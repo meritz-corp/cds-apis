@@ -1,0 +1,6 @@
+packages/**    linguist-generated=false
+
+rust/**        linguist-generated=true
+dart/**        linguist-generated=true
+go/**          linguist-generated=true
+openapiv2/**   linguist-generated=true

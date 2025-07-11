@@ -1,0 +1,134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "log_sync/v1/pnl.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PnlService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/pnl/summaries": {
+      "get": {
+        "summary": "ListPnlSummaries will return pnl summaries.",
+        "operationId": "PnlService_ListPnlSummaries",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pnlListPnlSummariesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* start_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* end_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* period_type\n  * `equal`\n\nExamples\n* filter=start_date\u003e\"2025-01-01T00\" AND end_date\u003c\"2025-01-31T23\" \n* filter=period_type=PERIOD_TYPE_MONTHLY",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PnlService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pnlListPnlSummariesResponse": {
+      "type": "object",
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pnlPnlSummary"
+          },
+          "description": "The list of rows that matched the query."
+        }
+      },
+      "title": "ListPnlSummariesResponse response"
+    },
+    "pnlPeriodType": {
+      "type": "string",
+      "enum": [
+        "PERIOD_TYPE_UNSPECIFIED",
+        "PERIOD_TYPE_DAILY",
+        "PERIOD_TYPE_WEEKLY",
+        "PERIOD_TYPE_MONTHLY",
+        "PERIOD_TYPE_YEARLY"
+      ],
+      "default": "PERIOD_TYPE_UNSPECIFIED",
+      "title": "- PERIOD_TYPE_UNSPECIFIED: Unspecified period type\n - PERIOD_TYPE_DAILY: Daily period\n - PERIOD_TYPE_WEEKLY: Weekly period\n - PERIOD_TYPE_MONTHLY: Monthly period\n - PERIOD_TYPE_YEARLY: Yearly period"
+    },
+    "pnlPnlSummary": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "$ref": "#/definitions/pnlPeriodType",
+          "title": "기간 유형"
+        },
+        "totalPnl": {
+          "type": "string",
+          "title": "총 손익 (문자열로 표현된 decimal)"
+        },
+        "totalVolume": {
+          "type": "string",
+          "title": "총 거래량 (문자열로 표현된 decimal)"
+        },
+        "totalTransactions": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 거래 횟수"
+        },
+        "recordCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "레코드 수"
+        }
+      },
+      "title": "PnL 요약 구조체"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

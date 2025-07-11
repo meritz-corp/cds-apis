@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package log_sync.v1.pnl;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/momentum99/ids-apis/go/log_sync/v1;log_sync";
+
+// PnlService is the service that handles all pnl requests.
+service PnlService {
+    // ListPnlSummaries will return pnl summaries.
+    rpc ListPnlSummaries(ListPnlSummariesRequest) returns (ListPnlSummariesResponse) {
+        option (google.api.http) = {
+            get: "/v1/pnl/summaries"
+        };
+        option (google.api.method_signature) = "";
+    }
+}
+
+
+enum PeriodType {
+    PERIOD_TYPE_UNSPECIFIED = 0; // Unspecified period type
+    PERIOD_TYPE_DAILY = 1; // Daily period
+    PERIOD_TYPE_WEEKLY = 2; // Weekly period
+    PERIOD_TYPE_MONTHLY = 3; // Monthly period
+    PERIOD_TYPE_YEARLY = 4; // Yearly period
+}
+
+// PnL 요약 구조체
+message PnlSummary {
+    // 기간 유형
+    PeriodType period_type = 1;
+
+    // 총 손익 (문자열로 표현된 decimal)
+    string total_pnl = 2;
+
+    // 총 거래량 (문자열로 표현된 decimal)
+    string total_volume = 3;
+
+    // 총 거래 횟수
+    int64 total_transactions = 4;
+
+    // 레코드 수
+    int64 record_count = 5;
+}
+
+// ListPnlSummariesRequest payload
+message ListPnlSummariesRequest {
+    // Available Sequence and Operator
+    // * start_date
+    //   * `>`, `>=`, `=`, `<=`, `<`
+    // * end_date
+    //   * `>`, `>=`, `=`, `<=`, `<`
+    // * period_type
+    //   * `equal`
+    //
+    // Examples
+    // * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23" 
+    // * filter=period_type=PERIOD_TYPE_MONTHLY
+    string filter = 1;
+}
+
+// ListPnlSummariesResponse response
+message ListPnlSummariesResponse {
+    // The list of rows that matched the query.
+    repeated PnlSummary summaries = 1;
+}

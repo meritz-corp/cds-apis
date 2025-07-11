@@ -1,0 +1,226 @@
+// This is a generated file - do not edit.
+//
+// Generated from log_sync/v1/pnl.proto.
+
+// @dart = 3.3
+
+// ignore_for_file: annotate_overrides, camel_case_types, comment_references
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names
+
+import 'dart:core' as $core;
+
+import 'package:fixnum/fixnum.dart' as $fixnum;
+import 'package:protobuf/protobuf.dart' as $pb;
+
+import 'pnl.pbenum.dart';
+
+export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
+export 'pnl.pbenum.dart';
+
+/// PnL 요약 구조체
+class PnlSummary extends $pb.GeneratedMessage {
+  factory PnlSummary({
+    PeriodType? periodType,
+    $core.String? totalPnl,
+    $core.String? totalVolume,
+    $fixnum.Int64? totalTransactions,
+    $fixnum.Int64? recordCount,
+  }) {
+    final result = create();
+    if (periodType != null) result.periodType = periodType;
+    if (totalPnl != null) result.totalPnl = totalPnl;
+    if (totalVolume != null) result.totalVolume = totalVolume;
+    if (totalTransactions != null) result.totalTransactions = totalTransactions;
+    if (recordCount != null) result.recordCount = recordCount;
+    return result;
+  }
+
+  PnlSummary._();
+
+  factory PnlSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PnlSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PnlSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
+    ..e<PeriodType>(1, _omitFieldNames ? '' : 'periodType', $pb.PbFieldType.OE, defaultOrMaker: PeriodType.PERIOD_TYPE_UNSPECIFIED, valueOf: PeriodType.valueOf, enumValues: PeriodType.values)
+    ..aOS(2, _omitFieldNames ? '' : 'totalPnl')
+    ..aOS(3, _omitFieldNames ? '' : 'totalVolume')
+    ..aInt64(4, _omitFieldNames ? '' : 'totalTransactions')
+    ..aInt64(5, _omitFieldNames ? '' : 'recordCount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PnlSummary clone() => PnlSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PnlSummary copyWith(void Function(PnlSummary) updates) => super.copyWith((message) => updates(message as PnlSummary)) as PnlSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PnlSummary create() => PnlSummary._();
+  @$core.override
+  PnlSummary createEmptyInstance() => create();
+  static $pb.PbList<PnlSummary> createRepeated() => $pb.PbList<PnlSummary>();
+  @$core.pragma('dart2js:noInline')
+  static PnlSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PnlSummary>(create);
+  static PnlSummary? _defaultInstance;
+
+  /// 기간 유형
+  @$pb.TagNumber(1)
+  PeriodType get periodType => $_getN(0);
+  @$pb.TagNumber(1)
+  set periodType(PeriodType value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPeriodType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPeriodType() => $_clearField(1);
+
+  /// 총 손익 (문자열로 표현된 decimal)
+  @$pb.TagNumber(2)
+  $core.String get totalPnl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set totalPnl($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTotalPnl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTotalPnl() => $_clearField(2);
+
+  /// 총 거래량 (문자열로 표현된 decimal)
+  @$pb.TagNumber(3)
+  $core.String get totalVolume => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set totalVolume($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTotalVolume() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalVolume() => $_clearField(3);
+
+  /// 총 거래 횟수
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get totalTransactions => $_getI64(3);
+  @$pb.TagNumber(4)
+  set totalTransactions($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTotalTransactions() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTotalTransactions() => $_clearField(4);
+
+  /// 레코드 수
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get recordCount => $_getI64(4);
+  @$pb.TagNumber(5)
+  set recordCount($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasRecordCount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRecordCount() => $_clearField(5);
+}
+
+/// ListPnlSummariesRequest payload
+class ListPnlSummariesRequest extends $pb.GeneratedMessage {
+  factory ListPnlSummariesRequest({
+    $core.String? filter,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  ListPnlSummariesRequest._();
+
+  factory ListPnlSummariesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListPnlSummariesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPnlSummariesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPnlSummariesRequest clone() => ListPnlSummariesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPnlSummariesRequest copyWith(void Function(ListPnlSummariesRequest) updates) => super.copyWith((message) => updates(message as ListPnlSummariesRequest)) as ListPnlSummariesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListPnlSummariesRequest create() => ListPnlSummariesRequest._();
+  @$core.override
+  ListPnlSummariesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListPnlSummariesRequest> createRepeated() => $pb.PbList<ListPnlSummariesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListPnlSummariesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListPnlSummariesRequest>(create);
+  static ListPnlSummariesRequest? _defaultInstance;
+
+  /// Available Sequence and Operator
+  /// * start_date
+  ///   * `>`, `>=`, `=`, `<=`, `<`
+  /// * end_date
+  ///   * `>`, `>=`, `=`, `<=`, `<`
+  /// * period_type
+  ///   * `equal`
+  ///
+  /// Examples
+  /// * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23"
+  /// * filter=period_type=PERIOD_TYPE_MONTHLY
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
+}
+
+/// ListPnlSummariesResponse response
+class ListPnlSummariesResponse extends $pb.GeneratedMessage {
+  factory ListPnlSummariesResponse({
+    $core.Iterable<PnlSummary>? summaries,
+  }) {
+    final result = create();
+    if (summaries != null) result.summaries.addAll(summaries);
+    return result;
+  }
+
+  ListPnlSummariesResponse._();
+
+  factory ListPnlSummariesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListPnlSummariesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPnlSummariesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
+    ..pc<PnlSummary>(1, _omitFieldNames ? '' : 'summaries', $pb.PbFieldType.PM, subBuilder: PnlSummary.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPnlSummariesResponse clone() => ListPnlSummariesResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPnlSummariesResponse copyWith(void Function(ListPnlSummariesResponse) updates) => super.copyWith((message) => updates(message as ListPnlSummariesResponse)) as ListPnlSummariesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListPnlSummariesResponse create() => ListPnlSummariesResponse._();
+  @$core.override
+  ListPnlSummariesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListPnlSummariesResponse> createRepeated() => $pb.PbList<ListPnlSummariesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListPnlSummariesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListPnlSummariesResponse>(create);
+  static ListPnlSummariesResponse? _defaultInstance;
+
+  /// The list of rows that matched the query.
+  @$pb.TagNumber(1)
+  $pb.PbList<PnlSummary> get summaries => $_getList(0);
+}
+
+
+const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
+const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

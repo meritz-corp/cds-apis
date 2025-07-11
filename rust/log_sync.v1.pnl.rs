@@ -1,0 +1,89 @@
+// @generated
+/// PnL 요약 구조체
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PnlSummary {
+    /// 기간 유형
+    #[prost(enumeration="PeriodType", tag="1")]
+    pub period_type: i32,
+    /// 총 손익 (문자열로 표현된 decimal)
+    #[prost(string, tag="2")]
+    pub total_pnl: ::prost::alloc::string::String,
+    /// 총 거래량 (문자열로 표현된 decimal)
+    #[prost(string, tag="3")]
+    pub total_volume: ::prost::alloc::string::String,
+    /// 총 거래 횟수
+    #[prost(int64, tag="4")]
+    pub total_transactions: i64,
+    /// 레코드 수
+    #[prost(int64, tag="5")]
+    pub record_count: i64,
+}
+/// ListPnlSummariesRequest payload
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPnlSummariesRequest {
+    /// Available Sequence and Operator
+    /// * start_date
+    ///    * `>`, `>=`, `=`, `<=`, `<`
+    /// * end_date
+    ///    * `>`, `>=`, `=`, `<=`, `<`
+    /// * period_type
+    ///    * `equal`
+    ///
+    /// Examples
+    /// * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23" 
+    /// * filter=period_type=PERIOD_TYPE_MONTHLY
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
+}
+/// ListPnlSummariesResponse response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPnlSummariesResponse {
+    /// The list of rows that matched the query.
+    #[prost(message, repeated, tag="1")]
+    pub summaries: ::prost::alloc::vec::Vec<PnlSummary>,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PeriodType {
+    /// Unspecified period type
+    Unspecified = 0,
+    /// Daily period
+    Daily = 1,
+    /// Weekly period
+    Weekly = 2,
+    /// Monthly period
+    Monthly = 3,
+    /// Yearly period
+    Yearly = 4,
+}
+impl PeriodType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PeriodType::Unspecified => "PERIOD_TYPE_UNSPECIFIED",
+            PeriodType::Daily => "PERIOD_TYPE_DAILY",
+            PeriodType::Weekly => "PERIOD_TYPE_WEEKLY",
+            PeriodType::Monthly => "PERIOD_TYPE_MONTHLY",
+            PeriodType::Yearly => "PERIOD_TYPE_YEARLY",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PERIOD_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "PERIOD_TYPE_DAILY" => Some(Self::Daily),
+            "PERIOD_TYPE_WEEKLY" => Some(Self::Weekly),
+            "PERIOD_TYPE_MONTHLY" => Some(Self::Monthly),
+            "PERIOD_TYPE_YEARLY" => Some(Self::Yearly),
+            _ => None,
+        }
+    }
+}
+include!("log_sync.v1.pnl.tonic.rs");
+// @@protoc_insertion_point(module)
