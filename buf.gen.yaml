@@ -23,11 +23,14 @@ plugins:
   - name: openapiv2
     out: openapiv2
 
-  - plugin: buf.build/community/neoeinstein-prost:v0.2.3
-    out: rust
+  - plugin: buf.build/community/neoeinstein-prost:v0.4.0
+    out: rust/src
 
-  - plugin: buf.build/community/neoeinstein-tonic:v0.3.0
-    out: rust
+  - plugin: buf.build/community/neoeinstein-tonic:v0.4.1
+    out: rust/src
+
+  - plugin: buf.build/community/neoeinstein-prost-serde:v0.3.1
+    out: rust/src
 
   - plugin: buf.build/connectrpc/dart:v1.0.0
     out: dart
@@ -36,3 +39,14 @@ plugins:
     out: dart
     opt:
         - grpc
+
+#  - plugin: buf.build/community/neoeinstein-tonic:v0.3.0
+#    out: gen/src
+#    opt:
+#      - compile_well_known_types
+#      - extern_path=.google.protobuf=::pbjson_types
+
+#  - plugin: buf.build/community/neoeinstein-prost-crate:v0.4.1
+#    out: gen
+#    opt:
+#      - gen_crate=Cargo.toml
