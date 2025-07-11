@@ -1,0 +1,15 @@
+[package]
+name = "ids-apis"
+version = "0.1.0"
+edition = "2021"
+description = "Meritz IDS APIs in Rust"
+license = "MIT"  # 또는 원하는 라이센스
+
+[lib]
+name = "ids_apis"
+path = "lib.rs"
+
+[dependencies]
+prost = "0.12"
+prost-types = "0.12"
+tonic = "0.13.1"
