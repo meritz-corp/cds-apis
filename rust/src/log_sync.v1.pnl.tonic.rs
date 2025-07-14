@@ -2,8 +2,8 @@
 /// Generated client implementations.
 pub mod pnl_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::*;
     use tonic::codegen::http::Uri;
+    use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct PnlServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -257,7 +257,7 @@ pub mod pnl_service_server {
                                 .header("grpc-status", tonic::Code::Unimplemented as i32)
                                 .header(
                                     http::header::CONTENT_TYPE,
-                                    "application/grpc", //
+                                    tonic::metadata::GRPC_CONTENT_TYPE,
                                 )
                                 .body(empty_body())
                                 .unwrap(),
