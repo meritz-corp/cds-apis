@@ -1,0 +1,51 @@
+name: ids_apis
+description: IDS APIs - gRPC and ConnectRPC client library for P&L services
+version: 1.0.0
+homepage: https://github.com/your-org/ids-apis
+repository: https://github.com/your-org/ids-apis
+
+environment:
+  sdk: ^3.3.0
+
+dependencies:
+  # Protocol Buffers support
+  protobuf: ^3.1.0
+
+  # gRPC support
+  grpc: ^4.0.1
+
+  # ConnectRPC support
+  connectrpc: ^1.0.0
+
+  # Fixed-width integer types
+  fixnum: ^1.1.0
+
+dev_dependencies:
+  # Testing framework
+  test: ^1.24.0
+
+  # Linting rules
+  lints: ^3.0.0
+
+  # Code generation tools (if needed for development)
+  build_runner: ^2.4.8
+
+  # Protocol buffer compiler (if needed for development)
+  protoc_plugin: ^21.1.2
+
+# If this is a library package, exclude example and test files from publishing
+# publish_to: 'none' # Remove this line if you want to publish to pub.dev
+
+# Specify additional files to include in the package
+# flutter:
+#   assets:
+#     - assets/
+
+# Platform-specific configurations
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
