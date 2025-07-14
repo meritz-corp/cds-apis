@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   # Protocol Buffers support
-  protobuf: ^3.1.0
+  protobuf: ^4.1.0
 
   # gRPC support
   grpc: ^4.0.1
@@ -31,7 +31,7 @@ dev_dependencies:
   build_runner: ^2.4.8
 
   # Protocol buffer compiler (if needed for development)
-  protoc_plugin: ^21.1.2
+  protoc_plugin: ^22.4.0
 
 # If this is a library package, exclude example and test files from publishing
 # publish_to: 'none' # Remove this line if you want to publish to pub.dev
