@@ -272,6 +272,9 @@ impl serde::Serialize for PnlSummary {
         if self.period_type != 0 {
             len += 1;
         }
+        if !self.trade_date.is_empty() {
+            len += 1;
+        }
         if !self.total_pnl.is_empty() {
             len += 1;
         }
@@ -289,6 +292,9 @@ impl serde::Serialize for PnlSummary {
             let v = PeriodType::try_from(self.period_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.period_type)))?;
             struct_ser.serialize_field("periodType", &v)?;
+        }
+        if !self.trade_date.is_empty() {
+            struct_ser.serialize_field("tradeDate", &self.trade_date)?;
         }
         if !self.total_pnl.is_empty() {
             struct_ser.serialize_field("totalPnl", &self.total_pnl)?;
@@ -318,6 +324,8 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
         const FIELDS: &[&str] = &[
             "period_type",
             "periodType",
+            "trade_date",
+            "tradeDate",
             "total_pnl",
             "totalPnl",
             "total_volume",
@@ -331,6 +339,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             PeriodType,
+            TradeDate,
             TotalPnl,
             TotalVolume,
             TotalTransactions,
@@ -357,6 +366,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                     {
                         match value {
                             "periodType" | "period_type" => Ok(GeneratedField::PeriodType),
+                            "tradeDate" | "trade_date" => Ok(GeneratedField::TradeDate),
                             "totalPnl" | "total_pnl" => Ok(GeneratedField::TotalPnl),
                             "totalVolume" | "total_volume" => Ok(GeneratedField::TotalVolume),
                             "totalTransactions" | "total_transactions" => Ok(GeneratedField::TotalTransactions),
@@ -381,6 +391,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut period_type__ = None;
+                let mut trade_date__ = None;
                 let mut total_pnl__ = None;
                 let mut total_volume__ = None;
                 let mut total_transactions__ = None;
@@ -392,6 +403,12 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                                 return Err(serde::de::Error::duplicate_field("periodType"));
                             }
                             period_type__ = Some(map_.next_value::<PeriodType>()? as i32);
+                        }
+                        GeneratedField::TradeDate => {
+                            if trade_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradeDate"));
+                            }
+                            trade_date__ = Some(map_.next_value()?);
                         }
                         GeneratedField::TotalPnl => {
                             if total_pnl__.is_some() {
@@ -425,6 +442,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                 }
                 Ok(PnlSummary {
                     period_type: period_type__.unwrap_or_default(),
+                    trade_date: trade_date__.unwrap_or_default(),
                     total_pnl: total_pnl__.unwrap_or_default(),
                     total_volume: total_volume__.unwrap_or_default(),
                     total_transactions: total_transactions__.unwrap_or_default(),

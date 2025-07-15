@@ -3,11 +3,6 @@ syntax = "proto3";
 package log_sync.v1.pnl;
 
 import "google/api/annotations.proto";
-import "google/api/field_behavior.proto";
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/field_mask.proto";
-import "google/protobuf/empty.proto";
-import "google/api/resource.proto";
 import "google/api/client.proto";
 
 option go_package = "github.com/momentum99/ids-apis/go/log_sync/v1;log_sync";
@@ -37,17 +32,20 @@ message PnlSummary {
     // 기간 유형
     PeriodType period_type = 1;
 
+    // 기준 날짜 (RFC3339 형식)
+    string trade_date = 2;
+
     // 총 손익 (문자열로 표현된 decimal)
-    string total_pnl = 2;
+    string total_pnl = 5;
 
     // 총 거래량 (문자열로 표현된 decimal)
-    string total_volume = 3;
+    string total_volume = 6;
 
     // 총 거래 횟수
-    int64 total_transactions = 4;
+    int64 total_transactions = 7;
 
     // 레코드 수
-    int64 record_count = 5;
+    int64 record_count = 8;
 }
 
 // ListPnlSummariesRequest payload

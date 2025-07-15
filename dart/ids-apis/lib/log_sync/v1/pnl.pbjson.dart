@@ -37,19 +37,21 @@ const PnlSummary$json = {
   '1': 'PnlSummary',
   '2': [
     {'1': 'period_type', '3': 1, '4': 1, '5': 14, '6': '.log_sync.v1.pnl.PeriodType', '10': 'periodType'},
-    {'1': 'total_pnl', '3': 2, '4': 1, '5': 9, '10': 'totalPnl'},
-    {'1': 'total_volume', '3': 3, '4': 1, '5': 9, '10': 'totalVolume'},
-    {'1': 'total_transactions', '3': 4, '4': 1, '5': 3, '10': 'totalTransactions'},
-    {'1': 'record_count', '3': 5, '4': 1, '5': 3, '10': 'recordCount'},
+    {'1': 'trade_date', '3': 2, '4': 1, '5': 9, '10': 'tradeDate'},
+    {'1': 'total_pnl', '3': 5, '4': 1, '5': 9, '10': 'totalPnl'},
+    {'1': 'total_volume', '3': 6, '4': 1, '5': 9, '10': 'totalVolume'},
+    {'1': 'total_transactions', '3': 7, '4': 1, '5': 3, '10': 'totalTransactions'},
+    {'1': 'record_count', '3': 8, '4': 1, '5': 3, '10': 'recordCount'},
   ],
 };
 
 /// Descriptor for `PnlSummary`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pnlSummaryDescriptor = $convert.base64Decode(
     'CgpQbmxTdW1tYXJ5EjwKC3BlcmlvZF90eXBlGAEgASgOMhsubG9nX3N5bmMudjEucG5sLlBlcm'
-    'lvZFR5cGVSCnBlcmlvZFR5cGUSGwoJdG90YWxfcG5sGAIgASgJUgh0b3RhbFBubBIhCgx0b3Rh'
-    'bF92b2x1bWUYAyABKAlSC3RvdGFsVm9sdW1lEi0KEnRvdGFsX3RyYW5zYWN0aW9ucxgEIAEoA1'
-    'IRdG90YWxUcmFuc2FjdGlvbnMSIQoMcmVjb3JkX2NvdW50GAUgASgDUgtyZWNvcmRDb3VudA==');
+    'lvZFR5cGVSCnBlcmlvZFR5cGUSHQoKdHJhZGVfZGF0ZRgCIAEoCVIJdHJhZGVEYXRlEhsKCXRv'
+    'dGFsX3BubBgFIAEoCVIIdG90YWxQbmwSIQoMdG90YWxfdm9sdW1lGAYgASgJUgt0b3RhbFZvbH'
+    'VtZRItChJ0b3RhbF90cmFuc2FjdGlvbnMYByABKANSEXRvdGFsVHJhbnNhY3Rpb25zEiEKDHJl'
+    'Y29yZF9jb3VudBgIIAEoA1ILcmVjb3JkQ291bnQ=');
 
 @$core.Deprecated('Use listPnlSummariesRequestDescriptor instead')
 const ListPnlSummariesRequest$json = {

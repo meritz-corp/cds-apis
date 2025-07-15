@@ -7,17 +7,20 @@ pub struct PnlSummary {
     /// 기간 유형
     #[prost(enumeration="PeriodType", tag="1")]
     pub period_type: i32,
-    /// 총 손익 (문자열로 표현된 decimal)
+    /// 기준 날짜 (RFC3339 형식)
     #[prost(string, tag="2")]
+    pub trade_date: ::prost::alloc::string::String,
+    /// 총 손익 (문자열로 표현된 decimal)
+    #[prost(string, tag="5")]
     pub total_pnl: ::prost::alloc::string::String,
     /// 총 거래량 (문자열로 표현된 decimal)
-    #[prost(string, tag="3")]
+    #[prost(string, tag="6")]
     pub total_volume: ::prost::alloc::string::String,
     /// 총 거래 횟수
-    #[prost(int64, tag="4")]
+    #[prost(int64, tag="7")]
     pub total_transactions: i64,
     /// 레코드 수
-    #[prost(int64, tag="5")]
+    #[prost(int64, tag="8")]
     pub record_count: i64,
 }
 /// ListPnlSummariesRequest payload

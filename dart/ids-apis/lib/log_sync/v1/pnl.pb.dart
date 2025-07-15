@@ -25,6 +25,7 @@ export 'pnl.pbenum.dart';
 class PnlSummary extends $pb.GeneratedMessage {
   factory PnlSummary({
     PeriodType? periodType,
+    $core.String? tradeDate,
     $core.String? totalPnl,
     $core.String? totalVolume,
     $fixnum.Int64? totalTransactions,
@@ -32,6 +33,7 @@ class PnlSummary extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (periodType != null) result.periodType = periodType;
+    if (tradeDate != null) result.tradeDate = tradeDate;
     if (totalPnl != null) result.totalPnl = totalPnl;
     if (totalVolume != null) result.totalVolume = totalVolume;
     if (totalTransactions != null) result.totalTransactions = totalTransactions;
@@ -46,10 +48,11 @@ class PnlSummary extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PnlSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
     ..e<PeriodType>(1, _omitFieldNames ? '' : 'periodType', $pb.PbFieldType.OE, defaultOrMaker: PeriodType.PERIOD_TYPE_UNSPECIFIED, valueOf: PeriodType.valueOf, enumValues: PeriodType.values)
-    ..aOS(2, _omitFieldNames ? '' : 'totalPnl')
-    ..aOS(3, _omitFieldNames ? '' : 'totalVolume')
-    ..aInt64(4, _omitFieldNames ? '' : 'totalTransactions')
-    ..aInt64(5, _omitFieldNames ? '' : 'recordCount')
+    ..aOS(2, _omitFieldNames ? '' : 'tradeDate')
+    ..aOS(5, _omitFieldNames ? '' : 'totalPnl')
+    ..aOS(6, _omitFieldNames ? '' : 'totalVolume')
+    ..aInt64(7, _omitFieldNames ? '' : 'totalTransactions')
+    ..aInt64(8, _omitFieldNames ? '' : 'recordCount')
     ..hasRequiredFields = false
   ;
 
@@ -80,45 +83,55 @@ class PnlSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPeriodType() => $_clearField(1);
 
+  /// 기준 날짜 (RFC3339 형식)
+  @$pb.TagNumber(2)
+  $core.String get tradeDate => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set tradeDate($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTradeDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTradeDate() => $_clearField(2);
+
   /// 총 손익 (문자열로 표현된 decimal)
-  @$pb.TagNumber(2)
-  $core.String get totalPnl => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set totalPnl($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTotalPnl() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTotalPnl() => $_clearField(2);
+  @$pb.TagNumber(5)
+  $core.String get totalPnl => $_getSZ(2);
+  @$pb.TagNumber(5)
+  set totalPnl($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(5)
+  $core.bool hasTotalPnl() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearTotalPnl() => $_clearField(5);
 
   /// 총 거래량 (문자열로 표현된 decimal)
-  @$pb.TagNumber(3)
-  $core.String get totalVolume => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set totalVolume($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasTotalVolume() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearTotalVolume() => $_clearField(3);
+  @$pb.TagNumber(6)
+  $core.String get totalVolume => $_getSZ(3);
+  @$pb.TagNumber(6)
+  set totalVolume($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(6)
+  $core.bool hasTotalVolume() => $_has(3);
+  @$pb.TagNumber(6)
+  void clearTotalVolume() => $_clearField(6);
 
   /// 총 거래 횟수
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get totalTransactions => $_getI64(3);
-  @$pb.TagNumber(4)
-  set totalTransactions($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasTotalTransactions() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearTotalTransactions() => $_clearField(4);
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get totalTransactions => $_getI64(4);
+  @$pb.TagNumber(7)
+  set totalTransactions($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(7)
+  $core.bool hasTotalTransactions() => $_has(4);
+  @$pb.TagNumber(7)
+  void clearTotalTransactions() => $_clearField(7);
 
   /// 레코드 수
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get recordCount => $_getI64(4);
-  @$pb.TagNumber(5)
-  set recordCount($fixnum.Int64 value) => $_setInt64(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasRecordCount() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearRecordCount() => $_clearField(5);
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get recordCount => $_getI64(5);
+  @$pb.TagNumber(8)
+  set recordCount($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(8)
+  $core.bool hasRecordCount() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearRecordCount() => $_clearField(8);
 }
 
 /// ListPnlSummariesRequest payload

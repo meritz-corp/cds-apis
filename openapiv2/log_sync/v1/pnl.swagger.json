@@ -82,6 +82,10 @@
           "$ref": "#/definitions/pnlPeriodType",
           "title": "기간 유형"
         },
+        "tradeDate": {
+          "type": "string",
+          "title": "기준 날짜 (RFC3339 형식)"
+        },
         "totalPnl": {
           "type": "string",
           "title": "총 손익 (문자열로 표현된 decimal)"
