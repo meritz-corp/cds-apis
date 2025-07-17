@@ -1,13 +1,10 @@
-name: Simple Auto Release
+name: Deploy Rust Crate
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'rust/**'  # rust 폴더 변경시만 실행
-    paths-ignore:
-      - 'README.md'
-      - '.github/**'
+      - 'rust/**'
 
 permissions:
   contents: write
