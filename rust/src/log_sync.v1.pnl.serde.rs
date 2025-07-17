@@ -343,6 +343,9 @@ impl serde::Serialize for PnlSummary {
         if self.record_count != 0 {
             len += 1;
         }
+        if self.test_field != 0 {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.pnl.PnlSummary", len)?;
         if self.period_type != 0 {
             let v = PeriodType::try_from(self.period_type)
@@ -368,6 +371,11 @@ impl serde::Serialize for PnlSummary {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("recordCount", ToString::to_string(&self.record_count).as_str())?;
         }
+        if self.test_field != 0 {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("testField", ToString::to_string(&self.test_field).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -390,6 +398,8 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
             "totalTransactions",
             "record_count",
             "recordCount",
+            "test_field",
+            "testField",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -400,6 +410,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
             TotalVolume,
             TotalTransactions,
             RecordCount,
+            TestField,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -427,6 +438,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                             "totalVolume" | "total_volume" => Ok(GeneratedField::TotalVolume),
                             "totalTransactions" | "total_transactions" => Ok(GeneratedField::TotalTransactions),
                             "recordCount" | "record_count" => Ok(GeneratedField::RecordCount),
+                            "testField" | "test_field" => Ok(GeneratedField::TestField),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -452,6 +464,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                 let mut total_volume__ = None;
                 let mut total_transactions__ = None;
                 let mut record_count__ = None;
+                let mut test_field__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PeriodType => {
@@ -494,6 +507,14 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::TestField => {
+                            if test_field__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("testField"));
+                            }
+                            test_field__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                     }
                 }
                 Ok(PnlSummary {
@@ -503,6 +524,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                     total_volume: total_volume__.unwrap_or_default(),
                     total_transactions: total_transactions__.unwrap_or_default(),
                     record_count: record_count__.unwrap_or_default(),
+                    test_field: test_field__.unwrap_or_default(),
                 })
             }
         }

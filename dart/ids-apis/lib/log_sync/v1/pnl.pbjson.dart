@@ -42,6 +42,7 @@ const PnlSummary$json = {
     {'1': 'total_volume', '3': 6, '4': 1, '5': 9, '10': 'totalVolume'},
     {'1': 'total_transactions', '3': 7, '4': 1, '5': 3, '10': 'totalTransactions'},
     {'1': 'record_count', '3': 8, '4': 1, '5': 3, '10': 'recordCount'},
+    {'1': 'test_field', '3': 9, '4': 1, '5': 3, '10': 'testField'},
   ],
 };
 
@@ -51,7 +52,8 @@ final $typed_data.Uint8List pnlSummaryDescriptor = $convert.base64Decode(
     'lvZFR5cGVSCnBlcmlvZFR5cGUSHQoKdHJhZGVfZGF0ZRgCIAEoCVIJdHJhZGVEYXRlEhsKCXRv'
     'dGFsX3BubBgFIAEoCVIIdG90YWxQbmwSIQoMdG90YWxfdm9sdW1lGAYgASgJUgt0b3RhbFZvbH'
     'VtZRItChJ0b3RhbF90cmFuc2FjdGlvbnMYByABKANSEXRvdGFsVHJhbnNhY3Rpb25zEiEKDHJl'
-    'Y29yZF9jb3VudBgIIAEoA1ILcmVjb3JkQ291bnQ=');
+    'Y29yZF9jb3VudBgIIAEoA1ILcmVjb3JkQ291bnQSHQoKdGVzdF9maWVsZBgJIAEoA1IJdGVzdE'
+    'ZpZWxk');
 
 @$core.Deprecated('Use listPnlSummariesRequestDescriptor instead')
 const ListPnlSummariesRequest$json = {

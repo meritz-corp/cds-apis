@@ -46,6 +46,8 @@ message PnlSummary {
 
     // 레코드 수
     int64 record_count = 8;
+
+    int64 test_field = 9;
 }
 
 // ListPnlSummariesRequest payload
