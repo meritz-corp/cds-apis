@@ -7,10 +7,22 @@ impl serde::Serialize for ListPnlSummariesRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if self.page_size != 0 {
+            len += 1;
+        }
+        if !self.page_token.is_empty() {
+            len += 1;
+        }
         if !self.filter.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.pnl.ListPnlSummariesRequest", len)?;
+        if self.page_size != 0 {
+            struct_ser.serialize_field("pageSize", &self.page_size)?;
+        }
+        if !self.page_token.is_empty() {
+            struct_ser.serialize_field("pageToken", &self.page_token)?;
+        }
         if !self.filter.is_empty() {
             struct_ser.serialize_field("filter", &self.filter)?;
         }
@@ -24,11 +36,17 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesRequest {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "page_size",
+            "pageSize",
+            "page_token",
+            "pageToken",
             "filter",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            PageSize,
+            PageToken,
             Filter,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -51,6 +69,8 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesRequest {
                         E: serde::de::Error,
                     {
                         match value {
+                            "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
+                            "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
@@ -71,9 +91,25 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesRequest {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut page_size__ = None;
+                let mut page_token__ = None;
                 let mut filter__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::PageSize => {
+                            if page_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageSize"));
+                            }
+                            page_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PageToken => {
+                            if page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageToken"));
+                            }
+                            page_token__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::Filter => {
                             if filter__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("filter"));
@@ -83,6 +119,8 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesRequest {
                     }
                 }
                 Ok(ListPnlSummariesRequest {
+                    page_size: page_size__.unwrap_or_default(),
+                    page_token: page_token__.unwrap_or_default(),
                     filter: filter__.unwrap_or_default(),
                 })
             }
@@ -101,9 +139,15 @@ impl serde::Serialize for ListPnlSummariesResponse {
         if !self.summaries.is_empty() {
             len += 1;
         }
+        if !self.next_page_token.is_empty() {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.pnl.ListPnlSummariesResponse", len)?;
         if !self.summaries.is_empty() {
             struct_ser.serialize_field("summaries", &self.summaries)?;
+        }
+        if !self.next_page_token.is_empty() {
+            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
         }
         struct_ser.end()
     }
@@ -116,11 +160,14 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesResponse {
     {
         const FIELDS: &[&str] = &[
             "summaries",
+            "next_page_token",
+            "nextPageToken",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Summaries,
+            NextPageToken,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -143,6 +190,7 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesResponse {
                     {
                         match value {
                             "summaries" => Ok(GeneratedField::Summaries),
+                            "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -163,6 +211,7 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesResponse {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut summaries__ = None;
+                let mut next_page_token__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Summaries => {
@@ -171,10 +220,17 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesResponse {
                             }
                             summaries__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::NextPageToken => {
+                            if next_page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nextPageToken"));
+                            }
+                            next_page_token__ = Some(map_.next_value()?);
+                        }
                     }
                 }
                 Ok(ListPnlSummariesResponse {
                     summaries: summaries__.unwrap_or_default(),
+                    next_page_token: next_page_token__.unwrap_or_default(),
                 })
             }
         }

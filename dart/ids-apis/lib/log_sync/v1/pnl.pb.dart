@@ -137,9 +137,13 @@ class PnlSummary extends $pb.GeneratedMessage {
 /// ListPnlSummariesRequest payload
 class ListPnlSummariesRequest extends $pb.GeneratedMessage {
   factory ListPnlSummariesRequest({
+    $core.int? pageSize,
+    $core.String? pageToken,
     $core.String? filter,
   }) {
     final result = create();
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
     if (filter != null) result.filter = filter;
     return result;
   }
@@ -150,7 +154,9 @@ class ListPnlSummariesRequest extends $pb.GeneratedMessage {
   factory ListPnlSummariesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPnlSummariesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'pageToken')
+    ..aOS(3, _omitFieldNames ? '' : 'filter')
     ..hasRequiredFields = false
   ;
 
@@ -171,6 +177,35 @@ class ListPnlSummariesRequest extends $pb.GeneratedMessage {
   static ListPnlSummariesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListPnlSummariesRequest>(create);
   static ListPnlSummariesRequest? _defaultInstance;
 
+  /// The maximum number of pnl summaries to return. The service may return fewer than
+  /// this value.
+  /// If unspecified, at most 50 rows will be returned.
+  /// The maximum value is 1024; values above 1024 will be coerced to 1024.
+  @$pb.TagNumber(1)
+  $core.int get pageSize => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set pageSize($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPageSize() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPageSize() => $_clearField(1);
+
+  /// Token of the page to retrieve. If not specified, the first
+  /// page of results will be returned. Use the value obtained from
+  /// `next_page_token` in the previous response to request
+  /// the next page of results.
+  ///
+  /// When paginating, all other parameters provided to `ListPnlSummaries` must match
+  /// the call that provided the page token.
+  @$pb.TagNumber(2)
+  $core.String get pageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set pageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageToken() => $_clearField(2);
+
   /// Available Sequence and Operator
   /// * start_date
   ///   * `>`, `>=`, `=`, `<=`, `<`
@@ -182,23 +217,25 @@ class ListPnlSummariesRequest extends $pb.GeneratedMessage {
   /// Examples
   /// * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23"
   /// * filter=period_type=PERIOD_TYPE_MONTHLY
-  @$pb.TagNumber(1)
-  $core.String get filter => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set filter($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasFilter() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFilter() => $_clearField(1);
+  @$pb.TagNumber(3)
+  $core.String get filter => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set filter($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilter() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilter() => $_clearField(3);
 }
 
 /// ListPnlSummariesResponse response
 class ListPnlSummariesResponse extends $pb.GeneratedMessage {
   factory ListPnlSummariesResponse({
     $core.Iterable<PnlSummary>? summaries,
+    $core.String? nextPageToken,
   }) {
     final result = create();
     if (summaries != null) result.summaries.addAll(summaries);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
     return result;
   }
 
@@ -209,6 +246,7 @@ class ListPnlSummariesResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPnlSummariesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
     ..pc<PnlSummary>(1, _omitFieldNames ? '' : 'summaries', $pb.PbFieldType.PM, subBuilder: PnlSummary.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..hasRequiredFields = false
   ;
 
@@ -232,6 +270,19 @@ class ListPnlSummariesResponse extends $pb.GeneratedMessage {
   /// The list of rows that matched the query.
   @$pb.TagNumber(1)
   $pb.PbList<PnlSummary> get summaries => $_getList(0);
+
+  /// Pagination token used to retrieve the next page of results.
+  /// Pass the content of this string as the `page_token` attribute of
+  /// the next request. `next_page_token` is not returned for the last
+  /// page.
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
 }
 
 

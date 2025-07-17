@@ -27,6 +27,21 @@ pub struct PnlSummary {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPnlSummariesRequest {
+    /// The maximum number of pnl summaries to return. The service may return fewer than
+    /// this value.
+    /// If unspecified, at most 50 rows will be returned.
+    /// The maximum value is 1024; values above 1024 will be coerced to 1024.
+    #[prost(int32, tag="1")]
+    pub page_size: i32,
+    /// Token of the page to retrieve. If not specified, the first
+    /// page of results will be returned. Use the value obtained from
+    /// `next_page_token` in the previous response to request
+    /// the next page of results.
+    ///
+    /// When paginating, all other parameters provided to `ListPnlSummaries` must match
+    /// the call that provided the page token.
+    #[prost(string, tag="2")]
+    pub page_token: ::prost::alloc::string::String,
     /// Available Sequence and Operator
     /// * start_date
     ///    * `>`, `>=`, `=`, `<=`, `<`
@@ -38,7 +53,7 @@ pub struct ListPnlSummariesRequest {
     /// Examples
     /// * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23" 
     /// * filter=period_type=PERIOD_TYPE_MONTHLY
-    #[prost(string, tag="1")]
+    #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }
 /// ListPnlSummariesResponse response
@@ -48,6 +63,12 @@ pub struct ListPnlSummariesResponse {
     /// The list of rows that matched the query.
     #[prost(message, repeated, tag="1")]
     pub summaries: ::prost::alloc::vec::Vec<PnlSummary>,
+    /// Pagination token used to retrieve the next page of results.
+    /// Pass the content of this string as the `page_token` attribute of
+    /// the next request. `next_page_token` is not returned for the last
+    /// page.
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

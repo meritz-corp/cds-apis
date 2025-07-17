@@ -36,6 +36,21 @@
         },
         "parameters": [
           {
+            "name": "pageSize",
+            "description": "The maximum number of pnl summaries to return. The service may return fewer than\nthis value.\nIf unspecified, at most 50 rows will be returned.\nThe maximum value is 1024; values above 1024 will be coerced to 1024.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "Token of the page to retrieve. If not specified, the first\npage of results will be returned. Use the value obtained from\n`next_page_token` in the previous response to request\nthe next page of results.\n\nWhen paginating, all other parameters provided to `ListPnlSummaries` must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "description": "Available Sequence and Operator\n* start_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* end_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* period_type\n  * `equal`\n\nExamples\n* filter=start_date\u003e\"2025-01-01T00\" AND end_date\u003c\"2025-01-31T23\" \n* filter=period_type=PERIOD_TYPE_MONTHLY",
             "in": "query",
@@ -59,6 +74,10 @@
             "$ref": "#/definitions/pnlPnlSummary"
           },
           "description": "The list of rows that matched the query."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token used to retrieve the next page of results.\nPass the content of this string as the `page_token` attribute of\nthe next request. `next_page_token` is not returned for the last\npage."
         }
       },
       "title": "ListPnlSummariesResponse response"

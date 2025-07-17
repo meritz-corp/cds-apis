@@ -57,24 +57,29 @@ final $typed_data.Uint8List pnlSummaryDescriptor = $convert.base64Decode(
 const ListPnlSummariesRequest$json = {
   '1': 'ListPnlSummariesRequest',
   '2': [
-    {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
+    {'1': 'page_size', '3': 1, '4': 1, '5': 5, '10': 'pageSize'},
+    {'1': 'page_token', '3': 2, '4': 1, '5': 9, '10': 'pageToken'},
+    {'1': 'filter', '3': 3, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
 /// Descriptor for `ListPnlSummariesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listPnlSummariesRequestDescriptor = $convert.base64Decode(
-    'ChdMaXN0UG5sU3VtbWFyaWVzUmVxdWVzdBIWCgZmaWx0ZXIYASABKAlSBmZpbHRlcg==');
+    'ChdMaXN0UG5sU3VtbWFyaWVzUmVxdWVzdBIbCglwYWdlX3NpemUYASABKAVSCHBhZ2VTaXplEh'
+    '0KCnBhZ2VfdG9rZW4YAiABKAlSCXBhZ2VUb2tlbhIWCgZmaWx0ZXIYAyABKAlSBmZpbHRlcg==');
 
 @$core.Deprecated('Use listPnlSummariesResponseDescriptor instead')
 const ListPnlSummariesResponse$json = {
   '1': 'ListPnlSummariesResponse',
   '2': [
     {'1': 'summaries', '3': 1, '4': 3, '5': 11, '6': '.log_sync.v1.pnl.PnlSummary', '10': 'summaries'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
 /// Descriptor for `ListPnlSummariesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listPnlSummariesResponseDescriptor = $convert.base64Decode(
     'ChhMaXN0UG5sU3VtbWFyaWVzUmVzcG9uc2USOQoJc3VtbWFyaWVzGAEgAygLMhsubG9nX3N5bm'
-    'MudjEucG5sLlBubFN1bW1hcnlSCXN1bW1hcmllcw==');
+    'MudjEucG5sLlBubFN1bW1hcnlSCXN1bW1hcmllcxImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlS'
+    'DW5leHRQYWdlVG9rZW4=');
 
