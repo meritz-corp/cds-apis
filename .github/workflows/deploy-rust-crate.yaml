@@ -14,7 +14,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     # 버전 범프 커밋은 스킵
-    if: "!contains(github.event.head_commit.message, 'chore: bump version')"
+    if: "!contains(github.event.head_commit.message, 'chore: bump cargo version')"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,7 +52,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add rust/Cargo.toml rust/Cargo.lock
-          git commit -m "chore: bump version to ${{ steps.version.outputs.version }}"
+          git commit -m "chore: bump cargo version to ${{ steps.version.outputs.version }}"
           git tag v${{ steps.version.outputs.version }}
           git push origin HEAD:main --tags
 
