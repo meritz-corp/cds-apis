@@ -31,7 +31,7 @@ jobs:
         id: version
         working-directory: ./rust
         run: |
-          NEW_VERSION=$(cargo metadata --format-version 1 | jq -r '.packages[] | select(.name == "YOUR_CRATE_NAME") | .version')
+          NEW_VERSION=$(cargo metadata --format-version 1 | jq -r '.packages[] | select(.name == "ids-apis") | .version')
           echo "version=${NEW_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Commit and push version bump
