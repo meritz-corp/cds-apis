@@ -22,8 +22,6 @@ pub struct PnlSummary {
     /// 레코드 수
     #[prost(int64, tag="8")]
     pub record_count: i64,
-    #[prost(int64, tag="9")]
-    pub test_field: i64,
 }
 /// ListPnlSummariesRequest payload
 #[allow(clippy::derive_partial_eq_without_eq)]

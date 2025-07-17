@@ -30,7 +30,6 @@ class PnlSummary extends $pb.GeneratedMessage {
     $core.String? totalVolume,
     $fixnum.Int64? totalTransactions,
     $fixnum.Int64? recordCount,
-    $fixnum.Int64? testField,
   }) {
     final result = create();
     if (periodType != null) result.periodType = periodType;
@@ -39,7 +38,6 @@ class PnlSummary extends $pb.GeneratedMessage {
     if (totalVolume != null) result.totalVolume = totalVolume;
     if (totalTransactions != null) result.totalTransactions = totalTransactions;
     if (recordCount != null) result.recordCount = recordCount;
-    if (testField != null) result.testField = testField;
     return result;
   }
 
@@ -55,7 +53,6 @@ class PnlSummary extends $pb.GeneratedMessage {
     ..aOS(6, _omitFieldNames ? '' : 'totalVolume')
     ..aInt64(7, _omitFieldNames ? '' : 'totalTransactions')
     ..aInt64(8, _omitFieldNames ? '' : 'recordCount')
-    ..aInt64(9, _omitFieldNames ? '' : 'testField')
     ..hasRequiredFields = false
   ;
 
@@ -135,15 +132,6 @@ class PnlSummary extends $pb.GeneratedMessage {
   $core.bool hasRecordCount() => $_has(5);
   @$pb.TagNumber(8)
   void clearRecordCount() => $_clearField(8);
-
-  @$pb.TagNumber(9)
-  $fixnum.Int64 get testField => $_getI64(6);
-  @$pb.TagNumber(9)
-  set testField($fixnum.Int64 value) => $_setInt64(6, value);
-  @$pb.TagNumber(9)
-  $core.bool hasTestField() => $_has(6);
-  @$pb.TagNumber(9)
-  void clearTestField() => $_clearField(9);
 }
 
 /// ListPnlSummariesRequest payload

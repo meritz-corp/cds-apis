@@ -122,10 +122,6 @@
           "type": "string",
           "format": "int64",
           "title": "레코드 수"
-        },
-        "testField": {
-          "type": "string",
-          "format": "int64"
         }
       },
       "title": "PnL 요약 구조체"
