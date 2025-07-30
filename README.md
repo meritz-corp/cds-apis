@@ -1,4 +1,4 @@
-# IDS APIs
+# CDS APIs
 
 법인파생영업팀에서 사용하는 API들의 Protocol Buffers 정의와 다양한 언어별 stub 파일을 제공하는 프로젝트.
 
