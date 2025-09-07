@@ -18,13 +18,13 @@
   "paths": {
     "/v1/order_logs": {
       "get": {
-        "summary": "ListOrderLogs will return pnl summaries.",
+        "summary": "ListOrderLogs will return order logs.",
         "operationId": "OrderLogService_ListOrderLogs",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pnlListOrderLogsResponse"
+              "$ref": "#/definitions/order_logListOrderLogsResponse"
             }
           },
           "default": {
@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "pageSize",
-            "description": "The maximum number of pnl summaries to return. The service may return fewer than\nthis value.\nIf unspecified, at most 50 rows will be returned.\nThe maximum value is 1024; values above 1024 will be coerced to 1024.",
+            "description": "The maximum number of order logs to return. The service may return fewer than\nthis value.\nIf unspecified, at most 50 rows will be returned.\nThe maximum value is 1024; values above 1024 will be coerced to 1024.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -65,13 +65,13 @@
     }
   },
   "definitions": {
-    "pnlListOrderLogsResponse": {
+    "order_logListOrderLogsResponse": {
       "type": "object",
       "properties": {
         "orderLogs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/pnlOrderLog"
+            "$ref": "#/definitions/order_logOrderLog"
           },
           "description": "The list of rows that matched the query."
         },
@@ -82,7 +82,7 @@
       },
       "title": "ListOrderLogsResponse response"
     },
-    "pnlOrderLog": {
+    "order_logOrderLog": {
       "type": "object",
       "properties": {
         "id": {

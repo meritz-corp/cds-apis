@@ -1,14 +1,14 @@
 // @generated
 /// Generated client implementations.
-pub mod pnl_service_client {
+pub mod order_log_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::http::Uri;
     use tonic::codegen::*;
     #[derive(Debug, Clone)]
-    pub struct PnlServiceClient<T> {
+    pub struct OrderLogServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl PnlServiceClient<tonic::transport::Channel> {
+    impl OrderLogServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -19,7 +19,7 @@ pub mod pnl_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> PnlServiceClient<T>
+    impl<T> OrderLogServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -37,7 +37,7 @@ pub mod pnl_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> PnlServiceClient<InterceptedService<T, F>>
+        ) -> OrderLogServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -51,7 +51,7 @@ pub mod pnl_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            PnlServiceClient::new(InterceptedService::new(inner, interceptor))
+            OrderLogServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -84,11 +84,11 @@ pub mod pnl_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn list_pnl_summaries(
+        pub async fn list_order_logs(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListPnlSummariesRequest>,
+            request: impl tonic::IntoRequest<super::ListOrderLogsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListPnlSummariesResponse>,
+            tonic::Response<super::ListOrderLogsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -102,41 +102,44 @@ pub mod pnl_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/log_sync.v1.pnl.PnlService/ListPnlSummaries",
+                "/log_sync.v1.order_log.OrderLogService/ListOrderLogs",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("log_sync.v1.pnl.PnlService", "ListPnlSummaries"),
+                    GrpcMethod::new(
+                        "log_sync.v1.order_log.OrderLogService",
+                        "ListOrderLogs",
+                    ),
                 );
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod pnl_service_server {
+pub mod order_log_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with PnlServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with OrderLogServiceServer.
     #[async_trait]
-    pub trait PnlService: Send + Sync + 'static {
-        async fn list_pnl_summaries(
+    pub trait OrderLogService: Send + Sync + 'static {
+        async fn list_order_logs(
             &self,
-            request: tonic::Request<super::ListPnlSummariesRequest>,
+            request: tonic::Request<super::ListOrderLogsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListPnlSummariesResponse>,
+            tonic::Response<super::ListOrderLogsResponse>,
             tonic::Status,
         >;
     }
     #[derive(Debug)]
-    pub struct PnlServiceServer<T: PnlService> {
+    pub struct OrderLogServiceServer<T: OrderLogService> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T: PnlService> PnlServiceServer<T> {
+    impl<T: OrderLogService> OrderLogServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -187,9 +190,9 @@ pub mod pnl_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for PnlServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for OrderLogServiceServer<T>
     where
-        T: PnlService,
+        T: OrderLogService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -204,25 +207,26 @@ pub mod pnl_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/log_sync.v1.pnl.PnlService/ListPnlSummaries" => {
+                "/log_sync.v1.order_log.OrderLogService/ListOrderLogs" => {
                     #[allow(non_camel_case_types)]
-                    struct ListPnlSummariesSvc<T: PnlService>(pub Arc<T>);
+                    struct ListOrderLogsSvc<T: OrderLogService>(pub Arc<T>);
                     impl<
-                        T: PnlService,
-                    > tonic::server::UnaryService<super::ListPnlSummariesRequest>
-                    for ListPnlSummariesSvc<T> {
-                        type Response = super::ListPnlSummariesResponse;
+                        T: OrderLogService,
+                    > tonic::server::UnaryService<super::ListOrderLogsRequest>
+                    for ListOrderLogsSvc<T> {
+                        type Response = super::ListOrderLogsResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListPnlSummariesRequest>,
+                            request: tonic::Request<super::ListOrderLogsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as PnlService>::list_pnl_summaries(&inner, request).await
+                                <T as OrderLogService>::list_order_logs(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -233,7 +237,7 @@ pub mod pnl_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ListPnlSummariesSvc(inner);
+                        let method = ListOrderLogsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -267,7 +271,7 @@ pub mod pnl_service_server {
             }
         }
     }
-    impl<T: PnlService> Clone for PnlServiceServer<T> {
+    impl<T: OrderLogService> Clone for OrderLogServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -279,7 +283,7 @@ pub mod pnl_service_server {
             }
         }
     }
-    impl<T: PnlService> tonic::server::NamedService for PnlServiceServer<T> {
-        const NAME: &'static str = "log_sync.v1.pnl.PnlService";
+    impl<T: OrderLogService> tonic::server::NamedService for OrderLogServiceServer<T> {
+        const NAME: &'static str = "log_sync.v1.order_log.OrderLogService";
     }
 }

@@ -102,7 +102,7 @@ class OrderLog extends $pb.GeneratedMessage {
   factory OrderLog.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory OrderLog.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderLog', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderLog', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.order_log'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aOM<$1.Timestamp>(2, _omitFieldNames ? '' : 'logTime', subBuilder: $1.Timestamp.create)
     ..aOS(3, _omitFieldNames ? '' : 'logType')
@@ -503,7 +503,7 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   factory ListOrderLogsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory ListOrderLogsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrderLogsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrderLogsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.order_log'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'pageToken')
     ..aOS(3, _omitFieldNames ? '' : 'filter')
@@ -527,7 +527,7 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   static ListOrderLogsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListOrderLogsRequest>(create);
   static ListOrderLogsRequest? _defaultInstance;
 
-  /// The maximum number of pnl summaries to return. The service may return fewer than
+  /// The maximum number of order logs to return. The service may return fewer than
   /// this value.
   /// If unspecified, at most 50 rows will be returned.
   /// The maximum value is 1024; values above 1024 will be coerced to 1024.
@@ -594,7 +594,7 @@ class ListOrderLogsResponse extends $pb.GeneratedMessage {
   factory ListOrderLogsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory ListOrderLogsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrderLogsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.pnl'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrderLogsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'log_sync.v1.order_log'), createEmptyInstance: create)
     ..pc<OrderLog>(1, _omitFieldNames ? '' : 'orderLogs', $pb.PbFieldType.PM, subBuilder: OrderLog.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..hasRequiredFields = false

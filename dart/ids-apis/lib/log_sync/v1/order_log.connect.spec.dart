@@ -6,12 +6,12 @@
 import "package:connectrpc/connect.dart" as connect;
 import "order_log.pb.dart" as log_syncv1order_log;
 
-/// OrderLogService is the service that handles all pnl requests.
+/// OrderLogService is the service that handles all order log requests.
 abstract final class OrderLogService {
   /// Fully-qualified name of the OrderLogService service.
-  static const name = 'log_sync.v1.pnl.OrderLogService';
+  static const name = 'log_sync.v1.order_log.OrderLogService';
 
-  /// ListOrderLogs will return pnl summaries.
+  /// ListOrderLogs will return order logs.
   static const listOrderLogs = connect.Spec(
     '/$name/ListOrderLogs',
     connect.StreamType.unary,

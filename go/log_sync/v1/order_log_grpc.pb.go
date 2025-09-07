@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderLogServiceClient interface {
-	// ListOrderLogs will return pnl summaries.
+	// ListOrderLogs will return order logs.
 	ListOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (*ListOrderLogsResponse, error)
 }
 
@@ -36,7 +36,7 @@ func NewOrderLogServiceClient(cc grpc.ClientConnInterface) OrderLogServiceClient
 
 func (c *orderLogServiceClient) ListOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (*ListOrderLogsResponse, error) {
 	out := new(ListOrderLogsResponse)
-	err := c.cc.Invoke(ctx, "/log_sync.v1.pnl.OrderLogService/ListOrderLogs", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/log_sync.v1.order_log.OrderLogService/ListOrderLogs", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *orderLogServiceClient) ListOrderLogs(ctx context.Context, in *ListOrder
 // All implementations must embed UnimplementedOrderLogServiceServer
 // for forward compatibility
 type OrderLogServiceServer interface {
-	// ListOrderLogs will return pnl summaries.
+	// ListOrderLogs will return order logs.
 	ListOrderLogs(context.Context, *ListOrderLogsRequest) (*ListOrderLogsResponse, error)
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
@@ -82,7 +82,7 @@ func _OrderLogService_ListOrderLogs_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/log_sync.v1.pnl.OrderLogService/ListOrderLogs",
+		FullMethod: "/log_sync.v1.order_log.OrderLogService/ListOrderLogs",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrderLogServiceServer).ListOrderLogs(ctx, req.(*ListOrderLogsRequest))
@@ -94,7 +94,7 @@ func _OrderLogService_ListOrderLogs_Handler(srv interface{}, ctx context.Context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "log_sync.v1.pnl.OrderLogService",
+	ServiceName: "log_sync.v1.order_log.OrderLogService",
 	HandlerType: (*OrderLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

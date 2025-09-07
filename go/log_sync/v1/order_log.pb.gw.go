@@ -81,7 +81,7 @@ func RegisterOrderLogServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/log_sync.v1.pnl.OrderLogService/ListOrderLogs", runtime.WithHTTPPathPattern("/v1/order_logs"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/log_sync.v1.order_log.OrderLogService/ListOrderLogs", runtime.WithHTTPPathPattern("/v1/order_logs"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -145,7 +145,7 @@ func RegisterOrderLogServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/log_sync.v1.pnl.OrderLogService/ListOrderLogs", runtime.WithHTTPPathPattern("/v1/order_logs"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/log_sync.v1.order_log.OrderLogService/ListOrderLogs", runtime.WithHTTPPathPattern("/v1/order_logs"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

@@ -20,8 +20,8 @@ import 'order_log.pb.dart' as $0;
 
 export 'order_log.pb.dart';
 
-/// OrderLogService is the service that handles all pnl requests.
-@$pb.GrpcServiceName('log_sync.v1.pnl.OrderLogService')
+/// OrderLogService is the service that handles all order log requests.
+@$pb.GrpcServiceName('log_sync.v1.order_log.OrderLogService')
 class OrderLogServiceClient extends $grpc.Client {
   /// The hostname for this service.
   static const $core.String defaultHost = '';
@@ -33,7 +33,7 @@ class OrderLogServiceClient extends $grpc.Client {
 
   OrderLogServiceClient(super.channel, {super.options, super.interceptors});
 
-  /// ListOrderLogs will return pnl summaries.
+  /// ListOrderLogs will return order logs.
   $grpc.ResponseFuture<$0.ListOrderLogsResponse> listOrderLogs($0.ListOrderLogsRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listOrderLogs, request, options: options);
   }
@@ -41,14 +41,14 @@ class OrderLogServiceClient extends $grpc.Client {
     // method descriptors
 
   static final _$listOrderLogs = $grpc.ClientMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(
-      '/log_sync.v1.pnl.OrderLogService/ListOrderLogs',
+      '/log_sync.v1.order_log.OrderLogService/ListOrderLogs',
       ($0.ListOrderLogsRequest value) => value.writeToBuffer(),
       $0.ListOrderLogsResponse.fromBuffer);
 }
 
-@$pb.GrpcServiceName('log_sync.v1.pnl.OrderLogService')
+@$pb.GrpcServiceName('log_sync.v1.order_log.OrderLogService')
 abstract class OrderLogServiceBase extends $grpc.Service {
-  $core.String get $name => 'log_sync.v1.pnl.OrderLogService';
+  $core.String get $name => 'log_sync.v1.order_log.OrderLogService';
 
   OrderLogServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(

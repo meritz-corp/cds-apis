@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package log_sync.v1.pnl;
+package log_sync.v1.order_log;
 
 import "google/api/annotations.proto";
 import "google/api/client.proto";
@@ -8,9 +8,9 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/log_sync/v1;log_sync";
 
-// OrderLogService is the service that handles all pnl requests.
+// OrderLogService is the service that handles all order log requests.
 service OrderLogService {
-  // ListOrderLogs will return pnl summaries.
+  // ListOrderLogs will return order logs.
   rpc ListOrderLogs(ListOrderLogsRequest) returns (ListOrderLogsResponse) {
     option (google.api.http) = {
       get: "/v1/order_logs"
@@ -62,7 +62,7 @@ message OrderLog {
 
 // ListOrderLogsRequest payload
 message ListOrderLogsRequest {
-  // The maximum number of pnl summaries to return. The service may return fewer than
+  // The maximum number of order logs to return. The service may return fewer than
   // this value.
   // If unspecified, at most 50 rows will be returned.
   // The maximum value is 1024; values above 1024 will be coerced to 1024.

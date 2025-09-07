@@ -101,14 +101,14 @@ final $typed_data.Uint8List listOrderLogsRequestDescriptor = $convert.base64Deco
 const ListOrderLogsResponse$json = {
   '1': 'ListOrderLogsResponse',
   '2': [
-    {'1': 'order_logs', '3': 1, '4': 3, '5': 11, '6': '.log_sync.v1.pnl.OrderLog', '10': 'orderLogs'},
+    {'1': 'order_logs', '3': 1, '4': 3, '5': 11, '6': '.log_sync.v1.order_log.OrderLog', '10': 'orderLogs'},
     {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
 /// Descriptor for `ListOrderLogsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listOrderLogsResponseDescriptor = $convert.base64Decode(
-    'ChVMaXN0T3JkZXJMb2dzUmVzcG9uc2USOAoKb3JkZXJfbG9ncxgBIAMoCzIZLmxvZ19zeW5jLn'
-    'YxLnBubC5PcmRlckxvZ1IJb3JkZXJMb2dzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4'
-    'dFBhZ2VUb2tlbg==');
+    'ChVMaXN0T3JkZXJMb2dzUmVzcG9uc2USPgoKb3JkZXJfbG9ncxgBIAMoCzIfLmxvZ19zeW5jLn'
+    'YxLm9yZGVyX2xvZy5PcmRlckxvZ1IJb3JkZXJMb2dzEiYKD25leHRfcGFnZV90b2tlbhgCIAEo'
+    'CVINbmV4dFBhZ2VUb2tlbg==');
 
