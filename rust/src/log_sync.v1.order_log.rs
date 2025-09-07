@@ -21,15 +21,6 @@ pub struct OrderLog {
     /// 체결가격
     #[prost(double, tag="6")]
     pub execution_price: f64,
-    /// 주문생성
-    #[prost(message, optional, tag="7")]
-    pub created_at: ::core::option::Option<::prost_types::Timestamp>,
-    /// 거래소송신
-    #[prost(message, optional, tag="8")]
-    pub submitted_at: ::core::option::Option<::prost_types::Timestamp>,
-    /// 거래소수신
-    #[prost(message, optional, tag="9")]
-    pub processed_at: ::core::option::Option<::prost_types::Timestamp>,
     /// 주문번호
     #[prost(int64, tag="10")]
     pub order_id: i64,
@@ -99,15 +90,24 @@ pub struct OrderLog {
     /// IP
     #[prost(string, tag="32")]
     pub user_trimmed_ip: ::prost::alloc::string::String,
-    /// 체결알림시각
-    #[prost(message, optional, tag="33")]
-    pub last_trade_notified_at: ::core::option::Option<::prost_types::Timestamp>,
     /// SMP 타입
     #[prost(int32, tag="34")]
     pub smp_type: i32,
     /// 서버 IP
     #[prost(string, tag="35")]
     pub server_ip: ::prost::alloc::string::String,
+    /// 주문생성
+    #[prost(message, optional, tag="40")]
+    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// 거래소송신
+    #[prost(message, optional, tag="41")]
+    pub submit_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// 거래소수신
+    #[prost(message, optional, tag="42")]
+    pub process_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// 체결알림시각
+    #[prost(message, optional, tag="43")]
+    pub last_trade_notify_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// ListOrderLogsRequest payload
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -133,12 +133,18 @@ pub struct ListOrderLogsRequest {
     ///    * `>`, `>=`, `=`, `<=`, `<`
     /// * end_date
     ///    * `>`, `>=`, `=`, `<=`, `<`
-    /// * period_type
+    /// * order_id
+    ///    * `equal`
+    /// * original_order_id
+    ///    * `equal`
+    /// * fund_code
+    ///    * `equal`
+    /// * product_code
     ///    * `equal`
     ///
     /// Examples
     /// * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23"
-    /// * filter=period_type=PERIOD_TYPE_MONTHLY
+    /// * filter=fund_code="0159" AND product_code="A005930"
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }

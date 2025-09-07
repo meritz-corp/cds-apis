@@ -24,9 +24,6 @@ const OrderLog$json = {
     {'1': 'event_type', '3': 4, '4': 1, '5': 9, '10': 'eventType'},
     {'1': 'execution_quantity', '3': 5, '4': 1, '5': 1, '10': 'executionQuantity'},
     {'1': 'execution_price', '3': 6, '4': 1, '5': 1, '10': 'executionPrice'},
-    {'1': 'created_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    {'1': 'submitted_at', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'submittedAt'},
-    {'1': 'processed_at', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'processedAt'},
     {'1': 'order_id', '3': 10, '4': 1, '5': 3, '10': 'orderId'},
     {'1': 'original_order_id', '3': 11, '4': 1, '5': 9, '10': 'originalOrderId'},
     {'1': 'action', '3': 12, '4': 1, '5': 9, '10': 'action'},
@@ -50,9 +47,12 @@ const OrderLog$json = {
     {'1': 'original_price', '3': 30, '4': 1, '5': 1, '10': 'originalPrice'},
     {'1': 'user_code', '3': 31, '4': 1, '5': 5, '10': 'userCode'},
     {'1': 'user_trimmed_ip', '3': 32, '4': 1, '5': 9, '10': 'userTrimmedIp'},
-    {'1': 'last_trade_notified_at', '3': 33, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastTradeNotifiedAt'},
     {'1': 'smp_type', '3': 34, '4': 1, '5': 5, '10': 'smpType'},
     {'1': 'server_ip', '3': 35, '4': 1, '5': 9, '10': 'serverIp'},
+    {'1': 'create_time', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createTime'},
+    {'1': 'submit_time', '3': 41, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'submitTime'},
+    {'1': 'process_time', '3': 42, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'processTime'},
+    {'1': 'last_trade_notify_time', '3': 43, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastTradeNotifyTime'},
   ],
 };
 
@@ -62,25 +62,25 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'JvdG9idWYuVGltZXN0YW1wUgdsb2dUaW1lEhkKCGxvZ190eXBlGAMgASgJUgdsb2dUeXBlEh0K'
     'CmV2ZW50X3R5cGUYBCABKAlSCWV2ZW50VHlwZRItChJleGVjdXRpb25fcXVhbnRpdHkYBSABKA'
     'FSEWV4ZWN1dGlvblF1YW50aXR5EicKD2V4ZWN1dGlvbl9wcmljZRgGIAEoAVIOZXhlY3V0aW9u'
-    'UHJpY2USOQoKY3JlYXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCW'
-    'NyZWF0ZWRBdBI9CgxzdWJtaXR0ZWRfYXQYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0'
-    'YW1wUgtzdWJtaXR0ZWRBdBI9Cgxwcm9jZXNzZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idW'
-    'YuVGltZXN0YW1wUgtwcm9jZXNzZWRBdBIZCghvcmRlcl9pZBgKIAEoA1IHb3JkZXJJZBIqChFv'
-    'cmlnaW5hbF9vcmRlcl9pZBgLIAEoCVIPb3JpZ2luYWxPcmRlcklkEhYKBmFjdGlvbhgMIAEoCV'
-    'IGYWN0aW9uEhIKBHNpZGUYDSABKAlSBHNpZGUSGwoJZnVuZF9jb2RlGA4gASgJUghmdW5kQ29k'
-    'ZRIyChVtYXJrZXRfb3BlcmF0aW9uX2NvZGUYDyABKAlSE21hcmtldE9wZXJhdGlvbkNvZGUSIQ'
-    'oMcHJvZHVjdF9jb2RlGBAgASgJUgtwcm9kdWN0Q29kZRIhCgxwcm9kdWN0X25hbWUYESABKAlS'
-    'C3Byb2R1Y3ROYW1lEh8KC29yZGVyX3ByaWNlGBIgASgBUgpvcmRlclByaWNlEiUKDm9yZGVyX3'
-    'F1YW50aXR5GBMgASgBUg1vcmRlclF1YW50aXR5EhoKCHVuZmlsbGVkGBQgASgBUgh1bmZpbGxl'
-    'ZBIWCgZmaWxsZWQYFSABKAFSBmZpbGxlZBIWCgZzdGF0dXMYFiABKAlSBnN0YXR1cxIaCghib3'
-    'Jyb3dlZBgXIAEoCFIIYm9ycm93ZWQSEgoEYXV0bxgYIAEoCFIEYXV0bxIaCghhY2NlcHRlZBgZ'
-    'IAEoCFIIYWNjZXB0ZWQSDgoCbHAYGiABKAhSAmxwEiIKDWFza190eXBlX3R5cGUYGyABKAVSC2'
-    'Fza1R5cGVUeXBlEiEKDHByb2dyYW1fdHlwZRgcIAEoBVILcHJvZ3JhbVR5cGUSEAoDdGFnGB0g'
-    'ASgJUgN0YWcSJQoOb3JpZ2luYWxfcHJpY2UYHiABKAFSDW9yaWdpbmFsUHJpY2USGwoJdXNlcl'
-    '9jb2RlGB8gASgFUgh1c2VyQ29kZRImCg91c2VyX3RyaW1tZWRfaXAYICABKAlSDXVzZXJUcmlt'
-    'bWVkSXASTwoWbGFzdF90cmFkZV9ub3RpZmllZF9hdBghIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi'
-    '5UaW1lc3RhbXBSE2xhc3RUcmFkZU5vdGlmaWVkQXQSGQoIc21wX3R5cGUYIiABKAVSB3NtcFR5'
-    'cGUSGwoJc2VydmVyX2lwGCMgASgJUghzZXJ2ZXJJcA==');
+    'UHJpY2USGQoIb3JkZXJfaWQYCiABKANSB29yZGVySWQSKgoRb3JpZ2luYWxfb3JkZXJfaWQYCy'
+    'ABKAlSD29yaWdpbmFsT3JkZXJJZBIWCgZhY3Rpb24YDCABKAlSBmFjdGlvbhISCgRzaWRlGA0g'
+    'ASgJUgRzaWRlEhsKCWZ1bmRfY29kZRgOIAEoCVIIZnVuZENvZGUSMgoVbWFya2V0X29wZXJhdG'
+    'lvbl9jb2RlGA8gASgJUhNtYXJrZXRPcGVyYXRpb25Db2RlEiEKDHByb2R1Y3RfY29kZRgQIAEo'
+    'CVILcHJvZHVjdENvZGUSIQoMcHJvZHVjdF9uYW1lGBEgASgJUgtwcm9kdWN0TmFtZRIfCgtvcm'
+    'Rlcl9wcmljZRgSIAEoAVIKb3JkZXJQcmljZRIlCg5vcmRlcl9xdWFudGl0eRgTIAEoAVINb3Jk'
+    'ZXJRdWFudGl0eRIaCgh1bmZpbGxlZBgUIAEoAVIIdW5maWxsZWQSFgoGZmlsbGVkGBUgASgBUg'
+    'ZmaWxsZWQSFgoGc3RhdHVzGBYgASgJUgZzdGF0dXMSGgoIYm9ycm93ZWQYFyABKAhSCGJvcnJv'
+    'd2VkEhIKBGF1dG8YGCABKAhSBGF1dG8SGgoIYWNjZXB0ZWQYGSABKAhSCGFjY2VwdGVkEg4KAm'
+    'xwGBogASgIUgJscBIiCg1hc2tfdHlwZV90eXBlGBsgASgFUgthc2tUeXBlVHlwZRIhCgxwcm9n'
+    'cmFtX3R5cGUYHCABKAVSC3Byb2dyYW1UeXBlEhAKA3RhZxgdIAEoCVIDdGFnEiUKDm9yaWdpbm'
+    'FsX3ByaWNlGB4gASgBUg1vcmlnaW5hbFByaWNlEhsKCXVzZXJfY29kZRgfIAEoBVIIdXNlckNv'
+    'ZGUSJgoPdXNlcl90cmltbWVkX2lwGCAgASgJUg11c2VyVHJpbW1lZElwEhkKCHNtcF90eXBlGC'
+    'IgASgFUgdzbXBUeXBlEhsKCXNlcnZlcl9pcBgjIAEoCVIIc2VydmVySXASOwoLY3JlYXRlX3Rp'
+    'bWUYKCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgpjcmVhdGVUaW1lEjsKC3N1Ym'
+    '1pdF90aW1lGCkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIKc3VibWl0VGltZRI9'
+    'Cgxwcm9jZXNzX3RpbWUYKiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgtwcm9jZX'
+    'NzVGltZRJPChZsYXN0X3RyYWRlX25vdGlmeV90aW1lGCsgASgLMhouZ29vZ2xlLnByb3RvYnVm'
+    'LlRpbWVzdGFtcFITbGFzdFRyYWRlTm90aWZ5VGltZQ==');
 
 @$core.Deprecated('Use listOrderLogsRequestDescriptor instead')
 const ListOrderLogsRequest$json = {

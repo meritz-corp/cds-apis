@@ -28,9 +28,6 @@ class OrderLog extends $pb.GeneratedMessage {
     $core.String? eventType,
     $core.double? executionQuantity,
     $core.double? executionPrice,
-    $1.Timestamp? createdAt,
-    $1.Timestamp? submittedAt,
-    $1.Timestamp? processedAt,
     $fixnum.Int64? orderId,
     $core.String? originalOrderId,
     $core.String? action,
@@ -54,9 +51,12 @@ class OrderLog extends $pb.GeneratedMessage {
     $core.double? originalPrice,
     $core.int? userCode,
     $core.String? userTrimmedIp,
-    $1.Timestamp? lastTradeNotifiedAt,
     $core.int? smpType,
     $core.String? serverIp,
+    $1.Timestamp? createTime,
+    $1.Timestamp? submitTime,
+    $1.Timestamp? processTime,
+    $1.Timestamp? lastTradeNotifyTime,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -65,9 +65,6 @@ class OrderLog extends $pb.GeneratedMessage {
     if (eventType != null) result.eventType = eventType;
     if (executionQuantity != null) result.executionQuantity = executionQuantity;
     if (executionPrice != null) result.executionPrice = executionPrice;
-    if (createdAt != null) result.createdAt = createdAt;
-    if (submittedAt != null) result.submittedAt = submittedAt;
-    if (processedAt != null) result.processedAt = processedAt;
     if (orderId != null) result.orderId = orderId;
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
     if (action != null) result.action = action;
@@ -91,9 +88,12 @@ class OrderLog extends $pb.GeneratedMessage {
     if (originalPrice != null) result.originalPrice = originalPrice;
     if (userCode != null) result.userCode = userCode;
     if (userTrimmedIp != null) result.userTrimmedIp = userTrimmedIp;
-    if (lastTradeNotifiedAt != null) result.lastTradeNotifiedAt = lastTradeNotifiedAt;
     if (smpType != null) result.smpType = smpType;
     if (serverIp != null) result.serverIp = serverIp;
+    if (createTime != null) result.createTime = createTime;
+    if (submitTime != null) result.submitTime = submitTime;
+    if (processTime != null) result.processTime = processTime;
+    if (lastTradeNotifyTime != null) result.lastTradeNotifyTime = lastTradeNotifyTime;
     return result;
   }
 
@@ -109,9 +109,6 @@ class OrderLog extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'eventType')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'executionQuantity', $pb.PbFieldType.OD)
     ..a<$core.double>(6, _omitFieldNames ? '' : 'executionPrice', $pb.PbFieldType.OD)
-    ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
-    ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'submittedAt', subBuilder: $1.Timestamp.create)
-    ..aOM<$1.Timestamp>(9, _omitFieldNames ? '' : 'processedAt', subBuilder: $1.Timestamp.create)
     ..aInt64(10, _omitFieldNames ? '' : 'orderId')
     ..aOS(11, _omitFieldNames ? '' : 'originalOrderId')
     ..aOS(12, _omitFieldNames ? '' : 'action')
@@ -135,9 +132,12 @@ class OrderLog extends $pb.GeneratedMessage {
     ..a<$core.double>(30, _omitFieldNames ? '' : 'originalPrice', $pb.PbFieldType.OD)
     ..a<$core.int>(31, _omitFieldNames ? '' : 'userCode', $pb.PbFieldType.O3)
     ..aOS(32, _omitFieldNames ? '' : 'userTrimmedIp')
-    ..aOM<$1.Timestamp>(33, _omitFieldNames ? '' : 'lastTradeNotifiedAt', subBuilder: $1.Timestamp.create)
     ..a<$core.int>(34, _omitFieldNames ? '' : 'smpType', $pb.PbFieldType.O3)
     ..aOS(35, _omitFieldNames ? '' : 'serverIp')
+    ..aOM<$1.Timestamp>(40, _omitFieldNames ? '' : 'createTime', subBuilder: $1.Timestamp.create)
+    ..aOM<$1.Timestamp>(41, _omitFieldNames ? '' : 'submitTime', subBuilder: $1.Timestamp.create)
+    ..aOM<$1.Timestamp>(42, _omitFieldNames ? '' : 'processTime', subBuilder: $1.Timestamp.create)
+    ..aOM<$1.Timestamp>(43, _omitFieldNames ? '' : 'lastTradeNotifyTime', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -214,274 +214,274 @@ class OrderLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearExecutionPrice() => $_clearField(6);
 
-  @$pb.TagNumber(7)
-  $1.Timestamp get createdAt => $_getN(6);
-  @$pb.TagNumber(7)
-  set createdAt($1.Timestamp value) => $_setField(7, value);
-  @$pb.TagNumber(7)
-  $core.bool hasCreatedAt() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearCreatedAt() => $_clearField(7);
-  @$pb.TagNumber(7)
-  $1.Timestamp ensureCreatedAt() => $_ensure(6);
-
-  @$pb.TagNumber(8)
-  $1.Timestamp get submittedAt => $_getN(7);
-  @$pb.TagNumber(8)
-  set submittedAt($1.Timestamp value) => $_setField(8, value);
-  @$pb.TagNumber(8)
-  $core.bool hasSubmittedAt() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearSubmittedAt() => $_clearField(8);
-  @$pb.TagNumber(8)
-  $1.Timestamp ensureSubmittedAt() => $_ensure(7);
-
-  @$pb.TagNumber(9)
-  $1.Timestamp get processedAt => $_getN(8);
-  @$pb.TagNumber(9)
-  set processedAt($1.Timestamp value) => $_setField(9, value);
-  @$pb.TagNumber(9)
-  $core.bool hasProcessedAt() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearProcessedAt() => $_clearField(9);
-  @$pb.TagNumber(9)
-  $1.Timestamp ensureProcessedAt() => $_ensure(8);
-
   @$pb.TagNumber(10)
-  $fixnum.Int64 get orderId => $_getI64(9);
+  $fixnum.Int64 get orderId => $_getI64(6);
   @$pb.TagNumber(10)
-  set orderId($fixnum.Int64 value) => $_setInt64(9, value);
+  set orderId($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(10)
-  $core.bool hasOrderId() => $_has(9);
+  $core.bool hasOrderId() => $_has(6);
   @$pb.TagNumber(10)
   void clearOrderId() => $_clearField(10);
 
   @$pb.TagNumber(11)
-  $core.String get originalOrderId => $_getSZ(10);
+  $core.String get originalOrderId => $_getSZ(7);
   @$pb.TagNumber(11)
-  set originalOrderId($core.String value) => $_setString(10, value);
+  set originalOrderId($core.String value) => $_setString(7, value);
   @$pb.TagNumber(11)
-  $core.bool hasOriginalOrderId() => $_has(10);
+  $core.bool hasOriginalOrderId() => $_has(7);
   @$pb.TagNumber(11)
   void clearOriginalOrderId() => $_clearField(11);
 
   @$pb.TagNumber(12)
-  $core.String get action => $_getSZ(11);
+  $core.String get action => $_getSZ(8);
   @$pb.TagNumber(12)
-  set action($core.String value) => $_setString(11, value);
+  set action($core.String value) => $_setString(8, value);
   @$pb.TagNumber(12)
-  $core.bool hasAction() => $_has(11);
+  $core.bool hasAction() => $_has(8);
   @$pb.TagNumber(12)
   void clearAction() => $_clearField(12);
 
   @$pb.TagNumber(13)
-  $core.String get side => $_getSZ(12);
+  $core.String get side => $_getSZ(9);
   @$pb.TagNumber(13)
-  set side($core.String value) => $_setString(12, value);
+  set side($core.String value) => $_setString(9, value);
   @$pb.TagNumber(13)
-  $core.bool hasSide() => $_has(12);
+  $core.bool hasSide() => $_has(9);
   @$pb.TagNumber(13)
   void clearSide() => $_clearField(13);
 
   @$pb.TagNumber(14)
-  $core.String get fundCode => $_getSZ(13);
+  $core.String get fundCode => $_getSZ(10);
   @$pb.TagNumber(14)
-  set fundCode($core.String value) => $_setString(13, value);
+  set fundCode($core.String value) => $_setString(10, value);
   @$pb.TagNumber(14)
-  $core.bool hasFundCode() => $_has(13);
+  $core.bool hasFundCode() => $_has(10);
   @$pb.TagNumber(14)
   void clearFundCode() => $_clearField(14);
 
   @$pb.TagNumber(15)
-  $core.String get marketOperationCode => $_getSZ(14);
+  $core.String get marketOperationCode => $_getSZ(11);
   @$pb.TagNumber(15)
-  set marketOperationCode($core.String value) => $_setString(14, value);
+  set marketOperationCode($core.String value) => $_setString(11, value);
   @$pb.TagNumber(15)
-  $core.bool hasMarketOperationCode() => $_has(14);
+  $core.bool hasMarketOperationCode() => $_has(11);
   @$pb.TagNumber(15)
   void clearMarketOperationCode() => $_clearField(15);
 
   @$pb.TagNumber(16)
-  $core.String get productCode => $_getSZ(15);
+  $core.String get productCode => $_getSZ(12);
   @$pb.TagNumber(16)
-  set productCode($core.String value) => $_setString(15, value);
+  set productCode($core.String value) => $_setString(12, value);
   @$pb.TagNumber(16)
-  $core.bool hasProductCode() => $_has(15);
+  $core.bool hasProductCode() => $_has(12);
   @$pb.TagNumber(16)
   void clearProductCode() => $_clearField(16);
 
   @$pb.TagNumber(17)
-  $core.String get productName => $_getSZ(16);
+  $core.String get productName => $_getSZ(13);
   @$pb.TagNumber(17)
-  set productName($core.String value) => $_setString(16, value);
+  set productName($core.String value) => $_setString(13, value);
   @$pb.TagNumber(17)
-  $core.bool hasProductName() => $_has(16);
+  $core.bool hasProductName() => $_has(13);
   @$pb.TagNumber(17)
   void clearProductName() => $_clearField(17);
 
   @$pb.TagNumber(18)
-  $core.double get orderPrice => $_getN(17);
+  $core.double get orderPrice => $_getN(14);
   @$pb.TagNumber(18)
-  set orderPrice($core.double value) => $_setDouble(17, value);
+  set orderPrice($core.double value) => $_setDouble(14, value);
   @$pb.TagNumber(18)
-  $core.bool hasOrderPrice() => $_has(17);
+  $core.bool hasOrderPrice() => $_has(14);
   @$pb.TagNumber(18)
   void clearOrderPrice() => $_clearField(18);
 
   @$pb.TagNumber(19)
-  $core.double get orderQuantity => $_getN(18);
+  $core.double get orderQuantity => $_getN(15);
   @$pb.TagNumber(19)
-  set orderQuantity($core.double value) => $_setDouble(18, value);
+  set orderQuantity($core.double value) => $_setDouble(15, value);
   @$pb.TagNumber(19)
-  $core.bool hasOrderQuantity() => $_has(18);
+  $core.bool hasOrderQuantity() => $_has(15);
   @$pb.TagNumber(19)
   void clearOrderQuantity() => $_clearField(19);
 
   @$pb.TagNumber(20)
-  $core.double get unfilled => $_getN(19);
+  $core.double get unfilled => $_getN(16);
   @$pb.TagNumber(20)
-  set unfilled($core.double value) => $_setDouble(19, value);
+  set unfilled($core.double value) => $_setDouble(16, value);
   @$pb.TagNumber(20)
-  $core.bool hasUnfilled() => $_has(19);
+  $core.bool hasUnfilled() => $_has(16);
   @$pb.TagNumber(20)
   void clearUnfilled() => $_clearField(20);
 
   @$pb.TagNumber(21)
-  $core.double get filled => $_getN(20);
+  $core.double get filled => $_getN(17);
   @$pb.TagNumber(21)
-  set filled($core.double value) => $_setDouble(20, value);
+  set filled($core.double value) => $_setDouble(17, value);
   @$pb.TagNumber(21)
-  $core.bool hasFilled() => $_has(20);
+  $core.bool hasFilled() => $_has(17);
   @$pb.TagNumber(21)
   void clearFilled() => $_clearField(21);
 
   @$pb.TagNumber(22)
-  $core.String get status => $_getSZ(21);
+  $core.String get status => $_getSZ(18);
   @$pb.TagNumber(22)
-  set status($core.String value) => $_setString(21, value);
+  set status($core.String value) => $_setString(18, value);
   @$pb.TagNumber(22)
-  $core.bool hasStatus() => $_has(21);
+  $core.bool hasStatus() => $_has(18);
   @$pb.TagNumber(22)
   void clearStatus() => $_clearField(22);
 
   @$pb.TagNumber(23)
-  $core.bool get borrowed => $_getBF(22);
+  $core.bool get borrowed => $_getBF(19);
   @$pb.TagNumber(23)
-  set borrowed($core.bool value) => $_setBool(22, value);
+  set borrowed($core.bool value) => $_setBool(19, value);
   @$pb.TagNumber(23)
-  $core.bool hasBorrowed() => $_has(22);
+  $core.bool hasBorrowed() => $_has(19);
   @$pb.TagNumber(23)
   void clearBorrowed() => $_clearField(23);
 
   @$pb.TagNumber(24)
-  $core.bool get auto => $_getBF(23);
+  $core.bool get auto => $_getBF(20);
   @$pb.TagNumber(24)
-  set auto($core.bool value) => $_setBool(23, value);
+  set auto($core.bool value) => $_setBool(20, value);
   @$pb.TagNumber(24)
-  $core.bool hasAuto() => $_has(23);
+  $core.bool hasAuto() => $_has(20);
   @$pb.TagNumber(24)
   void clearAuto() => $_clearField(24);
 
   @$pb.TagNumber(25)
-  $core.bool get accepted => $_getBF(24);
+  $core.bool get accepted => $_getBF(21);
   @$pb.TagNumber(25)
-  set accepted($core.bool value) => $_setBool(24, value);
+  set accepted($core.bool value) => $_setBool(21, value);
   @$pb.TagNumber(25)
-  $core.bool hasAccepted() => $_has(24);
+  $core.bool hasAccepted() => $_has(21);
   @$pb.TagNumber(25)
   void clearAccepted() => $_clearField(25);
 
   @$pb.TagNumber(26)
-  $core.bool get lp => $_getBF(25);
+  $core.bool get lp => $_getBF(22);
   @$pb.TagNumber(26)
-  set lp($core.bool value) => $_setBool(25, value);
+  set lp($core.bool value) => $_setBool(22, value);
   @$pb.TagNumber(26)
-  $core.bool hasLp() => $_has(25);
+  $core.bool hasLp() => $_has(22);
   @$pb.TagNumber(26)
   void clearLp() => $_clearField(26);
 
   @$pb.TagNumber(27)
-  $core.int get askTypeType => $_getIZ(26);
+  $core.int get askTypeType => $_getIZ(23);
   @$pb.TagNumber(27)
-  set askTypeType($core.int value) => $_setSignedInt32(26, value);
+  set askTypeType($core.int value) => $_setSignedInt32(23, value);
   @$pb.TagNumber(27)
-  $core.bool hasAskTypeType() => $_has(26);
+  $core.bool hasAskTypeType() => $_has(23);
   @$pb.TagNumber(27)
   void clearAskTypeType() => $_clearField(27);
 
   @$pb.TagNumber(28)
-  $core.int get programType => $_getIZ(27);
+  $core.int get programType => $_getIZ(24);
   @$pb.TagNumber(28)
-  set programType($core.int value) => $_setSignedInt32(27, value);
+  set programType($core.int value) => $_setSignedInt32(24, value);
   @$pb.TagNumber(28)
-  $core.bool hasProgramType() => $_has(27);
+  $core.bool hasProgramType() => $_has(24);
   @$pb.TagNumber(28)
   void clearProgramType() => $_clearField(28);
 
   @$pb.TagNumber(29)
-  $core.String get tag => $_getSZ(28);
+  $core.String get tag => $_getSZ(25);
   @$pb.TagNumber(29)
-  set tag($core.String value) => $_setString(28, value);
+  set tag($core.String value) => $_setString(25, value);
   @$pb.TagNumber(29)
-  $core.bool hasTag() => $_has(28);
+  $core.bool hasTag() => $_has(25);
   @$pb.TagNumber(29)
   void clearTag() => $_clearField(29);
 
   @$pb.TagNumber(30)
-  $core.double get originalPrice => $_getN(29);
+  $core.double get originalPrice => $_getN(26);
   @$pb.TagNumber(30)
-  set originalPrice($core.double value) => $_setDouble(29, value);
+  set originalPrice($core.double value) => $_setDouble(26, value);
   @$pb.TagNumber(30)
-  $core.bool hasOriginalPrice() => $_has(29);
+  $core.bool hasOriginalPrice() => $_has(26);
   @$pb.TagNumber(30)
   void clearOriginalPrice() => $_clearField(30);
 
   @$pb.TagNumber(31)
-  $core.int get userCode => $_getIZ(30);
+  $core.int get userCode => $_getIZ(27);
   @$pb.TagNumber(31)
-  set userCode($core.int value) => $_setSignedInt32(30, value);
+  set userCode($core.int value) => $_setSignedInt32(27, value);
   @$pb.TagNumber(31)
-  $core.bool hasUserCode() => $_has(30);
+  $core.bool hasUserCode() => $_has(27);
   @$pb.TagNumber(31)
   void clearUserCode() => $_clearField(31);
 
   @$pb.TagNumber(32)
-  $core.String get userTrimmedIp => $_getSZ(31);
+  $core.String get userTrimmedIp => $_getSZ(28);
   @$pb.TagNumber(32)
-  set userTrimmedIp($core.String value) => $_setString(31, value);
+  set userTrimmedIp($core.String value) => $_setString(28, value);
   @$pb.TagNumber(32)
-  $core.bool hasUserTrimmedIp() => $_has(31);
+  $core.bool hasUserTrimmedIp() => $_has(28);
   @$pb.TagNumber(32)
   void clearUserTrimmedIp() => $_clearField(32);
 
-  @$pb.TagNumber(33)
-  $1.Timestamp get lastTradeNotifiedAt => $_getN(32);
-  @$pb.TagNumber(33)
-  set lastTradeNotifiedAt($1.Timestamp value) => $_setField(33, value);
-  @$pb.TagNumber(33)
-  $core.bool hasLastTradeNotifiedAt() => $_has(32);
-  @$pb.TagNumber(33)
-  void clearLastTradeNotifiedAt() => $_clearField(33);
-  @$pb.TagNumber(33)
-  $1.Timestamp ensureLastTradeNotifiedAt() => $_ensure(32);
-
   @$pb.TagNumber(34)
-  $core.int get smpType => $_getIZ(33);
+  $core.int get smpType => $_getIZ(29);
   @$pb.TagNumber(34)
-  set smpType($core.int value) => $_setSignedInt32(33, value);
+  set smpType($core.int value) => $_setSignedInt32(29, value);
   @$pb.TagNumber(34)
-  $core.bool hasSmpType() => $_has(33);
+  $core.bool hasSmpType() => $_has(29);
   @$pb.TagNumber(34)
   void clearSmpType() => $_clearField(34);
 
   @$pb.TagNumber(35)
-  $core.String get serverIp => $_getSZ(34);
+  $core.String get serverIp => $_getSZ(30);
   @$pb.TagNumber(35)
-  set serverIp($core.String value) => $_setString(34, value);
+  set serverIp($core.String value) => $_setString(30, value);
   @$pb.TagNumber(35)
-  $core.bool hasServerIp() => $_has(34);
+  $core.bool hasServerIp() => $_has(30);
   @$pb.TagNumber(35)
   void clearServerIp() => $_clearField(35);
+
+  @$pb.TagNumber(40)
+  $1.Timestamp get createTime => $_getN(31);
+  @$pb.TagNumber(40)
+  set createTime($1.Timestamp value) => $_setField(40, value);
+  @$pb.TagNumber(40)
+  $core.bool hasCreateTime() => $_has(31);
+  @$pb.TagNumber(40)
+  void clearCreateTime() => $_clearField(40);
+  @$pb.TagNumber(40)
+  $1.Timestamp ensureCreateTime() => $_ensure(31);
+
+  @$pb.TagNumber(41)
+  $1.Timestamp get submitTime => $_getN(32);
+  @$pb.TagNumber(41)
+  set submitTime($1.Timestamp value) => $_setField(41, value);
+  @$pb.TagNumber(41)
+  $core.bool hasSubmitTime() => $_has(32);
+  @$pb.TagNumber(41)
+  void clearSubmitTime() => $_clearField(41);
+  @$pb.TagNumber(41)
+  $1.Timestamp ensureSubmitTime() => $_ensure(32);
+
+  @$pb.TagNumber(42)
+  $1.Timestamp get processTime => $_getN(33);
+  @$pb.TagNumber(42)
+  set processTime($1.Timestamp value) => $_setField(42, value);
+  @$pb.TagNumber(42)
+  $core.bool hasProcessTime() => $_has(33);
+  @$pb.TagNumber(42)
+  void clearProcessTime() => $_clearField(42);
+  @$pb.TagNumber(42)
+  $1.Timestamp ensureProcessTime() => $_ensure(33);
+
+  @$pb.TagNumber(43)
+  $1.Timestamp get lastTradeNotifyTime => $_getN(34);
+  @$pb.TagNumber(43)
+  set lastTradeNotifyTime($1.Timestamp value) => $_setField(43, value);
+  @$pb.TagNumber(43)
+  $core.bool hasLastTradeNotifyTime() => $_has(34);
+  @$pb.TagNumber(43)
+  void clearLastTradeNotifyTime() => $_clearField(43);
+  @$pb.TagNumber(43)
+  $1.Timestamp ensureLastTradeNotifyTime() => $_ensure(34);
 }
 
 /// ListOrderLogsRequest payload
@@ -561,12 +561,18 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   ///   * `>`, `>=`, `=`, `<=`, `<`
   /// * end_date
   ///   * `>`, `>=`, `=`, `<=`, `<`
-  /// * period_type
+  /// * order_id
+  ///   * `equal`
+  /// * original_order_id
+  ///   * `equal`
+  /// * fund_code
+  ///   * `equal`
+  /// * product_code
   ///   * `equal`
   ///
   /// Examples
   /// * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23"
-  /// * filter=period_type=PERIOD_TYPE_MONTHLY
+  /// * filter=fund_code="0159" AND product_code="A005930"
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)

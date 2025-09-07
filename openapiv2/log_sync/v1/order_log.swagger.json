@@ -52,7 +52,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* start_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* end_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* period_type\n  * `equal`\n\nExamples\n* filter=start_date\u003e\"2025-01-01T00\" AND end_date\u003c\"2025-01-31T23\"\n* filter=period_type=PERIOD_TYPE_MONTHLY",
+            "description": "Available Sequence and Operator\n* start_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* end_date\n  * `\u003e`, `\u003e=`, `=`, `\u003c=`, `\u003c`\n* order_id\n  * `equal`\n* original_order_id\n  * `equal`\n* fund_code\n  * `equal`\n* product_code\n  * `equal`\n\nExamples\n* filter=start_date\u003e\"2025-01-01T00\" AND end_date\u003c\"2025-01-31T23\"\n* filter=fund_code=\"0159\" AND product_code=\"A005930\"",
             "in": "query",
             "required": false,
             "type": "string"
@@ -111,21 +111,6 @@
           "type": "number",
           "format": "double",
           "title": "체결가격"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "title": "주문생성"
-        },
-        "submittedAt": {
-          "type": "string",
-          "format": "date-time",
-          "title": "거래소송신"
-        },
-        "processedAt": {
-          "type": "string",
-          "format": "date-time",
-          "title": "거래소수신"
         },
         "orderId": {
           "type": "string",
@@ -228,11 +213,6 @@
           "type": "string",
           "title": "IP"
         },
-        "lastTradeNotifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "title": "체결알림시각"
-        },
         "smpType": {
           "type": "integer",
           "format": "int32",
@@ -241,6 +221,26 @@
         "serverIp": {
           "type": "string",
           "title": "서버 IP"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "주문생성"
+        },
+        "submitTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "거래소송신"
+        },
+        "processTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "거래소수신"
+        },
+        "lastTradeNotifyTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "체결알림시각"
         }
       },
       "description": "OrderLog는 'order_log' 테이블의 스키마를 나타냅니다."

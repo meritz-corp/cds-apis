@@ -28,9 +28,6 @@ message OrderLog {
   string event_type = 4; // 이벤트
   double execution_quantity = 5; // 체결수량
   double execution_price = 6; // 체결가격
-  google.protobuf.Timestamp created_at = 7; // 주문생성
-  google.protobuf.Timestamp submitted_at = 8; // 거래소송신
-  google.protobuf.Timestamp processed_at = 9; // 거래소수신
   int64 order_id = 10; // 주문번호
   string original_order_id = 11; // 원주문번호
   string action = 12; // 신규/정정/취소
@@ -54,9 +51,12 @@ message OrderLog {
   double original_price = 30; // 체결확인시점상대가격
   int32 user_code = 31; // 사번
   string user_trimmed_ip = 32; // IP
-  google.protobuf.Timestamp last_trade_notified_at = 33; // 체결알림시각
   int32 smp_type = 34; // SMP 타입
   string server_ip = 35; // 서버 IP
+  google.protobuf.Timestamp create_time = 40; // 주문생성
+  google.protobuf.Timestamp submit_time = 41; // 거래소송신
+  google.protobuf.Timestamp process_time = 42; // 거래소수신
+  google.protobuf.Timestamp last_trade_notify_time = 43; // 체결알림시각
 }
 
 
@@ -82,12 +82,18 @@ message ListOrderLogsRequest {
   //   * `>`, `>=`, `=`, `<=`, `<`
   // * end_date
   //   * `>`, `>=`, `=`, `<=`, `<`
-  // * period_type
+  // * order_id
+  //   * `equal`
+  // * original_order_id
+  //   * `equal`
+  // * fund_code
+  //   * `equal`
+  // * product_code
   //   * `equal`
   //
   // Examples
   // * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23"
-  // * filter=period_type=PERIOD_TYPE_MONTHLY
+  // * filter=fund_code="0159" AND product_code="A005930"
   string filter = 3;
 }
 

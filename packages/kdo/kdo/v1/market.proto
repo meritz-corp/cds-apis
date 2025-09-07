@@ -3,7 +3,6 @@ syntax = "proto3";
 package kdo.v1.market;
 
 import "google/api/annotations.proto";
-import "google/api/client.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 

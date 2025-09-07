@@ -264,15 +264,6 @@ impl serde::Serialize for OrderLog {
         if self.execution_price != 0. {
             len += 1;
         }
-        if self.created_at.is_some() {
-            len += 1;
-        }
-        if self.submitted_at.is_some() {
-            len += 1;
-        }
-        if self.processed_at.is_some() {
-            len += 1;
-        }
         if self.order_id != 0 {
             len += 1;
         }
@@ -342,13 +333,22 @@ impl serde::Serialize for OrderLog {
         if !self.user_trimmed_ip.is_empty() {
             len += 1;
         }
-        if self.last_trade_notified_at.is_some() {
-            len += 1;
-        }
         if self.smp_type != 0 {
             len += 1;
         }
         if !self.server_ip.is_empty() {
+            len += 1;
+        }
+        if self.create_time.is_some() {
+            len += 1;
+        }
+        if self.submit_time.is_some() {
+            len += 1;
+        }
+        if self.process_time.is_some() {
+            len += 1;
+        }
+        if self.last_trade_notify_time.is_some() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.order_log.OrderLog", len)?;
@@ -371,15 +371,6 @@ impl serde::Serialize for OrderLog {
         }
         if self.execution_price != 0. {
             struct_ser.serialize_field("executionPrice", &self.execution_price)?;
-        }
-        if let Some(v) = self.created_at.as_ref() {
-            struct_ser.serialize_field("createdAt", v)?;
-        }
-        if let Some(v) = self.submitted_at.as_ref() {
-            struct_ser.serialize_field("submittedAt", v)?;
-        }
-        if let Some(v) = self.processed_at.as_ref() {
-            struct_ser.serialize_field("processedAt", v)?;
         }
         if self.order_id != 0 {
             #[allow(clippy::needless_borrow)]
@@ -452,14 +443,23 @@ impl serde::Serialize for OrderLog {
         if !self.user_trimmed_ip.is_empty() {
             struct_ser.serialize_field("userTrimmedIp", &self.user_trimmed_ip)?;
         }
-        if let Some(v) = self.last_trade_notified_at.as_ref() {
-            struct_ser.serialize_field("lastTradeNotifiedAt", v)?;
-        }
         if self.smp_type != 0 {
             struct_ser.serialize_field("smpType", &self.smp_type)?;
         }
         if !self.server_ip.is_empty() {
             struct_ser.serialize_field("serverIp", &self.server_ip)?;
+        }
+        if let Some(v) = self.create_time.as_ref() {
+            struct_ser.serialize_field("createTime", v)?;
+        }
+        if let Some(v) = self.submit_time.as_ref() {
+            struct_ser.serialize_field("submitTime", v)?;
+        }
+        if let Some(v) = self.process_time.as_ref() {
+            struct_ser.serialize_field("processTime", v)?;
+        }
+        if let Some(v) = self.last_trade_notify_time.as_ref() {
+            struct_ser.serialize_field("lastTradeNotifyTime", v)?;
         }
         struct_ser.end()
     }
@@ -482,12 +482,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "executionQuantity",
             "execution_price",
             "executionPrice",
-            "created_at",
-            "createdAt",
-            "submitted_at",
-            "submittedAt",
-            "processed_at",
-            "processedAt",
             "order_id",
             "orderId",
             "original_order_id",
@@ -524,12 +518,18 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "userCode",
             "user_trimmed_ip",
             "userTrimmedIp",
-            "last_trade_notified_at",
-            "lastTradeNotifiedAt",
             "smp_type",
             "smpType",
             "server_ip",
             "serverIp",
+            "create_time",
+            "createTime",
+            "submit_time",
+            "submitTime",
+            "process_time",
+            "processTime",
+            "last_trade_notify_time",
+            "lastTradeNotifyTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -540,9 +540,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             EventType,
             ExecutionQuantity,
             ExecutionPrice,
-            CreatedAt,
-            SubmittedAt,
-            ProcessedAt,
             OrderId,
             OriginalOrderId,
             Action,
@@ -566,9 +563,12 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             OriginalPrice,
             UserCode,
             UserTrimmedIp,
-            LastTradeNotifiedAt,
             SmpType,
             ServerIp,
+            CreateTime,
+            SubmitTime,
+            ProcessTime,
+            LastTradeNotifyTime,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -596,9 +596,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "eventType" | "event_type" => Ok(GeneratedField::EventType),
                             "executionQuantity" | "execution_quantity" => Ok(GeneratedField::ExecutionQuantity),
                             "executionPrice" | "execution_price" => Ok(GeneratedField::ExecutionPrice),
-                            "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
-                            "submittedAt" | "submitted_at" => Ok(GeneratedField::SubmittedAt),
-                            "processedAt" | "processed_at" => Ok(GeneratedField::ProcessedAt),
                             "orderId" | "order_id" => Ok(GeneratedField::OrderId),
                             "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
                             "action" => Ok(GeneratedField::Action),
@@ -622,9 +619,12 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "originalPrice" | "original_price" => Ok(GeneratedField::OriginalPrice),
                             "userCode" | "user_code" => Ok(GeneratedField::UserCode),
                             "userTrimmedIp" | "user_trimmed_ip" => Ok(GeneratedField::UserTrimmedIp),
-                            "lastTradeNotifiedAt" | "last_trade_notified_at" => Ok(GeneratedField::LastTradeNotifiedAt),
                             "smpType" | "smp_type" => Ok(GeneratedField::SmpType),
                             "serverIp" | "server_ip" => Ok(GeneratedField::ServerIp),
+                            "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
+                            "submitTime" | "submit_time" => Ok(GeneratedField::SubmitTime),
+                            "processTime" | "process_time" => Ok(GeneratedField::ProcessTime),
+                            "lastTradeNotifyTime" | "last_trade_notify_time" => Ok(GeneratedField::LastTradeNotifyTime),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -650,9 +650,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut event_type__ = None;
                 let mut execution_quantity__ = None;
                 let mut execution_price__ = None;
-                let mut created_at__ = None;
-                let mut submitted_at__ = None;
-                let mut processed_at__ = None;
                 let mut order_id__ = None;
                 let mut original_order_id__ = None;
                 let mut action__ = None;
@@ -676,9 +673,12 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut original_price__ = None;
                 let mut user_code__ = None;
                 let mut user_trimmed_ip__ = None;
-                let mut last_trade_notified_at__ = None;
                 let mut smp_type__ = None;
                 let mut server_ip__ = None;
+                let mut create_time__ = None;
+                let mut submit_time__ = None;
+                let mut process_time__ = None;
+                let mut last_trade_notify_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -722,24 +722,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             execution_price__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
-                        }
-                        GeneratedField::CreatedAt => {
-                            if created_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("createdAt"));
-                            }
-                            created_at__ = map_.next_value()?;
-                        }
-                        GeneratedField::SubmittedAt => {
-                            if submitted_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("submittedAt"));
-                            }
-                            submitted_at__ = map_.next_value()?;
-                        }
-                        GeneratedField::ProcessedAt => {
-                            if processed_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("processedAt"));
-                            }
-                            processed_at__ = map_.next_value()?;
                         }
                         GeneratedField::OrderId => {
                             if order_id__.is_some() {
@@ -897,12 +879,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             user_trimmed_ip__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::LastTradeNotifiedAt => {
-                            if last_trade_notified_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("lastTradeNotifiedAt"));
-                            }
-                            last_trade_notified_at__ = map_.next_value()?;
-                        }
                         GeneratedField::SmpType => {
                             if smp_type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("smpType"));
@@ -917,6 +893,30 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             server_ip__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::CreateTime => {
+                            if create_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("createTime"));
+                            }
+                            create_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::SubmitTime => {
+                            if submit_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("submitTime"));
+                            }
+                            submit_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::ProcessTime => {
+                            if process_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("processTime"));
+                            }
+                            process_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::LastTradeNotifyTime => {
+                            if last_trade_notify_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastTradeNotifyTime"));
+                            }
+                            last_trade_notify_time__ = map_.next_value()?;
+                        }
                     }
                 }
                 Ok(OrderLog {
@@ -926,9 +926,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     event_type: event_type__.unwrap_or_default(),
                     execution_quantity: execution_quantity__.unwrap_or_default(),
                     execution_price: execution_price__.unwrap_or_default(),
-                    created_at: created_at__,
-                    submitted_at: submitted_at__,
-                    processed_at: processed_at__,
                     order_id: order_id__.unwrap_or_default(),
                     original_order_id: original_order_id__.unwrap_or_default(),
                     action: action__.unwrap_or_default(),
@@ -952,9 +949,12 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     original_price: original_price__.unwrap_or_default(),
                     user_code: user_code__.unwrap_or_default(),
                     user_trimmed_ip: user_trimmed_ip__.unwrap_or_default(),
-                    last_trade_notified_at: last_trade_notified_at__,
                     smp_type: smp_type__.unwrap_or_default(),
                     server_ip: server_ip__.unwrap_or_default(),
+                    create_time: create_time__,
+                    submit_time: submit_time__,
+                    process_time: process_time__,
+                    last_trade_notify_time: last_trade_notify_time__,
                 })
             }
         }
