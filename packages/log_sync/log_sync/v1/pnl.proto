@@ -5,7 +5,7 @@ package log_sync.v1.pnl;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 
-option go_package = "github.com/momentum99/ids-apis/go/log_sync/v1;log_sync";
+option go_package = "github.com/meritz-corp/cds-apis/go/log_sync/v1;log_sync";
 
 // PnlService is the service that handles all pnl requests.
 service PnlService {

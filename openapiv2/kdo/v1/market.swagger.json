@@ -1,0 +1,343 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/market.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MarketService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/{etf}/orderbook:stream": {
+      "get": {
+        "summary": "ETF 주문장 데이터를 스트리밍",
+        "operationId": "MarketService_StreamEtfOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/marketEtfOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of marketEtfOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "리소스 이름 (예: etfs/A069500)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (선택적, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
+    "/v1/{future}/orderbook:stream": {
+      "get": {
+        "summary": "선물 주문장 데이터를 스트리밍",
+        "operationId": "MarketService_StreamFuturesOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/marketFuturesOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of marketFuturesOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "future",
+            "description": "리소스 이름 (예: futures/K101W9000)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "futures/[^/]+"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (선택적, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "marketEtfOrderbookData": {
+      "type": "object",
+      "properties": {
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 호가 (10단계, AIP-144)"
+        },
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 호가 (10단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 (10단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 (10단계)"
+        },
+        "lpBidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "LP 매수 수량 (10단계)"
+        },
+        "lpAskQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "LP 매도 수량 (10단계)"
+        },
+        "midPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "중간 호가"
+        },
+        "midAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "중간 매도 수량"
+        },
+        "midBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "중간 매수 수량"
+        },
+        "askQuoteTotalQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매도 호가 수량"
+        },
+        "bidQuoteTotalQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매수 호가 수량"
+        },
+        "estPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "예상 가격"
+        },
+        "estVolume": {
+          "type": "string",
+          "format": "int64",
+          "title": "예상 거래량"
+        },
+        "sessionId": {
+          "$ref": "#/definitions/marketSessionId",
+          "title": "세션 ID"
+        }
+      },
+      "title": "ETF 주문장 데이터"
+    },
+    "marketFuturesOrderbookData": {
+      "type": "object",
+      "properties": {
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 호가 (5단계, AIP-144)"
+        },
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 호가 (5단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 (5단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 (5단계)"
+        },
+        "bidCounts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 주문 수 (5단계)"
+        },
+        "askCounts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 주문 수 (5단계)"
+        },
+        "askQuoteTotalQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매도 호가 수량"
+        },
+        "bidQuoteTotalQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매수 호가 수량"
+        },
+        "estPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "예상 가격"
+        },
+        "estVolume": {
+          "type": "string",
+          "format": "int64",
+          "title": "예상 거래량"
+        },
+        "sessionId": {
+          "$ref": "#/definitions/marketSessionId",
+          "title": "세션 ID"
+        }
+      },
+      "title": "선물 주문장 데이터"
+    },
+    "marketSessionId": {
+      "type": "string",
+      "enum": [
+        "SESSION_ID_UNSPECIFIED",
+        "PREVIOUS",
+        "CONNECTED",
+        "OPENING_ONE_PRICE",
+        "ONE_PRICE",
+        "CLOSING_ONE_PRICE",
+        "VI_ONE_PRICE",
+        "VI_OPENING_ONE_PRICE",
+        "VI_CLOSING_ONE_PRICE",
+        "UNIT_TRADE",
+        "POST_MARKET",
+        "AUCTION_BID",
+        "AUCTION_ASK",
+        "SUSPENDED",
+        "SHUTDOWN",
+        "CLOSED",
+        "ETC"
+      ],
+      "default": "SESSION_ID_UNSPECIFIED",
+      "description": "- SESSION_ID_UNSPECIFIED: 기본값\n - PREVIOUS: 장개시전\n - CONNECTED: 이상무\n - OPENING_ONE_PRICE: 시가단일가\n - ONE_PRICE: 단일가\n - CLOSING_ONE_PRICE: 종가단일가\n - VI_ONE_PRICE: VI장중단일가\n - VI_OPENING_ONE_PRICE: VI시가단일가\n - VI_CLOSING_ONE_PRICE: VI종가단일가\n - UNIT_TRADE: 단위매매\n - POST_MARKET: 장종료후호가접수\n - AUCTION_BID: 경매매수호가 접수 세션\n - AUCTION_ASK: 경매매도호가 접수 세션\n - SUSPENDED: 거래정지\n - SHUTDOWN: SHUTDOWN\n - CLOSED: 장마감\n - ETC: 기타",
+      "title": "세션 ID 열거형 (AIP-126)"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

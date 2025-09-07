@@ -1,0 +1,145 @@
+syntax = "proto3";
+
+package kdo.v1.market;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// 주문장 데이터를 스트리밍하는 서비스
+service MarketService {
+    // ETF 주문장 데이터를 스트리밍
+    rpc StreamEtfOrderbook(StreamEtfOrderbookRequest) returns (stream EtfOrderbookData) {
+        option (google.api.http) = {
+            get: "/v1/{etf=etfs/*}/orderbook:stream"
+        };
+    }
+
+    // 선물 주문장 데이터를 스트리밍
+    rpc StreamFuturesOrderbook(StreamFuturesOrderbookRequest) returns (stream FuturesOrderbookData) {
+        option (google.api.http) = {
+            get: "/v1/{future=futures/*}/orderbook:stream"
+        };
+    }
+}
+
+// ETF 주문장 스트리밍 요청
+message StreamEtfOrderbookRequest {
+    // 리소스 이름 (예: etfs/A069500)
+    string etf = 1;
+
+    // 필터링 조건 (선택적, AIP-160)
+    string filter = 2;
+}
+
+// 선물 주문장 스트리밍 요청
+message StreamFuturesOrderbookRequest {
+    // 리소스 이름 (예: futures/K101W9000)
+    string future = 1;
+
+    // 필터링 조건 (선택적, AIP-160)
+    string filter = 2;
+}
+
+// 세션 ID 열거형 (AIP-126)
+enum SessionId {
+    SESSION_ID_UNSPECIFIED = 0; // 기본값
+    PREVIOUS = 1;               // 장개시전
+    CONNECTED = 2;              // 이상무
+    OPENING_ONE_PRICE = 3;      // 시가단일가
+    ONE_PRICE = 4;              // 단일가
+    CLOSING_ONE_PRICE = 5;      // 종가단일가
+    VI_ONE_PRICE = 6;           // VI장중단일가
+    VI_OPENING_ONE_PRICE = 7;   // VI시가단일가
+    VI_CLOSING_ONE_PRICE = 8;   // VI종가단일가
+    UNIT_TRADE = 9;             // 단위매매
+    POST_MARKET = 10;           // 장종료후호가접수
+    AUCTION_BID = 11;           // 경매매수호가 접수 세션
+    AUCTION_ASK = 12;           // 경매매도호가 접수 세션
+    SUSPENDED = 13;             // 거래정지
+    SHUTDOWN = 14;              // SHUTDOWN
+    CLOSED = 15;                // 장마감
+    ETC = 16;                   // 기타
+}
+
+// ETF 주문장 데이터
+message EtfOrderbookData {
+    // 매수 호가 (10단계, AIP-144)
+    repeated int64 bid_prices = 1;
+
+    // 매도 호가 (10단계)
+    repeated int64 ask_prices = 2;
+
+    // 매수 수량 (10단계)
+    repeated int64 bid_quantities = 3;
+
+    // 매도 수량 (10단계)
+    repeated int64 ask_quantities = 4;
+
+    // LP 매수 수량 (10단계)
+    repeated int64 lp_bid_quantities = 5;
+
+    // LP 매도 수량 (10단계)
+    repeated int64 lp_ask_quantities = 6;
+
+    // 중간 호가
+    int64 mid_price = 7;
+
+    // 중간 매도 수량
+    int64 mid_ask_quantity = 8;
+
+    // 중간 매수 수량
+    int64 mid_bid_quantity = 9;
+
+    // 총 매도 호가 수량
+    int64 ask_quote_total_quantity = 10;
+
+    // 총 매수 호가 수량
+    int64 bid_quote_total_quantity = 11;
+
+    // 예상 가격
+    int64 est_price = 12;
+
+    // 예상 거래량
+    int64 est_volume = 13;
+
+    // 세션 ID
+    SessionId session_id = 14;
+}
+
+// 선물 주문장 데이터
+message FuturesOrderbookData {
+    // 매수 호가 (5단계, AIP-144)
+    repeated int64 bid_prices = 1;
+
+    // 매도 호가 (5단계)
+    repeated int64 ask_prices = 2;
+
+    // 매수 수량 (5단계)
+    repeated int64 bid_quantities = 3;
+
+    // 매도 수량 (5단계)
+    repeated int64 ask_quantities = 4;
+
+    // 매수 주문 수 (5단계)
+    repeated int64 bid_counts = 5;
+
+    // 매도 주문 수 (5단계)
+    repeated int64 ask_counts = 6;
+
+    // 총 매도 호가 수량
+    int64 ask_quote_total_quantity = 7;
+
+    // 총 매수 호가 수량
+    int64 bid_quote_total_quantity = 8;
+
+    // 예상 가격
+    int64 est_price = 9;
+
+    // 예상 거래량
+    int64 est_volume = 10;
+
+    // 세션 ID
+    SessionId session_id = 11;
+}

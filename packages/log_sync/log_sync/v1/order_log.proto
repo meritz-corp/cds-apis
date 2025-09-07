@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package log_sync.v1.pnl;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/log_sync/v1;log_sync";
+
+// OrderLogService is the service that handles all pnl requests.
+service OrderLogService {
+  // ListOrderLogs will return pnl summaries.
+  rpc ListOrderLogs(ListOrderLogsRequest) returns (ListOrderLogsResponse) {
+    option (google.api.http) = {
+      get: "/v1/order_logs"
+    };
+    option (google.api.method_signature) = "";
+  }
+}
+
+
+// OrderLog는 'order_log' 테이블의 스키마를 나타냅니다.
+message OrderLog {
+  int64 id = 1;
+  google.protobuf.Timestamp log_time = 2; // 로그시각
+  string log_type = 3; // 로그종류
+  string event_type = 4; // 이벤트
+  double execution_quantity = 5; // 체결수량
+  double execution_price = 6; // 체결가격
+  google.protobuf.Timestamp created_at = 7; // 주문생성
+  google.protobuf.Timestamp submitted_at = 8; // 거래소송신
+  google.protobuf.Timestamp processed_at = 9; // 거래소수신
+  int64 order_id = 10; // 주문번호
+  string original_order_id = 11; // 원주문번호
+  string action = 12; // 신규/정정/취소
+  string side = 13; // 방향 (Ask, Bid)
+  string fund_code = 14; // 펀드코드
+  string market_operation_code = 15; // 장운영코드
+  string product_code = 16; // 종목코드
+  string product_name = 17; // 종목명
+  double order_price = 18; // 주문가격
+  double order_quantity = 19; // 주문수량
+  double unfilled = 20; // 미체결
+  double filled = 21; // 체결
+  string status = 22; // 상태
+  bool borrowed = 23; // 차입
+  bool auto = 24; // 자동정정
+  bool accepted = 25; // 거래소접수여부
+  bool lp = 26; // LP여부
+  int32 ask_type_type = 27; // 차입매도2/일반매도1/매수0
+  int32 program_type = 28; // PT코드
+  string tag = 29; // 태그
+  double original_price = 30; // 체결확인시점상대가격
+  int32 user_code = 31; // 사번
+  string user_trimmed_ip = 32; // IP
+  google.protobuf.Timestamp last_trade_notified_at = 33; // 체결알림시각
+  int32 smp_type = 34; // SMP 타입
+  string server_ip = 35; // 서버 IP
+}
+
+
+// ListOrderLogsRequest payload
+message ListOrderLogsRequest {
+  // The maximum number of pnl summaries to return. The service may return fewer than
+  // this value.
+  // If unspecified, at most 50 rows will be returned.
+  // The maximum value is 1024; values above 1024 will be coerced to 1024.
+  int32 page_size = 1;
+
+  // Token of the page to retrieve. If not specified, the first
+  // page of results will be returned. Use the value obtained from
+  // `next_page_token` in the previous response to request
+  // the next page of results.
+  //
+  // When paginating, all other parameters provided to `ListOrderLogs` must match
+  // the call that provided the page token.
+  string page_token = 2;
+
+  // Available Sequence and Operator
+  // * start_date
+  //   * `>`, `>=`, `=`, `<=`, `<`
+  // * end_date
+  //   * `>`, `>=`, `=`, `<=`, `<`
+  // * period_type
+  //   * `equal`
+  //
+  // Examples
+  // * filter=start_date>"2025-01-01T00" AND end_date<"2025-01-31T23"
+  // * filter=period_type=PERIOD_TYPE_MONTHLY
+  string filter = 3;
+}
+
+// ListOrderLogsResponse response
+message ListOrderLogsResponse {
+  // The list of rows that matched the query.
+  repeated OrderLog order_logs = 1;
+
+  // Pagination token used to retrieve the next page of results.
+  // Pass the content of this string as the `page_token` attribute of
+  // the next request. `next_page_token` is not returned for the last
+  // page.
+  string next_page_token = 2;
+}
