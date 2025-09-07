@@ -242,8 +242,7 @@
           "format": "date-time",
           "title": "체결알림시각"
         }
-      },
-      "description": "OrderLog는 'order_log' 테이블의 스키마를 나타냅니다."
+      }
     },
     "protobufAny": {
       "type": "object",

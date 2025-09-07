@@ -19,7 +19,6 @@ import '../../google/protobuf/timestamp.pb.dart' as $1;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
-/// OrderLog는 'order_log' 테이블의 스키마를 나타냅니다.
 class OrderLog extends $pb.GeneratedMessage {
   factory OrderLog({
     $fixnum.Int64? id,

@@ -19,8 +19,6 @@ service OrderLogService {
   }
 }
 
-
-// OrderLog는 'order_log' 테이블의 스키마를 나타냅니다.
 message OrderLog {
   int64 id = 1;
   google.protobuf.Timestamp log_time = 2; // 로그시각

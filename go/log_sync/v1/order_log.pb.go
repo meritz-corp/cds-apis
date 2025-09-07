@@ -22,7 +22,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// OrderLog는 'order_log' 테이블의 스키마를 나타냅니다.
 type OrderLog struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
