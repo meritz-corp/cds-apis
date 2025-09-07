@@ -1,3 +1,9 @@
+pub mod google {
+    pub mod protobuf {
+        pub use pbjson_types::Timestamp;
+    }
+}
+
 pub mod log_sync {
     pub mod v1 {
         pub mod pnl {

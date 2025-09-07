@@ -197,4 +197,5 @@ impl SessionId {
     }
 }
 include!("kdo.v1.market.tonic.rs");
+include!("kdo.v1.market.serde.rs");
 // @@protoc_insertion_point(module)

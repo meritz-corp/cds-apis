@@ -7,7 +7,7 @@ pub struct OrderLog {
     pub id: i64,
     /// 로그시각
     #[prost(message, optional, tag="2")]
-    pub log_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub log_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 로그종류
     #[prost(string, tag="3")]
     pub log_type: ::prost::alloc::string::String,
@@ -97,16 +97,16 @@ pub struct OrderLog {
     pub server_ip: ::prost::alloc::string::String,
     /// 주문생성
     #[prost(message, optional, tag="40")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 거래소송신
     #[prost(message, optional, tag="41")]
-    pub submit_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub submit_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 거래소수신
     #[prost(message, optional, tag="42")]
-    pub process_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub process_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 체결알림시각
     #[prost(message, optional, tag="43")]
-    pub last_trade_notify_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_trade_notify_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// ListOrderLogsRequest payload
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -162,4 +162,5 @@ pub struct ListOrderLogsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 include!("log_sync.v1.order_log.tonic.rs");
+include!("log_sync.v1.order_log.serde.rs");
 // @@protoc_insertion_point(module)

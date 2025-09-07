@@ -111,4 +111,5 @@ impl PeriodType {
     }
 }
 include!("log_sync.v1.pnl.tonic.rs");
+include!("log_sync.v1.pnl.serde.rs");
 // @@protoc_insertion_point(module)
