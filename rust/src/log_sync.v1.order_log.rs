@@ -163,5 +163,4 @@ pub struct ListOrderLogsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 include!("log_sync.v1.order_log.tonic.rs");
-include!("log_sync.v1.order_log.serde.rs");
 // @@protoc_insertion_point(module)

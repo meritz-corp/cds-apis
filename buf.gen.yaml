@@ -29,8 +29,8 @@ plugins:
   - plugin: buf.build/community/neoeinstein-tonic:v0.4.1
     out: rust/src
 
-  - plugin: buf.build/community/neoeinstein-prost-serde:v0.3.1
-    out: rust/src
+#  - plugin: buf.build/community/neoeinstein-prost-serde:v0.3.1
+#    out: rust/src
 
   - plugin: buf.build/connectrpc/dart:v1.0.0
     out: dart/ids-apis/lib
