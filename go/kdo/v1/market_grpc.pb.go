@@ -34,8 +34,6 @@ type MarketServiceClient interface {
 	CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error)
 	// 주문 목록 조회
 	ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error)
-	// 주문 상태 스트리밍
-	StreamOrderUpdates(ctx context.Context, in *StreamOrderUpdatesRequest, opts ...grpc.CallOption) (MarketService_StreamOrderUpdatesClient, error)
 	// ETF LP 시작
 	StartEtfLP(ctx context.Context, in *StartEtfLPRequest, opts ...grpc.CallOption) (*StartEtfLPResponse, error)
 	// ETF LP 중지
@@ -154,38 +152,6 @@ func (c *marketServiceClient) ListOrders(ctx context.Context, in *ListOrdersRequ
 	return out, nil
 }
 
-func (c *marketServiceClient) StreamOrderUpdates(ctx context.Context, in *StreamOrderUpdatesRequest, opts ...grpc.CallOption) (MarketService_StreamOrderUpdatesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &MarketService_ServiceDesc.Streams[2], "/kdo.v1.market.MarketService/StreamOrderUpdates", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &marketServiceStreamOrderUpdatesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type MarketService_StreamOrderUpdatesClient interface {
-	Recv() (*OrderUpdate, error)
-	grpc.ClientStream
-}
-
-type marketServiceStreamOrderUpdatesClient struct {
-	grpc.ClientStream
-}
-
-func (x *marketServiceStreamOrderUpdatesClient) Recv() (*OrderUpdate, error) {
-	m := new(OrderUpdate)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *marketServiceClient) StartEtfLP(ctx context.Context, in *StartEtfLPRequest, opts ...grpc.CallOption) (*StartEtfLPResponse, error) {
 	out := new(StartEtfLPResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.market.MarketService/StartEtfLP", in, out, opts...)
@@ -238,8 +204,6 @@ type MarketServiceServer interface {
 	CancelAllOrders(context.Context, *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error)
 	// 주문 목록 조회
 	ListOrders(context.Context, *ListOrdersRequest) (*ListOrdersResponse, error)
-	// 주문 상태 스트리밍
-	StreamOrderUpdates(*StreamOrderUpdatesRequest, MarketService_StreamOrderUpdatesServer) error
 	// ETF LP 시작
 	StartEtfLP(context.Context, *StartEtfLPRequest) (*StartEtfLPResponse, error)
 	// ETF LP 중지
@@ -272,9 +236,6 @@ func (UnimplementedMarketServiceServer) CancelAllOrders(context.Context, *Cancel
 }
 func (UnimplementedMarketServiceServer) ListOrders(context.Context, *ListOrdersRequest) (*ListOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrders not implemented")
-}
-func (UnimplementedMarketServiceServer) StreamOrderUpdates(*StreamOrderUpdatesRequest, MarketService_StreamOrderUpdatesServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamOrderUpdates not implemented")
 }
 func (UnimplementedMarketServiceServer) StartEtfLP(context.Context, *StartEtfLPRequest) (*StartEtfLPResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartEtfLP not implemented")
@@ -415,27 +376,6 @@ func _MarketService_ListOrders_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MarketService_StreamOrderUpdates_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamOrderUpdatesRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(MarketServiceServer).StreamOrderUpdates(m, &marketServiceStreamOrderUpdatesServer{stream})
-}
-
-type MarketService_StreamOrderUpdatesServer interface {
-	Send(*OrderUpdate) error
-	grpc.ServerStream
-}
-
-type marketServiceStreamOrderUpdatesServer struct {
-	grpc.ServerStream
-}
-
-func (x *marketServiceStreamOrderUpdatesServer) Send(m *OrderUpdate) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 func _MarketService_StartEtfLP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartEtfLPRequest)
 	if err := dec(in); err != nil {
@@ -557,11 +497,6 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamFuturesOrderbook",
 			Handler:       _MarketService_StreamFuturesOrderbook_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "StreamOrderUpdates",
-			Handler:       _MarketService_StreamOrderUpdates_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -63,11 +63,6 @@ class MarketServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listOrders, request, options: options);
   }
 
-  /// 주문 상태 스트리밍
-  $grpc.ResponseStream<$0.OrderUpdate> streamOrderUpdates($0.StreamOrderUpdatesRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamOrderUpdates, $async.Stream.fromIterable([request]), options: options);
-  }
-
   /// ETF LP 시작
   $grpc.ResponseFuture<$0.StartEtfLPResponse> startEtfLP($0.StartEtfLPRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$startEtfLP, request, options: options);
@@ -114,10 +109,6 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/ListOrders',
       ($0.ListOrdersRequest value) => value.writeToBuffer(),
       $0.ListOrdersResponse.fromBuffer);
-  static final _$streamOrderUpdates = $grpc.ClientMethod<$0.StreamOrderUpdatesRequest, $0.OrderUpdate>(
-      '/kdo.v1.market.MarketService/StreamOrderUpdates',
-      ($0.StreamOrderUpdatesRequest value) => value.writeToBuffer(),
-      $0.OrderUpdate.fromBuffer);
   static final _$startEtfLP = $grpc.ClientMethod<$0.StartEtfLPRequest, $0.StartEtfLPResponse>(
       '/kdo.v1.market.MarketService/StartEtfLP',
       ($0.StartEtfLPRequest value) => value.writeToBuffer(),
@@ -183,13 +174,6 @@ abstract class MarketServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListOrdersRequest.fromBuffer(value),
         ($0.ListOrdersResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamOrderUpdatesRequest, $0.OrderUpdate>(
-        'StreamOrderUpdates',
-        streamOrderUpdates_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.StreamOrderUpdatesRequest.fromBuffer(value),
-        ($0.OrderUpdate value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StartEtfLPRequest, $0.StartEtfLPResponse>(
         'StartEtfLP',
         startEtfLP_Pre,
@@ -255,12 +239,6 @@ abstract class MarketServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListOrdersResponse> listOrders($grpc.ServiceCall call, $0.ListOrdersRequest request);
-
-  $async.Stream<$0.OrderUpdate> streamOrderUpdates_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamOrderUpdatesRequest> $request) async* {
-    yield* streamOrderUpdates($call, await $request);
-  }
-
-  $async.Stream<$0.OrderUpdate> streamOrderUpdates($grpc.ServiceCall call, $0.StreamOrderUpdatesRequest request);
 
   $async.Future<$0.StartEtfLPResponse> startEtfLP_Pre($grpc.ServiceCall $call, $async.Future<$0.StartEtfLPRequest> $request) async {
     return startEtfLP($call, await $request);

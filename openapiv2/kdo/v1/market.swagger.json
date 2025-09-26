@@ -155,47 +155,6 @@
         ]
       }
     },
-    "/v1/orders:stream": {
-      "get": {
-        "summary": "주문 상태 스트리밍",
-        "operationId": "MarketService_StreamOrderUpdates",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/marketOrderUpdate"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of marketOrderUpdate"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "description": "필터링 조건 (선택적, AIP-160)",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "MarketService"
-        ]
-      }
-    },
     "/v1/{etf}/lp": {
       "get": {
         "summary": "ETF LP 상태 조회",
@@ -492,19 +451,6 @@
         }
       },
       "title": "통계 정보"
-    },
-    "OrderUpdateUpdateType": {
-      "type": "string",
-      "enum": [
-        "UPDATE_TYPE_UNSPECIFIED",
-        "CREATED",
-        "UPDATED",
-        "FILLED",
-        "CANCELLED"
-      ],
-      "default": "UPDATE_TYPE_UNSPECIFIED",
-      "description": "- UPDATE_TYPE_UNSPECIFIED: 기본값\n - CREATED: 주문 생성\n - UPDATED: 주문 업데이트\n - FILLED: 주문 체결\n - CANCELLED: 주문 취소",
-      "title": "업데이트 타입"
     },
     "marketCancelAllOrdersResponse": {
       "type": "object",
@@ -855,19 +801,6 @@
       "default": "ORDER_TYPE_UNSPECIFIED",
       "description": "- ORDER_TYPE_UNSPECIFIED: 기본값\n - BUY: 매수\n - SELL: 매도",
       "title": "주문 타입 열거형"
-    },
-    "marketOrderUpdate": {
-      "type": "object",
-      "properties": {
-        "order": {
-          "$ref": "#/definitions/marketOrder",
-          "title": "업데이트된 주문"
-        },
-        "updateType": {
-          "$ref": "#/definitions/OrderUpdateUpdateType"
-        }
-      },
-      "title": "주문 업데이트"
     },
     "marketPlaceOrderRequest": {
       "type": "object",

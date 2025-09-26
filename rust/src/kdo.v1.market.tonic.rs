@@ -2,8 +2,8 @@
 /// Generated client implementations.
 pub mod market_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::*;
     use tonic::codegen::http::Uri;
+    use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct MarketServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -243,33 +243,6 @@ pub mod market_service_client {
                 .insert(GrpcMethod::new("kdo.v1.market.MarketService", "ListOrders"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_order_updates(
-            &mut self,
-            request: impl tonic::IntoRequest<super::StreamOrderUpdatesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::OrderUpdate>>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.market.MarketService/StreamOrderUpdates",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("kdo.v1.market.MarketService", "StreamOrderUpdates"),
-                );
-            self.inner.server_streaming(req, path, codec).await
-        }
         pub async fn start_etf_lp(
             &mut self,
             request: impl tonic::IntoRequest<super::StartEtfLpRequest>,
@@ -435,19 +408,6 @@ pub mod market_service_server {
             request: tonic::Request<super::ListOrdersRequest>,
         ) -> std::result::Result<
             tonic::Response<super::ListOrdersResponse>,
-            tonic::Status,
-        >;
-        /// Server streaming response type for the StreamOrderUpdates method.
-        type StreamOrderUpdatesStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::OrderUpdate, tonic::Status>,
-            >
-            + Send
-            + 'static;
-        async fn stream_order_updates(
-            &self,
-            request: tonic::Request<super::StreamOrderUpdatesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<Self::StreamOrderUpdatesStream>,
             tonic::Status,
         >;
         async fn start_etf_lp(
@@ -831,54 +791,6 @@ pub mod market_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.market.MarketService/StreamOrderUpdates" => {
-                    #[allow(non_camel_case_types)]
-                    struct StreamOrderUpdatesSvc<T: MarketService>(pub Arc<T>);
-                    impl<
-                        T: MarketService,
-                    > tonic::server::ServerStreamingService<
-                        super::StreamOrderUpdatesRequest,
-                    > for StreamOrderUpdatesSvc<T> {
-                        type Response = super::OrderUpdate;
-                        type ResponseStream = T::StreamOrderUpdatesStream;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::ResponseStream>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::StreamOrderUpdatesRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MarketService>::stream_order_updates(&inner, request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = StreamOrderUpdatesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

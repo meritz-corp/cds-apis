@@ -52,11 +52,11 @@ service MarketService {
     }
 
     // 주문 상태 스트리밍
-    rpc StreamOrderUpdates(StreamOrderUpdatesRequest) returns (stream OrderUpdate) {
-        option (google.api.http) = {
-            get: "/v1/orders:stream"
-        };
-    }
+//    rpc StreamOrderUpdates(StreamOrderUpdatesRequest) returns (stream OrderUpdate) {
+//        option (google.api.http) = {
+//            get: "/v1/orders:stream"
+//        };
+//    }
 
     // ETF LP 시작
     rpc StartEtfLP(StartEtfLPRequest) returns (StartEtfLPResponse) {
