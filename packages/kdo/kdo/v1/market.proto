@@ -23,33 +23,33 @@ service MarketService {
     }
 
     // 주문 접수
-    rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse) {
-        option (google.api.http) = {
-            post: "/v1/orders"
-            body: "*"
-        };
-    }
-
-    // 주문 취소
-    rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {
-        option (google.api.http) = {
-            delete: "/v1/orders/{order_id}"
-        };
-    }
-
-    // 모든 주문 취소
-    rpc CancelAllOrders(CancelAllOrdersRequest) returns (CancelAllOrdersResponse) {
-        option (google.api.http) = {
-            delete: "/v1/orders"
-        };
-    }
-
-    // 주문 목록 조회
-    rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
-        option (google.api.http) = {
-            get: "/v1/orders"
-        };
-    }
+//    rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse) {
+//        option (google.api.http) = {
+//            post: "/v1/orders"
+//            body: "*"
+//        };
+//    }
+//
+//    // 주문 취소
+//    rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {
+//        option (google.api.http) = {
+//            delete: "/v1/orders/{order_id}"
+//        };
+//    }
+//
+//    // 모든 주문 취소
+//    rpc CancelAllOrders(CancelAllOrdersRequest) returns (CancelAllOrdersResponse) {
+//        option (google.api.http) = {
+//            delete: "/v1/orders"
+//        };
+//    }
+//
+//    // 주문 목록 조회
+//    rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
+//        option (google.api.http) = {
+//            get: "/v1/orders"
+//        };
+//    }
 
     // 주문 상태 스트리밍
 //    rpc StreamOrderUpdates(StreamOrderUpdatesRequest) returns (stream OrderUpdate) {

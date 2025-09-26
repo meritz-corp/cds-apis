@@ -27,38 +27,6 @@ abstract final class MarketService {
     kdov1market.FuturesOrderbookData.new,
   );
 
-  /// 주문 접수
-  static const placeOrder = connect.Spec(
-    '/$name/PlaceOrder',
-    connect.StreamType.unary,
-    kdov1market.PlaceOrderRequest.new,
-    kdov1market.PlaceOrderResponse.new,
-  );
-
-  /// 주문 취소
-  static const cancelOrder = connect.Spec(
-    '/$name/CancelOrder',
-    connect.StreamType.unary,
-    kdov1market.CancelOrderRequest.new,
-    kdov1market.CancelOrderResponse.new,
-  );
-
-  /// 모든 주문 취소
-  static const cancelAllOrders = connect.Spec(
-    '/$name/CancelAllOrders',
-    connect.StreamType.unary,
-    kdov1market.CancelAllOrdersRequest.new,
-    kdov1market.CancelAllOrdersResponse.new,
-  );
-
-  /// 주문 목록 조회
-  static const listOrders = connect.Spec(
-    '/$name/ListOrders',
-    connect.StreamType.unary,
-    kdov1market.ListOrdersRequest.new,
-    kdov1market.ListOrdersResponse.new,
-  );
-
   /// ETF LP 시작
   static const startEtfLP = connect.Spec(
     '/$name/StartEtfLP',

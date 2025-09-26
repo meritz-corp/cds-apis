@@ -519,46 +519,6 @@ func (m *MockMarketServiceClient) EXPECT() *MockMarketServiceClientMockRecorder 
 	return m.recorder
 }
 
-// CancelAllOrders mocks base method.
-func (m *MockMarketServiceClient) CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CancelAllOrders", varargs...)
-	ret0, _ := ret[0].(*CancelAllOrdersResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CancelAllOrders indicates an expected call of CancelAllOrders.
-func (mr *MockMarketServiceClientMockRecorder) CancelAllOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelAllOrders", reflect.TypeOf((*MockMarketServiceClient)(nil).CancelAllOrders), varargs...)
-}
-
-// CancelOrder mocks base method.
-func (m *MockMarketServiceClient) CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CancelOrder", varargs...)
-	ret0, _ := ret[0].(*CancelOrderResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CancelOrder indicates an expected call of CancelOrder.
-func (mr *MockMarketServiceClientMockRecorder) CancelOrder(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelOrder", reflect.TypeOf((*MockMarketServiceClient)(nil).CancelOrder), varargs...)
-}
-
 // GetEtfLPStatus mocks base method.
 func (m *MockMarketServiceClient) GetEtfLPStatus(ctx context.Context, in *GetEtfLPStatusRequest, opts ...grpc.CallOption) (*GetEtfLPStatusResponse, error) {
 	m.ctrl.T.Helper()
@@ -577,46 +537,6 @@ func (mr *MockMarketServiceClientMockRecorder) GetEtfLPStatus(ctx, in interface{
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLPStatus", reflect.TypeOf((*MockMarketServiceClient)(nil).GetEtfLPStatus), varargs...)
-}
-
-// ListOrders mocks base method.
-func (m *MockMarketServiceClient) ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ListOrders", varargs...)
-	ret0, _ := ret[0].(*ListOrdersResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ListOrders indicates an expected call of ListOrders.
-func (mr *MockMarketServiceClientMockRecorder) ListOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListOrders", reflect.TypeOf((*MockMarketServiceClient)(nil).ListOrders), varargs...)
-}
-
-// PlaceOrder mocks base method.
-func (m *MockMarketServiceClient) PlaceOrder(ctx context.Context, in *PlaceOrderRequest, opts ...grpc.CallOption) (*PlaceOrderResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "PlaceOrder", varargs...)
-	ret0, _ := ret[0].(*PlaceOrderResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// PlaceOrder indicates an expected call of PlaceOrder.
-func (mr *MockMarketServiceClientMockRecorder) PlaceOrder(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PlaceOrder", reflect.TypeOf((*MockMarketServiceClient)(nil).PlaceOrder), varargs...)
 }
 
 // StartEtfLP mocks base method.
@@ -742,36 +662,6 @@ func (m *MockMarketServiceServer) EXPECT() *MockMarketServiceServerMockRecorder 
 	return m.recorder
 }
 
-// CancelAllOrders mocks base method.
-func (m *MockMarketServiceServer) CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CancelAllOrders", ctx, in)
-	ret0, _ := ret[0].(*CancelAllOrdersResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CancelAllOrders indicates an expected call of CancelAllOrders.
-func (mr *MockMarketServiceServerMockRecorder) CancelAllOrders(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelAllOrders", reflect.TypeOf((*MockMarketServiceServer)(nil).CancelAllOrders), ctx, in)
-}
-
-// CancelOrder mocks base method.
-func (m *MockMarketServiceServer) CancelOrder(ctx context.Context, in *CancelOrderRequest) (*CancelOrderResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CancelOrder", ctx, in)
-	ret0, _ := ret[0].(*CancelOrderResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CancelOrder indicates an expected call of CancelOrder.
-func (mr *MockMarketServiceServerMockRecorder) CancelOrder(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelOrder", reflect.TypeOf((*MockMarketServiceServer)(nil).CancelOrder), ctx, in)
-}
-
 // GetEtfLPStatus mocks base method.
 func (m *MockMarketServiceServer) GetEtfLPStatus(ctx context.Context, in *GetEtfLPStatusRequest) (*GetEtfLPStatusResponse, error) {
 	m.ctrl.T.Helper()
@@ -785,36 +675,6 @@ func (m *MockMarketServiceServer) GetEtfLPStatus(ctx context.Context, in *GetEtf
 func (mr *MockMarketServiceServerMockRecorder) GetEtfLPStatus(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLPStatus", reflect.TypeOf((*MockMarketServiceServer)(nil).GetEtfLPStatus), ctx, in)
-}
-
-// ListOrders mocks base method.
-func (m *MockMarketServiceServer) ListOrders(ctx context.Context, in *ListOrdersRequest) (*ListOrdersResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListOrders", ctx, in)
-	ret0, _ := ret[0].(*ListOrdersResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ListOrders indicates an expected call of ListOrders.
-func (mr *MockMarketServiceServerMockRecorder) ListOrders(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListOrders", reflect.TypeOf((*MockMarketServiceServer)(nil).ListOrders), ctx, in)
-}
-
-// PlaceOrder mocks base method.
-func (m *MockMarketServiceServer) PlaceOrder(ctx context.Context, in *PlaceOrderRequest) (*PlaceOrderResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "PlaceOrder", ctx, in)
-	ret0, _ := ret[0].(*PlaceOrderResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// PlaceOrder indicates an expected call of PlaceOrder.
-func (mr *MockMarketServiceServerMockRecorder) PlaceOrder(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PlaceOrder", reflect.TypeOf((*MockMarketServiceServer)(nil).PlaceOrder), ctx, in)
 }
 
 // StartEtfLP mocks base method.
