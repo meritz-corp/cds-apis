@@ -466,6 +466,1405 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
   void clearSessionId() => $_clearField(11);
 }
 
+/// 주문 정보
+class Order extends $pb.GeneratedMessage {
+  factory Order({
+    $core.String? orderId,
+    OrderType? orderType,
+    $core.String? symbol,
+    $fixnum.Int64? price,
+    $fixnum.Int64? quantity,
+    $fixnum.Int64? filledQuantity,
+    OrderStatus? status,
+    $fixnum.Int64? createdAt,
+    $fixnum.Int64? updatedAt,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    if (orderType != null) result.orderType = orderType;
+    if (symbol != null) result.symbol = symbol;
+    if (price != null) result.price = price;
+    if (quantity != null) result.quantity = quantity;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (status != null) result.status = status;
+    if (createdAt != null) result.createdAt = createdAt;
+    if (updatedAt != null) result.updatedAt = updatedAt;
+    return result;
+  }
+
+  Order._();
+
+  factory Order.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Order.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Order', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'orderId')
+    ..e<OrderType>(2, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: OrderType.ORDER_TYPE_UNSPECIFIED, valueOf: OrderType.valueOf, enumValues: OrderType.values)
+    ..aOS(3, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(4, _omitFieldNames ? '' : 'price')
+    ..aInt64(5, _omitFieldNames ? '' : 'quantity')
+    ..aInt64(6, _omitFieldNames ? '' : 'filledQuantity')
+    ..e<OrderStatus>(7, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: OrderStatus.ORDER_STATUS_UNSPECIFIED, valueOf: OrderStatus.valueOf, enumValues: OrderStatus.values)
+    ..aInt64(8, _omitFieldNames ? '' : 'createdAt')
+    ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Order clone() => Order()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Order copyWith(void Function(Order) updates) => super.copyWith((message) => updates(message as Order)) as Order;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Order create() => Order._();
+  @$core.override
+  Order createEmptyInstance() => create();
+  static $pb.PbList<Order> createRepeated() => $pb.PbList<Order>();
+  @$core.pragma('dart2js:noInline')
+  static Order getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Order>(create);
+  static Order? _defaultInstance;
+
+  /// 주문 ID
+  @$pb.TagNumber(1)
+  $core.String get orderId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set orderId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+
+  /// 주문 타입
+  @$pb.TagNumber(2)
+  OrderType get orderType => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderType(OrderType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasOrderType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderType() => $_clearField(2);
+
+  /// 상품 (예: etfs/A069500)
+  @$pb.TagNumber(3)
+  $core.String get symbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set symbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSymbol() => $_clearField(3);
+
+  /// 주문 가격
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get price => $_getI64(3);
+  @$pb.TagNumber(4)
+  set price($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPrice() => $_clearField(4);
+
+  /// 주문 수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get quantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearQuantity() => $_clearField(5);
+
+  /// 체결 수량
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get filledQuantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasFilledQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFilledQuantity() => $_clearField(6);
+
+  /// 주문 상태
+  @$pb.TagNumber(7)
+  OrderStatus get status => $_getN(6);
+  @$pb.TagNumber(7)
+  set status(OrderStatus value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasStatus() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStatus() => $_clearField(7);
+
+  /// 주문 시간 (Unix timestamp)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get createdAt => $_getI64(7);
+  @$pb.TagNumber(8)
+  set createdAt($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCreatedAt() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCreatedAt() => $_clearField(8);
+
+  /// 업데이트 시간 (Unix timestamp)
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get updatedAt => $_getI64(8);
+  @$pb.TagNumber(9)
+  set updatedAt($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasUpdatedAt() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearUpdatedAt() => $_clearField(9);
+}
+
+/// 주문 접수 요청
+class PlaceOrderRequest extends $pb.GeneratedMessage {
+  factory PlaceOrderRequest({
+    OrderType? orderType,
+    $core.String? symbol,
+    $fixnum.Int64? price,
+    $fixnum.Int64? quantity,
+  }) {
+    final result = create();
+    if (orderType != null) result.orderType = orderType;
+    if (symbol != null) result.symbol = symbol;
+    if (price != null) result.price = price;
+    if (quantity != null) result.quantity = quantity;
+    return result;
+  }
+
+  PlaceOrderRequest._();
+
+  factory PlaceOrderRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PlaceOrderRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlaceOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..e<OrderType>(1, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: OrderType.ORDER_TYPE_UNSPECIFIED, valueOf: OrderType.valueOf, enumValues: OrderType.values)
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(3, _omitFieldNames ? '' : 'price')
+    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PlaceOrderRequest clone() => PlaceOrderRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PlaceOrderRequest copyWith(void Function(PlaceOrderRequest) updates) => super.copyWith((message) => updates(message as PlaceOrderRequest)) as PlaceOrderRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PlaceOrderRequest create() => PlaceOrderRequest._();
+  @$core.override
+  PlaceOrderRequest createEmptyInstance() => create();
+  static $pb.PbList<PlaceOrderRequest> createRepeated() => $pb.PbList<PlaceOrderRequest>();
+  @$core.pragma('dart2js:noInline')
+  static PlaceOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaceOrderRequest>(create);
+  static PlaceOrderRequest? _defaultInstance;
+
+  /// 주문 타입
+  @$pb.TagNumber(1)
+  OrderType get orderType => $_getN(0);
+  @$pb.TagNumber(1)
+  set orderType(OrderType value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderType() => $_clearField(1);
+
+  /// 상품 (예: etfs/A069500)
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 주문 가격
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get price => $_getI64(2);
+  @$pb.TagNumber(3)
+  set price($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPrice() => $_clearField(3);
+
+  /// 주문 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get quantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuantity() => $_clearField(4);
+}
+
+/// 주문 접수 응답
+class PlaceOrderResponse extends $pb.GeneratedMessage {
+  factory PlaceOrderResponse({
+    Order? order,
+  }) {
+    final result = create();
+    if (order != null) result.order = order;
+    return result;
+  }
+
+  PlaceOrderResponse._();
+
+  factory PlaceOrderResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PlaceOrderResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlaceOrderResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOM<Order>(1, _omitFieldNames ? '' : 'order', subBuilder: Order.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PlaceOrderResponse clone() => PlaceOrderResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PlaceOrderResponse copyWith(void Function(PlaceOrderResponse) updates) => super.copyWith((message) => updates(message as PlaceOrderResponse)) as PlaceOrderResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PlaceOrderResponse create() => PlaceOrderResponse._();
+  @$core.override
+  PlaceOrderResponse createEmptyInstance() => create();
+  static $pb.PbList<PlaceOrderResponse> createRepeated() => $pb.PbList<PlaceOrderResponse>();
+  @$core.pragma('dart2js:noInline')
+  static PlaceOrderResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaceOrderResponse>(create);
+  static PlaceOrderResponse? _defaultInstance;
+
+  /// 생성된 주문 정보
+  @$pb.TagNumber(1)
+  Order get order => $_getN(0);
+  @$pb.TagNumber(1)
+  set order(Order value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrder() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrder() => $_clearField(1);
+  @$pb.TagNumber(1)
+  Order ensureOrder() => $_ensure(0);
+}
+
+/// 주문 취소 요청
+class CancelOrderRequest extends $pb.GeneratedMessage {
+  factory CancelOrderRequest({
+    $core.String? orderId,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    return result;
+  }
+
+  CancelOrderRequest._();
+
+  factory CancelOrderRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelOrderRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'orderId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelOrderRequest clone() => CancelOrderRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelOrderRequest copyWith(void Function(CancelOrderRequest) updates) => super.copyWith((message) => updates(message as CancelOrderRequest)) as CancelOrderRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelOrderRequest create() => CancelOrderRequest._();
+  @$core.override
+  CancelOrderRequest createEmptyInstance() => create();
+  static $pb.PbList<CancelOrderRequest> createRepeated() => $pb.PbList<CancelOrderRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CancelOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelOrderRequest>(create);
+  static CancelOrderRequest? _defaultInstance;
+
+  /// 취소할 주문 ID
+  @$pb.TagNumber(1)
+  $core.String get orderId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set orderId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+}
+
+/// 주문 취소 응답
+class CancelOrderResponse extends $pb.GeneratedMessage {
+  factory CancelOrderResponse({
+    Order? order,
+  }) {
+    final result = create();
+    if (order != null) result.order = order;
+    return result;
+  }
+
+  CancelOrderResponse._();
+
+  factory CancelOrderResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelOrderResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelOrderResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOM<Order>(1, _omitFieldNames ? '' : 'order', subBuilder: Order.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelOrderResponse clone() => CancelOrderResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelOrderResponse copyWith(void Function(CancelOrderResponse) updates) => super.copyWith((message) => updates(message as CancelOrderResponse)) as CancelOrderResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelOrderResponse create() => CancelOrderResponse._();
+  @$core.override
+  CancelOrderResponse createEmptyInstance() => create();
+  static $pb.PbList<CancelOrderResponse> createRepeated() => $pb.PbList<CancelOrderResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CancelOrderResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelOrderResponse>(create);
+  static CancelOrderResponse? _defaultInstance;
+
+  /// 취소된 주문 정보
+  @$pb.TagNumber(1)
+  Order get order => $_getN(0);
+  @$pb.TagNumber(1)
+  set order(Order value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrder() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrder() => $_clearField(1);
+  @$pb.TagNumber(1)
+  Order ensureOrder() => $_ensure(0);
+}
+
+/// 모든 주문 취소 요청
+class CancelAllOrdersRequest extends $pb.GeneratedMessage {
+  factory CancelAllOrdersRequest({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  CancelAllOrdersRequest._();
+
+  factory CancelAllOrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelAllOrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelAllOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersRequest clone() => CancelAllOrdersRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersRequest copyWith(void Function(CancelAllOrdersRequest) updates) => super.copyWith((message) => updates(message as CancelAllOrdersRequest)) as CancelAllOrdersRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersRequest create() => CancelAllOrdersRequest._();
+  @$core.override
+  CancelAllOrdersRequest createEmptyInstance() => create();
+  static $pb.PbList<CancelAllOrdersRequest> createRepeated() => $pb.PbList<CancelAllOrdersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelAllOrdersRequest>(create);
+  static CancelAllOrdersRequest? _defaultInstance;
+
+  /// 선택적: 특정 상품의 주문만 취소
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
+/// 모든 주문 취소 응답
+class CancelAllOrdersResponse extends $pb.GeneratedMessage {
+  factory CancelAllOrdersResponse({
+    $core.int? cancelledCount,
+    $core.Iterable<Order>? cancelledOrders,
+  }) {
+    final result = create();
+    if (cancelledCount != null) result.cancelledCount = cancelledCount;
+    if (cancelledOrders != null) result.cancelledOrders.addAll(cancelledOrders);
+    return result;
+  }
+
+  CancelAllOrdersResponse._();
+
+  factory CancelAllOrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelAllOrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelAllOrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'cancelledCount', $pb.PbFieldType.O3)
+    ..pc<Order>(2, _omitFieldNames ? '' : 'cancelledOrders', $pb.PbFieldType.PM, subBuilder: Order.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersResponse clone() => CancelAllOrdersResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersResponse copyWith(void Function(CancelAllOrdersResponse) updates) => super.copyWith((message) => updates(message as CancelAllOrdersResponse)) as CancelAllOrdersResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersResponse create() => CancelAllOrdersResponse._();
+  @$core.override
+  CancelAllOrdersResponse createEmptyInstance() => create();
+  static $pb.PbList<CancelAllOrdersResponse> createRepeated() => $pb.PbList<CancelAllOrdersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelAllOrdersResponse>(create);
+  static CancelAllOrdersResponse? _defaultInstance;
+
+  /// 취소된 주문 수
+  @$pb.TagNumber(1)
+  $core.int get cancelledCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set cancelledCount($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCancelledCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCancelledCount() => $_clearField(1);
+
+  /// 취소된 주문 목록
+  @$pb.TagNumber(2)
+  $pb.PbList<Order> get cancelledOrders => $_getList(1);
+}
+
+/// 주문 목록 조회 요청
+class ListOrdersRequest extends $pb.GeneratedMessage {
+  factory ListOrdersRequest({
+    $core.String? filter,
+    $core.int? pageSize,
+    $core.String? pageToken,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    return result;
+  }
+
+  ListOrdersRequest._();
+
+  factory ListOrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListOrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'pageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersRequest clone() => ListOrdersRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersRequest copyWith(void Function(ListOrdersRequest) updates) => super.copyWith((message) => updates(message as ListOrdersRequest)) as ListOrdersRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersRequest create() => ListOrdersRequest._();
+  @$core.override
+  ListOrdersRequest createEmptyInstance() => create();
+  static $pb.PbList<ListOrdersRequest> createRepeated() => $pb.PbList<ListOrdersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListOrdersRequest>(create);
+  static ListOrdersRequest? _defaultInstance;
+
+  /// 필터링 조건 (선택적, AIP-160)
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
+
+  /// 페이징 (AIP-158)
+  @$pb.TagNumber(2)
+  $core.int get pageSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set pageSize($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageSize() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get pageToken => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set pageToken($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPageToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPageToken() => $_clearField(3);
+}
+
+/// 주문 목록 조회 응답
+class ListOrdersResponse extends $pb.GeneratedMessage {
+  factory ListOrdersResponse({
+    $core.Iterable<Order>? orders,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (orders != null) result.orders.addAll(orders);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListOrdersResponse._();
+
+  factory ListOrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListOrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..pc<Order>(1, _omitFieldNames ? '' : 'orders', $pb.PbFieldType.PM, subBuilder: Order.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersResponse clone() => ListOrdersResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersResponse copyWith(void Function(ListOrdersResponse) updates) => super.copyWith((message) => updates(message as ListOrdersResponse)) as ListOrdersResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersResponse create() => ListOrdersResponse._();
+  @$core.override
+  ListOrdersResponse createEmptyInstance() => create();
+  static $pb.PbList<ListOrdersResponse> createRepeated() => $pb.PbList<ListOrdersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListOrdersResponse>(create);
+  static ListOrdersResponse? _defaultInstance;
+
+  /// 주문 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<Order> get orders => $_getList(0);
+
+  /// 다음 페이지 토큰 (AIP-158)
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
+}
+
+/// 주문 업데이트 스트리밍 요청
+class StreamOrderUpdatesRequest extends $pb.GeneratedMessage {
+  factory StreamOrderUpdatesRequest({
+    $core.String? filter,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  StreamOrderUpdatesRequest._();
+
+  factory StreamOrderUpdatesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamOrderUpdatesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamOrderUpdatesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamOrderUpdatesRequest clone() => StreamOrderUpdatesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamOrderUpdatesRequest copyWith(void Function(StreamOrderUpdatesRequest) updates) => super.copyWith((message) => updates(message as StreamOrderUpdatesRequest)) as StreamOrderUpdatesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamOrderUpdatesRequest create() => StreamOrderUpdatesRequest._();
+  @$core.override
+  StreamOrderUpdatesRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamOrderUpdatesRequest> createRepeated() => $pb.PbList<StreamOrderUpdatesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamOrderUpdatesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamOrderUpdatesRequest>(create);
+  static StreamOrderUpdatesRequest? _defaultInstance;
+
+  /// 필터링 조건 (선택적, AIP-160)
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
+}
+
+/// 주문 업데이트
+class OrderUpdate extends $pb.GeneratedMessage {
+  factory OrderUpdate({
+    Order? order,
+    OrderUpdate_UpdateType? updateType,
+  }) {
+    final result = create();
+    if (order != null) result.order = order;
+    if (updateType != null) result.updateType = updateType;
+    return result;
+  }
+
+  OrderUpdate._();
+
+  factory OrderUpdate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory OrderUpdate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOM<Order>(1, _omitFieldNames ? '' : 'order', subBuilder: Order.create)
+    ..e<OrderUpdate_UpdateType>(2, _omitFieldNames ? '' : 'updateType', $pb.PbFieldType.OE, defaultOrMaker: OrderUpdate_UpdateType.UPDATE_TYPE_UNSPECIFIED, valueOf: OrderUpdate_UpdateType.valueOf, enumValues: OrderUpdate_UpdateType.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderUpdate clone() => OrderUpdate()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderUpdate copyWith(void Function(OrderUpdate) updates) => super.copyWith((message) => updates(message as OrderUpdate)) as OrderUpdate;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OrderUpdate create() => OrderUpdate._();
+  @$core.override
+  OrderUpdate createEmptyInstance() => create();
+  static $pb.PbList<OrderUpdate> createRepeated() => $pb.PbList<OrderUpdate>();
+  @$core.pragma('dart2js:noInline')
+  static OrderUpdate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OrderUpdate>(create);
+  static OrderUpdate? _defaultInstance;
+
+  /// 업데이트된 주문
+  @$pb.TagNumber(1)
+  Order get order => $_getN(0);
+  @$pb.TagNumber(1)
+  set order(Order value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrder() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrder() => $_clearField(1);
+  @$pb.TagNumber(1)
+  Order ensureOrder() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  OrderUpdate_UpdateType get updateType => $_getN(1);
+  @$pb.TagNumber(2)
+  set updateType(OrderUpdate_UpdateType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUpdateType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUpdateType() => $_clearField(2);
+}
+
+/// ETF LP 설정
+class EtfLPConfig extends $pb.GeneratedMessage {
+  factory EtfLPConfig({
+    $core.double? basis,
+    $core.double? offset,
+    $fixnum.Int64? maxQuantity,
+    $core.double? minSpread,
+  }) {
+    final result = create();
+    if (basis != null) result.basis = basis;
+    if (offset != null) result.offset = offset;
+    if (maxQuantity != null) result.maxQuantity = maxQuantity;
+    if (minSpread != null) result.minSpread = minSpread;
+    return result;
+  }
+
+  EtfLPConfig._();
+
+  factory EtfLPConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLPConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLPConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'basis', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.OD)
+    ..aInt64(3, _omitFieldNames ? '' : 'maxQuantity')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'minSpread', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLPConfig clone() => EtfLPConfig()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLPConfig copyWith(void Function(EtfLPConfig) updates) => super.copyWith((message) => updates(message as EtfLPConfig)) as EtfLPConfig;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfLPConfig create() => EtfLPConfig._();
+  @$core.override
+  EtfLPConfig createEmptyInstance() => create();
+  static $pb.PbList<EtfLPConfig> createRepeated() => $pb.PbList<EtfLPConfig>();
+  @$core.pragma('dart2js:noInline')
+  static EtfLPConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLPConfig>(create);
+  static EtfLPConfig? _defaultInstance;
+
+  /// Basis 값
+  @$pb.TagNumber(1)
+  $core.double get basis => $_getN(0);
+  @$pb.TagNumber(1)
+  set basis($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBasis() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBasis() => $_clearField(1);
+
+  /// Offset 값
+  @$pb.TagNumber(2)
+  $core.double get offset => $_getN(1);
+  @$pb.TagNumber(2)
+  set offset($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => $_clearField(2);
+
+  /// 최대 주문 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get maxQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set maxQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMaxQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMaxQuantity() => $_clearField(3);
+
+  /// 최소 스프레드
+  @$pb.TagNumber(4)
+  $core.double get minSpread => $_getN(3);
+  @$pb.TagNumber(4)
+  set minSpread($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMinSpread() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMinSpread() => $_clearField(4);
+}
+
+/// ETF LP 시작 요청
+class StartEtfLPRequest extends $pb.GeneratedMessage {
+  factory StartEtfLPRequest({
+    $core.String? etf,
+    EtfLPConfig? config,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (config != null) result.config = config;
+    return result;
+  }
+
+  StartEtfLPRequest._();
+
+  factory StartEtfLPRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StartEtfLPRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartEtfLPRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOM<EtfLPConfig>(2, _omitFieldNames ? '' : 'config', subBuilder: EtfLPConfig.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartEtfLPRequest clone() => StartEtfLPRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartEtfLPRequest copyWith(void Function(StartEtfLPRequest) updates) => super.copyWith((message) => updates(message as StartEtfLPRequest)) as StartEtfLPRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StartEtfLPRequest create() => StartEtfLPRequest._();
+  @$core.override
+  StartEtfLPRequest createEmptyInstance() => create();
+  static $pb.PbList<StartEtfLPRequest> createRepeated() => $pb.PbList<StartEtfLPRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StartEtfLPRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartEtfLPRequest>(create);
+  static StartEtfLPRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: etfs/A069500)
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// LP 설정
+  @$pb.TagNumber(2)
+  EtfLPConfig get config => $_getN(1);
+  @$pb.TagNumber(2)
+  set config(EtfLPConfig value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConfig() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConfig() => $_clearField(2);
+  @$pb.TagNumber(2)
+  EtfLPConfig ensureConfig() => $_ensure(1);
+}
+
+/// ETF LP 시작 응답
+class StartEtfLPResponse extends $pb.GeneratedMessage {
+  factory StartEtfLPResponse({
+    EtfLPStatus? status,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (status != null) result.status = status;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  StartEtfLPResponse._();
+
+  factory StartEtfLPResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StartEtfLPResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartEtfLPResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..e<EtfLPStatus>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: EtfLPStatus.ETF_LP_STATUS_UNSPECIFIED, valueOf: EtfLPStatus.valueOf, enumValues: EtfLPStatus.values)
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartEtfLPResponse clone() => StartEtfLPResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartEtfLPResponse copyWith(void Function(StartEtfLPResponse) updates) => super.copyWith((message) => updates(message as StartEtfLPResponse)) as StartEtfLPResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StartEtfLPResponse create() => StartEtfLPResponse._();
+  @$core.override
+  StartEtfLPResponse createEmptyInstance() => create();
+  static $pb.PbList<StartEtfLPResponse> createRepeated() => $pb.PbList<StartEtfLPResponse>();
+  @$core.pragma('dart2js:noInline')
+  static StartEtfLPResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartEtfLPResponse>(create);
+  static StartEtfLPResponse? _defaultInstance;
+
+  /// LP 상태
+  @$pb.TagNumber(1)
+  EtfLPStatus get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status(EtfLPStatus value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => $_clearField(1);
+
+  /// 메시지
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
+/// ETF LP 중지 요청
+class StopEtfLPRequest extends $pb.GeneratedMessage {
+  factory StopEtfLPRequest({
+    $core.String? etf,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    return result;
+  }
+
+  StopEtfLPRequest._();
+
+  factory StopEtfLPRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopEtfLPRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopEtfLPRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopEtfLPRequest clone() => StopEtfLPRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopEtfLPRequest copyWith(void Function(StopEtfLPRequest) updates) => super.copyWith((message) => updates(message as StopEtfLPRequest)) as StopEtfLPRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopEtfLPRequest create() => StopEtfLPRequest._();
+  @$core.override
+  StopEtfLPRequest createEmptyInstance() => create();
+  static $pb.PbList<StopEtfLPRequest> createRepeated() => $pb.PbList<StopEtfLPRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StopEtfLPRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopEtfLPRequest>(create);
+  static StopEtfLPRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: etfs/A069500)
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+}
+
+/// ETF LP 중지 응답
+class StopEtfLPResponse extends $pb.GeneratedMessage {
+  factory StopEtfLPResponse({
+    EtfLPStatus? status,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (status != null) result.status = status;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  StopEtfLPResponse._();
+
+  factory StopEtfLPResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopEtfLPResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopEtfLPResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..e<EtfLPStatus>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: EtfLPStatus.ETF_LP_STATUS_UNSPECIFIED, valueOf: EtfLPStatus.valueOf, enumValues: EtfLPStatus.values)
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopEtfLPResponse clone() => StopEtfLPResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopEtfLPResponse copyWith(void Function(StopEtfLPResponse) updates) => super.copyWith((message) => updates(message as StopEtfLPResponse)) as StopEtfLPResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopEtfLPResponse create() => StopEtfLPResponse._();
+  @$core.override
+  StopEtfLPResponse createEmptyInstance() => create();
+  static $pb.PbList<StopEtfLPResponse> createRepeated() => $pb.PbList<StopEtfLPResponse>();
+  @$core.pragma('dart2js:noInline')
+  static StopEtfLPResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopEtfLPResponse>(create);
+  static StopEtfLPResponse? _defaultInstance;
+
+  /// LP 상태
+  @$pb.TagNumber(1)
+  EtfLPStatus get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status(EtfLPStatus value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => $_clearField(1);
+
+  /// 메시지
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
+/// ETF LP 상태 조회 요청
+class GetEtfLPStatusRequest extends $pb.GeneratedMessage {
+  factory GetEtfLPStatusRequest({
+    $core.String? etf,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    return result;
+  }
+
+  GetEtfLPStatusRequest._();
+
+  factory GetEtfLPStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfLPStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfLPStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLPStatusRequest clone() => GetEtfLPStatusRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLPStatusRequest copyWith(void Function(GetEtfLPStatusRequest) updates) => super.copyWith((message) => updates(message as GetEtfLPStatusRequest)) as GetEtfLPStatusRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLPStatusRequest create() => GetEtfLPStatusRequest._();
+  @$core.override
+  GetEtfLPStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<GetEtfLPStatusRequest> createRepeated() => $pb.PbList<GetEtfLPStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLPStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfLPStatusRequest>(create);
+  static GetEtfLPStatusRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: etfs/A069500)
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+}
+
+/// 통계 정보
+class GetEtfLPStatusResponse_Statistics extends $pb.GeneratedMessage {
+  factory GetEtfLPStatusResponse_Statistics({
+    $fixnum.Int64? totalFills,
+    $fixnum.Int64? totalVolume,
+    $core.double? avgSpread,
+    $core.double? pnl,
+  }) {
+    final result = create();
+    if (totalFills != null) result.totalFills = totalFills;
+    if (totalVolume != null) result.totalVolume = totalVolume;
+    if (avgSpread != null) result.avgSpread = avgSpread;
+    if (pnl != null) result.pnl = pnl;
+    return result;
+  }
+
+  GetEtfLPStatusResponse_Statistics._();
+
+  factory GetEtfLPStatusResponse_Statistics.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfLPStatusResponse_Statistics.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfLPStatusResponse.Statistics', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'totalFills')
+    ..aInt64(2, _omitFieldNames ? '' : 'totalVolume')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'avgSpread', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'pnl', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLPStatusResponse_Statistics clone() => GetEtfLPStatusResponse_Statistics()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLPStatusResponse_Statistics copyWith(void Function(GetEtfLPStatusResponse_Statistics) updates) => super.copyWith((message) => updates(message as GetEtfLPStatusResponse_Statistics)) as GetEtfLPStatusResponse_Statistics;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLPStatusResponse_Statistics create() => GetEtfLPStatusResponse_Statistics._();
+  @$core.override
+  GetEtfLPStatusResponse_Statistics createEmptyInstance() => create();
+  static $pb.PbList<GetEtfLPStatusResponse_Statistics> createRepeated() => $pb.PbList<GetEtfLPStatusResponse_Statistics>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLPStatusResponse_Statistics getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfLPStatusResponse_Statistics>(create);
+  static GetEtfLPStatusResponse_Statistics? _defaultInstance;
+
+  /// 총 체결 수
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get totalFills => $_getI64(0);
+  @$pb.TagNumber(1)
+  set totalFills($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTotalFills() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTotalFills() => $_clearField(1);
+
+  /// 총 체결 수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get totalVolume => $_getI64(1);
+  @$pb.TagNumber(2)
+  set totalVolume($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTotalVolume() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTotalVolume() => $_clearField(2);
+
+  /// 평균 스프레드
+  @$pb.TagNumber(3)
+  $core.double get avgSpread => $_getN(2);
+  @$pb.TagNumber(3)
+  set avgSpread($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAvgSpread() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAvgSpread() => $_clearField(3);
+
+  /// 수익률
+  @$pb.TagNumber(4)
+  $core.double get pnl => $_getN(3);
+  @$pb.TagNumber(4)
+  set pnl($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPnl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPnl() => $_clearField(4);
+}
+
+/// ETF LP 상태 조회 응답
+class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
+  factory GetEtfLPStatusResponse({
+    EtfLPStatus? status,
+    EtfLPConfig? config,
+    $fixnum.Int64? startedAt,
+    GetEtfLPStatusResponse_Statistics? stats,
+  }) {
+    final result = create();
+    if (status != null) result.status = status;
+    if (config != null) result.config = config;
+    if (startedAt != null) result.startedAt = startedAt;
+    if (stats != null) result.stats = stats;
+    return result;
+  }
+
+  GetEtfLPStatusResponse._();
+
+  factory GetEtfLPStatusResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfLPStatusResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfLPStatusResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..e<EtfLPStatus>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: EtfLPStatus.ETF_LP_STATUS_UNSPECIFIED, valueOf: EtfLPStatus.valueOf, enumValues: EtfLPStatus.values)
+    ..aOM<EtfLPConfig>(2, _omitFieldNames ? '' : 'config', subBuilder: EtfLPConfig.create)
+    ..aInt64(3, _omitFieldNames ? '' : 'startedAt')
+    ..aOM<GetEtfLPStatusResponse_Statistics>(4, _omitFieldNames ? '' : 'stats', subBuilder: GetEtfLPStatusResponse_Statistics.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLPStatusResponse clone() => GetEtfLPStatusResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLPStatusResponse copyWith(void Function(GetEtfLPStatusResponse) updates) => super.copyWith((message) => updates(message as GetEtfLPStatusResponse)) as GetEtfLPStatusResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLPStatusResponse create() => GetEtfLPStatusResponse._();
+  @$core.override
+  GetEtfLPStatusResponse createEmptyInstance() => create();
+  static $pb.PbList<GetEtfLPStatusResponse> createRepeated() => $pb.PbList<GetEtfLPStatusResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLPStatusResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfLPStatusResponse>(create);
+  static GetEtfLPStatusResponse? _defaultInstance;
+
+  /// LP 상태
+  @$pb.TagNumber(1)
+  EtfLPStatus get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status(EtfLPStatus value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => $_clearField(1);
+
+  /// 현재 설정
+  @$pb.TagNumber(2)
+  EtfLPConfig get config => $_getN(1);
+  @$pb.TagNumber(2)
+  set config(EtfLPConfig value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConfig() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConfig() => $_clearField(2);
+  @$pb.TagNumber(2)
+  EtfLPConfig ensureConfig() => $_ensure(1);
+
+  /// 시작 시간 (Unix timestamp)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get startedAt => $_getI64(2);
+  @$pb.TagNumber(3)
+  set startedAt($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStartedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStartedAt() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  GetEtfLPStatusResponse_Statistics get stats => $_getN(3);
+  @$pb.TagNumber(4)
+  set stats(GetEtfLPStatusResponse_Statistics value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasStats() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStats() => $_clearField(4);
+  @$pb.TagNumber(4)
+  GetEtfLPStatusResponse_Statistics ensureStats() => $_ensure(3);
+}
+
+/// ETF LP 설정 업데이트 요청
+class UpdateEtfLPConfigRequest extends $pb.GeneratedMessage {
+  factory UpdateEtfLPConfigRequest({
+    $core.String? etf,
+    EtfLPConfig? config,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (config != null) result.config = config;
+    return result;
+  }
+
+  UpdateEtfLPConfigRequest._();
+
+  factory UpdateEtfLPConfigRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateEtfLPConfigRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfLPConfigRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOM<EtfLPConfig>(2, _omitFieldNames ? '' : 'config', subBuilder: EtfLPConfig.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateEtfLPConfigRequest clone() => UpdateEtfLPConfigRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateEtfLPConfigRequest copyWith(void Function(UpdateEtfLPConfigRequest) updates) => super.copyWith((message) => updates(message as UpdateEtfLPConfigRequest)) as UpdateEtfLPConfigRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateEtfLPConfigRequest create() => UpdateEtfLPConfigRequest._();
+  @$core.override
+  UpdateEtfLPConfigRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateEtfLPConfigRequest> createRepeated() => $pb.PbList<UpdateEtfLPConfigRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateEtfLPConfigRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateEtfLPConfigRequest>(create);
+  static UpdateEtfLPConfigRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: etfs/A069500)
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// 새로운 설정
+  @$pb.TagNumber(2)
+  EtfLPConfig get config => $_getN(1);
+  @$pb.TagNumber(2)
+  set config(EtfLPConfig value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConfig() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConfig() => $_clearField(2);
+  @$pb.TagNumber(2)
+  EtfLPConfig ensureConfig() => $_ensure(1);
+}
+
+/// ETF LP 설정 업데이트 응답
+class UpdateEtfLPConfigResponse extends $pb.GeneratedMessage {
+  factory UpdateEtfLPConfigResponse({
+    EtfLPConfig? config,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (config != null) result.config = config;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  UpdateEtfLPConfigResponse._();
+
+  factory UpdateEtfLPConfigResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateEtfLPConfigResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfLPConfigResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOM<EtfLPConfig>(1, _omitFieldNames ? '' : 'config', subBuilder: EtfLPConfig.create)
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateEtfLPConfigResponse clone() => UpdateEtfLPConfigResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateEtfLPConfigResponse copyWith(void Function(UpdateEtfLPConfigResponse) updates) => super.copyWith((message) => updates(message as UpdateEtfLPConfigResponse)) as UpdateEtfLPConfigResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateEtfLPConfigResponse create() => UpdateEtfLPConfigResponse._();
+  @$core.override
+  UpdateEtfLPConfigResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateEtfLPConfigResponse> createRepeated() => $pb.PbList<UpdateEtfLPConfigResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateEtfLPConfigResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateEtfLPConfigResponse>(create);
+  static UpdateEtfLPConfigResponse? _defaultInstance;
+
+  /// 업데이트된 설정
+  @$pb.TagNumber(1)
+  EtfLPConfig get config => $_getN(0);
+  @$pb.TagNumber(1)
+  set config(EtfLPConfig value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasConfig() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearConfig() => $_clearField(1);
+  @$pb.TagNumber(1)
+  EtfLPConfig ensureConfig() => $_ensure(0);
+
+  /// 메시지
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

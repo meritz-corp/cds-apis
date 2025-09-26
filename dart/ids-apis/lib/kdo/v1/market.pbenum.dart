@@ -60,5 +60,93 @@ class SessionId extends $pb.ProtobufEnum {
   const SessionId._(super.value, super.name);
 }
 
+/// 주문 타입 열거형
+class OrderType extends $pb.ProtobufEnum {
+  static const OrderType ORDER_TYPE_UNSPECIFIED = OrderType._(0, _omitEnumNames ? '' : 'ORDER_TYPE_UNSPECIFIED');
+  static const OrderType BUY = OrderType._(1, _omitEnumNames ? '' : 'BUY');
+  static const OrderType SELL = OrderType._(2, _omitEnumNames ? '' : 'SELL');
+
+  static const $core.List<OrderType> values = <OrderType> [
+    ORDER_TYPE_UNSPECIFIED,
+    BUY,
+    SELL,
+  ];
+
+  static final $core.List<OrderType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static OrderType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderType._(super.value, super.name);
+}
+
+/// 주문 상태 열거형
+class OrderStatus extends $pb.ProtobufEnum {
+  static const OrderStatus ORDER_STATUS_UNSPECIFIED = OrderStatus._(0, _omitEnumNames ? '' : 'ORDER_STATUS_UNSPECIFIED');
+  static const OrderStatus PENDING = OrderStatus._(1, _omitEnumNames ? '' : 'PENDING');
+  static const OrderStatus PARTIAL_FILLED = OrderStatus._(2, _omitEnumNames ? '' : 'PARTIAL_FILLED');
+  static const OrderStatus FILLED = OrderStatus._(3, _omitEnumNames ? '' : 'FILLED');
+  static const OrderStatus CANCELLED = OrderStatus._(4, _omitEnumNames ? '' : 'CANCELLED');
+  static const OrderStatus REJECTED = OrderStatus._(5, _omitEnumNames ? '' : 'REJECTED');
+
+  static const $core.List<OrderStatus> values = <OrderStatus> [
+    ORDER_STATUS_UNSPECIFIED,
+    PENDING,
+    PARTIAL_FILLED,
+    FILLED,
+    CANCELLED,
+    REJECTED,
+  ];
+
+  static final $core.List<OrderStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static OrderStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderStatus._(super.value, super.name);
+}
+
+/// ETF LP 상태
+class EtfLPStatus extends $pb.ProtobufEnum {
+  static const EtfLPStatus ETF_LP_STATUS_UNSPECIFIED = EtfLPStatus._(0, _omitEnumNames ? '' : 'ETF_LP_STATUS_UNSPECIFIED');
+  static const EtfLPStatus STOPPED = EtfLPStatus._(1, _omitEnumNames ? '' : 'STOPPED');
+  static const EtfLPStatus STARTING = EtfLPStatus._(2, _omitEnumNames ? '' : 'STARTING');
+  static const EtfLPStatus RUNNING = EtfLPStatus._(3, _omitEnumNames ? '' : 'RUNNING');
+  static const EtfLPStatus STOPPING = EtfLPStatus._(4, _omitEnumNames ? '' : 'STOPPING');
+  static const EtfLPStatus ERROR = EtfLPStatus._(5, _omitEnumNames ? '' : 'ERROR');
+
+  static const $core.List<EtfLPStatus> values = <EtfLPStatus> [
+    ETF_LP_STATUS_UNSPECIFIED,
+    STOPPED,
+    STARTING,
+    RUNNING,
+    STOPPING,
+    ERROR,
+  ];
+
+  static final $core.List<EtfLPStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static EtfLPStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const EtfLPStatus._(super.value, super.name);
+}
+
+/// 업데이트 타입
+class OrderUpdate_UpdateType extends $pb.ProtobufEnum {
+  static const OrderUpdate_UpdateType UPDATE_TYPE_UNSPECIFIED = OrderUpdate_UpdateType._(0, _omitEnumNames ? '' : 'UPDATE_TYPE_UNSPECIFIED');
+  static const OrderUpdate_UpdateType CREATED = OrderUpdate_UpdateType._(1, _omitEnumNames ? '' : 'CREATED');
+  static const OrderUpdate_UpdateType UPDATED = OrderUpdate_UpdateType._(2, _omitEnumNames ? '' : 'UPDATED');
+  static const OrderUpdate_UpdateType FILLED = OrderUpdate_UpdateType._(3, _omitEnumNames ? '' : 'FILLED');
+  static const OrderUpdate_UpdateType CANCELLED = OrderUpdate_UpdateType._(4, _omitEnumNames ? '' : 'CANCELLED');
+
+  static const $core.List<OrderUpdate_UpdateType> values = <OrderUpdate_UpdateType> [
+    UPDATE_TYPE_UNSPECIFIED,
+    CREATED,
+    UPDATED,
+    FILLED,
+    CANCELLED,
+  ];
+
+  static final $core.List<OrderUpdate_UpdateType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static OrderUpdate_UpdateType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderUpdate_UpdateType._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

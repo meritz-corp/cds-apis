@@ -107,6 +107,308 @@ pub struct FuturesOrderbookData {
     #[prost(enumeration="SessionId", tag="11")]
     pub session_id: i32,
 }
+/// 주문 정보
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Order {
+    /// 주문 ID
+    #[prost(string, tag="1")]
+    pub order_id: ::prost::alloc::string::String,
+    /// 주문 타입
+    #[prost(enumeration="OrderType", tag="2")]
+    pub order_type: i32,
+    /// 상품 (예: etfs/A069500)
+    #[prost(string, tag="3")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 주문 가격
+    #[prost(int64, tag="4")]
+    pub price: i64,
+    /// 주문 수량
+    #[prost(int64, tag="5")]
+    pub quantity: i64,
+    /// 체결 수량
+    #[prost(int64, tag="6")]
+    pub filled_quantity: i64,
+    /// 주문 상태
+    #[prost(enumeration="OrderStatus", tag="7")]
+    pub status: i32,
+    /// 주문 시간 (Unix timestamp)
+    #[prost(int64, tag="8")]
+    pub created_at: i64,
+    /// 업데이트 시간 (Unix timestamp)
+    #[prost(int64, tag="9")]
+    pub updated_at: i64,
+}
+/// 주문 접수 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PlaceOrderRequest {
+    /// 주문 타입
+    #[prost(enumeration="OrderType", tag="1")]
+    pub order_type: i32,
+    /// 상품 (예: etfs/A069500)
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 주문 가격
+    #[prost(int64, tag="3")]
+    pub price: i64,
+    /// 주문 수량
+    #[prost(int64, tag="4")]
+    pub quantity: i64,
+}
+/// 주문 접수 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PlaceOrderResponse {
+    /// 생성된 주문 정보
+    #[prost(message, optional, tag="1")]
+    pub order: ::core::option::Option<Order>,
+}
+/// 주문 취소 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelOrderRequest {
+    /// 취소할 주문 ID
+    #[prost(string, tag="1")]
+    pub order_id: ::prost::alloc::string::String,
+}
+/// 주문 취소 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelOrderResponse {
+    /// 취소된 주문 정보
+    #[prost(message, optional, tag="1")]
+    pub order: ::core::option::Option<Order>,
+}
+/// 모든 주문 취소 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelAllOrdersRequest {
+    /// 선택적: 특정 상품의 주문만 취소
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// 모든 주문 취소 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelAllOrdersResponse {
+    /// 취소된 주문 수
+    #[prost(int32, tag="1")]
+    pub cancelled_count: i32,
+    /// 취소된 주문 목록
+    #[prost(message, repeated, tag="2")]
+    pub cancelled_orders: ::prost::alloc::vec::Vec<Order>,
+}
+/// 주문 목록 조회 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListOrdersRequest {
+    /// 필터링 조건 (선택적, AIP-160)
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
+    /// 페이징 (AIP-158)
+    #[prost(int32, tag="2")]
+    pub page_size: i32,
+    #[prost(string, tag="3")]
+    pub page_token: ::prost::alloc::string::String,
+}
+/// 주문 목록 조회 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListOrdersResponse {
+    /// 주문 목록
+    #[prost(message, repeated, tag="1")]
+    pub orders: ::prost::alloc::vec::Vec<Order>,
+    /// 다음 페이지 토큰 (AIP-158)
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
+/// 주문 업데이트 스트리밍 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamOrderUpdatesRequest {
+    /// 필터링 조건 (선택적, AIP-160)
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
+}
+/// 주문 업데이트
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OrderUpdate {
+    /// 업데이트된 주문
+    #[prost(message, optional, tag="1")]
+    pub order: ::core::option::Option<Order>,
+    #[prost(enumeration="order_update::UpdateType", tag="2")]
+    pub update_type: i32,
+}
+/// Nested message and enum types in `OrderUpdate`.
+pub mod order_update {
+    /// 업데이트 타입
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum UpdateType {
+        /// 기본값
+        Unspecified = 0,
+        /// 주문 생성
+        Created = 1,
+        /// 주문 업데이트
+        Updated = 2,
+        /// 주문 체결
+        Filled = 3,
+        /// 주문 취소
+        Cancelled = 4,
+    }
+    impl UpdateType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UpdateType::Unspecified => "UPDATE_TYPE_UNSPECIFIED",
+                UpdateType::Created => "CREATED",
+                UpdateType::Updated => "UPDATED",
+                UpdateType::Filled => "FILLED",
+                UpdateType::Cancelled => "CANCELLED",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UPDATE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+                "CREATED" => Some(Self::Created),
+                "UPDATED" => Some(Self::Updated),
+                "FILLED" => Some(Self::Filled),
+                "CANCELLED" => Some(Self::Cancelled),
+                _ => None,
+            }
+        }
+    }
+}
+/// ETF LP 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct EtfLpConfig {
+    /// Basis 값
+    #[prost(double, tag="1")]
+    pub basis: f64,
+    /// Offset 값
+    #[prost(double, tag="2")]
+    pub offset: f64,
+    /// 최대 주문 수량
+    #[prost(int64, tag="3")]
+    pub max_quantity: i64,
+    /// 최소 스프레드
+    #[prost(double, tag="4")]
+    pub min_spread: f64,
+}
+/// ETF LP 시작 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartEtfLpRequest {
+    /// ETF 리소스 이름 (예: etfs/A069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// LP 설정
+    #[prost(message, optional, tag="2")]
+    pub config: ::core::option::Option<EtfLpConfig>,
+}
+/// ETF LP 시작 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartEtfLpResponse {
+    /// LP 상태
+    #[prost(enumeration="EtfLpStatus", tag="1")]
+    pub status: i32,
+    /// 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
+/// ETF LP 중지 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopEtfLpRequest {
+    /// ETF 리소스 이름 (예: etfs/A069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+}
+/// ETF LP 중지 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopEtfLpResponse {
+    /// LP 상태
+    #[prost(enumeration="EtfLpStatus", tag="1")]
+    pub status: i32,
+    /// 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
+/// ETF LP 상태 조회 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfLpStatusRequest {
+    /// ETF 리소스 이름 (예: etfs/A069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+}
+/// ETF LP 상태 조회 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetEtfLpStatusResponse {
+    /// LP 상태
+    #[prost(enumeration="EtfLpStatus", tag="1")]
+    pub status: i32,
+    /// 현재 설정
+    #[prost(message, optional, tag="2")]
+    pub config: ::core::option::Option<EtfLpConfig>,
+    /// 시작 시간 (Unix timestamp)
+    #[prost(int64, tag="3")]
+    pub started_at: i64,
+    #[prost(message, optional, tag="4")]
+    pub stats: ::core::option::Option<get_etf_lp_status_response::Statistics>,
+}
+/// Nested message and enum types in `GetEtfLPStatusResponse`.
+pub mod get_etf_lp_status_response {
+    /// 통계 정보
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct Statistics {
+        /// 총 체결 수
+        #[prost(int64, tag="1")]
+        pub total_fills: i64,
+        /// 총 체결 수량
+        #[prost(int64, tag="2")]
+        pub total_volume: i64,
+        /// 평균 스프레드
+        #[prost(double, tag="3")]
+        pub avg_spread: f64,
+        /// 수익률
+        #[prost(double, tag="4")]
+        pub pnl: f64,
+    }
+}
+/// ETF LP 설정 업데이트 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateEtfLpConfigRequest {
+    /// ETF 리소스 이름 (예: etfs/A069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// 새로운 설정
+    #[prost(message, optional, tag="2")]
+    pub config: ::core::option::Option<EtfLpConfig>,
+}
+/// ETF LP 설정 업데이트 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateEtfLpConfigResponse {
+    /// 업데이트된 설정
+    #[prost(message, optional, tag="1")]
+    pub config: ::core::option::Option<EtfLpConfig>,
+    /// 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
 /// 세션 ID 열거형 (AIP-126)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -192,6 +494,129 @@ impl SessionId {
             "SHUTDOWN" => Some(Self::Shutdown),
             "CLOSED" => Some(Self::Closed),
             "ETC" => Some(Self::Etc),
+            _ => None,
+        }
+    }
+}
+/// 주문 타입 열거형
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum OrderType {
+    /// 기본값
+    Unspecified = 0,
+    /// 매수
+    Buy = 1,
+    /// 매도
+    Sell = 2,
+}
+impl OrderType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            OrderType::Unspecified => "ORDER_TYPE_UNSPECIFIED",
+            OrderType::Buy => "BUY",
+            OrderType::Sell => "SELL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ORDER_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "BUY" => Some(Self::Buy),
+            "SELL" => Some(Self::Sell),
+            _ => None,
+        }
+    }
+}
+/// 주문 상태 열거형
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum OrderStatus {
+    /// 기본값
+    Unspecified = 0,
+    /// 대기중
+    Pending = 1,
+    /// 부분체결
+    PartialFilled = 2,
+    /// 체결완료
+    Filled = 3,
+    /// 취소됨
+    Cancelled = 4,
+    /// 거부됨
+    Rejected = 5,
+}
+impl OrderStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            OrderStatus::Unspecified => "ORDER_STATUS_UNSPECIFIED",
+            OrderStatus::Pending => "PENDING",
+            OrderStatus::PartialFilled => "PARTIAL_FILLED",
+            OrderStatus::Filled => "FILLED",
+            OrderStatus::Cancelled => "CANCELLED",
+            OrderStatus::Rejected => "REJECTED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ORDER_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "PENDING" => Some(Self::Pending),
+            "PARTIAL_FILLED" => Some(Self::PartialFilled),
+            "FILLED" => Some(Self::Filled),
+            "CANCELLED" => Some(Self::Cancelled),
+            "REJECTED" => Some(Self::Rejected),
+            _ => None,
+        }
+    }
+}
+/// ETF LP 상태
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum EtfLpStatus {
+    /// 기본값
+    Unspecified = 0,
+    /// 중지됨
+    Stopped = 1,
+    /// 시작중
+    Starting = 2,
+    /// 실행중
+    Running = 3,
+    /// 중지중
+    Stopping = 4,
+    /// 오류
+    Error = 5,
+}
+impl EtfLpStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            EtfLpStatus::Unspecified => "ETF_LP_STATUS_UNSPECIFIED",
+            EtfLpStatus::Stopped => "STOPPED",
+            EtfLpStatus::Starting => "STARTING",
+            EtfLpStatus::Running => "RUNNING",
+            EtfLpStatus::Stopping => "STOPPING",
+            EtfLpStatus::Error => "ERROR",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ETF_LP_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "STOPPED" => Some(Self::Stopped),
+            "STARTING" => Some(Self::Starting),
+            "RUNNING" => Some(Self::Running),
+            "STOPPING" => Some(Self::Stopping),
+            "ERROR" => Some(Self::Error),
             _ => None,
         }
     }

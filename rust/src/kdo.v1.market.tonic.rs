@@ -2,8 +2,8 @@
 /// Generated client implementations.
 pub mod market_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct MarketServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -141,6 +141,239 @@ pub mod market_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn place_order(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PlaceOrderRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::PlaceOrderResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/PlaceOrder",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.market.MarketService", "PlaceOrder"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn cancel_order(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CancelOrderRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelOrderResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/CancelOrder",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.market.MarketService", "CancelOrder"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn cancel_all_orders(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CancelAllOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelAllOrdersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/CancelAllOrders",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.market.MarketService", "CancelAllOrders"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_orders(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListOrdersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/ListOrders",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.market.MarketService", "ListOrders"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stream_order_updates(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamOrderUpdatesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::OrderUpdate>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/StreamOrderUpdates",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.market.MarketService", "StreamOrderUpdates"),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
+        pub async fn start_etf_lp(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StartEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StartEtfLpResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/StartEtfLP",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.market.MarketService", "StartEtfLP"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stop_etf_lp(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StopEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopEtfLpResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/StopEtfLP",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.market.MarketService", "StopEtfLP"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn get_etf_lp_status(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetEtfLpStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEtfLpStatusResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/GetEtfLPStatus",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.market.MarketService", "GetEtfLPStatus"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn update_etf_lp_config(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateEtfLpConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UpdateEtfLpConfigResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/UpdateEtfLPConfig",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.market.MarketService", "UpdateEtfLPConfig"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -174,6 +407,75 @@ pub mod market_service_server {
             request: tonic::Request<super::StreamFuturesOrderbookRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamFuturesOrderbookStream>,
+            tonic::Status,
+        >;
+        async fn place_order(
+            &self,
+            request: tonic::Request<super::PlaceOrderRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::PlaceOrderResponse>,
+            tonic::Status,
+        >;
+        async fn cancel_order(
+            &self,
+            request: tonic::Request<super::CancelOrderRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelOrderResponse>,
+            tonic::Status,
+        >;
+        async fn cancel_all_orders(
+            &self,
+            request: tonic::Request<super::CancelAllOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelAllOrdersResponse>,
+            tonic::Status,
+        >;
+        async fn list_orders(
+            &self,
+            request: tonic::Request<super::ListOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListOrdersResponse>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamOrderUpdates method.
+        type StreamOrderUpdatesStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::OrderUpdate, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_order_updates(
+            &self,
+            request: tonic::Request<super::StreamOrderUpdatesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamOrderUpdatesStream>,
+            tonic::Status,
+        >;
+        async fn start_etf_lp(
+            &self,
+            request: tonic::Request<super::StartEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StartEtfLpResponse>,
+            tonic::Status,
+        >;
+        async fn stop_etf_lp(
+            &self,
+            request: tonic::Request<super::StopEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopEtfLpResponse>,
+            tonic::Status,
+        >;
+        async fn get_etf_lp_status(
+            &self,
+            request: tonic::Request<super::GetEtfLpStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEtfLpStatusResponse>,
+            tonic::Status,
+        >;
+        async fn update_etf_lp_config(
+            &self,
+            request: tonic::Request<super::UpdateEtfLpConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UpdateEtfLpConfigResponse>,
             tonic::Status,
         >;
     }
@@ -348,6 +650,417 @@ pub mod market_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/PlaceOrder" => {
+                    #[allow(non_camel_case_types)]
+                    struct PlaceOrderSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::PlaceOrderRequest>
+                    for PlaceOrderSvc<T> {
+                        type Response = super::PlaceOrderResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::PlaceOrderRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::place_order(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = PlaceOrderSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/CancelOrder" => {
+                    #[allow(non_camel_case_types)]
+                    struct CancelOrderSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::CancelOrderRequest>
+                    for CancelOrderSvc<T> {
+                        type Response = super::CancelOrderResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CancelOrderRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::cancel_order(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CancelOrderSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/CancelAllOrders" => {
+                    #[allow(non_camel_case_types)]
+                    struct CancelAllOrdersSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::CancelAllOrdersRequest>
+                    for CancelAllOrdersSvc<T> {
+                        type Response = super::CancelAllOrdersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CancelAllOrdersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::cancel_all_orders(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CancelAllOrdersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/ListOrders" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListOrdersSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::ListOrdersRequest>
+                    for ListOrdersSvc<T> {
+                        type Response = super::ListOrdersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListOrdersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::list_orders(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListOrdersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/StreamOrderUpdates" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamOrderUpdatesSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamOrderUpdatesRequest,
+                    > for StreamOrderUpdatesSvc<T> {
+                        type Response = super::OrderUpdate;
+                        type ResponseStream = T::StreamOrderUpdatesStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamOrderUpdatesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::stream_order_updates(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamOrderUpdatesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/StartEtfLP" => {
+                    #[allow(non_camel_case_types)]
+                    struct StartEtfLPSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::StartEtfLpRequest>
+                    for StartEtfLPSvc<T> {
+                        type Response = super::StartEtfLpResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StartEtfLpRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::start_etf_lp(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StartEtfLPSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/StopEtfLP" => {
+                    #[allow(non_camel_case_types)]
+                    struct StopEtfLPSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::StopEtfLpRequest>
+                    for StopEtfLPSvc<T> {
+                        type Response = super::StopEtfLpResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StopEtfLpRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::stop_etf_lp(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StopEtfLPSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/GetEtfLPStatus" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetEtfLPStatusSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::GetEtfLpStatusRequest>
+                    for GetEtfLPStatusSvc<T> {
+                        type Response = super::GetEtfLpStatusResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetEtfLpStatusRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::get_etf_lp_status(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetEtfLPStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/UpdateEtfLPConfig" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateEtfLPConfigSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::UpdateEtfLpConfigRequest>
+                    for UpdateEtfLPConfigSvc<T> {
+                        type Response = super::UpdateEtfLpConfigResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateEtfLpConfigRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::update_etf_lp_config(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UpdateEtfLPConfigSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
