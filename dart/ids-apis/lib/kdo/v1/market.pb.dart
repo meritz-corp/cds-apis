@@ -327,15 +327,15 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
 /// 선물 주문장 데이터
 class FuturesOrderbookData extends $pb.GeneratedMessage {
   factory FuturesOrderbookData({
-    $core.Iterable<$fixnum.Int64>? bidPrices,
-    $core.Iterable<$fixnum.Int64>? askPrices,
+    $core.Iterable<$core.double>? bidPrices,
+    $core.Iterable<$core.double>? askPrices,
     $core.Iterable<$fixnum.Int64>? bidQuantities,
     $core.Iterable<$fixnum.Int64>? askQuantities,
     $core.Iterable<$fixnum.Int64>? bidCounts,
     $core.Iterable<$fixnum.Int64>? askCounts,
     $fixnum.Int64? askQuoteTotalQuantity,
     $fixnum.Int64? bidQuoteTotalQuantity,
-    $fixnum.Int64? estPrice,
+    $core.double? estPrice,
     $fixnum.Int64? estVolume,
     SessionId? sessionId,
   }) {
@@ -360,15 +360,15 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
   factory FuturesOrderbookData.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesOrderbookData', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'bidPrices', $pb.PbFieldType.K6)
-    ..p<$fixnum.Int64>(2, _omitFieldNames ? '' : 'askPrices', $pb.PbFieldType.K6)
+    ..p<$core.double>(1, _omitFieldNames ? '' : 'bidPrices', $pb.PbFieldType.KF)
+    ..p<$core.double>(2, _omitFieldNames ? '' : 'askPrices', $pb.PbFieldType.KF)
     ..p<$fixnum.Int64>(3, _omitFieldNames ? '' : 'bidQuantities', $pb.PbFieldType.K6)
     ..p<$fixnum.Int64>(4, _omitFieldNames ? '' : 'askQuantities', $pb.PbFieldType.K6)
     ..p<$fixnum.Int64>(5, _omitFieldNames ? '' : 'bidCounts', $pb.PbFieldType.K6)
     ..p<$fixnum.Int64>(6, _omitFieldNames ? '' : 'askCounts', $pb.PbFieldType.K6)
     ..aInt64(7, _omitFieldNames ? '' : 'askQuoteTotalQuantity')
     ..aInt64(8, _omitFieldNames ? '' : 'bidQuoteTotalQuantity')
-    ..aInt64(9, _omitFieldNames ? '' : 'estPrice')
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'estPrice', $pb.PbFieldType.OF)
     ..aInt64(10, _omitFieldNames ? '' : 'estVolume')
     ..e<SessionId>(11, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: SessionId.SESSION_ID_UNSPECIFIED, valueOf: SessionId.valueOf, enumValues: SessionId.values)
     ..hasRequiredFields = false
@@ -393,11 +393,11 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
 
   /// 매수 호가 (5단계, AIP-144)
   @$pb.TagNumber(1)
-  $pb.PbList<$fixnum.Int64> get bidPrices => $_getList(0);
+  $pb.PbList<$core.double> get bidPrices => $_getList(0);
 
   /// 매도 호가 (5단계)
   @$pb.TagNumber(2)
-  $pb.PbList<$fixnum.Int64> get askPrices => $_getList(1);
+  $pb.PbList<$core.double> get askPrices => $_getList(1);
 
   /// 매수 수량 (5단계)
   @$pb.TagNumber(3)
@@ -437,9 +437,9 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
 
   /// 예상 가격
   @$pb.TagNumber(9)
-  $fixnum.Int64 get estPrice => $_getI64(8);
+  $core.double get estPrice => $_getN(8);
   @$pb.TagNumber(9)
-  set estPrice($fixnum.Int64 value) => $_setInt64(8, value);
+  set estPrice($core.double value) => $_setFloat(8, value);
   @$pb.TagNumber(9)
   $core.bool hasEstPrice() => $_has(8);
   @$pb.TagNumber(9)
@@ -472,7 +472,7 @@ class Order extends $pb.GeneratedMessage {
     $core.String? orderId,
     OrderType? orderType,
     $core.String? symbol,
-    $fixnum.Int64? price,
+    $core.double? price,
     $fixnum.Int64? quantity,
     $fixnum.Int64? filledQuantity,
     OrderStatus? status,
@@ -501,7 +501,7 @@ class Order extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'orderId')
     ..e<OrderType>(2, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: OrderType.ORDER_TYPE_UNSPECIFIED, valueOf: OrderType.valueOf, enumValues: OrderType.values)
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(4, _omitFieldNames ? '' : 'price')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'price', $pb.PbFieldType.OF)
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aInt64(6, _omitFieldNames ? '' : 'filledQuantity')
     ..e<OrderStatus>(7, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: OrderStatus.ORDER_STATUS_UNSPECIFIED, valueOf: OrderStatus.valueOf, enumValues: OrderStatus.values)
@@ -559,9 +559,9 @@ class Order extends $pb.GeneratedMessage {
 
   /// 주문 가격
   @$pb.TagNumber(4)
-  $fixnum.Int64 get price => $_getI64(3);
+  $core.double get price => $_getN(3);
   @$pb.TagNumber(4)
-  set price($fixnum.Int64 value) => $_setInt64(3, value);
+  set price($core.double value) => $_setFloat(3, value);
   @$pb.TagNumber(4)
   $core.bool hasPrice() => $_has(3);
   @$pb.TagNumber(4)

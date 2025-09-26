@@ -1028,7 +1028,7 @@ impl serde::Serialize for FuturesOrderbookData {
         if self.bid_quote_total_quantity != 0 {
             len += 1;
         }
-        if self.est_price != 0 {
+        if self.est_price != 0. {
             len += 1;
         }
         if self.est_volume != 0 {
@@ -1039,10 +1039,10 @@ impl serde::Serialize for FuturesOrderbookData {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.FuturesOrderbookData", len)?;
         if !self.bid_prices.is_empty() {
-            struct_ser.serialize_field("bidPrices", &self.bid_prices.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+            struct_ser.serialize_field("bidPrices", &self.bid_prices)?;
         }
         if !self.ask_prices.is_empty() {
-            struct_ser.serialize_field("askPrices", &self.ask_prices.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+            struct_ser.serialize_field("askPrices", &self.ask_prices)?;
         }
         if !self.bid_quantities.is_empty() {
             struct_ser.serialize_field("bidQuantities", &self.bid_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
@@ -1066,10 +1066,8 @@ impl serde::Serialize for FuturesOrderbookData {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("bidQuoteTotalQuantity", ToString::to_string(&self.bid_quote_total_quantity).as_str())?;
         }
-        if self.est_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("estPrice", ToString::to_string(&self.est_price).as_str())?;
+        if self.est_price != 0. {
+            struct_ser.serialize_field("estPrice", &self.est_price)?;
         }
         if self.est_volume != 0 {
             #[allow(clippy::needless_borrow)]
@@ -1956,7 +1954,7 @@ impl serde::Serialize for Order {
         if !self.symbol.is_empty() {
             len += 1;
         }
-        if self.price != 0 {
+        if self.price != 0. {
             len += 1;
         }
         if self.quantity != 0 {
@@ -1986,10 +1984,8 @@ impl serde::Serialize for Order {
         if !self.symbol.is_empty() {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if self.price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+        if self.price != 0. {
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if self.quantity != 0 {
             #[allow(clippy::needless_borrow)]

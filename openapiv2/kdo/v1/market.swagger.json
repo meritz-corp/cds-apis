@@ -452,16 +452,16 @@
         "bidPrices": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "int64"
+            "type": "number",
+            "format": "float"
           },
           "title": "매수 호가 (5단계, AIP-144)"
         },
         "askPrices": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "int64"
+            "type": "number",
+            "format": "float"
           },
           "title": "매도 호가 (5단계)"
         },
@@ -508,8 +508,8 @@
           "title": "총 매수 호가 수량"
         },
         "estPrice": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "float",
           "title": "예상 가격"
         },
         "estVolume": {
