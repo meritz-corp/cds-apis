@@ -218,6 +218,33 @@ pub mod market_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn stream_etf_lp_status(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetEtfLpStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::GetEtfLpStatusResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/StreamEtfLPStatus",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.market.MarketService", "StreamEtfLPStatus"),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         pub async fn update_etf_lp_config(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateEtfLpConfigRequest>,
@@ -299,6 +326,19 @@ pub mod market_service_server {
             request: tonic::Request<super::GetEtfLpStatusRequest>,
         ) -> std::result::Result<
             tonic::Response<super::GetEtfLpStatusResponse>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamEtfLPStatus method.
+        type StreamEtfLPStatusStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::GetEtfLpStatusResponse, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_etf_lp_status(
+            &self,
+            request: tonic::Request<super::GetEtfLpStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamEtfLPStatusStream>,
             tonic::Status,
         >;
         async fn update_etf_lp_config(
@@ -616,6 +656,53 @@ pub mod market_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/StreamEtfLPStatus" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamEtfLPStatusSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::ServerStreamingService<super::GetEtfLpStatusRequest>
+                    for StreamEtfLPStatusSvc<T> {
+                        type Response = super::GetEtfLpStatusResponse;
+                        type ResponseStream = T::StreamEtfLPStatusStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetEtfLpStatusRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::stream_etf_lp_status(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamEtfLPStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

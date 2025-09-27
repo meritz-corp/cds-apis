@@ -496,6 +496,248 @@ func (mr *MockMarketService_StreamFuturesOrderbookServerMockRecorder) SetTrailer
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockMarketService_StreamFuturesOrderbookServer)(nil).SetTrailer), arg0)
 }
 
+// MockMarketService_StreamEtfLPStatusClient is a mock of MarketService_StreamEtfLPStatusClient interface.
+type MockMarketService_StreamEtfLPStatusClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockMarketService_StreamEtfLPStatusClientMockRecorder
+}
+
+// MockMarketService_StreamEtfLPStatusClientMockRecorder is the mock recorder for MockMarketService_StreamEtfLPStatusClient.
+type MockMarketService_StreamEtfLPStatusClientMockRecorder struct {
+	mock *MockMarketService_StreamEtfLPStatusClient
+}
+
+// NewMockMarketService_StreamEtfLPStatusClient creates a new mock instance.
+func NewMockMarketService_StreamEtfLPStatusClient(ctrl *gomock.Controller) *MockMarketService_StreamEtfLPStatusClient {
+	mock := &MockMarketService_StreamEtfLPStatusClient{ctrl: ctrl}
+	mock.recorder = &MockMarketService_StreamEtfLPStatusClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockMarketService_StreamEtfLPStatusClient) EXPECT() *MockMarketService_StreamEtfLPStatusClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockMarketService_StreamEtfLPStatusClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockMarketService_StreamEtfLPStatusClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockMarketService_StreamEtfLPStatusClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusClient) Recv() (*GetEtfLPStatusResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*GetEtfLPStatusResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockMarketService_StreamEtfLPStatusClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockMarketService_StreamEtfLPStatusClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockMarketService_StreamEtfLPStatusClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockMarketService_StreamEtfLPStatusClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusClient)(nil).Trailer))
+}
+
+// MockMarketService_StreamEtfLPStatusServer is a mock of MarketService_StreamEtfLPStatusServer interface.
+type MockMarketService_StreamEtfLPStatusServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockMarketService_StreamEtfLPStatusServerMockRecorder
+}
+
+// MockMarketService_StreamEtfLPStatusServerMockRecorder is the mock recorder for MockMarketService_StreamEtfLPStatusServer.
+type MockMarketService_StreamEtfLPStatusServerMockRecorder struct {
+	mock *MockMarketService_StreamEtfLPStatusServer
+}
+
+// NewMockMarketService_StreamEtfLPStatusServer creates a new mock instance.
+func NewMockMarketService_StreamEtfLPStatusServer(ctrl *gomock.Controller) *MockMarketService_StreamEtfLPStatusServer {
+	mock := &MockMarketService_StreamEtfLPStatusServer{ctrl: ctrl}
+	mock.recorder = &MockMarketService_StreamEtfLPStatusServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockMarketService_StreamEtfLPStatusServer) EXPECT() *MockMarketService_StreamEtfLPStatusServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockMarketService_StreamEtfLPStatusServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockMarketService_StreamEtfLPStatusServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusServer) Send(arg0 *GetEtfLPStatusResponse) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockMarketService_StreamEtfLPStatusServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockMarketService_StreamEtfLPStatusServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockMarketService_StreamEtfLPStatusServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockMarketService_StreamEtfLPStatusServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockMarketService_StreamEtfLPStatusServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockMarketService_StreamEtfLPStatusServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockMarketService_StreamEtfLPStatusServer)(nil).SetTrailer), arg0)
+}
+
 // MockMarketServiceClient is a mock of MarketServiceClient interface.
 type MockMarketServiceClient struct {
 	ctrl     *gomock.Controller
@@ -577,6 +819,26 @@ func (mr *MockMarketServiceClientMockRecorder) StopEtfLP(ctx, in interface{}, op
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopEtfLP", reflect.TypeOf((*MockMarketServiceClient)(nil).StopEtfLP), varargs...)
+}
+
+// StreamEtfLPStatus mocks base method.
+func (m *MockMarketServiceClient) StreamEtfLPStatus(ctx context.Context, in *GetEtfLPStatusRequest, opts ...grpc.CallOption) (MarketService_StreamEtfLPStatusClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamEtfLPStatus", varargs...)
+	ret0, _ := ret[0].(MarketService_StreamEtfLPStatusClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamEtfLPStatus indicates an expected call of StreamEtfLPStatus.
+func (mr *MockMarketServiceClientMockRecorder) StreamEtfLPStatus(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEtfLPStatus", reflect.TypeOf((*MockMarketServiceClient)(nil).StreamEtfLPStatus), varargs...)
 }
 
 // StreamEtfOrderbook mocks base method.
@@ -705,6 +967,20 @@ func (m *MockMarketServiceServer) StopEtfLP(ctx context.Context, in *StopEtfLPRe
 func (mr *MockMarketServiceServerMockRecorder) StopEtfLP(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopEtfLP", reflect.TypeOf((*MockMarketServiceServer)(nil).StopEtfLP), ctx, in)
+}
+
+// StreamEtfLPStatus mocks base method.
+func (m *MockMarketServiceServer) StreamEtfLPStatus(blob *GetEtfLPStatusRequest, server MarketService_StreamEtfLPStatusServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamEtfLPStatus", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamEtfLPStatus indicates an expected call of StreamEtfLPStatus.
+func (mr *MockMarketServiceServerMockRecorder) StreamEtfLPStatus(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEtfLPStatus", reflect.TypeOf((*MockMarketServiceServer)(nil).StreamEtfLPStatus), blob, server)
 }
 
 // StreamEtfOrderbook mocks base method.

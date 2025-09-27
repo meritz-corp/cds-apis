@@ -32,6 +32,8 @@ type MarketServiceClient interface {
 	StopEtfLP(ctx context.Context, in *StopEtfLPRequest, opts ...grpc.CallOption) (*StopEtfLPResponse, error)
 	// ETF LP 상태 조회
 	GetEtfLPStatus(ctx context.Context, in *GetEtfLPStatusRequest, opts ...grpc.CallOption) (*GetEtfLPStatusResponse, error)
+	// ETF LP 상태 스트리밍
+	StreamEtfLPStatus(ctx context.Context, in *GetEtfLPStatusRequest, opts ...grpc.CallOption) (MarketService_StreamEtfLPStatusClient, error)
 	// ETF LP 설정 업데이트
 	UpdateEtfLPConfig(ctx context.Context, in *UpdateEtfLPConfigRequest, opts ...grpc.CallOption) (*UpdateEtfLPConfigResponse, error)
 }
@@ -135,6 +137,38 @@ func (c *marketServiceClient) GetEtfLPStatus(ctx context.Context, in *GetEtfLPSt
 	return out, nil
 }
 
+func (c *marketServiceClient) StreamEtfLPStatus(ctx context.Context, in *GetEtfLPStatusRequest, opts ...grpc.CallOption) (MarketService_StreamEtfLPStatusClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketService_ServiceDesc.Streams[2], "/kdo.v1.market.MarketService/StreamEtfLPStatus", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &marketServiceStreamEtfLPStatusClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MarketService_StreamEtfLPStatusClient interface {
+	Recv() (*GetEtfLPStatusResponse, error)
+	grpc.ClientStream
+}
+
+type marketServiceStreamEtfLPStatusClient struct {
+	grpc.ClientStream
+}
+
+func (x *marketServiceStreamEtfLPStatusClient) Recv() (*GetEtfLPStatusResponse, error) {
+	m := new(GetEtfLPStatusResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *marketServiceClient) UpdateEtfLPConfig(ctx context.Context, in *UpdateEtfLPConfigRequest, opts ...grpc.CallOption) (*UpdateEtfLPConfigResponse, error) {
 	out := new(UpdateEtfLPConfigResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.market.MarketService/UpdateEtfLPConfig", in, out, opts...)
@@ -158,6 +192,8 @@ type MarketServiceServer interface {
 	StopEtfLP(context.Context, *StopEtfLPRequest) (*StopEtfLPResponse, error)
 	// ETF LP 상태 조회
 	GetEtfLPStatus(context.Context, *GetEtfLPStatusRequest) (*GetEtfLPStatusResponse, error)
+	// ETF LP 상태 스트리밍
+	StreamEtfLPStatus(*GetEtfLPStatusRequest, MarketService_StreamEtfLPStatusServer) error
 	// ETF LP 설정 업데이트
 	UpdateEtfLPConfig(context.Context, *UpdateEtfLPConfigRequest) (*UpdateEtfLPConfigResponse, error)
 	mustEmbedUnimplementedMarketServiceServer()
@@ -181,6 +217,9 @@ func (UnimplementedMarketServiceServer) StopEtfLP(context.Context, *StopEtfLPReq
 }
 func (UnimplementedMarketServiceServer) GetEtfLPStatus(context.Context, *GetEtfLPStatusRequest) (*GetEtfLPStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEtfLPStatus not implemented")
+}
+func (UnimplementedMarketServiceServer) StreamEtfLPStatus(*GetEtfLPStatusRequest, MarketService_StreamEtfLPStatusServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamEtfLPStatus not implemented")
 }
 func (UnimplementedMarketServiceServer) UpdateEtfLPConfig(context.Context, *UpdateEtfLPConfigRequest) (*UpdateEtfLPConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEtfLPConfig not implemented")
@@ -294,6 +333,27 @@ func _MarketService_GetEtfLPStatus_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MarketService_StreamEtfLPStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetEtfLPStatusRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MarketServiceServer).StreamEtfLPStatus(m, &marketServiceStreamEtfLPStatusServer{stream})
+}
+
+type MarketService_StreamEtfLPStatusServer interface {
+	Send(*GetEtfLPStatusResponse) error
+	grpc.ServerStream
+}
+
+type marketServiceStreamEtfLPStatusServer struct {
+	grpc.ServerStream
+}
+
+func (x *marketServiceStreamEtfLPStatusServer) Send(m *GetEtfLPStatusResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _MarketService_UpdateEtfLPConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateEtfLPConfigRequest)
 	if err := dec(in); err != nil {
@@ -345,6 +405,11 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamFuturesOrderbook",
 			Handler:       _MarketService_StreamFuturesOrderbook_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamEtfLPStatus",
+			Handler:       _MarketService_StreamEtfLPStatus_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -99,6 +99,24 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// ETF LP 상태 스트리밍
+  Stream<kdov1market.GetEtfLPStatusResponse> streamEtfLPStatus(
+    kdov1market.GetEtfLPStatusRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketService.streamEtfLPStatus,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// ETF LP 설정 업데이트
   Future<kdov1market.UpdateEtfLPConfigResponse> updateEtfLPConfig(
     kdov1market.UpdateEtfLPConfigRequest input, {

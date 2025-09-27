@@ -309,6 +309,40 @@ func local_request_MarketService_GetEtfLPStatus_0(ctx context.Context, marshaler
 
 }
 
+func request_MarketService_StreamEtfLPStatus_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (MarketService_StreamEtfLPStatusClient, runtime.ServerMetadata, error) {
+	var protoReq GetEtfLPStatusRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["etf"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "etf")
+	}
+
+	protoReq.Etf, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
+	}
+
+	stream, err := client.StreamEtfLPStatus(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 func request_MarketService_UpdateEtfLPConfig_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateEtfLPConfigRequest
 	var metadata runtime.ServerMetadata
@@ -470,6 +504,13 @@ func RegisterMarketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 
 		forward_MarketService_GetEtfLPStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("GET", pattern_MarketService_StreamEtfLPStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	mux.Handle("PATCH", pattern_MarketService_UpdateEtfLPConfig_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -648,6 +689,28 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("GET", pattern_MarketService_StreamEtfLPStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamEtfLPStatus", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/lp:stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MarketService_StreamEtfLPStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketService_StreamEtfLPStatus_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("PATCH", pattern_MarketService_UpdateEtfLPConfig_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -684,6 +747,8 @@ var (
 
 	pattern_MarketService_GetEtfLPStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "lp"}, ""))
 
+	pattern_MarketService_StreamEtfLPStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "lp"}, "stream"))
+
 	pattern_MarketService_UpdateEtfLPConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "lp"}, "config"))
 )
 
@@ -697,6 +762,8 @@ var (
 	forward_MarketService_StopEtfLP_0 = runtime.ForwardResponseMessage
 
 	forward_MarketService_GetEtfLPStatus_0 = runtime.ForwardResponseMessage
+
+	forward_MarketService_StreamEtfLPStatus_0 = runtime.ForwardResponseStream
 
 	forward_MarketService_UpdateEtfLPConfig_0 = runtime.ForwardResponseMessage
 )

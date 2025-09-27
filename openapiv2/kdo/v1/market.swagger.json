@@ -187,6 +187,48 @@
         ]
       }
     },
+    "/v1/{etf}/lp:stream": {
+      "get": {
+        "summary": "ETF LP 상태 스트리밍",
+        "operationId": "MarketService_StreamEtfLPStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/marketGetEtfLPStatusResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of marketGetEtfLPStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "ETF 리소스 이름 (예: etfs/A069500)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
     "/v1/{etf}/orderbook:stream": {
       "get": {
         "summary": "ETF 주문장 데이터를 스트리밍",

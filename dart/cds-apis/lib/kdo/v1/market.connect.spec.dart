@@ -51,6 +51,14 @@ abstract final class MarketService {
     kdov1market.GetEtfLPStatusResponse.new,
   );
 
+  /// ETF LP 상태 스트리밍
+  static const streamEtfLPStatus = connect.Spec(
+    '/$name/StreamEtfLPStatus',
+    connect.StreamType.server,
+    kdov1market.GetEtfLPStatusRequest.new,
+    kdov1market.GetEtfLPStatusResponse.new,
+  );
+
   /// ETF LP 설정 업데이트
   static const updateEtfLPConfig = connect.Spec(
     '/$name/UpdateEtfLPConfig',

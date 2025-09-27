@@ -81,6 +81,14 @@ service MarketService {
         };
     }
 
+    // ETF LP 상태 스트리밍
+    rpc StreamEtfLPStatus(GetEtfLPStatusRequest) returns (stream GetEtfLPStatusResponse) {
+        option (google.api.http) = {
+            get: "/v1/{etf=etfs/*}/lp:stream"
+        };
+    }
+
+
     // ETF LP 설정 업데이트
     rpc UpdateEtfLPConfig(UpdateEtfLPConfigRequest) returns (UpdateEtfLPConfigResponse) {
         option (google.api.http) = {
