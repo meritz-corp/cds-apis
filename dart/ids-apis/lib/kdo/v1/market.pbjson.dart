@@ -89,15 +89,14 @@ const EtfLPStatus$json = {
     {'1': 'STOPPED', '2': 1},
     {'1': 'STARTING', '2': 2},
     {'1': 'RUNNING', '2': 3},
-    {'1': 'STOPPING', '2': 4},
-    {'1': 'ERROR', '2': 5},
+    {'1': 'ERROR', '2': 4},
   ],
 };
 
 /// Descriptor for `EtfLPStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List etfLPStatusDescriptor = $convert.base64Decode(
     'CgtFdGZMUFN0YXR1cxIdChlFVEZfTFBfU1RBVFVTX1VOU1BFQ0lGSUVEEAASCwoHU1RPUFBFRB'
-    'ABEgwKCFNUQVJUSU5HEAISCwoHUlVOTklORxADEgwKCFNUT1BQSU5HEAQSCQoFRVJST1IQBQ==');
+    'ABEgwKCFNUQVJUSU5HEAISCwoHUlVOTklORxADEgkKBUVSUk9SEAQ=');
 
 @$core.Deprecated('Use streamEtfOrderbookRequestDescriptor instead')
 const StreamEtfOrderbookRequest$json = {
@@ -376,16 +375,17 @@ const EtfLPConfig$json = {
   '2': [
     {'1': 'basis', '3': 1, '4': 1, '5': 1, '10': 'basis'},
     {'1': 'offset', '3': 2, '4': 1, '5': 1, '10': 'offset'},
-    {'1': 'max_quantity', '3': 3, '4': 1, '5': 3, '10': 'maxQuantity'},
-    {'1': 'min_spread', '3': 4, '4': 1, '5': 1, '10': 'minSpread'},
+    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'depth', '3': 4, '4': 1, '5': 3, '10': 'depth'},
+    {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
   ],
 };
 
 /// Descriptor for `EtfLPConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLPConfigDescriptor = $convert.base64Decode(
     'CgtFdGZMUENvbmZpZxIUCgViYXNpcxgBIAEoAVIFYmFzaXMSFgoGb2Zmc2V0GAIgASgBUgZvZm'
-    'ZzZXQSIQoMbWF4X3F1YW50aXR5GAMgASgDUgttYXhRdWFudGl0eRIdCgptaW5fc3ByZWFkGAQg'
-    'ASgBUgltaW5TcHJlYWQ=');
+    'ZzZXQSGgoIcXVhbnRpdHkYAyABKANSCHF1YW50aXR5EhQKBWRlcHRoGAQgASgDUgVkZXB0aBIb'
+    'Cgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXpl');
 
 @$core.Deprecated('Use startEtfLPRequestDescriptor instead')
 const StartEtfLPRequest$json = {
@@ -460,19 +460,9 @@ const GetEtfLPStatusResponse$json = {
     {'1': 'status', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.market.EtfLPStatus', '10': 'status'},
     {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.market.EtfLPConfig', '10': 'config'},
     {'1': 'started_at', '3': 3, '4': 1, '5': 3, '10': 'startedAt'},
-    {'1': 'stats', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.market.GetEtfLPStatusResponse.Statistics', '10': 'stats'},
-  ],
-  '3': [GetEtfLPStatusResponse_Statistics$json],
-};
-
-@$core.Deprecated('Use getEtfLPStatusResponseDescriptor instead')
-const GetEtfLPStatusResponse_Statistics$json = {
-  '1': 'Statistics',
-  '2': [
-    {'1': 'total_fills', '3': 1, '4': 1, '5': 3, '10': 'totalFills'},
-    {'1': 'total_volume', '3': 2, '4': 1, '5': 3, '10': 'totalVolume'},
-    {'1': 'avg_spread', '3': 3, '4': 1, '5': 1, '10': 'avgSpread'},
-    {'1': 'pnl', '3': 4, '4': 1, '5': 1, '10': 'pnl'},
+    {'1': 'etf_price', '3': 4, '4': 1, '5': 3, '10': 'etfPrice'},
+    {'1': 'future_price', '3': 5, '4': 1, '5': 2, '10': 'futurePrice'},
+    {'1': 'etf_ref_price', '3': 6, '4': 1, '5': 2, '10': 'etfRefPrice'},
   ],
 };
 
@@ -480,11 +470,9 @@ const GetEtfLPStatusResponse_Statistics$json = {
 final $typed_data.Uint8List getEtfLPStatusResponseDescriptor = $convert.base64Decode(
     'ChZHZXRFdGZMUFN0YXR1c1Jlc3BvbnNlEjIKBnN0YXR1cxgBIAEoDjIaLmtkby52MS5tYXJrZX'
     'QuRXRmTFBTdGF0dXNSBnN0YXR1cxIyCgZjb25maWcYAiABKAsyGi5rZG8udjEubWFya2V0LkV0'
-    'ZkxQQ29uZmlnUgZjb25maWcSHQoKc3RhcnRlZF9hdBgDIAEoA1IJc3RhcnRlZEF0EkYKBXN0YX'
-    'RzGAQgASgLMjAua2RvLnYxLm1hcmtldC5HZXRFdGZMUFN0YXR1c1Jlc3BvbnNlLlN0YXRpc3Rp'
-    'Y3NSBXN0YXRzGoEBCgpTdGF0aXN0aWNzEh8KC3RvdGFsX2ZpbGxzGAEgASgDUgp0b3RhbEZpbG'
-    'xzEiEKDHRvdGFsX3ZvbHVtZRgCIAEoA1ILdG90YWxWb2x1bWUSHQoKYXZnX3NwcmVhZBgDIAEo'
-    'AVIJYXZnU3ByZWFkEhAKA3BubBgEIAEoAVIDcG5s');
+    'ZkxQQ29uZmlnUgZjb25maWcSHQoKc3RhcnRlZF9hdBgDIAEoA1IJc3RhcnRlZEF0EhsKCWV0Zl'
+    '9wcmljZRgEIAEoA1IIZXRmUHJpY2USIQoMZnV0dXJlX3ByaWNlGAUgASgCUgtmdXR1cmVQcmlj'
+    'ZRIiCg1ldGZfcmVmX3ByaWNlGAYgASgCUgtldGZSZWZQcmljZQ==');
 
 @$core.Deprecated('Use updateEtfLPConfigRequestDescriptor instead')
 const UpdateEtfLPConfigRequest$json = {

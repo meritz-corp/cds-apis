@@ -399,10 +399,13 @@ impl serde::Serialize for EtfLpConfig {
         if self.offset != 0. {
             len += 1;
         }
-        if self.max_quantity != 0 {
+        if self.quantity != 0 {
             len += 1;
         }
-        if self.min_spread != 0. {
+        if self.depth != 0 {
+            len += 1;
+        }
+        if self.tick_size != 0 {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.EtfLPConfig", len)?;
@@ -412,13 +415,20 @@ impl serde::Serialize for EtfLpConfig {
         if self.offset != 0. {
             struct_ser.serialize_field("offset", &self.offset)?;
         }
-        if self.max_quantity != 0 {
+        if self.quantity != 0 {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("maxQuantity", ToString::to_string(&self.max_quantity).as_str())?;
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
-        if self.min_spread != 0. {
-            struct_ser.serialize_field("minSpread", &self.min_spread)?;
+        if self.depth != 0 {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("depth", ToString::to_string(&self.depth).as_str())?;
+        }
+        if self.tick_size != 0 {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tickSize", ToString::to_string(&self.tick_size).as_str())?;
         }
         struct_ser.end()
     }
@@ -432,18 +442,19 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
         const FIELDS: &[&str] = &[
             "basis",
             "offset",
-            "max_quantity",
-            "maxQuantity",
-            "min_spread",
-            "minSpread",
+            "quantity",
+            "depth",
+            "tick_size",
+            "tickSize",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Basis,
             Offset,
-            MaxQuantity,
-            MinSpread,
+            Quantity,
+            Depth,
+            TickSize,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -467,8 +478,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                         match value {
                             "basis" => Ok(GeneratedField::Basis),
                             "offset" => Ok(GeneratedField::Offset),
-                            "maxQuantity" | "max_quantity" => Ok(GeneratedField::MaxQuantity),
-                            "minSpread" | "min_spread" => Ok(GeneratedField::MinSpread),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "depth" => Ok(GeneratedField::Depth),
+                            "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -490,8 +502,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
             {
                 let mut basis__ = None;
                 let mut offset__ = None;
-                let mut max_quantity__ = None;
-                let mut min_spread__ = None;
+                let mut quantity__ = None;
+                let mut depth__ = None;
+                let mut tick_size__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Basis => {
@@ -510,19 +523,27 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::MaxQuantity => {
-                            if max_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxQuantity"));
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
                             }
-                            max_quantity__ = 
+                            quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::MinSpread => {
-                            if min_spread__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("minSpread"));
+                        GeneratedField::Depth => {
+                            if depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
                             }
-                            min_spread__ = 
+                            depth__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TickSize => {
+                            if tick_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickSize"));
+                            }
+                            tick_size__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -531,8 +552,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                 Ok(EtfLpConfig {
                     basis: basis__.unwrap_or_default(),
                     offset: offset__.unwrap_or_default(),
-                    max_quantity: max_quantity__.unwrap_or_default(),
-                    min_spread: min_spread__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    depth: depth__.unwrap_or_default(),
+                    tick_size: tick_size__.unwrap_or_default(),
                 })
             }
         }
@@ -550,7 +572,6 @@ impl serde::Serialize for EtfLpStatus {
             Self::Stopped => "STOPPED",
             Self::Starting => "STARTING",
             Self::Running => "RUNNING",
-            Self::Stopping => "STOPPING",
             Self::Error => "ERROR",
         };
         serializer.serialize_str(variant)
@@ -567,7 +588,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "STOPPED",
             "STARTING",
             "RUNNING",
-            "STOPPING",
             "ERROR",
         ];
 
@@ -613,7 +633,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     "STOPPED" => Ok(EtfLpStatus::Stopped),
                     "STARTING" => Ok(EtfLpStatus::Starting),
                     "RUNNING" => Ok(EtfLpStatus::Running),
-                    "STOPPING" => Ok(EtfLpStatus::Stopping),
                     "ERROR" => Ok(EtfLpStatus::Error),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
@@ -1410,7 +1429,13 @@ impl serde::Serialize for GetEtfLpStatusResponse {
         if self.started_at != 0 {
             len += 1;
         }
-        if self.stats.is_some() {
+        if self.etf_price != 0 {
+            len += 1;
+        }
+        if self.future_price != 0. {
+            len += 1;
+        }
+        if self.etf_ref_price != 0. {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.GetEtfLPStatusResponse", len)?;
@@ -1427,8 +1452,16 @@ impl serde::Serialize for GetEtfLpStatusResponse {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("startedAt", ToString::to_string(&self.started_at).as_str())?;
         }
-        if let Some(v) = self.stats.as_ref() {
-            struct_ser.serialize_field("stats", v)?;
+        if self.etf_price != 0 {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("etfPrice", ToString::to_string(&self.etf_price).as_str())?;
+        }
+        if self.future_price != 0. {
+            struct_ser.serialize_field("futurePrice", &self.future_price)?;
+        }
+        if self.etf_ref_price != 0. {
+            struct_ser.serialize_field("etfRefPrice", &self.etf_ref_price)?;
         }
         struct_ser.end()
     }
@@ -1444,7 +1477,12 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
             "config",
             "started_at",
             "startedAt",
-            "stats",
+            "etf_price",
+            "etfPrice",
+            "future_price",
+            "futurePrice",
+            "etf_ref_price",
+            "etfRefPrice",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1452,7 +1490,9 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
             Status,
             Config,
             StartedAt,
-            Stats,
+            EtfPrice,
+            FuturePrice,
+            EtfRefPrice,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1477,7 +1517,9 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                             "status" => Ok(GeneratedField::Status),
                             "config" => Ok(GeneratedField::Config),
                             "startedAt" | "started_at" => Ok(GeneratedField::StartedAt),
-                            "stats" => Ok(GeneratedField::Stats),
+                            "etfPrice" | "etf_price" => Ok(GeneratedField::EtfPrice),
+                            "futurePrice" | "future_price" => Ok(GeneratedField::FuturePrice),
+                            "etfRefPrice" | "etf_ref_price" => Ok(GeneratedField::EtfRefPrice),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -1500,7 +1542,9 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                 let mut status__ = None;
                 let mut config__ = None;
                 let mut started_at__ = None;
-                let mut stats__ = None;
+                let mut etf_price__ = None;
+                let mut future_price__ = None;
+                let mut etf_ref_price__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Status => {
@@ -1523,11 +1567,29 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Stats => {
-                            if stats__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("stats"));
+                        GeneratedField::EtfPrice => {
+                            if etf_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPrice"));
                             }
-                            stats__ = map_.next_value()?;
+                            etf_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FuturePrice => {
+                            if future_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futurePrice"));
+                            }
+                            future_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EtfRefPrice => {
+                            if etf_ref_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfRefPrice"));
+                            }
+                            etf_ref_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
                     }
                 }
@@ -1535,168 +1597,13 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                     status: status__.unwrap_or_default(),
                     config: config__,
                     started_at: started_at__.unwrap_or_default(),
-                    stats: stats__,
+                    etf_price: etf_price__.unwrap_or_default(),
+                    future_price: future_price__.unwrap_or_default(),
+                    etf_ref_price: etf_ref_price__.unwrap_or_default(),
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.market.GetEtfLPStatusResponse", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for get_etf_lp_status_response::Statistics {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.total_fills != 0 {
-            len += 1;
-        }
-        if self.total_volume != 0 {
-            len += 1;
-        }
-        if self.avg_spread != 0. {
-            len += 1;
-        }
-        if self.pnl != 0. {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.GetEtfLPStatusResponse.Statistics", len)?;
-        if self.total_fills != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("totalFills", ToString::to_string(&self.total_fills).as_str())?;
-        }
-        if self.total_volume != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("totalVolume", ToString::to_string(&self.total_volume).as_str())?;
-        }
-        if self.avg_spread != 0. {
-            struct_ser.serialize_field("avgSpread", &self.avg_spread)?;
-        }
-        if self.pnl != 0. {
-            struct_ser.serialize_field("pnl", &self.pnl)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for get_etf_lp_status_response::Statistics {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "total_fills",
-            "totalFills",
-            "total_volume",
-            "totalVolume",
-            "avg_spread",
-            "avgSpread",
-            "pnl",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            TotalFills,
-            TotalVolume,
-            AvgSpread,
-            Pnl,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "totalFills" | "total_fills" => Ok(GeneratedField::TotalFills),
-                            "totalVolume" | "total_volume" => Ok(GeneratedField::TotalVolume),
-                            "avgSpread" | "avg_spread" => Ok(GeneratedField::AvgSpread),
-                            "pnl" => Ok(GeneratedField::Pnl),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = get_etf_lp_status_response::Statistics;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.market.GetEtfLPStatusResponse.Statistics")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<get_etf_lp_status_response::Statistics, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut total_fills__ = None;
-                let mut total_volume__ = None;
-                let mut avg_spread__ = None;
-                let mut pnl__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::TotalFills => {
-                            if total_fills__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("totalFills"));
-                            }
-                            total_fills__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::TotalVolume => {
-                            if total_volume__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("totalVolume"));
-                            }
-                            total_volume__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AvgSpread => {
-                            if avg_spread__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("avgSpread"));
-                            }
-                            avg_spread__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Pnl => {
-                            if pnl__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pnl"));
-                            }
-                            pnl__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                    }
-                }
-                Ok(get_etf_lp_status_response::Statistics {
-                    total_fills: total_fills__.unwrap_or_default(),
-                    total_volume: total_volume__.unwrap_or_default(),
-                    avg_spread: avg_spread__.unwrap_or_default(),
-                    pnl: pnl__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.market.GetEtfLPStatusResponse.Statistics", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListOrdersRequest {

@@ -354,11 +354,14 @@ message EtfLPConfig {
     // Offset 값
     double offset = 2;
 
-    // 최대 주문 수량
-    int64 max_quantity = 3;
+    // 주문 수량
+    int64 quantity = 3;
 
-    // 최소 스프레드
-    double min_spread = 4;
+    // 호가 깊이 (1~10)
+    int64 depth = 4;
+
+    // 호가 단위
+    int64 tick_size = 5;
 }
 
 // ETF LP 상태
@@ -367,8 +370,7 @@ enum EtfLPStatus {
     STOPPED = 1;                   // 중지됨
     STARTING = 2;                  // 시작중
     RUNNING = 3;                   // 실행중
-    STOPPING = 4;                  // 중지중
-    ERROR = 5;                     // 오류
+    ERROR = 4;                     // 오류
 }
 
 // ETF LP 시작 요청
@@ -421,21 +423,27 @@ message GetEtfLPStatusResponse {
     // 시작 시간 (Unix timestamp)
     int64 started_at = 3;
 
+    int64 etf_price = 4;
+
+    float future_price = 5;
+
+    float etf_ref_price = 6;
+
     // 통계 정보
-    message Statistics {
-        // 총 체결 수
-        int64 total_fills = 1;
-
-        // 총 체결 수량
-        int64 total_volume = 2;
-
-        // 평균 스프레드
-        double avg_spread = 3;
-
-        // 수익률
-        double pnl = 4;
-    }
-    Statistics stats = 4;
+//    message Statistics {
+//        // 총 체결 수
+//        int64 total_fills = 1;
+//
+//        // 총 체결 수량
+//        int64 total_volume = 2;
+//
+//        // 평균 스프레드
+//        double avg_spread = 3;
+//
+//        // 수익률
+//        double pnl = 4;
+//    }
+//    Statistics stats = 4;
 }
 
 // ETF LP 설정 업데이트 요청

@@ -1199,14 +1199,16 @@ class EtfLPConfig extends $pb.GeneratedMessage {
   factory EtfLPConfig({
     $core.double? basis,
     $core.double? offset,
-    $fixnum.Int64? maxQuantity,
-    $core.double? minSpread,
+    $fixnum.Int64? quantity,
+    $fixnum.Int64? depth,
+    $fixnum.Int64? tickSize,
   }) {
     final result = create();
     if (basis != null) result.basis = basis;
     if (offset != null) result.offset = offset;
-    if (maxQuantity != null) result.maxQuantity = maxQuantity;
-    if (minSpread != null) result.minSpread = minSpread;
+    if (quantity != null) result.quantity = quantity;
+    if (depth != null) result.depth = depth;
+    if (tickSize != null) result.tickSize = tickSize;
     return result;
   }
 
@@ -1218,8 +1220,9 @@ class EtfLPConfig extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLPConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'basis', $pb.PbFieldType.OD)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.OD)
-    ..aInt64(3, _omitFieldNames ? '' : 'maxQuantity')
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'minSpread', $pb.PbFieldType.OD)
+    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'depth')
+    ..aInt64(5, _omitFieldNames ? '' : 'tickSize')
     ..hasRequiredFields = false
   ;
 
@@ -1260,25 +1263,35 @@ class EtfLPConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearOffset() => $_clearField(2);
 
-  /// 최대 주문 수량
+  /// 주문 수량
   @$pb.TagNumber(3)
-  $fixnum.Int64 get maxQuantity => $_getI64(2);
+  $fixnum.Int64 get quantity => $_getI64(2);
   @$pb.TagNumber(3)
-  set maxQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasMaxQuantity() => $_has(2);
+  $core.bool hasQuantity() => $_has(2);
   @$pb.TagNumber(3)
-  void clearMaxQuantity() => $_clearField(3);
+  void clearQuantity() => $_clearField(3);
 
-  /// 최소 스프레드
+  /// 호가 깊이 (1~10)
   @$pb.TagNumber(4)
-  $core.double get minSpread => $_getN(3);
+  $fixnum.Int64 get depth => $_getI64(3);
   @$pb.TagNumber(4)
-  set minSpread($core.double value) => $_setDouble(3, value);
+  set depth($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasMinSpread() => $_has(3);
+  $core.bool hasDepth() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMinSpread() => $_clearField(4);
+  void clearDepth() => $_clearField(4);
+
+  /// 호가 단위
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get tickSize => $_getI64(4);
+  @$pb.TagNumber(5)
+  set tickSize($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasTickSize() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTickSize() => $_clearField(5);
 }
 
 /// ETF LP 시작 요청
@@ -1562,106 +1575,23 @@ class GetEtfLPStatusRequest extends $pb.GeneratedMessage {
   void clearEtf() => $_clearField(1);
 }
 
-/// 통계 정보
-class GetEtfLPStatusResponse_Statistics extends $pb.GeneratedMessage {
-  factory GetEtfLPStatusResponse_Statistics({
-    $fixnum.Int64? totalFills,
-    $fixnum.Int64? totalVolume,
-    $core.double? avgSpread,
-    $core.double? pnl,
-  }) {
-    final result = create();
-    if (totalFills != null) result.totalFills = totalFills;
-    if (totalVolume != null) result.totalVolume = totalVolume;
-    if (avgSpread != null) result.avgSpread = avgSpread;
-    if (pnl != null) result.pnl = pnl;
-    return result;
-  }
-
-  GetEtfLPStatusResponse_Statistics._();
-
-  factory GetEtfLPStatusResponse_Statistics.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory GetEtfLPStatusResponse_Statistics.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfLPStatusResponse.Statistics', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'totalFills')
-    ..aInt64(2, _omitFieldNames ? '' : 'totalVolume')
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'avgSpread', $pb.PbFieldType.OD)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'pnl', $pb.PbFieldType.OD)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetEtfLPStatusResponse_Statistics clone() => GetEtfLPStatusResponse_Statistics()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetEtfLPStatusResponse_Statistics copyWith(void Function(GetEtfLPStatusResponse_Statistics) updates) => super.copyWith((message) => updates(message as GetEtfLPStatusResponse_Statistics)) as GetEtfLPStatusResponse_Statistics;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetEtfLPStatusResponse_Statistics create() => GetEtfLPStatusResponse_Statistics._();
-  @$core.override
-  GetEtfLPStatusResponse_Statistics createEmptyInstance() => create();
-  static $pb.PbList<GetEtfLPStatusResponse_Statistics> createRepeated() => $pb.PbList<GetEtfLPStatusResponse_Statistics>();
-  @$core.pragma('dart2js:noInline')
-  static GetEtfLPStatusResponse_Statistics getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfLPStatusResponse_Statistics>(create);
-  static GetEtfLPStatusResponse_Statistics? _defaultInstance;
-
-  /// 총 체결 수
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get totalFills => $_getI64(0);
-  @$pb.TagNumber(1)
-  set totalFills($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasTotalFills() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearTotalFills() => $_clearField(1);
-
-  /// 총 체결 수량
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get totalVolume => $_getI64(1);
-  @$pb.TagNumber(2)
-  set totalVolume($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTotalVolume() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTotalVolume() => $_clearField(2);
-
-  /// 평균 스프레드
-  @$pb.TagNumber(3)
-  $core.double get avgSpread => $_getN(2);
-  @$pb.TagNumber(3)
-  set avgSpread($core.double value) => $_setDouble(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasAvgSpread() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAvgSpread() => $_clearField(3);
-
-  /// 수익률
-  @$pb.TagNumber(4)
-  $core.double get pnl => $_getN(3);
-  @$pb.TagNumber(4)
-  set pnl($core.double value) => $_setDouble(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasPnl() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearPnl() => $_clearField(4);
-}
-
 /// ETF LP 상태 조회 응답
 class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
   factory GetEtfLPStatusResponse({
     EtfLPStatus? status,
     EtfLPConfig? config,
     $fixnum.Int64? startedAt,
-    GetEtfLPStatusResponse_Statistics? stats,
+    $fixnum.Int64? etfPrice,
+    $core.double? futurePrice,
+    $core.double? etfRefPrice,
   }) {
     final result = create();
     if (status != null) result.status = status;
     if (config != null) result.config = config;
     if (startedAt != null) result.startedAt = startedAt;
-    if (stats != null) result.stats = stats;
+    if (etfPrice != null) result.etfPrice = etfPrice;
+    if (futurePrice != null) result.futurePrice = futurePrice;
+    if (etfRefPrice != null) result.etfRefPrice = etfRefPrice;
     return result;
   }
 
@@ -1674,7 +1604,9 @@ class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
     ..e<EtfLPStatus>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: EtfLPStatus.ETF_LP_STATUS_UNSPECIFIED, valueOf: EtfLPStatus.valueOf, enumValues: EtfLPStatus.values)
     ..aOM<EtfLPConfig>(2, _omitFieldNames ? '' : 'config', subBuilder: EtfLPConfig.create)
     ..aInt64(3, _omitFieldNames ? '' : 'startedAt')
-    ..aOM<GetEtfLPStatusResponse_Statistics>(4, _omitFieldNames ? '' : 'stats', subBuilder: GetEtfLPStatusResponse_Statistics.create)
+    ..aInt64(4, _omitFieldNames ? '' : 'etfPrice')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'futurePrice', $pb.PbFieldType.OF)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'etfRefPrice', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
@@ -1728,15 +1660,31 @@ class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
   void clearStartedAt() => $_clearField(3);
 
   @$pb.TagNumber(4)
-  GetEtfLPStatusResponse_Statistics get stats => $_getN(3);
+  $fixnum.Int64 get etfPrice => $_getI64(3);
   @$pb.TagNumber(4)
-  set stats(GetEtfLPStatusResponse_Statistics value) => $_setField(4, value);
+  set etfPrice($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasStats() => $_has(3);
+  $core.bool hasEtfPrice() => $_has(3);
   @$pb.TagNumber(4)
-  void clearStats() => $_clearField(4);
-  @$pb.TagNumber(4)
-  GetEtfLPStatusResponse_Statistics ensureStats() => $_ensure(3);
+  void clearEtfPrice() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get futurePrice => $_getN(4);
+  @$pb.TagNumber(5)
+  set futurePrice($core.double value) => $_setFloat(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFuturePrice() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFuturePrice() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get etfRefPrice => $_getN(5);
+  @$pb.TagNumber(6)
+  set etfRefPrice($core.double value) => $_setFloat(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasEtfRefPrice() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEtfRefPrice() => $_clearField(6);
 }
 
 /// ETF LP 설정 업데이트 요청

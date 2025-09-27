@@ -295,12 +295,15 @@ pub struct EtfLpConfig {
     /// Offset 값
     #[prost(double, tag="2")]
     pub offset: f64,
-    /// 최대 주문 수량
+    /// 주문 수량
     #[prost(int64, tag="3")]
-    pub max_quantity: i64,
-    /// 최소 스프레드
-    #[prost(double, tag="4")]
-    pub min_spread: f64,
+    pub quantity: i64,
+    /// 호가 깊이 (1~10)
+    #[prost(int64, tag="4")]
+    pub depth: i64,
+    /// 호가 단위
+    #[prost(int64, tag="5")]
+    pub tick_size: i64,
 }
 /// ETF LP 시작 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -364,28 +367,12 @@ pub struct GetEtfLpStatusResponse {
     /// 시작 시간 (Unix timestamp)
     #[prost(int64, tag="3")]
     pub started_at: i64,
-    #[prost(message, optional, tag="4")]
-    pub stats: ::core::option::Option<get_etf_lp_status_response::Statistics>,
-}
-/// Nested message and enum types in `GetEtfLPStatusResponse`.
-pub mod get_etf_lp_status_response {
-    /// 통계 정보
-    #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-    pub struct Statistics {
-        /// 총 체결 수
-        #[prost(int64, tag="1")]
-        pub total_fills: i64,
-        /// 총 체결 수량
-        #[prost(int64, tag="2")]
-        pub total_volume: i64,
-        /// 평균 스프레드
-        #[prost(double, tag="3")]
-        pub avg_spread: f64,
-        /// 수익률
-        #[prost(double, tag="4")]
-        pub pnl: f64,
-    }
+    #[prost(int64, tag="4")]
+    pub etf_price: i64,
+    #[prost(float, tag="5")]
+    pub future_price: f32,
+    #[prost(float, tag="6")]
+    pub etf_ref_price: f32,
 }
 /// ETF LP 설정 업데이트 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -588,10 +575,8 @@ pub enum EtfLpStatus {
     Starting = 2,
     /// 실행중
     Running = 3,
-    /// 중지중
-    Stopping = 4,
     /// 오류
-    Error = 5,
+    Error = 4,
 }
 impl EtfLpStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -604,7 +589,6 @@ impl EtfLpStatus {
             EtfLpStatus::Stopped => "STOPPED",
             EtfLpStatus::Starting => "STARTING",
             EtfLpStatus::Running => "RUNNING",
-            EtfLpStatus::Stopping => "STOPPING",
             EtfLpStatus::Error => "ERROR",
         }
     }
@@ -615,7 +599,6 @@ impl EtfLpStatus {
             "STOPPED" => Some(Self::Stopped),
             "STARTING" => Some(Self::Starting),
             "RUNNING" => Some(Self::Running),
-            "STOPPING" => Some(Self::Stopping),
             "ERROR" => Some(Self::Error),
             _ => None,
         }

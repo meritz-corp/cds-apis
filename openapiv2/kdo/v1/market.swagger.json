@@ -287,32 +287,6 @@
     }
   },
   "definitions": {
-    "GetEtfLPStatusResponseStatistics": {
-      "type": "object",
-      "properties": {
-        "totalFills": {
-          "type": "string",
-          "format": "int64",
-          "title": "총 체결 수"
-        },
-        "totalVolume": {
-          "type": "string",
-          "format": "int64",
-          "title": "총 체결 수량"
-        },
-        "avgSpread": {
-          "type": "number",
-          "format": "double",
-          "title": "평균 스프레드"
-        },
-        "pnl": {
-          "type": "number",
-          "format": "double",
-          "title": "수익률"
-        }
-      },
-      "title": "통계 정보"
-    },
     "marketEtfLPConfig": {
       "type": "object",
       "properties": {
@@ -326,15 +300,20 @@
           "format": "double",
           "title": "Offset 값"
         },
-        "maxQuantity": {
+        "quantity": {
           "type": "string",
           "format": "int64",
-          "title": "최대 주문 수량"
+          "title": "주문 수량"
         },
-        "minSpread": {
-          "type": "number",
-          "format": "double",
-          "title": "최소 스프레드"
+        "depth": {
+          "type": "string",
+          "format": "int64",
+          "title": "호가 깊이 (1~10)"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "호가 단위"
         }
       },
       "title": "ETF LP 설정"
@@ -346,11 +325,10 @@
         "STOPPED",
         "STARTING",
         "RUNNING",
-        "STOPPING",
         "ERROR"
       ],
       "default": "ETF_LP_STATUS_UNSPECIFIED",
-      "description": "- ETF_LP_STATUS_UNSPECIFIED: 기본값\n - STOPPED: 중지됨\n - STARTING: 시작중\n - RUNNING: 실행중\n - STOPPING: 중지중\n - ERROR: 오류",
+      "description": "- ETF_LP_STATUS_UNSPECIFIED: 기본값\n - STOPPED: 중지됨\n - STARTING: 시작중\n - RUNNING: 실행중\n - ERROR: 오류",
       "title": "ETF LP 상태"
     },
     "marketEtfOrderbookData": {
@@ -540,8 +518,17 @@
           "format": "int64",
           "title": "시작 시간 (Unix timestamp)"
         },
-        "stats": {
-          "$ref": "#/definitions/GetEtfLPStatusResponseStatistics"
+        "etfPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "futurePrice": {
+          "type": "number",
+          "format": "float"
+        },
+        "etfRefPrice": {
+          "type": "number",
+          "format": "float"
         }
       },
       "title": "ETF LP 상태 조회 응답"

@@ -108,19 +108,17 @@ class EtfLPStatus extends $pb.ProtobufEnum {
   static const EtfLPStatus STOPPED = EtfLPStatus._(1, _omitEnumNames ? '' : 'STOPPED');
   static const EtfLPStatus STARTING = EtfLPStatus._(2, _omitEnumNames ? '' : 'STARTING');
   static const EtfLPStatus RUNNING = EtfLPStatus._(3, _omitEnumNames ? '' : 'RUNNING');
-  static const EtfLPStatus STOPPING = EtfLPStatus._(4, _omitEnumNames ? '' : 'STOPPING');
-  static const EtfLPStatus ERROR = EtfLPStatus._(5, _omitEnumNames ? '' : 'ERROR');
+  static const EtfLPStatus ERROR = EtfLPStatus._(4, _omitEnumNames ? '' : 'ERROR');
 
   static const $core.List<EtfLPStatus> values = <EtfLPStatus> [
     ETF_LP_STATUS_UNSPECIFIED,
     STOPPED,
     STARTING,
     RUNNING,
-    STOPPING,
     ERROR,
   ];
 
-  static final $core.List<EtfLPStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static final $core.List<EtfLPStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
   static EtfLPStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const EtfLPStatus._(super.value, super.name);
