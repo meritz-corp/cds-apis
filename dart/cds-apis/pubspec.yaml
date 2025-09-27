@@ -1,8 +1,8 @@
-name: ids_apis
-description: IDS APIs - gRPC and ConnectRPC client library for P&L services
+name: cds_apis
+description: CDS APIs - gRPC and ConnectRPC client library for P&L services
 version: 1.0.0
-homepage: https://github.com/your-org/ids-apis
-repository: https://github.com/your-org/ids-apis
+homepage: https://github.com/your-org/cds-apis
+repository: https://github.com/your-org/cds-apis
 
 environment:
   sdk: ^3.3.0
