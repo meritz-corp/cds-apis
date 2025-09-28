@@ -354,13 +354,18 @@ message OrderUpdate {
     UpdateType update_type = 2;
 }
 
+message Symbol {
+    string symbol = 1;
+    string name = 2;
+}
+
 // ETF LP 설정
 message EtfLPConfig {
     // ETF 심볼
-    string etf_symbol = 1;
+    Symbol etf_symbol = 1;
 
     // 선물 심볼
-    string future_symbol = 2;
+    Symbol future_symbol = 2;
 
     // Basis 값
     float basis = 3;

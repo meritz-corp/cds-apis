@@ -369,12 +369,25 @@ final $typed_data.Uint8List orderUpdateDescriptor = $convert.base64Decode(
     'ZJRUQQABILCgdDUkVBVEVEEAESCwoHVVBEQVRFRBACEgoKBkZJTExFRBADEg0KCUNBTkNFTExF'
     'RBAE');
 
+@$core.Deprecated('Use symbolDescriptor instead')
+const Symbol$json = {
+  '1': 'Symbol',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `Symbol`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List symbolDescriptor = $convert.base64Decode(
+    'CgZTeW1ib2wSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSEgoEbmFtZRgCIAEoCVIEbmFtZQ==');
+
 @$core.Deprecated('Use etfLPConfigDescriptor instead')
 const EtfLPConfig$json = {
   '1': 'EtfLPConfig',
   '2': [
-    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
-    {'1': 'future_symbol', '3': 2, '4': 1, '5': 9, '10': 'futureSymbol'},
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.market.Symbol', '10': 'etfSymbol'},
+    {'1': 'future_symbol', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.market.Symbol', '10': 'futureSymbol'},
     {'1': 'basis', '3': 3, '4': 1, '5': 2, '10': 'basis'},
     {'1': 'offset', '3': 4, '4': 1, '5': 2, '10': 'offset'},
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
@@ -385,10 +398,11 @@ const EtfLPConfig$json = {
 
 /// Descriptor for `EtfLPConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLPConfigDescriptor = $convert.base64Decode(
-    'CgtFdGZMUENvbmZpZxIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSIwoNZnV0dXJlX3'
-    'N5bWJvbBgCIAEoCVIMZnV0dXJlU3ltYm9sEhQKBWJhc2lzGAMgASgCUgViYXNpcxIWCgZvZmZz'
-    'ZXQYBCABKAJSBm9mZnNldBIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdHkSFAoFZGVwdGgYBi'
-    'ABKANSBWRlcHRoEhsKCXRpY2tfc2l6ZRgHIAEoA1IIdGlja1NpemU=');
+    'CgtFdGZMUENvbmZpZxI0CgpldGZfc3ltYm9sGAEgASgLMhUua2RvLnYxLm1hcmtldC5TeW1ib2'
+    'xSCWV0ZlN5bWJvbBI6Cg1mdXR1cmVfc3ltYm9sGAIgASgLMhUua2RvLnYxLm1hcmtldC5TeW1i'
+    'b2xSDGZ1dHVyZVN5bWJvbBIUCgViYXNpcxgDIAEoAlIFYmFzaXMSFgoGb2Zmc2V0GAQgASgCUg'
+    'ZvZmZzZXQSGgoIcXVhbnRpdHkYBSABKANSCHF1YW50aXR5EhQKBWRlcHRoGAYgASgDUgVkZXB0'
+    'aBIbCgl0aWNrX3NpemUYByABKANSCHRpY2tTaXpl');
 
 @$core.Deprecated('Use startEtfLPRequestDescriptor instead')
 const StartEtfLPRequest$json = {

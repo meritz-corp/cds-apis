@@ -285,16 +285,24 @@ pub mod order_update {
         }
     }
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Symbol {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub name: ::prost::alloc::string::String,
+}
 /// ETF LP 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfLpConfig {
     /// ETF 심볼
-    #[prost(string, tag="1")]
-    pub etf_symbol: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="1")]
+    pub etf_symbol: ::core::option::Option<Symbol>,
     /// 선물 심볼
-    #[prost(string, tag="2")]
-    pub future_symbol: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="2")]
+    pub future_symbol: ::core::option::Option<Symbol>,
     /// Basis 값
     #[prost(float, tag="3")]
     pub basis: f32,

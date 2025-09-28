@@ -1194,11 +1194,69 @@ class OrderUpdate extends $pb.GeneratedMessage {
   void clearUpdateType() => $_clearField(2);
 }
 
+class Symbol extends $pb.GeneratedMessage {
+  factory Symbol({
+    $core.String? symbol,
+    $core.String? name,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  Symbol._();
+
+  factory Symbol.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Symbol.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Symbol', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Symbol clone() => Symbol()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Symbol copyWith(void Function(Symbol) updates) => super.copyWith((message) => updates(message as Symbol)) as Symbol;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Symbol create() => Symbol._();
+  @$core.override
+  Symbol createEmptyInstance() => create();
+  static $pb.PbList<Symbol> createRepeated() => $pb.PbList<Symbol>();
+  @$core.pragma('dart2js:noInline')
+  static Symbol getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Symbol>(create);
+  static Symbol? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+}
+
 /// ETF LP 설정
 class EtfLPConfig extends $pb.GeneratedMessage {
   factory EtfLPConfig({
-    $core.String? etfSymbol,
-    $core.String? futureSymbol,
+    Symbol? etfSymbol,
+    Symbol? futureSymbol,
     $core.double? basis,
     $core.double? offset,
     $fixnum.Int64? quantity,
@@ -1222,8 +1280,8 @@ class EtfLPConfig extends $pb.GeneratedMessage {
   factory EtfLPConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLPConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
-    ..aOS(2, _omitFieldNames ? '' : 'futureSymbol')
+    ..aOM<Symbol>(1, _omitFieldNames ? '' : 'etfSymbol', subBuilder: Symbol.create)
+    ..aOM<Symbol>(2, _omitFieldNames ? '' : 'futureSymbol', subBuilder: Symbol.create)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'basis', $pb.PbFieldType.OF)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.OF)
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
@@ -1251,23 +1309,27 @@ class EtfLPConfig extends $pb.GeneratedMessage {
 
   /// ETF 심볼
   @$pb.TagNumber(1)
-  $core.String get etfSymbol => $_getSZ(0);
+  Symbol get etfSymbol => $_getN(0);
   @$pb.TagNumber(1)
-  set etfSymbol($core.String value) => $_setString(0, value);
+  set etfSymbol(Symbol value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasEtfSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearEtfSymbol() => $_clearField(1);
+  @$pb.TagNumber(1)
+  Symbol ensureEtfSymbol() => $_ensure(0);
 
   /// 선물 심볼
   @$pb.TagNumber(2)
-  $core.String get futureSymbol => $_getSZ(1);
+  Symbol get futureSymbol => $_getN(1);
   @$pb.TagNumber(2)
-  set futureSymbol($core.String value) => $_setString(1, value);
+  set futureSymbol(Symbol value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasFutureSymbol() => $_has(1);
   @$pb.TagNumber(2)
   void clearFutureSymbol() => $_clearField(2);
+  @$pb.TagNumber(2)
+  Symbol ensureFutureSymbol() => $_ensure(1);
 
   /// Basis 값
   @$pb.TagNumber(3)

@@ -333,11 +333,11 @@
       "type": "object",
       "properties": {
         "etfSymbol": {
-          "type": "string",
+          "$ref": "#/definitions/marketSymbol",
           "title": "ETF 심볼"
         },
         "futureSymbol": {
-          "type": "string",
+          "$ref": "#/definitions/marketSymbol",
           "title": "선물 심볼"
         },
         "basis": {
@@ -635,6 +635,17 @@
         }
       },
       "title": "ETF LP 중지 응답"
+    },
+    "marketSymbol": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "marketUpdateEtfLPConfigResponse": {
       "type": "object",

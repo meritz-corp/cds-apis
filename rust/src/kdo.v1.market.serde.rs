@@ -393,10 +393,10 @@ impl serde::Serialize for EtfLpConfig {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf_symbol.is_empty() {
+        if self.etf_symbol.is_some() {
             len += 1;
         }
-        if !self.future_symbol.is_empty() {
+        if self.future_symbol.is_some() {
             len += 1;
         }
         if self.basis != 0. {
@@ -415,11 +415,11 @@ impl serde::Serialize for EtfLpConfig {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.EtfLPConfig", len)?;
-        if !self.etf_symbol.is_empty() {
-            struct_ser.serialize_field("etfSymbol", &self.etf_symbol)?;
+        if let Some(v) = self.etf_symbol.as_ref() {
+            struct_ser.serialize_field("etfSymbol", v)?;
         }
-        if !self.future_symbol.is_empty() {
-            struct_ser.serialize_field("futureSymbol", &self.future_symbol)?;
+        if let Some(v) = self.future_symbol.as_ref() {
+            struct_ser.serialize_field("futureSymbol", v)?;
         }
         if self.basis != 0. {
             struct_ser.serialize_field("basis", &self.basis)?;
@@ -533,13 +533,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                             if etf_symbol__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("etfSymbol"));
                             }
-                            etf_symbol__ = Some(map_.next_value()?);
+                            etf_symbol__ = map_.next_value()?;
                         }
                         GeneratedField::FutureSymbol => {
                             if future_symbol__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("futureSymbol"));
                             }
-                            future_symbol__ = Some(map_.next_value()?);
+                            future_symbol__ = map_.next_value()?;
                         }
                         GeneratedField::Basis => {
                             if basis__.is_some() {
@@ -584,8 +584,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                     }
                 }
                 Ok(EtfLpConfig {
-                    etf_symbol: etf_symbol__.unwrap_or_default(),
-                    future_symbol: future_symbol__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__,
+                    future_symbol: future_symbol__,
                     basis: basis__.unwrap_or_default(),
                     offset: offset__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
@@ -3566,6 +3566,114 @@ impl<'de> serde::Deserialize<'de> for StreamOrderUpdatesRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.market.StreamOrderUpdatesRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for Symbol {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.symbol.is_empty() {
+            len += 1;
+        }
+        if !self.name.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.Symbol", len)?;
+        if !self.symbol.is_empty() {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if !self.name.is_empty() {
+            struct_ser.serialize_field("name", &self.name)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Symbol {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "name",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            Name,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "name" => Ok(GeneratedField::Name),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Symbol;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.Symbol")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Symbol, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut name__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(Symbol {
+                    symbol: symbol__.unwrap_or_default(),
+                    name: name__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.Symbol", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UpdateEtfLpConfigRequest {
