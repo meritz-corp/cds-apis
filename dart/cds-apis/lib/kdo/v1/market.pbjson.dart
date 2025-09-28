@@ -373,19 +373,22 @@ final $typed_data.Uint8List orderUpdateDescriptor = $convert.base64Decode(
 const EtfLPConfig$json = {
   '1': 'EtfLPConfig',
   '2': [
-    {'1': 'basis', '3': 1, '4': 1, '5': 1, '10': 'basis'},
-    {'1': 'offset', '3': 2, '4': 1, '5': 1, '10': 'offset'},
-    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'depth', '3': 4, '4': 1, '5': 3, '10': 'depth'},
-    {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
+    {'1': 'future_symbol', '3': 2, '4': 1, '5': 9, '10': 'futureSymbol'},
+    {'1': 'basis', '3': 3, '4': 1, '5': 2, '10': 'basis'},
+    {'1': 'offset', '3': 4, '4': 1, '5': 2, '10': 'offset'},
+    {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'depth', '3': 6, '4': 1, '5': 3, '10': 'depth'},
+    {'1': 'tick_size', '3': 7, '4': 1, '5': 3, '10': 'tickSize'},
   ],
 };
 
 /// Descriptor for `EtfLPConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLPConfigDescriptor = $convert.base64Decode(
-    'CgtFdGZMUENvbmZpZxIUCgViYXNpcxgBIAEoAVIFYmFzaXMSFgoGb2Zmc2V0GAIgASgBUgZvZm'
-    'ZzZXQSGgoIcXVhbnRpdHkYAyABKANSCHF1YW50aXR5EhQKBWRlcHRoGAQgASgDUgVkZXB0aBIb'
-    'Cgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXpl');
+    'CgtFdGZMUENvbmZpZxIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSIwoNZnV0dXJlX3'
+    'N5bWJvbBgCIAEoCVIMZnV0dXJlU3ltYm9sEhQKBWJhc2lzGAMgASgCUgViYXNpcxIWCgZvZmZz'
+    'ZXQYBCABKAJSBm9mZnNldBIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdHkSFAoFZGVwdGgYBi'
+    'ABKANSBWRlcHRoEhsKCXRpY2tfc2l6ZRgHIAEoA1IIdGlja1NpemU=');
 
 @$core.Deprecated('Use startEtfLPRequestDescriptor instead')
 const StartEtfLPRequest$json = {

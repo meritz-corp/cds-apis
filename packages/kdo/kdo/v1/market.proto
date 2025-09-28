@@ -23,40 +23,40 @@ service MarketService {
     }
 
     // 주문 접수
-//    rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse) {
-//        option (google.api.http) = {
-//            post: "/v1/orders"
-//            body: "*"
-//        };
-//    }
-//
-//    // 주문 취소
-//    rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {
-//        option (google.api.http) = {
-//            delete: "/v1/orders/{order_id}"
-//        };
-//    }
-//
-//    // 모든 주문 취소
-//    rpc CancelAllOrders(CancelAllOrdersRequest) returns (CancelAllOrdersResponse) {
-//        option (google.api.http) = {
-//            delete: "/v1/orders"
-//        };
-//    }
-//
-//    // 주문 목록 조회
-//    rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
-//        option (google.api.http) = {
-//            get: "/v1/orders"
-//        };
-//    }
+    //    rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse) {
+    //        option (google.api.http) = {
+    //            post: "/v1/orders"
+    //            body: "*"
+    //        };
+    //    }
+    //
+    //    // 주문 취소
+    //    rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {
+    //        option (google.api.http) = {
+    //            delete: "/v1/orders/{order_id}"
+    //        };
+    //    }
+    //
+    //    // 모든 주문 취소
+    //    rpc CancelAllOrders(CancelAllOrdersRequest) returns (CancelAllOrdersResponse) {
+    //        option (google.api.http) = {
+    //            delete: "/v1/orders"
+    //        };
+    //    }
+    //
+    //    // 주문 목록 조회
+    //    rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
+    //        option (google.api.http) = {
+    //            get: "/v1/orders"
+    //        };
+    //    }
 
     // 주문 상태 스트리밍
-//    rpc StreamOrderUpdates(StreamOrderUpdatesRequest) returns (stream OrderUpdate) {
-//        option (google.api.http) = {
-//            get: "/v1/orders:stream"
-//        };
-//    }
+    //    rpc StreamOrderUpdates(StreamOrderUpdatesRequest) returns (stream OrderUpdate) {
+    //        option (google.api.http) = {
+    //            get: "/v1/orders:stream"
+    //        };
+    //    }
 
     // ETF LP 시작
     rpc StartEtfLP(StartEtfLPRequest) returns (StartEtfLPResponse) {
@@ -356,20 +356,26 @@ message OrderUpdate {
 
 // ETF LP 설정
 message EtfLPConfig {
+    // ETF 심볼
+    string etf_symbol = 1;
+
+    // 선물 심볼
+    string future_symbol = 2;
+
     // Basis 값
-    double basis = 1;
+    float basis = 3;
 
     // Offset 값
-    double offset = 2;
+    float offset = 4;
 
     // 주문 수량
-    int64 quantity = 3;
+    int64 quantity = 5;
 
     // 호가 깊이 (1~10)
-    int64 depth = 4;
+    int64 depth = 6;
 
     // 호가 단위
-    int64 tick_size = 5;
+    int64 tick_size = 7;
 }
 
 // ETF LP 상태
@@ -438,20 +444,20 @@ message GetEtfLPStatusResponse {
     float etf_ref_price = 6;
 
     // 통계 정보
-//    message Statistics {
-//        // 총 체결 수
-//        int64 total_fills = 1;
-//
-//        // 총 체결 수량
-//        int64 total_volume = 2;
-//
-//        // 평균 스프레드
-//        double avg_spread = 3;
-//
-//        // 수익률
-//        double pnl = 4;
-//    }
-//    Statistics stats = 4;
+    //    message Statistics {
+    //        // 총 체결 수
+    //        int64 total_fills = 1;
+    //
+    //        // 총 체결 수량
+    //        int64 total_volume = 2;
+    //
+    //        // 평균 스프레드
+    //        double avg_spread = 3;
+    //
+    //        // 수익률
+    //        double pnl = 4;
+    //    }
+    //    Statistics stats = 4;
 }
 
 // ETF LP 설정 업데이트 요청

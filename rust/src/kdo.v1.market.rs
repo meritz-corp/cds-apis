@@ -287,22 +287,28 @@ pub mod order_update {
 }
 /// ETF LP 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfLpConfig {
+    /// ETF 심볼
+    #[prost(string, tag="1")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    /// 선물 심볼
+    #[prost(string, tag="2")]
+    pub future_symbol: ::prost::alloc::string::String,
     /// Basis 값
-    #[prost(double, tag="1")]
-    pub basis: f64,
+    #[prost(float, tag="3")]
+    pub basis: f32,
     /// Offset 값
-    #[prost(double, tag="2")]
-    pub offset: f64,
+    #[prost(float, tag="4")]
+    pub offset: f32,
     /// 주문 수량
-    #[prost(int64, tag="3")]
+    #[prost(int64, tag="5")]
     pub quantity: i64,
     /// 호가 깊이 (1~10)
-    #[prost(int64, tag="4")]
+    #[prost(int64, tag="6")]
     pub depth: i64,
     /// 호가 단위
-    #[prost(int64, tag="5")]
+    #[prost(int64, tag="7")]
     pub tick_size: i64,
 }
 /// ETF LP 시작 요청
@@ -356,7 +362,7 @@ pub struct GetEtfLpStatusRequest {
 }
 /// ETF LP 상태 조회 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEtfLpStatusResponse {
     /// LP 상태
     #[prost(enumeration="EtfLpStatus", tag="1")]

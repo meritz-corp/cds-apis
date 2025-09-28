@@ -332,14 +332,22 @@
     "marketEtfLPConfig": {
       "type": "object",
       "properties": {
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "futureSymbol": {
+          "type": "string",
+          "title": "선물 심볼"
+        },
         "basis": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "title": "Basis 값"
         },
         "offset": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "title": "Offset 값"
         },
         "quantity": {

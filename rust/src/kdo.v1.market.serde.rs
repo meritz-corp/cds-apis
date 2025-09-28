@@ -393,6 +393,12 @@ impl serde::Serialize for EtfLpConfig {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if !self.etf_symbol.is_empty() {
+            len += 1;
+        }
+        if !self.future_symbol.is_empty() {
+            len += 1;
+        }
         if self.basis != 0. {
             len += 1;
         }
@@ -409,6 +415,12 @@ impl serde::Serialize for EtfLpConfig {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.EtfLPConfig", len)?;
+        if !self.etf_symbol.is_empty() {
+            struct_ser.serialize_field("etfSymbol", &self.etf_symbol)?;
+        }
+        if !self.future_symbol.is_empty() {
+            struct_ser.serialize_field("futureSymbol", &self.future_symbol)?;
+        }
         if self.basis != 0. {
             struct_ser.serialize_field("basis", &self.basis)?;
         }
@@ -440,6 +452,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "etf_symbol",
+            "etfSymbol",
+            "future_symbol",
+            "futureSymbol",
             "basis",
             "offset",
             "quantity",
@@ -450,6 +466,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            EtfSymbol,
+            FutureSymbol,
             Basis,
             Offset,
             Quantity,
@@ -476,6 +494,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                         E: serde::de::Error,
                     {
                         match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
                             "basis" => Ok(GeneratedField::Basis),
                             "offset" => Ok(GeneratedField::Offset),
                             "quantity" => Ok(GeneratedField::Quantity),
@@ -500,6 +520,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut etf_symbol__ = None;
+                let mut future_symbol__ = None;
                 let mut basis__ = None;
                 let mut offset__ = None;
                 let mut quantity__ = None;
@@ -507,6 +529,18 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                 let mut tick_size__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FutureSymbol => {
+                            if future_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futureSymbol"));
+                            }
+                            future_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::Basis => {
                             if basis__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("basis"));
@@ -550,6 +584,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                     }
                 }
                 Ok(EtfLpConfig {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    future_symbol: future_symbol__.unwrap_or_default(),
                     basis: basis__.unwrap_or_default(),
                     offset: offset__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
