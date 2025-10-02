@@ -1083,6 +1083,9 @@ impl serde::Serialize for FuturesOrderbookData {
         if self.bid_quote_total_quantity != 0 {
             len += 1;
         }
+        if self.mid_price != 0. {
+            len += 1;
+        }
         if self.est_price != 0. {
             len += 1;
         }
@@ -1120,6 +1123,9 @@ impl serde::Serialize for FuturesOrderbookData {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("bidQuoteTotalQuantity", ToString::to_string(&self.bid_quote_total_quantity).as_str())?;
+        }
+        if self.mid_price != 0. {
+            struct_ser.serialize_field("midPrice", &self.mid_price)?;
         }
         if self.est_price != 0. {
             struct_ser.serialize_field("estPrice", &self.est_price)?;
@@ -1160,6 +1166,8 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
             "askQuoteTotalQuantity",
             "bid_quote_total_quantity",
             "bidQuoteTotalQuantity",
+            "mid_price",
+            "midPrice",
             "est_price",
             "estPrice",
             "est_volume",
@@ -1178,6 +1186,7 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
             AskCounts,
             AskQuoteTotalQuantity,
             BidQuoteTotalQuantity,
+            MidPrice,
             EstPrice,
             EstVolume,
             SessionId,
@@ -1210,6 +1219,7 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
                             "askCounts" | "ask_counts" => Ok(GeneratedField::AskCounts),
                             "askQuoteTotalQuantity" | "ask_quote_total_quantity" => Ok(GeneratedField::AskQuoteTotalQuantity),
                             "bidQuoteTotalQuantity" | "bid_quote_total_quantity" => Ok(GeneratedField::BidQuoteTotalQuantity),
+                            "midPrice" | "mid_price" => Ok(GeneratedField::MidPrice),
                             "estPrice" | "est_price" => Ok(GeneratedField::EstPrice),
                             "estVolume" | "est_volume" => Ok(GeneratedField::EstVolume),
                             "sessionId" | "session_id" => Ok(GeneratedField::SessionId),
@@ -1240,6 +1250,7 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
                 let mut ask_counts__ = None;
                 let mut ask_quote_total_quantity__ = None;
                 let mut bid_quote_total_quantity__ = None;
+                let mut mid_price__ = None;
                 let mut est_price__ = None;
                 let mut est_volume__ = None;
                 let mut session_id__ = None;
@@ -1315,6 +1326,14 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::MidPrice => {
+                            if mid_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("midPrice"));
+                            }
+                            mid_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::EstPrice => {
                             if est_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("estPrice"));
@@ -1348,6 +1367,7 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
                     ask_counts: ask_counts__.unwrap_or_default(),
                     ask_quote_total_quantity: ask_quote_total_quantity__.unwrap_or_default(),
                     bid_quote_total_quantity: bid_quote_total_quantity__.unwrap_or_default(),
+                    mid_price: mid_price__.unwrap_or_default(),
                     est_price: est_price__.unwrap_or_default(),
                     est_volume: est_volume__.unwrap_or_default(),
                     session_id: session_id__.unwrap_or_default(),
@@ -1471,7 +1491,7 @@ impl serde::Serialize for GetEtfLpStatusResponse {
         if self.future_price != 0. {
             len += 1;
         }
-        if self.etf_ref_price != 0. {
+        if self.etf_theo_price != 0. {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.GetEtfLPStatusResponse", len)?;
@@ -1496,8 +1516,8 @@ impl serde::Serialize for GetEtfLpStatusResponse {
         if self.future_price != 0. {
             struct_ser.serialize_field("futurePrice", &self.future_price)?;
         }
-        if self.etf_ref_price != 0. {
-            struct_ser.serialize_field("etfRefPrice", &self.etf_ref_price)?;
+        if self.etf_theo_price != 0. {
+            struct_ser.serialize_field("etfTheoPrice", &self.etf_theo_price)?;
         }
         struct_ser.end()
     }
@@ -1517,8 +1537,8 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
             "etfPrice",
             "future_price",
             "futurePrice",
-            "etf_ref_price",
-            "etfRefPrice",
+            "etf_theo_price",
+            "etfTheoPrice",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1528,7 +1548,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
             StartedAt,
             EtfPrice,
             FuturePrice,
-            EtfRefPrice,
+            EtfTheoPrice,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1555,7 +1575,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                             "startedAt" | "started_at" => Ok(GeneratedField::StartedAt),
                             "etfPrice" | "etf_price" => Ok(GeneratedField::EtfPrice),
                             "futurePrice" | "future_price" => Ok(GeneratedField::FuturePrice),
-                            "etfRefPrice" | "etf_ref_price" => Ok(GeneratedField::EtfRefPrice),
+                            "etfTheoPrice" | "etf_theo_price" => Ok(GeneratedField::EtfTheoPrice),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -1580,7 +1600,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                 let mut started_at__ = None;
                 let mut etf_price__ = None;
                 let mut future_price__ = None;
-                let mut etf_ref_price__ = None;
+                let mut etf_theo_price__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Status => {
@@ -1619,11 +1639,11 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::EtfRefPrice => {
-                            if etf_ref_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etfRefPrice"));
+                        GeneratedField::EtfTheoPrice => {
+                            if etf_theo_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfTheoPrice"));
                             }
-                            etf_ref_price__ = 
+                            etf_theo_price__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1635,7 +1655,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusResponse {
                     started_at: started_at__.unwrap_or_default(),
                     etf_price: etf_price__.unwrap_or_default(),
                     future_price: future_price__.unwrap_or_default(),
-                    etf_ref_price: etf_ref_price__.unwrap_or_default(),
+                    etf_theo_price: etf_theo_price__.unwrap_or_default(),
                 })
             }
         }

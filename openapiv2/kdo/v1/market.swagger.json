@@ -535,6 +535,11 @@
           "format": "int64",
           "title": "총 매수 호가 수량"
         },
+        "midPrice": {
+          "type": "number",
+          "format": "float",
+          "title": "중간 가격"
+        },
         "estPrice": {
           "type": "number",
           "format": "float",
@@ -576,7 +581,7 @@
           "type": "number",
           "format": "float"
         },
-        "etfRefPrice": {
+        "etfTheoPrice": {
           "type": "number",
           "format": "float"
         }

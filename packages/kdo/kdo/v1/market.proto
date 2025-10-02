@@ -208,14 +208,17 @@ message FuturesOrderbookData {
     // 총 매수 호가 수량
     int64 bid_quote_total_quantity = 8;
 
+    // 중간 가격
+    float mid_price = 9;
+
     // 예상 가격
-    float est_price = 9;
+    float est_price = 10;
 
     // 예상 거래량
-    int64 est_volume = 10;
+    int64 est_volume = 11;
 
     // 세션 ID
-    SessionId session_id = 11;
+    SessionId session_id = 12;
 }
 
 // 주문 타입 열거형
@@ -446,7 +449,7 @@ message GetEtfLPStatusResponse {
 
     float future_price = 5;
 
-    float etf_ref_price = 6;
+    float etf_theo_price = 6;
 
     // 통계 정보
     //    message Statistics {

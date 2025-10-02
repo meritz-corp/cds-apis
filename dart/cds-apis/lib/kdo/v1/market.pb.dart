@@ -335,6 +335,7 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
     $core.Iterable<$fixnum.Int64>? askCounts,
     $fixnum.Int64? askQuoteTotalQuantity,
     $fixnum.Int64? bidQuoteTotalQuantity,
+    $core.double? midPrice,
     $core.double? estPrice,
     $fixnum.Int64? estVolume,
     SessionId? sessionId,
@@ -348,6 +349,7 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
     if (askCounts != null) result.askCounts.addAll(askCounts);
     if (askQuoteTotalQuantity != null) result.askQuoteTotalQuantity = askQuoteTotalQuantity;
     if (bidQuoteTotalQuantity != null) result.bidQuoteTotalQuantity = bidQuoteTotalQuantity;
+    if (midPrice != null) result.midPrice = midPrice;
     if (estPrice != null) result.estPrice = estPrice;
     if (estVolume != null) result.estVolume = estVolume;
     if (sessionId != null) result.sessionId = sessionId;
@@ -368,9 +370,10 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
     ..p<$fixnum.Int64>(6, _omitFieldNames ? '' : 'askCounts', $pb.PbFieldType.K6)
     ..aInt64(7, _omitFieldNames ? '' : 'askQuoteTotalQuantity')
     ..aInt64(8, _omitFieldNames ? '' : 'bidQuoteTotalQuantity')
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'estPrice', $pb.PbFieldType.OF)
-    ..aInt64(10, _omitFieldNames ? '' : 'estVolume')
-    ..e<SessionId>(11, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: SessionId.SESSION_ID_UNSPECIFIED, valueOf: SessionId.valueOf, enumValues: SessionId.values)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'midPrice', $pb.PbFieldType.OF)
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'estPrice', $pb.PbFieldType.OF)
+    ..aInt64(11, _omitFieldNames ? '' : 'estVolume')
+    ..e<SessionId>(12, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: SessionId.SESSION_ID_UNSPECIFIED, valueOf: SessionId.valueOf, enumValues: SessionId.values)
     ..hasRequiredFields = false
   ;
 
@@ -435,35 +438,45 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearBidQuoteTotalQuantity() => $_clearField(8);
 
+  /// 중간 가격
+  @$pb.TagNumber(9)
+  $core.double get midPrice => $_getN(8);
+  @$pb.TagNumber(9)
+  set midPrice($core.double value) => $_setFloat(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasMidPrice() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearMidPrice() => $_clearField(9);
+
   /// 예상 가격
-  @$pb.TagNumber(9)
-  $core.double get estPrice => $_getN(8);
-  @$pb.TagNumber(9)
-  set estPrice($core.double value) => $_setFloat(8, value);
-  @$pb.TagNumber(9)
-  $core.bool hasEstPrice() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearEstPrice() => $_clearField(9);
+  @$pb.TagNumber(10)
+  $core.double get estPrice => $_getN(9);
+  @$pb.TagNumber(10)
+  set estPrice($core.double value) => $_setFloat(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasEstPrice() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearEstPrice() => $_clearField(10);
 
   /// 예상 거래량
-  @$pb.TagNumber(10)
-  $fixnum.Int64 get estVolume => $_getI64(9);
-  @$pb.TagNumber(10)
-  set estVolume($fixnum.Int64 value) => $_setInt64(9, value);
-  @$pb.TagNumber(10)
-  $core.bool hasEstVolume() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearEstVolume() => $_clearField(10);
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get estVolume => $_getI64(10);
+  @$pb.TagNumber(11)
+  set estVolume($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasEstVolume() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearEstVolume() => $_clearField(11);
 
   /// 세션 ID
-  @$pb.TagNumber(11)
-  SessionId get sessionId => $_getN(10);
-  @$pb.TagNumber(11)
-  set sessionId(SessionId value) => $_setField(11, value);
-  @$pb.TagNumber(11)
-  $core.bool hasSessionId() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearSessionId() => $_clearField(11);
+  @$pb.TagNumber(12)
+  SessionId get sessionId => $_getN(11);
+  @$pb.TagNumber(12)
+  set sessionId(SessionId value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasSessionId() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearSessionId() => $_clearField(12);
 }
 
 /// 주문 정보
@@ -1671,7 +1684,7 @@ class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
     $fixnum.Int64? startedAt,
     $fixnum.Int64? etfPrice,
     $core.double? futurePrice,
-    $core.double? etfRefPrice,
+    $core.double? etfTheoPrice,
   }) {
     final result = create();
     if (status != null) result.status = status;
@@ -1679,7 +1692,7 @@ class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
     if (startedAt != null) result.startedAt = startedAt;
     if (etfPrice != null) result.etfPrice = etfPrice;
     if (futurePrice != null) result.futurePrice = futurePrice;
-    if (etfRefPrice != null) result.etfRefPrice = etfRefPrice;
+    if (etfTheoPrice != null) result.etfTheoPrice = etfTheoPrice;
     return result;
   }
 
@@ -1694,7 +1707,7 @@ class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
     ..aInt64(3, _omitFieldNames ? '' : 'startedAt')
     ..aInt64(4, _omitFieldNames ? '' : 'etfPrice')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'futurePrice', $pb.PbFieldType.OF)
-    ..a<$core.double>(6, _omitFieldNames ? '' : 'etfRefPrice', $pb.PbFieldType.OF)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'etfTheoPrice', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
@@ -1766,13 +1779,13 @@ class GetEtfLPStatusResponse extends $pb.GeneratedMessage {
   void clearFuturePrice() => $_clearField(5);
 
   @$pb.TagNumber(6)
-  $core.double get etfRefPrice => $_getN(5);
+  $core.double get etfTheoPrice => $_getN(5);
   @$pb.TagNumber(6)
-  set etfRefPrice($core.double value) => $_setFloat(5, value);
+  set etfTheoPrice($core.double value) => $_setFloat(5, value);
   @$pb.TagNumber(6)
-  $core.bool hasEtfRefPrice() => $_has(5);
+  $core.bool hasEtfTheoPrice() => $_has(5);
   @$pb.TagNumber(6)
-  void clearEtfRefPrice() => $_clearField(6);
+  void clearEtfTheoPrice() => $_clearField(6);
 }
 
 /// ETF LP 설정 업데이트 요청

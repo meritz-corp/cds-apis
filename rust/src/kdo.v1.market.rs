@@ -97,14 +97,17 @@ pub struct FuturesOrderbookData {
     /// 총 매수 호가 수량
     #[prost(int64, tag="8")]
     pub bid_quote_total_quantity: i64,
-    /// 예상 가격
+    /// 중간 가격
     #[prost(float, tag="9")]
+    pub mid_price: f32,
+    /// 예상 가격
+    #[prost(float, tag="10")]
     pub est_price: f32,
     /// 예상 거래량
-    #[prost(int64, tag="10")]
+    #[prost(int64, tag="11")]
     pub est_volume: i64,
     /// 세션 ID
-    #[prost(enumeration="SessionId", tag="11")]
+    #[prost(enumeration="SessionId", tag="12")]
     pub session_id: i32,
 }
 /// 주문 정보
@@ -386,7 +389,7 @@ pub struct GetEtfLpStatusResponse {
     #[prost(float, tag="5")]
     pub future_price: f32,
     #[prost(float, tag="6")]
-    pub etf_ref_price: f32,
+    pub etf_theo_price: f32,
 }
 /// ETF LP 설정 업데이트 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

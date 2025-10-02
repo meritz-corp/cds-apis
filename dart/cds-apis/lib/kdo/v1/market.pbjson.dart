@@ -173,9 +173,10 @@ const FuturesOrderbookData$json = {
     {'1': 'ask_counts', '3': 6, '4': 3, '5': 3, '10': 'askCounts'},
     {'1': 'ask_quote_total_quantity', '3': 7, '4': 1, '5': 3, '10': 'askQuoteTotalQuantity'},
     {'1': 'bid_quote_total_quantity', '3': 8, '4': 1, '5': 3, '10': 'bidQuoteTotalQuantity'},
-    {'1': 'est_price', '3': 9, '4': 1, '5': 2, '10': 'estPrice'},
-    {'1': 'est_volume', '3': 10, '4': 1, '5': 3, '10': 'estVolume'},
-    {'1': 'session_id', '3': 11, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
+    {'1': 'mid_price', '3': 9, '4': 1, '5': 2, '10': 'midPrice'},
+    {'1': 'est_price', '3': 10, '4': 1, '5': 2, '10': 'estPrice'},
+    {'1': 'est_volume', '3': 11, '4': 1, '5': 3, '10': 'estVolume'},
+    {'1': 'session_id', '3': 12, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
   ],
 };
 
@@ -187,9 +188,9 @@ final $typed_data.Uint8List futuresOrderbookDataDescriptor = $convert.base64Deco
     'JpZF9jb3VudHMYBSADKANSCWJpZENvdW50cxIdCgphc2tfY291bnRzGAYgAygDUglhc2tDb3Vu'
     'dHMSNwoYYXNrX3F1b3RlX3RvdGFsX3F1YW50aXR5GAcgASgDUhVhc2tRdW90ZVRvdGFsUXVhbn'
     'RpdHkSNwoYYmlkX3F1b3RlX3RvdGFsX3F1YW50aXR5GAggASgDUhViaWRRdW90ZVRvdGFsUXVh'
-    'bnRpdHkSGwoJZXN0X3ByaWNlGAkgASgCUghlc3RQcmljZRIdCgplc3Rfdm9sdW1lGAogASgDUg'
-    'llc3RWb2x1bWUSNwoKc2Vzc2lvbl9pZBgLIAEoDjIYLmtkby52MS5tYXJrZXQuU2Vzc2lvbklk'
-    'UglzZXNzaW9uSWQ=');
+    'bnRpdHkSGwoJbWlkX3ByaWNlGAkgASgCUghtaWRQcmljZRIbCgllc3RfcHJpY2UYCiABKAJSCG'
+    'VzdFByaWNlEh0KCmVzdF92b2x1bWUYCyABKANSCWVzdFZvbHVtZRI3CgpzZXNzaW9uX2lkGAwg'
+    'ASgOMhgua2RvLnYxLm1hcmtldC5TZXNzaW9uSWRSCXNlc3Npb25JZA==');
 
 @$core.Deprecated('Use orderDescriptor instead')
 const Order$json = {
@@ -479,7 +480,7 @@ const GetEtfLPStatusResponse$json = {
     {'1': 'started_at', '3': 3, '4': 1, '5': 3, '10': 'startedAt'},
     {'1': 'etf_price', '3': 4, '4': 1, '5': 3, '10': 'etfPrice'},
     {'1': 'future_price', '3': 5, '4': 1, '5': 2, '10': 'futurePrice'},
-    {'1': 'etf_ref_price', '3': 6, '4': 1, '5': 2, '10': 'etfRefPrice'},
+    {'1': 'etf_theo_price', '3': 6, '4': 1, '5': 2, '10': 'etfTheoPrice'},
   ],
 };
 
@@ -489,7 +490,7 @@ final $typed_data.Uint8List getEtfLPStatusResponseDescriptor = $convert.base64De
     'QuRXRmTFBTdGF0dXNSBnN0YXR1cxIyCgZjb25maWcYAiABKAsyGi5rZG8udjEubWFya2V0LkV0'
     'ZkxQQ29uZmlnUgZjb25maWcSHQoKc3RhcnRlZF9hdBgDIAEoA1IJc3RhcnRlZEF0EhsKCWV0Zl'
     '9wcmljZRgEIAEoA1IIZXRmUHJpY2USIQoMZnV0dXJlX3ByaWNlGAUgASgCUgtmdXR1cmVQcmlj'
-    'ZRIiCg1ldGZfcmVmX3ByaWNlGAYgASgCUgtldGZSZWZQcmljZQ==');
+    'ZRIkCg5ldGZfdGhlb19wcmljZRgGIAEoAlIMZXRmVGhlb1ByaWNl');
 
 @$core.Deprecated('Use updateEtfLPConfigRequestDescriptor instead')
 const UpdateEtfLPConfigRequest$json = {
