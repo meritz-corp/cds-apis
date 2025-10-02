@@ -86,6 +86,10 @@
                 "config": {
                   "$ref": "#/definitions/marketEtfLPConfig",
                   "title": "새로운 설정"
+                },
+                "updateMask": {
+                  "type": "string",
+                  "title": "Field mask that specifies the fields to update.\nIf no field mask is set, all fields will be updated.\nWildcards are supported.\nExamples\n[\"*\"]\n[\"config.basis\", \"config.offset\"]\n[\"config.prior_day_etf_nav\", \"config.prior_day_futures_settle\"]"
                 }
               },
               "title": "ETF LP 설정 업데이트 요청"

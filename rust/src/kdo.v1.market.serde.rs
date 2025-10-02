@@ -3750,12 +3750,18 @@ impl serde::Serialize for UpdateEtfLpConfigRequest {
         if self.config.is_some() {
             len += 1;
         }
+        if self.update_mask.is_some() {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.UpdateEtfLPConfigRequest", len)?;
         if !self.etf.is_empty() {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
         if let Some(v) = self.config.as_ref() {
             struct_ser.serialize_field("config", v)?;
+        }
+        if let Some(v) = self.update_mask.as_ref() {
+            struct_ser.serialize_field("updateMask", v)?;
         }
         struct_ser.end()
     }
@@ -3769,12 +3775,15 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpConfigRequest {
         const FIELDS: &[&str] = &[
             "etf",
             "config",
+            "update_mask",
+            "updateMask",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Etf,
             Config,
+            UpdateMask,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -3798,6 +3807,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpConfigRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "config" => Ok(GeneratedField::Config),
+                            "updateMask" | "update_mask" => Ok(GeneratedField::UpdateMask),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -3819,6 +3829,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpConfigRequest {
             {
                 let mut etf__ = None;
                 let mut config__ = None;
+                let mut update_mask__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Etf => {
@@ -3833,11 +3844,18 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpConfigRequest {
                             }
                             config__ = map_.next_value()?;
                         }
+                        GeneratedField::UpdateMask => {
+                            if update_mask__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updateMask"));
+                            }
+                            update_mask__ = map_.next_value()?;
+                        }
                     }
                 }
                 Ok(UpdateEtfLpConfigRequest {
                     etf: etf__.unwrap_or_default(),
                     config: config__,
+                    update_mask: update_mask__,
                 })
             }
         }

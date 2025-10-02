@@ -407,6 +407,15 @@ pub struct UpdateEtfLpConfigRequest {
     /// 새로운 설정
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<EtfLpConfig>,
+    /// Field mask that specifies the fields to update.
+    /// If no field mask is set, all fields will be updated.
+    /// Wildcards are supported.
+    /// Examples
+    /// \["*"\]
+    /// \["config.basis", "config.offset"\]
+    /// \["config.prior_day_etf_nav", "config.prior_day_futures_settle"\]
+    #[prost(message, optional, tag="3")]
+    pub update_mask: ::core::option::Option<super::super::super::google::protobuf::FieldMask>,
 }
 /// ETF LP 설정 업데이트 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

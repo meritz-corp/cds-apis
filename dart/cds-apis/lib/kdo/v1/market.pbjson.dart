@@ -502,13 +502,15 @@ const UpdateEtfLPConfigRequest$json = {
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
     {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.market.EtfLPConfig', '10': 'config'},
+    {'1': 'update_mask', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.FieldMask', '10': 'updateMask'},
   ],
 };
 
 /// Descriptor for `UpdateEtfLPConfigRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateEtfLPConfigRequestDescriptor = $convert.base64Decode(
     'ChhVcGRhdGVFdGZMUENvbmZpZ1JlcXVlc3QSEAoDZXRmGAEgASgJUgNldGYSMgoGY29uZmlnGA'
-    'IgASgLMhoua2RvLnYxLm1hcmtldC5FdGZMUENvbmZpZ1IGY29uZmln');
+    'IgASgLMhoua2RvLnYxLm1hcmtldC5FdGZMUENvbmZpZ1IGY29uZmlnEjsKC3VwZGF0ZV9tYXNr'
+    'GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFza1IKdXBkYXRlTWFzaw==');
 
 @$core.Deprecated('Use updateEtfLPConfigResponseDescriptor instead')
 const UpdateEtfLPConfigResponse$json = {

@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../google/protobuf/field_mask.pb.dart' as $1;
 import 'market.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -1819,10 +1820,12 @@ class UpdateEtfLPConfigRequest extends $pb.GeneratedMessage {
   factory UpdateEtfLPConfigRequest({
     $core.String? etf,
     EtfLPConfig? config,
+    $1.FieldMask? updateMask,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
     if (config != null) result.config = config;
+    if (updateMask != null) result.updateMask = updateMask;
     return result;
   }
 
@@ -1834,6 +1837,7 @@ class UpdateEtfLPConfigRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfLPConfigRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOM<EtfLPConfig>(2, _omitFieldNames ? '' : 'config', subBuilder: EtfLPConfig.create)
+    ..aOM<$1.FieldMask>(3, _omitFieldNames ? '' : 'updateMask', subBuilder: $1.FieldMask.create)
     ..hasRequiredFields = false
   ;
 
@@ -1875,6 +1879,24 @@ class UpdateEtfLPConfigRequest extends $pb.GeneratedMessage {
   void clearConfig() => $_clearField(2);
   @$pb.TagNumber(2)
   EtfLPConfig ensureConfig() => $_ensure(1);
+
+  /// Field mask that specifies the fields to update.
+  /// If no field mask is set, all fields will be updated.
+  /// Wildcards are supported.
+  /// Examples
+  /// ["*"]
+  /// ["config.basis", "config.offset"]
+  /// ["config.prior_day_etf_nav", "config.prior_day_futures_settle"]
+  @$pb.TagNumber(3)
+  $1.FieldMask get updateMask => $_getN(2);
+  @$pb.TagNumber(3)
+  set updateMask($1.FieldMask value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUpdateMask() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdateMask() => $_clearField(3);
+  @$pb.TagNumber(3)
+  $1.FieldMask ensureUpdateMask() => $_ensure(2);
 }
 
 /// ETF LP 설정 업데이트 응답

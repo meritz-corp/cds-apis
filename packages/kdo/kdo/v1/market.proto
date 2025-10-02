@@ -3,6 +3,7 @@ syntax = "proto3";
 package kdo.v1.market;
 
 import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -386,10 +387,10 @@ message EtfLPConfig {
     int64 tick_size = 7;
 
     // 전일 ETF 순자산가치
-    float  prior_day_etf_nav = 8;
+    float prior_day_etf_nav = 8;
 
     // 전일 선물 종가
-    float  prior_day_futures_settle = 9;
+    float prior_day_futures_settle = 9;
 }
 
 // ETF LP 상태
@@ -482,8 +483,14 @@ message UpdateEtfLPConfigRequest {
     // 새로운 설정
     EtfLPConfig config = 2;
 
-    // 업데이트할 필드 마스크 (AIP-134)
-    // google.protobuf.FieldMask update_mask = 3;
+    // Field mask that specifies the fields to update.
+    // If no field mask is set, all fields will be updated.
+    // Wildcards are supported.
+    // Examples
+    // ["*"]
+    // ["config.basis", "config.offset"]
+    // ["config.prior_day_etf_nav", "config.prior_day_futures_settle"]
+    google.protobuf.FieldMask update_mask = 3;
 }
 
 // ETF LP 설정 업데이트 응답
