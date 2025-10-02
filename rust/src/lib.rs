@@ -1,6 +1,6 @@
 pub mod google {
     pub mod protobuf {
-        pub use pbjson_types::Timestamp;
+        pub use pbjson_types::{FieldMask, Timestamp};
     }
 }
 
@@ -17,6 +17,8 @@ pub mod log_sync {
 
 pub mod kdo {
     pub mod v1 {
-        include!("kdo.v1.market.rs");
+        pub mod market {
+            include!("kdo.v1.market.rs");
+        }
     }
 }
