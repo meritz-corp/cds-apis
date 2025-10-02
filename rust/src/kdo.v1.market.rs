@@ -321,6 +321,12 @@ pub struct EtfLpConfig {
     /// 호가 단위
     #[prost(int64, tag="7")]
     pub tick_size: i64,
+    /// 전일 ETF 순자산가치
+    #[prost(float, tag="8")]
+    pub prior_day_etf_nav: f32,
+    /// 전일 선물 종가
+    #[prost(float, tag="9")]
+    pub prior_day_futures_settle: f32,
 }
 /// ETF LP 시작 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

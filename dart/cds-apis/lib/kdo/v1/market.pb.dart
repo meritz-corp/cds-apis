@@ -1275,6 +1275,8 @@ class EtfLPConfig extends $pb.GeneratedMessage {
     $fixnum.Int64? quantity,
     $fixnum.Int64? depth,
     $fixnum.Int64? tickSize,
+    $core.double? priorDayEtfNav,
+    $core.double? priorDayFuturesSettle,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -1284,6 +1286,8 @@ class EtfLPConfig extends $pb.GeneratedMessage {
     if (quantity != null) result.quantity = quantity;
     if (depth != null) result.depth = depth;
     if (tickSize != null) result.tickSize = tickSize;
+    if (priorDayEtfNav != null) result.priorDayEtfNav = priorDayEtfNav;
+    if (priorDayFuturesSettle != null) result.priorDayFuturesSettle = priorDayFuturesSettle;
     return result;
   }
 
@@ -1300,6 +1304,8 @@ class EtfLPConfig extends $pb.GeneratedMessage {
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aInt64(6, _omitFieldNames ? '' : 'depth')
     ..aInt64(7, _omitFieldNames ? '' : 'tickSize')
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'priorDayEtfNav', $pb.PbFieldType.OF)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'priorDayFuturesSettle', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
@@ -1393,6 +1399,26 @@ class EtfLPConfig extends $pb.GeneratedMessage {
   $core.bool hasTickSize() => $_has(6);
   @$pb.TagNumber(7)
   void clearTickSize() => $_clearField(7);
+
+  /// 전일 ETF 순자산가치
+  @$pb.TagNumber(8)
+  $core.double get priorDayEtfNav => $_getN(7);
+  @$pb.TagNumber(8)
+  set priorDayEtfNav($core.double value) => $_setFloat(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasPriorDayEtfNav() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearPriorDayEtfNav() => $_clearField(8);
+
+  /// 전일 선물 종가
+  @$pb.TagNumber(9)
+  $core.double get priorDayFuturesSettle => $_getN(8);
+  @$pb.TagNumber(9)
+  set priorDayFuturesSettle($core.double value) => $_setFloat(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasPriorDayFuturesSettle() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearPriorDayFuturesSettle() => $_clearField(9);
 }
 
 /// ETF LP 시작 요청

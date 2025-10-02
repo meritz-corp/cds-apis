@@ -414,6 +414,12 @@ impl serde::Serialize for EtfLpConfig {
         if self.tick_size != 0 {
             len += 1;
         }
+        if self.prior_day_etf_nav != 0. {
+            len += 1;
+        }
+        if self.prior_day_futures_settle != 0. {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.EtfLPConfig", len)?;
         if let Some(v) = self.etf_symbol.as_ref() {
             struct_ser.serialize_field("etfSymbol", v)?;
@@ -442,6 +448,12 @@ impl serde::Serialize for EtfLpConfig {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("tickSize", ToString::to_string(&self.tick_size).as_str())?;
         }
+        if self.prior_day_etf_nav != 0. {
+            struct_ser.serialize_field("priorDayEtfNav", &self.prior_day_etf_nav)?;
+        }
+        if self.prior_day_futures_settle != 0. {
+            struct_ser.serialize_field("priorDayFuturesSettle", &self.prior_day_futures_settle)?;
+        }
         struct_ser.end()
     }
 }
@@ -462,6 +474,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
             "depth",
             "tick_size",
             "tickSize",
+            "prior_day_etf_nav",
+            "priorDayEtfNav",
+            "prior_day_futures_settle",
+            "priorDayFuturesSettle",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -473,6 +489,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
             Quantity,
             Depth,
             TickSize,
+            PriorDayEtfNav,
+            PriorDayFuturesSettle,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -501,6 +519,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                             "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
+                            "priorDayEtfNav" | "prior_day_etf_nav" => Ok(GeneratedField::PriorDayEtfNav),
+                            "priorDayFuturesSettle" | "prior_day_futures_settle" => Ok(GeneratedField::PriorDayFuturesSettle),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -527,6 +547,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                 let mut quantity__ = None;
                 let mut depth__ = None;
                 let mut tick_size__ = None;
+                let mut prior_day_etf_nav__ = None;
+                let mut prior_day_futures_settle__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -581,6 +603,22 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PriorDayEtfNav => {
+                            if prior_day_etf_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priorDayEtfNav"));
+                            }
+                            prior_day_etf_nav__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PriorDayFuturesSettle => {
+                            if prior_day_futures_settle__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priorDayFuturesSettle"));
+                            }
+                            prior_day_futures_settle__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                     }
                 }
                 Ok(EtfLpConfig {
@@ -591,6 +629,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpConfig {
                     quantity: quantity__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
+                    prior_day_etf_nav: prior_day_etf_nav__.unwrap_or_default(),
+                    prior_day_futures_settle: prior_day_futures_settle__.unwrap_or_default(),
                 })
             }
         }

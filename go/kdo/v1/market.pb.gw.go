@@ -521,7 +521,7 @@ func RegisterMarketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.market.MarketService/UpdateEtfLPConfig", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/lp:config"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.market.MarketService/UpdateEtfLPConfig", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/lp/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -717,7 +717,7 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/UpdateEtfLPConfig", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/lp:config"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/UpdateEtfLPConfig", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/lp/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -749,7 +749,7 @@ var (
 
 	pattern_MarketService_StreamEtfLPStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "lp"}, "stream"))
 
-	pattern_MarketService_UpdateEtfLPConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "lp"}, "config"))
+	pattern_MarketService_UpdateEtfLPConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 2, 4}, []string{"v1", "etfs", "etf", "lp", "config"}, ""))
 )
 
 var (

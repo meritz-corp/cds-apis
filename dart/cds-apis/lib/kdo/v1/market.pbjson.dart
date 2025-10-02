@@ -394,6 +394,8 @@ const EtfLPConfig$json = {
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'depth', '3': 6, '4': 1, '5': 3, '10': 'depth'},
     {'1': 'tick_size', '3': 7, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'prior_day_etf_nav', '3': 8, '4': 1, '5': 2, '10': 'priorDayEtfNav'},
+    {'1': 'prior_day_futures_settle', '3': 9, '4': 1, '5': 2, '10': 'priorDayFuturesSettle'},
   ],
 };
 
@@ -403,7 +405,9 @@ final $typed_data.Uint8List etfLPConfigDescriptor = $convert.base64Decode(
     'xSCWV0ZlN5bWJvbBI6Cg1mdXR1cmVfc3ltYm9sGAIgASgLMhUua2RvLnYxLm1hcmtldC5TeW1i'
     'b2xSDGZ1dHVyZVN5bWJvbBIUCgViYXNpcxgDIAEoAlIFYmFzaXMSFgoGb2Zmc2V0GAQgASgCUg'
     'ZvZmZzZXQSGgoIcXVhbnRpdHkYBSABKANSCHF1YW50aXR5EhQKBWRlcHRoGAYgASgDUgVkZXB0'
-    'aBIbCgl0aWNrX3NpemUYByABKANSCHRpY2tTaXpl');
+    'aBIbCgl0aWNrX3NpemUYByABKANSCHRpY2tTaXplEikKEXByaW9yX2RheV9ldGZfbmF2GAggAS'
+    'gCUg5wcmlvckRheUV0Zk5hdhI3Chhwcmlvcl9kYXlfZnV0dXJlc19zZXR0bGUYCSABKAJSFXBy'
+    'aW9yRGF5RnV0dXJlc1NldHRsZQ==');
 
 @$core.Deprecated('Use startEtfLPRequestDescriptor instead')
 const StartEtfLPRequest$json = {

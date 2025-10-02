@@ -49,7 +49,7 @@
         ]
       }
     },
-    "/v1/{etf}/lp:config": {
+    "/v1/{etf}/lp/config": {
       "patch": {
         "summary": "ETF LP 설정 업데이트",
         "operationId": "MarketService_UpdateEtfLPConfig",
@@ -364,6 +364,16 @@
           "type": "string",
           "format": "int64",
           "title": "호가 단위"
+        },
+        "priorDayEtfNav": {
+          "type": "number",
+          "format": "float",
+          "title": "전일 ETF 순자산가치"
+        },
+        "priorDayFuturesSettle": {
+          "type": "number",
+          "format": "float",
+          "title": "전일 선물 종가"
         }
       },
       "title": "ETF LP 설정"

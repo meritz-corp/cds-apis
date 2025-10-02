@@ -92,7 +92,7 @@ service MarketService {
     // ETF LP 설정 업데이트
     rpc UpdateEtfLPConfig(UpdateEtfLPConfigRequest) returns (UpdateEtfLPConfigResponse) {
         option (google.api.http) = {
-            patch: "/v1/{etf=etfs/*}/lp:config"
+            patch: "/v1/{etf=etfs/*}/lp/config"
             body: "*"
         };
     }
@@ -384,6 +384,12 @@ message EtfLPConfig {
 
     // 호가 단위
     int64 tick_size = 7;
+
+    // 전일 ETF 순자산가치
+    float  prior_day_etf_nav = 8;
+
+    // 전일 선물 종가
+    float  prior_day_futures_settle = 9;
 }
 
 // ETF LP 상태
