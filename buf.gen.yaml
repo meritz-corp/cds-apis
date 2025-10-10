@@ -41,6 +41,7 @@ plugins:
     out: dart/cds-apis/lib
     opt:
         - grpc
+        - export_library=true
 
 #  - plugin: buf.build/community/neoeinstein-tonic:v0.3.0
 #    out: gen/src
