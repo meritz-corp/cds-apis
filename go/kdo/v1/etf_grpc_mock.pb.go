@@ -337,6 +337,46 @@ func (mr *MockEtfServiceClientMockRecorder) ListEtfs(ctx, in interface{}, opts .
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfs", reflect.TypeOf((*MockEtfServiceClient)(nil).ListEtfs), varargs...)
 }
 
+// StartEtfLp mocks base method.
+func (m *MockEtfServiceClient) StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StartEtfLp", varargs...)
+	ret0, _ := ret[0].(*StartEtfLpResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StartEtfLp indicates an expected call of StartEtfLp.
+func (mr *MockEtfServiceClientMockRecorder) StartEtfLp(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StartEtfLp", reflect.TypeOf((*MockEtfServiceClient)(nil).StartEtfLp), varargs...)
+}
+
+// StopEtfLp mocks base method.
+func (m *MockEtfServiceClient) StopEtfLp(ctx context.Context, in *StopEtfLpRequest, opts ...grpc.CallOption) (*StopEtfLpResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StopEtfLp", varargs...)
+	ret0, _ := ret[0].(*StopEtfLpResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopEtfLp indicates an expected call of StopEtfLp.
+func (mr *MockEtfServiceClientMockRecorder) StopEtfLp(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopEtfLp", reflect.TypeOf((*MockEtfServiceClient)(nil).StopEtfLp), varargs...)
+}
+
 // StreamEtfLpStatus mocks base method.
 func (m *MockEtfServiceClient) StreamEtfLpStatus(ctx context.Context, in *StreamEtfLpStatusRequest, opts ...grpc.CallOption) (EtfService_StreamEtfLpStatusClient, error) {
 	m.ctrl.T.Helper()
@@ -443,6 +483,36 @@ func (m *MockEtfServiceServer) ListEtfs(ctx context.Context, in *ListEtfsRequest
 func (mr *MockEtfServiceServerMockRecorder) ListEtfs(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfs", reflect.TypeOf((*MockEtfServiceServer)(nil).ListEtfs), ctx, in)
+}
+
+// StartEtfLp mocks base method.
+func (m *MockEtfServiceServer) StartEtfLp(ctx context.Context, in *StartEtfLpRequest) (*StartEtfLpResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StartEtfLp", ctx, in)
+	ret0, _ := ret[0].(*StartEtfLpResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StartEtfLp indicates an expected call of StartEtfLp.
+func (mr *MockEtfServiceServerMockRecorder) StartEtfLp(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StartEtfLp", reflect.TypeOf((*MockEtfServiceServer)(nil).StartEtfLp), ctx, in)
+}
+
+// StopEtfLp mocks base method.
+func (m *MockEtfServiceServer) StopEtfLp(ctx context.Context, in *StopEtfLpRequest) (*StopEtfLpResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StopEtfLp", ctx, in)
+	ret0, _ := ret[0].(*StopEtfLpResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopEtfLp indicates an expected call of StopEtfLp.
+func (mr *MockEtfServiceServerMockRecorder) StopEtfLp(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopEtfLp", reflect.TypeOf((*MockEtfServiceServer)(nil).StopEtfLp), ctx, in)
 }
 
 // StreamEtfLpStatus mocks base method.

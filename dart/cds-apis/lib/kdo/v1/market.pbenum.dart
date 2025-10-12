@@ -102,28 +102,6 @@ class OrderStatus extends $pb.ProtobufEnum {
   const OrderStatus._(super.value, super.name);
 }
 
-/// ETF LP 상태
-class EtfLPStatus extends $pb.ProtobufEnum {
-  static const EtfLPStatus ETF_LP_STATUS_UNSPECIFIED = EtfLPStatus._(0, _omitEnumNames ? '' : 'ETF_LP_STATUS_UNSPECIFIED');
-  static const EtfLPStatus STOPPED = EtfLPStatus._(1, _omitEnumNames ? '' : 'STOPPED');
-  static const EtfLPStatus STARTING = EtfLPStatus._(2, _omitEnumNames ? '' : 'STARTING');
-  static const EtfLPStatus RUNNING = EtfLPStatus._(3, _omitEnumNames ? '' : 'RUNNING');
-  static const EtfLPStatus ERROR = EtfLPStatus._(4, _omitEnumNames ? '' : 'ERROR');
-
-  static const $core.List<EtfLPStatus> values = <EtfLPStatus> [
-    ETF_LP_STATUS_UNSPECIFIED,
-    STOPPED,
-    STARTING,
-    RUNNING,
-    ERROR,
-  ];
-
-  static final $core.List<EtfLPStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
-  static EtfLPStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const EtfLPStatus._(super.value, super.name);
-}
-
 /// 업데이트 타입
 class OrderUpdate_UpdateType extends $pb.ProtobufEnum {
   static const OrderUpdate_UpdateType UPDATE_TYPE_UNSPECIFIED = OrderUpdate_UpdateType._(0, _omitEnumNames ? '' : 'UPDATE_TYPE_UNSPECIFIED');

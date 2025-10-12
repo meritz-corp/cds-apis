@@ -411,3 +411,56 @@ final $typed_data.Uint8List streamEtfLpStatusRequestDescriptor = $convert.base64
     'RzYXBpcy54eXovRXRmUgNldGYSOwoXdXBkYXRlX2ludGVydmFsX3NlY29uZHMYAiABKA1IAFIV'
     'dXBkYXRlSW50ZXJ2YWxTZWNvbmRziAEBQhoKGF91cGRhdGVfaW50ZXJ2YWxfc2Vjb25kcw==');
 
+@$core.Deprecated('Use startEtfLpRequestDescriptor instead')
+const StartEtfLpRequest$json = {
+  '1': 'StartEtfLpRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+  ],
+};
+
+/// Descriptor for `StartEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startEtfLpRequestDescriptor = $convert.base64Decode(
+    'ChFTdGFydEV0ZkxwUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZHNhcGlzLn'
+    'h5ei9FdGZSA2V0Zg==');
+
+@$core.Deprecated('Use startEtfLpResponseDescriptor instead')
+const StartEtfLpResponse$json = {
+  '1': 'StartEtfLpResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfLpStatus', '10': 'status'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `StartEtfLpResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startEtfLpResponseDescriptor = $convert.base64Decode(
+    'ChJTdGFydEV0ZkxwUmVzcG9uc2USLwoGc3RhdHVzGAEgASgLMhcua2RvLnYxLmV0Zi5FdGZMcF'
+    'N0YXR1c1IGc3RhdHVzEhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2U=');
+
+@$core.Deprecated('Use stopEtfLpRequestDescriptor instead')
+const StopEtfLpRequest$json = {
+  '1': 'StopEtfLpRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
+  ],
+};
+
+/// Descriptor for `StopEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopEtfLpRequestDescriptor = $convert.base64Decode(
+    'ChBTdG9wRXRmTHBSZXF1ZXN0EhAKA2V0ZhgBIAEoCVIDZXRm');
+
+@$core.Deprecated('Use stopEtfLpResponseDescriptor instead')
+const StopEtfLpResponse$json = {
+  '1': 'StopEtfLpResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfLpStatus', '10': 'status'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `StopEtfLpResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopEtfLpResponseDescriptor = $convert.base64Decode(
+    'ChFTdG9wRXRmTHBSZXNwb25zZRIvCgZzdGF0dXMYASABKAsyFy5rZG8udjEuZXRmLkV0ZkxwU3'
+    'RhdHVzUgZzdGF0dXMSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZQ==');
+

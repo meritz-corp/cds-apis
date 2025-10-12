@@ -56,6 +56,16 @@ class EtfServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamEtfLpStatus, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// ETF LP 시작
+  $grpc.ResponseFuture<$0.StartEtfLpResponse> startEtfLp($0.StartEtfLpRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$startEtfLp, request, options: options);
+  }
+
+  /// ETF LP 중지
+  $grpc.ResponseFuture<$0.StopEtfLpResponse> stopEtfLp($0.StopEtfLpRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$stopEtfLp, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getNFT = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -78,6 +88,14 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/StreamEtfLpStatus',
       ($0.StreamEtfLpStatusRequest value) => value.writeToBuffer(),
       $0.EtfLpStatus.fromBuffer);
+  static final _$startEtfLp = $grpc.ClientMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
+      '/kdo.v1.etf.EtfService/StartEtfLp',
+      ($0.StartEtfLpRequest value) => value.writeToBuffer(),
+      $0.StartEtfLpResponse.fromBuffer);
+  static final _$stopEtfLp = $grpc.ClientMethod<$0.StopEtfLpRequest, $0.StopEtfLpResponse>(
+      '/kdo.v1.etf.EtfService/StopEtfLp',
+      ($0.StopEtfLpRequest value) => value.writeToBuffer(),
+      $0.StopEtfLpResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -120,6 +138,20 @@ abstract class EtfServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamEtfLpStatusRequest.fromBuffer(value),
         ($0.EtfLpStatus value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
+        'StartEtfLp',
+        startEtfLp_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.StartEtfLpRequest.fromBuffer(value),
+        ($0.StartEtfLpResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StopEtfLpRequest, $0.StopEtfLpResponse>(
+        'StopEtfLp',
+        stopEtfLp_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.StopEtfLpRequest.fromBuffer(value),
+        ($0.StopEtfLpResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getNFT_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -151,5 +183,17 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.EtfLpStatus> streamEtfLpStatus($grpc.ServiceCall call, $0.StreamEtfLpStatusRequest request);
+
+  $async.Future<$0.StartEtfLpResponse> startEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.StartEtfLpRequest> $request) async {
+    return startEtfLp($call, await $request);
+  }
+
+  $async.Future<$0.StartEtfLpResponse> startEtfLp($grpc.ServiceCall call, $0.StartEtfLpRequest request);
+
+  $async.Future<$0.StopEtfLpResponse> stopEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.StopEtfLpRequest> $request) async {
+    return stopEtfLp($call, await $request);
+  }
+
+  $async.Future<$0.StopEtfLpResponse> stopEtfLp($grpc.ServiceCall call, $0.StopEtfLpRequest request);
 
 }

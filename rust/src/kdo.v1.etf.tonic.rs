@@ -205,6 +205,56 @@ pub mod etf_service_client {
                 .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "StreamEtfLpStatus"));
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn start_etf_lp(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StartEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StartEtfLpResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.etf.EtfService/StartEtfLp",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "StartEtfLp"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stop_etf_lp(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StopEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopEtfLpResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.etf.EtfService/StopEtfLp",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "StopEtfLp"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -247,6 +297,20 @@ pub mod etf_service_server {
             request: tonic::Request<super::StreamEtfLpStatusRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamEtfLpStatusStream>,
+            tonic::Status,
+        >;
+        async fn start_etf_lp(
+            &self,
+            request: tonic::Request<super::StartEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StartEtfLpResponse>,
+            tonic::Status,
+        >;
+        async fn stop_etf_lp(
+            &self,
+            request: tonic::Request<super::StopEtfLpRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopEtfLpResponse>,
             tonic::Status,
         >;
     }
@@ -552,6 +616,96 @@ pub mod etf_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.etf.EtfService/StartEtfLp" => {
+                    #[allow(non_camel_case_types)]
+                    struct StartEtfLpSvc<T: EtfService>(pub Arc<T>);
+                    impl<
+                        T: EtfService,
+                    > tonic::server::UnaryService<super::StartEtfLpRequest>
+                    for StartEtfLpSvc<T> {
+                        type Response = super::StartEtfLpResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StartEtfLpRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as EtfService>::start_etf_lp(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StartEtfLpSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.etf.EtfService/StopEtfLp" => {
+                    #[allow(non_camel_case_types)]
+                    struct StopEtfLpSvc<T: EtfService>(pub Arc<T>);
+                    impl<
+                        T: EtfService,
+                    > tonic::server::UnaryService<super::StopEtfLpRequest>
+                    for StopEtfLpSvc<T> {
+                        type Response = super::StopEtfLpResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StopEtfLpRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as EtfService>::stop_etf_lp(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StopEtfLpSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

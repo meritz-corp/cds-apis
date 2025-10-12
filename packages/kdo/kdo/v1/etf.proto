@@ -40,7 +40,7 @@ service EtfService {
     // ETF LP 상태 조회
     rpc GetEtfLpStatus(GetEtfLpStatusRequest) returns (EtfLpStatus) {
         option (google.api.http) = {
-            get: "/v1/{etf=etfs/*}/lp_status"
+            get: "/v1/{etf=etfs/*}/lp/status"
         };
         option (google.api.method_signature) = "etf";
     }
@@ -48,11 +48,26 @@ service EtfService {
     // ETF LP 상태 스트리밍 (실시간 업데이트)
     rpc StreamEtfLpStatus(StreamEtfLpStatusRequest) returns (stream EtfLpStatus) {
         option (google.api.http) = {
-            get: "/v1/{etf=etfs/*}/lp_status:stream"
+            get: "/v1/{etf=etfs/*}/lp/status:stream"
         };
         option (google.api.method_signature) = "etf,update_interval_seconds";
     }
 
+    // ETF LP 시작
+    rpc StartEtfLp(StartEtfLpRequest) returns (StartEtfLpResponse) {
+        option (google.api.http) = {
+            post: "/v1/{etf=etfs/*}/lp:start"
+            body: "*"
+        };
+    }
+
+    // ETF LP 중지
+    rpc StopEtfLp(StopEtfLpRequest) returns (StopEtfLpResponse) {
+        option (google.api.http) = {
+            post: "/v1/{etf=etfs/*}/lp:stop"
+            body: "*"
+        };
+    }
 
 }
 
@@ -358,4 +373,38 @@ message StreamEtfLpStatusRequest {
 
     // 업데이트 간격 (초, optional, default: 1)
     optional uint32 update_interval_seconds = 2;
+}
+
+// ETF LP 시작 요청
+message StartEtfLpRequest {
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+}
+
+// ETF LP 시작 응답
+message StartEtfLpResponse {
+    // LP 상태
+    EtfLpStatus status = 1;
+
+    // 메시지
+    string message = 2;
+}
+
+// ETF LP 중지 요청
+message StopEtfLpRequest {
+    // ETF 리소스 이름 (예: etfs/A069500)
+    string etf = 1;
+}
+
+// ETF LP 중지 응답
+message StopEtfLpResponse {
+    // LP 상태
+    EtfLpStatus status = 1;
+
+    // 메시지
+    string message = 2;
 }

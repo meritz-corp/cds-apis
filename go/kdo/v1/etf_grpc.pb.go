@@ -30,6 +30,10 @@ type EtfServiceClient interface {
 	GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest, opts ...grpc.CallOption) (*EtfLpStatus, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
 	StreamEtfLpStatus(ctx context.Context, in *StreamEtfLpStatusRequest, opts ...grpc.CallOption) (EtfService_StreamEtfLpStatusClient, error)
+	// ETF LP 시작
+	StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error)
+	// ETF LP 중지
+	StopEtfLp(ctx context.Context, in *StopEtfLpRequest, opts ...grpc.CallOption) (*StopEtfLpResponse, error)
 }
 
 type etfServiceClient struct {
@@ -108,6 +112,24 @@ func (x *etfServiceStreamEtfLpStatusClient) Recv() (*EtfLpStatus, error) {
 	return m, nil
 }
 
+func (c *etfServiceClient) StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error) {
+	out := new(StartEtfLpResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/StartEtfLp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *etfServiceClient) StopEtfLp(ctx context.Context, in *StopEtfLpRequest, opts ...grpc.CallOption) (*StopEtfLpResponse, error) {
+	out := new(StopEtfLpResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/StopEtfLp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EtfServiceServer is the server API for EtfService service.
 // All implementations must embed UnimplementedEtfServiceServer
 // for forward compatibility
@@ -120,6 +142,10 @@ type EtfServiceServer interface {
 	GetEtfLpStatus(context.Context, *GetEtfLpStatusRequest) (*EtfLpStatus, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
 	StreamEtfLpStatus(*StreamEtfLpStatusRequest, EtfService_StreamEtfLpStatusServer) error
+	// ETF LP 시작
+	StartEtfLp(context.Context, *StartEtfLpRequest) (*StartEtfLpResponse, error)
+	// ETF LP 중지
+	StopEtfLp(context.Context, *StopEtfLpRequest) (*StopEtfLpResponse, error)
 	mustEmbedUnimplementedEtfServiceServer()
 }
 
@@ -141,6 +167,12 @@ func (UnimplementedEtfServiceServer) GetEtfLpStatus(context.Context, *GetEtfLpSt
 }
 func (UnimplementedEtfServiceServer) StreamEtfLpStatus(*StreamEtfLpStatusRequest, EtfService_StreamEtfLpStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamEtfLpStatus not implemented")
+}
+func (UnimplementedEtfServiceServer) StartEtfLp(context.Context, *StartEtfLpRequest) (*StartEtfLpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartEtfLp not implemented")
+}
+func (UnimplementedEtfServiceServer) StopEtfLp(context.Context, *StopEtfLpRequest) (*StopEtfLpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopEtfLp not implemented")
 }
 func (UnimplementedEtfServiceServer) mustEmbedUnimplementedEtfServiceServer() {}
 
@@ -248,6 +280,42 @@ func (x *etfServiceStreamEtfLpStatusServer) Send(m *EtfLpStatus) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _EtfService_StartEtfLp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartEtfLpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).StartEtfLp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/StartEtfLp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).StartEtfLp(ctx, req.(*StartEtfLpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EtfService_StopEtfLp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopEtfLpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).StopEtfLp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/StopEtfLp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).StopEtfLp(ctx, req.(*StopEtfLpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EtfService_ServiceDesc is the grpc.ServiceDesc for EtfService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -270,6 +338,14 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEtfLpStatus",
 			Handler:    _EtfService_GetEtfLpStatus_Handler,
+		},
+		{
+			MethodName: "StartEtfLp",
+			Handler:    _EtfService_StartEtfLp_Handler,
+		},
+		{
+			MethodName: "StopEtfLp",
+			Handler:    _EtfService_StopEtfLp_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

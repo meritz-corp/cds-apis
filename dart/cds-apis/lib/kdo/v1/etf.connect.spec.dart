@@ -48,4 +48,20 @@ abstract final class EtfService {
     kdov1etf.StreamEtfLpStatusRequest.new,
     kdov1etf.EtfLpStatus.new,
   );
+
+  /// ETF LP 시작
+  static const startEtfLp = connect.Spec(
+    '/$name/StartEtfLp',
+    connect.StreamType.unary,
+    kdov1etf.StartEtfLpRequest.new,
+    kdov1etf.StartEtfLpResponse.new,
+  );
+
+  /// ETF LP 중지
+  static const stopEtfLp = connect.Spec(
+    '/$name/StopEtfLp',
+    connect.StreamType.unary,
+    kdov1etf.StopEtfLpRequest.new,
+    kdov1etf.StopEtfLpResponse.new,
+  );
 }

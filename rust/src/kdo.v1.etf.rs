@@ -299,6 +299,43 @@ pub struct StreamEtfLpStatusRequest {
     #[prost(uint32, optional, tag="2")]
     pub update_interval_seconds: ::core::option::Option<u32>,
 }
+/// ETF LP 시작 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartEtfLpRequest {
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+}
+/// ETF LP 시작 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartEtfLpResponse {
+    /// LP 상태
+    #[prost(message, optional, tag="1")]
+    pub status: ::core::option::Option<EtfLpStatus>,
+    /// 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
+/// ETF LP 중지 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopEtfLpRequest {
+    /// ETF 리소스 이름 (예: etfs/A069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+}
+/// ETF LP 중지 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopEtfLpResponse {
+    /// LP 상태
+    #[prost(message, optional, tag="1")]
+    pub status: ::core::option::Option<EtfLpStatus>,
+    /// 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
 /// 상품 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

@@ -162,7 +162,7 @@
         ]
       }
     },
-    "/v1/{etf}/lp_status": {
+    "/v1/{etf}/lp/status": {
       "get": {
         "summary": "ETF LP 상태 조회",
         "operationId": "EtfService_GetEtfLpStatus",
@@ -194,7 +194,7 @@
         ]
       }
     },
-    "/v1/{etf}/lp_status:stream": {
+    "/v1/{etf}/lp/status:stream": {
       "get": {
         "summary": "ETF LP 상태 스트리밍 (실시간 업데이트)",
         "operationId": "EtfService_StreamEtfLpStatus",
@@ -236,6 +236,89 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
+    "/v1/{etf}/lp:start": {
+      "post": {
+        "summary": "ETF LP 시작",
+        "operationId": "EtfService_StartEtfLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfStartEtfLpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "ETF LP 시작 요청"
+            }
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
+    "/v1/{etf}/lp:stop": {
+      "post": {
+        "summary": "ETF LP 중지",
+        "operationId": "EtfService_StopEtfLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfStopEtfLpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "ETF 리소스 이름 (예: etfs/A069500)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "ETF LP 중지 요청"
+            }
           }
         ],
         "tags": [
@@ -601,6 +684,34 @@
       ],
       "default": "REPLICATION_METHOD_UNSPECIFIED",
       "title": "복제 방법"
+    },
+    "etfStartEtfLpResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/etfEtfLpStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "ETF LP 시작 응답"
+    },
+    "etfStopEtfLpResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/etfEtfLpStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "ETF LP 중지 응답"
     },
     "etfTimeFrameStatus": {
       "type": "object",
