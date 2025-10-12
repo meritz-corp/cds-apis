@@ -42,6 +42,11 @@ class EtfServiceClient extends $grpc.Client {
   }
 
   /// ETF Quote Strategy 업데이트
+  $grpc.ResponseFuture<$0.EtfQuoteStrategy> getEtfQuoteStrategy($0.GetEtfQuoteStrategyRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getEtfQuoteStrategy, request, options: options);
+  }
+
+  /// ETF Quote Strategy 업데이트
   $grpc.ResponseFuture<$0.EtfQuoteStrategy> updateEtfQuoteStrategy($0.UpdateEtfQuoteStrategyRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$updateEtfQuoteStrategy, request, options: options);
   }
@@ -76,6 +81,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/ListEtfs',
       ($0.ListEtfsRequest value) => value.writeToBuffer(),
       $0.ListEtfsResponse.fromBuffer);
+  static final _$getEtfQuoteStrategy = $grpc.ClientMethod<$0.GetEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
+      '/kdo.v1.etf.EtfService/GetEtfQuoteStrategy',
+      ($0.GetEtfQuoteStrategyRequest value) => value.writeToBuffer(),
+      $0.EtfQuoteStrategy.fromBuffer);
   static final _$updateEtfQuoteStrategy = $grpc.ClientMethod<$0.UpdateEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
       '/kdo.v1.etf.EtfService/UpdateEtfQuoteStrategy',
       ($0.UpdateEtfQuoteStrategyRequest value) => value.writeToBuffer(),
@@ -117,6 +126,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListEtfsRequest.fromBuffer(value),
         ($0.ListEtfsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
+        'GetEtfQuoteStrategy',
+        getEtfQuoteStrategy_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetEtfQuoteStrategyRequest.fromBuffer(value),
+        ($0.EtfQuoteStrategy value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UpdateEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
         'UpdateEtfQuoteStrategy',
         updateEtfQuoteStrategy_Pre,
@@ -165,6 +181,12 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListEtfsResponse> listEtfs($grpc.ServiceCall call, $0.ListEtfsRequest request);
+
+  $async.Future<$0.EtfQuoteStrategy> getEtfQuoteStrategy_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfQuoteStrategyRequest> $request) async {
+    return getEtfQuoteStrategy($call, await $request);
+  }
+
+  $async.Future<$0.EtfQuoteStrategy> getEtfQuoteStrategy($grpc.ServiceCall call, $0.GetEtfQuoteStrategyRequest request);
 
   $async.Future<$0.EtfQuoteStrategy> updateEtfQuoteStrategy_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateEtfQuoteStrategyRequest> $request) async {
     return updateEtfQuoteStrategy($call, await $request);

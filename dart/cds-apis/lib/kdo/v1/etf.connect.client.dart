@@ -44,6 +44,24 @@ extension type EtfServiceClient (connect.Transport _transport) {
   }
 
   /// ETF Quote Strategy 업데이트
+  Future<kdov1etf.EtfQuoteStrategy> getEtfQuoteStrategy(
+    kdov1etf.GetEtfQuoteStrategyRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.EtfService.getEtfQuoteStrategy,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ETF Quote Strategy 업데이트
   Future<kdov1etf.EtfQuoteStrategy> updateEtfQuoteStrategy(
     kdov1etf.UpdateEtfQuoteStrategyRequest input, {
     connect.Headers? headers,

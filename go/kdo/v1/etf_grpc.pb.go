@@ -25,6 +25,8 @@ type EtfServiceClient interface {
 	GetEtf(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error)
 	ListEtfs(ctx context.Context, in *ListEtfsRequest, opts ...grpc.CallOption) (*ListEtfsResponse, error)
 	// ETF Quote Strategy 업데이트
+	GetEtfQuoteStrategy(ctx context.Context, in *GetEtfQuoteStrategyRequest, opts ...grpc.CallOption) (*EtfQuoteStrategy, error)
+	// ETF Quote Strategy 업데이트
 	UpdateEtfQuoteStrategy(ctx context.Context, in *UpdateEtfQuoteStrategyRequest, opts ...grpc.CallOption) (*EtfQuoteStrategy, error)
 	// ETF LP 상태 조회
 	GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest, opts ...grpc.CallOption) (*EtfLpStatus, error)
@@ -56,6 +58,15 @@ func (c *etfServiceClient) GetEtf(ctx context.Context, in *GetEtfRequest, opts .
 func (c *etfServiceClient) ListEtfs(ctx context.Context, in *ListEtfsRequest, opts ...grpc.CallOption) (*ListEtfsResponse, error) {
 	out := new(ListEtfsResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/ListEtfs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *etfServiceClient) GetEtfQuoteStrategy(ctx context.Context, in *GetEtfQuoteStrategyRequest, opts ...grpc.CallOption) (*EtfQuoteStrategy, error) {
+	out := new(EtfQuoteStrategy)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/GetEtfQuoteStrategy", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -137,6 +148,8 @@ type EtfServiceServer interface {
 	GetEtf(context.Context, *GetEtfRequest) (*Etf, error)
 	ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error)
 	// ETF Quote Strategy 업데이트
+	GetEtfQuoteStrategy(context.Context, *GetEtfQuoteStrategyRequest) (*EtfQuoteStrategy, error)
+	// ETF Quote Strategy 업데이트
 	UpdateEtfQuoteStrategy(context.Context, *UpdateEtfQuoteStrategyRequest) (*EtfQuoteStrategy, error)
 	// ETF LP 상태 조회
 	GetEtfLpStatus(context.Context, *GetEtfLpStatusRequest) (*EtfLpStatus, error)
@@ -158,6 +171,9 @@ func (UnimplementedEtfServiceServer) GetEtf(context.Context, *GetEtfRequest) (*E
 }
 func (UnimplementedEtfServiceServer) ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEtfs not implemented")
+}
+func (UnimplementedEtfServiceServer) GetEtfQuoteStrategy(context.Context, *GetEtfQuoteStrategyRequest) (*EtfQuoteStrategy, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEtfQuoteStrategy not implemented")
 }
 func (UnimplementedEtfServiceServer) UpdateEtfQuoteStrategy(context.Context, *UpdateEtfQuoteStrategyRequest) (*EtfQuoteStrategy, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEtfQuoteStrategy not implemented")
@@ -219,6 +235,24 @@ func _EtfService_ListEtfs_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EtfServiceServer).ListEtfs(ctx, req.(*ListEtfsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EtfService_GetEtfQuoteStrategy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEtfQuoteStrategyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).GetEtfQuoteStrategy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/GetEtfQuoteStrategy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).GetEtfQuoteStrategy(ctx, req.(*GetEtfQuoteStrategyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -330,6 +364,10 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListEtfs",
 			Handler:    _EtfService_ListEtfs_Handler,
+		},
+		{
+			MethodName: "GetEtfQuoteStrategy",
+			Handler:    _EtfService_GetEtfQuoteStrategy_Handler,
 		},
 		{
 			MethodName: "UpdateEtfQuoteStrategy",

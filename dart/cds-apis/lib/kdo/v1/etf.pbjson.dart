@@ -365,6 +365,19 @@ final $typed_data.Uint8List getEtfRequestDescriptor = $convert.base64Decode(
     'Cg1HZXRFdGZSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2FwaXMueHl6L0'
     'V0ZlIDZXRm');
 
+@$core.Deprecated('Use getEtfQuoteStrategyRequestDescriptor instead')
+const GetEtfQuoteStrategyRequest$json = {
+  '1': 'GetEtfQuoteStrategyRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+  ],
+};
+
+/// Descriptor for `GetEtfQuoteStrategyRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfQuoteStrategyRequestDescriptor = $convert.base64Decode(
+    'ChpHZXRFdGZRdW90ZVN0cmF0ZWd5UmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby'
+    '5jZHNhcGlzLnh5ei9FdGZSA2V0Zg==');
+
 @$core.Deprecated('Use updateEtfQuoteStrategyRequestDescriptor instead')
 const UpdateEtfQuoteStrategyRequest$json = {
   '1': 'UpdateEtfQuoteStrategyRequest',

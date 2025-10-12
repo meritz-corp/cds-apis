@@ -26,6 +26,14 @@ abstract final class EtfService {
   );
 
   /// ETF Quote Strategy 업데이트
+  static const getEtfQuoteStrategy = connect.Spec(
+    '/$name/GetEtfQuoteStrategy',
+    connect.StreamType.unary,
+    kdov1etf.GetEtfQuoteStrategyRequest.new,
+    kdov1etf.EtfQuoteStrategy.new,
+  );
+
+  /// ETF Quote Strategy 업데이트
   static const updateEtfQuoteStrategy = connect.Spec(
     '/$name/UpdateEtfQuoteStrategy',
     connect.StreamType.unary,

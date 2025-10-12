@@ -317,6 +317,26 @@ func (mr *MockEtfServiceClientMockRecorder) GetEtfLpStatus(ctx, in interface{}, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLpStatus", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtfLpStatus), varargs...)
 }
 
+// GetEtfQuoteStrategy mocks base method.
+func (m *MockEtfServiceClient) GetEtfQuoteStrategy(ctx context.Context, in *GetEtfQuoteStrategyRequest, opts ...grpc.CallOption) (*EtfQuoteStrategy, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetEtfQuoteStrategy", varargs...)
+	ret0, _ := ret[0].(*EtfQuoteStrategy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfQuoteStrategy indicates an expected call of GetEtfQuoteStrategy.
+func (mr *MockEtfServiceClientMockRecorder) GetEtfQuoteStrategy(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfQuoteStrategy", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtfQuoteStrategy), varargs...)
+}
+
 // ListEtfs mocks base method.
 func (m *MockEtfServiceClient) ListEtfs(ctx context.Context, in *ListEtfsRequest, opts ...grpc.CallOption) (*ListEtfsResponse, error) {
 	m.ctrl.T.Helper()
@@ -468,6 +488,21 @@ func (m *MockEtfServiceServer) GetEtfLpStatus(ctx context.Context, in *GetEtfLpS
 func (mr *MockEtfServiceServerMockRecorder) GetEtfLpStatus(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLpStatus", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtfLpStatus), ctx, in)
+}
+
+// GetEtfQuoteStrategy mocks base method.
+func (m *MockEtfServiceServer) GetEtfQuoteStrategy(ctx context.Context, in *GetEtfQuoteStrategyRequest) (*EtfQuoteStrategy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetEtfQuoteStrategy", ctx, in)
+	ret0, _ := ret[0].(*EtfQuoteStrategy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfQuoteStrategy indicates an expected call of GetEtfQuoteStrategy.
+func (mr *MockEtfServiceServerMockRecorder) GetEtfQuoteStrategy(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfQuoteStrategy", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtfQuoteStrategy), ctx, in)
 }
 
 // ListEtfs mocks base method.

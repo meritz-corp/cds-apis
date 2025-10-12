@@ -325,6 +325,38 @@
           "EtfService"
         ]
       }
+    },
+    "/v1/{etf}/quote_strategy": {
+      "get": {
+        "summary": "ETF Quote Strategy 업데이트",
+        "operationId": "EtfService_GetEtfQuoteStrategy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfEtfQuoteStrategy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
     }
   },
   "definitions": {

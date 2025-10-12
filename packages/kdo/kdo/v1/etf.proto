@@ -29,6 +29,14 @@ service EtfService {
     }
 
     // ETF Quote Strategy 업데이트
+    rpc GetEtfQuoteStrategy(GetEtfQuoteStrategyRequest) returns (EtfQuoteStrategy) {
+        option (google.api.http) = {
+            get: "/v1/{etf=etfs/*}/quote_strategy"
+        };
+        option (google.api.method_signature) = "";
+    }
+
+    // ETF Quote Strategy 업데이트
     rpc UpdateEtfQuoteStrategy(UpdateEtfQuoteStrategyRequest) returns (EtfQuoteStrategy) {
         option (google.api.http) = {
             patch: "/v1/etfs/{strategy.symbol=*}/quote_strategy"
@@ -333,6 +341,16 @@ message ListEtfsResponse {
 
 // GetEtf
 message GetEtfRequest {
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+}
+
+// GetEtfQuoteStrategy
+message GetEtfQuoteStrategyRequest {
     string etf = 1 [
         (google.api.field_behavior) = REQUIRED,
         (google.api.resource_reference) = {

@@ -272,6 +272,13 @@ pub struct GetEtfRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
 }
+/// GetEtfQuoteStrategy
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfQuoteStrategyRequest {
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+}
 /// UpdateEtfQuoteStrategy
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

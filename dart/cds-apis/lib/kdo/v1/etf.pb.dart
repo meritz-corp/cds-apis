@@ -1378,6 +1378,53 @@ class GetEtfRequest extends $pb.GeneratedMessage {
   void clearEtf() => $_clearField(1);
 }
 
+/// GetEtfQuoteStrategy
+class GetEtfQuoteStrategyRequest extends $pb.GeneratedMessage {
+  factory GetEtfQuoteStrategyRequest({
+    $core.String? etf,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    return result;
+  }
+
+  GetEtfQuoteStrategyRequest._();
+
+  factory GetEtfQuoteStrategyRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfQuoteStrategyRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfQuoteStrategyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfQuoteStrategyRequest clone() => GetEtfQuoteStrategyRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfQuoteStrategyRequest copyWith(void Function(GetEtfQuoteStrategyRequest) updates) => super.copyWith((message) => updates(message as GetEtfQuoteStrategyRequest)) as GetEtfQuoteStrategyRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfQuoteStrategyRequest create() => GetEtfQuoteStrategyRequest._();
+  @$core.override
+  GetEtfQuoteStrategyRequest createEmptyInstance() => create();
+  static $pb.PbList<GetEtfQuoteStrategyRequest> createRepeated() => $pb.PbList<GetEtfQuoteStrategyRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfQuoteStrategyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfQuoteStrategyRequest>(create);
+  static GetEtfQuoteStrategyRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+}
+
 /// UpdateEtfQuoteStrategy
 class UpdateEtfQuoteStrategyRequest extends $pb.GeneratedMessage {
   factory UpdateEtfQuoteStrategyRequest({
