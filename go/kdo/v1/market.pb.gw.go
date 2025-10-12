@@ -188,7 +188,7 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamEtfOrderbook", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/orderbook:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamEtfOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/orderbook:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -210,7 +210,7 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamFuturesOrderbook", runtime.WithHTTPPathPattern("/v1/{future=futures/*}/orderbook:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamFuturesOrderbook", runtime.WithHTTPPathPattern("/v1/market/{future=futures/*}/orderbook:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -230,9 +230,9 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_MarketService_StreamEtfOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "orderbook"}, "stream"))
+	pattern_MarketService_StreamEtfOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "etfs", "etf", "orderbook"}, "stream"))
 
-	pattern_MarketService_StreamFuturesOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "futures", "future", "orderbook"}, "stream"))
+	pattern_MarketService_StreamFuturesOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "futures", "future", "orderbook"}, "stream"))
 )
 
 var (

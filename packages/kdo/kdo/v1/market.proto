@@ -12,14 +12,14 @@ service MarketService {
     // ETF 주문장 데이터를 스트리밍
     rpc StreamEtfOrderbook(StreamEtfOrderbookRequest) returns (stream EtfOrderbookData) {
         option (google.api.http) = {
-            get: "/v1/{etf=etfs/*}/orderbook:stream"
+            get: "/v1/market/{etf=etfs/*}/orderbook:stream"
         };
     }
 
     // 선물 주문장 데이터를 스트리밍
     rpc StreamFuturesOrderbook(StreamFuturesOrderbookRequest) returns (stream FuturesOrderbookData) {
         option (google.api.http) = {
-            get: "/v1/{future=futures/*}/orderbook:stream"
+            get: "/v1/market/{future=futures/*}/orderbook:stream"
         };
     }
 

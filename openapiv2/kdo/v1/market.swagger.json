@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/{etf}/orderbook:stream": {
+    "/v1/market/{etf}/orderbook:stream": {
       "get": {
         "summary": "ETF 주문장 데이터를 스트리밍",
         "operationId": "MarketService_StreamEtfOrderbook",
@@ -65,7 +65,7 @@
         ]
       }
     },
-    "/v1/{future}/orderbook:stream": {
+    "/v1/market/{future}/orderbook:stream": {
       "get": {
         "summary": "선물 주문장 데이터를 스트리밍",
         "operationId": "MarketService_StreamFuturesOrderbook",
