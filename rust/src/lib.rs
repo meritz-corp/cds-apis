@@ -20,5 +20,8 @@ pub mod kdo {
         pub mod market {
             include!("kdo.v1.market.rs");
         }
+        pub mod etf {
+            include!("kdo.v1.etf.rs");
+        }
     }
 }
