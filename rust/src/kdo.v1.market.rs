@@ -303,9 +303,6 @@ pub struct EtfLpConfig {
     /// ETF 심볼
     #[prost(message, optional, tag="1")]
     pub etf_symbol: ::core::option::Option<Symbol>,
-    /// 선물 심볼
-    #[prost(message, optional, tag="2")]
-    pub future_symbol: ::core::option::Option<Symbol>,
     /// Basis 값
     #[prost(float, tag="3")]
     pub basis: f32,
@@ -318,15 +315,6 @@ pub struct EtfLpConfig {
     /// 호가 깊이 (1~10)
     #[prost(int64, tag="6")]
     pub depth: i64,
-    /// 호가 단위
-    #[prost(int64, tag="7")]
-    pub tick_size: i64,
-    /// 전일 ETF 순자산가치
-    #[prost(float, tag="8")]
-    pub prior_day_etf_nav: f32,
-    /// 전일 선물 종가
-    #[prost(float, tag="9")]
-    pub prior_day_futures_settle: f32,
 }
 /// ETF LP 시작 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

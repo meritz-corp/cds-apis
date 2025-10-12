@@ -1270,25 +1270,17 @@ class Symbol extends $pb.GeneratedMessage {
 class EtfLPConfig extends $pb.GeneratedMessage {
   factory EtfLPConfig({
     Symbol? etfSymbol,
-    Symbol? futureSymbol,
     $core.double? basis,
     $core.double? offset,
     $fixnum.Int64? quantity,
     $fixnum.Int64? depth,
-    $fixnum.Int64? tickSize,
-    $core.double? priorDayEtfNav,
-    $core.double? priorDayFuturesSettle,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
-    if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (basis != null) result.basis = basis;
     if (offset != null) result.offset = offset;
     if (quantity != null) result.quantity = quantity;
     if (depth != null) result.depth = depth;
-    if (tickSize != null) result.tickSize = tickSize;
-    if (priorDayEtfNav != null) result.priorDayEtfNav = priorDayEtfNav;
-    if (priorDayFuturesSettle != null) result.priorDayFuturesSettle = priorDayFuturesSettle;
     return result;
   }
 
@@ -1299,14 +1291,10 @@ class EtfLPConfig extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLPConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..aOM<Symbol>(1, _omitFieldNames ? '' : 'etfSymbol', subBuilder: Symbol.create)
-    ..aOM<Symbol>(2, _omitFieldNames ? '' : 'futureSymbol', subBuilder: Symbol.create)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'basis', $pb.PbFieldType.OF)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.OF)
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aInt64(6, _omitFieldNames ? '' : 'depth')
-    ..aInt64(7, _omitFieldNames ? '' : 'tickSize')
-    ..a<$core.double>(8, _omitFieldNames ? '' : 'priorDayEtfNav', $pb.PbFieldType.OF)
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'priorDayFuturesSettle', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
@@ -1339,87 +1327,45 @@ class EtfLPConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   Symbol ensureEtfSymbol() => $_ensure(0);
 
-  /// 선물 심볼
-  @$pb.TagNumber(2)
-  Symbol get futureSymbol => $_getN(1);
-  @$pb.TagNumber(2)
-  set futureSymbol(Symbol value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFutureSymbol() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFutureSymbol() => $_clearField(2);
-  @$pb.TagNumber(2)
-  Symbol ensureFutureSymbol() => $_ensure(1);
-
   /// Basis 값
   @$pb.TagNumber(3)
-  $core.double get basis => $_getN(2);
+  $core.double get basis => $_getN(1);
   @$pb.TagNumber(3)
-  set basis($core.double value) => $_setFloat(2, value);
+  set basis($core.double value) => $_setFloat(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasBasis() => $_has(2);
+  $core.bool hasBasis() => $_has(1);
   @$pb.TagNumber(3)
   void clearBasis() => $_clearField(3);
 
   /// Offset 값
   @$pb.TagNumber(4)
-  $core.double get offset => $_getN(3);
+  $core.double get offset => $_getN(2);
   @$pb.TagNumber(4)
-  set offset($core.double value) => $_setFloat(3, value);
+  set offset($core.double value) => $_setFloat(2, value);
   @$pb.TagNumber(4)
-  $core.bool hasOffset() => $_has(3);
+  $core.bool hasOffset() => $_has(2);
   @$pb.TagNumber(4)
   void clearOffset() => $_clearField(4);
 
   /// 주문 수량
   @$pb.TagNumber(5)
-  $fixnum.Int64 get quantity => $_getI64(4);
+  $fixnum.Int64 get quantity => $_getI64(3);
   @$pb.TagNumber(5)
-  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasQuantity() => $_has(4);
+  $core.bool hasQuantity() => $_has(3);
   @$pb.TagNumber(5)
   void clearQuantity() => $_clearField(5);
 
   /// 호가 깊이 (1~10)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get depth => $_getI64(5);
+  $fixnum.Int64 get depth => $_getI64(4);
   @$pb.TagNumber(6)
-  set depth($fixnum.Int64 value) => $_setInt64(5, value);
+  set depth($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasDepth() => $_has(5);
+  $core.bool hasDepth() => $_has(4);
   @$pb.TagNumber(6)
   void clearDepth() => $_clearField(6);
-
-  /// 호가 단위
-  @$pb.TagNumber(7)
-  $fixnum.Int64 get tickSize => $_getI64(6);
-  @$pb.TagNumber(7)
-  set tickSize($fixnum.Int64 value) => $_setInt64(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasTickSize() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearTickSize() => $_clearField(7);
-
-  /// 전일 ETF 순자산가치
-  @$pb.TagNumber(8)
-  $core.double get priorDayEtfNav => $_getN(7);
-  @$pb.TagNumber(8)
-  set priorDayEtfNav($core.double value) => $_setFloat(7, value);
-  @$pb.TagNumber(8)
-  $core.bool hasPriorDayEtfNav() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearPriorDayEtfNav() => $_clearField(8);
-
-  /// 전일 선물 종가
-  @$pb.TagNumber(9)
-  $core.double get priorDayFuturesSettle => $_getN(8);
-  @$pb.TagNumber(9)
-  set priorDayFuturesSettle($core.double value) => $_setFloat(8, value);
-  @$pb.TagNumber(9)
-  $core.bool hasPriorDayFuturesSettle() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearPriorDayFuturesSettle() => $_clearField(9);
 }
 
 /// ETF LP 시작 요청

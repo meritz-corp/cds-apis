@@ -340,10 +340,6 @@
           "$ref": "#/definitions/marketSymbol",
           "title": "ETF 심볼"
         },
-        "futureSymbol": {
-          "$ref": "#/definitions/marketSymbol",
-          "title": "선물 심볼"
-        },
         "basis": {
           "type": "number",
           "format": "float",
@@ -363,21 +359,6 @@
           "type": "string",
           "format": "int64",
           "title": "호가 깊이 (1~10)"
-        },
-        "tickSize": {
-          "type": "string",
-          "format": "int64",
-          "title": "호가 단위"
-        },
-        "priorDayEtfNav": {
-          "type": "number",
-          "format": "float",
-          "title": "전일 ETF 순자산가치"
-        },
-        "priorDayFuturesSettle": {
-          "type": "number",
-          "format": "float",
-          "title": "전일 선물 종가"
         }
       },
       "title": "ETF LP 설정"
