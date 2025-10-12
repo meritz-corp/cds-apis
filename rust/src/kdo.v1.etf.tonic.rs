@@ -84,7 +84,7 @@ pub mod etf_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn get_nft(
+        pub async fn get_etf(
             &mut self,
             request: impl tonic::IntoRequest<super::GetEtfRequest>,
         ) -> std::result::Result<tonic::Response<super::Etf>, tonic::Status> {
@@ -99,11 +99,11 @@ pub mod etf_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.etf.EtfService/GetNFT",
+                "/kdo.v1.etf.EtfService/GetEtf",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "GetNFT"));
+                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "GetEtf"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn list_etfs(
@@ -264,7 +264,7 @@ pub mod etf_service_server {
     /// Generated trait containing gRPC methods that should be implemented for use with EtfServiceServer.
     #[async_trait]
     pub trait EtfService: Send + Sync + 'static {
-        async fn get_nft(
+        async fn get_etf(
             &self,
             request: tonic::Request<super::GetEtfRequest>,
         ) -> std::result::Result<tonic::Response<super::Etf>, tonic::Status>;
@@ -390,11 +390,11 @@ pub mod etf_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/kdo.v1.etf.EtfService/GetNFT" => {
+                "/kdo.v1.etf.EtfService/GetEtf" => {
                     #[allow(non_camel_case_types)]
-                    struct GetNFTSvc<T: EtfService>(pub Arc<T>);
+                    struct GetEtfSvc<T: EtfService>(pub Arc<T>);
                     impl<T: EtfService> tonic::server::UnaryService<super::GetEtfRequest>
-                    for GetNFTSvc<T> {
+                    for GetEtfSvc<T> {
                         type Response = super::Etf;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
@@ -406,7 +406,7 @@ pub mod etf_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as EtfService>::get_nft(&inner, request).await
+                                <T as EtfService>::get_etf(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -417,7 +417,7 @@ pub mod etf_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetNFTSvc(inner);
+                        let method = GetEtfSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

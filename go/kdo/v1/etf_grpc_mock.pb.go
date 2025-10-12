@@ -277,6 +277,26 @@ func (m *MockEtfServiceClient) EXPECT() *MockEtfServiceClientMockRecorder {
 	return m.recorder
 }
 
+// GetEtf mocks base method.
+func (m *MockEtfServiceClient) GetEtf(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetEtf", varargs...)
+	ret0, _ := ret[0].(*Etf)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtf indicates an expected call of GetEtf.
+func (mr *MockEtfServiceClientMockRecorder) GetEtf(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtf", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtf), varargs...)
+}
+
 // GetEtfLpStatus mocks base method.
 func (m *MockEtfServiceClient) GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest, opts ...grpc.CallOption) (*EtfLpStatus, error) {
 	m.ctrl.T.Helper()
@@ -295,26 +315,6 @@ func (mr *MockEtfServiceClientMockRecorder) GetEtfLpStatus(ctx, in interface{}, 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLpStatus", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtfLpStatus), varargs...)
-}
-
-// GetNFT mocks base method.
-func (m *MockEtfServiceClient) GetNFT(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetNFT", varargs...)
-	ret0, _ := ret[0].(*Etf)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetNFT indicates an expected call of GetNFT.
-func (mr *MockEtfServiceClientMockRecorder) GetNFT(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNFT", reflect.TypeOf((*MockEtfServiceClient)(nil).GetNFT), varargs...)
 }
 
 // ListEtfs mocks base method.
@@ -440,6 +440,21 @@ func (m *MockEtfServiceServer) EXPECT() *MockEtfServiceServerMockRecorder {
 	return m.recorder
 }
 
+// GetEtf mocks base method.
+func (m *MockEtfServiceServer) GetEtf(ctx context.Context, in *GetEtfRequest) (*Etf, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetEtf", ctx, in)
+	ret0, _ := ret[0].(*Etf)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtf indicates an expected call of GetEtf.
+func (mr *MockEtfServiceServerMockRecorder) GetEtf(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtf", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtf), ctx, in)
+}
+
 // GetEtfLpStatus mocks base method.
 func (m *MockEtfServiceServer) GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest) (*EtfLpStatus, error) {
 	m.ctrl.T.Helper()
@@ -453,21 +468,6 @@ func (m *MockEtfServiceServer) GetEtfLpStatus(ctx context.Context, in *GetEtfLpS
 func (mr *MockEtfServiceServerMockRecorder) GetEtfLpStatus(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLpStatus", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtfLpStatus), ctx, in)
-}
-
-// GetNFT mocks base method.
-func (m *MockEtfServiceServer) GetNFT(ctx context.Context, in *GetEtfRequest) (*Etf, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetNFT", ctx, in)
-	ret0, _ := ret[0].(*Etf)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetNFT indicates an expected call of GetNFT.
-func (mr *MockEtfServiceServerMockRecorder) GetNFT(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNFT", reflect.TypeOf((*MockEtfServiceServer)(nil).GetNFT), ctx, in)
 }
 
 // ListEtfs mocks base method.

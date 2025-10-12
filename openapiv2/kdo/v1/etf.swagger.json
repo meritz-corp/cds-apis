@@ -133,7 +133,7 @@
     },
     "/v1/{etf}": {
       "get": {
-        "operationId": "EtfService_GetNFT",
+        "operationId": "EtfService_GetEtf",
         "responses": {
           "200": {
             "description": "A successful response.",

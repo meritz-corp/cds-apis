@@ -14,7 +14,7 @@ option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
 // EtfService는 ETF 및 선물 관련 서비스를 제공합니다.
 service EtfService {
-    rpc GetNFT(GetEtfRequest) returns (Etf) {
+    rpc GetEtf(GetEtfRequest) returns (Etf) {
         option (google.api.http) = {
             get: "/v1/{etf=etfs/*}"
         };

@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EtfServiceClient interface {
-	GetNFT(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error)
+	GetEtf(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error)
 	ListEtfs(ctx context.Context, in *ListEtfsRequest, opts ...grpc.CallOption) (*ListEtfsResponse, error)
 	// ETF Quote Strategy 업데이트
 	UpdateEtfQuoteStrategy(ctx context.Context, in *UpdateEtfQuoteStrategyRequest, opts ...grpc.CallOption) (*EtfQuoteStrategy, error)
@@ -44,9 +44,9 @@ func NewEtfServiceClient(cc grpc.ClientConnInterface) EtfServiceClient {
 	return &etfServiceClient{cc}
 }
 
-func (c *etfServiceClient) GetNFT(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
+func (c *etfServiceClient) GetEtf(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
 	out := new(Etf)
-	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/GetNFT", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/GetEtf", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +134,7 @@ func (c *etfServiceClient) StopEtfLp(ctx context.Context, in *StopEtfLpRequest, 
 // All implementations must embed UnimplementedEtfServiceServer
 // for forward compatibility
 type EtfServiceServer interface {
-	GetNFT(context.Context, *GetEtfRequest) (*Etf, error)
+	GetEtf(context.Context, *GetEtfRequest) (*Etf, error)
 	ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error)
 	// ETF Quote Strategy 업데이트
 	UpdateEtfQuoteStrategy(context.Context, *UpdateEtfQuoteStrategyRequest) (*EtfQuoteStrategy, error)
@@ -153,8 +153,8 @@ type EtfServiceServer interface {
 type UnimplementedEtfServiceServer struct {
 }
 
-func (UnimplementedEtfServiceServer) GetNFT(context.Context, *GetEtfRequest) (*Etf, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetNFT not implemented")
+func (UnimplementedEtfServiceServer) GetEtf(context.Context, *GetEtfRequest) (*Etf, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEtf not implemented")
 }
 func (UnimplementedEtfServiceServer) ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEtfs not implemented")
@@ -187,20 +187,20 @@ func RegisterEtfServiceServer(s grpc.ServiceRegistrar, srv EtfServiceServer) {
 	s.RegisterService(&EtfService_ServiceDesc, srv)
 }
 
-func _EtfService_GetNFT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _EtfService_GetEtf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetEtfRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EtfServiceServer).GetNFT(ctx, in)
+		return srv.(EtfServiceServer).GetEtf(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.etf.EtfService/GetNFT",
+		FullMethod: "/kdo.v1.etf.EtfService/GetEtf",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EtfServiceServer).GetNFT(ctx, req.(*GetEtfRequest))
+		return srv.(EtfServiceServer).GetEtf(ctx, req.(*GetEtfRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -324,8 +324,8 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*EtfServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetNFT",
-			Handler:    _EtfService_GetNFT_Handler,
+			MethodName: "GetEtf",
+			Handler:    _EtfService_GetEtf_Handler,
 		},
 		{
 			MethodName: "ListEtfs",

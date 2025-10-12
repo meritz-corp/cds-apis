@@ -9,7 +9,7 @@ import "etf.connect.spec.dart" as specs;
 
 /// EtfService는 ETF 및 선물 관련 서비스를 제공합니다.
 extension type EtfServiceClient (connect.Transport _transport) {
-  Future<kdov1etf.Etf> getNFT(
+  Future<kdov1etf.Etf> getEtf(
     kdov1etf.GetEtfRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -17,7 +17,7 @@ extension type EtfServiceClient (connect.Transport _transport) {
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.EtfService.getNFT,
+      specs.EtfService.getEtf,
       input,
       signal: signal,
       headers: headers,

@@ -33,8 +33,8 @@ class EtfServiceClient extends $grpc.Client {
 
   EtfServiceClient(super.channel, {super.options, super.interceptors});
 
-  $grpc.ResponseFuture<$0.Etf> getNFT($0.GetEtfRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getNFT, request, options: options);
+  $grpc.ResponseFuture<$0.Etf> getEtf($0.GetEtfRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getEtf, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.ListEtfsResponse> listEtfs($0.ListEtfsRequest request, {$grpc.CallOptions? options,}) {
@@ -68,8 +68,8 @@ class EtfServiceClient extends $grpc.Client {
 
     // method descriptors
 
-  static final _$getNFT = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
-      '/kdo.v1.etf.EtfService/GetNFT',
+  static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
+      '/kdo.v1.etf.EtfService/GetEtf',
       ($0.GetEtfRequest value) => value.writeToBuffer(),
       $0.Etf.fromBuffer);
   static final _$listEtfs = $grpc.ClientMethod<$0.ListEtfsRequest, $0.ListEtfsResponse>(
@@ -104,8 +104,8 @@ abstract class EtfServiceBase extends $grpc.Service {
 
   EtfServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.GetEtfRequest, $0.Etf>(
-        'GetNFT',
-        getNFT_Pre,
+        'GetEtf',
+        getEtf_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.GetEtfRequest.fromBuffer(value),
@@ -154,11 +154,11 @@ abstract class EtfServiceBase extends $grpc.Service {
         ($0.StopEtfLpResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.Etf> getNFT_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
-    return getNFT($call, await $request);
+  $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
+    return getEtf($call, await $request);
   }
 
-  $async.Future<$0.Etf> getNFT($grpc.ServiceCall call, $0.GetEtfRequest request);
+  $async.Future<$0.Etf> getEtf($grpc.ServiceCall call, $0.GetEtfRequest request);
 
   $async.Future<$0.ListEtfsResponse> listEtfs_Pre($grpc.ServiceCall $call, $async.Future<$0.ListEtfsRequest> $request) async {
     return listEtfs($call, await $request);

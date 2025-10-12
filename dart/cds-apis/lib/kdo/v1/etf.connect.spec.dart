@@ -11,8 +11,8 @@ abstract final class EtfService {
   /// Fully-qualified name of the EtfService service.
   static const name = 'kdo.v1.etf.EtfService';
 
-  static const getNFT = connect.Spec(
-    '/$name/GetNFT',
+  static const getEtf = connect.Spec(
+    '/$name/GetEtf',
     connect.StreamType.unary,
     kdov1etf.GetEtfRequest.new,
     kdov1etf.Etf.new,
