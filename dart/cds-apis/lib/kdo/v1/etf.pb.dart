@@ -27,7 +27,7 @@ class Etf extends $pb.GeneratedMessage {
     $fixnum.Int64? id,
     $core.String? symbol,
     $core.String? name,
-    $fixnum.Int64? lastPrice,
+    $core.String? lastPrice,
     $core.Iterable<EtfPdfConstituent>? constituents,
     EtfNav? nav,
     EtfQuoteStrategy? quoteStrategy,
@@ -58,7 +58,7 @@ class Etf extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'name')
-    ..aInt64(4, _omitFieldNames ? '' : 'lastPrice')
+    ..aOS(4, _omitFieldNames ? '' : 'lastPrice')
     ..pc<EtfPdfConstituent>(5, _omitFieldNames ? '' : 'constituents', $pb.PbFieldType.PM, subBuilder: EtfPdfConstituent.create)
     ..aOM<EtfNav>(6, _omitFieldNames ? '' : 'nav', subBuilder: EtfNav.create)
     ..aOM<EtfQuoteStrategy>(7, _omitFieldNames ? '' : 'quoteStrategy', subBuilder: EtfQuoteStrategy.create)
@@ -115,11 +115,11 @@ class Etf extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearName() => $_clearField(3);
 
-  /// 마지막 가격 (원 단위, i64)
+  /// 마지막 가격
   @$pb.TagNumber(4)
-  $fixnum.Int64 get lastPrice => $_getI64(3);
+  $core.String get lastPrice => $_getSZ(3);
   @$pb.TagNumber(4)
-  set lastPrice($fixnum.Int64 value) => $_setInt64(3, value);
+  set lastPrice($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
   $core.bool hasLastPrice() => $_has(3);
   @$pb.TagNumber(4)
@@ -352,7 +352,7 @@ class EtfNav extends $pb.GeneratedMessage {
 /// 현물 기반 NAV
 class PhysicalNav extends $pb.GeneratedMessage {
   factory PhysicalNav({
-    $fixnum.Int64? lastNav,
+    $core.String? lastNav,
     $core.Iterable<$core.MapEntry<$core.String, ConstituentPrice>>? constituents,
   }) {
     final result = create();
@@ -367,7 +367,7 @@ class PhysicalNav extends $pb.GeneratedMessage {
   factory PhysicalNav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PhysicalNav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'lastNav')
+    ..aOS(1, _omitFieldNames ? '' : 'lastNav')
     ..m<$core.String, ConstituentPrice>(2, _omitFieldNames ? '' : 'constituents', entryClassName: 'PhysicalNav.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: ConstituentPrice.create, valueDefaultOrMaker: ConstituentPrice.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..hasRequiredFields = false
   ;
@@ -391,9 +391,9 @@ class PhysicalNav extends $pb.GeneratedMessage {
 
   /// 마지막 NAV (원 단위, i64)
   @$pb.TagNumber(1)
-  $fixnum.Int64 get lastNav => $_getI64(0);
+  $core.String get lastNav => $_getSZ(0);
   @$pb.TagNumber(1)
-  set lastNav($fixnum.Int64 value) => $_setInt64(0, value);
+  set lastNav($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasLastNav() => $_has(0);
   @$pb.TagNumber(1)
@@ -407,12 +407,12 @@ class PhysicalNav extends $pb.GeneratedMessage {
 /// 선물 기반 NAV
 class FuturesBasedNav extends $pb.GeneratedMessage {
   factory FuturesBasedNav({
-    $fixnum.Int64? lastNav,
-    $fixnum.Int64? priorDayNav,
+    $core.String? lastNav,
+    $core.String? priorDayNav,
     $core.double? leverageMultiplier,
     $core.String? futuresSymbol,
-    $fixnum.Int64? futuresPriorDayPrice,
-    $fixnum.Int64? futuresLastPrice,
+    $core.String? futuresPriorDayPrice,
+    $core.String? futuresLastPrice,
   }) {
     final result = create();
     if (lastNav != null) result.lastNav = lastNav;
@@ -430,12 +430,12 @@ class FuturesBasedNav extends $pb.GeneratedMessage {
   factory FuturesBasedNav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesBasedNav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'lastNav')
-    ..aInt64(2, _omitFieldNames ? '' : 'priorDayNav')
+    ..aOS(1, _omitFieldNames ? '' : 'lastNav')
+    ..aOS(2, _omitFieldNames ? '' : 'priorDayNav')
     ..a<$core.double>(3, _omitFieldNames ? '' : 'leverageMultiplier', $pb.PbFieldType.OD)
     ..aOS(4, _omitFieldNames ? '' : 'futuresSymbol')
-    ..aInt64(5, _omitFieldNames ? '' : 'futuresPriorDayPrice')
-    ..aInt64(6, _omitFieldNames ? '' : 'futuresLastPrice')
+    ..aOS(5, _omitFieldNames ? '' : 'futuresPriorDayPrice')
+    ..aOS(6, _omitFieldNames ? '' : 'futuresLastPrice')
     ..hasRequiredFields = false
   ;
 
@@ -458,9 +458,9 @@ class FuturesBasedNav extends $pb.GeneratedMessage {
 
   /// 마지막 NAV (원 단위, i64)
   @$pb.TagNumber(1)
-  $fixnum.Int64 get lastNav => $_getI64(0);
+  $core.String get lastNav => $_getSZ(0);
   @$pb.TagNumber(1)
-  set lastNav($fixnum.Int64 value) => $_setInt64(0, value);
+  set lastNav($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasLastNav() => $_has(0);
   @$pb.TagNumber(1)
@@ -468,9 +468,9 @@ class FuturesBasedNav extends $pb.GeneratedMessage {
 
   /// 전일 NAV
   @$pb.TagNumber(2)
-  $fixnum.Int64 get priorDayNav => $_getI64(1);
+  $core.String get priorDayNav => $_getSZ(1);
   @$pb.TagNumber(2)
-  set priorDayNav($fixnum.Int64 value) => $_setInt64(1, value);
+  set priorDayNav($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
   $core.bool hasPriorDayNav() => $_has(1);
   @$pb.TagNumber(2)
@@ -498,9 +498,9 @@ class FuturesBasedNav extends $pb.GeneratedMessage {
 
   /// 선물 전일 가격
   @$pb.TagNumber(5)
-  $fixnum.Int64 get futuresPriorDayPrice => $_getI64(4);
+  $core.String get futuresPriorDayPrice => $_getSZ(4);
   @$pb.TagNumber(5)
-  set futuresPriorDayPrice($fixnum.Int64 value) => $_setInt64(4, value);
+  set futuresPriorDayPrice($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
   $core.bool hasFuturesPriorDayPrice() => $_has(4);
   @$pb.TagNumber(5)
@@ -508,9 +508,9 @@ class FuturesBasedNav extends $pb.GeneratedMessage {
 
   /// 선물 현재 가격
   @$pb.TagNumber(6)
-  $fixnum.Int64 get futuresLastPrice => $_getI64(5);
+  $core.String get futuresLastPrice => $_getSZ(5);
   @$pb.TagNumber(6)
-  set futuresLastPrice($fixnum.Int64 value) => $_setInt64(5, value);
+  set futuresLastPrice($core.String value) => $_setString(5, value);
   @$pb.TagNumber(6)
   $core.bool hasFuturesLastPrice() => $_has(5);
   @$pb.TagNumber(6)
@@ -520,7 +520,7 @@ class FuturesBasedNav extends $pb.GeneratedMessage {
 /// 구성종목 가격 정보
 class ConstituentPrice extends $pb.GeneratedMessage {
   factory ConstituentPrice({
-    $fixnum.Int64? lastPrice,
+    $core.String? lastPrice,
     $fixnum.Int64? quantity,
   }) {
     final result = create();
@@ -535,7 +535,7 @@ class ConstituentPrice extends $pb.GeneratedMessage {
   factory ConstituentPrice.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstituentPrice', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'lastPrice')
+    ..aOS(1, _omitFieldNames ? '' : 'lastPrice')
     ..aInt64(2, _omitFieldNames ? '' : 'quantity')
     ..hasRequiredFields = false
   ;
@@ -559,9 +559,9 @@ class ConstituentPrice extends $pb.GeneratedMessage {
 
   /// 마지막 가격 (원 단위, i64)
   @$pb.TagNumber(1)
-  $fixnum.Int64 get lastPrice => $_getI64(0);
+  $core.String get lastPrice => $_getSZ(0);
   @$pb.TagNumber(1)
-  set lastPrice($fixnum.Int64 value) => $_setInt64(0, value);
+  set lastPrice($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasLastPrice() => $_has(0);
   @$pb.TagNumber(1)
@@ -1096,9 +1096,9 @@ class TimeFrameStatus extends $pb.GeneratedMessage {
 /// LP 가격 정보
 class LpPricing extends $pb.GeneratedMessage {
   factory LpPricing({
-    $fixnum.Int64? etfPrice,
-    $fixnum.Int64? futurePrice,
-    $fixnum.Int64? etfNav,
+    $core.String? etfPrice,
+    $core.String? futurePrice,
+    $core.String? etfNav,
   }) {
     final result = create();
     if (etfPrice != null) result.etfPrice = etfPrice;
@@ -1113,9 +1113,9 @@ class LpPricing extends $pb.GeneratedMessage {
   factory LpPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LpPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'etfPrice')
-    ..aInt64(2, _omitFieldNames ? '' : 'futurePrice')
-    ..aInt64(3, _omitFieldNames ? '' : 'etfNav')
+    ..aOS(1, _omitFieldNames ? '' : 'etfPrice')
+    ..aOS(2, _omitFieldNames ? '' : 'futurePrice')
+    ..aOS(3, _omitFieldNames ? '' : 'etfNav')
     ..hasRequiredFields = false
   ;
 
@@ -1138,9 +1138,9 @@ class LpPricing extends $pb.GeneratedMessage {
 
   /// ETF 가격 (원 단위, i64)
   @$pb.TagNumber(1)
-  $fixnum.Int64 get etfPrice => $_getI64(0);
+  $core.String get etfPrice => $_getSZ(0);
   @$pb.TagNumber(1)
-  set etfPrice($fixnum.Int64 value) => $_setInt64(0, value);
+  set etfPrice($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasEtfPrice() => $_has(0);
   @$pb.TagNumber(1)
@@ -1148,9 +1148,9 @@ class LpPricing extends $pb.GeneratedMessage {
 
   /// 선물 가격 (원 단위, i64)
   @$pb.TagNumber(2)
-  $fixnum.Int64 get futurePrice => $_getI64(1);
+  $core.String get futurePrice => $_getSZ(1);
   @$pb.TagNumber(2)
-  set futurePrice($fixnum.Int64 value) => $_setInt64(1, value);
+  set futurePrice($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
   $core.bool hasFuturePrice() => $_has(1);
   @$pb.TagNumber(2)
@@ -1158,9 +1158,9 @@ class LpPricing extends $pb.GeneratedMessage {
 
   /// ETF NAV (원 단위, i64)
   @$pb.TagNumber(3)
-  $fixnum.Int64 get etfNav => $_getI64(2);
+  $core.String get etfNav => $_getSZ(2);
   @$pb.TagNumber(3)
-  set etfNav($fixnum.Int64 value) => $_setInt64(2, value);
+  set etfNav($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
   $core.bool hasEtfNav() => $_has(2);
   @$pb.TagNumber(3)

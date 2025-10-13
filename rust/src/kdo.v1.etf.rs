@@ -12,9 +12,9 @@ pub struct Etf {
     /// ETF 이름
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
-    /// 마지막 가격 (원 단위, i64)
-    #[prost(int64, tag="4")]
-    pub last_price: i64,
+    /// 마지막 가격
+    #[prost(string, tag="4")]
+    pub last_price: ::prost::alloc::string::String,
     /// PDF 구성 종목 목록
     #[prost(message, repeated, tag="5")]
     pub constituents: ::prost::alloc::vec::Vec<EtfPdfConstituent>,
@@ -74,8 +74,8 @@ pub mod etf_nav {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhysicalNav {
     /// 마지막 NAV (원 단위, i64)
-    #[prost(int64, tag="1")]
-    pub last_nav: i64,
+    #[prost(string, tag="1")]
+    pub last_nav: ::prost::alloc::string::String,
     /// 구성종목별 가격 정보
     #[prost(map="string, message", tag="2")]
     pub constituents: ::std::collections::HashMap<::prost::alloc::string::String, ConstituentPrice>,
@@ -85,11 +85,11 @@ pub struct PhysicalNav {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FuturesBasedNav {
     /// 마지막 NAV (원 단위, i64)
-    #[prost(int64, tag="1")]
-    pub last_nav: i64,
+    #[prost(string, tag="1")]
+    pub last_nav: ::prost::alloc::string::String,
     /// 전일 NAV
-    #[prost(int64, tag="2")]
-    pub prior_day_nav: i64,
+    #[prost(string, tag="2")]
+    pub prior_day_nav: ::prost::alloc::string::String,
     /// 레버리지 배수
     #[prost(double, tag="3")]
     pub leverage_multiplier: f64,
@@ -97,19 +97,19 @@ pub struct FuturesBasedNav {
     #[prost(string, tag="4")]
     pub futures_symbol: ::prost::alloc::string::String,
     /// 선물 전일 가격
-    #[prost(int64, tag="5")]
-    pub futures_prior_day_price: i64,
+    #[prost(string, tag="5")]
+    pub futures_prior_day_price: ::prost::alloc::string::String,
     /// 선물 현재 가격
-    #[prost(int64, tag="6")]
-    pub futures_last_price: i64,
+    #[prost(string, tag="6")]
+    pub futures_last_price: ::prost::alloc::string::String,
 }
 /// 구성종목 가격 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConstituentPrice {
     /// 마지막 가격 (원 단위, i64)
-    #[prost(int64, tag="1")]
-    pub last_price: i64,
+    #[prost(string, tag="1")]
+    pub last_price: ::prost::alloc::string::String,
     /// 구성 수량
     #[prost(int64, tag="2")]
     pub quantity: i64,
@@ -221,17 +221,17 @@ pub struct TimeFrameStatus {
 }
 /// LP 가격 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LpPricing {
     /// ETF 가격 (원 단위, i64)
-    #[prost(int64, tag="1")]
-    pub etf_price: i64,
+    #[prost(string, tag="1")]
+    pub etf_price: ::prost::alloc::string::String,
     /// 선물 가격 (원 단위, i64)
-    #[prost(int64, tag="2")]
-    pub future_price: i64,
+    #[prost(string, tag="2")]
+    pub future_price: ::prost::alloc::string::String,
     /// ETF NAV (원 단위, i64)
-    #[prost(int64, tag="3")]
-    pub etf_nav: i64,
+    #[prost(string, tag="3")]
+    pub etf_nav: ::prost::alloc::string::String,
 }
 // ========== Request/Response Messages ==========
 

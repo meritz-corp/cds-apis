@@ -73,7 +73,7 @@ const Etf$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'last_price', '3': 4, '4': 1, '5': 3, '10': 'lastPrice'},
+    {'1': 'last_price', '3': 4, '4': 1, '5': 9, '10': 'lastPrice'},
     {'1': 'constituents', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.etf.EtfPdfConstituent', '10': 'constituents'},
     {'1': 'nav', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfNav', '10': 'nav'},
     {'1': 'quote_strategy', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfQuoteStrategy', '10': 'quoteStrategy'},
@@ -86,7 +86,7 @@ const Etf$json = {
 /// Descriptor for `Etf`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'CgNFdGYSDgoCaWQYASABKARSAmlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhIKBG5hbWUYAy'
-    'ABKAlSBG5hbWUSHQoKbGFzdF9wcmljZRgEIAEoA1IJbGFzdFByaWNlEkEKDGNvbnN0aXR1ZW50'
+    'ABKAlSBG5hbWUSHQoKbGFzdF9wcmljZRgEIAEoCVIJbGFzdFByaWNlEkEKDGNvbnN0aXR1ZW50'
     'cxgFIAMoCzIdLmtkby52MS5ldGYuRXRmUGRmQ29uc3RpdHVlbnRSDGNvbnN0aXR1ZW50cxIkCg'
     'NuYXYYBiABKAsyEi5rZG8udjEuZXRmLkV0Zk5hdlIDbmF2EkMKDnF1b3RlX3N0cmF0ZWd5GAcg'
     'ASgLMhwua2RvLnYxLmV0Zi5FdGZRdW90ZVN0cmF0ZWd5Ug1xdW90ZVN0cmF0ZWd5EiMKDWNyZW'
@@ -133,7 +133,7 @@ final $typed_data.Uint8List etfNavDescriptor = $convert.base64Decode(
 const PhysicalNav$json = {
   '1': 'PhysicalNav',
   '2': [
-    {'1': 'last_nav', '3': 1, '4': 1, '5': 3, '10': 'lastNav'},
+    {'1': 'last_nav', '3': 1, '4': 1, '5': 9, '10': 'lastNav'},
     {'1': 'constituents', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.etf.PhysicalNav.ConstituentsEntry', '10': 'constituents'},
   ],
   '3': [PhysicalNav_ConstituentsEntry$json],
@@ -151,7 +151,7 @@ const PhysicalNav_ConstituentsEntry$json = {
 
 /// Descriptor for `PhysicalNav`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List physicalNavDescriptor = $convert.base64Decode(
-    'CgtQaHlzaWNhbE5hdhIZCghsYXN0X25hdhgBIAEoA1IHbGFzdE5hdhJNCgxjb25zdGl0dWVudH'
+    'CgtQaHlzaWNhbE5hdhIZCghsYXN0X25hdhgBIAEoCVIHbGFzdE5hdhJNCgxjb25zdGl0dWVudH'
     'MYAiADKAsyKS5rZG8udjEuZXRmLlBoeXNpY2FsTmF2LkNvbnN0aXR1ZW50c0VudHJ5Ugxjb25z'
     'dGl0dWVudHMaXQoRQ29uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSMgoFdmFsdW'
     'UYAiABKAsyHC5rZG8udjEuZXRmLkNvbnN0aXR1ZW50UHJpY2VSBXZhbHVlOgI4AQ==');
@@ -160,35 +160,35 @@ final $typed_data.Uint8List physicalNavDescriptor = $convert.base64Decode(
 const FuturesBasedNav$json = {
   '1': 'FuturesBasedNav',
   '2': [
-    {'1': 'last_nav', '3': 1, '4': 1, '5': 3, '10': 'lastNav'},
-    {'1': 'prior_day_nav', '3': 2, '4': 1, '5': 3, '10': 'priorDayNav'},
+    {'1': 'last_nav', '3': 1, '4': 1, '5': 9, '10': 'lastNav'},
+    {'1': 'prior_day_nav', '3': 2, '4': 1, '5': 9, '10': 'priorDayNav'},
     {'1': 'leverage_multiplier', '3': 3, '4': 1, '5': 1, '10': 'leverageMultiplier'},
     {'1': 'futures_symbol', '3': 4, '4': 1, '5': 9, '10': 'futuresSymbol'},
-    {'1': 'futures_prior_day_price', '3': 5, '4': 1, '5': 3, '10': 'futuresPriorDayPrice'},
-    {'1': 'futures_last_price', '3': 6, '4': 1, '5': 3, '10': 'futuresLastPrice'},
+    {'1': 'futures_prior_day_price', '3': 5, '4': 1, '5': 9, '10': 'futuresPriorDayPrice'},
+    {'1': 'futures_last_price', '3': 6, '4': 1, '5': 9, '10': 'futuresLastPrice'},
   ],
 };
 
 /// Descriptor for `FuturesBasedNav`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List futuresBasedNavDescriptor = $convert.base64Decode(
-    'Cg9GdXR1cmVzQmFzZWROYXYSGQoIbGFzdF9uYXYYASABKANSB2xhc3ROYXYSIgoNcHJpb3JfZG'
-    'F5X25hdhgCIAEoA1ILcHJpb3JEYXlOYXYSLwoTbGV2ZXJhZ2VfbXVsdGlwbGllchgDIAEoAVIS'
+    'Cg9GdXR1cmVzQmFzZWROYXYSGQoIbGFzdF9uYXYYASABKAlSB2xhc3ROYXYSIgoNcHJpb3JfZG'
+    'F5X25hdhgCIAEoCVILcHJpb3JEYXlOYXYSLwoTbGV2ZXJhZ2VfbXVsdGlwbGllchgDIAEoAVIS'
     'bGV2ZXJhZ2VNdWx0aXBsaWVyEiUKDmZ1dHVyZXNfc3ltYm9sGAQgASgJUg1mdXR1cmVzU3ltYm'
-    '9sEjUKF2Z1dHVyZXNfcHJpb3JfZGF5X3ByaWNlGAUgASgDUhRmdXR1cmVzUHJpb3JEYXlQcmlj'
-    'ZRIsChJmdXR1cmVzX2xhc3RfcHJpY2UYBiABKANSEGZ1dHVyZXNMYXN0UHJpY2U=');
+    '9sEjUKF2Z1dHVyZXNfcHJpb3JfZGF5X3ByaWNlGAUgASgJUhRmdXR1cmVzUHJpb3JEYXlQcmlj'
+    'ZRIsChJmdXR1cmVzX2xhc3RfcHJpY2UYBiABKAlSEGZ1dHVyZXNMYXN0UHJpY2U=');
 
 @$core.Deprecated('Use constituentPriceDescriptor instead')
 const ConstituentPrice$json = {
   '1': 'ConstituentPrice',
   '2': [
-    {'1': 'last_price', '3': 1, '4': 1, '5': 3, '10': 'lastPrice'},
+    {'1': 'last_price', '3': 1, '4': 1, '5': 9, '10': 'lastPrice'},
     {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
   ],
 };
 
 /// Descriptor for `ConstituentPrice`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List constituentPriceDescriptor = $convert.base64Decode(
-    'ChBDb25zdGl0dWVudFByaWNlEh0KCmxhc3RfcHJpY2UYASABKANSCWxhc3RQcmljZRIaCghxdW'
+    'ChBDb25zdGl0dWVudFByaWNlEh0KCmxhc3RfcHJpY2UYASABKAlSCWxhc3RQcmljZRIaCghxdW'
     'FudGl0eRgCIAEoA1IIcXVhbnRpdHk=');
 
 @$core.Deprecated('Use etfQuoteStrategyDescriptor instead')
@@ -295,16 +295,16 @@ final $typed_data.Uint8List timeFrameStatusDescriptor = $convert.base64Decode(
 const LpPricing$json = {
   '1': 'LpPricing',
   '2': [
-    {'1': 'etf_price', '3': 1, '4': 1, '5': 3, '10': 'etfPrice'},
-    {'1': 'future_price', '3': 2, '4': 1, '5': 3, '10': 'futurePrice'},
-    {'1': 'etf_nav', '3': 3, '4': 1, '5': 3, '10': 'etfNav'},
+    {'1': 'etf_price', '3': 1, '4': 1, '5': 9, '10': 'etfPrice'},
+    {'1': 'future_price', '3': 2, '4': 1, '5': 9, '10': 'futurePrice'},
+    {'1': 'etf_nav', '3': 3, '4': 1, '5': 9, '10': 'etfNav'},
   ],
 };
 
 /// Descriptor for `LpPricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List lpPricingDescriptor = $convert.base64Decode(
-    'CglMcFByaWNpbmcSGwoJZXRmX3ByaWNlGAEgASgDUghldGZQcmljZRIhCgxmdXR1cmVfcHJpY2'
-    'UYAiABKANSC2Z1dHVyZVByaWNlEhcKB2V0Zl9uYXYYAyABKANSBmV0Zk5hdg==');
+    'CglMcFByaWNpbmcSGwoJZXRmX3ByaWNlGAEgASgJUghldGZQcmljZRIhCgxmdXR1cmVfcHJpY2'
+    'UYAiABKAlSC2Z1dHVyZVByaWNlEhcKB2V0Zl9uYXYYAyABKAlSBmV0Zk5hdg==');
 
 @$core.Deprecated('Use getNFTRequestDescriptor instead')
 const GetNFTRequest$json = {

@@ -27,11 +27,11 @@ pub struct StreamFuturesOrderbookRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfOrderbookData {
     /// 매수 호가 (10단계, AIP-144)
-    #[prost(int64, repeated, tag="1")]
-    pub bid_prices: ::prost::alloc::vec::Vec<i64>,
+    #[prost(string, repeated, tag="1")]
+    pub bid_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// 매도 호가 (10단계)
-    #[prost(int64, repeated, tag="2")]
-    pub ask_prices: ::prost::alloc::vec::Vec<i64>,
+    #[prost(string, repeated, tag="2")]
+    pub ask_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// 매수 수량 (10단계)
     #[prost(int64, repeated, tag="3")]
     pub bid_quantities: ::prost::alloc::vec::Vec<i64>,
@@ -45,8 +45,8 @@ pub struct EtfOrderbookData {
     #[prost(int64, repeated, tag="6")]
     pub lp_ask_quantities: ::prost::alloc::vec::Vec<i64>,
     /// 중간 호가
-    #[prost(int64, tag="7")]
-    pub mid_price: i64,
+    #[prost(string, tag="7")]
+    pub mid_price: ::prost::alloc::string::String,
     /// 중간 매도 수량
     #[prost(int64, tag="8")]
     pub mid_ask_quantity: i64,
@@ -60,8 +60,8 @@ pub struct EtfOrderbookData {
     #[prost(int64, tag="11")]
     pub bid_quote_total_quantity: i64,
     /// 예상 가격
-    #[prost(int64, tag="12")]
-    pub est_price: i64,
+    #[prost(string, tag="12")]
+    pub est_price: ::prost::alloc::string::String,
     /// 예상 거래량
     #[prost(int64, tag="13")]
     pub est_volume: i64,
@@ -74,11 +74,11 @@ pub struct EtfOrderbookData {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FuturesOrderbookData {
     /// 매수 호가 (5단계, AIP-144)
-    #[prost(float, repeated, tag="1")]
-    pub bid_prices: ::prost::alloc::vec::Vec<f32>,
+    #[prost(string, repeated, tag="1")]
+    pub bid_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// 매도 호가 (5단계)
-    #[prost(float, repeated, tag="2")]
-    pub ask_prices: ::prost::alloc::vec::Vec<f32>,
+    #[prost(string, repeated, tag="2")]
+    pub ask_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// 매수 수량 (5단계)
     #[prost(int64, repeated, tag="3")]
     pub bid_quantities: ::prost::alloc::vec::Vec<i64>,
@@ -98,11 +98,11 @@ pub struct FuturesOrderbookData {
     #[prost(int64, tag="8")]
     pub bid_quote_total_quantity: i64,
     /// 중간 가격
-    #[prost(float, tag="9")]
-    pub mid_price: f32,
+    #[prost(string, tag="9")]
+    pub mid_price: ::prost::alloc::string::String,
     /// 예상 가격
-    #[prost(float, tag="10")]
-    pub est_price: f32,
+    #[prost(string, tag="10")]
+    pub est_price: ::prost::alloc::string::String,
     /// 예상 거래량
     #[prost(int64, tag="11")]
     pub est_volume: i64,
@@ -124,8 +124,8 @@ pub struct Order {
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
     /// 주문 가격
-    #[prost(float, tag="4")]
-    pub price: f32,
+    #[prost(string, tag="4")]
+    pub price: ::prost::alloc::string::String,
     /// 주문 수량
     #[prost(int64, tag="5")]
     pub quantity: i64,
@@ -153,8 +153,8 @@ pub struct PlaceOrderRequest {
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
     /// 주문 가격
-    #[prost(int64, tag="3")]
-    pub price: i64,
+    #[prost(string, tag="3")]
+    pub price: ::prost::alloc::string::String,
     /// 주문 수량
     #[prost(int64, tag="4")]
     pub quantity: i64,

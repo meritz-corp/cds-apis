@@ -7,17 +7,15 @@ impl serde::Serialize for ConstituentPrice {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.last_price != 0 {
+        if !self.last_price.is_empty() {
             len += 1;
         }
         if self.quantity != 0 {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.ConstituentPrice", len)?;
-        if self.last_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("lastPrice", ToString::to_string(&self.last_price).as_str())?;
+        if !self.last_price.is_empty() {
+            struct_ser.serialize_field("lastPrice", &self.last_price)?;
         }
         if self.quantity != 0 {
             #[allow(clippy::needless_borrow)]
@@ -93,9 +91,7 @@ impl<'de> serde::Deserialize<'de> for ConstituentPrice {
                             if last_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("lastPrice"));
                             }
-                            last_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            last_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -133,7 +129,7 @@ impl serde::Serialize for Etf {
         if !self.name.is_empty() {
             len += 1;
         }
-        if self.last_price != 0 {
+        if !self.last_price.is_empty() {
             len += 1;
         }
         if !self.constituents.is_empty() {
@@ -166,10 +162,8 @@ impl serde::Serialize for Etf {
         if !self.name.is_empty() {
             struct_ser.serialize_field("name", &self.name)?;
         }
-        if self.last_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("lastPrice", ToString::to_string(&self.last_price).as_str())?;
+        if !self.last_price.is_empty() {
+            struct_ser.serialize_field("lastPrice", &self.last_price)?;
         }
         if !self.constituents.is_empty() {
             struct_ser.serialize_field("constituents", &self.constituents)?;
@@ -320,9 +314,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             if last_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("lastPrice"));
                             }
-                            last_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            last_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Constituents => {
                             if constituents__.is_some() {
@@ -1110,10 +1102,10 @@ impl serde::Serialize for FuturesBasedNav {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.last_nav != 0 {
+        if !self.last_nav.is_empty() {
             len += 1;
         }
-        if self.prior_day_nav != 0 {
+        if !self.prior_day_nav.is_empty() {
             len += 1;
         }
         if self.leverage_multiplier != 0. {
@@ -1122,22 +1114,18 @@ impl serde::Serialize for FuturesBasedNav {
         if !self.futures_symbol.is_empty() {
             len += 1;
         }
-        if self.futures_prior_day_price != 0 {
+        if !self.futures_prior_day_price.is_empty() {
             len += 1;
         }
-        if self.futures_last_price != 0 {
+        if !self.futures_last_price.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.FuturesBasedNav", len)?;
-        if self.last_nav != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("lastNav", ToString::to_string(&self.last_nav).as_str())?;
+        if !self.last_nav.is_empty() {
+            struct_ser.serialize_field("lastNav", &self.last_nav)?;
         }
-        if self.prior_day_nav != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("priorDayNav", ToString::to_string(&self.prior_day_nav).as_str())?;
+        if !self.prior_day_nav.is_empty() {
+            struct_ser.serialize_field("priorDayNav", &self.prior_day_nav)?;
         }
         if self.leverage_multiplier != 0. {
             struct_ser.serialize_field("leverageMultiplier", &self.leverage_multiplier)?;
@@ -1145,15 +1133,11 @@ impl serde::Serialize for FuturesBasedNav {
         if !self.futures_symbol.is_empty() {
             struct_ser.serialize_field("futuresSymbol", &self.futures_symbol)?;
         }
-        if self.futures_prior_day_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("futuresPriorDayPrice", ToString::to_string(&self.futures_prior_day_price).as_str())?;
+        if !self.futures_prior_day_price.is_empty() {
+            struct_ser.serialize_field("futuresPriorDayPrice", &self.futures_prior_day_price)?;
         }
-        if self.futures_last_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("futuresLastPrice", ToString::to_string(&self.futures_last_price).as_str())?;
+        if !self.futures_last_price.is_empty() {
+            struct_ser.serialize_field("futuresLastPrice", &self.futures_last_price)?;
         }
         struct_ser.end()
     }
@@ -1245,17 +1229,13 @@ impl<'de> serde::Deserialize<'de> for FuturesBasedNav {
                             if last_nav__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("lastNav"));
                             }
-                            last_nav__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            last_nav__ = Some(map_.next_value()?);
                         }
                         GeneratedField::PriorDayNav => {
                             if prior_day_nav__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("priorDayNav"));
                             }
-                            prior_day_nav__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            prior_day_nav__ = Some(map_.next_value()?);
                         }
                         GeneratedField::LeverageMultiplier => {
                             if leverage_multiplier__.is_some() {
@@ -1275,17 +1255,13 @@ impl<'de> serde::Deserialize<'de> for FuturesBasedNav {
                             if futures_prior_day_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("futuresPriorDayPrice"));
                             }
-                            futures_prior_day_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            futures_prior_day_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::FuturesLastPrice => {
                             if futures_last_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("futuresLastPrice"));
                             }
-                            futures_last_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            futures_last_price__ = Some(map_.next_value()?);
                         }
                     }
                 }
@@ -1895,30 +1871,24 @@ impl serde::Serialize for LpPricing {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.etf_price != 0 {
+        if !self.etf_price.is_empty() {
             len += 1;
         }
-        if self.future_price != 0 {
+        if !self.future_price.is_empty() {
             len += 1;
         }
-        if self.etf_nav != 0 {
+        if !self.etf_nav.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.LpPricing", len)?;
-        if self.etf_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("etfPrice", ToString::to_string(&self.etf_price).as_str())?;
+        if !self.etf_price.is_empty() {
+            struct_ser.serialize_field("etfPrice", &self.etf_price)?;
         }
-        if self.future_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("futurePrice", ToString::to_string(&self.future_price).as_str())?;
+        if !self.future_price.is_empty() {
+            struct_ser.serialize_field("futurePrice", &self.future_price)?;
         }
-        if self.etf_nav != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("etfNav", ToString::to_string(&self.etf_nav).as_str())?;
+        if !self.etf_nav.is_empty() {
+            struct_ser.serialize_field("etfNav", &self.etf_nav)?;
         }
         struct_ser.end()
     }
@@ -1995,25 +1965,19 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                             if etf_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("etfPrice"));
                             }
-                            etf_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            etf_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::FuturePrice => {
                             if future_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("futurePrice"));
                             }
-                            future_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            future_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::EtfNav => {
                             if etf_nav__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("etfNav"));
                             }
-                            etf_nav__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            etf_nav__ = Some(map_.next_value()?);
                         }
                     }
                 }
@@ -2397,17 +2361,15 @@ impl serde::Serialize for PhysicalNav {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.last_nav != 0 {
+        if !self.last_nav.is_empty() {
             len += 1;
         }
         if !self.constituents.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.PhysicalNav", len)?;
-        if self.last_nav != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("lastNav", ToString::to_string(&self.last_nav).as_str())?;
+        if !self.last_nav.is_empty() {
+            struct_ser.serialize_field("lastNav", &self.last_nav)?;
         }
         if !self.constituents.is_empty() {
             struct_ser.serialize_field("constituents", &self.constituents)?;
@@ -2481,9 +2443,7 @@ impl<'de> serde::Deserialize<'de> for PhysicalNav {
                             if last_nav__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("lastNav"));
                             }
-                            last_nav__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            last_nav__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Constituents => {
                             if constituents__.is_some() {

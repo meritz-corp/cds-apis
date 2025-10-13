@@ -90,8 +90,8 @@ message Etf {
     // ETF 이름
     string name = 3;
 
-    // 마지막 가격 (원 단위, i64)
-    int64 last_price = 4;
+    // 마지막 가격
+    string last_price = 4;
 
     // PDF 구성 종목 목록
     repeated EtfPdfConstituent constituents = 5;
@@ -146,7 +146,7 @@ message EtfNav {
 // 현물 기반 NAV
 message PhysicalNav {
     // 마지막 NAV (원 단위, i64)
-    int64 last_nav = 1;
+    string last_nav = 1;
 
     // 구성종목별 가격 정보
     map<string, ConstituentPrice> constituents = 2;
@@ -155,10 +155,10 @@ message PhysicalNav {
 // 선물 기반 NAV
 message FuturesBasedNav {
     // 마지막 NAV (원 단위, i64)
-    int64 last_nav = 1;
+    string last_nav = 1;
 
     // 전일 NAV
-    int64 prior_day_nav = 2;
+    string prior_day_nav = 2;
 
     // 레버리지 배수
     double leverage_multiplier = 3;
@@ -167,16 +167,16 @@ message FuturesBasedNav {
     string futures_symbol = 4;
 
     // 선물 전일 가격
-    int64 futures_prior_day_price = 5;
+    string futures_prior_day_price = 5;
 
     // 선물 현재 가격
-    int64 futures_last_price = 6;
+    string futures_last_price = 6;
 }
 
 // 구성종목 가격 정보
 message ConstituentPrice {
     // 마지막 가격 (원 단위, i64)
-    int64 last_price = 1;
+    string last_price = 1;
 
     // 구성 수량
     int64 quantity = 2;
@@ -297,13 +297,13 @@ message TimeFrameStatus {
 // LP 가격 정보
 message LpPricing {
     // ETF 가격 (원 단위, i64)
-    int64 etf_price = 1;
+    string etf_price = 1;
 
     // 선물 가격 (원 단위, i64)
-    int64 future_price = 2;
+    string future_price = 2;
 
     // ETF NAV (원 단위, i64)
-    int64 etf_nav = 3;
+    string etf_nav = 3;
 }
 
 // ========== Request/Response Messages ==========

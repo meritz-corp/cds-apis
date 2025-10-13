@@ -102,10 +102,10 @@ enum SessionId {
 // ETF 주문장 데이터
 message EtfOrderbookData {
     // 매수 호가 (10단계, AIP-144)
-    repeated int64 bid_prices = 1;
+    repeated string bid_prices = 1;
 
     // 매도 호가 (10단계)
-    repeated int64 ask_prices = 2;
+    repeated string ask_prices = 2;
 
     // 매수 수량 (10단계)
     repeated int64 bid_quantities = 3;
@@ -120,7 +120,7 @@ message EtfOrderbookData {
     repeated int64 lp_ask_quantities = 6;
 
     // 중간 호가
-    int64 mid_price = 7;
+    string mid_price = 7;
 
     // 중간 매도 수량
     int64 mid_ask_quantity = 8;
@@ -135,7 +135,7 @@ message EtfOrderbookData {
     int64 bid_quote_total_quantity = 11;
 
     // 예상 가격
-    int64 est_price = 12;
+    string est_price = 12;
 
     // 예상 거래량
     int64 est_volume = 13;
@@ -147,10 +147,10 @@ message EtfOrderbookData {
 // 선물 주문장 데이터
 message FuturesOrderbookData {
     // 매수 호가 (5단계, AIP-144)
-    repeated float bid_prices = 1;
+    repeated string bid_prices = 1;
 
     // 매도 호가 (5단계)
-    repeated float ask_prices = 2;
+    repeated string ask_prices = 2;
 
     // 매수 수량 (5단계)
     repeated int64 bid_quantities = 3;
@@ -171,10 +171,10 @@ message FuturesOrderbookData {
     int64 bid_quote_total_quantity = 8;
 
     // 중간 가격
-    float mid_price = 9;
+    string mid_price = 9;
 
     // 예상 가격
-    float est_price = 10;
+    string est_price = 10;
 
     // 예상 거래량
     int64 est_volume = 11;
@@ -212,7 +212,7 @@ message Order {
     string symbol = 3;
 
     // 주문 가격
-    float price = 4;
+    string price = 4;
 
     // 주문 수량
     int64 quantity = 5;
@@ -239,7 +239,7 @@ message PlaceOrderRequest {
     string symbol = 2;
 
     // 주문 가격
-    int64 price = 3;
+    string price = 3;
 
     // 주문 수량
     int64 quantity = 4;

@@ -122,16 +122,14 @@
         "bidPrices": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           },
           "title": "매수 호가 (10단계, AIP-144)"
         },
         "askPrices": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           },
           "title": "매도 호가 (10단계)"
         },
@@ -169,7 +167,6 @@
         },
         "midPrice": {
           "type": "string",
-          "format": "int64",
           "title": "중간 호가"
         },
         "midAskQuantity": {
@@ -194,7 +191,6 @@
         },
         "estPrice": {
           "type": "string",
-          "format": "int64",
           "title": "예상 가격"
         },
         "estVolume": {
@@ -215,16 +211,14 @@
         "bidPrices": {
           "type": "array",
           "items": {
-            "type": "number",
-            "format": "float"
+            "type": "string"
           },
           "title": "매수 호가 (5단계, AIP-144)"
         },
         "askPrices": {
           "type": "array",
           "items": {
-            "type": "number",
-            "format": "float"
+            "type": "string"
           },
           "title": "매도 호가 (5단계)"
         },
@@ -271,13 +265,11 @@
           "title": "총 매수 호가 수량"
         },
         "midPrice": {
-          "type": "number",
-          "format": "float",
+          "type": "string",
           "title": "중간 가격"
         },
         "estPrice": {
-          "type": "number",
-          "format": "float",
+          "type": "string",
           "title": "예상 가격"
         },
         "estVolume": {

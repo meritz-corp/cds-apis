@@ -365,7 +365,6 @@
       "properties": {
         "lastPrice": {
           "type": "string",
-          "format": "int64",
           "title": "마지막 가격 (원 단위, i64)"
         },
         "quantity": {
@@ -394,8 +393,7 @@
         },
         "lastPrice": {
           "type": "string",
-          "format": "int64",
-          "title": "마지막 가격 (원 단위, i64)"
+          "title": "마지막 가격"
         },
         "constituents": {
           "type": "array",
@@ -546,12 +544,10 @@
       "properties": {
         "lastNav": {
           "type": "string",
-          "format": "int64",
           "title": "마지막 NAV (원 단위, i64)"
         },
         "priorDayNav": {
           "type": "string",
-          "format": "int64",
           "title": "전일 NAV"
         },
         "leverageMultiplier": {
@@ -565,12 +561,10 @@
         },
         "futuresPriorDayPrice": {
           "type": "string",
-          "format": "int64",
           "title": "선물 전일 가격"
         },
         "futuresLastPrice": {
           "type": "string",
-          "format": "int64",
           "title": "선물 현재 가격"
         }
       },
@@ -597,17 +591,14 @@
       "properties": {
         "etfPrice": {
           "type": "string",
-          "format": "int64",
           "title": "ETF 가격 (원 단위, i64)"
         },
         "futurePrice": {
           "type": "string",
-          "format": "int64",
           "title": "선물 가격 (원 단위, i64)"
         },
         "etfNav": {
           "type": "string",
-          "format": "int64",
           "title": "ETF NAV (원 단위, i64)"
         }
       },
@@ -682,7 +673,6 @@
       "properties": {
         "lastNav": {
           "type": "string",
-          "format": "int64",
           "title": "마지막 NAV (원 단위, i64)"
         },
         "constituents": {

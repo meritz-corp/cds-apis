@@ -411,7 +411,7 @@ impl serde::Serialize for EtfOrderbookData {
         if !self.lp_ask_quantities.is_empty() {
             len += 1;
         }
-        if self.mid_price != 0 {
+        if !self.mid_price.is_empty() {
             len += 1;
         }
         if self.mid_ask_quantity != 0 {
@@ -426,7 +426,7 @@ impl serde::Serialize for EtfOrderbookData {
         if self.bid_quote_total_quantity != 0 {
             len += 1;
         }
-        if self.est_price != 0 {
+        if !self.est_price.is_empty() {
             len += 1;
         }
         if self.est_volume != 0 {
@@ -437,10 +437,10 @@ impl serde::Serialize for EtfOrderbookData {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.EtfOrderbookData", len)?;
         if !self.bid_prices.is_empty() {
-            struct_ser.serialize_field("bidPrices", &self.bid_prices.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+            struct_ser.serialize_field("bidPrices", &self.bid_prices)?;
         }
         if !self.ask_prices.is_empty() {
-            struct_ser.serialize_field("askPrices", &self.ask_prices.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+            struct_ser.serialize_field("askPrices", &self.ask_prices)?;
         }
         if !self.bid_quantities.is_empty() {
             struct_ser.serialize_field("bidQuantities", &self.bid_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
@@ -454,10 +454,8 @@ impl serde::Serialize for EtfOrderbookData {
         if !self.lp_ask_quantities.is_empty() {
             struct_ser.serialize_field("lpAskQuantities", &self.lp_ask_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
         }
-        if self.mid_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("midPrice", ToString::to_string(&self.mid_price).as_str())?;
+        if !self.mid_price.is_empty() {
+            struct_ser.serialize_field("midPrice", &self.mid_price)?;
         }
         if self.mid_ask_quantity != 0 {
             #[allow(clippy::needless_borrow)]
@@ -479,10 +477,8 @@ impl serde::Serialize for EtfOrderbookData {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("bidQuoteTotalQuantity", ToString::to_string(&self.bid_quote_total_quantity).as_str())?;
         }
-        if self.est_price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("estPrice", ToString::to_string(&self.est_price).as_str())?;
+        if !self.est_price.is_empty() {
+            struct_ser.serialize_field("estPrice", &self.est_price)?;
         }
         if self.est_volume != 0 {
             #[allow(clippy::needless_borrow)]
@@ -624,19 +620,13 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
                             if bid_prices__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidPrices"));
                             }
-                            bid_prices__ = 
-                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
-                                    .into_iter().map(|x| x.0).collect())
-                            ;
+                            bid_prices__ = Some(map_.next_value()?);
                         }
                         GeneratedField::AskPrices => {
                             if ask_prices__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askPrices"));
                             }
-                            ask_prices__ = 
-                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
-                                    .into_iter().map(|x| x.0).collect())
-                            ;
+                            ask_prices__ = Some(map_.next_value()?);
                         }
                         GeneratedField::BidQuantities => {
                             if bid_quantities__.is_some() {
@@ -678,9 +668,7 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
                             if mid_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("midPrice"));
                             }
-                            mid_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            mid_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::MidAskQuantity => {
                             if mid_ask_quantity__.is_some() {
@@ -718,9 +706,7 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
                             if est_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("estPrice"));
                             }
-                            est_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            est_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::EstVolume => {
                             if est_volume__.is_some() {
@@ -791,10 +777,10 @@ impl serde::Serialize for FuturesOrderbookData {
         if self.bid_quote_total_quantity != 0 {
             len += 1;
         }
-        if self.mid_price != 0. {
+        if !self.mid_price.is_empty() {
             len += 1;
         }
-        if self.est_price != 0. {
+        if !self.est_price.is_empty() {
             len += 1;
         }
         if self.est_volume != 0 {
@@ -832,10 +818,10 @@ impl serde::Serialize for FuturesOrderbookData {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("bidQuoteTotalQuantity", ToString::to_string(&self.bid_quote_total_quantity).as_str())?;
         }
-        if self.mid_price != 0. {
+        if !self.mid_price.is_empty() {
             struct_ser.serialize_field("midPrice", &self.mid_price)?;
         }
-        if self.est_price != 0. {
+        if !self.est_price.is_empty() {
             struct_ser.serialize_field("estPrice", &self.est_price)?;
         }
         if self.est_volume != 0 {
@@ -968,19 +954,13 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
                             if bid_prices__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidPrices"));
                             }
-                            bid_prices__ = 
-                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
-                                    .into_iter().map(|x| x.0).collect())
-                            ;
+                            bid_prices__ = Some(map_.next_value()?);
                         }
                         GeneratedField::AskPrices => {
                             if ask_prices__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askPrices"));
                             }
-                            ask_prices__ = 
-                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
-                                    .into_iter().map(|x| x.0).collect())
-                            ;
+                            ask_prices__ = Some(map_.next_value()?);
                         }
                         GeneratedField::BidQuantities => {
                             if bid_quantities__.is_some() {
@@ -1038,17 +1018,13 @@ impl<'de> serde::Deserialize<'de> for FuturesOrderbookData {
                             if mid_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("midPrice"));
                             }
-                            mid_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            mid_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::EstPrice => {
                             if est_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("estPrice"));
                             }
-                            est_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            est_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::EstVolume => {
                             if est_volume__.is_some() {
@@ -1340,7 +1316,7 @@ impl serde::Serialize for Order {
         if !self.symbol.is_empty() {
             len += 1;
         }
-        if self.price != 0. {
+        if !self.price.is_empty() {
             len += 1;
         }
         if self.quantity != 0 {
@@ -1370,7 +1346,7 @@ impl serde::Serialize for Order {
         if !self.symbol.is_empty() {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if self.price != 0. {
+        if !self.price.is_empty() {
             struct_ser.serialize_field("price", &self.price)?;
         }
         if self.quantity != 0 {
@@ -1517,9 +1493,7 @@ impl<'de> serde::Deserialize<'de> for Order {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -1939,7 +1913,7 @@ impl serde::Serialize for PlaceOrderRequest {
         if !self.symbol.is_empty() {
             len += 1;
         }
-        if self.price != 0 {
+        if !self.price.is_empty() {
             len += 1;
         }
         if self.quantity != 0 {
@@ -1954,10 +1928,8 @@ impl serde::Serialize for PlaceOrderRequest {
         if !self.symbol.is_empty() {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if self.price != 0 {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+        if !self.price.is_empty() {
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if self.quantity != 0 {
             #[allow(clippy::needless_borrow)]
@@ -2053,9 +2025,7 @@ impl<'de> serde::Deserialize<'de> for PlaceOrderRequest {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {

@@ -113,18 +113,18 @@ final $typed_data.Uint8List streamFuturesOrderbookRequestDescriptor = $convert.b
 const EtfOrderbookData$json = {
   '1': 'EtfOrderbookData',
   '2': [
-    {'1': 'bid_prices', '3': 1, '4': 3, '5': 3, '10': 'bidPrices'},
-    {'1': 'ask_prices', '3': 2, '4': 3, '5': 3, '10': 'askPrices'},
+    {'1': 'bid_prices', '3': 1, '4': 3, '5': 9, '10': 'bidPrices'},
+    {'1': 'ask_prices', '3': 2, '4': 3, '5': 9, '10': 'askPrices'},
     {'1': 'bid_quantities', '3': 3, '4': 3, '5': 3, '10': 'bidQuantities'},
     {'1': 'ask_quantities', '3': 4, '4': 3, '5': 3, '10': 'askQuantities'},
     {'1': 'lp_bid_quantities', '3': 5, '4': 3, '5': 3, '10': 'lpBidQuantities'},
     {'1': 'lp_ask_quantities', '3': 6, '4': 3, '5': 3, '10': 'lpAskQuantities'},
-    {'1': 'mid_price', '3': 7, '4': 1, '5': 3, '10': 'midPrice'},
+    {'1': 'mid_price', '3': 7, '4': 1, '5': 9, '10': 'midPrice'},
     {'1': 'mid_ask_quantity', '3': 8, '4': 1, '5': 3, '10': 'midAskQuantity'},
     {'1': 'mid_bid_quantity', '3': 9, '4': 1, '5': 3, '10': 'midBidQuantity'},
     {'1': 'ask_quote_total_quantity', '3': 10, '4': 1, '5': 3, '10': 'askQuoteTotalQuantity'},
     {'1': 'bid_quote_total_quantity', '3': 11, '4': 1, '5': 3, '10': 'bidQuoteTotalQuantity'},
-    {'1': 'est_price', '3': 12, '4': 1, '5': 3, '10': 'estPrice'},
+    {'1': 'est_price', '3': 12, '4': 1, '5': 9, '10': 'estPrice'},
     {'1': 'est_volume', '3': 13, '4': 1, '5': 3, '10': 'estVolume'},
     {'1': 'session_id', '3': 14, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
   ],
@@ -132,15 +132,15 @@ const EtfOrderbookData$json = {
 
 /// Descriptor for `EtfOrderbookData`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfOrderbookDataDescriptor = $convert.base64Decode(
-    'ChBFdGZPcmRlcmJvb2tEYXRhEh0KCmJpZF9wcmljZXMYASADKANSCWJpZFByaWNlcxIdCgphc2'
-    'tfcHJpY2VzGAIgAygDUglhc2tQcmljZXMSJQoOYmlkX3F1YW50aXRpZXMYAyADKANSDWJpZFF1'
+    'ChBFdGZPcmRlcmJvb2tEYXRhEh0KCmJpZF9wcmljZXMYASADKAlSCWJpZFByaWNlcxIdCgphc2'
+    'tfcHJpY2VzGAIgAygJUglhc2tQcmljZXMSJQoOYmlkX3F1YW50aXRpZXMYAyADKANSDWJpZFF1'
     'YW50aXRpZXMSJQoOYXNrX3F1YW50aXRpZXMYBCADKANSDWFza1F1YW50aXRpZXMSKgoRbHBfYm'
     'lkX3F1YW50aXRpZXMYBSADKANSD2xwQmlkUXVhbnRpdGllcxIqChFscF9hc2tfcXVhbnRpdGll'
-    'cxgGIAMoA1IPbHBBc2tRdWFudGl0aWVzEhsKCW1pZF9wcmljZRgHIAEoA1IIbWlkUHJpY2USKA'
+    'cxgGIAMoA1IPbHBBc2tRdWFudGl0aWVzEhsKCW1pZF9wcmljZRgHIAEoCVIIbWlkUHJpY2USKA'
     'oQbWlkX2Fza19xdWFudGl0eRgIIAEoA1IObWlkQXNrUXVhbnRpdHkSKAoQbWlkX2JpZF9xdWFu'
     'dGl0eRgJIAEoA1IObWlkQmlkUXVhbnRpdHkSNwoYYXNrX3F1b3RlX3RvdGFsX3F1YW50aXR5GA'
     'ogASgDUhVhc2tRdW90ZVRvdGFsUXVhbnRpdHkSNwoYYmlkX3F1b3RlX3RvdGFsX3F1YW50aXR5'
-    'GAsgASgDUhViaWRRdW90ZVRvdGFsUXVhbnRpdHkSGwoJZXN0X3ByaWNlGAwgASgDUghlc3RQcm'
+    'GAsgASgDUhViaWRRdW90ZVRvdGFsUXVhbnRpdHkSGwoJZXN0X3ByaWNlGAwgASgJUghlc3RQcm'
     'ljZRIdCgplc3Rfdm9sdW1lGA0gASgDUgllc3RWb2x1bWUSNwoKc2Vzc2lvbl9pZBgOIAEoDjIY'
     'Lmtkby52MS5tYXJrZXQuU2Vzc2lvbklkUglzZXNzaW9uSWQ=');
 
@@ -148,16 +148,16 @@ final $typed_data.Uint8List etfOrderbookDataDescriptor = $convert.base64Decode(
 const FuturesOrderbookData$json = {
   '1': 'FuturesOrderbookData',
   '2': [
-    {'1': 'bid_prices', '3': 1, '4': 3, '5': 2, '10': 'bidPrices'},
-    {'1': 'ask_prices', '3': 2, '4': 3, '5': 2, '10': 'askPrices'},
+    {'1': 'bid_prices', '3': 1, '4': 3, '5': 9, '10': 'bidPrices'},
+    {'1': 'ask_prices', '3': 2, '4': 3, '5': 9, '10': 'askPrices'},
     {'1': 'bid_quantities', '3': 3, '4': 3, '5': 3, '10': 'bidQuantities'},
     {'1': 'ask_quantities', '3': 4, '4': 3, '5': 3, '10': 'askQuantities'},
     {'1': 'bid_counts', '3': 5, '4': 3, '5': 3, '10': 'bidCounts'},
     {'1': 'ask_counts', '3': 6, '4': 3, '5': 3, '10': 'askCounts'},
     {'1': 'ask_quote_total_quantity', '3': 7, '4': 1, '5': 3, '10': 'askQuoteTotalQuantity'},
     {'1': 'bid_quote_total_quantity', '3': 8, '4': 1, '5': 3, '10': 'bidQuoteTotalQuantity'},
-    {'1': 'mid_price', '3': 9, '4': 1, '5': 2, '10': 'midPrice'},
-    {'1': 'est_price', '3': 10, '4': 1, '5': 2, '10': 'estPrice'},
+    {'1': 'mid_price', '3': 9, '4': 1, '5': 9, '10': 'midPrice'},
+    {'1': 'est_price', '3': 10, '4': 1, '5': 9, '10': 'estPrice'},
     {'1': 'est_volume', '3': 11, '4': 1, '5': 3, '10': 'estVolume'},
     {'1': 'session_id', '3': 12, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
   ],
@@ -165,13 +165,13 @@ const FuturesOrderbookData$json = {
 
 /// Descriptor for `FuturesOrderbookData`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List futuresOrderbookDataDescriptor = $convert.base64Decode(
-    'ChRGdXR1cmVzT3JkZXJib29rRGF0YRIdCgpiaWRfcHJpY2VzGAEgAygCUgliaWRQcmljZXMSHQ'
-    'oKYXNrX3ByaWNlcxgCIAMoAlIJYXNrUHJpY2VzEiUKDmJpZF9xdWFudGl0aWVzGAMgAygDUg1i'
+    'ChRGdXR1cmVzT3JkZXJib29rRGF0YRIdCgpiaWRfcHJpY2VzGAEgAygJUgliaWRQcmljZXMSHQ'
+    'oKYXNrX3ByaWNlcxgCIAMoCVIJYXNrUHJpY2VzEiUKDmJpZF9xdWFudGl0aWVzGAMgAygDUg1i'
     'aWRRdWFudGl0aWVzEiUKDmFza19xdWFudGl0aWVzGAQgAygDUg1hc2tRdWFudGl0aWVzEh0KCm'
     'JpZF9jb3VudHMYBSADKANSCWJpZENvdW50cxIdCgphc2tfY291bnRzGAYgAygDUglhc2tDb3Vu'
     'dHMSNwoYYXNrX3F1b3RlX3RvdGFsX3F1YW50aXR5GAcgASgDUhVhc2tRdW90ZVRvdGFsUXVhbn'
     'RpdHkSNwoYYmlkX3F1b3RlX3RvdGFsX3F1YW50aXR5GAggASgDUhViaWRRdW90ZVRvdGFsUXVh'
-    'bnRpdHkSGwoJbWlkX3ByaWNlGAkgASgCUghtaWRQcmljZRIbCgllc3RfcHJpY2UYCiABKAJSCG'
+    'bnRpdHkSGwoJbWlkX3ByaWNlGAkgASgJUghtaWRQcmljZRIbCgllc3RfcHJpY2UYCiABKAlSCG'
     'VzdFByaWNlEh0KCmVzdF92b2x1bWUYCyABKANSCWVzdFZvbHVtZRI3CgpzZXNzaW9uX2lkGAwg'
     'ASgOMhgua2RvLnYxLm1hcmtldC5TZXNzaW9uSWRSCXNlc3Npb25JZA==');
 
@@ -182,7 +182,7 @@ const Order$json = {
     {'1': 'order_id', '3': 1, '4': 1, '5': 9, '10': 'orderId'},
     {'1': 'order_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.market.OrderType', '10': 'orderType'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'price', '3': 4, '4': 1, '5': 2, '10': 'price'},
+    {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'filled_quantity', '3': 6, '4': 1, '5': 3, '10': 'filledQuantity'},
     {'1': 'status', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.market.OrderStatus', '10': 'status'},
@@ -195,7 +195,7 @@ const Order$json = {
 final $typed_data.Uint8List orderDescriptor = $convert.base64Decode(
     'CgVPcmRlchIZCghvcmRlcl9pZBgBIAEoCVIHb3JkZXJJZBI3CgpvcmRlcl90eXBlGAIgASgOMh'
     'gua2RvLnYxLm1hcmtldC5PcmRlclR5cGVSCW9yZGVyVHlwZRIWCgZzeW1ib2wYAyABKAlSBnN5'
-    'bWJvbBIUCgVwcmljZRgEIAEoAlIFcHJpY2USGgoIcXVhbnRpdHkYBSABKANSCHF1YW50aXR5Ei'
+    'bWJvbBIUCgVwcmljZRgEIAEoCVIFcHJpY2USGgoIcXVhbnRpdHkYBSABKANSCHF1YW50aXR5Ei'
     'cKD2ZpbGxlZF9xdWFudGl0eRgGIAEoA1IOZmlsbGVkUXVhbnRpdHkSMgoGc3RhdHVzGAcgASgO'
     'Mhoua2RvLnYxLm1hcmtldC5PcmRlclN0YXR1c1IGc3RhdHVzEh0KCmNyZWF0ZWRfYXQYCCABKA'
     'NSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAkgASgDUgl1cGRhdGVkQXQ=');
@@ -206,7 +206,7 @@ const PlaceOrderRequest$json = {
   '2': [
     {'1': 'order_type', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.market.OrderType', '10': 'orderType'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'price', '3': 3, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'price', '3': 3, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
   ],
 };
@@ -215,7 +215,7 @@ const PlaceOrderRequest$json = {
 final $typed_data.Uint8List placeOrderRequestDescriptor = $convert.base64Decode(
     'ChFQbGFjZU9yZGVyUmVxdWVzdBI3CgpvcmRlcl90eXBlGAEgASgOMhgua2RvLnYxLm1hcmtldC'
     '5PcmRlclR5cGVSCW9yZGVyVHlwZRIWCgZzeW1ib2wYAiABKAlSBnN5bWJvbBIUCgVwcmljZRgD'
-    'IAEoA1IFcHJpY2USGgoIcXVhbnRpdHkYBCABKANSCHF1YW50aXR5');
+    'IAEoCVIFcHJpY2USGgoIcXVhbnRpdHkYBCABKANSCHF1YW50aXR5');
 
 @$core.Deprecated('Use placeOrderResponseDescriptor instead')
 const PlaceOrderResponse$json = {
