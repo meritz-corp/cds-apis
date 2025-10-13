@@ -370,6 +370,9 @@ pub struct EtfLpError {
     /// 에러 발생 시간
     #[prost(message, optional, tag="5")]
     pub timestamp: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 에러 레벨
+    #[prost(enumeration="ErrorLevel", tag="6")]
+    pub error_level: i32,
 }
 /// 상품 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -555,6 +558,50 @@ impl ErrorType {
             "ERROR_TYPE_ORDER_BOOK_UPDATE" => Some(Self::OrderBookUpdate),
             "ERROR_TYPE_LIMIT_EXCEEDED" => Some(Self::LimitExceeded),
             "ERROR_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
+            _ => None,
+        }
+    }
+}
+/// 에러 레벨
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ErrorLevel {
+    Unspecified = 0,
+    /// 디버그 정보
+    Debug = 1,
+    /// 정보성 메시지
+    Info = 2,
+    /// 경고
+    Warning = 3,
+    /// 에러
+    Error = 4,
+    /// 치명적 에러
+    Critical = 5,
+}
+impl ErrorLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ErrorLevel::Unspecified => "ERROR_LEVEL_UNSPECIFIED",
+            ErrorLevel::Debug => "ERROR_LEVEL_DEBUG",
+            ErrorLevel::Info => "ERROR_LEVEL_INFO",
+            ErrorLevel::Warning => "ERROR_LEVEL_WARNING",
+            ErrorLevel::Error => "ERROR_LEVEL_ERROR",
+            ErrorLevel::Critical => "ERROR_LEVEL_CRITICAL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ERROR_LEVEL_UNSPECIFIED" => Some(Self::Unspecified),
+            "ERROR_LEVEL_DEBUG" => Some(Self::Debug),
+            "ERROR_LEVEL_INFO" => Some(Self::Info),
+            "ERROR_LEVEL_WARNING" => Some(Self::Warning),
+            "ERROR_LEVEL_ERROR" => Some(Self::Error),
+            "ERROR_LEVEL_CRITICAL" => Some(Self::Critical),
             _ => None,
         }
     }

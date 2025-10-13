@@ -417,6 +417,20 @@
       },
       "title": "구성종목 가격 정보"
     },
+    "etfErrorLevel": {
+      "type": "string",
+      "enum": [
+        "ERROR_LEVEL_UNSPECIFIED",
+        "ERROR_LEVEL_DEBUG",
+        "ERROR_LEVEL_INFO",
+        "ERROR_LEVEL_WARNING",
+        "ERROR_LEVEL_ERROR",
+        "ERROR_LEVEL_CRITICAL"
+      ],
+      "default": "ERROR_LEVEL_UNSPECIFIED",
+      "description": "- ERROR_LEVEL_DEBUG: 디버그 정보\n - ERROR_LEVEL_INFO: 정보성 메시지\n - ERROR_LEVEL_WARNING: 경고\n - ERROR_LEVEL_ERROR: 에러\n - ERROR_LEVEL_CRITICAL: 치명적 에러",
+      "title": "에러 레벨"
+    },
     "etfErrorType": {
       "type": "string",
       "enum": [
@@ -508,6 +522,10 @@
           "type": "string",
           "format": "date-time",
           "title": "에러 발생 시간"
+        },
+        "errorLevel": {
+          "$ref": "#/definitions/etfErrorLevel",
+          "title": "에러 레벨"
         }
       },
       "title": "ETF LP 에러 이벤트"

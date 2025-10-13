@@ -456,6 +456,9 @@ message EtfLpError {
 
     // 에러 발생 시간
     google.protobuf.Timestamp timestamp = 5;
+
+    // 에러 레벨
+    ErrorLevel error_level = 6;
 }
 
 // 스레드 타입
@@ -476,4 +479,14 @@ enum ErrorType {
     ERROR_TYPE_ORDER_BOOK_UPDATE = 6;  // 오더북 업데이트 실패
     ERROR_TYPE_LIMIT_EXCEEDED = 7;     // 주문 한도 초과
     ERROR_TYPE_SYSTEM_ERROR = 8;       // 시스템 에러
+}
+
+// 에러 레벨
+enum ErrorLevel {
+    ERROR_LEVEL_UNSPECIFIED = 0;
+    ERROR_LEVEL_DEBUG = 1;    // 디버그 정보
+    ERROR_LEVEL_INFO = 2;     // 정보성 메시지
+    ERROR_LEVEL_WARNING = 3;  // 경고
+    ERROR_LEVEL_ERROR = 4;    // 에러
+    ERROR_LEVEL_CRITICAL = 5; // 치명적 에러
 }

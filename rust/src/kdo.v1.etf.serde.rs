@@ -112,6 +112,89 @@ impl<'de> serde::Deserialize<'de> for ConstituentPrice {
         deserializer.deserialize_struct("kdo.v1.etf.ConstituentPrice", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ErrorLevel {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "ERROR_LEVEL_UNSPECIFIED",
+            Self::Debug => "ERROR_LEVEL_DEBUG",
+            Self::Info => "ERROR_LEVEL_INFO",
+            Self::Warning => "ERROR_LEVEL_WARNING",
+            Self::Error => "ERROR_LEVEL_ERROR",
+            Self::Critical => "ERROR_LEVEL_CRITICAL",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for ErrorLevel {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ERROR_LEVEL_UNSPECIFIED",
+            "ERROR_LEVEL_DEBUG",
+            "ERROR_LEVEL_INFO",
+            "ERROR_LEVEL_WARNING",
+            "ERROR_LEVEL_ERROR",
+            "ERROR_LEVEL_CRITICAL",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ErrorLevel;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ERROR_LEVEL_UNSPECIFIED" => Ok(ErrorLevel::Unspecified),
+                    "ERROR_LEVEL_DEBUG" => Ok(ErrorLevel::Debug),
+                    "ERROR_LEVEL_INFO" => Ok(ErrorLevel::Info),
+                    "ERROR_LEVEL_WARNING" => Ok(ErrorLevel::Warning),
+                    "ERROR_LEVEL_ERROR" => Ok(ErrorLevel::Error),
+                    "ERROR_LEVEL_CRITICAL" => Ok(ErrorLevel::Critical),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ErrorType {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -490,6 +573,9 @@ impl serde::Serialize for EtfLpError {
         if self.timestamp.is_some() {
             len += 1;
         }
+        if self.error_level != 0 {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.EtfLpError", len)?;
         if !self.symbol.is_empty() {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -510,6 +596,11 @@ impl serde::Serialize for EtfLpError {
         if let Some(v) = self.timestamp.as_ref() {
             struct_ser.serialize_field("timestamp", v)?;
         }
+        if self.error_level != 0 {
+            let v = ErrorLevel::try_from(self.error_level)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.error_level)))?;
+            struct_ser.serialize_field("errorLevel", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -528,6 +619,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
             "error_message",
             "errorMessage",
             "timestamp",
+            "error_level",
+            "errorLevel",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -537,6 +630,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
             ErrorType,
             ErrorMessage,
             Timestamp,
+            ErrorLevel,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -563,6 +657,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                             "errorType" | "error_type" => Ok(GeneratedField::ErrorType),
                             "errorMessage" | "error_message" => Ok(GeneratedField::ErrorMessage),
                             "timestamp" => Ok(GeneratedField::Timestamp),
+                            "errorLevel" | "error_level" => Ok(GeneratedField::ErrorLevel),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -587,6 +682,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                 let mut error_type__ = None;
                 let mut error_message__ = None;
                 let mut timestamp__ = None;
+                let mut error_level__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -619,6 +715,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                             }
                             timestamp__ = map_.next_value()?;
                         }
+                        GeneratedField::ErrorLevel => {
+                            if error_level__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("errorLevel"));
+                            }
+                            error_level__ = Some(map_.next_value::<ErrorLevel>()? as i32);
+                        }
                     }
                 }
                 Ok(EtfLpError {
@@ -627,6 +729,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                     error_type: error_type__.unwrap_or_default(),
                     error_message: error_message__.unwrap_or_default(),
                     timestamp: timestamp__,
+                    error_level: error_level__.unwrap_or_default(),
                 })
             }
         }

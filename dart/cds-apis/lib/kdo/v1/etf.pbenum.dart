@@ -124,5 +124,29 @@ class ErrorType extends $pb.ProtobufEnum {
   const ErrorType._(super.value, super.name);
 }
 
+/// 에러 레벨
+class ErrorLevel extends $pb.ProtobufEnum {
+  static const ErrorLevel ERROR_LEVEL_UNSPECIFIED = ErrorLevel._(0, _omitEnumNames ? '' : 'ERROR_LEVEL_UNSPECIFIED');
+  static const ErrorLevel ERROR_LEVEL_DEBUG = ErrorLevel._(1, _omitEnumNames ? '' : 'ERROR_LEVEL_DEBUG');
+  static const ErrorLevel ERROR_LEVEL_INFO = ErrorLevel._(2, _omitEnumNames ? '' : 'ERROR_LEVEL_INFO');
+  static const ErrorLevel ERROR_LEVEL_WARNING = ErrorLevel._(3, _omitEnumNames ? '' : 'ERROR_LEVEL_WARNING');
+  static const ErrorLevel ERROR_LEVEL_ERROR = ErrorLevel._(4, _omitEnumNames ? '' : 'ERROR_LEVEL_ERROR');
+  static const ErrorLevel ERROR_LEVEL_CRITICAL = ErrorLevel._(5, _omitEnumNames ? '' : 'ERROR_LEVEL_CRITICAL');
+
+  static const $core.List<ErrorLevel> values = <ErrorLevel> [
+    ERROR_LEVEL_UNSPECIFIED,
+    ERROR_LEVEL_DEBUG,
+    ERROR_LEVEL_INFO,
+    ERROR_LEVEL_WARNING,
+    ERROR_LEVEL_ERROR,
+    ERROR_LEVEL_CRITICAL,
+  ];
+
+  static final $core.List<ErrorLevel?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static ErrorLevel? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const ErrorLevel._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

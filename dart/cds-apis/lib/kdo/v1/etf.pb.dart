@@ -1874,6 +1874,7 @@ class EtfLpError extends $pb.GeneratedMessage {
     ErrorType? errorType,
     $core.String? errorMessage,
     $2.Timestamp? timestamp,
+    ErrorLevel? errorLevel,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -1881,6 +1882,7 @@ class EtfLpError extends $pb.GeneratedMessage {
     if (errorType != null) result.errorType = errorType;
     if (errorMessage != null) result.errorMessage = errorMessage;
     if (timestamp != null) result.timestamp = timestamp;
+    if (errorLevel != null) result.errorLevel = errorLevel;
     return result;
   }
 
@@ -1895,6 +1897,7 @@ class EtfLpError extends $pb.GeneratedMessage {
     ..e<ErrorType>(3, _omitFieldNames ? '' : 'errorType', $pb.PbFieldType.OE, defaultOrMaker: ErrorType.ERROR_TYPE_UNSPECIFIED, valueOf: ErrorType.valueOf, enumValues: ErrorType.values)
     ..aOS(4, _omitFieldNames ? '' : 'errorMessage')
     ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $2.Timestamp.create)
+    ..e<ErrorLevel>(6, _omitFieldNames ? '' : 'errorLevel', $pb.PbFieldType.OE, defaultOrMaker: ErrorLevel.ERROR_LEVEL_UNSPECIFIED, valueOf: ErrorLevel.valueOf, enumValues: ErrorLevel.values)
     ..hasRequiredFields = false
   ;
 
@@ -1966,6 +1969,16 @@ class EtfLpError extends $pb.GeneratedMessage {
   void clearTimestamp() => $_clearField(5);
   @$pb.TagNumber(5)
   $2.Timestamp ensureTimestamp() => $_ensure(4);
+
+  /// 에러 레벨
+  @$pb.TagNumber(6)
+  ErrorLevel get errorLevel => $_getN(5);
+  @$pb.TagNumber(6)
+  set errorLevel(ErrorLevel value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasErrorLevel() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearErrorLevel() => $_clearField(6);
 }
 
 

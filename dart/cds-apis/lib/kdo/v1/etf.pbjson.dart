@@ -106,6 +106,25 @@ final $typed_data.Uint8List errorTypeDescriptor = $convert.base64Decode(
     'QVRFEAYSHQoZRVJST1JfVFlQRV9MSU1JVF9FWENFRURFRBAHEhsKF0VSUk9SX1RZUEVfU1lTVE'
     'VNX0VSUk9SEAg=');
 
+@$core.Deprecated('Use errorLevelDescriptor instead')
+const ErrorLevel$json = {
+  '1': 'ErrorLevel',
+  '2': [
+    {'1': 'ERROR_LEVEL_UNSPECIFIED', '2': 0},
+    {'1': 'ERROR_LEVEL_DEBUG', '2': 1},
+    {'1': 'ERROR_LEVEL_INFO', '2': 2},
+    {'1': 'ERROR_LEVEL_WARNING', '2': 3},
+    {'1': 'ERROR_LEVEL_ERROR', '2': 4},
+    {'1': 'ERROR_LEVEL_CRITICAL', '2': 5},
+  ],
+};
+
+/// Descriptor for `ErrorLevel`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List errorLevelDescriptor = $convert.base64Decode(
+    'CgpFcnJvckxldmVsEhsKF0VSUk9SX0xFVkVMX1VOU1BFQ0lGSUVEEAASFQoRRVJST1JfTEVWRU'
+    'xfREVCVUcQARIUChBFUlJPUl9MRVZFTF9JTkZPEAISFwoTRVJST1JfTEVWRUxfV0FSTklORxAD'
+    'EhUKEUVSUk9SX0xFVkVMX0VSUk9SEAQSGAoURVJST1JfTEVWRUxfQ1JJVElDQUwQBQ==');
+
 @$core.Deprecated('Use etfDescriptor instead')
 const Etf$json = {
   '1': 'Etf',
@@ -538,6 +557,7 @@ const EtfLpError$json = {
     {'1': 'error_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.etf.ErrorType', '10': 'errorType'},
     {'1': 'error_message', '3': 4, '4': 1, '5': 9, '10': 'errorMessage'},
     {'1': 'timestamp', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
+    {'1': 'error_level', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.etf.ErrorLevel', '10': 'errorLevel'},
   ],
 };
 
@@ -547,5 +567,6 @@ final $typed_data.Uint8List etfLpErrorDescriptor = $convert.base64Decode(
     'gOMhYua2RvLnYxLmV0Zi5UaHJlYWRUeXBlUgp0aHJlYWRUeXBlEjQKCmVycm9yX3R5cGUYAyAB'
     'KA4yFS5rZG8udjEuZXRmLkVycm9yVHlwZVIJZXJyb3JUeXBlEiMKDWVycm9yX21lc3NhZ2UYBC'
     'ABKAlSDGVycm9yTWVzc2FnZRI4Cgl0aW1lc3RhbXAYBSABKAsyGi5nb29nbGUucHJvdG9idWYu'
-    'VGltZXN0YW1wUgl0aW1lc3RhbXA=');
+    'VGltZXN0YW1wUgl0aW1lc3RhbXASNwoLZXJyb3JfbGV2ZWwYBiABKA4yFi5rZG8udjEuZXRmLk'
+    'Vycm9yTGV2ZWxSCmVycm9yTGV2ZWw=');
 
