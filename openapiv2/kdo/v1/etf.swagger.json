@@ -162,6 +162,48 @@
         ]
       }
     },
+    "/v1/{etf}/lp/errors:stream": {
+      "get": {
+        "summary": "ETF LP 에러 이벤트 실시간 스트리밍",
+        "operationId": "EtfService_StreamEtfErrors",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/etfEtfLpError"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of etfEtfLpError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "ETF 리소스 이름 (예: \"etfs/KR7122630002\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
     "/v1/{etf}/lp/status": {
       "get": {
         "summary": "ETF LP 상태 조회",
@@ -375,6 +417,23 @@
       },
       "title": "구성종목 가격 정보"
     },
+    "etfErrorType": {
+      "type": "string",
+      "enum": [
+        "ERROR_TYPE_UNSPECIFIED",
+        "ERROR_TYPE_INITIALIZATION",
+        "ERROR_TYPE_PRICE_UPDATE",
+        "ERROR_TYPE_ORDER_SUBMIT",
+        "ERROR_TYPE_ORDER_PROCESSING",
+        "ERROR_TYPE_NAV_CALCULATION",
+        "ERROR_TYPE_ORDER_BOOK_UPDATE",
+        "ERROR_TYPE_LIMIT_EXCEEDED",
+        "ERROR_TYPE_SYSTEM_ERROR"
+      ],
+      "default": "ERROR_TYPE_UNSPECIFIED",
+      "description": "- ERROR_TYPE_INITIALIZATION: 초기화 실패\n - ERROR_TYPE_PRICE_UPDATE: 가격 업데이트 실패\n - ERROR_TYPE_ORDER_SUBMIT: 주문 제출 실패\n - ERROR_TYPE_ORDER_PROCESSING: 주문 처리 실패\n - ERROR_TYPE_NAV_CALCULATION: NAV 계산 실패\n - ERROR_TYPE_ORDER_BOOK_UPDATE: 오더북 업데이트 실패\n - ERROR_TYPE_LIMIT_EXCEEDED: 주문 한도 초과\n - ERROR_TYPE_SYSTEM_ERROR: 시스템 에러",
+      "title": "에러 타입"
+    },
     "etfEtf": {
       "type": "object",
       "properties": {
@@ -425,6 +484,33 @@
           "title": "복제 방법"
         }
       }
+    },
+    "etfEtfLpError": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "threadType": {
+          "$ref": "#/definitions/etfThreadType",
+          "title": "스레드 타입"
+        },
+        "errorType": {
+          "$ref": "#/definitions/etfErrorType",
+          "title": "에러 타입"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "에러 메시지"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "에러 발생 시간"
+        }
+      },
+      "title": "ETF LP 에러 이벤트"
     },
     "etfEtfLpState": {
       "type": "string",
@@ -734,6 +820,16 @@
         }
       },
       "title": "ETF LP 중지 응답"
+    },
+    "etfThreadType": {
+      "type": "string",
+      "enum": [
+        "THREAD_TYPE_UNSPECIFIED",
+        "THREAD_TYPE_QUOTE",
+        "THREAD_TYPE_HEDGE"
+      ],
+      "default": "THREAD_TYPE_UNSPECIFIED",
+      "title": "스레드 타입"
     },
     "etfTimeFrameStatus": {
       "type": "object",

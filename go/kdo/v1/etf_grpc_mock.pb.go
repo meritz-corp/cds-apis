@@ -254,6 +254,248 @@ func (mr *MockEtfService_StreamEtfLpStatusServerMockRecorder) SetTrailer(arg0 in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockEtfService_StreamEtfLpStatusServer)(nil).SetTrailer), arg0)
 }
 
+// MockEtfService_StreamEtfErrorsClient is a mock of EtfService_StreamEtfErrorsClient interface.
+type MockEtfService_StreamEtfErrorsClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockEtfService_StreamEtfErrorsClientMockRecorder
+}
+
+// MockEtfService_StreamEtfErrorsClientMockRecorder is the mock recorder for MockEtfService_StreamEtfErrorsClient.
+type MockEtfService_StreamEtfErrorsClientMockRecorder struct {
+	mock *MockEtfService_StreamEtfErrorsClient
+}
+
+// NewMockEtfService_StreamEtfErrorsClient creates a new mock instance.
+func NewMockEtfService_StreamEtfErrorsClient(ctrl *gomock.Controller) *MockEtfService_StreamEtfErrorsClient {
+	mock := &MockEtfService_StreamEtfErrorsClient{ctrl: ctrl}
+	mock.recorder = &MockEtfService_StreamEtfErrorsClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockEtfService_StreamEtfErrorsClient) EXPECT() *MockEtfService_StreamEtfErrorsClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockEtfService_StreamEtfErrorsClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockEtfService_StreamEtfErrorsClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockEtfService_StreamEtfErrorsClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockEtfService_StreamEtfErrorsClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockEtfService_StreamEtfErrorsClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockEtfService_StreamEtfErrorsClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockEtfService_StreamEtfErrorsClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockEtfService_StreamEtfErrorsClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockEtfService_StreamEtfErrorsClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockEtfService_StreamEtfErrorsClient) Recv() (*EtfLpError, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*EtfLpError)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockEtfService_StreamEtfErrorsClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockEtfService_StreamEtfErrorsClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockEtfService_StreamEtfErrorsClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockEtfService_StreamEtfErrorsClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockEtfService_StreamEtfErrorsClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockEtfService_StreamEtfErrorsClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockEtfService_StreamEtfErrorsClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockEtfService_StreamEtfErrorsClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockEtfService_StreamEtfErrorsClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockEtfService_StreamEtfErrorsClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockEtfService_StreamEtfErrorsClient)(nil).Trailer))
+}
+
+// MockEtfService_StreamEtfErrorsServer is a mock of EtfService_StreamEtfErrorsServer interface.
+type MockEtfService_StreamEtfErrorsServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockEtfService_StreamEtfErrorsServerMockRecorder
+}
+
+// MockEtfService_StreamEtfErrorsServerMockRecorder is the mock recorder for MockEtfService_StreamEtfErrorsServer.
+type MockEtfService_StreamEtfErrorsServerMockRecorder struct {
+	mock *MockEtfService_StreamEtfErrorsServer
+}
+
+// NewMockEtfService_StreamEtfErrorsServer creates a new mock instance.
+func NewMockEtfService_StreamEtfErrorsServer(ctrl *gomock.Controller) *MockEtfService_StreamEtfErrorsServer {
+	mock := &MockEtfService_StreamEtfErrorsServer{ctrl: ctrl}
+	mock.recorder = &MockEtfService_StreamEtfErrorsServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockEtfService_StreamEtfErrorsServer) EXPECT() *MockEtfService_StreamEtfErrorsServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockEtfService_StreamEtfErrorsServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockEtfService_StreamEtfErrorsServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockEtfService_StreamEtfErrorsServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockEtfService_StreamEtfErrorsServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockEtfService_StreamEtfErrorsServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockEtfService_StreamEtfErrorsServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockEtfService_StreamEtfErrorsServer) Send(arg0 *EtfLpError) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockEtfService_StreamEtfErrorsServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockEtfService_StreamEtfErrorsServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockEtfService_StreamEtfErrorsServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockEtfService_StreamEtfErrorsServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockEtfService_StreamEtfErrorsServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockEtfService_StreamEtfErrorsServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockEtfService_StreamEtfErrorsServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockEtfService_StreamEtfErrorsServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockEtfService_StreamEtfErrorsServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockEtfService_StreamEtfErrorsServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockEtfService_StreamEtfErrorsServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockEtfService_StreamEtfErrorsServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockEtfService_StreamEtfErrorsServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockEtfService_StreamEtfErrorsServer)(nil).SetTrailer), arg0)
+}
+
 // MockEtfServiceClient is a mock of EtfServiceClient interface.
 type MockEtfServiceClient struct {
 	ctrl     *gomock.Controller
@@ -395,6 +637,26 @@ func (mr *MockEtfServiceClientMockRecorder) StopEtfLp(ctx, in interface{}, opts 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopEtfLp", reflect.TypeOf((*MockEtfServiceClient)(nil).StopEtfLp), varargs...)
+}
+
+// StreamEtfErrors mocks base method.
+func (m *MockEtfServiceClient) StreamEtfErrors(ctx context.Context, in *StreamEtfErrorsRequest, opts ...grpc.CallOption) (EtfService_StreamEtfErrorsClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamEtfErrors", varargs...)
+	ret0, _ := ret[0].(EtfService_StreamEtfErrorsClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamEtfErrors indicates an expected call of StreamEtfErrors.
+func (mr *MockEtfServiceClientMockRecorder) StreamEtfErrors(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEtfErrors", reflect.TypeOf((*MockEtfServiceClient)(nil).StreamEtfErrors), varargs...)
 }
 
 // StreamEtfLpStatus mocks base method.
@@ -548,6 +810,20 @@ func (m *MockEtfServiceServer) StopEtfLp(ctx context.Context, in *StopEtfLpReque
 func (mr *MockEtfServiceServerMockRecorder) StopEtfLp(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopEtfLp", reflect.TypeOf((*MockEtfServiceServer)(nil).StopEtfLp), ctx, in)
+}
+
+// StreamEtfErrors mocks base method.
+func (m *MockEtfServiceServer) StreamEtfErrors(blob *StreamEtfErrorsRequest, server EtfService_StreamEtfErrorsServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamEtfErrors", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamEtfErrors indicates an expected call of StreamEtfErrors.
+func (mr *MockEtfServiceServerMockRecorder) StreamEtfErrors(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEtfErrors", reflect.TypeOf((*MockEtfServiceServer)(nil).StreamEtfErrors), blob, server)
 }
 
 // StreamEtfLpStatus mocks base method.

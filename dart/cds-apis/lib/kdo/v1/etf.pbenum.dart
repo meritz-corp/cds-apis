@@ -76,5 +76,53 @@ class EtfLpState extends $pb.ProtobufEnum {
   const EtfLpState._(super.value, super.name);
 }
 
+/// 스레드 타입
+class ThreadType extends $pb.ProtobufEnum {
+  static const ThreadType THREAD_TYPE_UNSPECIFIED = ThreadType._(0, _omitEnumNames ? '' : 'THREAD_TYPE_UNSPECIFIED');
+  static const ThreadType THREAD_TYPE_QUOTE = ThreadType._(1, _omitEnumNames ? '' : 'THREAD_TYPE_QUOTE');
+  static const ThreadType THREAD_TYPE_HEDGE = ThreadType._(2, _omitEnumNames ? '' : 'THREAD_TYPE_HEDGE');
+
+  static const $core.List<ThreadType> values = <ThreadType> [
+    THREAD_TYPE_UNSPECIFIED,
+    THREAD_TYPE_QUOTE,
+    THREAD_TYPE_HEDGE,
+  ];
+
+  static final $core.List<ThreadType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static ThreadType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const ThreadType._(super.value, super.name);
+}
+
+/// 에러 타입
+class ErrorType extends $pb.ProtobufEnum {
+  static const ErrorType ERROR_TYPE_UNSPECIFIED = ErrorType._(0, _omitEnumNames ? '' : 'ERROR_TYPE_UNSPECIFIED');
+  static const ErrorType ERROR_TYPE_INITIALIZATION = ErrorType._(1, _omitEnumNames ? '' : 'ERROR_TYPE_INITIALIZATION');
+  static const ErrorType ERROR_TYPE_PRICE_UPDATE = ErrorType._(2, _omitEnumNames ? '' : 'ERROR_TYPE_PRICE_UPDATE');
+  static const ErrorType ERROR_TYPE_ORDER_SUBMIT = ErrorType._(3, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_SUBMIT');
+  static const ErrorType ERROR_TYPE_ORDER_PROCESSING = ErrorType._(4, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_PROCESSING');
+  static const ErrorType ERROR_TYPE_NAV_CALCULATION = ErrorType._(5, _omitEnumNames ? '' : 'ERROR_TYPE_NAV_CALCULATION');
+  static const ErrorType ERROR_TYPE_ORDER_BOOK_UPDATE = ErrorType._(6, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_BOOK_UPDATE');
+  static const ErrorType ERROR_TYPE_LIMIT_EXCEEDED = ErrorType._(7, _omitEnumNames ? '' : 'ERROR_TYPE_LIMIT_EXCEEDED');
+  static const ErrorType ERROR_TYPE_SYSTEM_ERROR = ErrorType._(8, _omitEnumNames ? '' : 'ERROR_TYPE_SYSTEM_ERROR');
+
+  static const $core.List<ErrorType> values = <ErrorType> [
+    ERROR_TYPE_UNSPECIFIED,
+    ERROR_TYPE_INITIALIZATION,
+    ERROR_TYPE_PRICE_UPDATE,
+    ERROR_TYPE_ORDER_SUBMIT,
+    ERROR_TYPE_ORDER_PROCESSING,
+    ERROR_TYPE_NAV_CALCULATION,
+    ERROR_TYPE_ORDER_BOOK_UPDATE,
+    ERROR_TYPE_LIMIT_EXCEEDED,
+    ERROR_TYPE_SYSTEM_ERROR,
+  ];
+
+  static final $core.List<ErrorType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 8);
+  static ErrorType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const ErrorType._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

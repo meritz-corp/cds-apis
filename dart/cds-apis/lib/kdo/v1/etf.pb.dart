@@ -16,6 +16,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/field_mask.pb.dart' as $1;
+import '../../google/protobuf/timestamp.pb.dart' as $2;
 import 'etf.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -1815,6 +1816,156 @@ class StopEtfLpResponse extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(1);
   @$pb.TagNumber(2)
   void clearMessage() => $_clearField(2);
+}
+
+/// StreamEtfErrors 요청
+class StreamEtfErrorsRequest extends $pb.GeneratedMessage {
+  factory StreamEtfErrorsRequest({
+    $core.String? etf,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    return result;
+  }
+
+  StreamEtfErrorsRequest._();
+
+  factory StreamEtfErrorsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamEtfErrorsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfErrorsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfErrorsRequest clone() => StreamEtfErrorsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfErrorsRequest copyWith(void Function(StreamEtfErrorsRequest) updates) => super.copyWith((message) => updates(message as StreamEtfErrorsRequest)) as StreamEtfErrorsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfErrorsRequest create() => StreamEtfErrorsRequest._();
+  @$core.override
+  StreamEtfErrorsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamEtfErrorsRequest> createRepeated() => $pb.PbList<StreamEtfErrorsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfErrorsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfErrorsRequest>(create);
+  static StreamEtfErrorsRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: "etfs/KR7122630002")
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+}
+
+/// ETF LP 에러 이벤트
+class EtfLpError extends $pb.GeneratedMessage {
+  factory EtfLpError({
+    $core.String? symbol,
+    ThreadType? threadType,
+    ErrorType? errorType,
+    $core.String? errorMessage,
+    $2.Timestamp? timestamp,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (threadType != null) result.threadType = threadType;
+    if (errorType != null) result.errorType = errorType;
+    if (errorMessage != null) result.errorMessage = errorMessage;
+    if (timestamp != null) result.timestamp = timestamp;
+    return result;
+  }
+
+  EtfLpError._();
+
+  factory EtfLpError.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLpError.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpError', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..e<ThreadType>(2, _omitFieldNames ? '' : 'threadType', $pb.PbFieldType.OE, defaultOrMaker: ThreadType.THREAD_TYPE_UNSPECIFIED, valueOf: ThreadType.valueOf, enumValues: ThreadType.values)
+    ..e<ErrorType>(3, _omitFieldNames ? '' : 'errorType', $pb.PbFieldType.OE, defaultOrMaker: ErrorType.ERROR_TYPE_UNSPECIFIED, valueOf: ErrorType.valueOf, enumValues: ErrorType.values)
+    ..aOS(4, _omitFieldNames ? '' : 'errorMessage')
+    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $2.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpError clone() => EtfLpError()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpError copyWith(void Function(EtfLpError) updates) => super.copyWith((message) => updates(message as EtfLpError)) as EtfLpError;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfLpError create() => EtfLpError._();
+  @$core.override
+  EtfLpError createEmptyInstance() => create();
+  static $pb.PbList<EtfLpError> createRepeated() => $pb.PbList<EtfLpError>();
+  @$core.pragma('dart2js:noInline')
+  static EtfLpError getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpError>(create);
+  static EtfLpError? _defaultInstance;
+
+  /// ETF 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 스레드 타입
+  @$pb.TagNumber(2)
+  ThreadType get threadType => $_getN(1);
+  @$pb.TagNumber(2)
+  set threadType(ThreadType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasThreadType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearThreadType() => $_clearField(2);
+
+  /// 에러 타입
+  @$pb.TagNumber(3)
+  ErrorType get errorType => $_getN(2);
+  @$pb.TagNumber(3)
+  set errorType(ErrorType value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasErrorType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearErrorType() => $_clearField(3);
+
+  /// 에러 메시지
+  @$pb.TagNumber(4)
+  $core.String get errorMessage => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set errorMessage($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasErrorMessage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearErrorMessage() => $_clearField(4);
+
+  /// 에러 발생 시간
+  @$pb.TagNumber(5)
+  $2.Timestamp get timestamp => $_getN(4);
+  @$pb.TagNumber(5)
+  set timestamp($2.Timestamp value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasTimestamp() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTimestamp() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $2.Timestamp ensureTimestamp() => $_ensure(4);
 }
 
 

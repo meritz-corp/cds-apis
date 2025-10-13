@@ -71,6 +71,11 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$stopEtfLp, request, options: options);
   }
 
+  /// ETF LP 에러 이벤트 실시간 스트리밍
+  $grpc.ResponseStream<$0.EtfLpError> streamEtfErrors($0.StreamEtfErrorsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamEtfErrors, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -105,6 +110,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/StopEtfLp',
       ($0.StopEtfLpRequest value) => value.writeToBuffer(),
       $0.StopEtfLpResponse.fromBuffer);
+  static final _$streamEtfErrors = $grpc.ClientMethod<$0.StreamEtfErrorsRequest, $0.EtfLpError>(
+      '/kdo.v1.etf.EtfService/StreamEtfErrors',
+      ($0.StreamEtfErrorsRequest value) => value.writeToBuffer(),
+      $0.EtfLpError.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -168,6 +177,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.StopEtfLpRequest.fromBuffer(value),
         ($0.StopEtfLpResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamEtfErrorsRequest, $0.EtfLpError>(
+        'StreamEtfErrors',
+        streamEtfErrors_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamEtfErrorsRequest.fromBuffer(value),
+        ($0.EtfLpError value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -217,5 +233,11 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.StopEtfLpResponse> stopEtfLp($grpc.ServiceCall call, $0.StopEtfLpRequest request);
+
+  $async.Stream<$0.EtfLpError> streamEtfErrors_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfErrorsRequest> $request) async* {
+    yield* streamEtfErrors($call, await $request);
+  }
+
+  $async.Stream<$0.EtfLpError> streamEtfErrors($grpc.ServiceCall call, $0.StreamEtfErrorsRequest request);
 
 }

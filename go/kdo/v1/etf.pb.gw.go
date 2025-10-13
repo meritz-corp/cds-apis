@@ -504,6 +504,40 @@ func local_request_EtfService_StopEtfLp_0(ctx context.Context, marshaler runtime
 
 }
 
+func request_EtfService_StreamEtfErrors_0(ctx context.Context, marshaler runtime.Marshaler, client EtfServiceClient, req *http.Request, pathParams map[string]string) (EtfService_StreamEtfErrorsClient, runtime.ServerMetadata, error) {
+	var protoReq StreamEtfErrorsRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["etf"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "etf")
+	}
+
+	protoReq.Etf, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
+	}
+
+	stream, err := client.StreamEtfErrors(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterEtfServiceHandlerServer registers the http handlers for service EtfService to "mux".
 // UnaryRPC     :call EtfServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -690,6 +724,13 @@ func RegisterEtfServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 
 		forward_EtfService_StopEtfLp_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("GET", pattern_EtfService_StreamEtfErrors_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -909,6 +950,28 @@ func RegisterEtfServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 
 	})
 
+	mux.Handle("GET", pattern_EtfService_StreamEtfErrors_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.etf.EtfService/StreamEtfErrors", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/lp/errors:stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_EtfService_StreamEtfErrors_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_EtfService_StreamEtfErrors_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -928,6 +991,8 @@ var (
 	pattern_EtfService_StartEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "lp"}, "start"))
 
 	pattern_EtfService_StopEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "etfs", "etf", "lp"}, "stop"))
+
+	pattern_EtfService_StreamEtfErrors_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 2, 4}, []string{"v1", "etfs", "etf", "lp", "errors"}, "stream"))
 )
 
 var (
@@ -946,4 +1011,6 @@ var (
 	forward_EtfService_StartEtfLp_0 = runtime.ForwardResponseMessage
 
 	forward_EtfService_StopEtfLp_0 = runtime.ForwardResponseMessage
+
+	forward_EtfService_StreamEtfErrors_0 = runtime.ForwardResponseStream
 )

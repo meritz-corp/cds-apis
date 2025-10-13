@@ -280,6 +280,31 @@ pub mod etf_service_client {
                 .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "StopEtfLp"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn stream_etf_errors(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamEtfErrorsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::EtfLpError>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.etf.EtfService/StreamEtfErrors",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "StreamEtfErrors"));
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -343,6 +368,19 @@ pub mod etf_service_server {
             request: tonic::Request<super::StopEtfLpRequest>,
         ) -> std::result::Result<
             tonic::Response<super::StopEtfLpResponse>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamEtfErrors method.
+        type StreamEtfErrorsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::EtfLpError, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_etf_errors(
+            &self,
+            request: tonic::Request<super::StreamEtfErrorsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamEtfErrorsStream>,
             tonic::Status,
         >;
     }
@@ -784,6 +822,53 @@ pub mod etf_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.etf.EtfService/StreamEtfErrors" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamEtfErrorsSvc<T: EtfService>(pub Arc<T>);
+                    impl<
+                        T: EtfService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamEtfErrorsRequest,
+                    > for StreamEtfErrorsSvc<T> {
+                        type Response = super::EtfLpError;
+                        type ResponseStream = T::StreamEtfErrorsStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamEtfErrorsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as EtfService>::stream_etf_errors(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamEtfErrorsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

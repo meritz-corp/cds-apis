@@ -343,6 +343,34 @@ pub struct StopEtfLpResponse {
     #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,
 }
+/// StreamEtfErrors 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamEtfErrorsRequest {
+    /// ETF 리소스 이름 (예: "etfs/KR7122630002")
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+}
+/// ETF LP 에러 이벤트
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfLpError {
+    /// ETF 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 스레드 타입
+    #[prost(enumeration="ThreadType", tag="2")]
+    pub thread_type: i32,
+    /// 에러 타입
+    #[prost(enumeration="ErrorType", tag="3")]
+    pub error_type: i32,
+    /// 에러 메시지
+    #[prost(string, tag="4")]
+    pub error_message: ::prost::alloc::string::String,
+    /// 에러 발생 시간
+    #[prost(message, optional, tag="5")]
+    pub timestamp: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
 /// 상품 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -441,6 +469,92 @@ impl EtfLpState {
             "ETF_LP_STATE_RUNNING" => Some(Self::Running),
             "ETF_LP_STATE_STOPPING" => Some(Self::Stopping),
             "ETF_LP_STATE_ERROR" => Some(Self::Error),
+            _ => None,
+        }
+    }
+}
+/// 스레드 타입
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ThreadType {
+    Unspecified = 0,
+    Quote = 1,
+    Hedge = 2,
+}
+impl ThreadType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ThreadType::Unspecified => "THREAD_TYPE_UNSPECIFIED",
+            ThreadType::Quote => "THREAD_TYPE_QUOTE",
+            ThreadType::Hedge => "THREAD_TYPE_HEDGE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "THREAD_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "THREAD_TYPE_QUOTE" => Some(Self::Quote),
+            "THREAD_TYPE_HEDGE" => Some(Self::Hedge),
+            _ => None,
+        }
+    }
+}
+/// 에러 타입
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ErrorType {
+    Unspecified = 0,
+    /// 초기화 실패
+    Initialization = 1,
+    /// 가격 업데이트 실패
+    PriceUpdate = 2,
+    /// 주문 제출 실패
+    OrderSubmit = 3,
+    /// 주문 처리 실패
+    OrderProcessing = 4,
+    /// NAV 계산 실패
+    NavCalculation = 5,
+    /// 오더북 업데이트 실패
+    OrderBookUpdate = 6,
+    /// 주문 한도 초과
+    LimitExceeded = 7,
+    /// 시스템 에러
+    SystemError = 8,
+}
+impl ErrorType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ErrorType::Unspecified => "ERROR_TYPE_UNSPECIFIED",
+            ErrorType::Initialization => "ERROR_TYPE_INITIALIZATION",
+            ErrorType::PriceUpdate => "ERROR_TYPE_PRICE_UPDATE",
+            ErrorType::OrderSubmit => "ERROR_TYPE_ORDER_SUBMIT",
+            ErrorType::OrderProcessing => "ERROR_TYPE_ORDER_PROCESSING",
+            ErrorType::NavCalculation => "ERROR_TYPE_NAV_CALCULATION",
+            ErrorType::OrderBookUpdate => "ERROR_TYPE_ORDER_BOOK_UPDATE",
+            ErrorType::LimitExceeded => "ERROR_TYPE_LIMIT_EXCEEDED",
+            ErrorType::SystemError => "ERROR_TYPE_SYSTEM_ERROR",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ERROR_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "ERROR_TYPE_INITIALIZATION" => Some(Self::Initialization),
+            "ERROR_TYPE_PRICE_UPDATE" => Some(Self::PriceUpdate),
+            "ERROR_TYPE_ORDER_SUBMIT" => Some(Self::OrderSubmit),
+            "ERROR_TYPE_ORDER_PROCESSING" => Some(Self::OrderProcessing),
+            "ERROR_TYPE_NAV_CALCULATION" => Some(Self::NavCalculation),
+            "ERROR_TYPE_ORDER_BOOK_UPDATE" => Some(Self::OrderBookUpdate),
+            "ERROR_TYPE_LIMIT_EXCEEDED" => Some(Self::LimitExceeded),
+            "ERROR_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
             _ => None,
         }
     }

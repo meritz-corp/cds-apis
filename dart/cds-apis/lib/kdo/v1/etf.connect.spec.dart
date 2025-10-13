@@ -72,4 +72,12 @@ abstract final class EtfService {
     kdov1etf.StopEtfLpRequest.new,
     kdov1etf.StopEtfLpResponse.new,
   );
+
+  /// ETF LP 에러 이벤트 실시간 스트리밍
+  static const streamEtfErrors = connect.Spec(
+    '/$name/StreamEtfErrors',
+    connect.StreamType.server,
+    kdov1etf.StreamEtfErrorsRequest.new,
+    kdov1etf.EtfLpError.new,
+  );
 }

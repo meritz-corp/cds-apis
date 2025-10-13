@@ -150,4 +150,22 @@ extension type EtfServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// ETF LP 에러 이벤트 실시간 스트리밍
+  Stream<kdov1etf.EtfLpError> streamEtfErrors(
+    kdov1etf.StreamEtfErrorsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.EtfService.streamEtfErrors,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }
