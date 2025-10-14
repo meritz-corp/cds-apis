@@ -26,4 +26,12 @@ abstract final class MarketService {
     kdov1market.StreamFuturesOrderbookRequest.new,
     kdov1market.FuturesOrderbookData.new,
   );
+
+  /// 주문 상태 스트리밍
+  static const streamOrderUpdates = connect.Spec(
+    '/$name/StreamOrderUpdates',
+    connect.StreamType.server,
+    kdov1market.StreamOrderUpdatesRequest.new,
+    kdov1market.OrderUpdate.new,
+  );
 }

@@ -26,6 +26,8 @@ type MarketServiceClient interface {
 	StreamEtfOrderbook(ctx context.Context, in *StreamEtfOrderbookRequest, opts ...grpc.CallOption) (MarketService_StreamEtfOrderbookClient, error)
 	// 선물 주문장 데이터를 스트리밍
 	StreamFuturesOrderbook(ctx context.Context, in *StreamFuturesOrderbookRequest, opts ...grpc.CallOption) (MarketService_StreamFuturesOrderbookClient, error)
+	// 주문 상태 스트리밍
+	StreamOrderUpdates(ctx context.Context, in *StreamOrderUpdatesRequest, opts ...grpc.CallOption) (MarketService_StreamOrderUpdatesClient, error)
 }
 
 type marketServiceClient struct {
@@ -100,6 +102,38 @@ func (x *marketServiceStreamFuturesOrderbookClient) Recv() (*FuturesOrderbookDat
 	return m, nil
 }
 
+func (c *marketServiceClient) StreamOrderUpdates(ctx context.Context, in *StreamOrderUpdatesRequest, opts ...grpc.CallOption) (MarketService_StreamOrderUpdatesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketService_ServiceDesc.Streams[2], "/kdo.v1.market.MarketService/StreamOrderUpdates", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &marketServiceStreamOrderUpdatesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MarketService_StreamOrderUpdatesClient interface {
+	Recv() (*OrderUpdate, error)
+	grpc.ClientStream
+}
+
+type marketServiceStreamOrderUpdatesClient struct {
+	grpc.ClientStream
+}
+
+func (x *marketServiceStreamOrderUpdatesClient) Recv() (*OrderUpdate, error) {
+	m := new(OrderUpdate)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // MarketServiceServer is the server API for MarketService service.
 // All implementations must embed UnimplementedMarketServiceServer
 // for forward compatibility
@@ -108,6 +142,8 @@ type MarketServiceServer interface {
 	StreamEtfOrderbook(*StreamEtfOrderbookRequest, MarketService_StreamEtfOrderbookServer) error
 	// 선물 주문장 데이터를 스트리밍
 	StreamFuturesOrderbook(*StreamFuturesOrderbookRequest, MarketService_StreamFuturesOrderbookServer) error
+	// 주문 상태 스트리밍
+	StreamOrderUpdates(*StreamOrderUpdatesRequest, MarketService_StreamOrderUpdatesServer) error
 	mustEmbedUnimplementedMarketServiceServer()
 }
 
@@ -120,6 +156,9 @@ func (UnimplementedMarketServiceServer) StreamEtfOrderbook(*StreamEtfOrderbookRe
 }
 func (UnimplementedMarketServiceServer) StreamFuturesOrderbook(*StreamFuturesOrderbookRequest, MarketService_StreamFuturesOrderbookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamFuturesOrderbook not implemented")
+}
+func (UnimplementedMarketServiceServer) StreamOrderUpdates(*StreamOrderUpdatesRequest, MarketService_StreamOrderUpdatesServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamOrderUpdates not implemented")
 }
 func (UnimplementedMarketServiceServer) mustEmbedUnimplementedMarketServiceServer() {}
 
@@ -176,6 +215,27 @@ func (x *marketServiceStreamFuturesOrderbookServer) Send(m *FuturesOrderbookData
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MarketService_StreamOrderUpdates_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamOrderUpdatesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MarketServiceServer).StreamOrderUpdates(m, &marketServiceStreamOrderUpdatesServer{stream})
+}
+
+type MarketService_StreamOrderUpdatesServer interface {
+	Send(*OrderUpdate) error
+	grpc.ServerStream
+}
+
+type marketServiceStreamOrderUpdatesServer struct {
+	grpc.ServerStream
+}
+
+func (x *marketServiceStreamOrderUpdatesServer) Send(m *OrderUpdate) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // MarketService_ServiceDesc is the grpc.ServiceDesc for MarketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -192,6 +252,11 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamFuturesOrderbook",
 			Handler:       _MarketService_StreamFuturesOrderbook_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamOrderUpdates",
+			Handler:       _MarketService_StreamOrderUpdates_Handler,
 			ServerStreams: true,
 		},
 	},

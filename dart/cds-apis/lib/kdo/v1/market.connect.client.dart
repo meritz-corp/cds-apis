@@ -44,4 +44,22 @@ extension type MarketServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 주문 상태 스트리밍
+  Stream<kdov1market.OrderUpdate> streamOrderUpdates(
+    kdov1market.StreamOrderUpdatesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketService.streamOrderUpdates,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

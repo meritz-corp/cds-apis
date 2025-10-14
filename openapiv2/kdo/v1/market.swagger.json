@@ -113,9 +113,63 @@
           "MarketService"
         ]
       }
+    },
+    "/v1/orders:stream": {
+      "get": {
+        "summary": "주문 상태 스트리밍",
+        "operationId": "MarketService_StreamOrderUpdates",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/marketOrderUpdate"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of marketOrderUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "필터링 조건 (선택적, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
     }
   },
   "definitions": {
+    "OrderUpdateUpdateType": {
+      "type": "string",
+      "enum": [
+        "UPDATE_TYPE_UNSPECIFIED",
+        "CREATED",
+        "UPDATED",
+        "FILLED",
+        "CANCELLED"
+      ],
+      "default": "UPDATE_TYPE_UNSPECIFIED",
+      "description": "- UPDATE_TYPE_UNSPECIFIED: 기본값\n - CREATED: 주문 생성\n - UPDATED: 주문 업데이트\n - FILLED: 주문 체결\n - CANCELLED: 주문 취소",
+      "title": "업데이트 타입"
+    },
     "marketEtfOrderbookData": {
       "type": "object",
       "properties": {
@@ -283,6 +337,90 @@
         }
       },
       "title": "선물 주문장 데이터"
+    },
+    "marketOrder": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "title": "주문 ID"
+        },
+        "orderType": {
+          "$ref": "#/definitions/marketOrderType",
+          "title": "주문 타입"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "상품 (예: etfs/A069500)"
+        },
+        "price": {
+          "type": "string",
+          "title": "주문 가격"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문 수량"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 수량"
+        },
+        "status": {
+          "$ref": "#/definitions/marketOrderStatus",
+          "title": "주문 상태"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문 시간 (Unix timestamp)"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "업데이트 시간 (Unix timestamp)"
+        }
+      },
+      "title": "주문 정보"
+    },
+    "marketOrderStatus": {
+      "type": "string",
+      "enum": [
+        "ORDER_STATUS_UNSPECIFIED",
+        "PENDING",
+        "PARTIAL_FILLED",
+        "FILLED",
+        "CANCELLED",
+        "REJECTED"
+      ],
+      "default": "ORDER_STATUS_UNSPECIFIED",
+      "description": "- ORDER_STATUS_UNSPECIFIED: 기본값\n - PENDING: 대기중\n - PARTIAL_FILLED: 부분체결\n - FILLED: 체결완료\n - CANCELLED: 취소됨\n - REJECTED: 거부됨",
+      "title": "주문 상태 열거형"
+    },
+    "marketOrderType": {
+      "type": "string",
+      "enum": [
+        "ORDER_TYPE_UNSPECIFIED",
+        "BUY",
+        "SELL"
+      ],
+      "default": "ORDER_TYPE_UNSPECIFIED",
+      "description": "- ORDER_TYPE_UNSPECIFIED: 기본값\n - BUY: 매수\n - SELL: 매도",
+      "title": "주문 타입 열거형"
+    },
+    "marketOrderUpdate": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/marketOrder",
+          "title": "업데이트된 주문"
+        },
+        "updateType": {
+          "$ref": "#/definitions/OrderUpdateUpdateType"
+        }
+      },
+      "title": "주문 업데이트"
     },
     "marketSessionId": {
       "type": "string",
