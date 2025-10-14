@@ -1098,113 +1098,127 @@ class ListOrdersResponse extends $pb.GeneratedMessage {
 }
 
 /// 주문 업데이트 스트리밍 요청
-class StreamOrderUpdatesRequest extends $pb.GeneratedMessage {
-  factory StreamOrderUpdatesRequest({
+class StreamUserOrderBookRequest extends $pb.GeneratedMessage {
+  factory StreamUserOrderBookRequest({
+    $core.String? etf,
     $core.String? filter,
   }) {
     final result = create();
+    if (etf != null) result.etf = etf;
     if (filter != null) result.filter = filter;
     return result;
   }
 
-  StreamOrderUpdatesRequest._();
+  StreamUserOrderBookRequest._();
 
-  factory StreamOrderUpdatesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamOrderUpdatesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StreamUserOrderBookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamUserOrderBookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamOrderUpdatesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'filter')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamUserOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOS(2, _omitFieldNames ? '' : 'filter')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamOrderUpdatesRequest clone() => StreamOrderUpdatesRequest()..mergeFromMessage(this);
+  StreamUserOrderBookRequest clone() => StreamUserOrderBookRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamOrderUpdatesRequest copyWith(void Function(StreamOrderUpdatesRequest) updates) => super.copyWith((message) => updates(message as StreamOrderUpdatesRequest)) as StreamOrderUpdatesRequest;
+  StreamUserOrderBookRequest copyWith(void Function(StreamUserOrderBookRequest) updates) => super.copyWith((message) => updates(message as StreamUserOrderBookRequest)) as StreamUserOrderBookRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StreamOrderUpdatesRequest create() => StreamOrderUpdatesRequest._();
+  static StreamUserOrderBookRequest create() => StreamUserOrderBookRequest._();
   @$core.override
-  StreamOrderUpdatesRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamOrderUpdatesRequest> createRepeated() => $pb.PbList<StreamOrderUpdatesRequest>();
+  StreamUserOrderBookRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamUserOrderBookRequest> createRepeated() => $pb.PbList<StreamUserOrderBookRequest>();
   @$core.pragma('dart2js:noInline')
-  static StreamOrderUpdatesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamOrderUpdatesRequest>(create);
-  static StreamOrderUpdatesRequest? _defaultInstance;
+  static StreamUserOrderBookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamUserOrderBookRequest>(create);
+  static StreamUserOrderBookRequest? _defaultInstance;
+
+  /// 리소스 이름 (예: etfs/A069500)
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
 
   /// 필터링 조건 (선택적, AIP-160)
-  @$pb.TagNumber(1)
-  $core.String get filter => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set filter($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasFilter() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFilter() => $_clearField(1);
+  @$pb.TagNumber(2)
+  $core.String get filter => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set filter($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFilter() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilter() => $_clearField(2);
 }
 
-/// 주문 업데이트
-class OrderUpdate extends $pb.GeneratedMessage {
-  factory OrderUpdate({
-    Order? order,
-    OrderUpdate_UpdateType? updateType,
+/// 주문 업데이트 정보
+class UserOrderbookData extends $pb.GeneratedMessage {
+  factory UserOrderbookData({
+    $core.Iterable<$core.String>? bidPrices,
+    $core.Iterable<$core.String>? askPrices,
+    $core.Iterable<$fixnum.Int64>? bidQuantities,
+    $core.Iterable<$fixnum.Int64>? askQuantities,
   }) {
     final result = create();
-    if (order != null) result.order = order;
-    if (updateType != null) result.updateType = updateType;
+    if (bidPrices != null) result.bidPrices.addAll(bidPrices);
+    if (askPrices != null) result.askPrices.addAll(askPrices);
+    if (bidQuantities != null) result.bidQuantities.addAll(bidQuantities);
+    if (askQuantities != null) result.askQuantities.addAll(askQuantities);
     return result;
   }
 
-  OrderUpdate._();
+  UserOrderbookData._();
 
-  factory OrderUpdate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory OrderUpdate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory UserOrderbookData.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UserOrderbookData.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..aOM<Order>(1, _omitFieldNames ? '' : 'order', subBuilder: Order.create)
-    ..e<OrderUpdate_UpdateType>(2, _omitFieldNames ? '' : 'updateType', $pb.PbFieldType.OE, defaultOrMaker: OrderUpdate_UpdateType.UPDATE_TYPE_UNSPECIFIED, valueOf: OrderUpdate_UpdateType.valueOf, enumValues: OrderUpdate_UpdateType.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserOrderbookData', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'bidPrices')
+    ..pPS(2, _omitFieldNames ? '' : 'askPrices')
+    ..p<$fixnum.Int64>(3, _omitFieldNames ? '' : 'bidQuantities', $pb.PbFieldType.K6)
+    ..p<$fixnum.Int64>(4, _omitFieldNames ? '' : 'askQuantities', $pb.PbFieldType.K6)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OrderUpdate clone() => OrderUpdate()..mergeFromMessage(this);
+  UserOrderbookData clone() => UserOrderbookData()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OrderUpdate copyWith(void Function(OrderUpdate) updates) => super.copyWith((message) => updates(message as OrderUpdate)) as OrderUpdate;
+  UserOrderbookData copyWith(void Function(UserOrderbookData) updates) => super.copyWith((message) => updates(message as UserOrderbookData)) as UserOrderbookData;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static OrderUpdate create() => OrderUpdate._();
+  static UserOrderbookData create() => UserOrderbookData._();
   @$core.override
-  OrderUpdate createEmptyInstance() => create();
-  static $pb.PbList<OrderUpdate> createRepeated() => $pb.PbList<OrderUpdate>();
+  UserOrderbookData createEmptyInstance() => create();
+  static $pb.PbList<UserOrderbookData> createRepeated() => $pb.PbList<UserOrderbookData>();
   @$core.pragma('dart2js:noInline')
-  static OrderUpdate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OrderUpdate>(create);
-  static OrderUpdate? _defaultInstance;
+  static UserOrderbookData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserOrderbookData>(create);
+  static UserOrderbookData? _defaultInstance;
 
-  /// 업데이트된 주문
+  /// 매수 호가 (10단계, AIP-144)
   @$pb.TagNumber(1)
-  Order get order => $_getN(0);
-  @$pb.TagNumber(1)
-  set order(Order value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasOrder() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearOrder() => $_clearField(1);
-  @$pb.TagNumber(1)
-  Order ensureOrder() => $_ensure(0);
+  $pb.PbList<$core.String> get bidPrices => $_getList(0);
 
+  /// 매도 호가 (10단계)
   @$pb.TagNumber(2)
-  OrderUpdate_UpdateType get updateType => $_getN(1);
-  @$pb.TagNumber(2)
-  set updateType(OrderUpdate_UpdateType value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasUpdateType() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearUpdateType() => $_clearField(2);
+  $pb.PbList<$core.String> get askPrices => $_getList(1);
+
+  /// 매수 수량 (10단계)
+  @$pb.TagNumber(3)
+  $pb.PbList<$fixnum.Int64> get bidQuantities => $_getList(2);
+
+  /// 매도 수량 (10단계)
+  @$pb.TagNumber(4)
+  $pb.PbList<$fixnum.Int64> get askQuantities => $_getList(3);
 }
 
 

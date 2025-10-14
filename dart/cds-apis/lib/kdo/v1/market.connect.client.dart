@@ -45,9 +45,9 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 주문 상태 스트리밍
-  Stream<kdov1market.OrderUpdate> streamOrderUpdates(
-    kdov1market.StreamOrderUpdatesRequest input, {
+  /// 사용자 주문장 업데이트를 스트리밍
+  Stream<kdov1market.UserOrderbookData> streamOrderUpdates(
+    kdov1market.StreamUserOrderBookRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,

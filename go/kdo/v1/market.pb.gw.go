@@ -122,12 +122,29 @@ func request_MarketService_StreamFuturesOrderbook_0(ctx context.Context, marshal
 }
 
 var (
-	filter_MarketService_StreamOrderUpdates_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_MarketService_StreamOrderUpdates_0 = &utilities.DoubleArray{Encoding: map[string]int{"etf": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_MarketService_StreamOrderUpdates_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (MarketService_StreamOrderUpdatesClient, runtime.ServerMetadata, error) {
-	var protoReq StreamOrderUpdatesRequest
+	var protoReq StreamUserOrderBookRequest
 	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["etf"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "etf")
+	}
+
+	protoReq.Etf, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
+	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -267,7 +284,7 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamOrderUpdates", runtime.WithHTTPPathPattern("/v1/orders:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamOrderUpdates", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/user-orderbook:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -291,7 +308,7 @@ var (
 
 	pattern_MarketService_StreamFuturesOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "futures", "future", "orderbook"}, "stream"))
 
-	pattern_MarketService_StreamOrderUpdates_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "orders"}, "stream"))
+	pattern_MarketService_StreamOrderUpdates_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "etfs", "etf", "user-orderbook"}, "stream"))
 )
 
 var (

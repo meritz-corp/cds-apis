@@ -311,45 +311,34 @@ final $typed_data.Uint8List listOrdersResponseDescriptor = $convert.base64Decode
     'ChJMaXN0T3JkZXJzUmVzcG9uc2USLAoGb3JkZXJzGAEgAygLMhQua2RvLnYxLm1hcmtldC5Pcm'
     'RlclIGb3JkZXJzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
-@$core.Deprecated('Use streamOrderUpdatesRequestDescriptor instead')
-const StreamOrderUpdatesRequest$json = {
-  '1': 'StreamOrderUpdatesRequest',
+@$core.Deprecated('Use streamUserOrderBookRequestDescriptor instead')
+const StreamUserOrderBookRequest$json = {
+  '1': 'StreamUserOrderBookRequest',
   '2': [
-    {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
+    {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
-/// Descriptor for `StreamOrderUpdatesRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamOrderUpdatesRequestDescriptor = $convert.base64Decode(
-    'ChlTdHJlYW1PcmRlclVwZGF0ZXNSZXF1ZXN0EhYKBmZpbHRlchgBIAEoCVIGZmlsdGVy');
+/// Descriptor for `StreamUserOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamUserOrderBookRequestDescriptor = $convert.base64Decode(
+    'ChpTdHJlYW1Vc2VyT3JkZXJCb29rUmVxdWVzdBIQCgNldGYYASABKAlSA2V0ZhIWCgZmaWx0ZX'
+    'IYAiABKAlSBmZpbHRlcg==');
 
-@$core.Deprecated('Use orderUpdateDescriptor instead')
-const OrderUpdate$json = {
-  '1': 'OrderUpdate',
+@$core.Deprecated('Use userOrderbookDataDescriptor instead')
+const UserOrderbookData$json = {
+  '1': 'UserOrderbookData',
   '2': [
-    {'1': 'order', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.market.Order', '10': 'order'},
-    {'1': 'update_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.market.OrderUpdate.UpdateType', '10': 'updateType'},
-  ],
-  '4': [OrderUpdate_UpdateType$json],
-};
-
-@$core.Deprecated('Use orderUpdateDescriptor instead')
-const OrderUpdate_UpdateType$json = {
-  '1': 'UpdateType',
-  '2': [
-    {'1': 'UPDATE_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'CREATED', '2': 1},
-    {'1': 'UPDATED', '2': 2},
-    {'1': 'FILLED', '2': 3},
-    {'1': 'CANCELLED', '2': 4},
+    {'1': 'bid_prices', '3': 1, '4': 3, '5': 9, '10': 'bidPrices'},
+    {'1': 'ask_prices', '3': 2, '4': 3, '5': 9, '10': 'askPrices'},
+    {'1': 'bid_quantities', '3': 3, '4': 3, '5': 3, '10': 'bidQuantities'},
+    {'1': 'ask_quantities', '3': 4, '4': 3, '5': 3, '10': 'askQuantities'},
   ],
 };
 
-/// Descriptor for `OrderUpdate`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List orderUpdateDescriptor = $convert.base64Decode(
-    'CgtPcmRlclVwZGF0ZRIqCgVvcmRlchgBIAEoCzIULmtkby52MS5tYXJrZXQuT3JkZXJSBW9yZG'
-    'VyEkYKC3VwZGF0ZV90eXBlGAIgASgOMiUua2RvLnYxLm1hcmtldC5PcmRlclVwZGF0ZS5VcGRh'
-    'dGVUeXBlUgp1cGRhdGVUeXBlIl4KClVwZGF0ZVR5cGUSGwoXVVBEQVRFX1RZUEVfVU5TUEVDSU'
-    'ZJRUQQABILCgdDUkVBVEVEEAESCwoHVVBEQVRFRBACEgoKBkZJTExFRBADEg0KCUNBTkNFTExF'
-    'RBAE');
+/// Descriptor for `UserOrderbookData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userOrderbookDataDescriptor = $convert.base64Decode(
+    'ChFVc2VyT3JkZXJib29rRGF0YRIdCgpiaWRfcHJpY2VzGAEgAygJUgliaWRQcmljZXMSHQoKYX'
+    'NrX3ByaWNlcxgCIAMoCVIJYXNrUHJpY2VzEiUKDmJpZF9xdWFudGl0aWVzGAMgAygDUg1iaWRR'
+    'dWFudGl0aWVzEiUKDmFza19xdWFudGl0aWVzGAQgAygDUg1hc2tRdWFudGl0aWVz');
 

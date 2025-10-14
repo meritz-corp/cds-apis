@@ -23,6 +23,13 @@ service MarketService {
         };
     }
 
+    // 사용자 주문장 업데이트를 스트리밍
+    rpc StreamOrderUpdates(StreamUserOrderBookRequest) returns (stream UserOrderbookData) {
+        option (google.api.http) = {
+            get: "/v1/market/{etf=etfs/*}/user-orderbook:stream"
+        };
+    }
+
     // 주문 접수
     //    rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse) {
     //        option (google.api.http) = {
@@ -52,12 +59,7 @@ service MarketService {
     //        };
     //    }
 
-    // 주문 상태 스트리밍
-    rpc StreamOrderUpdates(StreamOrderUpdatesRequest) returns (stream OrderUpdate) {
-        option (google.api.http) = {
-            get: "/v1/orders:stream"
-        };
-    }
+
 }
 
 // ETF 주문장 스트리밍 요청
@@ -298,24 +300,25 @@ message ListOrdersResponse {
 }
 
 // 주문 업데이트 스트리밍 요청
-message StreamOrderUpdatesRequest {
+message StreamUserOrderBookRequest {
+    // 리소스 이름 (예: etfs/A069500)
+    string etf = 1;
+
     // 필터링 조건 (선택적, AIP-160)
-    string filter = 1;
+    string filter = 2;
 }
 
-// 주문 업데이트
-message OrderUpdate {
-    // 업데이트된 주문
-    Order order = 1;
+// 주문 업데이트 정보
+message UserOrderbookData {
+    // 매수 호가 (10단계, AIP-144)
+    repeated string bid_prices = 1;
 
-    // 업데이트 타입
-    enum UpdateType {
-        UPDATE_TYPE_UNSPECIFIED = 0; // 기본값
-        CREATED = 1;                 // 주문 생성
-        UPDATED = 2;                 // 주문 업데이트
-        FILLED = 3;                  // 주문 체결
-        CANCELLED = 4;               // 주문 취소
-    }
-    UpdateType update_type = 2;
+    // 매도 호가 (10단계)
+    repeated string ask_prices = 2;
+
+    // 매수 수량 (10단계)
+    repeated int64 bid_quantities = 3;
+
+    // 매도 수량 (10단계)
+    repeated int64 ask_quantities = 4;
 }
-

@@ -143,9 +143,9 @@ pub mod market_service_client {
         }
         pub async fn stream_order_updates(
             &mut self,
-            request: impl tonic::IntoRequest<super::StreamOrderUpdatesRequest>,
+            request: impl tonic::IntoRequest<super::StreamUserOrderBookRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::OrderUpdate>>,
+            tonic::Response<tonic::codec::Streaming<super::UserOrderbookData>>,
             tonic::Status,
         > {
             self.inner
@@ -205,13 +205,13 @@ pub mod market_service_server {
         >;
         /// Server streaming response type for the StreamOrderUpdates method.
         type StreamOrderUpdatesStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::OrderUpdate, tonic::Status>,
+                Item = std::result::Result<super::UserOrderbookData, tonic::Status>,
             >
             + Send
             + 'static;
         async fn stream_order_updates(
             &self,
-            request: tonic::Request<super::StreamOrderUpdatesRequest>,
+            request: tonic::Request<super::StreamUserOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamOrderUpdatesStream>,
             tonic::Status,
@@ -398,9 +398,9 @@ pub mod market_service_server {
                     impl<
                         T: MarketService,
                     > tonic::server::ServerStreamingService<
-                        super::StreamOrderUpdatesRequest,
+                        super::StreamUserOrderBookRequest,
                     > for StreamOrderUpdatesSvc<T> {
-                        type Response = super::OrderUpdate;
+                        type Response = super::UserOrderbookData;
                         type ResponseStream = T::StreamOrderUpdatesStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -408,7 +408,7 @@ pub mod market_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StreamOrderUpdatesRequest>,
+                            request: tonic::Request<super::StreamUserOrderBookRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {

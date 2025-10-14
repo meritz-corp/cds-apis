@@ -102,27 +102,5 @@ class OrderStatus extends $pb.ProtobufEnum {
   const OrderStatus._(super.value, super.name);
 }
 
-/// 업데이트 타입
-class OrderUpdate_UpdateType extends $pb.ProtobufEnum {
-  static const OrderUpdate_UpdateType UPDATE_TYPE_UNSPECIFIED = OrderUpdate_UpdateType._(0, _omitEnumNames ? '' : 'UPDATE_TYPE_UNSPECIFIED');
-  static const OrderUpdate_UpdateType CREATED = OrderUpdate_UpdateType._(1, _omitEnumNames ? '' : 'CREATED');
-  static const OrderUpdate_UpdateType UPDATED = OrderUpdate_UpdateType._(2, _omitEnumNames ? '' : 'UPDATED');
-  static const OrderUpdate_UpdateType FILLED = OrderUpdate_UpdateType._(3, _omitEnumNames ? '' : 'FILLED');
-  static const OrderUpdate_UpdateType CANCELLED = OrderUpdate_UpdateType._(4, _omitEnumNames ? '' : 'CANCELLED');
-
-  static const $core.List<OrderUpdate_UpdateType> values = <OrderUpdate_UpdateType> [
-    UPDATE_TYPE_UNSPECIFIED,
-    CREATED,
-    UPDATED,
-    FILLED,
-    CANCELLED,
-  ];
-
-  static final $core.List<OrderUpdate_UpdateType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
-  static OrderUpdate_UpdateType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const OrderUpdate_UpdateType._(super.value, super.name);
-}
-
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

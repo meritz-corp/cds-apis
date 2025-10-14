@@ -563,10 +563,10 @@ func (mr *MockMarketService_StreamOrderUpdatesClientMockRecorder) Header() *gomo
 }
 
 // Recv mocks base method.
-func (m *MockMarketService_StreamOrderUpdatesClient) Recv() (*OrderUpdate, error) {
+func (m *MockMarketService_StreamOrderUpdatesClient) Recv() (*UserOrderbookData, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*OrderUpdate)
+	ret0, _ := ret[0].(*UserOrderbookData)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -671,7 +671,7 @@ func (mr *MockMarketService_StreamOrderUpdatesServerMockRecorder) RecvMsg(arg0 i
 }
 
 // Send mocks base method.
-func (m *MockMarketService_StreamOrderUpdatesServer) Send(arg0 *OrderUpdate) error {
+func (m *MockMarketService_StreamOrderUpdatesServer) Send(arg0 *UserOrderbookData) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Send", arg0)
 	ret0, _ := ret[0].(error)
@@ -802,7 +802,7 @@ func (mr *MockMarketServiceClientMockRecorder) StreamFuturesOrderbook(ctx, in in
 }
 
 // StreamOrderUpdates mocks base method.
-func (m *MockMarketServiceClient) StreamOrderUpdates(ctx context.Context, in *StreamOrderUpdatesRequest, opts ...grpc.CallOption) (MarketService_StreamOrderUpdatesClient, error) {
+func (m *MockMarketServiceClient) StreamOrderUpdates(ctx context.Context, in *StreamUserOrderBookRequest, opts ...grpc.CallOption) (MarketService_StreamOrderUpdatesClient, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
@@ -873,7 +873,7 @@ func (mr *MockMarketServiceServerMockRecorder) StreamFuturesOrderbook(blob, serv
 }
 
 // StreamOrderUpdates mocks base method.
-func (m *MockMarketServiceServer) StreamOrderUpdates(blob *StreamOrderUpdatesRequest, server MarketService_StreamOrderUpdatesServer) error {
+func (m *MockMarketServiceServer) StreamOrderUpdates(blob *StreamUserOrderBookRequest, server MarketService_StreamOrderUpdatesServer) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "StreamOrderUpdates", blob, server)
 	ret0, _ := ret[0].(error)

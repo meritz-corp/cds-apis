@@ -229,64 +229,30 @@ pub struct ListOrdersResponse {
 /// 주문 업데이트 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamOrderUpdatesRequest {
-    /// 필터링 조건 (선택적, AIP-160)
+pub struct StreamUserOrderBookRequest {
+    /// 리소스 이름 (예: etfs/A069500)
     #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// 필터링 조건 (선택적, AIP-160)
+    #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
 }
-/// 주문 업데이트
+/// 주문 업데이트 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OrderUpdate {
-    /// 업데이트된 주문
-    #[prost(message, optional, tag="1")]
-    pub order: ::core::option::Option<Order>,
-    #[prost(enumeration="order_update::UpdateType", tag="2")]
-    pub update_type: i32,
-}
-/// Nested message and enum types in `OrderUpdate`.
-pub mod order_update {
-    /// 업데이트 타입
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-    #[repr(i32)]
-    pub enum UpdateType {
-        /// 기본값
-        Unspecified = 0,
-        /// 주문 생성
-        Created = 1,
-        /// 주문 업데이트
-        Updated = 2,
-        /// 주문 체결
-        Filled = 3,
-        /// 주문 취소
-        Cancelled = 4,
-    }
-    impl UpdateType {
-        /// String value of the enum field names used in the ProtoBuf definition.
-        ///
-        /// The values are not transformed in any way and thus are considered stable
-        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-        pub fn as_str_name(&self) -> &'static str {
-            match self {
-                UpdateType::Unspecified => "UPDATE_TYPE_UNSPECIFIED",
-                UpdateType::Created => "CREATED",
-                UpdateType::Updated => "UPDATED",
-                UpdateType::Filled => "FILLED",
-                UpdateType::Cancelled => "CANCELLED",
-            }
-        }
-        /// Creates an enum from field names used in the ProtoBuf definition.
-        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-            match value {
-                "UPDATE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-                "CREATED" => Some(Self::Created),
-                "UPDATED" => Some(Self::Updated),
-                "FILLED" => Some(Self::Filled),
-                "CANCELLED" => Some(Self::Cancelled),
-                _ => None,
-            }
-        }
-    }
+pub struct UserOrderbookData {
+    /// 매수 호가 (10단계, AIP-144)
+    #[prost(string, repeated, tag="1")]
+    pub bid_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 매도 호가 (10단계)
+    #[prost(string, repeated, tag="2")]
+    pub ask_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 매수 수량 (10단계)
+    #[prost(int64, repeated, tag="3")]
+    pub bid_quantities: ::prost::alloc::vec::Vec<i64>,
+    /// 매도 수량 (10단계)
+    #[prost(int64, repeated, tag="4")]
+    pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
 }
 /// 세션 ID 열거형 (AIP-126)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
