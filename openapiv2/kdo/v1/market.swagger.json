@@ -68,7 +68,7 @@
     "/v1/market/{etf}/user-orderbook:stream": {
       "get": {
         "summary": "사용자 주문장 업데이트를 스트리밍",
-        "operationId": "MarketService_StreamOrderUpdates",
+        "operationId": "MarketService_StreamUserOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",

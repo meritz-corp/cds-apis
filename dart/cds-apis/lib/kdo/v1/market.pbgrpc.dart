@@ -44,8 +44,8 @@ class MarketServiceClient extends $grpc.Client {
   }
 
   /// 사용자 주문장 업데이트를 스트리밍
-  $grpc.ResponseStream<$0.UserOrderbookData> streamOrderUpdates($0.StreamUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamOrderUpdates, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.UserOrderbookData> streamUserOrderbook($0.StreamUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamUserOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
     // method descriptors
@@ -58,8 +58,8 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/StreamFuturesOrderbook',
       ($0.StreamFuturesOrderbookRequest value) => value.writeToBuffer(),
       $0.FuturesOrderbookData.fromBuffer);
-  static final _$streamOrderUpdates = $grpc.ClientMethod<$0.StreamUserOrderBookRequest, $0.UserOrderbookData>(
-      '/kdo.v1.market.MarketService/StreamOrderUpdates',
+  static final _$streamUserOrderbook = $grpc.ClientMethod<$0.StreamUserOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.market.MarketService/StreamUserOrderbook',
       ($0.StreamUserOrderBookRequest value) => value.writeToBuffer(),
       $0.UserOrderbookData.fromBuffer);
 }
@@ -84,8 +84,8 @@ abstract class MarketServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) => $0.StreamFuturesOrderbookRequest.fromBuffer(value),
         ($0.FuturesOrderbookData value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StreamUserOrderBookRequest, $0.UserOrderbookData>(
-        'StreamOrderUpdates',
-        streamOrderUpdates_Pre,
+        'StreamUserOrderbook',
+        streamUserOrderbook_Pre,
         false,
         true,
         ($core.List<$core.int> value) => $0.StreamUserOrderBookRequest.fromBuffer(value),
@@ -104,10 +104,10 @@ abstract class MarketServiceBase extends $grpc.Service {
 
   $async.Stream<$0.FuturesOrderbookData> streamFuturesOrderbook($grpc.ServiceCall call, $0.StreamFuturesOrderbookRequest request);
 
-  $async.Stream<$0.UserOrderbookData> streamOrderUpdates_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamUserOrderBookRequest> $request) async* {
-    yield* streamOrderUpdates($call, await $request);
+  $async.Stream<$0.UserOrderbookData> streamUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamUserOrderBookRequest> $request) async* {
+    yield* streamUserOrderbook($call, await $request);
   }
 
-  $async.Stream<$0.UserOrderbookData> streamOrderUpdates($grpc.ServiceCall call, $0.StreamUserOrderBookRequest request);
+  $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.StreamUserOrderBookRequest request);
 
 }

@@ -24,7 +24,7 @@ service MarketService {
     }
 
     // 사용자 주문장 업데이트를 스트리밍
-    rpc StreamOrderUpdates(StreamUserOrderBookRequest) returns (stream UserOrderbookData) {
+    rpc StreamUserOrderbook(StreamUserOrderBookRequest) returns (stream UserOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{etf=etfs/*}/user-orderbook:stream"
         };

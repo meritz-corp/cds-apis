@@ -28,8 +28,8 @@ abstract final class MarketService {
   );
 
   /// 사용자 주문장 업데이트를 스트리밍
-  static const streamOrderUpdates = connect.Spec(
-    '/$name/StreamOrderUpdates',
+  static const streamUserOrderbook = connect.Spec(
+    '/$name/StreamUserOrderbook',
     connect.StreamType.server,
     kdov1market.StreamUserOrderBookRequest.new,
     kdov1market.UserOrderbookData.new,

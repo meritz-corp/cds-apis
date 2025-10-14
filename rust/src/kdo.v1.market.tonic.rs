@@ -141,7 +141,7 @@ pub mod market_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
-        pub async fn stream_order_updates(
+        pub async fn stream_user_orderbook(
             &mut self,
             request: impl tonic::IntoRequest<super::StreamUserOrderBookRequest>,
         ) -> std::result::Result<
@@ -159,12 +159,12 @@ pub mod market_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.market.MarketService/StreamOrderUpdates",
+                "/kdo.v1.market.MarketService/StreamUserOrderbook",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("kdo.v1.market.MarketService", "StreamOrderUpdates"),
+                    GrpcMethod::new("kdo.v1.market.MarketService", "StreamUserOrderbook"),
                 );
             self.inner.server_streaming(req, path, codec).await
         }
@@ -203,17 +203,17 @@ pub mod market_service_server {
             tonic::Response<Self::StreamFuturesOrderbookStream>,
             tonic::Status,
         >;
-        /// Server streaming response type for the StreamOrderUpdates method.
-        type StreamOrderUpdatesStream: tonic::codegen::tokio_stream::Stream<
+        /// Server streaming response type for the StreamUserOrderbook method.
+        type StreamUserOrderbookStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::UserOrderbookData, tonic::Status>,
             >
             + Send
             + 'static;
-        async fn stream_order_updates(
+        async fn stream_user_orderbook(
             &self,
             request: tonic::Request<super::StreamUserOrderBookRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamOrderUpdatesStream>,
+            tonic::Response<Self::StreamUserOrderbookStream>,
             tonic::Status,
         >;
     }
@@ -392,16 +392,16 @@ pub mod market_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.market.MarketService/StreamOrderUpdates" => {
+                "/kdo.v1.market.MarketService/StreamUserOrderbook" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamOrderUpdatesSvc<T: MarketService>(pub Arc<T>);
+                    struct StreamUserOrderbookSvc<T: MarketService>(pub Arc<T>);
                     impl<
                         T: MarketService,
                     > tonic::server::ServerStreamingService<
                         super::StreamUserOrderBookRequest,
-                    > for StreamOrderUpdatesSvc<T> {
+                    > for StreamUserOrderbookSvc<T> {
                         type Response = super::UserOrderbookData;
-                        type ResponseStream = T::StreamOrderUpdatesStream;
+                        type ResponseStream = T::StreamUserOrderbookStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
@@ -412,7 +412,7 @@ pub mod market_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MarketService>::stream_order_updates(&inner, request)
+                                <T as MarketService>::stream_user_orderbook(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -424,7 +424,7 @@ pub mod market_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamOrderUpdatesSvc(inner);
+                        let method = StreamUserOrderbookSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

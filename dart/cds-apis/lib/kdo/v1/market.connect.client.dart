@@ -46,7 +46,7 @@ extension type MarketServiceClient (connect.Transport _transport) {
   }
 
   /// 사용자 주문장 업데이트를 스트리밍
-  Stream<kdov1market.UserOrderbookData> streamOrderUpdates(
+  Stream<kdov1market.UserOrderbookData> streamUserOrderbook(
     kdov1market.StreamUserOrderBookRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -54,7 +54,7 @@ extension type MarketServiceClient (connect.Transport _transport) {
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.MarketService.streamOrderUpdates,
+      specs.MarketService.streamUserOrderbook,
       input,
       signal: signal,
       headers: headers,
