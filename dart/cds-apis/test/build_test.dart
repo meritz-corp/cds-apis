@@ -1,8 +1,6 @@
 import 'package:test/test.dart';
 import 'package:fixnum/fixnum.dart';
 import '../lib/log_sync/v1/pnl.pb.dart';
-import '../lib/log_sync/v1/pnl.pbenum.dart';
-import '../lib/log_sync/v1/pnl.connect.client.dart';
 
 void main() {
   test('Basic build test - can import and create objects', () {
