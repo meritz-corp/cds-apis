@@ -23,8 +23,15 @@ service MarketService {
         };
     }
 
+    // 사용자 주문장 업데이트를 가져오기
+    rpc GetUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
+        option (google.api.http) = {
+            get: "/v1/market/{etf=etfs/*}/user-orderbook"
+        };
+    }
+
     // 사용자 주문장 업데이트를 스트리밍
-    rpc StreamUserOrderbook(StreamUserOrderBookRequest) returns (stream UserOrderbookData) {
+    rpc StreamUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{etf=etfs/*}/user-orderbook:stream"
         };
@@ -300,7 +307,7 @@ message ListOrdersResponse {
 }
 
 // 주문 업데이트 스트리밍 요청
-message StreamUserOrderBookRequest {
+message GetUserOrderBookRequest {
     // 리소스 이름 (예: etfs/A069500)
     string etf = 1;
 

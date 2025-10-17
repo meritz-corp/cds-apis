@@ -45,9 +45,27 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 사용자 주문장 업데이트를 가져오기
+  Stream<kdov1market.UserOrderbookData> getUserOrderbook(
+    kdov1market.GetUserOrderBookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketService.getUserOrderbook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 사용자 주문장 업데이트를 스트리밍
   Stream<kdov1market.UserOrderbookData> streamUserOrderbook(
-    kdov1market.StreamUserOrderBookRequest input, {
+    kdov1market.GetUserOrderBookRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,

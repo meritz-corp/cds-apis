@@ -229,7 +229,7 @@ pub struct ListOrdersResponse {
 /// 주문 업데이트 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamUserOrderBookRequest {
+pub struct GetUserOrderBookRequest {
     /// 리소스 이름 (예: etfs/A069500)
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,

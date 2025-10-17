@@ -311,19 +311,19 @@ final $typed_data.Uint8List listOrdersResponseDescriptor = $convert.base64Decode
     'ChJMaXN0T3JkZXJzUmVzcG9uc2USLAoGb3JkZXJzGAEgAygLMhQua2RvLnYxLm1hcmtldC5Pcm'
     'RlclIGb3JkZXJzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
-@$core.Deprecated('Use streamUserOrderBookRequestDescriptor instead')
-const StreamUserOrderBookRequest$json = {
-  '1': 'StreamUserOrderBookRequest',
+@$core.Deprecated('Use getUserOrderBookRequestDescriptor instead')
+const GetUserOrderBookRequest$json = {
+  '1': 'GetUserOrderBookRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
     {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
-/// Descriptor for `StreamUserOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamUserOrderBookRequestDescriptor = $convert.base64Decode(
-    'ChpTdHJlYW1Vc2VyT3JkZXJCb29rUmVxdWVzdBIQCgNldGYYASABKAlSA2V0ZhIWCgZmaWx0ZX'
-    'IYAiABKAlSBmZpbHRlcg==');
+/// Descriptor for `GetUserOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserOrderBookRequestDescriptor = $convert.base64Decode(
+    'ChdHZXRVc2VyT3JkZXJCb29rUmVxdWVzdBIQCgNldGYYASABKAlSA2V0ZhIWCgZmaWx0ZXIYAi'
+    'ABKAlSBmZpbHRlcg==');
 
 @$core.Deprecated('Use userOrderbookDataDescriptor instead')
 const UserOrderbookData$json = {

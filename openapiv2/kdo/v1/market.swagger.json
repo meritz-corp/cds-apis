@@ -65,6 +65,55 @@
         ]
       }
     },
+    "/v1/market/{etf}/user-orderbook": {
+      "get": {
+        "summary": "사용자 주문장 업데이트를 가져오기",
+        "operationId": "MarketService_GetUserOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/marketUserOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of marketUserOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "리소스 이름 (예: etfs/A069500)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (선택적, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
     "/v1/market/{etf}/user-orderbook:stream": {
       "get": {
         "summary": "사용자 주문장 업데이트를 스트리밍",

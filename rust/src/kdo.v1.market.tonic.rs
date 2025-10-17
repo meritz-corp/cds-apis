@@ -141,9 +141,36 @@ pub mod market_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn get_user_orderbook(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetUserOrderBookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::UserOrderbookData>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/GetUserOrderbook",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.market.MarketService", "GetUserOrderbook"),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         pub async fn stream_user_orderbook(
             &mut self,
-            request: impl tonic::IntoRequest<super::StreamUserOrderBookRequest>,
+            request: impl tonic::IntoRequest<super::GetUserOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<tonic::codec::Streaming<super::UserOrderbookData>>,
             tonic::Status,
@@ -203,6 +230,19 @@ pub mod market_service_server {
             tonic::Response<Self::StreamFuturesOrderbookStream>,
             tonic::Status,
         >;
+        /// Server streaming response type for the GetUserOrderbook method.
+        type GetUserOrderbookStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::UserOrderbookData, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn get_user_orderbook(
+            &self,
+            request: tonic::Request<super::GetUserOrderBookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::GetUserOrderbookStream>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the StreamUserOrderbook method.
         type StreamUserOrderbookStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::UserOrderbookData, tonic::Status>,
@@ -211,7 +251,7 @@ pub mod market_service_server {
             + 'static;
         async fn stream_user_orderbook(
             &self,
-            request: tonic::Request<super::StreamUserOrderBookRequest>,
+            request: tonic::Request<super::GetUserOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamUserOrderbookStream>,
             tonic::Status,
@@ -392,13 +432,61 @@ pub mod market_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/kdo.v1.market.MarketService/GetUserOrderbook" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetUserOrderbookSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::ServerStreamingService<
+                        super::GetUserOrderBookRequest,
+                    > for GetUserOrderbookSvc<T> {
+                        type Response = super::UserOrderbookData;
+                        type ResponseStream = T::GetUserOrderbookStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetUserOrderBookRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::get_user_orderbook(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetUserOrderbookSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/kdo.v1.market.MarketService/StreamUserOrderbook" => {
                     #[allow(non_camel_case_types)]
                     struct StreamUserOrderbookSvc<T: MarketService>(pub Arc<T>);
                     impl<
                         T: MarketService,
                     > tonic::server::ServerStreamingService<
-                        super::StreamUserOrderBookRequest,
+                        super::GetUserOrderBookRequest,
                     > for StreamUserOrderbookSvc<T> {
                         type Response = super::UserOrderbookData;
                         type ResponseStream = T::StreamUserOrderbookStream;
@@ -408,7 +496,7 @@ pub mod market_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StreamUserOrderBookRequest>,
+                            request: tonic::Request<super::GetUserOrderBookRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {

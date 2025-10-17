@@ -43,8 +43,13 @@ class MarketServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamFuturesOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 사용자 주문장 업데이트를 가져오기
+  $grpc.ResponseStream<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$getUserOrderbook, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// 사용자 주문장 업데이트를 스트리밍
-  $grpc.ResponseStream<$0.UserOrderbookData> streamUserOrderbook($0.StreamUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
+  $grpc.ResponseStream<$0.UserOrderbookData> streamUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamUserOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
@@ -58,9 +63,13 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/StreamFuturesOrderbook',
       ($0.StreamFuturesOrderbookRequest value) => value.writeToBuffer(),
       $0.FuturesOrderbookData.fromBuffer);
-  static final _$streamUserOrderbook = $grpc.ClientMethod<$0.StreamUserOrderBookRequest, $0.UserOrderbookData>(
+  static final _$getUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.market.MarketService/GetUserOrderbook',
+      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
+      $0.UserOrderbookData.fromBuffer);
+  static final _$streamUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
       '/kdo.v1.market.MarketService/StreamUserOrderbook',
-      ($0.StreamUserOrderBookRequest value) => value.writeToBuffer(),
+      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
       $0.UserOrderbookData.fromBuffer);
 }
 
@@ -83,12 +92,19 @@ abstract class MarketServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamFuturesOrderbookRequest.fromBuffer(value),
         ($0.FuturesOrderbookData value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamUserOrderBookRequest, $0.UserOrderbookData>(
+    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
+        'GetUserOrderbook',
+        getUserOrderbook_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
+        ($0.UserOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
         'StreamUserOrderbook',
         streamUserOrderbook_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => $0.StreamUserOrderBookRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
         ($0.UserOrderbookData value) => value.writeToBuffer()));
   }
 
@@ -104,10 +120,16 @@ abstract class MarketServiceBase extends $grpc.Service {
 
   $async.Stream<$0.FuturesOrderbookData> streamFuturesOrderbook($grpc.ServiceCall call, $0.StreamFuturesOrderbookRequest request);
 
-  $async.Stream<$0.UserOrderbookData> streamUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamUserOrderBookRequest> $request) async* {
+  $async.Stream<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async* {
+    yield* getUserOrderbook($call, await $request);
+  }
+
+  $async.Stream<$0.UserOrderbookData> getUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
+
+  $async.Stream<$0.UserOrderbookData> streamUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async* {
     yield* streamUserOrderbook($call, await $request);
   }
 
-  $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.StreamUserOrderBookRequest request);
+  $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
 
 }
