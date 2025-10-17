@@ -24,7 +24,7 @@ service MarketService {
     }
 
     // 사용자 주문장 업데이트를 가져오기
-    rpc GetUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
+    rpc GetUserOrderbook(GetUserOrderBookRequest) returns (UserOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{etf=etfs/*}/user-orderbook"
         };

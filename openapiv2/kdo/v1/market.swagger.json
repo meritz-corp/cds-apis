@@ -71,18 +71,9 @@
         "operationId": "MarketService_GetUserOrderbook",
         "responses": {
           "200": {
-            "description": "A successful response.(streaming responses)",
+            "description": "A successful response.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/marketUserOrderbookData"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of marketUserOrderbookData"
+              "$ref": "#/definitions/marketUserOrderbookData"
             }
           },
           "default": {

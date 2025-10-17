@@ -145,7 +145,7 @@ pub mod market_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::GetUserOrderBookRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::UserOrderbookData>>,
+            tonic::Response<super::UserOrderbookData>,
             tonic::Status,
         > {
             self.inner
@@ -166,7 +166,7 @@ pub mod market_service_client {
                 .insert(
                     GrpcMethod::new("kdo.v1.market.MarketService", "GetUserOrderbook"),
                 );
-            self.inner.server_streaming(req, path, codec).await
+            self.inner.unary(req, path, codec).await
         }
         pub async fn stream_user_orderbook(
             &mut self,
@@ -230,17 +230,11 @@ pub mod market_service_server {
             tonic::Response<Self::StreamFuturesOrderbookStream>,
             tonic::Status,
         >;
-        /// Server streaming response type for the GetUserOrderbook method.
-        type GetUserOrderbookStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::UserOrderbookData, tonic::Status>,
-            >
-            + Send
-            + 'static;
         async fn get_user_orderbook(
             &self,
             request: tonic::Request<super::GetUserOrderBookRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::GetUserOrderbookStream>,
+            tonic::Response<super::UserOrderbookData>,
             tonic::Status,
         >;
         /// Server streaming response type for the StreamUserOrderbook method.
@@ -437,13 +431,11 @@ pub mod market_service_server {
                     struct GetUserOrderbookSvc<T: MarketService>(pub Arc<T>);
                     impl<
                         T: MarketService,
-                    > tonic::server::ServerStreamingService<
-                        super::GetUserOrderBookRequest,
-                    > for GetUserOrderbookSvc<T> {
+                    > tonic::server::UnaryService<super::GetUserOrderBookRequest>
+                    for GetUserOrderbookSvc<T> {
                         type Response = super::UserOrderbookData;
-                        type ResponseStream = T::GetUserOrderbookStream;
                         type Future = BoxFuture<
-                            tonic::Response<Self::ResponseStream>,
+                            tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
@@ -475,7 +467,7 @@ pub mod market_service_server {
                                 max_decoding_message_size,
                                 max_encoding_message_size,
                             );
-                        let res = grpc.server_streaming(method, req).await;
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

@@ -44,8 +44,8 @@ class MarketServiceClient extends $grpc.Client {
   }
 
   /// 사용자 주문장 업데이트를 가져오기
-  $grpc.ResponseStream<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$getUserOrderbook, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseFuture<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getUserOrderbook, request, options: options);
   }
 
   /// 사용자 주문장 업데이트를 스트리밍
@@ -96,7 +96,7 @@ abstract class MarketServiceBase extends $grpc.Service {
         'GetUserOrderbook',
         getUserOrderbook_Pre,
         false,
-        true,
+        false,
         ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
         ($0.UserOrderbookData value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
@@ -120,11 +120,11 @@ abstract class MarketServiceBase extends $grpc.Service {
 
   $async.Stream<$0.FuturesOrderbookData> streamFuturesOrderbook($grpc.ServiceCall call, $0.StreamFuturesOrderbookRequest request);
 
-  $async.Stream<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async* {
-    yield* getUserOrderbook($call, await $request);
+  $async.Future<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async {
+    return getUserOrderbook($call, await $request);
   }
 
-  $async.Stream<$0.UserOrderbookData> getUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
+  $async.Future<$0.UserOrderbookData> getUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
 
   $async.Stream<$0.UserOrderbookData> streamUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async* {
     yield* streamUserOrderbook($call, await $request);

@@ -30,7 +30,7 @@ abstract final class MarketService {
   /// 사용자 주문장 업데이트를 가져오기
   static const getUserOrderbook = connect.Spec(
     '/$name/GetUserOrderbook',
-    connect.StreamType.server,
+    connect.StreamType.unary,
     kdov1market.GetUserOrderBookRequest.new,
     kdov1market.UserOrderbookData.new,
   );

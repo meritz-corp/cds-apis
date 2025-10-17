@@ -46,14 +46,14 @@ extension type MarketServiceClient (connect.Transport _transport) {
   }
 
   /// 사용자 주문장 업데이트를 가져오기
-  Stream<kdov1market.UserOrderbookData> getUserOrderbook(
+  Future<kdov1market.UserOrderbookData> getUserOrderbook(
     kdov1market.GetUserOrderBookRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
-    return connect.Client(_transport).server(
+    return connect.Client(_transport).unary(
       specs.MarketService.getUserOrderbook,
       input,
       signal: signal,
