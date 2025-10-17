@@ -90,7 +90,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "offset": {
+                "bidOffset": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+                },
+                "askOffset": {
                   "type": "string",
                   "format": "int64",
                   "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
@@ -615,7 +620,12 @@
           "type": "string",
           "title": "ETF 심볼"
         },
-        "offset": {
+        "bidOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
+        "askOffset": {
           "type": "string",
           "format": "int64",
           "title": "Offset (호가 스프레드 조정, 원 단위, i64)"

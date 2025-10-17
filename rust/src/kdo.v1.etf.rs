@@ -123,18 +123,21 @@ pub struct EtfQuoteStrategy {
     pub symbol: ::prost::alloc::string::String,
     /// Offset (호가 스프레드 조정, 원 단위, i64)
     #[prost(int64, tag="2")]
-    pub offset: i64,
-    /// Basis 스프레드 (원 단위, i64)
+    pub bid_offset: i64,
+    /// Offset (호가 스프레드 조정, 원 단위, i64)
     #[prost(int64, tag="3")]
+    pub ask_offset: i64,
+    /// Basis 스프레드 (원 단위, i64)
+    #[prost(int64, tag="4")]
     pub basis: i64,
     /// 주문 수량 (i64)
-    #[prost(int64, tag="4")]
+    #[prost(int64, tag="5")]
     pub quantity: i64,
     /// 호가 깊이 (양방향 레벨 수)
-    #[prost(uint32, tag="5")]
+    #[prost(uint32, tag="6")]
     pub depth: u32,
     /// ETF tick 크기 (원 단위, i64)
-    #[prost(int64, tag="6")]
+    #[prost(int64, tag="7")]
     pub tick_size: i64,
 }
 // ========== ETF LP Status Messages ==========

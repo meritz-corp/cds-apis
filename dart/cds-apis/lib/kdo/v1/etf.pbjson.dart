@@ -255,20 +255,21 @@ const EtfQuoteStrategy$json = {
   '1': 'EtfQuoteStrategy',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'offset', '3': 2, '4': 1, '5': 3, '10': 'offset'},
-    {'1': 'basis', '3': 3, '4': 1, '5': 3, '10': 'basis'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'depth', '3': 5, '4': 1, '5': 13, '10': 'depth'},
-    {'1': 'tick_size', '3': 6, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'bid_offset', '3': 2, '4': 1, '5': 3, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 3, '4': 1, '5': 3, '10': 'askOffset'},
+    {'1': 'basis', '3': 4, '4': 1, '5': 3, '10': 'basis'},
+    {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'depth', '3': 6, '4': 1, '5': 13, '10': 'depth'},
+    {'1': 'tick_size', '3': 7, '4': 1, '5': 3, '10': 'tickSize'},
   ],
 };
 
 /// Descriptor for `EtfQuoteStrategy`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfQuoteStrategyDescriptor = $convert.base64Decode(
-    'ChBFdGZRdW90ZVN0cmF0ZWd5EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhYKBm9mZnNldBgCIA'
-    'EoA1IGb2Zmc2V0EhQKBWJhc2lzGAMgASgDUgViYXNpcxIaCghxdWFudGl0eRgEIAEoA1IIcXVh'
-    'bnRpdHkSFAoFZGVwdGgYBSABKA1SBWRlcHRoEhsKCXRpY2tfc2l6ZRgGIAEoA1IIdGlja1Npem'
-    'U=');
+    'ChBFdGZRdW90ZVN0cmF0ZWd5EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEh0KCmJpZF9vZmZzZX'
+    'QYAiABKANSCWJpZE9mZnNldBIdCgphc2tfb2Zmc2V0GAMgASgDUglhc2tPZmZzZXQSFAoFYmFz'
+    'aXMYBCABKANSBWJhc2lzEhoKCHF1YW50aXR5GAUgASgDUghxdWFudGl0eRIUCgVkZXB0aBgGIA'
+    'EoDVIFZGVwdGgSGwoJdGlja19zaXplGAcgASgDUgh0aWNrU2l6ZQ==');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {

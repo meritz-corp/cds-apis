@@ -195,19 +195,22 @@ message EtfQuoteStrategy {
     string symbol = 1;
 
     // Offset (호가 스프레드 조정, 원 단위, i64)
-    int64 offset = 2;
+    int64 bid_offset = 2;
+
+    // Offset (호가 스프레드 조정, 원 단위, i64)
+    int64 ask_offset = 3;
 
     // Basis 스프레드 (원 단위, i64)
-    int64 basis = 3;
+    int64 basis = 4;
 
     // 주문 수량 (i64)
-    int64 quantity = 4;
+    int64 quantity = 5;
 
     // 호가 깊이 (양방향 레벨 수)
-    uint32 depth = 5;
+    uint32 depth = 6;
 
     // ETF tick 크기 (원 단위, i64)
-    int64 tick_size = 6;
+    int64 tick_size = 7;
 }
 
 // 복제 방법

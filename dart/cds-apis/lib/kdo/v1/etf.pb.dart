@@ -583,7 +583,8 @@ class ConstituentPrice extends $pb.GeneratedMessage {
 class EtfQuoteStrategy extends $pb.GeneratedMessage {
   factory EtfQuoteStrategy({
     $core.String? symbol,
-    $fixnum.Int64? offset,
+    $fixnum.Int64? bidOffset,
+    $fixnum.Int64? askOffset,
     $fixnum.Int64? basis,
     $fixnum.Int64? quantity,
     $core.int? depth,
@@ -591,7 +592,8 @@ class EtfQuoteStrategy extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
-    if (offset != null) result.offset = offset;
+    if (bidOffset != null) result.bidOffset = bidOffset;
+    if (askOffset != null) result.askOffset = askOffset;
     if (basis != null) result.basis = basis;
     if (quantity != null) result.quantity = quantity;
     if (depth != null) result.depth = depth;
@@ -606,11 +608,12 @@ class EtfQuoteStrategy extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfQuoteStrategy', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'offset')
-    ..aInt64(3, _omitFieldNames ? '' : 'basis')
-    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
-    ..aInt64(6, _omitFieldNames ? '' : 'tickSize')
+    ..aInt64(2, _omitFieldNames ? '' : 'bidOffset')
+    ..aInt64(3, _omitFieldNames ? '' : 'askOffset')
+    ..aInt64(4, _omitFieldNames ? '' : 'basis')
+    ..aInt64(5, _omitFieldNames ? '' : 'quantity')
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
+    ..aInt64(7, _omitFieldNames ? '' : 'tickSize')
     ..hasRequiredFields = false
   ;
 
@@ -643,53 +646,63 @@ class EtfQuoteStrategy extends $pb.GeneratedMessage {
 
   /// Offset (호가 스프레드 조정, 원 단위, i64)
   @$pb.TagNumber(2)
-  $fixnum.Int64 get offset => $_getI64(1);
+  $fixnum.Int64 get bidOffset => $_getI64(1);
   @$pb.TagNumber(2)
-  set offset($fixnum.Int64 value) => $_setInt64(1, value);
+  set bidOffset($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasOffset() => $_has(1);
+  $core.bool hasBidOffset() => $_has(1);
   @$pb.TagNumber(2)
-  void clearOffset() => $_clearField(2);
+  void clearBidOffset() => $_clearField(2);
+
+  /// Offset (호가 스프레드 조정, 원 단위, i64)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get askOffset => $_getI64(2);
+  @$pb.TagNumber(3)
+  set askOffset($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskOffset() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskOffset() => $_clearField(3);
 
   /// Basis 스프레드 (원 단위, i64)
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get basis => $_getI64(2);
-  @$pb.TagNumber(3)
-  set basis($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasBasis() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearBasis() => $_clearField(3);
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get basis => $_getI64(3);
+  @$pb.TagNumber(4)
+  set basis($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBasis() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBasis() => $_clearField(4);
 
   /// 주문 수량 (i64)
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get quantity => $_getI64(3);
-  @$pb.TagNumber(4)
-  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasQuantity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearQuantity() => $_clearField(4);
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get quantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearQuantity() => $_clearField(5);
 
   /// 호가 깊이 (양방향 레벨 수)
-  @$pb.TagNumber(5)
-  $core.int get depth => $_getIZ(4);
-  @$pb.TagNumber(5)
-  set depth($core.int value) => $_setUnsignedInt32(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasDepth() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearDepth() => $_clearField(5);
+  @$pb.TagNumber(6)
+  $core.int get depth => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set depth($core.int value) => $_setUnsignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasDepth() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDepth() => $_clearField(6);
 
   /// ETF tick 크기 (원 단위, i64)
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get tickSize => $_getI64(5);
-  @$pb.TagNumber(6)
-  set tickSize($fixnum.Int64 value) => $_setInt64(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasTickSize() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearTickSize() => $_clearField(6);
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get tickSize => $_getI64(6);
+  @$pb.TagNumber(7)
+  set tickSize($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasTickSize() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearTickSize() => $_clearField(7);
 }
 
 /// ETF LP 상태

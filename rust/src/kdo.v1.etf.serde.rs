@@ -1271,7 +1271,10 @@ impl serde::Serialize for EtfQuoteStrategy {
         if !self.symbol.is_empty() {
             len += 1;
         }
-        if self.offset != 0 {
+        if self.bid_offset != 0 {
+            len += 1;
+        }
+        if self.ask_offset != 0 {
             len += 1;
         }
         if self.basis != 0 {
@@ -1290,10 +1293,15 @@ impl serde::Serialize for EtfQuoteStrategy {
         if !self.symbol.is_empty() {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if self.offset != 0 {
+        if self.bid_offset != 0 {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("offset", ToString::to_string(&self.offset).as_str())?;
+            struct_ser.serialize_field("bidOffset", ToString::to_string(&self.bid_offset).as_str())?;
+        }
+        if self.ask_offset != 0 {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("askOffset", ToString::to_string(&self.ask_offset).as_str())?;
         }
         if self.basis != 0 {
             #[allow(clippy::needless_borrow)]
@@ -1324,7 +1332,10 @@ impl<'de> serde::Deserialize<'de> for EtfQuoteStrategy {
     {
         const FIELDS: &[&str] = &[
             "symbol",
-            "offset",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
             "basis",
             "quantity",
             "depth",
@@ -1335,7 +1346,8 @@ impl<'de> serde::Deserialize<'de> for EtfQuoteStrategy {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
-            Offset,
+            BidOffset,
+            AskOffset,
             Basis,
             Quantity,
             Depth,
@@ -1362,7 +1374,8 @@ impl<'de> serde::Deserialize<'de> for EtfQuoteStrategy {
                     {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
-                            "offset" => Ok(GeneratedField::Offset),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "basis" => Ok(GeneratedField::Basis),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
@@ -1387,7 +1400,8 @@ impl<'de> serde::Deserialize<'de> for EtfQuoteStrategy {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
-                let mut offset__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 let mut basis__ = None;
                 let mut quantity__ = None;
                 let mut depth__ = None;
@@ -1400,11 +1414,19 @@ impl<'de> serde::Deserialize<'de> for EtfQuoteStrategy {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
                             }
-                            offset__ = 
+                            bid_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1444,7 +1466,8 @@ impl<'de> serde::Deserialize<'de> for EtfQuoteStrategy {
                 }
                 Ok(EtfQuoteStrategy {
                     symbol: symbol__.unwrap_or_default(),
-                    offset: offset__.unwrap_or_default(),
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
                     basis: basis__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
