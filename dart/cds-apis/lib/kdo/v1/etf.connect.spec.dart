@@ -80,4 +80,20 @@ abstract final class EtfService {
     kdov1etf.StreamEtfErrorsRequest.new,
     kdov1etf.EtfLpError.new,
   );
+
+  /// 사용자 주문장 업데이트를 가져오기
+  static const getUserOrderbook = connect.Spec(
+    '/$name/GetUserOrderbook',
+    connect.StreamType.unary,
+    kdov1etf.GetUserOrderBookRequest.new,
+    kdov1etf.UserOrderbookData.new,
+  );
+
+  /// 사용자 주문장 업데이트를 스트리밍
+  static const streamUserOrderbook = connect.Spec(
+    '/$name/StreamUserOrderbook',
+    connect.StreamType.server,
+    kdov1etf.GetUserOrderBookRequest.new,
+    kdov1etf.UserOrderbookData.new,
+  );
 }

@@ -377,6 +377,34 @@ pub struct EtfLpError {
     #[prost(enumeration="ErrorLevel", tag="6")]
     pub error_level: i32,
 }
+/// 주문 업데이트 스트리밍 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserOrderBookRequest {
+    /// 리소스 이름 (예: etfs/A069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// 필터링 조건 (선택적, AIP-160)
+    #[prost(string, tag="2")]
+    pub filter: ::prost::alloc::string::String,
+}
+/// 주문 업데이트 정보
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UserOrderbookData {
+    /// 매수 호가 (10단계, AIP-144)
+    #[prost(string, repeated, tag="1")]
+    pub bid_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 매도 호가 (10단계)
+    #[prost(string, repeated, tag="2")]
+    pub ask_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 매수 수량 (10단계)
+    #[prost(int64, repeated, tag="3")]
+    pub bid_quantities: ::prost::alloc::vec::Vec<i64>,
+    /// 매도 수량 (10단계)
+    #[prost(int64, repeated, tag="4")]
+    pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
+}
 /// 상품 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

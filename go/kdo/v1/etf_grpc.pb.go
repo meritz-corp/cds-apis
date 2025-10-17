@@ -38,6 +38,10 @@ type EtfServiceClient interface {
 	StopEtfLp(ctx context.Context, in *StopEtfLpRequest, opts ...grpc.CallOption) (*StopEtfLpResponse, error)
 	// ETF LP 에러 이벤트 실시간 스트리밍
 	StreamEtfErrors(ctx context.Context, in *StreamEtfErrorsRequest, opts ...grpc.CallOption) (EtfService_StreamEtfErrorsClient, error)
+	// 사용자 주문장 업데이트를 가져오기
+	GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error)
+	// 사용자 주문장 업데이트를 스트리밍
+	StreamUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (EtfService_StreamUserOrderbookClient, error)
 }
 
 type etfServiceClient struct {
@@ -175,6 +179,47 @@ func (x *etfServiceStreamEtfErrorsClient) Recv() (*EtfLpError, error) {
 	return m, nil
 }
 
+func (c *etfServiceClient) GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error) {
+	out := new(UserOrderbookData)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/GetUserOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *etfServiceClient) StreamUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (EtfService_StreamUserOrderbookClient, error) {
+	stream, err := c.cc.NewStream(ctx, &EtfService_ServiceDesc.Streams[2], "/kdo.v1.etf.EtfService/StreamUserOrderbook", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &etfServiceStreamUserOrderbookClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type EtfService_StreamUserOrderbookClient interface {
+	Recv() (*UserOrderbookData, error)
+	grpc.ClientStream
+}
+
+type etfServiceStreamUserOrderbookClient struct {
+	grpc.ClientStream
+}
+
+func (x *etfServiceStreamUserOrderbookClient) Recv() (*UserOrderbookData, error) {
+	m := new(UserOrderbookData)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // EtfServiceServer is the server API for EtfService service.
 // All implementations must embed UnimplementedEtfServiceServer
 // for forward compatibility
@@ -195,6 +240,10 @@ type EtfServiceServer interface {
 	StopEtfLp(context.Context, *StopEtfLpRequest) (*StopEtfLpResponse, error)
 	// ETF LP 에러 이벤트 실시간 스트리밍
 	StreamEtfErrors(*StreamEtfErrorsRequest, EtfService_StreamEtfErrorsServer) error
+	// 사용자 주문장 업데이트를 가져오기
+	GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error)
+	// 사용자 주문장 업데이트를 스트리밍
+	StreamUserOrderbook(*GetUserOrderBookRequest, EtfService_StreamUserOrderbookServer) error
 	mustEmbedUnimplementedEtfServiceServer()
 }
 
@@ -228,6 +277,12 @@ func (UnimplementedEtfServiceServer) StopEtfLp(context.Context, *StopEtfLpReques
 }
 func (UnimplementedEtfServiceServer) StreamEtfErrors(*StreamEtfErrorsRequest, EtfService_StreamEtfErrorsServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamEtfErrors not implemented")
+}
+func (UnimplementedEtfServiceServer) GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserOrderbook not implemented")
+}
+func (UnimplementedEtfServiceServer) StreamUserOrderbook(*GetUserOrderBookRequest, EtfService_StreamUserOrderbookServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamUserOrderbook not implemented")
 }
 func (UnimplementedEtfServiceServer) mustEmbedUnimplementedEtfServiceServer() {}
 
@@ -410,6 +465,45 @@ func (x *etfServiceStreamEtfErrorsServer) Send(m *EtfLpError) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _EtfService_GetUserOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserOrderBookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).GetUserOrderbook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/GetUserOrderbook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).GetUserOrderbook(ctx, req.(*GetUserOrderBookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EtfService_StreamUserOrderbook_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetUserOrderBookRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(EtfServiceServer).StreamUserOrderbook(m, &etfServiceStreamUserOrderbookServer{stream})
+}
+
+type EtfService_StreamUserOrderbookServer interface {
+	Send(*UserOrderbookData) error
+	grpc.ServerStream
+}
+
+type etfServiceStreamUserOrderbookServer struct {
+	grpc.ServerStream
+}
+
+func (x *etfServiceStreamUserOrderbookServer) Send(m *UserOrderbookData) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // EtfService_ServiceDesc is the grpc.ServiceDesc for EtfService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -445,6 +539,10 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "StopEtfLp",
 			Handler:    _EtfService_StopEtfLp_Handler,
 		},
+		{
+			MethodName: "GetUserOrderbook",
+			Handler:    _EtfService_GetUserOrderbook_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -455,6 +553,11 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamEtfErrors",
 			Handler:       _EtfService_StreamEtfErrors_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamUserOrderbook",
+			Handler:       _EtfService_StreamUserOrderbook_Handler,
 			ServerStreams: true,
 		},
 	},

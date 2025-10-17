@@ -76,6 +76,16 @@ class EtfServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamEtfErrors, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 사용자 주문장 업데이트를 가져오기
+  $grpc.ResponseFuture<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getUserOrderbook, request, options: options);
+  }
+
+  /// 사용자 주문장 업데이트를 스트리밍
+  $grpc.ResponseStream<$0.UserOrderbookData> streamUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamUserOrderbook, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -114,6 +124,14 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/StreamEtfErrors',
       ($0.StreamEtfErrorsRequest value) => value.writeToBuffer(),
       $0.EtfLpError.fromBuffer);
+  static final _$getUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.etf.EtfService/GetUserOrderbook',
+      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
+      $0.UserOrderbookData.fromBuffer);
+  static final _$streamUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.etf.EtfService/StreamUserOrderbook',
+      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
+      $0.UserOrderbookData.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -184,6 +202,20 @@ abstract class EtfServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamEtfErrorsRequest.fromBuffer(value),
         ($0.EtfLpError value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
+        'GetUserOrderbook',
+        getUserOrderbook_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
+        ($0.UserOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
+        'StreamUserOrderbook',
+        streamUserOrderbook_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
+        ($0.UserOrderbookData value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -239,5 +271,17 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.EtfLpError> streamEtfErrors($grpc.ServiceCall call, $0.StreamEtfErrorsRequest request);
+
+  $async.Future<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async {
+    return getUserOrderbook($call, await $request);
+  }
+
+  $async.Future<$0.UserOrderbookData> getUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
+
+  $async.Stream<$0.UserOrderbookData> streamUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async* {
+    yield* streamUserOrderbook($call, await $request);
+  }
+
+  $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
 
 }

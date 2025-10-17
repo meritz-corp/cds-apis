@@ -209,6 +209,95 @@
         ]
       }
     },
+    "/v1/{etf}/lp/orderbook": {
+      "get": {
+        "summary": "사용자 주문장 업데이트를 가져오기",
+        "operationId": "EtfService_GetUserOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1etfUserOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "리소스 이름 (예: etfs/A069500)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (선택적, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
+    "/v1/{etf}/lp/orderbook:stream": {
+      "get": {
+        "summary": "사용자 주문장 업데이트를 스트리밍",
+        "operationId": "EtfService_StreamUserOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1etfUserOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1etfUserOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "리소스 이름 (예: etfs/A069500)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (선택적, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
     "/v1/{etf}/lp/status": {
       "get": {
         "summary": "ETF LP 상태 조회",
@@ -911,6 +1000,42 @@
           }
         }
       }
+    },
+    "v1etfUserOrderbookData": {
+      "type": "object",
+      "properties": {
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매수 호가 (10단계, AIP-144)"
+        },
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매도 호가 (10단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 (10단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 (10단계)"
+        }
+      },
+      "title": "주문 업데이트 정보"
     }
   }
 }

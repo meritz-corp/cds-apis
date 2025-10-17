@@ -168,4 +168,40 @@ extension type EtfServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 사용자 주문장 업데이트를 가져오기
+  Future<kdov1etf.UserOrderbookData> getUserOrderbook(
+    kdov1etf.GetUserOrderBookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.EtfService.getUserOrderbook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 사용자 주문장 업데이트를 스트리밍
+  Stream<kdov1etf.UserOrderbookData> streamUserOrderbook(
+    kdov1etf.GetUserOrderBookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.EtfService.streamUserOrderbook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

@@ -571,3 +571,34 @@ final $typed_data.Uint8List etfLpErrorDescriptor = $convert.base64Decode(
     'VGltZXN0YW1wUgl0aW1lc3RhbXASNwoLZXJyb3JfbGV2ZWwYBiABKA4yFi5rZG8udjEuZXRmLk'
     'Vycm9yTGV2ZWxSCmVycm9yTGV2ZWw=');
 
+@$core.Deprecated('Use getUserOrderBookRequestDescriptor instead')
+const GetUserOrderBookRequest$json = {
+  '1': 'GetUserOrderBookRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
+    {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
+  ],
+};
+
+/// Descriptor for `GetUserOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserOrderBookRequestDescriptor = $convert.base64Decode(
+    'ChdHZXRVc2VyT3JkZXJCb29rUmVxdWVzdBIQCgNldGYYASABKAlSA2V0ZhIWCgZmaWx0ZXIYAi'
+    'ABKAlSBmZpbHRlcg==');
+
+@$core.Deprecated('Use userOrderbookDataDescriptor instead')
+const UserOrderbookData$json = {
+  '1': 'UserOrderbookData',
+  '2': [
+    {'1': 'bid_prices', '3': 1, '4': 3, '5': 9, '10': 'bidPrices'},
+    {'1': 'ask_prices', '3': 2, '4': 3, '5': 9, '10': 'askPrices'},
+    {'1': 'bid_quantities', '3': 3, '4': 3, '5': 3, '10': 'bidQuantities'},
+    {'1': 'ask_quantities', '3': 4, '4': 3, '5': 3, '10': 'askQuantities'},
+  ],
+};
+
+/// Descriptor for `UserOrderbookData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userOrderbookDataDescriptor = $convert.base64Decode(
+    'ChFVc2VyT3JkZXJib29rRGF0YRIdCgpiaWRfcHJpY2VzGAEgAygJUgliaWRQcmljZXMSHQoKYX'
+    'NrX3ByaWNlcxgCIAMoCVIJYXNrUHJpY2VzEiUKDmJpZF9xdWFudGl0aWVzGAMgAygDUg1iaWRR'
+    'dWFudGl0aWVzEiUKDmFza19xdWFudGl0aWVzGAQgAygDUg1hc2tRdWFudGl0aWVz');
+

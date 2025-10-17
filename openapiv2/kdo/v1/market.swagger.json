@@ -73,7 +73,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/marketUserOrderbookData"
+              "$ref": "#/definitions/v1marketUserOrderbookData"
             }
           },
           "default": {
@@ -116,13 +116,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/marketUserOrderbookData"
+                  "$ref": "#/definitions/v1marketUserOrderbookData"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of marketUserOrderbookData"
+              "title": "Stream result of v1marketUserOrderbookData"
             }
           },
           "default": {
@@ -398,7 +398,34 @@
       "description": "- SESSION_ID_UNSPECIFIED: 기본값\n - PREVIOUS: 장개시전\n - CONNECTED: 이상무\n - OPENING_ONE_PRICE: 시가단일가\n - ONE_PRICE: 단일가\n - CLOSING_ONE_PRICE: 종가단일가\n - VI_ONE_PRICE: VI장중단일가\n - VI_OPENING_ONE_PRICE: VI시가단일가\n - VI_CLOSING_ONE_PRICE: VI종가단일가\n - UNIT_TRADE: 단위매매\n - POST_MARKET: 장종료후호가접수\n - AUCTION_BID: 경매매수호가 접수 세션\n - AUCTION_ASK: 경매매도호가 접수 세션\n - SUSPENDED: 거래정지\n - SHUTDOWN: SHUTDOWN\n - CLOSED: 장마감\n - ETC: 기타",
       "title": "세션 ID 열거형 (AIP-126)"
     },
-    "marketUserOrderbookData": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1marketUserOrderbookData": {
       "type": "object",
       "properties": {
         "bidPrices": {
@@ -433,33 +460,6 @@
         }
       },
       "title": "주문 업데이트 정보"
-    },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
     }
   }
 }

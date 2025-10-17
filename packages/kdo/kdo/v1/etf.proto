@@ -84,6 +84,20 @@ service EtfService {
         };
         option (google.api.method_signature) = "etf";
     }
+
+    // 사용자 주문장 업데이트를 가져오기
+    rpc GetUserOrderbook(GetUserOrderBookRequest) returns (UserOrderbookData) {
+        option (google.api.http) = {
+            get: "/v1/{etf=etfs/*}/lp/orderbook"
+        };
+    }
+
+    // 사용자 주문장 업데이트를 스트리밍
+    rpc StreamUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
+        option (google.api.http) = {
+            get: "/v1/{etf=etfs/*}/lp/orderbook:stream"
+        };
+    }
 }
 
 
@@ -492,4 +506,28 @@ enum ErrorLevel {
     ERROR_LEVEL_WARNING = 3;  // 경고
     ERROR_LEVEL_ERROR = 4;    // 에러
     ERROR_LEVEL_CRITICAL = 5; // 치명적 에러
+}
+
+// 주문 업데이트 스트리밍 요청
+message GetUserOrderBookRequest {
+    // 리소스 이름 (예: etfs/A069500)
+    string etf = 1;
+
+    // 필터링 조건 (선택적, AIP-160)
+    string filter = 2;
+}
+
+// 주문 업데이트 정보
+message UserOrderbookData {
+    // 매수 호가 (10단계, AIP-144)
+    repeated string bid_prices = 1;
+
+    // 매도 호가 (10단계)
+    repeated string ask_prices = 2;
+
+    // 매수 수량 (10단계)
+    repeated int64 bid_quantities = 3;
+
+    // 매도 수량 (10단계)
+    repeated int64 ask_quantities = 4;
 }
