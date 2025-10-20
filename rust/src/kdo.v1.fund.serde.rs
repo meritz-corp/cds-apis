@@ -1,0 +1,730 @@
+// @generated
+impl serde::Serialize for Fund {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.code.is_empty() {
+            len += 1;
+        }
+        if !self.name.is_empty() {
+            len += 1;
+        }
+        if !self.category_code.is_empty() {
+            len += 1;
+        }
+        if !self.employee_number.is_empty() {
+            len += 1;
+        }
+        if !self.employee_name.is_empty() {
+            len += 1;
+        }
+        if !self.limit_amount.is_empty() {
+            len += 1;
+        }
+        if !self.department_code.is_empty() {
+            len += 1;
+        }
+        if !self.trade_code.is_empty() {
+            len += 1;
+        }
+        if !self.part_code.is_empty() {
+            len += 1;
+        }
+        if !self.part_name.is_empty() {
+            len += 1;
+        }
+        if !self.product_deal_code.is_empty() {
+            len += 1;
+        }
+        if !self.add_up_position.is_empty() {
+            len += 1;
+        }
+        if !self.trading_system_code.is_empty() {
+            len += 1;
+        }
+        if !self.unique_trading_unit_code.is_empty() {
+            len += 1;
+        }
+        if !self.unique_trading_unit_part_code.is_empty() {
+            len += 1;
+        }
+        if self.unique_trading_unit_serial_number != 0 {
+            len += 1;
+        }
+        if self.add_up_unique_trading_unit {
+            len += 1;
+        }
+        if !self.short_selling_id.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.Fund", len)?;
+        if !self.code.is_empty() {
+            struct_ser.serialize_field("code", &self.code)?;
+        }
+        if !self.name.is_empty() {
+            struct_ser.serialize_field("name", &self.name)?;
+        }
+        if !self.category_code.is_empty() {
+            struct_ser.serialize_field("categoryCode", &self.category_code)?;
+        }
+        if !self.employee_number.is_empty() {
+            struct_ser.serialize_field("employeeNumber", &self.employee_number)?;
+        }
+        if !self.employee_name.is_empty() {
+            struct_ser.serialize_field("employeeName", &self.employee_name)?;
+        }
+        if !self.limit_amount.is_empty() {
+            struct_ser.serialize_field("limitAmount", &self.limit_amount)?;
+        }
+        if !self.department_code.is_empty() {
+            struct_ser.serialize_field("departmentCode", &self.department_code)?;
+        }
+        if !self.trade_code.is_empty() {
+            struct_ser.serialize_field("tradeCode", &self.trade_code)?;
+        }
+        if !self.part_code.is_empty() {
+            struct_ser.serialize_field("partCode", &self.part_code)?;
+        }
+        if !self.part_name.is_empty() {
+            struct_ser.serialize_field("partName", &self.part_name)?;
+        }
+        if !self.product_deal_code.is_empty() {
+            struct_ser.serialize_field("productDealCode", &self.product_deal_code)?;
+        }
+        if !self.add_up_position.is_empty() {
+            struct_ser.serialize_field("addUpPosition", &self.add_up_position)?;
+        }
+        if !self.trading_system_code.is_empty() {
+            struct_ser.serialize_field("tradingSystemCode", &self.trading_system_code)?;
+        }
+        if !self.unique_trading_unit_code.is_empty() {
+            struct_ser.serialize_field("uniqueTradingUnitCode", &self.unique_trading_unit_code)?;
+        }
+        if !self.unique_trading_unit_part_code.is_empty() {
+            struct_ser.serialize_field("uniqueTradingUnitPartCode", &self.unique_trading_unit_part_code)?;
+        }
+        if self.unique_trading_unit_serial_number != 0 {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("uniqueTradingUnitSerialNumber", ToString::to_string(&self.unique_trading_unit_serial_number).as_str())?;
+        }
+        if self.add_up_unique_trading_unit {
+            struct_ser.serialize_field("addUpUniqueTradingUnit", &self.add_up_unique_trading_unit)?;
+        }
+        if !self.short_selling_id.is_empty() {
+            struct_ser.serialize_field("shortSellingId", &self.short_selling_id)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Fund {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "code",
+            "name",
+            "category_code",
+            "categoryCode",
+            "employee_number",
+            "employeeNumber",
+            "employee_name",
+            "employeeName",
+            "limit_amount",
+            "limitAmount",
+            "department_code",
+            "departmentCode",
+            "trade_code",
+            "tradeCode",
+            "part_code",
+            "partCode",
+            "part_name",
+            "partName",
+            "product_deal_code",
+            "productDealCode",
+            "add_up_position",
+            "addUpPosition",
+            "trading_system_code",
+            "tradingSystemCode",
+            "unique_trading_unit_code",
+            "uniqueTradingUnitCode",
+            "unique_trading_unit_part_code",
+            "uniqueTradingUnitPartCode",
+            "unique_trading_unit_serial_number",
+            "uniqueTradingUnitSerialNumber",
+            "add_up_unique_trading_unit",
+            "addUpUniqueTradingUnit",
+            "short_selling_id",
+            "shortSellingId",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Code,
+            Name,
+            CategoryCode,
+            EmployeeNumber,
+            EmployeeName,
+            LimitAmount,
+            DepartmentCode,
+            TradeCode,
+            PartCode,
+            PartName,
+            ProductDealCode,
+            AddUpPosition,
+            TradingSystemCode,
+            UniqueTradingUnitCode,
+            UniqueTradingUnitPartCode,
+            UniqueTradingUnitSerialNumber,
+            AddUpUniqueTradingUnit,
+            ShortSellingId,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "code" => Ok(GeneratedField::Code),
+                            "name" => Ok(GeneratedField::Name),
+                            "categoryCode" | "category_code" => Ok(GeneratedField::CategoryCode),
+                            "employeeNumber" | "employee_number" => Ok(GeneratedField::EmployeeNumber),
+                            "employeeName" | "employee_name" => Ok(GeneratedField::EmployeeName),
+                            "limitAmount" | "limit_amount" => Ok(GeneratedField::LimitAmount),
+                            "departmentCode" | "department_code" => Ok(GeneratedField::DepartmentCode),
+                            "tradeCode" | "trade_code" => Ok(GeneratedField::TradeCode),
+                            "partCode" | "part_code" => Ok(GeneratedField::PartCode),
+                            "partName" | "part_name" => Ok(GeneratedField::PartName),
+                            "productDealCode" | "product_deal_code" => Ok(GeneratedField::ProductDealCode),
+                            "addUpPosition" | "add_up_position" => Ok(GeneratedField::AddUpPosition),
+                            "tradingSystemCode" | "trading_system_code" => Ok(GeneratedField::TradingSystemCode),
+                            "uniqueTradingUnitCode" | "unique_trading_unit_code" => Ok(GeneratedField::UniqueTradingUnitCode),
+                            "uniqueTradingUnitPartCode" | "unique_trading_unit_part_code" => Ok(GeneratedField::UniqueTradingUnitPartCode),
+                            "uniqueTradingUnitSerialNumber" | "unique_trading_unit_serial_number" => Ok(GeneratedField::UniqueTradingUnitSerialNumber),
+                            "addUpUniqueTradingUnit" | "add_up_unique_trading_unit" => Ok(GeneratedField::AddUpUniqueTradingUnit),
+                            "shortSellingId" | "short_selling_id" => Ok(GeneratedField::ShortSellingId),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Fund;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.Fund")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Fund, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut code__ = None;
+                let mut name__ = None;
+                let mut category_code__ = None;
+                let mut employee_number__ = None;
+                let mut employee_name__ = None;
+                let mut limit_amount__ = None;
+                let mut department_code__ = None;
+                let mut trade_code__ = None;
+                let mut part_code__ = None;
+                let mut part_name__ = None;
+                let mut product_deal_code__ = None;
+                let mut add_up_position__ = None;
+                let mut trading_system_code__ = None;
+                let mut unique_trading_unit_code__ = None;
+                let mut unique_trading_unit_part_code__ = None;
+                let mut unique_trading_unit_serial_number__ = None;
+                let mut add_up_unique_trading_unit__ = None;
+                let mut short_selling_id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Code => {
+                            if code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("code"));
+                            }
+                            code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CategoryCode => {
+                            if category_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("categoryCode"));
+                            }
+                            category_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EmployeeNumber => {
+                            if employee_number__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("employeeNumber"));
+                            }
+                            employee_number__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EmployeeName => {
+                            if employee_name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("employeeName"));
+                            }
+                            employee_name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LimitAmount => {
+                            if limit_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitAmount"));
+                            }
+                            limit_amount__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DepartmentCode => {
+                            if department_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("departmentCode"));
+                            }
+                            department_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TradeCode => {
+                            if trade_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradeCode"));
+                            }
+                            trade_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PartCode => {
+                            if part_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("partCode"));
+                            }
+                            part_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PartName => {
+                            if part_name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("partName"));
+                            }
+                            part_name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ProductDealCode => {
+                            if product_deal_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("productDealCode"));
+                            }
+                            product_deal_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AddUpPosition => {
+                            if add_up_position__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("addUpPosition"));
+                            }
+                            add_up_position__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TradingSystemCode => {
+                            if trading_system_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradingSystemCode"));
+                            }
+                            trading_system_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::UniqueTradingUnitCode => {
+                            if unique_trading_unit_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("uniqueTradingUnitCode"));
+                            }
+                            unique_trading_unit_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::UniqueTradingUnitPartCode => {
+                            if unique_trading_unit_part_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("uniqueTradingUnitPartCode"));
+                            }
+                            unique_trading_unit_part_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::UniqueTradingUnitSerialNumber => {
+                            if unique_trading_unit_serial_number__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("uniqueTradingUnitSerialNumber"));
+                            }
+                            unique_trading_unit_serial_number__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AddUpUniqueTradingUnit => {
+                            if add_up_unique_trading_unit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("addUpUniqueTradingUnit"));
+                            }
+                            add_up_unique_trading_unit__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ShortSellingId => {
+                            if short_selling_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shortSellingId"));
+                            }
+                            short_selling_id__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(Fund {
+                    code: code__.unwrap_or_default(),
+                    name: name__.unwrap_or_default(),
+                    category_code: category_code__.unwrap_or_default(),
+                    employee_number: employee_number__.unwrap_or_default(),
+                    employee_name: employee_name__.unwrap_or_default(),
+                    limit_amount: limit_amount__.unwrap_or_default(),
+                    department_code: department_code__.unwrap_or_default(),
+                    trade_code: trade_code__.unwrap_or_default(),
+                    part_code: part_code__.unwrap_or_default(),
+                    part_name: part_name__.unwrap_or_default(),
+                    product_deal_code: product_deal_code__.unwrap_or_default(),
+                    add_up_position: add_up_position__.unwrap_or_default(),
+                    trading_system_code: trading_system_code__.unwrap_or_default(),
+                    unique_trading_unit_code: unique_trading_unit_code__.unwrap_or_default(),
+                    unique_trading_unit_part_code: unique_trading_unit_part_code__.unwrap_or_default(),
+                    unique_trading_unit_serial_number: unique_trading_unit_serial_number__.unwrap_or_default(),
+                    add_up_unique_trading_unit: add_up_unique_trading_unit__.unwrap_or_default(),
+                    short_selling_id: short_selling_id__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.Fund", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetFundRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.fund.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.GetFundRequest", len)?;
+        if !self.fund.is_empty() {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetFundRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fund,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fund" => Ok(GeneratedField::Fund),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetFundRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.GetFundRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetFundRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(GetFundRequest {
+                    fund: fund__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.GetFundRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListFundsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.page_size.is_some() {
+            len += 1;
+        }
+        if self.page_token.is_some() {
+            len += 1;
+        }
+        if !self.filter.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundsRequest", len)?;
+        if let Some(v) = self.page_size.as_ref() {
+            struct_ser.serialize_field("pageSize", v)?;
+        }
+        if let Some(v) = self.page_token.as_ref() {
+            struct_ser.serialize_field("pageToken", v)?;
+        }
+        if !self.filter.is_empty() {
+            struct_ser.serialize_field("filter", &self.filter)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListFundsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "page_size",
+            "pageSize",
+            "page_token",
+            "pageToken",
+            "filter",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PageSize,
+            PageToken,
+            Filter,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
+                            "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            "filter" => Ok(GeneratedField::Filter),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListFundsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.ListFundsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut page_size__ = None;
+                let mut page_token__ = None;
+                let mut filter__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PageSize => {
+                            if page_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageSize"));
+                            }
+                            page_size__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::PageToken => {
+                            if page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageToken"));
+                            }
+                            page_token__ = map_.next_value()?;
+                        }
+                        GeneratedField::Filter => {
+                            if filter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filter"));
+                            }
+                            filter__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(ListFundsRequest {
+                    page_size: page_size__,
+                    page_token: page_token__,
+                    filter: filter__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.ListFundsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListFundsResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.funds.is_empty() {
+            len += 1;
+        }
+        if !self.next_page_token.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundsResponse", len)?;
+        if !self.funds.is_empty() {
+            struct_ser.serialize_field("funds", &self.funds)?;
+        }
+        if !self.next_page_token.is_empty() {
+            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListFundsResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "funds",
+            "next_page_token",
+            "nextPageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Funds,
+            NextPageToken,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "funds" => Ok(GeneratedField::Funds),
+                            "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListFundsResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.ListFundsResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundsResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut funds__ = None;
+                let mut next_page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Funds => {
+                            if funds__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("funds"));
+                            }
+                            funds__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::NextPageToken => {
+                            if next_page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nextPageToken"));
+                            }
+                            next_page_token__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(ListFundsResponse {
+                    funds: funds__.unwrap_or_default(),
+                    next_page_token: next_page_token__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.ListFundsResponse", FIELDS, GeneratedVisitor)
+    }
+}
