@@ -208,23 +208,26 @@ message EtfQuoteStrategy {
     // ETF 심볼
     string symbol = 1;
 
-    // Offset (호가 스프레드 조정, 원 단위, i64)
-    int64 bid_offset = 2;
+    // Fund
+    string fund_code = 2;
 
     // Offset (호가 스프레드 조정, 원 단위, i64)
-    int64 ask_offset = 3;
+    int64 bid_offset = 4;
+
+    // Offset (호가 스프레드 조정, 원 단위, i64)
+    int64 ask_offset = 5;
 
     // Basis 스프레드 (원 단위, i64)
-    int64 basis = 4;
+    int64 basis = 6;
 
     // 주문 수량 (i64)
-    int64 quantity = 5;
+    int64 quantity = 7;
 
     // 호가 깊이 (양방향 레벨 수)
-    uint32 depth = 6;
+    uint32 depth = 8;
 
     // ETF tick 크기 (원 단위, i64)
-    int64 tick_size = 7;
+    int64 tick_size = 9;
 }
 
 // 복제 방법
@@ -406,6 +409,13 @@ message GetEtfLpStatusRequest {
             type: "kdo.cdsapis.xyz/Etf"
         }
     ];
+
+    string fund = 2 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Fund"
+        }
+    ];
 }
 // StreamEtfLpStatus
 message StreamEtfLpStatusRequest {
@@ -416,8 +426,15 @@ message StreamEtfLpStatusRequest {
         }
     ];
 
+    string fund = 2 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Fund"
+        }
+    ];
+
     // 업데이트 간격 (초, optional, default: 1)
-    optional uint32 update_interval_seconds = 2;
+    optional uint32 update_interval_seconds = 3;
 }
 
 // ETF LP 시작 요청
@@ -426,6 +443,13 @@ message StartEtfLpRequest {
         (google.api.field_behavior) = REQUIRED,
         (google.api.resource_reference) = {
             type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+
+    string fund = 2 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Fund"
         }
     ];
 }
@@ -441,8 +465,19 @@ message StartEtfLpResponse {
 
 // ETF LP 중지 요청
 message StopEtfLpRequest {
-    // ETF 리소스 이름 (예: etfs/A069500)
-    string etf = 1;
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+
+    string fund = 2 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Fund"
+        }
+    ];
 }
 
 // ETF LP 중지 응답
@@ -456,8 +491,19 @@ message StopEtfLpResponse {
 
 // StreamEtfErrors 요청
 message StreamEtfErrorsRequest {
-    // ETF 리소스 이름 (예: "etfs/KR7122630002")
-    string etf = 1;
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+
+    string fund = 2 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Fund"
+        }
+    ];
 }
 
 // ETF LP 에러 이벤트

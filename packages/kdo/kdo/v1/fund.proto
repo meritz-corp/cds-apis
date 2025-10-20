@@ -89,7 +89,15 @@ message ListFundsRequest {
   // 페이지 토큰 (optional, for pagination)
   optional string page_token = 2;
 
-  // 필터링 조건 (optional, AIP-160)
+  // Available Sequence and Operator
+  // * fund_code
+  //   * `equal`, `contains`
+  // * employee_name
+  //   * `equal`, `contains`
+  //
+  // Examples
+  // * filter=fund_code="0159"
+  // * filter=employee_name:"홍길동"
   string filter = 3;
 }
 
