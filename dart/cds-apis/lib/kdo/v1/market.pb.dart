@@ -25,11 +25,9 @@ export 'market.pbenum.dart';
 class StreamEtfOrderbookRequest extends $pb.GeneratedMessage {
   factory StreamEtfOrderbookRequest({
     $core.String? etf,
-    $core.String? filter,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
-    if (filter != null) result.filter = filter;
     return result;
   }
 
@@ -40,7 +38,6 @@ class StreamEtfOrderbookRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
-    ..aOS(2, _omitFieldNames ? '' : 'filter')
     ..hasRequiredFields = false
   ;
 
@@ -70,27 +67,15 @@ class StreamEtfOrderbookRequest extends $pb.GeneratedMessage {
   $core.bool hasEtf() => $_has(0);
   @$pb.TagNumber(1)
   void clearEtf() => $_clearField(1);
-
-  /// 필터링 조건 (선택적, AIP-160)
-  @$pb.TagNumber(2)
-  $core.String get filter => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set filter($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFilter() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFilter() => $_clearField(2);
 }
 
 /// 선물 주문장 스트리밍 요청
 class StreamFuturesOrderbookRequest extends $pb.GeneratedMessage {
   factory StreamFuturesOrderbookRequest({
     $core.String? future,
-    $core.String? filter,
   }) {
     final result = create();
     if (future != null) result.future = future;
-    if (filter != null) result.filter = filter;
     return result;
   }
 
@@ -101,7 +86,6 @@ class StreamFuturesOrderbookRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFuturesOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'future')
-    ..aOS(2, _omitFieldNames ? '' : 'filter')
     ..hasRequiredFields = false
   ;
 
@@ -131,16 +115,6 @@ class StreamFuturesOrderbookRequest extends $pb.GeneratedMessage {
   $core.bool hasFuture() => $_has(0);
   @$pb.TagNumber(1)
   void clearFuture() => $_clearField(1);
-
-  /// 필터링 조건 (선택적, AIP-160)
-  @$pb.TagNumber(2)
-  $core.String get filter => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set filter($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFilter() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFilter() => $_clearField(2);
 }
 
 /// ETF 주문장 데이터

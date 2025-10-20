@@ -86,28 +86,25 @@ const StreamEtfOrderbookRequest$json = {
   '1': 'StreamEtfOrderbookRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
-    {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
 /// Descriptor for `StreamEtfOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamEtfOrderbookRequestDescriptor = $convert.base64Decode(
-    'ChlTdHJlYW1FdGZPcmRlcmJvb2tSZXF1ZXN0EhAKA2V0ZhgBIAEoCVIDZXRmEhYKBmZpbHRlch'
-    'gCIAEoCVIGZmlsdGVy');
+    'ChlTdHJlYW1FdGZPcmRlcmJvb2tSZXF1ZXN0EhAKA2V0ZhgBIAEoCVIDZXRm');
 
 @$core.Deprecated('Use streamFuturesOrderbookRequestDescriptor instead')
 const StreamFuturesOrderbookRequest$json = {
   '1': 'StreamFuturesOrderbookRequest',
   '2': [
     {'1': 'future', '3': 1, '4': 1, '5': 9, '10': 'future'},
-    {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
 /// Descriptor for `StreamFuturesOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamFuturesOrderbookRequestDescriptor = $convert.base64Decode(
-    'Ch1TdHJlYW1GdXR1cmVzT3JkZXJib29rUmVxdWVzdBIWCgZmdXR1cmUYASABKAlSBmZ1dHVyZR'
-    'IWCgZmaWx0ZXIYAiABKAlSBmZpbHRlcg==');
+    'Ch1TdHJlYW1GdXR1cmVzT3JkZXJib29rUmVxdWVzdBIWCgZmdXR1cmUYASABKAlSBmZ1dHVyZQ'
+    '==');
 
 @$core.Deprecated('Use etfOrderbookDataDescriptor instead')
 const EtfOrderbookData$json = {

@@ -51,13 +51,6 @@
             "required": true,
             "type": "string",
             "pattern": "etfs/[^/]+"
-          },
-          {
-            "name": "filter",
-            "description": "필터링 조건 (선택적, AIP-160)",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
@@ -189,13 +182,6 @@
             "required": true,
             "type": "string",
             "pattern": "futures/[^/]+"
-          },
-          {
-            "name": "filter",
-            "description": "필터링 조건 (선택적, AIP-160)",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [

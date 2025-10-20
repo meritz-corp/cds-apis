@@ -353,6 +353,9 @@ message ListEtfsRequest {
 
     // 페이지 토큰 (optional, for pagination)
     optional string page_token = 2;
+
+    // 필터링 조건 (optional, AIP-160)
+    string filter = 3;
 }
 
 message ListEtfsResponse {

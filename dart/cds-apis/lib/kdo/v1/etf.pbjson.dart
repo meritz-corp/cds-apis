@@ -385,6 +385,7 @@ const ListEtfsRequest$json = {
   '2': [
     {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
+    {'1': 'filter', '3': 3, '4': 1, '5': 9, '10': 'filter'},
   ],
   '8': [
     {'1': '_page_size'},
@@ -395,8 +396,8 @@ const ListEtfsRequest$json = {
 /// Descriptor for `ListEtfsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listEtfsRequestDescriptor = $convert.base64Decode(
     'Cg9MaXN0RXRmc1JlcXVlc3QSIAoJcGFnZV9zaXplGAEgASgNSABSCHBhZ2VTaXpliAEBEiIKCn'
-    'BhZ2VfdG9rZW4YAiABKAlIAVIJcGFnZVRva2VuiAEBQgwKCl9wYWdlX3NpemVCDQoLX3BhZ2Vf'
-    'dG9rZW4=');
+    'BhZ2VfdG9rZW4YAiABKAlIAVIJcGFnZVRva2VuiAEBEhYKBmZpbHRlchgDIAEoCVIGZmlsdGVy'
+    'QgwKCl9wYWdlX3NpemVCDQoLX3BhZ2VfdG9rZW4=');
 
 @$core.Deprecated('Use listEtfsResponseDescriptor instead')
 const ListEtfsResponse$json = {

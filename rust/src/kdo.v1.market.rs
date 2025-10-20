@@ -7,9 +7,6 @@ pub struct StreamEtfOrderbookRequest {
     /// 리소스 이름 (예: etfs/A069500)
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
-    /// 필터링 조건 (선택적, AIP-160)
-    #[prost(string, tag="2")]
-    pub filter: ::prost::alloc::string::String,
 }
 /// 선물 주문장 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -18,9 +15,6 @@ pub struct StreamFuturesOrderbookRequest {
     /// 리소스 이름 (예: futures/K101W9000)
     #[prost(string, tag="1")]
     pub future: ::prost::alloc::string::String,
-    /// 필터링 조건 (선택적, AIP-160)
-    #[prost(string, tag="2")]
-    pub filter: ::prost::alloc::string::String,
 }
 /// ETF 주문장 데이터
 #[allow(clippy::derive_partial_eq_without_eq)]

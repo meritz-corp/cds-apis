@@ -2148,12 +2148,18 @@ impl serde::Serialize for ListEtfsRequest {
         if self.page_token.is_some() {
             len += 1;
         }
+        if !self.filter.is_empty() {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.ListEtfsRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
             struct_ser.serialize_field("pageSize", v)?;
         }
         if let Some(v) = self.page_token.as_ref() {
             struct_ser.serialize_field("pageToken", v)?;
+        }
+        if !self.filter.is_empty() {
+            struct_ser.serialize_field("filter", &self.filter)?;
         }
         struct_ser.end()
     }
@@ -2169,12 +2175,14 @@ impl<'de> serde::Deserialize<'de> for ListEtfsRequest {
             "pageSize",
             "page_token",
             "pageToken",
+            "filter",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             PageSize,
             PageToken,
+            Filter,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2198,6 +2206,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfsRequest {
                         match value {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            "filter" => Ok(GeneratedField::Filter),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -2219,6 +2228,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfsRequest {
             {
                 let mut page_size__ = None;
                 let mut page_token__ = None;
+                let mut filter__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PageSize => {
@@ -2235,11 +2245,18 @@ impl<'de> serde::Deserialize<'de> for ListEtfsRequest {
                             }
                             page_token__ = map_.next_value()?;
                         }
+                        GeneratedField::Filter => {
+                            if filter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filter"));
+                            }
+                            filter__ = Some(map_.next_value()?);
+                        }
                     }
                 }
                 Ok(ListEtfsRequest {
                     page_size: page_size__,
                     page_token: page_token__,
+                    filter: filter__.unwrap_or_default(),
                 })
             }
         }

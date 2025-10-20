@@ -1235,10 +1235,12 @@ class ListEtfsRequest extends $pb.GeneratedMessage {
   factory ListEtfsRequest({
     $core.int? pageSize,
     $core.String? pageToken,
+    $core.String? filter,
   }) {
     final result = create();
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
+    if (filter != null) result.filter = filter;
     return result;
   }
 
@@ -1250,6 +1252,7 @@ class ListEtfsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListEtfsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
     ..aOS(2, _omitFieldNames ? '' : 'pageToken')
+    ..aOS(3, _omitFieldNames ? '' : 'filter')
     ..hasRequiredFields = false
   ;
 
@@ -1289,6 +1292,16 @@ class ListEtfsRequest extends $pb.GeneratedMessage {
   $core.bool hasPageToken() => $_has(1);
   @$pb.TagNumber(2)
   void clearPageToken() => $_clearField(2);
+
+  /// 필터링 조건 (optional, AIP-160)
+  @$pb.TagNumber(3)
+  $core.String get filter => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set filter($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilter() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilter() => $_clearField(3);
 }
 
 class ListEtfsResponse extends $pb.GeneratedMessage {

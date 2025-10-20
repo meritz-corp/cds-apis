@@ -48,6 +48,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [

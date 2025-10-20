@@ -73,18 +73,12 @@ service MarketService {
 message StreamEtfOrderbookRequest {
     // 리소스 이름 (예: etfs/A069500)
     string etf = 1;
-
-    // 필터링 조건 (선택적, AIP-160)
-    string filter = 2;
 }
 
 // 선물 주문장 스트리밍 요청
 message StreamFuturesOrderbookRequest {
     // 리소스 이름 (예: futures/K101W9000)
     string future = 1;
-
-    // 필터링 조건 (선택적, AIP-160)
-    string filter = 2;
 }
 
 // 세션 ID 열거형 (AIP-126)
