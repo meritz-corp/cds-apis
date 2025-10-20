@@ -23,5 +23,8 @@ pub mod kdo {
         pub mod etf {
             include!("kdo.v1.etf.rs");
         }
+        pub mod fund {
+            include!("kdo.v1.fund.rs");
+        }
     }
 }
