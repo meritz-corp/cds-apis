@@ -41,51 +41,6 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listEtfs, request, options: options);
   }
 
-  /// ETF Quote Strategy 업데이트
-  $grpc.ResponseFuture<$0.EtfQuoteStrategy> getEtfQuoteStrategy($0.GetEtfQuoteStrategyRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getEtfQuoteStrategy, request, options: options);
-  }
-
-  /// ETF Quote Strategy 업데이트
-  $grpc.ResponseFuture<$0.EtfQuoteStrategy> updateEtfQuoteStrategy($0.UpdateEtfQuoteStrategyRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$updateEtfQuoteStrategy, request, options: options);
-  }
-
-  /// ETF LP 상태 조회
-  $grpc.ResponseFuture<$0.EtfLpStatus> getEtfLpStatus($0.GetEtfLpStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getEtfLpStatus, request, options: options);
-  }
-
-  /// ETF LP 상태 스트리밍 (실시간 업데이트)
-  $grpc.ResponseStream<$0.EtfLpStatus> streamEtfLpStatus($0.StreamEtfLpStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamEtfLpStatus, $async.Stream.fromIterable([request]), options: options);
-  }
-
-  /// ETF LP 시작
-  $grpc.ResponseFuture<$0.StartEtfLpResponse> startEtfLp($0.StartEtfLpRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$startEtfLp, request, options: options);
-  }
-
-  /// ETF LP 중지
-  $grpc.ResponseFuture<$0.StopEtfLpResponse> stopEtfLp($0.StopEtfLpRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$stopEtfLp, request, options: options);
-  }
-
-  /// ETF LP 에러 이벤트 실시간 스트리밍
-  $grpc.ResponseStream<$0.EtfLpError> streamEtfErrors($0.StreamEtfErrorsRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamEtfErrors, $async.Stream.fromIterable([request]), options: options);
-  }
-
-  /// 사용자 주문장 업데이트를 가져오기
-  $grpc.ResponseFuture<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getUserOrderbook, request, options: options);
-  }
-
-  /// 사용자 주문장 업데이트를 스트리밍
-  $grpc.ResponseStream<$0.UserOrderbookData> streamUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamUserOrderbook, $async.Stream.fromIterable([request]), options: options);
-  }
-
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -96,42 +51,6 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/ListEtfs',
       ($0.ListEtfsRequest value) => value.writeToBuffer(),
       $0.ListEtfsResponse.fromBuffer);
-  static final _$getEtfQuoteStrategy = $grpc.ClientMethod<$0.GetEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
-      '/kdo.v1.etf.EtfService/GetEtfQuoteStrategy',
-      ($0.GetEtfQuoteStrategyRequest value) => value.writeToBuffer(),
-      $0.EtfQuoteStrategy.fromBuffer);
-  static final _$updateEtfQuoteStrategy = $grpc.ClientMethod<$0.UpdateEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
-      '/kdo.v1.etf.EtfService/UpdateEtfQuoteStrategy',
-      ($0.UpdateEtfQuoteStrategyRequest value) => value.writeToBuffer(),
-      $0.EtfQuoteStrategy.fromBuffer);
-  static final _$getEtfLpStatus = $grpc.ClientMethod<$0.GetEtfLpStatusRequest, $0.EtfLpStatus>(
-      '/kdo.v1.etf.EtfService/GetEtfLpStatus',
-      ($0.GetEtfLpStatusRequest value) => value.writeToBuffer(),
-      $0.EtfLpStatus.fromBuffer);
-  static final _$streamEtfLpStatus = $grpc.ClientMethod<$0.StreamEtfLpStatusRequest, $0.EtfLpStatus>(
-      '/kdo.v1.etf.EtfService/StreamEtfLpStatus',
-      ($0.StreamEtfLpStatusRequest value) => value.writeToBuffer(),
-      $0.EtfLpStatus.fromBuffer);
-  static final _$startEtfLp = $grpc.ClientMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
-      '/kdo.v1.etf.EtfService/StartEtfLp',
-      ($0.StartEtfLpRequest value) => value.writeToBuffer(),
-      $0.StartEtfLpResponse.fromBuffer);
-  static final _$stopEtfLp = $grpc.ClientMethod<$0.StopEtfLpRequest, $0.StopEtfLpResponse>(
-      '/kdo.v1.etf.EtfService/StopEtfLp',
-      ($0.StopEtfLpRequest value) => value.writeToBuffer(),
-      $0.StopEtfLpResponse.fromBuffer);
-  static final _$streamEtfErrors = $grpc.ClientMethod<$0.StreamEtfErrorsRequest, $0.EtfLpError>(
-      '/kdo.v1.etf.EtfService/StreamEtfErrors',
-      ($0.StreamEtfErrorsRequest value) => value.writeToBuffer(),
-      $0.EtfLpError.fromBuffer);
-  static final _$getUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-      '/kdo.v1.etf.EtfService/GetUserOrderbook',
-      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
-      $0.UserOrderbookData.fromBuffer);
-  static final _$streamUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-      '/kdo.v1.etf.EtfService/StreamUserOrderbook',
-      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
-      $0.UserOrderbookData.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -153,69 +72,6 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListEtfsRequest.fromBuffer(value),
         ($0.ListEtfsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
-        'GetEtfQuoteStrategy',
-        getEtfQuoteStrategy_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.GetEtfQuoteStrategyRequest.fromBuffer(value),
-        ($0.EtfQuoteStrategy value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateEtfQuoteStrategyRequest, $0.EtfQuoteStrategy>(
-        'UpdateEtfQuoteStrategy',
-        updateEtfQuoteStrategy_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.UpdateEtfQuoteStrategyRequest.fromBuffer(value),
-        ($0.EtfQuoteStrategy value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetEtfLpStatusRequest, $0.EtfLpStatus>(
-        'GetEtfLpStatus',
-        getEtfLpStatus_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.GetEtfLpStatusRequest.fromBuffer(value),
-        ($0.EtfLpStatus value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamEtfLpStatusRequest, $0.EtfLpStatus>(
-        'StreamEtfLpStatus',
-        streamEtfLpStatus_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.StreamEtfLpStatusRequest.fromBuffer(value),
-        ($0.EtfLpStatus value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
-        'StartEtfLp',
-        startEtfLp_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.StartEtfLpRequest.fromBuffer(value),
-        ($0.StartEtfLpResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StopEtfLpRequest, $0.StopEtfLpResponse>(
-        'StopEtfLp',
-        stopEtfLp_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.StopEtfLpRequest.fromBuffer(value),
-        ($0.StopEtfLpResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamEtfErrorsRequest, $0.EtfLpError>(
-        'StreamEtfErrors',
-        streamEtfErrors_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.StreamEtfErrorsRequest.fromBuffer(value),
-        ($0.EtfLpError value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-        'GetUserOrderbook',
-        getUserOrderbook_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
-        ($0.UserOrderbookData value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-        'StreamUserOrderbook',
-        streamUserOrderbook_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
-        ($0.UserOrderbookData value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -229,59 +85,5 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListEtfsResponse> listEtfs($grpc.ServiceCall call, $0.ListEtfsRequest request);
-
-  $async.Future<$0.EtfQuoteStrategy> getEtfQuoteStrategy_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfQuoteStrategyRequest> $request) async {
-    return getEtfQuoteStrategy($call, await $request);
-  }
-
-  $async.Future<$0.EtfQuoteStrategy> getEtfQuoteStrategy($grpc.ServiceCall call, $0.GetEtfQuoteStrategyRequest request);
-
-  $async.Future<$0.EtfQuoteStrategy> updateEtfQuoteStrategy_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateEtfQuoteStrategyRequest> $request) async {
-    return updateEtfQuoteStrategy($call, await $request);
-  }
-
-  $async.Future<$0.EtfQuoteStrategy> updateEtfQuoteStrategy($grpc.ServiceCall call, $0.UpdateEtfQuoteStrategyRequest request);
-
-  $async.Future<$0.EtfLpStatus> getEtfLpStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfLpStatusRequest> $request) async {
-    return getEtfLpStatus($call, await $request);
-  }
-
-  $async.Future<$0.EtfLpStatus> getEtfLpStatus($grpc.ServiceCall call, $0.GetEtfLpStatusRequest request);
-
-  $async.Stream<$0.EtfLpStatus> streamEtfLpStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfLpStatusRequest> $request) async* {
-    yield* streamEtfLpStatus($call, await $request);
-  }
-
-  $async.Stream<$0.EtfLpStatus> streamEtfLpStatus($grpc.ServiceCall call, $0.StreamEtfLpStatusRequest request);
-
-  $async.Future<$0.StartEtfLpResponse> startEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.StartEtfLpRequest> $request) async {
-    return startEtfLp($call, await $request);
-  }
-
-  $async.Future<$0.StartEtfLpResponse> startEtfLp($grpc.ServiceCall call, $0.StartEtfLpRequest request);
-
-  $async.Future<$0.StopEtfLpResponse> stopEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.StopEtfLpRequest> $request) async {
-    return stopEtfLp($call, await $request);
-  }
-
-  $async.Future<$0.StopEtfLpResponse> stopEtfLp($grpc.ServiceCall call, $0.StopEtfLpRequest request);
-
-  $async.Stream<$0.EtfLpError> streamEtfErrors_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfErrorsRequest> $request) async* {
-    yield* streamEtfErrors($call, await $request);
-  }
-
-  $async.Stream<$0.EtfLpError> streamEtfErrors($grpc.ServiceCall call, $0.StreamEtfErrorsRequest request);
-
-  $async.Future<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async {
-    return getUserOrderbook($call, await $request);
-  }
-
-  $async.Future<$0.UserOrderbookData> getUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
-
-  $async.Stream<$0.UserOrderbookData> streamUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async* {
-    yield* streamUserOrderbook($call, await $request);
-  }
-
-  $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
 
 }

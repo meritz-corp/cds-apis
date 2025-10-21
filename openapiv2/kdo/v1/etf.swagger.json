@@ -62,87 +62,6 @@
         ]
       }
     },
-    "/v1/etfs/{strategy.symbol}/quote_strategy": {
-      "patch": {
-        "summary": "ETF Quote Strategy 업데이트",
-        "operationId": "EtfService_UpdateEtfQuoteStrategy",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/etfEtfQuoteStrategy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "strategy.symbol",
-            "description": "ETF 심볼",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[^/]+"
-          },
-          {
-            "name": "strategy",
-            "description": "새로운 Quote 전략",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "bidOffset": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-                },
-                "askOffset": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-                },
-                "basis": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Basis 스프레드 (원 단위, i64)"
-                },
-                "quantity": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "주문 수량 (i64)"
-                },
-                "depth": {
-                  "type": "integer",
-                  "format": "int64",
-                  "title": "호가 깊이 (양방향 레벨 수)"
-                },
-                "tickSize": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "ETF tick 크기 (원 단위, i64)"
-                }
-              },
-              "title": "새로운 Quote 전략"
-            }
-          },
-          {
-            "name": "updateMask",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
     "/v1/{etf}": {
       "get": {
         "operationId": "EtfService_GetEtf",
@@ -150,334 +69,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/etfEtf"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/lp/errors:stream": {
-      "get": {
-        "summary": "ETF LP 에러 이벤트 실시간 스트리밍",
-        "operationId": "EtfService_StreamEtfErrors",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/etfEtfLpError"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of etfEtfLpError"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "description": "ETF 리소스 이름 (예: \"etfs/KR7122630002\")",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/lp/orderbook": {
-      "get": {
-        "summary": "사용자 주문장 업데이트를 가져오기",
-        "operationId": "EtfService_GetUserOrderbook",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1etfUserOrderbookData"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "description": "리소스 이름 (예: etfs/A069500)",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          },
-          {
-            "name": "filter",
-            "description": "필터링 조건 (선택적, AIP-160)",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/lp/orderbook:stream": {
-      "get": {
-        "summary": "사용자 주문장 업데이트를 스트리밍",
-        "operationId": "EtfService_StreamUserOrderbook",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/v1etfUserOrderbookData"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of v1etfUserOrderbookData"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "description": "리소스 이름 (예: etfs/A069500)",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          },
-          {
-            "name": "filter",
-            "description": "필터링 조건 (선택적, AIP-160)",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/lp/status": {
-      "get": {
-        "summary": "ETF LP 상태 조회",
-        "operationId": "EtfService_GetEtfLpStatus",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/etfEtfLpStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/lp/status:stream": {
-      "get": {
-        "summary": "ETF LP 상태 스트리밍 (실시간 업데이트)",
-        "operationId": "EtfService_StreamEtfLpStatus",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/etfEtfLpStatus"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of etfEtfLpStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          },
-          {
-            "name": "updateIntervalSeconds",
-            "description": "업데이트 간격 (초, optional, default: 1)",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/lp:start": {
-      "post": {
-        "summary": "ETF LP 시작",
-        "operationId": "EtfService_StartEtfLp",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/etfStartEtfLpResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "title": "ETF LP 시작 요청"
-            }
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/lp:stop": {
-      "post": {
-        "summary": "ETF LP 중지",
-        "operationId": "EtfService_StopEtfLp",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/etfStopEtfLpResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "description": "ETF 리소스 이름 (예: etfs/A069500)",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "title": "ETF LP 중지 요청"
-            }
-          }
-        ],
-        "tags": [
-          "EtfService"
-        ]
-      }
-    },
-    "/v1/{etf}/quote_strategy": {
-      "get": {
-        "summary": "ETF Quote Strategy 업데이트",
-        "operationId": "EtfService_GetEtfQuoteStrategy",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/etfEtfQuoteStrategy"
+              "$ref": "#/definitions/v1etfEtf"
             }
           },
           "default": {
@@ -503,7 +95,50 @@
     }
   },
   "definitions": {
-    "etfConstituentPrice": {
+    "etfListEtfsResponse": {
+      "type": "object",
+      "properties": {
+        "etfs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1etfEtf"
+          },
+          "title": "ETF 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1etfConstituentPrice": {
       "type": "object",
       "properties": {
         "lastPrice": {
@@ -518,38 +153,7 @@
       },
       "title": "구성종목 가격 정보"
     },
-    "etfErrorLevel": {
-      "type": "string",
-      "enum": [
-        "ERROR_LEVEL_UNSPECIFIED",
-        "ERROR_LEVEL_DEBUG",
-        "ERROR_LEVEL_INFO",
-        "ERROR_LEVEL_WARNING",
-        "ERROR_LEVEL_ERROR",
-        "ERROR_LEVEL_CRITICAL"
-      ],
-      "default": "ERROR_LEVEL_UNSPECIFIED",
-      "description": "- ERROR_LEVEL_DEBUG: 디버그 정보\n - ERROR_LEVEL_INFO: 정보성 메시지\n - ERROR_LEVEL_WARNING: 경고\n - ERROR_LEVEL_ERROR: 에러\n - ERROR_LEVEL_CRITICAL: 치명적 에러",
-      "title": "에러 레벨"
-    },
-    "etfErrorType": {
-      "type": "string",
-      "enum": [
-        "ERROR_TYPE_UNSPECIFIED",
-        "ERROR_TYPE_INITIALIZATION",
-        "ERROR_TYPE_PRICE_UPDATE",
-        "ERROR_TYPE_ORDER_SUBMIT",
-        "ERROR_TYPE_ORDER_PROCESSING",
-        "ERROR_TYPE_NAV_CALCULATION",
-        "ERROR_TYPE_ORDER_BOOK_UPDATE",
-        "ERROR_TYPE_LIMIT_EXCEEDED",
-        "ERROR_TYPE_SYSTEM_ERROR"
-      ],
-      "default": "ERROR_TYPE_UNSPECIFIED",
-      "description": "- ERROR_TYPE_INITIALIZATION: 초기화 실패\n - ERROR_TYPE_PRICE_UPDATE: 가격 업데이트 실패\n - ERROR_TYPE_ORDER_SUBMIT: 주문 제출 실패\n - ERROR_TYPE_ORDER_PROCESSING: 주문 처리 실패\n - ERROR_TYPE_NAV_CALCULATION: NAV 계산 실패\n - ERROR_TYPE_ORDER_BOOK_UPDATE: 오더북 업데이트 실패\n - ERROR_TYPE_LIMIT_EXCEEDED: 주문 한도 초과\n - ERROR_TYPE_SYSTEM_ERROR: 시스템 에러",
-      "title": "에러 타입"
-    },
-    "etfEtf": {
+    "v1etfEtf": {
       "type": "object",
       "properties": {
         "id": {
@@ -572,17 +176,13 @@
         "constituents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/etfEtfPdfConstituent"
+            "$ref": "#/definitions/v1etfEtfPdfConstituent"
           },
           "title": "PDF 구성 종목 목록"
         },
         "nav": {
-          "$ref": "#/definitions/etfEtfNav",
+          "$ref": "#/definitions/v1etfEtfNav",
           "title": "NAV 정보"
-        },
-        "quoteStrategy": {
-          "$ref": "#/definitions/etfEtfQuoteStrategy",
-          "title": "Quote 전략"
         },
         "creationUnit": {
           "type": "string",
@@ -595,98 +195,24 @@
           "title": "Tick 크기 (원 단위, i64)"
         },
         "replicationMethod": {
-          "$ref": "#/definitions/etfReplicationMethod",
+          "$ref": "#/definitions/v1etfReplicationMethod",
           "title": "복제 방법"
         }
       }
     },
-    "etfEtfLpError": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "threadType": {
-          "$ref": "#/definitions/etfThreadType",
-          "title": "스레드 타입"
-        },
-        "errorType": {
-          "$ref": "#/definitions/etfErrorType",
-          "title": "에러 타입"
-        },
-        "errorMessage": {
-          "type": "string",
-          "title": "에러 메시지"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "title": "에러 발생 시간"
-        },
-        "errorLevel": {
-          "$ref": "#/definitions/etfErrorLevel",
-          "title": "에러 레벨"
-        }
-      },
-      "title": "ETF LP 에러 이벤트"
-    },
-    "etfEtfLpState": {
-      "type": "string",
-      "enum": [
-        "ETF_LP_STATE_UNSPECIFIED",
-        "ETF_LP_STATE_IDLE",
-        "ETF_LP_STATE_RUNNING",
-        "ETF_LP_STATE_STOPPING",
-        "ETF_LP_STATE_ERROR"
-      ],
-      "default": "ETF_LP_STATE_UNSPECIFIED",
-      "title": "ETF LP 상태 enum"
-    },
-    "etfEtfLpStatus": {
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/etfEtfLpState",
-          "title": "LP 상태"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "int64",
-          "title": "시작 시간 (Unix timestamp, seconds)"
-        },
-        "orderStats": {
-          "$ref": "#/definitions/etfOrderStats",
-          "title": "주문 통계"
-        },
-        "orderLimit": {
-          "$ref": "#/definitions/etfOrderLimitStatus",
-          "title": "Order Limiter 상태"
-        },
-        "pricing": {
-          "$ref": "#/definitions/etfLpPricing",
-          "title": "가격 정보"
-        },
-        "strategy": {
-          "$ref": "#/definitions/etfEtfQuoteStrategy",
-          "title": "Quote 전략"
-        }
-      },
-      "title": "ETF LP 상태"
-    },
-    "etfEtfNav": {
+    "v1etfEtfNav": {
       "type": "object",
       "properties": {
         "physical": {
-          "$ref": "#/definitions/etfPhysicalNav"
+          "$ref": "#/definitions/v1etfPhysicalNav"
         },
         "futuresBased": {
-          "$ref": "#/definitions/etfFuturesBasedNav"
+          "$ref": "#/definitions/v1etfFuturesBasedNav"
         }
       },
       "title": "ETF NAV 정보"
     },
-    "etfEtfPdfConstituent": {
+    "v1etfEtfPdfConstituent": {
       "type": "object",
       "properties": {
         "code": {
@@ -698,7 +224,7 @@
           "title": "종목명"
         },
         "productType": {
-          "$ref": "#/definitions/etfProductType",
+          "$ref": "#/definitions/v1etfProductType",
           "title": "상품 타입"
         },
         "quantity": {
@@ -709,47 +235,7 @@
       },
       "title": "PDF 구성 종목"
     },
-    "etfEtfQuoteStrategy": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "bidOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
-        "askOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
-        "basis": {
-          "type": "string",
-          "format": "int64",
-          "title": "Basis 스프레드 (원 단위, i64)"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "주문 수량 (i64)"
-        },
-        "depth": {
-          "type": "integer",
-          "format": "int64",
-          "title": "호가 깊이 (양방향 레벨 수)"
-        },
-        "tickSize": {
-          "type": "string",
-          "format": "int64",
-          "title": "ETF tick 크기 (원 단위, i64)"
-        }
-      },
-      "title": "ETF Quote 전략"
-    },
-    "etfFuturesBasedNav": {
+    "v1etfFuturesBasedNav": {
       "type": "object",
       "properties": {
         "lastNav": {
@@ -780,105 +266,7 @@
       },
       "title": "선물 기반 NAV"
     },
-    "etfListEtfsResponse": {
-      "type": "object",
-      "properties": {
-        "etfs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/etfEtf"
-          },
-          "title": "ETF 목록"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "title": "다음 페이지 토큰"
-        }
-      }
-    },
-    "etfLpPricing": {
-      "type": "object",
-      "properties": {
-        "etfPrice": {
-          "type": "string",
-          "title": "ETF 가격 (원 단위, i64)"
-        },
-        "futurePrice": {
-          "type": "string",
-          "title": "선물 가격 (원 단위, i64)"
-        },
-        "etfNav": {
-          "type": "string",
-          "title": "ETF NAV (원 단위, i64)"
-        }
-      },
-      "title": "LP 가격 정보"
-    },
-    "etfOrderLimitStatus": {
-      "type": "object",
-      "properties": {
-        "dailyFilledQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "일일 누적 체결 수량 (i64)"
-        },
-        "dailyCumulativeLimit": {
-          "type": "string",
-          "format": "int64",
-          "title": "일일 누적 체결 수량 한도 (i64)"
-        },
-        "timeFrameStatus": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/etfTimeFrameStatus"
-          },
-          "title": "시간 프레임별 주문 개수 현황"
-        },
-        "dailyUsagePercent": {
-          "type": "number",
-          "format": "double",
-          "title": "일일 사용률 (%)"
-        }
-      },
-      "title": "Order Limiter 상태"
-    },
-    "etfOrderStats": {
-      "type": "object",
-      "properties": {
-        "totalOrdersSent": {
-          "type": "string",
-          "format": "uint64",
-          "title": "총 전송 주문 수"
-        },
-        "ordersAccepted": {
-          "type": "string",
-          "format": "uint64",
-          "title": "접수된 주문 수"
-        },
-        "ordersRejected": {
-          "type": "string",
-          "format": "uint64",
-          "title": "거부된 주문 수"
-        },
-        "ordersFilled": {
-          "type": "string",
-          "format": "uint64",
-          "title": "체결된 주문 수"
-        },
-        "totalFilledQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "총 체결 수량"
-        },
-        "dailyFilledQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "일일 체결 수량"
-        }
-      },
-      "title": "주문 통계"
-    },
-    "etfPhysicalNav": {
+    "v1etfPhysicalNav": {
       "type": "object",
       "properties": {
         "lastNav": {
@@ -888,14 +276,14 @@
         "constituents": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/etfConstituentPrice"
+            "$ref": "#/definitions/v1etfConstituentPrice"
           },
           "title": "구성종목별 가격 정보"
         }
       },
       "title": "현물 기반 NAV"
     },
-    "etfProductType": {
+    "v1etfProductType": {
       "type": "string",
       "enum": [
         "PRODUCT_TYPE_UNSPECIFIED",
@@ -906,7 +294,7 @@
       "default": "PRODUCT_TYPE_UNSPECIFIED",
       "title": "상품 타입"
     },
-    "etfReplicationMethod": {
+    "v1etfReplicationMethod": {
       "type": "string",
       "enum": [
         "REPLICATION_METHOD_UNSPECIFIED",
@@ -916,133 +304,6 @@
       ],
       "default": "REPLICATION_METHOD_UNSPECIFIED",
       "title": "복제 방법"
-    },
-    "etfStartEtfLpResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/etfEtfLpStatus",
-          "title": "LP 상태"
-        },
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      },
-      "title": "ETF LP 시작 응답"
-    },
-    "etfStopEtfLpResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/etfEtfLpStatus",
-          "title": "LP 상태"
-        },
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      },
-      "title": "ETF LP 중지 응답"
-    },
-    "etfThreadType": {
-      "type": "string",
-      "enum": [
-        "THREAD_TYPE_UNSPECIFIED",
-        "THREAD_TYPE_QUOTE",
-        "THREAD_TYPE_HEDGE"
-      ],
-      "default": "THREAD_TYPE_UNSPECIFIED",
-      "title": "스레드 타입"
-    },
-    "etfTimeFrameStatus": {
-      "type": "object",
-      "properties": {
-        "windowSeconds": {
-          "type": "string",
-          "format": "uint64",
-          "title": "시간 윈도우 (초)"
-        },
-        "currentCount": {
-          "type": "integer",
-          "format": "int64",
-          "title": "현재 윈도우 내 주문 개수"
-        },
-        "maxOrders": {
-          "type": "integer",
-          "format": "int64",
-          "title": "최대 주문 개수"
-        },
-        "usagePercent": {
-          "type": "number",
-          "format": "double",
-          "title": "사용률 (%)"
-        }
-      },
-      "title": "시간 프레임별 상태"
-    },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
-    "v1etfUserOrderbookData": {
-      "type": "object",
-      "properties": {
-        "bidPrices": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "매수 호가 (10단계, AIP-144)"
-        },
-        "askPrices": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "매도 호가 (10단계)"
-        },
-        "bidQuantities": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "int64"
-          },
-          "title": "매수 수량 (10단계)"
-        },
-        "askQuantities": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "int64"
-          },
-          "title": "매도 수량 (10단계)"
-        }
-      },
-      "title": "주문 업데이트 정보"
     }
   }
 }

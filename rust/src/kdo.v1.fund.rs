@@ -79,7 +79,15 @@ pub struct ListFundsRequest {
     /// 페이지 토큰 (optional, for pagination)
     #[prost(string, optional, tag="2")]
     pub page_token: ::core::option::Option<::prost::alloc::string::String>,
-    /// 필터링 조건 (optional, AIP-160)
+    /// Available Sequence and Operator
+    /// * fund_code
+    ///    * `equal`, `contains`
+    /// * employee_name
+    ///    * `equal`, `contains`
+    ///
+    /// Examples
+    /// * filter=fund_code="0159"
+    /// * filter=employee_name:"홍길동"
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }

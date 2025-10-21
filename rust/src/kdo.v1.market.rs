@@ -224,12 +224,10 @@ pub struct ListOrdersResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetUserOrderBookRequest {
-    /// 리소스 이름 (예: etfs/A069500)
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
-    /// 필터링 조건 (선택적, AIP-160)
     #[prost(string, tag="2")]
-    pub filter: ::prost::alloc::string::String,
+    pub fund: ::prost::alloc::string::String,
 }
 /// 주문 업데이트 정보
 #[allow(clippy::derive_partial_eq_without_eq)]

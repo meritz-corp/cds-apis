@@ -26,5 +26,8 @@ pub mod kdo {
         pub mod fund {
             include!("kdo.v1.fund.rs");
         }
+        pub mod lp {
+            include!("kdo.v1.lp.rs");
+        }
     }
 }

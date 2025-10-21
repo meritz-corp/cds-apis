@@ -3,7 +3,12 @@ syntax = "proto3";
 package kdo.v1.market;
 
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -26,14 +31,14 @@ service MarketService {
     // 사용자 주문장 업데이트를 가져오기
     rpc GetUserOrderbook(GetUserOrderBookRequest) returns (UserOrderbookData) {
         option (google.api.http) = {
-            get: "/v1/market/{etf=etfs/*}/user-orderbook"
+            get: "/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"
         };
     }
 
     // 사용자 주문장 업데이트를 스트리밍
     rpc StreamUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
         option (google.api.http) = {
-            get: "/v1/market/{etf=etfs/*}/user-orderbook:stream"
+            get: "/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook:stream"
         };
     }
 
@@ -302,11 +307,19 @@ message ListOrdersResponse {
 
 // 주문 업데이트 스트리밍 요청
 message GetUserOrderBookRequest {
-    // 리소스 이름 (예: etfs/A069500)
-    string etf = 1;
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
 
-    // 필터링 조건 (선택적, AIP-160)
-    string filter = 2;
+    string fund = 2 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Fund"
+        }
+    ];
 }
 
 // 주문 업데이트 정보

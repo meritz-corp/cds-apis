@@ -99,10 +99,6 @@ func request_MarketService_StreamFuturesOrderbook_0(ctx context.Context, marshal
 
 }
 
-var (
-	filter_MarketService_GetUserOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"etf": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
-)
-
 func request_MarketService_GetUserOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetUserOrderBookRequest
 	var metadata runtime.ServerMetadata
@@ -124,11 +120,14 @@ func request_MarketService_GetUserOrderbook_0(ctx context.Context, marshaler run
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketService_GetUserOrderbook_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
 	msg, err := client.GetUserOrderbook(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -157,21 +156,20 @@ func local_request_MarketService_GetUserOrderbook_0(ctx context.Context, marshal
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketService_GetUserOrderbook_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
 	msg, err := server.GetUserOrderbook(ctx, &protoReq)
 	return msg, metadata, err
 
 }
-
-var (
-	filter_MarketService_StreamUserOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"etf": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
-)
 
 func request_MarketService_StreamUserOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (MarketService_StreamUserOrderbookClient, runtime.ServerMetadata, error) {
 	var protoReq GetUserOrderBookRequest
@@ -194,11 +192,14 @@ func request_MarketService_StreamUserOrderbook_0(ctx context.Context, marshaler 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketService_StreamUserOrderbook_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
 	stream, err := client.StreamUserOrderbook(ctx, &protoReq)
@@ -242,7 +243,7 @@ func RegisterMarketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/user-orderbook"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -357,7 +358,7 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/user-orderbook"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -379,7 +380,7 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/user-orderbook:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -403,9 +404,9 @@ var (
 
 	pattern_MarketService_StreamFuturesOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "futures", "future", "orderbook"}, "stream"))
 
-	pattern_MarketService_GetUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "etfs", "etf", "user-orderbook"}, ""))
+	pattern_MarketService_GetUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, ""))
 
-	pattern_MarketService_StreamUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "etfs", "etf", "user-orderbook"}, "stream"))
+	pattern_MarketService_StreamUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, "stream"))
 )
 
 var (

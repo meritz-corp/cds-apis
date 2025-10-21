@@ -1,0 +1,531 @@
+syntax = "proto3";
+
+package kdo.v1.lp;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// LP 서비스는 ETF LP 관련 서비스를 제공합니다.
+service LpService {
+  // ETF LP 업데이트
+  rpc GetEtfLp(GetEtfLpRequest) returns (EtfLp) {
+    option (google.api.http) = {
+      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // ETF LP 업데이트
+  rpc UpdateEtfLp(UpdateEtfLpRequest) returns (EtfLp) {
+    option (google.api.http) = {
+      patch: "/v1/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}/lp"
+      body: "lp"
+    };
+    option (google.api.method_signature) = "lp,update_mask";
+  }
+
+  // ETF LP 상태 조회
+  rpc GetEtfLpStatus(GetEtfLpStatusRequest) returns (EtfLpStatus) {
+    option (google.api.http) = {
+      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/status"
+    };
+    option (google.api.method_signature) = "etf,fund";
+  }
+
+  // ETF LP 상태 스트리밍 (실시간 업데이트)
+  rpc StreamEtfLpStatus(StreamEtfLpStatusRequest) returns (stream EtfLpStatus) {
+    option (google.api.http) = {
+      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/status:stream"
+    };
+    option (google.api.method_signature) = "etf,fund,update_interval_seconds";
+  }
+
+  // ETF LP 시작
+  rpc StartEtfLp(StartEtfLpRequest) returns (StartEtfLpResponse) {
+    option (google.api.http) = {
+      post: "/v1/{etf=etfs/*}/{fund=funds/*}/lp:start"
+      body: "*"
+    };
+  }
+
+  // ETF LP 중지
+  rpc StopEtfLp(StopEtfLpRequest) returns (StopEtfLpResponse) {
+    option (google.api.http) = {
+      post: "/v1/{etf=etfs/*}/{fund=funds/*}/lp:stop"
+      body: "*"
+    };
+  }
+
+  // ETF LP 에러 이벤트 실시간 스트리밍
+  rpc StreamEtfErrors(StreamEtfErrorsRequest) returns (stream EtfLpError) {
+    option (google.api.http) = {
+      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/errors:stream"
+    };
+    option (google.api.method_signature) = "etf";
+  }
+
+  // 사용자 주문장 업데이트를 가져오기
+  rpc GetUserOrderbook(GetUserOrderBookRequest) returns (UserOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/orderbook"
+    };
+  }
+
+  // 사용자 주문장 업데이트를 스트리밍
+  rpc StreamUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/orderbook:stream"
+    };
+  }
+}
+
+
+message Etf {
+  // ETF ID
+  uint64 id = 1;
+
+  // ETF 심볼 (ISIN 코드)
+  string symbol = 2;
+
+  // ETF 이름
+  string name = 3;
+
+  // 마지막 가격
+  string last_price = 4;
+
+  // PDF 구성 종목 목록
+  repeated EtfPdfConstituent constituents = 5;
+
+  // NAV 정보
+  EtfNav nav = 6;
+
+  // 설정 단위
+  int64 creation_unit = 8;
+
+  // Tick 크기 (원 단위, i64)
+  int64 tick_size = 9;
+
+  // 복제 방법
+  ReplicationMethod replication_method = 10;
+}
+
+// PDF 구성 종목
+message EtfPdfConstituent {
+  // 종목 코드
+  string code = 1;
+
+  // 종목명
+  string name = 2;
+
+  // 상품 타입
+  ProductType product_type = 3;
+
+  // 구성 수량 (선물 숏의 경우 음수)
+  int64 quantity = 4;
+}
+
+// 상품 타입
+enum ProductType {
+  PRODUCT_TYPE_UNSPECIFIED = 0;
+  PRODUCT_TYPE_STOCK = 1;
+  PRODUCT_TYPE_FUTURES = 2;
+  PRODUCT_TYPE_ETF = 3;
+}
+
+// ETF NAV 정보
+message EtfNav {
+  oneof nav_type {
+    PhysicalNav physical = 1;
+    FuturesBasedNav futures_based = 2;
+  }
+}
+
+// 현물 기반 NAV
+message PhysicalNav {
+  // 마지막 NAV (원 단위, i64)
+  string last_nav = 1;
+
+  // 구성종목별 가격 정보
+  map<string, ConstituentPrice> constituents = 2;
+}
+
+// 선물 기반 NAV
+message FuturesBasedNav {
+  // 마지막 NAV (원 단위, i64)
+  string last_nav = 1;
+
+  // 전일 NAV
+  string prior_day_nav = 2;
+
+  // 레버리지 배수
+  double leverage_multiplier = 3;
+
+  // 선물 심볼
+  string futures_symbol = 4;
+
+  // 선물 전일 가격
+  string futures_prior_day_price = 5;
+
+  // 선물 현재 가격
+  string futures_last_price = 6;
+}
+
+// 구성종목 가격 정보
+message ConstituentPrice {
+  // 마지막 가격 (원 단위, i64)
+  string last_price = 1;
+
+  // 구성 수량
+  int64 quantity = 2;
+}
+
+// ETF LP 설정
+message EtfLp {
+  // ETF 심볼
+  string symbol = 1;
+
+  // Fund
+  string fund_code = 2;
+
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 bid_offset = 4;
+
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 ask_offset = 5;
+
+  // Basis 스프레드 (원 단위, i64)
+  int64 basis = 6;
+
+  // 주문 수량 (i64)
+  int64 quantity = 7;
+
+  // 호가 깊이 (양방향 레벨 수)
+  uint32 depth = 8;
+
+  // ETF tick 크기 (원 단위, i64)
+  int64 tick_size = 9;
+}
+
+// 복제 방법
+enum ReplicationMethod {
+  REPLICATION_METHOD_UNSPECIFIED = 0;
+  REPLICATION_METHOD_PHYSICAL = 1;
+  REPLICATION_METHOD_SYNTHETIC = 2;
+  REPLICATION_METHOD_FUTURES_BASED = 3;
+}
+
+// ========== ETF LP Status Messages ==========
+
+// ETF LP 상태
+message EtfLpStatus {
+  // LP 상태
+  EtfLpState state = 1;
+
+  // 시작 시간 (Unix timestamp, seconds)
+  int64 start_time = 2;
+
+  // 주문 통계
+  OrderStats order_stats = 3;
+
+  // Order Limiter 상태
+  OrderLimitStatus order_limit = 4;
+
+  // 가격 정보
+  LpPricing pricing = 5;
+}
+
+// ETF LP 상태 enum
+enum EtfLpState {
+  ETF_LP_STATE_UNSPECIFIED = 0;
+  ETF_LP_STATE_IDLE = 1;
+  ETF_LP_STATE_RUNNING = 2;
+  ETF_LP_STATE_STOPPING = 3;
+  ETF_LP_STATE_ERROR = 4;
+}
+
+// 주문 통계
+message OrderStats {
+  // 총 전송 주문 수
+  uint64 total_orders_sent = 1;
+
+  // 접수된 주문 수
+  uint64 orders_accepted = 2;
+
+  // 거부된 주문 수
+  uint64 orders_rejected = 3;
+
+  // 체결된 주문 수
+  uint64 orders_filled = 4;
+
+  // 총 체결 수량
+  int64 total_filled_quantity = 5;
+
+  // 일일 체결 수량
+  int64 daily_filled_quantity = 6;
+}
+
+// Order Limiter 상태
+message OrderLimitStatus {
+  // 일일 누적 체결 수량 (i64)
+  int64 daily_filled_quantity = 1;
+
+  // 일일 누적 체결 수량 한도 (i64)
+  int64 daily_cumulative_limit = 2;
+
+  // 시간 프레임별 주문 개수 현황
+  repeated TimeFrameStatus time_frame_status = 3;
+
+  // 일일 사용률 (%)
+  double daily_usage_percent = 4;
+}
+
+// 시간 프레임별 상태
+message TimeFrameStatus {
+  // 시간 윈도우 (초)
+  uint64 window_seconds = 1;
+
+  // 현재 윈도우 내 주문 개수
+  uint32 current_count = 2;
+
+  // 최대 주문 개수
+  uint32 max_orders = 3;
+
+  // 사용률 (%)
+  double usage_percent = 4;
+}
+
+// LP 가격 정보
+message LpPricing {
+  // ETF 가격 (원 단위, i64)
+  string etf_price = 1;
+
+  // 선물 가격 (원 단위, i64)
+  string future_price = 2;
+
+  // ETF NAV (원 단위, i64)
+  string etf_nav = 3;
+}
+
+// ========== Request/Response Messages ==========
+// GetEtfLp
+message GetEtfLpRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
+
+// UpdateEtfLp
+message UpdateEtfLpRequest {
+  EtfLp lp = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+
+// GetEtfLpStatus
+message GetEtfLpStatusRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+// StreamEtfLpStatus
+message StreamEtfLpStatusRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 업데이트 간격 (초, optional, default: 1)
+  optional uint32 update_interval_seconds = 3;
+}
+
+// ETF LP 시작 요청
+message StartEtfLpRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
+// ETF LP 시작 응답
+message StartEtfLpResponse {
+  // LP 상태
+  EtfLpStatus status = 1;
+
+  // 메시지
+  string message = 2;
+}
+
+// ETF LP 중지 요청
+message StopEtfLpRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
+// ETF LP 중지 응답
+message StopEtfLpResponse {
+  // LP 상태
+  EtfLpStatus status = 1;
+
+  // 메시지
+  string message = 2;
+}
+
+// StreamEtfErrors 요청
+message StreamEtfErrorsRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
+// ETF LP 에러 이벤트
+message EtfLpError {
+  // ETF 심볼
+  string symbol = 1;
+
+  // 스레드 타입
+  ThreadType thread_type = 2;
+
+  // 에러 타입
+  ErrorType error_type = 3;
+
+  // 에러 메시지
+  string error_message = 4;
+
+  // 에러 발생 시간
+  google.protobuf.Timestamp timestamp = 5;
+
+  // 에러 레벨
+  ErrorLevel error_level = 6;
+}
+
+// 스레드 타입
+enum ThreadType {
+  THREAD_TYPE_UNSPECIFIED = 0;
+  THREAD_TYPE_QUOTE = 1;
+  THREAD_TYPE_HEDGE = 2;
+}
+
+// 에러 타입
+enum ErrorType {
+  ERROR_TYPE_UNSPECIFIED = 0;
+  ERROR_TYPE_INITIALIZATION = 1;     // 초기화 실패
+  ERROR_TYPE_PRICE_UPDATE = 2;       // 가격 업데이트 실패
+  ERROR_TYPE_ORDER_SUBMIT = 3;       // 주문 제출 실패
+  ERROR_TYPE_ORDER_PROCESSING = 4;   // 주문 처리 실패
+  ERROR_TYPE_NAV_CALCULATION = 5;    // NAV 계산 실패
+  ERROR_TYPE_ORDER_BOOK_UPDATE = 6;  // 오더북 업데이트 실패
+  ERROR_TYPE_LIMIT_EXCEEDED = 7;     // 주문 한도 초과
+  ERROR_TYPE_SYSTEM_ERROR = 8;       // 시스템 에러
+}
+
+// 에러 레벨
+enum ErrorLevel {
+  ERROR_LEVEL_UNSPECIFIED = 0;
+  ERROR_LEVEL_DEBUG = 1;    // 디버그 정보
+  ERROR_LEVEL_INFO = 2;     // 정보성 메시지
+  ERROR_LEVEL_WARNING = 3;  // 경고
+  ERROR_LEVEL_ERROR = 4;    // 에러
+  ERROR_LEVEL_CRITICAL = 5; // 치명적 에러
+}
+
+// 주문 업데이트 스트리밍 요청
+message GetUserOrderBookRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
+// 주문 업데이트 정보
+message UserOrderbookData {
+  // 매수 호가 (10단계, AIP-144)
+  repeated string bid_prices = 1;
+
+  // 매도 호가 (10단계)
+  repeated string ask_prices = 2;
+
+  // 매수 수량 (10단계)
+  repeated int64 bid_quantities = 3;
+
+  // 매도 수량 (10단계)
+  repeated int64 ask_quantities = 4;
+}

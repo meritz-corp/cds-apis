@@ -282,7 +282,16 @@ type ListFundsRequest struct {
 	PageSize *uint32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// 페이지 토큰 (optional, for pagination)
 	PageToken *string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3,oneof" json:"page_token,omitempty"`
-	// 필터링 조건 (optional, AIP-160)
+	// Available Sequence and Operator
+	// * fund_code
+	//   - `equal`, `contains`
+	//
+	// * employee_name
+	//   - `equal`, `contains`
+	//
+	// Examples
+	// * filter=fund_code="0159"
+	// * filter=employee_name:"홍길동"
 	Filter string `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 

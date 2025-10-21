@@ -312,15 +312,16 @@ final $typed_data.Uint8List listOrdersResponseDescriptor = $convert.base64Decode
 const GetUserOrderBookRequest$json = {
   '1': 'GetUserOrderBookRequest',
   '2': [
-    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
-    {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
 /// Descriptor for `GetUserOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getUserOrderBookRequestDescriptor = $convert.base64Decode(
-    'ChdHZXRVc2VyT3JkZXJCb29rUmVxdWVzdBIQCgNldGYYASABKAlSA2V0ZhIWCgZmaWx0ZXIYAi'
-    'ABKAlSBmZpbHRlcg==');
+    'ChdHZXRVc2VyT3JkZXJCb29rUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZH'
+    'NhcGlzLnh5ei9FdGZSA2V0ZhIxCgRmdW5kGAIgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBpcy54'
+    'eXovRnVuZFIEZnVuZA==');
 
 @$core.Deprecated('Use userOrderbookDataDescriptor instead')
 const UserOrderbookData$json = {

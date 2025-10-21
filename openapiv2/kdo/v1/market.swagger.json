@@ -58,7 +58,7 @@
         ]
       }
     },
-    "/v1/market/{etf}/user-orderbook": {
+    "/v1/market/{etf}/{fund}/user-orderbook": {
       "get": {
         "summary": "사용자 주문장 업데이트를 가져오기",
         "operationId": "MarketService_GetUserOrderbook",
@@ -79,18 +79,17 @@
         "parameters": [
           {
             "name": "etf",
-            "description": "리소스 이름 (예: etfs/A069500)",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "etfs/[^/]+"
           },
           {
-            "name": "filter",
-            "description": "필터링 조건 (선택적, AIP-160)",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
           }
         ],
         "tags": [
@@ -98,7 +97,7 @@
         ]
       }
     },
-    "/v1/market/{etf}/user-orderbook:stream": {
+    "/v1/market/{etf}/{fund}/user-orderbook:stream": {
       "get": {
         "summary": "사용자 주문장 업데이트를 스트리밍",
         "operationId": "MarketService_StreamUserOrderbook",
@@ -128,18 +127,17 @@
         "parameters": [
           {
             "name": "etf",
-            "description": "리소스 이름 (예: etfs/A069500)",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "etfs/[^/]+"
           },
           {
-            "name": "filter",
-            "description": "필터링 조건 (선택적, AIP-160)",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
           }
         ],
         "tags": [

@@ -1,0 +1,830 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/lp.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "LpService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/etfs/{lp.symbol}/funds/{lp.fundCode}/lp": {
+      "patch": {
+        "summary": "ETF LP 업데이트",
+        "operationId": "LpService_UpdateEtfLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpEtfLp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "lp.symbol",
+            "description": "ETF 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "lp.fundCode",
+            "description": "Fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "lp",
+            "description": "ETF LP 설정",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bidOffset": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+                },
+                "askOffset": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+                },
+                "basis": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "Basis 스프레드 (원 단위, i64)"
+                },
+                "quantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "주문 수량 (i64)"
+                },
+                "depth": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "호가 깊이 (양방향 레벨 수)"
+                },
+                "tickSize": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "ETF tick 크기 (원 단위, i64)"
+                }
+              },
+              "title": "ETF LP 설정"
+            }
+          },
+          {
+            "name": "updateMask",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp": {
+      "get": {
+        "summary": "ETF LP 업데이트",
+        "operationId": "LpService_GetEtfLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpEtfLp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp/errors:stream": {
+      "get": {
+        "summary": "ETF LP 에러 이벤트 실시간 스트리밍",
+        "operationId": "LpService_StreamEtfErrors",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/lpEtfLpError"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of lpEtfLpError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp/orderbook": {
+      "get": {
+        "summary": "사용자 주문장 업데이트를 가져오기",
+        "operationId": "LpService_GetUserOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1lpUserOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp/orderbook:stream": {
+      "get": {
+        "summary": "사용자 주문장 업데이트를 스트리밍",
+        "operationId": "LpService_StreamUserOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1lpUserOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1lpUserOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp/status": {
+      "get": {
+        "summary": "ETF LP 상태 조회",
+        "operationId": "LpService_GetEtfLpStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpEtfLpStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp/status:stream": {
+      "get": {
+        "summary": "ETF LP 상태 스트리밍 (실시간 업데이트)",
+        "operationId": "LpService_StreamEtfLpStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/lpEtfLpStatus"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of lpEtfLpStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "updateIntervalSeconds",
+            "description": "업데이트 간격 (초, optional, default: 1)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp:start": {
+      "post": {
+        "summary": "ETF LP 시작",
+        "operationId": "LpService_StartEtfLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpStartEtfLpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "ETF LP 시작 요청"
+            }
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/{etf}/{fund}/lp:stop": {
+      "post": {
+        "summary": "ETF LP 중지",
+        "operationId": "LpService_StopEtfLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpStopEtfLpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "ETF LP 중지 요청"
+            }
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "lpErrorLevel": {
+      "type": "string",
+      "enum": [
+        "ERROR_LEVEL_UNSPECIFIED",
+        "ERROR_LEVEL_DEBUG",
+        "ERROR_LEVEL_INFO",
+        "ERROR_LEVEL_WARNING",
+        "ERROR_LEVEL_ERROR",
+        "ERROR_LEVEL_CRITICAL"
+      ],
+      "default": "ERROR_LEVEL_UNSPECIFIED",
+      "description": "- ERROR_LEVEL_DEBUG: 디버그 정보\n - ERROR_LEVEL_INFO: 정보성 메시지\n - ERROR_LEVEL_WARNING: 경고\n - ERROR_LEVEL_ERROR: 에러\n - ERROR_LEVEL_CRITICAL: 치명적 에러",
+      "title": "에러 레벨"
+    },
+    "lpErrorType": {
+      "type": "string",
+      "enum": [
+        "ERROR_TYPE_UNSPECIFIED",
+        "ERROR_TYPE_INITIALIZATION",
+        "ERROR_TYPE_PRICE_UPDATE",
+        "ERROR_TYPE_ORDER_SUBMIT",
+        "ERROR_TYPE_ORDER_PROCESSING",
+        "ERROR_TYPE_NAV_CALCULATION",
+        "ERROR_TYPE_ORDER_BOOK_UPDATE",
+        "ERROR_TYPE_LIMIT_EXCEEDED",
+        "ERROR_TYPE_SYSTEM_ERROR"
+      ],
+      "default": "ERROR_TYPE_UNSPECIFIED",
+      "description": "- ERROR_TYPE_INITIALIZATION: 초기화 실패\n - ERROR_TYPE_PRICE_UPDATE: 가격 업데이트 실패\n - ERROR_TYPE_ORDER_SUBMIT: 주문 제출 실패\n - ERROR_TYPE_ORDER_PROCESSING: 주문 처리 실패\n - ERROR_TYPE_NAV_CALCULATION: NAV 계산 실패\n - ERROR_TYPE_ORDER_BOOK_UPDATE: 오더북 업데이트 실패\n - ERROR_TYPE_LIMIT_EXCEEDED: 주문 한도 초과\n - ERROR_TYPE_SYSTEM_ERROR: 시스템 에러",
+      "title": "에러 타입"
+    },
+    "lpEtfLp": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "Fund"
+        },
+        "bidOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
+        "askOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
+        "basis": {
+          "type": "string",
+          "format": "int64",
+          "title": "Basis 스프레드 (원 단위, i64)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문 수량 (i64)"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이 (양방향 레벨 수)"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF tick 크기 (원 단위, i64)"
+        }
+      },
+      "title": "ETF LP 설정"
+    },
+    "lpEtfLpError": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "threadType": {
+          "$ref": "#/definitions/lpThreadType",
+          "title": "스레드 타입"
+        },
+        "errorType": {
+          "$ref": "#/definitions/lpErrorType",
+          "title": "에러 타입"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "에러 메시지"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "에러 발생 시간"
+        },
+        "errorLevel": {
+          "$ref": "#/definitions/lpErrorLevel",
+          "title": "에러 레벨"
+        }
+      },
+      "title": "ETF LP 에러 이벤트"
+    },
+    "lpEtfLpState": {
+      "type": "string",
+      "enum": [
+        "ETF_LP_STATE_UNSPECIFIED",
+        "ETF_LP_STATE_IDLE",
+        "ETF_LP_STATE_RUNNING",
+        "ETF_LP_STATE_STOPPING",
+        "ETF_LP_STATE_ERROR"
+      ],
+      "default": "ETF_LP_STATE_UNSPECIFIED",
+      "title": "ETF LP 상태 enum"
+    },
+    "lpEtfLpStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/lpEtfLpState",
+          "title": "LP 상태"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "시작 시간 (Unix timestamp, seconds)"
+        },
+        "orderStats": {
+          "$ref": "#/definitions/lpOrderStats",
+          "title": "주문 통계"
+        },
+        "orderLimit": {
+          "$ref": "#/definitions/lpOrderLimitStatus",
+          "title": "Order Limiter 상태"
+        },
+        "pricing": {
+          "$ref": "#/definitions/lpLpPricing",
+          "title": "가격 정보"
+        }
+      },
+      "title": "ETF LP 상태"
+    },
+    "lpLpPricing": {
+      "type": "object",
+      "properties": {
+        "etfPrice": {
+          "type": "string",
+          "title": "ETF 가격 (원 단위, i64)"
+        },
+        "futurePrice": {
+          "type": "string",
+          "title": "선물 가격 (원 단위, i64)"
+        },
+        "etfNav": {
+          "type": "string",
+          "title": "ETF NAV (원 단위, i64)"
+        }
+      },
+      "title": "LP 가격 정보"
+    },
+    "lpOrderLimitStatus": {
+      "type": "object",
+      "properties": {
+        "dailyFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "일일 누적 체결 수량 (i64)"
+        },
+        "dailyCumulativeLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "일일 누적 체결 수량 한도 (i64)"
+        },
+        "timeFrameStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpTimeFrameStatus"
+          },
+          "title": "시간 프레임별 주문 개수 현황"
+        },
+        "dailyUsagePercent": {
+          "type": "number",
+          "format": "double",
+          "title": "일일 사용률 (%)"
+        }
+      },
+      "title": "Order Limiter 상태"
+    },
+    "lpOrderStats": {
+      "type": "object",
+      "properties": {
+        "totalOrdersSent": {
+          "type": "string",
+          "format": "uint64",
+          "title": "총 전송 주문 수"
+        },
+        "ordersAccepted": {
+          "type": "string",
+          "format": "uint64",
+          "title": "접수된 주문 수"
+        },
+        "ordersRejected": {
+          "type": "string",
+          "format": "uint64",
+          "title": "거부된 주문 수"
+        },
+        "ordersFilled": {
+          "type": "string",
+          "format": "uint64",
+          "title": "체결된 주문 수"
+        },
+        "totalFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 체결 수량"
+        },
+        "dailyFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "일일 체결 수량"
+        }
+      },
+      "title": "주문 통계"
+    },
+    "lpStartEtfLpResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/lpEtfLpStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "ETF LP 시작 응답"
+    },
+    "lpStopEtfLpResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/lpEtfLpStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "ETF LP 중지 응답"
+    },
+    "lpThreadType": {
+      "type": "string",
+      "enum": [
+        "THREAD_TYPE_UNSPECIFIED",
+        "THREAD_TYPE_QUOTE",
+        "THREAD_TYPE_HEDGE"
+      ],
+      "default": "THREAD_TYPE_UNSPECIFIED",
+      "title": "스레드 타입"
+    },
+    "lpTimeFrameStatus": {
+      "type": "object",
+      "properties": {
+        "windowSeconds": {
+          "type": "string",
+          "format": "uint64",
+          "title": "시간 윈도우 (초)"
+        },
+        "currentCount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "현재 윈도우 내 주문 개수"
+        },
+        "maxOrders": {
+          "type": "integer",
+          "format": "int64",
+          "title": "최대 주문 개수"
+        },
+        "usagePercent": {
+          "type": "number",
+          "format": "double",
+          "title": "사용률 (%)"
+        }
+      },
+      "title": "시간 프레임별 상태"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1lpUserOrderbookData": {
+      "type": "object",
+      "properties": {
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매수 호가 (10단계, AIP-144)"
+        },
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매도 호가 (10단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 (10단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 (10단계)"
+        }
+      },
+      "title": "주문 업데이트 정보"
+    }
+  }
+}

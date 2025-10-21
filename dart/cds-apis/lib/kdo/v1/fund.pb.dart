@@ -397,7 +397,15 @@ class ListFundsRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearPageToken() => $_clearField(2);
 
-  /// 필터링 조건 (optional, AIP-160)
+  /// Available Sequence and Operator
+  /// * fund_code
+  ///   * `equal`, `contains`
+  /// * employee_name
+  ///   * `equal`, `contains`
+  ///
+  /// Examples
+  /// * filter=fund_code="0159"
+  /// * filter=employee_name:"홍길동"
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)

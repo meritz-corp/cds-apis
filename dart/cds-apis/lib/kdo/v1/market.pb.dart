@@ -1075,11 +1075,11 @@ class ListOrdersResponse extends $pb.GeneratedMessage {
 class GetUserOrderBookRequest extends $pb.GeneratedMessage {
   factory GetUserOrderBookRequest({
     $core.String? etf,
-    $core.String? filter,
+    $core.String? fund,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
-    if (filter != null) result.filter = filter;
+    if (fund != null) result.fund = fund;
     return result;
   }
 
@@ -1090,7 +1090,7 @@ class GetUserOrderBookRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
-    ..aOS(2, _omitFieldNames ? '' : 'filter')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
@@ -1111,7 +1111,6 @@ class GetUserOrderBookRequest extends $pb.GeneratedMessage {
   static GetUserOrderBookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserOrderBookRequest>(create);
   static GetUserOrderBookRequest? _defaultInstance;
 
-  /// 리소스 이름 (예: etfs/A069500)
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1121,15 +1120,14 @@ class GetUserOrderBookRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEtf() => $_clearField(1);
 
-  /// 필터링 조건 (선택적, AIP-160)
   @$pb.TagNumber(2)
-  $core.String get filter => $_getSZ(1);
+  $core.String get fund => $_getSZ(1);
   @$pb.TagNumber(2)
-  set filter($core.String value) => $_setString(1, value);
+  set fund($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasFilter() => $_has(1);
+  $core.bool hasFund() => $_has(1);
   @$pb.TagNumber(2)
-  void clearFilter() => $_clearField(2);
+  void clearFund() => $_clearField(2);
 }
 
 /// 주문 업데이트 정보
