@@ -14,10 +14,18 @@ option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
 // LP 서비스는 ETF LP 관련 서비스를 제공합니다.
 service LpService {
-  // ETF LP 업데이트
+  // ETF LP 조회
   rpc GetEtfLp(GetEtfLpRequest) returns (EtfLp) {
     option (google.api.http) = {
-      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // ETF LP 조회
+  rpc ListEtfLps(ListEtfLpsRequest) returns (ListEtfLpsResponse) {
+    option (google.api.http) = {
+      get: "/v1/lps"
     };
     option (google.api.method_signature) = "";
   }
@@ -25,7 +33,7 @@ service LpService {
   // ETF LP 업데이트
   rpc UpdateEtfLp(UpdateEtfLpRequest) returns (EtfLp) {
     option (google.api.http) = {
-      patch: "/v1/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}/lp"
+      patch: "/v1/lps/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}"
       body: "lp"
     };
     option (google.api.method_signature) = "lp,update_mask";
@@ -34,7 +42,7 @@ service LpService {
   // ETF LP 상태 조회
   rpc GetEtfLpStatus(GetEtfLpStatusRequest) returns (EtfLpStatus) {
     option (google.api.http) = {
-      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/status"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/status"
     };
     option (google.api.method_signature) = "etf,fund";
   }
@@ -42,7 +50,7 @@ service LpService {
   // ETF LP 상태 스트리밍 (실시간 업데이트)
   rpc StreamEtfLpStatus(StreamEtfLpStatusRequest) returns (stream EtfLpStatus) {
     option (google.api.http) = {
-      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/status:stream"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/status:stream"
     };
     option (google.api.method_signature) = "etf,fund,update_interval_seconds";
   }
@@ -50,7 +58,7 @@ service LpService {
   // ETF LP 시작
   rpc StartEtfLp(StartEtfLpRequest) returns (StartEtfLpResponse) {
     option (google.api.http) = {
-      post: "/v1/{etf=etfs/*}/{fund=funds/*}/lp:start"
+      post: "/v1/lps/{etf=etfs/*}/{fund=funds/*}:start"
       body: "*"
     };
   }
@@ -58,7 +66,7 @@ service LpService {
   // ETF LP 중지
   rpc StopEtfLp(StopEtfLpRequest) returns (StopEtfLpResponse) {
     option (google.api.http) = {
-      post: "/v1/{etf=etfs/*}/{fund=funds/*}/lp:stop"
+      post: "/v1/lps/{etf=etfs/*}/{fund=funds/*}:stop"
       body: "*"
     };
   }
@@ -66,7 +74,7 @@ service LpService {
   // ETF LP 에러 이벤트 실시간 스트리밍
   rpc StreamEtfErrors(StreamEtfErrorsRequest) returns (stream EtfLpError) {
     option (google.api.http) = {
-      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/errors:stream"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/errors:stream"
     };
     option (google.api.method_signature) = "etf";
   }
@@ -74,116 +82,16 @@ service LpService {
   // 사용자 주문장 업데이트를 가져오기
   rpc GetUserOrderbook(GetUserOrderBookRequest) returns (UserOrderbookData) {
     option (google.api.http) = {
-      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/orderbook"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/orderbook"
     };
   }
 
   // 사용자 주문장 업데이트를 스트리밍
   rpc StreamUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
     option (google.api.http) = {
-      get: "/v1/{etf=etfs/*}/{fund=funds/*}/lp/orderbook:stream"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/orderbook:stream"
     };
   }
-}
-
-
-message Etf {
-  // ETF ID
-  uint64 id = 1;
-
-  // ETF 심볼 (ISIN 코드)
-  string symbol = 2;
-
-  // ETF 이름
-  string name = 3;
-
-  // 마지막 가격
-  string last_price = 4;
-
-  // PDF 구성 종목 목록
-  repeated EtfPdfConstituent constituents = 5;
-
-  // NAV 정보
-  EtfNav nav = 6;
-
-  // 설정 단위
-  int64 creation_unit = 8;
-
-  // Tick 크기 (원 단위, i64)
-  int64 tick_size = 9;
-
-  // 복제 방법
-  ReplicationMethod replication_method = 10;
-}
-
-// PDF 구성 종목
-message EtfPdfConstituent {
-  // 종목 코드
-  string code = 1;
-
-  // 종목명
-  string name = 2;
-
-  // 상품 타입
-  ProductType product_type = 3;
-
-  // 구성 수량 (선물 숏의 경우 음수)
-  int64 quantity = 4;
-}
-
-// 상품 타입
-enum ProductType {
-  PRODUCT_TYPE_UNSPECIFIED = 0;
-  PRODUCT_TYPE_STOCK = 1;
-  PRODUCT_TYPE_FUTURES = 2;
-  PRODUCT_TYPE_ETF = 3;
-}
-
-// ETF NAV 정보
-message EtfNav {
-  oneof nav_type {
-    PhysicalNav physical = 1;
-    FuturesBasedNav futures_based = 2;
-  }
-}
-
-// 현물 기반 NAV
-message PhysicalNav {
-  // 마지막 NAV (원 단위, i64)
-  string last_nav = 1;
-
-  // 구성종목별 가격 정보
-  map<string, ConstituentPrice> constituents = 2;
-}
-
-// 선물 기반 NAV
-message FuturesBasedNav {
-  // 마지막 NAV (원 단위, i64)
-  string last_nav = 1;
-
-  // 전일 NAV
-  string prior_day_nav = 2;
-
-  // 레버리지 배수
-  double leverage_multiplier = 3;
-
-  // 선물 심볼
-  string futures_symbol = 4;
-
-  // 선물 전일 가격
-  string futures_prior_day_price = 5;
-
-  // 선물 현재 가격
-  string futures_last_price = 6;
-}
-
-// 구성종목 가격 정보
-message ConstituentPrice {
-  // 마지막 가격 (원 단위, i64)
-  string last_price = 1;
-
-  // 구성 수량
-  int64 quantity = 2;
 }
 
 // ETF LP 설정
@@ -331,6 +239,33 @@ message GetEtfLpRequest {
   ];
 }
 
+// ListEtfLps
+message ListEtfLpsRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // Available Sequence and Operator
+  // * etf_symbol
+  //   * `equal`, `contains`
+  // * fund_code
+  //   * `equal`, `contains`
+  //
+  // Examples
+  // * filter=etf_symbol:"005930"
+  // * filter=fund_code="0159"
+  string filter = 3;
+}
+
+message ListEtfLpsResponse {
+  // ETF 목록
+  repeated EtfLp etf_lps = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
 
 // UpdateEtfLp
 message UpdateEtfLpRequest {

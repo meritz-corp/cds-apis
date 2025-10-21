@@ -821,6 +821,26 @@ func (mr *MockLpServiceClientMockRecorder) GetUserOrderbook(ctx, in interface{},
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserOrderbook", reflect.TypeOf((*MockLpServiceClient)(nil).GetUserOrderbook), varargs...)
 }
 
+// ListEtfLps mocks base method.
+func (m *MockLpServiceClient) ListEtfLps(ctx context.Context, in *ListEtfLpsRequest, opts ...grpc.CallOption) (*ListEtfLpsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListEtfLps", varargs...)
+	ret0, _ := ret[0].(*ListEtfLpsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListEtfLps indicates an expected call of ListEtfLps.
+func (mr *MockLpServiceClientMockRecorder) ListEtfLps(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceClient)(nil).ListEtfLps), varargs...)
+}
+
 // StartEtfLp mocks base method.
 func (m *MockLpServiceClient) StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error) {
 	m.ctrl.T.Helper()
@@ -1007,6 +1027,21 @@ func (m *MockLpServiceServer) GetUserOrderbook(ctx context.Context, in *GetUserO
 func (mr *MockLpServiceServerMockRecorder) GetUserOrderbook(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserOrderbook", reflect.TypeOf((*MockLpServiceServer)(nil).GetUserOrderbook), ctx, in)
+}
+
+// ListEtfLps mocks base method.
+func (m *MockLpServiceServer) ListEtfLps(ctx context.Context, in *ListEtfLpsRequest) (*ListEtfLpsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListEtfLps", ctx, in)
+	ret0, _ := ret[0].(*ListEtfLpsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListEtfLps indicates an expected call of ListEtfLps.
+func (mr *MockLpServiceServerMockRecorder) ListEtfLps(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceServer)(nil).ListEtfLps), ctx, in)
 }
 
 // StartEtfLp mocks base method.

@@ -16,7 +16,54 @@
     "application/json"
   ],
   "paths": {
-    "/v1/etfs/{lp.symbol}/funds/{lp.fundCode}/lp": {
+    "/v1/lps": {
+      "get": {
+        "summary": "ETF LP 조회",
+        "operationId": "LpService_ListEtfLps",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpListEtfLpsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* etf_symbol\n  * `equal`, `contains`\n* fund_code\n  * `equal`, `contains`\n\nExamples\n* filter=etf_symbol:\"005930\"\n* filter=fund_code=\"0159\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/lps/etfs/{lp.symbol}/funds/{lp.fundCode}": {
       "patch": {
         "summary": "ETF LP 업데이트",
         "operationId": "LpService_UpdateEtfLp",
@@ -105,9 +152,9 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp": {
+    "/v1/lps/{etf}/{fund}": {
       "get": {
-        "summary": "ETF LP 업데이트",
+        "summary": "ETF LP 조회",
         "operationId": "LpService_GetEtfLp",
         "responses": {
           "200": {
@@ -144,7 +191,7 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp/errors:stream": {
+    "/v1/lps/{etf}/{fund}/errors:stream": {
       "get": {
         "summary": "ETF LP 에러 이벤트 실시간 스트리밍",
         "operationId": "LpService_StreamEtfErrors",
@@ -192,7 +239,7 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp/orderbook": {
+    "/v1/lps/{etf}/{fund}/orderbook": {
       "get": {
         "summary": "사용자 주문장 업데이트를 가져오기",
         "operationId": "LpService_GetUserOrderbook",
@@ -231,7 +278,7 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp/orderbook:stream": {
+    "/v1/lps/{etf}/{fund}/orderbook:stream": {
       "get": {
         "summary": "사용자 주문장 업데이트를 스트리밍",
         "operationId": "LpService_StreamUserOrderbook",
@@ -279,7 +326,7 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp/status": {
+    "/v1/lps/{etf}/{fund}/status": {
       "get": {
         "summary": "ETF LP 상태 조회",
         "operationId": "LpService_GetEtfLpStatus",
@@ -318,7 +365,7 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp/status:stream": {
+    "/v1/lps/{etf}/{fund}/status:stream": {
       "get": {
         "summary": "ETF LP 상태 스트리밍 (실시간 업데이트)",
         "operationId": "LpService_StreamEtfLpStatus",
@@ -374,7 +421,7 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp:start": {
+    "/v1/lps/{etf}/{fund}:start": {
       "post": {
         "summary": "ETF LP 시작",
         "operationId": "LpService_StartEtfLp",
@@ -422,7 +469,7 @@
         ]
       }
     },
-    "/v1/{etf}/{fund}/lp:stop": {
+    "/v1/lps/{etf}/{fund}:stop": {
       "post": {
         "summary": "ETF LP 중지",
         "operationId": "LpService_StopEtfLp",
@@ -616,6 +663,22 @@
         }
       },
       "title": "ETF LP 상태"
+    },
+    "lpListEtfLpsResponse": {
+      "type": "object",
+      "properties": {
+        "etfLps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpEtfLp"
+          },
+          "title": "ETF 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
     },
     "lpLpPricing": {
       "type": "object",

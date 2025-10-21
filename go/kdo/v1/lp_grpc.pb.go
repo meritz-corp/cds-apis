@@ -22,8 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LpServiceClient interface {
-	// ETF LP 업데이트
+	// ETF LP 조회
 	GetEtfLp(ctx context.Context, in *GetEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error)
+	// ETF LP 조회
+	ListEtfLps(ctx context.Context, in *ListEtfLpsRequest, opts ...grpc.CallOption) (*ListEtfLpsResponse, error)
 	// ETF LP 업데이트
 	UpdateEtfLp(ctx context.Context, in *UpdateEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error)
 	// ETF LP 상태 조회
@@ -53,6 +55,15 @@ func NewLpServiceClient(cc grpc.ClientConnInterface) LpServiceClient {
 func (c *lpServiceClient) GetEtfLp(ctx context.Context, in *GetEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error) {
 	out := new(EtfLp)
 	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetEtfLp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lpServiceClient) ListEtfLps(ctx context.Context, in *ListEtfLpsRequest, opts ...grpc.CallOption) (*ListEtfLpsResponse, error) {
+	out := new(ListEtfLpsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ListEtfLps", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -204,8 +215,10 @@ func (x *lpServiceStreamUserOrderbookClient) Recv() (*UserOrderbookData, error) 
 // All implementations must embed UnimplementedLpServiceServer
 // for forward compatibility
 type LpServiceServer interface {
-	// ETF LP 업데이트
+	// ETF LP 조회
 	GetEtfLp(context.Context, *GetEtfLpRequest) (*EtfLp, error)
+	// ETF LP 조회
+	ListEtfLps(context.Context, *ListEtfLpsRequest) (*ListEtfLpsResponse, error)
 	// ETF LP 업데이트
 	UpdateEtfLp(context.Context, *UpdateEtfLpRequest) (*EtfLp, error)
 	// ETF LP 상태 조회
@@ -231,6 +244,9 @@ type UnimplementedLpServiceServer struct {
 
 func (UnimplementedLpServiceServer) GetEtfLp(context.Context, *GetEtfLpRequest) (*EtfLp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEtfLp not implemented")
+}
+func (UnimplementedLpServiceServer) ListEtfLps(context.Context, *ListEtfLpsRequest) (*ListEtfLpsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEtfLps not implemented")
 }
 func (UnimplementedLpServiceServer) UpdateEtfLp(context.Context, *UpdateEtfLpRequest) (*EtfLp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEtfLp not implemented")
@@ -283,6 +299,24 @@ func _LpService_GetEtfLp_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LpServiceServer).GetEtfLp(ctx, req.(*GetEtfLpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LpService_ListEtfLps_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEtfLpsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LpServiceServer).ListEtfLps(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.lp.LpService/ListEtfLps",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LpServiceServer).ListEtfLps(ctx, req.(*ListEtfLpsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -450,6 +484,10 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEtfLp",
 			Handler:    _LpService_GetEtfLp_Handler,
+		},
+		{
+			MethodName: "ListEtfLps",
+			Handler:    _LpService_ListEtfLps_Handler,
 		},
 		{
 			MethodName: "UpdateEtfLp",

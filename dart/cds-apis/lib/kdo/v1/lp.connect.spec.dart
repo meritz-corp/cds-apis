@@ -11,12 +11,20 @@ abstract final class LpService {
   /// Fully-qualified name of the LpService service.
   static const name = 'kdo.v1.lp.LpService';
 
-  /// ETF LP 업데이트
+  /// ETF LP 조회
   static const getEtfLp = connect.Spec(
     '/$name/GetEtfLp',
     connect.StreamType.unary,
     kdov1lp.GetEtfLpRequest.new,
     kdov1lp.EtfLp.new,
+  );
+
+  /// ETF LP 조회
+  static const listEtfLps = connect.Spec(
+    '/$name/ListEtfLps',
+    connect.StreamType.unary,
+    kdov1lp.ListEtfLpsRequest.new,
+    kdov1lp.ListEtfLpsResponse.new,
   );
 
   /// ETF LP 업데이트

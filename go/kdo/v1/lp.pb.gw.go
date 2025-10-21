@@ -104,6 +104,42 @@ func local_request_LpService_GetEtfLp_0(ctx context.Context, marshaler runtime.M
 }
 
 var (
+	filter_LpService_ListEtfLps_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_LpService_ListEtfLps_0(ctx context.Context, marshaler runtime.Marshaler, client LpServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListEtfLpsRequest
+	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LpService_ListEtfLps_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.ListEtfLps(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_LpService_ListEtfLps_0(ctx context.Context, marshaler runtime.Marshaler, server LpServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListEtfLpsRequest
+	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LpService_ListEtfLps_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.ListEtfLps(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+var (
 	filter_LpService_UpdateEtfLp_0 = &utilities.DoubleArray{Encoding: map[string]int{"lp": 0, "symbol": 1, "fund_code": 2, "fundCode": 3}, Base: []int{1, 5, 6, 1, 7, 0, 3, 0, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 1, 4, 2, 7, 2, 2, 3, 5}}
 )
 
@@ -700,7 +736,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLp", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLp", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -717,6 +753,31 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
+	mux.Handle("GET", pattern_LpService_ListEtfLps_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/ListEtfLps", runtime.WithHTTPPathPattern("/v1/lps"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_LpService_ListEtfLps_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LpService_ListEtfLps_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("PATCH", pattern_LpService_UpdateEtfLp_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -725,7 +786,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}/lp"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/lps/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -750,7 +811,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLpStatus", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp/status"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLpStatus", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/status"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -782,7 +843,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/StartEtfLp", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp:start"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/StartEtfLp", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}:start"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -807,7 +868,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/StopEtfLp", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp:stop"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/StopEtfLp", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}:stop"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -839,7 +900,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp/orderbook"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -910,7 +971,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLp", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLp", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -926,13 +987,35 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
+	mux.Handle("GET", pattern_LpService_ListEtfLps_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/ListEtfLps", runtime.WithHTTPPathPattern("/v1/lps"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_LpService_ListEtfLps_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LpService_ListEtfLps_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("PATCH", pattern_LpService_UpdateEtfLp_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}/lp"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/lps/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -954,7 +1037,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLpStatus", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp/status"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetEtfLpStatus", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/status"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -976,7 +1059,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamEtfLpStatus", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp/status:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamEtfLpStatus", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/status:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -998,7 +1081,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StartEtfLp", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp:start"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StartEtfLp", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}:start"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1020,7 +1103,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StopEtfLp", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp:stop"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StopEtfLp", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}:stop"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1042,7 +1125,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamEtfErrors", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp/errors:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamEtfErrors", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/errors:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1064,7 +1147,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp/orderbook"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1086,7 +1169,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamUserOrderbook", runtime.WithHTTPPathPattern("/v1/{etf=etfs/*}/{fund=funds/*}/lp/orderbook:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamUserOrderbook", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/orderbook:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1106,27 +1189,31 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 }
 
 var (
-	pattern_LpService_GetEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5}, []string{"v1", "etfs", "etf", "funds", "fund", "lp"}, ""))
+	pattern_LpService_GetEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "lps", "etfs", "etf", "funds", "fund"}, ""))
 
-	pattern_LpService_UpdateEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "etfs", "lp.symbol", "funds", "lp.fund_code", "lp"}, ""))
+	pattern_LpService_ListEtfLps_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "lps"}, ""))
 
-	pattern_LpService_GetEtfLpStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5, 2, 6}, []string{"v1", "etfs", "etf", "funds", "fund", "lp", "status"}, ""))
+	pattern_LpService_UpdateEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "lps", "etfs", "lp.symbol", "funds", "lp.fund_code"}, ""))
 
-	pattern_LpService_StreamEtfLpStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5, 2, 6}, []string{"v1", "etfs", "etf", "funds", "fund", "lp", "status"}, "stream"))
+	pattern_LpService_GetEtfLpStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "status"}, ""))
 
-	pattern_LpService_StartEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5}, []string{"v1", "etfs", "etf", "funds", "fund", "lp"}, "start"))
+	pattern_LpService_StreamEtfLpStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "status"}, "stream"))
 
-	pattern_LpService_StopEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5}, []string{"v1", "etfs", "etf", "funds", "fund", "lp"}, "stop"))
+	pattern_LpService_StartEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "lps", "etfs", "etf", "funds", "fund"}, "start"))
 
-	pattern_LpService_StreamEtfErrors_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5, 2, 6}, []string{"v1", "etfs", "etf", "funds", "fund", "lp", "errors"}, "stream"))
+	pattern_LpService_StopEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "lps", "etfs", "etf", "funds", "fund"}, "stop"))
 
-	pattern_LpService_GetUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5, 2, 6}, []string{"v1", "etfs", "etf", "funds", "fund", "lp", "orderbook"}, ""))
+	pattern_LpService_StreamEtfErrors_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "errors"}, "stream"))
 
-	pattern_LpService_StreamUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 2, 5, 4, 2, 5, 2, 6}, []string{"v1", "etfs", "etf", "funds", "fund", "lp", "orderbook"}, "stream"))
+	pattern_LpService_GetUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "orderbook"}, ""))
+
+	pattern_LpService_StreamUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "orderbook"}, "stream"))
 )
 
 var (
 	forward_LpService_GetEtfLp_0 = runtime.ForwardResponseMessage
+
+	forward_LpService_ListEtfLps_0 = runtime.ForwardResponseMessage
 
 	forward_LpService_UpdateEtfLp_0 = runtime.ForwardResponseMessage
 

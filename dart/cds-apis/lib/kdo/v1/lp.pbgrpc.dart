@@ -33,9 +33,14 @@ class LpServiceClient extends $grpc.Client {
 
   LpServiceClient(super.channel, {super.options, super.interceptors});
 
-  /// ETF LP 업데이트
+  /// ETF LP 조회
   $grpc.ResponseFuture<$0.EtfLp> getEtfLp($0.GetEtfLpRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getEtfLp, request, options: options);
+  }
+
+  /// ETF LP 조회
+  $grpc.ResponseFuture<$0.ListEtfLpsResponse> listEtfLps($0.ListEtfLpsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listEtfLps, request, options: options);
   }
 
   /// ETF LP 업데이트
@@ -84,6 +89,10 @@ class LpServiceClient extends $grpc.Client {
       '/kdo.v1.lp.LpService/GetEtfLp',
       ($0.GetEtfLpRequest value) => value.writeToBuffer(),
       $0.EtfLp.fromBuffer);
+  static final _$listEtfLps = $grpc.ClientMethod<$0.ListEtfLpsRequest, $0.ListEtfLpsResponse>(
+      '/kdo.v1.lp.LpService/ListEtfLps',
+      ($0.ListEtfLpsRequest value) => value.writeToBuffer(),
+      $0.ListEtfLpsResponse.fromBuffer);
   static final _$updateEtfLp = $grpc.ClientMethod<$0.UpdateEtfLpRequest, $0.EtfLp>(
       '/kdo.v1.lp.LpService/UpdateEtfLp',
       ($0.UpdateEtfLpRequest value) => value.writeToBuffer(),
@@ -130,6 +139,13 @@ abstract class LpServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetEtfLpRequest.fromBuffer(value),
         ($0.EtfLp value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListEtfLpsRequest, $0.ListEtfLpsResponse>(
+        'ListEtfLps',
+        listEtfLps_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListEtfLpsRequest.fromBuffer(value),
+        ($0.ListEtfLpsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UpdateEtfLpRequest, $0.EtfLp>(
         'UpdateEtfLp',
         updateEtfLp_Pre,
@@ -193,6 +209,12 @@ abstract class LpServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.EtfLp> getEtfLp($grpc.ServiceCall call, $0.GetEtfLpRequest request);
+
+  $async.Future<$0.ListEtfLpsResponse> listEtfLps_Pre($grpc.ServiceCall $call, $async.Future<$0.ListEtfLpsRequest> $request) async {
+    return listEtfLps($call, await $request);
+  }
+
+  $async.Future<$0.ListEtfLpsResponse> listEtfLps($grpc.ServiceCall call, $0.ListEtfLpsRequest request);
 
   $async.Future<$0.EtfLp> updateEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateEtfLpRequest> $request) async {
     return updateEtfLp($call, await $request);

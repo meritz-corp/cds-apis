@@ -106,6 +106,31 @@ pub mod lp_service_client {
                 .insert(GrpcMethod::new("kdo.v1.lp.LpService", "GetEtfLp"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn list_etf_lps(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListEtfLpsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListEtfLpsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lp.LpService/ListEtfLps",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListEtfLps"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn update_etf_lp(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateEtfLpRequest>,
@@ -313,6 +338,13 @@ pub mod lp_service_server {
             &self,
             request: tonic::Request<super::GetEtfLpRequest>,
         ) -> std::result::Result<tonic::Response<super::EtfLp>, tonic::Status>;
+        async fn list_etf_lps(
+            &self,
+            request: tonic::Request<super::ListEtfLpsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListEtfLpsResponse>,
+            tonic::Status,
+        >;
         async fn update_etf_lp(
             &self,
             request: tonic::Request<super::UpdateEtfLpRequest>,
@@ -488,6 +520,51 @@ pub mod lp_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetEtfLpSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lp.LpService/ListEtfLps" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListEtfLpsSvc<T: LpService>(pub Arc<T>);
+                    impl<
+                        T: LpService,
+                    > tonic::server::UnaryService<super::ListEtfLpsRequest>
+                    for ListEtfLpsSvc<T> {
+                        type Response = super::ListEtfLpsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListEtfLpsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LpService>::list_etf_lps(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListEtfLpsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

@@ -69,7 +69,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1etfEtf"
+              "$ref": "#/definitions/etfEtf"
             }
           },
           "default": {
@@ -95,50 +95,7 @@
     }
   },
   "definitions": {
-    "etfListEtfsResponse": {
-      "type": "object",
-      "properties": {
-        "etfs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1etfEtf"
-          },
-          "title": "ETF 목록"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "title": "다음 페이지 토큰"
-        }
-      }
-    },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
-    "v1etfConstituentPrice": {
+    "etfConstituentPrice": {
       "type": "object",
       "properties": {
         "lastPrice": {
@@ -153,7 +110,7 @@
       },
       "title": "구성종목 가격 정보"
     },
-    "v1etfEtf": {
+    "etfEtf": {
       "type": "object",
       "properties": {
         "id": {
@@ -176,12 +133,12 @@
         "constituents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1etfEtfPdfConstituent"
+            "$ref": "#/definitions/etfEtfPdfConstituent"
           },
           "title": "PDF 구성 종목 목록"
         },
         "nav": {
-          "$ref": "#/definitions/v1etfEtfNav",
+          "$ref": "#/definitions/etfEtfNav",
           "title": "NAV 정보"
         },
         "creationUnit": {
@@ -200,19 +157,19 @@
         }
       }
     },
-    "v1etfEtfNav": {
+    "etfEtfNav": {
       "type": "object",
       "properties": {
         "physical": {
-          "$ref": "#/definitions/v1etfPhysicalNav"
+          "$ref": "#/definitions/etfPhysicalNav"
         },
         "futuresBased": {
-          "$ref": "#/definitions/v1etfFuturesBasedNav"
+          "$ref": "#/definitions/etfFuturesBasedNav"
         }
       },
       "title": "ETF NAV 정보"
     },
-    "v1etfEtfPdfConstituent": {
+    "etfEtfPdfConstituent": {
       "type": "object",
       "properties": {
         "code": {
@@ -224,7 +181,7 @@
           "title": "종목명"
         },
         "productType": {
-          "$ref": "#/definitions/v1etfProductType",
+          "$ref": "#/definitions/etfProductType",
           "title": "상품 타입"
         },
         "quantity": {
@@ -235,7 +192,7 @@
       },
       "title": "PDF 구성 종목"
     },
-    "v1etfFuturesBasedNav": {
+    "etfFuturesBasedNav": {
       "type": "object",
       "properties": {
         "lastNav": {
@@ -266,7 +223,23 @@
       },
       "title": "선물 기반 NAV"
     },
-    "v1etfPhysicalNav": {
+    "etfListEtfsResponse": {
+      "type": "object",
+      "properties": {
+        "etfs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/etfEtf"
+          },
+          "title": "ETF 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "etfPhysicalNav": {
       "type": "object",
       "properties": {
         "lastNav": {
@@ -276,14 +249,14 @@
         "constituents": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/v1etfConstituentPrice"
+            "$ref": "#/definitions/etfConstituentPrice"
           },
           "title": "구성종목별 가격 정보"
         }
       },
       "title": "현물 기반 NAV"
     },
-    "v1etfProductType": {
+    "etfProductType": {
       "type": "string",
       "enum": [
         "PRODUCT_TYPE_UNSPECIFIED",
@@ -293,6 +266,33 @@
       ],
       "default": "PRODUCT_TYPE_UNSPECIFIED",
       "title": "상품 타입"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
     },
     "v1etfReplicationMethod": {
       "type": "string",

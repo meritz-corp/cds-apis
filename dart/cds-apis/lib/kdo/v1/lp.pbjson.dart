@@ -14,23 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use productTypeDescriptor instead')
-const ProductType$json = {
-  '1': 'ProductType',
-  '2': [
-    {'1': 'PRODUCT_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'PRODUCT_TYPE_STOCK', '2': 1},
-    {'1': 'PRODUCT_TYPE_FUTURES', '2': 2},
-    {'1': 'PRODUCT_TYPE_ETF', '2': 3},
-  ],
-};
-
-/// Descriptor for `ProductType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List productTypeDescriptor = $convert.base64Decode(
-    'CgtQcm9kdWN0VHlwZRIcChhQUk9EVUNUX1RZUEVfVU5TUEVDSUZJRUQQABIWChJQUk9EVUNUX1'
-    'RZUEVfU1RPQ0sQARIYChRQUk9EVUNUX1RZUEVfRlVUVVJFUxACEhQKEFBST0RVQ1RfVFlQRV9F'
-    'VEYQAw==');
-
 @$core.Deprecated('Use replicationMethodDescriptor instead')
 const ReplicationMethod$json = {
   '1': 'ReplicationMethod',
@@ -124,129 +107,6 @@ final $typed_data.Uint8List errorLevelDescriptor = $convert.base64Decode(
     'CgpFcnJvckxldmVsEhsKF0VSUk9SX0xFVkVMX1VOU1BFQ0lGSUVEEAASFQoRRVJST1JfTEVWRU'
     'xfREVCVUcQARIUChBFUlJPUl9MRVZFTF9JTkZPEAISFwoTRVJST1JfTEVWRUxfV0FSTklORxAD'
     'EhUKEUVSUk9SX0xFVkVMX0VSUk9SEAQSGAoURVJST1JfTEVWRUxfQ1JJVElDQUwQBQ==');
-
-@$core.Deprecated('Use etfDescriptor instead')
-const Etf$json = {
-  '1': 'Etf',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
-    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'last_price', '3': 4, '4': 1, '5': 9, '10': 'lastPrice'},
-    {'1': 'constituents', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.lp.EtfPdfConstituent', '10': 'constituents'},
-    {'1': 'nav', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfNav', '10': 'nav'},
-    {'1': 'creation_unit', '3': 8, '4': 1, '5': 3, '10': 'creationUnit'},
-    {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
-    {'1': 'replication_method', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.lp.ReplicationMethod', '10': 'replicationMethod'},
-  ],
-};
-
-/// Descriptor for `Etf`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
-    'CgNFdGYSDgoCaWQYASABKARSAmlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhIKBG5hbWUYAy'
-    'ABKAlSBG5hbWUSHQoKbGFzdF9wcmljZRgEIAEoCVIJbGFzdFByaWNlEkAKDGNvbnN0aXR1ZW50'
-    'cxgFIAMoCzIcLmtkby52MS5scC5FdGZQZGZDb25zdGl0dWVudFIMY29uc3RpdHVlbnRzEiMKA2'
-    '5hdhgGIAEoCzIRLmtkby52MS5scC5FdGZOYXZSA25hdhIjCg1jcmVhdGlvbl91bml0GAggASgD'
-    'UgxjcmVhdGlvblVuaXQSGwoJdGlja19zaXplGAkgASgDUgh0aWNrU2l6ZRJLChJyZXBsaWNhdG'
-    'lvbl9tZXRob2QYCiABKA4yHC5rZG8udjEubHAuUmVwbGljYXRpb25NZXRob2RSEXJlcGxpY2F0'
-    'aW9uTWV0aG9k');
-
-@$core.Deprecated('Use etfPdfConstituentDescriptor instead')
-const EtfPdfConstituent$json = {
-  '1': 'EtfPdfConstituent',
-  '2': [
-    {'1': 'code', '3': 1, '4': 1, '5': 9, '10': 'code'},
-    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'product_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.lp.ProductType', '10': 'productType'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
-  ],
-};
-
-/// Descriptor for `EtfPdfConstituent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfPdfConstituentDescriptor = $convert.base64Decode(
-    'ChFFdGZQZGZDb25zdGl0dWVudBISCgRjb2RlGAEgASgJUgRjb2RlEhIKBG5hbWUYAiABKAlSBG'
-    '5hbWUSOQoMcHJvZHVjdF90eXBlGAMgASgOMhYua2RvLnYxLmxwLlByb2R1Y3RUeXBlUgtwcm9k'
-    'dWN0VHlwZRIaCghxdWFudGl0eRgEIAEoA1IIcXVhbnRpdHk=');
-
-@$core.Deprecated('Use etfNavDescriptor instead')
-const EtfNav$json = {
-  '1': 'EtfNav',
-  '2': [
-    {'1': 'physical', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.PhysicalNav', '9': 0, '10': 'physical'},
-    {'1': 'futures_based', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.FuturesBasedNav', '9': 0, '10': 'futuresBased'},
-  ],
-  '8': [
-    {'1': 'nav_type'},
-  ],
-};
-
-/// Descriptor for `EtfNav`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfNavDescriptor = $convert.base64Decode(
-    'CgZFdGZOYXYSNAoIcGh5c2ljYWwYASABKAsyFi5rZG8udjEubHAuUGh5c2ljYWxOYXZIAFIIcG'
-    'h5c2ljYWwSQQoNZnV0dXJlc19iYXNlZBgCIAEoCzIaLmtkby52MS5scC5GdXR1cmVzQmFzZWRO'
-    'YXZIAFIMZnV0dXJlc0Jhc2VkQgoKCG5hdl90eXBl');
-
-@$core.Deprecated('Use physicalNavDescriptor instead')
-const PhysicalNav$json = {
-  '1': 'PhysicalNav',
-  '2': [
-    {'1': 'last_nav', '3': 1, '4': 1, '5': 9, '10': 'lastNav'},
-    {'1': 'constituents', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lp.PhysicalNav.ConstituentsEntry', '10': 'constituents'},
-  ],
-  '3': [PhysicalNav_ConstituentsEntry$json],
-};
-
-@$core.Deprecated('Use physicalNavDescriptor instead')
-const PhysicalNav_ConstituentsEntry$json = {
-  '1': 'ConstituentsEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.ConstituentPrice', '10': 'value'},
-  ],
-  '7': {'7': true},
-};
-
-/// Descriptor for `PhysicalNav`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List physicalNavDescriptor = $convert.base64Decode(
-    'CgtQaHlzaWNhbE5hdhIZCghsYXN0X25hdhgBIAEoCVIHbGFzdE5hdhJMCgxjb25zdGl0dWVudH'
-    'MYAiADKAsyKC5rZG8udjEubHAuUGh5c2ljYWxOYXYuQ29uc3RpdHVlbnRzRW50cnlSDGNvbnN0'
-    'aXR1ZW50cxpcChFDb25zdGl0dWVudHNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIxCgV2YWx1ZR'
-    'gCIAEoCzIbLmtkby52MS5scC5Db25zdGl0dWVudFByaWNlUgV2YWx1ZToCOAE=');
-
-@$core.Deprecated('Use futuresBasedNavDescriptor instead')
-const FuturesBasedNav$json = {
-  '1': 'FuturesBasedNav',
-  '2': [
-    {'1': 'last_nav', '3': 1, '4': 1, '5': 9, '10': 'lastNav'},
-    {'1': 'prior_day_nav', '3': 2, '4': 1, '5': 9, '10': 'priorDayNav'},
-    {'1': 'leverage_multiplier', '3': 3, '4': 1, '5': 1, '10': 'leverageMultiplier'},
-    {'1': 'futures_symbol', '3': 4, '4': 1, '5': 9, '10': 'futuresSymbol'},
-    {'1': 'futures_prior_day_price', '3': 5, '4': 1, '5': 9, '10': 'futuresPriorDayPrice'},
-    {'1': 'futures_last_price', '3': 6, '4': 1, '5': 9, '10': 'futuresLastPrice'},
-  ],
-};
-
-/// Descriptor for `FuturesBasedNav`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List futuresBasedNavDescriptor = $convert.base64Decode(
-    'Cg9GdXR1cmVzQmFzZWROYXYSGQoIbGFzdF9uYXYYASABKAlSB2xhc3ROYXYSIgoNcHJpb3JfZG'
-    'F5X25hdhgCIAEoCVILcHJpb3JEYXlOYXYSLwoTbGV2ZXJhZ2VfbXVsdGlwbGllchgDIAEoAVIS'
-    'bGV2ZXJhZ2VNdWx0aXBsaWVyEiUKDmZ1dHVyZXNfc3ltYm9sGAQgASgJUg1mdXR1cmVzU3ltYm'
-    '9sEjUKF2Z1dHVyZXNfcHJpb3JfZGF5X3ByaWNlGAUgASgJUhRmdXR1cmVzUHJpb3JEYXlQcmlj'
-    'ZRIsChJmdXR1cmVzX2xhc3RfcHJpY2UYBiABKAlSEGZ1dHVyZXNMYXN0UHJpY2U=');
-
-@$core.Deprecated('Use constituentPriceDescriptor instead')
-const ConstituentPrice$json = {
-  '1': 'ConstituentPrice',
-  '2': [
-    {'1': 'last_price', '3': 1, '4': 1, '5': 9, '10': 'lastPrice'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
-  ],
-};
-
-/// Descriptor for `ConstituentPrice`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List constituentPriceDescriptor = $convert.base64Decode(
-    'ChBDb25zdGl0dWVudFByaWNlEh0KCmxhc3RfcHJpY2UYASABKAlSCWxhc3RQcmljZRIaCghxdW'
-    'FudGl0eRgCIAEoA1IIcXVhbnRpdHk=');
 
 @$core.Deprecated('Use etfLpDescriptor instead')
 const EtfLp$json = {
@@ -378,6 +238,40 @@ final $typed_data.Uint8List getEtfLpRequestDescriptor = $convert.base64Decode(
     'Cg9HZXRFdGZMcFJlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2RzYXBpcy54eX'
     'ovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6L0Z1bmRS'
     'BGZ1bmQ=');
+
+@$core.Deprecated('Use listEtfLpsRequestDescriptor instead')
+const ListEtfLpsRequest$json = {
+  '1': 'ListEtfLpsRequest',
+  '2': [
+    {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
+    {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
+    {'1': 'filter', '3': 3, '4': 1, '5': 9, '10': 'filter'},
+  ],
+  '8': [
+    {'1': '_page_size'},
+    {'1': '_page_token'},
+  ],
+};
+
+/// Descriptor for `ListEtfLpsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpsRequestDescriptor = $convert.base64Decode(
+    'ChFMaXN0RXRmTHBzUmVxdWVzdBIgCglwYWdlX3NpemUYASABKA1IAFIIcGFnZVNpemWIAQESIg'
+    'oKcGFnZV90b2tlbhgCIAEoCUgBUglwYWdlVG9rZW6IAQESFgoGZmlsdGVyGAMgASgJUgZmaWx0'
+    'ZXJCDAoKX3BhZ2Vfc2l6ZUINCgtfcGFnZV90b2tlbg==');
+
+@$core.Deprecated('Use listEtfLpsResponseDescriptor instead')
+const ListEtfLpsResponse$json = {
+  '1': 'ListEtfLpsResponse',
+  '2': [
+    {'1': 'etf_lps', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.EtfLp', '10': 'etfLps'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+  ],
+};
+
+/// Descriptor for `ListEtfLpsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpsResponseDescriptor = $convert.base64Decode(
+    'ChJMaXN0RXRmTHBzUmVzcG9uc2USKQoHZXRmX2xwcxgBIAMoCzIQLmtkby52MS5scC5FdGZMcF'
+    'IGZXRmTHBzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
 @$core.Deprecated('Use updateEtfLpRequestDescriptor instead')
 const UpdateEtfLpRequest$json = {

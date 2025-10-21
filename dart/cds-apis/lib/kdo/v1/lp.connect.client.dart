@@ -9,7 +9,7 @@ import "lp.connect.spec.dart" as specs;
 
 /// LP 서비스는 ETF LP 관련 서비스를 제공합니다.
 extension type LpServiceClient (connect.Transport _transport) {
-  /// ETF LP 업데이트
+  /// ETF LP 조회
   Future<kdov1lp.EtfLp> getEtfLp(
     kdov1lp.GetEtfLpRequest input, {
     connect.Headers? headers,
@@ -19,6 +19,24 @@ extension type LpServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.LpService.getEtfLp,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ETF LP 조회
+  Future<kdov1lp.ListEtfLpsResponse> listEtfLps(
+    kdov1lp.ListEtfLpsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LpService.listEtfLps,
       input,
       signal: signal,
       headers: headers,
