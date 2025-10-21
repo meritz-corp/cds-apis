@@ -11,6 +11,10 @@ image:
 
 build:
 	docker compose run --rm grpc
+	$(MAKE) descriptor
+
+descriptor:
+	docker compose run --rm buf-lint buf build -o rust/descriptor.bin
 
 go-mod:
 	cd go && go mod tidy

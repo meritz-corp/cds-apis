@@ -426,7 +426,7 @@ dependencies = [
 
 [[package]]
 name = "ids-apis"
-version = "0.1.38"
+version = "0.1.39"
 dependencies = [
  "async-trait",
  "http",
@@ -436,6 +436,7 @@ dependencies = [
  "prost-types",
  "serde",
  "tonic",
+ "tonic-reflection",
 ]
 
 [[package]]
@@ -996,6 +997,19 @@ dependencies = [
  "tower-layer",
  "tower-service",
  "tracing",
+]
+
+[[package]]
+name = "tonic-reflection"
+version = "0.12.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "878d81f52e7fcfd80026b7fdb6a9b578b3c3653ba987f87f0dce4b64043cba27"
+dependencies = [
+ "prost",
+ "prost-types",
+ "tokio",
+ "tokio-stream",
+ "tonic",
 ]
 
 [[package]]

@@ -4,6 +4,9 @@ pub mod google {
     }
 }
 
+/// File descriptor set for gRPC reflection support
+pub const FILE_DESCRIPTOR_SET: &[u8] = include_bytes!("../descriptor.bin");
+
 pub mod log_sync {
     pub mod v1 {
         pub mod pnl {
