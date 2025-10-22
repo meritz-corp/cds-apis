@@ -27,7 +27,7 @@ class Etf extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? name,
     $core.String? lastPrice,
-    $core.Iterable<EtfPdfConstituent>? constituents,
+    $core.Iterable<$core.MapEntry<$core.String, EtfPdfConstituent>>? constituents,
     EtfNav? nav,
     $fixnum.Int64? creationUnit,
     $fixnum.Int64? tickSize,
@@ -38,7 +38,7 @@ class Etf extends $pb.GeneratedMessage {
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
     if (lastPrice != null) result.lastPrice = lastPrice;
-    if (constituents != null) result.constituents.addAll(constituents);
+    if (constituents != null) result.constituents.addEntries(constituents);
     if (nav != null) result.nav = nav;
     if (creationUnit != null) result.creationUnit = creationUnit;
     if (tickSize != null) result.tickSize = tickSize;
@@ -56,7 +56,7 @@ class Etf extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..aOS(4, _omitFieldNames ? '' : 'lastPrice')
-    ..pc<EtfPdfConstituent>(5, _omitFieldNames ? '' : 'constituents', $pb.PbFieldType.PM, subBuilder: EtfPdfConstituent.create)
+    ..m<$core.String, EtfPdfConstituent>(5, _omitFieldNames ? '' : 'constituents', entryClassName: 'Etf.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..aOM<EtfNav>(6, _omitFieldNames ? '' : 'nav', subBuilder: EtfNav.create)
     ..aInt64(8, _omitFieldNames ? '' : 'creationUnit')
     ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
@@ -123,7 +123,7 @@ class Etf extends $pb.GeneratedMessage {
 
   /// PDF 구성 종목 목록
   @$pb.TagNumber(5)
-  $pb.PbList<EtfPdfConstituent> get constituents => $_getList(4);
+  $pb.PbMap<$core.String, EtfPdfConstituent> get constituents => $_getMap(4);
 
   /// NAV 정보
   @$pb.TagNumber(6)
@@ -171,13 +171,13 @@ class Etf extends $pb.GeneratedMessage {
 /// PDF 구성 종목
 class EtfPdfConstituent extends $pb.GeneratedMessage {
   factory EtfPdfConstituent({
-    $core.String? code,
+    $core.String? symbol,
     $core.String? name,
     ProductType? productType,
     $fixnum.Int64? quantity,
   }) {
     final result = create();
-    if (code != null) result.code = code;
+    if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
     if (productType != null) result.productType = productType;
     if (quantity != null) result.quantity = quantity;
@@ -190,7 +190,7 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
   factory EtfPdfConstituent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPdfConstituent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'code')
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..e<ProductType>(3, _omitFieldNames ? '' : 'productType', $pb.PbFieldType.OE, defaultOrMaker: ProductType.PRODUCT_TYPE_UNSPECIFIED, valueOf: ProductType.valueOf, enumValues: ProductType.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
@@ -216,13 +216,13 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
 
   /// 종목 코드
   @$pb.TagNumber(1)
-  $core.String get code => $_getSZ(0);
+  $core.String get symbol => $_getSZ(0);
   @$pb.TagNumber(1)
-  set code($core.String value) => $_setString(0, value);
+  set symbol($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasCode() => $_has(0);
+  $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCode() => $_clearField(1);
+  void clearSymbol() => $_clearField(1);
 
   /// 종목명
   @$pb.TagNumber(2)

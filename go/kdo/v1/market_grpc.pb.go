@@ -26,6 +26,8 @@ type MarketServiceClient interface {
 	StreamEtfOrderbook(ctx context.Context, in *StreamEtfOrderbookRequest, opts ...grpc.CallOption) (MarketService_StreamEtfOrderbookClient, error)
 	// 선물 주문장 데이터를 스트리밍
 	StreamFuturesOrderbook(ctx context.Context, in *StreamFuturesOrderbookRequest, opts ...grpc.CallOption) (MarketService_StreamFuturesOrderbookClient, error)
+	// ETF NAV 데이터를 스트리밍
+	StreamEtfNav(ctx context.Context, in *StreamEtfNavRequest, opts ...grpc.CallOption) (MarketService_StreamEtfNavClient, error)
 	// 사용자 주문장 업데이트를 가져오기
 	GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
@@ -104,6 +106,38 @@ func (x *marketServiceStreamFuturesOrderbookClient) Recv() (*FuturesOrderbookDat
 	return m, nil
 }
 
+func (c *marketServiceClient) StreamEtfNav(ctx context.Context, in *StreamEtfNavRequest, opts ...grpc.CallOption) (MarketService_StreamEtfNavClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketService_ServiceDesc.Streams[2], "/kdo.v1.market.MarketService/StreamEtfNav", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &marketServiceStreamEtfNavClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MarketService_StreamEtfNavClient interface {
+	Recv() (*EtfNav, error)
+	grpc.ClientStream
+}
+
+type marketServiceStreamEtfNavClient struct {
+	grpc.ClientStream
+}
+
+func (x *marketServiceStreamEtfNavClient) Recv() (*EtfNav, error) {
+	m := new(EtfNav)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *marketServiceClient) GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error) {
 	out := new(UserOrderbookData)
 	err := c.cc.Invoke(ctx, "/kdo.v1.market.MarketService/GetUserOrderbook", in, out, opts...)
@@ -114,7 +148,7 @@ func (c *marketServiceClient) GetUserOrderbook(ctx context.Context, in *GetUserO
 }
 
 func (c *marketServiceClient) StreamUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (MarketService_StreamUserOrderbookClient, error) {
-	stream, err := c.cc.NewStream(ctx, &MarketService_ServiceDesc.Streams[2], "/kdo.v1.market.MarketService/StreamUserOrderbook", opts...)
+	stream, err := c.cc.NewStream(ctx, &MarketService_ServiceDesc.Streams[3], "/kdo.v1.market.MarketService/StreamUserOrderbook", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -153,6 +187,8 @@ type MarketServiceServer interface {
 	StreamEtfOrderbook(*StreamEtfOrderbookRequest, MarketService_StreamEtfOrderbookServer) error
 	// 선물 주문장 데이터를 스트리밍
 	StreamFuturesOrderbook(*StreamFuturesOrderbookRequest, MarketService_StreamFuturesOrderbookServer) error
+	// ETF NAV 데이터를 스트리밍
+	StreamEtfNav(*StreamEtfNavRequest, MarketService_StreamEtfNavServer) error
 	// 사용자 주문장 업데이트를 가져오기
 	GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
@@ -169,6 +205,9 @@ func (UnimplementedMarketServiceServer) StreamEtfOrderbook(*StreamEtfOrderbookRe
 }
 func (UnimplementedMarketServiceServer) StreamFuturesOrderbook(*StreamFuturesOrderbookRequest, MarketService_StreamFuturesOrderbookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamFuturesOrderbook not implemented")
+}
+func (UnimplementedMarketServiceServer) StreamEtfNav(*StreamEtfNavRequest, MarketService_StreamEtfNavServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamEtfNav not implemented")
 }
 func (UnimplementedMarketServiceServer) GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserOrderbook not implemented")
@@ -228,6 +267,27 @@ type marketServiceStreamFuturesOrderbookServer struct {
 }
 
 func (x *marketServiceStreamFuturesOrderbookServer) Send(m *FuturesOrderbookData) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _MarketService_StreamEtfNav_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamEtfNavRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MarketServiceServer).StreamEtfNav(m, &marketServiceStreamEtfNavServer{stream})
+}
+
+type MarketService_StreamEtfNavServer interface {
+	Send(*EtfNav) error
+	grpc.ServerStream
+}
+
+type marketServiceStreamEtfNavServer struct {
+	grpc.ServerStream
+}
+
+func (x *marketServiceStreamEtfNavServer) Send(m *EtfNav) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -291,6 +351,11 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamFuturesOrderbook",
 			Handler:       _MarketService_StreamFuturesOrderbook_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamEtfNav",
+			Handler:       _MarketService_StreamEtfNav_Handler,
 			ServerStreams: true,
 		},
 		{

@@ -385,6 +385,151 @@ impl<'de> serde::Deserialize<'de> for CancelOrderResponse {
         deserializer.deserialize_struct("kdo.v1.market.CancelOrderResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for EtfNav {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.name.is_empty() {
+            len += 1;
+        }
+        if !self.etf_symbol.is_empty() {
+            len += 1;
+        }
+        if !self.theory_nav.is_empty() {
+            len += 1;
+        }
+        if !self.krx_nav.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.EtfNav", len)?;
+        if !self.name.is_empty() {
+            struct_ser.serialize_field("name", &self.name)?;
+        }
+        if !self.etf_symbol.is_empty() {
+            struct_ser.serialize_field("etfSymbol", &self.etf_symbol)?;
+        }
+        if !self.theory_nav.is_empty() {
+            struct_ser.serialize_field("theoryNav", &self.theory_nav)?;
+        }
+        if !self.krx_nav.is_empty() {
+            struct_ser.serialize_field("krxNav", &self.krx_nav)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfNav {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "name",
+            "etf_symbol",
+            "etfSymbol",
+            "theory_nav",
+            "theoryNav",
+            "krx_nav",
+            "krxNav",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Name,
+            EtfSymbol,
+            TheoryNav,
+            KrxNav,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "name" => Ok(GeneratedField::Name),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "theoryNav" | "theory_nav" => Ok(GeneratedField::TheoryNav),
+                            "krxNav" | "krx_nav" => Ok(GeneratedField::KrxNav),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfNav;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.EtfNav")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfNav, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut name__ = None;
+                let mut etf_symbol__ = None;
+                let mut theory_nav__ = None;
+                let mut krx_nav__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TheoryNav => {
+                            if theory_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("theoryNav"));
+                            }
+                            theory_nav__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::KrxNav => {
+                            if krx_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("krxNav"));
+                            }
+                            krx_nav__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(EtfNav {
+                    name: name__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    theory_nav: theory_nav__.unwrap_or_default(),
+                    krx_nav: krx_nav__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.EtfNav", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for EtfOrderbookData {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2170,6 +2315,97 @@ impl<'de> serde::Deserialize<'de> for SessionId {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for StreamEtfNavRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.etf.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.StreamEtfNavRequest", len)?;
+        if !self.etf.is_empty() {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for StreamEtfNavRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamEtfNavRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.StreamEtfNavRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamEtfNavRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(StreamEtfNavRequest {
+                    etf: etf__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.StreamEtfNavRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StreamEtfOrderbookRequest {

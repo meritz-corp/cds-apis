@@ -10,6 +10,8 @@ import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
 
+import "kdo/v1/etf.proto";
+
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
 // 주문장 데이터를 스트리밍하는 서비스
@@ -25,6 +27,13 @@ service MarketService {
     rpc StreamFuturesOrderbook(StreamFuturesOrderbookRequest) returns (stream FuturesOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{future=futures/*}/orderbook:stream"
+        };
+    }
+
+    // ETF NAV 데이터를 스트리밍
+    rpc StreamEtfNav(StreamEtfNavRequest) returns (stream EtfNav) {  // kdo.v1.etf.EtfNav
+        option (google.api.http) = {
+            get: "/v1/market/{etf=etfs/*}/nav:stream"
         };
     }
 
@@ -72,18 +81,6 @@ service MarketService {
     //    }
 
 
-}
-
-// ETF 주문장 스트리밍 요청
-message StreamEtfOrderbookRequest {
-    // 리소스 이름 (예: etfs/A069500)
-    string etf = 1;
-}
-
-// 선물 주문장 스트리밍 요청
-message StreamFuturesOrderbookRequest {
-    // 리소스 이름 (예: futures/K101W9000)
-    string future = 1;
 }
 
 // 세션 ID 열거형 (AIP-126)
@@ -236,6 +233,50 @@ message Order {
 
     // 업데이트 시간 (Unix timestamp)
     int64 updated_at = 9;
+}
+
+message EtfNav {
+    string name = 1;
+
+    string etf_symbol = 2;
+
+    // 순자산가치 (원 단위, string)
+    string theory_nav = 10;
+
+    // 전일 대비 (string)
+    string krx_nav = 11;
+}
+
+// ========== Request/Response Messages ==========
+
+// ETF 주문장 스트리밍 요청
+message StreamEtfOrderbookRequest {
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+}
+
+// 선물 주문장 스트리밍 요청
+message StreamFuturesOrderbookRequest {
+    // 리소스 이름 (예: futures/K101W9000)
+    string future = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Future"
+        }
+    ];
+}
+
+message StreamEtfNavRequest {
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
 }
 
 // 주문 접수 요청

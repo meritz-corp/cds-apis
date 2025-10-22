@@ -16,8 +16,8 @@ pub struct Etf {
     #[prost(string, tag="4")]
     pub last_price: ::prost::alloc::string::String,
     /// PDF 구성 종목 목록
-    #[prost(message, repeated, tag="5")]
-    pub constituents: ::prost::alloc::vec::Vec<EtfPdfConstituent>,
+    #[prost(map="string, message", tag="5")]
+    pub constituents: ::std::collections::HashMap<::prost::alloc::string::String, EtfPdfConstituent>,
     /// NAV 정보
     #[prost(message, optional, tag="6")]
     pub nav: ::core::option::Option<EtfNav>,
@@ -36,8 +36,10 @@ pub struct Etf {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfPdfConstituent {
     /// 종목 코드
+    ///
+    /// symbol
     #[prost(string, tag="1")]
-    pub code: ::prost::alloc::string::String,
+    pub symbol: ::prost::alloc::string::String,
     /// 종목명
     #[prost(string, tag="2")]
     pub name: ::prost::alloc::string::String,

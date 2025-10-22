@@ -16,6 +16,48 @@
     "application/json"
   ],
   "paths": {
+    "/v1/market/{etf}/nav:stream": {
+      "get": {
+        "summary": "ETF NAV 데이터를 스트리밍",
+        "description": "kdo.v1.etf.EtfNav",
+        "operationId": "MarketService_StreamEtfNav",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1marketEtfNav"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1marketEtfNav"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
     "/v1/market/{etf}/orderbook:stream": {
       "get": {
         "summary": "ETF 주문장 데이터를 스트리밍",
@@ -46,7 +88,6 @@
         "parameters": [
           {
             "name": "etf",
-            "description": "리소스 이름 (예: etfs/A069500)",
             "in": "path",
             "required": true,
             "type": "string",
@@ -406,6 +447,25 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1marketEtfNav": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "etfSymbol": {
+          "type": "string"
+        },
+        "theoryNav": {
+          "type": "string",
+          "title": "순자산가치 (원 단위, string)"
+        },
+        "krxNav": {
+          "type": "string",
+          "title": "전일 대비 (string)"
         }
       }
     },

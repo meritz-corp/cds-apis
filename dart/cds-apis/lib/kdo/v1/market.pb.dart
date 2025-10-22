@@ -21,102 +21,6 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'market.pbenum.dart';
 
-/// ETF 주문장 스트리밍 요청
-class StreamEtfOrderbookRequest extends $pb.GeneratedMessage {
-  factory StreamEtfOrderbookRequest({
-    $core.String? etf,
-  }) {
-    final result = create();
-    if (etf != null) result.etf = etf;
-    return result;
-  }
-
-  StreamEtfOrderbookRequest._();
-
-  factory StreamEtfOrderbookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamEtfOrderbookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'etf')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfOrderbookRequest clone() => StreamEtfOrderbookRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfOrderbookRequest copyWith(void Function(StreamEtfOrderbookRequest) updates) => super.copyWith((message) => updates(message as StreamEtfOrderbookRequest)) as StreamEtfOrderbookRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static StreamEtfOrderbookRequest create() => StreamEtfOrderbookRequest._();
-  @$core.override
-  StreamEtfOrderbookRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamEtfOrderbookRequest> createRepeated() => $pb.PbList<StreamEtfOrderbookRequest>();
-  @$core.pragma('dart2js:noInline')
-  static StreamEtfOrderbookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfOrderbookRequest>(create);
-  static StreamEtfOrderbookRequest? _defaultInstance;
-
-  /// 리소스 이름 (예: etfs/A069500)
-  @$pb.TagNumber(1)
-  $core.String get etf => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set etf($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasEtf() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearEtf() => $_clearField(1);
-}
-
-/// 선물 주문장 스트리밍 요청
-class StreamFuturesOrderbookRequest extends $pb.GeneratedMessage {
-  factory StreamFuturesOrderbookRequest({
-    $core.String? future,
-  }) {
-    final result = create();
-    if (future != null) result.future = future;
-    return result;
-  }
-
-  StreamFuturesOrderbookRequest._();
-
-  factory StreamFuturesOrderbookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamFuturesOrderbookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFuturesOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'future')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamFuturesOrderbookRequest clone() => StreamFuturesOrderbookRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamFuturesOrderbookRequest copyWith(void Function(StreamFuturesOrderbookRequest) updates) => super.copyWith((message) => updates(message as StreamFuturesOrderbookRequest)) as StreamFuturesOrderbookRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static StreamFuturesOrderbookRequest create() => StreamFuturesOrderbookRequest._();
-  @$core.override
-  StreamFuturesOrderbookRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamFuturesOrderbookRequest> createRepeated() => $pb.PbList<StreamFuturesOrderbookRequest>();
-  @$core.pragma('dart2js:noInline')
-  static StreamFuturesOrderbookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamFuturesOrderbookRequest>(create);
-  static StreamFuturesOrderbookRequest? _defaultInstance;
-
-  /// 리소스 이름 (예: futures/K101W9000)
-  @$pb.TagNumber(1)
-  $core.String get future => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set future($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasFuture() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFuture() => $_clearField(1);
-}
-
 /// ETF 주문장 데이터
 class EtfOrderbookData extends $pb.GeneratedMessage {
   factory EtfOrderbookData({
@@ -603,6 +507,231 @@ class Order extends $pb.GeneratedMessage {
   $core.bool hasUpdatedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearUpdatedAt() => $_clearField(9);
+}
+
+class EtfNav extends $pb.GeneratedMessage {
+  factory EtfNav({
+    $core.String? name,
+    $core.String? etfSymbol,
+    $core.String? theoryNav,
+    $core.String? krxNav,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (theoryNav != null) result.theoryNav = theoryNav;
+    if (krxNav != null) result.krxNav = krxNav;
+    return result;
+  }
+
+  EtfNav._();
+
+  factory EtfNav.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfNav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfNav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(10, _omitFieldNames ? '' : 'theoryNav')
+    ..aOS(11, _omitFieldNames ? '' : 'krxNav')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfNav clone() => EtfNav()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfNav copyWith(void Function(EtfNav) updates) => super.copyWith((message) => updates(message as EtfNav)) as EtfNav;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfNav create() => EtfNav._();
+  @$core.override
+  EtfNav createEmptyInstance() => create();
+  static $pb.PbList<EtfNav> createRepeated() => $pb.PbList<EtfNav>();
+  @$core.pragma('dart2js:noInline')
+  static EtfNav getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfNav>(create);
+  static EtfNav? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get etfSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set etfSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasEtfSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEtfSymbol() => $_clearField(2);
+
+  /// 순자산가치 (원 단위, string)
+  @$pb.TagNumber(10)
+  $core.String get theoryNav => $_getSZ(2);
+  @$pb.TagNumber(10)
+  set theoryNav($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(10)
+  $core.bool hasTheoryNav() => $_has(2);
+  @$pb.TagNumber(10)
+  void clearTheoryNav() => $_clearField(10);
+
+  /// 전일 대비 (string)
+  @$pb.TagNumber(11)
+  $core.String get krxNav => $_getSZ(3);
+  @$pb.TagNumber(11)
+  set krxNav($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(11)
+  $core.bool hasKrxNav() => $_has(3);
+  @$pb.TagNumber(11)
+  void clearKrxNav() => $_clearField(11);
+}
+
+/// ETF 주문장 스트리밍 요청
+class StreamEtfOrderbookRequest extends $pb.GeneratedMessage {
+  factory StreamEtfOrderbookRequest({
+    $core.String? etf,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    return result;
+  }
+
+  StreamEtfOrderbookRequest._();
+
+  factory StreamEtfOrderbookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamEtfOrderbookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfOrderbookRequest clone() => StreamEtfOrderbookRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfOrderbookRequest copyWith(void Function(StreamEtfOrderbookRequest) updates) => super.copyWith((message) => updates(message as StreamEtfOrderbookRequest)) as StreamEtfOrderbookRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfOrderbookRequest create() => StreamEtfOrderbookRequest._();
+  @$core.override
+  StreamEtfOrderbookRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamEtfOrderbookRequest> createRepeated() => $pb.PbList<StreamEtfOrderbookRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfOrderbookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfOrderbookRequest>(create);
+  static StreamEtfOrderbookRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+}
+
+/// 선물 주문장 스트리밍 요청
+class StreamFuturesOrderbookRequest extends $pb.GeneratedMessage {
+  factory StreamFuturesOrderbookRequest({
+    $core.String? future,
+  }) {
+    final result = create();
+    if (future != null) result.future = future;
+    return result;
+  }
+
+  StreamFuturesOrderbookRequest._();
+
+  factory StreamFuturesOrderbookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamFuturesOrderbookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFuturesOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'future')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFuturesOrderbookRequest clone() => StreamFuturesOrderbookRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFuturesOrderbookRequest copyWith(void Function(StreamFuturesOrderbookRequest) updates) => super.copyWith((message) => updates(message as StreamFuturesOrderbookRequest)) as StreamFuturesOrderbookRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamFuturesOrderbookRequest create() => StreamFuturesOrderbookRequest._();
+  @$core.override
+  StreamFuturesOrderbookRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamFuturesOrderbookRequest> createRepeated() => $pb.PbList<StreamFuturesOrderbookRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamFuturesOrderbookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamFuturesOrderbookRequest>(create);
+  static StreamFuturesOrderbookRequest? _defaultInstance;
+
+  /// 리소스 이름 (예: futures/K101W9000)
+  @$pb.TagNumber(1)
+  $core.String get future => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set future($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFuture() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFuture() => $_clearField(1);
+}
+
+class StreamEtfNavRequest extends $pb.GeneratedMessage {
+  factory StreamEtfNavRequest({
+    $core.String? etf,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    return result;
+  }
+
+  StreamEtfNavRequest._();
+
+  factory StreamEtfNavRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamEtfNavRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfNavRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfNavRequest clone() => StreamEtfNavRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfNavRequest copyWith(void Function(StreamEtfNavRequest) updates) => super.copyWith((message) => updates(message as StreamEtfNavRequest)) as StreamEtfNavRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfNavRequest create() => StreamEtfNavRequest._();
+  @$core.override
+  StreamEtfNavRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamEtfNavRequest> createRepeated() => $pb.PbList<StreamEtfNavRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfNavRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfNavRequest>(create);
+  static StreamEtfNavRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
 }
 
 /// 주문 접수 요청

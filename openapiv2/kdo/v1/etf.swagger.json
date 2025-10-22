@@ -131,14 +131,14 @@
           "title": "마지막 가격"
         },
         "constituents": {
-          "type": "array",
-          "items": {
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/etfEtfPdfConstituent"
           },
           "title": "PDF 구성 종목 목록"
         },
         "nav": {
-          "$ref": "#/definitions/etfEtfNav",
+          "$ref": "#/definitions/v1etfEtfNav",
           "title": "NAV 정보"
         },
         "creationUnit": {
@@ -157,23 +157,12 @@
         }
       }
     },
-    "etfEtfNav": {
-      "type": "object",
-      "properties": {
-        "physical": {
-          "$ref": "#/definitions/etfPhysicalNav"
-        },
-        "futuresBased": {
-          "$ref": "#/definitions/etfFuturesBasedNav"
-        }
-      },
-      "title": "ETF NAV 정보"
-    },
     "etfEtfPdfConstituent": {
       "type": "object",
       "properties": {
-        "code": {
+        "symbol": {
           "type": "string",
+          "description": "symbol",
           "title": "종목 코드"
         },
         "name": {
@@ -293,6 +282,18 @@
           }
         }
       }
+    },
+    "v1etfEtfNav": {
+      "type": "object",
+      "properties": {
+        "physical": {
+          "$ref": "#/definitions/etfPhysicalNav"
+        },
+        "futuresBased": {
+          "$ref": "#/definitions/etfFuturesBasedNav"
+        }
+      },
+      "title": "ETF NAV 정보"
     },
     "v1etfReplicationMethod": {
       "type": "string",

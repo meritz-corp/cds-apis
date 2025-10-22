@@ -45,6 +45,25 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// ETF NAV 데이터를 스트리밍
+  /// kdo.v1.etf.EtfNav
+  Stream<kdov1market.EtfNav> streamEtfNav(
+    kdov1market.StreamEtfNavRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketService.streamEtfNav,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 사용자 주문장 업데이트를 가져오기
   Future<kdov1market.UserOrderbookData> getUserOrderbook(
     kdov1market.GetUserOrderBookRequest input, {

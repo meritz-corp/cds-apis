@@ -309,7 +309,9 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             if constituents__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("constituents"));
                             }
-                            constituents__ = Some(map_.next_value()?);
+                            constituents__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
                         }
                         GeneratedField::Nav => {
                             if nav__.is_some() {
@@ -475,7 +477,7 @@ impl serde::Serialize for EtfPdfConstituent {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.code.is_empty() {
+        if !self.symbol.is_empty() {
             len += 1;
         }
         if !self.name.is_empty() {
@@ -488,8 +490,8 @@ impl serde::Serialize for EtfPdfConstituent {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.EtfPdfConstituent", len)?;
-        if !self.code.is_empty() {
-            struct_ser.serialize_field("code", &self.code)?;
+        if !self.symbol.is_empty() {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if !self.name.is_empty() {
             struct_ser.serialize_field("name", &self.name)?;
@@ -514,7 +516,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "code",
+            "symbol",
             "name",
             "product_type",
             "productType",
@@ -523,7 +525,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Code,
+            Symbol,
             Name,
             ProductType,
             Quantity,
@@ -548,7 +550,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                         E: serde::de::Error,
                     {
                         match value {
-                            "code" => Ok(GeneratedField::Code),
+                            "symbol" => Ok(GeneratedField::Symbol),
                             "name" => Ok(GeneratedField::Name),
                             "productType" | "product_type" => Ok(GeneratedField::ProductType),
                             "quantity" => Ok(GeneratedField::Quantity),
@@ -571,17 +573,17 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut code__ = None;
+                let mut symbol__ = None;
                 let mut name__ = None;
                 let mut product_type__ = None;
                 let mut quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Code => {
-                            if code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("code"));
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
                             }
-                            code__ = Some(map_.next_value()?);
+                            symbol__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Name => {
                             if name__.is_some() {
@@ -606,7 +608,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                     }
                 }
                 Ok(EtfPdfConstituent {
-                    code: code__.unwrap_or_default(),
+                    symbol: symbol__.unwrap_or_default(),
                     name: name__.unwrap_or_default(),
                     product_type: product_type__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),

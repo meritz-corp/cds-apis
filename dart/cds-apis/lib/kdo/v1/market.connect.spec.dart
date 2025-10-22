@@ -27,6 +27,15 @@ abstract final class MarketService {
     kdov1market.FuturesOrderbookData.new,
   );
 
+  /// ETF NAV 데이터를 스트리밍
+  /// kdo.v1.etf.EtfNav
+  static const streamEtfNav = connect.Spec(
+    '/$name/StreamEtfNav',
+    connect.StreamType.server,
+    kdov1market.StreamEtfNavRequest.new,
+    kdov1market.EtfNav.new,
+  );
+
   /// 사용자 주문장 업데이트를 가져오기
   static const getUserOrderbook = connect.Spec(
     '/$name/GetUserOrderbook',

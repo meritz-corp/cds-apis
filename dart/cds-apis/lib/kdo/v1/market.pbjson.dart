@@ -81,31 +81,6 @@ final $typed_data.Uint8List orderStatusDescriptor = $convert.base64Decode(
     'ESEgoOUEFSVElBTF9GSUxMRUQQAhIKCgZGSUxMRUQQAxINCglDQU5DRUxMRUQQBBIMCghSRUpF'
     'Q1RFRBAF');
 
-@$core.Deprecated('Use streamEtfOrderbookRequestDescriptor instead')
-const StreamEtfOrderbookRequest$json = {
-  '1': 'StreamEtfOrderbookRequest',
-  '2': [
-    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
-  ],
-};
-
-/// Descriptor for `StreamEtfOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamEtfOrderbookRequestDescriptor = $convert.base64Decode(
-    'ChlTdHJlYW1FdGZPcmRlcmJvb2tSZXF1ZXN0EhAKA2V0ZhgBIAEoCVIDZXRm');
-
-@$core.Deprecated('Use streamFuturesOrderbookRequestDescriptor instead')
-const StreamFuturesOrderbookRequest$json = {
-  '1': 'StreamFuturesOrderbookRequest',
-  '2': [
-    {'1': 'future', '3': 1, '4': 1, '5': 9, '10': 'future'},
-  ],
-};
-
-/// Descriptor for `StreamFuturesOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamFuturesOrderbookRequestDescriptor = $convert.base64Decode(
-    'Ch1TdHJlYW1GdXR1cmVzT3JkZXJib29rUmVxdWVzdBIWCgZmdXR1cmUYASABKAlSBmZ1dHVyZQ'
-    '==');
-
 @$core.Deprecated('Use etfOrderbookDataDescriptor instead')
 const EtfOrderbookData$json = {
   '1': 'EtfOrderbookData',
@@ -196,6 +171,62 @@ final $typed_data.Uint8List orderDescriptor = $convert.base64Decode(
     'cKD2ZpbGxlZF9xdWFudGl0eRgGIAEoA1IOZmlsbGVkUXVhbnRpdHkSMgoGc3RhdHVzGAcgASgO'
     'Mhoua2RvLnYxLm1hcmtldC5PcmRlclN0YXR1c1IGc3RhdHVzEh0KCmNyZWF0ZWRfYXQYCCABKA'
     'NSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAkgASgDUgl1cGRhdGVkQXQ=');
+
+@$core.Deprecated('Use etfNavDescriptor instead')
+const EtfNav$json = {
+  '1': 'EtfNav',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'etf_symbol', '3': 2, '4': 1, '5': 9, '10': 'etfSymbol'},
+    {'1': 'theory_nav', '3': 10, '4': 1, '5': 9, '10': 'theoryNav'},
+    {'1': 'krx_nav', '3': 11, '4': 1, '5': 9, '10': 'krxNav'},
+  ],
+};
+
+/// Descriptor for `EtfNav`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfNavDescriptor = $convert.base64Decode(
+    'CgZFdGZOYXYSEgoEbmFtZRgBIAEoCVIEbmFtZRIdCgpldGZfc3ltYm9sGAIgASgJUglldGZTeW'
+    '1ib2wSHQoKdGhlb3J5X25hdhgKIAEoCVIJdGhlb3J5TmF2EhcKB2tyeF9uYXYYCyABKAlSBmty'
+    'eE5hdg==');
+
+@$core.Deprecated('Use streamEtfOrderbookRequestDescriptor instead')
+const StreamEtfOrderbookRequest$json = {
+  '1': 'StreamEtfOrderbookRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+  ],
+};
+
+/// Descriptor for `StreamEtfOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamEtfOrderbookRequestDescriptor = $convert.base64Decode(
+    'ChlTdHJlYW1FdGZPcmRlcmJvb2tSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLm'
+    'Nkc2FwaXMueHl6L0V0ZlIDZXRm');
+
+@$core.Deprecated('Use streamFuturesOrderbookRequestDescriptor instead')
+const StreamFuturesOrderbookRequest$json = {
+  '1': 'StreamFuturesOrderbookRequest',
+  '2': [
+    {'1': 'future', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'future'},
+  ],
+};
+
+/// Descriptor for `StreamFuturesOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamFuturesOrderbookRequestDescriptor = $convert.base64Decode(
+    'Ch1TdHJlYW1GdXR1cmVzT3JkZXJib29rUmVxdWVzdBI3CgZmdXR1cmUYASABKAlCH+JBAQL6QR'
+    'gKFmtkby5jZHNhcGlzLnh5ei9GdXR1cmVSBmZ1dHVyZQ==');
+
+@$core.Deprecated('Use streamEtfNavRequestDescriptor instead')
+const StreamEtfNavRequest$json = {
+  '1': 'StreamEtfNavRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+  ],
+};
+
+/// Descriptor for `StreamEtfNavRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamEtfNavRequestDescriptor = $convert.base64Decode(
+    'ChNTdHJlYW1FdGZOYXZSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2FwaX'
+    'MueHl6L0V0ZlIDZXRm');
 
 @$core.Deprecated('Use placeOrderRequestDescriptor instead')
 const PlaceOrderRequest$json = {

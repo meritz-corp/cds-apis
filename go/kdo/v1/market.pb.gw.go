@@ -99,6 +99,40 @@ func request_MarketService_StreamFuturesOrderbook_0(ctx context.Context, marshal
 
 }
 
+func request_MarketService_StreamEtfNav_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (MarketService_StreamEtfNavClient, runtime.ServerMetadata, error) {
+	var protoReq StreamEtfNavRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["etf"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "etf")
+	}
+
+	protoReq.Etf, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
+	}
+
+	stream, err := client.StreamEtfNav(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 func request_MarketService_GetUserOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetUserOrderBookRequest
 	var metadata runtime.ServerMetadata
@@ -235,6 +269,13 @@ func RegisterMarketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		return
 	})
 
+	mux.Handle("GET", pattern_MarketService_StreamEtfNav_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	mux.Handle("GET", pattern_MarketService_GetUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -352,6 +393,28 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("GET", pattern_MarketService_StreamEtfNav_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamEtfNav", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/nav:stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MarketService_StreamEtfNav_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketService_StreamEtfNav_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_MarketService_GetUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -404,6 +467,8 @@ var (
 
 	pattern_MarketService_StreamFuturesOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "futures", "future", "orderbook"}, "stream"))
 
+	pattern_MarketService_StreamEtfNav_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "etfs", "etf", "nav"}, "stream"))
+
 	pattern_MarketService_GetUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, ""))
 
 	pattern_MarketService_StreamUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, "stream"))
@@ -413,6 +478,8 @@ var (
 	forward_MarketService_StreamEtfOrderbook_0 = runtime.ForwardResponseStream
 
 	forward_MarketService_StreamFuturesOrderbook_0 = runtime.ForwardResponseStream
+
+	forward_MarketService_StreamEtfNav_0 = runtime.ForwardResponseStream
 
 	forward_MarketService_GetUserOrderbook_0 = runtime.ForwardResponseMessage
 

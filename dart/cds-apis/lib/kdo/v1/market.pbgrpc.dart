@@ -43,6 +43,11 @@ class MarketServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamFuturesOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// ETF NAV 데이터를 스트리밍
+  $grpc.ResponseStream<$0.EtfNav> streamEtfNav($0.StreamEtfNavRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamEtfNav, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// 사용자 주문장 업데이트를 가져오기
   $grpc.ResponseFuture<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getUserOrderbook, request, options: options);
@@ -63,6 +68,10 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/StreamFuturesOrderbook',
       ($0.StreamFuturesOrderbookRequest value) => value.writeToBuffer(),
       $0.FuturesOrderbookData.fromBuffer);
+  static final _$streamEtfNav = $grpc.ClientMethod<$0.StreamEtfNavRequest, $0.EtfNav>(
+      '/kdo.v1.market.MarketService/StreamEtfNav',
+      ($0.StreamEtfNavRequest value) => value.writeToBuffer(),
+      $0.EtfNav.fromBuffer);
   static final _$getUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
       '/kdo.v1.market.MarketService/GetUserOrderbook',
       ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
@@ -92,6 +101,13 @@ abstract class MarketServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamFuturesOrderbookRequest.fromBuffer(value),
         ($0.FuturesOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamEtfNavRequest, $0.EtfNav>(
+        'StreamEtfNav',
+        streamEtfNav_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamEtfNavRequest.fromBuffer(value),
+        ($0.EtfNav value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
         'GetUserOrderbook',
         getUserOrderbook_Pre,
@@ -119,6 +135,12 @@ abstract class MarketServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.FuturesOrderbookData> streamFuturesOrderbook($grpc.ServiceCall call, $0.StreamFuturesOrderbookRequest request);
+
+  $async.Stream<$0.EtfNav> streamEtfNav_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfNavRequest> $request) async* {
+    yield* streamEtfNav($call, await $request);
+  }
+
+  $async.Stream<$0.EtfNav> streamEtfNav($grpc.ServiceCall call, $0.StreamEtfNavRequest request);
 
   $async.Future<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async {
     return getUserOrderbook($call, await $request);
