@@ -98,6 +98,7 @@ impl serde::Serialize for ErrorType {
             Self::OrderBookUpdate => "ERROR_TYPE_ORDER_BOOK_UPDATE",
             Self::LimitExceeded => "ERROR_TYPE_LIMIT_EXCEEDED",
             Self::SystemError => "ERROR_TYPE_SYSTEM_ERROR",
+            Self::MarketSession => "ERROR_TYPE_MARKET_SESSION",
         };
         serializer.serialize_str(variant)
     }
@@ -118,6 +119,7 @@ impl<'de> serde::Deserialize<'de> for ErrorType {
             "ERROR_TYPE_ORDER_BOOK_UPDATE",
             "ERROR_TYPE_LIMIT_EXCEEDED",
             "ERROR_TYPE_SYSTEM_ERROR",
+            "ERROR_TYPE_MARKET_SESSION",
         ];
 
         struct GeneratedVisitor;
@@ -167,6 +169,7 @@ impl<'de> serde::Deserialize<'de> for ErrorType {
                     "ERROR_TYPE_ORDER_BOOK_UPDATE" => Ok(ErrorType::OrderBookUpdate),
                     "ERROR_TYPE_LIMIT_EXCEEDED" => Ok(ErrorType::LimitExceeded),
                     "ERROR_TYPE_SYSTEM_ERROR" => Ok(ErrorType::SystemError),
+                    "ERROR_TYPE_MARKET_SESSION" => Ok(ErrorType::MarketSession),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

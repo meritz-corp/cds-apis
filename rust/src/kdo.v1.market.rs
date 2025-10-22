@@ -275,7 +275,7 @@ pub enum SessionId {
     Unspecified = 0,
     /// 장개시전
     Previous = 1,
-    /// 이상무
+    /// 연결됨
     Connected = 2,
     /// 시가단일가
     OpeningOnePrice = 3,
@@ -299,7 +299,7 @@ pub enum SessionId {
     AuctionAsk = 12,
     /// 거래정지
     Suspended = 13,
-    /// SHUTDOWN
+    /// 셧다운
     Shutdown = 14,
     /// 장마감
     Closed = 15,

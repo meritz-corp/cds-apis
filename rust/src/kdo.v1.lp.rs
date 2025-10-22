@@ -412,6 +412,8 @@ pub enum ErrorType {
     LimitExceeded = 7,
     /// 시스템 에러
     SystemError = 8,
+    /// 시장 세션 관련 에러
+    MarketSession = 9,
 }
 impl ErrorType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -429,6 +431,7 @@ impl ErrorType {
             ErrorType::OrderBookUpdate => "ERROR_TYPE_ORDER_BOOK_UPDATE",
             ErrorType::LimitExceeded => "ERROR_TYPE_LIMIT_EXCEEDED",
             ErrorType::SystemError => "ERROR_TYPE_SYSTEM_ERROR",
+            ErrorType::MarketSession => "ERROR_TYPE_MARKET_SESSION",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -443,6 +446,7 @@ impl ErrorType {
             "ERROR_TYPE_ORDER_BOOK_UPDATE" => Some(Self::OrderBookUpdate),
             "ERROR_TYPE_LIMIT_EXCEEDED" => Some(Self::LimitExceeded),
             "ERROR_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
+            "ERROR_TYPE_MARKET_SESSION" => Some(Self::MarketSession),
             _ => None,
         }
     }

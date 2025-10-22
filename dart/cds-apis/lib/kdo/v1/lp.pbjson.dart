@@ -77,6 +77,7 @@ const ErrorType$json = {
     {'1': 'ERROR_TYPE_ORDER_BOOK_UPDATE', '2': 6},
     {'1': 'ERROR_TYPE_LIMIT_EXCEEDED', '2': 7},
     {'1': 'ERROR_TYPE_SYSTEM_ERROR', '2': 8},
+    {'1': 'ERROR_TYPE_MARKET_SESSION', '2': 9},
   ],
 };
 
@@ -87,7 +88,7 @@ final $typed_data.Uint8List errorTypeDescriptor = $convert.base64Decode(
     'UEVfT1JERVJfU1VCTUlUEAMSHwobRVJST1JfVFlQRV9PUkRFUl9QUk9DRVNTSU5HEAQSHgoaRV'
     'JST1JfVFlQRV9OQVZfQ0FMQ1VMQVRJT04QBRIgChxFUlJPUl9UWVBFX09SREVSX0JPT0tfVVBE'
     'QVRFEAYSHQoZRVJST1JfVFlQRV9MSU1JVF9FWENFRURFRBAHEhsKF0VSUk9SX1RZUEVfU1lTVE'
-    'VNX0VSUk9SEAg=');
+    'VNX0VSUk9SEAgSHQoZRVJST1JfVFlQRV9NQVJLRVRfU0VTU0lPThAJ');
 
 @$core.Deprecated('Use errorLevelDescriptor instead')
 const ErrorLevel$json = {

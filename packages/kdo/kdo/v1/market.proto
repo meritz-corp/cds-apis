@@ -87,7 +87,7 @@ service MarketService {
 enum SessionId {
     SESSION_ID_UNSPECIFIED = 0; // 기본값
     PREVIOUS = 1;               // 장개시전
-    CONNECTED = 2;              // 이상무
+    CONNECTED = 2;              // 연결됨
     OPENING_ONE_PRICE = 3;      // 시가단일가
     ONE_PRICE = 4;              // 단일가
     CLOSING_ONE_PRICE = 5;      // 종가단일가
@@ -99,7 +99,7 @@ enum SessionId {
     AUCTION_BID = 11;           // 경매매수호가 접수 세션
     AUCTION_ASK = 12;           // 경매매도호가 접수 세션
     SUSPENDED = 13;             // 거래정지
-    SHUTDOWN = 14;              // SHUTDOWN
+    SHUTDOWN = 14;              // 셧다운
     CLOSED = 15;                // 장마감
     ETC = 16;                   // 기타
 }

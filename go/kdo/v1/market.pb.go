@@ -30,7 +30,7 @@ type SessionId int32
 const (
 	SessionId_SESSION_ID_UNSPECIFIED SessionId = 0  // 기본값
 	SessionId_PREVIOUS               SessionId = 1  // 장개시전
-	SessionId_CONNECTED              SessionId = 2  // 이상무
+	SessionId_CONNECTED              SessionId = 2  // 연결됨
 	SessionId_OPENING_ONE_PRICE      SessionId = 3  // 시가단일가
 	SessionId_ONE_PRICE              SessionId = 4  // 단일가
 	SessionId_CLOSING_ONE_PRICE      SessionId = 5  // 종가단일가
@@ -42,7 +42,7 @@ const (
 	SessionId_AUCTION_BID            SessionId = 11 // 경매매수호가 접수 세션
 	SessionId_AUCTION_ASK            SessionId = 12 // 경매매도호가 접수 세션
 	SessionId_SUSPENDED              SessionId = 13 // 거래정지
-	SessionId_SHUTDOWN               SessionId = 14 // SHUTDOWN
+	SessionId_SHUTDOWN               SessionId = 14 // 셧다운
 	SessionId_CLOSED                 SessionId = 15 // 장마감
 	SessionId_ETC                    SessionId = 16 // 기타
 )
