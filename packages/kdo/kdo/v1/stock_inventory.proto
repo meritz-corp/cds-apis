@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+package kdo.v1.stock_inventory;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// StockInventoryService는 주식 보유 현황 관련 서비스를 제공합니다.
+service StockInventoryService {
+  // 단일 주식 보유 현황 조회
+  rpc GetStockInventory(GetStockInventoryRequest) returns (StockInventory) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}/{stock=stocks/*}"
+    };
+    option (google.api.method_signature) = "fund,stock";
+  }
+
+  // 펀드별 주식 보유 현황 목록 조회
+  rpc ListStockInventories(ListStockInventoriesRequest) returns (ListStockInventoriesResponse) {
+    option (google.api.http) = {
+      get: "/v1/inventories"
+    };
+    option (google.api.method_signature) = "fund";
+  }
+}
+
+// 주식 보유 현황 정보
+message StockInventory {
+  // 종목 코드
+  string stock_code = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Stock"
+    }
+  ];
+
+  // 펀드 코드
+  string fund_code = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 현재 잔고 (순보유잔고)
+  int64 balance = 3;
+
+  // 전일 잔고
+  int64 prev_balance = 4;
+
+  // 담보 수량
+  int64 pledged = 5;
+
+  // 가용 수량 (일반가용)
+  int64 sellable = 6;
+
+  // 차입 가용 수량
+  int64 borrow_sellable = 7;
+
+  // 차입 수량
+  int64 borrow_quantity = 8;
+
+  // 장부 수량
+  int64 book_quantity = 9;
+
+  // 장부 금액 (원 단위, i64)
+  string book_amount = 10;
+
+  // 매도 예약 수량 (내부용)
+  int64 selling = 11;
+
+  // 차입 매도 예약 수량 (내부용)
+  int64 borrow_selling = 12;
+
+  // 차입 매도 수량 (내부용)
+  int64 borrow_sold = 13;
+}
+
+// ========== Request/Response Messages ==========
+
+// GetStockInventory 요청
+message GetStockInventoryRequest {
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  string stock = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Stock"
+    }
+  ];
+}
+
+// ListStockInventories 요청
+message ListStockInventoriesRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 2;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 3;
+
+  // 필터링 조건 (optional, AIP-160)
+  // Available Operators:
+  // * fund_code
+  //   * `equal`, `contains`
+  // * stock_code
+  //   * `equal`, `contains`
+  // * balance
+  //   * `equal`, `greater_than`, `less_than`
+  //
+  // Examples:
+  // * filter=fund_code="0331"
+  // * filter=stock_code:"5930"
+  // * filter=balance > 1000
+  string filter = 4;
+}
+
+// ListStockInventories 응답
+message ListStockInventoriesResponse {
+  // 주식 보유 현황 목록
+  repeated StockInventory stock_inventories = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}

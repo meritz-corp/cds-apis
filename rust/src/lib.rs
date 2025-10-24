@@ -32,5 +32,8 @@ pub mod kdo {
         pub mod lp {
             include!("kdo.v1.lp.rs");
         }
+        pub mod stock_inventory {
+            include!("kdo.v1.stock_inventory.serde.rs");
+        }
     }
 }
