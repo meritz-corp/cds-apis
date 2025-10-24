@@ -286,11 +286,13 @@ class ListStockInventoriesRequest extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? filter,
+    $core.String? orderBy,
   }) {
     final result = create();
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
     if (filter != null) result.filter = filter;
+    if (orderBy != null) result.orderBy = orderBy;
     return result;
   }
 
@@ -303,6 +305,7 @@ class ListStockInventoriesRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
     ..aOS(4, _omitFieldNames ? '' : 'filter')
+    ..aOS(5, _omitFieldNames ? '' : 'orderBy')
     ..hasRequiredFields = false
   ;
 
@@ -364,6 +367,22 @@ class ListStockInventoriesRequest extends $pb.GeneratedMessage {
   $core.bool hasFilter() => $_has(2);
   @$pb.TagNumber(4)
   void clearFilter() => $_clearField(4);
+
+  /// 오더링 조건. (optional, AIP-132)
+  ///
+  /// Supported Fields
+  /// * "stock_code", "balance", "sellable", "borrow_sellable", "borrow_quantity", "book_quantity", "book_amount", "selling", "borrow_selling", "borrow_sold"
+  ///
+  /// Examples
+  /// * order_by=balance desc
+  @$pb.TagNumber(5)
+  $core.String get orderBy => $_getSZ(3);
+  @$pb.TagNumber(5)
+  set orderBy($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOrderBy() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearOrderBy() => $_clearField(5);
 }
 
 /// ListStockInventories 응답

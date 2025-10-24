@@ -56,6 +56,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"stock_code\", \"balance\", \"sellable\", \"borrow_sellable\", \"borrow_quantity\", \"book_quantity\", \"book_amount\", \"selling\", \"borrow_selling\", \"borrow_sold\"\n\nExamples\n* order_by=balance desc",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [

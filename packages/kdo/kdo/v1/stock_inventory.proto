@@ -120,7 +120,17 @@ message ListStockInventoriesRequest {
   // * filter=fund_code="0331"
   // * filter=stock_code:"5930"
   // * filter=balance > 1000
-  string filter = 4;
+  string filter = 4 [(google.api.field_behavior) = OPTIONAL];
+
+
+  // 오더링 조건. (optional, AIP-132)
+  //
+  // Supported Fields
+  // * "stock_code", "balance", "sellable", "borrow_sellable", "borrow_quantity", "book_quantity", "book_amount", "selling", "borrow_selling", "borrow_sold"
+  //
+  // Examples
+  // * order_by=balance desc
+  string order_by = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // ListStockInventories 응답

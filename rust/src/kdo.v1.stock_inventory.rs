@@ -80,6 +80,15 @@ pub struct ListStockInventoriesRequest {
     /// * filter=balance > 1000
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
+    /// 오더링 조건. (optional, AIP-132)
+    ///
+    /// Supported Fields
+    /// * "stock_code", "balance", "sellable", "borrow_sellable", "borrow_quantity", "book_quantity", "book_amount", "selling", "borrow_selling", "borrow_sold"
+    ///
+    /// Examples
+    /// * order_by=balance desc
+    #[prost(string, tag="5")]
+    pub order_by: ::prost::alloc::string::String,
 }
 /// ListStockInventories 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
