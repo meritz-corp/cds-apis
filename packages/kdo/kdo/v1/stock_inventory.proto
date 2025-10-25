@@ -19,6 +19,14 @@ service StockInventoryService {
     option (google.api.method_signature) = "fund,stock";
   }
 
+  // 단일 주식 보유 현황 스트림
+  rpc StreamStockInventory(GetStockInventoryRequest) returns (stream StockInventory) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}/{stock=stocks/*}:stream"
+    };
+    option (google.api.method_signature) = "fund,stock";
+  }
+
   // 펀드별 주식 보유 현황 목록 조회
   rpc ListStockInventories(ListStockInventoriesRequest) returns (ListStockInventoriesResponse) {
     option (google.api.http) = {

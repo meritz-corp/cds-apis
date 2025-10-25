@@ -38,6 +38,11 @@ class StockInventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getStockInventory, request, options: options);
   }
 
+  /// 단일 주식 보유 현황 스트림
+  $grpc.ResponseStream<$0.StockInventory> streamStockInventory($0.GetStockInventoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamStockInventory, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// 펀드별 주식 보유 현황 목록 조회
   $grpc.ResponseFuture<$0.ListStockInventoriesResponse> listStockInventories($0.ListStockInventoriesRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listStockInventories, request, options: options);
@@ -47,6 +52,10 @@ class StockInventoryServiceClient extends $grpc.Client {
 
   static final _$getStockInventory = $grpc.ClientMethod<$0.GetStockInventoryRequest, $0.StockInventory>(
       '/kdo.v1.stock_inventory.StockInventoryService/GetStockInventory',
+      ($0.GetStockInventoryRequest value) => value.writeToBuffer(),
+      $0.StockInventory.fromBuffer);
+  static final _$streamStockInventory = $grpc.ClientMethod<$0.GetStockInventoryRequest, $0.StockInventory>(
+      '/kdo.v1.stock_inventory.StockInventoryService/StreamStockInventory',
       ($0.GetStockInventoryRequest value) => value.writeToBuffer(),
       $0.StockInventory.fromBuffer);
   static final _$listStockInventories = $grpc.ClientMethod<$0.ListStockInventoriesRequest, $0.ListStockInventoriesResponse>(
@@ -67,6 +76,13 @@ abstract class StockInventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetStockInventoryRequest.fromBuffer(value),
         ($0.StockInventory value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetStockInventoryRequest, $0.StockInventory>(
+        'StreamStockInventory',
+        streamStockInventory_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetStockInventoryRequest.fromBuffer(value),
+        ($0.StockInventory value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ListStockInventoriesRequest, $0.ListStockInventoriesResponse>(
         'ListStockInventories',
         listStockInventories_Pre,
@@ -81,6 +97,12 @@ abstract class StockInventoryServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.StockInventory> getStockInventory($grpc.ServiceCall call, $0.GetStockInventoryRequest request);
+
+  $async.Stream<$0.StockInventory> streamStockInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetStockInventoryRequest> $request) async* {
+    yield* streamStockInventory($call, await $request);
+  }
+
+  $async.Stream<$0.StockInventory> streamStockInventory($grpc.ServiceCall call, $0.GetStockInventoryRequest request);
 
   $async.Future<$0.ListStockInventoriesResponse> listStockInventories_Pre($grpc.ServiceCall $call, $async.Future<$0.ListStockInventoriesRequest> $request) async {
     return listStockInventories($call, await $request);

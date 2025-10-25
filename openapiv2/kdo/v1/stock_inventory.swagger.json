@@ -108,6 +108,54 @@
           "StockInventoryService"
         ]
       }
+    },
+    "/v1/inventories/{fund}/{stock}:stream": {
+      "get": {
+        "summary": "단일 주식 보유 현황 스트림",
+        "operationId": "StockInventoryService_StreamStockInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/stock_inventoryStockInventory"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of stock_inventoryStockInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "stock",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "stocks/[^/]+"
+          }
+        ],
+        "tags": [
+          "StockInventoryService"
+        ]
+      }
     }
   },
   "definitions": {

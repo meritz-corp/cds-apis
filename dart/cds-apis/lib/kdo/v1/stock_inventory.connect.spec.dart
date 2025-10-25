@@ -19,6 +19,14 @@ abstract final class StockInventoryService {
     kdov1stock_inventory.StockInventory.new,
   );
 
+  /// 단일 주식 보유 현황 스트림
+  static const streamStockInventory = connect.Spec(
+    '/$name/StreamStockInventory',
+    connect.StreamType.server,
+    kdov1stock_inventory.GetStockInventoryRequest.new,
+    kdov1stock_inventory.StockInventory.new,
+  );
+
   /// 펀드별 주식 보유 현황 목록 조회
   static const listStockInventories = connect.Spec(
     '/$name/ListStockInventories',

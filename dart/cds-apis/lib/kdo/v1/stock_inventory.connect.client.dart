@@ -27,6 +27,24 @@ extension type StockInventoryServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 단일 주식 보유 현황 스트림
+  Stream<kdov1stock_inventory.StockInventory> streamStockInventory(
+    kdov1stock_inventory.GetStockInventoryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.StockInventoryService.streamStockInventory,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 펀드별 주식 보유 현황 목록 조회
   Future<kdov1stock_inventory.ListStockInventoriesResponse> listStockInventories(
     kdov1stock_inventory.ListStockInventoriesRequest input, {

@@ -24,6 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type StockInventoryServiceClient interface {
 	// 단일 주식 보유 현황 조회
 	GetStockInventory(ctx context.Context, in *GetStockInventoryRequest, opts ...grpc.CallOption) (*StockInventory, error)
+	// 단일 주식 보유 현황 스트림
+	StreamStockInventory(ctx context.Context, in *GetStockInventoryRequest, opts ...grpc.CallOption) (StockInventoryService_StreamStockInventoryClient, error)
 	// 펀드별 주식 보유 현황 목록 조회
 	ListStockInventories(ctx context.Context, in *ListStockInventoriesRequest, opts ...grpc.CallOption) (*ListStockInventoriesResponse, error)
 }
@@ -45,6 +47,38 @@ func (c *stockInventoryServiceClient) GetStockInventory(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *stockInventoryServiceClient) StreamStockInventory(ctx context.Context, in *GetStockInventoryRequest, opts ...grpc.CallOption) (StockInventoryService_StreamStockInventoryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &StockInventoryService_ServiceDesc.Streams[0], "/kdo.v1.stock_inventory.StockInventoryService/StreamStockInventory", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &stockInventoryServiceStreamStockInventoryClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type StockInventoryService_StreamStockInventoryClient interface {
+	Recv() (*StockInventory, error)
+	grpc.ClientStream
+}
+
+type stockInventoryServiceStreamStockInventoryClient struct {
+	grpc.ClientStream
+}
+
+func (x *stockInventoryServiceStreamStockInventoryClient) Recv() (*StockInventory, error) {
+	m := new(StockInventory)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *stockInventoryServiceClient) ListStockInventories(ctx context.Context, in *ListStockInventoriesRequest, opts ...grpc.CallOption) (*ListStockInventoriesResponse, error) {
 	out := new(ListStockInventoriesResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.stock_inventory.StockInventoryService/ListStockInventories", in, out, opts...)
@@ -60,6 +94,8 @@ func (c *stockInventoryServiceClient) ListStockInventories(ctx context.Context, 
 type StockInventoryServiceServer interface {
 	// 단일 주식 보유 현황 조회
 	GetStockInventory(context.Context, *GetStockInventoryRequest) (*StockInventory, error)
+	// 단일 주식 보유 현황 스트림
+	StreamStockInventory(*GetStockInventoryRequest, StockInventoryService_StreamStockInventoryServer) error
 	// 펀드별 주식 보유 현황 목록 조회
 	ListStockInventories(context.Context, *ListStockInventoriesRequest) (*ListStockInventoriesResponse, error)
 	mustEmbedUnimplementedStockInventoryServiceServer()
@@ -71,6 +107,9 @@ type UnimplementedStockInventoryServiceServer struct {
 
 func (UnimplementedStockInventoryServiceServer) GetStockInventory(context.Context, *GetStockInventoryRequest) (*StockInventory, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStockInventory not implemented")
+}
+func (UnimplementedStockInventoryServiceServer) StreamStockInventory(*GetStockInventoryRequest, StockInventoryService_StreamStockInventoryServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamStockInventory not implemented")
 }
 func (UnimplementedStockInventoryServiceServer) ListStockInventories(context.Context, *ListStockInventoriesRequest) (*ListStockInventoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListStockInventories not implemented")
@@ -104,6 +143,27 @@ func _StockInventoryService_GetStockInventory_Handler(srv interface{}, ctx conte
 		return srv.(StockInventoryServiceServer).GetStockInventory(ctx, req.(*GetStockInventoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _StockInventoryService_StreamStockInventory_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetStockInventoryRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(StockInventoryServiceServer).StreamStockInventory(m, &stockInventoryServiceStreamStockInventoryServer{stream})
+}
+
+type StockInventoryService_StreamStockInventoryServer interface {
+	Send(*StockInventory) error
+	grpc.ServerStream
+}
+
+type stockInventoryServiceStreamStockInventoryServer struct {
+	grpc.ServerStream
+}
+
+func (x *stockInventoryServiceStreamStockInventoryServer) Send(m *StockInventory) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _StockInventoryService_ListStockInventories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -140,6 +200,12 @@ var StockInventoryService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StockInventoryService_ListStockInventories_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamStockInventory",
+			Handler:       _StockInventoryService_StreamStockInventory_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "kdo/v1/stock_inventory.proto",
 }
