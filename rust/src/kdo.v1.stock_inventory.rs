@@ -59,6 +59,8 @@ pub struct GetStockInventoryRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListStockInventoriesRequest {
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
     /// 페이지 크기 (optional)
     #[prost(uint32, optional, tag="2")]
     pub page_size: ::core::option::Option<u32>,

@@ -283,12 +283,14 @@ class GetStockInventoryRequest extends $pb.GeneratedMessage {
 /// ListStockInventories 요청
 class ListStockInventoriesRequest extends $pb.GeneratedMessage {
   factory ListStockInventoriesRequest({
+    $core.String? fund,
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? filter,
     $core.String? orderBy,
   }) {
     final result = create();
+    if (fund != null) result.fund = fund;
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
     if (filter != null) result.filter = filter;
@@ -302,6 +304,7 @@ class ListStockInventoriesRequest extends $pb.GeneratedMessage {
   factory ListStockInventoriesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStockInventoriesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.stock_inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
     ..aOS(4, _omitFieldNames ? '' : 'filter')
@@ -326,23 +329,32 @@ class ListStockInventoriesRequest extends $pb.GeneratedMessage {
   static ListStockInventoriesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListStockInventoriesRequest>(create);
   static ListStockInventoriesRequest? _defaultInstance;
 
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
   /// 페이지 크기 (optional)
   @$pb.TagNumber(2)
-  $core.int get pageSize => $_getIZ(0);
+  $core.int get pageSize => $_getIZ(1);
   @$pb.TagNumber(2)
-  set pageSize($core.int value) => $_setUnsignedInt32(0, value);
+  set pageSize($core.int value) => $_setUnsignedInt32(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasPageSize() => $_has(0);
+  $core.bool hasPageSize() => $_has(1);
   @$pb.TagNumber(2)
   void clearPageSize() => $_clearField(2);
 
   /// 페이지 토큰 (optional, for pagination)
   @$pb.TagNumber(3)
-  $core.String get pageToken => $_getSZ(1);
+  $core.String get pageToken => $_getSZ(2);
   @$pb.TagNumber(3)
-  set pageToken($core.String value) => $_setString(1, value);
+  set pageToken($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasPageToken() => $_has(1);
+  $core.bool hasPageToken() => $_has(2);
   @$pb.TagNumber(3)
   void clearPageToken() => $_clearField(3);
 
@@ -360,11 +372,11 @@ class ListStockInventoriesRequest extends $pb.GeneratedMessage {
   /// * filter=stock_code:"5930"
   /// * filter=balance > 1000
   @$pb.TagNumber(4)
-  $core.String get filter => $_getSZ(2);
+  $core.String get filter => $_getSZ(3);
   @$pb.TagNumber(4)
-  set filter($core.String value) => $_setString(2, value);
+  set filter($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasFilter() => $_has(2);
+  $core.bool hasFilter() => $_has(3);
   @$pb.TagNumber(4)
   void clearFilter() => $_clearField(4);
 
@@ -376,11 +388,11 @@ class ListStockInventoriesRequest extends $pb.GeneratedMessage {
   /// Examples
   /// * order_by=balance desc
   @$pb.TagNumber(5)
-  $core.String get orderBy => $_getSZ(3);
+  $core.String get orderBy => $_getSZ(4);
   @$pb.TagNumber(5)
-  set orderBy($core.String value) => $_setString(3, value);
+  set orderBy($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasOrderBy() => $_has(3);
+  $core.bool hasOrderBy() => $_has(4);
   @$pb.TagNumber(5)
   void clearOrderBy() => $_clearField(5);
 }

@@ -30,7 +30,7 @@ service StockInventoryService {
   // 펀드별 주식 보유 현황 목록 조회
   rpc ListStockInventories(ListStockInventoriesRequest) returns (ListStockInventoriesResponse) {
     option (google.api.http) = {
-      get: "/v1/inventories"
+      get: "/v1/inventories/{fund=funds/*}"
     };
     option (google.api.method_signature) = "fund";
   }
@@ -109,6 +109,13 @@ message GetStockInventoryRequest {
 
 // ListStockInventories 요청
 message ListStockInventoriesRequest {
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
   // 페이지 크기 (optional)
   optional uint32 page_size = 2;
 

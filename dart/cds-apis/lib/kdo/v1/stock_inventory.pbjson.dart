@@ -66,6 +66,7 @@ final $typed_data.Uint8List getStockInventoryRequestDescriptor = $convert.base64
 const ListStockInventoriesRequest$json = {
   '1': 'ListStockInventoriesRequest',
   '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'page_size', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
     {'1': 'filter', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'filter'},
@@ -79,10 +80,11 @@ const ListStockInventoriesRequest$json = {
 
 /// Descriptor for `ListStockInventoriesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listStockInventoriesRequestDescriptor = $convert.base64Decode(
-    'ChtMaXN0U3RvY2tJbnZlbnRvcmllc1JlcXVlc3QSIAoJcGFnZV9zaXplGAIgASgNSABSCHBhZ2'
-    'VTaXpliAEBEiIKCnBhZ2VfdG9rZW4YAyABKAlIAVIJcGFnZVRva2VuiAEBEhwKBmZpbHRlchgE'
-    'IAEoCUIE4kEBAVIGZmlsdGVyEh8KCG9yZGVyX2J5GAUgASgJQgTiQQEBUgdvcmRlckJ5QgwKCl'
-    '9wYWdlX3NpemVCDQoLX3BhZ2VfdG9rZW4=');
+    'ChtMaXN0U3RvY2tJbnZlbnRvcmllc1JlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAvpBFgoUa2'
+    'RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSIAoJcGFnZV9zaXplGAIgASgNSABSCHBhZ2VTaXpl'
+    'iAEBEiIKCnBhZ2VfdG9rZW4YAyABKAlIAVIJcGFnZVRva2VuiAEBEhwKBmZpbHRlchgEIAEoCU'
+    'IE4kEBAVIGZmlsdGVyEh8KCG9yZGVyX2J5GAUgASgJQgTiQQEBUgdvcmRlckJ5QgwKCl9wYWdl'
+    'X3NpemVCDQoLX3BhZ2VfdG9rZW4=');
 
 @$core.Deprecated('Use listStockInventoriesResponseDescriptor instead')
 const ListStockInventoriesResponse$json = {

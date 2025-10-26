@@ -148,12 +148,29 @@ func request_StockInventoryService_StreamStockInventory_0(ctx context.Context, m
 }
 
 var (
-	filter_StockInventoryService_ListStockInventories_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_StockInventoryService_ListStockInventories_0 = &utilities.DoubleArray{Encoding: map[string]int{"fund": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_StockInventoryService_ListStockInventories_0(ctx context.Context, marshaler runtime.Marshaler, client StockInventoryServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListStockInventoriesRequest
 	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -170,6 +187,23 @@ func request_StockInventoryService_ListStockInventories_0(ctx context.Context, m
 func local_request_StockInventoryService_ListStockInventories_0(ctx context.Context, marshaler runtime.Marshaler, server StockInventoryServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListStockInventoriesRequest
 	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -229,7 +263,7 @@ func RegisterStockInventoryServiceHandlerServer(ctx context.Context, mux *runtim
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.stock_inventory.StockInventoryService/ListStockInventories", runtime.WithHTTPPathPattern("/v1/inventories"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.stock_inventory.StockInventoryService/ListStockInventories", runtime.WithHTTPPathPattern("/v1/inventories/{fund=funds/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -337,7 +371,7 @@ func RegisterStockInventoryServiceHandlerClient(ctx context.Context, mux *runtim
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.stock_inventory.StockInventoryService/ListStockInventories", runtime.WithHTTPPathPattern("/v1/inventories"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.stock_inventory.StockInventoryService/ListStockInventories", runtime.WithHTTPPathPattern("/v1/inventories/{fund=funds/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -361,7 +395,7 @@ var (
 
 	pattern_StockInventoryService_StreamStockInventory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "inventories", "funds", "fund", "stocks", "stock"}, "stream"))
 
-	pattern_StockInventoryService_ListStockInventories_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "inventories"}, ""))
+	pattern_StockInventoryService_ListStockInventories_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3}, []string{"v1", "inventories", "funds", "fund"}, ""))
 )
 
 var (

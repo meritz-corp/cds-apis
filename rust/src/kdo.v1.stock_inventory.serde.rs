@@ -131,7 +131,13 @@ impl serde::Serialize for ListStockInventoriesRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.stock_inventory.ListStockInventoriesRequest", len)?;
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
         if let Some(v) = self.page_size.as_ref() {
             struct_ser.serialize_field("page_size", v)?;
         }
@@ -154,6 +160,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "fund",
             "page_size",
             "pageSize",
             "page_token",
@@ -165,6 +172,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            Fund,
             PageSize,
             PageToken,
             Filter,
@@ -191,6 +199,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
                         E: serde::de::Error,
                     {
                         match value {
+                            "fund" => Ok(GeneratedField::Fund),
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
@@ -214,12 +223,19 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut fund__ = None;
                 let mut page_size__ = None;
                 let mut page_token__ = None;
                 let mut filter__ = None;
                 let mut order_by__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::PageSize => {
                             if page_size__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("pageSize"));
@@ -252,6 +268,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
                     }
                 }
                 Ok(ListStockInventoriesRequest {
+                    fund: fund__.unwrap_or_default(),
                     page_size: page_size__,
                     page_token: page_token__,
                     filter: filter__.unwrap_or_default(),
