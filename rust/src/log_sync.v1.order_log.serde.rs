@@ -7,23 +7,23 @@ impl serde::Serialize for ListOrderLogsRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.page_size != 0 {
+        if true {
             len += 1;
         }
-        if !self.page_token.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.filter.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.order_log.ListOrderLogsRequest", len)?;
-        if self.page_size != 0 {
-            struct_ser.serialize_field("pageSize", &self.page_size)?;
+        if true {
+            struct_ser.serialize_field("page_size", &self.page_size)?;
         }
-        if !self.page_token.is_empty() {
-            struct_ser.serialize_field("pageToken", &self.page_token)?;
+        if true {
+            struct_ser.serialize_field("page_token", &self.page_token)?;
         }
-        if !self.filter.is_empty() {
+        if true {
             struct_ser.serialize_field("filter", &self.filter)?;
         }
         struct_ser.end()
@@ -48,6 +48,7 @@ impl<'de> serde::Deserialize<'de> for ListOrderLogsRequest {
             PageSize,
             PageToken,
             Filter,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -72,7 +73,7 @@ impl<'de> serde::Deserialize<'de> for ListOrderLogsRequest {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -116,6 +117,9 @@ impl<'de> serde::Deserialize<'de> for ListOrderLogsRequest {
                             }
                             filter__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListOrderLogsRequest {
@@ -136,18 +140,18 @@ impl serde::Serialize for ListOrderLogsResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.order_logs.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.next_page_token.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.order_log.ListOrderLogsResponse", len)?;
-        if !self.order_logs.is_empty() {
-            struct_ser.serialize_field("orderLogs", &self.order_logs)?;
+        if true {
+            struct_ser.serialize_field("order_logs", &self.order_logs)?;
         }
-        if !self.next_page_token.is_empty() {
-            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
         }
         struct_ser.end()
     }
@@ -169,6 +173,7 @@ impl<'de> serde::Deserialize<'de> for ListOrderLogsResponse {
         enum GeneratedField {
             OrderLogs,
             NextPageToken,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -192,7 +197,7 @@ impl<'de> serde::Deserialize<'de> for ListOrderLogsResponse {
                         match value {
                             "orderLogs" | "order_logs" => Ok(GeneratedField::OrderLogs),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -227,6 +232,9 @@ impl<'de> serde::Deserialize<'de> for ListOrderLogsResponse {
                             }
                             next_page_token__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListOrderLogsResponse {
@@ -246,220 +254,220 @@ impl serde::Serialize for OrderLog {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.id != 0 {
+        if true {
             len += 1;
         }
-        if self.log_time.is_some() {
+        if true {
             len += 1;
         }
-        if !self.log_type.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.event_type.is_empty() {
+        if true {
             len += 1;
         }
-        if self.execution_quantity != 0. {
+        if true {
             len += 1;
         }
-        if self.execution_price != 0. {
+        if true {
             len += 1;
         }
-        if self.order_id != 0 {
+        if true {
             len += 1;
         }
-        if !self.original_order_id.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.action.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.side.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.market_operation_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.product_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.product_name.is_empty() {
+        if true {
             len += 1;
         }
-        if self.order_price != 0. {
+        if true {
             len += 1;
         }
-        if self.order_quantity != 0. {
+        if true {
             len += 1;
         }
-        if self.unfilled != 0. {
+        if true {
             len += 1;
         }
-        if self.filled != 0. {
+        if true {
             len += 1;
         }
-        if !self.status.is_empty() {
+        if true {
             len += 1;
         }
-        if self.borrowed {
+        if true {
             len += 1;
         }
-        if self.auto {
+        if true {
             len += 1;
         }
-        if self.accepted {
+        if true {
             len += 1;
         }
-        if self.lp {
+        if true {
             len += 1;
         }
-        if self.ask_type_type != 0 {
+        if true {
             len += 1;
         }
-        if self.program_type != 0 {
+        if true {
             len += 1;
         }
-        if !self.tag.is_empty() {
+        if true {
             len += 1;
         }
-        if self.original_price != 0. {
+        if true {
             len += 1;
         }
-        if self.user_code != 0 {
+        if true {
             len += 1;
         }
-        if !self.user_trimmed_ip.is_empty() {
+        if true {
             len += 1;
         }
-        if self.smp_type != 0 {
+        if true {
             len += 1;
         }
-        if !self.server_ip.is_empty() {
+        if true {
             len += 1;
         }
-        if self.create_time.is_some() {
+        if true {
             len += 1;
         }
-        if self.submit_time.is_some() {
+        if true {
             len += 1;
         }
-        if self.process_time.is_some() {
+        if true {
             len += 1;
         }
-        if self.last_trade_notify_time.is_some() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.order_log.OrderLog", len)?;
-        if self.id != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("id", ToString::to_string(&self.id).as_str())?;
         }
         if let Some(v) = self.log_time.as_ref() {
-            struct_ser.serialize_field("logTime", v)?;
+            struct_ser.serialize_field("log_time", v)?;
         }
-        if !self.log_type.is_empty() {
-            struct_ser.serialize_field("logType", &self.log_type)?;
+        if true {
+            struct_ser.serialize_field("log_type", &self.log_type)?;
         }
-        if !self.event_type.is_empty() {
-            struct_ser.serialize_field("eventType", &self.event_type)?;
+        if true {
+            struct_ser.serialize_field("event_type", &self.event_type)?;
         }
-        if self.execution_quantity != 0. {
-            struct_ser.serialize_field("executionQuantity", &self.execution_quantity)?;
+        if true {
+            struct_ser.serialize_field("execution_quantity", &self.execution_quantity)?;
         }
-        if self.execution_price != 0. {
-            struct_ser.serialize_field("executionPrice", &self.execution_price)?;
+        if true {
+            struct_ser.serialize_field("execution_price", &self.execution_price)?;
         }
-        if self.order_id != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("orderId", ToString::to_string(&self.order_id).as_str())?;
+            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
         }
-        if !self.original_order_id.is_empty() {
-            struct_ser.serialize_field("originalOrderId", &self.original_order_id)?;
+        if true {
+            struct_ser.serialize_field("original_order_id", &self.original_order_id)?;
         }
-        if !self.action.is_empty() {
+        if true {
             struct_ser.serialize_field("action", &self.action)?;
         }
-        if !self.side.is_empty() {
+        if true {
             struct_ser.serialize_field("side", &self.side)?;
         }
-        if !self.fund_code.is_empty() {
-            struct_ser.serialize_field("fundCode", &self.fund_code)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
-        if !self.market_operation_code.is_empty() {
-            struct_ser.serialize_field("marketOperationCode", &self.market_operation_code)?;
+        if true {
+            struct_ser.serialize_field("market_operation_code", &self.market_operation_code)?;
         }
-        if !self.product_code.is_empty() {
-            struct_ser.serialize_field("productCode", &self.product_code)?;
+        if true {
+            struct_ser.serialize_field("product_code", &self.product_code)?;
         }
-        if !self.product_name.is_empty() {
-            struct_ser.serialize_field("productName", &self.product_name)?;
+        if true {
+            struct_ser.serialize_field("product_name", &self.product_name)?;
         }
-        if self.order_price != 0. {
-            struct_ser.serialize_field("orderPrice", &self.order_price)?;
+        if true {
+            struct_ser.serialize_field("order_price", &self.order_price)?;
         }
-        if self.order_quantity != 0. {
-            struct_ser.serialize_field("orderQuantity", &self.order_quantity)?;
+        if true {
+            struct_ser.serialize_field("order_quantity", &self.order_quantity)?;
         }
-        if self.unfilled != 0. {
+        if true {
             struct_ser.serialize_field("unfilled", &self.unfilled)?;
         }
-        if self.filled != 0. {
+        if true {
             struct_ser.serialize_field("filled", &self.filled)?;
         }
-        if !self.status.is_empty() {
+        if true {
             struct_ser.serialize_field("status", &self.status)?;
         }
-        if self.borrowed {
+        if true {
             struct_ser.serialize_field("borrowed", &self.borrowed)?;
         }
-        if self.auto {
+        if true {
             struct_ser.serialize_field("auto", &self.auto)?;
         }
-        if self.accepted {
+        if true {
             struct_ser.serialize_field("accepted", &self.accepted)?;
         }
-        if self.lp {
+        if true {
             struct_ser.serialize_field("lp", &self.lp)?;
         }
-        if self.ask_type_type != 0 {
-            struct_ser.serialize_field("askTypeType", &self.ask_type_type)?;
+        if true {
+            struct_ser.serialize_field("ask_type_type", &self.ask_type_type)?;
         }
-        if self.program_type != 0 {
-            struct_ser.serialize_field("programType", &self.program_type)?;
+        if true {
+            struct_ser.serialize_field("program_type", &self.program_type)?;
         }
-        if !self.tag.is_empty() {
+        if true {
             struct_ser.serialize_field("tag", &self.tag)?;
         }
-        if self.original_price != 0. {
-            struct_ser.serialize_field("originalPrice", &self.original_price)?;
+        if true {
+            struct_ser.serialize_field("original_price", &self.original_price)?;
         }
-        if self.user_code != 0 {
-            struct_ser.serialize_field("userCode", &self.user_code)?;
+        if true {
+            struct_ser.serialize_field("user_code", &self.user_code)?;
         }
-        if !self.user_trimmed_ip.is_empty() {
-            struct_ser.serialize_field("userTrimmedIp", &self.user_trimmed_ip)?;
+        if true {
+            struct_ser.serialize_field("user_trimmed_ip", &self.user_trimmed_ip)?;
         }
-        if self.smp_type != 0 {
-            struct_ser.serialize_field("smpType", &self.smp_type)?;
+        if true {
+            struct_ser.serialize_field("smp_type", &self.smp_type)?;
         }
-        if !self.server_ip.is_empty() {
-            struct_ser.serialize_field("serverIp", &self.server_ip)?;
+        if true {
+            struct_ser.serialize_field("server_ip", &self.server_ip)?;
         }
         if let Some(v) = self.create_time.as_ref() {
-            struct_ser.serialize_field("createTime", v)?;
+            struct_ser.serialize_field("create_time", v)?;
         }
         if let Some(v) = self.submit_time.as_ref() {
-            struct_ser.serialize_field("submitTime", v)?;
+            struct_ser.serialize_field("submit_time", v)?;
         }
         if let Some(v) = self.process_time.as_ref() {
-            struct_ser.serialize_field("processTime", v)?;
+            struct_ser.serialize_field("process_time", v)?;
         }
         if let Some(v) = self.last_trade_notify_time.as_ref() {
-            struct_ser.serialize_field("lastTradeNotifyTime", v)?;
+            struct_ser.serialize_field("last_trade_notify_time", v)?;
         }
         struct_ser.end()
     }
@@ -569,6 +577,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             SubmitTime,
             ProcessTime,
             LastTradeNotifyTime,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -625,7 +634,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "submitTime" | "submit_time" => Ok(GeneratedField::SubmitTime),
                             "processTime" | "process_time" => Ok(GeneratedField::ProcessTime),
                             "lastTradeNotifyTime" | "last_trade_notify_time" => Ok(GeneratedField::LastTradeNotifyTime),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -916,6 +925,9 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                                 return Err(serde::de::Error::duplicate_field("lastTradeNotifyTime"));
                             }
                             last_trade_notify_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }

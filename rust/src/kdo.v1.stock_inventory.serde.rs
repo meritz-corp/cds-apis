@@ -7,17 +7,17 @@ impl serde::Serialize for GetStockInventoryRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.stock.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.stock_inventory.GetStockInventoryRequest", len)?;
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
-        if !self.stock.is_empty() {
+        if true {
             struct_ser.serialize_field("stock", &self.stock)?;
         }
         struct_ser.end()
@@ -38,6 +38,7 @@ impl<'de> serde::Deserialize<'de> for GetStockInventoryRequest {
         enum GeneratedField {
             Fund,
             Stock,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -61,7 +62,7 @@ impl<'de> serde::Deserialize<'de> for GetStockInventoryRequest {
                         match value {
                             "fund" => Ok(GeneratedField::Fund),
                             "stock" => Ok(GeneratedField::Stock),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -96,6 +97,9 @@ impl<'de> serde::Deserialize<'de> for GetStockInventoryRequest {
                             }
                             stock__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(GetStockInventoryRequest {
@@ -115,30 +119,30 @@ impl serde::Serialize for ListStockInventoriesRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.page_size.is_some() {
+        if true {
             len += 1;
         }
-        if self.page_token.is_some() {
+        if true {
             len += 1;
         }
-        if !self.filter.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.order_by.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.stock_inventory.ListStockInventoriesRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
-            struct_ser.serialize_field("pageSize", v)?;
+            struct_ser.serialize_field("page_size", v)?;
         }
         if let Some(v) = self.page_token.as_ref() {
-            struct_ser.serialize_field("pageToken", v)?;
+            struct_ser.serialize_field("page_token", v)?;
         }
-        if !self.filter.is_empty() {
+        if true {
             struct_ser.serialize_field("filter", &self.filter)?;
         }
-        if !self.order_by.is_empty() {
-            struct_ser.serialize_field("orderBy", &self.order_by)?;
+        if true {
+            struct_ser.serialize_field("order_by", &self.order_by)?;
         }
         struct_ser.end()
     }
@@ -165,6 +169,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
             PageToken,
             Filter,
             OrderBy,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -190,7 +195,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
                             "orderBy" | "order_by" => Ok(GeneratedField::OrderBy),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -241,6 +246,9 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesRequest {
                             }
                             order_by__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListStockInventoriesRequest {
@@ -262,18 +270,18 @@ impl serde::Serialize for ListStockInventoriesResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.stock_inventories.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.next_page_token.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.stock_inventory.ListStockInventoriesResponse", len)?;
-        if !self.stock_inventories.is_empty() {
-            struct_ser.serialize_field("stockInventories", &self.stock_inventories)?;
+        if true {
+            struct_ser.serialize_field("stock_inventories", &self.stock_inventories)?;
         }
-        if !self.next_page_token.is_empty() {
-            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
         }
         struct_ser.end()
     }
@@ -295,6 +303,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesResponse {
         enum GeneratedField {
             StockInventories,
             NextPageToken,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -318,7 +327,7 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesResponse {
                         match value {
                             "stockInventories" | "stock_inventories" => Ok(GeneratedField::StockInventories),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -353,6 +362,9 @@ impl<'de> serde::Deserialize<'de> for ListStockInventoriesResponse {
                             }
                             next_page_token__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListStockInventoriesResponse {
@@ -372,104 +384,104 @@ impl serde::Serialize for StockInventory {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.stock_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund_code.is_empty() {
+        if true {
             len += 1;
         }
-        if self.balance != 0 {
+        if true {
             len += 1;
         }
-        if self.prev_balance != 0 {
+        if true {
             len += 1;
         }
-        if self.pledged != 0 {
+        if true {
             len += 1;
         }
-        if self.sellable != 0 {
+        if true {
             len += 1;
         }
-        if self.borrow_sellable != 0 {
+        if true {
             len += 1;
         }
-        if self.borrow_quantity != 0 {
+        if true {
             len += 1;
         }
-        if self.book_quantity != 0 {
+        if true {
             len += 1;
         }
-        if !self.book_amount.is_empty() {
+        if true {
             len += 1;
         }
-        if self.selling != 0 {
+        if true {
             len += 1;
         }
-        if self.borrow_selling != 0 {
+        if true {
             len += 1;
         }
-        if self.borrow_sold != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.stock_inventory.StockInventory", len)?;
-        if !self.stock_code.is_empty() {
-            struct_ser.serialize_field("stockCode", &self.stock_code)?;
+        if true {
+            struct_ser.serialize_field("stock_code", &self.stock_code)?;
         }
-        if !self.fund_code.is_empty() {
-            struct_ser.serialize_field("fundCode", &self.fund_code)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
-        if self.balance != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("balance", ToString::to_string(&self.balance).as_str())?;
         }
-        if self.prev_balance != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("prevBalance", ToString::to_string(&self.prev_balance).as_str())?;
+            struct_ser.serialize_field("prev_balance", ToString::to_string(&self.prev_balance).as_str())?;
         }
-        if self.pledged != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("pledged", ToString::to_string(&self.pledged).as_str())?;
         }
-        if self.sellable != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("sellable", ToString::to_string(&self.sellable).as_str())?;
         }
-        if self.borrow_sellable != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("borrowSellable", ToString::to_string(&self.borrow_sellable).as_str())?;
+            struct_ser.serialize_field("borrow_sellable", ToString::to_string(&self.borrow_sellable).as_str())?;
         }
-        if self.borrow_quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("borrowQuantity", ToString::to_string(&self.borrow_quantity).as_str())?;
+            struct_ser.serialize_field("borrow_quantity", ToString::to_string(&self.borrow_quantity).as_str())?;
         }
-        if self.book_quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bookQuantity", ToString::to_string(&self.book_quantity).as_str())?;
+            struct_ser.serialize_field("book_quantity", ToString::to_string(&self.book_quantity).as_str())?;
         }
-        if !self.book_amount.is_empty() {
-            struct_ser.serialize_field("bookAmount", &self.book_amount)?;
+        if true {
+            struct_ser.serialize_field("book_amount", &self.book_amount)?;
         }
-        if self.selling != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("selling", ToString::to_string(&self.selling).as_str())?;
         }
-        if self.borrow_selling != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("borrowSelling", ToString::to_string(&self.borrow_selling).as_str())?;
+            struct_ser.serialize_field("borrow_selling", ToString::to_string(&self.borrow_selling).as_str())?;
         }
-        if self.borrow_sold != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("borrowSold", ToString::to_string(&self.borrow_sold).as_str())?;
+            struct_ser.serialize_field("borrow_sold", ToString::to_string(&self.borrow_sold).as_str())?;
         }
         struct_ser.end()
     }
@@ -520,6 +532,7 @@ impl<'de> serde::Deserialize<'de> for StockInventory {
             Selling,
             BorrowSelling,
             BorrowSold,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -554,7 +567,7 @@ impl<'de> serde::Deserialize<'de> for StockInventory {
                             "selling" => Ok(GeneratedField::Selling),
                             "borrowSelling" | "borrow_selling" => Ok(GeneratedField::BorrowSelling),
                             "borrowSold" | "borrow_sold" => Ok(GeneratedField::BorrowSold),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -685,6 +698,9 @@ impl<'de> serde::Deserialize<'de> for StockInventory {
                             borrow_sold__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }

@@ -7,17 +7,17 @@ impl serde::Serialize for ConstituentPrice {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.last_price.is_empty() {
+        if true {
             len += 1;
         }
-        if self.quantity != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.ConstituentPrice", len)?;
-        if !self.last_price.is_empty() {
-            struct_ser.serialize_field("lastPrice", &self.last_price)?;
+        if true {
+            struct_ser.serialize_field("last_price", &self.last_price)?;
         }
-        if self.quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
@@ -41,6 +41,7 @@ impl<'de> serde::Deserialize<'de> for ConstituentPrice {
         enum GeneratedField {
             LastPrice,
             Quantity,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -64,7 +65,7 @@ impl<'de> serde::Deserialize<'de> for ConstituentPrice {
                         match value {
                             "lastPrice" | "last_price" => Ok(GeneratedField::LastPrice),
                             "quantity" => Ok(GeneratedField::Quantity),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -101,6 +102,9 @@ impl<'de> serde::Deserialize<'de> for ConstituentPrice {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ConstituentPrice {
@@ -120,68 +124,68 @@ impl serde::Serialize for Etf {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.id != 0 {
+        if true {
             len += 1;
         }
-        if !self.symbol.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.name.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.last_price.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.constituents.is_empty() {
+        if true {
             len += 1;
         }
-        if self.nav.is_some() {
+        if true {
             len += 1;
         }
-        if self.creation_unit != 0 {
+        if true {
             len += 1;
         }
-        if self.tick_size != 0 {
+        if true {
             len += 1;
         }
-        if self.replication_method != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.Etf", len)?;
-        if self.id != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("id", ToString::to_string(&self.id).as_str())?;
         }
-        if !self.symbol.is_empty() {
+        if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if !self.name.is_empty() {
+        if true {
             struct_ser.serialize_field("name", &self.name)?;
         }
-        if !self.last_price.is_empty() {
-            struct_ser.serialize_field("lastPrice", &self.last_price)?;
+        if true {
+            struct_ser.serialize_field("last_price", &self.last_price)?;
         }
-        if !self.constituents.is_empty() {
+        if true {
             struct_ser.serialize_field("constituents", &self.constituents)?;
         }
         if let Some(v) = self.nav.as_ref() {
             struct_ser.serialize_field("nav", v)?;
         }
-        if self.creation_unit != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("creationUnit", ToString::to_string(&self.creation_unit).as_str())?;
+            struct_ser.serialize_field("creation_unit", ToString::to_string(&self.creation_unit).as_str())?;
         }
-        if self.tick_size != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("tickSize", ToString::to_string(&self.tick_size).as_str())?;
+            struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
         }
-        if self.replication_method != 0 {
+        if true {
             let v = ReplicationMethod::try_from(self.replication_method)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.replication_method)))?;
-            struct_ser.serialize_field("replicationMethod", &v)?;
+            struct_ser.serialize_field("replication_method", &v)?;
         }
         struct_ser.end()
     }
@@ -219,6 +223,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             CreationUnit,
             TickSize,
             ReplicationMethod,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -249,7 +254,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "creationUnit" | "creation_unit" => Ok(GeneratedField::CreationUnit),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             "replicationMethod" | "replication_method" => Ok(GeneratedField::ReplicationMethod),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -341,6 +346,9 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             }
                             replication_method__ = Some(map_.next_value::<ReplicationMethod>()? as i32);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(Etf {
@@ -377,7 +385,7 @@ impl serde::Serialize for EtfNav {
                     struct_ser.serialize_field("physical", v)?;
                 }
                 etf_nav::NavType::FuturesBased(v) => {
-                    struct_ser.serialize_field("futuresBased", v)?;
+                    struct_ser.serialize_field("futures_based", v)?;
                 }
             }
         }
@@ -400,6 +408,7 @@ impl<'de> serde::Deserialize<'de> for EtfNav {
         enum GeneratedField {
             Physical,
             FuturesBased,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -423,7 +432,7 @@ impl<'de> serde::Deserialize<'de> for EtfNav {
                         match value {
                             "physical" => Ok(GeneratedField::Physical),
                             "futuresBased" | "futures_based" => Ok(GeneratedField::FuturesBased),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -459,6 +468,9 @@ impl<'de> serde::Deserialize<'de> for EtfNav {
                             nav_type__ = map_.next_value::<::std::option::Option<_>>()?.map(etf_nav::NavType::FuturesBased)
 ;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(EtfNav {
@@ -477,31 +489,31 @@ impl serde::Serialize for EtfPdfConstituent {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.symbol.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.name.is_empty() {
+        if true {
             len += 1;
         }
-        if self.product_type != 0 {
+        if true {
             len += 1;
         }
-        if self.quantity != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.EtfPdfConstituent", len)?;
-        if !self.symbol.is_empty() {
+        if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if !self.name.is_empty() {
+        if true {
             struct_ser.serialize_field("name", &self.name)?;
         }
-        if self.product_type != 0 {
+        if true {
             let v = ProductType::try_from(self.product_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.product_type)))?;
-            struct_ser.serialize_field("productType", &v)?;
+            struct_ser.serialize_field("product_type", &v)?;
         }
-        if self.quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
@@ -529,6 +541,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
             Name,
             ProductType,
             Quantity,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -554,7 +567,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                             "name" => Ok(GeneratedField::Name),
                             "productType" | "product_type" => Ok(GeneratedField::ProductType),
                             "quantity" => Ok(GeneratedField::Quantity),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -605,6 +618,9 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(EtfPdfConstituent {
@@ -626,42 +642,42 @@ impl serde::Serialize for FuturesBasedNav {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.last_nav.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.prior_day_nav.is_empty() {
+        if true {
             len += 1;
         }
-        if self.leverage_multiplier != 0. {
+        if true {
             len += 1;
         }
-        if !self.futures_symbol.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.futures_prior_day_price.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.futures_last_price.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.FuturesBasedNav", len)?;
-        if !self.last_nav.is_empty() {
-            struct_ser.serialize_field("lastNav", &self.last_nav)?;
+        if true {
+            struct_ser.serialize_field("last_nav", &self.last_nav)?;
         }
-        if !self.prior_day_nav.is_empty() {
-            struct_ser.serialize_field("priorDayNav", &self.prior_day_nav)?;
+        if true {
+            struct_ser.serialize_field("prior_day_nav", &self.prior_day_nav)?;
         }
-        if self.leverage_multiplier != 0. {
-            struct_ser.serialize_field("leverageMultiplier", &self.leverage_multiplier)?;
+        if true {
+            struct_ser.serialize_field("leverage_multiplier", &self.leverage_multiplier)?;
         }
-        if !self.futures_symbol.is_empty() {
-            struct_ser.serialize_field("futuresSymbol", &self.futures_symbol)?;
+        if true {
+            struct_ser.serialize_field("futures_symbol", &self.futures_symbol)?;
         }
-        if !self.futures_prior_day_price.is_empty() {
-            struct_ser.serialize_field("futuresPriorDayPrice", &self.futures_prior_day_price)?;
+        if true {
+            struct_ser.serialize_field("futures_prior_day_price", &self.futures_prior_day_price)?;
         }
-        if !self.futures_last_price.is_empty() {
-            struct_ser.serialize_field("futuresLastPrice", &self.futures_last_price)?;
+        if true {
+            struct_ser.serialize_field("futures_last_price", &self.futures_last_price)?;
         }
         struct_ser.end()
     }
@@ -695,6 +711,7 @@ impl<'de> serde::Deserialize<'de> for FuturesBasedNav {
             FuturesSymbol,
             FuturesPriorDayPrice,
             FuturesLastPrice,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -722,7 +739,7 @@ impl<'de> serde::Deserialize<'de> for FuturesBasedNav {
                             "futuresSymbol" | "futures_symbol" => Ok(GeneratedField::FuturesSymbol),
                             "futuresPriorDayPrice" | "futures_prior_day_price" => Ok(GeneratedField::FuturesPriorDayPrice),
                             "futuresLastPrice" | "futures_last_price" => Ok(GeneratedField::FuturesLastPrice),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -787,6 +804,9 @@ impl<'de> serde::Deserialize<'de> for FuturesBasedNav {
                             }
                             futures_last_price__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(FuturesBasedNav {
@@ -810,11 +830,11 @@ impl serde::Serialize for GetEtfRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.GetEtfRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
         struct_ser.end()
@@ -833,6 +853,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfRequest {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Etf,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -855,7 +876,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfRequest {
                     {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -883,6 +904,9 @@ impl<'de> serde::Deserialize<'de> for GetEtfRequest {
                             }
                             etf__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(GetEtfRequest {
@@ -901,23 +925,23 @@ impl serde::Serialize for ListEtfsRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.page_size.is_some() {
+        if true {
             len += 1;
         }
-        if self.page_token.is_some() {
+        if true {
             len += 1;
         }
-        if !self.filter.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.ListEtfsRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
-            struct_ser.serialize_field("pageSize", v)?;
+            struct_ser.serialize_field("page_size", v)?;
         }
         if let Some(v) = self.page_token.as_ref() {
-            struct_ser.serialize_field("pageToken", v)?;
+            struct_ser.serialize_field("page_token", v)?;
         }
-        if !self.filter.is_empty() {
+        if true {
             struct_ser.serialize_field("filter", &self.filter)?;
         }
         struct_ser.end()
@@ -942,6 +966,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfsRequest {
             PageSize,
             PageToken,
             Filter,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -966,7 +991,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfsRequest {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1010,6 +1035,9 @@ impl<'de> serde::Deserialize<'de> for ListEtfsRequest {
                             }
                             filter__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListEtfsRequest {
@@ -1030,18 +1058,18 @@ impl serde::Serialize for ListEtfsResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etfs.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.next_page_token.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.ListEtfsResponse", len)?;
-        if !self.etfs.is_empty() {
+        if true {
             struct_ser.serialize_field("etfs", &self.etfs)?;
         }
-        if !self.next_page_token.is_empty() {
-            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
         }
         struct_ser.end()
     }
@@ -1062,6 +1090,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfsResponse {
         enum GeneratedField {
             Etfs,
             NextPageToken,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1085,7 +1114,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfsResponse {
                         match value {
                             "etfs" => Ok(GeneratedField::Etfs),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1120,6 +1149,9 @@ impl<'de> serde::Deserialize<'de> for ListEtfsResponse {
                             }
                             next_page_token__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListEtfsResponse {
@@ -1139,17 +1171,17 @@ impl serde::Serialize for PhysicalNav {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.last_nav.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.constituents.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.PhysicalNav", len)?;
-        if !self.last_nav.is_empty() {
-            struct_ser.serialize_field("lastNav", &self.last_nav)?;
+        if true {
+            struct_ser.serialize_field("last_nav", &self.last_nav)?;
         }
-        if !self.constituents.is_empty() {
+        if true {
             struct_ser.serialize_field("constituents", &self.constituents)?;
         }
         struct_ser.end()
@@ -1171,6 +1203,7 @@ impl<'de> serde::Deserialize<'de> for PhysicalNav {
         enum GeneratedField {
             LastNav,
             Constituents,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1194,7 +1227,7 @@ impl<'de> serde::Deserialize<'de> for PhysicalNav {
                         match value {
                             "lastNav" | "last_nav" => Ok(GeneratedField::LastNav),
                             "constituents" => Ok(GeneratedField::Constituents),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1230,6 +1263,9 @@ impl<'de> serde::Deserialize<'de> for PhysicalNav {
                             constituents__ = Some(
                                 map_.next_value::<std::collections::HashMap<_, _>>()?
                             );
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }

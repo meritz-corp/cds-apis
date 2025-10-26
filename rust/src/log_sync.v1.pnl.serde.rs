@@ -7,23 +7,23 @@ impl serde::Serialize for ListPnlSummariesRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.page_size != 0 {
+        if true {
             len += 1;
         }
-        if !self.page_token.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.filter.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.pnl.ListPnlSummariesRequest", len)?;
-        if self.page_size != 0 {
-            struct_ser.serialize_field("pageSize", &self.page_size)?;
+        if true {
+            struct_ser.serialize_field("page_size", &self.page_size)?;
         }
-        if !self.page_token.is_empty() {
-            struct_ser.serialize_field("pageToken", &self.page_token)?;
+        if true {
+            struct_ser.serialize_field("page_token", &self.page_token)?;
         }
-        if !self.filter.is_empty() {
+        if true {
             struct_ser.serialize_field("filter", &self.filter)?;
         }
         struct_ser.end()
@@ -48,6 +48,7 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesRequest {
             PageSize,
             PageToken,
             Filter,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -72,7 +73,7 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesRequest {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -116,6 +117,9 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesRequest {
                             }
                             filter__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListPnlSummariesRequest {
@@ -136,18 +140,18 @@ impl serde::Serialize for ListPnlSummariesResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.summaries.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.next_page_token.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.pnl.ListPnlSummariesResponse", len)?;
-        if !self.summaries.is_empty() {
+        if true {
             struct_ser.serialize_field("summaries", &self.summaries)?;
         }
-        if !self.next_page_token.is_empty() {
-            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
         }
         struct_ser.end()
     }
@@ -168,6 +172,7 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesResponse {
         enum GeneratedField {
             Summaries,
             NextPageToken,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -191,7 +196,7 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesResponse {
                         match value {
                             "summaries" => Ok(GeneratedField::Summaries),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -225,6 +230,9 @@ impl<'de> serde::Deserialize<'de> for ListPnlSummariesResponse {
                                 return Err(serde::de::Error::duplicate_field("nextPageToken"));
                             }
                             next_page_token__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
@@ -325,48 +333,48 @@ impl serde::Serialize for PnlSummary {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.period_type != 0 {
+        if true {
             len += 1;
         }
-        if !self.trade_date.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.total_pnl.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.total_volume.is_empty() {
+        if true {
             len += 1;
         }
-        if self.total_transactions != 0 {
+        if true {
             len += 1;
         }
-        if self.record_count != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("log_sync.v1.pnl.PnlSummary", len)?;
-        if self.period_type != 0 {
+        if true {
             let v = PeriodType::try_from(self.period_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.period_type)))?;
-            struct_ser.serialize_field("periodType", &v)?;
+            struct_ser.serialize_field("period_type", &v)?;
         }
-        if !self.trade_date.is_empty() {
-            struct_ser.serialize_field("tradeDate", &self.trade_date)?;
+        if true {
+            struct_ser.serialize_field("trade_date", &self.trade_date)?;
         }
-        if !self.total_pnl.is_empty() {
-            struct_ser.serialize_field("totalPnl", &self.total_pnl)?;
+        if true {
+            struct_ser.serialize_field("total_pnl", &self.total_pnl)?;
         }
-        if !self.total_volume.is_empty() {
-            struct_ser.serialize_field("totalVolume", &self.total_volume)?;
+        if true {
+            struct_ser.serialize_field("total_volume", &self.total_volume)?;
         }
-        if self.total_transactions != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("totalTransactions", ToString::to_string(&self.total_transactions).as_str())?;
+            struct_ser.serialize_field("total_transactions", ToString::to_string(&self.total_transactions).as_str())?;
         }
-        if self.record_count != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("recordCount", ToString::to_string(&self.record_count).as_str())?;
+            struct_ser.serialize_field("record_count", ToString::to_string(&self.record_count).as_str())?;
         }
         struct_ser.end()
     }
@@ -400,6 +408,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
             TotalVolume,
             TotalTransactions,
             RecordCount,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -427,7 +436,7 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                             "totalVolume" | "total_volume" => Ok(GeneratedField::TotalVolume),
                             "totalTransactions" | "total_transactions" => Ok(GeneratedField::TotalTransactions),
                             "recordCount" | "record_count" => Ok(GeneratedField::RecordCount),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -493,6 +502,9 @@ impl<'de> serde::Deserialize<'de> for PnlSummary {
                             record_count__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }

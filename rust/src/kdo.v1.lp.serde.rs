@@ -185,64 +185,64 @@ impl serde::Serialize for EtfLp {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.symbol.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund_code.is_empty() {
+        if true {
             len += 1;
         }
-        if self.bid_offset != 0 {
+        if true {
             len += 1;
         }
-        if self.ask_offset != 0 {
+        if true {
             len += 1;
         }
-        if self.basis != 0 {
+        if true {
             len += 1;
         }
-        if self.quantity != 0 {
+        if true {
             len += 1;
         }
-        if self.depth != 0 {
+        if true {
             len += 1;
         }
-        if self.tick_size != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
-        if !self.symbol.is_empty() {
+        if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if !self.fund_code.is_empty() {
-            struct_ser.serialize_field("fundCode", &self.fund_code)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
-        if self.bid_offset != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bidOffset", ToString::to_string(&self.bid_offset).as_str())?;
+            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
         }
-        if self.ask_offset != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("askOffset", ToString::to_string(&self.ask_offset).as_str())?;
+            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
-        if self.basis != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
         }
-        if self.quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
-        if self.depth != 0 {
+        if true {
             struct_ser.serialize_field("depth", &self.depth)?;
         }
-        if self.tick_size != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("tickSize", ToString::to_string(&self.tick_size).as_str())?;
+            struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
         }
         struct_ser.end()
     }
@@ -278,6 +278,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             Quantity,
             Depth,
             TickSize,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -307,7 +308,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -396,6 +397,9 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(EtfLp {
@@ -421,48 +425,48 @@ impl serde::Serialize for EtfLpError {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.symbol.is_empty() {
+        if true {
             len += 1;
         }
-        if self.thread_type != 0 {
+        if true {
             len += 1;
         }
-        if self.error_type != 0 {
+        if true {
             len += 1;
         }
-        if !self.error_message.is_empty() {
+        if true {
             len += 1;
         }
-        if self.timestamp.is_some() {
+        if true {
             len += 1;
         }
-        if self.error_level != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpError", len)?;
-        if !self.symbol.is_empty() {
+        if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
-        if self.thread_type != 0 {
+        if true {
             let v = ThreadType::try_from(self.thread_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.thread_type)))?;
-            struct_ser.serialize_field("threadType", &v)?;
+            struct_ser.serialize_field("thread_type", &v)?;
         }
-        if self.error_type != 0 {
+        if true {
             let v = ErrorType::try_from(self.error_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.error_type)))?;
-            struct_ser.serialize_field("errorType", &v)?;
+            struct_ser.serialize_field("error_type", &v)?;
         }
-        if !self.error_message.is_empty() {
-            struct_ser.serialize_field("errorMessage", &self.error_message)?;
+        if true {
+            struct_ser.serialize_field("error_message", &self.error_message)?;
         }
         if let Some(v) = self.timestamp.as_ref() {
             struct_ser.serialize_field("timestamp", v)?;
         }
-        if self.error_level != 0 {
+        if true {
             let v = ErrorLevel::try_from(self.error_level)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.error_level)))?;
-            struct_ser.serialize_field("errorLevel", &v)?;
+            struct_ser.serialize_field("error_level", &v)?;
         }
         struct_ser.end()
     }
@@ -494,6 +498,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
             ErrorMessage,
             Timestamp,
             ErrorLevel,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -521,7 +526,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                             "errorMessage" | "error_message" => Ok(GeneratedField::ErrorMessage),
                             "timestamp" => Ok(GeneratedField::Timestamp),
                             "errorLevel" | "error_level" => Ok(GeneratedField::ErrorLevel),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -583,6 +588,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                                 return Err(serde::de::Error::duplicate_field("errorLevel"));
                             }
                             error_level__ = Some(map_.next_value::<ErrorLevel>()? as i32);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
@@ -687,37 +695,37 @@ impl serde::Serialize for EtfLpStatus {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.state != 0 {
+        if true {
             len += 1;
         }
-        if self.start_time != 0 {
+        if true {
             len += 1;
         }
-        if self.order_stats.is_some() {
+        if true {
             len += 1;
         }
-        if self.order_limit.is_some() {
+        if true {
             len += 1;
         }
-        if self.pricing.is_some() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
-        if self.state != 0 {
+        if true {
             let v = EtfLpState::try_from(self.state)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
             struct_ser.serialize_field("state", &v)?;
         }
-        if self.start_time != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("startTime", ToString::to_string(&self.start_time).as_str())?;
+            struct_ser.serialize_field("start_time", ToString::to_string(&self.start_time).as_str())?;
         }
         if let Some(v) = self.order_stats.as_ref() {
-            struct_ser.serialize_field("orderStats", v)?;
+            struct_ser.serialize_field("order_stats", v)?;
         }
         if let Some(v) = self.order_limit.as_ref() {
-            struct_ser.serialize_field("orderLimit", v)?;
+            struct_ser.serialize_field("order_limit", v)?;
         }
         if let Some(v) = self.pricing.as_ref() {
             struct_ser.serialize_field("pricing", v)?;
@@ -749,6 +757,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             OrderStats,
             OrderLimit,
             Pricing,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -775,7 +784,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "orderStats" | "order_stats" => Ok(GeneratedField::OrderStats),
                             "orderLimit" | "order_limit" => Ok(GeneratedField::OrderLimit),
                             "pricing" => Ok(GeneratedField::Pricing),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -833,6 +842,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             pricing__ = map_.next_value()?;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(EtfLpStatus {
@@ -855,17 +867,17 @@ impl serde::Serialize for GetEtfLpRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetEtfLpRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         struct_ser.end()
@@ -886,6 +898,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpRequest {
         enum GeneratedField {
             Etf,
             Fund,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -909,7 +922,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -944,6 +957,9 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(GetEtfLpRequest {
@@ -963,17 +979,17 @@ impl serde::Serialize for GetEtfLpStatusRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetEtfLpStatusRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         struct_ser.end()
@@ -994,6 +1010,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusRequest {
         enum GeneratedField {
             Etf,
             Fund,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1017,7 +1034,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1052,6 +1069,9 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(GetEtfLpStatusRequest {
@@ -1071,17 +1091,17 @@ impl serde::Serialize for GetUserOrderBookRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetUserOrderBookRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         struct_ser.end()
@@ -1102,6 +1122,7 @@ impl<'de> serde::Deserialize<'de> for GetUserOrderBookRequest {
         enum GeneratedField {
             Etf,
             Fund,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1125,7 +1146,7 @@ impl<'de> serde::Deserialize<'de> for GetUserOrderBookRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1160,6 +1181,9 @@ impl<'de> serde::Deserialize<'de> for GetUserOrderBookRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(GetUserOrderBookRequest {
@@ -1179,23 +1203,23 @@ impl serde::Serialize for ListEtfLpsRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.page_size.is_some() {
+        if true {
             len += 1;
         }
-        if self.page_token.is_some() {
+        if true {
             len += 1;
         }
-        if !self.filter.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListEtfLpsRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
-            struct_ser.serialize_field("pageSize", v)?;
+            struct_ser.serialize_field("page_size", v)?;
         }
         if let Some(v) = self.page_token.as_ref() {
-            struct_ser.serialize_field("pageToken", v)?;
+            struct_ser.serialize_field("page_token", v)?;
         }
-        if !self.filter.is_empty() {
+        if true {
             struct_ser.serialize_field("filter", &self.filter)?;
         }
         struct_ser.end()
@@ -1220,6 +1244,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsRequest {
             PageSize,
             PageToken,
             Filter,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1244,7 +1269,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsRequest {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1288,6 +1313,9 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsRequest {
                             }
                             filter__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListEtfLpsRequest {
@@ -1308,18 +1336,18 @@ impl serde::Serialize for ListEtfLpsResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf_lps.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.next_page_token.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListEtfLpsResponse", len)?;
-        if !self.etf_lps.is_empty() {
-            struct_ser.serialize_field("etfLps", &self.etf_lps)?;
+        if true {
+            struct_ser.serialize_field("etf_lps", &self.etf_lps)?;
         }
-        if !self.next_page_token.is_empty() {
-            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
         }
         struct_ser.end()
     }
@@ -1341,6 +1369,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsResponse {
         enum GeneratedField {
             EtfLps,
             NextPageToken,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1364,7 +1393,7 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsResponse {
                         match value {
                             "etfLps" | "etf_lps" => Ok(GeneratedField::EtfLps),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1399,6 +1428,9 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsResponse {
                             }
                             next_page_token__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListEtfLpsResponse {
@@ -1418,24 +1450,24 @@ impl serde::Serialize for LpPricing {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf_price.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.future_price.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.etf_nav.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.LpPricing", len)?;
-        if !self.etf_price.is_empty() {
-            struct_ser.serialize_field("etfPrice", &self.etf_price)?;
+        if true {
+            struct_ser.serialize_field("etf_price", &self.etf_price)?;
         }
-        if !self.future_price.is_empty() {
-            struct_ser.serialize_field("futurePrice", &self.future_price)?;
+        if true {
+            struct_ser.serialize_field("future_price", &self.future_price)?;
         }
-        if !self.etf_nav.is_empty() {
-            struct_ser.serialize_field("etfNav", &self.etf_nav)?;
+        if true {
+            struct_ser.serialize_field("etf_nav", &self.etf_nav)?;
         }
         struct_ser.end()
     }
@@ -1460,6 +1492,7 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
             EtfPrice,
             FuturePrice,
             EtfNav,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1484,7 +1517,7 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                             "etfPrice" | "etf_price" => Ok(GeneratedField::EtfPrice),
                             "futurePrice" | "future_price" => Ok(GeneratedField::FuturePrice),
                             "etfNav" | "etf_nav" => Ok(GeneratedField::EtfNav),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1526,6 +1559,9 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                             }
                             etf_nav__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(LpPricing {
@@ -1546,34 +1582,34 @@ impl serde::Serialize for OrderLimitStatus {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.daily_filled_quantity != 0 {
+        if true {
             len += 1;
         }
-        if self.daily_cumulative_limit != 0 {
+        if true {
             len += 1;
         }
-        if !self.time_frame_status.is_empty() {
+        if true {
             len += 1;
         }
-        if self.daily_usage_percent != 0. {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.OrderLimitStatus", len)?;
-        if self.daily_filled_quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("dailyFilledQuantity", ToString::to_string(&self.daily_filled_quantity).as_str())?;
+            struct_ser.serialize_field("daily_filled_quantity", ToString::to_string(&self.daily_filled_quantity).as_str())?;
         }
-        if self.daily_cumulative_limit != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("dailyCumulativeLimit", ToString::to_string(&self.daily_cumulative_limit).as_str())?;
+            struct_ser.serialize_field("daily_cumulative_limit", ToString::to_string(&self.daily_cumulative_limit).as_str())?;
         }
-        if !self.time_frame_status.is_empty() {
-            struct_ser.serialize_field("timeFrameStatus", &self.time_frame_status)?;
+        if true {
+            struct_ser.serialize_field("time_frame_status", &self.time_frame_status)?;
         }
-        if self.daily_usage_percent != 0. {
-            struct_ser.serialize_field("dailyUsagePercent", &self.daily_usage_percent)?;
+        if true {
+            struct_ser.serialize_field("daily_usage_percent", &self.daily_usage_percent)?;
         }
         struct_ser.end()
     }
@@ -1601,6 +1637,7 @@ impl<'de> serde::Deserialize<'de> for OrderLimitStatus {
             DailyCumulativeLimit,
             TimeFrameStatus,
             DailyUsagePercent,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1626,7 +1663,7 @@ impl<'de> serde::Deserialize<'de> for OrderLimitStatus {
                             "dailyCumulativeLimit" | "daily_cumulative_limit" => Ok(GeneratedField::DailyCumulativeLimit),
                             "timeFrameStatus" | "time_frame_status" => Ok(GeneratedField::TimeFrameStatus),
                             "dailyUsagePercent" | "daily_usage_percent" => Ok(GeneratedField::DailyUsagePercent),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1681,6 +1718,9 @@ impl<'de> serde::Deserialize<'de> for OrderLimitStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(OrderLimitStatus {
@@ -1702,54 +1742,54 @@ impl serde::Serialize for OrderStats {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.total_orders_sent != 0 {
+        if true {
             len += 1;
         }
-        if self.orders_accepted != 0 {
+        if true {
             len += 1;
         }
-        if self.orders_rejected != 0 {
+        if true {
             len += 1;
         }
-        if self.orders_filled != 0 {
+        if true {
             len += 1;
         }
-        if self.total_filled_quantity != 0 {
+        if true {
             len += 1;
         }
-        if self.daily_filled_quantity != 0 {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.OrderStats", len)?;
-        if self.total_orders_sent != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("totalOrdersSent", ToString::to_string(&self.total_orders_sent).as_str())?;
+            struct_ser.serialize_field("total_orders_sent", ToString::to_string(&self.total_orders_sent).as_str())?;
         }
-        if self.orders_accepted != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ordersAccepted", ToString::to_string(&self.orders_accepted).as_str())?;
+            struct_ser.serialize_field("orders_accepted", ToString::to_string(&self.orders_accepted).as_str())?;
         }
-        if self.orders_rejected != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ordersRejected", ToString::to_string(&self.orders_rejected).as_str())?;
+            struct_ser.serialize_field("orders_rejected", ToString::to_string(&self.orders_rejected).as_str())?;
         }
-        if self.orders_filled != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ordersFilled", ToString::to_string(&self.orders_filled).as_str())?;
+            struct_ser.serialize_field("orders_filled", ToString::to_string(&self.orders_filled).as_str())?;
         }
-        if self.total_filled_quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("totalFilledQuantity", ToString::to_string(&self.total_filled_quantity).as_str())?;
+            struct_ser.serialize_field("total_filled_quantity", ToString::to_string(&self.total_filled_quantity).as_str())?;
         }
-        if self.daily_filled_quantity != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("dailyFilledQuantity", ToString::to_string(&self.daily_filled_quantity).as_str())?;
+            struct_ser.serialize_field("daily_filled_quantity", ToString::to_string(&self.daily_filled_quantity).as_str())?;
         }
         struct_ser.end()
     }
@@ -1783,6 +1823,7 @@ impl<'de> serde::Deserialize<'de> for OrderStats {
             OrdersFilled,
             TotalFilledQuantity,
             DailyFilledQuantity,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1810,7 +1851,7 @@ impl<'de> serde::Deserialize<'de> for OrderStats {
                             "ordersFilled" | "orders_filled" => Ok(GeneratedField::OrdersFilled),
                             "totalFilledQuantity" | "total_filled_quantity" => Ok(GeneratedField::TotalFilledQuantity),
                             "dailyFilledQuantity" | "daily_filled_quantity" => Ok(GeneratedField::DailyFilledQuantity),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -1884,6 +1925,9 @@ impl<'de> serde::Deserialize<'de> for OrderStats {
                             daily_filled_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
@@ -1985,17 +2029,17 @@ impl serde::Serialize for StartEtfLpRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StartEtfLpRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         struct_ser.end()
@@ -2016,6 +2060,7 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
         enum GeneratedField {
             Etf,
             Fund,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2039,7 +2084,7 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2074,6 +2119,9 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(StartEtfLpRequest {
@@ -2093,17 +2141,17 @@ impl serde::Serialize for StartEtfLpResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.status.is_some() {
+        if true {
             len += 1;
         }
-        if !self.message.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StartEtfLpResponse", len)?;
         if let Some(v) = self.status.as_ref() {
             struct_ser.serialize_field("status", v)?;
         }
-        if !self.message.is_empty() {
+        if true {
             struct_ser.serialize_field("message", &self.message)?;
         }
         struct_ser.end()
@@ -2124,6 +2172,7 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpResponse {
         enum GeneratedField {
             Status,
             Message,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2147,7 +2196,7 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpResponse {
                         match value {
                             "status" => Ok(GeneratedField::Status),
                             "message" => Ok(GeneratedField::Message),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2182,6 +2231,9 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpResponse {
                             }
                             message__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(StartEtfLpResponse {
@@ -2201,17 +2253,17 @@ impl serde::Serialize for StopEtfLpRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StopEtfLpRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         struct_ser.end()
@@ -2232,6 +2284,7 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpRequest {
         enum GeneratedField {
             Etf,
             Fund,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2255,7 +2308,7 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2290,6 +2343,9 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(StopEtfLpRequest {
@@ -2309,17 +2365,17 @@ impl serde::Serialize for StopEtfLpResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.status.is_some() {
+        if true {
             len += 1;
         }
-        if !self.message.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StopEtfLpResponse", len)?;
         if let Some(v) = self.status.as_ref() {
             struct_ser.serialize_field("status", v)?;
         }
-        if !self.message.is_empty() {
+        if true {
             struct_ser.serialize_field("message", &self.message)?;
         }
         struct_ser.end()
@@ -2340,6 +2396,7 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpResponse {
         enum GeneratedField {
             Status,
             Message,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2363,7 +2420,7 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpResponse {
                         match value {
                             "status" => Ok(GeneratedField::Status),
                             "message" => Ok(GeneratedField::Message),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2398,6 +2455,9 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpResponse {
                             }
                             message__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(StopEtfLpResponse {
@@ -2417,17 +2477,17 @@ impl serde::Serialize for StreamEtfErrorsRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamEtfErrorsRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         struct_ser.end()
@@ -2448,6 +2508,7 @@ impl<'de> serde::Deserialize<'de> for StreamEtfErrorsRequest {
         enum GeneratedField {
             Etf,
             Fund,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2471,7 +2532,7 @@ impl<'de> serde::Deserialize<'de> for StreamEtfErrorsRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2506,6 +2567,9 @@ impl<'de> serde::Deserialize<'de> for StreamEtfErrorsRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(StreamEtfErrorsRequest {
@@ -2525,24 +2589,24 @@ impl serde::Serialize for StreamEtfLpStatusRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.etf.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
-        if self.update_interval_seconds.is_some() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamEtfLpStatusRequest", len)?;
-        if !self.etf.is_empty() {
+        if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         if let Some(v) = self.update_interval_seconds.as_ref() {
-            struct_ser.serialize_field("updateIntervalSeconds", v)?;
+            struct_ser.serialize_field("update_interval_seconds", v)?;
         }
         struct_ser.end()
     }
@@ -2565,6 +2629,7 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
             Etf,
             Fund,
             UpdateIntervalSeconds,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2589,7 +2654,7 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
                             "updateIntervalSeconds" | "update_interval_seconds" => Ok(GeneratedField::UpdateIntervalSeconds),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2632,6 +2697,9 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
                             update_interval_seconds__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
@@ -2727,32 +2795,32 @@ impl serde::Serialize for TimeFrameStatus {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.window_seconds != 0 {
+        if true {
             len += 1;
         }
-        if self.current_count != 0 {
+        if true {
             len += 1;
         }
-        if self.max_orders != 0 {
+        if true {
             len += 1;
         }
-        if self.usage_percent != 0. {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.TimeFrameStatus", len)?;
-        if self.window_seconds != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("windowSeconds", ToString::to_string(&self.window_seconds).as_str())?;
+            struct_ser.serialize_field("window_seconds", ToString::to_string(&self.window_seconds).as_str())?;
         }
-        if self.current_count != 0 {
-            struct_ser.serialize_field("currentCount", &self.current_count)?;
+        if true {
+            struct_ser.serialize_field("current_count", &self.current_count)?;
         }
-        if self.max_orders != 0 {
-            struct_ser.serialize_field("maxOrders", &self.max_orders)?;
+        if true {
+            struct_ser.serialize_field("max_orders", &self.max_orders)?;
         }
-        if self.usage_percent != 0. {
-            struct_ser.serialize_field("usagePercent", &self.usage_percent)?;
+        if true {
+            struct_ser.serialize_field("usage_percent", &self.usage_percent)?;
         }
         struct_ser.end()
     }
@@ -2780,6 +2848,7 @@ impl<'de> serde::Deserialize<'de> for TimeFrameStatus {
             CurrentCount,
             MaxOrders,
             UsagePercent,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2805,7 +2874,7 @@ impl<'de> serde::Deserialize<'de> for TimeFrameStatus {
                             "currentCount" | "current_count" => Ok(GeneratedField::CurrentCount),
                             "maxOrders" | "max_orders" => Ok(GeneratedField::MaxOrders),
                             "usagePercent" | "usage_percent" => Ok(GeneratedField::UsagePercent),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2862,6 +2931,9 @@ impl<'de> serde::Deserialize<'de> for TimeFrameStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(TimeFrameStatus {
@@ -2883,10 +2955,10 @@ impl serde::Serialize for UpdateEtfLpRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.lp.is_some() {
+        if true {
             len += 1;
         }
-        if self.update_mask.is_some() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
@@ -2894,7 +2966,7 @@ impl serde::Serialize for UpdateEtfLpRequest {
             struct_ser.serialize_field("lp", v)?;
         }
         if let Some(v) = self.update_mask.as_ref() {
-            struct_ser.serialize_field("updateMask", v)?;
+            struct_ser.serialize_field("update_mask", v)?;
         }
         struct_ser.end()
     }
@@ -2915,6 +2987,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
         enum GeneratedField {
             Lp,
             UpdateMask,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2938,7 +3011,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                         match value {
                             "lp" => Ok(GeneratedField::Lp),
                             "updateMask" | "update_mask" => Ok(GeneratedField::UpdateMask),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -2973,6 +3046,9 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             }
                             update_mask__ = map_.next_value()?;
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(UpdateEtfLpRequest {
@@ -2992,30 +3068,30 @@ impl serde::Serialize for UserOrderbookData {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.bid_prices.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.ask_prices.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.bid_quantities.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.ask_quantities.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UserOrderbookData", len)?;
-        if !self.bid_prices.is_empty() {
-            struct_ser.serialize_field("bidPrices", &self.bid_prices)?;
+        if true {
+            struct_ser.serialize_field("bid_prices", &self.bid_prices)?;
         }
-        if !self.ask_prices.is_empty() {
-            struct_ser.serialize_field("askPrices", &self.ask_prices)?;
+        if true {
+            struct_ser.serialize_field("ask_prices", &self.ask_prices)?;
         }
-        if !self.bid_quantities.is_empty() {
-            struct_ser.serialize_field("bidQuantities", &self.bid_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+        if true {
+            struct_ser.serialize_field("bid_quantities", &self.bid_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
         }
-        if !self.ask_quantities.is_empty() {
-            struct_ser.serialize_field("askQuantities", &self.ask_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+        if true {
+            struct_ser.serialize_field("ask_quantities", &self.ask_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
         }
         struct_ser.end()
     }
@@ -3043,6 +3119,7 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
             AskPrices,
             BidQuantities,
             AskQuantities,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -3068,7 +3145,7 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
                             "askPrices" | "ask_prices" => Ok(GeneratedField::AskPrices),
                             "bidQuantities" | "bid_quantities" => Ok(GeneratedField::BidQuantities),
                             "askQuantities" | "ask_quantities" => Ok(GeneratedField::AskQuantities),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -3122,6 +3199,9 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
                                 Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
                                     .into_iter().map(|x| x.0).collect())
                             ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }

@@ -7,116 +7,116 @@ impl serde::Serialize for Fund {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.name.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.category_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.employee_number.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.employee_name.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.limit_amount.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.department_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.trade_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.part_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.part_name.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.product_deal_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.add_up_position.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.trading_system_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.unique_trading_unit_code.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.unique_trading_unit_part_code.is_empty() {
+        if true {
             len += 1;
         }
-        if self.unique_trading_unit_serial_number != 0 {
+        if true {
             len += 1;
         }
-        if self.add_up_unique_trading_unit {
+        if true {
             len += 1;
         }
-        if !self.short_selling_id.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.Fund", len)?;
-        if !self.code.is_empty() {
+        if true {
             struct_ser.serialize_field("code", &self.code)?;
         }
-        if !self.name.is_empty() {
+        if true {
             struct_ser.serialize_field("name", &self.name)?;
         }
-        if !self.category_code.is_empty() {
-            struct_ser.serialize_field("categoryCode", &self.category_code)?;
+        if true {
+            struct_ser.serialize_field("category_code", &self.category_code)?;
         }
-        if !self.employee_number.is_empty() {
-            struct_ser.serialize_field("employeeNumber", &self.employee_number)?;
+        if true {
+            struct_ser.serialize_field("employee_number", &self.employee_number)?;
         }
-        if !self.employee_name.is_empty() {
-            struct_ser.serialize_field("employeeName", &self.employee_name)?;
+        if true {
+            struct_ser.serialize_field("employee_name", &self.employee_name)?;
         }
-        if !self.limit_amount.is_empty() {
-            struct_ser.serialize_field("limitAmount", &self.limit_amount)?;
+        if true {
+            struct_ser.serialize_field("limit_amount", &self.limit_amount)?;
         }
-        if !self.department_code.is_empty() {
-            struct_ser.serialize_field("departmentCode", &self.department_code)?;
+        if true {
+            struct_ser.serialize_field("department_code", &self.department_code)?;
         }
-        if !self.trade_code.is_empty() {
-            struct_ser.serialize_field("tradeCode", &self.trade_code)?;
+        if true {
+            struct_ser.serialize_field("trade_code", &self.trade_code)?;
         }
-        if !self.part_code.is_empty() {
-            struct_ser.serialize_field("partCode", &self.part_code)?;
+        if true {
+            struct_ser.serialize_field("part_code", &self.part_code)?;
         }
-        if !self.part_name.is_empty() {
-            struct_ser.serialize_field("partName", &self.part_name)?;
+        if true {
+            struct_ser.serialize_field("part_name", &self.part_name)?;
         }
-        if !self.product_deal_code.is_empty() {
-            struct_ser.serialize_field("productDealCode", &self.product_deal_code)?;
+        if true {
+            struct_ser.serialize_field("product_deal_code", &self.product_deal_code)?;
         }
-        if !self.add_up_position.is_empty() {
-            struct_ser.serialize_field("addUpPosition", &self.add_up_position)?;
+        if true {
+            struct_ser.serialize_field("add_up_position", &self.add_up_position)?;
         }
-        if !self.trading_system_code.is_empty() {
-            struct_ser.serialize_field("tradingSystemCode", &self.trading_system_code)?;
+        if true {
+            struct_ser.serialize_field("trading_system_code", &self.trading_system_code)?;
         }
-        if !self.unique_trading_unit_code.is_empty() {
-            struct_ser.serialize_field("uniqueTradingUnitCode", &self.unique_trading_unit_code)?;
+        if true {
+            struct_ser.serialize_field("unique_trading_unit_code", &self.unique_trading_unit_code)?;
         }
-        if !self.unique_trading_unit_part_code.is_empty() {
-            struct_ser.serialize_field("uniqueTradingUnitPartCode", &self.unique_trading_unit_part_code)?;
+        if true {
+            struct_ser.serialize_field("unique_trading_unit_part_code", &self.unique_trading_unit_part_code)?;
         }
-        if self.unique_trading_unit_serial_number != 0 {
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("uniqueTradingUnitSerialNumber", ToString::to_string(&self.unique_trading_unit_serial_number).as_str())?;
+            struct_ser.serialize_field("unique_trading_unit_serial_number", ToString::to_string(&self.unique_trading_unit_serial_number).as_str())?;
         }
-        if self.add_up_unique_trading_unit {
-            struct_ser.serialize_field("addUpUniqueTradingUnit", &self.add_up_unique_trading_unit)?;
+        if true {
+            struct_ser.serialize_field("add_up_unique_trading_unit", &self.add_up_unique_trading_unit)?;
         }
-        if !self.short_selling_id.is_empty() {
-            struct_ser.serialize_field("shortSellingId", &self.short_selling_id)?;
+        if true {
+            struct_ser.serialize_field("short_selling_id", &self.short_selling_id)?;
         }
         struct_ser.end()
     }
@@ -184,6 +184,7 @@ impl<'de> serde::Deserialize<'de> for Fund {
             UniqueTradingUnitSerialNumber,
             AddUpUniqueTradingUnit,
             ShortSellingId,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -223,7 +224,7 @@ impl<'de> serde::Deserialize<'de> for Fund {
                             "uniqueTradingUnitSerialNumber" | "unique_trading_unit_serial_number" => Ok(GeneratedField::UniqueTradingUnitSerialNumber),
                             "addUpUniqueTradingUnit" | "add_up_unique_trading_unit" => Ok(GeneratedField::AddUpUniqueTradingUnit),
                             "shortSellingId" | "short_selling_id" => Ok(GeneratedField::ShortSellingId),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -372,6 +373,9 @@ impl<'de> serde::Deserialize<'de> for Fund {
                             }
                             short_selling_id__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(Fund {
@@ -407,11 +411,11 @@ impl serde::Serialize for GetFundRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.fund.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.GetFundRequest", len)?;
-        if !self.fund.is_empty() {
+        if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         struct_ser.end()
@@ -430,6 +434,7 @@ impl<'de> serde::Deserialize<'de> for GetFundRequest {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Fund,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -452,7 +457,7 @@ impl<'de> serde::Deserialize<'de> for GetFundRequest {
                     {
                         match value {
                             "fund" => Ok(GeneratedField::Fund),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -480,6 +485,9 @@ impl<'de> serde::Deserialize<'de> for GetFundRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(GetFundRequest {
@@ -498,23 +506,23 @@ impl serde::Serialize for ListFundsRequest {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.page_size.is_some() {
+        if true {
             len += 1;
         }
-        if self.page_token.is_some() {
+        if true {
             len += 1;
         }
-        if !self.filter.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundsRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
-            struct_ser.serialize_field("pageSize", v)?;
+            struct_ser.serialize_field("page_size", v)?;
         }
         if let Some(v) = self.page_token.as_ref() {
-            struct_ser.serialize_field("pageToken", v)?;
+            struct_ser.serialize_field("page_token", v)?;
         }
-        if !self.filter.is_empty() {
+        if true {
             struct_ser.serialize_field("filter", &self.filter)?;
         }
         struct_ser.end()
@@ -539,6 +547,7 @@ impl<'de> serde::Deserialize<'de> for ListFundsRequest {
             PageSize,
             PageToken,
             Filter,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -563,7 +572,7 @@ impl<'de> serde::Deserialize<'de> for ListFundsRequest {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -607,6 +616,9 @@ impl<'de> serde::Deserialize<'de> for ListFundsRequest {
                             }
                             filter__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
                     }
                 }
                 Ok(ListFundsRequest {
@@ -627,18 +639,18 @@ impl serde::Serialize for ListFundsResponse {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.funds.is_empty() {
+        if true {
             len += 1;
         }
-        if !self.next_page_token.is_empty() {
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundsResponse", len)?;
-        if !self.funds.is_empty() {
+        if true {
             struct_ser.serialize_field("funds", &self.funds)?;
         }
-        if !self.next_page_token.is_empty() {
-            struct_ser.serialize_field("nextPageToken", &self.next_page_token)?;
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
         }
         struct_ser.end()
     }
@@ -659,6 +671,7 @@ impl<'de> serde::Deserialize<'de> for ListFundsResponse {
         enum GeneratedField {
             Funds,
             NextPageToken,
+            __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -682,7 +695,7 @@ impl<'de> serde::Deserialize<'de> for ListFundsResponse {
                         match value {
                             "funds" => Ok(GeneratedField::Funds),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                            _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
                 }
@@ -716,6 +729,9 @@ impl<'de> serde::Deserialize<'de> for ListFundsResponse {
                                 return Err(serde::de::Error::duplicate_field("nextPageToken"));
                             }
                             next_page_token__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
