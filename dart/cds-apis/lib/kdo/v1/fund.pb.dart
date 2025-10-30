@@ -38,6 +38,8 @@ class Fund extends $pb.GeneratedMessage {
     $fixnum.Int64? uniqueTradingUnitSerialNumber,
     $core.bool? addUpUniqueTradingUnit,
     $core.String? shortSellingId,
+    FundPnL? pnl,
+    FundExposure? exposure,
   }) {
     final result = create();
     if (code != null) result.code = code;
@@ -58,6 +60,8 @@ class Fund extends $pb.GeneratedMessage {
     if (uniqueTradingUnitSerialNumber != null) result.uniqueTradingUnitSerialNumber = uniqueTradingUnitSerialNumber;
     if (addUpUniqueTradingUnit != null) result.addUpUniqueTradingUnit = addUpUniqueTradingUnit;
     if (shortSellingId != null) result.shortSellingId = shortSellingId;
+    if (pnl != null) result.pnl = pnl;
+    if (exposure != null) result.exposure = exposure;
     return result;
   }
 
@@ -85,6 +89,8 @@ class Fund extends $pb.GeneratedMessage {
     ..aInt64(18, _omitFieldNames ? '' : 'uniqueTradingUnitSerialNumber')
     ..aOB(19, _omitFieldNames ? '' : 'addUpUniqueTradingUnit')
     ..aOS(20, _omitFieldNames ? '' : 'shortSellingId')
+    ..aOM<FundPnL>(21, _omitFieldNames ? '' : 'pnl', subBuilder: FundPnL.create)
+    ..aOM<FundExposure>(22, _omitFieldNames ? '' : 'exposure', subBuilder: FundExposure.create)
     ..hasRequiredFields = false
   ;
 
@@ -284,6 +290,326 @@ class Fund extends $pb.GeneratedMessage {
   $core.bool hasShortSellingId() => $_has(17);
   @$pb.TagNumber(20)
   void clearShortSellingId() => $_clearField(20);
+
+  /// 펀드 손익 정보
+  @$pb.TagNumber(21)
+  FundPnL get pnl => $_getN(18);
+  @$pb.TagNumber(21)
+  set pnl(FundPnL value) => $_setField(21, value);
+  @$pb.TagNumber(21)
+  $core.bool hasPnl() => $_has(18);
+  @$pb.TagNumber(21)
+  void clearPnl() => $_clearField(21);
+  @$pb.TagNumber(21)
+  FundPnL ensurePnl() => $_ensure(18);
+
+  /// 펀드 익스포저 정보
+  @$pb.TagNumber(22)
+  FundExposure get exposure => $_getN(19);
+  @$pb.TagNumber(22)
+  set exposure(FundExposure value) => $_setField(22, value);
+  @$pb.TagNumber(22)
+  $core.bool hasExposure() => $_has(19);
+  @$pb.TagNumber(22)
+  void clearExposure() => $_clearField(22);
+  @$pb.TagNumber(22)
+  FundExposure ensureExposure() => $_ensure(19);
+}
+
+/// 펀드 손익(PnL) 관리
+class FundPnL extends $pb.GeneratedMessage {
+  factory FundPnL({
+    $core.Iterable<PositionPnL>? positions,
+    $fixnum.Int64? dailyPnl,
+    $fixnum.Int64? lastUpdatedAt,
+  }) {
+    final result = create();
+    if (positions != null) result.positions.addAll(positions);
+    if (dailyPnl != null) result.dailyPnl = dailyPnl;
+    if (lastUpdatedAt != null) result.lastUpdatedAt = lastUpdatedAt;
+    return result;
+  }
+
+  FundPnL._();
+
+  factory FundPnL.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FundPnL.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FundPnL', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..pc<PositionPnL>(1, _omitFieldNames ? '' : 'positions', $pb.PbFieldType.PM, subBuilder: PositionPnL.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'dailyPnl')
+    ..aInt64(3, _omitFieldNames ? '' : 'lastUpdatedAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundPnL clone() => FundPnL()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundPnL copyWith(void Function(FundPnL) updates) => super.copyWith((message) => updates(message as FundPnL)) as FundPnL;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FundPnL create() => FundPnL._();
+  @$core.override
+  FundPnL createEmptyInstance() => create();
+  static $pb.PbList<FundPnL> createRepeated() => $pb.PbList<FundPnL>();
+  @$core.pragma('dart2js:noInline')
+  static FundPnL getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FundPnL>(create);
+  static FundPnL? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<PositionPnL> get positions => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get dailyPnl => $_getI64(1);
+  @$pb.TagNumber(2)
+  set dailyPnl($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDailyPnl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDailyPnl() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get lastUpdatedAt => $_getI64(2);
+  @$pb.TagNumber(3)
+  set lastUpdatedAt($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLastUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastUpdatedAt() => $_clearField(3);
+}
+
+/// 종목별 포지션 PnL
+class PositionPnL extends $pb.GeneratedMessage {
+  factory PositionPnL({
+    $core.String? symbol,
+    $core.double? averageBuyPrice,
+    $fixnum.Int64? quantity,
+    $fixnum.Int64? realizedPnl,
+    $fixnum.Int64? tradingCost,
+    $fixnum.Int64? lastUpdatedAt,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (averageBuyPrice != null) result.averageBuyPrice = averageBuyPrice;
+    if (quantity != null) result.quantity = quantity;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
+    if (tradingCost != null) result.tradingCost = tradingCost;
+    if (lastUpdatedAt != null) result.lastUpdatedAt = lastUpdatedAt;
+    return result;
+  }
+
+  PositionPnL._();
+
+  factory PositionPnL.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PositionPnL.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PositionPnL', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'averageBuyPrice', $pb.PbFieldType.OD)
+    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'realizedPnl')
+    ..aInt64(5, _omitFieldNames ? '' : 'tradingCost')
+    ..aInt64(6, _omitFieldNames ? '' : 'lastUpdatedAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PositionPnL clone() => PositionPnL()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PositionPnL copyWith(void Function(PositionPnL) updates) => super.copyWith((message) => updates(message as PositionPnL)) as PositionPnL;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PositionPnL create() => PositionPnL._();
+  @$core.override
+  PositionPnL createEmptyInstance() => create();
+  static $pb.PbList<PositionPnL> createRepeated() => $pb.PbList<PositionPnL>();
+  @$core.pragma('dart2js:noInline')
+  static PositionPnL getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PositionPnL>(create);
+  static PositionPnL? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get averageBuyPrice => $_getN(1);
+  @$pb.TagNumber(2)
+  set averageBuyPrice($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasAverageBuyPrice() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAverageBuyPrice() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get quantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearQuantity() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get realizedPnl => $_getI64(3);
+  @$pb.TagNumber(4)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasRealizedPnl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRealizedPnl() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get tradingCost => $_getI64(4);
+  @$pb.TagNumber(5)
+  set tradingCost($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasTradingCost() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTradingCost() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get lastUpdatedAt => $_getI64(5);
+  @$pb.TagNumber(6)
+  set lastUpdatedAt($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasLastUpdatedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearLastUpdatedAt() => $_clearField(6);
+}
+
+/// 펀드 익스포저(Exposure) 관리
+class FundExposure extends $pb.GeneratedMessage {
+  factory FundExposure({
+    $core.Iterable<PositionExposure>? positions,
+    $fixnum.Int64? lastUpdatedAt,
+  }) {
+    final result = create();
+    if (positions != null) result.positions.addAll(positions);
+    if (lastUpdatedAt != null) result.lastUpdatedAt = lastUpdatedAt;
+    return result;
+  }
+
+  FundExposure._();
+
+  factory FundExposure.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FundExposure.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FundExposure', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..pc<PositionExposure>(1, _omitFieldNames ? '' : 'positions', $pb.PbFieldType.PM, subBuilder: PositionExposure.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'lastUpdatedAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundExposure clone() => FundExposure()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundExposure copyWith(void Function(FundExposure) updates) => super.copyWith((message) => updates(message as FundExposure)) as FundExposure;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FundExposure create() => FundExposure._();
+  @$core.override
+  FundExposure createEmptyInstance() => create();
+  static $pb.PbList<FundExposure> createRepeated() => $pb.PbList<FundExposure>();
+  @$core.pragma('dart2js:noInline')
+  static FundExposure getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FundExposure>(create);
+  static FundExposure? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<PositionExposure> get positions => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get lastUpdatedAt => $_getI64(1);
+  @$pb.TagNumber(2)
+  set lastUpdatedAt($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLastUpdatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLastUpdatedAt() => $_clearField(2);
+}
+
+/// 종목별 포지션 익스포저
+class PositionExposure extends $pb.GeneratedMessage {
+  factory PositionExposure({
+    $core.String? symbol,
+    $fixnum.Int64? quantity,
+    $fixnum.Int64? lastUpdatedAt,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (quantity != null) result.quantity = quantity;
+    if (lastUpdatedAt != null) result.lastUpdatedAt = lastUpdatedAt;
+    return result;
+  }
+
+  PositionExposure._();
+
+  factory PositionExposure.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PositionExposure.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PositionExposure', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'lastUpdatedAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PositionExposure clone() => PositionExposure()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PositionExposure copyWith(void Function(PositionExposure) updates) => super.copyWith((message) => updates(message as PositionExposure)) as PositionExposure;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PositionExposure create() => PositionExposure._();
+  @$core.override
+  PositionExposure createEmptyInstance() => create();
+  static $pb.PbList<PositionExposure> createRepeated() => $pb.PbList<PositionExposure>();
+  @$core.pragma('dart2js:noInline')
+  static PositionExposure getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PositionExposure>(create);
+  static PositionExposure? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get quantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearQuantity() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get lastUpdatedAt => $_getI64(2);
+  @$pb.TagNumber(3)
+  set lastUpdatedAt($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLastUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastUpdatedAt() => $_clearField(3);
 }
 
 /// GetFund 요청

@@ -66,7 +66,42 @@ message Fund {
   bool add_up_unique_trading_unit = 19;
   // 공매도ID
   string short_selling_id = 20;
+  // 펀드 손익 정보
+  FundPnL pnl = 21;
+  // 펀드 익스포저 정보
+  FundExposure exposure = 22;
 }
+
+// 펀드 손익(PnL) 관리
+message FundPnL {
+  repeated PositionPnL positions = 1;  // 종목별 포지션 PnL 목록
+  int64 daily_pnl = 2;                 // 일일 손익
+  int64 last_updated_at = 3;           // 마지막 업데이트 시각 (Unix timestamp micros)
+}
+
+// 종목별 포지션 PnL
+message PositionPnL {
+  string symbol = 1;              // 종목 코드
+  double average_buy_price = 2;   // 평균 매입가
+  int64 quantity = 3;             // 보유 수량
+  int64 realized_pnl = 4;         // 실현 손익
+  int64 trading_cost = 5;         // 거래 비용
+  int64 last_updated_at = 6;      // 마지막 업데이트 시각 (Unix timestamp micros)
+}
+
+// 펀드 익스포저(Exposure) 관리
+message FundExposure {
+  repeated PositionExposure positions = 1;  // 종목별 포지션 수량 목록
+  int64 last_updated_at = 2;                // 마지막 업데이트 시각 (Unix timestamp micros)
+}
+
+// 종목별 포지션 익스포저
+message PositionExposure {
+  string symbol = 1;          // 종목 코드
+  int64 quantity = 2;         // 보유 수량
+  int64 last_updated_at = 3;  // 마지막 업데이트 시각 (Unix timestamp micros)
+}
+
 
 // ========== Request/Response Messages ==========
 

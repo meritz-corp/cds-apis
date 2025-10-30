@@ -58,6 +58,74 @@ pub struct Fund {
     /// 공매도ID
     #[prost(string, tag="20")]
     pub short_selling_id: ::prost::alloc::string::String,
+    /// 펀드 손익 정보
+    #[prost(message, optional, tag="21")]
+    pub pnl: ::core::option::Option<FundPnL>,
+    /// 펀드 익스포저 정보
+    #[prost(message, optional, tag="22")]
+    pub exposure: ::core::option::Option<FundExposure>,
+}
+/// 펀드 손익(PnL) 관리
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FundPnL {
+    /// 종목별 포지션 PnL 목록
+    #[prost(message, repeated, tag="1")]
+    pub positions: ::prost::alloc::vec::Vec<PositionPnL>,
+    /// 일일 손익
+    #[prost(int64, tag="2")]
+    pub daily_pnl: i64,
+    /// 마지막 업데이트 시각 (Unix timestamp micros)
+    #[prost(int64, tag="3")]
+    pub last_updated_at: i64,
+}
+/// 종목별 포지션 PnL
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PositionPnL {
+    /// 종목 코드
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 평균 매입가
+    #[prost(double, tag="2")]
+    pub average_buy_price: f64,
+    /// 보유 수량
+    #[prost(int64, tag="3")]
+    pub quantity: i64,
+    /// 실현 손익
+    #[prost(int64, tag="4")]
+    pub realized_pnl: i64,
+    /// 거래 비용
+    #[prost(int64, tag="5")]
+    pub trading_cost: i64,
+    /// 마지막 업데이트 시각 (Unix timestamp micros)
+    #[prost(int64, tag="6")]
+    pub last_updated_at: i64,
+}
+/// 펀드 익스포저(Exposure) 관리
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FundExposure {
+    /// 종목별 포지션 수량 목록
+    #[prost(message, repeated, tag="1")]
+    pub positions: ::prost::alloc::vec::Vec<PositionExposure>,
+    /// 마지막 업데이트 시각 (Unix timestamp micros)
+    #[prost(int64, tag="2")]
+    pub last_updated_at: i64,
+}
+/// 종목별 포지션 익스포저
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PositionExposure {
+    /// 종목 코드
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 보유 수량
+    #[prost(int64, tag="2")]
+    pub quantity: i64,
+    /// 마지막 업데이트 시각 (Unix timestamp micros)
+    #[prost(int64, tag="3")]
+    pub last_updated_at: i64,
 }
 // ========== Request/Response Messages ==========
 
