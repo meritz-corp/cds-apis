@@ -1,0 +1,171 @@
+syntax = "proto3";
+
+package kdo.v1.order_log;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// OrderLogService는 펀드 관련 서비스를 제공합니다.
+service OrderLogService {
+  // 주문 로그 조회
+  rpc ListOrderLogs(ListOrderLogsRequest) returns (ListOrderLogsResponse) {
+    option (google.api.http) = {
+      get: "/v1/order_logs"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 주문 로그 조회
+  rpc StreamOrderLogs(ListOrderLogsRequest) returns (ListOrderLogsResponse) {
+    option (google.api.http) = {
+      get: "/v1/order_logs:stream"
+    };
+    option (google.api.method_signature) = "";
+  }
+}
+
+
+// 주문 로그
+message OrderLog {
+  // 로그 고유 ID (DB에서 자동 생성)
+  int64 id = 1;
+
+  // 주문 ID (거래소에서 받은 ID)
+  uint64 order_id = 2;
+
+  // 원본 주문 ID (수정/취소의 경우)
+  // Option<u64>는 optional uint64로 매핑
+  optional uint64 original_order_id = 3;
+
+  // 펀드 코드
+  string fund_code = 4;
+
+  // 심볼
+  string symbol = 5;
+
+  // 로그 타입
+  OrderLogType log_type = 6;
+
+  // 주문 방향 (매수/매도)
+  OrderSide side = 7;
+
+  // 주문 타입 (신규/정정/취소)
+  OrderType order_type = 8;
+
+  // 주문 가격 (Price)
+  // 정확도 유지를 위해 string 또는 고정 소수점(fixed64 등)을 사용할 수 있으나,
+  // 여기서는 간단하게 string으로 가정
+  string price = 9;
+
+  // 주문 수량 (Quantity)
+  // 정확도 유지를 위해 string 또는 고정 소수점(fixed64 등)을 사용할 수 있으나,
+  // 여기서는 간단하게 string으로 가정
+  string quantity = 10;
+
+  // 체결 가격 (Filled 로그의 경우) (FilledPrice)
+  optional string filled_price = 11;
+
+  // 체결 수량 (Filled 로그의 경우) (FilledQuantity)
+  optional string filled_quantity = 12;
+
+  // 체결 금액 (계산값) (FilledAmount)
+  optional string filled_amount = 13;
+
+  // 거부/취소 코드
+  optional string rejection_code = 14;
+
+  // 에러 메시지 (MeritzRejected의 경우)
+  optional string error_message = 15;
+
+  // 이벤트 발생 시각 (거래소 시각, 마이크로초)
+  // Rust Timestamp 타입을 u64로 가정
+  uint64 event_time = 16;
+
+  // 이벤트 수신 시각 (시스템 시각, 마이크로초)
+  // Rust Timestamp 타입을 u64로 가정
+  uint64 receive_time = 17;
+
+  // DB 삽입 시각
+  // Rust의 DateTime<Utc> 타입을 Google의 Timestamp 메시지로 매핑
+  google.protobuf.Timestamp created_at = 18;
+}
+
+// 주문 로그 타입
+enum OrderLogType {
+  // Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의
+  // 주석은 Rust 코드의 내용을 번역했습니다.
+
+  // 알 수 없는 값 (기본값)
+  ORDER_LOG_TYPE_UNSPECIFIED = 0;
+
+  // 접수 확인
+  RECEIVED = 1;
+
+  // 거래소 거부
+  REJECTED = 2;
+
+  // 메리츠 내부 거부
+  MERITZ_REJECTED = 3;
+
+  // 체결
+  FILLED = 4;
+
+  // 자동 취소
+  AUTO_CANCELLED = 5;
+}
+
+// 주문 방향 (매수/매도)
+// Rust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정
+enum OrderSide {
+  ORDER_SIDE_UNSPECIFIED = 0;
+  BUY = 1; // 매수
+  SELL = 2; // 매도
+}
+
+// 주문 타입 (신규/정정/취소)
+// Rust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정
+enum OrderType {
+  ORDER_TYPE_UNSPECIFIED = 0;
+  NEW = 1; // 신규
+  AMEND = 2; // 정정
+  CANCEL = 3; // 취소
+}
+
+
+// ========== Request/Response Messages ==========
+
+// ListOrderLogs 요청
+message ListOrderLogsRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // Available Sequence and Operator
+  // * fund_code
+  //   * `equal`, `contains`
+  // * symbol
+  //   * `equal`, `contains`
+  //
+  // Examples
+  // * filter=fund_code="0159"
+  // * filter=symbol:"7526"
+  string filter = 3;
+}
+
+// ListOrderLogs 응답
+message ListOrderLogsResponse {
+  // 펀드 목록
+  repeated OrderLog order_logs = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}

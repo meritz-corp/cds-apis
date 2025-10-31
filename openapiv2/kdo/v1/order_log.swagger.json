@@ -1,0 +1,281 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/order_log.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OrderLogService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/order_logs": {
+      "get": {
+        "summary": "주문 로그 조회",
+        "operationId": "OrderLogService_ListOrderLogs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logListOrderLogsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
+    "/v1/order_logs:stream": {
+      "get": {
+        "summary": "주문 로그 조회",
+        "operationId": "OrderLogService_StreamOrderLogs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logListOrderLogsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "order_logListOrderLogsResponse": {
+      "type": "object",
+      "properties": {
+        "orderLogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/order_logOrderLog"
+          },
+          "title": "펀드 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      },
+      "title": "ListOrderLogs 응답"
+    },
+    "order_logOrderLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "로그 고유 ID (DB에서 자동 생성)"
+        },
+        "orderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "주문 ID (거래소에서 받은 ID)"
+        },
+        "originalOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "원본 주문 ID (수정/취소의 경우)\nOption\u003cu64\u003e는 optional uint64로 매핑"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "심볼"
+        },
+        "logType": {
+          "$ref": "#/definitions/order_logOrderLogType",
+          "title": "로그 타입"
+        },
+        "side": {
+          "$ref": "#/definitions/order_logOrderSide",
+          "title": "주문 방향 (매수/매도)"
+        },
+        "orderType": {
+          "$ref": "#/definitions/v1order_logOrderType",
+          "title": "주문 타입 (신규/정정/취소)"
+        },
+        "price": {
+          "type": "string",
+          "title": "주문 가격 (Price)\n정확도 유지를 위해 string 또는 고정 소수점(fixed64 등)을 사용할 수 있으나,\n여기서는 간단하게 string으로 가정"
+        },
+        "quantity": {
+          "type": "string",
+          "title": "주문 수량 (Quantity)\n정확도 유지를 위해 string 또는 고정 소수점(fixed64 등)을 사용할 수 있으나,\n여기서는 간단하게 string으로 가정"
+        },
+        "filledPrice": {
+          "type": "string",
+          "title": "체결 가격 (Filled 로그의 경우) (FilledPrice)"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "title": "체결 수량 (Filled 로그의 경우) (FilledQuantity)"
+        },
+        "filledAmount": {
+          "type": "string",
+          "title": "체결 금액 (계산값) (FilledAmount)"
+        },
+        "rejectionCode": {
+          "type": "string",
+          "title": "거부/취소 코드"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "에러 메시지 (MeritzRejected의 경우)"
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "이벤트 발생 시각 (거래소 시각, 마이크로초)\nRust Timestamp 타입을 u64로 가정"
+        },
+        "receiveTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "이벤트 수신 시각 (시스템 시각, 마이크로초)\nRust Timestamp 타입을 u64로 가정"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "DB 삽입 시각\nRust의 DateTime\u003cUtc\u003e 타입을 Google의 Timestamp 메시지로 매핑"
+        }
+      },
+      "title": "주문 로그"
+    },
+    "order_logOrderLogType": {
+      "type": "string",
+      "enum": [
+        "ORDER_LOG_TYPE_UNSPECIFIED",
+        "RECEIVED",
+        "REJECTED",
+        "MERITZ_REJECTED",
+        "FILLED",
+        "AUTO_CANCELLED"
+      ],
+      "default": "ORDER_LOG_TYPE_UNSPECIFIED",
+      "description": "Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의\n 주석은 Rust 코드의 내용을 번역했습니다.\n\n - ORDER_LOG_TYPE_UNSPECIFIED: 알 수 없는 값 (기본값)\n - RECEIVED: 접수 확인\n - REJECTED: 거래소 거부\n - MERITZ_REJECTED: 메리츠 내부 거부\n - FILLED: 체결\n - AUTO_CANCELLED: 자동 취소",
+      "title": "주문 로그 타입"
+    },
+    "order_logOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "BUY",
+        "SELL"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- BUY: 매수\n - SELL: 매도",
+      "title": "주문 방향 (매수/매도)\nRust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1order_logOrderType": {
+      "type": "string",
+      "enum": [
+        "ORDER_TYPE_UNSPECIFIED",
+        "NEW",
+        "AMEND",
+        "CANCEL"
+      ],
+      "default": "ORDER_TYPE_UNSPECIFIED",
+      "description": "- NEW: 신규\n - AMEND: 정정\n - CANCEL: 취소",
+      "title": "주문 타입 (신규/정정/취소)\nRust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정"
+    }
+  }
+}

@@ -7,16 +7,16 @@ pub mod google {
 /// File descriptor set for gRPC reflection support
 pub const FILE_DESCRIPTOR_SET: &[u8] = include_bytes!("../descriptor.bin");
 
-pub mod log_sync {
-    pub mod v1 {
-        pub mod pnl {
-            include!("log_sync.v1.pnl.rs");
-        }
-        pub mod order_log {
-            include!("log_sync.v1.order_log.rs");
-        }
-    }
-}
+// pub mod log_sync {
+//     pub mod v1 {
+//         pub mod pnl {
+//             include!("log_sync.v1.pnl.rs");
+//         }
+//         pub mod order_log {
+//             include!("log_sync.v1.order_log.rs");
+//         }
+//     }
+// }
 
 pub mod kdo {
     pub mod v1 {
@@ -34,6 +34,9 @@ pub mod kdo {
         }
         pub mod stock_inventory {
             include!("kdo.v1.stock_inventory.rs");
+        }
+        pub mod order_log {
+            include!("kdo.v1.order_log.rs");
         }
     }
 }
