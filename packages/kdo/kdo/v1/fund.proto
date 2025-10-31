@@ -35,7 +35,7 @@ service FundService {
     option (google.api.method_signature) = "";
   }
 
-  rpc ListFundLimits(ListFundLimitsRequest) returns (stream ListFundLimitsResponse) {
+  rpc ListFundLimits(ListFundLimitsRequest) returns (ListFundLimitsResponse) {
     option (google.api.http) = {
       get: "/v1/{fund=funds/*}/limits"
     };

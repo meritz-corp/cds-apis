@@ -48,8 +48,8 @@ class FundServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listFunds, request, options: options);
   }
 
-  $grpc.ResponseStream<$0.ListFundLimitsResponse> listFundLimits($0.ListFundLimitsRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$listFundLimits, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseFuture<$0.ListFundLimitsResponse> listFundLimits($0.ListFundLimitsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listFundLimits, request, options: options);
   }
 
   $grpc.ResponseStream<$0.ListFundLimitsResponse> streamFundLimits($0.ListFundLimitsRequest request, {$grpc.CallOptions? options,}) {
@@ -110,7 +110,7 @@ abstract class FundServiceBase extends $grpc.Service {
         'ListFundLimits',
         listFundLimits_Pre,
         false,
-        true,
+        false,
         ($core.List<$core.int> value) => $0.ListFundLimitsRequest.fromBuffer(value),
         ($0.ListFundLimitsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ListFundLimitsRequest, $0.ListFundLimitsResponse>(
@@ -140,11 +140,11 @@ abstract class FundServiceBase extends $grpc.Service {
 
   $async.Future<$0.ListFundsResponse> listFunds($grpc.ServiceCall call, $0.ListFundsRequest request);
 
-  $async.Stream<$0.ListFundLimitsResponse> listFundLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundLimitsRequest> $request) async* {
-    yield* listFundLimits($call, await $request);
+  $async.Future<$0.ListFundLimitsResponse> listFundLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundLimitsRequest> $request) async {
+    return listFundLimits($call, await $request);
   }
 
-  $async.Stream<$0.ListFundLimitsResponse> listFundLimits($grpc.ServiceCall call, $0.ListFundLimitsRequest request);
+  $async.Future<$0.ListFundLimitsResponse> listFundLimits($grpc.ServiceCall call, $0.ListFundLimitsRequest request);
 
   $async.Stream<$0.ListFundLimitsResponse> streamFundLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundLimitsRequest> $request) async* {
     yield* streamFundLimits($call, await $request);

@@ -160,7 +160,7 @@ pub mod fund_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::ListFundLimitsRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::ListFundLimitsResponse>>,
+            tonic::Response<super::ListFundLimitsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -179,7 +179,7 @@ pub mod fund_service_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("kdo.v1.fund.FundService", "ListFundLimits"));
-            self.inner.server_streaming(req, path, codec).await
+            self.inner.unary(req, path, codec).await
         }
         pub async fn stream_fund_limits(
             &mut self,
@@ -236,17 +236,11 @@ pub mod fund_service_server {
             tonic::Response<super::ListFundsResponse>,
             tonic::Status,
         >;
-        /// Server streaming response type for the ListFundLimits method.
-        type ListFundLimitsStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::ListFundLimitsResponse, tonic::Status>,
-            >
-            + Send
-            + 'static;
         async fn list_fund_limits(
             &self,
             request: tonic::Request<super::ListFundLimitsRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::ListFundLimitsStream>,
+            tonic::Response<super::ListFundLimitsResponse>,
             tonic::Status,
         >;
         /// Server streaming response type for the StreamFundLimits method.
@@ -480,12 +474,11 @@ pub mod fund_service_server {
                     struct ListFundLimitsSvc<T: FundService>(pub Arc<T>);
                     impl<
                         T: FundService,
-                    > tonic::server::ServerStreamingService<super::ListFundLimitsRequest>
+                    > tonic::server::UnaryService<super::ListFundLimitsRequest>
                     for ListFundLimitsSvc<T> {
                         type Response = super::ListFundLimitsResponse;
-                        type ResponseStream = T::ListFundLimitsStream;
                         type Future = BoxFuture<
-                            tonic::Response<Self::ResponseStream>,
+                            tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
@@ -516,7 +509,7 @@ pub mod fund_service_server {
                                 max_decoding_message_size,
                                 max_encoding_message_size,
                             );
-                        let res = grpc.server_streaming(method, req).await;
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

@@ -63,14 +63,14 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
-  Stream<kdov1fund.ListFundLimitsResponse> listFundLimits(
+  Future<kdov1fund.ListFundLimitsResponse> listFundLimits(
     kdov1fund.ListFundLimitsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
-    return connect.Client(_transport).server(
+    return connect.Client(_transport).unary(
       specs.FundService.listFundLimits,
       input,
       signal: signal,

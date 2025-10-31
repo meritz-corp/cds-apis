@@ -37,7 +37,7 @@ abstract final class FundService {
 
   static const listFundLimits = connect.Spec(
     '/$name/ListFundLimits',
-    connect.StreamType.server,
+    connect.StreamType.unary,
     kdov1fund.ListFundLimitsRequest.new,
     kdov1fund.ListFundLimitsResponse.new,
   );
