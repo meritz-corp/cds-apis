@@ -27,10 +27,17 @@ abstract final class FundService {
     kdov1fund.ListFundsResponse.new,
   );
 
+  static const listFundLimits = connect.Spec(
+    '/$name/ListFundLimits',
+    connect.StreamType.server,
+    kdov1fund.ListFundLimitsRequest.new,
+    kdov1fund.ListFundLimitssResponse.new,
+  );
+
   static const streamFundLimits = connect.Spec(
     '/$name/StreamFundLimits',
     connect.StreamType.server,
-    kdov1fund.StreamFundLimitsRequest.new,
-    kdov1fund.FundLimit.new,
+    kdov1fund.ListFundLimitsRequest.new,
+    kdov1fund.ListFundLimitssResponse.new,
   );
 }

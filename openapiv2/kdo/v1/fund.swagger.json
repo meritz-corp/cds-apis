@@ -96,6 +96,54 @@
         ]
       }
     },
+    "/v1/{fund}/limits": {
+      "get": {
+        "operationId": "FundService_ListFundLimits",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/fundListFundLimitssResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of fundListFundLimitssResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스 이름 (예: funds/KR1234567890)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* limit_type\n  * `equal`\n\nExamples\n* filter=limit_type=Stock",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FundService"
+        ]
+      }
+    },
     "/v1/{fund}/limits:stream": {
       "get": {
         "operationId": "FundService_StreamFundLimits",
@@ -106,13 +154,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/fundFundLimit"
+                  "$ref": "#/definitions/fundListFundLimitssResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of fundFundLimit"
+              "title": "Stream result of fundListFundLimitssResponse"
             }
           },
           "default": {
@@ -366,6 +414,22 @@
         }
       },
       "title": "펀드 손익(PnL) 관리"
+    },
+    "fundListFundLimitssResponse": {
+      "type": "object",
+      "properties": {
+        "fundLimits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fundFundLimit"
+          },
+          "title": "펀드 한도 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
     },
     "fundListFundsResponse": {
       "type": "object",

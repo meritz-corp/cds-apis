@@ -1041,8 +1041,8 @@ class ListFundsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
-class StreamFundLimitsRequest extends $pb.GeneratedMessage {
-  factory StreamFundLimitsRequest({
+class ListFundLimitsRequest extends $pb.GeneratedMessage {
+  factory ListFundLimitsRequest({
     $core.String? fund,
     $core.String? filter,
   }) {
@@ -1052,33 +1052,33 @@ class StreamFundLimitsRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  StreamFundLimitsRequest._();
+  ListFundLimitsRequest._();
 
-  factory StreamFundLimitsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamFundLimitsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListFundLimitsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListFundLimitsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFundLimitsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundLimitsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'filter')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamFundLimitsRequest clone() => StreamFundLimitsRequest()..mergeFromMessage(this);
+  ListFundLimitsRequest clone() => ListFundLimitsRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamFundLimitsRequest copyWith(void Function(StreamFundLimitsRequest) updates) => super.copyWith((message) => updates(message as StreamFundLimitsRequest)) as StreamFundLimitsRequest;
+  ListFundLimitsRequest copyWith(void Function(ListFundLimitsRequest) updates) => super.copyWith((message) => updates(message as ListFundLimitsRequest)) as ListFundLimitsRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StreamFundLimitsRequest create() => StreamFundLimitsRequest._();
+  static ListFundLimitsRequest create() => ListFundLimitsRequest._();
   @$core.override
-  StreamFundLimitsRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamFundLimitsRequest> createRepeated() => $pb.PbList<StreamFundLimitsRequest>();
+  ListFundLimitsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListFundLimitsRequest> createRepeated() => $pb.PbList<ListFundLimitsRequest>();
   @$core.pragma('dart2js:noInline')
-  static StreamFundLimitsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamFundLimitsRequest>(create);
-  static StreamFundLimitsRequest? _defaultInstance;
+  static ListFundLimitsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundLimitsRequest>(create);
+  static ListFundLimitsRequest? _defaultInstance;
 
   /// 펀드 리소스 이름 (예: funds/KR1234567890)
   @$pb.TagNumber(1)
@@ -1104,6 +1104,60 @@ class StreamFundLimitsRequest extends $pb.GeneratedMessage {
   $core.bool hasFilter() => $_has(1);
   @$pb.TagNumber(2)
   void clearFilter() => $_clearField(2);
+}
+
+class ListFundLimitssResponse extends $pb.GeneratedMessage {
+  factory ListFundLimitssResponse({
+    $core.Iterable<FundLimit>? fundLimits,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (fundLimits != null) result.fundLimits.addAll(fundLimits);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListFundLimitssResponse._();
+
+  factory ListFundLimitssResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListFundLimitssResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundLimitssResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..pc<FundLimit>(1, _omitFieldNames ? '' : 'fundLimits', $pb.PbFieldType.PM, subBuilder: FundLimit.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListFundLimitssResponse clone() => ListFundLimitssResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListFundLimitssResponse copyWith(void Function(ListFundLimitssResponse) updates) => super.copyWith((message) => updates(message as ListFundLimitssResponse)) as ListFundLimitssResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListFundLimitssResponse create() => ListFundLimitssResponse._();
+  @$core.override
+  ListFundLimitssResponse createEmptyInstance() => create();
+  static $pb.PbList<ListFundLimitssResponse> createRepeated() => $pb.PbList<ListFundLimitssResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListFundLimitssResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundLimitssResponse>(create);
+  static ListFundLimitssResponse? _defaultInstance;
+
+  /// 펀드 한도 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<FundLimit> get fundLimits => $_getList(0);
+
+  /// 다음 페이지 토큰
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
 }
 
 

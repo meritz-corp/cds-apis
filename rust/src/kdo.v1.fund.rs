@@ -223,7 +223,7 @@ pub struct ListFundsResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamFundLimitsRequest {
+pub struct ListFundLimitsRequest {
     /// 펀드 리소스 이름 (예: funds/KR1234567890)
     #[prost(string, tag="1")]
     pub fund: ::prost::alloc::string::String,
@@ -235,6 +235,16 @@ pub struct StreamFundLimitsRequest {
     /// * filter=limit_type=Stock
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListFundLimitssResponse {
+    /// 펀드 한도 목록
+    #[prost(message, repeated, tag="1")]
+    pub fund_limits: ::prost::alloc::vec::Vec<FundLimit>,
+    /// 다음 페이지 토큰
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

@@ -27,7 +27,15 @@ service FundService {
     option (google.api.method_signature) = "";
   }
 
-  rpc StreamFundLimits(StreamFundLimitsRequest) returns (stream FundLimit) {
+  rpc ListFundLimits(ListFundLimitsRequest) returns (stream ListFundLimitssResponse) {
+    option (google.api.http) = {
+      get: "/v1/{fund=funds/*}/limits"
+    };
+    option (google.api.method_signature) = "filter";
+  }
+
+
+  rpc StreamFundLimits(ListFundLimitsRequest) returns (stream ListFundLimitssResponse) {
     option (google.api.http) = {
       get: "/v1/{fund=funds/*}/limits:stream"
     };
@@ -214,7 +222,7 @@ message ListFundsResponse {
   string next_page_token = 2;
 }
 
-message StreamFundLimitsRequest {
+message ListFundLimitsRequest {
   // 펀드 리소스 이름 (예: funds/KR1234567890)
   string fund = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -230,4 +238,12 @@ message StreamFundLimitsRequest {
   // Examples
   // * filter=limit_type=Stock
   string filter = 2;
+}
+
+message ListFundLimitssResponse {
+  // 펀드 한도 목록
+  repeated FundLimit fund_limits = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
 }

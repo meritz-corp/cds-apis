@@ -229,17 +229,32 @@ final $typed_data.Uint8List listFundsResponseDescriptor = $convert.base64Decode(
     'ChFMaXN0RnVuZHNSZXNwb25zZRInCgVmdW5kcxgBIAMoCzIRLmtkby52MS5mdW5kLkZ1bmRSBW'
     'Z1bmRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
-@$core.Deprecated('Use streamFundLimitsRequestDescriptor instead')
-const StreamFundLimitsRequest$json = {
-  '1': 'StreamFundLimitsRequest',
+@$core.Deprecated('Use listFundLimitsRequestDescriptor instead')
+const ListFundLimitsRequest$json = {
+  '1': 'ListFundLimitsRequest',
   '2': [
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
-/// Descriptor for `StreamFundLimitsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamFundLimitsRequestDescriptor = $convert.base64Decode(
-    'ChdTdHJlYW1GdW5kTGltaXRzUmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWChRrZG8uY2'
-    'RzYXBpcy54eXovRnVuZFIEZnVuZBIWCgZmaWx0ZXIYAiABKAlSBmZpbHRlcg==');
+/// Descriptor for `ListFundLimitsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundLimitsRequestDescriptor = $convert.base64Decode(
+    'ChVMaXN0RnVuZExpbWl0c1JlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAvpBFgoUa2RvLmNkc2'
+    'FwaXMueHl6L0Z1bmRSBGZ1bmQSFgoGZmlsdGVyGAIgASgJUgZmaWx0ZXI=');
+
+@$core.Deprecated('Use listFundLimitssResponseDescriptor instead')
+const ListFundLimitssResponse$json = {
+  '1': 'ListFundLimitssResponse',
+  '2': [
+    {'1': 'fund_limits', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundLimit', '10': 'fundLimits'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+  ],
+};
+
+/// Descriptor for `ListFundLimitssResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundLimitssResponseDescriptor = $convert.base64Decode(
+    'ChdMaXN0RnVuZExpbWl0c3NSZXNwb25zZRI3CgtmdW5kX2xpbWl0cxgBIAMoCzIWLmtkby52MS'
+    '5mdW5kLkZ1bmRMaW1pdFIKZnVuZExpbWl0cxImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlSDW5l'
+    'eHRQYWdlVG9rZW4=');
 
