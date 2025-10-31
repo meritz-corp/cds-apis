@@ -243,18 +243,18 @@ final $typed_data.Uint8List listFundLimitsRequestDescriptor = $convert.base64Dec
     'ChVMaXN0RnVuZExpbWl0c1JlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAvpBFgoUa2RvLmNkc2'
     'FwaXMueHl6L0Z1bmRSBGZ1bmQSFgoGZmlsdGVyGAIgASgJUgZmaWx0ZXI=');
 
-@$core.Deprecated('Use listFundLimitssResponseDescriptor instead')
-const ListFundLimitssResponse$json = {
-  '1': 'ListFundLimitssResponse',
+@$core.Deprecated('Use listFundLimitsResponseDescriptor instead')
+const ListFundLimitsResponse$json = {
+  '1': 'ListFundLimitsResponse',
   '2': [
     {'1': 'fund_limits', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundLimit', '10': 'fundLimits'},
     {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
-/// Descriptor for `ListFundLimitssResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listFundLimitssResponseDescriptor = $convert.base64Decode(
-    'ChdMaXN0RnVuZExpbWl0c3NSZXNwb25zZRI3CgtmdW5kX2xpbWl0cxgBIAMoCzIWLmtkby52MS'
-    '5mdW5kLkZ1bmRMaW1pdFIKZnVuZExpbWl0cxImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlSDW5l'
-    'eHRQYWdlVG9rZW4=');
+/// Descriptor for `ListFundLimitsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundLimitsResponseDescriptor = $convert.base64Decode(
+    'ChZMaXN0RnVuZExpbWl0c1Jlc3BvbnNlEjcKC2Z1bmRfbGltaXRzGAEgAygLMhYua2RvLnYxLm'
+    'Z1bmQuRnVuZExpbWl0UgpmdW5kTGltaXRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4'
+    'dFBhZ2VUb2tlbg==');
 

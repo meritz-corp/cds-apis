@@ -1106,8 +1106,8 @@ class ListFundLimitsRequest extends $pb.GeneratedMessage {
   void clearFilter() => $_clearField(2);
 }
 
-class ListFundLimitssResponse extends $pb.GeneratedMessage {
-  factory ListFundLimitssResponse({
+class ListFundLimitsResponse extends $pb.GeneratedMessage {
+  factory ListFundLimitsResponse({
     $core.Iterable<FundLimit>? fundLimits,
     $core.String? nextPageToken,
   }) {
@@ -1117,33 +1117,33 @@ class ListFundLimitssResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  ListFundLimitssResponse._();
+  ListFundLimitsResponse._();
 
-  factory ListFundLimitssResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListFundLimitssResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListFundLimitsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListFundLimitsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundLimitssResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundLimitsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
     ..pc<FundLimit>(1, _omitFieldNames ? '' : 'fundLimits', $pb.PbFieldType.PM, subBuilder: FundLimit.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListFundLimitssResponse clone() => ListFundLimitssResponse()..mergeFromMessage(this);
+  ListFundLimitsResponse clone() => ListFundLimitsResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListFundLimitssResponse copyWith(void Function(ListFundLimitssResponse) updates) => super.copyWith((message) => updates(message as ListFundLimitssResponse)) as ListFundLimitssResponse;
+  ListFundLimitsResponse copyWith(void Function(ListFundLimitsResponse) updates) => super.copyWith((message) => updates(message as ListFundLimitsResponse)) as ListFundLimitsResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListFundLimitssResponse create() => ListFundLimitssResponse._();
+  static ListFundLimitsResponse create() => ListFundLimitsResponse._();
   @$core.override
-  ListFundLimitssResponse createEmptyInstance() => create();
-  static $pb.PbList<ListFundLimitssResponse> createRepeated() => $pb.PbList<ListFundLimitssResponse>();
+  ListFundLimitsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListFundLimitsResponse> createRepeated() => $pb.PbList<ListFundLimitsResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListFundLimitssResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundLimitssResponse>(create);
-  static ListFundLimitssResponse? _defaultInstance;
+  static ListFundLimitsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundLimitsResponse>(create);
+  static ListFundLimitsResponse? _defaultInstance;
 
   /// 펀드 한도 목록
   @$pb.TagNumber(1)

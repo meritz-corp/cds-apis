@@ -238,7 +238,7 @@ pub struct ListFundLimitsRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListFundLimitssResponse {
+pub struct ListFundLimitsResponse {
     /// 펀드 한도 목록
     #[prost(message, repeated, tag="1")]
     pub fund_limits: ::prost::alloc::vec::Vec<FundLimit>,

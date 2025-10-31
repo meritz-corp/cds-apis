@@ -106,13 +106,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/fundListFundLimitssResponse"
+                  "$ref": "#/definitions/fundListFundLimitsResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of fundListFundLimitssResponse"
+              "title": "Stream result of fundListFundLimitsResponse"
             }
           },
           "default": {
@@ -154,13 +154,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/fundListFundLimitssResponse"
+                  "$ref": "#/definitions/fundListFundLimitsResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of fundListFundLimitssResponse"
+              "title": "Stream result of fundListFundLimitsResponse"
             }
           },
           "default": {
@@ -185,6 +185,48 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "FundService"
+        ]
+      }
+    },
+    "/v1/{fund}:stream": {
+      "get": {
+        "summary": "단일 펀드 스트림",
+        "operationId": "FundService_StreamFund",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/fundFund"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of fundFund"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스 이름 (예: funds/KR1234567890)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
           }
         ],
         "tags": [
@@ -415,7 +457,7 @@
       },
       "title": "펀드 손익(PnL) 관리"
     },
-    "fundListFundLimitssResponse": {
+    "fundListFundLimitsResponse": {
       "type": "object",
       "properties": {
         "fundLimits": {

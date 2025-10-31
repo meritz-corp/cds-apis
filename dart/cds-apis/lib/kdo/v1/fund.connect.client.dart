@@ -27,6 +27,24 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 단일 펀드 스트림
+  Stream<kdov1fund.Fund> streamFund(
+    kdov1fund.GetFundRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.FundService.streamFund,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 펀드 목록 조회
   Future<kdov1fund.ListFundsResponse> listFunds(
     kdov1fund.ListFundsRequest input, {
@@ -45,7 +63,7 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
-  Stream<kdov1fund.ListFundLimitssResponse> listFundLimits(
+  Stream<kdov1fund.ListFundLimitsResponse> listFundLimits(
     kdov1fund.ListFundLimitsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -62,7 +80,7 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
-  Stream<kdov1fund.ListFundLimitssResponse> streamFundLimits(
+  Stream<kdov1fund.ListFundLimitsResponse> streamFundLimits(
     kdov1fund.ListFundLimitsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,

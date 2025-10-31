@@ -1397,7 +1397,7 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitsRequest {
         deserializer.deserialize_struct("kdo.v1.fund.ListFundLimitsRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListFundLimitssResponse {
+impl serde::Serialize for ListFundLimitsResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1411,7 +1411,7 @@ impl serde::Serialize for ListFundLimitssResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundLimitssResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundLimitsResponse", len)?;
         if true {
             struct_ser.serialize_field("fund_limits", &self.fund_limits)?;
         }
@@ -1421,7 +1421,7 @@ impl serde::Serialize for ListFundLimitssResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListFundLimitssResponse {
+impl<'de> serde::Deserialize<'de> for ListFundLimitsResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1471,13 +1471,13 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitssResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListFundLimitssResponse;
+            type Value = ListFundLimitsResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.fund.ListFundLimitssResponse")
+                formatter.write_str("struct kdo.v1.fund.ListFundLimitsResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundLimitssResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundLimitsResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1502,13 +1502,13 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitssResponse {
                         }
                     }
                 }
-                Ok(ListFundLimitssResponse {
+                Ok(ListFundLimitsResponse {
                     fund_limits: fund_limits__.unwrap_or_default(),
                     next_page_token: next_page_token__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.fund.ListFundLimitssResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.fund.ListFundLimitsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListFundsRequest {

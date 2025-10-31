@@ -38,16 +38,21 @@ class FundServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getFund, request, options: options);
   }
 
+  /// 단일 펀드 스트림
+  $grpc.ResponseStream<$0.Fund> streamFund($0.GetFundRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamFund, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// 펀드 목록 조회
   $grpc.ResponseFuture<$0.ListFundsResponse> listFunds($0.ListFundsRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listFunds, request, options: options);
   }
 
-  $grpc.ResponseStream<$0.ListFundLimitssResponse> listFundLimits($0.ListFundLimitsRequest request, {$grpc.CallOptions? options,}) {
+  $grpc.ResponseStream<$0.ListFundLimitsResponse> listFundLimits($0.ListFundLimitsRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$listFundLimits, $async.Stream.fromIterable([request]), options: options);
   }
 
-  $grpc.ResponseStream<$0.ListFundLimitssResponse> streamFundLimits($0.ListFundLimitsRequest request, {$grpc.CallOptions? options,}) {
+  $grpc.ResponseStream<$0.ListFundLimitsResponse> streamFundLimits($0.ListFundLimitsRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamFundLimits, $async.Stream.fromIterable([request]), options: options);
   }
 
@@ -57,18 +62,22 @@ class FundServiceClient extends $grpc.Client {
       '/kdo.v1.fund.FundService/GetFund',
       ($0.GetFundRequest value) => value.writeToBuffer(),
       $0.Fund.fromBuffer);
+  static final _$streamFund = $grpc.ClientMethod<$0.GetFundRequest, $0.Fund>(
+      '/kdo.v1.fund.FundService/StreamFund',
+      ($0.GetFundRequest value) => value.writeToBuffer(),
+      $0.Fund.fromBuffer);
   static final _$listFunds = $grpc.ClientMethod<$0.ListFundsRequest, $0.ListFundsResponse>(
       '/kdo.v1.fund.FundService/ListFunds',
       ($0.ListFundsRequest value) => value.writeToBuffer(),
       $0.ListFundsResponse.fromBuffer);
-  static final _$listFundLimits = $grpc.ClientMethod<$0.ListFundLimitsRequest, $0.ListFundLimitssResponse>(
+  static final _$listFundLimits = $grpc.ClientMethod<$0.ListFundLimitsRequest, $0.ListFundLimitsResponse>(
       '/kdo.v1.fund.FundService/ListFundLimits',
       ($0.ListFundLimitsRequest value) => value.writeToBuffer(),
-      $0.ListFundLimitssResponse.fromBuffer);
-  static final _$streamFundLimits = $grpc.ClientMethod<$0.ListFundLimitsRequest, $0.ListFundLimitssResponse>(
+      $0.ListFundLimitsResponse.fromBuffer);
+  static final _$streamFundLimits = $grpc.ClientMethod<$0.ListFundLimitsRequest, $0.ListFundLimitsResponse>(
       '/kdo.v1.fund.FundService/StreamFundLimits',
       ($0.ListFundLimitsRequest value) => value.writeToBuffer(),
-      $0.ListFundLimitssResponse.fromBuffer);
+      $0.ListFundLimitsResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.fund.FundService')
@@ -83,6 +92,13 @@ abstract class FundServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetFundRequest.fromBuffer(value),
         ($0.Fund value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetFundRequest, $0.Fund>(
+        'StreamFund',
+        streamFund_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetFundRequest.fromBuffer(value),
+        ($0.Fund value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ListFundsRequest, $0.ListFundsResponse>(
         'ListFunds',
         listFunds_Pre,
@@ -90,20 +106,20 @@ abstract class FundServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListFundsRequest.fromBuffer(value),
         ($0.ListFundsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListFundLimitsRequest, $0.ListFundLimitssResponse>(
+    $addMethod($grpc.ServiceMethod<$0.ListFundLimitsRequest, $0.ListFundLimitsResponse>(
         'ListFundLimits',
         listFundLimits_Pre,
         false,
         true,
         ($core.List<$core.int> value) => $0.ListFundLimitsRequest.fromBuffer(value),
-        ($0.ListFundLimitssResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListFundLimitsRequest, $0.ListFundLimitssResponse>(
+        ($0.ListFundLimitsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListFundLimitsRequest, $0.ListFundLimitsResponse>(
         'StreamFundLimits',
         streamFundLimits_Pre,
         false,
         true,
         ($core.List<$core.int> value) => $0.ListFundLimitsRequest.fromBuffer(value),
-        ($0.ListFundLimitssResponse value) => value.writeToBuffer()));
+        ($0.ListFundLimitsResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Fund> getFund_Pre($grpc.ServiceCall $call, $async.Future<$0.GetFundRequest> $request) async {
@@ -112,22 +128,28 @@ abstract class FundServiceBase extends $grpc.Service {
 
   $async.Future<$0.Fund> getFund($grpc.ServiceCall call, $0.GetFundRequest request);
 
+  $async.Stream<$0.Fund> streamFund_Pre($grpc.ServiceCall $call, $async.Future<$0.GetFundRequest> $request) async* {
+    yield* streamFund($call, await $request);
+  }
+
+  $async.Stream<$0.Fund> streamFund($grpc.ServiceCall call, $0.GetFundRequest request);
+
   $async.Future<$0.ListFundsResponse> listFunds_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundsRequest> $request) async {
     return listFunds($call, await $request);
   }
 
   $async.Future<$0.ListFundsResponse> listFunds($grpc.ServiceCall call, $0.ListFundsRequest request);
 
-  $async.Stream<$0.ListFundLimitssResponse> listFundLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundLimitsRequest> $request) async* {
+  $async.Stream<$0.ListFundLimitsResponse> listFundLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundLimitsRequest> $request) async* {
     yield* listFundLimits($call, await $request);
   }
 
-  $async.Stream<$0.ListFundLimitssResponse> listFundLimits($grpc.ServiceCall call, $0.ListFundLimitsRequest request);
+  $async.Stream<$0.ListFundLimitsResponse> listFundLimits($grpc.ServiceCall call, $0.ListFundLimitsRequest request);
 
-  $async.Stream<$0.ListFundLimitssResponse> streamFundLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundLimitsRequest> $request) async* {
+  $async.Stream<$0.ListFundLimitsResponse> streamFundLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundLimitsRequest> $request) async* {
     yield* streamFundLimits($call, await $request);
   }
 
-  $async.Stream<$0.ListFundLimitssResponse> streamFundLimits($grpc.ServiceCall call, $0.ListFundLimitsRequest request);
+  $async.Stream<$0.ListFundLimitsResponse> streamFundLimits($grpc.ServiceCall call, $0.ListFundLimitsRequest request);
 
 }
