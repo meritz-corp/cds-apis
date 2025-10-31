@@ -95,6 +95,54 @@
           "FundService"
         ]
       }
+    },
+    "/v1/{fund}/limits:stream": {
+      "get": {
+        "operationId": "FundService_StreamFundLimits",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/fundFundLimit"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of fundFundLimit"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스 이름 (예: funds/KR1234567890)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* limit_type\n  * `equal`\n\nExamples\n* filter=limit_type=Stock",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FundService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -202,6 +250,99 @@
         }
       },
       "title": "펀드 익스포저(Exposure) 관리"
+    },
+    "fundFundLimit": {
+      "type": "object",
+      "properties": {
+        "fund": {
+          "type": "string"
+        },
+        "limitType": {
+          "$ref": "#/definitions/fundFundLimitType"
+        },
+        "longLimitQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수한도수량"
+        },
+        "longLimitAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수한도금액"
+        },
+        "shortLimitQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도한도수량"
+        },
+        "shortLimitAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도한도금액"
+        },
+        "limitQuantityPerOrder": {
+          "type": "string",
+          "format": "int64",
+          "title": "1회 주문 한도계약수"
+        },
+        "limitAmountPerOrder": {
+          "type": "string",
+          "format": "int64",
+          "title": "1회 주문 한도금액"
+        },
+        "tickLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "1회 주문 한도틱"
+        },
+        "unfilledLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결한도수량"
+        },
+        "spreadLimitQuantityPerOrder": {
+          "type": "string",
+          "format": "int64",
+          "title": "스프레드 1회 주문 한도계약수"
+        },
+        "currentLongQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 누적 매수 수량"
+        },
+        "currentLongAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 누적 매수 금액"
+        },
+        "currentShortQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 누적 매도 수량 (음수로 저장)"
+        },
+        "currentShortAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 누적 매도 금액 (음수로 저장)"
+        },
+        "currentUnfilled": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 미체결 수량"
+        }
+      },
+      "required": [
+        "fund"
+      ]
+    },
+    "fundFundLimitType": {
+      "type": "string",
+      "enum": [
+        "FUND_LIMIT_UNSPECIFIED",
+        "KOSPI_200_Future",
+        "STOCK"
+      ],
+      "default": "FUND_LIMIT_UNSPECIFIED"
     },
     "fundFundPnL": {
       "type": "object",

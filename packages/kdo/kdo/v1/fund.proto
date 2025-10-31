@@ -26,6 +26,13 @@ service FundService {
     };
     option (google.api.method_signature) = "";
   }
+
+  rpc StreamFundLimits(StreamFundLimitsRequest) returns (stream FundLimit) {
+    option (google.api.http) = {
+      get: "/v1/{fund=funds/*}/limits:stream"
+    };
+    option (google.api.method_signature) = "filter";
+  }
 }
 
 // 펀드 정보
@@ -103,6 +110,68 @@ message PositionExposure {
 }
 
 
+
+message FundLimit {
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  //
+  FundLimitType limit_type = 2;
+
+  // 매수한도수량
+  int64 long_limit_quantity = 3;
+
+  // 매수한도금액
+  int64 long_limit_amount = 4;
+
+  // 매도한도수량
+  int64 short_limit_quantity = 5;
+
+  // 매도한도금액
+  int64 short_limit_amount = 6;
+
+  // 1회 주문 한도계약수
+  int64 limit_quantity_per_order = 7;
+
+  // 1회 주문 한도금액
+  int64 limit_amount_per_order = 8;
+
+  // 1회 주문 한도틱
+  int64 tick_limit = 9;
+
+  // 미체결한도수량
+  int64 unfilled_limit = 10;
+
+  // 스프레드 1회 주문 한도계약수
+  int64 spread_limit_quantity_per_order = 11;
+
+  // 현재 누적 매수 수량
+  int64 current_long_quantity = 12;
+
+  // 현재 누적 매수 금액
+  int64 current_long_amount = 13;
+
+  // 현재 누적 매도 수량 (음수로 저장)
+  int64 current_short_quantity = 14;
+
+  // 현재 누적 매도 금액 (음수로 저장)
+  int64 current_short_amount = 15;
+
+  // 현재 미체결 수량
+  int64 current_unfilled = 16;
+}
+
+enum FundLimitType {
+  FUND_LIMIT_UNSPECIFIED = 0;
+  KOSPI_200_Future = 1;
+  STOCK = 2;
+}
+
+
 // ========== Request/Response Messages ==========
 
 // GetFund 요청
@@ -143,4 +212,22 @@ message ListFundsResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
+}
+
+message StreamFundLimitsRequest {
+  // 펀드 리소스 이름 (예: funds/KR1234567890)
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // Available Sequence and Operator
+  // * limit_type
+  //   * `equal`
+  //
+  // Examples
+  // * filter=limit_type=Stock
+  string filter = 2;
 }

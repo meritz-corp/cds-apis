@@ -554,6 +554,503 @@ impl<'de> serde::Deserialize<'de> for FundExposure {
         deserializer.deserialize_struct("kdo.v1.fund.FundExposure", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for FundLimit {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.FundLimit", len)?;
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if true {
+            let v = FundLimitType::try_from(self.limit_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.limit_type)))?;
+            struct_ser.serialize_field("limit_type", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("long_limit_quantity", ToString::to_string(&self.long_limit_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("long_limit_amount", ToString::to_string(&self.long_limit_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("short_limit_quantity", ToString::to_string(&self.short_limit_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("short_limit_amount", ToString::to_string(&self.short_limit_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("limit_quantity_per_order", ToString::to_string(&self.limit_quantity_per_order).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("limit_amount_per_order", ToString::to_string(&self.limit_amount_per_order).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tick_limit", ToString::to_string(&self.tick_limit).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("unfilled_limit", ToString::to_string(&self.unfilled_limit).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("spread_limit_quantity_per_order", ToString::to_string(&self.spread_limit_quantity_per_order).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_long_quantity", ToString::to_string(&self.current_long_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_long_amount", ToString::to_string(&self.current_long_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_short_quantity", ToString::to_string(&self.current_short_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_short_amount", ToString::to_string(&self.current_short_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_unfilled", ToString::to_string(&self.current_unfilled).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FundLimit {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund",
+            "limit_type",
+            "limitType",
+            "long_limit_quantity",
+            "longLimitQuantity",
+            "long_limit_amount",
+            "longLimitAmount",
+            "short_limit_quantity",
+            "shortLimitQuantity",
+            "short_limit_amount",
+            "shortLimitAmount",
+            "limit_quantity_per_order",
+            "limitQuantityPerOrder",
+            "limit_amount_per_order",
+            "limitAmountPerOrder",
+            "tick_limit",
+            "tickLimit",
+            "unfilled_limit",
+            "unfilledLimit",
+            "spread_limit_quantity_per_order",
+            "spreadLimitQuantityPerOrder",
+            "current_long_quantity",
+            "currentLongQuantity",
+            "current_long_amount",
+            "currentLongAmount",
+            "current_short_quantity",
+            "currentShortQuantity",
+            "current_short_amount",
+            "currentShortAmount",
+            "current_unfilled",
+            "currentUnfilled",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fund,
+            LimitType,
+            LongLimitQuantity,
+            LongLimitAmount,
+            ShortLimitQuantity,
+            ShortLimitAmount,
+            LimitQuantityPerOrder,
+            LimitAmountPerOrder,
+            TickLimit,
+            UnfilledLimit,
+            SpreadLimitQuantityPerOrder,
+            CurrentLongQuantity,
+            CurrentLongAmount,
+            CurrentShortQuantity,
+            CurrentShortAmount,
+            CurrentUnfilled,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fund" => Ok(GeneratedField::Fund),
+                            "limitType" | "limit_type" => Ok(GeneratedField::LimitType),
+                            "longLimitQuantity" | "long_limit_quantity" => Ok(GeneratedField::LongLimitQuantity),
+                            "longLimitAmount" | "long_limit_amount" => Ok(GeneratedField::LongLimitAmount),
+                            "shortLimitQuantity" | "short_limit_quantity" => Ok(GeneratedField::ShortLimitQuantity),
+                            "shortLimitAmount" | "short_limit_amount" => Ok(GeneratedField::ShortLimitAmount),
+                            "limitQuantityPerOrder" | "limit_quantity_per_order" => Ok(GeneratedField::LimitQuantityPerOrder),
+                            "limitAmountPerOrder" | "limit_amount_per_order" => Ok(GeneratedField::LimitAmountPerOrder),
+                            "tickLimit" | "tick_limit" => Ok(GeneratedField::TickLimit),
+                            "unfilledLimit" | "unfilled_limit" => Ok(GeneratedField::UnfilledLimit),
+                            "spreadLimitQuantityPerOrder" | "spread_limit_quantity_per_order" => Ok(GeneratedField::SpreadLimitQuantityPerOrder),
+                            "currentLongQuantity" | "current_long_quantity" => Ok(GeneratedField::CurrentLongQuantity),
+                            "currentLongAmount" | "current_long_amount" => Ok(GeneratedField::CurrentLongAmount),
+                            "currentShortQuantity" | "current_short_quantity" => Ok(GeneratedField::CurrentShortQuantity),
+                            "currentShortAmount" | "current_short_amount" => Ok(GeneratedField::CurrentShortAmount),
+                            "currentUnfilled" | "current_unfilled" => Ok(GeneratedField::CurrentUnfilled),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FundLimit;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.FundLimit")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FundLimit, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund__ = None;
+                let mut limit_type__ = None;
+                let mut long_limit_quantity__ = None;
+                let mut long_limit_amount__ = None;
+                let mut short_limit_quantity__ = None;
+                let mut short_limit_amount__ = None;
+                let mut limit_quantity_per_order__ = None;
+                let mut limit_amount_per_order__ = None;
+                let mut tick_limit__ = None;
+                let mut unfilled_limit__ = None;
+                let mut spread_limit_quantity_per_order__ = None;
+                let mut current_long_quantity__ = None;
+                let mut current_long_amount__ = None;
+                let mut current_short_quantity__ = None;
+                let mut current_short_amount__ = None;
+                let mut current_unfilled__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LimitType => {
+                            if limit_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitType"));
+                            }
+                            limit_type__ = Some(map_.next_value::<FundLimitType>()? as i32);
+                        }
+                        GeneratedField::LongLimitQuantity => {
+                            if long_limit_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("longLimitQuantity"));
+                            }
+                            long_limit_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LongLimitAmount => {
+                            if long_limit_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("longLimitAmount"));
+                            }
+                            long_limit_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ShortLimitQuantity => {
+                            if short_limit_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shortLimitQuantity"));
+                            }
+                            short_limit_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ShortLimitAmount => {
+                            if short_limit_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shortLimitAmount"));
+                            }
+                            short_limit_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LimitQuantityPerOrder => {
+                            if limit_quantity_per_order__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitQuantityPerOrder"));
+                            }
+                            limit_quantity_per_order__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LimitAmountPerOrder => {
+                            if limit_amount_per_order__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitAmountPerOrder"));
+                            }
+                            limit_amount_per_order__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TickLimit => {
+                            if tick_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickLimit"));
+                            }
+                            tick_limit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::UnfilledLimit => {
+                            if unfilled_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unfilledLimit"));
+                            }
+                            unfilled_limit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SpreadLimitQuantityPerOrder => {
+                            if spread_limit_quantity_per_order__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("spreadLimitQuantityPerOrder"));
+                            }
+                            spread_limit_quantity_per_order__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentLongQuantity => {
+                            if current_long_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentLongQuantity"));
+                            }
+                            current_long_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentLongAmount => {
+                            if current_long_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentLongAmount"));
+                            }
+                            current_long_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentShortQuantity => {
+                            if current_short_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentShortQuantity"));
+                            }
+                            current_short_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentShortAmount => {
+                            if current_short_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentShortAmount"));
+                            }
+                            current_short_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentUnfilled => {
+                            if current_unfilled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentUnfilled"));
+                            }
+                            current_unfilled__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FundLimit {
+                    fund: fund__.unwrap_or_default(),
+                    limit_type: limit_type__.unwrap_or_default(),
+                    long_limit_quantity: long_limit_quantity__.unwrap_or_default(),
+                    long_limit_amount: long_limit_amount__.unwrap_or_default(),
+                    short_limit_quantity: short_limit_quantity__.unwrap_or_default(),
+                    short_limit_amount: short_limit_amount__.unwrap_or_default(),
+                    limit_quantity_per_order: limit_quantity_per_order__.unwrap_or_default(),
+                    limit_amount_per_order: limit_amount_per_order__.unwrap_or_default(),
+                    tick_limit: tick_limit__.unwrap_or_default(),
+                    unfilled_limit: unfilled_limit__.unwrap_or_default(),
+                    spread_limit_quantity_per_order: spread_limit_quantity_per_order__.unwrap_or_default(),
+                    current_long_quantity: current_long_quantity__.unwrap_or_default(),
+                    current_long_amount: current_long_amount__.unwrap_or_default(),
+                    current_short_quantity: current_short_quantity__.unwrap_or_default(),
+                    current_short_amount: current_short_amount__.unwrap_or_default(),
+                    current_unfilled: current_unfilled__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.FundLimit", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for FundLimitType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::FundLimitUnspecified => "FUND_LIMIT_UNSPECIFIED",
+            Self::Kospi200Future => "KOSPI_200_Future",
+            Self::Stock => "STOCK",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for FundLimitType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "FUND_LIMIT_UNSPECIFIED",
+            "KOSPI_200_Future",
+            "STOCK",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FundLimitType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "FUND_LIMIT_UNSPECIFIED" => Ok(FundLimitType::FundLimitUnspecified),
+                    "KOSPI_200_Future" => Ok(FundLimitType::Kospi200Future),
+                    "STOCK" => Ok(FundLimitType::Stock),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FundPnL {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1372,5 +1869,117 @@ impl<'de> serde::Deserialize<'de> for PositionPnL {
             }
         }
         deserializer.deserialize_struct("kdo.v1.fund.PositionPnL", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for StreamFundLimitsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.StreamFundLimitsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if true {
+            struct_ser.serialize_field("filter", &self.filter)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for StreamFundLimitsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund",
+            "filter",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fund,
+            Filter,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fund" => Ok(GeneratedField::Fund),
+                            "filter" => Ok(GeneratedField::Filter),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamFundLimitsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.StreamFundLimitsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamFundLimitsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund__ = None;
+                let mut filter__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Filter => {
+                            if filter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filter"));
+                            }
+                            filter__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(StreamFundLimitsRequest {
+                    fund: fund__.unwrap_or_default(),
+                    filter: filter__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.StreamFundLimitsRequest", FIELDS, GeneratedVisitor)
     }
 }

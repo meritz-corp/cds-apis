@@ -14,6 +14,21 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use fundLimitTypeDescriptor instead')
+const FundLimitType$json = {
+  '1': 'FundLimitType',
+  '2': [
+    {'1': 'FUND_LIMIT_UNSPECIFIED', '2': 0},
+    {'1': 'KOSPI_200_Future', '2': 1},
+    {'1': 'STOCK', '2': 2},
+  ],
+};
+
+/// Descriptor for `FundLimitType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List fundLimitTypeDescriptor = $convert.base64Decode(
+    'Cg1GdW5kTGltaXRUeXBlEhoKFkZVTkRfTElNSVRfVU5TUEVDSUZJRUQQABIUChBLT1NQSV8yMD'
+    'BfRnV0dXJlEAESCQoFU1RPQ0sQAg==');
+
 @$core.Deprecated('Use fundDescriptor instead')
 const Fund$json = {
   '1': 'Fund',
@@ -126,6 +141,47 @@ final $typed_data.Uint8List positionExposureDescriptor = $convert.base64Decode(
     'ChBQb3NpdGlvbkV4cG9zdXJlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhoKCHF1YW50aXR5GA'
     'IgASgDUghxdWFudGl0eRImCg9sYXN0X3VwZGF0ZWRfYXQYAyABKANSDWxhc3RVcGRhdGVkQXQ=');
 
+@$core.Deprecated('Use fundLimitDescriptor instead')
+const FundLimit$json = {
+  '1': 'FundLimit',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'limit_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.fund.FundLimitType', '10': 'limitType'},
+    {'1': 'long_limit_quantity', '3': 3, '4': 1, '5': 3, '10': 'longLimitQuantity'},
+    {'1': 'long_limit_amount', '3': 4, '4': 1, '5': 3, '10': 'longLimitAmount'},
+    {'1': 'short_limit_quantity', '3': 5, '4': 1, '5': 3, '10': 'shortLimitQuantity'},
+    {'1': 'short_limit_amount', '3': 6, '4': 1, '5': 3, '10': 'shortLimitAmount'},
+    {'1': 'limit_quantity_per_order', '3': 7, '4': 1, '5': 3, '10': 'limitQuantityPerOrder'},
+    {'1': 'limit_amount_per_order', '3': 8, '4': 1, '5': 3, '10': 'limitAmountPerOrder'},
+    {'1': 'tick_limit', '3': 9, '4': 1, '5': 3, '10': 'tickLimit'},
+    {'1': 'unfilled_limit', '3': 10, '4': 1, '5': 3, '10': 'unfilledLimit'},
+    {'1': 'spread_limit_quantity_per_order', '3': 11, '4': 1, '5': 3, '10': 'spreadLimitQuantityPerOrder'},
+    {'1': 'current_long_quantity', '3': 12, '4': 1, '5': 3, '10': 'currentLongQuantity'},
+    {'1': 'current_long_amount', '3': 13, '4': 1, '5': 3, '10': 'currentLongAmount'},
+    {'1': 'current_short_quantity', '3': 14, '4': 1, '5': 3, '10': 'currentShortQuantity'},
+    {'1': 'current_short_amount', '3': 15, '4': 1, '5': 3, '10': 'currentShortAmount'},
+    {'1': 'current_unfilled', '3': 16, '4': 1, '5': 3, '10': 'currentUnfilled'},
+  ],
+};
+
+/// Descriptor for `FundLimit`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fundLimitDescriptor = $convert.base64Decode(
+    'CglGdW5kTGltaXQSMQoEZnVuZBgBIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6L0Z1bm'
+    'RSBGZ1bmQSOQoKbGltaXRfdHlwZRgCIAEoDjIaLmtkby52MS5mdW5kLkZ1bmRMaW1pdFR5cGVS'
+    'CWxpbWl0VHlwZRIuChNsb25nX2xpbWl0X3F1YW50aXR5GAMgASgDUhFsb25nTGltaXRRdWFudG'
+    'l0eRIqChFsb25nX2xpbWl0X2Ftb3VudBgEIAEoA1IPbG9uZ0xpbWl0QW1vdW50EjAKFHNob3J0'
+    'X2xpbWl0X3F1YW50aXR5GAUgASgDUhJzaG9ydExpbWl0UXVhbnRpdHkSLAoSc2hvcnRfbGltaX'
+    'RfYW1vdW50GAYgASgDUhBzaG9ydExpbWl0QW1vdW50EjcKGGxpbWl0X3F1YW50aXR5X3Blcl9v'
+    'cmRlchgHIAEoA1IVbGltaXRRdWFudGl0eVBlck9yZGVyEjMKFmxpbWl0X2Ftb3VudF9wZXJfb3'
+    'JkZXIYCCABKANSE2xpbWl0QW1vdW50UGVyT3JkZXISHQoKdGlja19saW1pdBgJIAEoA1IJdGlj'
+    'a0xpbWl0EiUKDnVuZmlsbGVkX2xpbWl0GAogASgDUg11bmZpbGxlZExpbWl0EkQKH3NwcmVhZF'
+    '9saW1pdF9xdWFudGl0eV9wZXJfb3JkZXIYCyABKANSG3NwcmVhZExpbWl0UXVhbnRpdHlQZXJP'
+    'cmRlchIyChVjdXJyZW50X2xvbmdfcXVhbnRpdHkYDCABKANSE2N1cnJlbnRMb25nUXVhbnRpdH'
+    'kSLgoTY3VycmVudF9sb25nX2Ftb3VudBgNIAEoA1IRY3VycmVudExvbmdBbW91bnQSNAoWY3Vy'
+    'cmVudF9zaG9ydF9xdWFudGl0eRgOIAEoA1IUY3VycmVudFNob3J0UXVhbnRpdHkSMAoUY3Vycm'
+    'VudF9zaG9ydF9hbW91bnQYDyABKANSEmN1cnJlbnRTaG9ydEFtb3VudBIpChBjdXJyZW50X3Vu'
+    'ZmlsbGVkGBAgASgDUg9jdXJyZW50VW5maWxsZWQ=');
+
 @$core.Deprecated('Use getFundRequestDescriptor instead')
 const GetFundRequest$json = {
   '1': 'GetFundRequest',
@@ -172,4 +228,18 @@ const ListFundsResponse$json = {
 final $typed_data.Uint8List listFundsResponseDescriptor = $convert.base64Decode(
     'ChFMaXN0RnVuZHNSZXNwb25zZRInCgVmdW5kcxgBIAMoCzIRLmtkby52MS5mdW5kLkZ1bmRSBW'
     'Z1bmRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
+
+@$core.Deprecated('Use streamFundLimitsRequestDescriptor instead')
+const StreamFundLimitsRequest$json = {
+  '1': 'StreamFundLimitsRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
+  ],
+};
+
+/// Descriptor for `StreamFundLimitsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamFundLimitsRequestDescriptor = $convert.base64Decode(
+    'ChdTdHJlYW1GdW5kTGltaXRzUmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWChRrZG8uY2'
+    'RzYXBpcy54eXovRnVuZFIEZnVuZBIWCgZmaWx0ZXIYAiABKAlSBmZpbHRlcg==');
 

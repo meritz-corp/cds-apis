@@ -96,9 +96,11 @@ impl serde::Serialize for ErrorType {
             Self::OrderProcessing => "ERROR_TYPE_ORDER_PROCESSING",
             Self::NavCalculation => "ERROR_TYPE_NAV_CALCULATION",
             Self::OrderBookUpdate => "ERROR_TYPE_ORDER_BOOK_UPDATE",
-            Self::LimitExceeded => "ERROR_TYPE_LIMIT_EXCEEDED",
+            Self::OrderLimitExceeded => "ERROR_TYPE_ORDER_LIMIT_EXCEEDED",
+            Self::FundLimitExceeded => "ERROR_TYPE_FUND_LIMIT_EXCEEDED",
             Self::SystemError => "ERROR_TYPE_SYSTEM_ERROR",
             Self::MarketSession => "ERROR_TYPE_MARKET_SESSION",
+            Self::FundUpdate => "ERROR_TYPE_FUND_UPDATE",
         };
         serializer.serialize_str(variant)
     }
@@ -117,9 +119,11 @@ impl<'de> serde::Deserialize<'de> for ErrorType {
             "ERROR_TYPE_ORDER_PROCESSING",
             "ERROR_TYPE_NAV_CALCULATION",
             "ERROR_TYPE_ORDER_BOOK_UPDATE",
-            "ERROR_TYPE_LIMIT_EXCEEDED",
+            "ERROR_TYPE_ORDER_LIMIT_EXCEEDED",
+            "ERROR_TYPE_FUND_LIMIT_EXCEEDED",
             "ERROR_TYPE_SYSTEM_ERROR",
             "ERROR_TYPE_MARKET_SESSION",
+            "ERROR_TYPE_FUND_UPDATE",
         ];
 
         struct GeneratedVisitor;
@@ -167,9 +171,11 @@ impl<'de> serde::Deserialize<'de> for ErrorType {
                     "ERROR_TYPE_ORDER_PROCESSING" => Ok(ErrorType::OrderProcessing),
                     "ERROR_TYPE_NAV_CALCULATION" => Ok(ErrorType::NavCalculation),
                     "ERROR_TYPE_ORDER_BOOK_UPDATE" => Ok(ErrorType::OrderBookUpdate),
-                    "ERROR_TYPE_LIMIT_EXCEEDED" => Ok(ErrorType::LimitExceeded),
+                    "ERROR_TYPE_ORDER_LIMIT_EXCEEDED" => Ok(ErrorType::OrderLimitExceeded),
+                    "ERROR_TYPE_FUND_LIMIT_EXCEEDED" => Ok(ErrorType::FundLimitExceeded),
                     "ERROR_TYPE_SYSTEM_ERROR" => Ok(ErrorType::SystemError),
                     "ERROR_TYPE_MARKET_SESSION" => Ok(ErrorType::MarketSession),
+                    "ERROR_TYPE_FUND_UPDATE" => Ok(ErrorType::FundUpdate),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

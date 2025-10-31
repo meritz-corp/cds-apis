@@ -26,6 +26,7 @@ type FundServiceClient interface {
 	GetFund(ctx context.Context, in *GetFundRequest, opts ...grpc.CallOption) (*Fund, error)
 	// 펀드 목록 조회
 	ListFunds(ctx context.Context, in *ListFundsRequest, opts ...grpc.CallOption) (*ListFundsResponse, error)
+	StreamFundLimits(ctx context.Context, in *StreamFundLimitsRequest, opts ...grpc.CallOption) (FundService_StreamFundLimitsClient, error)
 }
 
 type fundServiceClient struct {
@@ -54,6 +55,38 @@ func (c *fundServiceClient) ListFunds(ctx context.Context, in *ListFundsRequest,
 	return out, nil
 }
 
+func (c *fundServiceClient) StreamFundLimits(ctx context.Context, in *StreamFundLimitsRequest, opts ...grpc.CallOption) (FundService_StreamFundLimitsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &FundService_ServiceDesc.Streams[0], "/kdo.v1.fund.FundService/StreamFundLimits", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &fundServiceStreamFundLimitsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type FundService_StreamFundLimitsClient interface {
+	Recv() (*FundLimit, error)
+	grpc.ClientStream
+}
+
+type fundServiceStreamFundLimitsClient struct {
+	grpc.ClientStream
+}
+
+func (x *fundServiceStreamFundLimitsClient) Recv() (*FundLimit, error) {
+	m := new(FundLimit)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // FundServiceServer is the server API for FundService service.
 // All implementations must embed UnimplementedFundServiceServer
 // for forward compatibility
@@ -62,6 +95,7 @@ type FundServiceServer interface {
 	GetFund(context.Context, *GetFundRequest) (*Fund, error)
 	// 펀드 목록 조회
 	ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error)
+	StreamFundLimits(*StreamFundLimitsRequest, FundService_StreamFundLimitsServer) error
 	mustEmbedUnimplementedFundServiceServer()
 }
 
@@ -74,6 +108,9 @@ func (UnimplementedFundServiceServer) GetFund(context.Context, *GetFundRequest) 
 }
 func (UnimplementedFundServiceServer) ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFunds not implemented")
+}
+func (UnimplementedFundServiceServer) StreamFundLimits(*StreamFundLimitsRequest, FundService_StreamFundLimitsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamFundLimits not implemented")
 }
 func (UnimplementedFundServiceServer) mustEmbedUnimplementedFundServiceServer() {}
 
@@ -124,6 +161,27 @@ func _FundService_ListFunds_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FundService_StreamFundLimits_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamFundLimitsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FundServiceServer).StreamFundLimits(m, &fundServiceStreamFundLimitsServer{stream})
+}
+
+type FundService_StreamFundLimitsServer interface {
+	Send(*FundLimit) error
+	grpc.ServerStream
+}
+
+type fundServiceStreamFundLimitsServer struct {
+	grpc.ServerStream
+}
+
+func (x *fundServiceStreamFundLimitsServer) Send(m *FundLimit) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // FundService_ServiceDesc is the grpc.ServiceDesc for FundService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -140,6 +198,12 @@ var FundService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FundService_ListFunds_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamFundLimits",
+			Handler:       _FundService_StreamFundLimits_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "kdo/v1/fund.proto",
 }

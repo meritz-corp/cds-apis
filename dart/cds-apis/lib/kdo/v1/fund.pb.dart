@@ -15,7 +15,11 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'fund.pbenum.dart';
+
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
+export 'fund.pbenum.dart';
 
 /// 펀드 정보
 class Fund extends $pb.GeneratedMessage {
@@ -612,6 +616,246 @@ class PositionExposure extends $pb.GeneratedMessage {
   void clearLastUpdatedAt() => $_clearField(3);
 }
 
+class FundLimit extends $pb.GeneratedMessage {
+  factory FundLimit({
+    $core.String? fund,
+    FundLimitType? limitType,
+    $fixnum.Int64? longLimitQuantity,
+    $fixnum.Int64? longLimitAmount,
+    $fixnum.Int64? shortLimitQuantity,
+    $fixnum.Int64? shortLimitAmount,
+    $fixnum.Int64? limitQuantityPerOrder,
+    $fixnum.Int64? limitAmountPerOrder,
+    $fixnum.Int64? tickLimit,
+    $fixnum.Int64? unfilledLimit,
+    $fixnum.Int64? spreadLimitQuantityPerOrder,
+    $fixnum.Int64? currentLongQuantity,
+    $fixnum.Int64? currentLongAmount,
+    $fixnum.Int64? currentShortQuantity,
+    $fixnum.Int64? currentShortAmount,
+    $fixnum.Int64? currentUnfilled,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (limitType != null) result.limitType = limitType;
+    if (longLimitQuantity != null) result.longLimitQuantity = longLimitQuantity;
+    if (longLimitAmount != null) result.longLimitAmount = longLimitAmount;
+    if (shortLimitQuantity != null) result.shortLimitQuantity = shortLimitQuantity;
+    if (shortLimitAmount != null) result.shortLimitAmount = shortLimitAmount;
+    if (limitQuantityPerOrder != null) result.limitQuantityPerOrder = limitQuantityPerOrder;
+    if (limitAmountPerOrder != null) result.limitAmountPerOrder = limitAmountPerOrder;
+    if (tickLimit != null) result.tickLimit = tickLimit;
+    if (unfilledLimit != null) result.unfilledLimit = unfilledLimit;
+    if (spreadLimitQuantityPerOrder != null) result.spreadLimitQuantityPerOrder = spreadLimitQuantityPerOrder;
+    if (currentLongQuantity != null) result.currentLongQuantity = currentLongQuantity;
+    if (currentLongAmount != null) result.currentLongAmount = currentLongAmount;
+    if (currentShortQuantity != null) result.currentShortQuantity = currentShortQuantity;
+    if (currentShortAmount != null) result.currentShortAmount = currentShortAmount;
+    if (currentUnfilled != null) result.currentUnfilled = currentUnfilled;
+    return result;
+  }
+
+  FundLimit._();
+
+  factory FundLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FundLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FundLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..e<FundLimitType>(2, _omitFieldNames ? '' : 'limitType', $pb.PbFieldType.OE, defaultOrMaker: FundLimitType.FUND_LIMIT_UNSPECIFIED, valueOf: FundLimitType.valueOf, enumValues: FundLimitType.values)
+    ..aInt64(3, _omitFieldNames ? '' : 'longLimitQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'longLimitAmount')
+    ..aInt64(5, _omitFieldNames ? '' : 'shortLimitQuantity')
+    ..aInt64(6, _omitFieldNames ? '' : 'shortLimitAmount')
+    ..aInt64(7, _omitFieldNames ? '' : 'limitQuantityPerOrder')
+    ..aInt64(8, _omitFieldNames ? '' : 'limitAmountPerOrder')
+    ..aInt64(9, _omitFieldNames ? '' : 'tickLimit')
+    ..aInt64(10, _omitFieldNames ? '' : 'unfilledLimit')
+    ..aInt64(11, _omitFieldNames ? '' : 'spreadLimitQuantityPerOrder')
+    ..aInt64(12, _omitFieldNames ? '' : 'currentLongQuantity')
+    ..aInt64(13, _omitFieldNames ? '' : 'currentLongAmount')
+    ..aInt64(14, _omitFieldNames ? '' : 'currentShortQuantity')
+    ..aInt64(15, _omitFieldNames ? '' : 'currentShortAmount')
+    ..aInt64(16, _omitFieldNames ? '' : 'currentUnfilled')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundLimit clone() => FundLimit()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundLimit copyWith(void Function(FundLimit) updates) => super.copyWith((message) => updates(message as FundLimit)) as FundLimit;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FundLimit create() => FundLimit._();
+  @$core.override
+  FundLimit createEmptyInstance() => create();
+  static $pb.PbList<FundLimit> createRepeated() => $pb.PbList<FundLimit>();
+  @$core.pragma('dart2js:noInline')
+  static FundLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FundLimit>(create);
+  static FundLimit? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  FundLimitType get limitType => $_getN(1);
+  @$pb.TagNumber(2)
+  set limitType(FundLimitType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLimitType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLimitType() => $_clearField(2);
+
+  /// 매수한도수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get longLimitQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set longLimitQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLongLimitQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLongLimitQuantity() => $_clearField(3);
+
+  /// 매수한도금액
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get longLimitAmount => $_getI64(3);
+  @$pb.TagNumber(4)
+  set longLimitAmount($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasLongLimitAmount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLongLimitAmount() => $_clearField(4);
+
+  /// 매도한도수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get shortLimitQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set shortLimitQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasShortLimitQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearShortLimitQuantity() => $_clearField(5);
+
+  /// 매도한도금액
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get shortLimitAmount => $_getI64(5);
+  @$pb.TagNumber(6)
+  set shortLimitAmount($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasShortLimitAmount() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearShortLimitAmount() => $_clearField(6);
+
+  /// 1회 주문 한도계약수
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get limitQuantityPerOrder => $_getI64(6);
+  @$pb.TagNumber(7)
+  set limitQuantityPerOrder($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasLimitQuantityPerOrder() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearLimitQuantityPerOrder() => $_clearField(7);
+
+  /// 1회 주문 한도금액
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get limitAmountPerOrder => $_getI64(7);
+  @$pb.TagNumber(8)
+  set limitAmountPerOrder($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasLimitAmountPerOrder() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearLimitAmountPerOrder() => $_clearField(8);
+
+  /// 1회 주문 한도틱
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get tickLimit => $_getI64(8);
+  @$pb.TagNumber(9)
+  set tickLimit($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasTickLimit() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearTickLimit() => $_clearField(9);
+
+  /// 미체결한도수량
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get unfilledLimit => $_getI64(9);
+  @$pb.TagNumber(10)
+  set unfilledLimit($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasUnfilledLimit() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearUnfilledLimit() => $_clearField(10);
+
+  /// 스프레드 1회 주문 한도계약수
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get spreadLimitQuantityPerOrder => $_getI64(10);
+  @$pb.TagNumber(11)
+  set spreadLimitQuantityPerOrder($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasSpreadLimitQuantityPerOrder() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearSpreadLimitQuantityPerOrder() => $_clearField(11);
+
+  /// 현재 누적 매수 수량
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get currentLongQuantity => $_getI64(11);
+  @$pb.TagNumber(12)
+  set currentLongQuantity($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasCurrentLongQuantity() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearCurrentLongQuantity() => $_clearField(12);
+
+  /// 현재 누적 매수 금액
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get currentLongAmount => $_getI64(12);
+  @$pb.TagNumber(13)
+  set currentLongAmount($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasCurrentLongAmount() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearCurrentLongAmount() => $_clearField(13);
+
+  /// 현재 누적 매도 수량 (음수로 저장)
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get currentShortQuantity => $_getI64(13);
+  @$pb.TagNumber(14)
+  set currentShortQuantity($fixnum.Int64 value) => $_setInt64(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasCurrentShortQuantity() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearCurrentShortQuantity() => $_clearField(14);
+
+  /// 현재 누적 매도 금액 (음수로 저장)
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get currentShortAmount => $_getI64(14);
+  @$pb.TagNumber(15)
+  set currentShortAmount($fixnum.Int64 value) => $_setInt64(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasCurrentShortAmount() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearCurrentShortAmount() => $_clearField(15);
+
+  /// 현재 미체결 수량
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get currentUnfilled => $_getI64(15);
+  @$pb.TagNumber(16)
+  set currentUnfilled($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasCurrentUnfilled() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearCurrentUnfilled() => $_clearField(16);
+}
+
 /// GetFund 요청
 class GetFundRequest extends $pb.GeneratedMessage {
   factory GetFundRequest({
@@ -795,6 +1039,71 @@ class ListFundsResponse extends $pb.GeneratedMessage {
   $core.bool hasNextPageToken() => $_has(1);
   @$pb.TagNumber(2)
   void clearNextPageToken() => $_clearField(2);
+}
+
+class StreamFundLimitsRequest extends $pb.GeneratedMessage {
+  factory StreamFundLimitsRequest({
+    $core.String? fund,
+    $core.String? filter,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  StreamFundLimitsRequest._();
+
+  factory StreamFundLimitsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamFundLimitsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFundLimitsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'filter')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFundLimitsRequest clone() => StreamFundLimitsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFundLimitsRequest copyWith(void Function(StreamFundLimitsRequest) updates) => super.copyWith((message) => updates(message as StreamFundLimitsRequest)) as StreamFundLimitsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamFundLimitsRequest create() => StreamFundLimitsRequest._();
+  @$core.override
+  StreamFundLimitsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamFundLimitsRequest> createRepeated() => $pb.PbList<StreamFundLimitsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamFundLimitsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamFundLimitsRequest>(create);
+  static StreamFundLimitsRequest? _defaultInstance;
+
+  /// 펀드 리소스 이름 (예: funds/KR1234567890)
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// Available Sequence and Operator
+  /// * limit_type
+  ///   * `equal`
+  ///
+  /// Examples
+  /// * filter=limit_type=Stock
+  @$pb.TagNumber(2)
+  $core.String get filter => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set filter($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFilter() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilter() => $_clearField(2);
 }
 
 

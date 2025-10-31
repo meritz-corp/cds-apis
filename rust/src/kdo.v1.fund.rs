@@ -127,6 +127,57 @@ pub struct PositionExposure {
     #[prost(int64, tag="3")]
     pub last_updated_at: i64,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FundLimit {
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    ///
+    #[prost(enumeration="FundLimitType", tag="2")]
+    pub limit_type: i32,
+    /// 매수한도수량
+    #[prost(int64, tag="3")]
+    pub long_limit_quantity: i64,
+    /// 매수한도금액
+    #[prost(int64, tag="4")]
+    pub long_limit_amount: i64,
+    /// 매도한도수량
+    #[prost(int64, tag="5")]
+    pub short_limit_quantity: i64,
+    /// 매도한도금액
+    #[prost(int64, tag="6")]
+    pub short_limit_amount: i64,
+    /// 1회 주문 한도계약수
+    #[prost(int64, tag="7")]
+    pub limit_quantity_per_order: i64,
+    /// 1회 주문 한도금액
+    #[prost(int64, tag="8")]
+    pub limit_amount_per_order: i64,
+    /// 1회 주문 한도틱
+    #[prost(int64, tag="9")]
+    pub tick_limit: i64,
+    /// 미체결한도수량
+    #[prost(int64, tag="10")]
+    pub unfilled_limit: i64,
+    /// 스프레드 1회 주문 한도계약수
+    #[prost(int64, tag="11")]
+    pub spread_limit_quantity_per_order: i64,
+    /// 현재 누적 매수 수량
+    #[prost(int64, tag="12")]
+    pub current_long_quantity: i64,
+    /// 현재 누적 매수 금액
+    #[prost(int64, tag="13")]
+    pub current_long_amount: i64,
+    /// 현재 누적 매도 수량 (음수로 저장)
+    #[prost(int64, tag="14")]
+    pub current_short_quantity: i64,
+    /// 현재 누적 매도 금액 (음수로 저장)
+    #[prost(int64, tag="15")]
+    pub current_short_amount: i64,
+    /// 현재 미체결 수량
+    #[prost(int64, tag="16")]
+    pub current_unfilled: i64,
+}
 // ========== Request/Response Messages ==========
 
 /// GetFund 요청
@@ -169,6 +220,50 @@ pub struct ListFundsResponse {
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamFundLimitsRequest {
+    /// 펀드 리소스 이름 (예: funds/KR1234567890)
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// Available Sequence and Operator
+    /// * limit_type
+    ///    * `equal`
+    ///
+    /// Examples
+    /// * filter=limit_type=Stock
+    #[prost(string, tag="2")]
+    pub filter: ::prost::alloc::string::String,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum FundLimitType {
+    FundLimitUnspecified = 0,
+    Kospi200Future = 1,
+    Stock = 2,
+}
+impl FundLimitType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FundLimitType::FundLimitUnspecified => "FUND_LIMIT_UNSPECIFIED",
+            FundLimitType::Kospi200Future => "KOSPI_200_Future",
+            FundLimitType::Stock => "STOCK",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "FUND_LIMIT_UNSPECIFIED" => Some(Self::FundLimitUnspecified),
+            "KOSPI_200_Future" => Some(Self::Kospi200Future),
+            "STOCK" => Some(Self::Stock),
+            _ => None,
+        }
+    }
 }
 include!("kdo.v1.fund.tonic.rs");
 include!("kdo.v1.fund.serde.rs");

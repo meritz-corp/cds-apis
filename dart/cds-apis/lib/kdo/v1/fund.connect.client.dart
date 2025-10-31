@@ -44,4 +44,21 @@ extension type FundServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  Stream<kdov1fund.FundLimit> streamFundLimits(
+    kdov1fund.StreamFundLimitsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.FundService.streamFundLimits,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }
