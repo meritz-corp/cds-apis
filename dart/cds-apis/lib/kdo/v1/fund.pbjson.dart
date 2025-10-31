@@ -52,7 +52,7 @@ const Fund$json = {
     {'1': 'add_up_unique_trading_unit', '3': 19, '4': 1, '5': 8, '10': 'addUpUniqueTradingUnit'},
     {'1': 'short_selling_id', '3': 20, '4': 1, '5': 9, '10': 'shortSellingId'},
     {'1': 'pnl', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundPnL', '10': 'pnl'},
-    {'1': 'exposure', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundExposure', '10': 'exposure'},
+    {'1': 'positions', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundPosition', '10': 'positions'},
   ],
 };
 
@@ -72,59 +72,66 @@ final $typed_data.Uint8List fundDescriptor = $convert.base64Decode(
     'xfbnVtYmVyGBIgASgDUh11bmlxdWVUcmFkaW5nVW5pdFNlcmlhbE51bWJlchI6ChphZGRfdXBf'
     'dW5pcXVlX3RyYWRpbmdfdW5pdBgTIAEoCFIWYWRkVXBVbmlxdWVUcmFkaW5nVW5pdBIoChBzaG'
     '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZBImCgNwbmwYFSABKAsyFC5rZG8u'
-    'djEuZnVuZC5GdW5kUG5MUgNwbmwSNQoIZXhwb3N1cmUYFiABKAsyGS5rZG8udjEuZnVuZC5GdW'
-    '5kRXhwb3N1cmVSCGV4cG9zdXJl');
+    'djEuZnVuZC5GdW5kUG5MUgNwbmwSNwoJcG9zaXRpb25zGBYgASgLMhkua2RvLnYxLmZ1bmQuRn'
+    'VuZFBvc2l0aW9uUglwb3NpdGlvbnM=');
 
 @$core.Deprecated('Use fundPnLDescriptor instead')
 const FundPnL$json = {
   '1': 'FundPnL',
   '2': [
-    {'1': 'positions', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.PositionPnL', '10': 'positions'},
+    {'1': 'symbols', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.SymbolPnL', '10': 'symbols'},
     {'1': 'daily_pnl', '3': 2, '4': 1, '5': 3, '10': 'dailyPnl'},
-    {'1': 'last_updated_at', '3': 3, '4': 1, '5': 3, '10': 'lastUpdatedAt'},
   ],
 };
 
 /// Descriptor for `FundPnL`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fundPnLDescriptor = $convert.base64Decode(
-    'CgdGdW5kUG5MEjYKCXBvc2l0aW9ucxgBIAMoCzIYLmtkby52MS5mdW5kLlBvc2l0aW9uUG5MUg'
-    'lwb3NpdGlvbnMSGwoJZGFpbHlfcG5sGAIgASgDUghkYWlseVBubBImCg9sYXN0X3VwZGF0ZWRf'
-    'YXQYAyABKANSDWxhc3RVcGRhdGVkQXQ=');
+    'CgdGdW5kUG5MEjAKB3N5bWJvbHMYASADKAsyFi5rZG8udjEuZnVuZC5TeW1ib2xQbkxSB3N5bW'
+    'JvbHMSGwoJZGFpbHlfcG5sGAIgASgDUghkYWlseVBubA==');
 
-@$core.Deprecated('Use positionPnLDescriptor instead')
-const PositionPnL$json = {
-  '1': 'PositionPnL',
+@$core.Deprecated('Use symbolPnLDescriptor instead')
+const SymbolPnL$json = {
+  '1': 'SymbolPnL',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'average_buy_price', '3': 2, '4': 1, '5': 1, '10': 'averageBuyPrice'},
     {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'realized_pnl', '3': 4, '4': 1, '5': 3, '10': 'realizedPnl'},
     {'1': 'trading_cost', '3': 5, '4': 1, '5': 3, '10': 'tradingCost'},
-    {'1': 'last_updated_at', '3': 6, '4': 1, '5': 3, '10': 'lastUpdatedAt'},
   ],
 };
 
-/// Descriptor for `PositionPnL`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List positionPnLDescriptor = $convert.base64Decode(
-    'CgtQb3NpdGlvblBuTBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIqChFhdmVyYWdlX2J1eV9wcm'
-    'ljZRgCIAEoAVIPYXZlcmFnZUJ1eVByaWNlEhoKCHF1YW50aXR5GAMgASgDUghxdWFudGl0eRIh'
-    'CgxyZWFsaXplZF9wbmwYBCABKANSC3JlYWxpemVkUG5sEiEKDHRyYWRpbmdfY29zdBgFIAEoA1'
-    'ILdHJhZGluZ0Nvc3QSJgoPbGFzdF91cGRhdGVkX2F0GAYgASgDUg1sYXN0VXBkYXRlZEF0');
+/// Descriptor for `SymbolPnL`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List symbolPnLDescriptor = $convert.base64Decode(
+    'CglTeW1ib2xQbkwSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSKgoRYXZlcmFnZV9idXlfcHJpY2'
+    'UYAiABKAFSD2F2ZXJhZ2VCdXlQcmljZRIaCghxdWFudGl0eRgDIAEoA1IIcXVhbnRpdHkSIQoM'
+    'cmVhbGl6ZWRfcG5sGAQgASgDUgtyZWFsaXplZFBubBIhCgx0cmFkaW5nX2Nvc3QYBSABKANSC3'
+    'RyYWRpbmdDb3N0');
 
-@$core.Deprecated('Use fundExposureDescriptor instead')
-const FundExposure$json = {
-  '1': 'FundExposure',
+@$core.Deprecated('Use fundPositionDescriptor instead')
+const FundPosition$json = {
+  '1': 'FundPosition',
   '2': [
-    {'1': 'positions', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.PositionExposure', '10': 'positions'},
-    {'1': 'last_updated_at', '3': 2, '4': 1, '5': 3, '10': 'lastUpdatedAt'},
+    {'1': 'symbols', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundPosition.SymbolsEntry', '10': 'symbols'},
   ],
+  '3': [FundPosition_SymbolsEntry$json],
 };
 
-/// Descriptor for `FundExposure`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List fundExposureDescriptor = $convert.base64Decode(
-    'CgxGdW5kRXhwb3N1cmUSOwoJcG9zaXRpb25zGAEgAygLMh0ua2RvLnYxLmZ1bmQuUG9zaXRpb2'
-    '5FeHBvc3VyZVIJcG9zaXRpb25zEiYKD2xhc3RfdXBkYXRlZF9hdBgCIAEoA1INbGFzdFVwZGF0'
-    'ZWRBdA==');
+@$core.Deprecated('Use fundPositionDescriptor instead')
+const FundPosition_SymbolsEntry$json = {
+  '1': 'SymbolsEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 3, '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `FundPosition`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fundPositionDescriptor = $convert.base64Decode(
+    'CgxGdW5kUG9zaXRpb24SQAoHc3ltYm9scxgBIAMoCzImLmtkby52MS5mdW5kLkZ1bmRQb3NpdG'
+    'lvbi5TeW1ib2xzRW50cnlSB3N5bWJvbHMaOgoMU3ltYm9sc0VudHJ5EhAKA2tleRgBIAEoCVID'
+    'a2V5EhQKBXZhbHVlGAIgASgDUgV2YWx1ZToCOAE=');
 
 @$core.Deprecated('Use positionExposureDescriptor instead')
 const PositionExposure$json = {

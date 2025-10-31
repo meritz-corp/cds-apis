@@ -307,30 +307,12 @@
           "$ref": "#/definitions/fundFundPnL",
           "title": "펀드 손익 정보"
         },
-        "exposure": {
-          "$ref": "#/definitions/fundFundExposure",
+        "positions": {
+          "$ref": "#/definitions/fundFundPosition",
           "title": "펀드 익스포저 정보"
         }
       },
       "title": "펀드 정보"
-    },
-    "fundFundExposure": {
-      "type": "object",
-      "properties": {
-        "positions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/fundPositionExposure"
-          },
-          "title": "종목별 포지션 수량 목록"
-        },
-        "lastUpdatedAt": {
-          "type": "string",
-          "format": "int64",
-          "title": "마지막 업데이트 시각 (Unix timestamp micros)"
-        }
-      },
-      "title": "펀드 익스포저(Exposure) 관리"
     },
     "fundFundLimit": {
       "type": "object",
@@ -428,10 +410,10 @@
     "fundFundPnL": {
       "type": "object",
       "properties": {
-        "positions": {
+        "symbols": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/fundPositionPnL"
+            "$ref": "#/definitions/fundSymbolPnL"
           },
           "title": "종목별 포지션 PnL 목록"
         },
@@ -439,14 +421,23 @@
           "type": "string",
           "format": "int64",
           "title": "일일 손익"
-        },
-        "lastUpdatedAt": {
-          "type": "string",
-          "format": "int64",
-          "title": "마지막 업데이트 시각 (Unix timestamp micros)"
         }
       },
       "title": "펀드 손익(PnL) 관리"
+    },
+    "fundFundPosition": {
+      "type": "object",
+      "properties": {
+        "symbols": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "종목별 포지션 수량 목록"
+        }
+      },
+      "title": "펀드 익스포저(Exposure) 관리"
     },
     "fundListFundLimitsResponse": {
       "type": "object",
@@ -481,27 +472,7 @@
       },
       "title": "ListFunds 응답"
     },
-    "fundPositionExposure": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "종목 코드"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "보유 수량"
-        },
-        "lastUpdatedAt": {
-          "type": "string",
-          "format": "int64",
-          "title": "마지막 업데이트 시각 (Unix timestamp micros)"
-        }
-      },
-      "title": "종목별 포지션 익스포저"
-    },
-    "fundPositionPnL": {
+    "fundSymbolPnL": {
       "type": "object",
       "properties": {
         "symbol": {
@@ -527,11 +498,6 @@
           "type": "string",
           "format": "int64",
           "title": "거래 비용"
-        },
-        "lastUpdatedAt": {
-          "type": "string",
-          "format": "int64",
-          "title": "마지막 업데이트 시각 (Unix timestamp micros)"
         }
       },
       "title": "종목별 포지션 PnL"

@@ -63,7 +63,7 @@ pub struct Fund {
     pub pnl: ::core::option::Option<FundPnL>,
     /// 펀드 익스포저 정보
     #[prost(message, optional, tag="22")]
-    pub exposure: ::core::option::Option<FundExposure>,
+    pub positions: ::core::option::Option<FundPosition>,
 }
 /// 펀드 손익(PnL) 관리
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -71,18 +71,15 @@ pub struct Fund {
 pub struct FundPnL {
     /// 종목별 포지션 PnL 목록
     #[prost(message, repeated, tag="1")]
-    pub positions: ::prost::alloc::vec::Vec<PositionPnL>,
+    pub symbols: ::prost::alloc::vec::Vec<SymbolPnL>,
     /// 일일 손익
     #[prost(int64, tag="2")]
     pub daily_pnl: i64,
-    /// 마지막 업데이트 시각 (Unix timestamp micros)
-    #[prost(int64, tag="3")]
-    pub last_updated_at: i64,
 }
 /// 종목별 포지션 PnL
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PositionPnL {
+pub struct SymbolPnL {
     /// 종목 코드
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -98,20 +95,14 @@ pub struct PositionPnL {
     /// 거래 비용
     #[prost(int64, tag="5")]
     pub trading_cost: i64,
-    /// 마지막 업데이트 시각 (Unix timestamp micros)
-    #[prost(int64, tag="6")]
-    pub last_updated_at: i64,
 }
 /// 펀드 익스포저(Exposure) 관리
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FundExposure {
+pub struct FundPosition {
     /// 종목별 포지션 수량 목록
-    #[prost(message, repeated, tag="1")]
-    pub positions: ::prost::alloc::vec::Vec<PositionExposure>,
-    /// 마지막 업데이트 시각 (Unix timestamp micros)
-    #[prost(int64, tag="2")]
-    pub last_updated_at: i64,
+    #[prost(map="string, int64", tag="1")]
+    pub symbols: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
 }
 /// 종목별 포지션 익스포저
 #[allow(clippy::derive_partial_eq_without_eq)]
