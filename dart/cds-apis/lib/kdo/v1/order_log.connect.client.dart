@@ -44,4 +44,40 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 주문 로그 조회
+  Future<kdov1order_log.OrderLogFillStatistics> getOrderLogStatistics(
+    kdov1order_log.GetOrderLogStatisticsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLogService.getOrderLogStatistics,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 주문 로그 조회
+  Future<kdov1order_log.OrderLogFillStatistics> streamOrderLogStatistics(
+    kdov1order_log.GetOrderLogStatisticsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLogService.streamOrderLogStatistics,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

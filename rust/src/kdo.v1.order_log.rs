@@ -67,6 +67,25 @@ pub struct OrderLog {
     #[prost(message, optional, tag="18")]
     pub created_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct OrderLogFillStatistics {
+    /// 총 체결 건수
+    #[prost(int64, tag="1")]
+    pub total_fills: i64,
+    /// 총 체결 수량
+    #[prost(int64, tag="2")]
+    pub total_quantity: i64,
+    /// 총 체결 금액
+    #[prost(int64, tag="3")]
+    pub total_amount: i64,
+    /// 매수 체결 건수
+    #[prost(int64, tag="4")]
+    pub buy_count: i64,
+    /// 매도 체결 건수
+    #[prost(int64, tag="5")]
+    pub sell_count: i64,
+}
 // ========== Request/Response Messages ==========
 
 /// ListOrderLogs 요청
@@ -101,6 +120,21 @@ pub struct ListOrderLogsResponse {
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetOrderLogStatisticsRequest {
+    /// Available Sequence and Operator
+    /// * fund_code
+    ///    * `equal`, `contains`
+    /// * symbol
+    ///    * `equal`, `contains`
+    ///
+    /// Examples
+    /// * filter=fund_code="0159"
+    /// * filter=symbol:"7526"
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
 }
 /// 주문 로그 타입
 ///

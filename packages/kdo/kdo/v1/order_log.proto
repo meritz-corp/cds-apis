@@ -29,6 +29,22 @@ service OrderLogService {
     };
     option (google.api.method_signature) = "";
   }
+
+  // 주문 로그 조회
+  rpc GetOrderLogStatistics(GetOrderLogStatisticsRequest) returns (OrderLogFillStatistics) {
+    option (google.api.http) = {
+      get: "/v1/order_logs/statistics"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 주문 로그 조회
+  rpc StreamOrderLogStatistics(GetOrderLogStatisticsRequest) returns (OrderLogFillStatistics) {
+    option (google.api.http) = {
+      get: "/v1/order_logs/statistics:stream"
+    };
+    option (google.api.method_signature) = "";
+  }
 }
 
 
@@ -139,6 +155,23 @@ enum OrderType {
 }
 
 
+message OrderLogFillStatistics {
+  // 총 체결 건수
+  int64 total_fills = 1;
+
+  // 총 체결 수량
+  int64 total_quantity = 2;
+
+  // 총 체결 금액
+  int64 total_amount = 3;
+
+  // 매수 체결 건수
+  int64 buy_count = 4;
+
+  // 매도 체결 건수
+  int64 sell_count = 5;
+}
+
 // ========== Request/Response Messages ==========
 
 // ListOrderLogs 요청
@@ -168,4 +201,17 @@ message ListOrderLogsResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
+}
+
+message GetOrderLogStatisticsRequest {
+  // Available Sequence and Operator
+  // * fund_code
+  //   * `equal`, `contains`
+  // * symbol
+  //   * `equal`, `contains`
+  //
+  // Examples
+  // * filter=fund_code="0159"
+  // * filter=symbol:"7526"
+  string filter = 1;
 }

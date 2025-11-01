@@ -1,4 +1,99 @@
 // @generated
+impl serde::Serialize for GetOrderLogStatisticsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.GetOrderLogStatisticsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("filter", &self.filter)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetOrderLogStatisticsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "filter",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Filter,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "filter" => Ok(GeneratedField::Filter),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetOrderLogStatisticsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.GetOrderLogStatisticsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetOrderLogStatisticsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut filter__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Filter => {
+                            if filter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filter"));
+                            }
+                            filter__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetOrderLogStatisticsRequest {
+                    filter: filter__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.GetOrderLogStatisticsRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListOrderLogsRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -667,6 +762,194 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             }
         }
         deserializer.deserialize_struct("kdo.v1.order_log.OrderLog", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for OrderLogFillStatistics {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLogFillStatistics", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_fills", ToString::to_string(&self.total_fills).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_quantity", ToString::to_string(&self.total_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_amount", ToString::to_string(&self.total_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("buy_count", ToString::to_string(&self.buy_count).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sell_count", ToString::to_string(&self.sell_count).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrderLogFillStatistics {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "total_fills",
+            "totalFills",
+            "total_quantity",
+            "totalQuantity",
+            "total_amount",
+            "totalAmount",
+            "buy_count",
+            "buyCount",
+            "sell_count",
+            "sellCount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TotalFills,
+            TotalQuantity,
+            TotalAmount,
+            BuyCount,
+            SellCount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "totalFills" | "total_fills" => Ok(GeneratedField::TotalFills),
+                            "totalQuantity" | "total_quantity" => Ok(GeneratedField::TotalQuantity),
+                            "totalAmount" | "total_amount" => Ok(GeneratedField::TotalAmount),
+                            "buyCount" | "buy_count" => Ok(GeneratedField::BuyCount),
+                            "sellCount" | "sell_count" => Ok(GeneratedField::SellCount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrderLogFillStatistics;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.OrderLogFillStatistics")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OrderLogFillStatistics, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut total_fills__ = None;
+                let mut total_quantity__ = None;
+                let mut total_amount__ = None;
+                let mut buy_count__ = None;
+                let mut sell_count__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TotalFills => {
+                            if total_fills__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalFills"));
+                            }
+                            total_fills__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TotalQuantity => {
+                            if total_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalQuantity"));
+                            }
+                            total_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TotalAmount => {
+                            if total_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalAmount"));
+                            }
+                            total_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BuyCount => {
+                            if buy_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyCount"));
+                            }
+                            buy_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellCount => {
+                            if sell_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellCount"));
+                            }
+                            sell_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(OrderLogFillStatistics {
+                    total_fills: total_fills__.unwrap_or_default(),
+                    total_quantity: total_quantity__.unwrap_or_default(),
+                    total_amount: total_amount__.unwrap_or_default(),
+                    buy_count: buy_count__.unwrap_or_default(),
+                    sell_count: sell_count__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.OrderLogFillStatistics", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for OrderLogType {

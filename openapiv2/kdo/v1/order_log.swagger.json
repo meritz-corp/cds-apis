@@ -63,6 +63,70 @@
         ]
       }
     },
+    "/v1/order_logs/statistics": {
+      "get": {
+        "summary": "주문 로그 조회",
+        "operationId": "OrderLogService_GetOrderLogStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logOrderLogFillStatistics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
+    "/v1/order_logs/statistics:stream": {
+      "get": {
+        "summary": "주문 로그 조회",
+        "operationId": "OrderLogService_StreamOrderLogStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logOrderLogFillStatistics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
     "/v1/order_logs:stream": {
       "get": {
         "summary": "주문 로그 조회",
@@ -212,6 +276,36 @@
         }
       },
       "title": "주문 로그"
+    },
+    "order_logOrderLogFillStatistics": {
+      "type": "object",
+      "properties": {
+        "totalFills": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 체결 건수"
+        },
+        "totalQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 체결 수량"
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 체결 금액"
+        },
+        "buyCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 체결 건수"
+        },
+        "sellCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 체결 건수"
+        }
+      }
     },
     "order_logOrderLogType": {
       "type": "string",

@@ -301,6 +301,105 @@ class OrderLog extends $pb.GeneratedMessage {
   $1.Timestamp ensureCreatedAt() => $_ensure(17);
 }
 
+class OrderLogFillStatistics extends $pb.GeneratedMessage {
+  factory OrderLogFillStatistics({
+    $fixnum.Int64? totalFills,
+    $fixnum.Int64? totalQuantity,
+    $fixnum.Int64? totalAmount,
+    $fixnum.Int64? buyCount,
+    $fixnum.Int64? sellCount,
+  }) {
+    final result = create();
+    if (totalFills != null) result.totalFills = totalFills;
+    if (totalQuantity != null) result.totalQuantity = totalQuantity;
+    if (totalAmount != null) result.totalAmount = totalAmount;
+    if (buyCount != null) result.buyCount = buyCount;
+    if (sellCount != null) result.sellCount = sellCount;
+    return result;
+  }
+
+  OrderLogFillStatistics._();
+
+  factory OrderLogFillStatistics.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory OrderLogFillStatistics.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderLogFillStatistics', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'totalFills')
+    ..aInt64(2, _omitFieldNames ? '' : 'totalQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'totalAmount')
+    ..aInt64(4, _omitFieldNames ? '' : 'buyCount')
+    ..aInt64(5, _omitFieldNames ? '' : 'sellCount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderLogFillStatistics clone() => OrderLogFillStatistics()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderLogFillStatistics copyWith(void Function(OrderLogFillStatistics) updates) => super.copyWith((message) => updates(message as OrderLogFillStatistics)) as OrderLogFillStatistics;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OrderLogFillStatistics create() => OrderLogFillStatistics._();
+  @$core.override
+  OrderLogFillStatistics createEmptyInstance() => create();
+  static $pb.PbList<OrderLogFillStatistics> createRepeated() => $pb.PbList<OrderLogFillStatistics>();
+  @$core.pragma('dart2js:noInline')
+  static OrderLogFillStatistics getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OrderLogFillStatistics>(create);
+  static OrderLogFillStatistics? _defaultInstance;
+
+  /// 총 체결 건수
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get totalFills => $_getI64(0);
+  @$pb.TagNumber(1)
+  set totalFills($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTotalFills() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTotalFills() => $_clearField(1);
+
+  /// 총 체결 수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get totalQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set totalQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTotalQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTotalQuantity() => $_clearField(2);
+
+  /// 총 체결 금액
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get totalAmount => $_getI64(2);
+  @$pb.TagNumber(3)
+  set totalAmount($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTotalAmount() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalAmount() => $_clearField(3);
+
+  /// 매수 체결 건수
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get buyCount => $_getI64(3);
+  @$pb.TagNumber(4)
+  set buyCount($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBuyCount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBuyCount() => $_clearField(4);
+
+  /// 매도 체결 건수
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get sellCount => $_getI64(4);
+  @$pb.TagNumber(5)
+  set sellCount($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSellCount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSellCount() => $_clearField(5);
+}
+
 /// ListOrderLogs 요청
 class ListOrderLogsRequest extends $pb.GeneratedMessage {
   factory ListOrderLogsRequest({
@@ -436,6 +535,61 @@ class ListOrderLogsResponse extends $pb.GeneratedMessage {
   $core.bool hasNextPageToken() => $_has(1);
   @$pb.TagNumber(2)
   void clearNextPageToken() => $_clearField(2);
+}
+
+class GetOrderLogStatisticsRequest extends $pb.GeneratedMessage {
+  factory GetOrderLogStatisticsRequest({
+    $core.String? filter,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  GetOrderLogStatisticsRequest._();
+
+  factory GetOrderLogStatisticsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetOrderLogStatisticsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOrderLogStatisticsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetOrderLogStatisticsRequest clone() => GetOrderLogStatisticsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetOrderLogStatisticsRequest copyWith(void Function(GetOrderLogStatisticsRequest) updates) => super.copyWith((message) => updates(message as GetOrderLogStatisticsRequest)) as GetOrderLogStatisticsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetOrderLogStatisticsRequest create() => GetOrderLogStatisticsRequest._();
+  @$core.override
+  GetOrderLogStatisticsRequest createEmptyInstance() => create();
+  static $pb.PbList<GetOrderLogStatisticsRequest> createRepeated() => $pb.PbList<GetOrderLogStatisticsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetOrderLogStatisticsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetOrderLogStatisticsRequest>(create);
+  static GetOrderLogStatisticsRequest? _defaultInstance;
+
+  /// Available Sequence and Operator
+  /// * fund_code
+  ///   * `equal`, `contains`
+  /// * symbol
+  ///   * `equal`, `contains`
+  ///
+  /// Examples
+  /// * filter=fund_code="0159"
+  /// * filter=symbol:"7526"
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
 }
 
 

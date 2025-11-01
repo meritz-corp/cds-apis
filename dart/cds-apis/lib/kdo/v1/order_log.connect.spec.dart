@@ -26,4 +26,20 @@ abstract final class OrderLogService {
     kdov1order_log.ListOrderLogsRequest.new,
     kdov1order_log.ListOrderLogsResponse.new,
   );
+
+  /// 주문 로그 조회
+  static const getOrderLogStatistics = connect.Spec(
+    '/$name/GetOrderLogStatistics',
+    connect.StreamType.unary,
+    kdov1order_log.GetOrderLogStatisticsRequest.new,
+    kdov1order_log.OrderLogFillStatistics.new,
+  );
+
+  /// 주문 로그 조회
+  static const streamOrderLogStatistics = connect.Spec(
+    '/$name/StreamOrderLogStatistics',
+    connect.StreamType.unary,
+    kdov1order_log.GetOrderLogStatisticsRequest.new,
+    kdov1order_log.OrderLogFillStatistics.new,
+  );
 }

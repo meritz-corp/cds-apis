@@ -34,6 +34,26 @@ func (m *MockOrderLogServiceClient) EXPECT() *MockOrderLogServiceClientMockRecor
 	return m.recorder
 }
 
+// GetOrderLogStatistics mocks base method.
+func (m *MockOrderLogServiceClient) GetOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetOrderLogStatistics", varargs...)
+	ret0, _ := ret[0].(*OrderLogFillStatistics)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrderLogStatistics indicates an expected call of GetOrderLogStatistics.
+func (mr *MockOrderLogServiceClientMockRecorder) GetOrderLogStatistics(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderLogStatistics", reflect.TypeOf((*MockOrderLogServiceClient)(nil).GetOrderLogStatistics), varargs...)
+}
+
 // ListOrderLogs mocks base method.
 func (m *MockOrderLogServiceClient) ListOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (*ListOrderLogsResponse, error) {
 	m.ctrl.T.Helper()
@@ -52,6 +72,26 @@ func (mr *MockOrderLogServiceClientMockRecorder) ListOrderLogs(ctx, in interface
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListOrderLogs", reflect.TypeOf((*MockOrderLogServiceClient)(nil).ListOrderLogs), varargs...)
+}
+
+// StreamOrderLogStatistics mocks base method.
+func (m *MockOrderLogServiceClient) StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamOrderLogStatistics", varargs...)
+	ret0, _ := ret[0].(*OrderLogFillStatistics)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamOrderLogStatistics indicates an expected call of StreamOrderLogStatistics.
+func (mr *MockOrderLogServiceClientMockRecorder) StreamOrderLogStatistics(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamOrderLogStatistics", reflect.TypeOf((*MockOrderLogServiceClient)(nil).StreamOrderLogStatistics), varargs...)
 }
 
 // StreamOrderLogs mocks base method.
@@ -97,6 +137,21 @@ func (m *MockOrderLogServiceServer) EXPECT() *MockOrderLogServiceServerMockRecor
 	return m.recorder
 }
 
+// GetOrderLogStatistics mocks base method.
+func (m *MockOrderLogServiceServer) GetOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest) (*OrderLogFillStatistics, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrderLogStatistics", ctx, in)
+	ret0, _ := ret[0].(*OrderLogFillStatistics)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrderLogStatistics indicates an expected call of GetOrderLogStatistics.
+func (mr *MockOrderLogServiceServerMockRecorder) GetOrderLogStatistics(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderLogStatistics", reflect.TypeOf((*MockOrderLogServiceServer)(nil).GetOrderLogStatistics), ctx, in)
+}
+
 // ListOrderLogs mocks base method.
 func (m *MockOrderLogServiceServer) ListOrderLogs(ctx context.Context, in *ListOrderLogsRequest) (*ListOrderLogsResponse, error) {
 	m.ctrl.T.Helper()
@@ -110,6 +165,21 @@ func (m *MockOrderLogServiceServer) ListOrderLogs(ctx context.Context, in *ListO
 func (mr *MockOrderLogServiceServerMockRecorder) ListOrderLogs(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListOrderLogs", reflect.TypeOf((*MockOrderLogServiceServer)(nil).ListOrderLogs), ctx, in)
+}
+
+// StreamOrderLogStatistics mocks base method.
+func (m *MockOrderLogServiceServer) StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest) (*OrderLogFillStatistics, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamOrderLogStatistics", ctx, in)
+	ret0, _ := ret[0].(*OrderLogFillStatistics)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamOrderLogStatistics indicates an expected call of StreamOrderLogStatistics.
+func (mr *MockOrderLogServiceServerMockRecorder) StreamOrderLogStatistics(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamOrderLogStatistics", reflect.TypeOf((*MockOrderLogServiceServer)(nil).StreamOrderLogStatistics), ctx, in)
 }
 
 // StreamOrderLogs mocks base method.

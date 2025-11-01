@@ -115,6 +115,25 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5QhAKDl9m'
     'aWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZQ==');
 
+@$core.Deprecated('Use orderLogFillStatisticsDescriptor instead')
+const OrderLogFillStatistics$json = {
+  '1': 'OrderLogFillStatistics',
+  '2': [
+    {'1': 'total_fills', '3': 1, '4': 1, '5': 3, '10': 'totalFills'},
+    {'1': 'total_quantity', '3': 2, '4': 1, '5': 3, '10': 'totalQuantity'},
+    {'1': 'total_amount', '3': 3, '4': 1, '5': 3, '10': 'totalAmount'},
+    {'1': 'buy_count', '3': 4, '4': 1, '5': 3, '10': 'buyCount'},
+    {'1': 'sell_count', '3': 5, '4': 1, '5': 3, '10': 'sellCount'},
+  ],
+};
+
+/// Descriptor for `OrderLogFillStatistics`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List orderLogFillStatisticsDescriptor = $convert.base64Decode(
+    'ChZPcmRlckxvZ0ZpbGxTdGF0aXN0aWNzEh8KC3RvdGFsX2ZpbGxzGAEgASgDUgp0b3RhbEZpbG'
+    'xzEiUKDnRvdGFsX3F1YW50aXR5GAIgASgDUg10b3RhbFF1YW50aXR5EiEKDHRvdGFsX2Ftb3Vu'
+    'dBgDIAEoA1ILdG90YWxBbW91bnQSGwoJYnV5X2NvdW50GAQgASgDUghidXlDb3VudBIdCgpzZW'
+    'xsX2NvdW50GAUgASgDUglzZWxsQ291bnQ=');
+
 @$core.Deprecated('Use listOrderLogsRequestDescriptor instead')
 const ListOrderLogsRequest$json = {
   '1': 'ListOrderLogsRequest',
@@ -149,4 +168,16 @@ final $typed_data.Uint8List listOrderLogsResponseDescriptor = $convert.base64Dec
     'ChVMaXN0T3JkZXJMb2dzUmVzcG9uc2USOQoKb3JkZXJfbG9ncxgBIAMoCzIaLmtkby52MS5vcm'
     'Rlcl9sb2cuT3JkZXJMb2dSCW9yZGVyTG9ncxImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlSDW5l'
     'eHRQYWdlVG9rZW4=');
+
+@$core.Deprecated('Use getOrderLogStatisticsRequestDescriptor instead')
+const GetOrderLogStatisticsRequest$json = {
+  '1': 'GetOrderLogStatisticsRequest',
+  '2': [
+    {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
+  ],
+};
+
+/// Descriptor for `GetOrderLogStatisticsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getOrderLogStatisticsRequestDescriptor = $convert.base64Decode(
+    'ChxHZXRPcmRlckxvZ1N0YXRpc3RpY3NSZXF1ZXN0EhYKBmZpbHRlchgBIAEoCVIGZmlsdGVy');
 
