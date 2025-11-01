@@ -38,9 +38,9 @@ class OrderLogServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listOrderLogs, request, options: options);
   }
 
-  /// 주문 로그 조회
-  $grpc.ResponseFuture<$0.ListOrderLogsResponse> streamOrderLogs($0.ListOrderLogsRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$streamOrderLogs, request, options: options);
+  /// 주문 로그 스트리밍
+  $grpc.ResponseStream<$0.OrderLog> streamOrderLogs($0.ListOrderLogsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamOrderLogs, $async.Stream.fromIterable([request]), options: options);
   }
 
   /// 주문 로그 조회
@@ -48,9 +48,9 @@ class OrderLogServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getOrderLogStatistics, request, options: options);
   }
 
-  /// 주문 로그 조회
-  $grpc.ResponseFuture<$0.OrderLogFillStatistics> streamOrderLogStatistics($0.GetOrderLogStatisticsRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$streamOrderLogStatistics, request, options: options);
+  /// 주문 로그 통계 스트리밍
+  $grpc.ResponseStream<$0.OrderLogFillStatistics> streamOrderLogStatistics($0.GetOrderLogStatisticsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamOrderLogStatistics, $async.Stream.fromIterable([request]), options: options);
   }
 
     // method descriptors
@@ -59,10 +59,10 @@ class OrderLogServiceClient extends $grpc.Client {
       '/kdo.v1.order_log.OrderLogService/ListOrderLogs',
       ($0.ListOrderLogsRequest value) => value.writeToBuffer(),
       $0.ListOrderLogsResponse.fromBuffer);
-  static final _$streamOrderLogs = $grpc.ClientMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(
+  static final _$streamOrderLogs = $grpc.ClientMethod<$0.ListOrderLogsRequest, $0.OrderLog>(
       '/kdo.v1.order_log.OrderLogService/StreamOrderLogs',
       ($0.ListOrderLogsRequest value) => value.writeToBuffer(),
-      $0.ListOrderLogsResponse.fromBuffer);
+      $0.OrderLog.fromBuffer);
   static final _$getOrderLogStatistics = $grpc.ClientMethod<$0.GetOrderLogStatisticsRequest, $0.OrderLogFillStatistics>(
       '/kdo.v1.order_log.OrderLogService/GetOrderLogStatistics',
       ($0.GetOrderLogStatisticsRequest value) => value.writeToBuffer(),
@@ -85,13 +85,13 @@ abstract class OrderLogServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListOrderLogsRequest.fromBuffer(value),
         ($0.ListOrderLogsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(
+    $addMethod($grpc.ServiceMethod<$0.ListOrderLogsRequest, $0.OrderLog>(
         'StreamOrderLogs',
         streamOrderLogs_Pre,
         false,
-        false,
+        true,
         ($core.List<$core.int> value) => $0.ListOrderLogsRequest.fromBuffer(value),
-        ($0.ListOrderLogsResponse value) => value.writeToBuffer()));
+        ($0.OrderLog value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetOrderLogStatisticsRequest, $0.OrderLogFillStatistics>(
         'GetOrderLogStatistics',
         getOrderLogStatistics_Pre,
@@ -103,7 +103,7 @@ abstract class OrderLogServiceBase extends $grpc.Service {
         'StreamOrderLogStatistics',
         streamOrderLogStatistics_Pre,
         false,
-        false,
+        true,
         ($core.List<$core.int> value) => $0.GetOrderLogStatisticsRequest.fromBuffer(value),
         ($0.OrderLogFillStatistics value) => value.writeToBuffer()));
   }
@@ -114,11 +114,11 @@ abstract class OrderLogServiceBase extends $grpc.Service {
 
   $async.Future<$0.ListOrderLogsResponse> listOrderLogs($grpc.ServiceCall call, $0.ListOrderLogsRequest request);
 
-  $async.Future<$0.ListOrderLogsResponse> streamOrderLogs_Pre($grpc.ServiceCall $call, $async.Future<$0.ListOrderLogsRequest> $request) async {
-    return streamOrderLogs($call, await $request);
+  $async.Stream<$0.OrderLog> streamOrderLogs_Pre($grpc.ServiceCall $call, $async.Future<$0.ListOrderLogsRequest> $request) async* {
+    yield* streamOrderLogs($call, await $request);
   }
 
-  $async.Future<$0.ListOrderLogsResponse> streamOrderLogs($grpc.ServiceCall call, $0.ListOrderLogsRequest request);
+  $async.Stream<$0.OrderLog> streamOrderLogs($grpc.ServiceCall call, $0.ListOrderLogsRequest request);
 
   $async.Future<$0.OrderLogFillStatistics> getOrderLogStatistics_Pre($grpc.ServiceCall $call, $async.Future<$0.GetOrderLogStatisticsRequest> $request) async {
     return getOrderLogStatistics($call, await $request);
@@ -126,10 +126,10 @@ abstract class OrderLogServiceBase extends $grpc.Service {
 
   $async.Future<$0.OrderLogFillStatistics> getOrderLogStatistics($grpc.ServiceCall call, $0.GetOrderLogStatisticsRequest request);
 
-  $async.Future<$0.OrderLogFillStatistics> streamOrderLogStatistics_Pre($grpc.ServiceCall $call, $async.Future<$0.GetOrderLogStatisticsRequest> $request) async {
-    return streamOrderLogStatistics($call, await $request);
+  $async.Stream<$0.OrderLogFillStatistics> streamOrderLogStatistics_Pre($grpc.ServiceCall $call, $async.Future<$0.GetOrderLogStatisticsRequest> $request) async* {
+    yield* streamOrderLogStatistics($call, await $request);
   }
 
-  $async.Future<$0.OrderLogFillStatistics> streamOrderLogStatistics($grpc.ServiceCall call, $0.GetOrderLogStatisticsRequest request);
+  $async.Stream<$0.OrderLogFillStatistics> streamOrderLogStatistics($grpc.ServiceCall call, $0.GetOrderLogStatisticsRequest request);
 
 }

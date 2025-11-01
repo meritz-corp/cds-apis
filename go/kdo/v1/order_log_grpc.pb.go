@@ -24,12 +24,12 @@ const _ = grpc.SupportPackageIsVersion7
 type OrderLogServiceClient interface {
 	// 주문 로그 조회
 	ListOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (*ListOrderLogsResponse, error)
-	// 주문 로그 조회
-	StreamOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (*ListOrderLogsResponse, error)
+	// 주문 로그 스트리밍
+	StreamOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (OrderLogService_StreamOrderLogsClient, error)
 	// 주문 로그 조회
 	GetOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error)
-	// 주문 로그 조회
-	StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error)
+	// 주문 로그 통계 스트리밍
+	StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (OrderLogService_StreamOrderLogStatisticsClient, error)
 }
 
 type orderLogServiceClient struct {
@@ -49,13 +49,36 @@ func (c *orderLogServiceClient) ListOrderLogs(ctx context.Context, in *ListOrder
 	return out, nil
 }
 
-func (c *orderLogServiceClient) StreamOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (*ListOrderLogsResponse, error) {
-	out := new(ListOrderLogsResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.order_log.OrderLogService/StreamOrderLogs", in, out, opts...)
+func (c *orderLogServiceClient) StreamOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (OrderLogService_StreamOrderLogsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &OrderLogService_ServiceDesc.Streams[0], "/kdo.v1.order_log.OrderLogService/StreamOrderLogs", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &orderLogServiceStreamOrderLogsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type OrderLogService_StreamOrderLogsClient interface {
+	Recv() (*OrderLog, error)
+	grpc.ClientStream
+}
+
+type orderLogServiceStreamOrderLogsClient struct {
+	grpc.ClientStream
+}
+
+func (x *orderLogServiceStreamOrderLogsClient) Recv() (*OrderLog, error) {
+	m := new(OrderLog)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *orderLogServiceClient) GetOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error) {
@@ -67,13 +90,36 @@ func (c *orderLogServiceClient) GetOrderLogStatistics(ctx context.Context, in *G
 	return out, nil
 }
 
-func (c *orderLogServiceClient) StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error) {
-	out := new(OrderLogFillStatistics)
-	err := c.cc.Invoke(ctx, "/kdo.v1.order_log.OrderLogService/StreamOrderLogStatistics", in, out, opts...)
+func (c *orderLogServiceClient) StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (OrderLogService_StreamOrderLogStatisticsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &OrderLogService_ServiceDesc.Streams[1], "/kdo.v1.order_log.OrderLogService/StreamOrderLogStatistics", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &orderLogServiceStreamOrderLogStatisticsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type OrderLogService_StreamOrderLogStatisticsClient interface {
+	Recv() (*OrderLogFillStatistics, error)
+	grpc.ClientStream
+}
+
+type orderLogServiceStreamOrderLogStatisticsClient struct {
+	grpc.ClientStream
+}
+
+func (x *orderLogServiceStreamOrderLogStatisticsClient) Recv() (*OrderLogFillStatistics, error) {
+	m := new(OrderLogFillStatistics)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // OrderLogServiceServer is the server API for OrderLogService service.
@@ -82,12 +128,12 @@ func (c *orderLogServiceClient) StreamOrderLogStatistics(ctx context.Context, in
 type OrderLogServiceServer interface {
 	// 주문 로그 조회
 	ListOrderLogs(context.Context, *ListOrderLogsRequest) (*ListOrderLogsResponse, error)
-	// 주문 로그 조회
-	StreamOrderLogs(context.Context, *ListOrderLogsRequest) (*ListOrderLogsResponse, error)
+	// 주문 로그 스트리밍
+	StreamOrderLogs(*ListOrderLogsRequest, OrderLogService_StreamOrderLogsServer) error
 	// 주문 로그 조회
 	GetOrderLogStatistics(context.Context, *GetOrderLogStatisticsRequest) (*OrderLogFillStatistics, error)
-	// 주문 로그 조회
-	StreamOrderLogStatistics(context.Context, *GetOrderLogStatisticsRequest) (*OrderLogFillStatistics, error)
+	// 주문 로그 통계 스트리밍
+	StreamOrderLogStatistics(*GetOrderLogStatisticsRequest, OrderLogService_StreamOrderLogStatisticsServer) error
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
 
@@ -98,14 +144,14 @@ type UnimplementedOrderLogServiceServer struct {
 func (UnimplementedOrderLogServiceServer) ListOrderLogs(context.Context, *ListOrderLogsRequest) (*ListOrderLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrderLogs not implemented")
 }
-func (UnimplementedOrderLogServiceServer) StreamOrderLogs(context.Context, *ListOrderLogsRequest) (*ListOrderLogsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StreamOrderLogs not implemented")
+func (UnimplementedOrderLogServiceServer) StreamOrderLogs(*ListOrderLogsRequest, OrderLogService_StreamOrderLogsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamOrderLogs not implemented")
 }
 func (UnimplementedOrderLogServiceServer) GetOrderLogStatistics(context.Context, *GetOrderLogStatisticsRequest) (*OrderLogFillStatistics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderLogStatistics not implemented")
 }
-func (UnimplementedOrderLogServiceServer) StreamOrderLogStatistics(context.Context, *GetOrderLogStatisticsRequest) (*OrderLogFillStatistics, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StreamOrderLogStatistics not implemented")
+func (UnimplementedOrderLogServiceServer) StreamOrderLogStatistics(*GetOrderLogStatisticsRequest, OrderLogService_StreamOrderLogStatisticsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamOrderLogStatistics not implemented")
 }
 func (UnimplementedOrderLogServiceServer) mustEmbedUnimplementedOrderLogServiceServer() {}
 
@@ -138,22 +184,25 @@ func _OrderLogService_ListOrderLogs_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderLogService_StreamOrderLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOrderLogsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _OrderLogService_StreamOrderLogs_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListOrderLogsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(OrderLogServiceServer).StreamOrderLogs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.order_log.OrderLogService/StreamOrderLogs",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderLogServiceServer).StreamOrderLogs(ctx, req.(*ListOrderLogsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(OrderLogServiceServer).StreamOrderLogs(m, &orderLogServiceStreamOrderLogsServer{stream})
+}
+
+type OrderLogService_StreamOrderLogsServer interface {
+	Send(*OrderLog) error
+	grpc.ServerStream
+}
+
+type orderLogServiceStreamOrderLogsServer struct {
+	grpc.ServerStream
+}
+
+func (x *orderLogServiceStreamOrderLogsServer) Send(m *OrderLog) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _OrderLogService_GetOrderLogStatistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -174,22 +223,25 @@ func _OrderLogService_GetOrderLogStatistics_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderLogService_StreamOrderLogStatistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderLogStatisticsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _OrderLogService_StreamOrderLogStatistics_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetOrderLogStatisticsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(OrderLogServiceServer).StreamOrderLogStatistics(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.order_log.OrderLogService/StreamOrderLogStatistics",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderLogServiceServer).StreamOrderLogStatistics(ctx, req.(*GetOrderLogStatisticsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(OrderLogServiceServer).StreamOrderLogStatistics(m, &orderLogServiceStreamOrderLogStatisticsServer{stream})
+}
+
+type OrderLogService_StreamOrderLogStatisticsServer interface {
+	Send(*OrderLogFillStatistics) error
+	grpc.ServerStream
+}
+
+type orderLogServiceStreamOrderLogStatisticsServer struct {
+	grpc.ServerStream
+}
+
+func (x *orderLogServiceStreamOrderLogStatisticsServer) Send(m *OrderLogFillStatistics) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // OrderLogService_ServiceDesc is the grpc.ServiceDesc for OrderLogService service.
@@ -204,18 +256,21 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _OrderLogService_ListOrderLogs_Handler,
 		},
 		{
-			MethodName: "StreamOrderLogs",
-			Handler:    _OrderLogService_StreamOrderLogs_Handler,
-		},
-		{
 			MethodName: "GetOrderLogStatistics",
 			Handler:    _OrderLogService_GetOrderLogStatistics_Handler,
 		},
+	},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "StreamOrderLogStatistics",
-			Handler:    _OrderLogService_StreamOrderLogStatistics_Handler,
+			StreamName:    "StreamOrderLogs",
+			Handler:       _OrderLogService_StreamOrderLogs_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamOrderLogStatistics",
+			Handler:       _OrderLogService_StreamOrderLogStatistics_Handler,
+			ServerStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "kdo/v1/order_log.proto",
 }

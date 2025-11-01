@@ -115,7 +115,7 @@ pub mod order_log_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::ListOrderLogsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListOrderLogsResponse>,
+            tonic::Response<tonic::codec::Streaming<super::OrderLog>>,
             tonic::Status,
         > {
             self.inner
@@ -139,7 +139,7 @@ pub mod order_log_service_client {
                         "StreamOrderLogs",
                     ),
                 );
-            self.inner.unary(req, path, codec).await
+            self.inner.server_streaming(req, path, codec).await
         }
         pub async fn get_order_log_statistics(
             &mut self,
@@ -175,7 +175,7 @@ pub mod order_log_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::GetOrderLogStatisticsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::OrderLogFillStatistics>,
+            tonic::Response<tonic::codec::Streaming<super::OrderLogFillStatistics>>,
             tonic::Status,
         > {
             self.inner
@@ -199,7 +199,7 @@ pub mod order_log_service_client {
                         "StreamOrderLogStatistics",
                     ),
                 );
-            self.inner.unary(req, path, codec).await
+            self.inner.server_streaming(req, path, codec).await
         }
     }
 }
@@ -217,11 +217,17 @@ pub mod order_log_service_server {
             tonic::Response<super::ListOrderLogsResponse>,
             tonic::Status,
         >;
+        /// Server streaming response type for the StreamOrderLogs method.
+        type StreamOrderLogsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::OrderLog, tonic::Status>,
+            >
+            + Send
+            + 'static;
         async fn stream_order_logs(
             &self,
             request: tonic::Request<super::ListOrderLogsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListOrderLogsResponse>,
+            tonic::Response<Self::StreamOrderLogsStream>,
             tonic::Status,
         >;
         async fn get_order_log_statistics(
@@ -231,11 +237,17 @@ pub mod order_log_service_server {
             tonic::Response<super::OrderLogFillStatistics>,
             tonic::Status,
         >;
+        /// Server streaming response type for the StreamOrderLogStatistics method.
+        type StreamOrderLogStatisticsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::OrderLogFillStatistics, tonic::Status>,
+            >
+            + Send
+            + 'static;
         async fn stream_order_log_statistics(
             &self,
             request: tonic::Request<super::GetOrderLogStatisticsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::OrderLogFillStatistics>,
+            tonic::Response<Self::StreamOrderLogStatisticsStream>,
             tonic::Status,
         >;
     }
@@ -366,11 +378,12 @@ pub mod order_log_service_server {
                     struct StreamOrderLogsSvc<T: OrderLogService>(pub Arc<T>);
                     impl<
                         T: OrderLogService,
-                    > tonic::server::UnaryService<super::ListOrderLogsRequest>
+                    > tonic::server::ServerStreamingService<super::ListOrderLogsRequest>
                     for StreamOrderLogsSvc<T> {
-                        type Response = super::ListOrderLogsResponse;
+                        type Response = super::OrderLog;
+                        type ResponseStream = T::StreamOrderLogsStream;
                         type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
+                            tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
@@ -402,7 +415,7 @@ pub mod order_log_service_server {
                                 max_decoding_message_size,
                                 max_encoding_message_size,
                             );
-                        let res = grpc.unary(method, req).await;
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -461,11 +474,13 @@ pub mod order_log_service_server {
                     struct StreamOrderLogStatisticsSvc<T: OrderLogService>(pub Arc<T>);
                     impl<
                         T: OrderLogService,
-                    > tonic::server::UnaryService<super::GetOrderLogStatisticsRequest>
-                    for StreamOrderLogStatisticsSvc<T> {
+                    > tonic::server::ServerStreamingService<
+                        super::GetOrderLogStatisticsRequest,
+                    > for StreamOrderLogStatisticsSvc<T> {
                         type Response = super::OrderLogFillStatistics;
+                        type ResponseStream = T::StreamOrderLogStatisticsStream;
                         type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
+                            tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
@@ -500,7 +515,7 @@ pub mod order_log_service_server {
                                 max_decoding_message_size,
                                 max_encoding_message_size,
                             );
-                        let res = grpc.unary(method, req).await;
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

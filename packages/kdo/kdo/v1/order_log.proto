@@ -22,8 +22,8 @@ service OrderLogService {
     option (google.api.method_signature) = "";
   }
 
-  // 주문 로그 조회
-  rpc StreamOrderLogs(ListOrderLogsRequest) returns (ListOrderLogsResponse) {
+  // 주문 로그 스트리밍
+  rpc StreamOrderLogs(ListOrderLogsRequest) returns (stream OrderLog) {
     option (google.api.http) = {
       get: "/v1/order_logs:stream"
     };
@@ -38,8 +38,8 @@ service OrderLogService {
     option (google.api.method_signature) = "";
   }
 
-  // 주문 로그 조회
-  rpc StreamOrderLogStatistics(GetOrderLogStatisticsRequest) returns (OrderLogFillStatistics) {
+  // 주문 로그 통계 스트리밍
+  rpc StreamOrderLogStatistics(GetOrderLogStatisticsRequest) returns (stream OrderLogFillStatistics) {
     option (google.api.http) = {
       get: "/v1/order_logs/statistics:stream"
     };

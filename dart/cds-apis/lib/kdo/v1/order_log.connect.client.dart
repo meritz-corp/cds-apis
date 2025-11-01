@@ -27,15 +27,15 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 주문 로그 조회
-  Future<kdov1order_log.ListOrderLogsResponse> streamOrderLogs(
+  /// 주문 로그 스트리밍
+  Stream<kdov1order_log.OrderLog> streamOrderLogs(
     kdov1order_log.ListOrderLogsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
-    return connect.Client(_transport).unary(
+    return connect.Client(_transport).server(
       specs.OrderLogService.streamOrderLogs,
       input,
       signal: signal,
@@ -63,15 +63,15 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 주문 로그 조회
-  Future<kdov1order_log.OrderLogFillStatistics> streamOrderLogStatistics(
+  /// 주문 로그 통계 스트리밍
+  Stream<kdov1order_log.OrderLogFillStatistics> streamOrderLogStatistics(
     kdov1order_log.GetOrderLogStatisticsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
-    return connect.Client(_transport).unary(
+    return connect.Client(_transport).server(
       specs.OrderLogService.streamOrderLogStatistics,
       input,
       signal: signal,

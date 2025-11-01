@@ -19,12 +19,12 @@ abstract final class OrderLogService {
     kdov1order_log.ListOrderLogsResponse.new,
   );
 
-  /// 주문 로그 조회
+  /// 주문 로그 스트리밍
   static const streamOrderLogs = connect.Spec(
     '/$name/StreamOrderLogs',
-    connect.StreamType.unary,
+    connect.StreamType.server,
     kdov1order_log.ListOrderLogsRequest.new,
-    kdov1order_log.ListOrderLogsResponse.new,
+    kdov1order_log.OrderLog.new,
   );
 
   /// 주문 로그 조회
@@ -35,10 +35,10 @@ abstract final class OrderLogService {
     kdov1order_log.OrderLogFillStatistics.new,
   );
 
-  /// 주문 로그 조회
+  /// 주문 로그 통계 스트리밍
   static const streamOrderLogStatistics = connect.Spec(
     '/$name/StreamOrderLogStatistics',
-    connect.StreamType.unary,
+    connect.StreamType.server,
     kdov1order_log.GetOrderLogStatisticsRequest.new,
     kdov1order_log.OrderLogFillStatistics.new,
   );
