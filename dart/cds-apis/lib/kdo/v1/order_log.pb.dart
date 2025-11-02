@@ -467,11 +467,20 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   /// * fund_code
   ///   * `equal`, `contains`
   /// * symbol
-  ///   * `equal`, `contains`
+  ///   * `equal`, `contains
+  /// * log_type
+  ///   * `equal`
+  /// * side
+  ///   * `equal`
+  /// * order_type
+  ///   * `equal`
   ///
   /// Examples
   /// * filter=fund_code="0159"
   /// * filter=symbol:"7526"
+  /// * filter=log_type=FILLED
+  /// * filter=side=BUY
+  /// * filter=order_type=AMEND
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)

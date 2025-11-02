@@ -503,11 +503,23 @@ type ListOrderLogsRequest struct {
 	//   - `equal`, `contains`
 	//
 	// * symbol
-	//   - `equal`, `contains`
+	//   - `equal`, `contains
+	//
+	// * log_type
+	//   - `equal`
+	//
+	// * side
+	//   - `equal`
+	//
+	// * order_type
+	//   - `equal`
 	//
 	// Examples
 	// * filter=fund_code="0159"
 	// * filter=symbol:"7526"
+	// * filter=log_type=FILLED
+	// * filter=side=BUY
+	// * filter=order_type=AMEND
 	Filter string `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 

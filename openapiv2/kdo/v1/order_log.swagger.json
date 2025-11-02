@@ -52,7 +52,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND",
             "in": "query",
             "required": false,
             "type": "string"
@@ -181,7 +181,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND",
             "in": "query",
             "required": false,
             "type": "string"

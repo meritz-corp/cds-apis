@@ -102,11 +102,20 @@ pub struct ListOrderLogsRequest {
     /// * fund_code
     ///    * `equal`, `contains`
     /// * symbol
-    ///    * `equal`, `contains`
+    ///    * `equal`, `contains
+    /// * log_type
+    ///    * `equal`
+    /// * side
+    ///    * `equal`
+    /// * order_type
+    ///    * `equal`
     ///
     /// Examples
     /// * filter=fund_code="0159"
     /// * filter=symbol:"7526"
+    /// * filter=log_type=FILLED
+    /// * filter=side=BUY
+    /// * filter=order_type=AMEND
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }
