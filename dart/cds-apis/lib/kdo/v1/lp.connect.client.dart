@@ -135,16 +135,16 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ETF LP 에러 이벤트 실시간 스트리밍
-  Stream<kdov1lp.EtfLpError> streamEtfErrors(
-    kdov1lp.StreamEtfErrorsRequest input, {
+  /// ETF LP 이벤트 실시간 스트리밍
+  Stream<kdov1lp.EtfLpEvent> streamLpEvents(
+    kdov1lp.StreamLpEventsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.LpService.streamEtfErrors,
+      specs.LpService.streamLpEvents,
       input,
       signal: signal,
       headers: headers,

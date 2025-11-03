@@ -1,191 +1,4 @@
 // @generated
-impl serde::Serialize for ErrorLevel {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "ERROR_LEVEL_UNSPECIFIED",
-            Self::Debug => "ERROR_LEVEL_DEBUG",
-            Self::Info => "ERROR_LEVEL_INFO",
-            Self::Warning => "ERROR_LEVEL_WARNING",
-            Self::Error => "ERROR_LEVEL_ERROR",
-            Self::Critical => "ERROR_LEVEL_CRITICAL",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for ErrorLevel {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "ERROR_LEVEL_UNSPECIFIED",
-            "ERROR_LEVEL_DEBUG",
-            "ERROR_LEVEL_INFO",
-            "ERROR_LEVEL_WARNING",
-            "ERROR_LEVEL_ERROR",
-            "ERROR_LEVEL_CRITICAL",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ErrorLevel;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "ERROR_LEVEL_UNSPECIFIED" => Ok(ErrorLevel::Unspecified),
-                    "ERROR_LEVEL_DEBUG" => Ok(ErrorLevel::Debug),
-                    "ERROR_LEVEL_INFO" => Ok(ErrorLevel::Info),
-                    "ERROR_LEVEL_WARNING" => Ok(ErrorLevel::Warning),
-                    "ERROR_LEVEL_ERROR" => Ok(ErrorLevel::Error),
-                    "ERROR_LEVEL_CRITICAL" => Ok(ErrorLevel::Critical),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ErrorType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "ERROR_TYPE_UNSPECIFIED",
-            Self::Initialization => "ERROR_TYPE_INITIALIZATION",
-            Self::PriceUpdate => "ERROR_TYPE_PRICE_UPDATE",
-            Self::OrderSubmit => "ERROR_TYPE_ORDER_SUBMIT",
-            Self::OrderProcessing => "ERROR_TYPE_ORDER_PROCESSING",
-            Self::NavCalculation => "ERROR_TYPE_NAV_CALCULATION",
-            Self::OrderBookUpdate => "ERROR_TYPE_ORDER_BOOK_UPDATE",
-            Self::OrderLimitExceeded => "ERROR_TYPE_ORDER_LIMIT_EXCEEDED",
-            Self::FundLimitExceeded => "ERROR_TYPE_FUND_LIMIT_EXCEEDED",
-            Self::StockInventoryExceeded => "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED",
-            Self::SystemError => "ERROR_TYPE_SYSTEM_ERROR",
-            Self::MarketSession => "ERROR_TYPE_MARKET_SESSION",
-            Self::FundUpdate => "ERROR_TYPE_FUND_UPDATE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for ErrorType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "ERROR_TYPE_UNSPECIFIED",
-            "ERROR_TYPE_INITIALIZATION",
-            "ERROR_TYPE_PRICE_UPDATE",
-            "ERROR_TYPE_ORDER_SUBMIT",
-            "ERROR_TYPE_ORDER_PROCESSING",
-            "ERROR_TYPE_NAV_CALCULATION",
-            "ERROR_TYPE_ORDER_BOOK_UPDATE",
-            "ERROR_TYPE_ORDER_LIMIT_EXCEEDED",
-            "ERROR_TYPE_FUND_LIMIT_EXCEEDED",
-            "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED",
-            "ERROR_TYPE_SYSTEM_ERROR",
-            "ERROR_TYPE_MARKET_SESSION",
-            "ERROR_TYPE_FUND_UPDATE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ErrorType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "ERROR_TYPE_UNSPECIFIED" => Ok(ErrorType::Unspecified),
-                    "ERROR_TYPE_INITIALIZATION" => Ok(ErrorType::Initialization),
-                    "ERROR_TYPE_PRICE_UPDATE" => Ok(ErrorType::PriceUpdate),
-                    "ERROR_TYPE_ORDER_SUBMIT" => Ok(ErrorType::OrderSubmit),
-                    "ERROR_TYPE_ORDER_PROCESSING" => Ok(ErrorType::OrderProcessing),
-                    "ERROR_TYPE_NAV_CALCULATION" => Ok(ErrorType::NavCalculation),
-                    "ERROR_TYPE_ORDER_BOOK_UPDATE" => Ok(ErrorType::OrderBookUpdate),
-                    "ERROR_TYPE_ORDER_LIMIT_EXCEEDED" => Ok(ErrorType::OrderLimitExceeded),
-                    "ERROR_TYPE_FUND_LIMIT_EXCEEDED" => Ok(ErrorType::FundLimitExceeded),
-                    "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED" => Ok(ErrorType::StockInventoryExceeded),
-                    "ERROR_TYPE_SYSTEM_ERROR" => Ok(ErrorType::SystemError),
-                    "ERROR_TYPE_MARKET_SESSION" => Ok(ErrorType::MarketSession),
-                    "ERROR_TYPE_FUND_UPDATE" => Ok(ErrorType::FundUpdate),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
 impl serde::Serialize for EtfLp {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -426,7 +239,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
         deserializer.deserialize_struct("kdo.v1.lp.EtfLp", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for EtfLpError {
+impl serde::Serialize for EtfLpEvent {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -452,35 +265,35 @@ impl serde::Serialize for EtfLpError {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpError", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpEvent", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            let v = ThreadType::try_from(self.thread_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.thread_type)))?;
-            struct_ser.serialize_field("thread_type", &v)?;
+            let v = TaskType::try_from(self.task_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.task_type)))?;
+            struct_ser.serialize_field("task_type", &v)?;
         }
         if true {
-            let v = ErrorType::try_from(self.error_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.error_type)))?;
-            struct_ser.serialize_field("error_type", &v)?;
+            let v = LpEventType::try_from(self.r#type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
+            struct_ser.serialize_field("type", &v)?;
         }
         if true {
-            struct_ser.serialize_field("error_message", &self.error_message)?;
+            struct_ser.serialize_field("message", &self.message)?;
         }
         if let Some(v) = self.timestamp.as_ref() {
             struct_ser.serialize_field("timestamp", v)?;
         }
         if true {
-            let v = ErrorLevel::try_from(self.error_level)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.error_level)))?;
-            struct_ser.serialize_field("error_level", &v)?;
+            let v = LpEventLevel::try_from(self.level)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.level)))?;
+            struct_ser.serialize_field("level", &v)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for EtfLpError {
+impl<'de> serde::Deserialize<'de> for EtfLpEvent {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -488,25 +301,22 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
     {
         const FIELDS: &[&str] = &[
             "symbol",
-            "thread_type",
-            "threadType",
-            "error_type",
-            "errorType",
-            "error_message",
-            "errorMessage",
+            "task_type",
+            "taskType",
+            "type",
+            "message",
             "timestamp",
-            "error_level",
-            "errorLevel",
+            "level",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
-            ThreadType,
-            ErrorType,
-            ErrorMessage,
+            TaskType,
+            Type,
+            Message,
             Timestamp,
-            ErrorLevel,
+            Level,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -530,11 +340,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                     {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
-                            "threadType" | "thread_type" => Ok(GeneratedField::ThreadType),
-                            "errorType" | "error_type" => Ok(GeneratedField::ErrorType),
-                            "errorMessage" | "error_message" => Ok(GeneratedField::ErrorMessage),
+                            "taskType" | "task_type" => Ok(GeneratedField::TaskType),
+                            "type" => Ok(GeneratedField::Type),
+                            "message" => Ok(GeneratedField::Message),
                             "timestamp" => Ok(GeneratedField::Timestamp),
-                            "errorLevel" | "error_level" => Ok(GeneratedField::ErrorLevel),
+                            "level" => Ok(GeneratedField::Level),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -544,22 +354,22 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = EtfLpError;
+            type Value = EtfLpEvent;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.EtfLpError")
+                formatter.write_str("struct kdo.v1.lp.EtfLpEvent")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpError, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpEvent, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
-                let mut thread_type__ = None;
-                let mut error_type__ = None;
-                let mut error_message__ = None;
+                let mut task_type__ = None;
+                let mut r#type__ = None;
+                let mut message__ = None;
                 let mut timestamp__ = None;
-                let mut error_level__ = None;
+                let mut level__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -568,23 +378,23 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::ThreadType => {
-                            if thread_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("threadType"));
+                        GeneratedField::TaskType => {
+                            if task_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("taskType"));
                             }
-                            thread_type__ = Some(map_.next_value::<ThreadType>()? as i32);
+                            task_type__ = Some(map_.next_value::<TaskType>()? as i32);
                         }
-                        GeneratedField::ErrorType => {
-                            if error_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("errorType"));
+                        GeneratedField::Type => {
+                            if r#type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("type"));
                             }
-                            error_type__ = Some(map_.next_value::<ErrorType>()? as i32);
+                            r#type__ = Some(map_.next_value::<LpEventType>()? as i32);
                         }
-                        GeneratedField::ErrorMessage => {
-                            if error_message__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("errorMessage"));
+                        GeneratedField::Message => {
+                            if message__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("message"));
                             }
-                            error_message__ = Some(map_.next_value()?);
+                            message__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Timestamp => {
                             if timestamp__.is_some() {
@@ -592,28 +402,28 @@ impl<'de> serde::Deserialize<'de> for EtfLpError {
                             }
                             timestamp__ = map_.next_value()?;
                         }
-                        GeneratedField::ErrorLevel => {
-                            if error_level__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("errorLevel"));
+                        GeneratedField::Level => {
+                            if level__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("level"));
                             }
-                            error_level__ = Some(map_.next_value::<ErrorLevel>()? as i32);
+                            level__ = Some(map_.next_value::<LpEventLevel>()? as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(EtfLpError {
+                Ok(EtfLpEvent {
                     symbol: symbol__.unwrap_or_default(),
-                    thread_type: thread_type__.unwrap_or_default(),
-                    error_type: error_type__.unwrap_or_default(),
-                    error_message: error_message__.unwrap_or_default(),
+                    task_type: task_type__.unwrap_or_default(),
+                    r#type: r#type__.unwrap_or_default(),
+                    message: message__.unwrap_or_default(),
                     timestamp: timestamp__,
-                    error_level: error_level__.unwrap_or_default(),
+                    level: level__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.EtfLpError", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpEvent", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for EtfLpState {
@@ -1449,6 +1259,193 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lp.ListEtfLpsResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LpEventLevel {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "LP_EVENT_LEVEL_UNSPECIFIED",
+            Self::Debug => "LP_EVENT_LEVEL_DEBUG",
+            Self::Info => "LP_EVENT_LEVEL_INFO",
+            Self::Warning => "LP_EVENT_LEVEL_WARNING",
+            Self::Error => "LP_EVENT_LEVEL_ERROR",
+            Self::Critical => "LP_EVENT_LEVEL_CRITICAL",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for LpEventLevel {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "LP_EVENT_LEVEL_UNSPECIFIED",
+            "LP_EVENT_LEVEL_DEBUG",
+            "LP_EVENT_LEVEL_INFO",
+            "LP_EVENT_LEVEL_WARNING",
+            "LP_EVENT_LEVEL_ERROR",
+            "LP_EVENT_LEVEL_CRITICAL",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LpEventLevel;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "LP_EVENT_LEVEL_UNSPECIFIED" => Ok(LpEventLevel::Unspecified),
+                    "LP_EVENT_LEVEL_DEBUG" => Ok(LpEventLevel::Debug),
+                    "LP_EVENT_LEVEL_INFO" => Ok(LpEventLevel::Info),
+                    "LP_EVENT_LEVEL_WARNING" => Ok(LpEventLevel::Warning),
+                    "LP_EVENT_LEVEL_ERROR" => Ok(LpEventLevel::Error),
+                    "LP_EVENT_LEVEL_CRITICAL" => Ok(LpEventLevel::Critical),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LpEventType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "LP_EVENT_TYPE_UNSPECIFIED",
+            Self::Initialization => "LP_EVENT_TYPE_INITIALIZATION",
+            Self::PriceUpdate => "LP_EVENT_TYPE_PRICE_UPDATE",
+            Self::OrderSubmit => "LP_EVENT_TYPE_ORDER_SUBMIT",
+            Self::OrderProcessing => "LP_EVENT_TYPE_ORDER_PROCESSING",
+            Self::NavCalculation => "LP_EVENT_TYPE_NAV_CALCULATION",
+            Self::OrderBookUpdate => "LP_EVENT_TYPE_ORDER_BOOK_UPDATE",
+            Self::OrderLimitExceeded => "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED",
+            Self::FundLimitExceeded => "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED",
+            Self::StockInventoryExceeded => "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED",
+            Self::SystemError => "LP_EVENT_TYPE_SYSTEM_ERROR",
+            Self::MarketSession => "LP_EVENT_TYPE_MARKET_SESSION",
+            Self::FundUpdate => "LP_EVENT_TYPE_FUND_UPDATE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for LpEventType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "LP_EVENT_TYPE_UNSPECIFIED",
+            "LP_EVENT_TYPE_INITIALIZATION",
+            "LP_EVENT_TYPE_PRICE_UPDATE",
+            "LP_EVENT_TYPE_ORDER_SUBMIT",
+            "LP_EVENT_TYPE_ORDER_PROCESSING",
+            "LP_EVENT_TYPE_NAV_CALCULATION",
+            "LP_EVENT_TYPE_ORDER_BOOK_UPDATE",
+            "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED",
+            "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED",
+            "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED",
+            "LP_EVENT_TYPE_SYSTEM_ERROR",
+            "LP_EVENT_TYPE_MARKET_SESSION",
+            "LP_EVENT_TYPE_FUND_UPDATE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LpEventType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "LP_EVENT_TYPE_UNSPECIFIED" => Ok(LpEventType::Unspecified),
+                    "LP_EVENT_TYPE_INITIALIZATION" => Ok(LpEventType::Initialization),
+                    "LP_EVENT_TYPE_PRICE_UPDATE" => Ok(LpEventType::PriceUpdate),
+                    "LP_EVENT_TYPE_ORDER_SUBMIT" => Ok(LpEventType::OrderSubmit),
+                    "LP_EVENT_TYPE_ORDER_PROCESSING" => Ok(LpEventType::OrderProcessing),
+                    "LP_EVENT_TYPE_NAV_CALCULATION" => Ok(LpEventType::NavCalculation),
+                    "LP_EVENT_TYPE_ORDER_BOOK_UPDATE" => Ok(LpEventType::OrderBookUpdate),
+                    "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED" => Ok(LpEventType::OrderLimitExceeded),
+                    "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED" => Ok(LpEventType::FundLimitExceeded),
+                    "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED" => Ok(LpEventType::StockInventoryExceeded),
+                    "LP_EVENT_TYPE_SYSTEM_ERROR" => Ok(LpEventType::SystemError),
+                    "LP_EVENT_TYPE_MARKET_SESSION" => Ok(LpEventType::MarketSession),
+                    "LP_EVENT_TYPE_FUND_UPDATE" => Ok(LpEventType::FundUpdate),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for LpPricing {
@@ -2478,118 +2475,6 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpResponse {
         deserializer.deserialize_struct("kdo.v1.lp.StopEtfLpResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StreamEtfErrorsRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamEtfErrorsRequest", len)?;
-        if true {
-            struct_ser.serialize_field("etf", &self.etf)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund", &self.fund)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for StreamEtfErrorsRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "etf",
-            "fund",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Etf,
-            Fund,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "etf" => Ok(GeneratedField::Etf),
-                            "fund" => Ok(GeneratedField::Fund),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StreamEtfErrorsRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.StreamEtfErrorsRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamEtfErrorsRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut etf__ = None;
-                let mut fund__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Etf => {
-                            if etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etf"));
-                            }
-                            etf__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Fund => {
-                            if fund__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fund"));
-                            }
-                            fund__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(StreamEtfErrorsRequest {
-                    etf: etf__.unwrap_or_default(),
-                    fund: fund__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.StreamEtfErrorsRequest", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for StreamEtfLpStatusRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2722,36 +2607,148 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
         deserializer.deserialize_struct("kdo.v1.lp.StreamEtfLpStatusRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ThreadType {
+impl serde::Serialize for StreamLpEventsRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
-        let variant = match self {
-            Self::Unspecified => "THREAD_TYPE_UNSPECIFIED",
-            Self::Quote => "THREAD_TYPE_QUOTE",
-            Self::Hedge => "THREAD_TYPE_HEDGE",
-        };
-        serializer.serialize_str(variant)
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamLpEventsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ThreadType {
+impl<'de> serde::Deserialize<'de> for StreamLpEventsRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "THREAD_TYPE_UNSPECIFIED",
-            "THREAD_TYPE_QUOTE",
-            "THREAD_TYPE_HEDGE",
+            "etf",
+            "fund",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            Fund,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "fund" => Ok(GeneratedField::Fund),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamLpEventsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.StreamLpEventsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamLpEventsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut fund__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(StreamLpEventsRequest {
+                    etf: etf__.unwrap_or_default(),
+                    fund: fund__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.StreamLpEventsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for TaskType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "TASK_TYPE_UNSPECIFIED",
+            Self::Quote => "TASK_TYPE_QUOTE",
+            Self::Hedge => "TASK_TYPE_HEDGE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for TaskType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "TASK_TYPE_UNSPECIFIED",
+            "TASK_TYPE_QUOTE",
+            "TASK_TYPE_HEDGE",
         ];
 
         struct GeneratedVisitor;
 
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ThreadType;
+            type Value = TaskType;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 write!(formatter, "expected one of: {:?}", &FIELDS)
@@ -2786,9 +2783,9 @@ impl<'de> serde::Deserialize<'de> for ThreadType {
                 E: serde::de::Error,
             {
                 match value {
-                    "THREAD_TYPE_UNSPECIFIED" => Ok(ThreadType::Unspecified),
-                    "THREAD_TYPE_QUOTE" => Ok(ThreadType::Quote),
-                    "THREAD_TYPE_HEDGE" => Ok(ThreadType::Hedge),
+                    "TASK_TYPE_UNSPECIFIED" => Ok(TaskType::Unspecified),
+                    "TASK_TYPE_QUOTE" => Ok(TaskType::Quote),
+                    "TASK_TYPE_HEDGE" => Ok(TaskType::Hedge),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

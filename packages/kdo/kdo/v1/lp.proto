@@ -71,10 +71,10 @@ service LpService {
     };
   }
 
-  // ETF LP 에러 이벤트 실시간 스트리밍
-  rpc StreamEtfErrors(StreamEtfErrorsRequest) returns (stream EtfLpError) {
+  // ETF LP 이벤트 실시간 스트리밍
+  rpc StreamLpEvents(StreamLpEventsRequest) returns (stream EtfLpEvent) {
     option (google.api.http) = {
-      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/errors:stream"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/events:stream"
     };
     option (google.api.method_signature) = "etf";
   }
@@ -366,7 +366,7 @@ message StopEtfLpResponse {
 }
 
 // StreamEtfErrors 요청
-message StreamEtfErrorsRequest {
+message StreamLpEventsRequest {
   string etf = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -383,58 +383,58 @@ message StreamEtfErrorsRequest {
 }
 
 // ETF LP 에러 이벤트
-message EtfLpError {
+message EtfLpEvent {
   // ETF 심볼
   string symbol = 1;
 
-  // 스레드 타입
-  ThreadType thread_type = 2;
+  // 작업 타입
+  TaskType task_type = 2;
 
-  // 에러 타입
-  ErrorType error_type = 3;
+  // 이벤트 타입
+  LpEventType type = 3;
 
-  // 에러 메시지
-  string error_message = 4;
+  // 상세 메시지
+  string message = 4;
 
-  // 에러 발생 시간
+  // 발생 시간
   google.protobuf.Timestamp timestamp = 5;
 
-  // 에러 레벨
-  ErrorLevel error_level = 6;
+  // 이벤트 레벨
+  LpEventLevel level = 6;
 }
 
-// 스레드 타입
-enum ThreadType {
-  THREAD_TYPE_UNSPECIFIED = 0;
-  THREAD_TYPE_QUOTE = 1;
-  THREAD_TYPE_HEDGE = 2;
+// 작업 타입
+enum TaskType {
+  TASK_TYPE_UNSPECIFIED = 0;
+  TASK_TYPE_QUOTE = 1;
+  TASK_TYPE_HEDGE = 2;
 }
 
-// 에러 타입
-enum ErrorType {
-  ERROR_TYPE_UNSPECIFIED = 0;
-  ERROR_TYPE_INITIALIZATION = 1;     // 초기화 실패
-  ERROR_TYPE_PRICE_UPDATE = 2;       // 가격 업데이트 실패
-  ERROR_TYPE_ORDER_SUBMIT = 3;       // 주문 제출 실패
-  ERROR_TYPE_ORDER_PROCESSING = 4;   // 주문 처리 실패
-  ERROR_TYPE_NAV_CALCULATION = 5;    // NAV 계산 실패
-  ERROR_TYPE_ORDER_BOOK_UPDATE = 6;  // 오더북 업데이트 실패
-  ERROR_TYPE_ORDER_LIMIT_EXCEEDED = 7;     // 주문 한도 초과
-  ERROR_TYPE_FUND_LIMIT_EXCEEDED = 8;     // 펀드 한도 초과
-  ERROR_TYPE_STOCK_INVENTORY_EXCEEDED = 9;        // 주식 재고 초과
-  ERROR_TYPE_SYSTEM_ERROR = 12;       // 시스템 에러
-  ERROR_TYPE_MARKET_SESSION = 13;     // 시장 세션 관련 에러
-  ERROR_TYPE_FUND_UPDATE = 14;        // 펀드 정보 업데이트 실패
+// 이벤트 타입
+enum LpEventType {
+  LP_EVENT_TYPE_UNSPECIFIED = 0;
+  LP_EVENT_TYPE_INITIALIZATION = 1;     // 초기화 실패
+  LP_EVENT_TYPE_PRICE_UPDATE = 2;       // 가격 업데이트 실패
+  LP_EVENT_TYPE_ORDER_SUBMIT = 3;       // 주문 제출 실패
+  LP_EVENT_TYPE_ORDER_PROCESSING = 4;   // 주문 처리 실패
+  LP_EVENT_TYPE_NAV_CALCULATION = 5;    // NAV 계산 실패
+  LP_EVENT_TYPE_ORDER_BOOK_UPDATE = 6;  // 오더북 업데이트 실패
+  LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED = 7;     // 주문 한도 초과
+  LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED = 8;     // 펀드 한도 초과
+  LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED = 9;        // 주식 재고 초과
+  LP_EVENT_TYPE_SYSTEM_ERROR = 12;       // 시스템 에러
+  LP_EVENT_TYPE_MARKET_SESSION = 13;     // 시장 세션 관련 에러
+  LP_EVENT_TYPE_FUND_UPDATE = 14;        // 펀드 정보 업데이트 실패
 }
 
-// 에러 레벨
-enum ErrorLevel {
-  ERROR_LEVEL_UNSPECIFIED = 0;
-  ERROR_LEVEL_DEBUG = 1;    // 디버그 정보
-  ERROR_LEVEL_INFO = 2;     // 정보성 메시지
-  ERROR_LEVEL_WARNING = 3;  // 경고
-  ERROR_LEVEL_ERROR = 4;    // 에러
-  ERROR_LEVEL_CRITICAL = 5; // 치명적 에러
+// 이벤트 레벨
+enum LpEventLevel {
+  LP_EVENT_LEVEL_UNSPECIFIED = 0;
+  LP_EVENT_LEVEL_DEBUG = 1;    // 디버그 정보
+  LP_EVENT_LEVEL_INFO = 2;     // 정보성 메시지
+  LP_EVENT_LEVEL_WARNING = 3;  // 경고
+  LP_EVENT_LEVEL_ERROR = 4;    // 에러
+  LP_EVENT_LEVEL_CRITICAL = 5; // 치명적 에러
 }
 
 // 주문 업데이트 스트리밍 요청

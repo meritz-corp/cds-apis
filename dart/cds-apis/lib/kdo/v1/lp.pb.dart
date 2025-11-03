@@ -1258,8 +1258,8 @@ class StopEtfLpResponse extends $pb.GeneratedMessage {
 }
 
 /// StreamEtfErrors 요청
-class StreamEtfErrorsRequest extends $pb.GeneratedMessage {
-  factory StreamEtfErrorsRequest({
+class StreamLpEventsRequest extends $pb.GeneratedMessage {
+  factory StreamLpEventsRequest({
     $core.String? etf,
     $core.String? fund,
   }) {
@@ -1269,33 +1269,33 @@ class StreamEtfErrorsRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  StreamEtfErrorsRequest._();
+  StreamLpEventsRequest._();
 
-  factory StreamEtfErrorsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamEtfErrorsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StreamLpEventsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamLpEventsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfErrorsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamLpEventsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfErrorsRequest clone() => StreamEtfErrorsRequest()..mergeFromMessage(this);
+  StreamLpEventsRequest clone() => StreamLpEventsRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfErrorsRequest copyWith(void Function(StreamEtfErrorsRequest) updates) => super.copyWith((message) => updates(message as StreamEtfErrorsRequest)) as StreamEtfErrorsRequest;
+  StreamLpEventsRequest copyWith(void Function(StreamLpEventsRequest) updates) => super.copyWith((message) => updates(message as StreamLpEventsRequest)) as StreamLpEventsRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StreamEtfErrorsRequest create() => StreamEtfErrorsRequest._();
+  static StreamLpEventsRequest create() => StreamLpEventsRequest._();
   @$core.override
-  StreamEtfErrorsRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamEtfErrorsRequest> createRepeated() => $pb.PbList<StreamEtfErrorsRequest>();
+  StreamLpEventsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamLpEventsRequest> createRepeated() => $pb.PbList<StreamLpEventsRequest>();
   @$core.pragma('dart2js:noInline')
-  static StreamEtfErrorsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfErrorsRequest>(create);
-  static StreamEtfErrorsRequest? _defaultInstance;
+  static StreamLpEventsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamLpEventsRequest>(create);
+  static StreamLpEventsRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -1317,56 +1317,56 @@ class StreamEtfErrorsRequest extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 에러 이벤트
-class EtfLpError extends $pb.GeneratedMessage {
-  factory EtfLpError({
+class EtfLpEvent extends $pb.GeneratedMessage {
+  factory EtfLpEvent({
     $core.String? symbol,
-    ThreadType? threadType,
-    ErrorType? errorType,
-    $core.String? errorMessage,
+    TaskType? taskType,
+    LpEventType? type,
+    $core.String? message,
     $2.Timestamp? timestamp,
-    ErrorLevel? errorLevel,
+    LpEventLevel? level,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
-    if (threadType != null) result.threadType = threadType;
-    if (errorType != null) result.errorType = errorType;
-    if (errorMessage != null) result.errorMessage = errorMessage;
+    if (taskType != null) result.taskType = taskType;
+    if (type != null) result.type = type;
+    if (message != null) result.message = message;
     if (timestamp != null) result.timestamp = timestamp;
-    if (errorLevel != null) result.errorLevel = errorLevel;
+    if (level != null) result.level = level;
     return result;
   }
 
-  EtfLpError._();
+  EtfLpEvent._();
 
-  factory EtfLpError.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpError.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory EtfLpEvent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLpEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpError', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..e<ThreadType>(2, _omitFieldNames ? '' : 'threadType', $pb.PbFieldType.OE, defaultOrMaker: ThreadType.THREAD_TYPE_UNSPECIFIED, valueOf: ThreadType.valueOf, enumValues: ThreadType.values)
-    ..e<ErrorType>(3, _omitFieldNames ? '' : 'errorType', $pb.PbFieldType.OE, defaultOrMaker: ErrorType.ERROR_TYPE_UNSPECIFIED, valueOf: ErrorType.valueOf, enumValues: ErrorType.values)
-    ..aOS(4, _omitFieldNames ? '' : 'errorMessage')
+    ..e<TaskType>(2, _omitFieldNames ? '' : 'taskType', $pb.PbFieldType.OE, defaultOrMaker: TaskType.TASK_TYPE_UNSPECIFIED, valueOf: TaskType.valueOf, enumValues: TaskType.values)
+    ..e<LpEventType>(3, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: LpEventType.LP_EVENT_TYPE_UNSPECIFIED, valueOf: LpEventType.valueOf, enumValues: LpEventType.values)
+    ..aOS(4, _omitFieldNames ? '' : 'message')
     ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $2.Timestamp.create)
-    ..e<ErrorLevel>(6, _omitFieldNames ? '' : 'errorLevel', $pb.PbFieldType.OE, defaultOrMaker: ErrorLevel.ERROR_LEVEL_UNSPECIFIED, valueOf: ErrorLevel.valueOf, enumValues: ErrorLevel.values)
+    ..e<LpEventLevel>(6, _omitFieldNames ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: LpEventLevel.LP_EVENT_LEVEL_UNSPECIFIED, valueOf: LpEventLevel.valueOf, enumValues: LpEventLevel.values)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpError clone() => EtfLpError()..mergeFromMessage(this);
+  EtfLpEvent clone() => EtfLpEvent()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpError copyWith(void Function(EtfLpError) updates) => super.copyWith((message) => updates(message as EtfLpError)) as EtfLpError;
+  EtfLpEvent copyWith(void Function(EtfLpEvent) updates) => super.copyWith((message) => updates(message as EtfLpEvent)) as EtfLpEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLpError create() => EtfLpError._();
+  static EtfLpEvent create() => EtfLpEvent._();
   @$core.override
-  EtfLpError createEmptyInstance() => create();
-  static $pb.PbList<EtfLpError> createRepeated() => $pb.PbList<EtfLpError>();
+  EtfLpEvent createEmptyInstance() => create();
+  static $pb.PbList<EtfLpEvent> createRepeated() => $pb.PbList<EtfLpEvent>();
   @$core.pragma('dart2js:noInline')
-  static EtfLpError getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpError>(create);
-  static EtfLpError? _defaultInstance;
+  static EtfLpEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpEvent>(create);
+  static EtfLpEvent? _defaultInstance;
 
   /// ETF 심볼
   @$pb.TagNumber(1)
@@ -1378,37 +1378,37 @@ class EtfLpError extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
-  /// 스레드 타입
+  /// 작업 타입
   @$pb.TagNumber(2)
-  ThreadType get threadType => $_getN(1);
+  TaskType get taskType => $_getN(1);
   @$pb.TagNumber(2)
-  set threadType(ThreadType value) => $_setField(2, value);
+  set taskType(TaskType value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasThreadType() => $_has(1);
+  $core.bool hasTaskType() => $_has(1);
   @$pb.TagNumber(2)
-  void clearThreadType() => $_clearField(2);
+  void clearTaskType() => $_clearField(2);
 
-  /// 에러 타입
+  /// 이벤트 타입
   @$pb.TagNumber(3)
-  ErrorType get errorType => $_getN(2);
+  LpEventType get type => $_getN(2);
   @$pb.TagNumber(3)
-  set errorType(ErrorType value) => $_setField(3, value);
+  set type(LpEventType value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasErrorType() => $_has(2);
+  $core.bool hasType() => $_has(2);
   @$pb.TagNumber(3)
-  void clearErrorType() => $_clearField(3);
+  void clearType() => $_clearField(3);
 
-  /// 에러 메시지
+  /// 상세 메시지
   @$pb.TagNumber(4)
-  $core.String get errorMessage => $_getSZ(3);
+  $core.String get message => $_getSZ(3);
   @$pb.TagNumber(4)
-  set errorMessage($core.String value) => $_setString(3, value);
+  set message($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasErrorMessage() => $_has(3);
+  $core.bool hasMessage() => $_has(3);
   @$pb.TagNumber(4)
-  void clearErrorMessage() => $_clearField(4);
+  void clearMessage() => $_clearField(4);
 
-  /// 에러 발생 시간
+  /// 발생 시간
   @$pb.TagNumber(5)
   $2.Timestamp get timestamp => $_getN(4);
   @$pb.TagNumber(5)
@@ -1420,15 +1420,15 @@ class EtfLpError extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $2.Timestamp ensureTimestamp() => $_ensure(4);
 
-  /// 에러 레벨
+  /// 이벤트 레벨
   @$pb.TagNumber(6)
-  ErrorLevel get errorLevel => $_getN(5);
+  LpEventLevel get level => $_getN(5);
   @$pb.TagNumber(6)
-  set errorLevel(ErrorLevel value) => $_setField(6, value);
+  set level(LpEventLevel value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasErrorLevel() => $_has(5);
+  $core.bool hasLevel() => $_has(5);
   @$pb.TagNumber(6)
-  void clearErrorLevel() => $_clearField(6);
+  void clearLevel() => $_clearField(6);
 }
 
 /// 주문 업데이트 스트리밍 요청

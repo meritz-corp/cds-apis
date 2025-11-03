@@ -56,84 +56,84 @@ class EtfLpState extends $pb.ProtobufEnum {
   const EtfLpState._(super.value, super.name);
 }
 
-/// 스레드 타입
-class ThreadType extends $pb.ProtobufEnum {
-  static const ThreadType THREAD_TYPE_UNSPECIFIED = ThreadType._(0, _omitEnumNames ? '' : 'THREAD_TYPE_UNSPECIFIED');
-  static const ThreadType THREAD_TYPE_QUOTE = ThreadType._(1, _omitEnumNames ? '' : 'THREAD_TYPE_QUOTE');
-  static const ThreadType THREAD_TYPE_HEDGE = ThreadType._(2, _omitEnumNames ? '' : 'THREAD_TYPE_HEDGE');
+/// 작업 타입
+class TaskType extends $pb.ProtobufEnum {
+  static const TaskType TASK_TYPE_UNSPECIFIED = TaskType._(0, _omitEnumNames ? '' : 'TASK_TYPE_UNSPECIFIED');
+  static const TaskType TASK_TYPE_QUOTE = TaskType._(1, _omitEnumNames ? '' : 'TASK_TYPE_QUOTE');
+  static const TaskType TASK_TYPE_HEDGE = TaskType._(2, _omitEnumNames ? '' : 'TASK_TYPE_HEDGE');
 
-  static const $core.List<ThreadType> values = <ThreadType> [
-    THREAD_TYPE_UNSPECIFIED,
-    THREAD_TYPE_QUOTE,
-    THREAD_TYPE_HEDGE,
+  static const $core.List<TaskType> values = <TaskType> [
+    TASK_TYPE_UNSPECIFIED,
+    TASK_TYPE_QUOTE,
+    TASK_TYPE_HEDGE,
   ];
 
-  static final $core.List<ThreadType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static ThreadType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<TaskType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static TaskType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const ThreadType._(super.value, super.name);
+  const TaskType._(super.value, super.name);
 }
 
-/// 에러 타입
-class ErrorType extends $pb.ProtobufEnum {
-  static const ErrorType ERROR_TYPE_UNSPECIFIED = ErrorType._(0, _omitEnumNames ? '' : 'ERROR_TYPE_UNSPECIFIED');
-  static const ErrorType ERROR_TYPE_INITIALIZATION = ErrorType._(1, _omitEnumNames ? '' : 'ERROR_TYPE_INITIALIZATION');
-  static const ErrorType ERROR_TYPE_PRICE_UPDATE = ErrorType._(2, _omitEnumNames ? '' : 'ERROR_TYPE_PRICE_UPDATE');
-  static const ErrorType ERROR_TYPE_ORDER_SUBMIT = ErrorType._(3, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_SUBMIT');
-  static const ErrorType ERROR_TYPE_ORDER_PROCESSING = ErrorType._(4, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_PROCESSING');
-  static const ErrorType ERROR_TYPE_NAV_CALCULATION = ErrorType._(5, _omitEnumNames ? '' : 'ERROR_TYPE_NAV_CALCULATION');
-  static const ErrorType ERROR_TYPE_ORDER_BOOK_UPDATE = ErrorType._(6, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_BOOK_UPDATE');
-  static const ErrorType ERROR_TYPE_ORDER_LIMIT_EXCEEDED = ErrorType._(7, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_LIMIT_EXCEEDED');
-  static const ErrorType ERROR_TYPE_FUND_LIMIT_EXCEEDED = ErrorType._(8, _omitEnumNames ? '' : 'ERROR_TYPE_FUND_LIMIT_EXCEEDED');
-  static const ErrorType ERROR_TYPE_STOCK_INVENTORY_EXCEEDED = ErrorType._(9, _omitEnumNames ? '' : 'ERROR_TYPE_STOCK_INVENTORY_EXCEEDED');
-  static const ErrorType ERROR_TYPE_SYSTEM_ERROR = ErrorType._(12, _omitEnumNames ? '' : 'ERROR_TYPE_SYSTEM_ERROR');
-  static const ErrorType ERROR_TYPE_MARKET_SESSION = ErrorType._(13, _omitEnumNames ? '' : 'ERROR_TYPE_MARKET_SESSION');
-  static const ErrorType ERROR_TYPE_FUND_UPDATE = ErrorType._(14, _omitEnumNames ? '' : 'ERROR_TYPE_FUND_UPDATE');
+/// 이벤트 타입
+class LpEventType extends $pb.ProtobufEnum {
+  static const LpEventType LP_EVENT_TYPE_UNSPECIFIED = LpEventType._(0, _omitEnumNames ? '' : 'LP_EVENT_TYPE_UNSPECIFIED');
+  static const LpEventType LP_EVENT_TYPE_INITIALIZATION = LpEventType._(1, _omitEnumNames ? '' : 'LP_EVENT_TYPE_INITIALIZATION');
+  static const LpEventType LP_EVENT_TYPE_PRICE_UPDATE = LpEventType._(2, _omitEnumNames ? '' : 'LP_EVENT_TYPE_PRICE_UPDATE');
+  static const LpEventType LP_EVENT_TYPE_ORDER_SUBMIT = LpEventType._(3, _omitEnumNames ? '' : 'LP_EVENT_TYPE_ORDER_SUBMIT');
+  static const LpEventType LP_EVENT_TYPE_ORDER_PROCESSING = LpEventType._(4, _omitEnumNames ? '' : 'LP_EVENT_TYPE_ORDER_PROCESSING');
+  static const LpEventType LP_EVENT_TYPE_NAV_CALCULATION = LpEventType._(5, _omitEnumNames ? '' : 'LP_EVENT_TYPE_NAV_CALCULATION');
+  static const LpEventType LP_EVENT_TYPE_ORDER_BOOK_UPDATE = LpEventType._(6, _omitEnumNames ? '' : 'LP_EVENT_TYPE_ORDER_BOOK_UPDATE');
+  static const LpEventType LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED = LpEventType._(7, _omitEnumNames ? '' : 'LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED');
+  static const LpEventType LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED = LpEventType._(8, _omitEnumNames ? '' : 'LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED');
+  static const LpEventType LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED = LpEventType._(9, _omitEnumNames ? '' : 'LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED');
+  static const LpEventType LP_EVENT_TYPE_SYSTEM_ERROR = LpEventType._(12, _omitEnumNames ? '' : 'LP_EVENT_TYPE_SYSTEM_ERROR');
+  static const LpEventType LP_EVENT_TYPE_MARKET_SESSION = LpEventType._(13, _omitEnumNames ? '' : 'LP_EVENT_TYPE_MARKET_SESSION');
+  static const LpEventType LP_EVENT_TYPE_FUND_UPDATE = LpEventType._(14, _omitEnumNames ? '' : 'LP_EVENT_TYPE_FUND_UPDATE');
 
-  static const $core.List<ErrorType> values = <ErrorType> [
-    ERROR_TYPE_UNSPECIFIED,
-    ERROR_TYPE_INITIALIZATION,
-    ERROR_TYPE_PRICE_UPDATE,
-    ERROR_TYPE_ORDER_SUBMIT,
-    ERROR_TYPE_ORDER_PROCESSING,
-    ERROR_TYPE_NAV_CALCULATION,
-    ERROR_TYPE_ORDER_BOOK_UPDATE,
-    ERROR_TYPE_ORDER_LIMIT_EXCEEDED,
-    ERROR_TYPE_FUND_LIMIT_EXCEEDED,
-    ERROR_TYPE_STOCK_INVENTORY_EXCEEDED,
-    ERROR_TYPE_SYSTEM_ERROR,
-    ERROR_TYPE_MARKET_SESSION,
-    ERROR_TYPE_FUND_UPDATE,
+  static const $core.List<LpEventType> values = <LpEventType> [
+    LP_EVENT_TYPE_UNSPECIFIED,
+    LP_EVENT_TYPE_INITIALIZATION,
+    LP_EVENT_TYPE_PRICE_UPDATE,
+    LP_EVENT_TYPE_ORDER_SUBMIT,
+    LP_EVENT_TYPE_ORDER_PROCESSING,
+    LP_EVENT_TYPE_NAV_CALCULATION,
+    LP_EVENT_TYPE_ORDER_BOOK_UPDATE,
+    LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED,
+    LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED,
+    LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED,
+    LP_EVENT_TYPE_SYSTEM_ERROR,
+    LP_EVENT_TYPE_MARKET_SESSION,
+    LP_EVENT_TYPE_FUND_UPDATE,
   ];
 
-  static final $core.List<ErrorType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 14);
-  static ErrorType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<LpEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 14);
+  static LpEventType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const ErrorType._(super.value, super.name);
+  const LpEventType._(super.value, super.name);
 }
 
-/// 에러 레벨
-class ErrorLevel extends $pb.ProtobufEnum {
-  static const ErrorLevel ERROR_LEVEL_UNSPECIFIED = ErrorLevel._(0, _omitEnumNames ? '' : 'ERROR_LEVEL_UNSPECIFIED');
-  static const ErrorLevel ERROR_LEVEL_DEBUG = ErrorLevel._(1, _omitEnumNames ? '' : 'ERROR_LEVEL_DEBUG');
-  static const ErrorLevel ERROR_LEVEL_INFO = ErrorLevel._(2, _omitEnumNames ? '' : 'ERROR_LEVEL_INFO');
-  static const ErrorLevel ERROR_LEVEL_WARNING = ErrorLevel._(3, _omitEnumNames ? '' : 'ERROR_LEVEL_WARNING');
-  static const ErrorLevel ERROR_LEVEL_ERROR = ErrorLevel._(4, _omitEnumNames ? '' : 'ERROR_LEVEL_ERROR');
-  static const ErrorLevel ERROR_LEVEL_CRITICAL = ErrorLevel._(5, _omitEnumNames ? '' : 'ERROR_LEVEL_CRITICAL');
+/// 이벤트 레벨
+class LpEventLevel extends $pb.ProtobufEnum {
+  static const LpEventLevel LP_EVENT_LEVEL_UNSPECIFIED = LpEventLevel._(0, _omitEnumNames ? '' : 'LP_EVENT_LEVEL_UNSPECIFIED');
+  static const LpEventLevel LP_EVENT_LEVEL_DEBUG = LpEventLevel._(1, _omitEnumNames ? '' : 'LP_EVENT_LEVEL_DEBUG');
+  static const LpEventLevel LP_EVENT_LEVEL_INFO = LpEventLevel._(2, _omitEnumNames ? '' : 'LP_EVENT_LEVEL_INFO');
+  static const LpEventLevel LP_EVENT_LEVEL_WARNING = LpEventLevel._(3, _omitEnumNames ? '' : 'LP_EVENT_LEVEL_WARNING');
+  static const LpEventLevel LP_EVENT_LEVEL_ERROR = LpEventLevel._(4, _omitEnumNames ? '' : 'LP_EVENT_LEVEL_ERROR');
+  static const LpEventLevel LP_EVENT_LEVEL_CRITICAL = LpEventLevel._(5, _omitEnumNames ? '' : 'LP_EVENT_LEVEL_CRITICAL');
 
-  static const $core.List<ErrorLevel> values = <ErrorLevel> [
-    ERROR_LEVEL_UNSPECIFIED,
-    ERROR_LEVEL_DEBUG,
-    ERROR_LEVEL_INFO,
-    ERROR_LEVEL_WARNING,
-    ERROR_LEVEL_ERROR,
-    ERROR_LEVEL_CRITICAL,
+  static const $core.List<LpEventLevel> values = <LpEventLevel> [
+    LP_EVENT_LEVEL_UNSPECIFIED,
+    LP_EVENT_LEVEL_DEBUG,
+    LP_EVENT_LEVEL_INFO,
+    LP_EVENT_LEVEL_WARNING,
+    LP_EVENT_LEVEL_ERROR,
+    LP_EVENT_LEVEL_CRITICAL,
   ];
 
-  static final $core.List<ErrorLevel?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
-  static ErrorLevel? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<LpEventLevel?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static LpEventLevel? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const ErrorLevel._(super.value, super.name);
+  const LpEventLevel._(super.value, super.name);
 }
 
 

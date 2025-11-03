@@ -237,7 +237,7 @@ pub struct StopEtfLpResponse {
 /// StreamEtfErrors 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamEtfErrorsRequest {
+pub struct StreamLpEventsRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
@@ -246,25 +246,25 @@ pub struct StreamEtfErrorsRequest {
 /// ETF LP 에러 이벤트
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLpError {
+pub struct EtfLpEvent {
     /// ETF 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 스레드 타입
-    #[prost(enumeration="ThreadType", tag="2")]
-    pub thread_type: i32,
-    /// 에러 타입
-    #[prost(enumeration="ErrorType", tag="3")]
-    pub error_type: i32,
-    /// 에러 메시지
+    /// 작업 타입
+    #[prost(enumeration="TaskType", tag="2")]
+    pub task_type: i32,
+    /// 이벤트 타입
+    #[prost(enumeration="LpEventType", tag="3")]
+    pub r#type: i32,
+    /// 상세 메시지
     #[prost(string, tag="4")]
-    pub error_message: ::prost::alloc::string::String,
-    /// 에러 발생 시간
+    pub message: ::prost::alloc::string::String,
+    /// 발생 시간
     #[prost(message, optional, tag="5")]
     pub timestamp: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// 에러 레벨
-    #[prost(enumeration="ErrorLevel", tag="6")]
-    pub error_level: i32,
+    /// 이벤트 레벨
+    #[prost(enumeration="LpEventLevel", tag="6")]
+    pub level: i32,
 }
 /// 주문 업데이트 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -361,40 +361,40 @@ impl EtfLpState {
         }
     }
 }
-/// 스레드 타입
+/// 작업 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum ThreadType {
+pub enum TaskType {
     Unspecified = 0,
     Quote = 1,
     Hedge = 2,
 }
-impl ThreadType {
+impl TaskType {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ThreadType::Unspecified => "THREAD_TYPE_UNSPECIFIED",
-            ThreadType::Quote => "THREAD_TYPE_QUOTE",
-            ThreadType::Hedge => "THREAD_TYPE_HEDGE",
+            TaskType::Unspecified => "TASK_TYPE_UNSPECIFIED",
+            TaskType::Quote => "TASK_TYPE_QUOTE",
+            TaskType::Hedge => "TASK_TYPE_HEDGE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "THREAD_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "THREAD_TYPE_QUOTE" => Some(Self::Quote),
-            "THREAD_TYPE_HEDGE" => Some(Self::Hedge),
+            "TASK_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "TASK_TYPE_QUOTE" => Some(Self::Quote),
+            "TASK_TYPE_HEDGE" => Some(Self::Hedge),
             _ => None,
         }
     }
 }
-/// 에러 타입
+/// 이벤트 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum ErrorType {
+pub enum LpEventType {
     Unspecified = 0,
     /// 초기화 실패
     Initialization = 1,
@@ -421,52 +421,52 @@ pub enum ErrorType {
     /// 펀드 정보 업데이트 실패
     FundUpdate = 14,
 }
-impl ErrorType {
+impl LpEventType {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ErrorType::Unspecified => "ERROR_TYPE_UNSPECIFIED",
-            ErrorType::Initialization => "ERROR_TYPE_INITIALIZATION",
-            ErrorType::PriceUpdate => "ERROR_TYPE_PRICE_UPDATE",
-            ErrorType::OrderSubmit => "ERROR_TYPE_ORDER_SUBMIT",
-            ErrorType::OrderProcessing => "ERROR_TYPE_ORDER_PROCESSING",
-            ErrorType::NavCalculation => "ERROR_TYPE_NAV_CALCULATION",
-            ErrorType::OrderBookUpdate => "ERROR_TYPE_ORDER_BOOK_UPDATE",
-            ErrorType::OrderLimitExceeded => "ERROR_TYPE_ORDER_LIMIT_EXCEEDED",
-            ErrorType::FundLimitExceeded => "ERROR_TYPE_FUND_LIMIT_EXCEEDED",
-            ErrorType::StockInventoryExceeded => "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED",
-            ErrorType::SystemError => "ERROR_TYPE_SYSTEM_ERROR",
-            ErrorType::MarketSession => "ERROR_TYPE_MARKET_SESSION",
-            ErrorType::FundUpdate => "ERROR_TYPE_FUND_UPDATE",
+            LpEventType::Unspecified => "LP_EVENT_TYPE_UNSPECIFIED",
+            LpEventType::Initialization => "LP_EVENT_TYPE_INITIALIZATION",
+            LpEventType::PriceUpdate => "LP_EVENT_TYPE_PRICE_UPDATE",
+            LpEventType::OrderSubmit => "LP_EVENT_TYPE_ORDER_SUBMIT",
+            LpEventType::OrderProcessing => "LP_EVENT_TYPE_ORDER_PROCESSING",
+            LpEventType::NavCalculation => "LP_EVENT_TYPE_NAV_CALCULATION",
+            LpEventType::OrderBookUpdate => "LP_EVENT_TYPE_ORDER_BOOK_UPDATE",
+            LpEventType::OrderLimitExceeded => "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED",
+            LpEventType::FundLimitExceeded => "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED",
+            LpEventType::StockInventoryExceeded => "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED",
+            LpEventType::SystemError => "LP_EVENT_TYPE_SYSTEM_ERROR",
+            LpEventType::MarketSession => "LP_EVENT_TYPE_MARKET_SESSION",
+            LpEventType::FundUpdate => "LP_EVENT_TYPE_FUND_UPDATE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "ERROR_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "ERROR_TYPE_INITIALIZATION" => Some(Self::Initialization),
-            "ERROR_TYPE_PRICE_UPDATE" => Some(Self::PriceUpdate),
-            "ERROR_TYPE_ORDER_SUBMIT" => Some(Self::OrderSubmit),
-            "ERROR_TYPE_ORDER_PROCESSING" => Some(Self::OrderProcessing),
-            "ERROR_TYPE_NAV_CALCULATION" => Some(Self::NavCalculation),
-            "ERROR_TYPE_ORDER_BOOK_UPDATE" => Some(Self::OrderBookUpdate),
-            "ERROR_TYPE_ORDER_LIMIT_EXCEEDED" => Some(Self::OrderLimitExceeded),
-            "ERROR_TYPE_FUND_LIMIT_EXCEEDED" => Some(Self::FundLimitExceeded),
-            "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED" => Some(Self::StockInventoryExceeded),
-            "ERROR_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
-            "ERROR_TYPE_MARKET_SESSION" => Some(Self::MarketSession),
-            "ERROR_TYPE_FUND_UPDATE" => Some(Self::FundUpdate),
+            "LP_EVENT_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "LP_EVENT_TYPE_INITIALIZATION" => Some(Self::Initialization),
+            "LP_EVENT_TYPE_PRICE_UPDATE" => Some(Self::PriceUpdate),
+            "LP_EVENT_TYPE_ORDER_SUBMIT" => Some(Self::OrderSubmit),
+            "LP_EVENT_TYPE_ORDER_PROCESSING" => Some(Self::OrderProcessing),
+            "LP_EVENT_TYPE_NAV_CALCULATION" => Some(Self::NavCalculation),
+            "LP_EVENT_TYPE_ORDER_BOOK_UPDATE" => Some(Self::OrderBookUpdate),
+            "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED" => Some(Self::OrderLimitExceeded),
+            "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED" => Some(Self::FundLimitExceeded),
+            "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED" => Some(Self::StockInventoryExceeded),
+            "LP_EVENT_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
+            "LP_EVENT_TYPE_MARKET_SESSION" => Some(Self::MarketSession),
+            "LP_EVENT_TYPE_FUND_UPDATE" => Some(Self::FundUpdate),
             _ => None,
         }
     }
 }
-/// 에러 레벨
+/// 이벤트 레벨
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum ErrorLevel {
+pub enum LpEventLevel {
     Unspecified = 0,
     /// 디버그 정보
     Debug = 1,
@@ -479,30 +479,30 @@ pub enum ErrorLevel {
     /// 치명적 에러
     Critical = 5,
 }
-impl ErrorLevel {
+impl LpEventLevel {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ErrorLevel::Unspecified => "ERROR_LEVEL_UNSPECIFIED",
-            ErrorLevel::Debug => "ERROR_LEVEL_DEBUG",
-            ErrorLevel::Info => "ERROR_LEVEL_INFO",
-            ErrorLevel::Warning => "ERROR_LEVEL_WARNING",
-            ErrorLevel::Error => "ERROR_LEVEL_ERROR",
-            ErrorLevel::Critical => "ERROR_LEVEL_CRITICAL",
+            LpEventLevel::Unspecified => "LP_EVENT_LEVEL_UNSPECIFIED",
+            LpEventLevel::Debug => "LP_EVENT_LEVEL_DEBUG",
+            LpEventLevel::Info => "LP_EVENT_LEVEL_INFO",
+            LpEventLevel::Warning => "LP_EVENT_LEVEL_WARNING",
+            LpEventLevel::Error => "LP_EVENT_LEVEL_ERROR",
+            LpEventLevel::Critical => "LP_EVENT_LEVEL_CRITICAL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "ERROR_LEVEL_UNSPECIFIED" => Some(Self::Unspecified),
-            "ERROR_LEVEL_DEBUG" => Some(Self::Debug),
-            "ERROR_LEVEL_INFO" => Some(Self::Info),
-            "ERROR_LEVEL_WARNING" => Some(Self::Warning),
-            "ERROR_LEVEL_ERROR" => Some(Self::Error),
-            "ERROR_LEVEL_CRITICAL" => Some(Self::Critical),
+            "LP_EVENT_LEVEL_UNSPECIFIED" => Some(Self::Unspecified),
+            "LP_EVENT_LEVEL_DEBUG" => Some(Self::Debug),
+            "LP_EVENT_LEVEL_INFO" => Some(Self::Info),
+            "LP_EVENT_LEVEL_WARNING" => Some(Self::Warning),
+            "LP_EVENT_LEVEL_ERROR" => Some(Self::Error),
+            "LP_EVENT_LEVEL_CRITICAL" => Some(Self::Critical),
             _ => None,
         }
     }

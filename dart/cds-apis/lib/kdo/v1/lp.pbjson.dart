@@ -49,70 +49,72 @@ final $typed_data.Uint8List etfLpStateDescriptor = $convert.base64Decode(
     'FURV9JRExFEAESGAoURVRGX0xQX1NUQVRFX1JVTk5JTkcQAhIZChVFVEZfTFBfU1RBVEVfU1RP'
     'UFBJTkcQAxIWChJFVEZfTFBfU1RBVEVfRVJST1IQBA==');
 
-@$core.Deprecated('Use threadTypeDescriptor instead')
-const ThreadType$json = {
-  '1': 'ThreadType',
+@$core.Deprecated('Use taskTypeDescriptor instead')
+const TaskType$json = {
+  '1': 'TaskType',
   '2': [
-    {'1': 'THREAD_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'THREAD_TYPE_QUOTE', '2': 1},
-    {'1': 'THREAD_TYPE_HEDGE', '2': 2},
+    {'1': 'TASK_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'TASK_TYPE_QUOTE', '2': 1},
+    {'1': 'TASK_TYPE_HEDGE', '2': 2},
   ],
 };
 
-/// Descriptor for `ThreadType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List threadTypeDescriptor = $convert.base64Decode(
-    'CgpUaHJlYWRUeXBlEhsKF1RIUkVBRF9UWVBFX1VOU1BFQ0lGSUVEEAASFQoRVEhSRUFEX1RZUE'
-    'VfUVVPVEUQARIVChFUSFJFQURfVFlQRV9IRURHRRAC');
+/// Descriptor for `TaskType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List taskTypeDescriptor = $convert.base64Decode(
+    'CghUYXNrVHlwZRIZChVUQVNLX1RZUEVfVU5TUEVDSUZJRUQQABITCg9UQVNLX1RZUEVfUVVPVE'
+    'UQARITCg9UQVNLX1RZUEVfSEVER0UQAg==');
 
-@$core.Deprecated('Use errorTypeDescriptor instead')
-const ErrorType$json = {
-  '1': 'ErrorType',
+@$core.Deprecated('Use lpEventTypeDescriptor instead')
+const LpEventType$json = {
+  '1': 'LpEventType',
   '2': [
-    {'1': 'ERROR_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'ERROR_TYPE_INITIALIZATION', '2': 1},
-    {'1': 'ERROR_TYPE_PRICE_UPDATE', '2': 2},
-    {'1': 'ERROR_TYPE_ORDER_SUBMIT', '2': 3},
-    {'1': 'ERROR_TYPE_ORDER_PROCESSING', '2': 4},
-    {'1': 'ERROR_TYPE_NAV_CALCULATION', '2': 5},
-    {'1': 'ERROR_TYPE_ORDER_BOOK_UPDATE', '2': 6},
-    {'1': 'ERROR_TYPE_ORDER_LIMIT_EXCEEDED', '2': 7},
-    {'1': 'ERROR_TYPE_FUND_LIMIT_EXCEEDED', '2': 8},
-    {'1': 'ERROR_TYPE_STOCK_INVENTORY_EXCEEDED', '2': 9},
-    {'1': 'ERROR_TYPE_SYSTEM_ERROR', '2': 12},
-    {'1': 'ERROR_TYPE_MARKET_SESSION', '2': 13},
-    {'1': 'ERROR_TYPE_FUND_UPDATE', '2': 14},
+    {'1': 'LP_EVENT_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'LP_EVENT_TYPE_INITIALIZATION', '2': 1},
+    {'1': 'LP_EVENT_TYPE_PRICE_UPDATE', '2': 2},
+    {'1': 'LP_EVENT_TYPE_ORDER_SUBMIT', '2': 3},
+    {'1': 'LP_EVENT_TYPE_ORDER_PROCESSING', '2': 4},
+    {'1': 'LP_EVENT_TYPE_NAV_CALCULATION', '2': 5},
+    {'1': 'LP_EVENT_TYPE_ORDER_BOOK_UPDATE', '2': 6},
+    {'1': 'LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED', '2': 7},
+    {'1': 'LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED', '2': 8},
+    {'1': 'LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED', '2': 9},
+    {'1': 'LP_EVENT_TYPE_SYSTEM_ERROR', '2': 12},
+    {'1': 'LP_EVENT_TYPE_MARKET_SESSION', '2': 13},
+    {'1': 'LP_EVENT_TYPE_FUND_UPDATE', '2': 14},
   ],
 };
 
-/// Descriptor for `ErrorType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List errorTypeDescriptor = $convert.base64Decode(
-    'CglFcnJvclR5cGUSGgoWRVJST1JfVFlQRV9VTlNQRUNJRklFRBAAEh0KGUVSUk9SX1RZUEVfSU'
-    '5JVElBTElaQVRJT04QARIbChdFUlJPUl9UWVBFX1BSSUNFX1VQREFURRACEhsKF0VSUk9SX1RZ'
-    'UEVfT1JERVJfU1VCTUlUEAMSHwobRVJST1JfVFlQRV9PUkRFUl9QUk9DRVNTSU5HEAQSHgoaRV'
-    'JST1JfVFlQRV9OQVZfQ0FMQ1VMQVRJT04QBRIgChxFUlJPUl9UWVBFX09SREVSX0JPT0tfVVBE'
-    'QVRFEAYSIwofRVJST1JfVFlQRV9PUkRFUl9MSU1JVF9FWENFRURFRBAHEiIKHkVSUk9SX1RZUE'
-    'VfRlVORF9MSU1JVF9FWENFRURFRBAIEicKI0VSUk9SX1RZUEVfU1RPQ0tfSU5WRU5UT1JZX0VY'
-    'Q0VFREVEEAkSGwoXRVJST1JfVFlQRV9TWVNURU1fRVJST1IQDBIdChlFUlJPUl9UWVBFX01BUk'
-    'tFVF9TRVNTSU9OEA0SGgoWRVJST1JfVFlQRV9GVU5EX1VQREFURRAO');
+/// Descriptor for `LpEventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List lpEventTypeDescriptor = $convert.base64Decode(
+    'CgtMcEV2ZW50VHlwZRIdChlMUF9FVkVOVF9UWVBFX1VOU1BFQ0lGSUVEEAASIAocTFBfRVZFTl'
+    'RfVFlQRV9JTklUSUFMSVpBVElPThABEh4KGkxQX0VWRU5UX1RZUEVfUFJJQ0VfVVBEQVRFEAIS'
+    'HgoaTFBfRVZFTlRfVFlQRV9PUkRFUl9TVUJNSVQQAxIiCh5MUF9FVkVOVF9UWVBFX09SREVSX1'
+    'BST0NFU1NJTkcQBBIhCh1MUF9FVkVOVF9UWVBFX05BVl9DQUxDVUxBVElPThAFEiMKH0xQX0VW'
+    'RU5UX1RZUEVfT1JERVJfQk9PS19VUERBVEUQBhImCiJMUF9FVkVOVF9UWVBFX09SREVSX0xJTU'
+    'lUX0VYQ0VFREVEEAcSJQohTFBfRVZFTlRfVFlQRV9GVU5EX0xJTUlUX0VYQ0VFREVEEAgSKgom'
+    'TFBfRVZFTlRfVFlQRV9TVE9DS19JTlZFTlRPUllfRVhDRUVERUQQCRIeChpMUF9FVkVOVF9UWV'
+    'BFX1NZU1RFTV9FUlJPUhAMEiAKHExQX0VWRU5UX1RZUEVfTUFSS0VUX1NFU1NJT04QDRIdChlM'
+    'UF9FVkVOVF9UWVBFX0ZVTkRfVVBEQVRFEA4=');
 
-@$core.Deprecated('Use errorLevelDescriptor instead')
-const ErrorLevel$json = {
-  '1': 'ErrorLevel',
+@$core.Deprecated('Use lpEventLevelDescriptor instead')
+const LpEventLevel$json = {
+  '1': 'LpEventLevel',
   '2': [
-    {'1': 'ERROR_LEVEL_UNSPECIFIED', '2': 0},
-    {'1': 'ERROR_LEVEL_DEBUG', '2': 1},
-    {'1': 'ERROR_LEVEL_INFO', '2': 2},
-    {'1': 'ERROR_LEVEL_WARNING', '2': 3},
-    {'1': 'ERROR_LEVEL_ERROR', '2': 4},
-    {'1': 'ERROR_LEVEL_CRITICAL', '2': 5},
+    {'1': 'LP_EVENT_LEVEL_UNSPECIFIED', '2': 0},
+    {'1': 'LP_EVENT_LEVEL_DEBUG', '2': 1},
+    {'1': 'LP_EVENT_LEVEL_INFO', '2': 2},
+    {'1': 'LP_EVENT_LEVEL_WARNING', '2': 3},
+    {'1': 'LP_EVENT_LEVEL_ERROR', '2': 4},
+    {'1': 'LP_EVENT_LEVEL_CRITICAL', '2': 5},
   ],
 };
 
-/// Descriptor for `ErrorLevel`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List errorLevelDescriptor = $convert.base64Decode(
-    'CgpFcnJvckxldmVsEhsKF0VSUk9SX0xFVkVMX1VOU1BFQ0lGSUVEEAASFQoRRVJST1JfTEVWRU'
-    'xfREVCVUcQARIUChBFUlJPUl9MRVZFTF9JTkZPEAISFwoTRVJST1JfTEVWRUxfV0FSTklORxAD'
-    'EhUKEUVSUk9SX0xFVkVMX0VSUk9SEAQSGAoURVJST1JfTEVWRUxfQ1JJVElDQUwQBQ==');
+/// Descriptor for `LpEventLevel`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List lpEventLevelDescriptor = $convert.base64Decode(
+    'CgxMcEV2ZW50TGV2ZWwSHgoaTFBfRVZFTlRfTEVWRUxfVU5TUEVDSUZJRUQQABIYChRMUF9FVk'
+    'VOVF9MRVZFTF9ERUJVRxABEhcKE0xQX0VWRU5UX0xFVkVMX0lORk8QAhIaChZMUF9FVkVOVF9M'
+    'RVZFTF9XQVJOSU5HEAMSGAoUTFBfRVZFTlRfTEVWRUxfRVJST1IQBBIbChdMUF9FVkVOVF9MRV'
+    'ZFTF9DUklUSUNBTBAF');
 
 @$core.Deprecated('Use etfLpDescriptor instead')
 const EtfLp$json = {
@@ -387,42 +389,41 @@ final $typed_data.Uint8List stopEtfLpResponseDescriptor = $convert.base64Decode(
     'ChFTdG9wRXRmTHBSZXNwb25zZRIuCgZzdGF0dXMYASABKAsyFi5rZG8udjEubHAuRXRmTHBTdG'
     'F0dXNSBnN0YXR1cxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdl');
 
-@$core.Deprecated('Use streamEtfErrorsRequestDescriptor instead')
-const StreamEtfErrorsRequest$json = {
-  '1': 'StreamEtfErrorsRequest',
+@$core.Deprecated('Use streamLpEventsRequestDescriptor instead')
+const StreamLpEventsRequest$json = {
+  '1': 'StreamLpEventsRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
-/// Descriptor for `StreamEtfErrorsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamEtfErrorsRequestDescriptor = $convert.base64Decode(
-    'ChZTdHJlYW1FdGZFcnJvcnNSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2'
-    'FwaXMueHl6L0V0ZlIDZXRmEjEKBGZ1bmQYAiABKAlCHeJBAQL6QRYKFGtkby5jZHNhcGlzLnh5'
-    'ei9GdW5kUgRmdW5k');
+/// Descriptor for `StreamLpEventsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamLpEventsRequestDescriptor = $convert.base64Decode(
+    'ChVTdHJlYW1McEV2ZW50c1JlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2RzYX'
+    'Bpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6'
+    'L0Z1bmRSBGZ1bmQ=');
 
-@$core.Deprecated('Use etfLpErrorDescriptor instead')
-const EtfLpError$json = {
-  '1': 'EtfLpError',
+@$core.Deprecated('Use etfLpEventDescriptor instead')
+const EtfLpEvent$json = {
+  '1': 'EtfLpEvent',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'thread_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.lp.ThreadType', '10': 'threadType'},
-    {'1': 'error_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.lp.ErrorType', '10': 'errorType'},
-    {'1': 'error_message', '3': 4, '4': 1, '5': 9, '10': 'errorMessage'},
+    {'1': 'task_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.lp.TaskType', '10': 'taskType'},
+    {'1': 'type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.lp.LpEventType', '10': 'type'},
+    {'1': 'message', '3': 4, '4': 1, '5': 9, '10': 'message'},
     {'1': 'timestamp', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
-    {'1': 'error_level', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.lp.ErrorLevel', '10': 'errorLevel'},
+    {'1': 'level', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.lp.LpEventLevel', '10': 'level'},
   ],
 };
 
-/// Descriptor for `EtfLpError`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfLpErrorDescriptor = $convert.base64Decode(
-    'CgpFdGZMcEVycm9yEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEjYKC3RocmVhZF90eXBlGAIgAS'
-    'gOMhUua2RvLnYxLmxwLlRocmVhZFR5cGVSCnRocmVhZFR5cGUSMwoKZXJyb3JfdHlwZRgDIAEo'
-    'DjIULmtkby52MS5scC5FcnJvclR5cGVSCWVycm9yVHlwZRIjCg1lcnJvcl9tZXNzYWdlGAQgAS'
-    'gJUgxlcnJvck1lc3NhZ2USOAoJdGltZXN0YW1wGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRp'
-    'bWVzdGFtcFIJdGltZXN0YW1wEjYKC2Vycm9yX2xldmVsGAYgASgOMhUua2RvLnYxLmxwLkVycm'
-    '9yTGV2ZWxSCmVycm9yTGV2ZWw=');
+/// Descriptor for `EtfLpEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpEventDescriptor = $convert.base64Decode(
+    'CgpFdGZMcEV2ZW50EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEjAKCXRhc2tfdHlwZRgCIAEoDj'
+    'ITLmtkby52MS5scC5UYXNrVHlwZVIIdGFza1R5cGUSKgoEdHlwZRgDIAEoDjIWLmtkby52MS5s'
+    'cC5McEV2ZW50VHlwZVIEdHlwZRIYCgdtZXNzYWdlGAQgASgJUgdtZXNzYWdlEjgKCXRpbWVzdG'
+    'FtcBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXRpbWVzdGFtcBItCgVsZXZl'
+    'bBgGIAEoDjIXLmtkby52MS5scC5McEV2ZW50TGV2ZWxSBWxldmVs');
 
 @$core.Deprecated('Use getUserOrderBookRequestDescriptor instead')
 const GetUserOrderBookRequest$json = {

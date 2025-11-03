@@ -191,10 +191,10 @@
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}/errors:stream": {
+    "/v1/lps/{etf}/{fund}/events:stream": {
       "get": {
-        "summary": "ETF LP 에러 이벤트 실시간 스트리밍",
-        "operationId": "LpService_StreamEtfErrors",
+        "summary": "ETF LP 이벤트 실시간 스트리밍",
+        "operationId": "LpService_StreamLpEvents",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -202,13 +202,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/lpEtfLpError"
+                  "$ref": "#/definitions/lpEtfLpEvent"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of lpEtfLpError"
+              "title": "Stream result of lpEtfLpEvent"
             }
           },
           "default": {
@@ -519,41 +519,6 @@
     }
   },
   "definitions": {
-    "lpErrorLevel": {
-      "type": "string",
-      "enum": [
-        "ERROR_LEVEL_UNSPECIFIED",
-        "ERROR_LEVEL_DEBUG",
-        "ERROR_LEVEL_INFO",
-        "ERROR_LEVEL_WARNING",
-        "ERROR_LEVEL_ERROR",
-        "ERROR_LEVEL_CRITICAL"
-      ],
-      "default": "ERROR_LEVEL_UNSPECIFIED",
-      "description": "- ERROR_LEVEL_DEBUG: 디버그 정보\n - ERROR_LEVEL_INFO: 정보성 메시지\n - ERROR_LEVEL_WARNING: 경고\n - ERROR_LEVEL_ERROR: 에러\n - ERROR_LEVEL_CRITICAL: 치명적 에러",
-      "title": "에러 레벨"
-    },
-    "lpErrorType": {
-      "type": "string",
-      "enum": [
-        "ERROR_TYPE_UNSPECIFIED",
-        "ERROR_TYPE_INITIALIZATION",
-        "ERROR_TYPE_PRICE_UPDATE",
-        "ERROR_TYPE_ORDER_SUBMIT",
-        "ERROR_TYPE_ORDER_PROCESSING",
-        "ERROR_TYPE_NAV_CALCULATION",
-        "ERROR_TYPE_ORDER_BOOK_UPDATE",
-        "ERROR_TYPE_ORDER_LIMIT_EXCEEDED",
-        "ERROR_TYPE_FUND_LIMIT_EXCEEDED",
-        "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED",
-        "ERROR_TYPE_SYSTEM_ERROR",
-        "ERROR_TYPE_MARKET_SESSION",
-        "ERROR_TYPE_FUND_UPDATE"
-      ],
-      "default": "ERROR_TYPE_UNSPECIFIED",
-      "description": "- ERROR_TYPE_INITIALIZATION: 초기화 실패\n - ERROR_TYPE_PRICE_UPDATE: 가격 업데이트 실패\n - ERROR_TYPE_ORDER_SUBMIT: 주문 제출 실패\n - ERROR_TYPE_ORDER_PROCESSING: 주문 처리 실패\n - ERROR_TYPE_NAV_CALCULATION: NAV 계산 실패\n - ERROR_TYPE_ORDER_BOOK_UPDATE: 오더북 업데이트 실패\n - ERROR_TYPE_ORDER_LIMIT_EXCEEDED: 주문 한도 초과\n - ERROR_TYPE_FUND_LIMIT_EXCEEDED: 펀드 한도 초과\n - ERROR_TYPE_STOCK_INVENTORY_EXCEEDED: 주식 재고 초과\n - ERROR_TYPE_SYSTEM_ERROR: 시스템 에러\n - ERROR_TYPE_MARKET_SESSION: 시장 세션 관련 에러\n - ERROR_TYPE_FUND_UPDATE: 펀드 정보 업데이트 실패",
-      "title": "에러 타입"
-    },
     "lpEtfLp": {
       "type": "object",
       "properties": {
@@ -598,33 +563,33 @@
       },
       "title": "ETF LP 설정"
     },
-    "lpEtfLpError": {
+    "lpEtfLpEvent": {
       "type": "object",
       "properties": {
         "symbol": {
           "type": "string",
           "title": "ETF 심볼"
         },
-        "threadType": {
-          "$ref": "#/definitions/lpThreadType",
-          "title": "스레드 타입"
+        "taskType": {
+          "$ref": "#/definitions/lpTaskType",
+          "title": "작업 타입"
         },
-        "errorType": {
-          "$ref": "#/definitions/lpErrorType",
-          "title": "에러 타입"
+        "type": {
+          "$ref": "#/definitions/lpLpEventType",
+          "title": "이벤트 타입"
         },
-        "errorMessage": {
+        "message": {
           "type": "string",
-          "title": "에러 메시지"
+          "title": "상세 메시지"
         },
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "title": "에러 발생 시간"
+          "title": "발생 시간"
         },
-        "errorLevel": {
-          "$ref": "#/definitions/lpErrorLevel",
-          "title": "에러 레벨"
+        "level": {
+          "$ref": "#/definitions/lpLpEventLevel",
+          "title": "이벤트 레벨"
         }
       },
       "title": "ETF LP 에러 이벤트"
@@ -683,6 +648,41 @@
           "title": "다음 페이지 토큰"
         }
       }
+    },
+    "lpLpEventLevel": {
+      "type": "string",
+      "enum": [
+        "LP_EVENT_LEVEL_UNSPECIFIED",
+        "LP_EVENT_LEVEL_DEBUG",
+        "LP_EVENT_LEVEL_INFO",
+        "LP_EVENT_LEVEL_WARNING",
+        "LP_EVENT_LEVEL_ERROR",
+        "LP_EVENT_LEVEL_CRITICAL"
+      ],
+      "default": "LP_EVENT_LEVEL_UNSPECIFIED",
+      "description": "- LP_EVENT_LEVEL_DEBUG: 디버그 정보\n - LP_EVENT_LEVEL_INFO: 정보성 메시지\n - LP_EVENT_LEVEL_WARNING: 경고\n - LP_EVENT_LEVEL_ERROR: 에러\n - LP_EVENT_LEVEL_CRITICAL: 치명적 에러",
+      "title": "이벤트 레벨"
+    },
+    "lpLpEventType": {
+      "type": "string",
+      "enum": [
+        "LP_EVENT_TYPE_UNSPECIFIED",
+        "LP_EVENT_TYPE_INITIALIZATION",
+        "LP_EVENT_TYPE_PRICE_UPDATE",
+        "LP_EVENT_TYPE_ORDER_SUBMIT",
+        "LP_EVENT_TYPE_ORDER_PROCESSING",
+        "LP_EVENT_TYPE_NAV_CALCULATION",
+        "LP_EVENT_TYPE_ORDER_BOOK_UPDATE",
+        "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED",
+        "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED",
+        "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED",
+        "LP_EVENT_TYPE_SYSTEM_ERROR",
+        "LP_EVENT_TYPE_MARKET_SESSION",
+        "LP_EVENT_TYPE_FUND_UPDATE"
+      ],
+      "default": "LP_EVENT_TYPE_UNSPECIFIED",
+      "description": "- LP_EVENT_TYPE_INITIALIZATION: 초기화 실패\n - LP_EVENT_TYPE_PRICE_UPDATE: 가격 업데이트 실패\n - LP_EVENT_TYPE_ORDER_SUBMIT: 주문 제출 실패\n - LP_EVENT_TYPE_ORDER_PROCESSING: 주문 처리 실패\n - LP_EVENT_TYPE_NAV_CALCULATION: NAV 계산 실패\n - LP_EVENT_TYPE_ORDER_BOOK_UPDATE: 오더북 업데이트 실패\n - LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED: 주문 한도 초과\n - LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED: 펀드 한도 초과\n - LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED: 주식 재고 초과\n - LP_EVENT_TYPE_SYSTEM_ERROR: 시스템 에러\n - LP_EVENT_TYPE_MARKET_SESSION: 시장 세션 관련 에러\n - LP_EVENT_TYPE_FUND_UPDATE: 펀드 정보 업데이트 실패",
+      "title": "이벤트 타입"
     },
     "lpLpPricing": {
       "type": "object",
@@ -794,15 +794,15 @@
       },
       "title": "ETF LP 중지 응답"
     },
-    "lpThreadType": {
+    "lpTaskType": {
       "type": "string",
       "enum": [
-        "THREAD_TYPE_UNSPECIFIED",
-        "THREAD_TYPE_QUOTE",
-        "THREAD_TYPE_HEDGE"
+        "TASK_TYPE_UNSPECIFIED",
+        "TASK_TYPE_QUOTE",
+        "TASK_TYPE_HEDGE"
       ],
-      "default": "THREAD_TYPE_UNSPECIFIED",
-      "title": "스레드 타입"
+      "default": "TASK_TYPE_UNSPECIFIED",
+      "title": "작업 타입"
     },
     "lpTimeFrameStatus": {
       "type": "object",

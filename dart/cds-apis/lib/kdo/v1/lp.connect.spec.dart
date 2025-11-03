@@ -67,12 +67,12 @@ abstract final class LpService {
     kdov1lp.StopEtfLpResponse.new,
   );
 
-  /// ETF LP 에러 이벤트 실시간 스트리밍
-  static const streamEtfErrors = connect.Spec(
-    '/$name/StreamEtfErrors',
+  /// ETF LP 이벤트 실시간 스트리밍
+  static const streamLpEvents = connect.Spec(
+    '/$name/StreamLpEvents',
     connect.StreamType.server,
-    kdov1lp.StreamEtfErrorsRequest.new,
-    kdov1lp.EtfLpError.new,
+    kdov1lp.StreamLpEventsRequest.new,
+    kdov1lp.EtfLpEvent.new,
   );
 
   /// 사용자 주문장 업데이트를 가져오기
