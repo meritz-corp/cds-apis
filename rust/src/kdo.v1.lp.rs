@@ -412,12 +412,14 @@ pub enum ErrorType {
     OrderLimitExceeded = 7,
     /// 펀드 한도 초과
     FundLimitExceeded = 8,
+    /// 주식 재고 초과
+    StockInventoryExceeded = 9,
     /// 시스템 에러
-    SystemError = 9,
+    SystemError = 12,
     /// 시장 세션 관련 에러
-    MarketSession = 10,
+    MarketSession = 13,
     /// 펀드 정보 업데이트 실패
-    FundUpdate = 11,
+    FundUpdate = 14,
 }
 impl ErrorType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -435,6 +437,7 @@ impl ErrorType {
             ErrorType::OrderBookUpdate => "ERROR_TYPE_ORDER_BOOK_UPDATE",
             ErrorType::OrderLimitExceeded => "ERROR_TYPE_ORDER_LIMIT_EXCEEDED",
             ErrorType::FundLimitExceeded => "ERROR_TYPE_FUND_LIMIT_EXCEEDED",
+            ErrorType::StockInventoryExceeded => "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED",
             ErrorType::SystemError => "ERROR_TYPE_SYSTEM_ERROR",
             ErrorType::MarketSession => "ERROR_TYPE_MARKET_SESSION",
             ErrorType::FundUpdate => "ERROR_TYPE_FUND_UPDATE",
@@ -452,6 +455,7 @@ impl ErrorType {
             "ERROR_TYPE_ORDER_BOOK_UPDATE" => Some(Self::OrderBookUpdate),
             "ERROR_TYPE_ORDER_LIMIT_EXCEEDED" => Some(Self::OrderLimitExceeded),
             "ERROR_TYPE_FUND_LIMIT_EXCEEDED" => Some(Self::FundLimitExceeded),
+            "ERROR_TYPE_STOCK_INVENTORY_EXCEEDED" => Some(Self::StockInventoryExceeded),
             "ERROR_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
             "ERROR_TYPE_MARKET_SESSION" => Some(Self::MarketSession),
             "ERROR_TYPE_FUND_UPDATE" => Some(Self::FundUpdate),

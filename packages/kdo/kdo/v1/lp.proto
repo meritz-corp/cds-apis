@@ -421,9 +421,10 @@ enum ErrorType {
   ERROR_TYPE_ORDER_BOOK_UPDATE = 6;  // 오더북 업데이트 실패
   ERROR_TYPE_ORDER_LIMIT_EXCEEDED = 7;     // 주문 한도 초과
   ERROR_TYPE_FUND_LIMIT_EXCEEDED = 8;     // 펀드 한도 초과
-  ERROR_TYPE_SYSTEM_ERROR = 9;       // 시스템 에러
-  ERROR_TYPE_MARKET_SESSION = 10;     // 시장 세션 관련 에러
-  ERROR_TYPE_FUND_UPDATE = 11;        // 펀드 정보 업데이트 실패
+  ERROR_TYPE_STOCK_INVENTORY_EXCEEDED = 9;        // 주식 재고 초과
+  ERROR_TYPE_SYSTEM_ERROR = 12;       // 시스템 에러
+  ERROR_TYPE_MARKET_SESSION = 13;     // 시장 세션 관련 에러
+  ERROR_TYPE_FUND_UPDATE = 14;        // 펀드 정보 업데이트 실패
 }
 
 // 에러 레벨

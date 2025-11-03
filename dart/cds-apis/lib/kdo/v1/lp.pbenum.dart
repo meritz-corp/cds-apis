@@ -85,9 +85,10 @@ class ErrorType extends $pb.ProtobufEnum {
   static const ErrorType ERROR_TYPE_ORDER_BOOK_UPDATE = ErrorType._(6, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_BOOK_UPDATE');
   static const ErrorType ERROR_TYPE_ORDER_LIMIT_EXCEEDED = ErrorType._(7, _omitEnumNames ? '' : 'ERROR_TYPE_ORDER_LIMIT_EXCEEDED');
   static const ErrorType ERROR_TYPE_FUND_LIMIT_EXCEEDED = ErrorType._(8, _omitEnumNames ? '' : 'ERROR_TYPE_FUND_LIMIT_EXCEEDED');
-  static const ErrorType ERROR_TYPE_SYSTEM_ERROR = ErrorType._(9, _omitEnumNames ? '' : 'ERROR_TYPE_SYSTEM_ERROR');
-  static const ErrorType ERROR_TYPE_MARKET_SESSION = ErrorType._(10, _omitEnumNames ? '' : 'ERROR_TYPE_MARKET_SESSION');
-  static const ErrorType ERROR_TYPE_FUND_UPDATE = ErrorType._(11, _omitEnumNames ? '' : 'ERROR_TYPE_FUND_UPDATE');
+  static const ErrorType ERROR_TYPE_STOCK_INVENTORY_EXCEEDED = ErrorType._(9, _omitEnumNames ? '' : 'ERROR_TYPE_STOCK_INVENTORY_EXCEEDED');
+  static const ErrorType ERROR_TYPE_SYSTEM_ERROR = ErrorType._(12, _omitEnumNames ? '' : 'ERROR_TYPE_SYSTEM_ERROR');
+  static const ErrorType ERROR_TYPE_MARKET_SESSION = ErrorType._(13, _omitEnumNames ? '' : 'ERROR_TYPE_MARKET_SESSION');
+  static const ErrorType ERROR_TYPE_FUND_UPDATE = ErrorType._(14, _omitEnumNames ? '' : 'ERROR_TYPE_FUND_UPDATE');
 
   static const $core.List<ErrorType> values = <ErrorType> [
     ERROR_TYPE_UNSPECIFIED,
@@ -99,12 +100,13 @@ class ErrorType extends $pb.ProtobufEnum {
     ERROR_TYPE_ORDER_BOOK_UPDATE,
     ERROR_TYPE_ORDER_LIMIT_EXCEEDED,
     ERROR_TYPE_FUND_LIMIT_EXCEEDED,
+    ERROR_TYPE_STOCK_INVENTORY_EXCEEDED,
     ERROR_TYPE_SYSTEM_ERROR,
     ERROR_TYPE_MARKET_SESSION,
     ERROR_TYPE_FUND_UPDATE,
   ];
 
-  static final $core.List<ErrorType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 11);
+  static final $core.List<ErrorType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 14);
   static ErrorType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const ErrorType._(super.value, super.name);
