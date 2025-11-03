@@ -1718,6 +1718,360 @@ impl<'de> serde::Deserialize<'de> for ListFundsResponse {
         deserializer.deserialize_struct("kdo.v1.fund.ListFundsResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for LossLimitAlert {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.LossLimitAlert", len)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_loss", ToString::to_string(&self.current_loss).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("loss_limit", ToString::to_string(&self.loss_limit).as_str())?;
+        }
+        if let Some(v) = self.timestamp.as_ref() {
+            struct_ser.serialize_field("timestamp", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("snapshots", &self.snapshots)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LossLimitAlert {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund_code",
+            "fundCode",
+            "current_loss",
+            "currentLoss",
+            "loss_limit",
+            "lossLimit",
+            "timestamp",
+            "snapshots",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FundCode,
+            CurrentLoss,
+            LossLimit,
+            Timestamp,
+            Snapshots,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "currentLoss" | "current_loss" => Ok(GeneratedField::CurrentLoss),
+                            "lossLimit" | "loss_limit" => Ok(GeneratedField::LossLimit),
+                            "timestamp" => Ok(GeneratedField::Timestamp),
+                            "snapshots" => Ok(GeneratedField::Snapshots),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LossLimitAlert;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.LossLimitAlert")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LossLimitAlert, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund_code__ = None;
+                let mut current_loss__ = None;
+                let mut loss_limit__ = None;
+                let mut timestamp__ = None;
+                let mut snapshots__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CurrentLoss => {
+                            if current_loss__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentLoss"));
+                            }
+                            current_loss__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LossLimit => {
+                            if loss_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lossLimit"));
+                            }
+                            loss_limit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Timestamp => {
+                            if timestamp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("timestamp"));
+                            }
+                            timestamp__ = map_.next_value()?;
+                        }
+                        GeneratedField::Snapshots => {
+                            if snapshots__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshots"));
+                            }
+                            snapshots__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LossLimitAlert {
+                    fund_code: fund_code__.unwrap_or_default(),
+                    current_loss: current_loss__.unwrap_or_default(),
+                    loss_limit: loss_limit__.unwrap_or_default(),
+                    timestamp: timestamp__,
+                    snapshots: snapshots__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.LossLimitAlert", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LossLimitSnapshot {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.LossLimitSnapshot", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("average_price", &self.average_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("current_price", &self.current_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("unrealized_pnl", ToString::to_string(&self.unrealized_pnl).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LossLimitSnapshot {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "quantity",
+            "average_price",
+            "averagePrice",
+            "current_price",
+            "currentPrice",
+            "unrealized_pnl",
+            "unrealizedPnl",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            Quantity,
+            AveragePrice,
+            CurrentPrice,
+            UnrealizedPnl,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "averagePrice" | "average_price" => Ok(GeneratedField::AveragePrice),
+                            "currentPrice" | "current_price" => Ok(GeneratedField::CurrentPrice),
+                            "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LossLimitSnapshot;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.LossLimitSnapshot")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LossLimitSnapshot, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut quantity__ = None;
+                let mut average_price__ = None;
+                let mut current_price__ = None;
+                let mut unrealized_pnl__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AveragePrice => {
+                            if average_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("averagePrice"));
+                            }
+                            average_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentPrice => {
+                            if current_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentPrice"));
+                            }
+                            current_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::UnrealizedPnl => {
+                            if unrealized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unrealizedPnl"));
+                            }
+                            unrealized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LossLimitSnapshot {
+                    symbol: symbol__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    average_price: average_price__.unwrap_or_default(),
+                    current_price: current_price__.unwrap_or_default(),
+                    unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.LossLimitSnapshot", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for PositionExposure {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2034,5 +2388,100 @@ impl<'de> serde::Deserialize<'de> for SymbolPnL {
             }
         }
         deserializer.deserialize_struct("kdo.v1.fund.SymbolPnL", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for WatchLossLimitAlertsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.WatchLossLimitAlertsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for WatchLossLimitAlertsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fund,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fund" => Ok(GeneratedField::Fund),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = WatchLossLimitAlertsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.WatchLossLimitAlertsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<WatchLossLimitAlertsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(WatchLossLimitAlertsRequest {
+                    fund: fund__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.WatchLossLimitAlertsRequest", FIELDS, GeneratedVisitor)
     }
 }

@@ -169,6 +169,34 @@ pub struct FundLimit {
     #[prost(int64, tag="16")]
     pub current_unfilled: i64,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LossLimitAlert {
+    #[prost(string, tag="1")]
+    pub fund_code: ::prost::alloc::string::String,
+    #[prost(int64, tag="2")]
+    pub current_loss: i64,
+    #[prost(int64, tag="3")]
+    pub loss_limit: i64,
+    #[prost(message, optional, tag="4")]
+    pub timestamp: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    #[prost(map="string, message", tag="5")]
+    pub snapshots: ::std::collections::HashMap<::prost::alloc::string::String, LossLimitSnapshot>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LossLimitSnapshot {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(int64, tag="2")]
+    pub quantity: i64,
+    #[prost(double, tag="3")]
+    pub average_price: f64,
+    #[prost(double, tag="4")]
+    pub current_price: f64,
+    #[prost(int64, tag="5")]
+    pub unrealized_pnl: i64,
+}
 // ========== Request/Response Messages ==========
 
 /// GetFund 요청
@@ -236,6 +264,13 @@ pub struct ListFundLimitsResponse {
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WatchLossLimitAlertsRequest {
+    /// 펀드 리소스 이름 (예: funds/KR1234567890)
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

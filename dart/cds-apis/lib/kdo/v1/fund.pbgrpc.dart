@@ -56,6 +56,10 @@ class FundServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamFundLimits, $async.Stream.fromIterable([request]), options: options);
   }
 
+  $grpc.ResponseStream<$0.LossLimitAlert> watchLossLimitAlerts($0.WatchLossLimitAlertsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$watchLossLimitAlerts, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$getFund = $grpc.ClientMethod<$0.GetFundRequest, $0.Fund>(
@@ -78,6 +82,10 @@ class FundServiceClient extends $grpc.Client {
       '/kdo.v1.fund.FundService/StreamFundLimits',
       ($0.ListFundLimitsRequest value) => value.writeToBuffer(),
       $0.ListFundLimitsResponse.fromBuffer);
+  static final _$watchLossLimitAlerts = $grpc.ClientMethod<$0.WatchLossLimitAlertsRequest, $0.LossLimitAlert>(
+      '/kdo.v1.fund.FundService/WatchLossLimitAlerts',
+      ($0.WatchLossLimitAlertsRequest value) => value.writeToBuffer(),
+      $0.LossLimitAlert.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.fund.FundService')
@@ -120,6 +128,13 @@ abstract class FundServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.ListFundLimitsRequest.fromBuffer(value),
         ($0.ListFundLimitsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.WatchLossLimitAlertsRequest, $0.LossLimitAlert>(
+        'WatchLossLimitAlerts',
+        watchLossLimitAlerts_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.WatchLossLimitAlertsRequest.fromBuffer(value),
+        ($0.LossLimitAlert value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Fund> getFund_Pre($grpc.ServiceCall $call, $async.Future<$0.GetFundRequest> $request) async {
@@ -151,5 +166,11 @@ abstract class FundServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.ListFundLimitsResponse> streamFundLimits($grpc.ServiceCall call, $0.ListFundLimitsRequest request);
+
+  $async.Stream<$0.LossLimitAlert> watchLossLimitAlerts_Pre($grpc.ServiceCall $call, $async.Future<$0.WatchLossLimitAlertsRequest> $request) async* {
+    yield* watchLossLimitAlerts($call, await $request);
+  }
+
+  $async.Stream<$0.LossLimitAlert> watchLossLimitAlerts($grpc.ServiceCall call, $0.WatchLossLimitAlertsRequest request);
 
 }

@@ -496,6 +496,248 @@ func (mr *MockFundService_StreamFundLimitsServerMockRecorder) SetTrailer(arg0 in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockFundService_StreamFundLimitsServer)(nil).SetTrailer), arg0)
 }
 
+// MockFundService_WatchLossLimitAlertsClient is a mock of FundService_WatchLossLimitAlertsClient interface.
+type MockFundService_WatchLossLimitAlertsClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockFundService_WatchLossLimitAlertsClientMockRecorder
+}
+
+// MockFundService_WatchLossLimitAlertsClientMockRecorder is the mock recorder for MockFundService_WatchLossLimitAlertsClient.
+type MockFundService_WatchLossLimitAlertsClientMockRecorder struct {
+	mock *MockFundService_WatchLossLimitAlertsClient
+}
+
+// NewMockFundService_WatchLossLimitAlertsClient creates a new mock instance.
+func NewMockFundService_WatchLossLimitAlertsClient(ctrl *gomock.Controller) *MockFundService_WatchLossLimitAlertsClient {
+	mock := &MockFundService_WatchLossLimitAlertsClient{ctrl: ctrl}
+	mock.recorder = &MockFundService_WatchLossLimitAlertsClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockFundService_WatchLossLimitAlertsClient) EXPECT() *MockFundService_WatchLossLimitAlertsClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockFundService_WatchLossLimitAlertsClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockFundService_WatchLossLimitAlertsClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockFundService_WatchLossLimitAlertsClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsClient) Recv() (*LossLimitAlert, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*LossLimitAlert)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockFundService_WatchLossLimitAlertsClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockFundService_WatchLossLimitAlertsClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockFundService_WatchLossLimitAlertsClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockFundService_WatchLossLimitAlertsClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsClient)(nil).Trailer))
+}
+
+// MockFundService_WatchLossLimitAlertsServer is a mock of FundService_WatchLossLimitAlertsServer interface.
+type MockFundService_WatchLossLimitAlertsServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockFundService_WatchLossLimitAlertsServerMockRecorder
+}
+
+// MockFundService_WatchLossLimitAlertsServerMockRecorder is the mock recorder for MockFundService_WatchLossLimitAlertsServer.
+type MockFundService_WatchLossLimitAlertsServerMockRecorder struct {
+	mock *MockFundService_WatchLossLimitAlertsServer
+}
+
+// NewMockFundService_WatchLossLimitAlertsServer creates a new mock instance.
+func NewMockFundService_WatchLossLimitAlertsServer(ctrl *gomock.Controller) *MockFundService_WatchLossLimitAlertsServer {
+	mock := &MockFundService_WatchLossLimitAlertsServer{ctrl: ctrl}
+	mock.recorder = &MockFundService_WatchLossLimitAlertsServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockFundService_WatchLossLimitAlertsServer) EXPECT() *MockFundService_WatchLossLimitAlertsServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockFundService_WatchLossLimitAlertsServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockFundService_WatchLossLimitAlertsServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsServer) Send(arg0 *LossLimitAlert) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockFundService_WatchLossLimitAlertsServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockFundService_WatchLossLimitAlertsServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockFundService_WatchLossLimitAlertsServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockFundService_WatchLossLimitAlertsServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockFundService_WatchLossLimitAlertsServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockFundService_WatchLossLimitAlertsServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockFundService_WatchLossLimitAlertsServer)(nil).SetTrailer), arg0)
+}
+
 // MockFundServiceClient is a mock of FundServiceClient interface.
 type MockFundServiceClient struct {
 	ctrl     *gomock.Controller
@@ -619,6 +861,26 @@ func (mr *MockFundServiceClientMockRecorder) StreamFundLimits(ctx, in interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFundLimits", reflect.TypeOf((*MockFundServiceClient)(nil).StreamFundLimits), varargs...)
 }
 
+// WatchLossLimitAlerts mocks base method.
+func (m *MockFundServiceClient) WatchLossLimitAlerts(ctx context.Context, in *WatchLossLimitAlertsRequest, opts ...grpc.CallOption) (FundService_WatchLossLimitAlertsClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "WatchLossLimitAlerts", varargs...)
+	ret0, _ := ret[0].(FundService_WatchLossLimitAlertsClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// WatchLossLimitAlerts indicates an expected call of WatchLossLimitAlerts.
+func (mr *MockFundServiceClientMockRecorder) WatchLossLimitAlerts(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WatchLossLimitAlerts", reflect.TypeOf((*MockFundServiceClient)(nil).WatchLossLimitAlerts), varargs...)
+}
+
 // MockFundServiceServer is a mock of FundServiceServer interface.
 type MockFundServiceServer struct {
 	ctrl     *gomock.Controller
@@ -713,4 +975,18 @@ func (m *MockFundServiceServer) StreamFundLimits(blob *ListFundLimitsRequest, se
 func (mr *MockFundServiceServerMockRecorder) StreamFundLimits(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFundLimits", reflect.TypeOf((*MockFundServiceServer)(nil).StreamFundLimits), blob, server)
+}
+
+// WatchLossLimitAlerts mocks base method.
+func (m *MockFundServiceServer) WatchLossLimitAlerts(blob *WatchLossLimitAlertsRequest, server FundService_WatchLossLimitAlertsServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WatchLossLimitAlerts", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// WatchLossLimitAlerts indicates an expected call of WatchLossLimitAlerts.
+func (mr *MockFundServiceServerMockRecorder) WatchLossLimitAlerts(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WatchLossLimitAlerts", reflect.TypeOf((*MockFundServiceServer)(nil).WatchLossLimitAlerts), blob, server)
 }

@@ -6,6 +6,9 @@ import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -48,6 +51,13 @@ service FundService {
       get: "/v1/{fund=funds/*}/limits:stream"
     };
     option (google.api.method_signature) = "filter";
+  }
+
+  rpc WatchLossLimitAlerts(WatchLossLimitAlertsRequest) returns (stream LossLimitAlert) {
+    option (google.api.http) = {
+      get: "/v1/{fund=funds/*}:watch-loss-limit-alerts"
+    };
+    option (google.api.method_signature) = "fund";
   }
 }
 
@@ -184,6 +194,21 @@ enum FundLimitType {
   STOCK = 2;
 }
 
+message LossLimitAlert {
+  string fund_code = 1;
+  int64 current_loss = 2;
+  int64 loss_limit = 3;
+  google.protobuf.Timestamp timestamp = 4;
+  map<string, LossLimitSnapshot> snapshots = 5;
+}
+
+message LossLimitSnapshot {
+  string symbol = 1;
+  int64 quantity = 2;
+  double average_price = 3;
+  double current_price = 4;
+  int64 unrealized_pnl = 5;
+}
 
 // ========== Request/Response Messages ==========
 
@@ -251,4 +276,14 @@ message ListFundLimitsResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
+}
+
+message WatchLossLimitAlertsRequest {
+  // 펀드 리소스 이름 (예: funds/KR1234567890)
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
 }

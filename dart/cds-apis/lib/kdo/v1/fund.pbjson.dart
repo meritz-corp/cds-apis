@@ -189,6 +189,58 @@ final $typed_data.Uint8List fundLimitDescriptor = $convert.base64Decode(
     'VudF9zaG9ydF9hbW91bnQYDyABKANSEmN1cnJlbnRTaG9ydEFtb3VudBIpChBjdXJyZW50X3Vu'
     'ZmlsbGVkGBAgASgDUg9jdXJyZW50VW5maWxsZWQ=');
 
+@$core.Deprecated('Use lossLimitAlertDescriptor instead')
+const LossLimitAlert$json = {
+  '1': 'LossLimitAlert',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'current_loss', '3': 2, '4': 1, '5': 3, '10': 'currentLoss'},
+    {'1': 'loss_limit', '3': 3, '4': 1, '5': 3, '10': 'lossLimit'},
+    {'1': 'timestamp', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
+    {'1': 'snapshots', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.fund.LossLimitAlert.SnapshotsEntry', '10': 'snapshots'},
+  ],
+  '3': [LossLimitAlert_SnapshotsEntry$json],
+};
+
+@$core.Deprecated('Use lossLimitAlertDescriptor instead')
+const LossLimitAlert_SnapshotsEntry$json = {
+  '1': 'SnapshotsEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.fund.LossLimitSnapshot', '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `LossLimitAlert`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lossLimitAlertDescriptor = $convert.base64Decode(
+    'Cg5Mb3NzTGltaXRBbGVydBIbCglmdW5kX2NvZGUYASABKAlSCGZ1bmRDb2RlEiEKDGN1cnJlbn'
+    'RfbG9zcxgCIAEoA1ILY3VycmVudExvc3MSHQoKbG9zc19saW1pdBgDIAEoA1IJbG9zc0xpbWl0'
+    'EjgKCXRpbWVzdGFtcBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXRpbWVzdG'
+    'FtcBJICglzbmFwc2hvdHMYBSADKAsyKi5rZG8udjEuZnVuZC5Mb3NzTGltaXRBbGVydC5TbmFw'
+    'c2hvdHNFbnRyeVIJc25hcHNob3RzGlwKDlNuYXBzaG90c0VudHJ5EhAKA2tleRgBIAEoCVIDa2'
+    'V5EjQKBXZhbHVlGAIgASgLMh4ua2RvLnYxLmZ1bmQuTG9zc0xpbWl0U25hcHNob3RSBXZhbHVl'
+    'OgI4AQ==');
+
+@$core.Deprecated('Use lossLimitSnapshotDescriptor instead')
+const LossLimitSnapshot$json = {
+  '1': 'LossLimitSnapshot',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'average_price', '3': 3, '4': 1, '5': 1, '10': 'averagePrice'},
+    {'1': 'current_price', '3': 4, '4': 1, '5': 1, '10': 'currentPrice'},
+    {'1': 'unrealized_pnl', '3': 5, '4': 1, '5': 3, '10': 'unrealizedPnl'},
+  ],
+};
+
+/// Descriptor for `LossLimitSnapshot`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lossLimitSnapshotDescriptor = $convert.base64Decode(
+    'ChFMb3NzTGltaXRTbmFwc2hvdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIaCghxdWFudGl0eR'
+    'gCIAEoA1IIcXVhbnRpdHkSIwoNYXZlcmFnZV9wcmljZRgDIAEoAVIMYXZlcmFnZVByaWNlEiMK'
+    'DWN1cnJlbnRfcHJpY2UYBCABKAFSDGN1cnJlbnRQcmljZRIlCg51bnJlYWxpemVkX3BubBgFIA'
+    'EoA1INdW5yZWFsaXplZFBubA==');
+
 @$core.Deprecated('Use getFundRequestDescriptor instead')
 const GetFundRequest$json = {
   '1': 'GetFundRequest',
@@ -264,4 +316,17 @@ final $typed_data.Uint8List listFundLimitsResponseDescriptor = $convert.base64De
     'ChZMaXN0RnVuZExpbWl0c1Jlc3BvbnNlEjcKC2Z1bmRfbGltaXRzGAEgAygLMhYua2RvLnYxLm'
     'Z1bmQuRnVuZExpbWl0UgpmdW5kTGltaXRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4'
     'dFBhZ2VUb2tlbg==');
+
+@$core.Deprecated('Use watchLossLimitAlertsRequestDescriptor instead')
+const WatchLossLimitAlertsRequest$json = {
+  '1': 'WatchLossLimitAlertsRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+  ],
+};
+
+/// Descriptor for `WatchLossLimitAlertsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List watchLossLimitAlertsRequestDescriptor = $convert.base64Decode(
+    'ChtXYXRjaExvc3NMaW1pdEFsZXJ0c1JlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAvpBFgoUa2'
+    'RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQ=');
 

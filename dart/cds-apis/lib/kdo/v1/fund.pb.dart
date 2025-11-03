@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../google/protobuf/timestamp.pb.dart' as $1;
 import 'fund.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -820,6 +821,190 @@ class FundLimit extends $pb.GeneratedMessage {
   void clearCurrentUnfilled() => $_clearField(16);
 }
 
+class LossLimitAlert extends $pb.GeneratedMessage {
+  factory LossLimitAlert({
+    $core.String? fundCode,
+    $fixnum.Int64? currentLoss,
+    $fixnum.Int64? lossLimit,
+    $1.Timestamp? timestamp,
+    $core.Iterable<$core.MapEntry<$core.String, LossLimitSnapshot>>? snapshots,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (currentLoss != null) result.currentLoss = currentLoss;
+    if (lossLimit != null) result.lossLimit = lossLimit;
+    if (timestamp != null) result.timestamp = timestamp;
+    if (snapshots != null) result.snapshots.addEntries(snapshots);
+    return result;
+  }
+
+  LossLimitAlert._();
+
+  factory LossLimitAlert.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LossLimitAlert.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LossLimitAlert', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aInt64(2, _omitFieldNames ? '' : 'currentLoss')
+    ..aInt64(3, _omitFieldNames ? '' : 'lossLimit')
+    ..aOM<$1.Timestamp>(4, _omitFieldNames ? '' : 'timestamp', subBuilder: $1.Timestamp.create)
+    ..m<$core.String, LossLimitSnapshot>(5, _omitFieldNames ? '' : 'snapshots', entryClassName: 'LossLimitAlert.SnapshotsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: LossLimitSnapshot.create, valueDefaultOrMaker: LossLimitSnapshot.getDefault, packageName: const $pb.PackageName('kdo.v1.fund'))
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LossLimitAlert clone() => LossLimitAlert()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LossLimitAlert copyWith(void Function(LossLimitAlert) updates) => super.copyWith((message) => updates(message as LossLimitAlert)) as LossLimitAlert;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LossLimitAlert create() => LossLimitAlert._();
+  @$core.override
+  LossLimitAlert createEmptyInstance() => create();
+  static $pb.PbList<LossLimitAlert> createRepeated() => $pb.PbList<LossLimitAlert>();
+  @$core.pragma('dart2js:noInline')
+  static LossLimitAlert getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LossLimitAlert>(create);
+  static LossLimitAlert? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get currentLoss => $_getI64(1);
+  @$pb.TagNumber(2)
+  set currentLoss($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCurrentLoss() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCurrentLoss() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get lossLimit => $_getI64(2);
+  @$pb.TagNumber(3)
+  set lossLimit($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLossLimit() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLossLimit() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $1.Timestamp get timestamp => $_getN(3);
+  @$pb.TagNumber(4)
+  set timestamp($1.Timestamp value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTimestamp() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTimestamp() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $1.Timestamp ensureTimestamp() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $pb.PbMap<$core.String, LossLimitSnapshot> get snapshots => $_getMap(4);
+}
+
+class LossLimitSnapshot extends $pb.GeneratedMessage {
+  factory LossLimitSnapshot({
+    $core.String? symbol,
+    $fixnum.Int64? quantity,
+    $core.double? averagePrice,
+    $core.double? currentPrice,
+    $fixnum.Int64? unrealizedPnl,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (quantity != null) result.quantity = quantity;
+    if (averagePrice != null) result.averagePrice = averagePrice;
+    if (currentPrice != null) result.currentPrice = currentPrice;
+    if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
+    return result;
+  }
+
+  LossLimitSnapshot._();
+
+  factory LossLimitSnapshot.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LossLimitSnapshot.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LossLimitSnapshot', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'averagePrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'currentPrice', $pb.PbFieldType.OD)
+    ..aInt64(5, _omitFieldNames ? '' : 'unrealizedPnl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LossLimitSnapshot clone() => LossLimitSnapshot()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LossLimitSnapshot copyWith(void Function(LossLimitSnapshot) updates) => super.copyWith((message) => updates(message as LossLimitSnapshot)) as LossLimitSnapshot;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LossLimitSnapshot create() => LossLimitSnapshot._();
+  @$core.override
+  LossLimitSnapshot createEmptyInstance() => create();
+  static $pb.PbList<LossLimitSnapshot> createRepeated() => $pb.PbList<LossLimitSnapshot>();
+  @$core.pragma('dart2js:noInline')
+  static LossLimitSnapshot getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LossLimitSnapshot>(create);
+  static LossLimitSnapshot? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get quantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearQuantity() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get averagePrice => $_getN(2);
+  @$pb.TagNumber(3)
+  set averagePrice($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAveragePrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAveragePrice() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get currentPrice => $_getN(3);
+  @$pb.TagNumber(4)
+  set currentPrice($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCurrentPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCurrentPrice() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get unrealizedPnl => $_getI64(4);
+  @$pb.TagNumber(5)
+  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasUnrealizedPnl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearUnrealizedPnl() => $_clearField(5);
+}
+
 /// GetFund 요청
 class GetFundRequest extends $pb.GeneratedMessage {
   factory GetFundRequest({
@@ -1122,6 +1307,53 @@ class ListFundLimitsResponse extends $pb.GeneratedMessage {
   $core.bool hasNextPageToken() => $_has(1);
   @$pb.TagNumber(2)
   void clearNextPageToken() => $_clearField(2);
+}
+
+class WatchLossLimitAlertsRequest extends $pb.GeneratedMessage {
+  factory WatchLossLimitAlertsRequest({
+    $core.String? fund,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    return result;
+  }
+
+  WatchLossLimitAlertsRequest._();
+
+  factory WatchLossLimitAlertsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory WatchLossLimitAlertsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'WatchLossLimitAlertsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  WatchLossLimitAlertsRequest clone() => WatchLossLimitAlertsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  WatchLossLimitAlertsRequest copyWith(void Function(WatchLossLimitAlertsRequest) updates) => super.copyWith((message) => updates(message as WatchLossLimitAlertsRequest)) as WatchLossLimitAlertsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static WatchLossLimitAlertsRequest create() => WatchLossLimitAlertsRequest._();
+  @$core.override
+  WatchLossLimitAlertsRequest createEmptyInstance() => create();
+  static $pb.PbList<WatchLossLimitAlertsRequest> createRepeated() => $pb.PbList<WatchLossLimitAlertsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static WatchLossLimitAlertsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<WatchLossLimitAlertsRequest>(create);
+  static WatchLossLimitAlertsRequest? _defaultInstance;
+
+  /// 펀드 리소스 이름 (예: funds/KR1234567890)
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
 }
 
 

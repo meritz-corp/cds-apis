@@ -30,6 +30,7 @@ type FundServiceClient interface {
 	ListFunds(ctx context.Context, in *ListFundsRequest, opts ...grpc.CallOption) (*ListFundsResponse, error)
 	ListFundLimits(ctx context.Context, in *ListFundLimitsRequest, opts ...grpc.CallOption) (*ListFundLimitsResponse, error)
 	StreamFundLimits(ctx context.Context, in *ListFundLimitsRequest, opts ...grpc.CallOption) (FundService_StreamFundLimitsClient, error)
+	WatchLossLimitAlerts(ctx context.Context, in *WatchLossLimitAlertsRequest, opts ...grpc.CallOption) (FundService_WatchLossLimitAlertsClient, error)
 }
 
 type fundServiceClient struct {
@@ -131,6 +132,38 @@ func (x *fundServiceStreamFundLimitsClient) Recv() (*ListFundLimitsResponse, err
 	return m, nil
 }
 
+func (c *fundServiceClient) WatchLossLimitAlerts(ctx context.Context, in *WatchLossLimitAlertsRequest, opts ...grpc.CallOption) (FundService_WatchLossLimitAlertsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &FundService_ServiceDesc.Streams[2], "/kdo.v1.fund.FundService/WatchLossLimitAlerts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &fundServiceWatchLossLimitAlertsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type FundService_WatchLossLimitAlertsClient interface {
+	Recv() (*LossLimitAlert, error)
+	grpc.ClientStream
+}
+
+type fundServiceWatchLossLimitAlertsClient struct {
+	grpc.ClientStream
+}
+
+func (x *fundServiceWatchLossLimitAlertsClient) Recv() (*LossLimitAlert, error) {
+	m := new(LossLimitAlert)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // FundServiceServer is the server API for FundService service.
 // All implementations must embed UnimplementedFundServiceServer
 // for forward compatibility
@@ -143,6 +176,7 @@ type FundServiceServer interface {
 	ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error)
 	ListFundLimits(context.Context, *ListFundLimitsRequest) (*ListFundLimitsResponse, error)
 	StreamFundLimits(*ListFundLimitsRequest, FundService_StreamFundLimitsServer) error
+	WatchLossLimitAlerts(*WatchLossLimitAlertsRequest, FundService_WatchLossLimitAlertsServer) error
 	mustEmbedUnimplementedFundServiceServer()
 }
 
@@ -164,6 +198,9 @@ func (UnimplementedFundServiceServer) ListFundLimits(context.Context, *ListFundL
 }
 func (UnimplementedFundServiceServer) StreamFundLimits(*ListFundLimitsRequest, FundService_StreamFundLimitsServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamFundLimits not implemented")
+}
+func (UnimplementedFundServiceServer) WatchLossLimitAlerts(*WatchLossLimitAlertsRequest, FundService_WatchLossLimitAlertsServer) error {
+	return status.Errorf(codes.Unimplemented, "method WatchLossLimitAlerts not implemented")
 }
 func (UnimplementedFundServiceServer) mustEmbedUnimplementedFundServiceServer() {}
 
@@ -274,6 +311,27 @@ func (x *fundServiceStreamFundLimitsServer) Send(m *ListFundLimitsResponse) erro
 	return x.ServerStream.SendMsg(m)
 }
 
+func _FundService_WatchLossLimitAlerts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(WatchLossLimitAlertsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FundServiceServer).WatchLossLimitAlerts(m, &fundServiceWatchLossLimitAlertsServer{stream})
+}
+
+type FundService_WatchLossLimitAlertsServer interface {
+	Send(*LossLimitAlert) error
+	grpc.ServerStream
+}
+
+type fundServiceWatchLossLimitAlertsServer struct {
+	grpc.ServerStream
+}
+
+func (x *fundServiceWatchLossLimitAlertsServer) Send(m *LossLimitAlert) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // FundService_ServiceDesc is the grpc.ServiceDesc for FundService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -303,6 +361,11 @@ var FundService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamFundLimits",
 			Handler:       _FundService_StreamFundLimits_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "WatchLossLimitAlerts",
+			Handler:       _FundService_WatchLossLimitAlerts_Handler,
 			ServerStreams: true,
 		},
 	},
