@@ -63,15 +63,15 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
-  Future<kdov1fund.ListFundLimitsResponse> listFundLimits(
-    kdov1fund.ListFundLimitsRequest input, {
+  Future<kdov1fund.ListFundTradingSnapshotsesponse> listFundTradingSnapshots(
+    kdov1fund.ListFundTradingSnapshotsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.FundService.listFundLimits,
+      specs.FundService.listFundTradingSnapshots,
       input,
       signal: signal,
       headers: headers,
@@ -80,15 +80,15 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
-  Stream<kdov1fund.ListFundLimitsResponse> streamFundLimits(
-    kdov1fund.ListFundLimitsRequest input, {
+  Stream<kdov1fund.ListFundTradingSnapshotsesponse> streamFunTradingSnapshots(
+    kdov1fund.ListFundTradingSnapshotsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.FundService.streamFundLimits,
+      specs.FundService.streamFunTradingSnapshots,
       input,
       signal: signal,
       headers: headers,

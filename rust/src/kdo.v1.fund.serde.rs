@@ -61,12 +61,6 @@ impl serde::Serialize for Fund {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.Fund", len)?;
         if true {
             struct_ser.serialize_field("code", &self.code)?;
@@ -124,12 +118,6 @@ impl serde::Serialize for Fund {
         if true {
             struct_ser.serialize_field("short_selling_id", &self.short_selling_id)?;
         }
-        if let Some(v) = self.pnl.as_ref() {
-            struct_ser.serialize_field("pnl", v)?;
-        }
-        if let Some(v) = self.positions.as_ref() {
-            struct_ser.serialize_field("positions", v)?;
-        }
         struct_ser.end()
     }
 }
@@ -174,8 +162,6 @@ impl<'de> serde::Deserialize<'de> for Fund {
             "addUpUniqueTradingUnit",
             "short_selling_id",
             "shortSellingId",
-            "pnl",
-            "positions",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -198,8 +184,6 @@ impl<'de> serde::Deserialize<'de> for Fund {
             UniqueTradingUnitSerialNumber,
             AddUpUniqueTradingUnit,
             ShortSellingId,
-            Pnl,
-            Positions,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -240,8 +224,6 @@ impl<'de> serde::Deserialize<'de> for Fund {
                             "uniqueTradingUnitSerialNumber" | "unique_trading_unit_serial_number" => Ok(GeneratedField::UniqueTradingUnitSerialNumber),
                             "addUpUniqueTradingUnit" | "add_up_unique_trading_unit" => Ok(GeneratedField::AddUpUniqueTradingUnit),
                             "shortSellingId" | "short_selling_id" => Ok(GeneratedField::ShortSellingId),
-                            "pnl" => Ok(GeneratedField::Pnl),
-                            "positions" => Ok(GeneratedField::Positions),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -279,8 +261,6 @@ impl<'de> serde::Deserialize<'de> for Fund {
                 let mut unique_trading_unit_serial_number__ = None;
                 let mut add_up_unique_trading_unit__ = None;
                 let mut short_selling_id__ = None;
-                let mut pnl__ = None;
-                let mut positions__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Code => {
@@ -393,18 +373,6 @@ impl<'de> serde::Deserialize<'de> for Fund {
                             }
                             short_selling_id__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Pnl => {
-                            if pnl__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pnl"));
-                            }
-                            pnl__ = map_.next_value()?;
-                        }
-                        GeneratedField::Positions => {
-                            if positions__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positions"));
-                            }
-                            positions__ = map_.next_value()?;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -429,12 +397,127 @@ impl<'de> serde::Deserialize<'de> for Fund {
                     unique_trading_unit_serial_number: unique_trading_unit_serial_number__.unwrap_or_default(),
                     add_up_unique_trading_unit: add_up_unique_trading_unit__.unwrap_or_default(),
                     short_selling_id: short_selling_id__.unwrap_or_default(),
-                    pnl: pnl__,
-                    positions: positions__,
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.fund.Fund", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for FundExposure {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.FundExposure", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_exposure", ToString::to_string(&self.total_exposure).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("symbols", &self.symbols)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FundExposure {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "total_exposure",
+            "totalExposure",
+            "symbols",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TotalExposure,
+            Symbols,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "totalExposure" | "total_exposure" => Ok(GeneratedField::TotalExposure),
+                            "symbols" => Ok(GeneratedField::Symbols),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FundExposure;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.FundExposure")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FundExposure, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut total_exposure__ = None;
+                let mut symbols__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TotalExposure => {
+                            if total_exposure__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalExposure"));
+                            }
+                            total_exposure__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Symbols => {
+                            if symbols__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbols"));
+                            }
+                            symbols__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FundExposure {
+                    total_exposure: total_exposure__.unwrap_or_default(),
+                    symbols: symbols__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.FundExposure", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for FundLimit {
@@ -948,14 +1031,22 @@ impl serde::Serialize for FundPnL {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.FundPnL", len)?;
         if true {
-            struct_ser.serialize_field("symbols", &self.symbols)?;
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("daily_realized_pnl", ToString::to_string(&self.daily_realized_pnl).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("daily_pnl", ToString::to_string(&self.daily_pnl).as_str())?;
+            struct_ser.serialize_field("daily_unrealized_pnl", ToString::to_string(&self.daily_unrealized_pnl).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("symbols", &self.symbols)?;
         }
         struct_ser.end()
     }
@@ -967,15 +1058,18 @@ impl<'de> serde::Deserialize<'de> for FundPnL {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "daily_realized_pnl",
+            "dailyRealizedPnl",
+            "daily_unrealized_pnl",
+            "dailyUnrealizedPnl",
             "symbols",
-            "daily_pnl",
-            "dailyPnl",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            DailyRealizedPnl,
+            DailyUnrealizedPnl,
             Symbols,
-            DailyPnl,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -998,8 +1092,9 @@ impl<'de> serde::Deserialize<'de> for FundPnL {
                         E: serde::de::Error,
                     {
                         match value {
+                            "dailyRealizedPnl" | "daily_realized_pnl" => Ok(GeneratedField::DailyRealizedPnl),
+                            "dailyUnrealizedPnl" | "daily_unrealized_pnl" => Ok(GeneratedField::DailyUnrealizedPnl),
                             "symbols" => Ok(GeneratedField::Symbols),
-                            "dailyPnl" | "daily_pnl" => Ok(GeneratedField::DailyPnl),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1019,23 +1114,32 @@ impl<'de> serde::Deserialize<'de> for FundPnL {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut daily_realized_pnl__ = None;
+                let mut daily_unrealized_pnl__ = None;
                 let mut symbols__ = None;
-                let mut daily_pnl__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::DailyRealizedPnl => {
+                            if daily_realized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dailyRealizedPnl"));
+                            }
+                            daily_realized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::DailyUnrealizedPnl => {
+                            if daily_unrealized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dailyUnrealizedPnl"));
+                            }
+                            daily_unrealized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::Symbols => {
                             if symbols__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("symbols"));
                             }
                             symbols__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::DailyPnl => {
-                            if daily_pnl__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dailyPnl"));
-                            }
-                            daily_pnl__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1043,15 +1147,16 @@ impl<'de> serde::Deserialize<'de> for FundPnL {
                     }
                 }
                 Ok(FundPnL {
+                    daily_realized_pnl: daily_realized_pnl__.unwrap_or_default(),
+                    daily_unrealized_pnl: daily_unrealized_pnl__.unwrap_or_default(),
                     symbols: symbols__.unwrap_or_default(),
-                    daily_pnl: daily_pnl__.unwrap_or_default(),
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.fund.FundPnL", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for FundPosition {
+impl serde::Serialize for FundTrading {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1062,28 +1167,51 @@ impl serde::Serialize for FundPosition {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.FundPosition", len)?;
         if true {
-            let v: std::collections::HashMap<_, _> = self.symbols.iter()
-                .map(|(k, v)| (k, v.to_string())).collect();
-            struct_ser.serialize_field("symbols", &v)?;
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.FundTrading", len)?;
+        if true {
+            struct_ser.serialize_field("fund_limits", &self.fund_limits)?;
+        }
+        if let Some(v) = self.pnls.as_ref() {
+            struct_ser.serialize_field("pnls", v)?;
+        }
+        if let Some(v) = self.exposures.as_ref() {
+            struct_ser.serialize_field("exposures", v)?;
+        }
+        if let Some(v) = self.timestamp.as_ref() {
+            struct_ser.serialize_field("timestamp", v)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for FundPosition {
+impl<'de> serde::Deserialize<'de> for FundTrading {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "symbols",
+            "fund_limits",
+            "fundLimits",
+            "pnls",
+            "exposures",
+            "timestamp",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Symbols,
+            FundLimits,
+            Pnls,
+            Exposures,
+            Timestamp,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1106,7 +1234,10 @@ impl<'de> serde::Deserialize<'de> for FundPosition {
                         E: serde::de::Error,
                     {
                         match value {
-                            "symbols" => Ok(GeneratedField::Symbols),
+                            "fundLimits" | "fund_limits" => Ok(GeneratedField::FundLimits),
+                            "pnls" => Ok(GeneratedField::Pnls),
+                            "exposures" => Ok(GeneratedField::Exposures),
+                            "timestamp" => Ok(GeneratedField::Timestamp),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1116,39 +1247,60 @@ impl<'de> serde::Deserialize<'de> for FundPosition {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FundPosition;
+            type Value = FundTrading;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.fund.FundPosition")
+                formatter.write_str("struct kdo.v1.fund.FundTrading")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FundPosition, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FundTrading, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut symbols__ = None;
+                let mut fund_limits__ = None;
+                let mut pnls__ = None;
+                let mut exposures__ = None;
+                let mut timestamp__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Symbols => {
-                            if symbols__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbols"));
+                        GeneratedField::FundLimits => {
+                            if fund_limits__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundLimits"));
                             }
-                            symbols__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<i64>>>()?
-                                    .into_iter().map(|(k,v)| (k, v.0)).collect()
-                            );
+                            fund_limits__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Pnls => {
+                            if pnls__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pnls"));
+                            }
+                            pnls__ = map_.next_value()?;
+                        }
+                        GeneratedField::Exposures => {
+                            if exposures__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposures"));
+                            }
+                            exposures__ = map_.next_value()?;
+                        }
+                        GeneratedField::Timestamp => {
+                            if timestamp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("timestamp"));
+                            }
+                            timestamp__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(FundPosition {
-                    symbols: symbols__.unwrap_or_default(),
+                Ok(FundTrading {
+                    fund_limits: fund_limits__.unwrap_or_default(),
+                    pnls: pnls__,
+                    exposures: exposures__,
+                    timestamp: timestamp__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.fund.FundPosition", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.fund.FundTrading", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetFundRequest {
@@ -1246,7 +1398,7 @@ impl<'de> serde::Deserialize<'de> for GetFundRequest {
         deserializer.deserialize_struct("kdo.v1.fund.GetFundRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListFundLimitsRequest {
+impl serde::Serialize for ListFundTradingSnapshotsRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1260,7 +1412,7 @@ impl serde::Serialize for ListFundLimitsRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundLimitsRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundTradingSnapshotsRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
@@ -1270,7 +1422,7 @@ impl serde::Serialize for ListFundLimitsRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListFundLimitsRequest {
+impl<'de> serde::Deserialize<'de> for ListFundTradingSnapshotsRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1318,13 +1470,13 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitsRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListFundLimitsRequest;
+            type Value = ListFundTradingSnapshotsRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.fund.ListFundLimitsRequest")
+                formatter.write_str("struct kdo.v1.fund.ListFundTradingSnapshotsRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundLimitsRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundTradingSnapshotsRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1349,16 +1501,16 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitsRequest {
                         }
                     }
                 }
-                Ok(ListFundLimitsRequest {
+                Ok(ListFundTradingSnapshotsRequest {
                     fund: fund__.unwrap_or_default(),
                     filter: filter__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.fund.ListFundLimitsRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.fund.ListFundTradingSnapshotsRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListFundLimitsResponse {
+impl serde::Serialize for ListFundTradingSnapshotsesponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1372,9 +1524,9 @@ impl serde::Serialize for ListFundLimitsResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundLimitsResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundTradingSnapshotsesponse", len)?;
         if true {
-            struct_ser.serialize_field("fund_limits", &self.fund_limits)?;
+            struct_ser.serialize_field("snapshots", &self.snapshots)?;
         }
         if true {
             struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
@@ -1382,22 +1534,21 @@ impl serde::Serialize for ListFundLimitsResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListFundLimitsResponse {
+impl<'de> serde::Deserialize<'de> for ListFundTradingSnapshotsesponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "fund_limits",
-            "fundLimits",
+            "snapshots",
             "next_page_token",
             "nextPageToken",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            FundLimits,
+            Snapshots,
             NextPageToken,
             __SkipField__,
         }
@@ -1421,7 +1572,7 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitsResponse {
                         E: serde::de::Error,
                     {
                         match value {
-                            "fundLimits" | "fund_limits" => Ok(GeneratedField::FundLimits),
+                            "snapshots" => Ok(GeneratedField::Snapshots),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -1432,25 +1583,25 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitsResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListFundLimitsResponse;
+            type Value = ListFundTradingSnapshotsesponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.fund.ListFundLimitsResponse")
+                formatter.write_str("struct kdo.v1.fund.ListFundTradingSnapshotsesponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundLimitsResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundTradingSnapshotsesponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut fund_limits__ = None;
+                let mut snapshots__ = None;
                 let mut next_page_token__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::FundLimits => {
-                            if fund_limits__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundLimits"));
+                        GeneratedField::Snapshots => {
+                            if snapshots__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshots"));
                             }
-                            fund_limits__ = Some(map_.next_value()?);
+                            snapshots__ = Some(map_.next_value()?);
                         }
                         GeneratedField::NextPageToken => {
                             if next_page_token__.is_some() {
@@ -1463,13 +1614,13 @@ impl<'de> serde::Deserialize<'de> for ListFundLimitsResponse {
                         }
                     }
                 }
-                Ok(ListFundLimitsResponse {
-                    fund_limits: fund_limits__.unwrap_or_default(),
+                Ok(ListFundTradingSnapshotsesponse {
+                    snapshots: snapshots__.unwrap_or_default(),
                     next_page_token: next_page_token__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.fund.ListFundLimitsResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.fund.ListFundTradingSnapshotsesponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListFundsRequest {
@@ -2072,7 +2223,7 @@ impl<'de> serde::Deserialize<'de> for LossLimitSnapshot {
         deserializer.deserialize_struct("kdo.v1.fund.LossLimitSnapshot", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for PositionExposure {
+impl serde::Serialize for SymbolExposure {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2089,7 +2240,10 @@ impl serde::Serialize for PositionExposure {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.PositionExposure", len)?;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.SymbolExposure", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -2101,12 +2255,17 @@ impl serde::Serialize for PositionExposure {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("last_updated_at", ToString::to_string(&self.last_updated_at).as_str())?;
+            struct_ser.serialize_field("current_price", ToString::to_string(&self.current_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exposure", ToString::to_string(&self.exposure).as_str())?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for PositionExposure {
+impl<'de> serde::Deserialize<'de> for SymbolExposure {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2115,15 +2274,17 @@ impl<'de> serde::Deserialize<'de> for PositionExposure {
         const FIELDS: &[&str] = &[
             "symbol",
             "quantity",
-            "last_updated_at",
-            "lastUpdatedAt",
+            "current_price",
+            "currentPrice",
+            "exposure",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
             Quantity,
-            LastUpdatedAt,
+            CurrentPrice,
+            Exposure,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2148,7 +2309,8 @@ impl<'de> serde::Deserialize<'de> for PositionExposure {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "quantity" => Ok(GeneratedField::Quantity),
-                            "lastUpdatedAt" | "last_updated_at" => Ok(GeneratedField::LastUpdatedAt),
+                            "currentPrice" | "current_price" => Ok(GeneratedField::CurrentPrice),
+                            "exposure" => Ok(GeneratedField::Exposure),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2158,19 +2320,20 @@ impl<'de> serde::Deserialize<'de> for PositionExposure {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PositionExposure;
+            type Value = SymbolExposure;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.fund.PositionExposure")
+                formatter.write_str("struct kdo.v1.fund.SymbolExposure")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PositionExposure, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SymbolExposure, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
                 let mut quantity__ = None;
-                let mut last_updated_at__ = None;
+                let mut current_price__ = None;
+                let mut exposure__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2187,11 +2350,19 @@ impl<'de> serde::Deserialize<'de> for PositionExposure {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::LastUpdatedAt => {
-                            if last_updated_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("lastUpdatedAt"));
+                        GeneratedField::CurrentPrice => {
+                            if current_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentPrice"));
                             }
-                            last_updated_at__ = 
+                            current_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Exposure => {
+                            if exposure__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposure"));
+                            }
+                            exposure__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -2200,14 +2371,15 @@ impl<'de> serde::Deserialize<'de> for PositionExposure {
                         }
                     }
                 }
-                Ok(PositionExposure {
+                Ok(SymbolExposure {
                     symbol: symbol__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
-                    last_updated_at: last_updated_at__.unwrap_or_default(),
+                    current_price: current_price__.unwrap_or_default(),
+                    exposure: exposure__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.fund.PositionExposure", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.fund.SymbolExposure", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for SymbolPnL {

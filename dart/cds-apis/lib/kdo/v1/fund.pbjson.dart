@@ -51,8 +51,6 @@ const Fund$json = {
     {'1': 'unique_trading_unit_serial_number', '3': 18, '4': 1, '5': 3, '10': 'uniqueTradingUnitSerialNumber'},
     {'1': 'add_up_unique_trading_unit', '3': 19, '4': 1, '5': 8, '10': 'addUpUniqueTradingUnit'},
     {'1': 'short_selling_id', '3': 20, '4': 1, '5': 9, '10': 'shortSellingId'},
-    {'1': 'pnl', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundPnL', '10': 'pnl'},
-    {'1': 'positions', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundPosition', '10': 'positions'},
   ],
 };
 
@@ -71,23 +69,42 @@ final $typed_data.Uint8List fundDescriptor = $convert.base64Decode(
     'GXVuaXF1ZVRyYWRpbmdVbml0UGFydENvZGUSSAohdW5pcXVlX3RyYWRpbmdfdW5pdF9zZXJpYW'
     'xfbnVtYmVyGBIgASgDUh11bmlxdWVUcmFkaW5nVW5pdFNlcmlhbE51bWJlchI6ChphZGRfdXBf'
     'dW5pcXVlX3RyYWRpbmdfdW5pdBgTIAEoCFIWYWRkVXBVbmlxdWVUcmFkaW5nVW5pdBIoChBzaG'
-    '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZBImCgNwbmwYFSABKAsyFC5rZG8u'
-    'djEuZnVuZC5GdW5kUG5MUgNwbmwSNwoJcG9zaXRpb25zGBYgASgLMhkua2RvLnYxLmZ1bmQuRn'
-    'VuZFBvc2l0aW9uUglwb3NpdGlvbnM=');
+    '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZA==');
+
+@$core.Deprecated('Use fundTradingDescriptor instead')
+const FundTrading$json = {
+  '1': 'FundTrading',
+  '2': [
+    {'1': 'fund_limits', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundLimit', '10': 'fundLimits'},
+    {'1': 'pnls', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundPnL', '10': 'pnls'},
+    {'1': 'exposures', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundExposure', '10': 'exposures'},
+    {'1': 'timestamp', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
+  ],
+};
+
+/// Descriptor for `FundTrading`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fundTradingDescriptor = $convert.base64Decode(
+    'CgtGdW5kVHJhZGluZxI3CgtmdW5kX2xpbWl0cxgBIAMoCzIWLmtkby52MS5mdW5kLkZ1bmRMaW'
+    '1pdFIKZnVuZExpbWl0cxIoCgRwbmxzGAIgASgLMhQua2RvLnYxLmZ1bmQuRnVuZFBuTFIEcG5s'
+    'cxI3CglleHBvc3VyZXMYAyABKAsyGS5rZG8udjEuZnVuZC5GdW5kRXhwb3N1cmVSCWV4cG9zdX'
+    'JlcxI4Cgl0aW1lc3RhbXAYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgl0aW1l'
+    'c3RhbXA=');
 
 @$core.Deprecated('Use fundPnLDescriptor instead')
 const FundPnL$json = {
   '1': 'FundPnL',
   '2': [
-    {'1': 'symbols', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.SymbolPnL', '10': 'symbols'},
-    {'1': 'daily_pnl', '3': 2, '4': 1, '5': 3, '10': 'dailyPnl'},
+    {'1': 'daily_realized_pnl', '3': 1, '4': 1, '5': 3, '10': 'dailyRealizedPnl'},
+    {'1': 'daily_unrealized_pnl', '3': 2, '4': 1, '5': 3, '10': 'dailyUnrealizedPnl'},
+    {'1': 'symbols', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.fund.SymbolPnL', '10': 'symbols'},
   ],
 };
 
 /// Descriptor for `FundPnL`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fundPnLDescriptor = $convert.base64Decode(
-    'CgdGdW5kUG5MEjAKB3N5bWJvbHMYASADKAsyFi5rZG8udjEuZnVuZC5TeW1ib2xQbkxSB3N5bW'
-    'JvbHMSGwoJZGFpbHlfcG5sGAIgASgDUghkYWlseVBubA==');
+    'CgdGdW5kUG5MEiwKEmRhaWx5X3JlYWxpemVkX3BubBgBIAEoA1IQZGFpbHlSZWFsaXplZFBubB'
+    'IwChRkYWlseV91bnJlYWxpemVkX3BubBgCIAEoA1ISZGFpbHlVbnJlYWxpemVkUG5sEjAKB3N5'
+    'bWJvbHMYAyADKAsyFi5rZG8udjEuZnVuZC5TeW1ib2xQbkxSB3N5bWJvbHM=');
 
 @$core.Deprecated('Use symbolPnLDescriptor instead')
 const SymbolPnL$json = {
@@ -108,45 +125,36 @@ final $typed_data.Uint8List symbolPnLDescriptor = $convert.base64Decode(
     'cmVhbGl6ZWRfcG5sGAQgASgDUgtyZWFsaXplZFBubBIhCgx0cmFkaW5nX2Nvc3QYBSABKANSC3'
     'RyYWRpbmdDb3N0');
 
-@$core.Deprecated('Use fundPositionDescriptor instead')
-const FundPosition$json = {
-  '1': 'FundPosition',
+@$core.Deprecated('Use fundExposureDescriptor instead')
+const FundExposure$json = {
+  '1': 'FundExposure',
   '2': [
-    {'1': 'symbols', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundPosition.SymbolsEntry', '10': 'symbols'},
+    {'1': 'total_exposure', '3': 1, '4': 1, '5': 3, '10': 'totalExposure'},
+    {'1': 'symbols', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.fund.SymbolExposure', '10': 'symbols'},
   ],
-  '3': [FundPosition_SymbolsEntry$json],
 };
 
-@$core.Deprecated('Use fundPositionDescriptor instead')
-const FundPosition_SymbolsEntry$json = {
-  '1': 'SymbolsEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 3, '10': 'value'},
-  ],
-  '7': {'7': true},
-};
+/// Descriptor for `FundExposure`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fundExposureDescriptor = $convert.base64Decode(
+    'CgxGdW5kRXhwb3N1cmUSJQoOdG90YWxfZXhwb3N1cmUYASABKANSDXRvdGFsRXhwb3N1cmUSNQ'
+    'oHc3ltYm9scxgCIAMoCzIbLmtkby52MS5mdW5kLlN5bWJvbEV4cG9zdXJlUgdzeW1ib2xz');
 
-/// Descriptor for `FundPosition`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List fundPositionDescriptor = $convert.base64Decode(
-    'CgxGdW5kUG9zaXRpb24SQAoHc3ltYm9scxgBIAMoCzImLmtkby52MS5mdW5kLkZ1bmRQb3NpdG'
-    'lvbi5TeW1ib2xzRW50cnlSB3N5bWJvbHMaOgoMU3ltYm9sc0VudHJ5EhAKA2tleRgBIAEoCVID'
-    'a2V5EhQKBXZhbHVlGAIgASgDUgV2YWx1ZToCOAE=');
-
-@$core.Deprecated('Use positionExposureDescriptor instead')
-const PositionExposure$json = {
-  '1': 'PositionExposure',
+@$core.Deprecated('Use symbolExposureDescriptor instead')
+const SymbolExposure$json = {
+  '1': 'SymbolExposure',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'last_updated_at', '3': 3, '4': 1, '5': 3, '10': 'lastUpdatedAt'},
+    {'1': 'current_price', '3': 3, '4': 1, '5': 3, '10': 'currentPrice'},
+    {'1': 'exposure', '3': 4, '4': 1, '5': 3, '10': 'exposure'},
   ],
 };
 
-/// Descriptor for `PositionExposure`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List positionExposureDescriptor = $convert.base64Decode(
-    'ChBQb3NpdGlvbkV4cG9zdXJlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhoKCHF1YW50aXR5GA'
-    'IgASgDUghxdWFudGl0eRImCg9sYXN0X3VwZGF0ZWRfYXQYAyABKANSDWxhc3RVcGRhdGVkQXQ=');
+/// Descriptor for `SymbolExposure`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List symbolExposureDescriptor = $convert.base64Decode(
+    'Cg5TeW1ib2xFeHBvc3VyZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIaCghxdWFudGl0eRgCIA'
+    'EoA1IIcXVhbnRpdHkSIwoNY3VycmVudF9wcmljZRgDIAEoA1IMY3VycmVudFByaWNlEhoKCGV4'
+    'cG9zdXJlGAQgASgDUghleHBvc3VyZQ==');
 
 @$core.Deprecated('Use fundLimitDescriptor instead')
 const FundLimit$json = {
@@ -288,34 +296,34 @@ final $typed_data.Uint8List listFundsResponseDescriptor = $convert.base64Decode(
     'ChFMaXN0RnVuZHNSZXNwb25zZRInCgVmdW5kcxgBIAMoCzIRLmtkby52MS5mdW5kLkZ1bmRSBW'
     'Z1bmRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
-@$core.Deprecated('Use listFundLimitsRequestDescriptor instead')
-const ListFundLimitsRequest$json = {
-  '1': 'ListFundLimitsRequest',
+@$core.Deprecated('Use listFundTradingSnapshotsRequestDescriptor instead')
+const ListFundTradingSnapshotsRequest$json = {
+  '1': 'ListFundTradingSnapshotsRequest',
   '2': [
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
-/// Descriptor for `ListFundLimitsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listFundLimitsRequestDescriptor = $convert.base64Decode(
-    'ChVMaXN0RnVuZExpbWl0c1JlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAvpBFgoUa2RvLmNkc2'
-    'FwaXMueHl6L0Z1bmRSBGZ1bmQSFgoGZmlsdGVyGAIgASgJUgZmaWx0ZXI=');
+/// Descriptor for `ListFundTradingSnapshotsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundTradingSnapshotsRequestDescriptor = $convert.base64Decode(
+    'Ch9MaXN0RnVuZFRyYWRpbmdTbmFwc2hvdHNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QR'
+    'YKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhYKBmZpbHRlchgCIAEoCVIGZmlsdGVy');
 
-@$core.Deprecated('Use listFundLimitsResponseDescriptor instead')
-const ListFundLimitsResponse$json = {
-  '1': 'ListFundLimitsResponse',
+@$core.Deprecated('Use listFundTradingSnapshotsesponseDescriptor instead')
+const ListFundTradingSnapshotsesponse$json = {
+  '1': 'ListFundTradingSnapshotsesponse',
   '2': [
-    {'1': 'fund_limits', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundLimit', '10': 'fundLimits'},
+    {'1': 'snapshots', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundTrading', '10': 'snapshots'},
     {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
-/// Descriptor for `ListFundLimitsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listFundLimitsResponseDescriptor = $convert.base64Decode(
-    'ChZMaXN0RnVuZExpbWl0c1Jlc3BvbnNlEjcKC2Z1bmRfbGltaXRzGAEgAygLMhYua2RvLnYxLm'
-    'Z1bmQuRnVuZExpbWl0UgpmdW5kTGltaXRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4'
-    'dFBhZ2VUb2tlbg==');
+/// Descriptor for `ListFundTradingSnapshotsesponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundTradingSnapshotsesponseDescriptor = $convert.base64Decode(
+    'Ch9MaXN0RnVuZFRyYWRpbmdTbmFwc2hvdHNlc3BvbnNlEjYKCXNuYXBzaG90cxgBIAMoCzIYLm'
+    'tkby52MS5mdW5kLkZ1bmRUcmFkaW5nUglzbmFwc2hvdHMSJgoPbmV4dF9wYWdlX3Rva2VuGAIg'
+    'ASgJUg1uZXh0UGFnZVRva2Vu');
 
 @$core.Deprecated('Use watchLossLimitAlertsRequestDescriptor instead')
 const WatchLossLimitAlertsRequest$json = {

@@ -156,11 +156,11 @@ pub mod fund_service_client {
                 .insert(GrpcMethod::new("kdo.v1.fund.FundService", "ListFunds"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn list_fund_limits(
+        pub async fn list_fund_trading_snapshots(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListFundLimitsRequest>,
+            request: impl tonic::IntoRequest<super::ListFundTradingSnapshotsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListFundLimitsResponse>,
+            tonic::Response<super::ListFundTradingSnapshotsesponse>,
             tonic::Status,
         > {
             self.inner
@@ -174,18 +174,25 @@ pub mod fund_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.fund.FundService/ListFundLimits",
+                "/kdo.v1.fund.FundService/ListFundTradingSnapshots",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.fund.FundService", "ListFundLimits"));
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.fund.FundService",
+                        "ListFundTradingSnapshots",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_fund_limits(
+        pub async fn stream_fun_trading_snapshots(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListFundLimitsRequest>,
+            request: impl tonic::IntoRequest<super::ListFundTradingSnapshotsRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::ListFundLimitsResponse>>,
+            tonic::Response<
+                tonic::codec::Streaming<super::ListFundTradingSnapshotsesponse>,
+            >,
             tonic::Status,
         > {
             self.inner
@@ -199,11 +206,16 @@ pub mod fund_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.fund.FundService/StreamFundLimits",
+                "/kdo.v1.fund.FundService/StreamFunTradingSnapshots",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.fund.FundService", "StreamFundLimits"));
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.fund.FundService",
+                        "StreamFunTradingSnapshots",
+                    ),
+                );
             self.inner.server_streaming(req, path, codec).await
         }
         pub async fn watch_loss_limit_alerts(
@@ -263,24 +275,27 @@ pub mod fund_service_server {
             tonic::Response<super::ListFundsResponse>,
             tonic::Status,
         >;
-        async fn list_fund_limits(
+        async fn list_fund_trading_snapshots(
             &self,
-            request: tonic::Request<super::ListFundLimitsRequest>,
+            request: tonic::Request<super::ListFundTradingSnapshotsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListFundLimitsResponse>,
+            tonic::Response<super::ListFundTradingSnapshotsesponse>,
             tonic::Status,
         >;
-        /// Server streaming response type for the StreamFundLimits method.
-        type StreamFundLimitsStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::ListFundLimitsResponse, tonic::Status>,
+        /// Server streaming response type for the StreamFunTradingSnapshots method.
+        type StreamFunTradingSnapshotsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::ListFundTradingSnapshotsesponse,
+                    tonic::Status,
+                >,
             >
             + Send
             + 'static;
-        async fn stream_fund_limits(
+        async fn stream_fun_trading_snapshots(
             &self,
-            request: tonic::Request<super::ListFundLimitsRequest>,
+            request: tonic::Request<super::ListFundTradingSnapshotsRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamFundLimitsStream>,
+            tonic::Response<Self::StreamFunTradingSnapshotsStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the WatchLossLimitAlerts method.
@@ -509,25 +524,31 @@ pub mod fund_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.fund.FundService/ListFundLimits" => {
+                "/kdo.v1.fund.FundService/ListFundTradingSnapshots" => {
                     #[allow(non_camel_case_types)]
-                    struct ListFundLimitsSvc<T: FundService>(pub Arc<T>);
+                    struct ListFundTradingSnapshotsSvc<T: FundService>(pub Arc<T>);
                     impl<
                         T: FundService,
-                    > tonic::server::UnaryService<super::ListFundLimitsRequest>
-                    for ListFundLimitsSvc<T> {
-                        type Response = super::ListFundLimitsResponse;
+                    > tonic::server::UnaryService<super::ListFundTradingSnapshotsRequest>
+                    for ListFundTradingSnapshotsSvc<T> {
+                        type Response = super::ListFundTradingSnapshotsesponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListFundLimitsRequest>,
+                            request: tonic::Request<
+                                super::ListFundTradingSnapshotsRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as FundService>::list_fund_limits(&inner, request).await
+                                <T as FundService>::list_fund_trading_snapshots(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -538,7 +559,7 @@ pub mod fund_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ListFundLimitsSvc(inner);
+                        let method = ListFundTradingSnapshotsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -554,26 +575,32 @@ pub mod fund_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.fund.FundService/StreamFundLimits" => {
+                "/kdo.v1.fund.FundService/StreamFunTradingSnapshots" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamFundLimitsSvc<T: FundService>(pub Arc<T>);
+                    struct StreamFunTradingSnapshotsSvc<T: FundService>(pub Arc<T>);
                     impl<
                         T: FundService,
-                    > tonic::server::ServerStreamingService<super::ListFundLimitsRequest>
-                    for StreamFundLimitsSvc<T> {
-                        type Response = super::ListFundLimitsResponse;
-                        type ResponseStream = T::StreamFundLimitsStream;
+                    > tonic::server::ServerStreamingService<
+                        super::ListFundTradingSnapshotsRequest,
+                    > for StreamFunTradingSnapshotsSvc<T> {
+                        type Response = super::ListFundTradingSnapshotsesponse;
+                        type ResponseStream = T::StreamFunTradingSnapshotsStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListFundLimitsRequest>,
+                            request: tonic::Request<
+                                super::ListFundTradingSnapshotsRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as FundService>::stream_fund_limits(&inner, request)
+                                <T as FundService>::stream_fun_trading_snapshots(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -585,7 +612,7 @@ pub mod fund_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamFundLimitsSvc(inner);
+                        let method = StreamFunTradingSnapshotsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
