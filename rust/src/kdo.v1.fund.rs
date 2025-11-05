@@ -96,17 +96,23 @@ pub struct SymbolPnL {
     /// 종목 코드
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 평균 매입가
-    #[prost(double, tag="2")]
-    pub average_buy_price: f64,
     /// 보유 수량
-    #[prost(int64, tag="3")]
+    #[prost(int64, tag="2")]
     pub quantity: i64,
-    /// 실현 손익
+    /// 평균 진입가
+    #[prost(double, tag="3")]
+    pub average_entry_price: f64,
+    /// 현재가
     #[prost(int64, tag="4")]
+    pub current_price: i64,
+    /// 미실현 손익
+    #[prost(int64, tag="5")]
+    pub unrealized_pnl: i64,
+    /// 실현 손익
+    #[prost(int64, tag="6")]
     pub realized_pnl: i64,
     /// 거래 비용
-    #[prost(int64, tag="5")]
+    #[prost(int64, tag="7")]
     pub trading_cost: i64,
 }
 /// 펀드 익스포저(Exposure) 관리

@@ -442,15 +442,19 @@ class FundPnL extends $pb.GeneratedMessage {
 class SymbolPnL extends $pb.GeneratedMessage {
   factory SymbolPnL({
     $core.String? symbol,
-    $core.double? averageBuyPrice,
     $fixnum.Int64? quantity,
+    $core.double? averageEntryPrice,
+    $fixnum.Int64? currentPrice,
+    $fixnum.Int64? unrealizedPnl,
     $fixnum.Int64? realizedPnl,
     $fixnum.Int64? tradingCost,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
-    if (averageBuyPrice != null) result.averageBuyPrice = averageBuyPrice;
     if (quantity != null) result.quantity = quantity;
+    if (averageEntryPrice != null) result.averageEntryPrice = averageEntryPrice;
+    if (currentPrice != null) result.currentPrice = currentPrice;
+    if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
     if (realizedPnl != null) result.realizedPnl = realizedPnl;
     if (tradingCost != null) result.tradingCost = tradingCost;
     return result;
@@ -463,10 +467,12 @@ class SymbolPnL extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SymbolPnL', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'averageBuyPrice', $pb.PbFieldType.OD)
-    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
-    ..aInt64(4, _omitFieldNames ? '' : 'realizedPnl')
-    ..aInt64(5, _omitFieldNames ? '' : 'tradingCost')
+    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'averageEntryPrice', $pb.PbFieldType.OD)
+    ..aInt64(4, _omitFieldNames ? '' : 'currentPrice')
+    ..aInt64(5, _omitFieldNames ? '' : 'unrealizedPnl')
+    ..aInt64(6, _omitFieldNames ? '' : 'realizedPnl')
+    ..aInt64(7, _omitFieldNames ? '' : 'tradingCost')
     ..hasRequiredFields = false
   ;
 
@@ -497,40 +503,58 @@ class SymbolPnL extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $core.double get averageBuyPrice => $_getN(1);
+  $fixnum.Int64 get quantity => $_getI64(1);
   @$pb.TagNumber(2)
-  set averageBuyPrice($core.double value) => $_setDouble(1, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasAverageBuyPrice() => $_has(1);
+  $core.bool hasQuantity() => $_has(1);
   @$pb.TagNumber(2)
-  void clearAverageBuyPrice() => $_clearField(2);
+  void clearQuantity() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $fixnum.Int64 get quantity => $_getI64(2);
+  $core.double get averageEntryPrice => $_getN(2);
   @$pb.TagNumber(3)
-  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
+  set averageEntryPrice($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasQuantity() => $_has(2);
+  $core.bool hasAverageEntryPrice() => $_has(2);
   @$pb.TagNumber(3)
-  void clearQuantity() => $_clearField(3);
+  void clearAverageEntryPrice() => $_clearField(3);
 
   @$pb.TagNumber(4)
-  $fixnum.Int64 get realizedPnl => $_getI64(3);
+  $fixnum.Int64 get currentPrice => $_getI64(3);
   @$pb.TagNumber(4)
-  set realizedPnl($fixnum.Int64 value) => $_setInt64(3, value);
+  set currentPrice($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasRealizedPnl() => $_has(3);
+  $core.bool hasCurrentPrice() => $_has(3);
   @$pb.TagNumber(4)
-  void clearRealizedPnl() => $_clearField(4);
+  void clearCurrentPrice() => $_clearField(4);
 
   @$pb.TagNumber(5)
-  $fixnum.Int64 get tradingCost => $_getI64(4);
+  $fixnum.Int64 get unrealizedPnl => $_getI64(4);
   @$pb.TagNumber(5)
-  set tradingCost($fixnum.Int64 value) => $_setInt64(4, value);
+  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasTradingCost() => $_has(4);
+  $core.bool hasUnrealizedPnl() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTradingCost() => $_clearField(5);
+  void clearUnrealizedPnl() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get realizedPnl => $_getI64(5);
+  @$pb.TagNumber(6)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasRealizedPnl() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRealizedPnl() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get tradingCost => $_getI64(6);
+  @$pb.TagNumber(7)
+  set tradingCost($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasTradingCost() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearTradingCost() => $_clearField(7);
 }
 
 /// 펀드 익스포저(Exposure) 관리

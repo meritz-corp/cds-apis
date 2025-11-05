@@ -2405,17 +2405,33 @@ impl serde::Serialize for SymbolPnL {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.SymbolPnL", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            struct_ser.serialize_field("average_buy_price", &self.average_buy_price)?;
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("average_entry_price", &self.average_entry_price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+            struct_ser.serialize_field("current_price", ToString::to_string(&self.current_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("unrealized_pnl", ToString::to_string(&self.unrealized_pnl).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2438,9 +2454,13 @@ impl<'de> serde::Deserialize<'de> for SymbolPnL {
     {
         const FIELDS: &[&str] = &[
             "symbol",
-            "average_buy_price",
-            "averageBuyPrice",
             "quantity",
+            "average_entry_price",
+            "averageEntryPrice",
+            "current_price",
+            "currentPrice",
+            "unrealized_pnl",
+            "unrealizedPnl",
             "realized_pnl",
             "realizedPnl",
             "trading_cost",
@@ -2450,8 +2470,10 @@ impl<'de> serde::Deserialize<'de> for SymbolPnL {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
-            AverageBuyPrice,
             Quantity,
+            AverageEntryPrice,
+            CurrentPrice,
+            UnrealizedPnl,
             RealizedPnl,
             TradingCost,
             __SkipField__,
@@ -2477,8 +2499,10 @@ impl<'de> serde::Deserialize<'de> for SymbolPnL {
                     {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
-                            "averageBuyPrice" | "average_buy_price" => Ok(GeneratedField::AverageBuyPrice),
                             "quantity" => Ok(GeneratedField::Quantity),
+                            "averageEntryPrice" | "average_entry_price" => Ok(GeneratedField::AverageEntryPrice),
+                            "currentPrice" | "current_price" => Ok(GeneratedField::CurrentPrice),
+                            "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
                             "realizedPnl" | "realized_pnl" => Ok(GeneratedField::RealizedPnl),
                             "tradingCost" | "trading_cost" => Ok(GeneratedField::TradingCost),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -2501,8 +2525,10 @@ impl<'de> serde::Deserialize<'de> for SymbolPnL {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
-                let mut average_buy_price__ = None;
                 let mut quantity__ = None;
+                let mut average_entry_price__ = None;
+                let mut current_price__ = None;
+                let mut unrealized_pnl__ = None;
                 let mut realized_pnl__ = None;
                 let mut trading_cost__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -2513,19 +2539,35 @@ impl<'de> serde::Deserialize<'de> for SymbolPnL {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::AverageBuyPrice => {
-                            if average_buy_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("averageBuyPrice"));
-                            }
-                            average_buy_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("quantity"));
                             }
                             quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AverageEntryPrice => {
+                            if average_entry_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("averageEntryPrice"));
+                            }
+                            average_entry_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentPrice => {
+                            if current_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentPrice"));
+                            }
+                            current_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::UnrealizedPnl => {
+                            if unrealized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unrealizedPnl"));
+                            }
+                            unrealized_pnl__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -2552,8 +2594,10 @@ impl<'de> serde::Deserialize<'de> for SymbolPnL {
                 }
                 Ok(SymbolPnL {
                     symbol: symbol__.unwrap_or_default(),
-                    average_buy_price: average_buy_price__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
+                    average_entry_price: average_entry_price__.unwrap_or_default(),
+                    current_price: current_price__.unwrap_or_default(),
+                    unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
                     realized_pnl: realized_pnl__.unwrap_or_default(),
                     trading_cost: trading_cost__.unwrap_or_default(),
                 })

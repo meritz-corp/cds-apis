@@ -619,15 +619,25 @@
           "type": "string",
           "title": "종목 코드"
         },
-        "averageBuyPrice": {
-          "type": "number",
-          "format": "double",
-          "title": "평균 매입가"
-        },
         "quantity": {
           "type": "string",
           "format": "int64",
           "title": "보유 수량"
+        },
+        "averageEntryPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "평균 진입가"
+        },
+        "currentPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재가"
+        },
+        "unrealizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "미실현 손익"
         },
         "realizedPnl": {
           "type": "string",

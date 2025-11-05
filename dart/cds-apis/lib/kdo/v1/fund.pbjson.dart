@@ -111,19 +111,22 @@ const SymbolPnL$json = {
   '1': 'SymbolPnL',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'average_buy_price', '3': 2, '4': 1, '5': 1, '10': 'averageBuyPrice'},
-    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'realized_pnl', '3': 4, '4': 1, '5': 3, '10': 'realizedPnl'},
-    {'1': 'trading_cost', '3': 5, '4': 1, '5': 3, '10': 'tradingCost'},
+    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'average_entry_price', '3': 3, '4': 1, '5': 1, '10': 'averageEntryPrice'},
+    {'1': 'current_price', '3': 4, '4': 1, '5': 3, '10': 'currentPrice'},
+    {'1': 'unrealized_pnl', '3': 5, '4': 1, '5': 3, '10': 'unrealizedPnl'},
+    {'1': 'realized_pnl', '3': 6, '4': 1, '5': 3, '10': 'realizedPnl'},
+    {'1': 'trading_cost', '3': 7, '4': 1, '5': 3, '10': 'tradingCost'},
   ],
 };
 
 /// Descriptor for `SymbolPnL`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List symbolPnLDescriptor = $convert.base64Decode(
-    'CglTeW1ib2xQbkwSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSKgoRYXZlcmFnZV9idXlfcHJpY2'
-    'UYAiABKAFSD2F2ZXJhZ2VCdXlQcmljZRIaCghxdWFudGl0eRgDIAEoA1IIcXVhbnRpdHkSIQoM'
-    'cmVhbGl6ZWRfcG5sGAQgASgDUgtyZWFsaXplZFBubBIhCgx0cmFkaW5nX2Nvc3QYBSABKANSC3'
-    'RyYWRpbmdDb3N0');
+    'CglTeW1ib2xQbkwSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGgoIcXVhbnRpdHkYAiABKANSCH'
+    'F1YW50aXR5Ei4KE2F2ZXJhZ2VfZW50cnlfcHJpY2UYAyABKAFSEWF2ZXJhZ2VFbnRyeVByaWNl'
+    'EiMKDWN1cnJlbnRfcHJpY2UYBCABKANSDGN1cnJlbnRQcmljZRIlCg51bnJlYWxpemVkX3BubB'
+    'gFIAEoA1INdW5yZWFsaXplZFBubBIhCgxyZWFsaXplZF9wbmwYBiABKANSC3JlYWxpemVkUG5s'
+    'EiEKDHRyYWRpbmdfY29zdBgHIAEoA1ILdHJhZGluZ0Nvc3Q=');
 
 @$core.Deprecated('Use fundExposureDescriptor instead')
 const FundExposure$json = {
