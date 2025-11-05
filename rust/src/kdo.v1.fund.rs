@@ -275,7 +275,7 @@ pub struct ListFundTradingSnapshotsRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListFundTradingSnapshotsesponse {
+pub struct ListFundTradingSnapshotsResponse {
     /// 펀드 한도 목록
     #[prost(message, repeated, tag="1")]
     pub snapshots: ::prost::alloc::vec::Vec<FundTrading>,

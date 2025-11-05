@@ -103,7 +103,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/fundListFundTradingSnapshotsesponse"
+              "$ref": "#/definitions/fundListFundTradingSnapshotsResponse"
             }
           },
           "default": {
@@ -137,7 +137,7 @@
     },
     "/v1/{fund}/trading_snapshot:stream": {
       "get": {
-        "operationId": "FundService_StreamFunTradingSnapshots",
+        "operationId": "FundService_StreamFundTradingSnapshots",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -145,13 +145,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/fundListFundTradingSnapshotsesponse"
+                  "$ref": "#/definitions/fundListFundTradingSnapshotsResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of fundListFundTradingSnapshotsesponse"
+              "title": "Stream result of fundListFundTradingSnapshotsResponse"
             }
           },
           "default": {
@@ -505,7 +505,7 @@
         }
       }
     },
-    "fundListFundTradingSnapshotsesponse": {
+    "fundListFundTradingSnapshotsResponse": {
       "type": "object",
       "properties": {
         "snapshots": {

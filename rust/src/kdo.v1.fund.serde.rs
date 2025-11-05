@@ -1510,7 +1510,7 @@ impl<'de> serde::Deserialize<'de> for ListFundTradingSnapshotsRequest {
         deserializer.deserialize_struct("kdo.v1.fund.ListFundTradingSnapshotsRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListFundTradingSnapshotsesponse {
+impl serde::Serialize for ListFundTradingSnapshotsResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1524,7 +1524,7 @@ impl serde::Serialize for ListFundTradingSnapshotsesponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundTradingSnapshotsesponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.ListFundTradingSnapshotsResponse", len)?;
         if true {
             struct_ser.serialize_field("snapshots", &self.snapshots)?;
         }
@@ -1534,7 +1534,7 @@ impl serde::Serialize for ListFundTradingSnapshotsesponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListFundTradingSnapshotsesponse {
+impl<'de> serde::Deserialize<'de> for ListFundTradingSnapshotsResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1583,13 +1583,13 @@ impl<'de> serde::Deserialize<'de> for ListFundTradingSnapshotsesponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListFundTradingSnapshotsesponse;
+            type Value = ListFundTradingSnapshotsResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.fund.ListFundTradingSnapshotsesponse")
+                formatter.write_str("struct kdo.v1.fund.ListFundTradingSnapshotsResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundTradingSnapshotsesponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListFundTradingSnapshotsResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1614,13 +1614,13 @@ impl<'de> serde::Deserialize<'de> for ListFundTradingSnapshotsesponse {
                         }
                     }
                 }
-                Ok(ListFundTradingSnapshotsesponse {
+                Ok(ListFundTradingSnapshotsResponse {
                     snapshots: snapshots__.unwrap_or_default(),
                     next_page_token: next_page_token__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.fund.ListFundTradingSnapshotsesponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.fund.ListFundTradingSnapshotsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListFundsRequest {

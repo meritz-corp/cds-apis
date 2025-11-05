@@ -254,31 +254,31 @@ func (mr *MockFundService_StreamFundServerMockRecorder) SetTrailer(arg0 interfac
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockFundService_StreamFundServer)(nil).SetTrailer), arg0)
 }
 
-// MockFundService_StreamFunTradingSnapshotsClient is a mock of FundService_StreamFunTradingSnapshotsClient interface.
-type MockFundService_StreamFunTradingSnapshotsClient struct {
+// MockFundService_StreamFundTradingSnapshotsClient is a mock of FundService_StreamFundTradingSnapshotsClient interface.
+type MockFundService_StreamFundTradingSnapshotsClient struct {
 	ctrl     *gomock.Controller
-	recorder *MockFundService_StreamFunTradingSnapshotsClientMockRecorder
+	recorder *MockFundService_StreamFundTradingSnapshotsClientMockRecorder
 }
 
-// MockFundService_StreamFunTradingSnapshotsClientMockRecorder is the mock recorder for MockFundService_StreamFunTradingSnapshotsClient.
-type MockFundService_StreamFunTradingSnapshotsClientMockRecorder struct {
-	mock *MockFundService_StreamFunTradingSnapshotsClient
+// MockFundService_StreamFundTradingSnapshotsClientMockRecorder is the mock recorder for MockFundService_StreamFundTradingSnapshotsClient.
+type MockFundService_StreamFundTradingSnapshotsClientMockRecorder struct {
+	mock *MockFundService_StreamFundTradingSnapshotsClient
 }
 
-// NewMockFundService_StreamFunTradingSnapshotsClient creates a new mock instance.
-func NewMockFundService_StreamFunTradingSnapshotsClient(ctrl *gomock.Controller) *MockFundService_StreamFunTradingSnapshotsClient {
-	mock := &MockFundService_StreamFunTradingSnapshotsClient{ctrl: ctrl}
-	mock.recorder = &MockFundService_StreamFunTradingSnapshotsClientMockRecorder{mock}
+// NewMockFundService_StreamFundTradingSnapshotsClient creates a new mock instance.
+func NewMockFundService_StreamFundTradingSnapshotsClient(ctrl *gomock.Controller) *MockFundService_StreamFundTradingSnapshotsClient {
+	mock := &MockFundService_StreamFundTradingSnapshotsClient{ctrl: ctrl}
+	mock.recorder = &MockFundService_StreamFundTradingSnapshotsClientMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) EXPECT() *MockFundService_StreamFunTradingSnapshotsClientMockRecorder {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) EXPECT() *MockFundService_StreamFundTradingSnapshotsClientMockRecorder {
 	return m.recorder
 }
 
 // CloseSend mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) CloseSend() error {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) CloseSend() error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CloseSend")
 	ret0, _ := ret[0].(error)
@@ -286,13 +286,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsClient) CloseSend() error {
 }
 
 // CloseSend indicates an expected call of CloseSend.
-func (mr *MockFundService_StreamFunTradingSnapshotsClientMockRecorder) CloseSend() *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsClientMockRecorder) CloseSend() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsClient)(nil).CloseSend))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsClient)(nil).CloseSend))
 }
 
 // Context mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) Context() context.Context {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) Context() context.Context {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Context")
 	ret0, _ := ret[0].(context.Context)
@@ -300,13 +300,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsClient) Context() context.Cont
 }
 
 // Context indicates an expected call of Context.
-func (mr *MockFundService_StreamFunTradingSnapshotsClientMockRecorder) Context() *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsClientMockRecorder) Context() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsClient)(nil).Context))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsClient)(nil).Context))
 }
 
 // Header mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) Header() (metadata.MD, error) {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) Header() (metadata.MD, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Header")
 	ret0, _ := ret[0].(metadata.MD)
@@ -315,28 +315,28 @@ func (m *MockFundService_StreamFunTradingSnapshotsClient) Header() (metadata.MD,
 }
 
 // Header indicates an expected call of Header.
-func (mr *MockFundService_StreamFunTradingSnapshotsClientMockRecorder) Header() *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsClientMockRecorder) Header() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsClient)(nil).Header))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsClient)(nil).Header))
 }
 
 // Recv mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) Recv() (*ListFundTradingSnapshotsesponse, error) {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) Recv() (*ListFundTradingSnapshotsResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListFundTradingSnapshotsesponse)
+	ret0, _ := ret[0].(*ListFundTradingSnapshotsResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Recv indicates an expected call of Recv.
-func (mr *MockFundService_StreamFunTradingSnapshotsClientMockRecorder) Recv() *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsClientMockRecorder) Recv() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsClient)(nil).Recv))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsClient)(nil).Recv))
 }
 
 // RecvMsg mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) RecvMsg(arg0 interface{}) error {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) RecvMsg(arg0 interface{}) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RecvMsg", arg0)
 	ret0, _ := ret[0].(error)
@@ -344,13 +344,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsClient) RecvMsg(arg0 interface
 }
 
 // RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockFundService_StreamFunTradingSnapshotsClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsClient)(nil).RecvMsg), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsClient)(nil).RecvMsg), arg0)
 }
 
 // SendMsg mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) SendMsg(arg0 interface{}) error {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) SendMsg(arg0 interface{}) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SendMsg", arg0)
 	ret0, _ := ret[0].(error)
@@ -358,13 +358,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsClient) SendMsg(arg0 interface
 }
 
 // SendMsg indicates an expected call of SendMsg.
-func (mr *MockFundService_StreamFunTradingSnapshotsClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsClient)(nil).SendMsg), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsClient)(nil).SendMsg), arg0)
 }
 
 // Trailer mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsClient) Trailer() metadata.MD {
+func (m *MockFundService_StreamFundTradingSnapshotsClient) Trailer() metadata.MD {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Trailer")
 	ret0, _ := ret[0].(metadata.MD)
@@ -372,36 +372,36 @@ func (m *MockFundService_StreamFunTradingSnapshotsClient) Trailer() metadata.MD 
 }
 
 // Trailer indicates an expected call of Trailer.
-func (mr *MockFundService_StreamFunTradingSnapshotsClientMockRecorder) Trailer() *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsClientMockRecorder) Trailer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsClient)(nil).Trailer))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsClient)(nil).Trailer))
 }
 
-// MockFundService_StreamFunTradingSnapshotsServer is a mock of FundService_StreamFunTradingSnapshotsServer interface.
-type MockFundService_StreamFunTradingSnapshotsServer struct {
+// MockFundService_StreamFundTradingSnapshotsServer is a mock of FundService_StreamFundTradingSnapshotsServer interface.
+type MockFundService_StreamFundTradingSnapshotsServer struct {
 	ctrl     *gomock.Controller
-	recorder *MockFundService_StreamFunTradingSnapshotsServerMockRecorder
+	recorder *MockFundService_StreamFundTradingSnapshotsServerMockRecorder
 }
 
-// MockFundService_StreamFunTradingSnapshotsServerMockRecorder is the mock recorder for MockFundService_StreamFunTradingSnapshotsServer.
-type MockFundService_StreamFunTradingSnapshotsServerMockRecorder struct {
-	mock *MockFundService_StreamFunTradingSnapshotsServer
+// MockFundService_StreamFundTradingSnapshotsServerMockRecorder is the mock recorder for MockFundService_StreamFundTradingSnapshotsServer.
+type MockFundService_StreamFundTradingSnapshotsServerMockRecorder struct {
+	mock *MockFundService_StreamFundTradingSnapshotsServer
 }
 
-// NewMockFundService_StreamFunTradingSnapshotsServer creates a new mock instance.
-func NewMockFundService_StreamFunTradingSnapshotsServer(ctrl *gomock.Controller) *MockFundService_StreamFunTradingSnapshotsServer {
-	mock := &MockFundService_StreamFunTradingSnapshotsServer{ctrl: ctrl}
-	mock.recorder = &MockFundService_StreamFunTradingSnapshotsServerMockRecorder{mock}
+// NewMockFundService_StreamFundTradingSnapshotsServer creates a new mock instance.
+func NewMockFundService_StreamFundTradingSnapshotsServer(ctrl *gomock.Controller) *MockFundService_StreamFundTradingSnapshotsServer {
+	mock := &MockFundService_StreamFundTradingSnapshotsServer{ctrl: ctrl}
+	mock.recorder = &MockFundService_StreamFundTradingSnapshotsServerMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) EXPECT() *MockFundService_StreamFunTradingSnapshotsServerMockRecorder {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) EXPECT() *MockFundService_StreamFundTradingSnapshotsServerMockRecorder {
 	return m.recorder
 }
 
 // Context mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) Context() context.Context {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) Context() context.Context {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Context")
 	ret0, _ := ret[0].(context.Context)
@@ -409,13 +409,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsServer) Context() context.Cont
 }
 
 // Context indicates an expected call of Context.
-func (mr *MockFundService_StreamFunTradingSnapshotsServerMockRecorder) Context() *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsServerMockRecorder) Context() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsServer)(nil).Context))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsServer)(nil).Context))
 }
 
 // RecvMsg mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) RecvMsg(arg0 interface{}) error {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) RecvMsg(arg0 interface{}) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RecvMsg", arg0)
 	ret0, _ := ret[0].(error)
@@ -423,13 +423,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsServer) RecvMsg(arg0 interface
 }
 
 // RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockFundService_StreamFunTradingSnapshotsServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsServer)(nil).RecvMsg), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsServer)(nil).RecvMsg), arg0)
 }
 
 // Send mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) Send(arg0 *ListFundTradingSnapshotsesponse) error {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) Send(arg0 *ListFundTradingSnapshotsResponse) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Send", arg0)
 	ret0, _ := ret[0].(error)
@@ -437,13 +437,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsServer) Send(arg0 *ListFundTra
 }
 
 // Send indicates an expected call of Send.
-func (mr *MockFundService_StreamFunTradingSnapshotsServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsServer)(nil).Send), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsServer)(nil).Send), arg0)
 }
 
 // SendHeader mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) SendHeader(arg0 metadata.MD) error {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) SendHeader(arg0 metadata.MD) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SendHeader", arg0)
 	ret0, _ := ret[0].(error)
@@ -451,13 +451,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsServer) SendHeader(arg0 metada
 }
 
 // SendHeader indicates an expected call of SendHeader.
-func (mr *MockFundService_StreamFunTradingSnapshotsServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsServer)(nil).SendHeader), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsServer)(nil).SendHeader), arg0)
 }
 
 // SendMsg mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) SendMsg(arg0 interface{}) error {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) SendMsg(arg0 interface{}) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SendMsg", arg0)
 	ret0, _ := ret[0].(error)
@@ -465,13 +465,13 @@ func (m *MockFundService_StreamFunTradingSnapshotsServer) SendMsg(arg0 interface
 }
 
 // SendMsg indicates an expected call of SendMsg.
-func (mr *MockFundService_StreamFunTradingSnapshotsServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsServer)(nil).SendMsg), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsServer)(nil).SendMsg), arg0)
 }
 
 // SetHeader mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) SetHeader(arg0 metadata.MD) error {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) SetHeader(arg0 metadata.MD) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SetHeader", arg0)
 	ret0, _ := ret[0].(error)
@@ -479,21 +479,21 @@ func (m *MockFundService_StreamFunTradingSnapshotsServer) SetHeader(arg0 metadat
 }
 
 // SetHeader indicates an expected call of SetHeader.
-func (mr *MockFundService_StreamFunTradingSnapshotsServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsServer)(nil).SetHeader), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsServer)(nil).SetHeader), arg0)
 }
 
 // SetTrailer mocks base method.
-func (m *MockFundService_StreamFunTradingSnapshotsServer) SetTrailer(arg0 metadata.MD) {
+func (m *MockFundService_StreamFundTradingSnapshotsServer) SetTrailer(arg0 metadata.MD) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetTrailer", arg0)
 }
 
 // SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockFundService_StreamFunTradingSnapshotsServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+func (mr *MockFundService_StreamFundTradingSnapshotsServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockFundService_StreamFunTradingSnapshotsServer)(nil).SetTrailer), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockFundService_StreamFundTradingSnapshotsServer)(nil).SetTrailer), arg0)
 }
 
 // MockFundService_WatchLossLimitAlertsClient is a mock of FundService_WatchLossLimitAlertsClient interface.
@@ -782,14 +782,14 @@ func (mr *MockFundServiceClientMockRecorder) GetFund(ctx, in interface{}, opts .
 }
 
 // ListFundTradingSnapshots mocks base method.
-func (m *MockFundServiceClient) ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsesponse, error) {
+func (m *MockFundServiceClient) ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListFundTradingSnapshots", varargs...)
-	ret0, _ := ret[0].(*ListFundTradingSnapshotsesponse)
+	ret0, _ := ret[0].(*ListFundTradingSnapshotsResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -821,26 +821,6 @@ func (mr *MockFundServiceClientMockRecorder) ListFunds(ctx, in interface{}, opts
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFunds", reflect.TypeOf((*MockFundServiceClient)(nil).ListFunds), varargs...)
 }
 
-// StreamFunTradingSnapshots mocks base method.
-func (m *MockFundServiceClient) StreamFunTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFunTradingSnapshotsClient, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "StreamFunTradingSnapshots", varargs...)
-	ret0, _ := ret[0].(FundService_StreamFunTradingSnapshotsClient)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// StreamFunTradingSnapshots indicates an expected call of StreamFunTradingSnapshots.
-func (mr *MockFundServiceClientMockRecorder) StreamFunTradingSnapshots(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFunTradingSnapshots", reflect.TypeOf((*MockFundServiceClient)(nil).StreamFunTradingSnapshots), varargs...)
-}
-
 // StreamFund mocks base method.
 func (m *MockFundServiceClient) StreamFund(ctx context.Context, in *GetFundRequest, opts ...grpc.CallOption) (FundService_StreamFundClient, error) {
 	m.ctrl.T.Helper()
@@ -859,6 +839,26 @@ func (mr *MockFundServiceClientMockRecorder) StreamFund(ctx, in interface{}, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFund", reflect.TypeOf((*MockFundServiceClient)(nil).StreamFund), varargs...)
+}
+
+// StreamFundTradingSnapshots mocks base method.
+func (m *MockFundServiceClient) StreamFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFundTradingSnapshotsClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamFundTradingSnapshots", varargs...)
+	ret0, _ := ret[0].(FundService_StreamFundTradingSnapshotsClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamFundTradingSnapshots indicates an expected call of StreamFundTradingSnapshots.
+func (mr *MockFundServiceClientMockRecorder) StreamFundTradingSnapshots(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFundTradingSnapshots", reflect.TypeOf((*MockFundServiceClient)(nil).StreamFundTradingSnapshots), varargs...)
 }
 
 // WatchLossLimitAlerts mocks base method.
@@ -920,10 +920,10 @@ func (mr *MockFundServiceServerMockRecorder) GetFund(ctx, in interface{}) *gomoc
 }
 
 // ListFundTradingSnapshots mocks base method.
-func (m *MockFundServiceServer) ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsesponse, error) {
+func (m *MockFundServiceServer) ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListFundTradingSnapshots", ctx, in)
-	ret0, _ := ret[0].(*ListFundTradingSnapshotsesponse)
+	ret0, _ := ret[0].(*ListFundTradingSnapshotsResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -949,20 +949,6 @@ func (mr *MockFundServiceServerMockRecorder) ListFunds(ctx, in interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFunds", reflect.TypeOf((*MockFundServiceServer)(nil).ListFunds), ctx, in)
 }
 
-// StreamFunTradingSnapshots mocks base method.
-func (m *MockFundServiceServer) StreamFunTradingSnapshots(blob *ListFundTradingSnapshotsRequest, server FundService_StreamFunTradingSnapshotsServer) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "StreamFunTradingSnapshots", blob, server)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// StreamFunTradingSnapshots indicates an expected call of StreamFunTradingSnapshots.
-func (mr *MockFundServiceServerMockRecorder) StreamFunTradingSnapshots(blob, server interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFunTradingSnapshots", reflect.TypeOf((*MockFundServiceServer)(nil).StreamFunTradingSnapshots), blob, server)
-}
-
 // StreamFund mocks base method.
 func (m *MockFundServiceServer) StreamFund(blob *GetFundRequest, server FundService_StreamFundServer) error {
 	m.ctrl.T.Helper()
@@ -975,6 +961,20 @@ func (m *MockFundServiceServer) StreamFund(blob *GetFundRequest, server FundServ
 func (mr *MockFundServiceServerMockRecorder) StreamFund(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFund", reflect.TypeOf((*MockFundServiceServer)(nil).StreamFund), blob, server)
+}
+
+// StreamFundTradingSnapshots mocks base method.
+func (m *MockFundServiceServer) StreamFundTradingSnapshots(blob *ListFundTradingSnapshotsRequest, server FundService_StreamFundTradingSnapshotsServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamFundTradingSnapshots", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamFundTradingSnapshots indicates an expected call of StreamFundTradingSnapshots.
+func (mr *MockFundServiceServerMockRecorder) StreamFundTradingSnapshots(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFundTradingSnapshots", reflect.TypeOf((*MockFundServiceServer)(nil).StreamFundTradingSnapshots), blob, server)
 }
 
 // WatchLossLimitAlerts mocks base method.

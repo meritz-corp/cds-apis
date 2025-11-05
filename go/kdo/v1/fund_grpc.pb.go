@@ -28,8 +28,8 @@ type FundServiceClient interface {
 	StreamFund(ctx context.Context, in *GetFundRequest, opts ...grpc.CallOption) (FundService_StreamFundClient, error)
 	// 펀드 목록 조회
 	ListFunds(ctx context.Context, in *ListFundsRequest, opts ...grpc.CallOption) (*ListFundsResponse, error)
-	ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsesponse, error)
-	StreamFunTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFunTradingSnapshotsClient, error)
+	ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsResponse, error)
+	StreamFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFundTradingSnapshotsClient, error)
 	WatchLossLimitAlerts(ctx context.Context, in *WatchLossLimitAlertsRequest, opts ...grpc.CallOption) (FundService_WatchLossLimitAlertsClient, error)
 }
 
@@ -91,8 +91,8 @@ func (c *fundServiceClient) ListFunds(ctx context.Context, in *ListFundsRequest,
 	return out, nil
 }
 
-func (c *fundServiceClient) ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsesponse, error) {
-	out := new(ListFundTradingSnapshotsesponse)
+func (c *fundServiceClient) ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsResponse, error) {
+	out := new(ListFundTradingSnapshotsResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.fund.FundService/ListFundTradingSnapshots", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -100,12 +100,12 @@ func (c *fundServiceClient) ListFundTradingSnapshots(ctx context.Context, in *Li
 	return out, nil
 }
 
-func (c *fundServiceClient) StreamFunTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFunTradingSnapshotsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &FundService_ServiceDesc.Streams[1], "/kdo.v1.fund.FundService/StreamFunTradingSnapshots", opts...)
+func (c *fundServiceClient) StreamFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFundTradingSnapshotsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &FundService_ServiceDesc.Streams[1], "/kdo.v1.fund.FundService/StreamFundTradingSnapshots", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &fundServiceStreamFunTradingSnapshotsClient{stream}
+	x := &fundServiceStreamFundTradingSnapshotsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -115,17 +115,17 @@ func (c *fundServiceClient) StreamFunTradingSnapshots(ctx context.Context, in *L
 	return x, nil
 }
 
-type FundService_StreamFunTradingSnapshotsClient interface {
-	Recv() (*ListFundTradingSnapshotsesponse, error)
+type FundService_StreamFundTradingSnapshotsClient interface {
+	Recv() (*ListFundTradingSnapshotsResponse, error)
 	grpc.ClientStream
 }
 
-type fundServiceStreamFunTradingSnapshotsClient struct {
+type fundServiceStreamFundTradingSnapshotsClient struct {
 	grpc.ClientStream
 }
 
-func (x *fundServiceStreamFunTradingSnapshotsClient) Recv() (*ListFundTradingSnapshotsesponse, error) {
-	m := new(ListFundTradingSnapshotsesponse)
+func (x *fundServiceStreamFundTradingSnapshotsClient) Recv() (*ListFundTradingSnapshotsResponse, error) {
+	m := new(ListFundTradingSnapshotsResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -174,8 +174,8 @@ type FundServiceServer interface {
 	StreamFund(*GetFundRequest, FundService_StreamFundServer) error
 	// 펀드 목록 조회
 	ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error)
-	ListFundTradingSnapshots(context.Context, *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsesponse, error)
-	StreamFunTradingSnapshots(*ListFundTradingSnapshotsRequest, FundService_StreamFunTradingSnapshotsServer) error
+	ListFundTradingSnapshots(context.Context, *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsResponse, error)
+	StreamFundTradingSnapshots(*ListFundTradingSnapshotsRequest, FundService_StreamFundTradingSnapshotsServer) error
 	WatchLossLimitAlerts(*WatchLossLimitAlertsRequest, FundService_WatchLossLimitAlertsServer) error
 	mustEmbedUnimplementedFundServiceServer()
 }
@@ -193,11 +193,11 @@ func (UnimplementedFundServiceServer) StreamFund(*GetFundRequest, FundService_St
 func (UnimplementedFundServiceServer) ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFunds not implemented")
 }
-func (UnimplementedFundServiceServer) ListFundTradingSnapshots(context.Context, *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsesponse, error) {
+func (UnimplementedFundServiceServer) ListFundTradingSnapshots(context.Context, *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFundTradingSnapshots not implemented")
 }
-func (UnimplementedFundServiceServer) StreamFunTradingSnapshots(*ListFundTradingSnapshotsRequest, FundService_StreamFunTradingSnapshotsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamFunTradingSnapshots not implemented")
+func (UnimplementedFundServiceServer) StreamFundTradingSnapshots(*ListFundTradingSnapshotsRequest, FundService_StreamFundTradingSnapshotsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamFundTradingSnapshots not implemented")
 }
 func (UnimplementedFundServiceServer) WatchLossLimitAlerts(*WatchLossLimitAlertsRequest, FundService_WatchLossLimitAlertsServer) error {
 	return status.Errorf(codes.Unimplemented, "method WatchLossLimitAlerts not implemented")
@@ -290,24 +290,24 @@ func _FundService_ListFundTradingSnapshots_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FundService_StreamFunTradingSnapshots_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _FundService_StreamFundTradingSnapshots_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListFundTradingSnapshotsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(FundServiceServer).StreamFunTradingSnapshots(m, &fundServiceStreamFunTradingSnapshotsServer{stream})
+	return srv.(FundServiceServer).StreamFundTradingSnapshots(m, &fundServiceStreamFundTradingSnapshotsServer{stream})
 }
 
-type FundService_StreamFunTradingSnapshotsServer interface {
-	Send(*ListFundTradingSnapshotsesponse) error
+type FundService_StreamFundTradingSnapshotsServer interface {
+	Send(*ListFundTradingSnapshotsResponse) error
 	grpc.ServerStream
 }
 
-type fundServiceStreamFunTradingSnapshotsServer struct {
+type fundServiceStreamFundTradingSnapshotsServer struct {
 	grpc.ServerStream
 }
 
-func (x *fundServiceStreamFunTradingSnapshotsServer) Send(m *ListFundTradingSnapshotsesponse) error {
+func (x *fundServiceStreamFundTradingSnapshotsServer) Send(m *ListFundTradingSnapshotsResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -359,8 +359,8 @@ var FundService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamFunTradingSnapshots",
-			Handler:       _FundService_StreamFunTradingSnapshots_Handler,
+			StreamName:    "StreamFundTradingSnapshots",
+			Handler:       _FundService_StreamFundTradingSnapshots_Handler,
 			ServerStreams: true,
 		},
 		{

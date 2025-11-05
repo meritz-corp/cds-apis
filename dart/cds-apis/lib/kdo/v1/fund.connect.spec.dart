@@ -39,14 +39,14 @@ abstract final class FundService {
     '/$name/ListFundTradingSnapshots',
     connect.StreamType.unary,
     kdov1fund.ListFundTradingSnapshotsRequest.new,
-    kdov1fund.ListFundTradingSnapshotsesponse.new,
+    kdov1fund.ListFundTradingSnapshotsResponse.new,
   );
 
-  static const streamFunTradingSnapshots = connect.Spec(
-    '/$name/StreamFunTradingSnapshots',
+  static const streamFundTradingSnapshots = connect.Spec(
+    '/$name/StreamFundTradingSnapshots',
     connect.StreamType.server,
     kdov1fund.ListFundTradingSnapshotsRequest.new,
-    kdov1fund.ListFundTradingSnapshotsesponse.new,
+    kdov1fund.ListFundTradingSnapshotsResponse.new,
   );
 
   static const watchLossLimitAlerts = connect.Spec(

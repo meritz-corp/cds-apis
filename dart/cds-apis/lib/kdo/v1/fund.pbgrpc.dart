@@ -48,12 +48,12 @@ class FundServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listFunds, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.ListFundTradingSnapshotsesponse> listFundTradingSnapshots($0.ListFundTradingSnapshotsRequest request, {$grpc.CallOptions? options,}) {
+  $grpc.ResponseFuture<$0.ListFundTradingSnapshotsResponse> listFundTradingSnapshots($0.ListFundTradingSnapshotsRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listFundTradingSnapshots, request, options: options);
   }
 
-  $grpc.ResponseStream<$0.ListFundTradingSnapshotsesponse> streamFunTradingSnapshots($0.ListFundTradingSnapshotsRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamFunTradingSnapshots, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.ListFundTradingSnapshotsResponse> streamFundTradingSnapshots($0.ListFundTradingSnapshotsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamFundTradingSnapshots, $async.Stream.fromIterable([request]), options: options);
   }
 
   $grpc.ResponseStream<$0.LossLimitAlert> watchLossLimitAlerts($0.WatchLossLimitAlertsRequest request, {$grpc.CallOptions? options,}) {
@@ -74,14 +74,14 @@ class FundServiceClient extends $grpc.Client {
       '/kdo.v1.fund.FundService/ListFunds',
       ($0.ListFundsRequest value) => value.writeToBuffer(),
       $0.ListFundsResponse.fromBuffer);
-  static final _$listFundTradingSnapshots = $grpc.ClientMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsesponse>(
+  static final _$listFundTradingSnapshots = $grpc.ClientMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
       '/kdo.v1.fund.FundService/ListFundTradingSnapshots',
       ($0.ListFundTradingSnapshotsRequest value) => value.writeToBuffer(),
-      $0.ListFundTradingSnapshotsesponse.fromBuffer);
-  static final _$streamFunTradingSnapshots = $grpc.ClientMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsesponse>(
-      '/kdo.v1.fund.FundService/StreamFunTradingSnapshots',
+      $0.ListFundTradingSnapshotsResponse.fromBuffer);
+  static final _$streamFundTradingSnapshots = $grpc.ClientMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
+      '/kdo.v1.fund.FundService/StreamFundTradingSnapshots',
       ($0.ListFundTradingSnapshotsRequest value) => value.writeToBuffer(),
-      $0.ListFundTradingSnapshotsesponse.fromBuffer);
+      $0.ListFundTradingSnapshotsResponse.fromBuffer);
   static final _$watchLossLimitAlerts = $grpc.ClientMethod<$0.WatchLossLimitAlertsRequest, $0.LossLimitAlert>(
       '/kdo.v1.fund.FundService/WatchLossLimitAlerts',
       ($0.WatchLossLimitAlertsRequest value) => value.writeToBuffer(),
@@ -114,20 +114,20 @@ abstract class FundServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListFundsRequest.fromBuffer(value),
         ($0.ListFundsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsesponse>(
+    $addMethod($grpc.ServiceMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
         'ListFundTradingSnapshots',
         listFundTradingSnapshots_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.ListFundTradingSnapshotsRequest.fromBuffer(value),
-        ($0.ListFundTradingSnapshotsesponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsesponse>(
-        'StreamFunTradingSnapshots',
-        streamFunTradingSnapshots_Pre,
+        ($0.ListFundTradingSnapshotsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
+        'StreamFundTradingSnapshots',
+        streamFundTradingSnapshots_Pre,
         false,
         true,
         ($core.List<$core.int> value) => $0.ListFundTradingSnapshotsRequest.fromBuffer(value),
-        ($0.ListFundTradingSnapshotsesponse value) => value.writeToBuffer()));
+        ($0.ListFundTradingSnapshotsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.WatchLossLimitAlertsRequest, $0.LossLimitAlert>(
         'WatchLossLimitAlerts',
         watchLossLimitAlerts_Pre,
@@ -155,17 +155,17 @@ abstract class FundServiceBase extends $grpc.Service {
 
   $async.Future<$0.ListFundsResponse> listFunds($grpc.ServiceCall call, $0.ListFundsRequest request);
 
-  $async.Future<$0.ListFundTradingSnapshotsesponse> listFundTradingSnapshots_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundTradingSnapshotsRequest> $request) async {
+  $async.Future<$0.ListFundTradingSnapshotsResponse> listFundTradingSnapshots_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundTradingSnapshotsRequest> $request) async {
     return listFundTradingSnapshots($call, await $request);
   }
 
-  $async.Future<$0.ListFundTradingSnapshotsesponse> listFundTradingSnapshots($grpc.ServiceCall call, $0.ListFundTradingSnapshotsRequest request);
+  $async.Future<$0.ListFundTradingSnapshotsResponse> listFundTradingSnapshots($grpc.ServiceCall call, $0.ListFundTradingSnapshotsRequest request);
 
-  $async.Stream<$0.ListFundTradingSnapshotsesponse> streamFunTradingSnapshots_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundTradingSnapshotsRequest> $request) async* {
-    yield* streamFunTradingSnapshots($call, await $request);
+  $async.Stream<$0.ListFundTradingSnapshotsResponse> streamFundTradingSnapshots_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundTradingSnapshotsRequest> $request) async* {
+    yield* streamFundTradingSnapshots($call, await $request);
   }
 
-  $async.Stream<$0.ListFundTradingSnapshotsesponse> streamFunTradingSnapshots($grpc.ServiceCall call, $0.ListFundTradingSnapshotsRequest request);
+  $async.Stream<$0.ListFundTradingSnapshotsResponse> streamFundTradingSnapshots($grpc.ServiceCall call, $0.ListFundTradingSnapshotsRequest request);
 
   $async.Stream<$0.LossLimitAlert> watchLossLimitAlerts_Pre($grpc.ServiceCall $call, $async.Future<$0.WatchLossLimitAlertsRequest> $request) async* {
     yield* watchLossLimitAlerts($call, await $request);

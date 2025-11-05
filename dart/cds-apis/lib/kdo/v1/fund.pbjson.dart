@@ -310,20 +310,20 @@ final $typed_data.Uint8List listFundTradingSnapshotsRequestDescriptor = $convert
     'Ch9MaXN0RnVuZFRyYWRpbmdTbmFwc2hvdHNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QR'
     'YKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhYKBmZpbHRlchgCIAEoCVIGZmlsdGVy');
 
-@$core.Deprecated('Use listFundTradingSnapshotsesponseDescriptor instead')
-const ListFundTradingSnapshotsesponse$json = {
-  '1': 'ListFundTradingSnapshotsesponse',
+@$core.Deprecated('Use listFundTradingSnapshotsResponseDescriptor instead')
+const ListFundTradingSnapshotsResponse$json = {
+  '1': 'ListFundTradingSnapshotsResponse',
   '2': [
     {'1': 'snapshots', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundTrading', '10': 'snapshots'},
     {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
-/// Descriptor for `ListFundTradingSnapshotsesponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listFundTradingSnapshotsesponseDescriptor = $convert.base64Decode(
-    'Ch9MaXN0RnVuZFRyYWRpbmdTbmFwc2hvdHNlc3BvbnNlEjYKCXNuYXBzaG90cxgBIAMoCzIYLm'
-    'tkby52MS5mdW5kLkZ1bmRUcmFkaW5nUglzbmFwc2hvdHMSJgoPbmV4dF9wYWdlX3Rva2VuGAIg'
-    'ASgJUg1uZXh0UGFnZVRva2Vu');
+/// Descriptor for `ListFundTradingSnapshotsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundTradingSnapshotsResponseDescriptor = $convert.base64Decode(
+    'CiBMaXN0RnVuZFRyYWRpbmdTbmFwc2hvdHNSZXNwb25zZRI2CglzbmFwc2hvdHMYASADKAsyGC'
+    '5rZG8udjEuZnVuZC5GdW5kVHJhZGluZ1IJc25hcHNob3RzEiYKD25leHRfcGFnZV90b2tlbhgC'
+    'IAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
 @$core.Deprecated('Use watchLossLimitAlertsRequestDescriptor instead')
 const WatchLossLimitAlertsRequest$json = {

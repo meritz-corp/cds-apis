@@ -224,10 +224,10 @@ func local_request_FundService_ListFundTradingSnapshots_0(ctx context.Context, m
 }
 
 var (
-	filter_FundService_StreamFunTradingSnapshots_0 = &utilities.DoubleArray{Encoding: map[string]int{"fund": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_FundService_StreamFundTradingSnapshots_0 = &utilities.DoubleArray{Encoding: map[string]int{"fund": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
-func request_FundService_StreamFunTradingSnapshots_0(ctx context.Context, marshaler runtime.Marshaler, client FundServiceClient, req *http.Request, pathParams map[string]string) (FundService_StreamFunTradingSnapshotsClient, runtime.ServerMetadata, error) {
+func request_FundService_StreamFundTradingSnapshots_0(ctx context.Context, marshaler runtime.Marshaler, client FundServiceClient, req *http.Request, pathParams map[string]string) (FundService_StreamFundTradingSnapshotsClient, runtime.ServerMetadata, error) {
 	var protoReq ListFundTradingSnapshotsRequest
 	var metadata runtime.ServerMetadata
 
@@ -251,11 +251,11 @@ func request_FundService_StreamFunTradingSnapshots_0(ctx context.Context, marsha
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_FundService_StreamFunTradingSnapshots_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_FundService_StreamFundTradingSnapshots_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	stream, err := client.StreamFunTradingSnapshots(ctx, &protoReq)
+	stream, err := client.StreamFundTradingSnapshots(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -390,7 +390,7 @@ func RegisterFundServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_FundService_StreamFunTradingSnapshots_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_FundService_StreamFundTradingSnapshots_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -533,25 +533,25 @@ func RegisterFundServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_FundService_StreamFunTradingSnapshots_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_FundService_StreamFundTradingSnapshots_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.fund.FundService/StreamFunTradingSnapshots", runtime.WithHTTPPathPattern("/v1/{fund=funds/*}/trading_snapshot:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.fund.FundService/StreamFundTradingSnapshots", runtime.WithHTTPPathPattern("/v1/{fund=funds/*}/trading_snapshot:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_FundService_StreamFunTradingSnapshots_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_FundService_StreamFundTradingSnapshots_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_FundService_StreamFunTradingSnapshots_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_FundService_StreamFundTradingSnapshots_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -589,7 +589,7 @@ var (
 
 	pattern_FundService_ListFundTradingSnapshots_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "funds", "fund", "trading_snapshot"}, ""))
 
-	pattern_FundService_StreamFunTradingSnapshots_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "funds", "fund", "trading_snapshot"}, "stream"))
+	pattern_FundService_StreamFundTradingSnapshots_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "funds", "fund", "trading_snapshot"}, "stream"))
 
 	pattern_FundService_WatchLossLimitAlerts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "funds", "fund"}, "watch-loss-limit-alerts"))
 )
@@ -603,7 +603,7 @@ var (
 
 	forward_FundService_ListFundTradingSnapshots_0 = runtime.ForwardResponseMessage
 
-	forward_FundService_StreamFunTradingSnapshots_0 = runtime.ForwardResponseStream
+	forward_FundService_StreamFundTradingSnapshots_0 = runtime.ForwardResponseStream
 
 	forward_FundService_WatchLossLimitAlerts_0 = runtime.ForwardResponseStream
 )

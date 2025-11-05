@@ -1342,8 +1342,8 @@ class ListFundTradingSnapshotsRequest extends $pb.GeneratedMessage {
   void clearFilter() => $_clearField(2);
 }
 
-class ListFundTradingSnapshotsesponse extends $pb.GeneratedMessage {
-  factory ListFundTradingSnapshotsesponse({
+class ListFundTradingSnapshotsResponse extends $pb.GeneratedMessage {
+  factory ListFundTradingSnapshotsResponse({
     $core.Iterable<FundTrading>? snapshots,
     $core.String? nextPageToken,
   }) {
@@ -1353,33 +1353,33 @@ class ListFundTradingSnapshotsesponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  ListFundTradingSnapshotsesponse._();
+  ListFundTradingSnapshotsResponse._();
 
-  factory ListFundTradingSnapshotsesponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListFundTradingSnapshotsesponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListFundTradingSnapshotsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListFundTradingSnapshotsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundTradingSnapshotsesponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundTradingSnapshotsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
     ..pc<FundTrading>(1, _omitFieldNames ? '' : 'snapshots', $pb.PbFieldType.PM, subBuilder: FundTrading.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListFundTradingSnapshotsesponse clone() => ListFundTradingSnapshotsesponse()..mergeFromMessage(this);
+  ListFundTradingSnapshotsResponse clone() => ListFundTradingSnapshotsResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListFundTradingSnapshotsesponse copyWith(void Function(ListFundTradingSnapshotsesponse) updates) => super.copyWith((message) => updates(message as ListFundTradingSnapshotsesponse)) as ListFundTradingSnapshotsesponse;
+  ListFundTradingSnapshotsResponse copyWith(void Function(ListFundTradingSnapshotsResponse) updates) => super.copyWith((message) => updates(message as ListFundTradingSnapshotsResponse)) as ListFundTradingSnapshotsResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListFundTradingSnapshotsesponse create() => ListFundTradingSnapshotsesponse._();
+  static ListFundTradingSnapshotsResponse create() => ListFundTradingSnapshotsResponse._();
   @$core.override
-  ListFundTradingSnapshotsesponse createEmptyInstance() => create();
-  static $pb.PbList<ListFundTradingSnapshotsesponse> createRepeated() => $pb.PbList<ListFundTradingSnapshotsesponse>();
+  ListFundTradingSnapshotsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListFundTradingSnapshotsResponse> createRepeated() => $pb.PbList<ListFundTradingSnapshotsResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListFundTradingSnapshotsesponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundTradingSnapshotsesponse>(create);
-  static ListFundTradingSnapshotsesponse? _defaultInstance;
+  static ListFundTradingSnapshotsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundTradingSnapshotsResponse>(create);
+  static ListFundTradingSnapshotsResponse? _defaultInstance;
 
   /// 펀드 한도 목록
   @$pb.TagNumber(1)

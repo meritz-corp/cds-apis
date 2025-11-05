@@ -38,7 +38,7 @@ service FundService {
     option (google.api.method_signature) = "";
   }
 
-  rpc ListFundTradingSnapshots(ListFundTradingSnapshotsRequest) returns (ListFundTradingSnapshotsesponse) {
+  rpc ListFundTradingSnapshots(ListFundTradingSnapshotsRequest) returns (ListFundTradingSnapshotsResponse) {
     option (google.api.http) = {
       get: "/v1/{fund=funds/*}/trading_snapshot"
     };
@@ -46,7 +46,7 @@ service FundService {
   }
 
 
-  rpc StreamFunTradingSnapshots(ListFundTradingSnapshotsRequest) returns (stream ListFundTradingSnapshotsesponse) {
+  rpc StreamFundTradingSnapshots(ListFundTradingSnapshotsRequest) returns (stream ListFundTradingSnapshotsResponse) {
     option (google.api.http) = {
       get: "/v1/{fund=funds/*}/trading_snapshot:stream"
     };
@@ -274,7 +274,7 @@ message ListFundTradingSnapshotsRequest {
   string filter = 2;
 }
 
-message ListFundTradingSnapshotsesponse {
+message ListFundTradingSnapshotsResponse {
   // 펀드 한도 목록
   repeated FundTrading snapshots = 1;
 
