@@ -20,15 +20,17 @@ class ProductType extends $pb.ProtobufEnum {
   static const ProductType PRODUCT_TYPE_STOCK = ProductType._(1, _omitEnumNames ? '' : 'PRODUCT_TYPE_STOCK');
   static const ProductType PRODUCT_TYPE_FUTURES = ProductType._(2, _omitEnumNames ? '' : 'PRODUCT_TYPE_FUTURES');
   static const ProductType PRODUCT_TYPE_ETF = ProductType._(3, _omitEnumNames ? '' : 'PRODUCT_TYPE_ETF');
+  static const ProductType PRODUCT_TYPE_CASH = ProductType._(4, _omitEnumNames ? '' : 'PRODUCT_TYPE_CASH');
 
   static const $core.List<ProductType> values = <ProductType> [
     PRODUCT_TYPE_UNSPECIFIED,
     PRODUCT_TYPE_STOCK,
     PRODUCT_TYPE_FUTURES,
     PRODUCT_TYPE_ETF,
+    PRODUCT_TYPE_CASH,
   ];
 
-  static final $core.List<ProductType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static final $core.List<ProductType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
   static ProductType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const ProductType._(super.value, super.name);

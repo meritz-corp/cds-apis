@@ -177,6 +177,7 @@ pub enum ProductType {
     Stock = 1,
     Futures = 2,
     Etf = 3,
+    Cash = 4,
 }
 impl ProductType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -189,6 +190,7 @@ impl ProductType {
             ProductType::Stock => "PRODUCT_TYPE_STOCK",
             ProductType::Futures => "PRODUCT_TYPE_FUTURES",
             ProductType::Etf => "PRODUCT_TYPE_ETF",
+            ProductType::Cash => "PRODUCT_TYPE_CASH",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -198,6 +200,7 @@ impl ProductType {
             "PRODUCT_TYPE_STOCK" => Some(Self::Stock),
             "PRODUCT_TYPE_FUTURES" => Some(Self::Futures),
             "PRODUCT_TYPE_ETF" => Some(Self::Etf),
+            "PRODUCT_TYPE_CASH" => Some(Self::Cash),
             _ => None,
         }
     }

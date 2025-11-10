@@ -22,6 +22,7 @@ const ProductType$json = {
     {'1': 'PRODUCT_TYPE_STOCK', '2': 1},
     {'1': 'PRODUCT_TYPE_FUTURES', '2': 2},
     {'1': 'PRODUCT_TYPE_ETF', '2': 3},
+    {'1': 'PRODUCT_TYPE_CASH', '2': 4},
   ],
 };
 
@@ -29,7 +30,7 @@ const ProductType$json = {
 final $typed_data.Uint8List productTypeDescriptor = $convert.base64Decode(
     'CgtQcm9kdWN0VHlwZRIcChhQUk9EVUNUX1RZUEVfVU5TUEVDSUZJRUQQABIWChJQUk9EVUNUX1'
     'RZUEVfU1RPQ0sQARIYChRQUk9EVUNUX1RZUEVfRlVUVVJFUxACEhQKEFBST0RVQ1RfVFlQRV9F'
-    'VEYQAw==');
+    'VEYQAxIVChFQUk9EVUNUX1RZUEVfQ0FTSBAE');
 
 @$core.Deprecated('Use replicationMethodDescriptor instead')
 const ReplicationMethod$json = {
