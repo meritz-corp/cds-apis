@@ -207,9 +207,9 @@ impl ProductType {
 #[repr(i32)]
 pub enum ReplicationMethod {
     Unspecified = 0,
-    Physical = 1,
-    Synthetic = 2,
-    FuturesBased = 3,
+    Active = 1,
+    Physical = 2,
+    Synthetic = 3,
 }
 impl ReplicationMethod {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -219,18 +219,18 @@ impl ReplicationMethod {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             ReplicationMethod::Unspecified => "REPLICATION_METHOD_UNSPECIFIED",
+            ReplicationMethod::Active => "REPLICATION_METHOD_ACTIVE",
             ReplicationMethod::Physical => "REPLICATION_METHOD_PHYSICAL",
             ReplicationMethod::Synthetic => "REPLICATION_METHOD_SYNTHETIC",
-            ReplicationMethod::FuturesBased => "REPLICATION_METHOD_FUTURES_BASED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "REPLICATION_METHOD_UNSPECIFIED" => Some(Self::Unspecified),
+            "REPLICATION_METHOD_ACTIVE" => Some(Self::Active),
             "REPLICATION_METHOD_PHYSICAL" => Some(Self::Physical),
             "REPLICATION_METHOD_SYNTHETIC" => Some(Self::Synthetic),
-            "REPLICATION_METHOD_FUTURES_BASED" => Some(Self::FuturesBased),
             _ => None,
         }
     }

@@ -1495,9 +1495,9 @@ impl serde::Serialize for ReplicationMethod {
     {
         let variant = match self {
             Self::Unspecified => "REPLICATION_METHOD_UNSPECIFIED",
+            Self::Active => "REPLICATION_METHOD_ACTIVE",
             Self::Physical => "REPLICATION_METHOD_PHYSICAL",
             Self::Synthetic => "REPLICATION_METHOD_SYNTHETIC",
-            Self::FuturesBased => "REPLICATION_METHOD_FUTURES_BASED",
         };
         serializer.serialize_str(variant)
     }
@@ -1510,9 +1510,9 @@ impl<'de> serde::Deserialize<'de> for ReplicationMethod {
     {
         const FIELDS: &[&str] = &[
             "REPLICATION_METHOD_UNSPECIFIED",
+            "REPLICATION_METHOD_ACTIVE",
             "REPLICATION_METHOD_PHYSICAL",
             "REPLICATION_METHOD_SYNTHETIC",
-            "REPLICATION_METHOD_FUTURES_BASED",
         ];
 
         struct GeneratedVisitor;
@@ -1554,9 +1554,9 @@ impl<'de> serde::Deserialize<'de> for ReplicationMethod {
             {
                 match value {
                     "REPLICATION_METHOD_UNSPECIFIED" => Ok(ReplicationMethod::Unspecified),
+                    "REPLICATION_METHOD_ACTIVE" => Ok(ReplicationMethod::Active),
                     "REPLICATION_METHOD_PHYSICAL" => Ok(ReplicationMethod::Physical),
                     "REPLICATION_METHOD_SYNTHETIC" => Ok(ReplicationMethod::Synthetic),
-                    "REPLICATION_METHOD_FUTURES_BASED" => Ok(ReplicationMethod::FuturesBased),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

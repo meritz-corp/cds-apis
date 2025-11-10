@@ -255,9 +255,9 @@
       "type": "string",
       "enum": [
         "REPLICATION_METHOD_UNSPECIFIED",
+        "REPLICATION_METHOD_ACTIVE",
         "REPLICATION_METHOD_PHYSICAL",
-        "REPLICATION_METHOD_SYNTHETIC",
-        "REPLICATION_METHOD_FUTURES_BASED"
+        "REPLICATION_METHOD_SYNTHETIC"
       ],
       "default": "REPLICATION_METHOD_UNSPECIFIED",
       "title": "복제 방법"

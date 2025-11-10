@@ -36,17 +36,17 @@ const ReplicationMethod$json = {
   '1': 'ReplicationMethod',
   '2': [
     {'1': 'REPLICATION_METHOD_UNSPECIFIED', '2': 0},
-    {'1': 'REPLICATION_METHOD_PHYSICAL', '2': 1},
-    {'1': 'REPLICATION_METHOD_SYNTHETIC', '2': 2},
-    {'1': 'REPLICATION_METHOD_FUTURES_BASED', '2': 3},
+    {'1': 'REPLICATION_METHOD_ACTIVE', '2': 1},
+    {'1': 'REPLICATION_METHOD_PHYSICAL', '2': 2},
+    {'1': 'REPLICATION_METHOD_SYNTHETIC', '2': 3},
   ],
 };
 
 /// Descriptor for `ReplicationMethod`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List replicationMethodDescriptor = $convert.base64Decode(
     'ChFSZXBsaWNhdGlvbk1ldGhvZBIiCh5SRVBMSUNBVElPTl9NRVRIT0RfVU5TUEVDSUZJRUQQAB'
-    'IfChtSRVBMSUNBVElPTl9NRVRIT0RfUEhZU0lDQUwQARIgChxSRVBMSUNBVElPTl9NRVRIT0Rf'
-    'U1lOVEhFVElDEAISJAogUkVQTElDQVRJT05fTUVUSE9EX0ZVVFVSRVNfQkFTRUQQAw==');
+    'IdChlSRVBMSUNBVElPTl9NRVRIT0RfQUNUSVZFEAESHwobUkVQTElDQVRJT05fTUVUSE9EX1BI'
+    'WVNJQ0FMEAISIAocUkVQTElDQVRJT05fTUVUSE9EX1NZTlRIRVRJQxAD');
 
 @$core.Deprecated('Use etfDescriptor instead')
 const Etf$json = {
