@@ -9,27 +9,113 @@ pub struct Etf {
     /// ETF 심볼 (ISIN 코드)
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
-    /// ETF 이름
+    /// ETF 코드
     #[prost(string, tag="3")]
+    pub code: ::prost::alloc::string::String,
+    /// ETF 이름
+    #[prost(string, tag="4")]
     pub name: ::prost::alloc::string::String,
     /// 마지막 가격
-    #[prost(string, tag="4")]
+    #[prost(string, tag="5")]
+    pub prev_close: ::prost::alloc::string::String,
+    #[prost(string, tag="6")]
     pub last_price: ::prost::alloc::string::String,
+    #[prost(string, tag="7")]
+    pub prev_nav: ::prost::alloc::string::String,
+    #[prost(string, tag="8")]
+    pub last_inav: ::prost::alloc::string::String,
     /// PDF 구성 종목 목록
-    #[prost(map="string, message", tag="5")]
+    #[prost(map="string, message", tag="10")]
     pub constituents: ::std::collections::HashMap<::prost::alloc::string::String, EtfPdfConstituent>,
-    /// NAV 정보
-    #[prost(message, optional, tag="6")]
-    pub nav: ::core::option::Option<EtfNav>,
     /// 설정 단위
-    #[prost(int64, tag="8")]
+    #[prost(int64, tag="11")]
     pub creation_unit: i64,
-    /// Tick 크기 (원 단위, i64)
-    #[prost(int64, tag="9")]
-    pub tick_size: i64,
     /// 복제 방법
-    #[prost(enumeration="ReplicationMethod", tag="10")]
+    #[prost(enumeration="ReplicationMethod", tag="12")]
     pub replication_method: i32,
+    /// Tick 크기 (원 단위, i64)
+    #[prost(int64, tag="13")]
+    pub tick_size: i64,
+    /// Tick 크기 (원 단위, i64)
+    #[prost(int64, tag="14")]
+    pub listed_quantity: i64,
+    #[prost(float, tag="15")]
+    pub leverage: f32,
+    #[prost(bool, tag="16")]
+    pub tradable: bool,
+    #[prost(bool, tag="17")]
+    pub short_sellable: bool,
+    #[prost(bool, tag="23")]
+    pub cash_creditable: bool,
+    #[prost(int64, tag="24")]
+    pub cash_creation_amount: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfConstituent {
+    #[prost(oneof="etf_constituent::ConstituentType", tags="1, 2, 3")]
+    pub constituent_type: ::core::option::Option<etf_constituent::ConstituentType>,
+}
+/// Nested message and enum types in `EtfConstituent`.
+pub mod etf_constituent {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum ConstituentType {
+        #[prost(message, tag="1")]
+        Stock(super::StockConstituent),
+        #[prost(message, tag="2")]
+        Futures(super::FuturesConstituent),
+        #[prost(message, tag="3")]
+        Cash(super::CashConstituent),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StockConstituent {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub prev_close: ::prost::alloc::string::String,
+    #[prost(string, tag="3")]
+    pub last_price: ::prost::alloc::string::String,
+    #[prost(int64, tag="4")]
+    pub quantity: i64,
+    #[prost(int64, tag="5")]
+    pub last_valuation: i64,
+    #[prost(int64, tag="6")]
+    pub notional_amount: i64,
+    #[prost(uint32, tag="7")]
+    pub num_members: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FuturesConstituent {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub prev_close: ::prost::alloc::string::String,
+    #[prost(string, tag="3")]
+    pub last_price: ::prost::alloc::string::String,
+    #[prost(float, tag="4")]
+    pub quantity: f32,
+    #[prost(double, tag="5")]
+    pub multiple: f64,
+    #[prost(int64, tag="6")]
+    pub last_valuation: i64,
+    #[prost(int64, tag="7")]
+    pub notional_amount: i64,
+    #[prost(uint32, tag="8")]
+    pub num_members: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CashConstituent {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(int64, tag="2")]
+    pub prev_valuation: i64,
+    #[prost(uint32, tag="3")]
+    pub num_members: u32,
 }
 /// PDF 구성 종목
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -48,69 +134,6 @@ pub struct EtfPdfConstituent {
     pub product_type: i32,
     /// 구성 수량 (선물 숏의 경우 음수)
     #[prost(int64, tag="4")]
-    pub quantity: i64,
-}
-/// ETF NAV 정보
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfNav {
-    #[prost(oneof="etf_nav::NavType", tags="1, 2")]
-    pub nav_type: ::core::option::Option<etf_nav::NavType>,
-}
-/// Nested message and enum types in `EtfNav`.
-pub mod etf_nav {
-    #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum NavType {
-        #[prost(message, tag="1")]
-        Physical(super::PhysicalNav),
-        #[prost(message, tag="2")]
-        FuturesBased(super::FuturesBasedNav),
-    }
-}
-/// 현물 기반 NAV
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PhysicalNav {
-    /// 마지막 NAV (원 단위, i64)
-    #[prost(string, tag="1")]
-    pub last_nav: ::prost::alloc::string::String,
-    /// 구성종목별 가격 정보
-    #[prost(map="string, message", tag="2")]
-    pub constituents: ::std::collections::HashMap<::prost::alloc::string::String, ConstituentPrice>,
-}
-/// 선물 기반 NAV
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FuturesBasedNav {
-    /// 마지막 NAV (원 단위, i64)
-    #[prost(string, tag="1")]
-    pub last_nav: ::prost::alloc::string::String,
-    /// 전일 NAV
-    #[prost(string, tag="2")]
-    pub prior_day_nav: ::prost::alloc::string::String,
-    /// 레버리지 배수
-    #[prost(double, tag="3")]
-    pub leverage_multiplier: f64,
-    /// 선물 심볼
-    #[prost(string, tag="4")]
-    pub futures_symbol: ::prost::alloc::string::String,
-    /// 선물 전일 가격
-    #[prost(string, tag="5")]
-    pub futures_prior_day_price: ::prost::alloc::string::String,
-    /// 선물 현재 가격
-    #[prost(string, tag="6")]
-    pub futures_last_price: ::prost::alloc::string::String,
-}
-/// 구성종목 가격 정보
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ConstituentPrice {
-    /// 마지막 가격 (원 단위, i64)
-    #[prost(string, tag="1")]
-    pub last_price: ::prost::alloc::string::String,
-    /// 구성 수량
-    #[prost(int64, tag="2")]
     pub quantity: i64,
 }
 // ========== Request/Response Messages ==========

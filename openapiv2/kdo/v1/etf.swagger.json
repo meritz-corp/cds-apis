@@ -95,21 +95,6 @@
     }
   },
   "definitions": {
-    "etfConstituentPrice": {
-      "type": "object",
-      "properties": {
-        "lastPrice": {
-          "type": "string",
-          "title": "마지막 가격 (원 단위, i64)"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "구성 수량"
-        }
-      },
-      "title": "구성종목 가격 정보"
-    },
     "etfEtf": {
       "type": "object",
       "properties": {
@@ -122,13 +107,26 @@
           "type": "string",
           "title": "ETF 심볼 (ISIN 코드)"
         },
+        "code": {
+          "type": "string",
+          "title": "ETF 코드"
+        },
         "name": {
           "type": "string",
           "title": "ETF 이름"
         },
-        "lastPrice": {
+        "prevClose": {
           "type": "string",
           "title": "마지막 가격"
+        },
+        "lastPrice": {
+          "type": "string"
+        },
+        "prevNav": {
+          "type": "string"
+        },
+        "lastInav": {
+          "type": "string"
         },
         "constituents": {
           "type": "object",
@@ -137,23 +135,41 @@
           },
           "title": "PDF 구성 종목 목록"
         },
-        "nav": {
-          "$ref": "#/definitions/v1etfEtfNav",
-          "title": "NAV 정보"
-        },
         "creationUnit": {
           "type": "string",
           "format": "int64",
           "title": "설정 단위"
+        },
+        "replicationMethod": {
+          "$ref": "#/definitions/v1etfReplicationMethod",
+          "title": "복제 방법"
         },
         "tickSize": {
           "type": "string",
           "format": "int64",
           "title": "Tick 크기 (원 단위, i64)"
         },
-        "replicationMethod": {
-          "$ref": "#/definitions/v1etfReplicationMethod",
-          "title": "복제 방법"
+        "listedQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 크기 (원 단위, i64)"
+        },
+        "leverage": {
+          "type": "number",
+          "format": "float"
+        },
+        "tradable": {
+          "type": "boolean"
+        },
+        "shortSellable": {
+          "type": "boolean"
+        },
+        "cashCreditable": {
+          "type": "boolean"
+        },
+        "cashCreationAmount": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -181,37 +197,6 @@
       },
       "title": "PDF 구성 종목"
     },
-    "etfFuturesBasedNav": {
-      "type": "object",
-      "properties": {
-        "lastNav": {
-          "type": "string",
-          "title": "마지막 NAV (원 단위, i64)"
-        },
-        "priorDayNav": {
-          "type": "string",
-          "title": "전일 NAV"
-        },
-        "leverageMultiplier": {
-          "type": "number",
-          "format": "double",
-          "title": "레버리지 배수"
-        },
-        "futuresSymbol": {
-          "type": "string",
-          "title": "선물 심볼"
-        },
-        "futuresPriorDayPrice": {
-          "type": "string",
-          "title": "선물 전일 가격"
-        },
-        "futuresLastPrice": {
-          "type": "string",
-          "title": "선물 현재 가격"
-        }
-      },
-      "title": "선물 기반 NAV"
-    },
     "etfListEtfsResponse": {
       "type": "object",
       "properties": {
@@ -227,23 +212,6 @@
           "title": "다음 페이지 토큰"
         }
       }
-    },
-    "etfPhysicalNav": {
-      "type": "object",
-      "properties": {
-        "lastNav": {
-          "type": "string",
-          "title": "마지막 NAV (원 단위, i64)"
-        },
-        "constituents": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/etfConstituentPrice"
-          },
-          "title": "구성종목별 가격 정보"
-        }
-      },
-      "title": "현물 기반 NAV"
     },
     "etfProductType": {
       "type": "string",
@@ -282,18 +250,6 @@
           }
         }
       }
-    },
-    "v1etfEtfNav": {
-      "type": "object",
-      "properties": {
-        "physical": {
-          "$ref": "#/definitions/etfPhysicalNav"
-        },
-        "futuresBased": {
-          "$ref": "#/definitions/etfFuturesBasedNav"
-        }
-      },
-      "title": "ETF NAV 정보"
     },
     "v1etfReplicationMethod": {
       "type": "string",

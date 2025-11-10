@@ -25,24 +25,42 @@ class Etf extends $pb.GeneratedMessage {
   factory Etf({
     $fixnum.Int64? id,
     $core.String? symbol,
+    $core.String? code,
     $core.String? name,
+    $core.String? prevClose,
     $core.String? lastPrice,
+    $core.String? prevNav,
+    $core.String? lastInav,
     $core.Iterable<$core.MapEntry<$core.String, EtfPdfConstituent>>? constituents,
-    EtfNav? nav,
     $fixnum.Int64? creationUnit,
-    $fixnum.Int64? tickSize,
     ReplicationMethod? replicationMethod,
+    $fixnum.Int64? tickSize,
+    $fixnum.Int64? listedQuantity,
+    $core.double? leverage,
+    $core.bool? tradable,
+    $core.bool? shortSellable,
+    $core.bool? cashCreditable,
+    $fixnum.Int64? cashCreationAmount,
   }) {
     final result = create();
     if (id != null) result.id = id;
     if (symbol != null) result.symbol = symbol;
+    if (code != null) result.code = code;
     if (name != null) result.name = name;
+    if (prevClose != null) result.prevClose = prevClose;
     if (lastPrice != null) result.lastPrice = lastPrice;
+    if (prevNav != null) result.prevNav = prevNav;
+    if (lastInav != null) result.lastInav = lastInav;
     if (constituents != null) result.constituents.addEntries(constituents);
-    if (nav != null) result.nav = nav;
     if (creationUnit != null) result.creationUnit = creationUnit;
-    if (tickSize != null) result.tickSize = tickSize;
     if (replicationMethod != null) result.replicationMethod = replicationMethod;
+    if (tickSize != null) result.tickSize = tickSize;
+    if (listedQuantity != null) result.listedQuantity = listedQuantity;
+    if (leverage != null) result.leverage = leverage;
+    if (tradable != null) result.tradable = tradable;
+    if (shortSellable != null) result.shortSellable = shortSellable;
+    if (cashCreditable != null) result.cashCreditable = cashCreditable;
+    if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
     return result;
   }
 
@@ -54,13 +72,22 @@ class Etf extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Etf', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..aOS(3, _omitFieldNames ? '' : 'name')
-    ..aOS(4, _omitFieldNames ? '' : 'lastPrice')
-    ..m<$core.String, EtfPdfConstituent>(5, _omitFieldNames ? '' : 'constituents', entryClassName: 'Etf.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
-    ..aOM<EtfNav>(6, _omitFieldNames ? '' : 'nav', subBuilder: EtfNav.create)
-    ..aInt64(8, _omitFieldNames ? '' : 'creationUnit')
-    ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
-    ..e<ReplicationMethod>(10, _omitFieldNames ? '' : 'replicationMethod', $pb.PbFieldType.OE, defaultOrMaker: ReplicationMethod.REPLICATION_METHOD_UNSPECIFIED, valueOf: ReplicationMethod.valueOf, enumValues: ReplicationMethod.values)
+    ..aOS(3, _omitFieldNames ? '' : 'code')
+    ..aOS(4, _omitFieldNames ? '' : 'name')
+    ..aOS(5, _omitFieldNames ? '' : 'prevClose')
+    ..aOS(6, _omitFieldNames ? '' : 'lastPrice')
+    ..aOS(7, _omitFieldNames ? '' : 'prevNav')
+    ..aOS(8, _omitFieldNames ? '' : 'lastInav')
+    ..m<$core.String, EtfPdfConstituent>(10, _omitFieldNames ? '' : 'constituents', entryClassName: 'Etf.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
+    ..aInt64(11, _omitFieldNames ? '' : 'creationUnit')
+    ..e<ReplicationMethod>(12, _omitFieldNames ? '' : 'replicationMethod', $pb.PbFieldType.OE, defaultOrMaker: ReplicationMethod.REPLICATION_METHOD_UNSPECIFIED, valueOf: ReplicationMethod.valueOf, enumValues: ReplicationMethod.values)
+    ..aInt64(13, _omitFieldNames ? '' : 'tickSize')
+    ..aInt64(14, _omitFieldNames ? '' : 'listedQuantity')
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'leverage', $pb.PbFieldType.OF)
+    ..aOB(16, _omitFieldNames ? '' : 'tradable')
+    ..aOB(17, _omitFieldNames ? '' : 'shortSellable')
+    ..aOB(23, _omitFieldNames ? '' : 'cashCreditable')
+    ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
     ..hasRequiredFields = false
   ;
 
@@ -101,71 +128,562 @@ class Etf extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearSymbol() => $_clearField(2);
 
+  /// ETF 코드
+  @$pb.TagNumber(3)
+  $core.String get code => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set code($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCode() => $_clearField(3);
+
   /// ETF 이름
-  @$pb.TagNumber(3)
-  $core.String get name => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set name($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasName() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearName() => $_clearField(3);
+  @$pb.TagNumber(4)
+  $core.String get name => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set name($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearName() => $_clearField(4);
 
   /// 마지막 가격
-  @$pb.TagNumber(4)
-  $core.String get lastPrice => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set lastPrice($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasLastPrice() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearLastPrice() => $_clearField(4);
+  @$pb.TagNumber(5)
+  $core.String get prevClose => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set prevClose($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPrevClose() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPrevClose() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get lastPrice => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set lastPrice($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasLastPrice() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearLastPrice() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get prevNav => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set prevNav($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasPrevNav() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPrevNav() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get lastInav => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set lastInav($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasLastInav() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearLastInav() => $_clearField(8);
 
   /// PDF 구성 종목 목록
-  @$pb.TagNumber(5)
-  $pb.PbMap<$core.String, EtfPdfConstituent> get constituents => $_getMap(4);
-
-  /// NAV 정보
-  @$pb.TagNumber(6)
-  EtfNav get nav => $_getN(5);
-  @$pb.TagNumber(6)
-  set nav(EtfNav value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasNav() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearNav() => $_clearField(6);
-  @$pb.TagNumber(6)
-  EtfNav ensureNav() => $_ensure(5);
+  @$pb.TagNumber(10)
+  $pb.PbMap<$core.String, EtfPdfConstituent> get constituents => $_getMap(8);
 
   /// 설정 단위
-  @$pb.TagNumber(8)
-  $fixnum.Int64 get creationUnit => $_getI64(6);
-  @$pb.TagNumber(8)
-  set creationUnit($fixnum.Int64 value) => $_setInt64(6, value);
-  @$pb.TagNumber(8)
-  $core.bool hasCreationUnit() => $_has(6);
-  @$pb.TagNumber(8)
-  void clearCreationUnit() => $_clearField(8);
-
-  /// Tick 크기 (원 단위, i64)
-  @$pb.TagNumber(9)
-  $fixnum.Int64 get tickSize => $_getI64(7);
-  @$pb.TagNumber(9)
-  set tickSize($fixnum.Int64 value) => $_setInt64(7, value);
-  @$pb.TagNumber(9)
-  $core.bool hasTickSize() => $_has(7);
-  @$pb.TagNumber(9)
-  void clearTickSize() => $_clearField(9);
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get creationUnit => $_getI64(9);
+  @$pb.TagNumber(11)
+  set creationUnit($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(11)
+  $core.bool hasCreationUnit() => $_has(9);
+  @$pb.TagNumber(11)
+  void clearCreationUnit() => $_clearField(11);
 
   /// 복제 방법
-  @$pb.TagNumber(10)
-  ReplicationMethod get replicationMethod => $_getN(8);
-  @$pb.TagNumber(10)
-  set replicationMethod(ReplicationMethod value) => $_setField(10, value);
-  @$pb.TagNumber(10)
-  $core.bool hasReplicationMethod() => $_has(8);
-  @$pb.TagNumber(10)
-  void clearReplicationMethod() => $_clearField(10);
+  @$pb.TagNumber(12)
+  ReplicationMethod get replicationMethod => $_getN(10);
+  @$pb.TagNumber(12)
+  set replicationMethod(ReplicationMethod value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasReplicationMethod() => $_has(10);
+  @$pb.TagNumber(12)
+  void clearReplicationMethod() => $_clearField(12);
+
+  /// Tick 크기 (원 단위, i64)
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get tickSize => $_getI64(11);
+  @$pb.TagNumber(13)
+  set tickSize($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(13)
+  $core.bool hasTickSize() => $_has(11);
+  @$pb.TagNumber(13)
+  void clearTickSize() => $_clearField(13);
+
+  /// Tick 크기 (원 단위, i64)
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get listedQuantity => $_getI64(12);
+  @$pb.TagNumber(14)
+  set listedQuantity($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(14)
+  $core.bool hasListedQuantity() => $_has(12);
+  @$pb.TagNumber(14)
+  void clearListedQuantity() => $_clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.double get leverage => $_getN(13);
+  @$pb.TagNumber(15)
+  set leverage($core.double value) => $_setFloat(13, value);
+  @$pb.TagNumber(15)
+  $core.bool hasLeverage() => $_has(13);
+  @$pb.TagNumber(15)
+  void clearLeverage() => $_clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.bool get tradable => $_getBF(14);
+  @$pb.TagNumber(16)
+  set tradable($core.bool value) => $_setBool(14, value);
+  @$pb.TagNumber(16)
+  $core.bool hasTradable() => $_has(14);
+  @$pb.TagNumber(16)
+  void clearTradable() => $_clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.bool get shortSellable => $_getBF(15);
+  @$pb.TagNumber(17)
+  set shortSellable($core.bool value) => $_setBool(15, value);
+  @$pb.TagNumber(17)
+  $core.bool hasShortSellable() => $_has(15);
+  @$pb.TagNumber(17)
+  void clearShortSellable() => $_clearField(17);
+
+  @$pb.TagNumber(23)
+  $core.bool get cashCreditable => $_getBF(16);
+  @$pb.TagNumber(23)
+  set cashCreditable($core.bool value) => $_setBool(16, value);
+  @$pb.TagNumber(23)
+  $core.bool hasCashCreditable() => $_has(16);
+  @$pb.TagNumber(23)
+  void clearCashCreditable() => $_clearField(23);
+
+  @$pb.TagNumber(24)
+  $fixnum.Int64 get cashCreationAmount => $_getI64(17);
+  @$pb.TagNumber(24)
+  set cashCreationAmount($fixnum.Int64 value) => $_setInt64(17, value);
+  @$pb.TagNumber(24)
+  $core.bool hasCashCreationAmount() => $_has(17);
+  @$pb.TagNumber(24)
+  void clearCashCreationAmount() => $_clearField(24);
+}
+
+enum EtfConstituent_ConstituentType {
+  stock, 
+  futures, 
+  cash, 
+  notSet
+}
+
+class EtfConstituent extends $pb.GeneratedMessage {
+  factory EtfConstituent({
+    StockConstituent? stock,
+    FuturesConstituent? futures,
+    CashConstituent? cash,
+  }) {
+    final result = create();
+    if (stock != null) result.stock = stock;
+    if (futures != null) result.futures = futures;
+    if (cash != null) result.cash = cash;
+    return result;
+  }
+
+  EtfConstituent._();
+
+  factory EtfConstituent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfConstituent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static const $core.Map<$core.int, EtfConstituent_ConstituentType> _EtfConstituent_ConstituentTypeByTag = {
+    1 : EtfConstituent_ConstituentType.stock,
+    2 : EtfConstituent_ConstituentType.futures,
+    3 : EtfConstituent_ConstituentType.cash,
+    0 : EtfConstituent_ConstituentType.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfConstituent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3])
+    ..aOM<StockConstituent>(1, _omitFieldNames ? '' : 'stock', subBuilder: StockConstituent.create)
+    ..aOM<FuturesConstituent>(2, _omitFieldNames ? '' : 'futures', subBuilder: FuturesConstituent.create)
+    ..aOM<CashConstituent>(3, _omitFieldNames ? '' : 'cash', subBuilder: CashConstituent.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfConstituent clone() => EtfConstituent()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfConstituent copyWith(void Function(EtfConstituent) updates) => super.copyWith((message) => updates(message as EtfConstituent)) as EtfConstituent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfConstituent create() => EtfConstituent._();
+  @$core.override
+  EtfConstituent createEmptyInstance() => create();
+  static $pb.PbList<EtfConstituent> createRepeated() => $pb.PbList<EtfConstituent>();
+  @$core.pragma('dart2js:noInline')
+  static EtfConstituent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfConstituent>(create);
+  static EtfConstituent? _defaultInstance;
+
+  EtfConstituent_ConstituentType whichConstituentType() => _EtfConstituent_ConstituentTypeByTag[$_whichOneof(0)]!;
+  void clearConstituentType() => $_clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  StockConstituent get stock => $_getN(0);
+  @$pb.TagNumber(1)
+  set stock(StockConstituent value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStock() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStock() => $_clearField(1);
+  @$pb.TagNumber(1)
+  StockConstituent ensureStock() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  FuturesConstituent get futures => $_getN(1);
+  @$pb.TagNumber(2)
+  set futures(FuturesConstituent value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFutures() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFutures() => $_clearField(2);
+  @$pb.TagNumber(2)
+  FuturesConstituent ensureFutures() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  CashConstituent get cash => $_getN(2);
+  @$pb.TagNumber(3)
+  set cash(CashConstituent value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCash() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCash() => $_clearField(3);
+  @$pb.TagNumber(3)
+  CashConstituent ensureCash() => $_ensure(2);
+}
+
+class StockConstituent extends $pb.GeneratedMessage {
+  factory StockConstituent({
+    $core.String? symbol,
+    $core.String? prevClose,
+    $core.String? lastPrice,
+    $fixnum.Int64? quantity,
+    $fixnum.Int64? lastValuation,
+    $fixnum.Int64? notionalAmount,
+    $core.int? numMembers,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (prevClose != null) result.prevClose = prevClose;
+    if (lastPrice != null) result.lastPrice = lastPrice;
+    if (quantity != null) result.quantity = quantity;
+    if (lastValuation != null) result.lastValuation = lastValuation;
+    if (notionalAmount != null) result.notionalAmount = notionalAmount;
+    if (numMembers != null) result.numMembers = numMembers;
+    return result;
+  }
+
+  StockConstituent._();
+
+  factory StockConstituent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StockConstituent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StockConstituent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'prevClose')
+    ..aOS(3, _omitFieldNames ? '' : 'lastPrice')
+    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'lastValuation')
+    ..aInt64(6, _omitFieldNames ? '' : 'notionalAmount')
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'numMembers', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StockConstituent clone() => StockConstituent()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StockConstituent copyWith(void Function(StockConstituent) updates) => super.copyWith((message) => updates(message as StockConstituent)) as StockConstituent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StockConstituent create() => StockConstituent._();
+  @$core.override
+  StockConstituent createEmptyInstance() => create();
+  static $pb.PbList<StockConstituent> createRepeated() => $pb.PbList<StockConstituent>();
+  @$core.pragma('dart2js:noInline')
+  static StockConstituent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StockConstituent>(create);
+  static StockConstituent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get prevClose => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set prevClose($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPrevClose() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrevClose() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get lastPrice => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set lastPrice($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLastPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastPrice() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get quantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuantity() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get lastValuation => $_getI64(4);
+  @$pb.TagNumber(5)
+  set lastValuation($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasLastValuation() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLastValuation() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get notionalAmount => $_getI64(5);
+  @$pb.TagNumber(6)
+  set notionalAmount($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasNotionalAmount() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearNotionalAmount() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get numMembers => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set numMembers($core.int value) => $_setUnsignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasNumMembers() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearNumMembers() => $_clearField(7);
+}
+
+class FuturesConstituent extends $pb.GeneratedMessage {
+  factory FuturesConstituent({
+    $core.String? symbol,
+    $core.String? prevClose,
+    $core.String? lastPrice,
+    $core.double? quantity,
+    $core.double? multiple,
+    $fixnum.Int64? lastValuation,
+    $fixnum.Int64? notionalAmount,
+    $core.int? numMembers,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (prevClose != null) result.prevClose = prevClose;
+    if (lastPrice != null) result.lastPrice = lastPrice;
+    if (quantity != null) result.quantity = quantity;
+    if (multiple != null) result.multiple = multiple;
+    if (lastValuation != null) result.lastValuation = lastValuation;
+    if (notionalAmount != null) result.notionalAmount = notionalAmount;
+    if (numMembers != null) result.numMembers = numMembers;
+    return result;
+  }
+
+  FuturesConstituent._();
+
+  factory FuturesConstituent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FuturesConstituent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesConstituent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'prevClose')
+    ..aOS(3, _omitFieldNames ? '' : 'lastPrice')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'quantity', $pb.PbFieldType.OF)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'multiple', $pb.PbFieldType.OD)
+    ..aInt64(6, _omitFieldNames ? '' : 'lastValuation')
+    ..aInt64(7, _omitFieldNames ? '' : 'notionalAmount')
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'numMembers', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FuturesConstituent clone() => FuturesConstituent()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FuturesConstituent copyWith(void Function(FuturesConstituent) updates) => super.copyWith((message) => updates(message as FuturesConstituent)) as FuturesConstituent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FuturesConstituent create() => FuturesConstituent._();
+  @$core.override
+  FuturesConstituent createEmptyInstance() => create();
+  static $pb.PbList<FuturesConstituent> createRepeated() => $pb.PbList<FuturesConstituent>();
+  @$core.pragma('dart2js:noInline')
+  static FuturesConstituent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FuturesConstituent>(create);
+  static FuturesConstituent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get prevClose => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set prevClose($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPrevClose() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrevClose() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get lastPrice => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set lastPrice($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLastPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastPrice() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get quantity => $_getN(3);
+  @$pb.TagNumber(4)
+  set quantity($core.double value) => $_setFloat(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuantity() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get multiple => $_getN(4);
+  @$pb.TagNumber(5)
+  set multiple($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMultiple() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMultiple() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get lastValuation => $_getI64(5);
+  @$pb.TagNumber(6)
+  set lastValuation($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasLastValuation() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearLastValuation() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get notionalAmount => $_getI64(6);
+  @$pb.TagNumber(7)
+  set notionalAmount($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasNotionalAmount() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearNotionalAmount() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.int get numMembers => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set numMembers($core.int value) => $_setUnsignedInt32(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasNumMembers() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearNumMembers() => $_clearField(8);
+}
+
+class CashConstituent extends $pb.GeneratedMessage {
+  factory CashConstituent({
+    $core.String? symbol,
+    $fixnum.Int64? prevValuation,
+    $core.int? numMembers,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (prevValuation != null) result.prevValuation = prevValuation;
+    if (numMembers != null) result.numMembers = numMembers;
+    return result;
+  }
+
+  CashConstituent._();
+
+  factory CashConstituent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CashConstituent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CashConstituent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'prevValuation')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'numMembers', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CashConstituent clone() => CashConstituent()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CashConstituent copyWith(void Function(CashConstituent) updates) => super.copyWith((message) => updates(message as CashConstituent)) as CashConstituent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CashConstituent create() => CashConstituent._();
+  @$core.override
+  CashConstituent createEmptyInstance() => create();
+  static $pb.PbList<CashConstituent> createRepeated() => $pb.PbList<CashConstituent>();
+  @$core.pragma('dart2js:noInline')
+  static CashConstituent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CashConstituent>(create);
+  static CashConstituent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get prevValuation => $_getI64(1);
+  @$pb.TagNumber(2)
+  set prevValuation($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPrevValuation() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrevValuation() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get numMembers => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set numMembers($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasNumMembers() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNumMembers() => $_clearField(3);
 }
 
 /// PDF 구성 종목
@@ -253,313 +771,6 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
   $core.bool hasQuantity() => $_has(3);
   @$pb.TagNumber(4)
   void clearQuantity() => $_clearField(4);
-}
-
-enum EtfNav_NavType {
-  physical, 
-  futuresBased, 
-  notSet
-}
-
-/// ETF NAV 정보
-class EtfNav extends $pb.GeneratedMessage {
-  factory EtfNav({
-    PhysicalNav? physical,
-    FuturesBasedNav? futuresBased,
-  }) {
-    final result = create();
-    if (physical != null) result.physical = physical;
-    if (futuresBased != null) result.futuresBased = futuresBased;
-    return result;
-  }
-
-  EtfNav._();
-
-  factory EtfNav.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfNav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static const $core.Map<$core.int, EtfNav_NavType> _EtfNav_NavTypeByTag = {
-    1 : EtfNav_NavType.physical,
-    2 : EtfNav_NavType.futuresBased,
-    0 : EtfNav_NavType.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfNav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..oo(0, [1, 2])
-    ..aOM<PhysicalNav>(1, _omitFieldNames ? '' : 'physical', subBuilder: PhysicalNav.create)
-    ..aOM<FuturesBasedNav>(2, _omitFieldNames ? '' : 'futuresBased', subBuilder: FuturesBasedNav.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfNav clone() => EtfNav()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfNav copyWith(void Function(EtfNav) updates) => super.copyWith((message) => updates(message as EtfNav)) as EtfNav;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static EtfNav create() => EtfNav._();
-  @$core.override
-  EtfNav createEmptyInstance() => create();
-  static $pb.PbList<EtfNav> createRepeated() => $pb.PbList<EtfNav>();
-  @$core.pragma('dart2js:noInline')
-  static EtfNav getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfNav>(create);
-  static EtfNav? _defaultInstance;
-
-  EtfNav_NavType whichNavType() => _EtfNav_NavTypeByTag[$_whichOneof(0)]!;
-  void clearNavType() => $_clearField($_whichOneof(0));
-
-  @$pb.TagNumber(1)
-  PhysicalNav get physical => $_getN(0);
-  @$pb.TagNumber(1)
-  set physical(PhysicalNav value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasPhysical() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPhysical() => $_clearField(1);
-  @$pb.TagNumber(1)
-  PhysicalNav ensurePhysical() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  FuturesBasedNav get futuresBased => $_getN(1);
-  @$pb.TagNumber(2)
-  set futuresBased(FuturesBasedNav value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFuturesBased() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFuturesBased() => $_clearField(2);
-  @$pb.TagNumber(2)
-  FuturesBasedNav ensureFuturesBased() => $_ensure(1);
-}
-
-/// 현물 기반 NAV
-class PhysicalNav extends $pb.GeneratedMessage {
-  factory PhysicalNav({
-    $core.String? lastNav,
-    $core.Iterable<$core.MapEntry<$core.String, ConstituentPrice>>? constituents,
-  }) {
-    final result = create();
-    if (lastNav != null) result.lastNav = lastNav;
-    if (constituents != null) result.constituents.addEntries(constituents);
-    return result;
-  }
-
-  PhysicalNav._();
-
-  factory PhysicalNav.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PhysicalNav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PhysicalNav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'lastNav')
-    ..m<$core.String, ConstituentPrice>(2, _omitFieldNames ? '' : 'constituents', entryClassName: 'PhysicalNav.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: ConstituentPrice.create, valueDefaultOrMaker: ConstituentPrice.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PhysicalNav clone() => PhysicalNav()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PhysicalNav copyWith(void Function(PhysicalNav) updates) => super.copyWith((message) => updates(message as PhysicalNav)) as PhysicalNav;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PhysicalNav create() => PhysicalNav._();
-  @$core.override
-  PhysicalNav createEmptyInstance() => create();
-  static $pb.PbList<PhysicalNav> createRepeated() => $pb.PbList<PhysicalNav>();
-  @$core.pragma('dart2js:noInline')
-  static PhysicalNav getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PhysicalNav>(create);
-  static PhysicalNav? _defaultInstance;
-
-  /// 마지막 NAV (원 단위, i64)
-  @$pb.TagNumber(1)
-  $core.String get lastNav => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set lastNav($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasLastNav() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearLastNav() => $_clearField(1);
-
-  /// 구성종목별 가격 정보
-  @$pb.TagNumber(2)
-  $pb.PbMap<$core.String, ConstituentPrice> get constituents => $_getMap(1);
-}
-
-/// 선물 기반 NAV
-class FuturesBasedNav extends $pb.GeneratedMessage {
-  factory FuturesBasedNav({
-    $core.String? lastNav,
-    $core.String? priorDayNav,
-    $core.double? leverageMultiplier,
-    $core.String? futuresSymbol,
-    $core.String? futuresPriorDayPrice,
-    $core.String? futuresLastPrice,
-  }) {
-    final result = create();
-    if (lastNav != null) result.lastNav = lastNav;
-    if (priorDayNav != null) result.priorDayNav = priorDayNav;
-    if (leverageMultiplier != null) result.leverageMultiplier = leverageMultiplier;
-    if (futuresSymbol != null) result.futuresSymbol = futuresSymbol;
-    if (futuresPriorDayPrice != null) result.futuresPriorDayPrice = futuresPriorDayPrice;
-    if (futuresLastPrice != null) result.futuresLastPrice = futuresLastPrice;
-    return result;
-  }
-
-  FuturesBasedNav._();
-
-  factory FuturesBasedNav.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory FuturesBasedNav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesBasedNav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'lastNav')
-    ..aOS(2, _omitFieldNames ? '' : 'priorDayNav')
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'leverageMultiplier', $pb.PbFieldType.OD)
-    ..aOS(4, _omitFieldNames ? '' : 'futuresSymbol')
-    ..aOS(5, _omitFieldNames ? '' : 'futuresPriorDayPrice')
-    ..aOS(6, _omitFieldNames ? '' : 'futuresLastPrice')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FuturesBasedNav clone() => FuturesBasedNav()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FuturesBasedNav copyWith(void Function(FuturesBasedNav) updates) => super.copyWith((message) => updates(message as FuturesBasedNav)) as FuturesBasedNav;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static FuturesBasedNav create() => FuturesBasedNav._();
-  @$core.override
-  FuturesBasedNav createEmptyInstance() => create();
-  static $pb.PbList<FuturesBasedNav> createRepeated() => $pb.PbList<FuturesBasedNav>();
-  @$core.pragma('dart2js:noInline')
-  static FuturesBasedNav getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FuturesBasedNav>(create);
-  static FuturesBasedNav? _defaultInstance;
-
-  /// 마지막 NAV (원 단위, i64)
-  @$pb.TagNumber(1)
-  $core.String get lastNav => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set lastNav($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasLastNav() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearLastNav() => $_clearField(1);
-
-  /// 전일 NAV
-  @$pb.TagNumber(2)
-  $core.String get priorDayNav => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set priorDayNav($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasPriorDayNav() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearPriorDayNav() => $_clearField(2);
-
-  /// 레버리지 배수
-  @$pb.TagNumber(3)
-  $core.double get leverageMultiplier => $_getN(2);
-  @$pb.TagNumber(3)
-  set leverageMultiplier($core.double value) => $_setDouble(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasLeverageMultiplier() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearLeverageMultiplier() => $_clearField(3);
-
-  /// 선물 심볼
-  @$pb.TagNumber(4)
-  $core.String get futuresSymbol => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set futuresSymbol($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasFuturesSymbol() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearFuturesSymbol() => $_clearField(4);
-
-  /// 선물 전일 가격
-  @$pb.TagNumber(5)
-  $core.String get futuresPriorDayPrice => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set futuresPriorDayPrice($core.String value) => $_setString(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasFuturesPriorDayPrice() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearFuturesPriorDayPrice() => $_clearField(5);
-
-  /// 선물 현재 가격
-  @$pb.TagNumber(6)
-  $core.String get futuresLastPrice => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set futuresLastPrice($core.String value) => $_setString(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasFuturesLastPrice() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearFuturesLastPrice() => $_clearField(6);
-}
-
-/// 구성종목 가격 정보
-class ConstituentPrice extends $pb.GeneratedMessage {
-  factory ConstituentPrice({
-    $core.String? lastPrice,
-    $fixnum.Int64? quantity,
-  }) {
-    final result = create();
-    if (lastPrice != null) result.lastPrice = lastPrice;
-    if (quantity != null) result.quantity = quantity;
-    return result;
-  }
-
-  ConstituentPrice._();
-
-  factory ConstituentPrice.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ConstituentPrice.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstituentPrice', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'lastPrice')
-    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ConstituentPrice clone() => ConstituentPrice()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ConstituentPrice copyWith(void Function(ConstituentPrice) updates) => super.copyWith((message) => updates(message as ConstituentPrice)) as ConstituentPrice;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ConstituentPrice create() => ConstituentPrice._();
-  @$core.override
-  ConstituentPrice createEmptyInstance() => create();
-  static $pb.PbList<ConstituentPrice> createRepeated() => $pb.PbList<ConstituentPrice>();
-  @$core.pragma('dart2js:noInline')
-  static ConstituentPrice getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConstituentPrice>(create);
-  static ConstituentPrice? _defaultInstance;
-
-  /// 마지막 가격 (원 단위, i64)
-  @$pb.TagNumber(1)
-  $core.String get lastPrice => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set lastPrice($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasLastPrice() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearLastPrice() => $_clearField(1);
-
-  /// 구성 수량
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get quantity => $_getI64(1);
-  @$pb.TagNumber(2)
-  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasQuantity() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearQuantity() => $_clearField(2);
 }
 
 /// GetEtf

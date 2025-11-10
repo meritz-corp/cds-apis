@@ -37,26 +37,95 @@ message Etf {
     // ETF 심볼 (ISIN 코드)
     string symbol = 2;
 
+    // ETF 코드
+    string code = 3;
+
     // ETF 이름
-    string name = 3;
+    string name = 4;
 
     // 마지막 가격
-    string last_price = 4;
+    string prev_close = 5;
+
+    string last_price = 6;
+
+    string prev_nav = 7;
+
+    string last_inav = 8;
 
     // PDF 구성 종목 목록
-    map<string, EtfPdfConstituent> constituents = 5;
-
-    // NAV 정보
-    EtfNav nav = 6;
+    map<string, EtfPdfConstituent> constituents = 10;
 
     // 설정 단위
-    int64 creation_unit = 8;
-
-    // Tick 크기 (원 단위, i64)
-    int64 tick_size = 9;
+    int64 creation_unit = 11;
 
     // 복제 방법
-    ReplicationMethod replication_method = 10;
+    ReplicationMethod replication_method = 12;
+
+    // Tick 크기 (원 단위, i64)
+    int64 tick_size = 13;
+
+    // Tick 크기 (원 단위, i64)
+    int64 listed_quantity = 14;
+
+    float leverage = 15;
+
+    bool tradable = 16;
+
+    bool short_sellable = 17;
+
+    bool cash_creditable = 23;
+
+    int64 cash_creation_amount = 24;
+}
+
+message EtfConstituent {
+    oneof constituent_type {
+        StockConstituent stock = 1;
+        FuturesConstituent futures = 2;
+        CashConstituent cash = 3;
+    }
+}
+
+message StockConstituent {
+    string symbol = 1;
+
+    string prev_close = 2;
+
+    string last_price = 3;
+
+    int64 quantity = 4;
+
+    int64 last_valuation = 5;
+
+    int64 notional_amount = 6;
+
+    uint32 num_members = 7;
+}
+
+message FuturesConstituent {
+    string symbol = 1;
+
+    string prev_close = 2;
+
+    string last_price = 3;
+
+    float quantity = 4;
+
+    double multiple = 5;
+
+    int64 last_valuation = 6;
+
+    int64 notional_amount = 7;
+
+    uint32 num_members = 8;
+}
+
+message CashConstituent {
+    string symbol = 1;
+
+    int64 prev_valuation = 2;
+
+    uint32 num_members = 3;
 }
 
 // PDF 구성 종목
@@ -80,53 +149,6 @@ enum ProductType {
     PRODUCT_TYPE_STOCK = 1;
     PRODUCT_TYPE_FUTURES = 2;
     PRODUCT_TYPE_ETF = 3;
-}
-
-// ETF NAV 정보
-message EtfNav {
-    oneof nav_type {
-        PhysicalNav physical = 1;
-        FuturesBasedNav futures_based = 2;
-    }
-}
-
-// 현물 기반 NAV
-message PhysicalNav {
-    // 마지막 NAV (원 단위, i64)
-    string last_nav = 1;
-
-    // 구성종목별 가격 정보
-    map<string, ConstituentPrice> constituents = 2;
-}
-
-// 선물 기반 NAV
-message FuturesBasedNav {
-    // 마지막 NAV (원 단위, i64)
-    string last_nav = 1;
-
-    // 전일 NAV
-    string prior_day_nav = 2;
-
-    // 레버리지 배수
-    double leverage_multiplier = 3;
-
-    // 선물 심볼
-    string futures_symbol = 4;
-
-    // 선물 전일 가격
-    string futures_prior_day_price = 5;
-
-    // 선물 현재 가격
-    string futures_last_price = 6;
-}
-
-// 구성종목 가격 정보
-message ConstituentPrice {
-    // 마지막 가격 (원 단위, i64)
-    string last_price = 1;
-
-    // 구성 수량
-    int64 quantity = 2;
 }
 
 // 복제 방법

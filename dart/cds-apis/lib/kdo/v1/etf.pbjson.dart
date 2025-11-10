@@ -54,13 +54,22 @@ const Etf$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'last_price', '3': 4, '4': 1, '5': 9, '10': 'lastPrice'},
-    {'1': 'constituents', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.etf.Etf.ConstituentsEntry', '10': 'constituents'},
-    {'1': 'nav', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfNav', '10': 'nav'},
-    {'1': 'creation_unit', '3': 8, '4': 1, '5': 3, '10': 'creationUnit'},
-    {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
-    {'1': 'replication_method', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.etf.ReplicationMethod', '10': 'replicationMethod'},
+    {'1': 'code', '3': 3, '4': 1, '5': 9, '10': 'code'},
+    {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'prev_close', '3': 5, '4': 1, '5': 9, '10': 'prevClose'},
+    {'1': 'last_price', '3': 6, '4': 1, '5': 9, '10': 'lastPrice'},
+    {'1': 'prev_nav', '3': 7, '4': 1, '5': 9, '10': 'prevNav'},
+    {'1': 'last_inav', '3': 8, '4': 1, '5': 9, '10': 'lastInav'},
+    {'1': 'constituents', '3': 10, '4': 3, '5': 11, '6': '.kdo.v1.etf.Etf.ConstituentsEntry', '10': 'constituents'},
+    {'1': 'creation_unit', '3': 11, '4': 1, '5': 3, '10': 'creationUnit'},
+    {'1': 'replication_method', '3': 12, '4': 1, '5': 14, '6': '.kdo.v1.etf.ReplicationMethod', '10': 'replicationMethod'},
+    {'1': 'tick_size', '3': 13, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'listed_quantity', '3': 14, '4': 1, '5': 3, '10': 'listedQuantity'},
+    {'1': 'leverage', '3': 15, '4': 1, '5': 2, '10': 'leverage'},
+    {'1': 'tradable', '3': 16, '4': 1, '5': 8, '10': 'tradable'},
+    {'1': 'short_sellable', '3': 17, '4': 1, '5': 8, '10': 'shortSellable'},
+    {'1': 'cash_creditable', '3': 23, '4': 1, '5': 8, '10': 'cashCreditable'},
+    {'1': 'cash_creation_amount', '3': 24, '4': 1, '5': 3, '10': 'cashCreationAmount'},
   ],
   '3': [Etf_ConstituentsEntry$json],
 };
@@ -77,15 +86,101 @@ const Etf_ConstituentsEntry$json = {
 
 /// Descriptor for `Etf`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
-    'CgNFdGYSDgoCaWQYASABKARSAmlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhIKBG5hbWUYAy'
-    'ABKAlSBG5hbWUSHQoKbGFzdF9wcmljZRgEIAEoCVIJbGFzdFByaWNlEkUKDGNvbnN0aXR1ZW50'
-    'cxgFIAMoCzIhLmtkby52MS5ldGYuRXRmLkNvbnN0aXR1ZW50c0VudHJ5Ugxjb25zdGl0dWVudH'
-    'MSJAoDbmF2GAYgASgLMhIua2RvLnYxLmV0Zi5FdGZOYXZSA25hdhIjCg1jcmVhdGlvbl91bml0'
-    'GAggASgDUgxjcmVhdGlvblVuaXQSGwoJdGlja19zaXplGAkgASgDUgh0aWNrU2l6ZRJMChJyZX'
-    'BsaWNhdGlvbl9tZXRob2QYCiABKA4yHS5rZG8udjEuZXRmLlJlcGxpY2F0aW9uTWV0aG9kUhFy'
-    'ZXBsaWNhdGlvbk1ldGhvZBpeChFDb25zdGl0dWVudHNFbnRyeRIQCgNrZXkYASABKAlSA2tleR'
-    'IzCgV2YWx1ZRgCIAEoCzIdLmtkby52MS5ldGYuRXRmUGRmQ29uc3RpdHVlbnRSBXZhbHVlOgI4'
-    'AQ==');
+    'CgNFdGYSDgoCaWQYASABKARSAmlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhIKBGNvZGUYAy'
+    'ABKAlSBGNvZGUSEgoEbmFtZRgEIAEoCVIEbmFtZRIdCgpwcmV2X2Nsb3NlGAUgASgJUglwcmV2'
+    'Q2xvc2USHQoKbGFzdF9wcmljZRgGIAEoCVIJbGFzdFByaWNlEhkKCHByZXZfbmF2GAcgASgJUg'
+    'dwcmV2TmF2EhsKCWxhc3RfaW5hdhgIIAEoCVIIbGFzdEluYXYSRQoMY29uc3RpdHVlbnRzGAog'
+    'AygLMiEua2RvLnYxLmV0Zi5FdGYuQ29uc3RpdHVlbnRzRW50cnlSDGNvbnN0aXR1ZW50cxIjCg'
+    '1jcmVhdGlvbl91bml0GAsgASgDUgxjcmVhdGlvblVuaXQSTAoScmVwbGljYXRpb25fbWV0aG9k'
+    'GAwgASgOMh0ua2RvLnYxLmV0Zi5SZXBsaWNhdGlvbk1ldGhvZFIRcmVwbGljYXRpb25NZXRob2'
+    'QSGwoJdGlja19zaXplGA0gASgDUgh0aWNrU2l6ZRInCg9saXN0ZWRfcXVhbnRpdHkYDiABKANS'
+    'Dmxpc3RlZFF1YW50aXR5EhoKCGxldmVyYWdlGA8gASgCUghsZXZlcmFnZRIaCgh0cmFkYWJsZR'
+    'gQIAEoCFIIdHJhZGFibGUSJQoOc2hvcnRfc2VsbGFibGUYESABKAhSDXNob3J0U2VsbGFibGUS'
+    'JwoPY2FzaF9jcmVkaXRhYmxlGBcgASgIUg5jYXNoQ3JlZGl0YWJsZRIwChRjYXNoX2NyZWF0aW'
+    '9uX2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50Gl4KEUNvbnN0aXR1ZW50c0VudHJ5'
+    'EhAKA2tleRgBIAEoCVIDa2V5EjMKBXZhbHVlGAIgASgLMh0ua2RvLnYxLmV0Zi5FdGZQZGZDb2'
+    '5zdGl0dWVudFIFdmFsdWU6AjgB');
+
+@$core.Deprecated('Use etfConstituentDescriptor instead')
+const EtfConstituent$json = {
+  '1': 'EtfConstituent',
+  '2': [
+    {'1': 'stock', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.etf.StockConstituent', '9': 0, '10': 'stock'},
+    {'1': 'futures', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.FuturesConstituent', '9': 0, '10': 'futures'},
+    {'1': 'cash', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.etf.CashConstituent', '9': 0, '10': 'cash'},
+  ],
+  '8': [
+    {'1': 'constituent_type'},
+  ],
+};
+
+/// Descriptor for `EtfConstituent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfConstituentDescriptor = $convert.base64Decode(
+    'Cg5FdGZDb25zdGl0dWVudBI0CgVzdG9jaxgBIAEoCzIcLmtkby52MS5ldGYuU3RvY2tDb25zdG'
+    'l0dWVudEgAUgVzdG9jaxI6CgdmdXR1cmVzGAIgASgLMh4ua2RvLnYxLmV0Zi5GdXR1cmVzQ29u'
+    'c3RpdHVlbnRIAFIHZnV0dXJlcxIxCgRjYXNoGAMgASgLMhsua2RvLnYxLmV0Zi5DYXNoQ29uc3'
+    'RpdHVlbnRIAFIEY2FzaEISChBjb25zdGl0dWVudF90eXBl');
+
+@$core.Deprecated('Use stockConstituentDescriptor instead')
+const StockConstituent$json = {
+  '1': 'StockConstituent',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'prev_close', '3': 2, '4': 1, '5': 9, '10': 'prevClose'},
+    {'1': 'last_price', '3': 3, '4': 1, '5': 9, '10': 'lastPrice'},
+    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'last_valuation', '3': 5, '4': 1, '5': 3, '10': 'lastValuation'},
+    {'1': 'notional_amount', '3': 6, '4': 1, '5': 3, '10': 'notionalAmount'},
+    {'1': 'num_members', '3': 7, '4': 1, '5': 13, '10': 'numMembers'},
+  ],
+};
+
+/// Descriptor for `StockConstituent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stockConstituentDescriptor = $convert.base64Decode(
+    'ChBTdG9ja0NvbnN0aXR1ZW50EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEh0KCnByZXZfY2xvc2'
+    'UYAiABKAlSCXByZXZDbG9zZRIdCgpsYXN0X3ByaWNlGAMgASgJUglsYXN0UHJpY2USGgoIcXVh'
+    'bnRpdHkYBCABKANSCHF1YW50aXR5EiUKDmxhc3RfdmFsdWF0aW9uGAUgASgDUg1sYXN0VmFsdW'
+    'F0aW9uEicKD25vdGlvbmFsX2Ftb3VudBgGIAEoA1IObm90aW9uYWxBbW91bnQSHwoLbnVtX21l'
+    'bWJlcnMYByABKA1SCm51bU1lbWJlcnM=');
+
+@$core.Deprecated('Use futuresConstituentDescriptor instead')
+const FuturesConstituent$json = {
+  '1': 'FuturesConstituent',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'prev_close', '3': 2, '4': 1, '5': 9, '10': 'prevClose'},
+    {'1': 'last_price', '3': 3, '4': 1, '5': 9, '10': 'lastPrice'},
+    {'1': 'quantity', '3': 4, '4': 1, '5': 2, '10': 'quantity'},
+    {'1': 'multiple', '3': 5, '4': 1, '5': 1, '10': 'multiple'},
+    {'1': 'last_valuation', '3': 6, '4': 1, '5': 3, '10': 'lastValuation'},
+    {'1': 'notional_amount', '3': 7, '4': 1, '5': 3, '10': 'notionalAmount'},
+    {'1': 'num_members', '3': 8, '4': 1, '5': 13, '10': 'numMembers'},
+  ],
+};
+
+/// Descriptor for `FuturesConstituent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List futuresConstituentDescriptor = $convert.base64Decode(
+    'ChJGdXR1cmVzQ29uc3RpdHVlbnQSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSHQoKcHJldl9jbG'
+    '9zZRgCIAEoCVIJcHJldkNsb3NlEh0KCmxhc3RfcHJpY2UYAyABKAlSCWxhc3RQcmljZRIaCghx'
+    'dWFudGl0eRgEIAEoAlIIcXVhbnRpdHkSGgoIbXVsdGlwbGUYBSABKAFSCG11bHRpcGxlEiUKDm'
+    'xhc3RfdmFsdWF0aW9uGAYgASgDUg1sYXN0VmFsdWF0aW9uEicKD25vdGlvbmFsX2Ftb3VudBgH'
+    'IAEoA1IObm90aW9uYWxBbW91bnQSHwoLbnVtX21lbWJlcnMYCCABKA1SCm51bU1lbWJlcnM=');
+
+@$core.Deprecated('Use cashConstituentDescriptor instead')
+const CashConstituent$json = {
+  '1': 'CashConstituent',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'prev_valuation', '3': 2, '4': 1, '5': 3, '10': 'prevValuation'},
+    {'1': 'num_members', '3': 3, '4': 1, '5': 13, '10': 'numMembers'},
+  ],
+};
+
+/// Descriptor for `CashConstituent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cashConstituentDescriptor = $convert.base64Decode(
+    'Cg9DYXNoQ29uc3RpdHVlbnQSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSJQoOcHJldl92YWx1YX'
+    'Rpb24YAiABKANSDXByZXZWYWx1YXRpb24SHwoLbnVtX21lbWJlcnMYAyABKA1SCm51bU1lbWJl'
+    'cnM=');
 
 @$core.Deprecated('Use etfPdfConstituentDescriptor instead')
 const EtfPdfConstituent$json = {
@@ -103,86 +198,6 @@ final $typed_data.Uint8List etfPdfConstituentDescriptor = $convert.base64Decode(
     'ChFFdGZQZGZDb25zdGl0dWVudBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBISCgRuYW1lGAIgAS'
     'gJUgRuYW1lEjoKDHByb2R1Y3RfdHlwZRgDIAEoDjIXLmtkby52MS5ldGYuUHJvZHVjdFR5cGVS'
     'C3Byb2R1Y3RUeXBlEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eQ==');
-
-@$core.Deprecated('Use etfNavDescriptor instead')
-const EtfNav$json = {
-  '1': 'EtfNav',
-  '2': [
-    {'1': 'physical', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.etf.PhysicalNav', '9': 0, '10': 'physical'},
-    {'1': 'futures_based', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.FuturesBasedNav', '9': 0, '10': 'futuresBased'},
-  ],
-  '8': [
-    {'1': 'nav_type'},
-  ],
-};
-
-/// Descriptor for `EtfNav`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfNavDescriptor = $convert.base64Decode(
-    'CgZFdGZOYXYSNQoIcGh5c2ljYWwYASABKAsyFy5rZG8udjEuZXRmLlBoeXNpY2FsTmF2SABSCH'
-    'BoeXNpY2FsEkIKDWZ1dHVyZXNfYmFzZWQYAiABKAsyGy5rZG8udjEuZXRmLkZ1dHVyZXNCYXNl'
-    'ZE5hdkgAUgxmdXR1cmVzQmFzZWRCCgoIbmF2X3R5cGU=');
-
-@$core.Deprecated('Use physicalNavDescriptor instead')
-const PhysicalNav$json = {
-  '1': 'PhysicalNav',
-  '2': [
-    {'1': 'last_nav', '3': 1, '4': 1, '5': 9, '10': 'lastNav'},
-    {'1': 'constituents', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.etf.PhysicalNav.ConstituentsEntry', '10': 'constituents'},
-  ],
-  '3': [PhysicalNav_ConstituentsEntry$json],
-};
-
-@$core.Deprecated('Use physicalNavDescriptor instead')
-const PhysicalNav_ConstituentsEntry$json = {
-  '1': 'ConstituentsEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.ConstituentPrice', '10': 'value'},
-  ],
-  '7': {'7': true},
-};
-
-/// Descriptor for `PhysicalNav`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List physicalNavDescriptor = $convert.base64Decode(
-    'CgtQaHlzaWNhbE5hdhIZCghsYXN0X25hdhgBIAEoCVIHbGFzdE5hdhJNCgxjb25zdGl0dWVudH'
-    'MYAiADKAsyKS5rZG8udjEuZXRmLlBoeXNpY2FsTmF2LkNvbnN0aXR1ZW50c0VudHJ5Ugxjb25z'
-    'dGl0dWVudHMaXQoRQ29uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSMgoFdmFsdW'
-    'UYAiABKAsyHC5rZG8udjEuZXRmLkNvbnN0aXR1ZW50UHJpY2VSBXZhbHVlOgI4AQ==');
-
-@$core.Deprecated('Use futuresBasedNavDescriptor instead')
-const FuturesBasedNav$json = {
-  '1': 'FuturesBasedNav',
-  '2': [
-    {'1': 'last_nav', '3': 1, '4': 1, '5': 9, '10': 'lastNav'},
-    {'1': 'prior_day_nav', '3': 2, '4': 1, '5': 9, '10': 'priorDayNav'},
-    {'1': 'leverage_multiplier', '3': 3, '4': 1, '5': 1, '10': 'leverageMultiplier'},
-    {'1': 'futures_symbol', '3': 4, '4': 1, '5': 9, '10': 'futuresSymbol'},
-    {'1': 'futures_prior_day_price', '3': 5, '4': 1, '5': 9, '10': 'futuresPriorDayPrice'},
-    {'1': 'futures_last_price', '3': 6, '4': 1, '5': 9, '10': 'futuresLastPrice'},
-  ],
-};
-
-/// Descriptor for `FuturesBasedNav`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List futuresBasedNavDescriptor = $convert.base64Decode(
-    'Cg9GdXR1cmVzQmFzZWROYXYSGQoIbGFzdF9uYXYYASABKAlSB2xhc3ROYXYSIgoNcHJpb3JfZG'
-    'F5X25hdhgCIAEoCVILcHJpb3JEYXlOYXYSLwoTbGV2ZXJhZ2VfbXVsdGlwbGllchgDIAEoAVIS'
-    'bGV2ZXJhZ2VNdWx0aXBsaWVyEiUKDmZ1dHVyZXNfc3ltYm9sGAQgASgJUg1mdXR1cmVzU3ltYm'
-    '9sEjUKF2Z1dHVyZXNfcHJpb3JfZGF5X3ByaWNlGAUgASgJUhRmdXR1cmVzUHJpb3JEYXlQcmlj'
-    'ZRIsChJmdXR1cmVzX2xhc3RfcHJpY2UYBiABKAlSEGZ1dHVyZXNMYXN0UHJpY2U=');
-
-@$core.Deprecated('Use constituentPriceDescriptor instead')
-const ConstituentPrice$json = {
-  '1': 'ConstituentPrice',
-  '2': [
-    {'1': 'last_price', '3': 1, '4': 1, '5': 9, '10': 'lastPrice'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
-  ],
-};
-
-/// Descriptor for `ConstituentPrice`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List constituentPriceDescriptor = $convert.base64Decode(
-    'ChBDb25zdGl0dWVudFByaWNlEh0KCmxhc3RfcHJpY2UYASABKAlSCWxhc3RQcmljZRIaCghxdW'
-    'FudGl0eRgCIAEoA1IIcXVhbnRpdHk=');
 
 @$core.Deprecated('Use getEtfRequestDescriptor instead')
 const GetEtfRequest$json = {
