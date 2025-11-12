@@ -147,7 +147,7 @@ const SymbolExposure$json = {
   '1': 'SymbolExposure',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'quantity', '3': 2, '4': 1, '5': 2, '10': 'quantity'},
     {'1': 'current_price', '3': 3, '4': 1, '5': 3, '10': 'currentPrice'},
     {'1': 'exposure', '3': 4, '4': 1, '5': 3, '10': 'exposure'},
   ],
@@ -156,7 +156,7 @@ const SymbolExposure$json = {
 /// Descriptor for `SymbolExposure`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List symbolExposureDescriptor = $convert.base64Decode(
     'Cg5TeW1ib2xFeHBvc3VyZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIaCghxdWFudGl0eRgCIA'
-    'EoA1IIcXVhbnRpdHkSIwoNY3VycmVudF9wcmljZRgDIAEoA1IMY3VycmVudFByaWNlEhoKCGV4'
+    'EoAlIIcXVhbnRpdHkSIwoNY3VycmVudF9wcmljZRgDIAEoA1IMY3VycmVudFByaWNlEhoKCGV4'
     'cG9zdXJlGAQgASgDUghleHBvc3VyZQ==');
 
 @$core.Deprecated('Use fundLimitDescriptor instead')

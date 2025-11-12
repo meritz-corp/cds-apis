@@ -2248,9 +2248,7 @@ impl serde::Serialize for SymbolExposure {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+            struct_ser.serialize_field("quantity", &self.quantity)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]

@@ -135,7 +135,7 @@ message FundExposure {
 
 message SymbolExposure {
   string symbol = 1;              // 종목 코드
-  int64 quantity = 2;             // 보유 수량
+  float quantity = 2;             // 보유 수량
   int64 current_price = 3;         // 현재가
   int64 exposure = 4;         // 익스포저
 }

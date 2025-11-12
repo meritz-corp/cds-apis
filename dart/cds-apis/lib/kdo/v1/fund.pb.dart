@@ -613,7 +613,7 @@ class FundExposure extends $pb.GeneratedMessage {
 class SymbolExposure extends $pb.GeneratedMessage {
   factory SymbolExposure({
     $core.String? symbol,
-    $fixnum.Int64? quantity,
+    $core.double? quantity,
     $fixnum.Int64? currentPrice,
     $fixnum.Int64? exposure,
   }) {
@@ -632,7 +632,7 @@ class SymbolExposure extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SymbolExposure', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'quantity', $pb.PbFieldType.OF)
     ..aInt64(3, _omitFieldNames ? '' : 'currentPrice')
     ..aInt64(4, _omitFieldNames ? '' : 'exposure')
     ..hasRequiredFields = false
@@ -665,9 +665,9 @@ class SymbolExposure extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get quantity => $_getI64(1);
+  $core.double get quantity => $_getN(1);
   @$pb.TagNumber(2)
-  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
+  set quantity($core.double value) => $_setFloat(1, value);
   @$pb.TagNumber(2)
   $core.bool hasQuantity() => $_has(1);
   @$pb.TagNumber(2)

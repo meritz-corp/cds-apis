@@ -596,8 +596,8 @@
           "title": "종목 코드"
         },
         "quantity": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "float",
           "title": "보유 수량"
         },
         "currentPrice": {

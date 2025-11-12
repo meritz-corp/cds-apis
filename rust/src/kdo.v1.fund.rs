@@ -133,8 +133,8 @@ pub struct SymbolExposure {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 보유 수량
-    #[prost(int64, tag="2")]
-    pub quantity: i64,
+    #[prost(float, tag="2")]
+    pub quantity: f32,
     /// 현재가
     #[prost(int64, tag="3")]
     pub current_price: i64,
