@@ -111,22 +111,22 @@ const SymbolPnL$json = {
   '1': 'SymbolPnL',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'quantity', '3': 2, '4': 1, '5': 1, '10': 'quantity'},
     {'1': 'average_entry_price', '3': 3, '4': 1, '5': 1, '10': 'averageEntryPrice'},
-    {'1': 'current_price', '3': 4, '4': 1, '5': 3, '10': 'currentPrice'},
+    {'1': 'current_price', '3': 4, '4': 1, '5': 1, '10': 'currentPrice'},
     {'1': 'unrealized_pnl', '3': 5, '4': 1, '5': 3, '10': 'unrealizedPnl'},
     {'1': 'realized_pnl', '3': 6, '4': 1, '5': 3, '10': 'realizedPnl'},
-    {'1': 'trading_cost', '3': 7, '4': 1, '5': 3, '10': 'tradingCost'},
+    {'1': 'trading_cost', '3': 7, '4': 1, '5': 1, '10': 'tradingCost'},
   ],
 };
 
 /// Descriptor for `SymbolPnL`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List symbolPnLDescriptor = $convert.base64Decode(
-    'CglTeW1ib2xQbkwSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGgoIcXVhbnRpdHkYAiABKANSCH'
+    'CglTeW1ib2xQbkwSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGgoIcXVhbnRpdHkYAiABKAFSCH'
     'F1YW50aXR5Ei4KE2F2ZXJhZ2VfZW50cnlfcHJpY2UYAyABKAFSEWF2ZXJhZ2VFbnRyeVByaWNl'
-    'EiMKDWN1cnJlbnRfcHJpY2UYBCABKANSDGN1cnJlbnRQcmljZRIlCg51bnJlYWxpemVkX3BubB'
+    'EiMKDWN1cnJlbnRfcHJpY2UYBCABKAFSDGN1cnJlbnRQcmljZRIlCg51bnJlYWxpemVkX3BubB'
     'gFIAEoA1INdW5yZWFsaXplZFBubBIhCgxyZWFsaXplZF9wbmwYBiABKANSC3JlYWxpemVkUG5s'
-    'EiEKDHRyYWRpbmdfY29zdBgHIAEoA1ILdHJhZGluZ0Nvc3Q=');
+    'EiEKDHRyYWRpbmdfY29zdBgHIAEoAVILdHJhZGluZ0Nvc3Q=');
 
 @$core.Deprecated('Use fundExposureDescriptor instead')
 const FundExposure$json = {
@@ -147,8 +147,8 @@ const SymbolExposure$json = {
   '1': 'SymbolExposure',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 2, '10': 'quantity'},
-    {'1': 'current_price', '3': 3, '4': 1, '5': 3, '10': 'currentPrice'},
+    {'1': 'quantity', '3': 2, '4': 1, '5': 1, '10': 'quantity'},
+    {'1': 'current_price', '3': 3, '4': 1, '5': 1, '10': 'currentPrice'},
     {'1': 'exposure', '3': 4, '4': 1, '5': 3, '10': 'exposure'},
   ],
 };
@@ -156,7 +156,7 @@ const SymbolExposure$json = {
 /// Descriptor for `SymbolExposure`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List symbolExposureDescriptor = $convert.base64Decode(
     'Cg5TeW1ib2xFeHBvc3VyZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIaCghxdWFudGl0eRgCIA'
-    'EoAlIIcXVhbnRpdHkSIwoNY3VycmVudF9wcmljZRgDIAEoA1IMY3VycmVudFByaWNlEhoKCGV4'
+    'EoAVIIcXVhbnRpdHkSIwoNY3VycmVudF9wcmljZRgDIAEoAVIMY3VycmVudFByaWNlEhoKCGV4'
     'cG9zdXJlGAQgASgDUghleHBvc3VyZQ==');
 
 @$core.Deprecated('Use fundLimitDescriptor instead')

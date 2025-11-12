@@ -2251,9 +2251,7 @@ impl serde::Serialize for SymbolExposure {
             struct_ser.serialize_field("quantity", &self.quantity)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_price", ToString::to_string(&self.current_price).as_str())?;
+            struct_ser.serialize_field("current_price", &self.current_price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2414,17 +2412,13 @@ impl serde::Serialize for SymbolPnL {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+            struct_ser.serialize_field("quantity", &self.quantity)?;
         }
         if true {
             struct_ser.serialize_field("average_entry_price", &self.average_entry_price)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_price", ToString::to_string(&self.current_price).as_str())?;
+            struct_ser.serialize_field("current_price", &self.current_price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2437,9 +2431,7 @@ impl serde::Serialize for SymbolPnL {
             struct_ser.serialize_field("realized_pnl", ToString::to_string(&self.realized_pnl).as_str())?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("trading_cost", ToString::to_string(&self.trading_cost).as_str())?;
+            struct_ser.serialize_field("trading_cost", &self.trading_cost)?;
         }
         struct_ser.end()
     }

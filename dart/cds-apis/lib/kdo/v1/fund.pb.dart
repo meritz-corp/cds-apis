@@ -442,12 +442,12 @@ class FundPnL extends $pb.GeneratedMessage {
 class SymbolPnL extends $pb.GeneratedMessage {
   factory SymbolPnL({
     $core.String? symbol,
-    $fixnum.Int64? quantity,
+    $core.double? quantity,
     $core.double? averageEntryPrice,
-    $fixnum.Int64? currentPrice,
+    $core.double? currentPrice,
     $fixnum.Int64? unrealizedPnl,
     $fixnum.Int64? realizedPnl,
-    $fixnum.Int64? tradingCost,
+    $core.double? tradingCost,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -467,12 +467,12 @@ class SymbolPnL extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SymbolPnL', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'quantity', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'averageEntryPrice', $pb.PbFieldType.OD)
-    ..aInt64(4, _omitFieldNames ? '' : 'currentPrice')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'currentPrice', $pb.PbFieldType.OD)
     ..aInt64(5, _omitFieldNames ? '' : 'unrealizedPnl')
     ..aInt64(6, _omitFieldNames ? '' : 'realizedPnl')
-    ..aInt64(7, _omitFieldNames ? '' : 'tradingCost')
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'tradingCost', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -503,9 +503,9 @@ class SymbolPnL extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get quantity => $_getI64(1);
+  $core.double get quantity => $_getN(1);
   @$pb.TagNumber(2)
-  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
+  set quantity($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(2)
   $core.bool hasQuantity() => $_has(1);
   @$pb.TagNumber(2)
@@ -521,9 +521,9 @@ class SymbolPnL extends $pb.GeneratedMessage {
   void clearAverageEntryPrice() => $_clearField(3);
 
   @$pb.TagNumber(4)
-  $fixnum.Int64 get currentPrice => $_getI64(3);
+  $core.double get currentPrice => $_getN(3);
   @$pb.TagNumber(4)
-  set currentPrice($fixnum.Int64 value) => $_setInt64(3, value);
+  set currentPrice($core.double value) => $_setDouble(3, value);
   @$pb.TagNumber(4)
   $core.bool hasCurrentPrice() => $_has(3);
   @$pb.TagNumber(4)
@@ -548,9 +548,9 @@ class SymbolPnL extends $pb.GeneratedMessage {
   void clearRealizedPnl() => $_clearField(6);
 
   @$pb.TagNumber(7)
-  $fixnum.Int64 get tradingCost => $_getI64(6);
+  $core.double get tradingCost => $_getN(6);
   @$pb.TagNumber(7)
-  set tradingCost($fixnum.Int64 value) => $_setInt64(6, value);
+  set tradingCost($core.double value) => $_setDouble(6, value);
   @$pb.TagNumber(7)
   $core.bool hasTradingCost() => $_has(6);
   @$pb.TagNumber(7)
@@ -614,7 +614,7 @@ class SymbolExposure extends $pb.GeneratedMessage {
   factory SymbolExposure({
     $core.String? symbol,
     $core.double? quantity,
-    $fixnum.Int64? currentPrice,
+    $core.double? currentPrice,
     $fixnum.Int64? exposure,
   }) {
     final result = create();
@@ -632,8 +632,8 @@ class SymbolExposure extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SymbolExposure', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'quantity', $pb.PbFieldType.OF)
-    ..aInt64(3, _omitFieldNames ? '' : 'currentPrice')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'quantity', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'currentPrice', $pb.PbFieldType.OD)
     ..aInt64(4, _omitFieldNames ? '' : 'exposure')
     ..hasRequiredFields = false
   ;
@@ -667,16 +667,16 @@ class SymbolExposure extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.double get quantity => $_getN(1);
   @$pb.TagNumber(2)
-  set quantity($core.double value) => $_setFloat(1, value);
+  set quantity($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(2)
   $core.bool hasQuantity() => $_has(1);
   @$pb.TagNumber(2)
   void clearQuantity() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $fixnum.Int64 get currentPrice => $_getI64(2);
+  $core.double get currentPrice => $_getN(2);
   @$pb.TagNumber(3)
-  set currentPrice($fixnum.Int64 value) => $_setInt64(2, value);
+  set currentPrice($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(3)
   $core.bool hasCurrentPrice() => $_has(2);
   @$pb.TagNumber(3)

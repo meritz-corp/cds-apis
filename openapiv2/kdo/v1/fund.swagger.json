@@ -597,12 +597,12 @@
         },
         "quantity": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "title": "보유 수량"
         },
         "currentPrice": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "title": "현재가"
         },
         "exposure": {
@@ -620,8 +620,8 @@
           "title": "종목 코드"
         },
         "quantity": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "title": "보유 수량"
         },
         "averageEntryPrice": {
@@ -630,8 +630,8 @@
           "title": "평균 진입가"
         },
         "currentPrice": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "title": "현재가"
         },
         "unrealizedPnl": {
@@ -645,8 +645,8 @@
           "title": "실현 손익"
         },
         "tradingCost": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "title": "거래 비용"
         }
       },

@@ -119,12 +119,12 @@ message FundPnL {
 // 종목별 포지션 PnL
 message SymbolPnL {
   string symbol = 1;              // 종목 코드
-  int64 quantity = 2;             // 보유 수량
+  double quantity = 2;             // 보유 수량
   double average_entry_price = 3;   // 평균 진입가
-  int64 current_price = 4;         // 현재가
+  double current_price = 4;         // 현재가
   int64 unrealized_pnl = 5;       // 미실현 손익
   int64 realized_pnl = 6;         // 실현 손익
-  int64 trading_cost = 7;         // 거래 비용
+  double trading_cost = 7;         // 거래 비용
 }
 
 // 펀드 익스포저(Exposure) 관리
@@ -135,8 +135,8 @@ message FundExposure {
 
 message SymbolExposure {
   string symbol = 1;              // 종목 코드
-  float quantity = 2;             // 보유 수량
-  int64 current_price = 3;         // 현재가
+  double quantity = 2;             // 보유 수량
+  double current_price = 3;         // 현재가
   int64 exposure = 4;         // 익스포저
 }
 
