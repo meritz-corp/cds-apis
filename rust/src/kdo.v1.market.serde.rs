@@ -600,6 +600,12 @@ impl serde::Serialize for EtfOrderbookData {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.EtfOrderbookData", len)?;
         if true {
             struct_ser.serialize_field("bid_prices", &self.bid_prices)?;
@@ -651,6 +657,12 @@ impl serde::Serialize for EtfOrderbookData {
             struct_ser.serialize_field("est_volume", ToString::to_string(&self.est_volume).as_str())?;
         }
         if true {
+            struct_ser.serialize_field("prev_inav", &self.prev_inav)?;
+        }
+        if true {
+            struct_ser.serialize_field("current_inav", &self.current_inav)?;
+        }
+        if true {
             let v = SessionId::try_from(self.session_id)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.session_id)))?;
             struct_ser.serialize_field("session_id", &v)?;
@@ -691,6 +703,10 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
             "estPrice",
             "est_volume",
             "estVolume",
+            "prev_inav",
+            "prevInav",
+            "current_inav",
+            "currentInav",
             "session_id",
             "sessionId",
         ];
@@ -710,6 +726,8 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
             BidQuoteTotalQuantity,
             EstPrice,
             EstVolume,
+            PrevInav,
+            CurrentInav,
             SessionId,
             __SkipField__,
         }
@@ -746,6 +764,8 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
                             "bidQuoteTotalQuantity" | "bid_quote_total_quantity" => Ok(GeneratedField::BidQuoteTotalQuantity),
                             "estPrice" | "est_price" => Ok(GeneratedField::EstPrice),
                             "estVolume" | "est_volume" => Ok(GeneratedField::EstVolume),
+                            "prevInav" | "prev_inav" => Ok(GeneratedField::PrevInav),
+                            "currentInav" | "current_inav" => Ok(GeneratedField::CurrentInav),
                             "sessionId" | "session_id" => Ok(GeneratedField::SessionId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -779,6 +799,8 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
                 let mut bid_quote_total_quantity__ = None;
                 let mut est_price__ = None;
                 let mut est_volume__ = None;
+                let mut prev_inav__ = None;
+                let mut current_inav__ = None;
                 let mut session_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -882,6 +904,18 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PrevInav => {
+                            if prev_inav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prevInav"));
+                            }
+                            prev_inav__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CurrentInav => {
+                            if current_inav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentInav"));
+                            }
+                            current_inav__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::SessionId => {
                             if session_id__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("sessionId"));
@@ -907,6 +941,8 @@ impl<'de> serde::Deserialize<'de> for EtfOrderbookData {
                     bid_quote_total_quantity: bid_quote_total_quantity__.unwrap_or_default(),
                     est_price: est_price__.unwrap_or_default(),
                     est_volume: est_volume__.unwrap_or_default(),
+                    prev_inav: prev_inav__.unwrap_or_default(),
+                    current_inav: current_inav__.unwrap_or_default(),
                     session_id: session_id__.unwrap_or_default(),
                 })
             }

@@ -43,8 +43,14 @@ pub struct EtfOrderbookData {
     /// 예상 거래량
     #[prost(int64, tag="13")]
     pub est_volume: i64,
+    /// 직전 inav
+    #[prost(string, tag="14")]
+    pub prev_inav: ::prost::alloc::string::String,
+    /// 현재 inav
+    #[prost(string, tag="15")]
+    pub current_inav: ::prost::alloc::string::String,
     /// 세션 ID
-    #[prost(enumeration="SessionId", tag="14")]
+    #[prost(enumeration="SessionId", tag="25")]
     pub session_id: i32,
 }
 /// 선물 주문장 데이터

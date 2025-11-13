@@ -331,6 +331,14 @@
           "format": "int64",
           "title": "예상 거래량"
         },
+        "prevInav": {
+          "type": "string",
+          "title": "직전 inav"
+        },
+        "currentInav": {
+          "type": "string",
+          "title": "현재 inav"
+        },
         "sessionId": {
           "$ref": "#/definitions/marketSessionId",
           "title": "세션 ID"
