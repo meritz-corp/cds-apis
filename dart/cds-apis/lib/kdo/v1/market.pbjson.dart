@@ -98,9 +98,7 @@ const EtfOrderbookData$json = {
     {'1': 'bid_quote_total_quantity', '3': 11, '4': 1, '5': 3, '10': 'bidQuoteTotalQuantity'},
     {'1': 'est_price', '3': 12, '4': 1, '5': 9, '10': 'estPrice'},
     {'1': 'est_volume', '3': 13, '4': 1, '5': 3, '10': 'estVolume'},
-    {'1': 'prev_inav', '3': 14, '4': 1, '5': 9, '10': 'prevInav'},
-    {'1': 'current_inav', '3': 15, '4': 1, '5': 9, '10': 'currentInav'},
-    {'1': 'session_id', '3': 25, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
+    {'1': 'session_id', '3': 14, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
   ],
 };
 
@@ -115,9 +113,8 @@ final $typed_data.Uint8List etfOrderbookDataDescriptor = $convert.base64Decode(
     'dGl0eRgJIAEoA1IObWlkQmlkUXVhbnRpdHkSNwoYYXNrX3F1b3RlX3RvdGFsX3F1YW50aXR5GA'
     'ogASgDUhVhc2tRdW90ZVRvdGFsUXVhbnRpdHkSNwoYYmlkX3F1b3RlX3RvdGFsX3F1YW50aXR5'
     'GAsgASgDUhViaWRRdW90ZVRvdGFsUXVhbnRpdHkSGwoJZXN0X3ByaWNlGAwgASgJUghlc3RQcm'
-    'ljZRIdCgplc3Rfdm9sdW1lGA0gASgDUgllc3RWb2x1bWUSGwoJcHJldl9pbmF2GA4gASgJUghw'
-    'cmV2SW5hdhIhCgxjdXJyZW50X2luYXYYDyABKAlSC2N1cnJlbnRJbmF2EjcKCnNlc3Npb25faW'
-    'QYGSABKA4yGC5rZG8udjEubWFya2V0LlNlc3Npb25JZFIJc2Vzc2lvbklk');
+    'ljZRIdCgplc3Rfdm9sdW1lGA0gASgDUgllc3RWb2x1bWUSNwoKc2Vzc2lvbl9pZBgOIAEoDjIY'
+    'Lmtkby52MS5tYXJrZXQuU2Vzc2lvbklkUglzZXNzaW9uSWQ=');
 
 @$core.Deprecated('Use futuresOrderbookDataDescriptor instead')
 const FuturesOrderbookData$json = {

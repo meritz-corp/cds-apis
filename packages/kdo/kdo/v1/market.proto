@@ -145,14 +145,8 @@ message EtfOrderbookData {
     // 예상 거래량
     int64 est_volume = 13;
 
-    // 직전 inav
-    string prev_inav = 14;
-
-    // 현재 inav
-    string current_inav = 15;
-
     // 세션 ID
-    SessionId session_id = 25;
+    SessionId session_id = 14;
 }
 
 // 선물 주문장 데이터

@@ -37,8 +37,6 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
     $fixnum.Int64? bidQuoteTotalQuantity,
     $core.String? estPrice,
     $fixnum.Int64? estVolume,
-    $core.String? prevInav,
-    $core.String? currentInav,
     SessionId? sessionId,
   }) {
     final result = create();
@@ -55,8 +53,6 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
     if (bidQuoteTotalQuantity != null) result.bidQuoteTotalQuantity = bidQuoteTotalQuantity;
     if (estPrice != null) result.estPrice = estPrice;
     if (estVolume != null) result.estVolume = estVolume;
-    if (prevInav != null) result.prevInav = prevInav;
-    if (currentInav != null) result.currentInav = currentInav;
     if (sessionId != null) result.sessionId = sessionId;
     return result;
   }
@@ -80,9 +76,7 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
     ..aInt64(11, _omitFieldNames ? '' : 'bidQuoteTotalQuantity')
     ..aOS(12, _omitFieldNames ? '' : 'estPrice')
     ..aInt64(13, _omitFieldNames ? '' : 'estVolume')
-    ..aOS(14, _omitFieldNames ? '' : 'prevInav')
-    ..aOS(15, _omitFieldNames ? '' : 'currentInav')
-    ..e<SessionId>(25, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: SessionId.SESSION_ID_UNSPECIFIED, valueOf: SessionId.valueOf, enumValues: SessionId.values)
+    ..e<SessionId>(14, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: SessionId.SESSION_ID_UNSPECIFIED, valueOf: SessionId.valueOf, enumValues: SessionId.values)
     ..hasRequiredFields = false
   ;
 
@@ -197,35 +191,15 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearEstVolume() => $_clearField(13);
 
-  /// 직전 inav
-  @$pb.TagNumber(14)
-  $core.String get prevInav => $_getSZ(13);
-  @$pb.TagNumber(14)
-  set prevInav($core.String value) => $_setString(13, value);
-  @$pb.TagNumber(14)
-  $core.bool hasPrevInav() => $_has(13);
-  @$pb.TagNumber(14)
-  void clearPrevInav() => $_clearField(14);
-
-  /// 현재 inav
-  @$pb.TagNumber(15)
-  $core.String get currentInav => $_getSZ(14);
-  @$pb.TagNumber(15)
-  set currentInav($core.String value) => $_setString(14, value);
-  @$pb.TagNumber(15)
-  $core.bool hasCurrentInav() => $_has(14);
-  @$pb.TagNumber(15)
-  void clearCurrentInav() => $_clearField(15);
-
   /// 세션 ID
-  @$pb.TagNumber(25)
-  SessionId get sessionId => $_getN(15);
-  @$pb.TagNumber(25)
-  set sessionId(SessionId value) => $_setField(25, value);
-  @$pb.TagNumber(25)
-  $core.bool hasSessionId() => $_has(15);
-  @$pb.TagNumber(25)
-  void clearSessionId() => $_clearField(25);
+  @$pb.TagNumber(14)
+  SessionId get sessionId => $_getN(13);
+  @$pb.TagNumber(14)
+  set sessionId(SessionId value) => $_setField(14, value);
+  @$pb.TagNumber(14)
+  $core.bool hasSessionId() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearSessionId() => $_clearField(14);
 }
 
 /// 선물 주문장 데이터
