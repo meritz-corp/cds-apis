@@ -689,15 +689,18 @@
       "properties": {
         "etfPrice": {
           "type": "string",
-          "title": "ETF 가격 (원 단위, i64)"
+          "title": "ETF 가격 (원 단위)"
         },
-        "futurePrice": {
-          "type": "string",
-          "title": "선물 가격 (원 단위, i64)"
+        "constituentsPrice": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "구성 종목 가격 맵 (종목 코드 -\u003e 가격, 원 단위)"
         },
         "etfNav": {
           "type": "string",
-          "title": "ETF NAV (원 단위, i64)"
+          "title": "ETF NAV (원 단위)"
         }
       },
       "title": "LP 가격 정보"

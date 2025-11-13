@@ -1470,7 +1470,7 @@ impl serde::Serialize for LpPricing {
             struct_ser.serialize_field("etf_price", &self.etf_price)?;
         }
         if true {
-            struct_ser.serialize_field("future_price", &self.future_price)?;
+            struct_ser.serialize_field("constituents_price", &self.constituents_price)?;
         }
         if true {
             struct_ser.serialize_field("etf_nav", &self.etf_nav)?;
@@ -1487,8 +1487,8 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
         const FIELDS: &[&str] = &[
             "etf_price",
             "etfPrice",
-            "future_price",
-            "futurePrice",
+            "constituents_price",
+            "constituentsPrice",
             "etf_nav",
             "etfNav",
         ];
@@ -1496,7 +1496,7 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             EtfPrice,
-            FuturePrice,
+            ConstituentsPrice,
             EtfNav,
             __SkipField__,
         }
@@ -1521,7 +1521,7 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                     {
                         match value {
                             "etfPrice" | "etf_price" => Ok(GeneratedField::EtfPrice),
-                            "futurePrice" | "future_price" => Ok(GeneratedField::FuturePrice),
+                            "constituentsPrice" | "constituents_price" => Ok(GeneratedField::ConstituentsPrice),
                             "etfNav" | "etf_nav" => Ok(GeneratedField::EtfNav),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -1543,7 +1543,7 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut etf_price__ = None;
-                let mut future_price__ = None;
+                let mut constituents_price__ = None;
                 let mut etf_nav__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -1553,11 +1553,13 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                             }
                             etf_price__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::FuturePrice => {
-                            if future_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("futurePrice"));
+                        GeneratedField::ConstituentsPrice => {
+                            if constituents_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituentsPrice"));
                             }
-                            future_price__ = Some(map_.next_value()?);
+                            constituents_price__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
                         }
                         GeneratedField::EtfNav => {
                             if etf_nav__.is_some() {
@@ -1572,7 +1574,7 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                 }
                 Ok(LpPricing {
                     etf_price: etf_price__.unwrap_or_default(),
-                    future_price: future_price__.unwrap_or_default(),
+                    constituents_price: constituents_price__.unwrap_or_default(),
                     etf_nav: etf_nav__.unwrap_or_default(),
                 })
             }

@@ -771,11 +771,11 @@ type LpPricing struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ETF 가격 (원 단위, i64)
+	// ETF 가격 (원 단위)
 	EtfPrice string `protobuf:"bytes,1,opt,name=etf_price,json=etfPrice,proto3" json:"etf_price,omitempty"`
-	// 선물 가격 (원 단위, i64)
-	FuturePrice string `protobuf:"bytes,2,opt,name=future_price,json=futurePrice,proto3" json:"future_price,omitempty"`
-	// ETF NAV (원 단위, i64)
+	// 구성 종목 가격 맵 (종목 코드 -> 가격, 원 단위)
+	ConstituentsPrice map[string]string `protobuf:"bytes,2,rep,name=constituents_price,json=constituentsPrice,proto3" json:"constituents_price,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ETF NAV (원 단위)
 	EtfNav string `protobuf:"bytes,3,opt,name=etf_nav,json=etfNav,proto3" json:"etf_nav,omitempty"`
 }
 
@@ -818,11 +818,11 @@ func (x *LpPricing) GetEtfPrice() string {
 	return ""
 }
 
-func (x *LpPricing) GetFuturePrice() string {
+func (x *LpPricing) GetConstituentsPrice() map[string]string {
 	if x != nil {
-		return x.FuturePrice
+		return x.ConstituentsPrice
 	}
-	return ""
+	return nil
 }
 
 func (x *LpPricing) GetEtfNav() string {
@@ -1800,13 +1800,21 @@ var file_kdo_v1_lp_proto_rawDesc = []byte{
 	0x72, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x6d, 0x61, 0x78, 0x4f, 0x72, 0x64,
 	0x65, 0x72, 0x73, 0x12, 0x23, 0x0a, 0x0d, 0x75, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x70, 0x65, 0x72,
 	0x63, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0c, 0x75, 0x73, 0x61, 0x67,
-	0x65, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x22, 0x64, 0x0a, 0x09, 0x4c, 0x70, 0x50, 0x72,
-	0x69, 0x63, 0x69, 0x6e, 0x67, 0x12, 0x1b, 0x0a, 0x09, 0x65, 0x74, 0x66, 0x5f, 0x70, 0x72, 0x69,
-	0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x65, 0x74, 0x66, 0x50, 0x72, 0x69,
-	0x63, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x66, 0x75, 0x74, 0x75, 0x72, 0x65, 0x5f, 0x70, 0x72, 0x69,
-	0x63, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x66, 0x75, 0x74, 0x75, 0x72, 0x65,
-	0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x17, 0x0a, 0x07, 0x65, 0x74, 0x66, 0x5f, 0x6e, 0x61, 0x76,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x65, 0x74, 0x66, 0x4e, 0x61, 0x76, 0x22, 0x74,
+	0x65, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x22, 0xe3, 0x01, 0x0a, 0x09, 0x4c, 0x70, 0x50,
+	0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x12, 0x1b, 0x0a, 0x09, 0x65, 0x74, 0x66, 0x5f, 0x70, 0x72,
+	0x69, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x65, 0x74, 0x66, 0x50, 0x72,
+	0x69, 0x63, 0x65, 0x12, 0x5a, 0x0a, 0x12, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x69, 0x74, 0x75, 0x65,
+	0x6e, 0x74, 0x73, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x2b, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x4c, 0x70, 0x50, 0x72,
+	0x69, 0x63, 0x69, 0x6e, 0x67, 0x2e, 0x43, 0x6f, 0x6e, 0x73, 0x74, 0x69, 0x74, 0x75, 0x65, 0x6e,
+	0x74, 0x73, 0x50, 0x72, 0x69, 0x63, 0x65, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x11, 0x63, 0x6f,
+	0x6e, 0x73, 0x74, 0x69, 0x74, 0x75, 0x65, 0x6e, 0x74, 0x73, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12,
+	0x17, 0x0a, 0x07, 0x65, 0x74, 0x66, 0x5f, 0x6e, 0x61, 0x76, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x65, 0x74, 0x66, 0x4e, 0x61, 0x76, 0x1a, 0x44, 0x0a, 0x16, 0x43, 0x6f, 0x6e, 0x73,
+	0x74, 0x69, 0x74, 0x75, 0x65, 0x6e, 0x74, 0x73, 0x50, 0x72, 0x69, 0x63, 0x65, 0x45, 0x6e, 0x74,
+	0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x74,
 	0x0a, 0x0f, 0x47, 0x65, 0x74, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x12, 0x2e, 0x0a, 0x03, 0x65, 0x74, 0x66, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x1c,
 	0xe2, 0x41, 0x01, 0x02, 0xfa, 0x41, 0x15, 0x0a, 0x13, 0x6b, 0x64, 0x6f, 0x2e, 0x63, 0x64, 0x73,
@@ -2098,7 +2106,7 @@ func file_kdo_v1_lp_proto_rawDescGZIP() []byte {
 }
 
 var file_kdo_v1_lp_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(ReplicationMethod)(0),           // 0: kdo.v1.lp.ReplicationMethod
 	(EtfLpState)(0),                  // 1: kdo.v1.lp.EtfLpState
@@ -2125,8 +2133,9 @@ var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(*EtfLpEvent)(nil),               // 22: kdo.v1.lp.EtfLpEvent
 	(*GetUserOrderBookRequest)(nil),  // 23: kdo.v1.lp.GetUserOrderBookRequest
 	(*UserOrderbookData)(nil),        // 24: kdo.v1.lp.UserOrderbookData
-	(*fieldmaskpb.FieldMask)(nil),    // 25: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),    // 26: google.protobuf.Timestamp
+	nil,                              // 25: kdo.v1.lp.LpPricing.ConstituentsPriceEntry
+	(*fieldmaskpb.FieldMask)(nil),    // 26: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),    // 27: google.protobuf.Timestamp
 }
 var file_kdo_v1_lp_proto_depIdxs = []int32{
 	1,  // 0: kdo.v1.lp.EtfLpStatus.state:type_name -> kdo.v1.lp.EtfLpState
@@ -2134,40 +2143,41 @@ var file_kdo_v1_lp_proto_depIdxs = []int32{
 	8,  // 2: kdo.v1.lp.EtfLpStatus.order_limit:type_name -> kdo.v1.lp.OrderLimitStatus
 	10, // 3: kdo.v1.lp.EtfLpStatus.pricing:type_name -> kdo.v1.lp.LpPricing
 	9,  // 4: kdo.v1.lp.OrderLimitStatus.time_frame_status:type_name -> kdo.v1.lp.TimeFrameStatus
-	5,  // 5: kdo.v1.lp.ListEtfLpsResponse.etf_lps:type_name -> kdo.v1.lp.EtfLp
-	5,  // 6: kdo.v1.lp.UpdateEtfLpRequest.lp:type_name -> kdo.v1.lp.EtfLp
-	25, // 7: kdo.v1.lp.UpdateEtfLpRequest.update_mask:type_name -> google.protobuf.FieldMask
-	6,  // 8: kdo.v1.lp.StartEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
-	6,  // 9: kdo.v1.lp.StopEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
-	2,  // 10: kdo.v1.lp.EtfLpEvent.task_type:type_name -> kdo.v1.lp.TaskType
-	3,  // 11: kdo.v1.lp.EtfLpEvent.type:type_name -> kdo.v1.lp.LpEventType
-	26, // 12: kdo.v1.lp.EtfLpEvent.timestamp:type_name -> google.protobuf.Timestamp
-	4,  // 13: kdo.v1.lp.EtfLpEvent.level:type_name -> kdo.v1.lp.LpEventLevel
-	11, // 14: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
-	12, // 15: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
-	14, // 16: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
-	15, // 17: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
-	16, // 18: kdo.v1.lp.LpService.StreamEtfLpStatus:input_type -> kdo.v1.lp.StreamEtfLpStatusRequest
-	17, // 19: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
-	19, // 20: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
-	21, // 21: kdo.v1.lp.LpService.StreamLpEvents:input_type -> kdo.v1.lp.StreamLpEventsRequest
-	23, // 22: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	23, // 23: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	5,  // 24: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
-	13, // 25: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
-	5,  // 26: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
-	6,  // 27: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
-	6,  // 28: kdo.v1.lp.LpService.StreamEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
-	18, // 29: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
-	20, // 30: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
-	22, // 31: kdo.v1.lp.LpService.StreamLpEvents:output_type -> kdo.v1.lp.EtfLpEvent
-	24, // 32: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	24, // 33: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	24, // [24:34] is the sub-list for method output_type
-	14, // [14:24] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	25, // 5: kdo.v1.lp.LpPricing.constituents_price:type_name -> kdo.v1.lp.LpPricing.ConstituentsPriceEntry
+	5,  // 6: kdo.v1.lp.ListEtfLpsResponse.etf_lps:type_name -> kdo.v1.lp.EtfLp
+	5,  // 7: kdo.v1.lp.UpdateEtfLpRequest.lp:type_name -> kdo.v1.lp.EtfLp
+	26, // 8: kdo.v1.lp.UpdateEtfLpRequest.update_mask:type_name -> google.protobuf.FieldMask
+	6,  // 9: kdo.v1.lp.StartEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
+	6,  // 10: kdo.v1.lp.StopEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
+	2,  // 11: kdo.v1.lp.EtfLpEvent.task_type:type_name -> kdo.v1.lp.TaskType
+	3,  // 12: kdo.v1.lp.EtfLpEvent.type:type_name -> kdo.v1.lp.LpEventType
+	27, // 13: kdo.v1.lp.EtfLpEvent.timestamp:type_name -> google.protobuf.Timestamp
+	4,  // 14: kdo.v1.lp.EtfLpEvent.level:type_name -> kdo.v1.lp.LpEventLevel
+	11, // 15: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
+	12, // 16: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
+	14, // 17: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
+	15, // 18: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
+	16, // 19: kdo.v1.lp.LpService.StreamEtfLpStatus:input_type -> kdo.v1.lp.StreamEtfLpStatusRequest
+	17, // 20: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
+	19, // 21: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
+	21, // 22: kdo.v1.lp.LpService.StreamLpEvents:input_type -> kdo.v1.lp.StreamLpEventsRequest
+	23, // 23: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	23, // 24: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	5,  // 25: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
+	13, // 26: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
+	5,  // 27: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
+	6,  // 28: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
+	6,  // 29: kdo.v1.lp.LpService.StreamEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
+	18, // 30: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
+	20, // 31: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
+	22, // 32: kdo.v1.lp.LpService.StreamLpEvents:output_type -> kdo.v1.lp.EtfLpEvent
+	24, // 33: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	24, // 34: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	25, // [25:35] is the sub-list for method output_type
+	15, // [15:25] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_kdo_v1_lp_proto_init() }
@@ -2425,7 +2435,7 @@ func file_kdo_v1_lp_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_kdo_v1_lp_proto_rawDesc,
 			NumEnums:      5,
-			NumMessages:   20,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

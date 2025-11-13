@@ -211,13 +211,13 @@ message TimeFrameStatus {
 
 // LP 가격 정보
 message LpPricing {
-  // ETF 가격 (원 단위, i64)
+  // ETF 가격 (원 단위)
   string etf_price = 1;
 
-  // 선물 가격 (원 단위, i64)
-  string future_price = 2;
+  // 구성 종목 가격 맵 (종목 코드 -> 가격, 원 단위)
+  map<string, string> constituents_price = 2;
 
-  // ETF NAV (원 단위, i64)
+  // ETF NAV (원 단위)
   string etf_nav = 3;
 }
 

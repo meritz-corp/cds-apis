@@ -553,12 +553,12 @@ class TimeFrameStatus extends $pb.GeneratedMessage {
 class LpPricing extends $pb.GeneratedMessage {
   factory LpPricing({
     $core.String? etfPrice,
-    $core.String? futurePrice,
+    $core.Iterable<$core.MapEntry<$core.String, $core.String>>? constituentsPrice,
     $core.String? etfNav,
   }) {
     final result = create();
     if (etfPrice != null) result.etfPrice = etfPrice;
-    if (futurePrice != null) result.futurePrice = futurePrice;
+    if (constituentsPrice != null) result.constituentsPrice.addEntries(constituentsPrice);
     if (etfNav != null) result.etfNav = etfNav;
     return result;
   }
@@ -570,7 +570,7 @@ class LpPricing extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LpPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfPrice')
-    ..aOS(2, _omitFieldNames ? '' : 'futurePrice')
+    ..m<$core.String, $core.String>(2, _omitFieldNames ? '' : 'constituentsPrice', entryClassName: 'LpPricing.ConstituentsPriceEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('kdo.v1.lp'))
     ..aOS(3, _omitFieldNames ? '' : 'etfNav')
     ..hasRequiredFields = false
   ;
@@ -592,7 +592,7 @@ class LpPricing extends $pb.GeneratedMessage {
   static LpPricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LpPricing>(create);
   static LpPricing? _defaultInstance;
 
-  /// ETF 가격 (원 단위, i64)
+  /// ETF 가격 (원 단위)
   @$pb.TagNumber(1)
   $core.String get etfPrice => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -602,17 +602,11 @@ class LpPricing extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEtfPrice() => $_clearField(1);
 
-  /// 선물 가격 (원 단위, i64)
+  /// 구성 종목 가격 맵 (종목 코드 -> 가격, 원 단위)
   @$pb.TagNumber(2)
-  $core.String get futurePrice => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set futurePrice($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFuturePrice() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFuturePrice() => $_clearField(2);
+  $pb.PbMap<$core.String, $core.String> get constituentsPrice => $_getMap(1);
 
-  /// ETF NAV (원 단위, i64)
+  /// ETF NAV (원 단위)
   @$pb.TagNumber(3)
   $core.String get etfNav => $_getSZ(2);
   @$pb.TagNumber(3)
