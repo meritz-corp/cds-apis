@@ -32,6 +32,10 @@ type MarketServiceClient interface {
 	GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
 	StreamUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (MarketService_StreamUserOrderbookClient, error)
+	// 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
+	AddRawMessagesSocket(ctx context.Context, in *AddRawMessagesSocketRequest, opts ...grpc.CallOption) (*AddRawMessagesSocketResponse, error)
+	// Raw 메시지 스트리밍 (server-side streaming)
+	StreamRawMessages(ctx context.Context, in *StreamRawMessagesRequest, opts ...grpc.CallOption) (MarketService_StreamRawMessagesClient, error)
 }
 
 type marketServiceClient struct {
@@ -179,6 +183,47 @@ func (x *marketServiceStreamUserOrderbookClient) Recv() (*UserOrderbookData, err
 	return m, nil
 }
 
+func (c *marketServiceClient) AddRawMessagesSocket(ctx context.Context, in *AddRawMessagesSocketRequest, opts ...grpc.CallOption) (*AddRawMessagesSocketResponse, error) {
+	out := new(AddRawMessagesSocketResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.market.MarketService/AddRawMessagesSocket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *marketServiceClient) StreamRawMessages(ctx context.Context, in *StreamRawMessagesRequest, opts ...grpc.CallOption) (MarketService_StreamRawMessagesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketService_ServiceDesc.Streams[4], "/kdo.v1.market.MarketService/StreamRawMessages", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &marketServiceStreamRawMessagesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MarketService_StreamRawMessagesClient interface {
+	Recv() (*RawMarketMessage, error)
+	grpc.ClientStream
+}
+
+type marketServiceStreamRawMessagesClient struct {
+	grpc.ClientStream
+}
+
+func (x *marketServiceStreamRawMessagesClient) Recv() (*RawMarketMessage, error) {
+	m := new(RawMarketMessage)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // MarketServiceServer is the server API for MarketService service.
 // All implementations must embed UnimplementedMarketServiceServer
 // for forward compatibility
@@ -193,6 +238,10 @@ type MarketServiceServer interface {
 	GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
 	StreamUserOrderbook(*GetUserOrderBookRequest, MarketService_StreamUserOrderbookServer) error
+	// 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
+	AddRawMessagesSocket(context.Context, *AddRawMessagesSocketRequest) (*AddRawMessagesSocketResponse, error)
+	// Raw 메시지 스트리밍 (server-side streaming)
+	StreamRawMessages(*StreamRawMessagesRequest, MarketService_StreamRawMessagesServer) error
 	mustEmbedUnimplementedMarketServiceServer()
 }
 
@@ -214,6 +263,12 @@ func (UnimplementedMarketServiceServer) GetUserOrderbook(context.Context, *GetUs
 }
 func (UnimplementedMarketServiceServer) StreamUserOrderbook(*GetUserOrderBookRequest, MarketService_StreamUserOrderbookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamUserOrderbook not implemented")
+}
+func (UnimplementedMarketServiceServer) AddRawMessagesSocket(context.Context, *AddRawMessagesSocketRequest) (*AddRawMessagesSocketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddRawMessagesSocket not implemented")
+}
+func (UnimplementedMarketServiceServer) StreamRawMessages(*StreamRawMessagesRequest, MarketService_StreamRawMessagesServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamRawMessages not implemented")
 }
 func (UnimplementedMarketServiceServer) mustEmbedUnimplementedMarketServiceServer() {}
 
@@ -330,6 +385,45 @@ func (x *marketServiceStreamUserOrderbookServer) Send(m *UserOrderbookData) erro
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MarketService_AddRawMessagesSocket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRawMessagesSocketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketServiceServer).AddRawMessagesSocket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.market.MarketService/AddRawMessagesSocket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketServiceServer).AddRawMessagesSocket(ctx, req.(*AddRawMessagesSocketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MarketService_StreamRawMessages_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamRawMessagesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MarketServiceServer).StreamRawMessages(m, &marketServiceStreamRawMessagesServer{stream})
+}
+
+type MarketService_StreamRawMessagesServer interface {
+	Send(*RawMarketMessage) error
+	grpc.ServerStream
+}
+
+type marketServiceStreamRawMessagesServer struct {
+	grpc.ServerStream
+}
+
+func (x *marketServiceStreamRawMessagesServer) Send(m *RawMarketMessage) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // MarketService_ServiceDesc is the grpc.ServiceDesc for MarketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -340,6 +434,10 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserOrderbook",
 			Handler:    _MarketService_GetUserOrderbook_Handler,
+		},
+		{
+			MethodName: "AddRawMessagesSocket",
+			Handler:    _MarketService_AddRawMessagesSocket_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
@@ -361,6 +459,11 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamUserOrderbook",
 			Handler:       _MarketService_StreamUserOrderbook_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamRawMessages",
+			Handler:       _MarketService_StreamRawMessages_Handler,
 			ServerStreams: true,
 		},
 	},

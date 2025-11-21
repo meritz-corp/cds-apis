@@ -371,3 +371,65 @@ final $typed_data.Uint8List userOrderbookDataDescriptor = $convert.base64Decode(
     'NrX3ByaWNlcxgCIAMoCVIJYXNrUHJpY2VzEiUKDmJpZF9xdWFudGl0aWVzGAMgAygDUg1iaWRR'
     'dWFudGl0aWVzEiUKDmFza19xdWFudGl0aWVzGAQgAygDUg1hc2tRdWFudGl0aWVz');
 
+@$core.Deprecated('Use addRawMessagesSocketRequestDescriptor instead')
+const AddRawMessagesSocketRequest$json = {
+  '1': 'AddRawMessagesSocketRequest',
+  '2': [
+    {'1': 'multicast_address', '3': 1, '4': 1, '5': 9, '10': 'multicastAddress'},
+    {'1': 'multicast_interface', '3': 2, '4': 1, '5': 9, '10': 'multicastInterface'},
+    {'1': 'port', '3': 3, '4': 1, '5': 13, '10': 'port'},
+    {'1': 'buffer_size', '3': 4, '4': 1, '5': 13, '10': 'bufferSize'},
+  ],
+};
+
+/// Descriptor for `AddRawMessagesSocketRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addRawMessagesSocketRequestDescriptor = $convert.base64Decode(
+    'ChtBZGRSYXdNZXNzYWdlc1NvY2tldFJlcXVlc3QSKwoRbXVsdGljYXN0X2FkZHJlc3MYASABKA'
+    'lSEG11bHRpY2FzdEFkZHJlc3MSLwoTbXVsdGljYXN0X2ludGVyZmFjZRgCIAEoCVISbXVsdGlj'
+    'YXN0SW50ZXJmYWNlEhIKBHBvcnQYAyABKA1SBHBvcnQSHwoLYnVmZmVyX3NpemUYBCABKA1SCm'
+    'J1ZmZlclNpemU=');
+
+@$core.Deprecated('Use addRawMessagesSocketResponseDescriptor instead')
+const AddRawMessagesSocketResponse$json = {
+  '1': 'AddRawMessagesSocketResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'error_message', '3': 2, '4': 1, '5': 9, '10': 'errorMessage'},
+  ],
+};
+
+/// Descriptor for `AddRawMessagesSocketResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addRawMessagesSocketResponseDescriptor = $convert.base64Decode(
+    'ChxBZGRSYXdNZXNzYWdlc1NvY2tldFJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3'
+    'MSIwoNZXJyb3JfbWVzc2FnZRgCIAEoCVIMZXJyb3JNZXNzYWdl');
+
+@$core.Deprecated('Use streamRawMessagesRequestDescriptor instead')
+const StreamRawMessagesRequest$json = {
+  '1': 'StreamRawMessagesRequest',
+  '2': [
+    {'1': 'socket_ids', '3': 1, '4': 3, '5': 9, '10': 'socketIds'},
+    {'1': 'buffer_size', '3': 2, '4': 1, '5': 13, '10': 'bufferSize'},
+  ],
+};
+
+/// Descriptor for `StreamRawMessagesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamRawMessagesRequestDescriptor = $convert.base64Decode(
+    'ChhTdHJlYW1SYXdNZXNzYWdlc1JlcXVlc3QSHQoKc29ja2V0X2lkcxgBIAMoCVIJc29ja2V0SW'
+    'RzEh8KC2J1ZmZlcl9zaXplGAIgASgNUgpidWZmZXJTaXpl');
+
+@$core.Deprecated('Use rawMarketMessageDescriptor instead')
+const RawMarketMessage$json = {
+  '1': 'RawMarketMessage',
+  '2': [
+    {'1': 'data', '3': 1, '4': 1, '5': 12, '10': 'data'},
+    {'1': 'receive_timestamp_ns', '3': 2, '4': 1, '5': 3, '10': 'receiveTimestampNs'},
+    {'1': 'sequence_number', '3': 3, '4': 1, '5': 4, '10': 'sequenceNumber'},
+  ],
+};
+
+/// Descriptor for `RawMarketMessage`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List rawMarketMessageDescriptor = $convert.base64Decode(
+    'ChBSYXdNYXJrZXRNZXNzYWdlEhIKBGRhdGEYASABKAxSBGRhdGESMAoUcmVjZWl2ZV90aW1lc3'
+    'RhbXBfbnMYAiABKANSEnJlY2VpdmVUaW1lc3RhbXBOcxInCg9zZXF1ZW5jZV9udW1iZXIYAyAB'
+    'KARSDnNlcXVlbmNlTnVtYmVy');
+

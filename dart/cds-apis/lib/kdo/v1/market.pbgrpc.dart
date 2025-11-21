@@ -58,6 +58,16 @@ class MarketServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamUserOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
+  $grpc.ResponseFuture<$0.AddRawMessagesSocketResponse> addRawMessagesSocket($0.AddRawMessagesSocketRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$addRawMessagesSocket, request, options: options);
+  }
+
+  /// Raw 메시지 스트리밍 (server-side streaming)
+  $grpc.ResponseStream<$0.RawMarketMessage> streamRawMessages($0.StreamRawMessagesRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamRawMessages, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$streamEtfOrderbook = $grpc.ClientMethod<$0.StreamEtfOrderbookRequest, $0.EtfOrderbookData>(
@@ -80,6 +90,14 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/StreamUserOrderbook',
       ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
       $0.UserOrderbookData.fromBuffer);
+  static final _$addRawMessagesSocket = $grpc.ClientMethod<$0.AddRawMessagesSocketRequest, $0.AddRawMessagesSocketResponse>(
+      '/kdo.v1.market.MarketService/AddRawMessagesSocket',
+      ($0.AddRawMessagesSocketRequest value) => value.writeToBuffer(),
+      $0.AddRawMessagesSocketResponse.fromBuffer);
+  static final _$streamRawMessages = $grpc.ClientMethod<$0.StreamRawMessagesRequest, $0.RawMarketMessage>(
+      '/kdo.v1.market.MarketService/StreamRawMessages',
+      ($0.StreamRawMessagesRequest value) => value.writeToBuffer(),
+      $0.RawMarketMessage.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.market.MarketService')
@@ -122,6 +140,20 @@ abstract class MarketServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
         ($0.UserOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AddRawMessagesSocketRequest, $0.AddRawMessagesSocketResponse>(
+        'AddRawMessagesSocket',
+        addRawMessagesSocket_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.AddRawMessagesSocketRequest.fromBuffer(value),
+        ($0.AddRawMessagesSocketResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamRawMessagesRequest, $0.RawMarketMessage>(
+        'StreamRawMessages',
+        streamRawMessages_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamRawMessagesRequest.fromBuffer(value),
+        ($0.RawMarketMessage value) => value.writeToBuffer()));
   }
 
   $async.Stream<$0.EtfOrderbookData> streamEtfOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfOrderbookRequest> $request) async* {
@@ -153,5 +185,17 @@ abstract class MarketServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
+
+  $async.Future<$0.AddRawMessagesSocketResponse> addRawMessagesSocket_Pre($grpc.ServiceCall $call, $async.Future<$0.AddRawMessagesSocketRequest> $request) async {
+    return addRawMessagesSocket($call, await $request);
+  }
+
+  $async.Future<$0.AddRawMessagesSocketResponse> addRawMessagesSocket($grpc.ServiceCall call, $0.AddRawMessagesSocketRequest request);
+
+  $async.Stream<$0.RawMarketMessage> streamRawMessages_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamRawMessagesRequest> $request) async* {
+    yield* streamRawMessages($call, await $request);
+  }
+
+  $async.Stream<$0.RawMarketMessage> streamRawMessages($grpc.ServiceCall call, $0.StreamRawMessagesRequest request);
 
 }

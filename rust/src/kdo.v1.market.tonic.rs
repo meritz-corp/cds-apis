@@ -220,6 +220,63 @@ pub mod market_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn add_raw_messages_socket(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddRawMessagesSocketRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddRawMessagesSocketResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/AddRawMessagesSocket",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.market.MarketService",
+                        "AddRawMessagesSocket",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stream_raw_messages(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamRawMessagesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::RawMarketMessage>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/StreamRawMessages",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.market.MarketService", "StreamRawMessages"),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -286,6 +343,26 @@ pub mod market_service_server {
             request: tonic::Request<super::GetUserOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamUserOrderbookStream>,
+            tonic::Status,
+        >;
+        async fn add_raw_messages_socket(
+            &self,
+            request: tonic::Request<super::AddRawMessagesSocketRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddRawMessagesSocketResponse>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamRawMessages method.
+        type StreamRawMessagesStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::RawMarketMessage, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_raw_messages(
+            &self,
+            request: tonic::Request<super::StreamRawMessagesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamRawMessagesStream>,
             tonic::Status,
         >;
     }
@@ -589,6 +666,103 @@ pub mod market_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StreamUserOrderbookSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/AddRawMessagesSocket" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddRawMessagesSocketSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::AddRawMessagesSocketRequest>
+                    for AddRawMessagesSocketSvc<T> {
+                        type Response = super::AddRawMessagesSocketResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::AddRawMessagesSocketRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::add_raw_messages_socket(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = AddRawMessagesSocketSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/StreamRawMessages" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamRawMessagesSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamRawMessagesRequest,
+                    > for StreamRawMessagesSvc<T> {
+                        type Response = super::RawMarketMessage;
+                        type ResponseStream = T::StreamRawMessagesStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamRawMessagesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::stream_raw_messages(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamRawMessagesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

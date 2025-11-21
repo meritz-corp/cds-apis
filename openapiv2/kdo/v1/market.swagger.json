@@ -16,6 +16,92 @@
     "application/json"
   ],
   "paths": {
+    "/v1/market/raw-messages/sockets": {
+      "post": {
+        "summary": "새로운 Raw 메시지 스트리밍 UDP 소켓 추가",
+        "operationId": "MarketService_AddRawMessagesSocket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/marketAddRawMessagesSocketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/marketAddRawMessagesSocketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
+    "/v1/market/raw-messages:stream": {
+      "get": {
+        "summary": "Raw 메시지 스트리밍 (server-side streaming)",
+        "operationId": "MarketService_StreamRawMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/marketRawMarketMessage"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of marketRawMarketMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "socketIds",
+            "description": "Optional filter by socket IDs (empty = all sockets)",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "bufferSize",
+            "description": "Optional buffer size for the stream (default: 100)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
     "/v1/market/{etf}/nav:stream": {
       "get": {
         "summary": "ETF NAV 데이터를 스트리밍",
@@ -230,6 +316,44 @@
     }
   },
   "definitions": {
+    "marketAddRawMessagesSocketRequest": {
+      "type": "object",
+      "properties": {
+        "multicastAddress": {
+          "type": "string",
+          "title": "Multicast address to listen on (e.g., \"239.1.1.1\")"
+        },
+        "multicastInterface": {
+          "type": "string",
+          "title": "Interface address to bind (e.g., \"192.168.1.100\")"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "title": "UDP port to listen on"
+        },
+        "bufferSize": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Buffer size for receiving UDP packets (default: 2048)"
+        }
+      },
+      "title": "Request to add a new raw UDP socket"
+    },
+    "marketAddRawMessagesSocketResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "Whether the socket was added successfully"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "Error message if success is false"
+        }
+      },
+      "title": "Response from adding a raw socket"
+    },
     "marketEtfNav": {
       "type": "object",
       "properties": {
@@ -416,6 +540,27 @@
         }
       },
       "title": "선물 주문장 데이터"
+    },
+    "marketRawMarketMessage": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "title": "Raw binary data received from the socket"
+        },
+        "receiveTimestampNs": {
+          "type": "string",
+          "format": "int64",
+          "title": "Timestamp when the message was received (nanoseconds since epoch)"
+        },
+        "sequenceNumber": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Message sequence number (per socket)"
+        }
+      },
+      "title": "Raw market message received from UDP socket"
     },
     "marketSessionId": {
       "type": "string",

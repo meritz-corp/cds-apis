@@ -267,6 +267,59 @@ pub struct UserOrderbookData {
     #[prost(int64, repeated, tag="4")]
     pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
 }
+/// Request to add a new raw UDP socket
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddRawMessagesSocketRequest {
+    /// Multicast address to listen on (e.g., "239.1.1.1")
+    #[prost(string, tag="1")]
+    pub multicast_address: ::prost::alloc::string::String,
+    /// Interface address to bind (e.g., "192.168.1.100")
+    #[prost(string, tag="2")]
+    pub multicast_interface: ::prost::alloc::string::String,
+    /// UDP port to listen on
+    #[prost(uint32, tag="3")]
+    pub port: u32,
+    /// Buffer size for receiving UDP packets (default: 2048)
+    #[prost(uint32, tag="4")]
+    pub buffer_size: u32,
+}
+/// Response from adding a raw socket
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddRawMessagesSocketResponse {
+    /// Whether the socket was added successfully
+    #[prost(bool, tag="1")]
+    pub success: bool,
+    /// Error message if success is false
+    #[prost(string, tag="2")]
+    pub error_message: ::prost::alloc::string::String,
+}
+/// Request to stream raw market messages
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamRawMessagesRequest {
+    /// Optional filter by socket IDs (empty = all sockets)
+    #[prost(string, repeated, tag="1")]
+    pub socket_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Optional buffer size for the stream (default: 100)
+    #[prost(uint32, tag="2")]
+    pub buffer_size: u32,
+}
+/// Raw market message received from UDP socket
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RawMarketMessage {
+    /// Raw binary data received from the socket
+    #[prost(bytes="vec", tag="1")]
+    pub data: ::prost::alloc::vec::Vec<u8>,
+    /// Timestamp when the message was received (nanoseconds since epoch)
+    #[prost(int64, tag="2")]
+    pub receive_timestamp_ns: i64,
+    /// Message sequence number (per socket)
+    #[prost(uint64, tag="3")]
+    pub sequence_number: u64,
+}
 /// 세션 ID 열거형 (AIP-126)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

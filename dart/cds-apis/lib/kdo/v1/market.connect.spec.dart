@@ -51,4 +51,20 @@ abstract final class MarketService {
     kdov1market.GetUserOrderBookRequest.new,
     kdov1market.UserOrderbookData.new,
   );
+
+  /// 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
+  static const addRawMessagesSocket = connect.Spec(
+    '/$name/AddRawMessagesSocket',
+    connect.StreamType.unary,
+    kdov1market.AddRawMessagesSocketRequest.new,
+    kdov1market.AddRawMessagesSocketResponse.new,
+  );
+
+  /// Raw 메시지 스트리밍 (server-side streaming)
+  static const streamRawMessages = connect.Spec(
+    '/$name/StreamRawMessages',
+    connect.StreamType.server,
+    kdov1market.StreamRawMessagesRequest.new,
+    kdov1market.RawMarketMessage.new,
+  );
 }

@@ -51,6 +51,21 @@ service MarketService {
         };
     }
 
+    // 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
+    rpc AddRawMessagesSocket(AddRawMessagesSocketRequest) returns (AddRawMessagesSocketResponse) {
+        option (google.api.http) = {
+            post: "/v1/market/raw-messages/sockets"
+            body: "*"
+        };
+    }
+
+    // Raw 메시지 스트리밍 (server-side streaming)
+    rpc StreamRawMessages(StreamRawMessagesRequest) returns (stream RawMarketMessage) {
+        option (google.api.http) = {
+            get: "/v1/market/raw-messages:stream"
+        };
+    }
+
     // 주문 접수
     //    rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse) {
     //        option (google.api.http) = {
@@ -376,4 +391,49 @@ message UserOrderbookData {
 
     // 매도 수량 (10단계)
     repeated int64 ask_quantities = 4;
+}
+
+// Request to add a new raw UDP socket
+message AddRawMessagesSocketRequest {
+    // Multicast address to listen on (e.g., "239.1.1.1")
+    string multicast_address = 1;
+
+    // Interface address to bind (e.g., "192.168.1.100")
+    string multicast_interface = 2;
+
+    // UDP port to listen on
+    uint32 port = 3;
+
+    // Buffer size for receiving UDP packets (default: 2048)
+    uint32 buffer_size = 4;
+}
+
+// Response from adding a raw socket
+message AddRawMessagesSocketResponse {
+    // Whether the socket was added successfully
+    bool success = 1;
+
+    // Error message if success is false
+    string error_message = 2;
+}
+
+// Request to stream raw market messages
+message StreamRawMessagesRequest {
+    // Optional filter by socket IDs (empty = all sockets)
+    repeated string socket_ids = 1;
+
+    // Optional buffer size for the stream (default: 100)
+    uint32 buffer_size = 2;
+}
+
+// Raw market message received from UDP socket
+message RawMarketMessage {
+    // Raw binary data received from the socket
+    bytes data = 1;
+
+    // Timestamp when the message was received (nanoseconds since epoch)
+    int64 receive_timestamp_ns = 2;
+
+    // Message sequence number (per socket)
+    uint64 sequence_number = 3;
 }

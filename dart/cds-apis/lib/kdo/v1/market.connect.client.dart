@@ -99,4 +99,40 @@ extension type MarketServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
+  Future<kdov1market.AddRawMessagesSocketResponse> addRawMessagesSocket(
+    kdov1market.AddRawMessagesSocketRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketService.addRawMessagesSocket,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Raw 메시지 스트리밍 (server-side streaming)
+  Stream<kdov1market.RawMarketMessage> streamRawMessages(
+    kdov1market.StreamRawMessagesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketService.streamRawMessages,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

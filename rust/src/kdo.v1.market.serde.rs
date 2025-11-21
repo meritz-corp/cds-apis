@@ -1,4 +1,270 @@
 // @generated
+impl serde::Serialize for AddRawMessagesSocketRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.AddRawMessagesSocketRequest", len)?;
+        if true {
+            struct_ser.serialize_field("multicast_address", &self.multicast_address)?;
+        }
+        if true {
+            struct_ser.serialize_field("multicast_interface", &self.multicast_interface)?;
+        }
+        if true {
+            struct_ser.serialize_field("port", &self.port)?;
+        }
+        if true {
+            struct_ser.serialize_field("buffer_size", &self.buffer_size)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for AddRawMessagesSocketRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "multicast_address",
+            "multicastAddress",
+            "multicast_interface",
+            "multicastInterface",
+            "port",
+            "buffer_size",
+            "bufferSize",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            MulticastAddress,
+            MulticastInterface,
+            Port,
+            BufferSize,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "multicastAddress" | "multicast_address" => Ok(GeneratedField::MulticastAddress),
+                            "multicastInterface" | "multicast_interface" => Ok(GeneratedField::MulticastInterface),
+                            "port" => Ok(GeneratedField::Port),
+                            "bufferSize" | "buffer_size" => Ok(GeneratedField::BufferSize),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = AddRawMessagesSocketRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.AddRawMessagesSocketRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<AddRawMessagesSocketRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut multicast_address__ = None;
+                let mut multicast_interface__ = None;
+                let mut port__ = None;
+                let mut buffer_size__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::MulticastAddress => {
+                            if multicast_address__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("multicastAddress"));
+                            }
+                            multicast_address__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::MulticastInterface => {
+                            if multicast_interface__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("multicastInterface"));
+                            }
+                            multicast_interface__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Port => {
+                            if port__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("port"));
+                            }
+                            port__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BufferSize => {
+                            if buffer_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bufferSize"));
+                            }
+                            buffer_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(AddRawMessagesSocketRequest {
+                    multicast_address: multicast_address__.unwrap_or_default(),
+                    multicast_interface: multicast_interface__.unwrap_or_default(),
+                    port: port__.unwrap_or_default(),
+                    buffer_size: buffer_size__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.AddRawMessagesSocketRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for AddRawMessagesSocketResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.AddRawMessagesSocketResponse", len)?;
+        if true {
+            struct_ser.serialize_field("success", &self.success)?;
+        }
+        if true {
+            struct_ser.serialize_field("error_message", &self.error_message)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for AddRawMessagesSocketResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "success",
+            "error_message",
+            "errorMessage",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Success,
+            ErrorMessage,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "success" => Ok(GeneratedField::Success),
+                            "errorMessage" | "error_message" => Ok(GeneratedField::ErrorMessage),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = AddRawMessagesSocketResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.AddRawMessagesSocketResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<AddRawMessagesSocketResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut success__ = None;
+                let mut error_message__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Success => {
+                            if success__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("success"));
+                            }
+                            success__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ErrorMessage => {
+                            if error_message__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("errorMessage"));
+                            }
+                            error_message__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(AddRawMessagesSocketResponse {
+                    success: success__.unwrap_or_default(),
+                    error_message: error_message__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.AddRawMessagesSocketResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CancelAllOrdersRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2253,6 +2519,149 @@ impl<'de> serde::Deserialize<'de> for PlaceOrderResponse {
         deserializer.deserialize_struct("kdo.v1.market.PlaceOrderResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for RawMarketMessage {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.RawMarketMessage", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("data", pbjson::private::base64::encode(&self.data).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("receive_timestamp_ns", ToString::to_string(&self.receive_timestamp_ns).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sequence_number", ToString::to_string(&self.sequence_number).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for RawMarketMessage {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "data",
+            "receive_timestamp_ns",
+            "receiveTimestampNs",
+            "sequence_number",
+            "sequenceNumber",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Data,
+            ReceiveTimestampNs,
+            SequenceNumber,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "data" => Ok(GeneratedField::Data),
+                            "receiveTimestampNs" | "receive_timestamp_ns" => Ok(GeneratedField::ReceiveTimestampNs),
+                            "sequenceNumber" | "sequence_number" => Ok(GeneratedField::SequenceNumber),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = RawMarketMessage;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.RawMarketMessage")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<RawMarketMessage, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut data__ = None;
+                let mut receive_timestamp_ns__ = None;
+                let mut sequence_number__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Data => {
+                            if data__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("data"));
+                            }
+                            data__ = 
+                                Some(map_.next_value::<::pbjson::private::BytesDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ReceiveTimestampNs => {
+                            if receive_timestamp_ns__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("receiveTimestampNs"));
+                            }
+                            receive_timestamp_ns__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SequenceNumber => {
+                            if sequence_number__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sequenceNumber"));
+                            }
+                            sequence_number__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(RawMarketMessage {
+                    data: data__.unwrap_or_default(),
+                    receive_timestamp_ns: receive_timestamp_ns__.unwrap_or_default(),
+                    sequence_number: sequence_number__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.RawMarketMessage", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for SessionId {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2652,6 +3061,122 @@ impl<'de> serde::Deserialize<'de> for StreamFuturesOrderbookRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.market.StreamFuturesOrderbookRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for StreamRawMessagesRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.StreamRawMessagesRequest", len)?;
+        if true {
+            struct_ser.serialize_field("socket_ids", &self.socket_ids)?;
+        }
+        if true {
+            struct_ser.serialize_field("buffer_size", &self.buffer_size)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for StreamRawMessagesRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "socket_ids",
+            "socketIds",
+            "buffer_size",
+            "bufferSize",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            SocketIds,
+            BufferSize,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "socketIds" | "socket_ids" => Ok(GeneratedField::SocketIds),
+                            "bufferSize" | "buffer_size" => Ok(GeneratedField::BufferSize),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamRawMessagesRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.StreamRawMessagesRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamRawMessagesRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut socket_ids__ = None;
+                let mut buffer_size__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::SocketIds => {
+                            if socket_ids__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("socketIds"));
+                            }
+                            socket_ids__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BufferSize => {
+                            if buffer_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bufferSize"));
+                            }
+                            buffer_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(StreamRawMessagesRequest {
+                    socket_ids: socket_ids__.unwrap_or_default(),
+                    buffer_size: buffer_size__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.StreamRawMessagesRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UserOrderbookData {

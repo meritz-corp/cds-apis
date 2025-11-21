@@ -1322,6 +1322,283 @@ class UserOrderbookData extends $pb.GeneratedMessage {
   $pb.PbList<$fixnum.Int64> get askQuantities => $_getList(3);
 }
 
+/// Request to add a new raw UDP socket
+class AddRawMessagesSocketRequest extends $pb.GeneratedMessage {
+  factory AddRawMessagesSocketRequest({
+    $core.String? multicastAddress,
+    $core.String? multicastInterface,
+    $core.int? port,
+    $core.int? bufferSize,
+  }) {
+    final result = create();
+    if (multicastAddress != null) result.multicastAddress = multicastAddress;
+    if (multicastInterface != null) result.multicastInterface = multicastInterface;
+    if (port != null) result.port = port;
+    if (bufferSize != null) result.bufferSize = bufferSize;
+    return result;
+  }
+
+  AddRawMessagesSocketRequest._();
+
+  factory AddRawMessagesSocketRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AddRawMessagesSocketRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddRawMessagesSocketRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'multicastAddress')
+    ..aOS(2, _omitFieldNames ? '' : 'multicastInterface')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'port', $pb.PbFieldType.OU3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'bufferSize', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddRawMessagesSocketRequest clone() => AddRawMessagesSocketRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddRawMessagesSocketRequest copyWith(void Function(AddRawMessagesSocketRequest) updates) => super.copyWith((message) => updates(message as AddRawMessagesSocketRequest)) as AddRawMessagesSocketRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddRawMessagesSocketRequest create() => AddRawMessagesSocketRequest._();
+  @$core.override
+  AddRawMessagesSocketRequest createEmptyInstance() => create();
+  static $pb.PbList<AddRawMessagesSocketRequest> createRepeated() => $pb.PbList<AddRawMessagesSocketRequest>();
+  @$core.pragma('dart2js:noInline')
+  static AddRawMessagesSocketRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddRawMessagesSocketRequest>(create);
+  static AddRawMessagesSocketRequest? _defaultInstance;
+
+  /// Multicast address to listen on (e.g., "239.1.1.1")
+  @$pb.TagNumber(1)
+  $core.String get multicastAddress => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set multicastAddress($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMulticastAddress() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMulticastAddress() => $_clearField(1);
+
+  /// Interface address to bind (e.g., "192.168.1.100")
+  @$pb.TagNumber(2)
+  $core.String get multicastInterface => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set multicastInterface($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMulticastInterface() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMulticastInterface() => $_clearField(2);
+
+  /// UDP port to listen on
+  @$pb.TagNumber(3)
+  $core.int get port => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set port($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPort() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPort() => $_clearField(3);
+
+  /// Buffer size for receiving UDP packets (default: 2048)
+  @$pb.TagNumber(4)
+  $core.int get bufferSize => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set bufferSize($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBufferSize() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBufferSize() => $_clearField(4);
+}
+
+/// Response from adding a raw socket
+class AddRawMessagesSocketResponse extends $pb.GeneratedMessage {
+  factory AddRawMessagesSocketResponse({
+    $core.bool? success,
+    $core.String? errorMessage,
+  }) {
+    final result = create();
+    if (success != null) result.success = success;
+    if (errorMessage != null) result.errorMessage = errorMessage;
+    return result;
+  }
+
+  AddRawMessagesSocketResponse._();
+
+  factory AddRawMessagesSocketResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AddRawMessagesSocketResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddRawMessagesSocketResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aOS(2, _omitFieldNames ? '' : 'errorMessage')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddRawMessagesSocketResponse clone() => AddRawMessagesSocketResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddRawMessagesSocketResponse copyWith(void Function(AddRawMessagesSocketResponse) updates) => super.copyWith((message) => updates(message as AddRawMessagesSocketResponse)) as AddRawMessagesSocketResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddRawMessagesSocketResponse create() => AddRawMessagesSocketResponse._();
+  @$core.override
+  AddRawMessagesSocketResponse createEmptyInstance() => create();
+  static $pb.PbList<AddRawMessagesSocketResponse> createRepeated() => $pb.PbList<AddRawMessagesSocketResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AddRawMessagesSocketResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddRawMessagesSocketResponse>(create);
+  static AddRawMessagesSocketResponse? _defaultInstance;
+
+  /// Whether the socket was added successfully
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => $_clearField(1);
+
+  /// Error message if success is false
+  @$pb.TagNumber(2)
+  $core.String get errorMessage => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set errorMessage($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasErrorMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearErrorMessage() => $_clearField(2);
+}
+
+/// Request to stream raw market messages
+class StreamRawMessagesRequest extends $pb.GeneratedMessage {
+  factory StreamRawMessagesRequest({
+    $core.Iterable<$core.String>? socketIds,
+    $core.int? bufferSize,
+  }) {
+    final result = create();
+    if (socketIds != null) result.socketIds.addAll(socketIds);
+    if (bufferSize != null) result.bufferSize = bufferSize;
+    return result;
+  }
+
+  StreamRawMessagesRequest._();
+
+  factory StreamRawMessagesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamRawMessagesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamRawMessagesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'socketIds')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'bufferSize', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamRawMessagesRequest clone() => StreamRawMessagesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamRawMessagesRequest copyWith(void Function(StreamRawMessagesRequest) updates) => super.copyWith((message) => updates(message as StreamRawMessagesRequest)) as StreamRawMessagesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamRawMessagesRequest create() => StreamRawMessagesRequest._();
+  @$core.override
+  StreamRawMessagesRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamRawMessagesRequest> createRepeated() => $pb.PbList<StreamRawMessagesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamRawMessagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamRawMessagesRequest>(create);
+  static StreamRawMessagesRequest? _defaultInstance;
+
+  /// Optional filter by socket IDs (empty = all sockets)
+  @$pb.TagNumber(1)
+  $pb.PbList<$core.String> get socketIds => $_getList(0);
+
+  /// Optional buffer size for the stream (default: 100)
+  @$pb.TagNumber(2)
+  $core.int get bufferSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set bufferSize($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBufferSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBufferSize() => $_clearField(2);
+}
+
+/// Raw market message received from UDP socket
+class RawMarketMessage extends $pb.GeneratedMessage {
+  factory RawMarketMessage({
+    $core.List<$core.int>? data,
+    $fixnum.Int64? receiveTimestampNs,
+    $fixnum.Int64? sequenceNumber,
+  }) {
+    final result = create();
+    if (data != null) result.data = data;
+    if (receiveTimestampNs != null) result.receiveTimestampNs = receiveTimestampNs;
+    if (sequenceNumber != null) result.sequenceNumber = sequenceNumber;
+    return result;
+  }
+
+  RawMarketMessage._();
+
+  factory RawMarketMessage.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory RawMarketMessage.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RawMarketMessage', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
+    ..aInt64(2, _omitFieldNames ? '' : 'receiveTimestampNs')
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'sequenceNumber', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RawMarketMessage clone() => RawMarketMessage()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RawMarketMessage copyWith(void Function(RawMarketMessage) updates) => super.copyWith((message) => updates(message as RawMarketMessage)) as RawMarketMessage;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RawMarketMessage create() => RawMarketMessage._();
+  @$core.override
+  RawMarketMessage createEmptyInstance() => create();
+  static $pb.PbList<RawMarketMessage> createRepeated() => $pb.PbList<RawMarketMessage>();
+  @$core.pragma('dart2js:noInline')
+  static RawMarketMessage getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RawMarketMessage>(create);
+  static RawMarketMessage? _defaultInstance;
+
+  /// Raw binary data received from the socket
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get data => $_getN(0);
+  @$pb.TagNumber(1)
+  set data($core.List<$core.int> value) => $_setBytes(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearData() => $_clearField(1);
+
+  /// Timestamp when the message was received (nanoseconds since epoch)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get receiveTimestampNs => $_getI64(1);
+  @$pb.TagNumber(2)
+  set receiveTimestampNs($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasReceiveTimestampNs() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReceiveTimestampNs() => $_clearField(2);
+
+  /// Message sequence number (per socket)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get sequenceNumber => $_getI64(2);
+  @$pb.TagNumber(3)
+  set sequenceNumber($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSequenceNumber() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSequenceNumber() => $_clearField(3);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
