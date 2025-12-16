@@ -166,16 +166,10 @@ class EtfLp extends $pb.GeneratedMessage {
 class EtfLpStatus extends $pb.GeneratedMessage {
   factory EtfLpStatus({
     EtfLpState? state,
-    $fixnum.Int64? startTime,
-    OrderStats? orderStats,
-    OrderLimitStatus? orderLimit,
     LpPricing? pricing,
   }) {
     final result = create();
     if (state != null) result.state = state;
-    if (startTime != null) result.startTime = startTime;
-    if (orderStats != null) result.orderStats = orderStats;
-    if (orderLimit != null) result.orderLimit = orderLimit;
     if (pricing != null) result.pricing = pricing;
     return result;
   }
@@ -187,10 +181,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..e<EtfLpState>(1, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
-    ..aInt64(2, _omitFieldNames ? '' : 'startTime')
-    ..aOM<OrderStats>(3, _omitFieldNames ? '' : 'orderStats', subBuilder: OrderStats.create)
-    ..aOM<OrderLimitStatus>(4, _omitFieldNames ? '' : 'orderLimit', subBuilder: OrderLimitStatus.create)
-    ..aOM<LpPricing>(5, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
+    ..aOM<LpPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -221,51 +212,17 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearState() => $_clearField(1);
 
-  /// 시작 시간 (Unix timestamp, seconds)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get startTime => $_getI64(1);
-  @$pb.TagNumber(2)
-  set startTime($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasStartTime() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearStartTime() => $_clearField(2);
-
-  /// 주문 통계
-  @$pb.TagNumber(3)
-  OrderStats get orderStats => $_getN(2);
-  @$pb.TagNumber(3)
-  set orderStats(OrderStats value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasOrderStats() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearOrderStats() => $_clearField(3);
-  @$pb.TagNumber(3)
-  OrderStats ensureOrderStats() => $_ensure(2);
-
-  /// Order Limiter 상태
-  @$pb.TagNumber(4)
-  OrderLimitStatus get orderLimit => $_getN(3);
-  @$pb.TagNumber(4)
-  set orderLimit(OrderLimitStatus value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasOrderLimit() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearOrderLimit() => $_clearField(4);
-  @$pb.TagNumber(4)
-  OrderLimitStatus ensureOrderLimit() => $_ensure(3);
-
   /// 가격 정보
-  @$pb.TagNumber(5)
-  LpPricing get pricing => $_getN(4);
-  @$pb.TagNumber(5)
-  set pricing(LpPricing value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasPricing() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearPricing() => $_clearField(5);
-  @$pb.TagNumber(5)
-  LpPricing ensurePricing() => $_ensure(4);
+  @$pb.TagNumber(2)
+  LpPricing get pricing => $_getN(1);
+  @$pb.TagNumber(2)
+  set pricing(LpPricing value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPricing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPricing() => $_clearField(2);
+  @$pb.TagNumber(2)
+  LpPricing ensurePricing() => $_ensure(1);
 }
 
 /// 주문 통계

@@ -520,31 +520,11 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             let v = EtfLpState::try_from(self.state)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
             struct_ser.serialize_field("state", &v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("start_time", ToString::to_string(&self.start_time).as_str())?;
-        }
-        if let Some(v) = self.order_stats.as_ref() {
-            struct_ser.serialize_field("order_stats", v)?;
-        }
-        if let Some(v) = self.order_limit.as_ref() {
-            struct_ser.serialize_field("order_limit", v)?;
         }
         if let Some(v) = self.pricing.as_ref() {
             struct_ser.serialize_field("pricing", v)?;
@@ -560,21 +540,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
     {
         const FIELDS: &[&str] = &[
             "state",
-            "start_time",
-            "startTime",
-            "order_stats",
-            "orderStats",
-            "order_limit",
-            "orderLimit",
             "pricing",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             State,
-            StartTime,
-            OrderStats,
-            OrderLimit,
             Pricing,
             __SkipField__,
         }
@@ -599,9 +570,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     {
                         match value {
                             "state" => Ok(GeneratedField::State),
-                            "startTime" | "start_time" => Ok(GeneratedField::StartTime),
-                            "orderStats" | "order_stats" => Ok(GeneratedField::OrderStats),
-                            "orderLimit" | "order_limit" => Ok(GeneratedField::OrderLimit),
                             "pricing" => Ok(GeneratedField::Pricing),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -623,9 +591,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut state__ = None;
-                let mut start_time__ = None;
-                let mut order_stats__ = None;
-                let mut order_limit__ = None;
                 let mut pricing__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -634,26 +599,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                                 return Err(serde::de::Error::duplicate_field("state"));
                             }
                             state__ = Some(map_.next_value::<EtfLpState>()? as i32);
-                        }
-                        GeneratedField::StartTime => {
-                            if start_time__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("startTime"));
-                            }
-                            start_time__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::OrderStats => {
-                            if order_stats__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orderStats"));
-                            }
-                            order_stats__ = map_.next_value()?;
-                        }
-                        GeneratedField::OrderLimit => {
-                            if order_limit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orderLimit"));
-                            }
-                            order_limit__ = map_.next_value()?;
                         }
                         GeneratedField::Pricing => {
                             if pricing__.is_some() {
@@ -668,9 +613,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 }
                 Ok(EtfLpStatus {
                     state: state__.unwrap_or_default(),
-                    start_time: start_time__.unwrap_or_default(),
-                    order_stats: order_stats__,
-                    order_limit: order_limit__,
                     pricing: pricing__,
                 })
             }

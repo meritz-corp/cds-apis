@@ -38,17 +38,8 @@ pub struct EtfLpStatus {
     /// LP 상태
     #[prost(enumeration="EtfLpState", tag="1")]
     pub state: i32,
-    /// 시작 시간 (Unix timestamp, seconds)
-    #[prost(int64, tag="2")]
-    pub start_time: i64,
-    /// 주문 통계
-    #[prost(message, optional, tag="3")]
-    pub order_stats: ::core::option::Option<OrderStats>,
-    /// Order Limiter 상태
-    #[prost(message, optional, tag="4")]
-    pub order_limit: ::core::option::Option<OrderLimitStatus>,
     /// 가격 정보
-    #[prost(message, optional, tag="5")]
+    #[prost(message, optional, tag="2")]
     pub pricing: ::core::option::Option<LpPricing>,
 }
 /// 주문 통계

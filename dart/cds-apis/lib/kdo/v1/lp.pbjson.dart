@@ -144,20 +144,14 @@ const EtfLpStatus$json = {
   '1': 'EtfLpStatus',
   '2': [
     {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
-    {'1': 'start_time', '3': 2, '4': 1, '5': 3, '10': 'startTime'},
-    {'1': 'order_stats', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.lp.OrderStats', '10': 'orderStats'},
-    {'1': 'order_limit', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.lp.OrderLimitStatus', '10': 'orderLimit'},
-    {'1': 'pricing', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
+    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
   ],
 };
 
 /// Descriptor for `EtfLpStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'CgtFdGZMcFN0YXR1cxIrCgVzdGF0ZRgBIAEoDjIVLmtkby52MS5scC5FdGZMcFN0YXRlUgVzdG'
-    'F0ZRIdCgpzdGFydF90aW1lGAIgASgDUglzdGFydFRpbWUSNgoLb3JkZXJfc3RhdHMYAyABKAsy'
-    'FS5rZG8udjEubHAuT3JkZXJTdGF0c1IKb3JkZXJTdGF0cxI8CgtvcmRlcl9saW1pdBgEIAEoCz'
-    'IbLmtkby52MS5scC5PcmRlckxpbWl0U3RhdHVzUgpvcmRlckxpbWl0Ei4KB3ByaWNpbmcYBSAB'
-    'KAsyFC5rZG8udjEubHAuTHBQcmljaW5nUgdwcmljaW5n');
+    'F0ZRIuCgdwcmljaW5nGAIgASgLMhQua2RvLnYxLmxwLkxwUHJpY2luZ1IHcHJpY2luZw==');
 
 @$core.Deprecated('Use orderStatsDescriptor instead')
 const OrderStats$json = {

@@ -613,19 +613,6 @@
           "$ref": "#/definitions/lpEtfLpState",
           "title": "LP 상태"
         },
-        "startTime": {
-          "type": "string",
-          "format": "int64",
-          "title": "시작 시간 (Unix timestamp, seconds)"
-        },
-        "orderStats": {
-          "$ref": "#/definitions/lpOrderStats",
-          "title": "주문 통계"
-        },
-        "orderLimit": {
-          "$ref": "#/definitions/lpOrderLimitStatus",
-          "title": "Order Limiter 상태"
-        },
         "pricing": {
           "$ref": "#/definitions/lpLpPricing",
           "title": "가격 정보"
@@ -705,70 +692,6 @@
       },
       "title": "LP 가격 정보"
     },
-    "lpOrderLimitStatus": {
-      "type": "object",
-      "properties": {
-        "dailyFilledQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "일일 누적 체결 수량 (i64)"
-        },
-        "dailyCumulativeLimit": {
-          "type": "string",
-          "format": "int64",
-          "title": "일일 누적 체결 수량 한도 (i64)"
-        },
-        "timeFrameStatus": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/lpTimeFrameStatus"
-          },
-          "title": "시간 프레임별 주문 개수 현황"
-        },
-        "dailyUsagePercent": {
-          "type": "number",
-          "format": "double",
-          "title": "일일 사용률 (%)"
-        }
-      },
-      "title": "Order Limiter 상태"
-    },
-    "lpOrderStats": {
-      "type": "object",
-      "properties": {
-        "totalOrdersSent": {
-          "type": "string",
-          "format": "uint64",
-          "title": "총 전송 주문 수"
-        },
-        "ordersAccepted": {
-          "type": "string",
-          "format": "uint64",
-          "title": "접수된 주문 수"
-        },
-        "ordersRejected": {
-          "type": "string",
-          "format": "uint64",
-          "title": "거부된 주문 수"
-        },
-        "ordersFilled": {
-          "type": "string",
-          "format": "uint64",
-          "title": "체결된 주문 수"
-        },
-        "totalFilledQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "총 체결 수량"
-        },
-        "dailyFilledQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "일일 체결 수량"
-        }
-      },
-      "title": "주문 통계"
-    },
     "lpStartEtfLpResponse": {
       "type": "object",
       "properties": {
@@ -806,32 +729,6 @@
       ],
       "default": "TASK_TYPE_UNSPECIFIED",
       "title": "작업 타입"
-    },
-    "lpTimeFrameStatus": {
-      "type": "object",
-      "properties": {
-        "windowSeconds": {
-          "type": "string",
-          "format": "uint64",
-          "title": "시간 윈도우 (초)"
-        },
-        "currentCount": {
-          "type": "integer",
-          "format": "int64",
-          "title": "현재 윈도우 내 주문 개수"
-        },
-        "maxOrders": {
-          "type": "integer",
-          "format": "int64",
-          "title": "최대 주문 개수"
-        },
-        "usagePercent": {
-          "type": "number",
-          "format": "double",
-          "title": "사용률 (%)"
-        }
-      },
-      "title": "시간 프레임별 상태"
     },
     "protobufAny": {
       "type": "object",
