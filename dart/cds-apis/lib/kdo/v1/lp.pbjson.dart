@@ -146,6 +146,8 @@ const EtfLpStatus$json = {
     {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
     {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
     {'1': 'fill_statistics', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
+    {'1': 'etf_symbol', '3': 4, '4': 1, '5': 9, '10': 'etfSymbol'},
+    {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '10': 'fundCode'},
   ],
 };
 
@@ -154,7 +156,8 @@ final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'CgtFdGZMcFN0YXR1cxIrCgVzdGF0ZRgBIAEoDjIVLmtkby52MS5scC5FdGZMcFN0YXRlUgVzdG'
     'F0ZRIuCgdwcmljaW5nGAIgASgLMhQua2RvLnYxLmxwLkxwUHJpY2luZ1IHcHJpY2luZxJCCg9m'
     'aWxsX3N0YXRpc3RpY3MYAyABKAsyGS5rZG8udjEubHAuRmlsbFN0YXRpc3RpY3NSDmZpbGxTdG'
-    'F0aXN0aWNz');
+    'F0aXN0aWNzEh0KCmV0Zl9zeW1ib2wYBCABKAlSCWV0ZlN5bWJvbBIbCglmdW5kX2NvZGUYBSAB'
+    'KAlSCGZ1bmRDb2Rl');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

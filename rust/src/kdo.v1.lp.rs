@@ -44,6 +44,12 @@ pub struct EtfLpStatus {
     /// 체결 통계
     #[prost(message, optional, tag="3")]
     pub fill_statistics: ::core::option::Option<FillStatistics>,
+    /// ETF 심볼
+    #[prost(string, tag="4")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="5")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]

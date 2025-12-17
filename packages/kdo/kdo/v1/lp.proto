@@ -150,6 +150,12 @@ message EtfLpStatus {
 
   // 체결 통계
   FillStatistics fill_statistics = 3;
+
+  // ETF 심볼
+  string etf_symbol = 4;
+
+  // 펀드 코드
+  string fund_code = 5;
 }
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

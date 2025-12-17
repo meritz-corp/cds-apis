@@ -168,11 +168,15 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     EtfLpState? state,
     LpPricing? pricing,
     FillStatistics? fillStatistics,
+    $core.String? etfSymbol,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (state != null) result.state = state;
     if (pricing != null) result.pricing = pricing;
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -185,6 +189,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..e<EtfLpState>(1, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
     ..aOM<LpPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(3, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
+    ..aOS(4, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(5, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -238,6 +244,26 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   void clearFillStatistics() => $_clearField(3);
   @$pb.TagNumber(3)
   FillStatistics ensureFillStatistics() => $_ensure(2);
+
+  /// ETF 심볼
+  @$pb.TagNumber(4)
+  $core.String get etfSymbol => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set etfSymbol($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEtfSymbol() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEtfSymbol() => $_clearField(4);
+
+  /// 펀드 코드
+  @$pb.TagNumber(5)
+  $core.String get fundCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set fundCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFundCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFundCode() => $_clearField(5);
 }
 
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

@@ -673,6 +673,14 @@
         "fillStatistics": {
           "$ref": "#/definitions/lpFillStatistics",
           "title": "체결 통계"
+        },
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
         }
       },
       "title": "ETF LP 상태"
