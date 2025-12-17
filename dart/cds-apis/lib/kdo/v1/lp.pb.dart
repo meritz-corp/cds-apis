@@ -167,10 +167,12 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   factory EtfLpStatus({
     EtfLpState? state,
     LpPricing? pricing,
+    FillStatistics? fillStatistics,
   }) {
     final result = create();
     if (state != null) result.state = state;
     if (pricing != null) result.pricing = pricing;
+    if (fillStatistics != null) result.fillStatistics = fillStatistics;
     return result;
   }
 
@@ -182,6 +184,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..e<EtfLpState>(1, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
     ..aOM<LpPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
+    ..aOM<FillStatistics>(3, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
     ..hasRequiredFields = false
   ;
 
@@ -223,6 +226,105 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   void clearPricing() => $_clearField(2);
   @$pb.TagNumber(2)
   LpPricing ensurePricing() => $_ensure(1);
+
+  /// 체결 통계
+  @$pb.TagNumber(3)
+  FillStatistics get fillStatistics => $_getN(2);
+  @$pb.TagNumber(3)
+  set fillStatistics(FillStatistics value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFillStatistics() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFillStatistics() => $_clearField(3);
+  @$pb.TagNumber(3)
+  FillStatistics ensureFillStatistics() => $_ensure(2);
+}
+
+/// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
+class FillStatistics extends $pb.GeneratedMessage {
+  factory FillStatistics({
+    $fixnum.Int64? buyFilledQuantity,
+    $fixnum.Int64? sellFilledQuantity,
+    $core.String? buyTotalAmount,
+    $core.String? sellTotalAmount,
+  }) {
+    final result = create();
+    if (buyFilledQuantity != null) result.buyFilledQuantity = buyFilledQuantity;
+    if (sellFilledQuantity != null) result.sellFilledQuantity = sellFilledQuantity;
+    if (buyTotalAmount != null) result.buyTotalAmount = buyTotalAmount;
+    if (sellTotalAmount != null) result.sellTotalAmount = sellTotalAmount;
+    return result;
+  }
+
+  FillStatistics._();
+
+  factory FillStatistics.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FillStatistics.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FillStatistics', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'buyFilledQuantity')
+    ..aInt64(2, _omitFieldNames ? '' : 'sellFilledQuantity')
+    ..aOS(3, _omitFieldNames ? '' : 'buyTotalAmount')
+    ..aOS(4, _omitFieldNames ? '' : 'sellTotalAmount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FillStatistics clone() => FillStatistics()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FillStatistics copyWith(void Function(FillStatistics) updates) => super.copyWith((message) => updates(message as FillStatistics)) as FillStatistics;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FillStatistics create() => FillStatistics._();
+  @$core.override
+  FillStatistics createEmptyInstance() => create();
+  static $pb.PbList<FillStatistics> createRepeated() => $pb.PbList<FillStatistics>();
+  @$core.pragma('dart2js:noInline')
+  static FillStatistics getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FillStatistics>(create);
+  static FillStatistics? _defaultInstance;
+
+  /// 매수 체결량
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get buyFilledQuantity => $_getI64(0);
+  @$pb.TagNumber(1)
+  set buyFilledQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBuyFilledQuantity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBuyFilledQuantity() => $_clearField(1);
+
+  /// 매도 체결량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get sellFilledQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set sellFilledQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSellFilledQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSellFilledQuantity() => $_clearField(2);
+
+  /// 매수 총금액 (평균 단가 계산용)
+  @$pb.TagNumber(3)
+  $core.String get buyTotalAmount => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set buyTotalAmount($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBuyTotalAmount() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBuyTotalAmount() => $_clearField(3);
+
+  /// 매도 총금액 (평균 단가 계산용)
+  @$pb.TagNumber(4)
+  $core.String get sellTotalAmount => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set sellTotalAmount($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSellTotalAmount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSellTotalAmount() => $_clearField(4);
 }
 
 /// 주문 통계

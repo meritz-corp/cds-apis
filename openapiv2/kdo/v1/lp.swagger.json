@@ -616,9 +616,37 @@
         "pricing": {
           "$ref": "#/definitions/lpLpPricing",
           "title": "가격 정보"
+        },
+        "fillStatistics": {
+          "$ref": "#/definitions/lpFillStatistics",
+          "title": "체결 통계"
         }
       },
       "title": "ETF LP 상태"
+    },
+    "lpFillStatistics": {
+      "type": "object",
+      "properties": {
+        "buyFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 체결량"
+        },
+        "sellFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 체결량"
+        },
+        "buyTotalAmount": {
+          "type": "string",
+          "title": "매수 총금액 (평균 단가 계산용)"
+        },
+        "sellTotalAmount": {
+          "type": "string",
+          "title": "매도 총금액 (평균 단가 계산용)"
+        }
+      },
+      "title": "ETF 체결 통계 (매수/매도 체결량 및 평균 단가)"
     },
     "lpListEtfLpsResponse": {
       "type": "object",

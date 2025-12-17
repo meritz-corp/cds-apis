@@ -138,6 +138,24 @@ message EtfLpStatus {
 
   // 가격 정보
   LpPricing pricing = 2;
+
+  // 체결 통계
+  FillStatistics fill_statistics = 3;
+}
+
+// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
+message FillStatistics {
+  // 매수 체결량
+  int64 buy_filled_quantity = 1;
+
+  // 매도 체결량
+  int64 sell_filled_quantity = 2;
+
+  // 매수 총금액 (평균 단가 계산용)
+  string buy_total_amount = 3;
+
+  // 매도 총금액 (평균 단가 계산용)
+  string sell_total_amount = 4;
 }
 
 // ETF LP 상태 enum

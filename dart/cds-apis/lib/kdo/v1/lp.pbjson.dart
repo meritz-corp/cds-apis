@@ -145,13 +145,34 @@ const EtfLpStatus$json = {
   '2': [
     {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
     {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
+    {'1': 'fill_statistics', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
   ],
 };
 
 /// Descriptor for `EtfLpStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'CgtFdGZMcFN0YXR1cxIrCgVzdGF0ZRgBIAEoDjIVLmtkby52MS5scC5FdGZMcFN0YXRlUgVzdG'
-    'F0ZRIuCgdwcmljaW5nGAIgASgLMhQua2RvLnYxLmxwLkxwUHJpY2luZ1IHcHJpY2luZw==');
+    'F0ZRIuCgdwcmljaW5nGAIgASgLMhQua2RvLnYxLmxwLkxwUHJpY2luZ1IHcHJpY2luZxJCCg9m'
+    'aWxsX3N0YXRpc3RpY3MYAyABKAsyGS5rZG8udjEubHAuRmlsbFN0YXRpc3RpY3NSDmZpbGxTdG'
+    'F0aXN0aWNz');
+
+@$core.Deprecated('Use fillStatisticsDescriptor instead')
+const FillStatistics$json = {
+  '1': 'FillStatistics',
+  '2': [
+    {'1': 'buy_filled_quantity', '3': 1, '4': 1, '5': 3, '10': 'buyFilledQuantity'},
+    {'1': 'sell_filled_quantity', '3': 2, '4': 1, '5': 3, '10': 'sellFilledQuantity'},
+    {'1': 'buy_total_amount', '3': 3, '4': 1, '5': 9, '10': 'buyTotalAmount'},
+    {'1': 'sell_total_amount', '3': 4, '4': 1, '5': 9, '10': 'sellTotalAmount'},
+  ],
+};
+
+/// Descriptor for `FillStatistics`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fillStatisticsDescriptor = $convert.base64Decode(
+    'Cg5GaWxsU3RhdGlzdGljcxIuChNidXlfZmlsbGVkX3F1YW50aXR5GAEgASgDUhFidXlGaWxsZW'
+    'RRdWFudGl0eRIwChRzZWxsX2ZpbGxlZF9xdWFudGl0eRgCIAEoA1ISc2VsbEZpbGxlZFF1YW50'
+    'aXR5EigKEGJ1eV90b3RhbF9hbW91bnQYAyABKAlSDmJ1eVRvdGFsQW1vdW50EioKEXNlbGxfdG'
+    '90YWxfYW1vdW50GAQgASgJUg9zZWxsVG90YWxBbW91bnQ=');
 
 @$core.Deprecated('Use orderStatsDescriptor instead')
 const OrderStats$json = {

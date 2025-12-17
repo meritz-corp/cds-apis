@@ -444,6 +444,8 @@ type EtfLpStatus struct {
 	State EtfLpState `protobuf:"varint,1,opt,name=state,proto3,enum=kdo.v1.lp.EtfLpState" json:"state,omitempty"`
 	// 가격 정보
 	Pricing *LpPricing `protobuf:"bytes,2,opt,name=pricing,proto3" json:"pricing,omitempty"`
+	// 체결 통계
+	FillStatistics *FillStatistics `protobuf:"bytes,3,opt,name=fill_statistics,json=fillStatistics,proto3" json:"fill_statistics,omitempty"`
 }
 
 func (x *EtfLpStatus) Reset() {
@@ -492,6 +494,89 @@ func (x *EtfLpStatus) GetPricing() *LpPricing {
 	return nil
 }
 
+func (x *EtfLpStatus) GetFillStatistics() *FillStatistics {
+	if x != nil {
+		return x.FillStatistics
+	}
+	return nil
+}
+
+// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
+type FillStatistics struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 매수 체결량
+	BuyFilledQuantity int64 `protobuf:"varint,1,opt,name=buy_filled_quantity,json=buyFilledQuantity,proto3" json:"buy_filled_quantity,omitempty"`
+	// 매도 체결량
+	SellFilledQuantity int64 `protobuf:"varint,2,opt,name=sell_filled_quantity,json=sellFilledQuantity,proto3" json:"sell_filled_quantity,omitempty"`
+	// 매수 총금액 (평균 단가 계산용)
+	BuyTotalAmount string `protobuf:"bytes,3,opt,name=buy_total_amount,json=buyTotalAmount,proto3" json:"buy_total_amount,omitempty"`
+	// 매도 총금액 (평균 단가 계산용)
+	SellTotalAmount string `protobuf:"bytes,4,opt,name=sell_total_amount,json=sellTotalAmount,proto3" json:"sell_total_amount,omitempty"`
+}
+
+func (x *FillStatistics) Reset() {
+	*x = FillStatistics{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_kdo_v1_lp_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FillStatistics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FillStatistics) ProtoMessage() {}
+
+func (x *FillStatistics) ProtoReflect() protoreflect.Message {
+	mi := &file_kdo_v1_lp_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FillStatistics.ProtoReflect.Descriptor instead.
+func (*FillStatistics) Descriptor() ([]byte, []int) {
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *FillStatistics) GetBuyFilledQuantity() int64 {
+	if x != nil {
+		return x.BuyFilledQuantity
+	}
+	return 0
+}
+
+func (x *FillStatistics) GetSellFilledQuantity() int64 {
+	if x != nil {
+		return x.SellFilledQuantity
+	}
+	return 0
+}
+
+func (x *FillStatistics) GetBuyTotalAmount() string {
+	if x != nil {
+		return x.BuyTotalAmount
+	}
+	return ""
+}
+
+func (x *FillStatistics) GetSellTotalAmount() string {
+	if x != nil {
+		return x.SellTotalAmount
+	}
+	return ""
+}
+
 // 주문 통계
 type OrderStats struct {
 	state         protoimpl.MessageState
@@ -515,7 +600,7 @@ type OrderStats struct {
 func (x *OrderStats) Reset() {
 	*x = OrderStats{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[2]
+		mi := &file_kdo_v1_lp_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -528,7 +613,7 @@ func (x *OrderStats) String() string {
 func (*OrderStats) ProtoMessage() {}
 
 func (x *OrderStats) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[2]
+	mi := &file_kdo_v1_lp_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -541,7 +626,7 @@ func (x *OrderStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderStats.ProtoReflect.Descriptor instead.
 func (*OrderStats) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{2}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *OrderStats) GetTotalOrdersSent() uint64 {
@@ -605,7 +690,7 @@ type OrderLimitStatus struct {
 func (x *OrderLimitStatus) Reset() {
 	*x = OrderLimitStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[3]
+		mi := &file_kdo_v1_lp_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -618,7 +703,7 @@ func (x *OrderLimitStatus) String() string {
 func (*OrderLimitStatus) ProtoMessage() {}
 
 func (x *OrderLimitStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[3]
+	mi := &file_kdo_v1_lp_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -631,7 +716,7 @@ func (x *OrderLimitStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderLimitStatus.ProtoReflect.Descriptor instead.
 func (*OrderLimitStatus) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{3}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *OrderLimitStatus) GetDailyFilledQuantity() int64 {
@@ -681,7 +766,7 @@ type TimeFrameStatus struct {
 func (x *TimeFrameStatus) Reset() {
 	*x = TimeFrameStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[4]
+		mi := &file_kdo_v1_lp_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -694,7 +779,7 @@ func (x *TimeFrameStatus) String() string {
 func (*TimeFrameStatus) ProtoMessage() {}
 
 func (x *TimeFrameStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[4]
+	mi := &file_kdo_v1_lp_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +792,7 @@ func (x *TimeFrameStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeFrameStatus.ProtoReflect.Descriptor instead.
 func (*TimeFrameStatus) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{4}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TimeFrameStatus) GetWindowSeconds() uint64 {
@@ -755,7 +840,7 @@ type LpPricing struct {
 func (x *LpPricing) Reset() {
 	*x = LpPricing{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[5]
+		mi := &file_kdo_v1_lp_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -768,7 +853,7 @@ func (x *LpPricing) String() string {
 func (*LpPricing) ProtoMessage() {}
 
 func (x *LpPricing) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[5]
+	mi := &file_kdo_v1_lp_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -781,7 +866,7 @@ func (x *LpPricing) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LpPricing.ProtoReflect.Descriptor instead.
 func (*LpPricing) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{5}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *LpPricing) GetEtfPrice() string {
@@ -819,7 +904,7 @@ type GetEtfLpRequest struct {
 func (x *GetEtfLpRequest) Reset() {
 	*x = GetEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[6]
+		mi := &file_kdo_v1_lp_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -832,7 +917,7 @@ func (x *GetEtfLpRequest) String() string {
 func (*GetEtfLpRequest) ProtoMessage() {}
 
 func (x *GetEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[6]
+	mi := &file_kdo_v1_lp_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -845,7 +930,7 @@ func (x *GetEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*GetEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{6}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetEtfLpRequest) GetEtf() string {
@@ -888,7 +973,7 @@ type ListEtfLpsRequest struct {
 func (x *ListEtfLpsRequest) Reset() {
 	*x = ListEtfLpsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[7]
+		mi := &file_kdo_v1_lp_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -901,7 +986,7 @@ func (x *ListEtfLpsRequest) String() string {
 func (*ListEtfLpsRequest) ProtoMessage() {}
 
 func (x *ListEtfLpsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[7]
+	mi := &file_kdo_v1_lp_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -914,7 +999,7 @@ func (x *ListEtfLpsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEtfLpsRequest.ProtoReflect.Descriptor instead.
 func (*ListEtfLpsRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{7}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListEtfLpsRequest) GetPageSize() uint32 {
@@ -952,7 +1037,7 @@ type ListEtfLpsResponse struct {
 func (x *ListEtfLpsResponse) Reset() {
 	*x = ListEtfLpsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[8]
+		mi := &file_kdo_v1_lp_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -965,7 +1050,7 @@ func (x *ListEtfLpsResponse) String() string {
 func (*ListEtfLpsResponse) ProtoMessage() {}
 
 func (x *ListEtfLpsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[8]
+	mi := &file_kdo_v1_lp_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -978,7 +1063,7 @@ func (x *ListEtfLpsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEtfLpsResponse.ProtoReflect.Descriptor instead.
 func (*ListEtfLpsResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{8}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListEtfLpsResponse) GetEtfLps() []*EtfLp {
@@ -1008,7 +1093,7 @@ type UpdateEtfLpRequest struct {
 func (x *UpdateEtfLpRequest) Reset() {
 	*x = UpdateEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[9]
+		mi := &file_kdo_v1_lp_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1021,7 +1106,7 @@ func (x *UpdateEtfLpRequest) String() string {
 func (*UpdateEtfLpRequest) ProtoMessage() {}
 
 func (x *UpdateEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[9]
+	mi := &file_kdo_v1_lp_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1034,7 +1119,7 @@ func (x *UpdateEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*UpdateEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{9}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateEtfLpRequest) GetLp() *EtfLp {
@@ -1064,7 +1149,7 @@ type GetEtfLpStatusRequest struct {
 func (x *GetEtfLpStatusRequest) Reset() {
 	*x = GetEtfLpStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[10]
+		mi := &file_kdo_v1_lp_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1077,7 +1162,7 @@ func (x *GetEtfLpStatusRequest) String() string {
 func (*GetEtfLpStatusRequest) ProtoMessage() {}
 
 func (x *GetEtfLpStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[10]
+	mi := &file_kdo_v1_lp_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +1175,7 @@ func (x *GetEtfLpStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEtfLpStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetEtfLpStatusRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{10}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetEtfLpStatusRequest) GetEtf() string {
@@ -1122,7 +1207,7 @@ type StreamEtfLpStatusRequest struct {
 func (x *StreamEtfLpStatusRequest) Reset() {
 	*x = StreamEtfLpStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[11]
+		mi := &file_kdo_v1_lp_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1135,7 +1220,7 @@ func (x *StreamEtfLpStatusRequest) String() string {
 func (*StreamEtfLpStatusRequest) ProtoMessage() {}
 
 func (x *StreamEtfLpStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[11]
+	mi := &file_kdo_v1_lp_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1148,7 +1233,7 @@ func (x *StreamEtfLpStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamEtfLpStatusRequest.ProtoReflect.Descriptor instead.
 func (*StreamEtfLpStatusRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{11}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StreamEtfLpStatusRequest) GetEtf() string {
@@ -1185,7 +1270,7 @@ type StartEtfLpRequest struct {
 func (x *StartEtfLpRequest) Reset() {
 	*x = StartEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[12]
+		mi := &file_kdo_v1_lp_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1198,7 +1283,7 @@ func (x *StartEtfLpRequest) String() string {
 func (*StartEtfLpRequest) ProtoMessage() {}
 
 func (x *StartEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[12]
+	mi := &file_kdo_v1_lp_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1211,7 +1296,7 @@ func (x *StartEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*StartEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{12}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StartEtfLpRequest) GetEtf() string {
@@ -1243,7 +1328,7 @@ type StartEtfLpResponse struct {
 func (x *StartEtfLpResponse) Reset() {
 	*x = StartEtfLpResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[13]
+		mi := &file_kdo_v1_lp_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1256,7 +1341,7 @@ func (x *StartEtfLpResponse) String() string {
 func (*StartEtfLpResponse) ProtoMessage() {}
 
 func (x *StartEtfLpResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[13]
+	mi := &file_kdo_v1_lp_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1269,7 +1354,7 @@ func (x *StartEtfLpResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartEtfLpResponse.ProtoReflect.Descriptor instead.
 func (*StartEtfLpResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{13}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *StartEtfLpResponse) GetStatus() *EtfLpStatus {
@@ -1299,7 +1384,7 @@ type StopEtfLpRequest struct {
 func (x *StopEtfLpRequest) Reset() {
 	*x = StopEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[14]
+		mi := &file_kdo_v1_lp_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1312,7 +1397,7 @@ func (x *StopEtfLpRequest) String() string {
 func (*StopEtfLpRequest) ProtoMessage() {}
 
 func (x *StopEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[14]
+	mi := &file_kdo_v1_lp_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1325,7 +1410,7 @@ func (x *StopEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*StopEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{14}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *StopEtfLpRequest) GetEtf() string {
@@ -1357,7 +1442,7 @@ type StopEtfLpResponse struct {
 func (x *StopEtfLpResponse) Reset() {
 	*x = StopEtfLpResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[15]
+		mi := &file_kdo_v1_lp_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1370,7 +1455,7 @@ func (x *StopEtfLpResponse) String() string {
 func (*StopEtfLpResponse) ProtoMessage() {}
 
 func (x *StopEtfLpResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[15]
+	mi := &file_kdo_v1_lp_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1383,7 +1468,7 @@ func (x *StopEtfLpResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopEtfLpResponse.ProtoReflect.Descriptor instead.
 func (*StopEtfLpResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{15}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *StopEtfLpResponse) GetStatus() *EtfLpStatus {
@@ -1413,7 +1498,7 @@ type StreamLpEventsRequest struct {
 func (x *StreamLpEventsRequest) Reset() {
 	*x = StreamLpEventsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[16]
+		mi := &file_kdo_v1_lp_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1426,7 +1511,7 @@ func (x *StreamLpEventsRequest) String() string {
 func (*StreamLpEventsRequest) ProtoMessage() {}
 
 func (x *StreamLpEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[16]
+	mi := &file_kdo_v1_lp_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1439,7 +1524,7 @@ func (x *StreamLpEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLpEventsRequest.ProtoReflect.Descriptor instead.
 func (*StreamLpEventsRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{16}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *StreamLpEventsRequest) GetEtf() string {
@@ -1479,7 +1564,7 @@ type EtfLpEvent struct {
 func (x *EtfLpEvent) Reset() {
 	*x = EtfLpEvent{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[17]
+		mi := &file_kdo_v1_lp_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1492,7 +1577,7 @@ func (x *EtfLpEvent) String() string {
 func (*EtfLpEvent) ProtoMessage() {}
 
 func (x *EtfLpEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[17]
+	mi := &file_kdo_v1_lp_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1505,7 +1590,7 @@ func (x *EtfLpEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EtfLpEvent.ProtoReflect.Descriptor instead.
 func (*EtfLpEvent) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{17}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *EtfLpEvent) GetSymbol() string {
@@ -1563,7 +1648,7 @@ type GetUserOrderBookRequest struct {
 func (x *GetUserOrderBookRequest) Reset() {
 	*x = GetUserOrderBookRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[18]
+		mi := &file_kdo_v1_lp_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1576,7 +1661,7 @@ func (x *GetUserOrderBookRequest) String() string {
 func (*GetUserOrderBookRequest) ProtoMessage() {}
 
 func (x *GetUserOrderBookRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[18]
+	mi := &file_kdo_v1_lp_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1589,7 +1674,7 @@ func (x *GetUserOrderBookRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserOrderBookRequest.ProtoReflect.Descriptor instead.
 func (*GetUserOrderBookRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{18}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetUserOrderBookRequest) GetEtf() string {
@@ -1625,7 +1710,7 @@ type UserOrderbookData struct {
 func (x *UserOrderbookData) Reset() {
 	*x = UserOrderbookData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[19]
+		mi := &file_kdo_v1_lp_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1638,7 +1723,7 @@ func (x *UserOrderbookData) String() string {
 func (*UserOrderbookData) ProtoMessage() {}
 
 func (x *UserOrderbookData) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[19]
+	mi := &file_kdo_v1_lp_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1651,7 +1736,7 @@ func (x *UserOrderbookData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserOrderbookData.ProtoReflect.Descriptor instead.
 func (*UserOrderbookData) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{19}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UserOrderbookData) GetBidPrices() []string {
@@ -1714,13 +1799,30 @@ var file_kdo_v1_lp_proto_rawDesc = []byte{
 	0x0a, 0x05, 0x64, 0x65, 0x70, 0x74, 0x68, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x64,
 	0x65, 0x70, 0x74, 0x68, 0x12, 0x1b, 0x0a, 0x09, 0x74, 0x69, 0x63, 0x6b, 0x5f, 0x73, 0x69, 0x7a,
 	0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x74, 0x69, 0x63, 0x6b, 0x53, 0x69, 0x7a,
-	0x65, 0x22, 0x6a, 0x0a, 0x0b, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x12, 0x2b, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32,
-	0x15, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66, 0x4c,
-	0x70, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x2e, 0x0a,
-	0x07, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14,
-	0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x4c, 0x70, 0x50, 0x72, 0x69,
-	0x63, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x22, 0x97, 0x02,
+	0x65, 0x22, 0xae, 0x01, 0x0a, 0x0b, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x12, 0x2b, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x15, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66,
+	0x4c, 0x70, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x2e,
+	0x0a, 0x07, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x14, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x4c, 0x70, 0x50, 0x72,
+	0x69, 0x63, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x12, 0x42,
+	0x0a, 0x0f, 0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63,
+	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31,
+	0x2e, 0x6c, 0x70, 0x2e, 0x46, 0x69, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69,
+	0x63, 0x73, 0x52, 0x0e, 0x66, 0x69, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69,
+	0x63, 0x73, 0x22, 0xc8, 0x01, 0x0a, 0x0e, 0x46, 0x69, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x69,
+	0x73, 0x74, 0x69, 0x63, 0x73, 0x12, 0x2e, 0x0a, 0x13, 0x62, 0x75, 0x79, 0x5f, 0x66, 0x69, 0x6c,
+	0x6c, 0x65, 0x64, 0x5f, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x11, 0x62, 0x75, 0x79, 0x46, 0x69, 0x6c, 0x6c, 0x65, 0x64, 0x51, 0x75, 0x61,
+	0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x30, 0x0a, 0x14, 0x73, 0x65, 0x6c, 0x6c, 0x5f, 0x66, 0x69,
+	0x6c, 0x6c, 0x65, 0x64, 0x5f, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x12, 0x73, 0x65, 0x6c, 0x6c, 0x46, 0x69, 0x6c, 0x6c, 0x65, 0x64, 0x51,
+	0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x28, 0x0a, 0x10, 0x62, 0x75, 0x79, 0x5f, 0x74,
+	0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0e, 0x62, 0x75, 0x79, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
+	0x74, 0x12, 0x2a, 0x0a, 0x11, 0x73, 0x65, 0x6c, 0x6c, 0x5f, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f,
+	0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x73, 0x65,
+	0x6c, 0x6c, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x97, 0x02,
 	0x0a, 0x0a, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x73, 0x12, 0x2a, 0x0a, 0x11,
 	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x5f, 0x73, 0x65, 0x6e,
 	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0f, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x4f, 0x72,
@@ -2070,7 +2172,7 @@ func file_kdo_v1_lp_proto_rawDescGZIP() []byte {
 }
 
 var file_kdo_v1_lp_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(ReplicationMethod)(0),           // 0: kdo.v1.lp.ReplicationMethod
 	(EtfLpState)(0),                  // 1: kdo.v1.lp.EtfLpState
@@ -2079,67 +2181,69 @@ var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(LpEventLevel)(0),                // 4: kdo.v1.lp.LpEventLevel
 	(*EtfLp)(nil),                    // 5: kdo.v1.lp.EtfLp
 	(*EtfLpStatus)(nil),              // 6: kdo.v1.lp.EtfLpStatus
-	(*OrderStats)(nil),               // 7: kdo.v1.lp.OrderStats
-	(*OrderLimitStatus)(nil),         // 8: kdo.v1.lp.OrderLimitStatus
-	(*TimeFrameStatus)(nil),          // 9: kdo.v1.lp.TimeFrameStatus
-	(*LpPricing)(nil),                // 10: kdo.v1.lp.LpPricing
-	(*GetEtfLpRequest)(nil),          // 11: kdo.v1.lp.GetEtfLpRequest
-	(*ListEtfLpsRequest)(nil),        // 12: kdo.v1.lp.ListEtfLpsRequest
-	(*ListEtfLpsResponse)(nil),       // 13: kdo.v1.lp.ListEtfLpsResponse
-	(*UpdateEtfLpRequest)(nil),       // 14: kdo.v1.lp.UpdateEtfLpRequest
-	(*GetEtfLpStatusRequest)(nil),    // 15: kdo.v1.lp.GetEtfLpStatusRequest
-	(*StreamEtfLpStatusRequest)(nil), // 16: kdo.v1.lp.StreamEtfLpStatusRequest
-	(*StartEtfLpRequest)(nil),        // 17: kdo.v1.lp.StartEtfLpRequest
-	(*StartEtfLpResponse)(nil),       // 18: kdo.v1.lp.StartEtfLpResponse
-	(*StopEtfLpRequest)(nil),         // 19: kdo.v1.lp.StopEtfLpRequest
-	(*StopEtfLpResponse)(nil),        // 20: kdo.v1.lp.StopEtfLpResponse
-	(*StreamLpEventsRequest)(nil),    // 21: kdo.v1.lp.StreamLpEventsRequest
-	(*EtfLpEvent)(nil),               // 22: kdo.v1.lp.EtfLpEvent
-	(*GetUserOrderBookRequest)(nil),  // 23: kdo.v1.lp.GetUserOrderBookRequest
-	(*UserOrderbookData)(nil),        // 24: kdo.v1.lp.UserOrderbookData
-	nil,                              // 25: kdo.v1.lp.LpPricing.ConstituentsPriceEntry
-	(*fieldmaskpb.FieldMask)(nil),    // 26: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),    // 27: google.protobuf.Timestamp
+	(*FillStatistics)(nil),           // 7: kdo.v1.lp.FillStatistics
+	(*OrderStats)(nil),               // 8: kdo.v1.lp.OrderStats
+	(*OrderLimitStatus)(nil),         // 9: kdo.v1.lp.OrderLimitStatus
+	(*TimeFrameStatus)(nil),          // 10: kdo.v1.lp.TimeFrameStatus
+	(*LpPricing)(nil),                // 11: kdo.v1.lp.LpPricing
+	(*GetEtfLpRequest)(nil),          // 12: kdo.v1.lp.GetEtfLpRequest
+	(*ListEtfLpsRequest)(nil),        // 13: kdo.v1.lp.ListEtfLpsRequest
+	(*ListEtfLpsResponse)(nil),       // 14: kdo.v1.lp.ListEtfLpsResponse
+	(*UpdateEtfLpRequest)(nil),       // 15: kdo.v1.lp.UpdateEtfLpRequest
+	(*GetEtfLpStatusRequest)(nil),    // 16: kdo.v1.lp.GetEtfLpStatusRequest
+	(*StreamEtfLpStatusRequest)(nil), // 17: kdo.v1.lp.StreamEtfLpStatusRequest
+	(*StartEtfLpRequest)(nil),        // 18: kdo.v1.lp.StartEtfLpRequest
+	(*StartEtfLpResponse)(nil),       // 19: kdo.v1.lp.StartEtfLpResponse
+	(*StopEtfLpRequest)(nil),         // 20: kdo.v1.lp.StopEtfLpRequest
+	(*StopEtfLpResponse)(nil),        // 21: kdo.v1.lp.StopEtfLpResponse
+	(*StreamLpEventsRequest)(nil),    // 22: kdo.v1.lp.StreamLpEventsRequest
+	(*EtfLpEvent)(nil),               // 23: kdo.v1.lp.EtfLpEvent
+	(*GetUserOrderBookRequest)(nil),  // 24: kdo.v1.lp.GetUserOrderBookRequest
+	(*UserOrderbookData)(nil),        // 25: kdo.v1.lp.UserOrderbookData
+	nil,                              // 26: kdo.v1.lp.LpPricing.ConstituentsPriceEntry
+	(*fieldmaskpb.FieldMask)(nil),    // 27: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),    // 28: google.protobuf.Timestamp
 }
 var file_kdo_v1_lp_proto_depIdxs = []int32{
 	1,  // 0: kdo.v1.lp.EtfLpStatus.state:type_name -> kdo.v1.lp.EtfLpState
-	10, // 1: kdo.v1.lp.EtfLpStatus.pricing:type_name -> kdo.v1.lp.LpPricing
-	9,  // 2: kdo.v1.lp.OrderLimitStatus.time_frame_status:type_name -> kdo.v1.lp.TimeFrameStatus
-	25, // 3: kdo.v1.lp.LpPricing.constituents_price:type_name -> kdo.v1.lp.LpPricing.ConstituentsPriceEntry
-	5,  // 4: kdo.v1.lp.ListEtfLpsResponse.etf_lps:type_name -> kdo.v1.lp.EtfLp
-	5,  // 5: kdo.v1.lp.UpdateEtfLpRequest.lp:type_name -> kdo.v1.lp.EtfLp
-	26, // 6: kdo.v1.lp.UpdateEtfLpRequest.update_mask:type_name -> google.protobuf.FieldMask
-	6,  // 7: kdo.v1.lp.StartEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
-	6,  // 8: kdo.v1.lp.StopEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
-	2,  // 9: kdo.v1.lp.EtfLpEvent.task_type:type_name -> kdo.v1.lp.TaskType
-	3,  // 10: kdo.v1.lp.EtfLpEvent.type:type_name -> kdo.v1.lp.LpEventType
-	27, // 11: kdo.v1.lp.EtfLpEvent.timestamp:type_name -> google.protobuf.Timestamp
-	4,  // 12: kdo.v1.lp.EtfLpEvent.level:type_name -> kdo.v1.lp.LpEventLevel
-	11, // 13: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
-	12, // 14: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
-	14, // 15: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
-	15, // 16: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
-	16, // 17: kdo.v1.lp.LpService.StreamEtfLpStatus:input_type -> kdo.v1.lp.StreamEtfLpStatusRequest
-	17, // 18: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
-	19, // 19: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
-	21, // 20: kdo.v1.lp.LpService.StreamLpEvents:input_type -> kdo.v1.lp.StreamLpEventsRequest
-	23, // 21: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	23, // 22: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	5,  // 23: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
-	13, // 24: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
-	5,  // 25: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
-	6,  // 26: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
-	6,  // 27: kdo.v1.lp.LpService.StreamEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
-	18, // 28: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
-	20, // 29: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
-	22, // 30: kdo.v1.lp.LpService.StreamLpEvents:output_type -> kdo.v1.lp.EtfLpEvent
-	24, // 31: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	24, // 32: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	23, // [23:33] is the sub-list for method output_type
-	13, // [13:23] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	11, // 1: kdo.v1.lp.EtfLpStatus.pricing:type_name -> kdo.v1.lp.LpPricing
+	7,  // 2: kdo.v1.lp.EtfLpStatus.fill_statistics:type_name -> kdo.v1.lp.FillStatistics
+	10, // 3: kdo.v1.lp.OrderLimitStatus.time_frame_status:type_name -> kdo.v1.lp.TimeFrameStatus
+	26, // 4: kdo.v1.lp.LpPricing.constituents_price:type_name -> kdo.v1.lp.LpPricing.ConstituentsPriceEntry
+	5,  // 5: kdo.v1.lp.ListEtfLpsResponse.etf_lps:type_name -> kdo.v1.lp.EtfLp
+	5,  // 6: kdo.v1.lp.UpdateEtfLpRequest.lp:type_name -> kdo.v1.lp.EtfLp
+	27, // 7: kdo.v1.lp.UpdateEtfLpRequest.update_mask:type_name -> google.protobuf.FieldMask
+	6,  // 8: kdo.v1.lp.StartEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
+	6,  // 9: kdo.v1.lp.StopEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
+	2,  // 10: kdo.v1.lp.EtfLpEvent.task_type:type_name -> kdo.v1.lp.TaskType
+	3,  // 11: kdo.v1.lp.EtfLpEvent.type:type_name -> kdo.v1.lp.LpEventType
+	28, // 12: kdo.v1.lp.EtfLpEvent.timestamp:type_name -> google.protobuf.Timestamp
+	4,  // 13: kdo.v1.lp.EtfLpEvent.level:type_name -> kdo.v1.lp.LpEventLevel
+	12, // 14: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
+	13, // 15: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
+	15, // 16: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
+	16, // 17: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
+	17, // 18: kdo.v1.lp.LpService.StreamEtfLpStatus:input_type -> kdo.v1.lp.StreamEtfLpStatusRequest
+	18, // 19: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
+	20, // 20: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
+	22, // 21: kdo.v1.lp.LpService.StreamLpEvents:input_type -> kdo.v1.lp.StreamLpEventsRequest
+	24, // 22: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	24, // 23: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	5,  // 24: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
+	14, // 25: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
+	5,  // 26: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
+	6,  // 27: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
+	6,  // 28: kdo.v1.lp.LpService.StreamEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
+	19, // 29: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
+	21, // 30: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
+	23, // 31: kdo.v1.lp.LpService.StreamLpEvents:output_type -> kdo.v1.lp.EtfLpEvent
+	25, // 32: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	25, // 33: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	24, // [24:34] is the sub-list for method output_type
+	14, // [14:24] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_kdo_v1_lp_proto_init() }
@@ -2173,7 +2277,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OrderStats); i {
+			switch v := v.(*FillStatistics); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2185,7 +2289,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OrderLimitStatus); i {
+			switch v := v.(*OrderStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2197,7 +2301,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TimeFrameStatus); i {
+			switch v := v.(*OrderLimitStatus); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2209,7 +2313,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*LpPricing); i {
+			switch v := v.(*TimeFrameStatus); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2221,7 +2325,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetEtfLpRequest); i {
+			switch v := v.(*LpPricing); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2233,7 +2337,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListEtfLpsRequest); i {
+			switch v := v.(*GetEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2245,7 +2349,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListEtfLpsResponse); i {
+			switch v := v.(*ListEtfLpsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2257,7 +2361,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateEtfLpRequest); i {
+			switch v := v.(*ListEtfLpsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2269,7 +2373,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetEtfLpStatusRequest); i {
+			switch v := v.(*UpdateEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2281,7 +2385,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamEtfLpStatusRequest); i {
+			switch v := v.(*GetEtfLpStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2293,7 +2397,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartEtfLpRequest); i {
+			switch v := v.(*StreamEtfLpStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2305,7 +2409,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartEtfLpResponse); i {
+			switch v := v.(*StartEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2317,7 +2421,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopEtfLpRequest); i {
+			switch v := v.(*StartEtfLpResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2329,7 +2433,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopEtfLpResponse); i {
+			switch v := v.(*StopEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2341,7 +2445,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamLpEventsRequest); i {
+			switch v := v.(*StopEtfLpResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2353,7 +2457,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EtfLpEvent); i {
+			switch v := v.(*StreamLpEventsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2365,7 +2469,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUserOrderBookRequest); i {
+			switch v := v.(*EtfLpEvent); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2377,6 +2481,18 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetUserOrderBookRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_kdo_v1_lp_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserOrderbookData); i {
 			case 0:
 				return &v.state
@@ -2389,15 +2505,15 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 	}
-	file_kdo_v1_lp_proto_msgTypes[7].OneofWrappers = []interface{}{}
-	file_kdo_v1_lp_proto_msgTypes[11].OneofWrappers = []interface{}{}
+	file_kdo_v1_lp_proto_msgTypes[8].OneofWrappers = []interface{}{}
+	file_kdo_v1_lp_proto_msgTypes[12].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_kdo_v1_lp_proto_rawDesc,
 			NumEnums:      5,
-			NumMessages:   21,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

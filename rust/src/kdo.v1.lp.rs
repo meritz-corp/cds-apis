@@ -41,6 +41,26 @@ pub struct EtfLpStatus {
     /// 가격 정보
     #[prost(message, optional, tag="2")]
     pub pricing: ::core::option::Option<LpPricing>,
+    /// 체결 통계
+    #[prost(message, optional, tag="3")]
+    pub fill_statistics: ::core::option::Option<FillStatistics>,
+}
+/// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FillStatistics {
+    /// 매수 체결량
+    #[prost(int64, tag="1")]
+    pub buy_filled_quantity: i64,
+    /// 매도 체결량
+    #[prost(int64, tag="2")]
+    pub sell_filled_quantity: i64,
+    /// 매수 총금액 (평균 단가 계산용)
+    #[prost(string, tag="3")]
+    pub buy_total_amount: ::prost::alloc::string::String,
+    /// 매도 총금액 (평균 단가 계산용)
+    #[prost(string, tag="4")]
+    pub sell_total_amount: ::prost::alloc::string::String,
 }
 /// 주문 통계
 #[allow(clippy::derive_partial_eq_without_eq)]
