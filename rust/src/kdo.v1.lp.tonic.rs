@@ -2,8 +2,8 @@
 /// Generated client implementations.
 pub mod lp_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::*;
     use tonic::codegen::http::Uri;
+    use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct LpServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -173,6 +173,31 @@ pub mod lp_service_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("kdo.v1.lp.LpService", "GetEtfLpStatus"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_etf_lp_statuses(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListEtfLpStatusesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListEtfLpStatusesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lp.LpService/ListEtfLpStatuses",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListEtfLpStatuses"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn stream_etf_lp_status(
@@ -353,6 +378,13 @@ pub mod lp_service_server {
             &self,
             request: tonic::Request<super::GetEtfLpStatusRequest>,
         ) -> std::result::Result<tonic::Response<super::EtfLpStatus>, tonic::Status>;
+        async fn list_etf_lp_statuses(
+            &self,
+            request: tonic::Request<super::ListEtfLpStatusesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListEtfLpStatusesResponse>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the StreamEtfLpStatus method.
         type StreamEtfLpStatusStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::EtfLpStatus, tonic::Status>,
@@ -655,6 +687,52 @@ pub mod lp_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetEtfLpStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lp.LpService/ListEtfLpStatuses" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListEtfLpStatusesSvc<T: LpService>(pub Arc<T>);
+                    impl<
+                        T: LpService,
+                    > tonic::server::UnaryService<super::ListEtfLpStatusesRequest>
+                    for ListEtfLpStatusesSvc<T> {
+                        type Response = super::ListEtfLpStatusesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListEtfLpStatusesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LpService>::list_etf_lp_statuses(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListEtfLpStatusesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

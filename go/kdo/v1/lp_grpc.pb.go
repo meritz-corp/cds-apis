@@ -30,6 +30,8 @@ type LpServiceClient interface {
 	UpdateEtfLp(ctx context.Context, in *UpdateEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error)
 	// ETF LP 상태 조회
 	GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest, opts ...grpc.CallOption) (*EtfLpStatus, error)
+	// ETF LP 상태 조회
+	ListEtfLpStatuses(ctx context.Context, in *ListEtfLpStatusesRequest, opts ...grpc.CallOption) (*ListEtfLpStatusesResponse, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
 	StreamEtfLpStatus(ctx context.Context, in *StreamEtfLpStatusRequest, opts ...grpc.CallOption) (LpService_StreamEtfLpStatusClient, error)
 	// ETF LP 시작
@@ -82,6 +84,15 @@ func (c *lpServiceClient) UpdateEtfLp(ctx context.Context, in *UpdateEtfLpReques
 func (c *lpServiceClient) GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest, opts ...grpc.CallOption) (*EtfLpStatus, error) {
 	out := new(EtfLpStatus)
 	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetEtfLpStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lpServiceClient) ListEtfLpStatuses(ctx context.Context, in *ListEtfLpStatusesRequest, opts ...grpc.CallOption) (*ListEtfLpStatusesResponse, error) {
+	out := new(ListEtfLpStatusesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ListEtfLpStatuses", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -223,6 +234,8 @@ type LpServiceServer interface {
 	UpdateEtfLp(context.Context, *UpdateEtfLpRequest) (*EtfLp, error)
 	// ETF LP 상태 조회
 	GetEtfLpStatus(context.Context, *GetEtfLpStatusRequest) (*EtfLpStatus, error)
+	// ETF LP 상태 조회
+	ListEtfLpStatuses(context.Context, *ListEtfLpStatusesRequest) (*ListEtfLpStatusesResponse, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
 	StreamEtfLpStatus(*StreamEtfLpStatusRequest, LpService_StreamEtfLpStatusServer) error
 	// ETF LP 시작
@@ -253,6 +266,9 @@ func (UnimplementedLpServiceServer) UpdateEtfLp(context.Context, *UpdateEtfLpReq
 }
 func (UnimplementedLpServiceServer) GetEtfLpStatus(context.Context, *GetEtfLpStatusRequest) (*EtfLpStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEtfLpStatus not implemented")
+}
+func (UnimplementedLpServiceServer) ListEtfLpStatuses(context.Context, *ListEtfLpStatusesRequest) (*ListEtfLpStatusesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEtfLpStatuses not implemented")
 }
 func (UnimplementedLpServiceServer) StreamEtfLpStatus(*StreamEtfLpStatusRequest, LpService_StreamEtfLpStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamEtfLpStatus not implemented")
@@ -353,6 +369,24 @@ func _LpService_GetEtfLpStatus_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LpServiceServer).GetEtfLpStatus(ctx, req.(*GetEtfLpStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LpService_ListEtfLpStatuses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEtfLpStatusesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LpServiceServer).ListEtfLpStatuses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.lp.LpService/ListEtfLpStatuses",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LpServiceServer).ListEtfLpStatuses(ctx, req.(*ListEtfLpStatusesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -496,6 +530,10 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEtfLpStatus",
 			Handler:    _LpService_GetEtfLpStatus_Handler,
+		},
+		{
+			MethodName: "ListEtfLpStatuses",
+			Handler:    _LpService_ListEtfLpStatuses_Handler,
 		},
 		{
 			MethodName: "StartEtfLp",

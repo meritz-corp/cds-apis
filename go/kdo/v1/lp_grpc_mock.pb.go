@@ -821,6 +821,26 @@ func (mr *MockLpServiceClientMockRecorder) GetUserOrderbook(ctx, in interface{},
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserOrderbook", reflect.TypeOf((*MockLpServiceClient)(nil).GetUserOrderbook), varargs...)
 }
 
+// ListEtfLpStatuses mocks base method.
+func (m *MockLpServiceClient) ListEtfLpStatuses(ctx context.Context, in *ListEtfLpStatusesRequest, opts ...grpc.CallOption) (*ListEtfLpStatusesResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListEtfLpStatuses", varargs...)
+	ret0, _ := ret[0].(*ListEtfLpStatusesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListEtfLpStatuses indicates an expected call of ListEtfLpStatuses.
+func (mr *MockLpServiceClientMockRecorder) ListEtfLpStatuses(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLpStatuses", reflect.TypeOf((*MockLpServiceClient)(nil).ListEtfLpStatuses), varargs...)
+}
+
 // ListEtfLps mocks base method.
 func (m *MockLpServiceClient) ListEtfLps(ctx context.Context, in *ListEtfLpsRequest, opts ...grpc.CallOption) (*ListEtfLpsResponse, error) {
 	m.ctrl.T.Helper()
@@ -1027,6 +1047,21 @@ func (m *MockLpServiceServer) GetUserOrderbook(ctx context.Context, in *GetUserO
 func (mr *MockLpServiceServerMockRecorder) GetUserOrderbook(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserOrderbook", reflect.TypeOf((*MockLpServiceServer)(nil).GetUserOrderbook), ctx, in)
+}
+
+// ListEtfLpStatuses mocks base method.
+func (m *MockLpServiceServer) ListEtfLpStatuses(ctx context.Context, in *ListEtfLpStatusesRequest) (*ListEtfLpStatusesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListEtfLpStatuses", ctx, in)
+	ret0, _ := ret[0].(*ListEtfLpStatusesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListEtfLpStatuses indicates an expected call of ListEtfLpStatuses.
+func (mr *MockLpServiceServerMockRecorder) ListEtfLpStatuses(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLpStatuses", reflect.TypeOf((*MockLpServiceServer)(nil).ListEtfLpStatuses), ctx, in)
 }
 
 // ListEtfLps mocks base method.

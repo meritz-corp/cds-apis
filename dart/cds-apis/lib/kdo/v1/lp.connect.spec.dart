@@ -43,6 +43,14 @@ abstract final class LpService {
     kdov1lp.EtfLpStatus.new,
   );
 
+  /// ETF LP 상태 조회
+  static const listEtfLpStatuses = connect.Spec(
+    '/$name/ListEtfLpStatuses',
+    connect.StreamType.unary,
+    kdov1lp.ListEtfLpStatusesRequest.new,
+    kdov1lp.ListEtfLpStatusesResponse.new,
+  );
+
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
   static const streamEtfLpStatus = connect.Spec(
     '/$name/StreamEtfLpStatus',

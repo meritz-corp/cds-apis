@@ -63,6 +63,59 @@
         ]
       }
     },
+    "/v1/lps/etfs/*/funds/*/status": {
+      "get": {
+        "summary": "ETF LP 상태 조회",
+        "operationId": "LpService_ListEtfLpStatuses",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpListEtfLpStatusesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"fill_statistics.buy_filled_quantity\", \"fill_statistics.sell_filled_quantity\"\n\nExamples\n* order_by=fill_statistics.buy_filled_quantity desc",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
     "/v1/lps/etfs/{lp.symbol}/funds/{lp.fundCode}": {
       "patch": {
         "summary": "ETF LP 업데이트",
@@ -647,6 +700,22 @@
         }
       },
       "title": "ETF 체결 통계 (매수/매도 체결량 및 평균 단가)"
+    },
+    "lpListEtfLpStatusesResponse": {
+      "type": "object",
+      "properties": {
+        "etfLpStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpEtfLpStatus"
+          },
+          "title": "ETF 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
     },
     "lpListEtfLpsResponse": {
       "type": "object",

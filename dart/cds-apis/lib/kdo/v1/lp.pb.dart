@@ -872,6 +872,151 @@ class ListEtfLpsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+class ListEtfLpStatusesRequest extends $pb.GeneratedMessage {
+  factory ListEtfLpStatusesRequest({
+    $core.int? pageSize,
+    $core.String? pageToken,
+    $core.String? filter,
+    $core.String? orderBy,
+  }) {
+    final result = create();
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    if (filter != null) result.filter = filter;
+    if (orderBy != null) result.orderBy = orderBy;
+    return result;
+  }
+
+  ListEtfLpStatusesRequest._();
+
+  factory ListEtfLpStatusesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListEtfLpStatusesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListEtfLpStatusesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
+    ..aOS(2, _omitFieldNames ? '' : 'pageToken')
+    ..aOS(3, _omitFieldNames ? '' : 'filter')
+    ..aOS(5, _omitFieldNames ? '' : 'orderBy')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListEtfLpStatusesRequest clone() => ListEtfLpStatusesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListEtfLpStatusesRequest copyWith(void Function(ListEtfLpStatusesRequest) updates) => super.copyWith((message) => updates(message as ListEtfLpStatusesRequest)) as ListEtfLpStatusesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListEtfLpStatusesRequest create() => ListEtfLpStatusesRequest._();
+  @$core.override
+  ListEtfLpStatusesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListEtfLpStatusesRequest> createRepeated() => $pb.PbList<ListEtfLpStatusesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListEtfLpStatusesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListEtfLpStatusesRequest>(create);
+  static ListEtfLpStatusesRequest? _defaultInstance;
+
+  /// 페이지 크기 (optional)
+  @$pb.TagNumber(1)
+  $core.int get pageSize => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set pageSize($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPageSize() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPageSize() => $_clearField(1);
+
+  /// 페이지 토큰 (optional, for pagination)
+  @$pb.TagNumber(2)
+  $core.String get pageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set pageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageToken() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get filter => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set filter($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilter() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilter() => $_clearField(3);
+
+  /// 오더링 조건. (optional, AIP-132)
+  ///
+  /// Supported Fields
+  /// * "fill_statistics.buy_filled_quantity", "fill_statistics.sell_filled_quantity"
+  ///
+  /// Examples
+  /// * order_by=fill_statistics.buy_filled_quantity desc
+  @$pb.TagNumber(5)
+  $core.String get orderBy => $_getSZ(3);
+  @$pb.TagNumber(5)
+  set orderBy($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOrderBy() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearOrderBy() => $_clearField(5);
+}
+
+class ListEtfLpStatusesResponse extends $pb.GeneratedMessage {
+  factory ListEtfLpStatusesResponse({
+    $core.Iterable<EtfLpStatus>? etfLpStatuses,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (etfLpStatuses != null) result.etfLpStatuses.addAll(etfLpStatuses);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListEtfLpStatusesResponse._();
+
+  factory ListEtfLpStatusesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListEtfLpStatusesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListEtfLpStatusesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..pc<EtfLpStatus>(1, _omitFieldNames ? '' : 'etfLpStatuses', $pb.PbFieldType.PM, subBuilder: EtfLpStatus.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListEtfLpStatusesResponse clone() => ListEtfLpStatusesResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListEtfLpStatusesResponse copyWith(void Function(ListEtfLpStatusesResponse) updates) => super.copyWith((message) => updates(message as ListEtfLpStatusesResponse)) as ListEtfLpStatusesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListEtfLpStatusesResponse create() => ListEtfLpStatusesResponse._();
+  @$core.override
+  ListEtfLpStatusesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListEtfLpStatusesResponse> createRepeated() => $pb.PbList<ListEtfLpStatusesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListEtfLpStatusesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListEtfLpStatusesResponse>(create);
+  static ListEtfLpStatusesResponse? _defaultInstance;
+
+  /// ETF 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<EtfLpStatus> get etfLpStatuses => $_getList(0);
+
+  /// 다음 페이지 토큰
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
+}
+
 /// UpdateEtfLp
 class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   factory UpdateEtfLpRequest({

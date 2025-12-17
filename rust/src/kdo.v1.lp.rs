@@ -175,6 +175,53 @@ pub struct ListEtfLpsResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListEtfLpStatusesRequest {
+    /// 페이지 크기 (optional)
+    #[prost(uint32, optional, tag="1")]
+    pub page_size: ::core::option::Option<u32>,
+    /// 페이지 토큰 (optional, for pagination)
+    #[prost(string, optional, tag="2")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    // Available Sequence and Operator
+    // * etf_symbol
+    //    * `equal`, `contains`
+    // * fund_code
+    //    * `equal`, `contains`
+    // * state
+    //    * `equal`
+    // * fill_satistics.buy_filled_quantity
+    //    * `greater_than`, `less_than`
+    //
+    // Examples
+    // * filter=etf_symbol:"005930"
+    // * filter=fund_code="0159"
+    // * filter=state=ETF_LP_STATE_RUNNING
+    // * filter=fill_statistics.buy_filled_quantity > 1000
+
+    #[prost(string, tag="3")]
+    pub filter: ::prost::alloc::string::String,
+    /// 오더링 조건. (optional, AIP-132)
+    ///
+    /// Supported Fields
+    /// * "fill_statistics.buy_filled_quantity", "fill_statistics.sell_filled_quantity"
+    ///
+    /// Examples
+    /// * order_by=fill_statistics.buy_filled_quantity desc
+    #[prost(string, tag="5")]
+    pub order_by: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListEtfLpStatusesResponse {
+    /// ETF 목록
+    #[prost(message, repeated, tag="1")]
+    pub etf_lp_statuses: ::prost::alloc::vec::Vec<EtfLpStatus>,
+    /// 다음 페이지 토큰
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
 /// UpdateEtfLp
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

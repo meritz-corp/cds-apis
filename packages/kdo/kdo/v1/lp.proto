@@ -47,6 +47,15 @@ service LpService {
     option (google.api.method_signature) = "etf,fund";
   }
 
+  // ETF LP 상태 조회
+  rpc ListEtfLpStatuses(ListEtfLpStatusesRequest) returns (ListEtfLpStatusesResponse) {
+    option (google.api.http) = {
+      get: "/v1/lps/etfs/*/funds/*/status"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+
   // ETF LP 상태 스트리밍 (실시간 업데이트)
   rpc StreamEtfLpStatus(StreamEtfLpStatusRequest) returns (stream EtfLpStatus) {
     option (google.api.http) = {
@@ -275,6 +284,50 @@ message ListEtfLpsResponse {
   // 다음 페이지 토큰
   string next_page_token = 2;
 }
+
+message ListEtfLpStatusesRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // Available Sequence and Operator
+  // * etf_symbol
+  //   * `equal`, `contains`
+  // * fund_code
+  //   * `equal`, `contains`
+  // * state
+  //   * `equal`
+  // * fill_satistics.buy_filled_quantity
+  //   * `greater_than`, `less_than`
+  //
+  // Examples
+  // * filter=etf_symbol:"005930"
+  // * filter=fund_code="0159"
+  // * filter=state=ETF_LP_STATE_RUNNING
+  // * filter=fill_statistics.buy_filled_quantity > 1000
+
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // 오더링 조건. (optional, AIP-132)
+  //
+  // Supported Fields
+  // * "fill_statistics.buy_filled_quantity", "fill_statistics.sell_filled_quantity"
+  //
+  // Examples
+  // * order_by=fill_statistics.buy_filled_quantity desc
+  string order_by = 5 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListEtfLpStatusesResponse {
+  // ETF 목록
+  repeated EtfLpStatus etf_lp_statuses = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
 
 // UpdateEtfLp
 message UpdateEtfLpRequest {

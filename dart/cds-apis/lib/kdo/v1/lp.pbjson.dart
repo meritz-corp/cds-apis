@@ -310,6 +310,43 @@ final $typed_data.Uint8List listEtfLpsResponseDescriptor = $convert.base64Decode
     'ChJMaXN0RXRmTHBzUmVzcG9uc2USKQoHZXRmX2xwcxgBIAMoCzIQLmtkby52MS5scC5FdGZMcF'
     'IGZXRmTHBzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
+@$core.Deprecated('Use listEtfLpStatusesRequestDescriptor instead')
+const ListEtfLpStatusesRequest$json = {
+  '1': 'ListEtfLpStatusesRequest',
+  '2': [
+    {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
+    {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
+    {'1': 'filter', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'filter'},
+    {'1': 'order_by', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'orderBy'},
+  ],
+  '8': [
+    {'1': '_page_size'},
+    {'1': '_page_token'},
+  ],
+};
+
+/// Descriptor for `ListEtfLpStatusesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpStatusesRequestDescriptor = $convert.base64Decode(
+    'ChhMaXN0RXRmTHBTdGF0dXNlc1JlcXVlc3QSIAoJcGFnZV9zaXplGAEgASgNSABSCHBhZ2VTaX'
+    'pliAEBEiIKCnBhZ2VfdG9rZW4YAiABKAlIAVIJcGFnZVRva2VuiAEBEhwKBmZpbHRlchgDIAEo'
+    'CUIE4kEBAVIGZmlsdGVyEh8KCG9yZGVyX2J5GAUgASgJQgTiQQEBUgdvcmRlckJ5QgwKCl9wYW'
+    'dlX3NpemVCDQoLX3BhZ2VfdG9rZW4=');
+
+@$core.Deprecated('Use listEtfLpStatusesResponseDescriptor instead')
+const ListEtfLpStatusesResponse$json = {
+  '1': 'ListEtfLpStatusesResponse',
+  '2': [
+    {'1': 'etf_lp_statuses', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.EtfLpStatus', '10': 'etfLpStatuses'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+  ],
+};
+
+/// Descriptor for `ListEtfLpStatusesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpStatusesResponseDescriptor = $convert.base64Decode(
+    'ChlMaXN0RXRmTHBTdGF0dXNlc1Jlc3BvbnNlEj4KD2V0Zl9scF9zdGF0dXNlcxgBIAMoCzIWLm'
+    'tkby52MS5scC5FdGZMcFN0YXR1c1INZXRmTHBTdGF0dXNlcxImCg9uZXh0X3BhZ2VfdG9rZW4Y'
+    'AiABKAlSDW5leHRQYWdlVG9rZW4=');
+
 @$core.Deprecated('Use updateEtfLpRequestDescriptor instead')
 const UpdateEtfLpRequest$json = {
   '1': 'UpdateEtfLpRequest',
