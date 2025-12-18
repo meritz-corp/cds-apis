@@ -142,20 +142,32 @@ enum ReplicationMethod {
 
 // ETF LP 상태
 message EtfLpStatus {
-  // LP 상태
-  EtfLpState state = 1;
-
-  // 가격 정보
-  LpPricing pricing = 2;
-
-  // 체결 통계
-  FillStatistics fill_statistics = 3;
-
   // ETF 심볼
-  string etf_symbol = 4;
+  string etf_symbol = 1;
 
   // 펀드 코드
-  string fund_code = 5;
+  string fund_code = 2;
+
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 bid_offset = 4;
+
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 ask_offset = 5;
+
+  // Basis 스프레드 (원 단위, i64)
+  int64 basis = 6;
+
+  // 주문 수량 (i64)
+  int64 quantity = 7;
+
+  // LP 상태
+  EtfLpState state = 8;
+
+  // 가격 정보
+  LpPricing pricing = 9;
+
+  // 체결 통계
+  FillStatistics fill_statistics = 10;
 }
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

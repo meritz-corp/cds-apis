@@ -143,21 +143,27 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
 const EtfLpStatus$json = {
   '1': 'EtfLpStatus',
   '2': [
-    {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
-    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
-    {'1': 'fill_statistics', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
-    {'1': 'etf_symbol', '3': 4, '4': 1, '5': 9, '10': 'etfSymbol'},
-    {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'bid_offset', '3': 4, '4': 1, '5': 3, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 5, '4': 1, '5': 3, '10': 'askOffset'},
+    {'1': 'basis', '3': 6, '4': 1, '5': 3, '10': 'basis'},
+    {'1': 'quantity', '3': 7, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
+    {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
+    {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
   ],
 };
 
 /// Descriptor for `EtfLpStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
-    'CgtFdGZMcFN0YXR1cxIrCgVzdGF0ZRgBIAEoDjIVLmtkby52MS5scC5FdGZMcFN0YXRlUgVzdG'
-    'F0ZRIuCgdwcmljaW5nGAIgASgLMhQua2RvLnYxLmxwLkxwUHJpY2luZ1IHcHJpY2luZxJCCg9m'
-    'aWxsX3N0YXRpc3RpY3MYAyABKAsyGS5rZG8udjEubHAuRmlsbFN0YXRpc3RpY3NSDmZpbGxTdG'
-    'F0aXN0aWNzEh0KCmV0Zl9zeW1ib2wYBCABKAlSCWV0ZlN5bWJvbBIbCglmdW5kX2NvZGUYBSAB'
-    'KAlSCGZ1bmRDb2Rl');
+    'CgtFdGZMcFN0YXR1cxIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSGwoJZnVuZF9jb2'
+    'RlGAIgASgJUghmdW5kQ29kZRIdCgpiaWRfb2Zmc2V0GAQgASgDUgliaWRPZmZzZXQSHQoKYXNr'
+    'X29mZnNldBgFIAEoA1IJYXNrT2Zmc2V0EhQKBWJhc2lzGAYgASgDUgViYXNpcxIaCghxdWFudG'
+    'l0eRgHIAEoA1IIcXVhbnRpdHkSKwoFc3RhdGUYCCABKA4yFS5rZG8udjEubHAuRXRmTHBTdGF0'
+    'ZVIFc3RhdGUSLgoHcHJpY2luZxgJIAEoCzIULmtkby52MS5scC5McFByaWNpbmdSB3ByaWNpbm'
+    'cSQgoPZmlsbF9zdGF0aXN0aWNzGAogASgLMhkua2RvLnYxLmxwLkZpbGxTdGF0aXN0aWNzUg5m'
+    'aWxsU3RhdGlzdGljcw==');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

@@ -529,7 +529,45 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
         if true {
             let v = EtfLpState::try_from(self.state)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
@@ -541,12 +579,6 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.fill_statistics.as_ref() {
             struct_ser.serialize_field("fill_statistics", v)?;
         }
-        if true {
-            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
         struct_ser.end()
     }
 }
@@ -557,23 +589,33 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "state",
-            "pricing",
-            "fill_statistics",
-            "fillStatistics",
             "etf_symbol",
             "etfSymbol",
             "fund_code",
             "fundCode",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
+            "basis",
+            "quantity",
+            "state",
+            "pricing",
+            "fill_statistics",
+            "fillStatistics",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            EtfSymbol,
+            FundCode,
+            BidOffset,
+            AskOffset,
+            Basis,
+            Quantity,
             State,
             Pricing,
             FillStatistics,
-            EtfSymbol,
-            FundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -596,11 +638,15 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                         E: serde::de::Error,
                     {
                         match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
+                            "basis" => Ok(GeneratedField::Basis),
+                            "quantity" => Ok(GeneratedField::Quantity),
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
-                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -620,13 +666,61 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut etf_symbol__ = None;
+                let mut fund_code__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
+                let mut basis__ = None;
+                let mut quantity__ = None;
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
-                let mut etf_symbol__ = None;
-                let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
+                            }
+                            bid_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Basis => {
+                            if basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basis"));
+                            }
+                            basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::State => {
                             if state__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("state"));
@@ -645,29 +739,21 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             fill_statistics__ = map_.next_value()?;
                         }
-                        GeneratedField::EtfSymbol => {
-                            if etf_symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
-                            }
-                            etf_symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
                 Ok(EtfLpStatus {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
+                    basis: basis__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
-                    etf_symbol: etf_symbol__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
                 })
             }
         }

@@ -35,21 +35,33 @@ pub struct EtfLp {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfLpStatus {
-    /// LP 상태
-    #[prost(enumeration="EtfLpState", tag="1")]
-    pub state: i32,
-    /// 가격 정보
-    #[prost(message, optional, tag="2")]
-    pub pricing: ::core::option::Option<LpPricing>,
-    /// 체결 통계
-    #[prost(message, optional, tag="3")]
-    pub fill_statistics: ::core::option::Option<FillStatistics>,
     /// ETF 심볼
-    #[prost(string, tag="4")]
+    #[prost(string, tag="1")]
     pub etf_symbol: ::prost::alloc::string::String,
     /// 펀드 코드
-    #[prost(string, tag="5")]
+    #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// Offset (호가 스프레드 조정, 원 단위, i64)
+    #[prost(int64, tag="4")]
+    pub bid_offset: i64,
+    /// Offset (호가 스프레드 조정, 원 단위, i64)
+    #[prost(int64, tag="5")]
+    pub ask_offset: i64,
+    /// Basis 스프레드 (원 단위, i64)
+    #[prost(int64, tag="6")]
+    pub basis: i64,
+    /// 주문 수량 (i64)
+    #[prost(int64, tag="7")]
+    pub quantity: i64,
+    /// LP 상태
+    #[prost(enumeration="EtfLpState", tag="8")]
+    pub state: i32,
+    /// 가격 정보
+    #[prost(message, optional, tag="9")]
+    pub pricing: ::core::option::Option<LpPricing>,
+    /// 체결 통계
+    #[prost(message, optional, tag="10")]
+    pub fill_statistics: ::core::option::Option<FillStatistics>,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]

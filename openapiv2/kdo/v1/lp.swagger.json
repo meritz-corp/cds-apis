@@ -662,6 +662,34 @@
     "lpEtfLpStatus": {
       "type": "object",
       "properties": {
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "bidOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
+        "askOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
+        "basis": {
+          "type": "string",
+          "format": "int64",
+          "title": "Basis 스프레드 (원 단위, i64)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문 수량 (i64)"
+        },
         "state": {
           "$ref": "#/definitions/lpEtfLpState",
           "title": "LP 상태"
@@ -673,14 +701,6 @@
         "fillStatistics": {
           "$ref": "#/definitions/lpFillStatistics",
           "title": "체결 통계"
-        },
-        "etfSymbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "fundCode": {
-          "type": "string",
-          "title": "펀드 코드"
         }
       },
       "title": "ETF LP 상태"
