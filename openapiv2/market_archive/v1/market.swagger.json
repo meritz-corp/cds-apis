@@ -1,0 +1,540 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "market_archive/v1/market.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OrderbookService"
+    },
+    {
+      "name": "TradeService"
+    },
+    {
+      "name": "CandleService"
+    },
+    {
+      "name": "SymbolService"
+    },
+    {
+      "name": "IndicatorService"
+    },
+    {
+      "name": "IngestionService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "marketCandle": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "캔들 시작 시간"
+        },
+        "interval": {
+          "$ref": "#/definitions/marketInterval"
+        },
+        "open": {
+          "type": "number",
+          "format": "double"
+        },
+        "high": {
+          "type": "number",
+          "format": "double"
+        },
+        "low": {
+          "type": "number",
+          "format": "double"
+        },
+        "close": {
+          "type": "number",
+          "format": "double"
+        },
+        "volume": {
+          "type": "string",
+          "format": "int64"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "title": "거래대금"
+        },
+        "tradeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "체결 건수"
+        }
+      },
+      "title": "OHLC 캔들 데이터"
+    },
+    "marketGetCandlesResponse": {
+      "type": "object",
+      "properties": {
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketCandle"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasMore": {
+          "type": "boolean"
+        }
+      },
+      "title": "OHLC 조회 응답"
+    },
+    "marketGetIndicatorResponse": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/definitions/marketIndicatorParams"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketIndicatorValue"
+          }
+        }
+      }
+    },
+    "marketGetOrderbooksResponse": {
+      "type": "object",
+      "properties": {
+        "orderbooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketOrderbook"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasMore": {
+          "type": "boolean"
+        }
+      },
+      "title": "호가 조회 응답"
+    },
+    "marketGetTradesResponse": {
+      "type": "object",
+      "properties": {
+        "trades": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketTrade"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasMore": {
+          "type": "boolean"
+        }
+      },
+      "title": "체결 조회 응답"
+    },
+    "marketIndicatorParams": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/marketIndicatorType"
+        },
+        "periods": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": "기간 파라미터 (예: [12, 26, 9] for MACD)"
+        },
+        "stdDev": {
+          "type": "number",
+          "format": "double",
+          "title": "표준편차 (볼린저용)"
+        }
+      }
+    },
+    "marketIndicatorType": {
+      "type": "string",
+      "enum": [
+        "INDICATOR_UNKNOWN",
+        "INDICATOR_SMA",
+        "INDICATOR_EMA",
+        "INDICATOR_MACD",
+        "INDICATOR_RSI",
+        "INDICATOR_BOLLINGER",
+        "INDICATOR_VWAP",
+        "INDICATOR_ATR"
+      ],
+      "default": "INDICATOR_UNKNOWN",
+      "title": "- INDICATOR_SMA: 단순 이동평균\n - INDICATOR_EMA: 지수 이동평균\n - INDICATOR_MACD: MACD\n - INDICATOR_RSI: RSI\n - INDICATOR_BOLLINGER: 볼린저 밴드\n - INDICATOR_VWAP: VWAP\n - INDICATOR_ATR: ATR"
+    },
+    "marketIndicatorValue": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "title": "지표 값들 (MACD면 [macd, signal, histogram])"
+        }
+      }
+    },
+    "marketIngestDirectoryResponse": {
+      "type": "object",
+      "properties": {
+        "fileCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketIngestFileResponse"
+          }
+        }
+      }
+    },
+    "marketIngestFileResponse": {
+      "type": "object",
+      "properties": {
+        "totalLines": {
+          "type": "string",
+          "format": "int64"
+        },
+        "parsedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "insertedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "skippedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "errorCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "처음 10개 에러만"
+        }
+      }
+    },
+    "marketInterval": {
+      "type": "string",
+      "enum": [
+        "INTERVAL_UNKNOWN",
+        "INTERVAL_1S",
+        "INTERVAL_5S",
+        "INTERVAL_10S",
+        "INTERVAL_30S",
+        "INTERVAL_1M",
+        "INTERVAL_5M",
+        "INTERVAL_15M",
+        "INTERVAL_30M",
+        "INTERVAL_1H",
+        "INTERVAL_4H",
+        "INTERVAL_1D"
+      ],
+      "default": "INTERVAL_UNKNOWN",
+      "description": "- INTERVAL_1S: 1초\n - INTERVAL_5S: 5초\n - INTERVAL_10S: 10초\n - INTERVAL_30S: 30초\n - INTERVAL_1M: 1분\n - INTERVAL_5M: 5분\n - INTERVAL_15M: 15분\n - INTERVAL_30M: 30분\n - INTERVAL_1H: 1시간\n - INTERVAL_4H: 4시간\n - INTERVAL_1D: 1일",
+      "title": "OHLC 간격"
+    },
+    "marketListSymbolsResponse": {
+      "type": "object",
+      "properties": {
+        "symbols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketSymbolInfo"
+          }
+        }
+      }
+    },
+    "marketMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_UNKNOWN",
+        "MARKET_KOSPI",
+        "MARKET_KOSDAQ",
+        "MARKET_ETF",
+        "MARKET_FUTURES",
+        "MARKET_OPTIONS"
+      ],
+      "default": "MARKET_UNKNOWN"
+    },
+    "marketOrderbook": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sessionId": {
+          "$ref": "#/definitions/marketSessionId"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketPriceLevel"
+          },
+          "title": "매수 호가 (가격 내림차순)"
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketPriceLevel"
+          },
+          "title": "매도 호가 (가격 오름차순)"
+        },
+        "midPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "중간 가격"
+        },
+        "spread": {
+          "type": "number",
+          "format": "double",
+          "title": "스프레드"
+        },
+        "totalBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 수량"
+        },
+        "totalAskQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "estimatedPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "예상 체결가/수량 (단일가 시)"
+        },
+        "estimatedVolume": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "호가 데이터"
+    },
+    "marketOrderbookUpdate": {
+      "type": "object",
+      "properties": {
+        "orderbook": {
+          "$ref": "#/definitions/marketOrderbook"
+        }
+      }
+    },
+    "marketPagination": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "최대 반환 개수 (default: 1000, max: 10000)"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "시작 위치"
+        }
+      },
+      "title": "페이지네이션"
+    },
+    "marketPriceLevel": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double",
+          "title": "가격"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "건수 (선물만 해당)"
+        }
+      },
+      "title": "단일 호가 레벨"
+    },
+    "marketSessionId": {
+      "type": "string",
+      "enum": [
+        "SESSION_UNKNOWN",
+        "SESSION_PREVIOUS",
+        "SESSION_OPENING_AUCTION",
+        "SESSION_CONTINUOUS",
+        "SESSION_CLOSING_AUCTION",
+        "SESSION_AFTER_HOURS",
+        "SESSION_VI_AUCTION",
+        "SESSION_CLOSED"
+      ],
+      "default": "SESSION_UNKNOWN",
+      "description": "- SESSION_PREVIOUS: 장개시전\n - SESSION_OPENING_AUCTION: 시가단일가\n - SESSION_CONTINUOUS: 접속 (정규장)\n - SESSION_CLOSING_AUCTION: 종가단일가\n - SESSION_AFTER_HOURS: 장종료후\n - SESSION_VI_AUCTION: VI단일가\n - SESSION_CLOSED: 장마감",
+      "title": "세션 ID (장 상태)"
+    },
+    "marketSide": {
+      "type": "string",
+      "enum": [
+        "SIDE_UNKNOWN",
+        "SIDE_BID",
+        "SIDE_ASK"
+      ],
+      "default": "SIDE_UNKNOWN",
+      "description": "- SIDE_BID: 매수\n - SIDE_ASK: 매도",
+      "title": "매수/매도 구분"
+    },
+    "marketSymbolInfo": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "marketType": {
+          "$ref": "#/definitions/marketMarketType"
+        },
+        "underlying": {
+          "type": "string",
+          "title": "기초자산 (파생만 해당)"
+        },
+        "tickSize": {
+          "type": "number",
+          "format": "double",
+          "title": "호가 단위"
+        },
+        "lotSize": {
+          "type": "integer",
+          "format": "int32",
+          "title": "거래 단위"
+        }
+      }
+    },
+    "marketTimeRange": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "시간 범위 쿼리"
+    },
+    "marketTrade": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "side": {
+          "$ref": "#/definitions/marketSide"
+        },
+        "cumulativeVolume": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 데이터"
+        },
+        "cumulativeValue": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "체결 데이터"
+    },
+    "marketTradeUpdate": {
+      "type": "object",
+      "properties": {
+        "trade": {
+          "$ref": "#/definitions/marketTrade"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

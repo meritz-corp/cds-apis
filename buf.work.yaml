@@ -2,3 +2,4 @@ version: v1
 directories:
   - packages/log_sync
   - packages/kdo
+  - packages/market_archive
