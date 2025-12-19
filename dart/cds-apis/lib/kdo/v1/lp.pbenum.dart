@@ -112,6 +112,8 @@ class LpEventType extends $pb.ProtobufEnum {
   static const LpEventType LP_EVENT_TYPE_SYSTEM_ERROR = LpEventType._(12, _omitEnumNames ? '' : 'LP_EVENT_TYPE_SYSTEM_ERROR');
   static const LpEventType LP_EVENT_TYPE_MARKET_SESSION = LpEventType._(13, _omitEnumNames ? '' : 'LP_EVENT_TYPE_MARKET_SESSION');
   static const LpEventType LP_EVENT_TYPE_FUND_UPDATE = LpEventType._(14, _omitEnumNames ? '' : 'LP_EVENT_TYPE_FUND_UPDATE');
+  static const LpEventType LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY = LpEventType._(15, _omitEnumNames ? '' : 'LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY');
+  static const LpEventType LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY = LpEventType._(16, _omitEnumNames ? '' : 'LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY');
 
   static const $core.List<LpEventType> values = <LpEventType> [
     LP_EVENT_TYPE_UNSPECIFIED,
@@ -127,9 +129,11 @@ class LpEventType extends $pb.ProtobufEnum {
     LP_EVENT_TYPE_SYSTEM_ERROR,
     LP_EVENT_TYPE_MARKET_SESSION,
     LP_EVENT_TYPE_FUND_UPDATE,
+    LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY,
+    LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY,
   ];
 
-  static final $core.List<LpEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 14);
+  static final $core.List<LpEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 16);
   static LpEventType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const LpEventType._(super.value, super.name);

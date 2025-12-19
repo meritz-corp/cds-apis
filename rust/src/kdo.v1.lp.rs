@@ -580,6 +580,10 @@ pub enum LpEventType {
     MarketSession = 13,
     /// 펀드 정보 업데이트 실패
     FundUpdate = 14,
+    /// 오프셋 조정 (시간 기반) 실행
+    OffsetAdjustmentTimeStrategy = 15,
+    /// 오프셋 조정 (포지션 기반) 실행
+    OffsetAdjustmentPositionStrategy = 16,
 }
 impl LpEventType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -601,6 +605,8 @@ impl LpEventType {
             LpEventType::SystemError => "LP_EVENT_TYPE_SYSTEM_ERROR",
             LpEventType::MarketSession => "LP_EVENT_TYPE_MARKET_SESSION",
             LpEventType::FundUpdate => "LP_EVENT_TYPE_FUND_UPDATE",
+            LpEventType::OffsetAdjustmentTimeStrategy => "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY",
+            LpEventType::OffsetAdjustmentPositionStrategy => "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -619,6 +625,8 @@ impl LpEventType {
             "LP_EVENT_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
             "LP_EVENT_TYPE_MARKET_SESSION" => Some(Self::MarketSession),
             "LP_EVENT_TYPE_FUND_UPDATE" => Some(Self::FundUpdate),
+            "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY" => Some(Self::OffsetAdjustmentTimeStrategy),
+            "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY" => Some(Self::OffsetAdjustmentPositionStrategy),
             _ => None,
         }
     }

@@ -550,6 +550,8 @@ enum LpEventType {
   LP_EVENT_TYPE_SYSTEM_ERROR = 12;       // 시스템 에러
   LP_EVENT_TYPE_MARKET_SESSION = 13;     // 시장 세션 관련 에러
   LP_EVENT_TYPE_FUND_UPDATE = 14;        // 펀드 정보 업데이트 실패
+  LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY = 15; // 오프셋 조정 (시간 기반) 실행
+  LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY = 16; // 오프셋 조정 (포지션 기반) 실행
 }
 
 // 이벤트 레벨

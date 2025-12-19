@@ -2041,6 +2041,8 @@ impl serde::Serialize for LpEventType {
             Self::SystemError => "LP_EVENT_TYPE_SYSTEM_ERROR",
             Self::MarketSession => "LP_EVENT_TYPE_MARKET_SESSION",
             Self::FundUpdate => "LP_EVENT_TYPE_FUND_UPDATE",
+            Self::OffsetAdjustmentTimeStrategy => "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY",
+            Self::OffsetAdjustmentPositionStrategy => "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY",
         };
         serializer.serialize_str(variant)
     }
@@ -2065,6 +2067,8 @@ impl<'de> serde::Deserialize<'de> for LpEventType {
             "LP_EVENT_TYPE_SYSTEM_ERROR",
             "LP_EVENT_TYPE_MARKET_SESSION",
             "LP_EVENT_TYPE_FUND_UPDATE",
+            "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY",
+            "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY",
         ];
 
         struct GeneratedVisitor;
@@ -2118,6 +2122,8 @@ impl<'de> serde::Deserialize<'de> for LpEventType {
                     "LP_EVENT_TYPE_SYSTEM_ERROR" => Ok(LpEventType::SystemError),
                     "LP_EVENT_TYPE_MARKET_SESSION" => Ok(LpEventType::MarketSession),
                     "LP_EVENT_TYPE_FUND_UPDATE" => Ok(LpEventType::FundUpdate),
+                    "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY" => Ok(LpEventType::OffsetAdjustmentTimeStrategy),
+                    "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY" => Ok(LpEventType::OffsetAdjustmentPositionStrategy),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
