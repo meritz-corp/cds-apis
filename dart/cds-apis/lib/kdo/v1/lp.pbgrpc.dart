@@ -59,8 +59,8 @@ class LpServiceClient extends $grpc.Client {
   }
 
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
-  $grpc.ResponseStream<$0.EtfLpStatus> streamEtfLpStatus($0.StreamEtfLpStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamEtfLpStatus, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate($0.StreamEtfLpStatusUpdateRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamEtfLpStatusUpdate, $async.Stream.fromIterable([request]), options: options);
   }
 
   /// ETF LP 시작
@@ -110,10 +110,10 @@ class LpServiceClient extends $grpc.Client {
       '/kdo.v1.lp.LpService/ListEtfLpStatuses',
       ($0.ListEtfLpStatusesRequest value) => value.writeToBuffer(),
       $0.ListEtfLpStatusesResponse.fromBuffer);
-  static final _$streamEtfLpStatus = $grpc.ClientMethod<$0.StreamEtfLpStatusRequest, $0.EtfLpStatus>(
-      '/kdo.v1.lp.LpService/StreamEtfLpStatus',
-      ($0.StreamEtfLpStatusRequest value) => value.writeToBuffer(),
-      $0.EtfLpStatus.fromBuffer);
+  static final _$streamEtfLpStatusUpdate = $grpc.ClientMethod<$0.StreamEtfLpStatusUpdateRequest, $0.EtfLpStatusUpdate>(
+      '/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate',
+      ($0.StreamEtfLpStatusUpdateRequest value) => value.writeToBuffer(),
+      $0.EtfLpStatusUpdate.fromBuffer);
   static final _$startEtfLp = $grpc.ClientMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
       '/kdo.v1.lp.LpService/StartEtfLp',
       ($0.StartEtfLpRequest value) => value.writeToBuffer(),
@@ -176,13 +176,13 @@ abstract class LpServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListEtfLpStatusesRequest.fromBuffer(value),
         ($0.ListEtfLpStatusesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamEtfLpStatusRequest, $0.EtfLpStatus>(
-        'StreamEtfLpStatus',
-        streamEtfLpStatus_Pre,
+    $addMethod($grpc.ServiceMethod<$0.StreamEtfLpStatusUpdateRequest, $0.EtfLpStatusUpdate>(
+        'StreamEtfLpStatusUpdate',
+        streamEtfLpStatusUpdate_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => $0.StreamEtfLpStatusRequest.fromBuffer(value),
-        ($0.EtfLpStatus value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.StreamEtfLpStatusUpdateRequest.fromBuffer(value),
+        ($0.EtfLpStatusUpdate value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
         'StartEtfLp',
         startEtfLp_Pre,
@@ -250,11 +250,11 @@ abstract class LpServiceBase extends $grpc.Service {
 
   $async.Future<$0.ListEtfLpStatusesResponse> listEtfLpStatuses($grpc.ServiceCall call, $0.ListEtfLpStatusesRequest request);
 
-  $async.Stream<$0.EtfLpStatus> streamEtfLpStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfLpStatusRequest> $request) async* {
-    yield* streamEtfLpStatus($call, await $request);
+  $async.Stream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfLpStatusUpdateRequest> $request) async* {
+    yield* streamEtfLpStatusUpdate($call, await $request);
   }
 
-  $async.Stream<$0.EtfLpStatus> streamEtfLpStatus($grpc.ServiceCall call, $0.StreamEtfLpStatusRequest request);
+  $async.Stream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate($grpc.ServiceCall call, $0.StreamEtfLpStatusUpdateRequest request);
 
   $async.Future<$0.StartEtfLpResponse> startEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.StartEtfLpRequest> $request) async {
     return startEtfLp($call, await $request);

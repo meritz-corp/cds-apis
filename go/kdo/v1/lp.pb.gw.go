@@ -367,12 +367,8 @@ func local_request_LpService_ListEtfLpStatuses_0(ctx context.Context, marshaler 
 
 }
 
-var (
-	filter_LpService_StreamEtfLpStatus_0 = &utilities.DoubleArray{Encoding: map[string]int{"etf": 0, "fund": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
-)
-
-func request_LpService_StreamEtfLpStatus_0(ctx context.Context, marshaler runtime.Marshaler, client LpServiceClient, req *http.Request, pathParams map[string]string) (LpService_StreamEtfLpStatusClient, runtime.ServerMetadata, error) {
-	var protoReq StreamEtfLpStatusRequest
+func request_LpService_StreamEtfLpStatusUpdate_0(ctx context.Context, marshaler runtime.Marshaler, client LpServiceClient, req *http.Request, pathParams map[string]string) (LpService_StreamEtfLpStatusUpdateClient, runtime.ServerMetadata, error) {
+	var protoReq StreamEtfLpStatusUpdateRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -402,14 +398,7 @@ func request_LpService_StreamEtfLpStatus_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LpService_StreamEtfLpStatus_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	stream, err := client.StreamEtfLpStatus(ctx, &protoReq)
+	stream, err := client.StreamEtfLpStatusUpdate(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -889,7 +878,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
-	mux.Handle("GET", pattern_LpService_StreamEtfLpStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_LpService_StreamEtfLpStatusUpdate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1136,25 +1125,25 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
-	mux.Handle("GET", pattern_LpService_StreamEtfLpStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_LpService_StreamEtfLpStatusUpdate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamEtfLpStatus", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/status:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/status_update:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_LpService_StreamEtfLpStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_LpService_StreamEtfLpStatusUpdate_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_LpService_StreamEtfLpStatus_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_LpService_StreamEtfLpStatusUpdate_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1282,7 +1271,7 @@ var (
 
 	pattern_LpService_ListEtfLpStatuses_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 2, 3, 1, 0, 2, 4}, []string{"v1", "lps", "etfs", "funds", "status"}, ""))
 
-	pattern_LpService_StreamEtfLpStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "status"}, "stream"))
+	pattern_LpService_StreamEtfLpStatusUpdate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "status_update"}, "stream"))
 
 	pattern_LpService_StartEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "lps", "etfs", "etf", "funds", "fund"}, "start"))
 
@@ -1306,7 +1295,7 @@ var (
 
 	forward_LpService_ListEtfLpStatuses_0 = runtime.ForwardResponseMessage
 
-	forward_LpService_StreamEtfLpStatus_0 = runtime.ForwardResponseStream
+	forward_LpService_StreamEtfLpStatusUpdate_0 = runtime.ForwardResponseStream
 
 	forward_LpService_StartEtfLp_0 = runtime.ForwardResponseMessage
 

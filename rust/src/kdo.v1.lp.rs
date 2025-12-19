@@ -66,6 +66,38 @@ pub struct EtfLpStatus {
     #[prost(message, optional, tag="12")]
     pub dynamic_offset_state: ::core::option::Option<DynamicOffsetState>,
 }
+/// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfLpStatusUpdate {
+    /// ETF 심볼
+    #[prost(string, tag="1")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// Basis 스프레드 (원 단위, i64)
+    #[prost(int64, optional, tag="6")]
+    pub basis: ::core::option::Option<i64>,
+    /// 주문 수량 (i64)
+    #[prost(int64, optional, tag="7")]
+    pub quantity: ::core::option::Option<i64>,
+    /// LP 상태
+    #[prost(enumeration="EtfLpState", optional, tag="8")]
+    pub state: ::core::option::Option<i32>,
+    /// 가격 정보
+    #[prost(message, optional, tag="9")]
+    pub pricing: ::core::option::Option<LpPricing>,
+    /// 체결 통계
+    #[prost(message, optional, tag="10")]
+    pub fill_statistics: ::core::option::Option<FillStatistics>,
+    /// 동적 offset 조정 설정 (optional)
+    #[prost(message, optional, tag="11")]
+    pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
+    /// 동적 offset 조정 런타임 상태 (optional)
+    #[prost(message, optional, tag="12")]
+    pub dynamic_offset_state: ::core::option::Option<DynamicOffsetState>,
+}
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -309,14 +341,11 @@ pub struct GetEtfLpStatusRequest {
 /// StreamEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamEtfLpStatusRequest {
+pub struct StreamEtfLpStatusUpdateRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
-    /// 업데이트 간격 (초, optional, default: 1)
-    #[prost(uint32, optional, tag="3")]
-    pub update_interval_seconds: ::core::option::Option<u32>,
 }
 /// ETF LP 시작 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

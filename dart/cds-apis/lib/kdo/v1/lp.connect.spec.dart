@@ -52,11 +52,11 @@ abstract final class LpService {
   );
 
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
-  static const streamEtfLpStatus = connect.Spec(
-    '/$name/StreamEtfLpStatus',
+  static const streamEtfLpStatusUpdate = connect.Spec(
+    '/$name/StreamEtfLpStatusUpdate',
     connect.StreamType.server,
-    kdov1lp.StreamEtfLpStatusRequest.new,
-    kdov1lp.EtfLpStatus.new,
+    kdov1lp.StreamEtfLpStatusUpdateRequest.new,
+    kdov1lp.EtfLpStatusUpdate.new,
   );
 
   /// ETF LP 시작

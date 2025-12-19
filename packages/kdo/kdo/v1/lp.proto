@@ -57,9 +57,9 @@ service LpService {
 
 
   // ETF LP 상태 스트리밍 (실시간 업데이트)
-  rpc StreamEtfLpStatus(StreamEtfLpStatusRequest) returns (stream EtfLpStatus) {
+  rpc StreamEtfLpStatusUpdate(StreamEtfLpStatusUpdateRequest) returns (stream EtfLpStatusUpdate) {
     option (google.api.http) = {
-      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/status:stream"
+      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/status_update:stream"
     };
     option (google.api.method_signature) = "etf,fund,update_interval_seconds";
   }
@@ -164,6 +164,37 @@ message EtfLpStatus {
   // 동적 offset 조정 런타임 상태 (optional)
   DynamicOffsetState dynamic_offset_state = 12;
 }
+
+// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
+message EtfLpStatusUpdate {
+  // ETF 심볼
+  string etf_symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // Basis 스프레드 (원 단위, i64)
+  optional int64 basis = 6;
+
+  // 주문 수량 (i64)
+  optional int64 quantity = 7;
+
+  // LP 상태
+  optional EtfLpState state = 8;
+
+  // 가격 정보
+  optional LpPricing pricing = 9;
+
+  // 체결 통계
+  optional FillStatistics fill_statistics = 10;
+
+  // 동적 offset 조정 설정 (optional)
+  optional OffsetAdjustmentConfig offset_adjustment_config = 11;
+
+  // 동적 offset 조정 런타임 상태 (optional)
+  optional DynamicOffsetState dynamic_offset_state = 12;
+}
+
 
 // 순매매량 기반 조정 전략
 enum PositionAdjustmentStrategy {
@@ -411,7 +442,7 @@ message GetEtfLpStatusRequest {
   ];
 }
 // StreamEtfLpStatus
-message StreamEtfLpStatusRequest {
+message StreamEtfLpStatusUpdateRequest {
   string etf = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -425,9 +456,6 @@ message StreamEtfLpStatusRequest {
       type: "kdo.cdsapis.xyz/Fund"
     }
   ];
-
-  // 업데이트 간격 (초, optional, default: 1)
-  optional uint32 update_interval_seconds = 3;
 }
 
 // ETF LP 시작 요청

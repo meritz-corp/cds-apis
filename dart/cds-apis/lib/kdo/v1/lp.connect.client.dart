@@ -100,15 +100,15 @@ extension type LpServiceClient (connect.Transport _transport) {
   }
 
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
-  Stream<kdov1lp.EtfLpStatus> streamEtfLpStatus(
-    kdov1lp.StreamEtfLpStatusRequest input, {
+  Stream<kdov1lp.EtfLpStatusUpdate> streamEtfLpStatusUpdate(
+    kdov1lp.StreamEtfLpStatusUpdateRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.LpService.streamEtfLpStatus,
+      specs.LpService.streamEtfLpStatusUpdate,
       input,
       signal: signal,
       headers: headers,

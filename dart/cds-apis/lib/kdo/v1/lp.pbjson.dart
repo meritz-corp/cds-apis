@@ -174,6 +174,46 @@ final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     '9vZmZzZXRfc3RhdGUYDCABKAsyHS5rZG8udjEubHAuRHluYW1pY09mZnNldFN0YXRlUhJkeW5h'
     'bWljT2Zmc2V0U3RhdGU=');
 
+@$core.Deprecated('Use etfLpStatusUpdateDescriptor instead')
+const EtfLpStatusUpdate$json = {
+  '1': 'EtfLpStatusUpdate',
+  '2': [
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'basis', '3': 6, '4': 1, '5': 3, '9': 0, '10': 'basis', '17': true},
+    {'1': 'quantity', '3': 7, '4': 1, '5': 3, '9': 1, '10': 'quantity', '17': true},
+    {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '9': 2, '10': 'state', '17': true},
+    {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '9': 3, '10': 'pricing', '17': true},
+    {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '9': 4, '10': 'fillStatistics', '17': true},
+    {'1': 'offset_adjustment_config', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.OffsetAdjustmentConfig', '9': 5, '10': 'offsetAdjustmentConfig', '17': true},
+    {'1': 'dynamic_offset_state', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.DynamicOffsetState', '9': 6, '10': 'dynamicOffsetState', '17': true},
+  ],
+  '8': [
+    {'1': '_basis'},
+    {'1': '_quantity'},
+    {'1': '_state'},
+    {'1': '_pricing'},
+    {'1': '_fill_statistics'},
+    {'1': '_offset_adjustment_config'},
+    {'1': '_dynamic_offset_state'},
+  ],
+};
+
+/// Descriptor for `EtfLpStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
+    'ChFFdGZMcFN0YXR1c1VwZGF0ZRIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSGwoJZn'
+    'VuZF9jb2RlGAIgASgJUghmdW5kQ29kZRIZCgViYXNpcxgGIAEoA0gAUgViYXNpc4gBARIfCghx'
+    'dWFudGl0eRgHIAEoA0gBUghxdWFudGl0eYgBARIwCgVzdGF0ZRgIIAEoDjIVLmtkby52MS5scC'
+    '5FdGZMcFN0YXRlSAJSBXN0YXRliAEBEjMKB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQ'
+    'cmljaW5nSANSB3ByaWNpbmeIAQESRwoPZmlsbF9zdGF0aXN0aWNzGAogASgLMhkua2RvLnYxLm'
+    'xwLkZpbGxTdGF0aXN0aWNzSARSDmZpbGxTdGF0aXN0aWNziAEBEmAKGG9mZnNldF9hZGp1c3Rt'
+    'ZW50X2NvbmZpZxgLIAEoCzIhLmtkby52MS5scC5PZmZzZXRBZGp1c3RtZW50Q29uZmlnSAVSFm'
+    '9mZnNldEFkanVzdG1lbnRDb25maWeIAQESVAoUZHluYW1pY19vZmZzZXRfc3RhdGUYDCABKAsy'
+    'HS5rZG8udjEubHAuRHluYW1pY09mZnNldFN0YXRlSAZSEmR5bmFtaWNPZmZzZXRTdGF0ZYgBAU'
+    'IICgZfYmFzaXNCCwoJX3F1YW50aXR5QggKBl9zdGF0ZUIKCghfcHJpY2luZ0ISChBfZmlsbF9z'
+    'dGF0aXN0aWNzQhsKGV9vZmZzZXRfYWRqdXN0bWVudF9jb25maWdCFwoVX2R5bmFtaWNfb2Zmc2'
+    'V0X3N0YXRl');
+
 @$core.Deprecated('Use offsetAdjustmentConfigDescriptor instead')
 const OffsetAdjustmentConfig$json = {
   '1': 'OffsetAdjustmentConfig',
@@ -428,25 +468,20 @@ final $typed_data.Uint8List getEtfLpStatusRequestDescriptor = $convert.base64Dec
     'Bpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6'
     'L0Z1bmRSBGZ1bmQ=');
 
-@$core.Deprecated('Use streamEtfLpStatusRequestDescriptor instead')
-const StreamEtfLpStatusRequest$json = {
-  '1': 'StreamEtfLpStatusRequest',
+@$core.Deprecated('Use streamEtfLpStatusUpdateRequestDescriptor instead')
+const StreamEtfLpStatusUpdateRequest$json = {
+  '1': 'StreamEtfLpStatusUpdateRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
-    {'1': 'update_interval_seconds', '3': 3, '4': 1, '5': 13, '9': 0, '10': 'updateIntervalSeconds', '17': true},
-  ],
-  '8': [
-    {'1': '_update_interval_seconds'},
   ],
 };
 
-/// Descriptor for `StreamEtfLpStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamEtfLpStatusRequestDescriptor = $convert.base64Decode(
-    'ChhTdHJlYW1FdGZMcFN0YXR1c1JlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2'
-    'RzYXBpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMu'
-    'eHl6L0Z1bmRSBGZ1bmQSOwoXdXBkYXRlX2ludGVydmFsX3NlY29uZHMYAyABKA1IAFIVdXBkYX'
-    'RlSW50ZXJ2YWxTZWNvbmRziAEBQhoKGF91cGRhdGVfaW50ZXJ2YWxfc2Vjb25kcw==');
+/// Descriptor for `StreamEtfLpStatusUpdateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamEtfLpStatusUpdateRequestDescriptor = $convert.base64Decode(
+    'Ch5TdHJlYW1FdGZMcFN0YXR1c1VwZGF0ZVJlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVCh'
+    'NrZG8uY2RzYXBpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNk'
+    'c2FwaXMueHl6L0Z1bmRSBGZ1bmQ=');
 
 @$core.Deprecated('Use startEtfLpRequestDescriptor instead')
 const StartEtfLpRequest$json = {

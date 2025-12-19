@@ -337,6 +337,166 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   DynamicOffsetState ensureDynamicOffsetState() => $_ensure(8);
 }
 
+/// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
+class EtfLpStatusUpdate extends $pb.GeneratedMessage {
+  factory EtfLpStatusUpdate({
+    $core.String? etfSymbol,
+    $core.String? fundCode,
+    $fixnum.Int64? basis,
+    $fixnum.Int64? quantity,
+    EtfLpState? state,
+    LpPricing? pricing,
+    FillStatistics? fillStatistics,
+    OffsetAdjustmentConfig? offsetAdjustmentConfig,
+    DynamicOffsetState? dynamicOffsetState,
+  }) {
+    final result = create();
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (basis != null) result.basis = basis;
+    if (quantity != null) result.quantity = quantity;
+    if (state != null) result.state = state;
+    if (pricing != null) result.pricing = pricing;
+    if (fillStatistics != null) result.fillStatistics = fillStatistics;
+    if (offsetAdjustmentConfig != null) result.offsetAdjustmentConfig = offsetAdjustmentConfig;
+    if (dynamicOffsetState != null) result.dynamicOffsetState = dynamicOffsetState;
+    return result;
+  }
+
+  EtfLpStatusUpdate._();
+
+  factory EtfLpStatusUpdate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLpStatusUpdate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aInt64(6, _omitFieldNames ? '' : 'basis')
+    ..aInt64(7, _omitFieldNames ? '' : 'quantity')
+    ..e<EtfLpState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
+    ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
+    ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
+    ..aOM<OffsetAdjustmentConfig>(11, _omitFieldNames ? '' : 'offsetAdjustmentConfig', subBuilder: OffsetAdjustmentConfig.create)
+    ..aOM<DynamicOffsetState>(12, _omitFieldNames ? '' : 'dynamicOffsetState', subBuilder: DynamicOffsetState.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpStatusUpdate clone() => EtfLpStatusUpdate()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpStatusUpdate copyWith(void Function(EtfLpStatusUpdate) updates) => super.copyWith((message) => updates(message as EtfLpStatusUpdate)) as EtfLpStatusUpdate;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfLpStatusUpdate create() => EtfLpStatusUpdate._();
+  @$core.override
+  EtfLpStatusUpdate createEmptyInstance() => create();
+  static $pb.PbList<EtfLpStatusUpdate> createRepeated() => $pb.PbList<EtfLpStatusUpdate>();
+  @$core.pragma('dart2js:noInline')
+  static EtfLpStatusUpdate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpStatusUpdate>(create);
+  static EtfLpStatusUpdate? _defaultInstance;
+
+  /// ETF 심볼
+  @$pb.TagNumber(1)
+  $core.String get etfSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etfSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtfSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtfSymbol() => $_clearField(1);
+
+  /// 펀드 코드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// Basis 스프레드 (원 단위, i64)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get basis => $_getI64(2);
+  @$pb.TagNumber(6)
+  set basis($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBasis() => $_has(2);
+  @$pb.TagNumber(6)
+  void clearBasis() => $_clearField(6);
+
+  /// 주문 수량 (i64)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get quantity => $_getI64(3);
+  @$pb.TagNumber(7)
+  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(7)
+  $core.bool hasQuantity() => $_has(3);
+  @$pb.TagNumber(7)
+  void clearQuantity() => $_clearField(7);
+
+  /// LP 상태
+  @$pb.TagNumber(8)
+  EtfLpState get state => $_getN(4);
+  @$pb.TagNumber(8)
+  set state(EtfLpState value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasState() => $_has(4);
+  @$pb.TagNumber(8)
+  void clearState() => $_clearField(8);
+
+  /// 가격 정보
+  @$pb.TagNumber(9)
+  LpPricing get pricing => $_getN(5);
+  @$pb.TagNumber(9)
+  set pricing(LpPricing value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasPricing() => $_has(5);
+  @$pb.TagNumber(9)
+  void clearPricing() => $_clearField(9);
+  @$pb.TagNumber(9)
+  LpPricing ensurePricing() => $_ensure(5);
+
+  /// 체결 통계
+  @$pb.TagNumber(10)
+  FillStatistics get fillStatistics => $_getN(6);
+  @$pb.TagNumber(10)
+  set fillStatistics(FillStatistics value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasFillStatistics() => $_has(6);
+  @$pb.TagNumber(10)
+  void clearFillStatistics() => $_clearField(10);
+  @$pb.TagNumber(10)
+  FillStatistics ensureFillStatistics() => $_ensure(6);
+
+  /// 동적 offset 조정 설정 (optional)
+  @$pb.TagNumber(11)
+  OffsetAdjustmentConfig get offsetAdjustmentConfig => $_getN(7);
+  @$pb.TagNumber(11)
+  set offsetAdjustmentConfig(OffsetAdjustmentConfig value) => $_setField(11, value);
+  @$pb.TagNumber(11)
+  $core.bool hasOffsetAdjustmentConfig() => $_has(7);
+  @$pb.TagNumber(11)
+  void clearOffsetAdjustmentConfig() => $_clearField(11);
+  @$pb.TagNumber(11)
+  OffsetAdjustmentConfig ensureOffsetAdjustmentConfig() => $_ensure(7);
+
+  /// 동적 offset 조정 런타임 상태 (optional)
+  @$pb.TagNumber(12)
+  DynamicOffsetState get dynamicOffsetState => $_getN(8);
+  @$pb.TagNumber(12)
+  set dynamicOffsetState(DynamicOffsetState value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasDynamicOffsetState() => $_has(8);
+  @$pb.TagNumber(12)
+  void clearDynamicOffsetState() => $_clearField(12);
+  @$pb.TagNumber(12)
+  DynamicOffsetState ensureDynamicOffsetState() => $_ensure(8);
+}
+
 /// 자동 offset 조정 설정
 class OffsetAdjustmentConfig extends $pb.GeneratedMessage {
   factory OffsetAdjustmentConfig({
@@ -1475,47 +1635,44 @@ class GetEtfLpStatusRequest extends $pb.GeneratedMessage {
 }
 
 /// StreamEtfLpStatus
-class StreamEtfLpStatusRequest extends $pb.GeneratedMessage {
-  factory StreamEtfLpStatusRequest({
+class StreamEtfLpStatusUpdateRequest extends $pb.GeneratedMessage {
+  factory StreamEtfLpStatusUpdateRequest({
     $core.String? etf,
     $core.String? fund,
-    $core.int? updateIntervalSeconds,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
     if (fund != null) result.fund = fund;
-    if (updateIntervalSeconds != null) result.updateIntervalSeconds = updateIntervalSeconds;
     return result;
   }
 
-  StreamEtfLpStatusRequest._();
+  StreamEtfLpStatusUpdateRequest._();
 
-  factory StreamEtfLpStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamEtfLpStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StreamEtfLpStatusUpdateRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamEtfLpStatusUpdateRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfLpStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfLpStatusUpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'updateIntervalSeconds', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfLpStatusRequest clone() => StreamEtfLpStatusRequest()..mergeFromMessage(this);
+  StreamEtfLpStatusUpdateRequest clone() => StreamEtfLpStatusUpdateRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfLpStatusRequest copyWith(void Function(StreamEtfLpStatusRequest) updates) => super.copyWith((message) => updates(message as StreamEtfLpStatusRequest)) as StreamEtfLpStatusRequest;
+  StreamEtfLpStatusUpdateRequest copyWith(void Function(StreamEtfLpStatusUpdateRequest) updates) => super.copyWith((message) => updates(message as StreamEtfLpStatusUpdateRequest)) as StreamEtfLpStatusUpdateRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StreamEtfLpStatusRequest create() => StreamEtfLpStatusRequest._();
+  static StreamEtfLpStatusUpdateRequest create() => StreamEtfLpStatusUpdateRequest._();
   @$core.override
-  StreamEtfLpStatusRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamEtfLpStatusRequest> createRepeated() => $pb.PbList<StreamEtfLpStatusRequest>();
+  StreamEtfLpStatusUpdateRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamEtfLpStatusUpdateRequest> createRepeated() => $pb.PbList<StreamEtfLpStatusUpdateRequest>();
   @$core.pragma('dart2js:noInline')
-  static StreamEtfLpStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfLpStatusRequest>(create);
-  static StreamEtfLpStatusRequest? _defaultInstance;
+  static StreamEtfLpStatusUpdateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfLpStatusUpdateRequest>(create);
+  static StreamEtfLpStatusUpdateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -1534,16 +1691,6 @@ class StreamEtfLpStatusRequest extends $pb.GeneratedMessage {
   $core.bool hasFund() => $_has(1);
   @$pb.TagNumber(2)
   void clearFund() => $_clearField(2);
-
-  /// 업데이트 간격 (초, optional, default: 1)
-  @$pb.TagNumber(3)
-  $core.int get updateIntervalSeconds => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set updateIntervalSeconds($core.int value) => $_setUnsignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasUpdateIntervalSeconds() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUpdateIntervalSeconds() => $_clearField(3);
 }
 
 /// ETF LP 시작 요청

@@ -200,11 +200,11 @@ pub mod lp_service_client {
                 .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListEtfLpStatuses"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_etf_lp_status(
+        pub async fn stream_etf_lp_status_update(
             &mut self,
-            request: impl tonic::IntoRequest<super::StreamEtfLpStatusRequest>,
+            request: impl tonic::IntoRequest<super::StreamEtfLpStatusUpdateRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::EtfLpStatus>>,
+            tonic::Response<tonic::codec::Streaming<super::EtfLpStatusUpdate>>,
             tonic::Status,
         > {
             self.inner
@@ -218,11 +218,13 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/StreamEtfLpStatus",
+                "/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "StreamEtfLpStatus"));
+                .insert(
+                    GrpcMethod::new("kdo.v1.lp.LpService", "StreamEtfLpStatusUpdate"),
+                );
             self.inner.server_streaming(req, path, codec).await
         }
         pub async fn start_etf_lp(
@@ -385,17 +387,17 @@ pub mod lp_service_server {
             tonic::Response<super::ListEtfLpStatusesResponse>,
             tonic::Status,
         >;
-        /// Server streaming response type for the StreamEtfLpStatus method.
-        type StreamEtfLpStatusStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::EtfLpStatus, tonic::Status>,
+        /// Server streaming response type for the StreamEtfLpStatusUpdate method.
+        type StreamEtfLpStatusUpdateStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::EtfLpStatusUpdate, tonic::Status>,
             >
             + Send
             + 'static;
-        async fn stream_etf_lp_status(
+        async fn stream_etf_lp_status_update(
             &self,
-            request: tonic::Request<super::StreamEtfLpStatusRequest>,
+            request: tonic::Request<super::StreamEtfLpStatusUpdateRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamEtfLpStatusStream>,
+            tonic::Response<Self::StreamEtfLpStatusUpdateStream>,
             tonic::Status,
         >;
         async fn start_etf_lp(
@@ -748,27 +750,32 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/StreamEtfLpStatus" => {
+                "/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamEtfLpStatusSvc<T: LpService>(pub Arc<T>);
+                    struct StreamEtfLpStatusUpdateSvc<T: LpService>(pub Arc<T>);
                     impl<
                         T: LpService,
                     > tonic::server::ServerStreamingService<
-                        super::StreamEtfLpStatusRequest,
-                    > for StreamEtfLpStatusSvc<T> {
-                        type Response = super::EtfLpStatus;
-                        type ResponseStream = T::StreamEtfLpStatusStream;
+                        super::StreamEtfLpStatusUpdateRequest,
+                    > for StreamEtfLpStatusUpdateSvc<T> {
+                        type Response = super::EtfLpStatusUpdate;
+                        type ResponseStream = T::StreamEtfLpStatusUpdateStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StreamEtfLpStatusRequest>,
+                            request: tonic::Request<
+                                super::StreamEtfLpStatusUpdateRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::stream_etf_lp_status(&inner, request)
+                                <T as LpService>::stream_etf_lp_status_update(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -780,7 +787,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamEtfLpStatusSvc(inner);
+                        let method = StreamEtfLpStatusUpdateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

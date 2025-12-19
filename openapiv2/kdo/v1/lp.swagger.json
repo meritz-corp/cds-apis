@@ -422,10 +422,10 @@
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}/status:stream": {
+    "/v1/lps/{etf}/{fund}/status_update:stream": {
       "get": {
         "summary": "ETF LP 상태 스트리밍 (실시간 업데이트)",
-        "operationId": "LpService_StreamEtfLpStatus",
+        "operationId": "LpService_StreamEtfLpStatusUpdate",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -433,13 +433,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/lpEtfLpStatus"
+                  "$ref": "#/definitions/lpEtfLpStatusUpdate"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of lpEtfLpStatus"
+              "title": "Stream result of lpEtfLpStatusUpdate"
             }
           },
           "default": {
@@ -463,14 +463,6 @@
             "required": true,
             "type": "string",
             "pattern": "funds/[^/]+"
-          },
-          {
-            "name": "updateIntervalSeconds",
-            "description": "업데이트 간격 (초, optional, default: 1)",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "tags": [
@@ -735,6 +727,50 @@
         }
       },
       "title": "ETF LP 상태"
+    },
+    "lpEtfLpStatusUpdate": {
+      "type": "object",
+      "properties": {
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "basis": {
+          "type": "string",
+          "format": "int64",
+          "title": "Basis 스프레드 (원 단위, i64)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문 수량 (i64)"
+        },
+        "state": {
+          "$ref": "#/definitions/lpEtfLpState",
+          "title": "LP 상태"
+        },
+        "pricing": {
+          "$ref": "#/definitions/lpLpPricing",
+          "title": "가격 정보"
+        },
+        "fillStatistics": {
+          "$ref": "#/definitions/lpFillStatistics",
+          "title": "체결 통계"
+        },
+        "offsetAdjustmentConfig": {
+          "$ref": "#/definitions/lpOffsetAdjustmentConfig",
+          "title": "동적 offset 조정 설정 (optional)"
+        },
+        "dynamicOffsetState": {
+          "$ref": "#/definitions/lpDynamicOffsetState",
+          "title": "동적 offset 조정 런타임 상태 (optional)"
+        }
+      },
+      "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
     },
     "lpFillStatistics": {
       "type": "object",

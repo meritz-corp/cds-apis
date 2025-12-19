@@ -33,7 +33,7 @@ type LpServiceClient interface {
 	// ETF LP 상태 조회
 	ListEtfLpStatuses(ctx context.Context, in *ListEtfLpStatusesRequest, opts ...grpc.CallOption) (*ListEtfLpStatusesResponse, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
-	StreamEtfLpStatus(ctx context.Context, in *StreamEtfLpStatusRequest, opts ...grpc.CallOption) (LpService_StreamEtfLpStatusClient, error)
+	StreamEtfLpStatusUpdate(ctx context.Context, in *StreamEtfLpStatusUpdateRequest, opts ...grpc.CallOption) (LpService_StreamEtfLpStatusUpdateClient, error)
 	// ETF LP 시작
 	StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error)
 	// ETF LP 중지
@@ -99,12 +99,12 @@ func (c *lpServiceClient) ListEtfLpStatuses(ctx context.Context, in *ListEtfLpSt
 	return out, nil
 }
 
-func (c *lpServiceClient) StreamEtfLpStatus(ctx context.Context, in *StreamEtfLpStatusRequest, opts ...grpc.CallOption) (LpService_StreamEtfLpStatusClient, error) {
-	stream, err := c.cc.NewStream(ctx, &LpService_ServiceDesc.Streams[0], "/kdo.v1.lp.LpService/StreamEtfLpStatus", opts...)
+func (c *lpServiceClient) StreamEtfLpStatusUpdate(ctx context.Context, in *StreamEtfLpStatusUpdateRequest, opts ...grpc.CallOption) (LpService_StreamEtfLpStatusUpdateClient, error) {
+	stream, err := c.cc.NewStream(ctx, &LpService_ServiceDesc.Streams[0], "/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &lpServiceStreamEtfLpStatusClient{stream}
+	x := &lpServiceStreamEtfLpStatusUpdateClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -114,17 +114,17 @@ func (c *lpServiceClient) StreamEtfLpStatus(ctx context.Context, in *StreamEtfLp
 	return x, nil
 }
 
-type LpService_StreamEtfLpStatusClient interface {
-	Recv() (*EtfLpStatus, error)
+type LpService_StreamEtfLpStatusUpdateClient interface {
+	Recv() (*EtfLpStatusUpdate, error)
 	grpc.ClientStream
 }
 
-type lpServiceStreamEtfLpStatusClient struct {
+type lpServiceStreamEtfLpStatusUpdateClient struct {
 	grpc.ClientStream
 }
 
-func (x *lpServiceStreamEtfLpStatusClient) Recv() (*EtfLpStatus, error) {
-	m := new(EtfLpStatus)
+func (x *lpServiceStreamEtfLpStatusUpdateClient) Recv() (*EtfLpStatusUpdate, error) {
+	m := new(EtfLpStatusUpdate)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -237,7 +237,7 @@ type LpServiceServer interface {
 	// ETF LP 상태 조회
 	ListEtfLpStatuses(context.Context, *ListEtfLpStatusesRequest) (*ListEtfLpStatusesResponse, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
-	StreamEtfLpStatus(*StreamEtfLpStatusRequest, LpService_StreamEtfLpStatusServer) error
+	StreamEtfLpStatusUpdate(*StreamEtfLpStatusUpdateRequest, LpService_StreamEtfLpStatusUpdateServer) error
 	// ETF LP 시작
 	StartEtfLp(context.Context, *StartEtfLpRequest) (*StartEtfLpResponse, error)
 	// ETF LP 중지
@@ -270,8 +270,8 @@ func (UnimplementedLpServiceServer) GetEtfLpStatus(context.Context, *GetEtfLpSta
 func (UnimplementedLpServiceServer) ListEtfLpStatuses(context.Context, *ListEtfLpStatusesRequest) (*ListEtfLpStatusesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEtfLpStatuses not implemented")
 }
-func (UnimplementedLpServiceServer) StreamEtfLpStatus(*StreamEtfLpStatusRequest, LpService_StreamEtfLpStatusServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamEtfLpStatus not implemented")
+func (UnimplementedLpServiceServer) StreamEtfLpStatusUpdate(*StreamEtfLpStatusUpdateRequest, LpService_StreamEtfLpStatusUpdateServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamEtfLpStatusUpdate not implemented")
 }
 func (UnimplementedLpServiceServer) StartEtfLp(context.Context, *StartEtfLpRequest) (*StartEtfLpResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartEtfLp not implemented")
@@ -391,24 +391,24 @@ func _LpService_ListEtfLpStatuses_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_StreamEtfLpStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamEtfLpStatusRequest)
+func _LpService_StreamEtfLpStatusUpdate_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamEtfLpStatusUpdateRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(LpServiceServer).StreamEtfLpStatus(m, &lpServiceStreamEtfLpStatusServer{stream})
+	return srv.(LpServiceServer).StreamEtfLpStatusUpdate(m, &lpServiceStreamEtfLpStatusUpdateServer{stream})
 }
 
-type LpService_StreamEtfLpStatusServer interface {
-	Send(*EtfLpStatus) error
+type LpService_StreamEtfLpStatusUpdateServer interface {
+	Send(*EtfLpStatusUpdate) error
 	grpc.ServerStream
 }
 
-type lpServiceStreamEtfLpStatusServer struct {
+type lpServiceStreamEtfLpStatusUpdateServer struct {
 	grpc.ServerStream
 }
 
-func (x *lpServiceStreamEtfLpStatusServer) Send(m *EtfLpStatus) error {
+func (x *lpServiceStreamEtfLpStatusUpdateServer) Send(m *EtfLpStatusUpdate) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -550,8 +550,8 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "StreamEtfLpStatus",
-			Handler:       _LpService_StreamEtfLpStatus_Handler,
+			StreamName:    "StreamEtfLpStatusUpdate",
+			Handler:       _LpService_StreamEtfLpStatusUpdate_Handler,
 			ServerStreams: true,
 		},
 		{

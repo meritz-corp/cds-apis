@@ -932,6 +932,252 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
         deserializer.deserialize_struct("kdo.v1.lp.EtfLpStatus", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for EtfLpStatusUpdate {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatusUpdate", len)?;
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if let Some(v) = self.basis.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("basis", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.state.as_ref() {
+            let v = EtfLpState::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("state", &v)?;
+        }
+        if let Some(v) = self.pricing.as_ref() {
+            struct_ser.serialize_field("pricing", v)?;
+        }
+        if let Some(v) = self.fill_statistics.as_ref() {
+            struct_ser.serialize_field("fill_statistics", v)?;
+        }
+        if let Some(v) = self.offset_adjustment_config.as_ref() {
+            struct_ser.serialize_field("offset_adjustment_config", v)?;
+        }
+        if let Some(v) = self.dynamic_offset_state.as_ref() {
+            struct_ser.serialize_field("dynamic_offset_state", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf_symbol",
+            "etfSymbol",
+            "fund_code",
+            "fundCode",
+            "basis",
+            "quantity",
+            "state",
+            "pricing",
+            "fill_statistics",
+            "fillStatistics",
+            "offset_adjustment_config",
+            "offsetAdjustmentConfig",
+            "dynamic_offset_state",
+            "dynamicOffsetState",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EtfSymbol,
+            FundCode,
+            Basis,
+            Quantity,
+            State,
+            Pricing,
+            FillStatistics,
+            OffsetAdjustmentConfig,
+            DynamicOffsetState,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "basis" => Ok(GeneratedField::Basis),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "state" => Ok(GeneratedField::State),
+                            "pricing" => Ok(GeneratedField::Pricing),
+                            "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
+                            "offsetAdjustmentConfig" | "offset_adjustment_config" => Ok(GeneratedField::OffsetAdjustmentConfig),
+                            "dynamicOffsetState" | "dynamic_offset_state" => Ok(GeneratedField::DynamicOffsetState),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpStatusUpdate;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpStatusUpdate")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpStatusUpdate, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf_symbol__ = None;
+                let mut fund_code__ = None;
+                let mut basis__ = None;
+                let mut quantity__ = None;
+                let mut state__ = None;
+                let mut pricing__ = None;
+                let mut fill_statistics__ = None;
+                let mut offset_adjustment_config__ = None;
+                let mut dynamic_offset_state__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Basis => {
+                            if basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basis"));
+                            }
+                            basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::State => {
+                            if state__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("state"));
+                            }
+                            state__ = map_.next_value::<::std::option::Option<EtfLpState>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::Pricing => {
+                            if pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricing"));
+                            }
+                            pricing__ = map_.next_value()?;
+                        }
+                        GeneratedField::FillStatistics => {
+                            if fill_statistics__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fillStatistics"));
+                            }
+                            fill_statistics__ = map_.next_value()?;
+                        }
+                        GeneratedField::OffsetAdjustmentConfig => {
+                            if offset_adjustment_config__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offsetAdjustmentConfig"));
+                            }
+                            offset_adjustment_config__ = map_.next_value()?;
+                        }
+                        GeneratedField::DynamicOffsetState => {
+                            if dynamic_offset_state__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dynamicOffsetState"));
+                            }
+                            dynamic_offset_state__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpStatusUpdate {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    basis: basis__,
+                    quantity: quantity__,
+                    state: state__,
+                    pricing: pricing__,
+                    fill_statistics: fill_statistics__,
+                    offset_adjustment_config: offset_adjustment_config__,
+                    dynamic_offset_state: dynamic_offset_state__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpStatusUpdate", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FillStatistics {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3424,7 +3670,7 @@ impl<'de> serde::Deserialize<'de> for StopEtfLpResponse {
         deserializer.deserialize_struct("kdo.v1.lp.StopEtfLpResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StreamEtfLpStatusRequest {
+impl serde::Serialize for StreamEtfLpStatusUpdateRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3438,23 +3684,17 @@ impl serde::Serialize for StreamEtfLpStatusRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamEtfLpStatusRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamEtfLpStatusUpdateRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
-        if let Some(v) = self.update_interval_seconds.as_ref() {
-            struct_ser.serialize_field("update_interval_seconds", v)?;
-        }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
+impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusUpdateRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3463,15 +3703,12 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
         const FIELDS: &[&str] = &[
             "etf",
             "fund",
-            "update_interval_seconds",
-            "updateIntervalSeconds",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Etf,
             Fund,
-            UpdateIntervalSeconds,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3496,7 +3733,6 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            "updateIntervalSeconds" | "update_interval_seconds" => Ok(GeneratedField::UpdateIntervalSeconds),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3506,19 +3742,18 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StreamEtfLpStatusRequest;
+            type Value = StreamEtfLpStatusUpdateRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.StreamEtfLpStatusRequest")
+                formatter.write_str("struct kdo.v1.lp.StreamEtfLpStatusUpdateRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamEtfLpStatusRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamEtfLpStatusUpdateRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut etf__ = None;
                 let mut fund__ = None;
-                let mut update_interval_seconds__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Etf => {
@@ -3533,27 +3768,18 @@ impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::UpdateIntervalSeconds => {
-                            if update_interval_seconds__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("updateIntervalSeconds"));
-                            }
-                            update_interval_seconds__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(StreamEtfLpStatusRequest {
+                Ok(StreamEtfLpStatusUpdateRequest {
                     etf: etf__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
-                    update_interval_seconds: update_interval_seconds__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.StreamEtfLpStatusRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.StreamEtfLpStatusUpdateRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StreamLpEventsRequest {
