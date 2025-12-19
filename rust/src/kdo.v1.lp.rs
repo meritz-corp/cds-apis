@@ -192,9 +192,9 @@ pub struct LpPricing {
     /// ETF 가격 (원 단위)
     #[prost(string, tag="1")]
     pub etf_price: ::prost::alloc::string::String,
-    /// 구성 종목 가격 맵 (종목 코드 -> 가격, 원 단위)
-    #[prost(map="string, string", tag="2")]
-    pub constituents_price: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    // 구성 종목 가격 맵 (종목 코드 -> 가격, 원 단위)
+    //   map<string, string> constituents_price = 2;
+
     /// ETF NAV (원 단위)
     #[prost(string, tag="3")]
     pub etf_nav: ::prost::alloc::string::String,
@@ -415,39 +415,6 @@ pub struct UserOrderbookData {
     /// 매도 수량 (10단계)
     #[prost(int64, repeated, tag="4")]
     pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
-}
-/// 복제 방법
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum ReplicationMethod {
-    Unspecified = 0,
-    Physical = 1,
-    Synthetic = 2,
-    FuturesBased = 3,
-}
-impl ReplicationMethod {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            ReplicationMethod::Unspecified => "REPLICATION_METHOD_UNSPECIFIED",
-            ReplicationMethod::Physical => "REPLICATION_METHOD_PHYSICAL",
-            ReplicationMethod::Synthetic => "REPLICATION_METHOD_SYNTHETIC",
-            ReplicationMethod::FuturesBased => "REPLICATION_METHOD_FUTURES_BASED",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "REPLICATION_METHOD_UNSPECIFIED" => Some(Self::Unspecified),
-            "REPLICATION_METHOD_PHYSICAL" => Some(Self::Physical),
-            "REPLICATION_METHOD_SYNTHETIC" => Some(Self::Synthetic),
-            "REPLICATION_METHOD_FUTURES_BASED" => Some(Self::FuturesBased),
-            _ => None,
-        }
-    }
 }
 /// 순매매량 기반 조정 전략
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

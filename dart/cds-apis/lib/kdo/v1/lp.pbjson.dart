@@ -14,23 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use replicationMethodDescriptor instead')
-const ReplicationMethod$json = {
-  '1': 'ReplicationMethod',
-  '2': [
-    {'1': 'REPLICATION_METHOD_UNSPECIFIED', '2': 0},
-    {'1': 'REPLICATION_METHOD_PHYSICAL', '2': 1},
-    {'1': 'REPLICATION_METHOD_SYNTHETIC', '2': 2},
-    {'1': 'REPLICATION_METHOD_FUTURES_BASED', '2': 3},
-  ],
-};
-
-/// Descriptor for `ReplicationMethod`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List replicationMethodDescriptor = $convert.base64Decode(
-    'ChFSZXBsaWNhdGlvbk1ldGhvZBIiCh5SRVBMSUNBVElPTl9NRVRIT0RfVU5TUEVDSUZJRUQQAB'
-    'IfChtSRVBMSUNBVElPTl9NRVRIT0RfUEhZU0lDQUwQARIgChxSRVBMSUNBVElPTl9NRVRIT0Rf'
-    'U1lOVEhFVElDEAISJAogUkVQTElDQVRJT05fTUVUSE9EX0ZVVFVSRVNfQkFTRUQQAw==');
-
 @$core.Deprecated('Use positionAdjustmentStrategyDescriptor instead')
 const PositionAdjustmentStrategy$json = {
   '1': 'PositionAdjustmentStrategy',
@@ -320,29 +303,14 @@ const LpPricing$json = {
   '1': 'LpPricing',
   '2': [
     {'1': 'etf_price', '3': 1, '4': 1, '5': 9, '10': 'etfPrice'},
-    {'1': 'constituents_price', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lp.LpPricing.ConstituentsPriceEntry', '10': 'constituentsPrice'},
     {'1': 'etf_nav', '3': 3, '4': 1, '5': 9, '10': 'etfNav'},
   ],
-  '3': [LpPricing_ConstituentsPriceEntry$json],
-};
-
-@$core.Deprecated('Use lpPricingDescriptor instead')
-const LpPricing_ConstituentsPriceEntry$json = {
-  '1': 'ConstituentsPriceEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
-  ],
-  '7': {'7': true},
 };
 
 /// Descriptor for `LpPricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List lpPricingDescriptor = $convert.base64Decode(
-    'CglMcFByaWNpbmcSGwoJZXRmX3ByaWNlGAEgASgJUghldGZQcmljZRJaChJjb25zdGl0dWVudH'
-    'NfcHJpY2UYAiADKAsyKy5rZG8udjEubHAuTHBQcmljaW5nLkNvbnN0aXR1ZW50c1ByaWNlRW50'
-    'cnlSEWNvbnN0aXR1ZW50c1ByaWNlEhcKB2V0Zl9uYXYYAyABKAlSBmV0Zk5hdhpEChZDb25zdG'
-    'l0dWVudHNQcmljZUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YWx1'
-    'ZToCOAE=');
+    'CglMcFByaWNpbmcSGwoJZXRmX3ByaWNlGAEgASgJUghldGZQcmljZRIXCgdldGZfbmF2GAMgAS'
+    'gJUgZldGZOYXY=');
 
 @$core.Deprecated('Use getEtfLpRequestDescriptor instead')
 const GetEtfLpRequest$json = {

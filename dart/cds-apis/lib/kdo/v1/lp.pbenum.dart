@@ -14,26 +14,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-/// 복제 방법
-class ReplicationMethod extends $pb.ProtobufEnum {
-  static const ReplicationMethod REPLICATION_METHOD_UNSPECIFIED = ReplicationMethod._(0, _omitEnumNames ? '' : 'REPLICATION_METHOD_UNSPECIFIED');
-  static const ReplicationMethod REPLICATION_METHOD_PHYSICAL = ReplicationMethod._(1, _omitEnumNames ? '' : 'REPLICATION_METHOD_PHYSICAL');
-  static const ReplicationMethod REPLICATION_METHOD_SYNTHETIC = ReplicationMethod._(2, _omitEnumNames ? '' : 'REPLICATION_METHOD_SYNTHETIC');
-  static const ReplicationMethod REPLICATION_METHOD_FUTURES_BASED = ReplicationMethod._(3, _omitEnumNames ? '' : 'REPLICATION_METHOD_FUTURES_BASED');
-
-  static const $core.List<ReplicationMethod> values = <ReplicationMethod> [
-    REPLICATION_METHOD_UNSPECIFIED,
-    REPLICATION_METHOD_PHYSICAL,
-    REPLICATION_METHOD_SYNTHETIC,
-    REPLICATION_METHOD_FUTURES_BASED,
-  ];
-
-  static final $core.List<ReplicationMethod?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
-  static ReplicationMethod? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const ReplicationMethod._(super.value, super.name);
-}
-
 /// 순매매량 기반 조정 전략
 class PositionAdjustmentStrategy extends $pb.ProtobufEnum {
   static const PositionAdjustmentStrategy POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED = PositionAdjustmentStrategy._(0, _omitEnumNames ? '' : 'POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED');

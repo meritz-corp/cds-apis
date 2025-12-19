@@ -2145,15 +2145,9 @@ impl serde::Serialize for LpPricing {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.LpPricing", len)?;
         if true {
             struct_ser.serialize_field("etf_price", &self.etf_price)?;
-        }
-        if true {
-            struct_ser.serialize_field("constituents_price", &self.constituents_price)?;
         }
         if true {
             struct_ser.serialize_field("etf_nav", &self.etf_nav)?;
@@ -2170,8 +2164,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
         const FIELDS: &[&str] = &[
             "etf_price",
             "etfPrice",
-            "constituents_price",
-            "constituentsPrice",
             "etf_nav",
             "etfNav",
         ];
@@ -2179,7 +2171,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             EtfPrice,
-            ConstituentsPrice,
             EtfNav,
             __SkipField__,
         }
@@ -2204,7 +2195,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                     {
                         match value {
                             "etfPrice" | "etf_price" => Ok(GeneratedField::EtfPrice),
-                            "constituentsPrice" | "constituents_price" => Ok(GeneratedField::ConstituentsPrice),
                             "etfNav" | "etf_nav" => Ok(GeneratedField::EtfNav),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -2226,7 +2216,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut etf_price__ = None;
-                let mut constituents_price__ = None;
                 let mut etf_nav__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -2235,14 +2224,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                                 return Err(serde::de::Error::duplicate_field("etfPrice"));
                             }
                             etf_price__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::ConstituentsPrice => {
-                            if constituents_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("constituentsPrice"));
-                            }
-                            constituents_price__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, _>>()?
-                            );
                         }
                         GeneratedField::EtfNav => {
                             if etf_nav__.is_some() {
@@ -2257,7 +2238,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                 }
                 Ok(LpPricing {
                     etf_price: etf_price__.unwrap_or_default(),
-                    constituents_price: constituents_price__.unwrap_or_default(),
                     etf_nav: etf_nav__.unwrap_or_default(),
                 })
             }
@@ -2989,83 +2969,6 @@ impl<'de> serde::Deserialize<'de> for PositionAdjustmentStrategy {
                     "POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE" => Ok(PositionAdjustmentStrategy::Avoidance),
                     "POSITION_ADJUSTMENT_STRATEGY_TURNOVER" => Ok(PositionAdjustmentStrategy::Turnover),
                     "POSITION_ADJUSTMENT_STRATEGY_ALL" => Ok(PositionAdjustmentStrategy::All),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ReplicationMethod {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "REPLICATION_METHOD_UNSPECIFIED",
-            Self::Physical => "REPLICATION_METHOD_PHYSICAL",
-            Self::Synthetic => "REPLICATION_METHOD_SYNTHETIC",
-            Self::FuturesBased => "REPLICATION_METHOD_FUTURES_BASED",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for ReplicationMethod {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "REPLICATION_METHOD_UNSPECIFIED",
-            "REPLICATION_METHOD_PHYSICAL",
-            "REPLICATION_METHOD_SYNTHETIC",
-            "REPLICATION_METHOD_FUTURES_BASED",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ReplicationMethod;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "REPLICATION_METHOD_UNSPECIFIED" => Ok(ReplicationMethod::Unspecified),
-                    "REPLICATION_METHOD_PHYSICAL" => Ok(ReplicationMethod::Physical),
-                    "REPLICATION_METHOD_SYNTHETIC" => Ok(ReplicationMethod::Synthetic),
-                    "REPLICATION_METHOD_FUTURES_BASED" => Ok(ReplicationMethod::FuturesBased),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
