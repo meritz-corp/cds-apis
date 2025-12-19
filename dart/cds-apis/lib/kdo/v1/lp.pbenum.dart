@@ -34,6 +34,29 @@ class ReplicationMethod extends $pb.ProtobufEnum {
   const ReplicationMethod._(super.value, super.name);
 }
 
+/// 순매매량 기반 조정 전략
+class PositionAdjustmentStrategy extends $pb.ProtobufEnum {
+  static const PositionAdjustmentStrategy POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED = PositionAdjustmentStrategy._(0, _omitEnumNames ? '' : 'POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED');
+  /// 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)
+  static const PositionAdjustmentStrategy POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE = PositionAdjustmentStrategy._(1, _omitEnumNames ? '' : 'POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE');
+  /// 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)
+  static const PositionAdjustmentStrategy POSITION_ADJUSTMENT_STRATEGY_TURNOVER = PositionAdjustmentStrategy._(2, _omitEnumNames ? '' : 'POSITION_ADJUSTMENT_STRATEGY_TURNOVER');
+  /// 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소
+  static const PositionAdjustmentStrategy POSITION_ADJUSTMENT_STRATEGY_ALL = PositionAdjustmentStrategy._(10, _omitEnumNames ? '' : 'POSITION_ADJUSTMENT_STRATEGY_ALL');
+
+  static const $core.List<PositionAdjustmentStrategy> values = <PositionAdjustmentStrategy> [
+    POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED,
+    POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE,
+    POSITION_ADJUSTMENT_STRATEGY_TURNOVER,
+    POSITION_ADJUSTMENT_STRATEGY_ALL,
+  ];
+
+  static final $core.Map<$core.int, PositionAdjustmentStrategy> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static PositionAdjustmentStrategy? valueOf($core.int value) => _byValue[value];
+
+  const PositionAdjustmentStrategy._(super.value, super.name);
+}
+
 /// ETF LP 상태 enum
 class EtfLpState extends $pb.ProtobufEnum {
   static const EtfLpState ETF_LP_STATE_UNSPECIFIED = EtfLpState._(0, _omitEnumNames ? '' : 'ETF_LP_STATE_UNSPECIFIED');

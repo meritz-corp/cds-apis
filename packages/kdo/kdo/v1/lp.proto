@@ -148,12 +148,6 @@ message EtfLpStatus {
   // 펀드 코드
   string fund_code = 2;
 
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 bid_offset = 4;
-
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 ask_offset = 5;
-
   // Basis 스프레드 (원 단위, i64)
   int64 basis = 6;
 
@@ -168,6 +162,54 @@ message EtfLpStatus {
 
   // 체결 통계
   FillStatistics fill_statistics = 10;
+
+  // 동적 offset 조정 설정 (optional)
+  OffsetAdjustmentConfig offset_adjustment_config = 11;
+
+  // 동적 offset 조정 런타임 상태 (optional)
+  DynamicOffsetState dynamic_offset_state = 12;
+}
+
+// 순매매량 기반 조정 전략
+enum PositionAdjustmentStrategy {
+  POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED = 0;
+  // 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)
+  POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE = 1;
+  // 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)
+  POSITION_ADJUSTMENT_STRATEGY_TURNOVER = 2;
+  // 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소
+  POSITION_ADJUSTMENT_STRATEGY_ALL = 10;
+}
+
+// 자동 offset 조정 설정
+message OffsetAdjustmentConfig {
+  // NAV 밴드 설정
+  int64 min_offset = 1;
+  int64 max_offset = 2;
+
+  // 시간 기반 조정
+  bool time_adjustment_enabled = 3;
+  uint64 adjustment_interval_secs = 4;
+  int64 adjustment_step = 5;
+  bool reset_on_fill = 6;
+
+  // 순매매량 기반 조정
+  bool position_adjustment_enabled = 7;
+  int64 position_threshold = 8;
+  PositionAdjustmentStrategy position_strategy = 9;
+  int64 position_adjustment_step = 10;
+}
+
+// 동적 offset 조정 런타임 상태
+message DynamicOffsetState {
+  // 현재 동적 bid offset
+  int64 current_bid_offset = 1;
+  // 현재 동적 ask offset
+  int64 current_ask_offset = 2;
+  // 순매매량 (+ = 순매수, - = 순매도)
+  int64 net_position = 3;
+  // 조정 활성화 여부
+  bool is_active = 4;
 }
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

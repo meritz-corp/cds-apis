@@ -31,6 +31,24 @@ final $typed_data.Uint8List replicationMethodDescriptor = $convert.base64Decode(
     'IfChtSRVBMSUNBVElPTl9NRVRIT0RfUEhZU0lDQUwQARIgChxSRVBMSUNBVElPTl9NRVRIT0Rf'
     'U1lOVEhFVElDEAISJAogUkVQTElDQVRJT05fTUVUSE9EX0ZVVFVSRVNfQkFTRUQQAw==');
 
+@$core.Deprecated('Use positionAdjustmentStrategyDescriptor instead')
+const PositionAdjustmentStrategy$json = {
+  '1': 'PositionAdjustmentStrategy',
+  '2': [
+    {'1': 'POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED', '2': 0},
+    {'1': 'POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE', '2': 1},
+    {'1': 'POSITION_ADJUSTMENT_STRATEGY_TURNOVER', '2': 2},
+    {'1': 'POSITION_ADJUSTMENT_STRATEGY_ALL', '2': 10},
+  ],
+};
+
+/// Descriptor for `PositionAdjustmentStrategy`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List positionAdjustmentStrategyDescriptor = $convert.base64Decode(
+    'ChpQb3NpdGlvbkFkanVzdG1lbnRTdHJhdGVneRIsCihQT1NJVElPTl9BREpVU1RNRU5UX1NUUk'
+    'FURUdZX1VOU1BFQ0lGSUVEEAASKgomUE9TSVRJT05fQURKVVNUTUVOVF9TVFJBVEVHWV9BVk9J'
+    'REFOQ0UQARIpCiVQT1NJVElPTl9BREpVU1RNRU5UX1NUUkFURUdZX1RVUk5PVkVSEAISJAogUE'
+    '9TSVRJT05fQURKVVNUTUVOVF9TVFJBVEVHWV9BTEwQCg==');
+
 @$core.Deprecated('Use etfLpStateDescriptor instead')
 const EtfLpState$json = {
   '1': 'EtfLpState',
@@ -145,25 +163,75 @@ const EtfLpStatus$json = {
   '2': [
     {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
-    {'1': 'bid_offset', '3': 4, '4': 1, '5': 3, '10': 'bidOffset'},
-    {'1': 'ask_offset', '3': 5, '4': 1, '5': 3, '10': 'askOffset'},
     {'1': 'basis', '3': 6, '4': 1, '5': 3, '10': 'basis'},
     {'1': 'quantity', '3': 7, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
+    {'1': 'offset_adjustment_config', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.OffsetAdjustmentConfig', '10': 'offsetAdjustmentConfig'},
+    {'1': 'dynamic_offset_state', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.DynamicOffsetState', '10': 'dynamicOffsetState'},
   ],
 };
 
 /// Descriptor for `EtfLpStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'CgtFdGZMcFN0YXR1cxIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSGwoJZnVuZF9jb2'
-    'RlGAIgASgJUghmdW5kQ29kZRIdCgpiaWRfb2Zmc2V0GAQgASgDUgliaWRPZmZzZXQSHQoKYXNr'
-    'X29mZnNldBgFIAEoA1IJYXNrT2Zmc2V0EhQKBWJhc2lzGAYgASgDUgViYXNpcxIaCghxdWFudG'
-    'l0eRgHIAEoA1IIcXVhbnRpdHkSKwoFc3RhdGUYCCABKA4yFS5rZG8udjEubHAuRXRmTHBTdGF0'
-    'ZVIFc3RhdGUSLgoHcHJpY2luZxgJIAEoCzIULmtkby52MS5scC5McFByaWNpbmdSB3ByaWNpbm'
-    'cSQgoPZmlsbF9zdGF0aXN0aWNzGAogASgLMhkua2RvLnYxLmxwLkZpbGxTdGF0aXN0aWNzUg5m'
-    'aWxsU3RhdGlzdGljcw==');
+    'RlGAIgASgJUghmdW5kQ29kZRIUCgViYXNpcxgGIAEoA1IFYmFzaXMSGgoIcXVhbnRpdHkYByAB'
+    'KANSCHF1YW50aXR5EisKBXN0YXRlGAggASgOMhUua2RvLnYxLmxwLkV0ZkxwU3RhdGVSBXN0YX'
+    'RlEi4KB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQcmljaW5nUgdwcmljaW5nEkIKD2Zp'
+    'bGxfc3RhdGlzdGljcxgKIAEoCzIZLmtkby52MS5scC5GaWxsU3RhdGlzdGljc1IOZmlsbFN0YX'
+    'Rpc3RpY3MSWwoYb2Zmc2V0X2FkanVzdG1lbnRfY29uZmlnGAsgASgLMiEua2RvLnYxLmxwLk9m'
+    'ZnNldEFkanVzdG1lbnRDb25maWdSFm9mZnNldEFkanVzdG1lbnRDb25maWcSTwoUZHluYW1pY1'
+    '9vZmZzZXRfc3RhdGUYDCABKAsyHS5rZG8udjEubHAuRHluYW1pY09mZnNldFN0YXRlUhJkeW5h'
+    'bWljT2Zmc2V0U3RhdGU=');
+
+@$core.Deprecated('Use offsetAdjustmentConfigDescriptor instead')
+const OffsetAdjustmentConfig$json = {
+  '1': 'OffsetAdjustmentConfig',
+  '2': [
+    {'1': 'min_offset', '3': 1, '4': 1, '5': 3, '10': 'minOffset'},
+    {'1': 'max_offset', '3': 2, '4': 1, '5': 3, '10': 'maxOffset'},
+    {'1': 'time_adjustment_enabled', '3': 3, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
+    {'1': 'adjustment_interval_secs', '3': 4, '4': 1, '5': 4, '10': 'adjustmentIntervalSecs'},
+    {'1': 'adjustment_step', '3': 5, '4': 1, '5': 3, '10': 'adjustmentStep'},
+    {'1': 'reset_on_fill', '3': 6, '4': 1, '5': 8, '10': 'resetOnFill'},
+    {'1': 'position_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'positionAdjustmentEnabled'},
+    {'1': 'position_threshold', '3': 8, '4': 1, '5': 3, '10': 'positionThreshold'},
+    {'1': 'position_strategy', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.lp.PositionAdjustmentStrategy', '10': 'positionStrategy'},
+    {'1': 'position_adjustment_step', '3': 10, '4': 1, '5': 3, '10': 'positionAdjustmentStep'},
+  ],
+};
+
+/// Descriptor for `OffsetAdjustmentConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List offsetAdjustmentConfigDescriptor = $convert.base64Decode(
+    'ChZPZmZzZXRBZGp1c3RtZW50Q29uZmlnEh0KCm1pbl9vZmZzZXQYASABKANSCW1pbk9mZnNldB'
+    'IdCgptYXhfb2Zmc2V0GAIgASgDUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJs'
+    'ZWQYAyABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3'
+    'NlY3MYBCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAUg'
+    'ASgDUg5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAYgASgIUgtyZXNldE9uRmlsbB'
+    'I+Chtwb3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWQYByABKAhSGXBvc2l0aW9uQWRqdXN0bWVu'
+    'dEVuYWJsZWQSLQoScG9zaXRpb25fdGhyZXNob2xkGAggASgDUhFwb3NpdGlvblRocmVzaG9sZB'
+    'JSChFwb3NpdGlvbl9zdHJhdGVneRgJIAEoDjIlLmtkby52MS5scC5Qb3NpdGlvbkFkanVzdG1l'
+    'bnRTdHJhdGVneVIQcG9zaXRpb25TdHJhdGVneRI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZX'
+    'AYCiABKANSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
+
+@$core.Deprecated('Use dynamicOffsetStateDescriptor instead')
+const DynamicOffsetState$json = {
+  '1': 'DynamicOffsetState',
+  '2': [
+    {'1': 'current_bid_offset', '3': 1, '4': 1, '5': 3, '10': 'currentBidOffset'},
+    {'1': 'current_ask_offset', '3': 2, '4': 1, '5': 3, '10': 'currentAskOffset'},
+    {'1': 'net_position', '3': 3, '4': 1, '5': 3, '10': 'netPosition'},
+    {'1': 'is_active', '3': 4, '4': 1, '5': 8, '10': 'isActive'},
+  ],
+};
+
+/// Descriptor for `DynamicOffsetState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List dynamicOffsetStateDescriptor = $convert.base64Decode(
+    'ChJEeW5hbWljT2Zmc2V0U3RhdGUSLAoSY3VycmVudF9iaWRfb2Zmc2V0GAEgASgDUhBjdXJyZW'
+    '50QmlkT2Zmc2V0EiwKEmN1cnJlbnRfYXNrX29mZnNldBgCIAEoA1IQY3VycmVudEFza09mZnNl'
+    'dBIhCgxuZXRfcG9zaXRpb24YAyABKANSC25ldFBvc2l0aW9uEhsKCWlzX2FjdGl2ZRgEIAEoCF'
+    'IIaXNBY3RpdmU=');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

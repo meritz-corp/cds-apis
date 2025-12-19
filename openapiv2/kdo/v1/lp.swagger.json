@@ -572,6 +572,31 @@
     }
   },
   "definitions": {
+    "lpDynamicOffsetState": {
+      "type": "object",
+      "properties": {
+        "currentBidOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 동적 bid offset"
+        },
+        "currentAskOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 동적 ask offset"
+        },
+        "netPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "순매매량 (+ = 순매수, - = 순매도)"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "조정 활성화 여부"
+        }
+      },
+      "title": "동적 offset 조정 런타임 상태"
+    },
     "lpEtfLp": {
       "type": "object",
       "properties": {
@@ -670,16 +695,6 @@
           "type": "string",
           "title": "펀드 코드"
         },
-        "bidOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
-        "askOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
         "basis": {
           "type": "string",
           "format": "int64",
@@ -701,6 +716,14 @@
         "fillStatistics": {
           "$ref": "#/definitions/lpFillStatistics",
           "title": "체결 통계"
+        },
+        "offsetAdjustmentConfig": {
+          "$ref": "#/definitions/lpOffsetAdjustmentConfig",
+          "title": "동적 offset 조정 설정 (optional)"
+        },
+        "dynamicOffsetState": {
+          "$ref": "#/definitions/lpDynamicOffsetState",
+          "title": "동적 offset 조정 런타임 상태 (optional)"
         }
       },
       "title": "ETF LP 상태"
@@ -816,6 +839,63 @@
         }
       },
       "title": "LP 가격 정보"
+    },
+    "lpOffsetAdjustmentConfig": {
+      "type": "object",
+      "properties": {
+        "minOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "NAV 밴드 설정"
+        },
+        "maxOffset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "timeAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "시간 기반 조정"
+        },
+        "adjustmentIntervalSecs": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "adjustmentStep": {
+          "type": "string",
+          "format": "int64"
+        },
+        "resetOnFill": {
+          "type": "boolean"
+        },
+        "positionAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "순매매량 기반 조정"
+        },
+        "positionThreshold": {
+          "type": "string",
+          "format": "int64"
+        },
+        "positionStrategy": {
+          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
+        },
+        "positionAdjustmentStep": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "자동 offset 조정 설정"
+    },
+    "lpPositionAdjustmentStrategy": {
+      "type": "string",
+      "enum": [
+        "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
+        "POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE",
+        "POSITION_ADJUSTMENT_STRATEGY_TURNOVER",
+        "POSITION_ADJUSTMENT_STRATEGY_ALL"
+      ],
+      "default": "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
+      "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
+      "title": "순매매량 기반 조정 전략"
     },
     "lpStartEtfLpResponse": {
       "type": "object",

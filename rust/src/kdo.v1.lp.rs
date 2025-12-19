@@ -41,12 +41,6 @@ pub struct EtfLpStatus {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="4")]
-    pub bid_offset: i64,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="5")]
-    pub ask_offset: i64,
     /// Basis 스프레드 (원 단위, i64)
     #[prost(int64, tag="6")]
     pub basis: i64,
@@ -62,6 +56,57 @@ pub struct EtfLpStatus {
     /// 체결 통계
     #[prost(message, optional, tag="10")]
     pub fill_statistics: ::core::option::Option<FillStatistics>,
+    /// 동적 offset 조정 설정 (optional)
+    #[prost(message, optional, tag="11")]
+    pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
+    /// 동적 offset 조정 런타임 상태 (optional)
+    #[prost(message, optional, tag="12")]
+    pub dynamic_offset_state: ::core::option::Option<DynamicOffsetState>,
+}
+/// 자동 offset 조정 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct OffsetAdjustmentConfig {
+    /// NAV 밴드 설정
+    #[prost(int64, tag="1")]
+    pub min_offset: i64,
+    #[prost(int64, tag="2")]
+    pub max_offset: i64,
+    /// 시간 기반 조정
+    #[prost(bool, tag="3")]
+    pub time_adjustment_enabled: bool,
+    #[prost(uint64, tag="4")]
+    pub adjustment_interval_secs: u64,
+    #[prost(int64, tag="5")]
+    pub adjustment_step: i64,
+    #[prost(bool, tag="6")]
+    pub reset_on_fill: bool,
+    /// 순매매량 기반 조정
+    #[prost(bool, tag="7")]
+    pub position_adjustment_enabled: bool,
+    #[prost(int64, tag="8")]
+    pub position_threshold: i64,
+    #[prost(enumeration="PositionAdjustmentStrategy", tag="9")]
+    pub position_strategy: i32,
+    #[prost(int64, tag="10")]
+    pub position_adjustment_step: i64,
+}
+/// 동적 offset 조정 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DynamicOffsetState {
+    /// 현재 동적 bid offset
+    #[prost(int64, tag="1")]
+    pub current_bid_offset: i64,
+    /// 현재 동적 ask offset
+    #[prost(int64, tag="2")]
+    pub current_ask_offset: i64,
+    /// 순매매량 (+ = 순매수, - = 순매도)
+    #[prost(int64, tag="3")]
+    pub net_position: i64,
+    /// 조정 활성화 여부
+    #[prost(bool, tag="4")]
+    pub is_active: bool,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -397,6 +442,42 @@ impl ReplicationMethod {
             "REPLICATION_METHOD_PHYSICAL" => Some(Self::Physical),
             "REPLICATION_METHOD_SYNTHETIC" => Some(Self::Synthetic),
             "REPLICATION_METHOD_FUTURES_BASED" => Some(Self::FuturesBased),
+            _ => None,
+        }
+    }
+}
+/// 순매매량 기반 조정 전략
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PositionAdjustmentStrategy {
+    Unspecified = 0,
+    /// 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)
+    Avoidance = 1,
+    /// 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)
+    Turnover = 2,
+    /// 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소
+    All = 10,
+}
+impl PositionAdjustmentStrategy {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PositionAdjustmentStrategy::Unspecified => "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
+            PositionAdjustmentStrategy::Avoidance => "POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE",
+            PositionAdjustmentStrategy::Turnover => "POSITION_ADJUSTMENT_STRATEGY_TURNOVER",
+            PositionAdjustmentStrategy::All => "POSITION_ADJUSTMENT_STRATEGY_ALL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED" => Some(Self::Unspecified),
+            "POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE" => Some(Self::Avoidance),
+            "POSITION_ADJUSTMENT_STRATEGY_TURNOVER" => Some(Self::Turnover),
+            "POSITION_ADJUSTMENT_STRATEGY_ALL" => Some(Self::All),
             _ => None,
         }
     }
