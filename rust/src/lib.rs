@@ -40,3 +40,11 @@ pub mod kdo {
         }
     }
 }
+
+pub mod market_archive {
+    pub mod v1 {
+        pub mod market {
+            include!("market_archive.v1.market.rs");
+        }
+    }
+}
