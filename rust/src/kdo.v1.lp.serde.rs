@@ -193,6 +193,9 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -228,6 +231,9 @@ impl serde::Serialize for EtfLp {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
         }
+        if let Some(v) = self.offset_adjustment_config.as_ref() {
+            struct_ser.serialize_field("offset_adjustment_config", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -250,6 +256,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "depth",
             "tick_size",
             "tickSize",
+            "offset_adjustment_config",
+            "offsetAdjustmentConfig",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -262,6 +270,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             Quantity,
             Depth,
             TickSize,
+            OffsetAdjustmentConfig,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -292,6 +301,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
+                            "offsetAdjustmentConfig" | "offset_adjustment_config" => Ok(GeneratedField::OffsetAdjustmentConfig),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -319,6 +329,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut quantity__ = None;
                 let mut depth__ = None;
                 let mut tick_size__ = None;
+                let mut offset_adjustment_config__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -381,6 +392,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::OffsetAdjustmentConfig => {
+                            if offset_adjustment_config__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offsetAdjustmentConfig"));
+                            }
+                            offset_adjustment_config__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -395,6 +412,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     quantity: quantity__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
+                    offset_adjustment_config: offset_adjustment_config__,
                 })
             }
         }

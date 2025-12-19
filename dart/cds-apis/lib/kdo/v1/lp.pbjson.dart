@@ -146,6 +146,7 @@ const EtfLp$json = {
     {'1': 'quantity', '3': 7, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'depth', '3': 8, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'offset_adjustment_config', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.OffsetAdjustmentConfig', '10': 'offsetAdjustmentConfig'},
   ],
 };
 
@@ -155,7 +156,8 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'RDb2RlEh0KCmJpZF9vZmZzZXQYBCABKANSCWJpZE9mZnNldBIdCgphc2tfb2Zmc2V0GAUgASgD'
     'Uglhc2tPZmZzZXQSFAoFYmFzaXMYBiABKANSBWJhc2lzEhoKCHF1YW50aXR5GAcgASgDUghxdW'
     'FudGl0eRIUCgVkZXB0aBgIIAEoDVIFZGVwdGgSGwoJdGlja19zaXplGAkgASgDUgh0aWNrU2l6'
-    'ZQ==');
+    'ZRJbChhvZmZzZXRfYWRqdXN0bWVudF9jb25maWcYCiABKAsyIS5rZG8udjEubHAuT2Zmc2V0QW'
+    'RqdXN0bWVudENvbmZpZ1IWb2Zmc2V0QWRqdXN0bWVudENvbmZpZw==');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {

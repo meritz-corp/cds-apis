@@ -28,6 +28,9 @@ pub struct EtfLp {
     /// ETF tick 크기 (원 단위, i64)
     #[prost(int64, tag="9")]
     pub tick_size: i64,
+    /// 동적 offset 조정 설정
+    #[prost(message, optional, tag="10")]
+    pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
 }
 // ========== ETF LP Status Messages ==========
 

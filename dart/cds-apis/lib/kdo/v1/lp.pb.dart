@@ -34,6 +34,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $fixnum.Int64? quantity,
     $core.int? depth,
     $fixnum.Int64? tickSize,
+    OffsetAdjustmentConfig? offsetAdjustmentConfig,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -44,6 +45,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (quantity != null) result.quantity = quantity;
     if (depth != null) result.depth = depth;
     if (tickSize != null) result.tickSize = tickSize;
+    if (offsetAdjustmentConfig != null) result.offsetAdjustmentConfig = offsetAdjustmentConfig;
     return result;
   }
 
@@ -61,6 +63,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..aInt64(7, _omitFieldNames ? '' : 'quantity')
     ..a<$core.int>(8, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
+    ..aOM<OffsetAdjustmentConfig>(10, _omitFieldNames ? '' : 'offsetAdjustmentConfig', subBuilder: OffsetAdjustmentConfig.create)
     ..hasRequiredFields = false
   ;
 
@@ -160,6 +163,18 @@ class EtfLp extends $pb.GeneratedMessage {
   $core.bool hasTickSize() => $_has(7);
   @$pb.TagNumber(9)
   void clearTickSize() => $_clearField(9);
+
+  /// 동적 offset 조정 설정
+  @$pb.TagNumber(10)
+  OffsetAdjustmentConfig get offsetAdjustmentConfig => $_getN(8);
+  @$pb.TagNumber(10)
+  set offsetAdjustmentConfig(OffsetAdjustmentConfig value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasOffsetAdjustmentConfig() => $_has(8);
+  @$pb.TagNumber(10)
+  void clearOffsetAdjustmentConfig() => $_clearField(10);
+  @$pb.TagNumber(10)
+  OffsetAdjustmentConfig ensureOffsetAdjustmentConfig() => $_ensure(8);
 }
 
 /// ETF LP 상태
