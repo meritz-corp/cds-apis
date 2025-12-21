@@ -2,8 +2,8 @@
 /// Generated client implementations.
 pub mod orderbook_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct OrderbookServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -543,8 +543,8 @@ pub mod orderbook_service_server {
 /// Generated client implementations.
 pub mod trade_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct TradeServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -916,8 +916,8 @@ pub mod trade_service_server {
 /// Generated client implementations.
 pub mod candle_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct CandleServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -1293,8 +1293,8 @@ pub mod candle_service_server {
 /// Generated client implementations.
 pub mod symbol_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct SymbolServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -1656,8 +1656,8 @@ pub mod symbol_service_server {
 /// Generated client implementations.
 pub mod indicator_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct IndicatorServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -1944,8 +1944,8 @@ pub mod indicator_service_server {
 /// Generated client implementations.
 pub mod ingestion_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct IngestionServiceClient<T> {
         inner: tonic::client::Grpc<T>,

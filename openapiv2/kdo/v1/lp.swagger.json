@@ -695,6 +695,16 @@
           "type": "string",
           "title": "펀드 코드"
         },
+        "bidOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
+        "askOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
         "basis": {
           "type": "string",
           "format": "int64",
@@ -738,6 +748,16 @@
         "fundCode": {
           "type": "string",
           "title": "펀드 코드"
+        },
+        "bidOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
+        },
+        "askOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
         },
         "basis": {
           "type": "string",
@@ -900,8 +920,8 @@
           "format": "uint64"
         },
         "adjustmentStep": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "float"
         },
         "resetOnFill": {
           "type": "boolean"
@@ -918,8 +938,8 @@
           "$ref": "#/definitions/lpPositionAdjustmentStrategy"
         },
         "positionAdjustmentStep": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "float"
         }
       },
       "title": "자동 offset 조정 설정"

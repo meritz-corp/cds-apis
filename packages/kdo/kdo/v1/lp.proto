@@ -143,6 +143,12 @@ message EtfLpStatus {
   // 펀드 코드
   string fund_code = 2;
 
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 bid_offset = 4;
+
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 ask_offset = 5;
+
   // Basis 스프레드 (원 단위, i64)
   int64 basis = 6;
 
@@ -172,6 +178,12 @@ message EtfLpStatusUpdate {
 
   // 펀드 코드
   string fund_code = 2;
+
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 bid_offset = 4;
+
+  // Offset (호가 스프레드 조정, 원 단위, i64)
+  int64 ask_offset = 5;
 
   // Basis 스프레드 (원 단위, i64)
   optional int64 basis = 6;
@@ -216,14 +228,14 @@ message OffsetAdjustmentConfig {
   // 시간 기반 조정
   bool time_adjustment_enabled = 3;
   uint64 adjustment_interval_secs = 4;
-  int64 adjustment_step = 5;
+  float adjustment_step = 5;
   bool reset_on_fill = 6;
 
   // 순매매량 기반 조정
   bool position_adjustment_enabled = 7;
   int64 position_threshold = 8;
   PositionAdjustmentStrategy position_strategy = 9;
-  int64 position_adjustment_step = 10;
+  float position_adjustment_step = 10;
 }
 
 // 동적 offset 조정 런타임 상태

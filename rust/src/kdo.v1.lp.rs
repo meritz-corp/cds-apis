@@ -44,6 +44,12 @@ pub struct EtfLpStatus {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// Offset (호가 스프레드 조정, 원 단위, i64)
+    #[prost(int64, tag="4")]
+    pub bid_offset: i64,
+    /// Offset (호가 스프레드 조정, 원 단위, i64)
+    #[prost(int64, tag="5")]
+    pub ask_offset: i64,
     /// Basis 스프레드 (원 단위, i64)
     #[prost(int64, tag="6")]
     pub basis: i64,
@@ -76,6 +82,12 @@ pub struct EtfLpStatusUpdate {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// Offset (호가 스프레드 조정, 원 단위, i64)
+    #[prost(int64, tag="4")]
+    pub bid_offset: i64,
+    /// Offset (호가 스프레드 조정, 원 단위, i64)
+    #[prost(int64, tag="5")]
+    pub ask_offset: i64,
     /// Basis 스프레드 (원 단위, i64)
     #[prost(int64, optional, tag="6")]
     pub basis: ::core::option::Option<i64>,
@@ -112,8 +124,8 @@ pub struct OffsetAdjustmentConfig {
     pub time_adjustment_enabled: bool,
     #[prost(uint64, tag="4")]
     pub adjustment_interval_secs: u64,
-    #[prost(int64, tag="5")]
-    pub adjustment_step: i64,
+    #[prost(float, tag="5")]
+    pub adjustment_step: f32,
     #[prost(bool, tag="6")]
     pub reset_on_fill: bool,
     /// 순매매량 기반 조정
@@ -123,8 +135,8 @@ pub struct OffsetAdjustmentConfig {
     pub position_threshold: i64,
     #[prost(enumeration="PositionAdjustmentStrategy", tag="9")]
     pub position_strategy: i32,
-    #[prost(int64, tag="10")]
-    pub position_adjustment_step: i64,
+    #[prost(float, tag="10")]
+    pub position_adjustment_step: f32,
 }
 /// 동적 offset 조정 런타임 상태
 #[allow(clippy::derive_partial_eq_without_eq)]

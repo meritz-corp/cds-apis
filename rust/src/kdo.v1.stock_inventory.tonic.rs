@@ -2,8 +2,8 @@
 /// Generated client implementations.
 pub mod stock_inventory_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct StockInventoryServiceClient<T> {
         inner: tonic::client::Grpc<T>,
