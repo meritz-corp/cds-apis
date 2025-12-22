@@ -159,16 +159,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "bidOffset": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-                },
-                "askOffset": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-                },
                 "basis": {
                   "type": "string",
                   "format": "int64",
@@ -189,8 +179,8 @@
                   "format": "int64",
                   "title": "ETF tick 크기 (원 단위, i64)"
                 },
-                "offsetAdjustmentConfig": {
-                  "$ref": "#/definitions/lpOffsetAdjustmentConfig",
+                "offset": {
+                  "$ref": "#/definitions/lpEtfLpOffset",
                   "title": "동적 offset 조정 설정"
                 }
               },
@@ -568,31 +558,6 @@
     }
   },
   "definitions": {
-    "lpDynamicOffset": {
-      "type": "object",
-      "properties": {
-        "bidOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "bid offset"
-        },
-        "askOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "ask offset"
-        },
-        "netPosition": {
-          "type": "string",
-          "format": "int64",
-          "title": "순매매량 (+ = 순매수, - = 순매도)"
-        },
-        "isDynamic": {
-          "type": "boolean",
-          "title": "동적 조정 활성화 여부"
-        }
-      },
-      "title": "동적 offset 조정 런타임 상태"
-    },
     "lpEtfLp": {
       "type": "object",
       "properties": {
@@ -603,16 +568,6 @@
         "fundCode": {
           "type": "string",
           "title": "Fund"
-        },
-        "bidOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
-        "askOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
         },
         "basis": {
           "type": "string",
@@ -634,8 +589,8 @@
           "format": "int64",
           "title": "ETF tick 크기 (원 단위, i64)"
         },
-        "offsetAdjustmentConfig": {
-          "$ref": "#/definitions/lpOffsetAdjustmentConfig",
+        "offset": {
+          "$ref": "#/definitions/lpEtfLpOffset",
           "title": "동적 offset 조정 설정"
         }
       },
@@ -671,6 +626,59 @@
         }
       },
       "title": "ETF LP 에러 이벤트"
+    },
+    "lpEtfLpOffset": {
+      "type": "object",
+      "properties": {
+        "currentBidOffset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentAskOffset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minOffset": {
+          "type": "string",
+          "format": "int64",
+          "title": "NAV 밴드 설정"
+        },
+        "maxOffset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "timeAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "시간 기반 조정"
+        },
+        "adjustmentIntervalSecs": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "adjustmentStep": {
+          "type": "number",
+          "format": "float"
+        },
+        "resetOnFill": {
+          "type": "boolean"
+        },
+        "positionAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "순매매량 기반 조정"
+        },
+        "positionStrategy": {
+          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
+        },
+        "positionThreshold": {
+          "type": "string",
+          "format": "int64"
+        },
+        "positionAdjustmentStep": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "자동 offset 조정 설정"
     },
     "lpEtfLpState": {
       "type": "string",
@@ -717,13 +725,9 @@
           "$ref": "#/definitions/lpFillStatistics",
           "title": "체결 통계"
         },
-        "offsetAdjustmentConfig": {
-          "$ref": "#/definitions/lpOffsetAdjustmentConfig",
+        "offset": {
+          "$ref": "#/definitions/lpEtfLpOffset",
           "title": "동적 offset 조정 설정 (optional)"
-        },
-        "dynamicOffset": {
-          "$ref": "#/definitions/lpDynamicOffset",
-          "title": "동적 offset 조정 런타임 상태 (optional)"
         }
       },
       "title": "ETF LP 상태"
@@ -761,13 +765,9 @@
           "$ref": "#/definitions/lpFillStatistics",
           "title": "체결 통계"
         },
-        "offsetAdjustmentConfig": {
-          "$ref": "#/definitions/lpOffsetAdjustmentConfig",
+        "offset": {
+          "$ref": "#/definitions/lpEtfLpOffset",
           "title": "동적 offset 조정 설정 (optional)"
-        },
-        "dynamicOffset": {
-          "$ref": "#/definitions/lpDynamicOffset",
-          "title": "동적 offset 조정 런타임 상태 (optional)"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
@@ -878,51 +878,6 @@
         }
       },
       "title": "LP 가격 정보"
-    },
-    "lpOffsetAdjustmentConfig": {
-      "type": "object",
-      "properties": {
-        "minOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "NAV 밴드 설정"
-        },
-        "maxOffset": {
-          "type": "string",
-          "format": "int64"
-        },
-        "timeAdjustmentEnabled": {
-          "type": "boolean",
-          "title": "시간 기반 조정"
-        },
-        "adjustmentIntervalSecs": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "adjustmentStep": {
-          "type": "number",
-          "format": "float"
-        },
-        "resetOnFill": {
-          "type": "boolean"
-        },
-        "positionAdjustmentEnabled": {
-          "type": "boolean",
-          "title": "순매매량 기반 조정"
-        },
-        "positionThreshold": {
-          "type": "string",
-          "format": "int64"
-        },
-        "positionStrategy": {
-          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
-        },
-        "positionAdjustmentStep": {
-          "type": "number",
-          "format": "float"
-        }
-      },
-      "title": "자동 offset 조정 설정"
     },
     "lpPositionAdjustmentStrategy": {
       "type": "string",

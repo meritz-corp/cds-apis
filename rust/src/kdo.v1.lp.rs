@@ -10,12 +10,6 @@ pub struct EtfLp {
     /// Fund
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="4")]
-    pub bid_offset: i64,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="5")]
-    pub ask_offset: i64,
     /// Basis 스프레드 (원 단위, i64)
     #[prost(int64, tag="6")]
     pub basis: i64,
@@ -30,7 +24,7 @@ pub struct EtfLp {
     pub tick_size: i64,
     /// 동적 offset 조정 설정
     #[prost(message, optional, tag="10")]
-    pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
+    pub offset: ::core::option::Option<EtfLpOffset>,
 }
 // ========== ETF LP Status Messages ==========
 
@@ -61,10 +55,7 @@ pub struct EtfLpStatus {
     pub fill_statistics: ::core::option::Option<FillStatistics>,
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
-    pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
-    /// 동적 offset 조정 런타임 상태 (optional)
-    #[prost(message, optional, tag="12")]
-    pub dynamic_offset: ::core::option::Option<DynamicOffset>,
+    pub offset: ::core::option::Option<EtfLpOffset>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -93,55 +84,40 @@ pub struct EtfLpStatusUpdate {
     pub fill_statistics: ::core::option::Option<FillStatistics>,
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
-    pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
-    /// 동적 offset 조정 런타임 상태 (optional)
-    #[prost(message, optional, tag="12")]
-    pub dynamic_offset: ::core::option::Option<DynamicOffset>,
+    pub offset: ::core::option::Option<EtfLpOffset>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct OffsetAdjustmentConfig {
-    /// NAV 밴드 설정
+pub struct EtfLpOffset {
+    ///
     #[prost(int64, tag="1")]
-    pub min_offset: i64,
+    pub current_bid_offset: i64,
     #[prost(int64, tag="2")]
+    pub current_ask_offset: i64,
+    /// NAV 밴드 설정
+    #[prost(int64, tag="3")]
+    pub min_offset: i64,
+    #[prost(int64, tag="4")]
     pub max_offset: i64,
     /// 시간 기반 조정
-    #[prost(bool, tag="3")]
+    #[prost(bool, tag="7")]
     pub time_adjustment_enabled: bool,
-    #[prost(uint64, tag="4")]
+    #[prost(uint64, tag="8")]
     pub adjustment_interval_secs: u64,
-    #[prost(float, tag="5")]
+    #[prost(float, tag="9")]
     pub adjustment_step: f32,
-    #[prost(bool, tag="6")]
+    #[prost(bool, tag="10")]
     pub reset_on_fill: bool,
     /// 순매매량 기반 조정
-    #[prost(bool, tag="7")]
+    #[prost(bool, tag="17")]
     pub position_adjustment_enabled: bool,
-    #[prost(int64, tag="8")]
-    pub position_threshold: i64,
-    #[prost(enumeration="PositionAdjustmentStrategy", tag="9")]
+    #[prost(enumeration="PositionAdjustmentStrategy", tag="18")]
     pub position_strategy: i32,
-    #[prost(float, tag="10")]
+    #[prost(int64, tag="19")]
+    pub position_threshold: i64,
+    #[prost(float, tag="20")]
     pub position_adjustment_step: f32,
-}
-/// 동적 offset 조정 런타임 상태
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct DynamicOffset {
-    /// bid offset
-    #[prost(int64, tag="1")]
-    pub bid_offset: i64,
-    /// ask offset
-    #[prost(int64, tag="2")]
-    pub ask_offset: i64,
-    /// 순매매량 (+ = 순매수, - = 순매도)
-    #[prost(int64, tag="3")]
-    pub net_position: i64,
-    /// 동적 조정 활성화 여부
-    #[prost(bool, tag="4")]
-    pub is_dynamic: bool,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -28,24 +28,20 @@ class EtfLp extends $pb.GeneratedMessage {
   factory EtfLp({
     $core.String? symbol,
     $core.String? fundCode,
-    $fixnum.Int64? bidOffset,
-    $fixnum.Int64? askOffset,
     $fixnum.Int64? basis,
     $fixnum.Int64? quantity,
     $core.int? depth,
     $fixnum.Int64? tickSize,
-    OffsetAdjustmentConfig? offsetAdjustmentConfig,
+    EtfLpOffset? offset,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
-    if (bidOffset != null) result.bidOffset = bidOffset;
-    if (askOffset != null) result.askOffset = askOffset;
     if (basis != null) result.basis = basis;
     if (quantity != null) result.quantity = quantity;
     if (depth != null) result.depth = depth;
     if (tickSize != null) result.tickSize = tickSize;
-    if (offsetAdjustmentConfig != null) result.offsetAdjustmentConfig = offsetAdjustmentConfig;
+    if (offset != null) result.offset = offset;
     return result;
   }
 
@@ -57,13 +53,11 @@ class EtfLp extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLp', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
-    ..aInt64(4, _omitFieldNames ? '' : 'bidOffset')
-    ..aInt64(5, _omitFieldNames ? '' : 'askOffset')
     ..aInt64(6, _omitFieldNames ? '' : 'basis')
     ..aInt64(7, _omitFieldNames ? '' : 'quantity')
     ..a<$core.int>(8, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
-    ..aOM<OffsetAdjustmentConfig>(10, _omitFieldNames ? '' : 'offsetAdjustmentConfig', subBuilder: OffsetAdjustmentConfig.create)
+    ..aOM<EtfLpOffset>(10, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
     ..hasRequiredFields = false
   ;
 
@@ -104,77 +98,57 @@ class EtfLp extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
-  /// Offset (호가 스프레드 조정, 원 단위, i64)
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get bidOffset => $_getI64(2);
-  @$pb.TagNumber(4)
-  set bidOffset($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(4)
-  $core.bool hasBidOffset() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearBidOffset() => $_clearField(4);
-
-  /// Offset (호가 스프레드 조정, 원 단위, i64)
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get askOffset => $_getI64(3);
-  @$pb.TagNumber(5)
-  set askOffset($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(5)
-  $core.bool hasAskOffset() => $_has(3);
-  @$pb.TagNumber(5)
-  void clearAskOffset() => $_clearField(5);
-
   /// Basis 스프레드 (원 단위, i64)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get basis => $_getI64(4);
+  $fixnum.Int64 get basis => $_getI64(2);
   @$pb.TagNumber(6)
-  set basis($fixnum.Int64 value) => $_setInt64(4, value);
+  set basis($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(6)
-  $core.bool hasBasis() => $_has(4);
+  $core.bool hasBasis() => $_has(2);
   @$pb.TagNumber(6)
   void clearBasis() => $_clearField(6);
 
   /// 주문 수량 (i64)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get quantity => $_getI64(5);
+  $fixnum.Int64 get quantity => $_getI64(3);
   @$pb.TagNumber(7)
-  set quantity($fixnum.Int64 value) => $_setInt64(5, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(7)
-  $core.bool hasQuantity() => $_has(5);
+  $core.bool hasQuantity() => $_has(3);
   @$pb.TagNumber(7)
   void clearQuantity() => $_clearField(7);
 
   /// 호가 깊이 (양방향 레벨 수)
   @$pb.TagNumber(8)
-  $core.int get depth => $_getIZ(6);
+  $core.int get depth => $_getIZ(4);
   @$pb.TagNumber(8)
-  set depth($core.int value) => $_setUnsignedInt32(6, value);
+  set depth($core.int value) => $_setUnsignedInt32(4, value);
   @$pb.TagNumber(8)
-  $core.bool hasDepth() => $_has(6);
+  $core.bool hasDepth() => $_has(4);
   @$pb.TagNumber(8)
   void clearDepth() => $_clearField(8);
 
   /// ETF tick 크기 (원 단위, i64)
   @$pb.TagNumber(9)
-  $fixnum.Int64 get tickSize => $_getI64(7);
+  $fixnum.Int64 get tickSize => $_getI64(5);
   @$pb.TagNumber(9)
-  set tickSize($fixnum.Int64 value) => $_setInt64(7, value);
+  set tickSize($fixnum.Int64 value) => $_setInt64(5, value);
   @$pb.TagNumber(9)
-  $core.bool hasTickSize() => $_has(7);
+  $core.bool hasTickSize() => $_has(5);
   @$pb.TagNumber(9)
   void clearTickSize() => $_clearField(9);
 
   /// 동적 offset 조정 설정
   @$pb.TagNumber(10)
-  OffsetAdjustmentConfig get offsetAdjustmentConfig => $_getN(8);
+  EtfLpOffset get offset => $_getN(6);
   @$pb.TagNumber(10)
-  set offsetAdjustmentConfig(OffsetAdjustmentConfig value) => $_setField(10, value);
+  set offset(EtfLpOffset value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasOffsetAdjustmentConfig() => $_has(8);
+  $core.bool hasOffset() => $_has(6);
   @$pb.TagNumber(10)
-  void clearOffsetAdjustmentConfig() => $_clearField(10);
+  void clearOffset() => $_clearField(10);
   @$pb.TagNumber(10)
-  OffsetAdjustmentConfig ensureOffsetAdjustmentConfig() => $_ensure(8);
+  EtfLpOffset ensureOffset() => $_ensure(6);
 }
 
 /// ETF LP 상태
@@ -187,8 +161,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     EtfLpState? state,
     LpPricing? pricing,
     FillStatistics? fillStatistics,
-    OffsetAdjustmentConfig? offsetAdjustmentConfig,
-    DynamicOffset? dynamicOffset,
+    EtfLpOffset? offset,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -198,8 +171,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (state != null) result.state = state;
     if (pricing != null) result.pricing = pricing;
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
-    if (offsetAdjustmentConfig != null) result.offsetAdjustmentConfig = offsetAdjustmentConfig;
-    if (dynamicOffset != null) result.dynamicOffset = dynamicOffset;
+    if (offset != null) result.offset = offset;
     return result;
   }
 
@@ -216,8 +188,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..e<EtfLpState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
-    ..aOM<OffsetAdjustmentConfig>(11, _omitFieldNames ? '' : 'offsetAdjustmentConfig', subBuilder: OffsetAdjustmentConfig.create)
-    ..aOM<DynamicOffset>(12, _omitFieldNames ? '' : 'dynamicOffset', subBuilder: DynamicOffset.create)
+    ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
     ..hasRequiredFields = false
   ;
 
@@ -314,27 +285,15 @@ class EtfLpStatus extends $pb.GeneratedMessage {
 
   /// 동적 offset 조정 설정 (optional)
   @$pb.TagNumber(11)
-  OffsetAdjustmentConfig get offsetAdjustmentConfig => $_getN(7);
+  EtfLpOffset get offset => $_getN(7);
   @$pb.TagNumber(11)
-  set offsetAdjustmentConfig(OffsetAdjustmentConfig value) => $_setField(11, value);
+  set offset(EtfLpOffset value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasOffsetAdjustmentConfig() => $_has(7);
+  $core.bool hasOffset() => $_has(7);
   @$pb.TagNumber(11)
-  void clearOffsetAdjustmentConfig() => $_clearField(11);
+  void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
-  OffsetAdjustmentConfig ensureOffsetAdjustmentConfig() => $_ensure(7);
-
-  /// 동적 offset 조정 런타임 상태 (optional)
-  @$pb.TagNumber(12)
-  DynamicOffset get dynamicOffset => $_getN(8);
-  @$pb.TagNumber(12)
-  set dynamicOffset(DynamicOffset value) => $_setField(12, value);
-  @$pb.TagNumber(12)
-  $core.bool hasDynamicOffset() => $_has(8);
-  @$pb.TagNumber(12)
-  void clearDynamicOffset() => $_clearField(12);
-  @$pb.TagNumber(12)
-  DynamicOffset ensureDynamicOffset() => $_ensure(8);
+  EtfLpOffset ensureOffset() => $_ensure(7);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -347,8 +306,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     EtfLpState? state,
     LpPricing? pricing,
     FillStatistics? fillStatistics,
-    OffsetAdjustmentConfig? offsetAdjustmentConfig,
-    DynamicOffset? dynamicOffset,
+    EtfLpOffset? offset,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -358,8 +316,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (state != null) result.state = state;
     if (pricing != null) result.pricing = pricing;
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
-    if (offsetAdjustmentConfig != null) result.offsetAdjustmentConfig = offsetAdjustmentConfig;
-    if (dynamicOffset != null) result.dynamicOffset = dynamicOffset;
+    if (offset != null) result.offset = offset;
     return result;
   }
 
@@ -376,8 +333,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..e<EtfLpState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
-    ..aOM<OffsetAdjustmentConfig>(11, _omitFieldNames ? '' : 'offsetAdjustmentConfig', subBuilder: OffsetAdjustmentConfig.create)
-    ..aOM<DynamicOffset>(12, _omitFieldNames ? '' : 'dynamicOffset', subBuilder: DynamicOffset.create)
+    ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
     ..hasRequiredFields = false
   ;
 
@@ -474,32 +430,22 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
 
   /// 동적 offset 조정 설정 (optional)
   @$pb.TagNumber(11)
-  OffsetAdjustmentConfig get offsetAdjustmentConfig => $_getN(7);
+  EtfLpOffset get offset => $_getN(7);
   @$pb.TagNumber(11)
-  set offsetAdjustmentConfig(OffsetAdjustmentConfig value) => $_setField(11, value);
+  set offset(EtfLpOffset value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasOffsetAdjustmentConfig() => $_has(7);
+  $core.bool hasOffset() => $_has(7);
   @$pb.TagNumber(11)
-  void clearOffsetAdjustmentConfig() => $_clearField(11);
+  void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
-  OffsetAdjustmentConfig ensureOffsetAdjustmentConfig() => $_ensure(7);
-
-  /// 동적 offset 조정 런타임 상태 (optional)
-  @$pb.TagNumber(12)
-  DynamicOffset get dynamicOffset => $_getN(8);
-  @$pb.TagNumber(12)
-  set dynamicOffset(DynamicOffset value) => $_setField(12, value);
-  @$pb.TagNumber(12)
-  $core.bool hasDynamicOffset() => $_has(8);
-  @$pb.TagNumber(12)
-  void clearDynamicOffset() => $_clearField(12);
-  @$pb.TagNumber(12)
-  DynamicOffset ensureDynamicOffset() => $_ensure(8);
+  EtfLpOffset ensureOffset() => $_ensure(7);
 }
 
 /// 자동 offset 조정 설정
-class OffsetAdjustmentConfig extends $pb.GeneratedMessage {
-  factory OffsetAdjustmentConfig({
+class EtfLpOffset extends $pb.GeneratedMessage {
+  factory EtfLpOffset({
+    $fixnum.Int64? currentBidOffset,
+    $fixnum.Int64? currentAskOffset,
     $fixnum.Int64? minOffset,
     $fixnum.Int64? maxOffset,
     $core.bool? timeAdjustmentEnabled,
@@ -507,11 +453,13 @@ class OffsetAdjustmentConfig extends $pb.GeneratedMessage {
     $core.double? adjustmentStep,
     $core.bool? resetOnFill,
     $core.bool? positionAdjustmentEnabled,
-    $fixnum.Int64? positionThreshold,
     PositionAdjustmentStrategy? positionStrategy,
+    $fixnum.Int64? positionThreshold,
     $core.double? positionAdjustmentStep,
   }) {
     final result = create();
+    if (currentBidOffset != null) result.currentBidOffset = currentBidOffset;
+    if (currentAskOffset != null) result.currentAskOffset = currentAskOffset;
     if (minOffset != null) result.minOffset = minOffset;
     if (maxOffset != null) result.maxOffset = maxOffset;
     if (timeAdjustmentEnabled != null) result.timeAdjustmentEnabled = timeAdjustmentEnabled;
@@ -519,227 +467,160 @@ class OffsetAdjustmentConfig extends $pb.GeneratedMessage {
     if (adjustmentStep != null) result.adjustmentStep = adjustmentStep;
     if (resetOnFill != null) result.resetOnFill = resetOnFill;
     if (positionAdjustmentEnabled != null) result.positionAdjustmentEnabled = positionAdjustmentEnabled;
-    if (positionThreshold != null) result.positionThreshold = positionThreshold;
     if (positionStrategy != null) result.positionStrategy = positionStrategy;
+    if (positionThreshold != null) result.positionThreshold = positionThreshold;
     if (positionAdjustmentStep != null) result.positionAdjustmentStep = positionAdjustmentStep;
     return result;
   }
 
-  OffsetAdjustmentConfig._();
+  EtfLpOffset._();
 
-  factory OffsetAdjustmentConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory OffsetAdjustmentConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory EtfLpOffset.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLpOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OffsetAdjustmentConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'minOffset')
-    ..aInt64(2, _omitFieldNames ? '' : 'maxOffset')
-    ..aOB(3, _omitFieldNames ? '' : 'timeAdjustmentEnabled')
-    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'adjustmentIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$core.double>(5, _omitFieldNames ? '' : 'adjustmentStep', $pb.PbFieldType.OF)
-    ..aOB(6, _omitFieldNames ? '' : 'resetOnFill')
-    ..aOB(7, _omitFieldNames ? '' : 'positionAdjustmentEnabled')
-    ..aInt64(8, _omitFieldNames ? '' : 'positionThreshold')
-    ..e<PositionAdjustmentStrategy>(9, _omitFieldNames ? '' : 'positionStrategy', $pb.PbFieldType.OE, defaultOrMaker: PositionAdjustmentStrategy.POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED, valueOf: PositionAdjustmentStrategy.valueOf, enumValues: PositionAdjustmentStrategy.values)
-    ..a<$core.double>(10, _omitFieldNames ? '' : 'positionAdjustmentStep', $pb.PbFieldType.OF)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'currentBidOffset')
+    ..aInt64(2, _omitFieldNames ? '' : 'currentAskOffset')
+    ..aInt64(3, _omitFieldNames ? '' : 'minOffset')
+    ..aInt64(4, _omitFieldNames ? '' : 'maxOffset')
+    ..aOB(7, _omitFieldNames ? '' : 'timeAdjustmentEnabled')
+    ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'adjustmentIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'adjustmentStep', $pb.PbFieldType.OF)
+    ..aOB(10, _omitFieldNames ? '' : 'resetOnFill')
+    ..aOB(17, _omitFieldNames ? '' : 'positionAdjustmentEnabled')
+    ..e<PositionAdjustmentStrategy>(18, _omitFieldNames ? '' : 'positionStrategy', $pb.PbFieldType.OE, defaultOrMaker: PositionAdjustmentStrategy.POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED, valueOf: PositionAdjustmentStrategy.valueOf, enumValues: PositionAdjustmentStrategy.values)
+    ..aInt64(19, _omitFieldNames ? '' : 'positionThreshold')
+    ..a<$core.double>(20, _omitFieldNames ? '' : 'positionAdjustmentStep', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OffsetAdjustmentConfig clone() => OffsetAdjustmentConfig()..mergeFromMessage(this);
+  EtfLpOffset clone() => EtfLpOffset()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OffsetAdjustmentConfig copyWith(void Function(OffsetAdjustmentConfig) updates) => super.copyWith((message) => updates(message as OffsetAdjustmentConfig)) as OffsetAdjustmentConfig;
+  EtfLpOffset copyWith(void Function(EtfLpOffset) updates) => super.copyWith((message) => updates(message as EtfLpOffset)) as EtfLpOffset;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static OffsetAdjustmentConfig create() => OffsetAdjustmentConfig._();
+  static EtfLpOffset create() => EtfLpOffset._();
   @$core.override
-  OffsetAdjustmentConfig createEmptyInstance() => create();
-  static $pb.PbList<OffsetAdjustmentConfig> createRepeated() => $pb.PbList<OffsetAdjustmentConfig>();
+  EtfLpOffset createEmptyInstance() => create();
+  static $pb.PbList<EtfLpOffset> createRepeated() => $pb.PbList<EtfLpOffset>();
   @$core.pragma('dart2js:noInline')
-  static OffsetAdjustmentConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OffsetAdjustmentConfig>(create);
-  static OffsetAdjustmentConfig? _defaultInstance;
+  static EtfLpOffset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpOffset>(create);
+  static EtfLpOffset? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get currentBidOffset => $_getI64(0);
+  @$pb.TagNumber(1)
+  set currentBidOffset($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCurrentBidOffset() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCurrentBidOffset() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get currentAskOffset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set currentAskOffset($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCurrentAskOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCurrentAskOffset() => $_clearField(2);
 
   /// NAV 밴드 설정
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get minOffset => $_getI64(0);
-  @$pb.TagNumber(1)
-  set minOffset($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMinOffset() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMinOffset() => $_clearField(1);
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get minOffset => $_getI64(2);
+  @$pb.TagNumber(3)
+  set minOffset($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMinOffset() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMinOffset() => $_clearField(3);
 
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get maxOffset => $_getI64(1);
-  @$pb.TagNumber(2)
-  set maxOffset($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasMaxOffset() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMaxOffset() => $_clearField(2);
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get maxOffset => $_getI64(3);
+  @$pb.TagNumber(4)
+  set maxOffset($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMaxOffset() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMaxOffset() => $_clearField(4);
 
   /// 시간 기반 조정
-  @$pb.TagNumber(3)
-  $core.bool get timeAdjustmentEnabled => $_getBF(2);
-  @$pb.TagNumber(3)
-  set timeAdjustmentEnabled($core.bool value) => $_setBool(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasTimeAdjustmentEnabled() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearTimeAdjustmentEnabled() => $_clearField(3);
+  @$pb.TagNumber(7)
+  $core.bool get timeAdjustmentEnabled => $_getBF(4);
+  @$pb.TagNumber(7)
+  set timeAdjustmentEnabled($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(7)
+  $core.bool hasTimeAdjustmentEnabled() => $_has(4);
+  @$pb.TagNumber(7)
+  void clearTimeAdjustmentEnabled() => $_clearField(7);
 
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get adjustmentIntervalSecs => $_getI64(3);
-  @$pb.TagNumber(4)
-  set adjustmentIntervalSecs($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasAdjustmentIntervalSecs() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearAdjustmentIntervalSecs() => $_clearField(4);
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get adjustmentIntervalSecs => $_getI64(5);
+  @$pb.TagNumber(8)
+  set adjustmentIntervalSecs($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(8)
+  $core.bool hasAdjustmentIntervalSecs() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearAdjustmentIntervalSecs() => $_clearField(8);
 
-  @$pb.TagNumber(5)
-  $core.double get adjustmentStep => $_getN(4);
-  @$pb.TagNumber(5)
-  set adjustmentStep($core.double value) => $_setFloat(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasAdjustmentStep() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearAdjustmentStep() => $_clearField(5);
+  @$pb.TagNumber(9)
+  $core.double get adjustmentStep => $_getN(6);
+  @$pb.TagNumber(9)
+  set adjustmentStep($core.double value) => $_setFloat(6, value);
+  @$pb.TagNumber(9)
+  $core.bool hasAdjustmentStep() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearAdjustmentStep() => $_clearField(9);
 
-  @$pb.TagNumber(6)
-  $core.bool get resetOnFill => $_getBF(5);
-  @$pb.TagNumber(6)
-  set resetOnFill($core.bool value) => $_setBool(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasResetOnFill() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearResetOnFill() => $_clearField(6);
+  @$pb.TagNumber(10)
+  $core.bool get resetOnFill => $_getBF(7);
+  @$pb.TagNumber(10)
+  set resetOnFill($core.bool value) => $_setBool(7, value);
+  @$pb.TagNumber(10)
+  $core.bool hasResetOnFill() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearResetOnFill() => $_clearField(10);
 
   /// 순매매량 기반 조정
-  @$pb.TagNumber(7)
-  $core.bool get positionAdjustmentEnabled => $_getBF(6);
-  @$pb.TagNumber(7)
-  set positionAdjustmentEnabled($core.bool value) => $_setBool(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasPositionAdjustmentEnabled() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearPositionAdjustmentEnabled() => $_clearField(7);
+  @$pb.TagNumber(17)
+  $core.bool get positionAdjustmentEnabled => $_getBF(8);
+  @$pb.TagNumber(17)
+  set positionAdjustmentEnabled($core.bool value) => $_setBool(8, value);
+  @$pb.TagNumber(17)
+  $core.bool hasPositionAdjustmentEnabled() => $_has(8);
+  @$pb.TagNumber(17)
+  void clearPositionAdjustmentEnabled() => $_clearField(17);
 
-  @$pb.TagNumber(8)
-  $fixnum.Int64 get positionThreshold => $_getI64(7);
-  @$pb.TagNumber(8)
-  set positionThreshold($fixnum.Int64 value) => $_setInt64(7, value);
-  @$pb.TagNumber(8)
-  $core.bool hasPositionThreshold() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearPositionThreshold() => $_clearField(8);
+  @$pb.TagNumber(18)
+  PositionAdjustmentStrategy get positionStrategy => $_getN(9);
+  @$pb.TagNumber(18)
+  set positionStrategy(PositionAdjustmentStrategy value) => $_setField(18, value);
+  @$pb.TagNumber(18)
+  $core.bool hasPositionStrategy() => $_has(9);
+  @$pb.TagNumber(18)
+  void clearPositionStrategy() => $_clearField(18);
 
-  @$pb.TagNumber(9)
-  PositionAdjustmentStrategy get positionStrategy => $_getN(8);
-  @$pb.TagNumber(9)
-  set positionStrategy(PositionAdjustmentStrategy value) => $_setField(9, value);
-  @$pb.TagNumber(9)
-  $core.bool hasPositionStrategy() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearPositionStrategy() => $_clearField(9);
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get positionThreshold => $_getI64(10);
+  @$pb.TagNumber(19)
+  set positionThreshold($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(19)
+  $core.bool hasPositionThreshold() => $_has(10);
+  @$pb.TagNumber(19)
+  void clearPositionThreshold() => $_clearField(19);
 
-  @$pb.TagNumber(10)
-  $core.double get positionAdjustmentStep => $_getN(9);
-  @$pb.TagNumber(10)
-  set positionAdjustmentStep($core.double value) => $_setFloat(9, value);
-  @$pb.TagNumber(10)
-  $core.bool hasPositionAdjustmentStep() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearPositionAdjustmentStep() => $_clearField(10);
-}
-
-/// 동적 offset 조정 런타임 상태
-class DynamicOffset extends $pb.GeneratedMessage {
-  factory DynamicOffset({
-    $fixnum.Int64? bidOffset,
-    $fixnum.Int64? askOffset,
-    $fixnum.Int64? netPosition,
-    $core.bool? isDynamic,
-  }) {
-    final result = create();
-    if (bidOffset != null) result.bidOffset = bidOffset;
-    if (askOffset != null) result.askOffset = askOffset;
-    if (netPosition != null) result.netPosition = netPosition;
-    if (isDynamic != null) result.isDynamic = isDynamic;
-    return result;
-  }
-
-  DynamicOffset._();
-
-  factory DynamicOffset.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory DynamicOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DynamicOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'bidOffset')
-    ..aInt64(2, _omitFieldNames ? '' : 'askOffset')
-    ..aInt64(3, _omitFieldNames ? '' : 'netPosition')
-    ..aOB(4, _omitFieldNames ? '' : 'isDynamic')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DynamicOffset clone() => DynamicOffset()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DynamicOffset copyWith(void Function(DynamicOffset) updates) => super.copyWith((message) => updates(message as DynamicOffset)) as DynamicOffset;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static DynamicOffset create() => DynamicOffset._();
-  @$core.override
-  DynamicOffset createEmptyInstance() => create();
-  static $pb.PbList<DynamicOffset> createRepeated() => $pb.PbList<DynamicOffset>();
-  @$core.pragma('dart2js:noInline')
-  static DynamicOffset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DynamicOffset>(create);
-  static DynamicOffset? _defaultInstance;
-
-  /// bid offset
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get bidOffset => $_getI64(0);
-  @$pb.TagNumber(1)
-  set bidOffset($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasBidOffset() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearBidOffset() => $_clearField(1);
-
-  /// ask offset
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get askOffset => $_getI64(1);
-  @$pb.TagNumber(2)
-  set askOffset($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasAskOffset() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearAskOffset() => $_clearField(2);
-
-  /// 순매매량 (+ = 순매수, - = 순매도)
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get netPosition => $_getI64(2);
-  @$pb.TagNumber(3)
-  set netPosition($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasNetPosition() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearNetPosition() => $_clearField(3);
-
-  /// 동적 조정 활성화 여부
-  @$pb.TagNumber(4)
-  $core.bool get isDynamic => $_getBF(3);
-  @$pb.TagNumber(4)
-  set isDynamic($core.bool value) => $_setBool(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasIsDynamic() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearIsDynamic() => $_clearField(4);
+  @$pb.TagNumber(20)
+  $core.double get positionAdjustmentStep => $_getN(11);
+  @$pb.TagNumber(20)
+  set positionAdjustmentStep($core.double value) => $_setFloat(11, value);
+  @$pb.TagNumber(20)
+  $core.bool hasPositionAdjustmentStep() => $_has(11);
+  @$pb.TagNumber(20)
+  void clearPositionAdjustmentStep() => $_clearField(20);
 }
 
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

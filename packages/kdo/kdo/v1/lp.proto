@@ -111,12 +111,6 @@ message EtfLp {
   // Fund
   string fund_code = 2;
 
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 bid_offset = 4;
-
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 ask_offset = 5;
-
   // Basis 스프레드 (원 단위, i64)
   int64 basis = 6;
 
@@ -130,7 +124,7 @@ message EtfLp {
   int64 tick_size = 9;
 
   // 동적 offset 조정 설정
-  OffsetAdjustmentConfig offset_adjustment_config = 10;
+  EtfLpOffset offset = 10;
 }
 
 // ========== ETF LP Status Messages ==========
@@ -159,10 +153,7 @@ message EtfLpStatus {
   FillStatistics fill_statistics = 10;
 
   // 동적 offset 조정 설정 (optional)
-  OffsetAdjustmentConfig offset_adjustment_config = 11;
-
-  // 동적 offset 조정 런타임 상태 (optional)
-  DynamicOffset dynamic_offset = 12;
+  EtfLpOffset offset = 11;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -189,10 +180,7 @@ message EtfLpStatusUpdate {
   optional FillStatistics fill_statistics = 10;
 
   // 동적 offset 조정 설정 (optional)
-  optional OffsetAdjustmentConfig offset_adjustment_config = 11;
-
-  // 동적 offset 조정 런타임 상태 (optional)
-  optional DynamicOffset dynamic_offset = 12;
+  optional EtfLpOffset offset = 11;
 }
 
 
@@ -208,34 +196,26 @@ enum PositionAdjustmentStrategy {
 }
 
 // 자동 offset 조정 설정
-message OffsetAdjustmentConfig {
+message EtfLpOffset {
+  //
+  int64 current_bid_offset = 1;
+  int64 current_ask_offset = 2;
+
   // NAV 밴드 설정
-  int64 min_offset = 1;
-  int64 max_offset = 2;
+  int64 min_offset = 3;
+  int64 max_offset = 4;
 
   // 시간 기반 조정
-  bool time_adjustment_enabled = 3;
-  uint64 adjustment_interval_secs = 4;
-  float adjustment_step = 5;
-  bool reset_on_fill = 6;
+  bool time_adjustment_enabled = 7;
+  uint64 adjustment_interval_secs = 8;
+  float adjustment_step = 9;
+  bool reset_on_fill = 10;
 
   // 순매매량 기반 조정
-  bool position_adjustment_enabled = 7;
-  int64 position_threshold = 8;
-  PositionAdjustmentStrategy position_strategy = 9;
-  float position_adjustment_step = 10;
-}
-
-// 동적 offset 조정 런타임 상태
-message DynamicOffset {
-  // bid offset
-  int64 bid_offset = 1;
-  // ask offset
-  int64 ask_offset = 2;
-  // 순매매량 (+ = 순매수, - = 순매도)
-  int64 net_position = 3;
-  // 동적 조정 활성화 여부
-  bool is_dynamic = 4;
+  bool position_adjustment_enabled = 17;
+  PositionAdjustmentStrategy position_strategy = 18;
+  int64 position_threshold = 19;
+  float position_adjustment_step = 20;
 }
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

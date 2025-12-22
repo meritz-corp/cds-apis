@@ -1,166 +1,4 @@
 // @generated
-impl serde::Serialize for DynamicOffset {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.DynamicOffset", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("net_position", ToString::to_string(&self.net_position).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("is_dynamic", &self.is_dynamic)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for DynamicOffset {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "bid_offset",
-            "bidOffset",
-            "ask_offset",
-            "askOffset",
-            "net_position",
-            "netPosition",
-            "is_dynamic",
-            "isDynamic",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            BidOffset,
-            AskOffset,
-            NetPosition,
-            IsDynamic,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
-                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
-                            "netPosition" | "net_position" => Ok(GeneratedField::NetPosition),
-                            "isDynamic" | "is_dynamic" => Ok(GeneratedField::IsDynamic),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = DynamicOffset;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.DynamicOffset")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DynamicOffset, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut bid_offset__ = None;
-                let mut ask_offset__ = None;
-                let mut net_position__ = None;
-                let mut is_dynamic__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::BidOffset => {
-                            if bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffset"));
-                            }
-                            bid_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskOffset => {
-                            if ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffset"));
-                            }
-                            ask_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::NetPosition => {
-                            if net_position__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("netPosition"));
-                            }
-                            net_position__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::IsDynamic => {
-                            if is_dynamic__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("isDynamic"));
-                            }
-                            is_dynamic__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(DynamicOffset {
-                    bid_offset: bid_offset__.unwrap_or_default(),
-                    ask_offset: ask_offset__.unwrap_or_default(),
-                    net_position: net_position__.unwrap_or_default(),
-                    is_dynamic: is_dynamic__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.DynamicOffset", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for EtfLp {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -169,12 +7,6 @@ impl serde::Serialize for EtfLp {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         if true {
             len += 1;
         }
@@ -206,16 +38,6 @@ impl serde::Serialize for EtfLp {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
         }
         if true {
@@ -231,8 +53,8 @@ impl serde::Serialize for EtfLp {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
         }
-        if let Some(v) = self.offset_adjustment_config.as_ref() {
-            struct_ser.serialize_field("offset_adjustment_config", v)?;
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
         }
         struct_ser.end()
     }
@@ -247,30 +69,23 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "symbol",
             "fund_code",
             "fundCode",
-            "bid_offset",
-            "bidOffset",
-            "ask_offset",
-            "askOffset",
             "basis",
             "quantity",
             "depth",
             "tick_size",
             "tickSize",
-            "offset_adjustment_config",
-            "offsetAdjustmentConfig",
+            "offset",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
             FundCode,
-            BidOffset,
-            AskOffset,
             Basis,
             Quantity,
             Depth,
             TickSize,
-            OffsetAdjustmentConfig,
+            Offset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -295,13 +110,11 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
-                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "basis" => Ok(GeneratedField::Basis),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
-                            "offsetAdjustmentConfig" | "offset_adjustment_config" => Ok(GeneratedField::OffsetAdjustmentConfig),
+                            "offset" => Ok(GeneratedField::Offset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -323,13 +136,11 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             {
                 let mut symbol__ = None;
                 let mut fund_code__ = None;
-                let mut bid_offset__ = None;
-                let mut ask_offset__ = None;
                 let mut basis__ = None;
                 let mut quantity__ = None;
                 let mut depth__ = None;
                 let mut tick_size__ = None;
-                let mut offset_adjustment_config__ = None;
+                let mut offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -343,22 +154,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
                             fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::BidOffset => {
-                            if bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffset"));
-                            }
-                            bid_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskOffset => {
-                            if ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffset"));
-                            }
-                            ask_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::Basis => {
                             if basis__.is_some() {
@@ -392,11 +187,11 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::OffsetAdjustmentConfig => {
-                            if offset_adjustment_config__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offsetAdjustmentConfig"));
+                        GeneratedField::Offset => {
+                            if offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
                             }
-                            offset_adjustment_config__ = map_.next_value()?;
+                            offset__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -406,13 +201,11 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 Ok(EtfLp {
                     symbol: symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    bid_offset: bid_offset__.unwrap_or_default(),
-                    ask_offset: ask_offset__.unwrap_or_default(),
                     basis: basis__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
-                    offset_adjustment_config: offset_adjustment_config__,
+                    offset: offset__,
                 })
             }
         }
@@ -606,6 +399,330 @@ impl<'de> serde::Deserialize<'de> for EtfLpEvent {
         deserializer.deserialize_struct("kdo.v1.lp.EtfLpEvent", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for EtfLpOffset {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpOffset", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_bid_offset", ToString::to_string(&self.current_bid_offset).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_ask_offset", ToString::to_string(&self.current_ask_offset).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("min_offset", ToString::to_string(&self.min_offset).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_offset", ToString::to_string(&self.max_offset).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("time_adjustment_enabled", &self.time_adjustment_enabled)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("adjustment_interval_secs", ToString::to_string(&self.adjustment_interval_secs).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("adjustment_step", &self.adjustment_step)?;
+        }
+        if true {
+            struct_ser.serialize_field("reset_on_fill", &self.reset_on_fill)?;
+        }
+        if true {
+            struct_ser.serialize_field("position_adjustment_enabled", &self.position_adjustment_enabled)?;
+        }
+        if true {
+            let v = PositionAdjustmentStrategy::try_from(self.position_strategy)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.position_strategy)))?;
+            struct_ser.serialize_field("position_strategy", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("position_threshold", ToString::to_string(&self.position_threshold).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("position_adjustment_step", &self.position_adjustment_step)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpOffset {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "current_bid_offset",
+            "currentBidOffset",
+            "current_ask_offset",
+            "currentAskOffset",
+            "min_offset",
+            "minOffset",
+            "max_offset",
+            "maxOffset",
+            "time_adjustment_enabled",
+            "timeAdjustmentEnabled",
+            "adjustment_interval_secs",
+            "adjustmentIntervalSecs",
+            "adjustment_step",
+            "adjustmentStep",
+            "reset_on_fill",
+            "resetOnFill",
+            "position_adjustment_enabled",
+            "positionAdjustmentEnabled",
+            "position_strategy",
+            "positionStrategy",
+            "position_threshold",
+            "positionThreshold",
+            "position_adjustment_step",
+            "positionAdjustmentStep",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            CurrentBidOffset,
+            CurrentAskOffset,
+            MinOffset,
+            MaxOffset,
+            TimeAdjustmentEnabled,
+            AdjustmentIntervalSecs,
+            AdjustmentStep,
+            ResetOnFill,
+            PositionAdjustmentEnabled,
+            PositionStrategy,
+            PositionThreshold,
+            PositionAdjustmentStep,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "currentBidOffset" | "current_bid_offset" => Ok(GeneratedField::CurrentBidOffset),
+                            "currentAskOffset" | "current_ask_offset" => Ok(GeneratedField::CurrentAskOffset),
+                            "minOffset" | "min_offset" => Ok(GeneratedField::MinOffset),
+                            "maxOffset" | "max_offset" => Ok(GeneratedField::MaxOffset),
+                            "timeAdjustmentEnabled" | "time_adjustment_enabled" => Ok(GeneratedField::TimeAdjustmentEnabled),
+                            "adjustmentIntervalSecs" | "adjustment_interval_secs" => Ok(GeneratedField::AdjustmentIntervalSecs),
+                            "adjustmentStep" | "adjustment_step" => Ok(GeneratedField::AdjustmentStep),
+                            "resetOnFill" | "reset_on_fill" => Ok(GeneratedField::ResetOnFill),
+                            "positionAdjustmentEnabled" | "position_adjustment_enabled" => Ok(GeneratedField::PositionAdjustmentEnabled),
+                            "positionStrategy" | "position_strategy" => Ok(GeneratedField::PositionStrategy),
+                            "positionThreshold" | "position_threshold" => Ok(GeneratedField::PositionThreshold),
+                            "positionAdjustmentStep" | "position_adjustment_step" => Ok(GeneratedField::PositionAdjustmentStep),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpOffset;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpOffset")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpOffset, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut current_bid_offset__ = None;
+                let mut current_ask_offset__ = None;
+                let mut min_offset__ = None;
+                let mut max_offset__ = None;
+                let mut time_adjustment_enabled__ = None;
+                let mut adjustment_interval_secs__ = None;
+                let mut adjustment_step__ = None;
+                let mut reset_on_fill__ = None;
+                let mut position_adjustment_enabled__ = None;
+                let mut position_strategy__ = None;
+                let mut position_threshold__ = None;
+                let mut position_adjustment_step__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::CurrentBidOffset => {
+                            if current_bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentBidOffset"));
+                            }
+                            current_bid_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentAskOffset => {
+                            if current_ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentAskOffset"));
+                            }
+                            current_ask_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MinOffset => {
+                            if min_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minOffset"));
+                            }
+                            min_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxOffset => {
+                            if max_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxOffset"));
+                            }
+                            max_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TimeAdjustmentEnabled => {
+                            if time_adjustment_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("timeAdjustmentEnabled"));
+                            }
+                            time_adjustment_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AdjustmentIntervalSecs => {
+                            if adjustment_interval_secs__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("adjustmentIntervalSecs"));
+                            }
+                            adjustment_interval_secs__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AdjustmentStep => {
+                            if adjustment_step__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("adjustmentStep"));
+                            }
+                            adjustment_step__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ResetOnFill => {
+                            if reset_on_fill__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("resetOnFill"));
+                            }
+                            reset_on_fill__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PositionAdjustmentEnabled => {
+                            if position_adjustment_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionAdjustmentEnabled"));
+                            }
+                            position_adjustment_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PositionStrategy => {
+                            if position_strategy__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionStrategy"));
+                            }
+                            position_strategy__ = Some(map_.next_value::<PositionAdjustmentStrategy>()? as i32);
+                        }
+                        GeneratedField::PositionThreshold => {
+                            if position_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionThreshold"));
+                            }
+                            position_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PositionAdjustmentStep => {
+                            if position_adjustment_step__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionAdjustmentStep"));
+                            }
+                            position_adjustment_step__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpOffset {
+                    current_bid_offset: current_bid_offset__.unwrap_or_default(),
+                    current_ask_offset: current_ask_offset__.unwrap_or_default(),
+                    min_offset: min_offset__.unwrap_or_default(),
+                    max_offset: max_offset__.unwrap_or_default(),
+                    time_adjustment_enabled: time_adjustment_enabled__.unwrap_or_default(),
+                    adjustment_interval_secs: adjustment_interval_secs__.unwrap_or_default(),
+                    adjustment_step: adjustment_step__.unwrap_or_default(),
+                    reset_on_fill: reset_on_fill__.unwrap_or_default(),
+                    position_adjustment_enabled: position_adjustment_enabled__.unwrap_or_default(),
+                    position_strategy: position_strategy__.unwrap_or_default(),
+                    position_threshold: position_threshold__.unwrap_or_default(),
+                    position_adjustment_step: position_adjustment_step__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpOffset", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for EtfLpState {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -718,9 +835,6 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -749,11 +863,8 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.fill_statistics.as_ref() {
             struct_ser.serialize_field("fill_statistics", v)?;
         }
-        if let Some(v) = self.offset_adjustment_config.as_ref() {
-            struct_ser.serialize_field("offset_adjustment_config", v)?;
-        }
-        if let Some(v) = self.dynamic_offset.as_ref() {
-            struct_ser.serialize_field("dynamic_offset", v)?;
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
         }
         struct_ser.end()
     }
@@ -775,10 +886,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "pricing",
             "fill_statistics",
             "fillStatistics",
-            "offset_adjustment_config",
-            "offsetAdjustmentConfig",
-            "dynamic_offset",
-            "dynamicOffset",
+            "offset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -790,8 +898,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             State,
             Pricing,
             FillStatistics,
-            OffsetAdjustmentConfig,
-            DynamicOffset,
+            Offset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -821,8 +928,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
-                            "offsetAdjustmentConfig" | "offset_adjustment_config" => Ok(GeneratedField::OffsetAdjustmentConfig),
-                            "dynamicOffset" | "dynamic_offset" => Ok(GeneratedField::DynamicOffset),
+                            "offset" => Ok(GeneratedField::Offset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -849,8 +955,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
-                let mut offset_adjustment_config__ = None;
-                let mut dynamic_offset__ = None;
+                let mut offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -899,17 +1004,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             fill_statistics__ = map_.next_value()?;
                         }
-                        GeneratedField::OffsetAdjustmentConfig => {
-                            if offset_adjustment_config__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offsetAdjustmentConfig"));
+                        GeneratedField::Offset => {
+                            if offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
                             }
-                            offset_adjustment_config__ = map_.next_value()?;
-                        }
-                        GeneratedField::DynamicOffset => {
-                            if dynamic_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dynamicOffset"));
-                            }
-                            dynamic_offset__ = map_.next_value()?;
+                            offset__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -924,8 +1023,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     state: state__.unwrap_or_default(),
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
-                    offset_adjustment_config: offset_adjustment_config__,
-                    dynamic_offset: dynamic_offset__,
+                    offset: offset__,
                 })
             }
         }
@@ -940,9 +1038,6 @@ impl serde::Serialize for EtfLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if true {
-            len += 1;
-        }
         if true {
             len += 1;
         }
@@ -995,11 +1090,8 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.fill_statistics.as_ref() {
             struct_ser.serialize_field("fill_statistics", v)?;
         }
-        if let Some(v) = self.offset_adjustment_config.as_ref() {
-            struct_ser.serialize_field("offset_adjustment_config", v)?;
-        }
-        if let Some(v) = self.dynamic_offset.as_ref() {
-            struct_ser.serialize_field("dynamic_offset", v)?;
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
         }
         struct_ser.end()
     }
@@ -1021,10 +1113,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "pricing",
             "fill_statistics",
             "fillStatistics",
-            "offset_adjustment_config",
-            "offsetAdjustmentConfig",
-            "dynamic_offset",
-            "dynamicOffset",
+            "offset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1036,8 +1125,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             State,
             Pricing,
             FillStatistics,
-            OffsetAdjustmentConfig,
-            DynamicOffset,
+            Offset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1067,8 +1155,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
-                            "offsetAdjustmentConfig" | "offset_adjustment_config" => Ok(GeneratedField::OffsetAdjustmentConfig),
-                            "dynamicOffset" | "dynamic_offset" => Ok(GeneratedField::DynamicOffset),
+                            "offset" => Ok(GeneratedField::Offset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1095,8 +1182,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
-                let mut offset_adjustment_config__ = None;
-                let mut dynamic_offset__ = None;
+                let mut offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1145,17 +1231,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             }
                             fill_statistics__ = map_.next_value()?;
                         }
-                        GeneratedField::OffsetAdjustmentConfig => {
-                            if offset_adjustment_config__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offsetAdjustmentConfig"));
+                        GeneratedField::Offset => {
+                            if offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
                             }
-                            offset_adjustment_config__ = map_.next_value()?;
-                        }
-                        GeneratedField::DynamicOffset => {
-                            if dynamic_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dynamicOffset"));
-                            }
-                            dynamic_offset__ = map_.next_value()?;
+                            offset__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1170,8 +1250,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     state: state__,
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
-                    offset_adjustment_config: offset_adjustment_config__,
-                    dynamic_offset: dynamic_offset__,
+                    offset: offset__,
                 })
             }
         }
@@ -2489,286 +2568,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lp.LpPricing", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for OffsetAdjustmentConfig {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.OffsetAdjustmentConfig", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("min_offset", ToString::to_string(&self.min_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("max_offset", ToString::to_string(&self.max_offset).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("time_adjustment_enabled", &self.time_adjustment_enabled)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("adjustment_interval_secs", ToString::to_string(&self.adjustment_interval_secs).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("adjustment_step", &self.adjustment_step)?;
-        }
-        if true {
-            struct_ser.serialize_field("reset_on_fill", &self.reset_on_fill)?;
-        }
-        if true {
-            struct_ser.serialize_field("position_adjustment_enabled", &self.position_adjustment_enabled)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("position_threshold", ToString::to_string(&self.position_threshold).as_str())?;
-        }
-        if true {
-            let v = PositionAdjustmentStrategy::try_from(self.position_strategy)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.position_strategy)))?;
-            struct_ser.serialize_field("position_strategy", &v)?;
-        }
-        if true {
-            struct_ser.serialize_field("position_adjustment_step", &self.position_adjustment_step)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for OffsetAdjustmentConfig {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "min_offset",
-            "minOffset",
-            "max_offset",
-            "maxOffset",
-            "time_adjustment_enabled",
-            "timeAdjustmentEnabled",
-            "adjustment_interval_secs",
-            "adjustmentIntervalSecs",
-            "adjustment_step",
-            "adjustmentStep",
-            "reset_on_fill",
-            "resetOnFill",
-            "position_adjustment_enabled",
-            "positionAdjustmentEnabled",
-            "position_threshold",
-            "positionThreshold",
-            "position_strategy",
-            "positionStrategy",
-            "position_adjustment_step",
-            "positionAdjustmentStep",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            MinOffset,
-            MaxOffset,
-            TimeAdjustmentEnabled,
-            AdjustmentIntervalSecs,
-            AdjustmentStep,
-            ResetOnFill,
-            PositionAdjustmentEnabled,
-            PositionThreshold,
-            PositionStrategy,
-            PositionAdjustmentStep,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "minOffset" | "min_offset" => Ok(GeneratedField::MinOffset),
-                            "maxOffset" | "max_offset" => Ok(GeneratedField::MaxOffset),
-                            "timeAdjustmentEnabled" | "time_adjustment_enabled" => Ok(GeneratedField::TimeAdjustmentEnabled),
-                            "adjustmentIntervalSecs" | "adjustment_interval_secs" => Ok(GeneratedField::AdjustmentIntervalSecs),
-                            "adjustmentStep" | "adjustment_step" => Ok(GeneratedField::AdjustmentStep),
-                            "resetOnFill" | "reset_on_fill" => Ok(GeneratedField::ResetOnFill),
-                            "positionAdjustmentEnabled" | "position_adjustment_enabled" => Ok(GeneratedField::PositionAdjustmentEnabled),
-                            "positionThreshold" | "position_threshold" => Ok(GeneratedField::PositionThreshold),
-                            "positionStrategy" | "position_strategy" => Ok(GeneratedField::PositionStrategy),
-                            "positionAdjustmentStep" | "position_adjustment_step" => Ok(GeneratedField::PositionAdjustmentStep),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = OffsetAdjustmentConfig;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.OffsetAdjustmentConfig")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OffsetAdjustmentConfig, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut min_offset__ = None;
-                let mut max_offset__ = None;
-                let mut time_adjustment_enabled__ = None;
-                let mut adjustment_interval_secs__ = None;
-                let mut adjustment_step__ = None;
-                let mut reset_on_fill__ = None;
-                let mut position_adjustment_enabled__ = None;
-                let mut position_threshold__ = None;
-                let mut position_strategy__ = None;
-                let mut position_adjustment_step__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::MinOffset => {
-                            if min_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("minOffset"));
-                            }
-                            min_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MaxOffset => {
-                            if max_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxOffset"));
-                            }
-                            max_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::TimeAdjustmentEnabled => {
-                            if time_adjustment_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("timeAdjustmentEnabled"));
-                            }
-                            time_adjustment_enabled__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::AdjustmentIntervalSecs => {
-                            if adjustment_interval_secs__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("adjustmentIntervalSecs"));
-                            }
-                            adjustment_interval_secs__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AdjustmentStep => {
-                            if adjustment_step__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("adjustmentStep"));
-                            }
-                            adjustment_step__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ResetOnFill => {
-                            if reset_on_fill__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("resetOnFill"));
-                            }
-                            reset_on_fill__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::PositionAdjustmentEnabled => {
-                            if position_adjustment_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionAdjustmentEnabled"));
-                            }
-                            position_adjustment_enabled__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::PositionThreshold => {
-                            if position_threshold__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionThreshold"));
-                            }
-                            position_threshold__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::PositionStrategy => {
-                            if position_strategy__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionStrategy"));
-                            }
-                            position_strategy__ = Some(map_.next_value::<PositionAdjustmentStrategy>()? as i32);
-                        }
-                        GeneratedField::PositionAdjustmentStep => {
-                            if position_adjustment_step__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionAdjustmentStep"));
-                            }
-                            position_adjustment_step__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(OffsetAdjustmentConfig {
-                    min_offset: min_offset__.unwrap_or_default(),
-                    max_offset: max_offset__.unwrap_or_default(),
-                    time_adjustment_enabled: time_adjustment_enabled__.unwrap_or_default(),
-                    adjustment_interval_secs: adjustment_interval_secs__.unwrap_or_default(),
-                    adjustment_step: adjustment_step__.unwrap_or_default(),
-                    reset_on_fill: reset_on_fill__.unwrap_or_default(),
-                    position_adjustment_enabled: position_adjustment_enabled__.unwrap_or_default(),
-                    position_threshold: position_threshold__.unwrap_or_default(),
-                    position_strategy: position_strategy__.unwrap_or_default(),
-                    position_adjustment_step: position_adjustment_step__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.OffsetAdjustmentConfig", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for OrderLimitStatus {

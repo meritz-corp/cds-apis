@@ -127,24 +127,20 @@ const EtfLp$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
-    {'1': 'bid_offset', '3': 4, '4': 1, '5': 3, '10': 'bidOffset'},
-    {'1': 'ask_offset', '3': 5, '4': 1, '5': 3, '10': 'askOffset'},
     {'1': 'basis', '3': 6, '4': 1, '5': 3, '10': 'basis'},
     {'1': 'quantity', '3': 7, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'depth', '3': 8, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
-    {'1': 'offset_adjustment_config', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.OffsetAdjustmentConfig', '10': 'offsetAdjustmentConfig'},
+    {'1': 'offset', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
   ],
 };
 
 /// Descriptor for `EtfLp`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'CgVFdGZMcBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bm'
-    'RDb2RlEh0KCmJpZF9vZmZzZXQYBCABKANSCWJpZE9mZnNldBIdCgphc2tfb2Zmc2V0GAUgASgD'
-    'Uglhc2tPZmZzZXQSFAoFYmFzaXMYBiABKANSBWJhc2lzEhoKCHF1YW50aXR5GAcgASgDUghxdW'
-    'FudGl0eRIUCgVkZXB0aBgIIAEoDVIFZGVwdGgSGwoJdGlja19zaXplGAkgASgDUgh0aWNrU2l6'
-    'ZRJbChhvZmZzZXRfYWRqdXN0bWVudF9jb25maWcYCiABKAsyIS5rZG8udjEubHAuT2Zmc2V0QW'
-    'RqdXN0bWVudENvbmZpZ1IWb2Zmc2V0QWRqdXN0bWVudENvbmZpZw==');
+    'RDb2RlEhQKBWJhc2lzGAYgASgDUgViYXNpcxIaCghxdWFudGl0eRgHIAEoA1IIcXVhbnRpdHkS'
+    'FAoFZGVwdGgYCCABKA1SBWRlcHRoEhsKCXRpY2tfc2l6ZRgJIAEoA1IIdGlja1NpemUSLgoGb2'
+    'Zmc2V0GAogASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQ=');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {
@@ -157,8 +153,7 @@ const EtfLpStatus$json = {
     {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
-    {'1': 'offset_adjustment_config', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.OffsetAdjustmentConfig', '10': 'offsetAdjustmentConfig'},
-    {'1': 'dynamic_offset', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.DynamicOffset', '10': 'dynamicOffset'},
+    {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
   ],
 };
 
@@ -169,9 +164,7 @@ final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'KANSCHF1YW50aXR5EisKBXN0YXRlGAggASgOMhUua2RvLnYxLmxwLkV0ZkxwU3RhdGVSBXN0YX'
     'RlEi4KB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQcmljaW5nUgdwcmljaW5nEkIKD2Zp'
     'bGxfc3RhdGlzdGljcxgKIAEoCzIZLmtkby52MS5scC5GaWxsU3RhdGlzdGljc1IOZmlsbFN0YX'
-    'Rpc3RpY3MSWwoYb2Zmc2V0X2FkanVzdG1lbnRfY29uZmlnGAsgASgLMiEua2RvLnYxLmxwLk9m'
-    'ZnNldEFkanVzdG1lbnRDb25maWdSFm9mZnNldEFkanVzdG1lbnRDb25maWcSPwoOZHluYW1pY1'
-    '9vZmZzZXQYDCABKAsyGC5rZG8udjEubHAuRHluYW1pY09mZnNldFINZHluYW1pY09mZnNldA==');
+    'Rpc3RpY3MSLgoGb2Zmc2V0GAsgASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQ=');
 
 @$core.Deprecated('Use etfLpStatusUpdateDescriptor instead')
 const EtfLpStatusUpdate$json = {
@@ -184,8 +177,7 @@ const EtfLpStatusUpdate$json = {
     {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '9': 2, '10': 'state', '17': true},
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '9': 3, '10': 'pricing', '17': true},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '9': 4, '10': 'fillStatistics', '17': true},
-    {'1': 'offset_adjustment_config', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.OffsetAdjustmentConfig', '9': 5, '10': 'offsetAdjustmentConfig', '17': true},
-    {'1': 'dynamic_offset', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.DynamicOffset', '9': 6, '10': 'dynamicOffset', '17': true},
+    {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 5, '10': 'offset', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -193,8 +185,7 @@ const EtfLpStatusUpdate$json = {
     {'1': '_state'},
     {'1': '_pricing'},
     {'1': '_fill_statistics'},
-    {'1': '_offset_adjustment_config'},
-    {'1': '_dynamic_offset'},
+    {'1': '_offset'},
   ],
 };
 
@@ -205,59 +196,43 @@ final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
     'dWFudGl0eRgHIAEoA0gBUghxdWFudGl0eYgBARIwCgVzdGF0ZRgIIAEoDjIVLmtkby52MS5scC'
     '5FdGZMcFN0YXRlSAJSBXN0YXRliAEBEjMKB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQ'
     'cmljaW5nSANSB3ByaWNpbmeIAQESRwoPZmlsbF9zdGF0aXN0aWNzGAogASgLMhkua2RvLnYxLm'
-    'xwLkZpbGxTdGF0aXN0aWNzSARSDmZpbGxTdGF0aXN0aWNziAEBEmAKGG9mZnNldF9hZGp1c3Rt'
-    'ZW50X2NvbmZpZxgLIAEoCzIhLmtkby52MS5scC5PZmZzZXRBZGp1c3RtZW50Q29uZmlnSAVSFm'
-    '9mZnNldEFkanVzdG1lbnRDb25maWeIAQESRAoOZHluYW1pY19vZmZzZXQYDCABKAsyGC5rZG8u'
-    'djEubHAuRHluYW1pY09mZnNldEgGUg1keW5hbWljT2Zmc2V0iAEBQggKBl9iYXNpc0ILCglfcX'
-    'VhbnRpdHlCCAoGX3N0YXRlQgoKCF9wcmljaW5nQhIKEF9maWxsX3N0YXRpc3RpY3NCGwoZX29m'
-    'ZnNldF9hZGp1c3RtZW50X2NvbmZpZ0IRCg9fZHluYW1pY19vZmZzZXQ=');
+    'xwLkZpbGxTdGF0aXN0aWNzSARSDmZpbGxTdGF0aXN0aWNziAEBEjMKBm9mZnNldBgLIAEoCzIW'
+    'Lmtkby52MS5scC5FdGZMcE9mZnNldEgFUgZvZmZzZXSIAQFCCAoGX2Jhc2lzQgsKCV9xdWFudG'
+    'l0eUIICgZfc3RhdGVCCgoIX3ByaWNpbmdCEgoQX2ZpbGxfc3RhdGlzdGljc0IJCgdfb2Zmc2V0');
 
-@$core.Deprecated('Use offsetAdjustmentConfigDescriptor instead')
-const OffsetAdjustmentConfig$json = {
-  '1': 'OffsetAdjustmentConfig',
+@$core.Deprecated('Use etfLpOffsetDescriptor instead')
+const EtfLpOffset$json = {
+  '1': 'EtfLpOffset',
   '2': [
-    {'1': 'min_offset', '3': 1, '4': 1, '5': 3, '10': 'minOffset'},
-    {'1': 'max_offset', '3': 2, '4': 1, '5': 3, '10': 'maxOffset'},
-    {'1': 'time_adjustment_enabled', '3': 3, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
-    {'1': 'adjustment_interval_secs', '3': 4, '4': 1, '5': 4, '10': 'adjustmentIntervalSecs'},
-    {'1': 'adjustment_step', '3': 5, '4': 1, '5': 2, '10': 'adjustmentStep'},
-    {'1': 'reset_on_fill', '3': 6, '4': 1, '5': 8, '10': 'resetOnFill'},
-    {'1': 'position_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'positionAdjustmentEnabled'},
-    {'1': 'position_threshold', '3': 8, '4': 1, '5': 3, '10': 'positionThreshold'},
-    {'1': 'position_strategy', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.lp.PositionAdjustmentStrategy', '10': 'positionStrategy'},
-    {'1': 'position_adjustment_step', '3': 10, '4': 1, '5': 2, '10': 'positionAdjustmentStep'},
+    {'1': 'current_bid_offset', '3': 1, '4': 1, '5': 3, '10': 'currentBidOffset'},
+    {'1': 'current_ask_offset', '3': 2, '4': 1, '5': 3, '10': 'currentAskOffset'},
+    {'1': 'min_offset', '3': 3, '4': 1, '5': 3, '10': 'minOffset'},
+    {'1': 'max_offset', '3': 4, '4': 1, '5': 3, '10': 'maxOffset'},
+    {'1': 'time_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
+    {'1': 'adjustment_interval_secs', '3': 8, '4': 1, '5': 4, '10': 'adjustmentIntervalSecs'},
+    {'1': 'adjustment_step', '3': 9, '4': 1, '5': 2, '10': 'adjustmentStep'},
+    {'1': 'reset_on_fill', '3': 10, '4': 1, '5': 8, '10': 'resetOnFill'},
+    {'1': 'position_adjustment_enabled', '3': 17, '4': 1, '5': 8, '10': 'positionAdjustmentEnabled'},
+    {'1': 'position_strategy', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.lp.PositionAdjustmentStrategy', '10': 'positionStrategy'},
+    {'1': 'position_threshold', '3': 19, '4': 1, '5': 3, '10': 'positionThreshold'},
+    {'1': 'position_adjustment_step', '3': 20, '4': 1, '5': 2, '10': 'positionAdjustmentStep'},
   ],
 };
 
-/// Descriptor for `OffsetAdjustmentConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List offsetAdjustmentConfigDescriptor = $convert.base64Decode(
-    'ChZPZmZzZXRBZGp1c3RtZW50Q29uZmlnEh0KCm1pbl9vZmZzZXQYASABKANSCW1pbk9mZnNldB'
-    'IdCgptYXhfb2Zmc2V0GAIgASgDUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJs'
-    'ZWQYAyABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3'
-    'NlY3MYBCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAUg'
-    'ASgCUg5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAYgASgIUgtyZXNldE9uRmlsbB'
-    'I+Chtwb3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWQYByABKAhSGXBvc2l0aW9uQWRqdXN0bWVu'
-    'dEVuYWJsZWQSLQoScG9zaXRpb25fdGhyZXNob2xkGAggASgDUhFwb3NpdGlvblRocmVzaG9sZB'
-    'JSChFwb3NpdGlvbl9zdHJhdGVneRgJIAEoDjIlLmtkby52MS5scC5Qb3NpdGlvbkFkanVzdG1l'
-    'bnRTdHJhdGVneVIQcG9zaXRpb25TdHJhdGVneRI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZX'
-    'AYCiABKAJSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
-
-@$core.Deprecated('Use dynamicOffsetDescriptor instead')
-const DynamicOffset$json = {
-  '1': 'DynamicOffset',
-  '2': [
-    {'1': 'bid_offset', '3': 1, '4': 1, '5': 3, '10': 'bidOffset'},
-    {'1': 'ask_offset', '3': 2, '4': 1, '5': 3, '10': 'askOffset'},
-    {'1': 'net_position', '3': 3, '4': 1, '5': 3, '10': 'netPosition'},
-    {'1': 'is_dynamic', '3': 4, '4': 1, '5': 8, '10': 'isDynamic'},
-  ],
-};
-
-/// Descriptor for `DynamicOffset`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dynamicOffsetDescriptor = $convert.base64Decode(
-    'Cg1EeW5hbWljT2Zmc2V0Eh0KCmJpZF9vZmZzZXQYASABKANSCWJpZE9mZnNldBIdCgphc2tfb2'
-    'Zmc2V0GAIgASgDUglhc2tPZmZzZXQSIQoMbmV0X3Bvc2l0aW9uGAMgASgDUgtuZXRQb3NpdGlv'
-    'bhIdCgppc19keW5hbWljGAQgASgIUglpc0R5bmFtaWM=');
+/// Descriptor for `EtfLpOffset`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
+    'CgtFdGZMcE9mZnNldBIsChJjdXJyZW50X2JpZF9vZmZzZXQYASABKANSEGN1cnJlbnRCaWRPZm'
+    'ZzZXQSLAoSY3VycmVudF9hc2tfb2Zmc2V0GAIgASgDUhBjdXJyZW50QXNrT2Zmc2V0Eh0KCm1p'
+    'bl9vZmZzZXQYAyABKANSCW1pbk9mZnNldBIdCgptYXhfb2Zmc2V0GAQgASgDUgltYXhPZmZzZX'
+    'QSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYByABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxl'
+    'ZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MYCCABKARSFmFkanVzdG1lbnRJbnRlcnZhbF'
+    'NlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgCUg5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9v'
+    'bl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtwb3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZW'
+    'QYESABKAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYWJsZWQSUgoRcG9zaXRpb25fc3RyYXRlZ3kY'
+    'EiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3'
+    'RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGBMgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4'
+    'Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCABKAJSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZX'
+    'A=');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {
