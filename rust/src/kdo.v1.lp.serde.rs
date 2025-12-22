@@ -1,5 +1,5 @@
 // @generated
-impl serde::Serialize for DynamicOffsetState {
+impl serde::Serialize for DynamicOffset {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -19,16 +19,16 @@ impl serde::Serialize for DynamicOffsetState {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.DynamicOffsetState", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.DynamicOffset", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_bid_offset", ToString::to_string(&self.current_bid_offset).as_str())?;
+            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_ask_offset", ToString::to_string(&self.current_ask_offset).as_str())?;
+            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -36,34 +36,34 @@ impl serde::Serialize for DynamicOffsetState {
             struct_ser.serialize_field("net_position", ToString::to_string(&self.net_position).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("is_active", &self.is_active)?;
+            struct_ser.serialize_field("is_dynamic", &self.is_dynamic)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for DynamicOffsetState {
+impl<'de> serde::Deserialize<'de> for DynamicOffset {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "current_bid_offset",
-            "currentBidOffset",
-            "current_ask_offset",
-            "currentAskOffset",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
             "net_position",
             "netPosition",
-            "is_active",
-            "isActive",
+            "is_dynamic",
+            "isDynamic",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            CurrentBidOffset,
-            CurrentAskOffset,
+            BidOffset,
+            AskOffset,
             NetPosition,
-            IsActive,
+            IsDynamic,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -86,10 +86,10 @@ impl<'de> serde::Deserialize<'de> for DynamicOffsetState {
                         E: serde::de::Error,
                     {
                         match value {
-                            "currentBidOffset" | "current_bid_offset" => Ok(GeneratedField::CurrentBidOffset),
-                            "currentAskOffset" | "current_ask_offset" => Ok(GeneratedField::CurrentAskOffset),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "netPosition" | "net_position" => Ok(GeneratedField::NetPosition),
-                            "isActive" | "is_active" => Ok(GeneratedField::IsActive),
+                            "isDynamic" | "is_dynamic" => Ok(GeneratedField::IsDynamic),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -99,35 +99,35 @@ impl<'de> serde::Deserialize<'de> for DynamicOffsetState {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = DynamicOffsetState;
+            type Value = DynamicOffset;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.DynamicOffsetState")
+                formatter.write_str("struct kdo.v1.lp.DynamicOffset")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DynamicOffsetState, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DynamicOffset, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut current_bid_offset__ = None;
-                let mut current_ask_offset__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 let mut net_position__ = None;
-                let mut is_active__ = None;
+                let mut is_dynamic__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::CurrentBidOffset => {
-                            if current_bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentBidOffset"));
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
                             }
-                            current_bid_offset__ = 
+                            bid_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::CurrentAskOffset => {
-                            if current_ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentAskOffset"));
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
                             }
-                            current_ask_offset__ = 
+                            ask_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -139,26 +139,26 @@ impl<'de> serde::Deserialize<'de> for DynamicOffsetState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::IsActive => {
-                            if is_active__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("isActive"));
+                        GeneratedField::IsDynamic => {
+                            if is_dynamic__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("isDynamic"));
                             }
-                            is_active__ = Some(map_.next_value()?);
+                            is_dynamic__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(DynamicOffsetState {
-                    current_bid_offset: current_bid_offset__.unwrap_or_default(),
-                    current_ask_offset: current_ask_offset__.unwrap_or_default(),
+                Ok(DynamicOffset {
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
                     net_position: net_position__.unwrap_or_default(),
-                    is_active: is_active__.unwrap_or_default(),
+                    is_dynamic: is_dynamic__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.DynamicOffsetState", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.DynamicOffset", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for EtfLp {
@@ -721,28 +721,12 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -768,8 +752,8 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.offset_adjustment_config.as_ref() {
             struct_ser.serialize_field("offset_adjustment_config", v)?;
         }
-        if let Some(v) = self.dynamic_offset_state.as_ref() {
-            struct_ser.serialize_field("dynamic_offset_state", v)?;
+        if let Some(v) = self.dynamic_offset.as_ref() {
+            struct_ser.serialize_field("dynamic_offset", v)?;
         }
         struct_ser.end()
     }
@@ -785,10 +769,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "etfSymbol",
             "fund_code",
             "fundCode",
-            "bid_offset",
-            "bidOffset",
-            "ask_offset",
-            "askOffset",
             "basis",
             "quantity",
             "state",
@@ -797,23 +777,21 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "fillStatistics",
             "offset_adjustment_config",
             "offsetAdjustmentConfig",
-            "dynamic_offset_state",
-            "dynamicOffsetState",
+            "dynamic_offset",
+            "dynamicOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             EtfSymbol,
             FundCode,
-            BidOffset,
-            AskOffset,
             Basis,
             Quantity,
             State,
             Pricing,
             FillStatistics,
             OffsetAdjustmentConfig,
-            DynamicOffsetState,
+            DynamicOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -838,15 +816,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                         match value {
                             "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
-                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "basis" => Ok(GeneratedField::Basis),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
                             "offsetAdjustmentConfig" | "offset_adjustment_config" => Ok(GeneratedField::OffsetAdjustmentConfig),
-                            "dynamicOffsetState" | "dynamic_offset_state" => Ok(GeneratedField::DynamicOffsetState),
+                            "dynamicOffset" | "dynamic_offset" => Ok(GeneratedField::DynamicOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -868,15 +844,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             {
                 let mut etf_symbol__ = None;
                 let mut fund_code__ = None;
-                let mut bid_offset__ = None;
-                let mut ask_offset__ = None;
                 let mut basis__ = None;
                 let mut quantity__ = None;
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
                 let mut offset_adjustment_config__ = None;
-                let mut dynamic_offset_state__ = None;
+                let mut dynamic_offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -890,22 +864,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                                 return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
                             fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::BidOffset => {
-                            if bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffset"));
-                            }
-                            bid_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskOffset => {
-                            if ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffset"));
-                            }
-                            ask_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::Basis => {
                             if basis__.is_some() {
@@ -947,11 +905,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             offset_adjustment_config__ = map_.next_value()?;
                         }
-                        GeneratedField::DynamicOffsetState => {
-                            if dynamic_offset_state__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dynamicOffsetState"));
+                        GeneratedField::DynamicOffset => {
+                            if dynamic_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dynamicOffset"));
                             }
-                            dynamic_offset_state__ = map_.next_value()?;
+                            dynamic_offset__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -961,15 +919,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 Ok(EtfLpStatus {
                     etf_symbol: etf_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    bid_offset: bid_offset__.unwrap_or_default(),
-                    ask_offset: ask_offset__.unwrap_or_default(),
                     basis: basis__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
                     offset_adjustment_config: offset_adjustment_config__,
-                    dynamic_offset_state: dynamic_offset_state__,
+                    dynamic_offset: dynamic_offset__,
                 })
             }
         }
@@ -1011,28 +967,12 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
         if let Some(v) = self.basis.as_ref() {
             #[allow(clippy::needless_borrow)]
@@ -1058,8 +998,8 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.offset_adjustment_config.as_ref() {
             struct_ser.serialize_field("offset_adjustment_config", v)?;
         }
-        if let Some(v) = self.dynamic_offset_state.as_ref() {
-            struct_ser.serialize_field("dynamic_offset_state", v)?;
+        if let Some(v) = self.dynamic_offset.as_ref() {
+            struct_ser.serialize_field("dynamic_offset", v)?;
         }
         struct_ser.end()
     }
@@ -1075,10 +1015,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "etfSymbol",
             "fund_code",
             "fundCode",
-            "bid_offset",
-            "bidOffset",
-            "ask_offset",
-            "askOffset",
             "basis",
             "quantity",
             "state",
@@ -1087,23 +1023,21 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "fillStatistics",
             "offset_adjustment_config",
             "offsetAdjustmentConfig",
-            "dynamic_offset_state",
-            "dynamicOffsetState",
+            "dynamic_offset",
+            "dynamicOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             EtfSymbol,
             FundCode,
-            BidOffset,
-            AskOffset,
             Basis,
             Quantity,
             State,
             Pricing,
             FillStatistics,
             OffsetAdjustmentConfig,
-            DynamicOffsetState,
+            DynamicOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1128,15 +1062,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                         match value {
                             "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
-                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "basis" => Ok(GeneratedField::Basis),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
                             "offsetAdjustmentConfig" | "offset_adjustment_config" => Ok(GeneratedField::OffsetAdjustmentConfig),
-                            "dynamicOffsetState" | "dynamic_offset_state" => Ok(GeneratedField::DynamicOffsetState),
+                            "dynamicOffset" | "dynamic_offset" => Ok(GeneratedField::DynamicOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1158,15 +1090,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             {
                 let mut etf_symbol__ = None;
                 let mut fund_code__ = None;
-                let mut bid_offset__ = None;
-                let mut ask_offset__ = None;
                 let mut basis__ = None;
                 let mut quantity__ = None;
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
                 let mut offset_adjustment_config__ = None;
-                let mut dynamic_offset_state__ = None;
+                let mut dynamic_offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1180,22 +1110,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                                 return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
                             fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::BidOffset => {
-                            if bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffset"));
-                            }
-                            bid_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskOffset => {
-                            if ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffset"));
-                            }
-                            ask_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::Basis => {
                             if basis__.is_some() {
@@ -1237,11 +1151,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             }
                             offset_adjustment_config__ = map_.next_value()?;
                         }
-                        GeneratedField::DynamicOffsetState => {
-                            if dynamic_offset_state__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dynamicOffsetState"));
+                        GeneratedField::DynamicOffset => {
+                            if dynamic_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dynamicOffset"));
                             }
-                            dynamic_offset_state__ = map_.next_value()?;
+                            dynamic_offset__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1251,15 +1165,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 Ok(EtfLpStatusUpdate {
                     etf_symbol: etf_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    bid_offset: bid_offset__.unwrap_or_default(),
-                    ask_offset: ask_offset__.unwrap_or_default(),
                     basis: basis__,
                     quantity: quantity__,
                     state: state__,
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
                     offset_adjustment_config: offset_adjustment_config__,
-                    dynamic_offset_state: dynamic_offset_state__,
+                    dynamic_offset: dynamic_offset__,
                 })
             }
         }

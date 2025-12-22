@@ -568,27 +568,27 @@
     }
   },
   "definitions": {
-    "lpDynamicOffsetState": {
+    "lpDynamicOffset": {
       "type": "object",
       "properties": {
-        "currentBidOffset": {
+        "bidOffset": {
           "type": "string",
           "format": "int64",
-          "title": "현재 동적 bid offset"
+          "title": "bid offset"
         },
-        "currentAskOffset": {
+        "askOffset": {
           "type": "string",
           "format": "int64",
-          "title": "현재 동적 ask offset"
+          "title": "ask offset"
         },
         "netPosition": {
           "type": "string",
           "format": "int64",
           "title": "순매매량 (+ = 순매수, - = 순매도)"
         },
-        "isActive": {
+        "isDynamic": {
           "type": "boolean",
-          "title": "조정 활성화 여부"
+          "title": "동적 조정 활성화 여부"
         }
       },
       "title": "동적 offset 조정 런타임 상태"
@@ -695,16 +695,6 @@
           "type": "string",
           "title": "펀드 코드"
         },
-        "bidOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
-        "askOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
         "basis": {
           "type": "string",
           "format": "int64",
@@ -731,8 +721,8 @@
           "$ref": "#/definitions/lpOffsetAdjustmentConfig",
           "title": "동적 offset 조정 설정 (optional)"
         },
-        "dynamicOffsetState": {
-          "$ref": "#/definitions/lpDynamicOffsetState",
+        "dynamicOffset": {
+          "$ref": "#/definitions/lpDynamicOffset",
           "title": "동적 offset 조정 런타임 상태 (optional)"
         }
       },
@@ -749,16 +739,6 @@
           "type": "string",
           "title": "펀드 코드"
         },
-        "bidOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
-        "askOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "Offset (호가 스프레드 조정, 원 단위, i64)"
-        },
         "basis": {
           "type": "string",
           "format": "int64",
@@ -785,8 +765,8 @@
           "$ref": "#/definitions/lpOffsetAdjustmentConfig",
           "title": "동적 offset 조정 설정 (optional)"
         },
-        "dynamicOffsetState": {
-          "$ref": "#/definitions/lpDynamicOffsetState",
+        "dynamicOffset": {
+          "$ref": "#/definitions/lpDynamicOffset",
           "title": "동적 offset 조정 런타임 상태 (optional)"
         }
       },

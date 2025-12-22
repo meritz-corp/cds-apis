@@ -143,12 +143,6 @@ message EtfLpStatus {
   // 펀드 코드
   string fund_code = 2;
 
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 bid_offset = 4;
-
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 ask_offset = 5;
-
   // Basis 스프레드 (원 단위, i64)
   int64 basis = 6;
 
@@ -168,7 +162,7 @@ message EtfLpStatus {
   OffsetAdjustmentConfig offset_adjustment_config = 11;
 
   // 동적 offset 조정 런타임 상태 (optional)
-  DynamicOffsetState dynamic_offset_state = 12;
+  DynamicOffset dynamic_offset = 12;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -178,12 +172,6 @@ message EtfLpStatusUpdate {
 
   // 펀드 코드
   string fund_code = 2;
-
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 bid_offset = 4;
-
-  // Offset (호가 스프레드 조정, 원 단위, i64)
-  int64 ask_offset = 5;
 
   // Basis 스프레드 (원 단위, i64)
   optional int64 basis = 6;
@@ -204,7 +192,7 @@ message EtfLpStatusUpdate {
   optional OffsetAdjustmentConfig offset_adjustment_config = 11;
 
   // 동적 offset 조정 런타임 상태 (optional)
-  optional DynamicOffsetState dynamic_offset_state = 12;
+  optional DynamicOffset dynamic_offset = 12;
 }
 
 
@@ -239,15 +227,15 @@ message OffsetAdjustmentConfig {
 }
 
 // 동적 offset 조정 런타임 상태
-message DynamicOffsetState {
-  // 현재 동적 bid offset
-  int64 current_bid_offset = 1;
-  // 현재 동적 ask offset
-  int64 current_ask_offset = 2;
+message DynamicOffset {
+  // bid offset
+  int64 bid_offset = 1;
+  // ask offset
+  int64 ask_offset = 2;
   // 순매매량 (+ = 순매수, - = 순매도)
   int64 net_position = 3;
-  // 조정 활성화 여부
-  bool is_active = 4;
+  // 동적 조정 활성화 여부
+  bool is_dynamic = 4;
 }
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

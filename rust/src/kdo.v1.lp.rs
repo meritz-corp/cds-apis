@@ -44,12 +44,6 @@ pub struct EtfLpStatus {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="4")]
-    pub bid_offset: i64,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="5")]
-    pub ask_offset: i64,
     /// Basis 스프레드 (원 단위, i64)
     #[prost(int64, tag="6")]
     pub basis: i64,
@@ -70,7 +64,7 @@ pub struct EtfLpStatus {
     pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
     /// 동적 offset 조정 런타임 상태 (optional)
     #[prost(message, optional, tag="12")]
-    pub dynamic_offset_state: ::core::option::Option<DynamicOffsetState>,
+    pub dynamic_offset: ::core::option::Option<DynamicOffset>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -82,12 +76,6 @@ pub struct EtfLpStatusUpdate {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="4")]
-    pub bid_offset: i64,
-    /// Offset (호가 스프레드 조정, 원 단위, i64)
-    #[prost(int64, tag="5")]
-    pub ask_offset: i64,
     /// Basis 스프레드 (원 단위, i64)
     #[prost(int64, optional, tag="6")]
     pub basis: ::core::option::Option<i64>,
@@ -108,7 +96,7 @@ pub struct EtfLpStatusUpdate {
     pub offset_adjustment_config: ::core::option::Option<OffsetAdjustmentConfig>,
     /// 동적 offset 조정 런타임 상태 (optional)
     #[prost(message, optional, tag="12")]
-    pub dynamic_offset_state: ::core::option::Option<DynamicOffsetState>,
+    pub dynamic_offset: ::core::option::Option<DynamicOffset>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -141,19 +129,19 @@ pub struct OffsetAdjustmentConfig {
 /// 동적 offset 조정 런타임 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct DynamicOffsetState {
-    /// 현재 동적 bid offset
+pub struct DynamicOffset {
+    /// bid offset
     #[prost(int64, tag="1")]
-    pub current_bid_offset: i64,
-    /// 현재 동적 ask offset
+    pub bid_offset: i64,
+    /// ask offset
     #[prost(int64, tag="2")]
-    pub current_ask_offset: i64,
+    pub ask_offset: i64,
     /// 순매매량 (+ = 순매수, - = 순매도)
     #[prost(int64, tag="3")]
     pub net_position: i64,
-    /// 조정 활성화 여부
+    /// 동적 조정 활성화 여부
     #[prost(bool, tag="4")]
-    pub is_active: bool,
+    pub is_dynamic: bool,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]
