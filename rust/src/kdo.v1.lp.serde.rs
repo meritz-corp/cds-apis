@@ -447,12 +447,12 @@ impl serde::Serialize for EtfLpOffset {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_bid_offset", ToString::to_string(&self.current_bid_offset).as_str())?;
+            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_ask_offset", ToString::to_string(&self.current_ask_offset).as_str())?;
+            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -504,10 +504,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "current_bid_offset",
-            "currentBidOffset",
-            "current_ask_offset",
-            "currentAskOffset",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
             "min_offset",
             "minOffset",
             "max_offset",
@@ -532,8 +532,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            CurrentBidOffset,
-            CurrentAskOffset,
+            BidOffset,
+            AskOffset,
             MinOffset,
             MaxOffset,
             TimeAdjustmentEnabled,
@@ -566,8 +566,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                         E: serde::de::Error,
                     {
                         match value {
-                            "currentBidOffset" | "current_bid_offset" => Ok(GeneratedField::CurrentBidOffset),
-                            "currentAskOffset" | "current_ask_offset" => Ok(GeneratedField::CurrentAskOffset),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "minOffset" | "min_offset" => Ok(GeneratedField::MinOffset),
                             "maxOffset" | "max_offset" => Ok(GeneratedField::MaxOffset),
                             "timeAdjustmentEnabled" | "time_adjustment_enabled" => Ok(GeneratedField::TimeAdjustmentEnabled),
@@ -597,8 +597,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut current_bid_offset__ = None;
-                let mut current_ask_offset__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 let mut min_offset__ = None;
                 let mut max_offset__ = None;
                 let mut time_adjustment_enabled__ = None;
@@ -611,19 +611,19 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                 let mut position_adjustment_step__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::CurrentBidOffset => {
-                            if current_bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentBidOffset"));
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
                             }
-                            current_bid_offset__ = 
+                            bid_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::CurrentAskOffset => {
-                            if current_ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentAskOffset"));
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
                             }
-                            current_ask_offset__ = 
+                            ask_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -705,8 +705,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                     }
                 }
                 Ok(EtfLpOffset {
-                    current_bid_offset: current_bid_offset__.unwrap_or_default(),
-                    current_ask_offset: current_ask_offset__.unwrap_or_default(),
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
                     min_offset: min_offset__.unwrap_or_default(),
                     max_offset: max_offset__.unwrap_or_default(),
                     time_adjustment_enabled: time_adjustment_enabled__.unwrap_or_default(),

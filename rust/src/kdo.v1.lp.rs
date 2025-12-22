@@ -92,9 +92,9 @@ pub struct EtfLpStatusUpdate {
 pub struct EtfLpOffset {
     ///
     #[prost(int64, tag="1")]
-    pub current_bid_offset: i64,
+    pub bid_offset: i64,
     #[prost(int64, tag="2")]
-    pub current_ask_offset: i64,
+    pub ask_offset: i64,
     /// NAV 밴드 설정
     #[prost(int64, tag="3")]
     pub min_offset: i64,

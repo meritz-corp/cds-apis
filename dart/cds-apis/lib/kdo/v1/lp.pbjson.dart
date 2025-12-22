@@ -204,8 +204,8 @@ final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
 const EtfLpOffset$json = {
   '1': 'EtfLpOffset',
   '2': [
-    {'1': 'current_bid_offset', '3': 1, '4': 1, '5': 3, '10': 'currentBidOffset'},
-    {'1': 'current_ask_offset', '3': 2, '4': 1, '5': 3, '10': 'currentAskOffset'},
+    {'1': 'bid_offset', '3': 1, '4': 1, '5': 3, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 2, '4': 1, '5': 3, '10': 'askOffset'},
     {'1': 'min_offset', '3': 3, '4': 1, '5': 3, '10': 'minOffset'},
     {'1': 'max_offset', '3': 4, '4': 1, '5': 3, '10': 'maxOffset'},
     {'1': 'time_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
@@ -221,18 +221,17 @@ const EtfLpOffset$json = {
 
 /// Descriptor for `EtfLpOffset`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
-    'CgtFdGZMcE9mZnNldBIsChJjdXJyZW50X2JpZF9vZmZzZXQYASABKANSEGN1cnJlbnRCaWRPZm'
-    'ZzZXQSLAoSY3VycmVudF9hc2tfb2Zmc2V0GAIgASgDUhBjdXJyZW50QXNrT2Zmc2V0Eh0KCm1p'
-    'bl9vZmZzZXQYAyABKANSCW1pbk9mZnNldBIdCgptYXhfb2Zmc2V0GAQgASgDUgltYXhPZmZzZX'
-    'QSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYByABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxl'
-    'ZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MYCCABKARSFmFkanVzdG1lbnRJbnRlcnZhbF'
-    'NlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgCUg5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9v'
-    'bl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtwb3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZW'
-    'QYESABKAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYWJsZWQSUgoRcG9zaXRpb25fc3RyYXRlZ3kY'
-    'EiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3'
-    'RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGBMgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4'
-    'Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCABKAJSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZX'
-    'A=');
+    'CgtFdGZMcE9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgDUgliaWRPZmZzZXQSHQoKYXNrX29mZn'
+    'NldBgCIAEoA1IJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKANSCW1pbk9mZnNldBIdCgpt'
+    'YXhfb2Zmc2V0GAQgASgDUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
+    'ABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MY'
+    'CCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgCUg'
+    '5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtw'
+    'b3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWQYESABKAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYW'
+    'JsZWQSUgoRcG9zaXRpb25fc3RyYXRlZ3kYEiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1'
+    'c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGB'
+    'MgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCAB'
+    'KAJSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

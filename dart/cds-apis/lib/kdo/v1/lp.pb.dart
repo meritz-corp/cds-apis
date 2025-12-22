@@ -444,8 +444,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
 /// 자동 offset 조정 설정
 class EtfLpOffset extends $pb.GeneratedMessage {
   factory EtfLpOffset({
-    $fixnum.Int64? currentBidOffset,
-    $fixnum.Int64? currentAskOffset,
+    $fixnum.Int64? bidOffset,
+    $fixnum.Int64? askOffset,
     $fixnum.Int64? minOffset,
     $fixnum.Int64? maxOffset,
     $core.bool? timeAdjustmentEnabled,
@@ -458,8 +458,8 @@ class EtfLpOffset extends $pb.GeneratedMessage {
     $core.double? positionAdjustmentStep,
   }) {
     final result = create();
-    if (currentBidOffset != null) result.currentBidOffset = currentBidOffset;
-    if (currentAskOffset != null) result.currentAskOffset = currentAskOffset;
+    if (bidOffset != null) result.bidOffset = bidOffset;
+    if (askOffset != null) result.askOffset = askOffset;
     if (minOffset != null) result.minOffset = minOffset;
     if (maxOffset != null) result.maxOffset = maxOffset;
     if (timeAdjustmentEnabled != null) result.timeAdjustmentEnabled = timeAdjustmentEnabled;
@@ -479,8 +479,8 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   factory EtfLpOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'currentBidOffset')
-    ..aInt64(2, _omitFieldNames ? '' : 'currentAskOffset')
+    ..aInt64(1, _omitFieldNames ? '' : 'bidOffset')
+    ..aInt64(2, _omitFieldNames ? '' : 'askOffset')
     ..aInt64(3, _omitFieldNames ? '' : 'minOffset')
     ..aInt64(4, _omitFieldNames ? '' : 'maxOffset')
     ..aOB(7, _omitFieldNames ? '' : 'timeAdjustmentEnabled')
@@ -512,22 +512,22 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   static EtfLpOffset? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get currentBidOffset => $_getI64(0);
+  $fixnum.Int64 get bidOffset => $_getI64(0);
   @$pb.TagNumber(1)
-  set currentBidOffset($fixnum.Int64 value) => $_setInt64(0, value);
+  set bidOffset($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasCurrentBidOffset() => $_has(0);
+  $core.bool hasBidOffset() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCurrentBidOffset() => $_clearField(1);
+  void clearBidOffset() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get currentAskOffset => $_getI64(1);
+  $fixnum.Int64 get askOffset => $_getI64(1);
   @$pb.TagNumber(2)
-  set currentAskOffset($fixnum.Int64 value) => $_setInt64(1, value);
+  set askOffset($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasCurrentAskOffset() => $_has(1);
+  $core.bool hasAskOffset() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCurrentAskOffset() => $_clearField(2);
+  void clearAskOffset() => $_clearField(2);
 
   /// NAV 밴드 설정
   @$pb.TagNumber(3)

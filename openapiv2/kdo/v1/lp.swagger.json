@@ -630,11 +630,11 @@
     "lpEtfLpOffset": {
       "type": "object",
       "properties": {
-        "currentBidOffset": {
+        "bidOffset": {
           "type": "string",
           "format": "int64"
         },
-        "currentAskOffset": {
+        "askOffset": {
           "type": "string",
           "format": "int64"
         },
