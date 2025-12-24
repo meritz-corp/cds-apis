@@ -38,6 +38,12 @@ pub mod kdo {
         pub mod order_log {
             include!("kdo.v1.order_log.rs");
         }
+        pub mod user {
+            include!("kdo.v1.user.rs");
+        }
+        pub mod notification {
+            include!("kdo.v1.notification.rs");
+        }
     }
 }
 

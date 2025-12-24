@@ -5,146 +5,169 @@ package kdo.v1.notification;
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1/notifications;notifications";
 
-// NotificationService contains the function to interact with the Notification of the cds
+// NotificationService provides notification management for users
 service NotificationService {
-  // Signin signs in a user and returns a session id.
+  // ListNotifications returns a list of notifications for a user.
   rpc ListNotifications(ListNotificationsRequest) returns (ListNotificationsResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=users/*}/notifications"
     };
-    option (google.api.method_signature) = "";
+    option (google.api.method_signature) = "parent";
   }
 
-  // AcknowledgeNotification acknowledges a notification.
+  // SubscribeNotifications subscribes to real-time notifications for a user.
+  rpc SubscribeNotifications(SubscribeNotificationsRequest) returns (stream Notification) {
+    option (google.api.http) = {
+      get: "/v1/{parent=users/*}/notifications:subscribe"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // AcknowledgeNotification marks a notification as acknowledged.
   rpc AcknowledgeNotification(AcknowledgeNotificationRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/v1/{name=users/*/notifications/*}:ack"
-      body: "name"
+      body: "*"
     };
     option (google.api.method_signature) = "name";
   }
-
 }
 
+// Request message for ListNotifications
 message ListNotificationsRequest {
-
   // The resource name of User.
-  // User is required.
-  // Format: users/{address}
+  // Format: users/{user_id}
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/User",
+      type: "kdo.cdsapis.xyz/User"
     }
   ];
 
-  // The maximum number of items to return. The service may return fewer than this value.
+  // The maximum number of items to return.
   // If unspecified, at most 50 rows will be returned.
   // The maximum value is 1024; values above 1024 will be coerced to 1024.
   int32 page_size = 2;
 
-  // Token of the page to retrieve. If not specified, the first
-  // page of results will be returned. Use the value obtained from
-  // `next_page_token` in the previous response in order to request
-  // the next page of results.
-  //
-  // When paginating, all other parameters provided to `ListNotifications` must match
-  // the call that provided the page token.
+  // Token of the page to retrieve.
   string page_token = 3;
 
-  // Available Sequence and Operator
-  // * state
-  //   * `Equal`
-  // * type
-  //   * `Equal`
+  // Filter expression.
+  // Available filters:
+  // * state: CREATED, ACKNOWLEDGED, EXPIRED
+  // * type: INFO, ERROR
   //
-  // Examples
+  // Examples:
   // * state=CREATED
-  // * type=INFO_POINTS_GIVEN
+  // * type=INFO
   string filter = 4;
 }
 
+// Response message for ListNotifications
 message ListNotificationsResponse {
   repeated Notification notifications = 1;
-
   string next_page_token = 2;
 }
 
-message AcknowledgeNotificationRequest {
-  string name = 1 [
+// Request message for SubscribeNotifications
+message SubscribeNotificationsRequest {
+  // The resource name of User.
+  // Format: users/{user_id}
+  string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/Notification",
+      type: "kdo.cdsapis.xyz/User"
     }
   ];
 }
 
+// Request message for AcknowledgeNotification
+message AcknowledgeNotificationRequest {
+  // The resource name of the notification.
+  // Format: users/{user_id}/notifications/{notification_id}
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Notification"
+    }
+  ];
+}
 
-// Type of the notification.
+// Type of the notification
 enum NotificationType {
-  // default value. this value is unused.
   TYPE_UNSPECIFIED = 0;
-
-  // Plain text info message.
-  INFO = 100;
-
-  //
-//  INFO_ = 101;
-
-  ERROR = 400;
+  // Informational notification
+  INFO = 1;
+  // Error notification
+  ERROR = 2;
 }
 
-// Action type that can be performed on the notification.
-enum NotificationAction {
-  // default value. this value is unused.
-  ACTION_UNSPECIFIED = 0;
-
-  // No operation.
-  NO_OP = 1;
-
-  // Navigate to the lp page.
-  NAVIGATE_LP_PAGE = 100;
-}
-
-// State of the notification.
+// State of the notification
 enum NotificationState {
-  // default value. this value is unused.
   STATE_UNSPECIFIED = 0;
-
-  //
+  // Notification has been created
   CREATED = 1;
-
-  //
+  // Notification has been acknowledged by user
   ACKNOWLEDGED = 2;
-
-  //
+  // Notification has expired
   EXPIRED = 3;
 }
 
+// Action to perform when notification is clicked
+message NotificationAction {
+  // Type of action
+  oneof action {
+    // No operation
+    NoOp no_op = 1;
+    // Navigate to a page
+    NavigateAction navigate = 2;
+  }
+}
 
+// No operation action
+message NoOp {}
+
+// Navigation action
+message NavigateAction {
+  // Navigation target
+  oneof target {
+    // Navigate to LP page
+    LpPageTarget lp_page = 1;
+    // Future targets can be added here:
+    // OrderDetailTarget order_detail = 2;
+    // SettingsTarget settings = 3;
+  }
+}
+
+// LP page navigation target
+message LpPageTarget {
+  // ETF code (e.g., "A252670")
+  string etf_code = 1;
+}
+
+// Notification resource
 message Notification {
   option (google.api.resource) = {
-    type: "kdo.cdsapis.xyz/Notification",
-    pattern: "users/{user_address}/notifications/{id}"
+    type: "kdo.cdsapis.xyz/Notification"
+    pattern: "users/{user_id}/notifications/{notification_id}"
   };
 
   // The resource name of the Notification.
-  // Format: users/{user_address}/notifications/{id}
+  // Format: users/{user_id}/notifications/{notification_id}
   string name = 1;
 
   // The resource name of User.
-  // Format: users/{address}
+  // Format: users/{user_id}
   string user = 2 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/User",
+      type: "kdo.cdsapis.xyz/User"
     }
   ];
 
@@ -153,45 +176,54 @@ message Notification {
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
+  // Notification type
   NotificationType type = 4 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
+  // Action to perform when clicked
   NotificationAction action = 5 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
+  // Current state
   NotificationState state = 6 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
-  string title = 8 [
+  // Notification title
+  string title = 7 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
-  string body = 9 [
+  // Notification body
+  string body = 8 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
-  map<string, string> metadata = 10 [
+  // Additional metadata
+  map<string, string> metadata = 9 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
-  // The created time of Notification.
-  // RFC3339 format e.g. "2006-01-02T15:04:05Z07:00"
-  google.protobuf.Timestamp create_time = 13 [
+  // Pre-computed navigation URL (convenience field)
+  // e.g., "/lp/A252670"
+  optional string navigation_url = 10 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
-  // The expire time of Notification if exists.
-  // RFC3339 format e.g. "2006-01-02T15:04:05Z07:00"
-  optional google.protobuf.Timestamp expire_time = 14 [
+  // Created timestamp
+  google.protobuf.Timestamp create_time = 11 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
-  // The acknowledged time of Notification.
-  optional google.protobuf.Timestamp acknowledge_time = 15 [
+  // Expiration timestamp (if applicable)
+  optional google.protobuf.Timestamp expire_time = 12 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
+  // Acknowledged timestamp
+  optional google.protobuf.Timestamp acknowledge_time = 13 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
