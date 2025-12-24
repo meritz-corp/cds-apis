@@ -14,6 +14,14 @@ option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1/users;users";
 
 // UserService contains the function to interact with the User of the spacebar
 service UserService {
+  // GetMe returns the currently authenticated user.
+  rpc GetMe(google.protobuf.Empty) returns (User) {
+    option (google.api.http) = {
+      get: "/v1/users/me"
+    };
+    option (google.api.method_signature) = "";
+  }
+
   // GetUser will return User.
   rpc GetUser(GetUserRequest) returns (User) {
     option (google.api.http) = {

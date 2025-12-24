@@ -63,6 +63,29 @@
         ]
       }
     },
+    "/v1/users/me": {
+      "get": {
+        "summary": "GetMe returns the currently authenticated user.",
+        "operationId": "UserService_GetMe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/v1/{user}": {
       "get": {
         "summary": "GetUser will return User.",
