@@ -111,6 +111,9 @@ pub struct LpPageTarget {
     /// ETF code (e.g., "A252670")
     #[prost(string, tag="1")]
     pub etf_code: ::prost::alloc::string::String,
+    /// Fund code (e.g., "0331")
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// Notification resource
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -179,6 +179,10 @@
         "etfCode": {
           "type": "string",
           "title": "ETF code (e.g., \"A252670\")"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "Fund code (e.g., \"0331\")"
         }
       },
       "title": "LP page navigation target"

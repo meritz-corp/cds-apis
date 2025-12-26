@@ -448,9 +448,11 @@ class NavigateAction extends $pb.GeneratedMessage {
 class LpPageTarget extends $pb.GeneratedMessage {
   factory LpPageTarget({
     $core.String? etfCode,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (etfCode != null) result.etfCode = etfCode;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -461,6 +463,7 @@ class LpPageTarget extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LpPageTarget', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfCode')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -490,6 +493,16 @@ class LpPageTarget extends $pb.GeneratedMessage {
   $core.bool hasEtfCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearEtfCode() => $_clearField(1);
+
+  /// Fund code (e.g., "0331")
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 /// Notification resource

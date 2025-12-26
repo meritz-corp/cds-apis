@@ -151,12 +151,14 @@ const LpPageTarget$json = {
   '1': 'LpPageTarget',
   '2': [
     {'1': 'etf_code', '3': 1, '4': 1, '5': 9, '10': 'etfCode'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
   ],
 };
 
 /// Descriptor for `LpPageTarget`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List lpPageTargetDescriptor = $convert.base64Decode(
-    'CgxMcFBhZ2VUYXJnZXQSGQoIZXRmX2NvZGUYASABKAlSB2V0ZkNvZGU=');
+    'CgxMcFBhZ2VUYXJnZXQSGQoIZXRmX2NvZGUYASABKAlSB2V0ZkNvZGUSGwoJZnVuZF9jb2RlGA'
+    'IgASgJUghmdW5kQ29kZQ==');
 
 @$core.Deprecated('Use notificationDescriptor instead')
 const Notification$json = {
