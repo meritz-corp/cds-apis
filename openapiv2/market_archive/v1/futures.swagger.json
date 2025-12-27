@@ -1,0 +1,240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "market_archive/v1/futures.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "FuturesService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/futures": {
+      "get": {
+        "operationId": "FuturesService_ListFutures",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futuresListFuturesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FuturesService"
+        ]
+      }
+    },
+    "/v1/{futures}": {
+      "get": {
+        "operationId": "FuturesService_GetFutures",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futuresFutures"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futures",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "futures/[^/]+"
+          }
+        ],
+        "tags": [
+          "FuturesService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "futuresFutures": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Futures ID"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "선물 심볼"
+        },
+        "code": {
+          "type": "string",
+          "title": "선물 코드"
+        },
+        "name": {
+          "type": "string",
+          "title": "선물 이름"
+        },
+        "prevClose": {
+          "type": "string",
+          "title": "전일 종가"
+        },
+        "lastPrice": {
+          "type": "string",
+          "title": "현재가"
+        },
+        "underlyingSymbol": {
+          "type": "string",
+          "title": "기초자산 심볼"
+        },
+        "underlyingName": {
+          "type": "string",
+          "title": "기초자산 이름"
+        },
+        "expiryDate": {
+          "type": "string",
+          "title": "만기일 (YYYYMMDD)"
+        },
+        "multiplier": {
+          "type": "number",
+          "format": "double",
+          "title": "승수 (계약 당 금액)"
+        },
+        "tickSize": {
+          "type": "number",
+          "format": "double",
+          "title": "Tick 크기 (포인트 단위)"
+        },
+        "tickValue": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 가치 (원 단위)"
+        },
+        "settlementType": {
+          "$ref": "#/definitions/futuresSettlementType",
+          "title": "결제 방식"
+        },
+        "tradable": {
+          "type": "boolean",
+          "title": "거래 가능 여부"
+        },
+        "lastTradingDate": {
+          "type": "string",
+          "title": "최종 거래일 (YYYYMMDD)"
+        },
+        "productType": {
+          "$ref": "#/definitions/futuresFuturesProductType",
+          "title": "상품 유형"
+        }
+      }
+    },
+    "futuresFuturesProductType": {
+      "type": "string",
+      "enum": [
+        "FUTURES_PRODUCT_TYPE_UNSPECIFIED",
+        "FUTURES_PRODUCT_TYPE_INDEX",
+        "FUTURES_PRODUCT_TYPE_STOCK",
+        "FUTURES_PRODUCT_TYPE_BOND",
+        "FUTURES_PRODUCT_TYPE_CURRENCY",
+        "FUTURES_PRODUCT_TYPE_COMMODITY"
+      ],
+      "default": "FUTURES_PRODUCT_TYPE_UNSPECIFIED",
+      "description": "- FUTURES_PRODUCT_TYPE_INDEX: 지수 선물\n - FUTURES_PRODUCT_TYPE_STOCK: 주식 선물\n - FUTURES_PRODUCT_TYPE_BOND: 채권 선물\n - FUTURES_PRODUCT_TYPE_CURRENCY: 통화 선물\n - FUTURES_PRODUCT_TYPE_COMMODITY: 상품 선물",
+      "title": "선물 상품 유형"
+    },
+    "futuresListFuturesResponse": {
+      "type": "object",
+      "properties": {
+        "futures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/futuresFutures"
+          },
+          "title": "선물 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "futuresSettlementType": {
+      "type": "string",
+      "enum": [
+        "SETTLEMENT_TYPE_UNSPECIFIED",
+        "SETTLEMENT_TYPE_CASH",
+        "SETTLEMENT_TYPE_PHYSICAL"
+      ],
+      "default": "SETTLEMENT_TYPE_UNSPECIFIED",
+      "description": "- SETTLEMENT_TYPE_CASH: 현금 결제\n - SETTLEMENT_TYPE_PHYSICAL: 실물 결제",
+      "title": "결제 방식"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

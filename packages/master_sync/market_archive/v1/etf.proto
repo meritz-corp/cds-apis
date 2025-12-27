@@ -1,0 +1,193 @@
+syntax = "proto3";
+
+package master_sync.v1.etf;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/master_sync/v1;master_sync";
+
+// EtfService는 ETF 및 선물 관련 서비스를 제공합니다.
+service EtfService {
+    rpc GetEtf(GetEtfRequest) returns (Etf) {
+        option (google.api.http) = {
+            get: "/v1/{etf=etfs/*}"
+        };
+        option (google.api.method_signature) = "etf";
+    }
+
+    rpc ListEtfs(ListEtfsRequest) returns (ListEtfsResponse) {
+        option (google.api.http) = {
+            get: "/v1/etfs"
+        };
+        option (google.api.method_signature) = "";
+    }
+}
+
+
+message Etf {
+    // ETF ID
+    uint64 id = 1;
+
+    // ETF 심볼 (ISIN 코드)
+    string symbol = 2;
+
+    // ETF 코드
+    string code = 3;
+
+    // ETF 이름
+    string name = 4;
+
+    // 마지막 가격
+    string prev_close = 5;
+
+    string last_price = 6;
+
+    string prev_nav = 7;
+
+    string last_inav = 8;
+
+    // PDF 구성 종목 목록
+    map<string, EtfPdfConstituent> constituents = 10;
+
+    // 설정 단위
+    int64 creation_unit = 11;
+
+    // 복제 방법
+    ReplicationMethod replication_method = 12;
+
+    // Tick 크기 (원 단위, i64)
+    int64 tick_size = 13;
+
+    // Tick 크기 (원 단위, i64)
+    int64 listed_quantity = 14;
+
+    float leverage = 15;
+
+    bool tradable = 16;
+
+    bool short_sellable = 17;
+
+    bool cash_creditable = 23;
+
+    int64 cash_creation_amount = 24;
+}
+
+message EtfConstituent {
+    oneof constituent_type {
+        StockConstituent stock = 1;
+        FuturesConstituent futures = 2;
+        CashConstituent cash = 3;
+    }
+}
+
+message StockConstituent {
+    string symbol = 1;
+
+    string prev_close = 2;
+
+    string last_price = 3;
+
+    int64 quantity = 4;
+
+    int64 last_valuation = 5;
+
+    int64 notional_amount = 6;
+
+    uint32 num_members = 7;
+}
+
+message FuturesConstituent {
+    string symbol = 1;
+
+    string prev_close = 2;
+
+    string last_price = 3;
+
+    float quantity = 4;
+
+    double multiple = 5;
+
+    int64 last_valuation = 6;
+
+    int64 notional_amount = 7;
+
+    uint32 num_members = 8;
+}
+
+message CashConstituent {
+    string symbol = 1;
+
+    int64 prev_valuation = 2;
+
+    uint32 num_members = 3;
+}
+
+// PDF 구성 종목
+message EtfPdfConstituent {
+    // 종목 코드
+    string symbol = 1;  // symbol
+
+    // 종목명
+    string name = 2;
+
+    // 상품 타입
+    ProductType product_type = 3;
+
+    // 구성 수량 (선물 숏의 경우 음수)
+    int64 quantity = 4;
+}
+
+// 상품 타입
+enum ProductType {
+    PRODUCT_TYPE_UNSPECIFIED = 0;
+    PRODUCT_TYPE_STOCK = 1;
+    PRODUCT_TYPE_FUTURES = 2;
+    PRODUCT_TYPE_ETF = 3;
+    PRODUCT_TYPE_CASH = 4;
+}
+
+// 복제 방법
+enum ReplicationMethod {
+    REPLICATION_METHOD_UNSPECIFIED = 0;
+    REPLICATION_METHOD_ACTIVE = 1;
+    REPLICATION_METHOD_PHYSICAL = 2;
+    REPLICATION_METHOD_SYNTHETIC = 3;
+}
+
+// ========== Request/Response Messages ==========
+
+// GetEtf
+message GetEtfRequest {
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "master_sync.cdsapis.xyz/Etf"
+        }
+    ];
+}
+
+// ListEtfs
+message ListEtfsRequest {
+    // 페이지 크기 (optional)
+    optional uint32 page_size = 1;
+
+    // 페이지 토큰 (optional, for pagination)
+    optional string page_token = 2;
+
+    // 필터링 조건 (optional, AIP-160)
+    string filter = 3;
+}
+
+message ListEtfsResponse {
+    // ETF 목록
+    repeated Etf etfs = 1;
+
+    // 다음 페이지 토큰
+    string next_page_token = 2;
+}

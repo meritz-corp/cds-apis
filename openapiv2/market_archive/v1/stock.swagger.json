@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "market_archive/v1/stock.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "StockService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/stocks": {
+      "get": {
+        "operationId": "StockService_ListStocks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/stockListStocksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StockService"
+        ]
+      }
+    },
+    "/v1/{stock}": {
+      "get": {
+        "operationId": "StockService_GetStock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/stockStock"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stock",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "stocks/[^/]+"
+          }
+        ],
+        "tags": [
+          "StockService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "stockListStocksResponse": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/stockStock"
+          },
+          "title": "주식 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "stockStock": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Stock ID"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "주식 심볼 (ISIN 코드)"
+        },
+        "code": {
+          "type": "string",
+          "title": "주식 코드"
+        },
+        "name": {
+          "type": "string",
+          "title": "주식 이름"
+        },
+        "prevClose": {
+          "type": "string",
+          "title": "전일 종가"
+        },
+        "lastPrice": {
+          "type": "string",
+          "title": "현재가"
+        },
+        "marketType": {
+          "$ref": "#/definitions/v1stockMarketType",
+          "title": "시장 구분"
+        },
+        "listedShares": {
+          "type": "string",
+          "format": "int64",
+          "title": "상장 주식 수"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 크기 (원 단위)"
+        },
+        "tradable": {
+          "type": "boolean",
+          "title": "거래 가능 여부"
+        },
+        "shortSellable": {
+          "type": "boolean",
+          "title": "공매도 가능 여부"
+        },
+        "marginTradable": {
+          "type": "boolean",
+          "title": "신용 거래 가능 여부"
+        },
+        "sectorCode": {
+          "type": "string",
+          "title": "섹터 코드"
+        },
+        "sectorName": {
+          "type": "string",
+          "title": "섹터 이름"
+        }
+      }
+    },
+    "v1stockMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_TYPE_UNSPECIFIED",
+        "MARKET_TYPE_KOSPI",
+        "MARKET_TYPE_KOSDAQ",
+        "MARKET_TYPE_KONEX"
+      ],
+      "default": "MARKET_TYPE_UNSPECIFIED",
+      "title": "시장 구분"
+    }
+  }
+}

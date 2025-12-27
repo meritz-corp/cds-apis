@@ -284,18 +284,6 @@
         }
       }
     },
-    "marketMarketType": {
-      "type": "string",
-      "enum": [
-        "MARKET_UNKNOWN",
-        "MARKET_KOSPI",
-        "MARKET_KOSDAQ",
-        "MARKET_ETF",
-        "MARKET_FUTURES",
-        "MARKET_OPTIONS"
-      ],
-      "default": "MARKET_UNKNOWN"
-    },
     "marketOrderbook": {
       "type": "object",
       "properties": {
@@ -436,7 +424,7 @@
           "type": "string"
         },
         "marketType": {
-          "$ref": "#/definitions/marketMarketType"
+          "$ref": "#/definitions/v1marketMarketType"
         },
         "underlying": {
           "type": "string",
@@ -535,6 +523,18 @@
           }
         }
       }
+    },
+    "v1marketMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_UNKNOWN",
+        "MARKET_KOSPI",
+        "MARKET_KOSDAQ",
+        "MARKET_ETF",
+        "MARKET_FUTURES",
+        "MARKET_OPTIONS"
+      ],
+      "default": "MARKET_UNKNOWN"
     }
   }
 }

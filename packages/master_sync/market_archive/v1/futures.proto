@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package master_sync.v1.futures;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/master_sync/v1;master_sync";
+
+// FuturesService는 선물 관련 서비스를 제공합니다.
+service FuturesService {
+    rpc GetFutures(GetFuturesRequest) returns (Futures) {
+        option (google.api.http) = {
+            get: "/v1/{futures=futures/*}"
+        };
+        option (google.api.method_signature) = "futures";
+    }
+
+    rpc ListFutures(ListFuturesRequest) returns (ListFuturesResponse) {
+        option (google.api.http) = {
+            get: "/v1/futures"
+        };
+        option (google.api.method_signature) = "";
+    }
+}
+
+message Futures {
+    // Futures ID
+    uint64 id = 1;
+
+    // 선물 심볼
+    string symbol = 2;
+
+    // 선물 코드
+    string code = 3;
+
+    // 선물 이름
+    string name = 4;
+
+    // 전일 종가
+    string prev_close = 5;
+
+    // 현재가
+    string last_price = 6;
+
+    // 기초자산 심볼
+    string underlying_symbol = 7;
+
+    // 기초자산 이름
+    string underlying_name = 8;
+
+    // 만기일 (YYYYMMDD)
+    string expiry_date = 9;
+
+    // 승수 (계약 당 금액)
+    double multiplier = 10;
+
+    // Tick 크기 (포인트 단위)
+    double tick_size = 11;
+
+    // Tick 가치 (원 단위)
+    int64 tick_value = 12;
+
+    // 결제 방식
+    SettlementType settlement_type = 13;
+
+    // 거래 가능 여부
+    bool tradable = 14;
+
+    // 최종 거래일 (YYYYMMDD)
+    string last_trading_date = 15;
+
+    // 상품 유형
+    FuturesProductType product_type = 16;
+}
+
+// 결제 방식
+enum SettlementType {
+    SETTLEMENT_TYPE_UNSPECIFIED = 0;
+    SETTLEMENT_TYPE_CASH = 1;        // 현금 결제
+    SETTLEMENT_TYPE_PHYSICAL = 2;    // 실물 결제
+}
+
+// 선물 상품 유형
+enum FuturesProductType {
+    FUTURES_PRODUCT_TYPE_UNSPECIFIED = 0;
+    FUTURES_PRODUCT_TYPE_INDEX = 1;       // 지수 선물
+    FUTURES_PRODUCT_TYPE_STOCK = 2;       // 주식 선물
+    FUTURES_PRODUCT_TYPE_BOND = 3;        // 채권 선물
+    FUTURES_PRODUCT_TYPE_CURRENCY = 4;    // 통화 선물
+    FUTURES_PRODUCT_TYPE_COMMODITY = 5;   // 상품 선물
+}
+
+// ========== Request/Response Messages ==========
+
+// GetFutures
+message GetFuturesRequest {
+    string futures = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "master_sync.cdsapis.xyz/Futures"
+        }
+    ];
+}
+
+// ListFutures
+message ListFuturesRequest {
+    // 페이지 크기 (optional)
+    optional uint32 page_size = 1;
+
+    // 페이지 토큰 (optional, for pagination)
+    optional string page_token = 2;
+
+    // 필터링 조건 (optional, AIP-160)
+    string filter = 3;
+}
+
+message ListFuturesResponse {
+    // 선물 목록
+    repeated Futures futures = 1;
+
+    // 다음 페이지 토큰
+    string next_page_token = 2;
+}

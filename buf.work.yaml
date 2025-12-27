@@ -3,3 +3,4 @@ directories:
   - packages/log_sync
   - packages/kdo
   - packages/market_archive
+  - packages/master_sync

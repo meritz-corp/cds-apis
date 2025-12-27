@@ -1,0 +1,267 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "market_archive/v1/etf.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "EtfService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/etfs": {
+      "get": {
+        "operationId": "EtfService_ListEtfs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfListEtfsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
+    "/v1/{etf}": {
+      "get": {
+        "operationId": "EtfService_GetEtf",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfEtf"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "etfEtf": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "ETF ID"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "ETF 심볼 (ISIN 코드)"
+        },
+        "code": {
+          "type": "string",
+          "title": "ETF 코드"
+        },
+        "name": {
+          "type": "string",
+          "title": "ETF 이름"
+        },
+        "prevClose": {
+          "type": "string",
+          "title": "마지막 가격"
+        },
+        "lastPrice": {
+          "type": "string"
+        },
+        "prevNav": {
+          "type": "string"
+        },
+        "lastInav": {
+          "type": "string"
+        },
+        "constituents": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/etfEtfPdfConstituent"
+          },
+          "title": "PDF 구성 종목 목록"
+        },
+        "creationUnit": {
+          "type": "string",
+          "format": "int64",
+          "title": "설정 단위"
+        },
+        "replicationMethod": {
+          "$ref": "#/definitions/etfReplicationMethod",
+          "title": "복제 방법"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 크기 (원 단위, i64)"
+        },
+        "listedQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 크기 (원 단위, i64)"
+        },
+        "leverage": {
+          "type": "number",
+          "format": "float"
+        },
+        "tradable": {
+          "type": "boolean"
+        },
+        "shortSellable": {
+          "type": "boolean"
+        },
+        "cashCreditable": {
+          "type": "boolean"
+        },
+        "cashCreationAmount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "etfEtfPdfConstituent": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "description": "symbol",
+          "title": "종목 코드"
+        },
+        "name": {
+          "type": "string",
+          "title": "종목명"
+        },
+        "productType": {
+          "$ref": "#/definitions/etfProductType",
+          "title": "상품 타입"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "구성 수량 (선물 숏의 경우 음수)"
+        }
+      },
+      "title": "PDF 구성 종목"
+    },
+    "etfListEtfsResponse": {
+      "type": "object",
+      "properties": {
+        "etfs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/etfEtf"
+          },
+          "title": "ETF 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "etfProductType": {
+      "type": "string",
+      "enum": [
+        "PRODUCT_TYPE_UNSPECIFIED",
+        "PRODUCT_TYPE_STOCK",
+        "PRODUCT_TYPE_FUTURES",
+        "PRODUCT_TYPE_ETF",
+        "PRODUCT_TYPE_CASH"
+      ],
+      "default": "PRODUCT_TYPE_UNSPECIFIED",
+      "title": "상품 타입"
+    },
+    "etfReplicationMethod": {
+      "type": "string",
+      "enum": [
+        "REPLICATION_METHOD_UNSPECIFIED",
+        "REPLICATION_METHOD_ACTIVE",
+        "REPLICATION_METHOD_PHYSICAL",
+        "REPLICATION_METHOD_SYNTHETIC"
+      ],
+      "default": "REPLICATION_METHOD_UNSPECIFIED",
+      "title": "복제 방법"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

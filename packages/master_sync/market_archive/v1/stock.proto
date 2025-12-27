@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package master_sync.v1.stock;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/master_sync/v1;master_sync";
+
+// StockService는 주식 관련 서비스를 제공합니다.
+service StockService {
+    rpc GetStock(GetStockRequest) returns (Stock) {
+        option (google.api.http) = {
+            get: "/v1/{stock=stocks/*}"
+        };
+        option (google.api.method_signature) = "stock";
+    }
+
+    rpc ListStocks(ListStocksRequest) returns (ListStocksResponse) {
+        option (google.api.http) = {
+            get: "/v1/stocks"
+        };
+        option (google.api.method_signature) = "";
+    }
+}
+
+message Stock {
+    // Stock ID
+    uint64 id = 1;
+
+    // 주식 심볼 (ISIN 코드)
+    string symbol = 2;
+
+    // 주식 코드
+    string code = 3;
+
+    // 주식 이름
+    string name = 4;
+
+    // 전일 종가
+    string prev_close = 5;
+
+    // 현재가
+    string last_price = 6;
+
+    // 시장 구분
+    MarketType market_type = 7;
+
+    // 상장 주식 수
+    int64 listed_shares = 8;
+
+    // Tick 크기 (원 단위)
+    int64 tick_size = 9;
+
+    // 거래 가능 여부
+    bool tradable = 10;
+
+    // 공매도 가능 여부
+    bool short_sellable = 11;
+
+    // 신용 거래 가능 여부
+    bool margin_tradable = 12;
+
+    // 섹터 코드
+    string sector_code = 13;
+
+    // 섹터 이름
+    string sector_name = 14;
+}
+
+// 시장 구분
+enum MarketType {
+    MARKET_TYPE_UNSPECIFIED = 0;
+    MARKET_TYPE_KOSPI = 1;
+    MARKET_TYPE_KOSDAQ = 2;
+    MARKET_TYPE_KONEX = 3;
+}
+
+// ========== Request/Response Messages ==========
+
+// GetStock
+message GetStockRequest {
+    string stock = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "master_sync.cdsapis.xyz/Stock"
+        }
+    ];
+}
+
+// ListStocks
+message ListStocksRequest {
+    // 페이지 크기 (optional)
+    optional uint32 page_size = 1;
+
+    // 페이지 토큰 (optional, for pagination)
+    optional string page_token = 2;
+
+    // 필터링 조건 (optional, AIP-160)
+    string filter = 3;
+}
+
+message ListStocksResponse {
+    // 주식 목록
+    repeated Stock stocks = 1;
+
+    // 다음 페이지 토큰
+    string next_page_token = 2;
+}

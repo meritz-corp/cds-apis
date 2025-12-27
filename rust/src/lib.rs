@@ -54,3 +54,18 @@ pub mod market_archive {
         }
     }
 }
+
+pub mod master_sync {
+    pub mod v1 {
+        pub mod etf {
+            include!("master_sync.v1.etf.rs");
+        }
+        pub mod stock {
+            include!("master_sync.v1.stock.rs");
+        }
+        pub mod futures {
+            include!("master_sync.v1.futures.rs");
+        }
+
+    }
+}
