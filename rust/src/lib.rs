@@ -57,6 +57,9 @@ pub mod market_archive {
 
 pub mod master_sync {
     pub mod v1 {
+        pub mod instrument {
+            include!("master_sync.v1.instrument.rs");
+        }
         pub mod etf {
             include!("master_sync.v1.etf.rs");
         }

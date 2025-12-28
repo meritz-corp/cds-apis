@@ -1,0 +1,225 @@
+syntax = "proto3";
+
+package master_sync.v1.instrument;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+import "market_archive/v1/stock.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/master_sync/v1;master_sync";
+
+// InstrumentService는 통합 상품 조회 서비스를 제공합니다.
+service InstrumentService {
+  // symbol로 상품 조회 (타입 자동 판별)
+  rpc GetInstrument(GetInstrumentRequest) returns (Instrument) {
+    option (google.api.http) = {
+      get: "/v1/{instrument=instruments/*}"
+    };
+    option (google.api.method_signature) = "instrument";
+  }
+
+  // 여러 symbol 배치 조회 (AIP-231)
+  rpc BatchGetInstruments(BatchGetInstrumentsRequest) returns (BatchGetInstrumentsResponse) {
+    option (google.api.http) = {
+      get: "/v1/instruments:batchGet"
+    };
+  }
+
+  // 통합 상품 리스트
+  rpc ListInstruments(ListInstrumentsRequest) returns (ListInstrumentsResponse) {
+    option (google.api.http) = {
+      get: "/v1/instruments"
+    };
+  }
+}
+
+// 통합 상품 메시지
+message Instrument {
+  option (google.api.resource) = {
+    type: "master_sync.cdsapis.xyz/Instrument"
+    pattern: "instruments/{symbol}"
+  };
+
+  // 리소스 이름 (instruments/{symbol})
+  string name = 1;
+
+  // 심볼 (고유 식별자)
+  string symbol = 2;
+
+  // 상품 코드
+  string code = 3;
+
+  // 상품명
+  string display_name = 4;
+
+  // 상품 타입
+  ProductType product_type = 5;
+
+  // 전일 종가
+  string prev_close = 6;
+
+  // 현재가
+  string last_price = 7;
+
+  // 거래 가능 여부
+  bool tradable = 8;
+
+  // 상품별 상세 정보
+  oneof details {
+    EtfDetails etf = 20;
+    FuturesDetails futures = 21;
+    StockDetails stock = 22;
+  }
+}
+
+// 상품 타입
+enum ProductType {
+  PRODUCT_TYPE_UNSPECIFIED = 0;
+  PRODUCT_TYPE_ETF = 1;
+  PRODUCT_TYPE_FUTURES = 2;
+  PRODUCT_TYPE_STOCK = 3;
+}
+
+// ETF 상세 정보 (ETF 전용 필드)
+message EtfDetails {
+  // 전일 NAV
+  string prev_nav = 1;
+
+  // 실시간 iNAV
+  string last_inav = 2;
+
+  // 설정 단위
+  int64 creation_unit = 3;
+
+  // Tick 크기 (원 단위)
+  int64 tick_size = 4;
+
+  // 레버리지 배율
+  float leverage = 5;
+
+  // 공매도 가능 여부
+  bool short_sellable = 6;
+
+  // 상장 주식 수
+  int64 listed_quantity = 7;
+
+  // 현금 설정 가능 여부
+  bool cash_creditable = 8;
+
+  // 현금 설정 금액
+  int64 cash_creation_amount = 9;
+}
+
+// 선물 상세 정보 (Futures 전용 필드)
+message FuturesDetails {
+  // 기초자산 심볼
+  string underlying_symbol = 1;
+
+  // 기초자산 이름
+  string underlying_name = 2;
+
+  // 만기일 (YYYYMMDD)
+  string expiry_date = 3;
+
+  // 승수 (계약 당 금액)
+  double multiplier = 4;
+
+  // Tick 크기 (포인트 단위)
+  double tick_size = 5;
+
+  // Tick 가치 (원 단위)
+  int64 tick_value = 6;
+
+  // 최종 거래일 (YYYYMMDD)
+  string last_trading_date = 7;
+}
+
+// 주식 상세 정보 (Stock 전용 필드)
+message StockDetails {
+  // 시장 구분
+  master_sync.v1.stock.MarketType market_type = 1;
+
+  // 상장 주식 수
+  int64 listed_shares = 2;
+
+  // Tick 크기 (원 단위)
+  int64 tick_size = 3;
+
+  // 공매도 가능 여부
+  bool short_sellable = 4;
+
+  // 신용 거래 가능 여부
+  bool margin_tradable = 5;
+
+  // 섹터 코드
+  string sector_code = 6;
+
+  // 섹터 이름
+  string sector_name = 7;
+}
+
+// ========== Request/Response Messages ==========
+
+message GetInstrumentRequest {
+  // instruments/{symbol}
+  string instrument = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "master_sync.cdsapis.xyz/Instrument"
+    }
+  ];
+}
+
+// BatchGet (AIP-231)
+message BatchGetInstrumentsRequest {
+  // 조회할 symbol 목록 (최대 100개)
+  // Format: ["instruments/005930", "instruments/101S6", ...]
+  repeated string instruments = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "master_sync.cdsapis.xyz/Instrument"
+    }
+  ];
+}
+
+message BatchGetInstrumentsResponse {
+  // 조회된 상품 목록 (요청 순서 보장)
+  repeated Instrument instruments = 1;
+
+  // 조회 실패한 symbol 목록
+  repeated string not_found = 2;
+}
+
+message ListInstrumentsRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * product_type - 상품 타입 (PRODUCT_TYPE_ETF, PRODUCT_TYPE_FUTURES, PRODUCT_TYPE_STOCK)
+  // * symbol - 심볼 (contains 지원)
+  // * code - 상품 코드 (contains 지원)
+  // * display_name - 상품명 (contains 지원)
+  // * tradable - 거래 가능 여부
+  //
+  // Examples:
+  // * filter=product_type=PRODUCT_TYPE_ETF
+  // * filter=symbol:"005930"
+  // * filter=tradable=true
+  // * filter=product_type=PRODUCT_TYPE_STOCK AND tradable=true
+  string filter = 3;
+}
+
+message ListInstrumentsResponse {
+  // 상품 목록
+  repeated Instrument instruments = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}

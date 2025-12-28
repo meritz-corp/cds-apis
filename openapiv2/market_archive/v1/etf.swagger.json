@@ -186,7 +186,7 @@
           "title": "종목명"
         },
         "productType": {
-          "$ref": "#/definitions/etfProductType",
+          "$ref": "#/definitions/v1etfProductType",
           "title": "상품 타입"
         },
         "quantity": {
@@ -212,18 +212,6 @@
           "title": "다음 페이지 토큰"
         }
       }
-    },
-    "etfProductType": {
-      "type": "string",
-      "enum": [
-        "PRODUCT_TYPE_UNSPECIFIED",
-        "PRODUCT_TYPE_STOCK",
-        "PRODUCT_TYPE_FUTURES",
-        "PRODUCT_TYPE_ETF",
-        "PRODUCT_TYPE_CASH"
-      ],
-      "default": "PRODUCT_TYPE_UNSPECIFIED",
-      "title": "상품 타입"
     },
     "etfReplicationMethod": {
       "type": "string",
@@ -262,6 +250,18 @@
           }
         }
       }
+    },
+    "v1etfProductType": {
+      "type": "string",
+      "enum": [
+        "PRODUCT_TYPE_UNSPECIFIED",
+        "PRODUCT_TYPE_STOCK",
+        "PRODUCT_TYPE_FUTURES",
+        "PRODUCT_TYPE_ETF",
+        "PRODUCT_TYPE_CASH"
+      ],
+      "default": "PRODUCT_TYPE_UNSPECIFIED",
+      "title": "상품 타입"
     }
   }
 }
