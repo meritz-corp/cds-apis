@@ -32,8 +32,8 @@ pub mod kdo {
         pub mod lp {
             include!("kdo.v1.lp.rs");
         }
-        pub mod stock_inventory {
-            include!("kdo.v1.stock_inventory.rs");
+        pub mod inventory {
+            include!("kdo.v1.inventory.rs");
         }
         pub mod order_log {
             include!("kdo.v1.order_log.rs");
