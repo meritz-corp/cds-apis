@@ -1,24 +1,24 @@
 //
 //  Generated code. Do not modify.
-//  source: kdo/v1/stock_inventory.proto
+//  source: kdo/v1/inventory.proto
 //
 
 import "package:connectrpc/connect.dart" as connect;
-import "stock_inventory.pb.dart" as kdov1stock_inventory;
-import "stock_inventory.connect.spec.dart" as specs;
+import "inventory.pb.dart" as kdov1inventory;
+import "inventory.connect.spec.dart" as specs;
 
-/// StockInventoryService는 주식 보유 현황 관련 서비스를 제공합니다.
-extension type StockInventoryServiceClient (connect.Transport _transport) {
-  /// 단일 주식 보유 현황 조회
-  Future<kdov1stock_inventory.StockInventory> getStockInventory(
-    kdov1stock_inventory.GetStockInventoryRequest input, {
+/// InventoryService는 재고(주식/파생) 현황 관련 서비스를 제공합니다.
+extension type InventoryServiceClient (connect.Transport _transport) {
+  /// 단일 재고 현황 조회
+  Future<kdov1inventory.Inventory> getInventory(
+    kdov1inventory.GetInventoryRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.StockInventoryService.getStockInventory,
+      specs.InventoryService.getInventory,
       input,
       signal: signal,
       headers: headers,
@@ -27,16 +27,16 @@ extension type StockInventoryServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 단일 주식 보유 현황 스트림
-  Stream<kdov1stock_inventory.StockInventory> streamStockInventory(
-    kdov1stock_inventory.GetStockInventoryRequest input, {
+  /// 단일 재고 현황 스트림
+  Stream<kdov1inventory.Inventory> streamInventory(
+    kdov1inventory.GetInventoryRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.StockInventoryService.streamStockInventory,
+      specs.InventoryService.streamInventory,
       input,
       signal: signal,
       headers: headers,
@@ -45,16 +45,16 @@ extension type StockInventoryServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 펀드별 주식 보유 현황 목록 조회
-  Future<kdov1stock_inventory.ListStockInventoriesResponse> listStockInventories(
-    kdov1stock_inventory.ListStockInventoriesRequest input, {
+  /// 펀드별 재고 현황 목록 조회
+  Future<kdov1inventory.ListInventoriesResponse> listInventories(
+    kdov1inventory.ListInventoriesRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.StockInventoryService.listStockInventories,
+      specs.InventoryService.listInventories,
       input,
       signal: signal,
       headers: headers,

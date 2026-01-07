@@ -1,0 +1,189 @@
+syntax = "proto3";
+
+package kdo.v1.inventory;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// InventoryService는 재고(주식/파생) 현황 관련 서비스를 제공합니다.
+service InventoryService {
+  // 단일 재고 현황 조회
+  rpc GetInventory(GetInventoryRequest) returns (Inventory) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}/{symbol=symbols/*}"
+    };
+    option (google.api.method_signature) = "fund,symbol";
+  }
+
+  // 단일 재고 현황 스트림
+  rpc StreamInventory(GetInventoryRequest) returns (stream Inventory) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}/{symbol=symbols/*}:stream"
+    };
+    option (google.api.method_signature) = "fund,symbol";
+  }
+
+  // 펀드별 재고 현황 목록 조회
+  rpc ListInventories(ListInventoriesRequest) returns (ListInventoriesResponse) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}"
+    };
+    option (google.api.method_signature) = "fund";
+  }
+}
+
+// 재고 유형
+enum InventoryType {
+  INVENTORY_TYPE_UNSPECIFIED = 0;
+  INVENTORY_TYPE_STOCK = 1;  // 주식
+  INVENTORY_TYPE_DERIV = 2;  // 파생상품
+}
+
+// 통합 재고 정보
+message Inventory {
+  // 종목 코드 (심볼)
+  string symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // 재고 유형
+  InventoryType inventory_type = 3;
+
+  // 재고 유형별 데이터
+  oneof data {
+    // 주식 재고 데이터
+    StockData stock = 10;
+    // 파생상품 재고 데이터
+    DerivData deriv = 11;
+  }
+}
+
+// 주식 재고 데이터
+// 일반가용과 차입가용의 이원화 구조
+message StockData {
+  // 전일잔고
+  int64 prev_balance = 1;
+
+  // 담보수량
+  int64 pledged = 2;
+
+  // 가용수량 (일반가용)
+  int64 sellable = 3;
+
+  // 차입가용수량
+  int64 borrow_sellable = 4;
+
+  // 차입수량
+  int64 borrow_quantity = 5;
+
+  // 장부수량
+  int64 book_quantity = 6;
+
+  // 장부금액 (원 단위)
+  string book_amount = 7;
+
+  // 매도예약수량 (내부용)
+  int64 selling = 8;
+
+  // 차입매도예약수량 (내부용)
+  int64 borrow_selling = 9;
+
+  // 차입매도수량 (내부용)
+  int64 borrow_sold = 10;
+}
+
+// 파생상품 재고 데이터
+// 단일 pending_quantity로 양방향 예약 관리
+message DerivData {
+  // 잔고수량 (양수: Long, 음수: Short)
+  int64 quantity = 1;
+
+  // 매입단가
+  string entry_price = 2;
+
+  // 장부금액
+  string book_amount = 3;
+
+  // 거래승수
+  double multiple = 4;
+
+  // 미체결수량 (양수: 매수대기, 음수: 매도대기) (내부용)
+  int64 pending_quantity = 5;
+}
+
+// ========== Request/Response Messages ==========
+
+// GetInventory 요청
+message GetInventoryRequest {
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  string symbol = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+// ListInventories 요청
+message ListInventoriesRequest {
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 2;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 3;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Operators:
+  // * symbol
+  //   * `equal`, `contains`
+  // * inventory_type
+  //   * `equal` (INVENTORY_TYPE_STOCK, INVENTORY_TYPE_DERIV)
+  // * stock.sellable, stock.book_quantity
+  //   * `equal`, `greater_than`, `less_than`
+  // * deriv.quantity
+  //   * `equal`, `greater_than`, `less_than`
+  //
+  // Examples:
+  // * filter=symbol:"005930"
+  // * filter=inventory_type=INVENTORY_TYPE_STOCK
+  // * filter=stock.sellable > 1000
+  // * filter=deriv.quantity < 0 (Short 포지션만)
+  string filter = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // 오더링 조건 (optional, AIP-132)
+  //
+  // Supported Fields:
+  // * "symbol", "inventory_type"
+  // * "stock.sellable", "stock.book_quantity", "stock.book_amount"
+  // * "deriv.quantity", "deriv.book_amount"
+  //
+  // Examples:
+  // * order_by=stock.book_amount desc
+  // * order_by=deriv.quantity asc
+  string order_by = 5 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// ListInventories 응답
+message ListInventoriesResponse {
+  // 재고 현황 목록
+  repeated Inventory inventories = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}

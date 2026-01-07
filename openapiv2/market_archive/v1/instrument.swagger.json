@@ -1,0 +1,389 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "market_archive/v1/instrument.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "InstrumentService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/instruments": {
+      "get": {
+        "summary": "통합 상품 리스트",
+        "operationId": "InstrumentService_ListInstruments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instrumentListInstrumentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* product_type - 상품 타입 (PRODUCT_TYPE_ETF, PRODUCT_TYPE_FUTURES, PRODUCT_TYPE_STOCK)\n* symbol - 심볼 (contains 지원)\n* code - 상품 코드 (contains 지원)\n* display_name - 상품명 (contains 지원)\n* tradable - 거래 가능 여부\n\nExamples:\n* filter=product_type=PRODUCT_TYPE_ETF\n* filter=symbol:\"005930\"\n* filter=tradable=true\n* filter=product_type=PRODUCT_TYPE_STOCK AND tradable=true",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InstrumentService"
+        ]
+      }
+    },
+    "/v1/instruments:batchGet": {
+      "get": {
+        "summary": "여러 symbol 배치 조회 (AIP-231)",
+        "operationId": "InstrumentService_BatchGetInstruments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instrumentBatchGetInstrumentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instruments",
+            "description": "조회할 symbol 목록 (최대 100개)\nFormat: [\"instruments/005930\", \"instruments/101S6\", ...]",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "InstrumentService"
+        ]
+      }
+    },
+    "/v1/{instrument}": {
+      "get": {
+        "summary": "symbol로 상품 조회 (타입 자동 판별)",
+        "operationId": "InstrumentService_GetInstrument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instrumentInstrument"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instrument",
+            "description": "instruments/{symbol}",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "instruments/[^/]+"
+          }
+        ],
+        "tags": [
+          "InstrumentService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "instrumentBatchGetInstrumentsResponse": {
+      "type": "object",
+      "properties": {
+        "instruments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/instrumentInstrument"
+          },
+          "title": "조회된 상품 목록 (요청 순서 보장)"
+        },
+        "notFound": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "조회 실패한 symbol 목록"
+        }
+      }
+    },
+    "instrumentEtfDetails": {
+      "type": "object",
+      "properties": {
+        "prevNav": {
+          "type": "string",
+          "title": "전일 NAV"
+        },
+        "lastInav": {
+          "type": "string",
+          "title": "실시간 iNAV"
+        },
+        "creationUnit": {
+          "type": "string",
+          "format": "int64",
+          "title": "설정 단위"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 크기 (원 단위)"
+        },
+        "leverage": {
+          "type": "number",
+          "format": "float",
+          "title": "레버리지 배율"
+        },
+        "shortSellable": {
+          "type": "boolean",
+          "title": "공매도 가능 여부"
+        },
+        "listedQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "상장 주식 수"
+        },
+        "cashCreditable": {
+          "type": "boolean",
+          "title": "현금 설정 가능 여부"
+        },
+        "cashCreationAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "현금 설정 금액"
+        }
+      },
+      "title": "ETF 상세 정보 (ETF 전용 필드)"
+    },
+    "instrumentFuturesDetails": {
+      "type": "object",
+      "properties": {
+        "underlyingSymbol": {
+          "type": "string",
+          "title": "기초자산 심볼"
+        },
+        "underlyingName": {
+          "type": "string",
+          "title": "기초자산 이름"
+        },
+        "expiryDate": {
+          "type": "string",
+          "title": "만기일 (YYYYMMDD)"
+        },
+        "multiplier": {
+          "type": "number",
+          "format": "double",
+          "title": "승수 (계약 당 금액)"
+        },
+        "tickSize": {
+          "type": "number",
+          "format": "double",
+          "title": "Tick 크기 (포인트 단위)"
+        },
+        "tickValue": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 가치 (원 단위)"
+        },
+        "lastTradingDate": {
+          "type": "string",
+          "title": "최종 거래일 (YYYYMMDD)"
+        }
+      },
+      "title": "선물 상세 정보 (Futures 전용 필드)"
+    },
+    "instrumentInstrument": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (instruments/{symbol})"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "심볼 (고유 식별자)"
+        },
+        "code": {
+          "type": "string",
+          "title": "상품 코드"
+        },
+        "displayName": {
+          "type": "string",
+          "title": "상품명"
+        },
+        "productType": {
+          "$ref": "#/definitions/v1instrumentProductType",
+          "title": "상품 타입"
+        },
+        "prevClose": {
+          "type": "string",
+          "title": "전일 종가"
+        },
+        "lastPrice": {
+          "type": "string",
+          "title": "현재가"
+        },
+        "tradable": {
+          "type": "boolean",
+          "title": "거래 가능 여부"
+        },
+        "etf": {
+          "$ref": "#/definitions/instrumentEtfDetails"
+        },
+        "futures": {
+          "$ref": "#/definitions/instrumentFuturesDetails"
+        },
+        "stock": {
+          "$ref": "#/definitions/instrumentStockDetails"
+        }
+      },
+      "title": "통합 상품 메시지"
+    },
+    "instrumentListInstrumentsResponse": {
+      "type": "object",
+      "properties": {
+        "instruments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/instrumentInstrument"
+          },
+          "title": "상품 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "instrumentStockDetails": {
+      "type": "object",
+      "properties": {
+        "marketType": {
+          "$ref": "#/definitions/v1stockMarketType",
+          "title": "시장 구분"
+        },
+        "listedShares": {
+          "type": "string",
+          "format": "int64",
+          "title": "상장 주식 수"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick 크기 (원 단위)"
+        },
+        "shortSellable": {
+          "type": "boolean",
+          "title": "공매도 가능 여부"
+        },
+        "marginTradable": {
+          "type": "boolean",
+          "title": "신용 거래 가능 여부"
+        },
+        "sectorCode": {
+          "type": "string",
+          "title": "섹터 코드"
+        },
+        "sectorName": {
+          "type": "string",
+          "title": "섹터 이름"
+        }
+      },
+      "title": "주식 상세 정보 (Stock 전용 필드)"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1instrumentProductType": {
+      "type": "string",
+      "enum": [
+        "PRODUCT_TYPE_UNSPECIFIED",
+        "PRODUCT_TYPE_ETF",
+        "PRODUCT_TYPE_FUTURES",
+        "PRODUCT_TYPE_STOCK"
+      ],
+      "default": "PRODUCT_TYPE_UNSPECIFIED",
+      "title": "상품 타입"
+    },
+    "v1stockMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_TYPE_UNSPECIFIED",
+        "MARKET_TYPE_KOSPI",
+        "MARKET_TYPE_KOSDAQ",
+        "MARKET_TYPE_KONEX"
+      ],
+      "default": "MARKET_TYPE_UNSPECIFIED",
+      "title": "시장 구분"
+    }
+  }
+}

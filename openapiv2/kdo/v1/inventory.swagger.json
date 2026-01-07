@@ -1,0 +1,335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/inventory.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "InventoryService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/inventories/{fund}": {
+      "get": {
+        "summary": "펀드별 재고 현황 목록 조회",
+        "operationId": "InventoryService_ListInventories",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryListInventoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Operators:\n* symbol\n  * `equal`, `contains`\n* inventory_type\n  * `equal` (INVENTORY_TYPE_STOCK, INVENTORY_TYPE_DERIV)\n* stock.sellable, stock.book_quantity\n  * `equal`, `greater_than`, `less_than`\n* deriv.quantity\n  * `equal`, `greater_than`, `less_than`\n\nExamples:\n* filter=symbol:\"005930\"\n* filter=inventory_type=INVENTORY_TYPE_STOCK\n* filter=stock.sellable \u003e 1000\n* filter=deriv.quantity \u003c 0 (Short 포지션만)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "오더링 조건 (optional, AIP-132)\n\nSupported Fields:\n* \"symbol\", \"inventory_type\"\n* \"stock.sellable\", \"stock.book_quantity\", \"stock.book_amount\"\n* \"deriv.quantity\", \"deriv.book_amount\"\n\nExamples:\n* order_by=stock.book_amount desc\n* order_by=deriv.quantity asc",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
+    "/v1/inventories/{fund}/{symbol}": {
+      "get": {
+        "summary": "단일 재고 현황 조회",
+        "operationId": "InventoryService_GetInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "symbols/[^/]+"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
+    "/v1/inventories/{fund}/{symbol}:stream": {
+      "get": {
+        "summary": "단일 재고 현황 스트림",
+        "operationId": "InventoryService_StreamInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/inventoryInventory"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of inventoryInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "symbols/[^/]+"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "inventoryDerivData": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "잔고수량 (양수: Long, 음수: Short)"
+        },
+        "entryPrice": {
+          "type": "string",
+          "title": "매입단가"
+        },
+        "bookAmount": {
+          "type": "string",
+          "title": "장부금액"
+        },
+        "multiple": {
+          "type": "number",
+          "format": "double",
+          "title": "거래승수"
+        },
+        "pendingQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결수량 (양수: 매수대기, 음수: 매도대기) (내부용)"
+        }
+      },
+      "title": "파생상품 재고 데이터\n단일 pending_quantity로 양방향 예약 관리"
+    },
+    "inventoryInventory": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 코드 (심볼)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "inventoryType": {
+          "$ref": "#/definitions/inventoryInventoryType",
+          "title": "재고 유형"
+        },
+        "stock": {
+          "$ref": "#/definitions/inventoryStockData",
+          "title": "주식 재고 데이터"
+        },
+        "deriv": {
+          "$ref": "#/definitions/inventoryDerivData",
+          "title": "파생상품 재고 데이터"
+        }
+      },
+      "title": "통합 재고 정보"
+    },
+    "inventoryInventoryType": {
+      "type": "string",
+      "enum": [
+        "INVENTORY_TYPE_UNSPECIFIED",
+        "INVENTORY_TYPE_STOCK",
+        "INVENTORY_TYPE_DERIV"
+      ],
+      "default": "INVENTORY_TYPE_UNSPECIFIED",
+      "description": "- INVENTORY_TYPE_STOCK: 주식\n - INVENTORY_TYPE_DERIV: 파생상품",
+      "title": "재고 유형"
+    },
+    "inventoryListInventoriesResponse": {
+      "type": "object",
+      "properties": {
+        "inventories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inventoryInventory"
+          },
+          "title": "재고 현황 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      },
+      "title": "ListInventories 응답"
+    },
+    "inventoryStockData": {
+      "type": "object",
+      "properties": {
+        "prevBalance": {
+          "type": "string",
+          "format": "int64",
+          "title": "전일잔고"
+        },
+        "pledged": {
+          "type": "string",
+          "format": "int64",
+          "title": "담보수량"
+        },
+        "sellable": {
+          "type": "string",
+          "format": "int64",
+          "title": "가용수량 (일반가용)"
+        },
+        "borrowSellable": {
+          "type": "string",
+          "format": "int64",
+          "title": "차입가용수량"
+        },
+        "borrowQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "차입수량"
+        },
+        "bookQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "장부수량"
+        },
+        "bookAmount": {
+          "type": "string",
+          "title": "장부금액 (원 단위)"
+        },
+        "selling": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도예약수량 (내부용)"
+        },
+        "borrowSelling": {
+          "type": "string",
+          "format": "int64",
+          "title": "차입매도예약수량 (내부용)"
+        },
+        "borrowSold": {
+          "type": "string",
+          "format": "int64",
+          "title": "차입매도수량 (내부용)"
+        }
+      },
+      "title": "주식 재고 데이터\n일반가용과 차입가용의 이원화 구조"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

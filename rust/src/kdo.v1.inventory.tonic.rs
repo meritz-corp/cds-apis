@@ -1,14 +1,14 @@
 // @generated
 /// Generated client implementations.
-pub mod stock_inventory_service_client {
+pub mod inventory_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct StockInventoryServiceClient<T> {
+    pub struct InventoryServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl StockInventoryServiceClient<tonic::transport::Channel> {
+    impl InventoryServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -19,7 +19,7 @@ pub mod stock_inventory_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> StockInventoryServiceClient<T>
+    impl<T> InventoryServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -37,7 +37,7 @@ pub mod stock_inventory_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> StockInventoryServiceClient<InterceptedService<T, F>>
+        ) -> InventoryServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -51,7 +51,7 @@ pub mod stock_inventory_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            StockInventoryServiceClient::new(InterceptedService::new(inner, interceptor))
+            InventoryServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -84,10 +84,10 @@ pub mod stock_inventory_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn get_stock_inventory(
+        pub async fn get_inventory(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetStockInventoryRequest>,
-        ) -> std::result::Result<tonic::Response<super::StockInventory>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetInventoryRequest>,
+        ) -> std::result::Result<tonic::Response<super::Inventory>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -99,23 +99,20 @@ pub mod stock_inventory_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.stock_inventory.StockInventoryService/GetStockInventory",
+                "/kdo.v1.inventory.InventoryService/GetInventory",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.stock_inventory.StockInventoryService",
-                        "GetStockInventory",
-                    ),
+                    GrpcMethod::new("kdo.v1.inventory.InventoryService", "GetInventory"),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_stock_inventory(
+        pub async fn stream_inventory(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetStockInventoryRequest>,
+            request: impl tonic::IntoRequest<super::GetInventoryRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::StockInventory>>,
+            tonic::Response<tonic::codec::Streaming<super::Inventory>>,
             tonic::Status,
         > {
             self.inner
@@ -129,23 +126,23 @@ pub mod stock_inventory_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.stock_inventory.StockInventoryService/StreamStockInventory",
+                "/kdo.v1.inventory.InventoryService/StreamInventory",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "kdo.v1.stock_inventory.StockInventoryService",
-                        "StreamStockInventory",
+                        "kdo.v1.inventory.InventoryService",
+                        "StreamInventory",
                     ),
                 );
             self.inner.server_streaming(req, path, codec).await
         }
-        pub async fn list_stock_inventories(
+        pub async fn list_inventories(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListStockInventoriesRequest>,
+            request: impl tonic::IntoRequest<super::ListInventoriesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListStockInventoriesResponse>,
+            tonic::Response<super::ListInventoriesResponse>,
             tonic::Status,
         > {
             self.inner
@@ -159,14 +156,14 @@ pub mod stock_inventory_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.stock_inventory.StockInventoryService/ListStockInventories",
+                "/kdo.v1.inventory.InventoryService/ListInventories",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "kdo.v1.stock_inventory.StockInventoryService",
-                        "ListStockInventories",
+                        "kdo.v1.inventory.InventoryService",
+                        "ListInventories",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -174,46 +171,46 @@ pub mod stock_inventory_service_client {
     }
 }
 /// Generated server implementations.
-pub mod stock_inventory_service_server {
+pub mod inventory_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with StockInventoryServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with InventoryServiceServer.
     #[async_trait]
-    pub trait StockInventoryService: Send + Sync + 'static {
-        async fn get_stock_inventory(
+    pub trait InventoryService: Send + Sync + 'static {
+        async fn get_inventory(
             &self,
-            request: tonic::Request<super::GetStockInventoryRequest>,
-        ) -> std::result::Result<tonic::Response<super::StockInventory>, tonic::Status>;
-        /// Server streaming response type for the StreamStockInventory method.
-        type StreamStockInventoryStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::StockInventory, tonic::Status>,
+            request: tonic::Request<super::GetInventoryRequest>,
+        ) -> std::result::Result<tonic::Response<super::Inventory>, tonic::Status>;
+        /// Server streaming response type for the StreamInventory method.
+        type StreamInventoryStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::Inventory, tonic::Status>,
             >
             + Send
             + 'static;
-        async fn stream_stock_inventory(
+        async fn stream_inventory(
             &self,
-            request: tonic::Request<super::GetStockInventoryRequest>,
+            request: tonic::Request<super::GetInventoryRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamStockInventoryStream>,
+            tonic::Response<Self::StreamInventoryStream>,
             tonic::Status,
         >;
-        async fn list_stock_inventories(
+        async fn list_inventories(
             &self,
-            request: tonic::Request<super::ListStockInventoriesRequest>,
+            request: tonic::Request<super::ListInventoriesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListStockInventoriesResponse>,
+            tonic::Response<super::ListInventoriesResponse>,
             tonic::Status,
         >;
     }
     #[derive(Debug)]
-    pub struct StockInventoryServiceServer<T: StockInventoryService> {
+    pub struct InventoryServiceServer<T: InventoryService> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T: StockInventoryService> StockInventoryServiceServer<T> {
+    impl<T: InventoryService> InventoryServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -264,10 +261,9 @@ pub mod stock_inventory_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>>
-    for StockInventoryServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for InventoryServiceServer<T>
     where
-        T: StockInventoryService,
+        T: InventoryService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -282,28 +278,25 @@ pub mod stock_inventory_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/kdo.v1.stock_inventory.StockInventoryService/GetStockInventory" => {
+                "/kdo.v1.inventory.InventoryService/GetInventory" => {
                     #[allow(non_camel_case_types)]
-                    struct GetStockInventorySvc<T: StockInventoryService>(pub Arc<T>);
+                    struct GetInventorySvc<T: InventoryService>(pub Arc<T>);
                     impl<
-                        T: StockInventoryService,
-                    > tonic::server::UnaryService<super::GetStockInventoryRequest>
-                    for GetStockInventorySvc<T> {
-                        type Response = super::StockInventory;
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::GetInventoryRequest>
+                    for GetInventorySvc<T> {
+                        type Response = super::Inventory;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetStockInventoryRequest>,
+                            request: tonic::Request<super::GetInventoryRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as StockInventoryService>::get_stock_inventory(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as InventoryService>::get_inventory(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -315,7 +308,7 @@ pub mod stock_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetStockInventorySvc(inner);
+                        let method = GetInventorySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -331,30 +324,26 @@ pub mod stock_inventory_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.stock_inventory.StockInventoryService/StreamStockInventory" => {
+                "/kdo.v1.inventory.InventoryService/StreamInventory" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamStockInventorySvc<T: StockInventoryService>(pub Arc<T>);
+                    struct StreamInventorySvc<T: InventoryService>(pub Arc<T>);
                     impl<
-                        T: StockInventoryService,
-                    > tonic::server::ServerStreamingService<
-                        super::GetStockInventoryRequest,
-                    > for StreamStockInventorySvc<T> {
-                        type Response = super::StockInventory;
-                        type ResponseStream = T::StreamStockInventoryStream;
+                        T: InventoryService,
+                    > tonic::server::ServerStreamingService<super::GetInventoryRequest>
+                    for StreamInventorySvc<T> {
+                        type Response = super::Inventory;
+                        type ResponseStream = T::StreamInventoryStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetStockInventoryRequest>,
+                            request: tonic::Request<super::GetInventoryRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as StockInventoryService>::stream_stock_inventory(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as InventoryService>::stream_inventory(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -366,7 +355,7 @@ pub mod stock_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamStockInventorySvc(inner);
+                        let method = StreamInventorySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -382,28 +371,25 @@ pub mod stock_inventory_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.stock_inventory.StockInventoryService/ListStockInventories" => {
+                "/kdo.v1.inventory.InventoryService/ListInventories" => {
                     #[allow(non_camel_case_types)]
-                    struct ListStockInventoriesSvc<T: StockInventoryService>(pub Arc<T>);
+                    struct ListInventoriesSvc<T: InventoryService>(pub Arc<T>);
                     impl<
-                        T: StockInventoryService,
-                    > tonic::server::UnaryService<super::ListStockInventoriesRequest>
-                    for ListStockInventoriesSvc<T> {
-                        type Response = super::ListStockInventoriesResponse;
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::ListInventoriesRequest>
+                    for ListInventoriesSvc<T> {
+                        type Response = super::ListInventoriesResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListStockInventoriesRequest>,
+                            request: tonic::Request<super::ListInventoriesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as StockInventoryService>::list_stock_inventories(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as InventoryService>::list_inventories(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -415,7 +401,7 @@ pub mod stock_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ListStockInventoriesSvc(inner);
+                        let method = ListInventoriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -449,7 +435,7 @@ pub mod stock_inventory_service_server {
             }
         }
     }
-    impl<T: StockInventoryService> Clone for StockInventoryServiceServer<T> {
+    impl<T: InventoryService> Clone for InventoryServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -461,8 +447,7 @@ pub mod stock_inventory_service_server {
             }
         }
     }
-    impl<T: StockInventoryService> tonic::server::NamedService
-    for StockInventoryServiceServer<T> {
-        const NAME: &'static str = "kdo.v1.stock_inventory.StockInventoryService";
+    impl<T: InventoryService> tonic::server::NamedService for InventoryServiceServer<T> {
+        const NAME: &'static str = "kdo.v1.inventory.InventoryService";
     }
 }
