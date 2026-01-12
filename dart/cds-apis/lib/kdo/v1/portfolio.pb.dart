@@ -464,6 +464,7 @@ class PortfolioExposure extends $pb.GeneratedMessage {
     $fixnum.Int64? netPnl,
     $fixnum.Int64? totalNetQuantity,
     $fixnum.Int64? totalExposureAmount,
+    NetExposures? netExposures,
     $1.Timestamp? lastUpdate,
   }) {
     final result = create();
@@ -477,6 +478,7 @@ class PortfolioExposure extends $pb.GeneratedMessage {
     if (netPnl != null) result.netPnl = netPnl;
     if (totalNetQuantity != null) result.totalNetQuantity = totalNetQuantity;
     if (totalExposureAmount != null) result.totalExposureAmount = totalExposureAmount;
+    if (netExposures != null) result.netExposures = netExposures;
     if (lastUpdate != null) result.lastUpdate = lastUpdate;
     return result;
   }
@@ -497,7 +499,8 @@ class PortfolioExposure extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'netPnl')
     ..aInt64(9, _omitFieldNames ? '' : 'totalNetQuantity')
     ..aInt64(10, _omitFieldNames ? '' : 'totalExposureAmount')
-    ..aOM<$1.Timestamp>(11, _omitFieldNames ? '' : 'lastUpdate', subBuilder: $1.Timestamp.create)
+    ..aOM<NetExposures>(11, _omitFieldNames ? '' : 'netExposures', subBuilder: NetExposures.create)
+    ..aOM<$1.Timestamp>(15, _omitFieldNames ? '' : 'lastUpdate', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -606,17 +609,30 @@ class PortfolioExposure extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearTotalExposureAmount() => $_clearField(10);
 
+  /// Net Exposures (Hedge 변환 후 상계된 결과)
+  /// positions를 nettings 설정에 따라 분해/변환한 결과
+  @$pb.TagNumber(11)
+  NetExposures get netExposures => $_getN(10);
+  @$pb.TagNumber(11)
+  set netExposures(NetExposures value) => $_setField(11, value);
+  @$pb.TagNumber(11)
+  $core.bool hasNetExposures() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearNetExposures() => $_clearField(11);
+  @$pb.TagNumber(11)
+  NetExposures ensureNetExposures() => $_ensure(10);
+
   /// 마지막 업데이트 시간
-  @$pb.TagNumber(11)
-  $1.Timestamp get lastUpdate => $_getN(10);
-  @$pb.TagNumber(11)
-  set lastUpdate($1.Timestamp value) => $_setField(11, value);
-  @$pb.TagNumber(11)
-  $core.bool hasLastUpdate() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearLastUpdate() => $_clearField(11);
-  @$pb.TagNumber(11)
-  $1.Timestamp ensureLastUpdate() => $_ensure(10);
+  @$pb.TagNumber(15)
+  $1.Timestamp get lastUpdate => $_getN(11);
+  @$pb.TagNumber(15)
+  set lastUpdate($1.Timestamp value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasLastUpdate() => $_has(11);
+  @$pb.TagNumber(15)
+  void clearLastUpdate() => $_clearField(15);
+  @$pb.TagNumber(15)
+  $1.Timestamp ensureLastUpdate() => $_ensure(11);
 }
 
 /// 심볼별 통합 포지션
@@ -843,6 +859,161 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
   $core.bool hasUnrealizedPnl() => $_has(5);
   @$pb.TagNumber(6)
   void clearUnrealizedPnl() => $_clearField(6);
+}
+
+/// Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)
+class NetExposures extends $pb.GeneratedMessage {
+  factory NetExposures({
+    $core.Iterable<NetExposure>? exposures,
+    $fixnum.Int64? totalQuantity,
+    $fixnum.Int64? totalExposure,
+  }) {
+    final result = create();
+    if (exposures != null) result.exposures.addAll(exposures);
+    if (totalQuantity != null) result.totalQuantity = totalQuantity;
+    if (totalExposure != null) result.totalExposure = totalExposure;
+    return result;
+  }
+
+  NetExposures._();
+
+  factory NetExposures.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory NetExposures.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NetExposures', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..pc<NetExposure>(1, _omitFieldNames ? '' : 'exposures', $pb.PbFieldType.PM, subBuilder: NetExposure.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'totalQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'totalExposure')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NetExposures clone() => NetExposures()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NetExposures copyWith(void Function(NetExposures) updates) => super.copyWith((message) => updates(message as NetExposures)) as NetExposures;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NetExposures create() => NetExposures._();
+  @$core.override
+  NetExposures createEmptyInstance() => create();
+  static $pb.PbList<NetExposures> createRepeated() => $pb.PbList<NetExposures>();
+  @$core.pragma('dart2js:noInline')
+  static NetExposures getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NetExposures>(create);
+  static NetExposures? _defaultInstance;
+
+  /// 심볼별 Net Exposure
+  @$pb.TagNumber(1)
+  $pb.PbList<NetExposure> get exposures => $_getList(0);
+
+  /// 전체 수량 합계
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get totalQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set totalQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTotalQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTotalQuantity() => $_clearField(2);
+
+  /// 전체 익스포저 금액
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get totalExposure => $_getI64(2);
+  @$pb.TagNumber(3)
+  set totalExposure($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTotalExposure() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalExposure() => $_clearField(3);
+}
+
+/// Net Exposure (변환된 포지션)
+class NetExposure extends $pb.GeneratedMessage {
+  factory NetExposure({
+    $core.String? symbol,
+    $fixnum.Int64? netQuantity,
+    $core.double? currentPrice,
+    $fixnum.Int64? exposureAmount,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (netQuantity != null) result.netQuantity = netQuantity;
+    if (currentPrice != null) result.currentPrice = currentPrice;
+    if (exposureAmount != null) result.exposureAmount = exposureAmount;
+    return result;
+  }
+
+  NetExposure._();
+
+  factory NetExposure.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory NetExposure.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NetExposure', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'netQuantity')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'currentPrice', $pb.PbFieldType.OD)
+    ..aInt64(4, _omitFieldNames ? '' : 'exposureAmount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NetExposure clone() => NetExposure()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NetExposure copyWith(void Function(NetExposure) updates) => super.copyWith((message) => updates(message as NetExposure)) as NetExposure;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NetExposure create() => NetExposure._();
+  @$core.override
+  NetExposure createEmptyInstance() => create();
+  static $pb.PbList<NetExposure> createRepeated() => $pb.PbList<NetExposure>();
+  @$core.pragma('dart2js:noInline')
+  static NetExposure getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NetExposure>(create);
+  static NetExposure? _defaultInstance;
+
+  /// 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 누적 수량 (분해 후 합산)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get netQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set netQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNetQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNetQuantity() => $_clearField(2);
+
+  /// 현재가
+  @$pb.TagNumber(3)
+  $core.double get currentPrice => $_getN(2);
+  @$pb.TagNumber(3)
+  set currentPrice($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCurrentPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCurrentPrice() => $_clearField(3);
+
+  /// 익스포저 금액 (net_quantity * current_price)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get exposureAmount => $_getI64(3);
+  @$pb.TagNumber(4)
+  set exposureAmount($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExposureAmount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExposureAmount() => $_clearField(4);
 }
 
 /// HedgeGroup 요약 정보 (포트폴리오 컨텍스트)

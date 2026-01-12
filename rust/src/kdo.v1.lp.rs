@@ -159,23 +159,21 @@ pub struct OrderStats {
     #[prost(int64, tag="6")]
     pub daily_filled_quantity: i64,
 }
-/// Order Limiter 상태
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OrderLimitStatus {
-    /// 일일 누적 체결 수량 (i64)
-    #[prost(int64, tag="1")]
-    pub daily_filled_quantity: i64,
-    /// 일일 누적 체결 수량 한도 (i64)
-    #[prost(int64, tag="2")]
-    pub daily_cumulative_limit: i64,
-    /// 시간 프레임별 주문 개수 현황
-    #[prost(message, repeated, tag="3")]
-    pub time_frame_status: ::prost::alloc::vec::Vec<TimeFrameStatus>,
-    /// 일일 사용률 (%)
-    #[prost(double, tag="4")]
-    pub daily_usage_percent: f64,
-}
+// Order Limiter 상태
+// message OrderLimitStatus {
+//   // 일일 누적 체결 수량 (i64)
+//   int64 daily_filled_quantity = 1;
+//
+//   // 일일 누적 체결 수량 한도 (i64)
+//   int64 daily_cumulative_limit = 2;
+//
+//   // 시간 프레임별 주문 개수 현황
+//   repeated TimeFrameStatus time_frame_status = 3;
+//
+//   // 일일 사용률 (%)
+//   double daily_usage_percent = 4;
+// }
+
 /// 시간 프레임별 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

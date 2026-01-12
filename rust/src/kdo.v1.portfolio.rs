@@ -127,8 +127,12 @@ pub struct PortfolioExposure {
     /// 전체 exposure 금액
     #[prost(int64, tag="10")]
     pub total_exposure_amount: i64,
-    /// 마지막 업데이트 시간
+    /// Net Exposures (Hedge 변환 후 상계된 결과)
+    /// positions를 nettings 설정에 따라 분해/변환한 결과
     #[prost(message, optional, tag="11")]
+    pub net_exposures: ::core::option::Option<NetExposures>,
+    /// 마지막 업데이트 시간
+    #[prost(message, optional, tag="15")]
     pub last_update: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// 심볼별 통합 포지션
@@ -176,6 +180,37 @@ pub struct FundSymbolPosition {
     /// 미실현 손익
     #[prost(int64, tag="6")]
     pub unrealized_pnl: i64,
+}
+/// Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NetExposures {
+    /// 심볼별 Net Exposure
+    #[prost(message, repeated, tag="1")]
+    pub exposures: ::prost::alloc::vec::Vec<NetExposure>,
+    /// 전체 수량 합계
+    #[prost(int64, tag="2")]
+    pub total_quantity: i64,
+    /// 전체 익스포저 금액
+    #[prost(int64, tag="3")]
+    pub total_exposure: i64,
+}
+/// Net Exposure (변환된 포지션)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NetExposure {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 누적 수량 (분해 후 합산)
+    #[prost(int64, tag="2")]
+    pub net_quantity: i64,
+    /// 현재가
+    #[prost(double, tag="3")]
+    pub current_price: f64,
+    /// 익스포저 금액 (net_quantity * current_price)
+    #[prost(int64, tag="4")]
+    pub exposure_amount: i64,
 }
 /// HedgeGroup 요약 정보 (포트폴리오 컨텍스트)
 #[allow(clippy::derive_partial_eq_without_eq)]

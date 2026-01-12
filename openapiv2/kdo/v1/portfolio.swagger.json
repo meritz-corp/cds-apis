@@ -569,6 +569,54 @@
       },
       "title": "ListPortfolios 응답"
     },
+    "portfolioNetExposure": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "netQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 수량 (분해 후 합산)"
+        },
+        "currentPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "현재가"
+        },
+        "exposureAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "익스포저 금액 (net_quantity * current_price)"
+        }
+      },
+      "title": "Net Exposure (변환된 포지션)"
+    },
+    "portfolioNetExposures": {
+      "type": "object",
+      "properties": {
+        "exposures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/portfolioNetExposure"
+          },
+          "title": "심볼별 Net Exposure"
+        },
+        "totalQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "전체 수량 합계"
+        },
+        "totalExposure": {
+          "type": "string",
+          "format": "int64",
+          "title": "전체 익스포저 금액"
+        }
+      },
+      "title": "Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)"
+    },
     "portfolioPortfolio": {
       "type": "object",
       "properties": {
@@ -668,6 +716,10 @@
           "type": "string",
           "format": "int64",
           "title": "전체 exposure 금액"
+        },
+        "netExposures": {
+          "$ref": "#/definitions/portfolioNetExposures",
+          "title": "Net Exposures (Hedge 변환 후 상계된 결과)\npositions를 nettings 설정에 따라 분해/변환한 결과"
         },
         "lastUpdate": {
           "type": "string",

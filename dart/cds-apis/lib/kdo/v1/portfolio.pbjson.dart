@@ -105,7 +105,8 @@ const PortfolioExposure$json = {
     {'1': 'net_pnl', '3': 8, '4': 1, '5': 3, '10': 'netPnl'},
     {'1': 'total_net_quantity', '3': 9, '4': 1, '5': 3, '10': 'totalNetQuantity'},
     {'1': 'total_exposure_amount', '3': 10, '4': 1, '5': 3, '10': 'totalExposureAmount'},
-    {'1': 'last_update', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastUpdate'},
+    {'1': 'net_exposures', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.portfolio.NetExposures', '10': 'netExposures'},
+    {'1': 'last_update', '3': 15, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastUpdate'},
   ],
 };
 
@@ -119,8 +120,10 @@ final $typed_data.Uint8List portfolioExposureDescriptor = $convert.base64Decode(
     'gFIAEoA1ILcmVhbGl6ZWRQbmwSJQoOdW5yZWFsaXplZF9wbmwYBiABKANSDXVucmVhbGl6ZWRQ'
     'bmwSIQoMdHJhZGluZ19jb3N0GAcgASgDUgt0cmFkaW5nQ29zdBIXCgduZXRfcG5sGAggASgDUg'
     'ZuZXRQbmwSLAoSdG90YWxfbmV0X3F1YW50aXR5GAkgASgDUhB0b3RhbE5ldFF1YW50aXR5EjIK'
-    'FXRvdGFsX2V4cG9zdXJlX2Ftb3VudBgKIAEoA1ITdG90YWxFeHBvc3VyZUFtb3VudBI7CgtsYX'
-    'N0X3VwZGF0ZRgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCmxhc3RVcGRhdGU=');
+    'FXRvdGFsX2V4cG9zdXJlX2Ftb3VudBgKIAEoA1ITdG90YWxFeHBvc3VyZUFtb3VudBJDCg1uZX'
+    'RfZXhwb3N1cmVzGAsgASgLMh4ua2RvLnYxLnBvcnRmb2xpby5OZXRFeHBvc3VyZXNSDG5ldEV4'
+    'cG9zdXJlcxI7CgtsYXN0X3VwZGF0ZRgPIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbX'
+    'BSCmxhc3RVcGRhdGU=');
 
 @$core.Deprecated('Use symbolPositionDescriptor instead')
 const SymbolPosition$json = {
@@ -162,6 +165,39 @@ final $typed_data.Uint8List fundSymbolPositionDescriptor = $convert.base64Decode
     '1ib2wYAiABKAlSBnN5bWJvbBIaCghxdWFudGl0eRgDIAEoA1IIcXVhbnRpdHkSIQoMYXZlcmFn'
     'ZV9jb3N0GAQgASgBUgthdmVyYWdlQ29zdBIjCg1jdXJyZW50X3ByaWNlGAUgASgBUgxjdXJyZW'
     '50UHJpY2USJQoOdW5yZWFsaXplZF9wbmwYBiABKANSDXVucmVhbGl6ZWRQbmw=');
+
+@$core.Deprecated('Use netExposuresDescriptor instead')
+const NetExposures$json = {
+  '1': 'NetExposures',
+  '2': [
+    {'1': 'exposures', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.portfolio.NetExposure', '10': 'exposures'},
+    {'1': 'total_quantity', '3': 2, '4': 1, '5': 3, '10': 'totalQuantity'},
+    {'1': 'total_exposure', '3': 3, '4': 1, '5': 3, '10': 'totalExposure'},
+  ],
+};
+
+/// Descriptor for `NetExposures`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List netExposuresDescriptor = $convert.base64Decode(
+    'CgxOZXRFeHBvc3VyZXMSOwoJZXhwb3N1cmVzGAEgAygLMh0ua2RvLnYxLnBvcnRmb2xpby5OZX'
+    'RFeHBvc3VyZVIJZXhwb3N1cmVzEiUKDnRvdGFsX3F1YW50aXR5GAIgASgDUg10b3RhbFF1YW50'
+    'aXR5EiUKDnRvdGFsX2V4cG9zdXJlGAMgASgDUg10b3RhbEV4cG9zdXJl');
+
+@$core.Deprecated('Use netExposureDescriptor instead')
+const NetExposure$json = {
+  '1': 'NetExposure',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'net_quantity', '3': 2, '4': 1, '5': 3, '10': 'netQuantity'},
+    {'1': 'current_price', '3': 3, '4': 1, '5': 1, '10': 'currentPrice'},
+    {'1': 'exposure_amount', '3': 4, '4': 1, '5': 3, '10': 'exposureAmount'},
+  ],
+};
+
+/// Descriptor for `NetExposure`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List netExposureDescriptor = $convert.base64Decode(
+    'CgtOZXRFeHBvc3VyZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIhCgxuZXRfcXVhbnRpdHkYAi'
+    'ABKANSC25ldFF1YW50aXR5EiMKDWN1cnJlbnRfcHJpY2UYAyABKAFSDGN1cnJlbnRQcmljZRIn'
+    'Cg9leHBvc3VyZV9hbW91bnQYBCABKANSDmV4cG9zdXJlQW1vdW50');
 
 @$core.Deprecated('Use hedgeGroupSummaryDescriptor instead')
 const HedgeGroupSummary$json = {

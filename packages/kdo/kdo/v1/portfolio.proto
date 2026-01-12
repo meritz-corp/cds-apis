@@ -243,8 +243,12 @@ message PortfolioExposure {
   // 전체 exposure 금액
   int64 total_exposure_amount = 10;
 
+  // Net Exposures (Hedge 변환 후 상계된 결과)
+  // positions를 nettings 설정에 따라 분해/변환한 결과
+  NetExposures net_exposures = 11;
+
   // 마지막 업데이트 시간
-  google.protobuf.Timestamp last_update = 11;
+  google.protobuf.Timestamp last_update = 15;
 }
 
 // 심볼별 통합 포지션
@@ -287,6 +291,33 @@ message FundSymbolPosition {
 
   // 미실현 손익
   int64 unrealized_pnl = 6;
+}
+
+// Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)
+message NetExposures {
+  // 심볼별 Net Exposure
+  repeated NetExposure exposures = 1;
+
+  // 전체 수량 합계
+  int64 total_quantity = 2;
+
+  // 전체 익스포저 금액
+  int64 total_exposure = 3;
+}
+
+// Net Exposure (변환된 포지션)
+message NetExposure {
+  // 종목 심볼
+  string symbol = 1;
+
+  // 누적 수량 (분해 후 합산)
+  int64 net_quantity = 2;
+
+  // 현재가
+  double current_price = 3;
+
+  // 익스포저 금액 (net_quantity * current_price)
+  int64 exposure_amount = 4;
 }
 
 // HedgeGroup 요약 정보 (포트폴리오 컨텍스트)

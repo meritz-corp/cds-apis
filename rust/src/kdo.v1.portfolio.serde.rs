@@ -1747,6 +1747,304 @@ impl<'de> serde::Deserialize<'de> for ListPortfoliosResponse {
         deserializer.deserialize_struct("kdo.v1.portfolio.ListPortfoliosResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for NetExposure {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.NetExposure", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity", ToString::to_string(&self.net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("current_price", &self.current_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exposure_amount", ToString::to_string(&self.exposure_amount).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for NetExposure {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "net_quantity",
+            "netQuantity",
+            "current_price",
+            "currentPrice",
+            "exposure_amount",
+            "exposureAmount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            NetQuantity,
+            CurrentPrice,
+            ExposureAmount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
+                            "currentPrice" | "current_price" => Ok(GeneratedField::CurrentPrice),
+                            "exposureAmount" | "exposure_amount" => Ok(GeneratedField::ExposureAmount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = NetExposure;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.NetExposure")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<NetExposure, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut net_quantity__ = None;
+                let mut current_price__ = None;
+                let mut exposure_amount__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::NetQuantity => {
+                            if net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantity"));
+                            }
+                            net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentPrice => {
+                            if current_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentPrice"));
+                            }
+                            current_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ExposureAmount => {
+                            if exposure_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposureAmount"));
+                            }
+                            exposure_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(NetExposure {
+                    symbol: symbol__.unwrap_or_default(),
+                    net_quantity: net_quantity__.unwrap_or_default(),
+                    current_price: current_price__.unwrap_or_default(),
+                    exposure_amount: exposure_amount__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.NetExposure", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for NetExposures {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.NetExposures", len)?;
+        if true {
+            struct_ser.serialize_field("exposures", &self.exposures)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_quantity", ToString::to_string(&self.total_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_exposure", ToString::to_string(&self.total_exposure).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for NetExposures {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "exposures",
+            "total_quantity",
+            "totalQuantity",
+            "total_exposure",
+            "totalExposure",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Exposures,
+            TotalQuantity,
+            TotalExposure,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "exposures" => Ok(GeneratedField::Exposures),
+                            "totalQuantity" | "total_quantity" => Ok(GeneratedField::TotalQuantity),
+                            "totalExposure" | "total_exposure" => Ok(GeneratedField::TotalExposure),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = NetExposures;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.NetExposures")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<NetExposures, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut exposures__ = None;
+                let mut total_quantity__ = None;
+                let mut total_exposure__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Exposures => {
+                            if exposures__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposures"));
+                            }
+                            exposures__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TotalQuantity => {
+                            if total_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalQuantity"));
+                            }
+                            total_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TotalExposure => {
+                            if total_exposure__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalExposure"));
+                            }
+                            total_exposure__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(NetExposures {
+                    exposures: exposures__.unwrap_or_default(),
+                    total_quantity: total_quantity__.unwrap_or_default(),
+                    total_exposure: total_exposure__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.NetExposures", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for Portfolio {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1991,6 +2289,9 @@ impl serde::Serialize for PortfolioExposure {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.PortfolioExposure", len)?;
         if true {
             struct_ser.serialize_field("portfolio", &self.portfolio)?;
@@ -2034,6 +2335,9 @@ impl serde::Serialize for PortfolioExposure {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("total_exposure_amount", ToString::to_string(&self.total_exposure_amount).as_str())?;
         }
+        if let Some(v) = self.net_exposures.as_ref() {
+            struct_ser.serialize_field("net_exposures", v)?;
+        }
         if let Some(v) = self.last_update.as_ref() {
             struct_ser.serialize_field("last_update", v)?;
         }
@@ -2065,6 +2369,8 @@ impl<'de> serde::Deserialize<'de> for PortfolioExposure {
             "totalNetQuantity",
             "total_exposure_amount",
             "totalExposureAmount",
+            "net_exposures",
+            "netExposures",
             "last_update",
             "lastUpdate",
         ];
@@ -2081,6 +2387,7 @@ impl<'de> serde::Deserialize<'de> for PortfolioExposure {
             NetPnl,
             TotalNetQuantity,
             TotalExposureAmount,
+            NetExposures,
             LastUpdate,
             __SkipField__,
         }
@@ -2114,6 +2421,7 @@ impl<'de> serde::Deserialize<'de> for PortfolioExposure {
                             "netPnl" | "net_pnl" => Ok(GeneratedField::NetPnl),
                             "totalNetQuantity" | "total_net_quantity" => Ok(GeneratedField::TotalNetQuantity),
                             "totalExposureAmount" | "total_exposure_amount" => Ok(GeneratedField::TotalExposureAmount),
+                            "netExposures" | "net_exposures" => Ok(GeneratedField::NetExposures),
                             "lastUpdate" | "last_update" => Ok(GeneratedField::LastUpdate),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -2144,6 +2452,7 @@ impl<'de> serde::Deserialize<'de> for PortfolioExposure {
                 let mut net_pnl__ = None;
                 let mut total_net_quantity__ = None;
                 let mut total_exposure_amount__ = None;
+                let mut net_exposures__ = None;
                 let mut last_update__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -2221,6 +2530,12 @@ impl<'de> serde::Deserialize<'de> for PortfolioExposure {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::NetExposures => {
+                            if net_exposures__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netExposures"));
+                            }
+                            net_exposures__ = map_.next_value()?;
+                        }
                         GeneratedField::LastUpdate => {
                             if last_update__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("lastUpdate"));
@@ -2243,6 +2558,7 @@ impl<'de> serde::Deserialize<'de> for PortfolioExposure {
                     net_pnl: net_pnl__.unwrap_or_default(),
                     total_net_quantity: total_net_quantity__.unwrap_or_default(),
                     total_exposure_amount: total_exposure_amount__.unwrap_or_default(),
+                    net_exposures: net_exposures__,
                     last_update: last_update__,
                 })
             }

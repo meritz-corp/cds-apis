@@ -264,19 +264,19 @@ message OrderStats {
 }
 
 // Order Limiter 상태
-message OrderLimitStatus {
-  // 일일 누적 체결 수량 (i64)
-  int64 daily_filled_quantity = 1;
-
-  // 일일 누적 체결 수량 한도 (i64)
-  int64 daily_cumulative_limit = 2;
-
-  // 시간 프레임별 주문 개수 현황
-  repeated TimeFrameStatus time_frame_status = 3;
-
-  // 일일 사용률 (%)
-  double daily_usage_percent = 4;
-}
+//message OrderLimitStatus {
+//  // 일일 누적 체결 수량 (i64)
+//  int64 daily_filled_quantity = 1;
+//
+//  // 일일 누적 체결 수량 한도 (i64)
+//  int64 daily_cumulative_limit = 2;
+//
+//  // 시간 프레임별 주문 개수 현황
+//  repeated TimeFrameStatus time_frame_status = 3;
+//
+//  // 일일 사용률 (%)
+//  double daily_usage_percent = 4;
+//}
 
 // 시간 프레임별 상태
 message TimeFrameStatus {

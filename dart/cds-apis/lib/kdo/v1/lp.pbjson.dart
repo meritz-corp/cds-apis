@@ -273,25 +273,6 @@ final $typed_data.Uint8List orderStatsDescriptor = $convert.base64Decode(
     'bnRpdHkSMgoVZGFpbHlfZmlsbGVkX3F1YW50aXR5GAYgASgDUhNkYWlseUZpbGxlZFF1YW50aX'
     'R5');
 
-@$core.Deprecated('Use orderLimitStatusDescriptor instead')
-const OrderLimitStatus$json = {
-  '1': 'OrderLimitStatus',
-  '2': [
-    {'1': 'daily_filled_quantity', '3': 1, '4': 1, '5': 3, '10': 'dailyFilledQuantity'},
-    {'1': 'daily_cumulative_limit', '3': 2, '4': 1, '5': 3, '10': 'dailyCumulativeLimit'},
-    {'1': 'time_frame_status', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.lp.TimeFrameStatus', '10': 'timeFrameStatus'},
-    {'1': 'daily_usage_percent', '3': 4, '4': 1, '5': 1, '10': 'dailyUsagePercent'},
-  ],
-};
-
-/// Descriptor for `OrderLimitStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List orderLimitStatusDescriptor = $convert.base64Decode(
-    'ChBPcmRlckxpbWl0U3RhdHVzEjIKFWRhaWx5X2ZpbGxlZF9xdWFudGl0eRgBIAEoA1ITZGFpbH'
-    'lGaWxsZWRRdWFudGl0eRI0ChZkYWlseV9jdW11bGF0aXZlX2xpbWl0GAIgASgDUhRkYWlseUN1'
-    'bXVsYXRpdmVMaW1pdBJGChF0aW1lX2ZyYW1lX3N0YXR1cxgDIAMoCzIaLmtkby52MS5scC5UaW'
-    '1lRnJhbWVTdGF0dXNSD3RpbWVGcmFtZVN0YXR1cxIuChNkYWlseV91c2FnZV9wZXJjZW50GAQg'
-    'ASgBUhFkYWlseVVzYWdlUGVyY2VudA==');
-
 @$core.Deprecated('Use timeFrameStatusDescriptor instead')
 const TimeFrameStatus$json = {
   '1': 'TimeFrameStatus',
