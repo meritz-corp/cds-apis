@@ -34,12 +34,4 @@ abstract final class OrderService {
     kdov1order.CancelOrderRequest.new,
     kdov1order.CancelOrderResponse.new,
   );
-
-  /// 주문 결과 스트리밍 (실시간)
-  static const streamOrderResults = connect.Spec(
-    '/$name/StreamOrderResults',
-    connect.StreamType.server,
-    kdov1order.StreamOrderResultsRequest.new,
-    kdov1order.OrderResult.new,
-  );
 }

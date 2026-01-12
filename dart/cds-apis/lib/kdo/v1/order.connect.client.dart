@@ -62,22 +62,4 @@ extension type OrderServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
-
-  /// 주문 결과 스트리밍 (실시간)
-  Stream<kdov1order.OrderResult> streamOrderResults(
-    kdov1order.StreamOrderResultsRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).server(
-      specs.OrderService.streamOrderResults,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
 }

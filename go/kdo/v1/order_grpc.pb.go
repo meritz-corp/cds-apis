@@ -28,8 +28,6 @@ type OrderServiceClient interface {
 	AmendOrder(ctx context.Context, in *AmendOrderRequest, opts ...grpc.CallOption) (*AmendOrderResponse, error)
 	// 취소 주문
 	CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error)
-	// 주문 결과 스트리밍 (실시간)
-	StreamOrderResults(ctx context.Context, in *StreamOrderResultsRequest, opts ...grpc.CallOption) (OrderService_StreamOrderResultsClient, error)
 }
 
 type orderServiceClient struct {
@@ -67,38 +65,6 @@ func (c *orderServiceClient) CancelOrder(ctx context.Context, in *CancelOrderReq
 	return out, nil
 }
 
-func (c *orderServiceClient) StreamOrderResults(ctx context.Context, in *StreamOrderResultsRequest, opts ...grpc.CallOption) (OrderService_StreamOrderResultsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &OrderService_ServiceDesc.Streams[0], "/kdo.v1.order.OrderService/StreamOrderResults", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &orderServiceStreamOrderResultsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type OrderService_StreamOrderResultsClient interface {
-	Recv() (*OrderResult, error)
-	grpc.ClientStream
-}
-
-type orderServiceStreamOrderResultsClient struct {
-	grpc.ClientStream
-}
-
-func (x *orderServiceStreamOrderResultsClient) Recv() (*OrderResult, error) {
-	m := new(OrderResult)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -109,8 +75,6 @@ type OrderServiceServer interface {
 	AmendOrder(context.Context, *AmendOrderRequest) (*AmendOrderResponse, error)
 	// 취소 주문
 	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error)
-	// 주문 결과 스트리밍 (실시간)
-	StreamOrderResults(*StreamOrderResultsRequest, OrderService_StreamOrderResultsServer) error
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -126,9 +90,6 @@ func (UnimplementedOrderServiceServer) AmendOrder(context.Context, *AmendOrderRe
 }
 func (UnimplementedOrderServiceServer) CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOrder not implemented")
-}
-func (UnimplementedOrderServiceServer) StreamOrderResults(*StreamOrderResultsRequest, OrderService_StreamOrderResultsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamOrderResults not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -197,27 +158,6 @@ func _OrderService_CancelOrder_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderService_StreamOrderResults_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamOrderResultsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(OrderServiceServer).StreamOrderResults(m, &orderServiceStreamOrderResultsServer{stream})
-}
-
-type OrderService_StreamOrderResultsServer interface {
-	Send(*OrderResult) error
-	grpc.ServerStream
-}
-
-type orderServiceStreamOrderResultsServer struct {
-	grpc.ServerStream
-}
-
-func (x *orderServiceStreamOrderResultsServer) Send(m *OrderResult) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -238,12 +178,6 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _OrderService_CancelOrder_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "StreamOrderResults",
-			Handler:       _OrderService_StreamOrderResults_Handler,
-			ServerStreams: true,
-		},
-	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "kdo/v1/order.proto",
 }

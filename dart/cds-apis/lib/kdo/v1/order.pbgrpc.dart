@@ -48,11 +48,6 @@ class OrderServiceClient extends $grpc.Client {
     return $createUnaryCall(_$cancelOrder, request, options: options);
   }
 
-  /// 주문 결과 스트리밍 (실시간)
-  $grpc.ResponseStream<$0.OrderResult> streamOrderResults($0.StreamOrderResultsRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamOrderResults, $async.Stream.fromIterable([request]), options: options);
-  }
-
     // method descriptors
 
   static final _$submitOrder = $grpc.ClientMethod<$0.SubmitOrderRequest, $0.SubmitOrderResponse>(
@@ -67,10 +62,6 @@ class OrderServiceClient extends $grpc.Client {
       '/kdo.v1.order.OrderService/CancelOrder',
       ($0.CancelOrderRequest value) => value.writeToBuffer(),
       $0.CancelOrderResponse.fromBuffer);
-  static final _$streamOrderResults = $grpc.ClientMethod<$0.StreamOrderResultsRequest, $0.OrderResult>(
-      '/kdo.v1.order.OrderService/StreamOrderResults',
-      ($0.StreamOrderResultsRequest value) => value.writeToBuffer(),
-      $0.OrderResult.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.order.OrderService')
@@ -99,13 +90,6 @@ abstract class OrderServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CancelOrderRequest.fromBuffer(value),
         ($0.CancelOrderResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamOrderResultsRequest, $0.OrderResult>(
-        'StreamOrderResults',
-        streamOrderResults_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.StreamOrderResultsRequest.fromBuffer(value),
-        ($0.OrderResult value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.SubmitOrderResponse> submitOrder_Pre($grpc.ServiceCall $call, $async.Future<$0.SubmitOrderRequest> $request) async {
@@ -125,11 +109,5 @@ abstract class OrderServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.CancelOrderResponse> cancelOrder($grpc.ServiceCall call, $0.CancelOrderRequest request);
-
-  $async.Stream<$0.OrderResult> streamOrderResults_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamOrderResultsRequest> $request) async* {
-    yield* streamOrderResults($call, await $request);
-  }
-
-  $async.Stream<$0.OrderResult> streamOrderResults($grpc.ServiceCall call, $0.StreamOrderResultsRequest request);
 
 }
