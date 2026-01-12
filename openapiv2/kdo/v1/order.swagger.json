@@ -1,0 +1,509 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/order.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OrderService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/orders": {
+      "post": {
+        "summary": "신규 주문 제출",
+        "operationId": "OrderService_SubmitOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderSubmitOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/orderSubmitOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/v1/orders/{originalOrderId}:amend": {
+      "post": {
+        "summary": "정정 주문",
+        "operationId": "OrderService_AmendOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderAmendOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "originalOrderId",
+            "description": "원주문 ID (필수)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fundCode": {
+                  "type": "string",
+                  "title": "펀드 코드 (필수)"
+                },
+                "symbol": {
+                  "type": "string",
+                  "title": "종목 코드 (필수)"
+                },
+                "quantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "정정 수량 (optional, 0이면 변경 없음)"
+                },
+                "price": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "정정 가격 (optional, 0이면 변경 없음)"
+                }
+              },
+              "required": [
+                "fundCode",
+                "symbol"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/v1/orders/{originalOrderId}:cancel": {
+      "post": {
+        "summary": "취소 주문",
+        "operationId": "OrderService_CancelOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1orderCancelOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "originalOrderId",
+            "description": "원주문 ID (필수)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fundCode": {
+                  "type": "string",
+                  "title": "펀드 코드 (필수)"
+                },
+                "symbol": {
+                  "type": "string",
+                  "title": "종목 코드 (필수)"
+                },
+                "quantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "취소 수량 (optional, 0이면 전량)"
+                }
+              },
+              "required": [
+                "fundCode",
+                "symbol"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/v1/orders:stream": {
+      "get": {
+        "summary": "주문 결과 스트리밍 (실시간)",
+        "operationId": "OrderService_StreamOrderResults",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/orderOrderResult"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of orderOrderResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fundCode",
+            "description": "필터: 특정 펀드만 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "symbol",
+            "description": "필터: 특정 종목만 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "orderAmendOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "신규 주문 ID"
+        },
+        "originalOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "원주문 ID"
+        },
+        "status": {
+          "$ref": "#/definitions/v1orderOrderStatus",
+          "title": "주문 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "결과 메시지"
+        }
+      }
+    },
+    "orderCancelledDetails": {
+      "type": "object",
+      "properties": {
+        "cancellationCode": {
+          "type": "string",
+          "title": "취소 코드"
+        },
+        "cancelledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "취소 수량"
+        }
+      }
+    },
+    "orderFilledDetails": {
+      "type": "object",
+      "properties": {
+        "filledPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 가격"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 수량"
+        },
+        "tradeTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "체결 시간 (nanoseconds since epoch)"
+        }
+      }
+    },
+    "orderOrderResult": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "주문 ID"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "종목 코드"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "side": {
+          "$ref": "#/definitions/v1orderOrderSide",
+          "title": "매수/매도"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "가격"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량"
+        },
+        "resultType": {
+          "$ref": "#/definitions/orderOrderResultType",
+          "title": "결과 유형"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "타임스탬프"
+        },
+        "received": {
+          "$ref": "#/definitions/orderReceivedDetails"
+        },
+        "rejected": {
+          "$ref": "#/definitions/orderRejectedDetails"
+        },
+        "filled": {
+          "$ref": "#/definitions/orderFilledDetails"
+        },
+        "cancelled": {
+          "$ref": "#/definitions/orderCancelledDetails"
+        }
+      }
+    },
+    "orderOrderResultType": {
+      "type": "string",
+      "enum": [
+        "ORDER_RESULT_TYPE_UNSPECIFIED",
+        "ORDER_RESULT_TYPE_RECEIVED",
+        "ORDER_RESULT_TYPE_REJECTED",
+        "ORDER_RESULT_TYPE_FILLED",
+        "ORDER_RESULT_TYPE_CANCELLED"
+      ],
+      "default": "ORDER_RESULT_TYPE_UNSPECIFIED",
+      "title": "- ORDER_RESULT_TYPE_RECEIVED: 접수됨\n - ORDER_RESULT_TYPE_REJECTED: 거부됨\n - ORDER_RESULT_TYPE_FILLED: 체결됨\n - ORDER_RESULT_TYPE_CANCELLED: 취소됨"
+    },
+    "orderQuoteType": {
+      "type": "string",
+      "enum": [
+        "QUOTE_TYPE_UNSPECIFIED",
+        "QUOTE_TYPE_LIMIT",
+        "QUOTE_TYPE_MARKET"
+      ],
+      "default": "QUOTE_TYPE_UNSPECIFIED",
+      "title": "- QUOTE_TYPE_LIMIT: 지정가\n - QUOTE_TYPE_MARKET: 시장가"
+    },
+    "orderReceivedDetails": {
+      "type": "object",
+      "properties": {
+        "receiveTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "접수 시간 (nanoseconds since epoch)"
+        }
+      }
+    },
+    "orderRejectedDetails": {
+      "type": "object",
+      "properties": {
+        "rejectionCode": {
+          "type": "string",
+          "title": "거부 코드"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "에러 메시지"
+        }
+      }
+    },
+    "orderSubmitOrderRequest": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드 (필수)"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "종목 코드 ISIN (필수)"
+        },
+        "side": {
+          "$ref": "#/definitions/v1orderOrderSide",
+          "title": "매수/매도 (필수)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량 (필수)"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "가격 (필수, 시장가 주문 시 0)"
+        },
+        "quoteType": {
+          "$ref": "#/definitions/orderQuoteType",
+          "title": "주문 유형 (기본: LIMIT)"
+        }
+      },
+      "required": [
+        "fundCode",
+        "symbol",
+        "side",
+        "quantity",
+        "price"
+      ]
+    },
+    "orderSubmitOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "주문 ID"
+        },
+        "status": {
+          "$ref": "#/definitions/v1orderOrderStatus",
+          "title": "주문 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "결과 메시지"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1orderCancelOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "취소 주문 ID"
+        },
+        "originalOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "원주문 ID"
+        },
+        "status": {
+          "$ref": "#/definitions/v1orderOrderStatus",
+          "title": "주문 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "결과 메시지"
+        }
+      }
+    },
+    "v1orderOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "title": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도"
+    },
+    "v1orderOrderStatus": {
+      "type": "string",
+      "enum": [
+        "ORDER_STATUS_UNSPECIFIED",
+        "ORDER_STATUS_SUBMITTED",
+        "ORDER_STATUS_REJECTED"
+      ],
+      "default": "ORDER_STATUS_UNSPECIFIED",
+      "title": "- ORDER_STATUS_SUBMITTED: 주문 제출됨\n - ORDER_STATUS_REJECTED: 거부됨 (validation 실패)"
+    }
+  }
+}

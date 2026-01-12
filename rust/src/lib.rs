@@ -47,6 +47,9 @@ pub mod kdo {
         pub mod notification {
             include!("kdo.v1.notification.rs");
         }
+        pub mod order {
+            include!("kdo.v1.order.rs");
+        }
     }
 }
 

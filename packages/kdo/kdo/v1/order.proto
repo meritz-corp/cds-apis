@@ -1,0 +1,237 @@
+syntax = "proto3";
+
+package kdo.v1.order;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// OrderService는 직접 주문 제출 서비스를 제공합니다.
+service OrderService {
+  // 신규 주문 제출
+  rpc SubmitOrder(SubmitOrderRequest) returns (SubmitOrderResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders"
+      body: "*"
+    };
+  }
+
+  // 정정 주문
+  rpc AmendOrder(AmendOrderRequest) returns (AmendOrderResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders/{original_order_id}:amend"
+      body: "*"
+    };
+  }
+
+  // 취소 주문
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders/{original_order_id}:cancel"
+      body: "*"
+    };
+  }
+
+}
+
+// ========== Enums ==========
+
+enum OrderSide {
+  ORDER_SIDE_UNSPECIFIED = 0;
+  ORDER_SIDE_BID = 1;    // 매수
+  ORDER_SIDE_ASK = 2;    // 매도
+}
+
+enum QuoteType {
+  QUOTE_TYPE_UNSPECIFIED = 0;
+  QUOTE_TYPE_LIMIT = 1;   // 지정가
+  QUOTE_TYPE_MARKET = 2;  // 시장가
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  ORDER_STATUS_SUBMITTED = 1;   // 주문 제출됨
+  ORDER_STATUS_REJECTED = 2;    // 거부됨 (validation 실패)
+}
+
+enum OrderResultType {
+  ORDER_RESULT_TYPE_UNSPECIFIED = 0;
+  ORDER_RESULT_TYPE_RECEIVED = 1;    // 접수됨
+  ORDER_RESULT_TYPE_REJECTED = 2;    // 거부됨
+  ORDER_RESULT_TYPE_FILLED = 3;      // 체결됨
+  ORDER_RESULT_TYPE_CANCELLED = 4;   // 취소됨
+}
+
+// ========== SubmitOrder ==========
+
+message SubmitOrderRequest {
+  // 펀드 코드 (필수)
+  string fund_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 종목 코드 ISIN (필수)
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 매수/매도 (필수)
+  OrderSide side = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 수량 (필수)
+  int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 가격 (필수, 시장가 주문 시 0)
+  int64 price = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // 주문 유형 (기본: LIMIT)
+  QuoteType quote_type = 6;
+}
+
+message SubmitOrderResponse {
+  // 주문 ID
+  uint64 order_id = 1;
+
+  // 주문 상태
+  OrderStatus status = 2;
+
+  // 결과 메시지
+  string message = 3;
+}
+
+// ========== AmendOrder ==========
+
+message AmendOrderRequest {
+  // 원주문 ID (필수)
+  uint64 original_order_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 (필수)
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 종목 코드 (필수)
+  string symbol = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 정정 수량 (optional, 0이면 변경 없음)
+  int64 quantity = 4;
+
+  // 정정 가격 (optional, 0이면 변경 없음)
+  int64 price = 5;
+}
+
+message AmendOrderResponse {
+  // 신규 주문 ID
+  uint64 order_id = 1;
+
+  // 원주문 ID
+  uint64 original_order_id = 2;
+
+  // 주문 상태
+  OrderStatus status = 3;
+
+  // 결과 메시지
+  string message = 4;
+}
+
+// ========== CancelOrder ==========
+
+message CancelOrderRequest {
+  // 원주문 ID (필수)
+  uint64 original_order_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 (필수)
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 종목 코드 (필수)
+  string symbol = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 취소 수량 (optional, 0이면 전량)
+  int64 quantity = 4;
+}
+
+message CancelOrderResponse {
+  // 취소 주문 ID
+  uint64 order_id = 1;
+
+  // 원주문 ID
+  uint64 original_order_id = 2;
+
+  // 주문 상태
+  OrderStatus status = 3;
+
+  // 결과 메시지
+  string message = 4;
+}
+
+// ========== StreamOrderResults ==========
+
+message StreamOrderResultsRequest {
+  // 필터: 특정 펀드만 (optional)
+  optional string fund_code = 1;
+
+  // 필터: 특정 종목만 (optional)
+  optional string symbol = 2;
+}
+
+message OrderResult {
+  // 주문 ID
+  uint64 order_id = 1;
+
+  // 종목 코드
+  string symbol = 2;
+
+  // 펀드 코드
+  string fund_code = 3;
+
+  // 매수/매도
+  OrderSide side = 4;
+
+  // 가격
+  int64 price = 5;
+
+  // 수량
+  int64 quantity = 6;
+
+  // 결과 유형
+  OrderResultType result_type = 7;
+
+  // 타임스탬프
+  google.protobuf.Timestamp timestamp = 8;
+
+  // result_type에 따른 추가 정보
+  oneof details {
+    ReceivedDetails received = 10;
+    RejectedDetails rejected = 11;
+    FilledDetails filled = 12;
+    CancelledDetails cancelled = 13;
+  }
+}
+
+message ReceivedDetails {
+  // 접수 시간 (nanoseconds since epoch)
+  uint64 receive_time = 1;
+}
+
+message RejectedDetails {
+  // 거부 코드
+  string rejection_code = 1;
+
+  // 에러 메시지
+  string error_message = 2;
+}
+
+message FilledDetails {
+  // 체결 가격
+  int64 filled_price = 1;
+
+  // 체결 수량
+  int64 filled_quantity = 2;
+
+  // 체결 시간 (nanoseconds since epoch)
+  uint64 trade_time = 3;
+}
+
+message CancelledDetails {
+  // 취소 코드
+  string cancellation_code = 1;
+
+  // 취소 수량
+  int64 cancelled_quantity = 2;
+}

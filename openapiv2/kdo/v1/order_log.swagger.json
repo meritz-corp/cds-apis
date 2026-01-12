@@ -242,7 +242,7 @@
           "title": "로그 타입"
         },
         "side": {
-          "$ref": "#/definitions/order_logOrderSide",
+          "$ref": "#/definitions/v1order_logOrderSide",
           "title": "주문 방향 (매수/매도)"
         },
         "orderType": {
@@ -339,17 +339,6 @@
       "description": "Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의\n 주석은 Rust 코드의 내용을 번역했습니다.\n\n - ORDER_LOG_TYPE_UNSPECIFIED: 알 수 없는 값 (기본값)\n - RECEIVED: 접수 확인\n - REJECTED: 거래소 거부\n - MERITZ_REJECTED: 메리츠 내부 거부\n - FILLED: 체결\n - AUTO_CANCELLED: 자동 취소",
       "title": "주문 로그 타입"
     },
-    "order_logOrderSide": {
-      "type": "string",
-      "enum": [
-        "ORDER_SIDE_UNSPECIFIED",
-        "BUY",
-        "SELL"
-      ],
-      "default": "ORDER_SIDE_UNSPECIFIED",
-      "description": "- BUY: 매수\n - SELL: 매도",
-      "title": "주문 방향 (매수/매도)\nRust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정"
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -376,6 +365,17 @@
           }
         }
       }
+    },
+    "v1order_logOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "BUY",
+        "SELL"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- BUY: 매수\n - SELL: 매도",
+      "title": "주문 방향 (매수/매도)\nRust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정"
     },
     "v1order_logOrderType": {
       "type": "string",
