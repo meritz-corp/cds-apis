@@ -605,8 +605,8 @@
           "title": "심볼별 Net Exposure"
         },
         "totalQuantity": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "float",
           "title": "전체 수량 합계"
         },
         "totalExposure": {

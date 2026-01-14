@@ -1928,9 +1928,7 @@ impl serde::Serialize for NetExposures {
             struct_ser.serialize_field("exposures", &self.exposures)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("total_quantity", ToString::to_string(&self.total_quantity).as_str())?;
+            struct_ser.serialize_field("total_quantity", &self.total_quantity)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]

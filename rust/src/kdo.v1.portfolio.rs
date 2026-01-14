@@ -189,8 +189,8 @@ pub struct NetExposures {
     #[prost(message, repeated, tag="1")]
     pub exposures: ::prost::alloc::vec::Vec<NetExposure>,
     /// 전체 수량 합계
-    #[prost(int64, tag="2")]
-    pub total_quantity: i64,
+    #[prost(float, tag="2")]
+    pub total_quantity: f32,
     /// 전체 익스포저 금액
     #[prost(int64, tag="3")]
     pub total_exposure: i64,

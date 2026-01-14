@@ -299,7 +299,7 @@ message NetExposures {
   repeated NetExposure exposures = 1;
 
   // 전체 수량 합계
-  int64 total_quantity = 2;
+  float total_quantity = 2;
 
   // 전체 익스포저 금액
   int64 total_exposure = 3;

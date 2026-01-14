@@ -171,7 +171,7 @@ const NetExposures$json = {
   '1': 'NetExposures',
   '2': [
     {'1': 'exposures', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.portfolio.NetExposure', '10': 'exposures'},
-    {'1': 'total_quantity', '3': 2, '4': 1, '5': 3, '10': 'totalQuantity'},
+    {'1': 'total_quantity', '3': 2, '4': 1, '5': 2, '10': 'totalQuantity'},
     {'1': 'total_exposure', '3': 3, '4': 1, '5': 3, '10': 'totalExposure'},
   ],
 };
@@ -179,7 +179,7 @@ const NetExposures$json = {
 /// Descriptor for `NetExposures`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List netExposuresDescriptor = $convert.base64Decode(
     'CgxOZXRFeHBvc3VyZXMSOwoJZXhwb3N1cmVzGAEgAygLMh0ua2RvLnYxLnBvcnRmb2xpby5OZX'
-    'RFeHBvc3VyZVIJZXhwb3N1cmVzEiUKDnRvdGFsX3F1YW50aXR5GAIgASgDUg10b3RhbFF1YW50'
+    'RFeHBvc3VyZVIJZXhwb3N1cmVzEiUKDnRvdGFsX3F1YW50aXR5GAIgASgCUg10b3RhbFF1YW50'
     'aXR5EiUKDnRvdGFsX2V4cG9zdXJlGAMgASgDUg10b3RhbEV4cG9zdXJl');
 
 @$core.Deprecated('Use netExposureDescriptor instead')
