@@ -224,47 +224,6 @@
           "FundService"
         ]
       }
-    },
-    "/v1/{fund}:watch-loss-limit-alerts": {
-      "get": {
-        "operationId": "FundService_WatchLossLimitAlerts",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/fundLossLimitAlert"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of fundLossLimitAlert"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "fund",
-            "description": "펀드 리소스 이름 (예: funds/KR1234567890)",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "funds/[^/]+"
-          }
-        ],
-        "tags": [
-          "FundService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -537,56 +496,6 @@
         }
       },
       "title": "ListFunds 응답"
-    },
-    "fundLossLimitAlert": {
-      "type": "object",
-      "properties": {
-        "fundCode": {
-          "type": "string"
-        },
-        "currentLoss": {
-          "type": "string",
-          "format": "int64"
-        },
-        "lossLimit": {
-          "type": "string",
-          "format": "int64"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "snapshots": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/fundLossLimitSnapshot"
-          }
-        }
-      }
-    },
-    "fundLossLimitSnapshot": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64"
-        },
-        "averagePrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "currentPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "unrealizedPnl": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
     },
     "fundSymbolExposure": {
       "type": "object",

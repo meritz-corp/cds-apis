@@ -48,11 +48,4 @@ abstract final class FundService {
     kdov1fund.ListFundTradingSnapshotsRequest.new,
     kdov1fund.ListFundTradingSnapshotsResponse.new,
   );
-
-  static const watchLossLimitAlerts = connect.Spec(
-    '/$name/WatchLossLimitAlerts',
-    connect.StreamType.server,
-    kdov1fund.WatchLossLimitAlertsRequest.new,
-    kdov1fund.LossLimitAlert.new,
-  );
 }
