@@ -209,11 +209,18 @@ message CreateRedeemEtfRequest {
     }
   ];
 
-  int64 quantity = 2 [
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  int64 quantity = 3 [
     (google.api.field_behavior) = REQUIRED
   ];
 
-  bool is_creation = 3 [
+  bool is_creation = 4 [
     (google.api.field_behavior) = REQUIRED
   ];
 }

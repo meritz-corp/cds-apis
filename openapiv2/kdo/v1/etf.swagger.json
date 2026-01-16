@@ -133,6 +133,9 @@
         "etf": {
           "type": "string"
         },
+        "fund": {
+          "type": "string"
+        },
         "quantity": {
           "type": "string",
           "format": "int64"
@@ -143,6 +146,7 @@
       },
       "required": [
         "etf",
+        "fund",
         "quantity",
         "isCreation"
       ]

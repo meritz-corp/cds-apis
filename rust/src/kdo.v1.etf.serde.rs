@@ -153,9 +153,15 @@ impl serde::Serialize for CreateRedeemEtfRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.CreateRedeemEtfRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -176,6 +182,7 @@ impl<'de> serde::Deserialize<'de> for CreateRedeemEtfRequest {
     {
         const FIELDS: &[&str] = &[
             "etf",
+            "fund",
             "quantity",
             "is_creation",
             "isCreation",
@@ -184,6 +191,7 @@ impl<'de> serde::Deserialize<'de> for CreateRedeemEtfRequest {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Etf,
+            Fund,
             Quantity,
             IsCreation,
             __SkipField__,
@@ -209,6 +217,7 @@ impl<'de> serde::Deserialize<'de> for CreateRedeemEtfRequest {
                     {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
+                            "fund" => Ok(GeneratedField::Fund),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "isCreation" | "is_creation" => Ok(GeneratedField::IsCreation),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -231,6 +240,7 @@ impl<'de> serde::Deserialize<'de> for CreateRedeemEtfRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut etf__ = None;
+                let mut fund__ = None;
                 let mut quantity__ = None;
                 let mut is_creation__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -240,6 +250,12 @@ impl<'de> serde::Deserialize<'de> for CreateRedeemEtfRequest {
                                 return Err(serde::de::Error::duplicate_field("etf"));
                             }
                             etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -262,6 +278,7 @@ impl<'de> serde::Deserialize<'de> for CreateRedeemEtfRequest {
                 }
                 Ok(CreateRedeemEtfRequest {
                     etf: etf__.unwrap_or_default(),
+                    fund: fund__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     is_creation: is_creation__.unwrap_or_default(),
                 })

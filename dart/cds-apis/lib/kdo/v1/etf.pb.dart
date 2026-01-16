@@ -951,11 +951,13 @@ class ListEtfsResponse extends $pb.GeneratedMessage {
 class CreateRedeemEtfRequest extends $pb.GeneratedMessage {
   factory CreateRedeemEtfRequest({
     $core.String? etf,
+    $core.String? fund,
     $fixnum.Int64? quantity,
     $core.bool? isCreation,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
+    if (fund != null) result.fund = fund;
     if (quantity != null) result.quantity = quantity;
     if (isCreation != null) result.isCreation = isCreation;
     return result;
@@ -968,8 +970,9 @@ class CreateRedeemEtfRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateRedeemEtfRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
-    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
-    ..aOB(3, _omitFieldNames ? '' : 'isCreation')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
+    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
+    ..aOB(4, _omitFieldNames ? '' : 'isCreation')
     ..hasRequiredFields = false
   ;
 
@@ -1000,22 +1003,31 @@ class CreateRedeemEtfRequest extends $pb.GeneratedMessage {
   void clearEtf() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get quantity => $_getI64(1);
+  $core.String get fund => $_getSZ(1);
   @$pb.TagNumber(2)
-  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
+  set fund($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasQuantity() => $_has(1);
+  $core.bool hasFund() => $_has(1);
   @$pb.TagNumber(2)
-  void clearQuantity() => $_clearField(2);
+  void clearFund() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $core.bool get isCreation => $_getBF(2);
+  $fixnum.Int64 get quantity => $_getI64(2);
   @$pb.TagNumber(3)
-  set isCreation($core.bool value) => $_setBool(2, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasIsCreation() => $_has(2);
+  $core.bool hasQuantity() => $_has(2);
   @$pb.TagNumber(3)
-  void clearIsCreation() => $_clearField(3);
+  void clearQuantity() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get isCreation => $_getBF(3);
+  @$pb.TagNumber(4)
+  set isCreation($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasIsCreation() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIsCreation() => $_clearField(4);
 }
 
 

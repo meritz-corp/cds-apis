@@ -252,14 +252,16 @@ const CreateRedeemEtfRequest$json = {
   '1': 'CreateRedeemEtfRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
-    {'1': 'is_creation', '3': 3, '4': 1, '5': 8, '8': {}, '10': 'isCreation'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
+    {'1': 'is_creation', '3': 4, '4': 1, '5': 8, '8': {}, '10': 'isCreation'},
   ],
 };
 
 /// Descriptor for `CreateRedeemEtfRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createRedeemEtfRequestDescriptor = $convert.base64Decode(
     'ChZDcmVhdGVSZWRlZW1FdGZSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2'
-    'FwaXMueHl6L0V0ZlIDZXRmEiAKCHF1YW50aXR5GAIgASgDQgTiQQECUghxdWFudGl0eRIlCgtp'
-    'c19jcmVhdGlvbhgDIAEoCEIE4kEBAlIKaXNDcmVhdGlvbg==');
+    'FwaXMueHl6L0V0ZlIDZXRmEjEKBGZ1bmQYAiABKAlCHeJBAQL6QRYKFGtkby5jZHNhcGlzLnh5'
+    'ei9GdW5kUgRmdW5kEiAKCHF1YW50aXR5GAMgASgDQgTiQQECUghxdWFudGl0eRIlCgtpc19jcm'
+    'VhdGlvbhgEIAEoCEIE4kEBAlIKaXNDcmVhdGlvbg==');
 
