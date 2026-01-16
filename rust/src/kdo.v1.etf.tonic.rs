@@ -131,6 +131,28 @@ pub mod etf_service_client {
                 .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "ListEtfs"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn create_redeem_etf(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateRedeemEtfRequest>,
+        ) -> std::result::Result<tonic::Response<super::Etf>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.etf.EtfService/CreateRedeemEtf",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "CreateRedeemEtf"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -151,6 +173,10 @@ pub mod etf_service_server {
             tonic::Response<super::ListEtfsResponse>,
             tonic::Status,
         >;
+        async fn create_redeem_etf(
+            &self,
+            request: tonic::Request<super::CreateRedeemEtfRequest>,
+        ) -> std::result::Result<tonic::Response<super::Etf>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct EtfServiceServer<T: EtfService> {
@@ -301,6 +327,51 @@ pub mod etf_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = ListEtfsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.etf.EtfService/CreateRedeemEtf" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateRedeemEtfSvc<T: EtfService>(pub Arc<T>);
+                    impl<
+                        T: EtfService,
+                    > tonic::server::UnaryService<super::CreateRedeemEtfRequest>
+                    for CreateRedeemEtfSvc<T> {
+                        type Response = super::Etf;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CreateRedeemEtfRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as EtfService>::create_redeem_etf(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CreateRedeemEtfSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

@@ -34,6 +34,26 @@ func (m *MockEtfServiceClient) EXPECT() *MockEtfServiceClientMockRecorder {
 	return m.recorder
 }
 
+// CreateRedeemEtf mocks base method.
+func (m *MockEtfServiceClient) CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateRedeemEtf", varargs...)
+	ret0, _ := ret[0].(*Etf)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateRedeemEtf indicates an expected call of CreateRedeemEtf.
+func (mr *MockEtfServiceClientMockRecorder) CreateRedeemEtf(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRedeemEtf", reflect.TypeOf((*MockEtfServiceClient)(nil).CreateRedeemEtf), varargs...)
+}
+
 // GetEtf mocks base method.
 func (m *MockEtfServiceClient) GetEtf(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
 	m.ctrl.T.Helper()
@@ -95,6 +115,21 @@ func NewMockEtfServiceServer(ctrl *gomock.Controller) *MockEtfServiceServer {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockEtfServiceServer) EXPECT() *MockEtfServiceServerMockRecorder {
 	return m.recorder
+}
+
+// CreateRedeemEtf mocks base method.
+func (m *MockEtfServiceServer) CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest) (*Etf, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateRedeemEtf", ctx, in)
+	ret0, _ := ret[0].(*Etf)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateRedeemEtf indicates an expected call of CreateRedeemEtf.
+func (mr *MockEtfServiceServerMockRecorder) CreateRedeemEtf(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRedeemEtf", reflect.TypeOf((*MockEtfServiceServer)(nil).CreateRedeemEtf), ctx, in)
 }
 
 // GetEtf mocks base method.

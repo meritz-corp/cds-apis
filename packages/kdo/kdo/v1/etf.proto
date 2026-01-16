@@ -27,6 +27,14 @@ service EtfService {
         };
         option (google.api.method_signature) = "";
     }
+
+    rpc CreateRedeemEtf(CreateRedeemEtfRequest) returns (Etf) {
+        option (google.api.http) = {
+            post: "/v1/etfs:create_redeem"
+            body: "*"
+        };
+        option (google.api.method_signature) = "etf";
+    }
 }
 
 
@@ -190,4 +198,22 @@ message ListEtfsResponse {
 
     // 다음 페이지 토큰
     string next_page_token = 2;
+}
+
+
+message CreateRedeemEtfRequest {
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  int64 quantity = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  bool is_creation = 3 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 }

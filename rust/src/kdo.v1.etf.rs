@@ -169,6 +169,16 @@ pub struct ListEtfsResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateRedeemEtfRequest {
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    #[prost(int64, tag="2")]
+    pub quantity: i64,
+    #[prost(bool, tag="3")]
+    pub is_creation: bool,
+}
 /// 상품 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

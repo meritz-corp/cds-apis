@@ -24,4 +24,11 @@ abstract final class EtfService {
     kdov1etf.ListEtfsRequest.new,
     kdov1etf.ListEtfsResponse.new,
   );
+
+  static const createRedeemEtf = connect.Spec(
+    '/$name/CreateRedeemEtf',
+    connect.StreamType.unary,
+    kdov1etf.CreateRedeemEtfRequest.new,
+    kdov1etf.Etf.new,
+  );
 }

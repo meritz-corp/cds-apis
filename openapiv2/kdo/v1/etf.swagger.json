@@ -62,6 +62,38 @@
         ]
       }
     },
+    "/v1/etfs:create_redeem": {
+      "post": {
+        "operationId": "EtfService_CreateRedeemEtf",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfEtf"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/etfCreateRedeemEtfRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
     "/v1/{etf}": {
       "get": {
         "operationId": "EtfService_GetEtf",
@@ -95,6 +127,26 @@
     }
   },
   "definitions": {
+    "etfCreateRedeemEtfRequest": {
+      "type": "object",
+      "properties": {
+        "etf": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "isCreation": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "etf",
+        "quantity",
+        "isCreation"
+      ]
+    },
     "etfEtf": {
       "type": "object",
       "properties": {

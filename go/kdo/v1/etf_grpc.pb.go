@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type EtfServiceClient interface {
 	GetEtf(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error)
 	ListEtfs(ctx context.Context, in *ListEtfsRequest, opts ...grpc.CallOption) (*ListEtfsResponse, error)
+	CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error)
 }
 
 type etfServiceClient struct {
@@ -52,12 +53,22 @@ func (c *etfServiceClient) ListEtfs(ctx context.Context, in *ListEtfsRequest, op
 	return out, nil
 }
 
+func (c *etfServiceClient) CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
+	out := new(Etf)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/CreateRedeemEtf", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EtfServiceServer is the server API for EtfService service.
 // All implementations must embed UnimplementedEtfServiceServer
 // for forward compatibility
 type EtfServiceServer interface {
 	GetEtf(context.Context, *GetEtfRequest) (*Etf, error)
 	ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error)
+	CreateRedeemEtf(context.Context, *CreateRedeemEtfRequest) (*Etf, error)
 	mustEmbedUnimplementedEtfServiceServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedEtfServiceServer) GetEtf(context.Context, *GetEtfRequest) (*E
 }
 func (UnimplementedEtfServiceServer) ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEtfs not implemented")
+}
+func (UnimplementedEtfServiceServer) CreateRedeemEtf(context.Context, *CreateRedeemEtfRequest) (*Etf, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRedeemEtf not implemented")
 }
 func (UnimplementedEtfServiceServer) mustEmbedUnimplementedEtfServiceServer() {}
 
@@ -120,6 +134,24 @@ func _EtfService_ListEtfs_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EtfService_CreateRedeemEtf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRedeemEtfRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).CreateRedeemEtf(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/CreateRedeemEtf",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).CreateRedeemEtf(ctx, req.(*CreateRedeemEtfRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EtfService_ServiceDesc is the grpc.ServiceDesc for EtfService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListEtfs",
 			Handler:    _EtfService_ListEtfs_Handler,
+		},
+		{
+			MethodName: "CreateRedeemEtf",
+			Handler:    _EtfService_CreateRedeemEtf_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

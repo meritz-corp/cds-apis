@@ -948,6 +948,76 @@ class ListEtfsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+class CreateRedeemEtfRequest extends $pb.GeneratedMessage {
+  factory CreateRedeemEtfRequest({
+    $core.String? etf,
+    $fixnum.Int64? quantity,
+    $core.bool? isCreation,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (quantity != null) result.quantity = quantity;
+    if (isCreation != null) result.isCreation = isCreation;
+    return result;
+  }
+
+  CreateRedeemEtfRequest._();
+
+  factory CreateRedeemEtfRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CreateRedeemEtfRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateRedeemEtfRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
+    ..aOB(3, _omitFieldNames ? '' : 'isCreation')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateRedeemEtfRequest clone() => CreateRedeemEtfRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateRedeemEtfRequest copyWith(void Function(CreateRedeemEtfRequest) updates) => super.copyWith((message) => updates(message as CreateRedeemEtfRequest)) as CreateRedeemEtfRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateRedeemEtfRequest create() => CreateRedeemEtfRequest._();
+  @$core.override
+  CreateRedeemEtfRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateRedeemEtfRequest> createRepeated() => $pb.PbList<CreateRedeemEtfRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateRedeemEtfRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateRedeemEtfRequest>(create);
+  static CreateRedeemEtfRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get quantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearQuantity() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get isCreation => $_getBF(2);
+  @$pb.TagNumber(3)
+  set isCreation($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasIsCreation() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearIsCreation() => $_clearField(3);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

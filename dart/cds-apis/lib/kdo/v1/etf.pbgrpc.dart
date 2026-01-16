@@ -41,6 +41,10 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listEtfs, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.Etf> createRedeemEtf($0.CreateRedeemEtfRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$createRedeemEtf, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -51,6 +55,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/ListEtfs',
       ($0.ListEtfsRequest value) => value.writeToBuffer(),
       $0.ListEtfsResponse.fromBuffer);
+  static final _$createRedeemEtf = $grpc.ClientMethod<$0.CreateRedeemEtfRequest, $0.Etf>(
+      '/kdo.v1.etf.EtfService/CreateRedeemEtf',
+      ($0.CreateRedeemEtfRequest value) => value.writeToBuffer(),
+      $0.Etf.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -72,6 +80,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListEtfsRequest.fromBuffer(value),
         ($0.ListEtfsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CreateRedeemEtfRequest, $0.Etf>(
+        'CreateRedeemEtf',
+        createRedeemEtf_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CreateRedeemEtfRequest.fromBuffer(value),
+        ($0.Etf value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -85,5 +100,11 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListEtfsResponse> listEtfs($grpc.ServiceCall call, $0.ListEtfsRequest request);
+
+  $async.Future<$0.Etf> createRedeemEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateRedeemEtfRequest> $request) async {
+    return createRedeemEtf($call, await $request);
+  }
+
+  $async.Future<$0.Etf> createRedeemEtf($grpc.ServiceCall call, $0.CreateRedeemEtfRequest request);
 
 }
