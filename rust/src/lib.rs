@@ -50,6 +50,9 @@ pub mod kdo {
         pub mod order {
             include!("kdo.v1.order.rs");
         }
+        pub mod arbitrage {
+            include!("kdo.v1.arbitrage.rs");
+        }
     }
 }
 

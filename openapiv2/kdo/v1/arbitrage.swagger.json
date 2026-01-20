@@ -1,0 +1,1215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/arbitrage.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ArbitrageService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/arbitrages": {
+      "get": {
+        "summary": "차익거래 목록 조회",
+        "operationId": "ArbitrageService_ListArbitrages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageListArbitragesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* portfolio_id - 포트폴리오 ID\n* fund_code - 펀드 코드\n* is_active - 활성화 여부\n\nExamples:\n* filter=portfolio_id=1\n* filter=is_active=true\n* filter=fund_code=\"0159\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      },
+      "post": {
+        "summary": "차익거래 생성",
+        "operationId": "ArbitrageService_CreateArbitrage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageArbitrage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "생성할 차익거래",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arbitrageArbitrage",
+              "required": [
+                "arbitrage"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/arbitrages/status": {
+      "get": {
+        "summary": "차익거래 상태 목록 조회",
+        "operationId": "ArbitrageService_ListArbitrageStatuses",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageListArbitrageStatusesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* state - 상태 (ARBITRAGE_STATE_*)\n\nExamples:\n* filter=state=ARBITRAGE_STATE_MONITORING",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/{arbitrage.name}": {
+      "patch": {
+        "summary": "차익거래 수정",
+        "operationId": "ArbitrageService_UpdateArbitrage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageArbitrage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage.name",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          },
+          {
+            "name": "arbitrage",
+            "description": "수정할 차익거래",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "차익거래 ID",
+                  "readOnly": true
+                },
+                "portfolioId": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "소속 포트폴리오 ID"
+                },
+                "fundCode": {
+                  "type": "string",
+                  "title": "주문에 사용할 펀드 코드"
+                },
+                "basketA": {
+                  "$ref": "#/definitions/arbitrageArbitrageBasket",
+                  "title": "바스켓 A"
+                },
+                "basketB": {
+                  "$ref": "#/definitions/arbitrageArbitrageBasket",
+                  "title": "바스켓 B"
+                },
+                "triggerConfig": {
+                  "$ref": "#/definitions/arbitrageTriggerConfig",
+                  "title": "트리거 설정"
+                },
+                "executionConfig": {
+                  "$ref": "#/definitions/arbitrageExecutionConfig",
+                  "title": "실행 설정"
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "title": "활성화 여부"
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "생성 시간",
+                  "readOnly": true
+                },
+                "updateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "수정 시간",
+                  "readOnly": true
+                }
+              },
+              "title": "수정할 차익거래",
+              "required": [
+                "fundCode",
+                "basketA",
+                "basketB"
+              ]
+            }
+          },
+          {
+            "name": "updateMask",
+            "description": "수정할 필드 마스크",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/{arbitrage}": {
+      "get": {
+        "summary": "단일 차익거래 조회",
+        "operationId": "ArbitrageService_GetArbitrage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageArbitrage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      },
+      "delete": {
+        "summary": "차익거래 삭제",
+        "operationId": "ArbitrageService_DeleteArbitrage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/{arbitrage}/events:stream": {
+      "get": {
+        "summary": "차익거래 이벤트 스트리밍",
+        "operationId": "ArbitrageService_StreamArbitrageEvents",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arbitrageArbitrageEvent"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of arbitrageArbitrageEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/{arbitrage}/status": {
+      "get": {
+        "summary": "차익거래 상태 조회",
+        "operationId": "ArbitrageService_GetArbitrageStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageArbitrageStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/{arbitrage}/status:stream": {
+      "get": {
+        "summary": "차익거래 상태 스트리밍",
+        "operationId": "ArbitrageService_StreamArbitrageStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arbitrageArbitrageStatusUpdate"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of arbitrageArbitrageStatusUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/{arbitrage}:start": {
+      "post": {
+        "summary": "차익거래 시작",
+        "operationId": "ArbitrageService_StartArbitrage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageArbitrageStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    },
+    "/v1/{arbitrage}:stop": {
+      "post": {
+        "summary": "차익거래 중지",
+        "operationId": "ArbitrageService_StopArbitrage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arbitrageArbitrageStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "arbitrage",
+            "description": "리소스 이름 (arbitrages/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "arbitrages/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "ArbitrageService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arbitrageArbitrage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (arbitrages/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "차익거래 ID",
+          "readOnly": true
+        },
+        "portfolioId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "소속 포트폴리오 ID"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "주문에 사용할 펀드 코드"
+        },
+        "basketA": {
+          "$ref": "#/definitions/arbitrageArbitrageBasket",
+          "title": "바스켓 A"
+        },
+        "basketB": {
+          "$ref": "#/definitions/arbitrageArbitrageBasket",
+          "title": "바스켓 B"
+        },
+        "triggerConfig": {
+          "$ref": "#/definitions/arbitrageTriggerConfig",
+          "title": "트리거 설정"
+        },
+        "executionConfig": {
+          "$ref": "#/definitions/arbitrageExecutionConfig",
+          "title": "실행 설정"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시간",
+          "readOnly": true
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "수정 시간",
+          "readOnly": true
+        }
+      },
+      "title": "차익거래 설정",
+      "required": [
+        "fundCode",
+        "basketA",
+        "basketB"
+      ]
+    },
+    "arbitrageArbitrageBasket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "바스켓 ID",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "title": "바스켓 이름"
+        },
+        "basketType": {
+          "$ref": "#/definitions/arbitrageBasketType",
+          "title": "바스켓 타입"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageBasketItem"
+          },
+          "title": "구성 종목 목록"
+        },
+        "targetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "기준 수량 (ETF의 경우 ETF 수량)"
+        },
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼 (basket_type이 ETF_CONSTITUENTS인 경우)"
+        }
+      },
+      "title": "바스켓 설정",
+      "required": [
+        "basketType"
+      ]
+    },
+    "arbitrageArbitrageEvent": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (arbitrages/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "차익거래 ID"
+        },
+        "stateChanged": {
+          "$ref": "#/definitions/arbitrageStateChangedEvent"
+        },
+        "priceUpdate": {
+          "$ref": "#/definitions/arbitragePriceUpdateEvent"
+        },
+        "triggered": {
+          "$ref": "#/definitions/arbitrageTriggeredEvent"
+        },
+        "roundStarted": {
+          "$ref": "#/definitions/arbitrageRoundStartedEvent"
+        },
+        "orderSubmitted": {
+          "$ref": "#/definitions/arbitrageOrderSubmittedEvent"
+        },
+        "orderFilled": {
+          "$ref": "#/definitions/arbitrageOrderFilledEvent"
+        },
+        "roundCompleted": {
+          "$ref": "#/definitions/arbitrageRoundCompletedEvent"
+        },
+        "executionCompleted": {
+          "$ref": "#/definitions/arbitrageExecutionCompletedEvent"
+        },
+        "error": {
+          "$ref": "#/definitions/arbitrageErrorEvent"
+        }
+      },
+      "title": "차익거래 이벤트"
+    },
+    "arbitrageArbitrageOrderType": {
+      "type": "string",
+      "enum": [
+        "ARBITRAGE_ORDER_TYPE_UNSPECIFIED",
+        "ARBITRAGE_ORDER_TYPE_MARKET",
+        "ARBITRAGE_ORDER_TYPE_LIMIT",
+        "ARBITRAGE_ORDER_TYPE_AGGRESSIVE"
+      ],
+      "default": "ARBITRAGE_ORDER_TYPE_UNSPECIFIED",
+      "description": "- ARBITRAGE_ORDER_TYPE_MARKET: 시장가\n - ARBITRAGE_ORDER_TYPE_LIMIT: 지정가\n - ARBITRAGE_ORDER_TYPE_AGGRESSIVE: 공격적 지정가 (상대호가)",
+      "title": "주문 유형"
+    },
+    "arbitrageArbitrageSide": {
+      "type": "string",
+      "enum": [
+        "ARBITRAGE_SIDE_UNSPECIFIED",
+        "ARBITRAGE_SIDE_BUY_A_SELL_B",
+        "ARBITRAGE_SIDE_BUY_B_SELL_A"
+      ],
+      "default": "ARBITRAGE_SIDE_UNSPECIFIED",
+      "description": "- ARBITRAGE_SIDE_BUY_A_SELL_B: A 매수, B 매도\n - ARBITRAGE_SIDE_BUY_B_SELL_A: B 매수, A 매도",
+      "title": "차익거래 방향"
+    },
+    "arbitrageArbitrageState": {
+      "type": "string",
+      "enum": [
+        "ARBITRAGE_STATE_UNSPECIFIED",
+        "ARBITRAGE_STATE_IDLE",
+        "ARBITRAGE_STATE_MONITORING",
+        "ARBITRAGE_STATE_TRIGGERED",
+        "ARBITRAGE_STATE_EXECUTING",
+        "ARBITRAGE_STATE_STOPPED",
+        "ARBITRAGE_STATE_ERROR"
+      ],
+      "default": "ARBITRAGE_STATE_UNSPECIFIED",
+      "description": "- ARBITRAGE_STATE_IDLE: 대기 중 (등록됨, 미시작)\n - ARBITRAGE_STATE_MONITORING: 모니터링 중 (시세 수신 및 트리거 평가)\n - ARBITRAGE_STATE_TRIGGERED: 트리거 발동됨 (조건 충족, 실행 준비)\n - ARBITRAGE_STATE_EXECUTING: 실행 중 (주문 진행 중)\n - ARBITRAGE_STATE_STOPPED: 중지됨\n - ARBITRAGE_STATE_ERROR: 에러 상태",
+      "title": "차익거래 런타임 상태"
+    },
+    "arbitrageArbitrageStats": {
+      "type": "object",
+      "properties": {
+        "triggerCount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "트리거 발동 횟수"
+        },
+        "executionCount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "실행 완료 횟수"
+        },
+        "executionFailures": {
+          "type": "string",
+          "format": "uint64",
+          "title": "실행 실패 횟수"
+        },
+        "totalProfit": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 수익"
+        }
+      },
+      "title": "차익거래 통계"
+    },
+    "arbitrageArbitrageStatus": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (arbitrages/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "차익거래 ID"
+        },
+        "state": {
+          "$ref": "#/definitions/arbitrageArbitrageState",
+          "title": "현재 상태"
+        },
+        "basketAValue": {
+          "type": "string",
+          "format": "int64",
+          "title": "바스켓 A 현재 가치"
+        },
+        "basketBValue": {
+          "type": "string",
+          "format": "int64",
+          "title": "바스켓 B 현재 가치"
+        },
+        "currentSpread": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 스프레드"
+        },
+        "currentSpreadBps": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 스프레드 (bps)"
+        },
+        "executionState": {
+          "$ref": "#/definitions/arbitrageExecutionState",
+          "title": "실행 상태 (실행 중일 때만)"
+        },
+        "stats": {
+          "$ref": "#/definitions/arbitrageArbitrageStats",
+          "title": "통계"
+        }
+      },
+      "title": "차익거래 상태"
+    },
+    "arbitrageArbitrageStatusUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (arbitrages/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "차익거래 ID"
+        },
+        "updateMask": {
+          "type": "string",
+          "title": "업데이트된 필드들"
+        },
+        "status": {
+          "$ref": "#/definitions/arbitrageArbitrageStatus",
+          "title": "상태 (필드마스크에 따라 부분 업데이트)"
+        }
+      },
+      "title": "상태 업데이트 (스트리밍용)"
+    },
+    "arbitrageBasketItem": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량"
+        },
+        "priceSource": {
+          "$ref": "#/definitions/arbitragePriceSource",
+          "title": "가격 소스"
+        },
+        "multiple": {
+          "type": "number",
+          "format": "double",
+          "title": "계약 승수 (선물용, 주식은 1.0)"
+        }
+      },
+      "title": "바스켓 구성 항목",
+      "required": [
+        "symbol"
+      ]
+    },
+    "arbitrageBasketType": {
+      "type": "string",
+      "enum": [
+        "BASKET_TYPE_UNSPECIFIED",
+        "BASKET_TYPE_STOCK_FUTURES",
+        "BASKET_TYPE_ETF_CONSTITUENTS"
+      ],
+      "default": "BASKET_TYPE_UNSPECIFIED",
+      "description": "- BASKET_TYPE_STOCK_FUTURES: 주식-선물 차익거래\n - BASKET_TYPE_ETF_CONSTITUENTS: ETF-구성종목 차익거래",
+      "title": "바스켓 타입"
+    },
+    "arbitrageErrorEvent": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "에러 이벤트"
+    },
+    "arbitrageExecutionCompletedEvent": {
+      "type": "object",
+      "properties": {
+        "totalFillRate": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "실행 완료 이벤트"
+    },
+    "arbitrageExecutionConfig": {
+      "type": "object",
+      "properties": {
+        "rounds": {
+          "type": "integer",
+          "format": "int64",
+          "title": "분할 주문 횟수"
+        },
+        "roundDelayMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "라운드 간 딜레이 (ms)"
+        },
+        "fillThresholdPct": {
+          "type": "number",
+          "format": "double",
+          "title": "다음 라운드 진행을 위한 체결률 임계값 (0.0~1.0)"
+        },
+        "orderType": {
+          "$ref": "#/definitions/arbitrageArbitrageOrderType",
+          "title": "주문 유형"
+        },
+        "pricingConfigs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arbitrageSymbolPricingConfig"
+          },
+          "title": "심볼별 호가 설정"
+        }
+      },
+      "title": "실행 설정"
+    },
+    "arbitrageExecutionState": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "$ref": "#/definitions/arbitrageArbitrageSide",
+          "title": "실행 방향"
+        },
+        "currentRound": {
+          "type": "integer",
+          "format": "int64",
+          "title": "현재 라운드 (1-based)"
+        },
+        "totalRounds": {
+          "type": "integer",
+          "format": "int64",
+          "title": "총 라운드 수"
+        },
+        "roundFills": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageRoundFillState"
+          },
+          "title": "라운드별 체결 상태"
+        },
+        "totalFillRate": {
+          "type": "number",
+          "format": "double",
+          "title": "전체 체결률"
+        },
+        "triggerSpread": {
+          "type": "string",
+          "format": "int64",
+          "title": "트리거 시점 스프레드"
+        }
+      },
+      "title": "실행 상태"
+    },
+    "arbitrageListArbitrageStatusesResponse": {
+      "type": "object",
+      "properties": {
+        "arbitrageStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageArbitrageStatus"
+          },
+          "title": "차익거래 상태 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "arbitrageListArbitragesResponse": {
+      "type": "object",
+      "properties": {
+        "arbitrages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageArbitrage"
+          },
+          "title": "차익거래 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "arbitrageOrderFilledEvent": {
+      "type": "object",
+      "properties": {
+        "round": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "filledPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "체결 이벤트"
+    },
+    "arbitrageOrderSubmittedEvent": {
+      "type": "object",
+      "properties": {
+        "round": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "주문 제출 이벤트"
+    },
+    "arbitragePriceSource": {
+      "type": "string",
+      "enum": [
+        "PRICE_SOURCE_UNSPECIFIED",
+        "PRICE_SOURCE_MID_PRICE",
+        "PRICE_SOURCE_BID1",
+        "PRICE_SOURCE_ASK1",
+        "PRICE_SOURCE_BID2",
+        "PRICE_SOURCE_ASK2",
+        "PRICE_SOURCE_LAST_PRICE"
+      ],
+      "default": "PRICE_SOURCE_UNSPECIFIED",
+      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가",
+      "title": "가격 소스"
+    },
+    "arbitragePriceUpdateEvent": {
+      "type": "object",
+      "properties": {
+        "basketAValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "basketBValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "spread": {
+          "type": "string",
+          "format": "int64"
+        },
+        "spreadBps": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "가격 업데이트 이벤트"
+    },
+    "arbitrageRoundCompletedEvent": {
+      "type": "object",
+      "properties": {
+        "round": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fillRate": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "라운드 완료 이벤트"
+    },
+    "arbitrageRoundFillState": {
+      "type": "object",
+      "properties": {
+        "round": {
+          "type": "integer",
+          "format": "int64",
+          "title": "라운드 번호"
+        },
+        "orderedQuantities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "심볼별 주문 수량"
+        },
+        "filledQuantities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "심볼별 체결 수량"
+        },
+        "fillRate": {
+          "type": "number",
+          "format": "double",
+          "title": "체결률"
+        }
+      },
+      "title": "라운드별 체결 상태"
+    },
+    "arbitrageRoundStartedEvent": {
+      "type": "object",
+      "properties": {
+        "round": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalRounds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "라운드 시작 이벤트"
+    },
+    "arbitrageSpreadAmountCondition": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "string",
+          "format": "int64",
+          "title": "스프레드 임계값 (원)"
+        }
+      },
+      "title": "절대 스프레드 조건"
+    },
+    "arbitrageSpreadBpsCondition": {
+      "type": "object",
+      "properties": {
+        "thresholdBps": {
+          "type": "number",
+          "format": "double",
+          "title": "스프레드 임계값 (bps, 1bp = 0.01%)"
+        }
+      },
+      "title": "상대 스프레드 조건"
+    },
+    "arbitrageStateChangedEvent": {
+      "type": "object",
+      "properties": {
+        "oldState": {
+          "$ref": "#/definitions/arbitrageArbitrageState"
+        },
+        "newState": {
+          "$ref": "#/definitions/arbitrageArbitrageState"
+        }
+      },
+      "title": "상태 변경 이벤트"
+    },
+    "arbitrageSymbolPricingConfig": {
+      "type": "object",
+      "properties": {
+        "buyPriceSource": {
+          "$ref": "#/definitions/arbitragePriceSource",
+          "title": "매수 시 사용할 가격"
+        },
+        "sellPriceSource": {
+          "$ref": "#/definitions/arbitragePriceSource",
+          "title": "매도 시 사용할 가격"
+        },
+        "priceOffsetTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "가격 조정 (틱 단위, +: 공격적, -: 보수적)"
+        }
+      },
+      "title": "심볼별 호가 설정"
+    },
+    "arbitrageTriggerCondition": {
+      "type": "object",
+      "properties": {
+        "spreadAmount": {
+          "$ref": "#/definitions/arbitrageSpreadAmountCondition",
+          "title": "절대 스프레드 (금액)"
+        },
+        "spreadBps": {
+          "$ref": "#/definitions/arbitrageSpreadBpsCondition",
+          "title": "상대 스프레드 (bps)"
+        }
+      },
+      "title": "트리거 조건"
+    },
+    "arbitrageTriggerConfig": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/arbitrageTriggerCondition",
+          "title": "트리거 조건"
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "트리거 후 재트리거까지 대기시간 (ms)"
+        }
+      },
+      "title": "트리거 설정"
+    },
+    "arbitrageTriggeredEvent": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "$ref": "#/definitions/arbitrageArbitrageSide"
+        },
+        "spread": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "트리거 발동 이벤트"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,42 +2,109 @@ syntax = "proto3";
 
 package kdo.v1.arbitrage;
 
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
 // ArbitrageService - 차익거래 관리 서비스
 service ArbitrageService {
   // 단일 차익거래 조회
-  rpc GetArbitrage(GetArbitrageRequest) returns (Arbitrage);
+  rpc GetArbitrage(GetArbitrageRequest) returns (Arbitrage) {
+    option (google.api.http) = {
+      get: "/v1/{arbitrage=arbitrages/*}"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
 
   // 차익거래 목록 조회
-  rpc ListArbitrages(ListArbitragesRequest) returns (ListArbitragesResponse);
+  rpc ListArbitrages(ListArbitragesRequest) returns (ListArbitragesResponse) {
+    option (google.api.http) = {
+      get: "/v1/arbitrages"
+    };
+    option (google.api.method_signature) = "";
+  }
 
   // 차익거래 생성
-  rpc CreateArbitrage(CreateArbitrageRequest) returns (Arbitrage);
+  rpc CreateArbitrage(CreateArbitrageRequest) returns (Arbitrage) {
+    option (google.api.http) = {
+      post: "/v1/arbitrages"
+      body: "arbitrage"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
 
   // 차익거래 수정
-  rpc UpdateArbitrage(UpdateArbitrageRequest) returns (Arbitrage);
+  rpc UpdateArbitrage(UpdateArbitrageRequest) returns (Arbitrage) {
+    option (google.api.http) = {
+      patch: "/v1/{arbitrage.name=arbitrages/*}"
+      body: "arbitrage"
+    };
+    option (google.api.method_signature) = "arbitrage,update_mask";
+  }
 
   // 차익거래 삭제
-  rpc DeleteArbitrage(DeleteArbitrageRequest) returns (DeleteArbitrageResponse);
+  rpc DeleteArbitrage(DeleteArbitrageRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{arbitrage=arbitrages/*}"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
 
   // 차익거래 시작
-  rpc StartArbitrage(StartArbitrageRequest) returns (ArbitrageStatus);
+  rpc StartArbitrage(StartArbitrageRequest) returns (ArbitrageStatus) {
+    option (google.api.http) = {
+      post: "/v1/{arbitrage=arbitrages/*}:start"
+      body: "*"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
 
   // 차익거래 중지
-  rpc StopArbitrage(StopArbitrageRequest) returns (ArbitrageStatus);
+  rpc StopArbitrage(StopArbitrageRequest) returns (ArbitrageStatus) {
+    option (google.api.http) = {
+      post: "/v1/{arbitrage=arbitrages/*}:stop"
+      body: "*"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
 
   // 차익거래 상태 조회
-  rpc GetArbitrageStatus(GetArbitrageStatusRequest) returns (ArbitrageStatus);
+  rpc GetArbitrageStatus(GetArbitrageStatusRequest) returns (ArbitrageStatus) {
+    option (google.api.http) = {
+      get: "/v1/{arbitrage=arbitrages/*}/status"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
+
+  // 차익거래 상태 목록 조회
+  rpc ListArbitrageStatuses(ListArbitrageStatusesRequest) returns (ListArbitrageStatusesResponse) {
+    option (google.api.http) = {
+      get: "/v1/arbitrages/status"
+    };
+    option (google.api.method_signature) = "";
+  }
 
   // 차익거래 상태 스트리밍
-  rpc StreamArbitrageStatus(StreamArbitrageStatusRequest) returns (stream ArbitrageStatusUpdate);
+  rpc StreamArbitrageStatus(StreamArbitrageStatusRequest) returns (stream ArbitrageStatusUpdate) {
+    option (google.api.http) = {
+      get: "/v1/{arbitrage=arbitrages/*}/status:stream"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
 
   // 차익거래 이벤트 스트리밍
-  rpc StreamArbitrageEvents(StreamArbitrageEventsRequest) returns (stream ArbitrageEvent);
+  rpc StreamArbitrageEvents(StreamArbitrageEventsRequest) returns (stream ArbitrageEvent) {
+    option (google.api.http) = {
+      get: "/v1/{arbitrage=arbitrages/*}/events:stream"
+    };
+    option (google.api.method_signature) = "arbitrage";
+  }
 }
 
 // ============================================================================
@@ -46,23 +113,28 @@ service ArbitrageService {
 
 // 차익거래 설정
 message Arbitrage {
-  // 차익거래 ID
-  int32 id = 1;
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/Arbitrage"
+    pattern: "arbitrages/{arbitrage}"
+  };
 
-  // 차익거래 이름 (고유)
-  string name = 2;
+  // 리소스 이름 (arbitrages/{id})
+  string name = 1;
+
+  // 차익거래 ID
+  int32 id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // 소속 포트폴리오 ID
   int32 portfolio_id = 3;
 
   // 주문에 사용할 펀드 코드
-  string fund_code = 4;
+  string fund_code = 4 [(google.api.field_behavior) = REQUIRED];
 
   // 바스켓 A
-  ArbitrageBasket basket_a = 5;
+  ArbitrageBasket basket_a = 5 [(google.api.field_behavior) = REQUIRED];
 
   // 바스켓 B
-  ArbitrageBasket basket_b = 6;
+  ArbitrageBasket basket_b = 6 [(google.api.field_behavior) = REQUIRED];
 
   // 트리거 설정
   TriggerConfig trigger_config = 7;
@@ -74,22 +146,22 @@ message Arbitrage {
   bool is_active = 9;
 
   // 생성 시간
-  google.protobuf.Timestamp create_time = 10;
+  google.protobuf.Timestamp create_time = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // 수정 시간
-  google.protobuf.Timestamp update_time = 11;
+  google.protobuf.Timestamp update_time = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // 바스켓 설정
 message ArbitrageBasket {
   // 바스켓 ID
-  int32 id = 1;
+  int32 id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // 바스켓 이름
   string name = 2;
 
   // 바스켓 타입
-  BasketType basket_type = 3;
+  BasketType basket_type = 3 [(google.api.field_behavior) = REQUIRED];
 
   // 구성 종목 목록
   repeated BasketItem items = 4;
@@ -105,15 +177,15 @@ message ArbitrageBasket {
 enum BasketType {
   BASKET_TYPE_UNSPECIFIED = 0;
   // 주식-선물 차익거래
-  STOCK_FUTURES = 1;
+  BASKET_TYPE_STOCK_FUTURES = 1;
   // ETF-구성종목 차익거래
-  ETF_CONSTITUENTS = 2;
+  BASKET_TYPE_ETF_CONSTITUENTS = 2;
 }
 
 // 바스켓 구성 항목
 message BasketItem {
   // 종목 심볼
-  string symbol = 1;
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
 
   // 수량
   int64 quantity = 2;
@@ -129,17 +201,17 @@ message BasketItem {
 enum PriceSource {
   PRICE_SOURCE_UNSPECIFIED = 0;
   // (bid1 + ask1) / 2
-  MID_PRICE = 1;
+  PRICE_SOURCE_MID_PRICE = 1;
   // 최우선 매수호가
-  BID1 = 2;
+  PRICE_SOURCE_BID1 = 2;
   // 최우선 매도호가
-  ASK1 = 3;
+  PRICE_SOURCE_ASK1 = 3;
   // 2차 매수호가
-  BID2 = 4;
+  PRICE_SOURCE_BID2 = 4;
   // 2차 매도호가
-  ASK2 = 5;
+  PRICE_SOURCE_ASK2 = 5;
   // 최근 체결가
-  LAST_PRICE = 6;
+  PRICE_SOURCE_LAST_PRICE = 6;
 }
 
 // 트리거 설정
@@ -195,11 +267,11 @@ message ExecutionConfig {
 enum ArbitrageOrderType {
   ARBITRAGE_ORDER_TYPE_UNSPECIFIED = 0;
   // 시장가
-  MARKET = 1;
+  ARBITRAGE_ORDER_TYPE_MARKET = 1;
   // 지정가
-  LIMIT = 2;
+  ARBITRAGE_ORDER_TYPE_LIMIT = 2;
   // 공격적 지정가 (상대호가)
-  AGGRESSIVE = 3;
+  ARBITRAGE_ORDER_TYPE_AGGRESSIVE = 3;
 }
 
 // 심볼별 호가 설정
@@ -220,11 +292,11 @@ message SymbolPricingConfig {
 
 // 차익거래 상태
 message ArbitrageStatus {
-  // 차익거래 ID
-  int32 id = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string name = 1;
 
-  // 차익거래 이름
-  string name = 2;
+  // 차익거래 ID
+  int32 id = 2;
 
   // 현재 상태
   ArbitrageState state = 3;
@@ -252,17 +324,17 @@ message ArbitrageStatus {
 enum ArbitrageState {
   ARBITRAGE_STATE_UNSPECIFIED = 0;
   // 대기 중 (등록됨, 미시작)
-  IDLE = 1;
+  ARBITRAGE_STATE_IDLE = 1;
   // 모니터링 중 (시세 수신 및 트리거 평가)
-  MONITORING = 2;
+  ARBITRAGE_STATE_MONITORING = 2;
   // 트리거 발동됨 (조건 충족, 실행 준비)
-  TRIGGERED = 3;
+  ARBITRAGE_STATE_TRIGGERED = 3;
   // 실행 중 (주문 진행 중)
-  EXECUTING = 4;
+  ARBITRAGE_STATE_EXECUTING = 4;
   // 중지됨
-  STOPPED = 5;
+  ARBITRAGE_STATE_STOPPED = 5;
   // 에러 상태
-  ERROR = 6;
+  ARBITRAGE_STATE_ERROR = 6;
 }
 
 // 실행 상태
@@ -290,9 +362,9 @@ message ExecutionState {
 enum ArbitrageSide {
   ARBITRAGE_SIDE_UNSPECIFIED = 0;
   // A 매수, B 매도
-  BUY_A_SELL_B = 1;
+  ARBITRAGE_SIDE_BUY_A_SELL_B = 1;
   // B 매수, A 매도
-  BUY_B_SELL_A = 2;
+  ARBITRAGE_SIDE_BUY_B_SELL_A = 2;
 }
 
 // 라운드별 체결 상태
@@ -327,32 +399,38 @@ message ArbitrageStats {
 
 // 상태 업데이트 (스트리밍용)
 message ArbitrageStatusUpdate {
+  // 리소스 이름 (arbitrages/{id})
+  string name = 1;
+
   // 차익거래 ID
-  int32 id = 1;
+  int32 id = 2;
 
   // 업데이트된 필드들
-  google.protobuf.FieldMask update_mask = 2;
+  google.protobuf.FieldMask update_mask = 3;
 
   // 상태 (필드마스크에 따라 부분 업데이트)
-  ArbitrageStatus status = 3;
+  ArbitrageStatus status = 4;
 }
 
 // 차익거래 이벤트
 message ArbitrageEvent {
+  // 리소스 이름 (arbitrages/{id})
+  string name = 1;
+
   // 차익거래 ID
-  int32 id = 1;
+  int32 id = 2;
 
   // 이벤트 타입
   oneof event {
-    StateChangedEvent state_changed = 2;
-    PriceUpdateEvent price_update = 3;
-    TriggeredEvent triggered = 4;
-    RoundStartedEvent round_started = 5;
-    OrderSubmittedEvent order_submitted = 6;
-    OrderFilledEvent order_filled = 7;
-    RoundCompletedEvent round_completed = 8;
-    ExecutionCompletedEvent execution_completed = 9;
-    ErrorEvent error = 10;
+    StateChangedEvent state_changed = 3;
+    PriceUpdateEvent price_update = 4;
+    TriggeredEvent triggered = 5;
+    RoundStartedEvent round_started = 6;
+    OrderSubmittedEvent order_submitted = 7;
+    OrderFilledEvent order_filled = 8;
+    RoundCompletedEvent round_completed = 9;
+    ExecutionCompletedEvent execution_completed = 10;
+    ErrorEvent error = 11;
   }
 }
 
@@ -419,19 +497,34 @@ message ErrorEvent {
 // ============================================================================
 
 message GetArbitrageRequest {
-  // 차익거래 ID
-  int32 id = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Arbitrage"
+    }
+  ];
 }
 
 message ListArbitragesRequest {
-  // 필터 (예: "portfolio_id=1", "is_active=true")
-  string filter = 1;
+  // 페이지 크기 (optional)
+  optional int32 page_size = 1;
 
-  // 페이지 크기
-  int32 page_size = 2;
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
 
-  // 페이지 토큰
-  string page_token = 3;
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * portfolio_id - 포트폴리오 ID
+  // * fund_code - 펀드 코드
+  // * is_active - 활성화 여부
+  //
+  // Examples:
+  // * filter=portfolio_id=1
+  // * filter=is_active=true
+  // * filter=fund_code="0159"
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 message ListArbitragesResponse {
@@ -444,48 +537,98 @@ message ListArbitragesResponse {
 
 message CreateArbitrageRequest {
   // 생성할 차익거래
-  Arbitrage arbitrage = 1;
+  Arbitrage arbitrage = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message UpdateArbitrageRequest {
   // 수정할 차익거래
-  Arbitrage arbitrage = 1;
+  Arbitrage arbitrage = 1 [(google.api.field_behavior) = REQUIRED];
 
   // 수정할 필드 마스크
   google.protobuf.FieldMask update_mask = 2;
 }
 
 message DeleteArbitrageRequest {
-  // 삭제할 차익거래 ID
-  int32 id = 1;
-}
-
-message DeleteArbitrageResponse {
-  // 성공 여부
-  bool success = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Arbitrage"
+    }
+  ];
 }
 
 message StartArbitrageRequest {
-  // 시작할 차익거래 ID
-  int32 id = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Arbitrage"
+    }
+  ];
 }
 
 message StopArbitrageRequest {
-  // 중지할 차익거래 ID
-  int32 id = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Arbitrage"
+    }
+  ];
 }
 
 message GetArbitrageStatusRequest {
-  // 조회할 차익거래 ID
-  int32 id = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Arbitrage"
+    }
+  ];
+}
+
+message ListArbitrageStatusesRequest {
+  // 페이지 크기 (optional)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * state - 상태 (ARBITRAGE_STATE_*)
+  //
+  // Examples:
+  // * filter=state=ARBITRAGE_STATE_MONITORING
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListArbitrageStatusesResponse {
+  // 차익거래 상태 목록
+  repeated ArbitrageStatus arbitrage_statuses = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
 }
 
 message StreamArbitrageStatusRequest {
-  // 구독할 차익거래 ID
-  int32 id = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Arbitrage"
+    }
+  ];
 }
 
 message StreamArbitrageEventsRequest {
-  // 구독할 차익거래 ID
-  int32 id = 1;
+  // 리소스 이름 (arbitrages/{id})
+  string arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Arbitrage"
+    }
+  ];
 }
