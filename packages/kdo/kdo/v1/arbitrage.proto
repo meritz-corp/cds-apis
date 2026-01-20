@@ -1,0 +1,491 @@
+syntax = "proto3";
+
+package kdo.v1.arbitrage;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// ArbitrageService - 차익거래 관리 서비스
+service ArbitrageService {
+  // 단일 차익거래 조회
+  rpc GetArbitrage(GetArbitrageRequest) returns (Arbitrage);
+
+  // 차익거래 목록 조회
+  rpc ListArbitrages(ListArbitragesRequest) returns (ListArbitragesResponse);
+
+  // 차익거래 생성
+  rpc CreateArbitrage(CreateArbitrageRequest) returns (Arbitrage);
+
+  // 차익거래 수정
+  rpc UpdateArbitrage(UpdateArbitrageRequest) returns (Arbitrage);
+
+  // 차익거래 삭제
+  rpc DeleteArbitrage(DeleteArbitrageRequest) returns (DeleteArbitrageResponse);
+
+  // 차익거래 시작
+  rpc StartArbitrage(StartArbitrageRequest) returns (ArbitrageStatus);
+
+  // 차익거래 중지
+  rpc StopArbitrage(StopArbitrageRequest) returns (ArbitrageStatus);
+
+  // 차익거래 상태 조회
+  rpc GetArbitrageStatus(GetArbitrageStatusRequest) returns (ArbitrageStatus);
+
+  // 차익거래 상태 스트리밍
+  rpc StreamArbitrageStatus(StreamArbitrageStatusRequest) returns (stream ArbitrageStatusUpdate);
+
+  // 차익거래 이벤트 스트리밍
+  rpc StreamArbitrageEvents(StreamArbitrageEventsRequest) returns (stream ArbitrageEvent);
+}
+
+// ============================================================================
+// Arbitrage Entity
+// ============================================================================
+
+// 차익거래 설정
+message Arbitrage {
+  // 차익거래 ID
+  int32 id = 1;
+
+  // 차익거래 이름 (고유)
+  string name = 2;
+
+  // 소속 포트폴리오 ID
+  int32 portfolio_id = 3;
+
+  // 주문에 사용할 펀드 코드
+  string fund_code = 4;
+
+  // 바스켓 A
+  ArbitrageBasket basket_a = 5;
+
+  // 바스켓 B
+  ArbitrageBasket basket_b = 6;
+
+  // 트리거 설정
+  TriggerConfig trigger_config = 7;
+
+  // 실행 설정
+  ExecutionConfig execution_config = 8;
+
+  // 활성화 여부
+  bool is_active = 9;
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 10;
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 11;
+}
+
+// 바스켓 설정
+message ArbitrageBasket {
+  // 바스켓 ID
+  int32 id = 1;
+
+  // 바스켓 이름
+  string name = 2;
+
+  // 바스켓 타입
+  BasketType basket_type = 3;
+
+  // 구성 종목 목록
+  repeated BasketItem items = 4;
+
+  // 기준 수량 (ETF의 경우 ETF 수량)
+  int64 target_quantity = 5;
+
+  // ETF 심볼 (basket_type이 ETF_CONSTITUENTS인 경우)
+  string etf_symbol = 6;
+}
+
+// 바스켓 타입
+enum BasketType {
+  BASKET_TYPE_UNSPECIFIED = 0;
+  // 주식-선물 차익거래
+  STOCK_FUTURES = 1;
+  // ETF-구성종목 차익거래
+  ETF_CONSTITUENTS = 2;
+}
+
+// 바스켓 구성 항목
+message BasketItem {
+  // 종목 심볼
+  string symbol = 1;
+
+  // 수량
+  int64 quantity = 2;
+
+  // 가격 소스
+  PriceSource price_source = 3;
+
+  // 계약 승수 (선물용, 주식은 1.0)
+  double multiple = 4;
+}
+
+// 가격 소스
+enum PriceSource {
+  PRICE_SOURCE_UNSPECIFIED = 0;
+  // (bid1 + ask1) / 2
+  MID_PRICE = 1;
+  // 최우선 매수호가
+  BID1 = 2;
+  // 최우선 매도호가
+  ASK1 = 3;
+  // 2차 매수호가
+  BID2 = 4;
+  // 2차 매도호가
+  ASK2 = 5;
+  // 최근 체결가
+  LAST_PRICE = 6;
+}
+
+// 트리거 설정
+message TriggerConfig {
+  // 트리거 조건
+  TriggerCondition condition = 1;
+
+  // 트리거 후 재트리거까지 대기시간 (ms)
+  uint64 cooldown_ms = 2;
+}
+
+// 트리거 조건
+message TriggerCondition {
+  oneof condition {
+    // 절대 스프레드 (금액)
+    SpreadAmountCondition spread_amount = 1;
+    // 상대 스프레드 (bps)
+    SpreadBpsCondition spread_bps = 2;
+  }
+}
+
+// 절대 스프레드 조건
+message SpreadAmountCondition {
+  // 스프레드 임계값 (원)
+  int64 threshold = 1;
+}
+
+// 상대 스프레드 조건
+message SpreadBpsCondition {
+  // 스프레드 임계값 (bps, 1bp = 0.01%)
+  double threshold_bps = 1;
+}
+
+// 실행 설정
+message ExecutionConfig {
+  // 분할 주문 횟수
+  uint32 rounds = 1;
+
+  // 라운드 간 딜레이 (ms)
+  uint64 round_delay_ms = 2;
+
+  // 다음 라운드 진행을 위한 체결률 임계값 (0.0~1.0)
+  double fill_threshold_pct = 3;
+
+  // 주문 유형
+  ArbitrageOrderType order_type = 4;
+
+  // 심볼별 호가 설정
+  map<string, SymbolPricingConfig> pricing_configs = 5;
+}
+
+// 주문 유형
+enum ArbitrageOrderType {
+  ARBITRAGE_ORDER_TYPE_UNSPECIFIED = 0;
+  // 시장가
+  MARKET = 1;
+  // 지정가
+  LIMIT = 2;
+  // 공격적 지정가 (상대호가)
+  AGGRESSIVE = 3;
+}
+
+// 심볼별 호가 설정
+message SymbolPricingConfig {
+  // 매수 시 사용할 가격
+  PriceSource buy_price_source = 1;
+
+  // 매도 시 사용할 가격
+  PriceSource sell_price_source = 2;
+
+  // 가격 조정 (틱 단위, +: 공격적, -: 보수적)
+  int32 price_offset_ticks = 3;
+}
+
+// ============================================================================
+// Status & Events
+// ============================================================================
+
+// 차익거래 상태
+message ArbitrageStatus {
+  // 차익거래 ID
+  int32 id = 1;
+
+  // 차익거래 이름
+  string name = 2;
+
+  // 현재 상태
+  ArbitrageState state = 3;
+
+  // 바스켓 A 현재 가치
+  int64 basket_a_value = 4;
+
+  // 바스켓 B 현재 가치
+  int64 basket_b_value = 5;
+
+  // 현재 스프레드
+  int64 current_spread = 6;
+
+  // 현재 스프레드 (bps)
+  double current_spread_bps = 7;
+
+  // 실행 상태 (실행 중일 때만)
+  ExecutionState execution_state = 8;
+
+  // 통계
+  ArbitrageStats stats = 9;
+}
+
+// 차익거래 런타임 상태
+enum ArbitrageState {
+  ARBITRAGE_STATE_UNSPECIFIED = 0;
+  // 대기 중 (등록됨, 미시작)
+  IDLE = 1;
+  // 모니터링 중 (시세 수신 및 트리거 평가)
+  MONITORING = 2;
+  // 트리거 발동됨 (조건 충족, 실행 준비)
+  TRIGGERED = 3;
+  // 실행 중 (주문 진행 중)
+  EXECUTING = 4;
+  // 중지됨
+  STOPPED = 5;
+  // 에러 상태
+  ERROR = 6;
+}
+
+// 실행 상태
+message ExecutionState {
+  // 실행 방향
+  ArbitrageSide side = 1;
+
+  // 현재 라운드 (1-based)
+  uint32 current_round = 2;
+
+  // 총 라운드 수
+  uint32 total_rounds = 3;
+
+  // 라운드별 체결 상태
+  repeated RoundFillState round_fills = 4;
+
+  // 전체 체결률
+  double total_fill_rate = 5;
+
+  // 트리거 시점 스프레드
+  int64 trigger_spread = 6;
+}
+
+// 차익거래 방향
+enum ArbitrageSide {
+  ARBITRAGE_SIDE_UNSPECIFIED = 0;
+  // A 매수, B 매도
+  BUY_A_SELL_B = 1;
+  // B 매수, A 매도
+  BUY_B_SELL_A = 2;
+}
+
+// 라운드별 체결 상태
+message RoundFillState {
+  // 라운드 번호
+  uint32 round = 1;
+
+  // 심볼별 주문 수량
+  map<string, int64> ordered_quantities = 2;
+
+  // 심볼별 체결 수량
+  map<string, int64> filled_quantities = 3;
+
+  // 체결률
+  double fill_rate = 4;
+}
+
+// 차익거래 통계
+message ArbitrageStats {
+  // 트리거 발동 횟수
+  uint64 trigger_count = 1;
+
+  // 실행 완료 횟수
+  uint64 execution_count = 2;
+
+  // 실행 실패 횟수
+  uint64 execution_failures = 3;
+
+  // 총 수익
+  int64 total_profit = 4;
+}
+
+// 상태 업데이트 (스트리밍용)
+message ArbitrageStatusUpdate {
+  // 차익거래 ID
+  int32 id = 1;
+
+  // 업데이트된 필드들
+  google.protobuf.FieldMask update_mask = 2;
+
+  // 상태 (필드마스크에 따라 부분 업데이트)
+  ArbitrageStatus status = 3;
+}
+
+// 차익거래 이벤트
+message ArbitrageEvent {
+  // 차익거래 ID
+  int32 id = 1;
+
+  // 이벤트 타입
+  oneof event {
+    StateChangedEvent state_changed = 2;
+    PriceUpdateEvent price_update = 3;
+    TriggeredEvent triggered = 4;
+    RoundStartedEvent round_started = 5;
+    OrderSubmittedEvent order_submitted = 6;
+    OrderFilledEvent order_filled = 7;
+    RoundCompletedEvent round_completed = 8;
+    ExecutionCompletedEvent execution_completed = 9;
+    ErrorEvent error = 10;
+  }
+}
+
+// 상태 변경 이벤트
+message StateChangedEvent {
+  ArbitrageState old_state = 1;
+  ArbitrageState new_state = 2;
+}
+
+// 가격 업데이트 이벤트
+message PriceUpdateEvent {
+  int64 basket_a_value = 1;
+  int64 basket_b_value = 2;
+  int64 spread = 3;
+  double spread_bps = 4;
+}
+
+// 트리거 발동 이벤트
+message TriggeredEvent {
+  ArbitrageSide side = 1;
+  int64 spread = 2;
+}
+
+// 라운드 시작 이벤트
+message RoundStartedEvent {
+  uint32 round = 1;
+  uint32 total_rounds = 2;
+}
+
+// 주문 제출 이벤트
+message OrderSubmittedEvent {
+  uint32 round = 1;
+  string symbol = 2;
+  int64 quantity = 3;
+  int64 price = 4;
+}
+
+// 체결 이벤트
+message OrderFilledEvent {
+  uint32 round = 1;
+  string symbol = 2;
+  int64 filled_quantity = 3;
+  int64 filled_price = 4;
+}
+
+// 라운드 완료 이벤트
+message RoundCompletedEvent {
+  uint32 round = 1;
+  double fill_rate = 2;
+}
+
+// 실행 완료 이벤트
+message ExecutionCompletedEvent {
+  double total_fill_rate = 1;
+}
+
+// 에러 이벤트
+message ErrorEvent {
+  string message = 1;
+}
+
+// ============================================================================
+// Request/Response Messages
+// ============================================================================
+
+message GetArbitrageRequest {
+  // 차익거래 ID
+  int32 id = 1;
+}
+
+message ListArbitragesRequest {
+  // 필터 (예: "portfolio_id=1", "is_active=true")
+  string filter = 1;
+
+  // 페이지 크기
+  int32 page_size = 2;
+
+  // 페이지 토큰
+  string page_token = 3;
+}
+
+message ListArbitragesResponse {
+  // 차익거래 목록
+  repeated Arbitrage arbitrages = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+message CreateArbitrageRequest {
+  // 생성할 차익거래
+  Arbitrage arbitrage = 1;
+}
+
+message UpdateArbitrageRequest {
+  // 수정할 차익거래
+  Arbitrage arbitrage = 1;
+
+  // 수정할 필드 마스크
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteArbitrageRequest {
+  // 삭제할 차익거래 ID
+  int32 id = 1;
+}
+
+message DeleteArbitrageResponse {
+  // 성공 여부
+  bool success = 1;
+}
+
+message StartArbitrageRequest {
+  // 시작할 차익거래 ID
+  int32 id = 1;
+}
+
+message StopArbitrageRequest {
+  // 중지할 차익거래 ID
+  int32 id = 1;
+}
+
+message GetArbitrageStatusRequest {
+  // 조회할 차익거래 ID
+  int32 id = 1;
+}
+
+message StreamArbitrageStatusRequest {
+  // 구독할 차익거래 ID
+  int32 id = 1;
+}
+
+message StreamArbitrageEventsRequest {
+  // 구독할 차익거래 ID
+  int32 id = 1;
+}
