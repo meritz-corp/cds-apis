@@ -529,6 +529,10 @@ func local_request_ArbitrageService_ListArbitrageStatuses_0(ctx context.Context,
 
 }
 
+var (
+	filter_ArbitrageService_StreamArbitrageStatus_0 = &utilities.DoubleArray{Encoding: map[string]int{"arbitrage": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
+
 func request_ArbitrageService_StreamArbitrageStatus_0(ctx context.Context, marshaler runtime.Marshaler, client ArbitrageServiceClient, req *http.Request, pathParams map[string]string) (ArbitrageService_StreamArbitrageStatusClient, runtime.ServerMetadata, error) {
 	var protoReq StreamArbitrageStatusRequest
 	var metadata runtime.ServerMetadata
@@ -550,6 +554,13 @@ func request_ArbitrageService_StreamArbitrageStatus_0(ctx context.Context, marsh
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "arbitrage", err)
 	}
 
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArbitrageService_StreamArbitrageStatus_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	stream, err := client.StreamArbitrageStatus(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -562,6 +573,10 @@ func request_ArbitrageService_StreamArbitrageStatus_0(ctx context.Context, marsh
 	return stream, metadata, nil
 
 }
+
+var (
+	filter_ArbitrageService_StreamArbitrageEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{"arbitrage": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
 
 func request_ArbitrageService_StreamArbitrageEvents_0(ctx context.Context, marshaler runtime.Marshaler, client ArbitrageServiceClient, req *http.Request, pathParams map[string]string) (ArbitrageService_StreamArbitrageEventsClient, runtime.ServerMetadata, error) {
 	var protoReq StreamArbitrageEventsRequest
@@ -582,6 +597,13 @@ func request_ArbitrageService_StreamArbitrageEvents_0(ctx context.Context, marsh
 	protoReq.Arbitrage, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "arbitrage", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArbitrageService_StreamArbitrageEvents_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	stream, err := client.StreamArbitrageEvents(ctx, &protoReq)

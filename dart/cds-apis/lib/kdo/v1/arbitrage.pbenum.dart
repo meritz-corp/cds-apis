@@ -141,5 +141,23 @@ class ArbitrageSide extends $pb.ProtobufEnum {
   const ArbitrageSide._(super.value, super.name);
 }
 
+/// 바스켓 구분
+class BasketSide extends $pb.ProtobufEnum {
+  static const BasketSide BASKET_SIDE_UNSPECIFIED = BasketSide._(0, _omitEnumNames ? '' : 'BASKET_SIDE_UNSPECIFIED');
+  static const BasketSide BASKET_SIDE_A = BasketSide._(1, _omitEnumNames ? '' : 'BASKET_SIDE_A');
+  static const BasketSide BASKET_SIDE_B = BasketSide._(2, _omitEnumNames ? '' : 'BASKET_SIDE_B');
+
+  static const $core.List<BasketSide> values = <BasketSide> [
+    BASKET_SIDE_UNSPECIFIED,
+    BASKET_SIDE_A,
+    BASKET_SIDE_B,
+  ];
+
+  static final $core.List<BasketSide?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static BasketSide? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const BasketSide._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

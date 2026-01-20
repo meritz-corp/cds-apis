@@ -826,6 +826,7 @@ class ArbitrageStatus extends $pb.GeneratedMessage {
     $core.double? currentSpreadBps,
     ExecutionState? executionState,
     ArbitrageStats? stats,
+    ExecutionEstimate? estimate,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -837,6 +838,7 @@ class ArbitrageStatus extends $pb.GeneratedMessage {
     if (currentSpreadBps != null) result.currentSpreadBps = currentSpreadBps;
     if (executionState != null) result.executionState = executionState;
     if (stats != null) result.stats = stats;
+    if (estimate != null) result.estimate = estimate;
     return result;
   }
 
@@ -855,6 +857,7 @@ class ArbitrageStatus extends $pb.GeneratedMessage {
     ..a<$core.double>(7, _omitFieldNames ? '' : 'currentSpreadBps', $pb.PbFieldType.OD)
     ..aOM<ExecutionState>(8, _omitFieldNames ? '' : 'executionState', subBuilder: ExecutionState.create)
     ..aOM<ArbitrageStats>(9, _omitFieldNames ? '' : 'stats', subBuilder: ArbitrageStats.create)
+    ..aOM<ExecutionEstimate>(10, _omitFieldNames ? '' : 'estimate', subBuilder: ExecutionEstimate.create)
     ..hasRequiredFields = false
   ;
 
@@ -968,6 +971,118 @@ class ArbitrageStatus extends $pb.GeneratedMessage {
   void clearStats() => $_clearField(9);
   @$pb.TagNumber(9)
   ArbitrageStats ensureStats() => $_ensure(8);
+
+  /// 예상 실행 결과 (현재 호가 기준)
+  @$pb.TagNumber(10)
+  ExecutionEstimate get estimate => $_getN(9);
+  @$pb.TagNumber(10)
+  set estimate(ExecutionEstimate value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasEstimate() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearEstimate() => $_clearField(10);
+  @$pb.TagNumber(10)
+  ExecutionEstimate ensureEstimate() => $_ensure(9);
+}
+
+/// 예상 실행 결과
+class ExecutionEstimate extends $pb.GeneratedMessage {
+  factory ExecutionEstimate({
+    $fixnum.Int64? buyASellBPnl,
+    $fixnum.Int64? buyBSellAPnl,
+    $core.double? slippageBps,
+    $core.bool? executable,
+    $core.String? reason,
+  }) {
+    final result = create();
+    if (buyASellBPnl != null) result.buyASellBPnl = buyASellBPnl;
+    if (buyBSellAPnl != null) result.buyBSellAPnl = buyBSellAPnl;
+    if (slippageBps != null) result.slippageBps = slippageBps;
+    if (executable != null) result.executable = executable;
+    if (reason != null) result.reason = reason;
+    return result;
+  }
+
+  ExecutionEstimate._();
+
+  factory ExecutionEstimate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ExecutionEstimate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExecutionEstimate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'buyASellBPnl')
+    ..aInt64(2, _omitFieldNames ? '' : 'buyBSellAPnl')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'slippageBps', $pb.PbFieldType.OD)
+    ..aOB(4, _omitFieldNames ? '' : 'executable')
+    ..aOS(5, _omitFieldNames ? '' : 'reason')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ExecutionEstimate clone() => ExecutionEstimate()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ExecutionEstimate copyWith(void Function(ExecutionEstimate) updates) => super.copyWith((message) => updates(message as ExecutionEstimate)) as ExecutionEstimate;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ExecutionEstimate create() => ExecutionEstimate._();
+  @$core.override
+  ExecutionEstimate createEmptyInstance() => create();
+  static $pb.PbList<ExecutionEstimate> createRepeated() => $pb.PbList<ExecutionEstimate>();
+  @$core.pragma('dart2js:noInline')
+  static ExecutionEstimate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExecutionEstimate>(create);
+  static ExecutionEstimate? _defaultInstance;
+
+  /// A매수-B매도 시 예상 손익
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get buyASellBPnl => $_getI64(0);
+  @$pb.TagNumber(1)
+  set buyASellBPnl($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBuyASellBPnl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBuyASellBPnl() => $_clearField(1);
+
+  /// B매수-A매도 시 예상 손익
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get buyBSellAPnl => $_getI64(1);
+  @$pb.TagNumber(2)
+  set buyBSellAPnl($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBuyBSellAPnl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBuyBSellAPnl() => $_clearField(2);
+
+  /// 예상 슬리피지 (bps)
+  @$pb.TagNumber(3)
+  $core.double get slippageBps => $_getN(2);
+  @$pb.TagNumber(3)
+  set slippageBps($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlippageBps() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlippageBps() => $_clearField(3);
+
+  /// 실행 가능 여부 (호가 수량 충분한지)
+  @$pb.TagNumber(4)
+  $core.bool get executable => $_getBF(3);
+  @$pb.TagNumber(4)
+  set executable($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExecutable() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExecutable() => $_clearField(4);
+
+  /// 실행 불가 사유 (executable=false인 경우)
+  @$pb.TagNumber(5)
+  $core.String get reason => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set reason($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasReason() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearReason() => $_clearField(5);
 }
 
 /// 실행 상태
@@ -1246,12 +1361,16 @@ class ArbitrageStatusUpdate extends $pb.GeneratedMessage {
     $core.int? id,
     $3.FieldMask? updateMask,
     ArbitrageStatus? status,
+    $core.Iterable<BasketItemPrice>? basketAPrices,
+    $core.Iterable<BasketItemPrice>? basketBPrices,
   }) {
     final result = create();
     if (name != null) result.name = name;
     if (id != null) result.id = id;
     if (updateMask != null) result.updateMask = updateMask;
     if (status != null) result.status = status;
+    if (basketAPrices != null) result.basketAPrices.addAll(basketAPrices);
+    if (basketBPrices != null) result.basketBPrices.addAll(basketBPrices);
     return result;
   }
 
@@ -1265,6 +1384,8 @@ class ArbitrageStatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOM<$3.FieldMask>(3, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
     ..aOM<ArbitrageStatus>(4, _omitFieldNames ? '' : 'status', subBuilder: ArbitrageStatus.create)
+    ..pc<BasketItemPrice>(5, _omitFieldNames ? '' : 'basketAPrices', $pb.PbFieldType.PM, subBuilder: BasketItemPrice.create)
+    ..pc<BasketItemPrice>(6, _omitFieldNames ? '' : 'basketBPrices', $pb.PbFieldType.PM, subBuilder: BasketItemPrice.create)
     ..hasRequiredFields = false
   ;
 
@@ -1328,6 +1449,14 @@ class ArbitrageStatusUpdate extends $pb.GeneratedMessage {
   void clearStatus() => $_clearField(4);
   @$pb.TagNumber(4)
   ArbitrageStatus ensureStatus() => $_ensure(3);
+
+  /// 바스켓 A 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)
+  @$pb.TagNumber(5)
+  $pb.PbList<BasketItemPrice> get basketAPrices => $_getList(4);
+
+  /// 바스켓 B 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)
+  @$pb.TagNumber(6)
+  $pb.PbList<BasketItemPrice> get basketBPrices => $_getList(5);
 }
 
 enum ArbitrageEvent_Event {
@@ -1340,6 +1469,7 @@ enum ArbitrageEvent_Event {
   roundCompleted, 
   executionCompleted, 
   error, 
+  basketPrice, 
   notSet
 }
 
@@ -1357,6 +1487,7 @@ class ArbitrageEvent extends $pb.GeneratedMessage {
     RoundCompletedEvent? roundCompleted,
     ExecutionCompletedEvent? executionCompleted,
     ErrorEvent? error,
+    BasketPriceUpdateEvent? basketPrice,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -1370,6 +1501,7 @@ class ArbitrageEvent extends $pb.GeneratedMessage {
     if (roundCompleted != null) result.roundCompleted = roundCompleted;
     if (executionCompleted != null) result.executionCompleted = executionCompleted;
     if (error != null) result.error = error;
+    if (basketPrice != null) result.basketPrice = basketPrice;
     return result;
   }
 
@@ -1388,10 +1520,11 @@ class ArbitrageEvent extends $pb.GeneratedMessage {
     9 : ArbitrageEvent_Event.roundCompleted,
     10 : ArbitrageEvent_Event.executionCompleted,
     11 : ArbitrageEvent_Event.error,
+    12 : ArbitrageEvent_Event.basketPrice,
     0 : ArbitrageEvent_Event.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ArbitrageEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
-    ..oo(0, [3, 4, 5, 6, 7, 8, 9, 10, 11])
+    ..oo(0, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOM<StateChangedEvent>(3, _omitFieldNames ? '' : 'stateChanged', subBuilder: StateChangedEvent.create)
@@ -1403,6 +1536,7 @@ class ArbitrageEvent extends $pb.GeneratedMessage {
     ..aOM<RoundCompletedEvent>(9, _omitFieldNames ? '' : 'roundCompleted', subBuilder: RoundCompletedEvent.create)
     ..aOM<ExecutionCompletedEvent>(10, _omitFieldNames ? '' : 'executionCompleted', subBuilder: ExecutionCompletedEvent.create)
     ..aOM<ErrorEvent>(11, _omitFieldNames ? '' : 'error', subBuilder: ErrorEvent.create)
+    ..aOM<BasketPriceUpdateEvent>(12, _omitFieldNames ? '' : 'basketPrice', subBuilder: BasketPriceUpdateEvent.create)
     ..hasRequiredFields = false
   ;
 
@@ -1544,6 +1678,17 @@ class ArbitrageEvent extends $pb.GeneratedMessage {
   void clearError() => $_clearField(11);
   @$pb.TagNumber(11)
   ErrorEvent ensureError() => $_ensure(10);
+
+  @$pb.TagNumber(12)
+  BasketPriceUpdateEvent get basketPrice => $_getN(11);
+  @$pb.TagNumber(12)
+  set basketPrice(BasketPriceUpdateEvent value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasBasketPrice() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearBasketPrice() => $_clearField(12);
+  @$pb.TagNumber(12)
+  BasketPriceUpdateEvent ensureBasketPrice() => $_ensure(11);
 }
 
 /// 상태 변경 이벤트
@@ -2123,6 +2268,161 @@ class ErrorEvent extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(0);
   @$pb.TagNumber(1)
   void clearMessage() => $_clearField(1);
+}
+
+/// 바스켓 구성종목 가격 (개별 종목)
+class BasketItemPrice extends $pb.GeneratedMessage {
+  factory BasketItemPrice({
+    $core.String? symbol,
+    $core.String? bid1,
+    $core.String? ask1,
+    $fixnum.Int64? bid1Qty,
+    $fixnum.Int64? ask1Qty,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (bid1 != null) result.bid1 = bid1;
+    if (ask1 != null) result.ask1 = ask1;
+    if (bid1Qty != null) result.bid1Qty = bid1Qty;
+    if (ask1Qty != null) result.ask1Qty = ask1Qty;
+    return result;
+  }
+
+  BasketItemPrice._();
+
+  factory BasketItemPrice.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BasketItemPrice.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketItemPrice', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'bid1')
+    ..aOS(3, _omitFieldNames ? '' : 'ask1')
+    ..aInt64(4, _omitFieldNames ? '' : 'bid1Qty')
+    ..aInt64(5, _omitFieldNames ? '' : 'ask1Qty')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketItemPrice clone() => BasketItemPrice()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketItemPrice copyWith(void Function(BasketItemPrice) updates) => super.copyWith((message) => updates(message as BasketItemPrice)) as BasketItemPrice;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BasketItemPrice create() => BasketItemPrice._();
+  @$core.override
+  BasketItemPrice createEmptyInstance() => create();
+  static $pb.PbList<BasketItemPrice> createRepeated() => $pb.PbList<BasketItemPrice>();
+  @$core.pragma('dart2js:noInline')
+  static BasketItemPrice getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasketItemPrice>(create);
+  static BasketItemPrice? _defaultInstance;
+
+  /// 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 최우선 매수호가
+  @$pb.TagNumber(2)
+  $core.String get bid1 => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set bid1($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBid1() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBid1() => $_clearField(2);
+
+  /// 최우선 매도호가
+  @$pb.TagNumber(3)
+  $core.String get ask1 => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set ask1($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAsk1() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAsk1() => $_clearField(3);
+
+  /// 최우선 매수호가 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get bid1Qty => $_getI64(3);
+  @$pb.TagNumber(4)
+  set bid1Qty($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBid1Qty() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBid1Qty() => $_clearField(4);
+
+  /// 최우선 매도호가 수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get ask1Qty => $_getI64(4);
+  @$pb.TagNumber(5)
+  set ask1Qty($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasAsk1Qty() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAsk1Qty() => $_clearField(5);
+}
+
+/// 바스켓 가격 업데이트 이벤트 (변경된 종목만 전송)
+class BasketPriceUpdateEvent extends $pb.GeneratedMessage {
+  factory BasketPriceUpdateEvent({
+    BasketSide? side,
+    $core.Iterable<BasketItemPrice>? updatedItems,
+  }) {
+    final result = create();
+    if (side != null) result.side = side;
+    if (updatedItems != null) result.updatedItems.addAll(updatedItems);
+    return result;
+  }
+
+  BasketPriceUpdateEvent._();
+
+  factory BasketPriceUpdateEvent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BasketPriceUpdateEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketPriceUpdateEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
+    ..e<BasketSide>(1, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: BasketSide.BASKET_SIDE_UNSPECIFIED, valueOf: BasketSide.valueOf, enumValues: BasketSide.values)
+    ..pc<BasketItemPrice>(2, _omitFieldNames ? '' : 'updatedItems', $pb.PbFieldType.PM, subBuilder: BasketItemPrice.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketPriceUpdateEvent clone() => BasketPriceUpdateEvent()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketPriceUpdateEvent copyWith(void Function(BasketPriceUpdateEvent) updates) => super.copyWith((message) => updates(message as BasketPriceUpdateEvent)) as BasketPriceUpdateEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BasketPriceUpdateEvent create() => BasketPriceUpdateEvent._();
+  @$core.override
+  BasketPriceUpdateEvent createEmptyInstance() => create();
+  static $pb.PbList<BasketPriceUpdateEvent> createRepeated() => $pb.PbList<BasketPriceUpdateEvent>();
+  @$core.pragma('dart2js:noInline')
+  static BasketPriceUpdateEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasketPriceUpdateEvent>(create);
+  static BasketPriceUpdateEvent? _defaultInstance;
+
+  /// 어느 바스켓인지
+  @$pb.TagNumber(1)
+  BasketSide get side => $_getN(0);
+  @$pb.TagNumber(1)
+  set side(BasketSide value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSide() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSide() => $_clearField(1);
+
+  /// 변경된 종목만 포함 (전체 아님)
+  @$pb.TagNumber(2)
+  $pb.PbList<BasketItemPrice> get updatedItems => $_getList(1);
 }
 
 class GetArbitrageRequest extends $pb.GeneratedMessage {
@@ -2746,9 +3046,13 @@ class ListArbitrageStatusesResponse extends $pb.GeneratedMessage {
 class StreamArbitrageStatusRequest extends $pb.GeneratedMessage {
   factory StreamArbitrageStatusRequest({
     $core.String? arbitrage,
+    $core.bool? includeBasketPrices,
+    $core.bool? includeEstimate,
   }) {
     final result = create();
     if (arbitrage != null) result.arbitrage = arbitrage;
+    if (includeBasketPrices != null) result.includeBasketPrices = includeBasketPrices;
+    if (includeEstimate != null) result.includeEstimate = includeEstimate;
     return result;
   }
 
@@ -2759,6 +3063,8 @@ class StreamArbitrageStatusRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamArbitrageStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'arbitrage')
+    ..aOB(2, _omitFieldNames ? '' : 'includeBasketPrices')
+    ..aOB(3, _omitFieldNames ? '' : 'includeEstimate')
     ..hasRequiredFields = false
   ;
 
@@ -2788,14 +3094,38 @@ class StreamArbitrageStatusRequest extends $pb.GeneratedMessage {
   $core.bool hasArbitrage() => $_has(0);
   @$pb.TagNumber(1)
   void clearArbitrage() => $_clearField(1);
+
+  /// 구성종목 개별 가격 포함 여부 (기본: false)
+  /// true인 경우 ArbitrageStatusUpdate에 바스켓 구성종목 가격이 포함됨
+  @$pb.TagNumber(2)
+  $core.bool get includeBasketPrices => $_getBF(1);
+  @$pb.TagNumber(2)
+  set includeBasketPrices($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasIncludeBasketPrices() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIncludeBasketPrices() => $_clearField(2);
+
+  /// 예상 손익/슬리피지 포함 여부 (기본: true)
+  /// ArbitrageStatus.estimate 필드 포함 여부
+  @$pb.TagNumber(3)
+  $core.bool get includeEstimate => $_getBF(2);
+  @$pb.TagNumber(3)
+  set includeEstimate($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasIncludeEstimate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearIncludeEstimate() => $_clearField(3);
 }
 
 class StreamArbitrageEventsRequest extends $pb.GeneratedMessage {
   factory StreamArbitrageEventsRequest({
     $core.String? arbitrage,
+    $core.bool? includeBasketPrices,
   }) {
     final result = create();
     if (arbitrage != null) result.arbitrage = arbitrage;
+    if (includeBasketPrices != null) result.includeBasketPrices = includeBasketPrices;
     return result;
   }
 
@@ -2806,6 +3136,7 @@ class StreamArbitrageEventsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamArbitrageEventsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'arbitrage')
+    ..aOB(2, _omitFieldNames ? '' : 'includeBasketPrices')
     ..hasRequiredFields = false
   ;
 
@@ -2835,6 +3166,17 @@ class StreamArbitrageEventsRequest extends $pb.GeneratedMessage {
   $core.bool hasArbitrage() => $_has(0);
   @$pb.TagNumber(1)
   void clearArbitrage() => $_clearField(1);
+
+  /// 바스켓 구성종목 가격 이벤트 포함 여부 (기본: false)
+  /// true인 경우 BasketPriceUpdateEvent가 스트림에 포함됨
+  @$pb.TagNumber(2)
+  $core.bool get includeBasketPrices => $_getBF(1);
+  @$pb.TagNumber(2)
+  set includeBasketPrices($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasIncludeBasketPrices() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIncludeBasketPrices() => $_clearField(2);
 }
 
 

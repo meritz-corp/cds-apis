@@ -198,6 +198,29 @@ pub struct ArbitrageStatus {
     /// 통계
     #[prost(message, optional, tag="9")]
     pub stats: ::core::option::Option<ArbitrageStats>,
+    /// 예상 실행 결과 (현재 호가 기준)
+    #[prost(message, optional, tag="10")]
+    pub estimate: ::core::option::Option<ExecutionEstimate>,
+}
+/// 예상 실행 결과
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionEstimate {
+    /// A매수-B매도 시 예상 손익
+    #[prost(int64, tag="1")]
+    pub buy_a_sell_b_pnl: i64,
+    /// B매수-A매도 시 예상 손익
+    #[prost(int64, tag="2")]
+    pub buy_b_sell_a_pnl: i64,
+    /// 예상 슬리피지 (bps)
+    #[prost(double, tag="3")]
+    pub slippage_bps: f64,
+    /// 실행 가능 여부 (호가 수량 충분한지)
+    #[prost(bool, tag="4")]
+    pub executable: bool,
+    /// 실행 불가 사유 (executable=false인 경우)
+    #[prost(string, tag="5")]
+    pub reason: ::prost::alloc::string::String,
 }
 /// 실행 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -272,6 +295,12 @@ pub struct ArbitrageStatusUpdate {
     /// 상태 (필드마스크에 따라 부분 업데이트)
     #[prost(message, optional, tag="4")]
     pub status: ::core::option::Option<ArbitrageStatus>,
+    /// 바스켓 A 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)
+    #[prost(message, repeated, tag="5")]
+    pub basket_a_prices: ::prost::alloc::vec::Vec<BasketItemPrice>,
+    /// 바스켓 B 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)
+    #[prost(message, repeated, tag="6")]
+    pub basket_b_prices: ::prost::alloc::vec::Vec<BasketItemPrice>,
 }
 /// 차익거래 이벤트
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -284,7 +313,7 @@ pub struct ArbitrageEvent {
     #[prost(int32, tag="2")]
     pub id: i32,
     /// 이벤트 타입
-    #[prost(oneof="arbitrage_event::Event", tags="3, 4, 5, 6, 7, 8, 9, 10, 11")]
+    #[prost(oneof="arbitrage_event::Event", tags="3, 4, 5, 6, 7, 8, 9, 10, 11, 12")]
     pub event: ::core::option::Option<arbitrage_event::Event>,
 }
 /// Nested message and enum types in `ArbitrageEvent`.
@@ -311,6 +340,8 @@ pub mod arbitrage_event {
         ExecutionCompleted(super::ExecutionCompletedEvent),
         #[prost(message, tag="11")]
         Error(super::ErrorEvent),
+        #[prost(message, tag="12")]
+        BasketPrice(super::BasketPriceUpdateEvent),
     }
 }
 /// 상태 변경 이벤트
@@ -401,6 +432,37 @@ pub struct ExecutionCompletedEvent {
 pub struct ErrorEvent {
     #[prost(string, tag="1")]
     pub message: ::prost::alloc::string::String,
+}
+/// 바스켓 구성종목 가격 (개별 종목)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketItemPrice {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 최우선 매수호가
+    #[prost(string, tag="2")]
+    pub bid1: ::prost::alloc::string::String,
+    /// 최우선 매도호가
+    #[prost(string, tag="3")]
+    pub ask1: ::prost::alloc::string::String,
+    /// 최우선 매수호가 수량
+    #[prost(int64, tag="4")]
+    pub bid1_qty: i64,
+    /// 최우선 매도호가 수량
+    #[prost(int64, tag="5")]
+    pub ask1_qty: i64,
+}
+/// 바스켓 가격 업데이트 이벤트 (변경된 종목만 전송)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketPriceUpdateEvent {
+    /// 어느 바스켓인지
+    #[prost(enumeration="BasketSide", tag="1")]
+    pub side: i32,
+    /// 변경된 종목만 포함 (전체 아님)
+    #[prost(message, repeated, tag="2")]
+    pub updated_items: ::prost::alloc::vec::Vec<BasketItemPrice>,
 }
 // ============================================================================
 // Request/Response Messages
@@ -526,6 +588,14 @@ pub struct StreamArbitrageStatusRequest {
     /// 리소스 이름 (arbitrages/{id})
     #[prost(string, tag="1")]
     pub arbitrage: ::prost::alloc::string::String,
+    /// 구성종목 개별 가격 포함 여부 (기본: false)
+    /// true인 경우 ArbitrageStatusUpdate에 바스켓 구성종목 가격이 포함됨
+    #[prost(bool, tag="2")]
+    pub include_basket_prices: bool,
+    /// 예상 손익/슬리피지 포함 여부 (기본: true)
+    /// ArbitrageStatus.estimate 필드 포함 여부
+    #[prost(bool, tag="3")]
+    pub include_estimate: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -533,6 +603,10 @@ pub struct StreamArbitrageEventsRequest {
     /// 리소스 이름 (arbitrages/{id})
     #[prost(string, tag="1")]
     pub arbitrage: ::prost::alloc::string::String,
+    /// 바스켓 구성종목 가격 이벤트 포함 여부 (기본: false)
+    /// true인 경우 BasketPriceUpdateEvent가 스트림에 포함됨
+    #[prost(bool, tag="2")]
+    pub include_basket_prices: bool,
 }
 /// 바스켓 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -726,6 +800,36 @@ impl ArbitrageSide {
             "ARBITRAGE_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
             "ARBITRAGE_SIDE_BUY_A_SELL_B" => Some(Self::BuyASellB),
             "ARBITRAGE_SIDE_BUY_B_SELL_A" => Some(Self::BuyBSellA),
+            _ => None,
+        }
+    }
+}
+/// 바스켓 구분
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum BasketSide {
+    Unspecified = 0,
+    A = 1,
+    B = 2,
+}
+impl BasketSide {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            BasketSide::Unspecified => "BASKET_SIDE_UNSPECIFIED",
+            BasketSide::A => "BASKET_SIDE_A",
+            BasketSide::B => "BASKET_SIDE_B",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BASKET_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
+            "BASKET_SIDE_A" => Some(Self::A),
+            "BASKET_SIDE_B" => Some(Self::B),
             _ => None,
         }
     }

@@ -318,6 +318,27 @@ message ArbitrageStatus {
 
   // 통계
   ArbitrageStats stats = 9;
+
+  // 예상 실행 결과 (현재 호가 기준)
+  ExecutionEstimate estimate = 10;
+}
+
+// 예상 실행 결과
+message ExecutionEstimate {
+  // A매수-B매도 시 예상 손익
+  int64 buy_a_sell_b_pnl = 1;
+
+  // B매수-A매도 시 예상 손익
+  int64 buy_b_sell_a_pnl = 2;
+
+  // 예상 슬리피지 (bps)
+  double slippage_bps = 3;
+
+  // 실행 가능 여부 (호가 수량 충분한지)
+  bool executable = 4;
+
+  // 실행 불가 사유 (executable=false인 경우)
+  string reason = 5;
 }
 
 // 차익거래 런타임 상태
@@ -410,6 +431,12 @@ message ArbitrageStatusUpdate {
 
   // 상태 (필드마스크에 따라 부분 업데이트)
   ArbitrageStatus status = 4;
+
+  // 바스켓 A 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)
+  repeated BasketItemPrice basket_a_prices = 5;
+
+  // 바스켓 B 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)
+  repeated BasketItemPrice basket_b_prices = 6;
 }
 
 // 차익거래 이벤트
@@ -431,6 +458,7 @@ message ArbitrageEvent {
     RoundCompletedEvent round_completed = 9;
     ExecutionCompletedEvent execution_completed = 10;
     ErrorEvent error = 11;
+    BasketPriceUpdateEvent basket_price = 12;
   }
 }
 
@@ -490,6 +518,40 @@ message ExecutionCompletedEvent {
 // 에러 이벤트
 message ErrorEvent {
   string message = 1;
+}
+
+// 바스켓 구분
+enum BasketSide {
+  BASKET_SIDE_UNSPECIFIED = 0;
+  BASKET_SIDE_A = 1;
+  BASKET_SIDE_B = 2;
+}
+
+// 바스켓 구성종목 가격 (개별 종목)
+message BasketItemPrice {
+  // 종목 심볼
+  string symbol = 1;
+
+  // 최우선 매수호가
+  string bid1 = 2;
+
+  // 최우선 매도호가
+  string ask1 = 3;
+
+  // 최우선 매수호가 수량
+  int64 bid1_qty = 4;
+
+  // 최우선 매도호가 수량
+  int64 ask1_qty = 5;
+}
+
+// 바스켓 가격 업데이트 이벤트 (변경된 종목만 전송)
+message BasketPriceUpdateEvent {
+  // 어느 바스켓인지
+  BasketSide side = 1;
+
+  // 변경된 종목만 포함 (전체 아님)
+  repeated BasketItemPrice updated_items = 2;
 }
 
 // ============================================================================
@@ -621,6 +683,14 @@ message StreamArbitrageStatusRequest {
       type: "kdo.cdsapis.xyz/Arbitrage"
     }
   ];
+
+  // 구성종목 개별 가격 포함 여부 (기본: false)
+  // true인 경우 ArbitrageStatusUpdate에 바스켓 구성종목 가격이 포함됨
+  bool include_basket_prices = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // 예상 손익/슬리피지 포함 여부 (기본: true)
+  // ArbitrageStatus.estimate 필드 포함 여부
+  bool include_estimate = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 message StreamArbitrageEventsRequest {
@@ -631,4 +701,8 @@ message StreamArbitrageEventsRequest {
       type: "kdo.cdsapis.xyz/Arbitrage"
     }
   ];
+
+  // 바스켓 구성종목 가격 이벤트 포함 여부 (기본: false)
+  // true인 경우 BasketPriceUpdateEvent가 스트림에 포함됨
+  bool include_basket_prices = 2 [(google.api.field_behavior) = OPTIONAL];
 }

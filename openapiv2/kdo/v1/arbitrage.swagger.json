@@ -349,6 +349,13 @@
             "required": true,
             "type": "string",
             "pattern": "arbitrages/[^/]+"
+          },
+          {
+            "name": "includeBasketPrices",
+            "description": "바스켓 구성종목 가격 이벤트 포함 여부 (기본: false)\ntrue인 경우 BasketPriceUpdateEvent가 스트림에 포함됨",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -424,6 +431,20 @@
             "required": true,
             "type": "string",
             "pattern": "arbitrages/[^/]+"
+          },
+          {
+            "name": "includeBasketPrices",
+            "description": "구성종목 개별 가격 포함 여부 (기본: false)\ntrue인 경우 ArbitrageStatusUpdate에 바스켓 구성종목 가격이 포함됨",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "includeEstimate",
+            "description": "예상 손익/슬리피지 포함 여부 (기본: true)\nArbitrageStatus.estimate 필드 포함 여부",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -654,6 +675,9 @@
         },
         "error": {
           "$ref": "#/definitions/arbitrageErrorEvent"
+        },
+        "basketPrice": {
+          "$ref": "#/definitions/arbitrageBasketPriceUpdateEvent"
         }
       },
       "title": "차익거래 이벤트"
@@ -765,6 +789,10 @@
         "stats": {
           "$ref": "#/definitions/arbitrageArbitrageStats",
           "title": "통계"
+        },
+        "estimate": {
+          "$ref": "#/definitions/arbitrageExecutionEstimate",
+          "title": "예상 실행 결과 (현재 호가 기준)"
         }
       },
       "title": "차익거래 상태"
@@ -788,6 +816,20 @@
         "status": {
           "$ref": "#/definitions/arbitrageArbitrageStatus",
           "title": "상태 (필드마스크에 따라 부분 업데이트)"
+        },
+        "basketAPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageBasketItemPrice"
+          },
+          "title": "바스켓 A 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)"
+        },
+        "basketBPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageBasketItemPrice"
+          },
+          "title": "바스켓 B 구성종목 가격 (include_basket_prices=true인 경우, 변경분만)"
         }
       },
       "title": "상태 업데이트 (스트리밍용)"
@@ -818,6 +860,61 @@
       "required": [
         "symbol"
       ]
+    },
+    "arbitrageBasketItemPrice": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "bid1": {
+          "type": "string",
+          "title": "최우선 매수호가"
+        },
+        "ask1": {
+          "type": "string",
+          "title": "최우선 매도호가"
+        },
+        "bid1Qty": {
+          "type": "string",
+          "format": "int64",
+          "title": "최우선 매수호가 수량"
+        },
+        "ask1Qty": {
+          "type": "string",
+          "format": "int64",
+          "title": "최우선 매도호가 수량"
+        }
+      },
+      "title": "바스켓 구성종목 가격 (개별 종목)"
+    },
+    "arbitrageBasketPriceUpdateEvent": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "$ref": "#/definitions/arbitrageBasketSide",
+          "title": "어느 바스켓인지"
+        },
+        "updatedItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageBasketItemPrice"
+          },
+          "title": "변경된 종목만 포함 (전체 아님)"
+        }
+      },
+      "title": "바스켓 가격 업데이트 이벤트 (변경된 종목만 전송)"
+    },
+    "arbitrageBasketSide": {
+      "type": "string",
+      "enum": [
+        "BASKET_SIDE_UNSPECIFIED",
+        "BASKET_SIDE_A",
+        "BASKET_SIDE_B"
+      ],
+      "default": "BASKET_SIDE_UNSPECIFIED",
+      "title": "바스켓 구분"
     },
     "arbitrageBasketType": {
       "type": "string",
@@ -880,6 +977,35 @@
         }
       },
       "title": "실행 설정"
+    },
+    "arbitrageExecutionEstimate": {
+      "type": "object",
+      "properties": {
+        "buyASellBPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "A매수-B매도 시 예상 손익"
+        },
+        "buyBSellAPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "B매수-A매도 시 예상 손익"
+        },
+        "slippageBps": {
+          "type": "number",
+          "format": "double",
+          "title": "예상 슬리피지 (bps)"
+        },
+        "executable": {
+          "type": "boolean",
+          "title": "실행 가능 여부 (호가 수량 충분한지)"
+        },
+        "reason": {
+          "type": "string",
+          "title": "실행 불가 사유 (executable=false인 경우)"
+        }
+      },
+      "title": "예상 실행 결과"
     },
     "arbitrageExecutionState": {
       "type": "object",

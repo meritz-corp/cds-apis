@@ -105,6 +105,21 @@ final $typed_data.Uint8List arbitrageSideDescriptor = $convert.base64Decode(
     'RSQUdFX1NJREVfQlVZX0FfU0VMTF9CEAESHwobQVJCSVRSQUdFX1NJREVfQlVZX0JfU0VMTF9B'
     'EAI=');
 
+@$core.Deprecated('Use basketSideDescriptor instead')
+const BasketSide$json = {
+  '1': 'BasketSide',
+  '2': [
+    {'1': 'BASKET_SIDE_UNSPECIFIED', '2': 0},
+    {'1': 'BASKET_SIDE_A', '2': 1},
+    {'1': 'BASKET_SIDE_B', '2': 2},
+  ],
+};
+
+/// Descriptor for `BasketSide`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List basketSideDescriptor = $convert.base64Decode(
+    'CgpCYXNrZXRTaWRlEhsKF0JBU0tFVF9TSURFX1VOU1BFQ0lGSUVEEAASEQoNQkFTS0VUX1NJRE'
+    'VfQRABEhEKDUJBU0tFVF9TSURFX0IQAg==');
+
 @$core.Deprecated('Use arbitrageDescriptor instead')
 const Arbitrage$json = {
   '1': 'Arbitrage',
@@ -300,6 +315,7 @@ const ArbitrageStatus$json = {
     {'1': 'current_spread_bps', '3': 7, '4': 1, '5': 1, '10': 'currentSpreadBps'},
     {'1': 'execution_state', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ExecutionState', '10': 'executionState'},
     {'1': 'stats', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ArbitrageStats', '10': 'stats'},
+    {'1': 'estimate', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ExecutionEstimate', '10': 'estimate'},
   ],
 };
 
@@ -312,7 +328,27 @@ final $typed_data.Uint8List arbitrageStatusDescriptor = $convert.base64Decode(
     'YWQSLAoSY3VycmVudF9zcHJlYWRfYnBzGAcgASgBUhBjdXJyZW50U3ByZWFkQnBzEkkKD2V4ZW'
     'N1dGlvbl9zdGF0ZRgIIAEoCzIgLmtkby52MS5hcmJpdHJhZ2UuRXhlY3V0aW9uU3RhdGVSDmV4'
     'ZWN1dGlvblN0YXRlEjYKBXN0YXRzGAkgASgLMiAua2RvLnYxLmFyYml0cmFnZS5BcmJpdHJhZ2'
-    'VTdGF0c1IFc3RhdHM=');
+    'VTdGF0c1IFc3RhdHMSPwoIZXN0aW1hdGUYCiABKAsyIy5rZG8udjEuYXJiaXRyYWdlLkV4ZWN1'
+    'dGlvbkVzdGltYXRlUghlc3RpbWF0ZQ==');
+
+@$core.Deprecated('Use executionEstimateDescriptor instead')
+const ExecutionEstimate$json = {
+  '1': 'ExecutionEstimate',
+  '2': [
+    {'1': 'buy_a_sell_b_pnl', '3': 1, '4': 1, '5': 3, '10': 'buyASellBPnl'},
+    {'1': 'buy_b_sell_a_pnl', '3': 2, '4': 1, '5': 3, '10': 'buyBSellAPnl'},
+    {'1': 'slippage_bps', '3': 3, '4': 1, '5': 1, '10': 'slippageBps'},
+    {'1': 'executable', '3': 4, '4': 1, '5': 8, '10': 'executable'},
+    {'1': 'reason', '3': 5, '4': 1, '5': 9, '10': 'reason'},
+  ],
+};
+
+/// Descriptor for `ExecutionEstimate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List executionEstimateDescriptor = $convert.base64Decode(
+    'ChFFeGVjdXRpb25Fc3RpbWF0ZRImChBidXlfYV9zZWxsX2JfcG5sGAEgASgDUgxidXlBU2VsbE'
+    'JQbmwSJgoQYnV5X2Jfc2VsbF9hX3BubBgCIAEoA1IMYnV5QlNlbGxBUG5sEiEKDHNsaXBwYWdl'
+    'X2JwcxgDIAEoAVILc2xpcHBhZ2VCcHMSHgoKZXhlY3V0YWJsZRgEIAEoCFIKZXhlY3V0YWJsZR'
+    'IWCgZyZWFzb24YBSABKAlSBnJlYXNvbg==');
 
 @$core.Deprecated('Use executionStateDescriptor instead')
 const ExecutionState$json = {
@@ -405,6 +441,8 @@ const ArbitrageStatusUpdate$json = {
     {'1': 'id', '3': 2, '4': 1, '5': 5, '10': 'id'},
     {'1': 'update_mask', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.FieldMask', '10': 'updateMask'},
     {'1': 'status', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ArbitrageStatus', '10': 'status'},
+    {'1': 'basket_a_prices', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.arbitrage.BasketItemPrice', '10': 'basketAPrices'},
+    {'1': 'basket_b_prices', '3': 6, '4': 3, '5': 11, '6': '.kdo.v1.arbitrage.BasketItemPrice', '10': 'basketBPrices'},
   ],
 };
 
@@ -413,7 +451,9 @@ final $typed_data.Uint8List arbitrageStatusUpdateDescriptor = $convert.base64Dec
     'ChVBcmJpdHJhZ2VTdGF0dXNVcGRhdGUSEgoEbmFtZRgBIAEoCVIEbmFtZRIOCgJpZBgCIAEoBV'
     'ICaWQSOwoLdXBkYXRlX21hc2sYAyABKAsyGi5nb29nbGUucHJvdG9idWYuRmllbGRNYXNrUgp1'
     'cGRhdGVNYXNrEjkKBnN0YXR1cxgEIAEoCzIhLmtkby52MS5hcmJpdHJhZ2UuQXJiaXRyYWdlU3'
-    'RhdHVzUgZzdGF0dXM=');
+    'RhdHVzUgZzdGF0dXMSSQoPYmFza2V0X2FfcHJpY2VzGAUgAygLMiEua2RvLnYxLmFyYml0cmFn'
+    'ZS5CYXNrZXRJdGVtUHJpY2VSDWJhc2tldEFQcmljZXMSSQoPYmFza2V0X2JfcHJpY2VzGAYgAy'
+    'gLMiEua2RvLnYxLmFyYml0cmFnZS5CYXNrZXRJdGVtUHJpY2VSDWJhc2tldEJQcmljZXM=');
 
 @$core.Deprecated('Use arbitrageEventDescriptor instead')
 const ArbitrageEvent$json = {
@@ -430,6 +470,7 @@ const ArbitrageEvent$json = {
     {'1': 'round_completed', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.RoundCompletedEvent', '9': 0, '10': 'roundCompleted'},
     {'1': 'execution_completed', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ExecutionCompletedEvent', '9': 0, '10': 'executionCompleted'},
     {'1': 'error', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ErrorEvent', '9': 0, '10': 'error'},
+    {'1': 'basket_price', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.BasketPriceUpdateEvent', '9': 0, '10': 'basketPrice'},
   ],
   '8': [
     {'1': 'event'},
@@ -451,7 +492,8 @@ final $typed_data.Uint8List arbitrageEventDescriptor = $convert.base64Decode(
     'ZWRFdmVudEgAUg5yb3VuZENvbXBsZXRlZBJcChNleGVjdXRpb25fY29tcGxldGVkGAogASgLMi'
     'kua2RvLnYxLmFyYml0cmFnZS5FeGVjdXRpb25Db21wbGV0ZWRFdmVudEgAUhJleGVjdXRpb25D'
     'b21wbGV0ZWQSNAoFZXJyb3IYCyABKAsyHC5rZG8udjEuYXJiaXRyYWdlLkVycm9yRXZlbnRIAF'
-    'IFZXJyb3JCBwoFZXZlbnQ=');
+    'IFZXJyb3ISTQoMYmFza2V0X3ByaWNlGAwgASgLMigua2RvLnYxLmFyYml0cmFnZS5CYXNrZXRQ'
+    'cmljZVVwZGF0ZUV2ZW50SABSC2Jhc2tldFByaWNlQgcKBWV2ZW50');
 
 @$core.Deprecated('Use stateChangedEventDescriptor instead')
 const StateChangedEvent$json = {
@@ -585,6 +627,39 @@ const ErrorEvent$json = {
 /// Descriptor for `ErrorEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List errorEventDescriptor = $convert.base64Decode(
     'CgpFcnJvckV2ZW50EhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
+
+@$core.Deprecated('Use basketItemPriceDescriptor instead')
+const BasketItemPrice$json = {
+  '1': 'BasketItemPrice',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'bid1', '3': 2, '4': 1, '5': 9, '10': 'bid1'},
+    {'1': 'ask1', '3': 3, '4': 1, '5': 9, '10': 'ask1'},
+    {'1': 'bid1_qty', '3': 4, '4': 1, '5': 3, '10': 'bid1Qty'},
+    {'1': 'ask1_qty', '3': 5, '4': 1, '5': 3, '10': 'ask1Qty'},
+  ],
+};
+
+/// Descriptor for `BasketItemPrice`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketItemPriceDescriptor = $convert.base64Decode(
+    'Cg9CYXNrZXRJdGVtUHJpY2USFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSEgoEYmlkMRgCIAEoCV'
+    'IEYmlkMRISCgRhc2sxGAMgASgJUgRhc2sxEhkKCGJpZDFfcXR5GAQgASgDUgdiaWQxUXR5EhkK'
+    'CGFzazFfcXR5GAUgASgDUgdhc2sxUXR5');
+
+@$core.Deprecated('Use basketPriceUpdateEventDescriptor instead')
+const BasketPriceUpdateEvent$json = {
+  '1': 'BasketPriceUpdateEvent',
+  '2': [
+    {'1': 'side', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.BasketSide', '10': 'side'},
+    {'1': 'updated_items', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.arbitrage.BasketItemPrice', '10': 'updatedItems'},
+  ],
+};
+
+/// Descriptor for `BasketPriceUpdateEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketPriceUpdateEventDescriptor = $convert.base64Decode(
+    'ChZCYXNrZXRQcmljZVVwZGF0ZUV2ZW50EjAKBHNpZGUYASABKA4yHC5rZG8udjEuYXJiaXRyYW'
+    'dlLkJhc2tldFNpZGVSBHNpZGUSRgoNdXBkYXRlZF9pdGVtcxgCIAMoCzIhLmtkby52MS5hcmJp'
+    'dHJhZ2UuQmFza2V0SXRlbVByaWNlUgx1cGRhdGVkSXRlbXM=');
 
 @$core.Deprecated('Use getArbitrageRequestDescriptor instead')
 const GetArbitrageRequest$json = {
@@ -754,24 +829,30 @@ const StreamArbitrageStatusRequest$json = {
   '1': 'StreamArbitrageStatusRequest',
   '2': [
     {'1': 'arbitrage', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'arbitrage'},
+    {'1': 'include_basket_prices', '3': 2, '4': 1, '5': 8, '8': {}, '10': 'includeBasketPrices'},
+    {'1': 'include_estimate', '3': 3, '4': 1, '5': 8, '8': {}, '10': 'includeEstimate'},
   ],
 };
 
 /// Descriptor for `StreamArbitrageStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamArbitrageStatusRequestDescriptor = $convert.base64Decode(
     'ChxTdHJlYW1BcmJpdHJhZ2VTdGF0dXNSZXF1ZXN0EkAKCWFyYml0cmFnZRgBIAEoCUIi4kEBAv'
-    'pBGwoZa2RvLmNkc2FwaXMueHl6L0FyYml0cmFnZVIJYXJiaXRyYWdl');
+    'pBGwoZa2RvLmNkc2FwaXMueHl6L0FyYml0cmFnZVIJYXJiaXRyYWdlEjgKFWluY2x1ZGVfYmFz'
+    'a2V0X3ByaWNlcxgCIAEoCEIE4kEBAVITaW5jbHVkZUJhc2tldFByaWNlcxIvChBpbmNsdWRlX2'
+    'VzdGltYXRlGAMgASgIQgTiQQEBUg9pbmNsdWRlRXN0aW1hdGU=');
 
 @$core.Deprecated('Use streamArbitrageEventsRequestDescriptor instead')
 const StreamArbitrageEventsRequest$json = {
   '1': 'StreamArbitrageEventsRequest',
   '2': [
     {'1': 'arbitrage', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'arbitrage'},
+    {'1': 'include_basket_prices', '3': 2, '4': 1, '5': 8, '8': {}, '10': 'includeBasketPrices'},
   ],
 };
 
 /// Descriptor for `StreamArbitrageEventsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamArbitrageEventsRequestDescriptor = $convert.base64Decode(
     'ChxTdHJlYW1BcmJpdHJhZ2VFdmVudHNSZXF1ZXN0EkAKCWFyYml0cmFnZRgBIAEoCUIi4kEBAv'
-    'pBGwoZa2RvLmNkc2FwaXMueHl6L0FyYml0cmFnZVIJYXJiaXRyYWdl');
+    'pBGwoZa2RvLmNkc2FwaXMueHl6L0FyYml0cmFnZVIJYXJiaXRyYWdlEjgKFWluY2x1ZGVfYmFz'
+    'a2V0X3ByaWNlcxgCIAEoCEIE4kEBAVITaW5jbHVkZUJhc2tldFByaWNlcw==');
 
