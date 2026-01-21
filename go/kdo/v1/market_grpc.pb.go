@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -36,6 +37,8 @@ type MarketServiceClient interface {
 	AddRawMessagesSocket(ctx context.Context, in *AddRawMessagesSocketRequest, opts ...grpc.CallOption) (*AddRawMessagesSocketResponse, error)
 	// Raw 메시지 스트리밍 (server-side streaming)
 	StreamRawMessages(ctx context.Context, in *StreamRawMessagesRequest, opts ...grpc.CallOption) (MarketService_StreamRawMessagesClient, error)
+	// 마켓 세션 정보 조회
+	GetMarketSession(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetMarketSessionResponse, error)
 }
 
 type marketServiceClient struct {
@@ -224,6 +227,15 @@ func (x *marketServiceStreamRawMessagesClient) Recv() (*RawMarketMessage, error)
 	return m, nil
 }
 
+func (c *marketServiceClient) GetMarketSession(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetMarketSessionResponse, error) {
+	out := new(GetMarketSessionResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.market.MarketService/GetMarketSession", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MarketServiceServer is the server API for MarketService service.
 // All implementations must embed UnimplementedMarketServiceServer
 // for forward compatibility
@@ -242,6 +254,8 @@ type MarketServiceServer interface {
 	AddRawMessagesSocket(context.Context, *AddRawMessagesSocketRequest) (*AddRawMessagesSocketResponse, error)
 	// Raw 메시지 스트리밍 (server-side streaming)
 	StreamRawMessages(*StreamRawMessagesRequest, MarketService_StreamRawMessagesServer) error
+	// 마켓 세션 정보 조회
+	GetMarketSession(context.Context, *emptypb.Empty) (*GetMarketSessionResponse, error)
 	mustEmbedUnimplementedMarketServiceServer()
 }
 
@@ -269,6 +283,9 @@ func (UnimplementedMarketServiceServer) AddRawMessagesSocket(context.Context, *A
 }
 func (UnimplementedMarketServiceServer) StreamRawMessages(*StreamRawMessagesRequest, MarketService_StreamRawMessagesServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamRawMessages not implemented")
+}
+func (UnimplementedMarketServiceServer) GetMarketSession(context.Context, *emptypb.Empty) (*GetMarketSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMarketSession not implemented")
 }
 func (UnimplementedMarketServiceServer) mustEmbedUnimplementedMarketServiceServer() {}
 
@@ -424,6 +441,24 @@ func (x *marketServiceStreamRawMessagesServer) Send(m *RawMarketMessage) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MarketService_GetMarketSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketServiceServer).GetMarketSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.market.MarketService/GetMarketSession",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketServiceServer).GetMarketSession(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MarketService_ServiceDesc is the grpc.ServiceDesc for MarketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -438,6 +473,10 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddRawMessagesSocket",
 			Handler:    _MarketService_AddRawMessagesSocket_Handler,
+		},
+		{
+			MethodName: "GetMarketSession",
+			Handler:    _MarketService_GetMarketSession_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

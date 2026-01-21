@@ -207,6 +207,62 @@ pub struct CancelledDetails {
     #[prost(int64, tag="2")]
     pub cancelled_quantity: i64,
 }
+/// 주문 목록 조회 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListOrdersRequest {
+    /// 필터링 조건 (선택적, AIP-160)
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
+    /// 페이징 (AIP-158)
+    #[prost(int32, tag="2")]
+    pub page_size: i32,
+    #[prost(string, tag="3")]
+    pub page_token: ::prost::alloc::string::String,
+}
+/// 주문 목록 조회 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListOrdersResponse {
+    /// 주문 목록
+    #[prost(message, repeated, tag="1")]
+    pub orders: ::prost::alloc::vec::Vec<Order>,
+    /// 다음 페이지 토큰 (AIP-158)
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
+/// 주문 정보
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Order {
+    /// 주문 ID
+    #[prost(string, tag="1")]
+    pub order_id: ::prost::alloc::string::String,
+    /// 주문 타입
+    #[prost(enumeration="OrderSide", tag="2")]
+    pub order_side: i32,
+    /// 상품 (예: etfs/A069500)
+    #[prost(string, tag="3")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 주문 가격
+    #[prost(string, tag="4")]
+    pub price: ::prost::alloc::string::String,
+    /// 주문 수량
+    #[prost(int64, tag="5")]
+    pub quantity: i64,
+    /// 체결 수량
+    #[prost(int64, tag="6")]
+    pub filled_quantity: i64,
+    /// 주문 상태
+    #[prost(enumeration="OrderStatus", tag="7")]
+    pub status: i32,
+    /// 주문 시간 (Unix timestamp)
+    #[prost(int64, tag="8")]
+    pub created_at: i64,
+    /// 업데이트 시간 (Unix timestamp)
+    #[prost(int64, tag="9")]
+    pub updated_at: i64,
+}
 // ========== Enums ==========
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

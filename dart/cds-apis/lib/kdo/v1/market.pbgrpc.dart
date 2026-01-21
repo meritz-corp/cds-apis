@@ -16,6 +16,7 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../google/protobuf/empty.pb.dart' as $1;
 import 'market.pb.dart' as $0;
 
 export 'market.pb.dart';
@@ -68,6 +69,11 @@ class MarketServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamRawMessages, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 마켓 세션 정보 조회
+  $grpc.ResponseFuture<$0.GetMarketSessionResponse> getMarketSession($1.Empty request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMarketSession, request, options: options);
+  }
+
     // method descriptors
 
   static final _$streamEtfOrderbook = $grpc.ClientMethod<$0.StreamEtfOrderbookRequest, $0.EtfOrderbookData>(
@@ -98,6 +104,10 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/StreamRawMessages',
       ($0.StreamRawMessagesRequest value) => value.writeToBuffer(),
       $0.RawMarketMessage.fromBuffer);
+  static final _$getMarketSession = $grpc.ClientMethod<$1.Empty, $0.GetMarketSessionResponse>(
+      '/kdo.v1.market.MarketService/GetMarketSession',
+      ($1.Empty value) => value.writeToBuffer(),
+      $0.GetMarketSessionResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.market.MarketService')
@@ -154,6 +164,13 @@ abstract class MarketServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamRawMessagesRequest.fromBuffer(value),
         ($0.RawMarketMessage value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.GetMarketSessionResponse>(
+        'GetMarketSession',
+        getMarketSession_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.GetMarketSessionResponse value) => value.writeToBuffer()));
   }
 
   $async.Stream<$0.EtfOrderbookData> streamEtfOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfOrderbookRequest> $request) async* {
@@ -197,5 +214,11 @@ abstract class MarketServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.RawMarketMessage> streamRawMessages($grpc.ServiceCall call, $0.StreamRawMessagesRequest request);
+
+  $async.Future<$0.GetMarketSessionResponse> getMarketSession_Pre($grpc.ServiceCall $call, $async.Future<$1.Empty> $request) async {
+    return getMarketSession($call, await $request);
+  }
+
+  $async.Future<$0.GetMarketSessionResponse> getMarketSession($grpc.ServiceCall call, $1.Empty request);
 
 }

@@ -1079,6 +1079,286 @@ class CancelledDetails extends $pb.GeneratedMessage {
   void clearCancelledQuantity() => $_clearField(2);
 }
 
+/// 주문 목록 조회 요청
+class ListOrdersRequest extends $pb.GeneratedMessage {
+  factory ListOrdersRequest({
+    $core.String? filter,
+    $core.int? pageSize,
+    $core.String? pageToken,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    return result;
+  }
+
+  ListOrdersRequest._();
+
+  factory ListOrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListOrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'pageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersRequest clone() => ListOrdersRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersRequest copyWith(void Function(ListOrdersRequest) updates) => super.copyWith((message) => updates(message as ListOrdersRequest)) as ListOrdersRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersRequest create() => ListOrdersRequest._();
+  @$core.override
+  ListOrdersRequest createEmptyInstance() => create();
+  static $pb.PbList<ListOrdersRequest> createRepeated() => $pb.PbList<ListOrdersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListOrdersRequest>(create);
+  static ListOrdersRequest? _defaultInstance;
+
+  /// 필터링 조건 (선택적, AIP-160)
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
+
+  /// 페이징 (AIP-158)
+  @$pb.TagNumber(2)
+  $core.int get pageSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set pageSize($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageSize() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get pageToken => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set pageToken($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPageToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPageToken() => $_clearField(3);
+}
+
+/// 주문 목록 조회 응답
+class ListOrdersResponse extends $pb.GeneratedMessage {
+  factory ListOrdersResponse({
+    $core.Iterable<Order>? orders,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (orders != null) result.orders.addAll(orders);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListOrdersResponse._();
+
+  factory ListOrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListOrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..pc<Order>(1, _omitFieldNames ? '' : 'orders', $pb.PbFieldType.PM, subBuilder: Order.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersResponse clone() => ListOrdersResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListOrdersResponse copyWith(void Function(ListOrdersResponse) updates) => super.copyWith((message) => updates(message as ListOrdersResponse)) as ListOrdersResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersResponse create() => ListOrdersResponse._();
+  @$core.override
+  ListOrdersResponse createEmptyInstance() => create();
+  static $pb.PbList<ListOrdersResponse> createRepeated() => $pb.PbList<ListOrdersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListOrdersResponse>(create);
+  static ListOrdersResponse? _defaultInstance;
+
+  /// 주문 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<Order> get orders => $_getList(0);
+
+  /// 다음 페이지 토큰 (AIP-158)
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
+}
+
+/// 주문 정보
+class Order extends $pb.GeneratedMessage {
+  factory Order({
+    $core.String? orderId,
+    OrderSide? orderSide,
+    $core.String? symbol,
+    $core.String? price,
+    $fixnum.Int64? quantity,
+    $fixnum.Int64? filledQuantity,
+    OrderStatus? status,
+    $fixnum.Int64? createdAt,
+    $fixnum.Int64? updatedAt,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    if (orderSide != null) result.orderSide = orderSide;
+    if (symbol != null) result.symbol = symbol;
+    if (price != null) result.price = price;
+    if (quantity != null) result.quantity = quantity;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (status != null) result.status = status;
+    if (createdAt != null) result.createdAt = createdAt;
+    if (updatedAt != null) result.updatedAt = updatedAt;
+    return result;
+  }
+
+  Order._();
+
+  factory Order.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Order.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Order', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'orderId')
+    ..e<OrderSide>(2, _omitFieldNames ? '' : 'orderSide', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..aOS(3, _omitFieldNames ? '' : 'symbol')
+    ..aOS(4, _omitFieldNames ? '' : 'price')
+    ..aInt64(5, _omitFieldNames ? '' : 'quantity')
+    ..aInt64(6, _omitFieldNames ? '' : 'filledQuantity')
+    ..e<OrderStatus>(7, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: OrderStatus.ORDER_STATUS_UNSPECIFIED, valueOf: OrderStatus.valueOf, enumValues: OrderStatus.values)
+    ..aInt64(8, _omitFieldNames ? '' : 'createdAt')
+    ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Order clone() => Order()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Order copyWith(void Function(Order) updates) => super.copyWith((message) => updates(message as Order)) as Order;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Order create() => Order._();
+  @$core.override
+  Order createEmptyInstance() => create();
+  static $pb.PbList<Order> createRepeated() => $pb.PbList<Order>();
+  @$core.pragma('dart2js:noInline')
+  static Order getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Order>(create);
+  static Order? _defaultInstance;
+
+  /// 주문 ID
+  @$pb.TagNumber(1)
+  $core.String get orderId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set orderId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+
+  /// 주문 타입
+  @$pb.TagNumber(2)
+  OrderSide get orderSide => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderSide(OrderSide value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasOrderSide() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderSide() => $_clearField(2);
+
+  /// 상품 (예: etfs/A069500)
+  @$pb.TagNumber(3)
+  $core.String get symbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set symbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSymbol() => $_clearField(3);
+
+  /// 주문 가격
+  @$pb.TagNumber(4)
+  $core.String get price => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set price($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPrice() => $_clearField(4);
+
+  /// 주문 수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get quantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearQuantity() => $_clearField(5);
+
+  /// 체결 수량
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get filledQuantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasFilledQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFilledQuantity() => $_clearField(6);
+
+  /// 주문 상태
+  @$pb.TagNumber(7)
+  OrderStatus get status => $_getN(6);
+  @$pb.TagNumber(7)
+  set status(OrderStatus value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasStatus() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStatus() => $_clearField(7);
+
+  /// 주문 시간 (Unix timestamp)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get createdAt => $_getI64(7);
+  @$pb.TagNumber(8)
+  set createdAt($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCreatedAt() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCreatedAt() => $_clearField(8);
+
+  /// 업데이트 시간 (Unix timestamp)
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get updatedAt => $_getI64(8);
+  @$pb.TagNumber(9)
+  set updatedAt($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasUpdatedAt() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearUpdatedAt() => $_clearField(9);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

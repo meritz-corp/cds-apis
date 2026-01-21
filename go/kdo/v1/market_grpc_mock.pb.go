@@ -10,6 +10,7 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // MockMarketService_StreamEtfOrderbookClient is a mock of MarketService_StreamEtfOrderbookClient interface.
@@ -1265,6 +1266,26 @@ func (mr *MockMarketServiceClientMockRecorder) AddRawMessagesSocket(ctx, in inte
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRawMessagesSocket", reflect.TypeOf((*MockMarketServiceClient)(nil).AddRawMessagesSocket), varargs...)
 }
 
+// GetMarketSession mocks base method.
+func (m *MockMarketServiceClient) GetMarketSession(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetMarketSessionResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetMarketSession", varargs...)
+	ret0, _ := ret[0].(*GetMarketSessionResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMarketSession indicates an expected call of GetMarketSession.
+func (mr *MockMarketServiceClientMockRecorder) GetMarketSession(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketSession", reflect.TypeOf((*MockMarketServiceClient)(nil).GetMarketSession), varargs...)
+}
+
 // GetUserOrderbook mocks base method.
 func (m *MockMarketServiceClient) GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error) {
 	m.ctrl.T.Helper()
@@ -1421,6 +1442,21 @@ func (m *MockMarketServiceServer) AddRawMessagesSocket(ctx context.Context, in *
 func (mr *MockMarketServiceServerMockRecorder) AddRawMessagesSocket(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRawMessagesSocket", reflect.TypeOf((*MockMarketServiceServer)(nil).AddRawMessagesSocket), ctx, in)
+}
+
+// GetMarketSession mocks base method.
+func (m *MockMarketServiceServer) GetMarketSession(ctx context.Context, in *emptypb.Empty) (*GetMarketSessionResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMarketSession", ctx, in)
+	ret0, _ := ret[0].(*GetMarketSessionResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMarketSession indicates an expected call of GetMarketSession.
+func (mr *MockMarketServiceServerMockRecorder) GetMarketSession(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketSession", reflect.TypeOf((*MockMarketServiceServer)(nil).GetMarketSession), ctx, in)
 }
 
 // GetUserOrderbook mocks base method.

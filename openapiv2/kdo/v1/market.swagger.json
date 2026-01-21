@@ -102,6 +102,29 @@
         ]
       }
     },
+    "/v1/market/session": {
+      "get": {
+        "summary": "마켓 세션 정보 조회",
+        "operationId": "MarketService_GetMarketSession",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/marketGetMarketSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
     "/v1/market/{etf}/nav:stream": {
       "get": {
         "summary": "ETF NAV 데이터를 스트리밍",
@@ -540,6 +563,27 @@
         }
       },
       "title": "선물 주문장 데이터"
+    },
+    "marketGetMarketSessionResponse": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/marketMarketSession"
+        }
+      }
+    },
+    "marketMarketSession": {
+      "type": "string",
+      "enum": [
+        "MARKT_SESSION_UNSPECIFIED",
+        "MARKT_SESSION_PRE_MARKET",
+        "MARKT_SESSION_OPENING_AUCTION",
+        "MARKT_SESSION_REGULAR",
+        "MARKT_SESSION_CLOSING_AUCTION",
+        "MARKT_SESSION_CLOSED"
+      ],
+      "default": "MARKT_SESSION_UNSPECIFIED",
+      "title": "- MARKT_SESSION_PRE_MARKET: 장 시작 전\n - MARKT_SESSION_OPENING_AUCTION: 시가 동시호가 (08:30 ~ 09:00)\n - MARKT_SESSION_REGULAR: 장중 (09:00 ~ 15:20)\n - MARKT_SESSION_CLOSING_AUCTION: 종가 동시호가 (15:20 ~ 15:30)\n - MARKT_SESSION_CLOSED: 장 종료"
     },
     "marketRawMarketMessage": {
       "type": "object",

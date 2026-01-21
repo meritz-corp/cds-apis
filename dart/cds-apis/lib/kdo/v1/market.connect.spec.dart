@@ -5,6 +5,7 @@
 
 import "package:connectrpc/connect.dart" as connect;
 import "market.pb.dart" as kdov1market;
+import "../../google/protobuf/empty.pb.dart" as googleprotobufempty;
 
 /// 주문장 데이터를 스트리밍하는 서비스
 abstract final class MarketService {
@@ -66,5 +67,13 @@ abstract final class MarketService {
     connect.StreamType.server,
     kdov1market.StreamRawMessagesRequest.new,
     kdov1market.RawMarketMessage.new,
+  );
+
+  /// 마켓 세션 정보 조회
+  static const getMarketSession = connect.Spec(
+    '/$name/GetMarketSession',
+    connect.StreamType.unary,
+    googleprotobufempty.Empty.new,
+    kdov1market.GetMarketSessionResponse.new,
   );
 }

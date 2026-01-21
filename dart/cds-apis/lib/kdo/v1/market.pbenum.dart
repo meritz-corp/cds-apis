@@ -60,46 +60,27 @@ class SessionId extends $pb.ProtobufEnum {
   const SessionId._(super.value, super.name);
 }
 
-/// 주문 타입 열거형
-class OrderType extends $pb.ProtobufEnum {
-  static const OrderType ORDER_TYPE_UNSPECIFIED = OrderType._(0, _omitEnumNames ? '' : 'ORDER_TYPE_UNSPECIFIED');
-  static const OrderType BUY = OrderType._(1, _omitEnumNames ? '' : 'BUY');
-  static const OrderType SELL = OrderType._(2, _omitEnumNames ? '' : 'SELL');
+class MarketSession extends $pb.ProtobufEnum {
+  static const MarketSession MARKT_SESSION_UNSPECIFIED = MarketSession._(0, _omitEnumNames ? '' : 'MARKT_SESSION_UNSPECIFIED');
+  static const MarketSession MARKT_SESSION_PRE_MARKET = MarketSession._(1, _omitEnumNames ? '' : 'MARKT_SESSION_PRE_MARKET');
+  static const MarketSession MARKT_SESSION_OPENING_AUCTION = MarketSession._(2, _omitEnumNames ? '' : 'MARKT_SESSION_OPENING_AUCTION');
+  static const MarketSession MARKT_SESSION_REGULAR = MarketSession._(3, _omitEnumNames ? '' : 'MARKT_SESSION_REGULAR');
+  static const MarketSession MARKT_SESSION_CLOSING_AUCTION = MarketSession._(4, _omitEnumNames ? '' : 'MARKT_SESSION_CLOSING_AUCTION');
+  static const MarketSession MARKT_SESSION_CLOSED = MarketSession._(5, _omitEnumNames ? '' : 'MARKT_SESSION_CLOSED');
 
-  static const $core.List<OrderType> values = <OrderType> [
-    ORDER_TYPE_UNSPECIFIED,
-    BUY,
-    SELL,
+  static const $core.List<MarketSession> values = <MarketSession> [
+    MARKT_SESSION_UNSPECIFIED,
+    MARKT_SESSION_PRE_MARKET,
+    MARKT_SESSION_OPENING_AUCTION,
+    MARKT_SESSION_REGULAR,
+    MARKT_SESSION_CLOSING_AUCTION,
+    MARKT_SESSION_CLOSED,
   ];
 
-  static final $core.List<OrderType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static OrderType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<MarketSession?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static MarketSession? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const OrderType._(super.value, super.name);
-}
-
-/// 주문 상태 열거형
-class OrderStatus extends $pb.ProtobufEnum {
-  static const OrderStatus ORDER_STATUS_UNSPECIFIED = OrderStatus._(0, _omitEnumNames ? '' : 'ORDER_STATUS_UNSPECIFIED');
-  static const OrderStatus PENDING = OrderStatus._(1, _omitEnumNames ? '' : 'PENDING');
-  static const OrderStatus PARTIAL_FILLED = OrderStatus._(2, _omitEnumNames ? '' : 'PARTIAL_FILLED');
-  static const OrderStatus FILLED = OrderStatus._(3, _omitEnumNames ? '' : 'FILLED');
-  static const OrderStatus CANCELLED = OrderStatus._(4, _omitEnumNames ? '' : 'CANCELLED');
-  static const OrderStatus REJECTED = OrderStatus._(5, _omitEnumNames ? '' : 'REJECTED');
-
-  static const $core.List<OrderStatus> values = <OrderStatus> [
-    ORDER_STATUS_UNSPECIFIED,
-    PENDING,
-    PARTIAL_FILLED,
-    FILLED,
-    CANCELLED,
-    REJECTED,
-  ];
-
-  static final $core.List<OrderStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
-  static OrderStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const OrderStatus._(super.value, super.name);
+  const MarketSession._(super.value, super.name);
 }
 
 

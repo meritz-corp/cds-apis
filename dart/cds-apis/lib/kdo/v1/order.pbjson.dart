@@ -298,3 +298,57 @@ final $typed_data.Uint8List cancelledDetailsDescriptor = $convert.base64Decode(
     'ChBDYW5jZWxsZWREZXRhaWxzEisKEWNhbmNlbGxhdGlvbl9jb2RlGAEgASgJUhBjYW5jZWxsYX'
     'Rpb25Db2RlEi0KEmNhbmNlbGxlZF9xdWFudGl0eRgCIAEoA1IRY2FuY2VsbGVkUXVhbnRpdHk=');
 
+@$core.Deprecated('Use listOrdersRequestDescriptor instead')
+const ListOrdersRequest$json = {
+  '1': 'ListOrdersRequest',
+  '2': [
+    {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
+    {'1': 'page_size', '3': 2, '4': 1, '5': 5, '10': 'pageSize'},
+    {'1': 'page_token', '3': 3, '4': 1, '5': 9, '10': 'pageToken'},
+  ],
+};
+
+/// Descriptor for `ListOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listOrdersRequestDescriptor = $convert.base64Decode(
+    'ChFMaXN0T3JkZXJzUmVxdWVzdBIWCgZmaWx0ZXIYASABKAlSBmZpbHRlchIbCglwYWdlX3Npem'
+    'UYAiABKAVSCHBhZ2VTaXplEh0KCnBhZ2VfdG9rZW4YAyABKAlSCXBhZ2VUb2tlbg==');
+
+@$core.Deprecated('Use listOrdersResponseDescriptor instead')
+const ListOrdersResponse$json = {
+  '1': 'ListOrdersResponse',
+  '2': [
+    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.order.Order', '10': 'orders'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+  ],
+};
+
+/// Descriptor for `ListOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listOrdersResponseDescriptor = $convert.base64Decode(
+    'ChJMaXN0T3JkZXJzUmVzcG9uc2USKwoGb3JkZXJzGAEgAygLMhMua2RvLnYxLm9yZGVyLk9yZG'
+    'VyUgZvcmRlcnMSJgoPbmV4dF9wYWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2Vu');
+
+@$core.Deprecated('Use orderDescriptor instead')
+const Order$json = {
+  '1': 'Order',
+  '2': [
+    {'1': 'order_id', '3': 1, '4': 1, '5': 9, '10': 'orderId'},
+    {'1': 'order_side', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '10': 'orderSide'},
+    {'1': 'symbol', '3': 3, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
+    {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'filled_quantity', '3': 6, '4': 1, '5': 3, '10': 'filledQuantity'},
+    {'1': 'status', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderStatus', '10': 'status'},
+    {'1': 'created_at', '3': 8, '4': 1, '5': 3, '10': 'createdAt'},
+    {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `Order`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List orderDescriptor = $convert.base64Decode(
+    'CgVPcmRlchIZCghvcmRlcl9pZBgBIAEoCVIHb3JkZXJJZBI2CgpvcmRlcl9zaWRlGAIgASgOMh'
+    'cua2RvLnYxLm9yZGVyLk9yZGVyU2lkZVIJb3JkZXJTaWRlEhYKBnN5bWJvbBgDIAEoCVIGc3lt'
+    'Ym9sEhQKBXByaWNlGAQgASgJUgVwcmljZRIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdHkSJw'
+    'oPZmlsbGVkX3F1YW50aXR5GAYgASgDUg5maWxsZWRRdWFudGl0eRIxCgZzdGF0dXMYByABKA4y'
+    'GS5rZG8udjEub3JkZXIuT3JkZXJTdGF0dXNSBnN0YXR1cxIdCgpjcmVhdGVkX2F0GAggASgDUg'
+    'ljcmVhdGVkQXQSHQoKdXBkYXRlZF9hdBgJIAEoA1IJdXBkYXRlZEF0');
+

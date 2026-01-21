@@ -122,7 +122,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1orderCancelOrderResponse"
+              "$ref": "#/definitions/orderCancelOrderResponse"
             }
           },
           "default": {
@@ -190,7 +190,7 @@
           "title": "원주문 ID"
         },
         "status": {
-          "$ref": "#/definitions/v1orderOrderStatus",
+          "$ref": "#/definitions/orderOrderStatus",
           "title": "주문 상태"
         },
         "message": {
@@ -198,6 +198,39 @@
           "title": "결과 메시지"
         }
       }
+    },
+    "orderCancelOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "취소 주문 ID"
+        },
+        "originalOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "원주문 ID"
+        },
+        "status": {
+          "$ref": "#/definitions/orderOrderStatus",
+          "title": "주문 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "결과 메시지"
+        }
+      }
+    },
+    "orderOrderStatus": {
+      "type": "string",
+      "enum": [
+        "ORDER_STATUS_UNSPECIFIED",
+        "ORDER_STATUS_SUBMITTED",
+        "ORDER_STATUS_REJECTED"
+      ],
+      "default": "ORDER_STATUS_UNSPECIFIED",
+      "title": "- ORDER_STATUS_SUBMITTED: 주문 제출됨\n - ORDER_STATUS_REJECTED: 거부됨 (validation 실패)"
     },
     "orderQuoteType": {
       "type": "string",
@@ -256,7 +289,7 @@
           "title": "주문 ID"
         },
         "status": {
-          "$ref": "#/definitions/v1orderOrderStatus",
+          "$ref": "#/definitions/orderOrderStatus",
           "title": "주문 상태"
         },
         "message": {
@@ -292,29 +325,6 @@
         }
       }
     },
-    "v1orderCancelOrderResponse": {
-      "type": "object",
-      "properties": {
-        "orderId": {
-          "type": "string",
-          "format": "uint64",
-          "title": "취소 주문 ID"
-        },
-        "originalOrderId": {
-          "type": "string",
-          "format": "uint64",
-          "title": "원주문 ID"
-        },
-        "status": {
-          "$ref": "#/definitions/v1orderOrderStatus",
-          "title": "주문 상태"
-        },
-        "message": {
-          "type": "string",
-          "title": "결과 메시지"
-        }
-      }
-    },
     "v1orderOrderSide": {
       "type": "string",
       "enum": [
@@ -324,16 +334,6 @@
       ],
       "default": "ORDER_SIDE_UNSPECIFIED",
       "title": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도"
-    },
-    "v1orderOrderStatus": {
-      "type": "string",
-      "enum": [
-        "ORDER_STATUS_UNSPECIFIED",
-        "ORDER_STATUS_SUBMITTED",
-        "ORDER_STATUS_REJECTED"
-      ],
-      "default": "ORDER_STATUS_UNSPECIFIED",
-      "title": "- ORDER_STATUS_SUBMITTED: 주문 제출됨\n - ORDER_STATUS_REJECTED: 거부됨 (validation 실패)"
     }
   }
 }

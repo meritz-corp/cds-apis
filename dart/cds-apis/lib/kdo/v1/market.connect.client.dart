@@ -6,6 +6,7 @@
 import "package:connectrpc/connect.dart" as connect;
 import "market.pb.dart" as kdov1market;
 import "market.connect.spec.dart" as specs;
+import "../../google/protobuf/empty.pb.dart" as googleprotobufempty;
 
 /// 주문장 데이터를 스트리밍하는 서비스
 extension type MarketServiceClient (connect.Transport _transport) {
@@ -128,6 +129,24 @@ extension type MarketServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).server(
       specs.MarketService.streamRawMessages,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 마켓 세션 정보 조회
+  Future<kdov1market.GetMarketSessionResponse> getMarketSession(
+    googleprotobufempty.Empty input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketService.getMarketSession,
       input,
       signal: signal,
       headers: headers,

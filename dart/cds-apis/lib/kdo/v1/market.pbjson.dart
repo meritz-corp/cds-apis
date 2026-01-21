@@ -47,39 +47,25 @@ final $typed_data.Uint8List sessionIdDescriptor = $convert.base64Decode(
     'VF9NQVJLRVQQChIPCgtBVUNUSU9OX0JJRBALEg8KC0FVQ1RJT05fQVNLEAwSDQoJU1VTUEVORE'
     'VEEA0SDAoIU0hVVERPV04QDhIKCgZDTE9TRUQQDxIHCgNFVEMQEA==');
 
-@$core.Deprecated('Use orderTypeDescriptor instead')
-const OrderType$json = {
-  '1': 'OrderType',
+@$core.Deprecated('Use marketSessionDescriptor instead')
+const MarketSession$json = {
+  '1': 'MarketSession',
   '2': [
-    {'1': 'ORDER_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'BUY', '2': 1},
-    {'1': 'SELL', '2': 2},
+    {'1': 'MARKT_SESSION_UNSPECIFIED', '2': 0},
+    {'1': 'MARKT_SESSION_PRE_MARKET', '2': 1},
+    {'1': 'MARKT_SESSION_OPENING_AUCTION', '2': 2},
+    {'1': 'MARKT_SESSION_REGULAR', '2': 3},
+    {'1': 'MARKT_SESSION_CLOSING_AUCTION', '2': 4},
+    {'1': 'MARKT_SESSION_CLOSED', '2': 5},
   ],
 };
 
-/// Descriptor for `OrderType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List orderTypeDescriptor = $convert.base64Decode(
-    'CglPcmRlclR5cGUSGgoWT1JERVJfVFlQRV9VTlNQRUNJRklFRBAAEgcKA0JVWRABEggKBFNFTE'
-    'wQAg==');
-
-@$core.Deprecated('Use orderStatusDescriptor instead')
-const OrderStatus$json = {
-  '1': 'OrderStatus',
-  '2': [
-    {'1': 'ORDER_STATUS_UNSPECIFIED', '2': 0},
-    {'1': 'PENDING', '2': 1},
-    {'1': 'PARTIAL_FILLED', '2': 2},
-    {'1': 'FILLED', '2': 3},
-    {'1': 'CANCELLED', '2': 4},
-    {'1': 'REJECTED', '2': 5},
-  ],
-};
-
-/// Descriptor for `OrderStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List orderStatusDescriptor = $convert.base64Decode(
-    'CgtPcmRlclN0YXR1cxIcChhPUkRFUl9TVEFUVVNfVU5TUEVDSUZJRUQQABILCgdQRU5ESU5HEA'
-    'ESEgoOUEFSVElBTF9GSUxMRUQQAhIKCgZGSUxMRUQQAxINCglDQU5DRUxMRUQQBBIMCghSRUpF'
-    'Q1RFRBAF');
+/// Descriptor for `MarketSession`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List marketSessionDescriptor = $convert.base64Decode(
+    'Cg1NYXJrZXRTZXNzaW9uEh0KGU1BUktUX1NFU1NJT05fVU5TUEVDSUZJRUQQABIcChhNQVJLVF'
+    '9TRVNTSU9OX1BSRV9NQVJLRVQQARIhCh1NQVJLVF9TRVNTSU9OX09QRU5JTkdfQVVDVElPThAC'
+    'EhkKFU1BUktUX1NFU1NJT05fUkVHVUxBUhADEiEKHU1BUktUX1NFU1NJT05fQ0xPU0lOR19BVU'
+    'NUSU9OEAQSGAoUTUFSS1RfU0VTU0lPTl9DTE9TRUQQBQ==');
 
 @$core.Deprecated('Use etfOrderbookDataDescriptor instead')
 const EtfOrderbookData$json = {
@@ -147,31 +133,6 @@ final $typed_data.Uint8List futuresOrderbookDataDescriptor = $convert.base64Deco
     'VzdFByaWNlEh0KCmVzdF92b2x1bWUYCyABKANSCWVzdFZvbHVtZRI3CgpzZXNzaW9uX2lkGAwg'
     'ASgOMhgua2RvLnYxLm1hcmtldC5TZXNzaW9uSWRSCXNlc3Npb25JZA==');
 
-@$core.Deprecated('Use orderDescriptor instead')
-const Order$json = {
-  '1': 'Order',
-  '2': [
-    {'1': 'order_id', '3': 1, '4': 1, '5': 9, '10': 'orderId'},
-    {'1': 'order_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.market.OrderType', '10': 'orderType'},
-    {'1': 'symbol', '3': 3, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
-    {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'filled_quantity', '3': 6, '4': 1, '5': 3, '10': 'filledQuantity'},
-    {'1': 'status', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.market.OrderStatus', '10': 'status'},
-    {'1': 'created_at', '3': 8, '4': 1, '5': 3, '10': 'createdAt'},
-    {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
-  ],
-};
-
-/// Descriptor for `Order`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List orderDescriptor = $convert.base64Decode(
-    'CgVPcmRlchIZCghvcmRlcl9pZBgBIAEoCVIHb3JkZXJJZBI3CgpvcmRlcl90eXBlGAIgASgOMh'
-    'gua2RvLnYxLm1hcmtldC5PcmRlclR5cGVSCW9yZGVyVHlwZRIWCgZzeW1ib2wYAyABKAlSBnN5'
-    'bWJvbBIUCgVwcmljZRgEIAEoCVIFcHJpY2USGgoIcXVhbnRpdHkYBSABKANSCHF1YW50aXR5Ei'
-    'cKD2ZpbGxlZF9xdWFudGl0eRgGIAEoA1IOZmlsbGVkUXVhbnRpdHkSMgoGc3RhdHVzGAcgASgO'
-    'Mhoua2RvLnYxLm1hcmtldC5PcmRlclN0YXR1c1IGc3RhdHVzEh0KCmNyZWF0ZWRfYXQYCCABKA'
-    'NSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAkgASgDUgl1cGRhdGVkQXQ=');
-
 @$core.Deprecated('Use etfNavDescriptor instead')
 const EtfNav$json = {
   '1': 'EtfNav',
@@ -227,117 +188,6 @@ const StreamEtfNavRequest$json = {
 final $typed_data.Uint8List streamEtfNavRequestDescriptor = $convert.base64Decode(
     'ChNTdHJlYW1FdGZOYXZSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2FwaX'
     'MueHl6L0V0ZlIDZXRm');
-
-@$core.Deprecated('Use placeOrderRequestDescriptor instead')
-const PlaceOrderRequest$json = {
-  '1': 'PlaceOrderRequest',
-  '2': [
-    {'1': 'order_type', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.market.OrderType', '10': 'orderType'},
-    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'price', '3': 3, '4': 1, '5': 9, '10': 'price'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
-  ],
-};
-
-/// Descriptor for `PlaceOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List placeOrderRequestDescriptor = $convert.base64Decode(
-    'ChFQbGFjZU9yZGVyUmVxdWVzdBI3CgpvcmRlcl90eXBlGAEgASgOMhgua2RvLnYxLm1hcmtldC'
-    '5PcmRlclR5cGVSCW9yZGVyVHlwZRIWCgZzeW1ib2wYAiABKAlSBnN5bWJvbBIUCgVwcmljZRgD'
-    'IAEoCVIFcHJpY2USGgoIcXVhbnRpdHkYBCABKANSCHF1YW50aXR5');
-
-@$core.Deprecated('Use placeOrderResponseDescriptor instead')
-const PlaceOrderResponse$json = {
-  '1': 'PlaceOrderResponse',
-  '2': [
-    {'1': 'order', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.market.Order', '10': 'order'},
-  ],
-};
-
-/// Descriptor for `PlaceOrderResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List placeOrderResponseDescriptor = $convert.base64Decode(
-    'ChJQbGFjZU9yZGVyUmVzcG9uc2USKgoFb3JkZXIYASABKAsyFC5rZG8udjEubWFya2V0Lk9yZG'
-    'VyUgVvcmRlcg==');
-
-@$core.Deprecated('Use cancelOrderRequestDescriptor instead')
-const CancelOrderRequest$json = {
-  '1': 'CancelOrderRequest',
-  '2': [
-    {'1': 'order_id', '3': 1, '4': 1, '5': 9, '10': 'orderId'},
-  ],
-};
-
-/// Descriptor for `CancelOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cancelOrderRequestDescriptor = $convert.base64Decode(
-    'ChJDYW5jZWxPcmRlclJlcXVlc3QSGQoIb3JkZXJfaWQYASABKAlSB29yZGVySWQ=');
-
-@$core.Deprecated('Use cancelOrderResponseDescriptor instead')
-const CancelOrderResponse$json = {
-  '1': 'CancelOrderResponse',
-  '2': [
-    {'1': 'order', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.market.Order', '10': 'order'},
-  ],
-};
-
-/// Descriptor for `CancelOrderResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cancelOrderResponseDescriptor = $convert.base64Decode(
-    'ChNDYW5jZWxPcmRlclJlc3BvbnNlEioKBW9yZGVyGAEgASgLMhQua2RvLnYxLm1hcmtldC5Pcm'
-    'RlclIFb3JkZXI=');
-
-@$core.Deprecated('Use cancelAllOrdersRequestDescriptor instead')
-const CancelAllOrdersRequest$json = {
-  '1': 'CancelAllOrdersRequest',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-  ],
-};
-
-/// Descriptor for `CancelAllOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cancelAllOrdersRequestDescriptor = $convert.base64Decode(
-    'ChZDYW5jZWxBbGxPcmRlcnNSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9s');
-
-@$core.Deprecated('Use cancelAllOrdersResponseDescriptor instead')
-const CancelAllOrdersResponse$json = {
-  '1': 'CancelAllOrdersResponse',
-  '2': [
-    {'1': 'cancelled_count', '3': 1, '4': 1, '5': 5, '10': 'cancelledCount'},
-    {'1': 'cancelled_orders', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.market.Order', '10': 'cancelledOrders'},
-  ],
-};
-
-/// Descriptor for `CancelAllOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cancelAllOrdersResponseDescriptor = $convert.base64Decode(
-    'ChdDYW5jZWxBbGxPcmRlcnNSZXNwb25zZRInCg9jYW5jZWxsZWRfY291bnQYASABKAVSDmNhbm'
-    'NlbGxlZENvdW50Ej8KEGNhbmNlbGxlZF9vcmRlcnMYAiADKAsyFC5rZG8udjEubWFya2V0Lk9y'
-    'ZGVyUg9jYW5jZWxsZWRPcmRlcnM=');
-
-@$core.Deprecated('Use listOrdersRequestDescriptor instead')
-const ListOrdersRequest$json = {
-  '1': 'ListOrdersRequest',
-  '2': [
-    {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
-    {'1': 'page_size', '3': 2, '4': 1, '5': 5, '10': 'pageSize'},
-    {'1': 'page_token', '3': 3, '4': 1, '5': 9, '10': 'pageToken'},
-  ],
-};
-
-/// Descriptor for `ListOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listOrdersRequestDescriptor = $convert.base64Decode(
-    'ChFMaXN0T3JkZXJzUmVxdWVzdBIWCgZmaWx0ZXIYASABKAlSBmZpbHRlchIbCglwYWdlX3Npem'
-    'UYAiABKAVSCHBhZ2VTaXplEh0KCnBhZ2VfdG9rZW4YAyABKAlSCXBhZ2VUb2tlbg==');
-
-@$core.Deprecated('Use listOrdersResponseDescriptor instead')
-const ListOrdersResponse$json = {
-  '1': 'ListOrdersResponse',
-  '2': [
-    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.market.Order', '10': 'orders'},
-    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
-  ],
-};
-
-/// Descriptor for `ListOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listOrdersResponseDescriptor = $convert.base64Decode(
-    'ChJMaXN0T3JkZXJzUmVzcG9uc2USLAoGb3JkZXJzGAEgAygLMhQua2RvLnYxLm1hcmtldC5Pcm'
-    'RlclIGb3JkZXJzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
 @$core.Deprecated('Use getUserOrderBookRequestDescriptor instead')
 const GetUserOrderBookRequest$json = {
@@ -432,4 +282,17 @@ final $typed_data.Uint8List rawMarketMessageDescriptor = $convert.base64Decode(
     'ChBSYXdNYXJrZXRNZXNzYWdlEhIKBGRhdGEYASABKAxSBGRhdGESMAoUcmVjZWl2ZV90aW1lc3'
     'RhbXBfbnMYAiABKANSEnJlY2VpdmVUaW1lc3RhbXBOcxInCg9zZXF1ZW5jZV9udW1iZXIYAyAB'
     'KARSDnNlcXVlbmNlTnVtYmVy');
+
+@$core.Deprecated('Use getMarketSessionResponseDescriptor instead')
+const GetMarketSessionResponse$json = {
+  '1': 'GetMarketSessionResponse',
+  '2': [
+    {'1': 'session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.market.MarketSession', '10': 'session'},
+  ],
+};
+
+/// Descriptor for `GetMarketSessionResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMarketSessionResponseDescriptor = $convert.base64Decode(
+    'ChhHZXRNYXJrZXRTZXNzaW9uUmVzcG9uc2USNgoHc2Vzc2lvbhgBIAEoDjIcLmtkby52MS5tYX'
+    'JrZXQuTWFya2V0U2Vzc2lvblIHc2Vzc2lvbg==');
 

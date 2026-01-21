@@ -88,38 +88,6 @@ pub struct FuturesOrderbookData {
     #[prost(enumeration="SessionId", tag="12")]
     pub session_id: i32,
 }
-/// 주문 정보
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Order {
-    /// 주문 ID
-    #[prost(string, tag="1")]
-    pub order_id: ::prost::alloc::string::String,
-    /// 주문 타입
-    #[prost(enumeration="OrderType", tag="2")]
-    pub order_type: i32,
-    /// 상품 (예: etfs/A069500)
-    #[prost(string, tag="3")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 주문 가격
-    #[prost(string, tag="4")]
-    pub price: ::prost::alloc::string::String,
-    /// 주문 수량
-    #[prost(int64, tag="5")]
-    pub quantity: i64,
-    /// 체결 수량
-    #[prost(int64, tag="6")]
-    pub filled_quantity: i64,
-    /// 주문 상태
-    #[prost(enumeration="OrderStatus", tag="7")]
-    pub status: i32,
-    /// 주문 시간 (Unix timestamp)
-    #[prost(int64, tag="8")]
-    pub created_at: i64,
-    /// 업데이트 시간 (Unix timestamp)
-    #[prost(int64, tag="9")]
-    pub updated_at: i64,
-}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfNav {
@@ -156,90 +124,6 @@ pub struct StreamFuturesOrderbookRequest {
 pub struct StreamEtfNavRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
-}
-/// 주문 접수 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PlaceOrderRequest {
-    /// 주문 타입
-    #[prost(enumeration="OrderType", tag="1")]
-    pub order_type: i32,
-    /// 상품 (예: etfs/A069500)
-    #[prost(string, tag="2")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 주문 가격
-    #[prost(string, tag="3")]
-    pub price: ::prost::alloc::string::String,
-    /// 주문 수량
-    #[prost(int64, tag="4")]
-    pub quantity: i64,
-}
-/// 주문 접수 응답
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PlaceOrderResponse {
-    /// 생성된 주문 정보
-    #[prost(message, optional, tag="1")]
-    pub order: ::core::option::Option<Order>,
-}
-/// 주문 취소 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CancelOrderRequest {
-    /// 취소할 주문 ID
-    #[prost(string, tag="1")]
-    pub order_id: ::prost::alloc::string::String,
-}
-/// 주문 취소 응답
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CancelOrderResponse {
-    /// 취소된 주문 정보
-    #[prost(message, optional, tag="1")]
-    pub order: ::core::option::Option<Order>,
-}
-/// 모든 주문 취소 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CancelAllOrdersRequest {
-    /// 선택적: 특정 상품의 주문만 취소
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-}
-/// 모든 주문 취소 응답
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CancelAllOrdersResponse {
-    /// 취소된 주문 수
-    #[prost(int32, tag="1")]
-    pub cancelled_count: i32,
-    /// 취소된 주문 목록
-    #[prost(message, repeated, tag="2")]
-    pub cancelled_orders: ::prost::alloc::vec::Vec<Order>,
-}
-/// 주문 목록 조회 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListOrdersRequest {
-    /// 필터링 조건 (선택적, AIP-160)
-    #[prost(string, tag="1")]
-    pub filter: ::prost::alloc::string::String,
-    /// 페이징 (AIP-158)
-    #[prost(int32, tag="2")]
-    pub page_size: i32,
-    #[prost(string, tag="3")]
-    pub page_token: ::prost::alloc::string::String,
-}
-/// 주문 목록 조회 응답
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListOrdersResponse {
-    /// 주문 목록
-    #[prost(message, repeated, tag="1")]
-    pub orders: ::prost::alloc::vec::Vec<Order>,
-    /// 다음 페이지 토큰 (AIP-158)
-    #[prost(string, tag="2")]
-    pub next_page_token: ::prost::alloc::string::String,
 }
 /// 주문 업데이트 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -319,6 +203,12 @@ pub struct RawMarketMessage {
     /// Message sequence number (per socket)
     #[prost(uint64, tag="3")]
     pub sequence_number: u64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetMarketSessionResponse {
+    #[prost(enumeration="MarketSession", tag="1")]
+    pub session: i32,
 }
 /// 세션 ID 열거형 (AIP-126)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -409,80 +299,45 @@ impl SessionId {
         }
     }
 }
-/// 주문 타입 열거형
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum OrderType {
-    /// 기본값
-    Unspecified = 0,
-    /// 매수
-    Buy = 1,
-    /// 매도
-    Sell = 2,
+pub enum MarketSession {
+    MarktSessionUnspecified = 0,
+    /// 장 시작 전
+    MarktSessionPreMarket = 1,
+    /// 시가 동시호가 (08:30 ~ 09:00)
+    MarktSessionOpeningAuction = 2,
+    /// 장중 (09:00 ~ 15:20)
+    MarktSessionRegular = 3,
+    /// 종가 동시호가 (15:20 ~ 15:30)
+    MarktSessionClosingAuction = 4,
+    /// 장 종료
+    MarktSessionClosed = 5,
 }
-impl OrderType {
+impl MarketSession {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OrderType::Unspecified => "ORDER_TYPE_UNSPECIFIED",
-            OrderType::Buy => "BUY",
-            OrderType::Sell => "SELL",
+            MarketSession::MarktSessionUnspecified => "MARKT_SESSION_UNSPECIFIED",
+            MarketSession::MarktSessionPreMarket => "MARKT_SESSION_PRE_MARKET",
+            MarketSession::MarktSessionOpeningAuction => "MARKT_SESSION_OPENING_AUCTION",
+            MarketSession::MarktSessionRegular => "MARKT_SESSION_REGULAR",
+            MarketSession::MarktSessionClosingAuction => "MARKT_SESSION_CLOSING_AUCTION",
+            MarketSession::MarktSessionClosed => "MARKT_SESSION_CLOSED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "ORDER_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "BUY" => Some(Self::Buy),
-            "SELL" => Some(Self::Sell),
-            _ => None,
-        }
-    }
-}
-/// 주문 상태 열거형
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum OrderStatus {
-    /// 기본값
-    Unspecified = 0,
-    /// 대기중
-    Pending = 1,
-    /// 부분체결
-    PartialFilled = 2,
-    /// 체결완료
-    Filled = 3,
-    /// 취소됨
-    Cancelled = 4,
-    /// 거부됨
-    Rejected = 5,
-}
-impl OrderStatus {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            OrderStatus::Unspecified => "ORDER_STATUS_UNSPECIFIED",
-            OrderStatus::Pending => "PENDING",
-            OrderStatus::PartialFilled => "PARTIAL_FILLED",
-            OrderStatus::Filled => "FILLED",
-            OrderStatus::Cancelled => "CANCELLED",
-            OrderStatus::Rejected => "REJECTED",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "ORDER_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
-            "PENDING" => Some(Self::Pending),
-            "PARTIAL_FILLED" => Some(Self::PartialFilled),
-            "FILLED" => Some(Self::Filled),
-            "CANCELLED" => Some(Self::Cancelled),
-            "REJECTED" => Some(Self::Rejected),
+            "MARKT_SESSION_UNSPECIFIED" => Some(Self::MarktSessionUnspecified),
+            "MARKT_SESSION_PRE_MARKET" => Some(Self::MarktSessionPreMarket),
+            "MARKT_SESSION_OPENING_AUCTION" => Some(Self::MarktSessionOpeningAuction),
+            "MARKT_SESSION_REGULAR" => Some(Self::MarktSessionRegular),
+            "MARKT_SESSION_CLOSING_AUCTION" => Some(Self::MarktSessionClosingAuction),
+            "MARKT_SESSION_CLOSED" => Some(Self::MarktSessionClosed),
             _ => None,
         }
     }
