@@ -20,6 +20,9 @@ dependencies:
   # Fixed-width integer types
   fixnum: ^1.1.0
 
+  # Value equality for domain models
+  equatable: ^2.0.5
+
 dev_dependencies:
   # Testing framework
   test: ^1.24.0
