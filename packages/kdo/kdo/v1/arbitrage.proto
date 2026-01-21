@@ -127,8 +127,9 @@ message Arbitrage {
   // 소속 포트폴리오 ID
   int32 portfolio_id = 3;
 
-  // 주문에 사용할 펀드 코드
-  string fund_code = 4 [(google.api.field_behavior) = REQUIRED];
+  // Reserved: fund_code was moved to BasketItem level
+  reserved 4;
+  reserved "fund_code";
 
   // 바스켓 A
   ArbitrageBasket basket_a = 5 [(google.api.field_behavior) = REQUIRED];
@@ -166,20 +167,40 @@ message ArbitrageBasket {
   // 구성 종목 목록
   repeated BasketItem items = 4;
 
-  // 기준 수량 (ETF의 경우 ETF 수량)
-  int64 target_quantity = 5;
+  // 기준 수량
+  int64 base_quantity = 5;
 
-  // ETF 심볼 (basket_type이 ETF_CONSTITUENTS인 경우)
+  // ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)
   string etf_symbol = 6;
+
+  // Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)
+  int64 creation_unit = 7;
+
+  // 리밸런싱 방향 (basket_type이 REBALANCING인 경우)
+  OrderSide rebalancing_side = 8;
+
+  // 리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)
+  google.protobuf.Timestamp target_time = 9;
 }
 
 // 바스켓 타입
 enum BasketType {
   BASKET_TYPE_UNSPECIFIED = 0;
-  // 주식-선물 차익거래
-  BASKET_TYPE_STOCK_FUTURES = 1;
-  // ETF-구성종목 차익거래
-  BASKET_TYPE_ETF_CONSTITUENTS = 2;
+  // ETF 구성종목 바스켓 (PDF 기반 자동 계산)
+  BASKET_TYPE_ETF_CONSTITUENT = 1;
+  // 리밸런싱 바스켓 (특정 시점에 잔고 청산)
+  BASKET_TYPE_REBALANCING = 2;
+  // 커스텀 바스켓 (수동 구성)
+  BASKET_TYPE_CUSTOM = 3;
+}
+
+// 주문 방향 (리밸런싱 바스켓용)
+enum OrderSide {
+  ORDER_SIDE_UNSPECIFIED = 0;
+  // 매수
+  ORDER_SIDE_BID = 1;
+  // 매도
+  ORDER_SIDE_ASK = 2;
 }
 
 // 바스켓 구성 항목
@@ -195,6 +216,9 @@ message BasketItem {
 
   // 계약 승수 (선물용, 주식은 1.0)
   double multiple = 4;
+
+  // 주문에 사용할 펀드 코드
+  string fund_code = 5 [(google.api.field_behavior) = REQUIRED];
 }
 
 // 가격 소스
@@ -212,6 +236,10 @@ enum PriceSource {
   PRICE_SOURCE_ASK2 = 5;
   // 최근 체결가
   PRICE_SOURCE_LAST_PRICE = 6;
+  // 3차 매수호가
+  PRICE_SOURCE_BID3 = 7;
+  // 3차 매도호가
+  PRICE_SOURCE_ASK3 = 8;
 }
 
 // 트리거 설정
@@ -579,13 +607,11 @@ message ListArbitragesRequest {
   //
   // Available Fields:
   // * portfolio_id - 포트폴리오 ID
-  // * fund_code - 펀드 코드
   // * is_active - 활성화 여부
   //
   // Examples:
   // * filter=portfolio_id=1
   // * filter=is_active=true
-  // * filter=fund_code="0159"
   string filter = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 

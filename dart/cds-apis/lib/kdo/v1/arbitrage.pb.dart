@@ -29,7 +29,6 @@ class Arbitrage extends $pb.GeneratedMessage {
     $core.String? name,
     $core.int? id,
     $core.int? portfolioId,
-    $core.String? fundCode,
     ArbitrageBasket? basketA,
     ArbitrageBasket? basketB,
     TriggerConfig? triggerConfig,
@@ -42,7 +41,6 @@ class Arbitrage extends $pb.GeneratedMessage {
     if (name != null) result.name = name;
     if (id != null) result.id = id;
     if (portfolioId != null) result.portfolioId = portfolioId;
-    if (fundCode != null) result.fundCode = fundCode;
     if (basketA != null) result.basketA = basketA;
     if (basketB != null) result.basketB = basketB;
     if (triggerConfig != null) result.triggerConfig = triggerConfig;
@@ -62,7 +60,6 @@ class Arbitrage extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
-    ..aOS(4, _omitFieldNames ? '' : 'fundCode')
     ..aOM<ArbitrageBasket>(5, _omitFieldNames ? '' : 'basketA', subBuilder: ArbitrageBasket.create)
     ..aOM<ArbitrageBasket>(6, _omitFieldNames ? '' : 'basketB', subBuilder: ArbitrageBasket.create)
     ..aOM<TriggerConfig>(7, _omitFieldNames ? '' : 'triggerConfig', subBuilder: TriggerConfig.create)
@@ -120,97 +117,87 @@ class Arbitrage extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPortfolioId() => $_clearField(3);
 
-  /// 주문에 사용할 펀드 코드
-  @$pb.TagNumber(4)
-  $core.String get fundCode => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set fundCode($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasFundCode() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearFundCode() => $_clearField(4);
-
   /// 바스켓 A
   @$pb.TagNumber(5)
-  ArbitrageBasket get basketA => $_getN(4);
+  ArbitrageBasket get basketA => $_getN(3);
   @$pb.TagNumber(5)
   set basketA(ArbitrageBasket value) => $_setField(5, value);
   @$pb.TagNumber(5)
-  $core.bool hasBasketA() => $_has(4);
+  $core.bool hasBasketA() => $_has(3);
   @$pb.TagNumber(5)
   void clearBasketA() => $_clearField(5);
   @$pb.TagNumber(5)
-  ArbitrageBasket ensureBasketA() => $_ensure(4);
+  ArbitrageBasket ensureBasketA() => $_ensure(3);
 
   /// 바스켓 B
   @$pb.TagNumber(6)
-  ArbitrageBasket get basketB => $_getN(5);
+  ArbitrageBasket get basketB => $_getN(4);
   @$pb.TagNumber(6)
   set basketB(ArbitrageBasket value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasBasketB() => $_has(5);
+  $core.bool hasBasketB() => $_has(4);
   @$pb.TagNumber(6)
   void clearBasketB() => $_clearField(6);
   @$pb.TagNumber(6)
-  ArbitrageBasket ensureBasketB() => $_ensure(5);
+  ArbitrageBasket ensureBasketB() => $_ensure(4);
 
   /// 트리거 설정
   @$pb.TagNumber(7)
-  TriggerConfig get triggerConfig => $_getN(6);
+  TriggerConfig get triggerConfig => $_getN(5);
   @$pb.TagNumber(7)
   set triggerConfig(TriggerConfig value) => $_setField(7, value);
   @$pb.TagNumber(7)
-  $core.bool hasTriggerConfig() => $_has(6);
+  $core.bool hasTriggerConfig() => $_has(5);
   @$pb.TagNumber(7)
   void clearTriggerConfig() => $_clearField(7);
   @$pb.TagNumber(7)
-  TriggerConfig ensureTriggerConfig() => $_ensure(6);
+  TriggerConfig ensureTriggerConfig() => $_ensure(5);
 
   /// 실행 설정
   @$pb.TagNumber(8)
-  ExecutionConfig get executionConfig => $_getN(7);
+  ExecutionConfig get executionConfig => $_getN(6);
   @$pb.TagNumber(8)
   set executionConfig(ExecutionConfig value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasExecutionConfig() => $_has(7);
+  $core.bool hasExecutionConfig() => $_has(6);
   @$pb.TagNumber(8)
   void clearExecutionConfig() => $_clearField(8);
   @$pb.TagNumber(8)
-  ExecutionConfig ensureExecutionConfig() => $_ensure(7);
+  ExecutionConfig ensureExecutionConfig() => $_ensure(6);
 
   /// 활성화 여부
   @$pb.TagNumber(9)
-  $core.bool get isActive => $_getBF(8);
+  $core.bool get isActive => $_getBF(7);
   @$pb.TagNumber(9)
-  set isActive($core.bool value) => $_setBool(8, value);
+  set isActive($core.bool value) => $_setBool(7, value);
   @$pb.TagNumber(9)
-  $core.bool hasIsActive() => $_has(8);
+  $core.bool hasIsActive() => $_has(7);
   @$pb.TagNumber(9)
   void clearIsActive() => $_clearField(9);
 
   /// 생성 시간
   @$pb.TagNumber(10)
-  $2.Timestamp get createTime => $_getN(9);
+  $2.Timestamp get createTime => $_getN(8);
   @$pb.TagNumber(10)
   set createTime($2.Timestamp value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasCreateTime() => $_has(9);
+  $core.bool hasCreateTime() => $_has(8);
   @$pb.TagNumber(10)
   void clearCreateTime() => $_clearField(10);
   @$pb.TagNumber(10)
-  $2.Timestamp ensureCreateTime() => $_ensure(9);
+  $2.Timestamp ensureCreateTime() => $_ensure(8);
 
   /// 수정 시간
   @$pb.TagNumber(11)
-  $2.Timestamp get updateTime => $_getN(10);
+  $2.Timestamp get updateTime => $_getN(9);
   @$pb.TagNumber(11)
   set updateTime($2.Timestamp value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasUpdateTime() => $_has(10);
+  $core.bool hasUpdateTime() => $_has(9);
   @$pb.TagNumber(11)
   void clearUpdateTime() => $_clearField(11);
   @$pb.TagNumber(11)
-  $2.Timestamp ensureUpdateTime() => $_ensure(10);
+  $2.Timestamp ensureUpdateTime() => $_ensure(9);
 }
 
 /// 바스켓 설정
@@ -220,16 +207,22 @@ class ArbitrageBasket extends $pb.GeneratedMessage {
     $core.String? name,
     BasketType? basketType,
     $core.Iterable<BasketItem>? items,
-    $fixnum.Int64? targetQuantity,
+    $fixnum.Int64? baseQuantity,
     $core.String? etfSymbol,
+    $fixnum.Int64? creationUnit,
+    OrderSide? rebalancingSide,
+    $2.Timestamp? targetTime,
   }) {
     final result = create();
     if (id != null) result.id = id;
     if (name != null) result.name = name;
     if (basketType != null) result.basketType = basketType;
     if (items != null) result.items.addAll(items);
-    if (targetQuantity != null) result.targetQuantity = targetQuantity;
+    if (baseQuantity != null) result.baseQuantity = baseQuantity;
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (creationUnit != null) result.creationUnit = creationUnit;
+    if (rebalancingSide != null) result.rebalancingSide = rebalancingSide;
+    if (targetTime != null) result.targetTime = targetTime;
     return result;
   }
 
@@ -243,8 +236,11 @@ class ArbitrageBasket extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..e<BasketType>(3, _omitFieldNames ? '' : 'basketType', $pb.PbFieldType.OE, defaultOrMaker: BasketType.BASKET_TYPE_UNSPECIFIED, valueOf: BasketType.valueOf, enumValues: BasketType.values)
     ..pc<BasketItem>(4, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: BasketItem.create)
-    ..aInt64(5, _omitFieldNames ? '' : 'targetQuantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'baseQuantity')
     ..aOS(6, _omitFieldNames ? '' : 'etfSymbol')
+    ..aInt64(7, _omitFieldNames ? '' : 'creationUnit')
+    ..e<OrderSide>(8, _omitFieldNames ? '' : 'rebalancingSide', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'targetTime', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -299,17 +295,17 @@ class ArbitrageBasket extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $pb.PbList<BasketItem> get items => $_getList(3);
 
-  /// 기준 수량 (ETF의 경우 ETF 수량)
+  /// 기준 수량
   @$pb.TagNumber(5)
-  $fixnum.Int64 get targetQuantity => $_getI64(4);
+  $fixnum.Int64 get baseQuantity => $_getI64(4);
   @$pb.TagNumber(5)
-  set targetQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  set baseQuantity($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasTargetQuantity() => $_has(4);
+  $core.bool hasBaseQuantity() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTargetQuantity() => $_clearField(5);
+  void clearBaseQuantity() => $_clearField(5);
 
-  /// ETF 심볼 (basket_type이 ETF_CONSTITUENTS인 경우)
+  /// ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)
   @$pb.TagNumber(6)
   $core.String get etfSymbol => $_getSZ(5);
   @$pb.TagNumber(6)
@@ -318,6 +314,38 @@ class ArbitrageBasket extends $pb.GeneratedMessage {
   $core.bool hasEtfSymbol() => $_has(5);
   @$pb.TagNumber(6)
   void clearEtfSymbol() => $_clearField(6);
+
+  /// Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get creationUnit => $_getI64(6);
+  @$pb.TagNumber(7)
+  set creationUnit($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCreationUnit() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCreationUnit() => $_clearField(7);
+
+  /// 리밸런싱 방향 (basket_type이 REBALANCING인 경우)
+  @$pb.TagNumber(8)
+  OrderSide get rebalancingSide => $_getN(7);
+  @$pb.TagNumber(8)
+  set rebalancingSide(OrderSide value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasRebalancingSide() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearRebalancingSide() => $_clearField(8);
+
+  /// 리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)
+  @$pb.TagNumber(9)
+  $2.Timestamp get targetTime => $_getN(8);
+  @$pb.TagNumber(9)
+  set targetTime($2.Timestamp value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasTargetTime() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearTargetTime() => $_clearField(9);
+  @$pb.TagNumber(9)
+  $2.Timestamp ensureTargetTime() => $_ensure(8);
 }
 
 /// 바스켓 구성 항목
@@ -327,12 +355,14 @@ class BasketItem extends $pb.GeneratedMessage {
     $fixnum.Int64? quantity,
     PriceSource? priceSource,
     $core.double? multiple,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (quantity != null) result.quantity = quantity;
     if (priceSource != null) result.priceSource = priceSource;
     if (multiple != null) result.multiple = multiple;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -346,6 +376,7 @@ class BasketItem extends $pb.GeneratedMessage {
     ..aInt64(2, _omitFieldNames ? '' : 'quantity')
     ..e<PriceSource>(3, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: PriceSource.PRICE_SOURCE_UNSPECIFIED, valueOf: PriceSource.valueOf, enumValues: PriceSource.values)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'multiple', $pb.PbFieldType.OD)
+    ..aOS(5, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -405,6 +436,16 @@ class BasketItem extends $pb.GeneratedMessage {
   $core.bool hasMultiple() => $_has(3);
   @$pb.TagNumber(4)
   void clearMultiple() => $_clearField(4);
+
+  /// 주문에 사용할 펀드 코드
+  @$pb.TagNumber(5)
+  $core.String get fundCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set fundCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFundCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFundCode() => $_clearField(5);
 }
 
 /// 트리거 설정
@@ -2538,13 +2579,11 @@ class ListArbitragesRequest extends $pb.GeneratedMessage {
   ///
   /// Available Fields:
   /// * portfolio_id - 포트폴리오 ID
-  /// * fund_code - 펀드 코드
   /// * is_active - 활성화 여부
   ///
   /// Examples:
   /// * filter=portfolio_id=1
   /// * filter=is_active=true
-  /// * filter=fund_code="0159"
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)

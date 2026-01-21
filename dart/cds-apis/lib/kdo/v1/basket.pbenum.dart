@@ -1,0 +1,99 @@
+// This is a generated file - do not edit.
+//
+// Generated from kdo/v1/basket.proto.
+
+// @dart = 3.3
+
+// ignore_for_file: annotate_overrides, camel_case_types, comment_references
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names
+
+import 'dart:core' as $core;
+
+import 'package:protobuf/protobuf.dart' as $pb;
+
+/// 바스켓 타입
+class BasketType extends $pb.ProtobufEnum {
+  static const BasketType BASKET_TYPE_UNSPECIFIED = BasketType._(0, _omitEnumNames ? '' : 'BASKET_TYPE_UNSPECIFIED');
+  /// ETF 구성종목 바스켓 (PDF 기반 자동 계산)
+  static const BasketType BASKET_TYPE_ETF_CONSTITUENT = BasketType._(1, _omitEnumNames ? '' : 'BASKET_TYPE_ETF_CONSTITUENT');
+  /// 리밸런싱 바스켓 (특정 시점에 잔고 청산)
+  static const BasketType BASKET_TYPE_REBALANCING = BasketType._(2, _omitEnumNames ? '' : 'BASKET_TYPE_REBALANCING');
+  /// 커스텀 바스켓 (수동 구성)
+  static const BasketType BASKET_TYPE_CUSTOM = BasketType._(3, _omitEnumNames ? '' : 'BASKET_TYPE_CUSTOM');
+
+  static const $core.List<BasketType> values = <BasketType> [
+    BASKET_TYPE_UNSPECIFIED,
+    BASKET_TYPE_ETF_CONSTITUENT,
+    BASKET_TYPE_REBALANCING,
+    BASKET_TYPE_CUSTOM,
+  ];
+
+  static final $core.List<BasketType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static BasketType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const BasketType._(super.value, super.name);
+}
+
+/// 주문 방향 (리밸런싱 바스켓용)
+class OrderSide extends $pb.ProtobufEnum {
+  static const OrderSide ORDER_SIDE_UNSPECIFIED = OrderSide._(0, _omitEnumNames ? '' : 'ORDER_SIDE_UNSPECIFIED');
+  /// 매수
+  static const OrderSide ORDER_SIDE_BID = OrderSide._(1, _omitEnumNames ? '' : 'ORDER_SIDE_BID');
+  /// 매도
+  static const OrderSide ORDER_SIDE_ASK = OrderSide._(2, _omitEnumNames ? '' : 'ORDER_SIDE_ASK');
+
+  static const $core.List<OrderSide> values = <OrderSide> [
+    ORDER_SIDE_UNSPECIFIED,
+    ORDER_SIDE_BID,
+    ORDER_SIDE_ASK,
+  ];
+
+  static final $core.List<OrderSide?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static OrderSide? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderSide._(super.value, super.name);
+}
+
+/// 가격 소스
+class PriceSource extends $pb.ProtobufEnum {
+  static const PriceSource PRICE_SOURCE_UNSPECIFIED = PriceSource._(0, _omitEnumNames ? '' : 'PRICE_SOURCE_UNSPECIFIED');
+  /// (bid1 + ask1) / 2
+  static const PriceSource PRICE_SOURCE_MID_PRICE = PriceSource._(1, _omitEnumNames ? '' : 'PRICE_SOURCE_MID_PRICE');
+  /// 최우선 매수호가
+  static const PriceSource PRICE_SOURCE_BID1 = PriceSource._(2, _omitEnumNames ? '' : 'PRICE_SOURCE_BID1');
+  /// 최우선 매도호가
+  static const PriceSource PRICE_SOURCE_ASK1 = PriceSource._(3, _omitEnumNames ? '' : 'PRICE_SOURCE_ASK1');
+  /// 2차 매수호가
+  static const PriceSource PRICE_SOURCE_BID2 = PriceSource._(4, _omitEnumNames ? '' : 'PRICE_SOURCE_BID2');
+  /// 2차 매도호가
+  static const PriceSource PRICE_SOURCE_ASK2 = PriceSource._(5, _omitEnumNames ? '' : 'PRICE_SOURCE_ASK2');
+  /// 최근 체결가
+  static const PriceSource PRICE_SOURCE_LAST_PRICE = PriceSource._(6, _omitEnumNames ? '' : 'PRICE_SOURCE_LAST_PRICE');
+  /// 3차 매수호가
+  static const PriceSource PRICE_SOURCE_BID3 = PriceSource._(7, _omitEnumNames ? '' : 'PRICE_SOURCE_BID3');
+  /// 3차 매도호가
+  static const PriceSource PRICE_SOURCE_ASK3 = PriceSource._(8, _omitEnumNames ? '' : 'PRICE_SOURCE_ASK3');
+
+  static const $core.List<PriceSource> values = <PriceSource> [
+    PRICE_SOURCE_UNSPECIFIED,
+    PRICE_SOURCE_MID_PRICE,
+    PRICE_SOURCE_BID1,
+    PRICE_SOURCE_ASK1,
+    PRICE_SOURCE_BID2,
+    PRICE_SOURCE_ASK2,
+    PRICE_SOURCE_LAST_PRICE,
+    PRICE_SOURCE_BID3,
+    PRICE_SOURCE_ASK3,
+  ];
+
+  static final $core.List<PriceSource?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 8);
+  static PriceSource? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const PriceSource._(super.value, super.name);
+}
+
+
+const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

@@ -53,6 +53,9 @@ pub mod kdo {
         pub mod arbitrage {
             include!("kdo.v1.arbitrage.rs");
         }
+        pub mod basket {
+            include!("kdo.v1.basket.rs");
+        }
     }
 }
 

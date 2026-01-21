@@ -52,7 +52,7 @@
           },
           {
             "name": "filter",
-            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* portfolio_id - 포트폴리오 ID\n* fund_code - 펀드 코드\n* is_active - 활성화 여부\n\nExamples:\n* filter=portfolio_id=1\n* filter=is_active=true\n* filter=fund_code=\"0159\"",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* portfolio_id - 포트폴리오 ID\n* is_active - 활성화 여부\n\nExamples:\n* filter=portfolio_id=1\n* filter=is_active=true",
             "in": "query",
             "required": false,
             "type": "string"
@@ -191,10 +191,6 @@
                   "format": "int32",
                   "title": "소속 포트폴리오 ID"
                 },
-                "fundCode": {
-                  "type": "string",
-                  "title": "주문에 사용할 펀드 코드"
-                },
                 "basketA": {
                   "$ref": "#/definitions/arbitrageArbitrageBasket",
                   "title": "바스켓 A"
@@ -230,7 +226,6 @@
               },
               "title": "수정할 차익거래",
               "required": [
-                "fundCode",
                 "basketA",
                 "basketB"
               ]
@@ -554,10 +549,6 @@
           "format": "int32",
           "title": "소속 포트폴리오 ID"
         },
-        "fundCode": {
-          "type": "string",
-          "title": "주문에 사용할 펀드 코드"
-        },
         "basketA": {
           "$ref": "#/definitions/arbitrageArbitrageBasket",
           "title": "바스켓 A"
@@ -593,7 +584,6 @@
       },
       "title": "차익거래 설정",
       "required": [
-        "fundCode",
         "basketA",
         "basketB"
       ]
@@ -612,24 +602,38 @@
           "title": "바스켓 이름"
         },
         "basketType": {
-          "$ref": "#/definitions/arbitrageBasketType",
+          "$ref": "#/definitions/v1arbitrageBasketType",
           "title": "바스켓 타입"
         },
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/arbitrageBasketItem"
+            "$ref": "#/definitions/v1arbitrageBasketItem"
           },
           "title": "구성 종목 목록"
         },
-        "targetQuantity": {
+        "baseQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "기준 수량 (ETF의 경우 ETF 수량)"
+          "title": "기준 수량"
         },
         "etfSymbol": {
           "type": "string",
-          "title": "ETF 심볼 (basket_type이 ETF_CONSTITUENTS인 경우)"
+          "title": "ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)"
+        },
+        "creationUnit": {
+          "type": "string",
+          "format": "int64",
+          "title": "Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)"
+        },
+        "rebalancingSide": {
+          "$ref": "#/definitions/v1arbitrageOrderSide",
+          "title": "리밸런싱 방향 (basket_type이 REBALANCING인 경우)"
+        },
+        "targetTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)"
         }
       },
       "title": "바스켓 설정",
@@ -834,33 +838,6 @@
       },
       "title": "상태 업데이트 (스트리밍용)"
     },
-    "arbitrageBasketItem": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "종목 심볼"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "수량"
-        },
-        "priceSource": {
-          "$ref": "#/definitions/arbitragePriceSource",
-          "title": "가격 소스"
-        },
-        "multiple": {
-          "type": "number",
-          "format": "double",
-          "title": "계약 승수 (선물용, 주식은 1.0)"
-        }
-      },
-      "title": "바스켓 구성 항목",
-      "required": [
-        "symbol"
-      ]
-    },
     "arbitrageBasketItemPrice": {
       "type": "object",
       "properties": {
@@ -915,17 +892,6 @@
       ],
       "default": "BASKET_SIDE_UNSPECIFIED",
       "title": "바스켓 구분"
-    },
-    "arbitrageBasketType": {
-      "type": "string",
-      "enum": [
-        "BASKET_TYPE_UNSPECIFIED",
-        "BASKET_TYPE_STOCK_FUTURES",
-        "BASKET_TYPE_ETF_CONSTITUENTS"
-      ],
-      "default": "BASKET_TYPE_UNSPECIFIED",
-      "description": "- BASKET_TYPE_STOCK_FUTURES: 주식-선물 차익거래\n - BASKET_TYPE_ETF_CONSTITUENTS: ETF-구성종목 차익거래",
-      "title": "바스켓 타입"
     },
     "arbitrageErrorEvent": {
       "type": "object",
@@ -1118,21 +1084,6 @@
       },
       "title": "주문 제출 이벤트"
     },
-    "arbitragePriceSource": {
-      "type": "string",
-      "enum": [
-        "PRICE_SOURCE_UNSPECIFIED",
-        "PRICE_SOURCE_MID_PRICE",
-        "PRICE_SOURCE_BID1",
-        "PRICE_SOURCE_ASK1",
-        "PRICE_SOURCE_BID2",
-        "PRICE_SOURCE_ASK2",
-        "PRICE_SOURCE_LAST_PRICE"
-      ],
-      "default": "PRICE_SOURCE_UNSPECIFIED",
-      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가",
-      "title": "가격 소스"
-    },
     "arbitragePriceUpdateEvent": {
       "type": "object",
       "properties": {
@@ -1253,11 +1204,11 @@
       "type": "object",
       "properties": {
         "buyPriceSource": {
-          "$ref": "#/definitions/arbitragePriceSource",
+          "$ref": "#/definitions/v1arbitragePriceSource",
           "title": "매수 시 사용할 가격"
         },
         "sellPriceSource": {
-          "$ref": "#/definitions/arbitragePriceSource",
+          "$ref": "#/definitions/v1arbitragePriceSource",
           "title": "매도 시 사용할 가격"
         },
         "priceOffsetTicks": {
@@ -1336,6 +1287,78 @@
           }
         }
       }
+    },
+    "v1arbitrageBasketItem": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량"
+        },
+        "priceSource": {
+          "$ref": "#/definitions/v1arbitragePriceSource",
+          "title": "가격 소스"
+        },
+        "multiple": {
+          "type": "number",
+          "format": "double",
+          "title": "계약 승수 (선물용, 주식은 1.0)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "주문에 사용할 펀드 코드"
+        }
+      },
+      "title": "바스켓 구성 항목",
+      "required": [
+        "symbol",
+        "fundCode"
+      ]
+    },
+    "v1arbitrageBasketType": {
+      "type": "string",
+      "enum": [
+        "BASKET_TYPE_UNSPECIFIED",
+        "BASKET_TYPE_ETF_CONSTITUENT",
+        "BASKET_TYPE_REBALANCING",
+        "BASKET_TYPE_CUSTOM"
+      ],
+      "default": "BASKET_TYPE_UNSPECIFIED",
+      "description": "- BASKET_TYPE_ETF_CONSTITUENT: ETF 구성종목 바스켓 (PDF 기반 자동 계산)\n - BASKET_TYPE_REBALANCING: 리밸런싱 바스켓 (특정 시점에 잔고 청산)\n - BASKET_TYPE_CUSTOM: 커스텀 바스켓 (수동 구성)",
+      "title": "바스켓 타입"
+    },
+    "v1arbitrageOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향 (리밸런싱 바스켓용)"
+    },
+    "v1arbitragePriceSource": {
+      "type": "string",
+      "enum": [
+        "PRICE_SOURCE_UNSPECIFIED",
+        "PRICE_SOURCE_MID_PRICE",
+        "PRICE_SOURCE_BID1",
+        "PRICE_SOURCE_ASK1",
+        "PRICE_SOURCE_BID2",
+        "PRICE_SOURCE_ASK2",
+        "PRICE_SOURCE_LAST_PRICE",
+        "PRICE_SOURCE_BID3",
+        "PRICE_SOURCE_ASK3"
+      ],
+      "default": "PRICE_SOURCE_UNSPECIFIED",
+      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가\n - PRICE_SOURCE_BID3: 3차 매수호가\n - PRICE_SOURCE_ASK3: 3차 매도호가",
+      "title": "가격 소스"
     }
   }
 }

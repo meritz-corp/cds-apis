@@ -19,15 +19,32 @@ const BasketType$json = {
   '1': 'BasketType',
   '2': [
     {'1': 'BASKET_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'BASKET_TYPE_STOCK_FUTURES', '2': 1},
-    {'1': 'BASKET_TYPE_ETF_CONSTITUENTS', '2': 2},
+    {'1': 'BASKET_TYPE_ETF_CONSTITUENT', '2': 1},
+    {'1': 'BASKET_TYPE_REBALANCING', '2': 2},
+    {'1': 'BASKET_TYPE_CUSTOM', '2': 3},
   ],
 };
 
 /// Descriptor for `BasketType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List basketTypeDescriptor = $convert.base64Decode(
-    'CgpCYXNrZXRUeXBlEhsKF0JBU0tFVF9UWVBFX1VOU1BFQ0lGSUVEEAASHQoZQkFTS0VUX1RZUE'
-    'VfU1RPQ0tfRlVUVVJFUxABEiAKHEJBU0tFVF9UWVBFX0VURl9DT05TVElUVUVOVFMQAg==');
+    'CgpCYXNrZXRUeXBlEhsKF0JBU0tFVF9UWVBFX1VOU1BFQ0lGSUVEEAASHwobQkFTS0VUX1RZUE'
+    'VfRVRGX0NPTlNUSVRVRU5UEAESGwoXQkFTS0VUX1RZUEVfUkVCQUxBTkNJTkcQAhIWChJCQVNL'
+    'RVRfVFlQRV9DVVNUT00QAw==');
+
+@$core.Deprecated('Use orderSideDescriptor instead')
+const OrderSide$json = {
+  '1': 'OrderSide',
+  '2': [
+    {'1': 'ORDER_SIDE_UNSPECIFIED', '2': 0},
+    {'1': 'ORDER_SIDE_BID', '2': 1},
+    {'1': 'ORDER_SIDE_ASK', '2': 2},
+  ],
+};
+
+/// Descriptor for `OrderSide`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List orderSideDescriptor = $convert.base64Decode(
+    'CglPcmRlclNpZGUSGgoWT1JERVJfU0lERV9VTlNQRUNJRklFRBAAEhIKDk9SREVSX1NJREVfQk'
+    'lEEAESEgoOT1JERVJfU0lERV9BU0sQAg==');
 
 @$core.Deprecated('Use priceSourceDescriptor instead')
 const PriceSource$json = {
@@ -40,6 +57,8 @@ const PriceSource$json = {
     {'1': 'PRICE_SOURCE_BID2', '2': 4},
     {'1': 'PRICE_SOURCE_ASK2', '2': 5},
     {'1': 'PRICE_SOURCE_LAST_PRICE', '2': 6},
+    {'1': 'PRICE_SOURCE_BID3', '2': 7},
+    {'1': 'PRICE_SOURCE_ASK3', '2': 8},
   ],
 };
 
@@ -48,7 +67,8 @@ final $typed_data.Uint8List priceSourceDescriptor = $convert.base64Decode(
     'CgtQcmljZVNvdXJjZRIcChhQUklDRV9TT1VSQ0VfVU5TUEVDSUZJRUQQABIaChZQUklDRV9TT1'
     'VSQ0VfTUlEX1BSSUNFEAESFQoRUFJJQ0VfU09VUkNFX0JJRDEQAhIVChFQUklDRV9TT1VSQ0Vf'
     'QVNLMRADEhUKEVBSSUNFX1NPVVJDRV9CSUQyEAQSFQoRUFJJQ0VfU09VUkNFX0FTSzIQBRIbCh'
-    'dQUklDRV9TT1VSQ0VfTEFTVF9QUklDRRAG');
+    'dQUklDRV9TT1VSQ0VfTEFTVF9QUklDRRAGEhUKEVBSSUNFX1NPVVJDRV9CSUQzEAcSFQoRUFJJ'
+    'Q0VfU09VUkNFX0FTSzMQCA==');
 
 @$core.Deprecated('Use arbitrageOrderTypeDescriptor instead')
 const ArbitrageOrderType$json = {
@@ -127,7 +147,6 @@ const Arbitrage$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'id', '3': 2, '4': 1, '5': 5, '8': {}, '10': 'id'},
     {'1': 'portfolio_id', '3': 3, '4': 1, '5': 5, '10': 'portfolioId'},
-    {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'basket_a', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ArbitrageBasket', '8': {}, '10': 'basketA'},
     {'1': 'basket_b', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ArbitrageBasket', '8': {}, '10': 'basketB'},
     {'1': 'trigger_config', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.TriggerConfig', '10': 'triggerConfig'},
@@ -137,22 +156,26 @@ const Arbitrage$json = {
     {'1': 'update_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
   '7': {},
+  '9': [
+    {'1': 4, '2': 5},
+  ],
+  '10': ['fund_code'],
 };
 
 /// Descriptor for `Arbitrage`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List arbitrageDescriptor = $convert.base64Decode(
     'CglBcmJpdHJhZ2USEgoEbmFtZRgBIAEoCVIEbmFtZRIUCgJpZBgCIAEoBUIE4kEBA1ICaWQSIQ'
-    'oMcG9ydGZvbGlvX2lkGAMgASgFUgtwb3J0Zm9saW9JZBIhCglmdW5kX2NvZGUYBCABKAlCBOJB'
-    'AQJSCGZ1bmRDb2RlEkIKCGJhc2tldF9hGAUgASgLMiEua2RvLnYxLmFyYml0cmFnZS5BcmJpdH'
-    'JhZ2VCYXNrZXRCBOJBAQJSB2Jhc2tldEESQgoIYmFza2V0X2IYBiABKAsyIS5rZG8udjEuYXJi'
-    'aXRyYWdlLkFyYml0cmFnZUJhc2tldEIE4kEBAlIHYmFza2V0QhJGCg50cmlnZ2VyX2NvbmZpZx'
-    'gHIAEoCzIfLmtkby52MS5hcmJpdHJhZ2UuVHJpZ2dlckNvbmZpZ1INdHJpZ2dlckNvbmZpZxJM'
-    'ChBleGVjdXRpb25fY29uZmlnGAggASgLMiEua2RvLnYxLmFyYml0cmFnZS5FeGVjdXRpb25Db2'
-    '5maWdSD2V4ZWN1dGlvbkNvbmZpZxIbCglpc19hY3RpdmUYCSABKAhSCGlzQWN0aXZlEkEKC2Ny'
-    'ZWF0ZV90aW1lGAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKY3JlYX'
-    'RlVGltZRJBCgt1cGRhdGVfdGltZRgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBC'
-    'BOJBAQNSCnVwZGF0ZVRpbWU6NupBMwoZa2RvLmNkc2FwaXMueHl6L0FyYml0cmFnZRIWYXJiaX'
-    'RyYWdlcy97YXJiaXRyYWdlfQ==');
+    'oMcG9ydGZvbGlvX2lkGAMgASgFUgtwb3J0Zm9saW9JZBJCCghiYXNrZXRfYRgFIAEoCzIhLmtk'
+    'by52MS5hcmJpdHJhZ2UuQXJiaXRyYWdlQmFza2V0QgTiQQECUgdiYXNrZXRBEkIKCGJhc2tldF'
+    '9iGAYgASgLMiEua2RvLnYxLmFyYml0cmFnZS5BcmJpdHJhZ2VCYXNrZXRCBOJBAQJSB2Jhc2tl'
+    'dEISRgoOdHJpZ2dlcl9jb25maWcYByABKAsyHy5rZG8udjEuYXJiaXRyYWdlLlRyaWdnZXJDb2'
+    '5maWdSDXRyaWdnZXJDb25maWcSTAoQZXhlY3V0aW9uX2NvbmZpZxgIIAEoCzIhLmtkby52MS5h'
+    'cmJpdHJhZ2UuRXhlY3V0aW9uQ29uZmlnUg9leGVjdXRpb25Db25maWcSGwoJaXNfYWN0aXZlGA'
+    'kgASgIUghpc0FjdGl2ZRJBCgtjcmVhdGVfdGltZRgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U'
+    'aW1lc3RhbXBCBOJBAQNSCmNyZWF0ZVRpbWUSQQoLdXBkYXRlX3RpbWUYCyABKAsyGi5nb29nbG'
+    'UucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lOjbqQTMKGWtkby5jZHNhcGlz'
+    'Lnh5ei9BcmJpdHJhZ2USFmFyYml0cmFnZXMve2FyYml0cmFnZX1KBAgEEAVSCWZ1bmRfY29kZQ'
+    '==');
 
 @$core.Deprecated('Use arbitrageBasketDescriptor instead')
 const ArbitrageBasket$json = {
@@ -162,8 +185,11 @@ const ArbitrageBasket$json = {
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     {'1': 'basket_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.BasketType', '8': {}, '10': 'basketType'},
     {'1': 'items', '3': 4, '4': 3, '5': 11, '6': '.kdo.v1.arbitrage.BasketItem', '10': 'items'},
-    {'1': 'target_quantity', '3': 5, '4': 1, '5': 3, '10': 'targetQuantity'},
+    {'1': 'base_quantity', '3': 5, '4': 1, '5': 3, '10': 'baseQuantity'},
     {'1': 'etf_symbol', '3': 6, '4': 1, '5': 9, '10': 'etfSymbol'},
+    {'1': 'creation_unit', '3': 7, '4': 1, '5': 3, '10': 'creationUnit'},
+    {'1': 'rebalancing_side', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.OrderSide', '10': 'rebalancingSide'},
+    {'1': 'target_time', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'targetTime'},
   ],
 };
 
@@ -172,8 +198,11 @@ final $typed_data.Uint8List arbitrageBasketDescriptor = $convert.base64Decode(
     'Cg9BcmJpdHJhZ2VCYXNrZXQSFAoCaWQYASABKAVCBOJBAQNSAmlkEhIKBG5hbWUYAiABKAlSBG'
     '5hbWUSQwoLYmFza2V0X3R5cGUYAyABKA4yHC5rZG8udjEuYXJiaXRyYWdlLkJhc2tldFR5cGVC'
     'BOJBAQJSCmJhc2tldFR5cGUSMgoFaXRlbXMYBCADKAsyHC5rZG8udjEuYXJiaXRyYWdlLkJhc2'
-    'tldEl0ZW1SBWl0ZW1zEicKD3RhcmdldF9xdWFudGl0eRgFIAEoA1IOdGFyZ2V0UXVhbnRpdHkS'
-    'HQoKZXRmX3N5bWJvbBgGIAEoCVIJZXRmU3ltYm9s');
+    'tldEl0ZW1SBWl0ZW1zEiMKDWJhc2VfcXVhbnRpdHkYBSABKANSDGJhc2VRdWFudGl0eRIdCgpl'
+    'dGZfc3ltYm9sGAYgASgJUglldGZTeW1ib2wSIwoNY3JlYXRpb25fdW5pdBgHIAEoA1IMY3JlYX'
+    'Rpb25Vbml0EkYKEHJlYmFsYW5jaW5nX3NpZGUYCCABKA4yGy5rZG8udjEuYXJiaXRyYWdlLk9y'
+    'ZGVyU2lkZVIPcmViYWxhbmNpbmdTaWRlEjsKC3RhcmdldF90aW1lGAkgASgLMhouZ29vZ2xlLn'
+    'Byb3RvYnVmLlRpbWVzdGFtcFIKdGFyZ2V0VGltZQ==');
 
 @$core.Deprecated('Use basketItemDescriptor instead')
 const BasketItem$json = {
@@ -183,6 +212,7 @@ const BasketItem$json = {
     {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'price_source', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.PriceSource', '10': 'priceSource'},
     {'1': 'multiple', '3': 4, '4': 1, '5': 1, '10': 'multiple'},
+    {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
   ],
 };
 
@@ -190,7 +220,8 @@ const BasketItem$json = {
 final $typed_data.Uint8List basketItemDescriptor = $convert.base64Decode(
     'CgpCYXNrZXRJdGVtEhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEhoKCHF1YW50aXR5GA'
     'IgASgDUghxdWFudGl0eRJACgxwcmljZV9zb3VyY2UYAyABKA4yHS5rZG8udjEuYXJiaXRyYWdl'
-    'LlByaWNlU291cmNlUgtwcmljZVNvdXJjZRIaCghtdWx0aXBsZRgEIAEoAVIIbXVsdGlwbGU=');
+    'LlByaWNlU291cmNlUgtwcmljZVNvdXJjZRIaCghtdWx0aXBsZRgEIAEoAVIIbXVsdGlwbGUSIQ'
+    'oJZnVuZF9jb2RlGAUgASgJQgTiQQECUghmdW5kQ29kZQ==');
 
 @$core.Deprecated('Use triggerConfigDescriptor instead')
 const TriggerConfig$json = {

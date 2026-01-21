@@ -1,0 +1,563 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/basket.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BasketService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/baskets": {
+      "get": {
+        "summary": "바스켓 목록 조회",
+        "operationId": "BasketService_ListBaskets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketListBasketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* basket_type - 바스켓 타입\n* etf_symbol - ETF 심볼\n\nExamples:\n* filter=basket_type=BASKET_TYPE_ETF_CONSTITUENT\n* filter=etf_symbol=\"069500\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      },
+      "post": {
+        "summary": "바스켓 생성",
+        "operationId": "BasketService_CreateBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketBasket"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basket",
+            "description": "생성할 바스켓",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/basketBasket",
+              "required": [
+                "basket"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    },
+    "/v1/{basket.name}": {
+      "patch": {
+        "summary": "바스켓 수정",
+        "operationId": "BasketService_UpdateBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketBasket"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basket.name",
+            "description": "리소스 이름 (baskets/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "baskets/[^/]+"
+          },
+          {
+            "name": "basket",
+            "description": "수정할 바스켓",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "바스켓 ID",
+                  "readOnly": true
+                },
+                "displayName": {
+                  "type": "string",
+                  "title": "바스켓 이름"
+                },
+                "basketType": {
+                  "$ref": "#/definitions/v1basketBasketType",
+                  "title": "바스켓 타입"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/v1basketBasketItem"
+                  },
+                  "title": "구성 종목 목록"
+                },
+                "baseQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "기준 수량"
+                },
+                "etfSymbol": {
+                  "type": "string",
+                  "title": "ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)"
+                },
+                "creationUnit": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)"
+                },
+                "rebalancingSide": {
+                  "$ref": "#/definitions/v1basketOrderSide",
+                  "title": "리밸런싱 방향 (basket_type이 REBALANCING인 경우)"
+                },
+                "targetTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)"
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "생성 시간",
+                  "readOnly": true
+                },
+                "updateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "수정 시간",
+                  "readOnly": true
+                }
+              },
+              "title": "수정할 바스켓",
+              "required": [
+                "basketType"
+              ]
+            }
+          },
+          {
+            "name": "updateMask",
+            "description": "수정할 필드 마스크",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    },
+    "/v1/{basket}": {
+      "get": {
+        "summary": "단일 바스켓 조회",
+        "operationId": "BasketService_GetBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketBasket"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basket",
+            "description": "리소스 이름 (baskets/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "baskets/[^/]+"
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      },
+      "delete": {
+        "summary": "바스켓 삭제",
+        "operationId": "BasketService_DeleteBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basket",
+            "description": "리소스 이름 (baskets/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "baskets/[^/]+"
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    },
+    "/v1/{basket}/value": {
+      "get": {
+        "summary": "바스켓 가치 조회 (현재 시세 기준)",
+        "operationId": "BasketService_GetBasketValue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketBasketValue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basket",
+            "description": "리소스 이름 (baskets/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "baskets/[^/]+"
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "basketBasket": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (baskets/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "바스켓 ID",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "title": "바스켓 이름"
+        },
+        "basketType": {
+          "$ref": "#/definitions/v1basketBasketType",
+          "title": "바스켓 타입"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1basketBasketItem"
+          },
+          "title": "구성 종목 목록"
+        },
+        "baseQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "기준 수량"
+        },
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)"
+        },
+        "creationUnit": {
+          "type": "string",
+          "format": "int64",
+          "title": "Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)"
+        },
+        "rebalancingSide": {
+          "$ref": "#/definitions/v1basketOrderSide",
+          "title": "리밸런싱 방향 (basket_type이 REBALANCING인 경우)"
+        },
+        "targetTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시간",
+          "readOnly": true
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "수정 시간",
+          "readOnly": true
+        }
+      },
+      "title": "바스켓 - 여러 상품을 묶은 덩어리",
+      "required": [
+        "basketType"
+      ]
+    },
+    "basketBasketItemValue": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "사용된 가격"
+        },
+        "priceSource": {
+          "$ref": "#/definitions/v1basketPriceSource",
+          "title": "가격 소스"
+        },
+        "multiple": {
+          "type": "number",
+          "format": "double",
+          "title": "계약 승수"
+        },
+        "value": {
+          "type": "string",
+          "format": "int64",
+          "title": "종목 가치 (price * quantity * multiple)"
+        }
+      },
+      "title": "구성종목 가치"
+    },
+    "basketBasketValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (baskets/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "바스켓 ID"
+        },
+        "totalValue": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 가치 (원)"
+        },
+        "itemValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basketBasketItemValue"
+          },
+          "title": "구성종목별 가치"
+        },
+        "calculatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "계산 시간"
+        }
+      },
+      "title": "바스켓 가치 (현재 시세 기준)"
+    },
+    "basketListBasketsResponse": {
+      "type": "object",
+      "properties": {
+        "baskets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basketBasket"
+          },
+          "title": "바스켓 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1basketBasketItem": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량 (음수 가능: 매도 포지션)"
+        },
+        "priceSource": {
+          "$ref": "#/definitions/v1basketPriceSource",
+          "title": "가격 소스 (바스켓 가치 계산용)"
+        },
+        "multiple": {
+          "type": "number",
+          "format": "double",
+          "title": "계약 승수 (선물용, 주식은 1.0)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "주문에 사용할 펀드 코드"
+        }
+      },
+      "title": "바스켓 구성 항목",
+      "required": [
+        "symbol",
+        "fundCode"
+      ]
+    },
+    "v1basketBasketType": {
+      "type": "string",
+      "enum": [
+        "BASKET_TYPE_UNSPECIFIED",
+        "BASKET_TYPE_ETF_CONSTITUENT",
+        "BASKET_TYPE_REBALANCING",
+        "BASKET_TYPE_CUSTOM"
+      ],
+      "default": "BASKET_TYPE_UNSPECIFIED",
+      "description": "- BASKET_TYPE_ETF_CONSTITUENT: ETF 구성종목 바스켓 (PDF 기반 자동 계산)\n - BASKET_TYPE_REBALANCING: 리밸런싱 바스켓 (특정 시점에 잔고 청산)\n - BASKET_TYPE_CUSTOM: 커스텀 바스켓 (수동 구성)",
+      "title": "바스켓 타입"
+    },
+    "v1basketOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향 (리밸런싱 바스켓용)"
+    },
+    "v1basketPriceSource": {
+      "type": "string",
+      "enum": [
+        "PRICE_SOURCE_UNSPECIFIED",
+        "PRICE_SOURCE_MID_PRICE",
+        "PRICE_SOURCE_BID1",
+        "PRICE_SOURCE_ASK1",
+        "PRICE_SOURCE_BID2",
+        "PRICE_SOURCE_ASK2",
+        "PRICE_SOURCE_LAST_PRICE",
+        "PRICE_SOURCE_BID3",
+        "PRICE_SOURCE_ASK3"
+      ],
+      "default": "PRICE_SOURCE_UNSPECIFIED",
+      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가\n - PRICE_SOURCE_BID3: 3차 매수호가\n - PRICE_SOURCE_ASK3: 3차 매도호가",
+      "title": "가격 소스"
+    }
+  }
+}

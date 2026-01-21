@@ -17,9 +17,6 @@ pub struct Arbitrage {
     /// 소속 포트폴리오 ID
     #[prost(int32, tag="3")]
     pub portfolio_id: i32,
-    /// 주문에 사용할 펀드 코드
-    #[prost(string, tag="4")]
-    pub fund_code: ::prost::alloc::string::String,
     /// 바스켓 A
     #[prost(message, optional, tag="5")]
     pub basket_a: ::core::option::Option<ArbitrageBasket>,
@@ -58,12 +55,21 @@ pub struct ArbitrageBasket {
     /// 구성 종목 목록
     #[prost(message, repeated, tag="4")]
     pub items: ::prost::alloc::vec::Vec<BasketItem>,
-    /// 기준 수량 (ETF의 경우 ETF 수량)
+    /// 기준 수량
     #[prost(int64, tag="5")]
-    pub target_quantity: i64,
-    /// ETF 심볼 (basket_type이 ETF_CONSTITUENTS인 경우)
+    pub base_quantity: i64,
+    /// ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)
     #[prost(string, tag="6")]
     pub etf_symbol: ::prost::alloc::string::String,
+    /// Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)
+    #[prost(int64, tag="7")]
+    pub creation_unit: i64,
+    /// 리밸런싱 방향 (basket_type이 REBALANCING인 경우)
+    #[prost(enumeration="OrderSide", tag="8")]
+    pub rebalancing_side: i32,
+    /// 리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)
+    #[prost(message, optional, tag="9")]
+    pub target_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// 바스켓 구성 항목
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -81,6 +87,9 @@ pub struct BasketItem {
     /// 계약 승수 (선물용, 주식은 1.0)
     #[prost(double, tag="4")]
     pub multiple: f64,
+    /// 주문에 사용할 펀드 코드
+    #[prost(string, tag="5")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// 트리거 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -488,13 +497,11 @@ pub struct ListArbitragesRequest {
     ///
     /// Available Fields:
     /// * portfolio_id - 포트폴리오 ID
-    /// * fund_code - 펀드 코드
     /// * is_active - 활성화 여부
     ///
     /// Examples:
     /// * filter=portfolio_id=1
     /// * filter=is_active=true
-    /// * filter=fund_code="0159"
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }
@@ -613,10 +620,12 @@ pub struct StreamArbitrageEventsRequest {
 #[repr(i32)]
 pub enum BasketType {
     Unspecified = 0,
-    /// 주식-선물 차익거래
-    StockFutures = 1,
-    /// ETF-구성종목 차익거래
-    EtfConstituents = 2,
+    /// ETF 구성종목 바스켓 (PDF 기반 자동 계산)
+    EtfConstituent = 1,
+    /// 리밸런싱 바스켓 (특정 시점에 잔고 청산)
+    Rebalancing = 2,
+    /// 커스텀 바스켓 (수동 구성)
+    Custom = 3,
 }
 impl BasketType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -626,16 +635,50 @@ impl BasketType {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             BasketType::Unspecified => "BASKET_TYPE_UNSPECIFIED",
-            BasketType::StockFutures => "BASKET_TYPE_STOCK_FUTURES",
-            BasketType::EtfConstituents => "BASKET_TYPE_ETF_CONSTITUENTS",
+            BasketType::EtfConstituent => "BASKET_TYPE_ETF_CONSTITUENT",
+            BasketType::Rebalancing => "BASKET_TYPE_REBALANCING",
+            BasketType::Custom => "BASKET_TYPE_CUSTOM",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "BASKET_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "BASKET_TYPE_STOCK_FUTURES" => Some(Self::StockFutures),
-            "BASKET_TYPE_ETF_CONSTITUENTS" => Some(Self::EtfConstituents),
+            "BASKET_TYPE_ETF_CONSTITUENT" => Some(Self::EtfConstituent),
+            "BASKET_TYPE_REBALANCING" => Some(Self::Rebalancing),
+            "BASKET_TYPE_CUSTOM" => Some(Self::Custom),
+            _ => None,
+        }
+    }
+}
+/// 주문 방향 (리밸런싱 바스켓용)
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum OrderSide {
+    Unspecified = 0,
+    /// 매수
+    Bid = 1,
+    /// 매도
+    Ask = 2,
+}
+impl OrderSide {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            OrderSide::Unspecified => "ORDER_SIDE_UNSPECIFIED",
+            OrderSide::Bid => "ORDER_SIDE_BID",
+            OrderSide::Ask => "ORDER_SIDE_ASK",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ORDER_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
+            "ORDER_SIDE_BID" => Some(Self::Bid),
+            "ORDER_SIDE_ASK" => Some(Self::Ask),
             _ => None,
         }
     }
@@ -657,6 +700,10 @@ pub enum PriceSource {
     Ask2 = 5,
     /// 최근 체결가
     LastPrice = 6,
+    /// 3차 매수호가
+    Bid3 = 7,
+    /// 3차 매도호가
+    Ask3 = 8,
 }
 impl PriceSource {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -672,6 +719,8 @@ impl PriceSource {
             PriceSource::Bid2 => "PRICE_SOURCE_BID2",
             PriceSource::Ask2 => "PRICE_SOURCE_ASK2",
             PriceSource::LastPrice => "PRICE_SOURCE_LAST_PRICE",
+            PriceSource::Bid3 => "PRICE_SOURCE_BID3",
+            PriceSource::Ask3 => "PRICE_SOURCE_ASK3",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -684,6 +733,8 @@ impl PriceSource {
             "PRICE_SOURCE_BID2" => Some(Self::Bid2),
             "PRICE_SOURCE_ASK2" => Some(Self::Ask2),
             "PRICE_SOURCE_LAST_PRICE" => Some(Self::LastPrice),
+            "PRICE_SOURCE_BID3" => Some(Self::Bid3),
+            "PRICE_SOURCE_ASK3" => Some(Self::Ask3),
             _ => None,
         }
     }

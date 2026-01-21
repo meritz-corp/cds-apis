@@ -37,9 +37,6 @@ impl serde::Serialize for Arbitrage {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.Arbitrage", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -49,9 +46,6 @@ impl serde::Serialize for Arbitrage {
         }
         if true {
             struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if let Some(v) = self.basket_a.as_ref() {
             struct_ser.serialize_field("basket_a", v)?;
@@ -88,8 +82,6 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
             "id",
             "portfolio_id",
             "portfolioId",
-            "fund_code",
-            "fundCode",
             "basket_a",
             "basketA",
             "basket_b",
@@ -111,7 +103,6 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
             Name,
             Id,
             PortfolioId,
-            FundCode,
             BasketA,
             BasketB,
             TriggerConfig,
@@ -144,7 +135,6 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                             "name" => Ok(GeneratedField::Name),
                             "id" => Ok(GeneratedField::Id),
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "basketA" | "basket_a" => Ok(GeneratedField::BasketA),
                             "basketB" | "basket_b" => Ok(GeneratedField::BasketB),
                             "triggerConfig" | "trigger_config" => Ok(GeneratedField::TriggerConfig),
@@ -174,7 +164,6 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                 let mut name__ = None;
                 let mut id__ = None;
                 let mut portfolio_id__ = None;
-                let mut fund_code__ = None;
                 let mut basket_a__ = None;
                 let mut basket_b__ = None;
                 let mut trigger_config__ = None;
@@ -205,12 +194,6 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                             portfolio_id__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
                         }
                         GeneratedField::BasketA => {
                             if basket_a__.is_some() {
@@ -263,7 +246,6 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                     name: name__.unwrap_or_default(),
                     id: id__.unwrap_or_default(),
                     portfolio_id: portfolio_id__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
                     basket_a: basket_a__,
                     basket_b: basket_b__,
                     trigger_config: trigger_config__,
@@ -303,6 +285,15 @@ impl serde::Serialize for ArbitrageBasket {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.ArbitrageBasket", len)?;
         if true {
             struct_ser.serialize_field("id", &self.id)?;
@@ -321,10 +312,23 @@ impl serde::Serialize for ArbitrageBasket {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("target_quantity", ToString::to_string(&self.target_quantity).as_str())?;
+            struct_ser.serialize_field("base_quantity", ToString::to_string(&self.base_quantity).as_str())?;
         }
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("creation_unit", ToString::to_string(&self.creation_unit).as_str())?;
+        }
+        if true {
+            let v = OrderSide::try_from(self.rebalancing_side)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.rebalancing_side)))?;
+            struct_ser.serialize_field("rebalancing_side", &v)?;
+        }
+        if let Some(v) = self.target_time.as_ref() {
+            struct_ser.serialize_field("target_time", v)?;
         }
         struct_ser.end()
     }
@@ -341,10 +345,16 @@ impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
             "basket_type",
             "basketType",
             "items",
-            "target_quantity",
-            "targetQuantity",
+            "base_quantity",
+            "baseQuantity",
             "etf_symbol",
             "etfSymbol",
+            "creation_unit",
+            "creationUnit",
+            "rebalancing_side",
+            "rebalancingSide",
+            "target_time",
+            "targetTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -353,8 +363,11 @@ impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
             Name,
             BasketType,
             Items,
-            TargetQuantity,
+            BaseQuantity,
             EtfSymbol,
+            CreationUnit,
+            RebalancingSide,
+            TargetTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -381,8 +394,11 @@ impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
                             "name" => Ok(GeneratedField::Name),
                             "basketType" | "basket_type" => Ok(GeneratedField::BasketType),
                             "items" => Ok(GeneratedField::Items),
-                            "targetQuantity" | "target_quantity" => Ok(GeneratedField::TargetQuantity),
+                            "baseQuantity" | "base_quantity" => Ok(GeneratedField::BaseQuantity),
                             "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "creationUnit" | "creation_unit" => Ok(GeneratedField::CreationUnit),
+                            "rebalancingSide" | "rebalancing_side" => Ok(GeneratedField::RebalancingSide),
+                            "targetTime" | "target_time" => Ok(GeneratedField::TargetTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -406,8 +422,11 @@ impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
                 let mut name__ = None;
                 let mut basket_type__ = None;
                 let mut items__ = None;
-                let mut target_quantity__ = None;
+                let mut base_quantity__ = None;
                 let mut etf_symbol__ = None;
+                let mut creation_unit__ = None;
+                let mut rebalancing_side__ = None;
+                let mut target_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -436,11 +455,11 @@ impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
                             }
                             items__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::TargetQuantity => {
-                            if target_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("targetQuantity"));
+                        GeneratedField::BaseQuantity => {
+                            if base_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseQuantity"));
                             }
-                            target_quantity__ = 
+                            base_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -449,6 +468,26 @@ impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
                                 return Err(serde::de::Error::duplicate_field("etfSymbol"));
                             }
                             etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CreationUnit => {
+                            if creation_unit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("creationUnit"));
+                            }
+                            creation_unit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RebalancingSide => {
+                            if rebalancing_side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("rebalancingSide"));
+                            }
+                            rebalancing_side__ = Some(map_.next_value::<OrderSide>()? as i32);
+                        }
+                        GeneratedField::TargetTime => {
+                            if target_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("targetTime"));
+                            }
+                            target_time__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -460,8 +499,11 @@ impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
                     name: name__.unwrap_or_default(),
                     basket_type: basket_type__.unwrap_or_default(),
                     items: items__.unwrap_or_default(),
-                    target_quantity: target_quantity__.unwrap_or_default(),
+                    base_quantity: base_quantity__.unwrap_or_default(),
                     etf_symbol: etf_symbol__.unwrap_or_default(),
+                    creation_unit: creation_unit__.unwrap_or_default(),
+                    rebalancing_side: rebalancing_side__.unwrap_or_default(),
+                    target_time: target_time__,
                 })
             }
         }
@@ -1608,6 +1650,9 @@ impl serde::Serialize for BasketItem {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.BasketItem", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -1625,6 +1670,9 @@ impl serde::Serialize for BasketItem {
         if true {
             struct_ser.serialize_field("multiple", &self.multiple)?;
         }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
         struct_ser.end()
     }
 }
@@ -1640,6 +1688,8 @@ impl<'de> serde::Deserialize<'de> for BasketItem {
             "price_source",
             "priceSource",
             "multiple",
+            "fund_code",
+            "fundCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1648,6 +1698,7 @@ impl<'de> serde::Deserialize<'de> for BasketItem {
             Quantity,
             PriceSource,
             Multiple,
+            FundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1674,6 +1725,7 @@ impl<'de> serde::Deserialize<'de> for BasketItem {
                             "quantity" => Ok(GeneratedField::Quantity),
                             "priceSource" | "price_source" => Ok(GeneratedField::PriceSource),
                             "multiple" => Ok(GeneratedField::Multiple),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1697,6 +1749,7 @@ impl<'de> serde::Deserialize<'de> for BasketItem {
                 let mut quantity__ = None;
                 let mut price_source__ = None;
                 let mut multiple__ = None;
+                let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -1727,6 +1780,12 @@ impl<'de> serde::Deserialize<'de> for BasketItem {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1737,6 +1796,7 @@ impl<'de> serde::Deserialize<'de> for BasketItem {
                     quantity: quantity__.unwrap_or_default(),
                     price_source: price_source__.unwrap_or_default(),
                     multiple: multiple__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
                 })
             }
         }
@@ -2113,8 +2173,9 @@ impl serde::Serialize for BasketType {
     {
         let variant = match self {
             Self::Unspecified => "BASKET_TYPE_UNSPECIFIED",
-            Self::StockFutures => "BASKET_TYPE_STOCK_FUTURES",
-            Self::EtfConstituents => "BASKET_TYPE_ETF_CONSTITUENTS",
+            Self::EtfConstituent => "BASKET_TYPE_ETF_CONSTITUENT",
+            Self::Rebalancing => "BASKET_TYPE_REBALANCING",
+            Self::Custom => "BASKET_TYPE_CUSTOM",
         };
         serializer.serialize_str(variant)
     }
@@ -2127,8 +2188,9 @@ impl<'de> serde::Deserialize<'de> for BasketType {
     {
         const FIELDS: &[&str] = &[
             "BASKET_TYPE_UNSPECIFIED",
-            "BASKET_TYPE_STOCK_FUTURES",
-            "BASKET_TYPE_ETF_CONSTITUENTS",
+            "BASKET_TYPE_ETF_CONSTITUENT",
+            "BASKET_TYPE_REBALANCING",
+            "BASKET_TYPE_CUSTOM",
         ];
 
         struct GeneratedVisitor;
@@ -2170,8 +2232,9 @@ impl<'de> serde::Deserialize<'de> for BasketType {
             {
                 match value {
                     "BASKET_TYPE_UNSPECIFIED" => Ok(BasketType::Unspecified),
-                    "BASKET_TYPE_STOCK_FUTURES" => Ok(BasketType::StockFutures),
-                    "BASKET_TYPE_ETF_CONSTITUENTS" => Ok(BasketType::EtfConstituents),
+                    "BASKET_TYPE_ETF_CONSTITUENT" => Ok(BasketType::EtfConstituent),
+                    "BASKET_TYPE_REBALANCING" => Ok(BasketType::Rebalancing),
+                    "BASKET_TYPE_CUSTOM" => Ok(BasketType::Custom),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -3955,6 +4018,80 @@ impl<'de> serde::Deserialize<'de> for OrderFilledEvent {
         deserializer.deserialize_struct("kdo.v1.arbitrage.OrderFilledEvent", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for OrderSide {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "ORDER_SIDE_UNSPECIFIED",
+            Self::Bid => "ORDER_SIDE_BID",
+            Self::Ask => "ORDER_SIDE_ASK",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrderSide {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ORDER_SIDE_UNSPECIFIED",
+            "ORDER_SIDE_BID",
+            "ORDER_SIDE_ASK",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrderSide;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ORDER_SIDE_UNSPECIFIED" => Ok(OrderSide::Unspecified),
+                    "ORDER_SIDE_BID" => Ok(OrderSide::Bid),
+                    "ORDER_SIDE_ASK" => Ok(OrderSide::Ask),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for OrderSubmittedEvent {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4125,6 +4262,8 @@ impl serde::Serialize for PriceSource {
             Self::Bid2 => "PRICE_SOURCE_BID2",
             Self::Ask2 => "PRICE_SOURCE_ASK2",
             Self::LastPrice => "PRICE_SOURCE_LAST_PRICE",
+            Self::Bid3 => "PRICE_SOURCE_BID3",
+            Self::Ask3 => "PRICE_SOURCE_ASK3",
         };
         serializer.serialize_str(variant)
     }
@@ -4143,6 +4282,8 @@ impl<'de> serde::Deserialize<'de> for PriceSource {
             "PRICE_SOURCE_BID2",
             "PRICE_SOURCE_ASK2",
             "PRICE_SOURCE_LAST_PRICE",
+            "PRICE_SOURCE_BID3",
+            "PRICE_SOURCE_ASK3",
         ];
 
         struct GeneratedVisitor;
@@ -4190,6 +4331,8 @@ impl<'de> serde::Deserialize<'de> for PriceSource {
                     "PRICE_SOURCE_BID2" => Ok(PriceSource::Bid2),
                     "PRICE_SOURCE_ASK2" => Ok(PriceSource::Ask2),
                     "PRICE_SOURCE_LAST_PRICE" => Ok(PriceSource::LastPrice),
+                    "PRICE_SOURCE_BID3" => Ok(PriceSource::Bid3),
+                    "PRICE_SOURCE_ASK3" => Ok(PriceSource::Ask3),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

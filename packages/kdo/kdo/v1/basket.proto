@@ -1,0 +1,290 @@
+syntax = "proto3";
+
+package kdo.v1.basket;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// BasketService - 바스켓 관리 서비스
+service BasketService {
+  // 단일 바스켓 조회
+  rpc GetBasket(GetBasketRequest) returns (Basket) {
+    option (google.api.http) = {
+      get: "/v1/{basket=baskets/*}"
+    };
+    option (google.api.method_signature) = "basket";
+  }
+
+  // 바스켓 목록 조회
+  rpc ListBaskets(ListBasketsRequest) returns (ListBasketsResponse) {
+    option (google.api.http) = {
+      get: "/v1/baskets"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 바스켓 생성
+  rpc CreateBasket(CreateBasketRequest) returns (Basket) {
+    option (google.api.http) = {
+      post: "/v1/baskets"
+      body: "basket"
+    };
+    option (google.api.method_signature) = "basket";
+  }
+
+  // 바스켓 수정
+  rpc UpdateBasket(UpdateBasketRequest) returns (Basket) {
+    option (google.api.http) = {
+      patch: "/v1/{basket.name=baskets/*}"
+      body: "basket"
+    };
+    option (google.api.method_signature) = "basket,update_mask";
+  }
+
+  // 바스켓 삭제
+  rpc DeleteBasket(DeleteBasketRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{basket=baskets/*}"
+    };
+    option (google.api.method_signature) = "basket";
+  }
+
+  // 바스켓 가치 조회 (현재 시세 기준)
+  rpc GetBasketValue(GetBasketValueRequest) returns (BasketValue) {
+    option (google.api.http) = {
+      get: "/v1/{basket=baskets/*}/value"
+    };
+    option (google.api.method_signature) = "basket";
+  }
+}
+
+// ============================================================================
+// Basket Entity
+// ============================================================================
+
+// 바스켓 - 여러 상품을 묶은 덩어리
+message Basket {
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/Basket"
+    pattern: "baskets/{basket}"
+  };
+
+  // 리소스 이름 (baskets/{id})
+  string name = 1;
+
+  // 바스켓 ID
+  int32 id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 바스켓 이름
+  string display_name = 3;
+
+  // 바스켓 타입
+  BasketType basket_type = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 구성 종목 목록
+  repeated BasketItem items = 5;
+
+  // 기준 수량
+  int64 base_quantity = 6;
+
+  // ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)
+  string etf_symbol = 7;
+
+  // Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)
+  int64 creation_unit = 8;
+
+  // 리밸런싱 방향 (basket_type이 REBALANCING인 경우)
+  OrderSide rebalancing_side = 9;
+
+  // 리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)
+  google.protobuf.Timestamp target_time = 10;
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// 바스켓 타입
+enum BasketType {
+  BASKET_TYPE_UNSPECIFIED = 0;
+  // ETF 구성종목 바스켓 (PDF 기반 자동 계산)
+  BASKET_TYPE_ETF_CONSTITUENT = 1;
+  // 리밸런싱 바스켓 (특정 시점에 잔고 청산)
+  BASKET_TYPE_REBALANCING = 2;
+  // 커스텀 바스켓 (수동 구성)
+  BASKET_TYPE_CUSTOM = 3;
+}
+
+// 주문 방향 (리밸런싱 바스켓용)
+enum OrderSide {
+  ORDER_SIDE_UNSPECIFIED = 0;
+  // 매수
+  ORDER_SIDE_BID = 1;
+  // 매도
+  ORDER_SIDE_ASK = 2;
+}
+
+// 바스켓 구성 항목
+message BasketItem {
+  // 종목 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 수량 (음수 가능: 매도 포지션)
+  int64 quantity = 2;
+
+  // 가격 소스 (바스켓 가치 계산용)
+  PriceSource price_source = 3;
+
+  // 계약 승수 (선물용, 주식은 1.0)
+  double multiple = 4;
+
+  // 주문에 사용할 펀드 코드
+  string fund_code = 5 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 가격 소스
+enum PriceSource {
+  PRICE_SOURCE_UNSPECIFIED = 0;
+  // (bid1 + ask1) / 2
+  PRICE_SOURCE_MID_PRICE = 1;
+  // 최우선 매수호가
+  PRICE_SOURCE_BID1 = 2;
+  // 최우선 매도호가
+  PRICE_SOURCE_ASK1 = 3;
+  // 2차 매수호가
+  PRICE_SOURCE_BID2 = 4;
+  // 2차 매도호가
+  PRICE_SOURCE_ASK2 = 5;
+  // 최근 체결가
+  PRICE_SOURCE_LAST_PRICE = 6;
+  // 3차 매수호가
+  PRICE_SOURCE_BID3 = 7;
+  // 3차 매도호가
+  PRICE_SOURCE_ASK3 = 8;
+}
+
+// ============================================================================
+// Basket Value
+// ============================================================================
+
+// 바스켓 가치 (현재 시세 기준)
+message BasketValue {
+  // 리소스 이름 (baskets/{id})
+  string name = 1;
+
+  // 바스켓 ID
+  int32 id = 2;
+
+  // 총 가치 (원)
+  int64 total_value = 3;
+
+  // 구성종목별 가치
+  repeated BasketItemValue item_values = 4;
+
+  // 계산 시간
+  google.protobuf.Timestamp calculated_at = 5;
+}
+
+// 구성종목 가치
+message BasketItemValue {
+  // 종목 심볼
+  string symbol = 1;
+
+  // 수량
+  int64 quantity = 2;
+
+  // 사용된 가격
+  int64 price = 3;
+
+  // 가격 소스
+  PriceSource price_source = 4;
+
+  // 계약 승수
+  double multiple = 5;
+
+  // 종목 가치 (price * quantity * multiple)
+  int64 value = 6;
+}
+
+// ============================================================================
+// Request/Response Messages
+// ============================================================================
+
+message GetBasketRequest {
+  // 리소스 이름 (baskets/{id})
+  string basket = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Basket"
+    }
+  ];
+}
+
+message ListBasketsRequest {
+  // 페이지 크기 (optional)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * basket_type - 바스켓 타입
+  // * etf_symbol - ETF 심볼
+  //
+  // Examples:
+  // * filter=basket_type=BASKET_TYPE_ETF_CONSTITUENT
+  // * filter=etf_symbol="069500"
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListBasketsResponse {
+  // 바스켓 목록
+  repeated Basket baskets = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+message CreateBasketRequest {
+  // 생성할 바스켓
+  Basket basket = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message UpdateBasketRequest {
+  // 수정할 바스켓
+  Basket basket = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 수정할 필드 마스크
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteBasketRequest {
+  // 리소스 이름 (baskets/{id})
+  string basket = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Basket"
+    }
+  ];
+}
+
+message GetBasketValueRequest {
+  // 리소스 이름 (baskets/{id})
+  string basket = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Basket"
+    }
+  ];
+}
