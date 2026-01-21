@@ -37,6 +37,9 @@ impl serde::Serialize for Arbitrage {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.Arbitrage", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -47,17 +50,14 @@ impl serde::Serialize for Arbitrage {
         if true {
             struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
         }
-        if let Some(v) = self.basket_a.as_ref() {
-            struct_ser.serialize_field("basket_a", v)?;
+        if true {
+            struct_ser.serialize_field("basket_a_id", &self.basket_a_id)?;
         }
-        if let Some(v) = self.basket_b.as_ref() {
-            struct_ser.serialize_field("basket_b", v)?;
+        if true {
+            struct_ser.serialize_field("basket_b_id", &self.basket_b_id)?;
         }
         if let Some(v) = self.trigger_config.as_ref() {
             struct_ser.serialize_field("trigger_config", v)?;
-        }
-        if let Some(v) = self.execution_config.as_ref() {
-            struct_ser.serialize_field("execution_config", v)?;
         }
         if true {
             struct_ser.serialize_field("is_active", &self.is_active)?;
@@ -67,6 +67,12 @@ impl serde::Serialize for Arbitrage {
         }
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
+        }
+        if let Some(v) = self.basket_a.as_ref() {
+            struct_ser.serialize_field("basket_a", v)?;
+        }
+        if let Some(v) = self.basket_b.as_ref() {
+            struct_ser.serialize_field("basket_b", v)?;
         }
         struct_ser.end()
     }
@@ -82,20 +88,22 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
             "id",
             "portfolio_id",
             "portfolioId",
-            "basket_a",
-            "basketA",
-            "basket_b",
-            "basketB",
+            "basket_a_id",
+            "basketAId",
+            "basket_b_id",
+            "basketBId",
             "trigger_config",
             "triggerConfig",
-            "execution_config",
-            "executionConfig",
             "is_active",
             "isActive",
             "create_time",
             "createTime",
             "update_time",
             "updateTime",
+            "basket_a",
+            "basketA",
+            "basket_b",
+            "basketB",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -103,13 +111,14 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
             Name,
             Id,
             PortfolioId,
-            BasketA,
-            BasketB,
+            BasketAId,
+            BasketBId,
             TriggerConfig,
-            ExecutionConfig,
             IsActive,
             CreateTime,
             UpdateTime,
+            BasketA,
+            BasketB,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -135,13 +144,14 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                             "name" => Ok(GeneratedField::Name),
                             "id" => Ok(GeneratedField::Id),
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
-                            "basketA" | "basket_a" => Ok(GeneratedField::BasketA),
-                            "basketB" | "basket_b" => Ok(GeneratedField::BasketB),
+                            "basketAId" | "basket_a_id" => Ok(GeneratedField::BasketAId),
+                            "basketBId" | "basket_b_id" => Ok(GeneratedField::BasketBId),
                             "triggerConfig" | "trigger_config" => Ok(GeneratedField::TriggerConfig),
-                            "executionConfig" | "execution_config" => Ok(GeneratedField::ExecutionConfig),
                             "isActive" | "is_active" => Ok(GeneratedField::IsActive),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
+                            "basketA" | "basket_a" => Ok(GeneratedField::BasketA),
+                            "basketB" | "basket_b" => Ok(GeneratedField::BasketB),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -164,13 +174,14 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                 let mut name__ = None;
                 let mut id__ = None;
                 let mut portfolio_id__ = None;
-                let mut basket_a__ = None;
-                let mut basket_b__ = None;
+                let mut basket_a_id__ = None;
+                let mut basket_b_id__ = None;
                 let mut trigger_config__ = None;
-                let mut execution_config__ = None;
                 let mut is_active__ = None;
                 let mut create_time__ = None;
                 let mut update_time__ = None;
+                let mut basket_a__ = None;
+                let mut basket_b__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -195,29 +206,27 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::BasketA => {
-                            if basket_a__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("basketA"));
+                        GeneratedField::BasketAId => {
+                            if basket_a_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basketAId"));
                             }
-                            basket_a__ = map_.next_value()?;
+                            basket_a_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
-                        GeneratedField::BasketB => {
-                            if basket_b__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("basketB"));
+                        GeneratedField::BasketBId => {
+                            if basket_b_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basketBId"));
                             }
-                            basket_b__ = map_.next_value()?;
+                            basket_b_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
                         GeneratedField::TriggerConfig => {
                             if trigger_config__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("triggerConfig"));
                             }
                             trigger_config__ = map_.next_value()?;
-                        }
-                        GeneratedField::ExecutionConfig => {
-                            if execution_config__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("executionConfig"));
-                            }
-                            execution_config__ = map_.next_value()?;
                         }
                         GeneratedField::IsActive => {
                             if is_active__.is_some() {
@@ -237,6 +246,18 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                             }
                             update_time__ = map_.next_value()?;
                         }
+                        GeneratedField::BasketA => {
+                            if basket_a__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basketA"));
+                            }
+                            basket_a__ = map_.next_value()?;
+                        }
+                        GeneratedField::BasketB => {
+                            if basket_b__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basketB"));
+                            }
+                            basket_b__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -246,268 +267,18 @@ impl<'de> serde::Deserialize<'de> for Arbitrage {
                     name: name__.unwrap_or_default(),
                     id: id__.unwrap_or_default(),
                     portfolio_id: portfolio_id__.unwrap_or_default(),
-                    basket_a: basket_a__,
-                    basket_b: basket_b__,
+                    basket_a_id: basket_a_id__.unwrap_or_default(),
+                    basket_b_id: basket_b_id__.unwrap_or_default(),
                     trigger_config: trigger_config__,
-                    execution_config: execution_config__,
                     is_active: is_active__.unwrap_or_default(),
                     create_time: create_time__,
                     update_time: update_time__,
+                    basket_a: basket_a__,
+                    basket_b: basket_b__,
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.arbitrage.Arbitrage", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ArbitrageBasket {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.ArbitrageBasket", len)?;
-        if true {
-            struct_ser.serialize_field("id", &self.id)?;
-        }
-        if true {
-            struct_ser.serialize_field("name", &self.name)?;
-        }
-        if true {
-            let v = BasketType::try_from(self.basket_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.basket_type)))?;
-            struct_ser.serialize_field("basket_type", &v)?;
-        }
-        if true {
-            struct_ser.serialize_field("items", &self.items)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("base_quantity", ToString::to_string(&self.base_quantity).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("creation_unit", ToString::to_string(&self.creation_unit).as_str())?;
-        }
-        if true {
-            let v = OrderSide::try_from(self.rebalancing_side)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.rebalancing_side)))?;
-            struct_ser.serialize_field("rebalancing_side", &v)?;
-        }
-        if let Some(v) = self.target_time.as_ref() {
-            struct_ser.serialize_field("target_time", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ArbitrageBasket {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "id",
-            "name",
-            "basket_type",
-            "basketType",
-            "items",
-            "base_quantity",
-            "baseQuantity",
-            "etf_symbol",
-            "etfSymbol",
-            "creation_unit",
-            "creationUnit",
-            "rebalancing_side",
-            "rebalancingSide",
-            "target_time",
-            "targetTime",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Id,
-            Name,
-            BasketType,
-            Items,
-            BaseQuantity,
-            EtfSymbol,
-            CreationUnit,
-            RebalancingSide,
-            TargetTime,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "id" => Ok(GeneratedField::Id),
-                            "name" => Ok(GeneratedField::Name),
-                            "basketType" | "basket_type" => Ok(GeneratedField::BasketType),
-                            "items" => Ok(GeneratedField::Items),
-                            "baseQuantity" | "base_quantity" => Ok(GeneratedField::BaseQuantity),
-                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
-                            "creationUnit" | "creation_unit" => Ok(GeneratedField::CreationUnit),
-                            "rebalancingSide" | "rebalancing_side" => Ok(GeneratedField::RebalancingSide),
-                            "targetTime" | "target_time" => Ok(GeneratedField::TargetTime),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ArbitrageBasket;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.arbitrage.ArbitrageBasket")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ArbitrageBasket, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut id__ = None;
-                let mut name__ = None;
-                let mut basket_type__ = None;
-                let mut items__ = None;
-                let mut base_quantity__ = None;
-                let mut etf_symbol__ = None;
-                let mut creation_unit__ = None;
-                let mut rebalancing_side__ = None;
-                let mut target_time__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Id => {
-                            if id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("id"));
-                            }
-                            id__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Name => {
-                            if name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("name"));
-                            }
-                            name__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::BasketType => {
-                            if basket_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("basketType"));
-                            }
-                            basket_type__ = Some(map_.next_value::<BasketType>()? as i32);
-                        }
-                        GeneratedField::Items => {
-                            if items__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("items"));
-                            }
-                            items__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::BaseQuantity => {
-                            if base_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("baseQuantity"));
-                            }
-                            base_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::EtfSymbol => {
-                            if etf_symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
-                            }
-                            etf_symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::CreationUnit => {
-                            if creation_unit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("creationUnit"));
-                            }
-                            creation_unit__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::RebalancingSide => {
-                            if rebalancing_side__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rebalancingSide"));
-                            }
-                            rebalancing_side__ = Some(map_.next_value::<OrderSide>()? as i32);
-                        }
-                        GeneratedField::TargetTime => {
-                            if target_time__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("targetTime"));
-                            }
-                            target_time__ = map_.next_value()?;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ArbitrageBasket {
-                    id: id__.unwrap_or_default(),
-                    name: name__.unwrap_or_default(),
-                    basket_type: basket_type__.unwrap_or_default(),
-                    items: items__.unwrap_or_default(),
-                    base_quantity: base_quantity__.unwrap_or_default(),
-                    etf_symbol: etf_symbol__.unwrap_or_default(),
-                    creation_unit: creation_unit__.unwrap_or_default(),
-                    rebalancing_side: rebalancing_side__.unwrap_or_default(),
-                    target_time: target_time__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.arbitrage.ArbitrageBasket", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ArbitrageEvent {
@@ -769,83 +540,6 @@ impl<'de> serde::Deserialize<'de> for ArbitrageEvent {
             }
         }
         deserializer.deserialize_struct("kdo.v1.arbitrage.ArbitrageEvent", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ArbitrageOrderType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "ARBITRAGE_ORDER_TYPE_UNSPECIFIED",
-            Self::Market => "ARBITRAGE_ORDER_TYPE_MARKET",
-            Self::Limit => "ARBITRAGE_ORDER_TYPE_LIMIT",
-            Self::Aggressive => "ARBITRAGE_ORDER_TYPE_AGGRESSIVE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for ArbitrageOrderType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "ARBITRAGE_ORDER_TYPE_UNSPECIFIED",
-            "ARBITRAGE_ORDER_TYPE_MARKET",
-            "ARBITRAGE_ORDER_TYPE_LIMIT",
-            "ARBITRAGE_ORDER_TYPE_AGGRESSIVE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ArbitrageOrderType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "ARBITRAGE_ORDER_TYPE_UNSPECIFIED" => Ok(ArbitrageOrderType::Unspecified),
-                    "ARBITRAGE_ORDER_TYPE_MARKET" => Ok(ArbitrageOrderType::Market),
-                    "ARBITRAGE_ORDER_TYPE_LIMIT" => Ok(ArbitrageOrderType::Limit),
-                    "ARBITRAGE_ORDER_TYPE_AGGRESSIVE" => Ok(ArbitrageOrderType::Aggressive),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for ArbitrageSide {
@@ -1630,179 +1324,6 @@ impl<'de> serde::Deserialize<'de> for ArbitrageStatusUpdate {
         deserializer.deserialize_struct("kdo.v1.arbitrage.ArbitrageStatusUpdate", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for BasketItem {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.BasketItem", len)?;
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
-        }
-        if true {
-            let v = PriceSource::try_from(self.price_source)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.price_source)))?;
-            struct_ser.serialize_field("price_source", &v)?;
-        }
-        if true {
-            struct_ser.serialize_field("multiple", &self.multiple)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for BasketItem {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "symbol",
-            "quantity",
-            "price_source",
-            "priceSource",
-            "multiple",
-            "fund_code",
-            "fundCode",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Symbol,
-            Quantity,
-            PriceSource,
-            Multiple,
-            FundCode,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            "quantity" => Ok(GeneratedField::Quantity),
-                            "priceSource" | "price_source" => Ok(GeneratedField::PriceSource),
-                            "multiple" => Ok(GeneratedField::Multiple),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = BasketItem;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.arbitrage.BasketItem")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<BasketItem, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut symbol__ = None;
-                let mut quantity__ = None;
-                let mut price_source__ = None;
-                let mut multiple__ = None;
-                let mut fund_code__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::PriceSource => {
-                            if price_source__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("priceSource"));
-                            }
-                            price_source__ = Some(map_.next_value::<PriceSource>()? as i32);
-                        }
-                        GeneratedField::Multiple => {
-                            if multiple__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("multiple"));
-                            }
-                            multiple__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(BasketItem {
-                    symbol: symbol__.unwrap_or_default(),
-                    quantity: quantity__.unwrap_or_default(),
-                    price_source: price_source__.unwrap_or_default(),
-                    multiple: multiple__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.arbitrage.BasketItem", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for BasketItemPrice {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2158,83 +1679,6 @@ impl<'de> serde::Deserialize<'de> for BasketSide {
                     "BASKET_SIDE_UNSPECIFIED" => Ok(BasketSide::Unspecified),
                     "BASKET_SIDE_A" => Ok(BasketSide::A),
                     "BASKET_SIDE_B" => Ok(BasketSide::B),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for BasketType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "BASKET_TYPE_UNSPECIFIED",
-            Self::EtfConstituent => "BASKET_TYPE_ETF_CONSTITUENT",
-            Self::Rebalancing => "BASKET_TYPE_REBALANCING",
-            Self::Custom => "BASKET_TYPE_CUSTOM",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for BasketType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "BASKET_TYPE_UNSPECIFIED",
-            "BASKET_TYPE_ETF_CONSTITUENT",
-            "BASKET_TYPE_REBALANCING",
-            "BASKET_TYPE_CUSTOM",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = BasketType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "BASKET_TYPE_UNSPECIFIED" => Ok(BasketType::Unspecified),
-                    "BASKET_TYPE_ETF_CONSTITUENT" => Ok(BasketType::EtfConstituent),
-                    "BASKET_TYPE_REBALANCING" => Ok(BasketType::Rebalancing),
-                    "BASKET_TYPE_CUSTOM" => Ok(BasketType::Custom),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -2623,185 +2067,6 @@ impl<'de> serde::Deserialize<'de> for ExecutionCompletedEvent {
             }
         }
         deserializer.deserialize_struct("kdo.v1.arbitrage.ExecutionCompletedEvent", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ExecutionConfig {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.ExecutionConfig", len)?;
-        if true {
-            struct_ser.serialize_field("rounds", &self.rounds)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("round_delay_ms", ToString::to_string(&self.round_delay_ms).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("fill_threshold_pct", &self.fill_threshold_pct)?;
-        }
-        if true {
-            let v = ArbitrageOrderType::try_from(self.order_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.order_type)))?;
-            struct_ser.serialize_field("order_type", &v)?;
-        }
-        if true {
-            struct_ser.serialize_field("pricing_configs", &self.pricing_configs)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ExecutionConfig {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "rounds",
-            "round_delay_ms",
-            "roundDelayMs",
-            "fill_threshold_pct",
-            "fillThresholdPct",
-            "order_type",
-            "orderType",
-            "pricing_configs",
-            "pricingConfigs",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Rounds,
-            RoundDelayMs,
-            FillThresholdPct,
-            OrderType,
-            PricingConfigs,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "rounds" => Ok(GeneratedField::Rounds),
-                            "roundDelayMs" | "round_delay_ms" => Ok(GeneratedField::RoundDelayMs),
-                            "fillThresholdPct" | "fill_threshold_pct" => Ok(GeneratedField::FillThresholdPct),
-                            "orderType" | "order_type" => Ok(GeneratedField::OrderType),
-                            "pricingConfigs" | "pricing_configs" => Ok(GeneratedField::PricingConfigs),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ExecutionConfig;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.arbitrage.ExecutionConfig")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ExecutionConfig, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut rounds__ = None;
-                let mut round_delay_ms__ = None;
-                let mut fill_threshold_pct__ = None;
-                let mut order_type__ = None;
-                let mut pricing_configs__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Rounds => {
-                            if rounds__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rounds"));
-                            }
-                            rounds__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::RoundDelayMs => {
-                            if round_delay_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("roundDelayMs"));
-                            }
-                            round_delay_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::FillThresholdPct => {
-                            if fill_threshold_pct__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fillThresholdPct"));
-                            }
-                            fill_threshold_pct__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::OrderType => {
-                            if order_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orderType"));
-                            }
-                            order_type__ = Some(map_.next_value::<ArbitrageOrderType>()? as i32);
-                        }
-                        GeneratedField::PricingConfigs => {
-                            if pricing_configs__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pricingConfigs"));
-                            }
-                            pricing_configs__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, _>>()?
-                            );
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ExecutionConfig {
-                    rounds: rounds__.unwrap_or_default(),
-                    round_delay_ms: round_delay_ms__.unwrap_or_default(),
-                    fill_threshold_pct: fill_threshold_pct__.unwrap_or_default(),
-                    order_type: order_type__.unwrap_or_default(),
-                    pricing_configs: pricing_configs__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.arbitrage.ExecutionConfig", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ExecutionEstimate {
@@ -4018,80 +3283,6 @@ impl<'de> serde::Deserialize<'de> for OrderFilledEvent {
         deserializer.deserialize_struct("kdo.v1.arbitrage.OrderFilledEvent", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for OrderSide {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "ORDER_SIDE_UNSPECIFIED",
-            Self::Bid => "ORDER_SIDE_BID",
-            Self::Ask => "ORDER_SIDE_ASK",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for OrderSide {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "ORDER_SIDE_UNSPECIFIED",
-            "ORDER_SIDE_BID",
-            "ORDER_SIDE_ASK",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = OrderSide;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "ORDER_SIDE_UNSPECIFIED" => Ok(OrderSide::Unspecified),
-                    "ORDER_SIDE_BID" => Ok(OrderSide::Bid),
-                    "ORDER_SIDE_ASK" => Ok(OrderSide::Ask),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
 impl serde::Serialize for OrderSubmittedEvent {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4246,98 +3437,6 @@ impl<'de> serde::Deserialize<'de> for OrderSubmittedEvent {
             }
         }
         deserializer.deserialize_struct("kdo.v1.arbitrage.OrderSubmittedEvent", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PriceSource {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "PRICE_SOURCE_UNSPECIFIED",
-            Self::MidPrice => "PRICE_SOURCE_MID_PRICE",
-            Self::Bid1 => "PRICE_SOURCE_BID1",
-            Self::Ask1 => "PRICE_SOURCE_ASK1",
-            Self::Bid2 => "PRICE_SOURCE_BID2",
-            Self::Ask2 => "PRICE_SOURCE_ASK2",
-            Self::LastPrice => "PRICE_SOURCE_LAST_PRICE",
-            Self::Bid3 => "PRICE_SOURCE_BID3",
-            Self::Ask3 => "PRICE_SOURCE_ASK3",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for PriceSource {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "PRICE_SOURCE_UNSPECIFIED",
-            "PRICE_SOURCE_MID_PRICE",
-            "PRICE_SOURCE_BID1",
-            "PRICE_SOURCE_ASK1",
-            "PRICE_SOURCE_BID2",
-            "PRICE_SOURCE_ASK2",
-            "PRICE_SOURCE_LAST_PRICE",
-            "PRICE_SOURCE_BID3",
-            "PRICE_SOURCE_ASK3",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PriceSource;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "PRICE_SOURCE_UNSPECIFIED" => Ok(PriceSource::Unspecified),
-                    "PRICE_SOURCE_MID_PRICE" => Ok(PriceSource::MidPrice),
-                    "PRICE_SOURCE_BID1" => Ok(PriceSource::Bid1),
-                    "PRICE_SOURCE_ASK1" => Ok(PriceSource::Ask1),
-                    "PRICE_SOURCE_BID2" => Ok(PriceSource::Bid2),
-                    "PRICE_SOURCE_ASK2" => Ok(PriceSource::Ask2),
-                    "PRICE_SOURCE_LAST_PRICE" => Ok(PriceSource::LastPrice),
-                    "PRICE_SOURCE_BID3" => Ok(PriceSource::Bid3),
-                    "PRICE_SOURCE_ASK3" => Ok(PriceSource::Ask3),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for PriceUpdateEvent {
@@ -5647,144 +4746,6 @@ impl<'de> serde::Deserialize<'de> for StreamArbitrageStatusRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.arbitrage.StreamArbitrageStatusRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for SymbolPricingConfig {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.arbitrage.SymbolPricingConfig", len)?;
-        if true {
-            let v = PriceSource::try_from(self.buy_price_source)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.buy_price_source)))?;
-            struct_ser.serialize_field("buy_price_source", &v)?;
-        }
-        if true {
-            let v = PriceSource::try_from(self.sell_price_source)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.sell_price_source)))?;
-            struct_ser.serialize_field("sell_price_source", &v)?;
-        }
-        if true {
-            struct_ser.serialize_field("price_offset_ticks", &self.price_offset_ticks)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for SymbolPricingConfig {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "buy_price_source",
-            "buyPriceSource",
-            "sell_price_source",
-            "sellPriceSource",
-            "price_offset_ticks",
-            "priceOffsetTicks",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            BuyPriceSource,
-            SellPriceSource,
-            PriceOffsetTicks,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "buyPriceSource" | "buy_price_source" => Ok(GeneratedField::BuyPriceSource),
-                            "sellPriceSource" | "sell_price_source" => Ok(GeneratedField::SellPriceSource),
-                            "priceOffsetTicks" | "price_offset_ticks" => Ok(GeneratedField::PriceOffsetTicks),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = SymbolPricingConfig;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.arbitrage.SymbolPricingConfig")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SymbolPricingConfig, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut buy_price_source__ = None;
-                let mut sell_price_source__ = None;
-                let mut price_offset_ticks__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::BuyPriceSource => {
-                            if buy_price_source__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("buyPriceSource"));
-                            }
-                            buy_price_source__ = Some(map_.next_value::<PriceSource>()? as i32);
-                        }
-                        GeneratedField::SellPriceSource => {
-                            if sell_price_source__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sellPriceSource"));
-                            }
-                            sell_price_source__ = Some(map_.next_value::<PriceSource>()? as i32);
-                        }
-                        GeneratedField::PriceOffsetTicks => {
-                            if price_offset_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("priceOffsetTicks"));
-                            }
-                            price_offset_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(SymbolPricingConfig {
-                    buy_price_source: buy_price_source__.unwrap_or_default(),
-                    sell_price_source: sell_price_source__.unwrap_or_default(),
-                    price_offset_ticks: price_offset_ticks__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.arbitrage.SymbolPricingConfig", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for TriggerCondition {

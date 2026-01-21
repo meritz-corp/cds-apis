@@ -95,5 +95,28 @@ class PriceSource extends $pb.ProtobufEnum {
   const PriceSource._(super.value, super.name);
 }
 
+/// 주문 유형
+class OrderType extends $pb.ProtobufEnum {
+  static const OrderType ORDER_TYPE_UNSPECIFIED = OrderType._(0, _omitEnumNames ? '' : 'ORDER_TYPE_UNSPECIFIED');
+  /// 시장가
+  static const OrderType ORDER_TYPE_MARKET = OrderType._(1, _omitEnumNames ? '' : 'ORDER_TYPE_MARKET');
+  /// 지정가 (pricing_config 기반)
+  static const OrderType ORDER_TYPE_LIMIT = OrderType._(2, _omitEnumNames ? '' : 'ORDER_TYPE_LIMIT');
+  /// 공격적 지정가 (상대호가)
+  static const OrderType ORDER_TYPE_AGGRESSIVE = OrderType._(3, _omitEnumNames ? '' : 'ORDER_TYPE_AGGRESSIVE');
+
+  static const $core.List<OrderType> values = <OrderType> [
+    ORDER_TYPE_UNSPECIFIED,
+    ORDER_TYPE_MARKET,
+    ORDER_TYPE_LIMIT,
+    ORDER_TYPE_AGGRESSIVE,
+  ];
+
+  static final $core.List<OrderType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static OrderType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderType._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

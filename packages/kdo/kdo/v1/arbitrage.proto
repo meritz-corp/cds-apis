@@ -9,6 +9,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/basket.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -122,125 +123,53 @@ message Arbitrage {
   string name = 1;
 
   // 차익거래 ID
-  int32 id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  int32 id = 2 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 
   // 소속 포트폴리오 ID
   int32 portfolio_id = 3;
 
-  // Reserved: fund_code was moved to BasketItem level
-  reserved 4;
-  reserved "fund_code";
+  // 바스켓 A ID (Basket 도메인 참조)
+  int32 basket_a_id = 5 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 
-  // 바스켓 A
-  ArbitrageBasket basket_a = 5 [(google.api.field_behavior) = REQUIRED];
-
-  // 바스켓 B
-  ArbitrageBasket basket_b = 6 [(google.api.field_behavior) = REQUIRED];
+  // 바스켓 B ID (Basket 도메인 참조)
+  int32 basket_b_id = 6 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 
   // 트리거 설정
   TriggerConfig trigger_config = 7;
-
-  // 실행 설정
-  ExecutionConfig execution_config = 8;
 
   // 활성화 여부
   bool is_active = 9;
 
   // 생성 시간
-  google.protobuf.Timestamp create_time = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp create_time = 10 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 
   // 수정 시간
-  google.protobuf.Timestamp update_time = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp update_time = 11 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 바스켓 A 상세 (OUTPUT_ONLY, 조회 시 포함)
+  kdo.v1.basket.Basket basket_a = 12 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 바스켓 B 상세 (OUTPUT_ONLY, 조회 시 포함)
+  kdo.v1.basket.Basket basket_b = 13 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
-// 바스켓 설정
-message ArbitrageBasket {
-  // 바스켓 ID
-  int32 id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
-
-  // 바스켓 이름
-  string name = 2;
-
-  // 바스켓 타입
-  BasketType basket_type = 3 [(google.api.field_behavior) = REQUIRED];
-
-  // 구성 종목 목록
-  repeated BasketItem items = 4;
-
-  // 기준 수량
-  int64 base_quantity = 5;
-
-  // ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)
-  string etf_symbol = 6;
-
-  // Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)
-  int64 creation_unit = 7;
-
-  // 리밸런싱 방향 (basket_type이 REBALANCING인 경우)
-  OrderSide rebalancing_side = 8;
-
-  // 리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)
-  google.protobuf.Timestamp target_time = 9;
-}
-
-// 바스켓 타입
-enum BasketType {
-  BASKET_TYPE_UNSPECIFIED = 0;
-  // ETF 구성종목 바스켓 (PDF 기반 자동 계산)
-  BASKET_TYPE_ETF_CONSTITUENT = 1;
-  // 리밸런싱 바스켓 (특정 시점에 잔고 청산)
-  BASKET_TYPE_REBALANCING = 2;
-  // 커스텀 바스켓 (수동 구성)
-  BASKET_TYPE_CUSTOM = 3;
-}
-
-// 주문 방향 (리밸런싱 바스켓용)
-enum OrderSide {
-  ORDER_SIDE_UNSPECIFIED = 0;
-  // 매수
-  ORDER_SIDE_BID = 1;
-  // 매도
-  ORDER_SIDE_ASK = 2;
-}
-
-// 바스켓 구성 항목
-message BasketItem {
-  // 종목 심볼
-  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
-
-  // 수량
-  int64 quantity = 2;
-
-  // 가격 소스
-  PriceSource price_source = 3;
-
-  // 계약 승수 (선물용, 주식은 1.0)
-  double multiple = 4;
-
-  // 주문에 사용할 펀드 코드
-  string fund_code = 5 [(google.api.field_behavior) = REQUIRED];
-}
-
-// 가격 소스
-enum PriceSource {
-  PRICE_SOURCE_UNSPECIFIED = 0;
-  // (bid1 + ask1) / 2
-  PRICE_SOURCE_MID_PRICE = 1;
-  // 최우선 매수호가
-  PRICE_SOURCE_BID1 = 2;
-  // 최우선 매도호가
-  PRICE_SOURCE_ASK1 = 3;
-  // 2차 매수호가
-  PRICE_SOURCE_BID2 = 4;
-  // 2차 매도호가
-  PRICE_SOURCE_ASK2 = 5;
-  // 최근 체결가
-  PRICE_SOURCE_LAST_PRICE = 6;
-  // 3차 매수호가
-  PRICE_SOURCE_BID3 = 7;
-  // 3차 매도호가
-  PRICE_SOURCE_ASK3 = 8;
-}
+// ============================================================================
+// Trigger Configuration
+// ============================================================================
 
 // 트리거 설정
 message TriggerConfig {
@@ -271,47 +200,6 @@ message SpreadAmountCondition {
 message SpreadBpsCondition {
   // 스프레드 임계값 (bps, 1bp = 0.01%)
   double threshold_bps = 1;
-}
-
-// 실행 설정
-message ExecutionConfig {
-  // 분할 주문 횟수
-  uint32 rounds = 1;
-
-  // 라운드 간 딜레이 (ms)
-  uint64 round_delay_ms = 2;
-
-  // 다음 라운드 진행을 위한 체결률 임계값 (0.0~1.0)
-  double fill_threshold_pct = 3;
-
-  // 주문 유형
-  ArbitrageOrderType order_type = 4;
-
-  // 심볼별 호가 설정
-  map<string, SymbolPricingConfig> pricing_configs = 5;
-}
-
-// 주문 유형
-enum ArbitrageOrderType {
-  ARBITRAGE_ORDER_TYPE_UNSPECIFIED = 0;
-  // 시장가
-  ARBITRAGE_ORDER_TYPE_MARKET = 1;
-  // 지정가
-  ARBITRAGE_ORDER_TYPE_LIMIT = 2;
-  // 공격적 지정가 (상대호가)
-  ARBITRAGE_ORDER_TYPE_AGGRESSIVE = 3;
-}
-
-// 심볼별 호가 설정
-message SymbolPricingConfig {
-  // 매수 시 사용할 가격
-  PriceSource buy_price_source = 1;
-
-  // 매도 시 사용할 가격
-  PriceSource sell_price_source = 2;
-
-  // 가격 조정 (틱 단위, +: 공격적, -: 보수적)
-  int32 price_offset_ticks = 3;
 }
 
 // ============================================================================
@@ -608,10 +496,26 @@ message ListArbitragesRequest {
   // Available Fields:
   // * portfolio_id - 포트폴리오 ID
   // * is_active - 활성화 여부
+  // * basket_a_id - 바스켓 A ID
+  // * basket_b_id - 바스켓 B ID
+  // * basket_a.basket_type - 바스켓 A 타입
+  // * basket_b.basket_type - 바스켓 B 타입
+  // * basket_a.etf_constituent.etf_symbol - 바스켓 A의 ETF 심볼
+  // * basket_b.etf_constituent.etf_symbol - 바스켓 B의 ETF 심볼
+  //
+  // Operators:
+  // * = : 일치
+  // * != : 불일치
   //
   // Examples:
-  // * filter=portfolio_id=1
-  // * filter=is_active=true
+  // * portfolio_id=1
+  // * is_active=true
+  // * is_active=false
+  // * basket_a_id=10
+  // * portfolio_id=1 AND is_active=true
+  // * basket_a.basket_type=BASKET_TYPE_ETF_CONSTITUENT
+  // * basket_a.etf_constituent.etf_symbol="069500"
+  // * basket_a.basket_type=BASKET_TYPE_ETF_CONSTITUENT AND basket_b.basket_type=BASKET_TYPE_REBALANCING
   string filter = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -625,12 +529,16 @@ message ListArbitragesResponse {
 
 message CreateArbitrageRequest {
   // 생성할 차익거래
-  Arbitrage arbitrage = 1 [(google.api.field_behavior) = REQUIRED];
+  Arbitrage arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 }
 
 message UpdateArbitrageRequest {
   // 수정할 차익거래
-  Arbitrage arbitrage = 1 [(google.api.field_behavior) = REQUIRED];
+  Arbitrage arbitrage = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 
   // 수정할 필드 마스크
   google.protobuf.FieldMask update_mask = 2;

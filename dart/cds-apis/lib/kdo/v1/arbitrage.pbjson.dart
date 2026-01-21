@@ -14,79 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use basketTypeDescriptor instead')
-const BasketType$json = {
-  '1': 'BasketType',
-  '2': [
-    {'1': 'BASKET_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'BASKET_TYPE_ETF_CONSTITUENT', '2': 1},
-    {'1': 'BASKET_TYPE_REBALANCING', '2': 2},
-    {'1': 'BASKET_TYPE_CUSTOM', '2': 3},
-  ],
-};
-
-/// Descriptor for `BasketType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List basketTypeDescriptor = $convert.base64Decode(
-    'CgpCYXNrZXRUeXBlEhsKF0JBU0tFVF9UWVBFX1VOU1BFQ0lGSUVEEAASHwobQkFTS0VUX1RZUE'
-    'VfRVRGX0NPTlNUSVRVRU5UEAESGwoXQkFTS0VUX1RZUEVfUkVCQUxBTkNJTkcQAhIWChJCQVNL'
-    'RVRfVFlQRV9DVVNUT00QAw==');
-
-@$core.Deprecated('Use orderSideDescriptor instead')
-const OrderSide$json = {
-  '1': 'OrderSide',
-  '2': [
-    {'1': 'ORDER_SIDE_UNSPECIFIED', '2': 0},
-    {'1': 'ORDER_SIDE_BID', '2': 1},
-    {'1': 'ORDER_SIDE_ASK', '2': 2},
-  ],
-};
-
-/// Descriptor for `OrderSide`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List orderSideDescriptor = $convert.base64Decode(
-    'CglPcmRlclNpZGUSGgoWT1JERVJfU0lERV9VTlNQRUNJRklFRBAAEhIKDk9SREVSX1NJREVfQk'
-    'lEEAESEgoOT1JERVJfU0lERV9BU0sQAg==');
-
-@$core.Deprecated('Use priceSourceDescriptor instead')
-const PriceSource$json = {
-  '1': 'PriceSource',
-  '2': [
-    {'1': 'PRICE_SOURCE_UNSPECIFIED', '2': 0},
-    {'1': 'PRICE_SOURCE_MID_PRICE', '2': 1},
-    {'1': 'PRICE_SOURCE_BID1', '2': 2},
-    {'1': 'PRICE_SOURCE_ASK1', '2': 3},
-    {'1': 'PRICE_SOURCE_BID2', '2': 4},
-    {'1': 'PRICE_SOURCE_ASK2', '2': 5},
-    {'1': 'PRICE_SOURCE_LAST_PRICE', '2': 6},
-    {'1': 'PRICE_SOURCE_BID3', '2': 7},
-    {'1': 'PRICE_SOURCE_ASK3', '2': 8},
-  ],
-};
-
-/// Descriptor for `PriceSource`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List priceSourceDescriptor = $convert.base64Decode(
-    'CgtQcmljZVNvdXJjZRIcChhQUklDRV9TT1VSQ0VfVU5TUEVDSUZJRUQQABIaChZQUklDRV9TT1'
-    'VSQ0VfTUlEX1BSSUNFEAESFQoRUFJJQ0VfU09VUkNFX0JJRDEQAhIVChFQUklDRV9TT1VSQ0Vf'
-    'QVNLMRADEhUKEVBSSUNFX1NPVVJDRV9CSUQyEAQSFQoRUFJJQ0VfU09VUkNFX0FTSzIQBRIbCh'
-    'dQUklDRV9TT1VSQ0VfTEFTVF9QUklDRRAGEhUKEVBSSUNFX1NPVVJDRV9CSUQzEAcSFQoRUFJJ'
-    'Q0VfU09VUkNFX0FTSzMQCA==');
-
-@$core.Deprecated('Use arbitrageOrderTypeDescriptor instead')
-const ArbitrageOrderType$json = {
-  '1': 'ArbitrageOrderType',
-  '2': [
-    {'1': 'ARBITRAGE_ORDER_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'ARBITRAGE_ORDER_TYPE_MARKET', '2': 1},
-    {'1': 'ARBITRAGE_ORDER_TYPE_LIMIT', '2': 2},
-    {'1': 'ARBITRAGE_ORDER_TYPE_AGGRESSIVE', '2': 3},
-  ],
-};
-
-/// Descriptor for `ArbitrageOrderType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List arbitrageOrderTypeDescriptor = $convert.base64Decode(
-    'ChJBcmJpdHJhZ2VPcmRlclR5cGUSJAogQVJCSVRSQUdFX09SREVSX1RZUEVfVU5TUEVDSUZJRU'
-    'QQABIfChtBUkJJVFJBR0VfT1JERVJfVFlQRV9NQVJLRVQQARIeChpBUkJJVFJBR0VfT1JERVJf'
-    'VFlQRV9MSU1JVBACEiMKH0FSQklUUkFHRV9PUkRFUl9UWVBFX0FHR1JFU1NJVkUQAw==');
-
 @$core.Deprecated('Use arbitrageStateDescriptor instead')
 const ArbitrageState$json = {
   '1': 'ArbitrageState',
@@ -147,81 +74,31 @@ const Arbitrage$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'id', '3': 2, '4': 1, '5': 5, '8': {}, '10': 'id'},
     {'1': 'portfolio_id', '3': 3, '4': 1, '5': 5, '10': 'portfolioId'},
-    {'1': 'basket_a', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ArbitrageBasket', '8': {}, '10': 'basketA'},
-    {'1': 'basket_b', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ArbitrageBasket', '8': {}, '10': 'basketB'},
+    {'1': 'basket_a_id', '3': 5, '4': 1, '5': 5, '8': {}, '10': 'basketAId'},
+    {'1': 'basket_b_id', '3': 6, '4': 1, '5': 5, '8': {}, '10': 'basketBId'},
     {'1': 'trigger_config', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.TriggerConfig', '10': 'triggerConfig'},
-    {'1': 'execution_config', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.ExecutionConfig', '10': 'executionConfig'},
     {'1': 'is_active', '3': 9, '4': 1, '5': 8, '10': 'isActive'},
     {'1': 'create_time', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
+    {'1': 'basket_a', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.basket.Basket', '8': {}, '10': 'basketA'},
+    {'1': 'basket_b', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.basket.Basket', '8': {}, '10': 'basketB'},
   ],
   '7': {},
-  '9': [
-    {'1': 4, '2': 5},
-  ],
-  '10': ['fund_code'],
 };
 
 /// Descriptor for `Arbitrage`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List arbitrageDescriptor = $convert.base64Decode(
     'CglBcmJpdHJhZ2USEgoEbmFtZRgBIAEoCVIEbmFtZRIUCgJpZBgCIAEoBUIE4kEBA1ICaWQSIQ'
-    'oMcG9ydGZvbGlvX2lkGAMgASgFUgtwb3J0Zm9saW9JZBJCCghiYXNrZXRfYRgFIAEoCzIhLmtk'
-    'by52MS5hcmJpdHJhZ2UuQXJiaXRyYWdlQmFza2V0QgTiQQECUgdiYXNrZXRBEkIKCGJhc2tldF'
-    '9iGAYgASgLMiEua2RvLnYxLmFyYml0cmFnZS5BcmJpdHJhZ2VCYXNrZXRCBOJBAQJSB2Jhc2tl'
-    'dEISRgoOdHJpZ2dlcl9jb25maWcYByABKAsyHy5rZG8udjEuYXJiaXRyYWdlLlRyaWdnZXJDb2'
-    '5maWdSDXRyaWdnZXJDb25maWcSTAoQZXhlY3V0aW9uX2NvbmZpZxgIIAEoCzIhLmtkby52MS5h'
-    'cmJpdHJhZ2UuRXhlY3V0aW9uQ29uZmlnUg9leGVjdXRpb25Db25maWcSGwoJaXNfYWN0aXZlGA'
-    'kgASgIUghpc0FjdGl2ZRJBCgtjcmVhdGVfdGltZRgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U'
-    'aW1lc3RhbXBCBOJBAQNSCmNyZWF0ZVRpbWUSQQoLdXBkYXRlX3RpbWUYCyABKAsyGi5nb29nbG'
-    'UucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lOjbqQTMKGWtkby5jZHNhcGlz'
-    'Lnh5ei9BcmJpdHJhZ2USFmFyYml0cmFnZXMve2FyYml0cmFnZX1KBAgEEAVSCWZ1bmRfY29kZQ'
-    '==');
-
-@$core.Deprecated('Use arbitrageBasketDescriptor instead')
-const ArbitrageBasket$json = {
-  '1': 'ArbitrageBasket',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 5, '8': {}, '10': 'id'},
-    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'basket_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.BasketType', '8': {}, '10': 'basketType'},
-    {'1': 'items', '3': 4, '4': 3, '5': 11, '6': '.kdo.v1.arbitrage.BasketItem', '10': 'items'},
-    {'1': 'base_quantity', '3': 5, '4': 1, '5': 3, '10': 'baseQuantity'},
-    {'1': 'etf_symbol', '3': 6, '4': 1, '5': 9, '10': 'etfSymbol'},
-    {'1': 'creation_unit', '3': 7, '4': 1, '5': 3, '10': 'creationUnit'},
-    {'1': 'rebalancing_side', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.OrderSide', '10': 'rebalancingSide'},
-    {'1': 'target_time', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'targetTime'},
-  ],
-};
-
-/// Descriptor for `ArbitrageBasket`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List arbitrageBasketDescriptor = $convert.base64Decode(
-    'Cg9BcmJpdHJhZ2VCYXNrZXQSFAoCaWQYASABKAVCBOJBAQNSAmlkEhIKBG5hbWUYAiABKAlSBG'
-    '5hbWUSQwoLYmFza2V0X3R5cGUYAyABKA4yHC5rZG8udjEuYXJiaXRyYWdlLkJhc2tldFR5cGVC'
-    'BOJBAQJSCmJhc2tldFR5cGUSMgoFaXRlbXMYBCADKAsyHC5rZG8udjEuYXJiaXRyYWdlLkJhc2'
-    'tldEl0ZW1SBWl0ZW1zEiMKDWJhc2VfcXVhbnRpdHkYBSABKANSDGJhc2VRdWFudGl0eRIdCgpl'
-    'dGZfc3ltYm9sGAYgASgJUglldGZTeW1ib2wSIwoNY3JlYXRpb25fdW5pdBgHIAEoA1IMY3JlYX'
-    'Rpb25Vbml0EkYKEHJlYmFsYW5jaW5nX3NpZGUYCCABKA4yGy5rZG8udjEuYXJiaXRyYWdlLk9y'
-    'ZGVyU2lkZVIPcmViYWxhbmNpbmdTaWRlEjsKC3RhcmdldF90aW1lGAkgASgLMhouZ29vZ2xlLn'
-    'Byb3RvYnVmLlRpbWVzdGFtcFIKdGFyZ2V0VGltZQ==');
-
-@$core.Deprecated('Use basketItemDescriptor instead')
-const BasketItem$json = {
-  '1': 'BasketItem',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'price_source', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.PriceSource', '10': 'priceSource'},
-    {'1': 'multiple', '3': 4, '4': 1, '5': 1, '10': 'multiple'},
-    {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-  ],
-};
-
-/// Descriptor for `BasketItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List basketItemDescriptor = $convert.base64Decode(
-    'CgpCYXNrZXRJdGVtEhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEhoKCHF1YW50aXR5GA'
-    'IgASgDUghxdWFudGl0eRJACgxwcmljZV9zb3VyY2UYAyABKA4yHS5rZG8udjEuYXJiaXRyYWdl'
-    'LlByaWNlU291cmNlUgtwcmljZVNvdXJjZRIaCghtdWx0aXBsZRgEIAEoAVIIbXVsdGlwbGUSIQ'
-    'oJZnVuZF9jb2RlGAUgASgJQgTiQQECUghmdW5kQ29kZQ==');
+    'oMcG9ydGZvbGlvX2lkGAMgASgFUgtwb3J0Zm9saW9JZBIkCgtiYXNrZXRfYV9pZBgFIAEoBUIE'
+    '4kEBAlIJYmFza2V0QUlkEiQKC2Jhc2tldF9iX2lkGAYgASgFQgTiQQECUgliYXNrZXRCSWQSRg'
+    'oOdHJpZ2dlcl9jb25maWcYByABKAsyHy5rZG8udjEuYXJiaXRyYWdlLlRyaWdnZXJDb25maWdS'
+    'DXRyaWdnZXJDb25maWcSGwoJaXNfYWN0aXZlGAkgASgIUghpc0FjdGl2ZRJBCgtjcmVhdGVfdG'
+    'ltZRgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCmNyZWF0ZVRpbWUS'
+    'QQoLdXBkYXRlX3RpbWUYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUg'
+    'p1cGRhdGVUaW1lEjYKCGJhc2tldF9hGAwgASgLMhUua2RvLnYxLmJhc2tldC5CYXNrZXRCBOJB'
+    'AQNSB2Jhc2tldEESNgoIYmFza2V0X2IYDSABKAsyFS5rZG8udjEuYmFza2V0LkJhc2tldEIE4k'
+    'EBA1IHYmFza2V0Qjo26kEzChlrZG8uY2RzYXBpcy54eXovQXJiaXRyYWdlEhZhcmJpdHJhZ2Vz'
+    'L3thcmJpdHJhZ2V9');
 
 @$core.Deprecated('Use triggerConfigDescriptor instead')
 const TriggerConfig$json = {
@@ -281,57 +158,6 @@ const SpreadBpsCondition$json = {
 final $typed_data.Uint8List spreadBpsConditionDescriptor = $convert.base64Decode(
     'ChJTcHJlYWRCcHNDb25kaXRpb24SIwoNdGhyZXNob2xkX2JwcxgBIAEoAVIMdGhyZXNob2xkQn'
     'Bz');
-
-@$core.Deprecated('Use executionConfigDescriptor instead')
-const ExecutionConfig$json = {
-  '1': 'ExecutionConfig',
-  '2': [
-    {'1': 'rounds', '3': 1, '4': 1, '5': 13, '10': 'rounds'},
-    {'1': 'round_delay_ms', '3': 2, '4': 1, '5': 4, '10': 'roundDelayMs'},
-    {'1': 'fill_threshold_pct', '3': 3, '4': 1, '5': 1, '10': 'fillThresholdPct'},
-    {'1': 'order_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.ArbitrageOrderType', '10': 'orderType'},
-    {'1': 'pricing_configs', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.arbitrage.ExecutionConfig.PricingConfigsEntry', '10': 'pricingConfigs'},
-  ],
-  '3': [ExecutionConfig_PricingConfigsEntry$json],
-};
-
-@$core.Deprecated('Use executionConfigDescriptor instead')
-const ExecutionConfig_PricingConfigsEntry$json = {
-  '1': 'PricingConfigsEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.arbitrage.SymbolPricingConfig', '10': 'value'},
-  ],
-  '7': {'7': true},
-};
-
-/// Descriptor for `ExecutionConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List executionConfigDescriptor = $convert.base64Decode(
-    'Cg9FeGVjdXRpb25Db25maWcSFgoGcm91bmRzGAEgASgNUgZyb3VuZHMSJAoOcm91bmRfZGVsYX'
-    'lfbXMYAiABKARSDHJvdW5kRGVsYXlNcxIsChJmaWxsX3RocmVzaG9sZF9wY3QYAyABKAFSEGZp'
-    'bGxUaHJlc2hvbGRQY3QSQwoKb3JkZXJfdHlwZRgEIAEoDjIkLmtkby52MS5hcmJpdHJhZ2UuQX'
-    'JiaXRyYWdlT3JkZXJUeXBlUglvcmRlclR5cGUSXgoPcHJpY2luZ19jb25maWdzGAUgAygLMjUu'
-    'a2RvLnYxLmFyYml0cmFnZS5FeGVjdXRpb25Db25maWcuUHJpY2luZ0NvbmZpZ3NFbnRyeVIOcH'
-    'JpY2luZ0NvbmZpZ3MaaAoTUHJpY2luZ0NvbmZpZ3NFbnRyeRIQCgNrZXkYASABKAlSA2tleRI7'
-    'CgV2YWx1ZRgCIAEoCzIlLmtkby52MS5hcmJpdHJhZ2UuU3ltYm9sUHJpY2luZ0NvbmZpZ1IFdm'
-    'FsdWU6AjgB');
-
-@$core.Deprecated('Use symbolPricingConfigDescriptor instead')
-const SymbolPricingConfig$json = {
-  '1': 'SymbolPricingConfig',
-  '2': [
-    {'1': 'buy_price_source', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.PriceSource', '10': 'buyPriceSource'},
-    {'1': 'sell_price_source', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.arbitrage.PriceSource', '10': 'sellPriceSource'},
-    {'1': 'price_offset_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceOffsetTicks'},
-  ],
-};
-
-/// Descriptor for `SymbolPricingConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List symbolPricingConfigDescriptor = $convert.base64Decode(
-    'ChNTeW1ib2xQcmljaW5nQ29uZmlnEkcKEGJ1eV9wcmljZV9zb3VyY2UYASABKA4yHS5rZG8udj'
-    'EuYXJiaXRyYWdlLlByaWNlU291cmNlUg5idXlQcmljZVNvdXJjZRJJChFzZWxsX3ByaWNlX3Nv'
-    'dXJjZRgCIAEoDjIdLmtkby52MS5hcmJpdHJhZ2UuUHJpY2VTb3VyY2VSD3NlbGxQcmljZVNvdX'
-    'JjZRIsChJwcmljZV9vZmZzZXRfdGlja3MYAyABKAVSEHByaWNlT2Zmc2V0VGlja3M=');
 
 @$core.Deprecated('Use arbitrageStatusDescriptor instead')
 const ArbitrageStatus$json = {

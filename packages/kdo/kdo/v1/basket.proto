@@ -80,37 +80,44 @@ message Basket {
   string name = 1;
 
   // 바스켓 ID
-  int32 id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  int32 id = 2 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 
   // 바스켓 이름
   string display_name = 3;
 
   // 바스켓 타입
-  BasketType basket_type = 4 [(google.api.field_behavior) = REQUIRED];
+  BasketType basket_type = 4 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 
   // 구성 종목 목록
   repeated BasketItem items = 5;
 
-  // 기준 수량
-  int64 base_quantity = 6;
+  // 실행 설정 (분할 주문, 체결률 임계값, 주문 유형 등)
+  ExecutionConfig execution_config = 6;
 
-  // ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)
-  string etf_symbol = 7;
+  // 타입별 설정
+  oneof type_config {
+    // ETF 구성종목 설정 (basket_type이 ETF_CONSTITUENT인 경우)
+    EtfConstituentConfig etf_constituent = 7;
 
-  // Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)
-  int64 creation_unit = 8;
+    // 리밸런싱 설정 (basket_type이 REBALANCING인 경우)
+    RebalancingConfig rebalancing = 8;
 
-  // 리밸런싱 방향 (basket_type이 REBALANCING인 경우)
-  OrderSide rebalancing_side = 9;
-
-  // 리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)
-  google.protobuf.Timestamp target_time = 10;
+    // 커스텀 바스켓은 추가 설정 없음
+  }
 
   // 생성 시간
-  google.protobuf.Timestamp create_time = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp create_time = 11 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 
   // 수정 시간
-  google.protobuf.Timestamp update_time = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp update_time = 12 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // 바스켓 타입
@@ -133,10 +140,34 @@ enum OrderSide {
   ORDER_SIDE_ASK = 2;
 }
 
+// ETF 구성종목 바스켓 설정
+message EtfConstituentConfig {
+  // ETF 심볼
+  string etf_symbol = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // Creation Unit 수량
+  int64 creation_unit = 2;
+}
+
+// 리밸런싱 바스켓 설정
+message RebalancingConfig {
+  // 리밸런싱 방향
+  OrderSide side = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 리밸런싱 목표 시점 (optional)
+  google.protobuf.Timestamp target_time = 2;
+}
+
 // 바스켓 구성 항목
 message BasketItem {
   // 종목 심볼
-  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  string symbol = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 
   // 수량 (음수 가능: 매도 포지션)
   int64 quantity = 2;
@@ -148,7 +179,9 @@ message BasketItem {
   double multiple = 4;
 
   // 주문에 사용할 펀드 코드
-  string fund_code = 5 [(google.api.field_behavior) = REQUIRED];
+  string fund_code = 5 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 }
 
 // 가격 소스
@@ -170,6 +203,51 @@ enum PriceSource {
   PRICE_SOURCE_BID3 = 7;
   // 3차 매도호가
   PRICE_SOURCE_ASK3 = 8;
+}
+
+// ============================================================================
+// Execution Configuration
+// ============================================================================
+
+// 실행 설정
+message ExecutionConfig {
+  // 분할 주문 횟수 (1 = 한 번에 전량 주문)
+  uint32 rounds = 1;
+
+  // 라운드 간 딜레이 (ms)
+  uint64 round_delay_ms = 2;
+
+  // 다음 라운드 진행을 위한 체결률 임계값 (0.0~1.0)
+  double fill_threshold_pct = 3;
+
+  // 주문 유형
+  OrderType order_type = 4;
+
+  // 심볼별 호가 설정 (optional)
+  map<string, SymbolPricingConfig> pricing_configs = 5;
+}
+
+// 주문 유형
+enum OrderType {
+  ORDER_TYPE_UNSPECIFIED = 0;
+  // 시장가
+  ORDER_TYPE_MARKET = 1;
+  // 지정가 (pricing_config 기반)
+  ORDER_TYPE_LIMIT = 2;
+  // 공격적 지정가 (상대호가)
+  ORDER_TYPE_AGGRESSIVE = 3;
+}
+
+// 심볼별 호가 설정
+message SymbolPricingConfig {
+  // 매수 시 사용할 가격
+  PriceSource buy_price_source = 1;
+
+  // 매도 시 사용할 가격
+  PriceSource sell_price_source = 2;
+
+  // 가격 조정 (틱 단위, +: 공격적, -: 보수적)
+  int32 price_offset_ticks = 3;
 }
 
 // ============================================================================
@@ -239,12 +317,22 @@ message ListBasketsRequest {
   // 필터링 조건 (optional, AIP-160)
   //
   // Available Fields:
-  // * basket_type - 바스켓 타입
-  // * etf_symbol - ETF 심볼
+  // * basket_type - 바스켓 타입 (BASKET_TYPE_ETF_CONSTITUENT, BASKET_TYPE_REBALANCING, BASKET_TYPE_CUSTOM)
+  // * display_name - 바스켓 이름 (문자열, 부분 일치)
+  // * etf_constituent.etf_symbol - ETF 심볼 (ETF_CONSTITUENT 타입인 경우)
+  //
+  // Operators:
+  // * = : 일치
+  // * != : 불일치
+  // * : : 포함 (문자열 부분 일치)
   //
   // Examples:
-  // * filter=basket_type=BASKET_TYPE_ETF_CONSTITUENT
-  // * filter=etf_symbol="069500"
+  // * basket_type=BASKET_TYPE_ETF_CONSTITUENT
+  // * basket_type!=BASKET_TYPE_CUSTOM
+  // * display_name:"KODEX"
+  // * etf_constituent.etf_symbol="069500"
+  // * basket_type=BASKET_TYPE_ETF_CONSTITUENT AND etf_constituent.etf_symbol="069500"
+  // * basket_type=BASKET_TYPE_REBALANCING AND display_name:"리밸런싱"
   string filter = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -258,12 +346,16 @@ message ListBasketsResponse {
 
 message CreateBasketRequest {
   // 생성할 바스켓
-  Basket basket = 1 [(google.api.field_behavior) = REQUIRED];
+  Basket basket = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 }
 
 message UpdateBasketRequest {
   // 수정할 바스켓
-  Basket basket = 1 [(google.api.field_behavior) = REQUIRED];
+  Basket basket = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 
   // 수정할 필드 마스크
   google.protobuf.FieldMask update_mask = 2;

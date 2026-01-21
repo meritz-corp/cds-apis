@@ -70,6 +70,22 @@ final $typed_data.Uint8List priceSourceDescriptor = $convert.base64Decode(
     'dQUklDRV9TT1VSQ0VfTEFTVF9QUklDRRAGEhUKEVBSSUNFX1NPVVJDRV9CSUQzEAcSFQoRUFJJ'
     'Q0VfU09VUkNFX0FTSzMQCA==');
 
+@$core.Deprecated('Use orderTypeDescriptor instead')
+const OrderType$json = {
+  '1': 'OrderType',
+  '2': [
+    {'1': 'ORDER_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'ORDER_TYPE_MARKET', '2': 1},
+    {'1': 'ORDER_TYPE_LIMIT', '2': 2},
+    {'1': 'ORDER_TYPE_AGGRESSIVE', '2': 3},
+  ],
+};
+
+/// Descriptor for `OrderType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List orderTypeDescriptor = $convert.base64Decode(
+    'CglPcmRlclR5cGUSGgoWT1JERVJfVFlQRV9VTlNQRUNJRklFRBAAEhUKEU9SREVSX1RZUEVfTU'
+    'FSS0VUEAESFAoQT1JERVJfVFlQRV9MSU1JVBACEhkKFU9SREVSX1RZUEVfQUdHUkVTU0lWRRAD');
+
 @$core.Deprecated('Use basketDescriptor instead')
 const Basket$json = {
   '1': 'Basket',
@@ -79,15 +95,16 @@ const Basket$json = {
     {'1': 'display_name', '3': 3, '4': 1, '5': 9, '10': 'displayName'},
     {'1': 'basket_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketType', '8': {}, '10': 'basketType'},
     {'1': 'items', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketItem', '10': 'items'},
-    {'1': 'base_quantity', '3': 6, '4': 1, '5': 3, '10': 'baseQuantity'},
-    {'1': 'etf_symbol', '3': 7, '4': 1, '5': 9, '10': 'etfSymbol'},
-    {'1': 'creation_unit', '3': 8, '4': 1, '5': 3, '10': 'creationUnit'},
-    {'1': 'rebalancing_side', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.basket.OrderSide', '10': 'rebalancingSide'},
-    {'1': 'target_time', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'targetTime'},
+    {'1': 'execution_config', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.basket.ExecutionConfig', '10': 'executionConfig'},
+    {'1': 'etf_constituent', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.basket.EtfConstituentConfig', '9': 0, '10': 'etfConstituent'},
+    {'1': 'rebalancing', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.basket.RebalancingConfig', '9': 0, '10': 'rebalancing'},
     {'1': 'create_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
   '7': {},
+  '8': [
+    {'1': 'type_config'},
+  ],
 };
 
 /// Descriptor for `Basket`. Decode as a `google.protobuf.DescriptorProto`.
@@ -95,15 +112,44 @@ final $typed_data.Uint8List basketDescriptor = $convert.base64Decode(
     'CgZCYXNrZXQSEgoEbmFtZRgBIAEoCVIEbmFtZRIUCgJpZBgCIAEoBUIE4kEBA1ICaWQSIQoMZG'
     'lzcGxheV9uYW1lGAMgASgJUgtkaXNwbGF5TmFtZRJACgtiYXNrZXRfdHlwZRgEIAEoDjIZLmtk'
     'by52MS5iYXNrZXQuQmFza2V0VHlwZUIE4kEBAlIKYmFza2V0VHlwZRIvCgVpdGVtcxgFIAMoCz'
-    'IZLmtkby52MS5iYXNrZXQuQmFza2V0SXRlbVIFaXRlbXMSIwoNYmFzZV9xdWFudGl0eRgGIAEo'
-    'A1IMYmFzZVF1YW50aXR5Eh0KCmV0Zl9zeW1ib2wYByABKAlSCWV0ZlN5bWJvbBIjCg1jcmVhdG'
-    'lvbl91bml0GAggASgDUgxjcmVhdGlvblVuaXQSQwoQcmViYWxhbmNpbmdfc2lkZRgJIAEoDjIY'
-    'Lmtkby52MS5iYXNrZXQuT3JkZXJTaWRlUg9yZWJhbGFuY2luZ1NpZGUSOwoLdGFyZ2V0X3RpbW'
-    'UYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgp0YXJnZXRUaW1lEkEKC2NyZWF0'
-    'ZV90aW1lGAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKY3JlYXRlVG'
-    'ltZRJBCgt1cGRhdGVfdGltZRgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJB'
-    'AQNSCnVwZGF0ZVRpbWU6LepBKgoWa2RvLmNkc2FwaXMueHl6L0Jhc2tldBIQYmFza2V0cy97Ym'
-    'Fza2V0fQ==');
+    'IZLmtkby52MS5iYXNrZXQuQmFza2V0SXRlbVIFaXRlbXMSSQoQZXhlY3V0aW9uX2NvbmZpZxgG'
+    'IAEoCzIeLmtkby52MS5iYXNrZXQuRXhlY3V0aW9uQ29uZmlnUg9leGVjdXRpb25Db25maWcSTg'
+    'oPZXRmX2NvbnN0aXR1ZW50GAcgASgLMiMua2RvLnYxLmJhc2tldC5FdGZDb25zdGl0dWVudENv'
+    'bmZpZ0gAUg5ldGZDb25zdGl0dWVudBJECgtyZWJhbGFuY2luZxgIIAEoCzIgLmtkby52MS5iYX'
+    'NrZXQuUmViYWxhbmNpbmdDb25maWdIAFILcmViYWxhbmNpbmcSQQoLY3JlYXRlX3RpbWUYCyAB'
+    'KAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZG'
+    'F0ZV90aW1lGAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRl'
+    'VGltZTot6kEqChZrZG8uY2RzYXBpcy54eXovQmFza2V0EhBiYXNrZXRzL3tiYXNrZXR9Qg0KC3'
+    'R5cGVfY29uZmln');
+
+@$core.Deprecated('Use etfConstituentConfigDescriptor instead')
+const EtfConstituentConfig$json = {
+  '1': 'EtfConstituentConfig',
+  '2': [
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etfSymbol'},
+    {'1': 'creation_unit', '3': 2, '4': 1, '5': 3, '10': 'creationUnit'},
+  ],
+};
+
+/// Descriptor for `EtfConstituentConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfConstituentConfigDescriptor = $convert.base64Decode(
+    'ChRFdGZDb25zdGl0dWVudENvbmZpZxIjCgpldGZfc3ltYm9sGAEgASgJQgTiQQECUglldGZTeW'
+    '1ib2wSIwoNY3JlYXRpb25fdW5pdBgCIAEoA1IMY3JlYXRpb25Vbml0');
+
+@$core.Deprecated('Use rebalancingConfigDescriptor instead')
+const RebalancingConfig$json = {
+  '1': 'RebalancingConfig',
+  '2': [
+    {'1': 'side', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.basket.OrderSide', '8': {}, '10': 'side'},
+    {'1': 'target_time', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'targetTime'},
+  ],
+};
+
+/// Descriptor for `RebalancingConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List rebalancingConfigDescriptor = $convert.base64Decode(
+    'ChFSZWJhbGFuY2luZ0NvbmZpZxIyCgRzaWRlGAEgASgOMhgua2RvLnYxLmJhc2tldC5PcmRlcl'
+    'NpZGVCBOJBAQJSBHNpZGUSOwoLdGFyZ2V0X3RpbWUYAiABKAsyGi5nb29nbGUucHJvdG9idWYu'
+    'VGltZXN0YW1wUgp0YXJnZXRUaW1l');
 
 @$core.Deprecated('Use basketItemDescriptor instead')
 const BasketItem$json = {
@@ -123,6 +169,56 @@ final $typed_data.Uint8List basketItemDescriptor = $convert.base64Decode(
     'IgASgDUghxdWFudGl0eRI9CgxwcmljZV9zb3VyY2UYAyABKA4yGi5rZG8udjEuYmFza2V0LlBy'
     'aWNlU291cmNlUgtwcmljZVNvdXJjZRIaCghtdWx0aXBsZRgEIAEoAVIIbXVsdGlwbGUSIQoJZn'
     'VuZF9jb2RlGAUgASgJQgTiQQECUghmdW5kQ29kZQ==');
+
+@$core.Deprecated('Use executionConfigDescriptor instead')
+const ExecutionConfig$json = {
+  '1': 'ExecutionConfig',
+  '2': [
+    {'1': 'rounds', '3': 1, '4': 1, '5': 13, '10': 'rounds'},
+    {'1': 'round_delay_ms', '3': 2, '4': 1, '5': 4, '10': 'roundDelayMs'},
+    {'1': 'fill_threshold_pct', '3': 3, '4': 1, '5': 1, '10': 'fillThresholdPct'},
+    {'1': 'order_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.basket.OrderType', '10': 'orderType'},
+    {'1': 'pricing_configs', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.basket.ExecutionConfig.PricingConfigsEntry', '10': 'pricingConfigs'},
+  ],
+  '3': [ExecutionConfig_PricingConfigsEntry$json],
+};
+
+@$core.Deprecated('Use executionConfigDescriptor instead')
+const ExecutionConfig_PricingConfigsEntry$json = {
+  '1': 'PricingConfigsEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.basket.SymbolPricingConfig', '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `ExecutionConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List executionConfigDescriptor = $convert.base64Decode(
+    'Cg9FeGVjdXRpb25Db25maWcSFgoGcm91bmRzGAEgASgNUgZyb3VuZHMSJAoOcm91bmRfZGVsYX'
+    'lfbXMYAiABKARSDHJvdW5kRGVsYXlNcxIsChJmaWxsX3RocmVzaG9sZF9wY3QYAyABKAFSEGZp'
+    'bGxUaHJlc2hvbGRQY3QSNwoKb3JkZXJfdHlwZRgEIAEoDjIYLmtkby52MS5iYXNrZXQuT3JkZX'
+    'JUeXBlUglvcmRlclR5cGUSWwoPcHJpY2luZ19jb25maWdzGAUgAygLMjIua2RvLnYxLmJhc2tl'
+    'dC5FeGVjdXRpb25Db25maWcuUHJpY2luZ0NvbmZpZ3NFbnRyeVIOcHJpY2luZ0NvbmZpZ3MaZQ'
+    'oTUHJpY2luZ0NvbmZpZ3NFbnRyeRIQCgNrZXkYASABKAlSA2tleRI4CgV2YWx1ZRgCIAEoCzIi'
+    'Lmtkby52MS5iYXNrZXQuU3ltYm9sUHJpY2luZ0NvbmZpZ1IFdmFsdWU6AjgB');
+
+@$core.Deprecated('Use symbolPricingConfigDescriptor instead')
+const SymbolPricingConfig$json = {
+  '1': 'SymbolPricingConfig',
+  '2': [
+    {'1': 'buy_price_source', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.basket.PriceSource', '10': 'buyPriceSource'},
+    {'1': 'sell_price_source', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.basket.PriceSource', '10': 'sellPriceSource'},
+    {'1': 'price_offset_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceOffsetTicks'},
+  ],
+};
+
+/// Descriptor for `SymbolPricingConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List symbolPricingConfigDescriptor = $convert.base64Decode(
+    'ChNTeW1ib2xQcmljaW5nQ29uZmlnEkQKEGJ1eV9wcmljZV9zb3VyY2UYASABKA4yGi5rZG8udj'
+    'EuYmFza2V0LlByaWNlU291cmNlUg5idXlQcmljZVNvdXJjZRJGChFzZWxsX3ByaWNlX3NvdXJj'
+    'ZRgCIAEoDjIaLmtkby52MS5iYXNrZXQuUHJpY2VTb3VyY2VSD3NlbGxQcmljZVNvdXJjZRIsCh'
+    'JwcmljZV9vZmZzZXRfdGlja3MYAyABKAVSEHByaWNlT2Zmc2V0VGlja3M=');
 
 @$core.Deprecated('Use basketValueDescriptor instead')
 const BasketValue$json = {

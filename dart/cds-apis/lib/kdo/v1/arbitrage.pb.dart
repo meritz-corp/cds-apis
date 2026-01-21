@@ -15,9 +15,10 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/field_mask.pb.dart' as $3;
+import '../../google/protobuf/field_mask.pb.dart' as $4;
 import '../../google/protobuf/timestamp.pb.dart' as $2;
 import 'arbitrage.pbenum.dart';
+import 'basket.pb.dart' as $3;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
@@ -29,25 +30,27 @@ class Arbitrage extends $pb.GeneratedMessage {
     $core.String? name,
     $core.int? id,
     $core.int? portfolioId,
-    ArbitrageBasket? basketA,
-    ArbitrageBasket? basketB,
+    $core.int? basketAId,
+    $core.int? basketBId,
     TriggerConfig? triggerConfig,
-    ExecutionConfig? executionConfig,
     $core.bool? isActive,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
+    $3.Basket? basketA,
+    $3.Basket? basketB,
   }) {
     final result = create();
     if (name != null) result.name = name;
     if (id != null) result.id = id;
     if (portfolioId != null) result.portfolioId = portfolioId;
-    if (basketA != null) result.basketA = basketA;
-    if (basketB != null) result.basketB = basketB;
+    if (basketAId != null) result.basketAId = basketAId;
+    if (basketBId != null) result.basketBId = basketBId;
     if (triggerConfig != null) result.triggerConfig = triggerConfig;
-    if (executionConfig != null) result.executionConfig = executionConfig;
     if (isActive != null) result.isActive = isActive;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
+    if (basketA != null) result.basketA = basketA;
+    if (basketB != null) result.basketB = basketB;
     return result;
   }
 
@@ -60,13 +63,14 @@ class Arbitrage extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
-    ..aOM<ArbitrageBasket>(5, _omitFieldNames ? '' : 'basketA', subBuilder: ArbitrageBasket.create)
-    ..aOM<ArbitrageBasket>(6, _omitFieldNames ? '' : 'basketB', subBuilder: ArbitrageBasket.create)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'basketAId', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'basketBId', $pb.PbFieldType.O3)
     ..aOM<TriggerConfig>(7, _omitFieldNames ? '' : 'triggerConfig', subBuilder: TriggerConfig.create)
-    ..aOM<ExecutionConfig>(8, _omitFieldNames ? '' : 'executionConfig', subBuilder: ExecutionConfig.create)
     ..aOB(9, _omitFieldNames ? '' : 'isActive')
     ..aOM<$2.Timestamp>(10, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(11, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..aOM<$3.Basket>(12, _omitFieldNames ? '' : 'basketA', subBuilder: $3.Basket.create)
+    ..aOM<$3.Basket>(13, _omitFieldNames ? '' : 'basketB', subBuilder: $3.Basket.create)
     ..hasRequiredFields = false
   ;
 
@@ -117,29 +121,25 @@ class Arbitrage extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPortfolioId() => $_clearField(3);
 
-  /// 바스켓 A
+  /// 바스켓 A ID (Basket 도메인 참조)
   @$pb.TagNumber(5)
-  ArbitrageBasket get basketA => $_getN(3);
+  $core.int get basketAId => $_getIZ(3);
   @$pb.TagNumber(5)
-  set basketA(ArbitrageBasket value) => $_setField(5, value);
+  set basketAId($core.int value) => $_setSignedInt32(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasBasketA() => $_has(3);
+  $core.bool hasBasketAId() => $_has(3);
   @$pb.TagNumber(5)
-  void clearBasketA() => $_clearField(5);
-  @$pb.TagNumber(5)
-  ArbitrageBasket ensureBasketA() => $_ensure(3);
+  void clearBasketAId() => $_clearField(5);
 
-  /// 바스켓 B
+  /// 바스켓 B ID (Basket 도메인 참조)
   @$pb.TagNumber(6)
-  ArbitrageBasket get basketB => $_getN(4);
+  $core.int get basketBId => $_getIZ(4);
   @$pb.TagNumber(6)
-  set basketB(ArbitrageBasket value) => $_setField(6, value);
+  set basketBId($core.int value) => $_setSignedInt32(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasBasketB() => $_has(4);
+  $core.bool hasBasketBId() => $_has(4);
   @$pb.TagNumber(6)
-  void clearBasketB() => $_clearField(6);
-  @$pb.TagNumber(6)
-  ArbitrageBasket ensureBasketB() => $_ensure(4);
+  void clearBasketBId() => $_clearField(6);
 
   /// 트리거 설정
   @$pb.TagNumber(7)
@@ -153,299 +153,63 @@ class Arbitrage extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   TriggerConfig ensureTriggerConfig() => $_ensure(5);
 
-  /// 실행 설정
-  @$pb.TagNumber(8)
-  ExecutionConfig get executionConfig => $_getN(6);
-  @$pb.TagNumber(8)
-  set executionConfig(ExecutionConfig value) => $_setField(8, value);
-  @$pb.TagNumber(8)
-  $core.bool hasExecutionConfig() => $_has(6);
-  @$pb.TagNumber(8)
-  void clearExecutionConfig() => $_clearField(8);
-  @$pb.TagNumber(8)
-  ExecutionConfig ensureExecutionConfig() => $_ensure(6);
-
   /// 활성화 여부
   @$pb.TagNumber(9)
-  $core.bool get isActive => $_getBF(7);
+  $core.bool get isActive => $_getBF(6);
   @$pb.TagNumber(9)
-  set isActive($core.bool value) => $_setBool(7, value);
+  set isActive($core.bool value) => $_setBool(6, value);
   @$pb.TagNumber(9)
-  $core.bool hasIsActive() => $_has(7);
+  $core.bool hasIsActive() => $_has(6);
   @$pb.TagNumber(9)
   void clearIsActive() => $_clearField(9);
 
   /// 생성 시간
   @$pb.TagNumber(10)
-  $2.Timestamp get createTime => $_getN(8);
+  $2.Timestamp get createTime => $_getN(7);
   @$pb.TagNumber(10)
   set createTime($2.Timestamp value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasCreateTime() => $_has(8);
+  $core.bool hasCreateTime() => $_has(7);
   @$pb.TagNumber(10)
   void clearCreateTime() => $_clearField(10);
   @$pb.TagNumber(10)
-  $2.Timestamp ensureCreateTime() => $_ensure(8);
+  $2.Timestamp ensureCreateTime() => $_ensure(7);
 
   /// 수정 시간
   @$pb.TagNumber(11)
-  $2.Timestamp get updateTime => $_getN(9);
+  $2.Timestamp get updateTime => $_getN(8);
   @$pb.TagNumber(11)
   set updateTime($2.Timestamp value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasUpdateTime() => $_has(9);
+  $core.bool hasUpdateTime() => $_has(8);
   @$pb.TagNumber(11)
   void clearUpdateTime() => $_clearField(11);
   @$pb.TagNumber(11)
-  $2.Timestamp ensureUpdateTime() => $_ensure(9);
-}
+  $2.Timestamp ensureUpdateTime() => $_ensure(8);
 
-/// 바스켓 설정
-class ArbitrageBasket extends $pb.GeneratedMessage {
-  factory ArbitrageBasket({
-    $core.int? id,
-    $core.String? name,
-    BasketType? basketType,
-    $core.Iterable<BasketItem>? items,
-    $fixnum.Int64? baseQuantity,
-    $core.String? etfSymbol,
-    $fixnum.Int64? creationUnit,
-    OrderSide? rebalancingSide,
-    $2.Timestamp? targetTime,
-  }) {
-    final result = create();
-    if (id != null) result.id = id;
-    if (name != null) result.name = name;
-    if (basketType != null) result.basketType = basketType;
-    if (items != null) result.items.addAll(items);
-    if (baseQuantity != null) result.baseQuantity = baseQuantity;
-    if (etfSymbol != null) result.etfSymbol = etfSymbol;
-    if (creationUnit != null) result.creationUnit = creationUnit;
-    if (rebalancingSide != null) result.rebalancingSide = rebalancingSide;
-    if (targetTime != null) result.targetTime = targetTime;
-    return result;
-  }
+  /// 바스켓 A 상세 (OUTPUT_ONLY, 조회 시 포함)
+  @$pb.TagNumber(12)
+  $3.Basket get basketA => $_getN(9);
+  @$pb.TagNumber(12)
+  set basketA($3.Basket value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasBasketA() => $_has(9);
+  @$pb.TagNumber(12)
+  void clearBasketA() => $_clearField(12);
+  @$pb.TagNumber(12)
+  $3.Basket ensureBasketA() => $_ensure(9);
 
-  ArbitrageBasket._();
-
-  factory ArbitrageBasket.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ArbitrageBasket.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ArbitrageBasket', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..e<BasketType>(3, _omitFieldNames ? '' : 'basketType', $pb.PbFieldType.OE, defaultOrMaker: BasketType.BASKET_TYPE_UNSPECIFIED, valueOf: BasketType.valueOf, enumValues: BasketType.values)
-    ..pc<BasketItem>(4, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: BasketItem.create)
-    ..aInt64(5, _omitFieldNames ? '' : 'baseQuantity')
-    ..aOS(6, _omitFieldNames ? '' : 'etfSymbol')
-    ..aInt64(7, _omitFieldNames ? '' : 'creationUnit')
-    ..e<OrderSide>(8, _omitFieldNames ? '' : 'rebalancingSide', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
-    ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'targetTime', subBuilder: $2.Timestamp.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ArbitrageBasket clone() => ArbitrageBasket()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ArbitrageBasket copyWith(void Function(ArbitrageBasket) updates) => super.copyWith((message) => updates(message as ArbitrageBasket)) as ArbitrageBasket;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ArbitrageBasket create() => ArbitrageBasket._();
-  @$core.override
-  ArbitrageBasket createEmptyInstance() => create();
-  static $pb.PbList<ArbitrageBasket> createRepeated() => $pb.PbList<ArbitrageBasket>();
-  @$core.pragma('dart2js:noInline')
-  static ArbitrageBasket getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ArbitrageBasket>(create);
-  static ArbitrageBasket? _defaultInstance;
-
-  /// 바스켓 ID
-  @$pb.TagNumber(1)
-  $core.int get id => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set id($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => $_clearField(1);
-
-  /// 바스켓 이름
-  @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set name($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearName() => $_clearField(2);
-
-  /// 바스켓 타입
-  @$pb.TagNumber(3)
-  BasketType get basketType => $_getN(2);
-  @$pb.TagNumber(3)
-  set basketType(BasketType value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasBasketType() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearBasketType() => $_clearField(3);
-
-  /// 구성 종목 목록
-  @$pb.TagNumber(4)
-  $pb.PbList<BasketItem> get items => $_getList(3);
-
-  /// 기준 수량
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get baseQuantity => $_getI64(4);
-  @$pb.TagNumber(5)
-  set baseQuantity($fixnum.Int64 value) => $_setInt64(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasBaseQuantity() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearBaseQuantity() => $_clearField(5);
-
-  /// ETF 심볼 (basket_type이 ETF_CONSTITUENT인 경우)
-  @$pb.TagNumber(6)
-  $core.String get etfSymbol => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set etfSymbol($core.String value) => $_setString(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasEtfSymbol() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearEtfSymbol() => $_clearField(6);
-
-  /// Creation Unit 수량 (basket_type이 ETF_CONSTITUENT인 경우)
-  @$pb.TagNumber(7)
-  $fixnum.Int64 get creationUnit => $_getI64(6);
-  @$pb.TagNumber(7)
-  set creationUnit($fixnum.Int64 value) => $_setInt64(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasCreationUnit() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearCreationUnit() => $_clearField(7);
-
-  /// 리밸런싱 방향 (basket_type이 REBALANCING인 경우)
-  @$pb.TagNumber(8)
-  OrderSide get rebalancingSide => $_getN(7);
-  @$pb.TagNumber(8)
-  set rebalancingSide(OrderSide value) => $_setField(8, value);
-  @$pb.TagNumber(8)
-  $core.bool hasRebalancingSide() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearRebalancingSide() => $_clearField(8);
-
-  /// 리밸런싱 목표 시점 (basket_type이 REBALANCING인 경우, optional)
-  @$pb.TagNumber(9)
-  $2.Timestamp get targetTime => $_getN(8);
-  @$pb.TagNumber(9)
-  set targetTime($2.Timestamp value) => $_setField(9, value);
-  @$pb.TagNumber(9)
-  $core.bool hasTargetTime() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearTargetTime() => $_clearField(9);
-  @$pb.TagNumber(9)
-  $2.Timestamp ensureTargetTime() => $_ensure(8);
-}
-
-/// 바스켓 구성 항목
-class BasketItem extends $pb.GeneratedMessage {
-  factory BasketItem({
-    $core.String? symbol,
-    $fixnum.Int64? quantity,
-    PriceSource? priceSource,
-    $core.double? multiple,
-    $core.String? fundCode,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (quantity != null) result.quantity = quantity;
-    if (priceSource != null) result.priceSource = priceSource;
-    if (multiple != null) result.multiple = multiple;
-    if (fundCode != null) result.fundCode = fundCode;
-    return result;
-  }
-
-  BasketItem._();
-
-  factory BasketItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory BasketItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
-    ..e<PriceSource>(3, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: PriceSource.PRICE_SOURCE_UNSPECIFIED, valueOf: PriceSource.valueOf, enumValues: PriceSource.values)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'multiple', $pb.PbFieldType.OD)
-    ..aOS(5, _omitFieldNames ? '' : 'fundCode')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BasketItem clone() => BasketItem()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BasketItem copyWith(void Function(BasketItem) updates) => super.copyWith((message) => updates(message as BasketItem)) as BasketItem;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static BasketItem create() => BasketItem._();
-  @$core.override
-  BasketItem createEmptyInstance() => create();
-  static $pb.PbList<BasketItem> createRepeated() => $pb.PbList<BasketItem>();
-  @$core.pragma('dart2js:noInline')
-  static BasketItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasketItem>(create);
-  static BasketItem? _defaultInstance;
-
-  /// 종목 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// 수량
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get quantity => $_getI64(1);
-  @$pb.TagNumber(2)
-  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasQuantity() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearQuantity() => $_clearField(2);
-
-  /// 가격 소스
-  @$pb.TagNumber(3)
-  PriceSource get priceSource => $_getN(2);
-  @$pb.TagNumber(3)
-  set priceSource(PriceSource value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasPriceSource() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearPriceSource() => $_clearField(3);
-
-  /// 계약 승수 (선물용, 주식은 1.0)
-  @$pb.TagNumber(4)
-  $core.double get multiple => $_getN(3);
-  @$pb.TagNumber(4)
-  set multiple($core.double value) => $_setDouble(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasMultiple() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearMultiple() => $_clearField(4);
-
-  /// 주문에 사용할 펀드 코드
-  @$pb.TagNumber(5)
-  $core.String get fundCode => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set fundCode($core.String value) => $_setString(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasFundCode() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearFundCode() => $_clearField(5);
+  /// 바스켓 B 상세 (OUTPUT_ONLY, 조회 시 포함)
+  @$pb.TagNumber(13)
+  $3.Basket get basketB => $_getN(10);
+  @$pb.TagNumber(13)
+  set basketB($3.Basket value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasBasketB() => $_has(10);
+  @$pb.TagNumber(13)
+  void clearBasketB() => $_clearField(13);
+  @$pb.TagNumber(13)
+  $3.Basket ensureBasketB() => $_ensure(10);
 }
 
 /// 트리거 설정
@@ -685,174 +449,6 @@ class SpreadBpsCondition extends $pb.GeneratedMessage {
   $core.bool hasThresholdBps() => $_has(0);
   @$pb.TagNumber(1)
   void clearThresholdBps() => $_clearField(1);
-}
-
-/// 실행 설정
-class ExecutionConfig extends $pb.GeneratedMessage {
-  factory ExecutionConfig({
-    $core.int? rounds,
-    $fixnum.Int64? roundDelayMs,
-    $core.double? fillThresholdPct,
-    ArbitrageOrderType? orderType,
-    $core.Iterable<$core.MapEntry<$core.String, SymbolPricingConfig>>? pricingConfigs,
-  }) {
-    final result = create();
-    if (rounds != null) result.rounds = rounds;
-    if (roundDelayMs != null) result.roundDelayMs = roundDelayMs;
-    if (fillThresholdPct != null) result.fillThresholdPct = fillThresholdPct;
-    if (orderType != null) result.orderType = orderType;
-    if (pricingConfigs != null) result.pricingConfigs.addEntries(pricingConfigs);
-    return result;
-  }
-
-  ExecutionConfig._();
-
-  factory ExecutionConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ExecutionConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExecutionConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'rounds', $pb.PbFieldType.OU3)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'roundDelayMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'fillThresholdPct', $pb.PbFieldType.OD)
-    ..e<ArbitrageOrderType>(4, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: ArbitrageOrderType.ARBITRAGE_ORDER_TYPE_UNSPECIFIED, valueOf: ArbitrageOrderType.valueOf, enumValues: ArbitrageOrderType.values)
-    ..m<$core.String, SymbolPricingConfig>(5, _omitFieldNames ? '' : 'pricingConfigs', entryClassName: 'ExecutionConfig.PricingConfigsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: SymbolPricingConfig.create, valueDefaultOrMaker: SymbolPricingConfig.getDefault, packageName: const $pb.PackageName('kdo.v1.arbitrage'))
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ExecutionConfig clone() => ExecutionConfig()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ExecutionConfig copyWith(void Function(ExecutionConfig) updates) => super.copyWith((message) => updates(message as ExecutionConfig)) as ExecutionConfig;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ExecutionConfig create() => ExecutionConfig._();
-  @$core.override
-  ExecutionConfig createEmptyInstance() => create();
-  static $pb.PbList<ExecutionConfig> createRepeated() => $pb.PbList<ExecutionConfig>();
-  @$core.pragma('dart2js:noInline')
-  static ExecutionConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExecutionConfig>(create);
-  static ExecutionConfig? _defaultInstance;
-
-  /// 분할 주문 횟수
-  @$pb.TagNumber(1)
-  $core.int get rounds => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set rounds($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasRounds() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRounds() => $_clearField(1);
-
-  /// 라운드 간 딜레이 (ms)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get roundDelayMs => $_getI64(1);
-  @$pb.TagNumber(2)
-  set roundDelayMs($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasRoundDelayMs() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearRoundDelayMs() => $_clearField(2);
-
-  /// 다음 라운드 진행을 위한 체결률 임계값 (0.0~1.0)
-  @$pb.TagNumber(3)
-  $core.double get fillThresholdPct => $_getN(2);
-  @$pb.TagNumber(3)
-  set fillThresholdPct($core.double value) => $_setDouble(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasFillThresholdPct() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearFillThresholdPct() => $_clearField(3);
-
-  /// 주문 유형
-  @$pb.TagNumber(4)
-  ArbitrageOrderType get orderType => $_getN(3);
-  @$pb.TagNumber(4)
-  set orderType(ArbitrageOrderType value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasOrderType() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearOrderType() => $_clearField(4);
-
-  /// 심볼별 호가 설정
-  @$pb.TagNumber(5)
-  $pb.PbMap<$core.String, SymbolPricingConfig> get pricingConfigs => $_getMap(4);
-}
-
-/// 심볼별 호가 설정
-class SymbolPricingConfig extends $pb.GeneratedMessage {
-  factory SymbolPricingConfig({
-    PriceSource? buyPriceSource,
-    PriceSource? sellPriceSource,
-    $core.int? priceOffsetTicks,
-  }) {
-    final result = create();
-    if (buyPriceSource != null) result.buyPriceSource = buyPriceSource;
-    if (sellPriceSource != null) result.sellPriceSource = sellPriceSource;
-    if (priceOffsetTicks != null) result.priceOffsetTicks = priceOffsetTicks;
-    return result;
-  }
-
-  SymbolPricingConfig._();
-
-  factory SymbolPricingConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SymbolPricingConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SymbolPricingConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
-    ..e<PriceSource>(1, _omitFieldNames ? '' : 'buyPriceSource', $pb.PbFieldType.OE, defaultOrMaker: PriceSource.PRICE_SOURCE_UNSPECIFIED, valueOf: PriceSource.valueOf, enumValues: PriceSource.values)
-    ..e<PriceSource>(2, _omitFieldNames ? '' : 'sellPriceSource', $pb.PbFieldType.OE, defaultOrMaker: PriceSource.PRICE_SOURCE_UNSPECIFIED, valueOf: PriceSource.valueOf, enumValues: PriceSource.values)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'priceOffsetTicks', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SymbolPricingConfig clone() => SymbolPricingConfig()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SymbolPricingConfig copyWith(void Function(SymbolPricingConfig) updates) => super.copyWith((message) => updates(message as SymbolPricingConfig)) as SymbolPricingConfig;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SymbolPricingConfig create() => SymbolPricingConfig._();
-  @$core.override
-  SymbolPricingConfig createEmptyInstance() => create();
-  static $pb.PbList<SymbolPricingConfig> createRepeated() => $pb.PbList<SymbolPricingConfig>();
-  @$core.pragma('dart2js:noInline')
-  static SymbolPricingConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SymbolPricingConfig>(create);
-  static SymbolPricingConfig? _defaultInstance;
-
-  /// 매수 시 사용할 가격
-  @$pb.TagNumber(1)
-  PriceSource get buyPriceSource => $_getN(0);
-  @$pb.TagNumber(1)
-  set buyPriceSource(PriceSource value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasBuyPriceSource() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearBuyPriceSource() => $_clearField(1);
-
-  /// 매도 시 사용할 가격
-  @$pb.TagNumber(2)
-  PriceSource get sellPriceSource => $_getN(1);
-  @$pb.TagNumber(2)
-  set sellPriceSource(PriceSource value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasSellPriceSource() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSellPriceSource() => $_clearField(2);
-
-  /// 가격 조정 (틱 단위, +: 공격적, -: 보수적)
-  @$pb.TagNumber(3)
-  $core.int get priceOffsetTicks => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set priceOffsetTicks($core.int value) => $_setSignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasPriceOffsetTicks() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearPriceOffsetTicks() => $_clearField(3);
 }
 
 /// 차익거래 상태
@@ -1400,7 +996,7 @@ class ArbitrageStatusUpdate extends $pb.GeneratedMessage {
   factory ArbitrageStatusUpdate({
     $core.String? name,
     $core.int? id,
-    $3.FieldMask? updateMask,
+    $4.FieldMask? updateMask,
     ArbitrageStatus? status,
     $core.Iterable<BasketItemPrice>? basketAPrices,
     $core.Iterable<BasketItemPrice>? basketBPrices,
@@ -1423,7 +1019,7 @@ class ArbitrageStatusUpdate extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ArbitrageStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOM<$3.FieldMask>(3, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
+    ..aOM<$4.FieldMask>(3, _omitFieldNames ? '' : 'updateMask', subBuilder: $4.FieldMask.create)
     ..aOM<ArbitrageStatus>(4, _omitFieldNames ? '' : 'status', subBuilder: ArbitrageStatus.create)
     ..pc<BasketItemPrice>(5, _omitFieldNames ? '' : 'basketAPrices', $pb.PbFieldType.PM, subBuilder: BasketItemPrice.create)
     ..pc<BasketItemPrice>(6, _omitFieldNames ? '' : 'basketBPrices', $pb.PbFieldType.PM, subBuilder: BasketItemPrice.create)
@@ -1469,15 +1065,15 @@ class ArbitrageStatusUpdate extends $pb.GeneratedMessage {
 
   /// 업데이트된 필드들
   @$pb.TagNumber(3)
-  $3.FieldMask get updateMask => $_getN(2);
+  $4.FieldMask get updateMask => $_getN(2);
   @$pb.TagNumber(3)
-  set updateMask($3.FieldMask value) => $_setField(3, value);
+  set updateMask($4.FieldMask value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasUpdateMask() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdateMask() => $_clearField(3);
   @$pb.TagNumber(3)
-  $3.FieldMask ensureUpdateMask() => $_ensure(2);
+  $4.FieldMask ensureUpdateMask() => $_ensure(2);
 
   /// 상태 (필드마스크에 따라 부분 업데이트)
   @$pb.TagNumber(4)
@@ -2580,10 +2176,26 @@ class ListArbitragesRequest extends $pb.GeneratedMessage {
   /// Available Fields:
   /// * portfolio_id - 포트폴리오 ID
   /// * is_active - 활성화 여부
+  /// * basket_a_id - 바스켓 A ID
+  /// * basket_b_id - 바스켓 B ID
+  /// * basket_a.basket_type - 바스켓 A 타입
+  /// * basket_b.basket_type - 바스켓 B 타입
+  /// * basket_a.etf_constituent.etf_symbol - 바스켓 A의 ETF 심볼
+  /// * basket_b.etf_constituent.etf_symbol - 바스켓 B의 ETF 심볼
+  ///
+  /// Operators:
+  /// * = : 일치
+  /// * != : 불일치
   ///
   /// Examples:
-  /// * filter=portfolio_id=1
-  /// * filter=is_active=true
+  /// * portfolio_id=1
+  /// * is_active=true
+  /// * is_active=false
+  /// * basket_a_id=10
+  /// * portfolio_id=1 AND is_active=true
+  /// * basket_a.basket_type=BASKET_TYPE_ETF_CONSTITUENT
+  /// * basket_a.etf_constituent.etf_symbol="069500"
+  /// * basket_a.basket_type=BASKET_TYPE_ETF_CONSTITUENT AND basket_b.basket_type=BASKET_TYPE_REBALANCING
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -2700,7 +2312,7 @@ class CreateArbitrageRequest extends $pb.GeneratedMessage {
 class UpdateArbitrageRequest extends $pb.GeneratedMessage {
   factory UpdateArbitrageRequest({
     Arbitrage? arbitrage,
-    $3.FieldMask? updateMask,
+    $4.FieldMask? updateMask,
   }) {
     final result = create();
     if (arbitrage != null) result.arbitrage = arbitrage;
@@ -2715,7 +2327,7 @@ class UpdateArbitrageRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateArbitrageRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.arbitrage'), createEmptyInstance: create)
     ..aOM<Arbitrage>(1, _omitFieldNames ? '' : 'arbitrage', subBuilder: Arbitrage.create)
-    ..aOM<$3.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
+    ..aOM<$4.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $4.FieldMask.create)
     ..hasRequiredFields = false
   ;
 
@@ -2750,15 +2362,15 @@ class UpdateArbitrageRequest extends $pb.GeneratedMessage {
 
   /// 수정할 필드 마스크
   @$pb.TagNumber(2)
-  $3.FieldMask get updateMask => $_getN(1);
+  $4.FieldMask get updateMask => $_getN(1);
   @$pb.TagNumber(2)
-  set updateMask($3.FieldMask value) => $_setField(2, value);
+  set updateMask($4.FieldMask value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasUpdateMask() => $_has(1);
   @$pb.TagNumber(2)
   void clearUpdateMask() => $_clearField(2);
   @$pb.TagNumber(2)
-  $3.FieldMask ensureUpdateMask() => $_ensure(1);
+  $4.FieldMask ensureUpdateMask() => $_ensure(1);
 }
 
 class DeleteArbitrageRequest extends $pb.GeneratedMessage {
