@@ -103,8 +103,8 @@ message Basket {
     // ETF 구성종목 설정 (basket_type이 ETF_CONSTITUENT인 경우)
     EtfConstituentConfig etf_constituent = 7;
 
-    // 리밸런싱 설정 (basket_type이 REBALANCING인 경우)
-    RebalancingConfig rebalancing = 8;
+    // 청산 설정 (basket_type이 LIQUIDATION인 경우)
+    LiquidationConfig liquidation = 8;
 
     // 커스텀 바스켓은 추가 설정 없음
   }
@@ -125,20 +125,12 @@ enum BasketType {
   BASKET_TYPE_UNSPECIFIED = 0;
   // ETF 구성종목 바스켓 (PDF 기반 자동 계산)
   BASKET_TYPE_ETF_CONSTITUENT = 1;
-  // 리밸런싱 바스켓 (특정 시점에 잔고 청산)
-  BASKET_TYPE_REBALANCING = 2;
+  // 청산 바스켓 (잔고 전량 청산: 롱→매도, 숏→매수)
+  BASKET_TYPE_LIQUIDATION = 2;
   // 커스텀 바스켓 (수동 구성)
   BASKET_TYPE_CUSTOM = 3;
 }
 
-// 주문 방향 (리밸런싱 바스켓용)
-enum OrderSide {
-  ORDER_SIDE_UNSPECIFIED = 0;
-  // 매수
-  ORDER_SIDE_BID = 1;
-  // 매도
-  ORDER_SIDE_ASK = 2;
-}
 
 // ETF 구성종목 바스켓 설정
 message EtfConstituentConfig {
@@ -147,19 +139,14 @@ message EtfConstituentConfig {
     (google.api.field_behavior) = REQUIRED
   ];
 
-  // Creation Unit 수량
-  int64 creation_unit = 2;
+  int64 quantity = 2;
 }
 
-// 리밸런싱 바스켓 설정
-message RebalancingConfig {
-  // 리밸런싱 방향
-  OrderSide side = 1 [
-    (google.api.field_behavior) = REQUIRED
-  ];
-
-  // 리밸런싱 목표 시점 (optional)
-  google.protobuf.Timestamp target_time = 2;
+// 청산 바스켓 설정
+// 청산은 방향이 없음 - 롱 포지션은 매도, 숏 포지션은 매수로 자동 결정
+message LiquidationConfig {
+  // 청산 목표 시점 (optional)
+  google.protobuf.Timestamp target_time = 1;
 }
 
 // 바스켓 구성 항목
@@ -317,7 +304,7 @@ message ListBasketsRequest {
   // 필터링 조건 (optional, AIP-160)
   //
   // Available Fields:
-  // * basket_type - 바스켓 타입 (BASKET_TYPE_ETF_CONSTITUENT, BASKET_TYPE_REBALANCING, BASKET_TYPE_CUSTOM)
+  // * basket_type - 바스켓 타입 (BASKET_TYPE_ETF_CONSTITUENT, BASKET_TYPE_LIQUIDATION, BASKET_TYPE_CUSTOM)
   // * display_name - 바스켓 이름 (문자열, 부분 일치)
   // * etf_constituent.etf_symbol - ETF 심볼 (ETF_CONSTITUENT 타입인 경우)
   //
@@ -332,7 +319,7 @@ message ListBasketsRequest {
   // * display_name:"KODEX"
   // * etf_constituent.etf_symbol="069500"
   // * basket_type=BASKET_TYPE_ETF_CONSTITUENT AND etf_constituent.etf_symbol="069500"
-  // * basket_type=BASKET_TYPE_REBALANCING AND display_name:"리밸런싱"
+  // * basket_type=BASKET_TYPE_LIQUIDATION AND display_name:"청산"
   string filter = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 

@@ -25,7 +25,7 @@ export 'basket.pbenum.dart';
 
 enum Basket_TypeConfig {
   etfConstituent, 
-  rebalancing, 
+  liquidation, 
   notSet
 }
 
@@ -39,7 +39,7 @@ class Basket extends $pb.GeneratedMessage {
     $core.Iterable<BasketItem>? items,
     ExecutionConfig? executionConfig,
     EtfConstituentConfig? etfConstituent,
-    RebalancingConfig? rebalancing,
+    LiquidationConfig? liquidation,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
   }) {
@@ -51,7 +51,7 @@ class Basket extends $pb.GeneratedMessage {
     if (items != null) result.items.addAll(items);
     if (executionConfig != null) result.executionConfig = executionConfig;
     if (etfConstituent != null) result.etfConstituent = etfConstituent;
-    if (rebalancing != null) result.rebalancing = rebalancing;
+    if (liquidation != null) result.liquidation = liquidation;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
     return result;
@@ -64,7 +64,7 @@ class Basket extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, Basket_TypeConfig> _Basket_TypeConfigByTag = {
     7 : Basket_TypeConfig.etfConstituent,
-    8 : Basket_TypeConfig.rebalancing,
+    8 : Basket_TypeConfig.liquidation,
     0 : Basket_TypeConfig.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Basket', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
@@ -76,7 +76,7 @@ class Basket extends $pb.GeneratedMessage {
     ..pc<BasketItem>(5, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: BasketItem.create)
     ..aOM<ExecutionConfig>(6, _omitFieldNames ? '' : 'executionConfig', subBuilder: ExecutionConfig.create)
     ..aOM<EtfConstituentConfig>(7, _omitFieldNames ? '' : 'etfConstituent', subBuilder: EtfConstituentConfig.create)
-    ..aOM<RebalancingConfig>(8, _omitFieldNames ? '' : 'rebalancing', subBuilder: RebalancingConfig.create)
+    ..aOM<LiquidationConfig>(8, _omitFieldNames ? '' : 'liquidation', subBuilder: LiquidationConfig.create)
     ..aOM<$2.Timestamp>(11, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(12, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
@@ -170,17 +170,17 @@ class Basket extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   EtfConstituentConfig ensureEtfConstituent() => $_ensure(6);
 
-  /// 리밸런싱 설정 (basket_type이 REBALANCING인 경우)
+  /// 청산 설정 (basket_type이 LIQUIDATION인 경우)
   @$pb.TagNumber(8)
-  RebalancingConfig get rebalancing => $_getN(7);
+  LiquidationConfig get liquidation => $_getN(7);
   @$pb.TagNumber(8)
-  set rebalancing(RebalancingConfig value) => $_setField(8, value);
+  set liquidation(LiquidationConfig value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasRebalancing() => $_has(7);
+  $core.bool hasLiquidation() => $_has(7);
   @$pb.TagNumber(8)
-  void clearRebalancing() => $_clearField(8);
+  void clearLiquidation() => $_clearField(8);
   @$pb.TagNumber(8)
-  RebalancingConfig ensureRebalancing() => $_ensure(7);
+  LiquidationConfig ensureLiquidation() => $_ensure(7);
 
   /// 생성 시간
   @$pb.TagNumber(11)
@@ -211,11 +211,11 @@ class Basket extends $pb.GeneratedMessage {
 class EtfConstituentConfig extends $pb.GeneratedMessage {
   factory EtfConstituentConfig({
     $core.String? etfSymbol,
-    $fixnum.Int64? creationUnit,
+    $fixnum.Int64? quantity,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
-    if (creationUnit != null) result.creationUnit = creationUnit;
+    if (quantity != null) result.quantity = quantity;
     return result;
   }
 
@@ -226,7 +226,7 @@ class EtfConstituentConfig extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfConstituentConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'creationUnit')
+    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
     ..hasRequiredFields = false
   ;
 
@@ -257,78 +257,65 @@ class EtfConstituentConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEtfSymbol() => $_clearField(1);
 
-  /// Creation Unit 수량
   @$pb.TagNumber(2)
-  $fixnum.Int64 get creationUnit => $_getI64(1);
+  $fixnum.Int64 get quantity => $_getI64(1);
   @$pb.TagNumber(2)
-  set creationUnit($fixnum.Int64 value) => $_setInt64(1, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasCreationUnit() => $_has(1);
+  $core.bool hasQuantity() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCreationUnit() => $_clearField(2);
+  void clearQuantity() => $_clearField(2);
 }
 
-/// 리밸런싱 바스켓 설정
-class RebalancingConfig extends $pb.GeneratedMessage {
-  factory RebalancingConfig({
-    OrderSide? side,
+/// 청산 바스켓 설정
+/// 청산은 방향이 없음 - 롱 포지션은 매도, 숏 포지션은 매수로 자동 결정
+class LiquidationConfig extends $pb.GeneratedMessage {
+  factory LiquidationConfig({
     $2.Timestamp? targetTime,
   }) {
     final result = create();
-    if (side != null) result.side = side;
     if (targetTime != null) result.targetTime = targetTime;
     return result;
   }
 
-  RebalancingConfig._();
+  LiquidationConfig._();
 
-  factory RebalancingConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory RebalancingConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory LiquidationConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LiquidationConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RebalancingConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
-    ..e<OrderSide>(1, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
-    ..aOM<$2.Timestamp>(2, _omitFieldNames ? '' : 'targetTime', subBuilder: $2.Timestamp.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LiquidationConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
+    ..aOM<$2.Timestamp>(1, _omitFieldNames ? '' : 'targetTime', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RebalancingConfig clone() => RebalancingConfig()..mergeFromMessage(this);
+  LiquidationConfig clone() => LiquidationConfig()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RebalancingConfig copyWith(void Function(RebalancingConfig) updates) => super.copyWith((message) => updates(message as RebalancingConfig)) as RebalancingConfig;
+  LiquidationConfig copyWith(void Function(LiquidationConfig) updates) => super.copyWith((message) => updates(message as LiquidationConfig)) as LiquidationConfig;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static RebalancingConfig create() => RebalancingConfig._();
+  static LiquidationConfig create() => LiquidationConfig._();
   @$core.override
-  RebalancingConfig createEmptyInstance() => create();
-  static $pb.PbList<RebalancingConfig> createRepeated() => $pb.PbList<RebalancingConfig>();
+  LiquidationConfig createEmptyInstance() => create();
+  static $pb.PbList<LiquidationConfig> createRepeated() => $pb.PbList<LiquidationConfig>();
   @$core.pragma('dart2js:noInline')
-  static RebalancingConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RebalancingConfig>(create);
-  static RebalancingConfig? _defaultInstance;
+  static LiquidationConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LiquidationConfig>(create);
+  static LiquidationConfig? _defaultInstance;
 
-  /// 리밸런싱 방향
+  /// 청산 목표 시점 (optional)
   @$pb.TagNumber(1)
-  OrderSide get side => $_getN(0);
+  $2.Timestamp get targetTime => $_getN(0);
   @$pb.TagNumber(1)
-  set side(OrderSide value) => $_setField(1, value);
+  set targetTime($2.Timestamp value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasSide() => $_has(0);
+  $core.bool hasTargetTime() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSide() => $_clearField(1);
-
-  /// 리밸런싱 목표 시점 (optional)
-  @$pb.TagNumber(2)
-  $2.Timestamp get targetTime => $_getN(1);
-  @$pb.TagNumber(2)
-  set targetTime($2.Timestamp value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTargetTime() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTargetTime() => $_clearField(2);
-  @$pb.TagNumber(2)
-  $2.Timestamp ensureTargetTime() => $_ensure(1);
+  void clearTargetTime() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.Timestamp ensureTargetTime() => $_ensure(0);
 }
 
 /// 바스켓 구성 항목
@@ -920,7 +907,7 @@ class ListBasketsRequest extends $pb.GeneratedMessage {
   /// 필터링 조건 (optional, AIP-160)
   ///
   /// Available Fields:
-  /// * basket_type - 바스켓 타입 (BASKET_TYPE_ETF_CONSTITUENT, BASKET_TYPE_REBALANCING, BASKET_TYPE_CUSTOM)
+  /// * basket_type - 바스켓 타입 (BASKET_TYPE_ETF_CONSTITUENT, BASKET_TYPE_LIQUIDATION, BASKET_TYPE_CUSTOM)
   /// * display_name - 바스켓 이름 (문자열, 부분 일치)
   /// * etf_constituent.etf_symbol - ETF 심볼 (ETF_CONSTITUENT 타입인 경우)
   ///
@@ -935,7 +922,7 @@ class ListBasketsRequest extends $pb.GeneratedMessage {
   /// * display_name:"KODEX"
   /// * etf_constituent.etf_symbol="069500"
   /// * basket_type=BASKET_TYPE_ETF_CONSTITUENT AND etf_constituent.etf_symbol="069500"
-  /// * basket_type=BASKET_TYPE_REBALANCING AND display_name:"리밸런싱"
+  /// * basket_type=BASKET_TYPE_LIQUIDATION AND display_name:"청산"
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)

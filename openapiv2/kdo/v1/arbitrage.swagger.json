@@ -1197,9 +1197,9 @@
           "$ref": "#/definitions/basketEtfConstituentConfig",
           "title": "ETF 구성종목 설정 (basket_type이 ETF_CONSTITUENT인 경우)"
         },
-        "rebalancing": {
-          "$ref": "#/definitions/basketRebalancingConfig",
-          "title": "리밸런싱 설정 (basket_type이 REBALANCING인 경우)"
+        "liquidation": {
+          "$ref": "#/definitions/basketLiquidationConfig",
+          "title": "청산 설정 (basket_type이 LIQUIDATION인 경우)"
         },
         "createTime": {
           "type": "string",
@@ -1256,11 +1256,11 @@
       "enum": [
         "BASKET_TYPE_UNSPECIFIED",
         "BASKET_TYPE_ETF_CONSTITUENT",
-        "BASKET_TYPE_REBALANCING",
+        "BASKET_TYPE_LIQUIDATION",
         "BASKET_TYPE_CUSTOM"
       ],
       "default": "BASKET_TYPE_UNSPECIFIED",
-      "description": "- BASKET_TYPE_ETF_CONSTITUENT: ETF 구성종목 바스켓 (PDF 기반 자동 계산)\n - BASKET_TYPE_REBALANCING: 리밸런싱 바스켓 (특정 시점에 잔고 청산)\n - BASKET_TYPE_CUSTOM: 커스텀 바스켓 (수동 구성)",
+      "description": "- BASKET_TYPE_ETF_CONSTITUENT: ETF 구성종목 바스켓 (PDF 기반 자동 계산)\n - BASKET_TYPE_LIQUIDATION: 청산 바스켓 (잔고 전량 청산: 롱→매도, 숏→매수)\n - BASKET_TYPE_CUSTOM: 커스텀 바스켓 (수동 구성)",
       "title": "바스켓 타입"
     },
     "basketEtfConstituentConfig": {
@@ -1270,10 +1270,9 @@
           "type": "string",
           "title": "ETF 심볼"
         },
-        "creationUnit": {
+        "quantity": {
           "type": "string",
-          "format": "int64",
-          "title": "Creation Unit 수량"
+          "format": "int64"
         }
       },
       "title": "ETF 구성종목 바스켓 설정",
@@ -1313,6 +1312,17 @@
       },
       "title": "실행 설정"
     },
+    "basketLiquidationConfig": {
+      "type": "object",
+      "properties": {
+        "targetTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "청산 목표 시점 (optional)"
+        }
+      },
+      "title": "청산 바스켓 설정\n청산은 방향이 없음 - 롱 포지션은 매도, 숏 포지션은 매수로 자동 결정"
+    },
     "basketPriceSource": {
       "type": "string",
       "enum": [
@@ -1329,24 +1339,6 @@
       "default": "PRICE_SOURCE_UNSPECIFIED",
       "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가\n - PRICE_SOURCE_BID3: 3차 매수호가\n - PRICE_SOURCE_ASK3: 3차 매도호가",
       "title": "가격 소스"
-    },
-    "basketRebalancingConfig": {
-      "type": "object",
-      "properties": {
-        "side": {
-          "$ref": "#/definitions/v1basketOrderSide",
-          "title": "리밸런싱 방향"
-        },
-        "targetTime": {
-          "type": "string",
-          "format": "date-time",
-          "title": "리밸런싱 목표 시점 (optional)"
-        }
-      },
-      "title": "리밸런싱 바스켓 설정",
-      "required": [
-        "side"
-      ]
     },
     "basketSymbolPricingConfig": {
       "type": "object",
@@ -1393,17 +1385,6 @@
           }
         }
       }
-    },
-    "v1basketOrderSide": {
-      "type": "string",
-      "enum": [
-        "ORDER_SIDE_UNSPECIFIED",
-        "ORDER_SIDE_BID",
-        "ORDER_SIDE_ASK"
-      ],
-      "default": "ORDER_SIDE_UNSPECIFIED",
-      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
-      "title": "주문 방향 (리밸런싱 바스켓용)"
     },
     "v1basketOrderType": {
       "type": "string",

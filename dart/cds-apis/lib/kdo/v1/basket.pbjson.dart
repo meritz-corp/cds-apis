@@ -20,7 +20,7 @@ const BasketType$json = {
   '2': [
     {'1': 'BASKET_TYPE_UNSPECIFIED', '2': 0},
     {'1': 'BASKET_TYPE_ETF_CONSTITUENT', '2': 1},
-    {'1': 'BASKET_TYPE_REBALANCING', '2': 2},
+    {'1': 'BASKET_TYPE_LIQUIDATION', '2': 2},
     {'1': 'BASKET_TYPE_CUSTOM', '2': 3},
   ],
 };
@@ -28,23 +28,8 @@ const BasketType$json = {
 /// Descriptor for `BasketType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List basketTypeDescriptor = $convert.base64Decode(
     'CgpCYXNrZXRUeXBlEhsKF0JBU0tFVF9UWVBFX1VOU1BFQ0lGSUVEEAASHwobQkFTS0VUX1RZUE'
-    'VfRVRGX0NPTlNUSVRVRU5UEAESGwoXQkFTS0VUX1RZUEVfUkVCQUxBTkNJTkcQAhIWChJCQVNL'
+    'VfRVRGX0NPTlNUSVRVRU5UEAESGwoXQkFTS0VUX1RZUEVfTElRVUlEQVRJT04QAhIWChJCQVNL'
     'RVRfVFlQRV9DVVNUT00QAw==');
-
-@$core.Deprecated('Use orderSideDescriptor instead')
-const OrderSide$json = {
-  '1': 'OrderSide',
-  '2': [
-    {'1': 'ORDER_SIDE_UNSPECIFIED', '2': 0},
-    {'1': 'ORDER_SIDE_BID', '2': 1},
-    {'1': 'ORDER_SIDE_ASK', '2': 2},
-  ],
-};
-
-/// Descriptor for `OrderSide`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List orderSideDescriptor = $convert.base64Decode(
-    'CglPcmRlclNpZGUSGgoWT1JERVJfU0lERV9VTlNQRUNJRklFRBAAEhIKDk9SREVSX1NJREVfQk'
-    'lEEAESEgoOT1JERVJfU0lERV9BU0sQAg==');
 
 @$core.Deprecated('Use priceSourceDescriptor instead')
 const PriceSource$json = {
@@ -97,7 +82,7 @@ const Basket$json = {
     {'1': 'items', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketItem', '10': 'items'},
     {'1': 'execution_config', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.basket.ExecutionConfig', '10': 'executionConfig'},
     {'1': 'etf_constituent', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.basket.EtfConstituentConfig', '9': 0, '10': 'etfConstituent'},
-    {'1': 'rebalancing', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.basket.RebalancingConfig', '9': 0, '10': 'rebalancing'},
+    {'1': 'liquidation', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.basket.LiquidationConfig', '9': 0, '10': 'liquidation'},
     {'1': 'create_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
@@ -115,8 +100,8 @@ final $typed_data.Uint8List basketDescriptor = $convert.base64Decode(
     'IZLmtkby52MS5iYXNrZXQuQmFza2V0SXRlbVIFaXRlbXMSSQoQZXhlY3V0aW9uX2NvbmZpZxgG'
     'IAEoCzIeLmtkby52MS5iYXNrZXQuRXhlY3V0aW9uQ29uZmlnUg9leGVjdXRpb25Db25maWcSTg'
     'oPZXRmX2NvbnN0aXR1ZW50GAcgASgLMiMua2RvLnYxLmJhc2tldC5FdGZDb25zdGl0dWVudENv'
-    'bmZpZ0gAUg5ldGZDb25zdGl0dWVudBJECgtyZWJhbGFuY2luZxgIIAEoCzIgLmtkby52MS5iYX'
-    'NrZXQuUmViYWxhbmNpbmdDb25maWdIAFILcmViYWxhbmNpbmcSQQoLY3JlYXRlX3RpbWUYCyAB'
+    'bmZpZ0gAUg5ldGZDb25zdGl0dWVudBJECgtsaXF1aWRhdGlvbhgIIAEoCzIgLmtkby52MS5iYX'
+    'NrZXQuTGlxdWlkYXRpb25Db25maWdIAFILbGlxdWlkYXRpb24SQQoLY3JlYXRlX3RpbWUYCyAB'
     'KAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZG'
     'F0ZV90aW1lGAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRl'
     'VGltZTot6kEqChZrZG8uY2RzYXBpcy54eXovQmFza2V0EhBiYXNrZXRzL3tiYXNrZXR9Qg0KC3'
@@ -127,29 +112,27 @@ const EtfConstituentConfig$json = {
   '1': 'EtfConstituentConfig',
   '2': [
     {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etfSymbol'},
-    {'1': 'creation_unit', '3': 2, '4': 1, '5': 3, '10': 'creationUnit'},
+    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
   ],
 };
 
 /// Descriptor for `EtfConstituentConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfConstituentConfigDescriptor = $convert.base64Decode(
     'ChRFdGZDb25zdGl0dWVudENvbmZpZxIjCgpldGZfc3ltYm9sGAEgASgJQgTiQQECUglldGZTeW'
-    '1ib2wSIwoNY3JlYXRpb25fdW5pdBgCIAEoA1IMY3JlYXRpb25Vbml0');
+    '1ib2wSGgoIcXVhbnRpdHkYAiABKANSCHF1YW50aXR5');
 
-@$core.Deprecated('Use rebalancingConfigDescriptor instead')
-const RebalancingConfig$json = {
-  '1': 'RebalancingConfig',
+@$core.Deprecated('Use liquidationConfigDescriptor instead')
+const LiquidationConfig$json = {
+  '1': 'LiquidationConfig',
   '2': [
-    {'1': 'side', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.basket.OrderSide', '8': {}, '10': 'side'},
-    {'1': 'target_time', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'targetTime'},
+    {'1': 'target_time', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'targetTime'},
   ],
 };
 
-/// Descriptor for `RebalancingConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List rebalancingConfigDescriptor = $convert.base64Decode(
-    'ChFSZWJhbGFuY2luZ0NvbmZpZxIyCgRzaWRlGAEgASgOMhgua2RvLnYxLmJhc2tldC5PcmRlcl'
-    'NpZGVCBOJBAQJSBHNpZGUSOwoLdGFyZ2V0X3RpbWUYAiABKAsyGi5nb29nbGUucHJvdG9idWYu'
-    'VGltZXN0YW1wUgp0YXJnZXRUaW1l');
+/// Descriptor for `LiquidationConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List liquidationConfigDescriptor = $convert.base64Decode(
+    'ChFMaXF1aWRhdGlvbkNvbmZpZxI7Cgt0YXJnZXRfdGltZRgBIAEoCzIaLmdvb2dsZS5wcm90b2'
+    'J1Zi5UaW1lc3RhbXBSCnRhcmdldFRpbWU=');
 
 @$core.Deprecated('Use basketItemDescriptor instead')
 const BasketItem$json = {

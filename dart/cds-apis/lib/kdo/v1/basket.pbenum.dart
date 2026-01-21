@@ -19,15 +19,15 @@ class BasketType extends $pb.ProtobufEnum {
   static const BasketType BASKET_TYPE_UNSPECIFIED = BasketType._(0, _omitEnumNames ? '' : 'BASKET_TYPE_UNSPECIFIED');
   /// ETF 구성종목 바스켓 (PDF 기반 자동 계산)
   static const BasketType BASKET_TYPE_ETF_CONSTITUENT = BasketType._(1, _omitEnumNames ? '' : 'BASKET_TYPE_ETF_CONSTITUENT');
-  /// 리밸런싱 바스켓 (특정 시점에 잔고 청산)
-  static const BasketType BASKET_TYPE_REBALANCING = BasketType._(2, _omitEnumNames ? '' : 'BASKET_TYPE_REBALANCING');
+  /// 청산 바스켓 (잔고 전량 청산: 롱→매도, 숏→매수)
+  static const BasketType BASKET_TYPE_LIQUIDATION = BasketType._(2, _omitEnumNames ? '' : 'BASKET_TYPE_LIQUIDATION');
   /// 커스텀 바스켓 (수동 구성)
   static const BasketType BASKET_TYPE_CUSTOM = BasketType._(3, _omitEnumNames ? '' : 'BASKET_TYPE_CUSTOM');
 
   static const $core.List<BasketType> values = <BasketType> [
     BASKET_TYPE_UNSPECIFIED,
     BASKET_TYPE_ETF_CONSTITUENT,
-    BASKET_TYPE_REBALANCING,
+    BASKET_TYPE_LIQUIDATION,
     BASKET_TYPE_CUSTOM,
   ];
 
@@ -35,26 +35,6 @@ class BasketType extends $pb.ProtobufEnum {
   static BasketType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const BasketType._(super.value, super.name);
-}
-
-/// 주문 방향 (리밸런싱 바스켓용)
-class OrderSide extends $pb.ProtobufEnum {
-  static const OrderSide ORDER_SIDE_UNSPECIFIED = OrderSide._(0, _omitEnumNames ? '' : 'ORDER_SIDE_UNSPECIFIED');
-  /// 매수
-  static const OrderSide ORDER_SIDE_BID = OrderSide._(1, _omitEnumNames ? '' : 'ORDER_SIDE_BID');
-  /// 매도
-  static const OrderSide ORDER_SIDE_ASK = OrderSide._(2, _omitEnumNames ? '' : 'ORDER_SIDE_ASK');
-
-  static const $core.List<OrderSide> values = <OrderSide> [
-    ORDER_SIDE_UNSPECIFIED,
-    ORDER_SIDE_BID,
-    ORDER_SIDE_ASK,
-  ];
-
-  static final $core.List<OrderSide?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static OrderSide? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const OrderSide._(super.value, super.name);
 }
 
 /// 가격 소스

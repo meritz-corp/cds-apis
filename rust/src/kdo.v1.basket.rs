@@ -45,9 +45,9 @@ pub mod basket {
         /// ETF 구성종목 설정 (basket_type이 ETF_CONSTITUENT인 경우)
         #[prost(message, tag="7")]
         EtfConstituent(super::EtfConstituentConfig),
-        /// 리밸런싱 설정 (basket_type이 REBALANCING인 경우)
+        /// 청산 설정 (basket_type이 LIQUIDATION인 경우)
         #[prost(message, tag="8")]
-        Rebalancing(super::RebalancingConfig),
+        Liquidation(super::LiquidationConfig),
     }
 }
 /// ETF 구성종목 바스켓 설정
@@ -57,19 +57,16 @@ pub struct EtfConstituentConfig {
     /// ETF 심볼
     #[prost(string, tag="1")]
     pub etf_symbol: ::prost::alloc::string::String,
-    /// Creation Unit 수량
     #[prost(int64, tag="2")]
-    pub creation_unit: i64,
+    pub quantity: i64,
 }
-/// 리밸런싱 바스켓 설정
+/// 청산 바스켓 설정
+/// 청산은 방향이 없음 - 롱 포지션은 매도, 숏 포지션은 매수로 자동 결정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct RebalancingConfig {
-    /// 리밸런싱 방향
-    #[prost(enumeration="OrderSide", tag="1")]
-    pub side: i32,
-    /// 리밸런싱 목표 시점 (optional)
-    #[prost(message, optional, tag="2")]
+pub struct LiquidationConfig {
+    /// 청산 목표 시점 (optional)
+    #[prost(message, optional, tag="1")]
     pub target_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// 바스켓 구성 항목
@@ -200,7 +197,7 @@ pub struct ListBasketsRequest {
     /// 필터링 조건 (optional, AIP-160)
     ///
     /// Available Fields:
-    /// * basket_type - 바스켓 타입 (BASKET_TYPE_ETF_CONSTITUENT, BASKET_TYPE_REBALANCING, BASKET_TYPE_CUSTOM)
+    /// * basket_type - 바스켓 타입 (BASKET_TYPE_ETF_CONSTITUENT, BASKET_TYPE_LIQUIDATION, BASKET_TYPE_CUSTOM)
     /// * display_name - 바스켓 이름 (문자열, 부분 일치)
     /// * etf_constituent.etf_symbol - ETF 심볼 (ETF_CONSTITUENT 타입인 경우)
     ///
@@ -215,7 +212,7 @@ pub struct ListBasketsRequest {
     /// * display_name:"KODEX"
     /// * etf_constituent.etf_symbol="069500"
     /// * basket_type=BASKET_TYPE_ETF_CONSTITUENT AND etf_constituent.etf_symbol="069500"
-    /// * basket_type=BASKET_TYPE_REBALANCING AND display_name:"리밸런싱"
+    /// * basket_type=BASKET_TYPE_LIQUIDATION AND display_name:"청산"
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }
@@ -267,8 +264,8 @@ pub enum BasketType {
     Unspecified = 0,
     /// ETF 구성종목 바스켓 (PDF 기반 자동 계산)
     EtfConstituent = 1,
-    /// 리밸런싱 바스켓 (특정 시점에 잔고 청산)
-    Rebalancing = 2,
+    /// 청산 바스켓 (잔고 전량 청산: 롱→매도, 숏→매수)
+    Liquidation = 2,
     /// 커스텀 바스켓 (수동 구성)
     Custom = 3,
 }
@@ -281,7 +278,7 @@ impl BasketType {
         match self {
             BasketType::Unspecified => "BASKET_TYPE_UNSPECIFIED",
             BasketType::EtfConstituent => "BASKET_TYPE_ETF_CONSTITUENT",
-            BasketType::Rebalancing => "BASKET_TYPE_REBALANCING",
+            BasketType::Liquidation => "BASKET_TYPE_LIQUIDATION",
             BasketType::Custom => "BASKET_TYPE_CUSTOM",
         }
     }
@@ -290,40 +287,8 @@ impl BasketType {
         match value {
             "BASKET_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "BASKET_TYPE_ETF_CONSTITUENT" => Some(Self::EtfConstituent),
-            "BASKET_TYPE_REBALANCING" => Some(Self::Rebalancing),
+            "BASKET_TYPE_LIQUIDATION" => Some(Self::Liquidation),
             "BASKET_TYPE_CUSTOM" => Some(Self::Custom),
-            _ => None,
-        }
-    }
-}
-/// 주문 방향 (리밸런싱 바스켓용)
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum OrderSide {
-    Unspecified = 0,
-    /// 매수
-    Bid = 1,
-    /// 매도
-    Ask = 2,
-}
-impl OrderSide {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            OrderSide::Unspecified => "ORDER_SIDE_UNSPECIFIED",
-            OrderSide::Bid => "ORDER_SIDE_BID",
-            OrderSide::Ask => "ORDER_SIDE_ASK",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "ORDER_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
-            "ORDER_SIDE_BID" => Some(Self::Bid),
-            "ORDER_SIDE_ASK" => Some(Self::Ask),
             _ => None,
         }
     }
