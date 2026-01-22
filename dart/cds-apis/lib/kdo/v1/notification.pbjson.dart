@@ -49,7 +49,7 @@ final $typed_data.Uint8List notificationStateDescriptor = $convert.base64Decode(
 const ListNotificationsRequest$json = {
   '1': 'ListNotificationsRequest',
   '2': [
-    {'1': 'parent', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'parent'},
+    {'1': 'user', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'user'},
     {'1': 'page_size', '3': 2, '4': 1, '5': 5, '10': 'pageSize'},
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '10': 'pageToken'},
     {'1': 'filter', '3': 4, '4': 1, '5': 9, '10': 'filter'},
@@ -58,9 +58,9 @@ const ListNotificationsRequest$json = {
 
 /// Descriptor for `ListNotificationsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listNotificationsRequestDescriptor = $convert.base64Decode(
-    'ChhMaXN0Tm90aWZpY2F0aW9uc1JlcXVlc3QSNQoGcGFyZW50GAEgASgJQh3iQQEC+kEWChRrZG'
-    '8uY2RzYXBpcy54eXovVXNlclIGcGFyZW50EhsKCXBhZ2Vfc2l6ZRgCIAEoBVIIcGFnZVNpemUS'
-    'HQoKcGFnZV90b2tlbhgDIAEoCVIJcGFnZVRva2VuEhYKBmZpbHRlchgEIAEoCVIGZmlsdGVy');
+    'ChhMaXN0Tm90aWZpY2F0aW9uc1JlcXVlc3QSMQoEdXNlchgBIAEoCUId4kEBAvpBFgoUa2RvLm'
+    'Nkc2FwaXMueHl6L1VzZXJSBHVzZXISGwoJcGFnZV9zaXplGAIgASgFUghwYWdlU2l6ZRIdCgpw'
+    'YWdlX3Rva2VuGAMgASgJUglwYWdlVG9rZW4SFgoGZmlsdGVyGAQgASgJUgZmaWx0ZXI=');
 
 @$core.Deprecated('Use listNotificationsResponseDescriptor instead')
 const ListNotificationsResponse$json = {
@@ -81,14 +81,19 @@ final $typed_data.Uint8List listNotificationsResponseDescriptor = $convert.base6
 const SubscribeNotificationsRequest$json = {
   '1': 'SubscribeNotificationsRequest',
   '2': [
-    {'1': 'parent', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'parent'},
+    {'1': 'user', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'user'},
+    {'1': 'portfolio', '3': 2, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'portfolio', '17': true},
+  ],
+  '8': [
+    {'1': '_portfolio'},
   ],
 };
 
 /// Descriptor for `SubscribeNotificationsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List subscribeNotificationsRequestDescriptor = $convert.base64Decode(
-    'Ch1TdWJzY3JpYmVOb3RpZmljYXRpb25zUmVxdWVzdBI1CgZwYXJlbnQYASABKAlCHeJBAQL6QR'
-    'YKFGtkby5jZHNhcGlzLnh5ei9Vc2VyUgZwYXJlbnQ=');
+    'Ch1TdWJzY3JpYmVOb3RpZmljYXRpb25zUmVxdWVzdBIxCgR1c2VyGAEgASgJQh3iQQEC+kEWCh'
+    'RrZG8uY2RzYXBpcy54eXovVXNlclIEdXNlchJBCglwb3J0Zm9saW8YAiABKAlCHvpBGwoZa2Rv'
+    'LmNkc2FwaXMueHl6L1BvcnRmb2xpb0gAUglwb3J0Zm9saW+IAQFCDAoKX3BvcnRmb2xpbw==');
 
 @$core.Deprecated('Use acknowledgeNotificationRequestDescriptor instead')
 const AcknowledgeNotificationRequest$json = {
@@ -166,21 +171,23 @@ const Notification$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'user', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'user'},
-    {'1': 'id', '3': 3, '4': 1, '5': 4, '8': {}, '10': 'id'},
-    {'1': 'type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.notification.NotificationType', '8': {}, '10': 'type'},
-    {'1': 'action', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.notification.NotificationAction', '8': {}, '10': 'action'},
-    {'1': 'state', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.notification.NotificationState', '8': {}, '10': 'state'},
-    {'1': 'title', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'title'},
-    {'1': 'body', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'body'},
-    {'1': 'metadata', '3': 9, '4': 3, '5': 11, '6': '.kdo.v1.notification.Notification.MetadataEntry', '8': {}, '10': 'metadata'},
-    {'1': 'navigation_url', '3': 10, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'navigationUrl', '17': true},
-    {'1': 'create_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
-    {'1': 'expire_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '9': 1, '10': 'expireTime', '17': true},
-    {'1': 'acknowledge_time', '3': 13, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '9': 2, '10': 'acknowledgeTime', '17': true},
+    {'1': 'portfolio', '3': 3, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'portfolio', '17': true},
+    {'1': 'id', '3': 4, '4': 1, '5': 4, '8': {}, '10': 'id'},
+    {'1': 'type', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.notification.NotificationType', '8': {}, '10': 'type'},
+    {'1': 'action', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.notification.NotificationAction', '8': {}, '10': 'action'},
+    {'1': 'state', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.notification.NotificationState', '8': {}, '10': 'state'},
+    {'1': 'title', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'title'},
+    {'1': 'body', '3': 9, '4': 1, '5': 9, '8': {}, '10': 'body'},
+    {'1': 'metadata', '3': 10, '4': 3, '5': 11, '6': '.kdo.v1.notification.Notification.MetadataEntry', '8': {}, '10': 'metadata'},
+    {'1': 'navigation_url', '3': 11, '4': 1, '5': 9, '8': {}, '9': 1, '10': 'navigationUrl', '17': true},
+    {'1': 'create_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
+    {'1': 'expire_time', '3': 13, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '9': 2, '10': 'expireTime', '17': true},
+    {'1': 'acknowledge_time', '3': 14, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '9': 3, '10': 'acknowledgeTime', '17': true},
   ],
   '3': [Notification_MetadataEntry$json],
   '7': {},
   '8': [
+    {'1': '_portfolio'},
     {'1': '_navigation_url'},
     {'1': '_expire_time'},
     {'1': '_acknowledge_time'},
@@ -200,20 +207,21 @@ const Notification_MetadataEntry$json = {
 /// Descriptor for `Notification`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List notificationDescriptor = $convert.base64Decode(
     'CgxOb3RpZmljYXRpb24SEgoEbmFtZRgBIAEoCVIEbmFtZRIxCgR1c2VyGAIgASgJQh3iQQED+k'
-    'EWChRrZG8uY2RzYXBpcy54eXovVXNlclIEdXNlchIUCgJpZBgDIAEoBEIE4kEBA1ICaWQSPwoE'
-    'dHlwZRgEIAEoDjIlLmtkby52MS5ub3RpZmljYXRpb24uTm90aWZpY2F0aW9uVHlwZUIE4kEBA1'
-    'IEdHlwZRJFCgZhY3Rpb24YBSABKAsyJy5rZG8udjEubm90aWZpY2F0aW9uLk5vdGlmaWNhdGlv'
-    'bkFjdGlvbkIE4kEBA1IGYWN0aW9uEkIKBXN0YXRlGAYgASgOMiYua2RvLnYxLm5vdGlmaWNhdG'
-    'lvbi5Ob3RpZmljYXRpb25TdGF0ZUIE4kEBA1IFc3RhdGUSGgoFdGl0bGUYByABKAlCBOJBAQNS'
-    'BXRpdGxlEhgKBGJvZHkYCCABKAlCBOJBAQNSBGJvZHkSUQoIbWV0YWRhdGEYCSADKAsyLy5rZG'
-    '8udjEubm90aWZpY2F0aW9uLk5vdGlmaWNhdGlvbi5NZXRhZGF0YUVudHJ5QgTiQQEDUghtZXRh'
-    'ZGF0YRIwCg5uYXZpZ2F0aW9uX3VybBgKIAEoCUIE4kEBA0gAUg1uYXZpZ2F0aW9uVXJsiAEBEk'
-    'EKC2NyZWF0ZV90aW1lGAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IK'
-    'Y3JlYXRlVGltZRJGCgtleHBpcmVfdGltZRgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3'
-    'RhbXBCBOJBAQNIAVIKZXhwaXJlVGltZYgBARJQChBhY2tub3dsZWRnZV90aW1lGA0gASgLMhou'
-    'Z29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA0gCUg9hY2tub3dsZWRnZVRpbWWIAQEaOw'
-    'oNTWV0YWRhdGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6'
-    'AjgBOlLqQU8KHGtkby5jZHNhcGlzLnh5ei9Ob3RpZmljYXRpb24SL3VzZXJzL3t1c2VyX2lkfS'
-    '9ub3RpZmljYXRpb25zL3tub3RpZmljYXRpb25faWR9QhEKD19uYXZpZ2F0aW9uX3VybEIOCgxf'
-    'ZXhwaXJlX3RpbWVCEwoRX2Fja25vd2xlZGdlX3RpbWU=');
+    'EWChRrZG8uY2RzYXBpcy54eXovVXNlclIEdXNlchJFCglwb3J0Zm9saW8YAyABKAlCIuJBAQP6'
+    'QRsKGWtkby5jZHNhcGlzLnh5ei9Qb3J0Zm9saW9IAFIJcG9ydGZvbGlviAEBEhQKAmlkGAQgAS'
+    'gEQgTiQQEDUgJpZBI/CgR0eXBlGAUgASgOMiUua2RvLnYxLm5vdGlmaWNhdGlvbi5Ob3RpZmlj'
+    'YXRpb25UeXBlQgTiQQEDUgR0eXBlEkUKBmFjdGlvbhgGIAEoCzInLmtkby52MS5ub3RpZmljYX'
+    'Rpb24uTm90aWZpY2F0aW9uQWN0aW9uQgTiQQEDUgZhY3Rpb24SQgoFc3RhdGUYByABKA4yJi5r'
+    'ZG8udjEubm90aWZpY2F0aW9uLk5vdGlmaWNhdGlvblN0YXRlQgTiQQEDUgVzdGF0ZRIaCgV0aX'
+    'RsZRgIIAEoCUIE4kEBA1IFdGl0bGUSGAoEYm9keRgJIAEoCUIE4kEBA1IEYm9keRJRCghtZXRh'
+    'ZGF0YRgKIAMoCzIvLmtkby52MS5ub3RpZmljYXRpb24uTm90aWZpY2F0aW9uLk1ldGFkYXRhRW'
+    '50cnlCBOJBAQNSCG1ldGFkYXRhEjAKDm5hdmlnYXRpb25fdXJsGAsgASgJQgTiQQEDSAFSDW5h'
+    'dmlnYXRpb25VcmyIAQESQQoLY3JlYXRlX3RpbWUYDCABKAsyGi5nb29nbGUucHJvdG9idWYuVG'
+    'ltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkYKC2V4cGlyZV90aW1lGA0gASgLMhouZ29vZ2xl'
+    'LnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA0gCUgpleHBpcmVUaW1liAEBElAKEGFja25vd2xlZG'
+    'dlX3RpbWUYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDSANSD2Fja25v'
+    'd2xlZGdlVGltZYgBARo7Cg1NZXRhZGF0YUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbH'
+    'VlGAIgASgJUgV2YWx1ZToCOAE6QupBPwoca2RvLmNkc2FwaXMueHl6L05vdGlmaWNhdGlvbhIf'
+    'bm90aWZpY2F0aW9ucy97bm90aWZpY2F0aW9uX2lkfUIMCgpfcG9ydGZvbGlvQhEKD19uYXZpZ2'
+    'F0aW9uX3VybEIOCgxfZXhwaXJlX3RpbWVCEwoRX2Fja25vd2xlZGdlX3RpbWU=');
 

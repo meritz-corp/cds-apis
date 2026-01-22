@@ -638,7 +638,7 @@ type FundLimit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Fund      string        `protobuf:"bytes,1,opt,name=fund,proto3" json:"fund,omitempty"`
+	Fund string `protobuf:"bytes,1,opt,name=fund,proto3" json:"fund,omitempty"`
 	LimitType FundLimitType `protobuf:"varint,2,opt,name=limit_type,json=limitType,proto3,enum=kdo.v1.fund.FundLimitType" json:"limit_type,omitempty"`
 	// 매수한도수량
 	LongLimitQuantity int64 `protobuf:"varint,3,opt,name=long_limit_quantity,json=longLimitQuantity,proto3" json:"long_limit_quantity,omitempty"`

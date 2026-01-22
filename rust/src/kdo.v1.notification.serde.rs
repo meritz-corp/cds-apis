@@ -116,7 +116,7 @@ impl serde::Serialize for ListNotificationsRequest {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.notification.ListNotificationsRequest", len)?;
         if true {
-            struct_ser.serialize_field("parent", &self.parent)?;
+            struct_ser.serialize_field("user", &self.user)?;
         }
         if true {
             struct_ser.serialize_field("page_size", &self.page_size)?;
@@ -137,7 +137,7 @@ impl<'de> serde::Deserialize<'de> for ListNotificationsRequest {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "parent",
+            "user",
             "page_size",
             "pageSize",
             "page_token",
@@ -147,7 +147,7 @@ impl<'de> serde::Deserialize<'de> for ListNotificationsRequest {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Parent,
+            User,
             PageSize,
             PageToken,
             Filter,
@@ -173,7 +173,7 @@ impl<'de> serde::Deserialize<'de> for ListNotificationsRequest {
                         E: serde::de::Error,
                     {
                         match value {
-                            "parent" => Ok(GeneratedField::Parent),
+                            "user" => Ok(GeneratedField::User),
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
@@ -196,17 +196,17 @@ impl<'de> serde::Deserialize<'de> for ListNotificationsRequest {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut parent__ = None;
+                let mut user__ = None;
                 let mut page_size__ = None;
                 let mut page_token__ = None;
                 let mut filter__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Parent => {
-                            if parent__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("parent"));
+                        GeneratedField::User => {
+                            if user__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("user"));
                             }
-                            parent__ = Some(map_.next_value()?);
+                            user__ = Some(map_.next_value()?);
                         }
                         GeneratedField::PageSize => {
                             if page_size__.is_some() {
@@ -234,7 +234,7 @@ impl<'de> serde::Deserialize<'de> for ListNotificationsRequest {
                     }
                 }
                 Ok(ListNotificationsRequest {
-                    parent: parent__.unwrap_or_default(),
+                    user: user__.unwrap_or_default(),
                     page_size: page_size__.unwrap_or_default(),
                     page_token: page_token__.unwrap_or_default(),
                     filter: filter__.unwrap_or_default(),
@@ -691,12 +691,18 @@ impl serde::Serialize for Notification {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.notification.Notification", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
         }
         if true {
             struct_ser.serialize_field("user", &self.user)?;
+        }
+        if let Some(v) = self.portfolio.as_ref() {
+            struct_ser.serialize_field("portfolio", v)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -749,6 +755,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
         const FIELDS: &[&str] = &[
             "name",
             "user",
+            "portfolio",
             "id",
             "type",
             "action",
@@ -770,6 +777,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
         enum GeneratedField {
             Name,
             User,
+            Portfolio,
             Id,
             Type,
             Action,
@@ -805,6 +813,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
                         match value {
                             "name" => Ok(GeneratedField::Name),
                             "user" => Ok(GeneratedField::User),
+                            "portfolio" => Ok(GeneratedField::Portfolio),
                             "id" => Ok(GeneratedField::Id),
                             "type" => Ok(GeneratedField::Type),
                             "action" => Ok(GeneratedField::Action),
@@ -837,6 +846,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
             {
                 let mut name__ = None;
                 let mut user__ = None;
+                let mut portfolio__ = None;
                 let mut id__ = None;
                 let mut r#type__ = None;
                 let mut action__ = None;
@@ -861,6 +871,12 @@ impl<'de> serde::Deserialize<'de> for Notification {
                                 return Err(serde::de::Error::duplicate_field("user"));
                             }
                             user__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Portfolio => {
+                            if portfolio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("portfolio"));
+                            }
+                            portfolio__ = map_.next_value()?;
                         }
                         GeneratedField::Id => {
                             if id__.is_some() {
@@ -940,6 +956,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
                 Ok(Notification {
                     name: name__.unwrap_or_default(),
                     user: user__.unwrap_or_default(),
+                    portfolio: portfolio__,
                     id: id__.unwrap_or_default(),
                     r#type: r#type__.unwrap_or_default(),
                     action: action__,
@@ -1233,9 +1250,15 @@ impl serde::Serialize for SubscribeNotificationsRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.notification.SubscribeNotificationsRequest", len)?;
         if true {
-            struct_ser.serialize_field("parent", &self.parent)?;
+            struct_ser.serialize_field("user", &self.user)?;
+        }
+        if let Some(v) = self.portfolio.as_ref() {
+            struct_ser.serialize_field("portfolio", v)?;
         }
         struct_ser.end()
     }
@@ -1247,12 +1270,14 @@ impl<'de> serde::Deserialize<'de> for SubscribeNotificationsRequest {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "parent",
+            "user",
+            "portfolio",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Parent,
+            User,
+            Portfolio,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1275,7 +1300,8 @@ impl<'de> serde::Deserialize<'de> for SubscribeNotificationsRequest {
                         E: serde::de::Error,
                     {
                         match value {
-                            "parent" => Ok(GeneratedField::Parent),
+                            "user" => Ok(GeneratedField::User),
+                            "portfolio" => Ok(GeneratedField::Portfolio),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1295,14 +1321,21 @@ impl<'de> serde::Deserialize<'de> for SubscribeNotificationsRequest {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut parent__ = None;
+                let mut user__ = None;
+                let mut portfolio__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Parent => {
-                            if parent__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("parent"));
+                        GeneratedField::User => {
+                            if user__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("user"));
                             }
-                            parent__ = Some(map_.next_value()?);
+                            user__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Portfolio => {
+                            if portfolio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("portfolio"));
+                            }
+                            portfolio__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1310,7 +1343,8 @@ impl<'de> serde::Deserialize<'de> for SubscribeNotificationsRequest {
                     }
                 }
                 Ok(SubscribeNotificationsRequest {
-                    parent: parent__.unwrap_or_default(),
+                    user: user__.unwrap_or_default(),
+                    portfolio: portfolio__,
                 })
             }
         }

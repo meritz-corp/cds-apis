@@ -7,7 +7,7 @@ pub struct ListNotificationsRequest {
     /// The resource name of User.
     /// Format: users/{user_id}
     #[prost(string, tag="1")]
-    pub parent: ::prost::alloc::string::String,
+    pub user: ::prost::alloc::string::String,
     /// The maximum number of items to return.
     /// If unspecified, at most 50 rows will be returned.
     /// The maximum value is 1024; values above 1024 will be coerced to 1024.
@@ -43,14 +43,18 @@ pub struct SubscribeNotificationsRequest {
     /// The resource name of User.
     /// Format: users/{user_id}
     #[prost(string, tag="1")]
-    pub parent: ::prost::alloc::string::String,
+    pub user: ::prost::alloc::string::String,
+    /// The resource name of Portfolio (optional, filter by portfolio).
+    /// Format: portfolios/{id}
+    #[prost(string, optional, tag="2")]
+    pub portfolio: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Request message for AcknowledgeNotification
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AcknowledgeNotificationRequest {
     /// The resource name of the notification.
-    /// Format: users/{user_id}/notifications/{notification_id}
+    /// Format: notifications/{notification_id}
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -120,46 +124,50 @@ pub struct LpPageTarget {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Notification {
     /// The resource name of the Notification.
-    /// Format: users/{user_id}/notifications/{notification_id}
+    /// Format: notifications/{notification_id}
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// The resource name of User.
     /// Format: users/{user_id}
     #[prost(string, tag="2")]
     pub user: ::prost::alloc::string::String,
+    /// The resource name of Portfolio (optional).
+    /// Format: portfolios/{id}
+    #[prost(string, optional, tag="3")]
+    pub portfolio: ::core::option::Option<::prost::alloc::string::String>,
     /// The id of Notification.
-    #[prost(uint64, tag="3")]
+    #[prost(uint64, tag="4")]
     pub id: u64,
     /// Notification type
-    #[prost(enumeration="NotificationType", tag="4")]
+    #[prost(enumeration="NotificationType", tag="5")]
     pub r#type: i32,
     /// Action to perform when clicked
-    #[prost(message, optional, tag="5")]
+    #[prost(message, optional, tag="6")]
     pub action: ::core::option::Option<NotificationAction>,
     /// Current state
-    #[prost(enumeration="NotificationState", tag="6")]
+    #[prost(enumeration="NotificationState", tag="7")]
     pub state: i32,
     /// Notification title
-    #[prost(string, tag="7")]
+    #[prost(string, tag="8")]
     pub title: ::prost::alloc::string::String,
     /// Notification body
-    #[prost(string, tag="8")]
+    #[prost(string, tag="9")]
     pub body: ::prost::alloc::string::String,
     /// Additional metadata
-    #[prost(map="string, string", tag="9")]
+    #[prost(map="string, string", tag="10")]
     pub metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Pre-computed navigation URL (convenience field)
     /// e.g., "/lp/A252670"
-    #[prost(string, optional, tag="10")]
+    #[prost(string, optional, tag="11")]
     pub navigation_url: ::core::option::Option<::prost::alloc::string::String>,
     /// Created timestamp
-    #[prost(message, optional, tag="11")]
+    #[prost(message, optional, tag="12")]
     pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// Expiration timestamp (if applicable)
-    #[prost(message, optional, tag="12")]
+    #[prost(message, optional, tag="13")]
     pub expire_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// Acknowledged timestamp
-    #[prost(message, optional, tag="13")]
+    #[prost(message, optional, tag="14")]
     pub acknowledge_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// Type of the notification

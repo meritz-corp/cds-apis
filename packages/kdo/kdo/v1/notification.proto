@@ -16,23 +16,23 @@ service NotificationService {
   // ListNotifications returns a list of notifications for a user.
   rpc ListNotifications(ListNotificationsRequest) returns (ListNotificationsResponse) {
     option (google.api.http) = {
-      get: "/v1/{parent=users/*}/notifications"
+      get: "/v1/notifications"
     };
-    option (google.api.method_signature) = "parent";
+    option (google.api.method_signature) = "user";
   }
 
   // SubscribeNotifications subscribes to real-time notifications for a user.
   rpc SubscribeNotifications(SubscribeNotificationsRequest) returns (stream Notification) {
     option (google.api.http) = {
-      get: "/v1/{parent=users/*}/notifications:subscribe"
+      get: "/v1/notifications:subscribe"
     };
-    option (google.api.method_signature) = "parent";
+    option (google.api.method_signature) = "user";
   }
 
   // AcknowledgeNotification marks a notification as acknowledged.
   rpc AcknowledgeNotification(AcknowledgeNotificationRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      post: "/v1/{name=users/*/notifications/*}:ack"
+      post: "/v1/{name=notifications/*}:ack"
       body: "*"
     };
     option (google.api.method_signature) = "name";
@@ -43,7 +43,7 @@ service NotificationService {
 message ListNotificationsRequest {
   // The resource name of User.
   // Format: users/{user_id}
-  string parent = 1 [
+  string user = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
       type: "kdo.cdsapis.xyz/User"
@@ -79,10 +79,18 @@ message ListNotificationsResponse {
 message SubscribeNotificationsRequest {
   // The resource name of User.
   // Format: users/{user_id}
-  string parent = 1 [
+  string user = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
       type: "kdo.cdsapis.xyz/User"
+    }
+  ];
+
+  // The resource name of Portfolio (optional, filter by portfolio).
+  // Format: portfolios/{id}
+  optional string portfolio = 2 [
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
     }
   ];
 }
@@ -90,7 +98,7 @@ message SubscribeNotificationsRequest {
 // Request message for AcknowledgeNotification
 message AcknowledgeNotificationRequest {
   // The resource name of the notification.
-  // Format: users/{user_id}/notifications/{notification_id}
+  // Format: notifications/{notification_id}
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -158,11 +166,11 @@ message LpPageTarget {
 message Notification {
   option (google.api.resource) = {
     type: "kdo.cdsapis.xyz/Notification"
-    pattern: "users/{user_id}/notifications/{notification_id}"
+    pattern: "notifications/{notification_id}"
   };
 
   // The resource name of the Notification.
-  // Format: users/{user_id}/notifications/{notification_id}
+  // Format: notifications/{notification_id}
   string name = 1;
 
   // The resource name of User.
@@ -174,59 +182,68 @@ message Notification {
     }
   ];
 
+  // The resource name of Portfolio (optional).
+  // Format: portfolios/{id}
+  optional string portfolio = 3 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
+    }
+  ];
+
   // The id of Notification.
-  uint64 id = 3 [
+  uint64 id = 4 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Notification type
-  NotificationType type = 4 [
+  NotificationType type = 5 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Action to perform when clicked
-  NotificationAction action = 5 [
+  NotificationAction action = 6 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Current state
-  NotificationState state = 6 [
+  NotificationState state = 7 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Notification title
-  string title = 7 [
+  string title = 8 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Notification body
-  string body = 8 [
+  string body = 9 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Additional metadata
-  map<string, string> metadata = 9 [
+  map<string, string> metadata = 10 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Pre-computed navigation URL (convenience field)
   // e.g., "/lp/A252670"
-  optional string navigation_url = 10 [
+  optional string navigation_url = 11 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Created timestamp
-  google.protobuf.Timestamp create_time = 11 [
+  google.protobuf.Timestamp create_time = 12 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Expiration timestamp (if applicable)
-  optional google.protobuf.Timestamp expire_time = 12 [
+  optional google.protobuf.Timestamp expire_time = 13 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 
   // Acknowledged timestamp
-  optional google.protobuf.Timestamp acknowledge_time = 13 [
+  optional google.protobuf.Timestamp acknowledge_time = 14 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 }

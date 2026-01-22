@@ -25,13 +25,13 @@ export 'notification.pbenum.dart';
 /// Request message for ListNotifications
 class ListNotificationsRequest extends $pb.GeneratedMessage {
   factory ListNotificationsRequest({
-    $core.String? parent,
+    $core.String? user,
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? filter,
   }) {
     final result = create();
-    if (parent != null) result.parent = parent;
+    if (user != null) result.user = user;
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
     if (filter != null) result.filter = filter;
@@ -44,7 +44,7 @@ class ListNotificationsRequest extends $pb.GeneratedMessage {
   factory ListNotificationsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListNotificationsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'parent')
+    ..aOS(1, _omitFieldNames ? '' : 'user')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
     ..aOS(4, _omitFieldNames ? '' : 'filter')
@@ -71,13 +71,13 @@ class ListNotificationsRequest extends $pb.GeneratedMessage {
   /// The resource name of User.
   /// Format: users/{user_id}
   @$pb.TagNumber(1)
-  $core.String get parent => $_getSZ(0);
+  $core.String get user => $_getSZ(0);
   @$pb.TagNumber(1)
-  set parent($core.String value) => $_setString(0, value);
+  set user($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasParent() => $_has(0);
+  $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
-  void clearParent() => $_clearField(1);
+  void clearUser() => $_clearField(1);
 
   /// The maximum number of items to return.
   /// If unspecified, at most 50 rows will be returned.
@@ -175,10 +175,12 @@ class ListNotificationsResponse extends $pb.GeneratedMessage {
 /// Request message for SubscribeNotifications
 class SubscribeNotificationsRequest extends $pb.GeneratedMessage {
   factory SubscribeNotificationsRequest({
-    $core.String? parent,
+    $core.String? user,
+    $core.String? portfolio,
   }) {
     final result = create();
-    if (parent != null) result.parent = parent;
+    if (user != null) result.user = user;
+    if (portfolio != null) result.portfolio = portfolio;
     return result;
   }
 
@@ -188,7 +190,8 @@ class SubscribeNotificationsRequest extends $pb.GeneratedMessage {
   factory SubscribeNotificationsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubscribeNotificationsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'parent')
+    ..aOS(1, _omitFieldNames ? '' : 'user')
+    ..aOS(2, _omitFieldNames ? '' : 'portfolio')
     ..hasRequiredFields = false
   ;
 
@@ -212,13 +215,24 @@ class SubscribeNotificationsRequest extends $pb.GeneratedMessage {
   /// The resource name of User.
   /// Format: users/{user_id}
   @$pb.TagNumber(1)
-  $core.String get parent => $_getSZ(0);
+  $core.String get user => $_getSZ(0);
   @$pb.TagNumber(1)
-  set parent($core.String value) => $_setString(0, value);
+  set user($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasParent() => $_has(0);
+  $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
-  void clearParent() => $_clearField(1);
+  void clearUser() => $_clearField(1);
+
+  /// The resource name of Portfolio (optional, filter by portfolio).
+  /// Format: portfolios/{id}
+  @$pb.TagNumber(2)
+  $core.String get portfolio => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set portfolio($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPortfolio() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPortfolio() => $_clearField(2);
 }
 
 /// Request message for AcknowledgeNotification
@@ -259,7 +273,7 @@ class AcknowledgeNotificationRequest extends $pb.GeneratedMessage {
   static AcknowledgeNotificationRequest? _defaultInstance;
 
   /// The resource name of the notification.
-  /// Format: users/{user_id}/notifications/{notification_id}
+  /// Format: notifications/{notification_id}
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -510,6 +524,7 @@ class Notification extends $pb.GeneratedMessage {
   factory Notification({
     $core.String? name,
     $core.String? user,
+    $core.String? portfolio,
     $fixnum.Int64? id,
     NotificationType? type,
     NotificationAction? action,
@@ -525,6 +540,7 @@ class Notification extends $pb.GeneratedMessage {
     final result = create();
     if (name != null) result.name = name;
     if (user != null) result.user = user;
+    if (portfolio != null) result.portfolio = portfolio;
     if (id != null) result.id = id;
     if (type != null) result.type = type;
     if (action != null) result.action = action;
@@ -547,17 +563,18 @@ class Notification extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Notification', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'user')
-    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..e<NotificationType>(4, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: NotificationType.TYPE_UNSPECIFIED, valueOf: NotificationType.valueOf, enumValues: NotificationType.values)
-    ..aOM<NotificationAction>(5, _omitFieldNames ? '' : 'action', subBuilder: NotificationAction.create)
-    ..e<NotificationState>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: NotificationState.STATE_UNSPECIFIED, valueOf: NotificationState.valueOf, enumValues: NotificationState.values)
-    ..aOS(7, _omitFieldNames ? '' : 'title')
-    ..aOS(8, _omitFieldNames ? '' : 'body')
-    ..m<$core.String, $core.String>(9, _omitFieldNames ? '' : 'metadata', entryClassName: 'Notification.MetadataEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('kdo.v1.notification'))
-    ..aOS(10, _omitFieldNames ? '' : 'navigationUrl')
-    ..aOM<$2.Timestamp>(11, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
-    ..aOM<$2.Timestamp>(12, _omitFieldNames ? '' : 'expireTime', subBuilder: $2.Timestamp.create)
-    ..aOM<$2.Timestamp>(13, _omitFieldNames ? '' : 'acknowledgeTime', subBuilder: $2.Timestamp.create)
+    ..aOS(3, _omitFieldNames ? '' : 'portfolio')
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..e<NotificationType>(5, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: NotificationType.TYPE_UNSPECIFIED, valueOf: NotificationType.valueOf, enumValues: NotificationType.values)
+    ..aOM<NotificationAction>(6, _omitFieldNames ? '' : 'action', subBuilder: NotificationAction.create)
+    ..e<NotificationState>(7, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: NotificationState.STATE_UNSPECIFIED, valueOf: NotificationState.valueOf, enumValues: NotificationState.values)
+    ..aOS(8, _omitFieldNames ? '' : 'title')
+    ..aOS(9, _omitFieldNames ? '' : 'body')
+    ..m<$core.String, $core.String>(10, _omitFieldNames ? '' : 'metadata', entryClassName: 'Notification.MetadataEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('kdo.v1.notification'))
+    ..aOS(11, _omitFieldNames ? '' : 'navigationUrl')
+    ..aOM<$2.Timestamp>(12, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(13, _omitFieldNames ? '' : 'expireTime', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(14, _omitFieldNames ? '' : 'acknowledgeTime', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -579,7 +596,7 @@ class Notification extends $pb.GeneratedMessage {
   static Notification? _defaultInstance;
 
   /// The resource name of the Notification.
-  /// Format: users/{user_id}/notifications/{notification_id}
+  /// Format: notifications/{notification_id}
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -600,118 +617,129 @@ class Notification extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearUser() => $_clearField(2);
 
+  /// The resource name of Portfolio (optional).
+  /// Format: portfolios/{id}
+  @$pb.TagNumber(3)
+  $core.String get portfolio => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set portfolio($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPortfolio() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPortfolio() => $_clearField(3);
+
   /// The id of Notification.
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get id => $_getI64(2);
-  @$pb.TagNumber(3)
-  set id($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasId() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearId() => $_clearField(3);
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get id => $_getI64(3);
+  @$pb.TagNumber(4)
+  set id($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearId() => $_clearField(4);
 
   /// Notification type
-  @$pb.TagNumber(4)
-  NotificationType get type => $_getN(3);
-  @$pb.TagNumber(4)
-  set type(NotificationType value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasType() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearType() => $_clearField(4);
+  @$pb.TagNumber(5)
+  NotificationType get type => $_getN(4);
+  @$pb.TagNumber(5)
+  set type(NotificationType value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasType() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearType() => $_clearField(5);
 
   /// Action to perform when clicked
-  @$pb.TagNumber(5)
-  NotificationAction get action => $_getN(4);
-  @$pb.TagNumber(5)
-  set action(NotificationAction value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasAction() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearAction() => $_clearField(5);
-  @$pb.TagNumber(5)
-  NotificationAction ensureAction() => $_ensure(4);
+  @$pb.TagNumber(6)
+  NotificationAction get action => $_getN(5);
+  @$pb.TagNumber(6)
+  set action(NotificationAction value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasAction() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAction() => $_clearField(6);
+  @$pb.TagNumber(6)
+  NotificationAction ensureAction() => $_ensure(5);
 
   /// Current state
-  @$pb.TagNumber(6)
-  NotificationState get state => $_getN(5);
-  @$pb.TagNumber(6)
-  set state(NotificationState value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasState() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearState() => $_clearField(6);
+  @$pb.TagNumber(7)
+  NotificationState get state => $_getN(6);
+  @$pb.TagNumber(7)
+  set state(NotificationState value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasState() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearState() => $_clearField(7);
 
   /// Notification title
-  @$pb.TagNumber(7)
-  $core.String get title => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set title($core.String value) => $_setString(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasTitle() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearTitle() => $_clearField(7);
+  @$pb.TagNumber(8)
+  $core.String get title => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set title($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasTitle() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearTitle() => $_clearField(8);
 
   /// Notification body
-  @$pb.TagNumber(8)
-  $core.String get body => $_getSZ(7);
-  @$pb.TagNumber(8)
-  set body($core.String value) => $_setString(7, value);
-  @$pb.TagNumber(8)
-  $core.bool hasBody() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearBody() => $_clearField(8);
+  @$pb.TagNumber(9)
+  $core.String get body => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set body($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasBody() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearBody() => $_clearField(9);
 
   /// Additional metadata
-  @$pb.TagNumber(9)
-  $pb.PbMap<$core.String, $core.String> get metadata => $_getMap(8);
+  @$pb.TagNumber(10)
+  $pb.PbMap<$core.String, $core.String> get metadata => $_getMap(9);
 
   /// Pre-computed navigation URL (convenience field)
   /// e.g., "/lp/A252670"
-  @$pb.TagNumber(10)
-  $core.String get navigationUrl => $_getSZ(9);
-  @$pb.TagNumber(10)
-  set navigationUrl($core.String value) => $_setString(9, value);
-  @$pb.TagNumber(10)
-  $core.bool hasNavigationUrl() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearNavigationUrl() => $_clearField(10);
+  @$pb.TagNumber(11)
+  $core.String get navigationUrl => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set navigationUrl($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasNavigationUrl() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearNavigationUrl() => $_clearField(11);
 
   /// Created timestamp
-  @$pb.TagNumber(11)
-  $2.Timestamp get createTime => $_getN(10);
-  @$pb.TagNumber(11)
-  set createTime($2.Timestamp value) => $_setField(11, value);
-  @$pb.TagNumber(11)
-  $core.bool hasCreateTime() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearCreateTime() => $_clearField(11);
-  @$pb.TagNumber(11)
-  $2.Timestamp ensureCreateTime() => $_ensure(10);
+  @$pb.TagNumber(12)
+  $2.Timestamp get createTime => $_getN(11);
+  @$pb.TagNumber(12)
+  set createTime($2.Timestamp value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasCreateTime() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearCreateTime() => $_clearField(12);
+  @$pb.TagNumber(12)
+  $2.Timestamp ensureCreateTime() => $_ensure(11);
 
   /// Expiration timestamp (if applicable)
-  @$pb.TagNumber(12)
-  $2.Timestamp get expireTime => $_getN(11);
-  @$pb.TagNumber(12)
-  set expireTime($2.Timestamp value) => $_setField(12, value);
-  @$pb.TagNumber(12)
-  $core.bool hasExpireTime() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearExpireTime() => $_clearField(12);
-  @$pb.TagNumber(12)
-  $2.Timestamp ensureExpireTime() => $_ensure(11);
+  @$pb.TagNumber(13)
+  $2.Timestamp get expireTime => $_getN(12);
+  @$pb.TagNumber(13)
+  set expireTime($2.Timestamp value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasExpireTime() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearExpireTime() => $_clearField(13);
+  @$pb.TagNumber(13)
+  $2.Timestamp ensureExpireTime() => $_ensure(12);
 
   /// Acknowledged timestamp
-  @$pb.TagNumber(13)
-  $2.Timestamp get acknowledgeTime => $_getN(12);
-  @$pb.TagNumber(13)
-  set acknowledgeTime($2.Timestamp value) => $_setField(13, value);
-  @$pb.TagNumber(13)
-  $core.bool hasAcknowledgeTime() => $_has(12);
-  @$pb.TagNumber(13)
-  void clearAcknowledgeTime() => $_clearField(13);
-  @$pb.TagNumber(13)
-  $2.Timestamp ensureAcknowledgeTime() => $_ensure(12);
+  @$pb.TagNumber(14)
+  $2.Timestamp get acknowledgeTime => $_getN(13);
+  @$pb.TagNumber(14)
+  set acknowledgeTime($2.Timestamp value) => $_setField(14, value);
+  @$pb.TagNumber(14)
+  $core.bool hasAcknowledgeTime() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearAcknowledgeTime() => $_clearField(14);
+  @$pb.TagNumber(14)
+  $2.Timestamp ensureAcknowledgeTime() => $_ensure(13);
 }
 
 
