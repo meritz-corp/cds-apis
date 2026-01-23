@@ -113,7 +113,7 @@ func RegisterBasketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/mmm.v1.arbitrage.BasketService/AddBasketPreset", runtime.WithHTTPPathPattern("/mmm.v1.arbitrage.BasketService/AddBasketPreset"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/mmm.v1.basket.BasketService/AddBasketPreset", runtime.WithHTTPPathPattern("/mmm.v1.basket.BasketService/AddBasketPreset"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -138,7 +138,7 @@ func RegisterBasketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset", runtime.WithHTTPPathPattern("/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset", runtime.WithHTTPPathPattern("/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -202,7 +202,7 @@ func RegisterBasketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/mmm.v1.arbitrage.BasketService/AddBasketPreset", runtime.WithHTTPPathPattern("/mmm.v1.arbitrage.BasketService/AddBasketPreset"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/mmm.v1.basket.BasketService/AddBasketPreset", runtime.WithHTTPPathPattern("/mmm.v1.basket.BasketService/AddBasketPreset"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -224,7 +224,7 @@ func RegisterBasketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset", runtime.WithHTTPPathPattern("/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset", runtime.WithHTTPPathPattern("/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -244,9 +244,9 @@ func RegisterBasketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_BasketService_AddBasketPreset_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"mmm.v1.arbitrage.BasketService", "AddBasketPreset"}, ""))
+	pattern_BasketService_AddBasketPreset_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"mmm.v1.basket.BasketService", "AddBasketPreset"}, ""))
 
-	pattern_BasketService_CreateBasketManagerFromPreset_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"mmm.v1.arbitrage.BasketService", "CreateBasketManagerFromPreset"}, ""))
+	pattern_BasketService_CreateBasketManagerFromPreset_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"mmm.v1.basket.BasketService", "CreateBasketManagerFromPreset"}, ""))
 )
 
 var (

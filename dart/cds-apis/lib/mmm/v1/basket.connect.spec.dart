@@ -9,7 +9,7 @@ import "basket.pb.dart" as mmmv1basket;
 /// BasketService - 차익거래 관리 서비스
 abstract final class BasketService {
   /// Fully-qualified name of the BasketService service.
-  static const name = 'mmm.v1.arbitrage.BasketService';
+  static const name = 'mmm.v1.basket.BasketService';
 
   static const addBasketPreset = connect.Spec(
     '/$name/AddBasketPreset',

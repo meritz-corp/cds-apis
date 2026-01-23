@@ -21,7 +21,7 @@ import 'basket.pb.dart' as $0;
 export 'basket.pb.dart';
 
 /// BasketService - 차익거래 관리 서비스
-@$pb.GrpcServiceName('mmm.v1.arbitrage.BasketService')
+@$pb.GrpcServiceName('mmm.v1.basket.BasketService')
 class BasketServiceClient extends $grpc.Client {
   /// The hostname for this service.
   static const $core.String defaultHost = '';
@@ -44,18 +44,18 @@ class BasketServiceClient extends $grpc.Client {
     // method descriptors
 
   static final _$addBasketPreset = $grpc.ClientMethod<$0.AddBasketPresetRequest, $0.BasketPresetDetail>(
-      '/mmm.v1.arbitrage.BasketService/AddBasketPreset',
+      '/mmm.v1.basket.BasketService/AddBasketPreset',
       ($0.AddBasketPresetRequest value) => value.writeToBuffer(),
       $0.BasketPresetDetail.fromBuffer);
   static final _$createBasketManagerFromPreset = $grpc.ClientMethod<$0.ControlManagerRequest, $0.BasketManagerDetail>(
-      '/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset',
+      '/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset',
       ($0.ControlManagerRequest value) => value.writeToBuffer(),
       $0.BasketManagerDetail.fromBuffer);
 }
 
-@$pb.GrpcServiceName('mmm.v1.arbitrage.BasketService')
+@$pb.GrpcServiceName('mmm.v1.basket.BasketService')
 abstract class BasketServiceBase extends $grpc.Service {
-  $core.String get $name => 'mmm.v1.arbitrage.BasketService';
+  $core.String get $name => 'mmm.v1.basket.BasketService';
 
   BasketServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.AddBasketPresetRequest, $0.BasketPresetDetail>(

@@ -95,7 +95,7 @@ class AddBasketPresetRequest extends $pb.GeneratedMessage {
   factory AddBasketPresetRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory AddBasketPresetRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddBasketPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.arbitrage'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddBasketPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.basket'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'prefix')
     ..aOS(2, _omitFieldNames ? '' : 'startAt')
     ..aOS(3, _omitFieldNames ? '' : 'stopAt')
@@ -530,7 +530,7 @@ class BasketPresetDetail extends $pb.GeneratedMessage {
   factory BasketPresetDetail.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory BasketPresetDetail.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketPresetDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.arbitrage'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketPresetDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.basket'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'prefix')
     ..aOS(2, _omitFieldNames ? '' : 'startAt')
     ..aOS(3, _omitFieldNames ? '' : 'stopAt')
@@ -921,7 +921,7 @@ class ControlManagerRequest extends $pb.GeneratedMessage {
   factory ControlManagerRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory ControlManagerRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ControlManagerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.arbitrage'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ControlManagerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.basket'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'code')
     ..aOS(2, _omitFieldNames ? '' : 'action')
     ..aOS(3, _omitFieldNames ? '' : 'value')
@@ -1087,7 +1087,7 @@ class BasketManagerDetail extends $pb.GeneratedMessage {
   factory BasketManagerDetail.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory BasketManagerDetail.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketManagerDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.arbitrage'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketManagerDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.basket'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'code')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'startAt')
@@ -1663,7 +1663,7 @@ class BasketManagerDetailItem extends $pb.GeneratedMessage {
   factory BasketManagerDetailItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory BasketManagerDetailItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketManagerDetailItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.arbitrage'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketManagerDetailItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.v1.basket'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'code')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'fundcode')

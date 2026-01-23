@@ -106,7 +106,7 @@ impl serde::Serialize for AddBasketPresetRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("mmm.v1.arbitrage.AddBasketPresetRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("mmm.v1.basket.AddBasketPresetRequest", len)?;
         if true {
             struct_ser.serialize_field("prefix", &self.prefix)?;
         }
@@ -394,7 +394,7 @@ impl<'de> serde::Deserialize<'de> for AddBasketPresetRequest {
             type Value = AddBasketPresetRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct mmm.v1.arbitrage.AddBasketPresetRequest")
+                formatter.write_str("struct mmm.v1.basket.AddBasketPresetRequest")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<AddBasketPresetRequest, V::Error>
@@ -702,7 +702,7 @@ impl<'de> serde::Deserialize<'de> for AddBasketPresetRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("mmm.v1.arbitrage.AddBasketPresetRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("mmm.v1.basket.AddBasketPresetRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for BasketManagerDetail {
@@ -866,7 +866,7 @@ impl serde::Serialize for BasketManagerDetail {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("mmm.v1.arbitrage.BasketManagerDetail", len)?;
+        let mut struct_ser = serializer.serialize_struct("mmm.v1.basket.BasketManagerDetail", len)?;
         if true {
             struct_ser.serialize_field("code", &self.code)?;
         }
@@ -1284,7 +1284,7 @@ impl<'de> serde::Deserialize<'de> for BasketManagerDetail {
             type Value = BasketManagerDetail;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct mmm.v1.arbitrage.BasketManagerDetail")
+                formatter.write_str("struct mmm.v1.basket.BasketManagerDetail")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<BasketManagerDetail, V::Error>
@@ -1748,7 +1748,7 @@ impl<'de> serde::Deserialize<'de> for BasketManagerDetail {
                 })
             }
         }
-        deserializer.deserialize_struct("mmm.v1.arbitrage.BasketManagerDetail", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("mmm.v1.basket.BasketManagerDetail", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for BasketManagerDetailItem {
@@ -1816,7 +1816,7 @@ impl serde::Serialize for BasketManagerDetailItem {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("mmm.v1.arbitrage.BasketManagerDetailItem", len)?;
+        let mut struct_ser = serializer.serialize_struct("mmm.v1.basket.BasketManagerDetailItem", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -1991,7 +1991,7 @@ impl<'de> serde::Deserialize<'de> for BasketManagerDetailItem {
             type Value = BasketManagerDetailItem;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct mmm.v1.arbitrage.BasketManagerDetailItem")
+                formatter.write_str("struct mmm.v1.basket.BasketManagerDetailItem")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<BasketManagerDetailItem, V::Error>
@@ -2173,7 +2173,7 @@ impl<'de> serde::Deserialize<'de> for BasketManagerDetailItem {
                 })
             }
         }
-        deserializer.deserialize_struct("mmm.v1.arbitrage.BasketManagerDetailItem", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("mmm.v1.basket.BasketManagerDetailItem", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for BasketPresetDetail {
@@ -2289,7 +2289,7 @@ impl serde::Serialize for BasketPresetDetail {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("mmm.v1.arbitrage.BasketPresetDetail", len)?;
+        let mut struct_ser = serializer.serialize_struct("mmm.v1.basket.BasketPresetDetail", len)?;
         if true {
             struct_ser.serialize_field("code", &self.code)?;
         }
@@ -2590,7 +2590,7 @@ impl<'de> serde::Deserialize<'de> for BasketPresetDetail {
             type Value = BasketPresetDetail;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct mmm.v1.arbitrage.BasketPresetDetail")
+                formatter.write_str("struct mmm.v1.basket.BasketPresetDetail")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<BasketPresetDetail, V::Error>
@@ -2914,7 +2914,7 @@ impl<'de> serde::Deserialize<'de> for BasketPresetDetail {
                 })
             }
         }
-        deserializer.deserialize_struct("mmm.v1.arbitrage.BasketPresetDetail", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("mmm.v1.basket.BasketPresetDetail", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ControlManagerRequest {
@@ -2934,7 +2934,7 @@ impl serde::Serialize for ControlManagerRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("mmm.v1.arbitrage.ControlManagerRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("mmm.v1.basket.ControlManagerRequest", len)?;
         if true {
             struct_ser.serialize_field("code", &self.code)?;
         }
@@ -3001,7 +3001,7 @@ impl<'de> serde::Deserialize<'de> for ControlManagerRequest {
             type Value = ControlManagerRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct mmm.v1.arbitrage.ControlManagerRequest")
+                formatter.write_str("struct mmm.v1.basket.ControlManagerRequest")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<ControlManagerRequest, V::Error>
@@ -3043,6 +3043,6 @@ impl<'de> serde::Deserialize<'de> for ControlManagerRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("mmm.v1.arbitrage.ControlManagerRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("mmm.v1.basket.ControlManagerRequest", FIELDS, GeneratedVisitor)
     }
 }

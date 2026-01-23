@@ -36,7 +36,7 @@ func NewBasketServiceClient(cc grpc.ClientConnInterface) BasketServiceClient {
 
 func (c *basketServiceClient) AddBasketPreset(ctx context.Context, in *AddBasketPresetRequest, opts ...grpc.CallOption) (*BasketPresetDetail, error) {
 	out := new(BasketPresetDetail)
-	err := c.cc.Invoke(ctx, "/mmm.v1.arbitrage.BasketService/AddBasketPreset", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/mmm.v1.basket.BasketService/AddBasketPreset", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (c *basketServiceClient) AddBasketPreset(ctx context.Context, in *AddBasket
 
 func (c *basketServiceClient) CreateBasketManagerFromPreset(ctx context.Context, in *ControlManagerRequest, opts ...grpc.CallOption) (*BasketManagerDetail, error) {
 	out := new(BasketManagerDetail)
-	err := c.cc.Invoke(ctx, "/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func _BasketService_AddBasketPreset_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/mmm.v1.arbitrage.BasketService/AddBasketPreset",
+		FullMethod: "/mmm.v1.basket.BasketService/AddBasketPreset",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BasketServiceServer).AddBasketPreset(ctx, req.(*AddBasketPresetRequest))
@@ -112,7 +112,7 @@ func _BasketService_CreateBasketManagerFromPreset_Handler(srv interface{}, ctx c
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset",
+		FullMethod: "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BasketServiceServer).CreateBasketManagerFromPreset(ctx, req.(*ControlManagerRequest))
@@ -124,7 +124,7 @@ func _BasketService_CreateBasketManagerFromPreset_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var BasketService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "mmm.v1.arbitrage.BasketService",
+	ServiceName: "mmm.v1.basket.BasketService",
 	HandlerType: (*BasketServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

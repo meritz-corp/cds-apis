@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mmm.v1.arbitrage;
+package mmm.v1.basket;
 
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";

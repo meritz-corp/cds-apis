@@ -17,7 +17,7 @@
   ],
   "paths": {},
   "definitions": {
-    "arbitrageBasketManagerDetail": {
+    "basketBasketManagerDetail": {
       "type": "object",
       "properties": {
         "code": {
@@ -80,7 +80,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/arbitrageBasketManagerDetailItem"
+            "$ref": "#/definitions/basketBasketManagerDetailItem"
           }
         },
         "userCode": {
@@ -203,7 +203,7 @@
         }
       }
     },
-    "arbitrageBasketManagerDetailItem": {
+    "basketBasketManagerDetailItem": {
       "type": "object",
       "properties": {
         "no": {
@@ -271,7 +271,7 @@
         }
       }
     },
-    "arbitrageBasketPresetDetail": {
+    "basketBasketPresetDetail": {
       "type": "object",
       "properties": {
         "code": {

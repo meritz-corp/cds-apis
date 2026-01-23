@@ -310,6 +310,6 @@ pub struct BasketManagerDetailItem {
     #[prost(string, tag="19")]
     pub exchange: ::prost::alloc::string::String,
 }
-include!("mmm.v1.arbitrage.tonic.rs");
-include!("mmm.v1.arbitrage.serde.rs");
+include!("mmm.v1.basket.tonic.rs");
+include!("mmm.v1.basket.serde.rs");
 // @@protoc_insertion_point(module)

@@ -102,12 +102,12 @@ pub mod basket_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mmm.v1.arbitrage.BasketService/AddBasketPreset",
+                "/mmm.v1.basket.BasketService/AddBasketPreset",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("mmm.v1.arbitrage.BasketService", "AddBasketPreset"),
+                    GrpcMethod::new("mmm.v1.basket.BasketService", "AddBasketPreset"),
                 );
             self.inner.unary(req, path, codec).await
         }
@@ -129,13 +129,13 @@ pub mod basket_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset",
+                "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "mmm.v1.arbitrage.BasketService",
+                        "mmm.v1.basket.BasketService",
                         "CreateBasketManagerFromPreset",
                     ),
                 );
@@ -241,7 +241,7 @@ pub mod basket_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/mmm.v1.arbitrage.BasketService/AddBasketPreset" => {
+                "/mmm.v1.basket.BasketService/AddBasketPreset" => {
                     #[allow(non_camel_case_types)]
                     struct AddBasketPresetSvc<T: BasketService>(pub Arc<T>);
                     impl<
@@ -287,7 +287,7 @@ pub mod basket_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mmm.v1.arbitrage.BasketService/CreateBasketManagerFromPreset" => {
+                "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset" => {
                     #[allow(non_camel_case_types)]
                     struct CreateBasketManagerFromPresetSvc<T: BasketService>(
                         pub Arc<T>,
@@ -369,6 +369,6 @@ pub mod basket_service_server {
         }
     }
     impl<T: BasketService> tonic::server::NamedService for BasketServiceServer<T> {
-        const NAME: &'static str = "mmm.v1.arbitrage.BasketService";
+        const NAME: &'static str = "mmm.v1.basket.BasketService";
     }
 }
