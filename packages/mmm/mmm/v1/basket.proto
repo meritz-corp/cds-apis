@@ -1,0 +1,183 @@
+syntax = "proto3";
+
+package mmm.v1.arbitrage;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/mmm/v1;mmm";
+
+// BasketService - 차익거래 관리 서비스
+service BasketService {
+
+  rpc AddBasketPreset (AddBasketPresetRequest) returns (BasketPresetDetail);
+
+  rpc CreateBasketManagerFromPreset (ControlManagerRequest) returns (BasketManagerDetail);
+
+}
+
+
+message AddBasketPresetRequest {
+  string prefix = 1;
+  string start_at = 2;
+  string stop_at = 3;
+  string index_code = 4;
+  string stock_fundcode = 5;
+  string deriv_fundcode = 6;
+  string basis_type = 7;
+  string stock_program_type = 8;
+  string deriv_program_type = 9;
+  string etf_program_type = 10;
+  string stock_price_type = 11;
+  string deriv_price_type = 12;
+  string etf_price_type = 13;
+  double stock_dominance_threshold = 14;
+  double deriv_dominance_threshold = 15;
+  double etf_dominance_threshold = 16;
+  double cu = 17;
+  int64 total_rounds = 18;
+  int64 remaining_turns = 19;
+  double trigger_basis = 20;
+  bool is_long = 21;
+  double minimum_filled_ratio = 22;
+  double minimum_interval = 23;
+  bool check_all_sellable = 24;
+  bool short_sellable = 25;
+  bool apply_slippage = 26;
+  double etf_unfilled_limit = 27;
+  int64 stock_future = 28;
+  // 주선차익(Price) 전용
+  string stock_code = 29;
+  int64 stock_total_quantity = 30;
+  bool stock_auto = 31;
+  int64 future_total_quantity = 32;
+  bool future_auto = 33;
+}
+
+
+message BasketPresetDetail {
+  string code = 22;
+  string prefix = 1;
+  string start_at = 2;
+  string stop_at = 3;
+  string index_code = 4;
+  string stock_fundcode = 5;
+  string deriv_fundcode = 6;
+  string basis_type = 7;
+  string stock_program_type = 8;
+  string deriv_program_type = 9;
+  string etf_program_type = 10;
+  string stock_price_type = 11;
+  string deriv_price_type = 12;
+  string etf_price_type = 13;
+  double stock_dominance_threshold = 14;
+  double deriv_dominance_threshold = 15;
+  double etf_dominance_threshold = 16;
+  double cu = 17;
+  int64 total_rounds = 18;
+  int64 remaining_turns = 19;
+  double trigger_basis = 20;
+  bool is_long = 21;
+  string user_code = 23;
+  bool check_all_sellable = 24;
+  bool short_sellable = 25;
+  bool apply_slippage = 26;
+  double minimum_filled_ratio = 27;
+  double minimum_interval = 28;
+  double etf_unfilled_limit = 29;
+  int64 stock_future = 30;
+  // 주선차익(Price) 전용
+  string stock_code = 31;
+  int64 stock_total_quantity = 32;
+  bool stock_auto = 33;
+  int64 future_total_quantity = 34;
+  bool future_auto = 35;
+}
+
+message ControlManagerRequest {
+  string code = 1;
+  string action = 2;
+  string value = 3;
+}
+
+message BasketManagerDetail {
+  string code = 1;
+  string name = 2;
+  string start_at = 3;
+  string stop_at = 4;
+  bool is_long = 5;
+  bool active = 6;
+  int64 current_round = 7;
+  int64 total_rounds = 8;
+  int64 done_rounds = 9;
+  double minimum_filled_ratio = 10;
+  double minimum_interval = 11;
+  double trigger_basis = 12;
+  string index_code = 13;
+  string index_name = 14;
+  string basis_condition = 15;
+  string basis_type = 16;
+  string basis_price_type = 17;
+  repeated BasketManagerDetailItem items = 18;
+  string user_code = 19;
+  bool public = 20;
+  int64 remaining_turns = 21;
+  string ui_group = 22;
+  bool check_all_sellable = 23;
+  string long_product_type = 24;
+  string short_product_type = 25;
+  int64 short_quantity = 26;
+  int64 long_quantity = 27;
+  int64 short_products = 28;
+  int64 long_products = 29;
+  bool short_sellable = 30;
+  bool apply_slippage = 31;
+  int64 pause_round = 32;
+  string created_at = 33;
+  string fundcode = 34;
+  double etf_unfilled_limit = 35;
+  double grace_the_money = 36;
+  bool regard_smp_as_traded = 37;
+  double execution_threshold = 38;
+  int64 starter_limit_rounds = 39;
+  string id_number = 40;
+  bool check_all_connected = 41;
+  string future_maturity_no = 42;
+  bool auto_launch = 43; // 종가자동발주
+  string launch_at = 44; // 종가자동발주시간
+  string start_amend_at = 45; // 종가관여조정시작시각
+  double launch_price_percent = 46; // 종가자동발주가격%
+  double participation_limit_percent = 47; // 종가관여최대%
+  bool launched = 48; // 종가발주완료
+  string custom_product_code = 49;
+  double custom_product_ratio = 50;
+  string exchange = 51;
+}
+
+
+message BasketManagerDetailItem {
+  int64 no = 10;
+  string id = 14;
+  string code = 1;
+  string name = 2;
+  string fundcode = 3;
+  string side = 4;
+  double dominance_threshold = 5;
+  string program_type = 6;
+  string price_type = 7;
+  int64 total_quantity = 8;
+  bool starter = 9;
+  bool pending = 11;
+  bool auto = 12;
+  bool lp = 13;
+  double order_price = 15;
+  double percent = 16;
+  int64 ticks = 17;
+  string position_type = 18;
+  string exchange = 19;
+}

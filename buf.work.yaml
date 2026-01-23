@@ -4,3 +4,4 @@ directories:
   - packages/kdo
   - packages/market_archive
   - packages/master_sync
+  - packages/mmm

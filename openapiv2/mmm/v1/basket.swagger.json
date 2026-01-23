@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mmm/v1/basket.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BasketService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "arbitrageBasketManagerDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "startAt": {
+          "type": "string"
+        },
+        "stopAt": {
+          "type": "string"
+        },
+        "isLong": {
+          "type": "boolean"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "currentRound": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalRounds": {
+          "type": "string",
+          "format": "int64"
+        },
+        "doneRounds": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minimumFilledRatio": {
+          "type": "number",
+          "format": "double"
+        },
+        "minimumInterval": {
+          "type": "number",
+          "format": "double"
+        },
+        "triggerBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "indexCode": {
+          "type": "string"
+        },
+        "indexName": {
+          "type": "string"
+        },
+        "basisCondition": {
+          "type": "string"
+        },
+        "basisType": {
+          "type": "string"
+        },
+        "basisPriceType": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arbitrageBasketManagerDetailItem"
+          }
+        },
+        "userCode": {
+          "type": "string"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "remainingTurns": {
+          "type": "string",
+          "format": "int64"
+        },
+        "uiGroup": {
+          "type": "string"
+        },
+        "checkAllSellable": {
+          "type": "boolean"
+        },
+        "longProductType": {
+          "type": "string"
+        },
+        "shortProductType": {
+          "type": "string"
+        },
+        "shortQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "longQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "shortProducts": {
+          "type": "string",
+          "format": "int64"
+        },
+        "longProducts": {
+          "type": "string",
+          "format": "int64"
+        },
+        "shortSellable": {
+          "type": "boolean"
+        },
+        "applySlippage": {
+          "type": "boolean"
+        },
+        "pauseRound": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "fundcode": {
+          "type": "string"
+        },
+        "etfUnfilledLimit": {
+          "type": "number",
+          "format": "double"
+        },
+        "graceTheMoney": {
+          "type": "number",
+          "format": "double"
+        },
+        "regardSmpAsTraded": {
+          "type": "boolean"
+        },
+        "executionThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "starterLimitRounds": {
+          "type": "string",
+          "format": "int64"
+        },
+        "idNumber": {
+          "type": "string"
+        },
+        "checkAllConnected": {
+          "type": "boolean"
+        },
+        "futureMaturityNo": {
+          "type": "string"
+        },
+        "autoLaunch": {
+          "type": "boolean",
+          "title": "종가자동발주"
+        },
+        "launchAt": {
+          "type": "string",
+          "title": "종가자동발주시간"
+        },
+        "startAmendAt": {
+          "type": "string",
+          "title": "종가관여조정시작시각"
+        },
+        "launchPricePercent": {
+          "type": "number",
+          "format": "double",
+          "title": "종가자동발주가격%"
+        },
+        "participationLimitPercent": {
+          "type": "number",
+          "format": "double",
+          "title": "종가관여최대%"
+        },
+        "launched": {
+          "type": "boolean",
+          "title": "종가발주완료"
+        },
+        "customProductCode": {
+          "type": "string"
+        },
+        "customProductRatio": {
+          "type": "number",
+          "format": "double"
+        },
+        "exchange": {
+          "type": "string"
+        }
+      }
+    },
+    "arbitrageBasketManagerDetailItem": {
+      "type": "object",
+      "properties": {
+        "no": {
+          "type": "string",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "fundcode": {
+          "type": "string"
+        },
+        "side": {
+          "type": "string"
+        },
+        "dominanceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "programType": {
+          "type": "string"
+        },
+        "priceType": {
+          "type": "string"
+        },
+        "totalQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "starter": {
+          "type": "boolean"
+        },
+        "pending": {
+          "type": "boolean"
+        },
+        "auto": {
+          "type": "boolean"
+        },
+        "lp": {
+          "type": "boolean"
+        },
+        "orderPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "percent": {
+          "type": "number",
+          "format": "double"
+        },
+        "ticks": {
+          "type": "string",
+          "format": "int64"
+        },
+        "positionType": {
+          "type": "string"
+        },
+        "exchange": {
+          "type": "string"
+        }
+      }
+    },
+    "arbitrageBasketPresetDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "startAt": {
+          "type": "string"
+        },
+        "stopAt": {
+          "type": "string"
+        },
+        "indexCode": {
+          "type": "string"
+        },
+        "stockFundcode": {
+          "type": "string"
+        },
+        "derivFundcode": {
+          "type": "string"
+        },
+        "basisType": {
+          "type": "string"
+        },
+        "stockProgramType": {
+          "type": "string"
+        },
+        "derivProgramType": {
+          "type": "string"
+        },
+        "etfProgramType": {
+          "type": "string"
+        },
+        "stockPriceType": {
+          "type": "string"
+        },
+        "derivPriceType": {
+          "type": "string"
+        },
+        "etfPriceType": {
+          "type": "string"
+        },
+        "stockDominanceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "derivDominanceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "etfDominanceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "cu": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalRounds": {
+          "type": "string",
+          "format": "int64"
+        },
+        "remainingTurns": {
+          "type": "string",
+          "format": "int64"
+        },
+        "triggerBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "isLong": {
+          "type": "boolean"
+        },
+        "userCode": {
+          "type": "string"
+        },
+        "checkAllSellable": {
+          "type": "boolean"
+        },
+        "shortSellable": {
+          "type": "boolean"
+        },
+        "applySlippage": {
+          "type": "boolean"
+        },
+        "minimumFilledRatio": {
+          "type": "number",
+          "format": "double"
+        },
+        "minimumInterval": {
+          "type": "number",
+          "format": "double"
+        },
+        "etfUnfilledLimit": {
+          "type": "number",
+          "format": "double"
+        },
+        "stockFuture": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stockCode": {
+          "type": "string",
+          "title": "주선차익(Price) 전용"
+        },
+        "stockTotalQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stockAuto": {
+          "type": "boolean"
+        },
+        "futureTotalQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "futureAuto": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
