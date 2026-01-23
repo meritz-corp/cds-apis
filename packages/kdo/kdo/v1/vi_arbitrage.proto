@@ -1,0 +1,315 @@
+syntax = "proto3";
+
+package kdo.v1.vi_arbitrage;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// ViArbitrageService - VI 차익거래 모니터링 서비스
+service ViArbitrageService {
+  // 서비스 상태 조회 (활성화 여부, 설정 등)
+  rpc GetStatus(GetStatusRequest) returns (ViArbitrageStatus) {
+    option (google.api.http) = {
+      get: "/v1/vi-arbitrage/status"
+    };
+  }
+
+  // 현재 VI 종목 목록 조회
+  rpc ListViStocks(ListViStocksRequest) returns (ListViStocksResponse) {
+    option (google.api.http) = {
+      get: "/v1/vi-arbitrage/vi-stocks"
+    };
+  }
+
+  // VI 트리거 이력 조회
+  rpc ListTriggerHistory(ListTriggerHistoryRequest) returns (ListTriggerHistoryResponse) {
+    option (google.api.http) = {
+      get: "/v1/vi-arbitrage/triggers"
+    };
+  }
+
+  // VI 이벤트 실시간 스트리밍 (VI 진입/해제, 트리거 등)
+  rpc StreamViEvents(StreamViEventsRequest) returns (stream ViEvent) {
+    option (google.api.http) = {
+      get: "/v1/vi-arbitrage/events:stream"
+    };
+  }
+
+  // VI 종목 Basis 실시간 스트리밍
+  rpc StreamBasis(StreamBasisRequest) returns (stream BasisUpdate) {
+    option (google.api.http) = {
+      get: "/v1/vi-arbitrage/basis:stream"
+    };
+  }
+}
+
+// ============================================================================
+// Service Status
+// ============================================================================
+
+// VI Arbitrage 서비스 상태
+message ViArbitrageStatus {
+  // 서비스 활성화 여부
+  bool enabled = 1;
+
+  // Basis 임계값 (bp 단위)
+  int64 basis_threshold_bp = 2;
+
+  // 현재 VI 종목 수
+  int32 vi_stock_count = 3;
+
+  // 금일 트리거 횟수
+  int32 trigger_count_today = 4;
+
+  // 서비스 시작 시간
+  google.protobuf.Timestamp start_time = 5;
+}
+
+// ============================================================================
+// VI Stock
+// ============================================================================
+
+// 현재 VI 상태인 종목 정보
+message ViStock {
+  // 주식 심볼 (예: "A005930")
+  string symbol = 1;
+
+  // VI 세션 종류 ("vi_static", "vi_dynamic")
+  string vi_session = 2;
+
+  // VI 진입 시간
+  google.protobuf.Timestamp vi_start_time = 3;
+
+  // VI 진입 전 KRX 마지막 가격
+  int64 krx_last_price = 4;
+
+  // 대응 주식선물 심볼 (없으면 빈 문자열)
+  string futures_symbol = 5;
+
+  // 현재 NXT 가격 (있으면)
+  optional int64 nxt_price = 6;
+
+  // 현재 선물 가격 (있으면)
+  optional int64 futures_price = 7;
+
+  // 현재 Basis (bp)
+  optional int64 current_basis_bp = 8;
+
+  // VI 경과 시간 (ms)
+  int64 elapsed_ms = 9;
+}
+
+// ============================================================================
+// Trigger History
+// ============================================================================
+
+// VI Arbitrage 트리거 이력
+message TriggerRecord {
+  // 트리거 ID (auto-increment)
+  int64 id = 1;
+
+  // 주식 심볼
+  string symbol = 2;
+
+  // 주식선물 심볼
+  string futures_symbol = 3;
+
+  // 트리거 시점 NXT 가격
+  int64 nxt_price = 4;
+
+  // 트리거 시점 선물 가격
+  int64 futures_price = 5;
+
+  // 트리거 시점 Basis (bp)
+  int64 basis_bp = 6;
+
+  // 트리거 방향 (LONG: NXT 매수/선물 매도, SHORT: NXT 매도/선물 매수)
+  TriggerDirection direction = 7;
+
+  // 트리거 시간
+  google.protobuf.Timestamp trigger_time = 8;
+
+  // 트리거 결과 (주문 성공 여부)
+  TriggerResult result = 9;
+
+  // 에러 메시지 (실패 시)
+  string error_message = 10;
+}
+
+// 트리거 방향
+enum TriggerDirection {
+  TRIGGER_DIRECTION_UNSPECIFIED = 0;
+  // NXT 매수, 선물 매도 (NXT < 선물)
+  TRIGGER_DIRECTION_LONG = 1;
+  // NXT 매도, 선물 매수 (NXT > 선물)
+  TRIGGER_DIRECTION_SHORT = 2;
+}
+
+// 트리거 결과
+enum TriggerResult {
+  TRIGGER_RESULT_UNSPECIFIED = 0;
+  // 주문 성공
+  TRIGGER_RESULT_SUCCESS = 1;
+  // 주문 실패
+  TRIGGER_RESULT_FAILED = 2;
+  // 스킵됨 (쿨다운 등)
+  TRIGGER_RESULT_SKIPPED = 3;
+}
+
+// ============================================================================
+// Events (Streaming)
+// ============================================================================
+
+// VI 이벤트 (스트리밍용)
+message ViEvent {
+  // 이벤트 발생 시간
+  google.protobuf.Timestamp event_time = 1;
+
+  // 이벤트 타입
+  oneof event {
+    // VI 진입 이벤트
+    ViEnteredEvent vi_entered = 2;
+    // VI 해제 이벤트
+    ViExitedEvent vi_exited = 3;
+    // 트리거 이벤트
+    TriggeredEvent triggered = 4;
+    // Basis 임계값 근접 이벤트 (경고)
+    BasisWarningEvent basis_warning = 5;
+  }
+}
+
+// VI 진입 이벤트
+message ViEnteredEvent {
+  // 주식 심볼
+  string symbol = 1;
+
+  // VI 세션 종류
+  string vi_session = 2;
+
+  // VI 진입 전 KRX 가격
+  int64 krx_last_price = 3;
+
+  // 대응 주식선물 심볼
+  string futures_symbol = 4;
+}
+
+// VI 해제 이벤트
+message ViExitedEvent {
+  // 주식 심볼
+  string symbol = 1;
+
+  // VI 지속 시간 (ms)
+  int64 duration_ms = 2;
+}
+
+// 트리거 발동 이벤트
+message TriggeredEvent {
+  // 트리거 정보
+  TriggerRecord trigger = 1;
+}
+
+// Basis 경고 이벤트 (임계값의 80% 이상일 때)
+message BasisWarningEvent {
+  // 주식 심볼
+  string symbol = 1;
+
+  // 현재 Basis (bp)
+  int64 current_basis_bp = 2;
+
+  // 임계값 (bp)
+  int64 threshold_bp = 3;
+
+  // 임계값 대비 비율 (%)
+  double threshold_ratio = 4;
+}
+
+// Basis 업데이트 (스트리밍용)
+message BasisUpdate {
+  // 업데이트 시간
+  google.protobuf.Timestamp update_time = 1;
+
+  // 주식 심볼
+  string symbol = 2;
+
+  // NXT 가격
+  int64 nxt_price = 3;
+
+  // 선물 가격
+  int64 futures_price = 4;
+
+  // Basis (bp)
+  int64 basis_bp = 5;
+
+  // 임계값 대비 비율 (%)
+  double threshold_ratio = 6;
+}
+
+// ============================================================================
+// Request/Response Messages
+// ============================================================================
+
+message GetStatusRequest {}
+
+message ListViStocksRequest {
+  // 페이지 크기 (optional, default: 100)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰
+  optional string page_token = 2;
+}
+
+message ListViStocksResponse {
+  // VI 종목 목록
+  repeated ViStock vi_stocks = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+message ListTriggerHistoryRequest {
+  // 페이지 크기 (optional, default: 50)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰
+  optional string page_token = 2;
+
+  // 시작 시간 필터 (이후)
+  optional google.protobuf.Timestamp start_time = 3;
+
+  // 종료 시간 필터 (이전)
+  optional google.protobuf.Timestamp end_time = 4;
+
+  // 심볼 필터 (특정 종목만)
+  optional string symbol = 5;
+}
+
+message ListTriggerHistoryResponse {
+  // 트리거 이력
+  repeated TriggerRecord triggers = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+
+  // 총 건수
+  int32 total_count = 3;
+}
+
+message StreamViEventsRequest {
+  // 특정 심볼만 구독 (없으면 전체)
+  repeated string symbols = 1;
+
+  // Basis 경고 이벤트 포함 여부 (기본: true)
+  optional bool include_basis_warning = 2;
+}
+
+message StreamBasisRequest {
+  // 특정 심볼만 구독 (없으면 현재 VI 종목 전체)
+  repeated string symbols = 1;
+
+  // 업데이트 최소 간격 (ms, 기본: 100)
+  optional int32 min_interval_ms = 2;
+}

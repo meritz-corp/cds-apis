@@ -59,6 +59,9 @@ pub mod kdo {
         pub mod auto_amend {
             include!("kdo.v1.auto_amend.rs");
         }
+        pub mod auto_amend {
+            include!("kdo.v1.vi_arbitrage.rs");
+        }
     }
 }
 

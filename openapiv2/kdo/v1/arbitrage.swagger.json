@@ -623,7 +623,7 @@
           "$ref": "#/definitions/arbitragePriceUpdateEvent"
         },
         "triggered": {
-          "$ref": "#/definitions/arbitrageTriggeredEvent"
+          "$ref": "#/definitions/v1arbitrageTriggeredEvent"
         },
         "roundStarted": {
           "$ref": "#/definitions/arbitrageRoundStartedEvent"
@@ -1148,19 +1148,6 @@
       },
       "title": "트리거 설정"
     },
-    "arbitrageTriggeredEvent": {
-      "type": "object",
-      "properties": {
-        "side": {
-          "$ref": "#/definitions/arbitrageArbitrageSide"
-        },
-        "spread": {
-          "type": "string",
-          "format": "int64"
-        }
-      },
-      "title": "트리거 발동 이벤트"
-    },
     "basketBasket": {
       "type": "object",
       "properties": {
@@ -1385,6 +1372,19 @@
           }
         }
       }
+    },
+    "v1arbitrageTriggeredEvent": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "$ref": "#/definitions/arbitrageArbitrageSide"
+        },
+        "spread": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "트리거 발동 이벤트"
     },
     "v1basketOrderType": {
       "type": "string",
