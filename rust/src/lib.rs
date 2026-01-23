@@ -87,3 +87,12 @@ pub mod master_sync {
 
     }
 }
+
+pub mod mmm {
+    pub mod v1 {
+        pub mod basket {
+            include!("mmm.v1.basket.rs");
+        }
+
+    }
+}
