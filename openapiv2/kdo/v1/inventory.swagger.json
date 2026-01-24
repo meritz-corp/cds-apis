@@ -163,6 +163,76 @@
           "InventoryService"
         ]
       }
+    },
+    "/v1/inventories/{fund}:stream": {
+      "get": {
+        "summary": "펀드별 재고 현황 목록 스트림",
+        "operationId": "InventoryService_StreamInventories",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/inventoryListInventoriesResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of inventoryListInventoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Operators:\n* symbol\n  * `equal`, `contains`\n* inventory_type\n  * `equal` (INVENTORY_TYPE_STOCK, INVENTORY_TYPE_DERIV)\n* stock.sellable, stock.book_quantity\n  * `equal`, `greater_than`, `less_than`\n* deriv.quantity\n  * `equal`, `greater_than`, `less_than`\n\nExamples:\n* filter=symbol:\"005930\"\n* filter=inventory_type=INVENTORY_TYPE_STOCK\n* filter=stock.sellable \u003e 1000\n* filter=deriv.quantity \u003c 0 (Short 포지션만)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "오더링 조건 (optional, AIP-132)\n\nSupported Fields:\n* \"symbol\", \"inventory_type\"\n* \"stock.sellable\", \"stock.book_quantity\", \"stock.book_amount\"\n* \"deriv.quantity\", \"deriv.book_amount\"\n\nExamples:\n* order_by=stock.book_amount desc\n* order_by=deriv.quantity asc",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
     }
   },
   "definitions": {

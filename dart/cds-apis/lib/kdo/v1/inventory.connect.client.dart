@@ -62,4 +62,22 @@ extension type InventoryServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 펀드별 재고 현황 목록 스트림
+  Stream<kdov1inventory.ListInventoriesResponse> streamInventories(
+    kdov1inventory.ListInventoriesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.InventoryService.streamInventories,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

@@ -48,6 +48,11 @@ class InventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listInventories, request, options: options);
   }
 
+  /// 펀드별 재고 현황 목록 스트림
+  $grpc.ResponseStream<$0.ListInventoriesResponse> streamInventories($0.ListInventoriesRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamInventories, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$getInventory = $grpc.ClientMethod<$0.GetInventoryRequest, $0.Inventory>(
@@ -60,6 +65,10 @@ class InventoryServiceClient extends $grpc.Client {
       $0.Inventory.fromBuffer);
   static final _$listInventories = $grpc.ClientMethod<$0.ListInventoriesRequest, $0.ListInventoriesResponse>(
       '/kdo.v1.inventory.InventoryService/ListInventories',
+      ($0.ListInventoriesRequest value) => value.writeToBuffer(),
+      $0.ListInventoriesResponse.fromBuffer);
+  static final _$streamInventories = $grpc.ClientMethod<$0.ListInventoriesRequest, $0.ListInventoriesResponse>(
+      '/kdo.v1.inventory.InventoryService/StreamInventories',
       ($0.ListInventoriesRequest value) => value.writeToBuffer(),
       $0.ListInventoriesResponse.fromBuffer);
 }
@@ -90,6 +99,13 @@ abstract class InventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListInventoriesRequest.fromBuffer(value),
         ($0.ListInventoriesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListInventoriesRequest, $0.ListInventoriesResponse>(
+        'StreamInventories',
+        streamInventories_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.ListInventoriesRequest.fromBuffer(value),
+        ($0.ListInventoriesResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Inventory> getInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetInventoryRequest> $request) async {
@@ -109,5 +125,11 @@ abstract class InventoryServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListInventoriesResponse> listInventories($grpc.ServiceCall call, $0.ListInventoriesRequest request);
+
+  $async.Stream<$0.ListInventoriesResponse> streamInventories_Pre($grpc.ServiceCall $call, $async.Future<$0.ListInventoriesRequest> $request) async* {
+    yield* streamInventories($call, await $request);
+  }
+
+  $async.Stream<$0.ListInventoriesResponse> streamInventories($grpc.ServiceCall call, $0.ListInventoriesRequest request);
 
 }

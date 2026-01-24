@@ -34,4 +34,12 @@ abstract final class InventoryService {
     kdov1inventory.ListInventoriesRequest.new,
     kdov1inventory.ListInventoriesResponse.new,
   );
+
+  /// 펀드별 재고 현황 목록 스트림
+  static const streamInventories = connect.Spec(
+    '/$name/StreamInventories',
+    connect.StreamType.server,
+    kdov1inventory.ListInventoriesRequest.new,
+    kdov1inventory.ListInventoriesResponse.new,
+  );
 }

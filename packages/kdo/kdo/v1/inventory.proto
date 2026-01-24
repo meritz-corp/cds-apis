@@ -34,6 +34,14 @@ service InventoryService {
     };
     option (google.api.method_signature) = "fund";
   }
+
+  // 펀드별 재고 현황 목록 스트림
+  rpc StreamInventories(ListInventoriesRequest) returns (stream ListInventoriesResponse) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}:stream"
+    };
+    option (google.api.method_signature) = "fund";
+  }
 }
 
 // 재고 유형

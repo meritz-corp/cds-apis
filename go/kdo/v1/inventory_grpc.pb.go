@@ -28,6 +28,8 @@ type InventoryServiceClient interface {
 	StreamInventory(ctx context.Context, in *GetInventoryRequest, opts ...grpc.CallOption) (InventoryService_StreamInventoryClient, error)
 	// 펀드별 재고 현황 목록 조회
 	ListInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (*ListInventoriesResponse, error)
+	// 펀드별 재고 현황 목록 스트림
+	StreamInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (InventoryService_StreamInventoriesClient, error)
 }
 
 type inventoryServiceClient struct {
@@ -88,6 +90,38 @@ func (c *inventoryServiceClient) ListInventories(ctx context.Context, in *ListIn
 	return out, nil
 }
 
+func (c *inventoryServiceClient) StreamInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (InventoryService_StreamInventoriesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &InventoryService_ServiceDesc.Streams[1], "/kdo.v1.inventory.InventoryService/StreamInventories", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &inventoryServiceStreamInventoriesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type InventoryService_StreamInventoriesClient interface {
+	Recv() (*ListInventoriesResponse, error)
+	grpc.ClientStream
+}
+
+type inventoryServiceStreamInventoriesClient struct {
+	grpc.ClientStream
+}
+
+func (x *inventoryServiceStreamInventoriesClient) Recv() (*ListInventoriesResponse, error) {
+	m := new(ListInventoriesResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // InventoryServiceServer is the server API for InventoryService service.
 // All implementations must embed UnimplementedInventoryServiceServer
 // for forward compatibility
@@ -98,6 +132,8 @@ type InventoryServiceServer interface {
 	StreamInventory(*GetInventoryRequest, InventoryService_StreamInventoryServer) error
 	// 펀드별 재고 현황 목록 조회
 	ListInventories(context.Context, *ListInventoriesRequest) (*ListInventoriesResponse, error)
+	// 펀드별 재고 현황 목록 스트림
+	StreamInventories(*ListInventoriesRequest, InventoryService_StreamInventoriesServer) error
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -113,6 +149,9 @@ func (UnimplementedInventoryServiceServer) StreamInventory(*GetInventoryRequest,
 }
 func (UnimplementedInventoryServiceServer) ListInventories(context.Context, *ListInventoriesRequest) (*ListInventoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListInventories not implemented")
+}
+func (UnimplementedInventoryServiceServer) StreamInventories(*ListInventoriesRequest, InventoryService_StreamInventoriesServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamInventories not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -184,6 +223,27 @@ func _InventoryService_ListInventories_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_StreamInventories_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListInventoriesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(InventoryServiceServer).StreamInventories(m, &inventoryServiceStreamInventoriesServer{stream})
+}
+
+type InventoryService_StreamInventoriesServer interface {
+	Send(*ListInventoriesResponse) error
+	grpc.ServerStream
+}
+
+type inventoryServiceStreamInventoriesServer struct {
+	grpc.ServerStream
+}
+
+func (x *inventoryServiceStreamInventoriesServer) Send(m *ListInventoriesResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // InventoryService_ServiceDesc is the grpc.ServiceDesc for InventoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -204,6 +264,11 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamInventory",
 			Handler:       _InventoryService_StreamInventory_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamInventories",
+			Handler:       _InventoryService_StreamInventories_Handler,
 			ServerStreams: true,
 		},
 	},
