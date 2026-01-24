@@ -130,7 +130,7 @@ class ViStock extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? viSession,
     $1.Timestamp? viStartTime,
-    $fixnum.Int64? krxLastPrice,
+    $fixnum.Int64? krxEstimatedPrice,
     $core.String? futuresSymbol,
     $fixnum.Int64? nxtPrice,
     $fixnum.Int64? futuresPrice,
@@ -141,7 +141,7 @@ class ViStock extends $pb.GeneratedMessage {
     if (symbol != null) result.symbol = symbol;
     if (viSession != null) result.viSession = viSession;
     if (viStartTime != null) result.viStartTime = viStartTime;
-    if (krxLastPrice != null) result.krxLastPrice = krxLastPrice;
+    if (krxEstimatedPrice != null) result.krxEstimatedPrice = krxEstimatedPrice;
     if (futuresSymbol != null) result.futuresSymbol = futuresSymbol;
     if (nxtPrice != null) result.nxtPrice = nxtPrice;
     if (futuresPrice != null) result.futuresPrice = futuresPrice;
@@ -159,7 +159,7 @@ class ViStock extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'viSession')
     ..aOM<$1.Timestamp>(3, _omitFieldNames ? '' : 'viStartTime', subBuilder: $1.Timestamp.create)
-    ..aInt64(4, _omitFieldNames ? '' : 'krxLastPrice')
+    ..aInt64(4, _omitFieldNames ? '' : 'krxEstimatedPrice')
     ..aOS(5, _omitFieldNames ? '' : 'futuresSymbol')
     ..aInt64(6, _omitFieldNames ? '' : 'nxtPrice')
     ..aInt64(7, _omitFieldNames ? '' : 'futuresPrice')
@@ -217,15 +217,15 @@ class ViStock extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $1.Timestamp ensureViStartTime() => $_ensure(2);
 
-  /// VI 진입 전 KRX 마지막 가격
+  /// VI 예체가
   @$pb.TagNumber(4)
-  $fixnum.Int64 get krxLastPrice => $_getI64(3);
+  $fixnum.Int64 get krxEstimatedPrice => $_getI64(3);
   @$pb.TagNumber(4)
-  set krxLastPrice($fixnum.Int64 value) => $_setInt64(3, value);
+  set krxEstimatedPrice($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasKrxLastPrice() => $_has(3);
+  $core.bool hasKrxEstimatedPrice() => $_has(3);
   @$pb.TagNumber(4)
-  void clearKrxLastPrice() => $_clearField(4);
+  void clearKrxEstimatedPrice() => $_clearField(4);
 
   /// 대응 주식선물 심볼 (없으면 빈 문자열)
   @$pb.TagNumber(5)

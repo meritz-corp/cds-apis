@@ -2362,7 +2362,7 @@ impl serde::Serialize for ViStock {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("krx_last_price", ToString::to_string(&self.krx_last_price).as_str())?;
+            struct_ser.serialize_field("krx_estimated_price", ToString::to_string(&self.krx_estimated_price).as_str())?;
         }
         if true {
             struct_ser.serialize_field("futures_symbol", &self.futures_symbol)?;
@@ -2402,8 +2402,8 @@ impl<'de> serde::Deserialize<'de> for ViStock {
             "viSession",
             "vi_start_time",
             "viStartTime",
-            "krx_last_price",
-            "krxLastPrice",
+            "krx_estimated_price",
+            "krxEstimatedPrice",
             "futures_symbol",
             "futuresSymbol",
             "nxt_price",
@@ -2421,7 +2421,7 @@ impl<'de> serde::Deserialize<'de> for ViStock {
             Symbol,
             ViSession,
             ViStartTime,
-            KrxLastPrice,
+            KrxEstimatedPrice,
             FuturesSymbol,
             NxtPrice,
             FuturesPrice,
@@ -2452,7 +2452,7 @@ impl<'de> serde::Deserialize<'de> for ViStock {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "viSession" | "vi_session" => Ok(GeneratedField::ViSession),
                             "viStartTime" | "vi_start_time" => Ok(GeneratedField::ViStartTime),
-                            "krxLastPrice" | "krx_last_price" => Ok(GeneratedField::KrxLastPrice),
+                            "krxEstimatedPrice" | "krx_estimated_price" => Ok(GeneratedField::KrxEstimatedPrice),
                             "futuresSymbol" | "futures_symbol" => Ok(GeneratedField::FuturesSymbol),
                             "nxtPrice" | "nxt_price" => Ok(GeneratedField::NxtPrice),
                             "futuresPrice" | "futures_price" => Ok(GeneratedField::FuturesPrice),
@@ -2480,7 +2480,7 @@ impl<'de> serde::Deserialize<'de> for ViStock {
                 let mut symbol__ = None;
                 let mut vi_session__ = None;
                 let mut vi_start_time__ = None;
-                let mut krx_last_price__ = None;
+                let mut krx_estimated_price__ = None;
                 let mut futures_symbol__ = None;
                 let mut nxt_price__ = None;
                 let mut futures_price__ = None;
@@ -2506,11 +2506,11 @@ impl<'de> serde::Deserialize<'de> for ViStock {
                             }
                             vi_start_time__ = map_.next_value()?;
                         }
-                        GeneratedField::KrxLastPrice => {
-                            if krx_last_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("krxLastPrice"));
+                        GeneratedField::KrxEstimatedPrice => {
+                            if krx_estimated_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("krxEstimatedPrice"));
                             }
-                            krx_last_price__ = 
+                            krx_estimated_price__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -2561,7 +2561,7 @@ impl<'de> serde::Deserialize<'de> for ViStock {
                     symbol: symbol__.unwrap_or_default(),
                     vi_session: vi_session__.unwrap_or_default(),
                     vi_start_time: vi_start_time__,
-                    krx_last_price: krx_last_price__.unwrap_or_default(),
+                    krx_estimated_price: krx_estimated_price__.unwrap_or_default(),
                     futures_symbol: futures_symbol__.unwrap_or_default(),
                     nxt_price: nxt_price__,
                     futures_price: futures_price__,

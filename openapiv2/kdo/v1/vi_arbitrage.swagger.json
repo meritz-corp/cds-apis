@@ -568,10 +568,10 @@
           "format": "date-time",
           "title": "VI 진입 시간"
         },
-        "krxLastPrice": {
+        "krxEstimatedPrice": {
           "type": "string",
           "format": "int64",
-          "title": "VI 진입 전 KRX 마지막 가격"
+          "title": "VI 예체가"
         },
         "futuresSymbol": {
           "type": "string",

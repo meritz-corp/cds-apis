@@ -73,7 +73,7 @@ const ViStock$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'vi_session', '3': 2, '4': 1, '5': 9, '10': 'viSession'},
     {'1': 'vi_start_time', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'viStartTime'},
-    {'1': 'krx_last_price', '3': 4, '4': 1, '5': 3, '10': 'krxLastPrice'},
+    {'1': 'krx_estimated_price', '3': 4, '4': 1, '5': 3, '10': 'krxEstimatedPrice'},
     {'1': 'futures_symbol', '3': 5, '4': 1, '5': 9, '10': 'futuresSymbol'},
     {'1': 'nxt_price', '3': 6, '4': 1, '5': 3, '9': 0, '10': 'nxtPrice', '17': true},
     {'1': 'futures_price', '3': 7, '4': 1, '5': 3, '9': 1, '10': 'futuresPrice', '17': true},
@@ -91,12 +91,12 @@ const ViStock$json = {
 final $typed_data.Uint8List viStockDescriptor = $convert.base64Decode(
     'CgdWaVN0b2NrEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEh0KCnZpX3Nlc3Npb24YAiABKAlSCX'
     'ZpU2Vzc2lvbhI+Cg12aV9zdGFydF90aW1lGAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVz'
-    'dGFtcFILdmlTdGFydFRpbWUSJAoOa3J4X2xhc3RfcHJpY2UYBCABKANSDGtyeExhc3RQcmljZR'
-    'IlCg5mdXR1cmVzX3N5bWJvbBgFIAEoCVINZnV0dXJlc1N5bWJvbBIgCglueHRfcHJpY2UYBiAB'
-    'KANIAFIIbnh0UHJpY2WIAQESKAoNZnV0dXJlc19wcmljZRgHIAEoA0gBUgxmdXR1cmVzUHJpY2'
-    'WIAQESLQoQY3VycmVudF9iYXNpc19icBgIIAEoA0gCUg5jdXJyZW50QmFzaXNCcIgBARIdCgpl'
-    'bGFwc2VkX21zGAkgASgDUgllbGFwc2VkTXNCDAoKX254dF9wcmljZUIQCg5fZnV0dXJlc19wcm'
-    'ljZUITChFfY3VycmVudF9iYXNpc19icA==');
+    'dGFtcFILdmlTdGFydFRpbWUSLgoTa3J4X2VzdGltYXRlZF9wcmljZRgEIAEoA1IRa3J4RXN0aW'
+    '1hdGVkUHJpY2USJQoOZnV0dXJlc19zeW1ib2wYBSABKAlSDWZ1dHVyZXNTeW1ib2wSIAoJbnh0'
+    'X3ByaWNlGAYgASgDSABSCG54dFByaWNliAEBEigKDWZ1dHVyZXNfcHJpY2UYByABKANIAVIMZn'
+    'V0dXJlc1ByaWNliAEBEi0KEGN1cnJlbnRfYmFzaXNfYnAYCCABKANIAlIOY3VycmVudEJhc2lz'
+    'QnCIAQESHQoKZWxhcHNlZF9tcxgJIAEoA1IJZWxhcHNlZE1zQgwKCl9ueHRfcHJpY2VCEAoOX2'
+    'Z1dHVyZXNfcHJpY2VCEwoRX2N1cnJlbnRfYmFzaXNfYnA=');
 
 @$core.Deprecated('Use triggerRecordDescriptor instead')
 const TriggerRecord$json = {

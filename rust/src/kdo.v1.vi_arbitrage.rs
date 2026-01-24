@@ -41,9 +41,9 @@ pub struct ViStock {
     /// VI 진입 시간
     #[prost(message, optional, tag="3")]
     pub vi_start_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// VI 진입 전 KRX 마지막 가격
+    /// VI 예체가
     #[prost(int64, tag="4")]
-    pub krx_last_price: i64,
+    pub krx_estimated_price: i64,
     /// 대응 주식선물 심볼 (없으면 빈 문자열)
     #[prost(string, tag="5")]
     pub futures_symbol: ::prost::alloc::string::String,
