@@ -139,10 +139,6 @@ func local_request_LpService_ListEtfLps_0(ctx context.Context, marshaler runtime
 
 }
 
-var (
-	filter_LpService_UpdateEtfLp_0 = &utilities.DoubleArray{Encoding: map[string]int{"lp": 0, "symbol": 1, "fund_code": 2, "fundCode": 3}, Base: []int{1, 5, 6, 1, 7, 0, 3, 0, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 1, 4, 2, 7, 2, 2, 3, 5}}
-)
-
 func request_LpService_UpdateEtfLp_0(ctx context.Context, marshaler runtime.Marshaler, client LpServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateEtfLpRequest
 	var metadata runtime.ServerMetadata
@@ -151,15 +147,8 @@ func request_LpService_UpdateEtfLp_0(ctx context.Context, marshaler runtime.Mars
 	if berr != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
 	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Lp); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if protoReq.UpdateMask == nil || len(protoReq.UpdateMask.GetPaths()) == 0 {
-		if fieldMask, err := runtime.FieldMaskFromRequestBody(newReader(), protoReq.Lp); err != nil {
-			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-		} else {
-			protoReq.UpdateMask = fieldMask
-		}
 	}
 
 	var (
@@ -169,31 +158,24 @@ func request_LpService_UpdateEtfLp_0(ctx context.Context, marshaler runtime.Mars
 		_   = err
 	)
 
-	val, ok = pathParams["lp.symbol"]
+	val, ok = pathParams["symbol"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lp.symbol")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "lp.symbol", val)
+	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lp.symbol", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	val, ok = pathParams["lp.fund_code"]
+	val, ok = pathParams["fund_code"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lp.fund_code")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund_code")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "lp.fund_code", val)
+	protoReq.FundCode, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lp.fund_code", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LpService_UpdateEtfLp_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund_code", err)
 	}
 
 	msg, err := client.UpdateEtfLp(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -209,15 +191,8 @@ func local_request_LpService_UpdateEtfLp_0(ctx context.Context, marshaler runtim
 	if berr != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
 	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Lp); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if protoReq.UpdateMask == nil || len(protoReq.UpdateMask.GetPaths()) == 0 {
-		if fieldMask, err := runtime.FieldMaskFromRequestBody(newReader(), protoReq.Lp); err != nil {
-			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-		} else {
-			protoReq.UpdateMask = fieldMask
-		}
 	}
 
 	var (
@@ -227,31 +202,24 @@ func local_request_LpService_UpdateEtfLp_0(ctx context.Context, marshaler runtim
 		_   = err
 	)
 
-	val, ok = pathParams["lp.symbol"]
+	val, ok = pathParams["symbol"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lp.symbol")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "lp.symbol", val)
+	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lp.symbol", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	val, ok = pathParams["lp.fund_code"]
+	val, ok = pathParams["fund_code"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lp.fund_code")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund_code")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "lp.fund_code", val)
+	protoReq.FundCode, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lp.fund_code", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LpService_UpdateEtfLp_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund_code", err)
 	}
 
 	msg, err := server.UpdateEtfLp(ctx, &protoReq)
@@ -811,7 +779,7 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/lps/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/lps/etfs/{symbol=*}/funds/{fund_code=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1065,7 +1033,7 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/lps/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/UpdateEtfLp", runtime.WithHTTPPathPattern("/v1/lps/etfs/{symbol=*}/funds/{fund_code=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1265,7 +1233,7 @@ var (
 
 	pattern_LpService_ListEtfLps_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "lps"}, ""))
 
-	pattern_LpService_UpdateEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "lps", "etfs", "lp.symbol", "funds", "lp.fund_code"}, ""))
+	pattern_LpService_UpdateEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "lps", "etfs", "symbol", "funds", "fund_code"}, ""))
 
 	pattern_LpService_GetEtfLpStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "status"}, ""))
 

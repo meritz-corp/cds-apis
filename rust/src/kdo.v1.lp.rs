@@ -298,10 +298,32 @@ pub struct ListEtfLpStatusesResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEtfLpRequest {
-    #[prost(message, optional, tag="1")]
-    pub lp: ::core::option::Option<EtfLp>,
-    #[prost(message, optional, tag="2")]
-    pub update_mask: ::core::option::Option<super::super::super::google::protobuf::FieldMask>,
+    /// ETF 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 업데이트 대상
+    #[prost(oneof="update_etf_lp_request::Update", tags="3, 4, 5")]
+    pub update: ::core::option::Option<update_etf_lp_request::Update>,
+}
+/// Nested message and enum types in `UpdateEtfLpRequest`.
+pub mod update_etf_lp_request {
+    /// 업데이트 대상
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Update {
+        /// 주문 수량
+        #[prost(int64, tag="3")]
+        Quantity(i64),
+        /// 호가 깊이
+        #[prost(uint32, tag="4")]
+        Depth(u32),
+        /// 동적 offset 조정 설정
+        #[prost(message, tag="5")]
+        Offset(super::EtfLpOffset),
+    }
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

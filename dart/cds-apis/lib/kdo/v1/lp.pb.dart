@@ -15,8 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/field_mask.pb.dart' as $1;
-import '../../google/protobuf/timestamp.pb.dart' as $2;
+import '../../google/protobuf/timestamp.pb.dart' as $1;
 import 'lp.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -1312,15 +1311,28 @@ class ListEtfLpStatusesResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+enum UpdateEtfLpRequest_Update {
+  quantity, 
+  depth, 
+  offset, 
+  notSet
+}
+
 /// UpdateEtfLp
 class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   factory UpdateEtfLpRequest({
-    EtfLp? lp,
-    $1.FieldMask? updateMask,
+    $core.String? symbol,
+    $core.String? fundCode,
+    $fixnum.Int64? quantity,
+    $core.int? depth,
+    EtfLpOffset? offset,
   }) {
     final result = create();
-    if (lp != null) result.lp = lp;
-    if (updateMask != null) result.updateMask = updateMask;
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (quantity != null) result.quantity = quantity;
+    if (depth != null) result.depth = depth;
+    if (offset != null) result.offset = offset;
     return result;
   }
 
@@ -1329,9 +1341,19 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   factory UpdateEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory UpdateEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
+  static const $core.Map<$core.int, UpdateEtfLpRequest_Update> _UpdateEtfLpRequest_UpdateByTag = {
+    3 : UpdateEtfLpRequest_Update.quantity,
+    4 : UpdateEtfLpRequest_Update.depth,
+    5 : UpdateEtfLpRequest_Update.offset,
+    0 : UpdateEtfLpRequest_Update.notSet
+  };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOM<EtfLp>(1, _omitFieldNames ? '' : 'lp', subBuilder: EtfLp.create)
-    ..aOM<$1.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $1.FieldMask.create)
+    ..oo(0, [3, 4, 5])
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
+    ..aOM<EtfLpOffset>(5, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
     ..hasRequiredFields = false
   ;
 
@@ -1352,27 +1374,60 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   static UpdateEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateEtfLpRequest>(create);
   static UpdateEtfLpRequest? _defaultInstance;
 
-  @$pb.TagNumber(1)
-  EtfLp get lp => $_getN(0);
-  @$pb.TagNumber(1)
-  set lp(EtfLp value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasLp() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearLp() => $_clearField(1);
-  @$pb.TagNumber(1)
-  EtfLp ensureLp() => $_ensure(0);
+  UpdateEtfLpRequest_Update whichUpdate() => _UpdateEtfLpRequest_UpdateByTag[$_whichOneof(0)]!;
+  void clearUpdate() => $_clearField($_whichOneof(0));
 
+  /// ETF 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드
   @$pb.TagNumber(2)
-  $1.FieldMask get updateMask => $_getN(1);
+  $core.String get fundCode => $_getSZ(1);
   @$pb.TagNumber(2)
-  set updateMask($1.FieldMask value) => $_setField(2, value);
+  set fundCode($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasUpdateMask() => $_has(1);
+  $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
-  void clearUpdateMask() => $_clearField(2);
-  @$pb.TagNumber(2)
-  $1.FieldMask ensureUpdateMask() => $_ensure(1);
+  void clearFundCode() => $_clearField(2);
+
+  /// 주문 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get quantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearQuantity() => $_clearField(3);
+
+  /// 호가 깊이
+  @$pb.TagNumber(4)
+  $core.int get depth => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set depth($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDepth() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDepth() => $_clearField(4);
+
+  /// 동적 offset 조정 설정
+  @$pb.TagNumber(5)
+  EtfLpOffset get offset => $_getN(4);
+  @$pb.TagNumber(5)
+  set offset(EtfLpOffset value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOffset() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOffset() => $_clearField(5);
+  @$pb.TagNumber(5)
+  EtfLpOffset ensureOffset() => $_ensure(4);
 }
 
 /// GetEtfLpStatus
@@ -1803,7 +1858,7 @@ class EtfLpEvent extends $pb.GeneratedMessage {
     TaskType? taskType,
     LpEventType? type,
     $core.String? message,
-    $2.Timestamp? timestamp,
+    $1.Timestamp? timestamp,
     LpEventLevel? level,
   }) {
     final result = create();
@@ -1826,7 +1881,7 @@ class EtfLpEvent extends $pb.GeneratedMessage {
     ..e<TaskType>(2, _omitFieldNames ? '' : 'taskType', $pb.PbFieldType.OE, defaultOrMaker: TaskType.TASK_TYPE_UNSPECIFIED, valueOf: TaskType.valueOf, enumValues: TaskType.values)
     ..e<LpEventType>(3, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: LpEventType.LP_EVENT_TYPE_UNSPECIFIED, valueOf: LpEventType.valueOf, enumValues: LpEventType.values)
     ..aOS(4, _omitFieldNames ? '' : 'message')
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $1.Timestamp.create)
     ..e<LpEventLevel>(6, _omitFieldNames ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: LpEventLevel.LP_EVENT_LEVEL_UNSPECIFIED, valueOf: LpEventLevel.valueOf, enumValues: LpEventLevel.values)
     ..hasRequiredFields = false
   ;
@@ -1890,15 +1945,15 @@ class EtfLpEvent extends $pb.GeneratedMessage {
 
   /// 발생 시간
   @$pb.TagNumber(5)
-  $2.Timestamp get timestamp => $_getN(4);
+  $1.Timestamp get timestamp => $_getN(4);
   @$pb.TagNumber(5)
-  set timestamp($2.Timestamp value) => $_setField(5, value);
+  set timestamp($1.Timestamp value) => $_setField(5, value);
   @$pb.TagNumber(5)
   $core.bool hasTimestamp() => $_has(4);
   @$pb.TagNumber(5)
   void clearTimestamp() => $_clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureTimestamp() => $_ensure(4);
+  $1.Timestamp ensureTimestamp() => $_ensure(4);
 
   /// 이벤트 레벨
   @$pb.TagNumber(6)

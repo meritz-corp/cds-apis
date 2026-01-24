@@ -3777,12 +3777,30 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
-        if let Some(v) = self.lp.as_ref() {
-            struct_ser.serialize_field("lp", v)?;
+        if self.update.is_some() {
+            len += 1;
         }
-        if let Some(v) = self.update_mask.as_ref() {
-            struct_ser.serialize_field("update_mask", v)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if let Some(v) = self.update.as_ref() {
+            match v {
+                update_etf_lp_request::Update::Quantity(v) => {
+                    #[allow(clippy::needless_borrow)]
+                    #[allow(clippy::needless_borrows_for_generic_args)]
+                    struct_ser.serialize_field("quantity", ToString::to_string(&v).as_str())?;
+                }
+                update_etf_lp_request::Update::Depth(v) => {
+                    struct_ser.serialize_field("depth", v)?;
+                }
+                update_etf_lp_request::Update::Offset(v) => {
+                    struct_ser.serialize_field("offset", v)?;
+                }
+            }
         }
         struct_ser.end()
     }
@@ -3794,15 +3812,21 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "lp",
-            "update_mask",
-            "updateMask",
+            "symbol",
+            "fund_code",
+            "fundCode",
+            "quantity",
+            "depth",
+            "offset",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Lp,
-            UpdateMask,
+            Symbol,
+            FundCode,
+            Quantity,
+            Depth,
+            Offset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3825,8 +3849,11 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                         E: serde::de::Error,
                     {
                         match value {
-                            "lp" => Ok(GeneratedField::Lp),
-                            "updateMask" | "update_mask" => Ok(GeneratedField::UpdateMask),
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "depth" => Ok(GeneratedField::Depth),
+                            "offset" => Ok(GeneratedField::Offset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3846,21 +3873,41 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut lp__ = None;
-                let mut update_mask__ = None;
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                let mut update__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Lp => {
-                            if lp__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("lp"));
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
                             }
-                            lp__ = map_.next_value()?;
+                            symbol__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::UpdateMask => {
-                            if update_mask__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("updateMask"));
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
-                            update_mask__ = map_.next_value()?;
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Quantity => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::Quantity(x.0));
+                        }
+                        GeneratedField::Depth => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::Depth(x.0));
+                        }
+                        GeneratedField::Offset => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<_>>()?.map(update_etf_lp_request::Update::Offset)
+;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -3868,8 +3915,9 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                     }
                 }
                 Ok(UpdateEtfLpRequest {
-                    lp: lp__,
-                    update_mask: update_mask__,
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    update: update__,
                 })
             }
         }

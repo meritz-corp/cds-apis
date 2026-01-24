@@ -116,7 +116,7 @@
         ]
       }
     },
-    "/v1/lps/etfs/{lp.symbol}/funds/{lp.fundCode}": {
+    "/v1/lps/etfs/{symbol}/funds/{fundCode}": {
       "patch": {
         "summary": "ETF LP 업데이트",
         "operationId": "LpService_UpdateEtfLp",
@@ -136,7 +136,7 @@
         },
         "parameters": [
           {
-            "name": "lp.symbol",
+            "name": "symbol",
             "description": "ETF 심볼",
             "in": "path",
             "required": true,
@@ -144,54 +144,37 @@
             "pattern": "[^/]+"
           },
           {
-            "name": "lp.fundCode",
-            "description": "Fund",
+            "name": "fundCode",
+            "description": "펀드 코드",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
           },
           {
-            "name": "lp",
-            "description": "ETF LP 설정",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "basis": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Basis 스프레드 (원 단위, i64)"
-                },
                 "quantity": {
                   "type": "string",
                   "format": "int64",
-                  "title": "주문 수량 (i64)"
+                  "title": "주문 수량"
                 },
                 "depth": {
                   "type": "integer",
                   "format": "int64",
-                  "title": "호가 깊이 (양방향 레벨 수)"
-                },
-                "tickSize": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "ETF tick 크기 (원 단위, i64)"
+                  "title": "호가 깊이"
                 },
                 "offset": {
                   "$ref": "#/definitions/lpEtfLpOffset",
                   "title": "동적 offset 조정 설정"
                 }
               },
-              "title": "ETF LP 설정"
+              "title": "UpdateEtfLp"
             }
-          },
-          {
-            "name": "updateMask",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [

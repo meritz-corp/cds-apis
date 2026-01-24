@@ -5,7 +5,6 @@ package kdo.v1.lp;
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
@@ -33,10 +32,10 @@ service LpService {
   // ETF LP 업데이트
   rpc UpdateEtfLp(UpdateEtfLpRequest) returns (EtfLp) {
     option (google.api.http) = {
-      patch: "/v1/lps/etfs/{lp.symbol=*}/funds/{lp.fund_code=*}"
-      body: "lp"
+      patch: "/v1/lps/etfs/{symbol=*}/funds/{fund_code=*}"
+      body: "*"
     };
-    option (google.api.method_signature) = "lp,update_mask";
+    option (google.api.method_signature) = "symbol,fund_code";
   }
 
   // ETF LP 상태 조회
@@ -397,11 +396,23 @@ message ListEtfLpStatusesResponse {
 
 // UpdateEtfLp
 message UpdateEtfLpRequest {
-  EtfLp lp = 1 [
-    (google.api.field_behavior) = REQUIRED
-  ];
+  // ETF 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
 
-  google.protobuf.FieldMask update_mask = 2;
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 업데이트 대상
+  oneof update {
+    // 주문 수량
+    int64 quantity = 3;
+
+    // 호가 깊이
+    uint32 depth = 4;
+
+    // 동적 offset 조정 설정
+    EtfLpOffset offset = 5;
+  }
 }
 
 

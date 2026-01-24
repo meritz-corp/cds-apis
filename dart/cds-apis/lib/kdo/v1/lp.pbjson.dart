@@ -394,16 +394,23 @@ final $typed_data.Uint8List listEtfLpStatusesResponseDescriptor = $convert.base6
 const UpdateEtfLpRequest$json = {
   '1': 'UpdateEtfLpRequest',
   '2': [
-    {'1': 'lp', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLp', '8': {}, '10': 'lp'},
-    {'1': 'update_mask', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.FieldMask', '10': 'updateMask'},
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '9': 0, '10': 'quantity'},
+    {'1': 'depth', '3': 4, '4': 1, '5': 13, '9': 0, '10': 'depth'},
+    {'1': 'offset', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 0, '10': 'offset'},
+  ],
+  '8': [
+    {'1': 'update'},
   ],
 };
 
 /// Descriptor for `UpdateEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateEtfLpRequestDescriptor = $convert.base64Decode(
-    'ChJVcGRhdGVFdGZMcFJlcXVlc3QSJgoCbHAYASABKAsyEC5rZG8udjEubHAuRXRmTHBCBOJBAQ'
-    'JSAmxwEjsKC3VwZGF0ZV9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFza1IK'
-    'dXBkYXRlTWFzaw==');
+    'ChJVcGRhdGVFdGZMcFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSIQoJZn'
+    'VuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIcCghxdWFudGl0eRgDIAEoA0gAUghxdWFu'
+    'dGl0eRIWCgVkZXB0aBgEIAEoDUgAUgVkZXB0aBIwCgZvZmZzZXQYBSABKAsyFi5rZG8udjEubH'
+    'AuRXRmTHBPZmZzZXRIAFIGb2Zmc2V0QggKBnVwZGF0ZQ==');
 
 @$core.Deprecated('Use getEtfLpStatusRequestDescriptor instead')
 const GetEtfLpStatusRequest$json = {
