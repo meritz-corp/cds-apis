@@ -84,8 +84,8 @@ message ViStock {
   // VI 진입 시간
   google.protobuf.Timestamp vi_start_time = 3;
 
-  // VI 진입 전 KRX 마지막 가격
-  int64 krx_last_price = 4;
+  // VI 예체가
+  int64 krx_estimated_price = 4;
 
   // 대응 주식선물 심볼 (없으면 빈 문자열)
   string futures_symbol = 5;
