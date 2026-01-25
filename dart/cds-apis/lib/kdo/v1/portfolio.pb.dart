@@ -933,7 +933,7 @@ class NetExposures extends $pb.GeneratedMessage {
 class NetExposure extends $pb.GeneratedMessage {
   factory NetExposure({
     $core.String? symbol,
-    $fixnum.Int64? netQuantity,
+    $core.double? netQuantity,
     $core.double? currentPrice,
     $fixnum.Int64? exposureAmount,
   }) {
@@ -952,7 +952,7 @@ class NetExposure extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NetExposure', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'netQuantity')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'netQuantity', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'currentPrice', $pb.PbFieldType.OD)
     ..aInt64(4, _omitFieldNames ? '' : 'exposureAmount')
     ..hasRequiredFields = false
@@ -985,11 +985,11 @@ class NetExposure extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
-  /// 누적 수량 (분해 후 합산)
+  /// 누적 수량 (분해 후 합산, 소수점 2자리)
   @$pb.TagNumber(2)
-  $fixnum.Int64 get netQuantity => $_getI64(1);
+  $core.double get netQuantity => $_getN(1);
   @$pb.TagNumber(2)
-  set netQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  set netQuantity($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(2)
   $core.bool hasNetQuantity() => $_has(1);
   @$pb.TagNumber(2)

@@ -1772,9 +1772,7 @@ impl serde::Serialize for NetExposure {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("net_quantity", ToString::to_string(&self.net_quantity).as_str())?;
+            struct_ser.serialize_field("net_quantity", &self.net_quantity)?;
         }
         if true {
             struct_ser.serialize_field("current_price", &self.current_price)?;

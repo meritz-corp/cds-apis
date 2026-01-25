@@ -577,9 +577,9 @@
           "title": "종목 심볼"
         },
         "netQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "누적 수량 (분해 후 합산)"
+          "type": "number",
+          "format": "double",
+          "title": "누적 수량 (분해 후 합산, 소수점 2자리)"
         },
         "currentPrice": {
           "type": "number",

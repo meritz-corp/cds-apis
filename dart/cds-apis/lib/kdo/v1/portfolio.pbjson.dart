@@ -187,7 +187,7 @@ const NetExposure$json = {
   '1': 'NetExposure',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'net_quantity', '3': 2, '4': 1, '5': 3, '10': 'netQuantity'},
+    {'1': 'net_quantity', '3': 2, '4': 1, '5': 1, '10': 'netQuantity'},
     {'1': 'current_price', '3': 3, '4': 1, '5': 1, '10': 'currentPrice'},
     {'1': 'exposure_amount', '3': 4, '4': 1, '5': 3, '10': 'exposureAmount'},
   ],
@@ -196,7 +196,7 @@ const NetExposure$json = {
 /// Descriptor for `NetExposure`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List netExposureDescriptor = $convert.base64Decode(
     'CgtOZXRFeHBvc3VyZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIhCgxuZXRfcXVhbnRpdHkYAi'
-    'ABKANSC25ldFF1YW50aXR5EiMKDWN1cnJlbnRfcHJpY2UYAyABKAFSDGN1cnJlbnRQcmljZRIn'
+    'ABKAFSC25ldFF1YW50aXR5EiMKDWN1cnJlbnRfcHJpY2UYAyABKAFSDGN1cnJlbnRQcmljZRIn'
     'Cg9leHBvc3VyZV9hbW91bnQYBCABKANSDmV4cG9zdXJlQW1vdW50');
 
 @$core.Deprecated('Use hedgeGroupSummaryDescriptor instead')

@@ -310,8 +310,8 @@ message NetExposure {
   // 종목 심볼
   string symbol = 1;
 
-  // 누적 수량 (분해 후 합산)
-  int64 net_quantity = 2;
+  // 누적 수량 (분해 후 합산, 소수점 2자리)
+  double net_quantity = 2;
 
   // 현재가
   double current_price = 3;

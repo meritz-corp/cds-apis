@@ -202,9 +202,9 @@ pub struct NetExposure {
     /// 종목 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 누적 수량 (분해 후 합산)
-    #[prost(int64, tag="2")]
-    pub net_quantity: i64,
+    /// 누적 수량 (분해 후 합산, 소수점 2자리)
+    #[prost(double, tag="2")]
+    pub net_quantity: f64,
     /// 현재가
     #[prost(double, tag="3")]
     pub current_price: f64,
