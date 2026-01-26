@@ -97,5 +97,9 @@ pub mod mmm {
             include!("mmm.v1.basket.rs");
         }
 
+        pub mod notification {
+            include!("mmm.v1.notification.rs");
+        }
+
     }
 }

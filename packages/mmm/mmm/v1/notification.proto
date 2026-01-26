@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package mmm.v1.notification;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/mmm/v1;mmm";
+
+// NotificationService
+service NotificationService {
+
+  rpc CreateNotification (CreateNotificationRequest) returns (Notification);
+
+}
+
+message CreateNotificationRequest {
+  string user = 1;     // 대상 사용자(또는 그룹/채널 키) //ex) "172.17.220.118"
+  string message = 2;  // 노티 본문
+}
+
+message Notification {
+  string id = 1;       // 서버가 생성 (uuid 등)
+  string user = 2;     // 요청값 그대로
+  string message = 3;  // 요청값 그대로
+  int64  ts_ms = 4;    // 서버 생성 시각(ms)
+  string source = 5;   // 서버가 기록한 발신자(IP or 서비스명)
+}

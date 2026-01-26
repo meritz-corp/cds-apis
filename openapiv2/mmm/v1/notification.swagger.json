@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mmm/v1/notification.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "NotificationService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "notificationNotification": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "서버가 생성 (uuid 등)"
+        },
+        "user": {
+          "type": "string",
+          "title": "요청값 그대로"
+        },
+        "message": {
+          "type": "string",
+          "title": "요청값 그대로"
+        },
+        "tsMs": {
+          "type": "string",
+          "format": "int64",
+          "title": "서버 생성 시각(ms)"
+        },
+        "source": {
+          "type": "string",
+          "title": "서버가 기록한 발신자(IP or 서비스명)"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
