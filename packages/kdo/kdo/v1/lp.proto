@@ -79,14 +79,6 @@ service LpService {
     };
   }
 
-  // ETF LP 이벤트 실시간 스트리밍
-  rpc StreamLpEvents(StreamLpEventsRequest) returns (stream EtfLpEvent) {
-    option (google.api.http) = {
-      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/events:stream"
-    };
-    option (google.api.method_signature) = "etf";
-  }
-
   // 사용자 주문장 업데이트를 가져오기
   rpc GetUserOrderbook(GetUserOrderBookRequest) returns (UserOrderbookData) {
     option (google.api.http) = {
@@ -516,63 +508,6 @@ message StreamLpEventsRequest {
       type: "kdo.cdsapis.xyz/Fund"
     }
   ];
-}
-
-// ETF LP 에러 이벤트
-message EtfLpEvent {
-  // ETF 심볼
-  string symbol = 1;
-
-  // 작업 타입
-  TaskType task_type = 2;
-
-  // 이벤트 타입
-  LpEventType type = 3;
-
-  // 상세 메시지
-  string message = 4;
-
-  // 발생 시간
-  google.protobuf.Timestamp timestamp = 5;
-
-  // 이벤트 레벨
-  LpEventLevel level = 6;
-}
-
-// 작업 타입
-enum TaskType {
-  TASK_TYPE_UNSPECIFIED = 0;
-  TASK_TYPE_QUOTE = 1;
-  TASK_TYPE_HEDGE = 2;
-}
-
-// 이벤트 타입
-enum LpEventType {
-  LP_EVENT_TYPE_UNSPECIFIED = 0;
-  LP_EVENT_TYPE_INITIALIZATION = 1;     // 초기화 실패
-  LP_EVENT_TYPE_PRICE_UPDATE = 2;       // 가격 업데이트 실패
-  LP_EVENT_TYPE_ORDER_SUBMIT = 3;       // 주문 제출 실패
-  LP_EVENT_TYPE_ORDER_PROCESSING = 4;   // 주문 처리 실패
-  LP_EVENT_TYPE_NAV_CALCULATION = 5;    // NAV 계산 실패
-  LP_EVENT_TYPE_ORDER_BOOK_UPDATE = 6;  // 오더북 업데이트 실패
-  LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED = 7;     // 주문 한도 초과
-  LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED = 8;     // 펀드 한도 초과
-  LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED = 9;        // 주식 재고 초과
-  LP_EVENT_TYPE_SYSTEM_ERROR = 12;       // 시스템 에러
-  LP_EVENT_TYPE_MARKET_SESSION = 13;     // 시장 세션 관련 에러
-  LP_EVENT_TYPE_FUND_UPDATE = 14;        // 펀드 정보 업데이트 실패
-  LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY = 15; // 오프셋 조정 (시간 기반) 실행
-  LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY = 16; // 오프셋 조정 (포지션 기반) 실행
-}
-
-// 이벤트 레벨
-enum LpEventLevel {
-  LP_EVENT_LEVEL_UNSPECIFIED = 0;
-  LP_EVENT_LEVEL_DEBUG = 1;    // 디버그 정보
-  LP_EVENT_LEVEL_INFO = 2;     // 정보성 메시지
-  LP_EVENT_LEVEL_WARNING = 3;  // 경고
-  LP_EVENT_LEVEL_ERROR = 4;    // 에러
-  LP_EVENT_LEVEL_CRITICAL = 5; // 치명적 에러
 }
 
 // 주문 업데이트 스트리밍 요청
