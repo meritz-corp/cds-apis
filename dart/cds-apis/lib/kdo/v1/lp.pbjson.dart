@@ -133,10 +133,10 @@ final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
 const EtfLpOffset$json = {
   '1': 'EtfLpOffset',
   '2': [
-    {'1': 'bid_offset', '3': 1, '4': 1, '5': 2, '10': 'bidOffset'},
-    {'1': 'ask_offset', '3': 2, '4': 1, '5': 2, '10': 'askOffset'},
-    {'1': 'min_offset', '3': 3, '4': 1, '5': 2, '10': 'minOffset'},
-    {'1': 'max_offset', '3': 4, '4': 1, '5': 2, '10': 'maxOffset'},
+    {'1': 'bid_offset', '3': 1, '4': 1, '5': 1, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 2, '4': 1, '5': 1, '10': 'askOffset'},
+    {'1': 'min_offset', '3': 3, '4': 1, '5': 1, '10': 'minOffset'},
+    {'1': 'max_offset', '3': 4, '4': 1, '5': 1, '10': 'maxOffset'},
     {'1': 'time_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
     {'1': 'adjustment_interval_secs', '3': 8, '4': 1, '5': 4, '10': 'adjustmentIntervalSecs'},
     {'1': 'adjustment_step', '3': 9, '4': 1, '5': 2, '10': 'adjustmentStep'},
@@ -150,9 +150,9 @@ const EtfLpOffset$json = {
 
 /// Descriptor for `EtfLpOffset`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
-    'CgtFdGZMcE9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgCUgliaWRPZmZzZXQSHQoKYXNrX29mZn'
-    'NldBgCIAEoAlIJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKAJSCW1pbk9mZnNldBIdCgpt'
-    'YXhfb2Zmc2V0GAQgASgCUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
+    'CgtFdGZMcE9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgBUgliaWRPZmZzZXQSHQoKYXNrX29mZn'
+    'NldBgCIAEoAVIJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKAFSCW1pbk9mZnNldBIdCgpt'
+    'YXhfb2Zmc2V0GAQgASgBUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
     'ABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MY'
     'CCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgCUg'
     '5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtw'

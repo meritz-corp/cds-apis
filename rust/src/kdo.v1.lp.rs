@@ -91,15 +91,15 @@ pub struct EtfLpStatusUpdate {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EtfLpOffset {
     ///
-    #[prost(float, tag="1")]
-    pub bid_offset: f32,
-    #[prost(float, tag="2")]
-    pub ask_offset: f32,
+    #[prost(double, tag="1")]
+    pub bid_offset: f64,
+    #[prost(double, tag="2")]
+    pub ask_offset: f64,
     /// NAV 밴드 설정
-    #[prost(float, tag="3")]
-    pub min_offset: f32,
-    #[prost(float, tag="4")]
-    pub max_offset: f32,
+    #[prost(double, tag="3")]
+    pub min_offset: f64,
+    #[prost(double, tag="4")]
+    pub max_offset: f64,
     /// 시간 기반 조정
     #[prost(bool, tag="7")]
     pub time_adjustment_enabled: bool,

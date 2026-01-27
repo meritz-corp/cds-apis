@@ -536,20 +536,20 @@
       "properties": {
         "bidOffset": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "askOffset": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "minOffset": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "title": "NAV 밴드 설정"
         },
         "maxOffset": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "timeAdjustmentEnabled": {
           "type": "boolean",

@@ -477,10 +477,10 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   factory EtfLpOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OF)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OF)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'minOffset', $pb.PbFieldType.OF)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'maxOffset', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'minOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'maxOffset', $pb.PbFieldType.OD)
     ..aOB(7, _omitFieldNames ? '' : 'timeAdjustmentEnabled')
     ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'adjustmentIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.double>(9, _omitFieldNames ? '' : 'adjustmentStep', $pb.PbFieldType.OF)
@@ -512,7 +512,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.double get bidOffset => $_getN(0);
   @$pb.TagNumber(1)
-  set bidOffset($core.double value) => $_setFloat(0, value);
+  set bidOffset($core.double value) => $_setDouble(0, value);
   @$pb.TagNumber(1)
   $core.bool hasBidOffset() => $_has(0);
   @$pb.TagNumber(1)
@@ -521,7 +521,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.double get askOffset => $_getN(1);
   @$pb.TagNumber(2)
-  set askOffset($core.double value) => $_setFloat(1, value);
+  set askOffset($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(2)
   $core.bool hasAskOffset() => $_has(1);
   @$pb.TagNumber(2)
@@ -531,7 +531,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.double get minOffset => $_getN(2);
   @$pb.TagNumber(3)
-  set minOffset($core.double value) => $_setFloat(2, value);
+  set minOffset($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(3)
   $core.bool hasMinOffset() => $_has(2);
   @$pb.TagNumber(3)
@@ -540,7 +540,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.double get maxOffset => $_getN(3);
   @$pb.TagNumber(4)
-  set maxOffset($core.double value) => $_setFloat(3, value);
+  set maxOffset($core.double value) => $_setDouble(3, value);
   @$pb.TagNumber(4)
   $core.bool hasMaxOffset() => $_has(3);
   @$pb.TagNumber(4)
