@@ -561,7 +561,7 @@
         },
         "adjustmentStep": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "resetOnFill": {
           "type": "boolean"
@@ -579,7 +579,7 @@
         },
         "positionAdjustmentStep": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         }
       },
       "title": "자동 offset 조정 설정"

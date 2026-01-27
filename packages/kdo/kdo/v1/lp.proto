@@ -199,14 +199,14 @@ message EtfLpOffset {
   // 시간 기반 조정
   bool time_adjustment_enabled = 7;
   uint64 adjustment_interval_secs = 8;
-  float adjustment_step = 9;
+  double adjustment_step = 9;
   bool reset_on_fill = 10;
 
   // 순매매량 기반 조정
   bool position_adjustment_enabled = 17;
   PositionAdjustmentStrategy position_strategy = 18;
   int64 position_threshold = 19;
-  float position_adjustment_step = 20;
+  double position_adjustment_step = 20;
 }
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

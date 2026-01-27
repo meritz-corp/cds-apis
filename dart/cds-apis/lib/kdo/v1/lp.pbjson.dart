@@ -139,12 +139,12 @@ const EtfLpOffset$json = {
     {'1': 'max_offset', '3': 4, '4': 1, '5': 1, '10': 'maxOffset'},
     {'1': 'time_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
     {'1': 'adjustment_interval_secs', '3': 8, '4': 1, '5': 4, '10': 'adjustmentIntervalSecs'},
-    {'1': 'adjustment_step', '3': 9, '4': 1, '5': 2, '10': 'adjustmentStep'},
+    {'1': 'adjustment_step', '3': 9, '4': 1, '5': 1, '10': 'adjustmentStep'},
     {'1': 'reset_on_fill', '3': 10, '4': 1, '5': 8, '10': 'resetOnFill'},
     {'1': 'position_adjustment_enabled', '3': 17, '4': 1, '5': 8, '10': 'positionAdjustmentEnabled'},
     {'1': 'position_strategy', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.lp.PositionAdjustmentStrategy', '10': 'positionStrategy'},
     {'1': 'position_threshold', '3': 19, '4': 1, '5': 3, '10': 'positionThreshold'},
-    {'1': 'position_adjustment_step', '3': 20, '4': 1, '5': 2, '10': 'positionAdjustmentStep'},
+    {'1': 'position_adjustment_step', '3': 20, '4': 1, '5': 1, '10': 'positionAdjustmentStep'},
   ],
 };
 
@@ -154,13 +154,13 @@ final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
     'NldBgCIAEoAVIJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKAFSCW1pbk9mZnNldBIdCgpt'
     'YXhfb2Zmc2V0GAQgASgBUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
     'ABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MY'
-    'CCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgCUg'
+    'CCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgBUg'
     '5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtw'
     'b3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWQYESABKAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYW'
     'JsZWQSUgoRcG9zaXRpb25fc3RyYXRlZ3kYEiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1'
     'c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGB'
     'MgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCAB'
-    'KAJSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
+    'KAFSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

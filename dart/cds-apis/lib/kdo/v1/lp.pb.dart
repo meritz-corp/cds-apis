@@ -483,12 +483,12 @@ class EtfLpOffset extends $pb.GeneratedMessage {
     ..a<$core.double>(4, _omitFieldNames ? '' : 'maxOffset', $pb.PbFieldType.OD)
     ..aOB(7, _omitFieldNames ? '' : 'timeAdjustmentEnabled')
     ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'adjustmentIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'adjustmentStep', $pb.PbFieldType.OF)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'adjustmentStep', $pb.PbFieldType.OD)
     ..aOB(10, _omitFieldNames ? '' : 'resetOnFill')
     ..aOB(17, _omitFieldNames ? '' : 'positionAdjustmentEnabled')
     ..e<PositionAdjustmentStrategy>(18, _omitFieldNames ? '' : 'positionStrategy', $pb.PbFieldType.OE, defaultOrMaker: PositionAdjustmentStrategy.POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED, valueOf: PositionAdjustmentStrategy.valueOf, enumValues: PositionAdjustmentStrategy.values)
     ..aInt64(19, _omitFieldNames ? '' : 'positionThreshold')
-    ..a<$core.double>(20, _omitFieldNames ? '' : 'positionAdjustmentStep', $pb.PbFieldType.OF)
+    ..a<$core.double>(20, _omitFieldNames ? '' : 'positionAdjustmentStep', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -568,7 +568,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $core.double get adjustmentStep => $_getN(6);
   @$pb.TagNumber(9)
-  set adjustmentStep($core.double value) => $_setFloat(6, value);
+  set adjustmentStep($core.double value) => $_setDouble(6, value);
   @$pb.TagNumber(9)
   $core.bool hasAdjustmentStep() => $_has(6);
   @$pb.TagNumber(9)
@@ -614,7 +614,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   @$pb.TagNumber(20)
   $core.double get positionAdjustmentStep => $_getN(11);
   @$pb.TagNumber(20)
-  set positionAdjustmentStep($core.double value) => $_setFloat(11, value);
+  set positionAdjustmentStep($core.double value) => $_setDouble(11, value);
   @$pb.TagNumber(20)
   $core.bool hasPositionAdjustmentStep() => $_has(11);
   @$pb.TagNumber(20)

@@ -105,8 +105,8 @@ pub struct EtfLpOffset {
     pub time_adjustment_enabled: bool,
     #[prost(uint64, tag="8")]
     pub adjustment_interval_secs: u64,
-    #[prost(float, tag="9")]
-    pub adjustment_step: f32,
+    #[prost(double, tag="9")]
+    pub adjustment_step: f64,
     #[prost(bool, tag="10")]
     pub reset_on_fill: bool,
     /// 순매매량 기반 조정
@@ -116,8 +116,8 @@ pub struct EtfLpOffset {
     pub position_strategy: i32,
     #[prost(int64, tag="19")]
     pub position_threshold: i64,
-    #[prost(float, tag="20")]
-    pub position_adjustment_step: f32,
+    #[prost(double, tag="20")]
+    pub position_adjustment_step: f64,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]
