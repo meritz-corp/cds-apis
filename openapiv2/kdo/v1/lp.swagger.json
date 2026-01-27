@@ -221,54 +221,6 @@
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}/events:stream": {
-      "get": {
-        "summary": "ETF LP 이벤트 실시간 스트리밍",
-        "operationId": "LpService_StreamLpEvents",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/lpEtfLpEvent"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of lpEtfLpEvent"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "etf",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "etfs/[^/]+"
-          },
-          {
-            "name": "fund",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "funds/[^/]+"
-          }
-        ],
-        "tags": [
-          "LpService"
-        ]
-      }
-    },
     "/v1/lps/{etf}/{fund}/orderbook": {
       "get": {
         "summary": "사용자 주문장 업데이트를 가져오기",
@@ -579,56 +531,25 @@
       },
       "title": "ETF LP 설정"
     },
-    "lpEtfLpEvent": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "taskType": {
-          "$ref": "#/definitions/lpTaskType",
-          "title": "작업 타입"
-        },
-        "type": {
-          "$ref": "#/definitions/lpLpEventType",
-          "title": "이벤트 타입"
-        },
-        "message": {
-          "type": "string",
-          "title": "상세 메시지"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "title": "발생 시간"
-        },
-        "level": {
-          "$ref": "#/definitions/lpLpEventLevel",
-          "title": "이벤트 레벨"
-        }
-      },
-      "title": "ETF LP 에러 이벤트"
-    },
     "lpEtfLpOffset": {
       "type": "object",
       "properties": {
         "bidOffset": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "float"
         },
         "askOffset": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "float"
         },
         "minOffset": {
-          "type": "string",
-          "format": "int64",
+          "type": "number",
+          "format": "float",
           "title": "NAV 밴드 설정"
         },
         "maxOffset": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "float"
         },
         "timeAdjustmentEnabled": {
           "type": "boolean",
@@ -811,43 +732,6 @@
         }
       }
     },
-    "lpLpEventLevel": {
-      "type": "string",
-      "enum": [
-        "LP_EVENT_LEVEL_UNSPECIFIED",
-        "LP_EVENT_LEVEL_DEBUG",
-        "LP_EVENT_LEVEL_INFO",
-        "LP_EVENT_LEVEL_WARNING",
-        "LP_EVENT_LEVEL_ERROR",
-        "LP_EVENT_LEVEL_CRITICAL"
-      ],
-      "default": "LP_EVENT_LEVEL_UNSPECIFIED",
-      "description": "- LP_EVENT_LEVEL_DEBUG: 디버그 정보\n - LP_EVENT_LEVEL_INFO: 정보성 메시지\n - LP_EVENT_LEVEL_WARNING: 경고\n - LP_EVENT_LEVEL_ERROR: 에러\n - LP_EVENT_LEVEL_CRITICAL: 치명적 에러",
-      "title": "이벤트 레벨"
-    },
-    "lpLpEventType": {
-      "type": "string",
-      "enum": [
-        "LP_EVENT_TYPE_UNSPECIFIED",
-        "LP_EVENT_TYPE_INITIALIZATION",
-        "LP_EVENT_TYPE_PRICE_UPDATE",
-        "LP_EVENT_TYPE_ORDER_SUBMIT",
-        "LP_EVENT_TYPE_ORDER_PROCESSING",
-        "LP_EVENT_TYPE_NAV_CALCULATION",
-        "LP_EVENT_TYPE_ORDER_BOOK_UPDATE",
-        "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED",
-        "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED",
-        "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED",
-        "LP_EVENT_TYPE_SYSTEM_ERROR",
-        "LP_EVENT_TYPE_MARKET_SESSION",
-        "LP_EVENT_TYPE_FUND_UPDATE",
-        "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY",
-        "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY"
-      ],
-      "default": "LP_EVENT_TYPE_UNSPECIFIED",
-      "description": "- LP_EVENT_TYPE_INITIALIZATION: 초기화 실패\n - LP_EVENT_TYPE_PRICE_UPDATE: 가격 업데이트 실패\n - LP_EVENT_TYPE_ORDER_SUBMIT: 주문 제출 실패\n - LP_EVENT_TYPE_ORDER_PROCESSING: 주문 처리 실패\n - LP_EVENT_TYPE_NAV_CALCULATION: NAV 계산 실패\n - LP_EVENT_TYPE_ORDER_BOOK_UPDATE: 오더북 업데이트 실패\n - LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED: 주문 한도 초과\n - LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED: 펀드 한도 초과\n - LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED: 주식 재고 초과\n - LP_EVENT_TYPE_SYSTEM_ERROR: 시스템 에러\n - LP_EVENT_TYPE_MARKET_SESSION: 시장 세션 관련 에러\n - LP_EVENT_TYPE_FUND_UPDATE: 펀드 정보 업데이트 실패\n - LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY: 오프셋 조정 (시간 기반) 실행\n - LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY: 오프셋 조정 (포지션 기반) 실행",
-      "title": "이벤트 타입"
-    },
     "lpLpPricing": {
       "type": "object",
       "properties": {
@@ -901,16 +785,6 @@
         }
       },
       "title": "ETF LP 중지 응답"
-    },
-    "lpTaskType": {
-      "type": "string",
-      "enum": [
-        "TASK_TYPE_UNSPECIFIED",
-        "TASK_TYPE_QUOTE",
-        "TASK_TYPE_HEDGE"
-      ],
-      "default": "TASK_TYPE_UNSPECIFIED",
-      "title": "작업 타입"
     },
     "protobufAny": {
       "type": "object",

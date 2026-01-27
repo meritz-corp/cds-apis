@@ -153,24 +153,6 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ETF LP 이벤트 실시간 스트리밍
-  Stream<kdov1lp.EtfLpEvent> streamLpEvents(
-    kdov1lp.StreamLpEventsRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).server(
-      specs.LpService.streamLpEvents,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
   /// 사용자 주문장 업데이트를 가져오기
   Future<kdov1lp.UserOrderbookData> getUserOrderbook(
     kdov1lp.GetUserOrderBookRequest input, {

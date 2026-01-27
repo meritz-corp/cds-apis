@@ -38,8 +38,6 @@ type LpServiceClient interface {
 	StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error)
 	// ETF LP 중지
 	StopEtfLp(ctx context.Context, in *StopEtfLpRequest, opts ...grpc.CallOption) (*StopEtfLpResponse, error)
-	// ETF LP 이벤트 실시간 스트리밍
-	StreamLpEvents(ctx context.Context, in *StreamLpEventsRequest, opts ...grpc.CallOption) (LpService_StreamLpEventsClient, error)
 	// 사용자 주문장 업데이트를 가져오기
 	GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
@@ -149,38 +147,6 @@ func (c *lpServiceClient) StopEtfLp(ctx context.Context, in *StopEtfLpRequest, o
 	return out, nil
 }
 
-func (c *lpServiceClient) StreamLpEvents(ctx context.Context, in *StreamLpEventsRequest, opts ...grpc.CallOption) (LpService_StreamLpEventsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &LpService_ServiceDesc.Streams[1], "/kdo.v1.lp.LpService/StreamLpEvents", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &lpServiceStreamLpEventsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type LpService_StreamLpEventsClient interface {
-	Recv() (*EtfLpEvent, error)
-	grpc.ClientStream
-}
-
-type lpServiceStreamLpEventsClient struct {
-	grpc.ClientStream
-}
-
-func (x *lpServiceStreamLpEventsClient) Recv() (*EtfLpEvent, error) {
-	m := new(EtfLpEvent)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *lpServiceClient) GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error) {
 	out := new(UserOrderbookData)
 	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetUserOrderbook", in, out, opts...)
@@ -191,7 +157,7 @@ func (c *lpServiceClient) GetUserOrderbook(ctx context.Context, in *GetUserOrder
 }
 
 func (c *lpServiceClient) StreamUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (LpService_StreamUserOrderbookClient, error) {
-	stream, err := c.cc.NewStream(ctx, &LpService_ServiceDesc.Streams[2], "/kdo.v1.lp.LpService/StreamUserOrderbook", opts...)
+	stream, err := c.cc.NewStream(ctx, &LpService_ServiceDesc.Streams[1], "/kdo.v1.lp.LpService/StreamUserOrderbook", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -242,8 +208,6 @@ type LpServiceServer interface {
 	StartEtfLp(context.Context, *StartEtfLpRequest) (*StartEtfLpResponse, error)
 	// ETF LP 중지
 	StopEtfLp(context.Context, *StopEtfLpRequest) (*StopEtfLpResponse, error)
-	// ETF LP 이벤트 실시간 스트리밍
-	StreamLpEvents(*StreamLpEventsRequest, LpService_StreamLpEventsServer) error
 	// 사용자 주문장 업데이트를 가져오기
 	GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
@@ -278,9 +242,6 @@ func (UnimplementedLpServiceServer) StartEtfLp(context.Context, *StartEtfLpReque
 }
 func (UnimplementedLpServiceServer) StopEtfLp(context.Context, *StopEtfLpRequest) (*StopEtfLpResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopEtfLp not implemented")
-}
-func (UnimplementedLpServiceServer) StreamLpEvents(*StreamLpEventsRequest, LpService_StreamLpEventsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamLpEvents not implemented")
 }
 func (UnimplementedLpServiceServer) GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserOrderbook not implemented")
@@ -448,27 +409,6 @@ func _LpService_StopEtfLp_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_StreamLpEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamLpEventsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(LpServiceServer).StreamLpEvents(m, &lpServiceStreamLpEventsServer{stream})
-}
-
-type LpService_StreamLpEventsServer interface {
-	Send(*EtfLpEvent) error
-	grpc.ServerStream
-}
-
-type lpServiceStreamLpEventsServer struct {
-	grpc.ServerStream
-}
-
-func (x *lpServiceStreamLpEventsServer) Send(m *EtfLpEvent) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 func _LpService_GetUserOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserOrderBookRequest)
 	if err := dec(in); err != nil {
@@ -552,11 +492,6 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamEtfLpStatusUpdate",
 			Handler:       _LpService_StreamEtfLpStatusUpdate_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "StreamLpEvents",
-			Handler:       _LpService_StreamLpEvents_Handler,
 			ServerStreams: true,
 		},
 		{

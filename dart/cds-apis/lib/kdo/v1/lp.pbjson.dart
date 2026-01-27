@@ -50,77 +50,6 @@ final $typed_data.Uint8List etfLpStateDescriptor = $convert.base64Decode(
     'FURV9JRExFEAESGAoURVRGX0xQX1NUQVRFX1JVTk5JTkcQAhIZChVFVEZfTFBfU1RBVEVfU1RP'
     'UFBJTkcQAxIWChJFVEZfTFBfU1RBVEVfRVJST1IQBA==');
 
-@$core.Deprecated('Use taskTypeDescriptor instead')
-const TaskType$json = {
-  '1': 'TaskType',
-  '2': [
-    {'1': 'TASK_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'TASK_TYPE_QUOTE', '2': 1},
-    {'1': 'TASK_TYPE_HEDGE', '2': 2},
-  ],
-};
-
-/// Descriptor for `TaskType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List taskTypeDescriptor = $convert.base64Decode(
-    'CghUYXNrVHlwZRIZChVUQVNLX1RZUEVfVU5TUEVDSUZJRUQQABITCg9UQVNLX1RZUEVfUVVPVE'
-    'UQARITCg9UQVNLX1RZUEVfSEVER0UQAg==');
-
-@$core.Deprecated('Use lpEventTypeDescriptor instead')
-const LpEventType$json = {
-  '1': 'LpEventType',
-  '2': [
-    {'1': 'LP_EVENT_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'LP_EVENT_TYPE_INITIALIZATION', '2': 1},
-    {'1': 'LP_EVENT_TYPE_PRICE_UPDATE', '2': 2},
-    {'1': 'LP_EVENT_TYPE_ORDER_SUBMIT', '2': 3},
-    {'1': 'LP_EVENT_TYPE_ORDER_PROCESSING', '2': 4},
-    {'1': 'LP_EVENT_TYPE_NAV_CALCULATION', '2': 5},
-    {'1': 'LP_EVENT_TYPE_ORDER_BOOK_UPDATE', '2': 6},
-    {'1': 'LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED', '2': 7},
-    {'1': 'LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED', '2': 8},
-    {'1': 'LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED', '2': 9},
-    {'1': 'LP_EVENT_TYPE_SYSTEM_ERROR', '2': 12},
-    {'1': 'LP_EVENT_TYPE_MARKET_SESSION', '2': 13},
-    {'1': 'LP_EVENT_TYPE_FUND_UPDATE', '2': 14},
-    {'1': 'LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY', '2': 15},
-    {'1': 'LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY', '2': 16},
-  ],
-};
-
-/// Descriptor for `LpEventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List lpEventTypeDescriptor = $convert.base64Decode(
-    'CgtMcEV2ZW50VHlwZRIdChlMUF9FVkVOVF9UWVBFX1VOU1BFQ0lGSUVEEAASIAocTFBfRVZFTl'
-    'RfVFlQRV9JTklUSUFMSVpBVElPThABEh4KGkxQX0VWRU5UX1RZUEVfUFJJQ0VfVVBEQVRFEAIS'
-    'HgoaTFBfRVZFTlRfVFlQRV9PUkRFUl9TVUJNSVQQAxIiCh5MUF9FVkVOVF9UWVBFX09SREVSX1'
-    'BST0NFU1NJTkcQBBIhCh1MUF9FVkVOVF9UWVBFX05BVl9DQUxDVUxBVElPThAFEiMKH0xQX0VW'
-    'RU5UX1RZUEVfT1JERVJfQk9PS19VUERBVEUQBhImCiJMUF9FVkVOVF9UWVBFX09SREVSX0xJTU'
-    'lUX0VYQ0VFREVEEAcSJQohTFBfRVZFTlRfVFlQRV9GVU5EX0xJTUlUX0VYQ0VFREVEEAgSKgom'
-    'TFBfRVZFTlRfVFlQRV9TVE9DS19JTlZFTlRPUllfRVhDRUVERUQQCRIeChpMUF9FVkVOVF9UWV'
-    'BFX1NZU1RFTV9FUlJPUhAMEiAKHExQX0VWRU5UX1RZUEVfTUFSS0VUX1NFU1NJT04QDRIdChlM'
-    'UF9FVkVOVF9UWVBFX0ZVTkRfVVBEQVRFEA4SMQotTFBfRVZFTlRfVFlQRV9PRkZTRVRfQURKVV'
-    'NUTUVOVF9USU1FX1NUUkFURUdZEA8SNQoxTFBfRVZFTlRfVFlQRV9PRkZTRVRfQURKVVNUTUVO'
-    'VF9QT1NJVElPTl9TVFJBVEVHWRAQ');
-
-@$core.Deprecated('Use lpEventLevelDescriptor instead')
-const LpEventLevel$json = {
-  '1': 'LpEventLevel',
-  '2': [
-    {'1': 'LP_EVENT_LEVEL_UNSPECIFIED', '2': 0},
-    {'1': 'LP_EVENT_LEVEL_DEBUG', '2': 1},
-    {'1': 'LP_EVENT_LEVEL_INFO', '2': 2},
-    {'1': 'LP_EVENT_LEVEL_WARNING', '2': 3},
-    {'1': 'LP_EVENT_LEVEL_ERROR', '2': 4},
-    {'1': 'LP_EVENT_LEVEL_CRITICAL', '2': 5},
-  ],
-};
-
-/// Descriptor for `LpEventLevel`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List lpEventLevelDescriptor = $convert.base64Decode(
-    'CgxMcEV2ZW50TGV2ZWwSHgoaTFBfRVZFTlRfTEVWRUxfVU5TUEVDSUZJRUQQABIYChRMUF9FVk'
-    'VOVF9MRVZFTF9ERUJVRxABEhcKE0xQX0VWRU5UX0xFVkVMX0lORk8QAhIaChZMUF9FVkVOVF9M'
-    'RVZFTF9XQVJOSU5HEAMSGAoUTFBfRVZFTlRfTEVWRUxfRVJST1IQBBIbChdMUF9FVkVOVF9MRV'
-    'ZFTF9DUklUSUNBTBAF');
-
 @$core.Deprecated('Use etfLpDescriptor instead')
 const EtfLp$json = {
   '1': 'EtfLp',
@@ -204,10 +133,10 @@ final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
 const EtfLpOffset$json = {
   '1': 'EtfLpOffset',
   '2': [
-    {'1': 'bid_offset', '3': 1, '4': 1, '5': 3, '10': 'bidOffset'},
-    {'1': 'ask_offset', '3': 2, '4': 1, '5': 3, '10': 'askOffset'},
-    {'1': 'min_offset', '3': 3, '4': 1, '5': 3, '10': 'minOffset'},
-    {'1': 'max_offset', '3': 4, '4': 1, '5': 3, '10': 'maxOffset'},
+    {'1': 'bid_offset', '3': 1, '4': 1, '5': 2, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 2, '4': 1, '5': 2, '10': 'askOffset'},
+    {'1': 'min_offset', '3': 3, '4': 1, '5': 2, '10': 'minOffset'},
+    {'1': 'max_offset', '3': 4, '4': 1, '5': 2, '10': 'maxOffset'},
     {'1': 'time_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
     {'1': 'adjustment_interval_secs', '3': 8, '4': 1, '5': 4, '10': 'adjustmentIntervalSecs'},
     {'1': 'adjustment_step', '3': 9, '4': 1, '5': 2, '10': 'adjustmentStep'},
@@ -221,9 +150,9 @@ const EtfLpOffset$json = {
 
 /// Descriptor for `EtfLpOffset`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
-    'CgtFdGZMcE9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgDUgliaWRPZmZzZXQSHQoKYXNrX29mZn'
-    'NldBgCIAEoA1IJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKANSCW1pbk9mZnNldBIdCgpt'
-    'YXhfb2Zmc2V0GAQgASgDUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
+    'CgtFdGZMcE9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgCUgliaWRPZmZzZXQSHQoKYXNrX29mZn'
+    'NldBgCIAEoAlIJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKAJSCW1pbk9mZnNldBIdCgpt'
+    'YXhfb2Zmc2V0GAQgASgCUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
     'ABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MY'
     'CCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgCUg'
     '5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtw'
@@ -514,27 +443,6 @@ final $typed_data.Uint8List streamLpEventsRequestDescriptor = $convert.base64Dec
     'ChVTdHJlYW1McEV2ZW50c1JlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2RzYX'
     'Bpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6'
     'L0Z1bmRSBGZ1bmQ=');
-
-@$core.Deprecated('Use etfLpEventDescriptor instead')
-const EtfLpEvent$json = {
-  '1': 'EtfLpEvent',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'task_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.lp.TaskType', '10': 'taskType'},
-    {'1': 'type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.lp.LpEventType', '10': 'type'},
-    {'1': 'message', '3': 4, '4': 1, '5': 9, '10': 'message'},
-    {'1': 'timestamp', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
-    {'1': 'level', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.lp.LpEventLevel', '10': 'level'},
-  ],
-};
-
-/// Descriptor for `EtfLpEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfLpEventDescriptor = $convert.base64Decode(
-    'CgpFdGZMcEV2ZW50EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEjAKCXRhc2tfdHlwZRgCIAEoDj'
-    'ITLmtkby52MS5scC5UYXNrVHlwZVIIdGFza1R5cGUSKgoEdHlwZRgDIAEoDjIWLmtkby52MS5s'
-    'cC5McEV2ZW50VHlwZVIEdHlwZRIYCgdtZXNzYWdlGAQgASgJUgdtZXNzYWdlEjgKCXRpbWVzdG'
-    'FtcBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXRpbWVzdGFtcBItCgVsZXZl'
-    'bBgGIAEoDjIXLmtkby52MS5scC5McEV2ZW50TGV2ZWxSBWxldmVs');
 
 @$core.Deprecated('Use getUserOrderBookRequestDescriptor instead')
 const GetUserOrderBookRequest$json = {

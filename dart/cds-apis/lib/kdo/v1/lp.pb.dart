@@ -15,7 +15,6 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $1;
 import 'lp.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -443,10 +442,10 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
 /// 자동 offset 조정 설정
 class EtfLpOffset extends $pb.GeneratedMessage {
   factory EtfLpOffset({
-    $fixnum.Int64? bidOffset,
-    $fixnum.Int64? askOffset,
-    $fixnum.Int64? minOffset,
-    $fixnum.Int64? maxOffset,
+    $core.double? bidOffset,
+    $core.double? askOffset,
+    $core.double? minOffset,
+    $core.double? maxOffset,
     $core.bool? timeAdjustmentEnabled,
     $fixnum.Int64? adjustmentIntervalSecs,
     $core.double? adjustmentStep,
@@ -478,10 +477,10 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   factory EtfLpOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'bidOffset')
-    ..aInt64(2, _omitFieldNames ? '' : 'askOffset')
-    ..aInt64(3, _omitFieldNames ? '' : 'minOffset')
-    ..aInt64(4, _omitFieldNames ? '' : 'maxOffset')
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OF)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OF)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'minOffset', $pb.PbFieldType.OF)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'maxOffset', $pb.PbFieldType.OF)
     ..aOB(7, _omitFieldNames ? '' : 'timeAdjustmentEnabled')
     ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'adjustmentIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.double>(9, _omitFieldNames ? '' : 'adjustmentStep', $pb.PbFieldType.OF)
@@ -511,18 +510,18 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   static EtfLpOffset? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get bidOffset => $_getI64(0);
+  $core.double get bidOffset => $_getN(0);
   @$pb.TagNumber(1)
-  set bidOffset($fixnum.Int64 value) => $_setInt64(0, value);
+  set bidOffset($core.double value) => $_setFloat(0, value);
   @$pb.TagNumber(1)
   $core.bool hasBidOffset() => $_has(0);
   @$pb.TagNumber(1)
   void clearBidOffset() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get askOffset => $_getI64(1);
+  $core.double get askOffset => $_getN(1);
   @$pb.TagNumber(2)
-  set askOffset($fixnum.Int64 value) => $_setInt64(1, value);
+  set askOffset($core.double value) => $_setFloat(1, value);
   @$pb.TagNumber(2)
   $core.bool hasAskOffset() => $_has(1);
   @$pb.TagNumber(2)
@@ -530,18 +529,18 @@ class EtfLpOffset extends $pb.GeneratedMessage {
 
   /// NAV 밴드 설정
   @$pb.TagNumber(3)
-  $fixnum.Int64 get minOffset => $_getI64(2);
+  $core.double get minOffset => $_getN(2);
   @$pb.TagNumber(3)
-  set minOffset($fixnum.Int64 value) => $_setInt64(2, value);
+  set minOffset($core.double value) => $_setFloat(2, value);
   @$pb.TagNumber(3)
   $core.bool hasMinOffset() => $_has(2);
   @$pb.TagNumber(3)
   void clearMinOffset() => $_clearField(3);
 
   @$pb.TagNumber(4)
-  $fixnum.Int64 get maxOffset => $_getI64(3);
+  $core.double get maxOffset => $_getN(3);
   @$pb.TagNumber(4)
-  set maxOffset($fixnum.Int64 value) => $_setInt64(3, value);
+  set maxOffset($core.double value) => $_setFloat(3, value);
   @$pb.TagNumber(4)
   $core.bool hasMaxOffset() => $_has(3);
   @$pb.TagNumber(4)
@@ -1849,121 +1848,6 @@ class StreamLpEventsRequest extends $pb.GeneratedMessage {
   $core.bool hasFund() => $_has(1);
   @$pb.TagNumber(2)
   void clearFund() => $_clearField(2);
-}
-
-/// ETF LP 에러 이벤트
-class EtfLpEvent extends $pb.GeneratedMessage {
-  factory EtfLpEvent({
-    $core.String? symbol,
-    TaskType? taskType,
-    LpEventType? type,
-    $core.String? message,
-    $1.Timestamp? timestamp,
-    LpEventLevel? level,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (taskType != null) result.taskType = taskType;
-    if (type != null) result.type = type;
-    if (message != null) result.message = message;
-    if (timestamp != null) result.timestamp = timestamp;
-    if (level != null) result.level = level;
-    return result;
-  }
-
-  EtfLpEvent._();
-
-  factory EtfLpEvent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..e<TaskType>(2, _omitFieldNames ? '' : 'taskType', $pb.PbFieldType.OE, defaultOrMaker: TaskType.TASK_TYPE_UNSPECIFIED, valueOf: TaskType.valueOf, enumValues: TaskType.values)
-    ..e<LpEventType>(3, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: LpEventType.LP_EVENT_TYPE_UNSPECIFIED, valueOf: LpEventType.valueOf, enumValues: LpEventType.values)
-    ..aOS(4, _omitFieldNames ? '' : 'message')
-    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $1.Timestamp.create)
-    ..e<LpEventLevel>(6, _omitFieldNames ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: LpEventLevel.LP_EVENT_LEVEL_UNSPECIFIED, valueOf: LpEventLevel.valueOf, enumValues: LpEventLevel.values)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpEvent clone() => EtfLpEvent()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpEvent copyWith(void Function(EtfLpEvent) updates) => super.copyWith((message) => updates(message as EtfLpEvent)) as EtfLpEvent;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static EtfLpEvent create() => EtfLpEvent._();
-  @$core.override
-  EtfLpEvent createEmptyInstance() => create();
-  static $pb.PbList<EtfLpEvent> createRepeated() => $pb.PbList<EtfLpEvent>();
-  @$core.pragma('dart2js:noInline')
-  static EtfLpEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpEvent>(create);
-  static EtfLpEvent? _defaultInstance;
-
-  /// ETF 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// 작업 타입
-  @$pb.TagNumber(2)
-  TaskType get taskType => $_getN(1);
-  @$pb.TagNumber(2)
-  set taskType(TaskType value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTaskType() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTaskType() => $_clearField(2);
-
-  /// 이벤트 타입
-  @$pb.TagNumber(3)
-  LpEventType get type => $_getN(2);
-  @$pb.TagNumber(3)
-  set type(LpEventType value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasType() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearType() => $_clearField(3);
-
-  /// 상세 메시지
-  @$pb.TagNumber(4)
-  $core.String get message => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set message($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasMessage() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearMessage() => $_clearField(4);
-
-  /// 발생 시간
-  @$pb.TagNumber(5)
-  $1.Timestamp get timestamp => $_getN(4);
-  @$pb.TagNumber(5)
-  set timestamp($1.Timestamp value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasTimestamp() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearTimestamp() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $1.Timestamp ensureTimestamp() => $_ensure(4);
-
-  /// 이벤트 레벨
-  @$pb.TagNumber(6)
-  LpEventLevel get level => $_getN(5);
-  @$pb.TagNumber(6)
-  set level(LpEventLevel value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasLevel() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearLevel() => $_clearField(6);
 }
 
 /// 주문 업데이트 스트리밍 요청

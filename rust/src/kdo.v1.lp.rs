@@ -91,15 +91,15 @@ pub struct EtfLpStatusUpdate {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EtfLpOffset {
     ///
-    #[prost(int64, tag="1")]
-    pub bid_offset: i64,
-    #[prost(int64, tag="2")]
-    pub ask_offset: i64,
+    #[prost(float, tag="1")]
+    pub bid_offset: f32,
+    #[prost(float, tag="2")]
+    pub ask_offset: f32,
     /// NAV 밴드 설정
-    #[prost(int64, tag="3")]
-    pub min_offset: i64,
-    #[prost(int64, tag="4")]
-    pub max_offset: i64,
+    #[prost(float, tag="3")]
+    pub min_offset: f32,
+    #[prost(float, tag="4")]
+    pub max_offset: f32,
     /// 시간 기반 조정
     #[prost(bool, tag="7")]
     pub time_adjustment_enabled: bool,
@@ -392,29 +392,6 @@ pub struct StreamLpEventsRequest {
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
 }
-/// ETF LP 에러 이벤트
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLpEvent {
-    /// ETF 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 작업 타입
-    #[prost(enumeration="TaskType", tag="2")]
-    pub task_type: i32,
-    /// 이벤트 타입
-    #[prost(enumeration="LpEventType", tag="3")]
-    pub r#type: i32,
-    /// 상세 메시지
-    #[prost(string, tag="4")]
-    pub message: ::prost::alloc::string::String,
-    /// 발생 시간
-    #[prost(message, optional, tag="5")]
-    pub timestamp: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// 이벤트 레벨
-    #[prost(enumeration="LpEventLevel", tag="6")]
-    pub level: i32,
-}
 /// 주문 업데이트 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -509,160 +486,6 @@ impl EtfLpState {
             "ETF_LP_STATE_RUNNING" => Some(Self::Running),
             "ETF_LP_STATE_STOPPING" => Some(Self::Stopping),
             "ETF_LP_STATE_ERROR" => Some(Self::Error),
-            _ => None,
-        }
-    }
-}
-/// 작업 타입
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum TaskType {
-    Unspecified = 0,
-    Quote = 1,
-    Hedge = 2,
-}
-impl TaskType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            TaskType::Unspecified => "TASK_TYPE_UNSPECIFIED",
-            TaskType::Quote => "TASK_TYPE_QUOTE",
-            TaskType::Hedge => "TASK_TYPE_HEDGE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "TASK_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "TASK_TYPE_QUOTE" => Some(Self::Quote),
-            "TASK_TYPE_HEDGE" => Some(Self::Hedge),
-            _ => None,
-        }
-    }
-}
-/// 이벤트 타입
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum LpEventType {
-    Unspecified = 0,
-    /// 초기화 실패
-    Initialization = 1,
-    /// 가격 업데이트 실패
-    PriceUpdate = 2,
-    /// 주문 제출 실패
-    OrderSubmit = 3,
-    /// 주문 처리 실패
-    OrderProcessing = 4,
-    /// NAV 계산 실패
-    NavCalculation = 5,
-    /// 오더북 업데이트 실패
-    OrderBookUpdate = 6,
-    /// 주문 한도 초과
-    OrderLimitExceeded = 7,
-    /// 펀드 한도 초과
-    FundLimitExceeded = 8,
-    /// 주식 재고 초과
-    StockInventoryExceeded = 9,
-    /// 시스템 에러
-    SystemError = 12,
-    /// 시장 세션 관련 에러
-    MarketSession = 13,
-    /// 펀드 정보 업데이트 실패
-    FundUpdate = 14,
-    /// 오프셋 조정 (시간 기반) 실행
-    OffsetAdjustmentTimeStrategy = 15,
-    /// 오프셋 조정 (포지션 기반) 실행
-    OffsetAdjustmentPositionStrategy = 16,
-}
-impl LpEventType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            LpEventType::Unspecified => "LP_EVENT_TYPE_UNSPECIFIED",
-            LpEventType::Initialization => "LP_EVENT_TYPE_INITIALIZATION",
-            LpEventType::PriceUpdate => "LP_EVENT_TYPE_PRICE_UPDATE",
-            LpEventType::OrderSubmit => "LP_EVENT_TYPE_ORDER_SUBMIT",
-            LpEventType::OrderProcessing => "LP_EVENT_TYPE_ORDER_PROCESSING",
-            LpEventType::NavCalculation => "LP_EVENT_TYPE_NAV_CALCULATION",
-            LpEventType::OrderBookUpdate => "LP_EVENT_TYPE_ORDER_BOOK_UPDATE",
-            LpEventType::OrderLimitExceeded => "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED",
-            LpEventType::FundLimitExceeded => "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED",
-            LpEventType::StockInventoryExceeded => "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED",
-            LpEventType::SystemError => "LP_EVENT_TYPE_SYSTEM_ERROR",
-            LpEventType::MarketSession => "LP_EVENT_TYPE_MARKET_SESSION",
-            LpEventType::FundUpdate => "LP_EVENT_TYPE_FUND_UPDATE",
-            LpEventType::OffsetAdjustmentTimeStrategy => "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY",
-            LpEventType::OffsetAdjustmentPositionStrategy => "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "LP_EVENT_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "LP_EVENT_TYPE_INITIALIZATION" => Some(Self::Initialization),
-            "LP_EVENT_TYPE_PRICE_UPDATE" => Some(Self::PriceUpdate),
-            "LP_EVENT_TYPE_ORDER_SUBMIT" => Some(Self::OrderSubmit),
-            "LP_EVENT_TYPE_ORDER_PROCESSING" => Some(Self::OrderProcessing),
-            "LP_EVENT_TYPE_NAV_CALCULATION" => Some(Self::NavCalculation),
-            "LP_EVENT_TYPE_ORDER_BOOK_UPDATE" => Some(Self::OrderBookUpdate),
-            "LP_EVENT_TYPE_ORDER_LIMIT_EXCEEDED" => Some(Self::OrderLimitExceeded),
-            "LP_EVENT_TYPE_FUND_LIMIT_EXCEEDED" => Some(Self::FundLimitExceeded),
-            "LP_EVENT_TYPE_STOCK_INVENTORY_EXCEEDED" => Some(Self::StockInventoryExceeded),
-            "LP_EVENT_TYPE_SYSTEM_ERROR" => Some(Self::SystemError),
-            "LP_EVENT_TYPE_MARKET_SESSION" => Some(Self::MarketSession),
-            "LP_EVENT_TYPE_FUND_UPDATE" => Some(Self::FundUpdate),
-            "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_TIME_STRATEGY" => Some(Self::OffsetAdjustmentTimeStrategy),
-            "LP_EVENT_TYPE_OFFSET_ADJUSTMENT_POSITION_STRATEGY" => Some(Self::OffsetAdjustmentPositionStrategy),
-            _ => None,
-        }
-    }
-}
-/// 이벤트 레벨
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum LpEventLevel {
-    Unspecified = 0,
-    /// 디버그 정보
-    Debug = 1,
-    /// 정보성 메시지
-    Info = 2,
-    /// 경고
-    Warning = 3,
-    /// 에러
-    Error = 4,
-    /// 치명적 에러
-    Critical = 5,
-}
-impl LpEventLevel {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            LpEventLevel::Unspecified => "LP_EVENT_LEVEL_UNSPECIFIED",
-            LpEventLevel::Debug => "LP_EVENT_LEVEL_DEBUG",
-            LpEventLevel::Info => "LP_EVENT_LEVEL_INFO",
-            LpEventLevel::Warning => "LP_EVENT_LEVEL_WARNING",
-            LpEventLevel::Error => "LP_EVENT_LEVEL_ERROR",
-            LpEventLevel::Critical => "LP_EVENT_LEVEL_CRITICAL",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "LP_EVENT_LEVEL_UNSPECIFIED" => Some(Self::Unspecified),
-            "LP_EVENT_LEVEL_DEBUG" => Some(Self::Debug),
-            "LP_EVENT_LEVEL_INFO" => Some(Self::Info),
-            "LP_EVENT_LEVEL_WARNING" => Some(Self::Warning),
-            "LP_EVENT_LEVEL_ERROR" => Some(Self::Error),
-            "LP_EVENT_LEVEL_CRITICAL" => Some(Self::Critical),
             _ => None,
         }
     }

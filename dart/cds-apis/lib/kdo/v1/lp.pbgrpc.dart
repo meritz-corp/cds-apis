@@ -73,11 +73,6 @@ class LpServiceClient extends $grpc.Client {
     return $createUnaryCall(_$stopEtfLp, request, options: options);
   }
 
-  /// ETF LP 이벤트 실시간 스트리밍
-  $grpc.ResponseStream<$0.EtfLpEvent> streamLpEvents($0.StreamLpEventsRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamLpEvents, $async.Stream.fromIterable([request]), options: options);
-  }
-
   /// 사용자 주문장 업데이트를 가져오기
   $grpc.ResponseFuture<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getUserOrderbook, request, options: options);
@@ -122,10 +117,6 @@ class LpServiceClient extends $grpc.Client {
       '/kdo.v1.lp.LpService/StopEtfLp',
       ($0.StopEtfLpRequest value) => value.writeToBuffer(),
       $0.StopEtfLpResponse.fromBuffer);
-  static final _$streamLpEvents = $grpc.ClientMethod<$0.StreamLpEventsRequest, $0.EtfLpEvent>(
-      '/kdo.v1.lp.LpService/StreamLpEvents',
-      ($0.StreamLpEventsRequest value) => value.writeToBuffer(),
-      $0.EtfLpEvent.fromBuffer);
   static final _$getUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
       '/kdo.v1.lp.LpService/GetUserOrderbook',
       ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
@@ -197,13 +188,6 @@ abstract class LpServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.StopEtfLpRequest.fromBuffer(value),
         ($0.StopEtfLpResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamLpEventsRequest, $0.EtfLpEvent>(
-        'StreamLpEvents',
-        streamLpEvents_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.StreamLpEventsRequest.fromBuffer(value),
-        ($0.EtfLpEvent value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
         'GetUserOrderbook',
         getUserOrderbook_Pre,
@@ -267,12 +251,6 @@ abstract class LpServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.StopEtfLpResponse> stopEtfLp($grpc.ServiceCall call, $0.StopEtfLpRequest request);
-
-  $async.Stream<$0.EtfLpEvent> streamLpEvents_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamLpEventsRequest> $request) async* {
-    yield* streamLpEvents($call, await $request);
-  }
-
-  $async.Stream<$0.EtfLpEvent> streamLpEvents($grpc.ServiceCall call, $0.StreamLpEventsRequest request);
 
   $async.Future<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async {
     return getUserOrderbook($call, await $request);

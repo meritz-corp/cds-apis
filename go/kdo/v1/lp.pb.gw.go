@@ -555,50 +555,6 @@ func local_request_LpService_StopEtfLp_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_LpService_StreamLpEvents_0(ctx context.Context, marshaler runtime.Marshaler, client LpServiceClient, req *http.Request, pathParams map[string]string) (LpService_StreamLpEventsClient, runtime.ServerMetadata, error) {
-	var protoReq StreamLpEventsRequest
-	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["etf"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "etf")
-	}
-
-	protoReq.Etf, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "etf", err)
-	}
-
-	val, ok = pathParams["fund"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
-	}
-
-	protoReq.Fund, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
-	}
-
-	stream, err := client.StreamLpEvents(ctx, &protoReq)
-	if err != nil {
-		return nil, metadata, err
-	}
-	header, err := stream.Header()
-	if err != nil {
-		return nil, metadata, err
-	}
-	metadata.HeaderMD = header
-	return stream, metadata, nil
-
-}
-
 func request_LpService_GetUserOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client LpServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetUserOrderBookRequest
 	var metadata runtime.ServerMetadata
@@ -903,13 +859,6 @@ func RegisterLpServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
-	mux.Handle("GET", pattern_LpService_StreamLpEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
-		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-		return
-	})
-
 	mux.Handle("GET", pattern_LpService_GetUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1159,28 +1108,6 @@ func RegisterLpServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
-	mux.Handle("GET", pattern_LpService_StreamLpEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lp.LpService/StreamLpEvents", runtime.WithHTTPPathPattern("/v1/lps/{etf=etfs/*}/{fund=funds/*}/events:stream"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := request_LpService_StreamLpEvents_0(annotatedContext, inboundMarshaler, client, req, pathParams)
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_LpService_StreamLpEvents_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
-	})
-
 	mux.Handle("GET", pattern_LpService_GetUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1245,8 +1172,6 @@ var (
 
 	pattern_LpService_StopEtfLp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "lps", "etfs", "etf", "funds", "fund"}, "stop"))
 
-	pattern_LpService_StreamLpEvents_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "events"}, "stream"))
-
 	pattern_LpService_GetUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "orderbook"}, ""))
 
 	pattern_LpService_StreamUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "lps", "etfs", "etf", "funds", "fund", "orderbook"}, "stream"))
@@ -1268,8 +1193,6 @@ var (
 	forward_LpService_StartEtfLp_0 = runtime.ForwardResponseMessage
 
 	forward_LpService_StopEtfLp_0 = runtime.ForwardResponseMessage
-
-	forward_LpService_StreamLpEvents_0 = runtime.ForwardResponseStream
 
 	forward_LpService_GetUserOrderbook_0 = runtime.ForwardResponseMessage
 

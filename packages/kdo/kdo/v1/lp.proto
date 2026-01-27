@@ -189,12 +189,12 @@ enum PositionAdjustmentStrategy {
 // 자동 offset 조정 설정
 message EtfLpOffset {
   //
-  int64 bid_offset = 1;
-  int64 ask_offset = 2;
+  float bid_offset = 1;
+  float ask_offset = 2;
 
   // NAV 밴드 설정
-  int64 min_offset = 3;
-  int64 max_offset = 4;
+  float min_offset = 3;
+  float max_offset = 4;
 
   // 시간 기반 조정
   bool time_adjustment_enabled = 7;
