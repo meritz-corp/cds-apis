@@ -293,7 +293,9 @@ message LpPricing {
 //  map<string, string> constituents_price = 2;
 
   // ETF NAV (원 단위)
-  string etf_nav = 3;
+  string etf_ask_nav = 3;
+
+  string etf_bid_nav = 4;
 }
 
 // ========== Request/Response Messages ==========

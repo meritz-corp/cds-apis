@@ -912,11 +912,13 @@ class TimeFrameStatus extends $pb.GeneratedMessage {
 class LpPricing extends $pb.GeneratedMessage {
   factory LpPricing({
     $core.String? etfPrice,
-    $core.String? etfNav,
+    $core.String? etfAskNav,
+    $core.String? etfBidNav,
   }) {
     final result = create();
     if (etfPrice != null) result.etfPrice = etfPrice;
-    if (etfNav != null) result.etfNav = etfNav;
+    if (etfAskNav != null) result.etfAskNav = etfAskNav;
+    if (etfBidNav != null) result.etfBidNav = etfBidNav;
     return result;
   }
 
@@ -927,7 +929,8 @@ class LpPricing extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LpPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfPrice')
-    ..aOS(3, _omitFieldNames ? '' : 'etfNav')
+    ..aOS(3, _omitFieldNames ? '' : 'etfAskNav')
+    ..aOS(4, _omitFieldNames ? '' : 'etfBidNav')
     ..hasRequiredFields = false
   ;
 
@@ -960,13 +963,22 @@ class LpPricing extends $pb.GeneratedMessage {
 
   /// ETF NAV (원 단위)
   @$pb.TagNumber(3)
-  $core.String get etfNav => $_getSZ(1);
+  $core.String get etfAskNav => $_getSZ(1);
   @$pb.TagNumber(3)
-  set etfNav($core.String value) => $_setString(1, value);
+  set etfAskNav($core.String value) => $_setString(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasEtfNav() => $_has(1);
+  $core.bool hasEtfAskNav() => $_has(1);
   @$pb.TagNumber(3)
-  void clearEtfNav() => $_clearField(3);
+  void clearEtfAskNav() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get etfBidNav => $_getSZ(2);
+  @$pb.TagNumber(4)
+  set etfBidNav($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEtfBidNav() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearEtfBidNav() => $_clearField(4);
 }
 
 /// ========== Request/Response Messages ==========

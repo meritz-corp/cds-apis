@@ -739,9 +739,12 @@
           "type": "string",
           "title": "ETF 가격 (원 단위)"
         },
-        "etfNav": {
+        "etfAskNav": {
           "type": "string",
           "title": "ETF NAV (원 단위)"
+        },
+        "etfBidNav": {
+          "type": "string"
         }
       },
       "title": "LP 가격 정보"

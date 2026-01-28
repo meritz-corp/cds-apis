@@ -203,7 +203,9 @@ pub struct LpPricing {
 
     /// ETF NAV (원 단위)
     #[prost(string, tag="3")]
-    pub etf_nav: ::prost::alloc::string::String,
+    pub etf_ask_nav: ::prost::alloc::string::String,
+    #[prost(string, tag="4")]
+    pub etf_bid_nav: ::prost::alloc::string::String,
 }
 /// ========== Request/Response Messages ==========
 /// GetEtfLp

@@ -50,7 +50,9 @@ message Etf {
 
     string prev_nav = 7;
 
-    string last_inav = 8;
+    string last_ask_inav = 8;
+
+    string last_bid_inav = 9;
 
     // PDF 구성 종목 목록
     map<string, EtfPdfConstituent> constituents = 10;

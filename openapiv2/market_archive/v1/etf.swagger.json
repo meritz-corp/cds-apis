@@ -125,7 +125,10 @@
         "prevNav": {
           "type": "string"
         },
-        "lastInav": {
+        "lastAskInav": {
+          "type": "string"
+        },
+        "lastBidInav": {
           "type": "string"
         },
         "constituents": {

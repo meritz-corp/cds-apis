@@ -30,7 +30,8 @@ class Etf extends $pb.GeneratedMessage {
     $core.String? prevClose,
     $core.String? lastPrice,
     $core.String? prevNav,
-    $core.String? lastInav,
+    $core.String? lastAskInav,
+    $core.String? lastBidInav,
     $core.Iterable<$core.MapEntry<$core.String, EtfPdfConstituent>>? constituents,
     $fixnum.Int64? creationUnit,
     ReplicationMethod? replicationMethod,
@@ -50,7 +51,8 @@ class Etf extends $pb.GeneratedMessage {
     if (prevClose != null) result.prevClose = prevClose;
     if (lastPrice != null) result.lastPrice = lastPrice;
     if (prevNav != null) result.prevNav = prevNav;
-    if (lastInav != null) result.lastInav = lastInav;
+    if (lastAskInav != null) result.lastAskInav = lastAskInav;
+    if (lastBidInav != null) result.lastBidInav = lastBidInav;
     if (constituents != null) result.constituents.addEntries(constituents);
     if (creationUnit != null) result.creationUnit = creationUnit;
     if (replicationMethod != null) result.replicationMethod = replicationMethod;
@@ -77,7 +79,8 @@ class Etf extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'prevClose')
     ..aOS(6, _omitFieldNames ? '' : 'lastPrice')
     ..aOS(7, _omitFieldNames ? '' : 'prevNav')
-    ..aOS(8, _omitFieldNames ? '' : 'lastInav')
+    ..aOS(8, _omitFieldNames ? '' : 'lastAskInav')
+    ..aOS(9, _omitFieldNames ? '' : 'lastBidInav')
     ..m<$core.String, EtfPdfConstituent>(10, _omitFieldNames ? '' : 'constituents', entryClassName: 'Etf.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('master_sync.v1.etf'))
     ..aInt64(11, _omitFieldNames ? '' : 'creationUnit')
     ..e<ReplicationMethod>(12, _omitFieldNames ? '' : 'replicationMethod', $pb.PbFieldType.OE, defaultOrMaker: ReplicationMethod.REPLICATION_METHOD_UNSPECIFIED, valueOf: ReplicationMethod.valueOf, enumValues: ReplicationMethod.values)
@@ -177,100 +180,109 @@ class Etf extends $pb.GeneratedMessage {
   void clearPrevNav() => $_clearField(7);
 
   @$pb.TagNumber(8)
-  $core.String get lastInav => $_getSZ(7);
+  $core.String get lastAskInav => $_getSZ(7);
   @$pb.TagNumber(8)
-  set lastInav($core.String value) => $_setString(7, value);
+  set lastAskInav($core.String value) => $_setString(7, value);
   @$pb.TagNumber(8)
-  $core.bool hasLastInav() => $_has(7);
+  $core.bool hasLastAskInav() => $_has(7);
   @$pb.TagNumber(8)
-  void clearLastInav() => $_clearField(8);
+  void clearLastAskInav() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get lastBidInav => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set lastBidInav($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasLastBidInav() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearLastBidInav() => $_clearField(9);
 
   /// PDF 구성 종목 목록
   @$pb.TagNumber(10)
-  $pb.PbMap<$core.String, EtfPdfConstituent> get constituents => $_getMap(8);
+  $pb.PbMap<$core.String, EtfPdfConstituent> get constituents => $_getMap(9);
 
   /// 설정 단위
   @$pb.TagNumber(11)
-  $fixnum.Int64 get creationUnit => $_getI64(9);
+  $fixnum.Int64 get creationUnit => $_getI64(10);
   @$pb.TagNumber(11)
-  set creationUnit($fixnum.Int64 value) => $_setInt64(9, value);
+  set creationUnit($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(11)
-  $core.bool hasCreationUnit() => $_has(9);
+  $core.bool hasCreationUnit() => $_has(10);
   @$pb.TagNumber(11)
   void clearCreationUnit() => $_clearField(11);
 
   /// 복제 방법
   @$pb.TagNumber(12)
-  ReplicationMethod get replicationMethod => $_getN(10);
+  ReplicationMethod get replicationMethod => $_getN(11);
   @$pb.TagNumber(12)
   set replicationMethod(ReplicationMethod value) => $_setField(12, value);
   @$pb.TagNumber(12)
-  $core.bool hasReplicationMethod() => $_has(10);
+  $core.bool hasReplicationMethod() => $_has(11);
   @$pb.TagNumber(12)
   void clearReplicationMethod() => $_clearField(12);
 
   /// Tick 크기 (원 단위, i64)
   @$pb.TagNumber(13)
-  $fixnum.Int64 get tickSize => $_getI64(11);
+  $fixnum.Int64 get tickSize => $_getI64(12);
   @$pb.TagNumber(13)
-  set tickSize($fixnum.Int64 value) => $_setInt64(11, value);
+  set tickSize($fixnum.Int64 value) => $_setInt64(12, value);
   @$pb.TagNumber(13)
-  $core.bool hasTickSize() => $_has(11);
+  $core.bool hasTickSize() => $_has(12);
   @$pb.TagNumber(13)
   void clearTickSize() => $_clearField(13);
 
   /// Tick 크기 (원 단위, i64)
   @$pb.TagNumber(14)
-  $fixnum.Int64 get listedQuantity => $_getI64(12);
+  $fixnum.Int64 get listedQuantity => $_getI64(13);
   @$pb.TagNumber(14)
-  set listedQuantity($fixnum.Int64 value) => $_setInt64(12, value);
+  set listedQuantity($fixnum.Int64 value) => $_setInt64(13, value);
   @$pb.TagNumber(14)
-  $core.bool hasListedQuantity() => $_has(12);
+  $core.bool hasListedQuantity() => $_has(13);
   @$pb.TagNumber(14)
   void clearListedQuantity() => $_clearField(14);
 
   @$pb.TagNumber(15)
-  $core.double get leverage => $_getN(13);
+  $core.double get leverage => $_getN(14);
   @$pb.TagNumber(15)
-  set leverage($core.double value) => $_setFloat(13, value);
+  set leverage($core.double value) => $_setFloat(14, value);
   @$pb.TagNumber(15)
-  $core.bool hasLeverage() => $_has(13);
+  $core.bool hasLeverage() => $_has(14);
   @$pb.TagNumber(15)
   void clearLeverage() => $_clearField(15);
 
   @$pb.TagNumber(16)
-  $core.bool get tradable => $_getBF(14);
+  $core.bool get tradable => $_getBF(15);
   @$pb.TagNumber(16)
-  set tradable($core.bool value) => $_setBool(14, value);
+  set tradable($core.bool value) => $_setBool(15, value);
   @$pb.TagNumber(16)
-  $core.bool hasTradable() => $_has(14);
+  $core.bool hasTradable() => $_has(15);
   @$pb.TagNumber(16)
   void clearTradable() => $_clearField(16);
 
   @$pb.TagNumber(17)
-  $core.bool get shortSellable => $_getBF(15);
+  $core.bool get shortSellable => $_getBF(16);
   @$pb.TagNumber(17)
-  set shortSellable($core.bool value) => $_setBool(15, value);
+  set shortSellable($core.bool value) => $_setBool(16, value);
   @$pb.TagNumber(17)
-  $core.bool hasShortSellable() => $_has(15);
+  $core.bool hasShortSellable() => $_has(16);
   @$pb.TagNumber(17)
   void clearShortSellable() => $_clearField(17);
 
   @$pb.TagNumber(23)
-  $core.bool get cashCreditable => $_getBF(16);
+  $core.bool get cashCreditable => $_getBF(17);
   @$pb.TagNumber(23)
-  set cashCreditable($core.bool value) => $_setBool(16, value);
+  set cashCreditable($core.bool value) => $_setBool(17, value);
   @$pb.TagNumber(23)
-  $core.bool hasCashCreditable() => $_has(16);
+  $core.bool hasCashCreditable() => $_has(17);
   @$pb.TagNumber(23)
   void clearCashCreditable() => $_clearField(23);
 
   @$pb.TagNumber(24)
-  $fixnum.Int64 get cashCreationAmount => $_getI64(17);
+  $fixnum.Int64 get cashCreationAmount => $_getI64(18);
   @$pb.TagNumber(24)
-  set cashCreationAmount($fixnum.Int64 value) => $_setInt64(17, value);
+  set cashCreationAmount($fixnum.Int64 value) => $_setInt64(18, value);
   @$pb.TagNumber(24)
-  $core.bool hasCashCreationAmount() => $_has(17);
+  $core.bool hasCashCreationAmount() => $_has(18);
   @$pb.TagNumber(24)
   void clearCashCreationAmount() => $_clearField(24);
 }

@@ -23,7 +23,9 @@ pub struct Etf {
     #[prost(string, tag="7")]
     pub prev_nav: ::prost::alloc::string::String,
     #[prost(string, tag="8")]
-    pub last_inav: ::prost::alloc::string::String,
+    pub last_ask_inav: ::prost::alloc::string::String,
+    #[prost(string, tag="9")]
+    pub last_bid_inav: ::prost::alloc::string::String,
     /// PDF 구성 종목 목록
     #[prost(map="string, message", tag="10")]
     pub constituents: ::std::collections::HashMap<::prost::alloc::string::String, EtfPdfConstituent>,

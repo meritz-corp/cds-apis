@@ -224,14 +224,15 @@ const LpPricing$json = {
   '1': 'LpPricing',
   '2': [
     {'1': 'etf_price', '3': 1, '4': 1, '5': 9, '10': 'etfPrice'},
-    {'1': 'etf_nav', '3': 3, '4': 1, '5': 9, '10': 'etfNav'},
+    {'1': 'etf_ask_nav', '3': 3, '4': 1, '5': 9, '10': 'etfAskNav'},
+    {'1': 'etf_bid_nav', '3': 4, '4': 1, '5': 9, '10': 'etfBidNav'},
   ],
 };
 
 /// Descriptor for `LpPricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List lpPricingDescriptor = $convert.base64Decode(
-    'CglMcFByaWNpbmcSGwoJZXRmX3ByaWNlGAEgASgJUghldGZQcmljZRIXCgdldGZfbmF2GAMgAS'
-    'gJUgZldGZOYXY=');
+    'CglMcFByaWNpbmcSGwoJZXRmX3ByaWNlGAEgASgJUghldGZQcmljZRIeCgtldGZfYXNrX25hdh'
+    'gDIAEoCVIJZXRmQXNrTmF2Eh4KC2V0Zl9iaWRfbmF2GAQgASgJUglldGZCaWROYXY=');
 
 @$core.Deprecated('Use getEtfLpRequestDescriptor instead')
 const GetEtfLpRequest$json = {
