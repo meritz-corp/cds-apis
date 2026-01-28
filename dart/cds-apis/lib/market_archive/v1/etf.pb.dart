@@ -29,7 +29,7 @@ class Etf extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? prevClose,
     $core.String? lastPrice,
-    $core.String? prevNav,
+    $core.String? prevCloseNav,
     $core.String? lastAskInav,
     $core.String? lastBidInav,
     $core.Iterable<$core.MapEntry<$core.String, EtfPdfConstituent>>? constituents,
@@ -50,7 +50,7 @@ class Etf extends $pb.GeneratedMessage {
     if (name != null) result.name = name;
     if (prevClose != null) result.prevClose = prevClose;
     if (lastPrice != null) result.lastPrice = lastPrice;
-    if (prevNav != null) result.prevNav = prevNav;
+    if (prevCloseNav != null) result.prevCloseNav = prevCloseNav;
     if (lastAskInav != null) result.lastAskInav = lastAskInav;
     if (lastBidInav != null) result.lastBidInav = lastBidInav;
     if (constituents != null) result.constituents.addEntries(constituents);
@@ -78,7 +78,7 @@ class Etf extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'name')
     ..aOS(5, _omitFieldNames ? '' : 'prevClose')
     ..aOS(6, _omitFieldNames ? '' : 'lastPrice')
-    ..aOS(7, _omitFieldNames ? '' : 'prevNav')
+    ..aOS(7, _omitFieldNames ? '' : 'prevCloseNav')
     ..aOS(8, _omitFieldNames ? '' : 'lastAskInav')
     ..aOS(9, _omitFieldNames ? '' : 'lastBidInav')
     ..m<$core.String, EtfPdfConstituent>(10, _omitFieldNames ? '' : 'constituents', entryClassName: 'Etf.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('master_sync.v1.etf'))
@@ -171,13 +171,13 @@ class Etf extends $pb.GeneratedMessage {
   void clearLastPrice() => $_clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get prevNav => $_getSZ(6);
+  $core.String get prevCloseNav => $_getSZ(6);
   @$pb.TagNumber(7)
-  set prevNav($core.String value) => $_setString(6, value);
+  set prevCloseNav($core.String value) => $_setString(6, value);
   @$pb.TagNumber(7)
-  $core.bool hasPrevNav() => $_has(6);
+  $core.bool hasPrevCloseNav() => $_has(6);
   @$pb.TagNumber(7)
-  void clearPrevNav() => $_clearField(7);
+  void clearPrevCloseNav() => $_clearField(7);
 
   @$pb.TagNumber(8)
   $core.String get lastAskInav => $_getSZ(7);

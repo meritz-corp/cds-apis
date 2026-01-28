@@ -48,7 +48,7 @@ message Etf {
 
     string last_price = 6;
 
-    string prev_nav = 7;
+    string prev_close_nav = 7;
 
     string last_ask_inav = 8;
 

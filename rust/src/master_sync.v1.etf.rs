@@ -21,7 +21,7 @@ pub struct Etf {
     #[prost(string, tag="6")]
     pub last_price: ::prost::alloc::string::String,
     #[prost(string, tag="7")]
-    pub prev_nav: ::prost::alloc::string::String,
+    pub prev_close_nav: ::prost::alloc::string::String,
     #[prost(string, tag="8")]
     pub last_ask_inav: ::prost::alloc::string::String,
     #[prost(string, tag="9")]

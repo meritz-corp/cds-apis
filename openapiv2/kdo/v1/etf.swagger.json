@@ -175,13 +175,16 @@
           "type": "string",
           "title": "마지막 가격"
         },
+        "prevCloseNav": {
+          "type": "string"
+        },
         "lastPrice": {
           "type": "string"
         },
-        "prevNav": {
+        "lastAskInav": {
           "type": "string"
         },
-        "lastInav": {
+        "lastBidInav": {
           "type": "string"
         },
         "constituents": {

@@ -58,9 +58,10 @@ const Etf$json = {
     {'1': 'code', '3': 3, '4': 1, '5': 9, '10': 'code'},
     {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
     {'1': 'prev_close', '3': 5, '4': 1, '5': 9, '10': 'prevClose'},
-    {'1': 'last_price', '3': 6, '4': 1, '5': 9, '10': 'lastPrice'},
-    {'1': 'prev_nav', '3': 7, '4': 1, '5': 9, '10': 'prevNav'},
-    {'1': 'last_inav', '3': 8, '4': 1, '5': 9, '10': 'lastInav'},
+    {'1': 'prev_close_nav', '3': 6, '4': 1, '5': 9, '10': 'prevCloseNav'},
+    {'1': 'last_price', '3': 7, '4': 1, '5': 9, '10': 'lastPrice'},
+    {'1': 'last_ask_inav', '3': 8, '4': 1, '5': 9, '10': 'lastAskInav'},
+    {'1': 'last_bid_inav', '3': 9, '4': 1, '5': 9, '10': 'lastBidInav'},
     {'1': 'constituents', '3': 10, '4': 3, '5': 11, '6': '.kdo.v1.etf.Etf.ConstituentsEntry', '10': 'constituents'},
     {'1': 'creation_unit', '3': 11, '4': 1, '5': 3, '10': 'creationUnit'},
     {'1': 'replication_method', '3': 12, '4': 1, '5': 14, '6': '.kdo.v1.etf.ReplicationMethod', '10': 'replicationMethod'},
@@ -89,18 +90,19 @@ const Etf_ConstituentsEntry$json = {
 final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'CgNFdGYSDgoCaWQYASABKARSAmlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhIKBGNvZGUYAy'
     'ABKAlSBGNvZGUSEgoEbmFtZRgEIAEoCVIEbmFtZRIdCgpwcmV2X2Nsb3NlGAUgASgJUglwcmV2'
-    'Q2xvc2USHQoKbGFzdF9wcmljZRgGIAEoCVIJbGFzdFByaWNlEhkKCHByZXZfbmF2GAcgASgJUg'
-    'dwcmV2TmF2EhsKCWxhc3RfaW5hdhgIIAEoCVIIbGFzdEluYXYSRQoMY29uc3RpdHVlbnRzGAog'
-    'AygLMiEua2RvLnYxLmV0Zi5FdGYuQ29uc3RpdHVlbnRzRW50cnlSDGNvbnN0aXR1ZW50cxIjCg'
-    '1jcmVhdGlvbl91bml0GAsgASgDUgxjcmVhdGlvblVuaXQSTAoScmVwbGljYXRpb25fbWV0aG9k'
-    'GAwgASgOMh0ua2RvLnYxLmV0Zi5SZXBsaWNhdGlvbk1ldGhvZFIRcmVwbGljYXRpb25NZXRob2'
-    'QSGwoJdGlja19zaXplGA0gASgDUgh0aWNrU2l6ZRInCg9saXN0ZWRfcXVhbnRpdHkYDiABKANS'
-    'Dmxpc3RlZFF1YW50aXR5EhoKCGxldmVyYWdlGA8gASgCUghsZXZlcmFnZRIaCgh0cmFkYWJsZR'
-    'gQIAEoCFIIdHJhZGFibGUSJQoOc2hvcnRfc2VsbGFibGUYESABKAhSDXNob3J0U2VsbGFibGUS'
-    'JwoPY2FzaF9jcmVkaXRhYmxlGBcgASgIUg5jYXNoQ3JlZGl0YWJsZRIwChRjYXNoX2NyZWF0aW'
-    '9uX2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50Gl4KEUNvbnN0aXR1ZW50c0VudHJ5'
-    'EhAKA2tleRgBIAEoCVIDa2V5EjMKBXZhbHVlGAIgASgLMh0ua2RvLnYxLmV0Zi5FdGZQZGZDb2'
-    '5zdGl0dWVudFIFdmFsdWU6AjgB');
+    'Q2xvc2USJAoOcHJldl9jbG9zZV9uYXYYBiABKAlSDHByZXZDbG9zZU5hdhIdCgpsYXN0X3ByaW'
+    'NlGAcgASgJUglsYXN0UHJpY2USIgoNbGFzdF9hc2tfaW5hdhgIIAEoCVILbGFzdEFza0luYXYS'
+    'IgoNbGFzdF9iaWRfaW5hdhgJIAEoCVILbGFzdEJpZEluYXYSRQoMY29uc3RpdHVlbnRzGAogAy'
+    'gLMiEua2RvLnYxLmV0Zi5FdGYuQ29uc3RpdHVlbnRzRW50cnlSDGNvbnN0aXR1ZW50cxIjCg1j'
+    'cmVhdGlvbl91bml0GAsgASgDUgxjcmVhdGlvblVuaXQSTAoScmVwbGljYXRpb25fbWV0aG9kGA'
+    'wgASgOMh0ua2RvLnYxLmV0Zi5SZXBsaWNhdGlvbk1ldGhvZFIRcmVwbGljYXRpb25NZXRob2QS'
+    'GwoJdGlja19zaXplGA0gASgDUgh0aWNrU2l6ZRInCg9saXN0ZWRfcXVhbnRpdHkYDiABKANSDm'
+    'xpc3RlZFF1YW50aXR5EhoKCGxldmVyYWdlGA8gASgCUghsZXZlcmFnZRIaCgh0cmFkYWJsZRgQ'
+    'IAEoCFIIdHJhZGFibGUSJQoOc2hvcnRfc2VsbGFibGUYESABKAhSDXNob3J0U2VsbGFibGUSJw'
+    'oPY2FzaF9jcmVkaXRhYmxlGBcgASgIUg5jYXNoQ3JlZGl0YWJsZRIwChRjYXNoX2NyZWF0aW9u'
+    'X2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50Gl4KEUNvbnN0aXR1ZW50c0VudHJ5Eh'
+    'AKA2tleRgBIAEoCVIDa2V5EjMKBXZhbHVlGAIgASgLMh0ua2RvLnYxLmV0Zi5FdGZQZGZDb25z'
+    'dGl0dWVudFIFdmFsdWU6AjgB');
 
 @$core.Deprecated('Use etfConstituentDescriptor instead')
 const EtfConstituent$json = {

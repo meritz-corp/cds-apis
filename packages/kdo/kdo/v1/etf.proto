@@ -54,11 +54,13 @@ message Etf {
     // 마지막 가격
     string prev_close = 5;
 
-    string last_price = 6;
+    string prev_close_nav = 6;
 
-    string prev_nav = 7;
+    string last_price = 7;
 
-    string last_inav = 8;
+    string last_ask_inav = 8;
+
+    string last_bid_inav = 9;
 
     // PDF 구성 종목 목록
     map<string, EtfPdfConstituent> constituents = 10;

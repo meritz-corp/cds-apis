@@ -59,7 +59,7 @@ const Etf$json = {
     {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
     {'1': 'prev_close', '3': 5, '4': 1, '5': 9, '10': 'prevClose'},
     {'1': 'last_price', '3': 6, '4': 1, '5': 9, '10': 'lastPrice'},
-    {'1': 'prev_nav', '3': 7, '4': 1, '5': 9, '10': 'prevNav'},
+    {'1': 'prev_close_nav', '3': 7, '4': 1, '5': 9, '10': 'prevCloseNav'},
     {'1': 'last_ask_inav', '3': 8, '4': 1, '5': 9, '10': 'lastAskInav'},
     {'1': 'last_bid_inav', '3': 9, '4': 1, '5': 9, '10': 'lastBidInav'},
     {'1': 'constituents', '3': 10, '4': 3, '5': 11, '6': '.master_sync.v1.etf.Etf.ConstituentsEntry', '10': 'constituents'},
@@ -90,19 +90,19 @@ const Etf_ConstituentsEntry$json = {
 final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'CgNFdGYSDgoCaWQYASABKARSAmlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhIKBGNvZGUYAy'
     'ABKAlSBGNvZGUSEgoEbmFtZRgEIAEoCVIEbmFtZRIdCgpwcmV2X2Nsb3NlGAUgASgJUglwcmV2'
-    'Q2xvc2USHQoKbGFzdF9wcmljZRgGIAEoCVIJbGFzdFByaWNlEhkKCHByZXZfbmF2GAcgASgJUg'
-    'dwcmV2TmF2EiIKDWxhc3RfYXNrX2luYXYYCCABKAlSC2xhc3RBc2tJbmF2EiIKDWxhc3RfYmlk'
-    'X2luYXYYCSABKAlSC2xhc3RCaWRJbmF2Ek0KDGNvbnN0aXR1ZW50cxgKIAMoCzIpLm1hc3Rlcl'
-    '9zeW5jLnYxLmV0Zi5FdGYuQ29uc3RpdHVlbnRzRW50cnlSDGNvbnN0aXR1ZW50cxIjCg1jcmVh'
-    'dGlvbl91bml0GAsgASgDUgxjcmVhdGlvblVuaXQSVAoScmVwbGljYXRpb25fbWV0aG9kGAwgAS'
-    'gOMiUubWFzdGVyX3N5bmMudjEuZXRmLlJlcGxpY2F0aW9uTWV0aG9kUhFyZXBsaWNhdGlvbk1l'
-    'dGhvZBIbCgl0aWNrX3NpemUYDSABKANSCHRpY2tTaXplEicKD2xpc3RlZF9xdWFudGl0eRgOIA'
-    'EoA1IObGlzdGVkUXVhbnRpdHkSGgoIbGV2ZXJhZ2UYDyABKAJSCGxldmVyYWdlEhoKCHRyYWRh'
-    'YmxlGBAgASgIUgh0cmFkYWJsZRIlCg5zaG9ydF9zZWxsYWJsZRgRIAEoCFINc2hvcnRTZWxsYW'
-    'JsZRInCg9jYXNoX2NyZWRpdGFibGUYFyABKAhSDmNhc2hDcmVkaXRhYmxlEjAKFGNhc2hfY3Jl'
-    'YXRpb25fYW1vdW50GBggASgDUhJjYXNoQ3JlYXRpb25BbW91bnQaZgoRQ29uc3RpdHVlbnRzRW'
-    '50cnkSEAoDa2V5GAEgASgJUgNrZXkSOwoFdmFsdWUYAiABKAsyJS5tYXN0ZXJfc3luYy52MS5l'
-    'dGYuRXRmUGRmQ29uc3RpdHVlbnRSBXZhbHVlOgI4AQ==');
+    'Q2xvc2USHQoKbGFzdF9wcmljZRgGIAEoCVIJbGFzdFByaWNlEiQKDnByZXZfY2xvc2VfbmF2GA'
+    'cgASgJUgxwcmV2Q2xvc2VOYXYSIgoNbGFzdF9hc2tfaW5hdhgIIAEoCVILbGFzdEFza0luYXYS'
+    'IgoNbGFzdF9iaWRfaW5hdhgJIAEoCVILbGFzdEJpZEluYXYSTQoMY29uc3RpdHVlbnRzGAogAy'
+    'gLMikubWFzdGVyX3N5bmMudjEuZXRmLkV0Zi5Db25zdGl0dWVudHNFbnRyeVIMY29uc3RpdHVl'
+    'bnRzEiMKDWNyZWF0aW9uX3VuaXQYCyABKANSDGNyZWF0aW9uVW5pdBJUChJyZXBsaWNhdGlvbl'
+    '9tZXRob2QYDCABKA4yJS5tYXN0ZXJfc3luYy52MS5ldGYuUmVwbGljYXRpb25NZXRob2RSEXJl'
+    'cGxpY2F0aW9uTWV0aG9kEhsKCXRpY2tfc2l6ZRgNIAEoA1IIdGlja1NpemUSJwoPbGlzdGVkX3'
+    'F1YW50aXR5GA4gASgDUg5saXN0ZWRRdWFudGl0eRIaCghsZXZlcmFnZRgPIAEoAlIIbGV2ZXJh'
+    'Z2USGgoIdHJhZGFibGUYECABKAhSCHRyYWRhYmxlEiUKDnNob3J0X3NlbGxhYmxlGBEgASgIUg'
+    '1zaG9ydFNlbGxhYmxlEicKD2Nhc2hfY3JlZGl0YWJsZRgXIAEoCFIOY2FzaENyZWRpdGFibGUS'
+    'MAoUY2FzaF9jcmVhdGlvbl9hbW91bnQYGCABKANSEmNhc2hDcmVhdGlvbkFtb3VudBpmChFDb2'
+    '5zdGl0dWVudHNFbnRyeRIQCgNrZXkYASABKAlSA2tleRI7CgV2YWx1ZRgCIAEoCzIlLm1hc3Rl'
+    'cl9zeW5jLnYxLmV0Zi5FdGZQZGZDb25zdGl0dWVudFIFdmFsdWU6AjgB');
 
 @$core.Deprecated('Use etfConstituentDescriptor instead')
 const EtfConstituent$json = {

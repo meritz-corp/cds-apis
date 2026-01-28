@@ -223,7 +223,7 @@ impl serde::Serialize for Etf {
             struct_ser.serialize_field("last_price", &self.last_price)?;
         }
         if true {
-            struct_ser.serialize_field("prev_nav", &self.prev_nav)?;
+            struct_ser.serialize_field("prev_close_nav", &self.prev_close_nav)?;
         }
         if true {
             struct_ser.serialize_field("last_ask_inav", &self.last_ask_inav)?;
@@ -289,8 +289,8 @@ impl<'de> serde::Deserialize<'de> for Etf {
             "prevClose",
             "last_price",
             "lastPrice",
-            "prev_nav",
-            "prevNav",
+            "prev_close_nav",
+            "prevCloseNav",
             "last_ask_inav",
             "lastAskInav",
             "last_bid_inav",
@@ -322,7 +322,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             Name,
             PrevClose,
             LastPrice,
-            PrevNav,
+            PrevCloseNav,
             LastAskInav,
             LastBidInav,
             Constituents,
@@ -363,7 +363,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "name" => Ok(GeneratedField::Name),
                             "prevClose" | "prev_close" => Ok(GeneratedField::PrevClose),
                             "lastPrice" | "last_price" => Ok(GeneratedField::LastPrice),
-                            "prevNav" | "prev_nav" => Ok(GeneratedField::PrevNav),
+                            "prevCloseNav" | "prev_close_nav" => Ok(GeneratedField::PrevCloseNav),
                             "lastAskInav" | "last_ask_inav" => Ok(GeneratedField::LastAskInav),
                             "lastBidInav" | "last_bid_inav" => Ok(GeneratedField::LastBidInav),
                             "constituents" => Ok(GeneratedField::Constituents),
@@ -401,7 +401,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                 let mut name__ = None;
                 let mut prev_close__ = None;
                 let mut last_price__ = None;
-                let mut prev_nav__ = None;
+                let mut prev_close_nav__ = None;
                 let mut last_ask_inav__ = None;
                 let mut last_bid_inav__ = None;
                 let mut constituents__ = None;
@@ -454,11 +454,11 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             }
                             last_price__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::PrevNav => {
-                            if prev_nav__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("prevNav"));
+                        GeneratedField::PrevCloseNav => {
+                            if prev_close_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prevCloseNav"));
                             }
-                            prev_nav__ = Some(map_.next_value()?);
+                            prev_close_nav__ = Some(map_.next_value()?);
                         }
                         GeneratedField::LastAskInav => {
                             if last_ask_inav__.is_some() {
@@ -556,7 +556,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                     name: name__.unwrap_or_default(),
                     prev_close: prev_close__.unwrap_or_default(),
                     last_price: last_price__.unwrap_or_default(),
-                    prev_nav: prev_nav__.unwrap_or_default(),
+                    prev_close_nav: prev_close_nav__.unwrap_or_default(),
                     last_ask_inav: last_ask_inav__.unwrap_or_default(),
                     last_bid_inav: last_bid_inav__.unwrap_or_default(),
                     constituents: constituents__.unwrap_or_default(),
