@@ -70,7 +70,7 @@
         "parameters": [
           {
             "name": "originalOrderId",
-            "description": "원주문 ID (필수)",
+            "description": "원주문 ID",
             "in": "path",
             "required": true,
             "type": "string",
@@ -85,21 +85,25 @@
               "properties": {
                 "fundCode": {
                   "type": "string",
-                  "title": "펀드 코드 (필수)"
+                  "title": "펀드 코드"
                 },
                 "symbol": {
                   "type": "string",
-                  "title": "종목 코드 (필수)"
+                  "title": "종목 코드"
                 },
                 "quantity": {
                   "type": "string",
                   "format": "int64",
-                  "title": "정정 수량 (optional, 0이면 변경 없음)"
+                  "title": "정정 수량"
                 },
                 "price": {
                   "type": "string",
                   "format": "int64",
-                  "title": "정정 가격 (optional, 0이면 변경 없음)"
+                  "title": "정정 가격"
+                },
+                "side": {
+                  "$ref": "#/definitions/v1orderOrderSide",
+                  "title": "매수/매도"
                 }
               },
               "required": [
@@ -135,7 +139,7 @@
         "parameters": [
           {
             "name": "originalOrderId",
-            "description": "원주문 ID (필수)",
+            "description": "원주문 ID",
             "in": "path",
             "required": true,
             "type": "string",
@@ -150,16 +154,11 @@
               "properties": {
                 "fundCode": {
                   "type": "string",
-                  "title": "펀드 코드 (필수)"
+                  "title": "펀드 코드"
                 },
                 "symbol": {
                   "type": "string",
-                  "title": "종목 코드 (필수)"
-                },
-                "quantity": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "취소 수량 (optional, 0이면 전량)"
+                  "title": "종목 코드"
                 }
               },
               "required": [

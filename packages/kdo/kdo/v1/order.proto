@@ -100,20 +100,23 @@ message SubmitOrderResponse {
 // ========== AmendOrder ==========
 
 message AmendOrderRequest {
-  // 원주문 ID (필수)
+  // 원주문 ID
   uint64 original_order_id = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // 펀드 코드 (필수)
+  // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // 종목 코드 (필수)
+  // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
 
-  // 정정 수량 (optional, 0이면 변경 없음)
+  // 정정 수량
   int64 quantity = 4;
 
-  // 정정 가격 (optional, 0이면 변경 없음)
+  // 정정 가격
   int64 price = 5;
+
+  // 매수/매도
+  OrderSide side = 6;
 }
 
 message AmendOrderResponse {
@@ -133,17 +136,14 @@ message AmendOrderResponse {
 // ========== CancelOrder ==========
 
 message CancelOrderRequest {
-  // 원주문 ID (필수)
+  // 원주문 ID
   uint64 original_order_id = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // 펀드 코드 (필수)
+  // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // 종목 코드 (필수)
+  // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
-
-  // 취소 수량 (optional, 0이면 전량)
-  int64 quantity = 4;
 }
 
 message CancelOrderResponse {

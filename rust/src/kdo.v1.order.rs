@@ -42,21 +42,24 @@ pub struct SubmitOrderResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AmendOrderRequest {
-    /// 원주문 ID (필수)
+    /// 원주문 ID
     #[prost(uint64, tag="1")]
     pub original_order_id: u64,
-    /// 펀드 코드 (필수)
+    /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// 종목 코드 (필수)
+    /// 종목 코드
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
-    /// 정정 수량 (optional, 0이면 변경 없음)
+    /// 정정 수량
     #[prost(int64, tag="4")]
     pub quantity: i64,
-    /// 정정 가격 (optional, 0이면 변경 없음)
+    /// 정정 가격
     #[prost(int64, tag="5")]
     pub price: i64,
+    /// 매수/매도
+    #[prost(enumeration="OrderSide", tag="6")]
+    pub side: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -79,18 +82,15 @@ pub struct AmendOrderResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelOrderRequest {
-    /// 원주문 ID (필수)
+    /// 원주문 ID
     #[prost(uint64, tag="1")]
     pub original_order_id: u64,
-    /// 펀드 코드 (필수)
+    /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// 종목 코드 (필수)
+    /// 종목 코드
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
-    /// 취소 수량 (optional, 0이면 전량)
-    #[prost(int64, tag="4")]
-    pub quantity: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

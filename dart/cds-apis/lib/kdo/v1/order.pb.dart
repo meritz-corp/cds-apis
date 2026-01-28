@@ -214,6 +214,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $fixnum.Int64? quantity,
     $fixnum.Int64? price,
+    OrderSide? side,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
@@ -221,6 +222,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     if (symbol != null) result.symbol = symbol;
     if (quantity != null) result.quantity = quantity;
     if (price != null) result.price = price;
+    if (side != null) result.side = side;
     return result;
   }
 
@@ -235,6 +237,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..aInt64(5, _omitFieldNames ? '' : 'price')
+    ..e<OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -255,7 +258,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   static AmendOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AmendOrderRequest>(create);
   static AmendOrderRequest? _defaultInstance;
 
-  /// 원주문 ID (필수)
+  /// 원주문 ID
   @$pb.TagNumber(1)
   $fixnum.Int64 get originalOrderId => $_getI64(0);
   @$pb.TagNumber(1)
@@ -265,7 +268,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearOriginalOrderId() => $_clearField(1);
 
-  /// 펀드 코드 (필수)
+  /// 펀드 코드
   @$pb.TagNumber(2)
   $core.String get fundCode => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -275,7 +278,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
-  /// 종목 코드 (필수)
+  /// 종목 코드
   @$pb.TagNumber(3)
   $core.String get symbol => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -285,7 +288,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSymbol() => $_clearField(3);
 
-  /// 정정 수량 (optional, 0이면 변경 없음)
+  /// 정정 수량
   @$pb.TagNumber(4)
   $fixnum.Int64 get quantity => $_getI64(3);
   @$pb.TagNumber(4)
@@ -295,7 +298,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearQuantity() => $_clearField(4);
 
-  /// 정정 가격 (optional, 0이면 변경 없음)
+  /// 정정 가격
   @$pb.TagNumber(5)
   $fixnum.Int64 get price => $_getI64(4);
   @$pb.TagNumber(5)
@@ -304,6 +307,16 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasPrice() => $_has(4);
   @$pb.TagNumber(5)
   void clearPrice() => $_clearField(5);
+
+  /// 매수/매도
+  @$pb.TagNumber(6)
+  OrderSide get side => $_getN(5);
+  @$pb.TagNumber(6)
+  set side(OrderSide value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSide() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSide() => $_clearField(6);
 }
 
 class AmendOrderResponse extends $pb.GeneratedMessage {
@@ -397,13 +410,11 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? originalOrderId,
     $core.String? fundCode,
     $core.String? symbol,
-    $fixnum.Int64? quantity,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
     if (fundCode != null) result.fundCode = fundCode;
     if (symbol != null) result.symbol = symbol;
-    if (quantity != null) result.quantity = quantity;
     return result;
   }
 
@@ -416,7 +427,6 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..hasRequiredFields = false
   ;
 
@@ -437,7 +447,7 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   static CancelOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelOrderRequest>(create);
   static CancelOrderRequest? _defaultInstance;
 
-  /// 원주문 ID (필수)
+  /// 원주문 ID
   @$pb.TagNumber(1)
   $fixnum.Int64 get originalOrderId => $_getI64(0);
   @$pb.TagNumber(1)
@@ -447,7 +457,7 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearOriginalOrderId() => $_clearField(1);
 
-  /// 펀드 코드 (필수)
+  /// 펀드 코드
   @$pb.TagNumber(2)
   $core.String get fundCode => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -457,7 +467,7 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
-  /// 종목 코드 (필수)
+  /// 종목 코드
   @$pb.TagNumber(3)
   $core.String get symbol => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -466,16 +476,6 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(2);
   @$pb.TagNumber(3)
   void clearSymbol() => $_clearField(3);
-
-  /// 취소 수량 (optional, 0이면 전량)
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get quantity => $_getI64(3);
-  @$pb.TagNumber(4)
-  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasQuantity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearQuantity() => $_clearField(4);
 }
 
 class CancelOrderResponse extends $pb.GeneratedMessage {

@@ -124,6 +124,7 @@ const AmendOrderRequest$json = {
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'price', '3': 5, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '10': 'side'},
   ],
 };
 
@@ -132,7 +133,8 @@ final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'ChFBbWVuZE9yZGVyUmVxdWVzdBIwChFvcmlnaW5hbF9vcmRlcl9pZBgBIAEoBEIE4kEBAlIPb3'
     'JpZ2luYWxPcmRlcklkEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSHAoGc3lt'
     'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSGgoIcXVhbnRpdHkYBCABKANSCHF1YW50aXR5EhQKBX'
-    'ByaWNlGAUgASgDUgVwcmljZQ==');
+    'ByaWNlGAUgASgDUgVwcmljZRIrCgRzaWRlGAYgASgOMhcua2RvLnYxLm9yZGVyLk9yZGVyU2lk'
+    'ZVIEc2lkZQ==');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {
@@ -159,7 +161,6 @@ const CancelOrderRequest$json = {
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
   ],
 };
 
@@ -167,7 +168,7 @@ const CancelOrderRequest$json = {
 final $typed_data.Uint8List cancelOrderRequestDescriptor = $convert.base64Decode(
     'ChJDYW5jZWxPcmRlclJlcXVlc3QSMAoRb3JpZ2luYWxfb3JkZXJfaWQYASABKARCBOJBAQJSD2'
     '9yaWdpbmFsT3JkZXJJZBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEhwKBnN5'
-    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eQ==');
+    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9s');
 
 @$core.Deprecated('Use cancelOrderResponseDescriptor instead')
 const CancelOrderResponse$json = {
