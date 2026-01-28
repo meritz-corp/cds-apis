@@ -122,9 +122,9 @@ const AmendOrderRequest$json = {
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'price', '3': 5, '4': 1, '5': 3, '10': 'price'},
-    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '10': 'side'},
+    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
+    {'1': 'price', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'price'},
+    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
   ],
 };
 
@@ -132,9 +132,9 @@ const AmendOrderRequest$json = {
 final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'ChFBbWVuZE9yZGVyUmVxdWVzdBIwChFvcmlnaW5hbF9vcmRlcl9pZBgBIAEoBEIE4kEBAlIPb3'
     'JpZ2luYWxPcmRlcklkEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSHAoGc3lt'
-    'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSGgoIcXVhbnRpdHkYBCABKANSCHF1YW50aXR5EhQKBX'
-    'ByaWNlGAUgASgDUgVwcmljZRIrCgRzaWRlGAYgASgOMhcua2RvLnYxLm9yZGVyLk9yZGVyU2lk'
-    'ZVIEc2lkZQ==');
+    'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aX'
+    'R5EhoKBXByaWNlGAUgASgDQgTiQQECUgVwcmljZRIxCgRzaWRlGAYgASgOMhcua2RvLnYxLm9y'
+    'ZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZQ==');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {
@@ -161,6 +161,8 @@ const CancelOrderRequest$json = {
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
+    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
   ],
 };
 
@@ -168,7 +170,8 @@ const CancelOrderRequest$json = {
 final $typed_data.Uint8List cancelOrderRequestDescriptor = $convert.base64Decode(
     'ChJDYW5jZWxPcmRlclJlcXVlc3QSMAoRb3JpZ2luYWxfb3JkZXJfaWQYASABKARCBOJBAQJSD2'
     '9yaWdpbmFsT3JkZXJJZBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEhwKBnN5'
-    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9s');
+    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEiAKCHF1YW50aXR5GAQgASgDQgTiQQECUghxdWFudG'
+    'l0eRIxCgRzaWRlGAYgASgOMhcua2RvLnYxLm9yZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZQ==');
 
 @$core.Deprecated('Use cancelOrderResponseDescriptor instead')
 const CancelOrderResponse$json = {

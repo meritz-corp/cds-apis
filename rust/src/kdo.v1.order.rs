@@ -91,6 +91,12 @@ pub struct CancelOrderRequest {
     /// 종목 코드
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
+    /// 정정 수량
+    #[prost(int64, tag="4")]
+    pub quantity: i64,
+    /// 매수/매도
+    #[prost(enumeration="OrderSide", tag="6")]
+    pub side: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -110,13 +110,13 @@ message AmendOrderRequest {
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
 
   // 정정 수량
-  int64 quantity = 4;
+  int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
 
   // 정정 가격
-  int64 price = 5;
+  int64 price = 5 [(google.api.field_behavior) = REQUIRED];
 
   // 매수/매도
-  OrderSide side = 6;
+  OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
 }
 
 message AmendOrderResponse {
@@ -144,6 +144,12 @@ message CancelOrderRequest {
 
   // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 정정 수량
+  int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 매수/매도
+  OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
 }
 
 message CancelOrderResponse {
