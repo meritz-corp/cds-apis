@@ -212,6 +212,7 @@ const UserOrderbookData$json = {
     {'1': 'ask_prices', '3': 2, '4': 3, '5': 9, '10': 'askPrices'},
     {'1': 'bid_quantities', '3': 3, '4': 3, '5': 3, '10': 'bidQuantities'},
     {'1': 'ask_quantities', '3': 4, '4': 3, '5': 3, '10': 'askQuantities'},
+    {'1': 'order_ids', '3': 5, '4': 3, '5': 3, '10': 'orderIds'},
   ],
 };
 
@@ -219,7 +220,8 @@ const UserOrderbookData$json = {
 final $typed_data.Uint8List userOrderbookDataDescriptor = $convert.base64Decode(
     'ChFVc2VyT3JkZXJib29rRGF0YRIdCgpiaWRfcHJpY2VzGAEgAygJUgliaWRQcmljZXMSHQoKYX'
     'NrX3ByaWNlcxgCIAMoCVIJYXNrUHJpY2VzEiUKDmJpZF9xdWFudGl0aWVzGAMgAygDUg1iaWRR'
-    'dWFudGl0aWVzEiUKDmFza19xdWFudGl0aWVzGAQgAygDUg1hc2tRdWFudGl0aWVz');
+    'dWFudGl0aWVzEiUKDmFza19xdWFudGl0aWVzGAQgAygDUg1hc2tRdWFudGl0aWVzEhsKCW9yZG'
+    'VyX2lkcxgFIAMoA1IIb3JkZXJJZHM=');
 
 @$core.Deprecated('Use addRawMessagesSocketRequestDescriptor instead')
 const AddRawMessagesSocketRequest$json = {

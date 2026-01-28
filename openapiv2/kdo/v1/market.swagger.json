@@ -690,6 +690,14 @@
             "format": "int64"
           },
           "title": "매도 수량 (10단계)"
+        },
+        "orderIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "주문 ID (10단계)"
         }
       },
       "title": "주문 업데이트 정보"

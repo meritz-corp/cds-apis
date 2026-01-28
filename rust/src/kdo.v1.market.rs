@@ -150,6 +150,9 @@ pub struct UserOrderbookData {
     /// 매도 수량 (10단계)
     #[prost(int64, repeated, tag="4")]
     pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
+    /// 주문 ID (10단계)
+    #[prost(int64, repeated, tag="5")]
+    pub order_ids: ::prost::alloc::vec::Vec<i64>,
 }
 /// Request to add a new raw UDP socket
 #[allow(clippy::derive_partial_eq_without_eq)]

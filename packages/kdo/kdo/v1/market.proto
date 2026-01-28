@@ -254,6 +254,9 @@ message UserOrderbookData {
 
     // 매도 수량 (10단계)
     repeated int64 ask_quantities = 4;
+
+    // 주문 ID (10단계)
+    repeated int64 order_ids = 5;
 }
 
 // Request to add a new raw UDP socket

@@ -648,12 +648,14 @@ class UserOrderbookData extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? askPrices,
     $core.Iterable<$fixnum.Int64>? bidQuantities,
     $core.Iterable<$fixnum.Int64>? askQuantities,
+    $core.Iterable<$fixnum.Int64>? orderIds,
   }) {
     final result = create();
     if (bidPrices != null) result.bidPrices.addAll(bidPrices);
     if (askPrices != null) result.askPrices.addAll(askPrices);
     if (bidQuantities != null) result.bidQuantities.addAll(bidQuantities);
     if (askQuantities != null) result.askQuantities.addAll(askQuantities);
+    if (orderIds != null) result.orderIds.addAll(orderIds);
     return result;
   }
 
@@ -667,6 +669,7 @@ class UserOrderbookData extends $pb.GeneratedMessage {
     ..pPS(2, _omitFieldNames ? '' : 'askPrices')
     ..p<$fixnum.Int64>(3, _omitFieldNames ? '' : 'bidQuantities', $pb.PbFieldType.K6)
     ..p<$fixnum.Int64>(4, _omitFieldNames ? '' : 'askQuantities', $pb.PbFieldType.K6)
+    ..p<$fixnum.Int64>(5, _omitFieldNames ? '' : 'orderIds', $pb.PbFieldType.K6)
     ..hasRequiredFields = false
   ;
 
@@ -702,6 +705,10 @@ class UserOrderbookData extends $pb.GeneratedMessage {
   /// 매도 수량 (10단계)
   @$pb.TagNumber(4)
   $pb.PbList<$fixnum.Int64> get askQuantities => $_getList(3);
+
+  /// 주문 ID (10단계)
+  @$pb.TagNumber(5)
+  $pb.PbList<$fixnum.Int64> get orderIds => $_getList(4);
 }
 
 /// Request to add a new raw UDP socket

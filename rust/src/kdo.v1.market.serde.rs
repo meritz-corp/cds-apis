@@ -2070,6 +2070,9 @@ impl serde::Serialize for UserOrderbookData {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.UserOrderbookData", len)?;
         if true {
             struct_ser.serialize_field("bid_prices", &self.bid_prices)?;
@@ -2082,6 +2085,9 @@ impl serde::Serialize for UserOrderbookData {
         }
         if true {
             struct_ser.serialize_field("ask_quantities", &self.ask_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+        }
+        if true {
+            struct_ser.serialize_field("order_ids", &self.order_ids.iter().map(ToString::to_string).collect::<Vec<_>>())?;
         }
         struct_ser.end()
     }
@@ -2101,6 +2107,8 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
             "bidQuantities",
             "ask_quantities",
             "askQuantities",
+            "order_ids",
+            "orderIds",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2109,6 +2117,7 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
             AskPrices,
             BidQuantities,
             AskQuantities,
+            OrderIds,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2135,6 +2144,7 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
                             "askPrices" | "ask_prices" => Ok(GeneratedField::AskPrices),
                             "bidQuantities" | "bid_quantities" => Ok(GeneratedField::BidQuantities),
                             "askQuantities" | "ask_quantities" => Ok(GeneratedField::AskQuantities),
+                            "orderIds" | "order_ids" => Ok(GeneratedField::OrderIds),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2158,6 +2168,7 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
                 let mut ask_prices__ = None;
                 let mut bid_quantities__ = None;
                 let mut ask_quantities__ = None;
+                let mut order_ids__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BidPrices => {
@@ -2190,6 +2201,15 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
                                     .into_iter().map(|x| x.0).collect())
                             ;
                         }
+                        GeneratedField::OrderIds => {
+                            if order_ids__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderIds"));
+                            }
+                            order_ids__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2200,6 +2220,7 @@ impl<'de> serde::Deserialize<'de> for UserOrderbookData {
                     ask_prices: ask_prices__.unwrap_or_default(),
                     bid_quantities: bid_quantities__.unwrap_or_default(),
                     ask_quantities: ask_quantities__.unwrap_or_default(),
+                    order_ids: order_ids__.unwrap_or_default(),
                 })
             }
         }
