@@ -217,11 +217,11 @@ message EtfLpOHedge {
   // 헷지 대상 종목 심볼
   string symbol = 1;
 
-  // 포트폴리오 리소스 이름
-  // format: portfolios/{portfolio_id}
-  string portfolio = 2 [
+  // 펀드 리소스 이름
+  // format: funds/{fund_code}
+  string fund = 2 [
     (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/Portfolio"
+      type: "kdo.cdsapis.xyz/Fund"
     }
   ];
 

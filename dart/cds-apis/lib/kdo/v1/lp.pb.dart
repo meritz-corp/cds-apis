@@ -640,12 +640,12 @@ class EtfLpOffset extends $pb.GeneratedMessage {
 class EtfLpOHedge extends $pb.GeneratedMessage {
   factory EtfLpOHedge({
     $core.String? symbol,
-    $core.String? portfolio,
+    $core.String? fund,
     $fixnum.Int64? filledQuantityPerHedge,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
-    if (portfolio != null) result.portfolio = portfolio;
+    if (fund != null) result.fund = fund;
     if (filledQuantityPerHedge != null) result.filledQuantityPerHedge = filledQuantityPerHedge;
     return result;
   }
@@ -657,7 +657,7 @@ class EtfLpOHedge extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aOS(2, _omitFieldNames ? '' : 'portfolio')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..aInt64(3, _omitFieldNames ? '' : 'filledQuantityPerHedge')
     ..hasRequiredFields = false
   ;
@@ -689,16 +689,16 @@ class EtfLpOHedge extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
-  /// 포트폴리오 리소스 이름
-  /// format: portfolios/{portfolio_id}
+  /// 펀드 리소스 이름
+  /// format: funds/{fund_code}
   @$pb.TagNumber(2)
-  $core.String get portfolio => $_getSZ(1);
+  $core.String get fund => $_getSZ(1);
   @$pb.TagNumber(2)
-  set portfolio($core.String value) => $_setString(1, value);
+  set fund($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasPortfolio() => $_has(1);
+  $core.bool hasFund() => $_has(1);
   @$pb.TagNumber(2)
-  void clearPortfolio() => $_clearField(2);
+  void clearFund() => $_clearField(2);
 
   /// 헷지 1주 주문당 ETF 체결수량 기준
   @$pb.TagNumber(3)

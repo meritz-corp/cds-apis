@@ -129,10 +129,10 @@ pub struct EtfLpOHedge {
     /// 헷지 대상 종목 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 포트폴리오 리소스 이름
-    /// format: portfolios/{portfolio_id}
+    /// 펀드 리소스 이름
+    /// format: funds/{fund_code}
     #[prost(string, tag="2")]
-    pub portfolio: ::prost::alloc::string::String,
+    pub fund: ::prost::alloc::string::String,
     /// 헷지 1주 주문당 ETF 체결수량 기준
     #[prost(int64, tag="3")]
     pub filled_quantity_per_hedge: i64,
