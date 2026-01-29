@@ -166,9 +166,9 @@ pub mod market_service_client {
                 .insert(GrpcMethod::new("kdo.v1.market.MarketService", "StreamEtfNav"));
             self.inner.server_streaming(req, path, codec).await
         }
-        pub async fn get_user_orderbook(
+        pub async fn get_user_etf_orderbook(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetUserOrderBookRequest>,
+            request: impl tonic::IntoRequest<super::GetUserEtfOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<super::UserOrderbookData>,
             tonic::Status,
@@ -184,18 +184,18 @@ pub mod market_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.market.MarketService/GetUserOrderbook",
+                "/kdo.v1.market.MarketService/GetUserEtfOrderbook",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("kdo.v1.market.MarketService", "GetUserOrderbook"),
+                    GrpcMethod::new("kdo.v1.market.MarketService", "GetUserEtfOrderbook"),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_user_orderbook(
+        pub async fn stream_user_etf_orderbook(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetUserOrderBookRequest>,
+            request: impl tonic::IntoRequest<super::GetUserEtfOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<tonic::codec::Streaming<super::UserOrderbookData>>,
             tonic::Status,
@@ -211,12 +211,75 @@ pub mod market_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.market.MarketService/StreamUserOrderbook",
+                "/kdo.v1.market.MarketService/StreamUserEtfOrderbook",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("kdo.v1.market.MarketService", "StreamUserOrderbook"),
+                    GrpcMethod::new(
+                        "kdo.v1.market.MarketService",
+                        "StreamUserEtfOrderbook",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
+        pub async fn get_user_future_orderbook(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetUserFutureOrderBookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UserOrderbookData>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/GetUserFutureOrderbook",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.market.MarketService",
+                        "GetUserFutureOrderbook",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stream_user_future_orderbook(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetUserFutureOrderBookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::UserOrderbookData>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/StreamUserFutureOrderbook",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.market.MarketService",
+                        "StreamUserFutureOrderbook",
+                    ),
                 );
             self.inner.server_streaming(req, path, codec).await
         }
@@ -352,24 +415,44 @@ pub mod market_service_server {
             tonic::Response<Self::StreamEtfNavStream>,
             tonic::Status,
         >;
-        async fn get_user_orderbook(
+        async fn get_user_etf_orderbook(
             &self,
-            request: tonic::Request<super::GetUserOrderBookRequest>,
+            request: tonic::Request<super::GetUserEtfOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<super::UserOrderbookData>,
             tonic::Status,
         >;
-        /// Server streaming response type for the StreamUserOrderbook method.
-        type StreamUserOrderbookStream: tonic::codegen::tokio_stream::Stream<
+        /// Server streaming response type for the StreamUserEtfOrderbook method.
+        type StreamUserEtfOrderbookStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::UserOrderbookData, tonic::Status>,
             >
             + Send
             + 'static;
-        async fn stream_user_orderbook(
+        async fn stream_user_etf_orderbook(
             &self,
-            request: tonic::Request<super::GetUserOrderBookRequest>,
+            request: tonic::Request<super::GetUserEtfOrderBookRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamUserOrderbookStream>,
+            tonic::Response<Self::StreamUserEtfOrderbookStream>,
+            tonic::Status,
+        >;
+        async fn get_user_future_orderbook(
+            &self,
+            request: tonic::Request<super::GetUserFutureOrderBookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UserOrderbookData>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamUserFutureOrderbook method.
+        type StreamUserFutureOrderbookStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::UserOrderbookData, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_user_future_orderbook(
+            &self,
+            request: tonic::Request<super::GetUserFutureOrderBookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamUserFutureOrderbookStream>,
             tonic::Status,
         >;
         async fn add_raw_messages_socket(
@@ -621,13 +704,13 @@ pub mod market_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.market.MarketService/GetUserOrderbook" => {
+                "/kdo.v1.market.MarketService/GetUserEtfOrderbook" => {
                     #[allow(non_camel_case_types)]
-                    struct GetUserOrderbookSvc<T: MarketService>(pub Arc<T>);
+                    struct GetUserEtfOrderbookSvc<T: MarketService>(pub Arc<T>);
                     impl<
                         T: MarketService,
-                    > tonic::server::UnaryService<super::GetUserOrderBookRequest>
-                    for GetUserOrderbookSvc<T> {
+                    > tonic::server::UnaryService<super::GetUserEtfOrderBookRequest>
+                    for GetUserEtfOrderbookSvc<T> {
                         type Response = super::UserOrderbookData;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
@@ -635,11 +718,14 @@ pub mod market_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetUserOrderBookRequest>,
+                            request: tonic::Request<super::GetUserEtfOrderBookRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MarketService>::get_user_orderbook(&inner, request)
+                                <T as MarketService>::get_user_etf_orderbook(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -651,7 +737,7 @@ pub mod market_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetUserOrderbookSvc(inner);
+                        let method = GetUserEtfOrderbookSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -667,27 +753,30 @@ pub mod market_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.market.MarketService/StreamUserOrderbook" => {
+                "/kdo.v1.market.MarketService/StreamUserEtfOrderbook" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamUserOrderbookSvc<T: MarketService>(pub Arc<T>);
+                    struct StreamUserEtfOrderbookSvc<T: MarketService>(pub Arc<T>);
                     impl<
                         T: MarketService,
                     > tonic::server::ServerStreamingService<
-                        super::GetUserOrderBookRequest,
-                    > for StreamUserOrderbookSvc<T> {
+                        super::GetUserEtfOrderBookRequest,
+                    > for StreamUserEtfOrderbookSvc<T> {
                         type Response = super::UserOrderbookData;
-                        type ResponseStream = T::StreamUserOrderbookStream;
+                        type ResponseStream = T::StreamUserEtfOrderbookStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetUserOrderBookRequest>,
+                            request: tonic::Request<super::GetUserEtfOrderBookRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MarketService>::stream_user_orderbook(&inner, request)
+                                <T as MarketService>::stream_user_etf_orderbook(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -699,7 +788,107 @@ pub mod market_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamUserOrderbookSvc(inner);
+                        let method = StreamUserEtfOrderbookSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/GetUserFutureOrderbook" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetUserFutureOrderbookSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::UnaryService<super::GetUserFutureOrderBookRequest>
+                    for GetUserFutureOrderbookSvc<T> {
+                        type Response = super::UserOrderbookData;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetUserFutureOrderBookRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::get_user_future_orderbook(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetUserFutureOrderbookSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/StreamUserFutureOrderbook" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamUserFutureOrderbookSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::ServerStreamingService<
+                        super::GetUserFutureOrderBookRequest,
+                    > for StreamUserFutureOrderbookSvc<T> {
+                        type Response = super::UserOrderbookData;
+                        type ResponseStream = T::StreamUserFutureOrderbookStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetUserFutureOrderBookRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::stream_user_future_orderbook(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamUserFutureOrderbookSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

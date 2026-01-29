@@ -134,8 +134,8 @@ func request_MarketService_StreamEtfNav_0(ctx context.Context, marshaler runtime
 
 }
 
-func request_MarketService_GetUserOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetUserOrderBookRequest
+func request_MarketService_GetUserEtfOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetUserEtfOrderBookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -165,13 +165,13 @@ func request_MarketService_GetUserOrderbook_0(ctx context.Context, marshaler run
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
-	msg, err := client.GetUserOrderbook(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetUserEtfOrderbook(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MarketService_GetUserOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, server MarketServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetUserOrderBookRequest
+func local_request_MarketService_GetUserEtfOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, server MarketServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetUserEtfOrderBookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -201,13 +201,13 @@ func local_request_MarketService_GetUserOrderbook_0(ctx context.Context, marshal
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
-	msg, err := server.GetUserOrderbook(ctx, &protoReq)
+	msg, err := server.GetUserEtfOrderbook(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MarketService_StreamUserOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (MarketService_StreamUserOrderbookClient, runtime.ServerMetadata, error) {
-	var protoReq GetUserOrderBookRequest
+func request_MarketService_StreamUserEtfOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (MarketService_StreamUserEtfOrderbookClient, runtime.ServerMetadata, error) {
+	var protoReq GetUserEtfOrderBookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -237,7 +237,123 @@ func request_MarketService_StreamUserOrderbook_0(ctx context.Context, marshaler 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
-	stream, err := client.StreamUserOrderbook(ctx, &protoReq)
+	stream, err := client.StreamUserEtfOrderbook(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
+func request_MarketService_GetUserFutureOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetUserFutureOrderBookRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["future"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "future")
+	}
+
+	protoReq.Future, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "future", err)
+	}
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
+
+	msg, err := client.GetUserFutureOrderbook(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_MarketService_GetUserFutureOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, server MarketServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetUserFutureOrderBookRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["future"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "future")
+	}
+
+	protoReq.Future, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "future", err)
+	}
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
+
+	msg, err := server.GetUserFutureOrderbook(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_MarketService_StreamUserFutureOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketServiceClient, req *http.Request, pathParams map[string]string) (MarketService_StreamUserFutureOrderbookClient, runtime.ServerMetadata, error) {
+	var protoReq GetUserFutureOrderBookRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["future"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "future")
+	}
+
+	protoReq.Future, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "future", err)
+	}
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
+
+	stream, err := client.StreamUserFutureOrderbook(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -357,7 +473,7 @@ func RegisterMarketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		return
 	})
 
-	mux.Handle("GET", pattern_MarketService_GetUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketService_GetUserEtfOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -365,12 +481,12 @@ func RegisterMarketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserEtfOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MarketService_GetUserOrderbook_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketService_GetUserEtfOrderbook_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -378,11 +494,43 @@ func RegisterMarketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 			return
 		}
 
-		forward_MarketService_GetUserOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketService_GetUserEtfOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MarketService_StreamUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketService_StreamUserEtfOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_MarketService_GetUserFutureOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserFutureOrderbook", runtime.WithHTTPPathPattern("/v1/market/{future=futures/*}/{fund=funds/*}/user-orderbook"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_MarketService_GetUserFutureOrderbook_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketService_GetUserFutureOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_MarketService_StreamUserFutureOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -553,47 +701,91 @@ func RegisterMarketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 
 	})
 
-	mux.Handle("GET", pattern_MarketService_GetUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketService_GetUserEtfOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserEtfOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MarketService_GetUserOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketService_GetUserEtfOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MarketService_GetUserOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketService_GetUserEtfOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MarketService_StreamUserOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketService_StreamUserEtfOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamUserOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamUserEtfOrderbook", runtime.WithHTTPPathPattern("/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MarketService_StreamUserOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketService_StreamUserEtfOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MarketService_StreamUserOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_MarketService_StreamUserEtfOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_MarketService_GetUserFutureOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/GetUserFutureOrderbook", runtime.WithHTTPPathPattern("/v1/market/{future=futures/*}/{fund=funds/*}/user-orderbook"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MarketService_GetUserFutureOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketService_GetUserFutureOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_MarketService_StreamUserFutureOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market.MarketService/StreamUserFutureOrderbook", runtime.WithHTTPPathPattern("/v1/market/{future=futures/*}/{fund=funds/*}/user-orderbook:stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MarketService_StreamUserFutureOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketService_StreamUserFutureOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -673,9 +865,13 @@ var (
 
 	pattern_MarketService_StreamEtfNav_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4}, []string{"v1", "market", "etfs", "etf", "nav"}, "stream"))
 
-	pattern_MarketService_GetUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, ""))
+	pattern_MarketService_GetUserEtfOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, ""))
 
-	pattern_MarketService_StreamUserOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, "stream"))
+	pattern_MarketService_StreamUserEtfOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "etfs", "etf", "funds", "fund", "user-orderbook"}, "stream"))
+
+	pattern_MarketService_GetUserFutureOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "futures", "future", "funds", "fund", "user-orderbook"}, ""))
+
+	pattern_MarketService_StreamUserFutureOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5, 2, 6}, []string{"v1", "market", "futures", "future", "funds", "fund", "user-orderbook"}, "stream"))
 
 	pattern_MarketService_AddRawMessagesSocket_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "market", "raw-messages", "sockets"}, ""))
 
@@ -691,9 +887,13 @@ var (
 
 	forward_MarketService_StreamEtfNav_0 = runtime.ForwardResponseStream
 
-	forward_MarketService_GetUserOrderbook_0 = runtime.ForwardResponseMessage
+	forward_MarketService_GetUserEtfOrderbook_0 = runtime.ForwardResponseMessage
 
-	forward_MarketService_StreamUserOrderbook_0 = runtime.ForwardResponseStream
+	forward_MarketService_StreamUserEtfOrderbook_0 = runtime.ForwardResponseStream
+
+	forward_MarketService_GetUserFutureOrderbook_0 = runtime.ForwardResponseMessage
+
+	forward_MarketService_StreamUserFutureOrderbook_0 = runtime.ForwardResponseStream
 
 	forward_MarketService_AddRawMessagesSocket_0 = runtime.ForwardResponseMessage
 

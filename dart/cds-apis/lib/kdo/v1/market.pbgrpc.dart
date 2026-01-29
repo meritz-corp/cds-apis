@@ -50,13 +50,23 @@ class MarketServiceClient extends $grpc.Client {
   }
 
   /// 사용자 주문장 업데이트를 가져오기
-  $grpc.ResponseFuture<$0.UserOrderbookData> getUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getUserOrderbook, request, options: options);
+  $grpc.ResponseFuture<$0.UserOrderbookData> getUserEtfOrderbook($0.GetUserEtfOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getUserEtfOrderbook, request, options: options);
   }
 
   /// 사용자 주문장 업데이트를 스트리밍
-  $grpc.ResponseStream<$0.UserOrderbookData> streamUserOrderbook($0.GetUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamUserOrderbook, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.UserOrderbookData> streamUserEtfOrderbook($0.GetUserEtfOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamUserEtfOrderbook, $async.Stream.fromIterable([request]), options: options);
+  }
+
+  /// 사용자 주문장 업데이트를 가져오기
+  $grpc.ResponseFuture<$0.UserOrderbookData> getUserFutureOrderbook($0.GetUserFutureOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getUserFutureOrderbook, request, options: options);
+  }
+
+  /// 사용자 주문장 업데이트를 스트리밍
+  $grpc.ResponseStream<$0.UserOrderbookData> streamUserFutureOrderbook($0.GetUserFutureOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamUserFutureOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
   /// 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
@@ -88,13 +98,21 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/StreamEtfNav',
       ($0.StreamEtfNavRequest value) => value.writeToBuffer(),
       $0.EtfNav.fromBuffer);
-  static final _$getUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-      '/kdo.v1.market.MarketService/GetUserOrderbook',
-      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
+  static final _$getUserEtfOrderbook = $grpc.ClientMethod<$0.GetUserEtfOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.market.MarketService/GetUserEtfOrderbook',
+      ($0.GetUserEtfOrderBookRequest value) => value.writeToBuffer(),
       $0.UserOrderbookData.fromBuffer);
-  static final _$streamUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-      '/kdo.v1.market.MarketService/StreamUserOrderbook',
-      ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
+  static final _$streamUserEtfOrderbook = $grpc.ClientMethod<$0.GetUserEtfOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.market.MarketService/StreamUserEtfOrderbook',
+      ($0.GetUserEtfOrderBookRequest value) => value.writeToBuffer(),
+      $0.UserOrderbookData.fromBuffer);
+  static final _$getUserFutureOrderbook = $grpc.ClientMethod<$0.GetUserFutureOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.market.MarketService/GetUserFutureOrderbook',
+      ($0.GetUserFutureOrderBookRequest value) => value.writeToBuffer(),
+      $0.UserOrderbookData.fromBuffer);
+  static final _$streamUserFutureOrderbook = $grpc.ClientMethod<$0.GetUserFutureOrderBookRequest, $0.UserOrderbookData>(
+      '/kdo.v1.market.MarketService/StreamUserFutureOrderbook',
+      ($0.GetUserFutureOrderBookRequest value) => value.writeToBuffer(),
       $0.UserOrderbookData.fromBuffer);
   static final _$addRawMessagesSocket = $grpc.ClientMethod<$0.AddRawMessagesSocketRequest, $0.AddRawMessagesSocketResponse>(
       '/kdo.v1.market.MarketService/AddRawMessagesSocket',
@@ -136,19 +154,33 @@ abstract class MarketServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamEtfNavRequest.fromBuffer(value),
         ($0.EtfNav value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-        'GetUserOrderbook',
-        getUserOrderbook_Pre,
+    $addMethod($grpc.ServiceMethod<$0.GetUserEtfOrderBookRequest, $0.UserOrderbookData>(
+        'GetUserEtfOrderbook',
+        getUserEtfOrderbook_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $0.GetUserEtfOrderBookRequest.fromBuffer(value),
         ($0.UserOrderbookData value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
-        'StreamUserOrderbook',
-        streamUserOrderbook_Pre,
+    $addMethod($grpc.ServiceMethod<$0.GetUserEtfOrderBookRequest, $0.UserOrderbookData>(
+        'StreamUserEtfOrderbook',
+        streamUserEtfOrderbook_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $0.GetUserEtfOrderBookRequest.fromBuffer(value),
+        ($0.UserOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetUserFutureOrderBookRequest, $0.UserOrderbookData>(
+        'GetUserFutureOrderbook',
+        getUserFutureOrderbook_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetUserFutureOrderBookRequest.fromBuffer(value),
+        ($0.UserOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetUserFutureOrderBookRequest, $0.UserOrderbookData>(
+        'StreamUserFutureOrderbook',
+        streamUserFutureOrderbook_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetUserFutureOrderBookRequest.fromBuffer(value),
         ($0.UserOrderbookData value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddRawMessagesSocketRequest, $0.AddRawMessagesSocketResponse>(
         'AddRawMessagesSocket',
@@ -191,17 +223,29 @@ abstract class MarketServiceBase extends $grpc.Service {
 
   $async.Stream<$0.EtfNav> streamEtfNav($grpc.ServiceCall call, $0.StreamEtfNavRequest request);
 
-  $async.Future<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async {
-    return getUserOrderbook($call, await $request);
+  $async.Future<$0.UserOrderbookData> getUserEtfOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserEtfOrderBookRequest> $request) async {
+    return getUserEtfOrderbook($call, await $request);
   }
 
-  $async.Future<$0.UserOrderbookData> getUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
+  $async.Future<$0.UserOrderbookData> getUserEtfOrderbook($grpc.ServiceCall call, $0.GetUserEtfOrderBookRequest request);
 
-  $async.Stream<$0.UserOrderbookData> streamUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async* {
-    yield* streamUserOrderbook($call, await $request);
+  $async.Stream<$0.UserOrderbookData> streamUserEtfOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserEtfOrderBookRequest> $request) async* {
+    yield* streamUserEtfOrderbook($call, await $request);
   }
 
-  $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
+  $async.Stream<$0.UserOrderbookData> streamUserEtfOrderbook($grpc.ServiceCall call, $0.GetUserEtfOrderBookRequest request);
+
+  $async.Future<$0.UserOrderbookData> getUserFutureOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserFutureOrderBookRequest> $request) async {
+    return getUserFutureOrderbook($call, await $request);
+  }
+
+  $async.Future<$0.UserOrderbookData> getUserFutureOrderbook($grpc.ServiceCall call, $0.GetUserFutureOrderBookRequest request);
+
+  $async.Stream<$0.UserOrderbookData> streamUserFutureOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserFutureOrderBookRequest> $request) async* {
+    yield* streamUserFutureOrderbook($call, await $request);
+  }
+
+  $async.Stream<$0.UserOrderbookData> streamUserFutureOrderbook($grpc.ServiceCall call, $0.GetUserFutureOrderBookRequest request);
 
   $async.Future<$0.AddRawMessagesSocketResponse> addRawMessagesSocket_Pre($grpc.ServiceCall $call, $async.Future<$0.AddRawMessagesSocketRequest> $request) async {
     return addRawMessagesSocket($call, await $request);

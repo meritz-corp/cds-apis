@@ -211,7 +211,7 @@
     "/v1/market/{etf}/{fund}/user-orderbook": {
       "get": {
         "summary": "사용자 주문장 업데이트를 가져오기",
-        "operationId": "MarketService_GetUserOrderbook",
+        "operationId": "MarketService_GetUserEtfOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -250,7 +250,7 @@
     "/v1/market/{etf}/{fund}/user-orderbook:stream": {
       "get": {
         "summary": "사용자 주문장 업데이트를 스트리밍",
-        "operationId": "MarketService_StreamUserOrderbook",
+        "operationId": "MarketService_StreamUserEtfOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -330,6 +330,93 @@
             "required": true,
             "type": "string",
             "pattern": "futures/[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
+    "/v1/market/{future}/{fund}/user-orderbook": {
+      "get": {
+        "summary": "사용자 주문장 업데이트를 가져오기",
+        "operationId": "MarketService_GetUserFutureOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1marketUserOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "future",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "futures/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
+    "/v1/market/{future}/{fund}/user-orderbook:stream": {
+      "get": {
+        "summary": "사용자 주문장 업데이트를 스트리밍",
+        "operationId": "MarketService_StreamUserFutureOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1marketUserOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1marketUserOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "future",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "futures/[^/]+"
+          },
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
           }
         ],
         "tags": [

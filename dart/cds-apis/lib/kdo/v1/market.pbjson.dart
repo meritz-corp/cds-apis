@@ -189,20 +189,35 @@ final $typed_data.Uint8List streamEtfNavRequestDescriptor = $convert.base64Decod
     'ChNTdHJlYW1FdGZOYXZSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2FwaX'
     'MueHl6L0V0ZlIDZXRm');
 
-@$core.Deprecated('Use getUserOrderBookRequestDescriptor instead')
-const GetUserOrderBookRequest$json = {
-  '1': 'GetUserOrderBookRequest',
+@$core.Deprecated('Use getUserEtfOrderBookRequestDescriptor instead')
+const GetUserEtfOrderBookRequest$json = {
+  '1': 'GetUserEtfOrderBookRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
-/// Descriptor for `GetUserOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getUserOrderBookRequestDescriptor = $convert.base64Decode(
-    'ChdHZXRVc2VyT3JkZXJCb29rUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZH'
-    'NhcGlzLnh5ei9FdGZSA2V0ZhIxCgRmdW5kGAIgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBpcy54'
-    'eXovRnVuZFIEZnVuZA==');
+/// Descriptor for `GetUserEtfOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserEtfOrderBookRequestDescriptor = $convert.base64Decode(
+    'ChpHZXRVc2VyRXRmT3JkZXJCb29rUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby'
+    '5jZHNhcGlzLnh5ei9FdGZSA2V0ZhIxCgRmdW5kGAIgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBp'
+    'cy54eXovRnVuZFIEZnVuZA==');
+
+@$core.Deprecated('Use getUserFutureOrderBookRequestDescriptor instead')
+const GetUserFutureOrderBookRequest$json = {
+  '1': 'GetUserFutureOrderBookRequest',
+  '2': [
+    {'1': 'future', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'future'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+  ],
+};
+
+/// Descriptor for `GetUserFutureOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserFutureOrderBookRequestDescriptor = $convert.base64Decode(
+    'Ch1HZXRVc2VyRnV0dXJlT3JkZXJCb29rUmVxdWVzdBI3CgZmdXR1cmUYASABKAlCH+JBAQL6QR'
+    'gKFmtkby5jZHNhcGlzLnh5ei9GdXR1cmVSBmZ1dHVyZRIxCgRmdW5kGAIgASgJQh3iQQEC+kEW'
+    'ChRrZG8uY2RzYXBpcy54eXovRnVuZFIEZnVuZA==');
 
 @$core.Deprecated('Use userOrderbookDataDescriptor instead')
 const UserOrderbookData$json = {

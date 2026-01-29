@@ -583,8 +583,8 @@ class StreamEtfNavRequest extends $pb.GeneratedMessage {
 }
 
 /// 주문 업데이트 스트리밍 요청
-class GetUserOrderBookRequest extends $pb.GeneratedMessage {
-  factory GetUserOrderBookRequest({
+class GetUserEtfOrderBookRequest extends $pb.GeneratedMessage {
+  factory GetUserEtfOrderBookRequest({
     $core.String? etf,
     $core.String? fund,
   }) {
@@ -594,33 +594,33 @@ class GetUserOrderBookRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  GetUserOrderBookRequest._();
+  GetUserEtfOrderBookRequest._();
 
-  factory GetUserOrderBookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory GetUserOrderBookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory GetUserEtfOrderBookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetUserEtfOrderBookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserEtfOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetUserOrderBookRequest clone() => GetUserOrderBookRequest()..mergeFromMessage(this);
+  GetUserEtfOrderBookRequest clone() => GetUserEtfOrderBookRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetUserOrderBookRequest copyWith(void Function(GetUserOrderBookRequest) updates) => super.copyWith((message) => updates(message as GetUserOrderBookRequest)) as GetUserOrderBookRequest;
+  GetUserEtfOrderBookRequest copyWith(void Function(GetUserEtfOrderBookRequest) updates) => super.copyWith((message) => updates(message as GetUserEtfOrderBookRequest)) as GetUserEtfOrderBookRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetUserOrderBookRequest create() => GetUserOrderBookRequest._();
+  static GetUserEtfOrderBookRequest create() => GetUserEtfOrderBookRequest._();
   @$core.override
-  GetUserOrderBookRequest createEmptyInstance() => create();
-  static $pb.PbList<GetUserOrderBookRequest> createRepeated() => $pb.PbList<GetUserOrderBookRequest>();
+  GetUserEtfOrderBookRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUserEtfOrderBookRequest> createRepeated() => $pb.PbList<GetUserEtfOrderBookRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetUserOrderBookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserOrderBookRequest>(create);
-  static GetUserOrderBookRequest? _defaultInstance;
+  static GetUserEtfOrderBookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserEtfOrderBookRequest>(create);
+  static GetUserEtfOrderBookRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -630,6 +630,65 @@ class GetUserOrderBookRequest extends $pb.GeneratedMessage {
   $core.bool hasEtf() => $_has(0);
   @$pb.TagNumber(1)
   void clearEtf() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fund => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fund($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFund() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFund() => $_clearField(2);
+}
+
+/// 주문 업데이트 스트리밍 요청
+class GetUserFutureOrderBookRequest extends $pb.GeneratedMessage {
+  factory GetUserFutureOrderBookRequest({
+    $core.String? future,
+    $core.String? fund,
+  }) {
+    final result = create();
+    if (future != null) result.future = future;
+    if (fund != null) result.fund = fund;
+    return result;
+  }
+
+  GetUserFutureOrderBookRequest._();
+
+  factory GetUserFutureOrderBookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetUserFutureOrderBookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserFutureOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'future')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetUserFutureOrderBookRequest clone() => GetUserFutureOrderBookRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetUserFutureOrderBookRequest copyWith(void Function(GetUserFutureOrderBookRequest) updates) => super.copyWith((message) => updates(message as GetUserFutureOrderBookRequest)) as GetUserFutureOrderBookRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetUserFutureOrderBookRequest create() => GetUserFutureOrderBookRequest._();
+  @$core.override
+  GetUserFutureOrderBookRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUserFutureOrderBookRequest> createRepeated() => $pb.PbList<GetUserFutureOrderBookRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserFutureOrderBookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserFutureOrderBookRequest>(create);
+  static GetUserFutureOrderBookRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get future => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set future($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFuture() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFuture() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get fund => $_getSZ(1);

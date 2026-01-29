@@ -38,18 +38,32 @@ service MarketService {
     }
 
     // 사용자 주문장 업데이트를 가져오기
-    rpc GetUserOrderbook(GetUserOrderBookRequest) returns (UserOrderbookData) {
+    rpc GetUserEtfOrderbook(GetUserEtfOrderBookRequest) returns (UserOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"
         };
     }
 
     // 사용자 주문장 업데이트를 스트리밍
-    rpc StreamUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
+    rpc StreamUserEtfOrderbook(GetUserEtfOrderBookRequest) returns (stream UserOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook:stream"
         };
     }
+
+  // 사용자 주문장 업데이트를 가져오기
+  rpc GetUserFutureOrderbook(GetUserFutureOrderBookRequest) returns (UserOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/market/{future=futures/*}/{fund=funds/*}/user-orderbook"
+    };
+  }
+
+  // 사용자 주문장 업데이트를 스트리밍
+  rpc StreamUserFutureOrderbook(GetUserFutureOrderBookRequest) returns (stream UserOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/market/{future=futures/*}/{fund=funds/*}/user-orderbook:stream"
+    };
+  }
 
     // 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
     rpc AddRawMessagesSocket(AddRawMessagesSocketRequest) returns (AddRawMessagesSocketResponse) {
@@ -225,7 +239,7 @@ message StreamEtfNavRequest {
 }
 
 // 주문 업데이트 스트리밍 요청
-message GetUserOrderBookRequest {
+message GetUserEtfOrderBookRequest {
     string etf = 1 [
         (google.api.field_behavior) = REQUIRED,
         (google.api.resource_reference) = {
@@ -239,6 +253,23 @@ message GetUserOrderBookRequest {
             type: "kdo.cdsapis.xyz/Fund"
         }
     ];
+}
+
+// 주문 업데이트 스트리밍 요청
+message GetUserFutureOrderBookRequest {
+  string future = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Future"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
 }
 
 // 주문 업데이트 정보

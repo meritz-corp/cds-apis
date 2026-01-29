@@ -128,9 +128,18 @@ pub struct StreamEtfNavRequest {
 /// 주문 업데이트 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetUserOrderBookRequest {
+pub struct GetUserEtfOrderBookRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub fund: ::prost::alloc::string::String,
+}
+/// 주문 업데이트 스트리밍 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserFutureOrderBookRequest {
+    #[prost(string, tag="1")]
+    pub future: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
 }
