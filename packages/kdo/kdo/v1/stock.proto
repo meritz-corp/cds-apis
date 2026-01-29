@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package kdo.v1.stock;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+import "kdo/v1/future.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// StockService - 주식 종목 정보 서비스
+service StockService {
+  // 단일 주식 조회
+  rpc GetStock(GetStockRequest) returns (Stock) {
+    option (google.api.http) = {
+      get: "/v1/{stock=stocks/*}"
+    };
+    option (google.api.method_signature) = "stock";
+  }
+
+  // 주식 목록 조회
+  rpc ListStocks(ListStocksRequest) returns (ListStocksResponse) {
+    option (google.api.http) = {
+      get: "/v1/stocks"
+    };
+    option (google.api.method_signature) = "";
+  }
+}
+
+// 주식 종목 정보
+message Stock {
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/Stock"
+    pattern: "stocks/{stock}"
+  };
+
+  // 리소스 이름 (stocks/{code})
+  string name = 1;
+
+  // 종목 코드
+  string code = 2;
+
+  // 심볼
+  string symbol = 3;
+
+  // 시장 유형
+  kdo.v1.future.MarketType market_type = 4;
+
+  // 종목명
+  string market_name = 5;
+
+  // 전일 종가
+  int64 prev_price = 6;
+
+  // 최근 체결가
+  int64 last_price = 7;
+
+  // 상장 수량
+  int64 listed_quantity = 8;
+
+  // 거래 가능 여부
+  bool tradable = 9;
+
+  // 대차 가능 여부
+  bool short_sellable = 10;
+}
+
+// ========== Request/Response Messages ==========
+
+message GetStockRequest {
+  // 리소스 이름 (stocks/{code})
+  string stock = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Stock"
+    }
+  ];
+}
+
+message ListStocksRequest {
+  // 페이지 크기 (optional)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰 (optional)
+  optional string page_token = 2;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * code - 종목 코드
+  // * symbol - 심볼
+  // * market_type - 시장 유형 (MARKET_TYPE_KOSPI, MARKET_TYPE_KOSDAQ)
+  // * tradable - 거래 가능 여부
+  // * short_sellable - 대차 가능 여부
+  //
+  // Examples:
+  // * code:"005930"
+  // * market_type=MARKET_TYPE_KOSPI
+  // * tradable=true AND short_sellable=true
+  // * market_type=MARKET_TYPE_KOSPI AND tradable=true
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListStocksResponse {
+  // 주식 목록
+  repeated Stock stocks = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}

@@ -56,7 +56,7 @@ pub struct EtfLpStatus {
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
     pub offset: ::core::option::Option<EtfLpOffset>,
-    ///
+    /// 헷지 정보
     #[prost(message, optional, tag="12")]
     pub hedge: ::core::option::Option<EtfLpOHedge>,
 }

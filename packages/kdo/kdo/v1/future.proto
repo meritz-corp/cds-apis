@@ -1,0 +1,173 @@
+syntax = "proto3";
+
+package kdo.v1.future;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// FutureService - 선물/옵션 종목 정보 서비스
+service FutureService {
+  // 단일 선물 조회
+  rpc GetFuture(GetFutureRequest) returns (Future) {
+    option (google.api.http) = {
+      get: "/v1/{future=futures/*}"
+    };
+    option (google.api.method_signature) = "future";
+  }
+
+  // 선물 목록 조회
+  rpc ListFutures(ListFuturesRequest) returns (ListFuturesResponse) {
+    option (google.api.http) = {
+      get: "/v1/futures"
+    };
+    option (google.api.method_signature) = "";
+  }
+}
+
+// 시장 유형
+enum MarketType {
+  MARKET_TYPE_UNSPECIFIED = 0;
+  // KOSPI
+  MARKET_TYPE_KOSPI = 1;
+  // KOSDAQ
+  MARKET_TYPE_KOSDAQ = 2;
+  // 파생상품
+  MARKET_TYPE_DERIVATIVE = 3;
+}
+
+// 선물/옵션 유형
+enum FutureOptionType {
+  FUTURE_OPTION_TYPE_UNSPECIFIED = 0;
+  // 선물
+  FUTURE_OPTION_TYPE_FUTURE = 1;
+  // 콜옵션
+  FUTURE_OPTION_TYPE_CALL = 2;
+  // 풋옵션
+  FUTURE_OPTION_TYPE_PUT = 3;
+}
+
+// 선물/옵션 종목 정보
+message Future {
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/Future"
+    pattern: "futures/{future}"
+  };
+
+  // 리소스 이름 (futures/{code})
+  string name = 1;
+
+  // 종목 코드
+  string code = 2;
+
+  // 심볼
+  string symbol = 3;
+
+  // 종목명
+  string market_name = 4;
+
+  // 시장 유형
+  MarketType market_type = 5;
+
+  // 1회 최대 주문 수량
+  int64 max_quantity_per_order = 6;
+
+  // 틱 크기
+  double tick_size = 7;
+
+  // 전일 종가
+  double prev_price = 8;
+
+  // 기준가
+  double base_price = 9;
+
+  // 상한가
+  double max_price = 10;
+
+  // 하한가
+  double min_price = 11;
+
+  // 거래 단위
+  double unit = 12;
+
+  // 거래 승수
+  double multiple = 13;
+
+  // 거래 가능 여부
+  bool tradable = 14;
+
+  // 선물/옵션 유형
+  FutureOptionType future_option_type = 15;
+
+  // 최종 거래일 (YYYY-MM-DD)
+  string last_tradable_date = 16;
+
+  // 만기일 (YYYY-MM-DD)
+  string maturity_date = 17;
+
+  // 기초자산 코드
+  string underlying_code = 18;
+
+  // 기초자산 전일 종가
+  double underlying_prev_price = 19;
+
+  // 잔존일수
+  double remaining_days = 20;
+
+  // 최종 거래일 여부
+  bool last_tradable_day = 21;
+
+  // CD 금리
+  double cd_rate = 22;
+
+  // 최종 결제일 (YYYY-MM-DD)
+  string final_settlement_date = 23;
+}
+
+// ========== Request/Response Messages ==========
+
+message GetFutureRequest {
+  // 리소스 이름 (futures/{code})
+  string future = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Future"
+    }
+  ];
+}
+
+message ListFuturesRequest {
+  // 페이지 크기 (optional)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰 (optional)
+  optional string page_token = 2;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * code - 종목 코드
+  // * symbol - 심볼
+  // * market_type - 시장 유형 (MARKET_TYPE_KOSPI, MARKET_TYPE_KOSDAQ, MARKET_TYPE_DERIVATIVE)
+  // * future_option_type - 선물/옵션 유형 (FUTURE_OPTION_TYPE_FUTURE, FUTURE_OPTION_TYPE_CALL, FUTURE_OPTION_TYPE_PUT)
+  // * tradable - 거래 가능 여부
+  // * underlying_code - 기초자산 코드
+  //
+  // Examples:
+  // * future_option_type=FUTURE_OPTION_TYPE_FUTURE
+  // * tradable=true
+  // * underlying_code="101S6"
+  // * future_option_type=FUTURE_OPTION_TYPE_FUTURE AND tradable=true
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListFuturesResponse {
+  // 선물 목록
+  repeated Future futures = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}

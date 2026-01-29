@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/stock.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "StockService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/stocks": {
+      "get": {
+        "summary": "주식 목록 조회",
+        "operationId": "StockService_ListStocks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/stockListStocksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* code - 종목 코드\n* symbol - 심볼\n* market_type - 시장 유형 (MARKET_TYPE_KOSPI, MARKET_TYPE_KOSDAQ)\n* tradable - 거래 가능 여부\n* short_sellable - 대차 가능 여부\n\nExamples:\n* code:\"005930\"\n* market_type=MARKET_TYPE_KOSPI\n* tradable=true AND short_sellable=true\n* market_type=MARKET_TYPE_KOSPI AND tradable=true",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StockService"
+        ]
+      }
+    },
+    "/v1/{stock}": {
+      "get": {
+        "summary": "단일 주식 조회",
+        "operationId": "StockService_GetStock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/stockStock"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stock",
+            "description": "리소스 이름 (stocks/{code})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "stocks/[^/]+"
+          }
+        ],
+        "tags": [
+          "StockService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "futureMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_TYPE_UNSPECIFIED",
+        "MARKET_TYPE_KOSPI",
+        "MARKET_TYPE_KOSDAQ",
+        "MARKET_TYPE_DERIVATIVE"
+      ],
+      "default": "MARKET_TYPE_UNSPECIFIED",
+      "description": "- MARKET_TYPE_KOSPI: KOSPI\n - MARKET_TYPE_KOSDAQ: KOSDAQ\n - MARKET_TYPE_DERIVATIVE: 파생상품",
+      "title": "시장 유형"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "stockListStocksResponse": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/stockStock"
+          },
+          "title": "주식 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "stockStock": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (stocks/{code})"
+        },
+        "code": {
+          "type": "string",
+          "title": "종목 코드"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "심볼"
+        },
+        "marketType": {
+          "$ref": "#/definitions/futureMarketType",
+          "title": "시장 유형"
+        },
+        "marketName": {
+          "type": "string",
+          "title": "종목명"
+        },
+        "prevPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "전일 종가"
+        },
+        "lastPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "최근 체결가"
+        },
+        "listedQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "상장 수량"
+        },
+        "tradable": {
+          "type": "boolean",
+          "title": "거래 가능 여부"
+        },
+        "shortSellable": {
+          "type": "boolean",
+          "title": "대차 가능 여부"
+        }
+      },
+      "title": "주식 종목 정보"
+    }
+  }
+}

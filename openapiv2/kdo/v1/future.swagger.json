@@ -1,0 +1,278 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/future.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "FutureService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/futures": {
+      "get": {
+        "summary": "선물 목록 조회",
+        "operationId": "FutureService_ListFutures",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futureListFuturesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* code - 종목 코드\n* symbol - 심볼\n* market_type - 시장 유형 (MARKET_TYPE_KOSPI, MARKET_TYPE_KOSDAQ, MARKET_TYPE_DERIVATIVE)\n* future_option_type - 선물/옵션 유형 (FUTURE_OPTION_TYPE_FUTURE, FUTURE_OPTION_TYPE_CALL, FUTURE_OPTION_TYPE_PUT)\n* tradable - 거래 가능 여부\n* underlying_code - 기초자산 코드\n\nExamples:\n* future_option_type=FUTURE_OPTION_TYPE_FUTURE\n* tradable=true\n* underlying_code=\"101S6\"\n* future_option_type=FUTURE_OPTION_TYPE_FUTURE AND tradable=true",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FutureService"
+        ]
+      }
+    },
+    "/v1/{future}": {
+      "get": {
+        "summary": "단일 선물 조회",
+        "operationId": "FutureService_GetFuture",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futureFuture"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "future",
+            "description": "리소스 이름 (futures/{code})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "futures/[^/]+"
+          }
+        ],
+        "tags": [
+          "FutureService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "futureFuture": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (futures/{code})"
+        },
+        "code": {
+          "type": "string",
+          "title": "종목 코드"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "심볼"
+        },
+        "marketName": {
+          "type": "string",
+          "title": "종목명"
+        },
+        "marketType": {
+          "$ref": "#/definitions/futureMarketType",
+          "title": "시장 유형"
+        },
+        "maxQuantityPerOrder": {
+          "type": "string",
+          "format": "int64",
+          "title": "1회 최대 주문 수량"
+        },
+        "tickSize": {
+          "type": "number",
+          "format": "double",
+          "title": "틱 크기"
+        },
+        "prevPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "전일 종가"
+        },
+        "basePrice": {
+          "type": "number",
+          "format": "double",
+          "title": "기준가"
+        },
+        "maxPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "상한가"
+        },
+        "minPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "하한가"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double",
+          "title": "거래 단위"
+        },
+        "multiple": {
+          "type": "number",
+          "format": "double",
+          "title": "거래 승수"
+        },
+        "tradable": {
+          "type": "boolean",
+          "title": "거래 가능 여부"
+        },
+        "futureOptionType": {
+          "$ref": "#/definitions/futureFutureOptionType",
+          "title": "선물/옵션 유형"
+        },
+        "lastTradableDate": {
+          "type": "string",
+          "title": "최종 거래일 (YYYY-MM-DD)"
+        },
+        "maturityDate": {
+          "type": "string",
+          "title": "만기일 (YYYY-MM-DD)"
+        },
+        "underlyingCode": {
+          "type": "string",
+          "title": "기초자산 코드"
+        },
+        "underlyingPrevPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "기초자산 전일 종가"
+        },
+        "remainingDays": {
+          "type": "number",
+          "format": "double",
+          "title": "잔존일수"
+        },
+        "lastTradableDay": {
+          "type": "boolean",
+          "title": "최종 거래일 여부"
+        },
+        "cdRate": {
+          "type": "number",
+          "format": "double",
+          "title": "CD 금리"
+        },
+        "finalSettlementDate": {
+          "type": "string",
+          "title": "최종 결제일 (YYYY-MM-DD)"
+        }
+      },
+      "title": "선물/옵션 종목 정보"
+    },
+    "futureFutureOptionType": {
+      "type": "string",
+      "enum": [
+        "FUTURE_OPTION_TYPE_UNSPECIFIED",
+        "FUTURE_OPTION_TYPE_FUTURE",
+        "FUTURE_OPTION_TYPE_CALL",
+        "FUTURE_OPTION_TYPE_PUT"
+      ],
+      "default": "FUTURE_OPTION_TYPE_UNSPECIFIED",
+      "description": "- FUTURE_OPTION_TYPE_FUTURE: 선물\n - FUTURE_OPTION_TYPE_CALL: 콜옵션\n - FUTURE_OPTION_TYPE_PUT: 풋옵션",
+      "title": "선물/옵션 유형"
+    },
+    "futureListFuturesResponse": {
+      "type": "object",
+      "properties": {
+        "futures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/futureFuture"
+          },
+          "title": "선물 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "futureMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_TYPE_UNSPECIFIED",
+        "MARKET_TYPE_KOSPI",
+        "MARKET_TYPE_KOSDAQ",
+        "MARKET_TYPE_DERIVATIVE"
+      ],
+      "default": "MARKET_TYPE_UNSPECIFIED",
+      "description": "- MARKET_TYPE_KOSPI: KOSPI\n - MARKET_TYPE_KOSDAQ: KOSDAQ\n - MARKET_TYPE_DERIVATIVE: 파생상품",
+      "title": "시장 유형"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

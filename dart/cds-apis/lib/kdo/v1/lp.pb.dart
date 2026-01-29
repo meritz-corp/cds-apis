@@ -296,6 +296,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   EtfLpOffset ensureOffset() => $_ensure(7);
 
+  /// 헷지 정보
   @$pb.TagNumber(12)
   EtfLpOHedge get hedge => $_getN(8);
   @$pb.TagNumber(12)

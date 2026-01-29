@@ -260,7 +260,8 @@ type EtfLpStatus struct {
 	FillStatistics *FillStatistics `protobuf:"bytes,10,opt,name=fill_statistics,json=fillStatistics,proto3" json:"fill_statistics,omitempty"`
 	// 동적 offset 조정 설정 (optional)
 	Offset *EtfLpOffset `protobuf:"bytes,11,opt,name=offset,proto3" json:"offset,omitempty"`
-	Hedge  *EtfLpOHedge `protobuf:"bytes,12,opt,name=hedge,proto3" json:"hedge,omitempty"`
+	// 헷지 정보
+	Hedge *EtfLpOHedge `protobuf:"bytes,12,opt,name=hedge,proto3" json:"hedge,omitempty"`
 }
 
 func (x *EtfLpStatus) Reset() {

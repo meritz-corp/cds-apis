@@ -62,6 +62,12 @@ pub mod kdo {
         pub mod vi_arbitrage {
             include!("kdo.v1.vi_arbitrage.rs");
         }
+        pub mod stock {
+            include!("kdo.v1.stock.rs");
+        }
+        pub mod future {
+            include!("kdo.v1.future.rs");
+        }
     }
 }
 
