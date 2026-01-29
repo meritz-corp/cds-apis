@@ -143,6 +143,14 @@ pub struct GetUserFutureOrderBookRequest {
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserStockOrderBookRequest {
+    #[prost(string, tag="1")]
+    pub stock: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub fund: ::prost::alloc::string::String,
+}
 /// 주문 업데이트 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

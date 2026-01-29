@@ -37,7 +37,7 @@ abstract final class MarketService {
     kdov1market.EtfNav.new,
   );
 
-  /// 사용자 주문장 업데이트를 가져오기
+  /// 사용자 ETF 주문장 업데이트를 가져오기
   static const getUserEtfOrderbook = connect.Spec(
     '/$name/GetUserEtfOrderbook',
     connect.StreamType.unary,
@@ -45,7 +45,7 @@ abstract final class MarketService {
     kdov1market.UserOrderbookData.new,
   );
 
-  /// 사용자 주문장 업데이트를 스트리밍
+  /// 사용자 ETF 주문장 업데이트를 스트리밍
   static const streamUserEtfOrderbook = connect.Spec(
     '/$name/StreamUserEtfOrderbook',
     connect.StreamType.server,
@@ -53,7 +53,7 @@ abstract final class MarketService {
     kdov1market.UserOrderbookData.new,
   );
 
-  /// 사용자 주문장 업데이트를 가져오기
+  /// 사용자 선물 주문장 업데이트를 가져오기
   static const getUserFutureOrderbook = connect.Spec(
     '/$name/GetUserFutureOrderbook',
     connect.StreamType.unary,
@@ -61,11 +61,27 @@ abstract final class MarketService {
     kdov1market.UserOrderbookData.new,
   );
 
-  /// 사용자 주문장 업데이트를 스트리밍
+  /// 사용자 선물 주문장 업데이트를 스트리밍
   static const streamUserFutureOrderbook = connect.Spec(
     '/$name/StreamUserFutureOrderbook',
     connect.StreamType.server,
     kdov1market.GetUserFutureOrderBookRequest.new,
+    kdov1market.UserOrderbookData.new,
+  );
+
+  /// 사용자 주식 주문장 업데이트를 가져오기
+  static const getUserStockOrderbook = connect.Spec(
+    '/$name/GetUserStockOrderbook',
+    connect.StreamType.unary,
+    kdov1market.GetUserStockOrderBookRequest.new,
+    kdov1market.UserOrderbookData.new,
+  );
+
+  /// 사용자 주식 주문장 업데이트를 스트리밍
+  static const streamUserStockOrderbook = connect.Spec(
+    '/$name/StreamUserStockOrderbook',
+    connect.StreamType.server,
+    kdov1market.GetUserStockOrderBookRequest.new,
     kdov1market.UserOrderbookData.new,
   );
 

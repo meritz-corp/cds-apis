@@ -65,7 +65,7 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 사용자 주문장 업데이트를 가져오기
+  /// 사용자 ETF 주문장 업데이트를 가져오기
   Future<kdov1market.UserOrderbookData> getUserEtfOrderbook(
     kdov1market.GetUserEtfOrderBookRequest input, {
     connect.Headers? headers,
@@ -83,7 +83,7 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 사용자 주문장 업데이트를 스트리밍
+  /// 사용자 ETF 주문장 업데이트를 스트리밍
   Stream<kdov1market.UserOrderbookData> streamUserEtfOrderbook(
     kdov1market.GetUserEtfOrderBookRequest input, {
     connect.Headers? headers,
@@ -101,7 +101,7 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 사용자 주문장 업데이트를 가져오기
+  /// 사용자 선물 주문장 업데이트를 가져오기
   Future<kdov1market.UserOrderbookData> getUserFutureOrderbook(
     kdov1market.GetUserFutureOrderBookRequest input, {
     connect.Headers? headers,
@@ -119,7 +119,7 @@ extension type MarketServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 사용자 주문장 업데이트를 스트리밍
+  /// 사용자 선물 주문장 업데이트를 스트리밍
   Stream<kdov1market.UserOrderbookData> streamUserFutureOrderbook(
     kdov1market.GetUserFutureOrderBookRequest input, {
     connect.Headers? headers,
@@ -129,6 +129,42 @@ extension type MarketServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).server(
       specs.MarketService.streamUserFutureOrderbook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 사용자 주식 주문장 업데이트를 가져오기
+  Future<kdov1market.UserOrderbookData> getUserStockOrderbook(
+    kdov1market.GetUserStockOrderBookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketService.getUserStockOrderbook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 사용자 주식 주문장 업데이트를 스트리밍
+  Stream<kdov1market.UserOrderbookData> streamUserStockOrderbook(
+    kdov1market.GetUserStockOrderBookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketService.streamUserStockOrderbook,
       input,
       signal: signal,
       headers: headers,

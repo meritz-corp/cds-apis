@@ -700,6 +700,64 @@ class GetUserFutureOrderBookRequest extends $pb.GeneratedMessage {
   void clearFund() => $_clearField(2);
 }
 
+class GetUserStockOrderBookRequest extends $pb.GeneratedMessage {
+  factory GetUserStockOrderBookRequest({
+    $core.String? stock,
+    $core.String? fund,
+  }) {
+    final result = create();
+    if (stock != null) result.stock = stock;
+    if (fund != null) result.fund = fund;
+    return result;
+  }
+
+  GetUserStockOrderBookRequest._();
+
+  factory GetUserStockOrderBookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetUserStockOrderBookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserStockOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'stock')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetUserStockOrderBookRequest clone() => GetUserStockOrderBookRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetUserStockOrderBookRequest copyWith(void Function(GetUserStockOrderBookRequest) updates) => super.copyWith((message) => updates(message as GetUserStockOrderBookRequest)) as GetUserStockOrderBookRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetUserStockOrderBookRequest create() => GetUserStockOrderBookRequest._();
+  @$core.override
+  GetUserStockOrderBookRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUserStockOrderBookRequest> createRepeated() => $pb.PbList<GetUserStockOrderBookRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserStockOrderBookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserStockOrderBookRequest>(create);
+  static GetUserStockOrderBookRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get stock => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set stock($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStock() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStock() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fund => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fund($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFund() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFund() => $_clearField(2);
+}
+
 /// 주문 업데이트 정보
 class UserOrderbookData extends $pb.GeneratedMessage {
   factory UserOrderbookData({

@@ -37,35 +37,50 @@ service MarketService {
         };
     }
 
-    // 사용자 주문장 업데이트를 가져오기
+    // 사용자 ETF 주문장 업데이트를 가져오기
     rpc GetUserEtfOrderbook(GetUserEtfOrderBookRequest) returns (UserOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook"
         };
     }
 
-    // 사용자 주문장 업데이트를 스트리밍
+    // 사용자 ETF 주문장 업데이트를 스트리밍
     rpc StreamUserEtfOrderbook(GetUserEtfOrderBookRequest) returns (stream UserOrderbookData) {
         option (google.api.http) = {
             get: "/v1/market/{etf=etfs/*}/{fund=funds/*}/user-orderbook:stream"
         };
     }
 
-  // 사용자 주문장 업데이트를 가져오기
+  // 사용자 선물 주문장 업데이트를 가져오기
   rpc GetUserFutureOrderbook(GetUserFutureOrderBookRequest) returns (UserOrderbookData) {
     option (google.api.http) = {
       get: "/v1/market/{future=futures/*}/{fund=funds/*}/user-orderbook"
     };
   }
 
-  // 사용자 주문장 업데이트를 스트리밍
+  // 사용자 선물 주문장 업데이트를 스트리밍
   rpc StreamUserFutureOrderbook(GetUserFutureOrderBookRequest) returns (stream UserOrderbookData) {
     option (google.api.http) = {
       get: "/v1/market/{future=futures/*}/{fund=funds/*}/user-orderbook:stream"
     };
   }
 
-    // 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
+  // 사용자 주식 주문장 업데이트를 가져오기
+  rpc GetUserStockOrderbook(GetUserStockOrderBookRequest) returns (UserOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/market/{stock=stocks/*}/{fund=funds/*}/user-orderbook"
+    };
+  }
+
+  // 사용자 주식 주문장 업데이트를 스트리밍
+  rpc StreamUserStockOrderbook(GetUserStockOrderBookRequest) returns (stream UserOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/market/{stock=stocks/*}/{fund=funds/*}/user-orderbook:stream"
+    };
+  }
+
+
+  // 새로운 Raw 메시지 스트리밍 UDP 소켓 추가
     rpc AddRawMessagesSocket(AddRawMessagesSocketRequest) returns (AddRawMessagesSocketResponse) {
         option (google.api.http) = {
             post: "/v1/market/raw-messages/sockets"
@@ -271,6 +286,23 @@ message GetUserFutureOrderBookRequest {
     }
   ];
 }
+
+message GetUserStockOrderBookRequest {
+  string stock = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Stock"
+    }
+  ];
+
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
 
 // 주문 업데이트 정보
 message UserOrderbookData {
