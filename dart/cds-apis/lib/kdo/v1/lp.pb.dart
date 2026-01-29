@@ -640,10 +640,12 @@ class EtfLpOffset extends $pb.GeneratedMessage {
 class EtfLpOHedge extends $pb.GeneratedMessage {
   factory EtfLpOHedge({
     $core.String? symbol,
+    $core.String? portfolio,
     $fixnum.Int64? filledQuantityPerHedge,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (portfolio != null) result.portfolio = portfolio;
     if (filledQuantityPerHedge != null) result.filledQuantityPerHedge = filledQuantityPerHedge;
     return result;
   }
@@ -655,7 +657,8 @@ class EtfLpOHedge extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'filledQuantityPerHedge')
+    ..aOS(2, _omitFieldNames ? '' : 'portfolio')
+    ..aInt64(3, _omitFieldNames ? '' : 'filledQuantityPerHedge')
     ..hasRequiredFields = false
   ;
 
@@ -686,15 +689,26 @@ class EtfLpOHedge extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
+  /// 포트폴리오 리소스 이름
+  /// format: portfolios/{portfolio_id}
+  @$pb.TagNumber(2)
+  $core.String get portfolio => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set portfolio($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPortfolio() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPortfolio() => $_clearField(2);
+
   /// 헷지 1주 주문당 ETF 체결수량 기준
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get filledQuantityPerHedge => $_getI64(1);
-  @$pb.TagNumber(2)
-  set filledQuantityPerHedge($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFilledQuantityPerHedge() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFilledQuantityPerHedge() => $_clearField(2);
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get filledQuantityPerHedge => $_getI64(2);
+  @$pb.TagNumber(3)
+  set filledQuantityPerHedge($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilledQuantityPerHedge() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilledQuantityPerHedge() => $_clearField(3);
 }
 
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

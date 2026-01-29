@@ -217,8 +217,16 @@ message EtfLpOHedge {
   // 헷지 대상 종목 심볼
   string symbol = 1;
 
+  // 포트폴리오 리소스 이름
+  // format: portfolios/{portfolio_id}
+  string portfolio = 2 [
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
+    }
+  ];
+
   // 헷지 1주 주문당 ETF 체결수량 기준
-  int64 filled_quantity_per_hedge = 2;
+  int64 filled_quantity_per_hedge = 3;
 }
 
 

@@ -538,6 +538,10 @@
           "type": "string",
           "title": "헷지 대상 종목 심볼"
         },
+        "portfolio": {
+          "type": "string",
+          "title": "포트폴리오 리소스 이름\nformat: portfolios/{portfolio_id}"
+        },
         "filledQuantityPerHedge": {
           "type": "string",
           "format": "int64",
