@@ -83,6 +83,7 @@ const EtfLpStatus$json = {
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
     {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
+    {'1': 'hedge', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOHedge', '10': 'hedge'},
   ],
 };
 
@@ -93,7 +94,8 @@ final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'KANSCHF1YW50aXR5EisKBXN0YXRlGAggASgOMhUua2RvLnYxLmxwLkV0ZkxwU3RhdGVSBXN0YX'
     'RlEi4KB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQcmljaW5nUgdwcmljaW5nEkIKD2Zp'
     'bGxfc3RhdGlzdGljcxgKIAEoCzIZLmtkby52MS5scC5GaWxsU3RhdGlzdGljc1IOZmlsbFN0YX'
-    'Rpc3RpY3MSLgoGb2Zmc2V0GAsgASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQ=');
+    'Rpc3RpY3MSLgoGb2Zmc2V0GAsgASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQS'
+    'LAoFaGVkZ2UYDCABKAsyFi5rZG8udjEubHAuRXRmTHBPSGVkZ2VSBWhlZGdl');
 
 @$core.Deprecated('Use etfLpStatusUpdateDescriptor instead')
 const EtfLpStatusUpdate$json = {
@@ -161,6 +163,20 @@ final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
     'c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGB'
     'MgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCAB'
     'KAFSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
+
+@$core.Deprecated('Use etfLpOHedgeDescriptor instead')
+const EtfLpOHedge$json = {
+  '1': 'EtfLpOHedge',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'filled_quantity_per_hedge', '3': 2, '4': 1, '5': 3, '10': 'filledQuantityPerHedge'},
+  ],
+};
+
+/// Descriptor for `EtfLpOHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpOHedgeDescriptor = $convert.base64Decode(
+    'CgtFdGZMcE9IZWRnZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBI5ChlmaWxsZWRfcXVhbnRpdH'
+    'lfcGVyX2hlZGdlGAIgASgDUhZmaWxsZWRRdWFudGl0eVBlckhlZGdl');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

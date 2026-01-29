@@ -260,6 +260,7 @@ type EtfLpStatus struct {
 	FillStatistics *FillStatistics `protobuf:"bytes,10,opt,name=fill_statistics,json=fillStatistics,proto3" json:"fill_statistics,omitempty"`
 	// 동적 offset 조정 설정 (optional)
 	Offset *EtfLpOffset `protobuf:"bytes,11,opt,name=offset,proto3" json:"offset,omitempty"`
+	Hedge  *EtfLpOHedge `protobuf:"bytes,12,opt,name=hedge,proto3" json:"hedge,omitempty"`
 }
 
 func (x *EtfLpStatus) Reset() {
@@ -346,6 +347,13 @@ func (x *EtfLpStatus) GetFillStatistics() *FillStatistics {
 func (x *EtfLpStatus) GetOffset() *EtfLpOffset {
 	if x != nil {
 		return x.Offset
+	}
+	return nil
+}
+
+func (x *EtfLpStatus) GetHedge() *EtfLpOHedge {
+	if x != nil {
+		return x.Hedge
 	}
 	return nil
 }
@@ -601,6 +609,64 @@ func (x *EtfLpOffset) GetPositionAdjustmentStep() float64 {
 	return 0
 }
 
+// ETF LP 헷지 설정
+type EtfLpOHedge struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 헷지 대상 종목 심볼
+	Symbol string `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	// 헷지 1주 주문당 ETF 체결수량 기준
+	FilledQuantityPerHedge int64 `protobuf:"varint,2,opt,name=filled_quantity_per_hedge,json=filledQuantityPerHedge,proto3" json:"filled_quantity_per_hedge,omitempty"`
+}
+
+func (x *EtfLpOHedge) Reset() {
+	*x = EtfLpOHedge{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_kdo_v1_lp_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EtfLpOHedge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EtfLpOHedge) ProtoMessage() {}
+
+func (x *EtfLpOHedge) ProtoReflect() protoreflect.Message {
+	mi := &file_kdo_v1_lp_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EtfLpOHedge.ProtoReflect.Descriptor instead.
+func (*EtfLpOHedge) Descriptor() ([]byte, []int) {
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *EtfLpOHedge) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+func (x *EtfLpOHedge) GetFilledQuantityPerHedge() int64 {
+	if x != nil {
+		return x.FilledQuantityPerHedge
+	}
+	return 0
+}
+
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 type FillStatistics struct {
 	state         protoimpl.MessageState
@@ -620,7 +686,7 @@ type FillStatistics struct {
 func (x *FillStatistics) Reset() {
 	*x = FillStatistics{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[4]
+		mi := &file_kdo_v1_lp_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -633,7 +699,7 @@ func (x *FillStatistics) String() string {
 func (*FillStatistics) ProtoMessage() {}
 
 func (x *FillStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[4]
+	mi := &file_kdo_v1_lp_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -646,7 +712,7 @@ func (x *FillStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FillStatistics.ProtoReflect.Descriptor instead.
 func (*FillStatistics) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{4}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *FillStatistics) GetBuyFilledQuantity() int64 {
@@ -700,7 +766,7 @@ type OrderStats struct {
 func (x *OrderStats) Reset() {
 	*x = OrderStats{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[5]
+		mi := &file_kdo_v1_lp_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -713,7 +779,7 @@ func (x *OrderStats) String() string {
 func (*OrderStats) ProtoMessage() {}
 
 func (x *OrderStats) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[5]
+	mi := &file_kdo_v1_lp_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -726,7 +792,7 @@ func (x *OrderStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderStats.ProtoReflect.Descriptor instead.
 func (*OrderStats) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{5}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *OrderStats) GetTotalOrdersSent() uint64 {
@@ -790,7 +856,7 @@ type TimeFrameStatus struct {
 func (x *TimeFrameStatus) Reset() {
 	*x = TimeFrameStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[6]
+		mi := &file_kdo_v1_lp_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -803,7 +869,7 @@ func (x *TimeFrameStatus) String() string {
 func (*TimeFrameStatus) ProtoMessage() {}
 
 func (x *TimeFrameStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[6]
+	mi := &file_kdo_v1_lp_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -816,7 +882,7 @@ func (x *TimeFrameStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeFrameStatus.ProtoReflect.Descriptor instead.
 func (*TimeFrameStatus) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{6}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TimeFrameStatus) GetWindowSeconds() uint64 {
@@ -863,7 +929,7 @@ type LpPricing struct {
 func (x *LpPricing) Reset() {
 	*x = LpPricing{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[7]
+		mi := &file_kdo_v1_lp_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -876,7 +942,7 @@ func (x *LpPricing) String() string {
 func (*LpPricing) ProtoMessage() {}
 
 func (x *LpPricing) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[7]
+	mi := &file_kdo_v1_lp_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -889,7 +955,7 @@ func (x *LpPricing) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LpPricing.ProtoReflect.Descriptor instead.
 func (*LpPricing) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{7}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *LpPricing) GetEtfPrice() string {
@@ -927,7 +993,7 @@ type GetEtfLpRequest struct {
 func (x *GetEtfLpRequest) Reset() {
 	*x = GetEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[8]
+		mi := &file_kdo_v1_lp_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -940,7 +1006,7 @@ func (x *GetEtfLpRequest) String() string {
 func (*GetEtfLpRequest) ProtoMessage() {}
 
 func (x *GetEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[8]
+	mi := &file_kdo_v1_lp_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -953,7 +1019,7 @@ func (x *GetEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*GetEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{8}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetEtfLpRequest) GetEtf() string {
@@ -996,7 +1062,7 @@ type ListEtfLpsRequest struct {
 func (x *ListEtfLpsRequest) Reset() {
 	*x = ListEtfLpsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[9]
+		mi := &file_kdo_v1_lp_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1009,7 +1075,7 @@ func (x *ListEtfLpsRequest) String() string {
 func (*ListEtfLpsRequest) ProtoMessage() {}
 
 func (x *ListEtfLpsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[9]
+	mi := &file_kdo_v1_lp_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1022,7 +1088,7 @@ func (x *ListEtfLpsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEtfLpsRequest.ProtoReflect.Descriptor instead.
 func (*ListEtfLpsRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{9}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListEtfLpsRequest) GetPageSize() uint32 {
@@ -1060,7 +1126,7 @@ type ListEtfLpsResponse struct {
 func (x *ListEtfLpsResponse) Reset() {
 	*x = ListEtfLpsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[10]
+		mi := &file_kdo_v1_lp_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1073,7 +1139,7 @@ func (x *ListEtfLpsResponse) String() string {
 func (*ListEtfLpsResponse) ProtoMessage() {}
 
 func (x *ListEtfLpsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[10]
+	mi := &file_kdo_v1_lp_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1086,7 +1152,7 @@ func (x *ListEtfLpsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEtfLpsResponse.ProtoReflect.Descriptor instead.
 func (*ListEtfLpsResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{10}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListEtfLpsResponse) GetEtfLps() []*EtfLp {
@@ -1126,7 +1192,7 @@ type ListEtfLpStatusesRequest struct {
 func (x *ListEtfLpStatusesRequest) Reset() {
 	*x = ListEtfLpStatusesRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[11]
+		mi := &file_kdo_v1_lp_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1139,7 +1205,7 @@ func (x *ListEtfLpStatusesRequest) String() string {
 func (*ListEtfLpStatusesRequest) ProtoMessage() {}
 
 func (x *ListEtfLpStatusesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[11]
+	mi := &file_kdo_v1_lp_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1152,7 +1218,7 @@ func (x *ListEtfLpStatusesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEtfLpStatusesRequest.ProtoReflect.Descriptor instead.
 func (*ListEtfLpStatusesRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{11}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListEtfLpStatusesRequest) GetPageSize() uint32 {
@@ -1197,7 +1263,7 @@ type ListEtfLpStatusesResponse struct {
 func (x *ListEtfLpStatusesResponse) Reset() {
 	*x = ListEtfLpStatusesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[12]
+		mi := &file_kdo_v1_lp_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1210,7 +1276,7 @@ func (x *ListEtfLpStatusesResponse) String() string {
 func (*ListEtfLpStatusesResponse) ProtoMessage() {}
 
 func (x *ListEtfLpStatusesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[12]
+	mi := &file_kdo_v1_lp_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1223,7 +1289,7 @@ func (x *ListEtfLpStatusesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEtfLpStatusesResponse.ProtoReflect.Descriptor instead.
 func (*ListEtfLpStatusesResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{12}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListEtfLpStatusesResponse) GetEtfLpStatuses() []*EtfLpStatus {
@@ -1263,7 +1329,7 @@ type UpdateEtfLpRequest struct {
 func (x *UpdateEtfLpRequest) Reset() {
 	*x = UpdateEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[13]
+		mi := &file_kdo_v1_lp_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1276,7 +1342,7 @@ func (x *UpdateEtfLpRequest) String() string {
 func (*UpdateEtfLpRequest) ProtoMessage() {}
 
 func (x *UpdateEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[13]
+	mi := &file_kdo_v1_lp_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1289,7 +1355,7 @@ func (x *UpdateEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*UpdateEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{13}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateEtfLpRequest) GetSymbol() string {
@@ -1372,7 +1438,7 @@ type GetEtfLpStatusRequest struct {
 func (x *GetEtfLpStatusRequest) Reset() {
 	*x = GetEtfLpStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[14]
+		mi := &file_kdo_v1_lp_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1385,7 +1451,7 @@ func (x *GetEtfLpStatusRequest) String() string {
 func (*GetEtfLpStatusRequest) ProtoMessage() {}
 
 func (x *GetEtfLpStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[14]
+	mi := &file_kdo_v1_lp_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1398,7 +1464,7 @@ func (x *GetEtfLpStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEtfLpStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetEtfLpStatusRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{14}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetEtfLpStatusRequest) GetEtf() string {
@@ -1428,7 +1494,7 @@ type StreamEtfLpStatusUpdateRequest struct {
 func (x *StreamEtfLpStatusUpdateRequest) Reset() {
 	*x = StreamEtfLpStatusUpdateRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[15]
+		mi := &file_kdo_v1_lp_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1441,7 +1507,7 @@ func (x *StreamEtfLpStatusUpdateRequest) String() string {
 func (*StreamEtfLpStatusUpdateRequest) ProtoMessage() {}
 
 func (x *StreamEtfLpStatusUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[15]
+	mi := &file_kdo_v1_lp_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1454,7 +1520,7 @@ func (x *StreamEtfLpStatusUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamEtfLpStatusUpdateRequest.ProtoReflect.Descriptor instead.
 func (*StreamEtfLpStatusUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{15}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *StreamEtfLpStatusUpdateRequest) GetEtf() string {
@@ -1484,7 +1550,7 @@ type StartEtfLpRequest struct {
 func (x *StartEtfLpRequest) Reset() {
 	*x = StartEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[16]
+		mi := &file_kdo_v1_lp_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1497,7 +1563,7 @@ func (x *StartEtfLpRequest) String() string {
 func (*StartEtfLpRequest) ProtoMessage() {}
 
 func (x *StartEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[16]
+	mi := &file_kdo_v1_lp_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1510,7 +1576,7 @@ func (x *StartEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*StartEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{16}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *StartEtfLpRequest) GetEtf() string {
@@ -1542,7 +1608,7 @@ type StartEtfLpResponse struct {
 func (x *StartEtfLpResponse) Reset() {
 	*x = StartEtfLpResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[17]
+		mi := &file_kdo_v1_lp_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1555,7 +1621,7 @@ func (x *StartEtfLpResponse) String() string {
 func (*StartEtfLpResponse) ProtoMessage() {}
 
 func (x *StartEtfLpResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[17]
+	mi := &file_kdo_v1_lp_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1568,7 +1634,7 @@ func (x *StartEtfLpResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartEtfLpResponse.ProtoReflect.Descriptor instead.
 func (*StartEtfLpResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{17}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *StartEtfLpResponse) GetStatus() *EtfLpStatus {
@@ -1598,7 +1664,7 @@ type StopEtfLpRequest struct {
 func (x *StopEtfLpRequest) Reset() {
 	*x = StopEtfLpRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[18]
+		mi := &file_kdo_v1_lp_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1611,7 +1677,7 @@ func (x *StopEtfLpRequest) String() string {
 func (*StopEtfLpRequest) ProtoMessage() {}
 
 func (x *StopEtfLpRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[18]
+	mi := &file_kdo_v1_lp_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1624,7 +1690,7 @@ func (x *StopEtfLpRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopEtfLpRequest.ProtoReflect.Descriptor instead.
 func (*StopEtfLpRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{18}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *StopEtfLpRequest) GetEtf() string {
@@ -1656,7 +1722,7 @@ type StopEtfLpResponse struct {
 func (x *StopEtfLpResponse) Reset() {
 	*x = StopEtfLpResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[19]
+		mi := &file_kdo_v1_lp_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1669,7 +1735,7 @@ func (x *StopEtfLpResponse) String() string {
 func (*StopEtfLpResponse) ProtoMessage() {}
 
 func (x *StopEtfLpResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[19]
+	mi := &file_kdo_v1_lp_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1682,7 +1748,7 @@ func (x *StopEtfLpResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopEtfLpResponse.ProtoReflect.Descriptor instead.
 func (*StopEtfLpResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{19}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *StopEtfLpResponse) GetStatus() *EtfLpStatus {
@@ -1712,7 +1778,7 @@ type StreamLpEventsRequest struct {
 func (x *StreamLpEventsRequest) Reset() {
 	*x = StreamLpEventsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[20]
+		mi := &file_kdo_v1_lp_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1725,7 +1791,7 @@ func (x *StreamLpEventsRequest) String() string {
 func (*StreamLpEventsRequest) ProtoMessage() {}
 
 func (x *StreamLpEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[20]
+	mi := &file_kdo_v1_lp_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1738,7 +1804,7 @@ func (x *StreamLpEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLpEventsRequest.ProtoReflect.Descriptor instead.
 func (*StreamLpEventsRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{20}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *StreamLpEventsRequest) GetEtf() string {
@@ -1768,7 +1834,7 @@ type GetUserOrderBookRequest struct {
 func (x *GetUserOrderBookRequest) Reset() {
 	*x = GetUserOrderBookRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[21]
+		mi := &file_kdo_v1_lp_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1781,7 +1847,7 @@ func (x *GetUserOrderBookRequest) String() string {
 func (*GetUserOrderBookRequest) ProtoMessage() {}
 
 func (x *GetUserOrderBookRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[21]
+	mi := &file_kdo_v1_lp_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1794,7 +1860,7 @@ func (x *GetUserOrderBookRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserOrderBookRequest.ProtoReflect.Descriptor instead.
 func (*GetUserOrderBookRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{21}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetUserOrderBookRequest) GetEtf() string {
@@ -1830,7 +1896,7 @@ type UserOrderbookData struct {
 func (x *UserOrderbookData) Reset() {
 	*x = UserOrderbookData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[22]
+		mi := &file_kdo_v1_lp_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1843,7 +1909,7 @@ func (x *UserOrderbookData) String() string {
 func (*UserOrderbookData) ProtoMessage() {}
 
 func (x *UserOrderbookData) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[22]
+	mi := &file_kdo_v1_lp_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1856,7 +1922,7 @@ func (x *UserOrderbookData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserOrderbookData.ProtoReflect.Descriptor instead.
 func (*UserOrderbookData) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{22}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UserOrderbookData) GetBidPrices() []string {
@@ -1916,7 +1982,7 @@ var file_kdo_v1_lp_proto_rawDesc = []byte{
 	0x65, 0x12, 0x2e, 0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x16, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74,
 	0x66, 0x4c, 0x70, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65,
-	0x74, 0x22, 0xcc, 0x02, 0x0a, 0x0b, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x74, 0x22, 0xfa, 0x02, 0x0a, 0x0b, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75,
 	0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x65, 0x74, 0x66, 0x5f, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x74, 0x66, 0x53, 0x79, 0x6d, 0x62, 0x6f, 0x6c,
 	0x12, 0x1b, 0x0a, 0x09, 0x66, 0x75, 0x6e, 0x64, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20,
@@ -1937,71 +2003,80 @@ var file_kdo_v1_lp_proto_rawDesc = []byte{
 	0x12, 0x2e, 0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x16, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66,
 	0x4c, 0x70, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74,
-	0x22, 0xbc, 0x03, 0x0a, 0x11, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x65, 0x74, 0x66, 0x5f, 0x73, 0x79,
-	0x6d, 0x62, 0x6f, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x74, 0x66, 0x53,
-	0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x75, 0x6e, 0x64, 0x5f, 0x63, 0x6f,
-	0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x75, 0x6e, 0x64, 0x43, 0x6f,
-	0x64, 0x65, 0x12, 0x19, 0x0a, 0x05, 0x62, 0x61, 0x73, 0x69, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28,
-	0x03, 0x48, 0x00, 0x52, 0x05, 0x62, 0x61, 0x73, 0x69, 0x73, 0x88, 0x01, 0x01, 0x12, 0x1f, 0x0a,
-	0x08, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x48,
-	0x01, 0x52, 0x08, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x88, 0x01, 0x01, 0x12, 0x30,
-	0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x15, 0x2e,
-	0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53,
-	0x74, 0x61, 0x74, 0x65, 0x48, 0x02, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x88, 0x01, 0x01,
-	0x12, 0x33, 0x0a, 0x07, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x18, 0x09, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x14, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x4c, 0x70,
-	0x50, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x48, 0x03, 0x52, 0x07, 0x70, 0x72, 0x69, 0x63, 0x69,
-	0x6e, 0x67, 0x88, 0x01, 0x01, 0x12, 0x47, 0x0a, 0x0f, 0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x73, 0x74,
-	0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19,
-	0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x46, 0x69, 0x6c, 0x6c, 0x53,
-	0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x48, 0x04, 0x52, 0x0e, 0x66, 0x69, 0x6c,
-	0x6c, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x88, 0x01, 0x01, 0x12, 0x33,
-	0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16,
-	0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66, 0x4c, 0x70,
-	0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x48, 0x05, 0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74,
-	0x88, 0x01, 0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x62, 0x61, 0x73, 0x69, 0x73, 0x42, 0x0b, 0x0a,
-	0x09, 0x5f, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x73,
-	0x74, 0x61, 0x74, 0x65, 0x42, 0x0a, 0x0a, 0x08, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67,
-	0x42, 0x12, 0x0a, 0x10, 0x5f, 0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x69, 0x73,
-	0x74, 0x69, 0x63, 0x73, 0x42, 0x09, 0x0a, 0x07, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x22,
-	0xc5, 0x04, 0x0a, 0x0b, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12,
-	0x1d, 0x0a, 0x0a, 0x62, 0x69, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x01, 0x52, 0x09, 0x62, 0x69, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d,
-	0x0a, 0x0a, 0x61, 0x73, 0x6b, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x01, 0x52, 0x09, 0x61, 0x73, 0x6b, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a,
-	0x0a, 0x6d, 0x69, 0x6e, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x01, 0x52, 0x09, 0x6d, 0x69, 0x6e, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
-	0x6d, 0x61, 0x78, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x01,
-	0x52, 0x09, 0x6d, 0x61, 0x78, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x36, 0x0a, 0x17, 0x74,
-	0x69, 0x6d, 0x65, 0x5f, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x65,
-	0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x15, 0x74, 0x69,
-	0x6d, 0x65, 0x41, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x45, 0x6e, 0x61, 0x62,
-	0x6c, 0x65, 0x64, 0x12, 0x38, 0x0a, 0x18, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e,
-	0x74, 0x5f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x76, 0x61, 0x6c, 0x5f, 0x73, 0x65, 0x63, 0x73, 0x18,
-	0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x16, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e,
-	0x74, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x76, 0x61, 0x6c, 0x53, 0x65, 0x63, 0x73, 0x12, 0x27, 0x0a,
-	0x0f, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x73, 0x74, 0x65, 0x70,
-	0x18, 0x09, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0e, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65,
-	0x6e, 0x74, 0x53, 0x74, 0x65, 0x70, 0x12, 0x22, 0x0a, 0x0d, 0x72, 0x65, 0x73, 0x65, 0x74, 0x5f,
-	0x6f, 0x6e, 0x5f, 0x66, 0x69, 0x6c, 0x6c, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x72,
-	0x65, 0x73, 0x65, 0x74, 0x4f, 0x6e, 0x46, 0x69, 0x6c, 0x6c, 0x12, 0x3e, 0x0a, 0x1b, 0x70, 0x6f,
-	0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e,
-	0x74, 0x5f, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x11, 0x20, 0x01, 0x28, 0x08, 0x52,
-	0x19, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d,
-	0x65, 0x6e, 0x74, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x52, 0x0a, 0x11, 0x70, 0x6f,
-	0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x73, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x18,
-	0x12, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x25, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c,
-	0x70, 0x2e, 0x50, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x6a, 0x75, 0x73, 0x74,
-	0x6d, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x52, 0x10, 0x70, 0x6f,
-	0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x2d,
-	0x0a, 0x12, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x68, 0x72, 0x65, 0x73,
-	0x68, 0x6f, 0x6c, 0x64, 0x18, 0x13, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x70, 0x6f, 0x73, 0x69,
-	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x68, 0x72, 0x65, 0x73, 0x68, 0x6f, 0x6c, 0x64, 0x12, 0x38, 0x0a,
-	0x18, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74,
-	0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x73, 0x74, 0x65, 0x70, 0x18, 0x14, 0x20, 0x01, 0x28, 0x01, 0x52,
-	0x16, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d,
-	0x65, 0x6e, 0x74, 0x53, 0x74, 0x65, 0x70, 0x22, 0xc8, 0x01, 0x0a, 0x0e, 0x46, 0x69, 0x6c, 0x6c,
+	0x12, 0x2c, 0x0a, 0x05, 0x68, 0x65, 0x64, 0x67, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x16, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66, 0x4c,
+	0x70, 0x4f, 0x48, 0x65, 0x64, 0x67, 0x65, 0x52, 0x05, 0x68, 0x65, 0x64, 0x67, 0x65, 0x22, 0xbc,
+	0x03, 0x0a, 0x11, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x65, 0x74, 0x66, 0x5f, 0x73, 0x79, 0x6d, 0x62,
+	0x6f, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x74, 0x66, 0x53, 0x79, 0x6d,
+	0x62, 0x6f, 0x6c, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x75, 0x6e, 0x64, 0x5f, 0x63, 0x6f, 0x64, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x75, 0x6e, 0x64, 0x43, 0x6f, 0x64, 0x65,
+	0x12, 0x19, 0x0a, 0x05, 0x62, 0x61, 0x73, 0x69, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x48,
+	0x00, 0x52, 0x05, 0x62, 0x61, 0x73, 0x69, 0x73, 0x88, 0x01, 0x01, 0x12, 0x1f, 0x0a, 0x08, 0x71,
+	0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x48, 0x01, 0x52,
+	0x08, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x88, 0x01, 0x01, 0x12, 0x30, 0x0a, 0x05,
+	0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x15, 0x2e, 0x6b, 0x64,
+	0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x53, 0x74, 0x61,
+	0x74, 0x65, 0x48, 0x02, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x88, 0x01, 0x01, 0x12, 0x33,
+	0x0a, 0x07, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x14, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x4c, 0x70, 0x50, 0x72,
+	0x69, 0x63, 0x69, 0x6e, 0x67, 0x48, 0x03, 0x52, 0x07, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67,
+	0x88, 0x01, 0x01, 0x12, 0x47, 0x0a, 0x0f, 0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x73, 0x74, 0x61, 0x74,
+	0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6b,
+	0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x46, 0x69, 0x6c, 0x6c, 0x53, 0x74, 0x61,
+	0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x48, 0x04, 0x52, 0x0e, 0x66, 0x69, 0x6c, 0x6c, 0x53,
+	0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x88, 0x01, 0x01, 0x12, 0x33, 0x0a, 0x06,
+	0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x6b,
+	0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x4f, 0x66,
+	0x66, 0x73, 0x65, 0x74, 0x48, 0x05, 0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x88, 0x01,
+	0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x62, 0x61, 0x73, 0x69, 0x73, 0x42, 0x0b, 0x0a, 0x09, 0x5f,
+	0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x73, 0x74, 0x61,
+	0x74, 0x65, 0x42, 0x0a, 0x0a, 0x08, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x69, 0x6e, 0x67, 0x42, 0x12,
+	0x0a, 0x10, 0x5f, 0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69,
+	0x63, 0x73, 0x42, 0x09, 0x0a, 0x07, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x22, 0xc5, 0x04,
+	0x0a, 0x0b, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a,
+	0x0a, 0x62, 0x69, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x01, 0x52, 0x09, 0x62, 0x69, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
+	0x61, 0x73, 0x6b, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01,
+	0x52, 0x09, 0x61, 0x73, 0x6b, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x6d,
+	0x69, 0x6e, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01, 0x52,
+	0x09, 0x6d, 0x69, 0x6e, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x6d, 0x61,
+	0x78, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x01, 0x52, 0x09,
+	0x6d, 0x61, 0x78, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x36, 0x0a, 0x17, 0x74, 0x69, 0x6d,
+	0x65, 0x5f, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x65, 0x6e, 0x61,
+	0x62, 0x6c, 0x65, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x15, 0x74, 0x69, 0x6d, 0x65,
+	0x41, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65,
+	0x64, 0x12, 0x38, 0x0a, 0x18, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x5f,
+	0x69, 0x6e, 0x74, 0x65, 0x72, 0x76, 0x61, 0x6c, 0x5f, 0x73, 0x65, 0x63, 0x73, 0x18, 0x08, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x16, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x49,
+	0x6e, 0x74, 0x65, 0x72, 0x76, 0x61, 0x6c, 0x53, 0x65, 0x63, 0x73, 0x12, 0x27, 0x0a, 0x0f, 0x61,
+	0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x73, 0x74, 0x65, 0x70, 0x18, 0x09,
+	0x20, 0x01, 0x28, 0x01, 0x52, 0x0e, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74,
+	0x53, 0x74, 0x65, 0x70, 0x12, 0x22, 0x0a, 0x0d, 0x72, 0x65, 0x73, 0x65, 0x74, 0x5f, 0x6f, 0x6e,
+	0x5f, 0x66, 0x69, 0x6c, 0x6c, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x72, 0x65, 0x73,
+	0x65, 0x74, 0x4f, 0x6e, 0x46, 0x69, 0x6c, 0x6c, 0x12, 0x3e, 0x0a, 0x1b, 0x70, 0x6f, 0x73, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x5f,
+	0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x11, 0x20, 0x01, 0x28, 0x08, 0x52, 0x19, 0x70,
+	0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e,
+	0x74, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x52, 0x0a, 0x11, 0x70, 0x6f, 0x73, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x73, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x18, 0x12, 0x20,
+	0x01, 0x28, 0x0e, 0x32, 0x25, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e,
+	0x50, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65,
+	0x6e, 0x74, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x52, 0x10, 0x70, 0x6f, 0x73, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x2d, 0x0a, 0x12,
+	0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x68, 0x72, 0x65, 0x73, 0x68, 0x6f,
+	0x6c, 0x64, 0x18, 0x13, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x54, 0x68, 0x72, 0x65, 0x73, 0x68, 0x6f, 0x6c, 0x64, 0x12, 0x38, 0x0a, 0x18, 0x70,
+	0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65,
+	0x6e, 0x74, 0x5f, 0x73, 0x74, 0x65, 0x70, 0x18, 0x14, 0x20, 0x01, 0x28, 0x01, 0x52, 0x16, 0x70,
+	0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x6d, 0x65, 0x6e,
+	0x74, 0x53, 0x74, 0x65, 0x70, 0x22, 0x60, 0x0a, 0x0b, 0x45, 0x74, 0x66, 0x4c, 0x70, 0x4f, 0x48,
+	0x65, 0x64, 0x67, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x12, 0x39, 0x0a, 0x19,
+	0x66, 0x69, 0x6c, 0x6c, 0x65, 0x64, 0x5f, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x5f,
+	0x70, 0x65, 0x72, 0x5f, 0x68, 0x65, 0x64, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x16, 0x66, 0x69, 0x6c, 0x6c, 0x65, 0x64, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x50,
+	0x65, 0x72, 0x48, 0x65, 0x64, 0x67, 0x65, 0x22, 0xc8, 0x01, 0x0a, 0x0e, 0x46, 0x69, 0x6c, 0x6c,
 	0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x12, 0x2e, 0x0a, 0x13, 0x62, 0x75,
 	0x79, 0x5f, 0x66, 0x69, 0x6c, 0x6c, 0x65, 0x64, 0x5f, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74,
 	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x62, 0x75, 0x79, 0x46, 0x69, 0x6c, 0x6c,
@@ -2301,7 +2376,7 @@ func file_kdo_v1_lp_proto_rawDescGZIP() []byte {
 }
 
 var file_kdo_v1_lp_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(PositionAdjustmentStrategy)(0),        // 0: kdo.v1.lp.PositionAdjustmentStrategy
 	(EtfLpState)(0),                        // 1: kdo.v1.lp.EtfLpState
@@ -2309,67 +2384,69 @@ var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(*EtfLpStatus)(nil),                    // 3: kdo.v1.lp.EtfLpStatus
 	(*EtfLpStatusUpdate)(nil),              // 4: kdo.v1.lp.EtfLpStatusUpdate
 	(*EtfLpOffset)(nil),                    // 5: kdo.v1.lp.EtfLpOffset
-	(*FillStatistics)(nil),                 // 6: kdo.v1.lp.FillStatistics
-	(*OrderStats)(nil),                     // 7: kdo.v1.lp.OrderStats
-	(*TimeFrameStatus)(nil),                // 8: kdo.v1.lp.TimeFrameStatus
-	(*LpPricing)(nil),                      // 9: kdo.v1.lp.LpPricing
-	(*GetEtfLpRequest)(nil),                // 10: kdo.v1.lp.GetEtfLpRequest
-	(*ListEtfLpsRequest)(nil),              // 11: kdo.v1.lp.ListEtfLpsRequest
-	(*ListEtfLpsResponse)(nil),             // 12: kdo.v1.lp.ListEtfLpsResponse
-	(*ListEtfLpStatusesRequest)(nil),       // 13: kdo.v1.lp.ListEtfLpStatusesRequest
-	(*ListEtfLpStatusesResponse)(nil),      // 14: kdo.v1.lp.ListEtfLpStatusesResponse
-	(*UpdateEtfLpRequest)(nil),             // 15: kdo.v1.lp.UpdateEtfLpRequest
-	(*GetEtfLpStatusRequest)(nil),          // 16: kdo.v1.lp.GetEtfLpStatusRequest
-	(*StreamEtfLpStatusUpdateRequest)(nil), // 17: kdo.v1.lp.StreamEtfLpStatusUpdateRequest
-	(*StartEtfLpRequest)(nil),              // 18: kdo.v1.lp.StartEtfLpRequest
-	(*StartEtfLpResponse)(nil),             // 19: kdo.v1.lp.StartEtfLpResponse
-	(*StopEtfLpRequest)(nil),               // 20: kdo.v1.lp.StopEtfLpRequest
-	(*StopEtfLpResponse)(nil),              // 21: kdo.v1.lp.StopEtfLpResponse
-	(*StreamLpEventsRequest)(nil),          // 22: kdo.v1.lp.StreamLpEventsRequest
-	(*GetUserOrderBookRequest)(nil),        // 23: kdo.v1.lp.GetUserOrderBookRequest
-	(*UserOrderbookData)(nil),              // 24: kdo.v1.lp.UserOrderbookData
+	(*EtfLpOHedge)(nil),                    // 6: kdo.v1.lp.EtfLpOHedge
+	(*FillStatistics)(nil),                 // 7: kdo.v1.lp.FillStatistics
+	(*OrderStats)(nil),                     // 8: kdo.v1.lp.OrderStats
+	(*TimeFrameStatus)(nil),                // 9: kdo.v1.lp.TimeFrameStatus
+	(*LpPricing)(nil),                      // 10: kdo.v1.lp.LpPricing
+	(*GetEtfLpRequest)(nil),                // 11: kdo.v1.lp.GetEtfLpRequest
+	(*ListEtfLpsRequest)(nil),              // 12: kdo.v1.lp.ListEtfLpsRequest
+	(*ListEtfLpsResponse)(nil),             // 13: kdo.v1.lp.ListEtfLpsResponse
+	(*ListEtfLpStatusesRequest)(nil),       // 14: kdo.v1.lp.ListEtfLpStatusesRequest
+	(*ListEtfLpStatusesResponse)(nil),      // 15: kdo.v1.lp.ListEtfLpStatusesResponse
+	(*UpdateEtfLpRequest)(nil),             // 16: kdo.v1.lp.UpdateEtfLpRequest
+	(*GetEtfLpStatusRequest)(nil),          // 17: kdo.v1.lp.GetEtfLpStatusRequest
+	(*StreamEtfLpStatusUpdateRequest)(nil), // 18: kdo.v1.lp.StreamEtfLpStatusUpdateRequest
+	(*StartEtfLpRequest)(nil),              // 19: kdo.v1.lp.StartEtfLpRequest
+	(*StartEtfLpResponse)(nil),             // 20: kdo.v1.lp.StartEtfLpResponse
+	(*StopEtfLpRequest)(nil),               // 21: kdo.v1.lp.StopEtfLpRequest
+	(*StopEtfLpResponse)(nil),              // 22: kdo.v1.lp.StopEtfLpResponse
+	(*StreamLpEventsRequest)(nil),          // 23: kdo.v1.lp.StreamLpEventsRequest
+	(*GetUserOrderBookRequest)(nil),        // 24: kdo.v1.lp.GetUserOrderBookRequest
+	(*UserOrderbookData)(nil),              // 25: kdo.v1.lp.UserOrderbookData
 }
 var file_kdo_v1_lp_proto_depIdxs = []int32{
 	5,  // 0: kdo.v1.lp.EtfLp.offset:type_name -> kdo.v1.lp.EtfLpOffset
 	1,  // 1: kdo.v1.lp.EtfLpStatus.state:type_name -> kdo.v1.lp.EtfLpState
-	9,  // 2: kdo.v1.lp.EtfLpStatus.pricing:type_name -> kdo.v1.lp.LpPricing
-	6,  // 3: kdo.v1.lp.EtfLpStatus.fill_statistics:type_name -> kdo.v1.lp.FillStatistics
+	10, // 2: kdo.v1.lp.EtfLpStatus.pricing:type_name -> kdo.v1.lp.LpPricing
+	7,  // 3: kdo.v1.lp.EtfLpStatus.fill_statistics:type_name -> kdo.v1.lp.FillStatistics
 	5,  // 4: kdo.v1.lp.EtfLpStatus.offset:type_name -> kdo.v1.lp.EtfLpOffset
-	1,  // 5: kdo.v1.lp.EtfLpStatusUpdate.state:type_name -> kdo.v1.lp.EtfLpState
-	9,  // 6: kdo.v1.lp.EtfLpStatusUpdate.pricing:type_name -> kdo.v1.lp.LpPricing
-	6,  // 7: kdo.v1.lp.EtfLpStatusUpdate.fill_statistics:type_name -> kdo.v1.lp.FillStatistics
-	5,  // 8: kdo.v1.lp.EtfLpStatusUpdate.offset:type_name -> kdo.v1.lp.EtfLpOffset
-	0,  // 9: kdo.v1.lp.EtfLpOffset.position_strategy:type_name -> kdo.v1.lp.PositionAdjustmentStrategy
-	2,  // 10: kdo.v1.lp.ListEtfLpsResponse.etf_lps:type_name -> kdo.v1.lp.EtfLp
-	3,  // 11: kdo.v1.lp.ListEtfLpStatusesResponse.etf_lp_statuses:type_name -> kdo.v1.lp.EtfLpStatus
-	5,  // 12: kdo.v1.lp.UpdateEtfLpRequest.offset:type_name -> kdo.v1.lp.EtfLpOffset
-	3,  // 13: kdo.v1.lp.StartEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
-	3,  // 14: kdo.v1.lp.StopEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
-	10, // 15: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
-	11, // 16: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
-	15, // 17: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
-	16, // 18: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
-	13, // 19: kdo.v1.lp.LpService.ListEtfLpStatuses:input_type -> kdo.v1.lp.ListEtfLpStatusesRequest
-	17, // 20: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:input_type -> kdo.v1.lp.StreamEtfLpStatusUpdateRequest
-	18, // 21: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
-	20, // 22: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
-	23, // 23: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	23, // 24: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	2,  // 25: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
-	12, // 26: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
-	2,  // 27: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
-	3,  // 28: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
-	14, // 29: kdo.v1.lp.LpService.ListEtfLpStatuses:output_type -> kdo.v1.lp.ListEtfLpStatusesResponse
-	4,  // 30: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:output_type -> kdo.v1.lp.EtfLpStatusUpdate
-	19, // 31: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
-	21, // 32: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
-	24, // 33: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	24, // 34: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	25, // [25:35] is the sub-list for method output_type
-	15, // [15:25] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	6,  // 5: kdo.v1.lp.EtfLpStatus.hedge:type_name -> kdo.v1.lp.EtfLpOHedge
+	1,  // 6: kdo.v1.lp.EtfLpStatusUpdate.state:type_name -> kdo.v1.lp.EtfLpState
+	10, // 7: kdo.v1.lp.EtfLpStatusUpdate.pricing:type_name -> kdo.v1.lp.LpPricing
+	7,  // 8: kdo.v1.lp.EtfLpStatusUpdate.fill_statistics:type_name -> kdo.v1.lp.FillStatistics
+	5,  // 9: kdo.v1.lp.EtfLpStatusUpdate.offset:type_name -> kdo.v1.lp.EtfLpOffset
+	0,  // 10: kdo.v1.lp.EtfLpOffset.position_strategy:type_name -> kdo.v1.lp.PositionAdjustmentStrategy
+	2,  // 11: kdo.v1.lp.ListEtfLpsResponse.etf_lps:type_name -> kdo.v1.lp.EtfLp
+	3,  // 12: kdo.v1.lp.ListEtfLpStatusesResponse.etf_lp_statuses:type_name -> kdo.v1.lp.EtfLpStatus
+	5,  // 13: kdo.v1.lp.UpdateEtfLpRequest.offset:type_name -> kdo.v1.lp.EtfLpOffset
+	3,  // 14: kdo.v1.lp.StartEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
+	3,  // 15: kdo.v1.lp.StopEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
+	11, // 16: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
+	12, // 17: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
+	16, // 18: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
+	17, // 19: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
+	14, // 20: kdo.v1.lp.LpService.ListEtfLpStatuses:input_type -> kdo.v1.lp.ListEtfLpStatusesRequest
+	18, // 21: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:input_type -> kdo.v1.lp.StreamEtfLpStatusUpdateRequest
+	19, // 22: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
+	21, // 23: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
+	24, // 24: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	24, // 25: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	2,  // 26: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
+	13, // 27: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
+	2,  // 28: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
+	3,  // 29: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
+	15, // 30: kdo.v1.lp.LpService.ListEtfLpStatuses:output_type -> kdo.v1.lp.ListEtfLpStatusesResponse
+	4,  // 31: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:output_type -> kdo.v1.lp.EtfLpStatusUpdate
+	20, // 32: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
+	22, // 33: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
+	25, // 34: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	25, // 35: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	26, // [26:36] is the sub-list for method output_type
+	16, // [16:26] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_kdo_v1_lp_proto_init() }
@@ -2427,7 +2504,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FillStatistics); i {
+			switch v := v.(*EtfLpOHedge); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2439,7 +2516,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OrderStats); i {
+			switch v := v.(*FillStatistics); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2451,7 +2528,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TimeFrameStatus); i {
+			switch v := v.(*OrderStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2463,7 +2540,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*LpPricing); i {
+			switch v := v.(*TimeFrameStatus); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2475,7 +2552,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetEtfLpRequest); i {
+			switch v := v.(*LpPricing); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2487,7 +2564,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListEtfLpsRequest); i {
+			switch v := v.(*GetEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2499,7 +2576,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListEtfLpsResponse); i {
+			switch v := v.(*ListEtfLpsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2511,7 +2588,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListEtfLpStatusesRequest); i {
+			switch v := v.(*ListEtfLpsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2523,7 +2600,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListEtfLpStatusesResponse); i {
+			switch v := v.(*ListEtfLpStatusesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2535,7 +2612,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateEtfLpRequest); i {
+			switch v := v.(*ListEtfLpStatusesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2547,7 +2624,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetEtfLpStatusRequest); i {
+			switch v := v.(*UpdateEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2559,7 +2636,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamEtfLpStatusUpdateRequest); i {
+			switch v := v.(*GetEtfLpStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2571,7 +2648,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartEtfLpRequest); i {
+			switch v := v.(*StreamEtfLpStatusUpdateRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2583,7 +2660,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartEtfLpResponse); i {
+			switch v := v.(*StartEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2595,7 +2672,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopEtfLpRequest); i {
+			switch v := v.(*StartEtfLpResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2607,7 +2684,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopEtfLpResponse); i {
+			switch v := v.(*StopEtfLpRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2619,7 +2696,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamLpEventsRequest); i {
+			switch v := v.(*StopEtfLpResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2631,7 +2708,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUserOrderBookRequest); i {
+			switch v := v.(*StreamLpEventsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2643,6 +2720,18 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetUserOrderBookRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_kdo_v1_lp_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserOrderbookData); i {
 			case 0:
 				return &v.state
@@ -2656,9 +2745,9 @@ func file_kdo_v1_lp_proto_init() {
 		}
 	}
 	file_kdo_v1_lp_proto_msgTypes[2].OneofWrappers = []interface{}{}
-	file_kdo_v1_lp_proto_msgTypes[9].OneofWrappers = []interface{}{}
-	file_kdo_v1_lp_proto_msgTypes[11].OneofWrappers = []interface{}{}
-	file_kdo_v1_lp_proto_msgTypes[13].OneofWrappers = []interface{}{
+	file_kdo_v1_lp_proto_msgTypes[10].OneofWrappers = []interface{}{}
+	file_kdo_v1_lp_proto_msgTypes[12].OneofWrappers = []interface{}{}
+	file_kdo_v1_lp_proto_msgTypes[14].OneofWrappers = []interface{}{
 		(*UpdateEtfLpRequest_Quantity)(nil),
 		(*UpdateEtfLpRequest_Depth)(nil),
 		(*UpdateEtfLpRequest_Offset)(nil),
@@ -2669,7 +2758,7 @@ func file_kdo_v1_lp_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_kdo_v1_lp_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   23,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

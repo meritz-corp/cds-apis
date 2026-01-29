@@ -56,6 +56,9 @@ pub struct EtfLpStatus {
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
     pub offset: ::core::option::Option<EtfLpOffset>,
+    ///
+    #[prost(message, optional, tag="12")]
+    pub hedge: ::core::option::Option<EtfLpOHedge>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -118,6 +121,17 @@ pub struct EtfLpOffset {
     pub position_threshold: i64,
     #[prost(double, tag="20")]
     pub position_adjustment_step: f64,
+}
+/// ETF LP 헷지 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfLpOHedge {
+    /// 헷지 대상 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 헷지 1주 주문당 ETF 체결수량 기준
+    #[prost(int64, tag="2")]
+    pub filled_quantity_per_hedge: i64,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]

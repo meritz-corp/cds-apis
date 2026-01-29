@@ -145,6 +145,9 @@ message EtfLpStatus {
 
   // 동적 offset 조정 설정 (optional)
   EtfLpOffset offset = 11;
+
+  // 헷지 정보
+  EtfLpOHedge hedge = 12;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -208,6 +211,16 @@ message EtfLpOffset {
   int64 position_threshold = 19;
   double position_adjustment_step = 20;
 }
+
+// ETF LP 헷지 설정
+message EtfLpOHedge {
+  // 헷지 대상 종목 심볼
+  string symbol = 1;
+
+  // 헷지 1주 주문당 ETF 체결수량 기준
+  int64 filled_quantity_per_hedge = 2;
+}
+
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 message FillStatistics {
