@@ -424,6 +424,47 @@
         ]
       }
     },
+    "/v1/market/{stock}/orderbook:stream": {
+      "get": {
+        "summary": "주식 주문장 데이터를 스트리밍",
+        "operationId": "MarketService_StreamStocksOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/marketEtfOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of marketEtfOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stock",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "stocks/[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
     "/v1/market/{stock}/{fund}/user-orderbook": {
       "get": {
         "summary": "사용자 주식 주문장 업데이트를 가져오기",

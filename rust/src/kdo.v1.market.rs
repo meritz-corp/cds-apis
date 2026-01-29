@@ -119,6 +119,13 @@ pub struct StreamFuturesOrderbookRequest {
     #[prost(string, tag="1")]
     pub future: ::prost::alloc::string::String,
 }
+/// 선물 주문장 스트리밍 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamStockOrderbookRequest {
+    #[prost(string, tag="1")]
+    pub stock: ::prost::alloc::string::String,
+}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamEtfNavRequest {

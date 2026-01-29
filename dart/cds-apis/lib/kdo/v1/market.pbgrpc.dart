@@ -44,6 +44,11 @@ class MarketServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamFuturesOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 주식 주문장 데이터를 스트리밍
+  $grpc.ResponseStream<$0.EtfOrderbookData> streamStocksOrderbook($0.StreamStockOrderbookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamStocksOrderbook, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// ETF NAV 데이터를 스트리밍
   $grpc.ResponseStream<$0.EtfNav> streamEtfNav($0.StreamEtfNavRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamEtfNav, $async.Stream.fromIterable([request]), options: options);
@@ -104,6 +109,10 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/StreamFuturesOrderbook',
       ($0.StreamFuturesOrderbookRequest value) => value.writeToBuffer(),
       $0.FuturesOrderbookData.fromBuffer);
+  static final _$streamStocksOrderbook = $grpc.ClientMethod<$0.StreamStockOrderbookRequest, $0.EtfOrderbookData>(
+      '/kdo.v1.market.MarketService/StreamStocksOrderbook',
+      ($0.StreamStockOrderbookRequest value) => value.writeToBuffer(),
+      $0.EtfOrderbookData.fromBuffer);
   static final _$streamEtfNav = $grpc.ClientMethod<$0.StreamEtfNavRequest, $0.EtfNav>(
       '/kdo.v1.market.MarketService/StreamEtfNav',
       ($0.StreamEtfNavRequest value) => value.writeToBuffer(),
@@ -165,6 +174,13 @@ abstract class MarketServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamFuturesOrderbookRequest.fromBuffer(value),
         ($0.FuturesOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamStockOrderbookRequest, $0.EtfOrderbookData>(
+        'StreamStocksOrderbook',
+        streamStocksOrderbook_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamStockOrderbookRequest.fromBuffer(value),
+        ($0.EtfOrderbookData value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StreamEtfNavRequest, $0.EtfNav>(
         'StreamEtfNav',
         streamEtfNav_Pre,
@@ -248,6 +264,12 @@ abstract class MarketServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.FuturesOrderbookData> streamFuturesOrderbook($grpc.ServiceCall call, $0.StreamFuturesOrderbookRequest request);
+
+  $async.Stream<$0.EtfOrderbookData> streamStocksOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamStockOrderbookRequest> $request) async* {
+    yield* streamStocksOrderbook($call, await $request);
+  }
+
+  $async.Stream<$0.EtfOrderbookData> streamStocksOrderbook($grpc.ServiceCall call, $0.StreamStockOrderbookRequest request);
 
   $async.Stream<$0.EtfNav> streamEtfNav_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfNavRequest> $request) async* {
     yield* streamEtfNav($call, await $request);

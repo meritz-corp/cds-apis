@@ -176,6 +176,19 @@ final $typed_data.Uint8List streamFuturesOrderbookRequestDescriptor = $convert.b
     'Ch1TdHJlYW1GdXR1cmVzT3JkZXJib29rUmVxdWVzdBI3CgZmdXR1cmUYASABKAlCH+JBAQL6QR'
     'gKFmtkby5jZHNhcGlzLnh5ei9GdXR1cmVSBmZ1dHVyZQ==');
 
+@$core.Deprecated('Use streamStockOrderbookRequestDescriptor instead')
+const StreamStockOrderbookRequest$json = {
+  '1': 'StreamStockOrderbookRequest',
+  '2': [
+    {'1': 'stock', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'stock'},
+  ],
+};
+
+/// Descriptor for `StreamStockOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamStockOrderbookRequestDescriptor = $convert.base64Decode(
+    'ChtTdHJlYW1TdG9ja09yZGVyYm9va1JlcXVlc3QSNAoFc3RvY2sYASABKAlCHuJBAQL6QRcKFW'
+    'tkby5jZHNhcGlzLnh5ei9TdG9ja1IFc3RvY2s=');
+
 @$core.Deprecated('Use streamEtfNavRequestDescriptor instead')
 const StreamEtfNavRequest$json = {
   '1': 'StreamEtfNavRequest',

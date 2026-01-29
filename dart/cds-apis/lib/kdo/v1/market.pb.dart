@@ -536,6 +536,53 @@ class StreamFuturesOrderbookRequest extends $pb.GeneratedMessage {
   void clearFuture() => $_clearField(1);
 }
 
+/// 선물 주문장 스트리밍 요청
+class StreamStockOrderbookRequest extends $pb.GeneratedMessage {
+  factory StreamStockOrderbookRequest({
+    $core.String? stock,
+  }) {
+    final result = create();
+    if (stock != null) result.stock = stock;
+    return result;
+  }
+
+  StreamStockOrderbookRequest._();
+
+  factory StreamStockOrderbookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamStockOrderbookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamStockOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'stock')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamStockOrderbookRequest clone() => StreamStockOrderbookRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamStockOrderbookRequest copyWith(void Function(StreamStockOrderbookRequest) updates) => super.copyWith((message) => updates(message as StreamStockOrderbookRequest)) as StreamStockOrderbookRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamStockOrderbookRequest create() => StreamStockOrderbookRequest._();
+  @$core.override
+  StreamStockOrderbookRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamStockOrderbookRequest> createRepeated() => $pb.PbList<StreamStockOrderbookRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamStockOrderbookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamStockOrderbookRequest>(create);
+  static StreamStockOrderbookRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get stock => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set stock($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStock() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStock() => $_clearField(1);
+}
+
 class StreamEtfNavRequest extends $pb.GeneratedMessage {
   factory StreamEtfNavRequest({
     $core.String? etf,

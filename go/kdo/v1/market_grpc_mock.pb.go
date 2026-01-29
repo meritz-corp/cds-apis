@@ -497,6 +497,248 @@ func (mr *MockMarketService_StreamFuturesOrderbookServerMockRecorder) SetTrailer
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockMarketService_StreamFuturesOrderbookServer)(nil).SetTrailer), arg0)
 }
 
+// MockMarketService_StreamStocksOrderbookClient is a mock of MarketService_StreamStocksOrderbookClient interface.
+type MockMarketService_StreamStocksOrderbookClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockMarketService_StreamStocksOrderbookClientMockRecorder
+}
+
+// MockMarketService_StreamStocksOrderbookClientMockRecorder is the mock recorder for MockMarketService_StreamStocksOrderbookClient.
+type MockMarketService_StreamStocksOrderbookClientMockRecorder struct {
+	mock *MockMarketService_StreamStocksOrderbookClient
+}
+
+// NewMockMarketService_StreamStocksOrderbookClient creates a new mock instance.
+func NewMockMarketService_StreamStocksOrderbookClient(ctrl *gomock.Controller) *MockMarketService_StreamStocksOrderbookClient {
+	mock := &MockMarketService_StreamStocksOrderbookClient{ctrl: ctrl}
+	mock.recorder = &MockMarketService_StreamStocksOrderbookClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockMarketService_StreamStocksOrderbookClient) EXPECT() *MockMarketService_StreamStocksOrderbookClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockMarketService_StreamStocksOrderbookClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockMarketService_StreamStocksOrderbookClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockMarketService_StreamStocksOrderbookClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookClient) Recv() (*EtfOrderbookData, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*EtfOrderbookData)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockMarketService_StreamStocksOrderbookClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockMarketService_StreamStocksOrderbookClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockMarketService_StreamStocksOrderbookClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockMarketService_StreamStocksOrderbookClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookClient)(nil).Trailer))
+}
+
+// MockMarketService_StreamStocksOrderbookServer is a mock of MarketService_StreamStocksOrderbookServer interface.
+type MockMarketService_StreamStocksOrderbookServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockMarketService_StreamStocksOrderbookServerMockRecorder
+}
+
+// MockMarketService_StreamStocksOrderbookServerMockRecorder is the mock recorder for MockMarketService_StreamStocksOrderbookServer.
+type MockMarketService_StreamStocksOrderbookServerMockRecorder struct {
+	mock *MockMarketService_StreamStocksOrderbookServer
+}
+
+// NewMockMarketService_StreamStocksOrderbookServer creates a new mock instance.
+func NewMockMarketService_StreamStocksOrderbookServer(ctrl *gomock.Controller) *MockMarketService_StreamStocksOrderbookServer {
+	mock := &MockMarketService_StreamStocksOrderbookServer{ctrl: ctrl}
+	mock.recorder = &MockMarketService_StreamStocksOrderbookServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockMarketService_StreamStocksOrderbookServer) EXPECT() *MockMarketService_StreamStocksOrderbookServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockMarketService_StreamStocksOrderbookServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockMarketService_StreamStocksOrderbookServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookServer) Send(arg0 *EtfOrderbookData) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockMarketService_StreamStocksOrderbookServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockMarketService_StreamStocksOrderbookServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockMarketService_StreamStocksOrderbookServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockMarketService_StreamStocksOrderbookServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockMarketService_StreamStocksOrderbookServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockMarketService_StreamStocksOrderbookServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockMarketService_StreamStocksOrderbookServer)(nil).SetTrailer), arg0)
+}
+
 // MockMarketService_StreamEtfNavClient is a mock of MarketService_StreamEtfNavClient interface.
 type MockMarketService_StreamEtfNavClient struct {
 	ctrl     *gomock.Controller
@@ -1910,6 +2152,26 @@ func (mr *MockMarketServiceClientMockRecorder) StreamRawMessages(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamRawMessages", reflect.TypeOf((*MockMarketServiceClient)(nil).StreamRawMessages), varargs...)
 }
 
+// StreamStocksOrderbook mocks base method.
+func (m *MockMarketServiceClient) StreamStocksOrderbook(ctx context.Context, in *StreamStockOrderbookRequest, opts ...grpc.CallOption) (MarketService_StreamStocksOrderbookClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamStocksOrderbook", varargs...)
+	ret0, _ := ret[0].(MarketService_StreamStocksOrderbookClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamStocksOrderbook indicates an expected call of StreamStocksOrderbook.
+func (mr *MockMarketServiceClientMockRecorder) StreamStocksOrderbook(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamStocksOrderbook", reflect.TypeOf((*MockMarketServiceClient)(nil).StreamStocksOrderbook), varargs...)
+}
+
 // StreamUserEtfOrderbook mocks base method.
 func (m *MockMarketServiceClient) StreamUserEtfOrderbook(ctx context.Context, in *GetUserEtfOrderBookRequest, opts ...grpc.CallOption) (MarketService_StreamUserEtfOrderbookClient, error) {
 	m.ctrl.T.Helper()
@@ -2122,6 +2384,20 @@ func (m *MockMarketServiceServer) StreamRawMessages(blob *StreamRawMessagesReque
 func (mr *MockMarketServiceServerMockRecorder) StreamRawMessages(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamRawMessages", reflect.TypeOf((*MockMarketServiceServer)(nil).StreamRawMessages), blob, server)
+}
+
+// StreamStocksOrderbook mocks base method.
+func (m *MockMarketServiceServer) StreamStocksOrderbook(blob *StreamStockOrderbookRequest, server MarketService_StreamStocksOrderbookServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamStocksOrderbook", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamStocksOrderbook indicates an expected call of StreamStocksOrderbook.
+func (mr *MockMarketServiceServerMockRecorder) StreamStocksOrderbook(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamStocksOrderbook", reflect.TypeOf((*MockMarketServiceServer)(nil).StreamStocksOrderbook), blob, server)
 }
 
 // StreamUserEtfOrderbook mocks base method.

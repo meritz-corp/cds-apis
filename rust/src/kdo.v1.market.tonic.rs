@@ -141,6 +141,36 @@ pub mod market_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn stream_stocks_orderbook(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamStockOrderbookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::EtfOrderbookData>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/StreamStocksOrderbook",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.market.MarketService",
+                        "StreamStocksOrderbook",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         pub async fn stream_etf_nav(
             &mut self,
             request: impl tonic::IntoRequest<super::StreamEtfNavRequest>,
@@ -462,6 +492,19 @@ pub mod market_service_server {
             tonic::Response<Self::StreamFuturesOrderbookStream>,
             tonic::Status,
         >;
+        /// Server streaming response type for the StreamStocksOrderbook method.
+        type StreamStocksOrderbookStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::EtfOrderbookData, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_stocks_orderbook(
+            &self,
+            request: tonic::Request<super::StreamStockOrderbookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamStocksOrderbookStream>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the StreamEtfNav method.
         type StreamEtfNavStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::EtfNav, tonic::Status>,
@@ -723,6 +766,57 @@ pub mod market_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StreamFuturesOrderbookSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/StreamStocksOrderbook" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamStocksOrderbookSvc<T: MarketService>(pub Arc<T>);
+                    impl<
+                        T: MarketService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamStockOrderbookRequest,
+                    > for StreamStocksOrderbookSvc<T> {
+                        type Response = super::EtfOrderbookData;
+                        type ResponseStream = T::StreamStocksOrderbookStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamStockOrderbookRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::stream_stocks_orderbook(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamStocksOrderbookSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

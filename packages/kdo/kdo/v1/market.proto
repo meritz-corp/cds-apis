@@ -30,6 +30,13 @@ service MarketService {
         };
     }
 
+  // 주식 주문장 데이터를 스트리밍
+  rpc StreamStocksOrderbook(StreamStockOrderbookRequest) returns (stream EtfOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/market/{stock=stocks/*}/orderbook:stream"
+    };
+  }
+
     // ETF NAV 데이터를 스트리밍
     rpc StreamEtfNav(StreamEtfNavRequest) returns (stream EtfNav) {  // kdo.v1.etf.EtfNav
         option (google.api.http) = {
@@ -242,6 +249,16 @@ message StreamFuturesOrderbookRequest {
             type: "kdo.cdsapis.xyz/Future"
         }
     ];
+}
+
+// 선물 주문장 스트리밍 요청
+message StreamStockOrderbookRequest {
+  string stock = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Stock"
+    }
+  ];
 }
 
 message StreamEtfNavRequest {
