@@ -31,6 +31,152 @@ pub mod inventory {
         Deriv(super::DerivData),
     }
 }
+/// 원장 재고 정보 (주식/파생 통합)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LedgerInventory {
+    /// 종목 코드
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 재고 유형
+    #[prost(enumeration="InventoryType", tag="3")]
+    pub inventory_type: i32,
+    /// 유형별 원장 데이터
+    #[prost(oneof="ledger_inventory::Data", tags="10, 11")]
+    pub data: ::core::option::Option<ledger_inventory::Data>,
+}
+/// Nested message and enum types in `LedgerInventory`.
+pub mod ledger_inventory {
+    /// 유형별 원장 데이터
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Data {
+        /// 주식 원장 데이터
+        #[prost(message, tag="10")]
+        Stock(super::LedgerStockData),
+        /// 파생상품 원장 데이터
+        #[prost(message, tag="11")]
+        Deriv(super::LedgerDerivData),
+    }
+}
+/// 주식 원장 재고 데이터
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LedgerStockData {
+    /// 장부수량
+    #[prost(int64, tag="1")]
+    pub book_quantity: i64,
+    /// 장부금액
+    #[prost(int64, tag="2")]
+    pub book_amount: i64,
+    /// 대여수량
+    #[prost(int64, tag="3")]
+    pub lending_quantity: i64,
+    /// 대주수량
+    #[prost(int64, tag="4")]
+    pub borrowing_quantity: i64,
+    /// 매수청구수량
+    #[prost(int64, tag="5")]
+    pub purchase_claim_quantity: i64,
+    /// 담보제공수량
+    #[prost(int64, tag="6")]
+    pub collateral_quantity: i64,
+    /// 차입수량
+    #[prost(int64, tag="7")]
+    pub borrow_quantity: i64,
+    /// 차입잔고수량
+    #[prost(int64, tag="8")]
+    pub borrow_balance_quantity: i64,
+    /// 차입장부수량
+    #[prost(int64, tag="9")]
+    pub borrow_book_quantity: i64,
+    /// 차입장부금액
+    #[prost(int64, tag="10")]
+    pub borrow_book_amount: i64,
+    /// 차입대여수량
+    #[prost(int64, tag="11")]
+    pub borrow_lending_quantity: i64,
+    /// 차입담보수량
+    #[prost(int64, tag="12")]
+    pub borrow_collateral_quantity: i64,
+    /// 신청수량
+    #[prost(int64, tag="13")]
+    pub application_quantity: i64,
+    /// 주문가능수량
+    #[prost(int64, tag="14")]
+    pub orderable_quantity: i64,
+    /// 전일장부수량
+    #[prost(int64, tag="15")]
+    pub prev_book_quantity: i64,
+    /// 전일매도장부수량
+    #[prost(int64, tag="16")]
+    pub prev_borrow_book_quantity: i64,
+    /// 결제잔고
+    #[prost(int64, tag="17")]
+    pub settlement_balance: i64,
+    /// 결제매도잔고
+    #[prost(int64, tag="18")]
+    pub settlement_borrow_balance: i64,
+}
+/// 파생상품 원장 재고 데이터
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LedgerDerivData {
+    /// 펀드명
+    #[prost(string, tag="1")]
+    pub fund_name: ::prost::alloc::string::String,
+    /// 한글종목명
+    #[prost(string, tag="2")]
+    pub item_name: ::prost::alloc::string::String,
+    /// 포지션구분명
+    #[prost(string, tag="3")]
+    pub position_type: ::prost::alloc::string::String,
+    /// 잔고수량
+    #[prost(int64, tag="4")]
+    pub balance_quantity: i64,
+    /// 매입단가
+    #[prost(double, tag="5")]
+    pub entry_price: f64,
+    /// 장부금액
+    #[prost(int64, tag="6")]
+    pub book_amount: i64,
+    /// 현재가격
+    #[prost(double, tag="7")]
+    pub current_price: f64,
+    /// 평가장부금액
+    #[prost(int64, tag="8")]
+    pub valuation_amount: i64,
+    /// 당일평가손익금액
+    #[prost(int64, tag="9")]
+    pub daily_pnl: i64,
+    /// 정산차금
+    #[prost(int64, tag="10")]
+    pub settlement_diff: i64,
+    /// 수수료금액
+    #[prost(int64, tag="11")]
+    pub fee_amount: i64,
+    /// 기초자산종목코드
+    #[prost(string, tag="12")]
+    pub underlying_code: ::prost::alloc::string::String,
+    /// 한글종목약어명
+    #[prost(string, tag="13")]
+    pub item_short_name: ::prost::alloc::string::String,
+    /// 거래승수
+    #[prost(double, tag="14")]
+    pub multiple: f64,
+    /// 스프레드근월물종목코드
+    #[prost(string, tag="15")]
+    pub spread_near_month_code: ::prost::alloc::string::String,
+    /// 한도금액
+    #[prost(int64, tag="16")]
+    pub limit_amount: i64,
+    /// 잔여원화금액
+    #[prost(int64, tag="17")]
+    pub remaining_krw_amount: i64,
+}
 /// 주식 재고 데이터
 /// 일반가용과 차입가용의 이원화 구조
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -153,6 +299,73 @@ pub struct ListInventoriesResponse {
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
+}
+/// GetLedgerInventory 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLedgerInventoryRequest {
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// SyncInventoryFromLedger 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SyncInventoryFromLedgerRequest {
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 동기화할 종목 코드 목록 (비어있을 경우 전체 종목 동기화)
+    /// 예: \["005930", "000660"\]
+    /// "*" 입력 시 전체 종목 동기화
+    #[prost(string, repeated, tag="2")]
+    pub symbols: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// ListLedgerInventories 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListLedgerInventoriesRequest {
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 페이지 크기 (optional)
+    #[prost(uint32, optional, tag="2")]
+    pub page_size: ::core::option::Option<u32>,
+    /// 페이지 토큰 (optional)
+    #[prost(string, optional, tag="3")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// 필터링 조건 (optional, AIP-160)
+    ///
+    /// Available Fields:
+    /// * symbol - 종목 코드
+    /// * inventory_type - 재고 유형 (INVENTORY_TYPE_STOCK, INVENTORY_TYPE_DERIV)
+    ///
+    /// Examples:
+    /// * symbol:"005930"
+    /// * inventory_type=INVENTORY_TYPE_STOCK
+    #[prost(string, tag="4")]
+    pub filter: ::prost::alloc::string::String,
+}
+/// ListLedgerInventories 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListLedgerInventoriesResponse {
+    /// 원장 재고 목록
+    #[prost(message, repeated, tag="1")]
+    pub ledger_inventories: ::prost::alloc::vec::Vec<LedgerInventory>,
+    /// 다음 페이지 토큰
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
+/// SyncInventoryFromLedger 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SyncInventoryFromLedgerResponse {
+    /// 동기화된 재고 목록
+    #[prost(message, repeated, tag="1")]
+    pub inventories: ::prost::alloc::vec::Vec<Inventory>,
+    /// 동기화된 종목 수
+    #[prost(int32, tag="2")]
+    pub synced_count: i32,
 }
 /// 재고 유형
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

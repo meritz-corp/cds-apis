@@ -539,6 +539,26 @@ func (mr *MockInventoryServiceClientMockRecorder) GetInventory(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInventory", reflect.TypeOf((*MockInventoryServiceClient)(nil).GetInventory), varargs...)
 }
 
+// GetLedgerInventory mocks base method.
+func (m *MockInventoryServiceClient) GetLedgerInventory(ctx context.Context, in *GetLedgerInventoryRequest, opts ...grpc.CallOption) (*LedgerInventory, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetLedgerInventory", varargs...)
+	ret0, _ := ret[0].(*LedgerInventory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLedgerInventory indicates an expected call of GetLedgerInventory.
+func (mr *MockInventoryServiceClientMockRecorder) GetLedgerInventory(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLedgerInventory", reflect.TypeOf((*MockInventoryServiceClient)(nil).GetLedgerInventory), varargs...)
+}
+
 // ListInventories mocks base method.
 func (m *MockInventoryServiceClient) ListInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (*ListInventoriesResponse, error) {
 	m.ctrl.T.Helper()
@@ -557,6 +577,26 @@ func (mr *MockInventoryServiceClientMockRecorder) ListInventories(ctx, in interf
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListInventories", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListInventories), varargs...)
+}
+
+// ListLedgerInventories mocks base method.
+func (m *MockInventoryServiceClient) ListLedgerInventories(ctx context.Context, in *ListLedgerInventoriesRequest, opts ...grpc.CallOption) (*ListLedgerInventoriesResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListLedgerInventories", varargs...)
+	ret0, _ := ret[0].(*ListLedgerInventoriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListLedgerInventories indicates an expected call of ListLedgerInventories.
+func (mr *MockInventoryServiceClientMockRecorder) ListLedgerInventories(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListLedgerInventories), varargs...)
 }
 
 // StreamInventories mocks base method.
@@ -599,6 +639,26 @@ func (mr *MockInventoryServiceClientMockRecorder) StreamInventory(ctx, in interf
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamInventory", reflect.TypeOf((*MockInventoryServiceClient)(nil).StreamInventory), varargs...)
 }
 
+// SyncInventoryFromLedger mocks base method.
+func (m *MockInventoryServiceClient) SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest, opts ...grpc.CallOption) (*SyncInventoryFromLedgerResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SyncInventoryFromLedger", varargs...)
+	ret0, _ := ret[0].(*SyncInventoryFromLedgerResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SyncInventoryFromLedger indicates an expected call of SyncInventoryFromLedger.
+func (mr *MockInventoryServiceClientMockRecorder) SyncInventoryFromLedger(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceClient)(nil).SyncInventoryFromLedger), varargs...)
+}
+
 // MockInventoryServiceServer is a mock of InventoryServiceServer interface.
 type MockInventoryServiceServer struct {
 	ctrl     *gomock.Controller
@@ -637,6 +697,21 @@ func (mr *MockInventoryServiceServerMockRecorder) GetInventory(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInventory", reflect.TypeOf((*MockInventoryServiceServer)(nil).GetInventory), ctx, in)
 }
 
+// GetLedgerInventory mocks base method.
+func (m *MockInventoryServiceServer) GetLedgerInventory(ctx context.Context, in *GetLedgerInventoryRequest) (*LedgerInventory, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLedgerInventory", ctx, in)
+	ret0, _ := ret[0].(*LedgerInventory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLedgerInventory indicates an expected call of GetLedgerInventory.
+func (mr *MockInventoryServiceServerMockRecorder) GetLedgerInventory(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLedgerInventory", reflect.TypeOf((*MockInventoryServiceServer)(nil).GetLedgerInventory), ctx, in)
+}
+
 // ListInventories mocks base method.
 func (m *MockInventoryServiceServer) ListInventories(ctx context.Context, in *ListInventoriesRequest) (*ListInventoriesResponse, error) {
 	m.ctrl.T.Helper()
@@ -650,6 +725,21 @@ func (m *MockInventoryServiceServer) ListInventories(ctx context.Context, in *Li
 func (mr *MockInventoryServiceServerMockRecorder) ListInventories(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListInventories", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListInventories), ctx, in)
+}
+
+// ListLedgerInventories mocks base method.
+func (m *MockInventoryServiceServer) ListLedgerInventories(ctx context.Context, in *ListLedgerInventoriesRequest) (*ListLedgerInventoriesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListLedgerInventories", ctx, in)
+	ret0, _ := ret[0].(*ListLedgerInventoriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListLedgerInventories indicates an expected call of ListLedgerInventories.
+func (mr *MockInventoryServiceServerMockRecorder) ListLedgerInventories(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListLedgerInventories), ctx, in)
 }
 
 // StreamInventories mocks base method.
@@ -678,4 +768,19 @@ func (m *MockInventoryServiceServer) StreamInventory(blob *GetInventoryRequest, 
 func (mr *MockInventoryServiceServerMockRecorder) StreamInventory(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamInventory", reflect.TypeOf((*MockInventoryServiceServer)(nil).StreamInventory), blob, server)
+}
+
+// SyncInventoryFromLedger mocks base method.
+func (m *MockInventoryServiceServer) SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest) (*SyncInventoryFromLedgerResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SyncInventoryFromLedger", ctx, in)
+	ret0, _ := ret[0].(*SyncInventoryFromLedgerResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SyncInventoryFromLedger indicates an expected call of SyncInventoryFromLedger.
+func (mr *MockInventoryServiceServerMockRecorder) SyncInventoryFromLedger(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceServer)(nil).SyncInventoryFromLedger), ctx, in)
 }

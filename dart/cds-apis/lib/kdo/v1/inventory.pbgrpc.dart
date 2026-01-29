@@ -53,6 +53,21 @@ class InventoryServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamInventories, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 원장 재고 목록 조회
+  $grpc.ResponseFuture<$0.ListLedgerInventoriesResponse> listLedgerInventories($0.ListLedgerInventoriesRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listLedgerInventories, request, options: options);
+  }
+
+  /// 원장 재고 조회 (주식/파생 통합)
+  $grpc.ResponseFuture<$0.LedgerInventory> getLedgerInventory($0.GetLedgerInventoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getLedgerInventory, request, options: options);
+  }
+
+  /// 원장에서 재고 동기화
+  $grpc.ResponseFuture<$0.SyncInventoryFromLedgerResponse> syncInventoryFromLedger($0.SyncInventoryFromLedgerRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$syncInventoryFromLedger, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getInventory = $grpc.ClientMethod<$0.GetInventoryRequest, $0.Inventory>(
@@ -71,6 +86,18 @@ class InventoryServiceClient extends $grpc.Client {
       '/kdo.v1.inventory.InventoryService/StreamInventories',
       ($0.ListInventoriesRequest value) => value.writeToBuffer(),
       $0.ListInventoriesResponse.fromBuffer);
+  static final _$listLedgerInventories = $grpc.ClientMethod<$0.ListLedgerInventoriesRequest, $0.ListLedgerInventoriesResponse>(
+      '/kdo.v1.inventory.InventoryService/ListLedgerInventories',
+      ($0.ListLedgerInventoriesRequest value) => value.writeToBuffer(),
+      $0.ListLedgerInventoriesResponse.fromBuffer);
+  static final _$getLedgerInventory = $grpc.ClientMethod<$0.GetLedgerInventoryRequest, $0.LedgerInventory>(
+      '/kdo.v1.inventory.InventoryService/GetLedgerInventory',
+      ($0.GetLedgerInventoryRequest value) => value.writeToBuffer(),
+      $0.LedgerInventory.fromBuffer);
+  static final _$syncInventoryFromLedger = $grpc.ClientMethod<$0.SyncInventoryFromLedgerRequest, $0.SyncInventoryFromLedgerResponse>(
+      '/kdo.v1.inventory.InventoryService/SyncInventoryFromLedger',
+      ($0.SyncInventoryFromLedgerRequest value) => value.writeToBuffer(),
+      $0.SyncInventoryFromLedgerResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.inventory.InventoryService')
@@ -106,6 +133,27 @@ abstract class InventoryServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.ListInventoriesRequest.fromBuffer(value),
         ($0.ListInventoriesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListLedgerInventoriesRequest, $0.ListLedgerInventoriesResponse>(
+        'ListLedgerInventories',
+        listLedgerInventories_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListLedgerInventoriesRequest.fromBuffer(value),
+        ($0.ListLedgerInventoriesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetLedgerInventoryRequest, $0.LedgerInventory>(
+        'GetLedgerInventory',
+        getLedgerInventory_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetLedgerInventoryRequest.fromBuffer(value),
+        ($0.LedgerInventory value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SyncInventoryFromLedgerRequest, $0.SyncInventoryFromLedgerResponse>(
+        'SyncInventoryFromLedger',
+        syncInventoryFromLedger_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SyncInventoryFromLedgerRequest.fromBuffer(value),
+        ($0.SyncInventoryFromLedgerResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Inventory> getInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetInventoryRequest> $request) async {
@@ -131,5 +179,23 @@ abstract class InventoryServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.ListInventoriesResponse> streamInventories($grpc.ServiceCall call, $0.ListInventoriesRequest request);
+
+  $async.Future<$0.ListLedgerInventoriesResponse> listLedgerInventories_Pre($grpc.ServiceCall $call, $async.Future<$0.ListLedgerInventoriesRequest> $request) async {
+    return listLedgerInventories($call, await $request);
+  }
+
+  $async.Future<$0.ListLedgerInventoriesResponse> listLedgerInventories($grpc.ServiceCall call, $0.ListLedgerInventoriesRequest request);
+
+  $async.Future<$0.LedgerInventory> getLedgerInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLedgerInventoryRequest> $request) async {
+    return getLedgerInventory($call, await $request);
+  }
+
+  $async.Future<$0.LedgerInventory> getLedgerInventory($grpc.ServiceCall call, $0.GetLedgerInventoryRequest request);
+
+  $async.Future<$0.SyncInventoryFromLedgerResponse> syncInventoryFromLedger_Pre($grpc.ServiceCall $call, $async.Future<$0.SyncInventoryFromLedgerRequest> $request) async {
+    return syncInventoryFromLedger($call, await $request);
+  }
+
+  $async.Future<$0.SyncInventoryFromLedgerResponse> syncInventoryFromLedger($grpc.ServiceCall call, $0.SyncInventoryFromLedgerRequest request);
 
 }

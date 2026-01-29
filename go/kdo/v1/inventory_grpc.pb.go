@@ -30,6 +30,12 @@ type InventoryServiceClient interface {
 	ListInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (*ListInventoriesResponse, error)
 	// 펀드별 재고 현황 목록 스트림
 	StreamInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (InventoryService_StreamInventoriesClient, error)
+	// 원장 재고 목록 조회
+	ListLedgerInventories(ctx context.Context, in *ListLedgerInventoriesRequest, opts ...grpc.CallOption) (*ListLedgerInventoriesResponse, error)
+	// 원장 재고 조회 (주식/파생 통합)
+	GetLedgerInventory(ctx context.Context, in *GetLedgerInventoryRequest, opts ...grpc.CallOption) (*LedgerInventory, error)
+	// 원장에서 재고 동기화
+	SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest, opts ...grpc.CallOption) (*SyncInventoryFromLedgerResponse, error)
 }
 
 type inventoryServiceClient struct {
@@ -122,6 +128,33 @@ func (x *inventoryServiceStreamInventoriesClient) Recv() (*ListInventoriesRespon
 	return m, nil
 }
 
+func (c *inventoryServiceClient) ListLedgerInventories(ctx context.Context, in *ListLedgerInventoriesRequest, opts ...grpc.CallOption) (*ListLedgerInventoriesResponse, error) {
+	out := new(ListLedgerInventoriesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/ListLedgerInventories", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) GetLedgerInventory(ctx context.Context, in *GetLedgerInventoryRequest, opts ...grpc.CallOption) (*LedgerInventory, error) {
+	out := new(LedgerInventory)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/GetLedgerInventory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest, opts ...grpc.CallOption) (*SyncInventoryFromLedgerResponse, error) {
+	out := new(SyncInventoryFromLedgerResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/SyncInventoryFromLedger", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InventoryServiceServer is the server API for InventoryService service.
 // All implementations must embed UnimplementedInventoryServiceServer
 // for forward compatibility
@@ -134,6 +167,12 @@ type InventoryServiceServer interface {
 	ListInventories(context.Context, *ListInventoriesRequest) (*ListInventoriesResponse, error)
 	// 펀드별 재고 현황 목록 스트림
 	StreamInventories(*ListInventoriesRequest, InventoryService_StreamInventoriesServer) error
+	// 원장 재고 목록 조회
+	ListLedgerInventories(context.Context, *ListLedgerInventoriesRequest) (*ListLedgerInventoriesResponse, error)
+	// 원장 재고 조회 (주식/파생 통합)
+	GetLedgerInventory(context.Context, *GetLedgerInventoryRequest) (*LedgerInventory, error)
+	// 원장에서 재고 동기화
+	SyncInventoryFromLedger(context.Context, *SyncInventoryFromLedgerRequest) (*SyncInventoryFromLedgerResponse, error)
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -152,6 +191,15 @@ func (UnimplementedInventoryServiceServer) ListInventories(context.Context, *Lis
 }
 func (UnimplementedInventoryServiceServer) StreamInventories(*ListInventoriesRequest, InventoryService_StreamInventoriesServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamInventories not implemented")
+}
+func (UnimplementedInventoryServiceServer) ListLedgerInventories(context.Context, *ListLedgerInventoriesRequest) (*ListLedgerInventoriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLedgerInventories not implemented")
+}
+func (UnimplementedInventoryServiceServer) GetLedgerInventory(context.Context, *GetLedgerInventoryRequest) (*LedgerInventory, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLedgerInventory not implemented")
+}
+func (UnimplementedInventoryServiceServer) SyncInventoryFromLedger(context.Context, *SyncInventoryFromLedgerRequest) (*SyncInventoryFromLedgerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncInventoryFromLedger not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -244,6 +292,60 @@ func (x *inventoryServiceStreamInventoriesServer) Send(m *ListInventoriesRespons
 	return x.ServerStream.SendMsg(m)
 }
 
+func _InventoryService_ListLedgerInventories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLedgerInventoriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).ListLedgerInventories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/ListLedgerInventories",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).ListLedgerInventories(ctx, req.(*ListLedgerInventoriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InventoryService_GetLedgerInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLedgerInventoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).GetLedgerInventory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/GetLedgerInventory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).GetLedgerInventory(ctx, req.(*GetLedgerInventoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InventoryService_SyncInventoryFromLedger_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncInventoryFromLedgerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).SyncInventoryFromLedger(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/SyncInventoryFromLedger",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).SyncInventoryFromLedger(ctx, req.(*SyncInventoryFromLedgerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InventoryService_ServiceDesc is the grpc.ServiceDesc for InventoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +360,18 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListInventories",
 			Handler:    _InventoryService_ListInventories_Handler,
+		},
+		{
+			MethodName: "ListLedgerInventories",
+			Handler:    _InventoryService_ListLedgerInventories_Handler,
+		},
+		{
+			MethodName: "GetLedgerInventory",
+			Handler:    _InventoryService_GetLedgerInventory_Handler,
+		},
+		{
+			MethodName: "SyncInventoryFromLedger",
+			Handler:    _InventoryService_SyncInventoryFromLedger_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

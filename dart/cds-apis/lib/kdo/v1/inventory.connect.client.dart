@@ -80,4 +80,58 @@ extension type InventoryServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 원장 재고 목록 조회
+  Future<kdov1inventory.ListLedgerInventoriesResponse> listLedgerInventories(
+    kdov1inventory.ListLedgerInventoriesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.listLedgerInventories,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 원장 재고 조회 (주식/파생 통합)
+  Future<kdov1inventory.LedgerInventory> getLedgerInventory(
+    kdov1inventory.GetLedgerInventoryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.getLedgerInventory,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 원장에서 재고 동기화
+  Future<kdov1inventory.SyncInventoryFromLedgerResponse> syncInventoryFromLedger(
+    kdov1inventory.SyncInventoryFromLedgerRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.syncInventoryFromLedger,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

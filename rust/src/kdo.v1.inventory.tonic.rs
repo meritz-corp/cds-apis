@@ -198,6 +198,96 @@ pub mod inventory_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn list_ledger_inventories(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListLedgerInventoriesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListLedgerInventoriesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.inventory.InventoryService/ListLedgerInventories",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.inventory.InventoryService",
+                        "ListLedgerInventories",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn get_ledger_inventory(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetLedgerInventoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::LedgerInventory>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.inventory.InventoryService/GetLedgerInventory",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.inventory.InventoryService",
+                        "GetLedgerInventory",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn sync_inventory_from_ledger(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SyncInventoryFromLedgerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SyncInventoryFromLedgerResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.inventory.InventoryService/SyncInventoryFromLedger",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.inventory.InventoryService",
+                        "SyncInventoryFromLedger",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -242,6 +332,24 @@ pub mod inventory_service_server {
             request: tonic::Request<super::ListInventoriesRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamInventoriesStream>,
+            tonic::Status,
+        >;
+        async fn list_ledger_inventories(
+            &self,
+            request: tonic::Request<super::ListLedgerInventoriesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListLedgerInventoriesResponse>,
+            tonic::Status,
+        >;
+        async fn get_ledger_inventory(
+            &self,
+            request: tonic::Request<super::GetLedgerInventoryRequest>,
+        ) -> std::result::Result<tonic::Response<super::LedgerInventory>, tonic::Status>;
+        async fn sync_inventory_from_ledger(
+            &self,
+            request: tonic::Request<super::SyncInventoryFromLedgerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SyncInventoryFromLedgerResponse>,
             tonic::Status,
         >;
     }
@@ -504,6 +612,155 @@ pub mod inventory_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.inventory.InventoryService/ListLedgerInventories" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListLedgerInventoriesSvc<T: InventoryService>(pub Arc<T>);
+                    impl<
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::ListLedgerInventoriesRequest>
+                    for ListLedgerInventoriesSvc<T> {
+                        type Response = super::ListLedgerInventoriesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListLedgerInventoriesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as InventoryService>::list_ledger_inventories(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListLedgerInventoriesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.inventory.InventoryService/GetLedgerInventory" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetLedgerInventorySvc<T: InventoryService>(pub Arc<T>);
+                    impl<
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::GetLedgerInventoryRequest>
+                    for GetLedgerInventorySvc<T> {
+                        type Response = super::LedgerInventory;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetLedgerInventoryRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as InventoryService>::get_ledger_inventory(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetLedgerInventorySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.inventory.InventoryService/SyncInventoryFromLedger" => {
+                    #[allow(non_camel_case_types)]
+                    struct SyncInventoryFromLedgerSvc<T: InventoryService>(pub Arc<T>);
+                    impl<
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::SyncInventoryFromLedgerRequest>
+                    for SyncInventoryFromLedgerSvc<T> {
+                        type Response = super::SyncInventoryFromLedgerResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::SyncInventoryFromLedgerRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as InventoryService>::sync_inventory_from_ledger(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SyncInventoryFromLedgerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
