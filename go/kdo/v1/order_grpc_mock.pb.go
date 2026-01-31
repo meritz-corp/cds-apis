@@ -94,6 +94,26 @@ func (mr *MockOrderServiceClientMockRecorder) CancelOrder(ctx, in interface{}, o
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelOrder", reflect.TypeOf((*MockOrderServiceClient)(nil).CancelOrder), varargs...)
 }
 
+// ListAllUnfilledOrders mocks base method.
+func (m *MockOrderServiceClient) ListAllUnfilledOrders(ctx context.Context, in *ListAllUnfilledOrdersRequest, opts ...grpc.CallOption) (*ListAllUnfilledOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListAllUnfilledOrders", varargs...)
+	ret0, _ := ret[0].(*ListAllUnfilledOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListAllUnfilledOrders indicates an expected call of ListAllUnfilledOrders.
+func (mr *MockOrderServiceClientMockRecorder) ListAllUnfilledOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllUnfilledOrders", reflect.TypeOf((*MockOrderServiceClient)(nil).ListAllUnfilledOrders), varargs...)
+}
+
 // SubmitOrder mocks base method.
 func (m *MockOrderServiceClient) SubmitOrder(ctx context.Context, in *SubmitOrderRequest, opts ...grpc.CallOption) (*SubmitOrderResponse, error) {
 	m.ctrl.T.Helper()
@@ -180,6 +200,21 @@ func (m *MockOrderServiceServer) CancelOrder(ctx context.Context, in *CancelOrde
 func (mr *MockOrderServiceServerMockRecorder) CancelOrder(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelOrder", reflect.TypeOf((*MockOrderServiceServer)(nil).CancelOrder), ctx, in)
+}
+
+// ListAllUnfilledOrders mocks base method.
+func (m *MockOrderServiceServer) ListAllUnfilledOrders(ctx context.Context, in *ListAllUnfilledOrdersRequest) (*ListAllUnfilledOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListAllUnfilledOrders", ctx, in)
+	ret0, _ := ret[0].(*ListAllUnfilledOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListAllUnfilledOrders indicates an expected call of ListAllUnfilledOrders.
+func (mr *MockOrderServiceServerMockRecorder) ListAllUnfilledOrders(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllUnfilledOrders", reflect.TypeOf((*MockOrderServiceServer)(nil).ListAllUnfilledOrders), ctx, in)
 }
 
 // SubmitOrder mocks base method.

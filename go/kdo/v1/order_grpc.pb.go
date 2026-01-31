@@ -28,6 +28,8 @@ type OrderServiceClient interface {
 	AmendOrder(ctx context.Context, in *AmendOrderRequest, opts ...grpc.CallOption) (*AmendOrderResponse, error)
 	// 취소 주문
 	CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error)
+	// 미체결 주문 목록 조회
+	ListAllUnfilledOrders(ctx context.Context, in *ListAllUnfilledOrdersRequest, opts ...grpc.CallOption) (*ListAllUnfilledOrdersResponse, error)
 	// 전체 주문 취소
 	CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error)
 }
@@ -67,6 +69,15 @@ func (c *orderServiceClient) CancelOrder(ctx context.Context, in *CancelOrderReq
 	return out, nil
 }
 
+func (c *orderServiceClient) ListAllUnfilledOrders(ctx context.Context, in *ListAllUnfilledOrdersRequest, opts ...grpc.CallOption) (*ListAllUnfilledOrdersResponse, error) {
+	out := new(ListAllUnfilledOrdersResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order.OrderService/ListAllUnfilledOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderServiceClient) CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error) {
 	out := new(CancelAllOrdersResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.order.OrderService/CancelAllOrders", in, out, opts...)
@@ -86,6 +97,8 @@ type OrderServiceServer interface {
 	AmendOrder(context.Context, *AmendOrderRequest) (*AmendOrderResponse, error)
 	// 취소 주문
 	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error)
+	// 미체결 주문 목록 조회
+	ListAllUnfilledOrders(context.Context, *ListAllUnfilledOrdersRequest) (*ListAllUnfilledOrdersResponse, error)
 	// 전체 주문 취소
 	CancelAllOrders(context.Context, *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
@@ -103,6 +116,9 @@ func (UnimplementedOrderServiceServer) AmendOrder(context.Context, *AmendOrderRe
 }
 func (UnimplementedOrderServiceServer) CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOrder not implemented")
+}
+func (UnimplementedOrderServiceServer) ListAllUnfilledOrders(context.Context, *ListAllUnfilledOrdersRequest) (*ListAllUnfilledOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllUnfilledOrders not implemented")
 }
 func (UnimplementedOrderServiceServer) CancelAllOrders(context.Context, *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelAllOrders not implemented")
@@ -174,6 +190,24 @@ func _OrderService_CancelOrder_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_ListAllUnfilledOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAllUnfilledOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).ListAllUnfilledOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order.OrderService/ListAllUnfilledOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).ListAllUnfilledOrders(ctx, req.(*ListAllUnfilledOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OrderService_CancelAllOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CancelAllOrdersRequest)
 	if err := dec(in); err != nil {
@@ -210,6 +244,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelOrder",
 			Handler:    _OrderService_CancelOrder_Handler,
+		},
+		{
+			MethodName: "ListAllUnfilledOrders",
+			Handler:    _OrderService_ListAllUnfilledOrders_Handler,
 		},
 		{
 			MethodName: "CancelAllOrders",

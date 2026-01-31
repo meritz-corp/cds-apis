@@ -35,6 +35,14 @@ abstract final class OrderService {
     kdov1order.CancelOrderResponse.new,
   );
 
+  /// 미체결 주문 목록 조회
+  static const listAllUnfilledOrders = connect.Spec(
+    '/$name/ListAllUnfilledOrders',
+    connect.StreamType.unary,
+    kdov1order.ListAllUnfilledOrdersRequest.new,
+    kdov1order.ListAllUnfilledOrdersResponse.new,
+  );
+
   /// 전체 주문 취소
   static const cancelAllOrders = connect.Spec(
     '/$name/CancelAllOrders',

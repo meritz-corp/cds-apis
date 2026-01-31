@@ -191,6 +191,41 @@ final $typed_data.Uint8List cancelOrderResponseDescriptor = $convert.base64Decod
     'a2RvLnYxLm9yZGVyLk9yZGVyU3RhdHVzUgZzdGF0dXMSGAoHbWVzc2FnZRgEIAEoCVIHbWVzc2'
     'FnZQ==');
 
+@$core.Deprecated('Use listAllUnfilledOrdersRequestDescriptor instead')
+const ListAllUnfilledOrdersRequest$json = {
+  '1': 'ListAllUnfilledOrdersRequest',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'fundCode', '17': true},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'symbol', '17': true},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '9': 2, '10': 'side', '17': true},
+  ],
+  '8': [
+    {'1': '_fund_code'},
+    {'1': '_symbol'},
+    {'1': '_side'},
+  ],
+};
+
+/// Descriptor for `ListAllUnfilledOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listAllUnfilledOrdersRequestDescriptor = $convert.base64Decode(
+    'ChxMaXN0QWxsVW5maWxsZWRPcmRlcnNSZXF1ZXN0EiAKCWZ1bmRfY29kZRgBIAEoCUgAUghmdW'
+    '5kQ29kZYgBARIbCgZzeW1ib2wYAiABKAlIAVIGc3ltYm9siAEBEjAKBHNpZGUYAyABKA4yFy5r'
+    'ZG8udjEub3JkZXIuT3JkZXJTaWRlSAJSBHNpZGWIAQFCDAoKX2Z1bmRfY29kZUIJCgdfc3ltYm'
+    '9sQgcKBV9zaWRl');
+
+@$core.Deprecated('Use listAllUnfilledOrdersResponseDescriptor instead')
+const ListAllUnfilledOrdersResponse$json = {
+  '1': 'ListAllUnfilledOrdersResponse',
+  '2': [
+    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.order.Order', '10': 'orders'},
+  ],
+};
+
+/// Descriptor for `ListAllUnfilledOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listAllUnfilledOrdersResponseDescriptor = $convert.base64Decode(
+    'Ch1MaXN0QWxsVW5maWxsZWRPcmRlcnNSZXNwb25zZRIrCgZvcmRlcnMYASADKAsyEy5rZG8udj'
+    'Eub3JkZXIuT3JkZXJSBm9yZGVycw==');
+
 @$core.Deprecated('Use cancelAllOrdersRequestDescriptor instead')
 const CancelAllOrdersRequest$json = {
   '1': 'CancelAllOrdersRequest',

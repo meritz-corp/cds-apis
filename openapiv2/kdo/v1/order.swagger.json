@@ -219,6 +219,58 @@
           "OrderService"
         ]
       }
+    },
+    "/v1/orders:unfilled": {
+      "get": {
+        "summary": "미체결 주문 목록 조회",
+        "operationId": "OrderService_ListAllUnfilledOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderListAllUnfilledOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 (optional, 미지정 시 전체 펀드)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "symbol",
+            "description": "종목 코드 (optional, 미지정 시 전체 종목)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "side",
+            "description": "매수/매도 (optional, 미지정 시 양방향)\n\n - ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ORDER_SIDE_UNSPECIFIED",
+              "ORDER_SIDE_BID",
+              "ORDER_SIDE_ASK"
+            ],
+            "default": "ORDER_SIDE_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -284,6 +336,64 @@
           "title": "결과 메시지"
         }
       }
+    },
+    "orderListAllUnfilledOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/orderOrder"
+          },
+          "title": "미체결 주문 목록"
+        }
+      }
+    },
+    "orderOrder": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "title": "주문 ID"
+        },
+        "orderSide": {
+          "$ref": "#/definitions/v1orderOrderSide",
+          "title": "주문 타입"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "상품 (예: etfs/A069500)"
+        },
+        "price": {
+          "type": "string",
+          "title": "주문 가격"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문 수량"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 수량"
+        },
+        "status": {
+          "$ref": "#/definitions/orderOrderStatus",
+          "title": "주문 상태"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문 시간 (Unix timestamp)"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "업데이트 시간 (Unix timestamp)"
+        }
+      },
+      "title": "주문 정보"
     },
     "orderOrderStatus": {
       "type": "string",

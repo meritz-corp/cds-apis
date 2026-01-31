@@ -63,6 +63,24 @@ extension type OrderServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 미체결 주문 목록 조회
+  Future<kdov1order.ListAllUnfilledOrdersResponse> listAllUnfilledOrders(
+    kdov1order.ListAllUnfilledOrdersRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderService.listAllUnfilledOrders,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 전체 주문 취소
   Future<kdov1order.CancelAllOrdersResponse> cancelAllOrders(
     kdov1order.CancelAllOrdersRequest input, {

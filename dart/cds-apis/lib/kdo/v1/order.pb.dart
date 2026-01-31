@@ -590,6 +590,120 @@ class CancelOrderResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(4);
 }
 
+class ListAllUnfilledOrdersRequest extends $pb.GeneratedMessage {
+  factory ListAllUnfilledOrdersRequest({
+    $core.String? fundCode,
+    $core.String? symbol,
+    OrderSide? side,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (symbol != null) result.symbol = symbol;
+    if (side != null) result.side = side;
+    return result;
+  }
+
+  ListAllUnfilledOrdersRequest._();
+
+  factory ListAllUnfilledOrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListAllUnfilledOrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListAllUnfilledOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListAllUnfilledOrdersRequest clone() => ListAllUnfilledOrdersRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListAllUnfilledOrdersRequest copyWith(void Function(ListAllUnfilledOrdersRequest) updates) => super.copyWith((message) => updates(message as ListAllUnfilledOrdersRequest)) as ListAllUnfilledOrdersRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListAllUnfilledOrdersRequest create() => ListAllUnfilledOrdersRequest._();
+  @$core.override
+  ListAllUnfilledOrdersRequest createEmptyInstance() => create();
+  static $pb.PbList<ListAllUnfilledOrdersRequest> createRepeated() => $pb.PbList<ListAllUnfilledOrdersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListAllUnfilledOrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListAllUnfilledOrdersRequest>(create);
+  static ListAllUnfilledOrdersRequest? _defaultInstance;
+
+  /// 펀드 코드 (optional, 미지정 시 전체 펀드)
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  /// 종목 코드 (optional, 미지정 시 전체 종목)
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 매수/매도 (optional, 미지정 시 양방향)
+  @$pb.TagNumber(3)
+  OrderSide get side => $_getN(2);
+  @$pb.TagNumber(3)
+  set side(OrderSide value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSide() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSide() => $_clearField(3);
+}
+
+class ListAllUnfilledOrdersResponse extends $pb.GeneratedMessage {
+  factory ListAllUnfilledOrdersResponse({
+    $core.Iterable<Order>? orders,
+  }) {
+    final result = create();
+    if (orders != null) result.orders.addAll(orders);
+    return result;
+  }
+
+  ListAllUnfilledOrdersResponse._();
+
+  factory ListAllUnfilledOrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListAllUnfilledOrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListAllUnfilledOrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..pc<Order>(1, _omitFieldNames ? '' : 'orders', $pb.PbFieldType.PM, subBuilder: Order.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListAllUnfilledOrdersResponse clone() => ListAllUnfilledOrdersResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListAllUnfilledOrdersResponse copyWith(void Function(ListAllUnfilledOrdersResponse) updates) => super.copyWith((message) => updates(message as ListAllUnfilledOrdersResponse)) as ListAllUnfilledOrdersResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListAllUnfilledOrdersResponse create() => ListAllUnfilledOrdersResponse._();
+  @$core.override
+  ListAllUnfilledOrdersResponse createEmptyInstance() => create();
+  static $pb.PbList<ListAllUnfilledOrdersResponse> createRepeated() => $pb.PbList<ListAllUnfilledOrdersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListAllUnfilledOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListAllUnfilledOrdersResponse>(create);
+  static ListAllUnfilledOrdersResponse? _defaultInstance;
+
+  /// 미체결 주문 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<Order> get orders => $_getList(0);
+}
+
 class CancelAllOrdersRequest extends $pb.GeneratedMessage {
   factory CancelAllOrdersRequest() => create();
 

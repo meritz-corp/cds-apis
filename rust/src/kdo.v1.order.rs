@@ -114,6 +114,28 @@ pub struct CancelOrderResponse {
     #[prost(string, tag="4")]
     pub message: ::prost::alloc::string::String,
 }
+// ========== ListAllUnfilledOrders ==========
+
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListAllUnfilledOrdersRequest {
+    /// 펀드 코드 (optional, 미지정 시 전체 펀드)
+    #[prost(string, optional, tag="1")]
+    pub fund_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// 종목 코드 (optional, 미지정 시 전체 종목)
+    #[prost(string, optional, tag="2")]
+    pub symbol: ::core::option::Option<::prost::alloc::string::String>,
+    /// 매수/매도 (optional, 미지정 시 양방향)
+    #[prost(enumeration="OrderSide", optional, tag="3")]
+    pub side: ::core::option::Option<i32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListAllUnfilledOrdersResponse {
+    /// 미체결 주문 목록
+    #[prost(message, repeated, tag="1")]
+    pub orders: ::prost::alloc::vec::Vec<Order>,
+}
 // ========== CancelAllOrders ==========
 
 #[allow(clippy::derive_partial_eq_without_eq)]

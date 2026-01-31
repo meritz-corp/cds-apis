@@ -34,6 +34,13 @@ service OrderService {
     };
   }
 
+  // 미체결 주문 목록 조회
+  rpc ListAllUnfilledOrders(ListAllUnfilledOrdersRequest) returns (ListAllUnfilledOrdersResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders:unfilled"
+    };
+  }
+
   // 전체 주문 취소
   rpc CancelAllOrders(CancelAllOrdersRequest) returns (CancelAllOrdersResponse) {
     option (google.api.http) = {
@@ -171,6 +178,24 @@ message CancelOrderResponse {
 
   // 결과 메시지
   string message = 4;
+}
+
+// ========== ListAllUnfilledOrders ==========
+
+message ListAllUnfilledOrdersRequest {
+  // 펀드 코드 (optional, 미지정 시 전체 펀드)
+  optional string fund_code = 1;
+
+  // 종목 코드 (optional, 미지정 시 전체 종목)
+  optional string symbol = 2;
+
+  // 매수/매도 (optional, 미지정 시 양방향)
+  optional OrderSide side = 3;
+}
+
+message ListAllUnfilledOrdersResponse {
+  // 미체결 주문 목록
+  repeated Order orders = 1;
 }
 
 // ========== CancelAllOrders ==========

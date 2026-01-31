@@ -48,6 +48,11 @@ class OrderServiceClient extends $grpc.Client {
     return $createUnaryCall(_$cancelOrder, request, options: options);
   }
 
+  /// 미체결 주문 목록 조회
+  $grpc.ResponseFuture<$0.ListAllUnfilledOrdersResponse> listAllUnfilledOrders($0.ListAllUnfilledOrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listAllUnfilledOrders, request, options: options);
+  }
+
   /// 전체 주문 취소
   $grpc.ResponseFuture<$0.CancelAllOrdersResponse> cancelAllOrders($0.CancelAllOrdersRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$cancelAllOrders, request, options: options);
@@ -67,6 +72,10 @@ class OrderServiceClient extends $grpc.Client {
       '/kdo.v1.order.OrderService/CancelOrder',
       ($0.CancelOrderRequest value) => value.writeToBuffer(),
       $0.CancelOrderResponse.fromBuffer);
+  static final _$listAllUnfilledOrders = $grpc.ClientMethod<$0.ListAllUnfilledOrdersRequest, $0.ListAllUnfilledOrdersResponse>(
+      '/kdo.v1.order.OrderService/ListAllUnfilledOrders',
+      ($0.ListAllUnfilledOrdersRequest value) => value.writeToBuffer(),
+      $0.ListAllUnfilledOrdersResponse.fromBuffer);
   static final _$cancelAllOrders = $grpc.ClientMethod<$0.CancelAllOrdersRequest, $0.CancelAllOrdersResponse>(
       '/kdo.v1.order.OrderService/CancelAllOrders',
       ($0.CancelAllOrdersRequest value) => value.writeToBuffer(),
@@ -99,6 +108,13 @@ abstract class OrderServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CancelOrderRequest.fromBuffer(value),
         ($0.CancelOrderResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListAllUnfilledOrdersRequest, $0.ListAllUnfilledOrdersResponse>(
+        'ListAllUnfilledOrders',
+        listAllUnfilledOrders_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListAllUnfilledOrdersRequest.fromBuffer(value),
+        ($0.ListAllUnfilledOrdersResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.CancelAllOrdersRequest, $0.CancelAllOrdersResponse>(
         'CancelAllOrders',
         cancelAllOrders_Pre,
@@ -125,6 +141,12 @@ abstract class OrderServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.CancelOrderResponse> cancelOrder($grpc.ServiceCall call, $0.CancelOrderRequest request);
+
+  $async.Future<$0.ListAllUnfilledOrdersResponse> listAllUnfilledOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.ListAllUnfilledOrdersRequest> $request) async {
+    return listAllUnfilledOrders($call, await $request);
+  }
+
+  $async.Future<$0.ListAllUnfilledOrdersResponse> listAllUnfilledOrders($grpc.ServiceCall call, $0.ListAllUnfilledOrdersRequest request);
 
   $async.Future<$0.CancelAllOrdersResponse> cancelAllOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.CancelAllOrdersRequest> $request) async {
     return cancelAllOrders($call, await $request);
