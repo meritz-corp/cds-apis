@@ -266,32 +266,3 @@ final $typed_data.Uint8List listFundsResponseDescriptor = $convert.base64Decode(
     'ChFMaXN0RnVuZHNSZXNwb25zZRInCgVmdW5kcxgBIAMoCzIRLmtkby52MS5mdW5kLkZ1bmRSBW'
     'Z1bmRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
-@$core.Deprecated('Use listFundTradingSnapshotsRequestDescriptor instead')
-const ListFundTradingSnapshotsRequest$json = {
-  '1': 'ListFundTradingSnapshotsRequest',
-  '2': [
-    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
-    {'1': 'filter', '3': 2, '4': 1, '5': 9, '10': 'filter'},
-  ],
-};
-
-/// Descriptor for `ListFundTradingSnapshotsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listFundTradingSnapshotsRequestDescriptor = $convert.base64Decode(
-    'Ch9MaXN0RnVuZFRyYWRpbmdTbmFwc2hvdHNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QR'
-    'YKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhYKBmZpbHRlchgCIAEoCVIGZmlsdGVy');
-
-@$core.Deprecated('Use listFundTradingSnapshotsResponseDescriptor instead')
-const ListFundTradingSnapshotsResponse$json = {
-  '1': 'ListFundTradingSnapshotsResponse',
-  '2': [
-    {'1': 'snapshots', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundTrading', '10': 'snapshots'},
-    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
-  ],
-};
-
-/// Descriptor for `ListFundTradingSnapshotsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listFundTradingSnapshotsResponseDescriptor = $convert.base64Decode(
-    'CiBMaXN0RnVuZFRyYWRpbmdTbmFwc2hvdHNSZXNwb25zZRI2CglzbmFwc2hvdHMYASADKAsyGC'
-    '5rZG8udjEuZnVuZC5GdW5kVHJhZGluZ1IJc25hcHNob3RzEiYKD25leHRfcGFnZV90b2tlbhgC'
-    'IAEoCVINbmV4dFBhZ2VUb2tlbg==');
-

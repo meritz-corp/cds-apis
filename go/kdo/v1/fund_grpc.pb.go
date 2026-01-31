@@ -28,8 +28,6 @@ type FundServiceClient interface {
 	StreamFund(ctx context.Context, in *GetFundRequest, opts ...grpc.CallOption) (FundService_StreamFundClient, error)
 	// 펀드 목록 조회
 	ListFunds(ctx context.Context, in *ListFundsRequest, opts ...grpc.CallOption) (*ListFundsResponse, error)
-	ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsResponse, error)
-	StreamFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFundTradingSnapshotsClient, error)
 }
 
 type fundServiceClient struct {
@@ -90,47 +88,6 @@ func (c *fundServiceClient) ListFunds(ctx context.Context, in *ListFundsRequest,
 	return out, nil
 }
 
-func (c *fundServiceClient) ListFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (*ListFundTradingSnapshotsResponse, error) {
-	out := new(ListFundTradingSnapshotsResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.fund.FundService/ListFundTradingSnapshots", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *fundServiceClient) StreamFundTradingSnapshots(ctx context.Context, in *ListFundTradingSnapshotsRequest, opts ...grpc.CallOption) (FundService_StreamFundTradingSnapshotsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &FundService_ServiceDesc.Streams[1], "/kdo.v1.fund.FundService/StreamFundTradingSnapshots", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &fundServiceStreamFundTradingSnapshotsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type FundService_StreamFundTradingSnapshotsClient interface {
-	Recv() (*ListFundTradingSnapshotsResponse, error)
-	grpc.ClientStream
-}
-
-type fundServiceStreamFundTradingSnapshotsClient struct {
-	grpc.ClientStream
-}
-
-func (x *fundServiceStreamFundTradingSnapshotsClient) Recv() (*ListFundTradingSnapshotsResponse, error) {
-	m := new(ListFundTradingSnapshotsResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 // FundServiceServer is the server API for FundService service.
 // All implementations must embed UnimplementedFundServiceServer
 // for forward compatibility
@@ -141,8 +98,6 @@ type FundServiceServer interface {
 	StreamFund(*GetFundRequest, FundService_StreamFundServer) error
 	// 펀드 목록 조회
 	ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error)
-	ListFundTradingSnapshots(context.Context, *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsResponse, error)
-	StreamFundTradingSnapshots(*ListFundTradingSnapshotsRequest, FundService_StreamFundTradingSnapshotsServer) error
 	mustEmbedUnimplementedFundServiceServer()
 }
 
@@ -158,12 +113,6 @@ func (UnimplementedFundServiceServer) StreamFund(*GetFundRequest, FundService_St
 }
 func (UnimplementedFundServiceServer) ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFunds not implemented")
-}
-func (UnimplementedFundServiceServer) ListFundTradingSnapshots(context.Context, *ListFundTradingSnapshotsRequest) (*ListFundTradingSnapshotsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListFundTradingSnapshots not implemented")
-}
-func (UnimplementedFundServiceServer) StreamFundTradingSnapshots(*ListFundTradingSnapshotsRequest, FundService_StreamFundTradingSnapshotsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamFundTradingSnapshots not implemented")
 }
 func (UnimplementedFundServiceServer) mustEmbedUnimplementedFundServiceServer() {}
 
@@ -235,45 +184,6 @@ func _FundService_ListFunds_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FundService_ListFundTradingSnapshots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListFundTradingSnapshotsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FundServiceServer).ListFundTradingSnapshots(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.fund.FundService/ListFundTradingSnapshots",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FundServiceServer).ListFundTradingSnapshots(ctx, req.(*ListFundTradingSnapshotsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FundService_StreamFundTradingSnapshots_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListFundTradingSnapshotsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(FundServiceServer).StreamFundTradingSnapshots(m, &fundServiceStreamFundTradingSnapshotsServer{stream})
-}
-
-type FundService_StreamFundTradingSnapshotsServer interface {
-	Send(*ListFundTradingSnapshotsResponse) error
-	grpc.ServerStream
-}
-
-type fundServiceStreamFundTradingSnapshotsServer struct {
-	grpc.ServerStream
-}
-
-func (x *fundServiceStreamFundTradingSnapshotsServer) Send(m *ListFundTradingSnapshotsResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 // FundService_ServiceDesc is the grpc.ServiceDesc for FundService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -289,20 +199,11 @@ var FundService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "ListFunds",
 			Handler:    _FundService_ListFunds_Handler,
 		},
-		{
-			MethodName: "ListFundTradingSnapshots",
-			Handler:    _FundService_ListFundTradingSnapshots_Handler,
-		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "StreamFund",
 			Handler:       _FundService_StreamFund_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "StreamFundTradingSnapshots",
-			Handler:       _FundService_StreamFundTradingSnapshots_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -37,21 +37,6 @@ service FundService {
     };
     option (google.api.method_signature) = "";
   }
-
-  rpc ListFundTradingSnapshots(ListFundTradingSnapshotsRequest) returns (ListFundTradingSnapshotsResponse) {
-    option (google.api.http) = {
-      get: "/v1/{fund=funds/*}/trading_snapshot"
-    };
-    option (google.api.method_signature) = "filter";
-  }
-
-
-  rpc StreamFundTradingSnapshots(ListFundTradingSnapshotsRequest) returns (stream ListFundTradingSnapshotsResponse) {
-    option (google.api.http) = {
-      get: "/v1/{fund=funds/*}/trading_snapshot:stream"
-    };
-    option (google.api.method_signature) = "filter";
-  }
 }
 
 // 펀드 정보
@@ -244,29 +229,5 @@ message ListFundsResponse {
   string next_page_token = 2;
 }
 
-message ListFundTradingSnapshotsRequest {
-  // 펀드 리소스 이름 (예: funds/KR1234567890)
-  string fund = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/Fund"
-    }
-  ];
 
-  // Available Sequence and Operator
-  // * limit_type
-  //   * `equal`
-  //
-  // Examples
-  // * filter=limit_type=Stock
-  string filter = 2;
-}
-
-message ListFundTradingSnapshotsResponse {
-  // 펀드 한도 목록
-  repeated FundTrading snapshots = 1;
-
-  // 다음 페이지 토큰
-  string next_page_token = 2;
-}
 

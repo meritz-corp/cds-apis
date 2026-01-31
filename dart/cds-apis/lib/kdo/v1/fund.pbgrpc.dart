@@ -48,14 +48,6 @@ class FundServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listFunds, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.ListFundTradingSnapshotsResponse> listFundTradingSnapshots($0.ListFundTradingSnapshotsRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$listFundTradingSnapshots, request, options: options);
-  }
-
-  $grpc.ResponseStream<$0.ListFundTradingSnapshotsResponse> streamFundTradingSnapshots($0.ListFundTradingSnapshotsRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamFundTradingSnapshots, $async.Stream.fromIterable([request]), options: options);
-  }
-
     // method descriptors
 
   static final _$getFund = $grpc.ClientMethod<$0.GetFundRequest, $0.Fund>(
@@ -70,14 +62,6 @@ class FundServiceClient extends $grpc.Client {
       '/kdo.v1.fund.FundService/ListFunds',
       ($0.ListFundsRequest value) => value.writeToBuffer(),
       $0.ListFundsResponse.fromBuffer);
-  static final _$listFundTradingSnapshots = $grpc.ClientMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
-      '/kdo.v1.fund.FundService/ListFundTradingSnapshots',
-      ($0.ListFundTradingSnapshotsRequest value) => value.writeToBuffer(),
-      $0.ListFundTradingSnapshotsResponse.fromBuffer);
-  static final _$streamFundTradingSnapshots = $grpc.ClientMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
-      '/kdo.v1.fund.FundService/StreamFundTradingSnapshots',
-      ($0.ListFundTradingSnapshotsRequest value) => value.writeToBuffer(),
-      $0.ListFundTradingSnapshotsResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.fund.FundService')
@@ -106,20 +90,6 @@ abstract class FundServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListFundsRequest.fromBuffer(value),
         ($0.ListFundsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
-        'ListFundTradingSnapshots',
-        listFundTradingSnapshots_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.ListFundTradingSnapshotsRequest.fromBuffer(value),
-        ($0.ListFundTradingSnapshotsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListFundTradingSnapshotsRequest, $0.ListFundTradingSnapshotsResponse>(
-        'StreamFundTradingSnapshots',
-        streamFundTradingSnapshots_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.ListFundTradingSnapshotsRequest.fromBuffer(value),
-        ($0.ListFundTradingSnapshotsResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Fund> getFund_Pre($grpc.ServiceCall $call, $async.Future<$0.GetFundRequest> $request) async {
@@ -139,17 +109,5 @@ abstract class FundServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListFundsResponse> listFunds($grpc.ServiceCall call, $0.ListFundsRequest request);
-
-  $async.Future<$0.ListFundTradingSnapshotsResponse> listFundTradingSnapshots_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundTradingSnapshotsRequest> $request) async {
-    return listFundTradingSnapshots($call, await $request);
-  }
-
-  $async.Future<$0.ListFundTradingSnapshotsResponse> listFundTradingSnapshots($grpc.ServiceCall call, $0.ListFundTradingSnapshotsRequest request);
-
-  $async.Stream<$0.ListFundTradingSnapshotsResponse> streamFundTradingSnapshots_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundTradingSnapshotsRequest> $request) async* {
-    yield* streamFundTradingSnapshots($call, await $request);
-  }
-
-  $async.Stream<$0.ListFundTradingSnapshotsResponse> streamFundTradingSnapshots($grpc.ServiceCall call, $0.ListFundTradingSnapshotsRequest request);
 
 }

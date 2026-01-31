@@ -62,38 +62,4 @@ extension type FundServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
-
-  Future<kdov1fund.ListFundTradingSnapshotsResponse> listFundTradingSnapshots(
-    kdov1fund.ListFundTradingSnapshotsRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.FundService.listFundTradingSnapshots,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
-  Stream<kdov1fund.ListFundTradingSnapshotsResponse> streamFundTradingSnapshots(
-    kdov1fund.ListFundTradingSnapshotsRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).server(
-      specs.FundService.streamFundTradingSnapshots,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
 }

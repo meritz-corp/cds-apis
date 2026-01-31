@@ -34,18 +34,4 @@ abstract final class FundService {
     kdov1fund.ListFundsRequest.new,
     kdov1fund.ListFundsResponse.new,
   );
-
-  static const listFundTradingSnapshots = connect.Spec(
-    '/$name/ListFundTradingSnapshots',
-    connect.StreamType.unary,
-    kdov1fund.ListFundTradingSnapshotsRequest.new,
-    kdov1fund.ListFundTradingSnapshotsResponse.new,
-  );
-
-  static const streamFundTradingSnapshots = connect.Spec(
-    '/$name/StreamFundTradingSnapshots',
-    connect.StreamType.server,
-    kdov1fund.ListFundTradingSnapshotsRequest.new,
-    kdov1fund.ListFundTradingSnapshotsResponse.new,
-  );
 }

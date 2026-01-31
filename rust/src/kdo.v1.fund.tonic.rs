@@ -156,68 +156,6 @@ pub mod fund_service_client {
                 .insert(GrpcMethod::new("kdo.v1.fund.FundService", "ListFunds"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn list_fund_trading_snapshots(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ListFundTradingSnapshotsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListFundTradingSnapshotsResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.fund.FundService/ListFundTradingSnapshots",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.fund.FundService",
-                        "ListFundTradingSnapshots",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn stream_fund_trading_snapshots(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ListFundTradingSnapshotsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<
-                tonic::codec::Streaming<super::ListFundTradingSnapshotsResponse>,
-            >,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.fund.FundService/StreamFundTradingSnapshots",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.fund.FundService",
-                        "StreamFundTradingSnapshots",
-                    ),
-                );
-            self.inner.server_streaming(req, path, codec).await
-        }
     }
 }
 /// Generated server implementations.
@@ -246,29 +184,6 @@ pub mod fund_service_server {
             request: tonic::Request<super::ListFundsRequest>,
         ) -> std::result::Result<
             tonic::Response<super::ListFundsResponse>,
-            tonic::Status,
-        >;
-        async fn list_fund_trading_snapshots(
-            &self,
-            request: tonic::Request<super::ListFundTradingSnapshotsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListFundTradingSnapshotsResponse>,
-            tonic::Status,
-        >;
-        /// Server streaming response type for the StreamFundTradingSnapshots method.
-        type StreamFundTradingSnapshotsStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<
-                    super::ListFundTradingSnapshotsResponse,
-                    tonic::Status,
-                >,
-            >
-            + Send
-            + 'static;
-        async fn stream_fund_trading_snapshots(
-            &self,
-            request: tonic::Request<super::ListFundTradingSnapshotsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<Self::StreamFundTradingSnapshotsStream>,
             tonic::Status,
         >;
     }
@@ -480,110 +395,6 @@ pub mod fund_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.fund.FundService/ListFundTradingSnapshots" => {
-                    #[allow(non_camel_case_types)]
-                    struct ListFundTradingSnapshotsSvc<T: FundService>(pub Arc<T>);
-                    impl<
-                        T: FundService,
-                    > tonic::server::UnaryService<super::ListFundTradingSnapshotsRequest>
-                    for ListFundTradingSnapshotsSvc<T> {
-                        type Response = super::ListFundTradingSnapshotsResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<
-                                super::ListFundTradingSnapshotsRequest,
-                            >,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as FundService>::list_fund_trading_snapshots(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = ListFundTradingSnapshotsSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.fund.FundService/StreamFundTradingSnapshots" => {
-                    #[allow(non_camel_case_types)]
-                    struct StreamFundTradingSnapshotsSvc<T: FundService>(pub Arc<T>);
-                    impl<
-                        T: FundService,
-                    > tonic::server::ServerStreamingService<
-                        super::ListFundTradingSnapshotsRequest,
-                    > for StreamFundTradingSnapshotsSvc<T> {
-                        type Response = super::ListFundTradingSnapshotsResponse;
-                        type ResponseStream = T::StreamFundTradingSnapshotsStream;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::ResponseStream>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<
-                                super::ListFundTradingSnapshotsRequest,
-                            >,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as FundService>::stream_fund_trading_snapshots(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = StreamFundTradingSnapshotsSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
