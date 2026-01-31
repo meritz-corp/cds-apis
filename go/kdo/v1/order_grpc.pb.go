@@ -28,6 +28,8 @@ type OrderServiceClient interface {
 	AmendOrder(ctx context.Context, in *AmendOrderRequest, opts ...grpc.CallOption) (*AmendOrderResponse, error)
 	// 취소 주문
 	CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error)
+	// 전체 주문 취소
+	CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error)
 }
 
 type orderServiceClient struct {
@@ -65,6 +67,15 @@ func (c *orderServiceClient) CancelOrder(ctx context.Context, in *CancelOrderReq
 	return out, nil
 }
 
+func (c *orderServiceClient) CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error) {
+	out := new(CancelAllOrdersResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order.OrderService/CancelAllOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -75,6 +86,8 @@ type OrderServiceServer interface {
 	AmendOrder(context.Context, *AmendOrderRequest) (*AmendOrderResponse, error)
 	// 취소 주문
 	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error)
+	// 전체 주문 취소
+	CancelAllOrders(context.Context, *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -90,6 +103,9 @@ func (UnimplementedOrderServiceServer) AmendOrder(context.Context, *AmendOrderRe
 }
 func (UnimplementedOrderServiceServer) CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOrder not implemented")
+}
+func (UnimplementedOrderServiceServer) CancelAllOrders(context.Context, *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelAllOrders not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -158,6 +174,24 @@ func _OrderService_CancelOrder_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_CancelAllOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelAllOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).CancelAllOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order.OrderService/CancelAllOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).CancelAllOrders(ctx, req.(*CancelAllOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +210,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelOrder",
 			Handler:    _OrderService_CancelOrder_Handler,
+		},
+		{
+			MethodName: "CancelAllOrders",
+			Handler:    _OrderService_CancelAllOrders_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

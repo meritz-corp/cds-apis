@@ -34,4 +34,12 @@ abstract final class OrderService {
     kdov1order.CancelOrderRequest.new,
     kdov1order.CancelOrderResponse.new,
   );
+
+  /// 전체 주문 취소
+  static const cancelAllOrders = connect.Spec(
+    '/$name/CancelAllOrders',
+    connect.StreamType.unary,
+    kdov1order.CancelAllOrdersRequest.new,
+    kdov1order.CancelAllOrdersResponse.new,
+  );
 }

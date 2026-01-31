@@ -62,4 +62,22 @@ extension type OrderServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 전체 주문 취소
+  Future<kdov1order.CancelAllOrdersResponse> cancelAllOrders(
+    kdov1order.CancelAllOrdersRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderService.cancelAllOrders,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

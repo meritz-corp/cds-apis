@@ -590,6 +590,96 @@ class CancelOrderResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(4);
 }
 
+class CancelAllOrdersRequest extends $pb.GeneratedMessage {
+  factory CancelAllOrdersRequest() => create();
+
+  CancelAllOrdersRequest._();
+
+  factory CancelAllOrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelAllOrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelAllOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersRequest clone() => CancelAllOrdersRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersRequest copyWith(void Function(CancelAllOrdersRequest) updates) => super.copyWith((message) => updates(message as CancelAllOrdersRequest)) as CancelAllOrdersRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersRequest create() => CancelAllOrdersRequest._();
+  @$core.override
+  CancelAllOrdersRequest createEmptyInstance() => create();
+  static $pb.PbList<CancelAllOrdersRequest> createRepeated() => $pb.PbList<CancelAllOrdersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelAllOrdersRequest>(create);
+  static CancelAllOrdersRequest? _defaultInstance;
+}
+
+class CancelAllOrdersResponse extends $pb.GeneratedMessage {
+  factory CancelAllOrdersResponse({
+    $core.int? cancelledCount,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (cancelledCount != null) result.cancelledCount = cancelledCount;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  CancelAllOrdersResponse._();
+
+  factory CancelAllOrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelAllOrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelAllOrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'cancelledCount', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersResponse clone() => CancelAllOrdersResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelAllOrdersResponse copyWith(void Function(CancelAllOrdersResponse) updates) => super.copyWith((message) => updates(message as CancelAllOrdersResponse)) as CancelAllOrdersResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersResponse create() => CancelAllOrdersResponse._();
+  @$core.override
+  CancelAllOrdersResponse createEmptyInstance() => create();
+  static $pb.PbList<CancelAllOrdersResponse> createRepeated() => $pb.PbList<CancelAllOrdersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CancelAllOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelAllOrdersResponse>(create);
+  static CancelAllOrdersResponse? _defaultInstance;
+
+  /// 취소 요청된 주문 수
+  @$pb.TagNumber(1)
+  $core.int get cancelledCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set cancelledCount($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCancelledCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCancelledCount() => $_clearField(1);
+
+  /// 결과 메시지
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
 class StreamOrderResultsRequest extends $pb.GeneratedMessage {
   factory StreamOrderResultsRequest({
     $core.String? fundCode,

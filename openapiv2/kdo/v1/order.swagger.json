@@ -186,6 +186,39 @@
           "OrderService"
         ]
       }
+    },
+    "/v1/orders:cancel_all": {
+      "post": {
+        "summary": "전체 주문 취소",
+        "operationId": "OrderService_CancelAllOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderCancelAllOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/orderCancelAllOrdersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -205,6 +238,23 @@
         "status": {
           "$ref": "#/definitions/orderOrderStatus",
           "title": "주문 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "결과 메시지"
+        }
+      }
+    },
+    "orderCancelAllOrdersRequest": {
+      "type": "object"
+    },
+    "orderCancelAllOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "cancelledCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "취소 요청된 주문 수"
         },
         "message": {
           "type": "string",

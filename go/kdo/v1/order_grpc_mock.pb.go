@@ -54,6 +54,26 @@ func (mr *MockOrderServiceClientMockRecorder) AmendOrder(ctx, in interface{}, op
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AmendOrder", reflect.TypeOf((*MockOrderServiceClient)(nil).AmendOrder), varargs...)
 }
 
+// CancelAllOrders mocks base method.
+func (m *MockOrderServiceClient) CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CancelAllOrders", varargs...)
+	ret0, _ := ret[0].(*CancelAllOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelAllOrders indicates an expected call of CancelAllOrders.
+func (mr *MockOrderServiceClientMockRecorder) CancelAllOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelAllOrders", reflect.TypeOf((*MockOrderServiceClient)(nil).CancelAllOrders), varargs...)
+}
+
 // CancelOrder mocks base method.
 func (m *MockOrderServiceClient) CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error) {
 	m.ctrl.T.Helper()
@@ -130,6 +150,21 @@ func (m *MockOrderServiceServer) AmendOrder(ctx context.Context, in *AmendOrderR
 func (mr *MockOrderServiceServerMockRecorder) AmendOrder(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AmendOrder", reflect.TypeOf((*MockOrderServiceServer)(nil).AmendOrder), ctx, in)
+}
+
+// CancelAllOrders mocks base method.
+func (m *MockOrderServiceServer) CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CancelAllOrders", ctx, in)
+	ret0, _ := ret[0].(*CancelAllOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelAllOrders indicates an expected call of CancelAllOrders.
+func (mr *MockOrderServiceServerMockRecorder) CancelAllOrders(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelAllOrders", reflect.TypeOf((*MockOrderServiceServer)(nil).CancelAllOrders), ctx, in)
 }
 
 // CancelOrder mocks base method.

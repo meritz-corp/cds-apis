@@ -191,6 +191,29 @@ final $typed_data.Uint8List cancelOrderResponseDescriptor = $convert.base64Decod
     'a2RvLnYxLm9yZGVyLk9yZGVyU3RhdHVzUgZzdGF0dXMSGAoHbWVzc2FnZRgEIAEoCVIHbWVzc2'
     'FnZQ==');
 
+@$core.Deprecated('Use cancelAllOrdersRequestDescriptor instead')
+const CancelAllOrdersRequest$json = {
+  '1': 'CancelAllOrdersRequest',
+};
+
+/// Descriptor for `CancelAllOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelAllOrdersRequestDescriptor = $convert.base64Decode(
+    'ChZDYW5jZWxBbGxPcmRlcnNSZXF1ZXN0');
+
+@$core.Deprecated('Use cancelAllOrdersResponseDescriptor instead')
+const CancelAllOrdersResponse$json = {
+  '1': 'CancelAllOrdersResponse',
+  '2': [
+    {'1': 'cancelled_count', '3': 1, '4': 1, '5': 5, '10': 'cancelledCount'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `CancelAllOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelAllOrdersResponseDescriptor = $convert.base64Decode(
+    'ChdDYW5jZWxBbGxPcmRlcnNSZXNwb25zZRInCg9jYW5jZWxsZWRfY291bnQYASABKAVSDmNhbm'
+    'NlbGxlZENvdW50EhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2U=');
+
 @$core.Deprecated('Use streamOrderResultsRequestDescriptor instead')
 const StreamOrderResultsRequest$json = {
   '1': 'StreamOrderResultsRequest',

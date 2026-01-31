@@ -114,6 +114,22 @@ pub struct CancelOrderResponse {
     #[prost(string, tag="4")]
     pub message: ::prost::alloc::string::String,
 }
+// ========== CancelAllOrders ==========
+
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct CancelAllOrdersRequest {
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelAllOrdersResponse {
+    /// 취소 요청된 주문 수
+    #[prost(int32, tag="1")]
+    pub cancelled_count: i32,
+    /// 결과 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
 // ========== StreamOrderResults ==========
 
 #[allow(clippy::derive_partial_eq_without_eq)]

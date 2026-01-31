@@ -48,6 +48,11 @@ class OrderServiceClient extends $grpc.Client {
     return $createUnaryCall(_$cancelOrder, request, options: options);
   }
 
+  /// 전체 주문 취소
+  $grpc.ResponseFuture<$0.CancelAllOrdersResponse> cancelAllOrders($0.CancelAllOrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$cancelAllOrders, request, options: options);
+  }
+
     // method descriptors
 
   static final _$submitOrder = $grpc.ClientMethod<$0.SubmitOrderRequest, $0.SubmitOrderResponse>(
@@ -62,6 +67,10 @@ class OrderServiceClient extends $grpc.Client {
       '/kdo.v1.order.OrderService/CancelOrder',
       ($0.CancelOrderRequest value) => value.writeToBuffer(),
       $0.CancelOrderResponse.fromBuffer);
+  static final _$cancelAllOrders = $grpc.ClientMethod<$0.CancelAllOrdersRequest, $0.CancelAllOrdersResponse>(
+      '/kdo.v1.order.OrderService/CancelAllOrders',
+      ($0.CancelAllOrdersRequest value) => value.writeToBuffer(),
+      $0.CancelAllOrdersResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.order.OrderService')
@@ -90,6 +99,13 @@ abstract class OrderServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CancelOrderRequest.fromBuffer(value),
         ($0.CancelOrderResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CancelAllOrdersRequest, $0.CancelAllOrdersResponse>(
+        'CancelAllOrders',
+        cancelAllOrders_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CancelAllOrdersRequest.fromBuffer(value),
+        ($0.CancelAllOrdersResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.SubmitOrderResponse> submitOrder_Pre($grpc.ServiceCall $call, $async.Future<$0.SubmitOrderRequest> $request) async {
@@ -109,5 +125,11 @@ abstract class OrderServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.CancelOrderResponse> cancelOrder($grpc.ServiceCall call, $0.CancelOrderRequest request);
+
+  $async.Future<$0.CancelAllOrdersResponse> cancelAllOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.CancelAllOrdersRequest> $request) async {
+    return cancelAllOrders($call, await $request);
+  }
+
+  $async.Future<$0.CancelAllOrdersResponse> cancelAllOrders($grpc.ServiceCall call, $0.CancelAllOrdersRequest request);
 
 }

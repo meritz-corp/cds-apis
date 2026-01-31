@@ -34,6 +34,13 @@ service OrderService {
     };
   }
 
+  // 전체 주문 취소
+  rpc CancelAllOrders(CancelAllOrdersRequest) returns (CancelAllOrdersResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders:cancel_all"
+      body: "*"
+    };
+  }
 }
 
 // ========== Enums ==========
@@ -164,6 +171,20 @@ message CancelOrderResponse {
 
   // 결과 메시지
   string message = 4;
+}
+
+// ========== CancelAllOrders ==========
+
+message CancelAllOrdersRequest {
+
+}
+
+message CancelAllOrdersResponse {
+  // 취소 요청된 주문 수
+  int32 cancelled_count = 1;
+
+  // 결과 메시지
+  string message = 2;
 }
 
 // ========== StreamOrderResults ==========
