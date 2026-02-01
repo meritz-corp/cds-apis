@@ -1119,25 +1119,11 @@
       },
       "title": "상태 변경 이벤트"
     },
-    "arbitrageTriggerCondition": {
-      "type": "object",
-      "properties": {
-        "spreadAmount": {
-          "$ref": "#/definitions/arbitrageSpreadAmountCondition",
-          "title": "절대 스프레드 (금액)"
-        },
-        "spreadBps": {
-          "$ref": "#/definitions/arbitrageSpreadBpsCondition",
-          "title": "상대 스프레드 (bps)"
-        }
-      },
-      "title": "트리거 조건"
-    },
     "arbitrageTriggerConfig": {
       "type": "object",
       "properties": {
         "condition": {
-          "$ref": "#/definitions/arbitrageTriggerCondition",
+          "$ref": "#/definitions/v1arbitrageTriggerCondition",
           "title": "트리거 조건"
         },
         "cooldownMs": {
@@ -1372,6 +1358,20 @@
           }
         }
       }
+    },
+    "v1arbitrageTriggerCondition": {
+      "type": "object",
+      "properties": {
+        "spreadAmount": {
+          "$ref": "#/definitions/arbitrageSpreadAmountCondition",
+          "title": "절대 스프레드 (금액)"
+        },
+        "spreadBps": {
+          "$ref": "#/definitions/arbitrageSpreadBpsCondition",
+          "title": "상대 스프레드 (bps)"
+        }
+      },
+      "title": "트리거 조건"
     },
     "v1arbitrageTriggeredEvent": {
       "type": "object",

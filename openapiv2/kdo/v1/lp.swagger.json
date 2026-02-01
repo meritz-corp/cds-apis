@@ -527,11 +527,15 @@
         "offset": {
           "$ref": "#/definitions/lpEtfLpOffset",
           "title": "동적 offset 조정 설정"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
         }
       },
       "title": "ETF LP 설정"
     },
-    "lpEtfLpOHedge": {
+    "lpEtfLpHedge": {
       "type": "object",
       "properties": {
         "symbol": {
@@ -653,7 +657,7 @@
           "title": "동적 offset 조정 설정 (optional)"
         },
         "hedge": {
-          "$ref": "#/definitions/lpEtfLpOHedge",
+          "$ref": "#/definitions/lpEtfLpHedge",
           "title": "헷지 정보"
         }
       },

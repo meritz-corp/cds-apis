@@ -7,6 +7,14 @@ import "package:connectrpc/connect.dart" as connect;
 import "lp.pb.dart" as kdov1lp;
 
 /// LP 서비스는 ETF LP 관련 서비스를 제공합니다.
+/// ETF LP 생성
+///  rpc CreateEtfLp(CreateEtfLpRequest) returns (EtfLp) {
+///    option (google.api.http) = {
+///      post: "/v1/lps"
+///      body: "etf_lp"
+///    };
+///    option (google.api.method_signature) = "etf_lp";
+///  }
 abstract final class LpService {
   /// Fully-qualified name of the LpService service.
   static const name = 'kdo.v1.lp.LpService';

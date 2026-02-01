@@ -8,6 +8,14 @@ import "lp.pb.dart" as kdov1lp;
 import "lp.connect.spec.dart" as specs;
 
 /// LP 서비스는 ETF LP 관련 서비스를 제공합니다.
+/// ETF LP 생성
+///  rpc CreateEtfLp(CreateEtfLpRequest) returns (EtfLp) {
+///    option (google.api.http) = {
+///      post: "/v1/lps"
+///      body: "etf_lp"
+///    };
+///    option (google.api.method_signature) = "etf_lp";
+///  }
 extension type LpServiceClient (connect.Transport _transport) {
   /// ETF LP 조회
   Future<kdov1lp.EtfLp> getEtfLp(

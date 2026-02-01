@@ -1,0 +1,392 @@
+syntax = "proto3";
+
+package kdo.v1.hedge;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// HedgeService는 헷지 관련 서비스를 제공합니다.
+// Hedge: 펀드 단위 즉시 헷지 (1:1 매핑)
+// HedgeGroup: 포트폴리오 단위 주기적 헷지 (트리거 조건 기반)
+service HedgeService {
+  // 단일 Hedge 조회
+  rpc GetHedge(GetHedgeRequest) returns (Hedge) {
+    option (google.api.http) = {
+      get: "/v1/{name=hedges/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Hedge 목록 조회
+  rpc ListHedges(ListHedgesRequest) returns (ListHedgesResponse) {
+    option (google.api.http) = {
+      get: "/v1/hedges"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // Hedge 생성
+  rpc CreateHedge(CreateHedgeRequest) returns (Hedge) {
+    option (google.api.http) = {
+      post: "/v1/hedges"
+      body: "hedge"
+    };
+    option (google.api.method_signature) = "hedge";
+  }
+
+  // Hedge 수정
+  rpc UpdateHedge(UpdateHedgeRequest) returns (Hedge) {
+    option (google.api.http) = {
+      patch: "/v1/{hedge.name=hedges/*}"
+      body: "hedge"
+    };
+    option (google.api.method_signature) = "hedge";
+  }
+
+  // Hedge 삭제
+  rpc DeleteHedge(DeleteHedgeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=hedges/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // 단일 HedgeGroup 조회
+  rpc GetHedgeGroup(GetHedgeGroupRequest) returns (HedgeGroup) {
+    option (google.api.http) = {
+      get: "/v1/{name=hedge_groups/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // HedgeGroup 목록 조회
+  rpc ListHedgeGroups(ListHedgeGroupsRequest) returns (ListHedgeGroupsResponse) {
+    option (google.api.http) = {
+      get: "/v1/hedge_groups"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // HedgeGroup 생성
+  rpc CreateHedgeGroup(CreateHedgeGroupRequest) returns (HedgeGroup) {
+    option (google.api.http) = {
+      post: "/v1/hedge_groups"
+      body: "hedge_group"
+    };
+    option (google.api.method_signature) = "hedge_group";
+  }
+
+  // HedgeGroup 수정
+  rpc UpdateHedgeGroup(UpdateHedgeGroupRequest) returns (HedgeGroup) {
+    option (google.api.http) = {
+      patch: "/v1/{hedge_group.name=hedge_groups/*}"
+      body: "hedge_group"
+    };
+    option (google.api.method_signature) = "hedge_group";
+  }
+
+  // HedgeGroup 삭제
+  rpc DeleteHedgeGroup(DeleteHedgeGroupRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=hedge_groups/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+}
+
+// ========== Resource Messages ==========
+
+// Hedge: 펀드 단위 즉시 헷지 설정
+// 소스 종목의 체결에 대해 즉시 헷지 주문을 실행
+message Hedge {
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/Hedge"
+    pattern: "hedges/{hedge}"
+  };
+
+  // 리소스 이름 (예: hedges/1)
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Hedge ID
+  int32 id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 펀드 코드
+  string fund_code = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 소스 종목 심볼 (체결 감시 대상)
+  string source_symbol = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 헷지 방식
+  HedgeMethod hedge_method = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // 활성화 여부
+  bool is_active = 6;
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// 헷지 방식
+message HedgeMethod {
+  oneof method {
+    // 선물 헷지 (비율 기반)
+    FutureHedge future = 1;
+
+    // ETF 분해 헷지 (CU 기반)
+    EtfDecompositionHedge etf_decomposition = 2;
+  }
+}
+
+// 선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매
+message FutureHedge {
+  // 헷지 대상 종목 심볼
+  string hedge_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 헷지 비율 (소스 수량 대비)
+  double ratio = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ETF 분해 헷지: ETF를 구성 종목으로 분해하여 CU 단위로 헷지
+message EtfDecompositionHedge {
+  // 1CU(설정단위) 당 ETF 주수
+  int32 cu = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 1CU 당 구성 종목별 헷지 주문 수량
+  // key: 종목 심볼, value: 1CU 당 주문 수량
+  map<string, int64> hedge_orders_per_1cu = 2;
+}
+
+// HedgeGroup: 포트폴리오 단위 주기적 헷지
+// 트리거 조건에 따라 주기적으로 헷지 실행
+message HedgeGroup {
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/HedgeGroup"
+    pattern: "hedge_groups/{hedge_group}"
+  };
+
+  // 리소스 이름 (예: hedge_groups/1)
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // HedgeGroup ID
+  int32 id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 포트폴리오 리소스 이름
+  // format: portfolios/{portfolio}
+  string portfolio = 3 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
+    }
+  ];
+
+  // 그룹 이름
+  string display_name = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 헷지 펀드 코드 (헷지 주문 실행 펀드)
+  string hedge_fund_code = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // 트리거 조건
+  TriggerCondition trigger_condition = 6 [(google.api.field_behavior) = REQUIRED];
+
+  // 그룹 소속 항목들
+  repeated HedgeGroupItem items = 7;
+
+  // 활성화 여부
+  bool is_active = 8;
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// HedgeGroup 소속 항목
+message HedgeGroupItem {
+  // 항목 ID
+  int32 id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 소속 HedgeGroup ID
+  int32 hedge_group_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 소스 종목 심볼
+  string source_symbol = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 트리거 조건: 헷지 실행 기준
+message TriggerCondition {
+  oneof condition {
+    // 수량 기반 트리거
+    QuantityTrigger quantity = 1;
+
+    // 금액 기반 트리거
+    AmountTrigger amount = 2;
+  }
+}
+
+// 수량 기반 트리거: 순수량 변동이 threshold 이상이면 헷지 실행
+message QuantityTrigger {
+  // 트리거 수량 임계값
+  int64 threshold = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 헷지 종목 심볼
+  string hedge_instrument = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 헷지 비율
+  double ratio = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 금액 기반 트리거: 순금액 변동이 threshold 이상이면 헷지 실행
+message AmountTrigger {
+  // 트리거 금액 임계값 (원)
+  int64 threshold = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 헷지 종목 심볼
+  string hedge_instrument = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 헷지 비율
+  double ratio = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ========== Request/Response Messages ==========
+
+// GetHedge 요청
+message GetHedgeRequest {
+  // 헷지 리소스 이름 (예: hedges/1)
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Hedge"
+    }
+  ];
+}
+
+// ListHedges 요청
+message ListHedgesRequest {
+  // 페이지 크기
+  optional int32 page_size = 1;
+
+  // 페이지 토큰
+  optional string page_token = 2;
+
+  // 필터
+  // Available filters:
+  // * fund_code
+  //   * `equal`
+  // * source_symbol
+  //   * `equal`
+  // * is_active
+  //   * `equal`
+  //
+  // Examples:
+  // * filter=fund_code="0159"
+  // * filter=is_active=true
+  string filter = 3;
+}
+
+// ListHedges 응답
+message ListHedgesResponse {
+  // 헷지 목록
+  repeated Hedge hedges = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+// CreateHedge 요청
+message CreateHedgeRequest {
+  // 생성할 헷지 정보
+  Hedge hedge = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// UpdateHedge 요청
+message UpdateHedgeRequest {
+  // 수정할 헷지 정보
+  Hedge hedge = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// DeleteHedge 요청
+message DeleteHedgeRequest {
+  // 삭제할 헷지 리소스 이름
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Hedge"
+    }
+  ];
+}
+
+// GetHedgeGroup 요청
+message GetHedgeGroupRequest {
+  // 헷지그룹 리소스 이름 (예: hedge_groups/1)
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/HedgeGroup"
+    }
+  ];
+}
+
+// ListHedgeGroups 요청
+message ListHedgeGroupsRequest {
+  // 페이지 크기
+  optional int32 page_size = 1;
+
+  // 페이지 토큰
+  optional string page_token = 2;
+
+  // 필터
+  // Available filters:
+  // * portfolio
+  //   * `equal`
+  // * hedge_fund_code
+  //   * `equal`
+  // * is_active
+  //   * `equal`
+  //
+  // Examples:
+  // * filter=portfolio="portfolios/1"
+  // * filter=is_active=true
+  string filter = 3;
+}
+
+// ListHedgeGroups 응답
+message ListHedgeGroupsResponse {
+  // 헷지그룹 목록
+  repeated HedgeGroup hedge_groups = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+// CreateHedgeGroup 요청
+message CreateHedgeGroupRequest {
+  // 생성할 헷지그룹 정보
+  HedgeGroup hedge_group = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// UpdateHedgeGroup 요청
+message UpdateHedgeGroupRequest {
+  // 수정할 헷지그룹 정보
+  HedgeGroup hedge_group = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// DeleteHedgeGroup 요청
+message DeleteHedgeGroupRequest {
+  // 삭제할 헷지그룹 리소스 이름
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/HedgeGroup"
+    }
+  ];
+}

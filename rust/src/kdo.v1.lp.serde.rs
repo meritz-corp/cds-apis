@@ -1,4 +1,100 @@
 // @generated
+impl serde::Serialize for CreateEtfLpRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.CreateEtfLpRequest", len)?;
+        if let Some(v) = self.etf_lp.as_ref() {
+            struct_ser.serialize_field("etf_lp", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CreateEtfLpRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf_lp",
+            "etfLp",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EtfLp,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etfLp" | "etf_lp" => Ok(GeneratedField::EtfLp),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CreateEtfLpRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.CreateEtfLpRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CreateEtfLpRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf_lp__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EtfLp => {
+                            if etf_lp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfLp"));
+                            }
+                            etf_lp__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CreateEtfLpRequest {
+                    etf_lp: etf_lp__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.CreateEtfLpRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for EtfLp {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -7,6 +103,9 @@ impl serde::Serialize for EtfLp {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -56,6 +155,9 @@ impl serde::Serialize for EtfLp {
         if let Some(v) = self.offset.as_ref() {
             struct_ser.serialize_field("offset", v)?;
         }
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
         struct_ser.end()
     }
 }
@@ -75,6 +177,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "tick_size",
             "tickSize",
             "offset",
+            "enabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -86,6 +189,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             Depth,
             TickSize,
             Offset,
+            Enabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -115,6 +219,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             "offset" => Ok(GeneratedField::Offset),
+                            "enabled" => Ok(GeneratedField::Enabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -141,6 +246,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut depth__ = None;
                 let mut tick_size__ = None;
                 let mut offset__ = None;
+                let mut enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -193,6 +299,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             }
                             offset__ = map_.next_value()?;
                         }
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -206,13 +318,14 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     depth: depth__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
                     offset: offset__,
+                    enabled: enabled__.unwrap_or_default(),
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.lp.EtfLp", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for EtfLpOHedge {
+impl serde::Serialize for EtfLpHedge {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -229,7 +342,7 @@ impl serde::Serialize for EtfLpOHedge {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpOHedge", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpHedge", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -244,7 +357,7 @@ impl serde::Serialize for EtfLpOHedge {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for EtfLpOHedge {
+impl<'de> serde::Deserialize<'de> for EtfLpHedge {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -296,13 +409,13 @@ impl<'de> serde::Deserialize<'de> for EtfLpOHedge {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = EtfLpOHedge;
+            type Value = EtfLpHedge;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.EtfLpOHedge")
+                formatter.write_str("struct kdo.v1.lp.EtfLpHedge")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpOHedge, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpHedge, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -336,14 +449,14 @@ impl<'de> serde::Deserialize<'de> for EtfLpOHedge {
                         }
                     }
                 }
-                Ok(EtfLpOHedge {
+                Ok(EtfLpHedge {
                     symbol: symbol__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
                     filled_quantity_per_hedge: filled_quantity_per_hedge__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.EtfLpOHedge", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpHedge", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for EtfLpOffset {

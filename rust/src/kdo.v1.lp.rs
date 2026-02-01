@@ -25,6 +25,9 @@ pub struct EtfLp {
     /// 동적 offset 조정 설정
     #[prost(message, optional, tag="10")]
     pub offset: ::core::option::Option<EtfLpOffset>,
+    /// 활성화 여부
+    #[prost(bool, tag="11")]
+    pub enabled: bool,
 }
 // ========== ETF LP Status Messages ==========
 
@@ -58,7 +61,7 @@ pub struct EtfLpStatus {
     pub offset: ::core::option::Option<EtfLpOffset>,
     /// 헷지 정보
     #[prost(message, optional, tag="12")]
-    pub hedge: ::core::option::Option<EtfLpOHedge>,
+    pub hedge: ::core::option::Option<EtfLpHedge>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -125,7 +128,7 @@ pub struct EtfLpOffset {
 /// ETF LP 헷지 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLpOHedge {
+pub struct EtfLpHedge {
     /// 헷지 대상 종목 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -225,7 +228,16 @@ pub struct LpPricing {
     #[prost(string, tag="4")]
     pub etf_bid_nav: ::prost::alloc::string::String,
 }
-/// ========== Request/Response Messages ==========
+// ========== Request/Response Messages ==========
+
+/// CreateEtfLp
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateEtfLpRequest {
+    /// 생성할 ETF LP 설정
+    #[prost(message, optional, tag="1")]
+    pub etf_lp: ::core::option::Option<EtfLp>,
+}
 /// GetEtfLp
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -61,6 +61,7 @@ const EtfLp$json = {
     {'1': 'depth', '3': 8, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
     {'1': 'offset', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
+    {'1': 'enabled', '3': 11, '4': 1, '5': 8, '10': 'enabled'},
   ],
 };
 
@@ -69,7 +70,8 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'CgVFdGZMcBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bm'
     'RDb2RlEhQKBWJhc2lzGAYgASgDUgViYXNpcxIaCghxdWFudGl0eRgHIAEoA1IIcXVhbnRpdHkS'
     'FAoFZGVwdGgYCCABKA1SBWRlcHRoEhsKCXRpY2tfc2l6ZRgJIAEoA1IIdGlja1NpemUSLgoGb2'
-    'Zmc2V0GAogASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQ=');
+    'Zmc2V0GAogASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQSGAoHZW5hYmxlZBgL'
+    'IAEoCFIHZW5hYmxlZA==');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {
@@ -83,7 +85,7 @@ const EtfLpStatus$json = {
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
     {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
-    {'1': 'hedge', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOHedge', '10': 'hedge'},
+    {'1': 'hedge', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpHedge', '10': 'hedge'},
   ],
 };
 
@@ -95,7 +97,7 @@ final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'RlEi4KB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQcmljaW5nUgdwcmljaW5nEkIKD2Zp'
     'bGxfc3RhdGlzdGljcxgKIAEoCzIZLmtkby52MS5scC5GaWxsU3RhdGlzdGljc1IOZmlsbFN0YX'
     'Rpc3RpY3MSLgoGb2Zmc2V0GAsgASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQS'
-    'LAoFaGVkZ2UYDCABKAsyFi5rZG8udjEubHAuRXRmTHBPSGVkZ2VSBWhlZGdl');
+    'KwoFaGVkZ2UYDCABKAsyFS5rZG8udjEubHAuRXRmTHBIZWRnZVIFaGVkZ2U=');
 
 @$core.Deprecated('Use etfLpStatusUpdateDescriptor instead')
 const EtfLpStatusUpdate$json = {
@@ -164,9 +166,9 @@ final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
     'MgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCAB'
     'KAFSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
 
-@$core.Deprecated('Use etfLpOHedgeDescriptor instead')
-const EtfLpOHedge$json = {
-  '1': 'EtfLpOHedge',
+@$core.Deprecated('Use etfLpHedgeDescriptor instead')
+const EtfLpHedge$json = {
+  '1': 'EtfLpHedge',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
@@ -174,11 +176,11 @@ const EtfLpOHedge$json = {
   ],
 };
 
-/// Descriptor for `EtfLpOHedge`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfLpOHedgeDescriptor = $convert.base64Decode(
-    'CgtFdGZMcE9IZWRnZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBItCgRmdW5kGAIgASgJQhn6QR'
-    'YKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEjkKGWZpbGxlZF9xdWFudGl0eV9wZXJfaGVk'
-    'Z2UYAyABKANSFmZpbGxlZFF1YW50aXR5UGVySGVkZ2U=');
+/// Descriptor for `EtfLpHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpHedgeDescriptor = $convert.base64Decode(
+    'CgpFdGZMcEhlZGdlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEi0KBGZ1bmQYAiABKAlCGfpBFg'
+    'oUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSOQoZZmlsbGVkX3F1YW50aXR5X3Blcl9oZWRn'
+    'ZRgDIAEoA1IWZmlsbGVkUXVhbnRpdHlQZXJIZWRnZQ==');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {
@@ -251,6 +253,19 @@ const LpPricing$json = {
 final $typed_data.Uint8List lpPricingDescriptor = $convert.base64Decode(
     'CglMcFByaWNpbmcSGwoJZXRmX3ByaWNlGAEgASgJUghldGZQcmljZRIeCgtldGZfYXNrX25hdh'
     'gDIAEoCVIJZXRmQXNrTmF2Eh4KC2V0Zl9iaWRfbmF2GAQgASgJUglldGZCaWROYXY=');
+
+@$core.Deprecated('Use createEtfLpRequestDescriptor instead')
+const CreateEtfLpRequest$json = {
+  '1': 'CreateEtfLpRequest',
+  '2': [
+    {'1': 'etf_lp', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLp', '8': {}, '10': 'etfLp'},
+  ],
+};
+
+/// Descriptor for `CreateEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createEtfLpRequestDescriptor = $convert.base64Decode(
+    'ChJDcmVhdGVFdGZMcFJlcXVlc3QSLQoGZXRmX2xwGAEgASgLMhAua2RvLnYxLmxwLkV0ZkxwQg'
+    'TiQQECUgVldGZMcA==');
 
 @$core.Deprecated('Use getEtfLpRequestDescriptor instead')
 const GetEtfLpRequest$json = {

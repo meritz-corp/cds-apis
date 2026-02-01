@@ -31,6 +31,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.int? depth,
     $fixnum.Int64? tickSize,
     EtfLpOffset? offset,
+    $core.bool? enabled,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -40,6 +41,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (depth != null) result.depth = depth;
     if (tickSize != null) result.tickSize = tickSize;
     if (offset != null) result.offset = offset;
+    if (enabled != null) result.enabled = enabled;
     return result;
   }
 
@@ -56,6 +58,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..a<$core.int>(8, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
     ..aOM<EtfLpOffset>(10, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
+    ..aOB(11, _omitFieldNames ? '' : 'enabled')
     ..hasRequiredFields = false
   ;
 
@@ -147,6 +150,16 @@ class EtfLp extends $pb.GeneratedMessage {
   void clearOffset() => $_clearField(10);
   @$pb.TagNumber(10)
   EtfLpOffset ensureOffset() => $_ensure(6);
+
+  /// 활성화 여부
+  @$pb.TagNumber(11)
+  $core.bool get enabled => $_getBF(7);
+  @$pb.TagNumber(11)
+  set enabled($core.bool value) => $_setBool(7, value);
+  @$pb.TagNumber(11)
+  $core.bool hasEnabled() => $_has(7);
+  @$pb.TagNumber(11)
+  void clearEnabled() => $_clearField(11);
 }
 
 /// ETF LP 상태
@@ -160,7 +173,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     LpPricing? pricing,
     FillStatistics? fillStatistics,
     EtfLpOffset? offset,
-    EtfLpOHedge? hedge,
+    EtfLpHedge? hedge,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -189,7 +202,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
     ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
-    ..aOM<EtfLpOHedge>(12, _omitFieldNames ? '' : 'hedge', subBuilder: EtfLpOHedge.create)
+    ..aOM<EtfLpHedge>(12, _omitFieldNames ? '' : 'hedge', subBuilder: EtfLpHedge.create)
     ..hasRequiredFields = false
   ;
 
@@ -298,15 +311,15 @@ class EtfLpStatus extends $pb.GeneratedMessage {
 
   /// 헷지 정보
   @$pb.TagNumber(12)
-  EtfLpOHedge get hedge => $_getN(8);
+  EtfLpHedge get hedge => $_getN(8);
   @$pb.TagNumber(12)
-  set hedge(EtfLpOHedge value) => $_setField(12, value);
+  set hedge(EtfLpHedge value) => $_setField(12, value);
   @$pb.TagNumber(12)
   $core.bool hasHedge() => $_has(8);
   @$pb.TagNumber(12)
   void clearHedge() => $_clearField(12);
   @$pb.TagNumber(12)
-  EtfLpOHedge ensureHedge() => $_ensure(8);
+  EtfLpHedge ensureHedge() => $_ensure(8);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -637,8 +650,8 @@ class EtfLpOffset extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 헷지 설정
-class EtfLpOHedge extends $pb.GeneratedMessage {
-  factory EtfLpOHedge({
+class EtfLpHedge extends $pb.GeneratedMessage {
+  factory EtfLpHedge({
     $core.String? symbol,
     $core.String? fund,
     $fixnum.Int64? filledQuantityPerHedge,
@@ -650,12 +663,12 @@ class EtfLpOHedge extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfLpOHedge._();
+  EtfLpHedge._();
 
-  factory EtfLpOHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpOHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory EtfLpHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLpHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..aInt64(3, _omitFieldNames ? '' : 'filledQuantityPerHedge')
@@ -663,21 +676,21 @@ class EtfLpOHedge extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpOHedge clone() => EtfLpOHedge()..mergeFromMessage(this);
+  EtfLpHedge clone() => EtfLpHedge()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpOHedge copyWith(void Function(EtfLpOHedge) updates) => super.copyWith((message) => updates(message as EtfLpOHedge)) as EtfLpOHedge;
+  EtfLpHedge copyWith(void Function(EtfLpHedge) updates) => super.copyWith((message) => updates(message as EtfLpHedge)) as EtfLpHedge;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLpOHedge create() => EtfLpOHedge._();
+  static EtfLpHedge create() => EtfLpHedge._();
   @$core.override
-  EtfLpOHedge createEmptyInstance() => create();
-  static $pb.PbList<EtfLpOHedge> createRepeated() => $pb.PbList<EtfLpOHedge>();
+  EtfLpHedge createEmptyInstance() => create();
+  static $pb.PbList<EtfLpHedge> createRepeated() => $pb.PbList<EtfLpHedge>();
   @$core.pragma('dart2js:noInline')
-  static EtfLpOHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpOHedge>(create);
-  static EtfLpOHedge? _defaultInstance;
+  static EtfLpHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpHedge>(create);
+  static EtfLpHedge? _defaultInstance;
 
   /// 헷지 대상 종목 심볼
   @$pb.TagNumber(1)
@@ -1071,7 +1084,56 @@ class LpPricing extends $pb.GeneratedMessage {
   void clearEtfBidNav() => $_clearField(4);
 }
 
-/// ========== Request/Response Messages ==========
+/// CreateEtfLp
+class CreateEtfLpRequest extends $pb.GeneratedMessage {
+  factory CreateEtfLpRequest({
+    EtfLp? etfLp,
+  }) {
+    final result = create();
+    if (etfLp != null) result.etfLp = etfLp;
+    return result;
+  }
+
+  CreateEtfLpRequest._();
+
+  factory CreateEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CreateEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOM<EtfLp>(1, _omitFieldNames ? '' : 'etfLp', subBuilder: EtfLp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateEtfLpRequest clone() => CreateEtfLpRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateEtfLpRequest copyWith(void Function(CreateEtfLpRequest) updates) => super.copyWith((message) => updates(message as CreateEtfLpRequest)) as CreateEtfLpRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateEtfLpRequest create() => CreateEtfLpRequest._();
+  @$core.override
+  CreateEtfLpRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateEtfLpRequest> createRepeated() => $pb.PbList<CreateEtfLpRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateEtfLpRequest>(create);
+  static CreateEtfLpRequest? _defaultInstance;
+
+  /// 생성할 ETF LP 설정
+  @$pb.TagNumber(1)
+  EtfLp get etfLp => $_getN(0);
+  @$pb.TagNumber(1)
+  set etfLp(EtfLp value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtfLp() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtfLp() => $_clearField(1);
+  @$pb.TagNumber(1)
+  EtfLp ensureEtfLp() => $_ensure(0);
+}
+
 /// GetEtfLp
 class GetEtfLpRequest extends $pb.GeneratedMessage {
   factory GetEtfLpRequest({

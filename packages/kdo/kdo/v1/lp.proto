@@ -13,6 +13,15 @@ option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
 // LP 서비스는 ETF LP 관련 서비스를 제공합니다.
 service LpService {
+  // ETF LP 생성
+//  rpc CreateEtfLp(CreateEtfLpRequest) returns (EtfLp) {
+//    option (google.api.http) = {
+//      post: "/v1/lps"
+//      body: "etf_lp"
+//    };
+//    option (google.api.method_signature) = "etf_lp";
+//  }
+
   // ETF LP 조회
   rpc GetEtfLp(GetEtfLpRequest) returns (EtfLp) {
     option (google.api.http) = {
@@ -116,6 +125,9 @@ message EtfLp {
 
   // 동적 offset 조정 설정
   EtfLpOffset offset = 10;
+
+  // 활성화 여부
+  bool enabled = 11;
 }
 
 // ========== ETF LP Status Messages ==========
@@ -147,7 +159,7 @@ message EtfLpStatus {
   EtfLpOffset offset = 11;
 
   // 헷지 정보
-  EtfLpOHedge hedge = 12;
+  EtfLpHedge hedge = 12;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -213,7 +225,7 @@ message EtfLpOffset {
 }
 
 // ETF LP 헷지 설정
-message EtfLpOHedge {
+message EtfLpHedge {
   // 헷지 대상 종목 심볼
   string symbol = 1;
 
@@ -320,6 +332,13 @@ message LpPricing {
 }
 
 // ========== Request/Response Messages ==========
+
+// CreateEtfLp
+message CreateEtfLpRequest {
+  // 생성할 ETF LP 설정
+  EtfLp etf_lp = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
 // GetEtfLp
 message GetEtfLpRequest {
   string etf = 1 [
