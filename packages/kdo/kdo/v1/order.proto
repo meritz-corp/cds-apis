@@ -62,6 +62,8 @@ enum QuoteType {
   QUOTE_TYPE_UNSPECIFIED = 0;
   QUOTE_TYPE_LIMIT = 1;   // 지정가
   QUOTE_TYPE_MARKET = 2;  // 시장가
+  QUOTE_TYPE_BEST_TAKE = 3;  // 상대호가
+  QUOTE_TYPE_BEST_MAKE = 4;  // 자기호가
 }
 
 enum OrderStatus {

@@ -36,13 +36,16 @@ const QuoteType$json = {
     {'1': 'QUOTE_TYPE_UNSPECIFIED', '2': 0},
     {'1': 'QUOTE_TYPE_LIMIT', '2': 1},
     {'1': 'QUOTE_TYPE_MARKET', '2': 2},
+    {'1': 'QUOTE_TYPE_BEST_TAKE', '2': 3},
+    {'1': 'QUOTE_TYPE_BEST_MAKE', '2': 4},
   ],
 };
 
 /// Descriptor for `QuoteType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List quoteTypeDescriptor = $convert.base64Decode(
     'CglRdW90ZVR5cGUSGgoWUVVPVEVfVFlQRV9VTlNQRUNJRklFRBAAEhQKEFFVT1RFX1RZUEVfTE'
-    'lNSVQQARIVChFRVU9URV9UWVBFX01BUktFVBAC');
+    'lNSVQQARIVChFRVU9URV9UWVBFX01BUktFVBACEhgKFFFVT1RFX1RZUEVfQkVTVF9UQUtFEAMS'
+    'GAoUUVVPVEVfVFlQRV9CRVNUX01BS0UQBA==');
 
 @$core.Deprecated('Use orderStatusDescriptor instead')
 const OrderStatus$json = {

@@ -2414,6 +2414,8 @@ impl serde::Serialize for QuoteType {
             Self::Unspecified => "QUOTE_TYPE_UNSPECIFIED",
             Self::Limit => "QUOTE_TYPE_LIMIT",
             Self::Market => "QUOTE_TYPE_MARKET",
+            Self::BestTake => "QUOTE_TYPE_BEST_TAKE",
+            Self::BestMake => "QUOTE_TYPE_BEST_MAKE",
         };
         serializer.serialize_str(variant)
     }
@@ -2428,6 +2430,8 @@ impl<'de> serde::Deserialize<'de> for QuoteType {
             "QUOTE_TYPE_UNSPECIFIED",
             "QUOTE_TYPE_LIMIT",
             "QUOTE_TYPE_MARKET",
+            "QUOTE_TYPE_BEST_TAKE",
+            "QUOTE_TYPE_BEST_MAKE",
         ];
 
         struct GeneratedVisitor;
@@ -2471,6 +2475,8 @@ impl<'de> serde::Deserialize<'de> for QuoteType {
                     "QUOTE_TYPE_UNSPECIFIED" => Ok(QuoteType::Unspecified),
                     "QUOTE_TYPE_LIMIT" => Ok(QuoteType::Limit),
                     "QUOTE_TYPE_MARKET" => Ok(QuoteType::Market),
+                    "QUOTE_TYPE_BEST_TAKE" => Ok(QuoteType::BestTake),
+                    "QUOTE_TYPE_BEST_MAKE" => Ok(QuoteType::BestMake),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

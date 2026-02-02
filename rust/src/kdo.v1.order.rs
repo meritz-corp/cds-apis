@@ -354,6 +354,10 @@ pub enum QuoteType {
     Limit = 1,
     /// 시장가
     Market = 2,
+    /// 상대호가
+    BestTake = 3,
+    /// 자기호가
+    BestMake = 4,
 }
 impl QuoteType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -365,6 +369,8 @@ impl QuoteType {
             QuoteType::Unspecified => "QUOTE_TYPE_UNSPECIFIED",
             QuoteType::Limit => "QUOTE_TYPE_LIMIT",
             QuoteType::Market => "QUOTE_TYPE_MARKET",
+            QuoteType::BestTake => "QUOTE_TYPE_BEST_TAKE",
+            QuoteType::BestMake => "QUOTE_TYPE_BEST_MAKE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -373,6 +379,8 @@ impl QuoteType {
             "QUOTE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "QUOTE_TYPE_LIMIT" => Some(Self::Limit),
             "QUOTE_TYPE_MARKET" => Some(Self::Market),
+            "QUOTE_TYPE_BEST_TAKE" => Some(Self::BestTake),
+            "QUOTE_TYPE_BEST_MAKE" => Some(Self::BestMake),
             _ => None,
         }
     }

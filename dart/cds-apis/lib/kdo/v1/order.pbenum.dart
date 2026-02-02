@@ -35,14 +35,18 @@ class QuoteType extends $pb.ProtobufEnum {
   static const QuoteType QUOTE_TYPE_UNSPECIFIED = QuoteType._(0, _omitEnumNames ? '' : 'QUOTE_TYPE_UNSPECIFIED');
   static const QuoteType QUOTE_TYPE_LIMIT = QuoteType._(1, _omitEnumNames ? '' : 'QUOTE_TYPE_LIMIT');
   static const QuoteType QUOTE_TYPE_MARKET = QuoteType._(2, _omitEnumNames ? '' : 'QUOTE_TYPE_MARKET');
+  static const QuoteType QUOTE_TYPE_BEST_TAKE = QuoteType._(3, _omitEnumNames ? '' : 'QUOTE_TYPE_BEST_TAKE');
+  static const QuoteType QUOTE_TYPE_BEST_MAKE = QuoteType._(4, _omitEnumNames ? '' : 'QUOTE_TYPE_BEST_MAKE');
 
   static const $core.List<QuoteType> values = <QuoteType> [
     QUOTE_TYPE_UNSPECIFIED,
     QUOTE_TYPE_LIMIT,
     QUOTE_TYPE_MARKET,
+    QUOTE_TYPE_BEST_TAKE,
+    QUOTE_TYPE_BEST_MAKE,
   ];
 
-  static final $core.List<QuoteType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static final $core.List<QuoteType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
   static QuoteType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const QuoteType._(super.value, super.name);

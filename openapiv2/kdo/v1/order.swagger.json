@@ -415,10 +415,12 @@
       "enum": [
         "QUOTE_TYPE_UNSPECIFIED",
         "QUOTE_TYPE_LIMIT",
-        "QUOTE_TYPE_MARKET"
+        "QUOTE_TYPE_MARKET",
+        "QUOTE_TYPE_BEST_TAKE",
+        "QUOTE_TYPE_BEST_MAKE"
       ],
       "default": "QUOTE_TYPE_UNSPECIFIED",
-      "title": "- QUOTE_TYPE_LIMIT: 지정가\n - QUOTE_TYPE_MARKET: 시장가"
+      "title": "- QUOTE_TYPE_LIMIT: 지정가\n - QUOTE_TYPE_MARKET: 시장가\n - QUOTE_TYPE_BEST_TAKE: 상대호가\n - QUOTE_TYPE_BEST_MAKE: 자기호가"
     },
     "orderSubmitOrderRequest": {
       "type": "object",
