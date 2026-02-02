@@ -63,6 +63,9 @@ pub struct AmendOrderRequest {
     /// 매수/매도
     #[prost(enumeration="OrderSide", tag="6")]
     pub side: i32,
+    /// 유동성 공급자 여부
+    #[prost(bool, tag="7")]
+    pub is_lp: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

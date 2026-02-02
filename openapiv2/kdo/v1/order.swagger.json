@@ -104,6 +104,10 @@
                 "side": {
                   "$ref": "#/definitions/v1orderOrderSide",
                   "title": "매수/매도"
+                },
+                "isLp": {
+                  "type": "boolean",
+                  "title": "유동성 공급자 여부"
                 }
               },
               "required": [
@@ -111,7 +115,8 @@
                 "symbol",
                 "quantity",
                 "price",
-                "side"
+                "side",
+                "isLp"
               ]
             }
           }
@@ -454,7 +459,9 @@
         "symbol",
         "side",
         "quantity",
-        "price"
+        "price",
+        "quoteType",
+        "isLp"
       ]
     },
     "orderSubmitOrderResponse": {

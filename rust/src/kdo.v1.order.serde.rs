@@ -25,6 +25,9 @@ impl serde::Serialize for AmendOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.AmendOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -52,6 +55,9 @@ impl serde::Serialize for AmendOrderRequest {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
             struct_ser.serialize_field("side", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("is_lp", &self.is_lp)?;
+        }
         struct_ser.end()
     }
 }
@@ -70,6 +76,8 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             "quantity",
             "price",
             "side",
+            "is_lp",
+            "isLp",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -80,6 +88,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             Quantity,
             Price,
             Side,
+            IsLp,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -108,6 +117,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             "quantity" => Ok(GeneratedField::Quantity),
                             "price" => Ok(GeneratedField::Price),
                             "side" => Ok(GeneratedField::Side),
+                            "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -133,6 +143,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                 let mut quantity__ = None;
                 let mut price__ = None;
                 let mut side__ = None;
+                let mut is_lp__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::OriginalOrderId => {
@@ -177,6 +188,12 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             }
                             side__ = Some(map_.next_value::<OrderSide>()? as i32);
                         }
+                        GeneratedField::IsLp => {
+                            if is_lp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("isLp"));
+                            }
+                            is_lp__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -189,6 +206,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                     quantity: quantity__.unwrap_or_default(),
                     price: price__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
+                    is_lp: is_lp__.unwrap_or_default(),
                 })
             }
         }

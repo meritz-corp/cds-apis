@@ -97,10 +97,10 @@ message SubmitOrderRequest {
   int64 price = 5 [(google.api.field_behavior) = REQUIRED];
 
   // 주문 유형 (기본: LIMIT)
-  QuoteType quote_type = 6;
+  QuoteType quote_type = 6  [(google.api.field_behavior) = REQUIRED];
 
   // 유동성 공급자 여부
-  bool is_lp = 7;
+  bool is_lp = 7  [(google.api.field_behavior) = REQUIRED];
 }
 
 message SubmitOrderResponse {
@@ -134,6 +134,9 @@ message AmendOrderRequest {
 
   // 매수/매도
   OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
+
+  // 유동성 공급자 여부
+  bool is_lp = 7  [(google.api.field_behavior) = REQUIRED];
 }
 
 message AmendOrderResponse {
