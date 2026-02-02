@@ -2813,6 +2813,9 @@ impl serde::Serialize for SubmitOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.SubmitOrderRequest", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -2840,6 +2843,9 @@ impl serde::Serialize for SubmitOrderRequest {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.quote_type)))?;
             struct_ser.serialize_field("quote_type", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("is_lp", &self.is_lp)?;
+        }
         struct_ser.end()
     }
 }
@@ -2858,6 +2864,8 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             "price",
             "quote_type",
             "quoteType",
+            "is_lp",
+            "isLp",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2868,6 +2876,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             Quantity,
             Price,
             QuoteType,
+            IsLp,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2896,6 +2905,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             "quantity" => Ok(GeneratedField::Quantity),
                             "price" => Ok(GeneratedField::Price),
                             "quoteType" | "quote_type" => Ok(GeneratedField::QuoteType),
+                            "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2921,6 +2931,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                 let mut quantity__ = None;
                 let mut price__ = None;
                 let mut quote_type__ = None;
+                let mut is_lp__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -2963,6 +2974,12 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             }
                             quote_type__ = Some(map_.next_value::<QuoteType>()? as i32);
                         }
+                        GeneratedField::IsLp => {
+                            if is_lp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("isLp"));
+                            }
+                            is_lp__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2975,6 +2992,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                     quantity: quantity__.unwrap_or_default(),
                     price: price__.unwrap_or_default(),
                     quote_type: quote_type__.unwrap_or_default(),
+                    is_lp: is_lp__.unwrap_or_default(),
                 })
             }
         }

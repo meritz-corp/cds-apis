@@ -30,6 +30,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? quantity,
     $fixnum.Int64? price,
     QuoteType? quoteType,
+    $core.bool? isLp,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -38,6 +39,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (quantity != null) result.quantity = quantity;
     if (price != null) result.price = price;
     if (quoteType != null) result.quoteType = quoteType;
+    if (isLp != null) result.isLp = isLp;
     return result;
   }
 
@@ -53,6 +55,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..aInt64(5, _omitFieldNames ? '' : 'price')
     ..e<QuoteType>(6, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
+    ..aOB(7, _omitFieldNames ? '' : 'isLp')
     ..hasRequiredFields = false
   ;
 
@@ -132,6 +135,16 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasQuoteType() => $_has(5);
   @$pb.TagNumber(6)
   void clearQuoteType() => $_clearField(6);
+
+  /// 유동성 공급자 여부
+  @$pb.TagNumber(7)
+  $core.bool get isLp => $_getBF(6);
+  @$pb.TagNumber(7)
+  set isLp($core.bool value) => $_setBool(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasIsLp() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearIsLp() => $_clearField(7);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {

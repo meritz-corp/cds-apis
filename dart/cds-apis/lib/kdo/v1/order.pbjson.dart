@@ -88,6 +88,7 @@ const SubmitOrderRequest$json = {
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'price', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'price'},
     {'1': 'quote_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '10': 'quoteType'},
+    {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '10': 'isLp'},
   ],
 };
 
@@ -97,7 +98,7 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIxCgRzaWRlGAMgASgOMhcua2RvLnYxLm9y'
     'ZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZRIgCghxdWFudGl0eRgEIAEoA0IE4kEBAlIIcXVhbn'
     'RpdHkSGgoFcHJpY2UYBSABKANCBOJBAQJSBXByaWNlEjYKCnF1b3RlX3R5cGUYBiABKA4yFy5r'
-    'ZG8udjEub3JkZXIuUXVvdGVUeXBlUglxdW90ZVR5cGU=');
+    'ZG8udjEub3JkZXIuUXVvdGVUeXBlUglxdW90ZVR5cGUSEwoFaXNfbHAYByABKAhSBGlzTHA=');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {

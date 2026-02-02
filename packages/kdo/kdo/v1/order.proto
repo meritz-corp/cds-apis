@@ -98,6 +98,9 @@ message SubmitOrderRequest {
 
   // 주문 유형 (기본: LIMIT)
   QuoteType quote_type = 6;
+
+  // 유동성 공급자 여부
+  bool is_lp = 7;
 }
 
 message SubmitOrderResponse {
