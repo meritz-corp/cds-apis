@@ -25,6 +25,14 @@ abstract final class EtfService {
     kdov1etf.ListEtfsResponse.new,
   );
 
+  /// 구성종목 1틱 변동 시 ETF NAV 영향 조회
+  static const getEtfTickImpact = connect.Spec(
+    '/$name/GetEtfTickImpact',
+    connect.StreamType.unary,
+    kdov1etf.GetEtfTickImpactRequest.new,
+    kdov1etf.EtfTickImpact.new,
+  );
+
   static const createRedeemEtf = connect.Spec(
     '/$name/CreateRedeemEtf',
     connect.StreamType.unary,

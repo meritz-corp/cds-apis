@@ -249,6 +249,56 @@ final $typed_data.Uint8List listEtfsResponseDescriptor = $convert.base64Decode(
     'ChBMaXN0RXRmc1Jlc3BvbnNlEiMKBGV0ZnMYASADKAsyDy5rZG8udjEuZXRmLkV0ZlIEZXRmcx'
     'ImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlSDW5leHRQYWdlVG9rZW4=');
 
+@$core.Deprecated('Use getEtfTickImpactRequestDescriptor instead')
+const GetEtfTickImpactRequest$json = {
+  '1': 'GetEtfTickImpactRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'constituent_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'constituentSymbol'},
+    {'1': 'tick_range', '3': 3, '4': 1, '5': 5, '8': {}, '10': 'tickRange'},
+  ],
+};
+
+/// Descriptor for `GetEtfTickImpactRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfTickImpactRequestDescriptor = $convert.base64Decode(
+    'ChdHZXRFdGZUaWNrSW1wYWN0UmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZH'
+    'NhcGlzLnh5ei9FdGZSA2V0ZhIzChJjb25zdGl0dWVudF9zeW1ib2wYAiABKAlCBOJBAQJSEWNv'
+    'bnN0aXR1ZW50U3ltYm9sEiMKCnRpY2tfcmFuZ2UYAyABKAVCBOJBAQJSCXRpY2tSYW5nZQ==');
+
+@$core.Deprecated('Use etfTickImpactDescriptor instead')
+const EtfTickImpact$json = {
+  '1': 'EtfTickImpact',
+  '2': [
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
+    {'1': 'constituent_symbol', '3': 2, '4': 1, '5': 9, '10': 'constituentSymbol'},
+    {'1': 'current_nav', '3': 3, '4': 1, '5': 9, '10': 'currentNav'},
+    {'1': 'current_price', '3': 4, '4': 1, '5': 9, '10': 'currentPrice'},
+    {'1': 'points', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.etf.TickNavPoint', '10': 'points'},
+  ],
+};
+
+/// Descriptor for `EtfTickImpact`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfTickImpactDescriptor = $convert.base64Decode(
+    'Cg1FdGZUaWNrSW1wYWN0Eh0KCmV0Zl9zeW1ib2wYASABKAlSCWV0ZlN5bWJvbBItChJjb25zdG'
+    'l0dWVudF9zeW1ib2wYAiABKAlSEWNvbnN0aXR1ZW50U3ltYm9sEh8KC2N1cnJlbnRfbmF2GAMg'
+    'ASgJUgpjdXJyZW50TmF2EiMKDWN1cnJlbnRfcHJpY2UYBCABKAlSDGN1cnJlbnRQcmljZRIwCg'
+    'Zwb2ludHMYBSADKAsyGC5rZG8udjEuZXRmLlRpY2tOYXZQb2ludFIGcG9pbnRz');
+
+@$core.Deprecated('Use tickNavPointDescriptor instead')
+const TickNavPoint$json = {
+  '1': 'TickNavPoint',
+  '2': [
+    {'1': 'tick_offset', '3': 1, '4': 1, '5': 5, '10': 'tickOffset'},
+    {'1': 'price', '3': 2, '4': 1, '5': 9, '10': 'price'},
+    {'1': 'nav', '3': 3, '4': 1, '5': 9, '10': 'nav'},
+  ],
+};
+
+/// Descriptor for `TickNavPoint`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tickNavPointDescriptor = $convert.base64Decode(
+    'CgxUaWNrTmF2UG9pbnQSHwoLdGlja19vZmZzZXQYASABKAVSCnRpY2tPZmZzZXQSFAoFcHJpY2'
+    'UYAiABKAlSBXByaWNlEhAKA25hdhgDIAEoCVIDbmF2');
+
 @$core.Deprecated('Use createRedeemEtfRequestDescriptor instead')
 const CreateRedeemEtfRequest$json = {
   '1': 'CreateRedeemEtfRequest',

@@ -41,6 +41,11 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listEtfs, request, options: options);
   }
 
+  /// 구성종목 1틱 변동 시 ETF NAV 영향 조회
+  $grpc.ResponseFuture<$0.EtfTickImpact> getEtfTickImpact($0.GetEtfTickImpactRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getEtfTickImpact, request, options: options);
+  }
+
   $grpc.ResponseFuture<$0.Etf> createRedeemEtf($0.CreateRedeemEtfRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$createRedeemEtf, request, options: options);
   }
@@ -55,6 +60,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/ListEtfs',
       ($0.ListEtfsRequest value) => value.writeToBuffer(),
       $0.ListEtfsResponse.fromBuffer);
+  static final _$getEtfTickImpact = $grpc.ClientMethod<$0.GetEtfTickImpactRequest, $0.EtfTickImpact>(
+      '/kdo.v1.etf.EtfService/GetEtfTickImpact',
+      ($0.GetEtfTickImpactRequest value) => value.writeToBuffer(),
+      $0.EtfTickImpact.fromBuffer);
   static final _$createRedeemEtf = $grpc.ClientMethod<$0.CreateRedeemEtfRequest, $0.Etf>(
       '/kdo.v1.etf.EtfService/CreateRedeemEtf',
       ($0.CreateRedeemEtfRequest value) => value.writeToBuffer(),
@@ -80,6 +89,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListEtfsRequest.fromBuffer(value),
         ($0.ListEtfsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetEtfTickImpactRequest, $0.EtfTickImpact>(
+        'GetEtfTickImpact',
+        getEtfTickImpact_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetEtfTickImpactRequest.fromBuffer(value),
+        ($0.EtfTickImpact value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.CreateRedeemEtfRequest, $0.Etf>(
         'CreateRedeemEtf',
         createRedeemEtf_Pre,
@@ -100,6 +116,12 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListEtfsResponse> listEtfs($grpc.ServiceCall call, $0.ListEtfsRequest request);
+
+  $async.Future<$0.EtfTickImpact> getEtfTickImpact_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfTickImpactRequest> $request) async {
+    return getEtfTickImpact($call, await $request);
+  }
+
+  $async.Future<$0.EtfTickImpact> getEtfTickImpact($grpc.ServiceCall call, $0.GetEtfTickImpactRequest request);
 
   $async.Future<$0.Etf> createRedeemEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateRedeemEtfRequest> $request) async {
     return createRedeemEtf($call, await $request);

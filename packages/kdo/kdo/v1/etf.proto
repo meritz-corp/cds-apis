@@ -28,6 +28,14 @@ service EtfService {
         option (google.api.method_signature) = "";
     }
 
+    // 구성종목 1틱 변동 시 ETF NAV 영향 조회
+    rpc GetEtfTickImpact(GetEtfTickImpactRequest) returns (EtfTickImpact) {
+        option (google.api.http) = {
+            get: "/v1/{etf=etfs/*}/tick_impact"
+        };
+        option (google.api.method_signature) = "etf,constituent_symbols";
+    }
+
     rpc CreateRedeemEtf(CreateRedeemEtfRequest) returns (Etf) {
         option (google.api.http) = {
             post: "/v1/etfs:create_redeem"
@@ -202,6 +210,53 @@ message ListEtfsResponse {
     string next_page_token = 2;
 }
 
+
+// GetEtfTickImpact
+message GetEtfTickImpactRequest {
+    // ETF 리소스 이름 (예: etfs/069500)
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+
+    // 구성종목 심볼
+    string constituent_symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+    // 위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)
+    int32 tick_range = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ETF 틱 임팩트 응답
+message EtfTickImpact {
+    // ETF 심볼
+    string etf_symbol = 1;
+
+    // 구성종목 심볼
+    string constituent_symbol = 2;
+
+    // 현재 ETF NAV
+    string current_nav = 3;
+
+    // 구성종목 현재가
+    string current_price = 4;
+
+    // 틱 변동별 NAV 시뮬레이션 결과 (-tick_range ~ +tick_range 순서)
+    repeated TickNavPoint points = 5;
+}
+
+// 틱 변동에 따른 NAV 포인트
+message TickNavPoint {
+    // 틱 오프셋 (예: -3, -2, -1, 0, +1, +2, +3)
+    int32 tick_offset = 1;
+
+    // 해당 틱에서의 구성종목 가격
+    string price = 2;
+
+    // 해당 틱에서의 ETF NAV
+    string nav = 3;
+}
 
 message CreateRedeemEtfRequest {
   string etf = 1 [

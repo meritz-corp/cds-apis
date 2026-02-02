@@ -24,6 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type EtfServiceClient interface {
 	GetEtf(ctx context.Context, in *GetEtfRequest, opts ...grpc.CallOption) (*Etf, error)
 	ListEtfs(ctx context.Context, in *ListEtfsRequest, opts ...grpc.CallOption) (*ListEtfsResponse, error)
+	// 구성종목 1틱 변동 시 ETF NAV 영향 조회
+	GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest, opts ...grpc.CallOption) (*EtfTickImpact, error)
 	CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error)
 }
 
@@ -53,6 +55,15 @@ func (c *etfServiceClient) ListEtfs(ctx context.Context, in *ListEtfsRequest, op
 	return out, nil
 }
 
+func (c *etfServiceClient) GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest, opts ...grpc.CallOption) (*EtfTickImpact, error) {
+	out := new(EtfTickImpact)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/GetEtfTickImpact", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *etfServiceClient) CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
 	out := new(Etf)
 	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/CreateRedeemEtf", in, out, opts...)
@@ -68,6 +79,8 @@ func (c *etfServiceClient) CreateRedeemEtf(ctx context.Context, in *CreateRedeem
 type EtfServiceServer interface {
 	GetEtf(context.Context, *GetEtfRequest) (*Etf, error)
 	ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error)
+	// 구성종목 1틱 변동 시 ETF NAV 영향 조회
+	GetEtfTickImpact(context.Context, *GetEtfTickImpactRequest) (*EtfTickImpact, error)
 	CreateRedeemEtf(context.Context, *CreateRedeemEtfRequest) (*Etf, error)
 	mustEmbedUnimplementedEtfServiceServer()
 }
@@ -81,6 +94,9 @@ func (UnimplementedEtfServiceServer) GetEtf(context.Context, *GetEtfRequest) (*E
 }
 func (UnimplementedEtfServiceServer) ListEtfs(context.Context, *ListEtfsRequest) (*ListEtfsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEtfs not implemented")
+}
+func (UnimplementedEtfServiceServer) GetEtfTickImpact(context.Context, *GetEtfTickImpactRequest) (*EtfTickImpact, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEtfTickImpact not implemented")
 }
 func (UnimplementedEtfServiceServer) CreateRedeemEtf(context.Context, *CreateRedeemEtfRequest) (*Etf, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRedeemEtf not implemented")
@@ -134,6 +150,24 @@ func _EtfService_ListEtfs_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EtfService_GetEtfTickImpact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEtfTickImpactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).GetEtfTickImpact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/GetEtfTickImpact",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).GetEtfTickImpact(ctx, req.(*GetEtfTickImpactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _EtfService_CreateRedeemEtf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateRedeemEtfRequest)
 	if err := dec(in); err != nil {
@@ -166,6 +200,10 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListEtfs",
 			Handler:    _EtfService_ListEtfs_Handler,
+		},
+		{
+			MethodName: "GetEtfTickImpact",
+			Handler:    _EtfService_GetEtfTickImpact_Handler,
 		},
 		{
 			MethodName: "CreateRedeemEtf",

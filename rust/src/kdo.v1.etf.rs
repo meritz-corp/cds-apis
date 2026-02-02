@@ -171,6 +171,54 @@ pub struct ListEtfsResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+/// GetEtfTickImpact
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfTickImpactRequest {
+    /// ETF 리소스 이름 (예: etfs/069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// 구성종목 심볼
+    #[prost(string, tag="2")]
+    pub constituent_symbol: ::prost::alloc::string::String,
+    /// 위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)
+    #[prost(int32, tag="3")]
+    pub tick_range: i32,
+}
+/// ETF 틱 임팩트 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfTickImpact {
+    /// ETF 심볼
+    #[prost(string, tag="1")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    /// 구성종목 심볼
+    #[prost(string, tag="2")]
+    pub constituent_symbol: ::prost::alloc::string::String,
+    /// 현재 ETF NAV
+    #[prost(string, tag="3")]
+    pub current_nav: ::prost::alloc::string::String,
+    /// 구성종목 현재가
+    #[prost(string, tag="4")]
+    pub current_price: ::prost::alloc::string::String,
+    /// 틱 변동별 NAV 시뮬레이션 결과 (-tick_range ~ +tick_range 순서)
+    #[prost(message, repeated, tag="5")]
+    pub points: ::prost::alloc::vec::Vec<TickNavPoint>,
+}
+/// 틱 변동에 따른 NAV 포인트
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TickNavPoint {
+    /// 틱 오프셋 (예: -3, -2, -1, 0, +1, +2, +3)
+    #[prost(int32, tag="1")]
+    pub tick_offset: i32,
+    /// 해당 틱에서의 구성종목 가격
+    #[prost(string, tag="2")]
+    pub price: ::prost::alloc::string::String,
+    /// 해당 틱에서의 ETF NAV
+    #[prost(string, tag="3")]
+    pub nav: ::prost::alloc::string::String,
+}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRedeemEtfRequest {

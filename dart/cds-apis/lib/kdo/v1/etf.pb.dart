@@ -960,6 +960,248 @@ class ListEtfsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+/// GetEtfTickImpact
+class GetEtfTickImpactRequest extends $pb.GeneratedMessage {
+  factory GetEtfTickImpactRequest({
+    $core.String? etf,
+    $core.String? constituentSymbol,
+    $core.int? tickRange,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (constituentSymbol != null) result.constituentSymbol = constituentSymbol;
+    if (tickRange != null) result.tickRange = tickRange;
+    return result;
+  }
+
+  GetEtfTickImpactRequest._();
+
+  factory GetEtfTickImpactRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfTickImpactRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfTickImpactRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOS(2, _omitFieldNames ? '' : 'constituentSymbol')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'tickRange', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfTickImpactRequest clone() => GetEtfTickImpactRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfTickImpactRequest copyWith(void Function(GetEtfTickImpactRequest) updates) => super.copyWith((message) => updates(message as GetEtfTickImpactRequest)) as GetEtfTickImpactRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfTickImpactRequest create() => GetEtfTickImpactRequest._();
+  @$core.override
+  GetEtfTickImpactRequest createEmptyInstance() => create();
+  static $pb.PbList<GetEtfTickImpactRequest> createRepeated() => $pb.PbList<GetEtfTickImpactRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfTickImpactRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfTickImpactRequest>(create);
+  static GetEtfTickImpactRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: etfs/069500)
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// 구성종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get constituentSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set constituentSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConstituentSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConstituentSymbol() => $_clearField(2);
+
+  /// 위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)
+  @$pb.TagNumber(3)
+  $core.int get tickRange => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set tickRange($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTickRange() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTickRange() => $_clearField(3);
+}
+
+/// ETF 틱 임팩트 응답
+class EtfTickImpact extends $pb.GeneratedMessage {
+  factory EtfTickImpact({
+    $core.String? etfSymbol,
+    $core.String? constituentSymbol,
+    $core.String? currentNav,
+    $core.String? currentPrice,
+    $core.Iterable<TickNavPoint>? points,
+  }) {
+    final result = create();
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (constituentSymbol != null) result.constituentSymbol = constituentSymbol;
+    if (currentNav != null) result.currentNav = currentNav;
+    if (currentPrice != null) result.currentPrice = currentPrice;
+    if (points != null) result.points.addAll(points);
+    return result;
+  }
+
+  EtfTickImpact._();
+
+  factory EtfTickImpact.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfTickImpact.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfTickImpact', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'constituentSymbol')
+    ..aOS(3, _omitFieldNames ? '' : 'currentNav')
+    ..aOS(4, _omitFieldNames ? '' : 'currentPrice')
+    ..pc<TickNavPoint>(5, _omitFieldNames ? '' : 'points', $pb.PbFieldType.PM, subBuilder: TickNavPoint.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfTickImpact clone() => EtfTickImpact()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfTickImpact copyWith(void Function(EtfTickImpact) updates) => super.copyWith((message) => updates(message as EtfTickImpact)) as EtfTickImpact;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfTickImpact create() => EtfTickImpact._();
+  @$core.override
+  EtfTickImpact createEmptyInstance() => create();
+  static $pb.PbList<EtfTickImpact> createRepeated() => $pb.PbList<EtfTickImpact>();
+  @$core.pragma('dart2js:noInline')
+  static EtfTickImpact getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfTickImpact>(create);
+  static EtfTickImpact? _defaultInstance;
+
+  /// ETF 심볼
+  @$pb.TagNumber(1)
+  $core.String get etfSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etfSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtfSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtfSymbol() => $_clearField(1);
+
+  /// 구성종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get constituentSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set constituentSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConstituentSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConstituentSymbol() => $_clearField(2);
+
+  /// 현재 ETF NAV
+  @$pb.TagNumber(3)
+  $core.String get currentNav => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set currentNav($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCurrentNav() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCurrentNav() => $_clearField(3);
+
+  /// 구성종목 현재가
+  @$pb.TagNumber(4)
+  $core.String get currentPrice => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set currentPrice($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCurrentPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCurrentPrice() => $_clearField(4);
+
+  /// 틱 변동별 NAV 시뮬레이션 결과 (-tick_range ~ +tick_range 순서)
+  @$pb.TagNumber(5)
+  $pb.PbList<TickNavPoint> get points => $_getList(4);
+}
+
+/// 틱 변동에 따른 NAV 포인트
+class TickNavPoint extends $pb.GeneratedMessage {
+  factory TickNavPoint({
+    $core.int? tickOffset,
+    $core.String? price,
+    $core.String? nav,
+  }) {
+    final result = create();
+    if (tickOffset != null) result.tickOffset = tickOffset;
+    if (price != null) result.price = price;
+    if (nav != null) result.nav = nav;
+    return result;
+  }
+
+  TickNavPoint._();
+
+  factory TickNavPoint.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TickNavPoint.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TickNavPoint', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'tickOffset', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'price')
+    ..aOS(3, _omitFieldNames ? '' : 'nav')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TickNavPoint clone() => TickNavPoint()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TickNavPoint copyWith(void Function(TickNavPoint) updates) => super.copyWith((message) => updates(message as TickNavPoint)) as TickNavPoint;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TickNavPoint create() => TickNavPoint._();
+  @$core.override
+  TickNavPoint createEmptyInstance() => create();
+  static $pb.PbList<TickNavPoint> createRepeated() => $pb.PbList<TickNavPoint>();
+  @$core.pragma('dart2js:noInline')
+  static TickNavPoint getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TickNavPoint>(create);
+  static TickNavPoint? _defaultInstance;
+
+  /// 틱 오프셋 (예: -3, -2, -1, 0, +1, +2, +3)
+  @$pb.TagNumber(1)
+  $core.int get tickOffset => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set tickOffset($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTickOffset() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTickOffset() => $_clearField(1);
+
+  /// 해당 틱에서의 구성종목 가격
+  @$pb.TagNumber(2)
+  $core.String get price => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set price($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPrice() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrice() => $_clearField(2);
+
+  /// 해당 틱에서의 ETF NAV
+  @$pb.TagNumber(3)
+  $core.String get nav => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set nav($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasNav() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNav() => $_clearField(3);
+}
+
 class CreateRedeemEtfRequest extends $pb.GeneratedMessage {
   factory CreateRedeemEtfRequest({
     $core.String? etf,

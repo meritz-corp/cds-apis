@@ -43,6 +43,24 @@ extension type EtfServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 구성종목 1틱 변동 시 ETF NAV 영향 조회
+  Future<kdov1etf.EtfTickImpact> getEtfTickImpact(
+    kdov1etf.GetEtfTickImpactRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.EtfService.getEtfTickImpact,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   Future<kdov1etf.Etf> createRedeemEtf(
     kdov1etf.CreateRedeemEtfRequest input, {
     connect.Headers? headers,

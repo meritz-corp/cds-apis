@@ -124,6 +124,54 @@
           "EtfService"
         ]
       }
+    },
+    "/v1/{etf}/tick_impact": {
+      "get": {
+        "summary": "구성종목 1틱 변동 시 ETF NAV 영향 조회",
+        "operationId": "EtfService_GetEtfTickImpact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfEtfTickImpact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "ETF 리소스 이름 (예: etfs/069500)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "constituentSymbol",
+            "description": "구성종목 심볼",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tickRange",
+            "description": "위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -256,6 +304,35 @@
       },
       "title": "PDF 구성 종목"
     },
+    "etfEtfTickImpact": {
+      "type": "object",
+      "properties": {
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "constituentSymbol": {
+          "type": "string",
+          "title": "구성종목 심볼"
+        },
+        "currentNav": {
+          "type": "string",
+          "title": "현재 ETF NAV"
+        },
+        "currentPrice": {
+          "type": "string",
+          "title": "구성종목 현재가"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/etfTickNavPoint"
+          },
+          "title": "틱 변동별 NAV 시뮬레이션 결과 (-tick_range ~ +tick_range 순서)"
+        }
+      },
+      "title": "ETF 틱 임팩트 응답"
+    },
     "etfListEtfsResponse": {
       "type": "object",
       "properties": {
@@ -294,6 +371,25 @@
       ],
       "default": "REPLICATION_METHOD_UNSPECIFIED",
       "title": "복제 방법"
+    },
+    "etfTickNavPoint": {
+      "type": "object",
+      "properties": {
+        "tickOffset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "틱 오프셋 (예: -3, -2, -1, 0, +1, +2, +3)"
+        },
+        "price": {
+          "type": "string",
+          "title": "해당 틱에서의 구성종목 가격"
+        },
+        "nav": {
+          "type": "string",
+          "title": "해당 틱에서의 ETF NAV"
+        }
+      },
+      "title": "틱 변동에 따른 NAV 포인트"
     },
     "protobufAny": {
       "type": "object",

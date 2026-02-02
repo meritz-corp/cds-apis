@@ -1005,6 +1005,173 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
         deserializer.deserialize_struct("kdo.v1.etf.EtfPdfConstituent", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for EtfTickImpact {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.EtfTickImpact", len)?;
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("constituent_symbol", &self.constituent_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("current_nav", &self.current_nav)?;
+        }
+        if true {
+            struct_ser.serialize_field("current_price", &self.current_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("points", &self.points)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfTickImpact {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf_symbol",
+            "etfSymbol",
+            "constituent_symbol",
+            "constituentSymbol",
+            "current_nav",
+            "currentNav",
+            "current_price",
+            "currentPrice",
+            "points",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EtfSymbol,
+            ConstituentSymbol,
+            CurrentNav,
+            CurrentPrice,
+            Points,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "constituentSymbol" | "constituent_symbol" => Ok(GeneratedField::ConstituentSymbol),
+                            "currentNav" | "current_nav" => Ok(GeneratedField::CurrentNav),
+                            "currentPrice" | "current_price" => Ok(GeneratedField::CurrentPrice),
+                            "points" => Ok(GeneratedField::Points),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfTickImpact;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.EtfTickImpact")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfTickImpact, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf_symbol__ = None;
+                let mut constituent_symbol__ = None;
+                let mut current_nav__ = None;
+                let mut current_price__ = None;
+                let mut points__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ConstituentSymbol => {
+                            if constituent_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituentSymbol"));
+                            }
+                            constituent_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CurrentNav => {
+                            if current_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentNav"));
+                            }
+                            current_nav__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CurrentPrice => {
+                            if current_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentPrice"));
+                            }
+                            current_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Points => {
+                            if points__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("points"));
+                            }
+                            points__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfTickImpact {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    constituent_symbol: constituent_symbol__.unwrap_or_default(),
+                    current_nav: current_nav__.unwrap_or_default(),
+                    current_price: current_price__.unwrap_or_default(),
+                    points: points__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.EtfTickImpact", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FuturesConstituent {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1331,6 +1498,139 @@ impl<'de> serde::Deserialize<'de> for GetEtfRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.etf.GetEtfRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetEtfTickImpactRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.GetEtfTickImpactRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if true {
+            struct_ser.serialize_field("constituent_symbol", &self.constituent_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("tick_range", &self.tick_range)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetEtfTickImpactRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+            "constituent_symbol",
+            "constituentSymbol",
+            "tick_range",
+            "tickRange",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            ConstituentSymbol,
+            TickRange,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "constituentSymbol" | "constituent_symbol" => Ok(GeneratedField::ConstituentSymbol),
+                            "tickRange" | "tick_range" => Ok(GeneratedField::TickRange),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetEtfTickImpactRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.GetEtfTickImpactRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetEtfTickImpactRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut constituent_symbol__ = None;
+                let mut tick_range__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ConstituentSymbol => {
+                            if constituent_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituentSymbol"));
+                            }
+                            constituent_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TickRange => {
+                            if tick_range__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickRange"));
+                            }
+                            tick_range__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetEtfTickImpactRequest {
+                    etf: etf__.unwrap_or_default(),
+                    constituent_symbol: constituent_symbol__.unwrap_or_default(),
+                    tick_range: tick_range__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.GetEtfTickImpactRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListEtfsRequest {
@@ -1950,5 +2250,137 @@ impl<'de> serde::Deserialize<'de> for StockConstituent {
             }
         }
         deserializer.deserialize_struct("kdo.v1.etf.StockConstituent", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for TickNavPoint {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.TickNavPoint", len)?;
+        if true {
+            struct_ser.serialize_field("tick_offset", &self.tick_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("price", &self.price)?;
+        }
+        if true {
+            struct_ser.serialize_field("nav", &self.nav)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for TickNavPoint {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "tick_offset",
+            "tickOffset",
+            "price",
+            "nav",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TickOffset,
+            Price,
+            Nav,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "tickOffset" | "tick_offset" => Ok(GeneratedField::TickOffset),
+                            "price" => Ok(GeneratedField::Price),
+                            "nav" => Ok(GeneratedField::Nav),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = TickNavPoint;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.TickNavPoint")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<TickNavPoint, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut tick_offset__ = None;
+                let mut price__ = None;
+                let mut nav__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TickOffset => {
+                            if tick_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickOffset"));
+                            }
+                            tick_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Price => {
+                            if price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("price"));
+                            }
+                            price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Nav => {
+                            if nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nav"));
+                            }
+                            nav__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(TickNavPoint {
+                    tick_offset: tick_offset__.unwrap_or_default(),
+                    price: price__.unwrap_or_default(),
+                    nav: nav__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.TickNavPoint", FIELDS, GeneratedVisitor)
     }
 }

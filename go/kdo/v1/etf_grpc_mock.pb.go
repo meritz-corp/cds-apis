@@ -74,6 +74,26 @@ func (mr *MockEtfServiceClientMockRecorder) GetEtf(ctx, in interface{}, opts ...
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtf", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtf), varargs...)
 }
 
+// GetEtfTickImpact mocks base method.
+func (m *MockEtfServiceClient) GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest, opts ...grpc.CallOption) (*EtfTickImpact, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetEtfTickImpact", varargs...)
+	ret0, _ := ret[0].(*EtfTickImpact)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfTickImpact indicates an expected call of GetEtfTickImpact.
+func (mr *MockEtfServiceClientMockRecorder) GetEtfTickImpact(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfTickImpact", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtfTickImpact), varargs...)
+}
+
 // ListEtfs mocks base method.
 func (m *MockEtfServiceClient) ListEtfs(ctx context.Context, in *ListEtfsRequest, opts ...grpc.CallOption) (*ListEtfsResponse, error) {
 	m.ctrl.T.Helper()
@@ -145,6 +165,21 @@ func (m *MockEtfServiceServer) GetEtf(ctx context.Context, in *GetEtfRequest) (*
 func (mr *MockEtfServiceServerMockRecorder) GetEtf(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtf", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtf), ctx, in)
+}
+
+// GetEtfTickImpact mocks base method.
+func (m *MockEtfServiceServer) GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest) (*EtfTickImpact, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetEtfTickImpact", ctx, in)
+	ret0, _ := ret[0].(*EtfTickImpact)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfTickImpact indicates an expected call of GetEtfTickImpact.
+func (mr *MockEtfServiceServerMockRecorder) GetEtfTickImpact(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfTickImpact", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtfTickImpact), ctx, in)
 }
 
 // ListEtfs mocks base method.
