@@ -1,0 +1,813 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/hedge.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "HedgeService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/hedge_groups": {
+      "get": {
+        "summary": "HedgeGroup 목록 조회",
+        "operationId": "HedgeService_ListHedgeGroups",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeListHedgeGroupsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터\nAvailable filters:\n* portfolio\n  * `equal`\n* hedge_fund_code\n  * `equal`\n* is_active\n  * `equal`\n\nExamples:\n* filter=portfolio=\"portfolios/1\"\n* filter=is_active=true",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      },
+      "post": {
+        "summary": "HedgeGroup 생성",
+        "operationId": "HedgeService_CreateHedgeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedgeGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hedgeGroup",
+            "description": "생성할 헷지그룹 정보",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/hedgeHedgeGroup",
+              "required": [
+                "hedgeGroup"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
+    "/v1/hedges": {
+      "get": {
+        "summary": "Hedge 목록 조회",
+        "operationId": "HedgeService_ListHedges",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeListHedgesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터\nAvailable filters:\n* fund_code\n  * `equal`\n* source_symbol\n  * `equal`\n* is_active\n  * `equal`\n\nExamples:\n* filter=fund_code=\"0159\"\n* filter=is_active=true",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      },
+      "post": {
+        "summary": "Hedge 생성",
+        "operationId": "HedgeService_CreateHedge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedge"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hedge",
+            "description": "생성할 헷지 정보",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/hedgeHedge",
+              "required": [
+                "hedge"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
+    "/v1/{hedge.name}": {
+      "patch": {
+        "summary": "Hedge 수정",
+        "operationId": "HedgeService_UpdateHedge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedge"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hedge.name",
+            "description": "리소스 이름 (예: hedges/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedges/[^/]+"
+          },
+          {
+            "name": "hedge",
+            "description": "수정할 헷지 정보",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "Hedge ID",
+                  "readOnly": true
+                },
+                "fundCode": {
+                  "type": "string",
+                  "title": "펀드 코드"
+                },
+                "sourceSymbol": {
+                  "type": "string",
+                  "title": "소스 종목 심볼 (체결 감시 대상)"
+                },
+                "hedgeMethod": {
+                  "$ref": "#/definitions/hedgeHedgeMethod",
+                  "title": "헷지 방식"
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "title": "활성화 여부"
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "생성 시간",
+                  "readOnly": true
+                },
+                "updateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "수정 시간",
+                  "readOnly": true
+                }
+              },
+              "title": "수정할 헷지 정보",
+              "required": [
+                "fundCode",
+                "sourceSymbol",
+                "hedgeMethod"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
+    "/v1/{hedgeGroup.name}": {
+      "patch": {
+        "summary": "HedgeGroup 수정",
+        "operationId": "HedgeService_UpdateHedgeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedgeGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hedgeGroup.name",
+            "description": "리소스 이름 (예: hedge_groups/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedgeGroups/[^/]+"
+          },
+          {
+            "name": "hedgeGroup",
+            "description": "수정할 헷지그룹 정보",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "HedgeGroup ID",
+                  "readOnly": true
+                },
+                "portfolio": {
+                  "type": "string",
+                  "title": "포트폴리오 리소스 이름\nformat: portfolios/{portfolio}"
+                },
+                "displayName": {
+                  "type": "string",
+                  "title": "그룹 이름"
+                },
+                "hedgeFundCode": {
+                  "type": "string",
+                  "title": "헷지 펀드 코드 (헷지 주문 실행 펀드)"
+                },
+                "triggerCondition": {
+                  "$ref": "#/definitions/v1hedgeTriggerCondition",
+                  "title": "트리거 조건"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/hedgeHedgeGroupItem"
+                  },
+                  "title": "그룹 소속 항목들"
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "title": "활성화 여부"
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "생성 시간",
+                  "readOnly": true
+                },
+                "updateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "수정 시간",
+                  "readOnly": true
+                }
+              },
+              "title": "수정할 헷지그룹 정보",
+              "required": [
+                "portfolio",
+                "displayName",
+                "hedgeFundCode",
+                "triggerCondition"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
+    "/v1/{name_1}": {
+      "get": {
+        "summary": "단일 HedgeGroup 조회",
+        "operationId": "HedgeService_GetHedgeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedgeGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name_1",
+            "description": "헷지그룹 리소스 이름 (예: hedge_groups/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedgeGroups/[^/]+"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      },
+      "delete": {
+        "summary": "HedgeGroup 삭제",
+        "operationId": "HedgeService_DeleteHedgeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name_1",
+            "description": "삭제할 헷지그룹 리소스 이름",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedgeGroups/[^/]+"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
+    "/v1/{name}": {
+      "get": {
+        "summary": "단일 Hedge 조회",
+        "operationId": "HedgeService_GetHedge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedge"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "헷지 리소스 이름 (예: hedges/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedges/[^/]+"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      },
+      "delete": {
+        "summary": "Hedge 삭제",
+        "operationId": "HedgeService_DeleteHedge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "삭제할 헷지 리소스 이름",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedges/[^/]+"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "hedgeAmountTrigger": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "string",
+          "format": "int64",
+          "title": "트리거 금액 임계값 (원)"
+        },
+        "hedgeInstrument": {
+          "type": "string",
+          "title": "헷지 종목 심볼"
+        },
+        "ratio": {
+          "type": "number",
+          "format": "double",
+          "title": "헷지 비율"
+        }
+      },
+      "title": "금액 기반 트리거: 순금액 변동이 threshold 이상이면 헷지 실행",
+      "required": [
+        "threshold",
+        "hedgeInstrument",
+        "ratio"
+      ]
+    },
+    "hedgeEtfDecompositionHedge": {
+      "type": "object",
+      "properties": {
+        "cu": {
+          "type": "integer",
+          "format": "int32",
+          "title": "1CU(설정단위) 당 ETF 주수"
+        },
+        "hedgeOrdersPer1cu": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "1CU 당 구성 종목별 헷지 주문 수량\nkey: 종목 심볼, value: 1CU 당 주문 수량"
+        }
+      },
+      "title": "ETF 분해 헷지: ETF를 구성 종목으로 분해하여 CU 단위로 헷지",
+      "required": [
+        "cu"
+      ]
+    },
+    "hedgeFutureHedge": {
+      "type": "object",
+      "properties": {
+        "hedgeSymbol": {
+          "type": "string",
+          "title": "헷지 대상 종목 심볼"
+        },
+        "ratio": {
+          "type": "number",
+          "format": "double",
+          "title": "헷지 비율 (소스 수량 대비)"
+        }
+      },
+      "title": "선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매",
+      "required": [
+        "hedgeSymbol",
+        "ratio"
+      ]
+    },
+    "hedgeHedge": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (예: hedges/1)",
+          "readOnly": true
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Hedge ID",
+          "readOnly": true
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "sourceSymbol": {
+          "type": "string",
+          "title": "소스 종목 심볼 (체결 감시 대상)"
+        },
+        "hedgeMethod": {
+          "$ref": "#/definitions/hedgeHedgeMethod",
+          "title": "헷지 방식"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시간",
+          "readOnly": true
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "수정 시간",
+          "readOnly": true
+        }
+      },
+      "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",
+      "required": [
+        "fundCode",
+        "sourceSymbol",
+        "hedgeMethod"
+      ]
+    },
+    "hedgeHedgeGroup": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (예: hedge_groups/1)",
+          "readOnly": true
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "HedgeGroup ID",
+          "readOnly": true
+        },
+        "portfolio": {
+          "type": "string",
+          "title": "포트폴리오 리소스 이름\nformat: portfolios/{portfolio}"
+        },
+        "displayName": {
+          "type": "string",
+          "title": "그룹 이름"
+        },
+        "hedgeFundCode": {
+          "type": "string",
+          "title": "헷지 펀드 코드 (헷지 주문 실행 펀드)"
+        },
+        "triggerCondition": {
+          "$ref": "#/definitions/v1hedgeTriggerCondition",
+          "title": "트리거 조건"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hedgeHedgeGroupItem"
+          },
+          "title": "그룹 소속 항목들"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시간",
+          "readOnly": true
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "수정 시간",
+          "readOnly": true
+        }
+      },
+      "title": "HedgeGroup: 포트폴리오 단위 주기적 헷지\n트리거 조건에 따라 주기적으로 헷지 실행",
+      "required": [
+        "portfolio",
+        "displayName",
+        "hedgeFundCode",
+        "triggerCondition"
+      ]
+    },
+    "hedgeHedgeGroupItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "항목 ID",
+          "readOnly": true
+        },
+        "hedgeGroupId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "소속 HedgeGroup ID",
+          "readOnly": true
+        },
+        "sourceSymbol": {
+          "type": "string",
+          "title": "소스 종목 심볼"
+        }
+      },
+      "title": "HedgeGroup 소속 항목",
+      "required": [
+        "sourceSymbol"
+      ]
+    },
+    "hedgeHedgeMethod": {
+      "type": "object",
+      "properties": {
+        "future": {
+          "$ref": "#/definitions/hedgeFutureHedge",
+          "title": "선물 헷지 (비율 기반)"
+        },
+        "etfDecomposition": {
+          "$ref": "#/definitions/hedgeEtfDecompositionHedge",
+          "title": "ETF 분해 헷지 (CU 기반)"
+        }
+      },
+      "title": "헷지 방식"
+    },
+    "hedgeListHedgeGroupsResponse": {
+      "type": "object",
+      "properties": {
+        "hedgeGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hedgeHedgeGroup"
+          },
+          "title": "헷지그룹 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      },
+      "title": "ListHedgeGroups 응답"
+    },
+    "hedgeListHedgesResponse": {
+      "type": "object",
+      "properties": {
+        "hedges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hedgeHedge"
+          },
+          "title": "헷지 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      },
+      "title": "ListHedges 응답"
+    },
+    "hedgeQuantityTrigger": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "string",
+          "format": "int64",
+          "title": "트리거 수량 임계값"
+        },
+        "hedgeInstrument": {
+          "type": "string",
+          "title": "헷지 종목 심볼"
+        },
+        "ratio": {
+          "type": "number",
+          "format": "double",
+          "title": "헷지 비율"
+        }
+      },
+      "title": "수량 기반 트리거: 순수량 변동이 threshold 이상이면 헷지 실행",
+      "required": [
+        "threshold",
+        "hedgeInstrument",
+        "ratio"
+      ]
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1hedgeTriggerCondition": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "$ref": "#/definitions/hedgeQuantityTrigger",
+          "title": "수량 기반 트리거"
+        },
+        "amount": {
+          "$ref": "#/definitions/hedgeAmountTrigger",
+          "title": "금액 기반 트리거"
+        }
+      },
+      "title": "트리거 조건: 헷지 실행 기준"
+    }
+  }
+}
