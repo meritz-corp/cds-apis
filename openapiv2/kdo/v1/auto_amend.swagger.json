@@ -404,7 +404,6 @@
         },
         "price": {
           "type": "string",
-          "format": "int64",
           "title": "현재 주문 가격"
         },
         "quantity": {
@@ -493,7 +492,6 @@
         },
         "price": {
           "type": "string",
-          "format": "int64",
           "title": "주문 가격"
         },
         "quantity": {

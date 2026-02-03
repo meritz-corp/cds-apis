@@ -909,9 +909,7 @@ impl serde::Serialize for AutoAmendOrder {
             struct_ser.serialize_field("side", &v)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1063,9 +1061,7 @@ impl<'de> serde::Deserialize<'de> for AutoAmendOrder {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -1828,9 +1824,7 @@ impl serde::Serialize for RegisterOrderRequest {
             struct_ser.serialize_field("side", &v)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1946,9 +1940,7 @@ impl<'de> serde::Deserialize<'de> for RegisterOrderRequest {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {

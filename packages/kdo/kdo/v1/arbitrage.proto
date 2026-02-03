@@ -409,7 +409,7 @@ message OrderSubmittedEvent {
   uint32 round = 1;
   string symbol = 2;
   int64 quantity = 3;
-  int64 price = 4;
+  string price = 4;
 }
 
 // 체결 이벤트

@@ -467,9 +467,7 @@ impl serde::Serialize for BasketItemValue {
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
             let v = PriceSource::try_from(self.price_source)
@@ -584,9 +582,7 @@ impl<'de> serde::Deserialize<'de> for BasketItemValue {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::PriceSource => {
                             if price_source__.is_some() {

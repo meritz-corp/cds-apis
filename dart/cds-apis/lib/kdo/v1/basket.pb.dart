@@ -687,7 +687,7 @@ class BasketItemValue extends $pb.GeneratedMessage {
   factory BasketItemValue({
     $core.String? symbol,
     $fixnum.Int64? quantity,
-    $fixnum.Int64? price,
+    $core.String? price,
     PriceSource? priceSource,
     $core.double? multiple,
     $fixnum.Int64? value,
@@ -710,7 +710,7 @@ class BasketItemValue extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketItemValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aInt64(2, _omitFieldNames ? '' : 'quantity')
-    ..aInt64(3, _omitFieldNames ? '' : 'price')
+    ..aOS(3, _omitFieldNames ? '' : 'price')
     ..e<PriceSource>(4, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: PriceSource.PRICE_SOURCE_UNSPECIFIED, valueOf: PriceSource.valueOf, enumValues: PriceSource.values)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'multiple', $pb.PbFieldType.OD)
     ..aInt64(6, _omitFieldNames ? '' : 'value')
@@ -756,9 +756,9 @@ class BasketItemValue extends $pb.GeneratedMessage {
 
   /// 사용된 가격
   @$pb.TagNumber(3)
-  $fixnum.Int64 get price => $_getI64(2);
+  $core.String get price => $_getSZ(2);
   @$pb.TagNumber(3)
-  set price($fixnum.Int64 value) => $_setInt64(2, value);
+  set price($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
   $core.bool hasPrice() => $_has(2);
   @$pb.TagNumber(3)

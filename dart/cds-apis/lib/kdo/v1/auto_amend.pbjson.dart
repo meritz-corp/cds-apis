@@ -73,7 +73,7 @@ const AutoAmendOrder$json = {
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '10': 'orderId'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.OrderSide', '10': 'side'},
-    {'1': 'price', '3': 4, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'remaining_quantity', '3': 6, '4': 1, '5': 3, '10': 'remainingQuantity'},
     {'1': 'config', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.auto_amend.AmendConfig', '10': 'config'},
@@ -87,7 +87,7 @@ const AutoAmendOrder$json = {
 final $typed_data.Uint8List autoAmendOrderDescriptor = $convert.base64Decode(
     'Cg5BdXRvQW1lbmRPcmRlchIZCghvcmRlcl9pZBgBIAEoBFIHb3JkZXJJZBIWCgZzeW1ib2wYAi'
     'ABKAlSBnN5bWJvbBIwCgRzaWRlGAMgASgOMhwua2RvLnYxLmF1dG9fYW1lbmQuT3JkZXJTaWRl'
-    'UgRzaWRlEhQKBXByaWNlGAQgASgDUgVwcmljZRIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdH'
+    'UgRzaWRlEhQKBXByaWNlGAQgASgJUgVwcmljZRIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdH'
     'kSLQoScmVtYWluaW5nX3F1YW50aXR5GAYgASgDUhFyZW1haW5pbmdRdWFudGl0eRI2CgZjb25m'
     'aWcYByABKAsyHi5rZG8udjEuYXV0b19hbWVuZC5BbWVuZENvbmZpZ1IGY29uZmlnEiUKC2FtZW'
     '5kX2NvdW50GAggASgNQgTiQQEDUgphbWVuZENvdW50EjEKEmxhc3RfYW1lbmRfdGltZV9tcxgJ'
@@ -275,7 +275,7 @@ const RegisterOrderRequest$json = {
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.OrderSide', '8': {}, '10': 'side'},
-    {'1': 'price', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'price'},
+    {'1': 'price', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'price'},
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'config', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.auto_amend.AmendConfig', '10': 'config'},
   ],
@@ -285,7 +285,7 @@ const RegisterOrderRequest$json = {
 final $typed_data.Uint8List registerOrderRequestDescriptor = $convert.base64Decode(
     'ChRSZWdpc3Rlck9yZGVyUmVxdWVzdBIfCghvcmRlcl9pZBgBIAEoBEIE4kEBAlIHb3JkZXJJZB'
     'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBI2CgRzaWRlGAMgASgOMhwua2RvLnYxLmF1'
-    'dG9fYW1lbmQuT3JkZXJTaWRlQgTiQQECUgRzaWRlEhoKBXByaWNlGAQgASgDQgTiQQECUgVwcm'
+    'dG9fYW1lbmQuT3JkZXJTaWRlQgTiQQECUgRzaWRlEhoKBXByaWNlGAQgASgJQgTiQQECUgVwcm'
     'ljZRIgCghxdWFudGl0eRgFIAEoA0IE4kEBAlIIcXVhbnRpdHkSNgoGY29uZmlnGAYgASgLMh4u'
     'a2RvLnYxLmF1dG9fYW1lbmQuQW1lbmRDb25maWdSBmNvbmZpZw==');
 

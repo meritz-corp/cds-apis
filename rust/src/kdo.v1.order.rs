@@ -18,8 +18,8 @@ pub struct SubmitOrderRequest {
     #[prost(int64, tag="4")]
     pub quantity: i64,
     /// 가격 (필수, 시장가 주문 시 0)
-    #[prost(int64, tag="5")]
-    pub price: i64,
+    #[prost(string, tag="5")]
+    pub price: ::prost::alloc::string::String,
     /// 주문 유형 (기본: LIMIT)
     #[prost(enumeration="QuoteType", tag="6")]
     pub quote_type: i32,
@@ -58,8 +58,8 @@ pub struct AmendOrderRequest {
     #[prost(int64, tag="4")]
     pub quantity: i64,
     /// 정정 가격
-    #[prost(int64, tag="5")]
-    pub price: i64,
+    #[prost(string, tag="5")]
+    pub price: ::prost::alloc::string::String,
     /// 매수/매도
     #[prost(enumeration="OrderSide", tag="6")]
     pub side: i32,
@@ -186,8 +186,8 @@ pub struct OrderResult {
     #[prost(enumeration="OrderSide", tag="4")]
     pub side: i32,
     /// 가격
-    #[prost(int64, tag="5")]
-    pub price: i64,
+    #[prost(string, tag="5")]
+    pub price: ::prost::alloc::string::String,
     /// 수량
     #[prost(int64, tag="6")]
     pub quantity: i64,
@@ -235,11 +235,11 @@ pub struct RejectedDetails {
     pub error_message: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FilledDetails {
     /// 체결 가격
-    #[prost(int64, tag="1")]
-    pub filled_price: i64,
+    #[prost(string, tag="1")]
+    pub filled_price: ::prost::alloc::string::String,
     /// 체결 수량
     #[prost(int64, tag="2")]
     pub filled_quantity: i64,

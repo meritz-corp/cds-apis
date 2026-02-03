@@ -27,7 +27,7 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
     $fixnum.Int64? orderId,
     $core.String? symbol,
     OrderSide? side,
-    $fixnum.Int64? price,
+    $core.String? price,
     $fixnum.Int64? quantity,
     $fixnum.Int64? remainingQuantity,
     AmendConfig? config,
@@ -58,7 +58,7 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
-    ..aInt64(4, _omitFieldNames ? '' : 'price')
+    ..aOS(4, _omitFieldNames ? '' : 'price')
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aInt64(6, _omitFieldNames ? '' : 'remainingQuantity')
     ..aOM<AmendConfig>(7, _omitFieldNames ? '' : 'config', subBuilder: AmendConfig.create)
@@ -117,9 +117,9 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
 
   /// 현재 주문 가격
   @$pb.TagNumber(4)
-  $fixnum.Int64 get price => $_getI64(3);
+  $core.String get price => $_getSZ(3);
   @$pb.TagNumber(4)
-  set price($fixnum.Int64 value) => $_setInt64(3, value);
+  set price($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
   $core.bool hasPrice() => $_has(3);
   @$pb.TagNumber(4)
@@ -1017,7 +1017,7 @@ class RegisterOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? orderId,
     $core.String? symbol,
     OrderSide? side,
-    $fixnum.Int64? price,
+    $core.String? price,
     $fixnum.Int64? quantity,
     AmendConfig? config,
   }) {
@@ -1040,7 +1040,7 @@ class RegisterOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
-    ..aInt64(4, _omitFieldNames ? '' : 'price')
+    ..aOS(4, _omitFieldNames ? '' : 'price')
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aOM<AmendConfig>(6, _omitFieldNames ? '' : 'config', subBuilder: AmendConfig.create)
     ..hasRequiredFields = false
@@ -1095,9 +1095,9 @@ class RegisterOrderRequest extends $pb.GeneratedMessage {
 
   /// 주문 가격
   @$pb.TagNumber(4)
-  $fixnum.Int64 get price => $_getI64(3);
+  $core.String get price => $_getSZ(3);
   @$pb.TagNumber(4)
-  set price($fixnum.Int64 value) => $_setInt64(3, value);
+  set price($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
   $core.bool hasPrice() => $_has(3);
   @$pb.TagNumber(4)

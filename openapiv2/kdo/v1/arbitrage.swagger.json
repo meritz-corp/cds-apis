@@ -997,8 +997,7 @@
           "format": "int64"
         },
         "price": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         }
       },
       "title": "주문 제출 이벤트"

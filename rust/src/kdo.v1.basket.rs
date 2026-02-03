@@ -162,8 +162,8 @@ pub struct BasketItemValue {
     #[prost(int64, tag="2")]
     pub quantity: i64,
     /// 사용된 가격
-    #[prost(int64, tag="3")]
-    pub price: i64,
+    #[prost(string, tag="3")]
+    pub price: ::prost::alloc::string::String,
     /// 가격 소스
     #[prost(enumeration="PriceSource", tag="4")]
     pub price_source: i32,

@@ -1594,7 +1594,7 @@ class OrderSubmittedEvent extends $pb.GeneratedMessage {
     $core.int? round,
     $core.String? symbol,
     $fixnum.Int64? quantity,
-    $fixnum.Int64? price,
+    $core.String? price,
   }) {
     final result = create();
     if (round != null) result.round = round;
@@ -1613,7 +1613,7 @@ class OrderSubmittedEvent extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'round', $pb.PbFieldType.OU3)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aInt64(3, _omitFieldNames ? '' : 'quantity')
-    ..aInt64(4, _omitFieldNames ? '' : 'price')
+    ..aOS(4, _omitFieldNames ? '' : 'price')
     ..hasRequiredFields = false
   ;
 
@@ -1662,9 +1662,9 @@ class OrderSubmittedEvent extends $pb.GeneratedMessage {
   void clearQuantity() => $_clearField(3);
 
   @$pb.TagNumber(4)
-  $fixnum.Int64 get price => $_getI64(3);
+  $core.String get price => $_getSZ(3);
   @$pb.TagNumber(4)
-  set price($fixnum.Int64 value) => $_setInt64(3, value);
+  set price($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
   $core.bool hasPrice() => $_has(3);
   @$pb.TagNumber(4)

@@ -98,7 +98,6 @@
                 },
                 "price": {
                   "type": "string",
-                  "format": "int64",
                   "title": "정정 가격"
                 },
                 "side": {
@@ -444,7 +443,6 @@
         },
         "price": {
           "type": "string",
-          "format": "int64",
           "title": "가격 (필수, 시장가 주문 시 0)"
         },
         "quoteType": {

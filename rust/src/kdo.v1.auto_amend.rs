@@ -18,8 +18,8 @@ pub struct AutoAmendOrder {
     #[prost(enumeration="OrderSide", tag="3")]
     pub side: i32,
     /// 현재 주문 가격
-    #[prost(int64, tag="4")]
-    pub price: i64,
+    #[prost(string, tag="4")]
+    pub price: ::prost::alloc::string::String,
     /// 현재 주문 수량
     #[prost(int64, tag="5")]
     pub quantity: i64,
@@ -226,8 +226,8 @@ pub struct RegisterOrderRequest {
     #[prost(enumeration="OrderSide", tag="3")]
     pub side: i32,
     /// 주문 가격
-    #[prost(int64, tag="4")]
-    pub price: i64,
+    #[prost(string, tag="4")]
+    pub price: ::prost::alloc::string::String,
     /// 주문 수량
     #[prost(int64, tag="5")]
     pub quantity: i64,

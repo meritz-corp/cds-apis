@@ -3316,9 +3316,7 @@ impl serde::Serialize for OrderSubmittedEvent {
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+            struct_ser.serialize_field("price", &self.price)?;
         }
         struct_ser.end()
     }
@@ -3419,9 +3417,7 @@ impl<'de> serde::Deserialize<'de> for OrderSubmittedEvent {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;

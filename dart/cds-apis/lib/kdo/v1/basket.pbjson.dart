@@ -228,7 +228,7 @@ const BasketItemValue$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'price', '3': 3, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'price', '3': 3, '4': 1, '5': 9, '10': 'price'},
     {'1': 'price_source', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.basket.PriceSource', '10': 'priceSource'},
     {'1': 'multiple', '3': 5, '4': 1, '5': 1, '10': 'multiple'},
     {'1': 'value', '3': 6, '4': 1, '5': 3, '10': 'value'},
@@ -238,7 +238,7 @@ const BasketItemValue$json = {
 /// Descriptor for `BasketItemValue`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List basketItemValueDescriptor = $convert.base64Decode(
     'Cg9CYXNrZXRJdGVtVmFsdWUSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGgoIcXVhbnRpdHkYAi'
-    'ABKANSCHF1YW50aXR5EhQKBXByaWNlGAMgASgDUgVwcmljZRI9CgxwcmljZV9zb3VyY2UYBCAB'
+    'ABKANSCHF1YW50aXR5EhQKBXByaWNlGAMgASgJUgVwcmljZRI9CgxwcmljZV9zb3VyY2UYBCAB'
     'KA4yGi5rZG8udjEuYmFza2V0LlByaWNlU291cmNlUgtwcmljZVNvdXJjZRIaCghtdWx0aXBsZR'
     'gFIAEoAVIIbXVsdGlwbGUSFAoFdmFsdWUYBiABKANSBXZhbHVl');
 

@@ -402,7 +402,6 @@
         },
         "price": {
           "type": "string",
-          "format": "int64",
           "title": "사용된 가격"
         },
         "priceSource": {

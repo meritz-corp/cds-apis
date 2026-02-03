@@ -89,7 +89,7 @@ const SubmitOrderRequest$json = {
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
-    {'1': 'price', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'price'},
+    {'1': 'price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'price'},
     {'1': 'quote_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
   ],
@@ -100,7 +100,7 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     'ChJTdWJtaXRPcmRlclJlcXVlc3QSIQoJZnVuZF9jb2RlGAEgASgJQgTiQQECUghmdW5kQ29kZR'
     'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIxCgRzaWRlGAMgASgOMhcua2RvLnYxLm9y'
     'ZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZRIgCghxdWFudGl0eRgEIAEoA0IE4kEBAlIIcXVhbn'
-    'RpdHkSGgoFcHJpY2UYBSABKANCBOJBAQJSBXByaWNlEjwKCnF1b3RlX3R5cGUYBiABKA4yFy5r'
+    'RpdHkSGgoFcHJpY2UYBSABKAlCBOJBAQJSBXByaWNlEjwKCnF1b3RlX3R5cGUYBiABKA4yFy5r'
     'ZG8udjEub3JkZXIuUXVvdGVUeXBlQgTiQQECUglxdW90ZVR5cGUSGQoFaXNfbHAYByABKAhCBO'
     'JBAQJSBGlzTHA=');
 
@@ -128,7 +128,7 @@ const AmendOrderRequest$json = {
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
-    {'1': 'price', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'price'},
+    {'1': 'price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'price'},
     {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
   ],
@@ -139,7 +139,7 @@ final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'ChFBbWVuZE9yZGVyUmVxdWVzdBIwChFvcmlnaW5hbF9vcmRlcl9pZBgBIAEoBEIE4kEBAlIPb3'
     'JpZ2luYWxPcmRlcklkEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSHAoGc3lt'
     'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aX'
-    'R5EhoKBXByaWNlGAUgASgDQgTiQQECUgVwcmljZRIxCgRzaWRlGAYgASgOMhcua2RvLnYxLm9y'
+    'R5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRIxCgRzaWRlGAYgASgOMhcua2RvLnYxLm9y'
     'ZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZRIZCgVpc19scBgHIAEoCEIE4kEBAlIEaXNMcA==');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
@@ -282,7 +282,7 @@ const OrderResult$json = {
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '10': 'side'},
-    {'1': 'price', '3': 5, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'price', '3': 5, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 6, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'result_type', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderResultType', '10': 'resultType'},
     {'1': 'timestamp', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
@@ -300,7 +300,7 @@ const OrderResult$json = {
 final $typed_data.Uint8List orderResultDescriptor = $convert.base64Decode(
     'CgtPcmRlclJlc3VsdBIZCghvcmRlcl9pZBgBIAEoBFIHb3JkZXJJZBIWCgZzeW1ib2wYAiABKA'
     'lSBnN5bWJvbBIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2RlEisKBHNpZGUYBCABKA4yFy5r'
-    'ZG8udjEub3JkZXIuT3JkZXJTaWRlUgRzaWRlEhQKBXByaWNlGAUgASgDUgVwcmljZRIaCghxdW'
+    'ZG8udjEub3JkZXIuT3JkZXJTaWRlUgRzaWRlEhQKBXByaWNlGAUgASgJUgVwcmljZRIaCghxdW'
     'FudGl0eRgGIAEoA1IIcXVhbnRpdHkSPgoLcmVzdWx0X3R5cGUYByABKA4yHS5rZG8udjEub3Jk'
     'ZXIuT3JkZXJSZXN1bHRUeXBlUgpyZXN1bHRUeXBlEjgKCXRpbWVzdGFtcBgIIAEoCzIaLmdvb2'
     'dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXRpbWVzdGFtcBI7CghyZWNlaXZlZBgKIAEoCzIdLmtk'
@@ -340,7 +340,7 @@ final $typed_data.Uint8List rejectedDetailsDescriptor = $convert.base64Decode(
 const FilledDetails$json = {
   '1': 'FilledDetails',
   '2': [
-    {'1': 'filled_price', '3': 1, '4': 1, '5': 3, '10': 'filledPrice'},
+    {'1': 'filled_price', '3': 1, '4': 1, '5': 9, '10': 'filledPrice'},
     {'1': 'filled_quantity', '3': 2, '4': 1, '5': 3, '10': 'filledQuantity'},
     {'1': 'trade_time', '3': 3, '4': 1, '5': 4, '10': 'tradeTime'},
   ],
@@ -348,7 +348,7 @@ const FilledDetails$json = {
 
 /// Descriptor for `FilledDetails`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List filledDetailsDescriptor = $convert.base64Decode(
-    'Cg1GaWxsZWREZXRhaWxzEiEKDGZpbGxlZF9wcmljZRgBIAEoA1ILZmlsbGVkUHJpY2USJwoPZm'
+    'Cg1GaWxsZWREZXRhaWxzEiEKDGZpbGxlZF9wcmljZRgBIAEoCVILZmlsbGVkUHJpY2USJwoPZm'
     'lsbGVkX3F1YW50aXR5GAIgASgDUg5maWxsZWRRdWFudGl0eRIdCgp0cmFkZV90aW1lGAMgASgE'
     'Ugl0cmFkZVRpbWU=');
 

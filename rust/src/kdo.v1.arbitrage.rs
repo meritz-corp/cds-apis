@@ -324,8 +324,8 @@ pub struct OrderSubmittedEvent {
     pub symbol: ::prost::alloc::string::String,
     #[prost(int64, tag="3")]
     pub quantity: i64,
-    #[prost(int64, tag="4")]
-    pub price: i64,
+    #[prost(string, tag="4")]
+    pub price: ::prost::alloc::string::String,
 }
 /// 체결 이벤트
 #[allow(clippy::derive_partial_eq_without_eq)]

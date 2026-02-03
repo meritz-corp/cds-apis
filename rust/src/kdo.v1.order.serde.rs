@@ -46,9 +46,7 @@ impl serde::Serialize for AmendOrderRequest {
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
             let v = OrderSide::try_from(self.side)
@@ -178,9 +176,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Side => {
                             if side__.is_some() {
@@ -1028,9 +1024,7 @@ impl serde::Serialize for FilledDetails {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.FilledDetails", len)?;
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("filled_price", ToString::to_string(&self.filled_price).as_str())?;
+            struct_ser.serialize_field("filled_price", &self.filled_price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1118,9 +1112,7 @@ impl<'de> serde::Deserialize<'de> for FilledDetails {
                             if filled_price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("filledPrice"));
                             }
-                            filled_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            filled_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::FilledQuantity => {
                             if filled_quantity__.is_some() {
@@ -1935,9 +1927,7 @@ impl serde::Serialize for OrderResult {
             struct_ser.serialize_field("side", &v)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2103,9 +2093,7 @@ impl<'de> serde::Deserialize<'de> for OrderResult {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -2858,9 +2846,7 @@ impl serde::Serialize for SubmitOrderRequest {
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+            struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
             let v = QuoteType::try_from(self.quote_type)
@@ -2988,9 +2974,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::QuoteType => {
                             if quote_type__.is_some() {

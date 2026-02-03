@@ -83,7 +83,7 @@ message AutoAmendOrder {
   OrderSide side = 3;
 
   // 현재 주문 가격
-  int64 price = 4;
+  string price = 4;
 
   // 현재 주문 수량
   int64 quantity = 5;
@@ -299,7 +299,7 @@ message RegisterOrderRequest {
   ];
 
   // 주문 가격
-  int64 price = 4 [
+  string price = 4 [
     (google.api.field_behavior) = REQUIRED
   ];
 

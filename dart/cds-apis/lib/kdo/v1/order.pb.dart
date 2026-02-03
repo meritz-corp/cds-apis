@@ -28,7 +28,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     OrderSide? side,
     $fixnum.Int64? quantity,
-    $fixnum.Int64? price,
+    $core.String? price,
     QuoteType? quoteType,
     $core.bool? isLp,
   }) {
@@ -53,7 +53,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
-    ..aInt64(5, _omitFieldNames ? '' : 'price')
+    ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<QuoteType>(6, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
     ..hasRequiredFields = false
@@ -118,9 +118,9 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
 
   /// 가격 (필수, 시장가 주문 시 0)
   @$pb.TagNumber(5)
-  $fixnum.Int64 get price => $_getI64(4);
+  $core.String get price => $_getSZ(4);
   @$pb.TagNumber(5)
-  set price($fixnum.Int64 value) => $_setInt64(4, value);
+  set price($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
   $core.bool hasPrice() => $_has(4);
   @$pb.TagNumber(5)
@@ -226,7 +226,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     $core.String? fundCode,
     $core.String? symbol,
     $fixnum.Int64? quantity,
-    $fixnum.Int64? price,
+    $core.String? price,
     OrderSide? side,
     $core.bool? isLp,
   }) {
@@ -251,7 +251,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
-    ..aInt64(5, _omitFieldNames ? '' : 'price')
+    ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
     ..hasRequiredFields = false
@@ -316,9 +316,9 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
 
   /// 정정 가격
   @$pb.TagNumber(5)
-  $fixnum.Int64 get price => $_getI64(4);
+  $core.String get price => $_getSZ(4);
   @$pb.TagNumber(5)
-  set price($fixnum.Int64 value) => $_setInt64(4, value);
+  set price($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
   $core.bool hasPrice() => $_has(4);
   @$pb.TagNumber(5)
@@ -894,7 +894,7 @@ class OrderResult extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? fundCode,
     OrderSide? side,
-    $fixnum.Int64? price,
+    $core.String? price,
     $fixnum.Int64? quantity,
     OrderResultType? resultType,
     $1.Timestamp? timestamp,
@@ -937,7 +937,7 @@ class OrderResult extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..e<OrderSide>(4, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
-    ..aInt64(5, _omitFieldNames ? '' : 'price')
+    ..aOS(5, _omitFieldNames ? '' : 'price')
     ..aInt64(6, _omitFieldNames ? '' : 'quantity')
     ..e<OrderResultType>(7, _omitFieldNames ? '' : 'resultType', $pb.PbFieldType.OE, defaultOrMaker: OrderResultType.ORDER_RESULT_TYPE_UNSPECIFIED, valueOf: OrderResultType.valueOf, enumValues: OrderResultType.values)
     ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'timestamp', subBuilder: $1.Timestamp.create)
@@ -1010,9 +1010,9 @@ class OrderResult extends $pb.GeneratedMessage {
 
   /// 가격
   @$pb.TagNumber(5)
-  $fixnum.Int64 get price => $_getI64(4);
+  $core.String get price => $_getSZ(4);
   @$pb.TagNumber(5)
-  set price($fixnum.Int64 value) => $_setInt64(4, value);
+  set price($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
   $core.bool hasPrice() => $_has(4);
   @$pb.TagNumber(5)
@@ -1204,7 +1204,7 @@ class RejectedDetails extends $pb.GeneratedMessage {
 
 class FilledDetails extends $pb.GeneratedMessage {
   factory FilledDetails({
-    $fixnum.Int64? filledPrice,
+    $core.String? filledPrice,
     $fixnum.Int64? filledQuantity,
     $fixnum.Int64? tradeTime,
   }) {
@@ -1221,7 +1221,7 @@ class FilledDetails extends $pb.GeneratedMessage {
   factory FilledDetails.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FilledDetails', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'filledPrice')
+    ..aOS(1, _omitFieldNames ? '' : 'filledPrice')
     ..aInt64(2, _omitFieldNames ? '' : 'filledQuantity')
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'tradeTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
@@ -1246,9 +1246,9 @@ class FilledDetails extends $pb.GeneratedMessage {
 
   /// 체결 가격
   @$pb.TagNumber(1)
-  $fixnum.Int64 get filledPrice => $_getI64(0);
+  $core.String get filledPrice => $_getSZ(0);
   @$pb.TagNumber(1)
-  set filledPrice($fixnum.Int64 value) => $_setInt64(0, value);
+  set filledPrice($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasFilledPrice() => $_has(0);
   @$pb.TagNumber(1)

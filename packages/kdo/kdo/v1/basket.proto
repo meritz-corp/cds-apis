@@ -268,7 +268,7 @@ message BasketItemValue {
   int64 quantity = 2;
 
   // 사용된 가격
-  int64 price = 3;
+  string price = 3;
 
   // 가격 소스
   PriceSource price_source = 4;

@@ -419,14 +419,14 @@ const OrderSubmittedEvent$json = {
     {'1': 'round', '3': 1, '4': 1, '5': 13, '10': 'round'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'price', '3': 4, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
   ],
 };
 
 /// Descriptor for `OrderSubmittedEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List orderSubmittedEventDescriptor = $convert.base64Decode(
     'ChNPcmRlclN1Ym1pdHRlZEV2ZW50EhQKBXJvdW5kGAEgASgNUgVyb3VuZBIWCgZzeW1ib2wYAi'
-    'ABKAlSBnN5bWJvbBIaCghxdWFudGl0eRgDIAEoA1IIcXVhbnRpdHkSFAoFcHJpY2UYBCABKANS'
+    'ABKAlSBnN5bWJvbBIaCghxdWFudGl0eRgDIAEoA1IIcXVhbnRpdHkSFAoFcHJpY2UYBCABKAlS'
     'BXByaWNl');
 
 @$core.Deprecated('Use orderFilledEventDescriptor instead')
