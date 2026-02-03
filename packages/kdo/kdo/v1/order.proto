@@ -167,9 +167,6 @@ message CancelOrderRequest {
   // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
 
-  // 정정 수량
-  int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
-
   // 매수/매도
   OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
 }

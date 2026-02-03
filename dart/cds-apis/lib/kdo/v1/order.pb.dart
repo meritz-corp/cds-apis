@@ -436,14 +436,12 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? originalOrderId,
     $core.String? fundCode,
     $core.String? symbol,
-    $fixnum.Int64? quantity,
     OrderSide? side,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
     if (fundCode != null) result.fundCode = fundCode;
     if (symbol != null) result.symbol = symbol;
-    if (quantity != null) result.quantity = quantity;
     if (side != null) result.side = side;
     return result;
   }
@@ -457,7 +455,6 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..e<OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
     ..hasRequiredFields = false
   ;
@@ -509,23 +506,13 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSymbol() => $_clearField(3);
 
-  /// 정정 수량
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get quantity => $_getI64(3);
-  @$pb.TagNumber(4)
-  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasQuantity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearQuantity() => $_clearField(4);
-
   /// 매수/매도
   @$pb.TagNumber(6)
-  OrderSide get side => $_getN(4);
+  OrderSide get side => $_getN(3);
   @$pb.TagNumber(6)
   set side(OrderSide value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasSide() => $_has(4);
+  $core.bool hasSide() => $_has(3);
   @$pb.TagNumber(6)
   void clearSide() => $_clearField(6);
 }

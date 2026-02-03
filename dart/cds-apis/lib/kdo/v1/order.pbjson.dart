@@ -167,7 +167,6 @@ const CancelOrderRequest$json = {
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
   ],
 };
@@ -176,8 +175,8 @@ const CancelOrderRequest$json = {
 final $typed_data.Uint8List cancelOrderRequestDescriptor = $convert.base64Decode(
     'ChJDYW5jZWxPcmRlclJlcXVlc3QSMAoRb3JpZ2luYWxfb3JkZXJfaWQYASABKARCBOJBAQJSD2'
     '9yaWdpbmFsT3JkZXJJZBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEhwKBnN5'
-    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEiAKCHF1YW50aXR5GAQgASgDQgTiQQECUghxdWFudG'
-    'l0eRIxCgRzaWRlGAYgASgOMhcua2RvLnYxLm9yZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZQ==');
+    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEjEKBHNpZGUYBiABKA4yFy5rZG8udjEub3JkZXIuT3'
+    'JkZXJTaWRlQgTiQQECUgRzaWRl');
 
 @$core.Deprecated('Use cancelOrderResponseDescriptor instead')
 const CancelOrderResponse$json = {

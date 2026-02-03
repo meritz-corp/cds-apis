@@ -167,11 +167,6 @@
                   "type": "string",
                   "title": "종목 코드"
                 },
-                "quantity": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "정정 수량"
-                },
                 "side": {
                   "$ref": "#/definitions/v1orderOrderSide",
                   "title": "매수/매도"
@@ -180,7 +175,6 @@
               "required": [
                 "fundCode",
                 "symbol",
-                "quantity",
                 "side"
               ]
             }
