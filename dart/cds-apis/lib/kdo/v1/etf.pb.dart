@@ -965,11 +965,13 @@ class GetEtfTickImpactRequest extends $pb.GeneratedMessage {
   factory GetEtfTickImpactRequest({
     $core.String? etf,
     $core.String? constituentSymbol,
+    $core.String? basePrice,
     $core.int? tickRange,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
     if (constituentSymbol != null) result.constituentSymbol = constituentSymbol;
+    if (basePrice != null) result.basePrice = basePrice;
     if (tickRange != null) result.tickRange = tickRange;
     return result;
   }
@@ -982,7 +984,8 @@ class GetEtfTickImpactRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfTickImpactRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'constituentSymbol')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'tickRange', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'basePrice')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'tickRange', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1023,15 +1026,25 @@ class GetEtfTickImpactRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearConstituentSymbol() => $_clearField(2);
 
-  /// 위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)
+  /// 기준가 (이 가격을 중심으로 위아래 틱 계산)
   @$pb.TagNumber(3)
-  $core.int get tickRange => $_getIZ(2);
+  $core.String get basePrice => $_getSZ(2);
   @$pb.TagNumber(3)
-  set tickRange($core.int value) => $_setSignedInt32(2, value);
+  set basePrice($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasTickRange() => $_has(2);
+  $core.bool hasBasePrice() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTickRange() => $_clearField(3);
+  void clearBasePrice() => $_clearField(3);
+
+  /// 위아래 계산할 틱 수 (예: 3이면 base_price 기준 -3틱 ~ +3틱)
+  @$pb.TagNumber(4)
+  $core.int get tickRange => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set tickRange($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTickRange() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTickRange() => $_clearField(4);
 }
 
 /// ETF 틱 임팩트 응답

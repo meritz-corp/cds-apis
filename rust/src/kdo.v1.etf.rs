@@ -181,8 +181,11 @@ pub struct GetEtfTickImpactRequest {
     /// 구성종목 심볼
     #[prost(string, tag="2")]
     pub constituent_symbol: ::prost::alloc::string::String,
-    /// 위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)
-    #[prost(int32, tag="3")]
+    /// 기준가 (이 가격을 중심으로 위아래 틱 계산)
+    #[prost(string, tag="3")]
+    pub base_price: ::prost::alloc::string::String,
+    /// 위아래 계산할 틱 수 (예: 3이면 base_price 기준 -3틱 ~ +3틱)
+    #[prost(int32, tag="4")]
     pub tick_range: i32,
 }
 /// ETF 틱 임팩트 응답

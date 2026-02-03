@@ -255,7 +255,8 @@ const GetEtfTickImpactRequest$json = {
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'constituent_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'constituentSymbol'},
-    {'1': 'tick_range', '3': 3, '4': 1, '5': 5, '8': {}, '10': 'tickRange'},
+    {'1': 'base_price', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'basePrice'},
+    {'1': 'tick_range', '3': 4, '4': 1, '5': 5, '8': {}, '10': 'tickRange'},
   ],
 };
 
@@ -263,7 +264,8 @@ const GetEtfTickImpactRequest$json = {
 final $typed_data.Uint8List getEtfTickImpactRequestDescriptor = $convert.base64Decode(
     'ChdHZXRFdGZUaWNrSW1wYWN0UmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZH'
     'NhcGlzLnh5ei9FdGZSA2V0ZhIzChJjb25zdGl0dWVudF9zeW1ib2wYAiABKAlCBOJBAQJSEWNv'
-    'bnN0aXR1ZW50U3ltYm9sEiMKCnRpY2tfcmFuZ2UYAyABKAVCBOJBAQJSCXRpY2tSYW5nZQ==');
+    'bnN0aXR1ZW50U3ltYm9sEiMKCmJhc2VfcHJpY2UYAyABKAlCBOJBAQJSCWJhc2VQcmljZRIjCg'
+    'p0aWNrX3JhbmdlGAQgASgFQgTiQQECUgl0aWNrUmFuZ2U=');
 
 @$core.Deprecated('Use etfTickImpactDescriptor instead')
 const EtfTickImpact$json = {

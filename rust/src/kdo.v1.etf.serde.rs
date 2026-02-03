@@ -1517,12 +1517,18 @@ impl serde::Serialize for GetEtfTickImpactRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.GetEtfTickImpactRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
         if true {
             struct_ser.serialize_field("constituent_symbol", &self.constituent_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("base_price", &self.base_price)?;
         }
         if true {
             struct_ser.serialize_field("tick_range", &self.tick_range)?;
@@ -1540,6 +1546,8 @@ impl<'de> serde::Deserialize<'de> for GetEtfTickImpactRequest {
             "etf",
             "constituent_symbol",
             "constituentSymbol",
+            "base_price",
+            "basePrice",
             "tick_range",
             "tickRange",
         ];
@@ -1548,6 +1556,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfTickImpactRequest {
         enum GeneratedField {
             Etf,
             ConstituentSymbol,
+            BasePrice,
             TickRange,
             __SkipField__,
         }
@@ -1573,6 +1582,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfTickImpactRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "constituentSymbol" | "constituent_symbol" => Ok(GeneratedField::ConstituentSymbol),
+                            "basePrice" | "base_price" => Ok(GeneratedField::BasePrice),
                             "tickRange" | "tick_range" => Ok(GeneratedField::TickRange),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -1595,6 +1605,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfTickImpactRequest {
             {
                 let mut etf__ = None;
                 let mut constituent_symbol__ = None;
+                let mut base_price__ = None;
                 let mut tick_range__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -1609,6 +1620,12 @@ impl<'de> serde::Deserialize<'de> for GetEtfTickImpactRequest {
                                 return Err(serde::de::Error::duplicate_field("constituentSymbol"));
                             }
                             constituent_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BasePrice => {
+                            if base_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basePrice"));
+                            }
+                            base_price__ = Some(map_.next_value()?);
                         }
                         GeneratedField::TickRange => {
                             if tick_range__.is_some() {
@@ -1626,6 +1643,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfTickImpactRequest {
                 Ok(GetEtfTickImpactRequest {
                     etf: etf__.unwrap_or_default(),
                     constituent_symbol: constituent_symbol__.unwrap_or_default(),
+                    base_price: base_price__.unwrap_or_default(),
                     tick_range: tick_range__.unwrap_or_default(),
                 })
             }

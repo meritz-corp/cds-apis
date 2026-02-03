@@ -224,8 +224,11 @@ message GetEtfTickImpactRequest {
     // 구성종목 심볼
     string constituent_symbol = 2 [(google.api.field_behavior) = REQUIRED];
 
-    // 위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)
-    int32 tick_range = 3 [(google.api.field_behavior) = REQUIRED];
+    // 기준가 (이 가격을 중심으로 위아래 틱 계산)
+    string base_price = 3 [(google.api.field_behavior) = REQUIRED];
+
+    // 위아래 계산할 틱 수 (예: 3이면 base_price 기준 -3틱 ~ +3틱)
+    int32 tick_range = 4 [(google.api.field_behavior) = REQUIRED];
 }
 
 // ETF 틱 임팩트 응답

@@ -160,8 +160,15 @@
             "type": "string"
           },
           {
+            "name": "basePrice",
+            "description": "기준가 (이 가격을 중심으로 위아래 틱 계산)",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "tickRange",
-            "description": "위아래 계산할 틱 수 (예: 3이면 -3틱 ~ +3틱)",
+            "description": "위아래 계산할 틱 수 (예: 3이면 base_price 기준 -3틱 ~ +3틱)",
             "in": "query",
             "required": true,
             "type": "integer",
