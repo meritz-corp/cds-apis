@@ -14,29 +14,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-/// 시장 유형
-class MarketType extends $pb.ProtobufEnum {
-  static const MarketType MARKET_TYPE_UNSPECIFIED = MarketType._(0, _omitEnumNames ? '' : 'MARKET_TYPE_UNSPECIFIED');
-  /// KOSPI
-  static const MarketType MARKET_TYPE_KOSPI = MarketType._(1, _omitEnumNames ? '' : 'MARKET_TYPE_KOSPI');
-  /// KOSDAQ
-  static const MarketType MARKET_TYPE_KOSDAQ = MarketType._(2, _omitEnumNames ? '' : 'MARKET_TYPE_KOSDAQ');
-  /// 파생상품
-  static const MarketType MARKET_TYPE_DERIVATIVE = MarketType._(3, _omitEnumNames ? '' : 'MARKET_TYPE_DERIVATIVE');
-
-  static const $core.List<MarketType> values = <MarketType> [
-    MARKET_TYPE_UNSPECIFIED,
-    MARKET_TYPE_KOSPI,
-    MARKET_TYPE_KOSDAQ,
-    MARKET_TYPE_DERIVATIVE,
-  ];
-
-  static final $core.List<MarketType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
-  static MarketType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const MarketType._(super.value, super.name);
-}
-
 /// 선물/옵션 유형
 class FutureOptionType extends $pb.ProtobufEnum {
   static const FutureOptionType FUTURE_OPTION_TYPE_UNSPECIFIED = FutureOptionType._(0, _omitEnumNames ? '' : 'FUTURE_OPTION_TYPE_UNSPECIFIED');

@@ -52,7 +52,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND\n* filter=market_type=KOSPI",
             "in": "query",
             "required": false,
             "type": "string"
@@ -181,7 +181,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND\n* filter=market_type=KOSPI",
             "in": "query",
             "required": false,
             "type": "string"
@@ -194,6 +194,29 @@
     }
   },
   "definitions": {
+    "commonMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_TYPE_UNSPECIFIED",
+        "MARKET_TYPE_KOSPI",
+        "MARKET_TYPE_KOSDAQ",
+        "MARKET_TYPE_DERIVATIVE"
+      ],
+      "default": "MARKET_TYPE_UNSPECIFIED",
+      "description": "- MARKET_TYPE_KOSPI: KOSPI\n - MARKET_TYPE_KOSDAQ: KOSDAQ\n - MARKET_TYPE_DERIVATIVE: 파생상품",
+      "title": "시장 유형"
+    },
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
     "order_logListOrderLogsResponse": {
       "type": "object",
       "properties": {
@@ -242,7 +265,7 @@
           "title": "로그 타입"
         },
         "side": {
-          "$ref": "#/definitions/v1order_logOrderSide",
+          "$ref": "#/definitions/commonOrderSide",
           "title": "주문 방향 (매수/매도)"
         },
         "orderType": {
@@ -291,6 +314,10 @@
           "type": "string",
           "format": "date-time",
           "title": "DB 삽입 시각\nRust의 DateTime\u003cUtc\u003e 타입을 Google의 Timestamp 메시지로 매핑"
+        },
+        "marketType": {
+          "$ref": "#/definitions/commonMarketType",
+          "title": "시장 구분"
         }
       },
       "title": "주문 로그"
@@ -365,17 +392,6 @@
           }
         }
       }
-    },
-    "v1order_logOrderSide": {
-      "type": "string",
-      "enum": [
-        "ORDER_SIDE_UNSPECIFIED",
-        "BUY",
-        "SELL"
-      ],
-      "default": "ORDER_SIDE_UNSPECIFIED",
-      "description": "- BUY: 매수\n - SELL: 매도",
-      "title": "주문 방향 (매수/매도)\nRust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정"
     },
     "v1order_logOrderType": {
       "type": "string",

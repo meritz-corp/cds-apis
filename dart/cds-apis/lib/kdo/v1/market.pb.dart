@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pbenum.dart' as $2;
 import 'market.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -1154,7 +1155,7 @@ class RawMarketMessage extends $pb.GeneratedMessage {
 
 class GetMarketSessionResponse extends $pb.GeneratedMessage {
   factory GetMarketSessionResponse({
-    MarketSession? session,
+    $2.TradingSession? session,
   }) {
     final result = create();
     if (session != null) result.session = session;
@@ -1167,7 +1168,7 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
   factory GetMarketSessionResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMarketSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..e<MarketSession>(1, _omitFieldNames ? '' : 'session', $pb.PbFieldType.OE, defaultOrMaker: MarketSession.MARKT_SESSION_UNSPECIFIED, valueOf: MarketSession.valueOf, enumValues: MarketSession.values)
+    ..e<$2.TradingSession>(1, _omitFieldNames ? '' : 'session', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
     ..hasRequiredFields = false
   ;
 
@@ -1189,9 +1190,9 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
   static GetMarketSessionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  MarketSession get session => $_getN(0);
+  $2.TradingSession get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session(MarketSession value) => $_setField(1, value);
+  set session($2.TradingSession value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)

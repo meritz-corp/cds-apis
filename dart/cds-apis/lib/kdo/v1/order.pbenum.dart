@@ -14,23 +14,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class OrderSide extends $pb.ProtobufEnum {
-  static const OrderSide ORDER_SIDE_UNSPECIFIED = OrderSide._(0, _omitEnumNames ? '' : 'ORDER_SIDE_UNSPECIFIED');
-  static const OrderSide ORDER_SIDE_BID = OrderSide._(1, _omitEnumNames ? '' : 'ORDER_SIDE_BID');
-  static const OrderSide ORDER_SIDE_ASK = OrderSide._(2, _omitEnumNames ? '' : 'ORDER_SIDE_ASK');
-
-  static const $core.List<OrderSide> values = <OrderSide> [
-    ORDER_SIDE_UNSPECIFIED,
-    ORDER_SIDE_BID,
-    ORDER_SIDE_ASK,
-  ];
-
-  static final $core.List<OrderSide?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static OrderSide? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const OrderSide._(super.value, super.name);
-}
-
 class QuoteType extends $pb.ProtobufEnum {
   static const QuoteType QUOTE_TYPE_UNSPECIFIED = QuoteType._(0, _omitEnumNames ? '' : 'QUOTE_TYPE_UNSPECIFIED');
   static const QuoteType QUOTE_TYPE_LIMIT = QuoteType._(1, _omitEnumNames ? '' : 'QUOTE_TYPE_LIMIT');

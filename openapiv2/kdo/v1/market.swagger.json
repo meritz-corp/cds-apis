@@ -554,6 +554,20 @@
     }
   },
   "definitions": {
+    "commonTradingSession": {
+      "type": "string",
+      "enum": [
+        "TRADING_SESSION_UNSPECIFIED",
+        "TRADING_SESSION_PRE_MARKET",
+        "TRADING_SESSION_OPENING_AUCTION",
+        "TRADING_SESSION_REGULAR",
+        "TRADING_SESSION_CLOSING_AUCTION",
+        "TRADING_SESSION_CLOSED"
+      ],
+      "default": "TRADING_SESSION_UNSPECIFIED",
+      "description": "- TRADING_SESSION_PRE_MARKET: 장 시작 전\n - TRADING_SESSION_OPENING_AUCTION: 시가 동시호가 (08:30 ~ 09:00)\n - TRADING_SESSION_REGULAR: 장중 (09:00 ~ 15:20)\n - TRADING_SESSION_CLOSING_AUCTION: 종가 동시호가 (15:20 ~ 15:30)\n - TRADING_SESSION_CLOSED: 장 종료",
+      "title": "거래 세션 타입"
+    },
     "marketAddRawMessagesSocketRequest": {
       "type": "object",
       "properties": {
@@ -783,22 +797,9 @@
       "type": "object",
       "properties": {
         "session": {
-          "$ref": "#/definitions/marketMarketSession"
+          "$ref": "#/definitions/commonTradingSession"
         }
       }
-    },
-    "marketMarketSession": {
-      "type": "string",
-      "enum": [
-        "MARKT_SESSION_UNSPECIFIED",
-        "MARKT_SESSION_PRE_MARKET",
-        "MARKT_SESSION_OPENING_AUCTION",
-        "MARKT_SESSION_REGULAR",
-        "MARKT_SESSION_CLOSING_AUCTION",
-        "MARKT_SESSION_CLOSED"
-      ],
-      "default": "MARKT_SESSION_UNSPECIFIED",
-      "title": "- MARKT_SESSION_PRE_MARKET: 장 시작 전\n - MARKT_SESSION_OPENING_AUCTION: 시가 동시호가 (08:30 ~ 09:00)\n - MARKT_SESSION_REGULAR: 장중 (09:00 ~ 15:20)\n - MARKT_SESSION_CLOSING_AUCTION: 종가 동시호가 (15:20 ~ 15:30)\n - MARKT_SESSION_CLOSED: 장 종료"
     },
     "marketRawMarketMessage": {
       "type": "object",

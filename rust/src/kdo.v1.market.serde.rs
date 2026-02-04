@@ -1111,7 +1111,7 @@ impl serde::Serialize for GetMarketSessionResponse {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.GetMarketSessionResponse", len)?;
         if true {
-            let v = MarketSession::try_from(self.session)
+            let v = super::common::TradingSession::try_from(self.session)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.session)))?;
             struct_ser.serialize_field("session", &v)?;
         }
@@ -1180,7 +1180,7 @@ impl<'de> serde::Deserialize<'de> for GetMarketSessionResponse {
                             if session__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("session"));
                             }
-                            session__ = Some(map_.next_value::<MarketSession>()? as i32);
+                            session__ = Some(map_.next_value::<super::common::TradingSession>()? as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1529,89 +1529,6 @@ impl<'de> serde::Deserialize<'de> for GetUserStockOrderBookRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.market.GetUserStockOrderBookRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MarketSession {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::MarktSessionUnspecified => "MARKT_SESSION_UNSPECIFIED",
-            Self::MarktSessionPreMarket => "MARKT_SESSION_PRE_MARKET",
-            Self::MarktSessionOpeningAuction => "MARKT_SESSION_OPENING_AUCTION",
-            Self::MarktSessionRegular => "MARKT_SESSION_REGULAR",
-            Self::MarktSessionClosingAuction => "MARKT_SESSION_CLOSING_AUCTION",
-            Self::MarktSessionClosed => "MARKT_SESSION_CLOSED",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for MarketSession {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "MARKT_SESSION_UNSPECIFIED",
-            "MARKT_SESSION_PRE_MARKET",
-            "MARKT_SESSION_OPENING_AUCTION",
-            "MARKT_SESSION_REGULAR",
-            "MARKT_SESSION_CLOSING_AUCTION",
-            "MARKT_SESSION_CLOSED",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MarketSession;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "MARKT_SESSION_UNSPECIFIED" => Ok(MarketSession::MarktSessionUnspecified),
-                    "MARKT_SESSION_PRE_MARKET" => Ok(MarketSession::MarktSessionPreMarket),
-                    "MARKT_SESSION_OPENING_AUCTION" => Ok(MarketSession::MarktSessionOpeningAuction),
-                    "MARKT_SESSION_REGULAR" => Ok(MarketSession::MarktSessionRegular),
-                    "MARKT_SESSION_CLOSING_AUCTION" => Ok(MarketSession::MarktSessionClosingAuction),
-                    "MARKT_SESSION_CLOSED" => Ok(MarketSession::MarktSessionClosed),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for RawMarketMessage {

@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -26,17 +27,6 @@ service FutureService {
     };
     option (google.api.method_signature) = "";
   }
-}
-
-// 시장 유형
-enum MarketType {
-  MARKET_TYPE_UNSPECIFIED = 0;
-  // KOSPI
-  MARKET_TYPE_KOSPI = 1;
-  // KOSDAQ
-  MARKET_TYPE_KOSDAQ = 2;
-  // 파생상품
-  MARKET_TYPE_DERIVATIVE = 3;
 }
 
 // 선물/옵션 유형
@@ -70,7 +60,7 @@ message Future {
   string market_name = 4;
 
   // 시장 유형
-  MarketType market_type = 5;
+  kdo.v1.common.MarketType market_type = 5;
 
   // 1회 최대 주문 수량
   int64 max_quantity_per_order = 6;

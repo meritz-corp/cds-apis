@@ -33,21 +33,6 @@ final $typed_data.Uint8List orderLogTypeDescriptor = $convert.base64Decode(
     'ZFRBABEgwKCFJFSkVDVEVEEAISEwoPTUVSSVRaX1JFSkVDVEVEEAMSCgoGRklMTEVEEAQSEgoO'
     'QVVUT19DQU5DRUxMRUQQBQ==');
 
-@$core.Deprecated('Use orderSideDescriptor instead')
-const OrderSide$json = {
-  '1': 'OrderSide',
-  '2': [
-    {'1': 'ORDER_SIDE_UNSPECIFIED', '2': 0},
-    {'1': 'BUY', '2': 1},
-    {'1': 'SELL', '2': 2},
-  ],
-};
-
-/// Descriptor for `OrderSide`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List orderSideDescriptor = $convert.base64Decode(
-    'CglPcmRlclNpZGUSGgoWT1JERVJfU0lERV9VTlNQRUNJRklFRBAAEgcKA0JVWRABEggKBFNFTE'
-    'wQAg==');
-
 @$core.Deprecated('Use orderTypeDescriptor instead')
 const OrderType$json = {
   '1': 'OrderType',
@@ -74,7 +59,7 @@ const OrderLog$json = {
     {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'symbol', '3': 5, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'log_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order_log.OrderLogType', '10': 'logType'},
-    {'1': 'side', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.order_log.OrderSide', '10': 'side'},
+    {'1': 'side', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
     {'1': 'order_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.order_log.OrderType', '10': 'orderType'},
     {'1': 'price', '3': 9, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 10, '4': 1, '5': 9, '10': 'quantity'},
@@ -86,6 +71,7 @@ const OrderLog$json = {
     {'1': 'event_time', '3': 16, '4': 1, '5': 4, '10': 'eventTime'},
     {'1': 'receive_time', '3': 17, '4': 1, '5': 4, '10': 'receiveTime'},
     {'1': 'created_at', '3': 18, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'market_type', '3': 19, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -102,18 +88,19 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'CghPcmRlckxvZxIOCgJpZBgBIAEoA1ICaWQSGQoIb3JkZXJfaWQYAiABKARSB29yZGVySWQSLw'
     'oRb3JpZ2luYWxfb3JkZXJfaWQYAyABKARIAFIPb3JpZ2luYWxPcmRlcklkiAEBEhsKCWZ1bmRf'
     'Y29kZRgEIAEoCVIIZnVuZENvZGUSFgoGc3ltYm9sGAUgASgJUgZzeW1ib2wSOQoIbG9nX3R5cG'
-    'UYBiABKA4yHi5rZG8udjEub3JkZXJfbG9nLk9yZGVyTG9nVHlwZVIHbG9nVHlwZRIvCgRzaWRl'
-    'GAcgASgOMhsua2RvLnYxLm9yZGVyX2xvZy5PcmRlclNpZGVSBHNpZGUSOgoKb3JkZXJfdHlwZR'
-    'gIIAEoDjIbLmtkby52MS5vcmRlcl9sb2cuT3JkZXJUeXBlUglvcmRlclR5cGUSFAoFcHJpY2UY'
-    'CSABKAlSBXByaWNlEhoKCHF1YW50aXR5GAogASgJUghxdWFudGl0eRImCgxmaWxsZWRfcHJpY2'
-    'UYCyABKAlIAVILZmlsbGVkUHJpY2WIAQESLAoPZmlsbGVkX3F1YW50aXR5GAwgASgJSAJSDmZp'
-    'bGxlZFF1YW50aXR5iAEBEigKDWZpbGxlZF9hbW91bnQYDSABKAlIA1IMZmlsbGVkQW1vdW50iA'
-    'EBEioKDnJlamVjdGlvbl9jb2RlGA4gASgJSARSDXJlamVjdGlvbkNvZGWIAQESKAoNZXJyb3Jf'
-    'bWVzc2FnZRgPIAEoCUgFUgxlcnJvck1lc3NhZ2WIAQESHQoKZXZlbnRfdGltZRgQIAEoBFIJZX'
-    'ZlbnRUaW1lEiEKDHJlY2VpdmVfdGltZRgRIAEoBFILcmVjZWl2ZVRpbWUSOQoKY3JlYXRlZF9h'
-    'dBgSIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdEIUChJfb3JpZ2'
-    'luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5QhAKDl9m'
-    'aWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZQ==');
+    'UYBiABKA4yHi5rZG8udjEub3JkZXJfbG9nLk9yZGVyTG9nVHlwZVIHbG9nVHlwZRIsCgRzaWRl'
+    'GAcgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZGVSBHNpZGUSOgoKb3JkZXJfdHlwZRgIIA'
+    'EoDjIbLmtkby52MS5vcmRlcl9sb2cuT3JkZXJUeXBlUglvcmRlclR5cGUSFAoFcHJpY2UYCSAB'
+    'KAlSBXByaWNlEhoKCHF1YW50aXR5GAogASgJUghxdWFudGl0eRImCgxmaWxsZWRfcHJpY2UYCy'
+    'ABKAlIAVILZmlsbGVkUHJpY2WIAQESLAoPZmlsbGVkX3F1YW50aXR5GAwgASgJSAJSDmZpbGxl'
+    'ZFF1YW50aXR5iAEBEigKDWZpbGxlZF9hbW91bnQYDSABKAlIA1IMZmlsbGVkQW1vdW50iAEBEi'
+    'oKDnJlamVjdGlvbl9jb2RlGA4gASgJSARSDXJlamVjdGlvbkNvZGWIAQESKAoNZXJyb3JfbWVz'
+    'c2FnZRgPIAEoCUgFUgxlcnJvck1lc3NhZ2WIAQESHQoKZXZlbnRfdGltZRgQIAEoBFIJZXZlbn'
+    'RUaW1lEiEKDHJlY2VpdmVfdGltZRgRIAEoBFILcmVjZWl2ZVRpbWUSOQoKY3JlYXRlZF9hdBgS'
+    'IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI6CgttYXJrZXRfdH'
+    'lwZRgTIAEoDjIZLmtkby52MS5jb21tb24uTWFya2V0VHlwZVIKbWFya2V0VHlwZUIUChJfb3Jp'
+    'Z2luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5QhAKDl'
+    '9maWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZQ==');
 
 @$core.Deprecated('Use orderLogFillStatisticsDescriptor instead')
 const OrderLogFillStatistics$json = {

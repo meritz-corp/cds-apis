@@ -880,7 +880,7 @@ impl serde::Serialize for EtfPdfConstituent {
             struct_ser.serialize_field("name", &self.name)?;
         }
         if true {
-            let v = ProductType::try_from(self.product_type)
+            let v = super::common::ProductType::try_from(self.product_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.product_type)))?;
             struct_ser.serialize_field("product_type", &v)?;
         }
@@ -979,7 +979,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                             if product_type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("productType"));
                             }
-                            product_type__ = Some(map_.next_value::<ProductType>()? as i32);
+                            product_type__ = Some(map_.next_value::<super::common::ProductType>()? as i32);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -1895,86 +1895,6 @@ impl<'de> serde::Deserialize<'de> for ListEtfsResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.etf.ListEtfsResponse", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ProductType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "PRODUCT_TYPE_UNSPECIFIED",
-            Self::Stock => "PRODUCT_TYPE_STOCK",
-            Self::Futures => "PRODUCT_TYPE_FUTURES",
-            Self::Etf => "PRODUCT_TYPE_ETF",
-            Self::Cash => "PRODUCT_TYPE_CASH",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for ProductType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "PRODUCT_TYPE_UNSPECIFIED",
-            "PRODUCT_TYPE_STOCK",
-            "PRODUCT_TYPE_FUTURES",
-            "PRODUCT_TYPE_ETF",
-            "PRODUCT_TYPE_CASH",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ProductType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "PRODUCT_TYPE_UNSPECIFIED" => Ok(ProductType::Unspecified),
-                    "PRODUCT_TYPE_STOCK" => Ok(ProductType::Stock),
-                    "PRODUCT_TYPE_FUTURES" => Ok(ProductType::Futures),
-                    "PRODUCT_TYPE_ETF" => Ok(ProductType::Etf),
-                    "PRODUCT_TYPE_CASH" => Ok(ProductType::Cash),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for ReplicationMethod {

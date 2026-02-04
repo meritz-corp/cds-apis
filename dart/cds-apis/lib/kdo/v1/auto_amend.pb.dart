@@ -16,6 +16,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'auto_amend.pbenum.dart';
+import 'common.pbenum.dart' as $2;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
@@ -26,7 +27,7 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
   factory AutoAmendOrder({
     $fixnum.Int64? orderId,
     $core.String? symbol,
-    OrderSide? side,
+    $2.OrderSide? side,
     $core.String? price,
     $fixnum.Int64? quantity,
     $fixnum.Int64? remainingQuantity,
@@ -57,7 +58,7 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AutoAmendOrder', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOS(4, _omitFieldNames ? '' : 'price')
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aInt64(6, _omitFieldNames ? '' : 'remainingQuantity')
@@ -107,9 +108,9 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
 
   /// 주문 방향
   @$pb.TagNumber(3)
-  OrderSide get side => $_getN(2);
+  $2.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side(OrderSide value) => $_setField(3, value);
+  set side($2.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -394,7 +395,7 @@ class AuctionSessionConfig extends $pb.GeneratedMessage {
 class ServiceStatus extends $pb.GeneratedMessage {
   factory ServiceStatus({
     $core.bool? isRunning,
-    TradingSession? currentSession,
+    $2.TradingSession? currentSession,
     $core.int? activeOrderCount,
     $core.int? totalOrderCount,
   }) {
@@ -413,7 +414,7 @@ class ServiceStatus extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServiceStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isRunning')
-    ..e<TradingSession>(2, _omitFieldNames ? '' : 'currentSession', $pb.PbFieldType.OE, defaultOrMaker: TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: TradingSession.valueOf, enumValues: TradingSession.values)
+    ..e<$2.TradingSession>(2, _omitFieldNames ? '' : 'currentSession', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'activeOrderCount', $pb.PbFieldType.OU3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'totalOrderCount', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
@@ -448,9 +449,9 @@ class ServiceStatus extends $pb.GeneratedMessage {
 
   /// 현재 세션
   @$pb.TagNumber(2)
-  TradingSession get currentSession => $_getN(1);
+  $2.TradingSession get currentSession => $_getN(1);
   @$pb.TagNumber(2)
-  set currentSession(TradingSession value) => $_setField(2, value);
+  set currentSession($2.TradingSession value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasCurrentSession() => $_has(1);
   @$pb.TagNumber(2)
@@ -819,8 +820,8 @@ class AmendFailedEvent extends $pb.GeneratedMessage {
 /// 세션 변경 이벤트
 class SessionChangedEvent extends $pb.GeneratedMessage {
   factory SessionChangedEvent({
-    TradingSession? oldSession,
-    TradingSession? newSession,
+    $2.TradingSession? oldSession,
+    $2.TradingSession? newSession,
   }) {
     final result = create();
     if (oldSession != null) result.oldSession = oldSession;
@@ -834,8 +835,8 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
   factory SessionChangedEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionChangedEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
-    ..e<TradingSession>(1, _omitFieldNames ? '' : 'oldSession', $pb.PbFieldType.OE, defaultOrMaker: TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: TradingSession.valueOf, enumValues: TradingSession.values)
-    ..e<TradingSession>(2, _omitFieldNames ? '' : 'newSession', $pb.PbFieldType.OE, defaultOrMaker: TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: TradingSession.valueOf, enumValues: TradingSession.values)
+    ..e<$2.TradingSession>(1, _omitFieldNames ? '' : 'oldSession', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
+    ..e<$2.TradingSession>(2, _omitFieldNames ? '' : 'newSession', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
     ..hasRequiredFields = false
   ;
 
@@ -858,9 +859,9 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
 
   /// 이전 세션
   @$pb.TagNumber(1)
-  TradingSession get oldSession => $_getN(0);
+  $2.TradingSession get oldSession => $_getN(0);
   @$pb.TagNumber(1)
-  set oldSession(TradingSession value) => $_setField(1, value);
+  set oldSession($2.TradingSession value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasOldSession() => $_has(0);
   @$pb.TagNumber(1)
@@ -868,9 +869,9 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
 
   /// 새 세션
   @$pb.TagNumber(2)
-  TradingSession get newSession => $_getN(1);
+  $2.TradingSession get newSession => $_getN(1);
   @$pb.TagNumber(2)
-  set newSession(TradingSession value) => $_setField(2, value);
+  set newSession($2.TradingSession value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasNewSession() => $_has(1);
   @$pb.TagNumber(2)
@@ -882,7 +883,7 @@ class OrderRegisteredEvent extends $pb.GeneratedMessage {
   factory OrderRegisteredEvent({
     $fixnum.Int64? orderId,
     $core.String? symbol,
-    OrderSide? side,
+    $2.OrderSide? side,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
@@ -899,7 +900,7 @@ class OrderRegisteredEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderRegisteredEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -942,9 +943,9 @@ class OrderRegisteredEvent extends $pb.GeneratedMessage {
 
   /// 주문 방향
   @$pb.TagNumber(3)
-  OrderSide get side => $_getN(2);
+  $2.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side(OrderSide value) => $_setField(3, value);
+  set side($2.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -1016,7 +1017,7 @@ class RegisterOrderRequest extends $pb.GeneratedMessage {
   factory RegisterOrderRequest({
     $fixnum.Int64? orderId,
     $core.String? symbol,
-    OrderSide? side,
+    $2.OrderSide? side,
     $core.String? price,
     $fixnum.Int64? quantity,
     AmendConfig? config,
@@ -1039,7 +1040,7 @@ class RegisterOrderRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RegisterOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOS(4, _omitFieldNames ? '' : 'price')
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aOM<AmendConfig>(6, _omitFieldNames ? '' : 'config', subBuilder: AmendConfig.create)
@@ -1085,9 +1086,9 @@ class RegisterOrderRequest extends $pb.GeneratedMessage {
 
   /// 주문 방향
   @$pb.TagNumber(3)
-  OrderSide get side => $_getN(2);
+  $2.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side(OrderSide value) => $_setField(3, value);
+  set side($2.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -1223,7 +1224,7 @@ class GetOrderRequest extends $pb.GeneratedMessage {
 class ListOrdersRequest extends $pb.GeneratedMessage {
   factory ListOrdersRequest({
     $core.String? symbol,
-    OrderSide? side,
+    $2.OrderSide? side,
     $core.bool? activeOnly,
   }) {
     final result = create();
@@ -1240,7 +1241,7 @@ class ListOrdersRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..e<OrderSide>(2, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(2, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOB(3, _omitFieldNames ? '' : 'activeOnly')
     ..hasRequiredFields = false
   ;
@@ -1274,9 +1275,9 @@ class ListOrdersRequest extends $pb.GeneratedMessage {
 
   /// 주문 방향 필터 (optional)
   @$pb.TagNumber(2)
-  OrderSide get side => $_getN(1);
+  $2.OrderSide get side => $_getN(1);
   @$pb.TagNumber(2)
-  set side(OrderSide value) => $_setField(2, value);
+  set side($2.OrderSide value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasSide() => $_has(1);
   @$pb.TagNumber(2)

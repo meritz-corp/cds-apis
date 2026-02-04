@@ -101,7 +101,7 @@
                   "title": "정정 가격"
                 },
                 "side": {
-                  "$ref": "#/definitions/v1orderOrderSide",
+                  "$ref": "#/definitions/commonOrderSide",
                   "title": "매수/매도"
                 },
                 "isLp": {
@@ -168,7 +168,7 @@
                   "title": "종목 코드"
                 },
                 "side": {
-                  "$ref": "#/definitions/v1orderOrderSide",
+                  "$ref": "#/definitions/commonOrderSide",
                   "title": "매수/매도"
                 }
               },
@@ -272,6 +272,17 @@
     }
   },
   "definitions": {
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
     "orderAmendOrderResponse": {
       "type": "object",
       "properties": {
@@ -355,7 +366,7 @@
           "title": "주문 ID"
         },
         "orderSide": {
-          "$ref": "#/definitions/v1orderOrderSide",
+          "$ref": "#/definitions/commonOrderSide",
           "title": "주문 타입"
         },
         "symbol": {
@@ -427,7 +438,7 @@
           "title": "종목 코드 ISIN (필수)"
         },
         "side": {
-          "$ref": "#/definitions/v1orderOrderSide",
+          "$ref": "#/definitions/commonOrderSide",
           "title": "매수/매도 (필수)"
         },
         "quantity": {
@@ -502,16 +513,6 @@
           }
         }
       }
-    },
-    "v1orderOrderSide": {
-      "type": "string",
-      "enum": [
-        "ORDER_SIDE_UNSPECIFIED",
-        "ORDER_SIDE_BID",
-        "ORDER_SIDE_ASK"
-      ],
-      "default": "ORDER_SIDE_UNSPECIFIED",
-      "title": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도"
     }
   }
 }

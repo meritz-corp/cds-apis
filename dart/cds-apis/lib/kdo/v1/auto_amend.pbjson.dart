@@ -14,41 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use orderSideDescriptor instead')
-const OrderSide$json = {
-  '1': 'OrderSide',
-  '2': [
-    {'1': 'ORDER_SIDE_UNSPECIFIED', '2': 0},
-    {'1': 'ORDER_SIDE_BID', '2': 1},
-    {'1': 'ORDER_SIDE_ASK', '2': 2},
-  ],
-};
-
-/// Descriptor for `OrderSide`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List orderSideDescriptor = $convert.base64Decode(
-    'CglPcmRlclNpZGUSGgoWT1JERVJfU0lERV9VTlNQRUNJRklFRBAAEhIKDk9SREVSX1NJREVfQk'
-    'lEEAESEgoOT1JERVJfU0lERV9BU0sQAg==');
-
-@$core.Deprecated('Use tradingSessionDescriptor instead')
-const TradingSession$json = {
-  '1': 'TradingSession',
-  '2': [
-    {'1': 'TRADING_SESSION_UNSPECIFIED', '2': 0},
-    {'1': 'TRADING_SESSION_PRE_MARKET', '2': 1},
-    {'1': 'TRADING_SESSION_OPENING_AUCTION', '2': 2},
-    {'1': 'TRADING_SESSION_REGULAR', '2': 3},
-    {'1': 'TRADING_SESSION_CLOSING_AUCTION', '2': 4},
-    {'1': 'TRADING_SESSION_CLOSED', '2': 5},
-  ],
-};
-
-/// Descriptor for `TradingSession`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List tradingSessionDescriptor = $convert.base64Decode(
-    'Cg5UcmFkaW5nU2Vzc2lvbhIfChtUUkFESU5HX1NFU1NJT05fVU5TUEVDSUZJRUQQABIeChpUUk'
-    'FESU5HX1NFU1NJT05fUFJFX01BUktFVBABEiMKH1RSQURJTkdfU0VTU0lPTl9PUEVOSU5HX0FV'
-    'Q1RJT04QAhIbChdUUkFESU5HX1NFU1NJT05fUkVHVUxBUhADEiMKH1RSQURJTkdfU0VTU0lPTl'
-    '9DTE9TSU5HX0FVQ1RJT04QBBIaChZUUkFESU5HX1NFU1NJT05fQ0xPU0VEEAU=');
-
 @$core.Deprecated('Use amendActionDescriptor instead')
 const AmendAction$json = {
   '1': 'AmendAction',
@@ -72,7 +37,7 @@ const AutoAmendOrder$json = {
   '2': [
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '10': 'orderId'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.OrderSide', '10': 'side'},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
     {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'remaining_quantity', '3': 6, '4': 1, '5': 3, '10': 'remainingQuantity'},
@@ -86,13 +51,13 @@ const AutoAmendOrder$json = {
 /// Descriptor for `AutoAmendOrder`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List autoAmendOrderDescriptor = $convert.base64Decode(
     'Cg5BdXRvQW1lbmRPcmRlchIZCghvcmRlcl9pZBgBIAEoBFIHb3JkZXJJZBIWCgZzeW1ib2wYAi'
-    'ABKAlSBnN5bWJvbBIwCgRzaWRlGAMgASgOMhwua2RvLnYxLmF1dG9fYW1lbmQuT3JkZXJTaWRl'
-    'UgRzaWRlEhQKBXByaWNlGAQgASgJUgVwcmljZRIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdH'
-    'kSLQoScmVtYWluaW5nX3F1YW50aXR5GAYgASgDUhFyZW1haW5pbmdRdWFudGl0eRI2CgZjb25m'
-    'aWcYByABKAsyHi5rZG8udjEuYXV0b19hbWVuZC5BbWVuZENvbmZpZ1IGY29uZmlnEiUKC2FtZW'
-    '5kX2NvdW50GAggASgNQgTiQQEDUgphbWVuZENvdW50EjEKEmxhc3RfYW1lbmRfdGltZV9tcxgJ'
-    'IAEoA0IE4kEBA1IPbGFzdEFtZW5kVGltZU1zEiEKCWlzX2FjdGl2ZRgKIAEoCEIE4kEBA1IIaX'
-    'NBY3RpdmU=');
+    'ABKAlSBnN5bWJvbBIsCgRzaWRlGAMgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZGVSBHNp'
+    'ZGUSFAoFcHJpY2UYBCABKAlSBXByaWNlEhoKCHF1YW50aXR5GAUgASgDUghxdWFudGl0eRItCh'
+    'JyZW1haW5pbmdfcXVhbnRpdHkYBiABKANSEXJlbWFpbmluZ1F1YW50aXR5EjYKBmNvbmZpZxgH'
+    'IAEoCzIeLmtkby52MS5hdXRvX2FtZW5kLkFtZW5kQ29uZmlnUgZjb25maWcSJQoLYW1lbmRfY2'
+    '91bnQYCCABKA1CBOJBAQNSCmFtZW5kQ291bnQSMQoSbGFzdF9hbWVuZF90aW1lX21zGAkgASgD'
+    'QgTiQQEDUg9sYXN0QW1lbmRUaW1lTXMSIQoJaXNfYWN0aXZlGAogASgIQgTiQQEDUghpc0FjdG'
+    'l2ZQ==');
 
 @$core.Deprecated('Use amendConfigDescriptor instead')
 const AmendConfig$json = {
@@ -146,7 +111,7 @@ const ServiceStatus$json = {
   '1': 'ServiceStatus',
   '2': [
     {'1': 'is_running', '3': 1, '4': 1, '5': 8, '10': 'isRunning'},
-    {'1': 'current_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.TradingSession', '10': 'currentSession'},
+    {'1': 'current_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'currentSession'},
     {'1': 'active_order_count', '3': 3, '4': 1, '5': 13, '10': 'activeOrderCount'},
     {'1': 'total_order_count', '3': 4, '4': 1, '5': 13, '10': 'totalOrderCount'},
   ],
@@ -154,10 +119,10 @@ const ServiceStatus$json = {
 
 /// Descriptor for `ServiceStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List serviceStatusDescriptor = $convert.base64Decode(
-    'Cg1TZXJ2aWNlU3RhdHVzEh0KCmlzX3J1bm5pbmcYASABKAhSCWlzUnVubmluZxJKCg9jdXJyZW'
-    '50X3Nlc3Npb24YAiABKA4yIS5rZG8udjEuYXV0b19hbWVuZC5UcmFkaW5nU2Vzc2lvblIOY3Vy'
-    'cmVudFNlc3Npb24SLAoSYWN0aXZlX29yZGVyX2NvdW50GAMgASgNUhBhY3RpdmVPcmRlckNvdW'
-    '50EioKEXRvdGFsX29yZGVyX2NvdW50GAQgASgNUg90b3RhbE9yZGVyQ291bnQ=');
+    'Cg1TZXJ2aWNlU3RhdHVzEh0KCmlzX3J1bm5pbmcYASABKAhSCWlzUnVubmluZxJGCg9jdXJyZW'
+    '50X3Nlc3Npb24YAiABKA4yHS5rZG8udjEuY29tbW9uLlRyYWRpbmdTZXNzaW9uUg5jdXJyZW50'
+    'U2Vzc2lvbhIsChJhY3RpdmVfb3JkZXJfY291bnQYAyABKA1SEGFjdGl2ZU9yZGVyQ291bnQSKg'
+    'oRdG90YWxfb3JkZXJfY291bnQYBCABKA1SD3RvdGFsT3JkZXJDb3VudA==');
 
 @$core.Deprecated('Use autoAmendEventDescriptor instead')
 const AutoAmendEvent$json = {
@@ -227,16 +192,16 @@ final $typed_data.Uint8List amendFailedEventDescriptor = $convert.base64Decode(
 const SessionChangedEvent$json = {
   '1': 'SessionChangedEvent',
   '2': [
-    {'1': 'old_session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.TradingSession', '10': 'oldSession'},
-    {'1': 'new_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.TradingSession', '10': 'newSession'},
+    {'1': 'old_session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'oldSession'},
+    {'1': 'new_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'newSession'},
   ],
 };
 
 /// Descriptor for `SessionChangedEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionChangedEventDescriptor = $convert.base64Decode(
-    'ChNTZXNzaW9uQ2hhbmdlZEV2ZW50EkIKC29sZF9zZXNzaW9uGAEgASgOMiEua2RvLnYxLmF1dG'
-    '9fYW1lbmQuVHJhZGluZ1Nlc3Npb25SCm9sZFNlc3Npb24SQgoLbmV3X3Nlc3Npb24YAiABKA4y'
-    'IS5rZG8udjEuYXV0b19hbWVuZC5UcmFkaW5nU2Vzc2lvblIKbmV3U2Vzc2lvbg==');
+    'ChNTZXNzaW9uQ2hhbmdlZEV2ZW50Ej4KC29sZF9zZXNzaW9uGAEgASgOMh0ua2RvLnYxLmNvbW'
+    '1vbi5UcmFkaW5nU2Vzc2lvblIKb2xkU2Vzc2lvbhI+CgtuZXdfc2Vzc2lvbhgCIAEoDjIdLmtk'
+    'by52MS5jb21tb24uVHJhZGluZ1Nlc3Npb25SCm5ld1Nlc3Npb24=');
 
 @$core.Deprecated('Use orderRegisteredEventDescriptor instead')
 const OrderRegisteredEvent$json = {
@@ -244,15 +209,15 @@ const OrderRegisteredEvent$json = {
   '2': [
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '10': 'orderId'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.OrderSide', '10': 'side'},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
   ],
 };
 
 /// Descriptor for `OrderRegisteredEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List orderRegisteredEventDescriptor = $convert.base64Decode(
     'ChRPcmRlclJlZ2lzdGVyZWRFdmVudBIZCghvcmRlcl9pZBgBIAEoBFIHb3JkZXJJZBIWCgZzeW'
-    '1ib2wYAiABKAlSBnN5bWJvbBIwCgRzaWRlGAMgASgOMhwua2RvLnYxLmF1dG9fYW1lbmQuT3Jk'
-    'ZXJTaWRlUgRzaWRl');
+    '1ib2wYAiABKAlSBnN5bWJvbBIsCgRzaWRlGAMgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNp'
+    'ZGVSBHNpZGU=');
 
 @$core.Deprecated('Use orderUnregisteredEventDescriptor instead')
 const OrderUnregisteredEvent$json = {
@@ -274,7 +239,7 @@ const RegisterOrderRequest$json = {
   '2': [
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.OrderSide', '8': {}, '10': 'side'},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'price', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'price'},
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'config', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.auto_amend.AmendConfig', '10': 'config'},
@@ -284,10 +249,10 @@ const RegisterOrderRequest$json = {
 /// Descriptor for `RegisterOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List registerOrderRequestDescriptor = $convert.base64Decode(
     'ChRSZWdpc3Rlck9yZGVyUmVxdWVzdBIfCghvcmRlcl9pZBgBIAEoBEIE4kEBAlIHb3JkZXJJZB'
-    'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBI2CgRzaWRlGAMgASgOMhwua2RvLnYxLmF1'
-    'dG9fYW1lbmQuT3JkZXJTaWRlQgTiQQECUgRzaWRlEhoKBXByaWNlGAQgASgJQgTiQQECUgVwcm'
-    'ljZRIgCghxdWFudGl0eRgFIAEoA0IE4kEBAlIIcXVhbnRpdHkSNgoGY29uZmlnGAYgASgLMh4u'
-    'a2RvLnYxLmF1dG9fYW1lbmQuQW1lbmRDb25maWdSBmNvbmZpZw==');
+    'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIyCgRzaWRlGAMgASgOMhgua2RvLnYxLmNv'
+    'bW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGUSGgoFcHJpY2UYBCABKAlCBOJBAQJSBXByaWNlEi'
+    'AKCHF1YW50aXR5GAUgASgDQgTiQQECUghxdWFudGl0eRI2CgZjb25maWcYBiABKAsyHi5rZG8u'
+    'djEuYXV0b19hbWVuZC5BbWVuZENvbmZpZ1IGY29uZmln');
 
 @$core.Deprecated('Use unregisterOrderRequestDescriptor instead')
 const UnregisterOrderRequest$json = {
@@ -319,16 +284,16 @@ const ListOrdersRequest$json = {
   '1': 'ListOrdersRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'side', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.auto_amend.OrderSide', '8': {}, '10': 'side'},
+    {'1': 'side', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'active_only', '3': 3, '4': 1, '5': 8, '8': {}, '10': 'activeOnly'},
   ],
 };
 
 /// Descriptor for `ListOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listOrdersRequestDescriptor = $convert.base64Decode(
-    'ChFMaXN0T3JkZXJzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQFSBnN5bWJvbBI2CgRzaW'
-    'RlGAIgASgOMhwua2RvLnYxLmF1dG9fYW1lbmQuT3JkZXJTaWRlQgTiQQEBUgRzaWRlEiUKC2Fj'
-    'dGl2ZV9vbmx5GAMgASgIQgTiQQEBUgphY3RpdmVPbmx5');
+    'ChFMaXN0T3JkZXJzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQFSBnN5bWJvbBIyCgRzaW'
+    'RlGAIgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZGVCBOJBAQFSBHNpZGUSJQoLYWN0aXZl'
+    'X29ubHkYAyABKAhCBOJBAQFSCmFjdGl2ZU9ubHk=');
 
 @$core.Deprecated('Use listOrdersResponseDescriptor instead')
 const ListOrdersResponse$json = {

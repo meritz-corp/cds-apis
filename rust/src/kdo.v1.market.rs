@@ -234,7 +234,7 @@ pub struct RawMarketMessage {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetMarketSessionResponse {
-    #[prost(enumeration="MarketSession", tag="1")]
+    #[prost(enumeration="super::common::TradingSession", tag="1")]
     pub session: i32,
 }
 /// 세션 ID 열거형 (AIP-126)
@@ -322,49 +322,6 @@ impl SessionId {
             "SHUTDOWN" => Some(Self::Shutdown),
             "CLOSED" => Some(Self::Closed),
             "ETC" => Some(Self::Etc),
-            _ => None,
-        }
-    }
-}
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum MarketSession {
-    MarktSessionUnspecified = 0,
-    /// 장 시작 전
-    MarktSessionPreMarket = 1,
-    /// 시가 동시호가 (08:30 ~ 09:00)
-    MarktSessionOpeningAuction = 2,
-    /// 장중 (09:00 ~ 15:20)
-    MarktSessionRegular = 3,
-    /// 종가 동시호가 (15:20 ~ 15:30)
-    MarktSessionClosingAuction = 4,
-    /// 장 종료
-    MarktSessionClosed = 5,
-}
-impl MarketSession {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            MarketSession::MarktSessionUnspecified => "MARKT_SESSION_UNSPECIFIED",
-            MarketSession::MarktSessionPreMarket => "MARKT_SESSION_PRE_MARKET",
-            MarketSession::MarktSessionOpeningAuction => "MARKT_SESSION_OPENING_AUCTION",
-            MarketSession::MarktSessionRegular => "MARKT_SESSION_REGULAR",
-            MarketSession::MarktSessionClosingAuction => "MARKT_SESSION_CLOSING_AUCTION",
-            MarketSession::MarktSessionClosed => "MARKT_SESSION_CLOSED",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "MARKT_SESSION_UNSPECIFIED" => Some(Self::MarktSessionUnspecified),
-            "MARKT_SESSION_PRE_MARKET" => Some(Self::MarktSessionPreMarket),
-            "MARKT_SESSION_OPENING_AUCTION" => Some(Self::MarktSessionOpeningAuction),
-            "MARKT_SESSION_REGULAR" => Some(Self::MarktSessionRegular),
-            "MARKT_SESSION_CLOSING_AUCTION" => Some(Self::MarktSessionClosingAuction),
-            "MARKT_SESSION_CLOSED" => Some(Self::MarktSessionClosed),
             _ => None,
         }
     }

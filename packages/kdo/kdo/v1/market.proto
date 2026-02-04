@@ -9,6 +9,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/common.proto";
 
 import "kdo/v1/etf.proto";
 
@@ -386,14 +387,5 @@ message RawMarketMessage {
 
 
 message GetMarketSessionResponse {
-  MarketSession session = 1;
-}
-
-enum MarketSession {
-  MARKT_SESSION_UNSPECIFIED = 0;
-  MARKT_SESSION_PRE_MARKET = 1;       // 장 시작 전
-  MARKT_SESSION_OPENING_AUCTION = 2;  // 시가 동시호가 (08:30 ~ 09:00)
-  MARKT_SESSION_REGULAR = 3;          // 장중 (09:00 ~ 15:20)
-  MARKT_SESSION_CLOSING_AUCTION = 4;  // 종가 동시호가 (15:20 ~ 15:30)
-  MARKT_SESSION_CLOSED = 5;           // 장 종료
+  kdo.v1.common.TradingSession session = 1;
 }

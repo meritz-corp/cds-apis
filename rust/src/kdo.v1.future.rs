@@ -17,7 +17,7 @@ pub struct Future {
     #[prost(string, tag="4")]
     pub market_name: ::prost::alloc::string::String,
     /// 시장 유형
-    #[prost(enumeration="MarketType", tag="5")]
+    #[prost(enumeration="super::common::MarketType", tag="5")]
     pub market_type: i32,
     /// 1회 최대 주문 수량
     #[prost(int64, tag="6")]
@@ -119,42 +119,6 @@ pub struct ListFuturesResponse {
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
-}
-/// 시장 유형
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum MarketType {
-    Unspecified = 0,
-    /// KOSPI
-    Kospi = 1,
-    /// KOSDAQ
-    Kosdaq = 2,
-    /// 파생상품
-    Derivative = 3,
-}
-impl MarketType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            MarketType::Unspecified => "MARKET_TYPE_UNSPECIFIED",
-            MarketType::Kospi => "MARKET_TYPE_KOSPI",
-            MarketType::Kosdaq => "MARKET_TYPE_KOSDAQ",
-            MarketType::Derivative => "MARKET_TYPE_DERIVATIVE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "MARKET_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "MARKET_TYPE_KOSPI" => Some(Self::Kospi),
-            "MARKET_TYPE_KOSDAQ" => Some(Self::Kosdaq),
-            "MARKET_TYPE_DERIVATIVE" => Some(Self::Derivative),
-            _ => None,
-        }
-    }
 }
 /// 선물/옵션 유형
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

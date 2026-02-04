@@ -16,6 +16,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $1;
+import 'common.pbenum.dart' as $2;
 import 'order.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -26,7 +27,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   factory SubmitOrderRequest({
     $core.String? fundCode,
     $core.String? symbol,
-    OrderSide? side,
+    $2.OrderSide? side,
     $fixnum.Int64? quantity,
     $core.String? price,
     QuoteType? quoteType,
@@ -51,7 +52,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubmitOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fundCode')
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<QuoteType>(6, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
@@ -98,9 +99,9 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
 
   /// 매수/매도 (필수)
   @$pb.TagNumber(3)
-  OrderSide get side => $_getN(2);
+  $2.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side(OrderSide value) => $_setField(3, value);
+  set side($2.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -227,7 +228,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $fixnum.Int64? quantity,
     $core.String? price,
-    OrderSide? side,
+    $2.OrderSide? side,
     $core.bool? isLp,
   }) {
     final result = create();
@@ -252,7 +253,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..aOS(5, _omitFieldNames ? '' : 'price')
-    ..e<OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
     ..hasRequiredFields = false
   ;
@@ -326,9 +327,9 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
 
   /// 매수/매도
   @$pb.TagNumber(6)
-  OrderSide get side => $_getN(5);
+  $2.OrderSide get side => $_getN(5);
   @$pb.TagNumber(6)
-  set side(OrderSide value) => $_setField(6, value);
+  set side($2.OrderSide value) => $_setField(6, value);
   @$pb.TagNumber(6)
   $core.bool hasSide() => $_has(5);
   @$pb.TagNumber(6)
@@ -436,7 +437,7 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? originalOrderId,
     $core.String? fundCode,
     $core.String? symbol,
-    OrderSide? side,
+    $2.OrderSide? side,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
@@ -455,7 +456,7 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
-    ..e<OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -508,9 +509,9 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
 
   /// 매수/매도
   @$pb.TagNumber(6)
-  OrderSide get side => $_getN(3);
+  $2.OrderSide get side => $_getN(3);
   @$pb.TagNumber(6)
-  set side(OrderSide value) => $_setField(6, value);
+  set side($2.OrderSide value) => $_setField(6, value);
   @$pb.TagNumber(6)
   $core.bool hasSide() => $_has(3);
   @$pb.TagNumber(6)
@@ -607,7 +608,7 @@ class ListAllUnfilledOrdersRequest extends $pb.GeneratedMessage {
   factory ListAllUnfilledOrdersRequest({
     $core.String? fundCode,
     $core.String? symbol,
-    OrderSide? side,
+    $2.OrderSide? side,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -624,7 +625,7 @@ class ListAllUnfilledOrdersRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListAllUnfilledOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fundCode')
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -667,9 +668,9 @@ class ListAllUnfilledOrdersRequest extends $pb.GeneratedMessage {
 
   /// 매수/매도 (optional, 미지정 시 양방향)
   @$pb.TagNumber(3)
-  OrderSide get side => $_getN(2);
+  $2.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side(OrderSide value) => $_setField(3, value);
+  set side($2.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -880,7 +881,7 @@ class OrderResult extends $pb.GeneratedMessage {
     $fixnum.Int64? orderId,
     $core.String? symbol,
     $core.String? fundCode,
-    OrderSide? side,
+    $2.OrderSide? side,
     $core.String? price,
     $fixnum.Int64? quantity,
     OrderResultType? resultType,
@@ -923,7 +924,7 @@ class OrderResult extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
-    ..e<OrderSide>(4, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(4, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOS(5, _omitFieldNames ? '' : 'price')
     ..aInt64(6, _omitFieldNames ? '' : 'quantity')
     ..e<OrderResultType>(7, _omitFieldNames ? '' : 'resultType', $pb.PbFieldType.OE, defaultOrMaker: OrderResultType.ORDER_RESULT_TYPE_UNSPECIFIED, valueOf: OrderResultType.valueOf, enumValues: OrderResultType.values)
@@ -987,9 +988,9 @@ class OrderResult extends $pb.GeneratedMessage {
 
   /// 매수/매도
   @$pb.TagNumber(4)
-  OrderSide get side => $_getN(3);
+  $2.OrderSide get side => $_getN(3);
   @$pb.TagNumber(4)
-  set side(OrderSide value) => $_setField(4, value);
+  set side($2.OrderSide value) => $_setField(4, value);
   @$pb.TagNumber(4)
   $core.bool hasSide() => $_has(3);
   @$pb.TagNumber(4)
@@ -1454,7 +1455,7 @@ class ListOrdersResponse extends $pb.GeneratedMessage {
 class Order extends $pb.GeneratedMessage {
   factory Order({
     $core.String? orderId,
-    OrderSide? orderSide,
+    $2.OrderSide? orderSide,
     $core.String? symbol,
     $core.String? price,
     $fixnum.Int64? quantity,
@@ -1483,7 +1484,7 @@ class Order extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Order', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'orderId')
-    ..e<OrderSide>(2, _omitFieldNames ? '' : 'orderSide', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(2, _omitFieldNames ? '' : 'orderSide', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aOS(4, _omitFieldNames ? '' : 'price')
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
@@ -1523,9 +1524,9 @@ class Order extends $pb.GeneratedMessage {
 
   /// 주문 타입
   @$pb.TagNumber(2)
-  OrderSide get orderSide => $_getN(1);
+  $2.OrderSide get orderSide => $_getN(1);
   @$pb.TagNumber(2)
-  set orderSide(OrderSide value) => $_setField(2, value);
+  set orderSide($2.OrderSide value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasOrderSide() => $_has(1);
   @$pb.TagNumber(2)

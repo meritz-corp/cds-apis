@@ -7,6 +7,7 @@ import "google/api/field_behavior.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -80,7 +81,7 @@ message AutoAmendOrder {
   string symbol = 2;
 
   // 주문 방향
-  OrderSide side = 3;
+  kdo.v1.common.OrderSide side = 3;
 
   // 현재 주문 가격
   string price = 4;
@@ -108,13 +109,6 @@ message AutoAmendOrder {
   bool is_active = 10 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
-}
-
-// 주문 방향
-enum OrderSide {
-  ORDER_SIDE_UNSPECIFIED = 0;
-  ORDER_SIDE_BID = 1;  // 매수
-  ORDER_SIDE_ASK = 2;  // 매도
 }
 
 // ============================================================================
@@ -157,16 +151,6 @@ message AuctionSessionConfig {
 // Session Info
 // ============================================================================
 
-// 거래 세션 타입
-enum TradingSession {
-  TRADING_SESSION_UNSPECIFIED = 0;
-  TRADING_SESSION_PRE_MARKET = 1;       // 장 시작 전
-  TRADING_SESSION_OPENING_AUCTION = 2;  // 시가 동시호가 (08:30 ~ 09:00)
-  TRADING_SESSION_REGULAR = 3;          // 장중 (09:00 ~ 15:20)
-  TRADING_SESSION_CLOSING_AUCTION = 4;  // 종가 동시호가 (15:20 ~ 15:30)
-  TRADING_SESSION_CLOSED = 5;           // 장 종료
-}
-
 // ============================================================================
 // Service Status
 // ============================================================================
@@ -177,7 +161,7 @@ message ServiceStatus {
   bool is_running = 1;
 
   // 현재 세션
-  TradingSession current_session = 2;
+  kdo.v1.common.TradingSession current_session = 2;
 
   // 활성 주문 수
   uint32 active_order_count = 3;
@@ -251,10 +235,10 @@ message AmendFailedEvent {
 // 세션 변경 이벤트
 message SessionChangedEvent {
   // 이전 세션
-  TradingSession old_session = 1;
+  kdo.v1.common.TradingSession old_session = 1;
 
   // 새 세션
-  TradingSession new_session = 2;
+  kdo.v1.common.TradingSession new_session = 2;
 }
 
 // 주문 등록 이벤트
@@ -266,7 +250,7 @@ message OrderRegisteredEvent {
   string symbol = 2;
 
   // 주문 방향
-  OrderSide side = 3;
+  kdo.v1.common.OrderSide side = 3;
 }
 
 // 주문 해제 이벤트
@@ -294,7 +278,7 @@ message RegisterOrderRequest {
   ];
 
   // 주문 방향
-  OrderSide side = 3 [
+  kdo.v1.common.OrderSide side = 3 [
     (google.api.field_behavior) = REQUIRED
   ];
 
@@ -333,7 +317,7 @@ message ListOrdersRequest {
   ];
 
   // 주문 방향 필터 (optional)
-  OrderSide side = 2 [
+  kdo.v1.common.OrderSide side = 2 [
     (google.api.field_behavior) = OPTIONAL
   ];
 

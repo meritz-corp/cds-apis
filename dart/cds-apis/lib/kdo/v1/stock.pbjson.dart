@@ -21,7 +21,7 @@ const Stock$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'code', '3': 2, '4': 1, '5': 9, '10': 'code'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'market_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.future.MarketType', '10': 'marketType'},
+    {'1': 'market_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
     {'1': 'market_name', '3': 5, '4': 1, '5': 9, '10': 'marketName'},
     {'1': 'prev_price', '3': 6, '4': 1, '5': 3, '10': 'prevPrice'},
     {'1': 'last_price', '3': 7, '4': 1, '5': 3, '10': 'lastPrice'},
@@ -35,7 +35,7 @@ const Stock$json = {
 /// Descriptor for `Stock`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List stockDescriptor = $convert.base64Decode(
     'CgVTdG9jaxISCgRuYW1lGAEgASgJUgRuYW1lEhIKBGNvZGUYAiABKAlSBGNvZGUSFgoGc3ltYm'
-    '9sGAMgASgJUgZzeW1ib2wSOgoLbWFya2V0X3R5cGUYBCABKA4yGS5rZG8udjEuZnV0dXJlLk1h'
+    '9sGAMgASgJUgZzeW1ib2wSOgoLbWFya2V0X3R5cGUYBCABKA4yGS5rZG8udjEuY29tbW9uLk1h'
     'cmtldFR5cGVSCm1hcmtldFR5cGUSHwoLbWFya2V0X25hbWUYBSABKAlSCm1hcmtldE5hbWUSHQ'
     'oKcHJldl9wcmljZRgGIAEoA1IJcHJldlByaWNlEh0KCmxhc3RfcHJpY2UYByABKANSCWxhc3RQ'
     'cmljZRInCg9saXN0ZWRfcXVhbnRpdHkYCCABKANSDmxpc3RlZFF1YW50aXR5EhoKCHRyYWRhYm'

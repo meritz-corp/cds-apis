@@ -24,7 +24,7 @@ pub struct OrderLog {
     #[prost(enumeration="OrderLogType", tag="6")]
     pub log_type: i32,
     /// 주문 방향 (매수/매도)
-    #[prost(enumeration="OrderSide", tag="7")]
+    #[prost(enumeration="super::common::OrderSide", tag="7")]
     pub side: i32,
     /// 주문 타입 (신규/정정/취소)
     #[prost(enumeration="OrderType", tag="8")]
@@ -66,6 +66,9 @@ pub struct OrderLog {
     /// Rust의 DateTime<Utc> 타입을 Google의 Timestamp 메시지로 매핑
     #[prost(message, optional, tag="18")]
     pub created_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 시장 구분
+    #[prost(enumeration="super::common::MarketType", tag="19")]
+    pub market_type: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -116,6 +119,7 @@ pub struct ListOrderLogsRequest {
     /// * filter=log_type=FILLED
     /// * filter=side=BUY
     /// * filter=order_type=AMEND
+    /// * filter=market_type=KOSPI
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }
@@ -189,39 +193,6 @@ impl OrderLogType {
             "MERITZ_REJECTED" => Some(Self::MeritzRejected),
             "FILLED" => Some(Self::Filled),
             "AUTO_CANCELLED" => Some(Self::AutoCancelled),
-            _ => None,
-        }
-    }
-}
-/// 주문 방향 (매수/매도)
-/// Rust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum OrderSide {
-    Unspecified = 0,
-    /// 매수
-    Buy = 1,
-    /// 매도
-    Sell = 2,
-}
-impl OrderSide {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            OrderSide::Unspecified => "ORDER_SIDE_UNSPECIFIED",
-            OrderSide::Buy => "BUY",
-            OrderSide::Sell => "SELL",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "ORDER_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
-            "BUY" => Some(Self::Buy),
-            "SELL" => Some(Self::Sell),
             _ => None,
         }
     }

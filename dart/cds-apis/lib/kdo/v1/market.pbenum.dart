@@ -60,28 +60,5 @@ class SessionId extends $pb.ProtobufEnum {
   const SessionId._(super.value, super.name);
 }
 
-class MarketSession extends $pb.ProtobufEnum {
-  static const MarketSession MARKT_SESSION_UNSPECIFIED = MarketSession._(0, _omitEnumNames ? '' : 'MARKT_SESSION_UNSPECIFIED');
-  static const MarketSession MARKT_SESSION_PRE_MARKET = MarketSession._(1, _omitEnumNames ? '' : 'MARKT_SESSION_PRE_MARKET');
-  static const MarketSession MARKT_SESSION_OPENING_AUCTION = MarketSession._(2, _omitEnumNames ? '' : 'MARKT_SESSION_OPENING_AUCTION');
-  static const MarketSession MARKT_SESSION_REGULAR = MarketSession._(3, _omitEnumNames ? '' : 'MARKT_SESSION_REGULAR');
-  static const MarketSession MARKT_SESSION_CLOSING_AUCTION = MarketSession._(4, _omitEnumNames ? '' : 'MARKT_SESSION_CLOSING_AUCTION');
-  static const MarketSession MARKT_SESSION_CLOSED = MarketSession._(5, _omitEnumNames ? '' : 'MARKT_SESSION_CLOSED');
-
-  static const $core.List<MarketSession> values = <MarketSession> [
-    MARKT_SESSION_UNSPECIFIED,
-    MARKT_SESSION_PRE_MARKET,
-    MARKT_SESSION_OPENING_AUCTION,
-    MARKT_SESSION_REGULAR,
-    MARKT_SESSION_CLOSING_AUCTION,
-    MARKT_SESSION_CLOSED,
-  ];
-
-  static final $core.List<MarketSession?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
-  static MarketSession? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const MarketSession._(super.value, super.name);
-}
-
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

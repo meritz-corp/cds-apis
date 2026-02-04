@@ -14,23 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use marketTypeDescriptor instead')
-const MarketType$json = {
-  '1': 'MarketType',
-  '2': [
-    {'1': 'MARKET_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'MARKET_TYPE_KOSPI', '2': 1},
-    {'1': 'MARKET_TYPE_KOSDAQ', '2': 2},
-    {'1': 'MARKET_TYPE_DERIVATIVE', '2': 3},
-  ],
-};
-
-/// Descriptor for `MarketType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List marketTypeDescriptor = $convert.base64Decode(
-    'CgpNYXJrZXRUeXBlEhsKF01BUktFVF9UWVBFX1VOU1BFQ0lGSUVEEAASFQoRTUFSS0VUX1RZUE'
-    'VfS09TUEkQARIWChJNQVJLRVRfVFlQRV9LT1NEQVEQAhIaChZNQVJLRVRfVFlQRV9ERVJJVkFU'
-    'SVZFEAM=');
-
 @$core.Deprecated('Use futureOptionTypeDescriptor instead')
 const FutureOptionType$json = {
   '1': 'FutureOptionType',
@@ -56,7 +39,7 @@ const Future$json = {
     {'1': 'code', '3': 2, '4': 1, '5': 9, '10': 'code'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'market_name', '3': 4, '4': 1, '5': 9, '10': 'marketName'},
-    {'1': 'market_type', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.future.MarketType', '10': 'marketType'},
+    {'1': 'market_type', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
     {'1': 'max_quantity_per_order', '3': 6, '4': 1, '5': 3, '10': 'maxQuantityPerOrder'},
     {'1': 'tick_size', '3': 7, '4': 1, '5': 1, '10': 'tickSize'},
     {'1': 'prev_price', '3': 8, '4': 1, '5': 1, '10': 'prevPrice'},
@@ -83,7 +66,7 @@ const Future$json = {
 final $typed_data.Uint8List futureDescriptor = $convert.base64Decode(
     'CgZGdXR1cmUSEgoEbmFtZRgBIAEoCVIEbmFtZRISCgRjb2RlGAIgASgJUgRjb2RlEhYKBnN5bW'
     'JvbBgDIAEoCVIGc3ltYm9sEh8KC21hcmtldF9uYW1lGAQgASgJUgptYXJrZXROYW1lEjoKC21h'
-    'cmtldF90eXBlGAUgASgOMhkua2RvLnYxLmZ1dHVyZS5NYXJrZXRUeXBlUgptYXJrZXRUeXBlEj'
+    'cmtldF90eXBlGAUgASgOMhkua2RvLnYxLmNvbW1vbi5NYXJrZXRUeXBlUgptYXJrZXRUeXBlEj'
     'MKFm1heF9xdWFudGl0eV9wZXJfb3JkZXIYBiABKANSE21heFF1YW50aXR5UGVyT3JkZXISGwoJ'
     'dGlja19zaXplGAcgASgBUgh0aWNrU2l6ZRIdCgpwcmV2X3ByaWNlGAggASgBUglwcmV2UHJpY2'
     'USHQoKYmFzZV9wcmljZRgJIAEoAVIJYmFzZVByaWNlEhsKCW1heF9wcmljZRgKIAEoAVIIbWF4'

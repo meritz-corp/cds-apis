@@ -9,6 +9,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -155,19 +156,10 @@ message EtfPdfConstituent {
     string name = 2;
 
     // 상품 타입
-    ProductType product_type = 3;
+    kdo.v1.common.ProductType product_type = 3;
 
     // 구성 수량 (선물 숏의 경우 음수)
     int64 quantity = 4;
-}
-
-// 상품 타입
-enum ProductType {
-    PRODUCT_TYPE_UNSPECIFIED = 0;
-    PRODUCT_TYPE_STOCK = 1;
-    PRODUCT_TYPE_FUTURES = 2;
-    PRODUCT_TYPE_ETF = 3;
-    PRODUCT_TYPE_CASH = 4;
 }
 
 // 복제 방법

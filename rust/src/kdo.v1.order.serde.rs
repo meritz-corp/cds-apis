@@ -49,7 +49,7 @@ impl serde::Serialize for AmendOrderRequest {
             struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
-            let v = OrderSide::try_from(self.side)
+            let v = super::common::OrderSide::try_from(self.side)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
             struct_ser.serialize_field("side", &v)?;
         }
@@ -182,7 +182,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            side__ = Some(map_.next_value::<OrderSide>()? as i32);
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
                         }
                         GeneratedField::IsLp => {
                             if is_lp__.is_some() {
@@ -587,7 +587,7 @@ impl serde::Serialize for CancelOrderRequest {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            let v = OrderSide::try_from(self.side)
+            let v = super::common::OrderSide::try_from(self.side)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
             struct_ser.serialize_field("side", &v)?;
         }
@@ -690,7 +690,7 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            side__ = Some(map_.next_value::<OrderSide>()? as i32);
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1149,7 +1149,7 @@ impl serde::Serialize for ListAllUnfilledOrdersRequest {
             struct_ser.serialize_field("symbol", v)?;
         }
         if let Some(v) = self.side.as_ref() {
-            let v = OrderSide::try_from(*v)
+            let v = super::common::OrderSide::try_from(*v)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("side", &v)?;
         }
@@ -1239,7 +1239,7 @@ impl<'de> serde::Deserialize<'de> for ListAllUnfilledOrdersRequest {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            side__ = map_.next_value::<::std::option::Option<OrderSide>>()?.map(|x| x as i32);
+                            side__ = map_.next_value::<::std::option::Option<super::common::OrderSide>>()?.map(|x| x as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1637,7 +1637,7 @@ impl serde::Serialize for Order {
             struct_ser.serialize_field("order_id", &self.order_id)?;
         }
         if true {
-            let v = OrderSide::try_from(self.order_side)
+            let v = super::common::OrderSide::try_from(self.order_side)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.order_side)))?;
             struct_ser.serialize_field("order_side", &v)?;
         }
@@ -1780,7 +1780,7 @@ impl<'de> serde::Deserialize<'de> for Order {
                             if order_side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("orderSide"));
                             }
-                            order_side__ = Some(map_.next_value::<OrderSide>()? as i32);
+                            order_side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
                         }
                         GeneratedField::Symbol => {
                             if symbol__.is_some() {
@@ -1901,7 +1901,7 @@ impl serde::Serialize for OrderResult {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if true {
-            let v = OrderSide::try_from(self.side)
+            let v = super::common::OrderSide::try_from(self.side)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
             struct_ser.serialize_field("side", &v)?;
         }
@@ -2066,7 +2066,7 @@ impl<'de> serde::Deserialize<'de> for OrderResult {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            side__ = Some(map_.next_value::<OrderSide>()? as i32);
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
                         }
                         GeneratedField::Price => {
                             if price__.is_some() {
@@ -2216,80 +2216,6 @@ impl<'de> serde::Deserialize<'de> for OrderResultType {
                     "ORDER_RESULT_TYPE_REJECTED" => Ok(OrderResultType::Rejected),
                     "ORDER_RESULT_TYPE_FILLED" => Ok(OrderResultType::Filled),
                     "ORDER_RESULT_TYPE_CANCELLED" => Ok(OrderResultType::Cancelled),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for OrderSide {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "ORDER_SIDE_UNSPECIFIED",
-            Self::Bid => "ORDER_SIDE_BID",
-            Self::Ask => "ORDER_SIDE_ASK",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for OrderSide {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "ORDER_SIDE_UNSPECIFIED",
-            "ORDER_SIDE_BID",
-            "ORDER_SIDE_ASK",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = OrderSide;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "ORDER_SIDE_UNSPECIFIED" => Ok(OrderSide::Unspecified),
-                    "ORDER_SIDE_BID" => Ok(OrderSide::Bid),
-                    "ORDER_SIDE_ASK" => Ok(OrderSide::Ask),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -2815,7 +2741,7 @@ impl serde::Serialize for SubmitOrderRequest {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            let v = OrderSide::try_from(self.side)
+            let v = super::common::OrderSide::try_from(self.side)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
             struct_ser.serialize_field("side", &v)?;
         }
@@ -2939,7 +2865,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            side__ = Some(map_.next_value::<OrderSide>()? as i32);
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {

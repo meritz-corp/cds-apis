@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pbenum.dart' as $1;
 import 'future.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -28,7 +29,7 @@ class Future extends $pb.GeneratedMessage {
     $core.String? code,
     $core.String? symbol,
     $core.String? marketName,
-    MarketType? marketType,
+    $1.MarketType? marketType,
     $fixnum.Int64? maxQuantityPerOrder,
     $core.double? tickSize,
     $core.double? prevPrice,
@@ -85,7 +86,7 @@ class Future extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'code')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aOS(4, _omitFieldNames ? '' : 'marketName')
-    ..e<MarketType>(5, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: MarketType.valueOf, enumValues: MarketType.values)
+    ..e<$1.MarketType>(5, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: $1.MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: $1.MarketType.valueOf, enumValues: $1.MarketType.values)
     ..aInt64(6, _omitFieldNames ? '' : 'maxQuantityPerOrder')
     ..a<$core.double>(7, _omitFieldNames ? '' : 'tickSize', $pb.PbFieldType.OD)
     ..a<$core.double>(8, _omitFieldNames ? '' : 'prevPrice', $pb.PbFieldType.OD)
@@ -166,9 +167,9 @@ class Future extends $pb.GeneratedMessage {
 
   /// 시장 유형
   @$pb.TagNumber(5)
-  MarketType get marketType => $_getN(4);
+  $1.MarketType get marketType => $_getN(4);
   @$pb.TagNumber(5)
-  set marketType(MarketType value) => $_setField(5, value);
+  set marketType($1.MarketType value) => $_setField(5, value);
   @$pb.TagNumber(5)
   $core.bool hasMarketType() => $_has(4);
   @$pb.TagNumber(5)

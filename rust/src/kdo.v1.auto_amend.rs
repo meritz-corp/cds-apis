@@ -15,7 +15,7 @@ pub struct AutoAmendOrder {
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
     /// 주문 방향
-    #[prost(enumeration="OrderSide", tag="3")]
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
     /// 현재 주문 가격
     #[prost(string, tag="4")]
@@ -82,6 +82,10 @@ pub struct AuctionSessionConfig {
     pub quantity_limit_pct: f64,
 }
 // ============================================================================
+// Session Info
+// ============================================================================
+
+// ============================================================================
 // Service Status
 // ============================================================================
 
@@ -93,7 +97,7 @@ pub struct ServiceStatus {
     #[prost(bool, tag="1")]
     pub is_running: bool,
     /// 현재 세션
-    #[prost(enumeration="TradingSession", tag="2")]
+    #[prost(enumeration="super::common::TradingSession", tag="2")]
     pub current_session: i32,
     /// 활성 주문 수
     #[prost(uint32, tag="3")]
@@ -178,10 +182,10 @@ pub struct AmendFailedEvent {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SessionChangedEvent {
     /// 이전 세션
-    #[prost(enumeration="TradingSession", tag="1")]
+    #[prost(enumeration="super::common::TradingSession", tag="1")]
     pub old_session: i32,
     /// 새 세션
-    #[prost(enumeration="TradingSession", tag="2")]
+    #[prost(enumeration="super::common::TradingSession", tag="2")]
     pub new_session: i32,
 }
 /// 주문 등록 이벤트
@@ -195,7 +199,7 @@ pub struct OrderRegisteredEvent {
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
     /// 주문 방향
-    #[prost(enumeration="OrderSide", tag="3")]
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
 }
 /// 주문 해제 이벤트
@@ -223,7 +227,7 @@ pub struct RegisterOrderRequest {
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
     /// 주문 방향
-    #[prost(enumeration="OrderSide", tag="3")]
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
     /// 주문 가격
     #[prost(string, tag="4")]
@@ -256,7 +260,7 @@ pub struct ListOrdersRequest {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 주문 방향 필터 (optional)
-    #[prost(enumeration="OrderSide", tag="2")]
+    #[prost(enumeration="super::common::OrderSide", tag="2")]
     pub side: i32,
     /// 활성화된 주문만 (optional, 기본: true)
     #[prost(bool, tag="3")]
@@ -285,86 +289,6 @@ pub struct StreamEventsRequest {
     /// 특정 주문 ID 필터 (optional, 미지정 시 전체)
     #[prost(uint64, repeated, packed="false", tag="1")]
     pub order_ids: ::prost::alloc::vec::Vec<u64>,
-}
-/// 주문 방향
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum OrderSide {
-    Unspecified = 0,
-    /// 매수
-    Bid = 1,
-    /// 매도
-    Ask = 2,
-}
-impl OrderSide {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            OrderSide::Unspecified => "ORDER_SIDE_UNSPECIFIED",
-            OrderSide::Bid => "ORDER_SIDE_BID",
-            OrderSide::Ask => "ORDER_SIDE_ASK",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "ORDER_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
-            "ORDER_SIDE_BID" => Some(Self::Bid),
-            "ORDER_SIDE_ASK" => Some(Self::Ask),
-            _ => None,
-        }
-    }
-}
-// ============================================================================
-// Session Info
-// ============================================================================
-
-/// 거래 세션 타입
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum TradingSession {
-    Unspecified = 0,
-    /// 장 시작 전
-    PreMarket = 1,
-    /// 시가 동시호가 (08:30 ~ 09:00)
-    OpeningAuction = 2,
-    /// 장중 (09:00 ~ 15:20)
-    Regular = 3,
-    /// 종가 동시호가 (15:20 ~ 15:30)
-    ClosingAuction = 4,
-    /// 장 종료
-    Closed = 5,
-}
-impl TradingSession {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            TradingSession::Unspecified => "TRADING_SESSION_UNSPECIFIED",
-            TradingSession::PreMarket => "TRADING_SESSION_PRE_MARKET",
-            TradingSession::OpeningAuction => "TRADING_SESSION_OPENING_AUCTION",
-            TradingSession::Regular => "TRADING_SESSION_REGULAR",
-            TradingSession::ClosingAuction => "TRADING_SESSION_CLOSING_AUCTION",
-            TradingSession::Closed => "TRADING_SESSION_CLOSED",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "TRADING_SESSION_UNSPECIFIED" => Some(Self::Unspecified),
-            "TRADING_SESSION_PRE_MARKET" => Some(Self::PreMarket),
-            "TRADING_SESSION_OPENING_AUCTION" => Some(Self::OpeningAuction),
-            "TRADING_SESSION_REGULAR" => Some(Self::Regular),
-            "TRADING_SESSION_CLOSING_AUCTION" => Some(Self::ClosingAuction),
-            "TRADING_SESSION_CLOSED" => Some(Self::Closed),
-            _ => None,
-        }
-    }
 }
 /// 정정 액션 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

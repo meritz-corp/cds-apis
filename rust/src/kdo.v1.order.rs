@@ -12,7 +12,7 @@ pub struct SubmitOrderRequest {
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
     /// 매수/매도 (필수)
-    #[prost(enumeration="OrderSide", tag="3")]
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
     /// 수량 (필수)
     #[prost(int64, tag="4")]
@@ -61,7 +61,7 @@ pub struct AmendOrderRequest {
     #[prost(string, tag="5")]
     pub price: ::prost::alloc::string::String,
     /// 매수/매도
-    #[prost(enumeration="OrderSide", tag="6")]
+    #[prost(enumeration="super::common::OrderSide", tag="6")]
     pub side: i32,
     /// 유동성 공급자 여부
     #[prost(bool, tag="7")]
@@ -98,7 +98,7 @@ pub struct CancelOrderRequest {
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
     /// 매수/매도
-    #[prost(enumeration="OrderSide", tag="6")]
+    #[prost(enumeration="super::common::OrderSide", tag="6")]
     pub side: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -129,7 +129,7 @@ pub struct ListAllUnfilledOrdersRequest {
     #[prost(string, optional, tag="2")]
     pub symbol: ::core::option::Option<::prost::alloc::string::String>,
     /// 매수/매도 (optional, 미지정 시 양방향)
-    #[prost(enumeration="OrderSide", optional, tag="3")]
+    #[prost(enumeration="super::common::OrderSide", optional, tag="3")]
     pub side: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -180,7 +180,7 @@ pub struct OrderResult {
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
     /// 매수/매도
-    #[prost(enumeration="OrderSide", tag="4")]
+    #[prost(enumeration="super::common::OrderSide", tag="4")]
     pub side: i32,
     /// 가격
     #[prost(string, tag="5")]
@@ -286,7 +286,7 @@ pub struct Order {
     #[prost(string, tag="1")]
     pub order_id: ::prost::alloc::string::String,
     /// 주문 타입
-    #[prost(enumeration="OrderSide", tag="2")]
+    #[prost(enumeration="super::common::OrderSide", tag="2")]
     pub order_side: i32,
     /// 상품 (예: etfs/A069500)
     #[prost(string, tag="3")]
@@ -312,37 +312,6 @@ pub struct Order {
 }
 // ========== Enums ==========
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum OrderSide {
-    Unspecified = 0,
-    /// 매수
-    Bid = 1,
-    /// 매도
-    Ask = 2,
-}
-impl OrderSide {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            OrderSide::Unspecified => "ORDER_SIDE_UNSPECIFIED",
-            OrderSide::Bid => "ORDER_SIDE_BID",
-            OrderSide::Ask => "ORDER_SIDE_ASK",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "ORDER_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
-            "ORDER_SIDE_BID" => Some(Self::Bid),
-            "ORDER_SIDE_ASK" => Some(Self::Ask),
-            _ => None,
-        }
-    }
-}
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum QuoteType {

@@ -16,6 +16,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $1;
+import 'common.pbenum.dart' as $2;
 import 'order_log.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -31,7 +32,7 @@ class OrderLog extends $pb.GeneratedMessage {
     $core.String? fundCode,
     $core.String? symbol,
     OrderLogType? logType,
-    OrderSide? side,
+    $2.OrderSide? side,
     OrderType? orderType,
     $core.String? price,
     $core.String? quantity,
@@ -43,6 +44,7 @@ class OrderLog extends $pb.GeneratedMessage {
     $fixnum.Int64? eventTime,
     $fixnum.Int64? receiveTime,
     $1.Timestamp? createdAt,
+    $2.MarketType? marketType,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -63,6 +65,7 @@ class OrderLog extends $pb.GeneratedMessage {
     if (eventTime != null) result.eventTime = eventTime;
     if (receiveTime != null) result.receiveTime = receiveTime;
     if (createdAt != null) result.createdAt = createdAt;
+    if (marketType != null) result.marketType = marketType;
     return result;
   }
 
@@ -78,7 +81,7 @@ class OrderLog extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'fundCode')
     ..aOS(5, _omitFieldNames ? '' : 'symbol')
     ..e<OrderLogType>(6, _omitFieldNames ? '' : 'logType', $pb.PbFieldType.OE, defaultOrMaker: OrderLogType.ORDER_LOG_TYPE_UNSPECIFIED, valueOf: OrderLogType.valueOf, enumValues: OrderLogType.values)
-    ..e<OrderSide>(7, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: OrderSide.valueOf, enumValues: OrderSide.values)
+    ..e<$2.OrderSide>(7, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..e<OrderType>(8, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: OrderType.ORDER_TYPE_UNSPECIFIED, valueOf: OrderType.valueOf, enumValues: OrderType.values)
     ..aOS(9, _omitFieldNames ? '' : 'price')
     ..aOS(10, _omitFieldNames ? '' : 'quantity')
@@ -90,6 +93,7 @@ class OrderLog extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(16, _omitFieldNames ? '' : 'eventTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(17, _omitFieldNames ? '' : 'receiveTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$1.Timestamp>(18, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..e<$2.MarketType>(19, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: $2.MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: $2.MarketType.valueOf, enumValues: $2.MarketType.values)
     ..hasRequiredFields = false
   ;
 
@@ -173,9 +177,9 @@ class OrderLog extends $pb.GeneratedMessage {
 
   /// 주문 방향 (매수/매도)
   @$pb.TagNumber(7)
-  OrderSide get side => $_getN(6);
+  $2.OrderSide get side => $_getN(6);
   @$pb.TagNumber(7)
-  set side(OrderSide value) => $_setField(7, value);
+  set side($2.OrderSide value) => $_setField(7, value);
   @$pb.TagNumber(7)
   $core.bool hasSide() => $_has(6);
   @$pb.TagNumber(7)
@@ -299,6 +303,16 @@ class OrderLog extends $pb.GeneratedMessage {
   void clearCreatedAt() => $_clearField(18);
   @$pb.TagNumber(18)
   $1.Timestamp ensureCreatedAt() => $_ensure(17);
+
+  /// 시장 구분
+  @$pb.TagNumber(19)
+  $2.MarketType get marketType => $_getN(18);
+  @$pb.TagNumber(19)
+  set marketType($2.MarketType value) => $_setField(19, value);
+  @$pb.TagNumber(19)
+  $core.bool hasMarketType() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearMarketType() => $_clearField(19);
 }
 
 class OrderLogFillStatistics extends $pb.GeneratedMessage {
@@ -481,6 +495,7 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   /// * filter=log_type=FILLED
   /// * filter=side=BUY
   /// * filter=order_type=AMEND
+  /// * filter=market_type=KOSPI
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)

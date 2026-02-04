@@ -5,6 +5,7 @@ package kdo.v1.order;
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -52,12 +53,6 @@ service OrderService {
 
 // ========== Enums ==========
 
-enum OrderSide {
-  ORDER_SIDE_UNSPECIFIED = 0;
-  ORDER_SIDE_BID = 1;    // 매수
-  ORDER_SIDE_ASK = 2;    // 매도
-}
-
 enum QuoteType {
   QUOTE_TYPE_UNSPECIFIED = 0;
   QUOTE_TYPE_LIMIT = 1;   // 지정가
@@ -90,7 +85,7 @@ message SubmitOrderRequest {
   string symbol = 2 [(google.api.field_behavior) = REQUIRED];
 
   // 매수/매도 (필수)
-  OrderSide side = 3 [(google.api.field_behavior) = REQUIRED];
+  kdo.v1.common.OrderSide side = 3 [(google.api.field_behavior) = REQUIRED];
 
   // 수량 (필수)
   int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
@@ -135,7 +130,7 @@ message AmendOrderRequest {
   string price = 5 [(google.api.field_behavior) = REQUIRED];
 
   // 매수/매도
-  OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
+  kdo.v1.common.OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
 
   // 유동성 공급자 여부
   bool is_lp = 7  [(google.api.field_behavior) = REQUIRED];
@@ -168,7 +163,7 @@ message CancelOrderRequest {
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
 
   // 매수/매도
-  OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
+  kdo.v1.common.OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
 }
 
 message CancelOrderResponse {
@@ -195,7 +190,7 @@ message ListAllUnfilledOrdersRequest {
   optional string symbol = 2;
 
   // 매수/매도 (optional, 미지정 시 양방향)
-  optional OrderSide side = 3;
+  optional kdo.v1.common.OrderSide side = 3;
 }
 
 message ListAllUnfilledOrdersResponse {
@@ -238,7 +233,7 @@ message OrderResult {
   string fund_code = 3;
 
   // 매수/매도
-  OrderSide side = 4;
+  kdo.v1.common.OrderSide side = 4;
 
   // 가격
   string price = 5;
@@ -319,7 +314,7 @@ message Order {
   string order_id = 1;
 
   // 주문 타입
-  OrderSide order_side = 2;
+  kdo.v1.common.OrderSide order_side = 2;
 
   // 상품 (예: etfs/A069500)
   string symbol = 3;

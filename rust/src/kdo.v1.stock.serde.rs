@@ -389,7 +389,7 @@ impl serde::Serialize for Stock {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            let v = super::future::MarketType::try_from(self.market_type)
+            let v = super::common::MarketType::try_from(self.market_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.market_type)))?;
             struct_ser.serialize_field("market_type", &v)?;
         }
@@ -542,7 +542,7 @@ impl<'de> serde::Deserialize<'de> for Stock {
                             if market_type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("marketType"));
                             }
-                            market_type__ = Some(map_.next_value::<super::future::MarketType>()? as i32);
+                            market_type__ = Some(map_.next_value::<super::common::MarketType>()? as i32);
                         }
                         GeneratedField::MarketName => {
                             if market_name__.is_some() {

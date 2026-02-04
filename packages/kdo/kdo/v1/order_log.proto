@@ -9,6 +9,7 @@ import "google/api/client.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -70,7 +71,7 @@ message OrderLog {
   OrderLogType log_type = 6;
 
   // 주문 방향 (매수/매도)
-  OrderSide side = 7;
+  kdo.v1.common.OrderSide side = 7;
 
   // 주문 타입 (신규/정정/취소)
   OrderType order_type = 8;
@@ -111,6 +112,9 @@ message OrderLog {
   // DB 삽입 시각
   // Rust의 DateTime<Utc> 타입을 Google의 Timestamp 메시지로 매핑
   google.protobuf.Timestamp created_at = 18;
+
+  // 시장 구분
+  kdo.v1.common.MarketType market_type = 19;
 }
 
 // 주문 로그 타입
@@ -135,14 +139,6 @@ enum OrderLogType {
 
   // 자동 취소
   AUTO_CANCELLED = 5;
-}
-
-// 주문 방향 (매수/매도)
-// Rust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정
-enum OrderSide {
-  ORDER_SIDE_UNSPECIFIED = 0;
-  BUY = 1; // 매수
-  SELL = 2; // 매도
 }
 
 // 주문 타입 (신규/정정/취소)
@@ -200,6 +196,7 @@ message ListOrderLogsRequest {
   // * filter=log_type=FILLED
   // * filter=side=BUY
   // * filter=order_type=AMEND
+  // * filter=market_type=KOSPI
   string filter = 3;
 }
 

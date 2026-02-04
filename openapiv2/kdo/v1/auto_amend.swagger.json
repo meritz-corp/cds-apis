@@ -399,7 +399,7 @@
           "title": "종목 심볼"
         },
         "side": {
-          "$ref": "#/definitions/v1auto_amendOrderSide",
+          "$ref": "#/definitions/commonOrderSide",
           "title": "주문 방향"
         },
         "price": {
@@ -453,7 +453,7 @@
           "title": "종목 심볼"
         },
         "side": {
-          "$ref": "#/definitions/v1auto_amendOrderSide",
+          "$ref": "#/definitions/commonOrderSide",
           "title": "주문 방향"
         }
       },
@@ -487,7 +487,7 @@
           "title": "종목 심볼"
         },
         "side": {
-          "$ref": "#/definitions/v1auto_amendOrderSide",
+          "$ref": "#/definitions/commonOrderSide",
           "title": "주문 방향"
         },
         "price": {
@@ -531,17 +531,28 @@
       "type": "object",
       "properties": {
         "oldSession": {
-          "$ref": "#/definitions/auto_amendTradingSession",
+          "$ref": "#/definitions/commonTradingSession",
           "title": "이전 세션"
         },
         "newSession": {
-          "$ref": "#/definitions/auto_amendTradingSession",
+          "$ref": "#/definitions/commonTradingSession",
           "title": "새 세션"
         }
       },
       "title": "세션 변경 이벤트"
     },
-    "auto_amendTradingSession": {
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
+    "commonTradingSession": {
       "type": "string",
       "enum": [
         "TRADING_SESSION_UNSPECIFIED",
@@ -593,17 +604,6 @@
           "title": "등록된 주문 목록"
         }
       }
-    },
-    "v1auto_amendOrderSide": {
-      "type": "string",
-      "enum": [
-        "ORDER_SIDE_UNSPECIFIED",
-        "ORDER_SIDE_BID",
-        "ORDER_SIDE_ASK"
-      ],
-      "default": "ORDER_SIDE_UNSPECIFIED",
-      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
-      "title": "주문 방향"
     }
   }
 }

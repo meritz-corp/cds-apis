@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package kdo.v1.common;
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// 주문 방향
+enum OrderSide {
+  ORDER_SIDE_UNSPECIFIED = 0;
+  ORDER_SIDE_BID = 1;  // 매수
+  ORDER_SIDE_ASK = 2;  // 매도
+}
+
+// 시장 유형
+enum MarketType {
+  MARKET_TYPE_UNSPECIFIED = 0;
+  // KOSPI
+  MARKET_TYPE_KOSPI = 1;
+  // KOSDAQ
+  MARKET_TYPE_KOSDAQ = 2;
+  // 파생상품
+  MARKET_TYPE_DERIVATIVE = 3;
+}
+
+// 상품 타입
+enum ProductType {
+  PRODUCT_TYPE_UNSPECIFIED = 0;
+  PRODUCT_TYPE_STOCK = 1;
+  PRODUCT_TYPE_FUTURES = 2;
+  PRODUCT_TYPE_ETF = 3;
+  PRODUCT_TYPE_CASH = 4;
+}
+
+// 거래 세션 타입
+enum TradingSession {
+  TRADING_SESSION_UNSPECIFIED = 0;
+  TRADING_SESSION_PRE_MARKET = 1;       // 장 시작 전
+  TRADING_SESSION_OPENING_AUCTION = 2;  // 시가 동시호가 (08:30 ~ 09:00)
+  TRADING_SESSION_REGULAR = 3;          // 장중 (09:00 ~ 15:20)
+  TRADING_SESSION_CLOSING_AUCTION = 4;  // 종가 동시호가 (15:20 ~ 15:30)
+  TRADING_SESSION_CLOSED = 5;           // 장 종료
+}

@@ -132,7 +132,7 @@ pub struct EtfPdfConstituent {
     #[prost(string, tag="2")]
     pub name: ::prost::alloc::string::String,
     /// 상품 타입
-    #[prost(enumeration="ProductType", tag="3")]
+    #[prost(enumeration="super::common::ProductType", tag="3")]
     pub product_type: i32,
     /// 구성 수량 (선물 숏의 경우 음수)
     #[prost(int64, tag="4")]
@@ -233,42 +233,6 @@ pub struct CreateRedeemEtfRequest {
     pub quantity: i64,
     #[prost(bool, tag="4")]
     pub is_creation: bool,
-}
-/// 상품 타입
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum ProductType {
-    Unspecified = 0,
-    Stock = 1,
-    Futures = 2,
-    Etf = 3,
-    Cash = 4,
-}
-impl ProductType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            ProductType::Unspecified => "PRODUCT_TYPE_UNSPECIFIED",
-            ProductType::Stock => "PRODUCT_TYPE_STOCK",
-            ProductType::Futures => "PRODUCT_TYPE_FUTURES",
-            ProductType::Etf => "PRODUCT_TYPE_ETF",
-            ProductType::Cash => "PRODUCT_TYPE_CASH",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "PRODUCT_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "PRODUCT_TYPE_STOCK" => Some(Self::Stock),
-            "PRODUCT_TYPE_FUTURES" => Some(Self::Futures),
-            "PRODUCT_TYPE_ETF" => Some(Self::Etf),
-            "PRODUCT_TYPE_CASH" => Some(Self::Cash),
-            _ => None,
-        }
-    }
 }
 /// 복제 방법
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

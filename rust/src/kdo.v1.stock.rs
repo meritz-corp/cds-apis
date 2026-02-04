@@ -14,7 +14,7 @@ pub struct Stock {
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
     /// 시장 유형
-    #[prost(enumeration="super::future::MarketType", tag="4")]
+    #[prost(enumeration="super::common::MarketType", tag="4")]
     pub market_type: i32,
     /// 종목명
     #[prost(string, tag="5")]

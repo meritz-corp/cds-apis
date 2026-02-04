@@ -14,21 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use orderSideDescriptor instead')
-const OrderSide$json = {
-  '1': 'OrderSide',
-  '2': [
-    {'1': 'ORDER_SIDE_UNSPECIFIED', '2': 0},
-    {'1': 'ORDER_SIDE_BID', '2': 1},
-    {'1': 'ORDER_SIDE_ASK', '2': 2},
-  ],
-};
-
-/// Descriptor for `OrderSide`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List orderSideDescriptor = $convert.base64Decode(
-    'CglPcmRlclNpZGUSGgoWT1JERVJfU0lERV9VTlNQRUNJRklFRBAAEhIKDk9SREVSX1NJREVfQk'
-    'lEEAESEgoOT1JERVJfU0lERV9BU0sQAg==');
-
 @$core.Deprecated('Use quoteTypeDescriptor instead')
 const QuoteType$json = {
   '1': 'QuoteType',
@@ -87,7 +72,7 @@ const SubmitOrderRequest$json = {
   '2': [
     {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'price'},
     {'1': 'quote_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
@@ -98,11 +83,11 @@ const SubmitOrderRequest$json = {
 /// Descriptor for `SubmitOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode(
     'ChJTdWJtaXRPcmRlclJlcXVlc3QSIQoJZnVuZF9jb2RlGAEgASgJQgTiQQECUghmdW5kQ29kZR'
-    'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIxCgRzaWRlGAMgASgOMhcua2RvLnYxLm9y'
-    'ZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZRIgCghxdWFudGl0eRgEIAEoA0IE4kEBAlIIcXVhbn'
-    'RpdHkSGgoFcHJpY2UYBSABKAlCBOJBAQJSBXByaWNlEjwKCnF1b3RlX3R5cGUYBiABKA4yFy5r'
-    'ZG8udjEub3JkZXIuUXVvdGVUeXBlQgTiQQECUglxdW90ZVR5cGUSGQoFaXNfbHAYByABKAhCBO'
-    'JBAQJSBGlzTHA=');
+    'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIyCgRzaWRlGAMgASgOMhgua2RvLnYxLmNv'
+    'bW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGUSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW'
+    '50aXR5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRI8CgpxdW90ZV90eXBlGAYgASgOMhcu'
+    'a2RvLnYxLm9yZGVyLlF1b3RlVHlwZUIE4kEBAlIJcXVvdGVUeXBlEhkKBWlzX2xwGAcgASgIQg'
+    'TiQQECUgRpc0xw');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {
@@ -129,7 +114,7 @@ const AmendOrderRequest$json = {
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'price'},
-    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
+    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
   ],
 };
@@ -139,8 +124,8 @@ final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'ChFBbWVuZE9yZGVyUmVxdWVzdBIwChFvcmlnaW5hbF9vcmRlcl9pZBgBIAEoBEIE4kEBAlIPb3'
     'JpZ2luYWxPcmRlcklkEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSHAoGc3lt'
     'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aX'
-    'R5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRIxCgRzaWRlGAYgASgOMhcua2RvLnYxLm9y'
-    'ZGVyLk9yZGVyU2lkZUIE4kEBAlIEc2lkZRIZCgVpc19scBgHIAEoCEIE4kEBAlIEaXNMcA==');
+    'R5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRIyCgRzaWRlGAYgASgOMhgua2RvLnYxLmNv'
+    'bW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGUSGQoFaXNfbHAYByABKAhCBOJBAQJSBGlzTHA=');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {
@@ -167,7 +152,7 @@ const CancelOrderRequest$json = {
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '8': {}, '10': 'side'},
+    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
   ],
 };
 
@@ -175,8 +160,8 @@ const CancelOrderRequest$json = {
 final $typed_data.Uint8List cancelOrderRequestDescriptor = $convert.base64Decode(
     'ChJDYW5jZWxPcmRlclJlcXVlc3QSMAoRb3JpZ2luYWxfb3JkZXJfaWQYASABKARCBOJBAQJSD2'
     '9yaWdpbmFsT3JkZXJJZBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEhwKBnN5'
-    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEjEKBHNpZGUYBiABKA4yFy5rZG8udjEub3JkZXIuT3'
-    'JkZXJTaWRlQgTiQQECUgRzaWRl');
+    'bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEjIKBHNpZGUYBiABKA4yGC5rZG8udjEuY29tbW9uLk'
+    '9yZGVyU2lkZUIE4kEBAlIEc2lkZQ==');
 
 @$core.Deprecated('Use cancelOrderResponseDescriptor instead')
 const CancelOrderResponse$json = {
@@ -202,7 +187,7 @@ const ListAllUnfilledOrdersRequest$json = {
   '2': [
     {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'fundCode', '17': true},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'symbol', '17': true},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '9': 2, '10': 'side', '17': true},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '9': 2, '10': 'side', '17': true},
   ],
   '8': [
     {'1': '_fund_code'},
@@ -214,9 +199,9 @@ const ListAllUnfilledOrdersRequest$json = {
 /// Descriptor for `ListAllUnfilledOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listAllUnfilledOrdersRequestDescriptor = $convert.base64Decode(
     'ChxMaXN0QWxsVW5maWxsZWRPcmRlcnNSZXF1ZXN0EiAKCWZ1bmRfY29kZRgBIAEoCUgAUghmdW'
-    '5kQ29kZYgBARIbCgZzeW1ib2wYAiABKAlIAVIGc3ltYm9siAEBEjAKBHNpZGUYAyABKA4yFy5r'
-    'ZG8udjEub3JkZXIuT3JkZXJTaWRlSAJSBHNpZGWIAQFCDAoKX2Z1bmRfY29kZUIJCgdfc3ltYm'
-    '9sQgcKBV9zaWRl');
+    '5kQ29kZYgBARIbCgZzeW1ib2wYAiABKAlIAVIGc3ltYm9siAEBEjEKBHNpZGUYAyABKA4yGC5r'
+    'ZG8udjEuY29tbW9uLk9yZGVyU2lkZUgCUgRzaWRliAEBQgwKCl9mdW5kX2NvZGVCCQoHX3N5bW'
+    'JvbEIHCgVfc2lkZQ==');
 
 @$core.Deprecated('Use listAllUnfilledOrdersResponseDescriptor instead')
 const ListAllUnfilledOrdersResponse$json = {
@@ -280,7 +265,7 @@ const OrderResult$json = {
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '10': 'orderId'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
-    {'1': 'side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '10': 'side'},
+    {'1': 'side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
     {'1': 'price', '3': 5, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 6, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'result_type', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderResultType', '10': 'resultType'},
@@ -298,16 +283,16 @@ const OrderResult$json = {
 /// Descriptor for `OrderResult`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List orderResultDescriptor = $convert.base64Decode(
     'CgtPcmRlclJlc3VsdBIZCghvcmRlcl9pZBgBIAEoBFIHb3JkZXJJZBIWCgZzeW1ib2wYAiABKA'
-    'lSBnN5bWJvbBIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2RlEisKBHNpZGUYBCABKA4yFy5r'
-    'ZG8udjEub3JkZXIuT3JkZXJTaWRlUgRzaWRlEhQKBXByaWNlGAUgASgJUgVwcmljZRIaCghxdW'
-    'FudGl0eRgGIAEoA1IIcXVhbnRpdHkSPgoLcmVzdWx0X3R5cGUYByABKA4yHS5rZG8udjEub3Jk'
-    'ZXIuT3JkZXJSZXN1bHRUeXBlUgpyZXN1bHRUeXBlEjgKCXRpbWVzdGFtcBgIIAEoCzIaLmdvb2'
-    'dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXRpbWVzdGFtcBI7CghyZWNlaXZlZBgKIAEoCzIdLmtk'
-    'by52MS5vcmRlci5SZWNlaXZlZERldGFpbHNIAFIIcmVjZWl2ZWQSOwoIcmVqZWN0ZWQYCyABKA'
-    'syHS5rZG8udjEub3JkZXIuUmVqZWN0ZWREZXRhaWxzSABSCHJlamVjdGVkEjUKBmZpbGxlZBgM'
-    'IAEoCzIbLmtkby52MS5vcmRlci5GaWxsZWREZXRhaWxzSABSBmZpbGxlZBI+CgljYW5jZWxsZW'
-    'QYDSABKAsyHi5rZG8udjEub3JkZXIuQ2FuY2VsbGVkRGV0YWlsc0gAUgljYW5jZWxsZWRCCQoH'
-    'ZGV0YWlscw==');
+    'lSBnN5bWJvbBIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2RlEiwKBHNpZGUYBCABKA4yGC5r'
+    'ZG8udjEuY29tbW9uLk9yZGVyU2lkZVIEc2lkZRIUCgVwcmljZRgFIAEoCVIFcHJpY2USGgoIcX'
+    'VhbnRpdHkYBiABKANSCHF1YW50aXR5Ej4KC3Jlc3VsdF90eXBlGAcgASgOMh0ua2RvLnYxLm9y'
+    'ZGVyLk9yZGVyUmVzdWx0VHlwZVIKcmVzdWx0VHlwZRI4Cgl0aW1lc3RhbXAYCCABKAsyGi5nb2'
+    '9nbGUucHJvdG9idWYuVGltZXN0YW1wUgl0aW1lc3RhbXASOwoIcmVjZWl2ZWQYCiABKAsyHS5r'
+    'ZG8udjEub3JkZXIuUmVjZWl2ZWREZXRhaWxzSABSCHJlY2VpdmVkEjsKCHJlamVjdGVkGAsgAS'
+    'gLMh0ua2RvLnYxLm9yZGVyLlJlamVjdGVkRGV0YWlsc0gAUghyZWplY3RlZBI1CgZmaWxsZWQY'
+    'DCABKAsyGy5rZG8udjEub3JkZXIuRmlsbGVkRGV0YWlsc0gAUgZmaWxsZWQSPgoJY2FuY2VsbG'
+    'VkGA0gASgLMh4ua2RvLnYxLm9yZGVyLkNhbmNlbGxlZERldGFpbHNIAFIJY2FuY2VsbGVkQgkK'
+    'B2RldGFpbHM=');
 
 @$core.Deprecated('Use receivedDetailsDescriptor instead')
 const ReceivedDetails$json = {
@@ -399,7 +384,7 @@ const Order$json = {
   '1': 'Order',
   '2': [
     {'1': 'order_id', '3': 1, '4': 1, '5': 9, '10': 'orderId'},
-    {'1': 'order_side', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderSide', '10': 'orderSide'},
+    {'1': 'order_side', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'orderSide'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
     {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
@@ -412,10 +397,10 @@ const Order$json = {
 
 /// Descriptor for `Order`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List orderDescriptor = $convert.base64Decode(
-    'CgVPcmRlchIZCghvcmRlcl9pZBgBIAEoCVIHb3JkZXJJZBI2CgpvcmRlcl9zaWRlGAIgASgOMh'
-    'cua2RvLnYxLm9yZGVyLk9yZGVyU2lkZVIJb3JkZXJTaWRlEhYKBnN5bWJvbBgDIAEoCVIGc3lt'
-    'Ym9sEhQKBXByaWNlGAQgASgJUgVwcmljZRIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdHkSJw'
-    'oPZmlsbGVkX3F1YW50aXR5GAYgASgDUg5maWxsZWRRdWFudGl0eRIxCgZzdGF0dXMYByABKA4y'
-    'GS5rZG8udjEub3JkZXIuT3JkZXJTdGF0dXNSBnN0YXR1cxIdCgpjcmVhdGVkX2F0GAggASgDUg'
-    'ljcmVhdGVkQXQSHQoKdXBkYXRlZF9hdBgJIAEoA1IJdXBkYXRlZEF0');
+    'CgVPcmRlchIZCghvcmRlcl9pZBgBIAEoCVIHb3JkZXJJZBI3CgpvcmRlcl9zaWRlGAIgASgOMh'
+    'gua2RvLnYxLmNvbW1vbi5PcmRlclNpZGVSCW9yZGVyU2lkZRIWCgZzeW1ib2wYAyABKAlSBnN5'
+    'bWJvbBIUCgVwcmljZRgEIAEoCVIFcHJpY2USGgoIcXVhbnRpdHkYBSABKANSCHF1YW50aXR5Ei'
+    'cKD2ZpbGxlZF9xdWFudGl0eRgGIAEoA1IOZmlsbGVkUXVhbnRpdHkSMQoGc3RhdHVzGAcgASgO'
+    'Mhkua2RvLnYxLm9yZGVyLk9yZGVyU3RhdHVzUgZzdGF0dXMSHQoKY3JlYXRlZF9hdBgIIAEoA1'
+    'IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYCSABKANSCXVwZGF0ZWRBdA==');
 

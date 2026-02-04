@@ -14,24 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use productTypeDescriptor instead')
-const ProductType$json = {
-  '1': 'ProductType',
-  '2': [
-    {'1': 'PRODUCT_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'PRODUCT_TYPE_STOCK', '2': 1},
-    {'1': 'PRODUCT_TYPE_FUTURES', '2': 2},
-    {'1': 'PRODUCT_TYPE_ETF', '2': 3},
-    {'1': 'PRODUCT_TYPE_CASH', '2': 4},
-  ],
-};
-
-/// Descriptor for `ProductType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List productTypeDescriptor = $convert.base64Decode(
-    'CgtQcm9kdWN0VHlwZRIcChhQUk9EVUNUX1RZUEVfVU5TUEVDSUZJRUQQABIWChJQUk9EVUNUX1'
-    'RZUEVfU1RPQ0sQARIYChRQUk9EVUNUX1RZUEVfRlVUVVJFUxACEhQKEFBST0RVQ1RfVFlQRV9F'
-    'VEYQAxIVChFQUk9EVUNUX1RZUEVfQ0FTSBAE');
-
 @$core.Deprecated('Use replicationMethodDescriptor instead')
 const ReplicationMethod$json = {
   '1': 'ReplicationMethod',
@@ -191,7 +173,7 @@ const EtfPdfConstituent$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'product_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.etf.ProductType', '10': 'productType'},
+    {'1': 'product_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.ProductType', '10': 'productType'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
   ],
 };
@@ -199,8 +181,8 @@ const EtfPdfConstituent$json = {
 /// Descriptor for `EtfPdfConstituent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfPdfConstituentDescriptor = $convert.base64Decode(
     'ChFFdGZQZGZDb25zdGl0dWVudBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBISCgRuYW1lGAIgAS'
-    'gJUgRuYW1lEjoKDHByb2R1Y3RfdHlwZRgDIAEoDjIXLmtkby52MS5ldGYuUHJvZHVjdFR5cGVS'
-    'C3Byb2R1Y3RUeXBlEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eQ==');
+    'gJUgRuYW1lEj0KDHByb2R1Y3RfdHlwZRgDIAEoDjIaLmtkby52MS5jb21tb24uUHJvZHVjdFR5'
+    'cGVSC3Byb2R1Y3RUeXBlEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eQ==');
 
 @$core.Deprecated('Use getEtfRequestDescriptor instead')
 const GetEtfRequest$json = {

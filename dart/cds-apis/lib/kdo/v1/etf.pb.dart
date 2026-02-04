@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pbenum.dart' as $1;
 import 'etf.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -703,7 +704,7 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
   factory EtfPdfConstituent({
     $core.String? symbol,
     $core.String? name,
-    ProductType? productType,
+    $1.ProductType? productType,
     $fixnum.Int64? quantity,
   }) {
     final result = create();
@@ -722,7 +723,7 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPdfConstituent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..e<ProductType>(3, _omitFieldNames ? '' : 'productType', $pb.PbFieldType.OE, defaultOrMaker: ProductType.PRODUCT_TYPE_UNSPECIFIED, valueOf: ProductType.valueOf, enumValues: ProductType.values)
+    ..e<$1.ProductType>(3, _omitFieldNames ? '' : 'productType', $pb.PbFieldType.OE, defaultOrMaker: $1.ProductType.PRODUCT_TYPE_UNSPECIFIED, valueOf: $1.ProductType.valueOf, enumValues: $1.ProductType.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..hasRequiredFields = false
   ;
@@ -766,9 +767,9 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
 
   /// 상품 타입
   @$pb.TagNumber(3)
-  ProductType get productType => $_getN(2);
+  $1.ProductType get productType => $_getN(2);
   @$pb.TagNumber(3)
-  set productType(ProductType value) => $_setField(3, value);
+  set productType($1.ProductType value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasProductType() => $_has(2);
   @$pb.TagNumber(3)

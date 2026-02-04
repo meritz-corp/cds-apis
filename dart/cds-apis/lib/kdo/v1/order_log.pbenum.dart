@@ -44,25 +44,6 @@ class OrderLogType extends $pb.ProtobufEnum {
   const OrderLogType._(super.value, super.name);
 }
 
-/// 주문 방향 (매수/매도)
-/// Rust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정
-class OrderSide extends $pb.ProtobufEnum {
-  static const OrderSide ORDER_SIDE_UNSPECIFIED = OrderSide._(0, _omitEnumNames ? '' : 'ORDER_SIDE_UNSPECIFIED');
-  static const OrderSide BUY = OrderSide._(1, _omitEnumNames ? '' : 'BUY');
-  static const OrderSide SELL = OrderSide._(2, _omitEnumNames ? '' : 'SELL');
-
-  static const $core.List<OrderSide> values = <OrderSide> [
-    ORDER_SIDE_UNSPECIFIED,
-    BUY,
-    SELL,
-  ];
-
-  static final $core.List<OrderSide?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static OrderSide? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const OrderSide._(super.value, super.name);
-}
-
 /// 주문 타입 (신규/정정/취소)
 /// Rust 코드에는 정의되지 않았지만, OrderLog에 사용되므로 정의 가정
 class OrderType extends $pb.ProtobufEnum {

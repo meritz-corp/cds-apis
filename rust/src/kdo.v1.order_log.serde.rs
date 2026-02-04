@@ -403,6 +403,9 @@ impl serde::Serialize for OrderLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLog", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -431,7 +434,7 @@ impl serde::Serialize for OrderLog {
             struct_ser.serialize_field("log_type", &v)?;
         }
         if true {
-            let v = OrderSide::try_from(self.side)
+            let v = super::common::OrderSide::try_from(self.side)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
             struct_ser.serialize_field("side", &v)?;
         }
@@ -474,6 +477,11 @@ impl serde::Serialize for OrderLog {
         if let Some(v) = self.created_at.as_ref() {
             struct_ser.serialize_field("created_at", v)?;
         }
+        if true {
+            let v = super::common::MarketType::try_from(self.market_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.market_type)))?;
+            struct_ser.serialize_field("market_type", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -515,6 +523,8 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "receiveTime",
             "created_at",
             "createdAt",
+            "market_type",
+            "marketType",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -537,6 +547,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             EventTime,
             ReceiveTime,
             CreatedAt,
+            MarketType,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -577,6 +588,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "eventTime" | "event_time" => Ok(GeneratedField::EventTime),
                             "receiveTime" | "receive_time" => Ok(GeneratedField::ReceiveTime),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
+                            "marketType" | "market_type" => Ok(GeneratedField::MarketType),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -614,6 +626,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut event_time__ = None;
                 let mut receive_time__ = None;
                 let mut created_at__ = None;
+                let mut market_type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -662,7 +675,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            side__ = Some(map_.next_value::<OrderSide>()? as i32);
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
                         }
                         GeneratedField::OrderType => {
                             if order_type__.is_some() {
@@ -734,6 +747,12 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             created_at__ = map_.next_value()?;
                         }
+                        GeneratedField::MarketType => {
+                            if market_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("marketType"));
+                            }
+                            market_type__ = Some(map_.next_value::<super::common::MarketType>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -758,6 +777,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     event_time: event_time__.unwrap_or_default(),
                     receive_time: receive_time__.unwrap_or_default(),
                     created_at: created_at__,
+                    market_type: market_type__.unwrap_or_default(),
                 })
             }
         }
@@ -1028,80 +1048,6 @@ impl<'de> serde::Deserialize<'de> for OrderLogType {
                     "MERITZ_REJECTED" => Ok(OrderLogType::MeritzRejected),
                     "FILLED" => Ok(OrderLogType::Filled),
                     "AUTO_CANCELLED" => Ok(OrderLogType::AutoCancelled),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for OrderSide {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "ORDER_SIDE_UNSPECIFIED",
-            Self::Buy => "BUY",
-            Self::Sell => "SELL",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for OrderSide {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "ORDER_SIDE_UNSPECIFIED",
-            "BUY",
-            "SELL",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = OrderSide;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "ORDER_SIDE_UNSPECIFIED" => Ok(OrderSide::Unspecified),
-                    "BUY" => Ok(OrderSide::Buy),
-                    "SELL" => Ok(OrderSide::Sell),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

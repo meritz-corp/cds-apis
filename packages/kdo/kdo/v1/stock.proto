@@ -7,7 +7,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
 
-import "kdo/v1/future.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -47,7 +47,7 @@ message Stock {
   string symbol = 3;
 
   // 시장 유형
-  kdo.v1.future.MarketType market_type = 4;
+  kdo.v1.common.MarketType market_type = 4;
 
   // 종목명
   string market_name = 5;

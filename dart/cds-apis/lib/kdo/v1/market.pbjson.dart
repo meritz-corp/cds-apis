@@ -47,26 +47,6 @@ final $typed_data.Uint8List sessionIdDescriptor = $convert.base64Decode(
     'VF9NQVJLRVQQChIPCgtBVUNUSU9OX0JJRBALEg8KC0FVQ1RJT05fQVNLEAwSDQoJU1VTUEVORE'
     'VEEA0SDAoIU0hVVERPV04QDhIKCgZDTE9TRUQQDxIHCgNFVEMQEA==');
 
-@$core.Deprecated('Use marketSessionDescriptor instead')
-const MarketSession$json = {
-  '1': 'MarketSession',
-  '2': [
-    {'1': 'MARKT_SESSION_UNSPECIFIED', '2': 0},
-    {'1': 'MARKT_SESSION_PRE_MARKET', '2': 1},
-    {'1': 'MARKT_SESSION_OPENING_AUCTION', '2': 2},
-    {'1': 'MARKT_SESSION_REGULAR', '2': 3},
-    {'1': 'MARKT_SESSION_CLOSING_AUCTION', '2': 4},
-    {'1': 'MARKT_SESSION_CLOSED', '2': 5},
-  ],
-};
-
-/// Descriptor for `MarketSession`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List marketSessionDescriptor = $convert.base64Decode(
-    'Cg1NYXJrZXRTZXNzaW9uEh0KGU1BUktUX1NFU1NJT05fVU5TUEVDSUZJRUQQABIcChhNQVJLVF'
-    '9TRVNTSU9OX1BSRV9NQVJLRVQQARIhCh1NQVJLVF9TRVNTSU9OX09QRU5JTkdfQVVDVElPThAC'
-    'EhkKFU1BUktUX1NFU1NJT05fUkVHVUxBUhADEiEKHU1BUktUX1NFU1NJT05fQ0xPU0lOR19BVU'
-    'NUSU9OEAQSGAoUTUFSS1RfU0VTU0lPTl9DTE9TRUQQBQ==');
-
 @$core.Deprecated('Use etfOrderbookDataDescriptor instead')
 const EtfOrderbookData$json = {
   '1': 'EtfOrderbookData',
@@ -332,12 +312,12 @@ final $typed_data.Uint8List rawMarketMessageDescriptor = $convert.base64Decode(
 const GetMarketSessionResponse$json = {
   '1': 'GetMarketSessionResponse',
   '2': [
-    {'1': 'session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.market.MarketSession', '10': 'session'},
+    {'1': 'session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'session'},
   ],
 };
 
 /// Descriptor for `GetMarketSessionResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getMarketSessionResponseDescriptor = $convert.base64Decode(
-    'ChhHZXRNYXJrZXRTZXNzaW9uUmVzcG9uc2USNgoHc2Vzc2lvbhgBIAEoDjIcLmtkby52MS5tYX'
-    'JrZXQuTWFya2V0U2Vzc2lvblIHc2Vzc2lvbg==');
+    'ChhHZXRNYXJrZXRTZXNzaW9uUmVzcG9uc2USNwoHc2Vzc2lvbhgBIAEoDjIdLmtkby52MS5jb2'
+    '1tb24uVHJhZGluZ1Nlc3Npb25SB3Nlc3Npb24=');
 

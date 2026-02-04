@@ -90,7 +90,7 @@ impl serde::Serialize for Future {
             struct_ser.serialize_field("market_name", &self.market_name)?;
         }
         if true {
-            let v = MarketType::try_from(self.market_type)
+            let v = super::common::MarketType::try_from(self.market_type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.market_type)))?;
             struct_ser.serialize_field("market_type", &v)?;
         }
@@ -346,7 +346,7 @@ impl<'de> serde::Deserialize<'de> for Future {
                             if market_type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("marketType"));
                             }
-                            market_type__ = Some(map_.next_value::<MarketType>()? as i32);
+                            market_type__ = Some(map_.next_value::<super::common::MarketType>()? as i32);
                         }
                         GeneratedField::MaxQuantityPerOrder => {
                             if max_quantity_per_order__.is_some() {
@@ -929,82 +929,5 @@ impl<'de> serde::Deserialize<'de> for ListFuturesResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.future.ListFuturesResponse", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MarketType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "MARKET_TYPE_UNSPECIFIED",
-            Self::Kospi => "MARKET_TYPE_KOSPI",
-            Self::Kosdaq => "MARKET_TYPE_KOSDAQ",
-            Self::Derivative => "MARKET_TYPE_DERIVATIVE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for MarketType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "MARKET_TYPE_UNSPECIFIED",
-            "MARKET_TYPE_KOSPI",
-            "MARKET_TYPE_KOSDAQ",
-            "MARKET_TYPE_DERIVATIVE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MarketType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "MARKET_TYPE_UNSPECIFIED" => Ok(MarketType::Unspecified),
-                    "MARKET_TYPE_KOSPI" => Ok(MarketType::Kospi),
-                    "MARKET_TYPE_KOSDAQ" => Ok(MarketType::Kosdaq),
-                    "MARKET_TYPE_DERIVATIVE" => Ok(MarketType::Derivative),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }

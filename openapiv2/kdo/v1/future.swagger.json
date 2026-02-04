@@ -98,6 +98,18 @@
     }
   },
   "definitions": {
+    "commonMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_TYPE_UNSPECIFIED",
+        "MARKET_TYPE_KOSPI",
+        "MARKET_TYPE_KOSDAQ",
+        "MARKET_TYPE_DERIVATIVE"
+      ],
+      "default": "MARKET_TYPE_UNSPECIFIED",
+      "description": "- MARKET_TYPE_KOSPI: KOSPI\n - MARKET_TYPE_KOSDAQ: KOSDAQ\n - MARKET_TYPE_DERIVATIVE: 파생상품",
+      "title": "시장 유형"
+    },
     "futureFuture": {
       "type": "object",
       "properties": {
@@ -118,7 +130,7 @@
           "title": "종목명"
         },
         "marketType": {
-          "$ref": "#/definitions/futureMarketType",
+          "$ref": "#/definitions/commonMarketType",
           "title": "시장 유형"
         },
         "maxQuantityPerOrder": {
@@ -234,18 +246,6 @@
           "title": "다음 페이지 토큰"
         }
       }
-    },
-    "futureMarketType": {
-      "type": "string",
-      "enum": [
-        "MARKET_TYPE_UNSPECIFIED",
-        "MARKET_TYPE_KOSPI",
-        "MARKET_TYPE_KOSDAQ",
-        "MARKET_TYPE_DERIVATIVE"
-      ],
-      "default": "MARKET_TYPE_UNSPECIFIED",
-      "description": "- MARKET_TYPE_KOSPI: KOSPI\n - MARKET_TYPE_KOSDAQ: KOSDAQ\n - MARKET_TYPE_DERIVATIVE: 파생상품",
-      "title": "시장 유형"
     },
     "protobufAny": {
       "type": "object",

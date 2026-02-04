@@ -98,7 +98,7 @@
     }
   },
   "definitions": {
-    "futureMarketType": {
+    "commonMarketType": {
       "type": "string",
       "enum": [
         "MARKET_TYPE_UNSPECIFIED",
@@ -169,7 +169,7 @@
           "title": "심볼"
         },
         "marketType": {
-          "$ref": "#/definitions/futureMarketType",
+          "$ref": "#/definitions/commonMarketType",
           "title": "시장 유형"
         },
         "marketName": {
