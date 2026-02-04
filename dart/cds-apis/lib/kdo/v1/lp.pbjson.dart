@@ -62,6 +62,7 @@ const EtfLp$json = {
     {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
     {'1': 'offset', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
     {'1': 'enabled', '3': 11, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'pricing_method', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfPricing', '10': 'pricingMethod'},
   ],
 };
 
@@ -71,7 +72,50 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'RDb2RlEhQKBWJhc2lzGAYgASgDUgViYXNpcxIaCghxdWFudGl0eRgHIAEoA1IIcXVhbnRpdHkS'
     'FAoFZGVwdGgYCCABKA1SBWRlcHRoEhsKCXRpY2tfc2l6ZRgJIAEoA1IIdGlja1NpemUSLgoGb2'
     'Zmc2V0GAogASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQSGAoHZW5hYmxlZBgL'
-    'IAEoCFIHZW5hYmxlZA==');
+    'IAEoCFIHZW5hYmxlZBI8Cg5wcmljaW5nX21ldGhvZBgMIAEoCzIVLmtkby52MS5scC5FdGZQcm'
+    'ljaW5nUg1wcmljaW5nTWV0aG9k');
+
+@$core.Deprecated('Use etfPricingDescriptor instead')
+const EtfPricing$json = {
+  '1': 'EtfPricing',
+  '2': [
+    {'1': 'decompose_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.DecomposeHedgePricing', '9': 0, '10': 'decomposeHedge'},
+    {'1': 'future_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.FutureHedgePricing', '9': 0, '10': 'futureHedge'},
+  ],
+  '8': [
+    {'1': 'method'},
+  ],
+};
+
+/// Descriptor for `EtfPricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfPricingDescriptor = $convert.base64Decode(
+    'CgpFdGZQcmljaW5nEksKD2RlY29tcG9zZV9oZWRnZRgBIAEoCzIgLmtkby52MS5scC5EZWNvbX'
+    'Bvc2VIZWRnZVByaWNpbmdIAFIOZGVjb21wb3NlSGVkZ2USQgoMZnV0dXJlX2hlZGdlGAIgASgL'
+    'Mh0ua2RvLnYxLmxwLkZ1dHVyZUhlZGdlUHJpY2luZ0gAUgtmdXR1cmVIZWRnZUIICgZtZXRob2'
+    'Q=');
+
+@$core.Deprecated('Use decomposeHedgePricingDescriptor instead')
+const DecomposeHedgePricing$json = {
+  '1': 'DecomposeHedgePricing',
+};
+
+/// Descriptor for `DecomposeHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List decomposeHedgePricingDescriptor = $convert.base64Decode(
+    'ChVEZWNvbXBvc2VIZWRnZVByaWNpbmc=');
+
+@$core.Deprecated('Use futureHedgePricingDescriptor instead')
+const FutureHedgePricing$json = {
+  '1': 'FutureHedgePricing',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
+  ],
+};
+
+/// Descriptor for `FutureHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List futureHedgePricingDescriptor = $convert.base64Decode(
+    'ChJGdXR1cmVIZWRnZVByaWNpbmcSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGgoIcXVhbnRpdH'
+    'kYAiABKANSCHF1YW50aXR5');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {

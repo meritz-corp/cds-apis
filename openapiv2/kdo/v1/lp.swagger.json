@@ -493,6 +493,10 @@
     }
   },
   "definitions": {
+    "lpDecomposeHedgePricing": {
+      "type": "object",
+      "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
+    },
     "lpEtfLp": {
       "type": "object",
       "properties": {
@@ -531,6 +535,10 @@
         "enabled": {
           "type": "boolean",
           "title": "활성화 여부"
+        },
+        "pricingMethod": {
+          "$ref": "#/definitions/lpEtfPricing",
+          "title": "ETF 가격 산출 방식"
         }
       },
       "title": "ETF LP 설정"
@@ -703,6 +711,20 @@
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
     },
+    "lpEtfPricing": {
+      "type": "object",
+      "properties": {
+        "decomposeHedge": {
+          "$ref": "#/definitions/lpDecomposeHedgePricing",
+          "title": "분해 헷지 방식"
+        },
+        "futureHedge": {
+          "$ref": "#/definitions/lpFutureHedgePricing",
+          "title": "선물 헷지 방식"
+        }
+      },
+      "title": "ETF 가격 산출 방식"
+    },
     "lpFillStatistics": {
       "type": "object",
       "properties": {
@@ -726,6 +748,21 @@
         }
       },
       "title": "ETF 체결 통계 (매수/매도 체결량 및 평균 단가)"
+    },
+    "lpFutureHedgePricing": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "선물 종목 심볼"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "수량"
+        }
+      },
+      "title": "선물 헷지 가격 산출"
     },
     "lpListEtfLpStatusesResponse": {
       "type": "object",

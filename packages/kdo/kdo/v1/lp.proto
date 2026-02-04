@@ -128,6 +128,32 @@ message EtfLp {
 
   // 활성화 여부
   bool enabled = 11;
+
+  // ETF 가격 산출 방식
+  EtfPricing pricing_method = 12;
+}
+
+// ETF 가격 산출 방식
+message EtfPricing {
+  oneof method {
+    // 분해 헷지 방식
+    DecomposeHedgePricing decompose_hedge = 1;
+
+    // 선물 헷지 방식
+    FutureHedgePricing future_hedge = 2;
+  }
+}
+
+// 분해 헷지 가격 산출 (추가 파라미터 없음)
+message DecomposeHedgePricing {}
+
+// 선물 헷지 가격 산출
+message FutureHedgePricing {
+  // 선물 종목 심볼
+  string symbol = 1;
+
+  // 수량
+  int64 quantity = 2;
 }
 
 // ========== ETF LP Status Messages ==========
