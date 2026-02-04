@@ -127,7 +127,8 @@ const ListOrderLogsRequest$json = {
   '2': [
     {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
-    {'1': 'filter', '3': 3, '4': 1, '5': 9, '10': 'filter'},
+    {'1': 'filter', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'filter'},
+    {'1': 'order_by', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'orderBy'},
   ],
   '8': [
     {'1': '_page_size'},
@@ -138,8 +139,9 @@ const ListOrderLogsRequest$json = {
 /// Descriptor for `ListOrderLogsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listOrderLogsRequestDescriptor = $convert.base64Decode(
     'ChRMaXN0T3JkZXJMb2dzUmVxdWVzdBIgCglwYWdlX3NpemUYASABKA1IAFIIcGFnZVNpemWIAQ'
-    'ESIgoKcGFnZV90b2tlbhgCIAEoCUgBUglwYWdlVG9rZW6IAQESFgoGZmlsdGVyGAMgASgJUgZm'
-    'aWx0ZXJCDAoKX3BhZ2Vfc2l6ZUINCgtfcGFnZV90b2tlbg==');
+    'ESIgoKcGFnZV90b2tlbhgCIAEoCUgBUglwYWdlVG9rZW6IAQESHAoGZmlsdGVyGAMgASgJQgTi'
+    'QQEBUgZmaWx0ZXISHwoIb3JkZXJfYnkYBCABKAlCBOJBAQFSB29yZGVyQnlCDAoKX3BhZ2Vfc2'
+    'l6ZUINCgtfcGFnZV90b2tlbg==');
 
 @$core.Deprecated('Use listOrderLogsResponseDescriptor instead')
 const ListOrderLogsResponse$json = {

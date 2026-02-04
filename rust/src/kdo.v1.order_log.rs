@@ -122,6 +122,15 @@ pub struct ListOrderLogsRequest {
     /// * filter=market_type=KOSPI
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
+    /// 오더링 조건. (optional, AIP-132)
+    ///
+    /// Supported Fields
+    /// * "order_id", "event_time", "receive_time"
+    ///
+    /// Examples
+    /// * order_by=order_id desc
+    #[prost(string, tag="4")]
+    pub order_by: ::prost::alloc::string::String,
 }
 /// ListOrderLogs 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

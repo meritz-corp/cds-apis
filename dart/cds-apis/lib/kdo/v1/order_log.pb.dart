@@ -420,11 +420,13 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? filter,
+    $core.String? orderBy,
   }) {
     final result = create();
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
     if (filter != null) result.filter = filter;
+    if (orderBy != null) result.orderBy = orderBy;
     return result;
   }
 
@@ -437,6 +439,7 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
     ..aOS(2, _omitFieldNames ? '' : 'pageToken')
     ..aOS(3, _omitFieldNames ? '' : 'filter')
+    ..aOS(4, _omitFieldNames ? '' : 'orderBy')
     ..hasRequiredFields = false
   ;
 
@@ -504,6 +507,22 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   $core.bool hasFilter() => $_has(2);
   @$pb.TagNumber(3)
   void clearFilter() => $_clearField(3);
+
+  /// 오더링 조건. (optional, AIP-132)
+  ///
+  /// Supported Fields
+  /// * "order_id", "event_time", "receive_time"
+  ///
+  /// Examples
+  /// * order_by=order_id desc
+  @$pb.TagNumber(4)
+  $core.String get orderBy => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set orderBy($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOrderBy() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOrderBy() => $_clearField(4);
 }
 
 /// ListOrderLogs 응답
