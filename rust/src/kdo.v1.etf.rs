@@ -47,6 +47,9 @@ pub struct Etf {
     pub tradable: bool,
     #[prost(bool, tag="17")]
     pub short_sellable: bool,
+    /// 기초자산 정보
+    #[prost(message, optional, tag="18")]
+    pub underlying_asset: ::core::option::Option<UnderlyingAsset>,
     #[prost(bool, tag="23")]
     pub cash_creditable: bool,
     #[prost(int64, tag="24")]
@@ -137,6 +140,73 @@ pub struct EtfPdfConstituent {
     /// 구성 수량 (선물 숏의 경우 음수)
     #[prost(int64, tag="4")]
     pub quantity: i64,
+}
+/// 기초자산
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnderlyingAsset {
+    #[prost(oneof="underlying_asset::Asset", tags="1, 2, 3, 4")]
+    pub asset: ::core::option::Option<underlying_asset::Asset>,
+}
+/// Nested message and enum types in `UnderlyingAsset`.
+pub mod underlying_asset {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Asset {
+        /// 선물형
+        #[prost(message, tag="1")]
+        Future(super::UnderlyingFuture),
+        /// 채권형
+        #[prost(message, tag="2")]
+        FixedIncome(super::UnderlyingFixedIncome),
+        /// 원자재형
+        #[prost(message, tag="3")]
+        Commodity(super::UnderlyingCommodity),
+        /// 통화형
+        #[prost(message, tag="4")]
+        Currency(super::UnderlyingCurrency),
+    }
+}
+/// 선물형 기초자산
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnderlyingFuture {
+    /// 선물 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 승수
+    #[prost(string, tag="2")]
+    pub multiple: ::prost::alloc::string::String,
+    /// 최근 매도호가
+    #[prost(string, tag="3")]
+    pub last_ask_price: ::prost::alloc::string::String,
+    /// 최근 매수호가
+    #[prost(string, tag="4")]
+    pub last_bid_price: ::prost::alloc::string::String,
+}
+/// 채권형 기초자산
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnderlyingFixedIncome {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// 원자재형 기초자산
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnderlyingCommodity {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// 통화형 기초자산
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnderlyingCurrency {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
 }
 // ========== Request/Response Messages ==========
 

@@ -80,7 +80,7 @@ const EtfPricing$json = {
   '1': 'EtfPricing',
   '2': [
     {'1': 'decompose_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.DecomposeHedgePricing', '9': 0, '10': 'decomposeHedge'},
-    {'1': 'future_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.FutureHedgePricing', '9': 0, '10': 'futureHedge'},
+    {'1': 'underlying_future_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.UnderlyingFutureHedgePricing', '9': 0, '10': 'underlyingFutureHedge'},
   ],
   '8': [
     {'1': 'method'},
@@ -90,9 +90,9 @@ const EtfPricing$json = {
 /// Descriptor for `EtfPricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfPricingDescriptor = $convert.base64Decode(
     'CgpFdGZQcmljaW5nEksKD2RlY29tcG9zZV9oZWRnZRgBIAEoCzIgLmtkby52MS5scC5EZWNvbX'
-    'Bvc2VIZWRnZVByaWNpbmdIAFIOZGVjb21wb3NlSGVkZ2USQgoMZnV0dXJlX2hlZGdlGAIgASgL'
-    'Mh0ua2RvLnYxLmxwLkZ1dHVyZUhlZGdlUHJpY2luZ0gAUgtmdXR1cmVIZWRnZUIICgZtZXRob2'
-    'Q=');
+    'Bvc2VIZWRnZVByaWNpbmdIAFIOZGVjb21wb3NlSGVkZ2USYQoXdW5kZXJseWluZ19mdXR1cmVf'
+    'aGVkZ2UYAiABKAsyJy5rZG8udjEubHAuVW5kZXJseWluZ0Z1dHVyZUhlZGdlUHJpY2luZ0gAUh'
+    'V1bmRlcmx5aW5nRnV0dXJlSGVkZ2VCCAoGbWV0aG9k');
 
 @$core.Deprecated('Use decomposeHedgePricingDescriptor instead')
 const DecomposeHedgePricing$json = {
@@ -103,19 +103,14 @@ const DecomposeHedgePricing$json = {
 final $typed_data.Uint8List decomposeHedgePricingDescriptor = $convert.base64Decode(
     'ChVEZWNvbXBvc2VIZWRnZVByaWNpbmc=');
 
-@$core.Deprecated('Use futureHedgePricingDescriptor instead')
-const FutureHedgePricing$json = {
-  '1': 'FutureHedgePricing',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
-  ],
+@$core.Deprecated('Use underlyingFutureHedgePricingDescriptor instead')
+const UnderlyingFutureHedgePricing$json = {
+  '1': 'UnderlyingFutureHedgePricing',
 };
 
-/// Descriptor for `FutureHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List futureHedgePricingDescriptor = $convert.base64Decode(
-    'ChJGdXR1cmVIZWRnZVByaWNpbmcSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGgoIcXVhbnRpdH'
-    'kYAiABKANSCHF1YW50aXR5');
+/// Descriptor for `UnderlyingFutureHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List underlyingFutureHedgePricingDescriptor = $convert.base64Decode(
+    'ChxVbmRlcmx5aW5nRnV0dXJlSGVkZ2VQcmljaW5n');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {

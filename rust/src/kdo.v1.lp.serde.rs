@@ -1433,8 +1433,8 @@ impl serde::Serialize for EtfPricing {
                 etf_pricing::Method::DecomposeHedge(v) => {
                     struct_ser.serialize_field("decompose_hedge", v)?;
                 }
-                etf_pricing::Method::FutureHedge(v) => {
-                    struct_ser.serialize_field("future_hedge", v)?;
+                etf_pricing::Method::UnderlyingFutureHedge(v) => {
+                    struct_ser.serialize_field("underlying_future_hedge", v)?;
                 }
             }
         }
@@ -1450,14 +1450,14 @@ impl<'de> serde::Deserialize<'de> for EtfPricing {
         const FIELDS: &[&str] = &[
             "decompose_hedge",
             "decomposeHedge",
-            "future_hedge",
-            "futureHedge",
+            "underlying_future_hedge",
+            "underlyingFutureHedge",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             DecomposeHedge,
-            FutureHedge,
+            UnderlyingFutureHedge,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1481,7 +1481,7 @@ impl<'de> serde::Deserialize<'de> for EtfPricing {
                     {
                         match value {
                             "decomposeHedge" | "decompose_hedge" => Ok(GeneratedField::DecomposeHedge),
-                            "futureHedge" | "future_hedge" => Ok(GeneratedField::FutureHedge),
+                            "underlyingFutureHedge" | "underlying_future_hedge" => Ok(GeneratedField::UnderlyingFutureHedge),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1511,11 +1511,11 @@ impl<'de> serde::Deserialize<'de> for EtfPricing {
                             method__ = map_.next_value::<::std::option::Option<_>>()?.map(etf_pricing::Method::DecomposeHedge)
 ;
                         }
-                        GeneratedField::FutureHedge => {
+                        GeneratedField::UnderlyingFutureHedge => {
                             if method__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("futureHedge"));
+                                return Err(serde::de::Error::duplicate_field("underlyingFutureHedge"));
                             }
-                            method__ = map_.next_value::<::std::option::Option<_>>()?.map(etf_pricing::Method::FutureHedge)
+                            method__ = map_.next_value::<::std::option::Option<_>>()?.map(etf_pricing::Method::UnderlyingFutureHedge)
 ;
                         }
                         GeneratedField::__SkipField__ => {
@@ -1687,122 +1687,6 @@ impl<'de> serde::Deserialize<'de> for FillStatistics {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lp.FillStatistics", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for FutureHedgePricing {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.FutureHedgePricing", len)?;
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for FutureHedgePricing {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "symbol",
-            "quantity",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Symbol,
-            Quantity,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            "quantity" => Ok(GeneratedField::Quantity),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FutureHedgePricing;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.FutureHedgePricing")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FutureHedgePricing, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut symbol__ = None;
-                let mut quantity__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(FutureHedgePricing {
-                    symbol: symbol__.unwrap_or_default(),
-                    quantity: quantity__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.FutureHedgePricing", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetEtfLpRequest {
@@ -3902,6 +3786,78 @@ impl<'de> serde::Deserialize<'de> for TimeFrameStatus {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lp.TimeFrameStatus", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UnderlyingFutureHedgePricing {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("kdo.v1.lp.UnderlyingFutureHedgePricing", len)?;
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UnderlyingFutureHedgePricing {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                            Ok(GeneratedField::__SkipField__)
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UnderlyingFutureHedgePricing;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.UnderlyingFutureHedgePricing")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnderlyingFutureHedgePricing, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                }
+                Ok(UnderlyingFutureHedgePricing {
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.UnderlyingFutureHedgePricing", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UpdateEtfLpRequest {

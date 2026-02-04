@@ -41,6 +41,7 @@ class Etf extends $pb.GeneratedMessage {
     $core.double? leverage,
     $core.bool? tradable,
     $core.bool? shortSellable,
+    UnderlyingAsset? underlyingAsset,
     $core.bool? cashCreditable,
     $fixnum.Int64? cashCreationAmount,
   }) {
@@ -62,6 +63,7 @@ class Etf extends $pb.GeneratedMessage {
     if (leverage != null) result.leverage = leverage;
     if (tradable != null) result.tradable = tradable;
     if (shortSellable != null) result.shortSellable = shortSellable;
+    if (underlyingAsset != null) result.underlyingAsset = underlyingAsset;
     if (cashCreditable != null) result.cashCreditable = cashCreditable;
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
     return result;
@@ -90,6 +92,7 @@ class Etf extends $pb.GeneratedMessage {
     ..a<$core.double>(15, _omitFieldNames ? '' : 'leverage', $pb.PbFieldType.OF)
     ..aOB(16, _omitFieldNames ? '' : 'tradable')
     ..aOB(17, _omitFieldNames ? '' : 'shortSellable')
+    ..aOM<UnderlyingAsset>(18, _omitFieldNames ? '' : 'underlyingAsset', subBuilder: UnderlyingAsset.create)
     ..aOB(23, _omitFieldNames ? '' : 'cashCreditable')
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
     ..hasRequiredFields = false
@@ -269,21 +272,33 @@ class Etf extends $pb.GeneratedMessage {
   @$pb.TagNumber(17)
   void clearShortSellable() => $_clearField(17);
 
+  /// 기초자산 정보
+  @$pb.TagNumber(18)
+  UnderlyingAsset get underlyingAsset => $_getN(17);
+  @$pb.TagNumber(18)
+  set underlyingAsset(UnderlyingAsset value) => $_setField(18, value);
+  @$pb.TagNumber(18)
+  $core.bool hasUnderlyingAsset() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearUnderlyingAsset() => $_clearField(18);
+  @$pb.TagNumber(18)
+  UnderlyingAsset ensureUnderlyingAsset() => $_ensure(17);
+
   @$pb.TagNumber(23)
-  $core.bool get cashCreditable => $_getBF(17);
+  $core.bool get cashCreditable => $_getBF(18);
   @$pb.TagNumber(23)
-  set cashCreditable($core.bool value) => $_setBool(17, value);
+  set cashCreditable($core.bool value) => $_setBool(18, value);
   @$pb.TagNumber(23)
-  $core.bool hasCashCreditable() => $_has(17);
+  $core.bool hasCashCreditable() => $_has(18);
   @$pb.TagNumber(23)
   void clearCashCreditable() => $_clearField(23);
 
   @$pb.TagNumber(24)
-  $fixnum.Int64 get cashCreationAmount => $_getI64(18);
+  $fixnum.Int64 get cashCreationAmount => $_getI64(19);
   @$pb.TagNumber(24)
-  set cashCreationAmount($fixnum.Int64 value) => $_setInt64(18, value);
+  set cashCreationAmount($fixnum.Int64 value) => $_setInt64(19, value);
   @$pb.TagNumber(24)
-  $core.bool hasCashCreationAmount() => $_has(18);
+  $core.bool hasCashCreationAmount() => $_has(19);
   @$pb.TagNumber(24)
   void clearCashCreationAmount() => $_clearField(24);
 }
@@ -784,6 +799,351 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
   $core.bool hasQuantity() => $_has(3);
   @$pb.TagNumber(4)
   void clearQuantity() => $_clearField(4);
+}
+
+enum UnderlyingAsset_Asset {
+  future, 
+  fixedIncome, 
+  commodity, 
+  currency, 
+  notSet
+}
+
+/// 기초자산
+class UnderlyingAsset extends $pb.GeneratedMessage {
+  factory UnderlyingAsset({
+    UnderlyingFuture? future,
+    UnderlyingFixedIncome? fixedIncome,
+    UnderlyingCommodity? commodity,
+    UnderlyingCurrency? currency,
+  }) {
+    final result = create();
+    if (future != null) result.future = future;
+    if (fixedIncome != null) result.fixedIncome = fixedIncome;
+    if (commodity != null) result.commodity = commodity;
+    if (currency != null) result.currency = currency;
+    return result;
+  }
+
+  UnderlyingAsset._();
+
+  factory UnderlyingAsset.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UnderlyingAsset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static const $core.Map<$core.int, UnderlyingAsset_Asset> _UnderlyingAsset_AssetByTag = {
+    1 : UnderlyingAsset_Asset.future,
+    2 : UnderlyingAsset_Asset.fixedIncome,
+    3 : UnderlyingAsset_Asset.commodity,
+    4 : UnderlyingAsset_Asset.currency,
+    0 : UnderlyingAsset_Asset.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingAsset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3, 4])
+    ..aOM<UnderlyingFuture>(1, _omitFieldNames ? '' : 'future', subBuilder: UnderlyingFuture.create)
+    ..aOM<UnderlyingFixedIncome>(2, _omitFieldNames ? '' : 'fixedIncome', subBuilder: UnderlyingFixedIncome.create)
+    ..aOM<UnderlyingCommodity>(3, _omitFieldNames ? '' : 'commodity', subBuilder: UnderlyingCommodity.create)
+    ..aOM<UnderlyingCurrency>(4, _omitFieldNames ? '' : 'currency', subBuilder: UnderlyingCurrency.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingAsset clone() => UnderlyingAsset()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingAsset copyWith(void Function(UnderlyingAsset) updates) => super.copyWith((message) => updates(message as UnderlyingAsset)) as UnderlyingAsset;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingAsset create() => UnderlyingAsset._();
+  @$core.override
+  UnderlyingAsset createEmptyInstance() => create();
+  static $pb.PbList<UnderlyingAsset> createRepeated() => $pb.PbList<UnderlyingAsset>();
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingAsset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingAsset>(create);
+  static UnderlyingAsset? _defaultInstance;
+
+  UnderlyingAsset_Asset whichAsset() => _UnderlyingAsset_AssetByTag[$_whichOneof(0)]!;
+  void clearAsset() => $_clearField($_whichOneof(0));
+
+  /// 선물형
+  @$pb.TagNumber(1)
+  UnderlyingFuture get future => $_getN(0);
+  @$pb.TagNumber(1)
+  set future(UnderlyingFuture value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFuture() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFuture() => $_clearField(1);
+  @$pb.TagNumber(1)
+  UnderlyingFuture ensureFuture() => $_ensure(0);
+
+  /// 채권형
+  @$pb.TagNumber(2)
+  UnderlyingFixedIncome get fixedIncome => $_getN(1);
+  @$pb.TagNumber(2)
+  set fixedIncome(UnderlyingFixedIncome value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFixedIncome() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFixedIncome() => $_clearField(2);
+  @$pb.TagNumber(2)
+  UnderlyingFixedIncome ensureFixedIncome() => $_ensure(1);
+
+  /// 원자재형
+  @$pb.TagNumber(3)
+  UnderlyingCommodity get commodity => $_getN(2);
+  @$pb.TagNumber(3)
+  set commodity(UnderlyingCommodity value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCommodity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCommodity() => $_clearField(3);
+  @$pb.TagNumber(3)
+  UnderlyingCommodity ensureCommodity() => $_ensure(2);
+
+  /// 통화형
+  @$pb.TagNumber(4)
+  UnderlyingCurrency get currency => $_getN(3);
+  @$pb.TagNumber(4)
+  set currency(UnderlyingCurrency value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCurrency() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCurrency() => $_clearField(4);
+  @$pb.TagNumber(4)
+  UnderlyingCurrency ensureCurrency() => $_ensure(3);
+}
+
+/// 선물형 기초자산
+class UnderlyingFuture extends $pb.GeneratedMessage {
+  factory UnderlyingFuture({
+    $core.String? symbol,
+    $core.String? multiple,
+    $core.String? lastAskPrice,
+    $core.String? lastBidPrice,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (multiple != null) result.multiple = multiple;
+    if (lastAskPrice != null) result.lastAskPrice = lastAskPrice;
+    if (lastBidPrice != null) result.lastBidPrice = lastBidPrice;
+    return result;
+  }
+
+  UnderlyingFuture._();
+
+  factory UnderlyingFuture.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UnderlyingFuture.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingFuture', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'multiple')
+    ..aOS(3, _omitFieldNames ? '' : 'lastAskPrice')
+    ..aOS(4, _omitFieldNames ? '' : 'lastBidPrice')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingFuture clone() => UnderlyingFuture()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingFuture copyWith(void Function(UnderlyingFuture) updates) => super.copyWith((message) => updates(message as UnderlyingFuture)) as UnderlyingFuture;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingFuture create() => UnderlyingFuture._();
+  @$core.override
+  UnderlyingFuture createEmptyInstance() => create();
+  static $pb.PbList<UnderlyingFuture> createRepeated() => $pb.PbList<UnderlyingFuture>();
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingFuture getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingFuture>(create);
+  static UnderlyingFuture? _defaultInstance;
+
+  /// 선물 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 승수
+  @$pb.TagNumber(2)
+  $core.String get multiple => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set multiple($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMultiple() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMultiple() => $_clearField(2);
+
+  /// 최근 매도호가
+  @$pb.TagNumber(3)
+  $core.String get lastAskPrice => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set lastAskPrice($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLastAskPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastAskPrice() => $_clearField(3);
+
+  /// 최근 매수호가
+  @$pb.TagNumber(4)
+  $core.String get lastBidPrice => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set lastBidPrice($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasLastBidPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLastBidPrice() => $_clearField(4);
+}
+
+/// 채권형 기초자산
+class UnderlyingFixedIncome extends $pb.GeneratedMessage {
+  factory UnderlyingFixedIncome({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  UnderlyingFixedIncome._();
+
+  factory UnderlyingFixedIncome.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UnderlyingFixedIncome.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingFixedIncome', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingFixedIncome clone() => UnderlyingFixedIncome()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingFixedIncome copyWith(void Function(UnderlyingFixedIncome) updates) => super.copyWith((message) => updates(message as UnderlyingFixedIncome)) as UnderlyingFixedIncome;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingFixedIncome create() => UnderlyingFixedIncome._();
+  @$core.override
+  UnderlyingFixedIncome createEmptyInstance() => create();
+  static $pb.PbList<UnderlyingFixedIncome> createRepeated() => $pb.PbList<UnderlyingFixedIncome>();
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingFixedIncome getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingFixedIncome>(create);
+  static UnderlyingFixedIncome? _defaultInstance;
+
+  /// 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
+/// 원자재형 기초자산
+class UnderlyingCommodity extends $pb.GeneratedMessage {
+  factory UnderlyingCommodity({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  UnderlyingCommodity._();
+
+  factory UnderlyingCommodity.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UnderlyingCommodity.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingCommodity', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingCommodity clone() => UnderlyingCommodity()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingCommodity copyWith(void Function(UnderlyingCommodity) updates) => super.copyWith((message) => updates(message as UnderlyingCommodity)) as UnderlyingCommodity;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingCommodity create() => UnderlyingCommodity._();
+  @$core.override
+  UnderlyingCommodity createEmptyInstance() => create();
+  static $pb.PbList<UnderlyingCommodity> createRepeated() => $pb.PbList<UnderlyingCommodity>();
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingCommodity getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingCommodity>(create);
+  static UnderlyingCommodity? _defaultInstance;
+
+  /// 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
+/// 통화형 기초자산
+class UnderlyingCurrency extends $pb.GeneratedMessage {
+  factory UnderlyingCurrency({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  UnderlyingCurrency._();
+
+  factory UnderlyingCurrency.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UnderlyingCurrency.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingCurrency', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingCurrency clone() => UnderlyingCurrency()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnderlyingCurrency copyWith(void Function(UnderlyingCurrency) updates) => super.copyWith((message) => updates(message as UnderlyingCurrency)) as UnderlyingCurrency;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingCurrency create() => UnderlyingCurrency._();
+  @$core.override
+  UnderlyingCurrency createEmptyInstance() => create();
+  static $pb.PbList<UnderlyingCurrency> createRepeated() => $pb.PbList<UnderlyingCurrency>();
+  @$core.pragma('dart2js:noInline')
+  static UnderlyingCurrency getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingCurrency>(create);
+  static UnderlyingCurrency? _defaultInstance;
+
+  /// 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
 }
 
 /// GetEtf

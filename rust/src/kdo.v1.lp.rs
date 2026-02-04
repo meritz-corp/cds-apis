@@ -34,7 +34,7 @@ pub struct EtfLp {
 }
 /// ETF 가격 산출 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EtfPricing {
     #[prost(oneof="etf_pricing::Method", tags="1, 2")]
     pub method: ::core::option::Option<etf_pricing::Method>,
@@ -42,14 +42,14 @@ pub struct EtfPricing {
 /// Nested message and enum types in `EtfPricing`.
 pub mod etf_pricing {
     #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Oneof)]
+#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Method {
         /// 분해 헷지 방식
         #[prost(message, tag="1")]
         DecomposeHedge(super::DecomposeHedgePricing),
         /// 선물 헷지 방식
         #[prost(message, tag="2")]
-        FutureHedge(super::FutureHedgePricing),
+        UnderlyingFutureHedge(super::UnderlyingFutureHedgePricing),
     }
 }
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
@@ -59,14 +59,8 @@ pub struct DecomposeHedgePricing {
 }
 /// 선물 헷지 가격 산출
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FutureHedgePricing {
-    /// 선물 종목 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 수량
-    #[prost(int64, tag="2")]
-    pub quantity: i64,
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct UnderlyingFutureHedgePricing {
 }
 // ========== ETF LP Status Messages ==========
 

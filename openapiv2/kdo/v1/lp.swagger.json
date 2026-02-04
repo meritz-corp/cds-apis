@@ -718,8 +718,8 @@
           "$ref": "#/definitions/lpDecomposeHedgePricing",
           "title": "분해 헷지 방식"
         },
-        "futureHedge": {
-          "$ref": "#/definitions/lpFutureHedgePricing",
+        "underlyingFutureHedge": {
+          "$ref": "#/definitions/lpUnderlyingFutureHedgePricing",
           "title": "선물 헷지 방식"
         }
       },
@@ -748,21 +748,6 @@
         }
       },
       "title": "ETF 체결 통계 (매수/매도 체결량 및 평균 단가)"
-    },
-    "lpFutureHedgePricing": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "선물 종목 심볼"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "수량"
-        }
-      },
-      "title": "선물 헷지 가격 산출"
     },
     "lpListEtfLpStatusesResponse": {
       "type": "object",
@@ -852,6 +837,10 @@
         }
       },
       "title": "ETF LP 중지 응답"
+    },
+    "lpUnderlyingFutureHedgePricing": {
+      "type": "object",
+      "title": "선물 헷지 가격 산출"
     },
     "protobufAny": {
       "type": "object",

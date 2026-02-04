@@ -290,6 +290,10 @@
         "shortSellable": {
           "type": "boolean"
         },
+        "underlyingAsset": {
+          "$ref": "#/definitions/etfUnderlyingAsset",
+          "title": "기초자산 정보"
+        },
         "cashCreditable": {
           "type": "boolean"
         },
@@ -397,6 +401,80 @@
         }
       },
       "title": "틱 변동에 따른 NAV 포인트"
+    },
+    "etfUnderlyingAsset": {
+      "type": "object",
+      "properties": {
+        "future": {
+          "$ref": "#/definitions/etfUnderlyingFuture",
+          "title": "선물형"
+        },
+        "fixedIncome": {
+          "$ref": "#/definitions/etfUnderlyingFixedIncome",
+          "title": "채권형"
+        },
+        "commodity": {
+          "$ref": "#/definitions/etfUnderlyingCommodity",
+          "title": "원자재형"
+        },
+        "currency": {
+          "$ref": "#/definitions/etfUnderlyingCurrency",
+          "title": "통화형"
+        }
+      },
+      "title": "기초자산"
+    },
+    "etfUnderlyingCommodity": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        }
+      },
+      "title": "원자재형 기초자산"
+    },
+    "etfUnderlyingCurrency": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        }
+      },
+      "title": "통화형 기초자산"
+    },
+    "etfUnderlyingFixedIncome": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        }
+      },
+      "title": "채권형 기초자산"
+    },
+    "etfUnderlyingFuture": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "선물 종목 심볼"
+        },
+        "multiple": {
+          "type": "string",
+          "title": "승수"
+        },
+        "lastAskPrice": {
+          "type": "string",
+          "title": "최근 매도호가"
+        },
+        "lastBidPrice": {
+          "type": "string",
+          "title": "최근 매수호가"
+        }
+      },
+      "title": "선물형 기초자산"
     },
     "protobufAny": {
       "type": "object",

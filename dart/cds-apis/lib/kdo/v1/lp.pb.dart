@@ -179,7 +179,7 @@ class EtfLp extends $pb.GeneratedMessage {
 
 enum EtfPricing_Method {
   decomposeHedge, 
-  futureHedge, 
+  underlyingFutureHedge, 
   notSet
 }
 
@@ -187,11 +187,11 @@ enum EtfPricing_Method {
 class EtfPricing extends $pb.GeneratedMessage {
   factory EtfPricing({
     DecomposeHedgePricing? decomposeHedge,
-    FutureHedgePricing? futureHedge,
+    UnderlyingFutureHedgePricing? underlyingFutureHedge,
   }) {
     final result = create();
     if (decomposeHedge != null) result.decomposeHedge = decomposeHedge;
-    if (futureHedge != null) result.futureHedge = futureHedge;
+    if (underlyingFutureHedge != null) result.underlyingFutureHedge = underlyingFutureHedge;
     return result;
   }
 
@@ -202,13 +202,13 @@ class EtfPricing extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, EtfPricing_Method> _EtfPricing_MethodByTag = {
     1 : EtfPricing_Method.decomposeHedge,
-    2 : EtfPricing_Method.futureHedge,
+    2 : EtfPricing_Method.underlyingFutureHedge,
     0 : EtfPricing_Method.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..oo(0, [1, 2])
     ..aOM<DecomposeHedgePricing>(1, _omitFieldNames ? '' : 'decomposeHedge', subBuilder: DecomposeHedgePricing.create)
-    ..aOM<FutureHedgePricing>(2, _omitFieldNames ? '' : 'futureHedge', subBuilder: FutureHedgePricing.create)
+    ..aOM<UnderlyingFutureHedgePricing>(2, _omitFieldNames ? '' : 'underlyingFutureHedge', subBuilder: UnderlyingFutureHedgePricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -246,15 +246,15 @@ class EtfPricing extends $pb.GeneratedMessage {
 
   /// 선물 헷지 방식
   @$pb.TagNumber(2)
-  FutureHedgePricing get futureHedge => $_getN(1);
+  UnderlyingFutureHedgePricing get underlyingFutureHedge => $_getN(1);
   @$pb.TagNumber(2)
-  set futureHedge(FutureHedgePricing value) => $_setField(2, value);
+  set underlyingFutureHedge(UnderlyingFutureHedgePricing value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasFutureHedge() => $_has(1);
+  $core.bool hasUnderlyingFutureHedge() => $_has(1);
   @$pb.TagNumber(2)
-  void clearFutureHedge() => $_clearField(2);
+  void clearUnderlyingFutureHedge() => $_clearField(2);
   @$pb.TagNumber(2)
-  FutureHedgePricing ensureFutureHedge() => $_ensure(1);
+  UnderlyingFutureHedgePricing ensureUnderlyingFutureHedge() => $_ensure(1);
 }
 
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
@@ -289,64 +289,34 @@ class DecomposeHedgePricing extends $pb.GeneratedMessage {
 }
 
 /// 선물 헷지 가격 산출
-class FutureHedgePricing extends $pb.GeneratedMessage {
-  factory FutureHedgePricing({
-    $core.String? symbol,
-    $fixnum.Int64? quantity,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (quantity != null) result.quantity = quantity;
-    return result;
-  }
+class UnderlyingFutureHedgePricing extends $pb.GeneratedMessage {
+  factory UnderlyingFutureHedgePricing() => create();
 
-  FutureHedgePricing._();
+  UnderlyingFutureHedgePricing._();
 
-  factory FutureHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory FutureHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory UnderlyingFutureHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UnderlyingFutureHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FutureHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'quantity')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingFutureHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FutureHedgePricing clone() => FutureHedgePricing()..mergeFromMessage(this);
+  UnderlyingFutureHedgePricing clone() => UnderlyingFutureHedgePricing()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FutureHedgePricing copyWith(void Function(FutureHedgePricing) updates) => super.copyWith((message) => updates(message as FutureHedgePricing)) as FutureHedgePricing;
+  UnderlyingFutureHedgePricing copyWith(void Function(UnderlyingFutureHedgePricing) updates) => super.copyWith((message) => updates(message as UnderlyingFutureHedgePricing)) as UnderlyingFutureHedgePricing;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static FutureHedgePricing create() => FutureHedgePricing._();
+  static UnderlyingFutureHedgePricing create() => UnderlyingFutureHedgePricing._();
   @$core.override
-  FutureHedgePricing createEmptyInstance() => create();
-  static $pb.PbList<FutureHedgePricing> createRepeated() => $pb.PbList<FutureHedgePricing>();
+  UnderlyingFutureHedgePricing createEmptyInstance() => create();
+  static $pb.PbList<UnderlyingFutureHedgePricing> createRepeated() => $pb.PbList<UnderlyingFutureHedgePricing>();
   @$core.pragma('dart2js:noInline')
-  static FutureHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FutureHedgePricing>(create);
-  static FutureHedgePricing? _defaultInstance;
-
-  /// 선물 종목 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// 수량
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get quantity => $_getI64(1);
-  @$pb.TagNumber(2)
-  set quantity($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasQuantity() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearQuantity() => $_clearField(2);
+  static UnderlyingFutureHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingFutureHedgePricing>(create);
+  static UnderlyingFutureHedgePricing? _defaultInstance;
 }
 
 /// ETF LP 상태

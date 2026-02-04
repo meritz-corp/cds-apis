@@ -92,6 +92,9 @@ message Etf {
 
     bool short_sellable = 17;
 
+    // 기초자산 정보
+    UnderlyingAsset underlying_asset = 18;
+
     bool cash_creditable = 23;
 
     int64 cash_creation_amount = 24;
@@ -168,6 +171,56 @@ enum ReplicationMethod {
     REPLICATION_METHOD_ACTIVE = 1;
     REPLICATION_METHOD_PHYSICAL = 2;
     REPLICATION_METHOD_SYNTHETIC = 3;
+}
+
+// 기초자산
+message UnderlyingAsset {
+  oneof asset {
+    // 선물형
+    UnderlyingFuture future = 1;
+
+    // 채권형
+    UnderlyingFixedIncome fixed_income = 2;
+
+    // 원자재형
+    UnderlyingCommodity commodity = 3;
+
+    // 통화형
+    UnderlyingCurrency currency = 4;
+  }
+}
+
+// 선물형 기초자산
+message UnderlyingFuture {
+  // 선물 종목 심볼
+  string symbol = 1;
+
+  // 승수
+  string multiple = 2;
+
+  // 최근 매도호가
+  string last_ask_price = 3;
+
+  // 최근 매수호가
+  string last_bid_price = 4;
+}
+
+// 채권형 기초자산
+message UnderlyingFixedIncome {
+  // 종목 심볼
+  string symbol = 1;
+}
+
+// 원자재형 기초자산
+message UnderlyingCommodity {
+  // 종목 심볼
+  string symbol = 1;
+}
+
+// 통화형 기초자산
+message UnderlyingCurrency {
+  // 종목 심볼
+  string symbol = 1;
 }
 
 // ========== Request/Response Messages ==========

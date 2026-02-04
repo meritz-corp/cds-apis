@@ -352,6 +352,9 @@ impl serde::Serialize for Etf {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.Etf", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -414,6 +417,9 @@ impl serde::Serialize for Etf {
         if true {
             struct_ser.serialize_field("short_sellable", &self.short_sellable)?;
         }
+        if let Some(v) = self.underlying_asset.as_ref() {
+            struct_ser.serialize_field("underlying_asset", v)?;
+        }
         if true {
             struct_ser.serialize_field("cash_creditable", &self.cash_creditable)?;
         }
@@ -459,6 +465,8 @@ impl<'de> serde::Deserialize<'de> for Etf {
             "tradable",
             "short_sellable",
             "shortSellable",
+            "underlying_asset",
+            "underlyingAsset",
             "cash_creditable",
             "cashCreditable",
             "cash_creation_amount",
@@ -484,6 +492,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             Leverage,
             Tradable,
             ShortSellable,
+            UnderlyingAsset,
             CashCreditable,
             CashCreationAmount,
             __SkipField__,
@@ -525,6 +534,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "leverage" => Ok(GeneratedField::Leverage),
                             "tradable" => Ok(GeneratedField::Tradable),
                             "shortSellable" | "short_sellable" => Ok(GeneratedField::ShortSellable),
+                            "underlyingAsset" | "underlying_asset" => Ok(GeneratedField::UnderlyingAsset),
                             "cashCreditable" | "cash_creditable" => Ok(GeneratedField::CashCreditable),
                             "cashCreationAmount" | "cash_creation_amount" => Ok(GeneratedField::CashCreationAmount),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -563,6 +573,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                 let mut leverage__ = None;
                 let mut tradable__ = None;
                 let mut short_sellable__ = None;
+                let mut underlying_asset__ = None;
                 let mut cash_creditable__ = None;
                 let mut cash_creation_amount__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -681,6 +692,12 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             }
                             short_sellable__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::UnderlyingAsset => {
+                            if underlying_asset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("underlyingAsset"));
+                            }
+                            underlying_asset__ = map_.next_value()?;
+                        }
                         GeneratedField::CashCreditable => {
                             if cash_creditable__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("cashCreditable"));
@@ -718,6 +735,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                     leverage: leverage__.unwrap_or_default(),
                     tradable: tradable__.unwrap_or_default(),
                     short_sellable: short_sellable__.unwrap_or_default(),
+                    underlying_asset: underlying_asset__,
                     cash_creditable: cash_creditable__.unwrap_or_default(),
                     cash_creation_amount: cash_creation_amount__.unwrap_or_default(),
                 })
@@ -2320,5 +2338,578 @@ impl<'de> serde::Deserialize<'de> for TickNavPoint {
             }
         }
         deserializer.deserialize_struct("kdo.v1.etf.TickNavPoint", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UnderlyingAsset {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.asset.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.UnderlyingAsset", len)?;
+        if let Some(v) = self.asset.as_ref() {
+            match v {
+                underlying_asset::Asset::Future(v) => {
+                    struct_ser.serialize_field("future", v)?;
+                }
+                underlying_asset::Asset::FixedIncome(v) => {
+                    struct_ser.serialize_field("fixed_income", v)?;
+                }
+                underlying_asset::Asset::Commodity(v) => {
+                    struct_ser.serialize_field("commodity", v)?;
+                }
+                underlying_asset::Asset::Currency(v) => {
+                    struct_ser.serialize_field("currency", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UnderlyingAsset {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "future",
+            "fixed_income",
+            "fixedIncome",
+            "commodity",
+            "currency",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Future,
+            FixedIncome,
+            Commodity,
+            Currency,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "future" => Ok(GeneratedField::Future),
+                            "fixedIncome" | "fixed_income" => Ok(GeneratedField::FixedIncome),
+                            "commodity" => Ok(GeneratedField::Commodity),
+                            "currency" => Ok(GeneratedField::Currency),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UnderlyingAsset;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.UnderlyingAsset")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnderlyingAsset, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut asset__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Future => {
+                            if asset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("future"));
+                            }
+                            asset__ = map_.next_value::<::std::option::Option<_>>()?.map(underlying_asset::Asset::Future)
+;
+                        }
+                        GeneratedField::FixedIncome => {
+                            if asset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fixedIncome"));
+                            }
+                            asset__ = map_.next_value::<::std::option::Option<_>>()?.map(underlying_asset::Asset::FixedIncome)
+;
+                        }
+                        GeneratedField::Commodity => {
+                            if asset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("commodity"));
+                            }
+                            asset__ = map_.next_value::<::std::option::Option<_>>()?.map(underlying_asset::Asset::Commodity)
+;
+                        }
+                        GeneratedField::Currency => {
+                            if asset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currency"));
+                            }
+                            asset__ = map_.next_value::<::std::option::Option<_>>()?.map(underlying_asset::Asset::Currency)
+;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UnderlyingAsset {
+                    asset: asset__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.UnderlyingAsset", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UnderlyingCommodity {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.UnderlyingCommodity", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UnderlyingCommodity {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UnderlyingCommodity;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.UnderlyingCommodity")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnderlyingCommodity, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UnderlyingCommodity {
+                    symbol: symbol__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.UnderlyingCommodity", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UnderlyingCurrency {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.UnderlyingCurrency", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UnderlyingCurrency {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UnderlyingCurrency;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.UnderlyingCurrency")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnderlyingCurrency, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UnderlyingCurrency {
+                    symbol: symbol__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.UnderlyingCurrency", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UnderlyingFixedIncome {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.UnderlyingFixedIncome", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UnderlyingFixedIncome {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UnderlyingFixedIncome;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.UnderlyingFixedIncome")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnderlyingFixedIncome, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UnderlyingFixedIncome {
+                    symbol: symbol__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.UnderlyingFixedIncome", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UnderlyingFuture {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.UnderlyingFuture", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("multiple", &self.multiple)?;
+        }
+        if true {
+            struct_ser.serialize_field("last_ask_price", &self.last_ask_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("last_bid_price", &self.last_bid_price)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UnderlyingFuture {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "multiple",
+            "last_ask_price",
+            "lastAskPrice",
+            "last_bid_price",
+            "lastBidPrice",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            Multiple,
+            LastAskPrice,
+            LastBidPrice,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "multiple" => Ok(GeneratedField::Multiple),
+                            "lastAskPrice" | "last_ask_price" => Ok(GeneratedField::LastAskPrice),
+                            "lastBidPrice" | "last_bid_price" => Ok(GeneratedField::LastBidPrice),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UnderlyingFuture;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.UnderlyingFuture")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnderlyingFuture, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut multiple__ = None;
+                let mut last_ask_price__ = None;
+                let mut last_bid_price__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Multiple => {
+                            if multiple__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("multiple"));
+                            }
+                            multiple__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LastAskPrice => {
+                            if last_ask_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastAskPrice"));
+                            }
+                            last_ask_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LastBidPrice => {
+                            if last_bid_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastBidPrice"));
+                            }
+                            last_bid_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UnderlyingFuture {
+                    symbol: symbol__.unwrap_or_default(),
+                    multiple: multiple__.unwrap_or_default(),
+                    last_ask_price: last_ask_price__.unwrap_or_default(),
+                    last_bid_price: last_bid_price__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.UnderlyingFuture", FIELDS, GeneratedVisitor)
     }
 }

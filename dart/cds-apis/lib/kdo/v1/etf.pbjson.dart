@@ -52,6 +52,7 @@ const Etf$json = {
     {'1': 'leverage', '3': 15, '4': 1, '5': 2, '10': 'leverage'},
     {'1': 'tradable', '3': 16, '4': 1, '5': 8, '10': 'tradable'},
     {'1': 'short_sellable', '3': 17, '4': 1, '5': 8, '10': 'shortSellable'},
+    {'1': 'underlying_asset', '3': 18, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingAsset', '10': 'underlyingAsset'},
     {'1': 'cash_creditable', '3': 23, '4': 1, '5': 8, '10': 'cashCreditable'},
     {'1': 'cash_creation_amount', '3': 24, '4': 1, '5': 3, '10': 'cashCreationAmount'},
   ],
@@ -80,11 +81,12 @@ final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'wgASgOMh0ua2RvLnYxLmV0Zi5SZXBsaWNhdGlvbk1ldGhvZFIRcmVwbGljYXRpb25NZXRob2QS'
     'GwoJdGlja19zaXplGA0gASgDUgh0aWNrU2l6ZRInCg9saXN0ZWRfcXVhbnRpdHkYDiABKANSDm'
     'xpc3RlZFF1YW50aXR5EhoKCGxldmVyYWdlGA8gASgCUghsZXZlcmFnZRIaCgh0cmFkYWJsZRgQ'
-    'IAEoCFIIdHJhZGFibGUSJQoOc2hvcnRfc2VsbGFibGUYESABKAhSDXNob3J0U2VsbGFibGUSJw'
-    'oPY2FzaF9jcmVkaXRhYmxlGBcgASgIUg5jYXNoQ3JlZGl0YWJsZRIwChRjYXNoX2NyZWF0aW9u'
-    'X2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50Gl4KEUNvbnN0aXR1ZW50c0VudHJ5Eh'
-    'AKA2tleRgBIAEoCVIDa2V5EjMKBXZhbHVlGAIgASgLMh0ua2RvLnYxLmV0Zi5FdGZQZGZDb25z'
-    'dGl0dWVudFIFdmFsdWU6AjgB');
+    'IAEoCFIIdHJhZGFibGUSJQoOc2hvcnRfc2VsbGFibGUYESABKAhSDXNob3J0U2VsbGFibGUSRg'
+    'oQdW5kZXJseWluZ19hc3NldBgSIAEoCzIbLmtkby52MS5ldGYuVW5kZXJseWluZ0Fzc2V0Ug91'
+    'bmRlcmx5aW5nQXNzZXQSJwoPY2FzaF9jcmVkaXRhYmxlGBcgASgIUg5jYXNoQ3JlZGl0YWJsZR'
+    'IwChRjYXNoX2NyZWF0aW9uX2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50Gl4KEUNv'
+    'bnN0aXR1ZW50c0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EjMKBXZhbHVlGAIgASgLMh0ua2RvLn'
+    'YxLmV0Zi5FdGZQZGZDb25zdGl0dWVudFIFdmFsdWU6AjgB');
 
 @$core.Deprecated('Use etfConstituentDescriptor instead')
 const EtfConstituent$json = {
@@ -183,6 +185,82 @@ final $typed_data.Uint8List etfPdfConstituentDescriptor = $convert.base64Decode(
     'ChFFdGZQZGZDb25zdGl0dWVudBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBISCgRuYW1lGAIgAS'
     'gJUgRuYW1lEj0KDHByb2R1Y3RfdHlwZRgDIAEoDjIaLmtkby52MS5jb21tb24uUHJvZHVjdFR5'
     'cGVSC3Byb2R1Y3RUeXBlEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eQ==');
+
+@$core.Deprecated('Use underlyingAssetDescriptor instead')
+const UnderlyingAsset$json = {
+  '1': 'UnderlyingAsset',
+  '2': [
+    {'1': 'future', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingFuture', '9': 0, '10': 'future'},
+    {'1': 'fixed_income', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingFixedIncome', '9': 0, '10': 'fixedIncome'},
+    {'1': 'commodity', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingCommodity', '9': 0, '10': 'commodity'},
+    {'1': 'currency', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingCurrency', '9': 0, '10': 'currency'},
+  ],
+  '8': [
+    {'1': 'asset'},
+  ],
+};
+
+/// Descriptor for `UnderlyingAsset`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List underlyingAssetDescriptor = $convert.base64Decode(
+    'Cg9VbmRlcmx5aW5nQXNzZXQSNgoGZnV0dXJlGAEgASgLMhwua2RvLnYxLmV0Zi5VbmRlcmx5aW'
+    '5nRnV0dXJlSABSBmZ1dHVyZRJGCgxmaXhlZF9pbmNvbWUYAiABKAsyIS5rZG8udjEuZXRmLlVu'
+    'ZGVybHlpbmdGaXhlZEluY29tZUgAUgtmaXhlZEluY29tZRI/Cgljb21tb2RpdHkYAyABKAsyHy'
+    '5rZG8udjEuZXRmLlVuZGVybHlpbmdDb21tb2RpdHlIAFIJY29tbW9kaXR5EjwKCGN1cnJlbmN5'
+    'GAQgASgLMh4ua2RvLnYxLmV0Zi5VbmRlcmx5aW5nQ3VycmVuY3lIAFIIY3VycmVuY3lCBwoFYX'
+    'NzZXQ=');
+
+@$core.Deprecated('Use underlyingFutureDescriptor instead')
+const UnderlyingFuture$json = {
+  '1': 'UnderlyingFuture',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'multiple', '3': 2, '4': 1, '5': 9, '10': 'multiple'},
+    {'1': 'last_ask_price', '3': 3, '4': 1, '5': 9, '10': 'lastAskPrice'},
+    {'1': 'last_bid_price', '3': 4, '4': 1, '5': 9, '10': 'lastBidPrice'},
+  ],
+};
+
+/// Descriptor for `UnderlyingFuture`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List underlyingFutureDescriptor = $convert.base64Decode(
+    'ChBVbmRlcmx5aW5nRnV0dXJlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhoKCG11bHRpcGxlGA'
+    'IgASgJUghtdWx0aXBsZRIkCg5sYXN0X2Fza19wcmljZRgDIAEoCVIMbGFzdEFza1ByaWNlEiQK'
+    'Dmxhc3RfYmlkX3ByaWNlGAQgASgJUgxsYXN0QmlkUHJpY2U=');
+
+@$core.Deprecated('Use underlyingFixedIncomeDescriptor instead')
+const UnderlyingFixedIncome$json = {
+  '1': 'UnderlyingFixedIncome',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `UnderlyingFixedIncome`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List underlyingFixedIncomeDescriptor = $convert.base64Decode(
+    'ChVVbmRlcmx5aW5nRml4ZWRJbmNvbWUSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
+
+@$core.Deprecated('Use underlyingCommodityDescriptor instead')
+const UnderlyingCommodity$json = {
+  '1': 'UnderlyingCommodity',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `UnderlyingCommodity`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List underlyingCommodityDescriptor = $convert.base64Decode(
+    'ChNVbmRlcmx5aW5nQ29tbW9kaXR5EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9s');
+
+@$core.Deprecated('Use underlyingCurrencyDescriptor instead')
+const UnderlyingCurrency$json = {
+  '1': 'UnderlyingCurrency',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `UnderlyingCurrency`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List underlyingCurrencyDescriptor = $convert.base64Decode(
+    'ChJVbmRlcmx5aW5nQ3VycmVuY3kSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
 
 @$core.Deprecated('Use getEtfRequestDescriptor instead')
 const GetEtfRequest$json = {
