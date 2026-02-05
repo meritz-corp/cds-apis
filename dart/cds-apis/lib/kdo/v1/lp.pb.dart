@@ -1171,12 +1171,10 @@ class TimeFrameStatus extends $pb.GeneratedMessage {
 /// LP 가격 정보
 class LpPricing extends $pb.GeneratedMessage {
   factory LpPricing({
-    $core.String? etfPrice,
     $core.String? etfAskNav,
     $core.String? etfBidNav,
   }) {
     final result = create();
-    if (etfPrice != null) result.etfPrice = etfPrice;
     if (etfAskNav != null) result.etfAskNav = etfAskNav;
     if (etfBidNav != null) result.etfBidNav = etfBidNav;
     return result;
@@ -1188,7 +1186,6 @@ class LpPricing extends $pb.GeneratedMessage {
   factory LpPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LpPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'etfPrice')
     ..aOS(3, _omitFieldNames ? '' : 'etfAskNav')
     ..aOS(4, _omitFieldNames ? '' : 'etfBidNav')
     ..hasRequiredFields = false
@@ -1211,32 +1208,22 @@ class LpPricing extends $pb.GeneratedMessage {
   static LpPricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LpPricing>(create);
   static LpPricing? _defaultInstance;
 
-  /// ETF 가격 (원 단위)
-  @$pb.TagNumber(1)
-  $core.String get etfPrice => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set etfPrice($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasEtfPrice() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearEtfPrice() => $_clearField(1);
-
   /// ETF NAV (원 단위)
   @$pb.TagNumber(3)
-  $core.String get etfAskNav => $_getSZ(1);
+  $core.String get etfAskNav => $_getSZ(0);
   @$pb.TagNumber(3)
-  set etfAskNav($core.String value) => $_setString(1, value);
+  set etfAskNav($core.String value) => $_setString(0, value);
   @$pb.TagNumber(3)
-  $core.bool hasEtfAskNav() => $_has(1);
+  $core.bool hasEtfAskNav() => $_has(0);
   @$pb.TagNumber(3)
   void clearEtfAskNav() => $_clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get etfBidNav => $_getSZ(2);
+  $core.String get etfBidNav => $_getSZ(1);
   @$pb.TagNumber(4)
-  set etfBidNav($core.String value) => $_setString(2, value);
+  set etfBidNav($core.String value) => $_setString(1, value);
   @$pb.TagNumber(4)
-  $core.bool hasEtfBidNav() => $_has(2);
+  $core.bool hasEtfBidNav() => $_has(1);
   @$pb.TagNumber(4)
   void clearEtfBidNav() => $_clearField(4);
 }

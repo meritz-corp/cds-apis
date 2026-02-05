@@ -249,12 +249,6 @@ pub struct TimeFrameStatus {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LpPricing {
-    /// ETF 가격 (원 단위)
-    #[prost(string, tag="1")]
-    pub etf_price: ::prost::alloc::string::String,
-    // 구성 종목 가격 맵 (종목 코드 -> 가격, 원 단위)
-    //   map<string, string> constituents_price = 2;
-
     /// ETF NAV (원 단위)
     #[prost(string, tag="3")]
     pub etf_ask_nav: ::prost::alloc::string::String,
