@@ -58,6 +58,9 @@ pub struct Fund {
     /// 공매도ID
     #[prost(string, tag="20")]
     pub short_selling_id: ::prost::alloc::string::String,
+    /// 펀드별 종목별 한도정보
+    #[prost(map="string, message", tag="21")]
+    pub fund_limits: ::std::collections::HashMap<::prost::alloc::string::String, FundLimit>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

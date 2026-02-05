@@ -77,6 +77,8 @@ message Fund {
   bool add_up_unique_trading_unit = 19;
   // 공매도ID
   string short_selling_id = 20;
+  // 펀드별 종목별 한도정보
+  map<string, FundLimit> fund_limits = 21;
 }
 
 message FundLimit {

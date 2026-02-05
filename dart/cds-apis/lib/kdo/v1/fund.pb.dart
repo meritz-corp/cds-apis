@@ -42,6 +42,7 @@ class Fund extends $pb.GeneratedMessage {
     $fixnum.Int64? uniqueTradingUnitSerialNumber,
     $core.bool? addUpUniqueTradingUnit,
     $core.String? shortSellingId,
+    $core.Iterable<$core.MapEntry<$core.String, FundLimit>>? fundLimits,
   }) {
     final result = create();
     if (code != null) result.code = code;
@@ -62,6 +63,7 @@ class Fund extends $pb.GeneratedMessage {
     if (uniqueTradingUnitSerialNumber != null) result.uniqueTradingUnitSerialNumber = uniqueTradingUnitSerialNumber;
     if (addUpUniqueTradingUnit != null) result.addUpUniqueTradingUnit = addUpUniqueTradingUnit;
     if (shortSellingId != null) result.shortSellingId = shortSellingId;
+    if (fundLimits != null) result.fundLimits.addEntries(fundLimits);
     return result;
   }
 
@@ -89,6 +91,7 @@ class Fund extends $pb.GeneratedMessage {
     ..aInt64(18, _omitFieldNames ? '' : 'uniqueTradingUnitSerialNumber')
     ..aOB(19, _omitFieldNames ? '' : 'addUpUniqueTradingUnit')
     ..aOS(20, _omitFieldNames ? '' : 'shortSellingId')
+    ..m<$core.String, FundLimit>(21, _omitFieldNames ? '' : 'fundLimits', entryClassName: 'Fund.FundLimitsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: FundLimit.create, valueDefaultOrMaker: FundLimit.getDefault, packageName: const $pb.PackageName('kdo.v1.fund'))
     ..hasRequiredFields = false
   ;
 
@@ -288,6 +291,10 @@ class Fund extends $pb.GeneratedMessage {
   $core.bool hasShortSellingId() => $_has(17);
   @$pb.TagNumber(20)
   void clearShortSellingId() => $_clearField(20);
+
+  /// 펀드별 종목별 한도정보
+  @$pb.TagNumber(21)
+  $pb.PbMap<$core.String, FundLimit> get fundLimits => $_getMap(18);
 }
 
 class FundLimit extends $pb.GeneratedMessage {

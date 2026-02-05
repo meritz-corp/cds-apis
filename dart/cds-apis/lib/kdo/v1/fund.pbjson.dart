@@ -51,7 +51,19 @@ const Fund$json = {
     {'1': 'unique_trading_unit_serial_number', '3': 18, '4': 1, '5': 3, '10': 'uniqueTradingUnitSerialNumber'},
     {'1': 'add_up_unique_trading_unit', '3': 19, '4': 1, '5': 8, '10': 'addUpUniqueTradingUnit'},
     {'1': 'short_selling_id', '3': 20, '4': 1, '5': 9, '10': 'shortSellingId'},
+    {'1': 'fund_limits', '3': 21, '4': 3, '5': 11, '6': '.kdo.v1.fund.Fund.FundLimitsEntry', '10': 'fundLimits'},
   ],
+  '3': [Fund_FundLimitsEntry$json],
+};
+
+@$core.Deprecated('Use fundDescriptor instead')
+const Fund_FundLimitsEntry$json = {
+  '1': 'FundLimitsEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundLimit', '10': 'value'},
+  ],
+  '7': {'7': true},
 };
 
 /// Descriptor for `Fund`. Decode as a `google.protobuf.DescriptorProto`.
@@ -69,7 +81,10 @@ final $typed_data.Uint8List fundDescriptor = $convert.base64Decode(
     'GXVuaXF1ZVRyYWRpbmdVbml0UGFydENvZGUSSAohdW5pcXVlX3RyYWRpbmdfdW5pdF9zZXJpYW'
     'xfbnVtYmVyGBIgASgDUh11bmlxdWVUcmFkaW5nVW5pdFNlcmlhbE51bWJlchI6ChphZGRfdXBf'
     'dW5pcXVlX3RyYWRpbmdfdW5pdBgTIAEoCFIWYWRkVXBVbmlxdWVUcmFkaW5nVW5pdBIoChBzaG'
-    '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZA==');
+    '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZBJCCgtmdW5kX2xpbWl0cxgVIAMo'
+    'CzIhLmtkby52MS5mdW5kLkZ1bmQuRnVuZExpbWl0c0VudHJ5UgpmdW5kTGltaXRzGlUKD0Z1bm'
+    'RMaW1pdHNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIsCgV2YWx1ZRgCIAEoCzIWLmtkby52MS5m'
+    'dW5kLkZ1bmRMaW1pdFIFdmFsdWU6AjgB');
 
 @$core.Deprecated('Use fundLimitDescriptor instead')
 const FundLimit$json = {

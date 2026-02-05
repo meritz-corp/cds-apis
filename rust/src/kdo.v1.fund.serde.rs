@@ -61,6 +61,9 @@ impl serde::Serialize for Fund {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.Fund", len)?;
         if true {
             struct_ser.serialize_field("code", &self.code)?;
@@ -118,6 +121,9 @@ impl serde::Serialize for Fund {
         if true {
             struct_ser.serialize_field("short_selling_id", &self.short_selling_id)?;
         }
+        if true {
+            struct_ser.serialize_field("fund_limits", &self.fund_limits)?;
+        }
         struct_ser.end()
     }
 }
@@ -162,6 +168,8 @@ impl<'de> serde::Deserialize<'de> for Fund {
             "addUpUniqueTradingUnit",
             "short_selling_id",
             "shortSellingId",
+            "fund_limits",
+            "fundLimits",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -184,6 +192,7 @@ impl<'de> serde::Deserialize<'de> for Fund {
             UniqueTradingUnitSerialNumber,
             AddUpUniqueTradingUnit,
             ShortSellingId,
+            FundLimits,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -224,6 +233,7 @@ impl<'de> serde::Deserialize<'de> for Fund {
                             "uniqueTradingUnitSerialNumber" | "unique_trading_unit_serial_number" => Ok(GeneratedField::UniqueTradingUnitSerialNumber),
                             "addUpUniqueTradingUnit" | "add_up_unique_trading_unit" => Ok(GeneratedField::AddUpUniqueTradingUnit),
                             "shortSellingId" | "short_selling_id" => Ok(GeneratedField::ShortSellingId),
+                            "fundLimits" | "fund_limits" => Ok(GeneratedField::FundLimits),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -261,6 +271,7 @@ impl<'de> serde::Deserialize<'de> for Fund {
                 let mut unique_trading_unit_serial_number__ = None;
                 let mut add_up_unique_trading_unit__ = None;
                 let mut short_selling_id__ = None;
+                let mut fund_limits__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Code => {
@@ -373,6 +384,14 @@ impl<'de> serde::Deserialize<'de> for Fund {
                             }
                             short_selling_id__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::FundLimits => {
+                            if fund_limits__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundLimits"));
+                            }
+                            fund_limits__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -397,6 +416,7 @@ impl<'de> serde::Deserialize<'de> for Fund {
                     unique_trading_unit_serial_number: unique_trading_unit_serial_number__.unwrap_or_default(),
                     add_up_unique_trading_unit: add_up_unique_trading_unit__.unwrap_or_default(),
                     short_selling_id: short_selling_id__.unwrap_or_default(),
+                    fund_limits: fund_limits__.unwrap_or_default(),
                 })
             }
         }
