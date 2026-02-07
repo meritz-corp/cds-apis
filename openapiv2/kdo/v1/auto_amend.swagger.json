@@ -70,7 +70,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1auto_amendListOrdersResponse"
+              "$ref": "#/definitions/auto_amendListAutoAmendOrdersResponse"
             }
           },
           "default": {
@@ -112,37 +112,6 @@
         "tags": [
           "AutoAmendService"
         ]
-      },
-      "post": {
-        "summary": "주문 자동정정 등록",
-        "operationId": "AutoAmendService_RegisterOrder",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/auto_amendAutoAmendOrder"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/auto_amendRegisterOrderRequest"
-            }
-          }
-        ],
-        "tags": [
-          "AutoAmendService"
-        ]
       }
     },
     "/v1/auto-amend/orders/{orderId}": {
@@ -154,38 +123,6 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/auto_amendAutoAmendOrder"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderId",
-            "description": "주문 ID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uint64"
-          }
-        ],
-        "tags": [
-          "AutoAmendService"
-        ]
-      },
-      "delete": {
-        "summary": "주문 자동정정 해제",
-        "operationId": "AutoAmendService_UnregisterOrder",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "type": "object",
-              "properties": {}
             }
           },
           "default": {
@@ -440,6 +377,18 @@
       },
       "title": "자동정정 등록 주문"
     },
+    "auto_amendListAutoAmendOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/auto_amendAutoAmendOrder"
+          },
+          "title": "등록된 주문 목록"
+        }
+      }
+    },
     "auto_amendOrderRegisteredEvent": {
       "type": "object",
       "properties": {
@@ -473,44 +422,6 @@
         }
       },
       "title": "주문 해제 이벤트"
-    },
-    "auto_amendRegisterOrderRequest": {
-      "type": "object",
-      "properties": {
-        "orderId": {
-          "type": "string",
-          "format": "uint64",
-          "title": "주문 ID"
-        },
-        "symbol": {
-          "type": "string",
-          "title": "종목 심볼"
-        },
-        "side": {
-          "$ref": "#/definitions/commonOrderSide",
-          "title": "주문 방향"
-        },
-        "price": {
-          "type": "string",
-          "title": "주문 가격"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "주문 수량"
-        },
-        "config": {
-          "$ref": "#/definitions/auto_amendAmendConfig",
-          "title": "자동정정 설정 (optional, 기본값 사용 가능)"
-        }
-      },
-      "required": [
-        "orderId",
-        "symbol",
-        "side",
-        "price",
-        "quantity"
-      ]
     },
     "auto_amendRegularSessionConfig": {
       "type": "object",
@@ -590,18 +501,6 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
-        }
-      }
-    },
-    "v1auto_amendListOrdersResponse": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/auto_amendAutoAmendOrder"
-          },
-          "title": "등록된 주문 목록"
         }
       }
     }

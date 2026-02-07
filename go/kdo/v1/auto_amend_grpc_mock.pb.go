@@ -10,7 +10,6 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // MockAutoAmendService_StreamEventsClient is a mock of AutoAmendService_StreamEventsClient interface.
@@ -279,7 +278,7 @@ func (m *MockAutoAmendServiceClient) EXPECT() *MockAutoAmendServiceClientMockRec
 }
 
 // GetOrder mocks base method.
-func (m *MockAutoAmendServiceClient) GetOrder(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error) {
+func (m *MockAutoAmendServiceClient) GetOrder(ctx context.Context, in *GetAutoAmendOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
@@ -299,14 +298,14 @@ func (mr *MockAutoAmendServiceClientMockRecorder) GetOrder(ctx, in interface{}, 
 }
 
 // ListOrders mocks base method.
-func (m *MockAutoAmendServiceClient) ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error) {
+func (m *MockAutoAmendServiceClient) ListOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListOrders", varargs...)
-	ret0, _ := ret[0].(*ListOrdersResponse)
+	ret0, _ := ret[0].(*ListAutoAmendOrdersResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -316,26 +315,6 @@ func (mr *MockAutoAmendServiceClientMockRecorder) ListOrders(ctx, in interface{}
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListOrders", reflect.TypeOf((*MockAutoAmendServiceClient)(nil).ListOrders), varargs...)
-}
-
-// RegisterOrder mocks base method.
-func (m *MockAutoAmendServiceClient) RegisterOrder(ctx context.Context, in *RegisterOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "RegisterOrder", varargs...)
-	ret0, _ := ret[0].(*AutoAmendOrder)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// RegisterOrder indicates an expected call of RegisterOrder.
-func (mr *MockAutoAmendServiceClientMockRecorder) RegisterOrder(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterOrder", reflect.TypeOf((*MockAutoAmendServiceClient)(nil).RegisterOrder), varargs...)
 }
 
 // StreamEvents mocks base method.
@@ -356,26 +335,6 @@ func (mr *MockAutoAmendServiceClientMockRecorder) StreamEvents(ctx, in interface
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEvents", reflect.TypeOf((*MockAutoAmendServiceClient)(nil).StreamEvents), varargs...)
-}
-
-// UnregisterOrder mocks base method.
-func (m *MockAutoAmendServiceClient) UnregisterOrder(ctx context.Context, in *UnregisterOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "UnregisterOrder", varargs...)
-	ret0, _ := ret[0].(*emptypb.Empty)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UnregisterOrder indicates an expected call of UnregisterOrder.
-func (mr *MockAutoAmendServiceClientMockRecorder) UnregisterOrder(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UnregisterOrder", reflect.TypeOf((*MockAutoAmendServiceClient)(nil).UnregisterOrder), varargs...)
 }
 
 // UpdateConfig mocks base method.
@@ -422,7 +381,7 @@ func (m *MockAutoAmendServiceServer) EXPECT() *MockAutoAmendServiceServerMockRec
 }
 
 // GetOrder mocks base method.
-func (m *MockAutoAmendServiceServer) GetOrder(ctx context.Context, in *GetOrderRequest) (*AutoAmendOrder, error) {
+func (m *MockAutoAmendServiceServer) GetOrder(ctx context.Context, in *GetAutoAmendOrderRequest) (*AutoAmendOrder, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrder", ctx, in)
 	ret0, _ := ret[0].(*AutoAmendOrder)
@@ -437,10 +396,10 @@ func (mr *MockAutoAmendServiceServerMockRecorder) GetOrder(ctx, in interface{}) 
 }
 
 // ListOrders mocks base method.
-func (m *MockAutoAmendServiceServer) ListOrders(ctx context.Context, in *ListOrdersRequest) (*ListOrdersResponse, error) {
+func (m *MockAutoAmendServiceServer) ListOrders(ctx context.Context, in *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListOrders", ctx, in)
-	ret0, _ := ret[0].(*ListOrdersResponse)
+	ret0, _ := ret[0].(*ListAutoAmendOrdersResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -449,21 +408,6 @@ func (m *MockAutoAmendServiceServer) ListOrders(ctx context.Context, in *ListOrd
 func (mr *MockAutoAmendServiceServerMockRecorder) ListOrders(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListOrders", reflect.TypeOf((*MockAutoAmendServiceServer)(nil).ListOrders), ctx, in)
-}
-
-// RegisterOrder mocks base method.
-func (m *MockAutoAmendServiceServer) RegisterOrder(ctx context.Context, in *RegisterOrderRequest) (*AutoAmendOrder, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RegisterOrder", ctx, in)
-	ret0, _ := ret[0].(*AutoAmendOrder)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// RegisterOrder indicates an expected call of RegisterOrder.
-func (mr *MockAutoAmendServiceServerMockRecorder) RegisterOrder(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterOrder", reflect.TypeOf((*MockAutoAmendServiceServer)(nil).RegisterOrder), ctx, in)
 }
 
 // StreamEvents mocks base method.
@@ -478,21 +422,6 @@ func (m *MockAutoAmendServiceServer) StreamEvents(blob *StreamEventsRequest, ser
 func (mr *MockAutoAmendServiceServerMockRecorder) StreamEvents(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEvents", reflect.TypeOf((*MockAutoAmendServiceServer)(nil).StreamEvents), blob, server)
-}
-
-// UnregisterOrder mocks base method.
-func (m *MockAutoAmendServiceServer) UnregisterOrder(ctx context.Context, in *UnregisterOrderRequest) (*emptypb.Empty, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UnregisterOrder", ctx, in)
-	ret0, _ := ret[0].(*emptypb.Empty)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UnregisterOrder indicates an expected call of UnregisterOrder.
-func (mr *MockAutoAmendServiceServerMockRecorder) UnregisterOrder(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UnregisterOrder", reflect.TypeOf((*MockAutoAmendServiceServer)(nil).UnregisterOrder), ctx, in)
 }
 
 // UpdateConfig mocks base method.

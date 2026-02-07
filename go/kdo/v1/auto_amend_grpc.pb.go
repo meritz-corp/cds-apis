@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -23,14 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AutoAmendServiceClient interface {
-	// 주문 자동정정 등록
-	RegisterOrder(ctx context.Context, in *RegisterOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
-	// 주문 자동정정 해제
-	UnregisterOrder(ctx context.Context, in *UnregisterOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// 등록된 주문 조회
-	GetOrder(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
+	GetOrder(ctx context.Context, in *GetAutoAmendOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
 	// 등록된 주문 목록 조회
-	ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error)
+	ListOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error)
 	// 설정 업데이트
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
 	// 이벤트 스트리밍
@@ -45,25 +40,7 @@ func NewAutoAmendServiceClient(cc grpc.ClientConnInterface) AutoAmendServiceClie
 	return &autoAmendServiceClient{cc}
 }
 
-func (c *autoAmendServiceClient) RegisterOrder(ctx context.Context, in *RegisterOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error) {
-	out := new(AutoAmendOrder)
-	err := c.cc.Invoke(ctx, "/kdo.v1.auto_amend.AutoAmendService/RegisterOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *autoAmendServiceClient) UnregisterOrder(ctx context.Context, in *UnregisterOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/kdo.v1.auto_amend.AutoAmendService/UnregisterOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *autoAmendServiceClient) GetOrder(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error) {
+func (c *autoAmendServiceClient) GetOrder(ctx context.Context, in *GetAutoAmendOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error) {
 	out := new(AutoAmendOrder)
 	err := c.cc.Invoke(ctx, "/kdo.v1.auto_amend.AutoAmendService/GetOrder", in, out, opts...)
 	if err != nil {
@@ -72,8 +49,8 @@ func (c *autoAmendServiceClient) GetOrder(ctx context.Context, in *GetOrderReque
 	return out, nil
 }
 
-func (c *autoAmendServiceClient) ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error) {
-	out := new(ListOrdersResponse)
+func (c *autoAmendServiceClient) ListOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error) {
+	out := new(ListAutoAmendOrdersResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.auto_amend.AutoAmendService/ListOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -126,14 +103,10 @@ func (x *autoAmendServiceStreamEventsClient) Recv() (*AutoAmendEvent, error) {
 // All implementations must embed UnimplementedAutoAmendServiceServer
 // for forward compatibility
 type AutoAmendServiceServer interface {
-	// 주문 자동정정 등록
-	RegisterOrder(context.Context, *RegisterOrderRequest) (*AutoAmendOrder, error)
-	// 주문 자동정정 해제
-	UnregisterOrder(context.Context, *UnregisterOrderRequest) (*emptypb.Empty, error)
 	// 등록된 주문 조회
-	GetOrder(context.Context, *GetOrderRequest) (*AutoAmendOrder, error)
+	GetOrder(context.Context, *GetAutoAmendOrderRequest) (*AutoAmendOrder, error)
 	// 등록된 주문 목록 조회
-	ListOrders(context.Context, *ListOrdersRequest) (*ListOrdersResponse, error)
+	ListOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error)
 	// 설정 업데이트
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*AutoAmendOrder, error)
 	// 이벤트 스트리밍
@@ -145,16 +118,10 @@ type AutoAmendServiceServer interface {
 type UnimplementedAutoAmendServiceServer struct {
 }
 
-func (UnimplementedAutoAmendServiceServer) RegisterOrder(context.Context, *RegisterOrderRequest) (*AutoAmendOrder, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrder not implemented")
-}
-func (UnimplementedAutoAmendServiceServer) UnregisterOrder(context.Context, *UnregisterOrderRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnregisterOrder not implemented")
-}
-func (UnimplementedAutoAmendServiceServer) GetOrder(context.Context, *GetOrderRequest) (*AutoAmendOrder, error) {
+func (UnimplementedAutoAmendServiceServer) GetOrder(context.Context, *GetAutoAmendOrderRequest) (*AutoAmendOrder, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrder not implemented")
 }
-func (UnimplementedAutoAmendServiceServer) ListOrders(context.Context, *ListOrdersRequest) (*ListOrdersResponse, error) {
+func (UnimplementedAutoAmendServiceServer) ListOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrders not implemented")
 }
 func (UnimplementedAutoAmendServiceServer) UpdateConfig(context.Context, *UpdateConfigRequest) (*AutoAmendOrder, error) {
@@ -176,44 +143,8 @@ func RegisterAutoAmendServiceServer(s grpc.ServiceRegistrar, srv AutoAmendServic
 	s.RegisterService(&AutoAmendService_ServiceDesc, srv)
 }
 
-func _AutoAmendService_RegisterOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AutoAmendServiceServer).RegisterOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.auto_amend.AutoAmendService/RegisterOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AutoAmendServiceServer).RegisterOrder(ctx, req.(*RegisterOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AutoAmendService_UnregisterOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UnregisterOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AutoAmendServiceServer).UnregisterOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.auto_amend.AutoAmendService/UnregisterOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AutoAmendServiceServer).UnregisterOrder(ctx, req.(*UnregisterOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AutoAmendService_GetOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderRequest)
+	in := new(GetAutoAmendOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -225,13 +156,13 @@ func _AutoAmendService_GetOrder_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/kdo.v1.auto_amend.AutoAmendService/GetOrder",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AutoAmendServiceServer).GetOrder(ctx, req.(*GetOrderRequest))
+		return srv.(AutoAmendServiceServer).GetOrder(ctx, req.(*GetAutoAmendOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AutoAmendService_ListOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOrdersRequest)
+	in := new(ListAutoAmendOrdersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -243,7 +174,7 @@ func _AutoAmendService_ListOrders_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: "/kdo.v1.auto_amend.AutoAmendService/ListOrders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AutoAmendServiceServer).ListOrders(ctx, req.(*ListOrdersRequest))
+		return srv.(AutoAmendServiceServer).ListOrders(ctx, req.(*ListAutoAmendOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -294,14 +225,6 @@ var AutoAmendService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "kdo.v1.auto_amend.AutoAmendService",
 	HandlerType: (*AutoAmendServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "RegisterOrder",
-			Handler:    _AutoAmendService_RegisterOrder_Handler,
-		},
-		{
-			MethodName: "UnregisterOrder",
-			Handler:    _AutoAmendService_UnregisterOrder_Handler,
-		},
 		{
 			MethodName: "GetOrder",
 			Handler:    _AutoAmendService_GetOrder_Handler,

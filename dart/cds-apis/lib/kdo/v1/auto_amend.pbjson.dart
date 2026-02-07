@@ -233,55 +233,22 @@ final $typed_data.Uint8List orderUnregisteredEventDescriptor = $convert.base64De
     'ChZPcmRlclVucmVnaXN0ZXJlZEV2ZW50EhkKCG9yZGVyX2lkGAEgASgEUgdvcmRlcklkEhYKBn'
     'JlYXNvbhgCIAEoCVIGcmVhc29u');
 
-@$core.Deprecated('Use registerOrderRequestDescriptor instead')
-const RegisterOrderRequest$json = {
-  '1': 'RegisterOrderRequest',
-  '2': [
-    {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
-    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
-    {'1': 'price', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'price'},
-    {'1': 'quantity', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
-    {'1': 'config', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.auto_amend.AmendConfig', '10': 'config'},
-  ],
-};
-
-/// Descriptor for `RegisterOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List registerOrderRequestDescriptor = $convert.base64Decode(
-    'ChRSZWdpc3Rlck9yZGVyUmVxdWVzdBIfCghvcmRlcl9pZBgBIAEoBEIE4kEBAlIHb3JkZXJJZB'
-    'IcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIyCgRzaWRlGAMgASgOMhgua2RvLnYxLmNv'
-    'bW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGUSGgoFcHJpY2UYBCABKAlCBOJBAQJSBXByaWNlEi'
-    'AKCHF1YW50aXR5GAUgASgDQgTiQQECUghxdWFudGl0eRI2CgZjb25maWcYBiABKAsyHi5rZG8u'
-    'djEuYXV0b19hbWVuZC5BbWVuZENvbmZpZ1IGY29uZmln');
-
-@$core.Deprecated('Use unregisterOrderRequestDescriptor instead')
-const UnregisterOrderRequest$json = {
-  '1': 'UnregisterOrderRequest',
+@$core.Deprecated('Use getAutoAmendOrderRequestDescriptor instead')
+const GetAutoAmendOrderRequest$json = {
+  '1': 'GetAutoAmendOrderRequest',
   '2': [
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
   ],
 };
 
-/// Descriptor for `UnregisterOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List unregisterOrderRequestDescriptor = $convert.base64Decode(
-    'ChZVbnJlZ2lzdGVyT3JkZXJSZXF1ZXN0Eh8KCG9yZGVyX2lkGAEgASgEQgTiQQECUgdvcmRlck'
-    'lk');
+/// Descriptor for `GetAutoAmendOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAutoAmendOrderRequestDescriptor = $convert.base64Decode(
+    'ChhHZXRBdXRvQW1lbmRPcmRlclJlcXVlc3QSHwoIb3JkZXJfaWQYASABKARCBOJBAQJSB29yZG'
+    'VySWQ=');
 
-@$core.Deprecated('Use getOrderRequestDescriptor instead')
-const GetOrderRequest$json = {
-  '1': 'GetOrderRequest',
-  '2': [
-    {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
-  ],
-};
-
-/// Descriptor for `GetOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getOrderRequestDescriptor = $convert.base64Decode(
-    'Cg9HZXRPcmRlclJlcXVlc3QSHwoIb3JkZXJfaWQYASABKARCBOJBAQJSB29yZGVySWQ=');
-
-@$core.Deprecated('Use listOrdersRequestDescriptor instead')
-const ListOrdersRequest$json = {
-  '1': 'ListOrdersRequest',
+@$core.Deprecated('Use listAutoAmendOrdersRequestDescriptor instead')
+const ListAutoAmendOrdersRequest$json = {
+  '1': 'ListAutoAmendOrdersRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'side', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
@@ -289,24 +256,24 @@ const ListOrdersRequest$json = {
   ],
 };
 
-/// Descriptor for `ListOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listOrdersRequestDescriptor = $convert.base64Decode(
-    'ChFMaXN0T3JkZXJzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQFSBnN5bWJvbBIyCgRzaW'
-    'RlGAIgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZGVCBOJBAQFSBHNpZGUSJQoLYWN0aXZl'
-    'X29ubHkYAyABKAhCBOJBAQFSCmFjdGl2ZU9ubHk=');
+/// Descriptor for `ListAutoAmendOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listAutoAmendOrdersRequestDescriptor = $convert.base64Decode(
+    'ChpMaXN0QXV0b0FtZW5kT3JkZXJzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQFSBnN5bW'
+    'JvbBIyCgRzaWRlGAIgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZGVCBOJBAQFSBHNpZGUS'
+    'JQoLYWN0aXZlX29ubHkYAyABKAhCBOJBAQFSCmFjdGl2ZU9ubHk=');
 
-@$core.Deprecated('Use listOrdersResponseDescriptor instead')
-const ListOrdersResponse$json = {
-  '1': 'ListOrdersResponse',
+@$core.Deprecated('Use listAutoAmendOrdersResponseDescriptor instead')
+const ListAutoAmendOrdersResponse$json = {
+  '1': 'ListAutoAmendOrdersResponse',
   '2': [
     {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.auto_amend.AutoAmendOrder', '10': 'orders'},
   ],
 };
 
-/// Descriptor for `ListOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listOrdersResponseDescriptor = $convert.base64Decode(
-    'ChJMaXN0T3JkZXJzUmVzcG9uc2USOQoGb3JkZXJzGAEgAygLMiEua2RvLnYxLmF1dG9fYW1lbm'
-    'QuQXV0b0FtZW5kT3JkZXJSBm9yZGVycw==');
+/// Descriptor for `ListAutoAmendOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listAutoAmendOrdersResponseDescriptor = $convert.base64Decode(
+    'ChtMaXN0QXV0b0FtZW5kT3JkZXJzUmVzcG9uc2USOQoGb3JkZXJzGAEgAygLMiEua2RvLnYxLm'
+    'F1dG9fYW1lbmQuQXV0b0FtZW5kT3JkZXJSBm9yZGVycw==');
 
 @$core.Deprecated('Use updateConfigRequestDescriptor instead')
 const UpdateConfigRequest$json = {

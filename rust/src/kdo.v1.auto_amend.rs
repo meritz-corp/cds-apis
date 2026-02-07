@@ -218,44 +218,15 @@ pub struct OrderUnregisteredEvent {
 // ============================================================================
 
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RegisterOrderRequest {
-    /// 주문 ID
-    #[prost(uint64, tag="1")]
-    pub order_id: u64,
-    /// 종목 심볼
-    #[prost(string, tag="2")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 주문 방향
-    #[prost(enumeration="super::common::OrderSide", tag="3")]
-    pub side: i32,
-    /// 주문 가격
-    #[prost(string, tag="4")]
-    pub price: ::prost::alloc::string::String,
-    /// 주문 수량
-    #[prost(int64, tag="5")]
-    pub quantity: i64,
-    /// 자동정정 설정 (optional, 기본값 사용 가능)
-    #[prost(message, optional, tag="6")]
-    pub config: ::core::option::Option<AmendConfig>,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct UnregisterOrderRequest {
-    /// 주문 ID
-    #[prost(uint64, tag="1")]
-    pub order_id: u64,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct GetOrderRequest {
+pub struct GetAutoAmendOrderRequest {
     /// 주문 ID
     #[prost(uint64, tag="1")]
     pub order_id: u64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListOrdersRequest {
+pub struct ListAutoAmendOrdersRequest {
     /// 종목 필터 (optional)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -268,7 +239,7 @@ pub struct ListOrdersRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListOrdersResponse {
+pub struct ListAutoAmendOrdersResponse {
     /// 등록된 주문 목록
     #[prost(message, repeated, tag="1")]
     pub orders: ::prost::alloc::vec::Vec<AutoAmendOrder>,

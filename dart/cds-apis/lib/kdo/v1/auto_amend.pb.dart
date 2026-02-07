@@ -16,7 +16,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'auto_amend.pbenum.dart';
-import 'common.pbenum.dart' as $2;
+import 'common.pbenum.dart' as $1;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
@@ -27,7 +27,7 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
   factory AutoAmendOrder({
     $fixnum.Int64? orderId,
     $core.String? symbol,
-    $2.OrderSide? side,
+    $1.OrderSide? side,
     $core.String? price,
     $fixnum.Int64? quantity,
     $fixnum.Int64? remainingQuantity,
@@ -58,7 +58,7 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AutoAmendOrder', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..e<$1.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
     ..aOS(4, _omitFieldNames ? '' : 'price')
     ..aInt64(5, _omitFieldNames ? '' : 'quantity')
     ..aInt64(6, _omitFieldNames ? '' : 'remainingQuantity')
@@ -108,9 +108,9 @@ class AutoAmendOrder extends $pb.GeneratedMessage {
 
   /// 주문 방향
   @$pb.TagNumber(3)
-  $2.OrderSide get side => $_getN(2);
+  $1.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side($2.OrderSide value) => $_setField(3, value);
+  set side($1.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -395,7 +395,7 @@ class AuctionSessionConfig extends $pb.GeneratedMessage {
 class ServiceStatus extends $pb.GeneratedMessage {
   factory ServiceStatus({
     $core.bool? isRunning,
-    $2.TradingSession? currentSession,
+    $1.TradingSession? currentSession,
     $core.int? activeOrderCount,
     $core.int? totalOrderCount,
   }) {
@@ -414,7 +414,7 @@ class ServiceStatus extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServiceStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isRunning')
-    ..e<$2.TradingSession>(2, _omitFieldNames ? '' : 'currentSession', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
+    ..e<$1.TradingSession>(2, _omitFieldNames ? '' : 'currentSession', $pb.PbFieldType.OE, defaultOrMaker: $1.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $1.TradingSession.valueOf, enumValues: $1.TradingSession.values)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'activeOrderCount', $pb.PbFieldType.OU3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'totalOrderCount', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
@@ -449,9 +449,9 @@ class ServiceStatus extends $pb.GeneratedMessage {
 
   /// 현재 세션
   @$pb.TagNumber(2)
-  $2.TradingSession get currentSession => $_getN(1);
+  $1.TradingSession get currentSession => $_getN(1);
   @$pb.TagNumber(2)
-  set currentSession($2.TradingSession value) => $_setField(2, value);
+  set currentSession($1.TradingSession value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasCurrentSession() => $_has(1);
   @$pb.TagNumber(2)
@@ -820,8 +820,8 @@ class AmendFailedEvent extends $pb.GeneratedMessage {
 /// 세션 변경 이벤트
 class SessionChangedEvent extends $pb.GeneratedMessage {
   factory SessionChangedEvent({
-    $2.TradingSession? oldSession,
-    $2.TradingSession? newSession,
+    $1.TradingSession? oldSession,
+    $1.TradingSession? newSession,
   }) {
     final result = create();
     if (oldSession != null) result.oldSession = oldSession;
@@ -835,8 +835,8 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
   factory SessionChangedEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionChangedEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
-    ..e<$2.TradingSession>(1, _omitFieldNames ? '' : 'oldSession', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
-    ..e<$2.TradingSession>(2, _omitFieldNames ? '' : 'newSession', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
+    ..e<$1.TradingSession>(1, _omitFieldNames ? '' : 'oldSession', $pb.PbFieldType.OE, defaultOrMaker: $1.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $1.TradingSession.valueOf, enumValues: $1.TradingSession.values)
+    ..e<$1.TradingSession>(2, _omitFieldNames ? '' : 'newSession', $pb.PbFieldType.OE, defaultOrMaker: $1.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $1.TradingSession.valueOf, enumValues: $1.TradingSession.values)
     ..hasRequiredFields = false
   ;
 
@@ -859,9 +859,9 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
 
   /// 이전 세션
   @$pb.TagNumber(1)
-  $2.TradingSession get oldSession => $_getN(0);
+  $1.TradingSession get oldSession => $_getN(0);
   @$pb.TagNumber(1)
-  set oldSession($2.TradingSession value) => $_setField(1, value);
+  set oldSession($1.TradingSession value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasOldSession() => $_has(0);
   @$pb.TagNumber(1)
@@ -869,9 +869,9 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
 
   /// 새 세션
   @$pb.TagNumber(2)
-  $2.TradingSession get newSession => $_getN(1);
+  $1.TradingSession get newSession => $_getN(1);
   @$pb.TagNumber(2)
-  set newSession($2.TradingSession value) => $_setField(2, value);
+  set newSession($1.TradingSession value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasNewSession() => $_has(1);
   @$pb.TagNumber(2)
@@ -883,7 +883,7 @@ class OrderRegisteredEvent extends $pb.GeneratedMessage {
   factory OrderRegisteredEvent({
     $fixnum.Int64? orderId,
     $core.String? symbol,
-    $2.OrderSide? side,
+    $1.OrderSide? side,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
@@ -900,7 +900,7 @@ class OrderRegisteredEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderRegisteredEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..e<$1.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -943,9 +943,9 @@ class OrderRegisteredEvent extends $pb.GeneratedMessage {
 
   /// 주문 방향
   @$pb.TagNumber(3)
-  $2.OrderSide get side => $_getN(2);
+  $1.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side($2.OrderSide value) => $_setField(3, value);
+  set side($1.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -1013,218 +1013,57 @@ class OrderUnregisteredEvent extends $pb.GeneratedMessage {
   void clearReason() => $_clearField(2);
 }
 
-class RegisterOrderRequest extends $pb.GeneratedMessage {
-  factory RegisterOrderRequest({
+class GetAutoAmendOrderRequest extends $pb.GeneratedMessage {
+  factory GetAutoAmendOrderRequest({
     $fixnum.Int64? orderId,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    return result;
+  }
+
+  GetAutoAmendOrderRequest._();
+
+  factory GetAutoAmendOrderRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetAutoAmendOrderRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAutoAmendOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetAutoAmendOrderRequest clone() => GetAutoAmendOrderRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetAutoAmendOrderRequest copyWith(void Function(GetAutoAmendOrderRequest) updates) => super.copyWith((message) => updates(message as GetAutoAmendOrderRequest)) as GetAutoAmendOrderRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetAutoAmendOrderRequest create() => GetAutoAmendOrderRequest._();
+  @$core.override
+  GetAutoAmendOrderRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAutoAmendOrderRequest> createRepeated() => $pb.PbList<GetAutoAmendOrderRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAutoAmendOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAutoAmendOrderRequest>(create);
+  static GetAutoAmendOrderRequest? _defaultInstance;
+
+  /// 주문 ID
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get orderId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+}
+
+class ListAutoAmendOrdersRequest extends $pb.GeneratedMessage {
+  factory ListAutoAmendOrdersRequest({
     $core.String? symbol,
-    $2.OrderSide? side,
-    $core.String? price,
-    $fixnum.Int64? quantity,
-    AmendConfig? config,
-  }) {
-    final result = create();
-    if (orderId != null) result.orderId = orderId;
-    if (symbol != null) result.symbol = symbol;
-    if (side != null) result.side = side;
-    if (price != null) result.price = price;
-    if (quantity != null) result.quantity = quantity;
-    if (config != null) result.config = config;
-    return result;
-  }
-
-  RegisterOrderRequest._();
-
-  factory RegisterOrderRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory RegisterOrderRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RegisterOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
-    ..aOS(4, _omitFieldNames ? '' : 'price')
-    ..aInt64(5, _omitFieldNames ? '' : 'quantity')
-    ..aOM<AmendConfig>(6, _omitFieldNames ? '' : 'config', subBuilder: AmendConfig.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RegisterOrderRequest clone() => RegisterOrderRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RegisterOrderRequest copyWith(void Function(RegisterOrderRequest) updates) => super.copyWith((message) => updates(message as RegisterOrderRequest)) as RegisterOrderRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static RegisterOrderRequest create() => RegisterOrderRequest._();
-  @$core.override
-  RegisterOrderRequest createEmptyInstance() => create();
-  static $pb.PbList<RegisterOrderRequest> createRepeated() => $pb.PbList<RegisterOrderRequest>();
-  @$core.pragma('dart2js:noInline')
-  static RegisterOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RegisterOrderRequest>(create);
-  static RegisterOrderRequest? _defaultInstance;
-
-  /// 주문 ID
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get orderId => $_getI64(0);
-  @$pb.TagNumber(1)
-  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasOrderId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearOrderId() => $_clearField(1);
-
-  /// 종목 심볼
-  @$pb.TagNumber(2)
-  $core.String get symbol => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set symbol($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasSymbol() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSymbol() => $_clearField(2);
-
-  /// 주문 방향
-  @$pb.TagNumber(3)
-  $2.OrderSide get side => $_getN(2);
-  @$pb.TagNumber(3)
-  set side($2.OrderSide value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasSide() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSide() => $_clearField(3);
-
-  /// 주문 가격
-  @$pb.TagNumber(4)
-  $core.String get price => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set price($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasPrice() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearPrice() => $_clearField(4);
-
-  /// 주문 수량
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get quantity => $_getI64(4);
-  @$pb.TagNumber(5)
-  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasQuantity() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearQuantity() => $_clearField(5);
-
-  /// 자동정정 설정 (optional, 기본값 사용 가능)
-  @$pb.TagNumber(6)
-  AmendConfig get config => $_getN(5);
-  @$pb.TagNumber(6)
-  set config(AmendConfig value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasConfig() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearConfig() => $_clearField(6);
-  @$pb.TagNumber(6)
-  AmendConfig ensureConfig() => $_ensure(5);
-}
-
-class UnregisterOrderRequest extends $pb.GeneratedMessage {
-  factory UnregisterOrderRequest({
-    $fixnum.Int64? orderId,
-  }) {
-    final result = create();
-    if (orderId != null) result.orderId = orderId;
-    return result;
-  }
-
-  UnregisterOrderRequest._();
-
-  factory UnregisterOrderRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory UnregisterOrderRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnregisterOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UnregisterOrderRequest clone() => UnregisterOrderRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UnregisterOrderRequest copyWith(void Function(UnregisterOrderRequest) updates) => super.copyWith((message) => updates(message as UnregisterOrderRequest)) as UnregisterOrderRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UnregisterOrderRequest create() => UnregisterOrderRequest._();
-  @$core.override
-  UnregisterOrderRequest createEmptyInstance() => create();
-  static $pb.PbList<UnregisterOrderRequest> createRepeated() => $pb.PbList<UnregisterOrderRequest>();
-  @$core.pragma('dart2js:noInline')
-  static UnregisterOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnregisterOrderRequest>(create);
-  static UnregisterOrderRequest? _defaultInstance;
-
-  /// 주문 ID
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get orderId => $_getI64(0);
-  @$pb.TagNumber(1)
-  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasOrderId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearOrderId() => $_clearField(1);
-}
-
-class GetOrderRequest extends $pb.GeneratedMessage {
-  factory GetOrderRequest({
-    $fixnum.Int64? orderId,
-  }) {
-    final result = create();
-    if (orderId != null) result.orderId = orderId;
-    return result;
-  }
-
-  GetOrderRequest._();
-
-  factory GetOrderRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory GetOrderRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetOrderRequest clone() => GetOrderRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetOrderRequest copyWith(void Function(GetOrderRequest) updates) => super.copyWith((message) => updates(message as GetOrderRequest)) as GetOrderRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetOrderRequest create() => GetOrderRequest._();
-  @$core.override
-  GetOrderRequest createEmptyInstance() => create();
-  static $pb.PbList<GetOrderRequest> createRepeated() => $pb.PbList<GetOrderRequest>();
-  @$core.pragma('dart2js:noInline')
-  static GetOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetOrderRequest>(create);
-  static GetOrderRequest? _defaultInstance;
-
-  /// 주문 ID
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get orderId => $_getI64(0);
-  @$pb.TagNumber(1)
-  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasOrderId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearOrderId() => $_clearField(1);
-}
-
-class ListOrdersRequest extends $pb.GeneratedMessage {
-  factory ListOrdersRequest({
-    $core.String? symbol,
-    $2.OrderSide? side,
+    $1.OrderSide? side,
     $core.bool? activeOnly,
   }) {
     final result = create();
@@ -1234,34 +1073,34 @@ class ListOrdersRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  ListOrdersRequest._();
+  ListAutoAmendOrdersRequest._();
 
-  factory ListOrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListOrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListAutoAmendOrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListAutoAmendOrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListAutoAmendOrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..e<$2.OrderSide>(2, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..e<$1.OrderSide>(2, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
     ..aOB(3, _omitFieldNames ? '' : 'activeOnly')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListOrdersRequest clone() => ListOrdersRequest()..mergeFromMessage(this);
+  ListAutoAmendOrdersRequest clone() => ListAutoAmendOrdersRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListOrdersRequest copyWith(void Function(ListOrdersRequest) updates) => super.copyWith((message) => updates(message as ListOrdersRequest)) as ListOrdersRequest;
+  ListAutoAmendOrdersRequest copyWith(void Function(ListAutoAmendOrdersRequest) updates) => super.copyWith((message) => updates(message as ListAutoAmendOrdersRequest)) as ListAutoAmendOrdersRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListOrdersRequest create() => ListOrdersRequest._();
+  static ListAutoAmendOrdersRequest create() => ListAutoAmendOrdersRequest._();
   @$core.override
-  ListOrdersRequest createEmptyInstance() => create();
-  static $pb.PbList<ListOrdersRequest> createRepeated() => $pb.PbList<ListOrdersRequest>();
+  ListAutoAmendOrdersRequest createEmptyInstance() => create();
+  static $pb.PbList<ListAutoAmendOrdersRequest> createRepeated() => $pb.PbList<ListAutoAmendOrdersRequest>();
   @$core.pragma('dart2js:noInline')
-  static ListOrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListOrdersRequest>(create);
-  static ListOrdersRequest? _defaultInstance;
+  static ListAutoAmendOrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListAutoAmendOrdersRequest>(create);
+  static ListAutoAmendOrdersRequest? _defaultInstance;
 
   /// 종목 필터 (optional)
   @$pb.TagNumber(1)
@@ -1275,9 +1114,9 @@ class ListOrdersRequest extends $pb.GeneratedMessage {
 
   /// 주문 방향 필터 (optional)
   @$pb.TagNumber(2)
-  $2.OrderSide get side => $_getN(1);
+  $1.OrderSide get side => $_getN(1);
   @$pb.TagNumber(2)
-  set side($2.OrderSide value) => $_setField(2, value);
+  set side($1.OrderSide value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasSide() => $_has(1);
   @$pb.TagNumber(2)
@@ -1294,8 +1133,8 @@ class ListOrdersRequest extends $pb.GeneratedMessage {
   void clearActiveOnly() => $_clearField(3);
 }
 
-class ListOrdersResponse extends $pb.GeneratedMessage {
-  factory ListOrdersResponse({
+class ListAutoAmendOrdersResponse extends $pb.GeneratedMessage {
+  factory ListAutoAmendOrdersResponse({
     $core.Iterable<AutoAmendOrder>? orders,
   }) {
     final result = create();
@@ -1303,32 +1142,32 @@ class ListOrdersResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  ListOrdersResponse._();
+  ListAutoAmendOrdersResponse._();
 
-  factory ListOrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListOrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListAutoAmendOrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListAutoAmendOrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListOrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListAutoAmendOrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..pc<AutoAmendOrder>(1, _omitFieldNames ? '' : 'orders', $pb.PbFieldType.PM, subBuilder: AutoAmendOrder.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListOrdersResponse clone() => ListOrdersResponse()..mergeFromMessage(this);
+  ListAutoAmendOrdersResponse clone() => ListAutoAmendOrdersResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListOrdersResponse copyWith(void Function(ListOrdersResponse) updates) => super.copyWith((message) => updates(message as ListOrdersResponse)) as ListOrdersResponse;
+  ListAutoAmendOrdersResponse copyWith(void Function(ListAutoAmendOrdersResponse) updates) => super.copyWith((message) => updates(message as ListAutoAmendOrdersResponse)) as ListAutoAmendOrdersResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListOrdersResponse create() => ListOrdersResponse._();
+  static ListAutoAmendOrdersResponse create() => ListAutoAmendOrdersResponse._();
   @$core.override
-  ListOrdersResponse createEmptyInstance() => create();
-  static $pb.PbList<ListOrdersResponse> createRepeated() => $pb.PbList<ListOrdersResponse>();
+  ListAutoAmendOrdersResponse createEmptyInstance() => create();
+  static $pb.PbList<ListAutoAmendOrdersResponse> createRepeated() => $pb.PbList<ListAutoAmendOrdersResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListOrdersResponse>(create);
-  static ListOrdersResponse? _defaultInstance;
+  static ListAutoAmendOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListAutoAmendOrdersResponse>(create);
+  static ListAutoAmendOrdersResponse? _defaultInstance;
 
   /// 등록된 주문 목록
   @$pb.TagNumber(1)

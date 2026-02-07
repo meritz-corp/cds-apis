@@ -1129,7 +1129,7 @@ impl<'de> serde::Deserialize<'de> for AutoAmendOrder {
         deserializer.deserialize_struct("kdo.v1.auto_amend.AutoAmendOrder", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for GetOrderRequest {
+impl serde::Serialize for GetAutoAmendOrderRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1140,7 +1140,7 @@ impl serde::Serialize for GetOrderRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.GetOrderRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.GetAutoAmendOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -1149,7 +1149,7 @@ impl serde::Serialize for GetOrderRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for GetOrderRequest {
+impl<'de> serde::Deserialize<'de> for GetAutoAmendOrderRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1195,13 +1195,13 @@ impl<'de> serde::Deserialize<'de> for GetOrderRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GetOrderRequest;
+            type Value = GetAutoAmendOrderRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.auto_amend.GetOrderRequest")
+                formatter.write_str("struct kdo.v1.auto_amend.GetAutoAmendOrderRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetOrderRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetAutoAmendOrderRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1221,15 +1221,15 @@ impl<'de> serde::Deserialize<'de> for GetOrderRequest {
                         }
                     }
                 }
-                Ok(GetOrderRequest {
+                Ok(GetAutoAmendOrderRequest {
                     order_id: order_id__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.auto_amend.GetOrderRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.auto_amend.GetAutoAmendOrderRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListOrdersRequest {
+impl serde::Serialize for ListAutoAmendOrdersRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1246,7 +1246,7 @@ impl serde::Serialize for ListOrdersRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.ListOrdersRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.ListAutoAmendOrdersRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -1261,7 +1261,7 @@ impl serde::Serialize for ListOrdersRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListOrdersRequest {
+impl<'de> serde::Deserialize<'de> for ListAutoAmendOrdersRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1313,13 +1313,13 @@ impl<'de> serde::Deserialize<'de> for ListOrdersRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListOrdersRequest;
+            type Value = ListAutoAmendOrdersRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.auto_amend.ListOrdersRequest")
+                formatter.write_str("struct kdo.v1.auto_amend.ListAutoAmendOrdersRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListOrdersRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListAutoAmendOrdersRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1351,17 +1351,17 @@ impl<'de> serde::Deserialize<'de> for ListOrdersRequest {
                         }
                     }
                 }
-                Ok(ListOrdersRequest {
+                Ok(ListAutoAmendOrdersRequest {
                     symbol: symbol__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
                     active_only: active_only__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.auto_amend.ListOrdersRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.auto_amend.ListAutoAmendOrdersRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListOrdersResponse {
+impl serde::Serialize for ListAutoAmendOrdersResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1372,14 +1372,14 @@ impl serde::Serialize for ListOrdersResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.ListOrdersResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.ListAutoAmendOrdersResponse", len)?;
         if true {
             struct_ser.serialize_field("orders", &self.orders)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListOrdersResponse {
+impl<'de> serde::Deserialize<'de> for ListAutoAmendOrdersResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1424,13 +1424,13 @@ impl<'de> serde::Deserialize<'de> for ListOrdersResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListOrdersResponse;
+            type Value = ListAutoAmendOrdersResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.auto_amend.ListOrdersResponse")
+                formatter.write_str("struct kdo.v1.auto_amend.ListAutoAmendOrdersResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListOrdersResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListAutoAmendOrdersResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1448,12 +1448,12 @@ impl<'de> serde::Deserialize<'de> for ListOrdersResponse {
                         }
                     }
                 }
-                Ok(ListOrdersResponse {
+                Ok(ListAutoAmendOrdersResponse {
                     orders: orders__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.auto_amend.ListOrdersResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.auto_amend.ListAutoAmendOrdersResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for OrderRegisteredEvent {
@@ -1707,197 +1707,6 @@ impl<'de> serde::Deserialize<'de> for OrderUnregisteredEvent {
             }
         }
         deserializer.deserialize_struct("kdo.v1.auto_amend.OrderUnregisteredEvent", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for RegisterOrderRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.RegisterOrderRequest", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        if true {
-            let v = super::common::OrderSide::try_from(self.side)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
-            struct_ser.serialize_field("side", &v)?;
-        }
-        if true {
-            struct_ser.serialize_field("price", &self.price)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
-        }
-        if let Some(v) = self.config.as_ref() {
-            struct_ser.serialize_field("config", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for RegisterOrderRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "order_id",
-            "orderId",
-            "symbol",
-            "side",
-            "price",
-            "quantity",
-            "config",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            OrderId,
-            Symbol,
-            Side,
-            Price,
-            Quantity,
-            Config,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            "side" => Ok(GeneratedField::Side),
-                            "price" => Ok(GeneratedField::Price),
-                            "quantity" => Ok(GeneratedField::Quantity),
-                            "config" => Ok(GeneratedField::Config),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = RegisterOrderRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.auto_amend.RegisterOrderRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<RegisterOrderRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut order_id__ = None;
-                let mut symbol__ = None;
-                let mut side__ = None;
-                let mut price__ = None;
-                let mut quantity__ = None;
-                let mut config__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::OrderId => {
-                            if order_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orderId"));
-                            }
-                            order_id__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Side => {
-                            if side__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("side"));
-                            }
-                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
-                        }
-                        GeneratedField::Price => {
-                            if price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("price"));
-                            }
-                            price__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Config => {
-                            if config__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("config"));
-                            }
-                            config__ = map_.next_value()?;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(RegisterOrderRequest {
-                    order_id: order_id__.unwrap_or_default(),
-                    symbol: symbol__.unwrap_or_default(),
-                    side: side__.unwrap_or_default(),
-                    price: price__.unwrap_or_default(),
-                    quantity: quantity__.unwrap_or_default(),
-                    config: config__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.auto_amend.RegisterOrderRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for RegularSessionConfig {
@@ -2386,106 +2195,6 @@ impl<'de> serde::Deserialize<'de> for StreamEventsRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.auto_amend.StreamEventsRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for UnregisterOrderRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.UnregisterOrderRequest", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for UnregisterOrderRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "order_id",
-            "orderId",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            OrderId,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UnregisterOrderRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.auto_amend.UnregisterOrderRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnregisterOrderRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut order_id__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::OrderId => {
-                            if order_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orderId"));
-                            }
-                            order_id__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(UnregisterOrderRequest {
-                    order_id: order_id__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.auto_amend.UnregisterOrderRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UpdateConfigRequest {

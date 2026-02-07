@@ -5,7 +5,6 @@
 
 import "package:connectrpc/connect.dart" as connect;
 import "auto_amend.pb.dart" as kdov1auto_amend;
-import "../../google/protobuf/empty.pb.dart" as googleprotobufempty;
 
 /// AutoAmendService - 자동 정정 서비스
 /// 주문의 자동 정정을 관리합니다.
@@ -15,27 +14,11 @@ abstract final class AutoAmendService {
   /// Fully-qualified name of the AutoAmendService service.
   static const name = 'kdo.v1.auto_amend.AutoAmendService';
 
-  /// 주문 자동정정 등록
-  static const registerOrder = connect.Spec(
-    '/$name/RegisterOrder',
-    connect.StreamType.unary,
-    kdov1auto_amend.RegisterOrderRequest.new,
-    kdov1auto_amend.AutoAmendOrder.new,
-  );
-
-  /// 주문 자동정정 해제
-  static const unregisterOrder = connect.Spec(
-    '/$name/UnregisterOrder',
-    connect.StreamType.unary,
-    kdov1auto_amend.UnregisterOrderRequest.new,
-    googleprotobufempty.Empty.new,
-  );
-
   /// 등록된 주문 조회
   static const getOrder = connect.Spec(
     '/$name/GetOrder',
     connect.StreamType.unary,
-    kdov1auto_amend.GetOrderRequest.new,
+    kdov1auto_amend.GetAutoAmendOrderRequest.new,
     kdov1auto_amend.AutoAmendOrder.new,
   );
 
@@ -43,8 +26,8 @@ abstract final class AutoAmendService {
   static const listOrders = connect.Spec(
     '/$name/ListOrders',
     connect.StreamType.unary,
-    kdov1auto_amend.ListOrdersRequest.new,
-    kdov1auto_amend.ListOrdersResponse.new,
+    kdov1auto_amend.ListAutoAmendOrdersRequest.new,
+    kdov1auto_amend.ListAutoAmendOrdersResponse.new,
   );
 
   /// 설정 업데이트
