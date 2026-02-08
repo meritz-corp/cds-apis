@@ -135,6 +135,33 @@ pub mod auto_amend_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn stream_orders(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListAutoAmendOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListAutoAmendOrdersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.auto_amend.AutoAmendService/StreamOrders",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.auto_amend.AutoAmendService", "StreamOrders"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn update_config(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateConfigRequest>,
@@ -200,6 +227,13 @@ pub mod auto_amend_service_server {
             request: tonic::Request<super::GetAutoAmendOrderRequest>,
         ) -> std::result::Result<tonic::Response<super::AutoAmendOrder>, tonic::Status>;
         async fn list_orders(
+            &self,
+            request: tonic::Request<super::ListAutoAmendOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListAutoAmendOrdersResponse>,
+            tonic::Status,
+        >;
+        async fn stream_orders(
             &self,
             request: tonic::Request<super::ListAutoAmendOrdersRequest>,
         ) -> std::result::Result<
@@ -375,6 +409,52 @@ pub mod auto_amend_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = ListOrdersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.auto_amend.AutoAmendService/StreamOrders" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamOrdersSvc<T: AutoAmendService>(pub Arc<T>);
+                    impl<
+                        T: AutoAmendService,
+                    > tonic::server::UnaryService<super::ListAutoAmendOrdersRequest>
+                    for StreamOrdersSvc<T> {
+                        type Response = super::ListAutoAmendOrdersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListAutoAmendOrdersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as AutoAmendService>::stream_orders(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamOrdersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

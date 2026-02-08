@@ -26,6 +26,8 @@ type AutoAmendServiceClient interface {
 	GetOrder(ctx context.Context, in *GetAutoAmendOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
 	// 등록된 주문 목록 조회
 	ListOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error)
+	// 등록된 주문 목록 스트림
+	StreamOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error)
 	// 설정 업데이트
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
 	// 이벤트 스트리밍
@@ -52,6 +54,15 @@ func (c *autoAmendServiceClient) GetOrder(ctx context.Context, in *GetAutoAmendO
 func (c *autoAmendServiceClient) ListOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error) {
 	out := new(ListAutoAmendOrdersResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.auto_amend.AutoAmendService/ListOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *autoAmendServiceClient) StreamOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error) {
+	out := new(ListAutoAmendOrdersResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.auto_amend.AutoAmendService/StreamOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -107,6 +118,8 @@ type AutoAmendServiceServer interface {
 	GetOrder(context.Context, *GetAutoAmendOrderRequest) (*AutoAmendOrder, error)
 	// 등록된 주문 목록 조회
 	ListOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error)
+	// 등록된 주문 목록 스트림
+	StreamOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error)
 	// 설정 업데이트
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*AutoAmendOrder, error)
 	// 이벤트 스트리밍
@@ -123,6 +136,9 @@ func (UnimplementedAutoAmendServiceServer) GetOrder(context.Context, *GetAutoAme
 }
 func (UnimplementedAutoAmendServiceServer) ListOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrders not implemented")
+}
+func (UnimplementedAutoAmendServiceServer) StreamOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StreamOrders not implemented")
 }
 func (UnimplementedAutoAmendServiceServer) UpdateConfig(context.Context, *UpdateConfigRequest) (*AutoAmendOrder, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfig not implemented")
@@ -175,6 +191,24 @@ func _AutoAmendService_ListOrders_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AutoAmendServiceServer).ListOrders(ctx, req.(*ListAutoAmendOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutoAmendService_StreamOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAutoAmendOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutoAmendServiceServer).StreamOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.auto_amend.AutoAmendService/StreamOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutoAmendServiceServer).StreamOrders(ctx, req.(*ListAutoAmendOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -232,6 +266,10 @@ var AutoAmendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOrders",
 			Handler:    _AutoAmendService_ListOrders_Handler,
+		},
+		{
+			MethodName: "StreamOrders",
+			Handler:    _AutoAmendService_StreamOrders_Handler,
 		},
 		{
 			MethodName: "UpdateConfig",

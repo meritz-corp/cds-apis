@@ -191,6 +191,58 @@
           "AutoAmendService"
         ]
       }
+    },
+    "/v1/auto-amend/orders:stream": {
+      "get": {
+        "summary": "등록된 주문 목록 스트림",
+        "operationId": "AutoAmendService_StreamOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/auto_amendListAutoAmendOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "종목 필터 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "side",
+            "description": "주문 방향 필터 (optional)\n\n - ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ORDER_SIDE_UNSPECIFIED",
+              "ORDER_SIDE_BID",
+              "ORDER_SIDE_ASK"
+            ],
+            "default": "ORDER_SIDE_UNSPECIFIED"
+          },
+          {
+            "name": "activeOnly",
+            "description": "활성화된 주문만 (optional, 기본: true)",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "AutoAmendService"
+        ]
+      }
     }
   },
   "definitions": {

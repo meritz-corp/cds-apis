@@ -47,6 +47,11 @@ class AutoAmendServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listOrders, request, options: options);
   }
 
+  /// 등록된 주문 목록 스트림
+  $grpc.ResponseFuture<$0.ListAutoAmendOrdersResponse> streamOrders($0.ListAutoAmendOrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$streamOrders, request, options: options);
+  }
+
   /// 설정 업데이트
   $grpc.ResponseFuture<$0.AutoAmendOrder> updateConfig($0.UpdateConfigRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$updateConfig, request, options: options);
@@ -65,6 +70,10 @@ class AutoAmendServiceClient extends $grpc.Client {
       $0.AutoAmendOrder.fromBuffer);
   static final _$listOrders = $grpc.ClientMethod<$0.ListAutoAmendOrdersRequest, $0.ListAutoAmendOrdersResponse>(
       '/kdo.v1.auto_amend.AutoAmendService/ListOrders',
+      ($0.ListAutoAmendOrdersRequest value) => value.writeToBuffer(),
+      $0.ListAutoAmendOrdersResponse.fromBuffer);
+  static final _$streamOrders = $grpc.ClientMethod<$0.ListAutoAmendOrdersRequest, $0.ListAutoAmendOrdersResponse>(
+      '/kdo.v1.auto_amend.AutoAmendService/StreamOrders',
       ($0.ListAutoAmendOrdersRequest value) => value.writeToBuffer(),
       $0.ListAutoAmendOrdersResponse.fromBuffer);
   static final _$updateConfig = $grpc.ClientMethod<$0.UpdateConfigRequest, $0.AutoAmendOrder>(
@@ -96,6 +105,13 @@ abstract class AutoAmendServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListAutoAmendOrdersRequest.fromBuffer(value),
         ($0.ListAutoAmendOrdersResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListAutoAmendOrdersRequest, $0.ListAutoAmendOrdersResponse>(
+        'StreamOrders',
+        streamOrders_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListAutoAmendOrdersRequest.fromBuffer(value),
+        ($0.ListAutoAmendOrdersResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UpdateConfigRequest, $0.AutoAmendOrder>(
         'UpdateConfig',
         updateConfig_Pre,
@@ -123,6 +139,12 @@ abstract class AutoAmendServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListAutoAmendOrdersResponse> listOrders($grpc.ServiceCall call, $0.ListAutoAmendOrdersRequest request);
+
+  $async.Future<$0.ListAutoAmendOrdersResponse> streamOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.ListAutoAmendOrdersRequest> $request) async {
+    return streamOrders($call, await $request);
+  }
+
+  $async.Future<$0.ListAutoAmendOrdersResponse> streamOrders($grpc.ServiceCall call, $0.ListAutoAmendOrdersRequest request);
 
   $async.Future<$0.AutoAmendOrder> updateConfig_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateConfigRequest> $request) async {
     return updateConfig($call, await $request);

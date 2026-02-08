@@ -48,6 +48,24 @@ extension type AutoAmendServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 등록된 주문 목록 스트림
+  Future<kdov1auto_amend.ListAutoAmendOrdersResponse> streamOrders(
+    kdov1auto_amend.ListAutoAmendOrdersRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.AutoAmendService.streamOrders,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 설정 업데이트
   Future<kdov1auto_amend.AutoAmendOrder> updateConfig(
     kdov1auto_amend.UpdateConfigRequest input, {

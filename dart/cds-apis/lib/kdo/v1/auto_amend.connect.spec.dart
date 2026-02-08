@@ -30,6 +30,14 @@ abstract final class AutoAmendService {
     kdov1auto_amend.ListAutoAmendOrdersResponse.new,
   );
 
+  /// 등록된 주문 목록 스트림
+  static const streamOrders = connect.Spec(
+    '/$name/StreamOrders',
+    connect.StreamType.unary,
+    kdov1auto_amend.ListAutoAmendOrdersRequest.new,
+    kdov1auto_amend.ListAutoAmendOrdersResponse.new,
+  );
+
   /// 설정 업데이트
   static const updateConfig = connect.Spec(
     '/$name/UpdateConfig',

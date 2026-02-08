@@ -337,6 +337,26 @@ func (mr *MockAutoAmendServiceClientMockRecorder) StreamEvents(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEvents", reflect.TypeOf((*MockAutoAmendServiceClient)(nil).StreamEvents), varargs...)
 }
 
+// StreamOrders mocks base method.
+func (m *MockAutoAmendServiceClient) StreamOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamOrders", varargs...)
+	ret0, _ := ret[0].(*ListAutoAmendOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamOrders indicates an expected call of StreamOrders.
+func (mr *MockAutoAmendServiceClientMockRecorder) StreamOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamOrders", reflect.TypeOf((*MockAutoAmendServiceClient)(nil).StreamOrders), varargs...)
+}
+
 // UpdateConfig mocks base method.
 func (m *MockAutoAmendServiceClient) UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error) {
 	m.ctrl.T.Helper()
@@ -422,6 +442,21 @@ func (m *MockAutoAmendServiceServer) StreamEvents(blob *StreamEventsRequest, ser
 func (mr *MockAutoAmendServiceServerMockRecorder) StreamEvents(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamEvents", reflect.TypeOf((*MockAutoAmendServiceServer)(nil).StreamEvents), blob, server)
+}
+
+// StreamOrders mocks base method.
+func (m *MockAutoAmendServiceServer) StreamOrders(ctx context.Context, in *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamOrders", ctx, in)
+	ret0, _ := ret[0].(*ListAutoAmendOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamOrders indicates an expected call of StreamOrders.
+func (mr *MockAutoAmendServiceServerMockRecorder) StreamOrders(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamOrders", reflect.TypeOf((*MockAutoAmendServiceServer)(nil).StreamOrders), ctx, in)
 }
 
 // UpdateConfig mocks base method.
