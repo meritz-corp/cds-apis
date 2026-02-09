@@ -37,17 +37,17 @@ class AutoAmendServiceClient extends $grpc.Client {
 
   AutoAmendServiceClient(super.channel, {super.options, super.interceptors});
 
-  /// 등록된 주문 조회
+  /// 등록된 자동 정적 주문 조회
   $grpc.ResponseFuture<$0.AutoAmendOrder> getOrder($0.GetAutoAmendOrderRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getOrder, request, options: options);
   }
 
-  /// 등록된 주문 목록 조회
+  /// 등록된 자동 정적 주문 목록 조회
   $grpc.ResponseFuture<$0.ListAutoAmendOrdersResponse> listOrders($0.ListAutoAmendOrdersRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listOrders, request, options: options);
   }
 
-  /// 등록된 주문 목록 스트림
+  /// 등록된 자동 정적 주문 목록 스트림
   $grpc.ResponseFuture<$0.ListAutoAmendOrdersResponse> streamOrders($0.ListAutoAmendOrdersRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$streamOrders, request, options: options);
   }

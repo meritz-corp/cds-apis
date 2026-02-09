@@ -141,6 +141,8 @@ message EtfPricing {
 
     // 선물 헷지 방식
     UnderlyingFutureHedgePricing underlying_future_hedge = 2;
+
+    FutureBasis future_basis = 3;
   }
 }
 
@@ -149,6 +151,10 @@ message DecomposeHedgePricing {}
 
 // 선물 헷지 가격 산출
 message UnderlyingFutureHedgePricing {}
+
+message FutureBasis {
+  string prev_index = 1;
+}
 
 // ========== ETF LP Status Messages ==========
 

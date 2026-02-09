@@ -22,11 +22,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AutoAmendServiceClient interface {
-	// 등록된 주문 조회
+	// 등록된 자동 정적 주문 조회
 	GetOrder(ctx context.Context, in *GetAutoAmendOrderRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
-	// 등록된 주문 목록 조회
+	// 등록된 자동 정적 주문 목록 조회
 	ListOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error)
-	// 등록된 주문 목록 스트림
+	// 등록된 자동 정적 주문 목록 스트림
 	StreamOrders(ctx context.Context, in *ListAutoAmendOrdersRequest, opts ...grpc.CallOption) (*ListAutoAmendOrdersResponse, error)
 	// 설정 업데이트
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*AutoAmendOrder, error)
@@ -114,11 +114,11 @@ func (x *autoAmendServiceStreamEventsClient) Recv() (*AutoAmendEvent, error) {
 // All implementations must embed UnimplementedAutoAmendServiceServer
 // for forward compatibility
 type AutoAmendServiceServer interface {
-	// 등록된 주문 조회
+	// 등록된 자동 정적 주문 조회
 	GetOrder(context.Context, *GetAutoAmendOrderRequest) (*AutoAmendOrder, error)
-	// 등록된 주문 목록 조회
+	// 등록된 자동 정적 주문 목록 조회
 	ListOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error)
-	// 등록된 주문 목록 스트림
+	// 등록된 자동 정적 주문 목록 스트림
 	StreamOrders(context.Context, *ListAutoAmendOrdersRequest) (*ListAutoAmendOrdersResponse, error)
 	// 설정 업데이트
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*AutoAmendOrder, error)

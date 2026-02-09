@@ -14,7 +14,7 @@ abstract final class AutoAmendService {
   /// Fully-qualified name of the AutoAmendService service.
   static const name = 'kdo.v1.auto_amend.AutoAmendService';
 
-  /// 등록된 주문 조회
+  /// 등록된 자동 정적 주문 조회
   static const getOrder = connect.Spec(
     '/$name/GetOrder',
     connect.StreamType.unary,
@@ -22,7 +22,7 @@ abstract final class AutoAmendService {
     kdov1auto_amend.AutoAmendOrder.new,
   );
 
-  /// 등록된 주문 목록 조회
+  /// 등록된 자동 정적 주문 목록 조회
   static const listOrders = connect.Spec(
     '/$name/ListOrders',
     connect.StreamType.unary,
@@ -30,7 +30,7 @@ abstract final class AutoAmendService {
     kdov1auto_amend.ListAutoAmendOrdersResponse.new,
   );
 
-  /// 등록된 주문 목록 스트림
+  /// 등록된 자동 정적 주문 목록 스트림
   static const streamOrders = connect.Spec(
     '/$name/StreamOrders',
     connect.StreamType.unary,

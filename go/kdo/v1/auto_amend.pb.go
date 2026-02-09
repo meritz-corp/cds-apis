@@ -1071,7 +1071,7 @@ type ListAutoAmendOrdersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 등록된 주문 목록
+	// 등록된 자동 정적 주문 목록
 	Orders []*AutoAmendOrder `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
 }
 

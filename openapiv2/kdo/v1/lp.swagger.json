@@ -721,6 +721,9 @@
         "underlyingFutureHedge": {
           "$ref": "#/definitions/lpUnderlyingFutureHedgePricing",
           "title": "선물 헷지 방식"
+        },
+        "futureBasis": {
+          "$ref": "#/definitions/lpFutureBasis"
         }
       },
       "title": "ETF 가격 산출 방식"
@@ -748,6 +751,14 @@
         }
       },
       "title": "ETF 체결 통계 (매수/매도 체결량 및 평균 단가)"
+    },
+    "lpFutureBasis": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "string"
+        }
+      }
     },
     "lpListEtfLpStatusesResponse": {
       "type": "object",

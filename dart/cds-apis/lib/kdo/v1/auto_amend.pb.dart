@@ -1169,7 +1169,7 @@ class ListAutoAmendOrdersResponse extends $pb.GeneratedMessage {
   static ListAutoAmendOrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListAutoAmendOrdersResponse>(create);
   static ListAutoAmendOrdersResponse? _defaultInstance;
 
-  /// 등록된 주문 목록
+  /// 등록된 자동 정적 주문 목록
   @$pb.TagNumber(1)
   $pb.PbList<AutoAmendOrder> get orders => $_getList(0);
 }

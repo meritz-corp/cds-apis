@@ -64,7 +64,7 @@
     },
     "/v1/auto-amend/orders": {
       "get": {
-        "summary": "등록된 주문 목록 조회",
+        "summary": "등록된 자동 정적 주문 목록 조회",
         "operationId": "AutoAmendService_ListOrders",
         "responses": {
           "200": {
@@ -116,7 +116,7 @@
     },
     "/v1/auto-amend/orders/{orderId}": {
       "get": {
-        "summary": "등록된 주문 조회",
+        "summary": "등록된 자동 정적 주문 조회",
         "operationId": "AutoAmendService_GetOrder",
         "responses": {
           "200": {
@@ -194,7 +194,7 @@
     },
     "/v1/auto-amend/orders:stream": {
       "get": {
-        "summary": "등록된 주문 목록 스트림",
+        "summary": "등록된 자동 정적 주문 목록 스트림",
         "operationId": "AutoAmendService_StreamOrders",
         "responses": {
           "200": {
@@ -437,7 +437,7 @@
           "items": {
             "$ref": "#/definitions/auto_amendAutoAmendOrder"
           },
-          "title": "등록된 주문 목록"
+          "title": "등록된 자동 정적 주문 목록"
         }
       }
     },

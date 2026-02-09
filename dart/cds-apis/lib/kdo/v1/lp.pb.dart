@@ -180,6 +180,7 @@ class EtfLp extends $pb.GeneratedMessage {
 enum EtfPricing_Method {
   decomposeHedge, 
   underlyingFutureHedge, 
+  futureBasis, 
   notSet
 }
 
@@ -188,10 +189,12 @@ class EtfPricing extends $pb.GeneratedMessage {
   factory EtfPricing({
     DecomposeHedgePricing? decomposeHedge,
     UnderlyingFutureHedgePricing? underlyingFutureHedge,
+    FutureBasis? futureBasis,
   }) {
     final result = create();
     if (decomposeHedge != null) result.decomposeHedge = decomposeHedge;
     if (underlyingFutureHedge != null) result.underlyingFutureHedge = underlyingFutureHedge;
+    if (futureBasis != null) result.futureBasis = futureBasis;
     return result;
   }
 
@@ -203,12 +206,14 @@ class EtfPricing extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, EtfPricing_Method> _EtfPricing_MethodByTag = {
     1 : EtfPricing_Method.decomposeHedge,
     2 : EtfPricing_Method.underlyingFutureHedge,
+    3 : EtfPricing_Method.futureBasis,
     0 : EtfPricing_Method.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2, 3])
     ..aOM<DecomposeHedgePricing>(1, _omitFieldNames ? '' : 'decomposeHedge', subBuilder: DecomposeHedgePricing.create)
     ..aOM<UnderlyingFutureHedgePricing>(2, _omitFieldNames ? '' : 'underlyingFutureHedge', subBuilder: UnderlyingFutureHedgePricing.create)
+    ..aOM<FutureBasis>(3, _omitFieldNames ? '' : 'futureBasis', subBuilder: FutureBasis.create)
     ..hasRequiredFields = false
   ;
 
@@ -255,6 +260,17 @@ class EtfPricing extends $pb.GeneratedMessage {
   void clearUnderlyingFutureHedge() => $_clearField(2);
   @$pb.TagNumber(2)
   UnderlyingFutureHedgePricing ensureUnderlyingFutureHedge() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  FutureBasis get futureBasis => $_getN(2);
+  @$pb.TagNumber(3)
+  set futureBasis(FutureBasis value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFutureBasis() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFutureBasis() => $_clearField(3);
+  @$pb.TagNumber(3)
+  FutureBasis ensureFutureBasis() => $_ensure(2);
 }
 
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
@@ -317,6 +333,52 @@ class UnderlyingFutureHedgePricing extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UnderlyingFutureHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingFutureHedgePricing>(create);
   static UnderlyingFutureHedgePricing? _defaultInstance;
+}
+
+class FutureBasis extends $pb.GeneratedMessage {
+  factory FutureBasis({
+    $core.String? prevIndex,
+  }) {
+    final result = create();
+    if (prevIndex != null) result.prevIndex = prevIndex;
+    return result;
+  }
+
+  FutureBasis._();
+
+  factory FutureBasis.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FutureBasis.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FutureBasis', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'prevIndex')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FutureBasis clone() => FutureBasis()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FutureBasis copyWith(void Function(FutureBasis) updates) => super.copyWith((message) => updates(message as FutureBasis)) as FutureBasis;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FutureBasis create() => FutureBasis._();
+  @$core.override
+  FutureBasis createEmptyInstance() => create();
+  static $pb.PbList<FutureBasis> createRepeated() => $pb.PbList<FutureBasis>();
+  @$core.pragma('dart2js:noInline')
+  static FutureBasis getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FutureBasis>(create);
+  static FutureBasis? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get prevIndex => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set prevIndex($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPrevIndex() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPrevIndex() => $_clearField(1);
 }
 
 /// ETF LP 상태

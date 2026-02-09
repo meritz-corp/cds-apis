@@ -240,7 +240,7 @@ pub struct ListAutoAmendOrdersRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAutoAmendOrdersResponse {
-    /// 등록된 주문 목록
+    /// 등록된 자동 정적 주문 목록
     #[prost(message, repeated, tag="1")]
     pub orders: ::prost::alloc::vec::Vec<AutoAmendOrder>,
 }

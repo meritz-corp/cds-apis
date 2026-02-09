@@ -12,7 +12,7 @@ import "auto_amend.connect.spec.dart" as specs;
 /// - 장중: 상대호가 잔량 비율 기반 정정
 /// - 동시호가: 예체가 관여 방지 (가격 ±1%, 수량 30% 제한)
 extension type AutoAmendServiceClient (connect.Transport _transport) {
-  /// 등록된 주문 조회
+  /// 등록된 자동 정적 주문 조회
   Future<kdov1auto_amend.AutoAmendOrder> getOrder(
     kdov1auto_amend.GetAutoAmendOrderRequest input, {
     connect.Headers? headers,
@@ -30,7 +30,7 @@ extension type AutoAmendServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 등록된 주문 목록 조회
+  /// 등록된 자동 정적 주문 목록 조회
   Future<kdov1auto_amend.ListAutoAmendOrdersResponse> listOrders(
     kdov1auto_amend.ListAutoAmendOrdersRequest input, {
     connect.Headers? headers,
@@ -48,7 +48,7 @@ extension type AutoAmendServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 등록된 주문 목록 스트림
+  /// 등록된 자동 정적 주문 목록 스트림
   Future<kdov1auto_amend.ListAutoAmendOrdersResponse> streamOrders(
     kdov1auto_amend.ListAutoAmendOrdersRequest input, {
     connect.Headers? headers,
