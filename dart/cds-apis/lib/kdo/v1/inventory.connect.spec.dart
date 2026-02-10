@@ -59,6 +59,14 @@ abstract final class InventoryService {
     kdov1inventory.LedgerInventory.new,
   );
 
+  /// 재고 수정
+  static const updateInventory = connect.Spec(
+    '/$name/UpdateInventory',
+    connect.StreamType.unary,
+    kdov1inventory.UpdateInventoryRequest.new,
+    kdov1inventory.Inventory.new,
+  );
+
   /// 원장에서 재고 동기화
   static const syncInventoryFromLedger = connect.Spec(
     '/$name/SyncInventoryFromLedger',

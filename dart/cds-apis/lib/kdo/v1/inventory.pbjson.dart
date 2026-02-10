@@ -324,6 +324,27 @@ final $typed_data.Uint8List listLedgerInventoriesResponseDescriptor = $convert.b
     'ADKAsyIS5rZG8udjEuaW52ZW50b3J5LkxlZGdlckludmVudG9yeVIRbGVkZ2VySW52ZW50b3Jp'
     'ZXMSJgoPbmV4dF9wYWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2Vu');
 
+@$core.Deprecated('Use updateInventoryRequestDescriptor instead')
+const UpdateInventoryRequest$json = {
+  '1': 'UpdateInventoryRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'stock', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.inventory.StockData', '9': 0, '10': 'stock'},
+    {'1': 'deriv', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.inventory.DerivData', '9': 0, '10': 'deriv'},
+  ],
+  '8': [
+    {'1': 'data'},
+  ],
+};
+
+/// Descriptor for `UpdateInventoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateInventoryRequestDescriptor = $convert.base64Decode(
+    'ChZVcGRhdGVJbnZlbnRvcnlSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby5jZH'
+    'NhcGlzLnh5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3ltYm9sEjMKBXN0'
+    'b2NrGAogASgLMhsua2RvLnYxLmludmVudG9yeS5TdG9ja0RhdGFIAFIFc3RvY2sSMwoFZGVyaX'
+    'YYCyABKAsyGy5rZG8udjEuaW52ZW50b3J5LkRlcml2RGF0YUgAUgVkZXJpdkIGCgRkYXRh');
+
 @$core.Deprecated('Use syncInventoryFromLedgerResponseDescriptor instead')
 const SyncInventoryFromLedgerResponse$json = {
   '1': 'SyncInventoryFromLedgerResponse',

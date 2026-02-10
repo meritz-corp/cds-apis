@@ -168,6 +168,62 @@
         "tags": [
           "InventoryService"
         ]
+      },
+      "patch": {
+        "summary": "재고 수정",
+        "operationId": "InventoryService_UpdateInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "symbols/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stock": {
+                  "$ref": "#/definitions/inventoryStockData",
+                  "title": "주식 재고 데이터"
+                },
+                "deriv": {
+                  "$ref": "#/definitions/inventoryDerivData",
+                  "title": "파생상품 재고 데이터"
+                }
+              },
+              "title": "UpdateInventory 요청"
+            }
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
       }
     },
     "/v1/inventories/{fund}/{symbol}/ledger": {

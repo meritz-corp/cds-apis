@@ -63,6 +63,11 @@ class InventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getLedgerInventory, request, options: options);
   }
 
+  /// 재고 수정
+  $grpc.ResponseFuture<$0.Inventory> updateInventory($0.UpdateInventoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateInventory, request, options: options);
+  }
+
   /// 원장에서 재고 동기화
   $grpc.ResponseFuture<$0.SyncInventoryFromLedgerResponse> syncInventoryFromLedger($0.SyncInventoryFromLedgerRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$syncInventoryFromLedger, request, options: options);
@@ -94,6 +99,10 @@ class InventoryServiceClient extends $grpc.Client {
       '/kdo.v1.inventory.InventoryService/GetLedgerInventory',
       ($0.GetLedgerInventoryRequest value) => value.writeToBuffer(),
       $0.LedgerInventory.fromBuffer);
+  static final _$updateInventory = $grpc.ClientMethod<$0.UpdateInventoryRequest, $0.Inventory>(
+      '/kdo.v1.inventory.InventoryService/UpdateInventory',
+      ($0.UpdateInventoryRequest value) => value.writeToBuffer(),
+      $0.Inventory.fromBuffer);
   static final _$syncInventoryFromLedger = $grpc.ClientMethod<$0.SyncInventoryFromLedgerRequest, $0.SyncInventoryFromLedgerResponse>(
       '/kdo.v1.inventory.InventoryService/SyncInventoryFromLedger',
       ($0.SyncInventoryFromLedgerRequest value) => value.writeToBuffer(),
@@ -147,6 +156,13 @@ abstract class InventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetLedgerInventoryRequest.fromBuffer(value),
         ($0.LedgerInventory value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateInventoryRequest, $0.Inventory>(
+        'UpdateInventory',
+        updateInventory_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateInventoryRequest.fromBuffer(value),
+        ($0.Inventory value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.SyncInventoryFromLedgerRequest, $0.SyncInventoryFromLedgerResponse>(
         'SyncInventoryFromLedger',
         syncInventoryFromLedger_Pre,
@@ -191,6 +207,12 @@ abstract class InventoryServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.LedgerInventory> getLedgerInventory($grpc.ServiceCall call, $0.GetLedgerInventoryRequest request);
+
+  $async.Future<$0.Inventory> updateInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateInventoryRequest> $request) async {
+    return updateInventory($call, await $request);
+  }
+
+  $async.Future<$0.Inventory> updateInventory($grpc.ServiceCall call, $0.UpdateInventoryRequest request);
 
   $async.Future<$0.SyncInventoryFromLedgerResponse> syncInventoryFromLedger_Pre($grpc.ServiceCall $call, $async.Future<$0.SyncInventoryFromLedgerRequest> $request) async {
     return syncInventoryFromLedger($call, await $request);

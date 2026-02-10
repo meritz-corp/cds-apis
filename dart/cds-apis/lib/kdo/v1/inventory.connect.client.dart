@@ -117,6 +117,24 @@ extension type InventoryServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 재고 수정
+  Future<kdov1inventory.Inventory> updateInventory(
+    kdov1inventory.UpdateInventoryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.updateInventory,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 원장에서 재고 동기화
   Future<kdov1inventory.SyncInventoryFromLedgerResponse> syncInventoryFromLedger(
     kdov1inventory.SyncInventoryFromLedgerRequest input, {

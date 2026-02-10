@@ -59,6 +59,15 @@ service InventoryService {
     option (google.api.method_signature) = "fund,symbol";
   }
 
+  // 재고 수정
+  rpc UpdateInventory(UpdateInventoryRequest) returns (Inventory) {
+    option (google.api.http) = {
+      patch: "/v1/inventories/{fund=funds/*}/{symbol=symbols/*}"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,symbol";
+  }
+
   // 원장에서 재고 동기화
   rpc SyncInventoryFromLedger(SyncInventoryFromLedgerRequest) returns (SyncInventoryFromLedgerResponse) {
     option (google.api.http) = {
@@ -384,6 +393,28 @@ message ListLedgerInventoriesResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
+}
+
+// UpdateInventory 요청
+message UpdateInventoryRequest {
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  string symbol = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 업데이트할 재고 데이터
+  oneof data {
+    // 주식 재고 데이터
+    StockData stock = 10;
+    // 파생상품 재고 데이터
+    DerivData deriv = 11;
+  }
 }
 
 // SyncInventoryFromLedger 응답

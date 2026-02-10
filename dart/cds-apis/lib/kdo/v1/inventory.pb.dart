@@ -1553,6 +1553,110 @@ class ListLedgerInventoriesResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+enum UpdateInventoryRequest_Data {
+  stock, 
+  deriv, 
+  notSet
+}
+
+/// UpdateInventory 요청
+class UpdateInventoryRequest extends $pb.GeneratedMessage {
+  factory UpdateInventoryRequest({
+    $core.String? fund,
+    $core.String? symbol,
+    StockData? stock,
+    DerivData? deriv,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (symbol != null) result.symbol = symbol;
+    if (stock != null) result.stock = stock;
+    if (deriv != null) result.deriv = deriv;
+    return result;
+  }
+
+  UpdateInventoryRequest._();
+
+  factory UpdateInventoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateInventoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static const $core.Map<$core.int, UpdateInventoryRequest_Data> _UpdateInventoryRequest_DataByTag = {
+    10 : UpdateInventoryRequest_Data.stock,
+    11 : UpdateInventoryRequest_Data.deriv,
+    0 : UpdateInventoryRequest_Data.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateInventoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..oo(0, [10, 11])
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOM<StockData>(10, _omitFieldNames ? '' : 'stock', subBuilder: StockData.create)
+    ..aOM<DerivData>(11, _omitFieldNames ? '' : 'deriv', subBuilder: DerivData.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateInventoryRequest clone() => UpdateInventoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateInventoryRequest copyWith(void Function(UpdateInventoryRequest) updates) => super.copyWith((message) => updates(message as UpdateInventoryRequest)) as UpdateInventoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateInventoryRequest create() => UpdateInventoryRequest._();
+  @$core.override
+  UpdateInventoryRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateInventoryRequest> createRepeated() => $pb.PbList<UpdateInventoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateInventoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateInventoryRequest>(create);
+  static UpdateInventoryRequest? _defaultInstance;
+
+  UpdateInventoryRequest_Data whichData() => _UpdateInventoryRequest_DataByTag[$_whichOneof(0)]!;
+  void clearData() => $_clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 주식 재고 데이터
+  @$pb.TagNumber(10)
+  StockData get stock => $_getN(2);
+  @$pb.TagNumber(10)
+  set stock(StockData value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasStock() => $_has(2);
+  @$pb.TagNumber(10)
+  void clearStock() => $_clearField(10);
+  @$pb.TagNumber(10)
+  StockData ensureStock() => $_ensure(2);
+
+  /// 파생상품 재고 데이터
+  @$pb.TagNumber(11)
+  DerivData get deriv => $_getN(3);
+  @$pb.TagNumber(11)
+  set deriv(DerivData value) => $_setField(11, value);
+  @$pb.TagNumber(11)
+  $core.bool hasDeriv() => $_has(3);
+  @$pb.TagNumber(11)
+  void clearDeriv() => $_clearField(11);
+  @$pb.TagNumber(11)
+  DerivData ensureDeriv() => $_ensure(3);
+}
+
 /// SyncInventoryFromLedger 응답
 class SyncInventoryFromLedgerResponse extends $pb.GeneratedMessage {
   factory SyncInventoryFromLedgerResponse({

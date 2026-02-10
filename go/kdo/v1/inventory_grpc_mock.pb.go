@@ -659,6 +659,26 @@ func (mr *MockInventoryServiceClientMockRecorder) SyncInventoryFromLedger(ctx, i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceClient)(nil).SyncInventoryFromLedger), varargs...)
 }
 
+// UpdateInventory mocks base method.
+func (m *MockInventoryServiceClient) UpdateInventory(ctx context.Context, in *UpdateInventoryRequest, opts ...grpc.CallOption) (*Inventory, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateInventory", varargs...)
+	ret0, _ := ret[0].(*Inventory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateInventory indicates an expected call of UpdateInventory.
+func (mr *MockInventoryServiceClientMockRecorder) UpdateInventory(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInventory", reflect.TypeOf((*MockInventoryServiceClient)(nil).UpdateInventory), varargs...)
+}
+
 // MockInventoryServiceServer is a mock of InventoryServiceServer interface.
 type MockInventoryServiceServer struct {
 	ctrl     *gomock.Controller
@@ -783,4 +803,19 @@ func (m *MockInventoryServiceServer) SyncInventoryFromLedger(ctx context.Context
 func (mr *MockInventoryServiceServerMockRecorder) SyncInventoryFromLedger(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceServer)(nil).SyncInventoryFromLedger), ctx, in)
+}
+
+// UpdateInventory mocks base method.
+func (m *MockInventoryServiceServer) UpdateInventory(ctx context.Context, in *UpdateInventoryRequest) (*Inventory, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateInventory", ctx, in)
+	ret0, _ := ret[0].(*Inventory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateInventory indicates an expected call of UpdateInventory.
+func (mr *MockInventoryServiceServerMockRecorder) UpdateInventory(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInventory", reflect.TypeOf((*MockInventoryServiceServer)(nil).UpdateInventory), ctx, in)
 }

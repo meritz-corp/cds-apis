@@ -34,6 +34,8 @@ type InventoryServiceClient interface {
 	ListLedgerInventories(ctx context.Context, in *ListLedgerInventoriesRequest, opts ...grpc.CallOption) (*ListLedgerInventoriesResponse, error)
 	// 원장 재고 조회 (주식/파생 통합)
 	GetLedgerInventory(ctx context.Context, in *GetLedgerInventoryRequest, opts ...grpc.CallOption) (*LedgerInventory, error)
+	// 재고 수정
+	UpdateInventory(ctx context.Context, in *UpdateInventoryRequest, opts ...grpc.CallOption) (*Inventory, error)
 	// 원장에서 재고 동기화
 	SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest, opts ...grpc.CallOption) (*SyncInventoryFromLedgerResponse, error)
 }
@@ -146,6 +148,15 @@ func (c *inventoryServiceClient) GetLedgerInventory(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *inventoryServiceClient) UpdateInventory(ctx context.Context, in *UpdateInventoryRequest, opts ...grpc.CallOption) (*Inventory, error) {
+	out := new(Inventory)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/UpdateInventory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *inventoryServiceClient) SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest, opts ...grpc.CallOption) (*SyncInventoryFromLedgerResponse, error) {
 	out := new(SyncInventoryFromLedgerResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/SyncInventoryFromLedger", in, out, opts...)
@@ -171,6 +182,8 @@ type InventoryServiceServer interface {
 	ListLedgerInventories(context.Context, *ListLedgerInventoriesRequest) (*ListLedgerInventoriesResponse, error)
 	// 원장 재고 조회 (주식/파생 통합)
 	GetLedgerInventory(context.Context, *GetLedgerInventoryRequest) (*LedgerInventory, error)
+	// 재고 수정
+	UpdateInventory(context.Context, *UpdateInventoryRequest) (*Inventory, error)
 	// 원장에서 재고 동기화
 	SyncInventoryFromLedger(context.Context, *SyncInventoryFromLedgerRequest) (*SyncInventoryFromLedgerResponse, error)
 	mustEmbedUnimplementedInventoryServiceServer()
@@ -197,6 +210,9 @@ func (UnimplementedInventoryServiceServer) ListLedgerInventories(context.Context
 }
 func (UnimplementedInventoryServiceServer) GetLedgerInventory(context.Context, *GetLedgerInventoryRequest) (*LedgerInventory, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLedgerInventory not implemented")
+}
+func (UnimplementedInventoryServiceServer) UpdateInventory(context.Context, *UpdateInventoryRequest) (*Inventory, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInventory not implemented")
 }
 func (UnimplementedInventoryServiceServer) SyncInventoryFromLedger(context.Context, *SyncInventoryFromLedgerRequest) (*SyncInventoryFromLedgerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SyncInventoryFromLedger not implemented")
@@ -328,6 +344,24 @@ func _InventoryService_GetLedgerInventory_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_UpdateInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInventoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).UpdateInventory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/UpdateInventory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).UpdateInventory(ctx, req.(*UpdateInventoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InventoryService_SyncInventoryFromLedger_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SyncInventoryFromLedgerRequest)
 	if err := dec(in); err != nil {
@@ -368,6 +402,10 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLedgerInventory",
 			Handler:    _InventoryService_GetLedgerInventory_Handler,
+		},
+		{
+			MethodName: "UpdateInventory",
+			Handler:    _InventoryService_UpdateInventory_Handler,
 		},
 		{
 			MethodName: "SyncInventoryFromLedger",

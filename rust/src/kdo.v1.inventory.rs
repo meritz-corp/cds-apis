@@ -356,6 +356,32 @@ pub struct ListLedgerInventoriesResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+/// UpdateInventory 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateInventoryRequest {
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 업데이트할 재고 데이터
+    #[prost(oneof="update_inventory_request::Data", tags="10, 11")]
+    pub data: ::core::option::Option<update_inventory_request::Data>,
+}
+/// Nested message and enum types in `UpdateInventoryRequest`.
+pub mod update_inventory_request {
+    /// 업데이트할 재고 데이터
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Data {
+        /// 주식 재고 데이터
+        #[prost(message, tag="10")]
+        Stock(super::StockData),
+        /// 파생상품 재고 데이터
+        #[prost(message, tag="11")]
+        Deriv(super::DerivData),
+    }
+}
 /// SyncInventoryFromLedger 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
