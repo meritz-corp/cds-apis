@@ -679,6 +679,82 @@ class GetFundRequest extends $pb.GeneratedMessage {
   void clearFund() => $_clearField(1);
 }
 
+/// UpdateFundLimit 요청
+class UpdateFundLimitRequest extends $pb.GeneratedMessage {
+  factory UpdateFundLimitRequest({
+    $core.String? fund,
+    $core.String? symbol,
+    FundLimit? fundLimit,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (symbol != null) result.symbol = symbol;
+    if (fundLimit != null) result.fundLimit = fundLimit;
+    return result;
+  }
+
+  UpdateFundLimitRequest._();
+
+  factory UpdateFundLimitRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateFundLimitRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateFundLimitRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOM<FundLimit>(3, _omitFieldNames ? '' : 'fundLimit', subBuilder: FundLimit.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateFundLimitRequest clone() => UpdateFundLimitRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateFundLimitRequest copyWith(void Function(UpdateFundLimitRequest) updates) => super.copyWith((message) => updates(message as UpdateFundLimitRequest)) as UpdateFundLimitRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateFundLimitRequest create() => UpdateFundLimitRequest._();
+  @$core.override
+  UpdateFundLimitRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateFundLimitRequest> createRepeated() => $pb.PbList<UpdateFundLimitRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateFundLimitRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateFundLimitRequest>(create);
+  static UpdateFundLimitRequest? _defaultInstance;
+
+  /// 펀드 리소스 이름 (예: funds/0159)
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 수정할 한도 정보
+  @$pb.TagNumber(3)
+  FundLimit get fundLimit => $_getN(2);
+  @$pb.TagNumber(3)
+  set fundLimit(FundLimit value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundLimit() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundLimit() => $_clearField(3);
+  @$pb.TagNumber(3)
+  FundLimit ensureFundLimit() => $_ensure(2);
+}
+
 /// ListFunds 요청
 class ListFundsRequest extends $pb.GeneratedMessage {
   factory ListFundsRequest({

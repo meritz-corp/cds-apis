@@ -131,6 +131,28 @@ pub mod fund_service_client {
                 .insert(GrpcMethod::new("kdo.v1.fund.FundService", "StreamFund"));
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn update_fund_limit(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateFundLimitRequest>,
+        ) -> std::result::Result<tonic::Response<super::FundLimit>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.fund.FundService/UpdateFundLimit",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.fund.FundService", "UpdateFundLimit"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn list_funds(
             &mut self,
             request: impl tonic::IntoRequest<super::ListFundsRequest>,
@@ -179,6 +201,10 @@ pub mod fund_service_server {
             &self,
             request: tonic::Request<super::GetFundRequest>,
         ) -> std::result::Result<tonic::Response<Self::StreamFundStream>, tonic::Status>;
+        async fn update_fund_limit(
+            &self,
+            request: tonic::Request<super::UpdateFundLimitRequest>,
+        ) -> std::result::Result<tonic::Response<super::FundLimit>, tonic::Status>;
         async fn list_funds(
             &self,
             request: tonic::Request<super::ListFundsRequest>,
@@ -350,6 +376,51 @@ pub mod fund_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.fund.FundService/UpdateFundLimit" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateFundLimitSvc<T: FundService>(pub Arc<T>);
+                    impl<
+                        T: FundService,
+                    > tonic::server::UnaryService<super::UpdateFundLimitRequest>
+                    for UpdateFundLimitSvc<T> {
+                        type Response = super::FundLimit;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateFundLimitRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as FundService>::update_fund_limit(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UpdateFundLimitSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

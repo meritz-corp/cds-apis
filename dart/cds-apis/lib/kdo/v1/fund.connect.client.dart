@@ -45,6 +45,24 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 펀드 한도 수정
+  Future<kdov1fund.FundLimit> updateFundLimit(
+    kdov1fund.UpdateFundLimitRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FundService.updateFundLimit,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 펀드 목록 조회
   Future<kdov1fund.ListFundsResponse> listFunds(
     kdov1fund.ListFundsRequest input, {

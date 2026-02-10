@@ -27,6 +27,14 @@ abstract final class FundService {
     kdov1fund.Fund.new,
   );
 
+  /// 펀드 한도 수정
+  static const updateFundLimit = connect.Spec(
+    '/$name/UpdateFundLimit',
+    connect.StreamType.unary,
+    kdov1fund.UpdateFundLimitRequest.new,
+    kdov1fund.FundLimit.new,
+  );
+
   /// 펀드 목록 조회
   static const listFunds = connect.Spec(
     '/$name/ListFunds',

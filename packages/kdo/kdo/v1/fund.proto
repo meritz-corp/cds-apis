@@ -30,6 +30,15 @@ service FundService {
     option (google.api.method_signature) = "fund";
   }
 
+  // 펀드 한도 수정
+  rpc UpdateFundLimit(UpdateFundLimitRequest) returns (FundLimit) {
+    option (google.api.http) = {
+      patch: "/v1/{fund=funds/*}/limits/{symbol}"
+      body: "fund_limit"
+    };
+    option (google.api.method_signature) = "fund,symbol,fund_limit";
+  }
+
   // 펀드 목록 조회
   rpc ListFunds(ListFundsRequest) returns (ListFundsResponse) {
     option (google.api.http) = {
@@ -161,6 +170,23 @@ message GetFundRequest {
       type: "kdo.cdsapis.xyz/Fund"
     }
   ];
+}
+
+// UpdateFundLimit 요청
+message UpdateFundLimitRequest {
+  // 펀드 리소스 이름 (예: funds/0159)
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 종목 심볼
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 수정할 한도 정보
+  FundLimit fund_limit = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // ListFunds 요청

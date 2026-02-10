@@ -137,6 +137,20 @@ pub struct GetFundRequest {
     #[prost(string, tag="1")]
     pub fund: ::prost::alloc::string::String,
 }
+/// UpdateFundLimit 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateFundLimitRequest {
+    /// 펀드 리소스 이름 (예: funds/0159)
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 종목 심볼
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 수정할 한도 정보
+    #[prost(message, optional, tag="3")]
+    pub fund_limit: ::core::option::Option<FundLimit>,
+}
 /// ListFunds 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

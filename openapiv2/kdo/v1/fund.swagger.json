@@ -96,6 +96,58 @@
         ]
       }
     },
+    "/v1/{fund}/limits/{symbol}": {
+      "patch": {
+        "summary": "펀드 한도 수정",
+        "operationId": "FundService_UpdateFundLimit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fundFundLimit"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스 이름 (예: funds/0159)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "symbol",
+            "description": "종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fundLimit",
+            "description": "수정할 한도 정보",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fundFundLimit",
+              "required": [
+                "fundLimit"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "FundService"
+        ]
+      }
+    },
     "/v1/{fund}:stream": {
       "get": {
         "summary": "단일 펀드 스트림",

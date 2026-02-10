@@ -26,6 +26,8 @@ type FundServiceClient interface {
 	GetFund(ctx context.Context, in *GetFundRequest, opts ...grpc.CallOption) (*Fund, error)
 	// 단일 펀드 스트림
 	StreamFund(ctx context.Context, in *GetFundRequest, opts ...grpc.CallOption) (FundService_StreamFundClient, error)
+	// 펀드 한도 수정
+	UpdateFundLimit(ctx context.Context, in *UpdateFundLimitRequest, opts ...grpc.CallOption) (*FundLimit, error)
 	// 펀드 목록 조회
 	ListFunds(ctx context.Context, in *ListFundsRequest, opts ...grpc.CallOption) (*ListFundsResponse, error)
 }
@@ -79,6 +81,15 @@ func (x *fundServiceStreamFundClient) Recv() (*Fund, error) {
 	return m, nil
 }
 
+func (c *fundServiceClient) UpdateFundLimit(ctx context.Context, in *UpdateFundLimitRequest, opts ...grpc.CallOption) (*FundLimit, error) {
+	out := new(FundLimit)
+	err := c.cc.Invoke(ctx, "/kdo.v1.fund.FundService/UpdateFundLimit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *fundServiceClient) ListFunds(ctx context.Context, in *ListFundsRequest, opts ...grpc.CallOption) (*ListFundsResponse, error) {
 	out := new(ListFundsResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.fund.FundService/ListFunds", in, out, opts...)
@@ -96,6 +107,8 @@ type FundServiceServer interface {
 	GetFund(context.Context, *GetFundRequest) (*Fund, error)
 	// 단일 펀드 스트림
 	StreamFund(*GetFundRequest, FundService_StreamFundServer) error
+	// 펀드 한도 수정
+	UpdateFundLimit(context.Context, *UpdateFundLimitRequest) (*FundLimit, error)
 	// 펀드 목록 조회
 	ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error)
 	mustEmbedUnimplementedFundServiceServer()
@@ -110,6 +123,9 @@ func (UnimplementedFundServiceServer) GetFund(context.Context, *GetFundRequest) 
 }
 func (UnimplementedFundServiceServer) StreamFund(*GetFundRequest, FundService_StreamFundServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamFund not implemented")
+}
+func (UnimplementedFundServiceServer) UpdateFundLimit(context.Context, *UpdateFundLimitRequest) (*FundLimit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFundLimit not implemented")
 }
 func (UnimplementedFundServiceServer) ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFunds not implemented")
@@ -166,6 +182,24 @@ func (x *fundServiceStreamFundServer) Send(m *Fund) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _FundService_UpdateFundLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFundLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FundServiceServer).UpdateFundLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.fund.FundService/UpdateFundLimit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FundServiceServer).UpdateFundLimit(ctx, req.(*UpdateFundLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FundService_ListFunds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListFundsRequest)
 	if err := dec(in); err != nil {
@@ -194,6 +228,10 @@ var FundService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFund",
 			Handler:    _FundService_GetFund_Handler,
+		},
+		{
+			MethodName: "UpdateFundLimit",
+			Handler:    _FundService_UpdateFundLimit_Handler,
 		},
 		{
 			MethodName: "ListFunds",

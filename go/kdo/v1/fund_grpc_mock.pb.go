@@ -337,6 +337,26 @@ func (mr *MockFundServiceClientMockRecorder) StreamFund(ctx, in interface{}, opt
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFund", reflect.TypeOf((*MockFundServiceClient)(nil).StreamFund), varargs...)
 }
 
+// UpdateFundLimit mocks base method.
+func (m *MockFundServiceClient) UpdateFundLimit(ctx context.Context, in *UpdateFundLimitRequest, opts ...grpc.CallOption) (*FundLimit, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateFundLimit", varargs...)
+	ret0, _ := ret[0].(*FundLimit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateFundLimit indicates an expected call of UpdateFundLimit.
+func (mr *MockFundServiceClientMockRecorder) UpdateFundLimit(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateFundLimit", reflect.TypeOf((*MockFundServiceClient)(nil).UpdateFundLimit), varargs...)
+}
+
 // MockFundServiceServer is a mock of FundServiceServer interface.
 type MockFundServiceServer struct {
 	ctrl     *gomock.Controller
@@ -402,4 +422,19 @@ func (m *MockFundServiceServer) StreamFund(blob *GetFundRequest, server FundServ
 func (mr *MockFundServiceServerMockRecorder) StreamFund(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFund", reflect.TypeOf((*MockFundServiceServer)(nil).StreamFund), blob, server)
+}
+
+// UpdateFundLimit mocks base method.
+func (m *MockFundServiceServer) UpdateFundLimit(ctx context.Context, in *UpdateFundLimitRequest) (*FundLimit, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateFundLimit", ctx, in)
+	ret0, _ := ret[0].(*FundLimit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateFundLimit indicates an expected call of UpdateFundLimit.
+func (mr *MockFundServiceServerMockRecorder) UpdateFundLimit(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateFundLimit", reflect.TypeOf((*MockFundServiceServer)(nil).UpdateFundLimit), ctx, in)
 }

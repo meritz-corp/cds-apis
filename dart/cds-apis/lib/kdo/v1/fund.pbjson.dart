@@ -159,6 +159,23 @@ final $typed_data.Uint8List getFundRequestDescriptor = $convert.base64Decode(
     'Cg5HZXRGdW5kUmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBpcy54eX'
     'ovRnVuZFIEZnVuZA==');
 
+@$core.Deprecated('Use updateFundLimitRequestDescriptor instead')
+const UpdateFundLimitRequest$json = {
+  '1': 'UpdateFundLimitRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_limit', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundLimit', '8': {}, '10': 'fundLimit'},
+  ],
+};
+
+/// Descriptor for `UpdateFundLimitRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateFundLimitRequestDescriptor = $convert.base64Decode(
+    'ChZVcGRhdGVGdW5kTGltaXRSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby5jZH'
+    'NhcGlzLnh5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3ltYm9sEjsKCmZ1'
+    'bmRfbGltaXQYAyABKAsyFi5rZG8udjEuZnVuZC5GdW5kTGltaXRCBOJBAQJSCWZ1bmRMaW1pdA'
+    '==');
+
 @$core.Deprecated('Use listFundsRequestDescriptor instead')
 const ListFundsRequest$json = {
   '1': 'ListFundsRequest',
