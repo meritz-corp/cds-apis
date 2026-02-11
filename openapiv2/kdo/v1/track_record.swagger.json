@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/track_record.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TrackRecordService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/track_records": {
+      "get": {
+        "summary": "Track Record 목록 조회",
+        "operationId": "TrackRecordService_ListTrackRecords",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/track_recordListTrackRecordsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`\n* quote_symbol\n  * `equal`, `contains`\n* quote_side\n  * `equal`\n* market_type\n  * `equal`\n* date\n  * `equal`, `greater_equal`, `less_equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=quote_symbol:\"7526\"\n* filter=quote_side=ASK\n* filter=market_type=KOSPI\n* filter=date\u003e=20260101 AND date\u003c=20260131",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"date\", \"quote_exchange_time\", \"pnl_amount\", \"pnl_bp\", \"created_at\", \"quote_order_id\"\n\nExamples\n* order_by=quote_exchange_time desc",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TrackRecordService"
+        ]
+      }
+    },
+    "/v1/track_records/summary": {
+      "get": {
+        "summary": "Track Record 요약 통계 조회",
+        "operationId": "TrackRecordService_GetTrackRecordSummary",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/track_recordTrackRecordSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`\n* quote_symbol\n  * `equal`, `contains`\n* date\n  * `equal`, `greater_equal`, `less_equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=date\u003e=20260101 AND date\u003c=20260131",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TrackRecordService"
+        ]
+      }
+    },
+    "/v1/track_records:rebuild": {
+      "post": {
+        "summary": "Track Record 재구축 (order_logs 기반)",
+        "operationId": "TrackRecordService_RebuildTrackRecords",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/track_recordRebuildTrackRecordsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/track_recordRebuildTrackRecordsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TrackRecordService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonMarketType": {
+      "type": "string",
+      "enum": [
+        "MARKET_TYPE_UNSPECIFIED",
+        "MARKET_TYPE_KOSPI",
+        "MARKET_TYPE_KOSDAQ",
+        "MARKET_TYPE_DERIVATIVE"
+      ],
+      "default": "MARKET_TYPE_UNSPECIFIED",
+      "description": "- MARKET_TYPE_KOSPI: KOSPI\n - MARKET_TYPE_KOSDAQ: KOSDAQ\n - MARKET_TYPE_DERIVATIVE: 파생상품",
+      "title": "시장 유형"
+    },
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "track_recordListTrackRecordsResponse": {
+      "type": "object",
+      "properties": {
+        "trackRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/track_recordTrackRecord"
+          },
+          "title": "Track Record 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      },
+      "title": "ListTrackRecords 응답"
+    },
+    "track_recordRebuildTrackRecordsRequest": {
+      "type": "object",
+      "properties": {
+        "dateFrom": {
+          "type": "integer",
+          "format": "int64",
+          "title": "시작 날짜 (YYYYMMDD)"
+        },
+        "dateTo": {
+          "type": "integer",
+          "format": "int64",
+          "title": "종료 날짜 (YYYYMMDD)"
+        }
+      },
+      "title": "RebuildTrackRecords 요청",
+      "required": [
+        "dateFrom",
+        "dateTo"
+      ]
+    },
+    "track_recordRebuildTrackRecordsResponse": {
+      "type": "object",
+      "properties": {
+        "totalQuotes": {
+          "type": "string",
+          "format": "int64",
+          "title": "처리된 Quote 건수"
+        },
+        "matchedCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매칭된 건수 (Hedge가 있는)"
+        },
+        "unmatchedCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매칭되지 않은 건수"
+        },
+        "upsertedCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "upsert된 Track Record 건수"
+        }
+      },
+      "title": "RebuildTrackRecords 응답"
+    },
+    "track_recordTrackRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "고유 ID"
+        },
+        "quoteOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Quote 주문 ID"
+        },
+        "quoteSymbol": {
+          "type": "string",
+          "title": "Quote 심볼"
+        },
+        "quoteSide": {
+          "$ref": "#/definitions/commonOrderSide",
+          "title": "Quote 방향 (매수/매도)"
+        },
+        "quoteFilledPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "Quote 체결 가격"
+        },
+        "quoteFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "Quote 체결 수량"
+        },
+        "quoteFilledAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "Quote 체결 금액"
+        },
+        "hedgeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Hedge 건수"
+        },
+        "hedgeSymbol": {
+          "type": "string",
+          "title": "Hedge 심볼"
+        },
+        "hedgeFilledPriceEtf": {
+          "type": "number",
+          "format": "double",
+          "title": "Hedge 체결 가격 (ETF 기준 변환)"
+        },
+        "hedgeFilledQuantityEtf": {
+          "type": "string",
+          "format": "int64",
+          "title": "Hedge 체결 수량 (ETF 기준 변환)"
+        },
+        "hedgeFilledAmountEtf": {
+          "type": "number",
+          "format": "double",
+          "title": "Hedge 체결 금액 (ETF 기준)"
+        },
+        "expectedHedgePrice": {
+          "type": "number",
+          "format": "double",
+          "title": "기대 헷지 가격 (QuoteContext에서 추출)"
+        },
+        "pnlAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "손익 금액"
+        },
+        "pnlBp": {
+          "type": "number",
+          "format": "double",
+          "title": "손익 (bp)"
+        },
+        "slippageBp": {
+          "type": "number",
+          "format": "double",
+          "title": "슬리피지 (bp)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "date": {
+          "type": "integer",
+          "format": "int64",
+          "title": "날짜 (YYYYMMDD)"
+        },
+        "marketType": {
+          "$ref": "#/definitions/commonMarketType",
+          "title": "시장 구분"
+        },
+        "quoteExchangeTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Quote 거래소 시각 (마이크로초)"
+        },
+        "lastHedgeTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "마지막 Hedge 시각 (마이크로초)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시각"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "수정 시각"
+        }
+      },
+      "title": "Track Record"
+    },
+    "track_recordTrackRecordSummary": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 건수"
+        },
+        "totalPnlAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "총 손익 금액"
+        },
+        "avgPnlBp": {
+          "type": "number",
+          "format": "double",
+          "title": "평균 손익 (bp)"
+        },
+        "maxPnlBp": {
+          "type": "number",
+          "format": "double",
+          "title": "최대 손익 (bp)"
+        },
+        "minPnlBp": {
+          "type": "number",
+          "format": "double",
+          "title": "최소 손익 (bp)"
+        },
+        "winCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "수익 건수"
+        },
+        "lossCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "손실 건수"
+        },
+        "avgSlippageBp": {
+          "type": "number",
+          "format": "double",
+          "title": "평균 슬리피지 (bp)"
+        },
+        "totalQuoteAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "총 Quote 체결 금액"
+        },
+        "totalHedgeAmountEtf": {
+          "type": "number",
+          "format": "double",
+          "title": "총 Hedge 체결 금액 (ETF 기준)"
+        }
+      },
+      "title": "Track Record 요약 통계"
+    }
+  }
+}

@@ -1,0 +1,234 @@
+syntax = "proto3";
+
+package kdo.v1.track_record;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/client.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "kdo/v1/common.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// TrackRecordService는 Quote-Hedge 매칭 기반 손익 추적 서비스를 제공합니다.
+service TrackRecordService {
+  // Track Record 목록 조회
+  rpc ListTrackRecords(ListTrackRecordsRequest) returns (ListTrackRecordsResponse) {
+    option (google.api.http) = {
+      get: "/v1/track_records"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // Track Record 요약 통계 조회
+  rpc GetTrackRecordSummary(GetTrackRecordSummaryRequest) returns (TrackRecordSummary) {
+    option (google.api.http) = {
+      get: "/v1/track_records/summary"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // Track Record 재구축 (order_logs 기반)
+  rpc RebuildTrackRecords(RebuildTrackRecordsRequest) returns (RebuildTrackRecordsResponse) {
+    option (google.api.http) = {
+      post: "/v1/track_records:rebuild"
+      body: "*"
+    };
+    option (google.api.method_signature) = "date_from,date_to";
+  }
+}
+
+// Track Record
+message TrackRecord {
+  // 고유 ID
+  int64 id = 1;
+
+  // Quote 주문 ID
+  uint64 quote_order_id = 2;
+
+  // Quote 심볼
+  string quote_symbol = 3;
+
+  // Quote 방향 (매수/매도)
+  kdo.v1.common.OrderSide quote_side = 4;
+
+  // Quote 체결 가격
+  double quote_filled_price = 5;
+
+  // Quote 체결 수량
+  int64 quote_filled_quantity = 6;
+
+  // Quote 체결 금액
+  double quote_filled_amount = 7;
+
+  // Hedge 건수
+  int32 hedge_count = 8;
+
+  // Hedge 심볼
+  optional string hedge_symbol = 9;
+
+  // Hedge 체결 가격 (ETF 기준 변환)
+  optional double hedge_filled_price_etf = 10;
+
+  // Hedge 체결 수량 (ETF 기준 변환)
+  int64 hedge_filled_quantity_etf = 11;
+
+  // Hedge 체결 금액 (ETF 기준)
+  double hedge_filled_amount_etf = 12;
+
+  // 기대 헷지 가격 (QuoteContext에서 추출)
+  optional double expected_hedge_price = 13;
+
+  // 손익 금액
+  double pnl_amount = 14;
+
+  // 손익 (bp)
+  double pnl_bp = 15;
+
+  // 슬리피지 (bp)
+  optional double slippage_bp = 16;
+
+  // 펀드 코드
+  string fund_code = 17;
+
+  // 날짜 (YYYYMMDD)
+  uint32 date = 18;
+
+  // 시장 구분
+  kdo.v1.common.MarketType market_type = 19;
+
+  // Quote 거래소 시각 (마이크로초)
+  uint64 quote_exchange_time = 20;
+
+  // 마지막 Hedge 시각 (마이크로초)
+  optional uint64 last_hedge_time = 21;
+
+  // 생성 시각
+  google.protobuf.Timestamp created_at = 22;
+
+  // 수정 시각
+  google.protobuf.Timestamp updated_at = 23;
+}
+
+// Track Record 요약 통계
+message TrackRecordSummary {
+  // 총 건수
+  int64 total_count = 1;
+
+  // 총 손익 금액
+  double total_pnl_amount = 2;
+
+  // 평균 손익 (bp)
+  double avg_pnl_bp = 3;
+
+  // 최대 손익 (bp)
+  double max_pnl_bp = 4;
+
+  // 최소 손익 (bp)
+  double min_pnl_bp = 5;
+
+  // 수익 건수
+  int64 win_count = 6;
+
+  // 손실 건수
+  int64 loss_count = 7;
+
+  // 평균 슬리피지 (bp)
+  optional double avg_slippage_bp = 8;
+
+  // 총 Quote 체결 금액
+  double total_quote_amount = 9;
+
+  // 총 Hedge 체결 금액 (ETF 기준)
+  double total_hedge_amount_etf = 10;
+}
+
+// ========== Request/Response Messages ==========
+
+// ListTrackRecords 요청
+message ListTrackRecordsRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // Available Sequence and Operator
+  // * fund_code
+  //   * `equal`
+  // * quote_symbol
+  //   * `equal`, `contains`
+  // * quote_side
+  //   * `equal`
+  // * market_type
+  //   * `equal`
+  // * date
+  //   * `equal`, `greater_equal`, `less_equal`
+  //
+  // Examples
+  // * filter=fund_code="0159"
+  // * filter=quote_symbol:"7526"
+  // * filter=quote_side=ASK
+  // * filter=market_type=KOSPI
+  // * filter=date>=20260101 AND date<=20260131
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // 오더링 조건. (optional, AIP-132)
+  //
+  // Supported Fields
+  // * "date", "quote_exchange_time", "pnl_amount", "pnl_bp", "created_at", "quote_order_id"
+  //
+  // Examples
+  // * order_by=quote_exchange_time desc
+  string order_by = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// ListTrackRecords 응답
+message ListTrackRecordsResponse {
+  // Track Record 목록
+  repeated TrackRecord track_records = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+// GetTrackRecordSummary 요청
+message GetTrackRecordSummaryRequest {
+  // Available Sequence and Operator
+  // * fund_code
+  //   * `equal`
+  // * quote_symbol
+  //   * `equal`, `contains`
+  // * date
+  //   * `equal`, `greater_equal`, `less_equal`
+  //
+  // Examples
+  // * filter=fund_code="0159"
+  // * filter=date>=20260101 AND date<=20260131
+  string filter = 1 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// RebuildTrackRecords 요청
+message RebuildTrackRecordsRequest {
+  // 시작 날짜 (YYYYMMDD)
+  uint32 date_from = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 종료 날짜 (YYYYMMDD)
+  uint32 date_to = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// RebuildTrackRecords 응답
+message RebuildTrackRecordsResponse {
+  // 처리된 Quote 건수
+  int64 total_quotes = 1;
+
+  // 매칭된 건수 (Hedge가 있는)
+  int64 matched_count = 2;
+
+  // 매칭되지 않은 건수
+  int64 unmatched_count = 3;
+
+  // upsert된 Track Record 건수
+  int64 upserted_count = 4;
+}

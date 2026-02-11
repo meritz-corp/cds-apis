@@ -922,12 +922,14 @@ class UnderlyingFuture extends $pb.GeneratedMessage {
     $core.String? multiple,
     $core.String? lastAskPrice,
     $core.String? lastBidPrice,
+    $core.double? ratioPerCu,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (multiple != null) result.multiple = multiple;
     if (lastAskPrice != null) result.lastAskPrice = lastAskPrice;
     if (lastBidPrice != null) result.lastBidPrice = lastBidPrice;
+    if (ratioPerCu != null) result.ratioPerCu = ratioPerCu;
     return result;
   }
 
@@ -941,6 +943,7 @@ class UnderlyingFuture extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'multiple')
     ..aOS(3, _omitFieldNames ? '' : 'lastAskPrice')
     ..aOS(4, _omitFieldNames ? '' : 'lastBidPrice')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'ratioPerCu', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1000,6 +1003,16 @@ class UnderlyingFuture extends $pb.GeneratedMessage {
   $core.bool hasLastBidPrice() => $_has(3);
   @$pb.TagNumber(4)
   void clearLastBidPrice() => $_clearField(4);
+
+  /// CU당 헷지 비율
+  @$pb.TagNumber(5)
+  $core.double get ratioPerCu => $_getN(4);
+  @$pb.TagNumber(5)
+  set ratioPerCu($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasRatioPerCu() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRatioPerCu() => $_clearField(5);
 }
 
 /// 채권형 기초자산

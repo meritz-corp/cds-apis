@@ -472,6 +472,11 @@
         "lastBidPrice": {
           "type": "string",
           "title": "최근 매수호가"
+        },
+        "ratioPerCu": {
+          "type": "number",
+          "format": "double",
+          "title": "CU당 헷지 비율"
         }
       },
       "title": "선물형 기초자산"

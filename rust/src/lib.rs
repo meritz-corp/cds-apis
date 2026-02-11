@@ -68,6 +68,9 @@ pub mod kdo {
         pub mod future {
             include!("kdo.v1.future.rs");
         }
+        pub mod track_record {
+            include!("kdo.v1.track_record.rs");
+        }
         pub mod common {
             include!("kdo.v1.common.rs");
         }

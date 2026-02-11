@@ -183,6 +183,9 @@ pub struct UnderlyingFuture {
     /// 최근 매수호가
     #[prost(string, tag="4")]
     pub last_bid_price: ::prost::alloc::string::String,
+    /// CU당 헷지 비율
+    #[prost(double, tag="5")]
+    pub ratio_per_cu: f64,
 }
 /// 채권형 기초자산
 #[allow(clippy::derive_partial_eq_without_eq)]
