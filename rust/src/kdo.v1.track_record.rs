@@ -31,18 +31,21 @@ pub struct TrackRecord {
     /// Hedge 심볼
     #[prost(string, optional, tag="9")]
     pub hedge_symbol: ::core::option::Option<::prost::alloc::string::String>,
-    /// Hedge 체결 가격 (ETF 기준 변환)
+    /// Hedge 체결 평균 가격 (선물 원시 가격)
     #[prost(double, optional, tag="10")]
-    pub hedge_filled_price_etf: ::core::option::Option<f64>,
-    /// Hedge 체결 수량 (ETF 기준 변환)
+    pub hedge_filled_price: ::core::option::Option<f64>,
+    /// Hedge 체결 수량 (선물 계약 수)
     #[prost(int64, tag="11")]
-    pub hedge_filled_quantity_etf: i64,
-    /// Hedge 체결 금액 (ETF 기준)
+    pub hedge_filled_quantity: i64,
+    /// Hedge 체결 금액 (선물 기준)
     #[prost(double, tag="12")]
-    pub hedge_filled_amount_etf: f64,
-    /// 기대 헷지 가격 (QuoteContext에서 추출)
+    pub hedge_filled_amount: f64,
+    /// 기대 헷지 가격 (QuoteContext에서 추출, 선물 환산)
     #[prost(double, optional, tag="13")]
     pub expected_hedge_price: ::core::option::Option<f64>,
+    /// Quote 가격의 선물 환산가
+    #[prost(double, optional, tag="24")]
+    pub quote_price_as_hedge: ::core::option::Option<f64>,
     /// 손익 금액
     #[prost(double, tag="14")]
     pub pnl_amount: f64,
@@ -105,9 +108,9 @@ pub struct TrackRecordSummary {
     /// 총 Quote 체결 금액
     #[prost(double, tag="9")]
     pub total_quote_amount: f64,
-    /// 총 Hedge 체결 금액 (ETF 기준)
+    /// 총 Hedge 체결 금액
     #[prost(double, tag="10")]
-    pub total_hedge_amount_etf: f64,
+    pub total_hedge_amount: f64,
 }
 // ========== Request/Response Messages ==========
 

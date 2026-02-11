@@ -32,9 +32,9 @@ class TrackRecord extends $pb.GeneratedMessage {
     $core.double? quoteFilledAmount,
     $core.int? hedgeCount,
     $core.String? hedgeSymbol,
-    $core.double? hedgeFilledPriceEtf,
-    $fixnum.Int64? hedgeFilledQuantityEtf,
-    $core.double? hedgeFilledAmountEtf,
+    $core.double? hedgeFilledPrice,
+    $fixnum.Int64? hedgeFilledQuantity,
+    $core.double? hedgeFilledAmount,
     $core.double? expectedHedgePrice,
     $core.double? pnlAmount,
     $core.double? pnlBp,
@@ -46,6 +46,7 @@ class TrackRecord extends $pb.GeneratedMessage {
     $fixnum.Int64? lastHedgeTime,
     $1.Timestamp? createdAt,
     $1.Timestamp? updatedAt,
+    $core.double? quotePriceAsHedge,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -57,9 +58,9 @@ class TrackRecord extends $pb.GeneratedMessage {
     if (quoteFilledAmount != null) result.quoteFilledAmount = quoteFilledAmount;
     if (hedgeCount != null) result.hedgeCount = hedgeCount;
     if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
-    if (hedgeFilledPriceEtf != null) result.hedgeFilledPriceEtf = hedgeFilledPriceEtf;
-    if (hedgeFilledQuantityEtf != null) result.hedgeFilledQuantityEtf = hedgeFilledQuantityEtf;
-    if (hedgeFilledAmountEtf != null) result.hedgeFilledAmountEtf = hedgeFilledAmountEtf;
+    if (hedgeFilledPrice != null) result.hedgeFilledPrice = hedgeFilledPrice;
+    if (hedgeFilledQuantity != null) result.hedgeFilledQuantity = hedgeFilledQuantity;
+    if (hedgeFilledAmount != null) result.hedgeFilledAmount = hedgeFilledAmount;
     if (expectedHedgePrice != null) result.expectedHedgePrice = expectedHedgePrice;
     if (pnlAmount != null) result.pnlAmount = pnlAmount;
     if (pnlBp != null) result.pnlBp = pnlBp;
@@ -71,6 +72,7 @@ class TrackRecord extends $pb.GeneratedMessage {
     if (lastHedgeTime != null) result.lastHedgeTime = lastHedgeTime;
     if (createdAt != null) result.createdAt = createdAt;
     if (updatedAt != null) result.updatedAt = updatedAt;
+    if (quotePriceAsHedge != null) result.quotePriceAsHedge = quotePriceAsHedge;
     return result;
   }
 
@@ -89,9 +91,9 @@ class TrackRecord extends $pb.GeneratedMessage {
     ..a<$core.double>(7, _omitFieldNames ? '' : 'quoteFilledAmount', $pb.PbFieldType.OD)
     ..a<$core.int>(8, _omitFieldNames ? '' : 'hedgeCount', $pb.PbFieldType.O3)
     ..aOS(9, _omitFieldNames ? '' : 'hedgeSymbol')
-    ..a<$core.double>(10, _omitFieldNames ? '' : 'hedgeFilledPriceEtf', $pb.PbFieldType.OD)
-    ..aInt64(11, _omitFieldNames ? '' : 'hedgeFilledQuantityEtf')
-    ..a<$core.double>(12, _omitFieldNames ? '' : 'hedgeFilledAmountEtf', $pb.PbFieldType.OD)
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'hedgeFilledPrice', $pb.PbFieldType.OD)
+    ..aInt64(11, _omitFieldNames ? '' : 'hedgeFilledQuantity')
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'hedgeFilledAmount', $pb.PbFieldType.OD)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'expectedHedgePrice', $pb.PbFieldType.OD)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'pnlAmount', $pb.PbFieldType.OD)
     ..a<$core.double>(15, _omitFieldNames ? '' : 'pnlBp', $pb.PbFieldType.OD)
@@ -103,6 +105,7 @@ class TrackRecord extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(21, _omitFieldNames ? '' : 'lastHedgeTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$1.Timestamp>(22, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..aOM<$1.Timestamp>(23, _omitFieldNames ? '' : 'updatedAt', subBuilder: $1.Timestamp.create)
+    ..a<$core.double>(24, _omitFieldNames ? '' : 'quotePriceAsHedge', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -213,37 +216,37 @@ class TrackRecord extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   void clearHedgeSymbol() => $_clearField(9);
 
-  /// Hedge 체결 가격 (ETF 기준 변환)
+  /// Hedge 체결 평균 가격 (선물 원시 가격)
   @$pb.TagNumber(10)
-  $core.double get hedgeFilledPriceEtf => $_getN(9);
+  $core.double get hedgeFilledPrice => $_getN(9);
   @$pb.TagNumber(10)
-  set hedgeFilledPriceEtf($core.double value) => $_setDouble(9, value);
+  set hedgeFilledPrice($core.double value) => $_setDouble(9, value);
   @$pb.TagNumber(10)
-  $core.bool hasHedgeFilledPriceEtf() => $_has(9);
+  $core.bool hasHedgeFilledPrice() => $_has(9);
   @$pb.TagNumber(10)
-  void clearHedgeFilledPriceEtf() => $_clearField(10);
+  void clearHedgeFilledPrice() => $_clearField(10);
 
-  /// Hedge 체결 수량 (ETF 기준 변환)
+  /// Hedge 체결 수량 (선물 계약 수)
   @$pb.TagNumber(11)
-  $fixnum.Int64 get hedgeFilledQuantityEtf => $_getI64(10);
+  $fixnum.Int64 get hedgeFilledQuantity => $_getI64(10);
   @$pb.TagNumber(11)
-  set hedgeFilledQuantityEtf($fixnum.Int64 value) => $_setInt64(10, value);
+  set hedgeFilledQuantity($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(11)
-  $core.bool hasHedgeFilledQuantityEtf() => $_has(10);
+  $core.bool hasHedgeFilledQuantity() => $_has(10);
   @$pb.TagNumber(11)
-  void clearHedgeFilledQuantityEtf() => $_clearField(11);
+  void clearHedgeFilledQuantity() => $_clearField(11);
 
-  /// Hedge 체결 금액 (ETF 기준)
+  /// Hedge 체결 금액 (선물 기준)
   @$pb.TagNumber(12)
-  $core.double get hedgeFilledAmountEtf => $_getN(11);
+  $core.double get hedgeFilledAmount => $_getN(11);
   @$pb.TagNumber(12)
-  set hedgeFilledAmountEtf($core.double value) => $_setDouble(11, value);
+  set hedgeFilledAmount($core.double value) => $_setDouble(11, value);
   @$pb.TagNumber(12)
-  $core.bool hasHedgeFilledAmountEtf() => $_has(11);
+  $core.bool hasHedgeFilledAmount() => $_has(11);
   @$pb.TagNumber(12)
-  void clearHedgeFilledAmountEtf() => $_clearField(12);
+  void clearHedgeFilledAmount() => $_clearField(12);
 
-  /// 기대 헷지 가격 (QuoteContext에서 추출)
+  /// 기대 헷지 가격 (QuoteContext에서 추출, 선물 환산)
   @$pb.TagNumber(13)
   $core.double get expectedHedgePrice => $_getN(12);
   @$pb.TagNumber(13)
@@ -356,6 +359,16 @@ class TrackRecord extends $pb.GeneratedMessage {
   void clearUpdatedAt() => $_clearField(23);
   @$pb.TagNumber(23)
   $1.Timestamp ensureUpdatedAt() => $_ensure(22);
+
+  /// Quote 가격의 선물 환산가
+  @$pb.TagNumber(24)
+  $core.double get quotePriceAsHedge => $_getN(23);
+  @$pb.TagNumber(24)
+  set quotePriceAsHedge($core.double value) => $_setDouble(23, value);
+  @$pb.TagNumber(24)
+  $core.bool hasQuotePriceAsHedge() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearQuotePriceAsHedge() => $_clearField(24);
 }
 
 /// Track Record 요약 통계
@@ -370,7 +383,7 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
     $fixnum.Int64? lossCount,
     $core.double? avgSlippageBp,
     $core.double? totalQuoteAmount,
-    $core.double? totalHedgeAmountEtf,
+    $core.double? totalHedgeAmount,
   }) {
     final result = create();
     if (totalCount != null) result.totalCount = totalCount;
@@ -382,7 +395,7 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
     if (lossCount != null) result.lossCount = lossCount;
     if (avgSlippageBp != null) result.avgSlippageBp = avgSlippageBp;
     if (totalQuoteAmount != null) result.totalQuoteAmount = totalQuoteAmount;
-    if (totalHedgeAmountEtf != null) result.totalHedgeAmountEtf = totalHedgeAmountEtf;
+    if (totalHedgeAmount != null) result.totalHedgeAmount = totalHedgeAmount;
     return result;
   }
 
@@ -401,7 +414,7 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
     ..aInt64(7, _omitFieldNames ? '' : 'lossCount')
     ..a<$core.double>(8, _omitFieldNames ? '' : 'avgSlippageBp', $pb.PbFieldType.OD)
     ..a<$core.double>(9, _omitFieldNames ? '' : 'totalQuoteAmount', $pb.PbFieldType.OD)
-    ..a<$core.double>(10, _omitFieldNames ? '' : 'totalHedgeAmountEtf', $pb.PbFieldType.OD)
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'totalHedgeAmount', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -512,15 +525,15 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   void clearTotalQuoteAmount() => $_clearField(9);
 
-  /// 총 Hedge 체결 금액 (ETF 기준)
+  /// 총 Hedge 체결 금액
   @$pb.TagNumber(10)
-  $core.double get totalHedgeAmountEtf => $_getN(9);
+  $core.double get totalHedgeAmount => $_getN(9);
   @$pb.TagNumber(10)
-  set totalHedgeAmountEtf($core.double value) => $_setDouble(9, value);
+  set totalHedgeAmount($core.double value) => $_setDouble(9, value);
   @$pb.TagNumber(10)
-  $core.bool hasTotalHedgeAmountEtf() => $_has(9);
+  $core.bool hasTotalHedgeAmount() => $_has(9);
   @$pb.TagNumber(10)
-  void clearTotalHedgeAmountEtf() => $_clearField(10);
+  void clearTotalHedgeAmount() => $_clearField(10);
 }
 
 /// ListTrackRecords 요청

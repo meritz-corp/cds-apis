@@ -295,25 +295,30 @@
           "type": "string",
           "title": "Hedge 심볼"
         },
-        "hedgeFilledPriceEtf": {
+        "hedgeFilledPrice": {
           "type": "number",
           "format": "double",
-          "title": "Hedge 체결 가격 (ETF 기준 변환)"
+          "title": "Hedge 체결 평균 가격 (선물 원시 가격)"
         },
-        "hedgeFilledQuantityEtf": {
+        "hedgeFilledQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "Hedge 체결 수량 (ETF 기준 변환)"
+          "title": "Hedge 체결 수량 (선물 계약 수)"
         },
-        "hedgeFilledAmountEtf": {
+        "hedgeFilledAmount": {
           "type": "number",
           "format": "double",
-          "title": "Hedge 체결 금액 (ETF 기준)"
+          "title": "Hedge 체결 금액 (선물 기준)"
         },
         "expectedHedgePrice": {
           "type": "number",
           "format": "double",
-          "title": "기대 헷지 가격 (QuoteContext에서 추출)"
+          "title": "기대 헷지 가격 (QuoteContext에서 추출, 선물 환산)"
+        },
+        "quotePriceAsHedge": {
+          "type": "number",
+          "format": "double",
+          "title": "Quote 가격의 선물 환산가"
         },
         "pnlAmount": {
           "type": "number",
@@ -414,10 +419,10 @@
           "format": "double",
           "title": "총 Quote 체결 금액"
         },
-        "totalHedgeAmountEtf": {
+        "totalHedgeAmount": {
           "type": "number",
           "format": "double",
-          "title": "총 Hedge 체결 금액 (ETF 기준)"
+          "title": "총 Hedge 체결 금액"
         }
       },
       "title": "Track Record 요약 통계"

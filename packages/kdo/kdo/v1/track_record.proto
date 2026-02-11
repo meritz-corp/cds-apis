@@ -68,17 +68,20 @@ message TrackRecord {
   // Hedge 심볼
   optional string hedge_symbol = 9;
 
-  // Hedge 체결 가격 (ETF 기준 변환)
-  optional double hedge_filled_price_etf = 10;
+  // Hedge 체결 평균 가격 (선물 원시 가격)
+  optional double hedge_filled_price = 10;
 
-  // Hedge 체결 수량 (ETF 기준 변환)
-  int64 hedge_filled_quantity_etf = 11;
+  // Hedge 체결 수량 (선물 계약 수)
+  int64 hedge_filled_quantity = 11;
 
-  // Hedge 체결 금액 (ETF 기준)
-  double hedge_filled_amount_etf = 12;
+  // Hedge 체결 금액 (선물 기준)
+  double hedge_filled_amount = 12;
 
-  // 기대 헷지 가격 (QuoteContext에서 추출)
+  // 기대 헷지 가격 (QuoteContext에서 추출, 선물 환산)
   optional double expected_hedge_price = 13;
+
+  // Quote 가격의 선물 환산가
+  optional double quote_price_as_hedge = 24;
 
   // 손익 금액
   double pnl_amount = 14;
@@ -140,8 +143,8 @@ message TrackRecordSummary {
   // 총 Quote 체결 금액
   double total_quote_amount = 9;
 
-  // 총 Hedge 체결 금액 (ETF 기준)
-  double total_hedge_amount_etf = 10;
+  // 총 Hedge 체결 금액
+  double total_hedge_amount = 10;
 }
 
 // ========== Request/Response Messages ==========

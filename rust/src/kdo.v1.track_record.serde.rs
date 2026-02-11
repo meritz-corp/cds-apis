@@ -720,6 +720,9 @@ impl serde::Serialize for TrackRecord {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.track_record.TrackRecord", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -756,19 +759,22 @@ impl serde::Serialize for TrackRecord {
         if let Some(v) = self.hedge_symbol.as_ref() {
             struct_ser.serialize_field("hedge_symbol", v)?;
         }
-        if let Some(v) = self.hedge_filled_price_etf.as_ref() {
-            struct_ser.serialize_field("hedge_filled_price_etf", v)?;
+        if let Some(v) = self.hedge_filled_price.as_ref() {
+            struct_ser.serialize_field("hedge_filled_price", v)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("hedge_filled_quantity_etf", ToString::to_string(&self.hedge_filled_quantity_etf).as_str())?;
+            struct_ser.serialize_field("hedge_filled_quantity", ToString::to_string(&self.hedge_filled_quantity).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("hedge_filled_amount_etf", &self.hedge_filled_amount_etf)?;
+            struct_ser.serialize_field("hedge_filled_amount", &self.hedge_filled_amount)?;
         }
         if let Some(v) = self.expected_hedge_price.as_ref() {
             struct_ser.serialize_field("expected_hedge_price", v)?;
+        }
+        if let Some(v) = self.quote_price_as_hedge.as_ref() {
+            struct_ser.serialize_field("quote_price_as_hedge", v)?;
         }
         if true {
             struct_ser.serialize_field("pnl_amount", &self.pnl_amount)?;
@@ -833,14 +839,16 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
             "hedgeCount",
             "hedge_symbol",
             "hedgeSymbol",
-            "hedge_filled_price_etf",
-            "hedgeFilledPriceEtf",
-            "hedge_filled_quantity_etf",
-            "hedgeFilledQuantityEtf",
-            "hedge_filled_amount_etf",
-            "hedgeFilledAmountEtf",
+            "hedge_filled_price",
+            "hedgeFilledPrice",
+            "hedge_filled_quantity",
+            "hedgeFilledQuantity",
+            "hedge_filled_amount",
+            "hedgeFilledAmount",
             "expected_hedge_price",
             "expectedHedgePrice",
+            "quote_price_as_hedge",
+            "quotePriceAsHedge",
             "pnl_amount",
             "pnlAmount",
             "pnl_bp",
@@ -873,10 +881,11 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
             QuoteFilledAmount,
             HedgeCount,
             HedgeSymbol,
-            HedgeFilledPriceEtf,
-            HedgeFilledQuantityEtf,
-            HedgeFilledAmountEtf,
+            HedgeFilledPrice,
+            HedgeFilledQuantity,
+            HedgeFilledAmount,
             ExpectedHedgePrice,
+            QuotePriceAsHedge,
             PnlAmount,
             PnlBp,
             SlippageBp,
@@ -918,10 +927,11 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                             "quoteFilledAmount" | "quote_filled_amount" => Ok(GeneratedField::QuoteFilledAmount),
                             "hedgeCount" | "hedge_count" => Ok(GeneratedField::HedgeCount),
                             "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
-                            "hedgeFilledPriceEtf" | "hedge_filled_price_etf" => Ok(GeneratedField::HedgeFilledPriceEtf),
-                            "hedgeFilledQuantityEtf" | "hedge_filled_quantity_etf" => Ok(GeneratedField::HedgeFilledQuantityEtf),
-                            "hedgeFilledAmountEtf" | "hedge_filled_amount_etf" => Ok(GeneratedField::HedgeFilledAmountEtf),
+                            "hedgeFilledPrice" | "hedge_filled_price" => Ok(GeneratedField::HedgeFilledPrice),
+                            "hedgeFilledQuantity" | "hedge_filled_quantity" => Ok(GeneratedField::HedgeFilledQuantity),
+                            "hedgeFilledAmount" | "hedge_filled_amount" => Ok(GeneratedField::HedgeFilledAmount),
                             "expectedHedgePrice" | "expected_hedge_price" => Ok(GeneratedField::ExpectedHedgePrice),
+                            "quotePriceAsHedge" | "quote_price_as_hedge" => Ok(GeneratedField::QuotePriceAsHedge),
                             "pnlAmount" | "pnl_amount" => Ok(GeneratedField::PnlAmount),
                             "pnlBp" | "pnl_bp" => Ok(GeneratedField::PnlBp),
                             "slippageBp" | "slippage_bp" => Ok(GeneratedField::SlippageBp),
@@ -960,10 +970,11 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                 let mut quote_filled_amount__ = None;
                 let mut hedge_count__ = None;
                 let mut hedge_symbol__ = None;
-                let mut hedge_filled_price_etf__ = None;
-                let mut hedge_filled_quantity_etf__ = None;
-                let mut hedge_filled_amount_etf__ = None;
+                let mut hedge_filled_price__ = None;
+                let mut hedge_filled_quantity__ = None;
+                let mut hedge_filled_amount__ = None;
                 let mut expected_hedge_price__ = None;
+                let mut quote_price_as_hedge__ = None;
                 let mut pnl_amount__ = None;
                 let mut pnl_bp__ = None;
                 let mut slippage_bp__ = None;
@@ -1042,27 +1053,27 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                             }
                             hedge_symbol__ = map_.next_value()?;
                         }
-                        GeneratedField::HedgeFilledPriceEtf => {
-                            if hedge_filled_price_etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeFilledPriceEtf"));
+                        GeneratedField::HedgeFilledPrice => {
+                            if hedge_filled_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeFilledPrice"));
                             }
-                            hedge_filled_price_etf__ = 
+                            hedge_filled_price__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::HedgeFilledQuantityEtf => {
-                            if hedge_filled_quantity_etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeFilledQuantityEtf"));
+                        GeneratedField::HedgeFilledQuantity => {
+                            if hedge_filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeFilledQuantity"));
                             }
-                            hedge_filled_quantity_etf__ = 
+                            hedge_filled_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::HedgeFilledAmountEtf => {
-                            if hedge_filled_amount_etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeFilledAmountEtf"));
+                        GeneratedField::HedgeFilledAmount => {
+                            if hedge_filled_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeFilledAmount"));
                             }
-                            hedge_filled_amount_etf__ = 
+                            hedge_filled_amount__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1071,6 +1082,14 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                                 return Err(serde::de::Error::duplicate_field("expectedHedgePrice"));
                             }
                             expected_hedge_price__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::QuotePriceAsHedge => {
+                            if quote_price_as_hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quotePriceAsHedge"));
+                            }
+                            quote_price_as_hedge__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
@@ -1161,10 +1180,11 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                     quote_filled_amount: quote_filled_amount__.unwrap_or_default(),
                     hedge_count: hedge_count__.unwrap_or_default(),
                     hedge_symbol: hedge_symbol__,
-                    hedge_filled_price_etf: hedge_filled_price_etf__,
-                    hedge_filled_quantity_etf: hedge_filled_quantity_etf__.unwrap_or_default(),
-                    hedge_filled_amount_etf: hedge_filled_amount_etf__.unwrap_or_default(),
+                    hedge_filled_price: hedge_filled_price__,
+                    hedge_filled_quantity: hedge_filled_quantity__.unwrap_or_default(),
+                    hedge_filled_amount: hedge_filled_amount__.unwrap_or_default(),
                     expected_hedge_price: expected_hedge_price__,
+                    quote_price_as_hedge: quote_price_as_hedge__,
                     pnl_amount: pnl_amount__.unwrap_or_default(),
                     pnl_bp: pnl_bp__.unwrap_or_default(),
                     slippage_bp: slippage_bp__,
@@ -1254,7 +1274,7 @@ impl serde::Serialize for TrackRecordSummary {
             struct_ser.serialize_field("total_quote_amount", &self.total_quote_amount)?;
         }
         if true {
-            struct_ser.serialize_field("total_hedge_amount_etf", &self.total_hedge_amount_etf)?;
+            struct_ser.serialize_field("total_hedge_amount", &self.total_hedge_amount)?;
         }
         struct_ser.end()
     }
@@ -1284,8 +1304,8 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
             "avgSlippageBp",
             "total_quote_amount",
             "totalQuoteAmount",
-            "total_hedge_amount_etf",
-            "totalHedgeAmountEtf",
+            "total_hedge_amount",
+            "totalHedgeAmount",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1299,7 +1319,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
             LossCount,
             AvgSlippageBp,
             TotalQuoteAmount,
-            TotalHedgeAmountEtf,
+            TotalHedgeAmount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1331,7 +1351,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                             "lossCount" | "loss_count" => Ok(GeneratedField::LossCount),
                             "avgSlippageBp" | "avg_slippage_bp" => Ok(GeneratedField::AvgSlippageBp),
                             "totalQuoteAmount" | "total_quote_amount" => Ok(GeneratedField::TotalQuoteAmount),
-                            "totalHedgeAmountEtf" | "total_hedge_amount_etf" => Ok(GeneratedField::TotalHedgeAmountEtf),
+                            "totalHedgeAmount" | "total_hedge_amount" => Ok(GeneratedField::TotalHedgeAmount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1360,7 +1380,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                 let mut loss_count__ = None;
                 let mut avg_slippage_bp__ = None;
                 let mut total_quote_amount__ = None;
-                let mut total_hedge_amount_etf__ = None;
+                let mut total_hedge_amount__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::TotalCount => {
@@ -1435,11 +1455,11 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::TotalHedgeAmountEtf => {
-                            if total_hedge_amount_etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("totalHedgeAmountEtf"));
+                        GeneratedField::TotalHedgeAmount => {
+                            if total_hedge_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalHedgeAmount"));
                             }
-                            total_hedge_amount_etf__ = 
+                            total_hedge_amount__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1458,7 +1478,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                     loss_count: loss_count__.unwrap_or_default(),
                     avg_slippage_bp: avg_slippage_bp__,
                     total_quote_amount: total_quote_amount__.unwrap_or_default(),
-                    total_hedge_amount_etf: total_hedge_amount_etf__.unwrap_or_default(),
+                    total_hedge_amount: total_hedge_amount__.unwrap_or_default(),
                 })
             }
         }
