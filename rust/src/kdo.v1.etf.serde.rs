@@ -2785,9 +2785,6 @@ impl serde::Serialize for UnderlyingFuture {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.UnderlyingFuture", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2800,9 +2797,6 @@ impl serde::Serialize for UnderlyingFuture {
         }
         if true {
             struct_ser.serialize_field("last_bid_price", &self.last_bid_price)?;
-        }
-        if true {
-            struct_ser.serialize_field("ratio_per_cu", &self.ratio_per_cu)?;
         }
         struct_ser.end()
     }
@@ -2820,8 +2814,6 @@ impl<'de> serde::Deserialize<'de> for UnderlyingFuture {
             "lastAskPrice",
             "last_bid_price",
             "lastBidPrice",
-            "ratio_per_cu",
-            "ratioPerCu",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2830,7 +2822,6 @@ impl<'de> serde::Deserialize<'de> for UnderlyingFuture {
             Multiple,
             LastAskPrice,
             LastBidPrice,
-            RatioPerCu,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2857,7 +2848,6 @@ impl<'de> serde::Deserialize<'de> for UnderlyingFuture {
                             "multiple" => Ok(GeneratedField::Multiple),
                             "lastAskPrice" | "last_ask_price" => Ok(GeneratedField::LastAskPrice),
                             "lastBidPrice" | "last_bid_price" => Ok(GeneratedField::LastBidPrice),
-                            "ratioPerCu" | "ratio_per_cu" => Ok(GeneratedField::RatioPerCu),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2881,7 +2871,6 @@ impl<'de> serde::Deserialize<'de> for UnderlyingFuture {
                 let mut multiple__ = None;
                 let mut last_ask_price__ = None;
                 let mut last_bid_price__ = None;
-                let mut ratio_per_cu__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2908,14 +2897,6 @@ impl<'de> serde::Deserialize<'de> for UnderlyingFuture {
                             }
                             last_bid_price__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::RatioPerCu => {
-                            if ratio_per_cu__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("ratioPerCu"));
-                            }
-                            ratio_per_cu__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2926,7 +2907,6 @@ impl<'de> serde::Deserialize<'de> for UnderlyingFuture {
                     multiple: multiple__.unwrap_or_default(),
                     last_ask_price: last_ask_price__.unwrap_or_default(),
                     last_bid_price: last_bid_price__.unwrap_or_default(),
-                    ratio_per_cu: ratio_per_cu__.unwrap_or_default(),
                 })
             }
         }

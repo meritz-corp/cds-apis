@@ -217,7 +217,6 @@ const UnderlyingFuture$json = {
     {'1': 'multiple', '3': 2, '4': 1, '5': 9, '10': 'multiple'},
     {'1': 'last_ask_price', '3': 3, '4': 1, '5': 9, '10': 'lastAskPrice'},
     {'1': 'last_bid_price', '3': 4, '4': 1, '5': 9, '10': 'lastBidPrice'},
-    {'1': 'ratio_per_cu', '3': 5, '4': 1, '5': 1, '10': 'ratioPerCu'},
   ],
 };
 
@@ -225,8 +224,7 @@ const UnderlyingFuture$json = {
 final $typed_data.Uint8List underlyingFutureDescriptor = $convert.base64Decode(
     'ChBVbmRlcmx5aW5nRnV0dXJlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhoKCG11bHRpcGxlGA'
     'IgASgJUghtdWx0aXBsZRIkCg5sYXN0X2Fza19wcmljZRgDIAEoCVIMbGFzdEFza1ByaWNlEiQK'
-    'Dmxhc3RfYmlkX3ByaWNlGAQgASgJUgxsYXN0QmlkUHJpY2USIAoMcmF0aW9fcGVyX2N1GAUgAS'
-    'gBUgpyYXRpb1BlckN1');
+    'Dmxhc3RfYmlkX3ByaWNlGAQgASgJUgxsYXN0QmlkUHJpY2U=');
 
 @$core.Deprecated('Use underlyingFixedIncomeDescriptor instead')
 const UnderlyingFixedIncome$json = {

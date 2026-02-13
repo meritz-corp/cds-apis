@@ -203,9 +203,6 @@ message UnderlyingFuture {
 
   // 최근 매수호가
   string last_bid_price = 4;
-
-  // CU당 헷지 비율
-  double ratio_per_cu = 5;
 }
 
 // 채권형 기초자산
