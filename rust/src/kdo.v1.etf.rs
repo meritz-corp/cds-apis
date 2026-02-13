@@ -54,6 +54,9 @@ pub struct Etf {
     pub cash_creditable: bool,
     #[prost(int64, tag="24")]
     pub cash_creation_amount: i64,
+    /// ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
+    #[prost(message, optional, tag="25")]
+    pub conversion: ::core::option::Option<Conversion>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -140,6 +143,22 @@ pub struct EtfPdfConstituent {
     /// 구성 수량 (선물 숏의 경우 음수)
     #[prost(int64, tag="4")]
     pub quantity: i64,
+}
+/// ETF가 다른 상품으로 변환될 수 있는 정보
+/// 예: KODEX 2X Inverse는 1cu당 -0.37개의 코스피200 선물로 변환 가능
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Conversion {
+    /// 변환 대상 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 변환 대상 상품 타입
+    #[prost(enumeration="super::common::ProductType", tag="2")]
+    pub product_type: i32,
+    /// 1 CU당 변환 비율
+    /// 예: KODEX 2X Inverse → 코스피200 선물 = -0.37
+    #[prost(double, tag="3")]
+    pub ratio_per_cu: f64,
 }
 /// 기초자산
 #[allow(clippy::derive_partial_eq_without_eq)]

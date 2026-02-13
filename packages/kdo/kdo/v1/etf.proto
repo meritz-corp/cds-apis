@@ -98,6 +98,9 @@ message Etf {
     bool cash_creditable = 23;
 
     int64 cash_creation_amount = 24;
+
+    // ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
+    Conversion conversion = 25;
 }
 
 message EtfConstituent {
@@ -163,6 +166,20 @@ message EtfPdfConstituent {
 
     // 구성 수량 (선물 숏의 경우 음수)
     int64 quantity = 4;
+}
+
+// ETF가 다른 상품으로 변환될 수 있는 정보
+// 예: KODEX 2X Inverse는 1cu당 -0.37개의 코스피200 선물로 변환 가능
+message Conversion {
+    // 변환 대상 심볼
+    string symbol = 1;
+
+    // 변환 대상 상품 타입
+    kdo.v1.common.ProductType product_type = 2;
+
+    // 1 CU당 변환 비율
+    // 예: KODEX 2X Inverse → 코스피200 선물 = -0.37
+    double ratio_per_cu = 3;
 }
 
 // 복제 방법

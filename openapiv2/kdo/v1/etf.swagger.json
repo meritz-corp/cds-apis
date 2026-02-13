@@ -194,6 +194,25 @@
       "default": "PRODUCT_TYPE_UNSPECIFIED",
       "title": "상품 타입"
     },
+    "etfConversion": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "변환 대상 심볼"
+        },
+        "productType": {
+          "$ref": "#/definitions/commonProductType",
+          "title": "변환 대상 상품 타입"
+        },
+        "ratioPerCu": {
+          "type": "number",
+          "format": "double",
+          "title": "1 CU당 변환 비율\n예: KODEX 2X Inverse → 코스피200 선물 = -0.37"
+        }
+      },
+      "title": "ETF가 다른 상품으로 변환될 수 있는 정보\n예: KODEX 2X Inverse는 1cu당 -0.37개의 코스피200 선물로 변환 가능"
+    },
     "etfCreateRedeemEtfRequest": {
       "type": "object",
       "properties": {
@@ -300,6 +319,10 @@
         "cashCreationAmount": {
           "type": "string",
           "format": "int64"
+        },
+        "conversion": {
+          "$ref": "#/definitions/etfConversion",
+          "title": "ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)"
         }
       }
     },

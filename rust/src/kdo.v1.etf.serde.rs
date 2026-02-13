@@ -136,6 +136,141 @@ impl<'de> serde::Deserialize<'de> for CashConstituent {
         deserializer.deserialize_struct("kdo.v1.etf.CashConstituent", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for Conversion {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.Conversion", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            let v = super::common::ProductType::try_from(self.product_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.product_type)))?;
+            struct_ser.serialize_field("product_type", &v)?;
+        }
+        if true {
+            struct_ser.serialize_field("ratio_per_cu", &self.ratio_per_cu)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Conversion {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "product_type",
+            "productType",
+            "ratio_per_cu",
+            "ratioPerCu",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            ProductType,
+            RatioPerCu,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "productType" | "product_type" => Ok(GeneratedField::ProductType),
+                            "ratioPerCu" | "ratio_per_cu" => Ok(GeneratedField::RatioPerCu),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Conversion;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.Conversion")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Conversion, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut product_type__ = None;
+                let mut ratio_per_cu__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ProductType => {
+                            if product_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("productType"));
+                            }
+                            product_type__ = Some(map_.next_value::<super::common::ProductType>()? as i32);
+                        }
+                        GeneratedField::RatioPerCu => {
+                            if ratio_per_cu__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ratioPerCu"));
+                            }
+                            ratio_per_cu__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(Conversion {
+                    symbol: symbol__.unwrap_or_default(),
+                    product_type: product_type__.unwrap_or_default(),
+                    ratio_per_cu: ratio_per_cu__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.Conversion", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CreateRedeemEtfRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -355,6 +490,9 @@ impl serde::Serialize for Etf {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.Etf", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -428,6 +566,9 @@ impl serde::Serialize for Etf {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("cash_creation_amount", ToString::to_string(&self.cash_creation_amount).as_str())?;
         }
+        if let Some(v) = self.conversion.as_ref() {
+            struct_ser.serialize_field("conversion", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -471,6 +612,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             "cashCreditable",
             "cash_creation_amount",
             "cashCreationAmount",
+            "conversion",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -495,6 +637,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             UnderlyingAsset,
             CashCreditable,
             CashCreationAmount,
+            Conversion,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -537,6 +680,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "underlyingAsset" | "underlying_asset" => Ok(GeneratedField::UnderlyingAsset),
                             "cashCreditable" | "cash_creditable" => Ok(GeneratedField::CashCreditable),
                             "cashCreationAmount" | "cash_creation_amount" => Ok(GeneratedField::CashCreationAmount),
+                            "conversion" => Ok(GeneratedField::Conversion),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -576,6 +720,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                 let mut underlying_asset__ = None;
                 let mut cash_creditable__ = None;
                 let mut cash_creation_amount__ = None;
+                let mut conversion__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -712,6 +857,12 @@ impl<'de> serde::Deserialize<'de> for Etf {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::Conversion => {
+                            if conversion__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("conversion"));
+                            }
+                            conversion__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -738,6 +889,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                     underlying_asset: underlying_asset__,
                     cash_creditable: cash_creditable__.unwrap_or_default(),
                     cash_creation_amount: cash_creation_amount__.unwrap_or_default(),
+                    conversion: conversion__,
                 })
             }
         }

@@ -55,6 +55,7 @@ const Etf$json = {
     {'1': 'underlying_asset', '3': 18, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingAsset', '10': 'underlyingAsset'},
     {'1': 'cash_creditable', '3': 23, '4': 1, '5': 8, '10': 'cashCreditable'},
     {'1': 'cash_creation_amount', '3': 24, '4': 1, '5': 3, '10': 'cashCreationAmount'},
+    {'1': 'conversion', '3': 25, '4': 1, '5': 11, '6': '.kdo.v1.etf.Conversion', '10': 'conversion'},
   ],
   '3': [Etf_ConstituentsEntry$json],
 };
@@ -84,9 +85,10 @@ final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'IAEoCFIIdHJhZGFibGUSJQoOc2hvcnRfc2VsbGFibGUYESABKAhSDXNob3J0U2VsbGFibGUSRg'
     'oQdW5kZXJseWluZ19hc3NldBgSIAEoCzIbLmtkby52MS5ldGYuVW5kZXJseWluZ0Fzc2V0Ug91'
     'bmRlcmx5aW5nQXNzZXQSJwoPY2FzaF9jcmVkaXRhYmxlGBcgASgIUg5jYXNoQ3JlZGl0YWJsZR'
-    'IwChRjYXNoX2NyZWF0aW9uX2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50Gl4KEUNv'
-    'bnN0aXR1ZW50c0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EjMKBXZhbHVlGAIgASgLMh0ua2RvLn'
-    'YxLmV0Zi5FdGZQZGZDb25zdGl0dWVudFIFdmFsdWU6AjgB');
+    'IwChRjYXNoX2NyZWF0aW9uX2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50EjYKCmNv'
+    'bnZlcnNpb24YGSABKAsyFi5rZG8udjEuZXRmLkNvbnZlcnNpb25SCmNvbnZlcnNpb24aXgoRQ2'
+    '9uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSMwoFdmFsdWUYAiABKAsyHS5rZG8u'
+    'djEuZXRmLkV0ZlBkZkNvbnN0aXR1ZW50UgV2YWx1ZToCOAE=');
 
 @$core.Deprecated('Use etfConstituentDescriptor instead')
 const EtfConstituent$json = {
@@ -185,6 +187,22 @@ final $typed_data.Uint8List etfPdfConstituentDescriptor = $convert.base64Decode(
     'ChFFdGZQZGZDb25zdGl0dWVudBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBISCgRuYW1lGAIgAS'
     'gJUgRuYW1lEj0KDHByb2R1Y3RfdHlwZRgDIAEoDjIaLmtkby52MS5jb21tb24uUHJvZHVjdFR5'
     'cGVSC3Byb2R1Y3RUeXBlEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eQ==');
+
+@$core.Deprecated('Use conversionDescriptor instead')
+const Conversion$json = {
+  '1': 'Conversion',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'product_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.ProductType', '10': 'productType'},
+    {'1': 'ratio_per_cu', '3': 3, '4': 1, '5': 1, '10': 'ratioPerCu'},
+  ],
+};
+
+/// Descriptor for `Conversion`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List conversionDescriptor = $convert.base64Decode(
+    'CgpDb252ZXJzaW9uEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEj0KDHByb2R1Y3RfdHlwZRgCIA'
+    'EoDjIaLmtkby52MS5jb21tb24uUHJvZHVjdFR5cGVSC3Byb2R1Y3RUeXBlEiAKDHJhdGlvX3Bl'
+    'cl9jdRgDIAEoAVIKcmF0aW9QZXJDdQ==');
 
 @$core.Deprecated('Use underlyingAssetDescriptor instead')
 const UnderlyingAsset$json = {

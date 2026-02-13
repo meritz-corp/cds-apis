@@ -44,6 +44,7 @@ class Etf extends $pb.GeneratedMessage {
     UnderlyingAsset? underlyingAsset,
     $core.bool? cashCreditable,
     $fixnum.Int64? cashCreationAmount,
+    Conversion? conversion,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -66,6 +67,7 @@ class Etf extends $pb.GeneratedMessage {
     if (underlyingAsset != null) result.underlyingAsset = underlyingAsset;
     if (cashCreditable != null) result.cashCreditable = cashCreditable;
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
+    if (conversion != null) result.conversion = conversion;
     return result;
   }
 
@@ -95,6 +97,7 @@ class Etf extends $pb.GeneratedMessage {
     ..aOM<UnderlyingAsset>(18, _omitFieldNames ? '' : 'underlyingAsset', subBuilder: UnderlyingAsset.create)
     ..aOB(23, _omitFieldNames ? '' : 'cashCreditable')
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
+    ..aOM<Conversion>(25, _omitFieldNames ? '' : 'conversion', subBuilder: Conversion.create)
     ..hasRequiredFields = false
   ;
 
@@ -301,6 +304,18 @@ class Etf extends $pb.GeneratedMessage {
   $core.bool hasCashCreationAmount() => $_has(19);
   @$pb.TagNumber(24)
   void clearCashCreationAmount() => $_clearField(24);
+
+  /// ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
+  @$pb.TagNumber(25)
+  Conversion get conversion => $_getN(20);
+  @$pb.TagNumber(25)
+  set conversion(Conversion value) => $_setField(25, value);
+  @$pb.TagNumber(25)
+  $core.bool hasConversion() => $_has(20);
+  @$pb.TagNumber(25)
+  void clearConversion() => $_clearField(25);
+  @$pb.TagNumber(25)
+  Conversion ensureConversion() => $_ensure(20);
 }
 
 enum EtfConstituent_ConstituentType {
@@ -799,6 +814,82 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
   $core.bool hasQuantity() => $_has(3);
   @$pb.TagNumber(4)
   void clearQuantity() => $_clearField(4);
+}
+
+/// ETF가 다른 상품으로 변환될 수 있는 정보
+/// 예: KODEX 2X Inverse는 1cu당 -0.37개의 코스피200 선물로 변환 가능
+class Conversion extends $pb.GeneratedMessage {
+  factory Conversion({
+    $core.String? symbol,
+    $1.ProductType? productType,
+    $core.double? ratioPerCu,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (productType != null) result.productType = productType;
+    if (ratioPerCu != null) result.ratioPerCu = ratioPerCu;
+    return result;
+  }
+
+  Conversion._();
+
+  factory Conversion.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Conversion.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Conversion', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..e<$1.ProductType>(2, _omitFieldNames ? '' : 'productType', $pb.PbFieldType.OE, defaultOrMaker: $1.ProductType.PRODUCT_TYPE_UNSPECIFIED, valueOf: $1.ProductType.valueOf, enumValues: $1.ProductType.values)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'ratioPerCu', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Conversion clone() => Conversion()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Conversion copyWith(void Function(Conversion) updates) => super.copyWith((message) => updates(message as Conversion)) as Conversion;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Conversion create() => Conversion._();
+  @$core.override
+  Conversion createEmptyInstance() => create();
+  static $pb.PbList<Conversion> createRepeated() => $pb.PbList<Conversion>();
+  @$core.pragma('dart2js:noInline')
+  static Conversion getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Conversion>(create);
+  static Conversion? _defaultInstance;
+
+  /// 변환 대상 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 변환 대상 상품 타입
+  @$pb.TagNumber(2)
+  $1.ProductType get productType => $_getN(1);
+  @$pb.TagNumber(2)
+  set productType($1.ProductType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProductType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProductType() => $_clearField(2);
+
+  /// 1 CU당 변환 비율
+  /// 예: KODEX 2X Inverse → 코스피200 선물 = -0.37
+  @$pb.TagNumber(3)
+  $core.double get ratioPerCu => $_getN(2);
+  @$pb.TagNumber(3)
+  set ratioPerCu($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRatioPerCu() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRatioPerCu() => $_clearField(3);
 }
 
 enum UnderlyingAsset_Asset {
