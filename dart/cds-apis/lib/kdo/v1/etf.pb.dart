@@ -44,7 +44,7 @@ class Etf extends $pb.GeneratedMessage {
     UnderlyingAsset? underlyingAsset,
     $core.bool? cashCreditable,
     $fixnum.Int64? cashCreationAmount,
-    Conversion? conversion,
+    $core.Iterable<$core.MapEntry<$core.String, Conversion>>? conversions,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -67,7 +67,7 @@ class Etf extends $pb.GeneratedMessage {
     if (underlyingAsset != null) result.underlyingAsset = underlyingAsset;
     if (cashCreditable != null) result.cashCreditable = cashCreditable;
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
-    if (conversion != null) result.conversion = conversion;
+    if (conversions != null) result.conversions.addEntries(conversions);
     return result;
   }
 
@@ -97,7 +97,7 @@ class Etf extends $pb.GeneratedMessage {
     ..aOM<UnderlyingAsset>(18, _omitFieldNames ? '' : 'underlyingAsset', subBuilder: UnderlyingAsset.create)
     ..aOB(23, _omitFieldNames ? '' : 'cashCreditable')
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
-    ..aOM<Conversion>(25, _omitFieldNames ? '' : 'conversion', subBuilder: Conversion.create)
+    ..m<$core.String, Conversion>(25, _omitFieldNames ? '' : 'conversions', entryClassName: 'Etf.ConversionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: Conversion.create, valueDefaultOrMaker: Conversion.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..hasRequiredFields = false
   ;
 
@@ -307,15 +307,7 @@ class Etf extends $pb.GeneratedMessage {
 
   /// ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
   @$pb.TagNumber(25)
-  Conversion get conversion => $_getN(20);
-  @$pb.TagNumber(25)
-  set conversion(Conversion value) => $_setField(25, value);
-  @$pb.TagNumber(25)
-  $core.bool hasConversion() => $_has(20);
-  @$pb.TagNumber(25)
-  void clearConversion() => $_clearField(25);
-  @$pb.TagNumber(25)
-  Conversion ensureConversion() => $_ensure(20);
+  $pb.PbMap<$core.String, Conversion> get conversions => $_getMap(20);
 }
 
 enum EtfConstituent_ConstituentType {

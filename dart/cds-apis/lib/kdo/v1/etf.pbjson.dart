@@ -55,9 +55,9 @@ const Etf$json = {
     {'1': 'underlying_asset', '3': 18, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingAsset', '10': 'underlyingAsset'},
     {'1': 'cash_creditable', '3': 23, '4': 1, '5': 8, '10': 'cashCreditable'},
     {'1': 'cash_creation_amount', '3': 24, '4': 1, '5': 3, '10': 'cashCreationAmount'},
-    {'1': 'conversion', '3': 25, '4': 1, '5': 11, '6': '.kdo.v1.etf.Conversion', '10': 'conversion'},
+    {'1': 'conversions', '3': 25, '4': 3, '5': 11, '6': '.kdo.v1.etf.Etf.ConversionsEntry', '10': 'conversions'},
   ],
-  '3': [Etf_ConstituentsEntry$json],
+  '3': [Etf_ConstituentsEntry$json, Etf_ConversionsEntry$json],
 };
 
 @$core.Deprecated('Use etfDescriptor instead')
@@ -66,6 +66,16 @@ const Etf_ConstituentsEntry$json = {
   '2': [
     {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
     {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfPdfConstituent', '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+@$core.Deprecated('Use etfDescriptor instead')
+const Etf_ConversionsEntry$json = {
+  '1': 'ConversionsEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.Conversion', '10': 'value'},
   ],
   '7': {'7': true},
 };
@@ -85,10 +95,12 @@ final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'IAEoCFIIdHJhZGFibGUSJQoOc2hvcnRfc2VsbGFibGUYESABKAhSDXNob3J0U2VsbGFibGUSRg'
     'oQdW5kZXJseWluZ19hc3NldBgSIAEoCzIbLmtkby52MS5ldGYuVW5kZXJseWluZ0Fzc2V0Ug91'
     'bmRlcmx5aW5nQXNzZXQSJwoPY2FzaF9jcmVkaXRhYmxlGBcgASgIUg5jYXNoQ3JlZGl0YWJsZR'
-    'IwChRjYXNoX2NyZWF0aW9uX2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50EjYKCmNv'
-    'bnZlcnNpb24YGSABKAsyFi5rZG8udjEuZXRmLkNvbnZlcnNpb25SCmNvbnZlcnNpb24aXgoRQ2'
-    '9uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSMwoFdmFsdWUYAiABKAsyHS5rZG8u'
-    'djEuZXRmLkV0ZlBkZkNvbnN0aXR1ZW50UgV2YWx1ZToCOAE=');
+    'IwChRjYXNoX2NyZWF0aW9uX2Ftb3VudBgYIAEoA1ISY2FzaENyZWF0aW9uQW1vdW50EkIKC2Nv'
+    'bnZlcnNpb25zGBkgAygLMiAua2RvLnYxLmV0Zi5FdGYuQ29udmVyc2lvbnNFbnRyeVILY29udm'
+    'Vyc2lvbnMaXgoRQ29uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSMwoFdmFsdWUY'
+    'AiABKAsyHS5rZG8udjEuZXRmLkV0ZlBkZkNvbnN0aXR1ZW50UgV2YWx1ZToCOAEaVgoQQ29udm'
+    'Vyc2lvbnNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIsCgV2YWx1ZRgCIAEoCzIWLmtkby52MS5l'
+    'dGYuQ29udmVyc2lvblIFdmFsdWU6AjgB');
 
 @$core.Deprecated('Use etfConstituentDescriptor instead')
 const EtfConstituent$json = {

@@ -55,8 +55,8 @@ pub struct Etf {
     #[prost(int64, tag="24")]
     pub cash_creation_amount: i64,
     /// ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
-    #[prost(message, optional, tag="25")]
-    pub conversion: ::core::option::Option<Conversion>,
+    #[prost(map="string, message", tag="25")]
+    pub conversions: ::std::collections::HashMap<::prost::alloc::string::String, Conversion>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

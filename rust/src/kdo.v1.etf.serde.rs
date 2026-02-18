@@ -566,8 +566,8 @@ impl serde::Serialize for Etf {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("cash_creation_amount", ToString::to_string(&self.cash_creation_amount).as_str())?;
         }
-        if let Some(v) = self.conversion.as_ref() {
-            struct_ser.serialize_field("conversion", v)?;
+        if true {
+            struct_ser.serialize_field("conversions", &self.conversions)?;
         }
         struct_ser.end()
     }
@@ -612,7 +612,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             "cashCreditable",
             "cash_creation_amount",
             "cashCreationAmount",
-            "conversion",
+            "conversions",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -637,7 +637,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             UnderlyingAsset,
             CashCreditable,
             CashCreationAmount,
-            Conversion,
+            Conversions,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -680,7 +680,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "underlyingAsset" | "underlying_asset" => Ok(GeneratedField::UnderlyingAsset),
                             "cashCreditable" | "cash_creditable" => Ok(GeneratedField::CashCreditable),
                             "cashCreationAmount" | "cash_creation_amount" => Ok(GeneratedField::CashCreationAmount),
-                            "conversion" => Ok(GeneratedField::Conversion),
+                            "conversions" => Ok(GeneratedField::Conversions),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -720,7 +720,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                 let mut underlying_asset__ = None;
                 let mut cash_creditable__ = None;
                 let mut cash_creation_amount__ = None;
-                let mut conversion__ = None;
+                let mut conversions__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -857,11 +857,13 @@ impl<'de> serde::Deserialize<'de> for Etf {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Conversion => {
-                            if conversion__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("conversion"));
+                        GeneratedField::Conversions => {
+                            if conversions__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("conversions"));
                             }
-                            conversion__ = map_.next_value()?;
+                            conversions__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -889,7 +891,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                     underlying_asset: underlying_asset__,
                     cash_creditable: cash_creditable__.unwrap_or_default(),
                     cash_creation_amount: cash_creation_amount__.unwrap_or_default(),
-                    conversion: conversion__,
+                    conversions: conversions__.unwrap_or_default(),
                 })
             }
         }

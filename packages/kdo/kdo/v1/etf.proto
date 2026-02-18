@@ -100,7 +100,7 @@ message Etf {
     int64 cash_creation_amount = 24;
 
     // ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
-    Conversion conversion = 25;
+    map<string, Conversion> conversions = 25;
 }
 
 message EtfConstituent {
