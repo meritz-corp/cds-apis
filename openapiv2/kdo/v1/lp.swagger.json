@@ -493,10 +493,6 @@
     }
   },
   "definitions": {
-    "lpDecomposeHedgePricing": {
-      "type": "object",
-      "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
-    },
     "lpEtfLp": {
       "type": "object",
       "properties": {
@@ -714,12 +710,12 @@
     "lpEtfPricing": {
       "type": "object",
       "properties": {
-        "decomposeHedge": {
-          "$ref": "#/definitions/lpDecomposeHedgePricing",
+        "pdfNavHedge": {
+          "$ref": "#/definitions/lpPdfNavHedgePricing",
           "title": "분해 헷지 방식"
         },
-        "underlyingFutureHedge": {
-          "$ref": "#/definitions/lpUnderlyingFutureHedgePricing",
+        "indexTrackingHedge": {
+          "$ref": "#/definitions/lpIndexTrackingHedgePricing",
           "title": "선물 헷지 방식"
         },
         "futureBasis": {
@@ -759,6 +755,10 @@
           "type": "string"
         }
       }
+    },
+    "lpIndexTrackingHedgePricing": {
+      "type": "object",
+      "title": "선물 헷지 가격 산출"
     },
     "lpListEtfLpStatusesResponse": {
       "type": "object",
@@ -805,6 +805,10 @@
       },
       "title": "LP 가격 정보"
     },
+    "lpPdfNavHedgePricing": {
+      "type": "object",
+      "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
+    },
     "lpPositionAdjustmentStrategy": {
       "type": "string",
       "enum": [
@@ -844,10 +848,6 @@
         }
       },
       "title": "ETF LP 중지 응답"
-    },
-    "lpUnderlyingFutureHedgePricing": {
-      "type": "object",
-      "title": "선물 헷지 가격 산출"
     },
     "protobufAny": {
       "type": "object",

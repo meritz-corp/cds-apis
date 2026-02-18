@@ -46,10 +46,10 @@ pub mod etf_pricing {
     pub enum Method {
         /// 분해 헷지 방식
         #[prost(message, tag="1")]
-        DecomposeHedge(super::DecomposeHedgePricing),
+        PdfNavHedge(super::PdfNavHedgePricing),
         /// 선물 헷지 방식
         #[prost(message, tag="2")]
-        UnderlyingFutureHedge(super::UnderlyingFutureHedgePricing),
+        IndexTrackingHedge(super::IndexTrackingHedgePricing),
         #[prost(message, tag="3")]
         FutureBasis(super::FutureBasis),
     }
@@ -57,12 +57,12 @@ pub mod etf_pricing {
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct DecomposeHedgePricing {
+pub struct PdfNavHedgePricing {
 }
 /// 선물 헷지 가격 산출
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct UnderlyingFutureHedgePricing {
+pub struct IndexTrackingHedgePricing {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

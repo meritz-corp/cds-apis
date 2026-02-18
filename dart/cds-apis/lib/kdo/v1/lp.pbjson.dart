@@ -79,8 +79,8 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
 const EtfPricing$json = {
   '1': 'EtfPricing',
   '2': [
-    {'1': 'decompose_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.DecomposeHedgePricing', '9': 0, '10': 'decomposeHedge'},
-    {'1': 'underlying_future_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.UnderlyingFutureHedgePricing', '9': 0, '10': 'underlyingFutureHedge'},
+    {'1': 'pdf_nav_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.PdfNavHedgePricing', '9': 0, '10': 'pdfNavHedge'},
+    {'1': 'index_tracking_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.IndexTrackingHedgePricing', '9': 0, '10': 'indexTrackingHedge'},
     {'1': 'future_basis', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.lp.FutureBasis', '9': 0, '10': 'futureBasis'},
   ],
   '8': [
@@ -90,29 +90,29 @@ const EtfPricing$json = {
 
 /// Descriptor for `EtfPricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfPricingDescriptor = $convert.base64Decode(
-    'CgpFdGZQcmljaW5nEksKD2RlY29tcG9zZV9oZWRnZRgBIAEoCzIgLmtkby52MS5scC5EZWNvbX'
-    'Bvc2VIZWRnZVByaWNpbmdIAFIOZGVjb21wb3NlSGVkZ2USYQoXdW5kZXJseWluZ19mdXR1cmVf'
-    'aGVkZ2UYAiABKAsyJy5rZG8udjEubHAuVW5kZXJseWluZ0Z1dHVyZUhlZGdlUHJpY2luZ0gAUh'
-    'V1bmRlcmx5aW5nRnV0dXJlSGVkZ2USOwoMZnV0dXJlX2Jhc2lzGAMgASgLMhYua2RvLnYxLmxw'
-    'LkZ1dHVyZUJhc2lzSABSC2Z1dHVyZUJhc2lzQggKBm1ldGhvZA==');
+    'CgpFdGZQcmljaW5nEkMKDXBkZl9uYXZfaGVkZ2UYASABKAsyHS5rZG8udjEubHAuUGRmTmF2SG'
+    'VkZ2VQcmljaW5nSABSC3BkZk5hdkhlZGdlElgKFGluZGV4X3RyYWNraW5nX2hlZGdlGAIgASgL'
+    'MiQua2RvLnYxLmxwLkluZGV4VHJhY2tpbmdIZWRnZVByaWNpbmdIAFISaW5kZXhUcmFja2luZ0'
+    'hlZGdlEjsKDGZ1dHVyZV9iYXNpcxgDIAEoCzIWLmtkby52MS5scC5GdXR1cmVCYXNpc0gAUgtm'
+    'dXR1cmVCYXNpc0IICgZtZXRob2Q=');
 
-@$core.Deprecated('Use decomposeHedgePricingDescriptor instead')
-const DecomposeHedgePricing$json = {
-  '1': 'DecomposeHedgePricing',
+@$core.Deprecated('Use pdfNavHedgePricingDescriptor instead')
+const PdfNavHedgePricing$json = {
+  '1': 'PdfNavHedgePricing',
 };
 
-/// Descriptor for `DecomposeHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List decomposeHedgePricingDescriptor = $convert.base64Decode(
-    'ChVEZWNvbXBvc2VIZWRnZVByaWNpbmc=');
+/// Descriptor for `PdfNavHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pdfNavHedgePricingDescriptor = $convert.base64Decode(
+    'ChJQZGZOYXZIZWRnZVByaWNpbmc=');
 
-@$core.Deprecated('Use underlyingFutureHedgePricingDescriptor instead')
-const UnderlyingFutureHedgePricing$json = {
-  '1': 'UnderlyingFutureHedgePricing',
+@$core.Deprecated('Use indexTrackingHedgePricingDescriptor instead')
+const IndexTrackingHedgePricing$json = {
+  '1': 'IndexTrackingHedgePricing',
 };
 
-/// Descriptor for `UnderlyingFutureHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List underlyingFutureHedgePricingDescriptor = $convert.base64Decode(
-    'ChxVbmRlcmx5aW5nRnV0dXJlSGVkZ2VQcmljaW5n');
+/// Descriptor for `IndexTrackingHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List indexTrackingHedgePricingDescriptor = $convert.base64Decode(
+    'ChlJbmRleFRyYWNraW5nSGVkZ2VQcmljaW5n');
 
 @$core.Deprecated('Use futureBasisDescriptor instead')
 const FutureBasis$json = {

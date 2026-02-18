@@ -137,20 +137,20 @@ message EtfLp {
 message EtfPricing {
   oneof method {
     // 분해 헷지 방식
-    DecomposeHedgePricing decompose_hedge = 1;
+    PdfNavHedgePricing pdf_nav_hedge = 1;
 
     // 선물 헷지 방식
-    UnderlyingFutureHedgePricing underlying_future_hedge = 2;
+    IndexTrackingHedgePricing index_tracking_hedge = 2;
 
     FutureBasis future_basis = 3;
   }
 }
 
 // 분해 헷지 가격 산출 (추가 파라미터 없음)
-message DecomposeHedgePricing {}
+message PdfNavHedgePricing {}
 
 // 선물 헷지 가격 산출
-message UnderlyingFutureHedgePricing {}
+message IndexTrackingHedgePricing {}
 
 message FutureBasis {
   string prev_index = 1;

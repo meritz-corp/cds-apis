@@ -178,8 +178,8 @@ class EtfLp extends $pb.GeneratedMessage {
 }
 
 enum EtfPricing_Method {
-  decomposeHedge, 
-  underlyingFutureHedge, 
+  pdfNavHedge, 
+  indexTrackingHedge, 
   futureBasis, 
   notSet
 }
@@ -187,13 +187,13 @@ enum EtfPricing_Method {
 /// ETF 가격 산출 방식
 class EtfPricing extends $pb.GeneratedMessage {
   factory EtfPricing({
-    DecomposeHedgePricing? decomposeHedge,
-    UnderlyingFutureHedgePricing? underlyingFutureHedge,
+    PdfNavHedgePricing? pdfNavHedge,
+    IndexTrackingHedgePricing? indexTrackingHedge,
     FutureBasis? futureBasis,
   }) {
     final result = create();
-    if (decomposeHedge != null) result.decomposeHedge = decomposeHedge;
-    if (underlyingFutureHedge != null) result.underlyingFutureHedge = underlyingFutureHedge;
+    if (pdfNavHedge != null) result.pdfNavHedge = pdfNavHedge;
+    if (indexTrackingHedge != null) result.indexTrackingHedge = indexTrackingHedge;
     if (futureBasis != null) result.futureBasis = futureBasis;
     return result;
   }
@@ -204,15 +204,15 @@ class EtfPricing extends $pb.GeneratedMessage {
   factory EtfPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, EtfPricing_Method> _EtfPricing_MethodByTag = {
-    1 : EtfPricing_Method.decomposeHedge,
-    2 : EtfPricing_Method.underlyingFutureHedge,
+    1 : EtfPricing_Method.pdfNavHedge,
+    2 : EtfPricing_Method.indexTrackingHedge,
     3 : EtfPricing_Method.futureBasis,
     0 : EtfPricing_Method.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..oo(0, [1, 2, 3])
-    ..aOM<DecomposeHedgePricing>(1, _omitFieldNames ? '' : 'decomposeHedge', subBuilder: DecomposeHedgePricing.create)
-    ..aOM<UnderlyingFutureHedgePricing>(2, _omitFieldNames ? '' : 'underlyingFutureHedge', subBuilder: UnderlyingFutureHedgePricing.create)
+    ..aOM<PdfNavHedgePricing>(1, _omitFieldNames ? '' : 'pdfNavHedge', subBuilder: PdfNavHedgePricing.create)
+    ..aOM<IndexTrackingHedgePricing>(2, _omitFieldNames ? '' : 'indexTrackingHedge', subBuilder: IndexTrackingHedgePricing.create)
     ..aOM<FutureBasis>(3, _omitFieldNames ? '' : 'futureBasis', subBuilder: FutureBasis.create)
     ..hasRequiredFields = false
   ;
@@ -239,27 +239,27 @@ class EtfPricing extends $pb.GeneratedMessage {
 
   /// 분해 헷지 방식
   @$pb.TagNumber(1)
-  DecomposeHedgePricing get decomposeHedge => $_getN(0);
+  PdfNavHedgePricing get pdfNavHedge => $_getN(0);
   @$pb.TagNumber(1)
-  set decomposeHedge(DecomposeHedgePricing value) => $_setField(1, value);
+  set pdfNavHedge(PdfNavHedgePricing value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasDecomposeHedge() => $_has(0);
+  $core.bool hasPdfNavHedge() => $_has(0);
   @$pb.TagNumber(1)
-  void clearDecomposeHedge() => $_clearField(1);
+  void clearPdfNavHedge() => $_clearField(1);
   @$pb.TagNumber(1)
-  DecomposeHedgePricing ensureDecomposeHedge() => $_ensure(0);
+  PdfNavHedgePricing ensurePdfNavHedge() => $_ensure(0);
 
   /// 선물 헷지 방식
   @$pb.TagNumber(2)
-  UnderlyingFutureHedgePricing get underlyingFutureHedge => $_getN(1);
+  IndexTrackingHedgePricing get indexTrackingHedge => $_getN(1);
   @$pb.TagNumber(2)
-  set underlyingFutureHedge(UnderlyingFutureHedgePricing value) => $_setField(2, value);
+  set indexTrackingHedge(IndexTrackingHedgePricing value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasUnderlyingFutureHedge() => $_has(1);
+  $core.bool hasIndexTrackingHedge() => $_has(1);
   @$pb.TagNumber(2)
-  void clearUnderlyingFutureHedge() => $_clearField(2);
+  void clearIndexTrackingHedge() => $_clearField(2);
   @$pb.TagNumber(2)
-  UnderlyingFutureHedgePricing ensureUnderlyingFutureHedge() => $_ensure(1);
+  IndexTrackingHedgePricing ensureIndexTrackingHedge() => $_ensure(1);
 
   @$pb.TagNumber(3)
   FutureBasis get futureBasis => $_getN(2);
@@ -274,65 +274,65 @@ class EtfPricing extends $pb.GeneratedMessage {
 }
 
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
-class DecomposeHedgePricing extends $pb.GeneratedMessage {
-  factory DecomposeHedgePricing() => create();
+class PdfNavHedgePricing extends $pb.GeneratedMessage {
+  factory PdfNavHedgePricing() => create();
 
-  DecomposeHedgePricing._();
+  PdfNavHedgePricing._();
 
-  factory DecomposeHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory DecomposeHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory PdfNavHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PdfNavHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DecomposeHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PdfNavHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DecomposeHedgePricing clone() => DecomposeHedgePricing()..mergeFromMessage(this);
+  PdfNavHedgePricing clone() => PdfNavHedgePricing()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DecomposeHedgePricing copyWith(void Function(DecomposeHedgePricing) updates) => super.copyWith((message) => updates(message as DecomposeHedgePricing)) as DecomposeHedgePricing;
+  PdfNavHedgePricing copyWith(void Function(PdfNavHedgePricing) updates) => super.copyWith((message) => updates(message as PdfNavHedgePricing)) as PdfNavHedgePricing;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static DecomposeHedgePricing create() => DecomposeHedgePricing._();
+  static PdfNavHedgePricing create() => PdfNavHedgePricing._();
   @$core.override
-  DecomposeHedgePricing createEmptyInstance() => create();
-  static $pb.PbList<DecomposeHedgePricing> createRepeated() => $pb.PbList<DecomposeHedgePricing>();
+  PdfNavHedgePricing createEmptyInstance() => create();
+  static $pb.PbList<PdfNavHedgePricing> createRepeated() => $pb.PbList<PdfNavHedgePricing>();
   @$core.pragma('dart2js:noInline')
-  static DecomposeHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DecomposeHedgePricing>(create);
-  static DecomposeHedgePricing? _defaultInstance;
+  static PdfNavHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PdfNavHedgePricing>(create);
+  static PdfNavHedgePricing? _defaultInstance;
 }
 
 /// 선물 헷지 가격 산출
-class UnderlyingFutureHedgePricing extends $pb.GeneratedMessage {
-  factory UnderlyingFutureHedgePricing() => create();
+class IndexTrackingHedgePricing extends $pb.GeneratedMessage {
+  factory IndexTrackingHedgePricing() => create();
 
-  UnderlyingFutureHedgePricing._();
+  IndexTrackingHedgePricing._();
 
-  factory UnderlyingFutureHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory UnderlyingFutureHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory IndexTrackingHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory IndexTrackingHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingFutureHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'IndexTrackingHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UnderlyingFutureHedgePricing clone() => UnderlyingFutureHedgePricing()..mergeFromMessage(this);
+  IndexTrackingHedgePricing clone() => IndexTrackingHedgePricing()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UnderlyingFutureHedgePricing copyWith(void Function(UnderlyingFutureHedgePricing) updates) => super.copyWith((message) => updates(message as UnderlyingFutureHedgePricing)) as UnderlyingFutureHedgePricing;
+  IndexTrackingHedgePricing copyWith(void Function(IndexTrackingHedgePricing) updates) => super.copyWith((message) => updates(message as IndexTrackingHedgePricing)) as IndexTrackingHedgePricing;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static UnderlyingFutureHedgePricing create() => UnderlyingFutureHedgePricing._();
+  static IndexTrackingHedgePricing create() => IndexTrackingHedgePricing._();
   @$core.override
-  UnderlyingFutureHedgePricing createEmptyInstance() => create();
-  static $pb.PbList<UnderlyingFutureHedgePricing> createRepeated() => $pb.PbList<UnderlyingFutureHedgePricing>();
+  IndexTrackingHedgePricing createEmptyInstance() => create();
+  static $pb.PbList<IndexTrackingHedgePricing> createRepeated() => $pb.PbList<IndexTrackingHedgePricing>();
   @$core.pragma('dart2js:noInline')
-  static UnderlyingFutureHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingFutureHedgePricing>(create);
-  static UnderlyingFutureHedgePricing? _defaultInstance;
+  static IndexTrackingHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IndexTrackingHedgePricing>(create);
+  static IndexTrackingHedgePricing? _defaultInstance;
 }
 
 class FutureBasis extends $pb.GeneratedMessage {
