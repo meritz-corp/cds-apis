@@ -56,7 +56,8 @@ const EtfLp$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
-    {'1': 'basis', '3': 6, '4': 1, '5': 3, '10': 'basis'},
+    {'1': 'ask_basis', '3': 3, '4': 1, '5': 1, '10': 'askBasis'},
+    {'1': 'bid_basis', '3': 4, '4': 1, '5': 1, '10': 'bidBasis'},
     {'1': 'quantity', '3': 7, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'depth', '3': 8, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
@@ -69,11 +70,11 @@ const EtfLp$json = {
 /// Descriptor for `EtfLp`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'CgVFdGZMcBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bm'
-    'RDb2RlEhQKBWJhc2lzGAYgASgDUgViYXNpcxIaCghxdWFudGl0eRgHIAEoA1IIcXVhbnRpdHkS'
-    'FAoFZGVwdGgYCCABKA1SBWRlcHRoEhsKCXRpY2tfc2l6ZRgJIAEoA1IIdGlja1NpemUSLgoGb2'
-    'Zmc2V0GAogASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQSGAoHZW5hYmxlZBgL'
-    'IAEoCFIHZW5hYmxlZBI8Cg5wcmljaW5nX21ldGhvZBgMIAEoCzIVLmtkby52MS5scC5FdGZQcm'
-    'ljaW5nUg1wcmljaW5nTWV0aG9k');
+    'RDb2RlEhsKCWFza19iYXNpcxgDIAEoAVIIYXNrQmFzaXMSGwoJYmlkX2Jhc2lzGAQgASgBUghi'
+    'aWRCYXNpcxIaCghxdWFudGl0eRgHIAEoA1IIcXVhbnRpdHkSFAoFZGVwdGgYCCABKA1SBWRlcH'
+    'RoEhsKCXRpY2tfc2l6ZRgJIAEoA1IIdGlja1NpemUSLgoGb2Zmc2V0GAogASgLMhYua2RvLnYx'
+    'LmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQSGAoHZW5hYmxlZBgLIAEoCFIHZW5hYmxlZBI8Cg5wcm'
+    'ljaW5nX21ldGhvZBgMIAEoCzIVLmtkby52MS5scC5FdGZQcmljaW5nUg1wcmljaW5nTWV0aG9k');
 
 @$core.Deprecated('Use etfPricingDescriptor instead')
 const EtfPricing$json = {

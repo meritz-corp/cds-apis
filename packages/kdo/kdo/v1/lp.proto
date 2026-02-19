@@ -111,8 +111,11 @@ message EtfLp {
   // Fund
   string fund_code = 2;
 
-  // Basis 스프레드 (원 단위, i64)
-  int64 basis = 6;
+  //
+  double ask_basis = 3;
+
+  //
+  double bid_basis = 4;
 
   // 주문 수량 (i64)
   int64 quantity = 7;

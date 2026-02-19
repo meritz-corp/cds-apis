@@ -504,10 +504,13 @@
           "type": "string",
           "title": "Fund"
         },
-        "basis": {
-          "type": "string",
-          "format": "int64",
-          "title": "Basis 스프레드 (원 단위, i64)"
+        "askBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
         },
         "quantity": {
           "type": "string",

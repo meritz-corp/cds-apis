@@ -10,9 +10,12 @@ pub struct EtfLp {
     /// Fund
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// Basis 스프레드 (원 단위, i64)
-    #[prost(int64, tag="6")]
-    pub basis: i64,
+    ///
+    #[prost(double, tag="3")]
+    pub ask_basis: f64,
+    ///
+    #[prost(double, tag="4")]
+    pub bid_basis: f64,
     /// 주문 수량 (i64)
     #[prost(int64, tag="7")]
     pub quantity: i64,
