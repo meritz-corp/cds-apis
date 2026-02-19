@@ -378,7 +378,7 @@ pub struct UpdateEtfLpRequest {
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
     /// 업데이트 대상
-    #[prost(oneof="update_etf_lp_request::Update", tags="3, 4, 5")]
+    #[prost(oneof="update_etf_lp_request::Update", tags="3, 4, 5, 6, 7")]
     pub update: ::core::option::Option<update_etf_lp_request::Update>,
 }
 /// Nested message and enum types in `UpdateEtfLpRequest`.
@@ -396,6 +396,10 @@ pub mod update_etf_lp_request {
         /// 동적 offset 조정 설정
         #[prost(message, tag="5")]
         Offset(super::EtfLpOffset),
+        #[prost(double, tag="6")]
+        AskBasis(f64),
+        #[prost(double, tag="7")]
+        BidBasis(f64),
     }
 }
 /// GetEtfLpStatus

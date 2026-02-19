@@ -473,6 +473,10 @@ message UpdateEtfLpRequest {
 
     // 동적 offset 조정 설정
     EtfLpOffset offset = 5;
+
+    double ask_basis = 6;
+
+    double bid_basis = 7;
   }
 }
 

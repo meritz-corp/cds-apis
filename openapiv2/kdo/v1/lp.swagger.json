@@ -171,6 +171,14 @@
                 "offset": {
                   "$ref": "#/definitions/lpEtfLpOffset",
                   "title": "동적 offset 조정 설정"
+                },
+                "askBasis": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "bidBasis": {
+                  "type": "number",
+                  "format": "double"
                 }
               },
               "title": "UpdateEtfLp"

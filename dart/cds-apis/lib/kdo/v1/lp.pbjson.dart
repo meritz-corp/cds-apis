@@ -426,6 +426,8 @@ const UpdateEtfLpRequest$json = {
     {'1': 'quantity', '3': 3, '4': 1, '5': 3, '9': 0, '10': 'quantity'},
     {'1': 'depth', '3': 4, '4': 1, '5': 13, '9': 0, '10': 'depth'},
     {'1': 'offset', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 0, '10': 'offset'},
+    {'1': 'ask_basis', '3': 6, '4': 1, '5': 1, '9': 0, '10': 'askBasis'},
+    {'1': 'bid_basis', '3': 7, '4': 1, '5': 1, '9': 0, '10': 'bidBasis'},
   ],
   '8': [
     {'1': 'update'},
@@ -437,7 +439,8 @@ final $typed_data.Uint8List updateEtfLpRequestDescriptor = $convert.base64Decode
     'ChJVcGRhdGVFdGZMcFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSIQoJZn'
     'VuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIcCghxdWFudGl0eRgDIAEoA0gAUghxdWFu'
     'dGl0eRIWCgVkZXB0aBgEIAEoDUgAUgVkZXB0aBIwCgZvZmZzZXQYBSABKAsyFi5rZG8udjEubH'
-    'AuRXRmTHBPZmZzZXRIAFIGb2Zmc2V0QggKBnVwZGF0ZQ==');
+    'AuRXRmTHBPZmZzZXRIAFIGb2Zmc2V0Eh0KCWFza19iYXNpcxgGIAEoAUgAUghhc2tCYXNpcxId'
+    'CgliaWRfYmFzaXMYByABKAFIAFIIYmlkQmFzaXNCCAoGdXBkYXRl');
 
 @$core.Deprecated('Use getEtfLpStatusRequestDescriptor instead')
 const GetEtfLpStatusRequest$json = {

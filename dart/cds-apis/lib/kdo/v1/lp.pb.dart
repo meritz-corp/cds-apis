@@ -1719,6 +1719,8 @@ enum UpdateEtfLpRequest_Update {
   quantity, 
   depth, 
   offset, 
+  askBasis, 
+  bidBasis, 
   notSet
 }
 
@@ -1730,6 +1732,8 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? quantity,
     $core.int? depth,
     EtfLpOffset? offset,
+    $core.double? askBasis,
+    $core.double? bidBasis,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -1737,6 +1741,8 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (quantity != null) result.quantity = quantity;
     if (depth != null) result.depth = depth;
     if (offset != null) result.offset = offset;
+    if (askBasis != null) result.askBasis = askBasis;
+    if (bidBasis != null) result.bidBasis = bidBasis;
     return result;
   }
 
@@ -1749,15 +1755,19 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     3 : UpdateEtfLpRequest_Update.quantity,
     4 : UpdateEtfLpRequest_Update.depth,
     5 : UpdateEtfLpRequest_Update.offset,
+    6 : UpdateEtfLpRequest_Update.askBasis,
+    7 : UpdateEtfLpRequest_Update.bidBasis,
     0 : UpdateEtfLpRequest_Update.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..oo(0, [3, 4, 5])
+    ..oo(0, [3, 4, 5, 6, 7])
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aInt64(3, _omitFieldNames ? '' : 'quantity')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aOM<EtfLpOffset>(5, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1832,6 +1842,24 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   void clearOffset() => $_clearField(5);
   @$pb.TagNumber(5)
   EtfLpOffset ensureOffset() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $core.double get askBasis => $_getN(5);
+  @$pb.TagNumber(6)
+  set askBasis($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasAskBasis() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAskBasis() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.double get bidBasis => $_getN(6);
+  @$pb.TagNumber(7)
+  set bidBasis($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasBidBasis() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearBidBasis() => $_clearField(7);
 }
 
 /// GetEtfLpStatus

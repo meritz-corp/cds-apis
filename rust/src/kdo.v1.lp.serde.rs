@@ -4046,6 +4046,12 @@ impl serde::Serialize for UpdateEtfLpRequest {
                 update_etf_lp_request::Update::Offset(v) => {
                     struct_ser.serialize_field("offset", v)?;
                 }
+                update_etf_lp_request::Update::AskBasis(v) => {
+                    struct_ser.serialize_field("ask_basis", v)?;
+                }
+                update_etf_lp_request::Update::BidBasis(v) => {
+                    struct_ser.serialize_field("bid_basis", v)?;
+                }
             }
         }
         struct_ser.end()
@@ -4064,6 +4070,10 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "quantity",
             "depth",
             "offset",
+            "ask_basis",
+            "askBasis",
+            "bid_basis",
+            "bidBasis",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4073,6 +4083,8 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             Quantity,
             Depth,
             Offset,
+            AskBasis,
+            BidBasis,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4100,6 +4112,8 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "offset" => Ok(GeneratedField::Offset),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4154,6 +4168,18 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             }
                             update__ = map_.next_value::<::std::option::Option<_>>()?.map(update_etf_lp_request::Update::Offset)
 ;
+                        }
+                        GeneratedField::AskBasis => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::AskBasis(x.0));
+                        }
+                        GeneratedField::BidBasis => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::BidBasis(x.0));
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
