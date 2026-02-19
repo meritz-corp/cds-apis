@@ -48,8 +48,6 @@ class Future extends $pb.GeneratedMessage {
     $core.bool? lastTradableDay,
     $core.double? cdRate,
     $core.String? finalSettlementDate,
-    $core.double? askBasis,
-    $core.double? bidBasis,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -75,8 +73,6 @@ class Future extends $pb.GeneratedMessage {
     if (lastTradableDay != null) result.lastTradableDay = lastTradableDay;
     if (cdRate != null) result.cdRate = cdRate;
     if (finalSettlementDate != null) result.finalSettlementDate = finalSettlementDate;
-    if (askBasis != null) result.askBasis = askBasis;
-    if (bidBasis != null) result.bidBasis = bidBasis;
     return result;
   }
 
@@ -109,8 +105,6 @@ class Future extends $pb.GeneratedMessage {
     ..aOB(21, _omitFieldNames ? '' : 'lastTradableDay')
     ..a<$core.double>(22, _omitFieldNames ? '' : 'cdRate', $pb.PbFieldType.OD)
     ..aOS(23, _omitFieldNames ? '' : 'finalSettlementDate')
-    ..a<$core.double>(24, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
-    ..a<$core.double>(25, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -360,26 +354,6 @@ class Future extends $pb.GeneratedMessage {
   $core.bool hasFinalSettlementDate() => $_has(22);
   @$pb.TagNumber(23)
   void clearFinalSettlementDate() => $_clearField(23);
-
-  /// 최종 결제일 (YYYY-MM-DD)
-  @$pb.TagNumber(24)
-  $core.double get askBasis => $_getN(23);
-  @$pb.TagNumber(24)
-  set askBasis($core.double value) => $_setDouble(23, value);
-  @$pb.TagNumber(24)
-  $core.bool hasAskBasis() => $_has(23);
-  @$pb.TagNumber(24)
-  void clearAskBasis() => $_clearField(24);
-
-  /// 최종 결제일 (YYYY-MM-DD)
-  @$pb.TagNumber(25)
-  $core.double get bidBasis => $_getN(24);
-  @$pb.TagNumber(25)
-  set bidBasis($core.double value) => $_setDouble(24, value);
-  @$pb.TagNumber(25)
-  $core.bool hasBidBasis() => $_has(24);
-  @$pb.TagNumber(25)
-  void clearBidBasis() => $_clearField(25);
 }
 
 class GetFutureRequest extends $pb.GeneratedMessage {

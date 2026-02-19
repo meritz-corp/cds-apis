@@ -73,12 +73,6 @@ pub struct Future {
     /// 최종 결제일 (YYYY-MM-DD)
     #[prost(string, tag="23")]
     pub final_settlement_date: ::prost::alloc::string::String,
-    /// 최종 결제일 (YYYY-MM-DD)
-    #[prost(double, tag="24")]
-    pub ask_basis: f64,
-    /// 최종 결제일 (YYYY-MM-DD)
-    #[prost(double, tag="25")]
-    pub bid_basis: f64,
 }
 // ========== Request/Response Messages ==========
 

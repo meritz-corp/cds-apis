@@ -58,8 +58,6 @@ const Future$json = {
     {'1': 'last_tradable_day', '3': 21, '4': 1, '5': 8, '10': 'lastTradableDay'},
     {'1': 'cd_rate', '3': 22, '4': 1, '5': 1, '10': 'cdRate'},
     {'1': 'final_settlement_date', '3': 23, '4': 1, '5': 9, '10': 'finalSettlementDate'},
-    {'1': 'ask_basis', '3': 24, '4': 1, '5': 1, '10': 'askBasis'},
-    {'1': 'bid_basis', '3': 25, '4': 1, '5': 1, '10': 'bidBasis'},
   ],
   '7': {},
 };
@@ -81,9 +79,8 @@ final $typed_data.Uint8List futureDescriptor = $convert.base64Decode(
     'cHJpY2UYEyABKAFSE3VuZGVybHlpbmdQcmV2UHJpY2USJQoOcmVtYWluaW5nX2RheXMYFCABKA'
     'FSDXJlbWFpbmluZ0RheXMSKgoRbGFzdF90cmFkYWJsZV9kYXkYFSABKAhSD2xhc3RUcmFkYWJs'
     'ZURheRIXCgdjZF9yYXRlGBYgASgBUgZjZFJhdGUSMgoVZmluYWxfc2V0dGxlbWVudF9kYXRlGB'
-    'cgASgJUhNmaW5hbFNldHRsZW1lbnREYXRlEhsKCWFza19iYXNpcxgYIAEoAVIIYXNrQmFzaXMS'
-    'GwoJYmlkX2Jhc2lzGBkgASgBUghiaWRCYXNpczot6kEqChZrZG8uY2RzYXBpcy54eXovRnV0dX'
-    'JlEhBmdXR1cmVzL3tmdXR1cmV9');
+    'cgASgJUhNmaW5hbFNldHRsZW1lbnREYXRlOi3qQSoKFmtkby5jZHNhcGlzLnh5ei9GdXR1cmUS'
+    'EGZ1dHVyZXMve2Z1dHVyZX0=');
 
 @$core.Deprecated('Use getFutureRequestDescriptor instead')
 const GetFutureRequest$json = {

@@ -76,12 +76,6 @@ impl serde::Serialize for Future {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.future.Future", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -158,12 +152,6 @@ impl serde::Serialize for Future {
         if true {
             struct_ser.serialize_field("final_settlement_date", &self.final_settlement_date)?;
         }
-        if true {
-            struct_ser.serialize_field("ask_basis", &self.ask_basis)?;
-        }
-        if true {
-            struct_ser.serialize_field("bid_basis", &self.bid_basis)?;
-        }
         struct_ser.end()
     }
 }
@@ -214,10 +202,6 @@ impl<'de> serde::Deserialize<'de> for Future {
             "cdRate",
             "final_settlement_date",
             "finalSettlementDate",
-            "ask_basis",
-            "askBasis",
-            "bid_basis",
-            "bidBasis",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -245,8 +229,6 @@ impl<'de> serde::Deserialize<'de> for Future {
             LastTradableDay,
             CdRate,
             FinalSettlementDate,
-            AskBasis,
-            BidBasis,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -292,8 +274,6 @@ impl<'de> serde::Deserialize<'de> for Future {
                             "lastTradableDay" | "last_tradable_day" => Ok(GeneratedField::LastTradableDay),
                             "cdRate" | "cd_rate" => Ok(GeneratedField::CdRate),
                             "finalSettlementDate" | "final_settlement_date" => Ok(GeneratedField::FinalSettlementDate),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -336,8 +316,6 @@ impl<'de> serde::Deserialize<'de> for Future {
                 let mut last_tradable_day__ = None;
                 let mut cd_rate__ = None;
                 let mut final_settlement_date__ = None;
-                let mut ask_basis__ = None;
-                let mut bid_basis__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -500,22 +478,6 @@ impl<'de> serde::Deserialize<'de> for Future {
                             }
                             final_settlement_date__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -545,8 +507,6 @@ impl<'de> serde::Deserialize<'de> for Future {
                     last_tradable_day: last_tradable_day__.unwrap_or_default(),
                     cd_rate: cd_rate__.unwrap_or_default(),
                     final_settlement_date: final_settlement_date__.unwrap_or_default(),
-                    ask_basis: ask_basis__.unwrap_or_default(),
-                    bid_basis: bid_basis__.unwrap_or_default(),
                 })
             }
         }

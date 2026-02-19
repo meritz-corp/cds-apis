@@ -26,6 +26,8 @@ class EtfLp extends $pb.GeneratedMessage {
   factory EtfLp({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.double? askBasis,
+    $core.double? bidBasis,
     $fixnum.Int64? quantity,
     $core.int? depth,
     $fixnum.Int64? tickSize,
@@ -36,6 +38,8 @@ class EtfLp extends $pb.GeneratedMessage {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (askBasis != null) result.askBasis = askBasis;
+    if (bidBasis != null) result.bidBasis = bidBasis;
     if (quantity != null) result.quantity = quantity;
     if (depth != null) result.depth = depth;
     if (tickSize != null) result.tickSize = tickSize;
@@ -53,6 +57,8 @@ class EtfLp extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLp', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..aInt64(7, _omitFieldNames ? '' : 'quantity')
     ..a<$core.int>(8, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
@@ -99,69 +105,87 @@ class EtfLp extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
+  @$pb.TagNumber(3)
+  $core.double get askBasis => $_getN(2);
+  @$pb.TagNumber(3)
+  set askBasis($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskBasis() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskBasis() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get bidBasis => $_getN(3);
+  @$pb.TagNumber(4)
+  set bidBasis($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBidBasis() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBidBasis() => $_clearField(4);
+
   /// 주문 수량 (i64)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get quantity => $_getI64(2);
+  $fixnum.Int64 get quantity => $_getI64(4);
   @$pb.TagNumber(7)
-  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(7)
-  $core.bool hasQuantity() => $_has(2);
+  $core.bool hasQuantity() => $_has(4);
   @$pb.TagNumber(7)
   void clearQuantity() => $_clearField(7);
 
   /// 호가 깊이 (양방향 레벨 수)
   @$pb.TagNumber(8)
-  $core.int get depth => $_getIZ(3);
+  $core.int get depth => $_getIZ(5);
   @$pb.TagNumber(8)
-  set depth($core.int value) => $_setUnsignedInt32(3, value);
+  set depth($core.int value) => $_setUnsignedInt32(5, value);
   @$pb.TagNumber(8)
-  $core.bool hasDepth() => $_has(3);
+  $core.bool hasDepth() => $_has(5);
   @$pb.TagNumber(8)
   void clearDepth() => $_clearField(8);
 
   /// ETF tick 크기 (원 단위, i64)
   @$pb.TagNumber(9)
-  $fixnum.Int64 get tickSize => $_getI64(4);
+  $fixnum.Int64 get tickSize => $_getI64(6);
   @$pb.TagNumber(9)
-  set tickSize($fixnum.Int64 value) => $_setInt64(4, value);
+  set tickSize($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(9)
-  $core.bool hasTickSize() => $_has(4);
+  $core.bool hasTickSize() => $_has(6);
   @$pb.TagNumber(9)
   void clearTickSize() => $_clearField(9);
 
   /// 동적 offset 조정 설정
   @$pb.TagNumber(10)
-  EtfLpOffset get offset => $_getN(5);
+  EtfLpOffset get offset => $_getN(7);
   @$pb.TagNumber(10)
   set offset(EtfLpOffset value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasOffset() => $_has(5);
+  $core.bool hasOffset() => $_has(7);
   @$pb.TagNumber(10)
   void clearOffset() => $_clearField(10);
   @$pb.TagNumber(10)
-  EtfLpOffset ensureOffset() => $_ensure(5);
+  EtfLpOffset ensureOffset() => $_ensure(7);
 
   /// 활성화 여부
   @$pb.TagNumber(11)
-  $core.bool get enabled => $_getBF(6);
+  $core.bool get enabled => $_getBF(8);
   @$pb.TagNumber(11)
-  set enabled($core.bool value) => $_setBool(6, value);
+  set enabled($core.bool value) => $_setBool(8, value);
   @$pb.TagNumber(11)
-  $core.bool hasEnabled() => $_has(6);
+  $core.bool hasEnabled() => $_has(8);
   @$pb.TagNumber(11)
   void clearEnabled() => $_clearField(11);
 
   /// ETF 가격 산출 방식
   @$pb.TagNumber(12)
-  EtfPricing get pricingMethod => $_getN(7);
+  EtfPricing get pricingMethod => $_getN(9);
   @$pb.TagNumber(12)
   set pricingMethod(EtfPricing value) => $_setField(12, value);
   @$pb.TagNumber(12)
-  $core.bool hasPricingMethod() => $_has(7);
+  $core.bool hasPricingMethod() => $_has(9);
   @$pb.TagNumber(12)
   void clearPricingMethod() => $_clearField(12);
   @$pb.TagNumber(12)
-  EtfPricing ensurePricingMethod() => $_ensure(7);
+  EtfPricing ensurePricingMethod() => $_ensure(9);
 }
 
 enum EtfPricing_Method {
