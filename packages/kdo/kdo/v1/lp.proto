@@ -352,6 +352,10 @@ message TimeFrameStatus {
 
 // LP 가격 정보
 message LpPricing {
+  string etf_ask_quote = 1;
+
+  string etf_bid_quote = 2;
+
   // ETF NAV (원 단위)
   string etf_ask_nav = 3;
 

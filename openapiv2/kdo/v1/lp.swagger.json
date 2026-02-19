@@ -814,6 +814,12 @@
     "lpLpPricing": {
       "type": "object",
       "properties": {
+        "etfAskQuote": {
+          "type": "string"
+        },
+        "etfBidQuote": {
+          "type": "string"
+        },
         "etfAskNav": {
           "type": "string",
           "title": "ETF NAV (원 단위)"

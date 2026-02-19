@@ -308,6 +308,8 @@ final $typed_data.Uint8List timeFrameStatusDescriptor = $convert.base64Decode(
 const LpPricing$json = {
   '1': 'LpPricing',
   '2': [
+    {'1': 'etf_ask_quote', '3': 1, '4': 1, '5': 9, '10': 'etfAskQuote'},
+    {'1': 'etf_bid_quote', '3': 2, '4': 1, '5': 9, '10': 'etfBidQuote'},
     {'1': 'etf_ask_nav', '3': 3, '4': 1, '5': 9, '10': 'etfAskNav'},
     {'1': 'etf_bid_nav', '3': 4, '4': 1, '5': 9, '10': 'etfBidNav'},
   ],
@@ -315,8 +317,9 @@ const LpPricing$json = {
 
 /// Descriptor for `LpPricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List lpPricingDescriptor = $convert.base64Decode(
-    'CglMcFByaWNpbmcSHgoLZXRmX2Fza19uYXYYAyABKAlSCWV0ZkFza05hdhIeCgtldGZfYmlkX2'
-    '5hdhgEIAEoCVIJZXRmQmlkTmF2');
+    'CglMcFByaWNpbmcSIgoNZXRmX2Fza19xdW90ZRgBIAEoCVILZXRmQXNrUXVvdGUSIgoNZXRmX2'
+    'JpZF9xdW90ZRgCIAEoCVILZXRmQmlkUXVvdGUSHgoLZXRmX2Fza19uYXYYAyABKAlSCWV0ZkFz'
+    'a05hdhIeCgtldGZfYmlkX25hdhgEIAEoCVIJZXRmQmlkTmF2');
 
 @$core.Deprecated('Use createEtfLpRequestDescriptor instead')
 const CreateEtfLpRequest$json = {

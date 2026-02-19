@@ -2718,7 +2718,19 @@ impl serde::Serialize for LpPricing {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.LpPricing", len)?;
+        if true {
+            struct_ser.serialize_field("etf_ask_quote", &self.etf_ask_quote)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_bid_quote", &self.etf_bid_quote)?;
+        }
         if true {
             struct_ser.serialize_field("etf_ask_nav", &self.etf_ask_nav)?;
         }
@@ -2735,6 +2747,10 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "etf_ask_quote",
+            "etfAskQuote",
+            "etf_bid_quote",
+            "etfBidQuote",
             "etf_ask_nav",
             "etfAskNav",
             "etf_bid_nav",
@@ -2743,6 +2759,8 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            EtfAskQuote,
+            EtfBidQuote,
             EtfAskNav,
             EtfBidNav,
             __SkipField__,
@@ -2767,6 +2785,8 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                         E: serde::de::Error,
                     {
                         match value {
+                            "etfAskQuote" | "etf_ask_quote" => Ok(GeneratedField::EtfAskQuote),
+                            "etfBidQuote" | "etf_bid_quote" => Ok(GeneratedField::EtfBidQuote),
                             "etfAskNav" | "etf_ask_nav" => Ok(GeneratedField::EtfAskNav),
                             "etfBidNav" | "etf_bid_nav" => Ok(GeneratedField::EtfBidNav),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -2788,10 +2808,24 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut etf_ask_quote__ = None;
+                let mut etf_bid_quote__ = None;
                 let mut etf_ask_nav__ = None;
                 let mut etf_bid_nav__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::EtfAskQuote => {
+                            if etf_ask_quote__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfAskQuote"));
+                            }
+                            etf_ask_quote__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EtfBidQuote => {
+                            if etf_bid_quote__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfBidQuote"));
+                            }
+                            etf_bid_quote__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::EtfAskNav => {
                             if etf_ask_nav__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("etfAskNav"));
@@ -2810,6 +2844,8 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
                     }
                 }
                 Ok(LpPricing {
+                    etf_ask_quote: etf_ask_quote__.unwrap_or_default(),
+                    etf_bid_quote: etf_bid_quote__.unwrap_or_default(),
                     etf_ask_nav: etf_ask_nav__.unwrap_or_default(),
                     etf_bid_nav: etf_bid_nav__.unwrap_or_default(),
                 })
