@@ -397,7 +397,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   factory EtfLpStatus({
     $core.String? etfSymbol,
     $core.String? fundCode,
-    $fixnum.Int64? basis,
+    $core.double? askBasis,
+    $core.double? bidBasis,
     $fixnum.Int64? quantity,
     EtfLpState? state,
     LpPricing? pricing,
@@ -408,7 +409,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
     if (fundCode != null) result.fundCode = fundCode;
-    if (basis != null) result.basis = basis;
+    if (askBasis != null) result.askBasis = askBasis;
+    if (bidBasis != null) result.bidBasis = bidBasis;
     if (quantity != null) result.quantity = quantity;
     if (state != null) result.state = state;
     if (pricing != null) result.pricing = pricing;
@@ -426,7 +428,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
-    ..aInt64(6, _omitFieldNames ? '' : 'basis')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..aInt64(7, _omitFieldNames ? '' : 'quantity')
     ..e<EtfLpState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
@@ -474,82 +477,91 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   void clearFundCode() => $_clearField(2);
 
   /// Basis 스프레드 (원 단위, i64)
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get basis => $_getI64(2);
-  @$pb.TagNumber(6)
-  set basis($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(6)
-  $core.bool hasBasis() => $_has(2);
-  @$pb.TagNumber(6)
-  void clearBasis() => $_clearField(6);
+  @$pb.TagNumber(3)
+  $core.double get askBasis => $_getN(2);
+  @$pb.TagNumber(3)
+  set askBasis($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskBasis() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskBasis() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get bidBasis => $_getN(3);
+  @$pb.TagNumber(4)
+  set bidBasis($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBidBasis() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBidBasis() => $_clearField(4);
 
   /// 주문 수량 (i64)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get quantity => $_getI64(3);
+  $fixnum.Int64 get quantity => $_getI64(4);
   @$pb.TagNumber(7)
-  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(7)
-  $core.bool hasQuantity() => $_has(3);
+  $core.bool hasQuantity() => $_has(4);
   @$pb.TagNumber(7)
   void clearQuantity() => $_clearField(7);
 
   /// LP 상태
   @$pb.TagNumber(8)
-  EtfLpState get state => $_getN(4);
+  EtfLpState get state => $_getN(5);
   @$pb.TagNumber(8)
   set state(EtfLpState value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasState() => $_has(4);
+  $core.bool hasState() => $_has(5);
   @$pb.TagNumber(8)
   void clearState() => $_clearField(8);
 
   /// 가격 정보
   @$pb.TagNumber(9)
-  LpPricing get pricing => $_getN(5);
+  LpPricing get pricing => $_getN(6);
   @$pb.TagNumber(9)
   set pricing(LpPricing value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasPricing() => $_has(5);
+  $core.bool hasPricing() => $_has(6);
   @$pb.TagNumber(9)
   void clearPricing() => $_clearField(9);
   @$pb.TagNumber(9)
-  LpPricing ensurePricing() => $_ensure(5);
+  LpPricing ensurePricing() => $_ensure(6);
 
   /// 체결 통계
   @$pb.TagNumber(10)
-  FillStatistics get fillStatistics => $_getN(6);
+  FillStatistics get fillStatistics => $_getN(7);
   @$pb.TagNumber(10)
   set fillStatistics(FillStatistics value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasFillStatistics() => $_has(6);
+  $core.bool hasFillStatistics() => $_has(7);
   @$pb.TagNumber(10)
   void clearFillStatistics() => $_clearField(10);
   @$pb.TagNumber(10)
-  FillStatistics ensureFillStatistics() => $_ensure(6);
+  FillStatistics ensureFillStatistics() => $_ensure(7);
 
   /// 동적 offset 조정 설정 (optional)
   @$pb.TagNumber(11)
-  EtfLpOffset get offset => $_getN(7);
+  EtfLpOffset get offset => $_getN(8);
   @$pb.TagNumber(11)
   set offset(EtfLpOffset value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasOffset() => $_has(7);
+  $core.bool hasOffset() => $_has(8);
   @$pb.TagNumber(11)
   void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
-  EtfLpOffset ensureOffset() => $_ensure(7);
+  EtfLpOffset ensureOffset() => $_ensure(8);
 
   /// 헷지 정보
   @$pb.TagNumber(12)
-  EtfLpHedge get hedge => $_getN(8);
+  EtfLpHedge get hedge => $_getN(9);
   @$pb.TagNumber(12)
   set hedge(EtfLpHedge value) => $_setField(12, value);
   @$pb.TagNumber(12)
-  $core.bool hasHedge() => $_has(8);
+  $core.bool hasHedge() => $_has(9);
   @$pb.TagNumber(12)
   void clearHedge() => $_clearField(12);
   @$pb.TagNumber(12)
-  EtfLpHedge ensureHedge() => $_ensure(8);
+  EtfLpHedge ensureHedge() => $_ensure(9);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -557,7 +569,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   factory EtfLpStatusUpdate({
     $core.String? etfSymbol,
     $core.String? fundCode,
-    $fixnum.Int64? basis,
+    $core.double? askBasis,
+    $core.double? bidBasis,
     $fixnum.Int64? quantity,
     EtfLpState? state,
     LpPricing? pricing,
@@ -567,7 +580,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
     if (fundCode != null) result.fundCode = fundCode;
-    if (basis != null) result.basis = basis;
+    if (askBasis != null) result.askBasis = askBasis;
+    if (bidBasis != null) result.bidBasis = bidBasis;
     if (quantity != null) result.quantity = quantity;
     if (state != null) result.state = state;
     if (pricing != null) result.pricing = pricing;
@@ -584,7 +598,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
-    ..aInt64(6, _omitFieldNames ? '' : 'basis')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..aInt64(7, _omitFieldNames ? '' : 'quantity')
     ..e<EtfLpState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
@@ -630,71 +645,80 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
-  /// Basis 스프레드 (원 단위, i64)
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get basis => $_getI64(2);
-  @$pb.TagNumber(6)
-  set basis($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(6)
-  $core.bool hasBasis() => $_has(2);
-  @$pb.TagNumber(6)
-  void clearBasis() => $_clearField(6);
+  /// Basis 스프레드
+  @$pb.TagNumber(3)
+  $core.double get askBasis => $_getN(2);
+  @$pb.TagNumber(3)
+  set askBasis($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskBasis() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskBasis() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get bidBasis => $_getN(3);
+  @$pb.TagNumber(4)
+  set bidBasis($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBidBasis() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBidBasis() => $_clearField(4);
 
   /// 주문 수량 (i64)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get quantity => $_getI64(3);
+  $fixnum.Int64 get quantity => $_getI64(4);
   @$pb.TagNumber(7)
-  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(7)
-  $core.bool hasQuantity() => $_has(3);
+  $core.bool hasQuantity() => $_has(4);
   @$pb.TagNumber(7)
   void clearQuantity() => $_clearField(7);
 
   /// LP 상태
   @$pb.TagNumber(8)
-  EtfLpState get state => $_getN(4);
+  EtfLpState get state => $_getN(5);
   @$pb.TagNumber(8)
   set state(EtfLpState value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasState() => $_has(4);
+  $core.bool hasState() => $_has(5);
   @$pb.TagNumber(8)
   void clearState() => $_clearField(8);
 
   /// 가격 정보
   @$pb.TagNumber(9)
-  LpPricing get pricing => $_getN(5);
+  LpPricing get pricing => $_getN(6);
   @$pb.TagNumber(9)
   set pricing(LpPricing value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasPricing() => $_has(5);
+  $core.bool hasPricing() => $_has(6);
   @$pb.TagNumber(9)
   void clearPricing() => $_clearField(9);
   @$pb.TagNumber(9)
-  LpPricing ensurePricing() => $_ensure(5);
+  LpPricing ensurePricing() => $_ensure(6);
 
   /// 체결 통계
   @$pb.TagNumber(10)
-  FillStatistics get fillStatistics => $_getN(6);
+  FillStatistics get fillStatistics => $_getN(7);
   @$pb.TagNumber(10)
   set fillStatistics(FillStatistics value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasFillStatistics() => $_has(6);
+  $core.bool hasFillStatistics() => $_has(7);
   @$pb.TagNumber(10)
   void clearFillStatistics() => $_clearField(10);
   @$pb.TagNumber(10)
-  FillStatistics ensureFillStatistics() => $_ensure(6);
+  FillStatistics ensureFillStatistics() => $_ensure(7);
 
   /// 동적 offset 조정 설정 (optional)
   @$pb.TagNumber(11)
-  EtfLpOffset get offset => $_getN(7);
+  EtfLpOffset get offset => $_getN(8);
   @$pb.TagNumber(11)
   set offset(EtfLpOffset value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasOffset() => $_has(7);
+  $core.bool hasOffset() => $_has(8);
   @$pb.TagNumber(11)
   void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
-  EtfLpOffset ensureOffset() => $_ensure(7);
+  EtfLpOffset ensureOffset() => $_ensure(8);
 }
 
 /// 자동 offset 조정 설정

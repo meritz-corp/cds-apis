@@ -637,10 +637,14 @@
           "type": "string",
           "title": "펀드 코드"
         },
-        "basis": {
-          "type": "string",
-          "format": "int64",
+        "askBasis": {
+          "type": "number",
+          "format": "double",
           "title": "Basis 스프레드 (원 단위, i64)"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
         },
         "quantity": {
           "type": "string",
@@ -681,10 +685,14 @@
           "type": "string",
           "title": "펀드 코드"
         },
-        "basis": {
-          "type": "string",
-          "format": "int64",
-          "title": "Basis 스프레드 (원 단위, i64)"
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "Basis 스프레드"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
         },
         "quantity": {
           "type": "string",

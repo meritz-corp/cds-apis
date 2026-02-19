@@ -85,8 +85,10 @@ pub struct EtfLpStatus {
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
     /// Basis 스프레드 (원 단위, i64)
-    #[prost(int64, tag="6")]
-    pub basis: i64,
+    #[prost(double, optional, tag="3")]
+    pub ask_basis: ::core::option::Option<f64>,
+    #[prost(double, optional, tag="4")]
+    pub bid_basis: ::core::option::Option<f64>,
     /// 주문 수량 (i64)
     #[prost(int64, tag="7")]
     pub quantity: i64,
@@ -116,9 +118,11 @@ pub struct EtfLpStatusUpdate {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// Basis 스프레드 (원 단위, i64)
-    #[prost(int64, optional, tag="6")]
-    pub basis: ::core::option::Option<i64>,
+    /// Basis 스프레드
+    #[prost(double, optional, tag="3")]
+    pub ask_basis: ::core::option::Option<f64>,
+    #[prost(double, optional, tag="4")]
+    pub bid_basis: ::core::option::Option<f64>,
     /// 주문 수량 (i64)
     #[prost(int64, optional, tag="7")]
     pub quantity: ::core::option::Option<i64>,

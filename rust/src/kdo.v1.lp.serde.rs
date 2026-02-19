@@ -927,6 +927,9 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -934,10 +937,11 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
+        if let Some(v) = self.ask_basis.as_ref() {
+            struct_ser.serialize_field("ask_basis", v)?;
+        }
+        if let Some(v) = self.bid_basis.as_ref() {
+            struct_ser.serialize_field("bid_basis", v)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -975,7 +979,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "etfSymbol",
             "fund_code",
             "fundCode",
-            "basis",
+            "ask_basis",
+            "askBasis",
+            "bid_basis",
+            "bidBasis",
             "quantity",
             "state",
             "pricing",
@@ -989,7 +996,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
         enum GeneratedField {
             EtfSymbol,
             FundCode,
-            Basis,
+            AskBasis,
+            BidBasis,
             Quantity,
             State,
             Pricing,
@@ -1020,7 +1028,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                         match value {
                             "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "basis" => Ok(GeneratedField::Basis),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
@@ -1048,7 +1057,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             {
                 let mut etf_symbol__ = None;
                 let mut fund_code__ = None;
-                let mut basis__ = None;
+                let mut ask_basis__ = None;
+                let mut bid_basis__ = None;
                 let mut quantity__ = None;
                 let mut state__ = None;
                 let mut pricing__ = None;
@@ -1069,12 +1079,20 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Basis => {
-                            if basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("basis"));
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
                             }
-                            basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ask_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::Quantity => {
@@ -1123,7 +1141,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 Ok(EtfLpStatus {
                     etf_symbol: etf_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    basis: basis__.unwrap_or_default(),
+                    ask_basis: ask_basis__,
+                    bid_basis: bid_basis__,
                     quantity: quantity__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     pricing: pricing__,
@@ -1168,6 +1187,9 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -1175,10 +1197,11 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
-        if let Some(v) = self.basis.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("basis", ToString::to_string(&v).as_str())?;
+        if let Some(v) = self.ask_basis.as_ref() {
+            struct_ser.serialize_field("ask_basis", v)?;
+        }
+        if let Some(v) = self.bid_basis.as_ref() {
+            struct_ser.serialize_field("bid_basis", v)?;
         }
         if let Some(v) = self.quantity.as_ref() {
             #[allow(clippy::needless_borrow)]
@@ -1213,7 +1236,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "etfSymbol",
             "fund_code",
             "fundCode",
-            "basis",
+            "ask_basis",
+            "askBasis",
+            "bid_basis",
+            "bidBasis",
             "quantity",
             "state",
             "pricing",
@@ -1226,7 +1252,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
         enum GeneratedField {
             EtfSymbol,
             FundCode,
-            Basis,
+            AskBasis,
+            BidBasis,
             Quantity,
             State,
             Pricing,
@@ -1256,7 +1283,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                         match value {
                             "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "basis" => Ok(GeneratedField::Basis),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
@@ -1283,7 +1311,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             {
                 let mut etf_symbol__ = None;
                 let mut fund_code__ = None;
-                let mut basis__ = None;
+                let mut ask_basis__ = None;
+                let mut bid_basis__ = None;
                 let mut quantity__ = None;
                 let mut state__ = None;
                 let mut pricing__ = None;
@@ -1303,11 +1332,19 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Basis => {
-                            if basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("basis"));
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
                             }
-                            basis__ = 
+                            ask_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
@@ -1351,7 +1388,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 Ok(EtfLpStatusUpdate {
                     etf_symbol: etf_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    basis: basis__,
+                    ask_basis: ask_basis__,
+                    bid_basis: bid_basis__,
                     quantity: quantity__,
                     state: state__,
                     pricing: pricing__,

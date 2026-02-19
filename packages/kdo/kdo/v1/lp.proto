@@ -170,7 +170,9 @@ message EtfLpStatus {
   string fund_code = 2;
 
   // Basis 스프레드 (원 단위, i64)
-  int64 basis = 6;
+  optional double ask_basis = 3;
+
+  optional double bid_basis = 4;
 
   // 주문 수량 (i64)
   int64 quantity = 7;
@@ -199,8 +201,10 @@ message EtfLpStatusUpdate {
   // 펀드 코드
   string fund_code = 2;
 
-  // Basis 스프레드 (원 단위, i64)
-  optional int64 basis = 6;
+  // Basis 스프레드
+  optional double ask_basis = 3;
+
+  optional double bid_basis = 4;
 
   // 주문 수량 (i64)
   optional int64 quantity = 7;
