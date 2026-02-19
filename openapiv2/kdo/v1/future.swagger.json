@@ -215,6 +215,16 @@
         "finalSettlementDate": {
           "type": "string",
           "title": "최종 결제일 (YYYY-MM-DD)"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "최종 결제일 (YYYY-MM-DD)"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "최종 결제일 (YYYY-MM-DD)"
         }
       },
       "title": "선물/옵션 종목 정보"

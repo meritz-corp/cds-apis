@@ -504,14 +504,6 @@
           "type": "string",
           "title": "Fund"
         },
-        "askBasis": {
-          "type": "number",
-          "format": "double"
-        },
-        "bidBasis": {
-          "type": "number",
-          "format": "double"
-        },
         "quantity": {
           "type": "string",
           "format": "int64",

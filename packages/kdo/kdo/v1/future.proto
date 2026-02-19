@@ -115,6 +115,12 @@ message Future {
 
   // 최종 결제일 (YYYY-MM-DD)
   string final_settlement_date = 23;
+
+  // 최종 결제일 (YYYY-MM-DD)
+  double ask_basis = 24;
+
+  // 최종 결제일 (YYYY-MM-DD)
+  double bid_basis = 25;
 }
 
 // ========== Request/Response Messages ==========

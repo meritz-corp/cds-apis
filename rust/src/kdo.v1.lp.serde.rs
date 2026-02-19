@@ -127,24 +127,12 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        if true {
-            struct_ser.serialize_field("ask_basis", &self.ask_basis)?;
-        }
-        if true {
-            struct_ser.serialize_field("bid_basis", &self.bid_basis)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -181,10 +169,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "symbol",
             "fund_code",
             "fundCode",
-            "ask_basis",
-            "askBasis",
-            "bid_basis",
-            "bidBasis",
             "quantity",
             "depth",
             "tick_size",
@@ -199,8 +183,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
         enum GeneratedField {
             Symbol,
             FundCode,
-            AskBasis,
-            BidBasis,
             Quantity,
             Depth,
             TickSize,
@@ -231,8 +213,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
@@ -260,8 +240,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             {
                 let mut symbol__ = None;
                 let mut fund_code__ = None;
-                let mut ask_basis__ = None;
-                let mut bid_basis__ = None;
                 let mut quantity__ = None;
                 let mut depth__ = None;
                 let mut tick_size__ = None;
@@ -281,22 +259,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
                             fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -348,8 +310,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 Ok(EtfLp {
                     symbol: symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    ask_basis: ask_basis__.unwrap_or_default(),
-                    bid_basis: bid_basis__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
