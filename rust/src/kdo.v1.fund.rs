@@ -97,21 +97,35 @@ pub struct FundLimit {
     /// 스프레드 1회 주문 한도계약수
     #[prost(int64, tag="11")]
     pub spread_limit_quantity_per_order: i64,
-    /// 현재 누적 매수 수량
-    #[prost(int64, tag="12")]
+    /// 종목별 한도 상태 (런타임 추적)
+    #[prost(map="string, message", tag="17")]
+    pub symbol_states: ::std::collections::HashMap<::prost::alloc::string::String, SymbolLimitState>,
+}
+/// 종목별 한도 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SymbolLimitState {
+    /// 현재 매수 수량
+    #[prost(int64, tag="1")]
     pub current_long_quantity: i64,
-    /// 현재 누적 매수 금액
-    #[prost(int64, tag="13")]
-    pub current_long_amount: i64,
-    /// 현재 누적 매도 수량 (음수로 저장)
-    #[prost(int64, tag="14")]
+    /// 현재 매도 수량
+    #[prost(int64, tag="2")]
     pub current_short_quantity: i64,
-    /// 현재 누적 매도 금액 (음수로 저장)
-    #[prost(int64, tag="15")]
-    pub current_short_amount: i64,
     /// 현재 미체결 수량
-    #[prost(int64, tag="16")]
-    pub current_unfilled: i64,
+    #[prost(int64, tag="3")]
+    pub current_unfilled_quantity: i64,
+    /// 매수 미체결 수량
+    #[prost(int64, tag="4")]
+    pub current_unfilled_long_quantity: i64,
+    /// 매수 미체결 금액
+    #[prost(int64, tag="5")]
+    pub current_unfilled_long_amount: i64,
+    /// 매도 미체결 수량
+    #[prost(int64, tag="6")]
+    pub current_unfilled_short_quantity: i64,
+    /// 매도 미체결 금액
+    #[prost(int64, tag="7")]
+    pub current_unfilled_short_amount: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

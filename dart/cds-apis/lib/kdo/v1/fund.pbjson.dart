@@ -101,12 +101,19 @@ const FundLimit$json = {
     {'1': 'tick_limit', '3': 9, '4': 1, '5': 3, '10': 'tickLimit'},
     {'1': 'unfilled_limit', '3': 10, '4': 1, '5': 3, '10': 'unfilledLimit'},
     {'1': 'spread_limit_quantity_per_order', '3': 11, '4': 1, '5': 3, '10': 'spreadLimitQuantityPerOrder'},
-    {'1': 'current_long_quantity', '3': 12, '4': 1, '5': 3, '10': 'currentLongQuantity'},
-    {'1': 'current_long_amount', '3': 13, '4': 1, '5': 3, '10': 'currentLongAmount'},
-    {'1': 'current_short_quantity', '3': 14, '4': 1, '5': 3, '10': 'currentShortQuantity'},
-    {'1': 'current_short_amount', '3': 15, '4': 1, '5': 3, '10': 'currentShortAmount'},
-    {'1': 'current_unfilled', '3': 16, '4': 1, '5': 3, '10': 'currentUnfilled'},
+    {'1': 'symbol_states', '3': 17, '4': 3, '5': 11, '6': '.kdo.v1.fund.FundLimit.SymbolStatesEntry', '10': 'symbolStates'},
   ],
+  '3': [FundLimit_SymbolStatesEntry$json],
+};
+
+@$core.Deprecated('Use fundLimitDescriptor instead')
+const FundLimit_SymbolStatesEntry$json = {
+  '1': 'SymbolStatesEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.fund.SymbolLimitState', '10': 'value'},
+  ],
+  '7': {'7': true},
 };
 
 /// Descriptor for `FundLimit`. Decode as a `google.protobuf.DescriptorProto`.
@@ -121,11 +128,36 @@ final $typed_data.Uint8List fundLimitDescriptor = $convert.base64Decode(
     'JkZXIYCCABKANSE2xpbWl0QW1vdW50UGVyT3JkZXISHQoKdGlja19saW1pdBgJIAEoA1IJdGlj'
     'a0xpbWl0EiUKDnVuZmlsbGVkX2xpbWl0GAogASgDUg11bmZpbGxlZExpbWl0EkQKH3NwcmVhZF'
     '9saW1pdF9xdWFudGl0eV9wZXJfb3JkZXIYCyABKANSG3NwcmVhZExpbWl0UXVhbnRpdHlQZXJP'
-    'cmRlchIyChVjdXJyZW50X2xvbmdfcXVhbnRpdHkYDCABKANSE2N1cnJlbnRMb25nUXVhbnRpdH'
-    'kSLgoTY3VycmVudF9sb25nX2Ftb3VudBgNIAEoA1IRY3VycmVudExvbmdBbW91bnQSNAoWY3Vy'
-    'cmVudF9zaG9ydF9xdWFudGl0eRgOIAEoA1IUY3VycmVudFNob3J0UXVhbnRpdHkSMAoUY3Vycm'
-    'VudF9zaG9ydF9hbW91bnQYDyABKANSEmN1cnJlbnRTaG9ydEFtb3VudBIpChBjdXJyZW50X3Vu'
-    'ZmlsbGVkGBAgASgDUg9jdXJyZW50VW5maWxsZWQ=');
+    'cmRlchJNCg1zeW1ib2xfc3RhdGVzGBEgAygLMigua2RvLnYxLmZ1bmQuRnVuZExpbWl0LlN5bW'
+    'JvbFN0YXRlc0VudHJ5UgxzeW1ib2xTdGF0ZXMaXgoRU3ltYm9sU3RhdGVzRW50cnkSEAoDa2V5'
+    'GAEgASgJUgNrZXkSMwoFdmFsdWUYAiABKAsyHS5rZG8udjEuZnVuZC5TeW1ib2xMaW1pdFN0YX'
+    'RlUgV2YWx1ZToCOAE=');
+
+@$core.Deprecated('Use symbolLimitStateDescriptor instead')
+const SymbolLimitState$json = {
+  '1': 'SymbolLimitState',
+  '2': [
+    {'1': 'current_long_quantity', '3': 1, '4': 1, '5': 3, '10': 'currentLongQuantity'},
+    {'1': 'current_short_quantity', '3': 2, '4': 1, '5': 3, '10': 'currentShortQuantity'},
+    {'1': 'current_unfilled_quantity', '3': 3, '4': 1, '5': 3, '10': 'currentUnfilledQuantity'},
+    {'1': 'current_unfilled_long_quantity', '3': 4, '4': 1, '5': 3, '10': 'currentUnfilledLongQuantity'},
+    {'1': 'current_unfilled_long_amount', '3': 5, '4': 1, '5': 3, '10': 'currentUnfilledLongAmount'},
+    {'1': 'current_unfilled_short_quantity', '3': 6, '4': 1, '5': 3, '10': 'currentUnfilledShortQuantity'},
+    {'1': 'current_unfilled_short_amount', '3': 7, '4': 1, '5': 3, '10': 'currentUnfilledShortAmount'},
+  ],
+};
+
+/// Descriptor for `SymbolLimitState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List symbolLimitStateDescriptor = $convert.base64Decode(
+    'ChBTeW1ib2xMaW1pdFN0YXRlEjIKFWN1cnJlbnRfbG9uZ19xdWFudGl0eRgBIAEoA1ITY3Vycm'
+    'VudExvbmdRdWFudGl0eRI0ChZjdXJyZW50X3Nob3J0X3F1YW50aXR5GAIgASgDUhRjdXJyZW50'
+    'U2hvcnRRdWFudGl0eRI6ChljdXJyZW50X3VuZmlsbGVkX3F1YW50aXR5GAMgASgDUhdjdXJyZW'
+    '50VW5maWxsZWRRdWFudGl0eRJDCh5jdXJyZW50X3VuZmlsbGVkX2xvbmdfcXVhbnRpdHkYBCAB'
+    'KANSG2N1cnJlbnRVbmZpbGxlZExvbmdRdWFudGl0eRI/ChxjdXJyZW50X3VuZmlsbGVkX2xvbm'
+    'dfYW1vdW50GAUgASgDUhljdXJyZW50VW5maWxsZWRMb25nQW1vdW50EkUKH2N1cnJlbnRfdW5m'
+    'aWxsZWRfc2hvcnRfcXVhbnRpdHkYBiABKANSHGN1cnJlbnRVbmZpbGxlZFNob3J0UXVhbnRpdH'
+    'kSQQodY3VycmVudF91bmZpbGxlZF9zaG9ydF9hbW91bnQYByABKANSGmN1cnJlbnRVbmZpbGxl'
+    'ZFNob3J0QW1vdW50');
 
 @$core.Deprecated('Use lossLimitSnapshotDescriptor instead')
 const LossLimitSnapshot$json = {

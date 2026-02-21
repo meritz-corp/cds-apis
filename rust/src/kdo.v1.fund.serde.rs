@@ -467,18 +467,6 @@ impl serde::Serialize for FundLimit {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.FundLimit", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
@@ -534,29 +522,7 @@ impl serde::Serialize for FundLimit {
             struct_ser.serialize_field("spread_limit_quantity_per_order", ToString::to_string(&self.spread_limit_quantity_per_order).as_str())?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_long_quantity", ToString::to_string(&self.current_long_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_long_amount", ToString::to_string(&self.current_long_amount).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_short_quantity", ToString::to_string(&self.current_short_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_short_amount", ToString::to_string(&self.current_short_amount).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("current_unfilled", ToString::to_string(&self.current_unfilled).as_str())?;
+            struct_ser.serialize_field("symbol_states", &self.symbol_states)?;
         }
         struct_ser.end()
     }
@@ -589,16 +555,8 @@ impl<'de> serde::Deserialize<'de> for FundLimit {
             "unfilledLimit",
             "spread_limit_quantity_per_order",
             "spreadLimitQuantityPerOrder",
-            "current_long_quantity",
-            "currentLongQuantity",
-            "current_long_amount",
-            "currentLongAmount",
-            "current_short_quantity",
-            "currentShortQuantity",
-            "current_short_amount",
-            "currentShortAmount",
-            "current_unfilled",
-            "currentUnfilled",
+            "symbol_states",
+            "symbolStates",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -614,11 +572,7 @@ impl<'de> serde::Deserialize<'de> for FundLimit {
             TickLimit,
             UnfilledLimit,
             SpreadLimitQuantityPerOrder,
-            CurrentLongQuantity,
-            CurrentLongAmount,
-            CurrentShortQuantity,
-            CurrentShortAmount,
-            CurrentUnfilled,
+            SymbolStates,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -652,11 +606,7 @@ impl<'de> serde::Deserialize<'de> for FundLimit {
                             "tickLimit" | "tick_limit" => Ok(GeneratedField::TickLimit),
                             "unfilledLimit" | "unfilled_limit" => Ok(GeneratedField::UnfilledLimit),
                             "spreadLimitQuantityPerOrder" | "spread_limit_quantity_per_order" => Ok(GeneratedField::SpreadLimitQuantityPerOrder),
-                            "currentLongQuantity" | "current_long_quantity" => Ok(GeneratedField::CurrentLongQuantity),
-                            "currentLongAmount" | "current_long_amount" => Ok(GeneratedField::CurrentLongAmount),
-                            "currentShortQuantity" | "current_short_quantity" => Ok(GeneratedField::CurrentShortQuantity),
-                            "currentShortAmount" | "current_short_amount" => Ok(GeneratedField::CurrentShortAmount),
-                            "currentUnfilled" | "current_unfilled" => Ok(GeneratedField::CurrentUnfilled),
+                            "symbolStates" | "symbol_states" => Ok(GeneratedField::SymbolStates),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -687,11 +637,7 @@ impl<'de> serde::Deserialize<'de> for FundLimit {
                 let mut tick_limit__ = None;
                 let mut unfilled_limit__ = None;
                 let mut spread_limit_quantity_per_order__ = None;
-                let mut current_long_quantity__ = None;
-                let mut current_long_amount__ = None;
-                let mut current_short_quantity__ = None;
-                let mut current_short_amount__ = None;
-                let mut current_unfilled__ = None;
+                let mut symbol_states__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -778,45 +724,13 @@ impl<'de> serde::Deserialize<'de> for FundLimit {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::CurrentLongQuantity => {
-                            if current_long_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentLongQuantity"));
+                        GeneratedField::SymbolStates => {
+                            if symbol_states__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbolStates"));
                             }
-                            current_long_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CurrentLongAmount => {
-                            if current_long_amount__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentLongAmount"));
-                            }
-                            current_long_amount__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CurrentShortQuantity => {
-                            if current_short_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentShortQuantity"));
-                            }
-                            current_short_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CurrentShortAmount => {
-                            if current_short_amount__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentShortAmount"));
-                            }
-                            current_short_amount__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CurrentUnfilled => {
-                            if current_unfilled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("currentUnfilled"));
-                            }
-                            current_unfilled__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            symbol_states__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -835,11 +749,7 @@ impl<'de> serde::Deserialize<'de> for FundLimit {
                     tick_limit: tick_limit__.unwrap_or_default(),
                     unfilled_limit: unfilled_limit__.unwrap_or_default(),
                     spread_limit_quantity_per_order: spread_limit_quantity_per_order__.unwrap_or_default(),
-                    current_long_quantity: current_long_quantity__.unwrap_or_default(),
-                    current_long_amount: current_long_amount__.unwrap_or_default(),
-                    current_short_quantity: current_short_quantity__.unwrap_or_default(),
-                    current_short_amount: current_short_amount__.unwrap_or_default(),
-                    current_unfilled: current_unfilled__.unwrap_or_default(),
+                    symbol_states: symbol_states__.unwrap_or_default(),
                 })
             }
         }
@@ -1437,6 +1347,238 @@ impl<'de> serde::Deserialize<'de> for LossLimitSnapshot {
             }
         }
         deserializer.deserialize_struct("kdo.v1.fund.LossLimitSnapshot", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SymbolLimitState {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.SymbolLimitState", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_long_quantity", ToString::to_string(&self.current_long_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_short_quantity", ToString::to_string(&self.current_short_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_unfilled_quantity", ToString::to_string(&self.current_unfilled_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_unfilled_long_quantity", ToString::to_string(&self.current_unfilled_long_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_unfilled_long_amount", ToString::to_string(&self.current_unfilled_long_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_unfilled_short_quantity", ToString::to_string(&self.current_unfilled_short_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_unfilled_short_amount", ToString::to_string(&self.current_unfilled_short_amount).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SymbolLimitState {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "current_long_quantity",
+            "currentLongQuantity",
+            "current_short_quantity",
+            "currentShortQuantity",
+            "current_unfilled_quantity",
+            "currentUnfilledQuantity",
+            "current_unfilled_long_quantity",
+            "currentUnfilledLongQuantity",
+            "current_unfilled_long_amount",
+            "currentUnfilledLongAmount",
+            "current_unfilled_short_quantity",
+            "currentUnfilledShortQuantity",
+            "current_unfilled_short_amount",
+            "currentUnfilledShortAmount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            CurrentLongQuantity,
+            CurrentShortQuantity,
+            CurrentUnfilledQuantity,
+            CurrentUnfilledLongQuantity,
+            CurrentUnfilledLongAmount,
+            CurrentUnfilledShortQuantity,
+            CurrentUnfilledShortAmount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "currentLongQuantity" | "current_long_quantity" => Ok(GeneratedField::CurrentLongQuantity),
+                            "currentShortQuantity" | "current_short_quantity" => Ok(GeneratedField::CurrentShortQuantity),
+                            "currentUnfilledQuantity" | "current_unfilled_quantity" => Ok(GeneratedField::CurrentUnfilledQuantity),
+                            "currentUnfilledLongQuantity" | "current_unfilled_long_quantity" => Ok(GeneratedField::CurrentUnfilledLongQuantity),
+                            "currentUnfilledLongAmount" | "current_unfilled_long_amount" => Ok(GeneratedField::CurrentUnfilledLongAmount),
+                            "currentUnfilledShortQuantity" | "current_unfilled_short_quantity" => Ok(GeneratedField::CurrentUnfilledShortQuantity),
+                            "currentUnfilledShortAmount" | "current_unfilled_short_amount" => Ok(GeneratedField::CurrentUnfilledShortAmount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SymbolLimitState;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.fund.SymbolLimitState")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SymbolLimitState, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut current_long_quantity__ = None;
+                let mut current_short_quantity__ = None;
+                let mut current_unfilled_quantity__ = None;
+                let mut current_unfilled_long_quantity__ = None;
+                let mut current_unfilled_long_amount__ = None;
+                let mut current_unfilled_short_quantity__ = None;
+                let mut current_unfilled_short_amount__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::CurrentLongQuantity => {
+                            if current_long_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentLongQuantity"));
+                            }
+                            current_long_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentShortQuantity => {
+                            if current_short_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentShortQuantity"));
+                            }
+                            current_short_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentUnfilledQuantity => {
+                            if current_unfilled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentUnfilledQuantity"));
+                            }
+                            current_unfilled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentUnfilledLongQuantity => {
+                            if current_unfilled_long_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentUnfilledLongQuantity"));
+                            }
+                            current_unfilled_long_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentUnfilledLongAmount => {
+                            if current_unfilled_long_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentUnfilledLongAmount"));
+                            }
+                            current_unfilled_long_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentUnfilledShortQuantity => {
+                            if current_unfilled_short_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentUnfilledShortQuantity"));
+                            }
+                            current_unfilled_short_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentUnfilledShortAmount => {
+                            if current_unfilled_short_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentUnfilledShortAmount"));
+                            }
+                            current_unfilled_short_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SymbolLimitState {
+                    current_long_quantity: current_long_quantity__.unwrap_or_default(),
+                    current_short_quantity: current_short_quantity__.unwrap_or_default(),
+                    current_unfilled_quantity: current_unfilled_quantity__.unwrap_or_default(),
+                    current_unfilled_long_quantity: current_unfilled_long_quantity__.unwrap_or_default(),
+                    current_unfilled_long_amount: current_unfilled_long_amount__.unwrap_or_default(),
+                    current_unfilled_short_quantity: current_unfilled_short_quantity__.unwrap_or_default(),
+                    current_unfilled_short_amount: current_unfilled_short_amount__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.fund.SymbolLimitState", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UpdateFundLimitRequest {

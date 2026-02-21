@@ -332,30 +332,12 @@
           "format": "int64",
           "title": "스프레드 1회 주문 한도계약수"
         },
-        "currentLongQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "현재 누적 매수 수량"
-        },
-        "currentLongAmount": {
-          "type": "string",
-          "format": "int64",
-          "title": "현재 누적 매수 금액"
-        },
-        "currentShortQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "현재 누적 매도 수량 (음수로 저장)"
-        },
-        "currentShortAmount": {
-          "type": "string",
-          "format": "int64",
-          "title": "현재 누적 매도 금액 (음수로 저장)"
-        },
-        "currentUnfilled": {
-          "type": "string",
-          "format": "int64",
-          "title": "현재 미체결 수량"
+        "symbolStates": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/fundSymbolLimitState"
+          },
+          "title": "종목별 한도 상태 (런타임 추적)"
         }
       },
       "required": [
@@ -387,6 +369,47 @@
         }
       },
       "title": "ListFunds 응답"
+    },
+    "fundSymbolLimitState": {
+      "type": "object",
+      "properties": {
+        "currentLongQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 매수 수량"
+        },
+        "currentShortQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 매도 수량"
+        },
+        "currentUnfilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 미체결 수량"
+        },
+        "currentUnfilledLongQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 미체결 수량"
+        },
+        "currentUnfilledLongAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 미체결 금액"
+        },
+        "currentUnfilledShortQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 미체결 수량"
+        },
+        "currentUnfilledShortAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 미체결 금액"
+        }
+      },
+      "title": "종목별 한도 상태"
     },
     "protobufAny": {
       "type": "object",

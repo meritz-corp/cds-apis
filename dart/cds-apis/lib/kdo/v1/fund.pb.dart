@@ -310,11 +310,7 @@ class FundLimit extends $pb.GeneratedMessage {
     $fixnum.Int64? tickLimit,
     $fixnum.Int64? unfilledLimit,
     $fixnum.Int64? spreadLimitQuantityPerOrder,
-    $fixnum.Int64? currentLongQuantity,
-    $fixnum.Int64? currentLongAmount,
-    $fixnum.Int64? currentShortQuantity,
-    $fixnum.Int64? currentShortAmount,
-    $fixnum.Int64? currentUnfilled,
+    $core.Iterable<$core.MapEntry<$core.String, SymbolLimitState>>? symbolStates,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
@@ -328,11 +324,7 @@ class FundLimit extends $pb.GeneratedMessage {
     if (tickLimit != null) result.tickLimit = tickLimit;
     if (unfilledLimit != null) result.unfilledLimit = unfilledLimit;
     if (spreadLimitQuantityPerOrder != null) result.spreadLimitQuantityPerOrder = spreadLimitQuantityPerOrder;
-    if (currentLongQuantity != null) result.currentLongQuantity = currentLongQuantity;
-    if (currentLongAmount != null) result.currentLongAmount = currentLongAmount;
-    if (currentShortQuantity != null) result.currentShortQuantity = currentShortQuantity;
-    if (currentShortAmount != null) result.currentShortAmount = currentShortAmount;
-    if (currentUnfilled != null) result.currentUnfilled = currentUnfilled;
+    if (symbolStates != null) result.symbolStates.addEntries(symbolStates);
     return result;
   }
 
@@ -353,11 +345,7 @@ class FundLimit extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'tickLimit')
     ..aInt64(10, _omitFieldNames ? '' : 'unfilledLimit')
     ..aInt64(11, _omitFieldNames ? '' : 'spreadLimitQuantityPerOrder')
-    ..aInt64(12, _omitFieldNames ? '' : 'currentLongQuantity')
-    ..aInt64(13, _omitFieldNames ? '' : 'currentLongAmount')
-    ..aInt64(14, _omitFieldNames ? '' : 'currentShortQuantity')
-    ..aInt64(15, _omitFieldNames ? '' : 'currentShortAmount')
-    ..aInt64(16, _omitFieldNames ? '' : 'currentUnfilled')
+    ..m<$core.String, SymbolLimitState>(17, _omitFieldNames ? '' : 'symbolStates', entryClassName: 'FundLimit.SymbolStatesEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: SymbolLimitState.create, valueDefaultOrMaker: SymbolLimitState.getDefault, packageName: const $pb.PackageName('kdo.v1.fund'))
     ..hasRequiredFields = false
   ;
 
@@ -486,55 +474,135 @@ class FundLimit extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   void clearSpreadLimitQuantityPerOrder() => $_clearField(11);
 
-  /// 현재 누적 매수 수량
-  @$pb.TagNumber(12)
-  $fixnum.Int64 get currentLongQuantity => $_getI64(11);
-  @$pb.TagNumber(12)
-  set currentLongQuantity($fixnum.Int64 value) => $_setInt64(11, value);
-  @$pb.TagNumber(12)
-  $core.bool hasCurrentLongQuantity() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearCurrentLongQuantity() => $_clearField(12);
+  /// 종목별 한도 상태 (런타임 추적)
+  @$pb.TagNumber(17)
+  $pb.PbMap<$core.String, SymbolLimitState> get symbolStates => $_getMap(11);
+}
 
-  /// 현재 누적 매수 금액
-  @$pb.TagNumber(13)
-  $fixnum.Int64 get currentLongAmount => $_getI64(12);
-  @$pb.TagNumber(13)
-  set currentLongAmount($fixnum.Int64 value) => $_setInt64(12, value);
-  @$pb.TagNumber(13)
-  $core.bool hasCurrentLongAmount() => $_has(12);
-  @$pb.TagNumber(13)
-  void clearCurrentLongAmount() => $_clearField(13);
+/// 종목별 한도 상태
+class SymbolLimitState extends $pb.GeneratedMessage {
+  factory SymbolLimitState({
+    $fixnum.Int64? currentLongQuantity,
+    $fixnum.Int64? currentShortQuantity,
+    $fixnum.Int64? currentUnfilledQuantity,
+    $fixnum.Int64? currentUnfilledLongQuantity,
+    $fixnum.Int64? currentUnfilledLongAmount,
+    $fixnum.Int64? currentUnfilledShortQuantity,
+    $fixnum.Int64? currentUnfilledShortAmount,
+  }) {
+    final result = create();
+    if (currentLongQuantity != null) result.currentLongQuantity = currentLongQuantity;
+    if (currentShortQuantity != null) result.currentShortQuantity = currentShortQuantity;
+    if (currentUnfilledQuantity != null) result.currentUnfilledQuantity = currentUnfilledQuantity;
+    if (currentUnfilledLongQuantity != null) result.currentUnfilledLongQuantity = currentUnfilledLongQuantity;
+    if (currentUnfilledLongAmount != null) result.currentUnfilledLongAmount = currentUnfilledLongAmount;
+    if (currentUnfilledShortQuantity != null) result.currentUnfilledShortQuantity = currentUnfilledShortQuantity;
+    if (currentUnfilledShortAmount != null) result.currentUnfilledShortAmount = currentUnfilledShortAmount;
+    return result;
+  }
 
-  /// 현재 누적 매도 수량 (음수로 저장)
-  @$pb.TagNumber(14)
-  $fixnum.Int64 get currentShortQuantity => $_getI64(13);
-  @$pb.TagNumber(14)
-  set currentShortQuantity($fixnum.Int64 value) => $_setInt64(13, value);
-  @$pb.TagNumber(14)
-  $core.bool hasCurrentShortQuantity() => $_has(13);
-  @$pb.TagNumber(14)
-  void clearCurrentShortQuantity() => $_clearField(14);
+  SymbolLimitState._();
 
-  /// 현재 누적 매도 금액 (음수로 저장)
-  @$pb.TagNumber(15)
-  $fixnum.Int64 get currentShortAmount => $_getI64(14);
-  @$pb.TagNumber(15)
-  set currentShortAmount($fixnum.Int64 value) => $_setInt64(14, value);
-  @$pb.TagNumber(15)
-  $core.bool hasCurrentShortAmount() => $_has(14);
-  @$pb.TagNumber(15)
-  void clearCurrentShortAmount() => $_clearField(15);
+  factory SymbolLimitState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SymbolLimitState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SymbolLimitState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'currentLongQuantity')
+    ..aInt64(2, _omitFieldNames ? '' : 'currentShortQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'currentUnfilledQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'currentUnfilledLongQuantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'currentUnfilledLongAmount')
+    ..aInt64(6, _omitFieldNames ? '' : 'currentUnfilledShortQuantity')
+    ..aInt64(7, _omitFieldNames ? '' : 'currentUnfilledShortAmount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SymbolLimitState clone() => SymbolLimitState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SymbolLimitState copyWith(void Function(SymbolLimitState) updates) => super.copyWith((message) => updates(message as SymbolLimitState)) as SymbolLimitState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SymbolLimitState create() => SymbolLimitState._();
+  @$core.override
+  SymbolLimitState createEmptyInstance() => create();
+  static $pb.PbList<SymbolLimitState> createRepeated() => $pb.PbList<SymbolLimitState>();
+  @$core.pragma('dart2js:noInline')
+  static SymbolLimitState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SymbolLimitState>(create);
+  static SymbolLimitState? _defaultInstance;
+
+  /// 현재 매수 수량
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get currentLongQuantity => $_getI64(0);
+  @$pb.TagNumber(1)
+  set currentLongQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCurrentLongQuantity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCurrentLongQuantity() => $_clearField(1);
+
+  /// 현재 매도 수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get currentShortQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set currentShortQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCurrentShortQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCurrentShortQuantity() => $_clearField(2);
 
   /// 현재 미체결 수량
-  @$pb.TagNumber(16)
-  $fixnum.Int64 get currentUnfilled => $_getI64(15);
-  @$pb.TagNumber(16)
-  set currentUnfilled($fixnum.Int64 value) => $_setInt64(15, value);
-  @$pb.TagNumber(16)
-  $core.bool hasCurrentUnfilled() => $_has(15);
-  @$pb.TagNumber(16)
-  void clearCurrentUnfilled() => $_clearField(16);
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get currentUnfilledQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set currentUnfilledQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCurrentUnfilledQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCurrentUnfilledQuantity() => $_clearField(3);
+
+  /// 매수 미체결 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get currentUnfilledLongQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set currentUnfilledLongQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCurrentUnfilledLongQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCurrentUnfilledLongQuantity() => $_clearField(4);
+
+  /// 매수 미체결 금액
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get currentUnfilledLongAmount => $_getI64(4);
+  @$pb.TagNumber(5)
+  set currentUnfilledLongAmount($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCurrentUnfilledLongAmount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCurrentUnfilledLongAmount() => $_clearField(5);
+
+  /// 매도 미체결 수량
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get currentUnfilledShortQuantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set currentUnfilledShortQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCurrentUnfilledShortQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCurrentUnfilledShortQuantity() => $_clearField(6);
+
+  /// 매도 미체결 금액
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get currentUnfilledShortAmount => $_getI64(6);
+  @$pb.TagNumber(7)
+  set currentUnfilledShortAmount($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCurrentUnfilledShortAmount() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCurrentUnfilledShortAmount() => $_clearField(7);
 }
 
 class LossLimitSnapshot extends $pb.GeneratedMessage {
