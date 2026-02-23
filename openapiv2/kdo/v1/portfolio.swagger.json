@@ -463,15 +463,25 @@
           "type": "string",
           "title": "종목 심볼"
         },
-        "quantity": {
+        "bidQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "수량"
+          "title": "매수 수량 (\u003e= 0)"
         },
-        "averageCost": {
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 (\u003e= 0)"
+        },
+        "bidAverageCost": {
           "type": "number",
           "format": "double",
-          "title": "평균 매입 단가"
+          "title": "매수 평균단가"
+        },
+        "askAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균단가"
         },
         "currentPrice": {
           "type": "number",
@@ -843,15 +853,30 @@
           "type": "string",
           "title": "종목 심볼"
         },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 (\u003e= 0)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 (\u003e= 0)"
+        },
         "netQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "순수량 (long - short, 모든 Fund 합산)"
+          "title": "순수량 (bid - ask, 모든 Fund 합산)"
         },
-        "averageCost": {
+        "bidAverageCost": {
           "type": "number",
           "format": "double",
-          "title": "평균 매입 단가"
+          "title": "매수 평균단가"
+        },
+        "askAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균단가"
         },
         "currentPrice": {
           "type": "number",

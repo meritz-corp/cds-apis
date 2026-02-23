@@ -640,18 +640,24 @@ class SymbolPosition extends $pb.GeneratedMessage {
   factory SymbolPosition({
     $core.String? symbol,
     $fixnum.Int64? netQuantity,
-    $core.double? averageCost,
     $core.double? currentPrice,
     $fixnum.Int64? unrealizedPnl,
     $fixnum.Int64? exposureAmount,
+    $fixnum.Int64? bidQuantity,
+    $fixnum.Int64? askQuantity,
+    $core.double? bidAverageCost,
+    $core.double? askAverageCost,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (netQuantity != null) result.netQuantity = netQuantity;
-    if (averageCost != null) result.averageCost = averageCost;
     if (currentPrice != null) result.currentPrice = currentPrice;
     if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
     if (exposureAmount != null) result.exposureAmount = exposureAmount;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
+    if (askQuantity != null) result.askQuantity = askQuantity;
+    if (bidAverageCost != null) result.bidAverageCost = bidAverageCost;
+    if (askAverageCost != null) result.askAverageCost = askAverageCost;
     return result;
   }
 
@@ -663,10 +669,13 @@ class SymbolPosition extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SymbolPosition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aInt64(2, _omitFieldNames ? '' : 'netQuantity')
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'averageCost', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'currentPrice', $pb.PbFieldType.OD)
     ..aInt64(5, _omitFieldNames ? '' : 'unrealizedPnl')
     ..aInt64(6, _omitFieldNames ? '' : 'exposureAmount')
+    ..aInt64(7, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(8, _omitFieldNames ? '' : 'askQuantity')
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'bidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'askAverageCost', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -697,7 +706,7 @@ class SymbolPosition extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
-  /// 순수량 (long - short, 모든 Fund 합산)
+  /// 순수량 (bid - ask, 모든 Fund 합산)
   @$pb.TagNumber(2)
   $fixnum.Int64 get netQuantity => $_getI64(1);
   @$pb.TagNumber(2)
@@ -707,45 +716,75 @@ class SymbolPosition extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearNetQuantity() => $_clearField(2);
 
-  /// 평균 매입 단가
-  @$pb.TagNumber(3)
-  $core.double get averageCost => $_getN(2);
-  @$pb.TagNumber(3)
-  set averageCost($core.double value) => $_setDouble(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasAverageCost() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAverageCost() => $_clearField(3);
-
   /// 현재가
   @$pb.TagNumber(4)
-  $core.double get currentPrice => $_getN(3);
+  $core.double get currentPrice => $_getN(2);
   @$pb.TagNumber(4)
-  set currentPrice($core.double value) => $_setDouble(3, value);
+  set currentPrice($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(4)
-  $core.bool hasCurrentPrice() => $_has(3);
+  $core.bool hasCurrentPrice() => $_has(2);
   @$pb.TagNumber(4)
   void clearCurrentPrice() => $_clearField(4);
 
   /// 미실현 손익
   @$pb.TagNumber(5)
-  $fixnum.Int64 get unrealizedPnl => $_getI64(4);
+  $fixnum.Int64 get unrealizedPnl => $_getI64(3);
   @$pb.TagNumber(5)
-  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(4, value);
+  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasUnrealizedPnl() => $_has(4);
+  $core.bool hasUnrealizedPnl() => $_has(3);
   @$pb.TagNumber(5)
   void clearUnrealizedPnl() => $_clearField(5);
 
   /// 익스포저 금액 (net_quantity * current_price)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get exposureAmount => $_getI64(5);
+  $fixnum.Int64 get exposureAmount => $_getI64(4);
   @$pb.TagNumber(6)
-  set exposureAmount($fixnum.Int64 value) => $_setInt64(5, value);
+  set exposureAmount($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasExposureAmount() => $_has(5);
+  $core.bool hasExposureAmount() => $_has(4);
   @$pb.TagNumber(6)
   void clearExposureAmount() => $_clearField(6);
+
+  /// 매수 수량 (>= 0)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get bidQuantity => $_getI64(5);
+  @$pb.TagNumber(7)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(7)
+  $core.bool hasBidQuantity() => $_has(5);
+  @$pb.TagNumber(7)
+  void clearBidQuantity() => $_clearField(7);
+
+  /// 매도 수량 (>= 0)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get askQuantity => $_getI64(6);
+  @$pb.TagNumber(8)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(8)
+  $core.bool hasAskQuantity() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearAskQuantity() => $_clearField(8);
+
+  /// 매수 평균단가
+  @$pb.TagNumber(9)
+  $core.double get bidAverageCost => $_getN(7);
+  @$pb.TagNumber(9)
+  set bidAverageCost($core.double value) => $_setDouble(7, value);
+  @$pb.TagNumber(9)
+  $core.bool hasBidAverageCost() => $_has(7);
+  @$pb.TagNumber(9)
+  void clearBidAverageCost() => $_clearField(9);
+
+  /// 매도 평균단가
+  @$pb.TagNumber(10)
+  $core.double get askAverageCost => $_getN(8);
+  @$pb.TagNumber(10)
+  set askAverageCost($core.double value) => $_setDouble(8, value);
+  @$pb.TagNumber(10)
+  $core.bool hasAskAverageCost() => $_has(8);
+  @$pb.TagNumber(10)
+  void clearAskAverageCost() => $_clearField(10);
 }
 
 /// Fund별 심볼 포지션 (상세)
@@ -753,18 +792,22 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
   factory FundSymbolPosition({
     $core.String? fundCode,
     $core.String? symbol,
-    $fixnum.Int64? quantity,
-    $core.double? averageCost,
     $core.double? currentPrice,
     $fixnum.Int64? unrealizedPnl,
+    $fixnum.Int64? bidQuantity,
+    $fixnum.Int64? askQuantity,
+    $core.double? bidAverageCost,
+    $core.double? askAverageCost,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
     if (symbol != null) result.symbol = symbol;
-    if (quantity != null) result.quantity = quantity;
-    if (averageCost != null) result.averageCost = averageCost;
     if (currentPrice != null) result.currentPrice = currentPrice;
     if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
+    if (askQuantity != null) result.askQuantity = askQuantity;
+    if (bidAverageCost != null) result.bidAverageCost = bidAverageCost;
+    if (askAverageCost != null) result.askAverageCost = askAverageCost;
     return result;
   }
 
@@ -776,10 +819,12 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FundSymbolPosition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fundCode')
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'averageCost', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'currentPrice', $pb.PbFieldType.OD)
     ..aInt64(6, _omitFieldNames ? '' : 'unrealizedPnl')
+    ..aInt64(7, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(8, _omitFieldNames ? '' : 'askQuantity')
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'bidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'askAverageCost', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -820,45 +865,65 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearSymbol() => $_clearField(2);
 
-  /// 수량
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get quantity => $_getI64(2);
-  @$pb.TagNumber(3)
-  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasQuantity() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearQuantity() => $_clearField(3);
-
-  /// 평균 매입 단가
-  @$pb.TagNumber(4)
-  $core.double get averageCost => $_getN(3);
-  @$pb.TagNumber(4)
-  set averageCost($core.double value) => $_setDouble(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasAverageCost() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearAverageCost() => $_clearField(4);
-
   /// 현재가
   @$pb.TagNumber(5)
-  $core.double get currentPrice => $_getN(4);
+  $core.double get currentPrice => $_getN(2);
   @$pb.TagNumber(5)
-  set currentPrice($core.double value) => $_setDouble(4, value);
+  set currentPrice($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(5)
-  $core.bool hasCurrentPrice() => $_has(4);
+  $core.bool hasCurrentPrice() => $_has(2);
   @$pb.TagNumber(5)
   void clearCurrentPrice() => $_clearField(5);
 
   /// 미실현 손익
   @$pb.TagNumber(6)
-  $fixnum.Int64 get unrealizedPnl => $_getI64(5);
+  $fixnum.Int64 get unrealizedPnl => $_getI64(3);
   @$pb.TagNumber(6)
-  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(5, value);
+  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(6)
-  $core.bool hasUnrealizedPnl() => $_has(5);
+  $core.bool hasUnrealizedPnl() => $_has(3);
   @$pb.TagNumber(6)
   void clearUnrealizedPnl() => $_clearField(6);
+
+  /// 매수 수량 (>= 0)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get bidQuantity => $_getI64(4);
+  @$pb.TagNumber(7)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(7)
+  $core.bool hasBidQuantity() => $_has(4);
+  @$pb.TagNumber(7)
+  void clearBidQuantity() => $_clearField(7);
+
+  /// 매도 수량 (>= 0)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get askQuantity => $_getI64(5);
+  @$pb.TagNumber(8)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(8)
+  $core.bool hasAskQuantity() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearAskQuantity() => $_clearField(8);
+
+  /// 매수 평균단가
+  @$pb.TagNumber(9)
+  $core.double get bidAverageCost => $_getN(6);
+  @$pb.TagNumber(9)
+  set bidAverageCost($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(9)
+  $core.bool hasBidAverageCost() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearBidAverageCost() => $_clearField(9);
+
+  /// 매도 평균단가
+  @$pb.TagNumber(10)
+  $core.double get askAverageCost => $_getN(7);
+  @$pb.TagNumber(10)
+  set askAverageCost($core.double value) => $_setDouble(7, value);
+  @$pb.TagNumber(10)
+  $core.bool hasAskAverageCost() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearAskAverageCost() => $_clearField(10);
 }
 
 /// Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)

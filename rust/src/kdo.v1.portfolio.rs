@@ -142,12 +142,21 @@ pub struct SymbolPosition {
     /// 종목 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 순수량 (long - short, 모든 Fund 합산)
+    /// 매수 수량 (>= 0)
+    #[prost(int64, tag="7")]
+    pub bid_quantity: i64,
+    /// 매도 수량 (>= 0)
+    #[prost(int64, tag="8")]
+    pub ask_quantity: i64,
+    /// 순수량 (bid - ask, 모든 Fund 합산)
     #[prost(int64, tag="2")]
     pub net_quantity: i64,
-    /// 평균 매입 단가
-    #[prost(double, tag="3")]
-    pub average_cost: f64,
+    /// 매수 평균단가
+    #[prost(double, tag="9")]
+    pub bid_average_cost: f64,
+    /// 매도 평균단가
+    #[prost(double, tag="10")]
+    pub ask_average_cost: f64,
     /// 현재가
     #[prost(double, tag="4")]
     pub current_price: f64,
@@ -168,12 +177,18 @@ pub struct FundSymbolPosition {
     /// 종목 심볼
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
-    /// 수량
-    #[prost(int64, tag="3")]
-    pub quantity: i64,
-    /// 평균 매입 단가
-    #[prost(double, tag="4")]
-    pub average_cost: f64,
+    /// 매수 수량 (>= 0)
+    #[prost(int64, tag="7")]
+    pub bid_quantity: i64,
+    /// 매도 수량 (>= 0)
+    #[prost(int64, tag="8")]
+    pub ask_quantity: i64,
+    /// 매수 평균단가
+    #[prost(double, tag="9")]
+    pub bid_average_cost: f64,
+    /// 매도 평균단가
+    #[prost(double, tag="10")]
+    pub ask_average_cost: f64,
     /// 현재가
     #[prost(double, tag="5")]
     pub current_price: f64,

@@ -130,8 +130,11 @@ const SymbolPosition$json = {
   '1': 'SymbolPosition',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'bid_quantity', '3': 7, '4': 1, '5': 3, '10': 'bidQuantity'},
+    {'1': 'ask_quantity', '3': 8, '4': 1, '5': 3, '10': 'askQuantity'},
     {'1': 'net_quantity', '3': 2, '4': 1, '5': 3, '10': 'netQuantity'},
-    {'1': 'average_cost', '3': 3, '4': 1, '5': 1, '10': 'averageCost'},
+    {'1': 'bid_average_cost', '3': 9, '4': 1, '5': 1, '10': 'bidAverageCost'},
+    {'1': 'ask_average_cost', '3': 10, '4': 1, '5': 1, '10': 'askAverageCost'},
     {'1': 'current_price', '3': 4, '4': 1, '5': 1, '10': 'currentPrice'},
     {'1': 'unrealized_pnl', '3': 5, '4': 1, '5': 3, '10': 'unrealizedPnl'},
     {'1': 'exposure_amount', '3': 6, '4': 1, '5': 3, '10': 'exposureAmount'},
@@ -140,11 +143,13 @@ const SymbolPosition$json = {
 
 /// Descriptor for `SymbolPosition`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List symbolPositionDescriptor = $convert.base64Decode(
-    'Cg5TeW1ib2xQb3NpdGlvbhIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIhCgxuZXRfcXVhbnRpdH'
-    'kYAiABKANSC25ldFF1YW50aXR5EiEKDGF2ZXJhZ2VfY29zdBgDIAEoAVILYXZlcmFnZUNvc3QS'
-    'IwoNY3VycmVudF9wcmljZRgEIAEoAVIMY3VycmVudFByaWNlEiUKDnVucmVhbGl6ZWRfcG5sGA'
-    'UgASgDUg11bnJlYWxpemVkUG5sEicKD2V4cG9zdXJlX2Ftb3VudBgGIAEoA1IOZXhwb3N1cmVB'
-    'bW91bnQ=');
+    'Cg5TeW1ib2xQb3NpdGlvbhIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIhCgxiaWRfcXVhbnRpdH'
+    'kYByABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFudGl0eRgIIAEoA1ILYXNrUXVhbnRpdHkS'
+    'IQoMbmV0X3F1YW50aXR5GAIgASgDUgtuZXRRdWFudGl0eRIoChBiaWRfYXZlcmFnZV9jb3N0GA'
+    'kgASgBUg5iaWRBdmVyYWdlQ29zdBIoChBhc2tfYXZlcmFnZV9jb3N0GAogASgBUg5hc2tBdmVy'
+    'YWdlQ29zdBIjCg1jdXJyZW50X3ByaWNlGAQgASgBUgxjdXJyZW50UHJpY2USJQoOdW5yZWFsaX'
+    'plZF9wbmwYBSABKANSDXVucmVhbGl6ZWRQbmwSJwoPZXhwb3N1cmVfYW1vdW50GAYgASgDUg5l'
+    'eHBvc3VyZUFtb3VudA==');
 
 @$core.Deprecated('Use fundSymbolPositionDescriptor instead')
 const FundSymbolPosition$json = {
@@ -152,8 +157,10 @@ const FundSymbolPosition$json = {
   '2': [
     {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'average_cost', '3': 4, '4': 1, '5': 1, '10': 'averageCost'},
+    {'1': 'bid_quantity', '3': 7, '4': 1, '5': 3, '10': 'bidQuantity'},
+    {'1': 'ask_quantity', '3': 8, '4': 1, '5': 3, '10': 'askQuantity'},
+    {'1': 'bid_average_cost', '3': 9, '4': 1, '5': 1, '10': 'bidAverageCost'},
+    {'1': 'ask_average_cost', '3': 10, '4': 1, '5': 1, '10': 'askAverageCost'},
     {'1': 'current_price', '3': 5, '4': 1, '5': 1, '10': 'currentPrice'},
     {'1': 'unrealized_pnl', '3': 6, '4': 1, '5': 3, '10': 'unrealizedPnl'},
   ],
@@ -162,9 +169,11 @@ const FundSymbolPosition$json = {
 /// Descriptor for `FundSymbolPosition`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fundSymbolPositionDescriptor = $convert.base64Decode(
     'ChJGdW5kU3ltYm9sUG9zaXRpb24SGwoJZnVuZF9jb2RlGAEgASgJUghmdW5kQ29kZRIWCgZzeW'
-    '1ib2wYAiABKAlSBnN5bWJvbBIaCghxdWFudGl0eRgDIAEoA1IIcXVhbnRpdHkSIQoMYXZlcmFn'
-    'ZV9jb3N0GAQgASgBUgthdmVyYWdlQ29zdBIjCg1jdXJyZW50X3ByaWNlGAUgASgBUgxjdXJyZW'
-    '50UHJpY2USJQoOdW5yZWFsaXplZF9wbmwYBiABKANSDXVucmVhbGl6ZWRQbmw=');
+    '1ib2wYAiABKAlSBnN5bWJvbBIhCgxiaWRfcXVhbnRpdHkYByABKANSC2JpZFF1YW50aXR5EiEK'
+    'DGFza19xdWFudGl0eRgIIAEoA1ILYXNrUXVhbnRpdHkSKAoQYmlkX2F2ZXJhZ2VfY29zdBgJIA'
+    'EoAVIOYmlkQXZlcmFnZUNvc3QSKAoQYXNrX2F2ZXJhZ2VfY29zdBgKIAEoAVIOYXNrQXZlcmFn'
+    'ZUNvc3QSIwoNY3VycmVudF9wcmljZRgFIAEoAVIMY3VycmVudFByaWNlEiUKDnVucmVhbGl6ZW'
+    'RfcG5sGAYgASgDUg11bnJlYWxpemVkUG5s');
 
 @$core.Deprecated('Use netExposuresDescriptor instead')
 const NetExposures$json = {

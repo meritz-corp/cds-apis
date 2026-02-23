@@ -365,6 +365,12 @@ impl serde::Serialize for FundSymbolPosition {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.FundSymbolPosition", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -375,10 +381,18 @@ impl serde::Serialize for FundSymbolPosition {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("average_cost", &self.average_cost)?;
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_average_cost", &self.bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_average_cost", &self.ask_average_cost)?;
         }
         if true {
             struct_ser.serialize_field("current_price", &self.current_price)?;
@@ -401,9 +415,14 @@ impl<'de> serde::Deserialize<'de> for FundSymbolPosition {
             "fund_code",
             "fundCode",
             "symbol",
-            "quantity",
-            "average_cost",
-            "averageCost",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
+            "bid_average_cost",
+            "bidAverageCost",
+            "ask_average_cost",
+            "askAverageCost",
             "current_price",
             "currentPrice",
             "unrealized_pnl",
@@ -414,8 +433,10 @@ impl<'de> serde::Deserialize<'de> for FundSymbolPosition {
         enum GeneratedField {
             FundCode,
             Symbol,
-            Quantity,
-            AverageCost,
+            BidQuantity,
+            AskQuantity,
+            BidAverageCost,
+            AskAverageCost,
             CurrentPrice,
             UnrealizedPnl,
             __SkipField__,
@@ -442,8 +463,10 @@ impl<'de> serde::Deserialize<'de> for FundSymbolPosition {
                         match value {
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "symbol" => Ok(GeneratedField::Symbol),
-                            "quantity" => Ok(GeneratedField::Quantity),
-                            "averageCost" | "average_cost" => Ok(GeneratedField::AverageCost),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "bidAverageCost" | "bid_average_cost" => Ok(GeneratedField::BidAverageCost),
+                            "askAverageCost" | "ask_average_cost" => Ok(GeneratedField::AskAverageCost),
                             "currentPrice" | "current_price" => Ok(GeneratedField::CurrentPrice),
                             "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -467,8 +490,10 @@ impl<'de> serde::Deserialize<'de> for FundSymbolPosition {
             {
                 let mut fund_code__ = None;
                 let mut symbol__ = None;
-                let mut quantity__ = None;
-                let mut average_cost__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
+                let mut bid_average_cost__ = None;
+                let mut ask_average_cost__ = None;
                 let mut current_price__ = None;
                 let mut unrealized_pnl__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -485,19 +510,35 @@ impl<'de> serde::Deserialize<'de> for FundSymbolPosition {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
                             }
-                            quantity__ = 
+                            bid_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::AverageCost => {
-                            if average_cost__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("averageCost"));
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
                             }
-                            average_cost__ = 
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidAverageCost => {
+                            if bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAverageCost"));
+                            }
+                            bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAverageCost => {
+                            if ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAverageCost"));
+                            }
+                            ask_average_cost__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -525,8 +566,10 @@ impl<'de> serde::Deserialize<'de> for FundSymbolPosition {
                 Ok(FundSymbolPosition {
                     fund_code: fund_code__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
-                    quantity: quantity__.unwrap_or_default(),
-                    average_cost: average_cost__.unwrap_or_default(),
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
+                    bid_average_cost: bid_average_cost__.unwrap_or_default(),
+                    ask_average_cost: ask_average_cost__.unwrap_or_default(),
                     current_price: current_price__.unwrap_or_default(),
                     unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
                 })
@@ -3104,6 +3147,15 @@ impl serde::Serialize for SymbolPosition {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.SymbolPosition", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -3111,10 +3163,23 @@ impl serde::Serialize for SymbolPosition {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("net_quantity", ToString::to_string(&self.net_quantity).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("average_cost", &self.average_cost)?;
+            struct_ser.serialize_field("bid_average_cost", &self.bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_average_cost", &self.ask_average_cost)?;
         }
         if true {
             struct_ser.serialize_field("current_price", &self.current_price)?;
@@ -3140,10 +3205,16 @@ impl<'de> serde::Deserialize<'de> for SymbolPosition {
     {
         const FIELDS: &[&str] = &[
             "symbol",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
             "net_quantity",
             "netQuantity",
-            "average_cost",
-            "averageCost",
+            "bid_average_cost",
+            "bidAverageCost",
+            "ask_average_cost",
+            "askAverageCost",
             "current_price",
             "currentPrice",
             "unrealized_pnl",
@@ -3155,8 +3226,11 @@ impl<'de> serde::Deserialize<'de> for SymbolPosition {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
+            BidQuantity,
+            AskQuantity,
             NetQuantity,
-            AverageCost,
+            BidAverageCost,
+            AskAverageCost,
             CurrentPrice,
             UnrealizedPnl,
             ExposureAmount,
@@ -3183,8 +3257,11 @@ impl<'de> serde::Deserialize<'de> for SymbolPosition {
                     {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
-                            "averageCost" | "average_cost" => Ok(GeneratedField::AverageCost),
+                            "bidAverageCost" | "bid_average_cost" => Ok(GeneratedField::BidAverageCost),
+                            "askAverageCost" | "ask_average_cost" => Ok(GeneratedField::AskAverageCost),
                             "currentPrice" | "current_price" => Ok(GeneratedField::CurrentPrice),
                             "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
                             "exposureAmount" | "exposure_amount" => Ok(GeneratedField::ExposureAmount),
@@ -3208,8 +3285,11 @@ impl<'de> serde::Deserialize<'de> for SymbolPosition {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
                 let mut net_quantity__ = None;
-                let mut average_cost__ = None;
+                let mut bid_average_cost__ = None;
+                let mut ask_average_cost__ = None;
                 let mut current_price__ = None;
                 let mut unrealized_pnl__ = None;
                 let mut exposure_amount__ = None;
@@ -3221,6 +3301,22 @@ impl<'de> serde::Deserialize<'de> for SymbolPosition {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::NetQuantity => {
                             if net_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("netQuantity"));
@@ -3229,11 +3325,19 @@ impl<'de> serde::Deserialize<'de> for SymbolPosition {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::AverageCost => {
-                            if average_cost__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("averageCost"));
+                        GeneratedField::BidAverageCost => {
+                            if bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAverageCost"));
                             }
-                            average_cost__ = 
+                            bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAverageCost => {
+                            if ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAverageCost"));
+                            }
+                            ask_average_cost__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -3268,8 +3372,11 @@ impl<'de> serde::Deserialize<'de> for SymbolPosition {
                 }
                 Ok(SymbolPosition {
                     symbol: symbol__.unwrap_or_default(),
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
                     net_quantity: net_quantity__.unwrap_or_default(),
-                    average_cost: average_cost__.unwrap_or_default(),
+                    bid_average_cost: bid_average_cost__.unwrap_or_default(),
+                    ask_average_cost: ask_average_cost__.unwrap_or_default(),
                     current_price: current_price__.unwrap_or_default(),
                     unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
                     exposure_amount: exposure_amount__.unwrap_or_default(),

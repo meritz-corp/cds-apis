@@ -256,11 +256,20 @@ message SymbolPosition {
   // 종목 심볼
   string symbol = 1;
 
-  // 순수량 (long - short, 모든 Fund 합산)
+  // 매수 수량 (>= 0)
+  int64 bid_quantity = 7;
+
+  // 매도 수량 (>= 0)
+  int64 ask_quantity = 8;
+
+  // 순수량 (bid - ask, 모든 Fund 합산)
   int64 net_quantity = 2;
 
-  // 평균 매입 단가
-  double average_cost = 3;
+  // 매수 평균단가
+  double bid_average_cost = 9;
+
+  // 매도 평균단가
+  double ask_average_cost = 10;
 
   // 현재가
   double current_price = 4;
@@ -280,11 +289,17 @@ message FundSymbolPosition {
   // 종목 심볼
   string symbol = 2;
 
-  // 수량
-  int64 quantity = 3;
+  // 매수 수량 (>= 0)
+  int64 bid_quantity = 7;
 
-  // 평균 매입 단가
-  double average_cost = 4;
+  // 매도 수량 (>= 0)
+  int64 ask_quantity = 8;
+
+  // 매수 평균단가
+  double bid_average_cost = 9;
+
+  // 매도 평균단가
+  double ask_average_cost = 10;
 
   // 현재가
   double current_price = 5;
