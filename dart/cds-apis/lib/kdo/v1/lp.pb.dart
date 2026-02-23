@@ -405,6 +405,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     FillStatistics? fillStatistics,
     EtfLpOffset? offset,
     EtfLpHedge? hedge,
+    $core.double? bidAdjustment,
+    $core.double? askAdjustment,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -417,6 +419,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
     if (offset != null) result.offset = offset;
     if (hedge != null) result.hedge = hedge;
+    if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
+    if (askAdjustment != null) result.askAdjustment = askAdjustment;
     return result;
   }
 
@@ -436,6 +440,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
     ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
     ..aOM<EtfLpHedge>(12, _omitFieldNames ? '' : 'hedge', subBuilder: EtfLpHedge.create)
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -562,6 +568,26 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   void clearHedge() => $_clearField(12);
   @$pb.TagNumber(12)
   EtfLpHedge ensureHedge() => $_ensure(9);
+
+  /// 매수 호가 조정값
+  @$pb.TagNumber(13)
+  $core.double get bidAdjustment => $_getN(10);
+  @$pb.TagNumber(13)
+  set bidAdjustment($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(13)
+  $core.bool hasBidAdjustment() => $_has(10);
+  @$pb.TagNumber(13)
+  void clearBidAdjustment() => $_clearField(13);
+
+  /// 매도 호가 조정값
+  @$pb.TagNumber(14)
+  $core.double get askAdjustment => $_getN(11);
+  @$pb.TagNumber(14)
+  set askAdjustment($core.double value) => $_setDouble(11, value);
+  @$pb.TagNumber(14)
+  $core.bool hasAskAdjustment() => $_has(11);
+  @$pb.TagNumber(14)
+  void clearAskAdjustment() => $_clearField(14);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -576,6 +602,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     LpPricing? pricing,
     FillStatistics? fillStatistics,
     EtfLpOffset? offset,
+    $core.double? bidAdjustment,
+    $core.double? askAdjustment,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -587,6 +615,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (pricing != null) result.pricing = pricing;
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
     if (offset != null) result.offset = offset;
+    if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
+    if (askAdjustment != null) result.askAdjustment = askAdjustment;
     return result;
   }
 
@@ -605,6 +635,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
     ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -719,6 +751,26 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
   EtfLpOffset ensureOffset() => $_ensure(8);
+
+  /// 매수 호가 조정값
+  @$pb.TagNumber(12)
+  $core.double get bidAdjustment => $_getN(9);
+  @$pb.TagNumber(12)
+  set bidAdjustment($core.double value) => $_setDouble(9, value);
+  @$pb.TagNumber(12)
+  $core.bool hasBidAdjustment() => $_has(9);
+  @$pb.TagNumber(12)
+  void clearBidAdjustment() => $_clearField(12);
+
+  /// 매도 호가 조정값
+  @$pb.TagNumber(13)
+  $core.double get askAdjustment => $_getN(10);
+  @$pb.TagNumber(13)
+  set askAdjustment($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(13)
+  $core.bool hasAskAdjustment() => $_has(10);
+  @$pb.TagNumber(13)
+  void clearAskAdjustment() => $_clearField(13);
 }
 
 /// 자동 offset 조정 설정

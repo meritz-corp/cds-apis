@@ -678,6 +678,16 @@
         "hedge": {
           "$ref": "#/definitions/lpEtfLpHedge",
           "title": "헷지 정보"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
         }
       },
       "title": "ETF LP 상태"
@@ -722,6 +732,16 @@
         "offset": {
           "$ref": "#/definitions/lpEtfLpOffset",
           "title": "동적 offset 조정 설정 (optional)"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"

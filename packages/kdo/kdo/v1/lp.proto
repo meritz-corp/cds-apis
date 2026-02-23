@@ -191,6 +191,12 @@ message EtfLpStatus {
 
   // 헷지 정보
   EtfLpHedge hedge = 12;
+
+  // 매수 호가 조정값
+  optional double bid_adjustment = 13;
+
+  // 매도 호가 조정값
+  optional double ask_adjustment = 14;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -220,6 +226,12 @@ message EtfLpStatusUpdate {
 
   // 동적 offset 조정 설정 (optional)
   optional EtfLpOffset offset = 11;
+
+  // 매수 호가 조정값
+  optional double bid_adjustment = 12;
+
+  // 매도 호가 조정값
+  optional double ask_adjustment = 13;
 }
 
 

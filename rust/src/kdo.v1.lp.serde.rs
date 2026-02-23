@@ -930,6 +930,12 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -965,6 +971,12 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.hedge.as_ref() {
             struct_ser.serialize_field("hedge", v)?;
         }
+        if let Some(v) = self.bid_adjustment.as_ref() {
+            struct_ser.serialize_field("bid_adjustment", v)?;
+        }
+        if let Some(v) = self.ask_adjustment.as_ref() {
+            struct_ser.serialize_field("ask_adjustment", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -990,6 +1002,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "fillStatistics",
             "offset",
             "hedge",
+            "bid_adjustment",
+            "bidAdjustment",
+            "ask_adjustment",
+            "askAdjustment",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1004,6 +1020,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             FillStatistics,
             Offset,
             Hedge,
+            BidAdjustment,
+            AskAdjustment,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1036,6 +1054,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
                             "offset" => Ok(GeneratedField::Offset),
                             "hedge" => Ok(GeneratedField::Hedge),
+                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
+                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1065,6 +1085,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut fill_statistics__ = None;
                 let mut offset__ = None;
                 let mut hedge__ = None;
+                let mut bid_adjustment__ = None;
+                let mut ask_adjustment__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1133,6 +1155,22 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             hedge__ = map_.next_value()?;
                         }
+                        GeneratedField::BidAdjustment => {
+                            if bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
+                            }
+                            bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskAdjustment => {
+                            if ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
+                            }
+                            ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1149,6 +1187,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     fill_statistics: fill_statistics__,
                     offset: offset__,
                     hedge: hedge__,
+                    bid_adjustment: bid_adjustment__,
+                    ask_adjustment: ask_adjustment__,
                 })
             }
         }
@@ -1163,6 +1203,12 @@ impl serde::Serialize for EtfLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1222,6 +1268,12 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.offset.as_ref() {
             struct_ser.serialize_field("offset", v)?;
         }
+        if let Some(v) = self.bid_adjustment.as_ref() {
+            struct_ser.serialize_field("bid_adjustment", v)?;
+        }
+        if let Some(v) = self.ask_adjustment.as_ref() {
+            struct_ser.serialize_field("ask_adjustment", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1246,6 +1298,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "fill_statistics",
             "fillStatistics",
             "offset",
+            "bid_adjustment",
+            "bidAdjustment",
+            "ask_adjustment",
+            "askAdjustment",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1259,6 +1315,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             Pricing,
             FillStatistics,
             Offset,
+            BidAdjustment,
+            AskAdjustment,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1290,6 +1348,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
                             "offset" => Ok(GeneratedField::Offset),
+                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
+                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1318,6 +1378,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
                 let mut offset__ = None;
+                let mut bid_adjustment__ = None;
+                let mut ask_adjustment__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1380,6 +1442,22 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             }
                             offset__ = map_.next_value()?;
                         }
+                        GeneratedField::BidAdjustment => {
+                            if bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
+                            }
+                            bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskAdjustment => {
+                            if ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
+                            }
+                            ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1395,6 +1473,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
                     offset: offset__,
+                    bid_adjustment: bid_adjustment__,
+                    ask_adjustment: ask_adjustment__,
                 })
             }
         }

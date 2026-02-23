@@ -107,6 +107,12 @@ pub struct EtfLpStatus {
     /// 헷지 정보
     #[prost(message, optional, tag="12")]
     pub hedge: ::core::option::Option<EtfLpHedge>,
+    /// 매수 호가 조정값
+    #[prost(double, optional, tag="13")]
+    pub bid_adjustment: ::core::option::Option<f64>,
+    /// 매도 호가 조정값
+    #[prost(double, optional, tag="14")]
+    pub ask_adjustment: ::core::option::Option<f64>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -138,6 +144,12 @@ pub struct EtfLpStatusUpdate {
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
     pub offset: ::core::option::Option<EtfLpOffset>,
+    /// 매수 호가 조정값
+    #[prost(double, optional, tag="12")]
+    pub bid_adjustment: ::core::option::Option<f64>,
+    /// 매도 호가 조정값
+    #[prost(double, optional, tag="13")]
+    pub ask_adjustment: ::core::option::Option<f64>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
