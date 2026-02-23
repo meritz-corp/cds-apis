@@ -33,6 +33,12 @@ pub struct EtfLp {
     /// ETF 가격 산출 방식
     #[prost(message, optional, tag="12")]
     pub pricing_method: ::core::option::Option<EtfPricing>,
+    /// 매수 호가 조정값
+    #[prost(double, optional, tag="13")]
+    pub bid_adjustment: ::core::option::Option<f64>,
+    /// 매도 호가 조정값
+    #[prost(double, optional, tag="14")]
+    pub ask_adjustment: ::core::option::Option<f64>,
 }
 /// ETF 가격 산출 방식
 #[allow(clippy::derive_partial_eq_without_eq)]

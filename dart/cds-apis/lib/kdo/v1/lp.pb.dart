@@ -34,6 +34,8 @@ class EtfLp extends $pb.GeneratedMessage {
     EtfLpOffset? offset,
     $core.bool? enabled,
     EtfPricing? pricingMethod,
+    $core.double? bidAdjustment,
+    $core.double? askAdjustment,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -46,6 +48,8 @@ class EtfLp extends $pb.GeneratedMessage {
     if (offset != null) result.offset = offset;
     if (enabled != null) result.enabled = enabled;
     if (pricingMethod != null) result.pricingMethod = pricingMethod;
+    if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
+    if (askAdjustment != null) result.askAdjustment = askAdjustment;
     return result;
   }
 
@@ -65,6 +69,8 @@ class EtfLp extends $pb.GeneratedMessage {
     ..aOM<EtfLpOffset>(10, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
     ..aOB(11, _omitFieldNames ? '' : 'enabled')
     ..aOM<EtfPricing>(12, _omitFieldNames ? '' : 'pricingMethod', subBuilder: EtfPricing.create)
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -186,6 +192,26 @@ class EtfLp extends $pb.GeneratedMessage {
   void clearPricingMethod() => $_clearField(12);
   @$pb.TagNumber(12)
   EtfPricing ensurePricingMethod() => $_ensure(9);
+
+  /// 매수 호가 조정값
+  @$pb.TagNumber(13)
+  $core.double get bidAdjustment => $_getN(10);
+  @$pb.TagNumber(13)
+  set bidAdjustment($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(13)
+  $core.bool hasBidAdjustment() => $_has(10);
+  @$pb.TagNumber(13)
+  void clearBidAdjustment() => $_clearField(13);
+
+  /// 매도 호가 조정값
+  @$pb.TagNumber(14)
+  $core.double get askAdjustment => $_getN(11);
+  @$pb.TagNumber(14)
+  set askAdjustment($core.double value) => $_setDouble(11, value);
+  @$pb.TagNumber(14)
+  $core.bool hasAskAdjustment() => $_has(11);
+  @$pb.TagNumber(14)
+  void clearAskAdjustment() => $_clearField(14);
 }
 
 enum EtfPricing_Method {

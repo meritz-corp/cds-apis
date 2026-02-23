@@ -64,6 +64,12 @@ const EtfLp$json = {
     {'1': 'offset', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
     {'1': 'enabled', '3': 11, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'pricing_method', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfPricing', '10': 'pricingMethod'},
+    {'1': 'bid_adjustment', '3': 13, '4': 1, '5': 1, '9': 0, '10': 'bidAdjustment', '17': true},
+    {'1': 'ask_adjustment', '3': 14, '4': 1, '5': 1, '9': 1, '10': 'askAdjustment', '17': true},
+  ],
+  '8': [
+    {'1': '_bid_adjustment'},
+    {'1': '_ask_adjustment'},
   ],
 };
 
@@ -74,7 +80,10 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'aWRCYXNpcxIaCghxdWFudGl0eRgHIAEoA1IIcXVhbnRpdHkSFAoFZGVwdGgYCCABKA1SBWRlcH'
     'RoEhsKCXRpY2tfc2l6ZRgJIAEoA1IIdGlja1NpemUSLgoGb2Zmc2V0GAogASgLMhYua2RvLnYx'
     'LmxwLkV0ZkxwT2Zmc2V0UgZvZmZzZXQSGAoHZW5hYmxlZBgLIAEoCFIHZW5hYmxlZBI8Cg5wcm'
-    'ljaW5nX21ldGhvZBgMIAEoCzIVLmtkby52MS5scC5FdGZQcmljaW5nUg1wcmljaW5nTWV0aG9k');
+    'ljaW5nX21ldGhvZBgMIAEoCzIVLmtkby52MS5scC5FdGZQcmljaW5nUg1wcmljaW5nTWV0aG9k'
+    'EioKDmJpZF9hZGp1c3RtZW50GA0gASgBSABSDWJpZEFkanVzdG1lbnSIAQESKgoOYXNrX2Fkan'
+    'VzdG1lbnQYDiABKAFIAVINYXNrQWRqdXN0bWVudIgBAUIRCg9fYmlkX2FkanVzdG1lbnRCEQoP'
+    'X2Fza19hZGp1c3RtZW50');
 
 @$core.Deprecated('Use etfPricingDescriptor instead')
 const EtfPricing$json = {

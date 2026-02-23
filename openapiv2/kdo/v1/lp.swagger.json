@@ -546,6 +546,16 @@
         "pricingMethod": {
           "$ref": "#/definitions/lpEtfPricing",
           "title": "ETF 가격 산출 방식"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
         }
       },
       "title": "ETF LP 설정"
