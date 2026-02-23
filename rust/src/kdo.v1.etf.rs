@@ -57,6 +57,9 @@ pub struct Etf {
     /// ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
     #[prost(map="string, message", tag="25")]
     pub conversions: ::std::collections::HashMap<::prost::alloc::string::String, Conversion>,
+    /// unit_delta (구성종목 기반 NAV 계산용)
+    #[prost(string, tag="26")]
+    pub unit_delta: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

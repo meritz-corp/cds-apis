@@ -326,6 +326,10 @@
             "$ref": "#/definitions/etfConversion"
           },
           "title": "ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)"
+        },
+        "unitDelta": {
+          "type": "string",
+          "title": "unit_delta (구성종목 기반 NAV 계산용)"
         }
       }
     },

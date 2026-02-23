@@ -45,6 +45,7 @@ class Etf extends $pb.GeneratedMessage {
     $core.bool? cashCreditable,
     $fixnum.Int64? cashCreationAmount,
     $core.Iterable<$core.MapEntry<$core.String, Conversion>>? conversions,
+    $core.String? unitDelta,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -68,6 +69,7 @@ class Etf extends $pb.GeneratedMessage {
     if (cashCreditable != null) result.cashCreditable = cashCreditable;
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
     if (conversions != null) result.conversions.addEntries(conversions);
+    if (unitDelta != null) result.unitDelta = unitDelta;
     return result;
   }
 
@@ -98,6 +100,7 @@ class Etf extends $pb.GeneratedMessage {
     ..aOB(23, _omitFieldNames ? '' : 'cashCreditable')
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
     ..m<$core.String, Conversion>(25, _omitFieldNames ? '' : 'conversions', entryClassName: 'Etf.ConversionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: Conversion.create, valueDefaultOrMaker: Conversion.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
+    ..aOS(26, _omitFieldNames ? '' : 'unitDelta')
     ..hasRequiredFields = false
   ;
 
@@ -308,6 +311,16 @@ class Etf extends $pb.GeneratedMessage {
   /// ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
   @$pb.TagNumber(25)
   $pb.PbMap<$core.String, Conversion> get conversions => $_getMap(20);
+
+  /// unit_delta (구성종목 기반 NAV 계산용)
+  @$pb.TagNumber(26)
+  $core.String get unitDelta => $_getSZ(21);
+  @$pb.TagNumber(26)
+  set unitDelta($core.String value) => $_setString(21, value);
+  @$pb.TagNumber(26)
+  $core.bool hasUnitDelta() => $_has(21);
+  @$pb.TagNumber(26)
+  void clearUnitDelta() => $_clearField(26);
 }
 
 enum EtfConstituent_ConstituentType {

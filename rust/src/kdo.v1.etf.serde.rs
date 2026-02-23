@@ -493,6 +493,9 @@ impl serde::Serialize for Etf {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.Etf", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -569,6 +572,9 @@ impl serde::Serialize for Etf {
         if true {
             struct_ser.serialize_field("conversions", &self.conversions)?;
         }
+        if true {
+            struct_ser.serialize_field("unit_delta", &self.unit_delta)?;
+        }
         struct_ser.end()
     }
 }
@@ -613,6 +619,8 @@ impl<'de> serde::Deserialize<'de> for Etf {
             "cash_creation_amount",
             "cashCreationAmount",
             "conversions",
+            "unit_delta",
+            "unitDelta",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -638,6 +646,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             CashCreditable,
             CashCreationAmount,
             Conversions,
+            UnitDelta,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -681,6 +690,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "cashCreditable" | "cash_creditable" => Ok(GeneratedField::CashCreditable),
                             "cashCreationAmount" | "cash_creation_amount" => Ok(GeneratedField::CashCreationAmount),
                             "conversions" => Ok(GeneratedField::Conversions),
+                            "unitDelta" | "unit_delta" => Ok(GeneratedField::UnitDelta),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -721,6 +731,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                 let mut cash_creditable__ = None;
                 let mut cash_creation_amount__ = None;
                 let mut conversions__ = None;
+                let mut unit_delta__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -865,6 +876,12 @@ impl<'de> serde::Deserialize<'de> for Etf {
                                 map_.next_value::<std::collections::HashMap<_, _>>()?
                             );
                         }
+                        GeneratedField::UnitDelta => {
+                            if unit_delta__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unitDelta"));
+                            }
+                            unit_delta__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -892,6 +909,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                     cash_creditable: cash_creditable__.unwrap_or_default(),
                     cash_creation_amount: cash_creation_amount__.unwrap_or_default(),
                     conversions: conversions__.unwrap_or_default(),
+                    unit_delta: unit_delta__.unwrap_or_default(),
                 })
             }
         }

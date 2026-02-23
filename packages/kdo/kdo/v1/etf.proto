@@ -101,6 +101,9 @@ message Etf {
 
     // ETF 변환 정보 (예: 레버리지/인버스 ETF의 선물 변환)
     map<string, Conversion> conversions = 25;
+
+    // unit_delta (구성종목 기반 NAV 계산용)
+    string unit_delta = 26;
 }
 
 message EtfConstituent {
