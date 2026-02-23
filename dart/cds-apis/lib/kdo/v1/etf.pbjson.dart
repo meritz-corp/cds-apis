@@ -393,6 +393,21 @@ final $typed_data.Uint8List tickNavPointDescriptor = $convert.base64Decode(
     'CgxUaWNrTmF2UG9pbnQSHwoLdGlja19vZmZzZXQYASABKAVSCnRpY2tPZmZzZXQSFAoFcHJpY2'
     'UYAiABKAlSBXByaWNlEhAKA25hdhgDIAEoCVIDbmF2');
 
+@$core.Deprecated('Use updateEtfUnitDeltaRequestDescriptor instead')
+const UpdateEtfUnitDeltaRequest$json = {
+  '1': 'UpdateEtfUnitDeltaRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'unit_delta', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'unitDelta'},
+  ],
+};
+
+/// Descriptor for `UpdateEtfUnitDeltaRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateEtfUnitDeltaRequestDescriptor = $convert.base64Decode(
+    'ChlVcGRhdGVFdGZVbml0RGVsdGFSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLm'
+    'Nkc2FwaXMueHl6L0V0ZlIDZXRmEiMKCnVuaXRfZGVsdGEYAiABKAlCBOJBAQJSCXVuaXREZWx0'
+    'YQ==');
+
 @$core.Deprecated('Use createRedeemEtfRequestDescriptor instead')
 const CreateRedeemEtfRequest$json = {
   '1': 'CreateRedeemEtfRequest',

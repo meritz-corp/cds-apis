@@ -114,6 +114,26 @@ func (mr *MockEtfServiceClientMockRecorder) ListEtfs(ctx, in interface{}, opts .
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfs", reflect.TypeOf((*MockEtfServiceClient)(nil).ListEtfs), varargs...)
 }
 
+// UpdateEtfUnitDelta mocks base method.
+func (m *MockEtfServiceClient) UpdateEtfUnitDelta(ctx context.Context, in *UpdateEtfUnitDeltaRequest, opts ...grpc.CallOption) (*Etf, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateEtfUnitDelta", varargs...)
+	ret0, _ := ret[0].(*Etf)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateEtfUnitDelta indicates an expected call of UpdateEtfUnitDelta.
+func (mr *MockEtfServiceClientMockRecorder) UpdateEtfUnitDelta(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateEtfUnitDelta", reflect.TypeOf((*MockEtfServiceClient)(nil).UpdateEtfUnitDelta), varargs...)
+}
+
 // MockEtfServiceServer is a mock of EtfServiceServer interface.
 type MockEtfServiceServer struct {
 	ctrl     *gomock.Controller
@@ -195,4 +215,19 @@ func (m *MockEtfServiceServer) ListEtfs(ctx context.Context, in *ListEtfsRequest
 func (mr *MockEtfServiceServerMockRecorder) ListEtfs(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfs", reflect.TypeOf((*MockEtfServiceServer)(nil).ListEtfs), ctx, in)
+}
+
+// UpdateEtfUnitDelta mocks base method.
+func (m *MockEtfServiceServer) UpdateEtfUnitDelta(ctx context.Context, in *UpdateEtfUnitDeltaRequest) (*Etf, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateEtfUnitDelta", ctx, in)
+	ret0, _ := ret[0].(*Etf)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateEtfUnitDelta indicates an expected call of UpdateEtfUnitDelta.
+func (mr *MockEtfServiceServerMockRecorder) UpdateEtfUnitDelta(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateEtfUnitDelta", reflect.TypeOf((*MockEtfServiceServer)(nil).UpdateEtfUnitDelta), ctx, in)
 }

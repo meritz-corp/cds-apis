@@ -27,6 +27,7 @@ type EtfServiceClient interface {
 	// 구성종목 1틱 변동 시 ETF NAV 영향 조회
 	GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest, opts ...grpc.CallOption) (*EtfTickImpact, error)
 	CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error)
+	UpdateEtfUnitDelta(ctx context.Context, in *UpdateEtfUnitDeltaRequest, opts ...grpc.CallOption) (*Etf, error)
 }
 
 type etfServiceClient struct {
@@ -73,6 +74,15 @@ func (c *etfServiceClient) CreateRedeemEtf(ctx context.Context, in *CreateRedeem
 	return out, nil
 }
 
+func (c *etfServiceClient) UpdateEtfUnitDelta(ctx context.Context, in *UpdateEtfUnitDeltaRequest, opts ...grpc.CallOption) (*Etf, error) {
+	out := new(Etf)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/UpdateEtfUnitDelta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EtfServiceServer is the server API for EtfService service.
 // All implementations must embed UnimplementedEtfServiceServer
 // for forward compatibility
@@ -82,6 +92,7 @@ type EtfServiceServer interface {
 	// 구성종목 1틱 변동 시 ETF NAV 영향 조회
 	GetEtfTickImpact(context.Context, *GetEtfTickImpactRequest) (*EtfTickImpact, error)
 	CreateRedeemEtf(context.Context, *CreateRedeemEtfRequest) (*Etf, error)
+	UpdateEtfUnitDelta(context.Context, *UpdateEtfUnitDeltaRequest) (*Etf, error)
 	mustEmbedUnimplementedEtfServiceServer()
 }
 
@@ -100,6 +111,9 @@ func (UnimplementedEtfServiceServer) GetEtfTickImpact(context.Context, *GetEtfTi
 }
 func (UnimplementedEtfServiceServer) CreateRedeemEtf(context.Context, *CreateRedeemEtfRequest) (*Etf, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRedeemEtf not implemented")
+}
+func (UnimplementedEtfServiceServer) UpdateEtfUnitDelta(context.Context, *UpdateEtfUnitDeltaRequest) (*Etf, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEtfUnitDelta not implemented")
 }
 func (UnimplementedEtfServiceServer) mustEmbedUnimplementedEtfServiceServer() {}
 
@@ -186,6 +200,24 @@ func _EtfService_CreateRedeemEtf_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EtfService_UpdateEtfUnitDelta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEtfUnitDeltaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).UpdateEtfUnitDelta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/UpdateEtfUnitDelta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).UpdateEtfUnitDelta(ctx, req.(*UpdateEtfUnitDeltaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EtfService_ServiceDesc is the grpc.ServiceDesc for EtfService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -208,6 +240,10 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateRedeemEtf",
 			Handler:    _EtfService_CreateRedeemEtf_Handler,
+		},
+		{
+			MethodName: "UpdateEtfUnitDelta",
+			Handler:    _EtfService_UpdateEtfUnitDelta_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

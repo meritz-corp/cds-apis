@@ -1672,6 +1672,64 @@ class TickNavPoint extends $pb.GeneratedMessage {
   void clearNav() => $_clearField(3);
 }
 
+class UpdateEtfUnitDeltaRequest extends $pb.GeneratedMessage {
+  factory UpdateEtfUnitDeltaRequest({
+    $core.String? etf,
+    $core.String? unitDelta,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (unitDelta != null) result.unitDelta = unitDelta;
+    return result;
+  }
+
+  UpdateEtfUnitDeltaRequest._();
+
+  factory UpdateEtfUnitDeltaRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateEtfUnitDeltaRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfUnitDeltaRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOS(2, _omitFieldNames ? '' : 'unitDelta')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateEtfUnitDeltaRequest clone() => UpdateEtfUnitDeltaRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateEtfUnitDeltaRequest copyWith(void Function(UpdateEtfUnitDeltaRequest) updates) => super.copyWith((message) => updates(message as UpdateEtfUnitDeltaRequest)) as UpdateEtfUnitDeltaRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateEtfUnitDeltaRequest create() => UpdateEtfUnitDeltaRequest._();
+  @$core.override
+  UpdateEtfUnitDeltaRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateEtfUnitDeltaRequest> createRepeated() => $pb.PbList<UpdateEtfUnitDeltaRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateEtfUnitDeltaRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateEtfUnitDeltaRequest>(create);
+  static UpdateEtfUnitDeltaRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get unitDelta => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set unitDelta($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUnitDelta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUnitDelta() => $_clearField(2);
+}
+
 class CreateRedeemEtfRequest extends $pb.GeneratedMessage {
   factory CreateRedeemEtfRequest({
     $core.String? etf,

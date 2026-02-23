@@ -175,6 +175,28 @@ pub mod etf_service_client {
                 .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "CreateRedeemEtf"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn update_etf_unit_delta(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateEtfUnitDeltaRequest>,
+        ) -> std::result::Result<tonic::Response<super::Etf>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.etf.EtfService/UpdateEtfUnitDelta",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "UpdateEtfUnitDelta"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -202,6 +224,10 @@ pub mod etf_service_server {
         async fn create_redeem_etf(
             &self,
             request: tonic::Request<super::CreateRedeemEtfRequest>,
+        ) -> std::result::Result<tonic::Response<super::Etf>, tonic::Status>;
+        async fn update_etf_unit_delta(
+            &self,
+            request: tonic::Request<super::UpdateEtfUnitDeltaRequest>,
         ) -> std::result::Result<tonic::Response<super::Etf>, tonic::Status>;
     }
     #[derive(Debug)]
@@ -444,6 +470,52 @@ pub mod etf_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = CreateRedeemEtfSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.etf.EtfService/UpdateEtfUnitDelta" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateEtfUnitDeltaSvc<T: EtfService>(pub Arc<T>);
+                    impl<
+                        T: EtfService,
+                    > tonic::server::UnaryService<super::UpdateEtfUnitDeltaRequest>
+                    for UpdateEtfUnitDeltaSvc<T> {
+                        type Response = super::Etf;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateEtfUnitDeltaRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as EtfService>::update_etf_unit_delta(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UpdateEtfUnitDeltaSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

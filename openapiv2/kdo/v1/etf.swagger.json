@@ -179,6 +179,53 @@
           "EtfService"
         ]
       }
+    },
+    "/v1/{etf}:update_unit_delta": {
+      "post": {
+        "operationId": "EtfService_UpdateEtfUnitDelta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfEtf"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "unitDelta": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "unitDelta"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
     }
   },
   "definitions": {

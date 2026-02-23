@@ -316,6 +316,14 @@ pub struct TickNavPoint {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateEtfUnitDeltaRequest {
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub unit_delta: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRedeemEtfRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,

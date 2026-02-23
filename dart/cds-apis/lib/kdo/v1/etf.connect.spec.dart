@@ -39,4 +39,11 @@ abstract final class EtfService {
     kdov1etf.CreateRedeemEtfRequest.new,
     kdov1etf.Etf.new,
   );
+
+  static const updateEtfUnitDelta = connect.Spec(
+    '/$name/UpdateEtfUnitDelta',
+    connect.StreamType.unary,
+    kdov1etf.UpdateEtfUnitDeltaRequest.new,
+    kdov1etf.Etf.new,
+  );
 }

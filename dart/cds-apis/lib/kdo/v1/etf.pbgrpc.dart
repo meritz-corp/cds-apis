@@ -50,6 +50,10 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$createRedeemEtf, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.Etf> updateEtfUnitDelta($0.UpdateEtfUnitDeltaRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateEtfUnitDelta, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -67,6 +71,10 @@ class EtfServiceClient extends $grpc.Client {
   static final _$createRedeemEtf = $grpc.ClientMethod<$0.CreateRedeemEtfRequest, $0.Etf>(
       '/kdo.v1.etf.EtfService/CreateRedeemEtf',
       ($0.CreateRedeemEtfRequest value) => value.writeToBuffer(),
+      $0.Etf.fromBuffer);
+  static final _$updateEtfUnitDelta = $grpc.ClientMethod<$0.UpdateEtfUnitDeltaRequest, $0.Etf>(
+      '/kdo.v1.etf.EtfService/UpdateEtfUnitDelta',
+      ($0.UpdateEtfUnitDeltaRequest value) => value.writeToBuffer(),
       $0.Etf.fromBuffer);
 }
 
@@ -103,6 +111,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CreateRedeemEtfRequest.fromBuffer(value),
         ($0.Etf value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateEtfUnitDeltaRequest, $0.Etf>(
+        'UpdateEtfUnitDelta',
+        updateEtfUnitDelta_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateEtfUnitDeltaRequest.fromBuffer(value),
+        ($0.Etf value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -128,5 +143,11 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.Etf> createRedeemEtf($grpc.ServiceCall call, $0.CreateRedeemEtfRequest request);
+
+  $async.Future<$0.Etf> updateEtfUnitDelta_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateEtfUnitDeltaRequest> $request) async {
+    return updateEtfUnitDelta($call, await $request);
+  }
+
+  $async.Future<$0.Etf> updateEtfUnitDelta($grpc.ServiceCall call, $0.UpdateEtfUnitDeltaRequest request);
 
 }

@@ -44,6 +44,14 @@ service EtfService {
         };
         option (google.api.method_signature) = "etf";
     }
+
+    rpc UpdateEtfUnitDelta(UpdateEtfUnitDeltaRequest) returns (Etf) {
+        option (google.api.http) = {
+            post: "/v1/{etf=etfs/*}:update_unit_delta"
+            body: "*"
+        };
+        option (google.api.method_signature) = "etf,unit_delta";
+    }
 }
 
 
@@ -324,6 +332,16 @@ message TickNavPoint {
 
     // 해당 틱에서의 ETF NAV
     string nav = 3;
+}
+
+message UpdateEtfUnitDeltaRequest {
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+    string unit_delta = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 message CreateRedeemEtfRequest {
