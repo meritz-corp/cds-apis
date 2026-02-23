@@ -134,6 +134,12 @@ message EtfLp {
 
   // ETF 가격 산출 방식
   EtfPricing pricing_method = 12;
+
+  // 매수 호가 조정값
+  optional double bid_adjustment = 13;
+
+  // 매도 호가 조정값
+  optional double ask_adjustment = 14;
 }
 
 // ETF 가격 산출 방식
