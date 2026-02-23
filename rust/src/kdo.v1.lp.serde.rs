@@ -139,6 +139,9 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -151,11 +154,6 @@ impl serde::Serialize for EtfLp {
         }
         if true {
             struct_ser.serialize_field("bid_basis", &self.bid_basis)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
             struct_ser.serialize_field("depth", &self.depth)?;
@@ -180,6 +178,16 @@ impl serde::Serialize for EtfLp {
         if let Some(v) = self.ask_adjustment.as_ref() {
             struct_ser.serialize_field("ask_adjustment", v)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -197,7 +205,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "askBasis",
             "bid_basis",
             "bidBasis",
-            "quantity",
             "depth",
             "tick_size",
             "tickSize",
@@ -209,6 +216,10 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -217,7 +228,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             FundCode,
             AskBasis,
             BidBasis,
-            Quantity,
             Depth,
             TickSize,
             Offset,
@@ -225,6 +235,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             PricingMethod,
             BidAdjustment,
             AskAdjustment,
+            BidQuantity,
+            AskQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -251,7 +263,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             "offset" => Ok(GeneratedField::Offset),
@@ -259,6 +270,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "pricingMethod" | "pricing_method" => Ok(GeneratedField::PricingMethod),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -282,7 +295,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut fund_code__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
-                let mut quantity__ = None;
                 let mut depth__ = None;
                 let mut tick_size__ = None;
                 let mut offset__ = None;
@@ -290,6 +302,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut pricing_method__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -317,14 +331,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 return Err(serde::de::Error::duplicate_field("bidBasis"));
                             }
                             bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -378,6 +384,22 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -388,7 +410,6 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     fund_code: fund_code__.unwrap_or_default(),
                     ask_basis: ask_basis__.unwrap_or_default(),
                     bid_basis: bid_basis__.unwrap_or_default(),
-                    quantity: quantity__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
                     offset: offset__,
@@ -396,6 +417,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     pricing_method: pricing_method__,
                     bid_adjustment: bid_adjustment__,
                     ask_adjustment: ask_adjustment__,
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
                 })
             }
         }
@@ -976,6 +999,9 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -988,11 +1014,6 @@ impl serde::Serialize for EtfLpStatus {
         }
         if let Some(v) = self.bid_basis.as_ref() {
             struct_ser.serialize_field("bid_basis", v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
             let v = EtfLpState::try_from(self.state)
@@ -1017,6 +1038,16 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.ask_adjustment.as_ref() {
             struct_ser.serialize_field("ask_adjustment", v)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -1035,7 +1066,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "askBasis",
             "bid_basis",
             "bidBasis",
-            "quantity",
             "state",
             "pricing",
             "fill_statistics",
@@ -1046,6 +1076,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1054,7 +1088,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             FundCode,
             AskBasis,
             BidBasis,
-            Quantity,
             State,
             Pricing,
             FillStatistics,
@@ -1062,6 +1095,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             Hedge,
             BidAdjustment,
             AskAdjustment,
+            BidQuantity,
+            AskQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1088,7 +1123,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "quantity" => Ok(GeneratedField::Quantity),
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
@@ -1096,6 +1130,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "hedge" => Ok(GeneratedField::Hedge),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1119,7 +1155,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut fund_code__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
-                let mut quantity__ = None;
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
@@ -1127,6 +1162,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut hedge__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1155,14 +1192,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             bid_basis__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
                         GeneratedField::State => {
@@ -1211,6 +1240,22 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1221,7 +1266,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     fund_code: fund_code__.unwrap_or_default(),
                     ask_basis: ask_basis__,
                     bid_basis: bid_basis__,
-                    quantity: quantity__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
@@ -1229,6 +1273,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     hedge: hedge__,
                     bid_adjustment: bid_adjustment__,
                     ask_adjustment: ask_adjustment__,
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
                 })
             }
         }
@@ -1276,6 +1322,9 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -1288,11 +1337,6 @@ impl serde::Serialize for EtfLpStatusUpdate {
         }
         if let Some(v) = self.bid_basis.as_ref() {
             struct_ser.serialize_field("bid_basis", v)?;
-        }
-        if let Some(v) = self.quantity.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&v).as_str())?;
         }
         if let Some(v) = self.state.as_ref() {
             let v = EtfLpState::try_from(*v)
@@ -1314,6 +1358,16 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.ask_adjustment.as_ref() {
             struct_ser.serialize_field("ask_adjustment", v)?;
         }
+        if let Some(v) = self.bid_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.ask_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -1332,7 +1386,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "askBasis",
             "bid_basis",
             "bidBasis",
-            "quantity",
             "state",
             "pricing",
             "fill_statistics",
@@ -1342,6 +1395,10 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1350,13 +1407,14 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             FundCode,
             AskBasis,
             BidBasis,
-            Quantity,
             State,
             Pricing,
             FillStatistics,
             Offset,
             BidAdjustment,
             AskAdjustment,
+            BidQuantity,
+            AskQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1383,13 +1441,14 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "quantity" => Ok(GeneratedField::Quantity),
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
                             "offset" => Ok(GeneratedField::Offset),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1413,13 +1472,14 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut fund_code__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
-                let mut quantity__ = None;
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
                 let mut offset__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1447,14 +1507,6 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                                 return Err(serde::de::Error::duplicate_field("bidBasis"));
                             }
                             bid_basis__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
@@ -1498,6 +1550,22 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1508,13 +1576,14 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     fund_code: fund_code__.unwrap_or_default(),
                     ask_basis: ask_basis__,
                     bid_basis: bid_basis__,
-                    quantity: quantity__,
                     state: state__,
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
                     offset: offset__,
                     bid_adjustment: bid_adjustment__,
                     ask_adjustment: ask_adjustment__,
+                    bid_quantity: bid_quantity__,
+                    ask_quantity: ask_quantity__,
                 })
             }
         }
@@ -4191,11 +4260,6 @@ impl serde::Serialize for UpdateEtfLpRequest {
         }
         if let Some(v) = self.update.as_ref() {
             match v {
-                update_etf_lp_request::Update::Quantity(v) => {
-                    #[allow(clippy::needless_borrow)]
-                    #[allow(clippy::needless_borrows_for_generic_args)]
-                    struct_ser.serialize_field("quantity", ToString::to_string(&v).as_str())?;
-                }
                 update_etf_lp_request::Update::Depth(v) => {
                     struct_ser.serialize_field("depth", v)?;
                 }
@@ -4207,6 +4271,22 @@ impl serde::Serialize for UpdateEtfLpRequest {
                 }
                 update_etf_lp_request::Update::BidBasis(v) => {
                     struct_ser.serialize_field("bid_basis", v)?;
+                }
+                update_etf_lp_request::Update::BidQuantity(v) => {
+                    #[allow(clippy::needless_borrow)]
+                    #[allow(clippy::needless_borrows_for_generic_args)]
+                    struct_ser.serialize_field("bid_quantity", ToString::to_string(&v).as_str())?;
+                }
+                update_etf_lp_request::Update::AskQuantity(v) => {
+                    #[allow(clippy::needless_borrow)]
+                    #[allow(clippy::needless_borrows_for_generic_args)]
+                    struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
+                }
+                update_etf_lp_request::Update::BidAdjustment(v) => {
+                    struct_ser.serialize_field("bid_adjustment", v)?;
+                }
+                update_etf_lp_request::Update::AskAdjustment(v) => {
+                    struct_ser.serialize_field("ask_adjustment", v)?;
                 }
             }
         }
@@ -4223,24 +4303,34 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "symbol",
             "fund_code",
             "fundCode",
-            "quantity",
             "depth",
             "offset",
             "ask_basis",
             "askBasis",
             "bid_basis",
             "bidBasis",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
+            "bid_adjustment",
+            "bidAdjustment",
+            "ask_adjustment",
+            "askAdjustment",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
             FundCode,
-            Quantity,
             Depth,
             Offset,
             AskBasis,
             BidBasis,
+            BidQuantity,
+            AskQuantity,
+            BidAdjustment,
+            AskAdjustment,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4265,11 +4355,14 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "quantity" => Ok(GeneratedField::Quantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "offset" => Ok(GeneratedField::Offset),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
+                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4306,12 +4399,6 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Quantity => {
-                            if update__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::Quantity(x.0));
-                        }
                         GeneratedField::Depth => {
                             if update__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("depth"));
@@ -4336,6 +4423,30 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                                 return Err(serde::de::Error::duplicate_field("bidBasis"));
                             }
                             update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::BidBasis(x.0));
+                        }
+                        GeneratedField::BidQuantity => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::BidQuantity(x.0));
+                        }
+                        GeneratedField::AskQuantity => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::AskQuantity(x.0));
+                        }
+                        GeneratedField::BidAdjustment => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::BidAdjustment(x.0));
+                        }
+                        GeneratedField::AskAdjustment => {
+                            if update__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
+                            }
+                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::AskAdjustment(x.0));
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;

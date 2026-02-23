@@ -158,11 +158,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "quantity": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "주문 수량"
-                },
                 "depth": {
                   "type": "integer",
                   "format": "int64",
@@ -179,6 +174,26 @@
                 "bidBasis": {
                   "type": "number",
                   "format": "double"
+                },
+                "bidQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "매수 주문 수량"
+                },
+                "askQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "매도 주문 수량"
+                },
+                "bidAdjustment": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "매수 호가 조정값"
+                },
+                "askAdjustment": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "매도 호가 조정값"
                 }
               },
               "title": "UpdateEtfLp"
@@ -520,11 +535,6 @@
           "type": "number",
           "format": "double"
         },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "주문 수량 (i64)"
-        },
         "depth": {
           "type": "integer",
           "format": "int64",
@@ -556,6 +566,16 @@
           "type": "number",
           "format": "double",
           "title": "매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (i64)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (i64)"
         }
       },
       "title": "ETF LP 설정"
@@ -664,11 +684,6 @@
           "type": "number",
           "format": "double"
         },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "주문 수량 (i64)"
-        },
         "state": {
           "$ref": "#/definitions/lpEtfLpState",
           "title": "LP 상태"
@@ -698,6 +713,16 @@
           "type": "number",
           "format": "double",
           "title": "매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (i64)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (i64)"
         }
       },
       "title": "ETF LP 상태"
@@ -721,11 +746,6 @@
         "bidBasis": {
           "type": "number",
           "format": "double"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "주문 수량 (i64)"
         },
         "state": {
           "$ref": "#/definitions/lpEtfLpState",
@@ -752,6 +772,16 @@
           "type": "number",
           "format": "double",
           "title": "매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (i64)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (i64)"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"

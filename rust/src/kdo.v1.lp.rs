@@ -15,9 +15,6 @@ pub struct EtfLp {
     ///
     #[prost(double, tag="4")]
     pub bid_basis: f64,
-    /// 주문 수량 (i64)
-    #[prost(int64, tag="7")]
-    pub quantity: i64,
     /// 호가 깊이 (양방향 레벨 수)
     #[prost(uint32, tag="8")]
     pub depth: u32,
@@ -39,6 +36,12 @@ pub struct EtfLp {
     /// 매도 호가 조정값
     #[prost(double, optional, tag="14")]
     pub ask_adjustment: ::core::option::Option<f64>,
+    /// 매수 주문 수량 (i64)
+    #[prost(int64, tag="15")]
+    pub bid_quantity: i64,
+    /// 매도 주문 수량 (i64)
+    #[prost(int64, tag="16")]
+    pub ask_quantity: i64,
 }
 /// ETF 가격 산출 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -95,9 +98,6 @@ pub struct EtfLpStatus {
     pub ask_basis: ::core::option::Option<f64>,
     #[prost(double, optional, tag="4")]
     pub bid_basis: ::core::option::Option<f64>,
-    /// 주문 수량 (i64)
-    #[prost(int64, tag="7")]
-    pub quantity: i64,
     /// LP 상태
     #[prost(enumeration="EtfLpState", tag="8")]
     pub state: i32,
@@ -119,6 +119,12 @@ pub struct EtfLpStatus {
     /// 매도 호가 조정값
     #[prost(double, optional, tag="14")]
     pub ask_adjustment: ::core::option::Option<f64>,
+    /// 매수 주문 수량 (i64)
+    #[prost(int64, tag="15")]
+    pub bid_quantity: i64,
+    /// 매도 주문 수량 (i64)
+    #[prost(int64, tag="16")]
+    pub ask_quantity: i64,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -135,9 +141,6 @@ pub struct EtfLpStatusUpdate {
     pub ask_basis: ::core::option::Option<f64>,
     #[prost(double, optional, tag="4")]
     pub bid_basis: ::core::option::Option<f64>,
-    /// 주문 수량 (i64)
-    #[prost(int64, optional, tag="7")]
-    pub quantity: ::core::option::Option<i64>,
     /// LP 상태
     #[prost(enumeration="EtfLpState", optional, tag="8")]
     pub state: ::core::option::Option<i32>,
@@ -156,6 +159,12 @@ pub struct EtfLpStatusUpdate {
     /// 매도 호가 조정값
     #[prost(double, optional, tag="13")]
     pub ask_adjustment: ::core::option::Option<f64>,
+    /// 매수 주문 수량 (i64)
+    #[prost(int64, optional, tag="14")]
+    pub bid_quantity: ::core::option::Option<i64>,
+    /// 매도 주문 수량 (i64)
+    #[prost(int64, optional, tag="15")]
+    pub ask_quantity: ::core::option::Option<i64>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -400,7 +409,7 @@ pub struct UpdateEtfLpRequest {
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
     /// 업데이트 대상
-    #[prost(oneof="update_etf_lp_request::Update", tags="3, 4, 5, 6, 7")]
+    #[prost(oneof="update_etf_lp_request::Update", tags="4, 5, 6, 7, 8, 9, 10, 11")]
     pub update: ::core::option::Option<update_etf_lp_request::Update>,
 }
 /// Nested message and enum types in `UpdateEtfLpRequest`.
@@ -409,9 +418,6 @@ pub mod update_etf_lp_request {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Update {
-        /// 주문 수량
-        #[prost(int64, tag="3")]
-        Quantity(i64),
         /// 호가 깊이
         #[prost(uint32, tag="4")]
         Depth(u32),
@@ -422,6 +428,18 @@ pub mod update_etf_lp_request {
         AskBasis(f64),
         #[prost(double, tag="7")]
         BidBasis(f64),
+        /// 매수 주문 수량
+        #[prost(int64, tag="8")]
+        BidQuantity(i64),
+        /// 매도 주문 수량
+        #[prost(int64, tag="9")]
+        AskQuantity(i64),
+        /// 매수 호가 조정값
+        #[prost(double, tag="10")]
+        BidAdjustment(f64),
+        /// 매도 호가 조정값
+        #[prost(double, tag="11")]
+        AskAdjustment(f64),
     }
 }
 /// GetEtfLpStatus

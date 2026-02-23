@@ -117,8 +117,7 @@ message EtfLp {
   //
   double bid_basis = 4;
 
-  // 주문 수량 (i64)
-  int64 quantity = 7;
+  reserved 7; // was: quantity (split into bid_quantity/ask_quantity)
 
   // 호가 깊이 (양방향 레벨 수)
   uint32 depth = 8;
@@ -140,6 +139,12 @@ message EtfLp {
 
   // 매도 호가 조정값
   optional double ask_adjustment = 14;
+
+  // 매수 주문 수량 (i64)
+  int64 bid_quantity = 15;
+
+  // 매도 주문 수량 (i64)
+  int64 ask_quantity = 16;
 }
 
 // ETF 가격 산출 방식
@@ -180,8 +185,7 @@ message EtfLpStatus {
 
   optional double bid_basis = 4;
 
-  // 주문 수량 (i64)
-  int64 quantity = 7;
+  reserved 7; // was: quantity (split into bid_quantity/ask_quantity)
 
   // LP 상태
   EtfLpState state = 8;
@@ -203,6 +207,12 @@ message EtfLpStatus {
 
   // 매도 호가 조정값
   optional double ask_adjustment = 14;
+
+  // 매수 주문 수량 (i64)
+  int64 bid_quantity = 15;
+
+  // 매도 주문 수량 (i64)
+  int64 ask_quantity = 16;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -218,8 +228,7 @@ message EtfLpStatusUpdate {
 
   optional double bid_basis = 4;
 
-  // 주문 수량 (i64)
-  optional int64 quantity = 7;
+  reserved 7; // was: quantity (split into bid_quantity/ask_quantity)
 
   // LP 상태
   optional EtfLpState state = 8;
@@ -238,6 +247,12 @@ message EtfLpStatusUpdate {
 
   // 매도 호가 조정값
   optional double ask_adjustment = 13;
+
+  // 매수 주문 수량 (i64)
+  optional int64 bid_quantity = 14;
+
+  // 매도 주문 수량 (i64)
+  optional int64 ask_quantity = 15;
 }
 
 
@@ -487,9 +502,6 @@ message UpdateEtfLpRequest {
 
   // 업데이트 대상
   oneof update {
-    // 주문 수량
-    int64 quantity = 3;
-
     // 호가 깊이
     uint32 depth = 4;
 
@@ -499,6 +511,18 @@ message UpdateEtfLpRequest {
     double ask_basis = 6;
 
     double bid_basis = 7;
+
+    // 매수 주문 수량
+    int64 bid_quantity = 8;
+
+    // 매도 주문 수량
+    int64 ask_quantity = 9;
+
+    // 매수 호가 조정값
+    double bid_adjustment = 10;
+
+    // 매도 호가 조정값
+    double ask_adjustment = 11;
   }
 }
 
