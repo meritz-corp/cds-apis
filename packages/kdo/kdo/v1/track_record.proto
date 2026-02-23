@@ -83,6 +83,14 @@ message TrackRecord {
   // Quote 가격의 선물 환산가
   optional double quote_price_as_hedge = 24;
 
+  // ETF→선물 감도 계수 (P&L 계산에 사용된 값, per-share 기준)
+  // sensitivity = hedge_conversion_ratio × futures_multiple / creation_unit
+  optional double sensitivity = 25;
+
+  // Hedge 경제적 가치 (선물승수 적용, KRW)
+  // hedge_filled_price × hedge_filled_quantity × futures_multiplier
+  optional double hedge_notional_amount = 26;
+
   // 손익 금액
   double pnl_amount = 14;
 
@@ -145,6 +153,9 @@ message TrackRecordSummary {
 
   // 총 Hedge 체결 금액
   double total_hedge_amount = 10;
+
+  // 총 Hedge 경제적 가치 (선물승수 적용, KRW)
+  double total_hedge_notional_amount = 11;
 }
 
 // ========== Request/Response Messages ==========

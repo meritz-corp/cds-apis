@@ -32,14 +32,16 @@ const TrackRecord$json = {
     {'1': 'hedge_filled_amount', '3': 12, '4': 1, '5': 1, '10': 'hedgeFilledAmount'},
     {'1': 'expected_hedge_price', '3': 13, '4': 1, '5': 1, '9': 2, '10': 'expectedHedgePrice', '17': true},
     {'1': 'quote_price_as_hedge', '3': 24, '4': 1, '5': 1, '9': 3, '10': 'quotePriceAsHedge', '17': true},
+    {'1': 'sensitivity', '3': 25, '4': 1, '5': 1, '9': 4, '10': 'sensitivity', '17': true},
+    {'1': 'hedge_notional_amount', '3': 26, '4': 1, '5': 1, '9': 5, '10': 'hedgeNotionalAmount', '17': true},
     {'1': 'pnl_amount', '3': 14, '4': 1, '5': 1, '10': 'pnlAmount'},
     {'1': 'pnl_bp', '3': 15, '4': 1, '5': 1, '10': 'pnlBp'},
-    {'1': 'slippage_bp', '3': 16, '4': 1, '5': 1, '9': 4, '10': 'slippageBp', '17': true},
+    {'1': 'slippage_bp', '3': 16, '4': 1, '5': 1, '9': 6, '10': 'slippageBp', '17': true},
     {'1': 'fund_code', '3': 17, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'date', '3': 18, '4': 1, '5': 13, '10': 'date'},
     {'1': 'market_type', '3': 19, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
     {'1': 'quote_exchange_time', '3': 20, '4': 1, '5': 4, '10': 'quoteExchangeTime'},
-    {'1': 'last_hedge_time', '3': 21, '4': 1, '5': 4, '9': 5, '10': 'lastHedgeTime', '17': true},
+    {'1': 'last_hedge_time', '3': 21, '4': 1, '5': 4, '9': 7, '10': 'lastHedgeTime', '17': true},
     {'1': 'created_at', '3': 22, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     {'1': 'updated_at', '3': 23, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
   ],
@@ -48,6 +50,8 @@ const TrackRecord$json = {
     {'1': '_hedge_filled_price'},
     {'1': '_expected_hedge_price'},
     {'1': '_quote_price_as_hedge'},
+    {'1': '_sensitivity'},
+    {'1': '_hedge_notional_amount'},
     {'1': '_slippage_bp'},
     {'1': '_last_hedge_time'},
   ],
@@ -66,17 +70,19 @@ final $typed_data.Uint8List trackRecordDescriptor = $convert.base64Decode(
     'ZF9xdWFudGl0eRgLIAEoA1ITaGVkZ2VGaWxsZWRRdWFudGl0eRIuChNoZWRnZV9maWxsZWRfYW'
     '1vdW50GAwgASgBUhFoZWRnZUZpbGxlZEFtb3VudBI1ChRleHBlY3RlZF9oZWRnZV9wcmljZRgN'
     'IAEoAUgCUhJleHBlY3RlZEhlZGdlUHJpY2WIAQESNAoUcXVvdGVfcHJpY2VfYXNfaGVkZ2UYGC'
-    'ABKAFIA1IRcXVvdGVQcmljZUFzSGVkZ2WIAQESHQoKcG5sX2Ftb3VudBgOIAEoAVIJcG5sQW1v'
-    'dW50EhUKBnBubF9icBgPIAEoAVIFcG5sQnASJAoLc2xpcHBhZ2VfYnAYECABKAFIBFIKc2xpcH'
-    'BhZ2VCcIgBARIbCglmdW5kX2NvZGUYESABKAlSCGZ1bmRDb2RlEhIKBGRhdGUYEiABKA1SBGRh'
-    'dGUSOgoLbWFya2V0X3R5cGUYEyABKA4yGS5rZG8udjEuY29tbW9uLk1hcmtldFR5cGVSCm1hcm'
-    'tldFR5cGUSLgoTcXVvdGVfZXhjaGFuZ2VfdGltZRgUIAEoBFIRcXVvdGVFeGNoYW5nZVRpbWUS'
-    'KwoPbGFzdF9oZWRnZV90aW1lGBUgASgESAVSDWxhc3RIZWRnZVRpbWWIAQESOQoKY3JlYXRlZF'
-    '9hdBgWIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI5Cgp1cGRh'
-    'dGVkX2F0GBcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJdXBkYXRlZEF0Qg8KDV'
-    '9oZWRnZV9zeW1ib2xCFQoTX2hlZGdlX2ZpbGxlZF9wcmljZUIXChVfZXhwZWN0ZWRfaGVkZ2Vf'
-    'cHJpY2VCFwoVX3F1b3RlX3ByaWNlX2FzX2hlZGdlQg4KDF9zbGlwcGFnZV9icEISChBfbGFzdF'
-    '9oZWRnZV90aW1l');
+    'ABKAFIA1IRcXVvdGVQcmljZUFzSGVkZ2WIAQESJQoLc2Vuc2l0aXZpdHkYGSABKAFIBFILc2Vu'
+    'c2l0aXZpdHmIAQESNwoVaGVkZ2Vfbm90aW9uYWxfYW1vdW50GBogASgBSAVSE2hlZGdlTm90aW'
+    '9uYWxBbW91bnSIAQESHQoKcG5sX2Ftb3VudBgOIAEoAVIJcG5sQW1vdW50EhUKBnBubF9icBgP'
+    'IAEoAVIFcG5sQnASJAoLc2xpcHBhZ2VfYnAYECABKAFIBlIKc2xpcHBhZ2VCcIgBARIbCglmdW'
+    '5kX2NvZGUYESABKAlSCGZ1bmRDb2RlEhIKBGRhdGUYEiABKA1SBGRhdGUSOgoLbWFya2V0X3R5'
+    'cGUYEyABKA4yGS5rZG8udjEuY29tbW9uLk1hcmtldFR5cGVSCm1hcmtldFR5cGUSLgoTcXVvdG'
+    'VfZXhjaGFuZ2VfdGltZRgUIAEoBFIRcXVvdGVFeGNoYW5nZVRpbWUSKwoPbGFzdF9oZWRnZV90'
+    'aW1lGBUgASgESAdSDWxhc3RIZWRnZVRpbWWIAQESOQoKY3JlYXRlZF9hdBgWIAEoCzIaLmdvb2'
+    'dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI5Cgp1cGRhdGVkX2F0GBcgASgLMhou'
+    'Z29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJdXBkYXRlZEF0Qg8KDV9oZWRnZV9zeW1ib2xCFQ'
+    'oTX2hlZGdlX2ZpbGxlZF9wcmljZUIXChVfZXhwZWN0ZWRfaGVkZ2VfcHJpY2VCFwoVX3F1b3Rl'
+    'X3ByaWNlX2FzX2hlZGdlQg4KDF9zZW5zaXRpdml0eUIYChZfaGVkZ2Vfbm90aW9uYWxfYW1vdW'
+    '50Qg4KDF9zbGlwcGFnZV9icEISChBfbGFzdF9oZWRnZV90aW1l');
 
 @$core.Deprecated('Use trackRecordSummaryDescriptor instead')
 const TrackRecordSummary$json = {
@@ -92,6 +98,7 @@ const TrackRecordSummary$json = {
     {'1': 'avg_slippage_bp', '3': 8, '4': 1, '5': 1, '9': 0, '10': 'avgSlippageBp', '17': true},
     {'1': 'total_quote_amount', '3': 9, '4': 1, '5': 1, '10': 'totalQuoteAmount'},
     {'1': 'total_hedge_amount', '3': 10, '4': 1, '5': 1, '10': 'totalHedgeAmount'},
+    {'1': 'total_hedge_notional_amount', '3': 11, '4': 1, '5': 1, '10': 'totalHedgeNotionalAmount'},
   ],
   '8': [
     {'1': '_avg_slippage_bp'},
@@ -106,8 +113,9 @@ final $typed_data.Uint8List trackRecordSummaryDescriptor = $convert.base64Decode
     '9icBgFIAEoAVIIbWluUG5sQnASGwoJd2luX2NvdW50GAYgASgDUgh3aW5Db3VudBIdCgpsb3Nz'
     'X2NvdW50GAcgASgDUglsb3NzQ291bnQSKwoPYXZnX3NsaXBwYWdlX2JwGAggASgBSABSDWF2Z1'
     'NsaXBwYWdlQnCIAQESLAoSdG90YWxfcXVvdGVfYW1vdW50GAkgASgBUhB0b3RhbFF1b3RlQW1v'
-    'dW50EiwKEnRvdGFsX2hlZGdlX2Ftb3VudBgKIAEoAVIQdG90YWxIZWRnZUFtb3VudEISChBfYX'
-    'ZnX3NsaXBwYWdlX2Jw');
+    'dW50EiwKEnRvdGFsX2hlZGdlX2Ftb3VudBgKIAEoAVIQdG90YWxIZWRnZUFtb3VudBI9Cht0b3'
+    'RhbF9oZWRnZV9ub3Rpb25hbF9hbW91bnQYCyABKAFSGHRvdGFsSGVkZ2VOb3Rpb25hbEFtb3Vu'
+    'dEISChBfYXZnX3NsaXBwYWdlX2Jw');
 
 @$core.Deprecated('Use listTrackRecordsRequestDescriptor instead')
 const ListTrackRecordsRequest$json = {

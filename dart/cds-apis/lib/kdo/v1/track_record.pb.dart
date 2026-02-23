@@ -47,6 +47,8 @@ class TrackRecord extends $pb.GeneratedMessage {
     $1.Timestamp? createdAt,
     $1.Timestamp? updatedAt,
     $core.double? quotePriceAsHedge,
+    $core.double? sensitivity,
+    $core.double? hedgeNotionalAmount,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -73,6 +75,8 @@ class TrackRecord extends $pb.GeneratedMessage {
     if (createdAt != null) result.createdAt = createdAt;
     if (updatedAt != null) result.updatedAt = updatedAt;
     if (quotePriceAsHedge != null) result.quotePriceAsHedge = quotePriceAsHedge;
+    if (sensitivity != null) result.sensitivity = sensitivity;
+    if (hedgeNotionalAmount != null) result.hedgeNotionalAmount = hedgeNotionalAmount;
     return result;
   }
 
@@ -106,6 +110,8 @@ class TrackRecord extends $pb.GeneratedMessage {
     ..aOM<$1.Timestamp>(22, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..aOM<$1.Timestamp>(23, _omitFieldNames ? '' : 'updatedAt', subBuilder: $1.Timestamp.create)
     ..a<$core.double>(24, _omitFieldNames ? '' : 'quotePriceAsHedge', $pb.PbFieldType.OD)
+    ..a<$core.double>(25, _omitFieldNames ? '' : 'sensitivity', $pb.PbFieldType.OD)
+    ..a<$core.double>(26, _omitFieldNames ? '' : 'hedgeNotionalAmount', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -369,6 +375,28 @@ class TrackRecord extends $pb.GeneratedMessage {
   $core.bool hasQuotePriceAsHedge() => $_has(23);
   @$pb.TagNumber(24)
   void clearQuotePriceAsHedge() => $_clearField(24);
+
+  /// ETF→선물 감도 계수 (P&L 계산에 사용된 값, per-share 기준)
+  /// sensitivity = hedge_conversion_ratio × futures_multiple / creation_unit
+  @$pb.TagNumber(25)
+  $core.double get sensitivity => $_getN(24);
+  @$pb.TagNumber(25)
+  set sensitivity($core.double value) => $_setDouble(24, value);
+  @$pb.TagNumber(25)
+  $core.bool hasSensitivity() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearSensitivity() => $_clearField(25);
+
+  /// Hedge 경제적 가치 (선물승수 적용, KRW)
+  /// hedge_filled_price × hedge_filled_quantity × futures_multiplier
+  @$pb.TagNumber(26)
+  $core.double get hedgeNotionalAmount => $_getN(25);
+  @$pb.TagNumber(26)
+  set hedgeNotionalAmount($core.double value) => $_setDouble(25, value);
+  @$pb.TagNumber(26)
+  $core.bool hasHedgeNotionalAmount() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearHedgeNotionalAmount() => $_clearField(26);
 }
 
 /// Track Record 요약 통계
@@ -384,6 +412,7 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
     $core.double? avgSlippageBp,
     $core.double? totalQuoteAmount,
     $core.double? totalHedgeAmount,
+    $core.double? totalHedgeNotionalAmount,
   }) {
     final result = create();
     if (totalCount != null) result.totalCount = totalCount;
@@ -396,6 +425,7 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
     if (avgSlippageBp != null) result.avgSlippageBp = avgSlippageBp;
     if (totalQuoteAmount != null) result.totalQuoteAmount = totalQuoteAmount;
     if (totalHedgeAmount != null) result.totalHedgeAmount = totalHedgeAmount;
+    if (totalHedgeNotionalAmount != null) result.totalHedgeNotionalAmount = totalHedgeNotionalAmount;
     return result;
   }
 
@@ -415,6 +445,7 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
     ..a<$core.double>(8, _omitFieldNames ? '' : 'avgSlippageBp', $pb.PbFieldType.OD)
     ..a<$core.double>(9, _omitFieldNames ? '' : 'totalQuoteAmount', $pb.PbFieldType.OD)
     ..a<$core.double>(10, _omitFieldNames ? '' : 'totalHedgeAmount', $pb.PbFieldType.OD)
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'totalHedgeNotionalAmount', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -534,6 +565,16 @@ class TrackRecordSummary extends $pb.GeneratedMessage {
   $core.bool hasTotalHedgeAmount() => $_has(9);
   @$pb.TagNumber(10)
   void clearTotalHedgeAmount() => $_clearField(10);
+
+  /// 총 Hedge 경제적 가치 (선물승수 적용, KRW)
+  @$pb.TagNumber(11)
+  $core.double get totalHedgeNotionalAmount => $_getN(10);
+  @$pb.TagNumber(11)
+  set totalHedgeNotionalAmount($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasTotalHedgeNotionalAmount() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearTotalHedgeNotionalAmount() => $_clearField(11);
 }
 
 /// ListTrackRecords 요청

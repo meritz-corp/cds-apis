@@ -320,6 +320,16 @@
           "format": "double",
           "title": "Quote 가격의 선물 환산가"
         },
+        "sensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF→선물 감도 계수 (P\u0026L 계산에 사용된 값, per-share 기준)\nsensitivity = hedge_conversion_ratio × futures_multiple / creation_unit"
+        },
+        "hedgeNotionalAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "Hedge 경제적 가치 (선물승수 적용, KRW)\nhedge_filled_price × hedge_filled_quantity × futures_multiplier"
+        },
         "pnlAmount": {
           "type": "number",
           "format": "double",
@@ -423,6 +433,11 @@
           "type": "number",
           "format": "double",
           "title": "총 Hedge 체결 금액"
+        },
+        "totalHedgeNotionalAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "총 Hedge 경제적 가치 (선물승수 적용, KRW)"
         }
       },
       "title": "Track Record 요약 통계"

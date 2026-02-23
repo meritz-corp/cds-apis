@@ -46,6 +46,14 @@ pub struct TrackRecord {
     /// Quote 가격의 선물 환산가
     #[prost(double, optional, tag="24")]
     pub quote_price_as_hedge: ::core::option::Option<f64>,
+    /// ETF→선물 감도 계수 (P&L 계산에 사용된 값, per-share 기준)
+    /// sensitivity = hedge_conversion_ratio × futures_multiple / creation_unit
+    #[prost(double, optional, tag="25")]
+    pub sensitivity: ::core::option::Option<f64>,
+    /// Hedge 경제적 가치 (선물승수 적용, KRW)
+    /// hedge_filled_price × hedge_filled_quantity × futures_multiplier
+    #[prost(double, optional, tag="26")]
+    pub hedge_notional_amount: ::core::option::Option<f64>,
     /// 손익 금액
     #[prost(double, tag="14")]
     pub pnl_amount: f64,
@@ -111,6 +119,9 @@ pub struct TrackRecordSummary {
     /// 총 Hedge 체결 금액
     #[prost(double, tag="10")]
     pub total_hedge_amount: f64,
+    /// 총 Hedge 경제적 가치 (선물승수 적용, KRW)
+    #[prost(double, tag="11")]
+    pub total_hedge_notional_amount: f64,
 }
 // ========== Request/Response Messages ==========
 

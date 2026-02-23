@@ -723,6 +723,12 @@ impl serde::Serialize for TrackRecord {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.track_record.TrackRecord", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -775,6 +781,12 @@ impl serde::Serialize for TrackRecord {
         }
         if let Some(v) = self.quote_price_as_hedge.as_ref() {
             struct_ser.serialize_field("quote_price_as_hedge", v)?;
+        }
+        if let Some(v) = self.sensitivity.as_ref() {
+            struct_ser.serialize_field("sensitivity", v)?;
+        }
+        if let Some(v) = self.hedge_notional_amount.as_ref() {
+            struct_ser.serialize_field("hedge_notional_amount", v)?;
         }
         if true {
             struct_ser.serialize_field("pnl_amount", &self.pnl_amount)?;
@@ -849,6 +861,9 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
             "expectedHedgePrice",
             "quote_price_as_hedge",
             "quotePriceAsHedge",
+            "sensitivity",
+            "hedge_notional_amount",
+            "hedgeNotionalAmount",
             "pnl_amount",
             "pnlAmount",
             "pnl_bp",
@@ -886,6 +901,8 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
             HedgeFilledAmount,
             ExpectedHedgePrice,
             QuotePriceAsHedge,
+            Sensitivity,
+            HedgeNotionalAmount,
             PnlAmount,
             PnlBp,
             SlippageBp,
@@ -932,6 +949,8 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                             "hedgeFilledAmount" | "hedge_filled_amount" => Ok(GeneratedField::HedgeFilledAmount),
                             "expectedHedgePrice" | "expected_hedge_price" => Ok(GeneratedField::ExpectedHedgePrice),
                             "quotePriceAsHedge" | "quote_price_as_hedge" => Ok(GeneratedField::QuotePriceAsHedge),
+                            "sensitivity" => Ok(GeneratedField::Sensitivity),
+                            "hedgeNotionalAmount" | "hedge_notional_amount" => Ok(GeneratedField::HedgeNotionalAmount),
                             "pnlAmount" | "pnl_amount" => Ok(GeneratedField::PnlAmount),
                             "pnlBp" | "pnl_bp" => Ok(GeneratedField::PnlBp),
                             "slippageBp" | "slippage_bp" => Ok(GeneratedField::SlippageBp),
@@ -975,6 +994,8 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                 let mut hedge_filled_amount__ = None;
                 let mut expected_hedge_price__ = None;
                 let mut quote_price_as_hedge__ = None;
+                let mut sensitivity__ = None;
+                let mut hedge_notional_amount__ = None;
                 let mut pnl_amount__ = None;
                 let mut pnl_bp__ = None;
                 let mut slippage_bp__ = None;
@@ -1093,6 +1114,22 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::Sensitivity => {
+                            if sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sensitivity"));
+                            }
+                            sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::HedgeNotionalAmount => {
+                            if hedge_notional_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeNotionalAmount"));
+                            }
+                            hedge_notional_amount__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::PnlAmount => {
                             if pnl_amount__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("pnlAmount"));
@@ -1185,6 +1222,8 @@ impl<'de> serde::Deserialize<'de> for TrackRecord {
                     hedge_filled_amount: hedge_filled_amount__.unwrap_or_default(),
                     expected_hedge_price: expected_hedge_price__,
                     quote_price_as_hedge: quote_price_as_hedge__,
+                    sensitivity: sensitivity__,
+                    hedge_notional_amount: hedge_notional_amount__,
                     pnl_amount: pnl_amount__.unwrap_or_default(),
                     pnl_bp: pnl_bp__.unwrap_or_default(),
                     slippage_bp: slippage_bp__,
@@ -1209,6 +1248,9 @@ impl serde::Serialize for TrackRecordSummary {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1276,6 +1318,9 @@ impl serde::Serialize for TrackRecordSummary {
         if true {
             struct_ser.serialize_field("total_hedge_amount", &self.total_hedge_amount)?;
         }
+        if true {
+            struct_ser.serialize_field("total_hedge_notional_amount", &self.total_hedge_notional_amount)?;
+        }
         struct_ser.end()
     }
 }
@@ -1306,6 +1351,8 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
             "totalQuoteAmount",
             "total_hedge_amount",
             "totalHedgeAmount",
+            "total_hedge_notional_amount",
+            "totalHedgeNotionalAmount",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1320,6 +1367,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
             AvgSlippageBp,
             TotalQuoteAmount,
             TotalHedgeAmount,
+            TotalHedgeNotionalAmount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1352,6 +1400,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                             "avgSlippageBp" | "avg_slippage_bp" => Ok(GeneratedField::AvgSlippageBp),
                             "totalQuoteAmount" | "total_quote_amount" => Ok(GeneratedField::TotalQuoteAmount),
                             "totalHedgeAmount" | "total_hedge_amount" => Ok(GeneratedField::TotalHedgeAmount),
+                            "totalHedgeNotionalAmount" | "total_hedge_notional_amount" => Ok(GeneratedField::TotalHedgeNotionalAmount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1381,6 +1430,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                 let mut avg_slippage_bp__ = None;
                 let mut total_quote_amount__ = None;
                 let mut total_hedge_amount__ = None;
+                let mut total_hedge_notional_amount__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::TotalCount => {
@@ -1463,6 +1513,14 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::TotalHedgeNotionalAmount => {
+                            if total_hedge_notional_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalHedgeNotionalAmount"));
+                            }
+                            total_hedge_notional_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1479,6 +1537,7 @@ impl<'de> serde::Deserialize<'de> for TrackRecordSummary {
                     avg_slippage_bp: avg_slippage_bp__,
                     total_quote_amount: total_quote_amount__.unwrap_or_default(),
                     total_hedge_amount: total_hedge_amount__.unwrap_or_default(),
+                    total_hedge_notional_amount: total_hedge_notional_amount__.unwrap_or_default(),
                 })
             }
         }
