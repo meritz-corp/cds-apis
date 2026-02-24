@@ -408,39 +408,31 @@ pub struct UpdateEtfLpRequest {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// 업데이트 대상
-    #[prost(oneof="update_etf_lp_request::Update", tags="4, 5, 6, 7, 8, 9, 10, 11")]
-    pub update: ::core::option::Option<update_etf_lp_request::Update>,
-}
-/// Nested message and enum types in `UpdateEtfLpRequest`.
-pub mod update_etf_lp_request {
-    /// 업데이트 대상
-    #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
-    pub enum Update {
-        /// 호가 깊이
-        #[prost(uint32, tag="4")]
-        Depth(u32),
-        /// 동적 offset 조정 설정
-        #[prost(message, tag="5")]
-        Offset(super::EtfLpOffset),
-        #[prost(double, tag="6")]
-        AskBasis(f64),
-        #[prost(double, tag="7")]
-        BidBasis(f64),
-        /// 매수 주문 수량
-        #[prost(int64, tag="8")]
-        BidQuantity(i64),
-        /// 매도 주문 수량
-        #[prost(int64, tag="9")]
-        AskQuantity(i64),
-        /// 매수 호가 조정값
-        #[prost(double, tag="10")]
-        BidAdjustment(f64),
-        /// 매도 호가 조정값
-        #[prost(double, tag="11")]
-        AskAdjustment(f64),
-    }
+    // 각 필드가 optional — 여러 필드를 동시에 설정 가능
+    // (tag 3은 예약, oneof wrapper와 충돌 방지)
+
+    /// 호가 깊이
+    #[prost(uint32, optional, tag="4")]
+    pub depth: ::core::option::Option<u32>,
+    /// 동적 offset 조정 설정
+    #[prost(message, optional, tag="5")]
+    pub offset: ::core::option::Option<EtfLpOffset>,
+    #[prost(double, optional, tag="6")]
+    pub ask_basis: ::core::option::Option<f64>,
+    #[prost(double, optional, tag="7")]
+    pub bid_basis: ::core::option::Option<f64>,
+    /// 매수 주문 수량
+    #[prost(int64, optional, tag="8")]
+    pub bid_quantity: ::core::option::Option<i64>,
+    /// 매도 주문 수량
+    #[prost(int64, optional, tag="9")]
+    pub ask_quantity: ::core::option::Option<i64>,
+    /// 매수 호가 조정값
+    #[prost(double, optional, tag="10")]
+    pub bid_adjustment: ::core::option::Option<f64>,
+    /// 매도 호가 조정값
+    #[prost(double, optional, tag="11")]
+    pub ask_adjustment: ::core::option::Option<f64>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

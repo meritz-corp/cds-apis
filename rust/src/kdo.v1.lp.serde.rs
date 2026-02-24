@@ -4248,7 +4248,28 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             len += 1;
         }
-        if self.update.is_some() {
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
@@ -4258,37 +4279,33 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
-        if let Some(v) = self.update.as_ref() {
-            match v {
-                update_etf_lp_request::Update::Depth(v) => {
-                    struct_ser.serialize_field("depth", v)?;
-                }
-                update_etf_lp_request::Update::Offset(v) => {
-                    struct_ser.serialize_field("offset", v)?;
-                }
-                update_etf_lp_request::Update::AskBasis(v) => {
-                    struct_ser.serialize_field("ask_basis", v)?;
-                }
-                update_etf_lp_request::Update::BidBasis(v) => {
-                    struct_ser.serialize_field("bid_basis", v)?;
-                }
-                update_etf_lp_request::Update::BidQuantity(v) => {
-                    #[allow(clippy::needless_borrow)]
-                    #[allow(clippy::needless_borrows_for_generic_args)]
-                    struct_ser.serialize_field("bid_quantity", ToString::to_string(&v).as_str())?;
-                }
-                update_etf_lp_request::Update::AskQuantity(v) => {
-                    #[allow(clippy::needless_borrow)]
-                    #[allow(clippy::needless_borrows_for_generic_args)]
-                    struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
-                }
-                update_etf_lp_request::Update::BidAdjustment(v) => {
-                    struct_ser.serialize_field("bid_adjustment", v)?;
-                }
-                update_etf_lp_request::Update::AskAdjustment(v) => {
-                    struct_ser.serialize_field("ask_adjustment", v)?;
-                }
-            }
+        if let Some(v) = self.depth.as_ref() {
+            struct_ser.serialize_field("depth", v)?;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
+        }
+        if let Some(v) = self.ask_basis.as_ref() {
+            struct_ser.serialize_field("ask_basis", v)?;
+        }
+        if let Some(v) = self.bid_basis.as_ref() {
+            struct_ser.serialize_field("bid_basis", v)?;
+        }
+        if let Some(v) = self.bid_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.ask_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.bid_adjustment.as_ref() {
+            struct_ser.serialize_field("bid_adjustment", v)?;
+        }
+        if let Some(v) = self.ask_adjustment.as_ref() {
+            struct_ser.serialize_field("ask_adjustment", v)?;
         }
         struct_ser.end()
     }
@@ -4384,7 +4401,14 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             {
                 let mut symbol__ = None;
                 let mut fund_code__ = None;
-                let mut update__ = None;
+                let mut depth__ = None;
+                let mut offset__ = None;
+                let mut ask_basis__ = None;
+                let mut bid_basis__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
+                let mut bid_adjustment__ = None;
+                let mut ask_adjustment__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -4400,53 +4424,66 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             fund_code__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Depth => {
-                            if update__.is_some() {
+                            if depth__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("depth"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::Depth(x.0));
+                            depth__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::Offset => {
-                            if update__.is_some() {
+                            if offset__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("offset"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<_>>()?.map(update_etf_lp_request::Update::Offset)
-;
+                            offset__ = map_.next_value()?;
                         }
                         GeneratedField::AskBasis => {
-                            if update__.is_some() {
+                            if ask_basis__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askBasis"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::AskBasis(x.0));
+                            ask_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::BidBasis => {
-                            if update__.is_some() {
+                            if bid_basis__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidBasis"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::BidBasis(x.0));
+                            bid_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::BidQuantity => {
-                            if update__.is_some() {
+                            if bid_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidQuantity"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::BidQuantity(x.0));
+                            bid_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::AskQuantity => {
-                            if update__.is_some() {
+                            if ask_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askQuantity"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::AskQuantity(x.0));
+                            ask_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::BidAdjustment => {
-                            if update__.is_some() {
+                            if bid_adjustment__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidAdjustment"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::BidAdjustment(x.0));
+                            bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::AskAdjustment => {
-                            if update__.is_some() {
+                            if ask_adjustment__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askAdjustment"));
                             }
-                            update__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| update_etf_lp_request::Update::AskAdjustment(x.0));
+                            ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -4456,7 +4493,14 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 Ok(UpdateEtfLpRequest {
                     symbol: symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    update: update__,
+                    depth: depth__,
+                    offset: offset__,
+                    ask_basis: ask_basis__,
+                    bid_basis: bid_basis__,
+                    bid_quantity: bid_quantity__,
+                    ask_quantity: ask_quantity__,
+                    bid_adjustment: bid_adjustment__,
+                    ask_adjustment: ask_adjustment__,
                 })
             }
         }

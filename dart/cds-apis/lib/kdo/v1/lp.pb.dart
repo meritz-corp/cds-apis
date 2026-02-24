@@ -1856,18 +1856,6 @@ class ListEtfLpStatusesResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
-enum UpdateEtfLpRequest_Update {
-  depth, 
-  offset, 
-  askBasis, 
-  bidBasis, 
-  bidQuantity, 
-  askQuantity, 
-  bidAdjustment, 
-  askAdjustment, 
-  notSet
-}
-
 /// UpdateEtfLp
 class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   factory UpdateEtfLpRequest({
@@ -1901,19 +1889,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   factory UpdateEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory UpdateEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static const $core.Map<$core.int, UpdateEtfLpRequest_Update> _UpdateEtfLpRequest_UpdateByTag = {
-    4 : UpdateEtfLpRequest_Update.depth,
-    5 : UpdateEtfLpRequest_Update.offset,
-    6 : UpdateEtfLpRequest_Update.askBasis,
-    7 : UpdateEtfLpRequest_Update.bidBasis,
-    8 : UpdateEtfLpRequest_Update.bidQuantity,
-    9 : UpdateEtfLpRequest_Update.askQuantity,
-    10 : UpdateEtfLpRequest_Update.bidAdjustment,
-    11 : UpdateEtfLpRequest_Update.askAdjustment,
-    0 : UpdateEtfLpRequest_Update.notSet
-  };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..oo(0, [4, 5, 6, 7, 8, 9, 10, 11])
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
@@ -1943,9 +1919,6 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateEtfLpRequest>(create);
   static UpdateEtfLpRequest? _defaultInstance;
-
-  UpdateEtfLpRequest_Update whichUpdate() => _UpdateEtfLpRequest_UpdateByTag[$_whichOneof(0)]!;
-  void clearUpdate() => $_clearField($_whichOneof(0));
 
   /// ETF 심볼
   @$pb.TagNumber(1)

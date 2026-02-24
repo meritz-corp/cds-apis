@@ -463,29 +463,39 @@ const UpdateEtfLpRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-    {'1': 'depth', '3': 4, '4': 1, '5': 13, '9': 0, '10': 'depth'},
-    {'1': 'offset', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 0, '10': 'offset'},
-    {'1': 'ask_basis', '3': 6, '4': 1, '5': 1, '9': 0, '10': 'askBasis'},
-    {'1': 'bid_basis', '3': 7, '4': 1, '5': 1, '9': 0, '10': 'bidBasis'},
-    {'1': 'bid_quantity', '3': 8, '4': 1, '5': 3, '9': 0, '10': 'bidQuantity'},
-    {'1': 'ask_quantity', '3': 9, '4': 1, '5': 3, '9': 0, '10': 'askQuantity'},
-    {'1': 'bid_adjustment', '3': 10, '4': 1, '5': 1, '9': 0, '10': 'bidAdjustment'},
-    {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 1, '9': 0, '10': 'askAdjustment'},
+    {'1': 'depth', '3': 4, '4': 1, '5': 13, '9': 0, '10': 'depth', '17': true},
+    {'1': 'offset', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 1, '10': 'offset', '17': true},
+    {'1': 'ask_basis', '3': 6, '4': 1, '5': 1, '9': 2, '10': 'askBasis', '17': true},
+    {'1': 'bid_basis', '3': 7, '4': 1, '5': 1, '9': 3, '10': 'bidBasis', '17': true},
+    {'1': 'bid_quantity', '3': 8, '4': 1, '5': 3, '9': 4, '10': 'bidQuantity', '17': true},
+    {'1': 'ask_quantity', '3': 9, '4': 1, '5': 3, '9': 5, '10': 'askQuantity', '17': true},
+    {'1': 'bid_adjustment', '3': 10, '4': 1, '5': 1, '9': 6, '10': 'bidAdjustment', '17': true},
+    {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 1, '9': 7, '10': 'askAdjustment', '17': true},
   ],
   '8': [
-    {'1': 'update'},
+    {'1': '_depth'},
+    {'1': '_offset'},
+    {'1': '_ask_basis'},
+    {'1': '_bid_basis'},
+    {'1': '_bid_quantity'},
+    {'1': '_ask_quantity'},
+    {'1': '_bid_adjustment'},
+    {'1': '_ask_adjustment'},
   ],
 };
 
 /// Descriptor for `UpdateEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateEtfLpRequestDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVFdGZMcFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSIQoJZn'
-    'VuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIWCgVkZXB0aBgEIAEoDUgAUgVkZXB0aBIw'
-    'CgZvZmZzZXQYBSABKAsyFi5rZG8udjEubHAuRXRmTHBPZmZzZXRIAFIGb2Zmc2V0Eh0KCWFza1'
-    '9iYXNpcxgGIAEoAUgAUghhc2tCYXNpcxIdCgliaWRfYmFzaXMYByABKAFIAFIIYmlkQmFzaXMS'
-    'IwoMYmlkX3F1YW50aXR5GAggASgDSABSC2JpZFF1YW50aXR5EiMKDGFza19xdWFudGl0eRgJIA'
-    'EoA0gAUgthc2tRdWFudGl0eRInCg5iaWRfYWRqdXN0bWVudBgKIAEoAUgAUg1iaWRBZGp1c3Rt'
-    'ZW50EicKDmFza19hZGp1c3RtZW50GAsgASgBSABSDWFza0FkanVzdG1lbnRCCAoGdXBkYXRl');
+    'VuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIZCgVkZXB0aBgEIAEoDUgAUgVkZXB0aIgB'
+    'ARIzCgZvZmZzZXQYBSABKAsyFi5rZG8udjEubHAuRXRmTHBPZmZzZXRIAVIGb2Zmc2V0iAEBEi'
+    'AKCWFza19iYXNpcxgGIAEoAUgCUghhc2tCYXNpc4gBARIgCgliaWRfYmFzaXMYByABKAFIA1II'
+    'YmlkQmFzaXOIAQESJgoMYmlkX3F1YW50aXR5GAggASgDSARSC2JpZFF1YW50aXR5iAEBEiYKDG'
+    'Fza19xdWFudGl0eRgJIAEoA0gFUgthc2tRdWFudGl0eYgBARIqCg5iaWRfYWRqdXN0bWVudBgK'
+    'IAEoAUgGUg1iaWRBZGp1c3RtZW50iAEBEioKDmFza19hZGp1c3RtZW50GAsgASgBSAdSDWFza0'
+    'FkanVzdG1lbnSIAQFCCAoGX2RlcHRoQgkKB19vZmZzZXRCDAoKX2Fza19iYXNpc0IMCgpfYmlk'
+    'X2Jhc2lzQg8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIRCg9fYmlkX2FkanVzdG'
+    '1lbnRCEQoPX2Fza19hZGp1c3RtZW50');
 
 @$core.Deprecated('Use getEtfLpStatusRequestDescriptor instead')
 const GetEtfLpStatusRequest$json = {
