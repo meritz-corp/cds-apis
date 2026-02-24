@@ -12,6 +12,18 @@ image:
 build:
 	docker compose run --rm grpc
 	$(MAKE) descriptor
+	$(MAKE) bump
+
+bump:
+	@cd rust && \
+	OLD_VERSION=$$(grep '^version' Cargo.toml | head -1 | sed 's/.*"\(.*\)"/\1/') && \
+	MAJOR=$$(echo $$OLD_VERSION | cut -d. -f1) && \
+	MINOR=$$(echo $$OLD_VERSION | cut -d. -f2) && \
+	PATCH=$$(echo $$OLD_VERSION | cut -d. -f3) && \
+	NEW_PATCH=$$((PATCH + 1)) && \
+	NEW_VERSION="$$MAJOR.$$MINOR.$$NEW_PATCH" && \
+	sed -i '' "s/^version = \"$$OLD_VERSION\"/version = \"$$NEW_VERSION\"/" Cargo.toml && \
+	echo "Bumped $$OLD_VERSION -> $$NEW_VERSION"
 
 descriptor:
 	docker compose run --rm buf-lint buf build -o rust/descriptor.bin

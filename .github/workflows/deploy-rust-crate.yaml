@@ -13,33 +13,21 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # 버전 범프 커밋은 스킵
-    if: "!contains(github.event.head_commit.message, 'chore: bump cargo version')"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
 
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
 
-      - name: Install cargo-edit
-        run: cargo install cargo-edit
-
-      - name: Auto bump patch version
-        working-directory: ./rust
-        run: cargo set-version --bump patch
-
-      - name: Get new version
+      - name: Get version
         id: version
         working-directory: ./rust
         run: |
-          NEW_VERSION=$(cargo metadata --format-version 1 | jq -r '.packages[] | select(.name == "ids-apis") | .version')
-          echo "version=${NEW_VERSION}" >> $GITHUB_OUTPUT
+          VERSION=$(grep '^version' Cargo.toml | head -1 | sed 's/.*"\(.*\)"/\1/')
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Build and test
         working-directory: ./rust
@@ -47,27 +35,16 @@ jobs:
           cargo build --release
           cargo test
 
-      - name: Commit and push version bump
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add rust/Cargo.toml rust/Cargo.lock
-          git commit -m "chore: bump cargo version to ${{ steps.version.outputs.version }}"
-          git tag v${{ steps.version.outputs.version }}
-          git push origin HEAD:main --tags
-
       - name: Publish to crates.io
         working-directory: ./rust
         run: cargo publish --token ${{ secrets.CARGO_TOKEN }}
 
-#      - name: Create GitHub Release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: v${{ steps.version.outputs.version }}
-#          release_name: v${{ steps.version.outputs.version }}
-#          body: Auto-generated patch release
+      - name: Tag and release
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag v${{ steps.version.outputs.version }}
+          git push origin --tags
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
