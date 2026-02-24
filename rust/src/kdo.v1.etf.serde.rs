@@ -558,8 +558,8 @@ impl serde::Serialize for Etf {
         if true {
             struct_ser.serialize_field("short_sellable", &self.short_sellable)?;
         }
-        if let Some(v) = self.underlying_asset.as_ref() {
-            struct_ser.serialize_field("underlying_asset", v)?;
+        if let Some(v) = self.tracking_asset.as_ref() {
+            struct_ser.serialize_field("tracking_asset", v)?;
         }
         if true {
             struct_ser.serialize_field("cash_creditable", &self.cash_creditable)?;
@@ -612,8 +612,8 @@ impl<'de> serde::Deserialize<'de> for Etf {
             "tradable",
             "short_sellable",
             "shortSellable",
-            "underlying_asset",
-            "underlyingAsset",
+            "tracking_asset",
+            "trackingAsset",
             "cash_creditable",
             "cashCreditable",
             "cash_creation_amount",
@@ -642,7 +642,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
             Leverage,
             Tradable,
             ShortSellable,
-            UnderlyingAsset,
+            TrackingAsset,
             CashCreditable,
             CashCreationAmount,
             Conversions,
@@ -686,7 +686,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "leverage" => Ok(GeneratedField::Leverage),
                             "tradable" => Ok(GeneratedField::Tradable),
                             "shortSellable" | "short_sellable" => Ok(GeneratedField::ShortSellable),
-                            "underlyingAsset" | "underlying_asset" => Ok(GeneratedField::UnderlyingAsset),
+                            "trackingAsset" | "tracking_asset" => Ok(GeneratedField::TrackingAsset),
                             "cashCreditable" | "cash_creditable" => Ok(GeneratedField::CashCreditable),
                             "cashCreationAmount" | "cash_creation_amount" => Ok(GeneratedField::CashCreationAmount),
                             "conversions" => Ok(GeneratedField::Conversions),
@@ -727,7 +727,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                 let mut leverage__ = None;
                 let mut tradable__ = None;
                 let mut short_sellable__ = None;
-                let mut underlying_asset__ = None;
+                let mut tracking_asset__ = None;
                 let mut cash_creditable__ = None;
                 let mut cash_creation_amount__ = None;
                 let mut conversions__ = None;
@@ -848,11 +848,11 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             }
                             short_sellable__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::UnderlyingAsset => {
-                            if underlying_asset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("underlyingAsset"));
+                        GeneratedField::TrackingAsset => {
+                            if tracking_asset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trackingAsset"));
                             }
-                            underlying_asset__ = map_.next_value()?;
+                            tracking_asset__ = map_.next_value()?;
                         }
                         GeneratedField::CashCreditable => {
                             if cash_creditable__.is_some() {
@@ -905,7 +905,7 @@ impl<'de> serde::Deserialize<'de> for Etf {
                     leverage: leverage__.unwrap_or_default(),
                     tradable: tradable__.unwrap_or_default(),
                     short_sellable: short_sellable__.unwrap_or_default(),
-                    underlying_asset: underlying_asset__,
+                    tracking_asset: tracking_asset__,
                     cash_creditable: cash_creditable__.unwrap_or_default(),
                     cash_creation_amount: cash_creation_amount__.unwrap_or_default(),
                     conversions: conversions__.unwrap_or_default(),

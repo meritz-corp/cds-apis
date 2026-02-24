@@ -41,7 +41,7 @@ class Etf extends $pb.GeneratedMessage {
     $core.double? leverage,
     $core.bool? tradable,
     $core.bool? shortSellable,
-    UnderlyingAsset? underlyingAsset,
+    UnderlyingAsset? trackingAsset,
     $core.bool? cashCreditable,
     $fixnum.Int64? cashCreationAmount,
     $core.Iterable<$core.MapEntry<$core.String, Conversion>>? conversions,
@@ -65,7 +65,7 @@ class Etf extends $pb.GeneratedMessage {
     if (leverage != null) result.leverage = leverage;
     if (tradable != null) result.tradable = tradable;
     if (shortSellable != null) result.shortSellable = shortSellable;
-    if (underlyingAsset != null) result.underlyingAsset = underlyingAsset;
+    if (trackingAsset != null) result.trackingAsset = trackingAsset;
     if (cashCreditable != null) result.cashCreditable = cashCreditable;
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
     if (conversions != null) result.conversions.addEntries(conversions);
@@ -96,7 +96,7 @@ class Etf extends $pb.GeneratedMessage {
     ..a<$core.double>(15, _omitFieldNames ? '' : 'leverage', $pb.PbFieldType.OF)
     ..aOB(16, _omitFieldNames ? '' : 'tradable')
     ..aOB(17, _omitFieldNames ? '' : 'shortSellable')
-    ..aOM<UnderlyingAsset>(18, _omitFieldNames ? '' : 'underlyingAsset', subBuilder: UnderlyingAsset.create)
+    ..aOM<UnderlyingAsset>(18, _omitFieldNames ? '' : 'trackingAsset', subBuilder: UnderlyingAsset.create)
     ..aOB(23, _omitFieldNames ? '' : 'cashCreditable')
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
     ..m<$core.String, Conversion>(25, _omitFieldNames ? '' : 'conversions', entryClassName: 'Etf.ConversionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: Conversion.create, valueDefaultOrMaker: Conversion.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
@@ -280,15 +280,15 @@ class Etf extends $pb.GeneratedMessage {
 
   /// 기초자산 정보
   @$pb.TagNumber(18)
-  UnderlyingAsset get underlyingAsset => $_getN(17);
+  UnderlyingAsset get trackingAsset => $_getN(17);
   @$pb.TagNumber(18)
-  set underlyingAsset(UnderlyingAsset value) => $_setField(18, value);
+  set trackingAsset(UnderlyingAsset value) => $_setField(18, value);
   @$pb.TagNumber(18)
-  $core.bool hasUnderlyingAsset() => $_has(17);
+  $core.bool hasTrackingAsset() => $_has(17);
   @$pb.TagNumber(18)
-  void clearUnderlyingAsset() => $_clearField(18);
+  void clearTrackingAsset() => $_clearField(18);
   @$pb.TagNumber(18)
-  UnderlyingAsset ensureUnderlyingAsset() => $_ensure(17);
+  UnderlyingAsset ensureTrackingAsset() => $_ensure(17);
 
   @$pb.TagNumber(23)
   $core.bool get cashCreditable => $_getBF(18);

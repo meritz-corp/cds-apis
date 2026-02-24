@@ -356,7 +356,7 @@
         "shortSellable": {
           "type": "boolean"
         },
-        "underlyingAsset": {
+        "trackingAsset": {
           "$ref": "#/definitions/etfUnderlyingAsset",
           "title": "기초자산 정보"
         },

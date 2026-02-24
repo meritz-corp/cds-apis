@@ -101,7 +101,7 @@ message Etf {
     bool short_sellable = 17;
 
     // 기초자산 정보
-    UnderlyingAsset underlying_asset = 18;
+    UnderlyingAsset tracking_asset = 18;
 
     bool cash_creditable = 23;
 

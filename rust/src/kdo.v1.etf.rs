@@ -49,7 +49,7 @@ pub struct Etf {
     pub short_sellable: bool,
     /// 기초자산 정보
     #[prost(message, optional, tag="18")]
-    pub underlying_asset: ::core::option::Option<UnderlyingAsset>,
+    pub tracking_asset: ::core::option::Option<UnderlyingAsset>,
     #[prost(bool, tag="23")]
     pub cash_creditable: bool,
     #[prost(int64, tag="24")]
