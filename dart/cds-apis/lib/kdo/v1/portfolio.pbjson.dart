@@ -245,6 +245,178 @@ final $typed_data.Uint8List fundSummaryDescriptor = $convert.base64Decode(
     'oOaGVkZ2VfZ3JvdXBfaWQYAyABKAVSDGhlZGdlR3JvdXBJZBIoChBoZWRnZV9ncm91cF9uYW1l'
     'GAQgASgJUg5oZWRnZUdyb3VwTmFtZQ==');
 
+@$core.Deprecated('Use exposureSnapshotDescriptor instead')
+const ExposureSnapshot$json = {
+  '1': 'ExposureSnapshot',
+  '2': [
+    {'1': 'snapshot_id', '3': 1, '4': 1, '5': 9, '10': 'snapshotId'},
+    {'1': 'portfolio_id', '3': 2, '4': 1, '5': 5, '10': 'portfolioId'},
+    {'1': 'name', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'name', '17': true},
+    {'1': 'positions', '3': 4, '4': 3, '5': 11, '6': '.kdo.v1.portfolio.SnapshotSymbolPosition', '10': 'positions'},
+    {'1': 'fund_positions', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.portfolio.SnapshotFundSymbolPosition', '10': 'fundPositions'},
+    {'1': 'created_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+  ],
+  '8': [
+    {'1': '_name'},
+  ],
+};
+
+/// Descriptor for `ExposureSnapshot`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List exposureSnapshotDescriptor = $convert.base64Decode(
+    'ChBFeHBvc3VyZVNuYXBzaG90Eh8KC3NuYXBzaG90X2lkGAEgASgJUgpzbmFwc2hvdElkEiEKDH'
+    'BvcnRmb2xpb19pZBgCIAEoBVILcG9ydGZvbGlvSWQSFwoEbmFtZRgDIAEoCUgAUgRuYW1liAEB'
+    'EkYKCXBvc2l0aW9ucxgEIAMoCzIoLmtkby52MS5wb3J0Zm9saW8uU25hcHNob3RTeW1ib2xQb3'
+    'NpdGlvblIJcG9zaXRpb25zElMKDmZ1bmRfcG9zaXRpb25zGAUgAygLMiwua2RvLnYxLnBvcnRm'
+    'b2xpby5TbmFwc2hvdEZ1bmRTeW1ib2xQb3NpdGlvblINZnVuZFBvc2l0aW9ucxI5CgpjcmVhdG'
+    'VkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJY3JlYXRlZEF0QgcKBV9u'
+    'YW1l');
+
+@$core.Deprecated('Use snapshotSymbolPositionDescriptor instead')
+const SnapshotSymbolPosition$json = {
+  '1': 'SnapshotSymbolPosition',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'bid_quantity', '3': 2, '4': 1, '5': 3, '10': 'bidQuantity'},
+    {'1': 'ask_quantity', '3': 3, '4': 1, '5': 3, '10': 'askQuantity'},
+    {'1': 'net_quantity', '3': 4, '4': 1, '5': 3, '10': 'netQuantity'},
+    {'1': 'bid_average_cost', '3': 5, '4': 1, '5': 1, '10': 'bidAverageCost'},
+    {'1': 'ask_average_cost', '3': 6, '4': 1, '5': 1, '10': 'askAverageCost'},
+  ],
+};
+
+/// Descriptor for `SnapshotSymbolPosition`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List snapshotSymbolPositionDescriptor = $convert.base64Decode(
+    'ChZTbmFwc2hvdFN5bWJvbFBvc2l0aW9uEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEiEKDGJpZF'
+    '9xdWFudGl0eRgCIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GAMgASgDUgthc2tR'
+    'dWFudGl0eRIhCgxuZXRfcXVhbnRpdHkYBCABKANSC25ldFF1YW50aXR5EigKEGJpZF9hdmVyYW'
+    'dlX2Nvc3QYBSABKAFSDmJpZEF2ZXJhZ2VDb3N0EigKEGFza19hdmVyYWdlX2Nvc3QYBiABKAFS'
+    'DmFza0F2ZXJhZ2VDb3N0');
+
+@$core.Deprecated('Use snapshotFundSymbolPositionDescriptor instead')
+const SnapshotFundSymbolPosition$json = {
+  '1': 'SnapshotFundSymbolPosition',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'bid_quantity', '3': 3, '4': 1, '5': 3, '10': 'bidQuantity'},
+    {'1': 'ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'askQuantity'},
+    {'1': 'net_quantity', '3': 5, '4': 1, '5': 3, '10': 'netQuantity'},
+    {'1': 'bid_average_cost', '3': 6, '4': 1, '5': 1, '10': 'bidAverageCost'},
+    {'1': 'ask_average_cost', '3': 7, '4': 1, '5': 1, '10': 'askAverageCost'},
+  ],
+};
+
+/// Descriptor for `SnapshotFundSymbolPosition`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List snapshotFundSymbolPositionDescriptor = $convert.base64Decode(
+    'ChpTbmFwc2hvdEZ1bmRTeW1ib2xQb3NpdGlvbhIbCglmdW5kX2NvZGUYASABKAlSCGZ1bmRDb2'
+    'RlEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEiEKDGJpZF9xdWFudGl0eRgDIAEoA1ILYmlkUXVh'
+    'bnRpdHkSIQoMYXNrX3F1YW50aXR5GAQgASgDUgthc2tRdWFudGl0eRIhCgxuZXRfcXVhbnRpdH'
+    'kYBSABKANSC25ldFF1YW50aXR5EigKEGJpZF9hdmVyYWdlX2Nvc3QYBiABKAFSDmJpZEF2ZXJh'
+    'Z2VDb3N0EigKEGFza19hdmVyYWdlX2Nvc3QYByABKAFSDmFza0F2ZXJhZ2VDb3N0');
+
+@$core.Deprecated('Use positionChangeDescriptor instead')
+const PositionChange$json = {
+  '1': 'PositionChange',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'snapshot_bid_quantity', '3': 2, '4': 1, '5': 3, '10': 'snapshotBidQuantity'},
+    {'1': 'snapshot_ask_quantity', '3': 3, '4': 1, '5': 3, '10': 'snapshotAskQuantity'},
+    {'1': 'snapshot_net_quantity', '3': 4, '4': 1, '5': 3, '10': 'snapshotNetQuantity'},
+    {'1': 'snapshot_bid_average_cost', '3': 5, '4': 1, '5': 1, '10': 'snapshotBidAverageCost'},
+    {'1': 'snapshot_ask_average_cost', '3': 6, '4': 1, '5': 1, '10': 'snapshotAskAverageCost'},
+    {'1': 'current_bid_quantity', '3': 7, '4': 1, '5': 3, '10': 'currentBidQuantity'},
+    {'1': 'current_ask_quantity', '3': 8, '4': 1, '5': 3, '10': 'currentAskQuantity'},
+    {'1': 'current_net_quantity', '3': 9, '4': 1, '5': 3, '10': 'currentNetQuantity'},
+    {'1': 'current_bid_average_cost', '3': 10, '4': 1, '5': 1, '10': 'currentBidAverageCost'},
+    {'1': 'current_ask_average_cost', '3': 11, '4': 1, '5': 1, '10': 'currentAskAverageCost'},
+    {'1': 'bid_quantity_change', '3': 12, '4': 1, '5': 3, '10': 'bidQuantityChange'},
+    {'1': 'ask_quantity_change', '3': 13, '4': 1, '5': 3, '10': 'askQuantityChange'},
+    {'1': 'net_quantity_change', '3': 14, '4': 1, '5': 3, '10': 'netQuantityChange'},
+    {'1': 'bid_average_cost_change', '3': 15, '4': 1, '5': 1, '10': 'bidAverageCostChange'},
+    {'1': 'ask_average_cost_change', '3': 16, '4': 1, '5': 1, '10': 'askAverageCostChange'},
+  ],
+};
+
+/// Descriptor for `PositionChange`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List positionChangeDescriptor = $convert.base64Decode(
+    'Cg5Qb3NpdGlvbkNoYW5nZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIyChVzbmFwc2hvdF9iaW'
+    'RfcXVhbnRpdHkYAiABKANSE3NuYXBzaG90QmlkUXVhbnRpdHkSMgoVc25hcHNob3RfYXNrX3F1'
+    'YW50aXR5GAMgASgDUhNzbmFwc2hvdEFza1F1YW50aXR5EjIKFXNuYXBzaG90X25ldF9xdWFudG'
+    'l0eRgEIAEoA1ITc25hcHNob3ROZXRRdWFudGl0eRI5ChlzbmFwc2hvdF9iaWRfYXZlcmFnZV9j'
+    'b3N0GAUgASgBUhZzbmFwc2hvdEJpZEF2ZXJhZ2VDb3N0EjkKGXNuYXBzaG90X2Fza19hdmVyYW'
+    'dlX2Nvc3QYBiABKAFSFnNuYXBzaG90QXNrQXZlcmFnZUNvc3QSMAoUY3VycmVudF9iaWRfcXVh'
+    'bnRpdHkYByABKANSEmN1cnJlbnRCaWRRdWFudGl0eRIwChRjdXJyZW50X2Fza19xdWFudGl0eR'
+    'gIIAEoA1ISY3VycmVudEFza1F1YW50aXR5EjAKFGN1cnJlbnRfbmV0X3F1YW50aXR5GAkgASgD'
+    'UhJjdXJyZW50TmV0UXVhbnRpdHkSNwoYY3VycmVudF9iaWRfYXZlcmFnZV9jb3N0GAogASgBUh'
+    'VjdXJyZW50QmlkQXZlcmFnZUNvc3QSNwoYY3VycmVudF9hc2tfYXZlcmFnZV9jb3N0GAsgASgB'
+    'UhVjdXJyZW50QXNrQXZlcmFnZUNvc3QSLgoTYmlkX3F1YW50aXR5X2NoYW5nZRgMIAEoA1IRYm'
+    'lkUXVhbnRpdHlDaGFuZ2USLgoTYXNrX3F1YW50aXR5X2NoYW5nZRgNIAEoA1IRYXNrUXVhbnRp'
+    'dHlDaGFuZ2USLgoTbmV0X3F1YW50aXR5X2NoYW5nZRgOIAEoA1IRbmV0UXVhbnRpdHlDaGFuZ2'
+    'USNQoXYmlkX2F2ZXJhZ2VfY29zdF9jaGFuZ2UYDyABKAFSFGJpZEF2ZXJhZ2VDb3N0Q2hhbmdl'
+    'EjUKF2Fza19hdmVyYWdlX2Nvc3RfY2hhbmdlGBAgASgBUhRhc2tBdmVyYWdlQ29zdENoYW5nZQ'
+    '==');
+
+@$core.Deprecated('Use fundPositionChangeDescriptor instead')
+const FundPositionChange$json = {
+  '1': 'FundPositionChange',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'snapshot_bid_quantity', '3': 3, '4': 1, '5': 3, '10': 'snapshotBidQuantity'},
+    {'1': 'snapshot_ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'snapshotAskQuantity'},
+    {'1': 'snapshot_net_quantity', '3': 5, '4': 1, '5': 3, '10': 'snapshotNetQuantity'},
+    {'1': 'snapshot_bid_average_cost', '3': 6, '4': 1, '5': 1, '10': 'snapshotBidAverageCost'},
+    {'1': 'snapshot_ask_average_cost', '3': 7, '4': 1, '5': 1, '10': 'snapshotAskAverageCost'},
+    {'1': 'current_bid_quantity', '3': 8, '4': 1, '5': 3, '10': 'currentBidQuantity'},
+    {'1': 'current_ask_quantity', '3': 9, '4': 1, '5': 3, '10': 'currentAskQuantity'},
+    {'1': 'current_net_quantity', '3': 10, '4': 1, '5': 3, '10': 'currentNetQuantity'},
+    {'1': 'current_bid_average_cost', '3': 11, '4': 1, '5': 1, '10': 'currentBidAverageCost'},
+    {'1': 'current_ask_average_cost', '3': 12, '4': 1, '5': 1, '10': 'currentAskAverageCost'},
+    {'1': 'bid_quantity_change', '3': 13, '4': 1, '5': 3, '10': 'bidQuantityChange'},
+    {'1': 'ask_quantity_change', '3': 14, '4': 1, '5': 3, '10': 'askQuantityChange'},
+    {'1': 'net_quantity_change', '3': 15, '4': 1, '5': 3, '10': 'netQuantityChange'},
+    {'1': 'bid_average_cost_change', '3': 16, '4': 1, '5': 1, '10': 'bidAverageCostChange'},
+    {'1': 'ask_average_cost_change', '3': 17, '4': 1, '5': 1, '10': 'askAverageCostChange'},
+  ],
+};
+
+/// Descriptor for `FundPositionChange`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fundPositionChangeDescriptor = $convert.base64Decode(
+    'ChJGdW5kUG9zaXRpb25DaGFuZ2USGwoJZnVuZF9jb2RlGAEgASgJUghmdW5kQ29kZRIWCgZzeW'
+    '1ib2wYAiABKAlSBnN5bWJvbBIyChVzbmFwc2hvdF9iaWRfcXVhbnRpdHkYAyABKANSE3NuYXBz'
+    'aG90QmlkUXVhbnRpdHkSMgoVc25hcHNob3RfYXNrX3F1YW50aXR5GAQgASgDUhNzbmFwc2hvdE'
+    'Fza1F1YW50aXR5EjIKFXNuYXBzaG90X25ldF9xdWFudGl0eRgFIAEoA1ITc25hcHNob3ROZXRR'
+    'dWFudGl0eRI5ChlzbmFwc2hvdF9iaWRfYXZlcmFnZV9jb3N0GAYgASgBUhZzbmFwc2hvdEJpZE'
+    'F2ZXJhZ2VDb3N0EjkKGXNuYXBzaG90X2Fza19hdmVyYWdlX2Nvc3QYByABKAFSFnNuYXBzaG90'
+    'QXNrQXZlcmFnZUNvc3QSMAoUY3VycmVudF9iaWRfcXVhbnRpdHkYCCABKANSEmN1cnJlbnRCaW'
+    'RRdWFudGl0eRIwChRjdXJyZW50X2Fza19xdWFudGl0eRgJIAEoA1ISY3VycmVudEFza1F1YW50'
+    'aXR5EjAKFGN1cnJlbnRfbmV0X3F1YW50aXR5GAogASgDUhJjdXJyZW50TmV0UXVhbnRpdHkSNw'
+    'oYY3VycmVudF9iaWRfYXZlcmFnZV9jb3N0GAsgASgBUhVjdXJyZW50QmlkQXZlcmFnZUNvc3QS'
+    'NwoYY3VycmVudF9hc2tfYXZlcmFnZV9jb3N0GAwgASgBUhVjdXJyZW50QXNrQXZlcmFnZUNvc3'
+    'QSLgoTYmlkX3F1YW50aXR5X2NoYW5nZRgNIAEoA1IRYmlkUXVhbnRpdHlDaGFuZ2USLgoTYXNr'
+    'X3F1YW50aXR5X2NoYW5nZRgOIAEoA1IRYXNrUXVhbnRpdHlDaGFuZ2USLgoTbmV0X3F1YW50aX'
+    'R5X2NoYW5nZRgPIAEoA1IRbmV0UXVhbnRpdHlDaGFuZ2USNQoXYmlkX2F2ZXJhZ2VfY29zdF9j'
+    'aGFuZ2UYECABKAFSFGJpZEF2ZXJhZ2VDb3N0Q2hhbmdlEjUKF2Fza19hdmVyYWdlX2Nvc3RfY2'
+    'hhbmdlGBEgASgBUhRhc2tBdmVyYWdlQ29zdENoYW5nZQ==');
+
+@$core.Deprecated('Use exposureChangesDescriptor instead')
+const ExposureChanges$json = {
+  '1': 'ExposureChanges',
+  '2': [
+    {'1': 'snapshot', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.portfolio.ExposureSnapshot', '10': 'snapshot'},
+    {'1': 'position_changes', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.portfolio.PositionChange', '10': 'positionChanges'},
+    {'1': 'fund_position_changes', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.portfolio.FundPositionChange', '10': 'fundPositionChanges'},
+  ],
+};
+
+/// Descriptor for `ExposureChanges`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List exposureChangesDescriptor = $convert.base64Decode(
+    'Cg9FeHBvc3VyZUNoYW5nZXMSPgoIc25hcHNob3QYASABKAsyIi5rZG8udjEucG9ydGZvbGlvLk'
+    'V4cG9zdXJlU25hcHNob3RSCHNuYXBzaG90EksKEHBvc2l0aW9uX2NoYW5nZXMYAiADKAsyIC5r'
+    'ZG8udjEucG9ydGZvbGlvLlBvc2l0aW9uQ2hhbmdlUg9wb3NpdGlvbkNoYW5nZXMSWAoVZnVuZF'
+    '9wb3NpdGlvbl9jaGFuZ2VzGAMgAygLMiQua2RvLnYxLnBvcnRmb2xpby5GdW5kUG9zaXRpb25D'
+    'aGFuZ2VSE2Z1bmRQb3NpdGlvbkNoYW5nZXM=');
+
 @$core.Deprecated('Use getPortfolioRequestDescriptor instead')
 const GetPortfolioRequest$json = {
   '1': 'GetPortfolioRequest',
@@ -431,4 +603,95 @@ final $typed_data.Uint8List listPortfolioFundsResponseDescriptor = $convert.base
     'ChpMaXN0UG9ydGZvbGlvRnVuZHNSZXNwb25zZRIzCgVmdW5kcxgBIAMoCzIdLmtkby52MS5wb3'
     'J0Zm9saW8uRnVuZFN1bW1hcnlSBWZ1bmRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4'
     'dFBhZ2VUb2tlbg==');
+
+@$core.Deprecated('Use createExposureSnapshotRequestDescriptor instead')
+const CreateExposureSnapshotRequest$json = {
+  '1': 'CreateExposureSnapshotRequest',
+  '2': [
+    {'1': 'parent', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'parent'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'name', '17': true},
+  ],
+  '8': [
+    {'1': '_name'},
+  ],
+};
+
+/// Descriptor for `CreateExposureSnapshotRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createExposureSnapshotRequestDescriptor = $convert.base64Decode(
+    'Ch1DcmVhdGVFeHBvc3VyZVNuYXBzaG90UmVxdWVzdBI6CgZwYXJlbnQYASABKAlCIuJBAQL6QR'
+    'sKGWtkby5jZHNhcGlzLnh5ei9Qb3J0Zm9saW9SBnBhcmVudBIXCgRuYW1lGAIgASgJSABSBG5h'
+    'bWWIAQFCBwoFX25hbWU=');
+
+@$core.Deprecated('Use getExposureSnapshotRequestDescriptor instead')
+const GetExposureSnapshotRequest$json = {
+  '1': 'GetExposureSnapshotRequest',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `GetExposureSnapshotRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getExposureSnapshotRequestDescriptor = $convert.base64Decode(
+    'ChpHZXRFeHBvc3VyZVNuYXBzaG90UmVxdWVzdBIYCgRuYW1lGAEgASgJQgTiQQECUgRuYW1l');
+
+@$core.Deprecated('Use listExposureSnapshotsRequestDescriptor instead')
+const ListExposureSnapshotsRequest$json = {
+  '1': 'ListExposureSnapshotsRequest',
+  '2': [
+    {'1': 'parent', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'parent'},
+    {'1': 'page_size', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'pageSize', '17': true},
+    {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
+  ],
+  '8': [
+    {'1': '_page_size'},
+    {'1': '_page_token'},
+  ],
+};
+
+/// Descriptor for `ListExposureSnapshotsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listExposureSnapshotsRequestDescriptor = $convert.base64Decode(
+    'ChxMaXN0RXhwb3N1cmVTbmFwc2hvdHNSZXF1ZXN0EjoKBnBhcmVudBgBIAEoCUIi4kEBAvpBGw'
+    'oZa2RvLmNkc2FwaXMueHl6L1BvcnRmb2xpb1IGcGFyZW50EiAKCXBhZ2Vfc2l6ZRgCIAEoBUgA'
+    'UghwYWdlU2l6ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBAUIMCgpfcG'
+    'FnZV9zaXplQg0KC19wYWdlX3Rva2Vu');
+
+@$core.Deprecated('Use listExposureSnapshotsResponseDescriptor instead')
+const ListExposureSnapshotsResponse$json = {
+  '1': 'ListExposureSnapshotsResponse',
+  '2': [
+    {'1': 'snapshots', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.portfolio.ExposureSnapshot', '10': 'snapshots'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+  ],
+};
+
+/// Descriptor for `ListExposureSnapshotsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listExposureSnapshotsResponseDescriptor = $convert.base64Decode(
+    'Ch1MaXN0RXhwb3N1cmVTbmFwc2hvdHNSZXNwb25zZRJACglzbmFwc2hvdHMYASADKAsyIi5rZG'
+    '8udjEucG9ydGZvbGlvLkV4cG9zdXJlU25hcHNob3RSCXNuYXBzaG90cxImCg9uZXh0X3BhZ2Vf'
+    'dG9rZW4YAiABKAlSDW5leHRQYWdlVG9rZW4=');
+
+@$core.Deprecated('Use getExposureChangesRequestDescriptor instead')
+const GetExposureChangesRequest$json = {
+  '1': 'GetExposureChangesRequest',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `GetExposureChangesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getExposureChangesRequestDescriptor = $convert.base64Decode(
+    'ChlHZXRFeHBvc3VyZUNoYW5nZXNSZXF1ZXN0EhgKBG5hbWUYASABKAlCBOJBAQJSBG5hbWU=');
+
+@$core.Deprecated('Use deleteExposureSnapshotRequestDescriptor instead')
+const DeleteExposureSnapshotRequest$json = {
+  '1': 'DeleteExposureSnapshotRequest',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `DeleteExposureSnapshotRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteExposureSnapshotRequestDescriptor = $convert.base64Decode(
+    'Ch1EZWxldGVFeHBvc3VyZVNuYXBzaG90UmVxdWVzdBIYCgRuYW1lGAEgASgJQgTiQQECUgRuYW'
+    '1l');
 

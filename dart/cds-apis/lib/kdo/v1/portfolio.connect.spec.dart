@@ -5,6 +5,7 @@
 
 import "package:connectrpc/connect.dart" as connect;
 import "portfolio.pb.dart" as kdov1portfolio;
+import "../../google/protobuf/empty.pb.dart" as googleprotobufempty;
 
 /// PortfolioService는 포트폴리오 관련 서비스를 제공합니다.
 /// Portfolio는 P&L(손익) 집계 단위입니다.
@@ -85,5 +86,45 @@ abstract final class PortfolioService {
     connect.StreamType.unary,
     kdov1portfolio.ListPortfolioFundsRequest.new,
     kdov1portfolio.ListPortfolioFundsResponse.new,
+  );
+
+  /// Exposure 스냅샷 생성 (현재 포지션 상태를 저장)
+  static const createExposureSnapshot = connect.Spec(
+    '/$name/CreateExposureSnapshot',
+    connect.StreamType.unary,
+    kdov1portfolio.CreateExposureSnapshotRequest.new,
+    kdov1portfolio.ExposureSnapshot.new,
+  );
+
+  /// Exposure 스냅샷 단일 조회
+  static const getExposureSnapshot = connect.Spec(
+    '/$name/GetExposureSnapshot',
+    connect.StreamType.unary,
+    kdov1portfolio.GetExposureSnapshotRequest.new,
+    kdov1portfolio.ExposureSnapshot.new,
+  );
+
+  /// Exposure 스냅샷 목록 조회
+  static const listExposureSnapshots = connect.Spec(
+    '/$name/ListExposureSnapshots',
+    connect.StreamType.unary,
+    kdov1portfolio.ListExposureSnapshotsRequest.new,
+    kdov1portfolio.ListExposureSnapshotsResponse.new,
+  );
+
+  /// 스냅샷 이후 포지션 변화 조회
+  static const getExposureChanges = connect.Spec(
+    '/$name/GetExposureChanges',
+    connect.StreamType.unary,
+    kdov1portfolio.GetExposureChangesRequest.new,
+    kdov1portfolio.ExposureChanges.new,
+  );
+
+  /// Exposure 스냅샷 삭제
+  static const deleteExposureSnapshot = connect.Spec(
+    '/$name/DeleteExposureSnapshot',
+    connect.StreamType.unary,
+    kdov1portfolio.DeleteExposureSnapshotRequest.new,
+    googleprotobufempty.Empty.new,
   );
 }

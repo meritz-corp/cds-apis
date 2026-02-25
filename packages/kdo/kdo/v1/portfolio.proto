@@ -107,6 +107,47 @@ service PortfolioService {
     };
     option (google.api.method_signature) = "parent";
   }
+
+  // Exposure 스냅샷 생성 (현재 포지션 상태를 저장)
+  rpc CreateExposureSnapshot(CreateExposureSnapshotRequest) returns (ExposureSnapshot) {
+    option (google.api.http) = {
+      post: "/v1/{parent=portfolios/*}/exposure_snapshots"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Exposure 스냅샷 단일 조회
+  rpc GetExposureSnapshot(GetExposureSnapshotRequest) returns (ExposureSnapshot) {
+    option (google.api.http) = {
+      get: "/v1/{name=portfolios/*/exposure_snapshots/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Exposure 스냅샷 목록 조회
+  rpc ListExposureSnapshots(ListExposureSnapshotsRequest) returns (ListExposureSnapshotsResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=portfolios/*}/exposure_snapshots"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // 스냅샷 이후 포지션 변화 조회
+  rpc GetExposureChanges(GetExposureChangesRequest) returns (ExposureChanges) {
+    option (google.api.http) = {
+      get: "/v1/{name=portfolios/*/exposure_snapshots/*}:changes"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Exposure 스냅샷 삭제
+  rpc DeleteExposureSnapshot(DeleteExposureSnapshotRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=portfolios/*/exposure_snapshots/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
 }
 
 // ========== Resource Messages ==========
@@ -371,6 +412,191 @@ message FundSummary {
   string hedge_group_name = 4;
 }
 
+// ========== Exposure Snapshot Messages ==========
+
+// 특정 시점의 포지션 스냅샷
+message ExposureSnapshot {
+  // 스냅샷 ID
+  string snapshot_id = 1;
+
+  // 포트폴리오 ID
+  int32 portfolio_id = 2;
+
+  // 스냅샷 이름 (사용자 지정, optional)
+  optional string name = 3;
+
+  // 심볼별 통합 포지션 (모든 Fund 합산)
+  repeated SnapshotSymbolPosition positions = 4;
+
+  // Fund별 심볼 포지션
+  repeated SnapshotFundSymbolPosition fund_positions = 5;
+
+  // 스냅샷 생성 시간
+  google.protobuf.Timestamp created_at = 6;
+}
+
+// 스냅샷에 저장되는 심볼별 포지션
+message SnapshotSymbolPosition {
+  // 종목 심볼
+  string symbol = 1;
+
+  // 매수 수량 (>= 0)
+  int64 bid_quantity = 2;
+
+  // 매도 수량 (>= 0)
+  int64 ask_quantity = 3;
+
+  // 순수량 (bid - ask)
+  int64 net_quantity = 4;
+
+  // 매수 평균단가
+  double bid_average_cost = 5;
+
+  // 매도 평균단가
+  double ask_average_cost = 6;
+}
+
+// 스냅샷에 저장되는 Fund별 심볼 포지션
+message SnapshotFundSymbolPosition {
+  // 펀드 코드
+  string fund_code = 1;
+
+  // 종목 심볼
+  string symbol = 2;
+
+  // 매수 수량 (>= 0)
+  int64 bid_quantity = 3;
+
+  // 매도 수량 (>= 0)
+  int64 ask_quantity = 4;
+
+  // 순수량 (bid - ask)
+  int64 net_quantity = 5;
+
+  // 매수 평균단가
+  double bid_average_cost = 6;
+
+  // 매도 평균단가
+  double ask_average_cost = 7;
+}
+
+// 스냅샷 이후 심볼별 포지션 변화
+message PositionChange {
+  // 종목 심볼
+  string symbol = 1;
+
+  // 스냅샷 시점 매수 수량
+  int64 snapshot_bid_quantity = 2;
+
+  // 스냅샷 시점 매도 수량
+  int64 snapshot_ask_quantity = 3;
+
+  // 스냅샷 시점 순수량
+  int64 snapshot_net_quantity = 4;
+
+  // 스냅샷 시점 매수 평균단가
+  double snapshot_bid_average_cost = 5;
+
+  // 스냅샷 시점 매도 평균단가
+  double snapshot_ask_average_cost = 6;
+
+  // 현재 매수 수량
+  int64 current_bid_quantity = 7;
+
+  // 현재 매도 수량
+  int64 current_ask_quantity = 8;
+
+  // 현재 순수량
+  int64 current_net_quantity = 9;
+
+  // 현재 매수 평균단가
+  double current_bid_average_cost = 10;
+
+  // 현재 매도 평균단가
+  double current_ask_average_cost = 11;
+
+  // 매수 수량 변화 (current - snapshot)
+  int64 bid_quantity_change = 12;
+
+  // 매도 수량 변화 (current - snapshot)
+  int64 ask_quantity_change = 13;
+
+  // 순수량 변화 (current - snapshot)
+  int64 net_quantity_change = 14;
+
+  // 매수 평균단가 변화
+  double bid_average_cost_change = 15;
+
+  // 매도 평균단가 변화
+  double ask_average_cost_change = 16;
+}
+
+// 스냅샷 이후 Fund별 심볼 포지션 변화
+message FundPositionChange {
+  // 펀드 코드
+  string fund_code = 1;
+
+  // 종목 심볼
+  string symbol = 2;
+
+  // 스냅샷 시점 매수 수량
+  int64 snapshot_bid_quantity = 3;
+
+  // 스냅샷 시점 매도 수량
+  int64 snapshot_ask_quantity = 4;
+
+  // 스냅샷 시점 순수량
+  int64 snapshot_net_quantity = 5;
+
+  // 스냅샷 시점 매수 평균단가
+  double snapshot_bid_average_cost = 6;
+
+  // 스냅샷 시점 매도 평균단가
+  double snapshot_ask_average_cost = 7;
+
+  // 현재 매수 수량
+  int64 current_bid_quantity = 8;
+
+  // 현재 매도 수량
+  int64 current_ask_quantity = 9;
+
+  // 현재 순수량
+  int64 current_net_quantity = 10;
+
+  // 현재 매수 평균단가
+  double current_bid_average_cost = 11;
+
+  // 현재 매도 평균단가
+  double current_ask_average_cost = 12;
+
+  // 매수 수량 변화
+  int64 bid_quantity_change = 13;
+
+  // 매도 수량 변화
+  int64 ask_quantity_change = 14;
+
+  // 순수량 변화
+  int64 net_quantity_change = 15;
+
+  // 매수 평균단가 변화
+  double bid_average_cost_change = 16;
+
+  // 매도 평균단가 변화
+  double ask_average_cost_change = 17;
+}
+
+// 스냅샷 이후 전체 포지션 변화 요약
+message ExposureChanges {
+  // 기준 스냅샷
+  ExposureSnapshot snapshot = 1;
+
+  // 심볼별 포지션 변화 목록
+  repeated PositionChange position_changes = 2;
+
+  // Fund별 심볼 포지션 변화 목록
+  repeated FundPositionChange fund_position_changes = 3;
+}
+
 // ========== Request/Response Messages ==========
 
 // GetPortfolio 요청
@@ -512,4 +738,62 @@ message ListPortfolioFundsResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
+}
+
+// CreateExposureSnapshot 요청
+message CreateExposureSnapshotRequest {
+  // 부모 포트폴리오 리소스 이름 (예: portfolios/1)
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
+    }
+  ];
+
+  // 스냅샷 이름 (optional)
+  optional string name = 2;
+}
+
+// GetExposureSnapshot 요청
+message GetExposureSnapshotRequest {
+  // 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ListExposureSnapshots 요청
+message ListExposureSnapshotsRequest {
+  // 부모 포트폴리오 리소스 이름 (예: portfolios/1)
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
+    }
+  ];
+
+  // 페이지 크기 (optional)
+  optional int32 page_size = 2;
+
+  // 페이지 토큰 (optional)
+  optional string page_token = 3;
+}
+
+// ListExposureSnapshots 응답
+message ListExposureSnapshotsResponse {
+  // 스냅샷 목록
+  repeated ExposureSnapshot snapshots = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+// GetExposureChanges 요청
+message GetExposureChangesRequest {
+  // 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// DeleteExposureSnapshot 요청
+message DeleteExposureSnapshotRequest {
+  // 삭제할 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
 }

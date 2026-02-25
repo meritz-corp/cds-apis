@@ -342,6 +342,153 @@ pub mod portfolio_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn create_exposure_snapshot(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateExposureSnapshotRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ExposureSnapshot>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.portfolio.PortfolioService/CreateExposureSnapshot",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.portfolio.PortfolioService",
+                        "CreateExposureSnapshot",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn get_exposure_snapshot(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetExposureSnapshotRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ExposureSnapshot>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.portfolio.PortfolioService/GetExposureSnapshot",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.portfolio.PortfolioService",
+                        "GetExposureSnapshot",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_exposure_snapshots(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListExposureSnapshotsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListExposureSnapshotsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.portfolio.PortfolioService/ListExposureSnapshots",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.portfolio.PortfolioService",
+                        "ListExposureSnapshots",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn get_exposure_changes(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetExposureChangesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ExposureChanges>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.portfolio.PortfolioService/GetExposureChanges",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.portfolio.PortfolioService",
+                        "GetExposureChanges",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn delete_exposure_snapshot(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteExposureSnapshotRequest>,
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.portfolio.PortfolioService",
+                        "DeleteExposureSnapshot",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -417,6 +564,35 @@ pub mod portfolio_service_server {
             tonic::Response<super::ListPortfolioFundsResponse>,
             tonic::Status,
         >;
+        async fn create_exposure_snapshot(
+            &self,
+            request: tonic::Request<super::CreateExposureSnapshotRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ExposureSnapshot>,
+            tonic::Status,
+        >;
+        async fn get_exposure_snapshot(
+            &self,
+            request: tonic::Request<super::GetExposureSnapshotRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ExposureSnapshot>,
+            tonic::Status,
+        >;
+        async fn list_exposure_snapshots(
+            &self,
+            request: tonic::Request<super::ListExposureSnapshotsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListExposureSnapshotsResponse>,
+            tonic::Status,
+        >;
+        async fn get_exposure_changes(
+            &self,
+            request: tonic::Request<super::GetExposureChangesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ExposureChanges>, tonic::Status>;
+        async fn delete_exposure_snapshot(
+            &self,
+            request: tonic::Request<super::DeleteExposureSnapshotRequest>,
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct PortfolioServiceServer<T: PortfolioService> {
@@ -914,6 +1090,251 @@ pub mod portfolio_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = ListPortfolioFundsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.portfolio.PortfolioService/CreateExposureSnapshot" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateExposureSnapshotSvc<T: PortfolioService>(pub Arc<T>);
+                    impl<
+                        T: PortfolioService,
+                    > tonic::server::UnaryService<super::CreateExposureSnapshotRequest>
+                    for CreateExposureSnapshotSvc<T> {
+                        type Response = super::ExposureSnapshot;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CreateExposureSnapshotRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PortfolioService>::create_exposure_snapshot(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CreateExposureSnapshotSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.portfolio.PortfolioService/GetExposureSnapshot" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetExposureSnapshotSvc<T: PortfolioService>(pub Arc<T>);
+                    impl<
+                        T: PortfolioService,
+                    > tonic::server::UnaryService<super::GetExposureSnapshotRequest>
+                    for GetExposureSnapshotSvc<T> {
+                        type Response = super::ExposureSnapshot;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetExposureSnapshotRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PortfolioService>::get_exposure_snapshot(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetExposureSnapshotSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.portfolio.PortfolioService/ListExposureSnapshots" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListExposureSnapshotsSvc<T: PortfolioService>(pub Arc<T>);
+                    impl<
+                        T: PortfolioService,
+                    > tonic::server::UnaryService<super::ListExposureSnapshotsRequest>
+                    for ListExposureSnapshotsSvc<T> {
+                        type Response = super::ListExposureSnapshotsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListExposureSnapshotsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PortfolioService>::list_exposure_snapshots(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListExposureSnapshotsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.portfolio.PortfolioService/GetExposureChanges" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetExposureChangesSvc<T: PortfolioService>(pub Arc<T>);
+                    impl<
+                        T: PortfolioService,
+                    > tonic::server::UnaryService<super::GetExposureChangesRequest>
+                    for GetExposureChangesSvc<T> {
+                        type Response = super::ExposureChanges;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetExposureChangesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PortfolioService>::get_exposure_changes(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetExposureChangesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteExposureSnapshotSvc<T: PortfolioService>(pub Arc<T>);
+                    impl<
+                        T: PortfolioService,
+                    > tonic::server::UnaryService<super::DeleteExposureSnapshotRequest>
+                    for DeleteExposureSnapshotSvc<T> {
+                        type Response = ();
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::DeleteExposureSnapshotRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PortfolioService>::delete_exposure_snapshot(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = DeleteExposureSnapshotSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

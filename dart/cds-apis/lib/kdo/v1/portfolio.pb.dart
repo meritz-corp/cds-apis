@@ -15,8 +15,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/field_mask.pb.dart' as $2;
-import '../../google/protobuf/timestamp.pb.dart' as $1;
+import '../../google/protobuf/field_mask.pb.dart' as $3;
+import '../../google/protobuf/timestamp.pb.dart' as $2;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
@@ -29,8 +29,8 @@ class Portfolio extends $pb.GeneratedMessage {
     $core.String? displayName,
     $core.String? description,
     $core.bool? isActive,
-    $1.Timestamp? createTime,
-    $1.Timestamp? updateTime,
+    $2.Timestamp? createTime,
+    $2.Timestamp? updateTime,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -54,8 +54,8 @@ class Portfolio extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'displayName')
     ..aOS(4, _omitFieldNames ? '' : 'description')
     ..aOB(5, _omitFieldNames ? '' : 'isActive')
-    ..aOM<$1.Timestamp>(6, _omitFieldNames ? '' : 'createTime', subBuilder: $1.Timestamp.create)
-    ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'updateTime', subBuilder: $1.Timestamp.create)
+    ..aOM<$2.Timestamp>(6, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -128,27 +128,27 @@ class Portfolio extends $pb.GeneratedMessage {
 
   /// 생성 시간
   @$pb.TagNumber(6)
-  $1.Timestamp get createTime => $_getN(5);
+  $2.Timestamp get createTime => $_getN(5);
   @$pb.TagNumber(6)
-  set createTime($1.Timestamp value) => $_setField(6, value);
+  set createTime($2.Timestamp value) => $_setField(6, value);
   @$pb.TagNumber(6)
   $core.bool hasCreateTime() => $_has(5);
   @$pb.TagNumber(6)
   void clearCreateTime() => $_clearField(6);
   @$pb.TagNumber(6)
-  $1.Timestamp ensureCreateTime() => $_ensure(5);
+  $2.Timestamp ensureCreateTime() => $_ensure(5);
 
   /// 수정 시간
   @$pb.TagNumber(7)
-  $1.Timestamp get updateTime => $_getN(6);
+  $2.Timestamp get updateTime => $_getN(6);
   @$pb.TagNumber(7)
-  set updateTime($1.Timestamp value) => $_setField(7, value);
+  set updateTime($2.Timestamp value) => $_setField(7, value);
   @$pb.TagNumber(7)
   $core.bool hasUpdateTime() => $_has(6);
   @$pb.TagNumber(7)
   void clearUpdateTime() => $_clearField(7);
   @$pb.TagNumber(7)
-  $1.Timestamp ensureUpdateTime() => $_ensure(6);
+  $2.Timestamp ensureUpdateTime() => $_ensure(6);
 }
 
 /// 포트폴리오 P&L 집계 결과
@@ -164,7 +164,7 @@ class PortfolioPnL extends $pb.GeneratedMessage {
     $core.int? fundCount,
     $core.int? hedgeGroupCount,
     $core.Iterable<SymbolPnLDetail>? symbolPnls,
-    $1.Timestamp? timestamp,
+    $2.Timestamp? timestamp,
   }) {
     final result = create();
     if (portfolio != null) result.portfolio = portfolio;
@@ -197,7 +197,7 @@ class PortfolioPnL extends $pb.GeneratedMessage {
     ..a<$core.int>(8, _omitFieldNames ? '' : 'fundCount', $pb.PbFieldType.O3)
     ..a<$core.int>(9, _omitFieldNames ? '' : 'hedgeGroupCount', $pb.PbFieldType.O3)
     ..pc<SymbolPnLDetail>(10, _omitFieldNames ? '' : 'symbolPnls', $pb.PbFieldType.PM, subBuilder: SymbolPnLDetail.create)
-    ..aOM<$1.Timestamp>(11, _omitFieldNames ? '' : 'timestamp', subBuilder: $1.Timestamp.create)
+    ..aOM<$2.Timestamp>(11, _omitFieldNames ? '' : 'timestamp', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -314,15 +314,15 @@ class PortfolioPnL extends $pb.GeneratedMessage {
 
   /// 스냅샷 시간
   @$pb.TagNumber(11)
-  $1.Timestamp get timestamp => $_getN(10);
+  $2.Timestamp get timestamp => $_getN(10);
   @$pb.TagNumber(11)
-  set timestamp($1.Timestamp value) => $_setField(11, value);
+  set timestamp($2.Timestamp value) => $_setField(11, value);
   @$pb.TagNumber(11)
   $core.bool hasTimestamp() => $_has(10);
   @$pb.TagNumber(11)
   void clearTimestamp() => $_clearField(11);
   @$pb.TagNumber(11)
-  $1.Timestamp ensureTimestamp() => $_ensure(10);
+  $2.Timestamp ensureTimestamp() => $_ensure(10);
 }
 
 /// 종목별 P&L 상세
@@ -465,7 +465,7 @@ class PortfolioExposure extends $pb.GeneratedMessage {
     $fixnum.Int64? totalNetQuantity,
     $fixnum.Int64? totalExposureAmount,
     NetExposures? netExposures,
-    $1.Timestamp? lastUpdate,
+    $2.Timestamp? lastUpdate,
   }) {
     final result = create();
     if (portfolio != null) result.portfolio = portfolio;
@@ -500,7 +500,7 @@ class PortfolioExposure extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'totalNetQuantity')
     ..aInt64(10, _omitFieldNames ? '' : 'totalExposureAmount')
     ..aOM<NetExposures>(11, _omitFieldNames ? '' : 'netExposures', subBuilder: NetExposures.create)
-    ..aOM<$1.Timestamp>(15, _omitFieldNames ? '' : 'lastUpdate', subBuilder: $1.Timestamp.create)
+    ..aOM<$2.Timestamp>(15, _omitFieldNames ? '' : 'lastUpdate', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -624,15 +624,15 @@ class PortfolioExposure extends $pb.GeneratedMessage {
 
   /// 마지막 업데이트 시간
   @$pb.TagNumber(15)
-  $1.Timestamp get lastUpdate => $_getN(11);
+  $2.Timestamp get lastUpdate => $_getN(11);
   @$pb.TagNumber(15)
-  set lastUpdate($1.Timestamp value) => $_setField(15, value);
+  set lastUpdate($2.Timestamp value) => $_setField(15, value);
   @$pb.TagNumber(15)
   $core.bool hasLastUpdate() => $_has(11);
   @$pb.TagNumber(15)
   void clearLastUpdate() => $_clearField(15);
   @$pb.TagNumber(15)
-  $1.Timestamp ensureLastUpdate() => $_ensure(11);
+  $2.Timestamp ensureLastUpdate() => $_ensure(11);
 }
 
 /// 심볼별 통합 포지션
@@ -1281,6 +1281,911 @@ class FundSummary extends $pb.GeneratedMessage {
   void clearHedgeGroupName() => $_clearField(4);
 }
 
+/// 특정 시점의 포지션 스냅샷
+class ExposureSnapshot extends $pb.GeneratedMessage {
+  factory ExposureSnapshot({
+    $core.String? snapshotId,
+    $core.int? portfolioId,
+    $core.String? name,
+    $core.Iterable<SnapshotSymbolPosition>? positions,
+    $core.Iterable<SnapshotFundSymbolPosition>? fundPositions,
+    $2.Timestamp? createdAt,
+  }) {
+    final result = create();
+    if (snapshotId != null) result.snapshotId = snapshotId;
+    if (portfolioId != null) result.portfolioId = portfolioId;
+    if (name != null) result.name = name;
+    if (positions != null) result.positions.addAll(positions);
+    if (fundPositions != null) result.fundPositions.addAll(fundPositions);
+    if (createdAt != null) result.createdAt = createdAt;
+    return result;
+  }
+
+  ExposureSnapshot._();
+
+  factory ExposureSnapshot.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ExposureSnapshot.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExposureSnapshot', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'snapshotId')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'name')
+    ..pc<SnapshotSymbolPosition>(4, _omitFieldNames ? '' : 'positions', $pb.PbFieldType.PM, subBuilder: SnapshotSymbolPosition.create)
+    ..pc<SnapshotFundSymbolPosition>(5, _omitFieldNames ? '' : 'fundPositions', $pb.PbFieldType.PM, subBuilder: SnapshotFundSymbolPosition.create)
+    ..aOM<$2.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ExposureSnapshot clone() => ExposureSnapshot()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ExposureSnapshot copyWith(void Function(ExposureSnapshot) updates) => super.copyWith((message) => updates(message as ExposureSnapshot)) as ExposureSnapshot;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ExposureSnapshot create() => ExposureSnapshot._();
+  @$core.override
+  ExposureSnapshot createEmptyInstance() => create();
+  static $pb.PbList<ExposureSnapshot> createRepeated() => $pb.PbList<ExposureSnapshot>();
+  @$core.pragma('dart2js:noInline')
+  static ExposureSnapshot getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExposureSnapshot>(create);
+  static ExposureSnapshot? _defaultInstance;
+
+  /// 스냅샷 ID
+  @$pb.TagNumber(1)
+  $core.String get snapshotId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set snapshotId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSnapshotId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSnapshotId() => $_clearField(1);
+
+  /// 포트폴리오 ID
+  @$pb.TagNumber(2)
+  $core.int get portfolioId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set portfolioId($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPortfolioId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPortfolioId() => $_clearField(2);
+
+  /// 스냅샷 이름 (사용자 지정, optional)
+  @$pb.TagNumber(3)
+  $core.String get name => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set name($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearName() => $_clearField(3);
+
+  /// 심볼별 통합 포지션 (모든 Fund 합산)
+  @$pb.TagNumber(4)
+  $pb.PbList<SnapshotSymbolPosition> get positions => $_getList(3);
+
+  /// Fund별 심볼 포지션
+  @$pb.TagNumber(5)
+  $pb.PbList<SnapshotFundSymbolPosition> get fundPositions => $_getList(4);
+
+  /// 스냅샷 생성 시간
+  @$pb.TagNumber(6)
+  $2.Timestamp get createdAt => $_getN(5);
+  @$pb.TagNumber(6)
+  set createdAt($2.Timestamp value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCreatedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCreatedAt() => $_clearField(6);
+  @$pb.TagNumber(6)
+  $2.Timestamp ensureCreatedAt() => $_ensure(5);
+}
+
+/// 스냅샷에 저장되는 심볼별 포지션
+class SnapshotSymbolPosition extends $pb.GeneratedMessage {
+  factory SnapshotSymbolPosition({
+    $core.String? symbol,
+    $fixnum.Int64? bidQuantity,
+    $fixnum.Int64? askQuantity,
+    $fixnum.Int64? netQuantity,
+    $core.double? bidAverageCost,
+    $core.double? askAverageCost,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
+    if (askQuantity != null) result.askQuantity = askQuantity;
+    if (netQuantity != null) result.netQuantity = netQuantity;
+    if (bidAverageCost != null) result.bidAverageCost = bidAverageCost;
+    if (askAverageCost != null) result.askAverageCost = askAverageCost;
+    return result;
+  }
+
+  SnapshotSymbolPosition._();
+
+  factory SnapshotSymbolPosition.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SnapshotSymbolPosition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SnapshotSymbolPosition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'askQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'netQuantity')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'bidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'askAverageCost', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnapshotSymbolPosition clone() => SnapshotSymbolPosition()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnapshotSymbolPosition copyWith(void Function(SnapshotSymbolPosition) updates) => super.copyWith((message) => updates(message as SnapshotSymbolPosition)) as SnapshotSymbolPosition;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SnapshotSymbolPosition create() => SnapshotSymbolPosition._();
+  @$core.override
+  SnapshotSymbolPosition createEmptyInstance() => create();
+  static $pb.PbList<SnapshotSymbolPosition> createRepeated() => $pb.PbList<SnapshotSymbolPosition>();
+  @$core.pragma('dart2js:noInline')
+  static SnapshotSymbolPosition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SnapshotSymbolPosition>(create);
+  static SnapshotSymbolPosition? _defaultInstance;
+
+  /// 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 매수 수량 (>= 0)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get bidQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBidQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBidQuantity() => $_clearField(2);
+
+  /// 매도 수량 (>= 0)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get askQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskQuantity() => $_clearField(3);
+
+  /// 순수량 (bid - ask)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get netQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set netQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasNetQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearNetQuantity() => $_clearField(4);
+
+  /// 매수 평균단가
+  @$pb.TagNumber(5)
+  $core.double get bidAverageCost => $_getN(4);
+  @$pb.TagNumber(5)
+  set bidAverageCost($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBidAverageCost() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBidAverageCost() => $_clearField(5);
+
+  /// 매도 평균단가
+  @$pb.TagNumber(6)
+  $core.double get askAverageCost => $_getN(5);
+  @$pb.TagNumber(6)
+  set askAverageCost($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasAskAverageCost() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAskAverageCost() => $_clearField(6);
+}
+
+/// 스냅샷에 저장되는 Fund별 심볼 포지션
+class SnapshotFundSymbolPosition extends $pb.GeneratedMessage {
+  factory SnapshotFundSymbolPosition({
+    $core.String? fundCode,
+    $core.String? symbol,
+    $fixnum.Int64? bidQuantity,
+    $fixnum.Int64? askQuantity,
+    $fixnum.Int64? netQuantity,
+    $core.double? bidAverageCost,
+    $core.double? askAverageCost,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (symbol != null) result.symbol = symbol;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
+    if (askQuantity != null) result.askQuantity = askQuantity;
+    if (netQuantity != null) result.netQuantity = netQuantity;
+    if (bidAverageCost != null) result.bidAverageCost = bidAverageCost;
+    if (askAverageCost != null) result.askAverageCost = askAverageCost;
+    return result;
+  }
+
+  SnapshotFundSymbolPosition._();
+
+  factory SnapshotFundSymbolPosition.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SnapshotFundSymbolPosition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SnapshotFundSymbolPosition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(3, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'askQuantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'netQuantity')
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'bidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'askAverageCost', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnapshotFundSymbolPosition clone() => SnapshotFundSymbolPosition()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnapshotFundSymbolPosition copyWith(void Function(SnapshotFundSymbolPosition) updates) => super.copyWith((message) => updates(message as SnapshotFundSymbolPosition)) as SnapshotFundSymbolPosition;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SnapshotFundSymbolPosition create() => SnapshotFundSymbolPosition._();
+  @$core.override
+  SnapshotFundSymbolPosition createEmptyInstance() => create();
+  static $pb.PbList<SnapshotFundSymbolPosition> createRepeated() => $pb.PbList<SnapshotFundSymbolPosition>();
+  @$core.pragma('dart2js:noInline')
+  static SnapshotFundSymbolPosition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SnapshotFundSymbolPosition>(create);
+  static SnapshotFundSymbolPosition? _defaultInstance;
+
+  /// 펀드 코드
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  /// 종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 매수 수량 (>= 0)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get bidQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBidQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBidQuantity() => $_clearField(3);
+
+  /// 매도 수량 (>= 0)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get askQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAskQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAskQuantity() => $_clearField(4);
+
+  /// 순수량 (bid - ask)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get netQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set netQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasNetQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearNetQuantity() => $_clearField(5);
+
+  /// 매수 평균단가
+  @$pb.TagNumber(6)
+  $core.double get bidAverageCost => $_getN(5);
+  @$pb.TagNumber(6)
+  set bidAverageCost($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBidAverageCost() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBidAverageCost() => $_clearField(6);
+
+  /// 매도 평균단가
+  @$pb.TagNumber(7)
+  $core.double get askAverageCost => $_getN(6);
+  @$pb.TagNumber(7)
+  set askAverageCost($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasAskAverageCost() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearAskAverageCost() => $_clearField(7);
+}
+
+/// 스냅샷 이후 심볼별 포지션 변화
+class PositionChange extends $pb.GeneratedMessage {
+  factory PositionChange({
+    $core.String? symbol,
+    $fixnum.Int64? snapshotBidQuantity,
+    $fixnum.Int64? snapshotAskQuantity,
+    $fixnum.Int64? snapshotNetQuantity,
+    $core.double? snapshotBidAverageCost,
+    $core.double? snapshotAskAverageCost,
+    $fixnum.Int64? currentBidQuantity,
+    $fixnum.Int64? currentAskQuantity,
+    $fixnum.Int64? currentNetQuantity,
+    $core.double? currentBidAverageCost,
+    $core.double? currentAskAverageCost,
+    $fixnum.Int64? bidQuantityChange,
+    $fixnum.Int64? askQuantityChange,
+    $fixnum.Int64? netQuantityChange,
+    $core.double? bidAverageCostChange,
+    $core.double? askAverageCostChange,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (snapshotBidQuantity != null) result.snapshotBidQuantity = snapshotBidQuantity;
+    if (snapshotAskQuantity != null) result.snapshotAskQuantity = snapshotAskQuantity;
+    if (snapshotNetQuantity != null) result.snapshotNetQuantity = snapshotNetQuantity;
+    if (snapshotBidAverageCost != null) result.snapshotBidAverageCost = snapshotBidAverageCost;
+    if (snapshotAskAverageCost != null) result.snapshotAskAverageCost = snapshotAskAverageCost;
+    if (currentBidQuantity != null) result.currentBidQuantity = currentBidQuantity;
+    if (currentAskQuantity != null) result.currentAskQuantity = currentAskQuantity;
+    if (currentNetQuantity != null) result.currentNetQuantity = currentNetQuantity;
+    if (currentBidAverageCost != null) result.currentBidAverageCost = currentBidAverageCost;
+    if (currentAskAverageCost != null) result.currentAskAverageCost = currentAskAverageCost;
+    if (bidQuantityChange != null) result.bidQuantityChange = bidQuantityChange;
+    if (askQuantityChange != null) result.askQuantityChange = askQuantityChange;
+    if (netQuantityChange != null) result.netQuantityChange = netQuantityChange;
+    if (bidAverageCostChange != null) result.bidAverageCostChange = bidAverageCostChange;
+    if (askAverageCostChange != null) result.askAverageCostChange = askAverageCostChange;
+    return result;
+  }
+
+  PositionChange._();
+
+  factory PositionChange.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PositionChange.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PositionChange', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'snapshotBidQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'snapshotAskQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'snapshotNetQuantity')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'snapshotBidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'snapshotAskAverageCost', $pb.PbFieldType.OD)
+    ..aInt64(7, _omitFieldNames ? '' : 'currentBidQuantity')
+    ..aInt64(8, _omitFieldNames ? '' : 'currentAskQuantity')
+    ..aInt64(9, _omitFieldNames ? '' : 'currentNetQuantity')
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'currentBidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'currentAskAverageCost', $pb.PbFieldType.OD)
+    ..aInt64(12, _omitFieldNames ? '' : 'bidQuantityChange')
+    ..aInt64(13, _omitFieldNames ? '' : 'askQuantityChange')
+    ..aInt64(14, _omitFieldNames ? '' : 'netQuantityChange')
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'bidAverageCostChange', $pb.PbFieldType.OD)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'askAverageCostChange', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PositionChange clone() => PositionChange()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PositionChange copyWith(void Function(PositionChange) updates) => super.copyWith((message) => updates(message as PositionChange)) as PositionChange;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PositionChange create() => PositionChange._();
+  @$core.override
+  PositionChange createEmptyInstance() => create();
+  static $pb.PbList<PositionChange> createRepeated() => $pb.PbList<PositionChange>();
+  @$core.pragma('dart2js:noInline')
+  static PositionChange getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PositionChange>(create);
+  static PositionChange? _defaultInstance;
+
+  /// 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 스냅샷 시점 매수 수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get snapshotBidQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set snapshotBidQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSnapshotBidQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSnapshotBidQuantity() => $_clearField(2);
+
+  /// 스냅샷 시점 매도 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get snapshotAskQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set snapshotAskQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSnapshotAskQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSnapshotAskQuantity() => $_clearField(3);
+
+  /// 스냅샷 시점 순수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get snapshotNetQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set snapshotNetQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSnapshotNetQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSnapshotNetQuantity() => $_clearField(4);
+
+  /// 스냅샷 시점 매수 평균단가
+  @$pb.TagNumber(5)
+  $core.double get snapshotBidAverageCost => $_getN(4);
+  @$pb.TagNumber(5)
+  set snapshotBidAverageCost($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSnapshotBidAverageCost() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSnapshotBidAverageCost() => $_clearField(5);
+
+  /// 스냅샷 시점 매도 평균단가
+  @$pb.TagNumber(6)
+  $core.double get snapshotAskAverageCost => $_getN(5);
+  @$pb.TagNumber(6)
+  set snapshotAskAverageCost($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSnapshotAskAverageCost() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSnapshotAskAverageCost() => $_clearField(6);
+
+  /// 현재 매수 수량
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get currentBidQuantity => $_getI64(6);
+  @$pb.TagNumber(7)
+  set currentBidQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCurrentBidQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCurrentBidQuantity() => $_clearField(7);
+
+  /// 현재 매도 수량
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get currentAskQuantity => $_getI64(7);
+  @$pb.TagNumber(8)
+  set currentAskQuantity($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCurrentAskQuantity() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCurrentAskQuantity() => $_clearField(8);
+
+  /// 현재 순수량
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get currentNetQuantity => $_getI64(8);
+  @$pb.TagNumber(9)
+  set currentNetQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasCurrentNetQuantity() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCurrentNetQuantity() => $_clearField(9);
+
+  /// 현재 매수 평균단가
+  @$pb.TagNumber(10)
+  $core.double get currentBidAverageCost => $_getN(9);
+  @$pb.TagNumber(10)
+  set currentBidAverageCost($core.double value) => $_setDouble(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasCurrentBidAverageCost() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearCurrentBidAverageCost() => $_clearField(10);
+
+  /// 현재 매도 평균단가
+  @$pb.TagNumber(11)
+  $core.double get currentAskAverageCost => $_getN(10);
+  @$pb.TagNumber(11)
+  set currentAskAverageCost($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasCurrentAskAverageCost() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearCurrentAskAverageCost() => $_clearField(11);
+
+  /// 매수 수량 변화 (current - snapshot)
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get bidQuantityChange => $_getI64(11);
+  @$pb.TagNumber(12)
+  set bidQuantityChange($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasBidQuantityChange() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearBidQuantityChange() => $_clearField(12);
+
+  /// 매도 수량 변화 (current - snapshot)
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get askQuantityChange => $_getI64(12);
+  @$pb.TagNumber(13)
+  set askQuantityChange($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasAskQuantityChange() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearAskQuantityChange() => $_clearField(13);
+
+  /// 순수량 변화 (current - snapshot)
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get netQuantityChange => $_getI64(13);
+  @$pb.TagNumber(14)
+  set netQuantityChange($fixnum.Int64 value) => $_setInt64(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasNetQuantityChange() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearNetQuantityChange() => $_clearField(14);
+
+  /// 매수 평균단가 변화
+  @$pb.TagNumber(15)
+  $core.double get bidAverageCostChange => $_getN(14);
+  @$pb.TagNumber(15)
+  set bidAverageCostChange($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasBidAverageCostChange() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearBidAverageCostChange() => $_clearField(15);
+
+  /// 매도 평균단가 변화
+  @$pb.TagNumber(16)
+  $core.double get askAverageCostChange => $_getN(15);
+  @$pb.TagNumber(16)
+  set askAverageCostChange($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasAskAverageCostChange() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearAskAverageCostChange() => $_clearField(16);
+}
+
+/// 스냅샷 이후 Fund별 심볼 포지션 변화
+class FundPositionChange extends $pb.GeneratedMessage {
+  factory FundPositionChange({
+    $core.String? fundCode,
+    $core.String? symbol,
+    $fixnum.Int64? snapshotBidQuantity,
+    $fixnum.Int64? snapshotAskQuantity,
+    $fixnum.Int64? snapshotNetQuantity,
+    $core.double? snapshotBidAverageCost,
+    $core.double? snapshotAskAverageCost,
+    $fixnum.Int64? currentBidQuantity,
+    $fixnum.Int64? currentAskQuantity,
+    $fixnum.Int64? currentNetQuantity,
+    $core.double? currentBidAverageCost,
+    $core.double? currentAskAverageCost,
+    $fixnum.Int64? bidQuantityChange,
+    $fixnum.Int64? askQuantityChange,
+    $fixnum.Int64? netQuantityChange,
+    $core.double? bidAverageCostChange,
+    $core.double? askAverageCostChange,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (symbol != null) result.symbol = symbol;
+    if (snapshotBidQuantity != null) result.snapshotBidQuantity = snapshotBidQuantity;
+    if (snapshotAskQuantity != null) result.snapshotAskQuantity = snapshotAskQuantity;
+    if (snapshotNetQuantity != null) result.snapshotNetQuantity = snapshotNetQuantity;
+    if (snapshotBidAverageCost != null) result.snapshotBidAverageCost = snapshotBidAverageCost;
+    if (snapshotAskAverageCost != null) result.snapshotAskAverageCost = snapshotAskAverageCost;
+    if (currentBidQuantity != null) result.currentBidQuantity = currentBidQuantity;
+    if (currentAskQuantity != null) result.currentAskQuantity = currentAskQuantity;
+    if (currentNetQuantity != null) result.currentNetQuantity = currentNetQuantity;
+    if (currentBidAverageCost != null) result.currentBidAverageCost = currentBidAverageCost;
+    if (currentAskAverageCost != null) result.currentAskAverageCost = currentAskAverageCost;
+    if (bidQuantityChange != null) result.bidQuantityChange = bidQuantityChange;
+    if (askQuantityChange != null) result.askQuantityChange = askQuantityChange;
+    if (netQuantityChange != null) result.netQuantityChange = netQuantityChange;
+    if (bidAverageCostChange != null) result.bidAverageCostChange = bidAverageCostChange;
+    if (askAverageCostChange != null) result.askAverageCostChange = askAverageCostChange;
+    return result;
+  }
+
+  FundPositionChange._();
+
+  factory FundPositionChange.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FundPositionChange.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FundPositionChange', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(3, _omitFieldNames ? '' : 'snapshotBidQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'snapshotAskQuantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'snapshotNetQuantity')
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'snapshotBidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'snapshotAskAverageCost', $pb.PbFieldType.OD)
+    ..aInt64(8, _omitFieldNames ? '' : 'currentBidQuantity')
+    ..aInt64(9, _omitFieldNames ? '' : 'currentAskQuantity')
+    ..aInt64(10, _omitFieldNames ? '' : 'currentNetQuantity')
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'currentBidAverageCost', $pb.PbFieldType.OD)
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'currentAskAverageCost', $pb.PbFieldType.OD)
+    ..aInt64(13, _omitFieldNames ? '' : 'bidQuantityChange')
+    ..aInt64(14, _omitFieldNames ? '' : 'askQuantityChange')
+    ..aInt64(15, _omitFieldNames ? '' : 'netQuantityChange')
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'bidAverageCostChange', $pb.PbFieldType.OD)
+    ..a<$core.double>(17, _omitFieldNames ? '' : 'askAverageCostChange', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundPositionChange clone() => FundPositionChange()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FundPositionChange copyWith(void Function(FundPositionChange) updates) => super.copyWith((message) => updates(message as FundPositionChange)) as FundPositionChange;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FundPositionChange create() => FundPositionChange._();
+  @$core.override
+  FundPositionChange createEmptyInstance() => create();
+  static $pb.PbList<FundPositionChange> createRepeated() => $pb.PbList<FundPositionChange>();
+  @$core.pragma('dart2js:noInline')
+  static FundPositionChange getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FundPositionChange>(create);
+  static FundPositionChange? _defaultInstance;
+
+  /// 펀드 코드
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  /// 종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 스냅샷 시점 매수 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get snapshotBidQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set snapshotBidQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSnapshotBidQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSnapshotBidQuantity() => $_clearField(3);
+
+  /// 스냅샷 시점 매도 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get snapshotAskQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set snapshotAskQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSnapshotAskQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSnapshotAskQuantity() => $_clearField(4);
+
+  /// 스냅샷 시점 순수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get snapshotNetQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set snapshotNetQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSnapshotNetQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSnapshotNetQuantity() => $_clearField(5);
+
+  /// 스냅샷 시점 매수 평균단가
+  @$pb.TagNumber(6)
+  $core.double get snapshotBidAverageCost => $_getN(5);
+  @$pb.TagNumber(6)
+  set snapshotBidAverageCost($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSnapshotBidAverageCost() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSnapshotBidAverageCost() => $_clearField(6);
+
+  /// 스냅샷 시점 매도 평균단가
+  @$pb.TagNumber(7)
+  $core.double get snapshotAskAverageCost => $_getN(6);
+  @$pb.TagNumber(7)
+  set snapshotAskAverageCost($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasSnapshotAskAverageCost() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSnapshotAskAverageCost() => $_clearField(7);
+
+  /// 현재 매수 수량
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get currentBidQuantity => $_getI64(7);
+  @$pb.TagNumber(8)
+  set currentBidQuantity($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCurrentBidQuantity() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCurrentBidQuantity() => $_clearField(8);
+
+  /// 현재 매도 수량
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get currentAskQuantity => $_getI64(8);
+  @$pb.TagNumber(9)
+  set currentAskQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasCurrentAskQuantity() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCurrentAskQuantity() => $_clearField(9);
+
+  /// 현재 순수량
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get currentNetQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set currentNetQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasCurrentNetQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearCurrentNetQuantity() => $_clearField(10);
+
+  /// 현재 매수 평균단가
+  @$pb.TagNumber(11)
+  $core.double get currentBidAverageCost => $_getN(10);
+  @$pb.TagNumber(11)
+  set currentBidAverageCost($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasCurrentBidAverageCost() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearCurrentBidAverageCost() => $_clearField(11);
+
+  /// 현재 매도 평균단가
+  @$pb.TagNumber(12)
+  $core.double get currentAskAverageCost => $_getN(11);
+  @$pb.TagNumber(12)
+  set currentAskAverageCost($core.double value) => $_setDouble(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasCurrentAskAverageCost() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearCurrentAskAverageCost() => $_clearField(12);
+
+  /// 매수 수량 변화
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get bidQuantityChange => $_getI64(12);
+  @$pb.TagNumber(13)
+  set bidQuantityChange($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasBidQuantityChange() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearBidQuantityChange() => $_clearField(13);
+
+  /// 매도 수량 변화
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get askQuantityChange => $_getI64(13);
+  @$pb.TagNumber(14)
+  set askQuantityChange($fixnum.Int64 value) => $_setInt64(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasAskQuantityChange() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearAskQuantityChange() => $_clearField(14);
+
+  /// 순수량 변화
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get netQuantityChange => $_getI64(14);
+  @$pb.TagNumber(15)
+  set netQuantityChange($fixnum.Int64 value) => $_setInt64(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasNetQuantityChange() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearNetQuantityChange() => $_clearField(15);
+
+  /// 매수 평균단가 변화
+  @$pb.TagNumber(16)
+  $core.double get bidAverageCostChange => $_getN(15);
+  @$pb.TagNumber(16)
+  set bidAverageCostChange($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasBidAverageCostChange() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearBidAverageCostChange() => $_clearField(16);
+
+  /// 매도 평균단가 변화
+  @$pb.TagNumber(17)
+  $core.double get askAverageCostChange => $_getN(16);
+  @$pb.TagNumber(17)
+  set askAverageCostChange($core.double value) => $_setDouble(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasAskAverageCostChange() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearAskAverageCostChange() => $_clearField(17);
+}
+
+/// 스냅샷 이후 전체 포지션 변화 요약
+class ExposureChanges extends $pb.GeneratedMessage {
+  factory ExposureChanges({
+    ExposureSnapshot? snapshot,
+    $core.Iterable<PositionChange>? positionChanges,
+    $core.Iterable<FundPositionChange>? fundPositionChanges,
+  }) {
+    final result = create();
+    if (snapshot != null) result.snapshot = snapshot;
+    if (positionChanges != null) result.positionChanges.addAll(positionChanges);
+    if (fundPositionChanges != null) result.fundPositionChanges.addAll(fundPositionChanges);
+    return result;
+  }
+
+  ExposureChanges._();
+
+  factory ExposureChanges.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ExposureChanges.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExposureChanges', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOM<ExposureSnapshot>(1, _omitFieldNames ? '' : 'snapshot', subBuilder: ExposureSnapshot.create)
+    ..pc<PositionChange>(2, _omitFieldNames ? '' : 'positionChanges', $pb.PbFieldType.PM, subBuilder: PositionChange.create)
+    ..pc<FundPositionChange>(3, _omitFieldNames ? '' : 'fundPositionChanges', $pb.PbFieldType.PM, subBuilder: FundPositionChange.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ExposureChanges clone() => ExposureChanges()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ExposureChanges copyWith(void Function(ExposureChanges) updates) => super.copyWith((message) => updates(message as ExposureChanges)) as ExposureChanges;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ExposureChanges create() => ExposureChanges._();
+  @$core.override
+  ExposureChanges createEmptyInstance() => create();
+  static $pb.PbList<ExposureChanges> createRepeated() => $pb.PbList<ExposureChanges>();
+  @$core.pragma('dart2js:noInline')
+  static ExposureChanges getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExposureChanges>(create);
+  static ExposureChanges? _defaultInstance;
+
+  /// 기준 스냅샷
+  @$pb.TagNumber(1)
+  ExposureSnapshot get snapshot => $_getN(0);
+  @$pb.TagNumber(1)
+  set snapshot(ExposureSnapshot value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSnapshot() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSnapshot() => $_clearField(1);
+  @$pb.TagNumber(1)
+  ExposureSnapshot ensureSnapshot() => $_ensure(0);
+
+  /// 심볼별 포지션 변화 목록
+  @$pb.TagNumber(2)
+  $pb.PbList<PositionChange> get positionChanges => $_getList(1);
+
+  /// Fund별 심볼 포지션 변화 목록
+  @$pb.TagNumber(3)
+  $pb.PbList<FundPositionChange> get fundPositionChanges => $_getList(2);
+}
+
 /// GetPortfolio 요청
 class GetPortfolioRequest extends $pb.GeneratedMessage {
   factory GetPortfolioRequest({
@@ -1521,7 +2426,7 @@ class CreatePortfolioRequest extends $pb.GeneratedMessage {
 class UpdatePortfolioRequest extends $pb.GeneratedMessage {
   factory UpdatePortfolioRequest({
     Portfolio? portfolio,
-    $2.FieldMask? updateMask,
+    $3.FieldMask? updateMask,
   }) {
     final result = create();
     if (portfolio != null) result.portfolio = portfolio;
@@ -1536,7 +2441,7 @@ class UpdatePortfolioRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePortfolioRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
     ..aOM<Portfolio>(1, _omitFieldNames ? '' : 'portfolio', subBuilder: Portfolio.create)
-    ..aOM<$2.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $2.FieldMask.create)
+    ..aOM<$3.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
     ..hasRequiredFields = false
   ;
 
@@ -1571,15 +2476,15 @@ class UpdatePortfolioRequest extends $pb.GeneratedMessage {
 
   /// 수정할 필드 마스크
   @$pb.TagNumber(2)
-  $2.FieldMask get updateMask => $_getN(1);
+  $3.FieldMask get updateMask => $_getN(1);
   @$pb.TagNumber(2)
-  set updateMask($2.FieldMask value) => $_setField(2, value);
+  set updateMask($3.FieldMask value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasUpdateMask() => $_has(1);
   @$pb.TagNumber(2)
   void clearUpdateMask() => $_clearField(2);
   @$pb.TagNumber(2)
-  $2.FieldMask ensureUpdateMask() => $_ensure(1);
+  $3.FieldMask ensureUpdateMask() => $_ensure(1);
 }
 
 /// DeletePortfolio 요청
@@ -1982,6 +2887,340 @@ class ListPortfolioFundsResponse extends $pb.GeneratedMessage {
   $core.bool hasNextPageToken() => $_has(1);
   @$pb.TagNumber(2)
   void clearNextPageToken() => $_clearField(2);
+}
+
+/// CreateExposureSnapshot 요청
+class CreateExposureSnapshotRequest extends $pb.GeneratedMessage {
+  factory CreateExposureSnapshotRequest({
+    $core.String? parent,
+    $core.String? name,
+  }) {
+    final result = create();
+    if (parent != null) result.parent = parent;
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  CreateExposureSnapshotRequest._();
+
+  factory CreateExposureSnapshotRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CreateExposureSnapshotRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateExposureSnapshotRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'parent')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateExposureSnapshotRequest clone() => CreateExposureSnapshotRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateExposureSnapshotRequest copyWith(void Function(CreateExposureSnapshotRequest) updates) => super.copyWith((message) => updates(message as CreateExposureSnapshotRequest)) as CreateExposureSnapshotRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateExposureSnapshotRequest create() => CreateExposureSnapshotRequest._();
+  @$core.override
+  CreateExposureSnapshotRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateExposureSnapshotRequest> createRepeated() => $pb.PbList<CreateExposureSnapshotRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateExposureSnapshotRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateExposureSnapshotRequest>(create);
+  static CreateExposureSnapshotRequest? _defaultInstance;
+
+  /// 부모 포트폴리오 리소스 이름 (예: portfolios/1)
+  @$pb.TagNumber(1)
+  $core.String get parent => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set parent($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasParent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearParent() => $_clearField(1);
+
+  /// 스냅샷 이름 (optional)
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+}
+
+/// GetExposureSnapshot 요청
+class GetExposureSnapshotRequest extends $pb.GeneratedMessage {
+  factory GetExposureSnapshotRequest({
+    $core.String? name,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  GetExposureSnapshotRequest._();
+
+  factory GetExposureSnapshotRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetExposureSnapshotRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetExposureSnapshotRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetExposureSnapshotRequest clone() => GetExposureSnapshotRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetExposureSnapshotRequest copyWith(void Function(GetExposureSnapshotRequest) updates) => super.copyWith((message) => updates(message as GetExposureSnapshotRequest)) as GetExposureSnapshotRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetExposureSnapshotRequest create() => GetExposureSnapshotRequest._();
+  @$core.override
+  GetExposureSnapshotRequest createEmptyInstance() => create();
+  static $pb.PbList<GetExposureSnapshotRequest> createRepeated() => $pb.PbList<GetExposureSnapshotRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetExposureSnapshotRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetExposureSnapshotRequest>(create);
+  static GetExposureSnapshotRequest? _defaultInstance;
+
+  /// 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+}
+
+/// ListExposureSnapshots 요청
+class ListExposureSnapshotsRequest extends $pb.GeneratedMessage {
+  factory ListExposureSnapshotsRequest({
+    $core.String? parent,
+    $core.int? pageSize,
+    $core.String? pageToken,
+  }) {
+    final result = create();
+    if (parent != null) result.parent = parent;
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    return result;
+  }
+
+  ListExposureSnapshotsRequest._();
+
+  factory ListExposureSnapshotsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListExposureSnapshotsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListExposureSnapshotsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'parent')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'pageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListExposureSnapshotsRequest clone() => ListExposureSnapshotsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListExposureSnapshotsRequest copyWith(void Function(ListExposureSnapshotsRequest) updates) => super.copyWith((message) => updates(message as ListExposureSnapshotsRequest)) as ListExposureSnapshotsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListExposureSnapshotsRequest create() => ListExposureSnapshotsRequest._();
+  @$core.override
+  ListExposureSnapshotsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListExposureSnapshotsRequest> createRepeated() => $pb.PbList<ListExposureSnapshotsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListExposureSnapshotsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListExposureSnapshotsRequest>(create);
+  static ListExposureSnapshotsRequest? _defaultInstance;
+
+  /// 부모 포트폴리오 리소스 이름 (예: portfolios/1)
+  @$pb.TagNumber(1)
+  $core.String get parent => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set parent($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasParent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearParent() => $_clearField(1);
+
+  /// 페이지 크기 (optional)
+  @$pb.TagNumber(2)
+  $core.int get pageSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set pageSize($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageSize() => $_clearField(2);
+
+  /// 페이지 토큰 (optional)
+  @$pb.TagNumber(3)
+  $core.String get pageToken => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set pageToken($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPageToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPageToken() => $_clearField(3);
+}
+
+/// ListExposureSnapshots 응답
+class ListExposureSnapshotsResponse extends $pb.GeneratedMessage {
+  factory ListExposureSnapshotsResponse({
+    $core.Iterable<ExposureSnapshot>? snapshots,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (snapshots != null) result.snapshots.addAll(snapshots);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListExposureSnapshotsResponse._();
+
+  factory ListExposureSnapshotsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListExposureSnapshotsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListExposureSnapshotsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..pc<ExposureSnapshot>(1, _omitFieldNames ? '' : 'snapshots', $pb.PbFieldType.PM, subBuilder: ExposureSnapshot.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListExposureSnapshotsResponse clone() => ListExposureSnapshotsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListExposureSnapshotsResponse copyWith(void Function(ListExposureSnapshotsResponse) updates) => super.copyWith((message) => updates(message as ListExposureSnapshotsResponse)) as ListExposureSnapshotsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListExposureSnapshotsResponse create() => ListExposureSnapshotsResponse._();
+  @$core.override
+  ListExposureSnapshotsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListExposureSnapshotsResponse> createRepeated() => $pb.PbList<ListExposureSnapshotsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListExposureSnapshotsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListExposureSnapshotsResponse>(create);
+  static ListExposureSnapshotsResponse? _defaultInstance;
+
+  /// 스냅샷 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<ExposureSnapshot> get snapshots => $_getList(0);
+
+  /// 다음 페이지 토큰
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
+}
+
+/// GetExposureChanges 요청
+class GetExposureChangesRequest extends $pb.GeneratedMessage {
+  factory GetExposureChangesRequest({
+    $core.String? name,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  GetExposureChangesRequest._();
+
+  factory GetExposureChangesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetExposureChangesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetExposureChangesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetExposureChangesRequest clone() => GetExposureChangesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetExposureChangesRequest copyWith(void Function(GetExposureChangesRequest) updates) => super.copyWith((message) => updates(message as GetExposureChangesRequest)) as GetExposureChangesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetExposureChangesRequest create() => GetExposureChangesRequest._();
+  @$core.override
+  GetExposureChangesRequest createEmptyInstance() => create();
+  static $pb.PbList<GetExposureChangesRequest> createRepeated() => $pb.PbList<GetExposureChangesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetExposureChangesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetExposureChangesRequest>(create);
+  static GetExposureChangesRequest? _defaultInstance;
+
+  /// 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+}
+
+/// DeleteExposureSnapshot 요청
+class DeleteExposureSnapshotRequest extends $pb.GeneratedMessage {
+  factory DeleteExposureSnapshotRequest({
+    $core.String? name,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  DeleteExposureSnapshotRequest._();
+
+  factory DeleteExposureSnapshotRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory DeleteExposureSnapshotRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteExposureSnapshotRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteExposureSnapshotRequest clone() => DeleteExposureSnapshotRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteExposureSnapshotRequest copyWith(void Function(DeleteExposureSnapshotRequest) updates) => super.copyWith((message) => updates(message as DeleteExposureSnapshotRequest)) as DeleteExposureSnapshotRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteExposureSnapshotRequest create() => DeleteExposureSnapshotRequest._();
+  @$core.override
+  DeleteExposureSnapshotRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteExposureSnapshotRequest> createRepeated() => $pb.PbList<DeleteExposureSnapshotRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteExposureSnapshotRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteExposureSnapshotRequest>(create);
+  static DeleteExposureSnapshotRequest? _defaultInstance;
+
+  /// 삭제할 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
 }
 
 

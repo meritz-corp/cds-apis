@@ -1,4 +1,116 @@
 // @generated
+impl serde::Serialize for CreateExposureSnapshotRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.CreateExposureSnapshotRequest", len)?;
+        if true {
+            struct_ser.serialize_field("parent", &self.parent)?;
+        }
+        if let Some(v) = self.name.as_ref() {
+            struct_ser.serialize_field("name", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CreateExposureSnapshotRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "parent",
+            "name",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Parent,
+            Name,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "parent" => Ok(GeneratedField::Parent),
+                            "name" => Ok(GeneratedField::Name),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CreateExposureSnapshotRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.CreateExposureSnapshotRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CreateExposureSnapshotRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut parent__ = None;
+                let mut name__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Parent => {
+                            if parent__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("parent"));
+                            }
+                            parent__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CreateExposureSnapshotRequest {
+                    parent: parent__.unwrap_or_default(),
+                    name: name__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.CreateExposureSnapshotRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CreatePortfolioRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -94,6 +206,101 @@ impl<'de> serde::Deserialize<'de> for CreatePortfolioRequest {
         deserializer.deserialize_struct("kdo.v1.portfolio.CreatePortfolioRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for DeleteExposureSnapshotRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.DeleteExposureSnapshotRequest", len)?;
+        if true {
+            struct_ser.serialize_field("name", &self.name)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for DeleteExposureSnapshotRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "name",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Name,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "name" => Ok(GeneratedField::Name),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DeleteExposureSnapshotRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.DeleteExposureSnapshotRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DeleteExposureSnapshotRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut name__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(DeleteExposureSnapshotRequest {
+                    name: name__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.DeleteExposureSnapshotRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for DeletePortfolioRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -187,6 +394,754 @@ impl<'de> serde::Deserialize<'de> for DeletePortfolioRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.portfolio.DeletePortfolioRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ExposureChanges {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.ExposureChanges", len)?;
+        if let Some(v) = self.snapshot.as_ref() {
+            struct_ser.serialize_field("snapshot", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("position_changes", &self.position_changes)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_position_changes", &self.fund_position_changes)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ExposureChanges {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "snapshot",
+            "position_changes",
+            "positionChanges",
+            "fund_position_changes",
+            "fundPositionChanges",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Snapshot,
+            PositionChanges,
+            FundPositionChanges,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "snapshot" => Ok(GeneratedField::Snapshot),
+                            "positionChanges" | "position_changes" => Ok(GeneratedField::PositionChanges),
+                            "fundPositionChanges" | "fund_position_changes" => Ok(GeneratedField::FundPositionChanges),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ExposureChanges;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.ExposureChanges")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ExposureChanges, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut snapshot__ = None;
+                let mut position_changes__ = None;
+                let mut fund_position_changes__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Snapshot => {
+                            if snapshot__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshot"));
+                            }
+                            snapshot__ = map_.next_value()?;
+                        }
+                        GeneratedField::PositionChanges => {
+                            if position_changes__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionChanges"));
+                            }
+                            position_changes__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundPositionChanges => {
+                            if fund_position_changes__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundPositionChanges"));
+                            }
+                            fund_position_changes__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ExposureChanges {
+                    snapshot: snapshot__,
+                    position_changes: position_changes__.unwrap_or_default(),
+                    fund_position_changes: fund_position_changes__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.ExposureChanges", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ExposureSnapshot {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.ExposureSnapshot", len)?;
+        if true {
+            struct_ser.serialize_field("snapshot_id", &self.snapshot_id)?;
+        }
+        if true {
+            struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
+        }
+        if let Some(v) = self.name.as_ref() {
+            struct_ser.serialize_field("name", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("positions", &self.positions)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_positions", &self.fund_positions)?;
+        }
+        if let Some(v) = self.created_at.as_ref() {
+            struct_ser.serialize_field("created_at", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ExposureSnapshot {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "snapshot_id",
+            "snapshotId",
+            "portfolio_id",
+            "portfolioId",
+            "name",
+            "positions",
+            "fund_positions",
+            "fundPositions",
+            "created_at",
+            "createdAt",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            SnapshotId,
+            PortfolioId,
+            Name,
+            Positions,
+            FundPositions,
+            CreatedAt,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "snapshotId" | "snapshot_id" => Ok(GeneratedField::SnapshotId),
+                            "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
+                            "name" => Ok(GeneratedField::Name),
+                            "positions" => Ok(GeneratedField::Positions),
+                            "fundPositions" | "fund_positions" => Ok(GeneratedField::FundPositions),
+                            "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ExposureSnapshot;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.ExposureSnapshot")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ExposureSnapshot, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut snapshot_id__ = None;
+                let mut portfolio_id__ = None;
+                let mut name__ = None;
+                let mut positions__ = None;
+                let mut fund_positions__ = None;
+                let mut created_at__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::SnapshotId => {
+                            if snapshot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotId"));
+                            }
+                            snapshot_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PortfolioId => {
+                            if portfolio_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("portfolioId"));
+                            }
+                            portfolio_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = map_.next_value()?;
+                        }
+                        GeneratedField::Positions => {
+                            if positions__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positions"));
+                            }
+                            positions__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundPositions => {
+                            if fund_positions__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundPositions"));
+                            }
+                            fund_positions__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CreatedAt => {
+                            if created_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("createdAt"));
+                            }
+                            created_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ExposureSnapshot {
+                    snapshot_id: snapshot_id__.unwrap_or_default(),
+                    portfolio_id: portfolio_id__.unwrap_or_default(),
+                    name: name__,
+                    positions: positions__.unwrap_or_default(),
+                    fund_positions: fund_positions__.unwrap_or_default(),
+                    created_at: created_at__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.ExposureSnapshot", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for FundPositionChange {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.FundPositionChange", len)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("snapshot_bid_quantity", ToString::to_string(&self.snapshot_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("snapshot_ask_quantity", ToString::to_string(&self.snapshot_ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("snapshot_net_quantity", ToString::to_string(&self.snapshot_net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("snapshot_bid_average_cost", &self.snapshot_bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("snapshot_ask_average_cost", &self.snapshot_ask_average_cost)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_bid_quantity", ToString::to_string(&self.current_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_ask_quantity", ToString::to_string(&self.current_ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_net_quantity", ToString::to_string(&self.current_net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("current_bid_average_cost", &self.current_bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("current_ask_average_cost", &self.current_ask_average_cost)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity_change", ToString::to_string(&self.bid_quantity_change).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity_change", ToString::to_string(&self.ask_quantity_change).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity_change", ToString::to_string(&self.net_quantity_change).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_average_cost_change", &self.bid_average_cost_change)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_average_cost_change", &self.ask_average_cost_change)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FundPositionChange {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund_code",
+            "fundCode",
+            "symbol",
+            "snapshot_bid_quantity",
+            "snapshotBidQuantity",
+            "snapshot_ask_quantity",
+            "snapshotAskQuantity",
+            "snapshot_net_quantity",
+            "snapshotNetQuantity",
+            "snapshot_bid_average_cost",
+            "snapshotBidAverageCost",
+            "snapshot_ask_average_cost",
+            "snapshotAskAverageCost",
+            "current_bid_quantity",
+            "currentBidQuantity",
+            "current_ask_quantity",
+            "currentAskQuantity",
+            "current_net_quantity",
+            "currentNetQuantity",
+            "current_bid_average_cost",
+            "currentBidAverageCost",
+            "current_ask_average_cost",
+            "currentAskAverageCost",
+            "bid_quantity_change",
+            "bidQuantityChange",
+            "ask_quantity_change",
+            "askQuantityChange",
+            "net_quantity_change",
+            "netQuantityChange",
+            "bid_average_cost_change",
+            "bidAverageCostChange",
+            "ask_average_cost_change",
+            "askAverageCostChange",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FundCode,
+            Symbol,
+            SnapshotBidQuantity,
+            SnapshotAskQuantity,
+            SnapshotNetQuantity,
+            SnapshotBidAverageCost,
+            SnapshotAskAverageCost,
+            CurrentBidQuantity,
+            CurrentAskQuantity,
+            CurrentNetQuantity,
+            CurrentBidAverageCost,
+            CurrentAskAverageCost,
+            BidQuantityChange,
+            AskQuantityChange,
+            NetQuantityChange,
+            BidAverageCostChange,
+            AskAverageCostChange,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "snapshotBidQuantity" | "snapshot_bid_quantity" => Ok(GeneratedField::SnapshotBidQuantity),
+                            "snapshotAskQuantity" | "snapshot_ask_quantity" => Ok(GeneratedField::SnapshotAskQuantity),
+                            "snapshotNetQuantity" | "snapshot_net_quantity" => Ok(GeneratedField::SnapshotNetQuantity),
+                            "snapshotBidAverageCost" | "snapshot_bid_average_cost" => Ok(GeneratedField::SnapshotBidAverageCost),
+                            "snapshotAskAverageCost" | "snapshot_ask_average_cost" => Ok(GeneratedField::SnapshotAskAverageCost),
+                            "currentBidQuantity" | "current_bid_quantity" => Ok(GeneratedField::CurrentBidQuantity),
+                            "currentAskQuantity" | "current_ask_quantity" => Ok(GeneratedField::CurrentAskQuantity),
+                            "currentNetQuantity" | "current_net_quantity" => Ok(GeneratedField::CurrentNetQuantity),
+                            "currentBidAverageCost" | "current_bid_average_cost" => Ok(GeneratedField::CurrentBidAverageCost),
+                            "currentAskAverageCost" | "current_ask_average_cost" => Ok(GeneratedField::CurrentAskAverageCost),
+                            "bidQuantityChange" | "bid_quantity_change" => Ok(GeneratedField::BidQuantityChange),
+                            "askQuantityChange" | "ask_quantity_change" => Ok(GeneratedField::AskQuantityChange),
+                            "netQuantityChange" | "net_quantity_change" => Ok(GeneratedField::NetQuantityChange),
+                            "bidAverageCostChange" | "bid_average_cost_change" => Ok(GeneratedField::BidAverageCostChange),
+                            "askAverageCostChange" | "ask_average_cost_change" => Ok(GeneratedField::AskAverageCostChange),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FundPositionChange;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.FundPositionChange")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FundPositionChange, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund_code__ = None;
+                let mut symbol__ = None;
+                let mut snapshot_bid_quantity__ = None;
+                let mut snapshot_ask_quantity__ = None;
+                let mut snapshot_net_quantity__ = None;
+                let mut snapshot_bid_average_cost__ = None;
+                let mut snapshot_ask_average_cost__ = None;
+                let mut current_bid_quantity__ = None;
+                let mut current_ask_quantity__ = None;
+                let mut current_net_quantity__ = None;
+                let mut current_bid_average_cost__ = None;
+                let mut current_ask_average_cost__ = None;
+                let mut bid_quantity_change__ = None;
+                let mut ask_quantity_change__ = None;
+                let mut net_quantity_change__ = None;
+                let mut bid_average_cost_change__ = None;
+                let mut ask_average_cost_change__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SnapshotBidQuantity => {
+                            if snapshot_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotBidQuantity"));
+                            }
+                            snapshot_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotAskQuantity => {
+                            if snapshot_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotAskQuantity"));
+                            }
+                            snapshot_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotNetQuantity => {
+                            if snapshot_net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotNetQuantity"));
+                            }
+                            snapshot_net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotBidAverageCost => {
+                            if snapshot_bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotBidAverageCost"));
+                            }
+                            snapshot_bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotAskAverageCost => {
+                            if snapshot_ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotAskAverageCost"));
+                            }
+                            snapshot_ask_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentBidQuantity => {
+                            if current_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentBidQuantity"));
+                            }
+                            current_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentAskQuantity => {
+                            if current_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentAskQuantity"));
+                            }
+                            current_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentNetQuantity => {
+                            if current_net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentNetQuantity"));
+                            }
+                            current_net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentBidAverageCost => {
+                            if current_bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentBidAverageCost"));
+                            }
+                            current_bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentAskAverageCost => {
+                            if current_ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentAskAverageCost"));
+                            }
+                            current_ask_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidQuantityChange => {
+                            if bid_quantity_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantityChange"));
+                            }
+                            bid_quantity_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantityChange => {
+                            if ask_quantity_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantityChange"));
+                            }
+                            ask_quantity_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantityChange => {
+                            if net_quantity_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantityChange"));
+                            }
+                            net_quantity_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidAverageCostChange => {
+                            if bid_average_cost_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAverageCostChange"));
+                            }
+                            bid_average_cost_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAverageCostChange => {
+                            if ask_average_cost_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAverageCostChange"));
+                            }
+                            ask_average_cost_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FundPositionChange {
+                    fund_code: fund_code__.unwrap_or_default(),
+                    symbol: symbol__.unwrap_or_default(),
+                    snapshot_bid_quantity: snapshot_bid_quantity__.unwrap_or_default(),
+                    snapshot_ask_quantity: snapshot_ask_quantity__.unwrap_or_default(),
+                    snapshot_net_quantity: snapshot_net_quantity__.unwrap_or_default(),
+                    snapshot_bid_average_cost: snapshot_bid_average_cost__.unwrap_or_default(),
+                    snapshot_ask_average_cost: snapshot_ask_average_cost__.unwrap_or_default(),
+                    current_bid_quantity: current_bid_quantity__.unwrap_or_default(),
+                    current_ask_quantity: current_ask_quantity__.unwrap_or_default(),
+                    current_net_quantity: current_net_quantity__.unwrap_or_default(),
+                    current_bid_average_cost: current_bid_average_cost__.unwrap_or_default(),
+                    current_ask_average_cost: current_ask_average_cost__.unwrap_or_default(),
+                    bid_quantity_change: bid_quantity_change__.unwrap_or_default(),
+                    ask_quantity_change: ask_quantity_change__.unwrap_or_default(),
+                    net_quantity_change: net_quantity_change__.unwrap_or_default(),
+                    bid_average_cost_change: bid_average_cost_change__.unwrap_or_default(),
+                    ask_average_cost_change: ask_average_cost_change__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.FundPositionChange", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for FundSummary {
@@ -576,6 +1531,196 @@ impl<'de> serde::Deserialize<'de> for FundSymbolPosition {
             }
         }
         deserializer.deserialize_struct("kdo.v1.portfolio.FundSymbolPosition", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetExposureChangesRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.GetExposureChangesRequest", len)?;
+        if true {
+            struct_ser.serialize_field("name", &self.name)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetExposureChangesRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "name",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Name,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "name" => Ok(GeneratedField::Name),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetExposureChangesRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.GetExposureChangesRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetExposureChangesRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut name__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetExposureChangesRequest {
+                    name: name__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.GetExposureChangesRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetExposureSnapshotRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.GetExposureSnapshotRequest", len)?;
+        if true {
+            struct_ser.serialize_field("name", &self.name)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetExposureSnapshotRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "name",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Name,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "name" => Ok(GeneratedField::Name),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetExposureSnapshotRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.GetExposureSnapshotRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetExposureSnapshotRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut name__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetExposureSnapshotRequest {
+                    name: name__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.GetExposureSnapshotRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetPortfolioExposureRequest {
@@ -1049,6 +2194,252 @@ impl<'de> serde::Deserialize<'de> for HedgeGroupSummary {
             }
         }
         deserializer.deserialize_struct("kdo.v1.portfolio.HedgeGroupSummary", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListExposureSnapshotsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.ListExposureSnapshotsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("parent", &self.parent)?;
+        }
+        if let Some(v) = self.page_size.as_ref() {
+            struct_ser.serialize_field("page_size", v)?;
+        }
+        if let Some(v) = self.page_token.as_ref() {
+            struct_ser.serialize_field("page_token", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "parent",
+            "page_size",
+            "pageSize",
+            "page_token",
+            "pageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Parent,
+            PageSize,
+            PageToken,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "parent" => Ok(GeneratedField::Parent),
+                            "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
+                            "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListExposureSnapshotsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.ListExposureSnapshotsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListExposureSnapshotsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut parent__ = None;
+                let mut page_size__ = None;
+                let mut page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Parent => {
+                            if parent__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("parent"));
+                            }
+                            parent__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PageSize => {
+                            if page_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageSize"));
+                            }
+                            page_size__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::PageToken => {
+                            if page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageToken"));
+                            }
+                            page_token__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListExposureSnapshotsRequest {
+                    parent: parent__.unwrap_or_default(),
+                    page_size: page_size__,
+                    page_token: page_token__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.ListExposureSnapshotsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListExposureSnapshotsResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.ListExposureSnapshotsResponse", len)?;
+        if true {
+            struct_ser.serialize_field("snapshots", &self.snapshots)?;
+        }
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "snapshots",
+            "next_page_token",
+            "nextPageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Snapshots,
+            NextPageToken,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "snapshots" => Ok(GeneratedField::Snapshots),
+                            "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListExposureSnapshotsResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.ListExposureSnapshotsResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListExposureSnapshotsResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut snapshots__ = None;
+                let mut next_page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Snapshots => {
+                            if snapshots__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshots"));
+                            }
+                            snapshots__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::NextPageToken => {
+                            if next_page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nextPageToken"));
+                            }
+                            next_page_token__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListExposureSnapshotsResponse {
+                    snapshots: snapshots__.unwrap_or_default(),
+                    next_page_token: next_page_token__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.ListExposureSnapshotsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListPortfolioFundsRequest {
@@ -2899,6 +4290,839 @@ impl<'de> serde::Deserialize<'de> for PortfolioPnL {
             }
         }
         deserializer.deserialize_struct("kdo.v1.portfolio.PortfolioPnL", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PositionChange {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.PositionChange", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("snapshot_bid_quantity", ToString::to_string(&self.snapshot_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("snapshot_ask_quantity", ToString::to_string(&self.snapshot_ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("snapshot_net_quantity", ToString::to_string(&self.snapshot_net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("snapshot_bid_average_cost", &self.snapshot_bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("snapshot_ask_average_cost", &self.snapshot_ask_average_cost)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_bid_quantity", ToString::to_string(&self.current_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_ask_quantity", ToString::to_string(&self.current_ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("current_net_quantity", ToString::to_string(&self.current_net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("current_bid_average_cost", &self.current_bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("current_ask_average_cost", &self.current_ask_average_cost)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity_change", ToString::to_string(&self.bid_quantity_change).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity_change", ToString::to_string(&self.ask_quantity_change).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity_change", ToString::to_string(&self.net_quantity_change).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_average_cost_change", &self.bid_average_cost_change)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_average_cost_change", &self.ask_average_cost_change)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PositionChange {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "snapshot_bid_quantity",
+            "snapshotBidQuantity",
+            "snapshot_ask_quantity",
+            "snapshotAskQuantity",
+            "snapshot_net_quantity",
+            "snapshotNetQuantity",
+            "snapshot_bid_average_cost",
+            "snapshotBidAverageCost",
+            "snapshot_ask_average_cost",
+            "snapshotAskAverageCost",
+            "current_bid_quantity",
+            "currentBidQuantity",
+            "current_ask_quantity",
+            "currentAskQuantity",
+            "current_net_quantity",
+            "currentNetQuantity",
+            "current_bid_average_cost",
+            "currentBidAverageCost",
+            "current_ask_average_cost",
+            "currentAskAverageCost",
+            "bid_quantity_change",
+            "bidQuantityChange",
+            "ask_quantity_change",
+            "askQuantityChange",
+            "net_quantity_change",
+            "netQuantityChange",
+            "bid_average_cost_change",
+            "bidAverageCostChange",
+            "ask_average_cost_change",
+            "askAverageCostChange",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            SnapshotBidQuantity,
+            SnapshotAskQuantity,
+            SnapshotNetQuantity,
+            SnapshotBidAverageCost,
+            SnapshotAskAverageCost,
+            CurrentBidQuantity,
+            CurrentAskQuantity,
+            CurrentNetQuantity,
+            CurrentBidAverageCost,
+            CurrentAskAverageCost,
+            BidQuantityChange,
+            AskQuantityChange,
+            NetQuantityChange,
+            BidAverageCostChange,
+            AskAverageCostChange,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "snapshotBidQuantity" | "snapshot_bid_quantity" => Ok(GeneratedField::SnapshotBidQuantity),
+                            "snapshotAskQuantity" | "snapshot_ask_quantity" => Ok(GeneratedField::SnapshotAskQuantity),
+                            "snapshotNetQuantity" | "snapshot_net_quantity" => Ok(GeneratedField::SnapshotNetQuantity),
+                            "snapshotBidAverageCost" | "snapshot_bid_average_cost" => Ok(GeneratedField::SnapshotBidAverageCost),
+                            "snapshotAskAverageCost" | "snapshot_ask_average_cost" => Ok(GeneratedField::SnapshotAskAverageCost),
+                            "currentBidQuantity" | "current_bid_quantity" => Ok(GeneratedField::CurrentBidQuantity),
+                            "currentAskQuantity" | "current_ask_quantity" => Ok(GeneratedField::CurrentAskQuantity),
+                            "currentNetQuantity" | "current_net_quantity" => Ok(GeneratedField::CurrentNetQuantity),
+                            "currentBidAverageCost" | "current_bid_average_cost" => Ok(GeneratedField::CurrentBidAverageCost),
+                            "currentAskAverageCost" | "current_ask_average_cost" => Ok(GeneratedField::CurrentAskAverageCost),
+                            "bidQuantityChange" | "bid_quantity_change" => Ok(GeneratedField::BidQuantityChange),
+                            "askQuantityChange" | "ask_quantity_change" => Ok(GeneratedField::AskQuantityChange),
+                            "netQuantityChange" | "net_quantity_change" => Ok(GeneratedField::NetQuantityChange),
+                            "bidAverageCostChange" | "bid_average_cost_change" => Ok(GeneratedField::BidAverageCostChange),
+                            "askAverageCostChange" | "ask_average_cost_change" => Ok(GeneratedField::AskAverageCostChange),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PositionChange;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.PositionChange")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PositionChange, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut snapshot_bid_quantity__ = None;
+                let mut snapshot_ask_quantity__ = None;
+                let mut snapshot_net_quantity__ = None;
+                let mut snapshot_bid_average_cost__ = None;
+                let mut snapshot_ask_average_cost__ = None;
+                let mut current_bid_quantity__ = None;
+                let mut current_ask_quantity__ = None;
+                let mut current_net_quantity__ = None;
+                let mut current_bid_average_cost__ = None;
+                let mut current_ask_average_cost__ = None;
+                let mut bid_quantity_change__ = None;
+                let mut ask_quantity_change__ = None;
+                let mut net_quantity_change__ = None;
+                let mut bid_average_cost_change__ = None;
+                let mut ask_average_cost_change__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SnapshotBidQuantity => {
+                            if snapshot_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotBidQuantity"));
+                            }
+                            snapshot_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotAskQuantity => {
+                            if snapshot_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotAskQuantity"));
+                            }
+                            snapshot_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotNetQuantity => {
+                            if snapshot_net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotNetQuantity"));
+                            }
+                            snapshot_net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotBidAverageCost => {
+                            if snapshot_bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotBidAverageCost"));
+                            }
+                            snapshot_bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SnapshotAskAverageCost => {
+                            if snapshot_ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("snapshotAskAverageCost"));
+                            }
+                            snapshot_ask_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentBidQuantity => {
+                            if current_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentBidQuantity"));
+                            }
+                            current_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentAskQuantity => {
+                            if current_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentAskQuantity"));
+                            }
+                            current_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentNetQuantity => {
+                            if current_net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentNetQuantity"));
+                            }
+                            current_net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentBidAverageCost => {
+                            if current_bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentBidAverageCost"));
+                            }
+                            current_bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CurrentAskAverageCost => {
+                            if current_ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("currentAskAverageCost"));
+                            }
+                            current_ask_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidQuantityChange => {
+                            if bid_quantity_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantityChange"));
+                            }
+                            bid_quantity_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantityChange => {
+                            if ask_quantity_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantityChange"));
+                            }
+                            ask_quantity_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantityChange => {
+                            if net_quantity_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantityChange"));
+                            }
+                            net_quantity_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidAverageCostChange => {
+                            if bid_average_cost_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAverageCostChange"));
+                            }
+                            bid_average_cost_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAverageCostChange => {
+                            if ask_average_cost_change__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAverageCostChange"));
+                            }
+                            ask_average_cost_change__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PositionChange {
+                    symbol: symbol__.unwrap_or_default(),
+                    snapshot_bid_quantity: snapshot_bid_quantity__.unwrap_or_default(),
+                    snapshot_ask_quantity: snapshot_ask_quantity__.unwrap_or_default(),
+                    snapshot_net_quantity: snapshot_net_quantity__.unwrap_or_default(),
+                    snapshot_bid_average_cost: snapshot_bid_average_cost__.unwrap_or_default(),
+                    snapshot_ask_average_cost: snapshot_ask_average_cost__.unwrap_or_default(),
+                    current_bid_quantity: current_bid_quantity__.unwrap_or_default(),
+                    current_ask_quantity: current_ask_quantity__.unwrap_or_default(),
+                    current_net_quantity: current_net_quantity__.unwrap_or_default(),
+                    current_bid_average_cost: current_bid_average_cost__.unwrap_or_default(),
+                    current_ask_average_cost: current_ask_average_cost__.unwrap_or_default(),
+                    bid_quantity_change: bid_quantity_change__.unwrap_or_default(),
+                    ask_quantity_change: ask_quantity_change__.unwrap_or_default(),
+                    net_quantity_change: net_quantity_change__.unwrap_or_default(),
+                    bid_average_cost_change: bid_average_cost_change__.unwrap_or_default(),
+                    ask_average_cost_change: ask_average_cost_change__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.PositionChange", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SnapshotFundSymbolPosition {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.SnapshotFundSymbolPosition", len)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity", ToString::to_string(&self.net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_average_cost", &self.bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_average_cost", &self.ask_average_cost)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SnapshotFundSymbolPosition {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund_code",
+            "fundCode",
+            "symbol",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
+            "net_quantity",
+            "netQuantity",
+            "bid_average_cost",
+            "bidAverageCost",
+            "ask_average_cost",
+            "askAverageCost",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FundCode,
+            Symbol,
+            BidQuantity,
+            AskQuantity,
+            NetQuantity,
+            BidAverageCost,
+            AskAverageCost,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
+                            "bidAverageCost" | "bid_average_cost" => Ok(GeneratedField::BidAverageCost),
+                            "askAverageCost" | "ask_average_cost" => Ok(GeneratedField::AskAverageCost),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SnapshotFundSymbolPosition;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.SnapshotFundSymbolPosition")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SnapshotFundSymbolPosition, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund_code__ = None;
+                let mut symbol__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
+                let mut net_quantity__ = None;
+                let mut bid_average_cost__ = None;
+                let mut ask_average_cost__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantity => {
+                            if net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantity"));
+                            }
+                            net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidAverageCost => {
+                            if bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAverageCost"));
+                            }
+                            bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAverageCost => {
+                            if ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAverageCost"));
+                            }
+                            ask_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SnapshotFundSymbolPosition {
+                    fund_code: fund_code__.unwrap_or_default(),
+                    symbol: symbol__.unwrap_or_default(),
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
+                    net_quantity: net_quantity__.unwrap_or_default(),
+                    bid_average_cost: bid_average_cost__.unwrap_or_default(),
+                    ask_average_cost: ask_average_cost__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.SnapshotFundSymbolPosition", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SnapshotSymbolPosition {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.SnapshotSymbolPosition", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity", ToString::to_string(&self.net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_average_cost", &self.bid_average_cost)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_average_cost", &self.ask_average_cost)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SnapshotSymbolPosition {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
+            "net_quantity",
+            "netQuantity",
+            "bid_average_cost",
+            "bidAverageCost",
+            "ask_average_cost",
+            "askAverageCost",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            BidQuantity,
+            AskQuantity,
+            NetQuantity,
+            BidAverageCost,
+            AskAverageCost,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
+                            "bidAverageCost" | "bid_average_cost" => Ok(GeneratedField::BidAverageCost),
+                            "askAverageCost" | "ask_average_cost" => Ok(GeneratedField::AskAverageCost),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SnapshotSymbolPosition;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.portfolio.SnapshotSymbolPosition")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SnapshotSymbolPosition, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
+                let mut net_quantity__ = None;
+                let mut bid_average_cost__ = None;
+                let mut ask_average_cost__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantity => {
+                            if net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantity"));
+                            }
+                            net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidAverageCost => {
+                            if bid_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAverageCost"));
+                            }
+                            bid_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAverageCost => {
+                            if ask_average_cost__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAverageCost"));
+                            }
+                            ask_average_cost__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SnapshotSymbolPosition {
+                    symbol: symbol__.unwrap_or_default(),
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
+                    net_quantity: net_quantity__.unwrap_or_default(),
+                    bid_average_cost: bid_average_cost__.unwrap_or_default(),
+                    ask_average_cost: ask_average_cost__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.portfolio.SnapshotSymbolPosition", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for SymbolPnLDetail {

@@ -6,6 +6,7 @@
 import "package:connectrpc/connect.dart" as connect;
 import "portfolio.pb.dart" as kdov1portfolio;
 import "portfolio.connect.spec.dart" as specs;
+import "../../google/protobuf/empty.pb.dart" as googleprotobufempty;
 
 /// PortfolioService는 포트폴리오 관련 서비스를 제공합니다.
 /// Portfolio는 P&L(손익) 집계 단위입니다.
@@ -167,6 +168,96 @@ extension type PortfolioServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.PortfolioService.listPortfolioFunds,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Exposure 스냅샷 생성 (현재 포지션 상태를 저장)
+  Future<kdov1portfolio.ExposureSnapshot> createExposureSnapshot(
+    kdov1portfolio.CreateExposureSnapshotRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PortfolioService.createExposureSnapshot,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Exposure 스냅샷 단일 조회
+  Future<kdov1portfolio.ExposureSnapshot> getExposureSnapshot(
+    kdov1portfolio.GetExposureSnapshotRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PortfolioService.getExposureSnapshot,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Exposure 스냅샷 목록 조회
+  Future<kdov1portfolio.ListExposureSnapshotsResponse> listExposureSnapshots(
+    kdov1portfolio.ListExposureSnapshotsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PortfolioService.listExposureSnapshots,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 스냅샷 이후 포지션 변화 조회
+  Future<kdov1portfolio.ExposureChanges> getExposureChanges(
+    kdov1portfolio.GetExposureChangesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PortfolioService.getExposureChanges,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Exposure 스냅샷 삭제
+  Future<googleprotobufempty.Empty> deleteExposureSnapshot(
+    kdov1portfolio.DeleteExposureSnapshotRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PortfolioService.deleteExposureSnapshot,
       input,
       signal: signal,
       headers: headers,

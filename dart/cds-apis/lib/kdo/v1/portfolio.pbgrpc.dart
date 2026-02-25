@@ -16,6 +16,7 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../google/protobuf/empty.pb.dart' as $1;
 import 'portfolio.pb.dart' as $0;
 
 export 'portfolio.pb.dart';
@@ -82,6 +83,31 @@ class PortfolioServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listPortfolioFunds, request, options: options);
   }
 
+  /// Exposure 스냅샷 생성 (현재 포지션 상태를 저장)
+  $grpc.ResponseFuture<$0.ExposureSnapshot> createExposureSnapshot($0.CreateExposureSnapshotRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$createExposureSnapshot, request, options: options);
+  }
+
+  /// Exposure 스냅샷 단일 조회
+  $grpc.ResponseFuture<$0.ExposureSnapshot> getExposureSnapshot($0.GetExposureSnapshotRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getExposureSnapshot, request, options: options);
+  }
+
+  /// Exposure 스냅샷 목록 조회
+  $grpc.ResponseFuture<$0.ListExposureSnapshotsResponse> listExposureSnapshots($0.ListExposureSnapshotsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listExposureSnapshots, request, options: options);
+  }
+
+  /// 스냅샷 이후 포지션 변화 조회
+  $grpc.ResponseFuture<$0.ExposureChanges> getExposureChanges($0.GetExposureChangesRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getExposureChanges, request, options: options);
+  }
+
+  /// Exposure 스냅샷 삭제
+  $grpc.ResponseFuture<$1.Empty> deleteExposureSnapshot($0.DeleteExposureSnapshotRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$deleteExposureSnapshot, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getPortfolio = $grpc.ClientMethod<$0.GetPortfolioRequest, $0.Portfolio>(
@@ -120,6 +146,26 @@ class PortfolioServiceClient extends $grpc.Client {
       '/kdo.v1.portfolio.PortfolioService/ListPortfolioFunds',
       ($0.ListPortfolioFundsRequest value) => value.writeToBuffer(),
       $0.ListPortfolioFundsResponse.fromBuffer);
+  static final _$createExposureSnapshot = $grpc.ClientMethod<$0.CreateExposureSnapshotRequest, $0.ExposureSnapshot>(
+      '/kdo.v1.portfolio.PortfolioService/CreateExposureSnapshot',
+      ($0.CreateExposureSnapshotRequest value) => value.writeToBuffer(),
+      $0.ExposureSnapshot.fromBuffer);
+  static final _$getExposureSnapshot = $grpc.ClientMethod<$0.GetExposureSnapshotRequest, $0.ExposureSnapshot>(
+      '/kdo.v1.portfolio.PortfolioService/GetExposureSnapshot',
+      ($0.GetExposureSnapshotRequest value) => value.writeToBuffer(),
+      $0.ExposureSnapshot.fromBuffer);
+  static final _$listExposureSnapshots = $grpc.ClientMethod<$0.ListExposureSnapshotsRequest, $0.ListExposureSnapshotsResponse>(
+      '/kdo.v1.portfolio.PortfolioService/ListExposureSnapshots',
+      ($0.ListExposureSnapshotsRequest value) => value.writeToBuffer(),
+      $0.ListExposureSnapshotsResponse.fromBuffer);
+  static final _$getExposureChanges = $grpc.ClientMethod<$0.GetExposureChangesRequest, $0.ExposureChanges>(
+      '/kdo.v1.portfolio.PortfolioService/GetExposureChanges',
+      ($0.GetExposureChangesRequest value) => value.writeToBuffer(),
+      $0.ExposureChanges.fromBuffer);
+  static final _$deleteExposureSnapshot = $grpc.ClientMethod<$0.DeleteExposureSnapshotRequest, $1.Empty>(
+      '/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot',
+      ($0.DeleteExposureSnapshotRequest value) => value.writeToBuffer(),
+      $1.Empty.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.portfolio.PortfolioService')
@@ -190,6 +236,41 @@ abstract class PortfolioServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListPortfolioFundsRequest.fromBuffer(value),
         ($0.ListPortfolioFundsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CreateExposureSnapshotRequest, $0.ExposureSnapshot>(
+        'CreateExposureSnapshot',
+        createExposureSnapshot_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CreateExposureSnapshotRequest.fromBuffer(value),
+        ($0.ExposureSnapshot value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetExposureSnapshotRequest, $0.ExposureSnapshot>(
+        'GetExposureSnapshot',
+        getExposureSnapshot_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetExposureSnapshotRequest.fromBuffer(value),
+        ($0.ExposureSnapshot value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListExposureSnapshotsRequest, $0.ListExposureSnapshotsResponse>(
+        'ListExposureSnapshots',
+        listExposureSnapshots_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListExposureSnapshotsRequest.fromBuffer(value),
+        ($0.ListExposureSnapshotsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetExposureChangesRequest, $0.ExposureChanges>(
+        'GetExposureChanges',
+        getExposureChanges_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetExposureChangesRequest.fromBuffer(value),
+        ($0.ExposureChanges value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.DeleteExposureSnapshotRequest, $1.Empty>(
+        'DeleteExposureSnapshot',
+        deleteExposureSnapshot_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.DeleteExposureSnapshotRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Portfolio> getPortfolio_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPortfolioRequest> $request) async {
@@ -245,5 +326,35 @@ abstract class PortfolioServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListPortfolioFundsResponse> listPortfolioFunds($grpc.ServiceCall call, $0.ListPortfolioFundsRequest request);
+
+  $async.Future<$0.ExposureSnapshot> createExposureSnapshot_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateExposureSnapshotRequest> $request) async {
+    return createExposureSnapshot($call, await $request);
+  }
+
+  $async.Future<$0.ExposureSnapshot> createExposureSnapshot($grpc.ServiceCall call, $0.CreateExposureSnapshotRequest request);
+
+  $async.Future<$0.ExposureSnapshot> getExposureSnapshot_Pre($grpc.ServiceCall $call, $async.Future<$0.GetExposureSnapshotRequest> $request) async {
+    return getExposureSnapshot($call, await $request);
+  }
+
+  $async.Future<$0.ExposureSnapshot> getExposureSnapshot($grpc.ServiceCall call, $0.GetExposureSnapshotRequest request);
+
+  $async.Future<$0.ListExposureSnapshotsResponse> listExposureSnapshots_Pre($grpc.ServiceCall $call, $async.Future<$0.ListExposureSnapshotsRequest> $request) async {
+    return listExposureSnapshots($call, await $request);
+  }
+
+  $async.Future<$0.ListExposureSnapshotsResponse> listExposureSnapshots($grpc.ServiceCall call, $0.ListExposureSnapshotsRequest request);
+
+  $async.Future<$0.ExposureChanges> getExposureChanges_Pre($grpc.ServiceCall $call, $async.Future<$0.GetExposureChangesRequest> $request) async {
+    return getExposureChanges($call, await $request);
+  }
+
+  $async.Future<$0.ExposureChanges> getExposureChanges($grpc.ServiceCall call, $0.GetExposureChangesRequest request);
+
+  $async.Future<$1.Empty> deleteExposureSnapshot_Pre($grpc.ServiceCall $call, $async.Future<$0.DeleteExposureSnapshotRequest> $request) async {
+    return deleteExposureSnapshot($call, await $request);
+  }
+
+  $async.Future<$1.Empty> deleteExposureSnapshot($grpc.ServiceCall call, $0.DeleteExposureSnapshotRequest request);
 
 }

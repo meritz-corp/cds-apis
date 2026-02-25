@@ -267,6 +267,203 @@ pub struct FundSummary {
     #[prost(string, tag="4")]
     pub hedge_group_name: ::prost::alloc::string::String,
 }
+// ========== Exposure Snapshot Messages ==========
+
+/// 특정 시점의 포지션 스냅샷
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExposureSnapshot {
+    /// 스냅샷 ID
+    #[prost(string, tag="1")]
+    pub snapshot_id: ::prost::alloc::string::String,
+    /// 포트폴리오 ID
+    #[prost(int32, tag="2")]
+    pub portfolio_id: i32,
+    /// 스냅샷 이름 (사용자 지정, optional)
+    #[prost(string, optional, tag="3")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// 심볼별 통합 포지션 (모든 Fund 합산)
+    #[prost(message, repeated, tag="4")]
+    pub positions: ::prost::alloc::vec::Vec<SnapshotSymbolPosition>,
+    /// Fund별 심볼 포지션
+    #[prost(message, repeated, tag="5")]
+    pub fund_positions: ::prost::alloc::vec::Vec<SnapshotFundSymbolPosition>,
+    /// 스냅샷 생성 시간
+    #[prost(message, optional, tag="6")]
+    pub created_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
+/// 스냅샷에 저장되는 심볼별 포지션
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SnapshotSymbolPosition {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 매수 수량 (>= 0)
+    #[prost(int64, tag="2")]
+    pub bid_quantity: i64,
+    /// 매도 수량 (>= 0)
+    #[prost(int64, tag="3")]
+    pub ask_quantity: i64,
+    /// 순수량 (bid - ask)
+    #[prost(int64, tag="4")]
+    pub net_quantity: i64,
+    /// 매수 평균단가
+    #[prost(double, tag="5")]
+    pub bid_average_cost: f64,
+    /// 매도 평균단가
+    #[prost(double, tag="6")]
+    pub ask_average_cost: f64,
+}
+/// 스냅샷에 저장되는 Fund별 심볼 포지션
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SnapshotFundSymbolPosition {
+    /// 펀드 코드
+    #[prost(string, tag="1")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 종목 심볼
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 매수 수량 (>= 0)
+    #[prost(int64, tag="3")]
+    pub bid_quantity: i64,
+    /// 매도 수량 (>= 0)
+    #[prost(int64, tag="4")]
+    pub ask_quantity: i64,
+    /// 순수량 (bid - ask)
+    #[prost(int64, tag="5")]
+    pub net_quantity: i64,
+    /// 매수 평균단가
+    #[prost(double, tag="6")]
+    pub bid_average_cost: f64,
+    /// 매도 평균단가
+    #[prost(double, tag="7")]
+    pub ask_average_cost: f64,
+}
+/// 스냅샷 이후 심볼별 포지션 변화
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PositionChange {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 스냅샷 시점 매수 수량
+    #[prost(int64, tag="2")]
+    pub snapshot_bid_quantity: i64,
+    /// 스냅샷 시점 매도 수량
+    #[prost(int64, tag="3")]
+    pub snapshot_ask_quantity: i64,
+    /// 스냅샷 시점 순수량
+    #[prost(int64, tag="4")]
+    pub snapshot_net_quantity: i64,
+    /// 스냅샷 시점 매수 평균단가
+    #[prost(double, tag="5")]
+    pub snapshot_bid_average_cost: f64,
+    /// 스냅샷 시점 매도 평균단가
+    #[prost(double, tag="6")]
+    pub snapshot_ask_average_cost: f64,
+    /// 현재 매수 수량
+    #[prost(int64, tag="7")]
+    pub current_bid_quantity: i64,
+    /// 현재 매도 수량
+    #[prost(int64, tag="8")]
+    pub current_ask_quantity: i64,
+    /// 현재 순수량
+    #[prost(int64, tag="9")]
+    pub current_net_quantity: i64,
+    /// 현재 매수 평균단가
+    #[prost(double, tag="10")]
+    pub current_bid_average_cost: f64,
+    /// 현재 매도 평균단가
+    #[prost(double, tag="11")]
+    pub current_ask_average_cost: f64,
+    /// 매수 수량 변화 (current - snapshot)
+    #[prost(int64, tag="12")]
+    pub bid_quantity_change: i64,
+    /// 매도 수량 변화 (current - snapshot)
+    #[prost(int64, tag="13")]
+    pub ask_quantity_change: i64,
+    /// 순수량 변화 (current - snapshot)
+    #[prost(int64, tag="14")]
+    pub net_quantity_change: i64,
+    /// 매수 평균단가 변화
+    #[prost(double, tag="15")]
+    pub bid_average_cost_change: f64,
+    /// 매도 평균단가 변화
+    #[prost(double, tag="16")]
+    pub ask_average_cost_change: f64,
+}
+/// 스냅샷 이후 Fund별 심볼 포지션 변화
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FundPositionChange {
+    /// 펀드 코드
+    #[prost(string, tag="1")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 종목 심볼
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 스냅샷 시점 매수 수량
+    #[prost(int64, tag="3")]
+    pub snapshot_bid_quantity: i64,
+    /// 스냅샷 시점 매도 수량
+    #[prost(int64, tag="4")]
+    pub snapshot_ask_quantity: i64,
+    /// 스냅샷 시점 순수량
+    #[prost(int64, tag="5")]
+    pub snapshot_net_quantity: i64,
+    /// 스냅샷 시점 매수 평균단가
+    #[prost(double, tag="6")]
+    pub snapshot_bid_average_cost: f64,
+    /// 스냅샷 시점 매도 평균단가
+    #[prost(double, tag="7")]
+    pub snapshot_ask_average_cost: f64,
+    /// 현재 매수 수량
+    #[prost(int64, tag="8")]
+    pub current_bid_quantity: i64,
+    /// 현재 매도 수량
+    #[prost(int64, tag="9")]
+    pub current_ask_quantity: i64,
+    /// 현재 순수량
+    #[prost(int64, tag="10")]
+    pub current_net_quantity: i64,
+    /// 현재 매수 평균단가
+    #[prost(double, tag="11")]
+    pub current_bid_average_cost: f64,
+    /// 현재 매도 평균단가
+    #[prost(double, tag="12")]
+    pub current_ask_average_cost: f64,
+    /// 매수 수량 변화
+    #[prost(int64, tag="13")]
+    pub bid_quantity_change: i64,
+    /// 매도 수량 변화
+    #[prost(int64, tag="14")]
+    pub ask_quantity_change: i64,
+    /// 순수량 변화
+    #[prost(int64, tag="15")]
+    pub net_quantity_change: i64,
+    /// 매수 평균단가 변화
+    #[prost(double, tag="16")]
+    pub bid_average_cost_change: f64,
+    /// 매도 평균단가 변화
+    #[prost(double, tag="17")]
+    pub ask_average_cost_change: f64,
+}
+/// 스냅샷 이후 전체 포지션 변화 요약
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExposureChanges {
+    /// 기준 스냅샷
+    #[prost(message, optional, tag="1")]
+    pub snapshot: ::core::option::Option<ExposureSnapshot>,
+    /// 심볼별 포지션 변화 목록
+    #[prost(message, repeated, tag="2")]
+    pub position_changes: ::prost::alloc::vec::Vec<PositionChange>,
+    /// Fund별 심볼 포지션 변화 목록
+    #[prost(message, repeated, tag="3")]
+    pub fund_position_changes: ::prost::alloc::vec::Vec<FundPositionChange>,
+}
 // ========== Request/Response Messages ==========
 
 /// GetPortfolio 요청
@@ -403,6 +600,66 @@ pub struct ListPortfolioFundsResponse {
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
+}
+/// CreateExposureSnapshot 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateExposureSnapshotRequest {
+    /// 부모 포트폴리오 리소스 이름 (예: portfolios/1)
+    #[prost(string, tag="1")]
+    pub parent: ::prost::alloc::string::String,
+    /// 스냅샷 이름 (optional)
+    #[prost(string, optional, tag="2")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// GetExposureSnapshot 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetExposureSnapshotRequest {
+    /// 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
+}
+/// ListExposureSnapshots 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListExposureSnapshotsRequest {
+    /// 부모 포트폴리오 리소스 이름 (예: portfolios/1)
+    #[prost(string, tag="1")]
+    pub parent: ::prost::alloc::string::String,
+    /// 페이지 크기 (optional)
+    #[prost(int32, optional, tag="2")]
+    pub page_size: ::core::option::Option<i32>,
+    /// 페이지 토큰 (optional)
+    #[prost(string, optional, tag="3")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ListExposureSnapshots 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListExposureSnapshotsResponse {
+    /// 스냅샷 목록
+    #[prost(message, repeated, tag="1")]
+    pub snapshots: ::prost::alloc::vec::Vec<ExposureSnapshot>,
+    /// 다음 페이지 토큰
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
+/// GetExposureChanges 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetExposureChangesRequest {
+    /// 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
+}
+/// DeleteExposureSnapshot 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteExposureSnapshotRequest {
+    /// 삭제할 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
 }
 include!("kdo.v1.portfolio.tonic.rs");
 include!("kdo.v1.portfolio.serde.rs");

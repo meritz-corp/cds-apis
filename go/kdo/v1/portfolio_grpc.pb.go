@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -42,6 +43,16 @@ type PortfolioServiceClient interface {
 	// 포트폴리오에 속한 Fund 목록 조회
 	// (Portfolio → HedgeGroups → Funds)
 	ListPortfolioFunds(ctx context.Context, in *ListPortfolioFundsRequest, opts ...grpc.CallOption) (*ListPortfolioFundsResponse, error)
+	// Exposure 스냅샷 생성 (현재 포지션 상태를 저장)
+	CreateExposureSnapshot(ctx context.Context, in *CreateExposureSnapshotRequest, opts ...grpc.CallOption) (*ExposureSnapshot, error)
+	// Exposure 스냅샷 단일 조회
+	GetExposureSnapshot(ctx context.Context, in *GetExposureSnapshotRequest, opts ...grpc.CallOption) (*ExposureSnapshot, error)
+	// Exposure 스냅샷 목록 조회
+	ListExposureSnapshots(ctx context.Context, in *ListExposureSnapshotsRequest, opts ...grpc.CallOption) (*ListExposureSnapshotsResponse, error)
+	// 스냅샷 이후 포지션 변화 조회
+	GetExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (*ExposureChanges, error)
+	// Exposure 스냅샷 삭제
+	DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type portfolioServiceClient struct {
@@ -179,6 +190,51 @@ func (c *portfolioServiceClient) ListPortfolioFunds(ctx context.Context, in *Lis
 	return out, nil
 }
 
+func (c *portfolioServiceClient) CreateExposureSnapshot(ctx context.Context, in *CreateExposureSnapshotRequest, opts ...grpc.CallOption) (*ExposureSnapshot, error) {
+	out := new(ExposureSnapshot)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/CreateExposureSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) GetExposureSnapshot(ctx context.Context, in *GetExposureSnapshotRequest, opts ...grpc.CallOption) (*ExposureSnapshot, error) {
+	out := new(ExposureSnapshot)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/GetExposureSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) ListExposureSnapshots(ctx context.Context, in *ListExposureSnapshotsRequest, opts ...grpc.CallOption) (*ListExposureSnapshotsResponse, error) {
+	out := new(ListExposureSnapshotsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/ListExposureSnapshots", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) GetExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (*ExposureChanges, error) {
+	out := new(ExposureChanges)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/GetExposureChanges", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PortfolioServiceServer is the server API for PortfolioService service.
 // All implementations must embed UnimplementedPortfolioServiceServer
 // for forward compatibility
@@ -203,6 +259,16 @@ type PortfolioServiceServer interface {
 	// 포트폴리오에 속한 Fund 목록 조회
 	// (Portfolio → HedgeGroups → Funds)
 	ListPortfolioFunds(context.Context, *ListPortfolioFundsRequest) (*ListPortfolioFundsResponse, error)
+	// Exposure 스냅샷 생성 (현재 포지션 상태를 저장)
+	CreateExposureSnapshot(context.Context, *CreateExposureSnapshotRequest) (*ExposureSnapshot, error)
+	// Exposure 스냅샷 단일 조회
+	GetExposureSnapshot(context.Context, *GetExposureSnapshotRequest) (*ExposureSnapshot, error)
+	// Exposure 스냅샷 목록 조회
+	ListExposureSnapshots(context.Context, *ListExposureSnapshotsRequest) (*ListExposureSnapshotsResponse, error)
+	// 스냅샷 이후 포지션 변화 조회
+	GetExposureChanges(context.Context, *GetExposureChangesRequest) (*ExposureChanges, error)
+	// Exposure 스냅샷 삭제
+	DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPortfolioServiceServer()
 }
 
@@ -236,6 +302,21 @@ func (UnimplementedPortfolioServiceServer) ListPortfolioHedgeGroups(context.Cont
 }
 func (UnimplementedPortfolioServiceServer) ListPortfolioFunds(context.Context, *ListPortfolioFundsRequest) (*ListPortfolioFundsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPortfolioFunds not implemented")
+}
+func (UnimplementedPortfolioServiceServer) CreateExposureSnapshot(context.Context, *CreateExposureSnapshotRequest) (*ExposureSnapshot, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateExposureSnapshot not implemented")
+}
+func (UnimplementedPortfolioServiceServer) GetExposureSnapshot(context.Context, *GetExposureSnapshotRequest) (*ExposureSnapshot, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExposureSnapshot not implemented")
+}
+func (UnimplementedPortfolioServiceServer) ListExposureSnapshots(context.Context, *ListExposureSnapshotsRequest) (*ListExposureSnapshotsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExposureSnapshots not implemented")
+}
+func (UnimplementedPortfolioServiceServer) GetExposureChanges(context.Context, *GetExposureChangesRequest) (*ExposureChanges, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExposureChanges not implemented")
+}
+func (UnimplementedPortfolioServiceServer) DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExposureSnapshot not implemented")
 }
 func (UnimplementedPortfolioServiceServer) mustEmbedUnimplementedPortfolioServiceServer() {}
 
@@ -418,6 +499,96 @@ func _PortfolioService_ListPortfolioFunds_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PortfolioService_CreateExposureSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateExposureSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).CreateExposureSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/CreateExposureSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).CreateExposureSnapshot(ctx, req.(*CreateExposureSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_GetExposureSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExposureSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).GetExposureSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/GetExposureSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).GetExposureSnapshot(ctx, req.(*GetExposureSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_ListExposureSnapshots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExposureSnapshotsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).ListExposureSnapshots(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/ListExposureSnapshots",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).ListExposureSnapshots(ctx, req.(*ListExposureSnapshotsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_GetExposureChanges_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExposureChangesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).GetExposureChanges(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/GetExposureChanges",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).GetExposureChanges(ctx, req.(*GetExposureChangesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_DeleteExposureSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteExposureSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).DeleteExposureSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).DeleteExposureSnapshot(ctx, req.(*DeleteExposureSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PortfolioService_ServiceDesc is the grpc.ServiceDesc for PortfolioService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -452,6 +623,26 @@ var PortfolioService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPortfolioFunds",
 			Handler:    _PortfolioService_ListPortfolioFunds_Handler,
+		},
+		{
+			MethodName: "CreateExposureSnapshot",
+			Handler:    _PortfolioService_CreateExposureSnapshot_Handler,
+		},
+		{
+			MethodName: "GetExposureSnapshot",
+			Handler:    _PortfolioService_GetExposureSnapshot_Handler,
+		},
+		{
+			MethodName: "ListExposureSnapshots",
+			Handler:    _PortfolioService_ListExposureSnapshots_Handler,
+		},
+		{
+			MethodName: "GetExposureChanges",
+			Handler:    _PortfolioService_GetExposureChanges_Handler,
+		},
+		{
+			MethodName: "DeleteExposureSnapshot",
+			Handler:    _PortfolioService_DeleteExposureSnapshot_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

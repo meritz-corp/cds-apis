@@ -10,6 +10,7 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // MockPortfolioService_StreamPortfolioPnLClient is a mock of PortfolioService_StreamPortfolioPnLClient interface.
@@ -519,6 +520,86 @@ func (m *MockPortfolioServiceClient) EXPECT() *MockPortfolioServiceClientMockRec
 	return m.recorder
 }
 
+// CreateExposureSnapshot mocks base method.
+func (m *MockPortfolioServiceClient) CreateExposureSnapshot(ctx context.Context, in *CreateExposureSnapshotRequest, opts ...grpc.CallOption) (*ExposureSnapshot, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateExposureSnapshot", varargs...)
+	ret0, _ := ret[0].(*ExposureSnapshot)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateExposureSnapshot indicates an expected call of CreateExposureSnapshot.
+func (mr *MockPortfolioServiceClientMockRecorder) CreateExposureSnapshot(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateExposureSnapshot", reflect.TypeOf((*MockPortfolioServiceClient)(nil).CreateExposureSnapshot), varargs...)
+}
+
+// DeleteExposureSnapshot mocks base method.
+func (m *MockPortfolioServiceClient) DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteExposureSnapshot", varargs...)
+	ret0, _ := ret[0].(*emptypb.Empty)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteExposureSnapshot indicates an expected call of DeleteExposureSnapshot.
+func (mr *MockPortfolioServiceClientMockRecorder) DeleteExposureSnapshot(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteExposureSnapshot", reflect.TypeOf((*MockPortfolioServiceClient)(nil).DeleteExposureSnapshot), varargs...)
+}
+
+// GetExposureChanges mocks base method.
+func (m *MockPortfolioServiceClient) GetExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (*ExposureChanges, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetExposureChanges", varargs...)
+	ret0, _ := ret[0].(*ExposureChanges)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetExposureChanges indicates an expected call of GetExposureChanges.
+func (mr *MockPortfolioServiceClientMockRecorder) GetExposureChanges(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetExposureChanges", reflect.TypeOf((*MockPortfolioServiceClient)(nil).GetExposureChanges), varargs...)
+}
+
+// GetExposureSnapshot mocks base method.
+func (m *MockPortfolioServiceClient) GetExposureSnapshot(ctx context.Context, in *GetExposureSnapshotRequest, opts ...grpc.CallOption) (*ExposureSnapshot, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetExposureSnapshot", varargs...)
+	ret0, _ := ret[0].(*ExposureSnapshot)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetExposureSnapshot indicates an expected call of GetExposureSnapshot.
+func (mr *MockPortfolioServiceClientMockRecorder) GetExposureSnapshot(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetExposureSnapshot", reflect.TypeOf((*MockPortfolioServiceClient)(nil).GetExposureSnapshot), varargs...)
+}
+
 // GetPortfolio mocks base method.
 func (m *MockPortfolioServiceClient) GetPortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*Portfolio, error) {
 	m.ctrl.T.Helper()
@@ -577,6 +658,26 @@ func (mr *MockPortfolioServiceClientMockRecorder) GetPortfolioPnL(ctx, in interf
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioPnL", reflect.TypeOf((*MockPortfolioServiceClient)(nil).GetPortfolioPnL), varargs...)
+}
+
+// ListExposureSnapshots mocks base method.
+func (m *MockPortfolioServiceClient) ListExposureSnapshots(ctx context.Context, in *ListExposureSnapshotsRequest, opts ...grpc.CallOption) (*ListExposureSnapshotsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListExposureSnapshots", varargs...)
+	ret0, _ := ret[0].(*ListExposureSnapshotsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListExposureSnapshots indicates an expected call of ListExposureSnapshots.
+func (mr *MockPortfolioServiceClientMockRecorder) ListExposureSnapshots(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListExposureSnapshots", reflect.TypeOf((*MockPortfolioServiceClient)(nil).ListExposureSnapshots), varargs...)
 }
 
 // ListPortfolioFunds mocks base method.
@@ -722,6 +823,66 @@ func (m *MockPortfolioServiceServer) EXPECT() *MockPortfolioServiceServerMockRec
 	return m.recorder
 }
 
+// CreateExposureSnapshot mocks base method.
+func (m *MockPortfolioServiceServer) CreateExposureSnapshot(ctx context.Context, in *CreateExposureSnapshotRequest) (*ExposureSnapshot, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateExposureSnapshot", ctx, in)
+	ret0, _ := ret[0].(*ExposureSnapshot)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateExposureSnapshot indicates an expected call of CreateExposureSnapshot.
+func (mr *MockPortfolioServiceServerMockRecorder) CreateExposureSnapshot(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateExposureSnapshot", reflect.TypeOf((*MockPortfolioServiceServer)(nil).CreateExposureSnapshot), ctx, in)
+}
+
+// DeleteExposureSnapshot mocks base method.
+func (m *MockPortfolioServiceServer) DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest) (*emptypb.Empty, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteExposureSnapshot", ctx, in)
+	ret0, _ := ret[0].(*emptypb.Empty)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteExposureSnapshot indicates an expected call of DeleteExposureSnapshot.
+func (mr *MockPortfolioServiceServerMockRecorder) DeleteExposureSnapshot(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteExposureSnapshot", reflect.TypeOf((*MockPortfolioServiceServer)(nil).DeleteExposureSnapshot), ctx, in)
+}
+
+// GetExposureChanges mocks base method.
+func (m *MockPortfolioServiceServer) GetExposureChanges(ctx context.Context, in *GetExposureChangesRequest) (*ExposureChanges, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetExposureChanges", ctx, in)
+	ret0, _ := ret[0].(*ExposureChanges)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetExposureChanges indicates an expected call of GetExposureChanges.
+func (mr *MockPortfolioServiceServerMockRecorder) GetExposureChanges(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetExposureChanges", reflect.TypeOf((*MockPortfolioServiceServer)(nil).GetExposureChanges), ctx, in)
+}
+
+// GetExposureSnapshot mocks base method.
+func (m *MockPortfolioServiceServer) GetExposureSnapshot(ctx context.Context, in *GetExposureSnapshotRequest) (*ExposureSnapshot, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetExposureSnapshot", ctx, in)
+	ret0, _ := ret[0].(*ExposureSnapshot)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetExposureSnapshot indicates an expected call of GetExposureSnapshot.
+func (mr *MockPortfolioServiceServerMockRecorder) GetExposureSnapshot(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetExposureSnapshot", reflect.TypeOf((*MockPortfolioServiceServer)(nil).GetExposureSnapshot), ctx, in)
+}
+
 // GetPortfolio mocks base method.
 func (m *MockPortfolioServiceServer) GetPortfolio(ctx context.Context, in *GetPortfolioRequest) (*Portfolio, error) {
 	m.ctrl.T.Helper()
@@ -765,6 +926,21 @@ func (m *MockPortfolioServiceServer) GetPortfolioPnL(ctx context.Context, in *Ge
 func (mr *MockPortfolioServiceServerMockRecorder) GetPortfolioPnL(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioPnL", reflect.TypeOf((*MockPortfolioServiceServer)(nil).GetPortfolioPnL), ctx, in)
+}
+
+// ListExposureSnapshots mocks base method.
+func (m *MockPortfolioServiceServer) ListExposureSnapshots(ctx context.Context, in *ListExposureSnapshotsRequest) (*ListExposureSnapshotsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListExposureSnapshots", ctx, in)
+	ret0, _ := ret[0].(*ListExposureSnapshotsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListExposureSnapshots indicates an expected call of ListExposureSnapshots.
+func (mr *MockPortfolioServiceServerMockRecorder) ListExposureSnapshots(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListExposureSnapshots", reflect.TypeOf((*MockPortfolioServiceServer)(nil).ListExposureSnapshots), ctx, in)
 }
 
 // ListPortfolioFunds mocks base method.

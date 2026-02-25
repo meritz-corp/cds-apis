@@ -63,6 +63,39 @@
         ]
       }
     },
+    "/v1/{name_1}": {
+      "get": {
+        "summary": "Exposure 스냅샷 단일 조회",
+        "operationId": "PortfolioService_GetExposureSnapshot",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/portfolioExposureSnapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name_1",
+            "description": "스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+/exposureSnapshots/[^/]+"
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      }
+    },
     "/v1/{name}": {
       "get": {
         "summary": "단일 포트폴리오 조회",
@@ -89,6 +122,38 @@
             "required": true,
             "type": "string",
             "pattern": "portfolios/[^/]+"
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      },
+      "delete": {
+        "summary": "Exposure 스냅샷 삭제",
+        "operationId": "PortfolioService_DeleteExposureSnapshot",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "삭제할 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+/exposureSnapshots/[^/]+"
           }
         ],
         "tags": [
@@ -239,6 +304,133 @@
             "required": true,
             "type": "string",
             "pattern": "portfolios/[^/]+"
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      }
+    },
+    "/v1/{name}:changes": {
+      "get": {
+        "summary": "스냅샷 이후 포지션 변화 조회",
+        "operationId": "PortfolioService_GetExposureChanges",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/portfolioExposureChanges"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+/exposureSnapshots/[^/]+"
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      }
+    },
+    "/v1/{parent}/exposure_snapshots": {
+      "get": {
+        "summary": "Exposure 스냅샷 목록 조회",
+        "operationId": "PortfolioService_ListExposureSnapshots",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/portfolioListExposureSnapshotsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "parent",
+            "description": "부모 포트폴리오 리소스 이름 (예: portfolios/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+"
+          },
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      },
+      "post": {
+        "summary": "Exposure 스냅샷 생성 (현재 포지션 상태를 저장)",
+        "operationId": "PortfolioService_CreateExposureSnapshot",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/portfolioExposureSnapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "parent",
+            "description": "부모 포트폴리오 리소스 이름 (예: portfolios/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "스냅샷 이름 (optional)"
+                }
+              },
+              "title": "CreateExposureSnapshot 요청"
+            }
           }
         ],
         "tags": [
@@ -429,6 +621,157 @@
     }
   },
   "definitions": {
+    "portfolioExposureChanges": {
+      "type": "object",
+      "properties": {
+        "snapshot": {
+          "$ref": "#/definitions/portfolioExposureSnapshot",
+          "title": "기준 스냅샷"
+        },
+        "positionChanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/portfolioPositionChange"
+          },
+          "title": "심볼별 포지션 변화 목록"
+        },
+        "fundPositionChanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/portfolioFundPositionChange"
+          },
+          "title": "Fund별 심볼 포지션 변화 목록"
+        }
+      },
+      "title": "스냅샷 이후 전체 포지션 변화 요약"
+    },
+    "portfolioExposureSnapshot": {
+      "type": "object",
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "title": "스냅샷 ID"
+        },
+        "portfolioId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "포트폴리오 ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "스냅샷 이름 (사용자 지정, optional)"
+        },
+        "positions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/portfolioSnapshotSymbolPosition"
+          },
+          "title": "심볼별 통합 포지션 (모든 Fund 합산)"
+        },
+        "fundPositions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/portfolioSnapshotFundSymbolPosition"
+          },
+          "title": "Fund별 심볼 포지션"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "스냅샷 생성 시간"
+        }
+      },
+      "title": "특정 시점의 포지션 스냅샷"
+    },
+    "portfolioFundPositionChange": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "snapshotBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "스냅샷 시점 매수 수량"
+        },
+        "snapshotAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "스냅샷 시점 매도 수량"
+        },
+        "snapshotNetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "스냅샷 시점 순수량"
+        },
+        "snapshotBidAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "스냅샷 시점 매수 평균단가"
+        },
+        "snapshotAskAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "스냅샷 시점 매도 평균단가"
+        },
+        "currentBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 매수 수량"
+        },
+        "currentAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 매도 수량"
+        },
+        "currentNetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 순수량"
+        },
+        "currentBidAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 매수 평균단가"
+        },
+        "currentAskAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 매도 평균단가"
+        },
+        "bidQuantityChange": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 변화"
+        },
+        "askQuantityChange": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 변화"
+        },
+        "netQuantityChange": {
+          "type": "string",
+          "format": "int64",
+          "title": "순수량 변화"
+        },
+        "bidAverageCostChange": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 평균단가 변화"
+        },
+        "askAverageCostChange": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균단가 변화"
+        }
+      },
+      "title": "스냅샷 이후 Fund별 심볼 포지션 변화"
+    },
     "portfolioFundSummary": {
       "type": "object",
       "properties": {
@@ -527,6 +870,23 @@
         }
       },
       "title": "HedgeGroup 요약 정보 (포트폴리오 컨텍스트)"
+    },
+    "portfolioListExposureSnapshotsResponse": {
+      "type": "object",
+      "properties": {
+        "snapshots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/portfolioExposureSnapshot"
+          },
+          "title": "스냅샷 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      },
+      "title": "ListExposureSnapshots 응답"
     },
     "portfolioListPortfolioFundsResponse": {
       "type": "object",
@@ -805,6 +1165,165 @@
       "required": [
         "portfolio"
       ]
+    },
+    "portfolioPositionChange": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "snapshotBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "스냅샷 시점 매수 수량"
+        },
+        "snapshotAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "스냅샷 시점 매도 수량"
+        },
+        "snapshotNetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "스냅샷 시점 순수량"
+        },
+        "snapshotBidAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "스냅샷 시점 매수 평균단가"
+        },
+        "snapshotAskAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "스냅샷 시점 매도 평균단가"
+        },
+        "currentBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 매수 수량"
+        },
+        "currentAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 매도 수량"
+        },
+        "currentNetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 순수량"
+        },
+        "currentBidAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 매수 평균단가"
+        },
+        "currentAskAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 매도 평균단가"
+        },
+        "bidQuantityChange": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 변화 (current - snapshot)"
+        },
+        "askQuantityChange": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 변화 (current - snapshot)"
+        },
+        "netQuantityChange": {
+          "type": "string",
+          "format": "int64",
+          "title": "순수량 변화 (current - snapshot)"
+        },
+        "bidAverageCostChange": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 평균단가 변화"
+        },
+        "askAverageCostChange": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균단가 변화"
+        }
+      },
+      "title": "스냅샷 이후 심볼별 포지션 변화"
+    },
+    "portfolioSnapshotFundSymbolPosition": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 (\u003e= 0)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 (\u003e= 0)"
+        },
+        "netQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순수량 (bid - ask)"
+        },
+        "bidAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 평균단가"
+        },
+        "askAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균단가"
+        }
+      },
+      "title": "스냅샷에 저장되는 Fund별 심볼 포지션"
+    },
+    "portfolioSnapshotSymbolPosition": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 (\u003e= 0)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 (\u003e= 0)"
+        },
+        "netQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순수량 (bid - ask)"
+        },
+        "bidAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 평균단가"
+        },
+        "askAverageCost": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균단가"
+        }
+      },
+      "title": "스냅샷에 저장되는 심볼별 포지션"
     },
     "portfolioSymbolPnLDetail": {
       "type": "object",
