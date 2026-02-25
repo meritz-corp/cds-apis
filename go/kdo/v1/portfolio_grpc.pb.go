@@ -51,6 +51,8 @@ type PortfolioServiceClient interface {
 	ListExposureSnapshots(ctx context.Context, in *ListExposureSnapshotsRequest, opts ...grpc.CallOption) (*ListExposureSnapshotsResponse, error)
 	// 스냅샷 이후 포지션 변화 조회
 	GetExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (*ExposureChanges, error)
+	// 스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)
+	StreamExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (PortfolioService_StreamExposureChangesClient, error)
 	// Exposure 스냅샷 삭제
 	DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -226,6 +228,38 @@ func (c *portfolioServiceClient) GetExposureChanges(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *portfolioServiceClient) StreamExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (PortfolioService_StreamExposureChangesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PortfolioService_ServiceDesc.Streams[2], "/kdo.v1.portfolio.PortfolioService/StreamExposureChanges", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &portfolioServiceStreamExposureChangesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PortfolioService_StreamExposureChangesClient interface {
+	Recv() (*ExposureChanges, error)
+	grpc.ClientStream
+}
+
+type portfolioServiceStreamExposureChangesClient struct {
+	grpc.ClientStream
+}
+
+func (x *portfolioServiceStreamExposureChangesClient) Recv() (*ExposureChanges, error) {
+	m := new(ExposureChanges)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *portfolioServiceClient) DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot", in, out, opts...)
@@ -267,6 +301,8 @@ type PortfolioServiceServer interface {
 	ListExposureSnapshots(context.Context, *ListExposureSnapshotsRequest) (*ListExposureSnapshotsResponse, error)
 	// 스냅샷 이후 포지션 변화 조회
 	GetExposureChanges(context.Context, *GetExposureChangesRequest) (*ExposureChanges, error)
+	// 스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)
+	StreamExposureChanges(*GetExposureChangesRequest, PortfolioService_StreamExposureChangesServer) error
 	// Exposure 스냅샷 삭제
 	DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPortfolioServiceServer()
@@ -314,6 +350,9 @@ func (UnimplementedPortfolioServiceServer) ListExposureSnapshots(context.Context
 }
 func (UnimplementedPortfolioServiceServer) GetExposureChanges(context.Context, *GetExposureChangesRequest) (*ExposureChanges, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetExposureChanges not implemented")
+}
+func (UnimplementedPortfolioServiceServer) StreamExposureChanges(*GetExposureChangesRequest, PortfolioService_StreamExposureChangesServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamExposureChanges not implemented")
 }
 func (UnimplementedPortfolioServiceServer) DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteExposureSnapshot not implemented")
@@ -571,6 +610,27 @@ func _PortfolioService_GetExposureChanges_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PortfolioService_StreamExposureChanges_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetExposureChangesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PortfolioServiceServer).StreamExposureChanges(m, &portfolioServiceStreamExposureChangesServer{stream})
+}
+
+type PortfolioService_StreamExposureChangesServer interface {
+	Send(*ExposureChanges) error
+	grpc.ServerStream
+}
+
+type portfolioServiceStreamExposureChangesServer struct {
+	grpc.ServerStream
+}
+
+func (x *portfolioServiceStreamExposureChangesServer) Send(m *ExposureChanges) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _PortfolioService_DeleteExposureSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteExposureSnapshotRequest)
 	if err := dec(in); err != nil {
@@ -654,6 +714,11 @@ var PortfolioService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamPortfolioExposure",
 			Handler:       _PortfolioService_StreamPortfolioExposure_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamExposureChanges",
+			Handler:       _PortfolioService_StreamExposureChanges_Handler,
 			ServerStreams: true,
 		},
 	},

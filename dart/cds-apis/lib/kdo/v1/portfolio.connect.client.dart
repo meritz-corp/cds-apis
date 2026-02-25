@@ -248,6 +248,24 @@ extension type PortfolioServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)
+  Stream<kdov1portfolio.ExposureChanges> streamExposureChanges(
+    kdov1portfolio.GetExposureChangesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PortfolioService.streamExposureChanges,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Exposure 스냅샷 삭제
   Future<googleprotobufempty.Empty> deleteExposureSnapshot(
     kdov1portfolio.DeleteExposureSnapshotRequest input, {

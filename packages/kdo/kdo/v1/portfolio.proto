@@ -141,6 +141,14 @@ service PortfolioService {
     option (google.api.method_signature) = "name";
   }
 
+  // 스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)
+  rpc StreamExposureChanges(GetExposureChangesRequest) returns (stream ExposureChanges) {
+    option (google.api.http) = {
+      get: "/v1/{name=portfolios/*/exposure_snapshots/*}:streamChanges"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
   // Exposure 스냅샷 삭제
   rpc DeleteExposureSnapshot(DeleteExposureSnapshotRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {

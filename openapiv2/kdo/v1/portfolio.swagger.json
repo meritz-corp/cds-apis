@@ -344,6 +344,48 @@
         ]
       }
     },
+    "/v1/{name}:streamChanges": {
+      "get": {
+        "summary": "스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)",
+        "operationId": "PortfolioService_StreamExposureChanges",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/portfolioExposureChanges"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of portfolioExposureChanges"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+/exposureSnapshots/[^/]+"
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      }
+    },
     "/v1/{parent}/exposure_snapshots": {
       "get": {
         "summary": "Exposure 스냅샷 목록 조회",

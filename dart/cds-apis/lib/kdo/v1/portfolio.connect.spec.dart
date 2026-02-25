@@ -120,6 +120,14 @@ abstract final class PortfolioService {
     kdov1portfolio.ExposureChanges.new,
   );
 
+  /// 스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)
+  static const streamExposureChanges = connect.Spec(
+    '/$name/StreamExposureChanges',
+    connect.StreamType.server,
+    kdov1portfolio.GetExposureChangesRequest.new,
+    kdov1portfolio.ExposureChanges.new,
+  );
+
   /// Exposure 스냅샷 삭제
   static const deleteExposureSnapshot = connect.Spec(
     '/$name/DeleteExposureSnapshot',

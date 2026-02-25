@@ -103,6 +103,11 @@ class PortfolioServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getExposureChanges, request, options: options);
   }
 
+  /// 스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)
+  $grpc.ResponseStream<$0.ExposureChanges> streamExposureChanges($0.GetExposureChangesRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamExposureChanges, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// Exposure 스냅샷 삭제
   $grpc.ResponseFuture<$1.Empty> deleteExposureSnapshot($0.DeleteExposureSnapshotRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$deleteExposureSnapshot, request, options: options);
@@ -160,6 +165,10 @@ class PortfolioServiceClient extends $grpc.Client {
       $0.ListExposureSnapshotsResponse.fromBuffer);
   static final _$getExposureChanges = $grpc.ClientMethod<$0.GetExposureChangesRequest, $0.ExposureChanges>(
       '/kdo.v1.portfolio.PortfolioService/GetExposureChanges',
+      ($0.GetExposureChangesRequest value) => value.writeToBuffer(),
+      $0.ExposureChanges.fromBuffer);
+  static final _$streamExposureChanges = $grpc.ClientMethod<$0.GetExposureChangesRequest, $0.ExposureChanges>(
+      '/kdo.v1.portfolio.PortfolioService/StreamExposureChanges',
       ($0.GetExposureChangesRequest value) => value.writeToBuffer(),
       $0.ExposureChanges.fromBuffer);
   static final _$deleteExposureSnapshot = $grpc.ClientMethod<$0.DeleteExposureSnapshotRequest, $1.Empty>(
@@ -264,6 +273,13 @@ abstract class PortfolioServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetExposureChangesRequest.fromBuffer(value),
         ($0.ExposureChanges value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetExposureChangesRequest, $0.ExposureChanges>(
+        'StreamExposureChanges',
+        streamExposureChanges_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetExposureChangesRequest.fromBuffer(value),
+        ($0.ExposureChanges value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.DeleteExposureSnapshotRequest, $1.Empty>(
         'DeleteExposureSnapshot',
         deleteExposureSnapshot_Pre,
@@ -350,6 +366,12 @@ abstract class PortfolioServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ExposureChanges> getExposureChanges($grpc.ServiceCall call, $0.GetExposureChangesRequest request);
+
+  $async.Stream<$0.ExposureChanges> streamExposureChanges_Pre($grpc.ServiceCall $call, $async.Future<$0.GetExposureChangesRequest> $request) async* {
+    yield* streamExposureChanges($call, await $request);
+  }
+
+  $async.Stream<$0.ExposureChanges> streamExposureChanges($grpc.ServiceCall call, $0.GetExposureChangesRequest request);
 
   $async.Future<$1.Empty> deleteExposureSnapshot_Pre($grpc.ServiceCall $call, $async.Future<$0.DeleteExposureSnapshotRequest> $request) async {
     return deleteExposureSnapshot($call, await $request);
