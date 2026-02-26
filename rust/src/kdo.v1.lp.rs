@@ -42,6 +42,15 @@ pub struct EtfLp {
     /// 매도 주문 수량 (i64)
     #[prost(int64, tag="16")]
     pub ask_quantity: i64,
+    /// 모멘텀 활성화 여부
+    #[prost(bool, optional, tag="17")]
+    pub momentum_enabled: ::core::option::Option<bool>,
+    /// 모멘텀 윈도우 크기
+    #[prost(uint32, optional, tag="18")]
+    pub momentum_window: ::core::option::Option<u32>,
+    /// 모멘텀 민감도
+    #[prost(double, optional, tag="19")]
+    pub momentum_sensitivity: ::core::option::Option<f64>,
 }
 /// ETF 가격 산출 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -125,6 +134,15 @@ pub struct EtfLpStatus {
     /// 매도 주문 수량 (i64)
     #[prost(int64, tag="16")]
     pub ask_quantity: i64,
+    /// 모멘텀 활성화 여부
+    #[prost(bool, optional, tag="17")]
+    pub momentum_enabled: ::core::option::Option<bool>,
+    /// 모멘텀 윈도우 크기
+    #[prost(uint32, optional, tag="18")]
+    pub momentum_window: ::core::option::Option<u32>,
+    /// 모멘텀 민감도
+    #[prost(double, optional, tag="19")]
+    pub momentum_sensitivity: ::core::option::Option<f64>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -165,6 +183,15 @@ pub struct EtfLpStatusUpdate {
     /// 매도 주문 수량 (i64)
     #[prost(int64, optional, tag="15")]
     pub ask_quantity: ::core::option::Option<i64>,
+    /// 모멘텀 활성화 여부
+    #[prost(bool, optional, tag="16")]
+    pub momentum_enabled: ::core::option::Option<bool>,
+    /// 모멘텀 윈도우 크기
+    #[prost(uint32, optional, tag="17")]
+    pub momentum_window: ::core::option::Option<u32>,
+    /// 모멘텀 민감도
+    #[prost(double, optional, tag="18")]
+    pub momentum_sensitivity: ::core::option::Option<f64>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -433,6 +460,15 @@ pub struct UpdateEtfLpRequest {
     /// 매도 호가 조정값
     #[prost(double, optional, tag="11")]
     pub ask_adjustment: ::core::option::Option<f64>,
+    /// 모멘텀 활성화 여부
+    #[prost(bool, optional, tag="12")]
+    pub momentum_enabled: ::core::option::Option<bool>,
+    /// 모멘텀 윈도우 크기
+    #[prost(uint32, optional, tag="13")]
+    pub momentum_window: ::core::option::Option<u32>,
+    /// 모멘텀 민감도
+    #[prost(double, optional, tag="14")]
+    pub momentum_sensitivity: ::core::option::Option<f64>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

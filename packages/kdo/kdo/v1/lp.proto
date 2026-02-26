@@ -145,6 +145,15 @@ message EtfLp {
 
   // 매도 주문 수량 (i64)
   int64 ask_quantity = 16;
+
+  // 모멘텀 활성화 여부
+  optional bool momentum_enabled = 17;
+
+  // 모멘텀 윈도우 크기
+  optional uint32 momentum_window = 18;
+
+  // 모멘텀 민감도
+  optional double momentum_sensitivity = 19;
 }
 
 // ETF 가격 산출 방식
@@ -213,6 +222,15 @@ message EtfLpStatus {
 
   // 매도 주문 수량 (i64)
   int64 ask_quantity = 16;
+
+  // 모멘텀 활성화 여부
+  optional bool momentum_enabled = 17;
+
+  // 모멘텀 윈도우 크기
+  optional uint32 momentum_window = 18;
+
+  // 모멘텀 민감도
+  optional double momentum_sensitivity = 19;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -253,6 +271,15 @@ message EtfLpStatusUpdate {
 
   // 매도 주문 수량 (i64)
   optional int64 ask_quantity = 15;
+
+  // 모멘텀 활성화 여부
+  optional bool momentum_enabled = 16;
+
+  // 모멘텀 윈도우 크기
+  optional uint32 momentum_window = 17;
+
+  // 모멘텀 민감도
+  optional double momentum_sensitivity = 18;
 }
 
 
@@ -524,6 +551,15 @@ message UpdateEtfLpRequest {
 
   // 매도 호가 조정값
   optional double ask_adjustment = 11;
+
+  // 모멘텀 활성화 여부
+  optional bool momentum_enabled = 12;
+
+  // 모멘텀 윈도우 크기
+  optional uint32 momentum_window = 13;
+
+  // 모멘텀 민감도
+  optional double momentum_sensitivity = 14;
 }
 
 

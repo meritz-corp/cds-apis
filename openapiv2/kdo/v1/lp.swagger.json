@@ -194,6 +194,20 @@
                   "type": "number",
                   "format": "double",
                   "title": "매도 호가 조정값"
+                },
+                "momentumEnabled": {
+                  "type": "boolean",
+                  "title": "모멘텀 활성화 여부"
+                },
+                "momentumWindow": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "모멘텀 윈도우 크기"
+                },
+                "momentumSensitivity": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "모멘텀 민감도"
                 }
               },
               "title": "UpdateEtfLp"
@@ -576,6 +590,20 @@
           "type": "string",
           "format": "int64",
           "title": "매도 주문 수량 (i64)"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
         }
       },
       "title": "ETF LP 설정"
@@ -723,6 +751,20 @@
           "type": "string",
           "format": "int64",
           "title": "매도 주문 수량 (i64)"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
         }
       },
       "title": "ETF LP 상태"
@@ -782,6 +824,20 @@
           "type": "string",
           "format": "int64",
           "title": "매도 주문 수량 (i64)"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"

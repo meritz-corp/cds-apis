@@ -142,6 +142,15 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -188,6 +197,15 @@ impl serde::Serialize for EtfLp {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
         }
+        if let Some(v) = self.momentum_enabled.as_ref() {
+            struct_ser.serialize_field("momentum_enabled", v)?;
+        }
+        if let Some(v) = self.momentum_window.as_ref() {
+            struct_ser.serialize_field("momentum_window", v)?;
+        }
+        if let Some(v) = self.momentum_sensitivity.as_ref() {
+            struct_ser.serialize_field("momentum_sensitivity", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -220,6 +238,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
+            "momentum_enabled",
+            "momentumEnabled",
+            "momentum_window",
+            "momentumWindow",
+            "momentum_sensitivity",
+            "momentumSensitivity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -237,6 +261,9 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             AskAdjustment,
             BidQuantity,
             AskQuantity,
+            MomentumEnabled,
+            MomentumWindow,
+            MomentumSensitivity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -272,6 +299,9 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
+                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
+                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -304,6 +334,9 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut ask_adjustment__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
+                let mut momentum_enabled__ = None;
+                let mut momentum_window__ = None;
+                let mut momentum_sensitivity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -400,6 +433,28 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::MomentumEnabled => {
+                            if momentum_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                            }
+                            momentum_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::MomentumWindow => {
+                            if momentum_window__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
+                            }
+                            momentum_window__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumSensitivity => {
+                            if momentum_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
+                            }
+                            momentum_sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -419,6 +474,9 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     ask_adjustment: ask_adjustment__,
                     bid_quantity: bid_quantity__.unwrap_or_default(),
                     ask_quantity: ask_quantity__.unwrap_or_default(),
+                    momentum_enabled: momentum_enabled__,
+                    momentum_window: momentum_window__,
+                    momentum_sensitivity: momentum_sensitivity__,
                 })
             }
         }
@@ -1002,6 +1060,15 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -1048,6 +1115,15 @@ impl serde::Serialize for EtfLpStatus {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
         }
+        if let Some(v) = self.momentum_enabled.as_ref() {
+            struct_ser.serialize_field("momentum_enabled", v)?;
+        }
+        if let Some(v) = self.momentum_window.as_ref() {
+            struct_ser.serialize_field("momentum_window", v)?;
+        }
+        if let Some(v) = self.momentum_sensitivity.as_ref() {
+            struct_ser.serialize_field("momentum_sensitivity", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1080,6 +1156,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
+            "momentum_enabled",
+            "momentumEnabled",
+            "momentum_window",
+            "momentumWindow",
+            "momentum_sensitivity",
+            "momentumSensitivity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1097,6 +1179,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             AskAdjustment,
             BidQuantity,
             AskQuantity,
+            MomentumEnabled,
+            MomentumWindow,
+            MomentumSensitivity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1132,6 +1217,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
+                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
+                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1164,6 +1252,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut ask_adjustment__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
+                let mut momentum_enabled__ = None;
+                let mut momentum_window__ = None;
+                let mut momentum_sensitivity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1256,6 +1347,28 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::MomentumEnabled => {
+                            if momentum_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                            }
+                            momentum_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::MomentumWindow => {
+                            if momentum_window__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
+                            }
+                            momentum_window__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumSensitivity => {
+                            if momentum_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
+                            }
+                            momentum_sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1275,6 +1388,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     ask_adjustment: ask_adjustment__,
                     bid_quantity: bid_quantity__.unwrap_or_default(),
                     ask_quantity: ask_quantity__.unwrap_or_default(),
+                    momentum_enabled: momentum_enabled__,
+                    momentum_window: momentum_window__,
+                    momentum_sensitivity: momentum_sensitivity__,
                 })
             }
         }
@@ -1289,6 +1405,15 @@ impl serde::Serialize for EtfLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1368,6 +1493,15 @@ impl serde::Serialize for EtfLpStatusUpdate {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
         }
+        if let Some(v) = self.momentum_enabled.as_ref() {
+            struct_ser.serialize_field("momentum_enabled", v)?;
+        }
+        if let Some(v) = self.momentum_window.as_ref() {
+            struct_ser.serialize_field("momentum_window", v)?;
+        }
+        if let Some(v) = self.momentum_sensitivity.as_ref() {
+            struct_ser.serialize_field("momentum_sensitivity", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1399,6 +1533,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
+            "momentum_enabled",
+            "momentumEnabled",
+            "momentum_window",
+            "momentumWindow",
+            "momentum_sensitivity",
+            "momentumSensitivity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1415,6 +1555,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             AskAdjustment,
             BidQuantity,
             AskQuantity,
+            MomentumEnabled,
+            MomentumWindow,
+            MomentumSensitivity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1449,6 +1592,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
+                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
+                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1480,6 +1626,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut ask_adjustment__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
+                let mut momentum_enabled__ = None;
+                let mut momentum_window__ = None;
+                let mut momentum_sensitivity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1566,6 +1715,28 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::MomentumEnabled => {
+                            if momentum_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                            }
+                            momentum_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::MomentumWindow => {
+                            if momentum_window__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
+                            }
+                            momentum_window__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumSensitivity => {
+                            if momentum_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
+                            }
+                            momentum_sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1584,6 +1755,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     ask_adjustment: ask_adjustment__,
                     bid_quantity: bid_quantity__,
                     ask_quantity: ask_quantity__,
+                    momentum_enabled: momentum_enabled__,
+                    momentum_window: momentum_window__,
+                    momentum_sensitivity: momentum_sensitivity__,
                 })
             }
         }
@@ -4272,6 +4446,15 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -4307,6 +4490,15 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if let Some(v) = self.ask_adjustment.as_ref() {
             struct_ser.serialize_field("ask_adjustment", v)?;
         }
+        if let Some(v) = self.momentum_enabled.as_ref() {
+            struct_ser.serialize_field("momentum_enabled", v)?;
+        }
+        if let Some(v) = self.momentum_window.as_ref() {
+            struct_ser.serialize_field("momentum_window", v)?;
+        }
+        if let Some(v) = self.momentum_sensitivity.as_ref() {
+            struct_ser.serialize_field("momentum_sensitivity", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4334,6 +4526,12 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
+            "momentum_enabled",
+            "momentumEnabled",
+            "momentum_window",
+            "momentumWindow",
+            "momentum_sensitivity",
+            "momentumSensitivity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4348,6 +4546,9 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             AskQuantity,
             BidAdjustment,
             AskAdjustment,
+            MomentumEnabled,
+            MomentumWindow,
+            MomentumSensitivity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4380,6 +4581,9 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
+                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
+                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4409,6 +4613,9 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 let mut ask_quantity__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
+                let mut momentum_enabled__ = None;
+                let mut momentum_window__ = None;
+                let mut momentum_sensitivity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -4485,6 +4692,28 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::MomentumEnabled => {
+                            if momentum_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                            }
+                            momentum_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::MomentumWindow => {
+                            if momentum_window__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
+                            }
+                            momentum_window__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumSensitivity => {
+                            if momentum_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
+                            }
+                            momentum_sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4501,6 +4730,9 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                     ask_quantity: ask_quantity__,
                     bid_adjustment: bid_adjustment__,
                     ask_adjustment: ask_adjustment__,
+                    momentum_enabled: momentum_enabled__,
+                    momentum_window: momentum_window__,
+                    momentum_sensitivity: momentum_sensitivity__,
                 })
             }
         }

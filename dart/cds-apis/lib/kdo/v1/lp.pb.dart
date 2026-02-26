@@ -37,6 +37,9 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.double? askAdjustment,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
+    $core.bool? momentumEnabled,
+    $core.int? momentumWindow,
+    $core.double? momentumSensitivity,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -52,6 +55,9 @@ class EtfLp extends $pb.GeneratedMessage {
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
+    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
+    if (momentumWindow != null) result.momentumWindow = momentumWindow;
+    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     return result;
   }
 
@@ -74,6 +80,9 @@ class EtfLp extends $pb.GeneratedMessage {
     ..a<$core.double>(14, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aInt64(15, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(16, _omitFieldNames ? '' : 'askQuantity')
+    ..aOB(17, _omitFieldNames ? '' : 'momentumEnabled')
+    ..a<$core.int>(18, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
+    ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -225,6 +234,36 @@ class EtfLp extends $pb.GeneratedMessage {
   $core.bool hasAskQuantity() => $_has(12);
   @$pb.TagNumber(16)
   void clearAskQuantity() => $_clearField(16);
+
+  /// 모멘텀 활성화 여부
+  @$pb.TagNumber(17)
+  $core.bool get momentumEnabled => $_getBF(13);
+  @$pb.TagNumber(17)
+  set momentumEnabled($core.bool value) => $_setBool(13, value);
+  @$pb.TagNumber(17)
+  $core.bool hasMomentumEnabled() => $_has(13);
+  @$pb.TagNumber(17)
+  void clearMomentumEnabled() => $_clearField(17);
+
+  /// 모멘텀 윈도우 크기
+  @$pb.TagNumber(18)
+  $core.int get momentumWindow => $_getIZ(14);
+  @$pb.TagNumber(18)
+  set momentumWindow($core.int value) => $_setUnsignedInt32(14, value);
+  @$pb.TagNumber(18)
+  $core.bool hasMomentumWindow() => $_has(14);
+  @$pb.TagNumber(18)
+  void clearMomentumWindow() => $_clearField(18);
+
+  /// 모멘텀 민감도
+  @$pb.TagNumber(19)
+  $core.double get momentumSensitivity => $_getN(15);
+  @$pb.TagNumber(19)
+  set momentumSensitivity($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(19)
+  $core.bool hasMomentumSensitivity() => $_has(15);
+  @$pb.TagNumber(19)
+  void clearMomentumSensitivity() => $_clearField(19);
 }
 
 enum EtfPricing_Method {
@@ -447,6 +486,9 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     $core.double? askAdjustment,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
+    $core.bool? momentumEnabled,
+    $core.int? momentumWindow,
+    $core.double? momentumSensitivity,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -462,6 +504,9 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
+    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
+    if (momentumWindow != null) result.momentumWindow = momentumWindow;
+    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     return result;
   }
 
@@ -484,6 +529,9 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..a<$core.double>(14, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aInt64(15, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(16, _omitFieldNames ? '' : 'askQuantity')
+    ..aOB(17, _omitFieldNames ? '' : 'momentumEnabled')
+    ..a<$core.int>(18, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
+    ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -640,6 +688,36 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   $core.bool hasAskQuantity() => $_has(12);
   @$pb.TagNumber(16)
   void clearAskQuantity() => $_clearField(16);
+
+  /// 모멘텀 활성화 여부
+  @$pb.TagNumber(17)
+  $core.bool get momentumEnabled => $_getBF(13);
+  @$pb.TagNumber(17)
+  set momentumEnabled($core.bool value) => $_setBool(13, value);
+  @$pb.TagNumber(17)
+  $core.bool hasMomentumEnabled() => $_has(13);
+  @$pb.TagNumber(17)
+  void clearMomentumEnabled() => $_clearField(17);
+
+  /// 모멘텀 윈도우 크기
+  @$pb.TagNumber(18)
+  $core.int get momentumWindow => $_getIZ(14);
+  @$pb.TagNumber(18)
+  set momentumWindow($core.int value) => $_setUnsignedInt32(14, value);
+  @$pb.TagNumber(18)
+  $core.bool hasMomentumWindow() => $_has(14);
+  @$pb.TagNumber(18)
+  void clearMomentumWindow() => $_clearField(18);
+
+  /// 모멘텀 민감도
+  @$pb.TagNumber(19)
+  $core.double get momentumSensitivity => $_getN(15);
+  @$pb.TagNumber(19)
+  set momentumSensitivity($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(19)
+  $core.bool hasMomentumSensitivity() => $_has(15);
+  @$pb.TagNumber(19)
+  void clearMomentumSensitivity() => $_clearField(19);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -657,6 +735,9 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     $core.double? askAdjustment,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
+    $core.bool? momentumEnabled,
+    $core.int? momentumWindow,
+    $core.double? momentumSensitivity,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -671,6 +752,9 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
+    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
+    if (momentumWindow != null) result.momentumWindow = momentumWindow;
+    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     return result;
   }
 
@@ -692,6 +776,9 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.double>(13, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aInt64(14, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(15, _omitFieldNames ? '' : 'askQuantity')
+    ..aOB(16, _omitFieldNames ? '' : 'momentumEnabled')
+    ..a<$core.int>(17, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
+    ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -836,6 +923,36 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasAskQuantity() => $_has(11);
   @$pb.TagNumber(15)
   void clearAskQuantity() => $_clearField(15);
+
+  /// 모멘텀 활성화 여부
+  @$pb.TagNumber(16)
+  $core.bool get momentumEnabled => $_getBF(12);
+  @$pb.TagNumber(16)
+  set momentumEnabled($core.bool value) => $_setBool(12, value);
+  @$pb.TagNumber(16)
+  $core.bool hasMomentumEnabled() => $_has(12);
+  @$pb.TagNumber(16)
+  void clearMomentumEnabled() => $_clearField(16);
+
+  /// 모멘텀 윈도우 크기
+  @$pb.TagNumber(17)
+  $core.int get momentumWindow => $_getIZ(13);
+  @$pb.TagNumber(17)
+  set momentumWindow($core.int value) => $_setUnsignedInt32(13, value);
+  @$pb.TagNumber(17)
+  $core.bool hasMomentumWindow() => $_has(13);
+  @$pb.TagNumber(17)
+  void clearMomentumWindow() => $_clearField(17);
+
+  /// 모멘텀 민감도
+  @$pb.TagNumber(18)
+  $core.double get momentumSensitivity => $_getN(14);
+  @$pb.TagNumber(18)
+  set momentumSensitivity($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(18)
+  $core.bool hasMomentumSensitivity() => $_has(14);
+  @$pb.TagNumber(18)
+  void clearMomentumSensitivity() => $_clearField(18);
 }
 
 /// 자동 offset 조정 설정
@@ -1869,6 +1986,9 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? askQuantity,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
+    $core.bool? momentumEnabled,
+    $core.int? momentumWindow,
+    $core.double? momentumSensitivity,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -1881,6 +2001,9 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
+    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
+    if (momentumWindow != null) result.momentumWindow = momentumWindow;
+    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     return result;
   }
 
@@ -1900,6 +2023,9 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'askQuantity')
     ..a<$core.double>(10, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(11, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
+    ..aOB(12, _omitFieldNames ? '' : 'momentumEnabled')
+    ..a<$core.int>(13, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2019,6 +2145,36 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   $core.bool hasAskAdjustment() => $_has(9);
   @$pb.TagNumber(11)
   void clearAskAdjustment() => $_clearField(11);
+
+  /// 모멘텀 활성화 여부
+  @$pb.TagNumber(12)
+  $core.bool get momentumEnabled => $_getBF(10);
+  @$pb.TagNumber(12)
+  set momentumEnabled($core.bool value) => $_setBool(10, value);
+  @$pb.TagNumber(12)
+  $core.bool hasMomentumEnabled() => $_has(10);
+  @$pb.TagNumber(12)
+  void clearMomentumEnabled() => $_clearField(12);
+
+  /// 모멘텀 윈도우 크기
+  @$pb.TagNumber(13)
+  $core.int get momentumWindow => $_getIZ(11);
+  @$pb.TagNumber(13)
+  set momentumWindow($core.int value) => $_setUnsignedInt32(11, value);
+  @$pb.TagNumber(13)
+  $core.bool hasMomentumWindow() => $_has(11);
+  @$pb.TagNumber(13)
+  void clearMomentumWindow() => $_clearField(13);
+
+  /// 모멘텀 민감도
+  @$pb.TagNumber(14)
+  $core.double get momentumSensitivity => $_getN(12);
+  @$pb.TagNumber(14)
+  set momentumSensitivity($core.double value) => $_setDouble(12, value);
+  @$pb.TagNumber(14)
+  $core.bool hasMomentumSensitivity() => $_has(12);
+  @$pb.TagNumber(14)
+  void clearMomentumSensitivity() => $_clearField(14);
 }
 
 /// GetEtfLpStatus
