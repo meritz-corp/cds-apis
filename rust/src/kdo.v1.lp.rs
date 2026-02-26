@@ -143,6 +143,12 @@ pub struct EtfLpStatus {
     /// 모멘텀 민감도
     #[prost(double, optional, tag="19")]
     pub momentum_sensitivity: ::core::option::Option<f64>,
+    /// 런타임 계산된 모멘텀 매수 호가 조정값
+    #[prost(double, optional, tag="20")]
+    pub momentum_bid_adjustment: ::core::option::Option<f64>,
+    /// 런타임 계산된 모멘텀 매도 호가 조정값
+    #[prost(double, optional, tag="21")]
+    pub momentum_ask_adjustment: ::core::option::Option<f64>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -192,6 +198,12 @@ pub struct EtfLpStatusUpdate {
     /// 모멘텀 민감도
     #[prost(double, optional, tag="18")]
     pub momentum_sensitivity: ::core::option::Option<f64>,
+    /// 런타임 계산된 모멘텀 매수 호가 조정값
+    #[prost(double, optional, tag="19")]
+    pub momentum_bid_adjustment: ::core::option::Option<f64>,
+    /// 런타임 계산된 모멘텀 매도 호가 조정값
+    #[prost(double, optional, tag="20")]
+    pub momentum_ask_adjustment: ::core::option::Option<f64>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

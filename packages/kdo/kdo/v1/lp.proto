@@ -231,6 +231,12 @@ message EtfLpStatus {
 
   // 모멘텀 민감도
   optional double momentum_sensitivity = 19;
+
+  // 런타임 계산된 모멘텀 매수 호가 조정값
+  optional double momentum_bid_adjustment = 20;
+
+  // 런타임 계산된 모멘텀 매도 호가 조정값
+  optional double momentum_ask_adjustment = 21;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -280,6 +286,12 @@ message EtfLpStatusUpdate {
 
   // 모멘텀 민감도
   optional double momentum_sensitivity = 18;
+
+  // 런타임 계산된 모멘텀 매수 호가 조정값
+  optional double momentum_bid_adjustment = 19;
+
+  // 런타임 계산된 모멘텀 매도 호가 조정값
+  optional double momentum_ask_adjustment = 20;
 }
 
 

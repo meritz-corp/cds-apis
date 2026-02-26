@@ -765,6 +765,16 @@
           "type": "number",
           "format": "double",
           "title": "모멘텀 민감도"
+        },
+        "momentumBidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
+        },
+        "momentumAskAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
         }
       },
       "title": "ETF LP 상태"
@@ -838,6 +848,16 @@
           "type": "number",
           "format": "double",
           "title": "모멘텀 민감도"
+        },
+        "momentumBidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
+        },
+        "momentumAskAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
