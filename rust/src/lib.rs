@@ -71,6 +71,9 @@ pub mod kdo {
         pub mod track_record {
             include!("kdo.v1.track_record.rs");
         }
+        pub mod lead_lag {
+            include!("kdo.v1.lead_lag.rs");
+        }
         pub mod common {
             include!("kdo.v1.common.rs");
         }
