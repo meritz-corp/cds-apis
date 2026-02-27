@@ -146,6 +146,132 @@ pub struct SetLeadLagActiveRequest {
     #[prost(bool, tag="2")]
     pub is_active: bool,
 }
+// ============================================================================
+// Streaming Status Messages
+// ============================================================================
+
+/// LeadLag 실시간 상태 스트리밍 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamLeadLagStatusRequest {
+    /// 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+}
+/// LeadLag 실시간 상태 업데이트 (delta 방식: 변경된 필드만 전송)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LeadLagStatusUpdate {
+    /// 전략 ID
+    #[prost(int32, tag="1")]
+    pub lead_lag_id: i32,
+    /// 서비스 실행 상태 (변경 시에만 전송)
+    #[prost(enumeration="LeadLagState", optional, tag="2")]
+    pub state: ::core::option::Option<i32>,
+    /// 현재 선물 포지션 (양수=롱, 음수=숏)
+    #[prost(int64, optional, tag="3")]
+    pub futures_position: ::core::option::Option<i64>,
+    /// 총 트레이드 수
+    #[prost(uint64, optional, tag="4")]
+    pub total_trades: ::core::option::Option<u64>,
+    /// 마지막 선물 mid price
+    #[prost(double, optional, tag="5")]
+    pub last_futures_price: ::core::option::Option<f64>,
+    /// 마지막 시그널 정보 (변경 시에만 전송)
+    #[prost(message, optional, tag="6")]
+    pub last_signal: ::core::option::Option<LeadLagSignalInfo>,
+    /// Price buffer 상태
+    #[prost(message, optional, tag="7")]
+    pub price_buffer: ::core::option::Option<LeadLagPriceBufferInfo>,
+    /// 주문 실행 지연시간 (마이크로초)
+    #[prost(uint64, optional, tag="8")]
+    pub latency_us: ::core::option::Option<u64>,
+    /// 타임스탬프 (마이크로초)
+    #[prost(uint64, tag="9")]
+    pub timestamp_us: u64,
+}
+/// 시그널 상세 정보
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LeadLagSignalInfo {
+    /// 시그널 방향 (SPIKE/DROP)
+    #[prost(string, tag="1")]
+    pub direction: ::prost::alloc::string::String,
+    /// 틱 변동량
+    #[prost(int64, tag="2")]
+    pub tick_change: i64,
+    /// 선물 주문 방향 (BID/ASK)
+    #[prost(string, tag="3")]
+    pub futures_side: ::prost::alloc::string::String,
+    /// ETF 주문 방향 (BID/ASK)
+    #[prost(string, tag="4")]
+    pub etf_side: ::prost::alloc::string::String,
+    /// 선물 주문 가격
+    #[prost(double, tag="5")]
+    pub futures_price: f64,
+    /// ETF 주문 가격
+    #[prost(double, tag="6")]
+    pub etf_price: f64,
+    /// 선물 주문 수량
+    #[prost(int64, tag="7")]
+    pub futures_qty: i64,
+    /// ETF 주문 수량
+    #[prost(int64, tag="8")]
+    pub etf_qty: i64,
+}
+/// Price buffer 상태 정보
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LeadLagPriceBufferInfo {
+    /// 버퍼 내 틱 수
+    #[prost(uint64, tag="1")]
+    pub tick_count: u64,
+    /// 윈도우 내 최고가
+    #[prost(double, optional, tag="2")]
+    pub window_high: ::core::option::Option<f64>,
+    /// 윈도우 내 최저가
+    #[prost(double, optional, tag="3")]
+    pub window_low: ::core::option::Option<f64>,
+    /// 현재 mid price
+    #[prost(double, optional, tag="4")]
+    pub current_mid: ::core::option::Option<f64>,
+}
+/// LeadLag 서비스 실행 상태
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum LeadLagState {
+    Unspecified = 0,
+    Idle = 1,
+    Monitoring = 2,
+    Triggered = 3,
+    Error = 4,
+}
+impl LeadLagState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            LeadLagState::Unspecified => "LEAD_LAG_STATE_UNSPECIFIED",
+            LeadLagState::Idle => "LEAD_LAG_STATE_IDLE",
+            LeadLagState::Monitoring => "LEAD_LAG_STATE_MONITORING",
+            LeadLagState::Triggered => "LEAD_LAG_STATE_TRIGGERED",
+            LeadLagState::Error => "LEAD_LAG_STATE_ERROR",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "LEAD_LAG_STATE_UNSPECIFIED" => Some(Self::Unspecified),
+            "LEAD_LAG_STATE_IDLE" => Some(Self::Idle),
+            "LEAD_LAG_STATE_MONITORING" => Some(Self::Monitoring),
+            "LEAD_LAG_STATE_TRIGGERED" => Some(Self::Triggered),
+            "LEAD_LAG_STATE_ERROR" => Some(Self::Error),
+            _ => None,
+        }
+    }
+}
 include!("kdo.v1.lead_lag.tonic.rs");
 include!("kdo.v1.lead_lag.serde.rs");
 // @@protoc_insertion_point(module)

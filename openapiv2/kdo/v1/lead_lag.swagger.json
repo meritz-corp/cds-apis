@@ -320,6 +320,48 @@
           "LeadLagService"
         ]
       }
+    },
+    "/v1/{leadLag}:streamStatus": {
+      "get": {
+        "summary": "LeadLag 실시간 상태 스트리밍 (서버→클라이언트)",
+        "operationId": "LeadLagService_StreamLeadLagStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/lead_lagLeadLagStatusUpdate"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of lead_lagLeadLagStatusUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -395,6 +437,135 @@
         "futuresFundCode",
         "etfFundCode"
       ]
+    },
+    "lead_lagLeadLagPriceBufferInfo": {
+      "type": "object",
+      "properties": {
+        "tickCount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "버퍼 내 틱 수"
+        },
+        "windowHigh": {
+          "type": "number",
+          "format": "double",
+          "title": "윈도우 내 최고가"
+        },
+        "windowLow": {
+          "type": "number",
+          "format": "double",
+          "title": "윈도우 내 최저가"
+        },
+        "currentMid": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 mid price"
+        }
+      },
+      "title": "Price buffer 상태 정보"
+    },
+    "lead_lagLeadLagSignalInfo": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "title": "시그널 방향 (SPIKE/DROP)"
+        },
+        "tickChange": {
+          "type": "string",
+          "format": "int64",
+          "title": "틱 변동량"
+        },
+        "futuresSide": {
+          "type": "string",
+          "title": "선물 주문 방향 (BID/ASK)"
+        },
+        "etfSide": {
+          "type": "string",
+          "title": "ETF 주문 방향 (BID/ASK)"
+        },
+        "futuresPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 주문 가격"
+        },
+        "etfPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF 주문 가격"
+        },
+        "futuresQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 주문 수량"
+        },
+        "etfQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 주문 수량"
+        }
+      },
+      "title": "시그널 상세 정보"
+    },
+    "lead_lagLeadLagState": {
+      "type": "string",
+      "enum": [
+        "LEAD_LAG_STATE_UNSPECIFIED",
+        "LEAD_LAG_STATE_IDLE",
+        "LEAD_LAG_STATE_MONITORING",
+        "LEAD_LAG_STATE_TRIGGERED",
+        "LEAD_LAG_STATE_ERROR"
+      ],
+      "default": "LEAD_LAG_STATE_UNSPECIFIED",
+      "title": "LeadLag 서비스 실행 상태"
+    },
+    "lead_lagLeadLagStatusUpdate": {
+      "type": "object",
+      "properties": {
+        "leadLagId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "전략 ID"
+        },
+        "state": {
+          "$ref": "#/definitions/lead_lagLeadLagState",
+          "title": "서비스 실행 상태 (변경 시에만 전송)"
+        },
+        "futuresPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 선물 포지션 (양수=롱, 음수=숏)"
+        },
+        "totalTrades": {
+          "type": "string",
+          "format": "uint64",
+          "title": "총 트레이드 수"
+        },
+        "lastFuturesPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "마지막 선물 mid price"
+        },
+        "lastSignal": {
+          "$ref": "#/definitions/lead_lagLeadLagSignalInfo",
+          "title": "마지막 시그널 정보 (변경 시에만 전송)"
+        },
+        "priceBuffer": {
+          "$ref": "#/definitions/lead_lagLeadLagPriceBufferInfo",
+          "title": "Price buffer 상태"
+        },
+        "latencyUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "주문 실행 지연시간 (마이크로초)"
+        },
+        "timestampUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "타임스탬프 (마이크로초)"
+        }
+      },
+      "title": "LeadLag 실시간 상태 업데이트 (delta 방식: 변경된 필드만 전송)"
     },
     "lead_lagLeadLagTriggerConfig": {
       "type": "object",

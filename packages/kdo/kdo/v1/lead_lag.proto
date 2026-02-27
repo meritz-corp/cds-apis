@@ -63,6 +63,14 @@ service LeadLagService {
     };
     option (google.api.method_signature) = "lead_lag";
   }
+
+  // LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
+  rpc StreamLeadLagStatus(StreamLeadLagStatusRequest) returns (stream LeadLagStatusUpdate) {
+    option (google.api.http) = {
+      get: "/v1/{lead_lag=lead_lags/*}:streamStatus"
+    };
+    option (google.api.method_signature) = "lead_lag";
+  }
 }
 
 // ============================================================================
@@ -233,4 +241,100 @@ message SetLeadLagActiveRequest {
   bool is_active = 2 [
     (google.api.field_behavior) = REQUIRED
   ];
+}
+
+// ============================================================================
+// Streaming Status Messages
+// ============================================================================
+
+// LeadLag 실시간 상태 스트리밍 요청
+message StreamLeadLagStatusRequest {
+  // 리소스 이름 (lead_lags/{id})
+  string lead_lag = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/LeadLag"
+    }
+  ];
+}
+
+// LeadLag 실시간 상태 업데이트 (delta 방식: 변경된 필드만 전송)
+message LeadLagStatusUpdate {
+  // 전략 ID
+  int32 lead_lag_id = 1;
+
+  // 서비스 실행 상태 (변경 시에만 전송)
+  optional LeadLagState state = 2;
+
+  // 현재 선물 포지션 (양수=롱, 음수=숏)
+  optional int64 futures_position = 3;
+
+  // 총 트레이드 수
+  optional uint64 total_trades = 4;
+
+  // 마지막 선물 mid price
+  optional double last_futures_price = 5;
+
+  // 마지막 시그널 정보 (변경 시에만 전송)
+  optional LeadLagSignalInfo last_signal = 6;
+
+  // Price buffer 상태
+  optional LeadLagPriceBufferInfo price_buffer = 7;
+
+  // 주문 실행 지연시간 (마이크로초)
+  optional uint64 latency_us = 8;
+
+  // 타임스탬프 (마이크로초)
+  uint64 timestamp_us = 9;
+}
+
+// LeadLag 서비스 실행 상태
+enum LeadLagState {
+  LEAD_LAG_STATE_UNSPECIFIED = 0;
+  LEAD_LAG_STATE_IDLE = 1;
+  LEAD_LAG_STATE_MONITORING = 2;
+  LEAD_LAG_STATE_TRIGGERED = 3;
+  LEAD_LAG_STATE_ERROR = 4;
+}
+
+// 시그널 상세 정보
+message LeadLagSignalInfo {
+  // 시그널 방향 (SPIKE/DROP)
+  string direction = 1;
+
+  // 틱 변동량
+  int64 tick_change = 2;
+
+  // 선물 주문 방향 (BID/ASK)
+  string futures_side = 3;
+
+  // ETF 주문 방향 (BID/ASK)
+  string etf_side = 4;
+
+  // 선물 주문 가격
+  double futures_price = 5;
+
+  // ETF 주문 가격
+  double etf_price = 6;
+
+  // 선물 주문 수량
+  int64 futures_qty = 7;
+
+  // ETF 주문 수량
+  int64 etf_qty = 8;
+}
+
+// Price buffer 상태 정보
+message LeadLagPriceBufferInfo {
+  // 버퍼 내 틱 수
+  uint64 tick_count = 1;
+
+  // 윈도우 내 최고가
+  optional double window_high = 2;
+
+  // 윈도우 내 최저가
+  optional double window_low = 3;
+
+  // 현재 mid price
+  optional double current_mid = 4;
 }

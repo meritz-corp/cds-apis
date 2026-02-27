@@ -9,8 +9,251 @@ import (
 
 	gomock "github.com/golang/mock/gomock"
 	grpc "google.golang.org/grpc"
+	metadata "google.golang.org/grpc/metadata"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
+
+// MockLeadLagService_StreamLeadLagStatusClient is a mock of LeadLagService_StreamLeadLagStatusClient interface.
+type MockLeadLagService_StreamLeadLagStatusClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockLeadLagService_StreamLeadLagStatusClientMockRecorder
+}
+
+// MockLeadLagService_StreamLeadLagStatusClientMockRecorder is the mock recorder for MockLeadLagService_StreamLeadLagStatusClient.
+type MockLeadLagService_StreamLeadLagStatusClientMockRecorder struct {
+	mock *MockLeadLagService_StreamLeadLagStatusClient
+}
+
+// NewMockLeadLagService_StreamLeadLagStatusClient creates a new mock instance.
+func NewMockLeadLagService_StreamLeadLagStatusClient(ctrl *gomock.Controller) *MockLeadLagService_StreamLeadLagStatusClient {
+	mock := &MockLeadLagService_StreamLeadLagStatusClient{ctrl: ctrl}
+	mock.recorder = &MockLeadLagService_StreamLeadLagStatusClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) EXPECT() *MockLeadLagService_StreamLeadLagStatusClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockLeadLagService_StreamLeadLagStatusClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockLeadLagService_StreamLeadLagStatusClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockLeadLagService_StreamLeadLagStatusClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) Recv() (*LeadLagStatusUpdate, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*LeadLagStatusUpdate)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockLeadLagService_StreamLeadLagStatusClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockLeadLagService_StreamLeadLagStatusClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockLeadLagService_StreamLeadLagStatusClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockLeadLagService_StreamLeadLagStatusClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusClient)(nil).Trailer))
+}
+
+// MockLeadLagService_StreamLeadLagStatusServer is a mock of LeadLagService_StreamLeadLagStatusServer interface.
+type MockLeadLagService_StreamLeadLagStatusServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockLeadLagService_StreamLeadLagStatusServerMockRecorder
+}
+
+// MockLeadLagService_StreamLeadLagStatusServerMockRecorder is the mock recorder for MockLeadLagService_StreamLeadLagStatusServer.
+type MockLeadLagService_StreamLeadLagStatusServerMockRecorder struct {
+	mock *MockLeadLagService_StreamLeadLagStatusServer
+}
+
+// NewMockLeadLagService_StreamLeadLagStatusServer creates a new mock instance.
+func NewMockLeadLagService_StreamLeadLagStatusServer(ctrl *gomock.Controller) *MockLeadLagService_StreamLeadLagStatusServer {
+	mock := &MockLeadLagService_StreamLeadLagStatusServer{ctrl: ctrl}
+	mock.recorder = &MockLeadLagService_StreamLeadLagStatusServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) EXPECT() *MockLeadLagService_StreamLeadLagStatusServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockLeadLagService_StreamLeadLagStatusServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockLeadLagService_StreamLeadLagStatusServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) Send(arg0 *LeadLagStatusUpdate) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockLeadLagService_StreamLeadLagStatusServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockLeadLagService_StreamLeadLagStatusServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockLeadLagService_StreamLeadLagStatusServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockLeadLagService_StreamLeadLagStatusServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockLeadLagService_StreamLeadLagStatusServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockLeadLagService_StreamLeadLagStatusServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLeadLagService_StreamLeadLagStatusServer)(nil).SetTrailer), arg0)
+}
 
 // MockLeadLagServiceClient is a mock of LeadLagServiceClient interface.
 type MockLeadLagServiceClient struct {
@@ -135,6 +378,26 @@ func (mr *MockLeadLagServiceClientMockRecorder) SetLeadLagActive(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetLeadLagActive", reflect.TypeOf((*MockLeadLagServiceClient)(nil).SetLeadLagActive), varargs...)
 }
 
+// StreamLeadLagStatus mocks base method.
+func (m *MockLeadLagServiceClient) StreamLeadLagStatus(ctx context.Context, in *StreamLeadLagStatusRequest, opts ...grpc.CallOption) (LeadLagService_StreamLeadLagStatusClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamLeadLagStatus", varargs...)
+	ret0, _ := ret[0].(LeadLagService_StreamLeadLagStatusClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamLeadLagStatus indicates an expected call of StreamLeadLagStatus.
+func (mr *MockLeadLagServiceClientMockRecorder) StreamLeadLagStatus(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamLeadLagStatus", reflect.TypeOf((*MockLeadLagServiceClient)(nil).StreamLeadLagStatus), varargs...)
+}
+
 // UpdateLeadLag mocks base method.
 func (m *MockLeadLagServiceClient) UpdateLeadLag(ctx context.Context, in *UpdateLeadLagRequest, opts ...grpc.CallOption) (*LeadLag, error) {
 	m.ctrl.T.Helper()
@@ -251,6 +514,20 @@ func (m *MockLeadLagServiceServer) SetLeadLagActive(ctx context.Context, in *Set
 func (mr *MockLeadLagServiceServerMockRecorder) SetLeadLagActive(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetLeadLagActive", reflect.TypeOf((*MockLeadLagServiceServer)(nil).SetLeadLagActive), ctx, in)
+}
+
+// StreamLeadLagStatus mocks base method.
+func (m *MockLeadLagServiceServer) StreamLeadLagStatus(blob *StreamLeadLagStatusRequest, server LeadLagService_StreamLeadLagStatusServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamLeadLagStatus", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamLeadLagStatus indicates an expected call of StreamLeadLagStatus.
+func (mr *MockLeadLagServiceServerMockRecorder) StreamLeadLagStatus(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamLeadLagStatus", reflect.TypeOf((*MockLeadLagServiceServer)(nil).StreamLeadLagStatus), blob, server)
 }
 
 // UpdateLeadLag mocks base method.

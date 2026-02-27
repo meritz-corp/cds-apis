@@ -64,6 +64,11 @@ class LeadLagServiceClient extends $grpc.Client {
     return $createUnaryCall(_$setLeadLagActive, request, options: options);
   }
 
+  /// LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
+  $grpc.ResponseStream<$0.LeadLagStatusUpdate> streamLeadLagStatus($0.StreamLeadLagStatusRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamLeadLagStatus, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$getLeadLag = $grpc.ClientMethod<$0.GetLeadLagRequest, $0.LeadLag>(
@@ -90,6 +95,10 @@ class LeadLagServiceClient extends $grpc.Client {
       '/kdo.v1.lead_lag.LeadLagService/SetLeadLagActive',
       ($0.SetLeadLagActiveRequest value) => value.writeToBuffer(),
       $0.LeadLag.fromBuffer);
+  static final _$streamLeadLagStatus = $grpc.ClientMethod<$0.StreamLeadLagStatusRequest, $0.LeadLagStatusUpdate>(
+      '/kdo.v1.lead_lag.LeadLagService/StreamLeadLagStatus',
+      ($0.StreamLeadLagStatusRequest value) => value.writeToBuffer(),
+      $0.LeadLagStatusUpdate.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lead_lag.LeadLagService')
@@ -139,6 +148,13 @@ abstract class LeadLagServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SetLeadLagActiveRequest.fromBuffer(value),
         ($0.LeadLag value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamLeadLagStatusRequest, $0.LeadLagStatusUpdate>(
+        'StreamLeadLagStatus',
+        streamLeadLagStatus_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamLeadLagStatusRequest.fromBuffer(value),
+        ($0.LeadLagStatusUpdate value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LeadLag> getLeadLag_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagRequest> $request) async {
@@ -176,5 +192,11 @@ abstract class LeadLagServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.LeadLag> setLeadLagActive($grpc.ServiceCall call, $0.SetLeadLagActiveRequest request);
+
+  $async.Stream<$0.LeadLagStatusUpdate> streamLeadLagStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamLeadLagStatusRequest> $request) async* {
+    yield* streamLeadLagStatus($call, await $request);
+  }
+
+  $async.Stream<$0.LeadLagStatusUpdate> streamLeadLagStatus($grpc.ServiceCall call, $0.StreamLeadLagStatusRequest request);
 
 }

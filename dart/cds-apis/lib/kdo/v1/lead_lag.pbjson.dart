@@ -14,6 +14,24 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use leadLagStateDescriptor instead')
+const LeadLagState$json = {
+  '1': 'LeadLagState',
+  '2': [
+    {'1': 'LEAD_LAG_STATE_UNSPECIFIED', '2': 0},
+    {'1': 'LEAD_LAG_STATE_IDLE', '2': 1},
+    {'1': 'LEAD_LAG_STATE_MONITORING', '2': 2},
+    {'1': 'LEAD_LAG_STATE_TRIGGERED', '2': 3},
+    {'1': 'LEAD_LAG_STATE_ERROR', '2': 4},
+  ],
+};
+
+/// Descriptor for `LeadLagState`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List leadLagStateDescriptor = $convert.base64Decode(
+    'CgxMZWFkTGFnU3RhdGUSHgoaTEVBRF9MQUdfU1RBVEVfVU5TUEVDSUZJRUQQABIXChNMRUFEX0'
+    'xBR19TVEFURV9JRExFEAESHQoZTEVBRF9MQUdfU1RBVEVfTU9OSVRPUklORxACEhwKGExFQURf'
+    'TEFHX1NUQVRFX1RSSUdHRVJFRBADEhgKFExFQURfTEFHX1NUQVRFX0VSUk9SEAQ=');
+
 @$core.Deprecated('Use leadLagDescriptor instead')
 const LeadLag$json = {
   '1': 'LeadLag',
@@ -172,4 +190,102 @@ final $typed_data.Uint8List setLeadLagActiveRequestDescriptor = $convert.base64D
     'ChdTZXRMZWFkTGFnQWN0aXZlUmVxdWVzdBI7CghsZWFkX2xhZxgBIAEoCUIg4kEBAvpBGQoXa2'
     'RvLmNkc2FwaXMueHl6L0xlYWRMYWdSB2xlYWRMYWcSIQoJaXNfYWN0aXZlGAIgASgIQgTiQQEC'
     'Ughpc0FjdGl2ZQ==');
+
+@$core.Deprecated('Use streamLeadLagStatusRequestDescriptor instead')
+const StreamLeadLagStatusRequest$json = {
+  '1': 'StreamLeadLagStatusRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+  ],
+};
+
+/// Descriptor for `StreamLeadLagStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamLeadLagStatusRequestDescriptor = $convert.base64Decode(
+    'ChpTdHJlYW1MZWFkTGFnU3RhdHVzUmVxdWVzdBI7CghsZWFkX2xhZxgBIAEoCUIg4kEBAvpBGQ'
+    'oXa2RvLmNkc2FwaXMueHl6L0xlYWRMYWdSB2xlYWRMYWc=');
+
+@$core.Deprecated('Use leadLagStatusUpdateDescriptor instead')
+const LeadLagStatusUpdate$json = {
+  '1': 'LeadLagStatusUpdate',
+  '2': [
+    {'1': 'lead_lag_id', '3': 1, '4': 1, '5': 5, '10': 'leadLagId'},
+    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.lead_lag.LeadLagState', '9': 0, '10': 'state', '17': true},
+    {'1': 'futures_position', '3': 3, '4': 1, '5': 3, '9': 1, '10': 'futuresPosition', '17': true},
+    {'1': 'total_trades', '3': 4, '4': 1, '5': 4, '9': 2, '10': 'totalTrades', '17': true},
+    {'1': 'last_futures_price', '3': 5, '4': 1, '5': 1, '9': 3, '10': 'lastFuturesPrice', '17': true},
+    {'1': 'last_signal', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagSignalInfo', '9': 4, '10': 'lastSignal', '17': true},
+    {'1': 'price_buffer', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagPriceBufferInfo', '9': 5, '10': 'priceBuffer', '17': true},
+    {'1': 'latency_us', '3': 8, '4': 1, '5': 4, '9': 6, '10': 'latencyUs', '17': true},
+    {'1': 'timestamp_us', '3': 9, '4': 1, '5': 4, '10': 'timestampUs'},
+  ],
+  '8': [
+    {'1': '_state'},
+    {'1': '_futures_position'},
+    {'1': '_total_trades'},
+    {'1': '_last_futures_price'},
+    {'1': '_last_signal'},
+    {'1': '_price_buffer'},
+    {'1': '_latency_us'},
+  ],
+};
+
+/// Descriptor for `LeadLagStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagStatusUpdateDescriptor = $convert.base64Decode(
+    'ChNMZWFkTGFnU3RhdHVzVXBkYXRlEh4KC2xlYWRfbGFnX2lkGAEgASgFUglsZWFkTGFnSWQSOA'
+    'oFc3RhdGUYAiABKA4yHS5rZG8udjEubGVhZF9sYWcuTGVhZExhZ1N0YXRlSABSBXN0YXRliAEB'
+    'Ei4KEGZ1dHVyZXNfcG9zaXRpb24YAyABKANIAVIPZnV0dXJlc1Bvc2l0aW9uiAEBEiYKDHRvdG'
+    'FsX3RyYWRlcxgEIAEoBEgCUgt0b3RhbFRyYWRlc4gBARIxChJsYXN0X2Z1dHVyZXNfcHJpY2UY'
+    'BSABKAFIA1IQbGFzdEZ1dHVyZXNQcmljZYgBARJICgtsYXN0X3NpZ25hbBgGIAEoCzIiLmtkby'
+    '52MS5sZWFkX2xhZy5MZWFkTGFnU2lnbmFsSW5mb0gEUgpsYXN0U2lnbmFsiAEBEk8KDHByaWNl'
+    'X2J1ZmZlchgHIAEoCzInLmtkby52MS5sZWFkX2xhZy5MZWFkTGFnUHJpY2VCdWZmZXJJbmZvSA'
+    'VSC3ByaWNlQnVmZmVyiAEBEiIKCmxhdGVuY3lfdXMYCCABKARIBlIJbGF0ZW5jeVVziAEBEiEK'
+    'DHRpbWVzdGFtcF91cxgJIAEoBFILdGltZXN0YW1wVXNCCAoGX3N0YXRlQhMKEV9mdXR1cmVzX3'
+    'Bvc2l0aW9uQg8KDV90b3RhbF90cmFkZXNCFQoTX2xhc3RfZnV0dXJlc19wcmljZUIOCgxfbGFz'
+    'dF9zaWduYWxCDwoNX3ByaWNlX2J1ZmZlckINCgtfbGF0ZW5jeV91cw==');
+
+@$core.Deprecated('Use leadLagSignalInfoDescriptor instead')
+const LeadLagSignalInfo$json = {
+  '1': 'LeadLagSignalInfo',
+  '2': [
+    {'1': 'direction', '3': 1, '4': 1, '5': 9, '10': 'direction'},
+    {'1': 'tick_change', '3': 2, '4': 1, '5': 3, '10': 'tickChange'},
+    {'1': 'futures_side', '3': 3, '4': 1, '5': 9, '10': 'futuresSide'},
+    {'1': 'etf_side', '3': 4, '4': 1, '5': 9, '10': 'etfSide'},
+    {'1': 'futures_price', '3': 5, '4': 1, '5': 1, '10': 'futuresPrice'},
+    {'1': 'etf_price', '3': 6, '4': 1, '5': 1, '10': 'etfPrice'},
+    {'1': 'futures_qty', '3': 7, '4': 1, '5': 3, '10': 'futuresQty'},
+    {'1': 'etf_qty', '3': 8, '4': 1, '5': 3, '10': 'etfQty'},
+  ],
+};
+
+/// Descriptor for `LeadLagSignalInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagSignalInfoDescriptor = $convert.base64Decode(
+    'ChFMZWFkTGFnU2lnbmFsSW5mbxIcCglkaXJlY3Rpb24YASABKAlSCWRpcmVjdGlvbhIfCgt0aW'
+    'NrX2NoYW5nZRgCIAEoA1IKdGlja0NoYW5nZRIhCgxmdXR1cmVzX3NpZGUYAyABKAlSC2Z1dHVy'
+    'ZXNTaWRlEhkKCGV0Zl9zaWRlGAQgASgJUgdldGZTaWRlEiMKDWZ1dHVyZXNfcHJpY2UYBSABKA'
+    'FSDGZ1dHVyZXNQcmljZRIbCglldGZfcHJpY2UYBiABKAFSCGV0ZlByaWNlEh8KC2Z1dHVyZXNf'
+    'cXR5GAcgASgDUgpmdXR1cmVzUXR5EhcKB2V0Zl9xdHkYCCABKANSBmV0ZlF0eQ==');
+
+@$core.Deprecated('Use leadLagPriceBufferInfoDescriptor instead')
+const LeadLagPriceBufferInfo$json = {
+  '1': 'LeadLagPriceBufferInfo',
+  '2': [
+    {'1': 'tick_count', '3': 1, '4': 1, '5': 4, '10': 'tickCount'},
+    {'1': 'window_high', '3': 2, '4': 1, '5': 1, '9': 0, '10': 'windowHigh', '17': true},
+    {'1': 'window_low', '3': 3, '4': 1, '5': 1, '9': 1, '10': 'windowLow', '17': true},
+    {'1': 'current_mid', '3': 4, '4': 1, '5': 1, '9': 2, '10': 'currentMid', '17': true},
+  ],
+  '8': [
+    {'1': '_window_high'},
+    {'1': '_window_low'},
+    {'1': '_current_mid'},
+  ],
+};
+
+/// Descriptor for `LeadLagPriceBufferInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagPriceBufferInfoDescriptor = $convert.base64Decode(
+    'ChZMZWFkTGFnUHJpY2VCdWZmZXJJbmZvEh0KCnRpY2tfY291bnQYASABKARSCXRpY2tDb3VudB'
+    'IkCgt3aW5kb3dfaGlnaBgCIAEoAUgAUgp3aW5kb3dIaWdoiAEBEiIKCndpbmRvd19sb3cYAyAB'
+    'KAFIAVIJd2luZG93TG93iAEBEiQKC2N1cnJlbnRfbWlkGAQgASgBSAJSCmN1cnJlbnRNaWSIAQ'
+    'FCDgoMX3dpbmRvd19oaWdoQg0KC193aW5kb3dfbG93Qg4KDF9jdXJyZW50X21pZA==');
 

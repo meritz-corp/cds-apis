@@ -35,6 +35,8 @@ type LeadLagServiceClient interface {
 	DeleteLeadLag(ctx context.Context, in *DeleteLeadLagRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// LeadLag 활성화/비활성화
 	SetLeadLagActive(ctx context.Context, in *SetLeadLagActiveRequest, opts ...grpc.CallOption) (*LeadLag, error)
+	// LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
+	StreamLeadLagStatus(ctx context.Context, in *StreamLeadLagStatusRequest, opts ...grpc.CallOption) (LeadLagService_StreamLeadLagStatusClient, error)
 }
 
 type leadLagServiceClient struct {
@@ -99,6 +101,38 @@ func (c *leadLagServiceClient) SetLeadLagActive(ctx context.Context, in *SetLead
 	return out, nil
 }
 
+func (c *leadLagServiceClient) StreamLeadLagStatus(ctx context.Context, in *StreamLeadLagStatusRequest, opts ...grpc.CallOption) (LeadLagService_StreamLeadLagStatusClient, error) {
+	stream, err := c.cc.NewStream(ctx, &LeadLagService_ServiceDesc.Streams[0], "/kdo.v1.lead_lag.LeadLagService/StreamLeadLagStatus", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &leadLagServiceStreamLeadLagStatusClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type LeadLagService_StreamLeadLagStatusClient interface {
+	Recv() (*LeadLagStatusUpdate, error)
+	grpc.ClientStream
+}
+
+type leadLagServiceStreamLeadLagStatusClient struct {
+	grpc.ClientStream
+}
+
+func (x *leadLagServiceStreamLeadLagStatusClient) Recv() (*LeadLagStatusUpdate, error) {
+	m := new(LeadLagStatusUpdate)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // LeadLagServiceServer is the server API for LeadLagService service.
 // All implementations must embed UnimplementedLeadLagServiceServer
 // for forward compatibility
@@ -115,6 +149,8 @@ type LeadLagServiceServer interface {
 	DeleteLeadLag(context.Context, *DeleteLeadLagRequest) (*emptypb.Empty, error)
 	// LeadLag 활성화/비활성화
 	SetLeadLagActive(context.Context, *SetLeadLagActiveRequest) (*LeadLag, error)
+	// LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
+	StreamLeadLagStatus(*StreamLeadLagStatusRequest, LeadLagService_StreamLeadLagStatusServer) error
 	mustEmbedUnimplementedLeadLagServiceServer()
 }
 
@@ -139,6 +175,9 @@ func (UnimplementedLeadLagServiceServer) DeleteLeadLag(context.Context, *DeleteL
 }
 func (UnimplementedLeadLagServiceServer) SetLeadLagActive(context.Context, *SetLeadLagActiveRequest) (*LeadLag, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetLeadLagActive not implemented")
+}
+func (UnimplementedLeadLagServiceServer) StreamLeadLagStatus(*StreamLeadLagStatusRequest, LeadLagService_StreamLeadLagStatusServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamLeadLagStatus not implemented")
 }
 func (UnimplementedLeadLagServiceServer) mustEmbedUnimplementedLeadLagServiceServer() {}
 
@@ -261,6 +300,27 @@ func _LeadLagService_SetLeadLagActive_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LeadLagService_StreamLeadLagStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamLeadLagStatusRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(LeadLagServiceServer).StreamLeadLagStatus(m, &leadLagServiceStreamLeadLagStatusServer{stream})
+}
+
+type LeadLagService_StreamLeadLagStatusServer interface {
+	Send(*LeadLagStatusUpdate) error
+	grpc.ServerStream
+}
+
+type leadLagServiceStreamLeadLagStatusServer struct {
+	grpc.ServerStream
+}
+
+func (x *leadLagServiceStreamLeadLagStatusServer) Send(m *LeadLagStatusUpdate) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // LeadLagService_ServiceDesc is the grpc.ServiceDesc for LeadLagService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -293,6 +353,12 @@ var LeadLagService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _LeadLagService_SetLeadLagActive_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamLeadLagStatus",
+			Handler:       _LeadLagService_StreamLeadLagStatus_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "kdo/v1/lead_lag.proto",
 }

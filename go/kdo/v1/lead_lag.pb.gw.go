@@ -341,6 +341,40 @@ func local_request_LeadLagService_SetLeadLagActive_0(ctx context.Context, marsha
 
 }
 
+func request_LeadLagService_StreamLeadLagStatus_0(ctx context.Context, marshaler runtime.Marshaler, client LeadLagServiceClient, req *http.Request, pathParams map[string]string) (LeadLagService_StreamLeadLagStatusClient, runtime.ServerMetadata, error) {
+	var protoReq StreamLeadLagStatusRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["lead_lag"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lead_lag")
+	}
+
+	protoReq.LeadLag, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lead_lag", err)
+	}
+
+	stream, err := client.StreamLeadLagStatus(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterLeadLagServiceHandlerServer registers the http handlers for service LeadLagService to "mux".
 // UnaryRPC     :call LeadLagServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -495,6 +529,13 @@ func RegisterLeadLagServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 
 		forward_LeadLagService_SetLeadLagActive_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("GET", pattern_LeadLagService_StreamLeadLagStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -670,6 +711,28 @@ func RegisterLeadLagServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 
 	})
 
+	mux.Handle("GET", pattern_LeadLagService_StreamLeadLagStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lead_lag.LeadLagService/StreamLeadLagStatus", runtime.WithHTTPPathPattern("/v1/{lead_lag=lead_lags/*}:streamStatus"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_LeadLagService_StreamLeadLagStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LeadLagService_StreamLeadLagStatus_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -685,6 +748,8 @@ var (
 	pattern_LeadLagService_DeleteLeadLag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, ""))
 
 	pattern_LeadLagService_SetLeadLagActive_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "setActive"))
+
+	pattern_LeadLagService_StreamLeadLagStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "streamStatus"))
 )
 
 var (
@@ -699,4 +764,6 @@ var (
 	forward_LeadLagService_DeleteLeadLag_0 = runtime.ForwardResponseMessage
 
 	forward_LeadLagService_SetLeadLagActive_0 = runtime.ForwardResponseMessage
+
+	forward_LeadLagService_StreamLeadLagStatus_0 = runtime.ForwardResponseStream
 )
