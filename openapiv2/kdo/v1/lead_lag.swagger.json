@@ -1,0 +1,479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/lead_lag.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "LeadLagService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/lead_lags": {
+      "get": {
+        "summary": "LeadLag 목록 조회",
+        "operationId": "LeadLagService_ListLeadLags",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagListLeadLagsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* is_active - 활성화 여부\n\nExamples:\n* is_active=true",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      },
+      "post": {
+        "summary": "LeadLag 생성",
+        "operationId": "LeadLagService_CreateLeadLag",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLag"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "생성할 LeadLag",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLag",
+              "required": [
+                "leadLag"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    },
+    "/v1/{leadLag.name}": {
+      "patch": {
+        "summary": "LeadLag 수정",
+        "operationId": "LeadLagService_UpdateLeadLag",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLag"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag.name",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          },
+          {
+            "name": "leadLag",
+            "description": "수정할 LeadLag",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "LeadLag ID",
+                  "readOnly": true
+                },
+                "displayName": {
+                  "type": "string",
+                  "title": "전략 이름 (고유)"
+                },
+                "futuresIsin": {
+                  "type": "string",
+                  "title": "선물 ISIN 코드"
+                },
+                "etfIsin": {
+                  "type": "string",
+                  "title": "ETF ISIN 코드"
+                },
+                "futuresFundCode": {
+                  "type": "string",
+                  "title": "선물 펀드코드"
+                },
+                "etfFundCode": {
+                  "type": "string",
+                  "title": "ETF 펀드코드"
+                },
+                "triggerConfig": {
+                  "$ref": "#/definitions/lead_lagLeadLagTriggerConfig",
+                  "title": "트리거 설정"
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "title": "활성화 여부"
+                },
+                "futuresTickSize": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "선물 틱 사이즈 (예: 0.05)"
+                },
+                "futuresMultiplier": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "선물 승수 (예: 250000)"
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "생성 시간",
+                  "readOnly": true
+                },
+                "updateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "수정 시간",
+                  "readOnly": true
+                }
+              },
+              "title": "수정할 LeadLag",
+              "required": [
+                "displayName",
+                "futuresIsin",
+                "etfIsin",
+                "futuresFundCode",
+                "etfFundCode"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    },
+    "/v1/{leadLag}": {
+      "get": {
+        "summary": "단일 LeadLag 조회",
+        "operationId": "LeadLagService_GetLeadLag",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLag"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      },
+      "delete": {
+        "summary": "LeadLag 삭제",
+        "operationId": "LeadLagService_DeleteLeadLag",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    },
+    "/v1/{leadLag}:setActive": {
+      "post": {
+        "summary": "LeadLag 활성화/비활성화",
+        "operationId": "LeadLagService_SetLeadLagActive",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLag"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isActive": {
+                  "type": "boolean",
+                  "title": "활성화 여부"
+                }
+              },
+              "required": [
+                "isActive"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "lead_lagLeadLag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (lead_lags/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "LeadLag ID",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "title": "전략 이름 (고유)"
+        },
+        "futuresIsin": {
+          "type": "string",
+          "title": "선물 ISIN 코드"
+        },
+        "etfIsin": {
+          "type": "string",
+          "title": "ETF ISIN 코드"
+        },
+        "futuresFundCode": {
+          "type": "string",
+          "title": "선물 펀드코드"
+        },
+        "etfFundCode": {
+          "type": "string",
+          "title": "ETF 펀드코드"
+        },
+        "triggerConfig": {
+          "$ref": "#/definitions/lead_lagLeadLagTriggerConfig",
+          "title": "트리거 설정"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "futuresTickSize": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 틱 사이즈 (예: 0.05)"
+        },
+        "futuresMultiplier": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 승수 (예: 250000)"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시간",
+          "readOnly": true
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "수정 시간",
+          "readOnly": true
+        }
+      },
+      "title": "선물-ETF 선행 차익거래 설정",
+      "required": [
+        "displayName",
+        "futuresIsin",
+        "etfIsin",
+        "futuresFundCode",
+        "etfFundCode"
+      ]
+    },
+    "lead_lagLeadLagTriggerConfig": {
+      "type": "object",
+      "properties": {
+        "tickThreshold": {
+          "type": "string",
+          "format": "int64",
+          "title": "트리거 틱 수 (선물 가격 변동 임계값, 틱 단위)"
+        },
+        "windowMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "감지 윈도우 (밀리초)"
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "트리거 후 재트리거까지 대기시간 (밀리초)"
+        },
+        "maxPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "최대 동시 포지션 (선물 계약 수)"
+        },
+        "etfHedgeQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 1계약당 ETF 헷지 수량"
+        },
+        "futuresOrderQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 주문 수량 (계약 수)"
+        }
+      },
+      "title": "선물 급변 감지 설정"
+    },
+    "lead_lagListLeadLagsResponse": {
+      "type": "object",
+      "properties": {
+        "leadLags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lead_lagLeadLag"
+          },
+          "title": "LeadLag 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
