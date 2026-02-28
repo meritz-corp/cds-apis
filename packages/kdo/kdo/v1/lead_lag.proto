@@ -191,8 +191,8 @@ message LeadLagTriggerConfig {
   // 트리거 틱 수 (선물 가격 변동 임계값, 틱 단위)
   int64 tick_threshold = 1;
 
-  // 감지 윈도우 (밀리초)
-  uint64 window_ms = 2;
+  // 감지 윈도우 (마이크로초)
+  uint64 window_us = 2;
 
   // 트리거 후 재트리거까지 대기시간 (밀리초)
   uint64 cooldown_ms = 3;

@@ -73,7 +73,7 @@ const LeadLagTriggerConfig$json = {
   '1': 'LeadLagTriggerConfig',
   '2': [
     {'1': 'tick_threshold', '3': 1, '4': 1, '5': 3, '10': 'tickThreshold'},
-    {'1': 'window_ms', '3': 2, '4': 1, '5': 4, '10': 'windowMs'},
+    {'1': 'window_us', '3': 2, '4': 1, '5': 4, '10': 'windowUs'},
     {'1': 'cooldown_ms', '3': 3, '4': 1, '5': 4, '10': 'cooldownMs'},
     {'1': 'max_position', '3': 4, '4': 1, '5': 3, '10': 'maxPosition'},
     {'1': 'etf_hedge_quantity', '3': 5, '4': 1, '5': 3, '10': 'etfHedgeQuantity'},
@@ -84,7 +84,7 @@ const LeadLagTriggerConfig$json = {
 /// Descriptor for `LeadLagTriggerConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List leadLagTriggerConfigDescriptor = $convert.base64Decode(
     'ChRMZWFkTGFnVHJpZ2dlckNvbmZpZxIlCg50aWNrX3RocmVzaG9sZBgBIAEoA1INdGlja1Rocm'
-    'VzaG9sZBIbCgl3aW5kb3dfbXMYAiABKARSCHdpbmRvd01zEh8KC2Nvb2xkb3duX21zGAMgASgE'
+    'VzaG9sZBIbCgl3aW5kb3dfdXMYAiABKARSCHdpbmRvd1VzEh8KC2Nvb2xkb3duX21zGAMgASgE'
     'Ugpjb29sZG93bk1zEiEKDG1heF9wb3NpdGlvbhgEIAEoA1ILbWF4UG9zaXRpb24SLAoSZXRmX2'
     'hlZGdlX3F1YW50aXR5GAUgASgDUhBldGZIZWRnZVF1YW50aXR5EjQKFmZ1dHVyZXNfb3JkZXJf'
     'cXVhbnRpdHkYBiABKANSFGZ1dHVyZXNPcmRlclF1YW50aXR5');

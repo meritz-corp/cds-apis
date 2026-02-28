@@ -236,7 +236,7 @@ class LeadLag extends $pb.GeneratedMessage {
 class LeadLagTriggerConfig extends $pb.GeneratedMessage {
   factory LeadLagTriggerConfig({
     $fixnum.Int64? tickThreshold,
-    $fixnum.Int64? windowMs,
+    $fixnum.Int64? windowUs,
     $fixnum.Int64? cooldownMs,
     $fixnum.Int64? maxPosition,
     $fixnum.Int64? etfHedgeQuantity,
@@ -244,7 +244,7 @@ class LeadLagTriggerConfig extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (tickThreshold != null) result.tickThreshold = tickThreshold;
-    if (windowMs != null) result.windowMs = windowMs;
+    if (windowUs != null) result.windowUs = windowUs;
     if (cooldownMs != null) result.cooldownMs = cooldownMs;
     if (maxPosition != null) result.maxPosition = maxPosition;
     if (etfHedgeQuantity != null) result.etfHedgeQuantity = etfHedgeQuantity;
@@ -259,7 +259,7 @@ class LeadLagTriggerConfig extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeadLagTriggerConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'tickThreshold')
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'windowMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'windowUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(4, _omitFieldNames ? '' : 'maxPosition')
     ..aInt64(5, _omitFieldNames ? '' : 'etfHedgeQuantity')
@@ -294,15 +294,15 @@ class LeadLagTriggerConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearTickThreshold() => $_clearField(1);
 
-  /// 감지 윈도우 (밀리초)
+  /// 감지 윈도우 (마이크로초)
   @$pb.TagNumber(2)
-  $fixnum.Int64 get windowMs => $_getI64(1);
+  $fixnum.Int64 get windowUs => $_getI64(1);
   @$pb.TagNumber(2)
-  set windowMs($fixnum.Int64 value) => $_setInt64(1, value);
+  set windowUs($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasWindowMs() => $_has(1);
+  $core.bool hasWindowUs() => $_has(1);
   @$pb.TagNumber(2)
-  void clearWindowMs() => $_clearField(2);
+  void clearWindowUs() => $_clearField(2);
 
   /// 트리거 후 재트리거까지 대기시간 (밀리초)
   @$pb.TagNumber(3)

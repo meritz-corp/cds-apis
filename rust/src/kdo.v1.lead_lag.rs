@@ -59,9 +59,9 @@ pub struct LeadLagTriggerConfig {
     /// 트리거 틱 수 (선물 가격 변동 임계값, 틱 단위)
     #[prost(int64, tag="1")]
     pub tick_threshold: i64,
-    /// 감지 윈도우 (밀리초)
+    /// 감지 윈도우 (마이크로초)
     #[prost(uint64, tag="2")]
-    pub window_ms: u64,
+    pub window_us: u64,
     /// 트리거 후 재트리거까지 대기시간 (밀리초)
     #[prost(uint64, tag="3")]
     pub cooldown_ms: u64,

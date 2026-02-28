@@ -2447,7 +2447,7 @@ impl serde::Serialize for LeadLagTriggerConfig {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("window_ms", ToString::to_string(&self.window_ms).as_str())?;
+            struct_ser.serialize_field("window_us", ToString::to_string(&self.window_us).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2481,8 +2481,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
         const FIELDS: &[&str] = &[
             "tick_threshold",
             "tickThreshold",
-            "window_ms",
-            "windowMs",
+            "window_us",
+            "windowUs",
             "cooldown_ms",
             "cooldownMs",
             "max_position",
@@ -2496,7 +2496,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             TickThreshold,
-            WindowMs,
+            WindowUs,
             CooldownMs,
             MaxPosition,
             EtfHedgeQuantity,
@@ -2524,7 +2524,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                     {
                         match value {
                             "tickThreshold" | "tick_threshold" => Ok(GeneratedField::TickThreshold),
-                            "windowMs" | "window_ms" => Ok(GeneratedField::WindowMs),
+                            "windowUs" | "window_us" => Ok(GeneratedField::WindowUs),
                             "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
                             "maxPosition" | "max_position" => Ok(GeneratedField::MaxPosition),
                             "etfHedgeQuantity" | "etf_hedge_quantity" => Ok(GeneratedField::EtfHedgeQuantity),
@@ -2549,7 +2549,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut tick_threshold__ = None;
-                let mut window_ms__ = None;
+                let mut window_us__ = None;
                 let mut cooldown_ms__ = None;
                 let mut max_position__ = None;
                 let mut etf_hedge_quantity__ = None;
@@ -2564,11 +2564,11 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::WindowMs => {
-                            if window_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("windowMs"));
+                        GeneratedField::WindowUs => {
+                            if window_us__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("windowUs"));
                             }
-                            window_ms__ = 
+                            window_us__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -2611,7 +2611,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                 }
                 Ok(LeadLagTriggerConfig {
                     tick_threshold: tick_threshold__.unwrap_or_default(),
-                    window_ms: window_ms__.unwrap_or_default(),
+                    window_us: window_us__.unwrap_or_default(),
                     cooldown_ms: cooldown_ms__.unwrap_or_default(),
                     max_position: max_position__.unwrap_or_default(),
                     etf_hedge_quantity: etf_hedge_quantity__.unwrap_or_default(),

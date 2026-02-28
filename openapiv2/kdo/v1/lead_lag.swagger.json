@@ -977,10 +977,10 @@
           "format": "int64",
           "title": "트리거 틱 수 (선물 가격 변동 임계값, 틱 단위)"
         },
-        "windowMs": {
+        "windowUs": {
           "type": "string",
           "format": "uint64",
-          "title": "감지 윈도우 (밀리초)"
+          "title": "감지 윈도우 (마이크로초)"
         },
         "cooldownMs": {
           "type": "string",
