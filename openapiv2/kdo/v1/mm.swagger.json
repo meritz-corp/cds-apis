@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/mm.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MmService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/mm": {
+      "get": {
+        "summary": "MM 목록 조회",
+        "operationId": "MmService_ListMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmListMmResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}/config": {
+      "patch": {
+        "summary": "MM 설정 업데이트",
+        "operationId": "MmService_UpdateMmConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMmConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "$ref": "#/definitions/mmMmConfiguration",
+                  "title": "업데이트할 설정 (전체 교체)"
+                }
+              },
+              "title": "UpdateMmConfig",
+              "required": [
+                "config"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}/status": {
+      "get": {
+        "summary": "MM 상태 조회",
+        "operationId": "MmService_GetMmStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMmStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}:pause": {
+      "post": {
+        "summary": "MM 일시정지 (호가 산출 중단)",
+        "operationId": "MmService_PauseMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmPauseMmResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "PauseMm"
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}:reset": {
+      "post": {
+        "summary": "MM 엔진 리셋 (일초 상태 초기화)",
+        "operationId": "MmService_ResetMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmResetMmResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼 (빈 문자열이면 전체 리셋)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "ResetMm"
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}:resume": {
+      "post": {
+        "summary": "MM 재개",
+        "operationId": "MmService_ResumeMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmResumeMmResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "ResumeMm"
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}:start": {
+      "post": {
+        "summary": "MM 시작 (심볼 등록)",
+        "operationId": "MmService_StartMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmStartMmResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "$ref": "#/definitions/mmMmConfiguration",
+                  "title": "MM 설정 오버라이드 (optional, 없으면 기본 설정 사용)"
+                }
+              },
+              "title": "StartMm"
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}:stop": {
+      "post": {
+        "summary": "MM 중지 (심볼 해제)",
+        "operationId": "MmService_StopMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmStopMmResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "StopMm"
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "mmListMmResponse": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mmMmEntry"
+          },
+          "title": "등록된 MM 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "mmMmConfiguration": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "type": "string",
+          "title": "Pricing 전략: \"plain_follow\", \"mean_bidask\", \"nav\", \"krx_nav\""
+        },
+        "skew": {
+          "$ref": "#/definitions/mmMmSkewConfig",
+          "title": "Skew 설정"
+        },
+        "tradeAnalyzer": {
+          "$ref": "#/definitions/mmMmTradeAnalyzerConfig",
+          "title": "Trade Analyzer 설정"
+        },
+        "screening": {
+          "$ref": "#/definitions/mmMmScreeningConfig",
+          "title": "Screening 설정"
+        }
+      },
+      "title": "MM 엔진 설정 (MmConfig 대응)"
+    },
+    "mmMmEntry": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "state": {
+          "$ref": "#/definitions/mmMmState",
+          "title": "현재 상태"
+        },
+        "config": {
+          "$ref": "#/definitions/mmMmConfiguration",
+          "title": "MM 설정"
+        }
+      },
+      "title": "MM 심볼 정보"
+    },
+    "mmMmScreeningConfig": {
+      "type": "object",
+      "properties": {
+        "maxSpreadWidthTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "최대 스프레드 폭 (틱 단위, 0=비활성)"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "최소 가격 (0=비활성)"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "최대 가격 (0=비활성)"
+        }
+      },
+      "title": "Pre-trade Screening 설정"
+    },
+    "mmMmSkewConfig": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "title": "Skew 모드: \"fixed\" or \"slide_on_trade\""
+        },
+        "triggerAmt": {
+          "type": "string",
+          "format": "int64",
+          "title": "SlideOnTrade 트리거 수량"
+        },
+        "skewUnit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "트리거당 skew 틱 수"
+        }
+      },
+      "title": "Skew 설정"
+    },
+    "mmMmState": {
+      "type": "string",
+      "enum": [
+        "MM_STATE_UNSPECIFIED",
+        "MM_STATE_IDLE",
+        "MM_STATE_RUNNING",
+        "MM_STATE_PAUSED"
+      ],
+      "default": "MM_STATE_UNSPECIFIED",
+      "description": "- MM_STATE_IDLE: 미등록\n - MM_STATE_RUNNING: 활성\n - MM_STATE_PAUSED: 일시정지",
+      "title": "MM 상태"
+    },
+    "mmMmStatus": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "state": {
+          "$ref": "#/definitions/mmMmState",
+          "title": "현재 상태"
+        },
+        "config": {
+          "$ref": "#/definitions/mmMmConfiguration",
+          "title": "MM 설정"
+        },
+        "registered": {
+          "type": "boolean",
+          "title": "등록 여부"
+        },
+        "active": {
+          "type": "boolean",
+          "title": "활성 여부 (paused가 아닌 경우)"
+        }
+      },
+      "title": "MM 상태 상세"
+    },
+    "mmMmTradeAnalyzerConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "window": {
+          "type": "integer",
+          "format": "int64",
+          "title": "분석 윈도우 크기"
+        },
+        "ratioThreshold": {
+          "type": "number",
+          "format": "double",
+          "title": "Adverse fill ratio 임계값"
+        },
+        "strengthThreshold": {
+          "type": "number",
+          "format": "double",
+          "title": "Take-fill strength 임계값"
+        },
+        "maxDecoTick": {
+          "type": "integer",
+          "format": "int32",
+          "title": "최대 decoration 틱 수"
+        }
+      },
+      "title": "Trade Analyzer 설정"
+    },
+    "mmPauseMmResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
+    "mmResetMmResponse": {
+      "type": "object",
+      "properties": {
+        "resetCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "리셋된 심볼 수"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
+    "mmResumeMmResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
+    "mmStartMmResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/mmMmStatus",
+          "title": "시작된 MM 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
+    "mmStopMmResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: market/v1/feed.proto
 
-package market
+package feed
 
 import (
 	context "context"

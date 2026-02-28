@@ -1,0 +1,281 @@
+syntax = "proto3";
+
+package kdo.v1.mm;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/client.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// Market Making 서비스 (기존 LP 서비스와 완전히 독립)
+service MmService {
+  // MM 목록 조회
+  rpc ListMm(ListMmRequest) returns (ListMmResponse) {
+    option (google.api.http) = {
+      get: "/v1/mm"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // MM 상태 조회
+  rpc GetMmStatus(GetMmStatusRequest) returns (MmStatus) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/status"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
+  // MM 시작 (심볼 등록)
+  rpc StartMm(StartMmRequest) returns (StartMmResponse) {
+    option (google.api.http) = {
+      post: "/v1/mm/{symbol=*}:start"
+      body: "*"
+    };
+  }
+
+  // MM 중지 (심볼 해제)
+  rpc StopMm(StopMmRequest) returns (StopMmResponse) {
+    option (google.api.http) = {
+      post: "/v1/mm/{symbol=*}:stop"
+      body: "*"
+    };
+  }
+
+  // MM 일시정지 (호가 산출 중단)
+  rpc PauseMm(PauseMmRequest) returns (PauseMmResponse) {
+    option (google.api.http) = {
+      post: "/v1/mm/{symbol=*}:pause"
+      body: "*"
+    };
+  }
+
+  // MM 재개
+  rpc ResumeMm(ResumeMmRequest) returns (ResumeMmResponse) {
+    option (google.api.http) = {
+      post: "/v1/mm/{symbol=*}:resume"
+      body: "*"
+    };
+  }
+
+  // MM 엔진 리셋 (일초 상태 초기화)
+  rpc ResetMm(ResetMmRequest) returns (ResetMmResponse) {
+    option (google.api.http) = {
+      post: "/v1/mm/{symbol=*}:reset"
+      body: "*"
+    };
+  }
+
+  // MM 설정 업데이트
+  rpc UpdateMmConfig(UpdateMmConfigRequest) returns (MmConfiguration) {
+    option (google.api.http) = {
+      patch: "/v1/mm/{symbol=*}/config"
+      body: "*"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+}
+
+// ============================================================================
+// Enums
+// ============================================================================
+
+// MM 상태
+enum MmState {
+  MM_STATE_UNSPECIFIED = 0;
+  MM_STATE_IDLE = 1;        // 미등록
+  MM_STATE_RUNNING = 2;     // 활성
+  MM_STATE_PAUSED = 3;      // 일시정지
+}
+
+// ============================================================================
+// Messages
+// ============================================================================
+
+// MM 심볼 정보
+message MmEntry {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // 현재 상태
+  MmState state = 2;
+
+  // MM 설정
+  MmConfiguration config = 3;
+}
+
+// MM 상태 상세
+message MmStatus {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // 현재 상태
+  MmState state = 2;
+
+  // MM 설정
+  MmConfiguration config = 3;
+
+  // 등록 여부
+  bool registered = 4;
+
+  // 활성 여부 (paused가 아닌 경우)
+  bool active = 5;
+}
+
+// MM 엔진 설정 (MmConfig 대응)
+message MmConfiguration {
+  // Pricing 전략: "plain_follow", "mean_bidask", "nav", "krx_nav"
+  string pricing = 1;
+
+  // Skew 설정
+  MmSkewConfig skew = 2;
+
+  // Trade Analyzer 설정
+  MmTradeAnalyzerConfig trade_analyzer = 3;
+
+  // Screening 설정
+  MmScreeningConfig screening = 4;
+}
+
+// Skew 설정
+message MmSkewConfig {
+  // Skew 모드: "fixed" or "slide_on_trade"
+  string mode = 1;
+
+  // SlideOnTrade 트리거 수량
+  int64 trigger_amt = 2;
+
+  // 트리거당 skew 틱 수
+  int32 skew_unit = 3;
+}
+
+// Trade Analyzer 설정
+message MmTradeAnalyzerConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 분석 윈도우 크기
+  uint32 window = 2;
+
+  // Adverse fill ratio 임계값
+  double ratio_threshold = 3;
+
+  // Take-fill strength 임계값
+  double strength_threshold = 4;
+
+  // 최대 decoration 틱 수
+  int32 max_deco_tick = 5;
+}
+
+// Pre-trade Screening 설정
+message MmScreeningConfig {
+  // 최대 스프레드 폭 (틱 단위, 0=비활성)
+  int32 max_spread_width_ticks = 1;
+
+  // 최소 가격 (0=비활성)
+  int64 min_price = 2;
+
+  // 최대 가격 (0=비활성)
+  int64 max_price = 3;
+}
+
+// ============================================================================
+// Request/Response Messages
+// ============================================================================
+
+// ListMm
+message ListMmRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional)
+  optional string page_token = 2;
+}
+
+message ListMmResponse {
+  // 등록된 MM 목록
+  repeated MmEntry entries = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+// GetMmStatus
+message GetMmStatusRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// StartMm
+message StartMmRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // MM 설정 오버라이드 (optional, 없으면 기본 설정 사용)
+  MmConfiguration config = 2;
+}
+
+message StartMmResponse {
+  // 시작된 MM 상태
+  MmStatus status = 1;
+
+  // 메시지
+  string message = 2;
+}
+
+// StopMm
+message StopMmRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message StopMmResponse {
+  // 메시지
+  string message = 1;
+}
+
+// PauseMm
+message PauseMmRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message PauseMmResponse {
+  // 메시지
+  string message = 1;
+}
+
+// ResumeMm
+message ResumeMmRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ResumeMmResponse {
+  // 메시지
+  string message = 1;
+}
+
+// ResetMm
+message ResetMmRequest {
+  // ISIN 심볼 (빈 문자열이면 전체 리셋)
+  string symbol = 1;
+}
+
+message ResetMmResponse {
+  // 리셋된 심볼 수
+  int32 reset_count = 1;
+
+  // 메시지
+  string message = 2;
+}
+
+// UpdateMmConfig
+message UpdateMmConfigRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 업데이트할 설정 (전체 교체)
+  MmConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
+}

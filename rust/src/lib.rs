@@ -74,6 +74,9 @@ pub mod kdo {
         pub mod lead_lag {
             include!("kdo.v1.lead_lag.rs");
         }
+        pub mod mm {
+            include!("kdo.v1.mm.rs");
+        }
         pub mod common {
             include!("kdo.v1.common.rs");
         }

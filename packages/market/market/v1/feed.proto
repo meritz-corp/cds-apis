@@ -7,7 +7,7 @@ import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/meritz-corp/cds-apis/go/market/v1;market";
+option go_package = "github.com/meritz-corp/cds-apis/go/market/v1/feed;feed";
 
 // ============================================================================
 // Enums

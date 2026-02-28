@@ -2,11 +2,11 @@
 // source: market/v1/feed.proto
 
 /*
-Package market is a reverse proxy.
+Package feed is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package market
+package feed
 
 import (
 	"context"
