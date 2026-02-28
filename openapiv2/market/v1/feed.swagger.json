@@ -1,0 +1,539 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "market/v1/feed.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MarketFeedService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/market-feed/status": {
+      "get": {
+        "summary": "마켓 피드 서버 상태 조회",
+        "operationId": "MarketFeedService_GetStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/feedMarketFeedStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MarketFeedService"
+        ]
+      }
+    },
+    "/v1/market-feed:subscribe": {
+      "post": {
+        "summary": "심볼/시작시각 기반 마켓 피드 구독 (server-side streaming)",
+        "operationId": "MarketFeedService_SubscribeMarketFeed",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/feedMarketFeedEvent"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of feedMarketFeedEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/feedSubscribeMarketFeedRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MarketFeedService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "feedEtfOrderbook": {
+      "type": "object",
+      "properties": {
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매도 호가 (10단계)"
+        },
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매수 호가 (10단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 (10단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 (10단계)"
+        },
+        "lpAskQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "LP 매도 수량 (10단계)"
+        },
+        "lpBidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "LP 매수 수량 (10단계)"
+        },
+        "midPrice": {
+          "type": "string",
+          "title": "중간 호가"
+        },
+        "midAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "중간 매도 수량"
+        },
+        "midBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "중간 매수 수량"
+        },
+        "totalAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매도 호가 수량"
+        },
+        "totalBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매수 호가 수량"
+        },
+        "estPrice": {
+          "type": "string",
+          "title": "예상 체결가"
+        },
+        "estVolume": {
+          "type": "string",
+          "format": "int64",
+          "title": "예상 체결량"
+        }
+      },
+      "title": "ETF 호가 (B703S) - 10단계, LP 수량 포함"
+    },
+    "feedFuturesOrderbook": {
+      "type": "object",
+      "properties": {
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매도 호가 (5단계)"
+        },
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매수 호가 (5단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 (5단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 (5단계)"
+        },
+        "askCounts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 주문 수 (5단계)"
+        },
+        "bidCounts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 주문 수 (5단계)"
+        },
+        "totalAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매도 호가 수량"
+        },
+        "totalBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매수 호가 수량"
+        },
+        "midPrice": {
+          "type": "string",
+          "title": "중간 가격"
+        },
+        "estPrice": {
+          "type": "string",
+          "title": "예상 체결가"
+        },
+        "estVolume": {
+          "type": "string",
+          "format": "int64",
+          "title": "예상 체결량"
+        }
+      },
+      "title": "선물 호가 (B601F, G701F 등) - 5단계"
+    },
+    "feedMarketDataType": {
+      "type": "string",
+      "enum": [
+        "MARKET_DATA_TYPE_UNSPECIFIED",
+        "MARKET_DATA_TYPE_ETF_ORDERBOOK",
+        "MARKET_DATA_TYPE_FUTURES_ORDERBOOK",
+        "MARKET_DATA_TYPE_STOCK_ORDERBOOK",
+        "MARKET_DATA_TYPE_TRADE",
+        "MARKET_DATA_TYPE_NAV"
+      ],
+      "default": "MARKET_DATA_TYPE_UNSPECIFIED",
+      "description": "- MARKET_DATA_TYPE_ETF_ORDERBOOK: ETF 호가 (B703S)\n - MARKET_DATA_TYPE_FUTURES_ORDERBOOK: 선물 호가 (B601F, G701F 등)\n - MARKET_DATA_TYPE_STOCK_ORDERBOOK: 주식 호가 (B601S, B601Q)\n - MARKET_DATA_TYPE_TRADE: 체결 (A301S, A301Q, A303S)\n - MARKET_DATA_TYPE_NAV: NAV (BV03S, BW03S, L503S)",
+      "title": "마켓 데이터 타입 필터"
+    },
+    "feedMarketFeedEvent": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 코드 (12자리, 예: \"KR7252670005\")"
+        },
+        "exchangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "거래소 시각 (마이크로초 정밀도)"
+        },
+        "sequenceNumber": {
+          "type": "string",
+          "format": "int64",
+          "title": "파일 원본 시퀀스 번호"
+        },
+        "messageType": {
+          "type": "string",
+          "title": "원본 메시지 타입 (예: \"B703S\", \"B601F\", \"G701F\")"
+        },
+        "sessionId": {
+          "$ref": "#/definitions/v1feedSessionId",
+          "title": "마켓 세션 상태"
+        },
+        "etfOrderbook": {
+          "$ref": "#/definitions/feedEtfOrderbook",
+          "title": "ETF 호가 (B703S)"
+        },
+        "futuresOrderbook": {
+          "$ref": "#/definitions/feedFuturesOrderbook",
+          "title": "선물 호가 (B601F, G701F)"
+        },
+        "stockOrderbook": {
+          "$ref": "#/definitions/feedStockOrderbook",
+          "title": "주식 호가 (B601S, B601Q)"
+        },
+        "trade": {
+          "$ref": "#/definitions/v1feedTrade",
+          "title": "체결 (A301S, A303S)"
+        },
+        "nav": {
+          "$ref": "#/definitions/feedNav",
+          "title": "NAV (BV03S)"
+        }
+      },
+      "title": "스트리밍되는 마켓 피드 이벤트"
+    },
+    "feedMarketFeedStatus": {
+      "type": "object",
+      "properties": {
+        "activeStreams": {
+          "type": "integer",
+          "format": "int32",
+          "title": "활성 구독 스트림 수"
+        },
+        "totalEventsSent": {
+          "type": "string",
+          "format": "int64",
+          "title": "서버 시작 이후 전송된 총 이벤트 수"
+        },
+        "loadedFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "로드된 TXT 파일 경로 목록"
+        },
+        "serverStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "서버 시작 시각"
+        }
+      },
+      "title": "서버 상태 응답"
+    },
+    "feedNav": {
+      "type": "object",
+      "properties": {
+        "prevNav": {
+          "type": "string",
+          "title": "직전 NAV"
+        },
+        "currentNav": {
+          "type": "string",
+          "title": "현재 NAV"
+        }
+      },
+      "title": "NAV (BV03S, BW03S, L503S)"
+    },
+    "feedOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "매수/매도 구분"
+    },
+    "feedStockOrderbook": {
+      "type": "object",
+      "properties": {
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매도 호가 (10단계)"
+        },
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매수 호가 (10단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 (10단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 (10단계)"
+        },
+        "midPrice": {
+          "type": "string",
+          "title": "중간 호가"
+        },
+        "midAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "중간 매도 수량"
+        },
+        "midBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "중간 매수 수량"
+        },
+        "totalAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매도 호가 수량"
+        },
+        "totalBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매수 호가 수량"
+        },
+        "estPrice": {
+          "type": "string",
+          "title": "예상 체결가"
+        },
+        "estVolume": {
+          "type": "string",
+          "format": "int64",
+          "title": "예상 체결량"
+        }
+      },
+      "title": "주식 호가 (B601S, B601Q) - 10단계"
+    },
+    "feedSubscribeMarketFeedRequest": {
+      "type": "object",
+      "properties": {
+        "symbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "구독 대상 ISIN 코드 목록 (예: [\"KR7252670005\", \"KR4A01630008\"])"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "스트리밍 시작 시각 (해당 시각 이후 데이터만 전송)"
+        },
+        "dataTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/feedMarketDataType"
+          },
+          "title": "수신할 데이터 타입 필터 (비어있으면 전체)"
+        }
+      },
+      "title": "마켓 피드 구독 요청",
+      "required": [
+        "symbols",
+        "startTime"
+      ]
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1feedSessionId": {
+      "type": "string",
+      "enum": [
+        "SESSION_ID_UNSPECIFIED",
+        "SESSION_ID_PREVIOUS",
+        "SESSION_ID_OPENING_AUCTION",
+        "SESSION_ID_ONE_PRICE",
+        "SESSION_ID_CLOSING_AUCTION",
+        "SESSION_ID_CONTINUOUS",
+        "SESSION_ID_VI_AUCTION",
+        "SESSION_ID_VI_OPENING_AUCTION",
+        "SESSION_ID_VI_CLOSING_AUCTION",
+        "SESSION_ID_POST_MARKET",
+        "SESSION_ID_AUCTION_BID",
+        "SESSION_ID_AUCTION_ASK",
+        "SESSION_ID_UNIT_TRADE",
+        "SESSION_ID_SUSPENDED",
+        "SESSION_ID_SHUTDOWN",
+        "SESSION_ID_CLOSED"
+      ],
+      "default": "SESSION_ID_UNSPECIFIED",
+      "description": "- SESSION_ID_PREVIOUS: 장개시전\n - SESSION_ID_OPENING_AUCTION: 시가단일가\n - SESSION_ID_ONE_PRICE: 단일가\n - SESSION_ID_CLOSING_AUCTION: 종가단일가\n - SESSION_ID_CONTINUOUS: 접속 (정규장)\n - SESSION_ID_VI_AUCTION: VI장중단일가\n - SESSION_ID_VI_OPENING_AUCTION: VI시가단일가\n - SESSION_ID_VI_CLOSING_AUCTION: VI종가단일가\n - SESSION_ID_POST_MARKET: 장종료후호가접수\n - SESSION_ID_AUCTION_BID: 경매매수호가 접수\n - SESSION_ID_AUCTION_ASK: 경매매도호가 접수\n - SESSION_ID_UNIT_TRADE: 단위매매\n - SESSION_ID_SUSPENDED: 거래정지\n - SESSION_ID_SHUTDOWN: SHUTDOWN\n - SESSION_ID_CLOSED: 장마감",
+      "title": "세션 ID (장 상태)"
+    },
+    "v1feedTrade": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "string",
+          "title": "체결 가격"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 수량"
+        },
+        "side": {
+          "$ref": "#/definitions/feedOrderSide",
+          "title": "매수/매도 방향"
+        },
+        "cumulativeVolume": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 거래량"
+        },
+        "cumulativeValue": {
+          "type": "string",
+          "title": "누적 거래대금"
+        }
+      },
+      "title": "체결 (A301S, A301Q, A303S)"
+    }
+  }
+}

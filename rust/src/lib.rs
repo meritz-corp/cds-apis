@@ -79,14 +79,17 @@ pub mod kdo {
         }
     }
 }
-
-pub mod market_archive {
+pub mod market {
     pub mod v1 {
-        pub mod market {
-            include!("market_archive.v1.market.rs");
+        pub mod archive {
+            include!("market.v1.archive.rs");
+        }
+        pub mod feed {
+            include!("market.v1.feed.rs");
         }
     }
 }
+
 
 pub mod master_sync {
     pub mod v1 {

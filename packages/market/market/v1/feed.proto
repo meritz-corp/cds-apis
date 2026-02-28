@@ -1,0 +1,280 @@
+syntax = "proto3";
+
+package market.v1.feed;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/market/v1;market";
+
+// ============================================================================
+// Enums
+// ============================================================================
+
+// 매수/매도 구분
+enum OrderSide {
+  ORDER_SIDE_UNSPECIFIED = 0;
+  ORDER_SIDE_BID = 1;  // 매수
+  ORDER_SIDE_ASK = 2;  // 매도
+}
+
+// 세션 ID (장 상태)
+enum SessionId {
+  SESSION_ID_UNSPECIFIED = 0;
+  SESSION_ID_PREVIOUS = 1;              // 장개시전
+  SESSION_ID_OPENING_AUCTION = 2;       // 시가단일가
+  SESSION_ID_ONE_PRICE = 3;             // 단일가
+  SESSION_ID_CLOSING_AUCTION = 4;       // 종가단일가
+  SESSION_ID_CONTINUOUS = 5;            // 접속 (정규장)
+  SESSION_ID_VI_AUCTION = 6;            // VI장중단일가
+  SESSION_ID_VI_OPENING_AUCTION = 7;    // VI시가단일가
+  SESSION_ID_VI_CLOSING_AUCTION = 8;    // VI종가단일가
+  SESSION_ID_POST_MARKET = 9;           // 장종료후호가접수
+  SESSION_ID_AUCTION_BID = 10;          // 경매매수호가 접수
+  SESSION_ID_AUCTION_ASK = 11;          // 경매매도호가 접수
+  SESSION_ID_UNIT_TRADE = 12;           // 단위매매
+  SESSION_ID_SUSPENDED = 13;            // 거래정지
+  SESSION_ID_SHUTDOWN = 14;             // SHUTDOWN
+  SESSION_ID_CLOSED = 15;               // 장마감
+}
+
+// 마켓 데이터 타입 필터
+enum MarketDataType {
+  MARKET_DATA_TYPE_UNSPECIFIED = 0;
+  MARKET_DATA_TYPE_ETF_ORDERBOOK = 1;       // ETF 호가 (B703S)
+  MARKET_DATA_TYPE_FUTURES_ORDERBOOK = 2;   // 선물 호가 (B601F, G701F 등)
+  MARKET_DATA_TYPE_STOCK_ORDERBOOK = 3;     // 주식 호가 (B601S, B601Q)
+  MARKET_DATA_TYPE_TRADE = 4;               // 체결 (A301S, A301Q, A303S)
+  MARKET_DATA_TYPE_NAV = 5;                 // NAV (BV03S, BW03S, L503S)
+}
+
+// ============================================================================
+// Service
+// ============================================================================
+
+// TXT 파일 기반 파싱된 마켓 데이터를 스트리밍하는 서비스
+service MarketFeedService {
+  // 심볼/시작시각 기반 마켓 피드 구독 (server-side streaming)
+  rpc SubscribeMarketFeed(SubscribeMarketFeedRequest) returns (stream MarketFeedEvent) {
+    option (google.api.http) = {
+      post: "/v1/market-feed:subscribe"
+      body: "*"
+    };
+  }
+
+  // 마켓 피드 서버 상태 조회
+  rpc GetStatus(google.protobuf.Empty) returns (MarketFeedStatus) {
+    option (google.api.http) = {
+      get: "/v1/market-feed/status"
+    };
+  }
+}
+
+// ============================================================================
+// Request / Response
+// ============================================================================
+
+// 마켓 피드 구독 요청
+message SubscribeMarketFeedRequest {
+  // 구독 대상 ISIN 코드 목록 (예: ["KR7252670005", "KR4A01630008"])
+  repeated string symbols = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 스트리밍 시작 시각 (해당 시각 이후 데이터만 전송)
+  google.protobuf.Timestamp start_time = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 수신할 데이터 타입 필터 (비어있으면 전체)
+  repeated MarketDataType data_types = 3;
+}
+
+// 서버 상태 응답
+message MarketFeedStatus {
+  // 활성 구독 스트림 수
+  int32 active_streams = 1;
+
+  // 서버 시작 이후 전송된 총 이벤트 수
+  int64 total_events_sent = 2;
+
+  // 로드된 TXT 파일 경로 목록
+  repeated string loaded_files = 3;
+
+  // 서버 시작 시각
+  google.protobuf.Timestamp server_start_time = 4;
+}
+
+// ============================================================================
+// Streaming Event
+// ============================================================================
+
+// 스트리밍되는 마켓 피드 이벤트
+message MarketFeedEvent {
+  // ISIN 코드 (12자리, 예: "KR7252670005")
+  string symbol = 1;
+
+  // 거래소 시각 (마이크로초 정밀도)
+  google.protobuf.Timestamp exchange_time = 2;
+
+  // 파일 원본 시퀀스 번호
+  int64 sequence_number = 3;
+
+  // 원본 메시지 타입 (예: "B703S", "B601F", "G701F")
+  string message_type = 4;
+
+  // 마켓 세션 상태
+  SessionId session_id = 5;
+
+  // 파싱된 데이터 본문
+  oneof data {
+    EtfOrderbook etf_orderbook = 10;            // ETF 호가 (B703S)
+    FuturesOrderbook futures_orderbook = 11;    // 선물 호가 (B601F, G701F)
+    StockOrderbook stock_orderbook = 12;        // 주식 호가 (B601S, B601Q)
+    Trade trade = 13;                           // 체결 (A301S, A303S)
+    Nav nav = 14;                               // NAV (BV03S)
+  }
+}
+
+// ============================================================================
+// Data Messages
+// ============================================================================
+
+// ETF 호가 (B703S) - 10단계, LP 수량 포함
+message EtfOrderbook {
+  // 매도 호가 (10단계)
+  repeated string ask_prices = 1;
+
+  // 매수 호가 (10단계)
+  repeated string bid_prices = 2;
+
+  // 매도 수량 (10단계)
+  repeated int64 ask_quantities = 3;
+
+  // 매수 수량 (10단계)
+  repeated int64 bid_quantities = 4;
+
+  // LP 매도 수량 (10단계)
+  repeated int64 lp_ask_quantities = 5;
+
+  // LP 매수 수량 (10단계)
+  repeated int64 lp_bid_quantities = 6;
+
+  // 중간 호가
+  string mid_price = 7;
+
+  // 중간 매도 수량
+  int64 mid_ask_quantity = 8;
+
+  // 중간 매수 수량
+  int64 mid_bid_quantity = 9;
+
+  // 총 매도 호가 수량
+  int64 total_ask_quantity = 10;
+
+  // 총 매수 호가 수량
+  int64 total_bid_quantity = 11;
+
+  // 예상 체결가
+  string est_price = 12;
+
+  // 예상 체결량
+  int64 est_volume = 13;
+}
+
+// 선물 호가 (B601F, G701F 등) - 5단계
+message FuturesOrderbook {
+  // 매도 호가 (5단계)
+  repeated string ask_prices = 1;
+
+  // 매수 호가 (5단계)
+  repeated string bid_prices = 2;
+
+  // 매도 수량 (5단계)
+  repeated int64 ask_quantities = 3;
+
+  // 매수 수량 (5단계)
+  repeated int64 bid_quantities = 4;
+
+  // 매도 주문 수 (5단계)
+  repeated int64 ask_counts = 5;
+
+  // 매수 주문 수 (5단계)
+  repeated int64 bid_counts = 6;
+
+  // 총 매도 호가 수량
+  int64 total_ask_quantity = 7;
+
+  // 총 매수 호가 수량
+  int64 total_bid_quantity = 8;
+
+  // 중간 가격
+  string mid_price = 9;
+
+  // 예상 체결가
+  string est_price = 10;
+
+  // 예상 체결량
+  int64 est_volume = 11;
+}
+
+// 주식 호가 (B601S, B601Q) - 10단계
+message StockOrderbook {
+  // 매도 호가 (10단계)
+  repeated string ask_prices = 1;
+
+  // 매수 호가 (10단계)
+  repeated string bid_prices = 2;
+
+  // 매도 수량 (10단계)
+  repeated int64 ask_quantities = 3;
+
+  // 매수 수량 (10단계)
+  repeated int64 bid_quantities = 4;
+
+  // 중간 호가
+  string mid_price = 5;
+
+  // 중간 매도 수량
+  int64 mid_ask_quantity = 6;
+
+  // 중간 매수 수량
+  int64 mid_bid_quantity = 7;
+
+  // 총 매도 호가 수량
+  int64 total_ask_quantity = 8;
+
+  // 총 매수 호가 수량
+  int64 total_bid_quantity = 9;
+
+  // 예상 체결가
+  string est_price = 10;
+
+  // 예상 체결량
+  int64 est_volume = 11;
+}
+
+// 체결 (A301S, A301Q, A303S)
+message Trade {
+  // 체결 가격
+  string price = 1;
+
+  // 체결 수량
+  int64 quantity = 2;
+
+  // 매수/매도 방향
+  OrderSide side = 3;
+
+  // 누적 거래량
+  int64 cumulative_volume = 4;
+
+  // 누적 거래대금
+  string cumulative_value = 5;
+}
+
+// NAV (BV03S, BW03S, L503S)
+message Nav {
+  // 직전 NAV
+  string prev_nav = 1;
+
+  // 현재 NAV
+  string current_nav = 2;
+}
