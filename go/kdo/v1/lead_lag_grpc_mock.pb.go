@@ -338,6 +338,26 @@ func (mr *MockLeadLagServiceClientMockRecorder) GetLeadLag(ctx, in interface{}, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLag", reflect.TypeOf((*MockLeadLagServiceClient)(nil).GetLeadLag), varargs...)
 }
 
+// GetLeadLagTradeContext mocks base method.
+func (m *MockLeadLagServiceClient) GetLeadLagTradeContext(ctx context.Context, in *GetLeadLagTradeContextRequest, opts ...grpc.CallOption) (*LeadLagTradeContext, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetLeadLagTradeContext", varargs...)
+	ret0, _ := ret[0].(*LeadLagTradeContext)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLeadLagTradeContext indicates an expected call of GetLeadLagTradeContext.
+func (mr *MockLeadLagServiceClientMockRecorder) GetLeadLagTradeContext(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagTradeContext", reflect.TypeOf((*MockLeadLagServiceClient)(nil).GetLeadLagTradeContext), varargs...)
+}
+
 // ListLeadLags mocks base method.
 func (m *MockLeadLagServiceClient) ListLeadLags(ctx context.Context, in *ListLeadLagsRequest, opts ...grpc.CallOption) (*ListLeadLagsResponse, error) {
 	m.ctrl.T.Helper()
@@ -524,6 +544,21 @@ func (m *MockLeadLagServiceServer) GetLeadLag(ctx context.Context, in *GetLeadLa
 func (mr *MockLeadLagServiceServerMockRecorder) GetLeadLag(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLag", reflect.TypeOf((*MockLeadLagServiceServer)(nil).GetLeadLag), ctx, in)
+}
+
+// GetLeadLagTradeContext mocks base method.
+func (m *MockLeadLagServiceServer) GetLeadLagTradeContext(ctx context.Context, in *GetLeadLagTradeContextRequest) (*LeadLagTradeContext, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLeadLagTradeContext", ctx, in)
+	ret0, _ := ret[0].(*LeadLagTradeContext)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLeadLagTradeContext indicates an expected call of GetLeadLagTradeContext.
+func (mr *MockLeadLagServiceServerMockRecorder) GetLeadLagTradeContext(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagTradeContext", reflect.TypeOf((*MockLeadLagServiceServer)(nil).GetLeadLagTradeContext), ctx, in)
 }
 
 // ListLeadLags mocks base method.

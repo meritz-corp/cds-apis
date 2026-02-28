@@ -41,6 +41,9 @@ type LeadLagServiceClient interface {
 	StartLeadLag(ctx context.Context, in *StartLeadLagRequest, opts ...grpc.CallOption) (*StartLeadLagResponse, error)
 	// LeadLag 전략 중지 (hot loop 중지)
 	StopLeadLag(ctx context.Context, in *StopLeadLagRequest, opts ...grpc.CallOption) (*StopLeadLagResponse, error)
+	// 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
+	// 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
+	GetLeadLagTradeContext(ctx context.Context, in *GetLeadLagTradeContextRequest, opts ...grpc.CallOption) (*LeadLagTradeContext, error)
 }
 
 type leadLagServiceClient struct {
@@ -155,6 +158,15 @@ func (c *leadLagServiceClient) StopLeadLag(ctx context.Context, in *StopLeadLagR
 	return out, nil
 }
 
+func (c *leadLagServiceClient) GetLeadLagTradeContext(ctx context.Context, in *GetLeadLagTradeContextRequest, opts ...grpc.CallOption) (*LeadLagTradeContext, error) {
+	out := new(LeadLagTradeContext)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LeadLagServiceServer is the server API for LeadLagService service.
 // All implementations must embed UnimplementedLeadLagServiceServer
 // for forward compatibility
@@ -177,6 +189,9 @@ type LeadLagServiceServer interface {
 	StartLeadLag(context.Context, *StartLeadLagRequest) (*StartLeadLagResponse, error)
 	// LeadLag 전략 중지 (hot loop 중지)
 	StopLeadLag(context.Context, *StopLeadLagRequest) (*StopLeadLagResponse, error)
+	// 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
+	// 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
+	GetLeadLagTradeContext(context.Context, *GetLeadLagTradeContextRequest) (*LeadLagTradeContext, error)
 	mustEmbedUnimplementedLeadLagServiceServer()
 }
 
@@ -210,6 +225,9 @@ func (UnimplementedLeadLagServiceServer) StartLeadLag(context.Context, *StartLea
 }
 func (UnimplementedLeadLagServiceServer) StopLeadLag(context.Context, *StopLeadLagRequest) (*StopLeadLagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopLeadLag not implemented")
+}
+func (UnimplementedLeadLagServiceServer) GetLeadLagTradeContext(context.Context, *GetLeadLagTradeContextRequest) (*LeadLagTradeContext, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLeadLagTradeContext not implemented")
 }
 func (UnimplementedLeadLagServiceServer) mustEmbedUnimplementedLeadLagServiceServer() {}
 
@@ -389,6 +407,24 @@ func _LeadLagService_StopLeadLag_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LeadLagService_GetLeadLagTradeContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeadLagTradeContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadLagServiceServer).GetLeadLagTradeContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadLagServiceServer).GetLeadLagTradeContext(ctx, req.(*GetLeadLagTradeContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LeadLagService_ServiceDesc is the grpc.ServiceDesc for LeadLagService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -427,6 +463,10 @@ var LeadLagService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopLeadLag",
 			Handler:    _LeadLagService_StopLeadLag_Handler,
+		},
+		{
+			MethodName: "GetLeadLagTradeContext",
+			Handler:    _LeadLagService_GetLeadLagTradeContext_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

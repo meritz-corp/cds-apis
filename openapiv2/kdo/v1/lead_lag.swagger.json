@@ -446,6 +446,63 @@
           "LeadLagService"
         ]
       }
+    },
+    "/v1/{leadLag}:tradeContext": {
+      "get": {
+        "summary": "체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)\n특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.",
+        "operationId": "LeadLagService_GetLeadLagTradeContext",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLagTradeContext"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          },
+          {
+            "name": "tradeTimestampUs",
+            "description": "트리거 발생 타임스탬프 (마이크로초, KST)",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "windowBeforeMs",
+            "description": "트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "windowAfterMs",
+            "description": "트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -547,6 +604,31 @@
         }
       },
       "title": "Price buffer 상태 정보"
+    },
+    "lead_lagLeadLagPriceTick": {
+      "type": "object",
+      "properties": {
+        "timestampUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "타임스탬프 (마이크로초)"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "title": "가격 (체결가 또는 mid price)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 수량 (호가 기반이면 0)"
+        },
+        "side": {
+          "type": "string",
+          "title": "매수/매도 구분 (BID/ASK, 호가 mid이면 빈 문자열)"
+        }
+      },
+      "title": "가격 틱 데이터 (시각화용)"
     },
     "lead_lagLeadLagSignalInfo": {
       "type": "object",
@@ -650,6 +732,55 @@
         }
       },
       "title": "LeadLag 실시간 상태 업데이트 (delta 방식: 변경된 필드만 전송)"
+    },
+    "lead_lagLeadLagTradeContext": {
+      "type": "object",
+      "properties": {
+        "futuresTicks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lead_lagLeadLagPriceTick"
+          },
+          "title": "선물 가격 틱 (시간순)"
+        },
+        "etfTicks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lead_lagLeadLagPriceTick"
+          },
+          "title": "ETF 가격 틱 (시간순)"
+        },
+        "triggerTimestampUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "트리거 시점 (마이크로초)"
+        },
+        "signal": {
+          "$ref": "#/definitions/lead_lagLeadLagSignalInfo",
+          "title": "해당 시그널 정보"
+        },
+        "futuresPriceAtTrigger": {
+          "type": "number",
+          "format": "double",
+          "title": "트리거 시점 선물 가격"
+        },
+        "etfPriceAtTrigger": {
+          "type": "number",
+          "format": "double",
+          "title": "트리거 시점 ETF 가격"
+        },
+        "futuresPriceChangePct": {
+          "type": "number",
+          "format": "double",
+          "title": "윈도우 내 선물 가격 변동률 (%)"
+        },
+        "etfPriceChangePct": {
+          "type": "number",
+          "format": "double",
+          "title": "윈도우 내 ETF 가격 변동률 (%)"
+        }
+      },
+      "title": "체결 시점 전후 가격 컨텍스트 응답"
     },
     "lead_lagLeadLagTriggerConfig": {
       "type": "object",

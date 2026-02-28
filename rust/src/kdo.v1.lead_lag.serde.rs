@@ -287,6 +287,168 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagRequest {
         deserializer.deserialize_struct("kdo.v1.lead_lag.GetLeadLagRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for GetLeadLagTradeContextRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.GetLeadLagTradeContextRequest", len)?;
+        if true {
+            struct_ser.serialize_field("lead_lag", &self.lead_lag)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("trade_timestamp_us", ToString::to_string(&self.trade_timestamp_us).as_str())?;
+        }
+        if let Some(v) = self.window_before_ms.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("window_before_ms", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.window_after_ms.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("window_after_ms", ToString::to_string(&v).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "lead_lag",
+            "leadLag",
+            "trade_timestamp_us",
+            "tradeTimestampUs",
+            "window_before_ms",
+            "windowBeforeMs",
+            "window_after_ms",
+            "windowAfterMs",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            LeadLag,
+            TradeTimestampUs,
+            WindowBeforeMs,
+            WindowAfterMs,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "leadLag" | "lead_lag" => Ok(GeneratedField::LeadLag),
+                            "tradeTimestampUs" | "trade_timestamp_us" => Ok(GeneratedField::TradeTimestampUs),
+                            "windowBeforeMs" | "window_before_ms" => Ok(GeneratedField::WindowBeforeMs),
+                            "windowAfterMs" | "window_after_ms" => Ok(GeneratedField::WindowAfterMs),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetLeadLagTradeContextRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lead_lag.GetLeadLagTradeContextRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetLeadLagTradeContextRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut lead_lag__ = None;
+                let mut trade_timestamp_us__ = None;
+                let mut window_before_ms__ = None;
+                let mut window_after_ms__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::LeadLag => {
+                            if lead_lag__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("leadLag"));
+                            }
+                            lead_lag__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TradeTimestampUs => {
+                            if trade_timestamp_us__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradeTimestampUs"));
+                            }
+                            trade_timestamp_us__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::WindowBeforeMs => {
+                            if window_before_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("windowBeforeMs"));
+                            }
+                            window_before_ms__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::WindowAfterMs => {
+                            if window_after_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("windowAfterMs"));
+                            }
+                            window_after_ms__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetLeadLagTradeContextRequest {
+                    lead_lag: lead_lag__.unwrap_or_default(),
+                    trade_timestamp_us: trade_timestamp_us__.unwrap_or_default(),
+                    window_before_ms: window_before_ms__,
+                    window_after_ms: window_after_ms__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lead_lag.GetLeadLagTradeContextRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for LeadLag {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -761,6 +923,163 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceBufferInfo {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lead_lag.LeadLagPriceBufferInfo", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LeadLagPriceTick {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagPriceTick", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("timestamp_us", ToString::to_string(&self.timestamp_us).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("price", &self.price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("side", &self.side)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LeadLagPriceTick {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "timestamp_us",
+            "timestampUs",
+            "price",
+            "quantity",
+            "side",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TimestampUs,
+            Price,
+            Quantity,
+            Side,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "timestampUs" | "timestamp_us" => Ok(GeneratedField::TimestampUs),
+                            "price" => Ok(GeneratedField::Price),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "side" => Ok(GeneratedField::Side),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LeadLagPriceTick;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lead_lag.LeadLagPriceTick")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LeadLagPriceTick, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut timestamp_us__ = None;
+                let mut price__ = None;
+                let mut quantity__ = None;
+                let mut side__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TimestampUs => {
+                            if timestamp_us__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("timestampUs"));
+                            }
+                            timestamp_us__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Price => {
+                            if price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("price"));
+                            }
+                            price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Side => {
+                            if side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("side"));
+                            }
+                            side__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LeadLagPriceTick {
+                    timestamp_us: timestamp_us__.unwrap_or_default(),
+                    price: price__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    side: side__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lead_lag.LeadLagPriceTick", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for LeadLagSignalInfo {
@@ -1339,6 +1658,239 @@ impl<'de> serde::Deserialize<'de> for LeadLagStatusUpdate {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lead_lag.LeadLagStatusUpdate", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LeadLagTradeContext {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagTradeContext", len)?;
+        if true {
+            struct_ser.serialize_field("futures_ticks", &self.futures_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_ticks", &self.etf_ticks)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("trigger_timestamp_us", ToString::to_string(&self.trigger_timestamp_us).as_str())?;
+        }
+        if let Some(v) = self.signal.as_ref() {
+            struct_ser.serialize_field("signal", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("futures_price_at_trigger", &self.futures_price_at_trigger)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_price_at_trigger", &self.etf_price_at_trigger)?;
+        }
+        if true {
+            struct_ser.serialize_field("futures_price_change_pct", &self.futures_price_change_pct)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_price_change_pct", &self.etf_price_change_pct)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "futures_ticks",
+            "futuresTicks",
+            "etf_ticks",
+            "etfTicks",
+            "trigger_timestamp_us",
+            "triggerTimestampUs",
+            "signal",
+            "futures_price_at_trigger",
+            "futuresPriceAtTrigger",
+            "etf_price_at_trigger",
+            "etfPriceAtTrigger",
+            "futures_price_change_pct",
+            "futuresPriceChangePct",
+            "etf_price_change_pct",
+            "etfPriceChangePct",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FuturesTicks,
+            EtfTicks,
+            TriggerTimestampUs,
+            Signal,
+            FuturesPriceAtTrigger,
+            EtfPriceAtTrigger,
+            FuturesPriceChangePct,
+            EtfPriceChangePct,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "futuresTicks" | "futures_ticks" => Ok(GeneratedField::FuturesTicks),
+                            "etfTicks" | "etf_ticks" => Ok(GeneratedField::EtfTicks),
+                            "triggerTimestampUs" | "trigger_timestamp_us" => Ok(GeneratedField::TriggerTimestampUs),
+                            "signal" => Ok(GeneratedField::Signal),
+                            "futuresPriceAtTrigger" | "futures_price_at_trigger" => Ok(GeneratedField::FuturesPriceAtTrigger),
+                            "etfPriceAtTrigger" | "etf_price_at_trigger" => Ok(GeneratedField::EtfPriceAtTrigger),
+                            "futuresPriceChangePct" | "futures_price_change_pct" => Ok(GeneratedField::FuturesPriceChangePct),
+                            "etfPriceChangePct" | "etf_price_change_pct" => Ok(GeneratedField::EtfPriceChangePct),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LeadLagTradeContext;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lead_lag.LeadLagTradeContext")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LeadLagTradeContext, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut futures_ticks__ = None;
+                let mut etf_ticks__ = None;
+                let mut trigger_timestamp_us__ = None;
+                let mut signal__ = None;
+                let mut futures_price_at_trigger__ = None;
+                let mut etf_price_at_trigger__ = None;
+                let mut futures_price_change_pct__ = None;
+                let mut etf_price_change_pct__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FuturesTicks => {
+                            if futures_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futuresTicks"));
+                            }
+                            futures_ticks__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EtfTicks => {
+                            if etf_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfTicks"));
+                            }
+                            etf_ticks__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TriggerTimestampUs => {
+                            if trigger_timestamp_us__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerTimestampUs"));
+                            }
+                            trigger_timestamp_us__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Signal => {
+                            if signal__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("signal"));
+                            }
+                            signal__ = map_.next_value()?;
+                        }
+                        GeneratedField::FuturesPriceAtTrigger => {
+                            if futures_price_at_trigger__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futuresPriceAtTrigger"));
+                            }
+                            futures_price_at_trigger__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EtfPriceAtTrigger => {
+                            if etf_price_at_trigger__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPriceAtTrigger"));
+                            }
+                            etf_price_at_trigger__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FuturesPriceChangePct => {
+                            if futures_price_change_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futuresPriceChangePct"));
+                            }
+                            futures_price_change_pct__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EtfPriceChangePct => {
+                            if etf_price_change_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPriceChangePct"));
+                            }
+                            etf_price_change_pct__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LeadLagTradeContext {
+                    futures_ticks: futures_ticks__.unwrap_or_default(),
+                    etf_ticks: etf_ticks__.unwrap_or_default(),
+                    trigger_timestamp_us: trigger_timestamp_us__.unwrap_or_default(),
+                    signal: signal__,
+                    futures_price_at_trigger: futures_price_at_trigger__.unwrap_or_default(),
+                    etf_price_at_trigger: etf_price_at_trigger__.unwrap_or_default(),
+                    futures_price_change_pct: futures_price_change_pct__.unwrap_or_default(),
+                    etf_price_change_pct: etf_price_change_pct__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lead_lag.LeadLagTradeContext", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for LeadLagTriggerConfig {

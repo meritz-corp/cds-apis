@@ -343,3 +343,71 @@ final $typed_data.Uint8List leadLagPriceBufferInfoDescriptor = $convert.base64De
     'KAFIAVIJd2luZG93TG93iAEBEiQKC2N1cnJlbnRfbWlkGAQgASgBSAJSCmN1cnJlbnRNaWSIAQ'
     'FCDgoMX3dpbmRvd19oaWdoQg0KC193aW5kb3dfbG93Qg4KDF9jdXJyZW50X21pZA==');
 
+@$core.Deprecated('Use getLeadLagTradeContextRequestDescriptor instead')
+const GetLeadLagTradeContextRequest$json = {
+  '1': 'GetLeadLagTradeContextRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+    {'1': 'trade_timestamp_us', '3': 2, '4': 1, '5': 4, '8': {}, '10': 'tradeTimestampUs'},
+    {'1': 'window_before_ms', '3': 3, '4': 1, '5': 4, '9': 0, '10': 'windowBeforeMs', '17': true},
+    {'1': 'window_after_ms', '3': 4, '4': 1, '5': 4, '9': 1, '10': 'windowAfterMs', '17': true},
+  ],
+  '8': [
+    {'1': '_window_before_ms'},
+    {'1': '_window_after_ms'},
+  ],
+};
+
+/// Descriptor for `GetLeadLagTradeContextRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getLeadLagTradeContextRequestDescriptor = $convert.base64Decode(
+    'Ch1HZXRMZWFkTGFnVHJhZGVDb250ZXh0UmVxdWVzdBI7CghsZWFkX2xhZxgBIAEoCUIg4kEBAv'
+    'pBGQoXa2RvLmNkc2FwaXMueHl6L0xlYWRMYWdSB2xlYWRMYWcSMgoSdHJhZGVfdGltZXN0YW1w'
+    'X3VzGAIgASgEQgTiQQECUhB0cmFkZVRpbWVzdGFtcFVzEi0KEHdpbmRvd19iZWZvcmVfbXMYAy'
+    'ABKARIAFIOd2luZG93QmVmb3JlTXOIAQESKwoPd2luZG93X2FmdGVyX21zGAQgASgESAFSDXdp'
+    'bmRvd0FmdGVyTXOIAQFCEwoRX3dpbmRvd19iZWZvcmVfbXNCEgoQX3dpbmRvd19hZnRlcl9tcw'
+    '==');
+
+@$core.Deprecated('Use leadLagTradeContextDescriptor instead')
+const LeadLagTradeContext$json = {
+  '1': 'LeadLagTradeContext',
+  '2': [
+    {'1': 'futures_ticks', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagPriceTick', '10': 'futuresTicks'},
+    {'1': 'etf_ticks', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagPriceTick', '10': 'etfTicks'},
+    {'1': 'trigger_timestamp_us', '3': 3, '4': 1, '5': 4, '10': 'triggerTimestampUs'},
+    {'1': 'signal', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagSignalInfo', '10': 'signal'},
+    {'1': 'futures_price_at_trigger', '3': 5, '4': 1, '5': 1, '10': 'futuresPriceAtTrigger'},
+    {'1': 'etf_price_at_trigger', '3': 6, '4': 1, '5': 1, '10': 'etfPriceAtTrigger'},
+    {'1': 'futures_price_change_pct', '3': 7, '4': 1, '5': 1, '10': 'futuresPriceChangePct'},
+    {'1': 'etf_price_change_pct', '3': 8, '4': 1, '5': 1, '10': 'etfPriceChangePct'},
+  ],
+};
+
+/// Descriptor for `LeadLagTradeContext`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagTradeContextDescriptor = $convert.base64Decode(
+    'ChNMZWFkTGFnVHJhZGVDb250ZXh0EkYKDWZ1dHVyZXNfdGlja3MYASADKAsyIS5rZG8udjEubG'
+    'VhZF9sYWcuTGVhZExhZ1ByaWNlVGlja1IMZnV0dXJlc1RpY2tzEj4KCWV0Zl90aWNrcxgCIAMo'
+    'CzIhLmtkby52MS5sZWFkX2xhZy5MZWFkTGFnUHJpY2VUaWNrUghldGZUaWNrcxIwChR0cmlnZ2'
+    'VyX3RpbWVzdGFtcF91cxgDIAEoBFISdHJpZ2dlclRpbWVzdGFtcFVzEjoKBnNpZ25hbBgEIAEo'
+    'CzIiLmtkby52MS5sZWFkX2xhZy5MZWFkTGFnU2lnbmFsSW5mb1IGc2lnbmFsEjcKGGZ1dHVyZX'
+    'NfcHJpY2VfYXRfdHJpZ2dlchgFIAEoAVIVZnV0dXJlc1ByaWNlQXRUcmlnZ2VyEi8KFGV0Zl9w'
+    'cmljZV9hdF90cmlnZ2VyGAYgASgBUhFldGZQcmljZUF0VHJpZ2dlchI3ChhmdXR1cmVzX3ByaW'
+    'NlX2NoYW5nZV9wY3QYByABKAFSFWZ1dHVyZXNQcmljZUNoYW5nZVBjdBIvChRldGZfcHJpY2Vf'
+    'Y2hhbmdlX3BjdBgIIAEoAVIRZXRmUHJpY2VDaGFuZ2VQY3Q=');
+
+@$core.Deprecated('Use leadLagPriceTickDescriptor instead')
+const LeadLagPriceTick$json = {
+  '1': 'LeadLagPriceTick',
+  '2': [
+    {'1': 'timestamp_us', '3': 1, '4': 1, '5': 4, '10': 'timestampUs'},
+    {'1': 'price', '3': 2, '4': 1, '5': 1, '10': 'price'},
+    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'side', '3': 4, '4': 1, '5': 9, '10': 'side'},
+  ],
+};
+
+/// Descriptor for `LeadLagPriceTick`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagPriceTickDescriptor = $convert.base64Decode(
+    'ChBMZWFkTGFnUHJpY2VUaWNrEiEKDHRpbWVzdGFtcF91cxgBIAEoBFILdGltZXN0YW1wVXMSFA'
+    'oFcHJpY2UYAiABKAFSBXByaWNlEhoKCHF1YW50aXR5GAMgASgDUghxdWFudGl0eRISCgRzaWRl'
+    'GAQgASgJUgRzaWRl');
+

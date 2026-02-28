@@ -79,6 +79,12 @@ class LeadLagServiceClient extends $grpc.Client {
     return $createUnaryCall(_$stopLeadLag, request, options: options);
   }
 
+  /// 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
+  /// 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
+  $grpc.ResponseFuture<$0.LeadLagTradeContext> getLeadLagTradeContext($0.GetLeadLagTradeContextRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getLeadLagTradeContext, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getLeadLag = $grpc.ClientMethod<$0.GetLeadLagRequest, $0.LeadLag>(
@@ -117,6 +123,10 @@ class LeadLagServiceClient extends $grpc.Client {
       '/kdo.v1.lead_lag.LeadLagService/StopLeadLag',
       ($0.StopLeadLagRequest value) => value.writeToBuffer(),
       $0.StopLeadLagResponse.fromBuffer);
+  static final _$getLeadLagTradeContext = $grpc.ClientMethod<$0.GetLeadLagTradeContextRequest, $0.LeadLagTradeContext>(
+      '/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext',
+      ($0.GetLeadLagTradeContextRequest value) => value.writeToBuffer(),
+      $0.LeadLagTradeContext.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lead_lag.LeadLagService')
@@ -187,6 +197,13 @@ abstract class LeadLagServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.StopLeadLagRequest.fromBuffer(value),
         ($0.StopLeadLagResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetLeadLagTradeContextRequest, $0.LeadLagTradeContext>(
+        'GetLeadLagTradeContext',
+        getLeadLagTradeContext_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetLeadLagTradeContextRequest.fromBuffer(value),
+        ($0.LeadLagTradeContext value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LeadLag> getLeadLag_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagRequest> $request) async {
@@ -242,5 +259,11 @@ abstract class LeadLagServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.StopLeadLagResponse> stopLeadLag($grpc.ServiceCall call, $0.StopLeadLagRequest request);
+
+  $async.Future<$0.LeadLagTradeContext> getLeadLagTradeContext_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagTradeContextRequest> $request) async {
+    return getLeadLagTradeContext($call, await $request);
+  }
+
+  $async.Future<$0.LeadLagTradeContext> getLeadLagTradeContext($grpc.ServiceCall call, $0.GetLeadLagTradeContextRequest request);
 
 }

@@ -83,4 +83,13 @@ abstract final class LeadLagService {
     kdov1lead_lag.StopLeadLagRequest.new,
     kdov1lead_lag.StopLeadLagResponse.new,
   );
+
+  /// 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
+  /// 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
+  static const getLeadLagTradeContext = connect.Spec(
+    '/$name/GetLeadLagTradeContext',
+    connect.StreamType.unary,
+    kdov1lead_lag.GetLeadLagTradeContextRequest.new,
+    kdov1lead_lag.LeadLagTradeContext.new,
+  );
 }

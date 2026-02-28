@@ -89,6 +89,15 @@ service LeadLagService {
     };
     option (google.api.method_signature) = "lead_lag";
   }
+
+  // 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
+  // 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
+  rpc GetLeadLagTradeContext(GetLeadLagTradeContextRequest) returns (LeadLagTradeContext) {
+    option (google.api.http) = {
+      get: "/v1/{lead_lag=lead_lags/*}:tradeContext"
+    };
+    option (google.api.method_signature) = "lead_lag";
+  }
 }
 
 // ============================================================================
@@ -393,4 +402,72 @@ message LeadLagPriceBufferInfo {
 
   // 현재 mid price
   optional double current_mid = 4;
+}
+
+// ============================================================================
+// Trade Context (체결 시각화용 가격 컨텍스트)
+// ============================================================================
+
+// 체결 시점 전후 가격 컨텍스트 조회 요청
+message GetLeadLagTradeContextRequest {
+  // 리소스 이름 (lead_lags/{id})
+  string lead_lag = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/LeadLag"
+    }
+  ];
+
+  // 트리거 발생 타임스탬프 (마이크로초, KST)
+  uint64 trade_timestamp_us = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)
+  optional uint64 window_before_ms = 3;
+
+  // 트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)
+  optional uint64 window_after_ms = 4;
+}
+
+// 체결 시점 전후 가격 컨텍스트 응답
+message LeadLagTradeContext {
+  // 선물 가격 틱 (시간순)
+  repeated LeadLagPriceTick futures_ticks = 1;
+
+  // ETF 가격 틱 (시간순)
+  repeated LeadLagPriceTick etf_ticks = 2;
+
+  // 트리거 시점 (마이크로초)
+  uint64 trigger_timestamp_us = 3;
+
+  // 해당 시그널 정보
+  LeadLagSignalInfo signal = 4;
+
+  // 트리거 시점 선물 가격
+  double futures_price_at_trigger = 5;
+
+  // 트리거 시점 ETF 가격
+  double etf_price_at_trigger = 6;
+
+  // 윈도우 내 선물 가격 변동률 (%)
+  double futures_price_change_pct = 7;
+
+  // 윈도우 내 ETF 가격 변동률 (%)
+  double etf_price_change_pct = 8;
+}
+
+// 가격 틱 데이터 (시각화용)
+message LeadLagPriceTick {
+  // 타임스탬프 (마이크로초)
+  uint64 timestamp_us = 1;
+
+  // 가격 (체결가 또는 mid price)
+  double price = 2;
+
+  // 체결 수량 (호가 기반이면 0)
+  int64 quantity = 3;
+
+  // 매수/매도 구분 (BID/ASK, 호가 mid이면 빈 문자열)
+  string side = 4;
 }

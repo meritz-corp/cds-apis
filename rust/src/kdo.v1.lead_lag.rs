@@ -274,6 +274,73 @@ pub struct LeadLagPriceBufferInfo {
     #[prost(double, optional, tag="4")]
     pub current_mid: ::core::option::Option<f64>,
 }
+// ============================================================================
+// Trade Context (체결 시각화용 가격 컨텍스트)
+// ============================================================================
+
+/// 체결 시점 전후 가격 컨텍스트 조회 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLeadLagTradeContextRequest {
+    /// 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+    /// 트리거 발생 타임스탬프 (마이크로초, KST)
+    #[prost(uint64, tag="2")]
+    pub trade_timestamp_us: u64,
+    /// 트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)
+    #[prost(uint64, optional, tag="3")]
+    pub window_before_ms: ::core::option::Option<u64>,
+    /// 트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)
+    #[prost(uint64, optional, tag="4")]
+    pub window_after_ms: ::core::option::Option<u64>,
+}
+/// 체결 시점 전후 가격 컨텍스트 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LeadLagTradeContext {
+    /// 선물 가격 틱 (시간순)
+    #[prost(message, repeated, tag="1")]
+    pub futures_ticks: ::prost::alloc::vec::Vec<LeadLagPriceTick>,
+    /// ETF 가격 틱 (시간순)
+    #[prost(message, repeated, tag="2")]
+    pub etf_ticks: ::prost::alloc::vec::Vec<LeadLagPriceTick>,
+    /// 트리거 시점 (마이크로초)
+    #[prost(uint64, tag="3")]
+    pub trigger_timestamp_us: u64,
+    /// 해당 시그널 정보
+    #[prost(message, optional, tag="4")]
+    pub signal: ::core::option::Option<LeadLagSignalInfo>,
+    /// 트리거 시점 선물 가격
+    #[prost(double, tag="5")]
+    pub futures_price_at_trigger: f64,
+    /// 트리거 시점 ETF 가격
+    #[prost(double, tag="6")]
+    pub etf_price_at_trigger: f64,
+    /// 윈도우 내 선물 가격 변동률 (%)
+    #[prost(double, tag="7")]
+    pub futures_price_change_pct: f64,
+    /// 윈도우 내 ETF 가격 변동률 (%)
+    #[prost(double, tag="8")]
+    pub etf_price_change_pct: f64,
+}
+/// 가격 틱 데이터 (시각화용)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LeadLagPriceTick {
+    /// 타임스탬프 (마이크로초)
+    #[prost(uint64, tag="1")]
+    pub timestamp_us: u64,
+    /// 가격 (체결가 또는 mid price)
+    #[prost(double, tag="2")]
+    pub price: f64,
+    /// 체결 수량 (호가 기반이면 0)
+    #[prost(int64, tag="3")]
+    pub quantity: i64,
+    /// 매수/매도 구분 (BID/ASK, 호가 mid이면 빈 문자열)
+    #[prost(string, tag="4")]
+    pub side: ::prost::alloc::string::String,
+}
 /// LeadLag 서비스 실행 상태
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

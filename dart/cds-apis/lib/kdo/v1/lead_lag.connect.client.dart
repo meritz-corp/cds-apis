@@ -171,4 +171,23 @@ extension type LeadLagServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
+  /// 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
+  Future<kdov1lead_lag.LeadLagTradeContext> getLeadLagTradeContext(
+    kdov1lead_lag.GetLeadLagTradeContextRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LeadLagService.getLeadLagTradeContext,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }
