@@ -378,6 +378,46 @@ func (mr *MockLeadLagServiceClientMockRecorder) SetLeadLagActive(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetLeadLagActive", reflect.TypeOf((*MockLeadLagServiceClient)(nil).SetLeadLagActive), varargs...)
 }
 
+// StartLeadLag mocks base method.
+func (m *MockLeadLagServiceClient) StartLeadLag(ctx context.Context, in *StartLeadLagRequest, opts ...grpc.CallOption) (*StartLeadLagResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StartLeadLag", varargs...)
+	ret0, _ := ret[0].(*StartLeadLagResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StartLeadLag indicates an expected call of StartLeadLag.
+func (mr *MockLeadLagServiceClientMockRecorder) StartLeadLag(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StartLeadLag", reflect.TypeOf((*MockLeadLagServiceClient)(nil).StartLeadLag), varargs...)
+}
+
+// StopLeadLag mocks base method.
+func (m *MockLeadLagServiceClient) StopLeadLag(ctx context.Context, in *StopLeadLagRequest, opts ...grpc.CallOption) (*StopLeadLagResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StopLeadLag", varargs...)
+	ret0, _ := ret[0].(*StopLeadLagResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopLeadLag indicates an expected call of StopLeadLag.
+func (mr *MockLeadLagServiceClientMockRecorder) StopLeadLag(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopLeadLag", reflect.TypeOf((*MockLeadLagServiceClient)(nil).StopLeadLag), varargs...)
+}
+
 // StreamLeadLagStatus mocks base method.
 func (m *MockLeadLagServiceClient) StreamLeadLagStatus(ctx context.Context, in *StreamLeadLagStatusRequest, opts ...grpc.CallOption) (LeadLagService_StreamLeadLagStatusClient, error) {
 	m.ctrl.T.Helper()
@@ -514,6 +554,36 @@ func (m *MockLeadLagServiceServer) SetLeadLagActive(ctx context.Context, in *Set
 func (mr *MockLeadLagServiceServerMockRecorder) SetLeadLagActive(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetLeadLagActive", reflect.TypeOf((*MockLeadLagServiceServer)(nil).SetLeadLagActive), ctx, in)
+}
+
+// StartLeadLag mocks base method.
+func (m *MockLeadLagServiceServer) StartLeadLag(ctx context.Context, in *StartLeadLagRequest) (*StartLeadLagResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StartLeadLag", ctx, in)
+	ret0, _ := ret[0].(*StartLeadLagResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StartLeadLag indicates an expected call of StartLeadLag.
+func (mr *MockLeadLagServiceServerMockRecorder) StartLeadLag(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StartLeadLag", reflect.TypeOf((*MockLeadLagServiceServer)(nil).StartLeadLag), ctx, in)
+}
+
+// StopLeadLag mocks base method.
+func (m *MockLeadLagServiceServer) StopLeadLag(ctx context.Context, in *StopLeadLagRequest) (*StopLeadLagResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StopLeadLag", ctx, in)
+	ret0, _ := ret[0].(*StopLeadLagResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopLeadLag indicates an expected call of StopLeadLag.
+func (mr *MockLeadLagServiceServerMockRecorder) StopLeadLag(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopLeadLag", reflect.TypeOf((*MockLeadLagServiceServer)(nil).StopLeadLag), ctx, in)
 }
 
 // StreamLeadLagStatus mocks base method.

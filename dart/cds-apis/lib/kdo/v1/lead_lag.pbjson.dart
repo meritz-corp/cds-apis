@@ -191,6 +191,60 @@ final $typed_data.Uint8List setLeadLagActiveRequestDescriptor = $convert.base64D
     'RvLmNkc2FwaXMueHl6L0xlYWRMYWdSB2xlYWRMYWcSIQoJaXNfYWN0aXZlGAIgASgIQgTiQQEC'
     'Ughpc0FjdGl2ZQ==');
 
+@$core.Deprecated('Use startLeadLagRequestDescriptor instead')
+const StartLeadLagRequest$json = {
+  '1': 'StartLeadLagRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+  ],
+};
+
+/// Descriptor for `StartLeadLagRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startLeadLagRequestDescriptor = $convert.base64Decode(
+    'ChNTdGFydExlYWRMYWdSZXF1ZXN0EjsKCGxlYWRfbGFnGAEgASgJQiDiQQEC+kEZChdrZG8uY2'
+    'RzYXBpcy54eXovTGVhZExhZ1IHbGVhZExhZw==');
+
+@$core.Deprecated('Use startLeadLagResponseDescriptor instead')
+const StartLeadLagResponse$json = {
+  '1': 'StartLeadLagResponse',
+  '2': [
+    {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.lead_lag.LeadLagState', '10': 'state'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `StartLeadLagResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startLeadLagResponseDescriptor = $convert.base64Decode(
+    'ChRTdGFydExlYWRMYWdSZXNwb25zZRIzCgVzdGF0ZRgBIAEoDjIdLmtkby52MS5sZWFkX2xhZy'
+    '5MZWFkTGFnU3RhdGVSBXN0YXRlEhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2U=');
+
+@$core.Deprecated('Use stopLeadLagRequestDescriptor instead')
+const StopLeadLagRequest$json = {
+  '1': 'StopLeadLagRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+  ],
+};
+
+/// Descriptor for `StopLeadLagRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopLeadLagRequestDescriptor = $convert.base64Decode(
+    'ChJTdG9wTGVhZExhZ1JlcXVlc3QSOwoIbGVhZF9sYWcYASABKAlCIOJBAQL6QRkKF2tkby5jZH'
+    'NhcGlzLnh5ei9MZWFkTGFnUgdsZWFkTGFn');
+
+@$core.Deprecated('Use stopLeadLagResponseDescriptor instead')
+const StopLeadLagResponse$json = {
+  '1': 'StopLeadLagResponse',
+  '2': [
+    {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.lead_lag.LeadLagState', '10': 'state'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `StopLeadLagResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopLeadLagResponseDescriptor = $convert.base64Decode(
+    'ChNTdG9wTGVhZExhZ1Jlc3BvbnNlEjMKBXN0YXRlGAEgASgOMh0ua2RvLnYxLmxlYWRfbGFnLk'
+    'xlYWRMYWdTdGF0ZVIFc3RhdGUSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZQ==');
+
 @$core.Deprecated('Use streamLeadLagStatusRequestDescriptor instead')
 const StreamLeadLagStatusRequest$json = {
   '1': 'StreamLeadLagStatusRequest',

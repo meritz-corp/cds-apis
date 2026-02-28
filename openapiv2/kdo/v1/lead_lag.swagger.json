@@ -321,6 +321,90 @@
         ]
       }
     },
+    "/v1/{leadLag}:start": {
+      "post": {
+        "summary": "LeadLag 전략 시작 (hot loop 시작)",
+        "operationId": "LeadLagService_StartLeadLag",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagStartLeadLagResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "LeadLag 전략 시작 요청"
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    },
+    "/v1/{leadLag}:stop": {
+      "post": {
+        "summary": "LeadLag 전략 중지 (hot loop 중지)",
+        "operationId": "LeadLagService_StopLeadLag",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagStopLeadLagResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "LeadLag 전략 중지 요청"
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    },
     "/v1/{leadLag}:streamStatus": {
       "get": {
         "summary": "LeadLag 실시간 상태 스트리밍 (서버→클라이언트)",
@@ -618,6 +702,34 @@
           "title": "다음 페이지 토큰"
         }
       }
+    },
+    "lead_lagStartLeadLagResponse": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/lead_lagLeadLagState",
+          "title": "현재 실행 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "응답 메시지"
+        }
+      },
+      "title": "LeadLag 전략 시작 응답"
+    },
+    "lead_lagStopLeadLagResponse": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/lead_lagLeadLagState",
+          "title": "현재 실행 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "응답 메시지"
+        }
+      },
+      "title": "LeadLag 전략 중지 응답"
     },
     "protobufAny": {
       "type": "object",

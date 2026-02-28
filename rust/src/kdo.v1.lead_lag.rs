@@ -146,6 +146,44 @@ pub struct SetLeadLagActiveRequest {
     #[prost(bool, tag="2")]
     pub is_active: bool,
 }
+/// LeadLag 전략 시작 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartLeadLagRequest {
+    /// 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+}
+/// LeadLag 전략 시작 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartLeadLagResponse {
+    /// 현재 실행 상태
+    #[prost(enumeration="LeadLagState", tag="1")]
+    pub state: i32,
+    /// 응답 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
+/// LeadLag 전략 중지 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopLeadLagRequest {
+    /// 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+}
+/// LeadLag 전략 중지 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopLeadLagResponse {
+    /// 현재 실행 상태
+    #[prost(enumeration="LeadLagState", tag="1")]
+    pub state: i32,
+    /// 응답 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+}
 // ============================================================================
 // Streaming Status Messages
 // ============================================================================

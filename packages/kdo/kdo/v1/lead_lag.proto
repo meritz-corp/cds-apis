@@ -71,6 +71,24 @@ service LeadLagService {
     };
     option (google.api.method_signature) = "lead_lag";
   }
+
+  // LeadLag 전략 시작 (hot loop 시작)
+  rpc StartLeadLag(StartLeadLagRequest) returns (StartLeadLagResponse) {
+    option (google.api.http) = {
+      post: "/v1/{lead_lag=lead_lags/*}:start"
+      body: "*"
+    };
+    option (google.api.method_signature) = "lead_lag";
+  }
+
+  // LeadLag 전략 중지 (hot loop 중지)
+  rpc StopLeadLag(StopLeadLagRequest) returns (StopLeadLagResponse) {
+    option (google.api.http) = {
+      post: "/v1/{lead_lag=lead_lags/*}:stop"
+      body: "*"
+    };
+    option (google.api.method_signature) = "lead_lag";
+  }
 }
 
 // ============================================================================
@@ -241,6 +259,44 @@ message SetLeadLagActiveRequest {
   bool is_active = 2 [
     (google.api.field_behavior) = REQUIRED
   ];
+}
+
+// LeadLag 전략 시작 요청
+message StartLeadLagRequest {
+  // 리소스 이름 (lead_lags/{id})
+  string lead_lag = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/LeadLag"
+    }
+  ];
+}
+
+// LeadLag 전략 시작 응답
+message StartLeadLagResponse {
+  // 현재 실행 상태
+  LeadLagState state = 1;
+  // 응답 메시지
+  string message = 2;
+}
+
+// LeadLag 전략 중지 요청
+message StopLeadLagRequest {
+  // 리소스 이름 (lead_lags/{id})
+  string lead_lag = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/LeadLag"
+    }
+  ];
+}
+
+// LeadLag 전략 중지 응답
+message StopLeadLagResponse {
+  // 현재 실행 상태
+  LeadLagState state = 1;
+  // 응답 메시지
+  string message = 2;
 }
 
 // ============================================================================

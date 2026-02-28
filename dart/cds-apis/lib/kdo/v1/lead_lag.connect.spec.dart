@@ -67,4 +67,20 @@ abstract final class LeadLagService {
     kdov1lead_lag.StreamLeadLagStatusRequest.new,
     kdov1lead_lag.LeadLagStatusUpdate.new,
   );
+
+  /// LeadLag 전략 시작 (hot loop 시작)
+  static const startLeadLag = connect.Spec(
+    '/$name/StartLeadLag',
+    connect.StreamType.unary,
+    kdov1lead_lag.StartLeadLagRequest.new,
+    kdov1lead_lag.StartLeadLagResponse.new,
+  );
+
+  /// LeadLag 전략 중지 (hot loop 중지)
+  static const stopLeadLag = connect.Spec(
+    '/$name/StopLeadLag',
+    connect.StreamType.unary,
+    kdov1lead_lag.StopLeadLagRequest.new,
+    kdov1lead_lag.StopLeadLagResponse.new,
+  );
 }

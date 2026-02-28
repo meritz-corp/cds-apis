@@ -259,6 +259,60 @@ pub mod lead_lag_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn start_lead_lag(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StartLeadLagRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StartLeadLagResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lead_lag.LeadLagService/StartLeadLag",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.lead_lag.LeadLagService", "StartLeadLag"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stop_lead_lag(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StopLeadLagRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopLeadLagResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lead_lag.LeadLagService/StopLeadLag",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.lead_lag.LeadLagService", "StopLeadLag"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -306,6 +360,20 @@ pub mod lead_lag_service_server {
             request: tonic::Request<super::StreamLeadLagStatusRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamLeadLagStatusStream>,
+            tonic::Status,
+        >;
+        async fn start_lead_lag(
+            &self,
+            request: tonic::Request<super::StartLeadLagRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StartLeadLagResponse>,
+            tonic::Status,
+        >;
+        async fn stop_lead_lag(
+            &self,
+            request: tonic::Request<super::StopLeadLagRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopLeadLagResponse>,
             tonic::Status,
         >;
     }
@@ -706,6 +774,96 @@ pub mod lead_lag_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lead_lag.LeadLagService/StartLeadLag" => {
+                    #[allow(non_camel_case_types)]
+                    struct StartLeadLagSvc<T: LeadLagService>(pub Arc<T>);
+                    impl<
+                        T: LeadLagService,
+                    > tonic::server::UnaryService<super::StartLeadLagRequest>
+                    for StartLeadLagSvc<T> {
+                        type Response = super::StartLeadLagResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StartLeadLagRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LeadLagService>::start_lead_lag(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StartLeadLagSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lead_lag.LeadLagService/StopLeadLag" => {
+                    #[allow(non_camel_case_types)]
+                    struct StopLeadLagSvc<T: LeadLagService>(pub Arc<T>);
+                    impl<
+                        T: LeadLagService,
+                    > tonic::server::UnaryService<super::StopLeadLagRequest>
+                    for StopLeadLagSvc<T> {
+                        type Response = super::StopLeadLagResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StopLeadLagRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LeadLagService>::stop_lead_lag(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StopLeadLagSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

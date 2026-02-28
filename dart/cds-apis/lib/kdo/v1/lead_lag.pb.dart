@@ -730,6 +730,224 @@ class SetLeadLagActiveRequest extends $pb.GeneratedMessage {
   void clearIsActive() => $_clearField(2);
 }
 
+/// LeadLag 전략 시작 요청
+class StartLeadLagRequest extends $pb.GeneratedMessage {
+  factory StartLeadLagRequest({
+    $core.String? leadLag,
+  }) {
+    final result = create();
+    if (leadLag != null) result.leadLag = leadLag;
+    return result;
+  }
+
+  StartLeadLagRequest._();
+
+  factory StartLeadLagRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StartLeadLagRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartLeadLagRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'leadLag')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartLeadLagRequest clone() => StartLeadLagRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartLeadLagRequest copyWith(void Function(StartLeadLagRequest) updates) => super.copyWith((message) => updates(message as StartLeadLagRequest)) as StartLeadLagRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StartLeadLagRequest create() => StartLeadLagRequest._();
+  @$core.override
+  StartLeadLagRequest createEmptyInstance() => create();
+  static $pb.PbList<StartLeadLagRequest> createRepeated() => $pb.PbList<StartLeadLagRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StartLeadLagRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartLeadLagRequest>(create);
+  static StartLeadLagRequest? _defaultInstance;
+
+  /// 리소스 이름 (lead_lags/{id})
+  @$pb.TagNumber(1)
+  $core.String get leadLag => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set leadLag($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLeadLag() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLeadLag() => $_clearField(1);
+}
+
+/// LeadLag 전략 시작 응답
+class StartLeadLagResponse extends $pb.GeneratedMessage {
+  factory StartLeadLagResponse({
+    LeadLagState? state,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (state != null) result.state = state;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  StartLeadLagResponse._();
+
+  factory StartLeadLagResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StartLeadLagResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartLeadLagResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..e<LeadLagState>(1, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: LeadLagState.LEAD_LAG_STATE_UNSPECIFIED, valueOf: LeadLagState.valueOf, enumValues: LeadLagState.values)
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartLeadLagResponse clone() => StartLeadLagResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartLeadLagResponse copyWith(void Function(StartLeadLagResponse) updates) => super.copyWith((message) => updates(message as StartLeadLagResponse)) as StartLeadLagResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StartLeadLagResponse create() => StartLeadLagResponse._();
+  @$core.override
+  StartLeadLagResponse createEmptyInstance() => create();
+  static $pb.PbList<StartLeadLagResponse> createRepeated() => $pb.PbList<StartLeadLagResponse>();
+  @$core.pragma('dart2js:noInline')
+  static StartLeadLagResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartLeadLagResponse>(create);
+  static StartLeadLagResponse? _defaultInstance;
+
+  /// 현재 실행 상태
+  @$pb.TagNumber(1)
+  LeadLagState get state => $_getN(0);
+  @$pb.TagNumber(1)
+  set state(LeadLagState value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasState() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearState() => $_clearField(1);
+
+  /// 응답 메시지
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
+/// LeadLag 전략 중지 요청
+class StopLeadLagRequest extends $pb.GeneratedMessage {
+  factory StopLeadLagRequest({
+    $core.String? leadLag,
+  }) {
+    final result = create();
+    if (leadLag != null) result.leadLag = leadLag;
+    return result;
+  }
+
+  StopLeadLagRequest._();
+
+  factory StopLeadLagRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopLeadLagRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopLeadLagRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'leadLag')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopLeadLagRequest clone() => StopLeadLagRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopLeadLagRequest copyWith(void Function(StopLeadLagRequest) updates) => super.copyWith((message) => updates(message as StopLeadLagRequest)) as StopLeadLagRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopLeadLagRequest create() => StopLeadLagRequest._();
+  @$core.override
+  StopLeadLagRequest createEmptyInstance() => create();
+  static $pb.PbList<StopLeadLagRequest> createRepeated() => $pb.PbList<StopLeadLagRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StopLeadLagRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopLeadLagRequest>(create);
+  static StopLeadLagRequest? _defaultInstance;
+
+  /// 리소스 이름 (lead_lags/{id})
+  @$pb.TagNumber(1)
+  $core.String get leadLag => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set leadLag($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLeadLag() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLeadLag() => $_clearField(1);
+}
+
+/// LeadLag 전략 중지 응답
+class StopLeadLagResponse extends $pb.GeneratedMessage {
+  factory StopLeadLagResponse({
+    LeadLagState? state,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (state != null) result.state = state;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  StopLeadLagResponse._();
+
+  factory StopLeadLagResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopLeadLagResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopLeadLagResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..e<LeadLagState>(1, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: LeadLagState.LEAD_LAG_STATE_UNSPECIFIED, valueOf: LeadLagState.valueOf, enumValues: LeadLagState.values)
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopLeadLagResponse clone() => StopLeadLagResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopLeadLagResponse copyWith(void Function(StopLeadLagResponse) updates) => super.copyWith((message) => updates(message as StopLeadLagResponse)) as StopLeadLagResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopLeadLagResponse create() => StopLeadLagResponse._();
+  @$core.override
+  StopLeadLagResponse createEmptyInstance() => create();
+  static $pb.PbList<StopLeadLagResponse> createRepeated() => $pb.PbList<StopLeadLagResponse>();
+  @$core.pragma('dart2js:noInline')
+  static StopLeadLagResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopLeadLagResponse>(create);
+  static StopLeadLagResponse? _defaultInstance;
+
+  /// 현재 실행 상태
+  @$pb.TagNumber(1)
+  LeadLagState get state => $_getN(0);
+  @$pb.TagNumber(1)
+  set state(LeadLagState value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasState() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearState() => $_clearField(1);
+
+  /// 응답 메시지
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
 /// LeadLag 실시간 상태 스트리밍 요청
 class StreamLeadLagStatusRequest extends $pb.GeneratedMessage {
   factory StreamLeadLagStatusRequest({

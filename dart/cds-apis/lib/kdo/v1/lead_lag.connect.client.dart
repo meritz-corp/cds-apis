@@ -135,4 +135,40 @@ extension type LeadLagServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// LeadLag 전략 시작 (hot loop 시작)
+  Future<kdov1lead_lag.StartLeadLagResponse> startLeadLag(
+    kdov1lead_lag.StartLeadLagRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LeadLagService.startLeadLag,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// LeadLag 전략 중지 (hot loop 중지)
+  Future<kdov1lead_lag.StopLeadLagResponse> stopLeadLag(
+    kdov1lead_lag.StopLeadLagRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LeadLagService.stopLeadLag,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

@@ -69,6 +69,16 @@ class LeadLagServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamLeadLagStatus, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// LeadLag 전략 시작 (hot loop 시작)
+  $grpc.ResponseFuture<$0.StartLeadLagResponse> startLeadLag($0.StartLeadLagRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$startLeadLag, request, options: options);
+  }
+
+  /// LeadLag 전략 중지 (hot loop 중지)
+  $grpc.ResponseFuture<$0.StopLeadLagResponse> stopLeadLag($0.StopLeadLagRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$stopLeadLag, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getLeadLag = $grpc.ClientMethod<$0.GetLeadLagRequest, $0.LeadLag>(
@@ -99,6 +109,14 @@ class LeadLagServiceClient extends $grpc.Client {
       '/kdo.v1.lead_lag.LeadLagService/StreamLeadLagStatus',
       ($0.StreamLeadLagStatusRequest value) => value.writeToBuffer(),
       $0.LeadLagStatusUpdate.fromBuffer);
+  static final _$startLeadLag = $grpc.ClientMethod<$0.StartLeadLagRequest, $0.StartLeadLagResponse>(
+      '/kdo.v1.lead_lag.LeadLagService/StartLeadLag',
+      ($0.StartLeadLagRequest value) => value.writeToBuffer(),
+      $0.StartLeadLagResponse.fromBuffer);
+  static final _$stopLeadLag = $grpc.ClientMethod<$0.StopLeadLagRequest, $0.StopLeadLagResponse>(
+      '/kdo.v1.lead_lag.LeadLagService/StopLeadLag',
+      ($0.StopLeadLagRequest value) => value.writeToBuffer(),
+      $0.StopLeadLagResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lead_lag.LeadLagService')
@@ -155,6 +173,20 @@ abstract class LeadLagServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamLeadLagStatusRequest.fromBuffer(value),
         ($0.LeadLagStatusUpdate value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StartLeadLagRequest, $0.StartLeadLagResponse>(
+        'StartLeadLag',
+        startLeadLag_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.StartLeadLagRequest.fromBuffer(value),
+        ($0.StartLeadLagResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StopLeadLagRequest, $0.StopLeadLagResponse>(
+        'StopLeadLag',
+        stopLeadLag_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.StopLeadLagRequest.fromBuffer(value),
+        ($0.StopLeadLagResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LeadLag> getLeadLag_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagRequest> $request) async {
@@ -198,5 +230,17 @@ abstract class LeadLagServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.LeadLagStatusUpdate> streamLeadLagStatus($grpc.ServiceCall call, $0.StreamLeadLagStatusRequest request);
+
+  $async.Future<$0.StartLeadLagResponse> startLeadLag_Pre($grpc.ServiceCall $call, $async.Future<$0.StartLeadLagRequest> $request) async {
+    return startLeadLag($call, await $request);
+  }
+
+  $async.Future<$0.StartLeadLagResponse> startLeadLag($grpc.ServiceCall call, $0.StartLeadLagRequest request);
+
+  $async.Future<$0.StopLeadLagResponse> stopLeadLag_Pre($grpc.ServiceCall $call, $async.Future<$0.StopLeadLagRequest> $request) async {
+    return stopLeadLag($call, await $request);
+  }
+
+  $async.Future<$0.StopLeadLagResponse> stopLeadLag($grpc.ServiceCall call, $0.StopLeadLagRequest request);
 
 }
