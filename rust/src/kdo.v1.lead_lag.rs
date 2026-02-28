@@ -341,6 +341,110 @@ pub struct LeadLagPriceTick {
     #[prost(string, tag="4")]
     pub side: ::prost::alloc::string::String,
 }
+// ============================================================================
+// Trade History (DB 영구 저장 체결 기록)
+// ============================================================================
+
+/// 체결 기록 (DB에 영구 저장되는 트레이드 레코드)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LeadLagTradeRecord {
+    /// DB ID
+    #[prost(int64, tag="1")]
+    pub id: i64,
+    /// 부모 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="2")]
+    pub lead_lag: ::prost::alloc::string::String,
+    /// 세션 내 순차 트레이드 번호
+    #[prost(int64, tag="3")]
+    pub trade_number: i64,
+    /// 시그널 방향 (FUTURES_SPIKE / FUTURES_DROP)
+    #[prost(string, tag="4")]
+    pub direction: ::prost::alloc::string::String,
+    /// 틱 변동량
+    #[prost(int64, tag="5")]
+    pub tick_change: i64,
+    /// 선물 주문 방향 (BID/ASK)
+    #[prost(string, tag="6")]
+    pub futures_side: ::prost::alloc::string::String,
+    /// ETF 주문 방향 (BID/ASK)
+    #[prost(string, tag="7")]
+    pub etf_side: ::prost::alloc::string::String,
+    /// 선물 주문 가격
+    #[prost(double, tag="8")]
+    pub futures_price: f64,
+    /// ETF 주문 가격
+    #[prost(double, tag="9")]
+    pub etf_price: f64,
+    /// 선물 주문 수량
+    #[prost(int64, tag="10")]
+    pub futures_qty: i64,
+    /// ETF 주문 수량
+    #[prost(int64, tag="11")]
+    pub etf_qty: i64,
+    /// 체결 후 선물 포지션
+    #[prost(int64, tag="12")]
+    pub futures_position_after: i64,
+    /// 주문 실행 지연시간 (마이크로초)
+    #[prost(uint64, tag="13")]
+    pub latency_us: u64,
+    /// 트리거 시각 (HHMMSSuuuuuu KST)
+    #[prost(uint64, tag="14")]
+    pub trigger_time_us: u64,
+    /// 거래일 (YYYYMMDD)
+    #[prost(int32, tag="15")]
+    pub date: i32,
+    /// 생성 시각
+    #[prost(message, optional, tag="16")]
+    pub created_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
+/// 체결 내역 목록 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListLeadLagTradesRequest {
+    /// 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+    /// 페이지 크기 (기본: 50, 최대: 200)
+    #[prost(int32, optional, tag="2")]
+    pub page_size: ::core::option::Option<i32>,
+    /// 페이지 토큰 (다음 페이지 조회용)
+    #[prost(string, optional, tag="3")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// 필터링 조건
+    /// Available Fields:
+    /// * date - 거래일 (YYYYMMDD), 예: date=20260228
+    #[prost(string, tag="4")]
+    pub filter: ::prost::alloc::string::String,
+    /// 정렬 기준 (기본: trigger_time_us DESC)
+    #[prost(string, tag="5")]
+    pub order_by: ::prost::alloc::string::String,
+}
+/// 체결 내역 목록 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListLeadLagTradesResponse {
+    /// 체결 기록 목록
+    #[prost(message, repeated, tag="1")]
+    pub trades: ::prost::alloc::vec::Vec<LeadLagTradeRecord>,
+    /// 다음 페이지 토큰
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+    /// 전체 건수
+    #[prost(int32, tag="3")]
+    pub total_count: i32,
+}
+/// 단일 체결 내역 조회 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLeadLagTradeRequest {
+    /// 부모 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+    /// 체결 기록 ID
+    #[prost(int64, tag="2")]
+    pub trade_id: i64,
+}
 /// LeadLag 서비스 실행 상태
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

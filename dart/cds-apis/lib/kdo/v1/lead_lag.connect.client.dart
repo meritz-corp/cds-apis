@@ -190,4 +190,40 @@ extension type LeadLagServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 체결 내역 목록 조회 (DB 저장된 과거 체결 기록, 페이징)
+  Future<kdov1lead_lag.ListLeadLagTradesResponse> listLeadLagTrades(
+    kdov1lead_lag.ListLeadLagTradesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LeadLagService.listLeadLagTrades,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 단일 체결 내역 조회
+  Future<kdov1lead_lag.LeadLagTradeRecord> getLeadLagTrade(
+    kdov1lead_lag.GetLeadLagTradeRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LeadLagService.getLeadLagTrade,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

@@ -411,3 +411,95 @@ final $typed_data.Uint8List leadLagPriceTickDescriptor = $convert.base64Decode(
     'oFcHJpY2UYAiABKAFSBXByaWNlEhoKCHF1YW50aXR5GAMgASgDUghxdWFudGl0eRISCgRzaWRl'
     'GAQgASgJUgRzaWRl');
 
+@$core.Deprecated('Use leadLagTradeRecordDescriptor instead')
+const LeadLagTradeRecord$json = {
+  '1': 'LeadLagTradeRecord',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'lead_lag', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+    {'1': 'trade_number', '3': 3, '4': 1, '5': 3, '10': 'tradeNumber'},
+    {'1': 'direction', '3': 4, '4': 1, '5': 9, '10': 'direction'},
+    {'1': 'tick_change', '3': 5, '4': 1, '5': 3, '10': 'tickChange'},
+    {'1': 'futures_side', '3': 6, '4': 1, '5': 9, '10': 'futuresSide'},
+    {'1': 'etf_side', '3': 7, '4': 1, '5': 9, '10': 'etfSide'},
+    {'1': 'futures_price', '3': 8, '4': 1, '5': 1, '10': 'futuresPrice'},
+    {'1': 'etf_price', '3': 9, '4': 1, '5': 1, '10': 'etfPrice'},
+    {'1': 'futures_qty', '3': 10, '4': 1, '5': 3, '10': 'futuresQty'},
+    {'1': 'etf_qty', '3': 11, '4': 1, '5': 3, '10': 'etfQty'},
+    {'1': 'futures_position_after', '3': 12, '4': 1, '5': 3, '10': 'futuresPositionAfter'},
+    {'1': 'latency_us', '3': 13, '4': 1, '5': 4, '10': 'latencyUs'},
+    {'1': 'trigger_time_us', '3': 14, '4': 1, '5': 4, '10': 'triggerTimeUs'},
+    {'1': 'date', '3': 15, '4': 1, '5': 5, '10': 'date'},
+    {'1': 'created_at', '3': 16, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createdAt'},
+  ],
+};
+
+/// Descriptor for `LeadLagTradeRecord`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagTradeRecordDescriptor = $convert.base64Decode(
+    'ChJMZWFkTGFnVHJhZGVSZWNvcmQSDgoCaWQYASABKANSAmlkEjsKCGxlYWRfbGFnGAIgASgJQi'
+    'DiQQED+kEZChdrZG8uY2RzYXBpcy54eXovTGVhZExhZ1IHbGVhZExhZxIhCgx0cmFkZV9udW1i'
+    'ZXIYAyABKANSC3RyYWRlTnVtYmVyEhwKCWRpcmVjdGlvbhgEIAEoCVIJZGlyZWN0aW9uEh8KC3'
+    'RpY2tfY2hhbmdlGAUgASgDUgp0aWNrQ2hhbmdlEiEKDGZ1dHVyZXNfc2lkZRgGIAEoCVILZnV0'
+    'dXJlc1NpZGUSGQoIZXRmX3NpZGUYByABKAlSB2V0ZlNpZGUSIwoNZnV0dXJlc19wcmljZRgIIA'
+    'EoAVIMZnV0dXJlc1ByaWNlEhsKCWV0Zl9wcmljZRgJIAEoAVIIZXRmUHJpY2USHwoLZnV0dXJl'
+    'c19xdHkYCiABKANSCmZ1dHVyZXNRdHkSFwoHZXRmX3F0eRgLIAEoA1IGZXRmUXR5EjQKFmZ1dH'
+    'VyZXNfcG9zaXRpb25fYWZ0ZXIYDCABKANSFGZ1dHVyZXNQb3NpdGlvbkFmdGVyEh0KCmxhdGVu'
+    'Y3lfdXMYDSABKARSCWxhdGVuY3lVcxImCg90cmlnZ2VyX3RpbWVfdXMYDiABKARSDXRyaWdnZX'
+    'JUaW1lVXMSEgoEZGF0ZRgPIAEoBVIEZGF0ZRI/CgpjcmVhdGVkX2F0GBAgASgLMhouZ29vZ2xl'
+    'LnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IJY3JlYXRlZEF0');
+
+@$core.Deprecated('Use listLeadLagTradesRequestDescriptor instead')
+const ListLeadLagTradesRequest$json = {
+  '1': 'ListLeadLagTradesRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+    {'1': 'page_size', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'pageSize', '17': true},
+    {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
+    {'1': 'filter', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'filter'},
+    {'1': 'order_by', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'orderBy'},
+  ],
+  '8': [
+    {'1': '_page_size'},
+    {'1': '_page_token'},
+  ],
+};
+
+/// Descriptor for `ListLeadLagTradesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLeadLagTradesRequestDescriptor = $convert.base64Decode(
+    'ChhMaXN0TGVhZExhZ1RyYWRlc1JlcXVlc3QSOwoIbGVhZF9sYWcYASABKAlCIOJBAQL6QRkKF2'
+    'tkby5jZHNhcGlzLnh5ei9MZWFkTGFnUgdsZWFkTGFnEiAKCXBhZ2Vfc2l6ZRgCIAEoBUgAUghw'
+    'YWdlU2l6ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBARIcCgZmaWx0ZX'
+    'IYBCABKAlCBOJBAQFSBmZpbHRlchIfCghvcmRlcl9ieRgFIAEoCUIE4kEBAVIHb3JkZXJCeUIM'
+    'CgpfcGFnZV9zaXplQg0KC19wYWdlX3Rva2Vu');
+
+@$core.Deprecated('Use listLeadLagTradesResponseDescriptor instead')
+const ListLeadLagTradesResponse$json = {
+  '1': 'ListLeadLagTradesResponse',
+  '2': [
+    {'1': 'trades', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagTradeRecord', '10': 'trades'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+    {'1': 'total_count', '3': 3, '4': 1, '5': 5, '10': 'totalCount'},
+  ],
+};
+
+/// Descriptor for `ListLeadLagTradesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLeadLagTradesResponseDescriptor = $convert.base64Decode(
+    'ChlMaXN0TGVhZExhZ1RyYWRlc1Jlc3BvbnNlEjsKBnRyYWRlcxgBIAMoCzIjLmtkby52MS5sZW'
+    'FkX2xhZy5MZWFkTGFnVHJhZGVSZWNvcmRSBnRyYWRlcxImCg9uZXh0X3BhZ2VfdG9rZW4YAiAB'
+    'KAlSDW5leHRQYWdlVG9rZW4SHwoLdG90YWxfY291bnQYAyABKAVSCnRvdGFsQ291bnQ=');
+
+@$core.Deprecated('Use getLeadLagTradeRequestDescriptor instead')
+const GetLeadLagTradeRequest$json = {
+  '1': 'GetLeadLagTradeRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+    {'1': 'trade_id', '3': 2, '4': 1, '5': 3, '8': {}, '10': 'tradeId'},
+  ],
+};
+
+/// Descriptor for `GetLeadLagTradeRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getLeadLagTradeRequestDescriptor = $convert.base64Decode(
+    'ChZHZXRMZWFkTGFnVHJhZGVSZXF1ZXN0EjsKCGxlYWRfbGFnGAEgASgJQiDiQQEC+kEZChdrZG'
+    '8uY2RzYXBpcy54eXovTGVhZExhZ1IHbGVhZExhZxIfCgh0cmFkZV9pZBgCIAEoA0IE4kEBAlIH'
+    'dHJhZGVJZA==');
+

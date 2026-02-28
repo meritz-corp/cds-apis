@@ -44,6 +44,10 @@ type LeadLagServiceClient interface {
 	// 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
 	// 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
 	GetLeadLagTradeContext(ctx context.Context, in *GetLeadLagTradeContextRequest, opts ...grpc.CallOption) (*LeadLagTradeContext, error)
+	// 체결 내역 목록 조회 (DB 저장된 과거 체결 기록, 페이징)
+	ListLeadLagTrades(ctx context.Context, in *ListLeadLagTradesRequest, opts ...grpc.CallOption) (*ListLeadLagTradesResponse, error)
+	// 단일 체결 내역 조회
+	GetLeadLagTrade(ctx context.Context, in *GetLeadLagTradeRequest, opts ...grpc.CallOption) (*LeadLagTradeRecord, error)
 }
 
 type leadLagServiceClient struct {
@@ -167,6 +171,24 @@ func (c *leadLagServiceClient) GetLeadLagTradeContext(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *leadLagServiceClient) ListLeadLagTrades(ctx context.Context, in *ListLeadLagTradesRequest, opts ...grpc.CallOption) (*ListLeadLagTradesResponse, error) {
+	out := new(ListLeadLagTradesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lead_lag.LeadLagService/ListLeadLagTrades", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadLagServiceClient) GetLeadLagTrade(ctx context.Context, in *GetLeadLagTradeRequest, opts ...grpc.CallOption) (*LeadLagTradeRecord, error) {
+	out := new(LeadLagTradeRecord)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTrade", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LeadLagServiceServer is the server API for LeadLagService service.
 // All implementations must embed UnimplementedLeadLagServiceServer
 // for forward compatibility
@@ -192,6 +214,10 @@ type LeadLagServiceServer interface {
 	// 체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)
 	// 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
 	GetLeadLagTradeContext(context.Context, *GetLeadLagTradeContextRequest) (*LeadLagTradeContext, error)
+	// 체결 내역 목록 조회 (DB 저장된 과거 체결 기록, 페이징)
+	ListLeadLagTrades(context.Context, *ListLeadLagTradesRequest) (*ListLeadLagTradesResponse, error)
+	// 단일 체결 내역 조회
+	GetLeadLagTrade(context.Context, *GetLeadLagTradeRequest) (*LeadLagTradeRecord, error)
 	mustEmbedUnimplementedLeadLagServiceServer()
 }
 
@@ -228,6 +254,12 @@ func (UnimplementedLeadLagServiceServer) StopLeadLag(context.Context, *StopLeadL
 }
 func (UnimplementedLeadLagServiceServer) GetLeadLagTradeContext(context.Context, *GetLeadLagTradeContextRequest) (*LeadLagTradeContext, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLeadLagTradeContext not implemented")
+}
+func (UnimplementedLeadLagServiceServer) ListLeadLagTrades(context.Context, *ListLeadLagTradesRequest) (*ListLeadLagTradesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLeadLagTrades not implemented")
+}
+func (UnimplementedLeadLagServiceServer) GetLeadLagTrade(context.Context, *GetLeadLagTradeRequest) (*LeadLagTradeRecord, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLeadLagTrade not implemented")
 }
 func (UnimplementedLeadLagServiceServer) mustEmbedUnimplementedLeadLagServiceServer() {}
 
@@ -425,6 +457,42 @@ func _LeadLagService_GetLeadLagTradeContext_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LeadLagService_ListLeadLagTrades_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLeadLagTradesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadLagServiceServer).ListLeadLagTrades(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.lead_lag.LeadLagService/ListLeadLagTrades",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadLagServiceServer).ListLeadLagTrades(ctx, req.(*ListLeadLagTradesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadLagService_GetLeadLagTrade_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeadLagTradeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadLagServiceServer).GetLeadLagTrade(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTrade",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadLagServiceServer).GetLeadLagTrade(ctx, req.(*GetLeadLagTradeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LeadLagService_ServiceDesc is the grpc.ServiceDesc for LeadLagService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -467,6 +535,14 @@ var LeadLagService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLeadLagTradeContext",
 			Handler:    _LeadLagService_GetLeadLagTradeContext_Handler,
+		},
+		{
+			MethodName: "ListLeadLagTrades",
+			Handler:    _LeadLagService_ListLeadLagTrades_Handler,
+		},
+		{
+			MethodName: "GetLeadLagTrade",
+			Handler:    _LeadLagService_GetLeadLagTrade_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

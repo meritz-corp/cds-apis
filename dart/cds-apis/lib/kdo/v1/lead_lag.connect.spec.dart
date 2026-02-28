@@ -92,4 +92,20 @@ abstract final class LeadLagService {
     kdov1lead_lag.GetLeadLagTradeContextRequest.new,
     kdov1lead_lag.LeadLagTradeContext.new,
   );
+
+  /// 체결 내역 목록 조회 (DB 저장된 과거 체결 기록, 페이징)
+  static const listLeadLagTrades = connect.Spec(
+    '/$name/ListLeadLagTrades',
+    connect.StreamType.unary,
+    kdov1lead_lag.ListLeadLagTradesRequest.new,
+    kdov1lead_lag.ListLeadLagTradesResponse.new,
+  );
+
+  /// 단일 체결 내역 조회
+  static const getLeadLagTrade = connect.Spec(
+    '/$name/GetLeadLagTrade',
+    connect.StreamType.unary,
+    kdov1lead_lag.GetLeadLagTradeRequest.new,
+    kdov1lead_lag.LeadLagTradeRecord.new,
+  );
 }

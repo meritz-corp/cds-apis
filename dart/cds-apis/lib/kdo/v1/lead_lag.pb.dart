@@ -1681,6 +1681,482 @@ class LeadLagPriceTick extends $pb.GeneratedMessage {
   void clearSide() => $_clearField(4);
 }
 
+/// 체결 기록 (DB에 영구 저장되는 트레이드 레코드)
+class LeadLagTradeRecord extends $pb.GeneratedMessage {
+  factory LeadLagTradeRecord({
+    $fixnum.Int64? id,
+    $core.String? leadLag,
+    $fixnum.Int64? tradeNumber,
+    $core.String? direction,
+    $fixnum.Int64? tickChange,
+    $core.String? futuresSide,
+    $core.String? etfSide,
+    $core.double? futuresPrice,
+    $core.double? etfPrice,
+    $fixnum.Int64? futuresQty,
+    $fixnum.Int64? etfQty,
+    $fixnum.Int64? futuresPositionAfter,
+    $fixnum.Int64? latencyUs,
+    $fixnum.Int64? triggerTimeUs,
+    $core.int? date,
+    $2.Timestamp? createdAt,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (leadLag != null) result.leadLag = leadLag;
+    if (tradeNumber != null) result.tradeNumber = tradeNumber;
+    if (direction != null) result.direction = direction;
+    if (tickChange != null) result.tickChange = tickChange;
+    if (futuresSide != null) result.futuresSide = futuresSide;
+    if (etfSide != null) result.etfSide = etfSide;
+    if (futuresPrice != null) result.futuresPrice = futuresPrice;
+    if (etfPrice != null) result.etfPrice = etfPrice;
+    if (futuresQty != null) result.futuresQty = futuresQty;
+    if (etfQty != null) result.etfQty = etfQty;
+    if (futuresPositionAfter != null) result.futuresPositionAfter = futuresPositionAfter;
+    if (latencyUs != null) result.latencyUs = latencyUs;
+    if (triggerTimeUs != null) result.triggerTimeUs = triggerTimeUs;
+    if (date != null) result.date = date;
+    if (createdAt != null) result.createdAt = createdAt;
+    return result;
+  }
+
+  LeadLagTradeRecord._();
+
+  factory LeadLagTradeRecord.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LeadLagTradeRecord.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeadLagTradeRecord', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'leadLag')
+    ..aInt64(3, _omitFieldNames ? '' : 'tradeNumber')
+    ..aOS(4, _omitFieldNames ? '' : 'direction')
+    ..aInt64(5, _omitFieldNames ? '' : 'tickChange')
+    ..aOS(6, _omitFieldNames ? '' : 'futuresSide')
+    ..aOS(7, _omitFieldNames ? '' : 'etfSide')
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'futuresPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'etfPrice', $pb.PbFieldType.OD)
+    ..aInt64(10, _omitFieldNames ? '' : 'futuresQty')
+    ..aInt64(11, _omitFieldNames ? '' : 'etfQty')
+    ..aInt64(12, _omitFieldNames ? '' : 'futuresPositionAfter')
+    ..a<$fixnum.Int64>(13, _omitFieldNames ? '' : 'latencyUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(14, _omitFieldNames ? '' : 'triggerTimeUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(15, _omitFieldNames ? '' : 'date', $pb.PbFieldType.O3)
+    ..aOM<$2.Timestamp>(16, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LeadLagTradeRecord clone() => LeadLagTradeRecord()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LeadLagTradeRecord copyWith(void Function(LeadLagTradeRecord) updates) => super.copyWith((message) => updates(message as LeadLagTradeRecord)) as LeadLagTradeRecord;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LeadLagTradeRecord create() => LeadLagTradeRecord._();
+  @$core.override
+  LeadLagTradeRecord createEmptyInstance() => create();
+  static $pb.PbList<LeadLagTradeRecord> createRepeated() => $pb.PbList<LeadLagTradeRecord>();
+  @$core.pragma('dart2js:noInline')
+  static LeadLagTradeRecord getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LeadLagTradeRecord>(create);
+  static LeadLagTradeRecord? _defaultInstance;
+
+  /// DB ID
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  /// 부모 리소스 이름 (lead_lags/{id})
+  @$pb.TagNumber(2)
+  $core.String get leadLag => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set leadLag($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLeadLag() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLeadLag() => $_clearField(2);
+
+  /// 세션 내 순차 트레이드 번호
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get tradeNumber => $_getI64(2);
+  @$pb.TagNumber(3)
+  set tradeNumber($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTradeNumber() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTradeNumber() => $_clearField(3);
+
+  /// 시그널 방향 (FUTURES_SPIKE / FUTURES_DROP)
+  @$pb.TagNumber(4)
+  $core.String get direction => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set direction($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDirection() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDirection() => $_clearField(4);
+
+  /// 틱 변동량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get tickChange => $_getI64(4);
+  @$pb.TagNumber(5)
+  set tickChange($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasTickChange() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTickChange() => $_clearField(5);
+
+  /// 선물 주문 방향 (BID/ASK)
+  @$pb.TagNumber(6)
+  $core.String get futuresSide => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set futuresSide($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasFuturesSide() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFuturesSide() => $_clearField(6);
+
+  /// ETF 주문 방향 (BID/ASK)
+  @$pb.TagNumber(7)
+  $core.String get etfSide => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set etfSide($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasEtfSide() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearEtfSide() => $_clearField(7);
+
+  /// 선물 주문 가격
+  @$pb.TagNumber(8)
+  $core.double get futuresPrice => $_getN(7);
+  @$pb.TagNumber(8)
+  set futuresPrice($core.double value) => $_setDouble(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasFuturesPrice() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearFuturesPrice() => $_clearField(8);
+
+  /// ETF 주문 가격
+  @$pb.TagNumber(9)
+  $core.double get etfPrice => $_getN(8);
+  @$pb.TagNumber(9)
+  set etfPrice($core.double value) => $_setDouble(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasEtfPrice() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearEtfPrice() => $_clearField(9);
+
+  /// 선물 주문 수량
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get futuresQty => $_getI64(9);
+  @$pb.TagNumber(10)
+  set futuresQty($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasFuturesQty() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearFuturesQty() => $_clearField(10);
+
+  /// ETF 주문 수량
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get etfQty => $_getI64(10);
+  @$pb.TagNumber(11)
+  set etfQty($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasEtfQty() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearEtfQty() => $_clearField(11);
+
+  /// 체결 후 선물 포지션
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get futuresPositionAfter => $_getI64(11);
+  @$pb.TagNumber(12)
+  set futuresPositionAfter($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasFuturesPositionAfter() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearFuturesPositionAfter() => $_clearField(12);
+
+  /// 주문 실행 지연시간 (마이크로초)
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get latencyUs => $_getI64(12);
+  @$pb.TagNumber(13)
+  set latencyUs($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasLatencyUs() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearLatencyUs() => $_clearField(13);
+
+  /// 트리거 시각 (HHMMSSuuuuuu KST)
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get triggerTimeUs => $_getI64(13);
+  @$pb.TagNumber(14)
+  set triggerTimeUs($fixnum.Int64 value) => $_setInt64(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasTriggerTimeUs() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearTriggerTimeUs() => $_clearField(14);
+
+  /// 거래일 (YYYYMMDD)
+  @$pb.TagNumber(15)
+  $core.int get date => $_getIZ(14);
+  @$pb.TagNumber(15)
+  set date($core.int value) => $_setSignedInt32(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasDate() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearDate() => $_clearField(15);
+
+  /// 생성 시각
+  @$pb.TagNumber(16)
+  $2.Timestamp get createdAt => $_getN(15);
+  @$pb.TagNumber(16)
+  set createdAt($2.Timestamp value) => $_setField(16, value);
+  @$pb.TagNumber(16)
+  $core.bool hasCreatedAt() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearCreatedAt() => $_clearField(16);
+  @$pb.TagNumber(16)
+  $2.Timestamp ensureCreatedAt() => $_ensure(15);
+}
+
+/// 체결 내역 목록 요청
+class ListLeadLagTradesRequest extends $pb.GeneratedMessage {
+  factory ListLeadLagTradesRequest({
+    $core.String? leadLag,
+    $core.int? pageSize,
+    $core.String? pageToken,
+    $core.String? filter,
+    $core.String? orderBy,
+  }) {
+    final result = create();
+    if (leadLag != null) result.leadLag = leadLag;
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    if (filter != null) result.filter = filter;
+    if (orderBy != null) result.orderBy = orderBy;
+    return result;
+  }
+
+  ListLeadLagTradesRequest._();
+
+  factory ListLeadLagTradesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListLeadLagTradesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLeadLagTradesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'leadLag')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'pageToken')
+    ..aOS(4, _omitFieldNames ? '' : 'filter')
+    ..aOS(5, _omitFieldNames ? '' : 'orderBy')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLeadLagTradesRequest clone() => ListLeadLagTradesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLeadLagTradesRequest copyWith(void Function(ListLeadLagTradesRequest) updates) => super.copyWith((message) => updates(message as ListLeadLagTradesRequest)) as ListLeadLagTradesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListLeadLagTradesRequest create() => ListLeadLagTradesRequest._();
+  @$core.override
+  ListLeadLagTradesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListLeadLagTradesRequest> createRepeated() => $pb.PbList<ListLeadLagTradesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListLeadLagTradesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLeadLagTradesRequest>(create);
+  static ListLeadLagTradesRequest? _defaultInstance;
+
+  /// 리소스 이름 (lead_lags/{id})
+  @$pb.TagNumber(1)
+  $core.String get leadLag => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set leadLag($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLeadLag() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLeadLag() => $_clearField(1);
+
+  /// 페이지 크기 (기본: 50, 최대: 200)
+  @$pb.TagNumber(2)
+  $core.int get pageSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set pageSize($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageSize() => $_clearField(2);
+
+  /// 페이지 토큰 (다음 페이지 조회용)
+  @$pb.TagNumber(3)
+  $core.String get pageToken => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set pageToken($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPageToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPageToken() => $_clearField(3);
+
+  /// 필터링 조건
+  /// Available Fields:
+  /// * date - 거래일 (YYYYMMDD), 예: date=20260228
+  @$pb.TagNumber(4)
+  $core.String get filter => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set filter($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFilter() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFilter() => $_clearField(4);
+
+  /// 정렬 기준 (기본: trigger_time_us DESC)
+  @$pb.TagNumber(5)
+  $core.String get orderBy => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set orderBy($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOrderBy() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOrderBy() => $_clearField(5);
+}
+
+/// 체결 내역 목록 응답
+class ListLeadLagTradesResponse extends $pb.GeneratedMessage {
+  factory ListLeadLagTradesResponse({
+    $core.Iterable<LeadLagTradeRecord>? trades,
+    $core.String? nextPageToken,
+    $core.int? totalCount,
+  }) {
+    final result = create();
+    if (trades != null) result.trades.addAll(trades);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    if (totalCount != null) result.totalCount = totalCount;
+    return result;
+  }
+
+  ListLeadLagTradesResponse._();
+
+  factory ListLeadLagTradesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListLeadLagTradesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLeadLagTradesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..pc<LeadLagTradeRecord>(1, _omitFieldNames ? '' : 'trades', $pb.PbFieldType.PM, subBuilder: LeadLagTradeRecord.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'totalCount', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLeadLagTradesResponse clone() => ListLeadLagTradesResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLeadLagTradesResponse copyWith(void Function(ListLeadLagTradesResponse) updates) => super.copyWith((message) => updates(message as ListLeadLagTradesResponse)) as ListLeadLagTradesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListLeadLagTradesResponse create() => ListLeadLagTradesResponse._();
+  @$core.override
+  ListLeadLagTradesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListLeadLagTradesResponse> createRepeated() => $pb.PbList<ListLeadLagTradesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListLeadLagTradesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLeadLagTradesResponse>(create);
+  static ListLeadLagTradesResponse? _defaultInstance;
+
+  /// 체결 기록 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<LeadLagTradeRecord> get trades => $_getList(0);
+
+  /// 다음 페이지 토큰
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
+
+  /// 전체 건수
+  @$pb.TagNumber(3)
+  $core.int get totalCount => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set totalCount($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTotalCount() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalCount() => $_clearField(3);
+}
+
+/// 단일 체결 내역 조회 요청
+class GetLeadLagTradeRequest extends $pb.GeneratedMessage {
+  factory GetLeadLagTradeRequest({
+    $core.String? leadLag,
+    $fixnum.Int64? tradeId,
+  }) {
+    final result = create();
+    if (leadLag != null) result.leadLag = leadLag;
+    if (tradeId != null) result.tradeId = tradeId;
+    return result;
+  }
+
+  GetLeadLagTradeRequest._();
+
+  factory GetLeadLagTradeRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetLeadLagTradeRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLeadLagTradeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'leadLag')
+    ..aInt64(2, _omitFieldNames ? '' : 'tradeId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetLeadLagTradeRequest clone() => GetLeadLagTradeRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetLeadLagTradeRequest copyWith(void Function(GetLeadLagTradeRequest) updates) => super.copyWith((message) => updates(message as GetLeadLagTradeRequest)) as GetLeadLagTradeRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetLeadLagTradeRequest create() => GetLeadLagTradeRequest._();
+  @$core.override
+  GetLeadLagTradeRequest createEmptyInstance() => create();
+  static $pb.PbList<GetLeadLagTradeRequest> createRepeated() => $pb.PbList<GetLeadLagTradeRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetLeadLagTradeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLeadLagTradeRequest>(create);
+  static GetLeadLagTradeRequest? _defaultInstance;
+
+  /// 부모 리소스 이름 (lead_lags/{id})
+  @$pb.TagNumber(1)
+  $core.String get leadLag => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set leadLag($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLeadLag() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLeadLag() => $_clearField(1);
+
+  /// 체결 기록 ID
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get tradeId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set tradeId($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTradeId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTradeId() => $_clearField(2);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

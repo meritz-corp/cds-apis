@@ -85,6 +85,16 @@ class LeadLagServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getLeadLagTradeContext, request, options: options);
   }
 
+  /// 체결 내역 목록 조회 (DB 저장된 과거 체결 기록, 페이징)
+  $grpc.ResponseFuture<$0.ListLeadLagTradesResponse> listLeadLagTrades($0.ListLeadLagTradesRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listLeadLagTrades, request, options: options);
+  }
+
+  /// 단일 체결 내역 조회
+  $grpc.ResponseFuture<$0.LeadLagTradeRecord> getLeadLagTrade($0.GetLeadLagTradeRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getLeadLagTrade, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getLeadLag = $grpc.ClientMethod<$0.GetLeadLagRequest, $0.LeadLag>(
@@ -127,6 +137,14 @@ class LeadLagServiceClient extends $grpc.Client {
       '/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext',
       ($0.GetLeadLagTradeContextRequest value) => value.writeToBuffer(),
       $0.LeadLagTradeContext.fromBuffer);
+  static final _$listLeadLagTrades = $grpc.ClientMethod<$0.ListLeadLagTradesRequest, $0.ListLeadLagTradesResponse>(
+      '/kdo.v1.lead_lag.LeadLagService/ListLeadLagTrades',
+      ($0.ListLeadLagTradesRequest value) => value.writeToBuffer(),
+      $0.ListLeadLagTradesResponse.fromBuffer);
+  static final _$getLeadLagTrade = $grpc.ClientMethod<$0.GetLeadLagTradeRequest, $0.LeadLagTradeRecord>(
+      '/kdo.v1.lead_lag.LeadLagService/GetLeadLagTrade',
+      ($0.GetLeadLagTradeRequest value) => value.writeToBuffer(),
+      $0.LeadLagTradeRecord.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lead_lag.LeadLagService')
@@ -204,6 +222,20 @@ abstract class LeadLagServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetLeadLagTradeContextRequest.fromBuffer(value),
         ($0.LeadLagTradeContext value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListLeadLagTradesRequest, $0.ListLeadLagTradesResponse>(
+        'ListLeadLagTrades',
+        listLeadLagTrades_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListLeadLagTradesRequest.fromBuffer(value),
+        ($0.ListLeadLagTradesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetLeadLagTradeRequest, $0.LeadLagTradeRecord>(
+        'GetLeadLagTrade',
+        getLeadLagTrade_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetLeadLagTradeRequest.fromBuffer(value),
+        ($0.LeadLagTradeRecord value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LeadLag> getLeadLag_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagRequest> $request) async {
@@ -265,5 +297,17 @@ abstract class LeadLagServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.LeadLagTradeContext> getLeadLagTradeContext($grpc.ServiceCall call, $0.GetLeadLagTradeContextRequest request);
+
+  $async.Future<$0.ListLeadLagTradesResponse> listLeadLagTrades_Pre($grpc.ServiceCall $call, $async.Future<$0.ListLeadLagTradesRequest> $request) async {
+    return listLeadLagTrades($call, await $request);
+  }
+
+  $async.Future<$0.ListLeadLagTradesResponse> listLeadLagTrades($grpc.ServiceCall call, $0.ListLeadLagTradesRequest request);
+
+  $async.Future<$0.LeadLagTradeRecord> getLeadLagTrade_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagTradeRequest> $request) async {
+    return getLeadLagTrade($call, await $request);
+  }
+
+  $async.Future<$0.LeadLagTradeRecord> getLeadLagTrade($grpc.ServiceCall call, $0.GetLeadLagTradeRequest request);
 
 }
