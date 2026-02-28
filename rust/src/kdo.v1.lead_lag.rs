@@ -35,18 +35,15 @@ pub struct LeadLag {
     /// 활성화 여부
     #[prost(bool, tag="9")]
     pub is_active: bool,
-    /// 선물 틱 사이즈 (예: 0.05)
-    #[prost(double, tag="10")]
-    pub futures_tick_size: f64,
-    /// 선물 승수 (예: 250000)
-    #[prost(double, tag="11")]
-    pub futures_multiplier: f64,
     /// 생성 시간
     #[prost(message, optional, tag="12")]
     pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 수정 시간
     #[prost(message, optional, tag="13")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 인버스 ETF 여부 (true: 선물과 같은 방향 헷지, false: 반대 방향 헷지)
+    #[prost(bool, tag="14")]
+    pub is_etf_inverse: bool,
 }
 // ============================================================================
 // Trigger Configuration

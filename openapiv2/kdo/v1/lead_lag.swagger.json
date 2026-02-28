@@ -167,16 +167,6 @@
                   "type": "boolean",
                   "title": "활성화 여부"
                 },
-                "futuresTickSize": {
-                  "type": "number",
-                  "format": "double",
-                  "title": "선물 틱 사이즈 (예: 0.05)"
-                },
-                "futuresMultiplier": {
-                  "type": "number",
-                  "format": "double",
-                  "title": "선물 승수 (예: 250000)"
-                },
                 "createTime": {
                   "type": "string",
                   "format": "date-time",
@@ -188,6 +178,10 @@
                   "format": "date-time",
                   "title": "수정 시간",
                   "readOnly": true
+                },
+                "isEtfInverse": {
+                  "type": "boolean",
+                  "title": "인버스 ETF 여부 (true: 선물과 같은 방향 헷지, false: 반대 방향 헷지)"
                 }
               },
               "title": "수정할 LeadLag",
@@ -650,16 +644,6 @@
           "type": "boolean",
           "title": "활성화 여부"
         },
-        "futuresTickSize": {
-          "type": "number",
-          "format": "double",
-          "title": "선물 틱 사이즈 (예: 0.05)"
-        },
-        "futuresMultiplier": {
-          "type": "number",
-          "format": "double",
-          "title": "선물 승수 (예: 250000)"
-        },
         "createTime": {
           "type": "string",
           "format": "date-time",
@@ -671,6 +655,10 @@
           "format": "date-time",
           "title": "수정 시간",
           "readOnly": true
+        },
+        "isEtfInverse": {
+          "type": "boolean",
+          "title": "인버스 ETF 여부 (true: 선물과 같은 방향 헷지, false: 반대 방향 헷지)"
         }
       },
       "title": "선물-ETF 선행 차익거래 설정",

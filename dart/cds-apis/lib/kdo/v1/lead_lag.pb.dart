@@ -34,10 +34,9 @@ class LeadLag extends $pb.GeneratedMessage {
     $core.String? etfFundCode,
     LeadLagTriggerConfig? triggerConfig,
     $core.bool? isActive,
-    $core.double? futuresTickSize,
-    $core.double? futuresMultiplier,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
+    $core.bool? isEtfInverse,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -49,10 +48,9 @@ class LeadLag extends $pb.GeneratedMessage {
     if (etfFundCode != null) result.etfFundCode = etfFundCode;
     if (triggerConfig != null) result.triggerConfig = triggerConfig;
     if (isActive != null) result.isActive = isActive;
-    if (futuresTickSize != null) result.futuresTickSize = futuresTickSize;
-    if (futuresMultiplier != null) result.futuresMultiplier = futuresMultiplier;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
+    if (isEtfInverse != null) result.isEtfInverse = isEtfInverse;
     return result;
   }
 
@@ -71,10 +69,9 @@ class LeadLag extends $pb.GeneratedMessage {
     ..aOS(7, _omitFieldNames ? '' : 'etfFundCode')
     ..aOM<LeadLagTriggerConfig>(8, _omitFieldNames ? '' : 'triggerConfig', subBuilder: LeadLagTriggerConfig.create)
     ..aOB(9, _omitFieldNames ? '' : 'isActive')
-    ..a<$core.double>(10, _omitFieldNames ? '' : 'futuresTickSize', $pb.PbFieldType.OD)
-    ..a<$core.double>(11, _omitFieldNames ? '' : 'futuresMultiplier', $pb.PbFieldType.OD)
     ..aOM<$2.Timestamp>(12, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(13, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..aOB(14, _omitFieldNames ? '' : 'isEtfInverse')
     ..hasRequiredFields = false
   ;
 
@@ -187,49 +184,39 @@ class LeadLag extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   void clearIsActive() => $_clearField(9);
 
-  /// 선물 틱 사이즈 (예: 0.05)
-  @$pb.TagNumber(10)
-  $core.double get futuresTickSize => $_getN(9);
-  @$pb.TagNumber(10)
-  set futuresTickSize($core.double value) => $_setDouble(9, value);
-  @$pb.TagNumber(10)
-  $core.bool hasFuturesTickSize() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearFuturesTickSize() => $_clearField(10);
-
-  /// 선물 승수 (예: 250000)
-  @$pb.TagNumber(11)
-  $core.double get futuresMultiplier => $_getN(10);
-  @$pb.TagNumber(11)
-  set futuresMultiplier($core.double value) => $_setDouble(10, value);
-  @$pb.TagNumber(11)
-  $core.bool hasFuturesMultiplier() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearFuturesMultiplier() => $_clearField(11);
-
   /// 생성 시간
   @$pb.TagNumber(12)
-  $2.Timestamp get createTime => $_getN(11);
+  $2.Timestamp get createTime => $_getN(9);
   @$pb.TagNumber(12)
   set createTime($2.Timestamp value) => $_setField(12, value);
   @$pb.TagNumber(12)
-  $core.bool hasCreateTime() => $_has(11);
+  $core.bool hasCreateTime() => $_has(9);
   @$pb.TagNumber(12)
   void clearCreateTime() => $_clearField(12);
   @$pb.TagNumber(12)
-  $2.Timestamp ensureCreateTime() => $_ensure(11);
+  $2.Timestamp ensureCreateTime() => $_ensure(9);
 
   /// 수정 시간
   @$pb.TagNumber(13)
-  $2.Timestamp get updateTime => $_getN(12);
+  $2.Timestamp get updateTime => $_getN(10);
   @$pb.TagNumber(13)
   set updateTime($2.Timestamp value) => $_setField(13, value);
   @$pb.TagNumber(13)
-  $core.bool hasUpdateTime() => $_has(12);
+  $core.bool hasUpdateTime() => $_has(10);
   @$pb.TagNumber(13)
   void clearUpdateTime() => $_clearField(13);
   @$pb.TagNumber(13)
-  $2.Timestamp ensureUpdateTime() => $_ensure(12);
+  $2.Timestamp ensureUpdateTime() => $_ensure(10);
+
+  /// 인버스 ETF 여부 (true: 선물과 같은 방향 헷지, false: 반대 방향 헷지)
+  @$pb.TagNumber(14)
+  $core.bool get isEtfInverse => $_getBF(11);
+  @$pb.TagNumber(14)
+  set isEtfInverse($core.bool value) => $_setBool(11, value);
+  @$pb.TagNumber(14)
+  $core.bool hasIsEtfInverse() => $_has(11);
+  @$pb.TagNumber(14)
+  void clearIsEtfInverse() => $_clearField(14);
 }
 
 /// 선물 급변 감지 설정

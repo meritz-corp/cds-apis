@@ -45,12 +45,16 @@ const LeadLag$json = {
     {'1': 'etf_fund_code', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'etfFundCode'},
     {'1': 'trigger_config', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagTriggerConfig', '10': 'triggerConfig'},
     {'1': 'is_active', '3': 9, '4': 1, '5': 8, '10': 'isActive'},
-    {'1': 'futures_tick_size', '3': 10, '4': 1, '5': 1, '10': 'futuresTickSize'},
-    {'1': 'futures_multiplier', '3': 11, '4': 1, '5': 1, '10': 'futuresMultiplier'},
     {'1': 'create_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 13, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
+    {'1': 'is_etf_inverse', '3': 14, '4': 1, '5': 8, '10': 'isEtfInverse'},
   ],
   '7': {},
+  '9': [
+    {'1': 10, '2': 11},
+    {'1': 11, '2': 12},
+  ],
+  '10': ['futures_tick_size', 'futures_multiplier'],
 };
 
 /// Descriptor for `LeadLag`. Decode as a `google.protobuf.DescriptorProto`.
@@ -61,12 +65,12 @@ final $typed_data.Uint8List leadLagDescriptor = $convert.base64Decode(
     'IwChFmdXR1cmVzX2Z1bmRfY29kZRgGIAEoCUIE4kEBAlIPZnV0dXJlc0Z1bmRDb2RlEigKDWV0'
     'Zl9mdW5kX2NvZGUYByABKAlCBOJBAQJSC2V0ZkZ1bmRDb2RlEkwKDnRyaWdnZXJfY29uZmlnGA'
     'ggASgLMiUua2RvLnYxLmxlYWRfbGFnLkxlYWRMYWdUcmlnZ2VyQ29uZmlnUg10cmlnZ2VyQ29u'
-    'ZmlnEhsKCWlzX2FjdGl2ZRgJIAEoCFIIaXNBY3RpdmUSKgoRZnV0dXJlc190aWNrX3NpemUYCi'
-    'ABKAFSD2Z1dHVyZXNUaWNrU2l6ZRItChJmdXR1cmVzX211bHRpcGxpZXIYCyABKAFSEWZ1dHVy'
-    'ZXNNdWx0aXBsaWVyEkEKC2NyZWF0ZV90aW1lGAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbW'
-    'VzdGFtcEIE4kEBA1IKY3JlYXRlVGltZRJBCgt1cGRhdGVfdGltZRgNIAEoCzIaLmdvb2dsZS5w'
-    'cm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWU6MupBLwoXa2RvLmNkc2FwaXMueH'
-    'l6L0xlYWRMYWcSFGxlYWRfbGFncy97bGVhZF9sYWd9');
+    'ZmlnEhsKCWlzX2FjdGl2ZRgJIAEoCFIIaXNBY3RpdmUSQQoLY3JlYXRlX3RpbWUYDCABKAsyGi'
+    '5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90'
+    'aW1lGA0gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZR'
+    'IkCg5pc19ldGZfaW52ZXJzZRgOIAEoCFIMaXNFdGZJbnZlcnNlOjLqQS8KF2tkby5jZHNhcGlz'
+    'Lnh5ei9MZWFkTGFnEhRsZWFkX2xhZ3Mve2xlYWRfbGFnfUoECAoQC0oECAsQDFIRZnV0dXJlc1'
+    '90aWNrX3NpemVSEmZ1dHVyZXNfbXVsdGlwbGllcg==');
 
 @$core.Deprecated('Use leadLagTriggerConfigDescriptor instead')
 const LeadLagTriggerConfig$json = {

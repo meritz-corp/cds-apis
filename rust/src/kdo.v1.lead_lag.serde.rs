@@ -611,9 +611,6 @@ impl serde::Serialize for LeadLag {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLag", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -642,17 +639,14 @@ impl serde::Serialize for LeadLag {
         if true {
             struct_ser.serialize_field("is_active", &self.is_active)?;
         }
-        if true {
-            struct_ser.serialize_field("futures_tick_size", &self.futures_tick_size)?;
-        }
-        if true {
-            struct_ser.serialize_field("futures_multiplier", &self.futures_multiplier)?;
-        }
         if let Some(v) = self.create_time.as_ref() {
             struct_ser.serialize_field("create_time", v)?;
         }
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("is_etf_inverse", &self.is_etf_inverse)?;
         }
         struct_ser.end()
     }
@@ -680,14 +674,12 @@ impl<'de> serde::Deserialize<'de> for LeadLag {
             "triggerConfig",
             "is_active",
             "isActive",
-            "futures_tick_size",
-            "futuresTickSize",
-            "futures_multiplier",
-            "futuresMultiplier",
             "create_time",
             "createTime",
             "update_time",
             "updateTime",
+            "is_etf_inverse",
+            "isEtfInverse",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -701,10 +693,9 @@ impl<'de> serde::Deserialize<'de> for LeadLag {
             EtfFundCode,
             TriggerConfig,
             IsActive,
-            FuturesTickSize,
-            FuturesMultiplier,
             CreateTime,
             UpdateTime,
+            IsEtfInverse,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -736,10 +727,9 @@ impl<'de> serde::Deserialize<'de> for LeadLag {
                             "etfFundCode" | "etf_fund_code" => Ok(GeneratedField::EtfFundCode),
                             "triggerConfig" | "trigger_config" => Ok(GeneratedField::TriggerConfig),
                             "isActive" | "is_active" => Ok(GeneratedField::IsActive),
-                            "futuresTickSize" | "futures_tick_size" => Ok(GeneratedField::FuturesTickSize),
-                            "futuresMultiplier" | "futures_multiplier" => Ok(GeneratedField::FuturesMultiplier),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
+                            "isEtfInverse" | "is_etf_inverse" => Ok(GeneratedField::IsEtfInverse),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -768,10 +758,9 @@ impl<'de> serde::Deserialize<'de> for LeadLag {
                 let mut etf_fund_code__ = None;
                 let mut trigger_config__ = None;
                 let mut is_active__ = None;
-                let mut futures_tick_size__ = None;
-                let mut futures_multiplier__ = None;
                 let mut create_time__ = None;
                 let mut update_time__ = None;
+                let mut is_etf_inverse__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -830,22 +819,6 @@ impl<'de> serde::Deserialize<'de> for LeadLag {
                             }
                             is_active__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::FuturesTickSize => {
-                            if futures_tick_size__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("futuresTickSize"));
-                            }
-                            futures_tick_size__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::FuturesMultiplier => {
-                            if futures_multiplier__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("futuresMultiplier"));
-                            }
-                            futures_multiplier__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::CreateTime => {
                             if create_time__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("createTime"));
@@ -857,6 +830,12 @@ impl<'de> serde::Deserialize<'de> for LeadLag {
                                 return Err(serde::de::Error::duplicate_field("updateTime"));
                             }
                             update_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::IsEtfInverse => {
+                            if is_etf_inverse__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("isEtfInverse"));
+                            }
+                            is_etf_inverse__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -873,10 +852,9 @@ impl<'de> serde::Deserialize<'de> for LeadLag {
                     etf_fund_code: etf_fund_code__.unwrap_or_default(),
                     trigger_config: trigger_config__,
                     is_active: is_active__.unwrap_or_default(),
-                    futures_tick_size: futures_tick_size__.unwrap_or_default(),
-                    futures_multiplier: futures_multiplier__.unwrap_or_default(),
                     create_time: create_time__,
                     update_time: update_time__,
+                    is_etf_inverse: is_etf_inverse__.unwrap_or_default(),
                 })
             }
         }

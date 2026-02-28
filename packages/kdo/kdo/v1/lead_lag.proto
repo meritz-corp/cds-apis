@@ -165,11 +165,10 @@ message LeadLag {
   // 활성화 여부
   bool is_active = 9;
 
-  // 선물 틱 사이즈 (예: 0.05)
-  double futures_tick_size = 10;
-
-  // 선물 승수 (예: 250000)
-  double futures_multiplier = 11;
+  // Reserved: previously futures_tick_size (10) and futures_multiplier (11)
+  // Now looked up at runtime from FutureRepository
+  reserved 10, 11;
+  reserved "futures_tick_size", "futures_multiplier";
 
   // 생성 시간
   google.protobuf.Timestamp create_time = 12 [
@@ -180,6 +179,9 @@ message LeadLag {
   google.protobuf.Timestamp update_time = 13 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
+
+  // 인버스 ETF 여부 (true: 선물과 같은 방향 헷지, false: 반대 방향 헷지)
+  bool is_etf_inverse = 14;
 }
 
 // ============================================================================
