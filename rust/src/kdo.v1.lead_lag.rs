@@ -279,18 +279,10 @@ pub struct LeadLagPriceBufferInfo {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLeadLagTradeContextRequest {
-    /// 리소스 이름 (lead_lags/{id})
+    /// Trade 리소스 이름. Format: "lead_lags/{lead_lag_id}/trades/{trade_id}"
+    /// trigger_time 및 window 는 서버에서 trade 레코드를 조회해 처리한다.
     #[prost(string, tag="1")]
-    pub lead_lag: ::prost::alloc::string::String,
-    /// 트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)
-    #[prost(uint64, optional, tag="3")]
-    pub window_before_ms: ::core::option::Option<u64>,
-    /// 트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)
-    #[prost(uint64, optional, tag="4")]
-    pub window_after_ms: ::core::option::Option<u64>,
-    /// 트리거 발생 타임스탬프 (UTC)
-    #[prost(message, optional, tag="5")]
-    pub trigger_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    pub name: ::prost::alloc::string::String,
 }
 /// 체결 시점 전후 가격 컨텍스트 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

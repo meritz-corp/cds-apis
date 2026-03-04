@@ -1368,16 +1368,10 @@ class LeadLagPriceBufferInfo extends $pb.GeneratedMessage {
 /// 체결 시점 전후 가격 컨텍스트 조회 요청
 class GetLeadLagTradeContextRequest extends $pb.GeneratedMessage {
   factory GetLeadLagTradeContextRequest({
-    $core.String? leadLag,
-    $fixnum.Int64? windowBeforeMs,
-    $fixnum.Int64? windowAfterMs,
-    $2.Timestamp? triggerTime,
+    $core.String? name,
   }) {
     final result = create();
-    if (leadLag != null) result.leadLag = leadLag;
-    if (windowBeforeMs != null) result.windowBeforeMs = windowBeforeMs;
-    if (windowAfterMs != null) result.windowAfterMs = windowAfterMs;
-    if (triggerTime != null) result.triggerTime = triggerTime;
+    if (name != null) result.name = name;
     return result;
   }
 
@@ -1387,10 +1381,7 @@ class GetLeadLagTradeContextRequest extends $pb.GeneratedMessage {
   factory GetLeadLagTradeContextRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLeadLagTradeContextRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'leadLag')
-    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'windowBeforeMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'windowAfterMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'triggerTime', subBuilder: $2.Timestamp.create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false
   ;
 
@@ -1411,47 +1402,16 @@ class GetLeadLagTradeContextRequest extends $pb.GeneratedMessage {
   static GetLeadLagTradeContextRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLeadLagTradeContextRequest>(create);
   static GetLeadLagTradeContextRequest? _defaultInstance;
 
-  /// 리소스 이름 (lead_lags/{id})
+  /// Trade 리소스 이름. Format: "lead_lags/{lead_lag_id}/trades/{trade_id}"
+  /// trigger_time 및 window 는 서버에서 trade 레코드를 조회해 처리한다.
   @$pb.TagNumber(1)
-  $core.String get leadLag => $_getSZ(0);
+  $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
-  set leadLag($core.String value) => $_setString(0, value);
+  set name($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasLeadLag() => $_has(0);
+  $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearLeadLag() => $_clearField(1);
-
-  /// 트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get windowBeforeMs => $_getI64(1);
-  @$pb.TagNumber(3)
-  set windowBeforeMs($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(3)
-  $core.bool hasWindowBeforeMs() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearWindowBeforeMs() => $_clearField(3);
-
-  /// 트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get windowAfterMs => $_getI64(2);
-  @$pb.TagNumber(4)
-  set windowAfterMs($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(4)
-  $core.bool hasWindowAfterMs() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearWindowAfterMs() => $_clearField(4);
-
-  /// 트리거 발생 타임스탬프 (UTC)
-  @$pb.TagNumber(5)
-  $2.Timestamp get triggerTime => $_getN(3);
-  @$pb.TagNumber(5)
-  set triggerTime($2.Timestamp value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasTriggerTime() => $_has(3);
-  @$pb.TagNumber(5)
-  void clearTriggerTime() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $2.Timestamp ensureTriggerTime() => $_ensure(3);
+  void clearName() => $_clearField(1);
 }
 
 /// 체결 시점 전후 가격 컨텍스트 응답

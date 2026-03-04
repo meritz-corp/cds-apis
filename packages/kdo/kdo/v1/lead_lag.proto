@@ -94,9 +94,9 @@ service LeadLagService {
   // 특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.
   rpc GetLeadLagTradeContext(GetLeadLagTradeContextRequest) returns (LeadLagTradeContext) {
     option (google.api.http) = {
-      get: "/v1/{lead_lag=lead_lags/*}:tradeContext"
+      get: "/v1/{name=lead_lags/*/trades/*}:context"
     };
-    option (google.api.method_signature) = "lead_lag";
+    option (google.api.method_signature) = "name";
   }
 
   // 체결 내역 목록 조회 (DB 저장된 과거 체결 기록, 페이징)
@@ -427,29 +427,14 @@ message LeadLagPriceBufferInfo {
 
 // 체결 시점 전후 가격 컨텍스트 조회 요청
 message GetLeadLagTradeContextRequest {
-  // 리소스 이름 (lead_lags/{id})
-  string lead_lag = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/LeadLag"
-    }
-  ];
+  // Trade 리소스 이름. Format: "lead_lags/{lead_lag_id}/trades/{trade_id}"
+  // trigger_time 및 window 는 서버에서 trade 레코드를 조회해 처리한다.
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // 트리거 발생 타임스탬프
-  // (이전: trade_timestamp_us uint64 — field 2 reserved)
-  reserved 2;
-  reserved "trade_timestamp_us";
-
-  // 트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)
-  optional uint64 window_before_ms = 3;
-
-  // 트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)
-  optional uint64 window_after_ms = 4;
-
-  // 트리거 발생 타임스탬프 (UTC)
-  google.protobuf.Timestamp trigger_time = 5 [
-    (google.api.field_behavior) = REQUIRED
-  ];
+  // Reserved: previously lead_lag (field 1 → renamed), trade_timestamp_us (2),
+  // window_before_ms (3), window_after_ms (4), trigger_time (5)
+  reserved 2, 3, 4, 5;
+  reserved "trade_timestamp_us", "window_before_ms", "window_after_ms", "trigger_time";
 }
 
 // 체결 시점 전후 가격 컨텍스트 응답

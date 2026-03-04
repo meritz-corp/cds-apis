@@ -544,7 +544,7 @@
         ]
       }
     },
-    "/v1/{leadLag}:tradeContext": {
+    "/v1/{name}:context": {
       "get": {
         "summary": "체결 건별 가격 컨텍스트 조회 (시각화용 — market-archive 연동)\n특정 트리거 시점 전후의 선물/ETF 가격 흐름을 반환한다.",
         "operationId": "LeadLagService_GetLeadLagTradeContext",
@@ -564,36 +564,12 @@
         },
         "parameters": [
           {
-            "name": "leadLag",
-            "description": "리소스 이름 (lead_lags/{id})",
+            "name": "name",
+            "description": "Trade 리소스 이름. Format: \"lead_lags/{lead_lag_id}/trades/{trade_id}\"\ntrigger_time 및 window 는 서버에서 trade 레코드를 조회해 처리한다.",
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "leadLags/[^/]+"
-          },
-          {
-            "name": "windowBeforeMs",
-            "description": "트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "windowAfterMs",
-            "description": "트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "triggerTime",
-            "description": "트리거 발생 타임스탬프 (UTC)",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "format": "date-time"
+            "pattern": "leadLags/[^/]+/trades/[^/]+"
           }
         ],
         "tags": [

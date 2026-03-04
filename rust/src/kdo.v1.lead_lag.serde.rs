@@ -298,31 +298,9 @@ impl serde::Serialize for GetLeadLagTradeContextRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.GetLeadLagTradeContextRequest", len)?;
         if true {
-            struct_ser.serialize_field("lead_lag", &self.lead_lag)?;
-        }
-        if let Some(v) = self.window_before_ms.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("window_before_ms", ToString::to_string(&v).as_str())?;
-        }
-        if let Some(v) = self.window_after_ms.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("window_after_ms", ToString::to_string(&v).as_str())?;
-        }
-        if let Some(v) = self.trigger_time.as_ref() {
-            struct_ser.serialize_field("trigger_time", v)?;
+            struct_ser.serialize_field("name", &self.name)?;
         }
         struct_ser.end()
     }
@@ -334,22 +312,12 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "lead_lag",
-            "leadLag",
-            "window_before_ms",
-            "windowBeforeMs",
-            "window_after_ms",
-            "windowAfterMs",
-            "trigger_time",
-            "triggerTime",
+            "name",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            LeadLag,
-            WindowBeforeMs,
-            WindowAfterMs,
-            TriggerTime,
+            Name,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -372,10 +340,7 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                         E: serde::de::Error,
                     {
                         match value {
-                            "leadLag" | "lead_lag" => Ok(GeneratedField::LeadLag),
-                            "windowBeforeMs" | "window_before_ms" => Ok(GeneratedField::WindowBeforeMs),
-                            "windowAfterMs" | "window_after_ms" => Ok(GeneratedField::WindowAfterMs),
-                            "triggerTime" | "trigger_time" => Ok(GeneratedField::TriggerTime),
+                            "name" => Ok(GeneratedField::Name),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -395,39 +360,14 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut lead_lag__ = None;
-                let mut window_before_ms__ = None;
-                let mut window_after_ms__ = None;
-                let mut trigger_time__ = None;
+                let mut name__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::LeadLag => {
-                            if lead_lag__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("leadLag"));
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
                             }
-                            lead_lag__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::WindowBeforeMs => {
-                            if window_before_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("windowBeforeMs"));
-                            }
-                            window_before_ms__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::WindowAfterMs => {
-                            if window_after_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("windowAfterMs"));
-                            }
-                            window_after_ms__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::TriggerTime => {
-                            if trigger_time__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("triggerTime"));
-                            }
-                            trigger_time__ = map_.next_value()?;
+                            name__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -435,10 +375,7 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                     }
                 }
                 Ok(GetLeadLagTradeContextRequest {
-                    lead_lag: lead_lag__.unwrap_or_default(),
-                    window_before_ms: window_before_ms__,
-                    window_after_ms: window_after_ms__,
-                    trigger_time: trigger_time__,
+                    name: name__.unwrap_or_default(),
                 })
             }
         }

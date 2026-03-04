@@ -511,10 +511,6 @@ func local_request_LeadLagService_StopLeadLag_0(ctx context.Context, marshaler r
 
 }
 
-var (
-	filter_LeadLagService_GetLeadLagTradeContext_0 = &utilities.DoubleArray{Encoding: map[string]int{"lead_lag": 0, "leadLag": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
-)
-
 func request_LeadLagService_GetLeadLagTradeContext_0(ctx context.Context, marshaler runtime.Marshaler, client LeadLagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetLeadLagTradeContextRequest
 	var metadata runtime.ServerMetadata
@@ -526,21 +522,14 @@ func request_LeadLagService_GetLeadLagTradeContext_0(ctx context.Context, marsha
 		_   = err
 	)
 
-	val, ok = pathParams["lead_lag"]
+	val, ok = pathParams["name"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lead_lag")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
 	}
 
-	protoReq.LeadLag, err = runtime.String(val)
+	protoReq.Name, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lead_lag", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LeadLagService_GetLeadLagTradeContext_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
 	msg, err := client.GetLeadLagTradeContext(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -559,21 +548,14 @@ func local_request_LeadLagService_GetLeadLagTradeContext_0(ctx context.Context, 
 		_   = err
 	)
 
-	val, ok = pathParams["lead_lag"]
+	val, ok = pathParams["name"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lead_lag")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
 	}
 
-	protoReq.LeadLag, err = runtime.String(val)
+	protoReq.Name, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lead_lag", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LeadLagService_GetLeadLagTradeContext_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
 	msg, err := server.GetLeadLagTradeContext(ctx, &protoReq)
@@ -944,7 +926,7 @@ func RegisterLeadLagServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext", runtime.WithHTTPPathPattern("/v1/{lead_lag=lead_lags/*}:tradeContext"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext", runtime.WithHTTPPathPattern("/v1/{name=lead_lags/*/trades/*}:context"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1256,7 +1238,7 @@ func RegisterLeadLagServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext", runtime.WithHTTPPathPattern("/v1/{lead_lag=lead_lags/*}:tradeContext"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagTradeContext", runtime.WithHTTPPathPattern("/v1/{name=lead_lags/*/trades/*}:context"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1338,7 +1320,7 @@ var (
 
 	pattern_LeadLagService_StopLeadLag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "stop"))
 
-	pattern_LeadLagService_GetLeadLagTradeContext_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "tradeContext"))
+	pattern_LeadLagService_GetLeadLagTradeContext_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 4, 4, 5, 3}, []string{"v1", "lead_lags", "trades", "name"}, "context"))
 
 	pattern_LeadLagService_ListLeadLagTrades_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "lead_lags", "lead_lag", "trades"}, ""))
 
