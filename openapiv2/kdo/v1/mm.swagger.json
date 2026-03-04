@@ -355,6 +355,48 @@
           "MmService"
         ]
       }
+    },
+    "/v1/mm/{symbol}:streamStatus": {
+      "get": {
+        "summary": "MM 실시간 상태 스트리밍 (서버→클라이언트)",
+        "operationId": "MmService_StreamMmStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/mmMmStatus"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of mmMmStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼 (빈 문자열이면 전체 스트리밍)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
     }
   },
   "definitions": {

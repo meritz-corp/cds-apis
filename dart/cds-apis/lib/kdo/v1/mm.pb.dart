@@ -1284,6 +1284,54 @@ class UpdateMmConfigRequest extends $pb.GeneratedMessage {
   MmConfiguration ensureConfig() => $_ensure(1);
 }
 
+/// StreamMmStatus
+class StreamMmStatusRequest extends $pb.GeneratedMessage {
+  factory StreamMmStatusRequest({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  StreamMmStatusRequest._();
+
+  factory StreamMmStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamMmStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamMmStatusRequest clone() => StreamMmStatusRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamMmStatusRequest copyWith(void Function(StreamMmStatusRequest) updates) => super.copyWith((message) => updates(message as StreamMmStatusRequest)) as StreamMmStatusRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamMmStatusRequest create() => StreamMmStatusRequest._();
+  @$core.override
+  StreamMmStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamMmStatusRequest> createRepeated() => $pb.PbList<StreamMmStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamMmStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamMmStatusRequest>(create);
+  static StreamMmStatusRequest? _defaultInstance;
+
+  /// ISIN 심볼 (빈 문자열이면 전체 스트리밍)
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

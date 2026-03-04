@@ -152,4 +152,22 @@ extension type MmServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// MM 실시간 상태 스트리밍 (서버→클라이언트)
+  Stream<kdov1mm.MmStatus> streamMmStatus(
+    kdov1mm.StreamMmStatusRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MmService.streamMmStatus,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

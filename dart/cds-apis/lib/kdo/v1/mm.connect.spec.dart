@@ -74,4 +74,12 @@ abstract final class MmService {
     kdov1mm.UpdateMmConfigRequest.new,
     kdov1mm.MmConfiguration.new,
   );
+
+  /// MM 실시간 상태 스트리밍 (서버→클라이언트)
+  static const streamMmStatus = connect.Spec(
+    '/$name/StreamMmStatus',
+    connect.StreamType.server,
+    kdov1mm.StreamMmStatusRequest.new,
+    kdov1mm.MmStatus.new,
+  );
 }

@@ -231,6 +231,14 @@ pub struct UpdateMmConfigRequest {
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<MmConfiguration>,
 }
+/// StreamMmStatus
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamMmStatusRequest {
+    /// ISIN 심볼 (빈 문자열이면 전체 스트리밍)
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
 // ============================================================================
 // Enums
 // ============================================================================

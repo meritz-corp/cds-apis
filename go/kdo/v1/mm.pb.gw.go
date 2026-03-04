@@ -527,6 +527,40 @@ func local_request_MmService_UpdateMmConfig_0(ctx context.Context, marshaler run
 
 }
 
+func request_MmService_StreamMmStatus_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (MmService_StreamMmStatusClient, runtime.ServerMetadata, error) {
+	var protoReq StreamMmStatusRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
+	}
+
+	protoReq.Symbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	stream, err := client.StreamMmStatus(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterMmServiceHandlerServer registers the http handlers for service MmService to "mux".
 // UnaryRPC     :call MmServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -731,6 +765,13 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 
 		forward_MmService_UpdateMmConfig_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("GET", pattern_MmService_StreamMmStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -950,6 +991,28 @@ func RegisterMmServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
+	mux.Handle("GET", pattern_MmService_StreamMmStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/StreamMmStatus", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:streamStatus"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MmService_StreamMmStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MmService_StreamMmStatus_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -969,6 +1032,8 @@ var (
 	pattern_MmService_ResetMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "reset"))
 
 	pattern_MmService_UpdateMmConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "config"}, ""))
+
+	pattern_MmService_StreamMmStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "streamStatus"))
 )
 
 var (
@@ -987,4 +1052,6 @@ var (
 	forward_MmService_ResetMm_0 = runtime.ForwardResponseMessage
 
 	forward_MmService_UpdateMmConfig_0 = runtime.ForwardResponseMessage
+
+	forward_MmService_StreamMmStatus_0 = runtime.ForwardResponseStream
 )

@@ -73,6 +73,11 @@ class MmServiceClient extends $grpc.Client {
     return $createUnaryCall(_$updateMmConfig, request, options: options);
   }
 
+  /// MM 실시간 상태 스트리밍 (서버→클라이언트)
+  $grpc.ResponseStream<$0.MmStatus> streamMmStatus($0.StreamMmStatusRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMmStatus, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$listMm = $grpc.ClientMethod<$0.ListMmRequest, $0.ListMmResponse>(
@@ -107,6 +112,10 @@ class MmServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MmService/UpdateMmConfig',
       ($0.UpdateMmConfigRequest value) => value.writeToBuffer(),
       $0.MmConfiguration.fromBuffer);
+  static final _$streamMmStatus = $grpc.ClientMethod<$0.StreamMmStatusRequest, $0.MmStatus>(
+      '/kdo.v1.mm.MmService/StreamMmStatus',
+      ($0.StreamMmStatusRequest value) => value.writeToBuffer(),
+      $0.MmStatus.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MmService')
@@ -170,6 +179,13 @@ abstract class MmServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.UpdateMmConfigRequest.fromBuffer(value),
         ($0.MmConfiguration value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamMmStatusRequest, $0.MmStatus>(
+        'StreamMmStatus',
+        streamMmStatus_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamMmStatusRequest.fromBuffer(value),
+        ($0.MmStatus value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMmResponse> listMm_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmRequest> $request) async {
@@ -219,5 +235,11 @@ abstract class MmServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.MmConfiguration> updateMmConfig($grpc.ServiceCall call, $0.UpdateMmConfigRequest request);
+
+  $async.Stream<$0.MmStatus> streamMmStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMmStatusRequest> $request) async* {
+    yield* streamMmStatus($call, await $request);
+  }
+
+  $async.Stream<$0.MmStatus> streamMmStatus($grpc.ServiceCall call, $0.StreamMmStatusRequest request);
 
 }

@@ -75,6 +75,14 @@ service MmService {
     };
     option (google.api.method_signature) = "symbol";
   }
+
+  // MM 실시간 상태 스트리밍 (서버→클라이언트)
+  rpc StreamMmStatus(StreamMmStatusRequest) returns (stream MmStatus) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}:streamStatus"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
 }
 
 // ============================================================================
@@ -278,4 +286,10 @@ message UpdateMmConfigRequest {
 
   // 업데이트할 설정 (전체 교체)
   MmConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// StreamMmStatus
+message StreamMmStatusRequest {
+  // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
+  string symbol = 1;
 }

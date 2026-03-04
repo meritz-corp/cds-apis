@@ -318,3 +318,15 @@ final $typed_data.Uint8List updateMmConfigRequestDescriptor = $convert.base64Dec
     'ChVVcGRhdGVNbUNvbmZpZ1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSOA'
     'oGY29uZmlnGAIgASgLMhoua2RvLnYxLm1tLk1tQ29uZmlndXJhdGlvbkIE4kEBAlIGY29uZmln');
 
+@$core.Deprecated('Use streamMmStatusRequestDescriptor instead')
+const StreamMmStatusRequest$json = {
+  '1': 'StreamMmStatusRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `StreamMmStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamMmStatusRequestDescriptor = $convert.base64Decode(
+    'ChVTdHJlYW1NbVN0YXR1c1JlcXVlc3QSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
+

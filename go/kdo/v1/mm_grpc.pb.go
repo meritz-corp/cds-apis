@@ -38,6 +38,8 @@ type MmServiceClient interface {
 	ResetMm(ctx context.Context, in *ResetMmRequest, opts ...grpc.CallOption) (*ResetMmResponse, error)
 	// MM 설정 업데이트
 	UpdateMmConfig(ctx context.Context, in *UpdateMmConfigRequest, opts ...grpc.CallOption) (*MmConfiguration, error)
+	// MM 실시간 상태 스트리밍 (서버→클라이언트)
+	StreamMmStatus(ctx context.Context, in *StreamMmStatusRequest, opts ...grpc.CallOption) (MmService_StreamMmStatusClient, error)
 }
 
 type mmServiceClient struct {
@@ -120,6 +122,38 @@ func (c *mmServiceClient) UpdateMmConfig(ctx context.Context, in *UpdateMmConfig
 	return out, nil
 }
 
+func (c *mmServiceClient) StreamMmStatus(ctx context.Context, in *StreamMmStatusRequest, opts ...grpc.CallOption) (MmService_StreamMmStatusClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MmService_ServiceDesc.Streams[0], "/kdo.v1.mm.MmService/StreamMmStatus", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &mmServiceStreamMmStatusClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MmService_StreamMmStatusClient interface {
+	Recv() (*MmStatus, error)
+	grpc.ClientStream
+}
+
+type mmServiceStreamMmStatusClient struct {
+	grpc.ClientStream
+}
+
+func (x *mmServiceStreamMmStatusClient) Recv() (*MmStatus, error) {
+	m := new(MmStatus)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // MmServiceServer is the server API for MmService service.
 // All implementations must embed UnimplementedMmServiceServer
 // for forward compatibility
@@ -140,6 +174,8 @@ type MmServiceServer interface {
 	ResetMm(context.Context, *ResetMmRequest) (*ResetMmResponse, error)
 	// MM 설정 업데이트
 	UpdateMmConfig(context.Context, *UpdateMmConfigRequest) (*MmConfiguration, error)
+	// MM 실시간 상태 스트리밍 (서버→클라이언트)
+	StreamMmStatus(*StreamMmStatusRequest, MmService_StreamMmStatusServer) error
 	mustEmbedUnimplementedMmServiceServer()
 }
 
@@ -170,6 +206,9 @@ func (UnimplementedMmServiceServer) ResetMm(context.Context, *ResetMmRequest) (*
 }
 func (UnimplementedMmServiceServer) UpdateMmConfig(context.Context, *UpdateMmConfigRequest) (*MmConfiguration, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMmConfig not implemented")
+}
+func (UnimplementedMmServiceServer) StreamMmStatus(*StreamMmStatusRequest, MmService_StreamMmStatusServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamMmStatus not implemented")
 }
 func (UnimplementedMmServiceServer) mustEmbedUnimplementedMmServiceServer() {}
 
@@ -328,6 +367,27 @@ func _MmService_UpdateMmConfig_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MmService_StreamMmStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamMmStatusRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MmServiceServer).StreamMmStatus(m, &mmServiceStreamMmStatusServer{stream})
+}
+
+type MmService_StreamMmStatusServer interface {
+	Send(*MmStatus) error
+	grpc.ServerStream
+}
+
+type mmServiceStreamMmStatusServer struct {
+	grpc.ServerStream
+}
+
+func (x *mmServiceStreamMmStatusServer) Send(m *MmStatus) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // MmService_ServiceDesc is the grpc.ServiceDesc for MmService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -368,6 +428,12 @@ var MmService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MmService_UpdateMmConfig_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamMmStatus",
+			Handler:       _MmService_StreamMmStatus_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "kdo/v1/mm.proto",
 }
