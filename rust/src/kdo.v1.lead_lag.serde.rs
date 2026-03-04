@@ -311,11 +311,6 @@ impl serde::Serialize for GetLeadLagTradeContextRequest {
         if true {
             struct_ser.serialize_field("lead_lag", &self.lead_lag)?;
         }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("trade_timestamp_us", ToString::to_string(&self.trade_timestamp_us).as_str())?;
-        }
         if let Some(v) = self.window_before_ms.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -325,6 +320,9 @@ impl serde::Serialize for GetLeadLagTradeContextRequest {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("window_after_ms", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.trigger_time.as_ref() {
+            struct_ser.serialize_field("trigger_time", v)?;
         }
         struct_ser.end()
     }
@@ -338,20 +336,20 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
         const FIELDS: &[&str] = &[
             "lead_lag",
             "leadLag",
-            "trade_timestamp_us",
-            "tradeTimestampUs",
             "window_before_ms",
             "windowBeforeMs",
             "window_after_ms",
             "windowAfterMs",
+            "trigger_time",
+            "triggerTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             LeadLag,
-            TradeTimestampUs,
             WindowBeforeMs,
             WindowAfterMs,
+            TriggerTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -375,9 +373,9 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                     {
                         match value {
                             "leadLag" | "lead_lag" => Ok(GeneratedField::LeadLag),
-                            "tradeTimestampUs" | "trade_timestamp_us" => Ok(GeneratedField::TradeTimestampUs),
                             "windowBeforeMs" | "window_before_ms" => Ok(GeneratedField::WindowBeforeMs),
                             "windowAfterMs" | "window_after_ms" => Ok(GeneratedField::WindowAfterMs),
+                            "triggerTime" | "trigger_time" => Ok(GeneratedField::TriggerTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -398,9 +396,9 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut lead_lag__ = None;
-                let mut trade_timestamp_us__ = None;
                 let mut window_before_ms__ = None;
                 let mut window_after_ms__ = None;
+                let mut trigger_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::LeadLag => {
@@ -408,14 +406,6 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                                 return Err(serde::de::Error::duplicate_field("leadLag"));
                             }
                             lead_lag__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::TradeTimestampUs => {
-                            if trade_timestamp_us__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("tradeTimestampUs"));
-                            }
-                            trade_timestamp_us__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::WindowBeforeMs => {
                             if window_before_ms__.is_some() {
@@ -433,6 +423,12 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::TriggerTime => {
+                            if trigger_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerTime"));
+                            }
+                            trigger_time__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -440,9 +436,9 @@ impl<'de> serde::Deserialize<'de> for GetLeadLagTradeContextRequest {
                 }
                 Ok(GetLeadLagTradeContextRequest {
                     lead_lag: lead_lag__.unwrap_or_default(),
-                    trade_timestamp_us: trade_timestamp_us__.unwrap_or_default(),
                     window_before_ms: window_before_ms__,
                     window_after_ms: window_after_ms__,
+                    trigger_time: trigger_time__,
                 })
             }
         }
@@ -1043,11 +1039,6 @@ impl serde::Serialize for LeadLagPriceTick {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagPriceTick", len)?;
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("timestamp_us", ToString::to_string(&self.timestamp_us).as_str())?;
-        }
-        if true {
             struct_ser.serialize_field("price", &self.price)?;
         }
         if true {
@@ -1057,6 +1048,9 @@ impl serde::Serialize for LeadLagPriceTick {
         }
         if true {
             struct_ser.serialize_field("side", &self.side)?;
+        }
+        if let Some(v) = self.time.as_ref() {
+            struct_ser.serialize_field("time", v)?;
         }
         struct_ser.end()
     }
@@ -1068,19 +1062,18 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceTick {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "timestamp_us",
-            "timestampUs",
             "price",
             "quantity",
             "side",
+            "time",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            TimestampUs,
             Price,
             Quantity,
             Side,
+            Time,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1103,10 +1096,10 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceTick {
                         E: serde::de::Error,
                     {
                         match value {
-                            "timestampUs" | "timestamp_us" => Ok(GeneratedField::TimestampUs),
                             "price" => Ok(GeneratedField::Price),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "side" => Ok(GeneratedField::Side),
+                            "time" => Ok(GeneratedField::Time),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1126,20 +1119,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceTick {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut timestamp_us__ = None;
                 let mut price__ = None;
                 let mut quantity__ = None;
                 let mut side__ = None;
+                let mut time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::TimestampUs => {
-                            if timestamp_us__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("timestampUs"));
-                            }
-                            timestamp_us__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::Price => {
                             if price__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("price"));
@@ -1162,16 +1147,22 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceTick {
                             }
                             side__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::Time => {
+                            if time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("time"));
+                            }
+                            time__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
                 Ok(LeadLagPriceTick {
-                    timestamp_us: timestamp_us__.unwrap_or_default(),
                     price: price__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
+                    time: time__,
                 })
             }
         }
@@ -1795,11 +1786,6 @@ impl serde::Serialize for LeadLagTradeContext {
         if true {
             struct_ser.serialize_field("etf_ticks", &self.etf_ticks)?;
         }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("trigger_timestamp_us", ToString::to_string(&self.trigger_timestamp_us).as_str())?;
-        }
         if let Some(v) = self.signal.as_ref() {
             struct_ser.serialize_field("signal", v)?;
         }
@@ -1815,6 +1801,9 @@ impl serde::Serialize for LeadLagTradeContext {
         if true {
             struct_ser.serialize_field("etf_price_change_pct", &self.etf_price_change_pct)?;
         }
+        if let Some(v) = self.trigger_time.as_ref() {
+            struct_ser.serialize_field("trigger_time", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1829,8 +1818,6 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
             "futuresTicks",
             "etf_ticks",
             "etfTicks",
-            "trigger_timestamp_us",
-            "triggerTimestampUs",
             "signal",
             "futures_price_at_trigger",
             "futuresPriceAtTrigger",
@@ -1840,18 +1827,20 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
             "futuresPriceChangePct",
             "etf_price_change_pct",
             "etfPriceChangePct",
+            "trigger_time",
+            "triggerTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             FuturesTicks,
             EtfTicks,
-            TriggerTimestampUs,
             Signal,
             FuturesPriceAtTrigger,
             EtfPriceAtTrigger,
             FuturesPriceChangePct,
             EtfPriceChangePct,
+            TriggerTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1876,12 +1865,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
                         match value {
                             "futuresTicks" | "futures_ticks" => Ok(GeneratedField::FuturesTicks),
                             "etfTicks" | "etf_ticks" => Ok(GeneratedField::EtfTicks),
-                            "triggerTimestampUs" | "trigger_timestamp_us" => Ok(GeneratedField::TriggerTimestampUs),
                             "signal" => Ok(GeneratedField::Signal),
                             "futuresPriceAtTrigger" | "futures_price_at_trigger" => Ok(GeneratedField::FuturesPriceAtTrigger),
                             "etfPriceAtTrigger" | "etf_price_at_trigger" => Ok(GeneratedField::EtfPriceAtTrigger),
                             "futuresPriceChangePct" | "futures_price_change_pct" => Ok(GeneratedField::FuturesPriceChangePct),
                             "etfPriceChangePct" | "etf_price_change_pct" => Ok(GeneratedField::EtfPriceChangePct),
+                            "triggerTime" | "trigger_time" => Ok(GeneratedField::TriggerTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1903,12 +1892,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
             {
                 let mut futures_ticks__ = None;
                 let mut etf_ticks__ = None;
-                let mut trigger_timestamp_us__ = None;
                 let mut signal__ = None;
                 let mut futures_price_at_trigger__ = None;
                 let mut etf_price_at_trigger__ = None;
                 let mut futures_price_change_pct__ = None;
                 let mut etf_price_change_pct__ = None;
+                let mut trigger_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FuturesTicks => {
@@ -1922,14 +1911,6 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
                                 return Err(serde::de::Error::duplicate_field("etfTicks"));
                             }
                             etf_ticks__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::TriggerTimestampUs => {
-                            if trigger_timestamp_us__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("triggerTimestampUs"));
-                            }
-                            trigger_timestamp_us__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::Signal => {
                             if signal__.is_some() {
@@ -1969,6 +1950,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::TriggerTime => {
+                            if trigger_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerTime"));
+                            }
+                            trigger_time__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1977,12 +1964,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeContext {
                 Ok(LeadLagTradeContext {
                     futures_ticks: futures_ticks__.unwrap_or_default(),
                     etf_ticks: etf_ticks__.unwrap_or_default(),
-                    trigger_timestamp_us: trigger_timestamp_us__.unwrap_or_default(),
                     signal: signal__,
                     futures_price_at_trigger: futures_price_at_trigger__.unwrap_or_default(),
                     etf_price_at_trigger: etf_price_at_trigger__.unwrap_or_default(),
                     futures_price_change_pct: futures_price_change_pct__.unwrap_or_default(),
                     etf_price_change_pct: etf_price_change_pct__.unwrap_or_default(),
+                    trigger_time: trigger_time__,
                 })
             }
         }

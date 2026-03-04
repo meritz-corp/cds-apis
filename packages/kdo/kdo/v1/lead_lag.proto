@@ -435,16 +435,21 @@ message GetLeadLagTradeContextRequest {
     }
   ];
 
-  // 트리거 발생 타임스탬프 (마이크로초, KST)
-  uint64 trade_timestamp_us = 2 [
-    (google.api.field_behavior) = REQUIRED
-  ];
+  // 트리거 발생 타임스탬프
+  // (이전: trade_timestamp_us uint64 — field 2 reserved)
+  reserved 2;
+  reserved "trade_timestamp_us";
 
   // 트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)
   optional uint64 window_before_ms = 3;
 
   // 트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)
   optional uint64 window_after_ms = 4;
+
+  // 트리거 발생 타임스탬프 (UTC)
+  google.protobuf.Timestamp trigger_time = 5 [
+    (google.api.field_behavior) = REQUIRED
+  ];
 }
 
 // 체결 시점 전후 가격 컨텍스트 응답
@@ -455,8 +460,9 @@ message LeadLagTradeContext {
   // ETF 가격 틱 (시간순)
   repeated LeadLagPriceTick etf_ticks = 2;
 
-  // 트리거 시점 (마이크로초)
-  uint64 trigger_timestamp_us = 3;
+  // 트리거 시점 (이전: trigger_timestamp_us uint64 — field 3 reserved)
+  reserved 3;
+  reserved "trigger_timestamp_us";
 
   // 해당 시그널 정보
   LeadLagSignalInfo signal = 4;
@@ -472,12 +478,16 @@ message LeadLagTradeContext {
 
   // 윈도우 내 ETF 가격 변동률 (%)
   double etf_price_change_pct = 8;
+
+  // 트리거 시점 (UTC)
+  google.protobuf.Timestamp trigger_time = 9;
 }
 
 // 가격 틱 데이터 (시각화용)
 message LeadLagPriceTick {
-  // 타임스탬프 (마이크로초)
-  uint64 timestamp_us = 1;
+  // 타임스탬프 (이전: timestamp_us uint64 — field 1 reserved)
+  reserved 1;
+  reserved "timestamp_us";
 
   // 가격 (체결가 또는 mid price)
   double price = 2;
@@ -487,6 +497,9 @@ message LeadLagPriceTick {
 
   // 매수/매도 구분 (BID/ASK, 호가 mid이면 빈 문자열)
   string side = 4;
+
+  // 타임스탬프 (UTC)
+  google.protobuf.Timestamp time = 5;
 }
 
 // ============================================================================

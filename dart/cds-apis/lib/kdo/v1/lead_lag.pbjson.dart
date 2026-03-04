@@ -352,24 +352,28 @@ const GetLeadLagTradeContextRequest$json = {
   '1': 'GetLeadLagTradeContextRequest',
   '2': [
     {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
-    {'1': 'trade_timestamp_us', '3': 2, '4': 1, '5': 4, '8': {}, '10': 'tradeTimestampUs'},
     {'1': 'window_before_ms', '3': 3, '4': 1, '5': 4, '9': 0, '10': 'windowBeforeMs', '17': true},
     {'1': 'window_after_ms', '3': 4, '4': 1, '5': 4, '9': 1, '10': 'windowAfterMs', '17': true},
+    {'1': 'trigger_time', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'triggerTime'},
   ],
   '8': [
     {'1': '_window_before_ms'},
     {'1': '_window_after_ms'},
   ],
+  '9': [
+    {'1': 2, '2': 3},
+  ],
+  '10': ['trade_timestamp_us'],
 };
 
 /// Descriptor for `GetLeadLagTradeContextRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getLeadLagTradeContextRequestDescriptor = $convert.base64Decode(
     'Ch1HZXRMZWFkTGFnVHJhZGVDb250ZXh0UmVxdWVzdBI7CghsZWFkX2xhZxgBIAEoCUIg4kEBAv'
-    'pBGQoXa2RvLmNkc2FwaXMueHl6L0xlYWRMYWdSB2xlYWRMYWcSMgoSdHJhZGVfdGltZXN0YW1w'
-    'X3VzGAIgASgEQgTiQQECUhB0cmFkZVRpbWVzdGFtcFVzEi0KEHdpbmRvd19iZWZvcmVfbXMYAy'
-    'ABKARIAFIOd2luZG93QmVmb3JlTXOIAQESKwoPd2luZG93X2FmdGVyX21zGAQgASgESAFSDXdp'
-    'bmRvd0FmdGVyTXOIAQFCEwoRX3dpbmRvd19iZWZvcmVfbXNCEgoQX3dpbmRvd19hZnRlcl9tcw'
-    '==');
+    'pBGQoXa2RvLmNkc2FwaXMueHl6L0xlYWRMYWdSB2xlYWRMYWcSLQoQd2luZG93X2JlZm9yZV9t'
+    'cxgDIAEoBEgAUg53aW5kb3dCZWZvcmVNc4gBARIrCg93aW5kb3dfYWZ0ZXJfbXMYBCABKARIAV'
+    'INd2luZG93QWZ0ZXJNc4gBARJDCgx0cmlnZ2VyX3RpbWUYBSABKAsyGi5nb29nbGUucHJvdG9i'
+    'dWYuVGltZXN0YW1wQgTiQQECUgt0cmlnZ2VyVGltZUITChFfd2luZG93X2JlZm9yZV9tc0ISCh'
+    'Bfd2luZG93X2FmdGVyX21zSgQIAhADUhJ0cmFkZV90aW1lc3RhbXBfdXM=');
 
 @$core.Deprecated('Use leadLagTradeContextDescriptor instead')
 const LeadLagTradeContext$json = {
@@ -377,43 +381,52 @@ const LeadLagTradeContext$json = {
   '2': [
     {'1': 'futures_ticks', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagPriceTick', '10': 'futuresTicks'},
     {'1': 'etf_ticks', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagPriceTick', '10': 'etfTicks'},
-    {'1': 'trigger_timestamp_us', '3': 3, '4': 1, '5': 4, '10': 'triggerTimestampUs'},
     {'1': 'signal', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagSignalInfo', '10': 'signal'},
     {'1': 'futures_price_at_trigger', '3': 5, '4': 1, '5': 1, '10': 'futuresPriceAtTrigger'},
     {'1': 'etf_price_at_trigger', '3': 6, '4': 1, '5': 1, '10': 'etfPriceAtTrigger'},
     {'1': 'futures_price_change_pct', '3': 7, '4': 1, '5': 1, '10': 'futuresPriceChangePct'},
     {'1': 'etf_price_change_pct', '3': 8, '4': 1, '5': 1, '10': 'etfPriceChangePct'},
+    {'1': 'trigger_time', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'triggerTime'},
   ],
+  '9': [
+    {'1': 3, '2': 4},
+  ],
+  '10': ['trigger_timestamp_us'],
 };
 
 /// Descriptor for `LeadLagTradeContext`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List leadLagTradeContextDescriptor = $convert.base64Decode(
     'ChNMZWFkTGFnVHJhZGVDb250ZXh0EkYKDWZ1dHVyZXNfdGlja3MYASADKAsyIS5rZG8udjEubG'
     'VhZF9sYWcuTGVhZExhZ1ByaWNlVGlja1IMZnV0dXJlc1RpY2tzEj4KCWV0Zl90aWNrcxgCIAMo'
-    'CzIhLmtkby52MS5sZWFkX2xhZy5MZWFkTGFnUHJpY2VUaWNrUghldGZUaWNrcxIwChR0cmlnZ2'
-    'VyX3RpbWVzdGFtcF91cxgDIAEoBFISdHJpZ2dlclRpbWVzdGFtcFVzEjoKBnNpZ25hbBgEIAEo'
-    'CzIiLmtkby52MS5sZWFkX2xhZy5MZWFkTGFnU2lnbmFsSW5mb1IGc2lnbmFsEjcKGGZ1dHVyZX'
-    'NfcHJpY2VfYXRfdHJpZ2dlchgFIAEoAVIVZnV0dXJlc1ByaWNlQXRUcmlnZ2VyEi8KFGV0Zl9w'
-    'cmljZV9hdF90cmlnZ2VyGAYgASgBUhFldGZQcmljZUF0VHJpZ2dlchI3ChhmdXR1cmVzX3ByaW'
-    'NlX2NoYW5nZV9wY3QYByABKAFSFWZ1dHVyZXNQcmljZUNoYW5nZVBjdBIvChRldGZfcHJpY2Vf'
-    'Y2hhbmdlX3BjdBgIIAEoAVIRZXRmUHJpY2VDaGFuZ2VQY3Q=');
+    'CzIhLmtkby52MS5sZWFkX2xhZy5MZWFkTGFnUHJpY2VUaWNrUghldGZUaWNrcxI6CgZzaWduYW'
+    'wYBCABKAsyIi5rZG8udjEubGVhZF9sYWcuTGVhZExhZ1NpZ25hbEluZm9SBnNpZ25hbBI3Chhm'
+    'dXR1cmVzX3ByaWNlX2F0X3RyaWdnZXIYBSABKAFSFWZ1dHVyZXNQcmljZUF0VHJpZ2dlchIvCh'
+    'RldGZfcHJpY2VfYXRfdHJpZ2dlchgGIAEoAVIRZXRmUHJpY2VBdFRyaWdnZXISNwoYZnV0dXJl'
+    'c19wcmljZV9jaGFuZ2VfcGN0GAcgASgBUhVmdXR1cmVzUHJpY2VDaGFuZ2VQY3QSLwoUZXRmX3'
+    'ByaWNlX2NoYW5nZV9wY3QYCCABKAFSEWV0ZlByaWNlQ2hhbmdlUGN0Ej0KDHRyaWdnZXJfdGlt'
+    'ZRgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSC3RyaWdnZXJUaW1lSgQIAxAEUh'
+    'R0cmlnZ2VyX3RpbWVzdGFtcF91cw==');
 
 @$core.Deprecated('Use leadLagPriceTickDescriptor instead')
 const LeadLagPriceTick$json = {
   '1': 'LeadLagPriceTick',
   '2': [
-    {'1': 'timestamp_us', '3': 1, '4': 1, '5': 4, '10': 'timestampUs'},
     {'1': 'price', '3': 2, '4': 1, '5': 1, '10': 'price'},
     {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
     {'1': 'side', '3': 4, '4': 1, '5': 9, '10': 'side'},
+    {'1': 'time', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'time'},
   ],
+  '9': [
+    {'1': 1, '2': 2},
+  ],
+  '10': ['timestamp_us'],
 };
 
 /// Descriptor for `LeadLagPriceTick`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List leadLagPriceTickDescriptor = $convert.base64Decode(
-    'ChBMZWFkTGFnUHJpY2VUaWNrEiEKDHRpbWVzdGFtcF91cxgBIAEoBFILdGltZXN0YW1wVXMSFA'
-    'oFcHJpY2UYAiABKAFSBXByaWNlEhoKCHF1YW50aXR5GAMgASgDUghxdWFudGl0eRISCgRzaWRl'
-    'GAQgASgJUgRzaWRl');
+    'ChBMZWFkTGFnUHJpY2VUaWNrEhQKBXByaWNlGAIgASgBUgVwcmljZRIaCghxdWFudGl0eRgDIA'
+    'EoA1IIcXVhbnRpdHkSEgoEc2lkZRgEIAEoCVIEc2lkZRIuCgR0aW1lGAUgASgLMhouZ29vZ2xl'
+    'LnByb3RvYnVmLlRpbWVzdGFtcFIEdGltZUoECAEQAlIMdGltZXN0YW1wX3Vz');
 
 @$core.Deprecated('Use leadLagTradeRecordDescriptor instead')
 const LeadLagTradeRecord$json = {

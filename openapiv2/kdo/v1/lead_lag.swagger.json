@@ -572,14 +572,6 @@
             "pattern": "leadLags/[^/]+"
           },
           {
-            "name": "tradeTimestampUs",
-            "description": "트리거 발생 타임스탬프 (마이크로초, KST)",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
             "name": "windowBeforeMs",
             "description": "트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)",
             "in": "query",
@@ -594,6 +586,14 @@
             "required": false,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "triggerTime",
+            "description": "트리거 발생 타임스탬프 (UTC)",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [
@@ -699,11 +699,6 @@
     "lead_lagLeadLagPriceTick": {
       "type": "object",
       "properties": {
-        "timestampUs": {
-          "type": "string",
-          "format": "uint64",
-          "title": "타임스탬프 (마이크로초)"
-        },
         "price": {
           "type": "number",
           "format": "double",
@@ -717,6 +712,11 @@
         "side": {
           "type": "string",
           "title": "매수/매도 구분 (BID/ASK, 호가 mid이면 빈 문자열)"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "타임스탬프 (UTC)"
         }
       },
       "title": "가격 틱 데이터 (시각화용)"
@@ -841,11 +841,6 @@
           },
           "title": "ETF 가격 틱 (시간순)"
         },
-        "triggerTimestampUs": {
-          "type": "string",
-          "format": "uint64",
-          "title": "트리거 시점 (마이크로초)"
-        },
         "signal": {
           "$ref": "#/definitions/lead_lagLeadLagSignalInfo",
           "title": "해당 시그널 정보"
@@ -869,6 +864,11 @@
           "type": "number",
           "format": "double",
           "title": "윈도우 내 ETF 가격 변동률 (%)"
+        },
+        "triggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "트리거 시점 (UTC)"
         }
       },
       "title": "체결 시점 전후 가격 컨텍스트 응답"

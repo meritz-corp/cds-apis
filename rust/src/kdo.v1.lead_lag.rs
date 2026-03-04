@@ -282,15 +282,15 @@ pub struct GetLeadLagTradeContextRequest {
     /// 리소스 이름 (lead_lags/{id})
     #[prost(string, tag="1")]
     pub lead_lag: ::prost::alloc::string::String,
-    /// 트리거 발생 타임스탬프 (마이크로초, KST)
-    #[prost(uint64, tag="2")]
-    pub trade_timestamp_us: u64,
     /// 트리거 전 조회 윈도우 (밀리초, default: 30000 = 30초)
     #[prost(uint64, optional, tag="3")]
     pub window_before_ms: ::core::option::Option<u64>,
     /// 트리거 후 조회 윈도우 (밀리초, default: 10000 = 10초)
     #[prost(uint64, optional, tag="4")]
     pub window_after_ms: ::core::option::Option<u64>,
+    /// 트리거 발생 타임스탬프 (UTC)
+    #[prost(message, optional, tag="5")]
+    pub trigger_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// 체결 시점 전후 가격 컨텍스트 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -302,9 +302,6 @@ pub struct LeadLagTradeContext {
     /// ETF 가격 틱 (시간순)
     #[prost(message, repeated, tag="2")]
     pub etf_ticks: ::prost::alloc::vec::Vec<LeadLagPriceTick>,
-    /// 트리거 시점 (마이크로초)
-    #[prost(uint64, tag="3")]
-    pub trigger_timestamp_us: u64,
     /// 해당 시그널 정보
     #[prost(message, optional, tag="4")]
     pub signal: ::core::option::Option<LeadLagSignalInfo>,
@@ -320,14 +317,14 @@ pub struct LeadLagTradeContext {
     /// 윈도우 내 ETF 가격 변동률 (%)
     #[prost(double, tag="8")]
     pub etf_price_change_pct: f64,
+    /// 트리거 시점 (UTC)
+    #[prost(message, optional, tag="9")]
+    pub trigger_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// 가격 틱 데이터 (시각화용)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LeadLagPriceTick {
-    /// 타임스탬프 (마이크로초)
-    #[prost(uint64, tag="1")]
-    pub timestamp_us: u64,
     /// 가격 (체결가 또는 mid price)
     #[prost(double, tag="2")]
     pub price: f64,
@@ -337,6 +334,9 @@ pub struct LeadLagPriceTick {
     /// 매수/매도 구분 (BID/ASK, 호가 mid이면 빈 문자열)
     #[prost(string, tag="4")]
     pub side: ::prost::alloc::string::String,
+    /// 타임스탬프 (UTC)
+    #[prost(message, optional, tag="5")]
+    pub time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 // ============================================================================
 // Trade History (DB 영구 저장 체결 기록)
