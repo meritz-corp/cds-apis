@@ -1332,6 +1332,132 @@ class StreamMmStatusRequest extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 }
 
+/// CreateMm
+class CreateMmRequest extends $pb.GeneratedMessage {
+  factory CreateMmRequest({
+    $core.String? symbol,
+    MmConfiguration? config,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (config != null) result.config = config;
+    return result;
+  }
+
+  CreateMmRequest._();
+
+  factory CreateMmRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CreateMmRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateMmRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOM<MmConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MmConfiguration.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateMmRequest clone() => CreateMmRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateMmRequest copyWith(void Function(CreateMmRequest) updates) => super.copyWith((message) => updates(message as CreateMmRequest)) as CreateMmRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateMmRequest create() => CreateMmRequest._();
+  @$core.override
+  CreateMmRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateMmRequest> createRepeated() => $pb.PbList<CreateMmRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateMmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateMmRequest>(create);
+  static CreateMmRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// MM 설정
+  @$pb.TagNumber(2)
+  MmConfiguration get config => $_getN(1);
+  @$pb.TagNumber(2)
+  set config(MmConfiguration value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConfig() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConfig() => $_clearField(2);
+  @$pb.TagNumber(2)
+  MmConfiguration ensureConfig() => $_ensure(1);
+}
+
+/// UpdateMm
+class UpdateMmRequest extends $pb.GeneratedMessage {
+  factory UpdateMmRequest({
+    $core.String? symbol,
+    MmConfiguration? config,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (config != null) result.config = config;
+    return result;
+  }
+
+  UpdateMmRequest._();
+
+  factory UpdateMmRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateMmRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMmRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOM<MmConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MmConfiguration.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateMmRequest clone() => UpdateMmRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateMmRequest copyWith(void Function(UpdateMmRequest) updates) => super.copyWith((message) => updates(message as UpdateMmRequest)) as UpdateMmRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateMmRequest create() => UpdateMmRequest._();
+  @$core.override
+  UpdateMmRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateMmRequest> createRepeated() => $pb.PbList<UpdateMmRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateMmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateMmRequest>(create);
+  static UpdateMmRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 업데이트할 MM 설정
+  @$pb.TagNumber(2)
+  MmConfiguration get config => $_getN(1);
+  @$pb.TagNumber(2)
+  set config(MmConfiguration value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConfig() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConfig() => $_clearField(2);
+  @$pb.TagNumber(2)
+  MmConfiguration ensureConfig() => $_ensure(1);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

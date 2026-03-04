@@ -277,6 +277,26 @@ func (m *MockMmServiceClient) EXPECT() *MockMmServiceClientMockRecorder {
 	return m.recorder
 }
 
+// CreateMm mocks base method.
+func (m *MockMmServiceClient) CreateMm(ctx context.Context, in *CreateMmRequest, opts ...grpc.CallOption) (*MmEntry, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateMm", varargs...)
+	ret0, _ := ret[0].(*MmEntry)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateMm indicates an expected call of CreateMm.
+func (mr *MockMmServiceClientMockRecorder) CreateMm(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMm", reflect.TypeOf((*MockMmServiceClient)(nil).CreateMm), varargs...)
+}
+
 // GetMmStatus mocks base method.
 func (m *MockMmServiceClient) GetMmStatus(ctx context.Context, in *GetMmStatusRequest, opts ...grpc.CallOption) (*MmStatus, error) {
 	m.ctrl.T.Helper()
@@ -437,6 +457,26 @@ func (mr *MockMmServiceClientMockRecorder) StreamMmStatus(ctx, in interface{}, o
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMmStatus", reflect.TypeOf((*MockMmServiceClient)(nil).StreamMmStatus), varargs...)
 }
 
+// UpdateMm mocks base method.
+func (m *MockMmServiceClient) UpdateMm(ctx context.Context, in *UpdateMmRequest, opts ...grpc.CallOption) (*MmEntry, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateMm", varargs...)
+	ret0, _ := ret[0].(*MmEntry)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateMm indicates an expected call of UpdateMm.
+func (mr *MockMmServiceClientMockRecorder) UpdateMm(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMm", reflect.TypeOf((*MockMmServiceClient)(nil).UpdateMm), varargs...)
+}
+
 // UpdateMmConfig mocks base method.
 func (m *MockMmServiceClient) UpdateMmConfig(ctx context.Context, in *UpdateMmConfigRequest, opts ...grpc.CallOption) (*MmConfiguration, error) {
 	m.ctrl.T.Helper()
@@ -478,6 +518,21 @@ func NewMockMmServiceServer(ctrl *gomock.Controller) *MockMmServiceServer {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockMmServiceServer) EXPECT() *MockMmServiceServerMockRecorder {
 	return m.recorder
+}
+
+// CreateMm mocks base method.
+func (m *MockMmServiceServer) CreateMm(ctx context.Context, in *CreateMmRequest) (*MmEntry, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateMm", ctx, in)
+	ret0, _ := ret[0].(*MmEntry)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateMm indicates an expected call of CreateMm.
+func (mr *MockMmServiceServerMockRecorder) CreateMm(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMm", reflect.TypeOf((*MockMmServiceServer)(nil).CreateMm), ctx, in)
 }
 
 // GetMmStatus mocks base method.
@@ -597,6 +652,21 @@ func (m *MockMmServiceServer) StreamMmStatus(blob *StreamMmStatusRequest, server
 func (mr *MockMmServiceServerMockRecorder) StreamMmStatus(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMmStatus", reflect.TypeOf((*MockMmServiceServer)(nil).StreamMmStatus), blob, server)
+}
+
+// UpdateMm mocks base method.
+func (m *MockMmServiceServer) UpdateMm(ctx context.Context, in *UpdateMmRequest) (*MmEntry, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateMm", ctx, in)
+	ret0, _ := ret[0].(*MmEntry)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateMm indicates an expected call of UpdateMm.
+func (mr *MockMmServiceServerMockRecorder) UpdateMm(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMm", reflect.TypeOf((*MockMmServiceServer)(nil).UpdateMm), ctx, in)
 }
 
 // UpdateMmConfig mocks base method.

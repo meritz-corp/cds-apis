@@ -24,6 +24,10 @@ const _ = grpc.SupportPackageIsVersion7
 type MmServiceClient interface {
 	// MM 목록 조회
 	ListMm(ctx context.Context, in *ListMmRequest, opts ...grpc.CallOption) (*ListMmResponse, error)
+	// MM 설정 생성 (DB 저장)
+	CreateMm(ctx context.Context, in *CreateMmRequest, opts ...grpc.CallOption) (*MmEntry, error)
+	// MM 설정 업데이트 (DB 저장)
+	UpdateMm(ctx context.Context, in *UpdateMmRequest, opts ...grpc.CallOption) (*MmEntry, error)
 	// MM 상태 조회
 	GetMmStatus(ctx context.Context, in *GetMmStatusRequest, opts ...grpc.CallOption) (*MmStatus, error)
 	// MM 시작 (심볼 등록)
@@ -53,6 +57,24 @@ func NewMmServiceClient(cc grpc.ClientConnInterface) MmServiceClient {
 func (c *mmServiceClient) ListMm(ctx context.Context, in *ListMmRequest, opts ...grpc.CallOption) (*ListMmResponse, error) {
 	out := new(ListMmResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/ListMm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mmServiceClient) CreateMm(ctx context.Context, in *CreateMmRequest, opts ...grpc.CallOption) (*MmEntry, error) {
+	out := new(MmEntry)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/CreateMm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mmServiceClient) UpdateMm(ctx context.Context, in *UpdateMmRequest, opts ...grpc.CallOption) (*MmEntry, error) {
+	out := new(MmEntry)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/UpdateMm", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -160,6 +182,10 @@ func (x *mmServiceStreamMmStatusClient) Recv() (*MmStatus, error) {
 type MmServiceServer interface {
 	// MM 목록 조회
 	ListMm(context.Context, *ListMmRequest) (*ListMmResponse, error)
+	// MM 설정 생성 (DB 저장)
+	CreateMm(context.Context, *CreateMmRequest) (*MmEntry, error)
+	// MM 설정 업데이트 (DB 저장)
+	UpdateMm(context.Context, *UpdateMmRequest) (*MmEntry, error)
 	// MM 상태 조회
 	GetMmStatus(context.Context, *GetMmStatusRequest) (*MmStatus, error)
 	// MM 시작 (심볼 등록)
@@ -185,6 +211,12 @@ type UnimplementedMmServiceServer struct {
 
 func (UnimplementedMmServiceServer) ListMm(context.Context, *ListMmRequest) (*ListMmResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMm not implemented")
+}
+func (UnimplementedMmServiceServer) CreateMm(context.Context, *CreateMmRequest) (*MmEntry, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMm not implemented")
+}
+func (UnimplementedMmServiceServer) UpdateMm(context.Context, *UpdateMmRequest) (*MmEntry, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMm not implemented")
 }
 func (UnimplementedMmServiceServer) GetMmStatus(context.Context, *GetMmStatusRequest) (*MmStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMmStatus not implemented")
@@ -237,6 +269,42 @@ func _MmService_ListMm_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MmServiceServer).ListMm(ctx, req.(*ListMmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MmService_CreateMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MmServiceServer).CreateMm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MmService/CreateMm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MmServiceServer).CreateMm(ctx, req.(*CreateMmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MmService_UpdateMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MmServiceServer).UpdateMm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MmService/UpdateMm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MmServiceServer).UpdateMm(ctx, req.(*UpdateMmRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -398,6 +466,14 @@ var MmService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMm",
 			Handler:    _MmService_ListMm_Handler,
+		},
+		{
+			MethodName: "CreateMm",
+			Handler:    _MmService_CreateMm_Handler,
+		},
+		{
+			MethodName: "UpdateMm",
+			Handler:    _MmService_UpdateMm_Handler,
 		},
 		{
 			MethodName: "GetMmStatus",

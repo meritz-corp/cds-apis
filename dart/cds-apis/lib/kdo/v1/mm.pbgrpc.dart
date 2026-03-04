@@ -38,6 +38,16 @@ class MmServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listMm, request, options: options);
   }
 
+  /// MM 설정 생성 (DB 저장)
+  $grpc.ResponseFuture<$0.MmEntry> createMm($0.CreateMmRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$createMm, request, options: options);
+  }
+
+  /// MM 설정 업데이트 (DB 저장)
+  $grpc.ResponseFuture<$0.MmEntry> updateMm($0.UpdateMmRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateMm, request, options: options);
+  }
+
   /// MM 상태 조회
   $grpc.ResponseFuture<$0.MmStatus> getMmStatus($0.GetMmStatusRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getMmStatus, request, options: options);
@@ -84,6 +94,14 @@ class MmServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MmService/ListMm',
       ($0.ListMmRequest value) => value.writeToBuffer(),
       $0.ListMmResponse.fromBuffer);
+  static final _$createMm = $grpc.ClientMethod<$0.CreateMmRequest, $0.MmEntry>(
+      '/kdo.v1.mm.MmService/CreateMm',
+      ($0.CreateMmRequest value) => value.writeToBuffer(),
+      $0.MmEntry.fromBuffer);
+  static final _$updateMm = $grpc.ClientMethod<$0.UpdateMmRequest, $0.MmEntry>(
+      '/kdo.v1.mm.MmService/UpdateMm',
+      ($0.UpdateMmRequest value) => value.writeToBuffer(),
+      $0.MmEntry.fromBuffer);
   static final _$getMmStatus = $grpc.ClientMethod<$0.GetMmStatusRequest, $0.MmStatus>(
       '/kdo.v1.mm.MmService/GetMmStatus',
       ($0.GetMmStatusRequest value) => value.writeToBuffer(),
@@ -130,6 +148,20 @@ abstract class MmServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListMmRequest.fromBuffer(value),
         ($0.ListMmResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CreateMmRequest, $0.MmEntry>(
+        'CreateMm',
+        createMm_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CreateMmRequest.fromBuffer(value),
+        ($0.MmEntry value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateMmRequest, $0.MmEntry>(
+        'UpdateMm',
+        updateMm_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateMmRequest.fromBuffer(value),
+        ($0.MmEntry value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetMmStatusRequest, $0.MmStatus>(
         'GetMmStatus',
         getMmStatus_Pre,
@@ -193,6 +225,18 @@ abstract class MmServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListMmResponse> listMm($grpc.ServiceCall call, $0.ListMmRequest request);
+
+  $async.Future<$0.MmEntry> createMm_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateMmRequest> $request) async {
+    return createMm($call, await $request);
+  }
+
+  $async.Future<$0.MmEntry> createMm($grpc.ServiceCall call, $0.CreateMmRequest request);
+
+  $async.Future<$0.MmEntry> updateMm_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMmRequest> $request) async {
+    return updateMm($call, await $request);
+  }
+
+  $async.Future<$0.MmEntry> updateMm($grpc.ServiceCall call, $0.UpdateMmRequest request);
 
   $async.Future<$0.MmStatus> getMmStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmStatusRequest> $request) async {
     return getMmStatus($call, await $request);

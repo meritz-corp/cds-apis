@@ -19,6 +19,22 @@ abstract final class MmService {
     kdov1mm.ListMmResponse.new,
   );
 
+  /// MM 설정 생성 (DB 저장)
+  static const createMm = connect.Spec(
+    '/$name/CreateMm',
+    connect.StreamType.unary,
+    kdov1mm.CreateMmRequest.new,
+    kdov1mm.MmEntry.new,
+  );
+
+  /// MM 설정 업데이트 (DB 저장)
+  static const updateMm = connect.Spec(
+    '/$name/UpdateMm',
+    connect.StreamType.unary,
+    kdov1mm.UpdateMmRequest.new,
+    kdov1mm.MmEntry.new,
+  );
+
   /// MM 상태 조회
   static const getMmStatus = connect.Spec(
     '/$name/GetMmStatus',

@@ -239,6 +239,28 @@ pub struct StreamMmStatusRequest {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
+/// CreateMm
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateMmRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// MM 설정
+    #[prost(message, optional, tag="2")]
+    pub config: ::core::option::Option<MmConfiguration>,
+}
+/// UpdateMm
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateMmRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 업데이트할 MM 설정
+    #[prost(message, optional, tag="2")]
+    pub config: ::core::option::Option<MmConfiguration>,
+}
 // ============================================================================
 // Enums
 // ============================================================================

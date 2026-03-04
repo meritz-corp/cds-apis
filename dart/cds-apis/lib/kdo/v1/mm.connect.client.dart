@@ -27,6 +27,42 @@ extension type MmServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// MM 설정 생성 (DB 저장)
+  Future<kdov1mm.MmEntry> createMm(
+    kdov1mm.CreateMmRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MmService.createMm,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// MM 설정 업데이트 (DB 저장)
+  Future<kdov1mm.MmEntry> updateMm(
+    kdov1mm.UpdateMmRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MmService.updateMm,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// MM 상태 조회
   Future<kdov1mm.MmStatus> getMmStatus(
     kdov1mm.GetMmStatusRequest input, {

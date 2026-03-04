@@ -106,6 +106,50 @@ pub mod mm_service_client {
                 .insert(GrpcMethod::new("kdo.v1.mm.MmService", "ListMm"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn create_mm(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MmService/CreateMm",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "CreateMm"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn update_mm(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MmService/UpdateMm",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "UpdateMm"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn get_mm_status(
             &mut self,
             request: impl tonic::IntoRequest<super::GetMmStatusRequest>,
@@ -313,6 +357,14 @@ pub mod mm_service_server {
             &self,
             request: tonic::Request<super::ListMmRequest>,
         ) -> std::result::Result<tonic::Response<super::ListMmResponse>, tonic::Status>;
+        async fn create_mm(
+            &self,
+            request: tonic::Request<super::CreateMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status>;
+        async fn update_mm(
+            &self,
+            request: tonic::Request<super::UpdateMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status>;
         async fn get_mm_status(
             &self,
             request: tonic::Request<super::GetMmStatusRequest>,
@@ -462,6 +514,96 @@ pub mod mm_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = ListMmSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MmService/CreateMm" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateMmSvc<T: MmService>(pub Arc<T>);
+                    impl<
+                        T: MmService,
+                    > tonic::server::UnaryService<super::CreateMmRequest>
+                    for CreateMmSvc<T> {
+                        type Response = super::MmEntry;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CreateMmRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MmService>::create_mm(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CreateMmSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MmService/UpdateMm" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateMmSvc<T: MmService>(pub Arc<T>);
+                    impl<
+                        T: MmService,
+                    > tonic::server::UnaryService<super::UpdateMmRequest>
+                    for UpdateMmSvc<T> {
+                        type Response = super::MmEntry;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateMmRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MmService>::update_mm(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UpdateMmSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

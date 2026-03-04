@@ -330,3 +330,31 @@ const StreamMmStatusRequest$json = {
 final $typed_data.Uint8List streamMmStatusRequestDescriptor = $convert.base64Decode(
     'ChVTdHJlYW1NbVN0YXR1c1JlcXVlc3QSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
 
+@$core.Deprecated('Use createMmRequestDescriptor instead')
+const CreateMmRequest$json = {
+  '1': 'CreateMmRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '8': {}, '10': 'config'},
+  ],
+};
+
+/// Descriptor for `CreateMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createMmRequestDescriptor = $convert.base64Decode(
+    'Cg9DcmVhdGVNbVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSOAoGY29uZm'
+    'lnGAIgASgLMhoua2RvLnYxLm1tLk1tQ29uZmlndXJhdGlvbkIE4kEBAlIGY29uZmln');
+
+@$core.Deprecated('Use updateMmRequestDescriptor instead')
+const UpdateMmRequest$json = {
+  '1': 'UpdateMmRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '8': {}, '10': 'config'},
+  ],
+};
+
+/// Descriptor for `UpdateMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateMmRequestDescriptor = $convert.base64Decode(
+    'Cg9VcGRhdGVNbVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSOAoGY29uZm'
+    'lnGAIgASgLMhoua2RvLnYxLm1tLk1tQ29uZmlndXJhdGlvbkIE4kEBAlIGY29uZmln');
+

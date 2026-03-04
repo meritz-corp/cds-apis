@@ -19,6 +19,24 @@ service MmService {
     option (google.api.method_signature) = "";
   }
 
+  // MM 설정 생성 (DB 저장)
+  rpc CreateMm(CreateMmRequest) returns (MmEntry) {
+    option (google.api.http) = {
+      post: "/v1/mm"
+      body: "*"
+    };
+    option (google.api.method_signature) = "symbol,config";
+  }
+
+  // MM 설정 업데이트 (DB 저장)
+  rpc UpdateMm(UpdateMmRequest) returns (MmEntry) {
+    option (google.api.http) = {
+      patch: "/v1/mm/{symbol=*}"
+      body: "*"
+    };
+    option (google.api.method_signature) = "symbol,config";
+  }
+
   // MM 상태 조회
   rpc GetMmStatus(GetMmStatusRequest) returns (MmStatus) {
     option (google.api.http) = {
@@ -292,4 +310,22 @@ message UpdateMmConfigRequest {
 message StreamMmStatusRequest {
   // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
   string symbol = 1;
+}
+
+// CreateMm
+message CreateMmRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // MM 설정
+  MmConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// UpdateMm
+message UpdateMmRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 업데이트할 MM 설정
+  MmConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
 }

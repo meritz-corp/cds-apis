@@ -54,6 +54,88 @@
         "tags": [
           "MmService"
         ]
+      },
+      "post": {
+        "summary": "MM 설정 생성 (DB 저장)",
+        "operationId": "MmService_CreateMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMmEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mmCreateMmRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}": {
+      "patch": {
+        "summary": "MM 설정 업데이트 (DB 저장)",
+        "operationId": "MmService_UpdateMm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMmEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "$ref": "#/definitions/mmMmConfiguration",
+                  "title": "업데이트할 MM 설정"
+                }
+              },
+              "title": "UpdateMm",
+              "required": [
+                "config"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
       }
     },
     "/v1/mm/{symbol}/config": {
@@ -400,6 +482,24 @@
     }
   },
   "definitions": {
+    "mmCreateMmRequest": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "config": {
+          "$ref": "#/definitions/mmMmConfiguration",
+          "title": "MM 설정"
+        }
+      },
+      "title": "CreateMm",
+      "required": [
+        "symbol",
+        "config"
+      ]
+    },
     "mmListMmResponse": {
       "type": "object",
       "properties": {
