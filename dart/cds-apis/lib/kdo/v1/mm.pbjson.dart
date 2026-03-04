@@ -73,6 +73,7 @@ const MmConfiguration$json = {
     {'1': 'skew', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmSkewConfig', '10': 'skew'},
     {'1': 'trade_analyzer', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmTradeAnalyzerConfig', '10': 'tradeAnalyzer'},
     {'1': 'screening', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmScreeningConfig', '10': 'screening'},
+    {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
   ],
 };
 
@@ -81,7 +82,8 @@ final $typed_data.Uint8List mmConfigurationDescriptor = $convert.base64Decode(
     'Cg9NbUNvbmZpZ3VyYXRpb24SGAoHcHJpY2luZxgBIAEoCVIHcHJpY2luZxIrCgRza2V3GAIgAS'
     'gLMhcua2RvLnYxLm1tLk1tU2tld0NvbmZpZ1IEc2tldxJHCg50cmFkZV9hbmFseXplchgDIAEo'
     'CzIgLmtkby52MS5tbS5NbVRyYWRlQW5hbHl6ZXJDb25maWdSDXRyYWRlQW5hbHl6ZXISOgoJc2'
-    'NyZWVuaW5nGAQgASgLMhwua2RvLnYxLm1tLk1tU2NyZWVuaW5nQ29uZmlnUglzY3JlZW5pbmc=');
+    'NyZWVuaW5nGAQgASgLMhwua2RvLnYxLm1tLk1tU2NyZWVuaW5nQ29uZmlnUglzY3JlZW5pbmcS'
+    'GwoJdGlja19zaXplGAUgASgDUgh0aWNrU2l6ZQ==');
 
 @$core.Deprecated('Use mmSkewConfigDescriptor instead')
 const MmSkewConfig$json = {

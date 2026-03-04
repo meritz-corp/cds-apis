@@ -54,6 +54,9 @@ pub struct MmConfiguration {
     /// Screening 설정
     #[prost(message, optional, tag="4")]
     pub screening: ::core::option::Option<MmScreeningConfig>,
+    /// ETF tick size (Price internal representation)
+    #[prost(int64, tag="5")]
+    pub tick_size: i64,
 }
 /// Skew 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

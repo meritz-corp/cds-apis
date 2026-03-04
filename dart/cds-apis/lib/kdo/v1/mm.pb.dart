@@ -206,12 +206,14 @@ class MmConfiguration extends $pb.GeneratedMessage {
     MmSkewConfig? skew,
     MmTradeAnalyzerConfig? tradeAnalyzer,
     MmScreeningConfig? screening,
+    $fixnum.Int64? tickSize,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
     if (skew != null) result.skew = skew;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
     if (screening != null) result.screening = screening;
+    if (tickSize != null) result.tickSize = tickSize;
     return result;
   }
 
@@ -225,6 +227,7 @@ class MmConfiguration extends $pb.GeneratedMessage {
     ..aOM<MmSkewConfig>(2, _omitFieldNames ? '' : 'skew', subBuilder: MmSkewConfig.create)
     ..aOM<MmTradeAnalyzerConfig>(3, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: MmTradeAnalyzerConfig.create)
     ..aOM<MmScreeningConfig>(4, _omitFieldNames ? '' : 'screening', subBuilder: MmScreeningConfig.create)
+    ..aInt64(5, _omitFieldNames ? '' : 'tickSize')
     ..hasRequiredFields = false
   ;
 
@@ -290,6 +293,16 @@ class MmConfiguration extends $pb.GeneratedMessage {
   void clearScreening() => $_clearField(4);
   @$pb.TagNumber(4)
   MmScreeningConfig ensureScreening() => $_ensure(3);
+
+  /// ETF tick size (Price internal representation)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get tickSize => $_getI64(4);
+  @$pb.TagNumber(5)
+  set tickSize($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasTickSize() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTickSize() => $_clearField(5);
 }
 
 /// Skew 설정

@@ -455,6 +455,9 @@ impl serde::Serialize for MmConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmConfiguration", len)?;
         if true {
             struct_ser.serialize_field("pricing", &self.pricing)?;
@@ -467,6 +470,11 @@ impl serde::Serialize for MmConfiguration {
         }
         if let Some(v) = self.screening.as_ref() {
             struct_ser.serialize_field("screening", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
         }
         struct_ser.end()
     }
@@ -483,6 +491,8 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
             "trade_analyzer",
             "tradeAnalyzer",
             "screening",
+            "tick_size",
+            "tickSize",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -491,6 +501,7 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
             Skew,
             TradeAnalyzer,
             Screening,
+            TickSize,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -517,6 +528,7 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                             "skew" => Ok(GeneratedField::Skew),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
                             "screening" => Ok(GeneratedField::Screening),
+                            "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -540,6 +552,7 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                 let mut skew__ = None;
                 let mut trade_analyzer__ = None;
                 let mut screening__ = None;
+                let mut tick_size__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pricing => {
@@ -566,6 +579,14 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                             }
                             screening__ = map_.next_value()?;
                         }
+                        GeneratedField::TickSize => {
+                            if tick_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickSize"));
+                            }
+                            tick_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -576,6 +597,7 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                     skew: skew__,
                     trade_analyzer: trade_analyzer__,
                     screening: screening__,
+                    tick_size: tick_size__.unwrap_or_default(),
                 })
             }
         }

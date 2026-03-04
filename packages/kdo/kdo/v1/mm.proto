@@ -162,6 +162,9 @@ message MmConfiguration {
 
   // Screening 설정
   MmScreeningConfig screening = 4;
+
+  // ETF tick size (Price internal representation)
+  int64 tick_size = 5;
 }
 
 // Skew 설정
