@@ -338,6 +338,26 @@ func (mr *MockLeadLagServiceClientMockRecorder) GetLeadLag(ctx, in interface{}, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLag", reflect.TypeOf((*MockLeadLagServiceClient)(nil).GetLeadLag), varargs...)
 }
 
+// GetLeadLagExecutionSummary mocks base method.
+func (m *MockLeadLagServiceClient) GetLeadLagExecutionSummary(ctx context.Context, in *GetLeadLagExecutionSummaryRequest, opts ...grpc.CallOption) (*LeadLagExecutionSummaryResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetLeadLagExecutionSummary", varargs...)
+	ret0, _ := ret[0].(*LeadLagExecutionSummaryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLeadLagExecutionSummary indicates an expected call of GetLeadLagExecutionSummary.
+func (mr *MockLeadLagServiceClientMockRecorder) GetLeadLagExecutionSummary(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagExecutionSummary", reflect.TypeOf((*MockLeadLagServiceClient)(nil).GetLeadLagExecutionSummary), varargs...)
+}
+
 // GetLeadLagTrade mocks base method.
 func (m *MockLeadLagServiceClient) GetLeadLagTrade(ctx context.Context, in *GetLeadLagTradeRequest, opts ...grpc.CallOption) (*LeadLagTradeRecord, error) {
 	m.ctrl.T.Helper()
@@ -584,6 +604,21 @@ func (m *MockLeadLagServiceServer) GetLeadLag(ctx context.Context, in *GetLeadLa
 func (mr *MockLeadLagServiceServerMockRecorder) GetLeadLag(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLag", reflect.TypeOf((*MockLeadLagServiceServer)(nil).GetLeadLag), ctx, in)
+}
+
+// GetLeadLagExecutionSummary mocks base method.
+func (m *MockLeadLagServiceServer) GetLeadLagExecutionSummary(ctx context.Context, in *GetLeadLagExecutionSummaryRequest) (*LeadLagExecutionSummaryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLeadLagExecutionSummary", ctx, in)
+	ret0, _ := ret[0].(*LeadLagExecutionSummaryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLeadLagExecutionSummary indicates an expected call of GetLeadLagExecutionSummary.
+func (mr *MockLeadLagServiceServerMockRecorder) GetLeadLagExecutionSummary(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagExecutionSummary", reflect.TypeOf((*MockLeadLagServiceServer)(nil).GetLeadLagExecutionSummary), ctx, in)
 }
 
 // GetLeadLagTrade mocks base method.

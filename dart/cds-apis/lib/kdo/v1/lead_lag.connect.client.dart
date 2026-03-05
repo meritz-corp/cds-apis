@@ -226,4 +226,22 @@ extension type LeadLagServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// LeadLag 체결 현황 요약 (선물/ETF 레그별 체결수량, 체결단가, 순매매)
+  Future<kdov1lead_lag.LeadLagExecutionSummaryResponse> getLeadLagExecutionSummary(
+    kdov1lead_lag.GetLeadLagExecutionSummaryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LeadLagService.getLeadLagExecutionSummary,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

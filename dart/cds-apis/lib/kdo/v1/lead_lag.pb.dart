@@ -935,6 +935,232 @@ class StopLeadLagResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(2);
 }
 
+/// 체결 현황 요약 요청
+class GetLeadLagExecutionSummaryRequest extends $pb.GeneratedMessage {
+  factory GetLeadLagExecutionSummaryRequest({
+    $core.String? leadLag,
+  }) {
+    final result = create();
+    if (leadLag != null) result.leadLag = leadLag;
+    return result;
+  }
+
+  GetLeadLagExecutionSummaryRequest._();
+
+  factory GetLeadLagExecutionSummaryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetLeadLagExecutionSummaryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLeadLagExecutionSummaryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'leadLag')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetLeadLagExecutionSummaryRequest clone() => GetLeadLagExecutionSummaryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetLeadLagExecutionSummaryRequest copyWith(void Function(GetLeadLagExecutionSummaryRequest) updates) => super.copyWith((message) => updates(message as GetLeadLagExecutionSummaryRequest)) as GetLeadLagExecutionSummaryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetLeadLagExecutionSummaryRequest create() => GetLeadLagExecutionSummaryRequest._();
+  @$core.override
+  GetLeadLagExecutionSummaryRequest createEmptyInstance() => create();
+  static $pb.PbList<GetLeadLagExecutionSummaryRequest> createRepeated() => $pb.PbList<GetLeadLagExecutionSummaryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetLeadLagExecutionSummaryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLeadLagExecutionSummaryRequest>(create);
+  static GetLeadLagExecutionSummaryRequest? _defaultInstance;
+
+  /// 리소스 이름 (lead_lags/{id})
+  @$pb.TagNumber(1)
+  $core.String get leadLag => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set leadLag($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLeadLag() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLeadLag() => $_clearField(1);
+}
+
+/// 체결 현황 요약 응답
+class LeadLagExecutionSummaryResponse extends $pb.GeneratedMessage {
+  factory LeadLagExecutionSummaryResponse({
+    LeadLagLegExecutionSummary? futures,
+    LeadLagLegExecutionSummary? etf,
+    $core.double? spread,
+  }) {
+    final result = create();
+    if (futures != null) result.futures = futures;
+    if (etf != null) result.etf = etf;
+    if (spread != null) result.spread = spread;
+    return result;
+  }
+
+  LeadLagExecutionSummaryResponse._();
+
+  factory LeadLagExecutionSummaryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LeadLagExecutionSummaryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeadLagExecutionSummaryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aOM<LeadLagLegExecutionSummary>(1, _omitFieldNames ? '' : 'futures', subBuilder: LeadLagLegExecutionSummary.create)
+    ..aOM<LeadLagLegExecutionSummary>(2, _omitFieldNames ? '' : 'etf', subBuilder: LeadLagLegExecutionSummary.create)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'spread', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LeadLagExecutionSummaryResponse clone() => LeadLagExecutionSummaryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LeadLagExecutionSummaryResponse copyWith(void Function(LeadLagExecutionSummaryResponse) updates) => super.copyWith((message) => updates(message as LeadLagExecutionSummaryResponse)) as LeadLagExecutionSummaryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LeadLagExecutionSummaryResponse create() => LeadLagExecutionSummaryResponse._();
+  @$core.override
+  LeadLagExecutionSummaryResponse createEmptyInstance() => create();
+  static $pb.PbList<LeadLagExecutionSummaryResponse> createRepeated() => $pb.PbList<LeadLagExecutionSummaryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static LeadLagExecutionSummaryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LeadLagExecutionSummaryResponse>(create);
+  static LeadLagExecutionSummaryResponse? _defaultInstance;
+
+  /// 선물 레그 체결 현황
+  @$pb.TagNumber(1)
+  LeadLagLegExecutionSummary get futures => $_getN(0);
+  @$pb.TagNumber(1)
+  set futures(LeadLagLegExecutionSummary value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFutures() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFutures() => $_clearField(1);
+  @$pb.TagNumber(1)
+  LeadLagLegExecutionSummary ensureFutures() => $_ensure(0);
+
+  /// ETF 레그 체결 현황
+  @$pb.TagNumber(2)
+  LeadLagLegExecutionSummary get etf => $_getN(1);
+  @$pb.TagNumber(2)
+  set etf(LeadLagLegExecutionSummary value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasEtf() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEtf() => $_clearField(2);
+  @$pb.TagNumber(2)
+  LeadLagLegExecutionSummary ensureEtf() => $_ensure(1);
+
+  /// 스프레드 (선물-ETF 체결단가 차이)
+  @$pb.TagNumber(3)
+  $core.double get spread => $_getN(2);
+  @$pb.TagNumber(3)
+  set spread($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSpread() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSpread() => $_clearField(3);
+}
+
+/// 개별 레그 체결 현황
+class LeadLagLegExecutionSummary extends $pb.GeneratedMessage {
+  factory LeadLagLegExecutionSummary({
+    $fixnum.Int64? sellFilledQty,
+    $fixnum.Int64? buyFilledQty,
+    $core.double? sellAvgPrice,
+    $core.double? buyAvgPrice,
+    $fixnum.Int64? netQty,
+  }) {
+    final result = create();
+    if (sellFilledQty != null) result.sellFilledQty = sellFilledQty;
+    if (buyFilledQty != null) result.buyFilledQty = buyFilledQty;
+    if (sellAvgPrice != null) result.sellAvgPrice = sellAvgPrice;
+    if (buyAvgPrice != null) result.buyAvgPrice = buyAvgPrice;
+    if (netQty != null) result.netQty = netQty;
+    return result;
+  }
+
+  LeadLagLegExecutionSummary._();
+
+  factory LeadLagLegExecutionSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LeadLagLegExecutionSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeadLagLegExecutionSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'sellFilledQty')
+    ..aInt64(2, _omitFieldNames ? '' : 'buyFilledQty')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'sellAvgPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'buyAvgPrice', $pb.PbFieldType.OD)
+    ..aInt64(5, _omitFieldNames ? '' : 'netQty')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LeadLagLegExecutionSummary clone() => LeadLagLegExecutionSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LeadLagLegExecutionSummary copyWith(void Function(LeadLagLegExecutionSummary) updates) => super.copyWith((message) => updates(message as LeadLagLegExecutionSummary)) as LeadLagLegExecutionSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LeadLagLegExecutionSummary create() => LeadLagLegExecutionSummary._();
+  @$core.override
+  LeadLagLegExecutionSummary createEmptyInstance() => create();
+  static $pb.PbList<LeadLagLegExecutionSummary> createRepeated() => $pb.PbList<LeadLagLegExecutionSummary>();
+  @$core.pragma('dart2js:noInline')
+  static LeadLagLegExecutionSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LeadLagLegExecutionSummary>(create);
+  static LeadLagLegExecutionSummary? _defaultInstance;
+
+  /// 매도 체결수량
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get sellFilledQty => $_getI64(0);
+  @$pb.TagNumber(1)
+  set sellFilledQty($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSellFilledQty() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSellFilledQty() => $_clearField(1);
+
+  /// 매수 체결수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get buyFilledQty => $_getI64(1);
+  @$pb.TagNumber(2)
+  set buyFilledQty($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBuyFilledQty() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBuyFilledQty() => $_clearField(2);
+
+  /// 매도 평균 체결단가
+  @$pb.TagNumber(3)
+  $core.double get sellAvgPrice => $_getN(2);
+  @$pb.TagNumber(3)
+  set sellAvgPrice($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSellAvgPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSellAvgPrice() => $_clearField(3);
+
+  /// 매수 평균 체결단가
+  @$pb.TagNumber(4)
+  $core.double get buyAvgPrice => $_getN(3);
+  @$pb.TagNumber(4)
+  set buyAvgPrice($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBuyAvgPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBuyAvgPrice() => $_clearField(4);
+
+  /// 순매매 (매수체결수량 - 매도체결수량)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get netQty => $_getI64(4);
+  @$pb.TagNumber(5)
+  set netQty($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasNetQty() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearNetQty() => $_clearField(5);
+}
+
 /// LeadLag 실시간 상태 스트리밍 요청
 class StreamLeadLagStatusRequest extends $pb.GeneratedMessage {
   factory StreamLeadLagStatusRequest({
@@ -1281,14 +1507,12 @@ class LeadLagSignalInfo extends $pb.GeneratedMessage {
 /// Price buffer 상태 정보
 class LeadLagPriceBufferInfo extends $pb.GeneratedMessage {
   factory LeadLagPriceBufferInfo({
-    $core.double? windowHigh,
-    $core.double? windowLow,
-    $core.double? currentMid,
+    $core.double? windowAskLow,
+    $core.double? windowBidHigh,
   }) {
     final result = create();
-    if (windowHigh != null) result.windowHigh = windowHigh;
-    if (windowLow != null) result.windowLow = windowLow;
-    if (currentMid != null) result.currentMid = currentMid;
+    if (windowAskLow != null) result.windowAskLow = windowAskLow;
+    if (windowBidHigh != null) result.windowBidHigh = windowBidHigh;
     return result;
   }
 
@@ -1298,9 +1522,8 @@ class LeadLagPriceBufferInfo extends $pb.GeneratedMessage {
   factory LeadLagPriceBufferInfo.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeadLagPriceBufferInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'windowHigh', $pb.PbFieldType.OD)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'windowLow', $pb.PbFieldType.OD)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'currentMid', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'windowAskLow', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'windowBidHigh', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1321,35 +1544,25 @@ class LeadLagPriceBufferInfo extends $pb.GeneratedMessage {
   static LeadLagPriceBufferInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LeadLagPriceBufferInfo>(create);
   static LeadLagPriceBufferInfo? _defaultInstance;
 
-  /// 윈도우 내 최고가
+  /// 윈도우 내 ask 최저가 (매도 스파이크 감지용)
   @$pb.TagNumber(2)
-  $core.double get windowHigh => $_getN(0);
+  $core.double get windowAskLow => $_getN(0);
   @$pb.TagNumber(2)
-  set windowHigh($core.double value) => $_setDouble(0, value);
+  set windowAskLow($core.double value) => $_setDouble(0, value);
   @$pb.TagNumber(2)
-  $core.bool hasWindowHigh() => $_has(0);
+  $core.bool hasWindowAskLow() => $_has(0);
   @$pb.TagNumber(2)
-  void clearWindowHigh() => $_clearField(2);
+  void clearWindowAskLow() => $_clearField(2);
 
-  /// 윈도우 내 최저가
+  /// 윈도우 내 bid 최고가 (매수 드롭 감지용)
   @$pb.TagNumber(3)
-  $core.double get windowLow => $_getN(1);
+  $core.double get windowBidHigh => $_getN(1);
   @$pb.TagNumber(3)
-  set windowLow($core.double value) => $_setDouble(1, value);
+  set windowBidHigh($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasWindowLow() => $_has(1);
+  $core.bool hasWindowBidHigh() => $_has(1);
   @$pb.TagNumber(3)
-  void clearWindowLow() => $_clearField(3);
-
-  /// 현재 mid price
-  @$pb.TagNumber(4)
-  $core.double get currentMid => $_getN(2);
-  @$pb.TagNumber(4)
-  set currentMid($core.double value) => $_setDouble(2, value);
-  @$pb.TagNumber(4)
-  $core.bool hasCurrentMid() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearCurrentMid() => $_clearField(4);
+  void clearWindowBidHigh() => $_clearField(3);
 }
 
 /// 체결 시점 전후 가격 컨텍스트 조회 요청

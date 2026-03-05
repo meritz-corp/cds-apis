@@ -95,6 +95,11 @@ class LeadLagServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getLeadLagTrade, request, options: options);
   }
 
+  /// LeadLag 체결 현황 요약 (선물/ETF 레그별 체결수량, 체결단가, 순매매)
+  $grpc.ResponseFuture<$0.LeadLagExecutionSummaryResponse> getLeadLagExecutionSummary($0.GetLeadLagExecutionSummaryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getLeadLagExecutionSummary, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getLeadLag = $grpc.ClientMethod<$0.GetLeadLagRequest, $0.LeadLag>(
@@ -145,6 +150,10 @@ class LeadLagServiceClient extends $grpc.Client {
       '/kdo.v1.lead_lag.LeadLagService/GetLeadLagTrade',
       ($0.GetLeadLagTradeRequest value) => value.writeToBuffer(),
       $0.LeadLagTradeRecord.fromBuffer);
+  static final _$getLeadLagExecutionSummary = $grpc.ClientMethod<$0.GetLeadLagExecutionSummaryRequest, $0.LeadLagExecutionSummaryResponse>(
+      '/kdo.v1.lead_lag.LeadLagService/GetLeadLagExecutionSummary',
+      ($0.GetLeadLagExecutionSummaryRequest value) => value.writeToBuffer(),
+      $0.LeadLagExecutionSummaryResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lead_lag.LeadLagService')
@@ -236,6 +245,13 @@ abstract class LeadLagServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetLeadLagTradeRequest.fromBuffer(value),
         ($0.LeadLagTradeRecord value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetLeadLagExecutionSummaryRequest, $0.LeadLagExecutionSummaryResponse>(
+        'GetLeadLagExecutionSummary',
+        getLeadLagExecutionSummary_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetLeadLagExecutionSummaryRequest.fromBuffer(value),
+        ($0.LeadLagExecutionSummaryResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LeadLag> getLeadLag_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagRequest> $request) async {
@@ -309,5 +325,11 @@ abstract class LeadLagServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.LeadLagTradeRecord> getLeadLagTrade($grpc.ServiceCall call, $0.GetLeadLagTradeRequest request);
+
+  $async.Future<$0.LeadLagExecutionSummaryResponse> getLeadLagExecutionSummary_Pre($grpc.ServiceCall $call, $async.Future<$0.GetLeadLagExecutionSummaryRequest> $request) async {
+    return getLeadLagExecutionSummary($call, await $request);
+  }
+
+  $async.Future<$0.LeadLagExecutionSummaryResponse> getLeadLagExecutionSummary($grpc.ServiceCall call, $0.GetLeadLagExecutionSummaryRequest request);
 
 }

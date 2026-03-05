@@ -108,4 +108,12 @@ abstract final class LeadLagService {
     kdov1lead_lag.GetLeadLagTradeRequest.new,
     kdov1lead_lag.LeadLagTradeRecord.new,
   );
+
+  /// LeadLag 체결 현황 요약 (선물/ETF 레그별 체결수량, 체결단가, 순매매)
+  static const getLeadLagExecutionSummary = connect.Spec(
+    '/$name/GetLeadLagExecutionSummary',
+    connect.StreamType.unary,
+    kdov1lead_lag.GetLeadLagExecutionSummaryRequest.new,
+    kdov1lead_lag.LeadLagExecutionSummaryResponse.new,
+  );
 }

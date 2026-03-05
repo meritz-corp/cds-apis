@@ -182,6 +182,52 @@ pub struct StopLeadLagResponse {
     pub message: ::prost::alloc::string::String,
 }
 // ============================================================================
+// Execution Summary (체결 현황 요약)
+// ============================================================================
+
+/// 체결 현황 요약 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLeadLagExecutionSummaryRequest {
+    /// 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+}
+/// 체결 현황 요약 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LeadLagExecutionSummaryResponse {
+    /// 선물 레그 체결 현황
+    #[prost(message, optional, tag="1")]
+    pub futures: ::core::option::Option<LeadLagLegExecutionSummary>,
+    /// ETF 레그 체결 현황
+    #[prost(message, optional, tag="2")]
+    pub etf: ::core::option::Option<LeadLagLegExecutionSummary>,
+    /// 스프레드 (선물-ETF 체결단가 차이)
+    #[prost(double, optional, tag="3")]
+    pub spread: ::core::option::Option<f64>,
+}
+/// 개별 레그 체결 현황
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LeadLagLegExecutionSummary {
+    /// 매도 체결수량
+    #[prost(int64, tag="1")]
+    pub sell_filled_qty: i64,
+    /// 매수 체결수량
+    #[prost(int64, tag="2")]
+    pub buy_filled_qty: i64,
+    /// 매도 평균 체결단가
+    #[prost(double, optional, tag="3")]
+    pub sell_avg_price: ::core::option::Option<f64>,
+    /// 매수 평균 체결단가
+    #[prost(double, optional, tag="4")]
+    pub buy_avg_price: ::core::option::Option<f64>,
+    /// 순매매 (매수체결수량 - 매도체결수량)
+    #[prost(int64, tag="5")]
+    pub net_qty: i64,
+}
+// ============================================================================
 // Streaming Status Messages
 // ============================================================================
 
@@ -258,15 +304,12 @@ pub struct LeadLagSignalInfo {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LeadLagPriceBufferInfo {
-    /// 윈도우 내 최고가
+    /// 윈도우 내 ask 최저가 (매도 스파이크 감지용)
     #[prost(double, optional, tag="2")]
-    pub window_high: ::core::option::Option<f64>,
-    /// 윈도우 내 최저가
+    pub window_ask_low: ::core::option::Option<f64>,
+    /// 윈도우 내 bid 최고가 (매수 드롭 감지용)
     #[prost(double, optional, tag="3")]
-    pub window_low: ::core::option::Option<f64>,
-    /// 현재 mid price
-    #[prost(double, optional, tag="4")]
-    pub current_mid: ::core::option::Option<f64>,
+    pub window_bid_high: ::core::option::Option<f64>,
 }
 // ============================================================================
 // Trade Context (체결 시각화용 가격 컨텍스트)

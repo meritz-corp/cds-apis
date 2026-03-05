@@ -400,6 +400,36 @@ pub mod lead_lag_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn get_lead_lag_execution_summary(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetLeadLagExecutionSummaryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::LeadLagExecutionSummaryResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lead_lag.LeadLagService/GetLeadLagExecutionSummary",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.lead_lag.LeadLagService",
+                        "GetLeadLagExecutionSummary",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -482,6 +512,13 @@ pub mod lead_lag_service_server {
             request: tonic::Request<super::GetLeadLagTradeRequest>,
         ) -> std::result::Result<
             tonic::Response<super::LeadLagTradeRecord>,
+            tonic::Status,
+        >;
+        async fn get_lead_lag_execution_summary(
+            &self,
+            request: tonic::Request<super::GetLeadLagExecutionSummaryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::LeadLagExecutionSummaryResponse>,
             tonic::Status,
         >;
     }
@@ -1102,6 +1139,58 @@ pub mod lead_lag_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetLeadLagTradeSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lead_lag.LeadLagService/GetLeadLagExecutionSummary" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetLeadLagExecutionSummarySvc<T: LeadLagService>(pub Arc<T>);
+                    impl<
+                        T: LeadLagService,
+                    > tonic::server::UnaryService<
+                        super::GetLeadLagExecutionSummaryRequest,
+                    > for GetLeadLagExecutionSummarySvc<T> {
+                        type Response = super::LeadLagExecutionSummaryResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::GetLeadLagExecutionSummaryRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LeadLagService>::get_lead_lag_execution_summary(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetLeadLagExecutionSummarySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

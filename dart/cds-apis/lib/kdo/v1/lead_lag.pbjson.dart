@@ -249,6 +249,63 @@ final $typed_data.Uint8List stopLeadLagResponseDescriptor = $convert.base64Decod
     'ChNTdG9wTGVhZExhZ1Jlc3BvbnNlEjMKBXN0YXRlGAEgASgOMh0ua2RvLnYxLmxlYWRfbGFnLk'
     'xlYWRMYWdTdGF0ZVIFc3RhdGUSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZQ==');
 
+@$core.Deprecated('Use getLeadLagExecutionSummaryRequestDescriptor instead')
+const GetLeadLagExecutionSummaryRequest$json = {
+  '1': 'GetLeadLagExecutionSummaryRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+  ],
+};
+
+/// Descriptor for `GetLeadLagExecutionSummaryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getLeadLagExecutionSummaryRequestDescriptor = $convert.base64Decode(
+    'CiFHZXRMZWFkTGFnRXhlY3V0aW9uU3VtbWFyeVJlcXVlc3QSOwoIbGVhZF9sYWcYASABKAlCIO'
+    'JBAQL6QRkKF2tkby5jZHNhcGlzLnh5ei9MZWFkTGFnUgdsZWFkTGFn');
+
+@$core.Deprecated('Use leadLagExecutionSummaryResponseDescriptor instead')
+const LeadLagExecutionSummaryResponse$json = {
+  '1': 'LeadLagExecutionSummaryResponse',
+  '2': [
+    {'1': 'futures', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagLegExecutionSummary', '10': 'futures'},
+    {'1': 'etf', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagLegExecutionSummary', '10': 'etf'},
+    {'1': 'spread', '3': 3, '4': 1, '5': 1, '9': 0, '10': 'spread', '17': true},
+  ],
+  '8': [
+    {'1': '_spread'},
+  ],
+};
+
+/// Descriptor for `LeadLagExecutionSummaryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagExecutionSummaryResponseDescriptor = $convert.base64Decode(
+    'Ch9MZWFkTGFnRXhlY3V0aW9uU3VtbWFyeVJlc3BvbnNlEkUKB2Z1dHVyZXMYASABKAsyKy5rZG'
+    '8udjEubGVhZF9sYWcuTGVhZExhZ0xlZ0V4ZWN1dGlvblN1bW1hcnlSB2Z1dHVyZXMSPQoDZXRm'
+    'GAIgASgLMisua2RvLnYxLmxlYWRfbGFnLkxlYWRMYWdMZWdFeGVjdXRpb25TdW1tYXJ5UgNldG'
+    'YSGwoGc3ByZWFkGAMgASgBSABSBnNwcmVhZIgBAUIJCgdfc3ByZWFk');
+
+@$core.Deprecated('Use leadLagLegExecutionSummaryDescriptor instead')
+const LeadLagLegExecutionSummary$json = {
+  '1': 'LeadLagLegExecutionSummary',
+  '2': [
+    {'1': 'sell_filled_qty', '3': 1, '4': 1, '5': 3, '10': 'sellFilledQty'},
+    {'1': 'buy_filled_qty', '3': 2, '4': 1, '5': 3, '10': 'buyFilledQty'},
+    {'1': 'sell_avg_price', '3': 3, '4': 1, '5': 1, '9': 0, '10': 'sellAvgPrice', '17': true},
+    {'1': 'buy_avg_price', '3': 4, '4': 1, '5': 1, '9': 1, '10': 'buyAvgPrice', '17': true},
+    {'1': 'net_qty', '3': 5, '4': 1, '5': 3, '10': 'netQty'},
+  ],
+  '8': [
+    {'1': '_sell_avg_price'},
+    {'1': '_buy_avg_price'},
+  ],
+};
+
+/// Descriptor for `LeadLagLegExecutionSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leadLagLegExecutionSummaryDescriptor = $convert.base64Decode(
+    'ChpMZWFkTGFnTGVnRXhlY3V0aW9uU3VtbWFyeRImCg9zZWxsX2ZpbGxlZF9xdHkYASABKANSDX'
+    'NlbGxGaWxsZWRRdHkSJAoOYnV5X2ZpbGxlZF9xdHkYAiABKANSDGJ1eUZpbGxlZFF0eRIpCg5z'
+    'ZWxsX2F2Z19wcmljZRgDIAEoAUgAUgxzZWxsQXZnUHJpY2WIAQESJwoNYnV5X2F2Z19wcmljZR'
+    'gEIAEoAUgBUgtidXlBdmdQcmljZYgBARIXCgduZXRfcXR5GAUgASgDUgZuZXRRdHlCEQoPX3Nl'
+    'bGxfYXZnX3ByaWNlQhAKDl9idXlfYXZnX3ByaWNl');
+
 @$core.Deprecated('Use streamLeadLagStatusRequestDescriptor instead')
 const StreamLeadLagStatusRequest$json = {
   '1': 'StreamLeadLagStatusRequest',
@@ -328,26 +385,24 @@ final $typed_data.Uint8List leadLagSignalInfoDescriptor = $convert.base64Decode(
 const LeadLagPriceBufferInfo$json = {
   '1': 'LeadLagPriceBufferInfo',
   '2': [
-    {'1': 'window_high', '3': 2, '4': 1, '5': 1, '9': 0, '10': 'windowHigh', '17': true},
-    {'1': 'window_low', '3': 3, '4': 1, '5': 1, '9': 1, '10': 'windowLow', '17': true},
-    {'1': 'current_mid', '3': 4, '4': 1, '5': 1, '9': 2, '10': 'currentMid', '17': true},
+    {'1': 'window_ask_low', '3': 2, '4': 1, '5': 1, '9': 0, '10': 'windowAskLow', '17': true},
+    {'1': 'window_bid_high', '3': 3, '4': 1, '5': 1, '9': 1, '10': 'windowBidHigh', '17': true},
   ],
   '8': [
-    {'1': '_window_high'},
-    {'1': '_window_low'},
-    {'1': '_current_mid'},
+    {'1': '_window_ask_low'},
+    {'1': '_window_bid_high'},
   ],
   '9': [
     {'1': 1, '2': 2},
+    {'1': 4, '2': 5},
   ],
 };
 
 /// Descriptor for `LeadLagPriceBufferInfo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List leadLagPriceBufferInfoDescriptor = $convert.base64Decode(
-    'ChZMZWFkTGFnUHJpY2VCdWZmZXJJbmZvEiQKC3dpbmRvd19oaWdoGAIgASgBSABSCndpbmRvd0'
-    'hpZ2iIAQESIgoKd2luZG93X2xvdxgDIAEoAUgBUgl3aW5kb3dMb3eIAQESJAoLY3VycmVudF9t'
-    'aWQYBCABKAFIAlIKY3VycmVudE1pZIgBAUIOCgxfd2luZG93X2hpZ2hCDQoLX3dpbmRvd19sb3'
-    'dCDgoMX2N1cnJlbnRfbWlkSgQIARAC');
+    'ChZMZWFkTGFnUHJpY2VCdWZmZXJJbmZvEikKDndpbmRvd19hc2tfbG93GAIgASgBSABSDHdpbm'
+    'Rvd0Fza0xvd4gBARIrCg93aW5kb3dfYmlkX2hpZ2gYAyABKAFIAVINd2luZG93QmlkSGlnaIgB'
+    'AUIRCg9fd2luZG93X2Fza19sb3dCEgoQX3dpbmRvd19iaWRfaGlnaEoECAEQAkoECAQQBQ==');
 
 @$core.Deprecated('Use getLeadLagTradeContextRequestDescriptor instead')
 const GetLeadLagTradeContextRequest$json = {

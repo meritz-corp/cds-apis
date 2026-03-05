@@ -113,6 +113,15 @@ service LeadLagService {
       get: "/v1/{lead_lag=lead_lags/*}/trades/{trade_id}"
     };
   }
+
+  // LeadLag 체결 현황 요약 (선물/ETF 레그별 체결수량, 체결단가, 순매매)
+  rpc GetLeadLagExecutionSummary(GetLeadLagExecutionSummaryRequest) returns (LeadLagExecutionSummaryResponse) {
+    option (google.api.http) = {
+      get: "/v1/{lead_lag=lead_lags/*}:executionSummary"
+    };
+    option (google.api.method_signature) = "lead_lag";
+  }
+
 }
 
 // ============================================================================
@@ -326,6 +335,51 @@ message StopLeadLagResponse {
 }
 
 // ============================================================================
+// Execution Summary (체결 현황 요약)
+// ============================================================================
+
+// 체결 현황 요약 요청
+message GetLeadLagExecutionSummaryRequest {
+  // 리소스 이름 (lead_lags/{id})
+  string lead_lag = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/LeadLag"
+    }
+  ];
+}
+
+// 체결 현황 요약 응답
+message LeadLagExecutionSummaryResponse {
+  // 선물 레그 체결 현황
+  LeadLagLegExecutionSummary futures = 1;
+
+  // ETF 레그 체결 현황
+  LeadLagLegExecutionSummary etf = 2;
+
+  // 스프레드 (선물-ETF 체결단가 차이)
+  optional double spread = 3;
+}
+
+// 개별 레그 체결 현황
+message LeadLagLegExecutionSummary {
+  // 매도 체결수량
+  int64 sell_filled_qty = 1;
+
+  // 매수 체결수량
+  int64 buy_filled_qty = 2;
+
+  // 매도 평균 체결단가
+  optional double sell_avg_price = 3;
+
+  // 매수 평균 체결단가
+  optional double buy_avg_price = 4;
+
+  // 순매매 (매수체결수량 - 매도체결수량)
+  int64 net_qty = 5;
+}
+
+// ============================================================================
 // Streaming Status Messages
 // ============================================================================
 
@@ -409,15 +463,13 @@ message LeadLagSignalInfo {
 // Price buffer 상태 정보
 message LeadLagPriceBufferInfo {
   reserved 1;  // tick_count removed
+  reserved 4;  // current_mid removed
 
-  // 윈도우 내 최고가
-  optional double window_high = 2;
+  // 윈도우 내 ask 최저가 (매도 스파이크 감지용)
+  optional double window_ask_low = 2;
 
-  // 윈도우 내 최저가
-  optional double window_low = 3;
-
-  // 현재 mid price
-  optional double current_mid = 4;
+  // 윈도우 내 bid 최고가 (매수 드롭 감지용)
+  optional double window_bid_high = 3;
 }
 
 // ============================================================================

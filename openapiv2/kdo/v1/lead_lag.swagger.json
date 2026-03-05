@@ -368,6 +368,39 @@
         ]
       }
     },
+    "/v1/{leadLag}:executionSummary": {
+      "get": {
+        "summary": "LeadLag 체결 현황 요약 (선물/ETF 레그별 체결수량, 체결단가, 순매매)",
+        "operationId": "LeadLagService_GetLeadLagExecutionSummary",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLagExecutionSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    },
     "/v1/{leadLag}:setActive": {
       "post": {
         "summary": "LeadLag 활성화/비활성화",
@@ -646,23 +679,68 @@
         "etfFundCode"
       ]
     },
+    "lead_lagLeadLagExecutionSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "futures": {
+          "$ref": "#/definitions/lead_lagLeadLagLegExecutionSummary",
+          "title": "선물 레그 체결 현황"
+        },
+        "etf": {
+          "$ref": "#/definitions/lead_lagLeadLagLegExecutionSummary",
+          "title": "ETF 레그 체결 현황"
+        },
+        "spread": {
+          "type": "number",
+          "format": "double",
+          "title": "스프레드 (선물-ETF 체결단가 차이)"
+        }
+      },
+      "title": "체결 현황 요약 응답"
+    },
+    "lead_lagLeadLagLegExecutionSummary": {
+      "type": "object",
+      "properties": {
+        "sellFilledQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 체결수량"
+        },
+        "buyFilledQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 체결수량"
+        },
+        "sellAvgPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균 체결단가"
+        },
+        "buyAvgPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 평균 체결단가"
+        },
+        "netQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "순매매 (매수체결수량 - 매도체결수량)"
+        }
+      },
+      "title": "개별 레그 체결 현황"
+    },
     "lead_lagLeadLagPriceBufferInfo": {
       "type": "object",
       "properties": {
-        "windowHigh": {
+        "windowAskLow": {
           "type": "number",
           "format": "double",
-          "title": "윈도우 내 최고가"
+          "title": "윈도우 내 ask 최저가 (매도 스파이크 감지용)"
         },
-        "windowLow": {
+        "windowBidHigh": {
           "type": "number",
           "format": "double",
-          "title": "윈도우 내 최저가"
-        },
-        "currentMid": {
-          "type": "number",
-          "format": "double",
-          "title": "현재 mid price"
+          "title": "윈도우 내 bid 최고가 (매수 드롭 감지용)"
         }
       },
       "title": "Price buffer 상태 정보"
