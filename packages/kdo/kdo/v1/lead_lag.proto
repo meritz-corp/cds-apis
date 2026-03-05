@@ -408,8 +408,7 @@ message LeadLagSignalInfo {
 
 // Price buffer 상태 정보
 message LeadLagPriceBufferInfo {
-  // 버퍼 내 틱 수
-  uint64 tick_count = 1;
+  reserved 1;  // tick_count removed
 
   // 윈도우 내 최고가
   optional double window_high = 2;

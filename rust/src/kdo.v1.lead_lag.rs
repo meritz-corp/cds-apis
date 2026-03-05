@@ -258,9 +258,6 @@ pub struct LeadLagSignalInfo {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LeadLagPriceBufferInfo {
-    /// 버퍼 내 틱 수
-    #[prost(uint64, tag="1")]
-    pub tick_count: u64,
     /// 윈도우 내 최고가
     #[prost(double, optional, tag="2")]
     pub window_high: ::core::option::Option<f64>,

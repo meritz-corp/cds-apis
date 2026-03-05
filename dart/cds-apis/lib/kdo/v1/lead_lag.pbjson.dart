@@ -328,7 +328,6 @@ final $typed_data.Uint8List leadLagSignalInfoDescriptor = $convert.base64Decode(
 const LeadLagPriceBufferInfo$json = {
   '1': 'LeadLagPriceBufferInfo',
   '2': [
-    {'1': 'tick_count', '3': 1, '4': 1, '5': 4, '10': 'tickCount'},
     {'1': 'window_high', '3': 2, '4': 1, '5': 1, '9': 0, '10': 'windowHigh', '17': true},
     {'1': 'window_low', '3': 3, '4': 1, '5': 1, '9': 1, '10': 'windowLow', '17': true},
     {'1': 'current_mid', '3': 4, '4': 1, '5': 1, '9': 2, '10': 'currentMid', '17': true},
@@ -338,14 +337,17 @@ const LeadLagPriceBufferInfo$json = {
     {'1': '_window_low'},
     {'1': '_current_mid'},
   ],
+  '9': [
+    {'1': 1, '2': 2},
+  ],
 };
 
 /// Descriptor for `LeadLagPriceBufferInfo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List leadLagPriceBufferInfoDescriptor = $convert.base64Decode(
-    'ChZMZWFkTGFnUHJpY2VCdWZmZXJJbmZvEh0KCnRpY2tfY291bnQYASABKARSCXRpY2tDb3VudB'
-    'IkCgt3aW5kb3dfaGlnaBgCIAEoAUgAUgp3aW5kb3dIaWdoiAEBEiIKCndpbmRvd19sb3cYAyAB'
-    'KAFIAVIJd2luZG93TG93iAEBEiQKC2N1cnJlbnRfbWlkGAQgASgBSAJSCmN1cnJlbnRNaWSIAQ'
-    'FCDgoMX3dpbmRvd19oaWdoQg0KC193aW5kb3dfbG93Qg4KDF9jdXJyZW50X21pZA==');
+    'ChZMZWFkTGFnUHJpY2VCdWZmZXJJbmZvEiQKC3dpbmRvd19oaWdoGAIgASgBSABSCndpbmRvd0'
+    'hpZ2iIAQESIgoKd2luZG93X2xvdxgDIAEoAUgBUgl3aW5kb3dMb3eIAQESJAoLY3VycmVudF9t'
+    'aWQYBCABKAFIAlIKY3VycmVudE1pZIgBAUIOCgxfd2luZG93X2hpZ2hCDQoLX3dpbmRvd19sb3'
+    'dCDgoMX2N1cnJlbnRfbWlkSgQIARAC');
 
 @$core.Deprecated('Use getLeadLagTradeContextRequestDescriptor instead')
 const GetLeadLagTradeContextRequest$json = {

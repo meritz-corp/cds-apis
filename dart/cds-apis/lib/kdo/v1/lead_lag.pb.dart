@@ -1281,13 +1281,11 @@ class LeadLagSignalInfo extends $pb.GeneratedMessage {
 /// Price buffer 상태 정보
 class LeadLagPriceBufferInfo extends $pb.GeneratedMessage {
   factory LeadLagPriceBufferInfo({
-    $fixnum.Int64? tickCount,
     $core.double? windowHigh,
     $core.double? windowLow,
     $core.double? currentMid,
   }) {
     final result = create();
-    if (tickCount != null) result.tickCount = tickCount;
     if (windowHigh != null) result.windowHigh = windowHigh;
     if (windowLow != null) result.windowLow = windowLow;
     if (currentMid != null) result.currentMid = currentMid;
@@ -1300,7 +1298,6 @@ class LeadLagPriceBufferInfo extends $pb.GeneratedMessage {
   factory LeadLagPriceBufferInfo.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeadLagPriceBufferInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'tickCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'windowHigh', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'windowLow', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'currentMid', $pb.PbFieldType.OD)
@@ -1324,43 +1321,33 @@ class LeadLagPriceBufferInfo extends $pb.GeneratedMessage {
   static LeadLagPriceBufferInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LeadLagPriceBufferInfo>(create);
   static LeadLagPriceBufferInfo? _defaultInstance;
 
-  /// 버퍼 내 틱 수
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get tickCount => $_getI64(0);
-  @$pb.TagNumber(1)
-  set tickCount($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasTickCount() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearTickCount() => $_clearField(1);
-
   /// 윈도우 내 최고가
   @$pb.TagNumber(2)
-  $core.double get windowHigh => $_getN(1);
+  $core.double get windowHigh => $_getN(0);
   @$pb.TagNumber(2)
-  set windowHigh($core.double value) => $_setDouble(1, value);
+  set windowHigh($core.double value) => $_setDouble(0, value);
   @$pb.TagNumber(2)
-  $core.bool hasWindowHigh() => $_has(1);
+  $core.bool hasWindowHigh() => $_has(0);
   @$pb.TagNumber(2)
   void clearWindowHigh() => $_clearField(2);
 
   /// 윈도우 내 최저가
   @$pb.TagNumber(3)
-  $core.double get windowLow => $_getN(2);
+  $core.double get windowLow => $_getN(1);
   @$pb.TagNumber(3)
-  set windowLow($core.double value) => $_setDouble(2, value);
+  set windowLow($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasWindowLow() => $_has(2);
+  $core.bool hasWindowLow() => $_has(1);
   @$pb.TagNumber(3)
   void clearWindowLow() => $_clearField(3);
 
   /// 현재 mid price
   @$pb.TagNumber(4)
-  $core.double get currentMid => $_getN(3);
+  $core.double get currentMid => $_getN(2);
   @$pb.TagNumber(4)
-  set currentMid($core.double value) => $_setDouble(3, value);
+  set currentMid($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(4)
-  $core.bool hasCurrentMid() => $_has(3);
+  $core.bool hasCurrentMid() => $_has(2);
   @$pb.TagNumber(4)
   void clearCurrentMid() => $_clearField(4);
 }

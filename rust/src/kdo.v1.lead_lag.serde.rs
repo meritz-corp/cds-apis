@@ -811,15 +811,7 @@ impl serde::Serialize for LeadLagPriceBufferInfo {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagPriceBufferInfo", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("tick_count", ToString::to_string(&self.tick_count).as_str())?;
-        }
         if let Some(v) = self.window_high.as_ref() {
             struct_ser.serialize_field("window_high", v)?;
         }
@@ -839,8 +831,6 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceBufferInfo {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "tick_count",
-            "tickCount",
             "window_high",
             "windowHigh",
             "window_low",
@@ -851,7 +841,6 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceBufferInfo {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            TickCount,
             WindowHigh,
             WindowLow,
             CurrentMid,
@@ -877,7 +866,6 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceBufferInfo {
                         E: serde::de::Error,
                     {
                         match value {
-                            "tickCount" | "tick_count" => Ok(GeneratedField::TickCount),
                             "windowHigh" | "window_high" => Ok(GeneratedField::WindowHigh),
                             "windowLow" | "window_low" => Ok(GeneratedField::WindowLow),
                             "currentMid" | "current_mid" => Ok(GeneratedField::CurrentMid),
@@ -900,20 +888,11 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceBufferInfo {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut tick_count__ = None;
                 let mut window_high__ = None;
                 let mut window_low__ = None;
                 let mut current_mid__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::TickCount => {
-                            if tick_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("tickCount"));
-                            }
-                            tick_count__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::WindowHigh => {
                             if window_high__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("windowHigh"));
@@ -944,7 +923,6 @@ impl<'de> serde::Deserialize<'de> for LeadLagPriceBufferInfo {
                     }
                 }
                 Ok(LeadLagPriceBufferInfo {
-                    tick_count: tick_count__.unwrap_or_default(),
                     window_high: window_high__,
                     window_low: window_low__,
                     current_mid: current_mid__,

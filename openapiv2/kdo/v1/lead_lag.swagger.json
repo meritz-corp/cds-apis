@@ -649,11 +649,6 @@
     "lead_lagLeadLagPriceBufferInfo": {
       "type": "object",
       "properties": {
-        "tickCount": {
-          "type": "string",
-          "format": "uint64",
-          "title": "버퍼 내 틱 수"
-        },
         "windowHigh": {
           "type": "number",
           "format": "double",
