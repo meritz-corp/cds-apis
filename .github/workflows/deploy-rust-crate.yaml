@@ -35,14 +35,20 @@ jobs:
           cargo build --release
           cargo test
 
+      - name: Commit Cargo.lock
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add rust/Cargo.lock
+          git diff --cached --quiet || git commit -m "chore: update Cargo.lock"
+          git push
+
       - name: Publish to crates.io
         working-directory: ./rust
         run: cargo publish --token ${{ secrets.CARGO_TOKEN }}
 
       - name: Tag and release
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git tag v${{ steps.version.outputs.version }}
           git push origin --tags
 
