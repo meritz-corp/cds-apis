@@ -51,6 +51,26 @@ pub struct EtfLp {
     /// 모멘텀 민감도
     #[prost(double, optional, tag="19")]
     pub momentum_sensitivity: ::core::option::Option<f64>,
+    /// 매수/매도 수량 한도
+    #[prost(message, optional, tag="20")]
+    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+}
+/// 매수/매도 수량 한도
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct EtfLpQuantityLimit {
+    /// 매수 수량 하한
+    #[prost(int64, tag="1")]
+    pub min_bid_quantity: i64,
+    /// 매수 수량 상한
+    #[prost(int64, tag="2")]
+    pub max_bid_quantity: i64,
+    /// 매도 수량 하한
+    #[prost(int64, tag="3")]
+    pub min_ask_quantity: i64,
+    /// 매도 수량 상한
+    #[prost(int64, tag="4")]
+    pub max_ask_quantity: i64,
 }
 /// ETF 가격 산출 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -149,6 +169,9 @@ pub struct EtfLpStatus {
     /// 런타임 계산된 모멘텀 매도 호가 조정값
     #[prost(double, optional, tag="21")]
     pub momentum_ask_adjustment: ::core::option::Option<f64>,
+    /// 매수/매도 수량 한도
+    #[prost(message, optional, tag="22")]
+    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -204,6 +227,9 @@ pub struct EtfLpStatusUpdate {
     /// 런타임 계산된 모멘텀 매도 호가 조정값
     #[prost(double, optional, tag="20")]
     pub momentum_ask_adjustment: ::core::option::Option<f64>,
+    /// 매수/매도 수량 한도
+    #[prost(message, optional, tag="21")]
+    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -481,6 +507,9 @@ pub struct UpdateEtfLpRequest {
     /// 모멘텀 민감도
     #[prost(double, optional, tag="14")]
     pub momentum_sensitivity: ::core::option::Option<f64>,
+    /// 매수/매도 수량 한도
+    #[prost(message, optional, tag="15")]
+    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

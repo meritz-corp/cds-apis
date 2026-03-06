@@ -70,6 +70,7 @@ const EtfLp$json = {
     {'1': 'momentum_enabled', '3': 17, '4': 1, '5': 8, '9': 2, '10': 'momentumEnabled', '17': true},
     {'1': 'momentum_window', '3': 18, '4': 1, '5': 13, '9': 3, '10': 'momentumWindow', '17': true},
     {'1': 'momentum_sensitivity', '3': 19, '4': 1, '5': 1, '9': 4, '10': 'momentumSensitivity', '17': true},
+    {'1': 'quantity_limit', '3': 20, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 5, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_bid_adjustment'},
@@ -77,6 +78,7 @@ const EtfLp$json = {
     {'1': '_momentum_enabled'},
     {'1': '_momentum_window'},
     {'1': '_momentum_sensitivity'},
+    {'1': '_quantity_limit'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -96,9 +98,28 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'GBAgASgDUgthc2tRdWFudGl0eRIuChBtb21lbnR1bV9lbmFibGVkGBEgASgISAJSD21vbWVudH'
     'VtRW5hYmxlZIgBARIsCg9tb21lbnR1bV93aW5kb3cYEiABKA1IA1IObW9tZW50dW1XaW5kb3eI'
     'AQESNgoUbW9tZW50dW1fc2Vuc2l0aXZpdHkYEyABKAFIBFITbW9tZW50dW1TZW5zaXRpdml0eY'
-    'gBAUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9l'
-    'bmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5SgQIBx'
-    'AI');
+    'gBARJJCg5xdWFudGl0eV9saW1pdBgUIAEoCzIdLmtkby52MS5scC5FdGZMcFF1YW50aXR5TGlt'
+    'aXRIBVINcXVhbnRpdHlMaW1pdIgBAUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3'
+    'RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVu'
+    'dHVtX3NlbnNpdGl2aXR5QhEKD19xdWFudGl0eV9saW1pdEoECAcQCA==');
+
+@$core.Deprecated('Use etfLpQuantityLimitDescriptor instead')
+const EtfLpQuantityLimit$json = {
+  '1': 'EtfLpQuantityLimit',
+  '2': [
+    {'1': 'min_bid_quantity', '3': 1, '4': 1, '5': 3, '10': 'minBidQuantity'},
+    {'1': 'max_bid_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxBidQuantity'},
+    {'1': 'min_ask_quantity', '3': 3, '4': 1, '5': 3, '10': 'minAskQuantity'},
+    {'1': 'max_ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'maxAskQuantity'},
+  ],
+};
+
+/// Descriptor for `EtfLpQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpQuantityLimitDescriptor = $convert.base64Decode(
+    'ChJFdGZMcFF1YW50aXR5TGltaXQSKAoQbWluX2JpZF9xdWFudGl0eRgBIAEoA1IObWluQmlkUX'
+    'VhbnRpdHkSKAoQbWF4X2JpZF9xdWFudGl0eRgCIAEoA1IObWF4QmlkUXVhbnRpdHkSKAoQbWlu'
+    'X2Fza19xdWFudGl0eRgDIAEoA1IObWluQXNrUXVhbnRpdHkSKAoQbWF4X2Fza19xdWFudGl0eR'
+    'gEIAEoA1IObWF4QXNrUXVhbnRpdHk=');
 
 @$core.Deprecated('Use etfPricingDescriptor instead')
 const EtfPricing$json = {
@@ -173,6 +194,7 @@ const EtfLpStatus$json = {
     {'1': 'momentum_sensitivity', '3': 19, '4': 1, '5': 1, '9': 6, '10': 'momentumSensitivity', '17': true},
     {'1': 'momentum_bid_adjustment', '3': 20, '4': 1, '5': 1, '9': 7, '10': 'momentumBidAdjustment', '17': true},
     {'1': 'momentum_ask_adjustment', '3': 21, '4': 1, '5': 1, '9': 8, '10': 'momentumAskAdjustment', '17': true},
+    {'1': 'quantity_limit', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 9, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_ask_basis'},
@@ -184,6 +206,7 @@ const EtfLpStatus$json = {
     {'1': '_momentum_sensitivity'},
     {'1': '_momentum_bid_adjustment'},
     {'1': '_momentum_ask_adjustment'},
+    {'1': '_quantity_limit'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -206,11 +229,13 @@ final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'R1bV93aW5kb3cYEiABKA1IBVIObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vuc2l0'
     'aXZpdHkYEyABKAFIBlITbW9tZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21lbnR1bV9iaWRfYW'
     'RqdXN0bWVudBgUIAEoAUgHUhVtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOwoXbW9tZW50dW1f'
-    'YXNrX2FkanVzdG1lbnQYFSABKAFICFIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBQgwKCl9hc2'
-    'tfYmFzaXNCDAoKX2JpZF9iYXNpc0IRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3Rt'
-    'ZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVudH'
-    'VtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1bV9iaWRfYWRqdXN0bWVudEIaChhfbW9tZW50dW1f'
-    'YXNrX2FkanVzdG1lbnRKBAgHEAg=');
+    'YXNrX2FkanVzdG1lbnQYFSABKAFICFIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBEkkKDnF1YW'
+    '50aXR5X2xpbWl0GBYgASgLMh0ua2RvLnYxLmxwLkV0ZkxwUXVhbnRpdHlMaW1pdEgJUg1xdWFu'
+    'dGl0eUxpbWl0iAEBQgwKCl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IRCg9fYmlkX2FkanVzdG'
+    '1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1'
+    'bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1bV9iaWRfYWRqdX'
+    'N0bWVudEIaChhfbW9tZW50dW1fYXNrX2FkanVzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0SgQI'
+    'BxAI');
 
 @$core.Deprecated('Use etfLpStatusUpdateDescriptor instead')
 const EtfLpStatusUpdate$json = {
@@ -233,6 +258,7 @@ const EtfLpStatusUpdate$json = {
     {'1': 'momentum_sensitivity', '3': 18, '4': 1, '5': 1, '9': 12, '10': 'momentumSensitivity', '17': true},
     {'1': 'momentum_bid_adjustment', '3': 19, '4': 1, '5': 1, '9': 13, '10': 'momentumBidAdjustment', '17': true},
     {'1': 'momentum_ask_adjustment', '3': 20, '4': 1, '5': 1, '9': 14, '10': 'momentumAskAdjustment', '17': true},
+    {'1': 'quantity_limit', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 15, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_ask_basis'},
@@ -250,6 +276,7 @@ const EtfLpStatusUpdate$json = {
     {'1': '_momentum_sensitivity'},
     {'1': '_momentum_bid_adjustment'},
     {'1': '_momentum_ask_adjustment'},
+    {'1': '_quantity_limit'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -272,12 +299,14 @@ final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
     'cYESABKA1IC1IObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vuc2l0aXZpdHkYEiAB'
     'KAFIDFITbW9tZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21lbnR1bV9iaWRfYWRqdXN0bWVudB'
     'gTIAEoAUgNUhVtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOwoXbW9tZW50dW1fYXNrX2FkanVz'
-    'dG1lbnQYFCABKAFIDlIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBQgwKCl9hc2tfYmFzaXNCDA'
-    'oKX2JpZF9iYXNpc0IICgZfc3RhdGVCCgoIX3ByaWNpbmdCEgoQX2ZpbGxfc3RhdGlzdGljc0IJ'
-    'Cgdfb2Zmc2V0QhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG1lbnRCDwoNX2JpZF'
-    '9xdWFudGl0eUIPCg1fYXNrX3F1YW50aXR5QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21l'
-    'bnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1bV9iaWRfYW'
-    'RqdXN0bWVudEIaChhfbW9tZW50dW1fYXNrX2FkanVzdG1lbnRKBAgHEAg=');
+    'dG1lbnQYFCABKAFIDlIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBEkkKDnF1YW50aXR5X2xpbW'
+    'l0GBUgASgLMh0ua2RvLnYxLmxwLkV0ZkxwUXVhbnRpdHlMaW1pdEgPUg1xdWFudGl0eUxpbWl0'
+    'iAEBQgwKCl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IICgZfc3RhdGVCCgoIX3ByaWNpbmdCEg'
+    'oQX2ZpbGxfc3RhdGlzdGljc0IJCgdfb2Zmc2V0QhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNr'
+    'X2FkanVzdG1lbnRCDwoNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW50aXR5QhMKEV9tb21lbn'
+    'R1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5'
+    'QhoKGF9tb21lbnR1bV9iaWRfYWRqdXN0bWVudEIaChhfbW9tZW50dW1fYXNrX2FkanVzdG1lbn'
+    'RCEQoPX3F1YW50aXR5X2xpbWl0SgQIBxAI');
 
 @$core.Deprecated('Use etfLpOffsetDescriptor instead')
 const EtfLpOffset$json = {
@@ -518,6 +547,7 @@ const UpdateEtfLpRequest$json = {
     {'1': 'momentum_enabled', '3': 12, '4': 1, '5': 8, '9': 8, '10': 'momentumEnabled', '17': true},
     {'1': 'momentum_window', '3': 13, '4': 1, '5': 13, '9': 9, '10': 'momentumWindow', '17': true},
     {'1': 'momentum_sensitivity', '3': 14, '4': 1, '5': 1, '9': 10, '10': 'momentumSensitivity', '17': true},
+    {'1': 'quantity_limit', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 11, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_depth'},
@@ -531,6 +561,7 @@ const UpdateEtfLpRequest$json = {
     {'1': '_momentum_enabled'},
     {'1': '_momentum_window'},
     {'1': '_momentum_sensitivity'},
+    {'1': '_quantity_limit'},
   ],
 };
 
@@ -545,11 +576,13 @@ final $typed_data.Uint8List updateEtfLpRequestDescriptor = $convert.base64Decode
     'IAEoAUgGUg1iaWRBZGp1c3RtZW50iAEBEioKDmFza19hZGp1c3RtZW50GAsgASgBSAdSDWFza0'
     'FkanVzdG1lbnSIAQESLgoQbW9tZW50dW1fZW5hYmxlZBgMIAEoCEgIUg9tb21lbnR1bUVuYWJs'
     'ZWSIAQESLAoPbW9tZW50dW1fd2luZG93GA0gASgNSAlSDm1vbWVudHVtV2luZG93iAEBEjYKFG'
-    '1vbWVudHVtX3NlbnNpdGl2aXR5GA4gASgBSApSE21vbWVudHVtU2Vuc2l0aXZpdHmIAQFCCAoG'
-    'X2RlcHRoQgkKB19vZmZzZXRCDAoKX2Fza19iYXNpc0IMCgpfYmlkX2Jhc2lzQg8KDV9iaWRfcX'
-    'VhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1'
-    'c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbW'
-    'VudHVtX3NlbnNpdGl2aXR5');
+    '1vbWVudHVtX3NlbnNpdGl2aXR5GA4gASgBSApSE21vbWVudHVtU2Vuc2l0aXZpdHmIAQESSQoO'
+    'cXVhbnRpdHlfbGltaXQYDyABKAsyHS5rZG8udjEubHAuRXRmTHBRdWFudGl0eUxpbWl0SAtSDX'
+    'F1YW50aXR5TGltaXSIAQFCCAoGX2RlcHRoQgkKB19vZmZzZXRCDAoKX2Fza19iYXNpc0IMCgpf'
+    'YmlkX2Jhc2lzQg8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIRCg9fYmlkX2Fkan'
+    'VzdG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21l'
+    'bnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhEKD19xdWFudGl0eV9saW1pdA'
+    '==');
 
 @$core.Deprecated('Use getEtfLpStatusRequestDescriptor instead')
 const GetEtfLpStatusRequest$json = {

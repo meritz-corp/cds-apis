@@ -40,6 +40,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.bool? momentumEnabled,
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
+    EtfLpQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -58,6 +59,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
     if (momentumWindow != null) result.momentumWindow = momentumWindow;
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
+    if (quantityLimit != null) result.quantityLimit = quantityLimit;
     return result;
   }
 
@@ -83,6 +85,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..aOB(17, _omitFieldNames ? '' : 'momentumEnabled')
     ..a<$core.int>(18, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
+    ..aOM<EtfLpQuantityLimit>(20, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
@@ -264,6 +267,105 @@ class EtfLp extends $pb.GeneratedMessage {
   $core.bool hasMomentumSensitivity() => $_has(15);
   @$pb.TagNumber(19)
   void clearMomentumSensitivity() => $_clearField(19);
+
+  /// 매수/매도 수량 한도
+  @$pb.TagNumber(20)
+  EtfLpQuantityLimit get quantityLimit => $_getN(16);
+  @$pb.TagNumber(20)
+  set quantityLimit(EtfLpQuantityLimit value) => $_setField(20, value);
+  @$pb.TagNumber(20)
+  $core.bool hasQuantityLimit() => $_has(16);
+  @$pb.TagNumber(20)
+  void clearQuantityLimit() => $_clearField(20);
+  @$pb.TagNumber(20)
+  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(16);
+}
+
+/// 매수/매도 수량 한도
+class EtfLpQuantityLimit extends $pb.GeneratedMessage {
+  factory EtfLpQuantityLimit({
+    $fixnum.Int64? minBidQuantity,
+    $fixnum.Int64? maxBidQuantity,
+    $fixnum.Int64? minAskQuantity,
+    $fixnum.Int64? maxAskQuantity,
+  }) {
+    final result = create();
+    if (minBidQuantity != null) result.minBidQuantity = minBidQuantity;
+    if (maxBidQuantity != null) result.maxBidQuantity = maxBidQuantity;
+    if (minAskQuantity != null) result.minAskQuantity = minAskQuantity;
+    if (maxAskQuantity != null) result.maxAskQuantity = maxAskQuantity;
+    return result;
+  }
+
+  EtfLpQuantityLimit._();
+
+  factory EtfLpQuantityLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLpQuantityLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'minBidQuantity')
+    ..aInt64(2, _omitFieldNames ? '' : 'maxBidQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'minAskQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'maxAskQuantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpQuantityLimit clone() => EtfLpQuantityLimit()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpQuantityLimit copyWith(void Function(EtfLpQuantityLimit) updates) => super.copyWith((message) => updates(message as EtfLpQuantityLimit)) as EtfLpQuantityLimit;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfLpQuantityLimit create() => EtfLpQuantityLimit._();
+  @$core.override
+  EtfLpQuantityLimit createEmptyInstance() => create();
+  static $pb.PbList<EtfLpQuantityLimit> createRepeated() => $pb.PbList<EtfLpQuantityLimit>();
+  @$core.pragma('dart2js:noInline')
+  static EtfLpQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpQuantityLimit>(create);
+  static EtfLpQuantityLimit? _defaultInstance;
+
+  /// 매수 수량 하한
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get minBidQuantity => $_getI64(0);
+  @$pb.TagNumber(1)
+  set minBidQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMinBidQuantity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMinBidQuantity() => $_clearField(1);
+
+  /// 매수 수량 상한
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get maxBidQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set maxBidQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMaxBidQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMaxBidQuantity() => $_clearField(2);
+
+  /// 매도 수량 하한
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get minAskQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set minAskQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMinAskQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMinAskQuantity() => $_clearField(3);
+
+  /// 매도 수량 상한
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get maxAskQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set maxAskQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMaxAskQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMaxAskQuantity() => $_clearField(4);
 }
 
 enum EtfPricing_Method {
@@ -491,6 +593,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     $core.double? momentumSensitivity,
     $core.double? momentumBidAdjustment,
     $core.double? momentumAskAdjustment,
+    EtfLpQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -511,6 +614,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (momentumBidAdjustment != null) result.momentumBidAdjustment = momentumBidAdjustment;
     if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
+    if (quantityLimit != null) result.quantityLimit = quantityLimit;
     return result;
   }
 
@@ -538,6 +642,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..a<$core.double>(20, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(21, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
+    ..aOM<EtfLpQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
@@ -744,6 +849,18 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   $core.bool hasMomentumAskAdjustment() => $_has(17);
   @$pb.TagNumber(21)
   void clearMomentumAskAdjustment() => $_clearField(21);
+
+  /// 매수/매도 수량 한도
+  @$pb.TagNumber(22)
+  EtfLpQuantityLimit get quantityLimit => $_getN(18);
+  @$pb.TagNumber(22)
+  set quantityLimit(EtfLpQuantityLimit value) => $_setField(22, value);
+  @$pb.TagNumber(22)
+  $core.bool hasQuantityLimit() => $_has(18);
+  @$pb.TagNumber(22)
+  void clearQuantityLimit() => $_clearField(22);
+  @$pb.TagNumber(22)
+  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(18);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -766,6 +883,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     $core.double? momentumSensitivity,
     $core.double? momentumBidAdjustment,
     $core.double? momentumAskAdjustment,
+    EtfLpQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -785,6 +903,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (momentumBidAdjustment != null) result.momentumBidAdjustment = momentumBidAdjustment;
     if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
+    if (quantityLimit != null) result.quantityLimit = quantityLimit;
     return result;
   }
 
@@ -811,6 +930,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(20, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
+    ..aOM<EtfLpQuantityLimit>(21, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
@@ -1005,6 +1125,18 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasMomentumAskAdjustment() => $_has(16);
   @$pb.TagNumber(20)
   void clearMomentumAskAdjustment() => $_clearField(20);
+
+  /// 매수/매도 수량 한도
+  @$pb.TagNumber(21)
+  EtfLpQuantityLimit get quantityLimit => $_getN(17);
+  @$pb.TagNumber(21)
+  set quantityLimit(EtfLpQuantityLimit value) => $_setField(21, value);
+  @$pb.TagNumber(21)
+  $core.bool hasQuantityLimit() => $_has(17);
+  @$pb.TagNumber(21)
+  void clearQuantityLimit() => $_clearField(21);
+  @$pb.TagNumber(21)
+  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
 }
 
 /// 자동 offset 조정 설정
@@ -2041,6 +2173,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $core.bool? momentumEnabled,
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
+    EtfLpQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2056,6 +2189,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
     if (momentumWindow != null) result.momentumWindow = momentumWindow;
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
+    if (quantityLimit != null) result.quantityLimit = quantityLimit;
     return result;
   }
 
@@ -2078,6 +2212,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..aOB(12, _omitFieldNames ? '' : 'momentumEnabled')
     ..a<$core.int>(13, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
+    ..aOM<EtfLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
@@ -2227,6 +2362,18 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   $core.bool hasMomentumSensitivity() => $_has(12);
   @$pb.TagNumber(14)
   void clearMomentumSensitivity() => $_clearField(14);
+
+  /// 매수/매도 수량 한도
+  @$pb.TagNumber(15)
+  EtfLpQuantityLimit get quantityLimit => $_getN(13);
+  @$pb.TagNumber(15)
+  set quantityLimit(EtfLpQuantityLimit value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasQuantityLimit() => $_has(13);
+  @$pb.TagNumber(15)
+  void clearQuantityLimit() => $_clearField(15);
+  @$pb.TagNumber(15)
+  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(13);
 }
 
 /// GetEtfLpStatus

@@ -208,6 +208,10 @@
                   "type": "number",
                   "format": "double",
                   "title": "모멘텀 민감도"
+                },
+                "quantityLimit": {
+                  "$ref": "#/definitions/lpEtfLpQuantityLimit",
+                  "title": "매수/매도 수량 한도"
                 }
               },
               "title": "UpdateEtfLp"
@@ -604,6 +608,10 @@
           "type": "number",
           "format": "double",
           "title": "모멘텀 민감도"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/lpEtfLpQuantityLimit",
+          "title": "매수/매도 수량 한도"
         }
       },
       "title": "ETF LP 설정"
@@ -679,6 +687,32 @@
         }
       },
       "title": "자동 offset 조정 설정"
+    },
+    "lpEtfLpQuantityLimit": {
+      "type": "object",
+      "properties": {
+        "minBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 하한"
+        },
+        "maxBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 상한"
+        },
+        "minAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 하한"
+        },
+        "maxAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 상한"
+        }
+      },
+      "title": "매수/매도 수량 한도"
     },
     "lpEtfLpState": {
       "type": "string",
@@ -775,6 +809,10 @@
           "type": "number",
           "format": "double",
           "title": "런타임 계산된 모멘텀 매도 호가 조정값"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/lpEtfLpQuantityLimit",
+          "title": "매수/매도 수량 한도"
         }
       },
       "title": "ETF LP 상태"
@@ -858,6 +896,10 @@
           "type": "number",
           "format": "double",
           "title": "런타임 계산된 모멘텀 매도 호가 조정값"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/lpEtfLpQuantityLimit",
+          "title": "매수/매도 수량 한도"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"

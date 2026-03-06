@@ -151,6 +151,9 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -206,6 +209,9 @@ impl serde::Serialize for EtfLp {
         if let Some(v) = self.momentum_sensitivity.as_ref() {
             struct_ser.serialize_field("momentum_sensitivity", v)?;
         }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -244,6 +250,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "momentumWindow",
             "momentum_sensitivity",
             "momentumSensitivity",
+            "quantity_limit",
+            "quantityLimit",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -264,6 +272,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             MomentumEnabled,
             MomentumWindow,
             MomentumSensitivity,
+            QuantityLimit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -302,6 +311,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
                             "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -337,6 +347,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut momentum_enabled__ = None;
                 let mut momentum_window__ = None;
                 let mut momentum_sensitivity__ = None;
+                let mut quantity_limit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -455,6 +466,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -477,6 +494,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     momentum_enabled: momentum_enabled__,
                     momentum_window: momentum_window__,
                     momentum_sensitivity: momentum_sensitivity__,
+                    quantity_limit: quantity_limit__,
                 })
             }
         }
@@ -933,6 +951,172 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
         deserializer.deserialize_struct("kdo.v1.lp.EtfLpOffset", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for EtfLpQuantityLimit {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpQuantityLimit", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("min_bid_quantity", ToString::to_string(&self.min_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_bid_quantity", ToString::to_string(&self.max_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("min_ask_quantity", ToString::to_string(&self.min_ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_ask_quantity", ToString::to_string(&self.max_ask_quantity).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpQuantityLimit {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "min_bid_quantity",
+            "minBidQuantity",
+            "max_bid_quantity",
+            "maxBidQuantity",
+            "min_ask_quantity",
+            "minAskQuantity",
+            "max_ask_quantity",
+            "maxAskQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            MinBidQuantity,
+            MaxBidQuantity,
+            MinAskQuantity,
+            MaxAskQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "minBidQuantity" | "min_bid_quantity" => Ok(GeneratedField::MinBidQuantity),
+                            "maxBidQuantity" | "max_bid_quantity" => Ok(GeneratedField::MaxBidQuantity),
+                            "minAskQuantity" | "min_ask_quantity" => Ok(GeneratedField::MinAskQuantity),
+                            "maxAskQuantity" | "max_ask_quantity" => Ok(GeneratedField::MaxAskQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpQuantityLimit;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpQuantityLimit")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpQuantityLimit, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut min_bid_quantity__ = None;
+                let mut max_bid_quantity__ = None;
+                let mut min_ask_quantity__ = None;
+                let mut max_ask_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::MinBidQuantity => {
+                            if min_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minBidQuantity"));
+                            }
+                            min_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxBidQuantity => {
+                            if max_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxBidQuantity"));
+                            }
+                            max_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MinAskQuantity => {
+                            if min_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minAskQuantity"));
+                            }
+                            min_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxAskQuantity => {
+                            if max_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxAskQuantity"));
+                            }
+                            max_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpQuantityLimit {
+                    min_bid_quantity: min_bid_quantity__.unwrap_or_default(),
+                    max_bid_quantity: max_bid_quantity__.unwrap_or_default(),
+                    min_ask_quantity: min_ask_quantity__.unwrap_or_default(),
+                    max_ask_quantity: max_ask_quantity__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpQuantityLimit", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for EtfLpState {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1075,6 +1259,9 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -1136,6 +1323,9 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.momentum_ask_adjustment.as_ref() {
             struct_ser.serialize_field("momentum_ask_adjustment", v)?;
         }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1178,6 +1368,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "momentumBidAdjustment",
             "momentum_ask_adjustment",
             "momentumAskAdjustment",
+            "quantity_limit",
+            "quantityLimit",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1200,6 +1392,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             MomentumSensitivity,
             MomentumBidAdjustment,
             MomentumAskAdjustment,
+            QuantityLimit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1240,6 +1433,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
                             "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1277,6 +1471,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut momentum_sensitivity__ = None;
                 let mut momentum_bid_adjustment__ = None;
                 let mut momentum_ask_adjustment__ = None;
+                let mut quantity_limit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1407,6 +1602,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1431,6 +1632,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     momentum_sensitivity: momentum_sensitivity__,
                     momentum_bid_adjustment: momentum_bid_adjustment__,
                     momentum_ask_adjustment: momentum_ask_adjustment__,
+                    quantity_limit: quantity_limit__,
                 })
             }
         }
@@ -1445,6 +1647,9 @@ impl serde::Serialize for EtfLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1554,6 +1759,9 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.momentum_ask_adjustment.as_ref() {
             struct_ser.serialize_field("momentum_ask_adjustment", v)?;
         }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1595,6 +1803,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "momentumBidAdjustment",
             "momentum_ask_adjustment",
             "momentumAskAdjustment",
+            "quantity_limit",
+            "quantityLimit",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1616,6 +1826,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             MomentumSensitivity,
             MomentumBidAdjustment,
             MomentumAskAdjustment,
+            QuantityLimit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1655,6 +1866,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
                             "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1691,6 +1903,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut momentum_sensitivity__ = None;
                 let mut momentum_bid_adjustment__ = None;
                 let mut momentum_ask_adjustment__ = None;
+                let mut quantity_limit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1815,6 +2028,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1838,6 +2057,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     momentum_sensitivity: momentum_sensitivity__,
                     momentum_bid_adjustment: momentum_bid_adjustment__,
                     momentum_ask_adjustment: momentum_ask_adjustment__,
+                    quantity_limit: quantity_limit__,
                 })
             }
         }
@@ -4535,6 +4755,9 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -4579,6 +4802,9 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if let Some(v) = self.momentum_sensitivity.as_ref() {
             struct_ser.serialize_field("momentum_sensitivity", v)?;
         }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4612,6 +4838,8 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "momentumWindow",
             "momentum_sensitivity",
             "momentumSensitivity",
+            "quantity_limit",
+            "quantityLimit",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4629,6 +4857,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             MomentumEnabled,
             MomentumWindow,
             MomentumSensitivity,
+            QuantityLimit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4664,6 +4893,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
                             "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4696,6 +4926,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 let mut momentum_enabled__ = None;
                 let mut momentum_window__ = None;
                 let mut momentum_sensitivity__ = None;
+                let mut quantity_limit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -4794,6 +5025,12 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4813,6 +5050,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                     momentum_enabled: momentum_enabled__,
                     momentum_window: momentum_window__,
                     momentum_sensitivity: momentum_sensitivity__,
+                    quantity_limit: quantity_limit__,
                 })
             }
         }

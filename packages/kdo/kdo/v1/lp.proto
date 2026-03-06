@@ -154,6 +154,21 @@ message EtfLp {
 
   // 모멘텀 민감도
   optional double momentum_sensitivity = 19;
+
+  // 매수/매도 수량 한도
+  optional EtfLpQuantityLimit quantity_limit = 20;
+}
+
+// 매수/매도 수량 한도
+message EtfLpQuantityLimit {
+  // 매수 수량 하한
+  int64 min_bid_quantity = 1;
+  // 매수 수량 상한
+  int64 max_bid_quantity = 2;
+  // 매도 수량 하한
+  int64 min_ask_quantity = 3;
+  // 매도 수량 상한
+  int64 max_ask_quantity = 4;
 }
 
 // ETF 가격 산출 방식
@@ -237,6 +252,9 @@ message EtfLpStatus {
 
   // 런타임 계산된 모멘텀 매도 호가 조정값
   optional double momentum_ask_adjustment = 21;
+
+  // 매수/매도 수량 한도
+  optional EtfLpQuantityLimit quantity_limit = 22;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -292,6 +310,9 @@ message EtfLpStatusUpdate {
 
   // 런타임 계산된 모멘텀 매도 호가 조정값
   optional double momentum_ask_adjustment = 20;
+
+  // 매수/매도 수량 한도
+  optional EtfLpQuantityLimit quantity_limit = 21;
 }
 
 
@@ -572,6 +593,9 @@ message UpdateEtfLpRequest {
 
   // 모멘텀 민감도
   optional double momentum_sensitivity = 14;
+
+  // 매수/매도 수량 한도
+  optional EtfLpQuantityLimit quantity_limit = 15;
 }
 
 
