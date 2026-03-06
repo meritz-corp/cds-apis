@@ -630,6 +630,12 @@ message LeadLagTradeRecord {
 
   // ETF 체결시간 (HHMMSSuuuuuu KST)
   int64 etf_filled_time = 20;
+
+  // 트리거 당시 선물 가격 (시그널 발생 시점의 호가)
+  double futures_trigger_price = 21;
+
+  // 트리거 당시 ETF 가격 (시그널 발생 시점의 호가)
+  double etf_trigger_price = 22;
 }
 
 // 체결 내역 목록 요청

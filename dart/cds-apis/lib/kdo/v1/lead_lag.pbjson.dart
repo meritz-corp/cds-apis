@@ -514,6 +514,8 @@ const LeadLagTradeRecord$json = {
     {'1': 'trigger_exchange_time', '3': 18, '4': 1, '5': 3, '10': 'triggerExchangeTime'},
     {'1': 'futures_filled_time', '3': 19, '4': 1, '5': 3, '10': 'futuresFilledTime'},
     {'1': 'etf_filled_time', '3': 20, '4': 1, '5': 3, '10': 'etfFilledTime'},
+    {'1': 'futures_trigger_price', '3': 21, '4': 1, '5': 1, '10': 'futuresTriggerPrice'},
+    {'1': 'etf_trigger_price', '3': 22, '4': 1, '5': 1, '10': 'etfTriggerPrice'},
   ],
   '9': [
     {'1': 14, '2': 15},
@@ -536,7 +538,9 @@ final $typed_data.Uint8List leadLagTradeRecordDescriptor = $convert.base64Decode
     'c2VuZF9vcmRlcl90aW1lGBEgASgDUg1zZW5kT3JkZXJUaW1lEjIKFXRyaWdnZXJfZXhjaGFuZ2'
     'VfdGltZRgSIAEoA1ITdHJpZ2dlckV4Y2hhbmdlVGltZRIuChNmdXR1cmVzX2ZpbGxlZF90aW1l'
     'GBMgASgDUhFmdXR1cmVzRmlsbGVkVGltZRImCg9ldGZfZmlsbGVkX3RpbWUYFCABKANSDWV0Zk'
-    'ZpbGxlZFRpbWVKBAgOEA9SD3RyaWdnZXJfdGltZV91cw==');
+    'ZpbGxlZFRpbWUSMgoVZnV0dXJlc190cmlnZ2VyX3ByaWNlGBUgASgBUhNmdXR1cmVzVHJpZ2dl'
+    'clByaWNlEioKEWV0Zl90cmlnZ2VyX3ByaWNlGBYgASgBUg9ldGZUcmlnZ2VyUHJpY2VKBAgOEA'
+    '9SD3RyaWdnZXJfdGltZV91cw==');
 
 @$core.Deprecated('Use listLeadLagTradesRequestDescriptor instead')
 const ListLeadLagTradesRequest$json = {

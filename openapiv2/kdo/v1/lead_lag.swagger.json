@@ -1050,6 +1050,16 @@
           "type": "string",
           "format": "int64",
           "title": "ETF 체결시간 (HHMMSSuuuuuu KST)"
+        },
+        "futuresTriggerPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "트리거 당시 선물 가격 (시그널 발생 시점의 호가)"
+        },
+        "etfTriggerPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "트리거 당시 ETF 가격 (시그널 발생 시점의 호가)"
         }
       },
       "title": "체결 기록 (DB에 영구 저장되는 트레이드 레코드)"

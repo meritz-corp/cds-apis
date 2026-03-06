@@ -1904,6 +1904,8 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
     $fixnum.Int64? triggerExchangeTime,
     $fixnum.Int64? futuresFilledTime,
     $fixnum.Int64? etfFilledTime,
+    $core.double? futuresTriggerPrice,
+    $core.double? etfTriggerPrice,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -1925,6 +1927,8 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
     if (triggerExchangeTime != null) result.triggerExchangeTime = triggerExchangeTime;
     if (futuresFilledTime != null) result.futuresFilledTime = futuresFilledTime;
     if (etfFilledTime != null) result.etfFilledTime = etfFilledTime;
+    if (futuresTriggerPrice != null) result.futuresTriggerPrice = futuresTriggerPrice;
+    if (etfTriggerPrice != null) result.etfTriggerPrice = etfTriggerPrice;
     return result;
   }
 
@@ -1953,6 +1957,8 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
     ..aInt64(18, _omitFieldNames ? '' : 'triggerExchangeTime')
     ..aInt64(19, _omitFieldNames ? '' : 'futuresFilledTime')
     ..aInt64(20, _omitFieldNames ? '' : 'etfFilledTime')
+    ..a<$core.double>(21, _omitFieldNames ? '' : 'futuresTriggerPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(22, _omitFieldNames ? '' : 'etfTriggerPrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2164,6 +2170,26 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
   $core.bool hasEtfFilledTime() => $_has(18);
   @$pb.TagNumber(20)
   void clearEtfFilledTime() => $_clearField(20);
+
+  /// 트리거 당시 선물 가격 (시그널 발생 시점의 호가)
+  @$pb.TagNumber(21)
+  $core.double get futuresTriggerPrice => $_getN(19);
+  @$pb.TagNumber(21)
+  set futuresTriggerPrice($core.double value) => $_setDouble(19, value);
+  @$pb.TagNumber(21)
+  $core.bool hasFuturesTriggerPrice() => $_has(19);
+  @$pb.TagNumber(21)
+  void clearFuturesTriggerPrice() => $_clearField(21);
+
+  /// 트리거 당시 ETF 가격 (시그널 발생 시점의 호가)
+  @$pb.TagNumber(22)
+  $core.double get etfTriggerPrice => $_getN(20);
+  @$pb.TagNumber(22)
+  set etfTriggerPrice($core.double value) => $_setDouble(20, value);
+  @$pb.TagNumber(22)
+  $core.bool hasEtfTriggerPrice() => $_has(20);
+  @$pb.TagNumber(22)
+  void clearEtfTriggerPrice() => $_clearField(22);
 }
 
 /// 체결 내역 목록 요청

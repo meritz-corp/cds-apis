@@ -443,6 +443,12 @@ pub struct LeadLagTradeRecord {
     /// ETF 체결시간 (HHMMSSuuuuuu KST)
     #[prost(int64, tag="20")]
     pub etf_filled_time: i64,
+    /// 트리거 당시 선물 가격 (시그널 발생 시점의 호가)
+    #[prost(double, tag="21")]
+    pub futures_trigger_price: f64,
+    /// 트리거 당시 ETF 가격 (시그널 발생 시점의 호가)
+    #[prost(double, tag="22")]
+    pub etf_trigger_price: f64,
 }
 /// 체결 내역 목록 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

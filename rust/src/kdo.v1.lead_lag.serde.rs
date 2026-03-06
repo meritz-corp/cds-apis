@@ -2443,6 +2443,12 @@ impl serde::Serialize for LeadLagTradeRecord {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagTradeRecord", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2523,6 +2529,12 @@ impl serde::Serialize for LeadLagTradeRecord {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("etf_filled_time", ToString::to_string(&self.etf_filled_time).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("futures_trigger_price", &self.futures_trigger_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_trigger_price", &self.etf_trigger_price)?;
+        }
         struct_ser.end()
     }
 }
@@ -2568,6 +2580,10 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
             "futuresFilledTime",
             "etf_filled_time",
             "etfFilledTime",
+            "futures_trigger_price",
+            "futuresTriggerPrice",
+            "etf_trigger_price",
+            "etfTriggerPrice",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2591,6 +2607,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
             TriggerExchangeTime,
             FuturesFilledTime,
             EtfFilledTime,
+            FuturesTriggerPrice,
+            EtfTriggerPrice,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2632,6 +2650,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                             "triggerExchangeTime" | "trigger_exchange_time" => Ok(GeneratedField::TriggerExchangeTime),
                             "futuresFilledTime" | "futures_filled_time" => Ok(GeneratedField::FuturesFilledTime),
                             "etfFilledTime" | "etf_filled_time" => Ok(GeneratedField::EtfFilledTime),
+                            "futuresTriggerPrice" | "futures_trigger_price" => Ok(GeneratedField::FuturesTriggerPrice),
+                            "etfTriggerPrice" | "etf_trigger_price" => Ok(GeneratedField::EtfTriggerPrice),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2670,6 +2690,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                 let mut trigger_exchange_time__ = None;
                 let mut futures_filled_time__ = None;
                 let mut etf_filled_time__ = None;
+                let mut futures_trigger_price__ = None;
+                let mut etf_trigger_price__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -2814,6 +2836,22 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::FuturesTriggerPrice => {
+                            if futures_trigger_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futuresTriggerPrice"));
+                            }
+                            futures_trigger_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EtfTriggerPrice => {
+                            if etf_trigger_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfTriggerPrice"));
+                            }
+                            etf_trigger_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2839,6 +2877,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                     trigger_exchange_time: trigger_exchange_time__.unwrap_or_default(),
                     futures_filled_time: futures_filled_time__.unwrap_or_default(),
                     etf_filled_time: etf_filled_time__.unwrap_or_default(),
+                    futures_trigger_price: futures_trigger_price__.unwrap_or_default(),
+                    etf_trigger_price: etf_trigger_price__.unwrap_or_default(),
                 })
             }
         }
