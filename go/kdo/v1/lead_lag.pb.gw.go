@@ -341,6 +341,58 @@ func local_request_LeadLagService_SetLeadLagActive_0(ctx context.Context, marsha
 
 }
 
+func request_LeadLagService_GetLeadLagStatus_0(ctx context.Context, marshaler runtime.Marshaler, client LeadLagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetLeadLagStatusRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["lead_lag"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lead_lag")
+	}
+
+	protoReq.LeadLag, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lead_lag", err)
+	}
+
+	msg, err := client.GetLeadLagStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_LeadLagService_GetLeadLagStatus_0(ctx context.Context, marshaler runtime.Marshaler, server LeadLagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetLeadLagStatusRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["lead_lag"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "lead_lag")
+	}
+
+	protoReq.LeadLag, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "lead_lag", err)
+	}
+
+	msg, err := server.GetLeadLagStatus(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 func request_LeadLagService_StreamLeadLagStatus_0(ctx context.Context, marshaler runtime.Marshaler, client LeadLagServiceClient, req *http.Request, pathParams map[string]string) (LeadLagService_StreamLeadLagStatusClient, runtime.ServerMetadata, error) {
 	var protoReq StreamLeadLagStatusRequest
 	var metadata runtime.ServerMetadata
@@ -913,6 +965,31 @@ func RegisterLeadLagServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 
 	})
 
+	mux.Handle("GET", pattern_LeadLagService_GetLeadLagStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagStatus", runtime.WithHTTPPathPattern("/v1/{lead_lag=lead_lags/*}:status"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_LeadLagService_GetLeadLagStatus_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LeadLagService_GetLeadLagStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_LeadLagService_StreamLeadLagStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -1243,6 +1320,28 @@ func RegisterLeadLagServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 
 	})
 
+	mux.Handle("GET", pattern_LeadLagService_GetLeadLagStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagStatus", runtime.WithHTTPPathPattern("/v1/{lead_lag=lead_lags/*}:status"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_LeadLagService_GetLeadLagStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LeadLagService_GetLeadLagStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_LeadLagService_StreamLeadLagStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1413,6 +1512,8 @@ var (
 
 	pattern_LeadLagService_SetLeadLagActive_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "setActive"))
 
+	pattern_LeadLagService_GetLeadLagStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "status"))
+
 	pattern_LeadLagService_StreamLeadLagStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "streamStatus"))
 
 	pattern_LeadLagService_StartLeadLag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "lead_lags", "lead_lag"}, "start"))
@@ -1440,6 +1541,8 @@ var (
 	forward_LeadLagService_DeleteLeadLag_0 = runtime.ForwardResponseMessage
 
 	forward_LeadLagService_SetLeadLagActive_0 = runtime.ForwardResponseMessage
+
+	forward_LeadLagService_GetLeadLagStatus_0 = runtime.ForwardResponseMessage
 
 	forward_LeadLagService_StreamLeadLagStatus_0 = runtime.ForwardResponseStream
 

@@ -358,6 +358,26 @@ func (mr *MockLeadLagServiceClientMockRecorder) GetLeadLagExecutionSummary(ctx, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagExecutionSummary", reflect.TypeOf((*MockLeadLagServiceClient)(nil).GetLeadLagExecutionSummary), varargs...)
 }
 
+// GetLeadLagStatus mocks base method.
+func (m *MockLeadLagServiceClient) GetLeadLagStatus(ctx context.Context, in *GetLeadLagStatusRequest, opts ...grpc.CallOption) (*LeadLagStatusUpdate, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetLeadLagStatus", varargs...)
+	ret0, _ := ret[0].(*LeadLagStatusUpdate)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLeadLagStatus indicates an expected call of GetLeadLagStatus.
+func (mr *MockLeadLagServiceClientMockRecorder) GetLeadLagStatus(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagStatus", reflect.TypeOf((*MockLeadLagServiceClient)(nil).GetLeadLagStatus), varargs...)
+}
+
 // GetLeadLagTrade mocks base method.
 func (m *MockLeadLagServiceClient) GetLeadLagTrade(ctx context.Context, in *GetLeadLagTradeRequest, opts ...grpc.CallOption) (*LeadLagTradeRecord, error) {
 	m.ctrl.T.Helper()
@@ -619,6 +639,21 @@ func (m *MockLeadLagServiceServer) GetLeadLagExecutionSummary(ctx context.Contex
 func (mr *MockLeadLagServiceServerMockRecorder) GetLeadLagExecutionSummary(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagExecutionSummary", reflect.TypeOf((*MockLeadLagServiceServer)(nil).GetLeadLagExecutionSummary), ctx, in)
+}
+
+// GetLeadLagStatus mocks base method.
+func (m *MockLeadLagServiceServer) GetLeadLagStatus(ctx context.Context, in *GetLeadLagStatusRequest) (*LeadLagStatusUpdate, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLeadLagStatus", ctx, in)
+	ret0, _ := ret[0].(*LeadLagStatusUpdate)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLeadLagStatus indicates an expected call of GetLeadLagStatus.
+func (mr *MockLeadLagServiceServerMockRecorder) GetLeadLagStatus(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeadLagStatus", reflect.TypeOf((*MockLeadLagServiceServer)(nil).GetLeadLagStatus), ctx, in)
 }
 
 // GetLeadLagTrade mocks base method.

@@ -60,6 +60,14 @@ abstract final class LeadLagService {
     kdov1lead_lag.LeadLag.new,
   );
 
+  /// LeadLag 현재 상태 단건 조회 (unary)
+  static const getLeadLagStatus = connect.Spec(
+    '/$name/GetLeadLagStatus',
+    connect.StreamType.unary,
+    kdov1lead_lag.GetLeadLagStatusRequest.new,
+    kdov1lead_lag.LeadLagStatusUpdate.new,
+  );
+
   /// LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
   static const streamLeadLagStatus = connect.Spec(
     '/$name/StreamLeadLagStatus',

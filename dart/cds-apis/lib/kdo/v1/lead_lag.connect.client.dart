@@ -118,6 +118,24 @@ extension type LeadLagServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// LeadLag 현재 상태 단건 조회 (unary)
+  Future<kdov1lead_lag.LeadLagStatusUpdate> getLeadLagStatus(
+    kdov1lead_lag.GetLeadLagStatusRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LeadLagService.getLeadLagStatus,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
   Stream<kdov1lead_lag.LeadLagStatusUpdate> streamLeadLagStatus(
     kdov1lead_lag.StreamLeadLagStatusRequest input, {

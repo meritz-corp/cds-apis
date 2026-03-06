@@ -493,6 +493,39 @@
         ]
       }
     },
+    "/v1/{leadLag}:status": {
+      "get": {
+        "summary": "LeadLag 현재 상태 단건 조회 (unary)",
+        "operationId": "LeadLagService_GetLeadLagStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lagLeadLagStatusUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLag",
+            "description": "리소스 이름 (lead_lags/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLags/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagService"
+        ]
+      }
+    },
     "/v1/{leadLag}:stop": {
       "post": {
         "summary": "LeadLag 전략 중지 (hot loop 중지)",

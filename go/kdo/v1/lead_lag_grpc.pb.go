@@ -35,6 +35,8 @@ type LeadLagServiceClient interface {
 	DeleteLeadLag(ctx context.Context, in *DeleteLeadLagRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// LeadLag 활성화/비활성화
 	SetLeadLagActive(ctx context.Context, in *SetLeadLagActiveRequest, opts ...grpc.CallOption) (*LeadLag, error)
+	// LeadLag 현재 상태 단건 조회 (unary)
+	GetLeadLagStatus(ctx context.Context, in *GetLeadLagStatusRequest, opts ...grpc.CallOption) (*LeadLagStatusUpdate, error)
 	// LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
 	StreamLeadLagStatus(ctx context.Context, in *StreamLeadLagStatusRequest, opts ...grpc.CallOption) (LeadLagService_StreamLeadLagStatusClient, error)
 	// LeadLag 전략 시작 (hot loop 시작)
@@ -108,6 +110,15 @@ func (c *leadLagServiceClient) DeleteLeadLag(ctx context.Context, in *DeleteLead
 func (c *leadLagServiceClient) SetLeadLagActive(ctx context.Context, in *SetLeadLagActiveRequest, opts ...grpc.CallOption) (*LeadLag, error) {
 	out := new(LeadLag)
 	err := c.cc.Invoke(ctx, "/kdo.v1.lead_lag.LeadLagService/SetLeadLagActive", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadLagServiceClient) GetLeadLagStatus(ctx context.Context, in *GetLeadLagStatusRequest, opts ...grpc.CallOption) (*LeadLagStatusUpdate, error) {
+	out := new(LeadLagStatusUpdate)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lead_lag.LeadLagService/GetLeadLagStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -216,6 +227,8 @@ type LeadLagServiceServer interface {
 	DeleteLeadLag(context.Context, *DeleteLeadLagRequest) (*emptypb.Empty, error)
 	// LeadLag 활성화/비활성화
 	SetLeadLagActive(context.Context, *SetLeadLagActiveRequest) (*LeadLag, error)
+	// LeadLag 현재 상태 단건 조회 (unary)
+	GetLeadLagStatus(context.Context, *GetLeadLagStatusRequest) (*LeadLagStatusUpdate, error)
 	// LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
 	StreamLeadLagStatus(*StreamLeadLagStatusRequest, LeadLagService_StreamLeadLagStatusServer) error
 	// LeadLag 전략 시작 (hot loop 시작)
@@ -255,6 +268,9 @@ func (UnimplementedLeadLagServiceServer) DeleteLeadLag(context.Context, *DeleteL
 }
 func (UnimplementedLeadLagServiceServer) SetLeadLagActive(context.Context, *SetLeadLagActiveRequest) (*LeadLag, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetLeadLagActive not implemented")
+}
+func (UnimplementedLeadLagServiceServer) GetLeadLagStatus(context.Context, *GetLeadLagStatusRequest) (*LeadLagStatusUpdate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLeadLagStatus not implemented")
 }
 func (UnimplementedLeadLagServiceServer) StreamLeadLagStatus(*StreamLeadLagStatusRequest, LeadLagService_StreamLeadLagStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamLeadLagStatus not implemented")
@@ -394,6 +410,24 @@ func _LeadLagService_SetLeadLagActive_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LeadLagServiceServer).SetLeadLagActive(ctx, req.(*SetLeadLagActiveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadLagService_GetLeadLagStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeadLagStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadLagServiceServer).GetLeadLagStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.lead_lag.LeadLagService/GetLeadLagStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadLagServiceServer).GetLeadLagStatus(ctx, req.(*GetLeadLagStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -557,6 +591,10 @@ var LeadLagService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetLeadLagActive",
 			Handler:    _LeadLagService_SetLeadLagActive_Handler,
+		},
+		{
+			MethodName: "GetLeadLagStatus",
+			Handler:    _LeadLagService_GetLeadLagStatus_Handler,
 		},
 		{
 			MethodName: "StartLeadLag",

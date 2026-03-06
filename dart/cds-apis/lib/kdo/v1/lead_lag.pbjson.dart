@@ -306,6 +306,19 @@ final $typed_data.Uint8List leadLagLegExecutionSummaryDescriptor = $convert.base
     'gEIAEoAUgBUgtidXlBdmdQcmljZYgBARIXCgduZXRfcXR5GAUgASgDUgZuZXRRdHlCEQoPX3Nl'
     'bGxfYXZnX3ByaWNlQhAKDl9idXlfYXZnX3ByaWNl');
 
+@$core.Deprecated('Use getLeadLagStatusRequestDescriptor instead')
+const GetLeadLagStatusRequest$json = {
+  '1': 'GetLeadLagStatusRequest',
+  '2': [
+    {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+  ],
+};
+
+/// Descriptor for `GetLeadLagStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getLeadLagStatusRequestDescriptor = $convert.base64Decode(
+    'ChdHZXRMZWFkTGFnU3RhdHVzUmVxdWVzdBI7CghsZWFkX2xhZxgBIAEoCUIg4kEBAvpBGQoXa2'
+    'RvLmNkc2FwaXMueHl6L0xlYWRMYWdSB2xlYWRMYWc=');
+
 @$core.Deprecated('Use streamLeadLagStatusRequestDescriptor instead')
 const StreamLeadLagStatusRequest$json = {
   '1': 'StreamLeadLagStatusRequest',

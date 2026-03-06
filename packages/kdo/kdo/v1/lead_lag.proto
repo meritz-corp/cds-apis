@@ -64,6 +64,14 @@ service LeadLagService {
     option (google.api.method_signature) = "lead_lag";
   }
 
+  // LeadLag 현재 상태 단건 조회 (unary)
+  rpc GetLeadLagStatus(GetLeadLagStatusRequest) returns (LeadLagStatusUpdate) {
+    option (google.api.http) = {
+      get: "/v1/{lead_lag=lead_lags/*}:status"
+    };
+    option (google.api.method_signature) = "lead_lag";
+  }
+
   // LeadLag 실시간 상태 스트리밍 (서버→클라이언트)
   rpc StreamLeadLagStatus(StreamLeadLagStatusRequest) returns (stream LeadLagStatusUpdate) {
     option (google.api.http) = {
@@ -382,6 +390,17 @@ message LeadLagLegExecutionSummary {
 // ============================================================================
 // Streaming Status Messages
 // ============================================================================
+
+// LeadLag 현재 상태 단건 조회 요청
+message GetLeadLagStatusRequest {
+  // 리소스 이름 (lead_lags/{id})
+  string lead_lag = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/LeadLag"
+    }
+  ];
+}
 
 // LeadLag 실시간 상태 스트리밍 요청
 message StreamLeadLagStatusRequest {

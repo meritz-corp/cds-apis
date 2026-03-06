@@ -231,6 +231,14 @@ pub struct LeadLagLegExecutionSummary {
 // Streaming Status Messages
 // ============================================================================
 
+/// LeadLag 현재 상태 단건 조회 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLeadLagStatusRequest {
+    /// 리소스 이름 (lead_lags/{id})
+    #[prost(string, tag="1")]
+    pub lead_lag: ::prost::alloc::string::String,
+}
 /// LeadLag 실시간 상태 스트리밍 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

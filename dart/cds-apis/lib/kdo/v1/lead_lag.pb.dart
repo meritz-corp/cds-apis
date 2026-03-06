@@ -1161,6 +1161,54 @@ class LeadLagLegExecutionSummary extends $pb.GeneratedMessage {
   void clearNetQty() => $_clearField(5);
 }
 
+/// LeadLag 현재 상태 단건 조회 요청
+class GetLeadLagStatusRequest extends $pb.GeneratedMessage {
+  factory GetLeadLagStatusRequest({
+    $core.String? leadLag,
+  }) {
+    final result = create();
+    if (leadLag != null) result.leadLag = leadLag;
+    return result;
+  }
+
+  GetLeadLagStatusRequest._();
+
+  factory GetLeadLagStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetLeadLagStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLeadLagStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'leadLag')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetLeadLagStatusRequest clone() => GetLeadLagStatusRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetLeadLagStatusRequest copyWith(void Function(GetLeadLagStatusRequest) updates) => super.copyWith((message) => updates(message as GetLeadLagStatusRequest)) as GetLeadLagStatusRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetLeadLagStatusRequest create() => GetLeadLagStatusRequest._();
+  @$core.override
+  GetLeadLagStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<GetLeadLagStatusRequest> createRepeated() => $pb.PbList<GetLeadLagStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetLeadLagStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLeadLagStatusRequest>(create);
+  static GetLeadLagStatusRequest? _defaultInstance;
+
+  /// 리소스 이름 (lead_lags/{id})
+  @$pb.TagNumber(1)
+  $core.String get leadLag => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set leadLag($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLeadLag() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLeadLag() => $_clearField(1);
+}
+
 /// LeadLag 실시간 상태 스트리밍 요청
 class StreamLeadLagStatusRequest extends $pb.GeneratedMessage {
   factory StreamLeadLagStatusRequest({
