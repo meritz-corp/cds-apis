@@ -588,8 +588,9 @@ message LeadLagTradeRecord {
   // 주문 실행 지연시간 (마이크로초)
   uint64 latency_us = 13;
 
-  // 트리거 시각 (HHMMSSuuuuuu KST)
-  uint64 trigger_time_us = 14;
+  // Reserved: previously trigger_time_us (field 14) — renamed to send_order_time
+  reserved 14;
+  reserved "trigger_time_us";
 
   // 거래일 (YYYYMMDD)
   int32 date = 15;
@@ -598,6 +599,18 @@ message LeadLagTradeRecord {
   google.protobuf.Timestamp created_at = 16 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
+
+  // 주문제출시간 (HHMMSSuuuuuu KST)
+  int64 send_order_time = 17;
+
+  // 트리거한 선물 시세의 거래소 시간 (HHMMSSuuuuuu KST)
+  int64 trigger_exchange_time = 18;
+
+  // 선물 체결시간 (HHMMSSuuuuuu KST)
+  int64 futures_filled_time = 19;
+
+  // ETF 체결시간 (HHMMSSuuuuuu KST)
+  int64 etf_filled_time = 20;
 }
 
 // 체결 내역 목록 요청

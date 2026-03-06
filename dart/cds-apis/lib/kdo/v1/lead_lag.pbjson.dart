@@ -495,10 +495,17 @@ const LeadLagTradeRecord$json = {
     {'1': 'etf_qty', '3': 11, '4': 1, '5': 3, '10': 'etfQty'},
     {'1': 'futures_position_after', '3': 12, '4': 1, '5': 3, '10': 'futuresPositionAfter'},
     {'1': 'latency_us', '3': 13, '4': 1, '5': 4, '10': 'latencyUs'},
-    {'1': 'trigger_time_us', '3': 14, '4': 1, '5': 4, '10': 'triggerTimeUs'},
     {'1': 'date', '3': 15, '4': 1, '5': 5, '10': 'date'},
     {'1': 'created_at', '3': 16, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createdAt'},
+    {'1': 'send_order_time', '3': 17, '4': 1, '5': 3, '10': 'sendOrderTime'},
+    {'1': 'trigger_exchange_time', '3': 18, '4': 1, '5': 3, '10': 'triggerExchangeTime'},
+    {'1': 'futures_filled_time', '3': 19, '4': 1, '5': 3, '10': 'futuresFilledTime'},
+    {'1': 'etf_filled_time', '3': 20, '4': 1, '5': 3, '10': 'etfFilledTime'},
   ],
+  '9': [
+    {'1': 14, '2': 15},
+  ],
+  '10': ['trigger_time_us'],
 };
 
 /// Descriptor for `LeadLagTradeRecord`. Decode as a `google.protobuf.DescriptorProto`.
@@ -511,9 +518,12 @@ final $typed_data.Uint8List leadLagTradeRecordDescriptor = $convert.base64Decode
     'EoAVIMZnV0dXJlc1ByaWNlEhsKCWV0Zl9wcmljZRgJIAEoAVIIZXRmUHJpY2USHwoLZnV0dXJl'
     'c19xdHkYCiABKANSCmZ1dHVyZXNRdHkSFwoHZXRmX3F0eRgLIAEoA1IGZXRmUXR5EjQKFmZ1dH'
     'VyZXNfcG9zaXRpb25fYWZ0ZXIYDCABKANSFGZ1dHVyZXNQb3NpdGlvbkFmdGVyEh0KCmxhdGVu'
-    'Y3lfdXMYDSABKARSCWxhdGVuY3lVcxImCg90cmlnZ2VyX3RpbWVfdXMYDiABKARSDXRyaWdnZX'
-    'JUaW1lVXMSEgoEZGF0ZRgPIAEoBVIEZGF0ZRI/CgpjcmVhdGVkX2F0GBAgASgLMhouZ29vZ2xl'
-    'LnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IJY3JlYXRlZEF0');
+    'Y3lfdXMYDSABKARSCWxhdGVuY3lVcxISCgRkYXRlGA8gASgFUgRkYXRlEj8KCmNyZWF0ZWRfYX'
+    'QYECABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgljcmVhdGVkQXQSJgoP'
+    'c2VuZF9vcmRlcl90aW1lGBEgASgDUg1zZW5kT3JkZXJUaW1lEjIKFXRyaWdnZXJfZXhjaGFuZ2'
+    'VfdGltZRgSIAEoA1ITdHJpZ2dlckV4Y2hhbmdlVGltZRIuChNmdXR1cmVzX2ZpbGxlZF90aW1l'
+    'GBMgASgDUhFmdXR1cmVzRmlsbGVkVGltZRImCg9ldGZfZmlsbGVkX3RpbWUYFCABKANSDWV0Zk'
+    'ZpbGxlZFRpbWVKBAgOEA9SD3RyaWdnZXJfdGltZV91cw==');
 
 @$core.Deprecated('Use listLeadLagTradesRequestDescriptor instead')
 const ListLeadLagTradesRequest$json = {

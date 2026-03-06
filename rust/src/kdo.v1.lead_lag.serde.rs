@@ -2338,6 +2338,15 @@ impl serde::Serialize for LeadLagTradeRecord {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagTradeRecord", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2393,15 +2402,30 @@ impl serde::Serialize for LeadLagTradeRecord {
             struct_ser.serialize_field("latency_us", ToString::to_string(&self.latency_us).as_str())?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("trigger_time_us", ToString::to_string(&self.trigger_time_us).as_str())?;
-        }
-        if true {
             struct_ser.serialize_field("date", &self.date)?;
         }
         if let Some(v) = self.created_at.as_ref() {
             struct_ser.serialize_field("created_at", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("send_order_time", ToString::to_string(&self.send_order_time).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("trigger_exchange_time", ToString::to_string(&self.trigger_exchange_time).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("futures_filled_time", ToString::to_string(&self.futures_filled_time).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("etf_filled_time", ToString::to_string(&self.etf_filled_time).as_str())?;
         }
         struct_ser.end()
     }
@@ -2437,11 +2461,17 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
             "futuresPositionAfter",
             "latency_us",
             "latencyUs",
-            "trigger_time_us",
-            "triggerTimeUs",
             "date",
             "created_at",
             "createdAt",
+            "send_order_time",
+            "sendOrderTime",
+            "trigger_exchange_time",
+            "triggerExchangeTime",
+            "futures_filled_time",
+            "futuresFilledTime",
+            "etf_filled_time",
+            "etfFilledTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2459,9 +2489,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
             EtfQty,
             FuturesPositionAfter,
             LatencyUs,
-            TriggerTimeUs,
             Date,
             CreatedAt,
+            SendOrderTime,
+            TriggerExchangeTime,
+            FuturesFilledTime,
+            EtfFilledTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2497,9 +2530,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                             "etfQty" | "etf_qty" => Ok(GeneratedField::EtfQty),
                             "futuresPositionAfter" | "futures_position_after" => Ok(GeneratedField::FuturesPositionAfter),
                             "latencyUs" | "latency_us" => Ok(GeneratedField::LatencyUs),
-                            "triggerTimeUs" | "trigger_time_us" => Ok(GeneratedField::TriggerTimeUs),
                             "date" => Ok(GeneratedField::Date),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
+                            "sendOrderTime" | "send_order_time" => Ok(GeneratedField::SendOrderTime),
+                            "triggerExchangeTime" | "trigger_exchange_time" => Ok(GeneratedField::TriggerExchangeTime),
+                            "futuresFilledTime" | "futures_filled_time" => Ok(GeneratedField::FuturesFilledTime),
+                            "etfFilledTime" | "etf_filled_time" => Ok(GeneratedField::EtfFilledTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2532,9 +2568,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                 let mut etf_qty__ = None;
                 let mut futures_position_after__ = None;
                 let mut latency_us__ = None;
-                let mut trigger_time_us__ = None;
                 let mut date__ = None;
                 let mut created_at__ = None;
+                let mut send_order_time__ = None;
+                let mut trigger_exchange_time__ = None;
+                let mut futures_filled_time__ = None;
+                let mut etf_filled_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -2633,14 +2672,6 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::TriggerTimeUs => {
-                            if trigger_time_us__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("triggerTimeUs"));
-                            }
-                            trigger_time_us__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::Date => {
                             if date__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("date"));
@@ -2654,6 +2685,38 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                                 return Err(serde::de::Error::duplicate_field("createdAt"));
                             }
                             created_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::SendOrderTime => {
+                            if send_order_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sendOrderTime"));
+                            }
+                            send_order_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TriggerExchangeTime => {
+                            if trigger_exchange_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerExchangeTime"));
+                            }
+                            trigger_exchange_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FuturesFilledTime => {
+                            if futures_filled_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futuresFilledTime"));
+                            }
+                            futures_filled_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EtfFilledTime => {
+                            if etf_filled_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfFilledTime"));
+                            }
+                            etf_filled_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -2674,9 +2737,12 @@ impl<'de> serde::Deserialize<'de> for LeadLagTradeRecord {
                     etf_qty: etf_qty__.unwrap_or_default(),
                     futures_position_after: futures_position_after__.unwrap_or_default(),
                     latency_us: latency_us__.unwrap_or_default(),
-                    trigger_time_us: trigger_time_us__.unwrap_or_default(),
                     date: date__.unwrap_or_default(),
                     created_at: created_at__,
+                    send_order_time: send_order_time__.unwrap_or_default(),
+                    trigger_exchange_time: trigger_exchange_time__.unwrap_or_default(),
+                    futures_filled_time: futures_filled_time__.unwrap_or_default(),
+                    etf_filled_time: etf_filled_time__.unwrap_or_default(),
                 })
             }
         }

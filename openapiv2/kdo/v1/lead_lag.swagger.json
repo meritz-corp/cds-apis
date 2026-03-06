@@ -987,11 +987,6 @@
           "format": "uint64",
           "title": "주문 실행 지연시간 (마이크로초)"
         },
-        "triggerTimeUs": {
-          "type": "string",
-          "format": "uint64",
-          "title": "트리거 시각 (HHMMSSuuuuuu KST)"
-        },
         "date": {
           "type": "integer",
           "format": "int32",
@@ -1002,6 +997,26 @@
           "format": "date-time",
           "title": "생성 시각",
           "readOnly": true
+        },
+        "sendOrderTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문제출시간 (HHMMSSuuuuuu KST)"
+        },
+        "triggerExchangeTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "트리거한 선물 시세의 거래소 시간 (HHMMSSuuuuuu KST)"
+        },
+        "futuresFilledTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 체결시간 (HHMMSSuuuuuu KST)"
+        },
+        "etfFilledTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 체결시간 (HHMMSSuuuuuu KST)"
         }
       },
       "title": "체결 기록 (DB에 영구 저장되는 트레이드 레코드)"

@@ -417,15 +417,24 @@ pub struct LeadLagTradeRecord {
     /// 주문 실행 지연시간 (마이크로초)
     #[prost(uint64, tag="13")]
     pub latency_us: u64,
-    /// 트리거 시각 (HHMMSSuuuuuu KST)
-    #[prost(uint64, tag="14")]
-    pub trigger_time_us: u64,
     /// 거래일 (YYYYMMDD)
     #[prost(int32, tag="15")]
     pub date: i32,
     /// 생성 시각
     #[prost(message, optional, tag="16")]
     pub created_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 주문제출시간 (HHMMSSuuuuuu KST)
+    #[prost(int64, tag="17")]
+    pub send_order_time: i64,
+    /// 트리거한 선물 시세의 거래소 시간 (HHMMSSuuuuuu KST)
+    #[prost(int64, tag="18")]
+    pub trigger_exchange_time: i64,
+    /// 선물 체결시간 (HHMMSSuuuuuu KST)
+    #[prost(int64, tag="19")]
+    pub futures_filled_time: i64,
+    /// ETF 체결시간 (HHMMSSuuuuuu KST)
+    #[prost(int64, tag="20")]
+    pub etf_filled_time: i64,
 }
 /// 체결 내역 목록 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

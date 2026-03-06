@@ -1850,9 +1850,12 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
     $fixnum.Int64? etfQty,
     $fixnum.Int64? futuresPositionAfter,
     $fixnum.Int64? latencyUs,
-    $fixnum.Int64? triggerTimeUs,
     $core.int? date,
     $2.Timestamp? createdAt,
+    $fixnum.Int64? sendOrderTime,
+    $fixnum.Int64? triggerExchangeTime,
+    $fixnum.Int64? futuresFilledTime,
+    $fixnum.Int64? etfFilledTime,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -1868,9 +1871,12 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
     if (etfQty != null) result.etfQty = etfQty;
     if (futuresPositionAfter != null) result.futuresPositionAfter = futuresPositionAfter;
     if (latencyUs != null) result.latencyUs = latencyUs;
-    if (triggerTimeUs != null) result.triggerTimeUs = triggerTimeUs;
     if (date != null) result.date = date;
     if (createdAt != null) result.createdAt = createdAt;
+    if (sendOrderTime != null) result.sendOrderTime = sendOrderTime;
+    if (triggerExchangeTime != null) result.triggerExchangeTime = triggerExchangeTime;
+    if (futuresFilledTime != null) result.futuresFilledTime = futuresFilledTime;
+    if (etfFilledTime != null) result.etfFilledTime = etfFilledTime;
     return result;
   }
 
@@ -1893,9 +1899,12 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
     ..aInt64(11, _omitFieldNames ? '' : 'etfQty')
     ..aInt64(12, _omitFieldNames ? '' : 'futuresPositionAfter')
     ..a<$fixnum.Int64>(13, _omitFieldNames ? '' : 'latencyUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(14, _omitFieldNames ? '' : 'triggerTimeUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.int>(15, _omitFieldNames ? '' : 'date', $pb.PbFieldType.O3)
     ..aOM<$2.Timestamp>(16, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aInt64(17, _omitFieldNames ? '' : 'sendOrderTime')
+    ..aInt64(18, _omitFieldNames ? '' : 'triggerExchangeTime')
+    ..aInt64(19, _omitFieldNames ? '' : 'futuresFilledTime')
+    ..aInt64(20, _omitFieldNames ? '' : 'etfFilledTime')
     ..hasRequiredFields = false
   ;
 
@@ -2046,37 +2055,67 @@ class LeadLagTradeRecord extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearLatencyUs() => $_clearField(13);
 
-  /// 트리거 시각 (HHMMSSuuuuuu KST)
-  @$pb.TagNumber(14)
-  $fixnum.Int64 get triggerTimeUs => $_getI64(13);
-  @$pb.TagNumber(14)
-  set triggerTimeUs($fixnum.Int64 value) => $_setInt64(13, value);
-  @$pb.TagNumber(14)
-  $core.bool hasTriggerTimeUs() => $_has(13);
-  @$pb.TagNumber(14)
-  void clearTriggerTimeUs() => $_clearField(14);
-
   /// 거래일 (YYYYMMDD)
   @$pb.TagNumber(15)
-  $core.int get date => $_getIZ(14);
+  $core.int get date => $_getIZ(13);
   @$pb.TagNumber(15)
-  set date($core.int value) => $_setSignedInt32(14, value);
+  set date($core.int value) => $_setSignedInt32(13, value);
   @$pb.TagNumber(15)
-  $core.bool hasDate() => $_has(14);
+  $core.bool hasDate() => $_has(13);
   @$pb.TagNumber(15)
   void clearDate() => $_clearField(15);
 
   /// 생성 시각
   @$pb.TagNumber(16)
-  $2.Timestamp get createdAt => $_getN(15);
+  $2.Timestamp get createdAt => $_getN(14);
   @$pb.TagNumber(16)
   set createdAt($2.Timestamp value) => $_setField(16, value);
   @$pb.TagNumber(16)
-  $core.bool hasCreatedAt() => $_has(15);
+  $core.bool hasCreatedAt() => $_has(14);
   @$pb.TagNumber(16)
   void clearCreatedAt() => $_clearField(16);
   @$pb.TagNumber(16)
-  $2.Timestamp ensureCreatedAt() => $_ensure(15);
+  $2.Timestamp ensureCreatedAt() => $_ensure(14);
+
+  /// 주문제출시간 (HHMMSSuuuuuu KST)
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get sendOrderTime => $_getI64(15);
+  @$pb.TagNumber(17)
+  set sendOrderTime($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(17)
+  $core.bool hasSendOrderTime() => $_has(15);
+  @$pb.TagNumber(17)
+  void clearSendOrderTime() => $_clearField(17);
+
+  /// 트리거한 선물 시세의 거래소 시간 (HHMMSSuuuuuu KST)
+  @$pb.TagNumber(18)
+  $fixnum.Int64 get triggerExchangeTime => $_getI64(16);
+  @$pb.TagNumber(18)
+  set triggerExchangeTime($fixnum.Int64 value) => $_setInt64(16, value);
+  @$pb.TagNumber(18)
+  $core.bool hasTriggerExchangeTime() => $_has(16);
+  @$pb.TagNumber(18)
+  void clearTriggerExchangeTime() => $_clearField(18);
+
+  /// 선물 체결시간 (HHMMSSuuuuuu KST)
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get futuresFilledTime => $_getI64(17);
+  @$pb.TagNumber(19)
+  set futuresFilledTime($fixnum.Int64 value) => $_setInt64(17, value);
+  @$pb.TagNumber(19)
+  $core.bool hasFuturesFilledTime() => $_has(17);
+  @$pb.TagNumber(19)
+  void clearFuturesFilledTime() => $_clearField(19);
+
+  /// ETF 체결시간 (HHMMSSuuuuuu KST)
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get etfFilledTime => $_getI64(18);
+  @$pb.TagNumber(20)
+  set etfFilledTime($fixnum.Int64 value) => $_setInt64(18, value);
+  @$pb.TagNumber(20)
+  $core.bool hasEtfFilledTime() => $_has(18);
+  @$pb.TagNumber(20)
+  void clearEtfFilledTime() => $_clearField(20);
 }
 
 /// 체결 내역 목록 요청
