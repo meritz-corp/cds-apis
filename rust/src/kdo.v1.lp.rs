@@ -76,7 +76,7 @@ pub struct EtfLpQuantityLimit {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfPricing {
-    #[prost(oneof="etf_pricing::Method", tags="1, 2, 3")]
+    #[prost(oneof="etf_pricing::Method", tags="1, 2, 3, 4")]
     pub method: ::core::option::Option<etf_pricing::Method>,
 }
 /// Nested message and enum types in `EtfPricing`.
@@ -92,6 +92,9 @@ pub mod etf_pricing {
         IndexTrackingHedge(super::IndexTrackingHedgePricing),
         #[prost(message, tag="3")]
         FutureBasis(super::FutureBasis),
+        /// 레버리지 선물 방식
+        #[prost(message, tag="4")]
+        LeverageFuture(super::LeverageFuturePricing),
     }
 }
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
@@ -109,6 +112,17 @@ pub struct IndexTrackingHedgePricing {
 pub struct FutureBasis {
     #[prost(string, tag="1")]
     pub prev_index: ::prost::alloc::string::String,
+}
+/// 레버리지 선물 가격 산출
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LeverageFuturePricing {
+    /// 기초지수 전일종가
+    #[prost(double, tag="1")]
+    pub prev_index: f64,
+    /// 선물 전일종가
+    #[prost(double, tag="2")]
+    pub prev_future: f64,
 }
 // ========== ETF LP Status Messages ==========
 

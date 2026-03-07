@@ -128,6 +128,7 @@ const EtfPricing$json = {
     {'1': 'pdf_nav_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.PdfNavHedgePricing', '9': 0, '10': 'pdfNavHedge'},
     {'1': 'index_tracking_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.IndexTrackingHedgePricing', '9': 0, '10': 'indexTrackingHedge'},
     {'1': 'future_basis', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.lp.FutureBasis', '9': 0, '10': 'futureBasis'},
+    {'1': 'leverage_future', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.lp.LeverageFuturePricing', '9': 0, '10': 'leverageFuture'},
   ],
   '8': [
     {'1': 'method'},
@@ -140,7 +141,8 @@ final $typed_data.Uint8List etfPricingDescriptor = $convert.base64Decode(
     'VkZ2VQcmljaW5nSABSC3BkZk5hdkhlZGdlElgKFGluZGV4X3RyYWNraW5nX2hlZGdlGAIgASgL'
     'MiQua2RvLnYxLmxwLkluZGV4VHJhY2tpbmdIZWRnZVByaWNpbmdIAFISaW5kZXhUcmFja2luZ0'
     'hlZGdlEjsKDGZ1dHVyZV9iYXNpcxgDIAEoCzIWLmtkby52MS5scC5GdXR1cmVCYXNpc0gAUgtm'
-    'dXR1cmVCYXNpc0IICgZtZXRob2Q=');
+    'dXR1cmVCYXNpcxJLCg9sZXZlcmFnZV9mdXR1cmUYBCABKAsyIC5rZG8udjEubHAuTGV2ZXJhZ2'
+    'VGdXR1cmVQcmljaW5nSABSDmxldmVyYWdlRnV0dXJlQggKBm1ldGhvZA==');
 
 @$core.Deprecated('Use pdfNavHedgePricingDescriptor instead')
 const PdfNavHedgePricing$json = {
@@ -171,6 +173,20 @@ const FutureBasis$json = {
 /// Descriptor for `FutureBasis`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List futureBasisDescriptor = $convert.base64Decode(
     'CgtGdXR1cmVCYXNpcxIdCgpwcmV2X2luZGV4GAEgASgJUglwcmV2SW5kZXg=');
+
+@$core.Deprecated('Use leverageFuturePricingDescriptor instead')
+const LeverageFuturePricing$json = {
+  '1': 'LeverageFuturePricing',
+  '2': [
+    {'1': 'prev_index', '3': 1, '4': 1, '5': 1, '10': 'prevIndex'},
+    {'1': 'prev_future', '3': 2, '4': 1, '5': 1, '10': 'prevFuture'},
+  ],
+};
+
+/// Descriptor for `LeverageFuturePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List leverageFuturePricingDescriptor = $convert.base64Decode(
+    'ChVMZXZlcmFnZUZ1dHVyZVByaWNpbmcSHQoKcHJldl9pbmRleBgBIAEoAVIJcHJldkluZGV4Eh'
+    '8KC3ByZXZfZnV0dXJlGAIgASgBUgpwcmV2RnV0dXJl');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {

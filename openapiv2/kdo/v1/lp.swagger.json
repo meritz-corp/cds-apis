@@ -917,6 +917,10 @@
         },
         "futureBasis": {
           "$ref": "#/definitions/lpFutureBasis"
+        },
+        "leverageFuture": {
+          "$ref": "#/definitions/lpLeverageFuturePricing",
+          "title": "레버리지 선물 방식"
         }
       },
       "title": "ETF 가격 산출 방식"
@@ -956,6 +960,22 @@
     "lpIndexTrackingHedgePricing": {
       "type": "object",
       "title": "선물 헷지 가격 산출"
+    },
+    "lpLeverageFuturePricing": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "number",
+          "format": "double",
+          "title": "기초지수 전일종가"
+        },
+        "prevFuture": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 전일종가"
+        }
+      },
+      "title": "레버리지 선물 가격 산출"
     },
     "lpListEtfLpStatusesResponse": {
       "type": "object",

@@ -181,6 +181,9 @@ message EtfPricing {
     IndexTrackingHedgePricing index_tracking_hedge = 2;
 
     FutureBasis future_basis = 3;
+
+    // 레버리지 선물 방식
+    LeverageFuturePricing leverage_future = 4;
   }
 }
 
@@ -192,6 +195,15 @@ message IndexTrackingHedgePricing {}
 
 message FutureBasis {
   string prev_index = 1;
+}
+
+// 레버리지 선물 가격 산출
+message LeverageFuturePricing {
+  // 기초지수 전일종가
+  double prev_index = 1;
+
+  // 선물 전일종가
+  double prev_future = 2;
 }
 
 // ========== ETF LP Status Messages ==========
