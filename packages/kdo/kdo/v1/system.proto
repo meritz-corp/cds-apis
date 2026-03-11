@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package kdo.v1.system;
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// SystemService provides system-level information about the running KDO instance.
+service SystemService {
+  // GetConnectionInfo returns current market feed and FEP connection information.
+  rpc GetConnectionInfo(GetConnectionInfoRequest) returns (GetConnectionInfoResponse) {}
+}
+
+message GetConnectionInfoRequest {}
+
+message GetConnectionInfoResponse {
+  // Market feed connection info per exchange
+  MarketFeedInfo krx_market_feed = 1;
+  MarketFeedInfo nxt_market_feed = 2;  // optional
+
+  // FEP connection info
+  FepInfo fep = 3;
+}
+
+// Market feed implementation info
+message MarketFeedInfo {
+  string implementation = 1;  // "udp", "file", "websocket", "grpc", "simulation"
+}
+
+// FEP connection info
+message FepInfo {
+  string implementation = 1;  // "fake_memory", "fake_tcp", "tcp"
+  repeated FepClientInfo clients = 2;  // populated when implementation is "tcp"
+}
+
+// Individual FEP client connection info
+message FepClientInfo {
+  string market_type = 1;     // "Kospi", "Kosdaq", "Deriv"
+  string exchange_type = 2;   // "Krx"
+  string client_type = 3;     // "Submit", "Trade"
+  string task_code = 4;       // e.g., "A831", "B851"
+  string transport_type = 5;  // "tcp", "unix"
+  string host = 6;            // IP address (for tcp) or empty (for unix)
+  uint32 port = 7;            // port number (for tcp) or 0 (for unix)
+  string path = 8;            // unix socket path (for unix) or empty (for tcp)
+  string hostname = 9;        // resolved hostname/alias (e.g., "pfds11", "pfds14")
+}

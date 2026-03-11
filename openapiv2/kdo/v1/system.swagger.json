@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/system.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "SystemService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "systemFepClientInfo": {
+      "type": "object",
+      "properties": {
+        "marketType": {
+          "type": "string",
+          "title": "\"Kospi\", \"Kosdaq\", \"Deriv\""
+        },
+        "exchangeType": {
+          "type": "string",
+          "title": "\"Krx\""
+        },
+        "clientType": {
+          "type": "string",
+          "title": "\"Submit\", \"Trade\""
+        },
+        "taskCode": {
+          "type": "string",
+          "title": "e.g., \"A831\", \"B851\""
+        },
+        "transportType": {
+          "type": "string",
+          "title": "\"tcp\", \"unix\""
+        },
+        "host": {
+          "type": "string",
+          "title": "IP address (for tcp) or empty (for unix)"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "title": "port number (for tcp) or 0 (for unix)"
+        },
+        "path": {
+          "type": "string",
+          "title": "unix socket path (for unix) or empty (for tcp)"
+        },
+        "hostname": {
+          "type": "string",
+          "title": "resolved hostname/alias (e.g., \"pfds11\", \"pfds14\")"
+        }
+      },
+      "title": "Individual FEP client connection info"
+    },
+    "systemFepInfo": {
+      "type": "object",
+      "properties": {
+        "implementation": {
+          "type": "string",
+          "title": "\"fake_memory\", \"fake_tcp\", \"tcp\""
+        },
+        "clients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/systemFepClientInfo"
+          },
+          "title": "populated when implementation is \"tcp\""
+        }
+      },
+      "title": "FEP connection info"
+    },
+    "systemGetConnectionInfoResponse": {
+      "type": "object",
+      "properties": {
+        "krxMarketFeed": {
+          "$ref": "#/definitions/systemMarketFeedInfo",
+          "title": "Market feed connection info per exchange"
+        },
+        "nxtMarketFeed": {
+          "$ref": "#/definitions/systemMarketFeedInfo",
+          "title": "optional"
+        },
+        "fep": {
+          "$ref": "#/definitions/systemFepInfo",
+          "title": "FEP connection info"
+        }
+      }
+    },
+    "systemMarketFeedInfo": {
+      "type": "object",
+      "properties": {
+        "implementation": {
+          "type": "string",
+          "title": "\"udp\", \"file\", \"websocket\", \"grpc\", \"simulation\""
+        }
+      },
+      "title": "Market feed implementation info"
+    }
+  }
+}
