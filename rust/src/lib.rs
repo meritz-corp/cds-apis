@@ -80,6 +80,9 @@ pub mod kdo {
         pub mod common {
             include!("kdo.v1.common.rs");
         }
+        pub mod system {
+            include!("kdo.v1.system.rs");
+        }
     }
 }
 pub mod market {
