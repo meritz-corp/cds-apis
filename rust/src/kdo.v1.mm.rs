@@ -264,6 +264,31 @@ pub struct UpdateMmRequest {
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<MmConfiguration>,
 }
+/// GetMmOrderbook / StreamMmOrderbook
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetMmOrderbookRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// MM 전용 주문장 데이터
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MmOrderbookData {
+    /// 매수 호가 목록 (string 표현)
+    #[prost(string, repeated, tag="1")]
+    pub bid_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 매도 호가 목록 (string 표현)
+    #[prost(string, repeated, tag="2")]
+    pub ask_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 매수 수량 목록
+    #[prost(int64, repeated, tag="3")]
+    pub bid_quantities: ::prost::alloc::vec::Vec<i64>,
+    /// 매도 수량 목록
+    #[prost(int64, repeated, tag="4")]
+    pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
+}
 // ============================================================================
 // Enums
 // ============================================================================

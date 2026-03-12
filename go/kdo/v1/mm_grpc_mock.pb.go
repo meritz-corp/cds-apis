@@ -254,6 +254,248 @@ func (mr *MockMmService_StreamMmStatusServerMockRecorder) SetTrailer(arg0 interf
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockMmService_StreamMmStatusServer)(nil).SetTrailer), arg0)
 }
 
+// MockMmService_StreamMmOrderbookClient is a mock of MmService_StreamMmOrderbookClient interface.
+type MockMmService_StreamMmOrderbookClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockMmService_StreamMmOrderbookClientMockRecorder
+}
+
+// MockMmService_StreamMmOrderbookClientMockRecorder is the mock recorder for MockMmService_StreamMmOrderbookClient.
+type MockMmService_StreamMmOrderbookClientMockRecorder struct {
+	mock *MockMmService_StreamMmOrderbookClient
+}
+
+// NewMockMmService_StreamMmOrderbookClient creates a new mock instance.
+func NewMockMmService_StreamMmOrderbookClient(ctrl *gomock.Controller) *MockMmService_StreamMmOrderbookClient {
+	mock := &MockMmService_StreamMmOrderbookClient{ctrl: ctrl}
+	mock.recorder = &MockMmService_StreamMmOrderbookClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockMmService_StreamMmOrderbookClient) EXPECT() *MockMmService_StreamMmOrderbookClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockMmService_StreamMmOrderbookClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockMmService_StreamMmOrderbookClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockMmService_StreamMmOrderbookClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockMmService_StreamMmOrderbookClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockMmService_StreamMmOrderbookClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMmService_StreamMmOrderbookClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockMmService_StreamMmOrderbookClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockMmService_StreamMmOrderbookClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockMmService_StreamMmOrderbookClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockMmService_StreamMmOrderbookClient) Recv() (*MmOrderbookData, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*MmOrderbookData)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockMmService_StreamMmOrderbookClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockMmService_StreamMmOrderbookClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockMmService_StreamMmOrderbookClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockMmService_StreamMmOrderbookClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMmService_StreamMmOrderbookClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockMmService_StreamMmOrderbookClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockMmService_StreamMmOrderbookClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMmService_StreamMmOrderbookClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockMmService_StreamMmOrderbookClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockMmService_StreamMmOrderbookClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockMmService_StreamMmOrderbookClient)(nil).Trailer))
+}
+
+// MockMmService_StreamMmOrderbookServer is a mock of MmService_StreamMmOrderbookServer interface.
+type MockMmService_StreamMmOrderbookServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockMmService_StreamMmOrderbookServerMockRecorder
+}
+
+// MockMmService_StreamMmOrderbookServerMockRecorder is the mock recorder for MockMmService_StreamMmOrderbookServer.
+type MockMmService_StreamMmOrderbookServerMockRecorder struct {
+	mock *MockMmService_StreamMmOrderbookServer
+}
+
+// NewMockMmService_StreamMmOrderbookServer creates a new mock instance.
+func NewMockMmService_StreamMmOrderbookServer(ctrl *gomock.Controller) *MockMmService_StreamMmOrderbookServer {
+	mock := &MockMmService_StreamMmOrderbookServer{ctrl: ctrl}
+	mock.recorder = &MockMmService_StreamMmOrderbookServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockMmService_StreamMmOrderbookServer) EXPECT() *MockMmService_StreamMmOrderbookServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockMmService_StreamMmOrderbookServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockMmService_StreamMmOrderbookServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMmService_StreamMmOrderbookServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockMmService_StreamMmOrderbookServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockMmService_StreamMmOrderbookServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMmService_StreamMmOrderbookServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockMmService_StreamMmOrderbookServer) Send(arg0 *MmOrderbookData) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockMmService_StreamMmOrderbookServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockMmService_StreamMmOrderbookServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockMmService_StreamMmOrderbookServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockMmService_StreamMmOrderbookServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockMmService_StreamMmOrderbookServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockMmService_StreamMmOrderbookServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockMmService_StreamMmOrderbookServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMmService_StreamMmOrderbookServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockMmService_StreamMmOrderbookServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockMmService_StreamMmOrderbookServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockMmService_StreamMmOrderbookServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockMmService_StreamMmOrderbookServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockMmService_StreamMmOrderbookServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockMmService_StreamMmOrderbookServer)(nil).SetTrailer), arg0)
+}
+
 // MockMmServiceClient is a mock of MmServiceClient interface.
 type MockMmServiceClient struct {
 	ctrl     *gomock.Controller
@@ -295,6 +537,26 @@ func (mr *MockMmServiceClientMockRecorder) CreateMm(ctx, in interface{}, opts ..
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMm", reflect.TypeOf((*MockMmServiceClient)(nil).CreateMm), varargs...)
+}
+
+// GetMmOrderbook mocks base method.
+func (m *MockMmServiceClient) GetMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (*MmOrderbookData, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetMmOrderbook", varargs...)
+	ret0, _ := ret[0].(*MmOrderbookData)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMmOrderbook indicates an expected call of GetMmOrderbook.
+func (mr *MockMmServiceClientMockRecorder) GetMmOrderbook(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMmOrderbook", reflect.TypeOf((*MockMmServiceClient)(nil).GetMmOrderbook), varargs...)
 }
 
 // GetMmStatus mocks base method.
@@ -437,6 +699,26 @@ func (mr *MockMmServiceClientMockRecorder) StopMm(ctx, in interface{}, opts ...i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopMm", reflect.TypeOf((*MockMmServiceClient)(nil).StopMm), varargs...)
 }
 
+// StreamMmOrderbook mocks base method.
+func (m *MockMmServiceClient) StreamMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (MmService_StreamMmOrderbookClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamMmOrderbook", varargs...)
+	ret0, _ := ret[0].(MmService_StreamMmOrderbookClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamMmOrderbook indicates an expected call of StreamMmOrderbook.
+func (mr *MockMmServiceClientMockRecorder) StreamMmOrderbook(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMmOrderbook", reflect.TypeOf((*MockMmServiceClient)(nil).StreamMmOrderbook), varargs...)
+}
+
 // StreamMmStatus mocks base method.
 func (m *MockMmServiceClient) StreamMmStatus(ctx context.Context, in *StreamMmStatusRequest, opts ...grpc.CallOption) (MmService_StreamMmStatusClient, error) {
 	m.ctrl.T.Helper()
@@ -533,6 +815,21 @@ func (m *MockMmServiceServer) CreateMm(ctx context.Context, in *CreateMmRequest)
 func (mr *MockMmServiceServerMockRecorder) CreateMm(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMm", reflect.TypeOf((*MockMmServiceServer)(nil).CreateMm), ctx, in)
+}
+
+// GetMmOrderbook mocks base method.
+func (m *MockMmServiceServer) GetMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest) (*MmOrderbookData, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMmOrderbook", ctx, in)
+	ret0, _ := ret[0].(*MmOrderbookData)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMmOrderbook indicates an expected call of GetMmOrderbook.
+func (mr *MockMmServiceServerMockRecorder) GetMmOrderbook(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMmOrderbook", reflect.TypeOf((*MockMmServiceServer)(nil).GetMmOrderbook), ctx, in)
 }
 
 // GetMmStatus mocks base method.
@@ -638,6 +935,20 @@ func (m *MockMmServiceServer) StopMm(ctx context.Context, in *StopMmRequest) (*S
 func (mr *MockMmServiceServerMockRecorder) StopMm(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopMm", reflect.TypeOf((*MockMmServiceServer)(nil).StopMm), ctx, in)
+}
+
+// StreamMmOrderbook mocks base method.
+func (m *MockMmServiceServer) StreamMmOrderbook(blob *GetMmOrderbookRequest, server MmService_StreamMmOrderbookServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamMmOrderbook", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamMmOrderbook indicates an expected call of StreamMmOrderbook.
+func (mr *MockMmServiceServerMockRecorder) StreamMmOrderbook(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMmOrderbook", reflect.TypeOf((*MockMmServiceServer)(nil).StreamMmOrderbook), blob, server)
 }
 
 // StreamMmStatus mocks base method.

@@ -44,6 +44,10 @@ type MmServiceClient interface {
 	UpdateMmConfig(ctx context.Context, in *UpdateMmConfigRequest, opts ...grpc.CallOption) (*MmConfiguration, error)
 	// MM 실시간 상태 스트리밍 (서버→클라이언트)
 	StreamMmStatus(ctx context.Context, in *StreamMmStatusRequest, opts ...grpc.CallOption) (MmService_StreamMmStatusClient, error)
+	// MM 전용 주문장 조회
+	GetMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (*MmOrderbookData, error)
+	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
+	StreamMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (MmService_StreamMmOrderbookClient, error)
 }
 
 type mmServiceClient struct {
@@ -176,6 +180,47 @@ func (x *mmServiceStreamMmStatusClient) Recv() (*MmStatus, error) {
 	return m, nil
 }
 
+func (c *mmServiceClient) GetMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (*MmOrderbookData, error) {
+	out := new(MmOrderbookData)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/GetMmOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mmServiceClient) StreamMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (MmService_StreamMmOrderbookClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MmService_ServiceDesc.Streams[1], "/kdo.v1.mm.MmService/StreamMmOrderbook", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &mmServiceStreamMmOrderbookClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MmService_StreamMmOrderbookClient interface {
+	Recv() (*MmOrderbookData, error)
+	grpc.ClientStream
+}
+
+type mmServiceStreamMmOrderbookClient struct {
+	grpc.ClientStream
+}
+
+func (x *mmServiceStreamMmOrderbookClient) Recv() (*MmOrderbookData, error) {
+	m := new(MmOrderbookData)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // MmServiceServer is the server API for MmService service.
 // All implementations must embed UnimplementedMmServiceServer
 // for forward compatibility
@@ -202,6 +247,10 @@ type MmServiceServer interface {
 	UpdateMmConfig(context.Context, *UpdateMmConfigRequest) (*MmConfiguration, error)
 	// MM 실시간 상태 스트리밍 (서버→클라이언트)
 	StreamMmStatus(*StreamMmStatusRequest, MmService_StreamMmStatusServer) error
+	// MM 전용 주문장 조회
+	GetMmOrderbook(context.Context, *GetMmOrderbookRequest) (*MmOrderbookData, error)
+	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
+	StreamMmOrderbook(*GetMmOrderbookRequest, MmService_StreamMmOrderbookServer) error
 	mustEmbedUnimplementedMmServiceServer()
 }
 
@@ -241,6 +290,12 @@ func (UnimplementedMmServiceServer) UpdateMmConfig(context.Context, *UpdateMmCon
 }
 func (UnimplementedMmServiceServer) StreamMmStatus(*StreamMmStatusRequest, MmService_StreamMmStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMmStatus not implemented")
+}
+func (UnimplementedMmServiceServer) GetMmOrderbook(context.Context, *GetMmOrderbookRequest) (*MmOrderbookData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMmOrderbook not implemented")
+}
+func (UnimplementedMmServiceServer) StreamMmOrderbook(*GetMmOrderbookRequest, MmService_StreamMmOrderbookServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamMmOrderbook not implemented")
 }
 func (UnimplementedMmServiceServer) mustEmbedUnimplementedMmServiceServer() {}
 
@@ -456,6 +511,45 @@ func (x *mmServiceStreamMmStatusServer) Send(m *MmStatus) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MmService_GetMmOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMmOrderbookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MmServiceServer).GetMmOrderbook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MmService/GetMmOrderbook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MmServiceServer).GetMmOrderbook(ctx, req.(*GetMmOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MmService_StreamMmOrderbook_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetMmOrderbookRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MmServiceServer).StreamMmOrderbook(m, &mmServiceStreamMmOrderbookServer{stream})
+}
+
+type MmService_StreamMmOrderbookServer interface {
+	Send(*MmOrderbookData) error
+	grpc.ServerStream
+}
+
+type mmServiceStreamMmOrderbookServer struct {
+	grpc.ServerStream
+}
+
+func (x *mmServiceStreamMmOrderbookServer) Send(m *MmOrderbookData) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // MmService_ServiceDesc is the grpc.ServiceDesc for MmService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -503,11 +597,20 @@ var MmService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UpdateMmConfig",
 			Handler:    _MmService_UpdateMmConfig_Handler,
 		},
+		{
+			MethodName: "GetMmOrderbook",
+			Handler:    _MmService_GetMmOrderbook_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "StreamMmStatus",
 			Handler:       _MmService_StreamMmStatus_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamMmOrderbook",
+			Handler:       _MmService_StreamMmOrderbook_Handler,
 			ServerStreams: true,
 		},
 	},

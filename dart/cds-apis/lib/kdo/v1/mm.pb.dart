@@ -1471,6 +1471,117 @@ class UpdateMmRequest extends $pb.GeneratedMessage {
   MmConfiguration ensureConfig() => $_ensure(1);
 }
 
+/// GetMmOrderbook / StreamMmOrderbook
+class GetMmOrderbookRequest extends $pb.GeneratedMessage {
+  factory GetMmOrderbookRequest({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  GetMmOrderbookRequest._();
+
+  factory GetMmOrderbookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetMmOrderbookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMmOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetMmOrderbookRequest clone() => GetMmOrderbookRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetMmOrderbookRequest copyWith(void Function(GetMmOrderbookRequest) updates) => super.copyWith((message) => updates(message as GetMmOrderbookRequest)) as GetMmOrderbookRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetMmOrderbookRequest create() => GetMmOrderbookRequest._();
+  @$core.override
+  GetMmOrderbookRequest createEmptyInstance() => create();
+  static $pb.PbList<GetMmOrderbookRequest> createRepeated() => $pb.PbList<GetMmOrderbookRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetMmOrderbookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMmOrderbookRequest>(create);
+  static GetMmOrderbookRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
+/// MM 전용 주문장 데이터
+class MmOrderbookData extends $pb.GeneratedMessage {
+  factory MmOrderbookData({
+    $core.Iterable<$core.String>? bidPrices,
+    $core.Iterable<$core.String>? askPrices,
+    $core.Iterable<$fixnum.Int64>? bidQuantities,
+    $core.Iterable<$fixnum.Int64>? askQuantities,
+  }) {
+    final result = create();
+    if (bidPrices != null) result.bidPrices.addAll(bidPrices);
+    if (askPrices != null) result.askPrices.addAll(askPrices);
+    if (bidQuantities != null) result.bidQuantities.addAll(bidQuantities);
+    if (askQuantities != null) result.askQuantities.addAll(askQuantities);
+    return result;
+  }
+
+  MmOrderbookData._();
+
+  factory MmOrderbookData.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmOrderbookData.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmOrderbookData', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'bidPrices')
+    ..pPS(2, _omitFieldNames ? '' : 'askPrices')
+    ..p<$fixnum.Int64>(3, _omitFieldNames ? '' : 'bidQuantities', $pb.PbFieldType.K6)
+    ..p<$fixnum.Int64>(4, _omitFieldNames ? '' : 'askQuantities', $pb.PbFieldType.K6)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmOrderbookData clone() => MmOrderbookData()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmOrderbookData copyWith(void Function(MmOrderbookData) updates) => super.copyWith((message) => updates(message as MmOrderbookData)) as MmOrderbookData;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmOrderbookData create() => MmOrderbookData._();
+  @$core.override
+  MmOrderbookData createEmptyInstance() => create();
+  static $pb.PbList<MmOrderbookData> createRepeated() => $pb.PbList<MmOrderbookData>();
+  @$core.pragma('dart2js:noInline')
+  static MmOrderbookData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmOrderbookData>(create);
+  static MmOrderbookData? _defaultInstance;
+
+  /// 매수 호가 목록 (string 표현)
+  @$pb.TagNumber(1)
+  $pb.PbList<$core.String> get bidPrices => $_getList(0);
+
+  /// 매도 호가 목록 (string 표현)
+  @$pb.TagNumber(2)
+  $pb.PbList<$core.String> get askPrices => $_getList(1);
+
+  /// 매수 수량 목록
+  @$pb.TagNumber(3)
+  $pb.PbList<$fixnum.Int64> get bidQuantities => $_getList(2);
+
+  /// 매도 수량 목록
+  @$pb.TagNumber(4)
+  $pb.PbList<$fixnum.Int64> get askQuantities => $_getList(3);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -88,6 +88,16 @@ class MmServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamMmStatus, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// MM 전용 주문장 조회
+  $grpc.ResponseFuture<$0.MmOrderbookData> getMmOrderbook($0.GetMmOrderbookRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMmOrderbook, request, options: options);
+  }
+
+  /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
+  $grpc.ResponseStream<$0.MmOrderbookData> streamMmOrderbook($0.GetMmOrderbookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMmOrderbook, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$listMm = $grpc.ClientMethod<$0.ListMmRequest, $0.ListMmResponse>(
@@ -134,6 +144,14 @@ class MmServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MmService/StreamMmStatus',
       ($0.StreamMmStatusRequest value) => value.writeToBuffer(),
       $0.MmStatus.fromBuffer);
+  static final _$getMmOrderbook = $grpc.ClientMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
+      '/kdo.v1.mm.MmService/GetMmOrderbook',
+      ($0.GetMmOrderbookRequest value) => value.writeToBuffer(),
+      $0.MmOrderbookData.fromBuffer);
+  static final _$streamMmOrderbook = $grpc.ClientMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
+      '/kdo.v1.mm.MmService/StreamMmOrderbook',
+      ($0.GetMmOrderbookRequest value) => value.writeToBuffer(),
+      $0.MmOrderbookData.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MmService')
@@ -218,6 +236,20 @@ abstract class MmServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamMmStatusRequest.fromBuffer(value),
         ($0.MmStatus value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
+        'GetMmOrderbook',
+        getMmOrderbook_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetMmOrderbookRequest.fromBuffer(value),
+        ($0.MmOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
+        'StreamMmOrderbook',
+        streamMmOrderbook_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetMmOrderbookRequest.fromBuffer(value),
+        ($0.MmOrderbookData value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMmResponse> listMm_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmRequest> $request) async {
@@ -285,5 +317,17 @@ abstract class MmServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.MmStatus> streamMmStatus($grpc.ServiceCall call, $0.StreamMmStatusRequest request);
+
+  $async.Future<$0.MmOrderbookData> getMmOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmOrderbookRequest> $request) async {
+    return getMmOrderbook($call, await $request);
+  }
+
+  $async.Future<$0.MmOrderbookData> getMmOrderbook($grpc.ServiceCall call, $0.GetMmOrderbookRequest request);
+
+  $async.Stream<$0.MmOrderbookData> streamMmOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmOrderbookRequest> $request) async* {
+    yield* streamMmOrderbook($call, await $request);
+  }
+
+  $async.Stream<$0.MmOrderbookData> streamMmOrderbook($grpc.ServiceCall call, $0.GetMmOrderbookRequest request);
 
 }

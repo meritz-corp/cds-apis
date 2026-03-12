@@ -360,3 +360,32 @@ final $typed_data.Uint8List updateMmRequestDescriptor = $convert.base64Decode(
     'Cg9VcGRhdGVNbVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSOAoGY29uZm'
     'lnGAIgASgLMhoua2RvLnYxLm1tLk1tQ29uZmlndXJhdGlvbkIE4kEBAlIGY29uZmln');
 
+@$core.Deprecated('Use getMmOrderbookRequestDescriptor instead')
+const GetMmOrderbookRequest$json = {
+  '1': 'GetMmOrderbookRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `GetMmOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMmOrderbookRequestDescriptor = $convert.base64Decode(
+    'ChVHZXRNbU9yZGVyYm9va1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2w=');
+
+@$core.Deprecated('Use mmOrderbookDataDescriptor instead')
+const MmOrderbookData$json = {
+  '1': 'MmOrderbookData',
+  '2': [
+    {'1': 'bid_prices', '3': 1, '4': 3, '5': 9, '10': 'bidPrices'},
+    {'1': 'ask_prices', '3': 2, '4': 3, '5': 9, '10': 'askPrices'},
+    {'1': 'bid_quantities', '3': 3, '4': 3, '5': 3, '10': 'bidQuantities'},
+    {'1': 'ask_quantities', '3': 4, '4': 3, '5': 3, '10': 'askQuantities'},
+  ],
+};
+
+/// Descriptor for `MmOrderbookData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmOrderbookDataDescriptor = $convert.base64Decode(
+    'Cg9NbU9yZGVyYm9va0RhdGESHQoKYmlkX3ByaWNlcxgBIAMoCVIJYmlkUHJpY2VzEh0KCmFza1'
+    '9wcmljZXMYAiADKAlSCWFza1ByaWNlcxIlCg5iaWRfcXVhbnRpdGllcxgDIAMoA1INYmlkUXVh'
+    'bnRpdGllcxIlCg5hc2tfcXVhbnRpdGllcxgEIAMoA1INYXNrUXVhbnRpdGllcw==');
+

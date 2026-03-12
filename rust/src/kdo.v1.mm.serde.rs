@@ -111,6 +111,101 @@ impl<'de> serde::Deserialize<'de> for CreateMmRequest {
         deserializer.deserialize_struct("kdo.v1.mm.CreateMmRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for GetMmOrderbookRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetMmOrderbookRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetMmOrderbookRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetMmOrderbookRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.GetMmOrderbookRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMmOrderbookRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetMmOrderbookRequest {
+                    symbol: symbol__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.GetMmOrderbookRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for GetMmStatusRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -733,6 +828,162 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MmEntry", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MmOrderbookData {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmOrderbookData", len)?;
+        if true {
+            struct_ser.serialize_field("bid_prices", &self.bid_prices)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_prices", &self.ask_prices)?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_quantities", &self.bid_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_quantities", &self.ask_quantities.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmOrderbookData {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "bid_prices",
+            "bidPrices",
+            "ask_prices",
+            "askPrices",
+            "bid_quantities",
+            "bidQuantities",
+            "ask_quantities",
+            "askQuantities",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            BidPrices,
+            AskPrices,
+            BidQuantities,
+            AskQuantities,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "bidPrices" | "bid_prices" => Ok(GeneratedField::BidPrices),
+                            "askPrices" | "ask_prices" => Ok(GeneratedField::AskPrices),
+                            "bidQuantities" | "bid_quantities" => Ok(GeneratedField::BidQuantities),
+                            "askQuantities" | "ask_quantities" => Ok(GeneratedField::AskQuantities),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmOrderbookData;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MmOrderbookData")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmOrderbookData, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut bid_prices__ = None;
+                let mut ask_prices__ = None;
+                let mut bid_quantities__ = None;
+                let mut ask_quantities__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::BidPrices => {
+                            if bid_prices__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidPrices"));
+                            }
+                            bid_prices__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AskPrices => {
+                            if ask_prices__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askPrices"));
+                            }
+                            ask_prices__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BidQuantities => {
+                            if bid_quantities__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantities"));
+                            }
+                            bid_quantities__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
+                        GeneratedField::AskQuantities => {
+                            if ask_quantities__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantities"));
+                            }
+                            ask_quantities__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmOrderbookData {
+                    bid_prices: bid_prices__.unwrap_or_default(),
+                    ask_prices: ask_prices__.unwrap_or_default(),
+                    bid_quantities: bid_quantities__.unwrap_or_default(),
+                    ask_quantities: ask_quantities__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MmOrderbookData", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MmScreeningConfig {

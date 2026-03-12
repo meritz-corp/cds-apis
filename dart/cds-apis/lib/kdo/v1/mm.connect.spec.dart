@@ -98,4 +98,20 @@ abstract final class MmService {
     kdov1mm.StreamMmStatusRequest.new,
     kdov1mm.MmStatus.new,
   );
+
+  /// MM 전용 주문장 조회
+  static const getMmOrderbook = connect.Spec(
+    '/$name/GetMmOrderbook',
+    connect.StreamType.unary,
+    kdov1mm.GetMmOrderbookRequest.new,
+    kdov1mm.MmOrderbookData.new,
+  );
+
+  /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
+  static const streamMmOrderbook = connect.Spec(
+    '/$name/StreamMmOrderbook',
+    connect.StreamType.server,
+    kdov1mm.GetMmOrderbookRequest.new,
+    kdov1mm.MmOrderbookData.new,
+  );
 }

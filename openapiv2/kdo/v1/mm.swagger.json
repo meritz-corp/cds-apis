@@ -189,6 +189,81 @@
         ]
       }
     },
+    "/v1/mm/{symbol}/orderbook": {
+      "get": {
+        "summary": "MM 전용 주문장 조회",
+        "operationId": "MmService_GetMmOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMmOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}/orderbook:stream": {
+      "get": {
+        "summary": "MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)",
+        "operationId": "MmService_StreamMmOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/mmMmOrderbookData"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of mmMmOrderbookData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MmService"
+        ]
+      }
+    },
     "/v1/mm/{symbol}/status": {
       "get": {
         "summary": "MM 상태 조회",
@@ -560,6 +635,42 @@
         }
       },
       "title": "MM 심볼 정보"
+    },
+    "mmMmOrderbookData": {
+      "type": "object",
+      "properties": {
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매수 호가 목록 (string 표현)"
+        },
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "매도 호가 목록 (string 표현)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 목록"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 목록"
+        }
+      },
+      "title": "MM 전용 주문장 데이터"
     },
     "mmMmScreeningConfig": {
       "type": "object",

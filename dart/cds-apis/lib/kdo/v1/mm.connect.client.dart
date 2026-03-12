@@ -206,4 +206,40 @@ extension type MmServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// MM 전용 주문장 조회
+  Future<kdov1mm.MmOrderbookData> getMmOrderbook(
+    kdov1mm.GetMmOrderbookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MmService.getMmOrderbook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
+  Stream<kdov1mm.MmOrderbookData> streamMmOrderbook(
+    kdov1mm.GetMmOrderbookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MmService.streamMmOrderbook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

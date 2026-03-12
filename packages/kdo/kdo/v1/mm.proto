@@ -101,6 +101,22 @@ service MmService {
     };
     option (google.api.method_signature) = "symbol";
   }
+
+  // MM 전용 주문장 조회
+  rpc GetMmOrderbook(GetMmOrderbookRequest) returns (MmOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/orderbook"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
+  // MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
+  rpc StreamMmOrderbook(GetMmOrderbookRequest) returns (stream MmOrderbookData) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/orderbook:stream"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
 }
 
 // ============================================================================
@@ -331,4 +347,25 @@ message UpdateMmRequest {
 
   // 업데이트할 MM 설정
   MmConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// GetMmOrderbook / StreamMmOrderbook
+message GetMmOrderbookRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// MM 전용 주문장 데이터
+message MmOrderbookData {
+  // 매수 호가 목록 (string 표현)
+  repeated string bid_prices = 1;
+
+  // 매도 호가 목록 (string 표현)
+  repeated string ask_prices = 2;
+
+  // 매수 수량 목록
+  repeated int64 bid_quantities = 3;
+
+  // 매도 수량 목록
+  repeated int64 ask_quantities = 4;
 }
