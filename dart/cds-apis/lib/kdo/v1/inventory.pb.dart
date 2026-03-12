@@ -1718,11 +1718,15 @@ class RepayLoanRequest extends $pb.GeneratedMessage {
     $core.String? fund,
     $core.String? symbol,
     $fixnum.Int64? quantity,
+    $core.String? dbcrDate,
+    $fixnum.Int64? dbcrSrno,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (symbol != null) result.symbol = symbol;
     if (quantity != null) result.quantity = quantity;
+    if (dbcrDate != null) result.dbcrDate = dbcrDate;
+    if (dbcrSrno != null) result.dbcrSrno = dbcrSrno;
     return result;
   }
 
@@ -1735,6 +1739,8 @@ class RepayLoanRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aInt64(3, _omitFieldNames ? '' : 'quantity')
+    ..aOS(4, _omitFieldNames ? '' : 'dbcrDate')
+    ..aInt64(5, _omitFieldNames ? '' : 'dbcrSrno')
     ..hasRequiredFields = false
   ;
 
@@ -1784,6 +1790,26 @@ class RepayLoanRequest extends $pb.GeneratedMessage {
   $core.bool hasQuantity() => $_has(2);
   @$pb.TagNumber(3)
   void clearQuantity() => $_clearField(3);
+
+  /// 대차발생일자 (YYYYMMDD)
+  @$pb.TagNumber(4)
+  $core.String get dbcrDate => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set dbcrDate($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDbcrDate() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDbcrDate() => $_clearField(4);
+
+  /// 대차일련번호
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get dbcrSrno => $_getI64(4);
+  @$pb.TagNumber(5)
+  set dbcrSrno($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasDbcrSrno() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDbcrSrno() => $_clearField(5);
 }
 
 /// RepayLoan 응답
