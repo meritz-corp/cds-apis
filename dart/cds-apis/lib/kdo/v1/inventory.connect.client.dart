@@ -152,4 +152,58 @@ extension type InventoryServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 대차 상환 (원장 즉시 차감)
+  Future<kdov1inventory.RepayLoanResponse> repayLoan(
+    kdov1inventory.RepayLoanRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.repayLoan,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 펀드간 대차 이전 (내부대차)
+  Future<kdov1inventory.TransferLoanResponse> transferLoan(
+    kdov1inventory.TransferLoanRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.transferLoan,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
+  Future<kdov1inventory.SyncLoanDeliveriesResponse> syncLoanDeliveries(
+    kdov1inventory.SyncLoanDeliveriesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.syncLoanDeliveries,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

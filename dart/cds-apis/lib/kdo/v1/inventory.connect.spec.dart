@@ -74,4 +74,28 @@ abstract final class InventoryService {
     kdov1inventory.SyncInventoryFromLedgerRequest.new,
     kdov1inventory.SyncInventoryFromLedgerResponse.new,
   );
+
+  /// 대차 상환 (원장 즉시 차감)
+  static const repayLoan = connect.Spec(
+    '/$name/RepayLoan',
+    connect.StreamType.unary,
+    kdov1inventory.RepayLoanRequest.new,
+    kdov1inventory.RepayLoanResponse.new,
+  );
+
+  /// 펀드간 대차 이전 (내부대차)
+  static const transferLoan = connect.Spec(
+    '/$name/TransferLoan',
+    connect.StreamType.unary,
+    kdov1inventory.TransferLoanRequest.new,
+    kdov1inventory.TransferLoanResponse.new,
+  );
+
+  /// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
+  static const syncLoanDeliveries = connect.Spec(
+    '/$name/SyncLoanDeliveries',
+    connect.StreamType.unary,
+    kdov1inventory.SyncLoanDeliveriesRequest.new,
+    kdov1inventory.SyncLoanDeliveriesResponse.new,
+  );
 }

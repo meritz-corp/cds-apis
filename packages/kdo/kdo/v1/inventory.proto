@@ -76,6 +76,33 @@ service InventoryService {
     };
     option (google.api.method_signature) = "fund";
   }
+
+  // 대차 상환 (원장 즉시 차감)
+  rpc RepayLoan(RepayLoanRequest) returns (RepayLoanResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{fund=funds/*}:repayLoan"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,symbol,quantity";
+  }
+
+  // 펀드간 대차 이전 (내부대차)
+  rpc TransferLoan(TransferLoanRequest) returns (TransferLoanResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{from_fund=funds/*}:transferLoan"
+      body: "*"
+    };
+    option (google.api.method_signature) = "from_fund,to_fund,symbol,quantity,borrow,cntg_date,cntg_no";
+  }
+
+  // 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
+  rpc SyncLoanDeliveries(SyncLoanDeliveriesRequest) returns (SyncLoanDeliveriesResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{fund=funds/*}:syncLoanDeliveries"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,date";
+  }
 }
 
 // 재고 유형
@@ -424,4 +451,162 @@ message SyncInventoryFromLedgerResponse {
 
   // 동기화된 종목 수
   int32 synced_count = 2;
+}
+
+// ========== 대차거래 Request/Response Messages ==========
+
+// RepayLoan 요청
+message RepayLoanRequest {
+  // 펀드 리소스명 (예: "funds/KD0001")
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 종목코드
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 상환 수량
+  int64 quantity = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// RepayLoan 응답
+message RepayLoanResponse {}
+
+// TransferLoan 요청
+message TransferLoanRequest {
+  // 이전 출발 펀드 리소스명
+  string from_fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 이전 도착 펀드 리소스명
+  string to_fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 종목코드
+  string symbol = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 이전 수량
+  int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 이전 구분 (true=차입이전, false=대여이전)
+  bool borrow = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // 원 체결일자 (YYYYMMDD)
+  string cntg_date = 6 [(google.api.field_behavior) = REQUIRED];
+
+  // 원 체결번호
+  string cntg_no = 7 [(google.api.field_behavior) = REQUIRED];
+}
+
+// TransferLoan 응답
+message TransferLoanResponse {}
+
+// SyncLoanDeliveries 요청
+message SyncLoanDeliveriesRequest {
+  // 펀드 리소스명
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 조회 기준일자 (YYYYMMDD)
+  string date = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// SyncLoanDeliveries 응답
+message SyncLoanDeliveriesResponse {
+  // 처리된 대차 인도내역 목록
+  repeated LoanDeliveryItem items = 1;
+
+  // 처리 건수
+  int32 processed_count = 2;
+}
+
+// 대차체결인도내역 항목 (obfnp_loan_021r)
+message LoanDeliveryItem {
+  // 수신일자
+  string rcms_date = 1;
+  // 대차상대처구분코드 (1=예탁원, 2=증금)
+  string dbcr_cnof_cls_code = 2;
+  // 수신일련번호
+  string rcms_srno = 3;
+  // 펀드코드
+  string fncd = 4;
+  // 펀드명
+  string fund_name = 5;
+  // 참가기관코드
+  string prtc_istu_code = 6;
+  // 표준펀드코드
+  string stnd_fncd = 7;
+  // 체결인도구분 (01=인도, 02=미인도)
+  string cntg_trns_cls = 8;
+  // 대차체결사유코드
+  string dbcr_cntg_reas_code = 9;
+  // 대차구분코드 (1=대여, 2=차입)
+  string dbcr_cls_code = 10;
+  // 대차거래구분코드
+  string dbcr_tr_cls_code = 11;
+  // 주식채권구분코드
+  string stck_bond_cls_code = 12;
+  // 종목코드
+  string iscd = 13;
+  // 종목명
+  string isnm = 14;
+  // 대차신청일자
+  string dbcr_aplt_date = 15;
+  // 대차신청일련번호
+  string dbcr_aplt_srno = 16;
+  // 체결일자
+  string cntg_date = 17;
+  // 체결번호
+  string cntg_no = 18;
+  // 원체결일자
+  string orgl_cntg_date = 19;
+  // 원체결번호
+  string orgl_cntg_no = 20;
+  // 만기예정일자
+  string mtrt_scdl_date = 21;
+  // 대차수수료율
+  string dbcr_fert = 22;
+  // 대차수량
+  int64 dbcr_qty = 23;
+  // 현금담보금액
+  int64 cash_morg_amt = 24;
+  // 대차평가기준가
+  string dbcr_vltn_sdpr = 25;
+  // 대차평가금액
+  int64 dbcr_vltn_amt = 26;
+  // 담보비율
+  string morg_rate = 27;
+  // 거래상대방기관코드
+  string tr_cnrp_istu_cod = 28;
+  // 거래상대방펀드코드
+  string tr_cnrp_fncd = 29;
+  // 인도일자
+  string trns_date = 30;
+  // 대차체결상환구분
+  string dbcr_cntg_rdmp_cls = 31;
+  // 처리여부
+  string pros_yn = 32;
+  // 포지션구분코드
+  string pstn_cls_code = 33;
+  // 부서코드
+  string dpcd = 34;
+  // 부서명
+  string dpnm = 35;
+  // 최초체결일자
+  string frst_cntg_date = 36;
 }

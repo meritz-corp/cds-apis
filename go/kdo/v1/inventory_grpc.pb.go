@@ -38,6 +38,12 @@ type InventoryServiceClient interface {
 	UpdateInventory(ctx context.Context, in *UpdateInventoryRequest, opts ...grpc.CallOption) (*Inventory, error)
 	// 원장에서 재고 동기화
 	SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest, opts ...grpc.CallOption) (*SyncInventoryFromLedgerResponse, error)
+	// 대차 상환 (원장 즉시 차감)
+	RepayLoan(ctx context.Context, in *RepayLoanRequest, opts ...grpc.CallOption) (*RepayLoanResponse, error)
+	// 펀드간 대차 이전 (내부대차)
+	TransferLoan(ctx context.Context, in *TransferLoanRequest, opts ...grpc.CallOption) (*TransferLoanResponse, error)
+	// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
+	SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest, opts ...grpc.CallOption) (*SyncLoanDeliveriesResponse, error)
 }
 
 type inventoryServiceClient struct {
@@ -166,6 +172,33 @@ func (c *inventoryServiceClient) SyncInventoryFromLedger(ctx context.Context, in
 	return out, nil
 }
 
+func (c *inventoryServiceClient) RepayLoan(ctx context.Context, in *RepayLoanRequest, opts ...grpc.CallOption) (*RepayLoanResponse, error) {
+	out := new(RepayLoanResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/RepayLoan", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) TransferLoan(ctx context.Context, in *TransferLoanRequest, opts ...grpc.CallOption) (*TransferLoanResponse, error) {
+	out := new(TransferLoanResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/TransferLoan", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest, opts ...grpc.CallOption) (*SyncLoanDeliveriesResponse, error) {
+	out := new(SyncLoanDeliveriesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/SyncLoanDeliveries", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InventoryServiceServer is the server API for InventoryService service.
 // All implementations must embed UnimplementedInventoryServiceServer
 // for forward compatibility
@@ -186,6 +219,12 @@ type InventoryServiceServer interface {
 	UpdateInventory(context.Context, *UpdateInventoryRequest) (*Inventory, error)
 	// 원장에서 재고 동기화
 	SyncInventoryFromLedger(context.Context, *SyncInventoryFromLedgerRequest) (*SyncInventoryFromLedgerResponse, error)
+	// 대차 상환 (원장 즉시 차감)
+	RepayLoan(context.Context, *RepayLoanRequest) (*RepayLoanResponse, error)
+	// 펀드간 대차 이전 (내부대차)
+	TransferLoan(context.Context, *TransferLoanRequest) (*TransferLoanResponse, error)
+	// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
+	SyncLoanDeliveries(context.Context, *SyncLoanDeliveriesRequest) (*SyncLoanDeliveriesResponse, error)
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -216,6 +255,15 @@ func (UnimplementedInventoryServiceServer) UpdateInventory(context.Context, *Upd
 }
 func (UnimplementedInventoryServiceServer) SyncInventoryFromLedger(context.Context, *SyncInventoryFromLedgerRequest) (*SyncInventoryFromLedgerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SyncInventoryFromLedger not implemented")
+}
+func (UnimplementedInventoryServiceServer) RepayLoan(context.Context, *RepayLoanRequest) (*RepayLoanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RepayLoan not implemented")
+}
+func (UnimplementedInventoryServiceServer) TransferLoan(context.Context, *TransferLoanRequest) (*TransferLoanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferLoan not implemented")
+}
+func (UnimplementedInventoryServiceServer) SyncLoanDeliveries(context.Context, *SyncLoanDeliveriesRequest) (*SyncLoanDeliveriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncLoanDeliveries not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -380,6 +428,60 @@ func _InventoryService_SyncInventoryFromLedger_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_RepayLoan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RepayLoanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).RepayLoan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/RepayLoan",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).RepayLoan(ctx, req.(*RepayLoanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InventoryService_TransferLoan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransferLoanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).TransferLoan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/TransferLoan",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).TransferLoan(ctx, req.(*TransferLoanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InventoryService_SyncLoanDeliveries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncLoanDeliveriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).SyncLoanDeliveries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/SyncLoanDeliveries",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).SyncLoanDeliveries(ctx, req.(*SyncLoanDeliveriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InventoryService_ServiceDesc is the grpc.ServiceDesc for InventoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -410,6 +512,18 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SyncInventoryFromLedger",
 			Handler:    _InventoryService_SyncInventoryFromLedger_Handler,
+		},
+		{
+			MethodName: "RepayLoan",
+			Handler:    _InventoryService_RepayLoan_Handler,
+		},
+		{
+			MethodName: "TransferLoan",
+			Handler:    _InventoryService_TransferLoan_Handler,
+		},
+		{
+			MethodName: "SyncLoanDeliveries",
+			Handler:    _InventoryService_SyncLoanDeliveries_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

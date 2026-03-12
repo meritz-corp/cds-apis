@@ -1712,6 +1712,887 @@ class SyncInventoryFromLedgerResponse extends $pb.GeneratedMessage {
   void clearSyncedCount() => $_clearField(2);
 }
 
+/// RepayLoan 요청
+class RepayLoanRequest extends $pb.GeneratedMessage {
+  factory RepayLoanRequest({
+    $core.String? fund,
+    $core.String? symbol,
+    $fixnum.Int64? quantity,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (symbol != null) result.symbol = symbol;
+    if (quantity != null) result.quantity = quantity;
+    return result;
+  }
+
+  RepayLoanRequest._();
+
+  factory RepayLoanRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory RepayLoanRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RepayLoanRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RepayLoanRequest clone() => RepayLoanRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RepayLoanRequest copyWith(void Function(RepayLoanRequest) updates) => super.copyWith((message) => updates(message as RepayLoanRequest)) as RepayLoanRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RepayLoanRequest create() => RepayLoanRequest._();
+  @$core.override
+  RepayLoanRequest createEmptyInstance() => create();
+  static $pb.PbList<RepayLoanRequest> createRepeated() => $pb.PbList<RepayLoanRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RepayLoanRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RepayLoanRequest>(create);
+  static RepayLoanRequest? _defaultInstance;
+
+  /// 펀드 리소스명 (예: "funds/KD0001")
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 종목코드
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 상환 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get quantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearQuantity() => $_clearField(3);
+}
+
+/// RepayLoan 응답
+class RepayLoanResponse extends $pb.GeneratedMessage {
+  factory RepayLoanResponse() => create();
+
+  RepayLoanResponse._();
+
+  factory RepayLoanResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory RepayLoanResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RepayLoanResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RepayLoanResponse clone() => RepayLoanResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RepayLoanResponse copyWith(void Function(RepayLoanResponse) updates) => super.copyWith((message) => updates(message as RepayLoanResponse)) as RepayLoanResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RepayLoanResponse create() => RepayLoanResponse._();
+  @$core.override
+  RepayLoanResponse createEmptyInstance() => create();
+  static $pb.PbList<RepayLoanResponse> createRepeated() => $pb.PbList<RepayLoanResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RepayLoanResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RepayLoanResponse>(create);
+  static RepayLoanResponse? _defaultInstance;
+}
+
+/// TransferLoan 요청
+class TransferLoanRequest extends $pb.GeneratedMessage {
+  factory TransferLoanRequest({
+    $core.String? fromFund,
+    $core.String? toFund,
+    $core.String? symbol,
+    $fixnum.Int64? quantity,
+    $core.bool? borrow,
+    $core.String? cntgDate,
+    $core.String? cntgNo,
+  }) {
+    final result = create();
+    if (fromFund != null) result.fromFund = fromFund;
+    if (toFund != null) result.toFund = toFund;
+    if (symbol != null) result.symbol = symbol;
+    if (quantity != null) result.quantity = quantity;
+    if (borrow != null) result.borrow = borrow;
+    if (cntgDate != null) result.cntgDate = cntgDate;
+    if (cntgNo != null) result.cntgNo = cntgNo;
+    return result;
+  }
+
+  TransferLoanRequest._();
+
+  factory TransferLoanRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TransferLoanRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TransferLoanRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fromFund')
+    ..aOS(2, _omitFieldNames ? '' : 'toFund')
+    ..aOS(3, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
+    ..aOB(5, _omitFieldNames ? '' : 'borrow')
+    ..aOS(6, _omitFieldNames ? '' : 'cntgDate')
+    ..aOS(7, _omitFieldNames ? '' : 'cntgNo')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TransferLoanRequest clone() => TransferLoanRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TransferLoanRequest copyWith(void Function(TransferLoanRequest) updates) => super.copyWith((message) => updates(message as TransferLoanRequest)) as TransferLoanRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TransferLoanRequest create() => TransferLoanRequest._();
+  @$core.override
+  TransferLoanRequest createEmptyInstance() => create();
+  static $pb.PbList<TransferLoanRequest> createRepeated() => $pb.PbList<TransferLoanRequest>();
+  @$core.pragma('dart2js:noInline')
+  static TransferLoanRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TransferLoanRequest>(create);
+  static TransferLoanRequest? _defaultInstance;
+
+  /// 이전 출발 펀드 리소스명
+  @$pb.TagNumber(1)
+  $core.String get fromFund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fromFund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFromFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFromFund() => $_clearField(1);
+
+  /// 이전 도착 펀드 리소스명
+  @$pb.TagNumber(2)
+  $core.String get toFund => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set toFund($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasToFund() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearToFund() => $_clearField(2);
+
+  /// 종목코드
+  @$pb.TagNumber(3)
+  $core.String get symbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set symbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSymbol() => $_clearField(3);
+
+  /// 이전 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get quantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuantity() => $_clearField(4);
+
+  /// 이전 구분 (true=차입이전, false=대여이전)
+  @$pb.TagNumber(5)
+  $core.bool get borrow => $_getBF(4);
+  @$pb.TagNumber(5)
+  set borrow($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBorrow() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBorrow() => $_clearField(5);
+
+  /// 원 체결일자 (YYYYMMDD)
+  @$pb.TagNumber(6)
+  $core.String get cntgDate => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set cntgDate($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCntgDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCntgDate() => $_clearField(6);
+
+  /// 원 체결번호
+  @$pb.TagNumber(7)
+  $core.String get cntgNo => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set cntgNo($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCntgNo() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCntgNo() => $_clearField(7);
+}
+
+/// TransferLoan 응답
+class TransferLoanResponse extends $pb.GeneratedMessage {
+  factory TransferLoanResponse() => create();
+
+  TransferLoanResponse._();
+
+  factory TransferLoanResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TransferLoanResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TransferLoanResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TransferLoanResponse clone() => TransferLoanResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TransferLoanResponse copyWith(void Function(TransferLoanResponse) updates) => super.copyWith((message) => updates(message as TransferLoanResponse)) as TransferLoanResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TransferLoanResponse create() => TransferLoanResponse._();
+  @$core.override
+  TransferLoanResponse createEmptyInstance() => create();
+  static $pb.PbList<TransferLoanResponse> createRepeated() => $pb.PbList<TransferLoanResponse>();
+  @$core.pragma('dart2js:noInline')
+  static TransferLoanResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TransferLoanResponse>(create);
+  static TransferLoanResponse? _defaultInstance;
+}
+
+/// SyncLoanDeliveries 요청
+class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
+  factory SyncLoanDeliveriesRequest({
+    $core.String? fund,
+    $core.String? date,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (date != null) result.date = date;
+    return result;
+  }
+
+  SyncLoanDeliveriesRequest._();
+
+  factory SyncLoanDeliveriesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SyncLoanDeliveriesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncLoanDeliveriesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'date')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SyncLoanDeliveriesRequest clone() => SyncLoanDeliveriesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SyncLoanDeliveriesRequest copyWith(void Function(SyncLoanDeliveriesRequest) updates) => super.copyWith((message) => updates(message as SyncLoanDeliveriesRequest)) as SyncLoanDeliveriesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SyncLoanDeliveriesRequest create() => SyncLoanDeliveriesRequest._();
+  @$core.override
+  SyncLoanDeliveriesRequest createEmptyInstance() => create();
+  static $pb.PbList<SyncLoanDeliveriesRequest> createRepeated() => $pb.PbList<SyncLoanDeliveriesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SyncLoanDeliveriesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SyncLoanDeliveriesRequest>(create);
+  static SyncLoanDeliveriesRequest? _defaultInstance;
+
+  /// 펀드 리소스명
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 조회 기준일자 (YYYYMMDD)
+  @$pb.TagNumber(2)
+  $core.String get date => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set date($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDate() => $_clearField(2);
+}
+
+/// SyncLoanDeliveries 응답
+class SyncLoanDeliveriesResponse extends $pb.GeneratedMessage {
+  factory SyncLoanDeliveriesResponse({
+    $core.Iterable<LoanDeliveryItem>? items,
+    $core.int? processedCount,
+  }) {
+    final result = create();
+    if (items != null) result.items.addAll(items);
+    if (processedCount != null) result.processedCount = processedCount;
+    return result;
+  }
+
+  SyncLoanDeliveriesResponse._();
+
+  factory SyncLoanDeliveriesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SyncLoanDeliveriesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncLoanDeliveriesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..pc<LoanDeliveryItem>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: LoanDeliveryItem.create)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'processedCount', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SyncLoanDeliveriesResponse clone() => SyncLoanDeliveriesResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SyncLoanDeliveriesResponse copyWith(void Function(SyncLoanDeliveriesResponse) updates) => super.copyWith((message) => updates(message as SyncLoanDeliveriesResponse)) as SyncLoanDeliveriesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SyncLoanDeliveriesResponse create() => SyncLoanDeliveriesResponse._();
+  @$core.override
+  SyncLoanDeliveriesResponse createEmptyInstance() => create();
+  static $pb.PbList<SyncLoanDeliveriesResponse> createRepeated() => $pb.PbList<SyncLoanDeliveriesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SyncLoanDeliveriesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SyncLoanDeliveriesResponse>(create);
+  static SyncLoanDeliveriesResponse? _defaultInstance;
+
+  /// 처리된 대차 인도내역 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<LoanDeliveryItem> get items => $_getList(0);
+
+  /// 처리 건수
+  @$pb.TagNumber(2)
+  $core.int get processedCount => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set processedCount($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProcessedCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProcessedCount() => $_clearField(2);
+}
+
+/// 대차체결인도내역 항목 (obfnp_loan_021r)
+class LoanDeliveryItem extends $pb.GeneratedMessage {
+  factory LoanDeliveryItem({
+    $core.String? rcmsDate,
+    $core.String? dbcrCnofClsCode,
+    $core.String? rcmsSrno,
+    $core.String? fncd,
+    $core.String? fundName,
+    $core.String? prtcIstuCode,
+    $core.String? stndFncd,
+    $core.String? cntgTrnsCls,
+    $core.String? dbcrCntgReasCode,
+    $core.String? dbcrClsCode,
+    $core.String? dbcrTrClsCode,
+    $core.String? stckBondClsCode,
+    $core.String? iscd,
+    $core.String? isnm,
+    $core.String? dbcrApltDate,
+    $core.String? dbcrApltSrno,
+    $core.String? cntgDate,
+    $core.String? cntgNo,
+    $core.String? orglCntgDate,
+    $core.String? orglCntgNo,
+    $core.String? mtrtScdlDate,
+    $core.String? dbcrFert,
+    $fixnum.Int64? dbcrQty,
+    $fixnum.Int64? cashMorgAmt,
+    $core.String? dbcrVltnSdpr,
+    $fixnum.Int64? dbcrVltnAmt,
+    $core.String? morgRate,
+    $core.String? trCnrpIstuCod,
+    $core.String? trCnrpFncd,
+    $core.String? trnsDate,
+    $core.String? dbcrCntgRdmpCls,
+    $core.String? prosYn,
+    $core.String? pstnClsCode,
+    $core.String? dpcd,
+    $core.String? dpnm,
+    $core.String? frstCntgDate,
+  }) {
+    final result = create();
+    if (rcmsDate != null) result.rcmsDate = rcmsDate;
+    if (dbcrCnofClsCode != null) result.dbcrCnofClsCode = dbcrCnofClsCode;
+    if (rcmsSrno != null) result.rcmsSrno = rcmsSrno;
+    if (fncd != null) result.fncd = fncd;
+    if (fundName != null) result.fundName = fundName;
+    if (prtcIstuCode != null) result.prtcIstuCode = prtcIstuCode;
+    if (stndFncd != null) result.stndFncd = stndFncd;
+    if (cntgTrnsCls != null) result.cntgTrnsCls = cntgTrnsCls;
+    if (dbcrCntgReasCode != null) result.dbcrCntgReasCode = dbcrCntgReasCode;
+    if (dbcrClsCode != null) result.dbcrClsCode = dbcrClsCode;
+    if (dbcrTrClsCode != null) result.dbcrTrClsCode = dbcrTrClsCode;
+    if (stckBondClsCode != null) result.stckBondClsCode = stckBondClsCode;
+    if (iscd != null) result.iscd = iscd;
+    if (isnm != null) result.isnm = isnm;
+    if (dbcrApltDate != null) result.dbcrApltDate = dbcrApltDate;
+    if (dbcrApltSrno != null) result.dbcrApltSrno = dbcrApltSrno;
+    if (cntgDate != null) result.cntgDate = cntgDate;
+    if (cntgNo != null) result.cntgNo = cntgNo;
+    if (orglCntgDate != null) result.orglCntgDate = orglCntgDate;
+    if (orglCntgNo != null) result.orglCntgNo = orglCntgNo;
+    if (mtrtScdlDate != null) result.mtrtScdlDate = mtrtScdlDate;
+    if (dbcrFert != null) result.dbcrFert = dbcrFert;
+    if (dbcrQty != null) result.dbcrQty = dbcrQty;
+    if (cashMorgAmt != null) result.cashMorgAmt = cashMorgAmt;
+    if (dbcrVltnSdpr != null) result.dbcrVltnSdpr = dbcrVltnSdpr;
+    if (dbcrVltnAmt != null) result.dbcrVltnAmt = dbcrVltnAmt;
+    if (morgRate != null) result.morgRate = morgRate;
+    if (trCnrpIstuCod != null) result.trCnrpIstuCod = trCnrpIstuCod;
+    if (trCnrpFncd != null) result.trCnrpFncd = trCnrpFncd;
+    if (trnsDate != null) result.trnsDate = trnsDate;
+    if (dbcrCntgRdmpCls != null) result.dbcrCntgRdmpCls = dbcrCntgRdmpCls;
+    if (prosYn != null) result.prosYn = prosYn;
+    if (pstnClsCode != null) result.pstnClsCode = pstnClsCode;
+    if (dpcd != null) result.dpcd = dpcd;
+    if (dpnm != null) result.dpnm = dpnm;
+    if (frstCntgDate != null) result.frstCntgDate = frstCntgDate;
+    return result;
+  }
+
+  LoanDeliveryItem._();
+
+  factory LoanDeliveryItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LoanDeliveryItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoanDeliveryItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'rcmsDate')
+    ..aOS(2, _omitFieldNames ? '' : 'dbcrCnofClsCode')
+    ..aOS(3, _omitFieldNames ? '' : 'rcmsSrno')
+    ..aOS(4, _omitFieldNames ? '' : 'fncd')
+    ..aOS(5, _omitFieldNames ? '' : 'fundName')
+    ..aOS(6, _omitFieldNames ? '' : 'prtcIstuCode')
+    ..aOS(7, _omitFieldNames ? '' : 'stndFncd')
+    ..aOS(8, _omitFieldNames ? '' : 'cntgTrnsCls')
+    ..aOS(9, _omitFieldNames ? '' : 'dbcrCntgReasCode')
+    ..aOS(10, _omitFieldNames ? '' : 'dbcrClsCode')
+    ..aOS(11, _omitFieldNames ? '' : 'dbcrTrClsCode')
+    ..aOS(12, _omitFieldNames ? '' : 'stckBondClsCode')
+    ..aOS(13, _omitFieldNames ? '' : 'iscd')
+    ..aOS(14, _omitFieldNames ? '' : 'isnm')
+    ..aOS(15, _omitFieldNames ? '' : 'dbcrApltDate')
+    ..aOS(16, _omitFieldNames ? '' : 'dbcrApltSrno')
+    ..aOS(17, _omitFieldNames ? '' : 'cntgDate')
+    ..aOS(18, _omitFieldNames ? '' : 'cntgNo')
+    ..aOS(19, _omitFieldNames ? '' : 'orglCntgDate')
+    ..aOS(20, _omitFieldNames ? '' : 'orglCntgNo')
+    ..aOS(21, _omitFieldNames ? '' : 'mtrtScdlDate')
+    ..aOS(22, _omitFieldNames ? '' : 'dbcrFert')
+    ..aInt64(23, _omitFieldNames ? '' : 'dbcrQty')
+    ..aInt64(24, _omitFieldNames ? '' : 'cashMorgAmt')
+    ..aOS(25, _omitFieldNames ? '' : 'dbcrVltnSdpr')
+    ..aInt64(26, _omitFieldNames ? '' : 'dbcrVltnAmt')
+    ..aOS(27, _omitFieldNames ? '' : 'morgRate')
+    ..aOS(28, _omitFieldNames ? '' : 'trCnrpIstuCod')
+    ..aOS(29, _omitFieldNames ? '' : 'trCnrpFncd')
+    ..aOS(30, _omitFieldNames ? '' : 'trnsDate')
+    ..aOS(31, _omitFieldNames ? '' : 'dbcrCntgRdmpCls')
+    ..aOS(32, _omitFieldNames ? '' : 'prosYn')
+    ..aOS(33, _omitFieldNames ? '' : 'pstnClsCode')
+    ..aOS(34, _omitFieldNames ? '' : 'dpcd')
+    ..aOS(35, _omitFieldNames ? '' : 'dpnm')
+    ..aOS(36, _omitFieldNames ? '' : 'frstCntgDate')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LoanDeliveryItem clone() => LoanDeliveryItem()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LoanDeliveryItem copyWith(void Function(LoanDeliveryItem) updates) => super.copyWith((message) => updates(message as LoanDeliveryItem)) as LoanDeliveryItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LoanDeliveryItem create() => LoanDeliveryItem._();
+  @$core.override
+  LoanDeliveryItem createEmptyInstance() => create();
+  static $pb.PbList<LoanDeliveryItem> createRepeated() => $pb.PbList<LoanDeliveryItem>();
+  @$core.pragma('dart2js:noInline')
+  static LoanDeliveryItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoanDeliveryItem>(create);
+  static LoanDeliveryItem? _defaultInstance;
+
+  /// 수신일자
+  @$pb.TagNumber(1)
+  $core.String get rcmsDate => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set rcmsDate($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRcmsDate() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRcmsDate() => $_clearField(1);
+
+  /// 대차상대처구분코드 (1=예탁원, 2=증금)
+  @$pb.TagNumber(2)
+  $core.String get dbcrCnofClsCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set dbcrCnofClsCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDbcrCnofClsCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDbcrCnofClsCode() => $_clearField(2);
+
+  /// 수신일련번호
+  @$pb.TagNumber(3)
+  $core.String get rcmsSrno => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set rcmsSrno($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRcmsSrno() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRcmsSrno() => $_clearField(3);
+
+  /// 펀드코드
+  @$pb.TagNumber(4)
+  $core.String get fncd => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set fncd($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFncd() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFncd() => $_clearField(4);
+
+  /// 펀드명
+  @$pb.TagNumber(5)
+  $core.String get fundName => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set fundName($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFundName() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFundName() => $_clearField(5);
+
+  /// 참가기관코드
+  @$pb.TagNumber(6)
+  $core.String get prtcIstuCode => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set prtcIstuCode($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasPrtcIstuCode() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPrtcIstuCode() => $_clearField(6);
+
+  /// 표준펀드코드
+  @$pb.TagNumber(7)
+  $core.String get stndFncd => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set stndFncd($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasStndFncd() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStndFncd() => $_clearField(7);
+
+  /// 체결인도구분 (01=인도, 02=미인도)
+  @$pb.TagNumber(8)
+  $core.String get cntgTrnsCls => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set cntgTrnsCls($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCntgTrnsCls() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCntgTrnsCls() => $_clearField(8);
+
+  /// 대차체결사유코드
+  @$pb.TagNumber(9)
+  $core.String get dbcrCntgReasCode => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set dbcrCntgReasCode($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasDbcrCntgReasCode() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearDbcrCntgReasCode() => $_clearField(9);
+
+  /// 대차구분코드 (1=대여, 2=차입)
+  @$pb.TagNumber(10)
+  $core.String get dbcrClsCode => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set dbcrClsCode($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasDbcrClsCode() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearDbcrClsCode() => $_clearField(10);
+
+  /// 대차거래구분코드
+  @$pb.TagNumber(11)
+  $core.String get dbcrTrClsCode => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set dbcrTrClsCode($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasDbcrTrClsCode() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearDbcrTrClsCode() => $_clearField(11);
+
+  /// 주식채권구분코드
+  @$pb.TagNumber(12)
+  $core.String get stckBondClsCode => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set stckBondClsCode($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasStckBondClsCode() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearStckBondClsCode() => $_clearField(12);
+
+  /// 종목코드
+  @$pb.TagNumber(13)
+  $core.String get iscd => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set iscd($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasIscd() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearIscd() => $_clearField(13);
+
+  /// 종목명
+  @$pb.TagNumber(14)
+  $core.String get isnm => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set isnm($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasIsnm() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearIsnm() => $_clearField(14);
+
+  /// 대차신청일자
+  @$pb.TagNumber(15)
+  $core.String get dbcrApltDate => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set dbcrApltDate($core.String value) => $_setString(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasDbcrApltDate() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearDbcrApltDate() => $_clearField(15);
+
+  /// 대차신청일련번호
+  @$pb.TagNumber(16)
+  $core.String get dbcrApltSrno => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set dbcrApltSrno($core.String value) => $_setString(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasDbcrApltSrno() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearDbcrApltSrno() => $_clearField(16);
+
+  /// 체결일자
+  @$pb.TagNumber(17)
+  $core.String get cntgDate => $_getSZ(16);
+  @$pb.TagNumber(17)
+  set cntgDate($core.String value) => $_setString(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasCntgDate() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearCntgDate() => $_clearField(17);
+
+  /// 체결번호
+  @$pb.TagNumber(18)
+  $core.String get cntgNo => $_getSZ(17);
+  @$pb.TagNumber(18)
+  set cntgNo($core.String value) => $_setString(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasCntgNo() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearCntgNo() => $_clearField(18);
+
+  /// 원체결일자
+  @$pb.TagNumber(19)
+  $core.String get orglCntgDate => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set orglCntgDate($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasOrglCntgDate() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearOrglCntgDate() => $_clearField(19);
+
+  /// 원체결번호
+  @$pb.TagNumber(20)
+  $core.String get orglCntgNo => $_getSZ(19);
+  @$pb.TagNumber(20)
+  set orglCntgNo($core.String value) => $_setString(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasOrglCntgNo() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearOrglCntgNo() => $_clearField(20);
+
+  /// 만기예정일자
+  @$pb.TagNumber(21)
+  $core.String get mtrtScdlDate => $_getSZ(20);
+  @$pb.TagNumber(21)
+  set mtrtScdlDate($core.String value) => $_setString(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasMtrtScdlDate() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearMtrtScdlDate() => $_clearField(21);
+
+  /// 대차수수료율
+  @$pb.TagNumber(22)
+  $core.String get dbcrFert => $_getSZ(21);
+  @$pb.TagNumber(22)
+  set dbcrFert($core.String value) => $_setString(21, value);
+  @$pb.TagNumber(22)
+  $core.bool hasDbcrFert() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearDbcrFert() => $_clearField(22);
+
+  /// 대차수량
+  @$pb.TagNumber(23)
+  $fixnum.Int64 get dbcrQty => $_getI64(22);
+  @$pb.TagNumber(23)
+  set dbcrQty($fixnum.Int64 value) => $_setInt64(22, value);
+  @$pb.TagNumber(23)
+  $core.bool hasDbcrQty() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearDbcrQty() => $_clearField(23);
+
+  /// 현금담보금액
+  @$pb.TagNumber(24)
+  $fixnum.Int64 get cashMorgAmt => $_getI64(23);
+  @$pb.TagNumber(24)
+  set cashMorgAmt($fixnum.Int64 value) => $_setInt64(23, value);
+  @$pb.TagNumber(24)
+  $core.bool hasCashMorgAmt() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearCashMorgAmt() => $_clearField(24);
+
+  /// 대차평가기준가
+  @$pb.TagNumber(25)
+  $core.String get dbcrVltnSdpr => $_getSZ(24);
+  @$pb.TagNumber(25)
+  set dbcrVltnSdpr($core.String value) => $_setString(24, value);
+  @$pb.TagNumber(25)
+  $core.bool hasDbcrVltnSdpr() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearDbcrVltnSdpr() => $_clearField(25);
+
+  /// 대차평가금액
+  @$pb.TagNumber(26)
+  $fixnum.Int64 get dbcrVltnAmt => $_getI64(25);
+  @$pb.TagNumber(26)
+  set dbcrVltnAmt($fixnum.Int64 value) => $_setInt64(25, value);
+  @$pb.TagNumber(26)
+  $core.bool hasDbcrVltnAmt() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearDbcrVltnAmt() => $_clearField(26);
+
+  /// 담보비율
+  @$pb.TagNumber(27)
+  $core.String get morgRate => $_getSZ(26);
+  @$pb.TagNumber(27)
+  set morgRate($core.String value) => $_setString(26, value);
+  @$pb.TagNumber(27)
+  $core.bool hasMorgRate() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearMorgRate() => $_clearField(27);
+
+  /// 거래상대방기관코드
+  @$pb.TagNumber(28)
+  $core.String get trCnrpIstuCod => $_getSZ(27);
+  @$pb.TagNumber(28)
+  set trCnrpIstuCod($core.String value) => $_setString(27, value);
+  @$pb.TagNumber(28)
+  $core.bool hasTrCnrpIstuCod() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearTrCnrpIstuCod() => $_clearField(28);
+
+  /// 거래상대방펀드코드
+  @$pb.TagNumber(29)
+  $core.String get trCnrpFncd => $_getSZ(28);
+  @$pb.TagNumber(29)
+  set trCnrpFncd($core.String value) => $_setString(28, value);
+  @$pb.TagNumber(29)
+  $core.bool hasTrCnrpFncd() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearTrCnrpFncd() => $_clearField(29);
+
+  /// 인도일자
+  @$pb.TagNumber(30)
+  $core.String get trnsDate => $_getSZ(29);
+  @$pb.TagNumber(30)
+  set trnsDate($core.String value) => $_setString(29, value);
+  @$pb.TagNumber(30)
+  $core.bool hasTrnsDate() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearTrnsDate() => $_clearField(30);
+
+  /// 대차체결상환구분
+  @$pb.TagNumber(31)
+  $core.String get dbcrCntgRdmpCls => $_getSZ(30);
+  @$pb.TagNumber(31)
+  set dbcrCntgRdmpCls($core.String value) => $_setString(30, value);
+  @$pb.TagNumber(31)
+  $core.bool hasDbcrCntgRdmpCls() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearDbcrCntgRdmpCls() => $_clearField(31);
+
+  /// 처리여부
+  @$pb.TagNumber(32)
+  $core.String get prosYn => $_getSZ(31);
+  @$pb.TagNumber(32)
+  set prosYn($core.String value) => $_setString(31, value);
+  @$pb.TagNumber(32)
+  $core.bool hasProsYn() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearProsYn() => $_clearField(32);
+
+  /// 포지션구분코드
+  @$pb.TagNumber(33)
+  $core.String get pstnClsCode => $_getSZ(32);
+  @$pb.TagNumber(33)
+  set pstnClsCode($core.String value) => $_setString(32, value);
+  @$pb.TagNumber(33)
+  $core.bool hasPstnClsCode() => $_has(32);
+  @$pb.TagNumber(33)
+  void clearPstnClsCode() => $_clearField(33);
+
+  /// 부서코드
+  @$pb.TagNumber(34)
+  $core.String get dpcd => $_getSZ(33);
+  @$pb.TagNumber(34)
+  set dpcd($core.String value) => $_setString(33, value);
+  @$pb.TagNumber(34)
+  $core.bool hasDpcd() => $_has(33);
+  @$pb.TagNumber(34)
+  void clearDpcd() => $_clearField(34);
+
+  /// 부서명
+  @$pb.TagNumber(35)
+  $core.String get dpnm => $_getSZ(34);
+  @$pb.TagNumber(35)
+  set dpnm($core.String value) => $_setString(34, value);
+  @$pb.TagNumber(35)
+  $core.bool hasDpnm() => $_has(34);
+  @$pb.TagNumber(35)
+  void clearDpnm() => $_clearField(35);
+
+  /// 최초체결일자
+  @$pb.TagNumber(36)
+  $core.String get frstCntgDate => $_getSZ(35);
+  @$pb.TagNumber(36)
+  set frstCntgDate($core.String value) => $_setString(35, value);
+  @$pb.TagNumber(36)
+  $core.bool hasFrstCntgDate() => $_has(35);
+  @$pb.TagNumber(36)
+  void clearFrstCntgDate() => $_clearField(36);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

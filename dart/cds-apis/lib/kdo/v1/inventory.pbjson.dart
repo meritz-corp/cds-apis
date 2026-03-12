@@ -360,3 +360,157 @@ final $typed_data.Uint8List syncInventoryFromLedgerResponseDescriptor = $convert
     'sua2RvLnYxLmludmVudG9yeS5JbnZlbnRvcnlSC2ludmVudG9yaWVzEiEKDHN5bmNlZF9jb3Vu'
     'dBgCIAEoBVILc3luY2VkQ291bnQ=');
 
+@$core.Deprecated('Use repayLoanRequestDescriptor instead')
+const RepayLoanRequest$json = {
+  '1': 'RepayLoanRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
+  ],
+};
+
+/// Descriptor for `RepayLoanRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List repayLoanRequestDescriptor = $convert.base64Decode(
+    'ChBSZXBheUxvYW5SZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby5jZHNhcGlzLn'
+    'h5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3ltYm9sEiAKCHF1YW50aXR5'
+    'GAMgASgDQgTiQQECUghxdWFudGl0eQ==');
+
+@$core.Deprecated('Use repayLoanResponseDescriptor instead')
+const RepayLoanResponse$json = {
+  '1': 'RepayLoanResponse',
+};
+
+/// Descriptor for `RepayLoanResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List repayLoanResponseDescriptor = $convert.base64Decode(
+    'ChFSZXBheUxvYW5SZXNwb25zZQ==');
+
+@$core.Deprecated('Use transferLoanRequestDescriptor instead')
+const TransferLoanRequest$json = {
+  '1': 'TransferLoanRequest',
+  '2': [
+    {'1': 'from_fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fromFund'},
+    {'1': 'to_fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'toFund'},
+    {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
+    {'1': 'borrow', '3': 5, '4': 1, '5': 8, '8': {}, '10': 'borrow'},
+    {'1': 'cntg_date', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'cntgDate'},
+    {'1': 'cntg_no', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'cntgNo'},
+  ],
+};
+
+/// Descriptor for `TransferLoanRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List transferLoanRequestDescriptor = $convert.base64Decode(
+    'ChNUcmFuc2ZlckxvYW5SZXF1ZXN0EjoKCWZyb21fZnVuZBgBIAEoCUId4kEBAvpBFgoUa2RvLm'
+    'Nkc2FwaXMueHl6L0Z1bmRSCGZyb21GdW5kEjYKB3RvX2Z1bmQYAiABKAlCHeJBAQL6QRYKFGtk'
+    'by5jZHNhcGlzLnh5ei9GdW5kUgZ0b0Z1bmQSHAoGc3ltYm9sGAMgASgJQgTiQQECUgZzeW1ib2'
+    'wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aXR5EhwKBmJvcnJvdxgFIAEoCEIE4kEB'
+    'AlIGYm9ycm93EiEKCWNudGdfZGF0ZRgGIAEoCUIE4kEBAlIIY250Z0RhdGUSHQoHY250Z19ubx'
+    'gHIAEoCUIE4kEBAlIGY250Z05v');
+
+@$core.Deprecated('Use transferLoanResponseDescriptor instead')
+const TransferLoanResponse$json = {
+  '1': 'TransferLoanResponse',
+};
+
+/// Descriptor for `TransferLoanResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List transferLoanResponseDescriptor = $convert.base64Decode(
+    'ChRUcmFuc2ZlckxvYW5SZXNwb25zZQ==');
+
+@$core.Deprecated('Use syncLoanDeliveriesRequestDescriptor instead')
+const SyncLoanDeliveriesRequest$json = {
+  '1': 'SyncLoanDeliveriesRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'date', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'date'},
+  ],
+};
+
+/// Descriptor for `SyncLoanDeliveriesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List syncLoanDeliveriesRequestDescriptor = $convert.base64Decode(
+    'ChlTeW5jTG9hbkRlbGl2ZXJpZXNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby'
+    '5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhgKBGRhdGUYAiABKAlCBOJBAQJSBGRhdGU=');
+
+@$core.Deprecated('Use syncLoanDeliveriesResponseDescriptor instead')
+const SyncLoanDeliveriesResponse$json = {
+  '1': 'SyncLoanDeliveriesResponse',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.inventory.LoanDeliveryItem', '10': 'items'},
+    {'1': 'processed_count', '3': 2, '4': 1, '5': 5, '10': 'processedCount'},
+  ],
+};
+
+/// Descriptor for `SyncLoanDeliveriesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List syncLoanDeliveriesResponseDescriptor = $convert.base64Decode(
+    'ChpTeW5jTG9hbkRlbGl2ZXJpZXNSZXNwb25zZRI4CgVpdGVtcxgBIAMoCzIiLmtkby52MS5pbn'
+    'ZlbnRvcnkuTG9hbkRlbGl2ZXJ5SXRlbVIFaXRlbXMSJwoPcHJvY2Vzc2VkX2NvdW50GAIgASgF'
+    'Ug5wcm9jZXNzZWRDb3VudA==');
+
+@$core.Deprecated('Use loanDeliveryItemDescriptor instead')
+const LoanDeliveryItem$json = {
+  '1': 'LoanDeliveryItem',
+  '2': [
+    {'1': 'rcms_date', '3': 1, '4': 1, '5': 9, '10': 'rcmsDate'},
+    {'1': 'dbcr_cnof_cls_code', '3': 2, '4': 1, '5': 9, '10': 'dbcrCnofClsCode'},
+    {'1': 'rcms_srno', '3': 3, '4': 1, '5': 9, '10': 'rcmsSrno'},
+    {'1': 'fncd', '3': 4, '4': 1, '5': 9, '10': 'fncd'},
+    {'1': 'fund_name', '3': 5, '4': 1, '5': 9, '10': 'fundName'},
+    {'1': 'prtc_istu_code', '3': 6, '4': 1, '5': 9, '10': 'prtcIstuCode'},
+    {'1': 'stnd_fncd', '3': 7, '4': 1, '5': 9, '10': 'stndFncd'},
+    {'1': 'cntg_trns_cls', '3': 8, '4': 1, '5': 9, '10': 'cntgTrnsCls'},
+    {'1': 'dbcr_cntg_reas_code', '3': 9, '4': 1, '5': 9, '10': 'dbcrCntgReasCode'},
+    {'1': 'dbcr_cls_code', '3': 10, '4': 1, '5': 9, '10': 'dbcrClsCode'},
+    {'1': 'dbcr_tr_cls_code', '3': 11, '4': 1, '5': 9, '10': 'dbcrTrClsCode'},
+    {'1': 'stck_bond_cls_code', '3': 12, '4': 1, '5': 9, '10': 'stckBondClsCode'},
+    {'1': 'iscd', '3': 13, '4': 1, '5': 9, '10': 'iscd'},
+    {'1': 'isnm', '3': 14, '4': 1, '5': 9, '10': 'isnm'},
+    {'1': 'dbcr_aplt_date', '3': 15, '4': 1, '5': 9, '10': 'dbcrApltDate'},
+    {'1': 'dbcr_aplt_srno', '3': 16, '4': 1, '5': 9, '10': 'dbcrApltSrno'},
+    {'1': 'cntg_date', '3': 17, '4': 1, '5': 9, '10': 'cntgDate'},
+    {'1': 'cntg_no', '3': 18, '4': 1, '5': 9, '10': 'cntgNo'},
+    {'1': 'orgl_cntg_date', '3': 19, '4': 1, '5': 9, '10': 'orglCntgDate'},
+    {'1': 'orgl_cntg_no', '3': 20, '4': 1, '5': 9, '10': 'orglCntgNo'},
+    {'1': 'mtrt_scdl_date', '3': 21, '4': 1, '5': 9, '10': 'mtrtScdlDate'},
+    {'1': 'dbcr_fert', '3': 22, '4': 1, '5': 9, '10': 'dbcrFert'},
+    {'1': 'dbcr_qty', '3': 23, '4': 1, '5': 3, '10': 'dbcrQty'},
+    {'1': 'cash_morg_amt', '3': 24, '4': 1, '5': 3, '10': 'cashMorgAmt'},
+    {'1': 'dbcr_vltn_sdpr', '3': 25, '4': 1, '5': 9, '10': 'dbcrVltnSdpr'},
+    {'1': 'dbcr_vltn_amt', '3': 26, '4': 1, '5': 3, '10': 'dbcrVltnAmt'},
+    {'1': 'morg_rate', '3': 27, '4': 1, '5': 9, '10': 'morgRate'},
+    {'1': 'tr_cnrp_istu_cod', '3': 28, '4': 1, '5': 9, '10': 'trCnrpIstuCod'},
+    {'1': 'tr_cnrp_fncd', '3': 29, '4': 1, '5': 9, '10': 'trCnrpFncd'},
+    {'1': 'trns_date', '3': 30, '4': 1, '5': 9, '10': 'trnsDate'},
+    {'1': 'dbcr_cntg_rdmp_cls', '3': 31, '4': 1, '5': 9, '10': 'dbcrCntgRdmpCls'},
+    {'1': 'pros_yn', '3': 32, '4': 1, '5': 9, '10': 'prosYn'},
+    {'1': 'pstn_cls_code', '3': 33, '4': 1, '5': 9, '10': 'pstnClsCode'},
+    {'1': 'dpcd', '3': 34, '4': 1, '5': 9, '10': 'dpcd'},
+    {'1': 'dpnm', '3': 35, '4': 1, '5': 9, '10': 'dpnm'},
+    {'1': 'frst_cntg_date', '3': 36, '4': 1, '5': 9, '10': 'frstCntgDate'},
+  ],
+};
+
+/// Descriptor for `LoanDeliveryItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List loanDeliveryItemDescriptor = $convert.base64Decode(
+    'ChBMb2FuRGVsaXZlcnlJdGVtEhsKCXJjbXNfZGF0ZRgBIAEoCVIIcmNtc0RhdGUSKwoSZGJjcl'
+    '9jbm9mX2Nsc19jb2RlGAIgASgJUg9kYmNyQ25vZkNsc0NvZGUSGwoJcmNtc19zcm5vGAMgASgJ'
+    'UghyY21zU3JubxISCgRmbmNkGAQgASgJUgRmbmNkEhsKCWZ1bmRfbmFtZRgFIAEoCVIIZnVuZE'
+    '5hbWUSJAoOcHJ0Y19pc3R1X2NvZGUYBiABKAlSDHBydGNJc3R1Q29kZRIbCglzdG5kX2ZuY2QY'
+    'ByABKAlSCHN0bmRGbmNkEiIKDWNudGdfdHJuc19jbHMYCCABKAlSC2NudGdUcm5zQ2xzEi0KE2'
+    'RiY3JfY250Z19yZWFzX2NvZGUYCSABKAlSEGRiY3JDbnRnUmVhc0NvZGUSIgoNZGJjcl9jbHNf'
+    'Y29kZRgKIAEoCVILZGJjckNsc0NvZGUSJwoQZGJjcl90cl9jbHNfY29kZRgLIAEoCVINZGJjcl'
+    'RyQ2xzQ29kZRIrChJzdGNrX2JvbmRfY2xzX2NvZGUYDCABKAlSD3N0Y2tCb25kQ2xzQ29kZRIS'
+    'CgRpc2NkGA0gASgJUgRpc2NkEhIKBGlzbm0YDiABKAlSBGlzbm0SJAoOZGJjcl9hcGx0X2RhdG'
+    'UYDyABKAlSDGRiY3JBcGx0RGF0ZRIkCg5kYmNyX2FwbHRfc3JubxgQIAEoCVIMZGJjckFwbHRT'
+    'cm5vEhsKCWNudGdfZGF0ZRgRIAEoCVIIY250Z0RhdGUSFwoHY250Z19ubxgSIAEoCVIGY250Z0'
+    '5vEiQKDm9yZ2xfY250Z19kYXRlGBMgASgJUgxvcmdsQ250Z0RhdGUSIAoMb3JnbF9jbnRnX25v'
+    'GBQgASgJUgpvcmdsQ250Z05vEiQKDm10cnRfc2NkbF9kYXRlGBUgASgJUgxtdHJ0U2NkbERhdG'
+    'USGwoJZGJjcl9mZXJ0GBYgASgJUghkYmNyRmVydBIZCghkYmNyX3F0eRgXIAEoA1IHZGJjclF0'
+    'eRIiCg1jYXNoX21vcmdfYW10GBggASgDUgtjYXNoTW9yZ0FtdBIkCg5kYmNyX3ZsdG5fc2Rwch'
+    'gZIAEoCVIMZGJjclZsdG5TZHByEiIKDWRiY3Jfdmx0bl9hbXQYGiABKANSC2RiY3JWbHRuQW10'
+    'EhsKCW1vcmdfcmF0ZRgbIAEoCVIIbW9yZ1JhdGUSJwoQdHJfY25ycF9pc3R1X2NvZBgcIAEoCV'
+    'INdHJDbnJwSXN0dUNvZBIgCgx0cl9jbnJwX2ZuY2QYHSABKAlSCnRyQ25ycEZuY2QSGwoJdHJu'
+    'c19kYXRlGB4gASgJUgh0cm5zRGF0ZRIrChJkYmNyX2NudGdfcmRtcF9jbHMYHyABKAlSD2RiY3'
+    'JDbnRnUmRtcENscxIXCgdwcm9zX3luGCAgASgJUgZwcm9zWW4SIgoNcHN0bl9jbHNfY29kZRgh'
+    'IAEoCVILcHN0bkNsc0NvZGUSEgoEZHBjZBgiIAEoCVIEZHBjZBISCgRkcG5tGCMgASgJUgRkcG'
+    '5tEiQKDmZyc3RfY250Z19kYXRlGCQgASgJUgxmcnN0Q250Z0RhdGU=');
+

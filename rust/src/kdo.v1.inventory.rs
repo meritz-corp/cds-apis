@@ -393,6 +393,193 @@ pub struct SyncInventoryFromLedgerResponse {
     #[prost(int32, tag="2")]
     pub synced_count: i32,
 }
+// ========== 대차거래 Request/Response Messages ==========
+
+/// RepayLoan 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RepayLoanRequest {
+    /// 펀드 리소스명 (예: "funds/KD0001")
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 종목코드
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 상환 수량
+    #[prost(int64, tag="3")]
+    pub quantity: i64,
+}
+/// RepayLoan 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct RepayLoanResponse {
+}
+/// TransferLoan 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransferLoanRequest {
+    /// 이전 출발 펀드 리소스명
+    #[prost(string, tag="1")]
+    pub from_fund: ::prost::alloc::string::String,
+    /// 이전 도착 펀드 리소스명
+    #[prost(string, tag="2")]
+    pub to_fund: ::prost::alloc::string::String,
+    /// 종목코드
+    #[prost(string, tag="3")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 이전 수량
+    #[prost(int64, tag="4")]
+    pub quantity: i64,
+    /// 이전 구분 (true=차입이전, false=대여이전)
+    #[prost(bool, tag="5")]
+    pub borrow: bool,
+    /// 원 체결일자 (YYYYMMDD)
+    #[prost(string, tag="6")]
+    pub cntg_date: ::prost::alloc::string::String,
+    /// 원 체결번호
+    #[prost(string, tag="7")]
+    pub cntg_no: ::prost::alloc::string::String,
+}
+/// TransferLoan 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TransferLoanResponse {
+}
+/// SyncLoanDeliveries 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SyncLoanDeliveriesRequest {
+    /// 펀드 리소스명
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 조회 기준일자 (YYYYMMDD)
+    #[prost(string, tag="2")]
+    pub date: ::prost::alloc::string::String,
+}
+/// SyncLoanDeliveries 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SyncLoanDeliveriesResponse {
+    /// 처리된 대차 인도내역 목록
+    #[prost(message, repeated, tag="1")]
+    pub items: ::prost::alloc::vec::Vec<LoanDeliveryItem>,
+    /// 처리 건수
+    #[prost(int32, tag="2")]
+    pub processed_count: i32,
+}
+/// 대차체결인도내역 항목 (obfnp_loan_021r)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LoanDeliveryItem {
+    /// 수신일자
+    #[prost(string, tag="1")]
+    pub rcms_date: ::prost::alloc::string::String,
+    /// 대차상대처구분코드 (1=예탁원, 2=증금)
+    #[prost(string, tag="2")]
+    pub dbcr_cnof_cls_code: ::prost::alloc::string::String,
+    /// 수신일련번호
+    #[prost(string, tag="3")]
+    pub rcms_srno: ::prost::alloc::string::String,
+    /// 펀드코드
+    #[prost(string, tag="4")]
+    pub fncd: ::prost::alloc::string::String,
+    /// 펀드명
+    #[prost(string, tag="5")]
+    pub fund_name: ::prost::alloc::string::String,
+    /// 참가기관코드
+    #[prost(string, tag="6")]
+    pub prtc_istu_code: ::prost::alloc::string::String,
+    /// 표준펀드코드
+    #[prost(string, tag="7")]
+    pub stnd_fncd: ::prost::alloc::string::String,
+    /// 체결인도구분 (01=인도, 02=미인도)
+    #[prost(string, tag="8")]
+    pub cntg_trns_cls: ::prost::alloc::string::String,
+    /// 대차체결사유코드
+    #[prost(string, tag="9")]
+    pub dbcr_cntg_reas_code: ::prost::alloc::string::String,
+    /// 대차구분코드 (1=대여, 2=차입)
+    #[prost(string, tag="10")]
+    pub dbcr_cls_code: ::prost::alloc::string::String,
+    /// 대차거래구분코드
+    #[prost(string, tag="11")]
+    pub dbcr_tr_cls_code: ::prost::alloc::string::String,
+    /// 주식채권구분코드
+    #[prost(string, tag="12")]
+    pub stck_bond_cls_code: ::prost::alloc::string::String,
+    /// 종목코드
+    #[prost(string, tag="13")]
+    pub iscd: ::prost::alloc::string::String,
+    /// 종목명
+    #[prost(string, tag="14")]
+    pub isnm: ::prost::alloc::string::String,
+    /// 대차신청일자
+    #[prost(string, tag="15")]
+    pub dbcr_aplt_date: ::prost::alloc::string::String,
+    /// 대차신청일련번호
+    #[prost(string, tag="16")]
+    pub dbcr_aplt_srno: ::prost::alloc::string::String,
+    /// 체결일자
+    #[prost(string, tag="17")]
+    pub cntg_date: ::prost::alloc::string::String,
+    /// 체결번호
+    #[prost(string, tag="18")]
+    pub cntg_no: ::prost::alloc::string::String,
+    /// 원체결일자
+    #[prost(string, tag="19")]
+    pub orgl_cntg_date: ::prost::alloc::string::String,
+    /// 원체결번호
+    #[prost(string, tag="20")]
+    pub orgl_cntg_no: ::prost::alloc::string::String,
+    /// 만기예정일자
+    #[prost(string, tag="21")]
+    pub mtrt_scdl_date: ::prost::alloc::string::String,
+    /// 대차수수료율
+    #[prost(string, tag="22")]
+    pub dbcr_fert: ::prost::alloc::string::String,
+    /// 대차수량
+    #[prost(int64, tag="23")]
+    pub dbcr_qty: i64,
+    /// 현금담보금액
+    #[prost(int64, tag="24")]
+    pub cash_morg_amt: i64,
+    /// 대차평가기준가
+    #[prost(string, tag="25")]
+    pub dbcr_vltn_sdpr: ::prost::alloc::string::String,
+    /// 대차평가금액
+    #[prost(int64, tag="26")]
+    pub dbcr_vltn_amt: i64,
+    /// 담보비율
+    #[prost(string, tag="27")]
+    pub morg_rate: ::prost::alloc::string::String,
+    /// 거래상대방기관코드
+    #[prost(string, tag="28")]
+    pub tr_cnrp_istu_cod: ::prost::alloc::string::String,
+    /// 거래상대방펀드코드
+    #[prost(string, tag="29")]
+    pub tr_cnrp_fncd: ::prost::alloc::string::String,
+    /// 인도일자
+    #[prost(string, tag="30")]
+    pub trns_date: ::prost::alloc::string::String,
+    /// 대차체결상환구분
+    #[prost(string, tag="31")]
+    pub dbcr_cntg_rdmp_cls: ::prost::alloc::string::String,
+    /// 처리여부
+    #[prost(string, tag="32")]
+    pub pros_yn: ::prost::alloc::string::String,
+    /// 포지션구분코드
+    #[prost(string, tag="33")]
+    pub pstn_cls_code: ::prost::alloc::string::String,
+    /// 부서코드
+    #[prost(string, tag="34")]
+    pub dpcd: ::prost::alloc::string::String,
+    /// 부서명
+    #[prost(string, tag="35")]
+    pub dpnm: ::prost::alloc::string::String,
+    /// 최초체결일자
+    #[prost(string, tag="36")]
+    pub frst_cntg_date: ::prost::alloc::string::String,
+}
 /// 재고 유형
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

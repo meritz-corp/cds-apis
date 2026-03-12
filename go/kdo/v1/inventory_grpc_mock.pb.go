@@ -599,6 +599,26 @@ func (mr *MockInventoryServiceClientMockRecorder) ListLedgerInventories(ctx, in 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListLedgerInventories), varargs...)
 }
 
+// RepayLoan mocks base method.
+func (m *MockInventoryServiceClient) RepayLoan(ctx context.Context, in *RepayLoanRequest, opts ...grpc.CallOption) (*RepayLoanResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RepayLoan", varargs...)
+	ret0, _ := ret[0].(*RepayLoanResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RepayLoan indicates an expected call of RepayLoan.
+func (mr *MockInventoryServiceClientMockRecorder) RepayLoan(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RepayLoan", reflect.TypeOf((*MockInventoryServiceClient)(nil).RepayLoan), varargs...)
+}
+
 // StreamInventories mocks base method.
 func (m *MockInventoryServiceClient) StreamInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (InventoryService_StreamInventoriesClient, error) {
 	m.ctrl.T.Helper()
@@ -657,6 +677,46 @@ func (mr *MockInventoryServiceClientMockRecorder) SyncInventoryFromLedger(ctx, i
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceClient)(nil).SyncInventoryFromLedger), varargs...)
+}
+
+// SyncLoanDeliveries mocks base method.
+func (m *MockInventoryServiceClient) SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest, opts ...grpc.CallOption) (*SyncLoanDeliveriesResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SyncLoanDeliveries", varargs...)
+	ret0, _ := ret[0].(*SyncLoanDeliveriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SyncLoanDeliveries indicates an expected call of SyncLoanDeliveries.
+func (mr *MockInventoryServiceClientMockRecorder) SyncLoanDeliveries(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncLoanDeliveries", reflect.TypeOf((*MockInventoryServiceClient)(nil).SyncLoanDeliveries), varargs...)
+}
+
+// TransferLoan mocks base method.
+func (m *MockInventoryServiceClient) TransferLoan(ctx context.Context, in *TransferLoanRequest, opts ...grpc.CallOption) (*TransferLoanResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "TransferLoan", varargs...)
+	ret0, _ := ret[0].(*TransferLoanResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// TransferLoan indicates an expected call of TransferLoan.
+func (mr *MockInventoryServiceClientMockRecorder) TransferLoan(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransferLoan", reflect.TypeOf((*MockInventoryServiceClient)(nil).TransferLoan), varargs...)
 }
 
 // UpdateInventory mocks base method.
@@ -762,6 +822,21 @@ func (mr *MockInventoryServiceServerMockRecorder) ListLedgerInventories(ctx, in 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListLedgerInventories), ctx, in)
 }
 
+// RepayLoan mocks base method.
+func (m *MockInventoryServiceServer) RepayLoan(ctx context.Context, in *RepayLoanRequest) (*RepayLoanResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RepayLoan", ctx, in)
+	ret0, _ := ret[0].(*RepayLoanResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RepayLoan indicates an expected call of RepayLoan.
+func (mr *MockInventoryServiceServerMockRecorder) RepayLoan(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RepayLoan", reflect.TypeOf((*MockInventoryServiceServer)(nil).RepayLoan), ctx, in)
+}
+
 // StreamInventories mocks base method.
 func (m *MockInventoryServiceServer) StreamInventories(blob *ListInventoriesRequest, server InventoryService_StreamInventoriesServer) error {
 	m.ctrl.T.Helper()
@@ -803,6 +878,36 @@ func (m *MockInventoryServiceServer) SyncInventoryFromLedger(ctx context.Context
 func (mr *MockInventoryServiceServerMockRecorder) SyncInventoryFromLedger(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceServer)(nil).SyncInventoryFromLedger), ctx, in)
+}
+
+// SyncLoanDeliveries mocks base method.
+func (m *MockInventoryServiceServer) SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest) (*SyncLoanDeliveriesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SyncLoanDeliveries", ctx, in)
+	ret0, _ := ret[0].(*SyncLoanDeliveriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SyncLoanDeliveries indicates an expected call of SyncLoanDeliveries.
+func (mr *MockInventoryServiceServerMockRecorder) SyncLoanDeliveries(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncLoanDeliveries", reflect.TypeOf((*MockInventoryServiceServer)(nil).SyncLoanDeliveries), ctx, in)
+}
+
+// TransferLoan mocks base method.
+func (m *MockInventoryServiceServer) TransferLoan(ctx context.Context, in *TransferLoanRequest) (*TransferLoanResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "TransferLoan", ctx, in)
+	ret0, _ := ret[0].(*TransferLoanResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// TransferLoan indicates an expected call of TransferLoan.
+func (mr *MockInventoryServiceServerMockRecorder) TransferLoan(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransferLoan", reflect.TypeOf((*MockInventoryServiceServer)(nil).TransferLoan), ctx, in)
 }
 
 // UpdateInventory mocks base method.
