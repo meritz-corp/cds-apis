@@ -367,17 +367,20 @@ const RepayLoanRequest$json = {
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'quantity', '3': 3, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
-    {'1': 'dbcr_date', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'dbcrDate'},
-    {'1': 'dbcr_srno', '3': 5, '4': 1, '5': 3, '8': {}, '10': 'dbcrSrno'},
   ],
+  '9': [
+    {'1': 4, '2': 5},
+    {'1': 5, '2': 6},
+  ],
+  '10': ['dbcr_date', 'dbcr_srno'],
 };
 
 /// Descriptor for `RepayLoanRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List repayLoanRequestDescriptor = $convert.base64Decode(
     'ChBSZXBheUxvYW5SZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby5jZHNhcGlzLn'
     'h5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3ltYm9sEiAKCHF1YW50aXR5'
-    'GAMgASgDQgTiQQECUghxdWFudGl0eRIhCglkYmNyX2RhdGUYBCABKAlCBOJBAQJSCGRiY3JEYX'
-    'RlEiEKCWRiY3Jfc3JubxgFIAEoA0IE4kEBAlIIZGJjclNybm8=');
+    'GAMgASgDQgTiQQECUghxdWFudGl0eUoECAQQBUoECAUQBlIJZGJjcl9kYXRlUglkYmNyX3Nybm'
+    '8=');
 
 @$core.Deprecated('Use repayLoanResponseDescriptor instead')
 const RepayLoanResponse$json = {

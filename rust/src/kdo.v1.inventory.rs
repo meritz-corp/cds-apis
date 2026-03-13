@@ -408,12 +408,6 @@ pub struct RepayLoanRequest {
     /// 상환 수량
     #[prost(int64, tag="3")]
     pub quantity: i64,
-    /// 대차발생일자 (YYYYMMDD)
-    #[prost(string, tag="4")]
-    pub dbcr_date: ::prost::alloc::string::String,
-    /// 대차일련번호
-    #[prost(int64, tag="5")]
-    pub dbcr_srno: i64,
 }
 /// RepayLoan 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

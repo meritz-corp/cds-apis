@@ -83,7 +83,7 @@ service InventoryService {
       post: "/v1/inventories/{fund=funds/*}:repayLoan"
       body: "*"
     };
-    option (google.api.method_signature) = "fund,symbol,quantity,dbcr_date,dbcr_srno";
+    option (google.api.method_signature) = "fund,symbol,quantity";
   }
 
   // 펀드간 대차 이전 (내부대차)
@@ -471,11 +471,9 @@ message RepayLoanRequest {
   // 상환 수량
   int64 quantity = 3 [(google.api.field_behavior) = REQUIRED];
 
-  // 대차발생일자 (YYYYMMDD)
-  string dbcr_date = 4 [(google.api.field_behavior) = REQUIRED];
-
-  // 대차일련번호
-  int64 dbcr_srno = 5 [(google.api.field_behavior) = REQUIRED];
+  // 필드 번호 4, 5는 삭제된 dbcr_date, dbcr_srno 예약
+  reserved 4, 5;
+  reserved "dbcr_date", "dbcr_srno";
 }
 
 // RepayLoan 응답

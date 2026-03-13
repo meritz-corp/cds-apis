@@ -2999,12 +2999,6 @@ impl serde::Serialize for RepayLoanRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.RepayLoanRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
@@ -3016,14 +3010,6 @@ impl serde::Serialize for RepayLoanRequest {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("dbcr_date", &self.dbcr_date)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("dbcr_srno", ToString::to_string(&self.dbcr_srno).as_str())?;
         }
         struct_ser.end()
     }
@@ -3038,10 +3024,6 @@ impl<'de> serde::Deserialize<'de> for RepayLoanRequest {
             "fund",
             "symbol",
             "quantity",
-            "dbcr_date",
-            "dbcrDate",
-            "dbcr_srno",
-            "dbcrSrno",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3049,8 +3031,6 @@ impl<'de> serde::Deserialize<'de> for RepayLoanRequest {
             Fund,
             Symbol,
             Quantity,
-            DbcrDate,
-            DbcrSrno,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3076,8 +3056,6 @@ impl<'de> serde::Deserialize<'de> for RepayLoanRequest {
                             "fund" => Ok(GeneratedField::Fund),
                             "symbol" => Ok(GeneratedField::Symbol),
                             "quantity" => Ok(GeneratedField::Quantity),
-                            "dbcrDate" | "dbcr_date" => Ok(GeneratedField::DbcrDate),
-                            "dbcrSrno" | "dbcr_srno" => Ok(GeneratedField::DbcrSrno),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3100,8 +3078,6 @@ impl<'de> serde::Deserialize<'de> for RepayLoanRequest {
                 let mut fund__ = None;
                 let mut symbol__ = None;
                 let mut quantity__ = None;
-                let mut dbcr_date__ = None;
-                let mut dbcr_srno__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -3124,20 +3100,6 @@ impl<'de> serde::Deserialize<'de> for RepayLoanRequest {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::DbcrDate => {
-                            if dbcr_date__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dbcrDate"));
-                            }
-                            dbcr_date__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::DbcrSrno => {
-                            if dbcr_srno__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dbcrSrno"));
-                            }
-                            dbcr_srno__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3147,8 +3109,6 @@ impl<'de> serde::Deserialize<'de> for RepayLoanRequest {
                     fund: fund__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
-                    dbcr_date: dbcr_date__.unwrap_or_default(),
-                    dbcr_srno: dbcr_srno__.unwrap_or_default(),
                 })
             }
         }

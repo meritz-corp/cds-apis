@@ -432,23 +432,12 @@
                   "type": "string",
                   "format": "int64",
                   "title": "상환 수량"
-                },
-                "dbcrDate": {
-                  "type": "string",
-                  "title": "대차발생일자 (YYYYMMDD)"
-                },
-                "dbcrSrno": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "대차일련번호"
                 }
               },
               "title": "RepayLoan 요청",
               "required": [
                 "symbol",
-                "quantity",
-                "dbcrDate",
-                "dbcrSrno"
+                "quantity"
               ]
             }
           }
