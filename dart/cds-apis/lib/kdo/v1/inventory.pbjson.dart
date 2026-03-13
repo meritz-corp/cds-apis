@@ -400,9 +400,12 @@ const TransferLoanRequest$json = {
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'borrow', '3': 5, '4': 1, '5': 8, '8': {}, '10': 'borrow'},
-    {'1': 'cntg_date', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'cntgDate'},
-    {'1': 'cntg_no', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'cntgNo'},
   ],
+  '9': [
+    {'1': 6, '2': 7},
+    {'1': 7, '2': 8},
+  ],
+  '10': ['cntg_date', 'cntg_no'],
 };
 
 /// Descriptor for `TransferLoanRequest`. Decode as a `google.protobuf.DescriptorProto`.
@@ -411,8 +414,7 @@ final $typed_data.Uint8List transferLoanRequestDescriptor = $convert.base64Decod
     'Nkc2FwaXMueHl6L0Z1bmRSCGZyb21GdW5kEjYKB3RvX2Z1bmQYAiABKAlCHeJBAQL6QRYKFGtk'
     'by5jZHNhcGlzLnh5ei9GdW5kUgZ0b0Z1bmQSHAoGc3ltYm9sGAMgASgJQgTiQQECUgZzeW1ib2'
     'wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aXR5EhwKBmJvcnJvdxgFIAEoCEIE4kEB'
-    'AlIGYm9ycm93EiEKCWNudGdfZGF0ZRgGIAEoCUIE4kEBAlIIY250Z0RhdGUSHQoHY250Z19ubx'
-    'gHIAEoCUIE4kEBAlIGY250Z05v');
+    'AlIGYm9ycm93SgQIBhAHSgQIBxAIUgljbnRnX2RhdGVSB2NudGdfbm8=');
 
 @$core.Deprecated('Use transferLoanResponseDescriptor instead')
 const TransferLoanResponse$json = {

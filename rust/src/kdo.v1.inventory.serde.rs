@@ -3955,12 +3955,6 @@ impl serde::Serialize for TransferLoanRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.TransferLoanRequest", len)?;
         if true {
             struct_ser.serialize_field("from_fund", &self.from_fund)?;
@@ -3979,12 +3973,6 @@ impl serde::Serialize for TransferLoanRequest {
         if true {
             struct_ser.serialize_field("borrow", &self.borrow)?;
         }
-        if true {
-            struct_ser.serialize_field("cntg_date", &self.cntg_date)?;
-        }
-        if true {
-            struct_ser.serialize_field("cntg_no", &self.cntg_no)?;
-        }
         struct_ser.end()
     }
 }
@@ -4002,10 +3990,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
             "symbol",
             "quantity",
             "borrow",
-            "cntg_date",
-            "cntgDate",
-            "cntg_no",
-            "cntgNo",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4015,8 +3999,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
             Symbol,
             Quantity,
             Borrow,
-            CntgDate,
-            CntgNo,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4044,8 +4026,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "borrow" => Ok(GeneratedField::Borrow),
-                            "cntgDate" | "cntg_date" => Ok(GeneratedField::CntgDate),
-                            "cntgNo" | "cntg_no" => Ok(GeneratedField::CntgNo),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4070,8 +4050,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                 let mut symbol__ = None;
                 let mut quantity__ = None;
                 let mut borrow__ = None;
-                let mut cntg_date__ = None;
-                let mut cntg_no__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FromFund => {
@@ -4106,18 +4084,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                             }
                             borrow__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::CntgDate => {
-                            if cntg_date__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("cntgDate"));
-                            }
-                            cntg_date__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::CntgNo => {
-                            if cntg_no__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("cntgNo"));
-                            }
-                            cntg_no__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4129,8 +4095,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                     symbol: symbol__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     borrow: borrow__.unwrap_or_default(),
-                    cntg_date: cntg_date__.unwrap_or_default(),
-                    cntg_no: cntg_no__.unwrap_or_default(),
                 })
             }
         }

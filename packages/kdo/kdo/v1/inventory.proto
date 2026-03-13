@@ -92,7 +92,7 @@ service InventoryService {
       post: "/v1/inventories/{from_fund=funds/*}:transferLoan"
       body: "*"
     };
-    option (google.api.method_signature) = "from_fund,to_fund,symbol,quantity,borrow,cntg_date,cntg_no";
+    option (google.api.method_signature) = "from_fund,to_fund,symbol,quantity,borrow";
   }
 
   // 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
@@ -506,11 +506,10 @@ message TransferLoanRequest {
   // 이전 구분 (true=차입이전, false=대여이전)
   bool borrow = 5 [(google.api.field_behavior) = REQUIRED];
 
-  // 원 체결일자 (YYYYMMDD)
-  string cntg_date = 6 [(google.api.field_behavior) = REQUIRED];
-
-  // 원 체결번호
-  string cntg_no = 7 [(google.api.field_behavior) = REQUIRED];
+  // 필드 번호 6, 7은 삭제된 cntg_date, cntg_no 예약
+  // (서버에서 012r TR로 자동 조회하여 매칭하도록 변경)
+  reserved 6, 7;
+  reserved "cntg_date", "cntg_no";
 }
 
 // TransferLoan 응답

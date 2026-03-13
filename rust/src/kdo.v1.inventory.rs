@@ -433,12 +433,6 @@ pub struct TransferLoanRequest {
     /// 이전 구분 (true=차입이전, false=대여이전)
     #[prost(bool, tag="5")]
     pub borrow: bool,
-    /// 원 체결일자 (YYYYMMDD)
-    #[prost(string, tag="6")]
-    pub cntg_date: ::prost::alloc::string::String,
-    /// 원 체결번호
-    #[prost(string, tag="7")]
-    pub cntg_no: ::prost::alloc::string::String,
 }
 /// TransferLoan 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

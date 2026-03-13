@@ -1825,8 +1825,6 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $fixnum.Int64? quantity,
     $core.bool? borrow,
-    $core.String? cntgDate,
-    $core.String? cntgNo,
   }) {
     final result = create();
     if (fromFund != null) result.fromFund = fromFund;
@@ -1834,8 +1832,6 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
     if (symbol != null) result.symbol = symbol;
     if (quantity != null) result.quantity = quantity;
     if (borrow != null) result.borrow = borrow;
-    if (cntgDate != null) result.cntgDate = cntgDate;
-    if (cntgNo != null) result.cntgNo = cntgNo;
     return result;
   }
 
@@ -1850,8 +1846,6 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..aOB(5, _omitFieldNames ? '' : 'borrow')
-    ..aOS(6, _omitFieldNames ? '' : 'cntgDate')
-    ..aOS(7, _omitFieldNames ? '' : 'cntgNo')
     ..hasRequiredFields = false
   ;
 
@@ -1921,26 +1915,6 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
   $core.bool hasBorrow() => $_has(4);
   @$pb.TagNumber(5)
   void clearBorrow() => $_clearField(5);
-
-  /// 원 체결일자 (YYYYMMDD)
-  @$pb.TagNumber(6)
-  $core.String get cntgDate => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set cntgDate($core.String value) => $_setString(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasCntgDate() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearCntgDate() => $_clearField(6);
-
-  /// 원 체결번호
-  @$pb.TagNumber(7)
-  $core.String get cntgNo => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set cntgNo($core.String value) => $_setString(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasCntgNo() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearCntgNo() => $_clearField(7);
 }
 
 /// TransferLoan 응답

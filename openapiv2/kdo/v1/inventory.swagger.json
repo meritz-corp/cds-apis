@@ -66,14 +66,6 @@
                 "borrow": {
                   "type": "boolean",
                   "title": "이전 구분 (true=차입이전, false=대여이전)"
-                },
-                "cntgDate": {
-                  "type": "string",
-                  "title": "원 체결일자 (YYYYMMDD)"
-                },
-                "cntgNo": {
-                  "type": "string",
-                  "title": "원 체결번호"
                 }
               },
               "title": "TransferLoan 요청",
@@ -81,9 +73,7 @@
                 "toFund",
                 "symbol",
                 "quantity",
-                "borrow",
-                "cntgDate",
-                "cntgNo"
+                "borrow"
               ]
             }
           }
