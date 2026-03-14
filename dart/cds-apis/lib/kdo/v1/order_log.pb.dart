@@ -41,7 +41,7 @@ class OrderLog extends $pb.GeneratedMessage {
     $core.String? filledAmount,
     $core.String? rejectionCode,
     $core.String? errorMessage,
-    $fixnum.Int64? eventTime,
+    $fixnum.Int64? exchangeTime,
     $fixnum.Int64? receiveTime,
     $1.Timestamp? createdAt,
     $2.MarketType? marketType,
@@ -62,7 +62,7 @@ class OrderLog extends $pb.GeneratedMessage {
     if (filledAmount != null) result.filledAmount = filledAmount;
     if (rejectionCode != null) result.rejectionCode = rejectionCode;
     if (errorMessage != null) result.errorMessage = errorMessage;
-    if (eventTime != null) result.eventTime = eventTime;
+    if (exchangeTime != null) result.exchangeTime = exchangeTime;
     if (receiveTime != null) result.receiveTime = receiveTime;
     if (createdAt != null) result.createdAt = createdAt;
     if (marketType != null) result.marketType = marketType;
@@ -90,7 +90,7 @@ class OrderLog extends $pb.GeneratedMessage {
     ..aOS(13, _omitFieldNames ? '' : 'filledAmount')
     ..aOS(14, _omitFieldNames ? '' : 'rejectionCode')
     ..aOS(15, _omitFieldNames ? '' : 'errorMessage')
-    ..a<$fixnum.Int64>(16, _omitFieldNames ? '' : 'eventTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(16, _omitFieldNames ? '' : 'exchangeTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(17, _omitFieldNames ? '' : 'receiveTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$1.Timestamp>(18, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..e<$2.MarketType>(19, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: $2.MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: $2.MarketType.valueOf, enumValues: $2.MarketType.values)
@@ -269,16 +269,15 @@ class OrderLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(15)
   void clearErrorMessage() => $_clearField(15);
 
-  /// 이벤트 발생 시각 (거래소 시각, 마이크로초)
-  /// Rust Timestamp 타입을 u64로 가정
+  /// 거래소 시각 (KST, HHMMSSuuuuuu)
   @$pb.TagNumber(16)
-  $fixnum.Int64 get eventTime => $_getI64(15);
+  $fixnum.Int64 get exchangeTime => $_getI64(15);
   @$pb.TagNumber(16)
-  set eventTime($fixnum.Int64 value) => $_setInt64(15, value);
+  set exchangeTime($fixnum.Int64 value) => $_setInt64(15, value);
   @$pb.TagNumber(16)
-  $core.bool hasEventTime() => $_has(15);
+  $core.bool hasExchangeTime() => $_has(15);
   @$pb.TagNumber(16)
-  void clearEventTime() => $_clearField(16);
+  void clearExchangeTime() => $_clearField(16);
 
   /// 이벤트 수신 시각 (시스템 시각, 마이크로초)
   /// Rust Timestamp 타입을 u64로 가정
@@ -511,7 +510,7 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   /// 오더링 조건. (optional, AIP-132)
   ///
   /// Supported Fields
-  /// * "order_id", "event_time", "receive_time"
+  /// * "order_id", "exchange_time", "receive_time", "date"
   ///
   /// Examples
   /// * order_by=order_id desc

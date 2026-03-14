@@ -54,10 +54,9 @@ pub struct OrderLog {
     /// 에러 메시지 (MeritzRejected의 경우)
     #[prost(string, optional, tag="15")]
     pub error_message: ::core::option::Option<::prost::alloc::string::String>,
-    /// 이벤트 발생 시각 (거래소 시각, 마이크로초)
-    /// Rust Timestamp 타입을 u64로 가정
+    /// 거래소 시각 (KST, HHMMSSuuuuuu)
     #[prost(uint64, tag="16")]
-    pub event_time: u64,
+    pub exchange_time: u64,
     /// 이벤트 수신 시각 (시스템 시각, 마이크로초)
     /// Rust Timestamp 타입을 u64로 가정
     #[prost(uint64, tag="17")]
@@ -125,7 +124,7 @@ pub struct ListOrderLogsRequest {
     /// 오더링 조건. (optional, AIP-132)
     ///
     /// Supported Fields
-    /// * "order_id", "event_time", "receive_time"
+    /// * "order_id", "exchange_time", "receive_time", "date"
     ///
     /// Examples
     /// * order_by=order_id desc

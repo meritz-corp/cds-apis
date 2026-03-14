@@ -700,7 +700,7 @@ impl serde::Serialize for OrderLog {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("event_time", ToString::to_string(&self.event_time).as_str())?;
+            struct_ser.serialize_field("exchange_time", ToString::to_string(&self.exchange_time).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -750,8 +750,8 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "rejectionCode",
             "error_message",
             "errorMessage",
-            "event_time",
-            "eventTime",
+            "exchange_time",
+            "exchangeTime",
             "receive_time",
             "receiveTime",
             "created_at",
@@ -777,7 +777,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             FilledAmount,
             RejectionCode,
             ErrorMessage,
-            EventTime,
+            ExchangeTime,
             ReceiveTime,
             CreatedAt,
             MarketType,
@@ -818,7 +818,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "filledAmount" | "filled_amount" => Ok(GeneratedField::FilledAmount),
                             "rejectionCode" | "rejection_code" => Ok(GeneratedField::RejectionCode),
                             "errorMessage" | "error_message" => Ok(GeneratedField::ErrorMessage),
-                            "eventTime" | "event_time" => Ok(GeneratedField::EventTime),
+                            "exchangeTime" | "exchange_time" => Ok(GeneratedField::ExchangeTime),
                             "receiveTime" | "receive_time" => Ok(GeneratedField::ReceiveTime),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "marketType" | "market_type" => Ok(GeneratedField::MarketType),
@@ -856,7 +856,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut filled_amount__ = None;
                 let mut rejection_code__ = None;
                 let mut error_message__ = None;
-                let mut event_time__ = None;
+                let mut exchange_time__ = None;
                 let mut receive_time__ = None;
                 let mut created_at__ = None;
                 let mut market_type__ = None;
@@ -958,11 +958,11 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             error_message__ = map_.next_value()?;
                         }
-                        GeneratedField::EventTime => {
-                            if event_time__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("eventTime"));
+                        GeneratedField::ExchangeTime => {
+                            if exchange_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exchangeTime"));
                             }
-                            event_time__ = 
+                            exchange_time__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1007,7 +1007,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     filled_amount: filled_amount__,
                     rejection_code: rejection_code__,
                     error_message: error_message__,
-                    event_time: event_time__.unwrap_or_default(),
+                    exchange_time: exchange_time__.unwrap_or_default(),
                     receive_time: receive_time__.unwrap_or_default(),
                     created_at: created_at__,
                     market_type: market_type__.unwrap_or_default(),

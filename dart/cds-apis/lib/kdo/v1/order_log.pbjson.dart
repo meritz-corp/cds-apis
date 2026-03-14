@@ -68,7 +68,7 @@ const OrderLog$json = {
     {'1': 'filled_amount', '3': 13, '4': 1, '5': 9, '9': 3, '10': 'filledAmount', '17': true},
     {'1': 'rejection_code', '3': 14, '4': 1, '5': 9, '9': 4, '10': 'rejectionCode', '17': true},
     {'1': 'error_message', '3': 15, '4': 1, '5': 9, '9': 5, '10': 'errorMessage', '17': true},
-    {'1': 'event_time', '3': 16, '4': 1, '5': 4, '10': 'eventTime'},
+    {'1': 'exchange_time', '3': 16, '4': 1, '5': 4, '10': 'exchangeTime'},
     {'1': 'receive_time', '3': 17, '4': 1, '5': 4, '10': 'receiveTime'},
     {'1': 'created_at', '3': 18, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     {'1': 'market_type', '3': 19, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
@@ -95,12 +95,13 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'ABKAlIAVILZmlsbGVkUHJpY2WIAQESLAoPZmlsbGVkX3F1YW50aXR5GAwgASgJSAJSDmZpbGxl'
     'ZFF1YW50aXR5iAEBEigKDWZpbGxlZF9hbW91bnQYDSABKAlIA1IMZmlsbGVkQW1vdW50iAEBEi'
     'oKDnJlamVjdGlvbl9jb2RlGA4gASgJSARSDXJlamVjdGlvbkNvZGWIAQESKAoNZXJyb3JfbWVz'
-    'c2FnZRgPIAEoCUgFUgxlcnJvck1lc3NhZ2WIAQESHQoKZXZlbnRfdGltZRgQIAEoBFIJZXZlbn'
-    'RUaW1lEiEKDHJlY2VpdmVfdGltZRgRIAEoBFILcmVjZWl2ZVRpbWUSOQoKY3JlYXRlZF9hdBgS'
-    'IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI6CgttYXJrZXRfdH'
-    'lwZRgTIAEoDjIZLmtkby52MS5jb21tb24uTWFya2V0VHlwZVIKbWFya2V0VHlwZUIUChJfb3Jp'
-    'Z2luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5QhAKDl'
-    '9maWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZQ==');
+    'c2FnZRgPIAEoCUgFUgxlcnJvck1lc3NhZ2WIAQESIwoNZXhjaGFuZ2VfdGltZRgQIAEoBFIMZX'
+    'hjaGFuZ2VUaW1lEiEKDHJlY2VpdmVfdGltZRgRIAEoBFILcmVjZWl2ZVRpbWUSOQoKY3JlYXRl'
+    'ZF9hdBgSIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI6CgttYX'
+    'JrZXRfdHlwZRgTIAEoDjIZLmtkby52MS5jb21tb24uTWFya2V0VHlwZVIKbWFya2V0VHlwZUIU'
+    'ChJfb3JpZ2luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aX'
+    'R5QhAKDl9maWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2Fn'
+    'ZQ==');
 
 @$core.Deprecated('Use orderLogFillStatisticsDescriptor instead')
 const OrderLogFillStatistics$json = {

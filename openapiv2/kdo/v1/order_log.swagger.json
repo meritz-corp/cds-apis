@@ -59,7 +59,7 @@
           },
           {
             "name": "orderBy",
-            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"order_id\", \"event_time\", \"receive_time\"\n\nExamples\n* order_by=order_id desc",
+            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"order_id\", \"exchange_time\", \"receive_time\", \"date\"\n\nExamples\n* order_by=order_id desc",
             "in": "query",
             "required": false,
             "type": "string"
@@ -235,7 +235,7 @@
           },
           {
             "name": "orderBy",
-            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"order_id\", \"event_time\", \"receive_time\"\n\nExamples\n* order_by=order_id desc",
+            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"order_id\", \"exchange_time\", \"receive_time\", \"date\"\n\nExamples\n* order_by=order_id desc",
             "in": "query",
             "required": false,
             "type": "string"
@@ -365,10 +365,10 @@
           "type": "string",
           "title": "에러 메시지 (MeritzRejected의 경우)"
         },
-        "eventTime": {
+        "exchangeTime": {
           "type": "string",
           "format": "uint64",
-          "title": "이벤트 발생 시각 (거래소 시각, 마이크로초)\nRust Timestamp 타입을 u64로 가정"
+          "title": "거래소 시각 (KST, HHMMSSuuuuuu)"
         },
         "receiveTime": {
           "type": "string",
