@@ -635,6 +635,92 @@ class GetOrderLogStatisticsRequest extends $pb.GeneratedMessage {
   void clearFilter() => $_clearField(1);
 }
 
+class GetOrderChainRequest extends $pb.GeneratedMessage {
+  factory GetOrderChainRequest({
+    $fixnum.Int64? orderId,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    return result;
+  }
+
+  GetOrderChainRequest._();
+
+  factory GetOrderChainRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetOrderChainRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOrderChainRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetOrderChainRequest clone() => GetOrderChainRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetOrderChainRequest copyWith(void Function(GetOrderChainRequest) updates) => super.copyWith((message) => updates(message as GetOrderChainRequest)) as GetOrderChainRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetOrderChainRequest create() => GetOrderChainRequest._();
+  @$core.override
+  GetOrderChainRequest createEmptyInstance() => create();
+  static $pb.PbList<GetOrderChainRequest> createRepeated() => $pb.PbList<GetOrderChainRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetOrderChainRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetOrderChainRequest>(create);
+  static GetOrderChainRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get orderId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+}
+
+class GetOrderChainResponse extends $pb.GeneratedMessage {
+  factory GetOrderChainResponse({
+    $core.Iterable<OrderLog>? orderLogs,
+  }) {
+    final result = create();
+    if (orderLogs != null) result.orderLogs.addAll(orderLogs);
+    return result;
+  }
+
+  GetOrderChainResponse._();
+
+  factory GetOrderChainResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetOrderChainResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOrderChainResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..pc<OrderLog>(1, _omitFieldNames ? '' : 'orderLogs', $pb.PbFieldType.PM, subBuilder: OrderLog.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetOrderChainResponse clone() => GetOrderChainResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetOrderChainResponse copyWith(void Function(GetOrderChainResponse) updates) => super.copyWith((message) => updates(message as GetOrderChainResponse)) as GetOrderChainResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetOrderChainResponse create() => GetOrderChainResponse._();
+  @$core.override
+  GetOrderChainResponse createEmptyInstance() => create();
+  static $pb.PbList<GetOrderChainResponse> createRepeated() => $pb.PbList<GetOrderChainResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetOrderChainResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetOrderChainResponse>(create);
+  static GetOrderChainResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<OrderLog> get orderLogs => $_getList(0);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

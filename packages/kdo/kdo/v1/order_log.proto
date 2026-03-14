@@ -46,6 +46,14 @@ service OrderLogService {
     };
     option (google.api.method_signature) = "";
   }
+
+  // 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
+  rpc GetOrderChain(GetOrderChainRequest) returns (GetOrderChainResponse) {
+    option (google.api.http) = {
+      get: "/v1/order_logs/{order_id}:chain"
+    };
+    option (google.api.method_signature) = "order_id";
+  }
 }
 
 
@@ -229,4 +237,12 @@ message GetOrderLogStatisticsRequest {
   // * filter=fund_code="0159"
   // * filter=symbol:"7526"
   string filter = 1;
+}
+
+message GetOrderChainRequest {
+  uint64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetOrderChainResponse {
+  repeated OrderLog order_logs = 1;
 }

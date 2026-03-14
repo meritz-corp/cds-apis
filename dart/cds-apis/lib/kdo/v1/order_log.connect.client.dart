@@ -80,4 +80,22 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
+  Future<kdov1order_log.GetOrderChainResponse> getOrderChain(
+    kdov1order_log.GetOrderChainRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLogService.getOrderChain,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

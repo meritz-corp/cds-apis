@@ -30,6 +30,8 @@ type OrderLogServiceClient interface {
 	GetOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error)
 	// 주문 로그 통계 스트리밍
 	StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (OrderLogService_StreamOrderLogStatisticsClient, error)
+	// 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
+	GetOrderChain(ctx context.Context, in *GetOrderChainRequest, opts ...grpc.CallOption) (*GetOrderChainResponse, error)
 }
 
 type orderLogServiceClient struct {
@@ -122,6 +124,15 @@ func (x *orderLogServiceStreamOrderLogStatisticsClient) Recv() (*OrderLogFillSta
 	return m, nil
 }
 
+func (c *orderLogServiceClient) GetOrderChain(ctx context.Context, in *GetOrderChainRequest, opts ...grpc.CallOption) (*GetOrderChainResponse, error) {
+	out := new(GetOrderChainResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order_log.OrderLogService/GetOrderChain", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderLogServiceServer is the server API for OrderLogService service.
 // All implementations must embed UnimplementedOrderLogServiceServer
 // for forward compatibility
@@ -134,6 +145,8 @@ type OrderLogServiceServer interface {
 	GetOrderLogStatistics(context.Context, *GetOrderLogStatisticsRequest) (*OrderLogFillStatistics, error)
 	// 주문 로그 통계 스트리밍
 	StreamOrderLogStatistics(*GetOrderLogStatisticsRequest, OrderLogService_StreamOrderLogStatisticsServer) error
+	// 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
+	GetOrderChain(context.Context, *GetOrderChainRequest) (*GetOrderChainResponse, error)
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
 
@@ -152,6 +165,9 @@ func (UnimplementedOrderLogServiceServer) GetOrderLogStatistics(context.Context,
 }
 func (UnimplementedOrderLogServiceServer) StreamOrderLogStatistics(*GetOrderLogStatisticsRequest, OrderLogService_StreamOrderLogStatisticsServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamOrderLogStatistics not implemented")
+}
+func (UnimplementedOrderLogServiceServer) GetOrderChain(context.Context, *GetOrderChainRequest) (*GetOrderChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrderChain not implemented")
 }
 func (UnimplementedOrderLogServiceServer) mustEmbedUnimplementedOrderLogServiceServer() {}
 
@@ -244,6 +260,24 @@ func (x *orderLogServiceStreamOrderLogStatisticsServer) Send(m *OrderLogFillStat
 	return x.ServerStream.SendMsg(m)
 }
 
+func _OrderLogService_GetOrderChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrderChainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderLogServiceServer).GetOrderChain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order_log.OrderLogService/GetOrderChain",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderLogServiceServer).GetOrderChain(ctx, req.(*GetOrderChainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderLogService_ServiceDesc is the grpc.ServiceDesc for OrderLogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +292,10 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrderLogStatistics",
 			Handler:    _OrderLogService_GetOrderLogStatistics_Handler,
+		},
+		{
+			MethodName: "GetOrderChain",
+			Handler:    _OrderLogService_GetOrderChain_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

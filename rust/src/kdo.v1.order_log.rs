@@ -158,6 +158,18 @@ pub struct GetOrderLogStatisticsRequest {
     #[prost(string, tag="1")]
     pub filter: ::prost::alloc::string::String,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetOrderChainRequest {
+    #[prost(uint64, tag="1")]
+    pub order_id: u64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetOrderChainResponse {
+    #[prost(message, repeated, tag="1")]
+    pub order_logs: ::prost::alloc::vec::Vec<OrderLog>,
+}
 /// 주문 로그 타입
 ///
 /// Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의

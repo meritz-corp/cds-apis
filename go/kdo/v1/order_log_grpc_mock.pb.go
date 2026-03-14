@@ -519,6 +519,26 @@ func (m *MockOrderLogServiceClient) EXPECT() *MockOrderLogServiceClientMockRecor
 	return m.recorder
 }
 
+// GetOrderChain mocks base method.
+func (m *MockOrderLogServiceClient) GetOrderChain(ctx context.Context, in *GetOrderChainRequest, opts ...grpc.CallOption) (*GetOrderChainResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetOrderChain", varargs...)
+	ret0, _ := ret[0].(*GetOrderChainResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrderChain indicates an expected call of GetOrderChain.
+func (mr *MockOrderLogServiceClientMockRecorder) GetOrderChain(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderChain", reflect.TypeOf((*MockOrderLogServiceClient)(nil).GetOrderChain), varargs...)
+}
+
 // GetOrderLogStatistics mocks base method.
 func (m *MockOrderLogServiceClient) GetOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (*OrderLogFillStatistics, error) {
 	m.ctrl.T.Helper()
@@ -620,6 +640,21 @@ func NewMockOrderLogServiceServer(ctrl *gomock.Controller) *MockOrderLogServiceS
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockOrderLogServiceServer) EXPECT() *MockOrderLogServiceServerMockRecorder {
 	return m.recorder
+}
+
+// GetOrderChain mocks base method.
+func (m *MockOrderLogServiceServer) GetOrderChain(ctx context.Context, in *GetOrderChainRequest) (*GetOrderChainResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrderChain", ctx, in)
+	ret0, _ := ret[0].(*GetOrderChainResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrderChain indicates an expected call of GetOrderChain.
+func (mr *MockOrderLogServiceServerMockRecorder) GetOrderChain(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderChain", reflect.TypeOf((*MockOrderLogServiceServer)(nil).GetOrderChain), ctx, in)
 }
 
 // GetOrderLogStatistics mocks base method.

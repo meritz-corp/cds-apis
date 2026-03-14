@@ -42,4 +42,12 @@ abstract final class OrderLogService {
     kdov1order_log.GetOrderLogStatisticsRequest.new,
     kdov1order_log.OrderLogFillStatistics.new,
   );
+
+  /// 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
+  static const getOrderChain = connect.Spec(
+    '/$name/GetOrderChain',
+    connect.StreamType.unary,
+    kdov1order_log.GetOrderChainRequest.new,
+    kdov1order_log.GetOrderChainResponse.new,
+  );
 }

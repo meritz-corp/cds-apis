@@ -143,6 +143,38 @@
         ]
       }
     },
+    "/v1/order_logs/{orderId}:chain": {
+      "get": {
+        "summary": "주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그",
+        "operationId": "OrderLogService_GetOrderChain",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logGetOrderChainResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
     "/v1/order_logs:stream": {
       "get": {
         "summary": "주문 로그 스트리밍",
@@ -230,6 +262,17 @@
       "default": "ORDER_SIDE_UNSPECIFIED",
       "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
       "title": "주문 방향"
+    },
+    "order_logGetOrderChainResponse": {
+      "type": "object",
+      "properties": {
+        "orderLogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/order_logOrderLog"
+          }
+        }
+      }
     },
     "order_logListOrderLogsResponse": {
       "type": "object",

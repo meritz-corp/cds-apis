@@ -53,6 +53,11 @@ class OrderLogServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamOrderLogStatistics, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
+  $grpc.ResponseFuture<$0.GetOrderChainResponse> getOrderChain($0.GetOrderChainRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getOrderChain, request, options: options);
+  }
+
     // method descriptors
 
   static final _$listOrderLogs = $grpc.ClientMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(
@@ -71,6 +76,10 @@ class OrderLogServiceClient extends $grpc.Client {
       '/kdo.v1.order_log.OrderLogService/StreamOrderLogStatistics',
       ($0.GetOrderLogStatisticsRequest value) => value.writeToBuffer(),
       $0.OrderLogFillStatistics.fromBuffer);
+  static final _$getOrderChain = $grpc.ClientMethod<$0.GetOrderChainRequest, $0.GetOrderChainResponse>(
+      '/kdo.v1.order_log.OrderLogService/GetOrderChain',
+      ($0.GetOrderChainRequest value) => value.writeToBuffer(),
+      $0.GetOrderChainResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.order_log.OrderLogService')
@@ -106,6 +115,13 @@ abstract class OrderLogServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.GetOrderLogStatisticsRequest.fromBuffer(value),
         ($0.OrderLogFillStatistics value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetOrderChainRequest, $0.GetOrderChainResponse>(
+        'GetOrderChain',
+        getOrderChain_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetOrderChainRequest.fromBuffer(value),
+        ($0.GetOrderChainResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListOrderLogsResponse> listOrderLogs_Pre($grpc.ServiceCall $call, $async.Future<$0.ListOrderLogsRequest> $request) async {
@@ -131,5 +147,11 @@ abstract class OrderLogServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.OrderLogFillStatistics> streamOrderLogStatistics($grpc.ServiceCall call, $0.GetOrderLogStatisticsRequest request);
+
+  $async.Future<$0.GetOrderChainResponse> getOrderChain_Pre($grpc.ServiceCall $call, $async.Future<$0.GetOrderChainRequest> $request) async {
+    return getOrderChain($call, await $request);
+  }
+
+  $async.Future<$0.GetOrderChainResponse> getOrderChain($grpc.ServiceCall call, $0.GetOrderChainRequest request);
 
 }

@@ -170,3 +170,29 @@ const GetOrderLogStatisticsRequest$json = {
 final $typed_data.Uint8List getOrderLogStatisticsRequestDescriptor = $convert.base64Decode(
     'ChxHZXRPcmRlckxvZ1N0YXRpc3RpY3NSZXF1ZXN0EhYKBmZpbHRlchgBIAEoCVIGZmlsdGVy');
 
+@$core.Deprecated('Use getOrderChainRequestDescriptor instead')
+const GetOrderChainRequest$json = {
+  '1': 'GetOrderChainRequest',
+  '2': [
+    {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
+  ],
+};
+
+/// Descriptor for `GetOrderChainRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getOrderChainRequestDescriptor = $convert.base64Decode(
+    'ChRHZXRPcmRlckNoYWluUmVxdWVzdBIfCghvcmRlcl9pZBgBIAEoBEIE4kEBAlIHb3JkZXJJZA'
+    '==');
+
+@$core.Deprecated('Use getOrderChainResponseDescriptor instead')
+const GetOrderChainResponse$json = {
+  '1': 'GetOrderChainResponse',
+  '2': [
+    {'1': 'order_logs', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.order_log.OrderLog', '10': 'orderLogs'},
+  ],
+};
+
+/// Descriptor for `GetOrderChainResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getOrderChainResponseDescriptor = $convert.base64Decode(
+    'ChVHZXRPcmRlckNoYWluUmVzcG9uc2USOQoKb3JkZXJfbG9ncxgBIAMoCzIaLmtkby52MS5vcm'
+    'Rlcl9sb2cuT3JkZXJMb2dSCW9yZGVyTG9ncw==');
+
