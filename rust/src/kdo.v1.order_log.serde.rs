@@ -639,6 +639,9 @@ impl serde::Serialize for OrderLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLog", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -715,6 +718,9 @@ impl serde::Serialize for OrderLog {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.market_type)))?;
             struct_ser.serialize_field("market_type", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("date", &self.date)?;
+        }
         struct_ser.end()
     }
 }
@@ -758,6 +764,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "createdAt",
             "market_type",
             "marketType",
+            "date",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -781,6 +788,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             ReceiveTime,
             CreatedAt,
             MarketType,
+            Date,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -822,6 +830,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "receiveTime" | "receive_time" => Ok(GeneratedField::ReceiveTime),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "marketType" | "market_type" => Ok(GeneratedField::MarketType),
+                            "date" => Ok(GeneratedField::Date),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -860,6 +869,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut receive_time__ = None;
                 let mut created_at__ = None;
                 let mut market_type__ = None;
+                let mut date__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -986,6 +996,14 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             market_type__ = Some(map_.next_value::<super::common::MarketType>()? as i32);
                         }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1011,6 +1029,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     receive_time: receive_time__.unwrap_or_default(),
                     created_at: created_at__,
                     market_type: market_type__.unwrap_or_default(),
+                    date: date__.unwrap_or_default(),
                 })
             }
         }

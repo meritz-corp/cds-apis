@@ -68,6 +68,9 @@ pub struct OrderLog {
     /// 시장 구분
     #[prost(enumeration="super::common::MarketType", tag="19")]
     pub market_type: i32,
+    /// 거래일 (YYYYMMDD)
+    #[prost(uint32, tag="20")]
+    pub date: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

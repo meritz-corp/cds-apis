@@ -383,6 +383,11 @@
         "marketType": {
           "$ref": "#/definitions/commonMarketType",
           "title": "시장 구분"
+        },
+        "date": {
+          "type": "integer",
+          "format": "int64",
+          "title": "거래일 (YYYYMMDD)"
         }
       },
       "title": "주문 로그"

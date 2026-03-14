@@ -45,6 +45,7 @@ class OrderLog extends $pb.GeneratedMessage {
     $fixnum.Int64? receiveTime,
     $1.Timestamp? createdAt,
     $2.MarketType? marketType,
+    $core.int? date,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -66,6 +67,7 @@ class OrderLog extends $pb.GeneratedMessage {
     if (receiveTime != null) result.receiveTime = receiveTime;
     if (createdAt != null) result.createdAt = createdAt;
     if (marketType != null) result.marketType = marketType;
+    if (date != null) result.date = date;
     return result;
   }
 
@@ -94,6 +96,7 @@ class OrderLog extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(17, _omitFieldNames ? '' : 'receiveTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$1.Timestamp>(18, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..e<$2.MarketType>(19, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: $2.MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: $2.MarketType.valueOf, enumValues: $2.MarketType.values)
+    ..a<$core.int>(20, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -312,6 +315,16 @@ class OrderLog extends $pb.GeneratedMessage {
   $core.bool hasMarketType() => $_has(18);
   @$pb.TagNumber(19)
   void clearMarketType() => $_clearField(19);
+
+  /// 거래일 (YYYYMMDD)
+  @$pb.TagNumber(20)
+  $core.int get date => $_getIZ(19);
+  @$pb.TagNumber(20)
+  set date($core.int value) => $_setUnsignedInt32(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasDate() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearDate() => $_clearField(20);
 }
 
 class OrderLogFillStatistics extends $pb.GeneratedMessage {

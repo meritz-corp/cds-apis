@@ -122,6 +122,9 @@ message OrderLog {
 
   // 시장 구분
   kdo.v1.common.MarketType market_type = 19;
+
+  // 거래일 (YYYYMMDD)
+  uint32 date = 20;
 }
 
 // 주문 로그 타입
