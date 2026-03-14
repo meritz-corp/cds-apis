@@ -638,9 +638,11 @@ class GetOrderLogStatisticsRequest extends $pb.GeneratedMessage {
 class GetOrderChainRequest extends $pb.GeneratedMessage {
   factory GetOrderChainRequest({
     $fixnum.Int64? orderId,
+    $core.int? date,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
+    if (date != null) result.date = date;
     return result;
   }
 
@@ -651,6 +653,7 @@ class GetOrderChainRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOrderChainRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -679,6 +682,16 @@ class GetOrderChainRequest extends $pb.GeneratedMessage {
   $core.bool hasOrderId() => $_has(0);
   @$pb.TagNumber(1)
   void clearOrderId() => $_clearField(1);
+
+  /// YYYYMMDD, 미지정 시 오늘 날짜
+  @$pb.TagNumber(2)
+  $core.int get date => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set date($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDate() => $_clearField(2);
 }
 
 class GetOrderChainResponse extends $pb.GeneratedMessage {

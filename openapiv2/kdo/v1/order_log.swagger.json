@@ -168,6 +168,14 @@
             "required": true,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "date",
+            "description": "YYYYMMDD, 미지정 시 오늘 날짜",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [

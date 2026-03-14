@@ -163,6 +163,9 @@ pub struct GetOrderLogStatisticsRequest {
 pub struct GetOrderChainRequest {
     #[prost(uint64, tag="1")]
     pub order_id: u64,
+    /// YYYYMMDD, 미지정 시 오늘 날짜
+    #[prost(uint32, optional, tag="2")]
+    pub date: ::core::option::Option<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

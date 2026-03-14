@@ -241,6 +241,8 @@ message GetOrderLogStatisticsRequest {
 
 message GetOrderChainRequest {
   uint64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+  // YYYYMMDD, 미지정 시 오늘 날짜
+  optional uint32 date = 2;
 }
 
 message GetOrderChainResponse {

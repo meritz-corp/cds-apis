@@ -175,13 +175,17 @@ const GetOrderChainRequest$json = {
   '1': 'GetOrderChainRequest',
   '2': [
     {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
+    {'1': 'date', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'date', '17': true},
+  ],
+  '8': [
+    {'1': '_date'},
   ],
 };
 
 /// Descriptor for `GetOrderChainRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getOrderChainRequestDescriptor = $convert.base64Decode(
-    'ChRHZXRPcmRlckNoYWluUmVxdWVzdBIfCghvcmRlcl9pZBgBIAEoBEIE4kEBAlIHb3JkZXJJZA'
-    '==');
+    'ChRHZXRPcmRlckNoYWluUmVxdWVzdBIfCghvcmRlcl9pZBgBIAEoBEIE4kEBAlIHb3JkZXJJZB'
+    'IXCgRkYXRlGAIgASgNSABSBGRhdGWIAQFCBwoFX2RhdGU=');
 
 @$core.Deprecated('Use getOrderChainResponseDescriptor instead')
 const GetOrderChainResponse$json = {
