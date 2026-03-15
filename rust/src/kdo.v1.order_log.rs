@@ -74,9 +74,6 @@ pub struct OrderLog {
     /// 사용자 영역 (JSON: QuoteContext 또는 HedgeContext)
     #[prost(string, optional, tag="21")]
     pub user_area: ::core::option::Option<::prost::alloc::string::String>,
-    /// 주문 시점 트레이딩 컨텍스트 (JSON: QuoteSnapshot)
-    #[prost(string, optional, tag="22")]
-    pub trading_context: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

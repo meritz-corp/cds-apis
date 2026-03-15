@@ -645,9 +645,6 @@ impl serde::Serialize for OrderLog {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLog", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -730,9 +727,6 @@ impl serde::Serialize for OrderLog {
         if let Some(v) = self.user_area.as_ref() {
             struct_ser.serialize_field("user_area", v)?;
         }
-        if let Some(v) = self.trading_context.as_ref() {
-            struct_ser.serialize_field("trading_context", v)?;
-        }
         struct_ser.end()
     }
 }
@@ -779,8 +773,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "date",
             "user_area",
             "userArea",
-            "trading_context",
-            "tradingContext",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -806,7 +798,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             MarketType,
             Date,
             UserArea,
-            TradingContext,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -850,7 +841,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "marketType" | "market_type" => Ok(GeneratedField::MarketType),
                             "date" => Ok(GeneratedField::Date),
                             "userArea" | "user_area" => Ok(GeneratedField::UserArea),
-                            "tradingContext" | "trading_context" => Ok(GeneratedField::TradingContext),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -891,7 +881,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut market_type__ = None;
                 let mut date__ = None;
                 let mut user_area__ = None;
-                let mut trading_context__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -1032,12 +1021,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             user_area__ = map_.next_value()?;
                         }
-                        GeneratedField::TradingContext => {
-                            if trading_context__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("tradingContext"));
-                            }
-                            trading_context__ = map_.next_value()?;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1065,7 +1048,6 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     market_type: market_type__.unwrap_or_default(),
                     date: date__.unwrap_or_default(),
                     user_area: user_area__,
-                    trading_context: trading_context__,
                 })
             }
         }

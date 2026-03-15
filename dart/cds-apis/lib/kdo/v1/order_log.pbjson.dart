@@ -74,7 +74,6 @@ const OrderLog$json = {
     {'1': 'market_type', '3': 19, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
     {'1': 'date', '3': 20, '4': 1, '5': 13, '10': 'date'},
     {'1': 'user_area', '3': 21, '4': 1, '5': 9, '9': 6, '10': 'userArea', '17': true},
-    {'1': 'trading_context', '3': 22, '4': 1, '5': 9, '9': 7, '10': 'tradingContext', '17': true},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -84,7 +83,9 @@ const OrderLog$json = {
     {'1': '_rejection_code'},
     {'1': '_error_message'},
     {'1': '_user_area'},
-    {'1': '_trading_context'},
+  ],
+  '9': [
+    {'1': 22, '2': 23},
   ],
 };
 
@@ -104,11 +105,10 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'hjaGFuZ2VUaW1lEiEKDHJlY2VpdmVfdGltZRgRIAEoBFILcmVjZWl2ZVRpbWUSOQoKY3JlYXRl'
     'ZF9hdBgSIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI6CgttYX'
     'JrZXRfdHlwZRgTIAEoDjIZLmtkby52MS5jb21tb24uTWFya2V0VHlwZVIKbWFya2V0VHlwZRIS'
-    'CgRkYXRlGBQgASgNUgRkYXRlEiAKCXVzZXJfYXJlYRgVIAEoCUgGUgh1c2VyQXJlYYgBARIsCg'
-    '90cmFkaW5nX2NvbnRleHQYFiABKAlIB1IOdHJhZGluZ0NvbnRleHSIAQFCFAoSX29yaWdpbmFs'
-    'X29yZGVyX2lkQg8KDV9maWxsZWRfcHJpY2VCEgoQX2ZpbGxlZF9xdWFudGl0eUIQCg5fZmlsbG'
-    'VkX2Ftb3VudEIRCg9fcmVqZWN0aW9uX2NvZGVCEAoOX2Vycm9yX21lc3NhZ2VCDAoKX3VzZXJf'
-    'YXJlYUISChBfdHJhZGluZ19jb250ZXh0');
+    'CgRkYXRlGBQgASgNUgRkYXRlEiAKCXVzZXJfYXJlYRgVIAEoCUgGUgh1c2VyQXJlYYgBAUIUCh'
+    'Jfb3JpZ2luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5'
+    'QhAKDl9maWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZU'
+    'IMCgpfdXNlcl9hcmVhSgQIFhAX');
 
 @$core.Deprecated('Use orderLogFillStatisticsDescriptor instead')
 const OrderLogFillStatistics$json = {

@@ -47,7 +47,6 @@ class OrderLog extends $pb.GeneratedMessage {
     $2.MarketType? marketType,
     $core.int? date,
     $core.String? userArea,
-    $core.String? tradingContext,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -71,7 +70,6 @@ class OrderLog extends $pb.GeneratedMessage {
     if (marketType != null) result.marketType = marketType;
     if (date != null) result.date = date;
     if (userArea != null) result.userArea = userArea;
-    if (tradingContext != null) result.tradingContext = tradingContext;
     return result;
   }
 
@@ -102,7 +100,6 @@ class OrderLog extends $pb.GeneratedMessage {
     ..e<$2.MarketType>(19, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: $2.MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: $2.MarketType.valueOf, enumValues: $2.MarketType.values)
     ..a<$core.int>(20, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
     ..aOS(21, _omitFieldNames ? '' : 'userArea')
-    ..aOS(22, _omitFieldNames ? '' : 'tradingContext')
     ..hasRequiredFields = false
   ;
 
@@ -341,16 +338,6 @@ class OrderLog extends $pb.GeneratedMessage {
   $core.bool hasUserArea() => $_has(20);
   @$pb.TagNumber(21)
   void clearUserArea() => $_clearField(21);
-
-  /// 주문 시점 트레이딩 컨텍스트 (JSON: QuoteSnapshot)
-  @$pb.TagNumber(22)
-  $core.String get tradingContext => $_getSZ(21);
-  @$pb.TagNumber(22)
-  set tradingContext($core.String value) => $_setString(21, value);
-  @$pb.TagNumber(22)
-  $core.bool hasTradingContext() => $_has(21);
-  @$pb.TagNumber(22)
-  void clearTradingContext() => $_clearField(22);
 }
 
 class OrderLogFillStatistics extends $pb.GeneratedMessage {
