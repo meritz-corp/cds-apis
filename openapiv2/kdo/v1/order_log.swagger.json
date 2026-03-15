@@ -392,6 +392,10 @@
         "userArea": {
           "type": "string",
           "title": "사용자 영역 (JSON: QuoteContext 또는 HedgeContext)"
+        },
+        "tradingContext": {
+          "type": "string",
+          "title": "주문 시점 트레이딩 컨텍스트 (JSON: QuoteSnapshot)"
         }
       },
       "title": "주문 로그"

@@ -128,6 +128,9 @@ message OrderLog {
 
   // 사용자 영역 (JSON: QuoteContext 또는 HedgeContext)
   optional string user_area = 21;
+
+  // 주문 시점 트레이딩 컨텍스트 (JSON: QuoteSnapshot)
+  optional string trading_context = 22;
 }
 
 // 주문 로그 타입
