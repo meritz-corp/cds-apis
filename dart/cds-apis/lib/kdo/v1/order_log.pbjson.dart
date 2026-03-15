@@ -73,6 +73,7 @@ const OrderLog$json = {
     {'1': 'created_at', '3': 18, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     {'1': 'market_type', '3': 19, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
     {'1': 'date', '3': 20, '4': 1, '5': 13, '10': 'date'},
+    {'1': 'user_area', '3': 21, '4': 1, '5': 9, '9': 6, '10': 'userArea', '17': true},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -81,6 +82,7 @@ const OrderLog$json = {
     {'1': '_filled_amount'},
     {'1': '_rejection_code'},
     {'1': '_error_message'},
+    {'1': '_user_area'},
   ],
 };
 
@@ -100,9 +102,10 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'hjaGFuZ2VUaW1lEiEKDHJlY2VpdmVfdGltZRgRIAEoBFILcmVjZWl2ZVRpbWUSOQoKY3JlYXRl'
     'ZF9hdBgSIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI6CgttYX'
     'JrZXRfdHlwZRgTIAEoDjIZLmtkby52MS5jb21tb24uTWFya2V0VHlwZVIKbWFya2V0VHlwZRIS'
-    'CgRkYXRlGBQgASgNUgRkYXRlQhQKEl9vcmlnaW5hbF9vcmRlcl9pZEIPCg1fZmlsbGVkX3ByaW'
-    'NlQhIKEF9maWxsZWRfcXVhbnRpdHlCEAoOX2ZpbGxlZF9hbW91bnRCEQoPX3JlamVjdGlvbl9j'
-    'b2RlQhAKDl9lcnJvcl9tZXNzYWdl');
+    'CgRkYXRlGBQgASgNUgRkYXRlEiAKCXVzZXJfYXJlYRgVIAEoCUgGUgh1c2VyQXJlYYgBAUIUCh'
+    'Jfb3JpZ2luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5'
+    'QhAKDl9maWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZU'
+    'IMCgpfdXNlcl9hcmVh');
 
 @$core.Deprecated('Use orderLogFillStatisticsDescriptor instead')
 const OrderLogFillStatistics$json = {

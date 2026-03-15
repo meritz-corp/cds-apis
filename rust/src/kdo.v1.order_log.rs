@@ -71,6 +71,9 @@ pub struct OrderLog {
     /// 거래일 (YYYYMMDD)
     #[prost(uint32, tag="20")]
     pub date: u32,
+    /// 사용자 영역 (JSON: QuoteContext 또는 HedgeContext)
+    #[prost(string, optional, tag="21")]
+    pub user_area: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

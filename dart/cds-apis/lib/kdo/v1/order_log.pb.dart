@@ -46,6 +46,7 @@ class OrderLog extends $pb.GeneratedMessage {
     $1.Timestamp? createdAt,
     $2.MarketType? marketType,
     $core.int? date,
+    $core.String? userArea,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -68,6 +69,7 @@ class OrderLog extends $pb.GeneratedMessage {
     if (createdAt != null) result.createdAt = createdAt;
     if (marketType != null) result.marketType = marketType;
     if (date != null) result.date = date;
+    if (userArea != null) result.userArea = userArea;
     return result;
   }
 
@@ -97,6 +99,7 @@ class OrderLog extends $pb.GeneratedMessage {
     ..aOM<$1.Timestamp>(18, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..e<$2.MarketType>(19, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: $2.MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: $2.MarketType.valueOf, enumValues: $2.MarketType.values)
     ..a<$core.int>(20, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..aOS(21, _omitFieldNames ? '' : 'userArea')
     ..hasRequiredFields = false
   ;
 
@@ -325,6 +328,16 @@ class OrderLog extends $pb.GeneratedMessage {
   $core.bool hasDate() => $_has(19);
   @$pb.TagNumber(20)
   void clearDate() => $_clearField(20);
+
+  /// 사용자 영역 (JSON: QuoteContext 또는 HedgeContext)
+  @$pb.TagNumber(21)
+  $core.String get userArea => $_getSZ(20);
+  @$pb.TagNumber(21)
+  set userArea($core.String value) => $_setString(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasUserArea() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearUserArea() => $_clearField(21);
 }
 
 class OrderLogFillStatistics extends $pb.GeneratedMessage {

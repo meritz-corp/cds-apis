@@ -388,6 +388,10 @@
           "type": "integer",
           "format": "int64",
           "title": "거래일 (YYYYMMDD)"
+        },
+        "userArea": {
+          "type": "string",
+          "title": "사용자 영역 (JSON: QuoteContext 또는 HedgeContext)"
         }
       },
       "title": "주문 로그"
