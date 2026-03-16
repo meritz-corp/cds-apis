@@ -105,6 +105,26 @@ service InventoryService {
   }
 }
 
+// 상품포지션구분 (PROD_PSTN_CLS_CODE)
+// 042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도
+enum ProductPositionType {
+  PRODUCT_POSITION_TYPE_UNSPECIFIED = 0;
+  PRODUCT_POSITION_TYPE_STOCK = 1;   // 상품유가증권 (1=상품)
+  PRODUCT_POSITION_TYPE_SELL = 2;    // 매도유가증권 (2=매도)
+}
+
+// 처리구분 (PROS_CLS_CODE)
+// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타
+// 펀드간이전 확장: 4=펀드간상환, 5=펀드간대여
+enum LoanTransactionType {
+  LOAN_TRANSACTION_TYPE_UNSPECIFIED = 0;
+  LOAN_TRANSACTION_TYPE_REPAY = 1;        // 상환 (1=상환)
+  LOAN_TRANSACTION_TYPE_LEND = 2;         // 대여 (2=대여)
+  LOAN_TRANSACTION_TYPE_OTHER = 3;        // 기타 (3=기타)
+  LOAN_TRANSACTION_TYPE_FUND_REPAY = 4;   // 펀드간상환
+  LOAN_TRANSACTION_TYPE_FUND_LEND = 5;    // 펀드간대여
+}
+
 // 재고 유형
 enum InventoryType {
   INVENTORY_TYPE_UNSPECIFIED = 0;
@@ -510,6 +530,14 @@ message TransferLoanRequest {
   // (서버에서 012r TR로 자동 조회하여 매칭하도록 변경)
   reserved 6, 7;
   reserved "cntg_date", "cntg_no";
+
+  // 상품포지션구분 (PROD_PSTN_CLS_CODE)
+  // 042c/052a InBlock2: 상품유가증권 또는 매도유가증권
+  ProductPositionType product_position_type = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  // 처리구분 (PROS_CLS_CODE)
+  // 042c InBlock1: 상환/대여/기타/펀드간상환/펀드간대여
+  LoanTransactionType loan_transaction_type = 9 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // TransferLoan 응답

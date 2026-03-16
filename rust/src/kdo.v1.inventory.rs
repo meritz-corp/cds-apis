@@ -433,6 +433,14 @@ pub struct TransferLoanRequest {
     /// 이전 구분 (true=차입이전, false=대여이전)
     #[prost(bool, tag="5")]
     pub borrow: bool,
+    /// 상품포지션구분 (PROD_PSTN_CLS_CODE)
+    /// 042c/052a InBlock2: 상품유가증권 또는 매도유가증권
+    #[prost(enumeration="ProductPositionType", tag="8")]
+    pub product_position_type: i32,
+    /// 처리구분 (PROS_CLS_CODE)
+    /// 042c InBlock1: 상환/대여/기타/펀드간상환/펀드간대여
+    #[prost(enumeration="LoanTransactionType", tag="9")]
+    pub loan_transaction_type: i32,
 }
 /// TransferLoan 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -573,6 +581,85 @@ pub struct LoanDeliveryItem {
     /// 최초체결일자
     #[prost(string, tag="36")]
     pub frst_cntg_date: ::prost::alloc::string::String,
+}
+/// 상품포지션구분 (PROD_PSTN_CLS_CODE)
+/// 042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ProductPositionType {
+    Unspecified = 0,
+    /// 상품유가증권 (1=상품)
+    Stock = 1,
+    /// 매도유가증권 (2=매도)
+    Sell = 2,
+}
+impl ProductPositionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ProductPositionType::Unspecified => "PRODUCT_POSITION_TYPE_UNSPECIFIED",
+            ProductPositionType::Stock => "PRODUCT_POSITION_TYPE_STOCK",
+            ProductPositionType::Sell => "PRODUCT_POSITION_TYPE_SELL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PRODUCT_POSITION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "PRODUCT_POSITION_TYPE_STOCK" => Some(Self::Stock),
+            "PRODUCT_POSITION_TYPE_SELL" => Some(Self::Sell),
+            _ => None,
+        }
+    }
+}
+/// 처리구분 (PROS_CLS_CODE)
+/// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타
+/// 펀드간이전 확장: 4=펀드간상환, 5=펀드간대여
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum LoanTransactionType {
+    Unspecified = 0,
+    /// 상환 (1=상환)
+    Repay = 1,
+    /// 대여 (2=대여)
+    Lend = 2,
+    /// 기타 (3=기타)
+    Other = 3,
+    /// 펀드간상환
+    FundRepay = 4,
+    /// 펀드간대여
+    FundLend = 5,
+}
+impl LoanTransactionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            LoanTransactionType::Unspecified => "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
+            LoanTransactionType::Repay => "LOAN_TRANSACTION_TYPE_REPAY",
+            LoanTransactionType::Lend => "LOAN_TRANSACTION_TYPE_LEND",
+            LoanTransactionType::Other => "LOAN_TRANSACTION_TYPE_OTHER",
+            LoanTransactionType::FundRepay => "LOAN_TRANSACTION_TYPE_FUND_REPAY",
+            LoanTransactionType::FundLend => "LOAN_TRANSACTION_TYPE_FUND_LEND",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "LOAN_TRANSACTION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "LOAN_TRANSACTION_TYPE_REPAY" => Some(Self::Repay),
+            "LOAN_TRANSACTION_TYPE_LEND" => Some(Self::Lend),
+            "LOAN_TRANSACTION_TYPE_OTHER" => Some(Self::Other),
+            "LOAN_TRANSACTION_TYPE_FUND_REPAY" => Some(Self::FundRepay),
+            "LOAN_TRANSACTION_TYPE_FUND_LEND" => Some(Self::FundLend),
+            _ => None,
+        }
+    }
 }
 /// 재고 유형
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

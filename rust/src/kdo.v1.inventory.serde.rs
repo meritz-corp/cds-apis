@@ -2982,6 +2982,163 @@ impl<'de> serde::Deserialize<'de> for LoanDeliveryItem {
         deserializer.deserialize_struct("kdo.v1.inventory.LoanDeliveryItem", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for LoanTransactionType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
+            Self::Repay => "LOAN_TRANSACTION_TYPE_REPAY",
+            Self::Lend => "LOAN_TRANSACTION_TYPE_LEND",
+            Self::Other => "LOAN_TRANSACTION_TYPE_OTHER",
+            Self::FundRepay => "LOAN_TRANSACTION_TYPE_FUND_REPAY",
+            Self::FundLend => "LOAN_TRANSACTION_TYPE_FUND_LEND",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for LoanTransactionType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
+            "LOAN_TRANSACTION_TYPE_REPAY",
+            "LOAN_TRANSACTION_TYPE_LEND",
+            "LOAN_TRANSACTION_TYPE_OTHER",
+            "LOAN_TRANSACTION_TYPE_FUND_REPAY",
+            "LOAN_TRANSACTION_TYPE_FUND_LEND",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LoanTransactionType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "LOAN_TRANSACTION_TYPE_UNSPECIFIED" => Ok(LoanTransactionType::Unspecified),
+                    "LOAN_TRANSACTION_TYPE_REPAY" => Ok(LoanTransactionType::Repay),
+                    "LOAN_TRANSACTION_TYPE_LEND" => Ok(LoanTransactionType::Lend),
+                    "LOAN_TRANSACTION_TYPE_OTHER" => Ok(LoanTransactionType::Other),
+                    "LOAN_TRANSACTION_TYPE_FUND_REPAY" => Ok(LoanTransactionType::FundRepay),
+                    "LOAN_TRANSACTION_TYPE_FUND_LEND" => Ok(LoanTransactionType::FundLend),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ProductPositionType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "PRODUCT_POSITION_TYPE_UNSPECIFIED",
+            Self::Stock => "PRODUCT_POSITION_TYPE_STOCK",
+            Self::Sell => "PRODUCT_POSITION_TYPE_SELL",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for ProductPositionType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "PRODUCT_POSITION_TYPE_UNSPECIFIED",
+            "PRODUCT_POSITION_TYPE_STOCK",
+            "PRODUCT_POSITION_TYPE_SELL",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ProductPositionType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "PRODUCT_POSITION_TYPE_UNSPECIFIED" => Ok(ProductPositionType::Unspecified),
+                    "PRODUCT_POSITION_TYPE_STOCK" => Ok(ProductPositionType::Stock),
+                    "PRODUCT_POSITION_TYPE_SELL" => Ok(ProductPositionType::Sell),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for RepayLoanRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3955,6 +4112,12 @@ impl serde::Serialize for TransferLoanRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.TransferLoanRequest", len)?;
         if true {
             struct_ser.serialize_field("from_fund", &self.from_fund)?;
@@ -3973,6 +4136,16 @@ impl serde::Serialize for TransferLoanRequest {
         if true {
             struct_ser.serialize_field("borrow", &self.borrow)?;
         }
+        if true {
+            let v = ProductPositionType::try_from(self.product_position_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.product_position_type)))?;
+            struct_ser.serialize_field("product_position_type", &v)?;
+        }
+        if true {
+            let v = LoanTransactionType::try_from(self.loan_transaction_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.loan_transaction_type)))?;
+            struct_ser.serialize_field("loan_transaction_type", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -3990,6 +4163,10 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
             "symbol",
             "quantity",
             "borrow",
+            "product_position_type",
+            "productPositionType",
+            "loan_transaction_type",
+            "loanTransactionType",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3999,6 +4176,8 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
             Symbol,
             Quantity,
             Borrow,
+            ProductPositionType,
+            LoanTransactionType,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4026,6 +4205,8 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "borrow" => Ok(GeneratedField::Borrow),
+                            "productPositionType" | "product_position_type" => Ok(GeneratedField::ProductPositionType),
+                            "loanTransactionType" | "loan_transaction_type" => Ok(GeneratedField::LoanTransactionType),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4050,6 +4231,8 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                 let mut symbol__ = None;
                 let mut quantity__ = None;
                 let mut borrow__ = None;
+                let mut product_position_type__ = None;
+                let mut loan_transaction_type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FromFund => {
@@ -4084,6 +4267,18 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                             }
                             borrow__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::ProductPositionType => {
+                            if product_position_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("productPositionType"));
+                            }
+                            product_position_type__ = Some(map_.next_value::<ProductPositionType>()? as i32);
+                        }
+                        GeneratedField::LoanTransactionType => {
+                            if loan_transaction_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("loanTransactionType"));
+                            }
+                            loan_transaction_type__ = Some(map_.next_value::<LoanTransactionType>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4095,6 +4290,8 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                     symbol: symbol__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     borrow: borrow__.unwrap_or_default(),
+                    product_position_type: product_position_type__.unwrap_or_default(),
+                    loan_transaction_type: loan_transaction_type__.unwrap_or_default(),
                 })
             }
         }

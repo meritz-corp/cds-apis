@@ -66,6 +66,14 @@
                 "borrow": {
                   "type": "boolean",
                   "title": "이전 구분 (true=차입이전, false=대여이전)"
+                },
+                "productPositionType": {
+                  "$ref": "#/definitions/inventoryProductPositionType",
+                  "title": "상품포지션구분 (PROD_PSTN_CLS_CODE)\n042c/052a InBlock2: 상품유가증권 또는 매도유가증권"
+                },
+                "loanTransactionType": {
+                  "$ref": "#/definitions/inventoryLoanTransactionType",
+                  "title": "처리구분 (PROS_CLS_CODE)\n042c InBlock1: 상환/대여/기타/펀드간상환/펀드간대여"
                 }
               },
               "title": "TransferLoan 요청",
@@ -1069,6 +1077,31 @@
         }
       },
       "title": "대차체결인도내역 항목 (obfnp_loan_021r)"
+    },
+    "inventoryLoanTransactionType": {
+      "type": "string",
+      "enum": [
+        "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
+        "LOAN_TRANSACTION_TYPE_REPAY",
+        "LOAN_TRANSACTION_TYPE_LEND",
+        "LOAN_TRANSACTION_TYPE_OTHER",
+        "LOAN_TRANSACTION_TYPE_FUND_REPAY",
+        "LOAN_TRANSACTION_TYPE_FUND_LEND"
+      ],
+      "default": "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
+      "description": "- LOAN_TRANSACTION_TYPE_REPAY: 상환 (1=상환)\n - LOAN_TRANSACTION_TYPE_LEND: 대여 (2=대여)\n - LOAN_TRANSACTION_TYPE_OTHER: 기타 (3=기타)\n - LOAN_TRANSACTION_TYPE_FUND_REPAY: 펀드간상환\n - LOAN_TRANSACTION_TYPE_FUND_LEND: 펀드간대여",
+      "title": "처리구분 (PROS_CLS_CODE)\n042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타\n펀드간이전 확장: 4=펀드간상환, 5=펀드간대여"
+    },
+    "inventoryProductPositionType": {
+      "type": "string",
+      "enum": [
+        "PRODUCT_POSITION_TYPE_UNSPECIFIED",
+        "PRODUCT_POSITION_TYPE_STOCK",
+        "PRODUCT_POSITION_TYPE_SELL"
+      ],
+      "default": "PRODUCT_POSITION_TYPE_UNSPECIFIED",
+      "description": "- PRODUCT_POSITION_TYPE_STOCK: 상품유가증권 (1=상품)\n - PRODUCT_POSITION_TYPE_SELL: 매도유가증권 (2=매도)",
+      "title": "상품포지션구분 (PROD_PSTN_CLS_CODE)\n042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도"
     },
     "inventoryRepayLoanResponse": {
       "type": "object",

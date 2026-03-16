@@ -14,6 +14,43 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use productPositionTypeDescriptor instead')
+const ProductPositionType$json = {
+  '1': 'ProductPositionType',
+  '2': [
+    {'1': 'PRODUCT_POSITION_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'PRODUCT_POSITION_TYPE_STOCK', '2': 1},
+    {'1': 'PRODUCT_POSITION_TYPE_SELL', '2': 2},
+  ],
+};
+
+/// Descriptor for `ProductPositionType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List productPositionTypeDescriptor = $convert.base64Decode(
+    'ChNQcm9kdWN0UG9zaXRpb25UeXBlEiUKIVBST0RVQ1RfUE9TSVRJT05fVFlQRV9VTlNQRUNJRk'
+    'lFRBAAEh8KG1BST0RVQ1RfUE9TSVRJT05fVFlQRV9TVE9DSxABEh4KGlBST0RVQ1RfUE9TSVRJ'
+    'T05fVFlQRV9TRUxMEAI=');
+
+@$core.Deprecated('Use loanTransactionTypeDescriptor instead')
+const LoanTransactionType$json = {
+  '1': 'LoanTransactionType',
+  '2': [
+    {'1': 'LOAN_TRANSACTION_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'LOAN_TRANSACTION_TYPE_REPAY', '2': 1},
+    {'1': 'LOAN_TRANSACTION_TYPE_LEND', '2': 2},
+    {'1': 'LOAN_TRANSACTION_TYPE_OTHER', '2': 3},
+    {'1': 'LOAN_TRANSACTION_TYPE_FUND_REPAY', '2': 4},
+    {'1': 'LOAN_TRANSACTION_TYPE_FUND_LEND', '2': 5},
+  ],
+};
+
+/// Descriptor for `LoanTransactionType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List loanTransactionTypeDescriptor = $convert.base64Decode(
+    'ChNMb2FuVHJhbnNhY3Rpb25UeXBlEiUKIUxPQU5fVFJBTlNBQ1RJT05fVFlQRV9VTlNQRUNJRk'
+    'lFRBAAEh8KG0xPQU5fVFJBTlNBQ1RJT05fVFlQRV9SRVBBWRABEh4KGkxPQU5fVFJBTlNBQ1RJ'
+    'T05fVFlQRV9MRU5EEAISHwobTE9BTl9UUkFOU0FDVElPTl9UWVBFX09USEVSEAMSJAogTE9BTl'
+    '9UUkFOU0FDVElPTl9UWVBFX0ZVTkRfUkVQQVkQBBIjCh9MT0FOX1RSQU5TQUNUSU9OX1RZUEVf'
+    'RlVORF9MRU5EEAU=');
+
 @$core.Deprecated('Use inventoryTypeDescriptor instead')
 const InventoryType$json = {
   '1': 'InventoryType',
@@ -400,6 +437,8 @@ const TransferLoanRequest$json = {
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'borrow', '3': 5, '4': 1, '5': 8, '8': {}, '10': 'borrow'},
+    {'1': 'product_position_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.inventory.ProductPositionType', '8': {}, '10': 'productPositionType'},
+    {'1': 'loan_transaction_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.inventory.LoanTransactionType', '8': {}, '10': 'loanTransactionType'},
   ],
   '9': [
     {'1': 6, '2': 7},
@@ -414,7 +453,11 @@ final $typed_data.Uint8List transferLoanRequestDescriptor = $convert.base64Decod
     'Nkc2FwaXMueHl6L0Z1bmRSCGZyb21GdW5kEjYKB3RvX2Z1bmQYAiABKAlCHeJBAQL6QRYKFGtk'
     'by5jZHNhcGlzLnh5ei9GdW5kUgZ0b0Z1bmQSHAoGc3ltYm9sGAMgASgJQgTiQQECUgZzeW1ib2'
     'wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aXR5EhwKBmJvcnJvdxgFIAEoCEIE4kEB'
-    'AlIGYm9ycm93SgQIBhAHSgQIBxAIUgljbnRnX2RhdGVSB2NudGdfbm8=');
+    'AlIGYm9ycm93El8KFXByb2R1Y3RfcG9zaXRpb25fdHlwZRgIIAEoDjIlLmtkby52MS5pbnZlbn'
+    'RvcnkuUHJvZHVjdFBvc2l0aW9uVHlwZUIE4kEBAVITcHJvZHVjdFBvc2l0aW9uVHlwZRJfChVs'
+    'b2FuX3RyYW5zYWN0aW9uX3R5cGUYCSABKA4yJS5rZG8udjEuaW52ZW50b3J5LkxvYW5UcmFuc2'
+    'FjdGlvblR5cGVCBOJBAQFSE2xvYW5UcmFuc2FjdGlvblR5cGVKBAgGEAdKBAgHEAhSCWNudGdf'
+    'ZGF0ZVIHY250Z19ubw==');
 
 @$core.Deprecated('Use transferLoanResponseDescriptor instead')
 const TransferLoanResponse$json = {
