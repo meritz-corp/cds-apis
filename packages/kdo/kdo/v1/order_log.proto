@@ -284,8 +284,8 @@ message GetHedgePairDetailRequest {
 message StreamHedgePairDetailRequest {
   // 감시할 ETF 심볼
   string symbol = 1;
-  // 날짜 (YYYYMMDD, optional - 미지정 시 당일)
-  optional uint32 date = 2;
+
+  reserved 2;
 }
 
 // 헷지 쌍 상세 정보

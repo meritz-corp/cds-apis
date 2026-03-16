@@ -824,11 +824,9 @@ class GetHedgePairDetailRequest extends $pb.GeneratedMessage {
 class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
   factory StreamHedgePairDetailRequest({
     $core.String? symbol,
-    $core.int? date,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
-    if (date != null) result.date = date;
     return result;
   }
 
@@ -839,7 +837,6 @@ class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamHedgePairDetailRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -869,16 +866,6 @@ class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
-
-  /// 날짜 (YYYYMMDD, optional - 미지정 시 당일)
-  @$pb.TagNumber(2)
-  $core.int get date => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set date($core.int value) => $_setUnsignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasDate() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDate() => $_clearField(2);
 }
 
 /// 헷지 쌍 상세 정보

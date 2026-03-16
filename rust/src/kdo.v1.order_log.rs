@@ -196,9 +196,6 @@ pub struct StreamHedgePairDetailRequest {
     /// 감시할 ETF 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 날짜 (YYYYMMDD, optional - 미지정 시 당일)
-    #[prost(uint32, optional, tag="2")]
-    pub date: ::core::option::Option<u32>,
 }
 /// 헷지 쌍 상세 정보
 #[allow(clippy::derive_partial_eq_without_eq)]

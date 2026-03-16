@@ -321,14 +321,6 @@
             "in": "query",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "date",
-            "description": "날짜 (YYYYMMDD, optional - 미지정 시 당일)",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "tags": [
