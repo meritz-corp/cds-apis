@@ -58,4 +58,12 @@ abstract final class OrderLogService {
     kdov1order_log.GetHedgePairDetailRequest.new,
     kdov1order_log.HedgePairDetail.new,
   );
+
+  /// 헷지 쌍 상세 정보 실시간 스트림
+  static const streamHedgePairDetail = connect.Spec(
+    '/$name/StreamHedgePairDetail',
+    connect.StreamType.server,
+    kdov1order_log.GetHedgePairDetailRequest.new,
+    kdov1order_log.HedgePairDetail.new,
+  );
 }

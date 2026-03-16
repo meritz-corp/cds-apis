@@ -62,6 +62,14 @@ service OrderLogService {
     };
     option (google.api.method_signature) = "order_id";
   }
+
+  // 헷지 쌍 상세 정보 실시간 스트림
+  rpc StreamHedgePairDetail(GetHedgePairDetailRequest) returns (stream HedgePairDetail) {
+    option (google.api.http) = {
+      get: "/v1/order_logs/{order_id}:streamHedgePairDetail"
+    };
+    option (google.api.method_signature) = "order_id";
+  }
 }
 
 

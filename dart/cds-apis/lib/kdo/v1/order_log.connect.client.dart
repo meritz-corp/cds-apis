@@ -116,4 +116,22 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 헷지 쌍 상세 정보 실시간 스트림
+  Stream<kdov1order_log.HedgePairDetail> streamHedgePairDetail(
+    kdov1order_log.GetHedgePairDetailRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.OrderLogService.streamHedgePairDetail,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

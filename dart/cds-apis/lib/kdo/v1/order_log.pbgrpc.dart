@@ -63,6 +63,11 @@ class OrderLogServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getHedgePairDetail, request, options: options);
   }
 
+  /// 헷지 쌍 상세 정보 실시간 스트림
+  $grpc.ResponseStream<$0.HedgePairDetail> streamHedgePairDetail($0.GetHedgePairDetailRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamHedgePairDetail, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$listOrderLogs = $grpc.ClientMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(
@@ -87,6 +92,10 @@ class OrderLogServiceClient extends $grpc.Client {
       $0.GetOrderChainResponse.fromBuffer);
   static final _$getHedgePairDetail = $grpc.ClientMethod<$0.GetHedgePairDetailRequest, $0.HedgePairDetail>(
       '/kdo.v1.order_log.OrderLogService/GetHedgePairDetail',
+      ($0.GetHedgePairDetailRequest value) => value.writeToBuffer(),
+      $0.HedgePairDetail.fromBuffer);
+  static final _$streamHedgePairDetail = $grpc.ClientMethod<$0.GetHedgePairDetailRequest, $0.HedgePairDetail>(
+      '/kdo.v1.order_log.OrderLogService/StreamHedgePairDetail',
       ($0.GetHedgePairDetailRequest value) => value.writeToBuffer(),
       $0.HedgePairDetail.fromBuffer);
 }
@@ -138,6 +147,13 @@ abstract class OrderLogServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetHedgePairDetailRequest.fromBuffer(value),
         ($0.HedgePairDetail value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetHedgePairDetailRequest, $0.HedgePairDetail>(
+        'StreamHedgePairDetail',
+        streamHedgePairDetail_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetHedgePairDetailRequest.fromBuffer(value),
+        ($0.HedgePairDetail value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListOrderLogsResponse> listOrderLogs_Pre($grpc.ServiceCall $call, $async.Future<$0.ListOrderLogsRequest> $request) async {
@@ -175,5 +191,11 @@ abstract class OrderLogServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.HedgePairDetail> getHedgePairDetail($grpc.ServiceCall call, $0.GetHedgePairDetailRequest request);
+
+  $async.Stream<$0.HedgePairDetail> streamHedgePairDetail_Pre($grpc.ServiceCall $call, $async.Future<$0.GetHedgePairDetailRequest> $request) async* {
+    yield* streamHedgePairDetail($call, await $request);
+  }
+
+  $async.Stream<$0.HedgePairDetail> streamHedgePairDetail($grpc.ServiceCall call, $0.GetHedgePairDetailRequest request);
 
 }

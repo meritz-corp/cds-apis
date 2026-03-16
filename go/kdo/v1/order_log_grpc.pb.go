@@ -34,6 +34,8 @@ type OrderLogServiceClient interface {
 	GetOrderChain(ctx context.Context, in *GetOrderChainRequest, opts ...grpc.CallOption) (*GetOrderChainResponse, error)
 	// 헷지 체결 주문의 원주문 상세 정보 조회
 	GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (*HedgePairDetail, error)
+	// 헷지 쌍 상세 정보 실시간 스트림
+	StreamHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error)
 }
 
 type orderLogServiceClient struct {
@@ -144,6 +146,38 @@ func (c *orderLogServiceClient) GetHedgePairDetail(ctx context.Context, in *GetH
 	return out, nil
 }
 
+func (c *orderLogServiceClient) StreamHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error) {
+	stream, err := c.cc.NewStream(ctx, &OrderLogService_ServiceDesc.Streams[2], "/kdo.v1.order_log.OrderLogService/StreamHedgePairDetail", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &orderLogServiceStreamHedgePairDetailClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type OrderLogService_StreamHedgePairDetailClient interface {
+	Recv() (*HedgePairDetail, error)
+	grpc.ClientStream
+}
+
+type orderLogServiceStreamHedgePairDetailClient struct {
+	grpc.ClientStream
+}
+
+func (x *orderLogServiceStreamHedgePairDetailClient) Recv() (*HedgePairDetail, error) {
+	m := new(HedgePairDetail)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // OrderLogServiceServer is the server API for OrderLogService service.
 // All implementations must embed UnimplementedOrderLogServiceServer
 // for forward compatibility
@@ -160,6 +194,8 @@ type OrderLogServiceServer interface {
 	GetOrderChain(context.Context, *GetOrderChainRequest) (*GetOrderChainResponse, error)
 	// 헷지 체결 주문의 원주문 상세 정보 조회
 	GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error)
+	// 헷지 쌍 상세 정보 실시간 스트림
+	StreamHedgePairDetail(*GetHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
 
@@ -184,6 +220,9 @@ func (UnimplementedOrderLogServiceServer) GetOrderChain(context.Context, *GetOrd
 }
 func (UnimplementedOrderLogServiceServer) GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHedgePairDetail not implemented")
+}
+func (UnimplementedOrderLogServiceServer) StreamHedgePairDetail(*GetHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamHedgePairDetail not implemented")
 }
 func (UnimplementedOrderLogServiceServer) mustEmbedUnimplementedOrderLogServiceServer() {}
 
@@ -312,6 +351,27 @@ func _OrderLogService_GetHedgePairDetail_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderLogService_StreamHedgePairDetail_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetHedgePairDetailRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(OrderLogServiceServer).StreamHedgePairDetail(m, &orderLogServiceStreamHedgePairDetailServer{stream})
+}
+
+type OrderLogService_StreamHedgePairDetailServer interface {
+	Send(*HedgePairDetail) error
+	grpc.ServerStream
+}
+
+type orderLogServiceStreamHedgePairDetailServer struct {
+	grpc.ServerStream
+}
+
+func (x *orderLogServiceStreamHedgePairDetailServer) Send(m *HedgePairDetail) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // OrderLogService_ServiceDesc is the grpc.ServiceDesc for OrderLogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -345,6 +405,11 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamOrderLogStatistics",
 			Handler:       _OrderLogService_StreamOrderLogStatistics_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamHedgePairDetail",
+			Handler:       _OrderLogService_StreamHedgePairDetail_Handler,
 			ServerStreams: true,
 		},
 	},
