@@ -224,56 +224,6 @@
         ]
       }
     },
-    "/v1/order_logs/{orderId}:streamHedgePairDetail": {
-      "get": {
-        "summary": "헷지 쌍 상세 정보 실시간 스트림",
-        "operationId": "OrderLogService_StreamHedgePairDetail",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/order_logHedgePairDetail"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of order_logHedgePairDetail"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderId",
-            "description": "주문 ID (hedge 또는 quote order)",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "date",
-            "description": "날짜 (YYYYMMDD, optional - 미지정 시 당일)",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "OrderLogService"
-        ]
-      }
-    },
     "/v1/order_logs:stream": {
       "get": {
         "summary": "주문 로그 스트리밍",
@@ -330,6 +280,55 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
+    "/v1/order_logs:streamHedgePairDetail": {
+      "get": {
+        "summary": "헷지 쌍 상세 정보 실시간 스트림",
+        "operationId": "OrderLogService_StreamHedgePairDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/order_logHedgePairDetail"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of order_logHedgePairDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "감시할 ETF 심볼",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "description": "날짜 (YYYYMMDD, optional - 미지정 시 당일)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [

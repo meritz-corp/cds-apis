@@ -63,7 +63,7 @@ abstract final class OrderLogService {
   static const streamHedgePairDetail = connect.Spec(
     '/$name/StreamHedgePairDetail',
     connect.StreamType.server,
-    kdov1order_log.GetHedgePairDetailRequest.new,
+    kdov1order_log.StreamHedgePairDetailRequest.new,
     kdov1order_log.HedgePairDetail.new,
   );
 }

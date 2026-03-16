@@ -300,29 +300,12 @@ func local_request_OrderLogService_GetHedgePairDetail_0(ctx context.Context, mar
 }
 
 var (
-	filter_OrderLogService_StreamHedgePairDetail_0 = &utilities.DoubleArray{Encoding: map[string]int{"order_id": 0, "orderId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+	filter_OrderLogService_StreamHedgePairDetail_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
 func request_OrderLogService_StreamHedgePairDetail_0(ctx context.Context, marshaler runtime.Marshaler, client OrderLogServiceClient, req *http.Request, pathParams map[string]string) (OrderLogService_StreamHedgePairDetailClient, runtime.ServerMetadata, error) {
-	var protoReq GetHedgePairDetailRequest
+	var protoReq StreamHedgePairDetailRequest
 	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["order_id"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "order_id")
-	}
-
-	protoReq.OrderId, err = runtime.Uint64(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
-	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -650,7 +633,7 @@ func RegisterOrderLogServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.order_log.OrderLogService/StreamHedgePairDetail", runtime.WithHTTPPathPattern("/v1/order_logs/{order_id}:streamHedgePairDetail"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.order_log.OrderLogService/StreamHedgePairDetail", runtime.WithHTTPPathPattern("/v1/order_logs:streamHedgePairDetail"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -682,7 +665,7 @@ var (
 
 	pattern_OrderLogService_GetHedgePairDetail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "order_logs", "order_id"}, "hedgePairDetail"))
 
-	pattern_OrderLogService_StreamHedgePairDetail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "order_logs", "order_id"}, "streamHedgePairDetail"))
+	pattern_OrderLogService_StreamHedgePairDetail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "order_logs"}, "streamHedgePairDetail"))
 )
 
 var (

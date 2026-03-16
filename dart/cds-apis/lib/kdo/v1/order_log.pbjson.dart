@@ -225,6 +225,23 @@ final $typed_data.Uint8List getHedgePairDetailRequestDescriptor = $convert.base6
     'ChlHZXRIZWRnZVBhaXJEZXRhaWxSZXF1ZXN0Eh8KCG9yZGVyX2lkGAEgASgEQgTiQQECUgdvcm'
     'RlcklkEhcKBGRhdGUYAiABKA1IAFIEZGF0ZYgBAUIHCgVfZGF0ZQ==');
 
+@$core.Deprecated('Use streamHedgePairDetailRequestDescriptor instead')
+const StreamHedgePairDetailRequest$json = {
+  '1': 'StreamHedgePairDetailRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'date', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'date', '17': true},
+  ],
+  '8': [
+    {'1': '_date'},
+  ],
+};
+
+/// Descriptor for `StreamHedgePairDetailRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamHedgePairDetailRequestDescriptor = $convert.base64Decode(
+    'ChxTdHJlYW1IZWRnZVBhaXJEZXRhaWxSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEh'
+    'cKBGRhdGUYAiABKA1IAFIEZGF0ZYgBAUIHCgVfZGF0ZQ==');
+
 @$core.Deprecated('Use hedgePairDetailDescriptor instead')
 const HedgePairDetail$json = {
   '1': 'HedgePairDetail',

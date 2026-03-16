@@ -119,7 +119,7 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
 
   /// 헷지 쌍 상세 정보 실시간 스트림
   Stream<kdov1order_log.HedgePairDetail> streamHedgePairDetail(
-    kdov1order_log.GetHedgePairDetailRequest input, {
+    kdov1order_log.StreamHedgePairDetailRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,

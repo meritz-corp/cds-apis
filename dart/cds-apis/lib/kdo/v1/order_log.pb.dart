@@ -820,6 +820,67 @@ class GetHedgePairDetailRequest extends $pb.GeneratedMessage {
   void clearDate() => $_clearField(2);
 }
 
+/// StreamHedgePairDetail 요청
+class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
+  factory StreamHedgePairDetailRequest({
+    $core.String? symbol,
+    $core.int? date,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (date != null) result.date = date;
+    return result;
+  }
+
+  StreamHedgePairDetailRequest._();
+
+  factory StreamHedgePairDetailRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamHedgePairDetailRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamHedgePairDetailRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamHedgePairDetailRequest clone() => StreamHedgePairDetailRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamHedgePairDetailRequest copyWith(void Function(StreamHedgePairDetailRequest) updates) => super.copyWith((message) => updates(message as StreamHedgePairDetailRequest)) as StreamHedgePairDetailRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamHedgePairDetailRequest create() => StreamHedgePairDetailRequest._();
+  @$core.override
+  StreamHedgePairDetailRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamHedgePairDetailRequest> createRepeated() => $pb.PbList<StreamHedgePairDetailRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamHedgePairDetailRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamHedgePairDetailRequest>(create);
+  static StreamHedgePairDetailRequest? _defaultInstance;
+
+  /// 감시할 ETF 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 날짜 (YYYYMMDD, optional - 미지정 시 당일)
+  @$pb.TagNumber(2)
+  $core.int get date => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set date($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDate() => $_clearField(2);
+}
+
 /// 헷지 쌍 상세 정보
 class HedgePairDetail extends $pb.GeneratedMessage {
   factory HedgePairDetail({

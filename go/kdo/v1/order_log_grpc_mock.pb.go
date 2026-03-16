@@ -842,7 +842,7 @@ func (mr *MockOrderLogServiceClientMockRecorder) ListOrderLogs(ctx, in interface
 }
 
 // StreamHedgePairDetail mocks base method.
-func (m *MockOrderLogServiceClient) StreamHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error) {
+func (m *MockOrderLogServiceClient) StreamHedgePairDetail(ctx context.Context, in *StreamHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
@@ -985,7 +985,7 @@ func (mr *MockOrderLogServiceServerMockRecorder) ListOrderLogs(ctx, in interface
 }
 
 // StreamHedgePairDetail mocks base method.
-func (m *MockOrderLogServiceServer) StreamHedgePairDetail(blob *GetHedgePairDetailRequest, server OrderLogService_StreamHedgePairDetailServer) error {
+func (m *MockOrderLogServiceServer) StreamHedgePairDetail(blob *StreamHedgePairDetailRequest, server OrderLogService_StreamHedgePairDetailServer) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "StreamHedgePairDetail", blob, server)
 	ret0, _ := ret[0].(error)

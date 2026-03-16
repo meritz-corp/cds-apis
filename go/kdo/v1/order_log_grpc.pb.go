@@ -35,7 +35,7 @@ type OrderLogServiceClient interface {
 	// 헷지 체결 주문의 원주문 상세 정보 조회
 	GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (*HedgePairDetail, error)
 	// 헷지 쌍 상세 정보 실시간 스트림
-	StreamHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error)
+	StreamHedgePairDetail(ctx context.Context, in *StreamHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error)
 }
 
 type orderLogServiceClient struct {
@@ -146,7 +146,7 @@ func (c *orderLogServiceClient) GetHedgePairDetail(ctx context.Context, in *GetH
 	return out, nil
 }
 
-func (c *orderLogServiceClient) StreamHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error) {
+func (c *orderLogServiceClient) StreamHedgePairDetail(ctx context.Context, in *StreamHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error) {
 	stream, err := c.cc.NewStream(ctx, &OrderLogService_ServiceDesc.Streams[2], "/kdo.v1.order_log.OrderLogService/StreamHedgePairDetail", opts...)
 	if err != nil {
 		return nil, err
@@ -195,7 +195,7 @@ type OrderLogServiceServer interface {
 	// 헷지 체결 주문의 원주문 상세 정보 조회
 	GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error)
 	// 헷지 쌍 상세 정보 실시간 스트림
-	StreamHedgePairDetail(*GetHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error
+	StreamHedgePairDetail(*StreamHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
 
@@ -221,7 +221,7 @@ func (UnimplementedOrderLogServiceServer) GetOrderChain(context.Context, *GetOrd
 func (UnimplementedOrderLogServiceServer) GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHedgePairDetail not implemented")
 }
-func (UnimplementedOrderLogServiceServer) StreamHedgePairDetail(*GetHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error {
+func (UnimplementedOrderLogServiceServer) StreamHedgePairDetail(*StreamHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamHedgePairDetail not implemented")
 }
 func (UnimplementedOrderLogServiceServer) mustEmbedUnimplementedOrderLogServiceServer() {}
@@ -352,7 +352,7 @@ func _OrderLogService_GetHedgePairDetail_Handler(srv interface{}, ctx context.Co
 }
 
 func _OrderLogService_StreamHedgePairDetail_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetHedgePairDetailRequest)
+	m := new(StreamHedgePairDetailRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}

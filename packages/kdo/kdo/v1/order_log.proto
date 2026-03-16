@@ -64,11 +64,11 @@ service OrderLogService {
   }
 
   // 헷지 쌍 상세 정보 실시간 스트림
-  rpc StreamHedgePairDetail(GetHedgePairDetailRequest) returns (stream HedgePairDetail) {
+  rpc StreamHedgePairDetail(StreamHedgePairDetailRequest) returns (stream HedgePairDetail) {
     option (google.api.http) = {
-      get: "/v1/order_logs/{order_id}:streamHedgePairDetail"
+      get: "/v1/order_logs:streamHedgePairDetail"
     };
-    option (google.api.method_signature) = "order_id";
+    option (google.api.method_signature) = "symbol";
   }
 }
 
@@ -276,6 +276,14 @@ message GetOrderChainResponse {
 message GetHedgePairDetailRequest {
   // 주문 ID (hedge 또는 quote order)
   uint64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+  // 날짜 (YYYYMMDD, optional - 미지정 시 당일)
+  optional uint32 date = 2;
+}
+
+// StreamHedgePairDetail 요청
+message StreamHedgePairDetailRequest {
+  // 감시할 ETF 심볼
+  string symbol = 1;
   // 날짜 (YYYYMMDD, optional - 미지정 시 당일)
   optional uint32 date = 2;
 }

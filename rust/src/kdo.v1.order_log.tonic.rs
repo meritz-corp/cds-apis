@@ -260,7 +260,7 @@ pub mod order_log_service_client {
         }
         pub async fn stream_hedge_pair_detail(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetHedgePairDetailRequest>,
+            request: impl tonic::IntoRequest<super::StreamHedgePairDetailRequest>,
         ) -> std::result::Result<
             tonic::Response<tonic::codec::Streaming<super::HedgePairDetail>>,
             tonic::Status,
@@ -356,7 +356,7 @@ pub mod order_log_service_server {
             + 'static;
         async fn stream_hedge_pair_detail(
             &self,
-            request: tonic::Request<super::GetHedgePairDetailRequest>,
+            request: tonic::Request<super::StreamHedgePairDetailRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamHedgePairDetailStream>,
             tonic::Status,
@@ -732,7 +732,7 @@ pub mod order_log_service_server {
                     impl<
                         T: OrderLogService,
                     > tonic::server::ServerStreamingService<
-                        super::GetHedgePairDetailRequest,
+                        super::StreamHedgePairDetailRequest,
                     > for StreamHedgePairDetailSvc<T> {
                         type Response = super::HedgePairDetail;
                         type ResponseStream = T::StreamHedgePairDetailStream;
@@ -742,7 +742,7 @@ pub mod order_log_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetHedgePairDetailRequest>,
+                            request: tonic::Request<super::StreamHedgePairDetailRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
