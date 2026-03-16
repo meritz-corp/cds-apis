@@ -824,9 +824,11 @@ class GetHedgePairDetailRequest extends $pb.GeneratedMessage {
 class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
   factory StreamHedgePairDetailRequest({
     $core.String? symbol,
+    $2.OrderSide? quoteSide,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (quoteSide != null) result.quoteSide = quoteSide;
     return result;
   }
 
@@ -837,6 +839,7 @@ class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamHedgePairDetailRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'quoteSide', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -866,6 +869,16 @@ class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
+
+  /// Quote 방향 필터 (optional - 미지정 시 양방향 모두)
+  @$pb.TagNumber(3)
+  $2.OrderSide get quoteSide => $_getN(1);
+  @$pb.TagNumber(3)
+  set quoteSide($2.OrderSide value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasQuoteSide() => $_has(1);
+  @$pb.TagNumber(3)
+  void clearQuoteSide() => $_clearField(3);
 }
 
 /// 헷지 쌍 상세 정보
@@ -882,6 +895,7 @@ class HedgePairDetail extends $pb.GeneratedMessage {
     $core.double? spread,
     $core.String? fundCode,
     $core.int? date,
+    $fixnum.Int64? hedgeExchangeTime,
   }) {
     final result = create();
     if (quoteOrderId != null) result.quoteOrderId = quoteOrderId;
@@ -895,6 +909,7 @@ class HedgePairDetail extends $pb.GeneratedMessage {
     if (spread != null) result.spread = spread;
     if (fundCode != null) result.fundCode = fundCode;
     if (date != null) result.date = date;
+    if (hedgeExchangeTime != null) result.hedgeExchangeTime = hedgeExchangeTime;
     return result;
   }
 
@@ -915,6 +930,7 @@ class HedgePairDetail extends $pb.GeneratedMessage {
     ..a<$core.double>(9, _omitFieldNames ? '' : 'spread', $pb.PbFieldType.OD)
     ..aOS(10, _omitFieldNames ? '' : 'fundCode')
     ..a<$core.int>(11, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'hedgeExchangeTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -1044,6 +1060,16 @@ class HedgePairDetail extends $pb.GeneratedMessage {
   $core.bool hasDate() => $_has(10);
   @$pb.TagNumber(11)
   void clearDate() => $_clearField(11);
+
+  /// 마지막 Hedge 거래소 시각 (마이크로초)
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get hedgeExchangeTime => $_getI64(11);
+  @$pb.TagNumber(12)
+  set hedgeExchangeTime($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasHedgeExchangeTime() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearHedgeExchangeTime() => $_clearField(12);
 }
 
 

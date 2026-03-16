@@ -230,6 +230,10 @@ const StreamHedgePairDetailRequest$json = {
   '1': 'StreamHedgePairDetailRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'quote_side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '9': 0, '10': 'quoteSide', '17': true},
+  ],
+  '8': [
+    {'1': '_quote_side'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -238,8 +242,9 @@ const StreamHedgePairDetailRequest$json = {
 
 /// Descriptor for `StreamHedgePairDetailRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamHedgePairDetailRequestDescriptor = $convert.base64Decode(
-    'ChxTdHJlYW1IZWRnZVBhaXJEZXRhaWxSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sSg'
-    'QIAhAD');
+    'ChxTdHJlYW1IZWRnZVBhaXJEZXRhaWxSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEj'
+    'wKCnF1b3RlX3NpZGUYAyABKA4yGC5rZG8udjEuY29tbW9uLk9yZGVyU2lkZUgAUglxdW90ZVNp'
+    'ZGWIAQFCDQoLX3F1b3RlX3NpZGVKBAgCEAM=');
 
 @$core.Deprecated('Use hedgePairDetailDescriptor instead')
 const HedgePairDetail$json = {
@@ -256,6 +261,7 @@ const HedgePairDetail$json = {
     {'1': 'spread', '3': 9, '4': 1, '5': 1, '10': 'spread'},
     {'1': 'fund_code', '3': 10, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'date', '3': 11, '4': 1, '5': 13, '10': 'date'},
+    {'1': 'hedge_exchange_time', '3': 12, '4': 1, '5': 4, '10': 'hedgeExchangeTime'},
   ],
 };
 
@@ -268,5 +274,6 @@ final $typed_data.Uint8List hedgePairDetailDescriptor = $convert.base64Decode(
     'KAFSDXF1b3RlQXZnUHJpY2USIQoMaGVkZ2Vfc3ltYm9sGAYgASgJUgtoZWRnZVN5bWJvbBIyCh'
     'VoZWRnZV9maWxsZWRfcXVhbnRpdHkYByABKANSE2hlZGdlRmlsbGVkUXVhbnRpdHkSJgoPaGVk'
     'Z2VfYXZnX3ByaWNlGAggASgBUg1oZWRnZUF2Z1ByaWNlEhYKBnNwcmVhZBgJIAEoAVIGc3ByZW'
-    'FkEhsKCWZ1bmRfY29kZRgKIAEoCVIIZnVuZENvZGUSEgoEZGF0ZRgLIAEoDVIEZGF0ZQ==');
+    'FkEhsKCWZ1bmRfY29kZRgKIAEoCVIIZnVuZENvZGUSEgoEZGF0ZRgLIAEoDVIEZGF0ZRIuChNo'
+    'ZWRnZV9leGNoYW5nZV90aW1lGAwgASgEUhFoZWRnZUV4Y2hhbmdlVGltZQ==');
 

@@ -469,6 +469,9 @@ impl serde::Serialize for HedgePairDetail {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.HedgePairDetail", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -511,6 +514,11 @@ impl serde::Serialize for HedgePairDetail {
         if true {
             struct_ser.serialize_field("date", &self.date)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("hedge_exchange_time", ToString::to_string(&self.hedge_exchange_time).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -541,6 +549,8 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
             "fund_code",
             "fundCode",
             "date",
+            "hedge_exchange_time",
+            "hedgeExchangeTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -556,6 +566,7 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
             Spread,
             FundCode,
             Date,
+            HedgeExchangeTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -589,6 +600,7 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
                             "spread" => Ok(GeneratedField::Spread),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "date" => Ok(GeneratedField::Date),
+                            "hedgeExchangeTime" | "hedge_exchange_time" => Ok(GeneratedField::HedgeExchangeTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -619,6 +631,7 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
                 let mut spread__ = None;
                 let mut fund_code__ = None;
                 let mut date__ = None;
+                let mut hedge_exchange_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::QuoteOrderId => {
@@ -701,6 +714,14 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::HedgeExchangeTime => {
+                            if hedge_exchange_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeExchangeTime"));
+                            }
+                            hedge_exchange_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -718,6 +739,7 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
                     spread: spread__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
                     date: date__.unwrap_or_default(),
+                    hedge_exchange_time: hedge_exchange_time__.unwrap_or_default(),
                 })
             }
         }
@@ -1828,9 +1850,17 @@ impl serde::Serialize for StreamHedgePairDetailRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.StreamHedgePairDetailRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if let Some(v) = self.quote_side.as_ref() {
+            let v = super::common::OrderSide::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("quote_side", &v)?;
         }
         struct_ser.end()
     }
@@ -1843,11 +1873,14 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
     {
         const FIELDS: &[&str] = &[
             "symbol",
+            "quote_side",
+            "quoteSide",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
+            QuoteSide,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1871,6 +1904,7 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                     {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
+                            "quoteSide" | "quote_side" => Ok(GeneratedField::QuoteSide),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1891,6 +1925,7 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
+                let mut quote_side__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -1899,6 +1934,12 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::QuoteSide => {
+                            if quote_side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteSide"));
+                            }
+                            quote_side__ = map_.next_value::<::std::option::Option<super::common::OrderSide>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1906,6 +1947,7 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                 }
                 Ok(StreamHedgePairDetailRequest {
                     symbol: symbol__.unwrap_or_default(),
+                    quote_side: quote_side__,
                 })
             }
         }

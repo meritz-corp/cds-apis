@@ -286,6 +286,9 @@ message StreamHedgePairDetailRequest {
   string symbol = 1;
 
   reserved 2;
+
+  // Quote 방향 필터 (optional - 미지정 시 양방향 모두)
+  optional kdo.v1.common.OrderSide quote_side = 3;
 }
 
 // 헷지 쌍 상세 정보
@@ -312,4 +315,6 @@ message HedgePairDetail {
   string fund_code = 10;
   // 날짜 (YYYYMMDD)
   uint32 date = 11;
+  // 마지막 Hedge 거래소 시각 (마이크로초)
+  uint64 hedge_exchange_time = 12;
 }

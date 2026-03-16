@@ -321,6 +321,19 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "quoteSide",
+            "description": "Quote 방향 필터 (optional - 미지정 시 양방향 모두)\n\n - ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ORDER_SIDE_UNSPECIFIED",
+              "ORDER_SIDE_BID",
+              "ORDER_SIDE_ASK"
+            ],
+            "default": "ORDER_SIDE_UNSPECIFIED"
           }
         ],
         "tags": [
@@ -417,6 +430,11 @@
           "type": "integer",
           "format": "int64",
           "title": "날짜 (YYYYMMDD)"
+        },
+        "hedgeExchangeTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "마지막 Hedge 거래소 시각 (마이크로초)"
         }
       },
       "title": "헷지 쌍 상세 정보"

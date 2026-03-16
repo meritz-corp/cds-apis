@@ -196,6 +196,9 @@ pub struct StreamHedgePairDetailRequest {
     /// 감시할 ETF 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// Quote 방향 필터 (optional - 미지정 시 양방향 모두)
+    #[prost(enumeration="super::common::OrderSide", optional, tag="3")]
+    pub quote_side: ::core::option::Option<i32>,
 }
 /// 헷지 쌍 상세 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -234,6 +237,9 @@ pub struct HedgePairDetail {
     /// 날짜 (YYYYMMDD)
     #[prost(uint32, tag="11")]
     pub date: u32,
+    /// 마지막 Hedge 거래소 시각 (마이크로초)
+    #[prost(uint64, tag="12")]
+    pub hedge_exchange_time: u64,
 }
 /// 주문 로그 타입
 ///
