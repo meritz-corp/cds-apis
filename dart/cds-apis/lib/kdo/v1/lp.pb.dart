@@ -284,15 +284,11 @@ class EtfLp extends $pb.GeneratedMessage {
 /// 매수/매도 수량 한도
 class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   factory EtfLpQuantityLimit({
-    $fixnum.Int64? minBidQuantity,
     $fixnum.Int64? maxBidQuantity,
-    $fixnum.Int64? minAskQuantity,
     $fixnum.Int64? maxAskQuantity,
   }) {
     final result = create();
-    if (minBidQuantity != null) result.minBidQuantity = minBidQuantity;
     if (maxBidQuantity != null) result.maxBidQuantity = maxBidQuantity;
-    if (minAskQuantity != null) result.minAskQuantity = minAskQuantity;
     if (maxAskQuantity != null) result.maxAskQuantity = maxAskQuantity;
     return result;
   }
@@ -303,9 +299,7 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   factory EtfLpQuantityLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'minBidQuantity')
     ..aInt64(2, _omitFieldNames ? '' : 'maxBidQuantity')
-    ..aInt64(3, _omitFieldNames ? '' : 'minAskQuantity')
     ..aInt64(4, _omitFieldNames ? '' : 'maxAskQuantity')
     ..hasRequiredFields = false
   ;
@@ -327,43 +321,23 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   static EtfLpQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpQuantityLimit>(create);
   static EtfLpQuantityLimit? _defaultInstance;
 
-  /// 매수 수량 하한
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get minBidQuantity => $_getI64(0);
-  @$pb.TagNumber(1)
-  set minBidQuantity($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMinBidQuantity() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMinBidQuantity() => $_clearField(1);
-
   /// 매수 수량 상한
   @$pb.TagNumber(2)
-  $fixnum.Int64 get maxBidQuantity => $_getI64(1);
+  $fixnum.Int64 get maxBidQuantity => $_getI64(0);
   @$pb.TagNumber(2)
-  set maxBidQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  set maxBidQuantity($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(2)
-  $core.bool hasMaxBidQuantity() => $_has(1);
+  $core.bool hasMaxBidQuantity() => $_has(0);
   @$pb.TagNumber(2)
   void clearMaxBidQuantity() => $_clearField(2);
 
-  /// 매도 수량 하한
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get minAskQuantity => $_getI64(2);
-  @$pb.TagNumber(3)
-  set minAskQuantity($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasMinAskQuantity() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearMinAskQuantity() => $_clearField(3);
-
   /// 매도 수량 상한
   @$pb.TagNumber(4)
-  $fixnum.Int64 get maxAskQuantity => $_getI64(3);
+  $fixnum.Int64 get maxAskQuantity => $_getI64(1);
   @$pb.TagNumber(4)
-  set maxAskQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  set maxAskQuantity($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(4)
-  $core.bool hasMaxAskQuantity() => $_has(3);
+  $core.bool hasMaxAskQuantity() => $_has(1);
   @$pb.TagNumber(4)
   void clearMaxAskQuantity() => $_clearField(4);
 }

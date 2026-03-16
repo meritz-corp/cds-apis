@@ -691,20 +691,10 @@
     "lpEtfLpQuantityLimit": {
       "type": "object",
       "properties": {
-        "minBidQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매수 수량 하한"
-        },
         "maxBidQuantity": {
           "type": "string",
           "format": "int64",
           "title": "매수 수량 상한"
-        },
-        "minAskQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매도 수량 하한"
         },
         "maxAskQuantity": {
           "type": "string",

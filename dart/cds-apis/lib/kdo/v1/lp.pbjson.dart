@@ -107,19 +107,21 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
 const EtfLpQuantityLimit$json = {
   '1': 'EtfLpQuantityLimit',
   '2': [
-    {'1': 'min_bid_quantity', '3': 1, '4': 1, '5': 3, '10': 'minBidQuantity'},
     {'1': 'max_bid_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxBidQuantity'},
-    {'1': 'min_ask_quantity', '3': 3, '4': 1, '5': 3, '10': 'minAskQuantity'},
     {'1': 'max_ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'maxAskQuantity'},
   ],
+  '9': [
+    {'1': 1, '2': 2},
+    {'1': 3, '2': 4},
+  ],
+  '10': ['min_bid_quantity', 'min_ask_quantity'],
 };
 
 /// Descriptor for `EtfLpQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpQuantityLimitDescriptor = $convert.base64Decode(
-    'ChJFdGZMcFF1YW50aXR5TGltaXQSKAoQbWluX2JpZF9xdWFudGl0eRgBIAEoA1IObWluQmlkUX'
-    'VhbnRpdHkSKAoQbWF4X2JpZF9xdWFudGl0eRgCIAEoA1IObWF4QmlkUXVhbnRpdHkSKAoQbWlu'
-    'X2Fza19xdWFudGl0eRgDIAEoA1IObWluQXNrUXVhbnRpdHkSKAoQbWF4X2Fza19xdWFudGl0eR'
-    'gEIAEoA1IObWF4QXNrUXVhbnRpdHk=');
+    'ChJFdGZMcFF1YW50aXR5TGltaXQSKAoQbWF4X2JpZF9xdWFudGl0eRgCIAEoA1IObWF4QmlkUX'
+    'VhbnRpdHkSKAoQbWF4X2Fza19xdWFudGl0eRgEIAEoA1IObWF4QXNrUXVhbnRpdHlKBAgBEAJK'
+    'BAgDEARSEG1pbl9iaWRfcXVhbnRpdHlSEG1pbl9hc2tfcXVhbnRpdHk=');
 
 @$core.Deprecated('Use etfPricingDescriptor instead')
 const EtfPricing$json = {

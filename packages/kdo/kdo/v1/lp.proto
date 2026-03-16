@@ -161,12 +161,11 @@ message EtfLp {
 
 // 매수/매도 수량 한도
 message EtfLpQuantityLimit {
-  // 매수 수량 하한
-  int64 min_bid_quantity = 1;
+  reserved 1, 3;
+  reserved "min_bid_quantity", "min_ask_quantity";
+
   // 매수 수량 상한
   int64 max_bid_quantity = 2;
-  // 매도 수량 하한
-  int64 min_ask_quantity = 3;
   // 매도 수량 상한
   int64 max_ask_quantity = 4;
 }

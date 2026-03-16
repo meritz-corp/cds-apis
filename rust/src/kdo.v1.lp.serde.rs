@@ -965,27 +965,11 @@ impl serde::Serialize for EtfLpQuantityLimit {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpQuantityLimit", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("min_bid_quantity", ToString::to_string(&self.min_bid_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("max_bid_quantity", ToString::to_string(&self.max_bid_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("min_ask_quantity", ToString::to_string(&self.min_ask_quantity).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1002,21 +986,15 @@ impl<'de> serde::Deserialize<'de> for EtfLpQuantityLimit {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "min_bid_quantity",
-            "minBidQuantity",
             "max_bid_quantity",
             "maxBidQuantity",
-            "min_ask_quantity",
-            "minAskQuantity",
             "max_ask_quantity",
             "maxAskQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            MinBidQuantity,
             MaxBidQuantity,
-            MinAskQuantity,
             MaxAskQuantity,
             __SkipField__,
         }
@@ -1040,9 +1018,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpQuantityLimit {
                         E: serde::de::Error,
                     {
                         match value {
-                            "minBidQuantity" | "min_bid_quantity" => Ok(GeneratedField::MinBidQuantity),
                             "maxBidQuantity" | "max_bid_quantity" => Ok(GeneratedField::MaxBidQuantity),
-                            "minAskQuantity" | "min_ask_quantity" => Ok(GeneratedField::MinAskQuantity),
                             "maxAskQuantity" | "max_ask_quantity" => Ok(GeneratedField::MaxAskQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -1063,33 +1039,15 @@ impl<'de> serde::Deserialize<'de> for EtfLpQuantityLimit {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut min_bid_quantity__ = None;
                 let mut max_bid_quantity__ = None;
-                let mut min_ask_quantity__ = None;
                 let mut max_ask_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::MinBidQuantity => {
-                            if min_bid_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("minBidQuantity"));
-                            }
-                            min_bid_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::MaxBidQuantity => {
                             if max_bid_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("maxBidQuantity"));
                             }
                             max_bid_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MinAskQuantity => {
-                            if min_ask_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("minAskQuantity"));
-                            }
-                            min_ask_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1107,9 +1065,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpQuantityLimit {
                     }
                 }
                 Ok(EtfLpQuantityLimit {
-                    min_bid_quantity: min_bid_quantity__.unwrap_or_default(),
                     max_bid_quantity: max_bid_quantity__.unwrap_or_default(),
-                    min_ask_quantity: min_ask_quantity__.unwrap_or_default(),
                     max_ask_quantity: max_ask_quantity__.unwrap_or_default(),
                 })
             }

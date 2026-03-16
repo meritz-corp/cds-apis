@@ -59,15 +59,9 @@ pub struct EtfLp {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EtfLpQuantityLimit {
-    /// 매수 수량 하한
-    #[prost(int64, tag="1")]
-    pub min_bid_quantity: i64,
     /// 매수 수량 상한
     #[prost(int64, tag="2")]
     pub max_bid_quantity: i64,
-    /// 매도 수량 하한
-    #[prost(int64, tag="3")]
-    pub min_ask_quantity: i64,
     /// 매도 수량 상한
     #[prost(int64, tag="4")]
     pub max_ask_quantity: i64,
