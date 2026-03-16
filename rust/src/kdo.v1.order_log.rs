@@ -178,6 +178,55 @@ pub struct GetOrderChainResponse {
     #[prost(message, repeated, tag="1")]
     pub order_logs: ::prost::alloc::vec::Vec<OrderLog>,
 }
+/// GetHedgePairDetail 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetHedgePairDetailRequest {
+    /// 주문 ID (hedge 또는 quote order)
+    #[prost(uint64, tag="1")]
+    pub order_id: u64,
+    /// 날짜 (YYYYMMDD, optional - 미지정 시 당일)
+    #[prost(uint32, optional, tag="2")]
+    pub date: ::core::option::Option<u32>,
+}
+/// 헷지 쌍 상세 정보
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HedgePairDetail {
+    /// Quote(원주문) 주문 ID
+    #[prost(uint64, tag="1")]
+    pub quote_order_id: u64,
+    /// ETF 심볼
+    #[prost(string, tag="2")]
+    pub quote_symbol: ::prost::alloc::string::String,
+    /// ETF 방향 (매수/매도)
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
+    pub quote_side: i32,
+    /// ETF 체결 수량
+    #[prost(int64, tag="4")]
+    pub quote_filled_quantity: i64,
+    /// ETF 평균 체결 가격
+    #[prost(double, tag="5")]
+    pub quote_avg_price: f64,
+    /// Hedge 심볼 (선물)
+    #[prost(string, tag="6")]
+    pub hedge_symbol: ::prost::alloc::string::String,
+    /// Hedge 체결 수량
+    #[prost(int64, tag="7")]
+    pub hedge_filled_quantity: i64,
+    /// Hedge 평균 체결 가격
+    #[prost(double, tag="8")]
+    pub hedge_avg_price: f64,
+    /// 스프레드 (선물가격 * 100 - ETF가격)
+    #[prost(double, tag="9")]
+    pub spread: f64,
+    /// 펀드 코드
+    #[prost(string, tag="10")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 날짜 (YYYYMMDD)
+    #[prost(uint32, tag="11")]
+    pub date: u32,
+}
 /// 주문 로그 타입
 ///
 /// Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의

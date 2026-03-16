@@ -208,3 +208,49 @@ final $typed_data.Uint8List getOrderChainResponseDescriptor = $convert.base64Dec
     'ChVHZXRPcmRlckNoYWluUmVzcG9uc2USOQoKb3JkZXJfbG9ncxgBIAMoCzIaLmtkby52MS5vcm'
     'Rlcl9sb2cuT3JkZXJMb2dSCW9yZGVyTG9ncw==');
 
+@$core.Deprecated('Use getHedgePairDetailRequestDescriptor instead')
+const GetHedgePairDetailRequest$json = {
+  '1': 'GetHedgePairDetailRequest',
+  '2': [
+    {'1': 'order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'orderId'},
+    {'1': 'date', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'date', '17': true},
+  ],
+  '8': [
+    {'1': '_date'},
+  ],
+};
+
+/// Descriptor for `GetHedgePairDetailRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getHedgePairDetailRequestDescriptor = $convert.base64Decode(
+    'ChlHZXRIZWRnZVBhaXJEZXRhaWxSZXF1ZXN0Eh8KCG9yZGVyX2lkGAEgASgEQgTiQQECUgdvcm'
+    'RlcklkEhcKBGRhdGUYAiABKA1IAFIEZGF0ZYgBAUIHCgVfZGF0ZQ==');
+
+@$core.Deprecated('Use hedgePairDetailDescriptor instead')
+const HedgePairDetail$json = {
+  '1': 'HedgePairDetail',
+  '2': [
+    {'1': 'quote_order_id', '3': 1, '4': 1, '5': 4, '10': 'quoteOrderId'},
+    {'1': 'quote_symbol', '3': 2, '4': 1, '5': 9, '10': 'quoteSymbol'},
+    {'1': 'quote_side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'quoteSide'},
+    {'1': 'quote_filled_quantity', '3': 4, '4': 1, '5': 3, '10': 'quoteFilledQuantity'},
+    {'1': 'quote_avg_price', '3': 5, '4': 1, '5': 1, '10': 'quoteAvgPrice'},
+    {'1': 'hedge_symbol', '3': 6, '4': 1, '5': 9, '10': 'hedgeSymbol'},
+    {'1': 'hedge_filled_quantity', '3': 7, '4': 1, '5': 3, '10': 'hedgeFilledQuantity'},
+    {'1': 'hedge_avg_price', '3': 8, '4': 1, '5': 1, '10': 'hedgeAvgPrice'},
+    {'1': 'spread', '3': 9, '4': 1, '5': 1, '10': 'spread'},
+    {'1': 'fund_code', '3': 10, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'date', '3': 11, '4': 1, '5': 13, '10': 'date'},
+  ],
+};
+
+/// Descriptor for `HedgePairDetail`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List hedgePairDetailDescriptor = $convert.base64Decode(
+    'Cg9IZWRnZVBhaXJEZXRhaWwSJAoOcXVvdGVfb3JkZXJfaWQYASABKARSDHF1b3RlT3JkZXJJZB'
+    'IhCgxxdW90ZV9zeW1ib2wYAiABKAlSC3F1b3RlU3ltYm9sEjcKCnF1b3RlX3NpZGUYAyABKA4y'
+    'GC5rZG8udjEuY29tbW9uLk9yZGVyU2lkZVIJcXVvdGVTaWRlEjIKFXF1b3RlX2ZpbGxlZF9xdW'
+    'FudGl0eRgEIAEoA1ITcXVvdGVGaWxsZWRRdWFudGl0eRImCg9xdW90ZV9hdmdfcHJpY2UYBSAB'
+    'KAFSDXF1b3RlQXZnUHJpY2USIQoMaGVkZ2Vfc3ltYm9sGAYgASgJUgtoZWRnZVN5bWJvbBIyCh'
+    'VoZWRnZV9maWxsZWRfcXVhbnRpdHkYByABKANSE2hlZGdlRmlsbGVkUXVhbnRpdHkSJgoPaGVk'
+    'Z2VfYXZnX3ByaWNlGAggASgBUg1oZWRnZUF2Z1ByaWNlEhYKBnNwcmVhZBgJIAEoAVIGc3ByZW'
+    'FkEhsKCWZ1bmRfY29kZRgKIAEoCVIIZnVuZENvZGUSEgoEZGF0ZRgLIAEoDVIEZGF0ZQ==');
+

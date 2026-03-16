@@ -50,4 +50,12 @@ abstract final class OrderLogService {
     kdov1order_log.GetOrderChainRequest.new,
     kdov1order_log.GetOrderChainResponse.new,
   );
+
+  /// 헷지 체결 주문의 원주문 상세 정보 조회
+  static const getHedgePairDetail = connect.Spec(
+    '/$name/GetHedgePairDetail',
+    connect.StreamType.unary,
+    kdov1order_log.GetHedgePairDetailRequest.new,
+    kdov1order_log.HedgePairDetail.new,
+  );
 }

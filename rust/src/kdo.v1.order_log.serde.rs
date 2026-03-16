@@ -1,4 +1,123 @@
 // @generated
+impl serde::Serialize for GetHedgePairDetailRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.GetHedgePairDetailRequest", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
+        }
+        if let Some(v) = self.date.as_ref() {
+            struct_ser.serialize_field("date", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetHedgePairDetailRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "order_id",
+            "orderId",
+            "date",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            OrderId,
+            Date,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
+                            "date" => Ok(GeneratedField::Date),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetHedgePairDetailRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.GetHedgePairDetailRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetHedgePairDetailRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut order_id__ = None;
+                let mut date__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::OrderId => {
+                            if order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderId"));
+                            }
+                            order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetHedgePairDetailRequest {
+                    order_id: order_id__.unwrap_or_default(),
+                    date: date__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.GetHedgePairDetailRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for GetOrderChainRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -307,6 +426,302 @@ impl<'de> serde::Deserialize<'de> for GetOrderLogStatisticsRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.order_log.GetOrderLogStatisticsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for HedgePairDetail {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.HedgePairDetail", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quote_order_id", ToString::to_string(&self.quote_order_id).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("quote_symbol", &self.quote_symbol)?;
+        }
+        if true {
+            let v = super::common::OrderSide::try_from(self.quote_side)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.quote_side)))?;
+            struct_ser.serialize_field("quote_side", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quote_filled_quantity", ToString::to_string(&self.quote_filled_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("quote_avg_price", &self.quote_avg_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("hedge_symbol", &self.hedge_symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("hedge_filled_quantity", ToString::to_string(&self.hedge_filled_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("hedge_avg_price", &self.hedge_avg_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("spread", &self.spread)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("date", &self.date)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for HedgePairDetail {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "quote_order_id",
+            "quoteOrderId",
+            "quote_symbol",
+            "quoteSymbol",
+            "quote_side",
+            "quoteSide",
+            "quote_filled_quantity",
+            "quoteFilledQuantity",
+            "quote_avg_price",
+            "quoteAvgPrice",
+            "hedge_symbol",
+            "hedgeSymbol",
+            "hedge_filled_quantity",
+            "hedgeFilledQuantity",
+            "hedge_avg_price",
+            "hedgeAvgPrice",
+            "spread",
+            "fund_code",
+            "fundCode",
+            "date",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            QuoteOrderId,
+            QuoteSymbol,
+            QuoteSide,
+            QuoteFilledQuantity,
+            QuoteAvgPrice,
+            HedgeSymbol,
+            HedgeFilledQuantity,
+            HedgeAvgPrice,
+            Spread,
+            FundCode,
+            Date,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "quoteOrderId" | "quote_order_id" => Ok(GeneratedField::QuoteOrderId),
+                            "quoteSymbol" | "quote_symbol" => Ok(GeneratedField::QuoteSymbol),
+                            "quoteSide" | "quote_side" => Ok(GeneratedField::QuoteSide),
+                            "quoteFilledQuantity" | "quote_filled_quantity" => Ok(GeneratedField::QuoteFilledQuantity),
+                            "quoteAvgPrice" | "quote_avg_price" => Ok(GeneratedField::QuoteAvgPrice),
+                            "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
+                            "hedgeFilledQuantity" | "hedge_filled_quantity" => Ok(GeneratedField::HedgeFilledQuantity),
+                            "hedgeAvgPrice" | "hedge_avg_price" => Ok(GeneratedField::HedgeAvgPrice),
+                            "spread" => Ok(GeneratedField::Spread),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "date" => Ok(GeneratedField::Date),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = HedgePairDetail;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.HedgePairDetail")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<HedgePairDetail, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut quote_order_id__ = None;
+                let mut quote_symbol__ = None;
+                let mut quote_side__ = None;
+                let mut quote_filled_quantity__ = None;
+                let mut quote_avg_price__ = None;
+                let mut hedge_symbol__ = None;
+                let mut hedge_filled_quantity__ = None;
+                let mut hedge_avg_price__ = None;
+                let mut spread__ = None;
+                let mut fund_code__ = None;
+                let mut date__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::QuoteOrderId => {
+                            if quote_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteOrderId"));
+                            }
+                            quote_order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::QuoteSymbol => {
+                            if quote_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteSymbol"));
+                            }
+                            quote_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::QuoteSide => {
+                            if quote_side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteSide"));
+                            }
+                            quote_side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
+                        }
+                        GeneratedField::QuoteFilledQuantity => {
+                            if quote_filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteFilledQuantity"));
+                            }
+                            quote_filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::QuoteAvgPrice => {
+                            if quote_avg_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteAvgPrice"));
+                            }
+                            quote_avg_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::HedgeSymbol => {
+                            if hedge_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeSymbol"));
+                            }
+                            hedge_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::HedgeFilledQuantity => {
+                            if hedge_filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeFilledQuantity"));
+                            }
+                            hedge_filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::HedgeAvgPrice => {
+                            if hedge_avg_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeAvgPrice"));
+                            }
+                            hedge_avg_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Spread => {
+                            if spread__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("spread"));
+                            }
+                            spread__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(HedgePairDetail {
+                    quote_order_id: quote_order_id__.unwrap_or_default(),
+                    quote_symbol: quote_symbol__.unwrap_or_default(),
+                    quote_side: quote_side__.unwrap_or_default(),
+                    quote_filled_quantity: quote_filled_quantity__.unwrap_or_default(),
+                    quote_avg_price: quote_avg_price__.unwrap_or_default(),
+                    hedge_symbol: hedge_symbol__.unwrap_or_default(),
+                    hedge_filled_quantity: hedge_filled_quantity__.unwrap_or_default(),
+                    hedge_avg_price: hedge_avg_price__.unwrap_or_default(),
+                    spread: spread__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    date: date__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.HedgePairDetail", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListOrderLogsRequest {

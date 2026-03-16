@@ -759,6 +759,245 @@ class GetOrderChainResponse extends $pb.GeneratedMessage {
   $pb.PbList<OrderLog> get orderLogs => $_getList(0);
 }
 
+/// GetHedgePairDetail 요청
+class GetHedgePairDetailRequest extends $pb.GeneratedMessage {
+  factory GetHedgePairDetailRequest({
+    $fixnum.Int64? orderId,
+    $core.int? date,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    if (date != null) result.date = date;
+    return result;
+  }
+
+  GetHedgePairDetailRequest._();
+
+  factory GetHedgePairDetailRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetHedgePairDetailRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetHedgePairDetailRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetHedgePairDetailRequest clone() => GetHedgePairDetailRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetHedgePairDetailRequest copyWith(void Function(GetHedgePairDetailRequest) updates) => super.copyWith((message) => updates(message as GetHedgePairDetailRequest)) as GetHedgePairDetailRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetHedgePairDetailRequest create() => GetHedgePairDetailRequest._();
+  @$core.override
+  GetHedgePairDetailRequest createEmptyInstance() => create();
+  static $pb.PbList<GetHedgePairDetailRequest> createRepeated() => $pb.PbList<GetHedgePairDetailRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetHedgePairDetailRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetHedgePairDetailRequest>(create);
+  static GetHedgePairDetailRequest? _defaultInstance;
+
+  /// 주문 ID (hedge 또는 quote order)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get orderId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+
+  /// 날짜 (YYYYMMDD, optional - 미지정 시 당일)
+  @$pb.TagNumber(2)
+  $core.int get date => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set date($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDate() => $_clearField(2);
+}
+
+/// 헷지 쌍 상세 정보
+class HedgePairDetail extends $pb.GeneratedMessage {
+  factory HedgePairDetail({
+    $fixnum.Int64? quoteOrderId,
+    $core.String? quoteSymbol,
+    $2.OrderSide? quoteSide,
+    $fixnum.Int64? quoteFilledQuantity,
+    $core.double? quoteAvgPrice,
+    $core.String? hedgeSymbol,
+    $fixnum.Int64? hedgeFilledQuantity,
+    $core.double? hedgeAvgPrice,
+    $core.double? spread,
+    $core.String? fundCode,
+    $core.int? date,
+  }) {
+    final result = create();
+    if (quoteOrderId != null) result.quoteOrderId = quoteOrderId;
+    if (quoteSymbol != null) result.quoteSymbol = quoteSymbol;
+    if (quoteSide != null) result.quoteSide = quoteSide;
+    if (quoteFilledQuantity != null) result.quoteFilledQuantity = quoteFilledQuantity;
+    if (quoteAvgPrice != null) result.quoteAvgPrice = quoteAvgPrice;
+    if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
+    if (hedgeFilledQuantity != null) result.hedgeFilledQuantity = hedgeFilledQuantity;
+    if (hedgeAvgPrice != null) result.hedgeAvgPrice = hedgeAvgPrice;
+    if (spread != null) result.spread = spread;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (date != null) result.date = date;
+    return result;
+  }
+
+  HedgePairDetail._();
+
+  factory HedgePairDetail.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory HedgePairDetail.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HedgePairDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'quoteOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2, _omitFieldNames ? '' : 'quoteSymbol')
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'quoteSide', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..aInt64(4, _omitFieldNames ? '' : 'quoteFilledQuantity')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'quoteAvgPrice', $pb.PbFieldType.OD)
+    ..aOS(6, _omitFieldNames ? '' : 'hedgeSymbol')
+    ..aInt64(7, _omitFieldNames ? '' : 'hedgeFilledQuantity')
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'hedgeAvgPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'spread', $pb.PbFieldType.OD)
+    ..aOS(10, _omitFieldNames ? '' : 'fundCode')
+    ..a<$core.int>(11, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  HedgePairDetail clone() => HedgePairDetail()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  HedgePairDetail copyWith(void Function(HedgePairDetail) updates) => super.copyWith((message) => updates(message as HedgePairDetail)) as HedgePairDetail;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static HedgePairDetail create() => HedgePairDetail._();
+  @$core.override
+  HedgePairDetail createEmptyInstance() => create();
+  static $pb.PbList<HedgePairDetail> createRepeated() => $pb.PbList<HedgePairDetail>();
+  @$core.pragma('dart2js:noInline')
+  static HedgePairDetail getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HedgePairDetail>(create);
+  static HedgePairDetail? _defaultInstance;
+
+  /// Quote(원주문) 주문 ID
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get quoteOrderId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set quoteOrderId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasQuoteOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearQuoteOrderId() => $_clearField(1);
+
+  /// ETF 심볼
+  @$pb.TagNumber(2)
+  $core.String get quoteSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set quoteSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasQuoteSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearQuoteSymbol() => $_clearField(2);
+
+  /// ETF 방향 (매수/매도)
+  @$pb.TagNumber(3)
+  $2.OrderSide get quoteSide => $_getN(2);
+  @$pb.TagNumber(3)
+  set quoteSide($2.OrderSide value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasQuoteSide() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearQuoteSide() => $_clearField(3);
+
+  /// ETF 체결 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get quoteFilledQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set quoteFilledQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuoteFilledQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuoteFilledQuantity() => $_clearField(4);
+
+  /// ETF 평균 체결 가격
+  @$pb.TagNumber(5)
+  $core.double get quoteAvgPrice => $_getN(4);
+  @$pb.TagNumber(5)
+  set quoteAvgPrice($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasQuoteAvgPrice() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearQuoteAvgPrice() => $_clearField(5);
+
+  /// Hedge 심볼 (선물)
+  @$pb.TagNumber(6)
+  $core.String get hedgeSymbol => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set hedgeSymbol($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasHedgeSymbol() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearHedgeSymbol() => $_clearField(6);
+
+  /// Hedge 체결 수량
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get hedgeFilledQuantity => $_getI64(6);
+  @$pb.TagNumber(7)
+  set hedgeFilledQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasHedgeFilledQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearHedgeFilledQuantity() => $_clearField(7);
+
+  /// Hedge 평균 체결 가격
+  @$pb.TagNumber(8)
+  $core.double get hedgeAvgPrice => $_getN(7);
+  @$pb.TagNumber(8)
+  set hedgeAvgPrice($core.double value) => $_setDouble(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasHedgeAvgPrice() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearHedgeAvgPrice() => $_clearField(8);
+
+  /// 스프레드 (선물가격 * 100 - ETF가격)
+  @$pb.TagNumber(9)
+  $core.double get spread => $_getN(8);
+  @$pb.TagNumber(9)
+  set spread($core.double value) => $_setDouble(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasSpread() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearSpread() => $_clearField(9);
+
+  /// 펀드 코드
+  @$pb.TagNumber(10)
+  $core.String get fundCode => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set fundCode($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasFundCode() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearFundCode() => $_clearField(10);
+
+  /// 날짜 (YYYYMMDD)
+  @$pb.TagNumber(11)
+  $core.int get date => $_getIZ(10);
+  @$pb.TagNumber(11)
+  set date($core.int value) => $_setUnsignedInt32(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasDate() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearDate() => $_clearField(11);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -58,6 +58,11 @@ class OrderLogServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getOrderChain, request, options: options);
   }
 
+  /// 헷지 체결 주문의 원주문 상세 정보 조회
+  $grpc.ResponseFuture<$0.HedgePairDetail> getHedgePairDetail($0.GetHedgePairDetailRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getHedgePairDetail, request, options: options);
+  }
+
     // method descriptors
 
   static final _$listOrderLogs = $grpc.ClientMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(
@@ -80,6 +85,10 @@ class OrderLogServiceClient extends $grpc.Client {
       '/kdo.v1.order_log.OrderLogService/GetOrderChain',
       ($0.GetOrderChainRequest value) => value.writeToBuffer(),
       $0.GetOrderChainResponse.fromBuffer);
+  static final _$getHedgePairDetail = $grpc.ClientMethod<$0.GetHedgePairDetailRequest, $0.HedgePairDetail>(
+      '/kdo.v1.order_log.OrderLogService/GetHedgePairDetail',
+      ($0.GetHedgePairDetailRequest value) => value.writeToBuffer(),
+      $0.HedgePairDetail.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.order_log.OrderLogService')
@@ -122,6 +131,13 @@ abstract class OrderLogServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetOrderChainRequest.fromBuffer(value),
         ($0.GetOrderChainResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetHedgePairDetailRequest, $0.HedgePairDetail>(
+        'GetHedgePairDetail',
+        getHedgePairDetail_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetHedgePairDetailRequest.fromBuffer(value),
+        ($0.HedgePairDetail value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListOrderLogsResponse> listOrderLogs_Pre($grpc.ServiceCall $call, $async.Future<$0.ListOrderLogsRequest> $request) async {
@@ -153,5 +169,11 @@ abstract class OrderLogServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetOrderChainResponse> getOrderChain($grpc.ServiceCall call, $0.GetOrderChainRequest request);
+
+  $async.Future<$0.HedgePairDetail> getHedgePairDetail_Pre($grpc.ServiceCall $call, $async.Future<$0.GetHedgePairDetailRequest> $request) async {
+    return getHedgePairDetail($call, await $request);
+  }
+
+  $async.Future<$0.HedgePairDetail> getHedgePairDetail($grpc.ServiceCall call, $0.GetHedgePairDetailRequest request);
 
 }

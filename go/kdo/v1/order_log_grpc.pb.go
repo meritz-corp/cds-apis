@@ -32,6 +32,8 @@ type OrderLogServiceClient interface {
 	StreamOrderLogStatistics(ctx context.Context, in *GetOrderLogStatisticsRequest, opts ...grpc.CallOption) (OrderLogService_StreamOrderLogStatisticsClient, error)
 	// 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
 	GetOrderChain(ctx context.Context, in *GetOrderChainRequest, opts ...grpc.CallOption) (*GetOrderChainResponse, error)
+	// 헷지 체결 주문의 원주문 상세 정보 조회
+	GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (*HedgePairDetail, error)
 }
 
 type orderLogServiceClient struct {
@@ -133,6 +135,15 @@ func (c *orderLogServiceClient) GetOrderChain(ctx context.Context, in *GetOrderC
 	return out, nil
 }
 
+func (c *orderLogServiceClient) GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (*HedgePairDetail, error) {
+	out := new(HedgePairDetail)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order_log.OrderLogService/GetHedgePairDetail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderLogServiceServer is the server API for OrderLogService service.
 // All implementations must embed UnimplementedOrderLogServiceServer
 // for forward compatibility
@@ -147,6 +158,8 @@ type OrderLogServiceServer interface {
 	StreamOrderLogStatistics(*GetOrderLogStatisticsRequest, OrderLogService_StreamOrderLogStatisticsServer) error
 	// 주문 체인 조회: 원본 주문 + 체결 + 파생 헷지 주문 전체 로그
 	GetOrderChain(context.Context, *GetOrderChainRequest) (*GetOrderChainResponse, error)
+	// 헷지 체결 주문의 원주문 상세 정보 조회
+	GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error)
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
 
@@ -168,6 +181,9 @@ func (UnimplementedOrderLogServiceServer) StreamOrderLogStatistics(*GetOrderLogS
 }
 func (UnimplementedOrderLogServiceServer) GetOrderChain(context.Context, *GetOrderChainRequest) (*GetOrderChainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderChain not implemented")
+}
+func (UnimplementedOrderLogServiceServer) GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHedgePairDetail not implemented")
 }
 func (UnimplementedOrderLogServiceServer) mustEmbedUnimplementedOrderLogServiceServer() {}
 
@@ -278,6 +294,24 @@ func _OrderLogService_GetOrderChain_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderLogService_GetHedgePairDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHedgePairDetailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderLogServiceServer).GetHedgePairDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order_log.OrderLogService/GetHedgePairDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderLogServiceServer).GetHedgePairDetail(ctx, req.(*GetHedgePairDetailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderLogService_ServiceDesc is the grpc.ServiceDesc for OrderLogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -296,6 +330,10 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrderChain",
 			Handler:    _OrderLogService_GetOrderChain_Handler,
+		},
+		{
+			MethodName: "GetHedgePairDetail",
+			Handler:    _OrderLogService_GetHedgePairDetail_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

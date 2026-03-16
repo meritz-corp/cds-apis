@@ -183,6 +183,47 @@
         ]
       }
     },
+    "/v1/order_logs/{orderId}:hedgePairDetail": {
+      "get": {
+        "summary": "헷지 체결 주문의 원주문 상세 정보 조회",
+        "operationId": "OrderLogService_GetHedgePairDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logHedgePairDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "description": "주문 ID (hedge 또는 quote order)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "date",
+            "description": "날짜 (YYYYMMDD, optional - 미지정 시 당일)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
     "/v1/order_logs:stream": {
       "get": {
         "summary": "주문 로그 스트리밍",
@@ -281,6 +322,63 @@
           }
         }
       }
+    },
+    "order_logHedgePairDetail": {
+      "type": "object",
+      "properties": {
+        "quoteOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Quote(원주문) 주문 ID"
+        },
+        "quoteSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "quoteSide": {
+          "$ref": "#/definitions/commonOrderSide",
+          "title": "ETF 방향 (매수/매도)"
+        },
+        "quoteFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 체결 수량"
+        },
+        "quoteAvgPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF 평균 체결 가격"
+        },
+        "hedgeSymbol": {
+          "type": "string",
+          "title": "Hedge 심볼 (선물)"
+        },
+        "hedgeFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "Hedge 체결 수량"
+        },
+        "hedgeAvgPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "Hedge 평균 체결 가격"
+        },
+        "spread": {
+          "type": "number",
+          "format": "double",
+          "title": "스프레드 (선물가격 * 100 - ETF가격)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "date": {
+          "type": "integer",
+          "format": "int64",
+          "title": "날짜 (YYYYMMDD)"
+        }
+      },
+      "title": "헷지 쌍 상세 정보"
     },
     "order_logListOrderLogsResponse": {
       "type": "object",

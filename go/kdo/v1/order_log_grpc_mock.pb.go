@@ -519,6 +519,26 @@ func (m *MockOrderLogServiceClient) EXPECT() *MockOrderLogServiceClientMockRecor
 	return m.recorder
 }
 
+// GetHedgePairDetail mocks base method.
+func (m *MockOrderLogServiceClient) GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (*HedgePairDetail, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetHedgePairDetail", varargs...)
+	ret0, _ := ret[0].(*HedgePairDetail)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetHedgePairDetail indicates an expected call of GetHedgePairDetail.
+func (mr *MockOrderLogServiceClientMockRecorder) GetHedgePairDetail(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHedgePairDetail", reflect.TypeOf((*MockOrderLogServiceClient)(nil).GetHedgePairDetail), varargs...)
+}
+
 // GetOrderChain mocks base method.
 func (m *MockOrderLogServiceClient) GetOrderChain(ctx context.Context, in *GetOrderChainRequest, opts ...grpc.CallOption) (*GetOrderChainResponse, error) {
 	m.ctrl.T.Helper()
@@ -640,6 +660,21 @@ func NewMockOrderLogServiceServer(ctrl *gomock.Controller) *MockOrderLogServiceS
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockOrderLogServiceServer) EXPECT() *MockOrderLogServiceServerMockRecorder {
 	return m.recorder
+}
+
+// GetHedgePairDetail mocks base method.
+func (m *MockOrderLogServiceServer) GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest) (*HedgePairDetail, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetHedgePairDetail", ctx, in)
+	ret0, _ := ret[0].(*HedgePairDetail)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetHedgePairDetail indicates an expected call of GetHedgePairDetail.
+func (mr *MockOrderLogServiceServerMockRecorder) GetHedgePairDetail(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHedgePairDetail", reflect.TypeOf((*MockOrderLogServiceServer)(nil).GetHedgePairDetail), ctx, in)
 }
 
 // GetOrderChain mocks base method.

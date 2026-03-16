@@ -98,4 +98,22 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 헷지 체결 주문의 원주문 상세 정보 조회
+  Future<kdov1order_log.HedgePairDetail> getHedgePairDetail(
+    kdov1order_log.GetHedgePairDetailRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLogService.getHedgePairDetail,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

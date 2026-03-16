@@ -54,6 +54,14 @@ service OrderLogService {
     };
     option (google.api.method_signature) = "order_id";
   }
+
+  // 헷지 체결 주문의 원주문 상세 정보 조회
+  rpc GetHedgePairDetail(GetHedgePairDetailRequest) returns (HedgePairDetail) {
+    option (google.api.http) = {
+      get: "/v1/order_logs/{order_id}:hedgePairDetail"
+    };
+    option (google.api.method_signature) = "order_id";
+  }
 }
 
 
@@ -254,4 +262,38 @@ message GetOrderChainRequest {
 
 message GetOrderChainResponse {
   repeated OrderLog order_logs = 1;
+}
+
+// GetHedgePairDetail 요청
+message GetHedgePairDetailRequest {
+  // 주문 ID (hedge 또는 quote order)
+  uint64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+  // 날짜 (YYYYMMDD, optional - 미지정 시 당일)
+  optional uint32 date = 2;
+}
+
+// 헷지 쌍 상세 정보
+message HedgePairDetail {
+  // Quote(원주문) 주문 ID
+  uint64 quote_order_id = 1;
+  // ETF 심볼
+  string quote_symbol = 2;
+  // ETF 방향 (매수/매도)
+  kdo.v1.common.OrderSide quote_side = 3;
+  // ETF 체결 수량
+  int64 quote_filled_quantity = 4;
+  // ETF 평균 체결 가격
+  double quote_avg_price = 5;
+  // Hedge 심볼 (선물)
+  string hedge_symbol = 6;
+  // Hedge 체결 수량
+  int64 hedge_filled_quantity = 7;
+  // Hedge 평균 체결 가격
+  double hedge_avg_price = 8;
+  // 스프레드 (선물가격 * 100 - ETF가격)
+  double spread = 9;
+  // 펀드 코드
+  string fund_code = 10;
+  // 날짜 (YYYYMMDD)
+  uint32 date = 11;
 }

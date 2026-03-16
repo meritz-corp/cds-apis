@@ -228,6 +228,36 @@ pub mod order_log_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn get_hedge_pair_detail(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetHedgePairDetailRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::HedgePairDetail>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.order_log.OrderLogService/GetHedgePairDetail",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.order_log.OrderLogService",
+                        "GetHedgePairDetail",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -284,6 +314,10 @@ pub mod order_log_service_server {
             tonic::Response<super::GetOrderChainResponse>,
             tonic::Status,
         >;
+        async fn get_hedge_pair_detail(
+            &self,
+            request: tonic::Request<super::GetHedgePairDetailRequest>,
+        ) -> std::result::Result<tonic::Response<super::HedgePairDetail>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct OrderLogServiceServer<T: OrderLogService> {
@@ -585,6 +619,55 @@ pub mod order_log_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetOrderChainSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.order_log.OrderLogService/GetHedgePairDetail" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetHedgePairDetailSvc<T: OrderLogService>(pub Arc<T>);
+                    impl<
+                        T: OrderLogService,
+                    > tonic::server::UnaryService<super::GetHedgePairDetailRequest>
+                    for GetHedgePairDetailSvc<T> {
+                        type Response = super::HedgePairDetail;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetHedgePairDetailRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as OrderLogService>::get_hedge_pair_detail(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetHedgePairDetailSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
