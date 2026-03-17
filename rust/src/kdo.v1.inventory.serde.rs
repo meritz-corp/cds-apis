@@ -3876,12 +3876,30 @@ impl serde::Serialize for SyncLoanDeliveriesRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.SyncLoanDeliveriesRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         if true {
             struct_ser.serialize_field("date", &self.date)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_cnof_cls_code", &self.dbcr_cnof_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_cls_code", &self.dbcr_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("prtc_istu_code", &self.prtc_istu_code)?;
         }
         struct_ser.end()
     }
@@ -3895,12 +3913,21 @@ impl<'de> serde::Deserialize<'de> for SyncLoanDeliveriesRequest {
         const FIELDS: &[&str] = &[
             "fund",
             "date",
+            "dbcr_cnof_cls_code",
+            "dbcrCnofClsCode",
+            "dbcr_cls_code",
+            "dbcrClsCode",
+            "prtc_istu_code",
+            "prtcIstuCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Fund,
             Date,
+            DbcrCnofClsCode,
+            DbcrClsCode,
+            PrtcIstuCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3925,6 +3952,9 @@ impl<'de> serde::Deserialize<'de> for SyncLoanDeliveriesRequest {
                         match value {
                             "fund" => Ok(GeneratedField::Fund),
                             "date" => Ok(GeneratedField::Date),
+                            "dbcrCnofClsCode" | "dbcr_cnof_cls_code" => Ok(GeneratedField::DbcrCnofClsCode),
+                            "dbcrClsCode" | "dbcr_cls_code" => Ok(GeneratedField::DbcrClsCode),
+                            "prtcIstuCode" | "prtc_istu_code" => Ok(GeneratedField::PrtcIstuCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3946,6 +3976,9 @@ impl<'de> serde::Deserialize<'de> for SyncLoanDeliveriesRequest {
             {
                 let mut fund__ = None;
                 let mut date__ = None;
+                let mut dbcr_cnof_cls_code__ = None;
+                let mut dbcr_cls_code__ = None;
+                let mut prtc_istu_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -3960,6 +3993,24 @@ impl<'de> serde::Deserialize<'de> for SyncLoanDeliveriesRequest {
                             }
                             date__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::DbcrCnofClsCode => {
+                            if dbcr_cnof_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrCnofClsCode"));
+                            }
+                            dbcr_cnof_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrClsCode => {
+                            if dbcr_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrClsCode"));
+                            }
+                            dbcr_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PrtcIstuCode => {
+                            if prtc_istu_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prtcIstuCode"));
+                            }
+                            prtc_istu_code__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3968,6 +4019,9 @@ impl<'de> serde::Deserialize<'de> for SyncLoanDeliveriesRequest {
                 Ok(SyncLoanDeliveriesRequest {
                     fund: fund__.unwrap_or_default(),
                     date: date__.unwrap_or_default(),
+                    dbcr_cnof_cls_code: dbcr_cnof_cls_code__.unwrap_or_default(),
+                    dbcr_cls_code: dbcr_cls_code__.unwrap_or_default(),
+                    prtc_istu_code: prtc_istu_code__.unwrap_or_default(),
                 })
             }
         }

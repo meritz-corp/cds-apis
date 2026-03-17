@@ -602,6 +602,18 @@
                 "date": {
                   "type": "string",
                   "title": "조회 기준일자 (YYYYMMDD)"
+                },
+                "dbcrCnofClsCode": {
+                  "type": "string",
+                  "title": "대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)"
+                },
+                "dbcrClsCode": {
+                  "type": "string",
+                  "title": "대차구분코드 (1=대여, 2=차입, 빈값=전체)"
+                },
+                "prtcIstuCode": {
+                  "type": "string",
+                  "title": "참가기관코드 (빈값=전체)"
                 }
               },
               "title": "SyncLoanDeliveries 요청",

@@ -474,13 +474,19 @@ const SyncLoanDeliveriesRequest$json = {
   '2': [
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'date', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'date'},
+    {'1': 'dbcr_cnof_cls_code', '3': 3, '4': 1, '5': 9, '10': 'dbcrCnofClsCode'},
+    {'1': 'dbcr_cls_code', '3': 4, '4': 1, '5': 9, '10': 'dbcrClsCode'},
+    {'1': 'prtc_istu_code', '3': 5, '4': 1, '5': 9, '10': 'prtcIstuCode'},
   ],
 };
 
 /// Descriptor for `SyncLoanDeliveriesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List syncLoanDeliveriesRequestDescriptor = $convert.base64Decode(
     'ChlTeW5jTG9hbkRlbGl2ZXJpZXNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby'
-    '5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhgKBGRhdGUYAiABKAlCBOJBAQJSBGRhdGU=');
+    '5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhgKBGRhdGUYAiABKAlCBOJBAQJSBGRhdGUSKwoSZGJj'
+    'cl9jbm9mX2Nsc19jb2RlGAMgASgJUg9kYmNyQ25vZkNsc0NvZGUSIgoNZGJjcl9jbHNfY29kZR'
+    'gEIAEoCVILZGJjckNsc0NvZGUSJAoOcHJ0Y19pc3R1X2NvZGUYBSABKAlSDHBydGNJc3R1Q29k'
+    'ZQ==');
 
 @$core.Deprecated('Use syncLoanDeliveriesResponseDescriptor instead')
 const SyncLoanDeliveriesResponse$json = {

@@ -457,6 +457,15 @@ pub struct SyncLoanDeliveriesRequest {
     /// 조회 기준일자 (YYYYMMDD)
     #[prost(string, tag="2")]
     pub date: ::prost::alloc::string::String,
+    /// 대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)
+    #[prost(string, tag="3")]
+    pub dbcr_cnof_cls_code: ::prost::alloc::string::String,
+    /// 대차구분코드 (1=대여, 2=차입, 빈값=전체)
+    #[prost(string, tag="4")]
+    pub dbcr_cls_code: ::prost::alloc::string::String,
+    /// 참가기관코드 (빈값=전체)
+    #[prost(string, tag="5")]
+    pub prtc_istu_code: ::prost::alloc::string::String,
 }
 /// SyncLoanDeliveries 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

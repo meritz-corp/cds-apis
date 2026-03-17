@@ -1981,10 +1981,16 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
   factory SyncLoanDeliveriesRequest({
     $core.String? fund,
     $core.String? date,
+    $core.String? dbcrCnofClsCode,
+    $core.String? dbcrClsCode,
+    $core.String? prtcIstuCode,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (date != null) result.date = date;
+    if (dbcrCnofClsCode != null) result.dbcrCnofClsCode = dbcrCnofClsCode;
+    if (dbcrClsCode != null) result.dbcrClsCode = dbcrClsCode;
+    if (prtcIstuCode != null) result.prtcIstuCode = prtcIstuCode;
     return result;
   }
 
@@ -1996,6 +2002,9 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncLoanDeliveriesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'date')
+    ..aOS(3, _omitFieldNames ? '' : 'dbcrCnofClsCode')
+    ..aOS(4, _omitFieldNames ? '' : 'dbcrClsCode')
+    ..aOS(5, _omitFieldNames ? '' : 'prtcIstuCode')
     ..hasRequiredFields = false
   ;
 
@@ -2035,6 +2044,36 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
   $core.bool hasDate() => $_has(1);
   @$pb.TagNumber(2)
   void clearDate() => $_clearField(2);
+
+  /// 대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)
+  @$pb.TagNumber(3)
+  $core.String get dbcrCnofClsCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set dbcrCnofClsCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasDbcrCnofClsCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDbcrCnofClsCode() => $_clearField(3);
+
+  /// 대차구분코드 (1=대여, 2=차입, 빈값=전체)
+  @$pb.TagNumber(4)
+  $core.String get dbcrClsCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set dbcrClsCode($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDbcrClsCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDbcrClsCode() => $_clearField(4);
+
+  /// 참가기관코드 (빈값=전체)
+  @$pb.TagNumber(5)
+  $core.String get prtcIstuCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set prtcIstuCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPrtcIstuCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPrtcIstuCode() => $_clearField(5);
 }
 
 /// SyncLoanDeliveries 응답

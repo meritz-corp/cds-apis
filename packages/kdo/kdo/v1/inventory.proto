@@ -555,6 +555,15 @@ message SyncLoanDeliveriesRequest {
 
   // 조회 기준일자 (YYYYMMDD)
   string date = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)
+  string dbcr_cnof_cls_code = 3;
+
+  // 대차구분코드 (1=대여, 2=차입, 빈값=전체)
+  string dbcr_cls_code = 4;
+
+  // 참가기관코드 (빈값=전체)
+  string prtc_istu_code = 5;
 }
 
 // SyncLoanDeliveries 응답
