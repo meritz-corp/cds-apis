@@ -611,9 +611,9 @@
                   "type": "string",
                   "title": "대차구분코드 (1=대여, 2=차입, 빈값=전체)"
                 },
-                "prtcIstuCode": {
+                "symbol": {
                   "type": "string",
-                  "title": "참가기관코드 (빈값=전체)"
+                  "title": "종목코드 (빈값=전체)"
                 }
               },
               "title": "SyncLoanDeliveries 요청",

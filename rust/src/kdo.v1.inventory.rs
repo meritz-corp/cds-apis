@@ -463,9 +463,9 @@ pub struct SyncLoanDeliveriesRequest {
     /// 대차구분코드 (1=대여, 2=차입, 빈값=전체)
     #[prost(string, tag="4")]
     pub dbcr_cls_code: ::prost::alloc::string::String,
-    /// 참가기관코드 (빈값=전체)
-    #[prost(string, tag="5")]
-    pub prtc_istu_code: ::prost::alloc::string::String,
+    /// 종목코드 (빈값=전체)
+    #[prost(string, tag="6")]
+    pub symbol: ::prost::alloc::string::String,
 }
 /// SyncLoanDeliveries 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -1983,14 +1983,14 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
     $core.String? date,
     $core.String? dbcrCnofClsCode,
     $core.String? dbcrClsCode,
-    $core.String? prtcIstuCode,
+    $core.String? symbol,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (date != null) result.date = date;
     if (dbcrCnofClsCode != null) result.dbcrCnofClsCode = dbcrCnofClsCode;
     if (dbcrClsCode != null) result.dbcrClsCode = dbcrClsCode;
-    if (prtcIstuCode != null) result.prtcIstuCode = prtcIstuCode;
+    if (symbol != null) result.symbol = symbol;
     return result;
   }
 
@@ -2004,7 +2004,7 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'date')
     ..aOS(3, _omitFieldNames ? '' : 'dbcrCnofClsCode')
     ..aOS(4, _omitFieldNames ? '' : 'dbcrClsCode')
-    ..aOS(5, _omitFieldNames ? '' : 'prtcIstuCode')
+    ..aOS(6, _omitFieldNames ? '' : 'symbol')
     ..hasRequiredFields = false
   ;
 
@@ -2065,15 +2065,15 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearDbcrClsCode() => $_clearField(4);
 
-  /// 참가기관코드 (빈값=전체)
-  @$pb.TagNumber(5)
-  $core.String get prtcIstuCode => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set prtcIstuCode($core.String value) => $_setString(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasPrtcIstuCode() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearPrtcIstuCode() => $_clearField(5);
+  /// 종목코드 (빈값=전체)
+  @$pb.TagNumber(6)
+  $core.String get symbol => $_getSZ(4);
+  @$pb.TagNumber(6)
+  set symbol($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSymbol() => $_has(4);
+  @$pb.TagNumber(6)
+  void clearSymbol() => $_clearField(6);
 }
 
 /// SyncLoanDeliveries 응답

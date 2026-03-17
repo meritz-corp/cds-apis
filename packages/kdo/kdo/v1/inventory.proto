@@ -562,8 +562,12 @@ message SyncLoanDeliveriesRequest {
   // 대차구분코드 (1=대여, 2=차입, 빈값=전체)
   string dbcr_cls_code = 4;
 
-  // 참가기관코드 (빈값=전체)
-  string prtc_istu_code = 5;
+  // 필드 번호 5는 삭제된 prtc_istu_code 예약 (서버에서 "0000100000"으로 하드코딩)
+  reserved 5;
+  reserved "prtc_istu_code";
+
+  // 종목코드 (빈값=전체)
+  string symbol = 6;
 }
 
 // SyncLoanDeliveries 응답
