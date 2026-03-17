@@ -519,6 +519,26 @@ func (m *MockInventoryServiceClient) EXPECT() *MockInventoryServiceClientMockRec
 	return m.recorder
 }
 
+// BatchProcessLoanDeliveries mocks base method.
+func (m *MockInventoryServiceClient) BatchProcessLoanDeliveries(ctx context.Context, in *BatchProcessLoanDeliveriesRequest, opts ...grpc.CallOption) (*BatchProcessLoanDeliveriesResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "BatchProcessLoanDeliveries", varargs...)
+	ret0, _ := ret[0].(*BatchProcessLoanDeliveriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// BatchProcessLoanDeliveries indicates an expected call of BatchProcessLoanDeliveries.
+func (mr *MockInventoryServiceClientMockRecorder) BatchProcessLoanDeliveries(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BatchProcessLoanDeliveries", reflect.TypeOf((*MockInventoryServiceClient)(nil).BatchProcessLoanDeliveries), varargs...)
+}
+
 // GetInventory mocks base method.
 func (m *MockInventoryServiceClient) GetInventory(ctx context.Context, in *GetInventoryRequest, opts ...grpc.CallOption) (*Inventory, error) {
 	m.ctrl.T.Helper()
@@ -597,6 +617,26 @@ func (mr *MockInventoryServiceClientMockRecorder) ListLedgerInventories(ctx, in 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListLedgerInventories), varargs...)
+}
+
+// ListLoanDeliveries mocks base method.
+func (m *MockInventoryServiceClient) ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest, opts ...grpc.CallOption) (*ListLoanDeliveriesResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListLoanDeliveries", varargs...)
+	ret0, _ := ret[0].(*ListLoanDeliveriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListLoanDeliveries indicates an expected call of ListLoanDeliveries.
+func (mr *MockInventoryServiceClientMockRecorder) ListLoanDeliveries(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLoanDeliveries", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListLoanDeliveries), varargs...)
 }
 
 // RepayLoan mocks base method.
@@ -679,26 +719,6 @@ func (mr *MockInventoryServiceClientMockRecorder) SyncInventoryFromLedger(ctx, i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceClient)(nil).SyncInventoryFromLedger), varargs...)
 }
 
-// SyncLoanDeliveries mocks base method.
-func (m *MockInventoryServiceClient) SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest, opts ...grpc.CallOption) (*SyncLoanDeliveriesResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "SyncLoanDeliveries", varargs...)
-	ret0, _ := ret[0].(*SyncLoanDeliveriesResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SyncLoanDeliveries indicates an expected call of SyncLoanDeliveries.
-func (mr *MockInventoryServiceClientMockRecorder) SyncLoanDeliveries(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncLoanDeliveries", reflect.TypeOf((*MockInventoryServiceClient)(nil).SyncLoanDeliveries), varargs...)
-}
-
 // TransferLoan mocks base method.
 func (m *MockInventoryServiceClient) TransferLoan(ctx context.Context, in *TransferLoanRequest, opts ...grpc.CallOption) (*TransferLoanResponse, error) {
 	m.ctrl.T.Helper()
@@ -762,6 +782,21 @@ func (m *MockInventoryServiceServer) EXPECT() *MockInventoryServiceServerMockRec
 	return m.recorder
 }
 
+// BatchProcessLoanDeliveries mocks base method.
+func (m *MockInventoryServiceServer) BatchProcessLoanDeliveries(ctx context.Context, in *BatchProcessLoanDeliveriesRequest) (*BatchProcessLoanDeliveriesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "BatchProcessLoanDeliveries", ctx, in)
+	ret0, _ := ret[0].(*BatchProcessLoanDeliveriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// BatchProcessLoanDeliveries indicates an expected call of BatchProcessLoanDeliveries.
+func (mr *MockInventoryServiceServerMockRecorder) BatchProcessLoanDeliveries(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BatchProcessLoanDeliveries", reflect.TypeOf((*MockInventoryServiceServer)(nil).BatchProcessLoanDeliveries), ctx, in)
+}
+
 // GetInventory mocks base method.
 func (m *MockInventoryServiceServer) GetInventory(ctx context.Context, in *GetInventoryRequest) (*Inventory, error) {
 	m.ctrl.T.Helper()
@@ -822,6 +857,21 @@ func (mr *MockInventoryServiceServerMockRecorder) ListLedgerInventories(ctx, in 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListLedgerInventories), ctx, in)
 }
 
+// ListLoanDeliveries mocks base method.
+func (m *MockInventoryServiceServer) ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest) (*ListLoanDeliveriesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListLoanDeliveries", ctx, in)
+	ret0, _ := ret[0].(*ListLoanDeliveriesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListLoanDeliveries indicates an expected call of ListLoanDeliveries.
+func (mr *MockInventoryServiceServerMockRecorder) ListLoanDeliveries(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLoanDeliveries", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListLoanDeliveries), ctx, in)
+}
+
 // RepayLoan mocks base method.
 func (m *MockInventoryServiceServer) RepayLoan(ctx context.Context, in *RepayLoanRequest) (*RepayLoanResponse, error) {
 	m.ctrl.T.Helper()
@@ -878,21 +928,6 @@ func (m *MockInventoryServiceServer) SyncInventoryFromLedger(ctx context.Context
 func (mr *MockInventoryServiceServerMockRecorder) SyncInventoryFromLedger(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncInventoryFromLedger", reflect.TypeOf((*MockInventoryServiceServer)(nil).SyncInventoryFromLedger), ctx, in)
-}
-
-// SyncLoanDeliveries mocks base method.
-func (m *MockInventoryServiceServer) SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest) (*SyncLoanDeliveriesResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SyncLoanDeliveries", ctx, in)
-	ret0, _ := ret[0].(*SyncLoanDeliveriesResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SyncLoanDeliveries indicates an expected call of SyncLoanDeliveries.
-func (mr *MockInventoryServiceServerMockRecorder) SyncLoanDeliveries(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncLoanDeliveries", reflect.TypeOf((*MockInventoryServiceServer)(nil).SyncLoanDeliveries), ctx, in)
 }
 
 // TransferLoan mocks base method.

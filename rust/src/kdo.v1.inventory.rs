@@ -447,10 +447,10 @@ pub struct TransferLoanRequest {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransferLoanResponse {
 }
-/// SyncLoanDeliveries 요청
+/// ListLoanDeliveries 요청 (조회 전용)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SyncLoanDeliveriesRequest {
+pub struct ListLoanDeliveriesRequest {
     /// 펀드 리소스명
     #[prost(string, tag="1")]
     pub fund: ::prost::alloc::string::String,
@@ -464,18 +464,34 @@ pub struct SyncLoanDeliveriesRequest {
     #[prost(string, tag="4")]
     pub dbcr_cls_code: ::prost::alloc::string::String,
     /// 종목코드 (빈값=전체)
-    #[prost(string, tag="6")]
+    #[prost(string, tag="5")]
     pub symbol: ::prost::alloc::string::String,
 }
-/// SyncLoanDeliveries 응답
+/// ListLoanDeliveries 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SyncLoanDeliveriesResponse {
-    /// 처리된 대차 인도내역 목록
+pub struct ListLoanDeliveriesResponse {
+    /// 미처리 대차 인도내역 목록
     #[prost(message, repeated, tag="1")]
     pub items: ::prost::alloc::vec::Vec<LoanDeliveryItem>,
+}
+/// BatchProcessLoanDeliveries 요청 (원장 반영)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BatchProcessLoanDeliveriesRequest {
+    /// 펀드 리소스명
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 원장 반영할 대차 인도내역 항목들
+    #[prost(message, repeated, tag="2")]
+    pub items: ::prost::alloc::vec::Vec<LoanDeliveryItem>,
+}
+/// BatchProcessLoanDeliveries 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct BatchProcessLoanDeliveriesResponse {
     /// 처리 건수
-    #[prost(int32, tag="2")]
+    #[prost(int32, tag="1")]
     pub processed_count: i32,
 }
 /// 대차체결인도내역 항목 (obfnp_loan_021r)

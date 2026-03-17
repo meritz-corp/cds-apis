@@ -468,44 +468,65 @@ const TransferLoanResponse$json = {
 final $typed_data.Uint8List transferLoanResponseDescriptor = $convert.base64Decode(
     'ChRUcmFuc2ZlckxvYW5SZXNwb25zZQ==');
 
-@$core.Deprecated('Use syncLoanDeliveriesRequestDescriptor instead')
-const SyncLoanDeliveriesRequest$json = {
-  '1': 'SyncLoanDeliveriesRequest',
+@$core.Deprecated('Use listLoanDeliveriesRequestDescriptor instead')
+const ListLoanDeliveriesRequest$json = {
+  '1': 'ListLoanDeliveriesRequest',
   '2': [
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'date', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'date'},
     {'1': 'dbcr_cnof_cls_code', '3': 3, '4': 1, '5': 9, '10': 'dbcrCnofClsCode'},
     {'1': 'dbcr_cls_code', '3': 4, '4': 1, '5': 9, '10': 'dbcrClsCode'},
-    {'1': 'symbol', '3': 6, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'symbol', '3': 5, '4': 1, '5': 9, '10': 'symbol'},
   ],
-  '9': [
-    {'1': 5, '2': 6},
-  ],
-  '10': ['prtc_istu_code'],
 };
 
-/// Descriptor for `SyncLoanDeliveriesRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List syncLoanDeliveriesRequestDescriptor = $convert.base64Decode(
-    'ChlTeW5jTG9hbkRlbGl2ZXJpZXNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby'
+/// Descriptor for `ListLoanDeliveriesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLoanDeliveriesRequestDescriptor = $convert.base64Decode(
+    'ChlMaXN0TG9hbkRlbGl2ZXJpZXNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby'
     '5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhgKBGRhdGUYAiABKAlCBOJBAQJSBGRhdGUSKwoSZGJj'
     'cl9jbm9mX2Nsc19jb2RlGAMgASgJUg9kYmNyQ25vZkNsc0NvZGUSIgoNZGJjcl9jbHNfY29kZR'
-    'gEIAEoCVILZGJjckNsc0NvZGUSFgoGc3ltYm9sGAYgASgJUgZzeW1ib2xKBAgFEAZSDnBydGNf'
-    'aXN0dV9jb2Rl');
+    'gEIAEoCVILZGJjckNsc0NvZGUSFgoGc3ltYm9sGAUgASgJUgZzeW1ib2w=');
 
-@$core.Deprecated('Use syncLoanDeliveriesResponseDescriptor instead')
-const SyncLoanDeliveriesResponse$json = {
-  '1': 'SyncLoanDeliveriesResponse',
+@$core.Deprecated('Use listLoanDeliveriesResponseDescriptor instead')
+const ListLoanDeliveriesResponse$json = {
+  '1': 'ListLoanDeliveriesResponse',
   '2': [
     {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.inventory.LoanDeliveryItem', '10': 'items'},
-    {'1': 'processed_count', '3': 2, '4': 1, '5': 5, '10': 'processedCount'},
   ],
 };
 
-/// Descriptor for `SyncLoanDeliveriesResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List syncLoanDeliveriesResponseDescriptor = $convert.base64Decode(
-    'ChpTeW5jTG9hbkRlbGl2ZXJpZXNSZXNwb25zZRI4CgVpdGVtcxgBIAMoCzIiLmtkby52MS5pbn'
-    'ZlbnRvcnkuTG9hbkRlbGl2ZXJ5SXRlbVIFaXRlbXMSJwoPcHJvY2Vzc2VkX2NvdW50GAIgASgF'
-    'Ug5wcm9jZXNzZWRDb3VudA==');
+/// Descriptor for `ListLoanDeliveriesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLoanDeliveriesResponseDescriptor = $convert.base64Decode(
+    'ChpMaXN0TG9hbkRlbGl2ZXJpZXNSZXNwb25zZRI4CgVpdGVtcxgBIAMoCzIiLmtkby52MS5pbn'
+    'ZlbnRvcnkuTG9hbkRlbGl2ZXJ5SXRlbVIFaXRlbXM=');
+
+@$core.Deprecated('Use batchProcessLoanDeliveriesRequestDescriptor instead')
+const BatchProcessLoanDeliveriesRequest$json = {
+  '1': 'BatchProcessLoanDeliveriesRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'items', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.inventory.LoanDeliveryItem', '8': {}, '10': 'items'},
+  ],
+};
+
+/// Descriptor for `BatchProcessLoanDeliveriesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List batchProcessLoanDeliveriesRequestDescriptor = $convert.base64Decode(
+    'CiFCYXRjaFByb2Nlc3NMb2FuRGVsaXZlcmllc1JlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAv'
+    'pBFgoUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSPgoFaXRlbXMYAiADKAsyIi5rZG8udjEu'
+    'aW52ZW50b3J5LkxvYW5EZWxpdmVyeUl0ZW1CBOJBAQJSBWl0ZW1z');
+
+@$core.Deprecated('Use batchProcessLoanDeliveriesResponseDescriptor instead')
+const BatchProcessLoanDeliveriesResponse$json = {
+  '1': 'BatchProcessLoanDeliveriesResponse',
+  '2': [
+    {'1': 'processed_count', '3': 1, '4': 1, '5': 5, '10': 'processedCount'},
+  ],
+};
+
+/// Descriptor for `BatchProcessLoanDeliveriesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List batchProcessLoanDeliveriesResponseDescriptor = $convert.base64Decode(
+    'CiJCYXRjaFByb2Nlc3NMb2FuRGVsaXZlcmllc1Jlc3BvbnNlEicKD3Byb2Nlc3NlZF9jb3VudB'
+    'gBIAEoBVIOcHJvY2Vzc2VkQ291bnQ=');
 
 @$core.Deprecated('Use loanDeliveryItemDescriptor instead')
 const LoanDeliveryItem$json = {

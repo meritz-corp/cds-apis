@@ -91,11 +91,19 @@ abstract final class InventoryService {
     kdov1inventory.TransferLoanResponse.new,
   );
 
-  /// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
-  static const syncLoanDeliveries = connect.Spec(
-    '/$name/SyncLoanDeliveries',
+  /// 대차 인도내역 조회 (미처리 건 목록)
+  static const listLoanDeliveries = connect.Spec(
+    '/$name/ListLoanDeliveries',
     connect.StreamType.unary,
-    kdov1inventory.SyncLoanDeliveriesRequest.new,
-    kdov1inventory.SyncLoanDeliveriesResponse.new,
+    kdov1inventory.ListLoanDeliveriesRequest.new,
+    kdov1inventory.ListLoanDeliveriesResponse.new,
+  );
+
+  /// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
+  static const batchProcessLoanDeliveries = connect.Spec(
+    '/$name/BatchProcessLoanDeliveries',
+    connect.StreamType.unary,
+    kdov1inventory.BatchProcessLoanDeliveriesRequest.new,
+    kdov1inventory.BatchProcessLoanDeliveriesResponse.new,
   );
 }

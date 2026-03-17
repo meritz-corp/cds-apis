@@ -83,9 +83,14 @@ class InventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$transferLoan, request, options: options);
   }
 
-  /// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
-  $grpc.ResponseFuture<$0.SyncLoanDeliveriesResponse> syncLoanDeliveries($0.SyncLoanDeliveriesRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$syncLoanDeliveries, request, options: options);
+  /// 대차 인도내역 조회 (미처리 건 목록)
+  $grpc.ResponseFuture<$0.ListLoanDeliveriesResponse> listLoanDeliveries($0.ListLoanDeliveriesRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listLoanDeliveries, request, options: options);
+  }
+
+  /// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
+  $grpc.ResponseFuture<$0.BatchProcessLoanDeliveriesResponse> batchProcessLoanDeliveries($0.BatchProcessLoanDeliveriesRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$batchProcessLoanDeliveries, request, options: options);
   }
 
     // method descriptors
@@ -130,10 +135,14 @@ class InventoryServiceClient extends $grpc.Client {
       '/kdo.v1.inventory.InventoryService/TransferLoan',
       ($0.TransferLoanRequest value) => value.writeToBuffer(),
       $0.TransferLoanResponse.fromBuffer);
-  static final _$syncLoanDeliveries = $grpc.ClientMethod<$0.SyncLoanDeliveriesRequest, $0.SyncLoanDeliveriesResponse>(
-      '/kdo.v1.inventory.InventoryService/SyncLoanDeliveries',
-      ($0.SyncLoanDeliveriesRequest value) => value.writeToBuffer(),
-      $0.SyncLoanDeliveriesResponse.fromBuffer);
+  static final _$listLoanDeliveries = $grpc.ClientMethod<$0.ListLoanDeliveriesRequest, $0.ListLoanDeliveriesResponse>(
+      '/kdo.v1.inventory.InventoryService/ListLoanDeliveries',
+      ($0.ListLoanDeliveriesRequest value) => value.writeToBuffer(),
+      $0.ListLoanDeliveriesResponse.fromBuffer);
+  static final _$batchProcessLoanDeliveries = $grpc.ClientMethod<$0.BatchProcessLoanDeliveriesRequest, $0.BatchProcessLoanDeliveriesResponse>(
+      '/kdo.v1.inventory.InventoryService/BatchProcessLoanDeliveries',
+      ($0.BatchProcessLoanDeliveriesRequest value) => value.writeToBuffer(),
+      $0.BatchProcessLoanDeliveriesResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.inventory.InventoryService')
@@ -211,13 +220,20 @@ abstract class InventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.TransferLoanRequest.fromBuffer(value),
         ($0.TransferLoanResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.SyncLoanDeliveriesRequest, $0.SyncLoanDeliveriesResponse>(
-        'SyncLoanDeliveries',
-        syncLoanDeliveries_Pre,
+    $addMethod($grpc.ServiceMethod<$0.ListLoanDeliveriesRequest, $0.ListLoanDeliveriesResponse>(
+        'ListLoanDeliveries',
+        listLoanDeliveries_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.SyncLoanDeliveriesRequest.fromBuffer(value),
-        ($0.SyncLoanDeliveriesResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.ListLoanDeliveriesRequest.fromBuffer(value),
+        ($0.ListLoanDeliveriesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.BatchProcessLoanDeliveriesRequest, $0.BatchProcessLoanDeliveriesResponse>(
+        'BatchProcessLoanDeliveries',
+        batchProcessLoanDeliveries_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.BatchProcessLoanDeliveriesRequest.fromBuffer(value),
+        ($0.BatchProcessLoanDeliveriesResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Inventory> getInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetInventoryRequest> $request) async {
@@ -280,10 +296,16 @@ abstract class InventoryServiceBase extends $grpc.Service {
 
   $async.Future<$0.TransferLoanResponse> transferLoan($grpc.ServiceCall call, $0.TransferLoanRequest request);
 
-  $async.Future<$0.SyncLoanDeliveriesResponse> syncLoanDeliveries_Pre($grpc.ServiceCall $call, $async.Future<$0.SyncLoanDeliveriesRequest> $request) async {
-    return syncLoanDeliveries($call, await $request);
+  $async.Future<$0.ListLoanDeliveriesResponse> listLoanDeliveries_Pre($grpc.ServiceCall $call, $async.Future<$0.ListLoanDeliveriesRequest> $request) async {
+    return listLoanDeliveries($call, await $request);
   }
 
-  $async.Future<$0.SyncLoanDeliveriesResponse> syncLoanDeliveries($grpc.ServiceCall call, $0.SyncLoanDeliveriesRequest request);
+  $async.Future<$0.ListLoanDeliveriesResponse> listLoanDeliveries($grpc.ServiceCall call, $0.ListLoanDeliveriesRequest request);
+
+  $async.Future<$0.BatchProcessLoanDeliveriesResponse> batchProcessLoanDeliveries_Pre($grpc.ServiceCall $call, $async.Future<$0.BatchProcessLoanDeliveriesRequest> $request) async {
+    return batchProcessLoanDeliveries($call, await $request);
+  }
+
+  $async.Future<$0.BatchProcessLoanDeliveriesResponse> batchProcessLoanDeliveries($grpc.ServiceCall call, $0.BatchProcessLoanDeliveriesRequest request);
 
 }

@@ -189,16 +189,34 @@ extension type InventoryServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
-  Future<kdov1inventory.SyncLoanDeliveriesResponse> syncLoanDeliveries(
-    kdov1inventory.SyncLoanDeliveriesRequest input, {
+  /// 대차 인도내역 조회 (미처리 건 목록)
+  Future<kdov1inventory.ListLoanDeliveriesResponse> listLoanDeliveries(
+    kdov1inventory.ListLoanDeliveriesRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.InventoryService.syncLoanDeliveries,
+      specs.InventoryService.listLoanDeliveries,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
+  Future<kdov1inventory.BatchProcessLoanDeliveriesResponse> batchProcessLoanDeliveries(
+    kdov1inventory.BatchProcessLoanDeliveriesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.batchProcessLoanDeliveries,
       input,
       signal: signal,
       headers: headers,

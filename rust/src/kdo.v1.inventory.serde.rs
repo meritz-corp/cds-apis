@@ -1,4 +1,214 @@
 // @generated
+impl serde::Serialize for BatchProcessLoanDeliveriesRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.BatchProcessLoanDeliveriesRequest", len)?;
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if true {
+            struct_ser.serialize_field("items", &self.items)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for BatchProcessLoanDeliveriesRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund",
+            "items",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fund,
+            Items,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fund" => Ok(GeneratedField::Fund),
+                            "items" => Ok(GeneratedField::Items),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = BatchProcessLoanDeliveriesRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.BatchProcessLoanDeliveriesRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<BatchProcessLoanDeliveriesRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund__ = None;
+                let mut items__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Items => {
+                            if items__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("items"));
+                            }
+                            items__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(BatchProcessLoanDeliveriesRequest {
+                    fund: fund__.unwrap_or_default(),
+                    items: items__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.BatchProcessLoanDeliveriesRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for BatchProcessLoanDeliveriesResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.BatchProcessLoanDeliveriesResponse", len)?;
+        if true {
+            struct_ser.serialize_field("processed_count", &self.processed_count)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for BatchProcessLoanDeliveriesResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "processed_count",
+            "processedCount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ProcessedCount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "processedCount" | "processed_count" => Ok(GeneratedField::ProcessedCount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = BatchProcessLoanDeliveriesResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.BatchProcessLoanDeliveriesResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<BatchProcessLoanDeliveriesResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut processed_count__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ProcessedCount => {
+                            if processed_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("processedCount"));
+                            }
+                            processed_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(BatchProcessLoanDeliveriesResponse {
+                    processed_count: processed_count__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.BatchProcessLoanDeliveriesResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for DerivData {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2249,6 +2459,266 @@ impl<'de> serde::Deserialize<'de> for ListLedgerInventoriesResponse {
         deserializer.deserialize_struct("kdo.v1.inventory.ListLedgerInventoriesResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ListLoanDeliveriesRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.ListLoanDeliveriesRequest", len)?;
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if true {
+            struct_ser.serialize_field("date", &self.date)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_cnof_cls_code", &self.dbcr_cnof_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_cls_code", &self.dbcr_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListLoanDeliveriesRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund",
+            "date",
+            "dbcr_cnof_cls_code",
+            "dbcrCnofClsCode",
+            "dbcr_cls_code",
+            "dbcrClsCode",
+            "symbol",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fund,
+            Date,
+            DbcrCnofClsCode,
+            DbcrClsCode,
+            Symbol,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fund" => Ok(GeneratedField::Fund),
+                            "date" => Ok(GeneratedField::Date),
+                            "dbcrCnofClsCode" | "dbcr_cnof_cls_code" => Ok(GeneratedField::DbcrCnofClsCode),
+                            "dbcrClsCode" | "dbcr_cls_code" => Ok(GeneratedField::DbcrClsCode),
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListLoanDeliveriesRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.ListLoanDeliveriesRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListLoanDeliveriesRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund__ = None;
+                let mut date__ = None;
+                let mut dbcr_cnof_cls_code__ = None;
+                let mut dbcr_cls_code__ = None;
+                let mut symbol__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrCnofClsCode => {
+                            if dbcr_cnof_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrCnofClsCode"));
+                            }
+                            dbcr_cnof_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrClsCode => {
+                            if dbcr_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrClsCode"));
+                            }
+                            dbcr_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListLoanDeliveriesRequest {
+                    fund: fund__.unwrap_or_default(),
+                    date: date__.unwrap_or_default(),
+                    dbcr_cnof_cls_code: dbcr_cnof_cls_code__.unwrap_or_default(),
+                    dbcr_cls_code: dbcr_cls_code__.unwrap_or_default(),
+                    symbol: symbol__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.ListLoanDeliveriesRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListLoanDeliveriesResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.ListLoanDeliveriesResponse", len)?;
+        if true {
+            struct_ser.serialize_field("items", &self.items)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListLoanDeliveriesResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "items",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Items,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "items" => Ok(GeneratedField::Items),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListLoanDeliveriesResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.ListLoanDeliveriesResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListLoanDeliveriesResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut items__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Items => {
+                            if items__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("items"));
+                            }
+                            items__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListLoanDeliveriesResponse {
+                    items: items__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.ListLoanDeliveriesResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for LoanDeliveryItem {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3860,286 +4330,6 @@ impl<'de> serde::Deserialize<'de> for SyncInventoryFromLedgerResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.inventory.SyncInventoryFromLedgerResponse", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for SyncLoanDeliveriesRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.SyncLoanDeliveriesRequest", len)?;
-        if true {
-            struct_ser.serialize_field("fund", &self.fund)?;
-        }
-        if true {
-            struct_ser.serialize_field("date", &self.date)?;
-        }
-        if true {
-            struct_ser.serialize_field("dbcr_cnof_cls_code", &self.dbcr_cnof_cls_code)?;
-        }
-        if true {
-            struct_ser.serialize_field("dbcr_cls_code", &self.dbcr_cls_code)?;
-        }
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for SyncLoanDeliveriesRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "fund",
-            "date",
-            "dbcr_cnof_cls_code",
-            "dbcrCnofClsCode",
-            "dbcr_cls_code",
-            "dbcrClsCode",
-            "symbol",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Fund,
-            Date,
-            DbcrCnofClsCode,
-            DbcrClsCode,
-            Symbol,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "fund" => Ok(GeneratedField::Fund),
-                            "date" => Ok(GeneratedField::Date),
-                            "dbcrCnofClsCode" | "dbcr_cnof_cls_code" => Ok(GeneratedField::DbcrCnofClsCode),
-                            "dbcrClsCode" | "dbcr_cls_code" => Ok(GeneratedField::DbcrClsCode),
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = SyncLoanDeliveriesRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.inventory.SyncLoanDeliveriesRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SyncLoanDeliveriesRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut fund__ = None;
-                let mut date__ = None;
-                let mut dbcr_cnof_cls_code__ = None;
-                let mut dbcr_cls_code__ = None;
-                let mut symbol__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Fund => {
-                            if fund__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fund"));
-                            }
-                            fund__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Date => {
-                            if date__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("date"));
-                            }
-                            date__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::DbcrCnofClsCode => {
-                            if dbcr_cnof_cls_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dbcrCnofClsCode"));
-                            }
-                            dbcr_cnof_cls_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::DbcrClsCode => {
-                            if dbcr_cls_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dbcrClsCode"));
-                            }
-                            dbcr_cls_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(SyncLoanDeliveriesRequest {
-                    fund: fund__.unwrap_or_default(),
-                    date: date__.unwrap_or_default(),
-                    dbcr_cnof_cls_code: dbcr_cnof_cls_code__.unwrap_or_default(),
-                    dbcr_cls_code: dbcr_cls_code__.unwrap_or_default(),
-                    symbol: symbol__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.inventory.SyncLoanDeliveriesRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for SyncLoanDeliveriesResponse {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.SyncLoanDeliveriesResponse", len)?;
-        if true {
-            struct_ser.serialize_field("items", &self.items)?;
-        }
-        if true {
-            struct_ser.serialize_field("processed_count", &self.processed_count)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for SyncLoanDeliveriesResponse {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "items",
-            "processed_count",
-            "processedCount",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Items,
-            ProcessedCount,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "items" => Ok(GeneratedField::Items),
-                            "processedCount" | "processed_count" => Ok(GeneratedField::ProcessedCount),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = SyncLoanDeliveriesResponse;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.inventory.SyncLoanDeliveriesResponse")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SyncLoanDeliveriesResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut items__ = None;
-                let mut processed_count__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Items => {
-                            if items__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("items"));
-                            }
-                            items__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::ProcessedCount => {
-                            if processed_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("processedCount"));
-                            }
-                            processed_count__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(SyncLoanDeliveriesResponse {
-                    items: items__.unwrap_or_default(),
-                    processed_count: processed_count__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.inventory.SyncLoanDeliveriesResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for TransferLoanRequest {

@@ -42,8 +42,10 @@ type InventoryServiceClient interface {
 	RepayLoan(ctx context.Context, in *RepayLoanRequest, opts ...grpc.CallOption) (*RepayLoanResponse, error)
 	// 펀드간 대차 이전 (내부대차)
 	TransferLoan(ctx context.Context, in *TransferLoanRequest, opts ...grpc.CallOption) (*TransferLoanResponse, error)
-	// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
-	SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest, opts ...grpc.CallOption) (*SyncLoanDeliveriesResponse, error)
+	// 대차 인도내역 조회 (미처리 건 목록)
+	ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest, opts ...grpc.CallOption) (*ListLoanDeliveriesResponse, error)
+	// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
+	BatchProcessLoanDeliveries(ctx context.Context, in *BatchProcessLoanDeliveriesRequest, opts ...grpc.CallOption) (*BatchProcessLoanDeliveriesResponse, error)
 }
 
 type inventoryServiceClient struct {
@@ -190,9 +192,18 @@ func (c *inventoryServiceClient) TransferLoan(ctx context.Context, in *TransferL
 	return out, nil
 }
 
-func (c *inventoryServiceClient) SyncLoanDeliveries(ctx context.Context, in *SyncLoanDeliveriesRequest, opts ...grpc.CallOption) (*SyncLoanDeliveriesResponse, error) {
-	out := new(SyncLoanDeliveriesResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/SyncLoanDeliveries", in, out, opts...)
+func (c *inventoryServiceClient) ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest, opts ...grpc.CallOption) (*ListLoanDeliveriesResponse, error) {
+	out := new(ListLoanDeliveriesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/ListLoanDeliveries", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) BatchProcessLoanDeliveries(ctx context.Context, in *BatchProcessLoanDeliveriesRequest, opts ...grpc.CallOption) (*BatchProcessLoanDeliveriesResponse, error) {
+	out := new(BatchProcessLoanDeliveriesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/BatchProcessLoanDeliveries", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -223,8 +234,10 @@ type InventoryServiceServer interface {
 	RepayLoan(context.Context, *RepayLoanRequest) (*RepayLoanResponse, error)
 	// 펀드간 대차 이전 (내부대차)
 	TransferLoan(context.Context, *TransferLoanRequest) (*TransferLoanResponse, error)
-	// 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
-	SyncLoanDeliveries(context.Context, *SyncLoanDeliveriesRequest) (*SyncLoanDeliveriesResponse, error)
+	// 대차 인도내역 조회 (미처리 건 목록)
+	ListLoanDeliveries(context.Context, *ListLoanDeliveriesRequest) (*ListLoanDeliveriesResponse, error)
+	// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
+	BatchProcessLoanDeliveries(context.Context, *BatchProcessLoanDeliveriesRequest) (*BatchProcessLoanDeliveriesResponse, error)
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -262,8 +275,11 @@ func (UnimplementedInventoryServiceServer) RepayLoan(context.Context, *RepayLoan
 func (UnimplementedInventoryServiceServer) TransferLoan(context.Context, *TransferLoanRequest) (*TransferLoanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferLoan not implemented")
 }
-func (UnimplementedInventoryServiceServer) SyncLoanDeliveries(context.Context, *SyncLoanDeliveriesRequest) (*SyncLoanDeliveriesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SyncLoanDeliveries not implemented")
+func (UnimplementedInventoryServiceServer) ListLoanDeliveries(context.Context, *ListLoanDeliveriesRequest) (*ListLoanDeliveriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLoanDeliveries not implemented")
+}
+func (UnimplementedInventoryServiceServer) BatchProcessLoanDeliveries(context.Context, *BatchProcessLoanDeliveriesRequest) (*BatchProcessLoanDeliveriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchProcessLoanDeliveries not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -464,20 +480,38 @@ func _InventoryService_TransferLoan_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _InventoryService_SyncLoanDeliveries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SyncLoanDeliveriesRequest)
+func _InventoryService_ListLoanDeliveries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLoanDeliveriesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InventoryServiceServer).SyncLoanDeliveries(ctx, in)
+		return srv.(InventoryServiceServer).ListLoanDeliveries(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.inventory.InventoryService/SyncLoanDeliveries",
+		FullMethod: "/kdo.v1.inventory.InventoryService/ListLoanDeliveries",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InventoryServiceServer).SyncLoanDeliveries(ctx, req.(*SyncLoanDeliveriesRequest))
+		return srv.(InventoryServiceServer).ListLoanDeliveries(ctx, req.(*ListLoanDeliveriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InventoryService_BatchProcessLoanDeliveries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchProcessLoanDeliveriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).BatchProcessLoanDeliveries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/BatchProcessLoanDeliveries",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).BatchProcessLoanDeliveries(ctx, req.(*BatchProcessLoanDeliveriesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -522,8 +556,12 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _InventoryService_TransferLoan_Handler,
 		},
 		{
-			MethodName: "SyncLoanDeliveries",
-			Handler:    _InventoryService_SyncLoanDeliveries_Handler,
+			MethodName: "ListLoanDeliveries",
+			Handler:    _InventoryService_ListLoanDeliveries_Handler,
+		},
+		{
+			MethodName: "BatchProcessLoanDeliveries",
+			Handler:    _InventoryService_BatchProcessLoanDeliveries_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

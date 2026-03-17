@@ -369,11 +369,11 @@ pub mod inventory_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn sync_loan_deliveries(
+        pub async fn list_loan_deliveries(
             &mut self,
-            request: impl tonic::IntoRequest<super::SyncLoanDeliveriesRequest>,
+            request: impl tonic::IntoRequest<super::ListLoanDeliveriesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::SyncLoanDeliveriesResponse>,
+            tonic::Response<super::ListLoanDeliveriesResponse>,
             tonic::Status,
         > {
             self.inner
@@ -387,14 +387,44 @@ pub mod inventory_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.inventory.InventoryService/SyncLoanDeliveries",
+                "/kdo.v1.inventory.InventoryService/ListLoanDeliveries",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "kdo.v1.inventory.InventoryService",
-                        "SyncLoanDeliveries",
+                        "ListLoanDeliveries",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn batch_process_loan_deliveries(
+            &mut self,
+            request: impl tonic::IntoRequest<super::BatchProcessLoanDeliveriesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::BatchProcessLoanDeliveriesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.inventory.InventoryService/BatchProcessLoanDeliveries",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.inventory.InventoryService",
+                        "BatchProcessLoanDeliveries",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -481,11 +511,18 @@ pub mod inventory_service_server {
             tonic::Response<super::TransferLoanResponse>,
             tonic::Status,
         >;
-        async fn sync_loan_deliveries(
+        async fn list_loan_deliveries(
             &self,
-            request: tonic::Request<super::SyncLoanDeliveriesRequest>,
+            request: tonic::Request<super::ListLoanDeliveriesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::SyncLoanDeliveriesResponse>,
+            tonic::Response<super::ListLoanDeliveriesResponse>,
+            tonic::Status,
+        >;
+        async fn batch_process_loan_deliveries(
+            &self,
+            request: tonic::Request<super::BatchProcessLoanDeliveriesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::BatchProcessLoanDeliveriesResponse>,
             tonic::Status,
         >;
     }
@@ -1038,25 +1075,25 @@ pub mod inventory_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.inventory.InventoryService/SyncLoanDeliveries" => {
+                "/kdo.v1.inventory.InventoryService/ListLoanDeliveries" => {
                     #[allow(non_camel_case_types)]
-                    struct SyncLoanDeliveriesSvc<T: InventoryService>(pub Arc<T>);
+                    struct ListLoanDeliveriesSvc<T: InventoryService>(pub Arc<T>);
                     impl<
                         T: InventoryService,
-                    > tonic::server::UnaryService<super::SyncLoanDeliveriesRequest>
-                    for SyncLoanDeliveriesSvc<T> {
-                        type Response = super::SyncLoanDeliveriesResponse;
+                    > tonic::server::UnaryService<super::ListLoanDeliveriesRequest>
+                    for ListLoanDeliveriesSvc<T> {
+                        type Response = super::ListLoanDeliveriesResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::SyncLoanDeliveriesRequest>,
+                            request: tonic::Request<super::ListLoanDeliveriesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as InventoryService>::sync_loan_deliveries(
+                                <T as InventoryService>::list_loan_deliveries(
                                         &inner,
                                         request,
                                     )
@@ -1071,7 +1108,61 @@ pub mod inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = SyncLoanDeliveriesSvc(inner);
+                        let method = ListLoanDeliveriesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.inventory.InventoryService/BatchProcessLoanDeliveries" => {
+                    #[allow(non_camel_case_types)]
+                    struct BatchProcessLoanDeliveriesSvc<T: InventoryService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: InventoryService,
+                    > tonic::server::UnaryService<
+                        super::BatchProcessLoanDeliveriesRequest,
+                    > for BatchProcessLoanDeliveriesSvc<T> {
+                        type Response = super::BatchProcessLoanDeliveriesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::BatchProcessLoanDeliveriesRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as InventoryService>::batch_process_loan_deliveries(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = BatchProcessLoanDeliveriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

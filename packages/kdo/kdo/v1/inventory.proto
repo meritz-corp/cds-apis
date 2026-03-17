@@ -95,13 +95,21 @@ service InventoryService {
     option (google.api.method_signature) = "from_fund,to_fund,symbol,quantity,borrow";
   }
 
-  // 대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)
-  rpc SyncLoanDeliveries(SyncLoanDeliveriesRequest) returns (SyncLoanDeliveriesResponse) {
+  // 대차 인도내역 조회 (미처리 건 목록)
+  rpc ListLoanDeliveries(ListLoanDeliveriesRequest) returns (ListLoanDeliveriesResponse) {
     option (google.api.http) = {
-      post: "/v1/inventories/{fund=funds/*}:syncLoanDeliveries"
-      body: "*"
+      get: "/v1/inventories/{fund=funds/*}/loanDeliveries"
     };
     option (google.api.method_signature) = "fund,date";
+  }
+
+  // 대차 인도내역 원장 반영 (선택 건 일괄 처리)
+  rpc BatchProcessLoanDeliveries(BatchProcessLoanDeliveriesRequest) returns (BatchProcessLoanDeliveriesResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{fund=funds/*}/loanDeliveries:batchProcess"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,items";
   }
 }
 
@@ -543,8 +551,8 @@ message TransferLoanRequest {
 // TransferLoan 응답
 message TransferLoanResponse {}
 
-// SyncLoanDeliveries 요청
-message SyncLoanDeliveriesRequest {
+// ListLoanDeliveries 요청 (조회 전용)
+message ListLoanDeliveriesRequest {
   // 펀드 리소스명
   string fund = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -562,21 +570,34 @@ message SyncLoanDeliveriesRequest {
   // 대차구분코드 (1=대여, 2=차입, 빈값=전체)
   string dbcr_cls_code = 4;
 
-  // 필드 번호 5는 삭제된 prtc_istu_code 예약 (서버에서 "0000100000"으로 하드코딩)
-  reserved 5;
-  reserved "prtc_istu_code";
-
   // 종목코드 (빈값=전체)
-  string symbol = 6;
+  string symbol = 5;
 }
 
-// SyncLoanDeliveries 응답
-message SyncLoanDeliveriesResponse {
-  // 처리된 대차 인도내역 목록
+// ListLoanDeliveries 응답
+message ListLoanDeliveriesResponse {
+  // 미처리 대차 인도내역 목록
   repeated LoanDeliveryItem items = 1;
+}
 
+// BatchProcessLoanDeliveries 요청 (원장 반영)
+message BatchProcessLoanDeliveriesRequest {
+  // 펀드 리소스명
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 원장 반영할 대차 인도내역 항목들
+  repeated LoanDeliveryItem items = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// BatchProcessLoanDeliveries 응답
+message BatchProcessLoanDeliveriesResponse {
   // 처리 건수
-  int32 processed_count = 2;
+  int32 processed_count = 1;
 }
 
 // 대차체결인도내역 항목 (obfnp_loan_021r)

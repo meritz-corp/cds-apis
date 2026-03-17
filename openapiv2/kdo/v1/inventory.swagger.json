@@ -206,6 +206,121 @@
         ]
       }
     },
+    "/v1/inventories/{fund}/loanDeliveries": {
+      "get": {
+        "summary": "대차 인도내역 조회 (미처리 건 목록)",
+        "operationId": "InventoryService_ListLoanDeliveries",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryListLoanDeliveriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "date",
+            "description": "조회 기준일자 (YYYYMMDD)",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dbcrCnofClsCode",
+            "description": "대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dbcrClsCode",
+            "description": "대차구분코드 (1=대여, 2=차입, 빈값=전체)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "symbol",
+            "description": "종목코드 (빈값=전체)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
+    "/v1/inventories/{fund}/loanDeliveries:batchProcess": {
+      "post": {
+        "summary": "대차 인도내역 원장 반영 (선택 건 일괄 처리)",
+        "operationId": "InventoryService_BatchProcessLoanDeliveries",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryBatchProcessLoanDeliveriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/inventoryLoanDeliveryItem"
+                  },
+                  "title": "원장 반영할 대차 인도내역 항목들"
+                }
+              },
+              "title": "BatchProcessLoanDeliveries 요청 (원장 반영)",
+              "required": [
+                "items"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
     "/v1/inventories/{fund}/{symbol}": {
       "get": {
         "summary": "단일 재고 현황 조회",
@@ -564,72 +679,20 @@
           "InventoryService"
         ]
       }
-    },
-    "/v1/inventories/{fund}:syncLoanDeliveries": {
-      "post": {
-        "summary": "대차 인도내역 조회 + 원장 반영 (미처리 건 일괄 처리)",
-        "operationId": "InventoryService_SyncLoanDeliveries",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/inventorySyncLoanDeliveriesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "fund",
-            "description": "펀드 리소스명",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "funds/[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "type": "string",
-                  "title": "조회 기준일자 (YYYYMMDD)"
-                },
-                "dbcrCnofClsCode": {
-                  "type": "string",
-                  "title": "대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)"
-                },
-                "dbcrClsCode": {
-                  "type": "string",
-                  "title": "대차구분코드 (1=대여, 2=차입, 빈값=전체)"
-                },
-                "symbol": {
-                  "type": "string",
-                  "title": "종목코드 (빈값=전체)"
-                }
-              },
-              "title": "SyncLoanDeliveries 요청",
-              "required": [
-                "date"
-              ]
-            }
-          }
-        ],
-        "tags": [
-          "InventoryService"
-        ]
-      }
     }
   },
   "definitions": {
+    "inventoryBatchProcessLoanDeliveriesResponse": {
+      "type": "object",
+      "properties": {
+        "processedCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "처리 건수"
+        }
+      },
+      "title": "BatchProcessLoanDeliveries 응답"
+    },
     "inventoryDerivData": {
       "type": "object",
       "properties": {
@@ -937,6 +1000,19 @@
       },
       "title": "ListLedgerInventories 응답"
     },
+    "inventoryListLoanDeliveriesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inventoryLoanDeliveryItem"
+          },
+          "title": "미처리 대차 인도내역 목록"
+        }
+      },
+      "title": "ListLoanDeliveries 응답"
+    },
     "inventoryLoanDeliveryItem": {
       "type": "object",
       "properties": {
@@ -1191,24 +1267,6 @@
         }
       },
       "title": "SyncInventoryFromLedger 응답"
-    },
-    "inventorySyncLoanDeliveriesResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/inventoryLoanDeliveryItem"
-          },
-          "title": "처리된 대차 인도내역 목록"
-        },
-        "processedCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "처리 건수"
-        }
-      },
-      "title": "SyncLoanDeliveries 응답"
     },
     "inventoryTransferLoanResponse": {
       "type": "object",

@@ -1976,9 +1976,9 @@ class TransferLoanResponse extends $pb.GeneratedMessage {
   static TransferLoanResponse? _defaultInstance;
 }
 
-/// SyncLoanDeliveries 요청
-class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
-  factory SyncLoanDeliveriesRequest({
+/// ListLoanDeliveries 요청 (조회 전용)
+class ListLoanDeliveriesRequest extends $pb.GeneratedMessage {
+  factory ListLoanDeliveriesRequest({
     $core.String? fund,
     $core.String? date,
     $core.String? dbcrCnofClsCode,
@@ -1994,36 +1994,36 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  SyncLoanDeliveriesRequest._();
+  ListLoanDeliveriesRequest._();
 
-  factory SyncLoanDeliveriesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SyncLoanDeliveriesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListLoanDeliveriesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListLoanDeliveriesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncLoanDeliveriesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLoanDeliveriesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'date')
     ..aOS(3, _omitFieldNames ? '' : 'dbcrCnofClsCode')
     ..aOS(4, _omitFieldNames ? '' : 'dbcrClsCode')
-    ..aOS(6, _omitFieldNames ? '' : 'symbol')
+    ..aOS(5, _omitFieldNames ? '' : 'symbol')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SyncLoanDeliveriesRequest clone() => SyncLoanDeliveriesRequest()..mergeFromMessage(this);
+  ListLoanDeliveriesRequest clone() => ListLoanDeliveriesRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SyncLoanDeliveriesRequest copyWith(void Function(SyncLoanDeliveriesRequest) updates) => super.copyWith((message) => updates(message as SyncLoanDeliveriesRequest)) as SyncLoanDeliveriesRequest;
+  ListLoanDeliveriesRequest copyWith(void Function(ListLoanDeliveriesRequest) updates) => super.copyWith((message) => updates(message as ListLoanDeliveriesRequest)) as ListLoanDeliveriesRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SyncLoanDeliveriesRequest create() => SyncLoanDeliveriesRequest._();
+  static ListLoanDeliveriesRequest create() => ListLoanDeliveriesRequest._();
   @$core.override
-  SyncLoanDeliveriesRequest createEmptyInstance() => create();
-  static $pb.PbList<SyncLoanDeliveriesRequest> createRepeated() => $pb.PbList<SyncLoanDeliveriesRequest>();
+  ListLoanDeliveriesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListLoanDeliveriesRequest> createRepeated() => $pb.PbList<ListLoanDeliveriesRequest>();
   @$core.pragma('dart2js:noInline')
-  static SyncLoanDeliveriesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SyncLoanDeliveriesRequest>(create);
-  static SyncLoanDeliveriesRequest? _defaultInstance;
+  static ListLoanDeliveriesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLoanDeliveriesRequest>(create);
+  static ListLoanDeliveriesRequest? _defaultInstance;
 
   /// 펀드 리소스명
   @$pb.TagNumber(1)
@@ -2066,69 +2066,159 @@ class SyncLoanDeliveriesRequest extends $pb.GeneratedMessage {
   void clearDbcrClsCode() => $_clearField(4);
 
   /// 종목코드 (빈값=전체)
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(5)
   $core.String get symbol => $_getSZ(4);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(5)
   set symbol($core.String value) => $_setString(4, value);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(5)
   $core.bool hasSymbol() => $_has(4);
-  @$pb.TagNumber(6)
-  void clearSymbol() => $_clearField(6);
+  @$pb.TagNumber(5)
+  void clearSymbol() => $_clearField(5);
 }
 
-/// SyncLoanDeliveries 응답
-class SyncLoanDeliveriesResponse extends $pb.GeneratedMessage {
-  factory SyncLoanDeliveriesResponse({
+/// ListLoanDeliveries 응답
+class ListLoanDeliveriesResponse extends $pb.GeneratedMessage {
+  factory ListLoanDeliveriesResponse({
     $core.Iterable<LoanDeliveryItem>? items,
-    $core.int? processedCount,
   }) {
     final result = create();
     if (items != null) result.items.addAll(items);
-    if (processedCount != null) result.processedCount = processedCount;
     return result;
   }
 
-  SyncLoanDeliveriesResponse._();
+  ListLoanDeliveriesResponse._();
 
-  factory SyncLoanDeliveriesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SyncLoanDeliveriesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListLoanDeliveriesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListLoanDeliveriesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncLoanDeliveriesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLoanDeliveriesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
     ..pc<LoanDeliveryItem>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: LoanDeliveryItem.create)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'processedCount', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SyncLoanDeliveriesResponse clone() => SyncLoanDeliveriesResponse()..mergeFromMessage(this);
+  ListLoanDeliveriesResponse clone() => ListLoanDeliveriesResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SyncLoanDeliveriesResponse copyWith(void Function(SyncLoanDeliveriesResponse) updates) => super.copyWith((message) => updates(message as SyncLoanDeliveriesResponse)) as SyncLoanDeliveriesResponse;
+  ListLoanDeliveriesResponse copyWith(void Function(ListLoanDeliveriesResponse) updates) => super.copyWith((message) => updates(message as ListLoanDeliveriesResponse)) as ListLoanDeliveriesResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SyncLoanDeliveriesResponse create() => SyncLoanDeliveriesResponse._();
+  static ListLoanDeliveriesResponse create() => ListLoanDeliveriesResponse._();
   @$core.override
-  SyncLoanDeliveriesResponse createEmptyInstance() => create();
-  static $pb.PbList<SyncLoanDeliveriesResponse> createRepeated() => $pb.PbList<SyncLoanDeliveriesResponse>();
+  ListLoanDeliveriesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListLoanDeliveriesResponse> createRepeated() => $pb.PbList<ListLoanDeliveriesResponse>();
   @$core.pragma('dart2js:noInline')
-  static SyncLoanDeliveriesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SyncLoanDeliveriesResponse>(create);
-  static SyncLoanDeliveriesResponse? _defaultInstance;
+  static ListLoanDeliveriesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLoanDeliveriesResponse>(create);
+  static ListLoanDeliveriesResponse? _defaultInstance;
 
-  /// 처리된 대차 인도내역 목록
+  /// 미처리 대차 인도내역 목록
   @$pb.TagNumber(1)
   $pb.PbList<LoanDeliveryItem> get items => $_getList(0);
+}
+
+/// BatchProcessLoanDeliveries 요청 (원장 반영)
+class BatchProcessLoanDeliveriesRequest extends $pb.GeneratedMessage {
+  factory BatchProcessLoanDeliveriesRequest({
+    $core.String? fund,
+    $core.Iterable<LoanDeliveryItem>? items,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (items != null) result.items.addAll(items);
+    return result;
+  }
+
+  BatchProcessLoanDeliveriesRequest._();
+
+  factory BatchProcessLoanDeliveriesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BatchProcessLoanDeliveriesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BatchProcessLoanDeliveriesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..pc<LoanDeliveryItem>(2, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: LoanDeliveryItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BatchProcessLoanDeliveriesRequest clone() => BatchProcessLoanDeliveriesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BatchProcessLoanDeliveriesRequest copyWith(void Function(BatchProcessLoanDeliveriesRequest) updates) => super.copyWith((message) => updates(message as BatchProcessLoanDeliveriesRequest)) as BatchProcessLoanDeliveriesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BatchProcessLoanDeliveriesRequest create() => BatchProcessLoanDeliveriesRequest._();
+  @$core.override
+  BatchProcessLoanDeliveriesRequest createEmptyInstance() => create();
+  static $pb.PbList<BatchProcessLoanDeliveriesRequest> createRepeated() => $pb.PbList<BatchProcessLoanDeliveriesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static BatchProcessLoanDeliveriesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BatchProcessLoanDeliveriesRequest>(create);
+  static BatchProcessLoanDeliveriesRequest? _defaultInstance;
+
+  /// 펀드 리소스명
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 원장 반영할 대차 인도내역 항목들
+  @$pb.TagNumber(2)
+  $pb.PbList<LoanDeliveryItem> get items => $_getList(1);
+}
+
+/// BatchProcessLoanDeliveries 응답
+class BatchProcessLoanDeliveriesResponse extends $pb.GeneratedMessage {
+  factory BatchProcessLoanDeliveriesResponse({
+    $core.int? processedCount,
+  }) {
+    final result = create();
+    if (processedCount != null) result.processedCount = processedCount;
+    return result;
+  }
+
+  BatchProcessLoanDeliveriesResponse._();
+
+  factory BatchProcessLoanDeliveriesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BatchProcessLoanDeliveriesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BatchProcessLoanDeliveriesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'processedCount', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BatchProcessLoanDeliveriesResponse clone() => BatchProcessLoanDeliveriesResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BatchProcessLoanDeliveriesResponse copyWith(void Function(BatchProcessLoanDeliveriesResponse) updates) => super.copyWith((message) => updates(message as BatchProcessLoanDeliveriesResponse)) as BatchProcessLoanDeliveriesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BatchProcessLoanDeliveriesResponse create() => BatchProcessLoanDeliveriesResponse._();
+  @$core.override
+  BatchProcessLoanDeliveriesResponse createEmptyInstance() => create();
+  static $pb.PbList<BatchProcessLoanDeliveriesResponse> createRepeated() => $pb.PbList<BatchProcessLoanDeliveriesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static BatchProcessLoanDeliveriesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BatchProcessLoanDeliveriesResponse>(create);
+  static BatchProcessLoanDeliveriesResponse? _defaultInstance;
 
   /// 처리 건수
-  @$pb.TagNumber(2)
-  $core.int get processedCount => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set processedCount($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasProcessedCount() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearProcessedCount() => $_clearField(2);
+  @$pb.TagNumber(1)
+  $core.int get processedCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set processedCount($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasProcessedCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProcessedCount() => $_clearField(1);
 }
 
 /// 대차체결인도내역 항목 (obfnp_loan_021r)
