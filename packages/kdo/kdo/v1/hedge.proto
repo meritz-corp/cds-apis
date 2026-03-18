@@ -117,6 +117,9 @@ enum ExecPriceType {
 
   // 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱
   EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK = 3;
+
+  // 호가 가격: 지정된 호가 가격으로 주문
+  EXEC_PRICE_TYPE_QUOTED_PRICE = 4;
 }
 
 // ========== Resource Messages ==========

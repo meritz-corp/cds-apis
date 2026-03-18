@@ -26,15 +26,18 @@ class ExecPriceType extends $pb.ProtobufEnum {
   static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST = ExecPriceType._(2, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST');
   /// 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱
   static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK = ExecPriceType._(3, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK');
+  /// 호가 가격: 지정된 호가 가격으로 주문
+  static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE = ExecPriceType._(4, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE');
 
   static const $core.List<ExecPriceType> values = <ExecPriceType> [
     EXEC_PRICE_TYPE_UNSPECIFIED,
     EXEC_PRICE_TYPE_IMMEDIATE_FILL,
     EXEC_PRICE_TYPE_COUNTER_BEST,
     EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK,
+    EXEC_PRICE_TYPE_QUOTED_PRICE,
   ];
 
-  static final $core.List<ExecPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static final $core.List<ExecPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
   static ExecPriceType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const ExecPriceType._(super.value, super.name);

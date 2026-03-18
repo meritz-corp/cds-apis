@@ -647,6 +647,7 @@ impl serde::Serialize for ExecPriceType {
             Self::ImmediateFill => "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
             Self::CounterBest => "EXEC_PRICE_TYPE_COUNTER_BEST",
             Self::CounterBestPlusTick => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
+            Self::QuotedPrice => "EXEC_PRICE_TYPE_QUOTED_PRICE",
         };
         serializer.serialize_str(variant)
     }
@@ -662,6 +663,7 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
             "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
             "EXEC_PRICE_TYPE_COUNTER_BEST",
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
+            "EXEC_PRICE_TYPE_QUOTED_PRICE",
         ];
 
         struct GeneratedVisitor;
@@ -706,6 +708,7 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
                     "EXEC_PRICE_TYPE_IMMEDIATE_FILL" => Ok(ExecPriceType::ImmediateFill),
                     "EXEC_PRICE_TYPE_COUNTER_BEST" => Ok(ExecPriceType::CounterBest),
                     "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK" => Ok(ExecPriceType::CounterBestPlusTick),
+                    "EXEC_PRICE_TYPE_QUOTED_PRICE" => Ok(ExecPriceType::QuotedPrice),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

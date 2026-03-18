@@ -549,10 +549,11 @@
         "EXEC_PRICE_TYPE_UNSPECIFIED",
         "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
         "EXEC_PRICE_TYPE_COUNTER_BEST",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK"
+        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
+        "EXEC_PRICE_TYPE_QUOTED_PRICE"
       ],
       "default": "EXEC_PRICE_TYPE_UNSPECIFIED",
-      "description": "헷지 주문 체결 가격 유형\n거래소의 구체적인 호가 유형(QuoteType)과 달리,\n헷지 주문의 전략적 의도를 표현합니다.\n\n - EXEC_PRICE_TYPE_UNSPECIFIED: 미지정\n - EXEC_PRICE_TYPE_IMMEDIATE_FILL: 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도\n - EXEC_PRICE_TYPE_COUNTER_BEST: 상대호가: 상대방 최우선호가 가격으로 지정가 주문\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK: 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱"
+      "description": "헷지 주문 체결 가격 유형\n거래소의 구체적인 호가 유형(QuoteType)과 달리,\n헷지 주문의 전략적 의도를 표현합니다.\n\n - EXEC_PRICE_TYPE_UNSPECIFIED: 미지정\n - EXEC_PRICE_TYPE_IMMEDIATE_FILL: 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도\n - EXEC_PRICE_TYPE_COUNTER_BEST: 상대호가: 상대방 최우선호가 가격으로 지정가 주문\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK: 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱\n - EXEC_PRICE_TYPE_QUOTED_PRICE: 호가 가격: 지정된 호가 가격으로 주문"
     },
     "hedgeFutureHedge": {
       "type": "object",
