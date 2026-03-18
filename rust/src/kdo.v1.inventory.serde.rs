@@ -4342,9 +4342,6 @@ impl serde::Serialize for LoanTransactionType {
             Self::Unspecified => "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
             Self::Repay => "LOAN_TRANSACTION_TYPE_REPAY",
             Self::Lend => "LOAN_TRANSACTION_TYPE_LEND",
-            Self::Other => "LOAN_TRANSACTION_TYPE_OTHER",
-            Self::FundRepay => "LOAN_TRANSACTION_TYPE_FUND_REPAY",
-            Self::FundLend => "LOAN_TRANSACTION_TYPE_FUND_LEND",
         };
         serializer.serialize_str(variant)
     }
@@ -4359,9 +4356,6 @@ impl<'de> serde::Deserialize<'de> for LoanTransactionType {
             "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
             "LOAN_TRANSACTION_TYPE_REPAY",
             "LOAN_TRANSACTION_TYPE_LEND",
-            "LOAN_TRANSACTION_TYPE_OTHER",
-            "LOAN_TRANSACTION_TYPE_FUND_REPAY",
-            "LOAN_TRANSACTION_TYPE_FUND_LEND",
         ];
 
         struct GeneratedVisitor;
@@ -4405,9 +4399,6 @@ impl<'de> serde::Deserialize<'de> for LoanTransactionType {
                     "LOAN_TRANSACTION_TYPE_UNSPECIFIED" => Ok(LoanTransactionType::Unspecified),
                     "LOAN_TRANSACTION_TYPE_REPAY" => Ok(LoanTransactionType::Repay),
                     "LOAN_TRANSACTION_TYPE_LEND" => Ok(LoanTransactionType::Lend),
-                    "LOAN_TRANSACTION_TYPE_OTHER" => Ok(LoanTransactionType::Other),
-                    "LOAN_TRANSACTION_TYPE_FUND_REPAY" => Ok(LoanTransactionType::FundRepay),
-                    "LOAN_TRANSACTION_TYPE_FUND_LEND" => Ok(LoanTransactionType::FundLend),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

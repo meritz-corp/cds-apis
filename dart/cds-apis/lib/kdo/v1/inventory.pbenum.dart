@@ -72,26 +72,19 @@ class DbcrClsCode extends $pb.ProtobufEnum {
 }
 
 /// 처리구분 (PROS_CLS_CODE)
-/// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타
-/// 펀드간이전 확장: 4=펀드간상환, 5=펀드간대여
+/// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여
 class LoanTransactionType extends $pb.ProtobufEnum {
   static const LoanTransactionType LOAN_TRANSACTION_TYPE_UNSPECIFIED = LoanTransactionType._(0, _omitEnumNames ? '' : 'LOAN_TRANSACTION_TYPE_UNSPECIFIED');
   static const LoanTransactionType LOAN_TRANSACTION_TYPE_REPAY = LoanTransactionType._(1, _omitEnumNames ? '' : 'LOAN_TRANSACTION_TYPE_REPAY');
   static const LoanTransactionType LOAN_TRANSACTION_TYPE_LEND = LoanTransactionType._(2, _omitEnumNames ? '' : 'LOAN_TRANSACTION_TYPE_LEND');
-  static const LoanTransactionType LOAN_TRANSACTION_TYPE_OTHER = LoanTransactionType._(3, _omitEnumNames ? '' : 'LOAN_TRANSACTION_TYPE_OTHER');
-  static const LoanTransactionType LOAN_TRANSACTION_TYPE_FUND_REPAY = LoanTransactionType._(4, _omitEnumNames ? '' : 'LOAN_TRANSACTION_TYPE_FUND_REPAY');
-  static const LoanTransactionType LOAN_TRANSACTION_TYPE_FUND_LEND = LoanTransactionType._(5, _omitEnumNames ? '' : 'LOAN_TRANSACTION_TYPE_FUND_LEND');
 
   static const $core.List<LoanTransactionType> values = <LoanTransactionType> [
     LOAN_TRANSACTION_TYPE_UNSPECIFIED,
     LOAN_TRANSACTION_TYPE_REPAY,
     LOAN_TRANSACTION_TYPE_LEND,
-    LOAN_TRANSACTION_TYPE_OTHER,
-    LOAN_TRANSACTION_TYPE_FUND_REPAY,
-    LOAN_TRANSACTION_TYPE_FUND_LEND,
   ];
 
-  static final $core.List<LoanTransactionType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static final $core.List<LoanTransactionType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
   static LoanTransactionType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const LoanTransactionType._(super.value, super.name);

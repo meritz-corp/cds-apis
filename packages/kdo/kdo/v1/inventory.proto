@@ -147,15 +147,13 @@ enum DbcrClsCode {
 }
 
 // 처리구분 (PROS_CLS_CODE)
-// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타
-// 펀드간이전 확장: 4=펀드간상환, 5=펀드간대여
+// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여
 enum LoanTransactionType {
   LOAN_TRANSACTION_TYPE_UNSPECIFIED = 0;
-  LOAN_TRANSACTION_TYPE_REPAY = 1;        // 상환 (1=상환)
-  LOAN_TRANSACTION_TYPE_LEND = 2;         // 대여 (2=대여)
-  LOAN_TRANSACTION_TYPE_OTHER = 3;        // 기타 (3=기타)
-  LOAN_TRANSACTION_TYPE_FUND_REPAY = 4;   // 펀드간상환
-  LOAN_TRANSACTION_TYPE_FUND_LEND = 5;    // 펀드간대여
+  LOAN_TRANSACTION_TYPE_REPAY = 1;  // 상환
+  LOAN_TRANSACTION_TYPE_LEND = 2;   // 대여
+  reserved 3, 4, 5;                 // OTHER, FUND_REPAY, FUND_LEND (제거됨)
+  reserved "LOAN_TRANSACTION_TYPE_OTHER", "LOAN_TRANSACTION_TYPE_FUND_REPAY", "LOAN_TRANSACTION_TYPE_FUND_LEND";
 }
 
 // 재고 유형

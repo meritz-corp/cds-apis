@@ -1402,14 +1402,11 @@
       "enum": [
         "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
         "LOAN_TRANSACTION_TYPE_REPAY",
-        "LOAN_TRANSACTION_TYPE_LEND",
-        "LOAN_TRANSACTION_TYPE_OTHER",
-        "LOAN_TRANSACTION_TYPE_FUND_REPAY",
-        "LOAN_TRANSACTION_TYPE_FUND_LEND"
+        "LOAN_TRANSACTION_TYPE_LEND"
       ],
       "default": "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
-      "description": "- LOAN_TRANSACTION_TYPE_REPAY: 상환 (1=상환)\n - LOAN_TRANSACTION_TYPE_LEND: 대여 (2=대여)\n - LOAN_TRANSACTION_TYPE_OTHER: 기타 (3=기타)\n - LOAN_TRANSACTION_TYPE_FUND_REPAY: 펀드간상환\n - LOAN_TRANSACTION_TYPE_FUND_LEND: 펀드간대여",
-      "title": "처리구분 (PROS_CLS_CODE)\n042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타\n펀드간이전 확장: 4=펀드간상환, 5=펀드간대여"
+      "description": "- LOAN_TRANSACTION_TYPE_REPAY: 상환\n - LOAN_TRANSACTION_TYPE_LEND: 대여",
+      "title": "처리구분 (PROS_CLS_CODE)\n042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여"
     },
     "inventoryProductPositionType": {
       "type": "string",

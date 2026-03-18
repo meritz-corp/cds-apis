@@ -68,19 +68,22 @@ const LoanTransactionType$json = {
     {'1': 'LOAN_TRANSACTION_TYPE_UNSPECIFIED', '2': 0},
     {'1': 'LOAN_TRANSACTION_TYPE_REPAY', '2': 1},
     {'1': 'LOAN_TRANSACTION_TYPE_LEND', '2': 2},
-    {'1': 'LOAN_TRANSACTION_TYPE_OTHER', '2': 3},
-    {'1': 'LOAN_TRANSACTION_TYPE_FUND_REPAY', '2': 4},
-    {'1': 'LOAN_TRANSACTION_TYPE_FUND_LEND', '2': 5},
   ],
+  '4': [
+    {'1': 3, '2': 3},
+    {'1': 4, '2': 4},
+    {'1': 5, '2': 5},
+  ],
+  '5': ['LOAN_TRANSACTION_TYPE_OTHER', 'LOAN_TRANSACTION_TYPE_FUND_REPAY', 'LOAN_TRANSACTION_TYPE_FUND_LEND'],
 };
 
 /// Descriptor for `LoanTransactionType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List loanTransactionTypeDescriptor = $convert.base64Decode(
     'ChNMb2FuVHJhbnNhY3Rpb25UeXBlEiUKIUxPQU5fVFJBTlNBQ1RJT05fVFlQRV9VTlNQRUNJRk'
     'lFRBAAEh8KG0xPQU5fVFJBTlNBQ1RJT05fVFlQRV9SRVBBWRABEh4KGkxPQU5fVFJBTlNBQ1RJ'
-    'T05fVFlQRV9MRU5EEAISHwobTE9BTl9UUkFOU0FDVElPTl9UWVBFX09USEVSEAMSJAogTE9BTl'
-    '9UUkFOU0FDVElPTl9UWVBFX0ZVTkRfUkVQQVkQBBIjCh9MT0FOX1RSQU5TQUNUSU9OX1RZUEVf'
-    'RlVORF9MRU5EEAU=');
+    'T05fVFlQRV9MRU5EEAIiBAgDEAMiBAgEEAQiBAgFEAUqG0xPQU5fVFJBTlNBQ1RJT05fVFlQRV'
+    '9PVEhFUiogTE9BTl9UUkFOU0FDVElPTl9UWVBFX0ZVTkRfUkVQQVkqH0xPQU5fVFJBTlNBQ1RJ'
+    'T05fVFlQRV9GVU5EX0xFTkQ=');
 
 @$core.Deprecated('Use inventoryTypeDescriptor instead')
 const InventoryType$json = {

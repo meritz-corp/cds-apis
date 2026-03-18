@@ -823,22 +823,15 @@ impl DbcrClsCode {
     }
 }
 /// 처리구분 (PROS_CLS_CODE)
-/// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타
-/// 펀드간이전 확장: 4=펀드간상환, 5=펀드간대여
+/// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LoanTransactionType {
     Unspecified = 0,
-    /// 상환 (1=상환)
+    /// 상환
     Repay = 1,
-    /// 대여 (2=대여)
+    /// 대여
     Lend = 2,
-    /// 기타 (3=기타)
-    Other = 3,
-    /// 펀드간상환
-    FundRepay = 4,
-    /// 펀드간대여
-    FundLend = 5,
 }
 impl LoanTransactionType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -850,9 +843,6 @@ impl LoanTransactionType {
             LoanTransactionType::Unspecified => "LOAN_TRANSACTION_TYPE_UNSPECIFIED",
             LoanTransactionType::Repay => "LOAN_TRANSACTION_TYPE_REPAY",
             LoanTransactionType::Lend => "LOAN_TRANSACTION_TYPE_LEND",
-            LoanTransactionType::Other => "LOAN_TRANSACTION_TYPE_OTHER",
-            LoanTransactionType::FundRepay => "LOAN_TRANSACTION_TYPE_FUND_REPAY",
-            LoanTransactionType::FundLend => "LOAN_TRANSACTION_TYPE_FUND_LEND",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -861,9 +851,6 @@ impl LoanTransactionType {
             "LOAN_TRANSACTION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "LOAN_TRANSACTION_TYPE_REPAY" => Some(Self::Repay),
             "LOAN_TRANSACTION_TYPE_LEND" => Some(Self::Lend),
-            "LOAN_TRANSACTION_TYPE_OTHER" => Some(Self::Other),
-            "LOAN_TRANSACTION_TYPE_FUND_REPAY" => Some(Self::FundRepay),
-            "LOAN_TRANSACTION_TYPE_FUND_LEND" => Some(Self::FundLend),
             _ => None,
         }
     }
