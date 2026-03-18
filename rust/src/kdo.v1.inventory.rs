@@ -430,9 +430,6 @@ pub struct TransferLoanRequest {
     /// 이전 수량
     #[prost(int64, tag="4")]
     pub quantity: i64,
-    /// 이전 구분 (true=차입이전, false=대여이전)
-    #[prost(bool, tag="5")]
-    pub borrow: bool,
     /// 상품포지션구분 (PROD_PSTN_CLS_CODE)
     /// 042c/052a InBlock2: 상품유가증권 또는 매도유가증권
     #[prost(enumeration="ProductPositionType", tag="8")]

@@ -436,15 +436,15 @@ const TransferLoanRequest$json = {
     {'1': 'to_fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'toFund'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
-    {'1': 'borrow', '3': 5, '4': 1, '5': 8, '8': {}, '10': 'borrow'},
     {'1': 'product_position_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.inventory.ProductPositionType', '8': {}, '10': 'productPositionType'},
     {'1': 'loan_transaction_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.inventory.LoanTransactionType', '8': {}, '10': 'loanTransactionType'},
   ],
   '9': [
+    {'1': 5, '2': 6},
     {'1': 6, '2': 7},
     {'1': 7, '2': 8},
   ],
-  '10': ['cntg_date', 'cntg_no'],
+  '10': ['borrow', 'cntg_date', 'cntg_no'],
 };
 
 /// Descriptor for `TransferLoanRequest`. Decode as a `google.protobuf.DescriptorProto`.
@@ -452,12 +452,11 @@ final $typed_data.Uint8List transferLoanRequestDescriptor = $convert.base64Decod
     'ChNUcmFuc2ZlckxvYW5SZXF1ZXN0EjoKCWZyb21fZnVuZBgBIAEoCUId4kEBAvpBFgoUa2RvLm'
     'Nkc2FwaXMueHl6L0Z1bmRSCGZyb21GdW5kEjYKB3RvX2Z1bmQYAiABKAlCHeJBAQL6QRYKFGtk'
     'by5jZHNhcGlzLnh5ei9GdW5kUgZ0b0Z1bmQSHAoGc3ltYm9sGAMgASgJQgTiQQECUgZzeW1ib2'
-    'wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aXR5EhwKBmJvcnJvdxgFIAEoCEIE4kEB'
-    'AlIGYm9ycm93El8KFXByb2R1Y3RfcG9zaXRpb25fdHlwZRgIIAEoDjIlLmtkby52MS5pbnZlbn'
-    'RvcnkuUHJvZHVjdFBvc2l0aW9uVHlwZUIE4kEBAVITcHJvZHVjdFBvc2l0aW9uVHlwZRJfChVs'
-    'b2FuX3RyYW5zYWN0aW9uX3R5cGUYCSABKA4yJS5rZG8udjEuaW52ZW50b3J5LkxvYW5UcmFuc2'
-    'FjdGlvblR5cGVCBOJBAQFSE2xvYW5UcmFuc2FjdGlvblR5cGVKBAgGEAdKBAgHEAhSCWNudGdf'
-    'ZGF0ZVIHY250Z19ubw==');
+    'wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aXR5El8KFXByb2R1Y3RfcG9zaXRpb25f'
+    'dHlwZRgIIAEoDjIlLmtkby52MS5pbnZlbnRvcnkuUHJvZHVjdFBvc2l0aW9uVHlwZUIE4kEBAV'
+    'ITcHJvZHVjdFBvc2l0aW9uVHlwZRJfChVsb2FuX3RyYW5zYWN0aW9uX3R5cGUYCSABKA4yJS5r'
+    'ZG8udjEuaW52ZW50b3J5LkxvYW5UcmFuc2FjdGlvblR5cGVCBOJBAQFSE2xvYW5UcmFuc2FjdG'
+    'lvblR5cGVKBAgFEAZKBAgGEAdKBAgHEAhSBmJvcnJvd1IJY250Z19kYXRlUgdjbnRnX25v');
 
 @$core.Deprecated('Use transferLoanResponseDescriptor instead')
 const TransferLoanResponse$json = {

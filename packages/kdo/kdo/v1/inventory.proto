@@ -92,7 +92,7 @@ service InventoryService {
       post: "/v1/inventories/{from_fund=funds/*}:transferLoan"
       body: "*"
     };
-    option (google.api.method_signature) = "from_fund,to_fund,symbol,quantity,borrow";
+    option (google.api.method_signature) = "from_fund,to_fund,symbol,quantity";
   }
 
   // 대차 인도내역 조회 (미처리 건 목록)
@@ -540,13 +540,11 @@ message TransferLoanRequest {
   // 이전 수량
   int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
 
-  // 이전 구분 (true=차입이전, false=대여이전)
-  bool borrow = 5 [(google.api.field_behavior) = REQUIRED];
-
+  // 필드 번호 5는 삭제된 borrow 예약 (loan_transaction_type으로 대체)
   // 필드 번호 6, 7은 삭제된 cntg_date, cntg_no 예약
   // (서버에서 012r TR로 자동 조회하여 매칭하도록 변경)
-  reserved 6, 7;
-  reserved "cntg_date", "cntg_no";
+  reserved 5, 6, 7;
+  reserved "borrow", "cntg_date", "cntg_no";
 
   // 상품포지션구분 (PROD_PSTN_CLS_CODE)
   // 042c/052a InBlock2: 상품유가증권 또는 매도유가증권

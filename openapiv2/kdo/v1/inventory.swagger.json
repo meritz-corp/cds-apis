@@ -63,10 +63,6 @@
                   "format": "int64",
                   "title": "이전 수량"
                 },
-                "borrow": {
-                  "type": "boolean",
-                  "title": "이전 구분 (true=차입이전, false=대여이전)"
-                },
                 "productPositionType": {
                   "$ref": "#/definitions/inventoryProductPositionType",
                   "title": "상품포지션구분 (PROD_PSTN_CLS_CODE)\n042c/052a InBlock2: 상품유가증권 또는 매도유가증권"
@@ -80,8 +76,7 @@
               "required": [
                 "toFund",
                 "symbol",
-                "quantity",
-                "borrow"
+                "quantity"
               ]
             }
           }

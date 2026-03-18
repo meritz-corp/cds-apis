@@ -5310,9 +5310,6 @@ impl serde::Serialize for TransferLoanRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.TransferLoanRequest", len)?;
         if true {
             struct_ser.serialize_field("from_fund", &self.from_fund)?;
@@ -5327,9 +5324,6 @@ impl serde::Serialize for TransferLoanRequest {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("borrow", &self.borrow)?;
         }
         if true {
             let v = ProductPositionType::try_from(self.product_position_type)
@@ -5357,7 +5351,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
             "toFund",
             "symbol",
             "quantity",
-            "borrow",
             "product_position_type",
             "productPositionType",
             "loan_transaction_type",
@@ -5370,7 +5363,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
             ToFund,
             Symbol,
             Quantity,
-            Borrow,
             ProductPositionType,
             LoanTransactionType,
             __SkipField__,
@@ -5399,7 +5391,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                             "toFund" | "to_fund" => Ok(GeneratedField::ToFund),
                             "symbol" => Ok(GeneratedField::Symbol),
                             "quantity" => Ok(GeneratedField::Quantity),
-                            "borrow" => Ok(GeneratedField::Borrow),
                             "productPositionType" | "product_position_type" => Ok(GeneratedField::ProductPositionType),
                             "loanTransactionType" | "loan_transaction_type" => Ok(GeneratedField::LoanTransactionType),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -5425,7 +5416,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                 let mut to_fund__ = None;
                 let mut symbol__ = None;
                 let mut quantity__ = None;
-                let mut borrow__ = None;
                 let mut product_position_type__ = None;
                 let mut loan_transaction_type__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -5456,12 +5446,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Borrow => {
-                            if borrow__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("borrow"));
-                            }
-                            borrow__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::ProductPositionType => {
                             if product_position_type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("productPositionType"));
@@ -5484,7 +5468,6 @@ impl<'de> serde::Deserialize<'de> for TransferLoanRequest {
                     to_fund: to_fund__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
-                    borrow: borrow__.unwrap_or_default(),
                     product_position_type: product_position_type__.unwrap_or_default(),
                     loan_transaction_type: loan_transaction_type__.unwrap_or_default(),
                 })

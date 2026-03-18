@@ -1824,7 +1824,6 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
     $core.String? toFund,
     $core.String? symbol,
     $fixnum.Int64? quantity,
-    $core.bool? borrow,
     ProductPositionType? productPositionType,
     LoanTransactionType? loanTransactionType,
   }) {
@@ -1833,7 +1832,6 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
     if (toFund != null) result.toFund = toFund;
     if (symbol != null) result.symbol = symbol;
     if (quantity != null) result.quantity = quantity;
-    if (borrow != null) result.borrow = borrow;
     if (productPositionType != null) result.productPositionType = productPositionType;
     if (loanTransactionType != null) result.loanTransactionType = loanTransactionType;
     return result;
@@ -1849,7 +1847,6 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'toFund')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
-    ..aOB(5, _omitFieldNames ? '' : 'borrow')
     ..e<ProductPositionType>(8, _omitFieldNames ? '' : 'productPositionType', $pb.PbFieldType.OE, defaultOrMaker: ProductPositionType.PRODUCT_POSITION_TYPE_UNSPECIFIED, valueOf: ProductPositionType.valueOf, enumValues: ProductPositionType.values)
     ..e<LoanTransactionType>(9, _omitFieldNames ? '' : 'loanTransactionType', $pb.PbFieldType.OE, defaultOrMaker: LoanTransactionType.LOAN_TRANSACTION_TYPE_UNSPECIFIED, valueOf: LoanTransactionType.valueOf, enumValues: LoanTransactionType.values)
     ..hasRequiredFields = false
@@ -1912,35 +1909,25 @@ class TransferLoanRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearQuantity() => $_clearField(4);
 
-  /// 이전 구분 (true=차입이전, false=대여이전)
-  @$pb.TagNumber(5)
-  $core.bool get borrow => $_getBF(4);
-  @$pb.TagNumber(5)
-  set borrow($core.bool value) => $_setBool(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasBorrow() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearBorrow() => $_clearField(5);
-
   /// 상품포지션구분 (PROD_PSTN_CLS_CODE)
   /// 042c/052a InBlock2: 상품유가증권 또는 매도유가증권
   @$pb.TagNumber(8)
-  ProductPositionType get productPositionType => $_getN(5);
+  ProductPositionType get productPositionType => $_getN(4);
   @$pb.TagNumber(8)
   set productPositionType(ProductPositionType value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasProductPositionType() => $_has(5);
+  $core.bool hasProductPositionType() => $_has(4);
   @$pb.TagNumber(8)
   void clearProductPositionType() => $_clearField(8);
 
   /// 처리구분 (PROS_CLS_CODE)
   /// 042c InBlock1: 상환/대여/기타/펀드간상환/펀드간대여
   @$pb.TagNumber(9)
-  LoanTransactionType get loanTransactionType => $_getN(6);
+  LoanTransactionType get loanTransactionType => $_getN(5);
   @$pb.TagNumber(9)
   set loanTransactionType(LoanTransactionType value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasLoanTransactionType() => $_has(6);
+  $core.bool hasLoanTransactionType() => $_has(5);
   @$pb.TagNumber(9)
   void clearLoanTransactionType() => $_clearField(9);
 }
