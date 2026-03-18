@@ -209,6 +209,154 @@ impl<'de> serde::Deserialize<'de> for BatchProcessLoanDeliveriesResponse {
         deserializer.deserialize_struct("kdo.v1.inventory.BatchProcessLoanDeliveriesResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for DbcrClsCode {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "DBCR_CLS_CODE_UNSPECIFIED",
+            Self::Lend => "DBCR_CLS_CODE_LEND",
+            Self::Borrow => "DBCR_CLS_CODE_BORROW",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for DbcrClsCode {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "DBCR_CLS_CODE_UNSPECIFIED",
+            "DBCR_CLS_CODE_LEND",
+            "DBCR_CLS_CODE_BORROW",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DbcrClsCode;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "DBCR_CLS_CODE_UNSPECIFIED" => Ok(DbcrClsCode::Unspecified),
+                    "DBCR_CLS_CODE_LEND" => Ok(DbcrClsCode::Lend),
+                    "DBCR_CLS_CODE_BORROW" => Ok(DbcrClsCode::Borrow),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for DbcrCnofClsCode {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "DBCR_CNOF_CLS_CODE_UNSPECIFIED",
+            Self::Depository => "DBCR_CNOF_CLS_CODE_DEPOSITORY",
+            Self::SecuritiesFinance => "DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for DbcrCnofClsCode {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "DBCR_CNOF_CLS_CODE_UNSPECIFIED",
+            "DBCR_CNOF_CLS_CODE_DEPOSITORY",
+            "DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DbcrCnofClsCode;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "DBCR_CNOF_CLS_CODE_UNSPECIFIED" => Ok(DbcrCnofClsCode::Unspecified),
+                    "DBCR_CNOF_CLS_CODE_DEPOSITORY" => Ok(DbcrCnofClsCode::Depository),
+                    "DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE" => Ok(DbcrCnofClsCode::SecuritiesFinance),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for DerivData {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3218,10 +3366,14 @@ impl serde::Serialize for ListLoanDeliveriesRequest {
             struct_ser.serialize_field("date", &self.date)?;
         }
         if true {
-            struct_ser.serialize_field("dbcr_cnof_cls_code", &self.dbcr_cnof_cls_code)?;
+            let v = DbcrCnofClsCode::try_from(self.dbcr_cnof_cls_code)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.dbcr_cnof_cls_code)))?;
+            struct_ser.serialize_field("dbcr_cnof_cls_code", &v)?;
         }
         if true {
-            struct_ser.serialize_field("dbcr_cls_code", &self.dbcr_cls_code)?;
+            let v = DbcrClsCode::try_from(self.dbcr_cls_code)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.dbcr_cls_code)))?;
+            struct_ser.serialize_field("dbcr_cls_code", &v)?;
         }
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -3321,13 +3473,13 @@ impl<'de> serde::Deserialize<'de> for ListLoanDeliveriesRequest {
                             if dbcr_cnof_cls_code__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("dbcrCnofClsCode"));
                             }
-                            dbcr_cnof_cls_code__ = Some(map_.next_value()?);
+                            dbcr_cnof_cls_code__ = Some(map_.next_value::<DbcrCnofClsCode>()? as i32);
                         }
                         GeneratedField::DbcrClsCode => {
                             if dbcr_cls_code__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("dbcrClsCode"));
                             }
-                            dbcr_cls_code__ = Some(map_.next_value()?);
+                            dbcr_cls_code__ = Some(map_.next_value::<DbcrClsCode>()? as i32);
                         }
                         GeneratedField::Symbol => {
                             if symbol__.is_some() {

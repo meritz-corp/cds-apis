@@ -130,6 +130,22 @@ enum ProductPositionType {
   PRODUCT_POSITION_TYPE_SELL = 2;    // 매도유가증권 (2=매도)
 }
 
+// 대차상대처구분코드 (DBCR_CNOF_CLS_CODE)
+// obfnp_loan_021r 조회 필터: 1=예탁원, 2=증권금융, 빈값=전체
+enum DbcrCnofClsCode {
+  DBCR_CNOF_CLS_CODE_UNSPECIFIED = 0;       // 전체 조회
+  DBCR_CNOF_CLS_CODE_DEPOSITORY = 1;        // 예탁원
+  DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE = 2; // 증권금융
+}
+
+// 대차구분코드 (DBCR_CLS_CODE)
+// obfnp_loan_021r 조회 필터: 1=대여, 2=차입, 빈값=전체
+enum DbcrClsCode {
+  DBCR_CLS_CODE_UNSPECIFIED = 0; // 전체 조회
+  DBCR_CLS_CODE_LEND = 1;        // 대여
+  DBCR_CLS_CODE_BORROW = 2;      // 차입
+}
+
 // 처리구분 (PROS_CLS_CODE)
 // 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타
 // 펀드간이전 확장: 4=펀드간상환, 5=펀드간대여
@@ -571,11 +587,11 @@ message ListLoanDeliveriesRequest {
   // 조회 기준일자 (YYYYMMDD)
   string date = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // 대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)
-  string dbcr_cnof_cls_code = 3;
+  // 대차상대처구분코드 (UNSPECIFIED=전체, DEPOSITORY=예탁원, SECURITIES_FINANCE=증권금융)
+  DbcrCnofClsCode dbcr_cnof_cls_code = 3;
 
-  // 대차구분코드 (1=대여, 2=차입, 빈값=전체)
-  string dbcr_cls_code = 4;
+  // 대차구분코드 (UNSPECIFIED=전체, LEND=대여, BORROW=차입)
+  DbcrClsCode dbcr_cls_code = 4;
 
   // 종목코드 (빈값=전체)
   string symbol = 5;

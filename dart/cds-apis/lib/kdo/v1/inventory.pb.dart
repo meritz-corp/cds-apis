@@ -1968,8 +1968,8 @@ class ListLoanDeliveriesRequest extends $pb.GeneratedMessage {
   factory ListLoanDeliveriesRequest({
     $core.String? fund,
     $core.String? date,
-    $core.String? dbcrCnofClsCode,
-    $core.String? dbcrClsCode,
+    DbcrCnofClsCode? dbcrCnofClsCode,
+    DbcrClsCode? dbcrClsCode,
     $core.String? symbol,
   }) {
     final result = create();
@@ -1989,8 +1989,8 @@ class ListLoanDeliveriesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLoanDeliveriesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'date')
-    ..aOS(3, _omitFieldNames ? '' : 'dbcrCnofClsCode')
-    ..aOS(4, _omitFieldNames ? '' : 'dbcrClsCode')
+    ..e<DbcrCnofClsCode>(3, _omitFieldNames ? '' : 'dbcrCnofClsCode', $pb.PbFieldType.OE, defaultOrMaker: DbcrCnofClsCode.DBCR_CNOF_CLS_CODE_UNSPECIFIED, valueOf: DbcrCnofClsCode.valueOf, enumValues: DbcrCnofClsCode.values)
+    ..e<DbcrClsCode>(4, _omitFieldNames ? '' : 'dbcrClsCode', $pb.PbFieldType.OE, defaultOrMaker: DbcrClsCode.DBCR_CLS_CODE_UNSPECIFIED, valueOf: DbcrClsCode.valueOf, enumValues: DbcrClsCode.values)
     ..aOS(5, _omitFieldNames ? '' : 'symbol')
     ..hasRequiredFields = false
   ;
@@ -2032,21 +2032,21 @@ class ListLoanDeliveriesRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearDate() => $_clearField(2);
 
-  /// 대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)
+  /// 대차상대처구분코드 (UNSPECIFIED=전체, DEPOSITORY=예탁원, SECURITIES_FINANCE=증권금융)
   @$pb.TagNumber(3)
-  $core.String get dbcrCnofClsCode => $_getSZ(2);
+  DbcrCnofClsCode get dbcrCnofClsCode => $_getN(2);
   @$pb.TagNumber(3)
-  set dbcrCnofClsCode($core.String value) => $_setString(2, value);
+  set dbcrCnofClsCode(DbcrCnofClsCode value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasDbcrCnofClsCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearDbcrCnofClsCode() => $_clearField(3);
 
-  /// 대차구분코드 (1=대여, 2=차입, 빈값=전체)
+  /// 대차구분코드 (UNSPECIFIED=전체, LEND=대여, BORROW=차입)
   @$pb.TagNumber(4)
-  $core.String get dbcrClsCode => $_getSZ(3);
+  DbcrClsCode get dbcrClsCode => $_getN(3);
   @$pb.TagNumber(4)
-  set dbcrClsCode($core.String value) => $_setString(3, value);
+  set dbcrClsCode(DbcrClsCode value) => $_setField(4, value);
   @$pb.TagNumber(4)
   $core.bool hasDbcrClsCode() => $_has(3);
   @$pb.TagNumber(4)

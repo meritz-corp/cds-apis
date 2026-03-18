@@ -30,6 +30,37 @@ final $typed_data.Uint8List productPositionTypeDescriptor = $convert.base64Decod
     'lFRBAAEh8KG1BST0RVQ1RfUE9TSVRJT05fVFlQRV9TVE9DSxABEh4KGlBST0RVQ1RfUE9TSVRJ'
     'T05fVFlQRV9TRUxMEAI=');
 
+@$core.Deprecated('Use dbcrCnofClsCodeDescriptor instead')
+const DbcrCnofClsCode$json = {
+  '1': 'DbcrCnofClsCode',
+  '2': [
+    {'1': 'DBCR_CNOF_CLS_CODE_UNSPECIFIED', '2': 0},
+    {'1': 'DBCR_CNOF_CLS_CODE_DEPOSITORY', '2': 1},
+    {'1': 'DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE', '2': 2},
+  ],
+};
+
+/// Descriptor for `DbcrCnofClsCode`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List dbcrCnofClsCodeDescriptor = $convert.base64Decode(
+    'Cg9EYmNyQ25vZkNsc0NvZGUSIgoeREJDUl9DTk9GX0NMU19DT0RFX1VOU1BFQ0lGSUVEEAASIQ'
+    'odREJDUl9DTk9GX0NMU19DT0RFX0RFUE9TSVRPUlkQARIpCiVEQkNSX0NOT0ZfQ0xTX0NPREVf'
+    'U0VDVVJJVElFU19GSU5BTkNFEAI=');
+
+@$core.Deprecated('Use dbcrClsCodeDescriptor instead')
+const DbcrClsCode$json = {
+  '1': 'DbcrClsCode',
+  '2': [
+    {'1': 'DBCR_CLS_CODE_UNSPECIFIED', '2': 0},
+    {'1': 'DBCR_CLS_CODE_LEND', '2': 1},
+    {'1': 'DBCR_CLS_CODE_BORROW', '2': 2},
+  ],
+};
+
+/// Descriptor for `DbcrClsCode`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List dbcrClsCodeDescriptor = $convert.base64Decode(
+    'CgtEYmNyQ2xzQ29kZRIdChlEQkNSX0NMU19DT0RFX1VOU1BFQ0lGSUVEEAASFgoSREJDUl9DTF'
+    'NfQ09ERV9MRU5EEAESGAoUREJDUl9DTFNfQ09ERV9CT1JST1cQAg==');
+
 @$core.Deprecated('Use loanTransactionTypeDescriptor instead')
 const LoanTransactionType$json = {
   '1': 'LoanTransactionType',
@@ -473,8 +504,8 @@ const ListLoanDeliveriesRequest$json = {
   '2': [
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'date', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'date'},
-    {'1': 'dbcr_cnof_cls_code', '3': 3, '4': 1, '5': 9, '10': 'dbcrCnofClsCode'},
-    {'1': 'dbcr_cls_code', '3': 4, '4': 1, '5': 9, '10': 'dbcrClsCode'},
+    {'1': 'dbcr_cnof_cls_code', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.inventory.DbcrCnofClsCode', '10': 'dbcrCnofClsCode'},
+    {'1': 'dbcr_cls_code', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.inventory.DbcrClsCode', '10': 'dbcrClsCode'},
     {'1': 'symbol', '3': 5, '4': 1, '5': 9, '10': 'symbol'},
   ],
 };
@@ -482,9 +513,10 @@ const ListLoanDeliveriesRequest$json = {
 /// Descriptor for `ListLoanDeliveriesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listLoanDeliveriesRequestDescriptor = $convert.base64Decode(
     'ChlMaXN0TG9hbkRlbGl2ZXJpZXNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby'
-    '5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhgKBGRhdGUYAiABKAlCBOJBAQJSBGRhdGUSKwoSZGJj'
-    'cl9jbm9mX2Nsc19jb2RlGAMgASgJUg9kYmNyQ25vZkNsc0NvZGUSIgoNZGJjcl9jbHNfY29kZR'
-    'gEIAEoCVILZGJjckNsc0NvZGUSFgoGc3ltYm9sGAUgASgJUgZzeW1ib2w=');
+    '5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhgKBGRhdGUYAiABKAlCBOJBAQJSBGRhdGUSTgoSZGJj'
+    'cl9jbm9mX2Nsc19jb2RlGAMgASgOMiEua2RvLnYxLmludmVudG9yeS5EYmNyQ25vZkNsc0NvZG'
+    'VSD2RiY3JDbm9mQ2xzQ29kZRJBCg1kYmNyX2Nsc19jb2RlGAQgASgOMh0ua2RvLnYxLmludmVu'
+    'dG9yeS5EYmNyQ2xzQ29kZVILZGJjckNsc0NvZGUSFgoGc3ltYm9sGAUgASgJUgZzeW1ib2w=');
 
 @$core.Deprecated('Use listLoanDeliveriesResponseDescriptor instead')
 const ListLoanDeliveriesResponse$json = {

@@ -33,6 +33,44 @@ class ProductPositionType extends $pb.ProtobufEnum {
   const ProductPositionType._(super.value, super.name);
 }
 
+/// 대차상대처구분코드 (DBCR_CNOF_CLS_CODE)
+/// obfnp_loan_021r 조회 필터: 1=예탁원, 2=증권금융, 빈값=전체
+class DbcrCnofClsCode extends $pb.ProtobufEnum {
+  static const DbcrCnofClsCode DBCR_CNOF_CLS_CODE_UNSPECIFIED = DbcrCnofClsCode._(0, _omitEnumNames ? '' : 'DBCR_CNOF_CLS_CODE_UNSPECIFIED');
+  static const DbcrCnofClsCode DBCR_CNOF_CLS_CODE_DEPOSITORY = DbcrCnofClsCode._(1, _omitEnumNames ? '' : 'DBCR_CNOF_CLS_CODE_DEPOSITORY');
+  static const DbcrCnofClsCode DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE = DbcrCnofClsCode._(2, _omitEnumNames ? '' : 'DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE');
+
+  static const $core.List<DbcrCnofClsCode> values = <DbcrCnofClsCode> [
+    DBCR_CNOF_CLS_CODE_UNSPECIFIED,
+    DBCR_CNOF_CLS_CODE_DEPOSITORY,
+    DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE,
+  ];
+
+  static final $core.List<DbcrCnofClsCode?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static DbcrCnofClsCode? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const DbcrCnofClsCode._(super.value, super.name);
+}
+
+/// 대차구분코드 (DBCR_CLS_CODE)
+/// obfnp_loan_021r 조회 필터: 1=대여, 2=차입, 빈값=전체
+class DbcrClsCode extends $pb.ProtobufEnum {
+  static const DbcrClsCode DBCR_CLS_CODE_UNSPECIFIED = DbcrClsCode._(0, _omitEnumNames ? '' : 'DBCR_CLS_CODE_UNSPECIFIED');
+  static const DbcrClsCode DBCR_CLS_CODE_LEND = DbcrClsCode._(1, _omitEnumNames ? '' : 'DBCR_CLS_CODE_LEND');
+  static const DbcrClsCode DBCR_CLS_CODE_BORROW = DbcrClsCode._(2, _omitEnumNames ? '' : 'DBCR_CLS_CODE_BORROW');
+
+  static const $core.List<DbcrClsCode> values = <DbcrClsCode> [
+    DBCR_CLS_CODE_UNSPECIFIED,
+    DBCR_CLS_CODE_LEND,
+    DBCR_CLS_CODE_BORROW,
+  ];
+
+  static final $core.List<DbcrClsCode?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static DbcrClsCode? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const DbcrClsCode._(super.value, super.name);
+}
+
 /// 처리구분 (PROS_CLS_CODE)
 /// 042c InBlock1.PROS_CLS_CODE: 1=상환, 2=대여, 3=기타
 /// 펀드간이전 확장: 4=펀드간상환, 5=펀드간대여

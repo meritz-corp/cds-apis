@@ -237,17 +237,29 @@
           },
           {
             "name": "dbcrCnofClsCode",
-            "description": "대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)",
+            "description": "대차상대처구분코드 (UNSPECIFIED=전체, DEPOSITORY=예탁원, SECURITIES_FINANCE=증권금융)\n\n - DBCR_CNOF_CLS_CODE_UNSPECIFIED: 전체 조회\n - DBCR_CNOF_CLS_CODE_DEPOSITORY: 예탁원\n - DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE: 증권금융",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "DBCR_CNOF_CLS_CODE_UNSPECIFIED",
+              "DBCR_CNOF_CLS_CODE_DEPOSITORY",
+              "DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE"
+            ],
+            "default": "DBCR_CNOF_CLS_CODE_UNSPECIFIED"
           },
           {
             "name": "dbcrClsCode",
-            "description": "대차구분코드 (1=대여, 2=차입, 빈값=전체)",
+            "description": "대차구분코드 (UNSPECIFIED=전체, LEND=대여, BORROW=차입)\n\n - DBCR_CLS_CODE_UNSPECIFIED: 전체 조회\n - DBCR_CLS_CODE_LEND: 대여\n - DBCR_CLS_CODE_BORROW: 차입",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "DBCR_CLS_CODE_UNSPECIFIED",
+              "DBCR_CLS_CODE_LEND",
+              "DBCR_CLS_CODE_BORROW"
+            ],
+            "default": "DBCR_CLS_CODE_UNSPECIFIED"
           },
           {
             "name": "symbol",
@@ -746,6 +758,28 @@
         }
       },
       "title": "BatchProcessLoanDeliveries 응답"
+    },
+    "inventoryDbcrClsCode": {
+      "type": "string",
+      "enum": [
+        "DBCR_CLS_CODE_UNSPECIFIED",
+        "DBCR_CLS_CODE_LEND",
+        "DBCR_CLS_CODE_BORROW"
+      ],
+      "default": "DBCR_CLS_CODE_UNSPECIFIED",
+      "description": "- DBCR_CLS_CODE_UNSPECIFIED: 전체 조회\n - DBCR_CLS_CODE_LEND: 대여\n - DBCR_CLS_CODE_BORROW: 차입",
+      "title": "대차구분코드 (DBCR_CLS_CODE)\nobfnp_loan_021r 조회 필터: 1=대여, 2=차입, 빈값=전체"
+    },
+    "inventoryDbcrCnofClsCode": {
+      "type": "string",
+      "enum": [
+        "DBCR_CNOF_CLS_CODE_UNSPECIFIED",
+        "DBCR_CNOF_CLS_CODE_DEPOSITORY",
+        "DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE"
+      ],
+      "default": "DBCR_CNOF_CLS_CODE_UNSPECIFIED",
+      "description": "- DBCR_CNOF_CLS_CODE_UNSPECIFIED: 전체 조회\n - DBCR_CNOF_CLS_CODE_DEPOSITORY: 예탁원\n - DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE: 증권금융",
+      "title": "대차상대처구분코드 (DBCR_CNOF_CLS_CODE)\nobfnp_loan_021r 조회 필터: 1=예탁원, 2=증권금융, 빈값=전체"
     },
     "inventoryDerivData": {
       "type": "object",

@@ -454,12 +454,12 @@ pub struct ListLoanDeliveriesRequest {
     /// 조회 기준일자 (YYYYMMDD)
     #[prost(string, tag="2")]
     pub date: ::prost::alloc::string::String,
-    /// 대차상대처구분코드 (1=예탁원, 2=증금, 빈값=전체)
-    #[prost(string, tag="3")]
-    pub dbcr_cnof_cls_code: ::prost::alloc::string::String,
-    /// 대차구분코드 (1=대여, 2=차입, 빈값=전체)
-    #[prost(string, tag="4")]
-    pub dbcr_cls_code: ::prost::alloc::string::String,
+    /// 대차상대처구분코드 (UNSPECIFIED=전체, DEPOSITORY=예탁원, SECURITIES_FINANCE=증권금융)
+    #[prost(enumeration="DbcrCnofClsCode", tag="3")]
+    pub dbcr_cnof_cls_code: i32,
+    /// 대차구분코드 (UNSPECIFIED=전체, LEND=대여, BORROW=차입)
+    #[prost(enumeration="DbcrClsCode", tag="4")]
+    pub dbcr_cls_code: i32,
     /// 종목코드 (빈값=전체)
     #[prost(string, tag="5")]
     pub symbol: ::prost::alloc::string::String,
@@ -750,6 +750,74 @@ impl ProductPositionType {
             "PRODUCT_POSITION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "PRODUCT_POSITION_TYPE_STOCK" => Some(Self::Stock),
             "PRODUCT_POSITION_TYPE_SELL" => Some(Self::Sell),
+            _ => None,
+        }
+    }
+}
+/// 대차상대처구분코드 (DBCR_CNOF_CLS_CODE)
+/// obfnp_loan_021r 조회 필터: 1=예탁원, 2=증권금융, 빈값=전체
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum DbcrCnofClsCode {
+    /// 전체 조회
+    Unspecified = 0,
+    /// 예탁원
+    Depository = 1,
+    /// 증권금융
+    SecuritiesFinance = 2,
+}
+impl DbcrCnofClsCode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DbcrCnofClsCode::Unspecified => "DBCR_CNOF_CLS_CODE_UNSPECIFIED",
+            DbcrCnofClsCode::Depository => "DBCR_CNOF_CLS_CODE_DEPOSITORY",
+            DbcrCnofClsCode::SecuritiesFinance => "DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "DBCR_CNOF_CLS_CODE_UNSPECIFIED" => Some(Self::Unspecified),
+            "DBCR_CNOF_CLS_CODE_DEPOSITORY" => Some(Self::Depository),
+            "DBCR_CNOF_CLS_CODE_SECURITIES_FINANCE" => Some(Self::SecuritiesFinance),
+            _ => None,
+        }
+    }
+}
+/// 대차구분코드 (DBCR_CLS_CODE)
+/// obfnp_loan_021r 조회 필터: 1=대여, 2=차입, 빈값=전체
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum DbcrClsCode {
+    /// 전체 조회
+    Unspecified = 0,
+    /// 대여
+    Lend = 1,
+    /// 차입
+    Borrow = 2,
+}
+impl DbcrClsCode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DbcrClsCode::Unspecified => "DBCR_CLS_CODE_UNSPECIFIED",
+            DbcrClsCode::Lend => "DBCR_CLS_CODE_LEND",
+            DbcrClsCode::Borrow => "DBCR_CLS_CODE_BORROW",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "DBCR_CLS_CODE_UNSPECIFIED" => Some(Self::Unspecified),
+            "DBCR_CLS_CODE_LEND" => Some(Self::Lend),
+            "DBCR_CLS_CODE_BORROW" => Some(Self::Borrow),
             _ => None,
         }
     }
