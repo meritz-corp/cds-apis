@@ -224,4 +224,22 @@ extension type InventoryServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 대여 등록 (obfnp_loan_015a - 45221 화면)
+  Future<kdov1inventory.RegisterLendingResponse> registerLending(
+    kdov1inventory.RegisterLendingRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.registerLending,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

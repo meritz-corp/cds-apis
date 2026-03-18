@@ -1914,6 +1914,734 @@ impl<'de> serde::Deserialize<'de> for LedgerStockData {
         deserializer.deserialize_struct("kdo.v1.inventory.LedgerStockData", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for LendingItem {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.LendingItem", len)?;
+        if true {
+            struct_ser.serialize_field("iscd", &self.iscd)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("dbcr_qty", ToString::to_string(&self.dbcr_qty).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("tr_cnrp_idnt_id", &self.tr_cnrp_idnt_id)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_cls_code", &self.dbcr_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("cntg_date", &self.cntg_date)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cntg_no", ToString::to_string(&self.cntg_no).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("dbcr_srno", ToString::to_string(&self.dbcr_srno).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tr_srno", ToString::to_string(&self.tr_srno).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LendingItem {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "iscd",
+            "dbcr_qty",
+            "dbcrQty",
+            "tr_cnrp_idnt_id",
+            "trCnrpIdntId",
+            "dbcr_cls_code",
+            "dbcrClsCode",
+            "cntg_date",
+            "cntgDate",
+            "cntg_no",
+            "cntgNo",
+            "dbcr_srno",
+            "dbcrSrno",
+            "tr_srno",
+            "trSrno",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Iscd,
+            DbcrQty,
+            TrCnrpIdntId,
+            DbcrClsCode,
+            CntgDate,
+            CntgNo,
+            DbcrSrno,
+            TrSrno,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "iscd" => Ok(GeneratedField::Iscd),
+                            "dbcrQty" | "dbcr_qty" => Ok(GeneratedField::DbcrQty),
+                            "trCnrpIdntId" | "tr_cnrp_idnt_id" => Ok(GeneratedField::TrCnrpIdntId),
+                            "dbcrClsCode" | "dbcr_cls_code" => Ok(GeneratedField::DbcrClsCode),
+                            "cntgDate" | "cntg_date" => Ok(GeneratedField::CntgDate),
+                            "cntgNo" | "cntg_no" => Ok(GeneratedField::CntgNo),
+                            "dbcrSrno" | "dbcr_srno" => Ok(GeneratedField::DbcrSrno),
+                            "trSrno" | "tr_srno" => Ok(GeneratedField::TrSrno),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LendingItem;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.LendingItem")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LendingItem, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut iscd__ = None;
+                let mut dbcr_qty__ = None;
+                let mut tr_cnrp_idnt_id__ = None;
+                let mut dbcr_cls_code__ = None;
+                let mut cntg_date__ = None;
+                let mut cntg_no__ = None;
+                let mut dbcr_srno__ = None;
+                let mut tr_srno__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Iscd => {
+                            if iscd__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("iscd"));
+                            }
+                            iscd__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrQty => {
+                            if dbcr_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrQty"));
+                            }
+                            dbcr_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TrCnrpIdntId => {
+                            if tr_cnrp_idnt_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trCnrpIdntId"));
+                            }
+                            tr_cnrp_idnt_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrClsCode => {
+                            if dbcr_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrClsCode"));
+                            }
+                            dbcr_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CntgDate => {
+                            if cntg_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cntgDate"));
+                            }
+                            cntg_date__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CntgNo => {
+                            if cntg_no__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cntgNo"));
+                            }
+                            cntg_no__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::DbcrSrno => {
+                            if dbcr_srno__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrSrno"));
+                            }
+                            dbcr_srno__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TrSrno => {
+                            if tr_srno__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trSrno"));
+                            }
+                            tr_srno__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LendingItem {
+                    iscd: iscd__.unwrap_or_default(),
+                    dbcr_qty: dbcr_qty__.unwrap_or_default(),
+                    tr_cnrp_idnt_id: tr_cnrp_idnt_id__.unwrap_or_default(),
+                    dbcr_cls_code: dbcr_cls_code__.unwrap_or_default(),
+                    cntg_date: cntg_date__.unwrap_or_default(),
+                    cntg_no: cntg_no__.unwrap_or_default(),
+                    dbcr_srno: dbcr_srno__.unwrap_or_default(),
+                    tr_srno: tr_srno__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.LendingItem", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LendingRequestHeader {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.LendingRequestHeader", len)?;
+        if true {
+            struct_ser.serialize_field("pros_cls_code", &self.pros_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_ocrn_date", &self.dbcr_ocrn_date)?;
+        }
+        if true {
+            struct_ser.serialize_field("fncd", &self.fncd)?;
+        }
+        if true {
+            struct_ser.serialize_field("prod_pstn_cls_code", &self.prod_pstn_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_cls_code", &self.dbcr_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_cnof_cls_code", &self.dbcr_cnof_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_tr_cls_code", &self.dbcr_tr_cls_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("dbcr_fert", &self.dbcr_fert)?;
+        }
+        if true {
+            struct_ser.serialize_field("rela_fert", &self.rela_fert)?;
+        }
+        if true {
+            struct_ser.serialize_field("ins_dbcr_yn", &self.ins_dbcr_yn)?;
+        }
+        if true {
+            struct_ser.serialize_field("tr_cnrp_istu_cod", &self.tr_cnrp_istu_cod)?;
+        }
+        if true {
+            struct_ser.serialize_field("tr_cnrp_fncd", &self.tr_cnrp_fncd)?;
+        }
+        if true {
+            struct_ser.serialize_field("tr_cnrp_deps_pprt_clcd", &self.tr_cnrp_deps_pprt_clcd)?;
+        }
+        if true {
+            struct_ser.serialize_field("tr_cnrp_slb_code", &self.tr_cnrp_slb_code)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LendingRequestHeader {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pros_cls_code",
+            "prosClsCode",
+            "dbcr_ocrn_date",
+            "dbcrOcrnDate",
+            "fncd",
+            "prod_pstn_cls_code",
+            "prodPstnClsCode",
+            "dbcr_cls_code",
+            "dbcrClsCode",
+            "dbcr_cnof_cls_code",
+            "dbcrCnofClsCode",
+            "dbcr_tr_cls_code",
+            "dbcrTrClsCode",
+            "dbcr_fert",
+            "dbcrFert",
+            "rela_fert",
+            "relaFert",
+            "ins_dbcr_yn",
+            "insDbcrYn",
+            "tr_cnrp_istu_cod",
+            "trCnrpIstuCod",
+            "tr_cnrp_fncd",
+            "trCnrpFncd",
+            "tr_cnrp_deps_pprt_clcd",
+            "trCnrpDepsPprtClcd",
+            "tr_cnrp_slb_code",
+            "trCnrpSlbCode",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ProsClsCode,
+            DbcrOcrnDate,
+            Fncd,
+            ProdPstnClsCode,
+            DbcrClsCode,
+            DbcrCnofClsCode,
+            DbcrTrClsCode,
+            DbcrFert,
+            RelaFert,
+            InsDbcrYn,
+            TrCnrpIstuCod,
+            TrCnrpFncd,
+            TrCnrpDepsPprtClcd,
+            TrCnrpSlbCode,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "prosClsCode" | "pros_cls_code" => Ok(GeneratedField::ProsClsCode),
+                            "dbcrOcrnDate" | "dbcr_ocrn_date" => Ok(GeneratedField::DbcrOcrnDate),
+                            "fncd" => Ok(GeneratedField::Fncd),
+                            "prodPstnClsCode" | "prod_pstn_cls_code" => Ok(GeneratedField::ProdPstnClsCode),
+                            "dbcrClsCode" | "dbcr_cls_code" => Ok(GeneratedField::DbcrClsCode),
+                            "dbcrCnofClsCode" | "dbcr_cnof_cls_code" => Ok(GeneratedField::DbcrCnofClsCode),
+                            "dbcrTrClsCode" | "dbcr_tr_cls_code" => Ok(GeneratedField::DbcrTrClsCode),
+                            "dbcrFert" | "dbcr_fert" => Ok(GeneratedField::DbcrFert),
+                            "relaFert" | "rela_fert" => Ok(GeneratedField::RelaFert),
+                            "insDbcrYn" | "ins_dbcr_yn" => Ok(GeneratedField::InsDbcrYn),
+                            "trCnrpIstuCod" | "tr_cnrp_istu_cod" => Ok(GeneratedField::TrCnrpIstuCod),
+                            "trCnrpFncd" | "tr_cnrp_fncd" => Ok(GeneratedField::TrCnrpFncd),
+                            "trCnrpDepsPprtClcd" | "tr_cnrp_deps_pprt_clcd" => Ok(GeneratedField::TrCnrpDepsPprtClcd),
+                            "trCnrpSlbCode" | "tr_cnrp_slb_code" => Ok(GeneratedField::TrCnrpSlbCode),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LendingRequestHeader;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.LendingRequestHeader")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LendingRequestHeader, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pros_cls_code__ = None;
+                let mut dbcr_ocrn_date__ = None;
+                let mut fncd__ = None;
+                let mut prod_pstn_cls_code__ = None;
+                let mut dbcr_cls_code__ = None;
+                let mut dbcr_cnof_cls_code__ = None;
+                let mut dbcr_tr_cls_code__ = None;
+                let mut dbcr_fert__ = None;
+                let mut rela_fert__ = None;
+                let mut ins_dbcr_yn__ = None;
+                let mut tr_cnrp_istu_cod__ = None;
+                let mut tr_cnrp_fncd__ = None;
+                let mut tr_cnrp_deps_pprt_clcd__ = None;
+                let mut tr_cnrp_slb_code__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ProsClsCode => {
+                            if pros_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prosClsCode"));
+                            }
+                            pros_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrOcrnDate => {
+                            if dbcr_ocrn_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrOcrnDate"));
+                            }
+                            dbcr_ocrn_date__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fncd => {
+                            if fncd__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fncd"));
+                            }
+                            fncd__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ProdPstnClsCode => {
+                            if prod_pstn_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prodPstnClsCode"));
+                            }
+                            prod_pstn_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrClsCode => {
+                            if dbcr_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrClsCode"));
+                            }
+                            dbcr_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrCnofClsCode => {
+                            if dbcr_cnof_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrCnofClsCode"));
+                            }
+                            dbcr_cnof_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrTrClsCode => {
+                            if dbcr_tr_cls_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrTrClsCode"));
+                            }
+                            dbcr_tr_cls_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::DbcrFert => {
+                            if dbcr_fert__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrFert"));
+                            }
+                            dbcr_fert__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RelaFert => {
+                            if rela_fert__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("relaFert"));
+                            }
+                            rela_fert__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::InsDbcrYn => {
+                            if ins_dbcr_yn__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("insDbcrYn"));
+                            }
+                            ins_dbcr_yn__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TrCnrpIstuCod => {
+                            if tr_cnrp_istu_cod__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trCnrpIstuCod"));
+                            }
+                            tr_cnrp_istu_cod__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TrCnrpFncd => {
+                            if tr_cnrp_fncd__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trCnrpFncd"));
+                            }
+                            tr_cnrp_fncd__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TrCnrpDepsPprtClcd => {
+                            if tr_cnrp_deps_pprt_clcd__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trCnrpDepsPprtClcd"));
+                            }
+                            tr_cnrp_deps_pprt_clcd__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TrCnrpSlbCode => {
+                            if tr_cnrp_slb_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trCnrpSlbCode"));
+                            }
+                            tr_cnrp_slb_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LendingRequestHeader {
+                    pros_cls_code: pros_cls_code__.unwrap_or_default(),
+                    dbcr_ocrn_date: dbcr_ocrn_date__.unwrap_or_default(),
+                    fncd: fncd__.unwrap_or_default(),
+                    prod_pstn_cls_code: prod_pstn_cls_code__.unwrap_or_default(),
+                    dbcr_cls_code: dbcr_cls_code__.unwrap_or_default(),
+                    dbcr_cnof_cls_code: dbcr_cnof_cls_code__.unwrap_or_default(),
+                    dbcr_tr_cls_code: dbcr_tr_cls_code__.unwrap_or_default(),
+                    dbcr_fert: dbcr_fert__.unwrap_or_default(),
+                    rela_fert: rela_fert__.unwrap_or_default(),
+                    ins_dbcr_yn: ins_dbcr_yn__.unwrap_or_default(),
+                    tr_cnrp_istu_cod: tr_cnrp_istu_cod__.unwrap_or_default(),
+                    tr_cnrp_fncd: tr_cnrp_fncd__.unwrap_or_default(),
+                    tr_cnrp_deps_pprt_clcd: tr_cnrp_deps_pprt_clcd__.unwrap_or_default(),
+                    tr_cnrp_slb_code: tr_cnrp_slb_code__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.LendingRequestHeader", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LendingResultItem {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.LendingResultItem", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tr_srno", ToString::to_string(&self.tr_srno).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("dbcr_srno", ToString::to_string(&self.dbcr_srno).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("msg_code", &self.msg_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("uscs_msg_cntt", &self.uscs_msg_cntt)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LendingResultItem {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "tr_srno",
+            "trSrno",
+            "dbcr_srno",
+            "dbcrSrno",
+            "msg_code",
+            "msgCode",
+            "uscs_msg_cntt",
+            "uscsMsgCntt",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TrSrno,
+            DbcrSrno,
+            MsgCode,
+            UscsMsgCntt,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "trSrno" | "tr_srno" => Ok(GeneratedField::TrSrno),
+                            "dbcrSrno" | "dbcr_srno" => Ok(GeneratedField::DbcrSrno),
+                            "msgCode" | "msg_code" => Ok(GeneratedField::MsgCode),
+                            "uscsMsgCntt" | "uscs_msg_cntt" => Ok(GeneratedField::UscsMsgCntt),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LendingResultItem;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.LendingResultItem")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LendingResultItem, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut tr_srno__ = None;
+                let mut dbcr_srno__ = None;
+                let mut msg_code__ = None;
+                let mut uscs_msg_cntt__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TrSrno => {
+                            if tr_srno__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("trSrno"));
+                            }
+                            tr_srno__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::DbcrSrno => {
+                            if dbcr_srno__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("dbcrSrno"));
+                            }
+                            dbcr_srno__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MsgCode => {
+                            if msg_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("msgCode"));
+                            }
+                            msg_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::UscsMsgCntt => {
+                            if uscs_msg_cntt__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("uscsMsgCntt"));
+                            }
+                            uscs_msg_cntt__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LendingResultItem {
+                    tr_srno: tr_srno__.unwrap_or_default(),
+                    dbcr_srno: dbcr_srno__.unwrap_or_default(),
+                    msg_code: msg_code__.unwrap_or_default(),
+                    uscs_msg_cntt: uscs_msg_cntt__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.LendingResultItem", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListInventoriesRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3607,6 +4335,230 @@ impl<'de> serde::Deserialize<'de> for ProductPositionType {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for RegisterLendingRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.RegisterLendingRequest", len)?;
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if let Some(v) = self.request.as_ref() {
+            struct_ser.serialize_field("request", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("items", &self.items)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for RegisterLendingRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund",
+            "request",
+            "items",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fund,
+            Request,
+            Items,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fund" => Ok(GeneratedField::Fund),
+                            "request" => Ok(GeneratedField::Request),
+                            "items" => Ok(GeneratedField::Items),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = RegisterLendingRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.RegisterLendingRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<RegisterLendingRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund__ = None;
+                let mut request__ = None;
+                let mut items__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Request => {
+                            if request__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("request"));
+                            }
+                            request__ = map_.next_value()?;
+                        }
+                        GeneratedField::Items => {
+                            if items__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("items"));
+                            }
+                            items__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(RegisterLendingRequest {
+                    fund: fund__.unwrap_or_default(),
+                    request: request__,
+                    items: items__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.RegisterLendingRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for RegisterLendingResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.RegisterLendingResponse", len)?;
+        if true {
+            struct_ser.serialize_field("results", &self.results)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for RegisterLendingResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "results",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Results,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "results" => Ok(GeneratedField::Results),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = RegisterLendingResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.inventory.RegisterLendingResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<RegisterLendingResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut results__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Results => {
+                            if results__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("results"));
+                            }
+                            results__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(RegisterLendingResponse {
+                    results: results__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.inventory.RegisterLendingResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for RepayLoanRequest {

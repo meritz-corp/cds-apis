@@ -596,3 +596,108 @@ final $typed_data.Uint8List loanDeliveryItemDescriptor = $convert.base64Decode(
     'IAEoCVILcHN0bkNsc0NvZGUSEgoEZHBjZBgiIAEoCVIEZHBjZBISCgRkcG5tGCMgASgJUgRkcG'
     '5tEiQKDmZyc3RfY250Z19kYXRlGCQgASgJUgxmcnN0Q250Z0RhdGU=');
 
+@$core.Deprecated('Use lendingRequestHeaderDescriptor instead')
+const LendingRequestHeader$json = {
+  '1': 'LendingRequestHeader',
+  '2': [
+    {'1': 'pros_cls_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'prosClsCode'},
+    {'1': 'dbcr_ocrn_date', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'dbcrOcrnDate'},
+    {'1': 'fncd', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'fncd'},
+    {'1': 'prod_pstn_cls_code', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'prodPstnClsCode'},
+    {'1': 'dbcr_cls_code', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'dbcrClsCode'},
+    {'1': 'dbcr_cnof_cls_code', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'dbcrCnofClsCode'},
+    {'1': 'dbcr_tr_cls_code', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'dbcrTrClsCode'},
+    {'1': 'dbcr_fert', '3': 8, '4': 1, '5': 1, '10': 'dbcrFert'},
+    {'1': 'rela_fert', '3': 9, '4': 1, '5': 1, '10': 'relaFert'},
+    {'1': 'ins_dbcr_yn', '3': 10, '4': 1, '5': 9, '10': 'insDbcrYn'},
+    {'1': 'tr_cnrp_istu_cod', '3': 11, '4': 1, '5': 9, '10': 'trCnrpIstuCod'},
+    {'1': 'tr_cnrp_fncd', '3': 12, '4': 1, '5': 9, '10': 'trCnrpFncd'},
+    {'1': 'tr_cnrp_deps_pprt_clcd', '3': 13, '4': 1, '5': 9, '10': 'trCnrpDepsPprtClcd'},
+    {'1': 'tr_cnrp_slb_code', '3': 14, '4': 1, '5': 9, '10': 'trCnrpSlbCode'},
+  ],
+};
+
+/// Descriptor for `LendingRequestHeader`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lendingRequestHeaderDescriptor = $convert.base64Decode(
+    'ChRMZW5kaW5nUmVxdWVzdEhlYWRlchIoCg1wcm9zX2Nsc19jb2RlGAEgASgJQgTiQQECUgtwcm'
+    '9zQ2xzQ29kZRIqCg5kYmNyX29jcm5fZGF0ZRgCIAEoCUIE4kEBAlIMZGJjck9jcm5EYXRlEhgK'
+    'BGZuY2QYAyABKAlCBOJBAQJSBGZuY2QSMQoScHJvZF9wc3RuX2Nsc19jb2RlGAQgASgJQgTiQQ'
+    'ECUg9wcm9kUHN0bkNsc0NvZGUSKAoNZGJjcl9jbHNfY29kZRgFIAEoCUIE4kEBAlILZGJjckNs'
+    'c0NvZGUSMQoSZGJjcl9jbm9mX2Nsc19jb2RlGAYgASgJQgTiQQECUg9kYmNyQ25vZkNsc0NvZG'
+    'USLQoQZGJjcl90cl9jbHNfY29kZRgHIAEoCUIE4kEBAlINZGJjclRyQ2xzQ29kZRIbCglkYmNy'
+    'X2ZlcnQYCCABKAFSCGRiY3JGZXJ0EhsKCXJlbGFfZmVydBgJIAEoAVIIcmVsYUZlcnQSHgoLaW'
+    '5zX2RiY3JfeW4YCiABKAlSCWluc0RiY3JZbhInChB0cl9jbnJwX2lzdHVfY29kGAsgASgJUg10'
+    'ckNucnBJc3R1Q29kEiAKDHRyX2NucnBfZm5jZBgMIAEoCVIKdHJDbnJwRm5jZBIyChZ0cl9jbn'
+    'JwX2RlcHNfcHBydF9jbGNkGA0gASgJUhJ0ckNucnBEZXBzUHBydENsY2QSJwoQdHJfY25ycF9z'
+    'bGJfY29kZRgOIAEoCVINdHJDbnJwU2xiQ29kZQ==');
+
+@$core.Deprecated('Use lendingItemDescriptor instead')
+const LendingItem$json = {
+  '1': 'LendingItem',
+  '2': [
+    {'1': 'iscd', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'iscd'},
+    {'1': 'dbcr_qty', '3': 2, '4': 1, '5': 3, '8': {}, '10': 'dbcrQty'},
+    {'1': 'tr_cnrp_idnt_id', '3': 3, '4': 1, '5': 9, '10': 'trCnrpIdntId'},
+    {'1': 'dbcr_cls_code', '3': 4, '4': 1, '5': 9, '10': 'dbcrClsCode'},
+    {'1': 'cntg_date', '3': 5, '4': 1, '5': 9, '10': 'cntgDate'},
+    {'1': 'cntg_no', '3': 6, '4': 1, '5': 3, '10': 'cntgNo'},
+    {'1': 'dbcr_srno', '3': 7, '4': 1, '5': 3, '10': 'dbcrSrno'},
+    {'1': 'tr_srno', '3': 8, '4': 1, '5': 3, '10': 'trSrno'},
+  ],
+};
+
+/// Descriptor for `LendingItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lendingItemDescriptor = $convert.base64Decode(
+    'CgtMZW5kaW5nSXRlbRIYCgRpc2NkGAEgASgJQgTiQQECUgRpc2NkEh8KCGRiY3JfcXR5GAIgAS'
+    'gDQgTiQQECUgdkYmNyUXR5EiUKD3RyX2NucnBfaWRudF9pZBgDIAEoCVIMdHJDbnJwSWRudElk'
+    'EiIKDWRiY3JfY2xzX2NvZGUYBCABKAlSC2RiY3JDbHNDb2RlEhsKCWNudGdfZGF0ZRgFIAEoCV'
+    'IIY250Z0RhdGUSFwoHY250Z19ubxgGIAEoA1IGY250Z05vEhsKCWRiY3Jfc3JubxgHIAEoA1II'
+    'ZGJjclNybm8SFwoHdHJfc3JubxgIIAEoA1IGdHJTcm5v');
+
+@$core.Deprecated('Use lendingResultItemDescriptor instead')
+const LendingResultItem$json = {
+  '1': 'LendingResultItem',
+  '2': [
+    {'1': 'tr_srno', '3': 1, '4': 1, '5': 3, '10': 'trSrno'},
+    {'1': 'dbcr_srno', '3': 2, '4': 1, '5': 3, '10': 'dbcrSrno'},
+    {'1': 'msg_code', '3': 3, '4': 1, '5': 9, '10': 'msgCode'},
+    {'1': 'uscs_msg_cntt', '3': 4, '4': 1, '5': 9, '10': 'uscsMsgCntt'},
+  ],
+};
+
+/// Descriptor for `LendingResultItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lendingResultItemDescriptor = $convert.base64Decode(
+    'ChFMZW5kaW5nUmVzdWx0SXRlbRIXCgd0cl9zcm5vGAEgASgDUgZ0clNybm8SGwoJZGJjcl9zcm'
+    '5vGAIgASgDUghkYmNyU3JubxIZCghtc2dfY29kZRgDIAEoCVIHbXNnQ29kZRIiCg11c2NzX21z'
+    'Z19jbnR0GAQgASgJUgt1c2NzTXNnQ250dA==');
+
+@$core.Deprecated('Use registerLendingRequestDescriptor instead')
+const RegisterLendingRequest$json = {
+  '1': 'RegisterLendingRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'request', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.inventory.LendingRequestHeader', '8': {}, '10': 'request'},
+    {'1': 'items', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.inventory.LendingItem', '8': {}, '10': 'items'},
+  ],
+};
+
+/// Descriptor for `RegisterLendingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List registerLendingRequestDescriptor = $convert.base64Decode(
+    'ChZSZWdpc3RlckxlbmRpbmdSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby5jZH'
+    'NhcGlzLnh5ei9GdW5kUgRmdW5kEkYKB3JlcXVlc3QYAiABKAsyJi5rZG8udjEuaW52ZW50b3J5'
+    'LkxlbmRpbmdSZXF1ZXN0SGVhZGVyQgTiQQECUgdyZXF1ZXN0EjkKBWl0ZW1zGAMgAygLMh0ua2'
+    'RvLnYxLmludmVudG9yeS5MZW5kaW5nSXRlbUIE4kEBAlIFaXRlbXM=');
+
+@$core.Deprecated('Use registerLendingResponseDescriptor instead')
+const RegisterLendingResponse$json = {
+  '1': 'RegisterLendingResponse',
+  '2': [
+    {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.inventory.LendingResultItem', '10': 'results'},
+  ],
+};
+
+/// Descriptor for `RegisterLendingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List registerLendingResponseDescriptor = $convert.base64Decode(
+    'ChdSZWdpc3RlckxlbmRpbmdSZXNwb25zZRI9CgdyZXN1bHRzGAEgAygLMiMua2RvLnYxLmludm'
+    'VudG9yeS5MZW5kaW5nUmVzdWx0SXRlbVIHcmVzdWx0cw==');
+

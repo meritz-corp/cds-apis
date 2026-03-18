@@ -2724,6 +2724,561 @@ class LoanDeliveryItem extends $pb.GeneratedMessage {
   void clearFrstCntgDate() => $_clearField(36);
 }
 
+/// 대여 등록 요청 헤더 (obfnp_loan_015a InBlock1)
+class LendingRequestHeader extends $pb.GeneratedMessage {
+  factory LendingRequestHeader({
+    $core.String? prosClsCode,
+    $core.String? dbcrOcrnDate,
+    $core.String? fncd,
+    $core.String? prodPstnClsCode,
+    $core.String? dbcrClsCode,
+    $core.String? dbcrCnofClsCode,
+    $core.String? dbcrTrClsCode,
+    $core.double? dbcrFert,
+    $core.double? relaFert,
+    $core.String? insDbcrYn,
+    $core.String? trCnrpIstuCod,
+    $core.String? trCnrpFncd,
+    $core.String? trCnrpDepsPprtClcd,
+    $core.String? trCnrpSlbCode,
+  }) {
+    final result = create();
+    if (prosClsCode != null) result.prosClsCode = prosClsCode;
+    if (dbcrOcrnDate != null) result.dbcrOcrnDate = dbcrOcrnDate;
+    if (fncd != null) result.fncd = fncd;
+    if (prodPstnClsCode != null) result.prodPstnClsCode = prodPstnClsCode;
+    if (dbcrClsCode != null) result.dbcrClsCode = dbcrClsCode;
+    if (dbcrCnofClsCode != null) result.dbcrCnofClsCode = dbcrCnofClsCode;
+    if (dbcrTrClsCode != null) result.dbcrTrClsCode = dbcrTrClsCode;
+    if (dbcrFert != null) result.dbcrFert = dbcrFert;
+    if (relaFert != null) result.relaFert = relaFert;
+    if (insDbcrYn != null) result.insDbcrYn = insDbcrYn;
+    if (trCnrpIstuCod != null) result.trCnrpIstuCod = trCnrpIstuCod;
+    if (trCnrpFncd != null) result.trCnrpFncd = trCnrpFncd;
+    if (trCnrpDepsPprtClcd != null) result.trCnrpDepsPprtClcd = trCnrpDepsPprtClcd;
+    if (trCnrpSlbCode != null) result.trCnrpSlbCode = trCnrpSlbCode;
+    return result;
+  }
+
+  LendingRequestHeader._();
+
+  factory LendingRequestHeader.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LendingRequestHeader.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LendingRequestHeader', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'prosClsCode')
+    ..aOS(2, _omitFieldNames ? '' : 'dbcrOcrnDate')
+    ..aOS(3, _omitFieldNames ? '' : 'fncd')
+    ..aOS(4, _omitFieldNames ? '' : 'prodPstnClsCode')
+    ..aOS(5, _omitFieldNames ? '' : 'dbcrClsCode')
+    ..aOS(6, _omitFieldNames ? '' : 'dbcrCnofClsCode')
+    ..aOS(7, _omitFieldNames ? '' : 'dbcrTrClsCode')
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'dbcrFert', $pb.PbFieldType.OD)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'relaFert', $pb.PbFieldType.OD)
+    ..aOS(10, _omitFieldNames ? '' : 'insDbcrYn')
+    ..aOS(11, _omitFieldNames ? '' : 'trCnrpIstuCod')
+    ..aOS(12, _omitFieldNames ? '' : 'trCnrpFncd')
+    ..aOS(13, _omitFieldNames ? '' : 'trCnrpDepsPprtClcd')
+    ..aOS(14, _omitFieldNames ? '' : 'trCnrpSlbCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LendingRequestHeader clone() => LendingRequestHeader()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LendingRequestHeader copyWith(void Function(LendingRequestHeader) updates) => super.copyWith((message) => updates(message as LendingRequestHeader)) as LendingRequestHeader;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LendingRequestHeader create() => LendingRequestHeader._();
+  @$core.override
+  LendingRequestHeader createEmptyInstance() => create();
+  static $pb.PbList<LendingRequestHeader> createRepeated() => $pb.PbList<LendingRequestHeader>();
+  @$core.pragma('dart2js:noInline')
+  static LendingRequestHeader getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LendingRequestHeader>(create);
+  static LendingRequestHeader? _defaultInstance;
+
+  /// 처리구분코드 (1=등록, 2=수정, 3=취소)
+  @$pb.TagNumber(1)
+  $core.String get prosClsCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set prosClsCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasProsClsCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProsClsCode() => $_clearField(1);
+
+  /// 대차발생일자 (당일, YYYYMMDD)
+  @$pb.TagNumber(2)
+  $core.String get dbcrOcrnDate => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set dbcrOcrnDate($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDbcrOcrnDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDbcrOcrnDate() => $_clearField(2);
+
+  /// 펀드코드 (4자리)
+  @$pb.TagNumber(3)
+  $core.String get fncd => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fncd($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFncd() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFncd() => $_clearField(3);
+
+  /// 상품포지션구분코드 (1=상품, 2=매도)
+  @$pb.TagNumber(4)
+  $core.String get prodPstnClsCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set prodPstnClsCode($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasProdPstnClsCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProdPstnClsCode() => $_clearField(4);
+
+  /// 대차구분코드 (1=대여, 2=차입승인)
+  @$pb.TagNumber(5)
+  $core.String get dbcrClsCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set dbcrClsCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasDbcrClsCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDbcrClsCode() => $_clearField(5);
+
+  /// 대차상대처구분코드 (1=예탁원, 2=증권금융, 8=리테일, 9=기타)
+  @$pb.TagNumber(6)
+  $core.String get dbcrCnofClsCode => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set dbcrCnofClsCode($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasDbcrCnofClsCode() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDbcrCnofClsCode() => $_clearField(6);
+
+  /// 대차거래구분코드 (1=결제, 2=경쟁, 3=맞춤, 4=지정)
+  @$pb.TagNumber(7)
+  $core.String get dbcrTrClsCode => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set dbcrTrClsCode($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasDbcrTrClsCode() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDbcrTrClsCode() => $_clearField(7);
+
+  /// 대차수수료율 (소수점 4자리)
+  @$pb.TagNumber(8)
+  $core.double get dbcrFert => $_getN(7);
+  @$pb.TagNumber(8)
+  set dbcrFert($core.double value) => $_setDouble(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasDbcrFert() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearDbcrFert() => $_clearField(8);
+
+  /// 중개수수료율 (소수점 4자리)
+  @$pb.TagNumber(9)
+  $core.double get relaFert => $_getN(8);
+  @$pb.TagNumber(9)
+  set relaFert($core.double value) => $_setDouble(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasRelaFert() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearRelaFert() => $_clearField(9);
+
+  /// 내부대차여부 (Y/N)
+  @$pb.TagNumber(10)
+  $core.String get insDbcrYn => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set insDbcrYn($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasInsDbcrYn() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearInsDbcrYn() => $_clearField(10);
+
+  /// 거래상대방기관코드
+  @$pb.TagNumber(11)
+  $core.String get trCnrpIstuCod => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set trCnrpIstuCod($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasTrCnrpIstuCod() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearTrCnrpIstuCod() => $_clearField(11);
+
+  /// 거래상대방펀드코드
+  @$pb.TagNumber(12)
+  $core.String get trCnrpFncd => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set trCnrpFncd($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasTrCnrpFncd() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearTrCnrpFncd() => $_clearField(12);
+
+  /// 거래상대방예탁재산구분코드
+  @$pb.TagNumber(13)
+  $core.String get trCnrpDepsPprtClcd => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set trCnrpDepsPprtClcd($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasTrCnrpDepsPprtClcd() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearTrCnrpDepsPprtClcd() => $_clearField(13);
+
+  /// 거래상대방SLB코드
+  @$pb.TagNumber(14)
+  $core.String get trCnrpSlbCode => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set trCnrpSlbCode($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasTrCnrpSlbCode() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearTrCnrpSlbCode() => $_clearField(14);
+}
+
+/// 대여 등록 종목 항목 (obfnp_loan_015a InBlock2 - 복수종목)
+class LendingItem extends $pb.GeneratedMessage {
+  factory LendingItem({
+    $core.String? iscd,
+    $fixnum.Int64? dbcrQty,
+    $core.String? trCnrpIdntId,
+    $core.String? dbcrClsCode,
+    $core.String? cntgDate,
+    $fixnum.Int64? cntgNo,
+    $fixnum.Int64? dbcrSrno,
+    $fixnum.Int64? trSrno,
+  }) {
+    final result = create();
+    if (iscd != null) result.iscd = iscd;
+    if (dbcrQty != null) result.dbcrQty = dbcrQty;
+    if (trCnrpIdntId != null) result.trCnrpIdntId = trCnrpIdntId;
+    if (dbcrClsCode != null) result.dbcrClsCode = dbcrClsCode;
+    if (cntgDate != null) result.cntgDate = cntgDate;
+    if (cntgNo != null) result.cntgNo = cntgNo;
+    if (dbcrSrno != null) result.dbcrSrno = dbcrSrno;
+    if (trSrno != null) result.trSrno = trSrno;
+    return result;
+  }
+
+  LendingItem._();
+
+  factory LendingItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LendingItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LendingItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'iscd')
+    ..aInt64(2, _omitFieldNames ? '' : 'dbcrQty')
+    ..aOS(3, _omitFieldNames ? '' : 'trCnrpIdntId')
+    ..aOS(4, _omitFieldNames ? '' : 'dbcrClsCode')
+    ..aOS(5, _omitFieldNames ? '' : 'cntgDate')
+    ..aInt64(6, _omitFieldNames ? '' : 'cntgNo')
+    ..aInt64(7, _omitFieldNames ? '' : 'dbcrSrno')
+    ..aInt64(8, _omitFieldNames ? '' : 'trSrno')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LendingItem clone() => LendingItem()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LendingItem copyWith(void Function(LendingItem) updates) => super.copyWith((message) => updates(message as LendingItem)) as LendingItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LendingItem create() => LendingItem._();
+  @$core.override
+  LendingItem createEmptyInstance() => create();
+  static $pb.PbList<LendingItem> createRepeated() => $pb.PbList<LendingItem>();
+  @$core.pragma('dart2js:noInline')
+  static LendingItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LendingItem>(create);
+  static LendingItem? _defaultInstance;
+
+  /// 종목코드 (A포함 12자리)
+  @$pb.TagNumber(1)
+  $core.String get iscd => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set iscd($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasIscd() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIscd() => $_clearField(1);
+
+  /// 대차수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get dbcrQty => $_getI64(1);
+  @$pb.TagNumber(2)
+  set dbcrQty($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDbcrQty() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDbcrQty() => $_clearField(2);
+
+  /// 거래상대방식별ID
+  @$pb.TagNumber(3)
+  $core.String get trCnrpIdntId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set trCnrpIdntId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTrCnrpIdntId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTrCnrpIdntId() => $_clearField(3);
+
+  /// 대차구분코드 (정정취소용)
+  @$pb.TagNumber(4)
+  $core.String get dbcrClsCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set dbcrClsCode($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDbcrClsCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDbcrClsCode() => $_clearField(4);
+
+  /// 체결일자 (YYYYMMDD)
+  @$pb.TagNumber(5)
+  $core.String get cntgDate => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set cntgDate($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCntgDate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCntgDate() => $_clearField(5);
+
+  /// 체결번호 (미존재시 0)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get cntgNo => $_getI64(5);
+  @$pb.TagNumber(6)
+  set cntgNo($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCntgNo() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCntgNo() => $_clearField(6);
+
+  /// 대차일련번호 (신규=0)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get dbcrSrno => $_getI64(6);
+  @$pb.TagNumber(7)
+  set dbcrSrno($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasDbcrSrno() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDbcrSrno() => $_clearField(7);
+
+  /// 거래일련번호 (신규=0)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get trSrno => $_getI64(7);
+  @$pb.TagNumber(8)
+  set trSrno($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasTrSrno() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearTrSrno() => $_clearField(8);
+}
+
+/// 대여 등록 결과 항목 (obfnp_loan_015a OutBlock1)
+class LendingResultItem extends $pb.GeneratedMessage {
+  factory LendingResultItem({
+    $fixnum.Int64? trSrno,
+    $fixnum.Int64? dbcrSrno,
+    $core.String? msgCode,
+    $core.String? uscsMsgCntt,
+  }) {
+    final result = create();
+    if (trSrno != null) result.trSrno = trSrno;
+    if (dbcrSrno != null) result.dbcrSrno = dbcrSrno;
+    if (msgCode != null) result.msgCode = msgCode;
+    if (uscsMsgCntt != null) result.uscsMsgCntt = uscsMsgCntt;
+    return result;
+  }
+
+  LendingResultItem._();
+
+  factory LendingResultItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LendingResultItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LendingResultItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'trSrno')
+    ..aInt64(2, _omitFieldNames ? '' : 'dbcrSrno')
+    ..aOS(3, _omitFieldNames ? '' : 'msgCode')
+    ..aOS(4, _omitFieldNames ? '' : 'uscsMsgCntt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LendingResultItem clone() => LendingResultItem()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LendingResultItem copyWith(void Function(LendingResultItem) updates) => super.copyWith((message) => updates(message as LendingResultItem)) as LendingResultItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LendingResultItem create() => LendingResultItem._();
+  @$core.override
+  LendingResultItem createEmptyInstance() => create();
+  static $pb.PbList<LendingResultItem> createRepeated() => $pb.PbList<LendingResultItem>();
+  @$core.pragma('dart2js:noInline')
+  static LendingResultItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LendingResultItem>(create);
+  static LendingResultItem? _defaultInstance;
+
+  /// 거래일련번호 (처리완료)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get trSrno => $_getI64(0);
+  @$pb.TagNumber(1)
+  set trSrno($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTrSrno() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTrSrno() => $_clearField(1);
+
+  /// 대차일련번호 (처리완료)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get dbcrSrno => $_getI64(1);
+  @$pb.TagNumber(2)
+  set dbcrSrno($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDbcrSrno() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDbcrSrno() => $_clearField(2);
+
+  /// 메시지코드
+  @$pb.TagNumber(3)
+  $core.String get msgCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set msgCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMsgCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMsgCode() => $_clearField(3);
+
+  /// 고객용메시지내용
+  @$pb.TagNumber(4)
+  $core.String get uscsMsgCntt => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set uscsMsgCntt($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasUscsMsgCntt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUscsMsgCntt() => $_clearField(4);
+}
+
+/// RegisterLending 요청
+class RegisterLendingRequest extends $pb.GeneratedMessage {
+  factory RegisterLendingRequest({
+    $core.String? fund,
+    LendingRequestHeader? request,
+    $core.Iterable<LendingItem>? items,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (request != null) result.request = request;
+    if (items != null) result.items.addAll(items);
+    return result;
+  }
+
+  RegisterLendingRequest._();
+
+  factory RegisterLendingRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory RegisterLendingRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RegisterLendingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOM<LendingRequestHeader>(2, _omitFieldNames ? '' : 'request', subBuilder: LendingRequestHeader.create)
+    ..pc<LendingItem>(3, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: LendingItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterLendingRequest clone() => RegisterLendingRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterLendingRequest copyWith(void Function(RegisterLendingRequest) updates) => super.copyWith((message) => updates(message as RegisterLendingRequest)) as RegisterLendingRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RegisterLendingRequest create() => RegisterLendingRequest._();
+  @$core.override
+  RegisterLendingRequest createEmptyInstance() => create();
+  static $pb.PbList<RegisterLendingRequest> createRepeated() => $pb.PbList<RegisterLendingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterLendingRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RegisterLendingRequest>(create);
+  static RegisterLendingRequest? _defaultInstance;
+
+  /// 펀드 리소스명 (예: "funds/KD0001")
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 대여 등록 헤더 정보 (InBlock1)
+  @$pb.TagNumber(2)
+  LendingRequestHeader get request => $_getN(1);
+  @$pb.TagNumber(2)
+  set request(LendingRequestHeader value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRequest() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRequest() => $_clearField(2);
+  @$pb.TagNumber(2)
+  LendingRequestHeader ensureRequest() => $_ensure(1);
+
+  /// 대여 종목 목록 (InBlock2)
+  @$pb.TagNumber(3)
+  $pb.PbList<LendingItem> get items => $_getList(2);
+}
+
+/// RegisterLending 응답
+class RegisterLendingResponse extends $pb.GeneratedMessage {
+  factory RegisterLendingResponse({
+    $core.Iterable<LendingResultItem>? results,
+  }) {
+    final result = create();
+    if (results != null) result.results.addAll(results);
+    return result;
+  }
+
+  RegisterLendingResponse._();
+
+  factory RegisterLendingResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory RegisterLendingResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RegisterLendingResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..pc<LendingResultItem>(1, _omitFieldNames ? '' : 'results', $pb.PbFieldType.PM, subBuilder: LendingResultItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterLendingResponse clone() => RegisterLendingResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterLendingResponse copyWith(void Function(RegisterLendingResponse) updates) => super.copyWith((message) => updates(message as RegisterLendingResponse)) as RegisterLendingResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RegisterLendingResponse create() => RegisterLendingResponse._();
+  @$core.override
+  RegisterLendingResponse createEmptyInstance() => create();
+  static $pb.PbList<RegisterLendingResponse> createRepeated() => $pb.PbList<RegisterLendingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterLendingResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RegisterLendingResponse>(create);
+  static RegisterLendingResponse? _defaultInstance;
+
+  /// 대여 등록 결과 목록 (OutBlock1)
+  @$pb.TagNumber(1)
+  $pb.PbList<LendingResultItem> get results => $_getList(0);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -503,6 +503,65 @@
         ]
       }
     },
+    "/v1/inventories/{fund}:registerLending": {
+      "post": {
+        "summary": "대여 등록 (obfnp_loan_015a - 45221 화면)",
+        "operationId": "InventoryService_RegisterLending",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryRegisterLendingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명 (예: \"funds/KD0001\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "request": {
+                  "$ref": "#/definitions/inventoryLendingRequestHeader",
+                  "title": "대여 등록 헤더 정보 (InBlock1)"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/inventoryLendingItem"
+                  },
+                  "title": "대여 종목 목록 (InBlock2)"
+                }
+              },
+              "title": "RegisterLending 요청",
+              "required": [
+                "request",
+                "items"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
     "/v1/inventories/{fund}:repayLoan": {
       "post": {
         "summary": "대차 상환 (원장 즉시 차감)",
@@ -966,6 +1025,149 @@
       },
       "title": "주식 원장 재고 데이터"
     },
+    "inventoryLendingItem": {
+      "type": "object",
+      "properties": {
+        "iscd": {
+          "type": "string",
+          "title": "종목코드 (A포함 12자리)"
+        },
+        "dbcrQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "대차수량"
+        },
+        "trCnrpIdntId": {
+          "type": "string",
+          "title": "거래상대방식별ID"
+        },
+        "dbcrClsCode": {
+          "type": "string",
+          "title": "대차구분코드 (정정취소용)"
+        },
+        "cntgDate": {
+          "type": "string",
+          "title": "체결일자 (YYYYMMDD)"
+        },
+        "cntgNo": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결번호 (미존재시 0)"
+        },
+        "dbcrSrno": {
+          "type": "string",
+          "format": "int64",
+          "title": "대차일련번호 (신규=0)"
+        },
+        "trSrno": {
+          "type": "string",
+          "format": "int64",
+          "title": "거래일련번호 (신규=0)"
+        }
+      },
+      "title": "대여 등록 종목 항목 (obfnp_loan_015a InBlock2 - 복수종목)",
+      "required": [
+        "iscd",
+        "dbcrQty"
+      ]
+    },
+    "inventoryLendingRequestHeader": {
+      "type": "object",
+      "properties": {
+        "prosClsCode": {
+          "type": "string",
+          "title": "처리구분코드 (1=등록, 2=수정, 3=취소)"
+        },
+        "dbcrOcrnDate": {
+          "type": "string",
+          "title": "대차발생일자 (당일, YYYYMMDD)"
+        },
+        "fncd": {
+          "type": "string",
+          "title": "펀드코드 (4자리)"
+        },
+        "prodPstnClsCode": {
+          "type": "string",
+          "title": "상품포지션구분코드 (1=상품, 2=매도)"
+        },
+        "dbcrClsCode": {
+          "type": "string",
+          "title": "대차구분코드 (1=대여, 2=차입승인)"
+        },
+        "dbcrCnofClsCode": {
+          "type": "string",
+          "title": "대차상대처구분코드 (1=예탁원, 2=증권금융, 8=리테일, 9=기타)"
+        },
+        "dbcrTrClsCode": {
+          "type": "string",
+          "title": "대차거래구분코드 (1=결제, 2=경쟁, 3=맞춤, 4=지정)"
+        },
+        "dbcrFert": {
+          "type": "number",
+          "format": "double",
+          "title": "대차수수료율 (소수점 4자리)"
+        },
+        "relaFert": {
+          "type": "number",
+          "format": "double",
+          "title": "중개수수료율 (소수점 4자리)"
+        },
+        "insDbcrYn": {
+          "type": "string",
+          "title": "내부대차여부 (Y/N)"
+        },
+        "trCnrpIstuCod": {
+          "type": "string",
+          "title": "거래상대방기관코드"
+        },
+        "trCnrpFncd": {
+          "type": "string",
+          "title": "거래상대방펀드코드"
+        },
+        "trCnrpDepsPprtClcd": {
+          "type": "string",
+          "title": "거래상대방예탁재산구분코드"
+        },
+        "trCnrpSlbCode": {
+          "type": "string",
+          "title": "거래상대방SLB코드"
+        }
+      },
+      "title": "대여 등록 요청 헤더 (obfnp_loan_015a InBlock1)",
+      "required": [
+        "prosClsCode",
+        "dbcrOcrnDate",
+        "fncd",
+        "prodPstnClsCode",
+        "dbcrClsCode",
+        "dbcrCnofClsCode",
+        "dbcrTrClsCode"
+      ]
+    },
+    "inventoryLendingResultItem": {
+      "type": "object",
+      "properties": {
+        "trSrno": {
+          "type": "string",
+          "format": "int64",
+          "title": "거래일련번호 (처리완료)"
+        },
+        "dbcrSrno": {
+          "type": "string",
+          "format": "int64",
+          "title": "대차일련번호 (처리완료)"
+        },
+        "msgCode": {
+          "type": "string",
+          "title": "메시지코드"
+        },
+        "uscsMsgCntt": {
+          "type": "string",
+          "title": "고객용메시지내용"
+        }
+      },
+      "title": "대여 등록 결과 항목 (obfnp_loan_015a OutBlock1)"
+    },
     "inventoryListInventoriesResponse": {
       "type": "object",
       "properties": {
@@ -1190,6 +1392,19 @@
       "default": "PRODUCT_POSITION_TYPE_UNSPECIFIED",
       "description": "- PRODUCT_POSITION_TYPE_STOCK: 상품유가증권 (1=상품)\n - PRODUCT_POSITION_TYPE_SELL: 매도유가증권 (2=매도)",
       "title": "상품포지션구분 (PROD_PSTN_CLS_CODE)\n042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도"
+    },
+    "inventoryRegisterLendingResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inventoryLendingResultItem"
+          },
+          "title": "대여 등록 결과 목록 (OutBlock1)"
+        }
+      },
+      "title": "RegisterLending 응답"
     },
     "inventoryRepayLoanResponse": {
       "type": "object",

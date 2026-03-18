@@ -93,6 +93,11 @@ class InventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$batchProcessLoanDeliveries, request, options: options);
   }
 
+  /// 대여 등록 (obfnp_loan_015a - 45221 화면)
+  $grpc.ResponseFuture<$0.RegisterLendingResponse> registerLending($0.RegisterLendingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$registerLending, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getInventory = $grpc.ClientMethod<$0.GetInventoryRequest, $0.Inventory>(
@@ -143,6 +148,10 @@ class InventoryServiceClient extends $grpc.Client {
       '/kdo.v1.inventory.InventoryService/BatchProcessLoanDeliveries',
       ($0.BatchProcessLoanDeliveriesRequest value) => value.writeToBuffer(),
       $0.BatchProcessLoanDeliveriesResponse.fromBuffer);
+  static final _$registerLending = $grpc.ClientMethod<$0.RegisterLendingRequest, $0.RegisterLendingResponse>(
+      '/kdo.v1.inventory.InventoryService/RegisterLending',
+      ($0.RegisterLendingRequest value) => value.writeToBuffer(),
+      $0.RegisterLendingResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.inventory.InventoryService')
@@ -234,6 +243,13 @@ abstract class InventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.BatchProcessLoanDeliveriesRequest.fromBuffer(value),
         ($0.BatchProcessLoanDeliveriesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.RegisterLendingRequest, $0.RegisterLendingResponse>(
+        'RegisterLending',
+        registerLending_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.RegisterLendingRequest.fromBuffer(value),
+        ($0.RegisterLendingResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Inventory> getInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetInventoryRequest> $request) async {
@@ -307,5 +323,11 @@ abstract class InventoryServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.BatchProcessLoanDeliveriesResponse> batchProcessLoanDeliveries($grpc.ServiceCall call, $0.BatchProcessLoanDeliveriesRequest request);
+
+  $async.Future<$0.RegisterLendingResponse> registerLending_Pre($grpc.ServiceCall $call, $async.Future<$0.RegisterLendingRequest> $request) async {
+    return registerLending($call, await $request);
+  }
+
+  $async.Future<$0.RegisterLendingResponse> registerLending($grpc.ServiceCall call, $0.RegisterLendingRequest request);
 
 }

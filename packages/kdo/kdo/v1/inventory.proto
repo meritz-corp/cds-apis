@@ -111,6 +111,15 @@ service InventoryService {
     };
     option (google.api.method_signature) = "fund,items";
   }
+
+  // 대여 등록 (obfnp_loan_015a - 45221 화면)
+  rpc RegisterLending(RegisterLendingRequest) returns (RegisterLendingResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{fund=funds/*}:registerLending"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,request,items";
+  }
 }
 
 // 상품포지션구분 (PROD_PSTN_CLS_CODE)
@@ -674,4 +683,116 @@ message LoanDeliveryItem {
   string dpnm = 35;
   // 최초체결일자
   string frst_cntg_date = 36;
+}
+
+// ========== 대여 등록 Request/Response Messages ==========
+
+// 대여 등록 요청 헤더 (obfnp_loan_015a InBlock1)
+message LendingRequestHeader {
+  // 처리구분코드 (1=등록, 2=수정, 3=취소)
+  string pros_cls_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 대차발생일자 (당일, YYYYMMDD)
+  string dbcr_ocrn_date = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드코드 (4자리)
+  string fncd = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 상품포지션구분코드 (1=상품, 2=매도)
+  string prod_pstn_cls_code = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 대차구분코드 (1=대여, 2=차입승인)
+  string dbcr_cls_code = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // 대차상대처구분코드 (1=예탁원, 2=증권금융, 8=리테일, 9=기타)
+  string dbcr_cnof_cls_code = 6 [(google.api.field_behavior) = REQUIRED];
+
+  // 대차거래구분코드 (1=결제, 2=경쟁, 3=맞춤, 4=지정)
+  string dbcr_tr_cls_code = 7 [(google.api.field_behavior) = REQUIRED];
+
+  // 대차수수료율 (소수점 4자리)
+  double dbcr_fert = 8;
+
+  // 중개수수료율 (소수점 4자리)
+  double rela_fert = 9;
+
+  // 내부대차여부 (Y/N)
+  string ins_dbcr_yn = 10;
+
+  // 거래상대방기관코드
+  string tr_cnrp_istu_cod = 11;
+
+  // 거래상대방펀드코드
+  string tr_cnrp_fncd = 12;
+
+  // 거래상대방예탁재산구분코드
+  string tr_cnrp_deps_pprt_clcd = 13;
+
+  // 거래상대방SLB코드
+  string tr_cnrp_slb_code = 14;
+}
+
+// 대여 등록 종목 항목 (obfnp_loan_015a InBlock2 - 복수종목)
+message LendingItem {
+  // 종목코드 (A포함 12자리)
+  string iscd = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 대차수량
+  int64 dbcr_qty = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 거래상대방식별ID
+  string tr_cnrp_idnt_id = 3;
+
+  // 대차구분코드 (정정취소용)
+  string dbcr_cls_code = 4;
+
+  // 체결일자 (YYYYMMDD)
+  string cntg_date = 5;
+
+  // 체결번호 (미존재시 0)
+  int64 cntg_no = 6;
+
+  // 대차일련번호 (신규=0)
+  int64 dbcr_srno = 7;
+
+  // 거래일련번호 (신규=0)
+  int64 tr_srno = 8;
+}
+
+// 대여 등록 결과 항목 (obfnp_loan_015a OutBlock1)
+message LendingResultItem {
+  // 거래일련번호 (처리완료)
+  int64 tr_srno = 1;
+
+  // 대차일련번호 (처리완료)
+  int64 dbcr_srno = 2;
+
+  // 메시지코드
+  string msg_code = 3;
+
+  // 고객용메시지내용
+  string uscs_msg_cntt = 4;
+}
+
+// RegisterLending 요청
+message RegisterLendingRequest {
+  // 펀드 리소스명 (예: "funds/KD0001")
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 대여 등록 헤더 정보 (InBlock1)
+  LendingRequestHeader request = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 대여 종목 목록 (InBlock2)
+  repeated LendingItem items = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// RegisterLending 응답
+message RegisterLendingResponse {
+  // 대여 등록 결과 목록 (OutBlock1)
+  repeated LendingResultItem results = 1;
 }

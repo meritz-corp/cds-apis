@@ -607,6 +607,123 @@ pub struct LoanDeliveryItem {
     #[prost(string, tag="36")]
     pub frst_cntg_date: ::prost::alloc::string::String,
 }
+// ========== 대여 등록 Request/Response Messages ==========
+
+/// 대여 등록 요청 헤더 (obfnp_loan_015a InBlock1)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LendingRequestHeader {
+    /// 처리구분코드 (1=등록, 2=수정, 3=취소)
+    #[prost(string, tag="1")]
+    pub pros_cls_code: ::prost::alloc::string::String,
+    /// 대차발생일자 (당일, YYYYMMDD)
+    #[prost(string, tag="2")]
+    pub dbcr_ocrn_date: ::prost::alloc::string::String,
+    /// 펀드코드 (4자리)
+    #[prost(string, tag="3")]
+    pub fncd: ::prost::alloc::string::String,
+    /// 상품포지션구분코드 (1=상품, 2=매도)
+    #[prost(string, tag="4")]
+    pub prod_pstn_cls_code: ::prost::alloc::string::String,
+    /// 대차구분코드 (1=대여, 2=차입승인)
+    #[prost(string, tag="5")]
+    pub dbcr_cls_code: ::prost::alloc::string::String,
+    /// 대차상대처구분코드 (1=예탁원, 2=증권금융, 8=리테일, 9=기타)
+    #[prost(string, tag="6")]
+    pub dbcr_cnof_cls_code: ::prost::alloc::string::String,
+    /// 대차거래구분코드 (1=결제, 2=경쟁, 3=맞춤, 4=지정)
+    #[prost(string, tag="7")]
+    pub dbcr_tr_cls_code: ::prost::alloc::string::String,
+    /// 대차수수료율 (소수점 4자리)
+    #[prost(double, tag="8")]
+    pub dbcr_fert: f64,
+    /// 중개수수료율 (소수점 4자리)
+    #[prost(double, tag="9")]
+    pub rela_fert: f64,
+    /// 내부대차여부 (Y/N)
+    #[prost(string, tag="10")]
+    pub ins_dbcr_yn: ::prost::alloc::string::String,
+    /// 거래상대방기관코드
+    #[prost(string, tag="11")]
+    pub tr_cnrp_istu_cod: ::prost::alloc::string::String,
+    /// 거래상대방펀드코드
+    #[prost(string, tag="12")]
+    pub tr_cnrp_fncd: ::prost::alloc::string::String,
+    /// 거래상대방예탁재산구분코드
+    #[prost(string, tag="13")]
+    pub tr_cnrp_deps_pprt_clcd: ::prost::alloc::string::String,
+    /// 거래상대방SLB코드
+    #[prost(string, tag="14")]
+    pub tr_cnrp_slb_code: ::prost::alloc::string::String,
+}
+/// 대여 등록 종목 항목 (obfnp_loan_015a InBlock2 - 복수종목)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LendingItem {
+    /// 종목코드 (A포함 12자리)
+    #[prost(string, tag="1")]
+    pub iscd: ::prost::alloc::string::String,
+    /// 대차수량
+    #[prost(int64, tag="2")]
+    pub dbcr_qty: i64,
+    /// 거래상대방식별ID
+    #[prost(string, tag="3")]
+    pub tr_cnrp_idnt_id: ::prost::alloc::string::String,
+    /// 대차구분코드 (정정취소용)
+    #[prost(string, tag="4")]
+    pub dbcr_cls_code: ::prost::alloc::string::String,
+    /// 체결일자 (YYYYMMDD)
+    #[prost(string, tag="5")]
+    pub cntg_date: ::prost::alloc::string::String,
+    /// 체결번호 (미존재시 0)
+    #[prost(int64, tag="6")]
+    pub cntg_no: i64,
+    /// 대차일련번호 (신규=0)
+    #[prost(int64, tag="7")]
+    pub dbcr_srno: i64,
+    /// 거래일련번호 (신규=0)
+    #[prost(int64, tag="8")]
+    pub tr_srno: i64,
+}
+/// 대여 등록 결과 항목 (obfnp_loan_015a OutBlock1)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LendingResultItem {
+    /// 거래일련번호 (처리완료)
+    #[prost(int64, tag="1")]
+    pub tr_srno: i64,
+    /// 대차일련번호 (처리완료)
+    #[prost(int64, tag="2")]
+    pub dbcr_srno: i64,
+    /// 메시지코드
+    #[prost(string, tag="3")]
+    pub msg_code: ::prost::alloc::string::String,
+    /// 고객용메시지내용
+    #[prost(string, tag="4")]
+    pub uscs_msg_cntt: ::prost::alloc::string::String,
+}
+/// RegisterLending 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RegisterLendingRequest {
+    /// 펀드 리소스명 (예: "funds/KD0001")
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 대여 등록 헤더 정보 (InBlock1)
+    #[prost(message, optional, tag="2")]
+    pub request: ::core::option::Option<LendingRequestHeader>,
+    /// 대여 종목 목록 (InBlock2)
+    #[prost(message, repeated, tag="3")]
+    pub items: ::prost::alloc::vec::Vec<LendingItem>,
+}
+/// RegisterLending 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RegisterLendingResponse {
+    /// 대여 등록 결과 목록 (OutBlock1)
+    #[prost(message, repeated, tag="1")]
+    pub results: ::prost::alloc::vec::Vec<LendingResultItem>,
+}
 /// 상품포지션구분 (PROD_PSTN_CLS_CODE)
 /// 042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

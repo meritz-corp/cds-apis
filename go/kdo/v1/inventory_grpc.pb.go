@@ -46,6 +46,8 @@ type InventoryServiceClient interface {
 	ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest, opts ...grpc.CallOption) (*ListLoanDeliveriesResponse, error)
 	// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
 	BatchProcessLoanDeliveries(ctx context.Context, in *BatchProcessLoanDeliveriesRequest, opts ...grpc.CallOption) (*BatchProcessLoanDeliveriesResponse, error)
+	// 대여 등록 (obfnp_loan_015a - 45221 화면)
+	RegisterLending(ctx context.Context, in *RegisterLendingRequest, opts ...grpc.CallOption) (*RegisterLendingResponse, error)
 }
 
 type inventoryServiceClient struct {
@@ -210,6 +212,15 @@ func (c *inventoryServiceClient) BatchProcessLoanDeliveries(ctx context.Context,
 	return out, nil
 }
 
+func (c *inventoryServiceClient) RegisterLending(ctx context.Context, in *RegisterLendingRequest, opts ...grpc.CallOption) (*RegisterLendingResponse, error) {
+	out := new(RegisterLendingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/RegisterLending", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InventoryServiceServer is the server API for InventoryService service.
 // All implementations must embed UnimplementedInventoryServiceServer
 // for forward compatibility
@@ -238,6 +249,8 @@ type InventoryServiceServer interface {
 	ListLoanDeliveries(context.Context, *ListLoanDeliveriesRequest) (*ListLoanDeliveriesResponse, error)
 	// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
 	BatchProcessLoanDeliveries(context.Context, *BatchProcessLoanDeliveriesRequest) (*BatchProcessLoanDeliveriesResponse, error)
+	// 대여 등록 (obfnp_loan_015a - 45221 화면)
+	RegisterLending(context.Context, *RegisterLendingRequest) (*RegisterLendingResponse, error)
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -280,6 +293,9 @@ func (UnimplementedInventoryServiceServer) ListLoanDeliveries(context.Context, *
 }
 func (UnimplementedInventoryServiceServer) BatchProcessLoanDeliveries(context.Context, *BatchProcessLoanDeliveriesRequest) (*BatchProcessLoanDeliveriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchProcessLoanDeliveries not implemented")
+}
+func (UnimplementedInventoryServiceServer) RegisterLending(context.Context, *RegisterLendingRequest) (*RegisterLendingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterLending not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -516,6 +532,24 @@ func _InventoryService_BatchProcessLoanDeliveries_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_RegisterLending_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterLendingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).RegisterLending(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/RegisterLending",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).RegisterLending(ctx, req.(*RegisterLendingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InventoryService_ServiceDesc is the grpc.ServiceDesc for InventoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -562,6 +596,10 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchProcessLoanDeliveries",
 			Handler:    _InventoryService_BatchProcessLoanDeliveries_Handler,
+		},
+		{
+			MethodName: "RegisterLending",
+			Handler:    _InventoryService_RegisterLending_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

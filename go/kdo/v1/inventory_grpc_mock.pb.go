@@ -639,6 +639,26 @@ func (mr *MockInventoryServiceClientMockRecorder) ListLoanDeliveries(ctx, in int
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLoanDeliveries", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListLoanDeliveries), varargs...)
 }
 
+// RegisterLending mocks base method.
+func (m *MockInventoryServiceClient) RegisterLending(ctx context.Context, in *RegisterLendingRequest, opts ...grpc.CallOption) (*RegisterLendingResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RegisterLending", varargs...)
+	ret0, _ := ret[0].(*RegisterLendingResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterLending indicates an expected call of RegisterLending.
+func (mr *MockInventoryServiceClientMockRecorder) RegisterLending(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterLending", reflect.TypeOf((*MockInventoryServiceClient)(nil).RegisterLending), varargs...)
+}
+
 // RepayLoan mocks base method.
 func (m *MockInventoryServiceClient) RepayLoan(ctx context.Context, in *RepayLoanRequest, opts ...grpc.CallOption) (*RepayLoanResponse, error) {
 	m.ctrl.T.Helper()
@@ -870,6 +890,21 @@ func (m *MockInventoryServiceServer) ListLoanDeliveries(ctx context.Context, in 
 func (mr *MockInventoryServiceServerMockRecorder) ListLoanDeliveries(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLoanDeliveries", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListLoanDeliveries), ctx, in)
+}
+
+// RegisterLending mocks base method.
+func (m *MockInventoryServiceServer) RegisterLending(ctx context.Context, in *RegisterLendingRequest) (*RegisterLendingResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterLending", ctx, in)
+	ret0, _ := ret[0].(*RegisterLendingResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterLending indicates an expected call of RegisterLending.
+func (mr *MockInventoryServiceServerMockRecorder) RegisterLending(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterLending", reflect.TypeOf((*MockInventoryServiceServer)(nil).RegisterLending), ctx, in)
 }
 
 // RepayLoan mocks base method.

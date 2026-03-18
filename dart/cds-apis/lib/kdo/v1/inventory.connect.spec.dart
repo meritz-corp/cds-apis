@@ -106,4 +106,12 @@ abstract final class InventoryService {
     kdov1inventory.BatchProcessLoanDeliveriesRequest.new,
     kdov1inventory.BatchProcessLoanDeliveriesResponse.new,
   );
+
+  /// 대여 등록 (obfnp_loan_015a - 45221 화면)
+  static const registerLending = connect.Spec(
+    '/$name/RegisterLending',
+    connect.StreamType.unary,
+    kdov1inventory.RegisterLendingRequest.new,
+    kdov1inventory.RegisterLendingResponse.new,
+  );
 }
