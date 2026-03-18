@@ -34,7 +34,7 @@ class Hedge extends $pb.GeneratedMessage {
     $core.bool? isActive,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
-    HedgeQuoteType? quoteType,
+    ExecPriceType? execPriceType,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -45,7 +45,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (isActive != null) result.isActive = isActive;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
-    if (quoteType != null) result.quoteType = quoteType;
+    if (execPriceType != null) result.execPriceType = execPriceType;
     return result;
   }
 
@@ -63,7 +63,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOB(6, _omitFieldNames ? '' : 'isActive')
     ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
-    ..e<HedgeQuoteType>(9, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: HedgeQuoteType.HEDGE_QUOTE_TYPE_UNSPECIFIED, valueOf: HedgeQuoteType.valueOf, enumValues: HedgeQuoteType.values)
+    ..e<ExecPriceType>(9, _omitFieldNames ? '' : 'execPriceType', $pb.PbFieldType.OE, defaultOrMaker: ExecPriceType.EXEC_PRICE_TYPE_UNSPECIFIED, valueOf: ExecPriceType.valueOf, enumValues: ExecPriceType.values)
     ..hasRequiredFields = false
   ;
 
@@ -170,15 +170,15 @@ class Hedge extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $2.Timestamp ensureUpdateTime() => $_ensure(7);
 
-  /// 헷지 주문 호가 전략
+  /// 헷지 주문 체결 가격 유형
   @$pb.TagNumber(9)
-  HedgeQuoteType get quoteType => $_getN(8);
+  ExecPriceType get execPriceType => $_getN(8);
   @$pb.TagNumber(9)
-  set quoteType(HedgeQuoteType value) => $_setField(9, value);
+  set execPriceType(ExecPriceType value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasQuoteType() => $_has(8);
+  $core.bool hasExecPriceType() => $_has(8);
   @$pb.TagNumber(9)
-  void clearQuoteType() => $_clearField(9);
+  void clearExecPriceType() => $_clearField(9);
 }
 
 enum HedgeMethod_Method {

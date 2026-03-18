@@ -636,6 +636,83 @@ impl<'de> serde::Deserialize<'de> for EtfDecompositionHedge {
         deserializer.deserialize_struct("kdo.v1.hedge.EtfDecompositionHedge", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ExecPriceType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "EXEC_PRICE_TYPE_UNSPECIFIED",
+            Self::ImmediateFill => "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
+            Self::CounterBest => "EXEC_PRICE_TYPE_COUNTER_BEST",
+            Self::CounterBestPlusTick => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for ExecPriceType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "EXEC_PRICE_TYPE_UNSPECIFIED",
+            "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
+            "EXEC_PRICE_TYPE_COUNTER_BEST",
+            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ExecPriceType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "EXEC_PRICE_TYPE_UNSPECIFIED" => Ok(ExecPriceType::Unspecified),
+                    "EXEC_PRICE_TYPE_IMMEDIATE_FILL" => Ok(ExecPriceType::ImmediateFill),
+                    "EXEC_PRICE_TYPE_COUNTER_BEST" => Ok(ExecPriceType::CounterBest),
+                    "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK" => Ok(ExecPriceType::CounterBestPlusTick),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FutureHedge {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1002,9 +1079,9 @@ impl serde::Serialize for Hedge {
             struct_ser.serialize_field("update_time", v)?;
         }
         if true {
-            let v = HedgeQuoteType::try_from(self.quote_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.quote_type)))?;
-            struct_ser.serialize_field("quote_type", &v)?;
+            let v = ExecPriceType::try_from(self.exec_price_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.exec_price_type)))?;
+            struct_ser.serialize_field("exec_price_type", &v)?;
         }
         struct_ser.end()
     }
@@ -1030,8 +1107,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "createTime",
             "update_time",
             "updateTime",
-            "quote_type",
-            "quoteType",
+            "exec_price_type",
+            "execPriceType",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1044,7 +1121,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             IsActive,
             CreateTime,
             UpdateTime,
-            QuoteType,
+            ExecPriceType,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1075,7 +1152,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "isActive" | "is_active" => Ok(GeneratedField::IsActive),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
-                            "quoteType" | "quote_type" => Ok(GeneratedField::QuoteType),
+                            "execPriceType" | "exec_price_type" => Ok(GeneratedField::ExecPriceType),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1103,7 +1180,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut is_active__ = None;
                 let mut create_time__ = None;
                 let mut update_time__ = None;
-                let mut quote_type__ = None;
+                let mut exec_price_type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1156,11 +1233,11 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             }
                             update_time__ = map_.next_value()?;
                         }
-                        GeneratedField::QuoteType => {
-                            if quote_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quoteType"));
+                        GeneratedField::ExecPriceType => {
+                            if exec_price_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("execPriceType"));
                             }
-                            quote_type__ = Some(map_.next_value::<HedgeQuoteType>()? as i32);
+                            exec_price_type__ = Some(map_.next_value::<ExecPriceType>()? as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1176,7 +1253,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     is_active: is_active__.unwrap_or_default(),
                     create_time: create_time__,
                     update_time: update_time__,
-                    quote_type: quote_type__.unwrap_or_default(),
+                    exec_price_type: exec_price_type__.unwrap_or_default(),
                 })
             }
         }
@@ -1686,83 +1763,6 @@ impl<'de> serde::Deserialize<'de> for HedgeMethod {
             }
         }
         deserializer.deserialize_struct("kdo.v1.hedge.HedgeMethod", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for HedgeQuoteType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "HEDGE_QUOTE_TYPE_UNSPECIFIED",
-            Self::ImmediateFill => "HEDGE_QUOTE_TYPE_IMMEDIATE_FILL",
-            Self::CounterBest => "HEDGE_QUOTE_TYPE_COUNTER_BEST",
-            Self::CounterBestPlusTick => "HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for HedgeQuoteType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "HEDGE_QUOTE_TYPE_UNSPECIFIED",
-            "HEDGE_QUOTE_TYPE_IMMEDIATE_FILL",
-            "HEDGE_QUOTE_TYPE_COUNTER_BEST",
-            "HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = HedgeQuoteType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "HEDGE_QUOTE_TYPE_UNSPECIFIED" => Ok(HedgeQuoteType::Unspecified),
-                    "HEDGE_QUOTE_TYPE_IMMEDIATE_FILL" => Ok(HedgeQuoteType::ImmediateFill),
-                    "HEDGE_QUOTE_TYPE_COUNTER_BEST" => Ok(HedgeQuoteType::CounterBest),
-                    "HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK" => Ok(HedgeQuoteType::CounterBestPlusTick),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListHedgeGroupsRequest {

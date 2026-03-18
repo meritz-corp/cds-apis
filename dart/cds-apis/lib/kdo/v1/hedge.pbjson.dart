@@ -14,23 +14,22 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use hedgeQuoteTypeDescriptor instead')
-const HedgeQuoteType$json = {
-  '1': 'HedgeQuoteType',
+@$core.Deprecated('Use execPriceTypeDescriptor instead')
+const ExecPriceType$json = {
+  '1': 'ExecPriceType',
   '2': [
-    {'1': 'HEDGE_QUOTE_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'HEDGE_QUOTE_TYPE_IMMEDIATE_FILL', '2': 1},
-    {'1': 'HEDGE_QUOTE_TYPE_COUNTER_BEST', '2': 2},
-    {'1': 'HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK', '2': 3},
+    {'1': 'EXEC_PRICE_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'EXEC_PRICE_TYPE_IMMEDIATE_FILL', '2': 1},
+    {'1': 'EXEC_PRICE_TYPE_COUNTER_BEST', '2': 2},
+    {'1': 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK', '2': 3},
   ],
 };
 
-/// Descriptor for `HedgeQuoteType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List hedgeQuoteTypeDescriptor = $convert.base64Decode(
-    'Cg5IZWRnZVF1b3RlVHlwZRIgChxIRURHRV9RVU9URV9UWVBFX1VOU1BFQ0lGSUVEEAASIwofSE'
-    'VER0VfUVVPVEVfVFlQRV9JTU1FRElBVEVfRklMTBABEiEKHUhFREdFX1FVT1RFX1RZUEVfQ09V'
-    'TlRFUl9CRVNUEAISKwonSEVER0VfUVVPVEVfVFlQRV9DT1VOVEVSX0JFU1RfUExVU19USUNLEA'
-    'M=');
+/// Descriptor for `ExecPriceType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List execPriceTypeDescriptor = $convert.base64Decode(
+    'Cg1FeGVjUHJpY2VUeXBlEh8KG0VYRUNfUFJJQ0VfVFlQRV9VTlNQRUNJRklFRBAAEiIKHkVYRU'
+    'NfUFJJQ0VfVFlQRV9JTU1FRElBVEVfRklMTBABEiAKHEVYRUNfUFJJQ0VfVFlQRV9DT1VOVEVS'
+    'X0JFU1QQAhIqCiZFWEVDX1BSSUNFX1RZUEVfQ09VTlRFUl9CRVNUX1BMVVNfVElDSxAD');
 
 @$core.Deprecated('Use hedgeDescriptor instead')
 const Hedge$json = {
@@ -44,7 +43,7 @@ const Hedge$json = {
     {'1': 'is_active', '3': 6, '4': 1, '5': 8, '10': 'isActive'},
     {'1': 'create_time', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
-    {'1': 'quote_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.hedge.HedgeQuoteType', '10': 'quoteType'},
+    {'1': 'exec_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.hedge.ExecPriceType', '10': 'execPriceType'},
   ],
   '7': {},
 };
@@ -57,9 +56,9 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'VkZ2UuSGVkZ2VNZXRob2RCBOJBAQJSC2hlZGdlTWV0aG9kEhsKCWlzX2FjdGl2ZRgGIAEoCFII'
     'aXNBY3RpdmUSQQoLY3JlYXRlX3RpbWUYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW'
     '1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90aW1lGAggASgLMhouZ29vZ2xlLnByb3Rv'
-    'YnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRI7CgpxdW90ZV90eXBlGAkgASgOMhwua2'
-    'RvLnYxLmhlZGdlLkhlZGdlUXVvdGVUeXBlUglxdW90ZVR5cGU6KupBJwoVa2RvLmNkc2FwaXMu'
-    'eHl6L0hlZGdlEg5oZWRnZXMve2hlZGdlfQ==');
+    'YnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRJDCg9leGVjX3ByaWNlX3R5cGUYCSABKA'
+    '4yGy5rZG8udjEuaGVkZ2UuRXhlY1ByaWNlVHlwZVINZXhlY1ByaWNlVHlwZToq6kEnChVrZG8u'
+    'Y2RzYXBpcy54eXovSGVkZ2USDmhlZGdlcy97aGVkZ2V9');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {
