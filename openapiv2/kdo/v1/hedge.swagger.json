@@ -248,6 +248,10 @@
                   "format": "date-time",
                   "title": "수정 시간",
                   "readOnly": true
+                },
+                "quoteType": {
+                  "$ref": "#/definitions/hedgeHedgeQuoteType",
+                  "title": "헷지 주문 호가 전략"
                 }
               },
               "title": "수정할 헷지 정보",
@@ -599,6 +603,10 @@
           "format": "date-time",
           "title": "수정 시간",
           "readOnly": true
+        },
+        "quoteType": {
+          "$ref": "#/definitions/hedgeHedgeQuoteType",
+          "title": "헷지 주문 호가 전략"
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",
@@ -708,6 +716,17 @@
         }
       },
       "title": "헷지 방식"
+    },
+    "hedgeHedgeQuoteType": {
+      "type": "string",
+      "enum": [
+        "HEDGE_QUOTE_TYPE_UNSPECIFIED",
+        "HEDGE_QUOTE_TYPE_IMMEDIATE_FILL",
+        "HEDGE_QUOTE_TYPE_COUNTER_BEST",
+        "HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK"
+      ],
+      "default": "HEDGE_QUOTE_TYPE_UNSPECIFIED",
+      "description": "헷지 주문 호가 전략\n거래소의 구체적인 호가 유형(QuoteType)과 달리,\n헷지 주문의 전략적 의도를 표현합니다.\n\n - HEDGE_QUOTE_TYPE_UNSPECIFIED: 미지정\n - HEDGE_QUOTE_TYPE_IMMEDIATE_FILL: 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도\n - HEDGE_QUOTE_TYPE_COUNTER_BEST: 상대호가: 상대방 최우선호가 가격으로 지정가 주문\n - HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK: 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱"
     },
     "hedgeListHedgeGroupsResponse": {
       "type": "object",

@@ -100,6 +100,25 @@ service HedgeService {
   }
 }
 
+// ========== Enums ==========
+
+// 헷지 주문 호가 전략
+// 거래소의 구체적인 호가 유형(QuoteType)과 달리,
+// 헷지 주문의 전략적 의도를 표현합니다.
+enum HedgeQuoteType {
+  // 미지정
+  HEDGE_QUOTE_TYPE_UNSPECIFIED = 0;
+
+  // 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도
+  HEDGE_QUOTE_TYPE_IMMEDIATE_FILL = 1;
+
+  // 상대호가: 상대방 최우선호가 가격으로 지정가 주문
+  HEDGE_QUOTE_TYPE_COUNTER_BEST = 2;
+
+  // 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱
+  HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK = 3;
+}
+
 // ========== Resource Messages ==========
 
 // Hedge: 펀드 단위 즉시 헷지 설정
@@ -133,6 +152,9 @@ message Hedge {
 
   // 수정 시간
   google.protobuf.Timestamp update_time = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 헷지 주문 호가 전략
+  HedgeQuoteType quote_type = 9;
 }
 
 // 헷지 방식

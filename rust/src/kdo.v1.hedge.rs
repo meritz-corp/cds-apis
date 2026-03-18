@@ -31,6 +31,9 @@ pub struct Hedge {
     /// 수정 시간
     #[prost(message, optional, tag="8")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 헷지 주문 호가 전략
+    #[prost(enumeration="HedgeQuoteType", tag="9")]
+    pub quote_type: i32,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -311,6 +314,47 @@ pub struct DeleteHedgeGroupRequest {
     /// 삭제할 헷지그룹 리소스 이름
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
+}
+// ========== Enums ==========
+
+/// 헷지 주문 호가 전략
+/// 거래소의 구체적인 호가 유형(QuoteType)과 달리,
+/// 헷지 주문의 전략적 의도를 표현합니다.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum HedgeQuoteType {
+    /// 미지정
+    Unspecified = 0,
+    /// 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도
+    ImmediateFill = 1,
+    /// 상대호가: 상대방 최우선호가 가격으로 지정가 주문
+    CounterBest = 2,
+    /// 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱
+    CounterBestPlusTick = 3,
+}
+impl HedgeQuoteType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            HedgeQuoteType::Unspecified => "HEDGE_QUOTE_TYPE_UNSPECIFIED",
+            HedgeQuoteType::ImmediateFill => "HEDGE_QUOTE_TYPE_IMMEDIATE_FILL",
+            HedgeQuoteType::CounterBest => "HEDGE_QUOTE_TYPE_COUNTER_BEST",
+            HedgeQuoteType::CounterBestPlusTick => "HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "HEDGE_QUOTE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "HEDGE_QUOTE_TYPE_IMMEDIATE_FILL" => Some(Self::ImmediateFill),
+            "HEDGE_QUOTE_TYPE_COUNTER_BEST" => Some(Self::CounterBest),
+            "HEDGE_QUOTE_TYPE_COUNTER_BEST_PLUS_TICK" => Some(Self::CounterBestPlusTick),
+            _ => None,
+        }
+    }
 }
 include!("kdo.v1.hedge.tonic.rs");
 include!("kdo.v1.hedge.serde.rs");

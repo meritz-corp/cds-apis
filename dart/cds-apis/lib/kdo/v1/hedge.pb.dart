@@ -16,8 +16,11 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $2;
+import 'hedge.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
+export 'hedge.pbenum.dart';
 
 /// Hedge: 펀드 단위 즉시 헷지 설정
 /// 소스 종목의 체결에 대해 즉시 헷지 주문을 실행
@@ -31,6 +34,7 @@ class Hedge extends $pb.GeneratedMessage {
     $core.bool? isActive,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
+    HedgeQuoteType? quoteType,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -41,6 +45,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (isActive != null) result.isActive = isActive;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
+    if (quoteType != null) result.quoteType = quoteType;
     return result;
   }
 
@@ -58,6 +63,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOB(6, _omitFieldNames ? '' : 'isActive')
     ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..e<HedgeQuoteType>(9, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: HedgeQuoteType.HEDGE_QUOTE_TYPE_UNSPECIFIED, valueOf: HedgeQuoteType.valueOf, enumValues: HedgeQuoteType.values)
     ..hasRequiredFields = false
   ;
 
@@ -163,6 +169,16 @@ class Hedge extends $pb.GeneratedMessage {
   void clearUpdateTime() => $_clearField(8);
   @$pb.TagNumber(8)
   $2.Timestamp ensureUpdateTime() => $_ensure(7);
+
+  /// 헷지 주문 호가 전략
+  @$pb.TagNumber(9)
+  HedgeQuoteType get quoteType => $_getN(8);
+  @$pb.TagNumber(9)
+  set quoteType(HedgeQuoteType value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasQuoteType() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearQuoteType() => $_clearField(9);
 }
 
 enum HedgeMethod_Method {
