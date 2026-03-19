@@ -457,6 +457,10 @@
         "isLp": {
           "type": "boolean",
           "title": "유동성 공급자 여부"
+        },
+        "autoAmendStrategy": {
+          "type": "string",
+          "title": "자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)"
         }
       },
       "required": [

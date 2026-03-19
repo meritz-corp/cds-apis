@@ -32,6 +32,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $core.String? price,
     QuoteType? quoteType,
     $core.bool? isLp,
+    $core.String? autoAmendStrategy,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -41,6 +42,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (price != null) result.price = price;
     if (quoteType != null) result.quoteType = quoteType;
     if (isLp != null) result.isLp = isLp;
+    if (autoAmendStrategy != null) result.autoAmendStrategy = autoAmendStrategy;
     return result;
   }
 
@@ -57,6 +59,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<QuoteType>(6, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
+    ..aOS(8, _omitFieldNames ? '' : 'autoAmendStrategy')
     ..hasRequiredFields = false
   ;
 
@@ -146,6 +149,16 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasIsLp() => $_has(6);
   @$pb.TagNumber(7)
   void clearIsLp() => $_clearField(7);
+
+  /// 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
+  @$pb.TagNumber(8)
+  $core.String get autoAmendStrategy => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set autoAmendStrategy($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasAutoAmendStrategy() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearAutoAmendStrategy() => $_clearField(8);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {

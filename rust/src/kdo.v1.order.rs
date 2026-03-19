@@ -26,6 +26,9 @@ pub struct SubmitOrderRequest {
     /// 유동성 공급자 여부
     #[prost(bool, tag="7")]
     pub is_lp: bool,
+    /// 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
+    #[prost(string, optional, tag="8")]
+    pub auto_amend_strategy: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
