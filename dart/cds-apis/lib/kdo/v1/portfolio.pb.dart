@@ -647,6 +647,7 @@ class SymbolPosition extends $pb.GeneratedMessage {
     $fixnum.Int64? askQuantity,
     $core.double? bidAverageCost,
     $core.double? askAverageCost,
+    $fixnum.Int64? realizedPnl,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -658,6 +659,7 @@ class SymbolPosition extends $pb.GeneratedMessage {
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (bidAverageCost != null) result.bidAverageCost = bidAverageCost;
     if (askAverageCost != null) result.askAverageCost = askAverageCost;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
     return result;
   }
 
@@ -676,6 +678,7 @@ class SymbolPosition extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'askQuantity')
     ..a<$core.double>(9, _omitFieldNames ? '' : 'bidAverageCost', $pb.PbFieldType.OD)
     ..a<$core.double>(10, _omitFieldNames ? '' : 'askAverageCost', $pb.PbFieldType.OD)
+    ..aInt64(11, _omitFieldNames ? '' : 'realizedPnl')
     ..hasRequiredFields = false
   ;
 
@@ -785,6 +788,16 @@ class SymbolPosition extends $pb.GeneratedMessage {
   $core.bool hasAskAverageCost() => $_has(8);
   @$pb.TagNumber(10)
   void clearAskAverageCost() => $_clearField(10);
+
+  /// 실현 손익
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get realizedPnl => $_getI64(9);
+  @$pb.TagNumber(11)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(11)
+  $core.bool hasRealizedPnl() => $_has(9);
+  @$pb.TagNumber(11)
+  void clearRealizedPnl() => $_clearField(11);
 }
 
 /// Fund별 심볼 포지션 (상세)
@@ -798,6 +811,7 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
     $fixnum.Int64? askQuantity,
     $core.double? bidAverageCost,
     $core.double? askAverageCost,
+    $fixnum.Int64? realizedPnl,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -808,6 +822,7 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (bidAverageCost != null) result.bidAverageCost = bidAverageCost;
     if (askAverageCost != null) result.askAverageCost = askAverageCost;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
     return result;
   }
 
@@ -825,6 +840,7 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'askQuantity')
     ..a<$core.double>(9, _omitFieldNames ? '' : 'bidAverageCost', $pb.PbFieldType.OD)
     ..a<$core.double>(10, _omitFieldNames ? '' : 'askAverageCost', $pb.PbFieldType.OD)
+    ..aInt64(11, _omitFieldNames ? '' : 'realizedPnl')
     ..hasRequiredFields = false
   ;
 
@@ -924,6 +940,16 @@ class FundSymbolPosition extends $pb.GeneratedMessage {
   $core.bool hasAskAverageCost() => $_has(7);
   @$pb.TagNumber(10)
   void clearAskAverageCost() => $_clearField(10);
+
+  /// 실현 손익
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get realizedPnl => $_getI64(8);
+  @$pb.TagNumber(11)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(11)
+  $core.bool hasRealizedPnl() => $_has(8);
+  @$pb.TagNumber(11)
+  void clearRealizedPnl() => $_clearField(11);
 }
 
 /// Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)

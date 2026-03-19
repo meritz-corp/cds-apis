@@ -138,6 +138,7 @@ const SymbolPosition$json = {
     {'1': 'current_price', '3': 4, '4': 1, '5': 1, '10': 'currentPrice'},
     {'1': 'unrealized_pnl', '3': 5, '4': 1, '5': 3, '10': 'unrealizedPnl'},
     {'1': 'exposure_amount', '3': 6, '4': 1, '5': 3, '10': 'exposureAmount'},
+    {'1': 'realized_pnl', '3': 11, '4': 1, '5': 3, '10': 'realizedPnl'},
   ],
 };
 
@@ -149,7 +150,7 @@ final $typed_data.Uint8List symbolPositionDescriptor = $convert.base64Decode(
     'kgASgBUg5iaWRBdmVyYWdlQ29zdBIoChBhc2tfYXZlcmFnZV9jb3N0GAogASgBUg5hc2tBdmVy'
     'YWdlQ29zdBIjCg1jdXJyZW50X3ByaWNlGAQgASgBUgxjdXJyZW50UHJpY2USJQoOdW5yZWFsaX'
     'plZF9wbmwYBSABKANSDXVucmVhbGl6ZWRQbmwSJwoPZXhwb3N1cmVfYW1vdW50GAYgASgDUg5l'
-    'eHBvc3VyZUFtb3VudA==');
+    'eHBvc3VyZUFtb3VudBIhCgxyZWFsaXplZF9wbmwYCyABKANSC3JlYWxpemVkUG5s');
 
 @$core.Deprecated('Use fundSymbolPositionDescriptor instead')
 const FundSymbolPosition$json = {
@@ -163,6 +164,7 @@ const FundSymbolPosition$json = {
     {'1': 'ask_average_cost', '3': 10, '4': 1, '5': 1, '10': 'askAverageCost'},
     {'1': 'current_price', '3': 5, '4': 1, '5': 1, '10': 'currentPrice'},
     {'1': 'unrealized_pnl', '3': 6, '4': 1, '5': 3, '10': 'unrealizedPnl'},
+    {'1': 'realized_pnl', '3': 11, '4': 1, '5': 3, '10': 'realizedPnl'},
   ],
 };
 
@@ -173,7 +175,8 @@ final $typed_data.Uint8List fundSymbolPositionDescriptor = $convert.base64Decode
     'DGFza19xdWFudGl0eRgIIAEoA1ILYXNrUXVhbnRpdHkSKAoQYmlkX2F2ZXJhZ2VfY29zdBgJIA'
     'EoAVIOYmlkQXZlcmFnZUNvc3QSKAoQYXNrX2F2ZXJhZ2VfY29zdBgKIAEoAVIOYXNrQXZlcmFn'
     'ZUNvc3QSIwoNY3VycmVudF9wcmljZRgFIAEoAVIMY3VycmVudFByaWNlEiUKDnVucmVhbGl6ZW'
-    'RfcG5sGAYgASgDUg11bnJlYWxpemVkUG5s');
+    'RfcG5sGAYgASgDUg11bnJlYWxpemVkUG5sEiEKDHJlYWxpemVkX3BubBgLIAEoA1ILcmVhbGl6'
+    'ZWRQbmw=');
 
 @$core.Deprecated('Use netExposuresDescriptor instead')
 const NetExposures$json = {

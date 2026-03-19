@@ -328,6 +328,9 @@ message SymbolPosition {
 
   // 익스포저 금액 (net_quantity * current_price)
   int64 exposure_amount = 6;
+
+  // 실현 손익
+  int64 realized_pnl = 11;
 }
 
 // Fund별 심볼 포지션 (상세)
@@ -355,6 +358,9 @@ message FundSymbolPosition {
 
   // 미실현 손익
   int64 unrealized_pnl = 6;
+
+  // 실현 손익
+  int64 realized_pnl = 11;
 }
 
 // Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)

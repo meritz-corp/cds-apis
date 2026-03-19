@@ -877,6 +877,11 @@
           "type": "string",
           "format": "int64",
           "title": "미실현 손익"
+        },
+        "realizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "실현 손익"
         }
       },
       "title": "Fund별 심볼 포지션 (상세)"
@@ -1453,6 +1458,11 @@
           "type": "string",
           "format": "int64",
           "title": "익스포저 금액 (net_quantity * current_price)"
+        },
+        "realizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "실현 손익"
         }
       },
       "title": "심볼별 통합 포지션"

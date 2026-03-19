@@ -166,6 +166,9 @@ pub struct SymbolPosition {
     /// 익스포저 금액 (net_quantity * current_price)
     #[prost(int64, tag="6")]
     pub exposure_amount: i64,
+    /// 실현 손익
+    #[prost(int64, tag="11")]
+    pub realized_pnl: i64,
 }
 /// Fund별 심볼 포지션 (상세)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -195,6 +198,9 @@ pub struct FundSymbolPosition {
     /// 미실현 손익
     #[prost(int64, tag="6")]
     pub unrealized_pnl: i64,
+    /// 실현 손익
+    #[prost(int64, tag="11")]
+    pub realized_pnl: i64,
 }
 /// Net Exposures 집계 구조체 (Hedge 변환 후 상계된 결과)
 #[allow(clippy::derive_partial_eq_without_eq)]
