@@ -243,6 +243,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     $core.String? price,
     $2.OrderSide? side,
     $core.bool? isLp,
+    QuoteType? quoteType,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
@@ -252,6 +253,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     if (price != null) result.price = price;
     if (side != null) result.side = side;
     if (isLp != null) result.isLp = isLp;
+    if (quoteType != null) result.quoteType = quoteType;
     return result;
   }
 
@@ -268,6 +270,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
+    ..e<QuoteType>(8, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
     ..hasRequiredFields = false
   ;
 
@@ -357,6 +360,16 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasIsLp() => $_has(6);
   @$pb.TagNumber(7)
   void clearIsLp() => $_clearField(7);
+
+  /// 주문 유형 (기본: LIMIT)
+  @$pb.TagNumber(8)
+  QuoteType get quoteType => $_getN(7);
+  @$pb.TagNumber(8)
+  set quoteType(QuoteType value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasQuoteType() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearQuoteType() => $_clearField(8);
 }
 
 class AmendOrderResponse extends $pb.GeneratedMessage {

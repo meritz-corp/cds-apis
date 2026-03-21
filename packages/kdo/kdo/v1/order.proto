@@ -137,6 +137,9 @@ message AmendOrderRequest {
 
   // 유동성 공급자 여부
   bool is_lp = 7  [(google.api.field_behavior) = REQUIRED];
+
+  // 주문 유형 (기본: LIMIT)
+  QuoteType quote_type = 8 [(google.api.field_behavior) = REQUIRED];
 }
 
 message AmendOrderResponse {

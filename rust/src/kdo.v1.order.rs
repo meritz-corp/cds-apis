@@ -69,6 +69,9 @@ pub struct AmendOrderRequest {
     /// 유동성 공급자 여부
     #[prost(bool, tag="7")]
     pub is_lp: bool,
+    /// 주문 유형 (기본: LIMIT)
+    #[prost(enumeration="QuoteType", tag="8")]
+    pub quote_type: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

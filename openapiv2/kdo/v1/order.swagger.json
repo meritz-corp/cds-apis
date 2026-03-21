@@ -107,6 +107,10 @@
                 "isLp": {
                   "type": "boolean",
                   "title": "유동성 공급자 여부"
+                },
+                "quoteType": {
+                  "$ref": "#/definitions/orderQuoteType",
+                  "title": "주문 유형 (기본: LIMIT)"
                 }
               },
               "required": [
@@ -115,7 +119,8 @@
                 "quantity",
                 "price",
                 "side",
-                "isLp"
+                "isLp",
+                "quoteType"
               ]
             }
           }

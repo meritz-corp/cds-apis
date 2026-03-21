@@ -121,6 +121,7 @@ const AmendOrderRequest$json = {
     {'1': 'price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'price'},
     {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
+    {'1': 'quote_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
   ],
 };
 
@@ -130,7 +131,9 @@ final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'JpZ2luYWxPcmRlcklkEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSHAoGc3lt'
     'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aX'
     'R5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRIyCgRzaWRlGAYgASgOMhgua2RvLnYxLmNv'
-    'bW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGUSGQoFaXNfbHAYByABKAhCBOJBAQJSBGlzTHA=');
+    'bW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGUSGQoFaXNfbHAYByABKAhCBOJBAQJSBGlzTHASPA'
+    'oKcXVvdGVfdHlwZRgIIAEoDjIXLmtkby52MS5vcmRlci5RdW90ZVR5cGVCBOJBAQJSCXF1b3Rl'
+    'VHlwZQ==');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {
