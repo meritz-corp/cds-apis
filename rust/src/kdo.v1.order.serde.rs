@@ -1123,6 +1123,83 @@ impl<'de> serde::Deserialize<'de> for FilledDetails {
         deserializer.deserialize_struct("kdo.v1.order.FilledDetails", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for LimitPriceType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "LIMIT_PRICE_TYPE_UNSPECIFIED",
+            Self::BestTake => "LIMIT_PRICE_TYPE_BEST_TAKE",
+            Self::BestTake1 => "LIMIT_PRICE_TYPE_BEST_TAKE_1",
+            Self::BestTake2 => "LIMIT_PRICE_TYPE_BEST_TAKE_2",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for LimitPriceType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "LIMIT_PRICE_TYPE_UNSPECIFIED",
+            "LIMIT_PRICE_TYPE_BEST_TAKE",
+            "LIMIT_PRICE_TYPE_BEST_TAKE_1",
+            "LIMIT_PRICE_TYPE_BEST_TAKE_2",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LimitPriceType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "LIMIT_PRICE_TYPE_UNSPECIFIED" => Ok(LimitPriceType::Unspecified),
+                    "LIMIT_PRICE_TYPE_BEST_TAKE" => Ok(LimitPriceType::BestTake),
+                    "LIMIT_PRICE_TYPE_BEST_TAKE_1" => Ok(LimitPriceType::BestTake1),
+                    "LIMIT_PRICE_TYPE_BEST_TAKE_2" => Ok(LimitPriceType::BestTake2),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListAllUnfilledOrdersRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2769,8 +2846,10 @@ impl serde::Serialize for SubmitOrderRequest {
         if let Some(v) = self.auto_amend_strategy.as_ref() {
             struct_ser.serialize_field("auto_amend_strategy", v)?;
         }
-        if true {
-            struct_ser.serialize_field("price_offset_ticks", &self.price_offset_ticks)?;
+        if let Some(v) = self.limit_price_type.as_ref() {
+            let v = LimitPriceType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("limit_price_type", &v)?;
         }
         struct_ser.end()
     }
@@ -2794,8 +2873,8 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             "isLp",
             "auto_amend_strategy",
             "autoAmendStrategy",
-            "price_offset_ticks",
-            "priceOffsetTicks",
+            "limit_price_type",
+            "limitPriceType",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2808,7 +2887,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             QuoteType,
             IsLp,
             AutoAmendStrategy,
-            PriceOffsetTicks,
+            LimitPriceType,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2839,7 +2918,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             "quoteType" | "quote_type" => Ok(GeneratedField::QuoteType),
                             "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             "autoAmendStrategy" | "auto_amend_strategy" => Ok(GeneratedField::AutoAmendStrategy),
-                            "priceOffsetTicks" | "price_offset_ticks" => Ok(GeneratedField::PriceOffsetTicks),
+                            "limitPriceType" | "limit_price_type" => Ok(GeneratedField::LimitPriceType),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2867,7 +2946,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                 let mut quote_type__ = None;
                 let mut is_lp__ = None;
                 let mut auto_amend_strategy__ = None;
-                let mut price_offset_ticks__ = None;
+                let mut limit_price_type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -2920,13 +2999,11 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             }
                             auto_amend_strategy__ = map_.next_value()?;
                         }
-                        GeneratedField::PriceOffsetTicks => {
-                            if price_offset_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("priceOffsetTicks"));
+                        GeneratedField::LimitPriceType => {
+                            if limit_price_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitPriceType"));
                             }
-                            price_offset_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            limit_price_type__ = map_.next_value::<::std::option::Option<LimitPriceType>>()?.map(|x| x as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -2942,7 +3019,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                     quote_type: quote_type__.unwrap_or_default(),
                     is_lp: is_lp__.unwrap_or_default(),
                     auto_amend_strategy: auto_amend_strategy__,
-                    price_offset_ticks: price_offset_ticks__.unwrap_or_default(),
+                    limit_price_type: limit_price_type__,
                 })
             }
         }

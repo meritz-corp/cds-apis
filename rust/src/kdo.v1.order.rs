@@ -29,10 +29,9 @@ pub struct SubmitOrderRequest {
     /// 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
     #[prost(string, optional, tag="8")]
     pub auto_amend_strategy: ::core::option::Option<::prost::alloc::string::String>,
-    /// 상대호가 대비 틱 오프셋 (0=상대호가, 1=상대호가+1틱, 2=상대호가+2틱, ...)
-    /// quote_type이 BEST_TAKE일 때만 유효. 미지정 시 0 (상대호가 그대로).
-    #[prost(int32, tag="9")]
-    pub price_offset_ticks: i32,
+    /// 지정가 가격 결정 방식 (미지정 시 price 필드의 가격 사용)
+    #[prost(enumeration="LimitPriceType", optional, tag="9")]
+    pub limit_price_type: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -354,6 +353,43 @@ impl QuoteType {
             "QUOTE_TYPE_MARKET" => Some(Self::Market),
             "QUOTE_TYPE_BEST_TAKE" => Some(Self::BestTake),
             "QUOTE_TYPE_BEST_MAKE" => Some(Self::BestMake),
+            _ => None,
+        }
+    }
+}
+/// 지정가 가격 결정 방식
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum LimitPriceType {
+    /// 직접 지정한 가격 사용 (price 필드 사용)
+    Unspecified = 0,
+    /// 상대호가 (매수→매도1호가, 매도→매수1호가)
+    BestTake = 1,
+    /// 상대호가 +1틱
+    BestTake1 = 2,
+    /// 상대호가 +2틱
+    BestTake2 = 3,
+}
+impl LimitPriceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            LimitPriceType::Unspecified => "LIMIT_PRICE_TYPE_UNSPECIFIED",
+            LimitPriceType::BestTake => "LIMIT_PRICE_TYPE_BEST_TAKE",
+            LimitPriceType::BestTake1 => "LIMIT_PRICE_TYPE_BEST_TAKE_1",
+            LimitPriceType::BestTake2 => "LIMIT_PRICE_TYPE_BEST_TAKE_2",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "LIMIT_PRICE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "LIMIT_PRICE_TYPE_BEST_TAKE" => Some(Self::BestTake),
+            "LIMIT_PRICE_TYPE_BEST_TAKE_1" => Some(Self::BestTake1),
+            "LIMIT_PRICE_TYPE_BEST_TAKE_2" => Some(Self::BestTake2),
             _ => None,
         }
     }

@@ -32,6 +32,23 @@ final $typed_data.Uint8List quoteTypeDescriptor = $convert.base64Decode(
     'lNSVQQARIVChFRVU9URV9UWVBFX01BUktFVBACEhgKFFFVT1RFX1RZUEVfQkVTVF9UQUtFEAMS'
     'GAoUUVVPVEVfVFlQRV9CRVNUX01BS0UQBA==');
 
+@$core.Deprecated('Use limitPriceTypeDescriptor instead')
+const LimitPriceType$json = {
+  '1': 'LimitPriceType',
+  '2': [
+    {'1': 'LIMIT_PRICE_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'LIMIT_PRICE_TYPE_BEST_TAKE', '2': 1},
+    {'1': 'LIMIT_PRICE_TYPE_BEST_TAKE_1', '2': 2},
+    {'1': 'LIMIT_PRICE_TYPE_BEST_TAKE_2', '2': 3},
+  ],
+};
+
+/// Descriptor for `LimitPriceType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List limitPriceTypeDescriptor = $convert.base64Decode(
+    'Cg5MaW1pdFByaWNlVHlwZRIgChxMSU1JVF9QUklDRV9UWVBFX1VOU1BFQ0lGSUVEEAASHgoaTE'
+    'lNSVRfUFJJQ0VfVFlQRV9CRVNUX1RBS0UQARIgChxMSU1JVF9QUklDRV9UWVBFX0JFU1RfVEFL'
+    'RV8xEAISIAocTElNSVRfUFJJQ0VfVFlQRV9CRVNUX1RBS0VfMhAD');
+
 @$core.Deprecated('Use orderStatusDescriptor instead')
 const OrderStatus$json = {
   '1': 'OrderStatus',
@@ -78,10 +95,11 @@ const SubmitOrderRequest$json = {
     {'1': 'quote_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
     {'1': 'auto_amend_strategy', '3': 8, '4': 1, '5': 9, '9': 0, '10': 'autoAmendStrategy', '17': true},
-    {'1': 'price_offset_ticks', '3': 9, '4': 1, '5': 5, '10': 'priceOffsetTicks'},
+    {'1': 'limit_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.order.LimitPriceType', '9': 1, '10': 'limitPriceType', '17': true},
   ],
   '8': [
     {'1': '_auto_amend_strategy'},
+    {'1': '_limit_price_type'},
   ],
 };
 
@@ -93,8 +111,9 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     '50aXR5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRI8CgpxdW90ZV90eXBlGAYgASgOMhcu'
     'a2RvLnYxLm9yZGVyLlF1b3RlVHlwZUIE4kEBAlIJcXVvdGVUeXBlEhkKBWlzX2xwGAcgASgIQg'
     'TiQQECUgRpc0xwEjMKE2F1dG9fYW1lbmRfc3RyYXRlZ3kYCCABKAlIAFIRYXV0b0FtZW5kU3Ry'
-    'YXRlZ3mIAQESLAoScHJpY2Vfb2Zmc2V0X3RpY2tzGAkgASgFUhBwcmljZU9mZnNldFRpY2tzQh'
-    'YKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5');
+    'YXRlZ3mIAQESSwoQbGltaXRfcHJpY2VfdHlwZRgJIAEoDjIcLmtkby52MS5vcmRlci5MaW1pdF'
+    'ByaWNlVHlwZUgBUg5saW1pdFByaWNlVHlwZYgBAUIWChRfYXV0b19hbWVuZF9zdHJhdGVneUIT'
+    'ChFfbGltaXRfcHJpY2VfdHlwZQ==');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {

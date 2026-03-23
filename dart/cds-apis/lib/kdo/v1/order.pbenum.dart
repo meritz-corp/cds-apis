@@ -35,6 +35,26 @@ class QuoteType extends $pb.ProtobufEnum {
   const QuoteType._(super.value, super.name);
 }
 
+/// 지정가 가격 결정 방식
+class LimitPriceType extends $pb.ProtobufEnum {
+  static const LimitPriceType LIMIT_PRICE_TYPE_UNSPECIFIED = LimitPriceType._(0, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_UNSPECIFIED');
+  static const LimitPriceType LIMIT_PRICE_TYPE_BEST_TAKE = LimitPriceType._(1, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_TAKE');
+  static const LimitPriceType LIMIT_PRICE_TYPE_BEST_TAKE_1 = LimitPriceType._(2, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_TAKE_1');
+  static const LimitPriceType LIMIT_PRICE_TYPE_BEST_TAKE_2 = LimitPriceType._(3, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_TAKE_2');
+
+  static const $core.List<LimitPriceType> values = <LimitPriceType> [
+    LIMIT_PRICE_TYPE_UNSPECIFIED,
+    LIMIT_PRICE_TYPE_BEST_TAKE,
+    LIMIT_PRICE_TYPE_BEST_TAKE_1,
+    LIMIT_PRICE_TYPE_BEST_TAKE_2,
+  ];
+
+  static final $core.List<LimitPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static LimitPriceType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const LimitPriceType._(super.value, super.name);
+}
+
 class OrderStatus extends $pb.ProtobufEnum {
   static const OrderStatus ORDER_STATUS_UNSPECIFIED = OrderStatus._(0, _omitEnumNames ? '' : 'ORDER_STATUS_UNSPECIFIED');
   static const OrderStatus ORDER_STATUS_SUBMITTED = OrderStatus._(1, _omitEnumNames ? '' : 'ORDER_STATUS_SUBMITTED');
