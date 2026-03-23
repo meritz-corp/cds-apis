@@ -33,6 +33,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     QuoteType? quoteType,
     $core.bool? isLp,
     $core.String? autoAmendStrategy,
+    $core.int? priceOffsetTicks,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -43,6 +44,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (quoteType != null) result.quoteType = quoteType;
     if (isLp != null) result.isLp = isLp;
     if (autoAmendStrategy != null) result.autoAmendStrategy = autoAmendStrategy;
+    if (priceOffsetTicks != null) result.priceOffsetTicks = priceOffsetTicks;
     return result;
   }
 
@@ -60,6 +62,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..e<QuoteType>(6, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
     ..aOS(8, _omitFieldNames ? '' : 'autoAmendStrategy')
+    ..a<$core.int>(9, _omitFieldNames ? '' : 'priceOffsetTicks', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -159,6 +162,17 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasAutoAmendStrategy() => $_has(7);
   @$pb.TagNumber(8)
   void clearAutoAmendStrategy() => $_clearField(8);
+
+  /// 상대호가 대비 틱 오프셋 (0=상대호가, 1=상대호가+1틱, 2=상대호가+2틱, ...)
+  /// quote_type이 BEST_TAKE일 때만 유효. 미지정 시 0 (상대호가 그대로).
+  @$pb.TagNumber(9)
+  $core.int get priceOffsetTicks => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set priceOffsetTicks($core.int value) => $_setSignedInt32(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasPriceOffsetTicks() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearPriceOffsetTicks() => $_clearField(9);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {

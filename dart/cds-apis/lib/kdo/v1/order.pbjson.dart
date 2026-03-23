@@ -78,6 +78,7 @@ const SubmitOrderRequest$json = {
     {'1': 'quote_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
     {'1': 'auto_amend_strategy', '3': 8, '4': 1, '5': 9, '9': 0, '10': 'autoAmendStrategy', '17': true},
+    {'1': 'price_offset_ticks', '3': 9, '4': 1, '5': 5, '10': 'priceOffsetTicks'},
   ],
   '8': [
     {'1': '_auto_amend_strategy'},
@@ -92,7 +93,8 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     '50aXR5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRI8CgpxdW90ZV90eXBlGAYgASgOMhcu'
     'a2RvLnYxLm9yZGVyLlF1b3RlVHlwZUIE4kEBAlIJcXVvdGVUeXBlEhkKBWlzX2xwGAcgASgIQg'
     'TiQQECUgRpc0xwEjMKE2F1dG9fYW1lbmRfc3RyYXRlZ3kYCCABKAlIAFIRYXV0b0FtZW5kU3Ry'
-    'YXRlZ3mIAQFCFgoUX2F1dG9fYW1lbmRfc3RyYXRlZ3k=');
+    'YXRlZ3mIAQESLAoScHJpY2Vfb2Zmc2V0X3RpY2tzGAkgASgFUhBwcmljZU9mZnNldFRpY2tzQh'
+    'YKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {

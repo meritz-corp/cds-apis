@@ -29,6 +29,10 @@ pub struct SubmitOrderRequest {
     /// 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
     #[prost(string, optional, tag="8")]
     pub auto_amend_strategy: ::core::option::Option<::prost::alloc::string::String>,
+    /// 상대호가 대비 틱 오프셋 (0=상대호가, 1=상대호가+1틱, 2=상대호가+2틱, ...)
+    /// quote_type이 BEST_TAKE일 때만 유효. 미지정 시 0 (상대호가 그대로).
+    #[prost(int32, tag="9")]
+    pub price_offset_ticks: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
