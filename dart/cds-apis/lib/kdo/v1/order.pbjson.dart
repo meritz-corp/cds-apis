@@ -117,23 +117,25 @@ const AmendOrderRequest$json = {
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'price'},
     {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
     {'1': 'quote_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
   ],
+  '9': [
+    {'1': 4, '2': 5},
+  ],
+  '10': ['quantity'],
 };
 
 /// Descriptor for `AmendOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'ChFBbWVuZE9yZGVyUmVxdWVzdBIwChFvcmlnaW5hbF9vcmRlcl9pZBgBIAEoBEIE4kEBAlIPb3'
     'JpZ2luYWxPcmRlcklkEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSHAoGc3lt'
-    'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aX'
-    'R5EhoKBXByaWNlGAUgASgJQgTiQQECUgVwcmljZRIyCgRzaWRlGAYgASgOMhgua2RvLnYxLmNv'
-    'bW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGUSGQoFaXNfbHAYByABKAhCBOJBAQJSBGlzTHASPA'
-    'oKcXVvdGVfdHlwZRgIIAEoDjIXLmtkby52MS5vcmRlci5RdW90ZVR5cGVCBOJBAQJSCXF1b3Rl'
-    'VHlwZQ==');
+    'Ym9sGAMgASgJQgTiQQECUgZzeW1ib2wSGgoFcHJpY2UYBSABKAlCBOJBAQJSBXByaWNlEjIKBH'
+    'NpZGUYBiABKA4yGC5rZG8udjEuY29tbW9uLk9yZGVyU2lkZUIE4kEBAlIEc2lkZRIZCgVpc19s'
+    'cBgHIAEoCEIE4kEBAlIEaXNMcBI8CgpxdW90ZV90eXBlGAggASgOMhcua2RvLnYxLm9yZGVyLl'
+    'F1b3RlVHlwZUIE4kEBAlIJcXVvdGVUeXBlSgQIBBAFUghxdWFudGl0eQ==');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {

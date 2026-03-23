@@ -126,8 +126,9 @@ message AmendOrderRequest {
   // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
 
-  // 정정 수량
-  int64 quantity = 4 [(google.api.field_behavior) = REQUIRED];
+  // 4: quantity (삭제됨, 재사용 금지)
+  reserved 4;
+  reserved "quantity";
 
   // 정정 가격
   string price = 5 [(google.api.field_behavior) = REQUIRED];

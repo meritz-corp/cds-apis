@@ -28,9 +28,6 @@ impl serde::Serialize for AmendOrderRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.AmendOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -42,11 +39,6 @@ impl serde::Serialize for AmendOrderRequest {
         }
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
             struct_ser.serialize_field("price", &self.price)?;
@@ -79,7 +71,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             "fund_code",
             "fundCode",
             "symbol",
-            "quantity",
             "price",
             "side",
             "is_lp",
@@ -93,7 +84,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             OriginalOrderId,
             FundCode,
             Symbol,
-            Quantity,
             Price,
             Side,
             IsLp,
@@ -123,7 +113,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "symbol" => Ok(GeneratedField::Symbol),
-                            "quantity" => Ok(GeneratedField::Quantity),
                             "price" => Ok(GeneratedField::Price),
                             "side" => Ok(GeneratedField::Side),
                             "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
@@ -150,7 +139,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                 let mut original_order_id__ = None;
                 let mut fund_code__ = None;
                 let mut symbol__ = None;
-                let mut quantity__ = None;
                 let mut price__ = None;
                 let mut side__ = None;
                 let mut is_lp__ = None;
@@ -176,14 +164,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                                 return Err(serde::de::Error::duplicate_field("symbol"));
                             }
                             symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::Price => {
                             if price__.is_some() {
@@ -218,7 +198,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                     original_order_id: original_order_id__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
-                    quantity: quantity__.unwrap_or_default(),
                     price: price__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
                     is_lp: is_lp__.unwrap_or_default(),

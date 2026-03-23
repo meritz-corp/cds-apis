@@ -57,9 +57,6 @@ pub struct AmendOrderRequest {
     /// 종목 코드
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
-    /// 정정 수량
-    #[prost(int64, tag="4")]
-    pub quantity: i64,
     /// 정정 가격
     #[prost(string, tag="5")]
     pub price: ::prost::alloc::string::String,

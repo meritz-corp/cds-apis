@@ -239,7 +239,6 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? originalOrderId,
     $core.String? fundCode,
     $core.String? symbol,
-    $fixnum.Int64? quantity,
     $core.String? price,
     $2.OrderSide? side,
     $core.bool? isLp,
@@ -249,7 +248,6 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
     if (fundCode != null) result.fundCode = fundCode;
     if (symbol != null) result.symbol = symbol;
-    if (quantity != null) result.quantity = quantity;
     if (price != null) result.price = price;
     if (side != null) result.side = side;
     if (isLp != null) result.isLp = isLp;
@@ -266,7 +264,6 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
@@ -321,53 +318,43 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSymbol() => $_clearField(3);
 
-  /// 정정 수량
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get quantity => $_getI64(3);
-  @$pb.TagNumber(4)
-  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasQuantity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearQuantity() => $_clearField(4);
-
   /// 정정 가격
   @$pb.TagNumber(5)
-  $core.String get price => $_getSZ(4);
+  $core.String get price => $_getSZ(3);
   @$pb.TagNumber(5)
-  set price($core.String value) => $_setString(4, value);
+  set price($core.String value) => $_setString(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasPrice() => $_has(4);
+  $core.bool hasPrice() => $_has(3);
   @$pb.TagNumber(5)
   void clearPrice() => $_clearField(5);
 
   /// 매수/매도
   @$pb.TagNumber(6)
-  $2.OrderSide get side => $_getN(5);
+  $2.OrderSide get side => $_getN(4);
   @$pb.TagNumber(6)
   set side($2.OrderSide value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasSide() => $_has(5);
+  $core.bool hasSide() => $_has(4);
   @$pb.TagNumber(6)
   void clearSide() => $_clearField(6);
 
   /// 유동성 공급자 여부
   @$pb.TagNumber(7)
-  $core.bool get isLp => $_getBF(6);
+  $core.bool get isLp => $_getBF(5);
   @$pb.TagNumber(7)
-  set isLp($core.bool value) => $_setBool(6, value);
+  set isLp($core.bool value) => $_setBool(5, value);
   @$pb.TagNumber(7)
-  $core.bool hasIsLp() => $_has(6);
+  $core.bool hasIsLp() => $_has(5);
   @$pb.TagNumber(7)
   void clearIsLp() => $_clearField(7);
 
   /// 주문 유형 (기본: LIMIT)
   @$pb.TagNumber(8)
-  QuoteType get quoteType => $_getN(7);
+  QuoteType get quoteType => $_getN(6);
   @$pb.TagNumber(8)
   set quoteType(QuoteType value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasQuoteType() => $_has(7);
+  $core.bool hasQuoteType() => $_has(6);
   @$pb.TagNumber(8)
   void clearQuoteType() => $_clearField(8);
 }

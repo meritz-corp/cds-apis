@@ -91,11 +91,6 @@
                   "type": "string",
                   "title": "종목 코드"
                 },
-                "quantity": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "정정 수량"
-                },
                 "price": {
                   "type": "string",
                   "title": "정정 가격"
@@ -116,7 +111,6 @@
               "required": [
                 "fundCode",
                 "symbol",
-                "quantity",
                 "price",
                 "side",
                 "isLp",
