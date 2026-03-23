@@ -69,6 +69,9 @@ pub struct AmendOrderRequest {
     /// 주문 유형 (기본: LIMIT)
     #[prost(enumeration="QuoteType", tag="8")]
     pub quote_type: i32,
+    /// 펀드 코드 (필수)
+    #[prost(string, tag="9")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -97,6 +100,9 @@ pub struct CancelOrderRequest {
     /// 종목 코드
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 (필수)
+    #[prost(string, tag="4")]
+    pub fund_code: ::prost::alloc::string::String,
     /// 매수/매도
     #[prost(enumeration="super::common::OrderSide", tag="6")]
     pub side: i32,

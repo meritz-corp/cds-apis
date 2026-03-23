@@ -102,6 +102,10 @@
                 "quoteType": {
                   "$ref": "#/definitions/orderQuoteType",
                   "title": "주문 유형 (기본: LIMIT)"
+                },
+                "fundCode": {
+                  "type": "string",
+                  "title": "펀드 코드 (필수)"
                 }
               },
               "required": [
@@ -109,7 +113,8 @@
                 "price",
                 "side",
                 "isLp",
-                "quoteType"
+                "quoteType",
+                "fundCode"
               ]
             }
           }
@@ -157,6 +162,10 @@
                   "type": "string",
                   "title": "종목 코드"
                 },
+                "fundCode": {
+                  "type": "string",
+                  "title": "펀드 코드 (필수)"
+                },
                 "side": {
                   "$ref": "#/definitions/commonOrderSide",
                   "title": "매수/매도"
@@ -164,6 +173,7 @@
               },
               "required": [
                 "symbol",
+                "fundCode",
                 "side"
               ]
             }

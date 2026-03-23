@@ -141,12 +141,13 @@ const AmendOrderRequest$json = {
     {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
     {'1': 'quote_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
+    {'1': 'fund_code', '3': 9, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
   ],
   '9': [
     {'1': 2, '2': 3},
     {'1': 4, '2': 5},
   ],
-  '10': ['fund_code', 'quantity'],
+  '10': ['quantity'],
 };
 
 /// Descriptor for `AmendOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
@@ -155,8 +156,8 @@ final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'JpZ2luYWxPcmRlcklkEhwKBnN5bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEhoKBXByaWNlGAUg'
     'ASgJQgTiQQECUgVwcmljZRIyCgRzaWRlGAYgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZG'
     'VCBOJBAQJSBHNpZGUSGQoFaXNfbHAYByABKAhCBOJBAQJSBGlzTHASPAoKcXVvdGVfdHlwZRgI'
-    'IAEoDjIXLmtkby52MS5vcmRlci5RdW90ZVR5cGVCBOJBAQJSCXF1b3RlVHlwZUoECAIQA0oECA'
-    'QQBVIJZnVuZF9jb2RlUghxdWFudGl0eQ==');
+    'IAEoDjIXLmtkby52MS5vcmRlci5RdW90ZVR5cGVCBOJBAQJSCXF1b3RlVHlwZRIhCglmdW5kX2'
+    'NvZGUYCSABKAlCBOJBAQJSCGZ1bmRDb2RlSgQIAhADSgQIBBAFUghxdWFudGl0eQ==');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {
@@ -182,20 +183,20 @@ const CancelOrderRequest$json = {
   '2': [
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
   ],
   '9': [
     {'1': 2, '2': 3},
   ],
-  '10': ['fund_code'],
 };
 
 /// Descriptor for `CancelOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cancelOrderRequestDescriptor = $convert.base64Decode(
     'ChJDYW5jZWxPcmRlclJlcXVlc3QSMAoRb3JpZ2luYWxfb3JkZXJfaWQYASABKARCBOJBAQJSD2'
-    '9yaWdpbmFsT3JkZXJJZBIcCgZzeW1ib2wYAyABKAlCBOJBAQJSBnN5bWJvbBIyCgRzaWRlGAYg'
-    'ASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGVKBAgCEANSCWZ1bmRfY2'
-    '9kZQ==');
+    '9yaWdpbmFsT3JkZXJJZBIcCgZzeW1ib2wYAyABKAlCBOJBAQJSBnN5bWJvbBIhCglmdW5kX2Nv'
+    'ZGUYBCABKAlCBOJBAQJSCGZ1bmRDb2RlEjIKBHNpZGUYBiABKA4yGC5rZG8udjEuY29tbW9uLk'
+    '9yZGVyU2lkZUIE4kEBAlIEc2lkZUoECAIQAw==');
 
 @$core.Deprecated('Use cancelOrderResponseDescriptor instead')
 const CancelOrderResponse$json = {

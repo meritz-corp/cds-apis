@@ -25,6 +25,9 @@ impl serde::Serialize for AmendOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.AmendOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -50,6 +53,9 @@ impl serde::Serialize for AmendOrderRequest {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.quote_type)))?;
             struct_ser.serialize_field("quote_type", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
         struct_ser.end()
     }
 }
@@ -69,6 +75,8 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             "isLp",
             "quote_type",
             "quoteType",
+            "fund_code",
+            "fundCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -79,6 +87,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             Side,
             IsLp,
             QuoteType,
+            FundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -107,6 +116,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             "side" => Ok(GeneratedField::Side),
                             "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             "quoteType" | "quote_type" => Ok(GeneratedField::QuoteType),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -132,6 +142,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                 let mut side__ = None;
                 let mut is_lp__ = None;
                 let mut quote_type__ = None;
+                let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::OriginalOrderId => {
@@ -172,6 +183,12 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             }
                             quote_type__ = Some(map_.next_value::<QuoteType>()? as i32);
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -184,6 +201,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                     side: side__.unwrap_or_default(),
                     is_lp: is_lp__.unwrap_or_default(),
                     quote_type: quote_type__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
                 })
             }
         }
@@ -552,6 +570,9 @@ impl serde::Serialize for CancelOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.CancelOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -560,6 +581,9 @@ impl serde::Serialize for CancelOrderRequest {
         }
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if true {
             let v = super::common::OrderSide::try_from(self.side)
@@ -579,6 +603,8 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
             "original_order_id",
             "originalOrderId",
             "symbol",
+            "fund_code",
+            "fundCode",
             "side",
         ];
 
@@ -586,6 +612,7 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
         enum GeneratedField {
             OriginalOrderId,
             Symbol,
+            FundCode,
             Side,
             __SkipField__,
         }
@@ -611,6 +638,7 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                         match value {
                             "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
                             "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "side" => Ok(GeneratedField::Side),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -633,6 +661,7 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
             {
                 let mut original_order_id__ = None;
                 let mut symbol__ = None;
+                let mut fund_code__ = None;
                 let mut side__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -650,6 +679,12 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::Side => {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
@@ -664,6 +699,7 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                 Ok(CancelOrderRequest {
                     original_order_id: original_order_id__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
                 })
             }

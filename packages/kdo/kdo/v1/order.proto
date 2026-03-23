@@ -131,9 +131,8 @@ message AmendOrderRequest {
   // 원주문 ID
   uint64 original_order_id = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // 2: fund_code (삭제됨, orderbook에서 조회)
+  // 2: 삭제됨 (재사용 금지)
   reserved 2;
-  reserved "fund_code";
 
   // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
@@ -153,6 +152,9 @@ message AmendOrderRequest {
 
   // 주문 유형 (기본: LIMIT)
   QuoteType quote_type = 8 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 (필수)
+  string fund_code = 9 [(google.api.field_behavior) = REQUIRED];
 }
 
 message AmendOrderResponse {
@@ -175,12 +177,14 @@ message CancelOrderRequest {
   // 원주문 ID
   uint64 original_order_id = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // 2: fund_code (삭제됨, orderbook에서 조회)
+  // 2: 삭제됨 (재사용 금지)
   reserved 2;
-  reserved "fund_code";
 
   // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 (필수)
+  string fund_code = 4 [(google.api.field_behavior) = REQUIRED];
 
   // 매수/매도
   kdo.v1.common.OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
