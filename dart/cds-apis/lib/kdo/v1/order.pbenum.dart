@@ -41,15 +41,23 @@ class LimitPriceType extends $pb.ProtobufEnum {
   static const LimitPriceType LIMIT_PRICE_TYPE_BEST_TAKE = LimitPriceType._(1, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_TAKE');
   static const LimitPriceType LIMIT_PRICE_TYPE_BEST_TAKE_1 = LimitPriceType._(2, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_TAKE_1');
   static const LimitPriceType LIMIT_PRICE_TYPE_BEST_TAKE_2 = LimitPriceType._(3, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_TAKE_2');
+  static const LimitPriceType LIMIT_PRICE_TYPE_BEST_TAKE_3 = LimitPriceType._(4, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_TAKE_3');
+  static const LimitPriceType LIMIT_PRICE_TYPE_BEST_MAKE_1 = LimitPriceType._(5, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_MAKE_1');
+  static const LimitPriceType LIMIT_PRICE_TYPE_BEST_MAKE_2 = LimitPriceType._(6, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_MAKE_2');
+  static const LimitPriceType LIMIT_PRICE_TYPE_BEST_MAKE_3 = LimitPriceType._(7, _omitEnumNames ? '' : 'LIMIT_PRICE_TYPE_BEST_MAKE_3');
 
   static const $core.List<LimitPriceType> values = <LimitPriceType> [
     LIMIT_PRICE_TYPE_UNSPECIFIED,
     LIMIT_PRICE_TYPE_BEST_TAKE,
     LIMIT_PRICE_TYPE_BEST_TAKE_1,
     LIMIT_PRICE_TYPE_BEST_TAKE_2,
+    LIMIT_PRICE_TYPE_BEST_TAKE_3,
+    LIMIT_PRICE_TYPE_BEST_MAKE_1,
+    LIMIT_PRICE_TYPE_BEST_MAKE_2,
+    LIMIT_PRICE_TYPE_BEST_MAKE_3,
   ];
 
-  static final $core.List<LimitPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static final $core.List<LimitPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
   static LimitPriceType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const LimitPriceType._(super.value, super.name);

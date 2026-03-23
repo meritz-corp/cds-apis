@@ -1134,6 +1134,10 @@ impl serde::Serialize for LimitPriceType {
             Self::BestTake => "LIMIT_PRICE_TYPE_BEST_TAKE",
             Self::BestTake1 => "LIMIT_PRICE_TYPE_BEST_TAKE_1",
             Self::BestTake2 => "LIMIT_PRICE_TYPE_BEST_TAKE_2",
+            Self::BestTake3 => "LIMIT_PRICE_TYPE_BEST_TAKE_3",
+            Self::BestMake1 => "LIMIT_PRICE_TYPE_BEST_MAKE_1",
+            Self::BestMake2 => "LIMIT_PRICE_TYPE_BEST_MAKE_2",
+            Self::BestMake3 => "LIMIT_PRICE_TYPE_BEST_MAKE_3",
         };
         serializer.serialize_str(variant)
     }
@@ -1149,6 +1153,10 @@ impl<'de> serde::Deserialize<'de> for LimitPriceType {
             "LIMIT_PRICE_TYPE_BEST_TAKE",
             "LIMIT_PRICE_TYPE_BEST_TAKE_1",
             "LIMIT_PRICE_TYPE_BEST_TAKE_2",
+            "LIMIT_PRICE_TYPE_BEST_TAKE_3",
+            "LIMIT_PRICE_TYPE_BEST_MAKE_1",
+            "LIMIT_PRICE_TYPE_BEST_MAKE_2",
+            "LIMIT_PRICE_TYPE_BEST_MAKE_3",
         ];
 
         struct GeneratedVisitor;
@@ -1193,6 +1201,10 @@ impl<'de> serde::Deserialize<'de> for LimitPriceType {
                     "LIMIT_PRICE_TYPE_BEST_TAKE" => Ok(LimitPriceType::BestTake),
                     "LIMIT_PRICE_TYPE_BEST_TAKE_1" => Ok(LimitPriceType::BestTake1),
                     "LIMIT_PRICE_TYPE_BEST_TAKE_2" => Ok(LimitPriceType::BestTake2),
+                    "LIMIT_PRICE_TYPE_BEST_TAKE_3" => Ok(LimitPriceType::BestTake3),
+                    "LIMIT_PRICE_TYPE_BEST_MAKE_1" => Ok(LimitPriceType::BestMake1),
+                    "LIMIT_PRICE_TYPE_BEST_MAKE_2" => Ok(LimitPriceType::BestMake2),
+                    "LIMIT_PRICE_TYPE_BEST_MAKE_3" => Ok(LimitPriceType::BestMake3),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

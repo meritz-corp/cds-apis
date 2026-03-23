@@ -369,6 +369,14 @@ pub enum LimitPriceType {
     BestTake1 = 2,
     /// 상대호가 +2틱
     BestTake2 = 3,
+    /// 상대호가 +3틱
+    BestTake3 = 4,
+    /// 자기호가 +1틱
+    BestMake1 = 5,
+    /// 자기호가 +2틱
+    BestMake2 = 6,
+    /// 자기호가 +3틱
+    BestMake3 = 7,
 }
 impl LimitPriceType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -381,6 +389,10 @@ impl LimitPriceType {
             LimitPriceType::BestTake => "LIMIT_PRICE_TYPE_BEST_TAKE",
             LimitPriceType::BestTake1 => "LIMIT_PRICE_TYPE_BEST_TAKE_1",
             LimitPriceType::BestTake2 => "LIMIT_PRICE_TYPE_BEST_TAKE_2",
+            LimitPriceType::BestTake3 => "LIMIT_PRICE_TYPE_BEST_TAKE_3",
+            LimitPriceType::BestMake1 => "LIMIT_PRICE_TYPE_BEST_MAKE_1",
+            LimitPriceType::BestMake2 => "LIMIT_PRICE_TYPE_BEST_MAKE_2",
+            LimitPriceType::BestMake3 => "LIMIT_PRICE_TYPE_BEST_MAKE_3",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -390,6 +402,10 @@ impl LimitPriceType {
             "LIMIT_PRICE_TYPE_BEST_TAKE" => Some(Self::BestTake),
             "LIMIT_PRICE_TYPE_BEST_TAKE_1" => Some(Self::BestTake1),
             "LIMIT_PRICE_TYPE_BEST_TAKE_2" => Some(Self::BestTake2),
+            "LIMIT_PRICE_TYPE_BEST_TAKE_3" => Some(Self::BestTake3),
+            "LIMIT_PRICE_TYPE_BEST_MAKE_1" => Some(Self::BestMake1),
+            "LIMIT_PRICE_TYPE_BEST_MAKE_2" => Some(Self::BestMake2),
+            "LIMIT_PRICE_TYPE_BEST_MAKE_3" => Some(Self::BestMake3),
             _ => None,
         }
     }
