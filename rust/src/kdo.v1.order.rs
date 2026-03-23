@@ -54,9 +54,6 @@ pub struct AmendOrderRequest {
     /// 원주문 ID
     #[prost(uint64, tag="1")]
     pub original_order_id: u64,
-    /// 펀드 코드
-    #[prost(string, tag="2")]
-    pub fund_code: ::prost::alloc::string::String,
     /// 종목 코드
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,
@@ -97,9 +94,6 @@ pub struct CancelOrderRequest {
     /// 원주문 ID
     #[prost(uint64, tag="1")]
     pub original_order_id: u64,
-    /// 펀드 코드
-    #[prost(string, tag="2")]
-    pub fund_code: ::prost::alloc::string::String,
     /// 종목 코드
     #[prost(string, tag="3")]
     pub symbol: ::prost::alloc::string::String,

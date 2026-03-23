@@ -250,7 +250,6 @@ class SubmitOrderResponse extends $pb.GeneratedMessage {
 class AmendOrderRequest extends $pb.GeneratedMessage {
   factory AmendOrderRequest({
     $fixnum.Int64? originalOrderId,
-    $core.String? fundCode,
     $core.String? symbol,
     $core.String? price,
     $2.OrderSide? side,
@@ -259,7 +258,6 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
-    if (fundCode != null) result.fundCode = fundCode;
     if (symbol != null) result.symbol = symbol;
     if (price != null) result.price = price;
     if (side != null) result.side = side;
@@ -275,7 +273,6 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AmendOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
@@ -311,63 +308,53 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearOriginalOrderId() => $_clearField(1);
 
-  /// 펀드 코드
-  @$pb.TagNumber(2)
-  $core.String get fundCode => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set fundCode($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFundCode() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFundCode() => $_clearField(2);
-
   /// 종목 코드
   @$pb.TagNumber(3)
-  $core.String get symbol => $_getSZ(2);
+  $core.String get symbol => $_getSZ(1);
   @$pb.TagNumber(3)
-  set symbol($core.String value) => $_setString(2, value);
+  set symbol($core.String value) => $_setString(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasSymbol() => $_has(2);
+  $core.bool hasSymbol() => $_has(1);
   @$pb.TagNumber(3)
   void clearSymbol() => $_clearField(3);
 
   /// 정정 가격
   @$pb.TagNumber(5)
-  $core.String get price => $_getSZ(3);
+  $core.String get price => $_getSZ(2);
   @$pb.TagNumber(5)
-  set price($core.String value) => $_setString(3, value);
+  set price($core.String value) => $_setString(2, value);
   @$pb.TagNumber(5)
-  $core.bool hasPrice() => $_has(3);
+  $core.bool hasPrice() => $_has(2);
   @$pb.TagNumber(5)
   void clearPrice() => $_clearField(5);
 
   /// 매수/매도
   @$pb.TagNumber(6)
-  $2.OrderSide get side => $_getN(4);
+  $2.OrderSide get side => $_getN(3);
   @$pb.TagNumber(6)
   set side($2.OrderSide value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasSide() => $_has(4);
+  $core.bool hasSide() => $_has(3);
   @$pb.TagNumber(6)
   void clearSide() => $_clearField(6);
 
   /// 유동성 공급자 여부
   @$pb.TagNumber(7)
-  $core.bool get isLp => $_getBF(5);
+  $core.bool get isLp => $_getBF(4);
   @$pb.TagNumber(7)
-  set isLp($core.bool value) => $_setBool(5, value);
+  set isLp($core.bool value) => $_setBool(4, value);
   @$pb.TagNumber(7)
-  $core.bool hasIsLp() => $_has(5);
+  $core.bool hasIsLp() => $_has(4);
   @$pb.TagNumber(7)
   void clearIsLp() => $_clearField(7);
 
   /// 주문 유형 (기본: LIMIT)
   @$pb.TagNumber(8)
-  QuoteType get quoteType => $_getN(6);
+  QuoteType get quoteType => $_getN(5);
   @$pb.TagNumber(8)
   set quoteType(QuoteType value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasQuoteType() => $_has(6);
+  $core.bool hasQuoteType() => $_has(5);
   @$pb.TagNumber(8)
   void clearQuoteType() => $_clearField(8);
 }
@@ -461,13 +448,11 @@ class AmendOrderResponse extends $pb.GeneratedMessage {
 class CancelOrderRequest extends $pb.GeneratedMessage {
   factory CancelOrderRequest({
     $fixnum.Int64? originalOrderId,
-    $core.String? fundCode,
     $core.String? symbol,
     $2.OrderSide? side,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
-    if (fundCode != null) result.fundCode = fundCode;
     if (symbol != null) result.symbol = symbol;
     if (side != null) result.side = side;
     return result;
@@ -480,7 +465,6 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..hasRequiredFields = false
@@ -513,33 +497,23 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearOriginalOrderId() => $_clearField(1);
 
-  /// 펀드 코드
-  @$pb.TagNumber(2)
-  $core.String get fundCode => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set fundCode($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFundCode() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFundCode() => $_clearField(2);
-
   /// 종목 코드
   @$pb.TagNumber(3)
-  $core.String get symbol => $_getSZ(2);
+  $core.String get symbol => $_getSZ(1);
   @$pb.TagNumber(3)
-  set symbol($core.String value) => $_setString(2, value);
+  set symbol($core.String value) => $_setString(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasSymbol() => $_has(2);
+  $core.bool hasSymbol() => $_has(1);
   @$pb.TagNumber(3)
   void clearSymbol() => $_clearField(3);
 
   /// 매수/매도
   @$pb.TagNumber(6)
-  $2.OrderSide get side => $_getN(3);
+  $2.OrderSide get side => $_getN(2);
   @$pb.TagNumber(6)
   set side($2.OrderSide value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasSide() => $_has(3);
+  $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(6)
   void clearSide() => $_clearField(6);
 }

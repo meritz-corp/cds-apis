@@ -25,17 +25,11 @@ impl serde::Serialize for AmendOrderRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.AmendOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("original_order_id", ToString::to_string(&self.original_order_id).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -68,8 +62,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
         const FIELDS: &[&str] = &[
             "original_order_id",
             "originalOrderId",
-            "fund_code",
-            "fundCode",
             "symbol",
             "price",
             "side",
@@ -82,7 +74,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             OriginalOrderId,
-            FundCode,
             Symbol,
             Price,
             Side,
@@ -111,7 +102,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                     {
                         match value {
                             "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "symbol" => Ok(GeneratedField::Symbol),
                             "price" => Ok(GeneratedField::Price),
                             "side" => Ok(GeneratedField::Side),
@@ -137,7 +127,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut original_order_id__ = None;
-                let mut fund_code__ = None;
                 let mut symbol__ = None;
                 let mut price__ = None;
                 let mut side__ = None;
@@ -152,12 +141,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             original_order_id__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Symbol => {
                             if symbol__.is_some() {
@@ -196,7 +179,6 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                 }
                 Ok(AmendOrderRequest {
                     original_order_id: original_order_id__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
                     price: price__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
@@ -570,17 +552,11 @@ impl serde::Serialize for CancelOrderRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.CancelOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("original_order_id", ToString::to_string(&self.original_order_id).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -602,8 +578,6 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
         const FIELDS: &[&str] = &[
             "original_order_id",
             "originalOrderId",
-            "fund_code",
-            "fundCode",
             "symbol",
             "side",
         ];
@@ -611,7 +585,6 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             OriginalOrderId,
-            FundCode,
             Symbol,
             Side,
             __SkipField__,
@@ -637,7 +610,6 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                     {
                         match value {
                             "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "symbol" => Ok(GeneratedField::Symbol),
                             "side" => Ok(GeneratedField::Side),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -660,7 +632,6 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut original_order_id__ = None;
-                let mut fund_code__ = None;
                 let mut symbol__ = None;
                 let mut side__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -672,12 +643,6 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                             original_order_id__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Symbol => {
                             if symbol__.is_some() {
@@ -698,7 +663,6 @@ impl<'de> serde::Deserialize<'de> for CancelOrderRequest {
                 }
                 Ok(CancelOrderRequest {
                     original_order_id: original_order_id__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
                 })
