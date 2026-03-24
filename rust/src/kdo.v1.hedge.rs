@@ -340,6 +340,12 @@ pub enum ExecPriceType {
     CounterBestPlusTick = 3,
     /// 호가 가격: 지정된 호가 가격으로 주문
     QuotedPrice = 4,
+    /// QuotedPrice에서 1틱 더 공격적 (매수: +1틱, 매도: -1틱)
+    QuotedPricePlus1 = 5,
+    /// QuotedPrice에서 2틱 더 공격적 (매수: +2틱, 매도: -2틱)
+    QuotedPricePlus2 = 6,
+    /// QuotedPrice에서 3틱 더 공격적 (매수: +3틱, 매도: -3틱)
+    QuotedPricePlus3 = 7,
 }
 impl ExecPriceType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -353,6 +359,9 @@ impl ExecPriceType {
             ExecPriceType::CounterBest => "EXEC_PRICE_TYPE_COUNTER_BEST",
             ExecPriceType::CounterBestPlusTick => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
             ExecPriceType::QuotedPrice => "EXEC_PRICE_TYPE_QUOTED_PRICE",
+            ExecPriceType::QuotedPricePlus1 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1",
+            ExecPriceType::QuotedPricePlus2 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2",
+            ExecPriceType::QuotedPricePlus3 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -363,6 +372,9 @@ impl ExecPriceType {
             "EXEC_PRICE_TYPE_COUNTER_BEST" => Some(Self::CounterBest),
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK" => Some(Self::CounterBestPlusTick),
             "EXEC_PRICE_TYPE_QUOTED_PRICE" => Some(Self::QuotedPrice),
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1" => Some(Self::QuotedPricePlus1),
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2" => Some(Self::QuotedPricePlus2),
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3" => Some(Self::QuotedPricePlus3),
             _ => None,
         }
     }

@@ -646,6 +646,9 @@ impl serde::Serialize for ExecPriceType {
             Self::CounterBest => "EXEC_PRICE_TYPE_COUNTER_BEST",
             Self::CounterBestPlusTick => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
             Self::QuotedPrice => "EXEC_PRICE_TYPE_QUOTED_PRICE",
+            Self::QuotedPricePlus1 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1",
+            Self::QuotedPricePlus2 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2",
+            Self::QuotedPricePlus3 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3",
         };
         serializer.serialize_str(variant)
     }
@@ -662,6 +665,9 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
             "EXEC_PRICE_TYPE_COUNTER_BEST",
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
             "EXEC_PRICE_TYPE_QUOTED_PRICE",
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1",
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2",
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3",
         ];
 
         struct GeneratedVisitor;
@@ -707,6 +713,9 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
                     "EXEC_PRICE_TYPE_COUNTER_BEST" => Ok(ExecPriceType::CounterBest),
                     "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK" => Ok(ExecPriceType::CounterBestPlusTick),
                     "EXEC_PRICE_TYPE_QUOTED_PRICE" => Ok(ExecPriceType::QuotedPrice),
+                    "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1" => Ok(ExecPriceType::QuotedPricePlus1),
+                    "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2" => Ok(ExecPriceType::QuotedPricePlus2),
+                    "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3" => Ok(ExecPriceType::QuotedPricePlus3),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

@@ -28,6 +28,12 @@ class ExecPriceType extends $pb.ProtobufEnum {
   static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK = ExecPriceType._(3, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK');
   /// 호가 가격: 지정된 호가 가격으로 주문
   static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE = ExecPriceType._(4, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE');
+  /// QuotedPrice에서 1틱 더 공격적 (매수: +1틱, 매도: -1틱)
+  static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1 = ExecPriceType._(5, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1');
+  /// QuotedPrice에서 2틱 더 공격적 (매수: +2틱, 매도: -2틱)
+  static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2 = ExecPriceType._(6, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2');
+  /// QuotedPrice에서 3틱 더 공격적 (매수: +3틱, 매도: -3틱)
+  static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3 = ExecPriceType._(7, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3');
 
   static const $core.List<ExecPriceType> values = <ExecPriceType> [
     EXEC_PRICE_TYPE_UNSPECIFIED,
@@ -35,9 +41,12 @@ class ExecPriceType extends $pb.ProtobufEnum {
     EXEC_PRICE_TYPE_COUNTER_BEST,
     EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK,
     EXEC_PRICE_TYPE_QUOTED_PRICE,
+    EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1,
+    EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2,
+    EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3,
   ];
 
-  static final $core.List<ExecPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static final $core.List<ExecPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
   static ExecPriceType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const ExecPriceType._(super.value, super.name);
