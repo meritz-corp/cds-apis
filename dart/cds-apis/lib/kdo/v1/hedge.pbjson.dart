@@ -46,6 +46,8 @@ const Hedge$json = {
     {'1': 'create_time', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
     {'1': 'exec_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.hedge.ExecPriceType', '10': 'execPriceType'},
+    {'1': 'auto_amend', '3': 10, '4': 1, '5': 8, '10': 'autoAmend'},
+    {'1': 'amend_method', '3': 11, '4': 1, '5': 9, '10': 'amendMethod'},
   ],
   '7': {},
 };
@@ -59,8 +61,9 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'aXNBY3RpdmUSQQoLY3JlYXRlX3RpbWUYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW'
     '1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90aW1lGAggASgLMhouZ29vZ2xlLnByb3Rv'
     'YnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRJDCg9leGVjX3ByaWNlX3R5cGUYCSABKA'
-    '4yGy5rZG8udjEuaGVkZ2UuRXhlY1ByaWNlVHlwZVINZXhlY1ByaWNlVHlwZToq6kEnChVrZG8u'
-    'Y2RzYXBpcy54eXovSGVkZ2USDmhlZGdlcy97aGVkZ2V9');
+    '4yGy5rZG8udjEuaGVkZ2UuRXhlY1ByaWNlVHlwZVINZXhlY1ByaWNlVHlwZRIdCgphdXRvX2Ft'
+    'ZW5kGAogASgIUglhdXRvQW1lbmQSIQoMYW1lbmRfbWV0aG9kGAsgASgJUgthbWVuZE1ldGhvZD'
+    'oq6kEnChVrZG8uY2RzYXBpcy54eXovSGVkZ2USDmhlZGdlcy97aGVkZ2V9');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {

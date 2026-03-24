@@ -158,6 +158,14 @@ message Hedge {
 
   // 헷지 주문 체결 가격 유형
   ExecPriceType exec_price_type = 9;
+
+  // 자동정정 활성화 여부
+  bool auto_amend = 10;
+
+  // 자동정정 전략 프리셋 (auto_amend=true 일 때 유효)
+  // 값: "AGGRESSIVE", "EVASIVE", "BEST_PRICE", "STOP_LOSS", "TIMED_MARKET"
+  // 미지정 시 "EVASIVE" 로 처리됨
+  string amend_method = 11;
 }
 
 // 헷지 방식

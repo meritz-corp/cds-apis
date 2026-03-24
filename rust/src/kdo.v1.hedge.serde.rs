@@ -1054,6 +1054,12 @@ impl serde::Serialize for Hedge {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.Hedge", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1084,6 +1090,12 @@ impl serde::Serialize for Hedge {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.exec_price_type)))?;
             struct_ser.serialize_field("exec_price_type", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("auto_amend", &self.auto_amend)?;
+        }
+        if true {
+            struct_ser.serialize_field("amend_method", &self.amend_method)?;
+        }
         struct_ser.end()
     }
 }
@@ -1110,6 +1122,10 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "updateTime",
             "exec_price_type",
             "execPriceType",
+            "auto_amend",
+            "autoAmend",
+            "amend_method",
+            "amendMethod",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1123,6 +1139,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             CreateTime,
             UpdateTime,
             ExecPriceType,
+            AutoAmend,
+            AmendMethod,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1154,6 +1172,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
                             "execPriceType" | "exec_price_type" => Ok(GeneratedField::ExecPriceType),
+                            "autoAmend" | "auto_amend" => Ok(GeneratedField::AutoAmend),
+                            "amendMethod" | "amend_method" => Ok(GeneratedField::AmendMethod),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1182,6 +1202,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut create_time__ = None;
                 let mut update_time__ = None;
                 let mut exec_price_type__ = None;
+                let mut auto_amend__ = None;
+                let mut amend_method__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1240,6 +1262,18 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             }
                             exec_price_type__ = Some(map_.next_value::<ExecPriceType>()? as i32);
                         }
+                        GeneratedField::AutoAmend => {
+                            if auto_amend__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("autoAmend"));
+                            }
+                            auto_amend__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AmendMethod => {
+                            if amend_method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("amendMethod"));
+                            }
+                            amend_method__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1255,6 +1289,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     create_time: create_time__,
                     update_time: update_time__,
                     exec_price_type: exec_price_type__.unwrap_or_default(),
+                    auto_amend: auto_amend__.unwrap_or_default(),
+                    amend_method: amend_method__.unwrap_or_default(),
                 })
             }
         }

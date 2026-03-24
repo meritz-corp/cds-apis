@@ -34,6 +34,14 @@ pub struct Hedge {
     /// 헷지 주문 체결 가격 유형
     #[prost(enumeration="ExecPriceType", tag="9")]
     pub exec_price_type: i32,
+    /// 자동정정 활성화 여부
+    #[prost(bool, tag="10")]
+    pub auto_amend: bool,
+    /// 자동정정 전략 프리셋 (auto_amend=true 일 때 유효)
+    /// 값: "AGGRESSIVE", "EVASIVE", "BEST_PRICE", "STOP_LOSS", "TIMED_MARKET"
+    /// 미지정 시 "EVASIVE" 로 처리됨
+    #[prost(string, tag="11")]
+    pub amend_method: ::prost::alloc::string::String,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]

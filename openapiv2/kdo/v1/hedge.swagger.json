@@ -252,6 +252,14 @@
                 "execPriceType": {
                   "$ref": "#/definitions/hedgeExecPriceType",
                   "title": "헷지 주문 체결 가격 유형"
+                },
+                "autoAmend": {
+                  "type": "boolean",
+                  "title": "자동정정 활성화 여부"
+                },
+                "amendMethod": {
+                  "type": "string",
+                  "title": "자동정정 전략 프리셋 (auto_amend=true 일 때 유효)\n값: \"AGGRESSIVE\", \"EVASIVE\", \"BEST_PRICE\", \"STOP_LOSS\", \"TIMED_MARKET\"\n미지정 시 \"EVASIVE\" 로 처리됨"
                 }
               },
               "title": "수정할 헷지 정보",
@@ -619,6 +627,14 @@
         "execPriceType": {
           "$ref": "#/definitions/hedgeExecPriceType",
           "title": "헷지 주문 체결 가격 유형"
+        },
+        "autoAmend": {
+          "type": "boolean",
+          "title": "자동정정 활성화 여부"
+        },
+        "amendMethod": {
+          "type": "string",
+          "title": "자동정정 전략 프리셋 (auto_amend=true 일 때 유효)\n값: \"AGGRESSIVE\", \"EVASIVE\", \"BEST_PRICE\", \"STOP_LOSS\", \"TIMED_MARKET\"\n미지정 시 \"EVASIVE\" 로 처리됨"
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",

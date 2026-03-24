@@ -35,6 +35,8 @@ class Hedge extends $pb.GeneratedMessage {
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
     ExecPriceType? execPriceType,
+    $core.bool? autoAmend,
+    $core.String? amendMethod,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -46,6 +48,8 @@ class Hedge extends $pb.GeneratedMessage {
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
     if (execPriceType != null) result.execPriceType = execPriceType;
+    if (autoAmend != null) result.autoAmend = autoAmend;
+    if (amendMethod != null) result.amendMethod = amendMethod;
     return result;
   }
 
@@ -64,6 +68,8 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..e<ExecPriceType>(9, _omitFieldNames ? '' : 'execPriceType', $pb.PbFieldType.OE, defaultOrMaker: ExecPriceType.EXEC_PRICE_TYPE_UNSPECIFIED, valueOf: ExecPriceType.valueOf, enumValues: ExecPriceType.values)
+    ..aOB(10, _omitFieldNames ? '' : 'autoAmend')
+    ..aOS(11, _omitFieldNames ? '' : 'amendMethod')
     ..hasRequiredFields = false
   ;
 
@@ -179,6 +185,28 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasExecPriceType() => $_has(8);
   @$pb.TagNumber(9)
   void clearExecPriceType() => $_clearField(9);
+
+  /// 자동정정 활성화 여부
+  @$pb.TagNumber(10)
+  $core.bool get autoAmend => $_getBF(9);
+  @$pb.TagNumber(10)
+  set autoAmend($core.bool value) => $_setBool(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasAutoAmend() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearAutoAmend() => $_clearField(10);
+
+  /// 자동정정 전략 프리셋 (auto_amend=true 일 때 유효)
+  /// 값: "AGGRESSIVE", "EVASIVE", "BEST_PRICE", "STOP_LOSS", "TIMED_MARKET"
+  /// 미지정 시 "EVASIVE" 로 처리됨
+  @$pb.TagNumber(11)
+  $core.String get amendMethod => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set amendMethod($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasAmendMethod() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearAmendMethod() => $_clearField(11);
 }
 
 enum HedgeMethod_Method {
