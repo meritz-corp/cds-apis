@@ -16,6 +16,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $2;
+import 'common.pbenum.dart' as $3;
 import 'hedge.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -36,7 +37,7 @@ class Hedge extends $pb.GeneratedMessage {
     $2.Timestamp? updateTime,
     ExecPriceType? execPriceType,
     $core.bool? autoAmend,
-    AmendMethodType? amendMethod,
+    $3.AmendMethodType? amendMethod,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -69,7 +70,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..e<ExecPriceType>(9, _omitFieldNames ? '' : 'execPriceType', $pb.PbFieldType.OE, defaultOrMaker: ExecPriceType.EXEC_PRICE_TYPE_UNSPECIFIED, valueOf: ExecPriceType.valueOf, enumValues: ExecPriceType.values)
     ..aOB(10, _omitFieldNames ? '' : 'autoAmend')
-    ..e<AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: AmendMethodType.valueOf, enumValues: AmendMethodType.values)
+    ..e<$3.AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: $3.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $3.AmendMethodType.valueOf, enumValues: $3.AmendMethodType.values)
     ..hasRequiredFields = false
   ;
 
@@ -199,9 +200,9 @@ class Hedge extends $pb.GeneratedMessage {
   /// 자동정정 전략 유형 (auto_amend=true 일 때 유효)
   /// 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
   @$pb.TagNumber(11)
-  AmendMethodType get amendMethod => $_getN(10);
+  $3.AmendMethodType get amendMethod => $_getN(10);
   @$pb.TagNumber(11)
-  set amendMethod(AmendMethodType value) => $_setField(11, value);
+  set amendMethod($3.AmendMethodType value) => $_setField(11, value);
   @$pb.TagNumber(11)
   $core.bool hasAmendMethod() => $_has(10);
   @$pb.TagNumber(11)

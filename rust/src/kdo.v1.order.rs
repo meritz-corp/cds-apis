@@ -26,9 +26,9 @@ pub struct SubmitOrderRequest {
     /// 유동성 공급자 여부
     #[prost(bool, tag="7")]
     pub is_lp: bool,
-    /// 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
-    #[prost(string, optional, tag="8")]
-    pub auto_amend_strategy: ::core::option::Option<::prost::alloc::string::String>,
+    /// 자동정정 전략
+    #[prost(enumeration="super::common::AmendMethodType", optional, tag="8")]
+    pub auto_amend_strategy: ::core::option::Option<i32>,
     /// 지정가 가격 결정 방식 (미지정 시 price 필드의 가격 사용)
     #[prost(enumeration="LimitPriceType", optional, tag="9")]
     pub limit_price_type: ::core::option::Option<i32>,

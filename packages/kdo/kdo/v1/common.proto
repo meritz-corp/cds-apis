@@ -40,3 +40,24 @@ enum TradingSession {
   TRADING_SESSION_CLOSING_AUCTION = 4;  // 종가 동시호가 (15:20 ~ 15:30)
   TRADING_SESSION_CLOSED = 5;           // 장 종료
 }
+
+// 자동정정 전략 유형
+enum AmendMethodType {
+  // 미지정 (기본값: TIMED_MARKET으로 처리)
+  AMEND_METHOD_TYPE_UNSPECIFIED = 0;
+
+  // 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
+  AMEND_METHOD_TYPE_AGGRESSIVE = 1;
+
+  // 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지
+  AMEND_METHOD_TYPE_EVASIVE = 2;
+
+  // 최우선 호가: 상대방 최우선 호가로 정정
+  AMEND_METHOD_TYPE_BEST_PRICE = 3;
+
+  // 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
+  AMEND_METHOD_TYPE_STOP_LOSS = 4;
+
+  // 시간 제한 시장가: timeout 후 시장가로 전환
+  AMEND_METHOD_TYPE_TIMED_MARKET = 5;
+}

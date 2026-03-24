@@ -111,8 +111,8 @@ message SubmitOrderRequest {
   // 유동성 공급자 여부
   bool is_lp = 7  [(google.api.field_behavior) = REQUIRED];
 
-  // 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
-  optional string auto_amend_strategy = 8;
+  // 자동정정 전략
+  optional kdo.v1.common.AmendMethodType auto_amend_strategy = 8;
 
   // 지정가 가격 결정 방식 (미지정 시 price 필드의 가격 사용)
   optional LimitPriceType limit_price_type = 9;

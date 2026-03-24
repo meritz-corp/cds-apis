@@ -14,26 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use amendMethodTypeDescriptor instead')
-const AmendMethodType$json = {
-  '1': 'AmendMethodType',
-  '2': [
-    {'1': 'AMEND_METHOD_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'AMEND_METHOD_TYPE_AGGRESSIVE', '2': 1},
-    {'1': 'AMEND_METHOD_TYPE_EVASIVE', '2': 2},
-    {'1': 'AMEND_METHOD_TYPE_BEST_PRICE', '2': 3},
-    {'1': 'AMEND_METHOD_TYPE_STOP_LOSS', '2': 4},
-    {'1': 'AMEND_METHOD_TYPE_TIMED_MARKET', '2': 5},
-  ],
-};
-
-/// Descriptor for `AmendMethodType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List amendMethodTypeDescriptor = $convert.base64Decode(
-    'Cg9BbWVuZE1ldGhvZFR5cGUSIQodQU1FTkRfTUVUSE9EX1RZUEVfVU5TUEVDSUZJRUQQABIgCh'
-    'xBTUVORF9NRVRIT0RfVFlQRV9BR0dSRVNTSVZFEAESHQoZQU1FTkRfTUVUSE9EX1RZUEVfRVZB'
-    'U0lWRRACEiAKHEFNRU5EX01FVEhPRF9UWVBFX0JFU1RfUFJJQ0UQAxIfChtBTUVORF9NRVRIT0'
-    'RfVFlQRV9TVE9QX0xPU1MQBBIiCh5BTUVORF9NRVRIT0RfVFlQRV9USU1FRF9NQVJLRVQQBQ==');
-
 @$core.Deprecated('Use execPriceTypeDescriptor instead')
 const ExecPriceType$json = {
   '1': 'ExecPriceType',
@@ -67,7 +47,7 @@ const Hedge$json = {
     {'1': 'update_time', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
     {'1': 'exec_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.hedge.ExecPriceType', '10': 'execPriceType'},
     {'1': 'auto_amend', '3': 10, '4': 1, '5': 8, '10': 'autoAmend'},
-    {'1': 'amend_method', '3': 11, '4': 1, '5': 14, '6': '.kdo.v1.hedge.AmendMethodType', '10': 'amendMethod'},
+    {'1': 'amend_method', '3': 11, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '10': 'amendMethod'},
   ],
   '7': {},
 };
@@ -82,9 +62,9 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     '1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90aW1lGAggASgLMhouZ29vZ2xlLnByb3Rv'
     'YnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRJDCg9leGVjX3ByaWNlX3R5cGUYCSABKA'
     '4yGy5rZG8udjEuaGVkZ2UuRXhlY1ByaWNlVHlwZVINZXhlY1ByaWNlVHlwZRIdCgphdXRvX2Ft'
-    'ZW5kGAogASgIUglhdXRvQW1lbmQSQAoMYW1lbmRfbWV0aG9kGAsgASgOMh0ua2RvLnYxLmhlZG'
-    'dlLkFtZW5kTWV0aG9kVHlwZVILYW1lbmRNZXRob2Q6KupBJwoVa2RvLmNkc2FwaXMueHl6L0hl'
-    'ZGdlEg5oZWRnZXMve2hlZGdlfQ==');
+    'ZW5kGAogASgIUglhdXRvQW1lbmQSQQoMYW1lbmRfbWV0aG9kGAsgASgOMh4ua2RvLnYxLmNvbW'
+    '1vbi5BbWVuZE1ldGhvZFR5cGVSC2FtZW5kTWV0aG9kOirqQScKFWtkby5jZHNhcGlzLnh5ei9I'
+    'ZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {

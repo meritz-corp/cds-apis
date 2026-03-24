@@ -84,3 +84,23 @@ final $typed_data.Uint8List tradingSessionDescriptor = $convert.base64Decode(
     'Q1RJT04QAhIbChdUUkFESU5HX1NFU1NJT05fUkVHVUxBUhADEiMKH1RSQURJTkdfU0VTU0lPTl'
     '9DTE9TSU5HX0FVQ1RJT04QBBIaChZUUkFESU5HX1NFU1NJT05fQ0xPU0VEEAU=');
 
+@$core.Deprecated('Use amendMethodTypeDescriptor instead')
+const AmendMethodType$json = {
+  '1': 'AmendMethodType',
+  '2': [
+    {'1': 'AMEND_METHOD_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'AMEND_METHOD_TYPE_AGGRESSIVE', '2': 1},
+    {'1': 'AMEND_METHOD_TYPE_EVASIVE', '2': 2},
+    {'1': 'AMEND_METHOD_TYPE_BEST_PRICE', '2': 3},
+    {'1': 'AMEND_METHOD_TYPE_STOP_LOSS', '2': 4},
+    {'1': 'AMEND_METHOD_TYPE_TIMED_MARKET', '2': 5},
+  ],
+};
+
+/// Descriptor for `AmendMethodType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List amendMethodTypeDescriptor = $convert.base64Decode(
+    'Cg9BbWVuZE1ldGhvZFR5cGUSIQodQU1FTkRfTUVUSE9EX1RZUEVfVU5TUEVDSUZJRUQQABIgCh'
+    'xBTUVORF9NRVRIT0RfVFlQRV9BR0dSRVNTSVZFEAESHQoZQU1FTkRfTUVUSE9EX1RZUEVfRVZB'
+    'U0lWRRACEiAKHEFNRU5EX01FVEhPRF9UWVBFX0JFU1RfUFJJQ0UQAxIfChtBTUVORF9NRVRIT0'
+    'RfVFlQRV9TVE9QX0xPU1MQBBIiCh5BTUVORF9NRVRIT0RfVFlQRV9USU1FRF9NQVJLRVQQBQ==');
+

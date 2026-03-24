@@ -101,5 +101,35 @@ class TradingSession extends $pb.ProtobufEnum {
   const TradingSession._(super.value, super.name);
 }
 
+/// 자동정정 전략 유형
+class AmendMethodType extends $pb.ProtobufEnum {
+  /// 미지정 (기본값: TIMED_MARKET으로 처리)
+  static const AmendMethodType AMEND_METHOD_TYPE_UNSPECIFIED = AmendMethodType._(0, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_UNSPECIFIED');
+  /// 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
+  static const AmendMethodType AMEND_METHOD_TYPE_AGGRESSIVE = AmendMethodType._(1, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_AGGRESSIVE');
+  /// 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지
+  static const AmendMethodType AMEND_METHOD_TYPE_EVASIVE = AmendMethodType._(2, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_EVASIVE');
+  /// 최우선 호가: 상대방 최우선 호가로 정정
+  static const AmendMethodType AMEND_METHOD_TYPE_BEST_PRICE = AmendMethodType._(3, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_BEST_PRICE');
+  /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
+  static const AmendMethodType AMEND_METHOD_TYPE_STOP_LOSS = AmendMethodType._(4, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_STOP_LOSS');
+  /// 시간 제한 시장가: timeout 후 시장가로 전환
+  static const AmendMethodType AMEND_METHOD_TYPE_TIMED_MARKET = AmendMethodType._(5, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TIMED_MARKET');
+
+  static const $core.List<AmendMethodType> values = <AmendMethodType> [
+    AMEND_METHOD_TYPE_UNSPECIFIED,
+    AMEND_METHOD_TYPE_AGGRESSIVE,
+    AMEND_METHOD_TYPE_EVASIVE,
+    AMEND_METHOD_TYPE_BEST_PRICE,
+    AMEND_METHOD_TYPE_STOP_LOSS,
+    AMEND_METHOD_TYPE_TIMED_MARKET,
+  ];
+
+  static final $core.List<AmendMethodType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static AmendMethodType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const AmendMethodType._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

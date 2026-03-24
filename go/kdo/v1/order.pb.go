@@ -265,8 +265,8 @@ type SubmitOrderRequest struct {
 	QuoteType QuoteType `protobuf:"varint,6,opt,name=quote_type,json=quoteType,proto3,enum=kdo.v1.order.QuoteType" json:"quote_type,omitempty"`
 	// 유동성 공급자 여부
 	IsLp bool `protobuf:"varint,7,opt,name=is_lp,json=isLp,proto3" json:"is_lp,omitempty"`
-	// 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
-	AutoAmendStrategy *string `protobuf:"bytes,8,opt,name=auto_amend_strategy,json=autoAmendStrategy,proto3,oneof" json:"auto_amend_strategy,omitempty"`
+	// 자동정정 전략
+	AutoAmendStrategy *AmendMethodType `protobuf:"varint,8,opt,name=auto_amend_strategy,json=autoAmendStrategy,proto3,enum=kdo.v1.common.AmendMethodType,oneof" json:"auto_amend_strategy,omitempty"`
 	// 지정가 가격 결정 방식 (미지정 시 price 필드의 가격 사용)
 	LimitPriceType *LimitPriceType `protobuf:"varint,9,opt,name=limit_price_type,json=limitPriceType,proto3,enum=kdo.v1.order.LimitPriceType,oneof" json:"limit_price_type,omitempty"`
 }
@@ -352,11 +352,11 @@ func (x *SubmitOrderRequest) GetIsLp() bool {
 	return false
 }
 
-func (x *SubmitOrderRequest) GetAutoAmendStrategy() string {
+func (x *SubmitOrderRequest) GetAutoAmendStrategy() AmendMethodType {
 	if x != nil && x.AutoAmendStrategy != nil {
 		return *x.AutoAmendStrategy
 	}
-	return ""
+	return AmendMethodType_AMEND_METHOD_TYPE_UNSPECIFIED
 }
 
 func (x *SubmitOrderRequest) GetLimitPriceType() LimitPriceType {
@@ -1693,7 +1693,7 @@ var file_kdo_v1_order_proto_rawDesc = []byte{
 	0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
 	0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x1a, 0x13, 0x6b, 0x64, 0x6f, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
-	0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xcf, 0x03, 0x0a, 0x12, 0x53, 0x75, 0x62, 0x6d,
+	0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xef, 0x03, 0x0a, 0x12, 0x53, 0x75, 0x62, 0x6d,
 	0x69, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21,
 	0x0a, 0x09, 0x66, 0x75, 0x6e, 0x64, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x09, 0x42, 0x04, 0xe2, 0x41, 0x01, 0x02, 0x52, 0x08, 0x66, 0x75, 0x6e, 0x64, 0x43, 0x6f, 0x64,
@@ -1711,9 +1711,11 @@ var file_kdo_v1_order_proto_rawDesc = []byte{
 	0x72, 0x64, 0x65, 0x72, 0x2e, 0x51, 0x75, 0x6f, 0x74, 0x65, 0x54, 0x79, 0x70, 0x65, 0x42, 0x04,
 	0xe2, 0x41, 0x01, 0x02, 0x52, 0x09, 0x71, 0x75, 0x6f, 0x74, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12,
 	0x19, 0x0a, 0x05, 0x69, 0x73, 0x5f, 0x6c, 0x70, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x42, 0x04,
-	0xe2, 0x41, 0x01, 0x02, 0x52, 0x04, 0x69, 0x73, 0x4c, 0x70, 0x12, 0x33, 0x0a, 0x13, 0x61, 0x75,
+	0xe2, 0x41, 0x01, 0x02, 0x52, 0x04, 0x69, 0x73, 0x4c, 0x70, 0x12, 0x53, 0x0a, 0x13, 0x61, 0x75,
 	0x74, 0x6f, 0x5f, 0x61, 0x6d, 0x65, 0x6e, 0x64, 0x5f, 0x73, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67,
-	0x79, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x11, 0x61, 0x75, 0x74, 0x6f, 0x41,
+	0x79, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1e, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31,
+	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x41, 0x6d, 0x65, 0x6e, 0x64, 0x4d, 0x65, 0x74,
+	0x68, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65, 0x48, 0x00, 0x52, 0x11, 0x61, 0x75, 0x74, 0x6f, 0x41,
 	0x6d, 0x65, 0x6e, 0x64, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x88, 0x01, 0x01, 0x12,
 	0x4b, 0x0a, 0x10, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x5f, 0x74,
 	0x79, 0x70, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1c, 0x2e, 0x6b, 0x64, 0x6f, 0x2e,
@@ -2039,45 +2041,47 @@ var file_kdo_v1_order_proto_goTypes = []interface{}{
 	(*ListOrdersResponse)(nil),            // 21: kdo.v1.order.ListOrdersResponse
 	(*Order)(nil),                         // 22: kdo.v1.order.Order
 	(OrderSide)(0),                        // 23: kdo.v1.common.OrderSide
-	(*timestamppb.Timestamp)(nil),         // 24: google.protobuf.Timestamp
+	(AmendMethodType)(0),                  // 24: kdo.v1.common.AmendMethodType
+	(*timestamppb.Timestamp)(nil),         // 25: google.protobuf.Timestamp
 }
 var file_kdo_v1_order_proto_depIdxs = []int32{
 	23, // 0: kdo.v1.order.SubmitOrderRequest.side:type_name -> kdo.v1.common.OrderSide
 	0,  // 1: kdo.v1.order.SubmitOrderRequest.quote_type:type_name -> kdo.v1.order.QuoteType
-	1,  // 2: kdo.v1.order.SubmitOrderRequest.limit_price_type:type_name -> kdo.v1.order.LimitPriceType
-	2,  // 3: kdo.v1.order.SubmitOrderResponse.status:type_name -> kdo.v1.order.OrderStatus
-	23, // 4: kdo.v1.order.AmendOrderRequest.side:type_name -> kdo.v1.common.OrderSide
-	0,  // 5: kdo.v1.order.AmendOrderRequest.quote_type:type_name -> kdo.v1.order.QuoteType
-	2,  // 6: kdo.v1.order.AmendOrderResponse.status:type_name -> kdo.v1.order.OrderStatus
-	23, // 7: kdo.v1.order.CancelOrderRequest.side:type_name -> kdo.v1.common.OrderSide
-	2,  // 8: kdo.v1.order.CancelOrderResponse.status:type_name -> kdo.v1.order.OrderStatus
-	23, // 9: kdo.v1.order.ListAllUnfilledOrdersRequest.side:type_name -> kdo.v1.common.OrderSide
-	22, // 10: kdo.v1.order.ListAllUnfilledOrdersResponse.orders:type_name -> kdo.v1.order.Order
-	23, // 11: kdo.v1.order.OrderResult.side:type_name -> kdo.v1.common.OrderSide
-	3,  // 12: kdo.v1.order.OrderResult.result_type:type_name -> kdo.v1.order.OrderResultType
-	24, // 13: kdo.v1.order.OrderResult.timestamp:type_name -> google.protobuf.Timestamp
-	16, // 14: kdo.v1.order.OrderResult.received:type_name -> kdo.v1.order.ReceivedDetails
-	17, // 15: kdo.v1.order.OrderResult.rejected:type_name -> kdo.v1.order.RejectedDetails
-	18, // 16: kdo.v1.order.OrderResult.filled:type_name -> kdo.v1.order.FilledDetails
-	19, // 17: kdo.v1.order.OrderResult.cancelled:type_name -> kdo.v1.order.CancelledDetails
-	22, // 18: kdo.v1.order.ListOrdersResponse.orders:type_name -> kdo.v1.order.Order
-	23, // 19: kdo.v1.order.Order.order_side:type_name -> kdo.v1.common.OrderSide
-	2,  // 20: kdo.v1.order.Order.status:type_name -> kdo.v1.order.OrderStatus
-	4,  // 21: kdo.v1.order.OrderService.SubmitOrder:input_type -> kdo.v1.order.SubmitOrderRequest
-	6,  // 22: kdo.v1.order.OrderService.AmendOrder:input_type -> kdo.v1.order.AmendOrderRequest
-	8,  // 23: kdo.v1.order.OrderService.CancelOrder:input_type -> kdo.v1.order.CancelOrderRequest
-	10, // 24: kdo.v1.order.OrderService.ListAllUnfilledOrders:input_type -> kdo.v1.order.ListAllUnfilledOrdersRequest
-	12, // 25: kdo.v1.order.OrderService.CancelAllOrders:input_type -> kdo.v1.order.CancelAllOrdersRequest
-	5,  // 26: kdo.v1.order.OrderService.SubmitOrder:output_type -> kdo.v1.order.SubmitOrderResponse
-	7,  // 27: kdo.v1.order.OrderService.AmendOrder:output_type -> kdo.v1.order.AmendOrderResponse
-	9,  // 28: kdo.v1.order.OrderService.CancelOrder:output_type -> kdo.v1.order.CancelOrderResponse
-	11, // 29: kdo.v1.order.OrderService.ListAllUnfilledOrders:output_type -> kdo.v1.order.ListAllUnfilledOrdersResponse
-	13, // 30: kdo.v1.order.OrderService.CancelAllOrders:output_type -> kdo.v1.order.CancelAllOrdersResponse
-	26, // [26:31] is the sub-list for method output_type
-	21, // [21:26] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	24, // 2: kdo.v1.order.SubmitOrderRequest.auto_amend_strategy:type_name -> kdo.v1.common.AmendMethodType
+	1,  // 3: kdo.v1.order.SubmitOrderRequest.limit_price_type:type_name -> kdo.v1.order.LimitPriceType
+	2,  // 4: kdo.v1.order.SubmitOrderResponse.status:type_name -> kdo.v1.order.OrderStatus
+	23, // 5: kdo.v1.order.AmendOrderRequest.side:type_name -> kdo.v1.common.OrderSide
+	0,  // 6: kdo.v1.order.AmendOrderRequest.quote_type:type_name -> kdo.v1.order.QuoteType
+	2,  // 7: kdo.v1.order.AmendOrderResponse.status:type_name -> kdo.v1.order.OrderStatus
+	23, // 8: kdo.v1.order.CancelOrderRequest.side:type_name -> kdo.v1.common.OrderSide
+	2,  // 9: kdo.v1.order.CancelOrderResponse.status:type_name -> kdo.v1.order.OrderStatus
+	23, // 10: kdo.v1.order.ListAllUnfilledOrdersRequest.side:type_name -> kdo.v1.common.OrderSide
+	22, // 11: kdo.v1.order.ListAllUnfilledOrdersResponse.orders:type_name -> kdo.v1.order.Order
+	23, // 12: kdo.v1.order.OrderResult.side:type_name -> kdo.v1.common.OrderSide
+	3,  // 13: kdo.v1.order.OrderResult.result_type:type_name -> kdo.v1.order.OrderResultType
+	25, // 14: kdo.v1.order.OrderResult.timestamp:type_name -> google.protobuf.Timestamp
+	16, // 15: kdo.v1.order.OrderResult.received:type_name -> kdo.v1.order.ReceivedDetails
+	17, // 16: kdo.v1.order.OrderResult.rejected:type_name -> kdo.v1.order.RejectedDetails
+	18, // 17: kdo.v1.order.OrderResult.filled:type_name -> kdo.v1.order.FilledDetails
+	19, // 18: kdo.v1.order.OrderResult.cancelled:type_name -> kdo.v1.order.CancelledDetails
+	22, // 19: kdo.v1.order.ListOrdersResponse.orders:type_name -> kdo.v1.order.Order
+	23, // 20: kdo.v1.order.Order.order_side:type_name -> kdo.v1.common.OrderSide
+	2,  // 21: kdo.v1.order.Order.status:type_name -> kdo.v1.order.OrderStatus
+	4,  // 22: kdo.v1.order.OrderService.SubmitOrder:input_type -> kdo.v1.order.SubmitOrderRequest
+	6,  // 23: kdo.v1.order.OrderService.AmendOrder:input_type -> kdo.v1.order.AmendOrderRequest
+	8,  // 24: kdo.v1.order.OrderService.CancelOrder:input_type -> kdo.v1.order.CancelOrderRequest
+	10, // 25: kdo.v1.order.OrderService.ListAllUnfilledOrders:input_type -> kdo.v1.order.ListAllUnfilledOrdersRequest
+	12, // 26: kdo.v1.order.OrderService.CancelAllOrders:input_type -> kdo.v1.order.CancelAllOrdersRequest
+	5,  // 27: kdo.v1.order.OrderService.SubmitOrder:output_type -> kdo.v1.order.SubmitOrderResponse
+	7,  // 28: kdo.v1.order.OrderService.AmendOrder:output_type -> kdo.v1.order.AmendOrderResponse
+	9,  // 29: kdo.v1.order.OrderService.CancelOrder:output_type -> kdo.v1.order.CancelOrderResponse
+	11, // 30: kdo.v1.order.OrderService.ListAllUnfilledOrders:output_type -> kdo.v1.order.ListAllUnfilledOrdersResponse
+	13, // 31: kdo.v1.order.OrderService.CancelAllOrders:output_type -> kdo.v1.order.CancelAllOrdersResponse
+	27, // [27:32] is the sub-list for method output_type
+	22, // [22:27] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_kdo_v1_order_proto_init() }

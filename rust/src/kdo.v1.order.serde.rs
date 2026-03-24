@@ -2856,7 +2856,9 @@ impl serde::Serialize for SubmitOrderRequest {
             struct_ser.serialize_field("is_lp", &self.is_lp)?;
         }
         if let Some(v) = self.auto_amend_strategy.as_ref() {
-            struct_ser.serialize_field("auto_amend_strategy", v)?;
+            let v = super::common::AmendMethodType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("auto_amend_strategy", &v)?;
         }
         if let Some(v) = self.limit_price_type.as_ref() {
             let v = LimitPriceType::try_from(*v)
@@ -3009,7 +3011,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             if auto_amend_strategy__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("autoAmendStrategy"));
                             }
-                            auto_amend_strategy__ = map_.next_value()?;
+                            auto_amend_strategy__ = map_.next_value::<::std::option::Option<super::common::AmendMethodType>>()?.map(|x| x as i32);
                         }
                         GeneratedField::LimitPriceType => {
                             if limit_price_type__.is_some() {

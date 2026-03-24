@@ -32,7 +32,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $core.String? price,
     QuoteType? quoteType,
     $core.bool? isLp,
-    $core.String? autoAmendStrategy,
+    $2.AmendMethodType? autoAmendStrategy,
     LimitPriceType? limitPriceType,
   }) {
     final result = create();
@@ -61,7 +61,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'price')
     ..e<QuoteType>(6, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
-    ..aOS(8, _omitFieldNames ? '' : 'autoAmendStrategy')
+    ..e<$2.AmendMethodType>(8, _omitFieldNames ? '' : 'autoAmendStrategy', $pb.PbFieldType.OE, defaultOrMaker: $2.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $2.AmendMethodType.valueOf, enumValues: $2.AmendMethodType.values)
     ..e<LimitPriceType>(9, _omitFieldNames ? '' : 'limitPriceType', $pb.PbFieldType.OE, defaultOrMaker: LimitPriceType.LIMIT_PRICE_TYPE_UNSPECIFIED, valueOf: LimitPriceType.valueOf, enumValues: LimitPriceType.values)
     ..hasRequiredFields = false
   ;
@@ -153,11 +153,11 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearIsLp() => $_clearField(7);
 
-  /// 자동정정 전략 (AGGRESSIVE | EVASIVE | BEST_PRICE | STOP_LOSS)
+  /// 자동정정 전략
   @$pb.TagNumber(8)
-  $core.String get autoAmendStrategy => $_getSZ(7);
+  $2.AmendMethodType get autoAmendStrategy => $_getN(7);
   @$pb.TagNumber(8)
-  set autoAmendStrategy($core.String value) => $_setString(7, value);
+  set autoAmendStrategy($2.AmendMethodType value) => $_setField(8, value);
   @$pb.TagNumber(8)
   $core.bool hasAutoAmendStrategy() => $_has(7);
   @$pb.TagNumber(8)

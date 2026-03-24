@@ -8,6 +8,7 @@ import "google/api/resource.proto";
 import "google/api/client.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -102,27 +103,6 @@ service HedgeService {
 
 // ========== Enums ==========
 
-// 자동정정 전략 유형
-enum AmendMethodType {
-  // 미지정 (기본값: EVASIVE로 처리)
-  AMEND_METHOD_TYPE_UNSPECIFIED = 0;
-
-  // 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
-  AMEND_METHOD_TYPE_AGGRESSIVE = 1;
-
-  // 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지
-  AMEND_METHOD_TYPE_EVASIVE = 2;
-
-  // 최우선 호가: 상대방 최우선 호가로 정정
-  AMEND_METHOD_TYPE_BEST_PRICE = 3;
-
-  // 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
-  AMEND_METHOD_TYPE_STOP_LOSS = 4;
-
-  // 시간 제한 시장가: timeout 후 시장가로 전환
-  AMEND_METHOD_TYPE_TIMED_MARKET = 5;
-}
-
 // 헷지 주문 체결 가격 유형
 // 거래소의 구체적인 호가 유형(QuoteType)과 달리,
 // 헷지 주문의 전략적 의도를 표현합니다.
@@ -185,7 +165,7 @@ message Hedge {
 
   // 자동정정 전략 유형 (auto_amend=true 일 때 유효)
   // 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
-  AmendMethodType amend_method = 11;
+  kdo.v1.common.AmendMethodType amend_method = 11;
 }
 
 // 헷지 방식
