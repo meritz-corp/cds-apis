@@ -36,7 +36,7 @@ class Hedge extends $pb.GeneratedMessage {
     $2.Timestamp? updateTime,
     ExecPriceType? execPriceType,
     $core.bool? autoAmend,
-    $core.String? amendMethod,
+    AmendMethodType? amendMethod,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -69,7 +69,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..e<ExecPriceType>(9, _omitFieldNames ? '' : 'execPriceType', $pb.PbFieldType.OE, defaultOrMaker: ExecPriceType.EXEC_PRICE_TYPE_UNSPECIFIED, valueOf: ExecPriceType.valueOf, enumValues: ExecPriceType.values)
     ..aOB(10, _omitFieldNames ? '' : 'autoAmend')
-    ..aOS(11, _omitFieldNames ? '' : 'amendMethod')
+    ..e<AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: AmendMethodType.valueOf, enumValues: AmendMethodType.values)
     ..hasRequiredFields = false
   ;
 
@@ -196,13 +196,12 @@ class Hedge extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearAutoAmend() => $_clearField(10);
 
-  /// 자동정정 전략 프리셋 (auto_amend=true 일 때 유효)
-  /// 값: "AGGRESSIVE", "EVASIVE", "BEST_PRICE", "STOP_LOSS", "TIMED_MARKET"
-  /// 미지정 시 "EVASIVE" 로 처리됨
+  /// 자동정정 전략 유형 (auto_amend=true 일 때 유효)
+  /// 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
   @$pb.TagNumber(11)
-  $core.String get amendMethod => $_getSZ(10);
+  AmendMethodType get amendMethod => $_getN(10);
   @$pb.TagNumber(11)
-  set amendMethod($core.String value) => $_setString(10, value);
+  set amendMethod(AmendMethodType value) => $_setField(11, value);
   @$pb.TagNumber(11)
   $core.bool hasAmendMethod() => $_has(10);
   @$pb.TagNumber(11)

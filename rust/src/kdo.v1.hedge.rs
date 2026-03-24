@@ -37,11 +37,10 @@ pub struct Hedge {
     /// 자동정정 활성화 여부
     #[prost(bool, tag="10")]
     pub auto_amend: bool,
-    /// 자동정정 전략 프리셋 (auto_amend=true 일 때 유효)
-    /// 값: "AGGRESSIVE", "EVASIVE", "BEST_PRICE", "STOP_LOSS", "TIMED_MARKET"
-    /// 미지정 시 "EVASIVE" 로 처리됨
-    #[prost(string, tag="11")]
-    pub amend_method: ::prost::alloc::string::String,
+    /// 자동정정 전략 유형 (auto_amend=true 일 때 유효)
+    /// 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
+    #[prost(enumeration="AmendMethodType", tag="11")]
+    pub amend_method: i32,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -325,6 +324,51 @@ pub struct DeleteHedgeGroupRequest {
 }
 // ========== Enums ==========
 
+/// 자동정정 전략 유형
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum AmendMethodType {
+    /// 미지정 (기본값: EVASIVE로 처리)
+    Unspecified = 0,
+    /// 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
+    Aggressive = 1,
+    /// 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지
+    Evasive = 2,
+    /// 최우선 호가: 상대방 최우선 호가로 정정
+    BestPrice = 3,
+    /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
+    StopLoss = 4,
+    /// 시간 제한 시장가: timeout 후 시장가로 전환
+    TimedMarket = 5,
+}
+impl AmendMethodType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AmendMethodType::Unspecified => "AMEND_METHOD_TYPE_UNSPECIFIED",
+            AmendMethodType::Aggressive => "AMEND_METHOD_TYPE_AGGRESSIVE",
+            AmendMethodType::Evasive => "AMEND_METHOD_TYPE_EVASIVE",
+            AmendMethodType::BestPrice => "AMEND_METHOD_TYPE_BEST_PRICE",
+            AmendMethodType::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
+            AmendMethodType::TimedMarket => "AMEND_METHOD_TYPE_TIMED_MARKET",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "AMEND_METHOD_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "AMEND_METHOD_TYPE_AGGRESSIVE" => Some(Self::Aggressive),
+            "AMEND_METHOD_TYPE_EVASIVE" => Some(Self::Evasive),
+            "AMEND_METHOD_TYPE_BEST_PRICE" => Some(Self::BestPrice),
+            "AMEND_METHOD_TYPE_STOP_LOSS" => Some(Self::StopLoss),
+            "AMEND_METHOD_TYPE_TIMED_MARKET" => Some(Self::TimedMarket),
+            _ => None,
+        }
+    }
+}
 /// 헷지 주문 체결 가격 유형
 /// 거래소의 구체적인 호가 유형(QuoteType)과 달리,
 /// 헷지 주문의 전략적 의도를 표현합니다.

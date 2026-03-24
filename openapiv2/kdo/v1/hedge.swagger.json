@@ -258,8 +258,8 @@
                   "title": "자동정정 활성화 여부"
                 },
                 "amendMethod": {
-                  "type": "string",
-                  "title": "자동정정 전략 프리셋 (auto_amend=true 일 때 유효)\n값: \"AGGRESSIVE\", \"EVASIVE\", \"BEST_PRICE\", \"STOP_LOSS\", \"TIMED_MARKET\"\n미지정 시 \"EVASIVE\" 로 처리됨"
+                  "$ref": "#/definitions/hedgeAmendMethodType",
+                  "title": "자동정정 전략 유형 (auto_amend=true 일 때 유효)\n미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨"
                 }
               },
               "title": "수정할 헷지 정보",
@@ -504,6 +504,20 @@
     }
   },
   "definitions": {
+    "hedgeAmendMethodType": {
+      "type": "string",
+      "enum": [
+        "AMEND_METHOD_TYPE_UNSPECIFIED",
+        "AMEND_METHOD_TYPE_AGGRESSIVE",
+        "AMEND_METHOD_TYPE_EVASIVE",
+        "AMEND_METHOD_TYPE_BEST_PRICE",
+        "AMEND_METHOD_TYPE_STOP_LOSS",
+        "AMEND_METHOD_TYPE_TIMED_MARKET"
+      ],
+      "default": "AMEND_METHOD_TYPE_UNSPECIFIED",
+      "description": "- AMEND_METHOD_TYPE_UNSPECIFIED: 미지정 (기본값: EVASIVE로 처리)\n - AMEND_METHOD_TYPE_AGGRESSIVE: 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도\n - AMEND_METHOD_TYPE_EVASIVE: 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지\n - AMEND_METHOD_TYPE_BEST_PRICE: 최우선 호가: 상대방 최우선 호가로 정정\n - AMEND_METHOD_TYPE_STOP_LOSS: 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환\n - AMEND_METHOD_TYPE_TIMED_MARKET: 시간 제한 시장가: timeout 후 시장가로 전환",
+      "title": "자동정정 전략 유형"
+    },
     "hedgeAmountTrigger": {
       "type": "object",
       "properties": {
@@ -633,8 +647,8 @@
           "title": "자동정정 활성화 여부"
         },
         "amendMethod": {
-          "type": "string",
-          "title": "자동정정 전략 프리셋 (auto_amend=true 일 때 유효)\n값: \"AGGRESSIVE\", \"EVASIVE\", \"BEST_PRICE\", \"STOP_LOSS\", \"TIMED_MARKET\"\n미지정 시 \"EVASIVE\" 로 처리됨"
+          "$ref": "#/definitions/hedgeAmendMethodType",
+          "title": "자동정정 전략 유형 (auto_amend=true 일 때 유효)\n미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨"
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",
