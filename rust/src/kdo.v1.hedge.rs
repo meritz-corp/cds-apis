@@ -75,8 +75,8 @@ pub struct EtfDecompositionHedge {
     pub cu: i32,
     /// 1CU 당 구성 종목별 헷지 주문 수량
     /// key: 종목 심볼, value: 1CU 당 주문 수량
-    #[prost(map="string, int64", tag="2")]
-    pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
+    #[prost(map="string, int32", tag="2")]
+    pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, i32>,
 }
 /// HedgeGroup: 포트폴리오 단위 주기적 헷지
 /// 트리거 조건에 따라 주기적으로 헷지 실행

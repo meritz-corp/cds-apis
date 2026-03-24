@@ -532,8 +532,8 @@
         "hedgeOrdersPer1cu": {
           "type": "object",
           "additionalProperties": {
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           "title": "1CU 당 구성 종목별 헷지 주문 수량\nkey: 종목 심볼, value: 1CU 당 주문 수량"
         }

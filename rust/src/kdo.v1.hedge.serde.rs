@@ -535,9 +535,7 @@ impl serde::Serialize for EtfDecompositionHedge {
             struct_ser.serialize_field("cu", &self.cu)?;
         }
         if true {
-            let v: std::collections::HashMap<_, _> = self.hedge_orders_per_1cu.iter()
-                .map(|(k, v)| (k, v.to_string())).collect();
-            struct_ser.serialize_field("hedge_orders_per_1cu", &v)?;
+            struct_ser.serialize_field("hedge_orders_per_1cu", &self.hedge_orders_per_1cu)?;
         }
         struct_ser.end()
     }
@@ -618,7 +616,7 @@ impl<'de> serde::Deserialize<'de> for EtfDecompositionHedge {
                                 return Err(serde::de::Error::duplicate_field("hedgeOrdersPer1cu"));
                             }
                             hedge_orders_per_1cu__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<i64>>>()?
+                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<i32>>>()?
                                     .into_iter().map(|(k,v)| (k, v.0)).collect()
                             );
                         }

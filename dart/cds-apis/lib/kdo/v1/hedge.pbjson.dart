@@ -109,7 +109,7 @@ const EtfDecompositionHedge_HedgeOrdersPer1cuEntry$json = {
   '1': 'HedgeOrdersPer1cuEntry',
   '2': [
     {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 3, '10': 'value'},
+    {'1': 'value', '3': 2, '4': 1, '5': 5, '10': 'value'},
   ],
   '7': {'7': true},
 };
@@ -119,7 +119,7 @@ final $typed_data.Uint8List etfDecompositionHedgeDescriptor = $convert.base64Dec
     'ChVFdGZEZWNvbXBvc2l0aW9uSGVkZ2USFAoCY3UYASABKAVCBOJBAQJSAmN1EmsKFGhlZGdlX2'
     '9yZGVyc19wZXJfMWN1GAIgAygLMjoua2RvLnYxLmhlZGdlLkV0ZkRlY29tcG9zaXRpb25IZWRn'
     'ZS5IZWRnZU9yZGVyc1BlcjFjdUVudHJ5UhFoZWRnZU9yZGVyc1BlcjFjdRpEChZIZWRnZU9yZG'
-    'Vyc1BlcjFjdUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgDUgV2YWx1ZToC'
+    'Vyc1BlcjFjdUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgFUgV2YWx1ZToC'
     'OAE=');
 
 @$core.Deprecated('Use hedgeGroupDescriptor instead')
