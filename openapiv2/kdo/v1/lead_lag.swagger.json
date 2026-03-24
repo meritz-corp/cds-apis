@@ -1082,10 +1082,14 @@
           "format": "uint64",
           "title": "트리거 후 재트리거까지 대기시간 (밀리초)"
         },
-        "maxPosition": {
+        "maxBidPosition": {
           "type": "string",
           "format": "int64",
-          "title": "최대 동시 포지션 (선물 계약 수)"
+          "title": "최대 포지션 (etf 횟수)"
+        },
+        "maxAskPosition": {
+          "type": "string",
+          "format": "int64"
         },
         "etfHedgeQuantity": {
           "type": "string",

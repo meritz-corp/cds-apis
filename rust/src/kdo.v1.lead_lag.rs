@@ -62,14 +62,16 @@ pub struct LeadLagTriggerConfig {
     /// 트리거 후 재트리거까지 대기시간 (밀리초)
     #[prost(uint64, tag="3")]
     pub cooldown_ms: u64,
-    /// 최대 동시 포지션 (선물 계약 수)
+    /// 최대 포지션 (etf 횟수)
     #[prost(int64, tag="4")]
-    pub max_position: i64,
-    /// 선물 1계약당 ETF 헷지 수량
+    pub max_bid_position: i64,
     #[prost(int64, tag="5")]
+    pub max_ask_position: i64,
+    /// 선물 1계약당 ETF 헷지 수량
+    #[prost(int64, tag="6")]
     pub etf_hedge_quantity: i64,
     /// 선물 주문 수량 (계약 수)
-    #[prost(int64, tag="6")]
+    #[prost(int64, tag="7")]
     pub futures_order_quantity: i64,
 }
 // ============================================================================

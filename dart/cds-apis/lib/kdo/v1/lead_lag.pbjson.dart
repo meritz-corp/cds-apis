@@ -79,9 +79,10 @@ const LeadLagTriggerConfig$json = {
     {'1': 'tick_threshold', '3': 1, '4': 1, '5': 3, '10': 'tickThreshold'},
     {'1': 'window_us', '3': 2, '4': 1, '5': 4, '10': 'windowUs'},
     {'1': 'cooldown_ms', '3': 3, '4': 1, '5': 4, '10': 'cooldownMs'},
-    {'1': 'max_position', '3': 4, '4': 1, '5': 3, '10': 'maxPosition'},
-    {'1': 'etf_hedge_quantity', '3': 5, '4': 1, '5': 3, '10': 'etfHedgeQuantity'},
-    {'1': 'futures_order_quantity', '3': 6, '4': 1, '5': 3, '10': 'futuresOrderQuantity'},
+    {'1': 'max_bid_position', '3': 4, '4': 1, '5': 3, '10': 'maxBidPosition'},
+    {'1': 'max_ask_position', '3': 5, '4': 1, '5': 3, '10': 'maxAskPosition'},
+    {'1': 'etf_hedge_quantity', '3': 6, '4': 1, '5': 3, '10': 'etfHedgeQuantity'},
+    {'1': 'futures_order_quantity', '3': 7, '4': 1, '5': 3, '10': 'futuresOrderQuantity'},
   ],
 };
 
@@ -89,9 +90,10 @@ const LeadLagTriggerConfig$json = {
 final $typed_data.Uint8List leadLagTriggerConfigDescriptor = $convert.base64Decode(
     'ChRMZWFkTGFnVHJpZ2dlckNvbmZpZxIlCg50aWNrX3RocmVzaG9sZBgBIAEoA1INdGlja1Rocm'
     'VzaG9sZBIbCgl3aW5kb3dfdXMYAiABKARSCHdpbmRvd1VzEh8KC2Nvb2xkb3duX21zGAMgASgE'
-    'Ugpjb29sZG93bk1zEiEKDG1heF9wb3NpdGlvbhgEIAEoA1ILbWF4UG9zaXRpb24SLAoSZXRmX2'
-    'hlZGdlX3F1YW50aXR5GAUgASgDUhBldGZIZWRnZVF1YW50aXR5EjQKFmZ1dHVyZXNfb3JkZXJf'
-    'cXVhbnRpdHkYBiABKANSFGZ1dHVyZXNPcmRlclF1YW50aXR5');
+    'Ugpjb29sZG93bk1zEigKEG1heF9iaWRfcG9zaXRpb24YBCABKANSDm1heEJpZFBvc2l0aW9uEi'
+    'gKEG1heF9hc2tfcG9zaXRpb24YBSABKANSDm1heEFza1Bvc2l0aW9uEiwKEmV0Zl9oZWRnZV9x'
+    'dWFudGl0eRgGIAEoA1IQZXRmSGVkZ2VRdWFudGl0eRI0ChZmdXR1cmVzX29yZGVyX3F1YW50aX'
+    'R5GAcgASgDUhRmdXR1cmVzT3JkZXJRdWFudGl0eQ==');
 
 @$core.Deprecated('Use getLeadLagRequestDescriptor instead')
 const GetLeadLagRequest$json = {

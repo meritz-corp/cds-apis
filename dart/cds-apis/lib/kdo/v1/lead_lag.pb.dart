@@ -225,7 +225,8 @@ class LeadLagTriggerConfig extends $pb.GeneratedMessage {
     $fixnum.Int64? tickThreshold,
     $fixnum.Int64? windowUs,
     $fixnum.Int64? cooldownMs,
-    $fixnum.Int64? maxPosition,
+    $fixnum.Int64? maxBidPosition,
+    $fixnum.Int64? maxAskPosition,
     $fixnum.Int64? etfHedgeQuantity,
     $fixnum.Int64? futuresOrderQuantity,
   }) {
@@ -233,7 +234,8 @@ class LeadLagTriggerConfig extends $pb.GeneratedMessage {
     if (tickThreshold != null) result.tickThreshold = tickThreshold;
     if (windowUs != null) result.windowUs = windowUs;
     if (cooldownMs != null) result.cooldownMs = cooldownMs;
-    if (maxPosition != null) result.maxPosition = maxPosition;
+    if (maxBidPosition != null) result.maxBidPosition = maxBidPosition;
+    if (maxAskPosition != null) result.maxAskPosition = maxAskPosition;
     if (etfHedgeQuantity != null) result.etfHedgeQuantity = etfHedgeQuantity;
     if (futuresOrderQuantity != null) result.futuresOrderQuantity = futuresOrderQuantity;
     return result;
@@ -248,9 +250,10 @@ class LeadLagTriggerConfig extends $pb.GeneratedMessage {
     ..aInt64(1, _omitFieldNames ? '' : 'tickThreshold')
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'windowUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aInt64(4, _omitFieldNames ? '' : 'maxPosition')
-    ..aInt64(5, _omitFieldNames ? '' : 'etfHedgeQuantity')
-    ..aInt64(6, _omitFieldNames ? '' : 'futuresOrderQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'maxBidPosition')
+    ..aInt64(5, _omitFieldNames ? '' : 'maxAskPosition')
+    ..aInt64(6, _omitFieldNames ? '' : 'etfHedgeQuantity')
+    ..aInt64(7, _omitFieldNames ? '' : 'futuresOrderQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -301,35 +304,44 @@ class LeadLagTriggerConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearCooldownMs() => $_clearField(3);
 
-  /// 최대 동시 포지션 (선물 계약 수)
+  /// 최대 포지션 (etf 횟수)
   @$pb.TagNumber(4)
-  $fixnum.Int64 get maxPosition => $_getI64(3);
+  $fixnum.Int64 get maxBidPosition => $_getI64(3);
   @$pb.TagNumber(4)
-  set maxPosition($fixnum.Int64 value) => $_setInt64(3, value);
+  set maxBidPosition($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasMaxPosition() => $_has(3);
+  $core.bool hasMaxBidPosition() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMaxPosition() => $_clearField(4);
+  void clearMaxBidPosition() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get maxAskPosition => $_getI64(4);
+  @$pb.TagNumber(5)
+  set maxAskPosition($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMaxAskPosition() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMaxAskPosition() => $_clearField(5);
 
   /// 선물 1계약당 ETF 헷지 수량
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get etfHedgeQuantity => $_getI64(4);
-  @$pb.TagNumber(5)
-  set etfHedgeQuantity($fixnum.Int64 value) => $_setInt64(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasEtfHedgeQuantity() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearEtfHedgeQuantity() => $_clearField(5);
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get etfHedgeQuantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set etfHedgeQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasEtfHedgeQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEtfHedgeQuantity() => $_clearField(6);
 
   /// 선물 주문 수량 (계약 수)
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get futuresOrderQuantity => $_getI64(5);
-  @$pb.TagNumber(6)
-  set futuresOrderQuantity($fixnum.Int64 value) => $_setInt64(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasFuturesOrderQuantity() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearFuturesOrderQuantity() => $_clearField(6);
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get futuresOrderQuantity => $_getI64(6);
+  @$pb.TagNumber(7)
+  set futuresOrderQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasFuturesOrderQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearFuturesOrderQuantity() => $_clearField(7);
 }
 
 class GetLeadLagRequest extends $pb.GeneratedMessage {

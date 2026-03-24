@@ -2911,6 +2911,9 @@ impl serde::Serialize for LeadLagTriggerConfig {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagTriggerConfig", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2930,7 +2933,12 @@ impl serde::Serialize for LeadLagTriggerConfig {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("max_position", ToString::to_string(&self.max_position).as_str())?;
+            struct_ser.serialize_field("max_bid_position", ToString::to_string(&self.max_bid_position).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_ask_position", ToString::to_string(&self.max_ask_position).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2958,8 +2966,10 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
             "windowUs",
             "cooldown_ms",
             "cooldownMs",
-            "max_position",
-            "maxPosition",
+            "max_bid_position",
+            "maxBidPosition",
+            "max_ask_position",
+            "maxAskPosition",
             "etf_hedge_quantity",
             "etfHedgeQuantity",
             "futures_order_quantity",
@@ -2971,7 +2981,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
             TickThreshold,
             WindowUs,
             CooldownMs,
-            MaxPosition,
+            MaxBidPosition,
+            MaxAskPosition,
             EtfHedgeQuantity,
             FuturesOrderQuantity,
             __SkipField__,
@@ -2999,7 +3010,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                             "tickThreshold" | "tick_threshold" => Ok(GeneratedField::TickThreshold),
                             "windowUs" | "window_us" => Ok(GeneratedField::WindowUs),
                             "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
-                            "maxPosition" | "max_position" => Ok(GeneratedField::MaxPosition),
+                            "maxBidPosition" | "max_bid_position" => Ok(GeneratedField::MaxBidPosition),
+                            "maxAskPosition" | "max_ask_position" => Ok(GeneratedField::MaxAskPosition),
                             "etfHedgeQuantity" | "etf_hedge_quantity" => Ok(GeneratedField::EtfHedgeQuantity),
                             "futuresOrderQuantity" | "futures_order_quantity" => Ok(GeneratedField::FuturesOrderQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -3024,7 +3036,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                 let mut tick_threshold__ = None;
                 let mut window_us__ = None;
                 let mut cooldown_ms__ = None;
-                let mut max_position__ = None;
+                let mut max_bid_position__ = None;
+                let mut max_ask_position__ = None;
                 let mut etf_hedge_quantity__ = None;
                 let mut futures_order_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -3053,11 +3066,19 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::MaxPosition => {
-                            if max_position__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxPosition"));
+                        GeneratedField::MaxBidPosition => {
+                            if max_bid_position__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxBidPosition"));
                             }
-                            max_position__ = 
+                            max_bid_position__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxAskPosition => {
+                            if max_ask_position__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxAskPosition"));
+                            }
+                            max_ask_position__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -3086,7 +3107,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagTriggerConfig {
                     tick_threshold: tick_threshold__.unwrap_or_default(),
                     window_us: window_us__.unwrap_or_default(),
                     cooldown_ms: cooldown_ms__.unwrap_or_default(),
-                    max_position: max_position__.unwrap_or_default(),
+                    max_bid_position: max_bid_position__.unwrap_or_default(),
+                    max_ask_position: max_ask_position__.unwrap_or_default(),
                     etf_hedge_quantity: etf_hedge_quantity__.unwrap_or_default(),
                     futures_order_quantity: futures_order_quantity__.unwrap_or_default(),
                 })
