@@ -1720,6 +1720,9 @@ impl serde::Serialize for Order {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.Order", len)?;
         if true {
             struct_ser.serialize_field("order_id", &self.order_id)?;
@@ -1760,6 +1763,9 @@ impl serde::Serialize for Order {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("updated_at", ToString::to_string(&self.updated_at).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
         struct_ser.end()
     }
 }
@@ -1784,6 +1790,8 @@ impl<'de> serde::Deserialize<'de> for Order {
             "createdAt",
             "updated_at",
             "updatedAt",
+            "fund_code",
+            "fundCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1797,6 +1805,7 @@ impl<'de> serde::Deserialize<'de> for Order {
             Status,
             CreatedAt,
             UpdatedAt,
+            FundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1828,6 +1837,7 @@ impl<'de> serde::Deserialize<'de> for Order {
                             "status" => Ok(GeneratedField::Status),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "updatedAt" | "updated_at" => Ok(GeneratedField::UpdatedAt),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1856,6 +1866,7 @@ impl<'de> serde::Deserialize<'de> for Order {
                 let mut status__ = None;
                 let mut created_at__ = None;
                 let mut updated_at__ = None;
+                let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::OrderId => {
@@ -1920,6 +1931,12 @@ impl<'de> serde::Deserialize<'de> for Order {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1935,6 +1952,7 @@ impl<'de> serde::Deserialize<'de> for Order {
                     status: status__.unwrap_or_default(),
                     created_at: created_at__.unwrap_or_default(),
                     updated_at: updated_at__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
                 })
             }
         }

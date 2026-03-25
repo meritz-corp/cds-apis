@@ -1489,6 +1489,7 @@ class Order extends $pb.GeneratedMessage {
     OrderStatus? status,
     $fixnum.Int64? createdAt,
     $fixnum.Int64? updatedAt,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
@@ -1500,6 +1501,7 @@ class Order extends $pb.GeneratedMessage {
     if (status != null) result.status = status;
     if (createdAt != null) result.createdAt = createdAt;
     if (updatedAt != null) result.updatedAt = updatedAt;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -1518,6 +1520,7 @@ class Order extends $pb.GeneratedMessage {
     ..e<OrderStatus>(7, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: OrderStatus.ORDER_STATUS_UNSPECIFIED, valueOf: OrderStatus.valueOf, enumValues: OrderStatus.values)
     ..aInt64(8, _omitFieldNames ? '' : 'createdAt')
     ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
+    ..aOS(10, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -1627,6 +1630,16 @@ class Order extends $pb.GeneratedMessage {
   $core.bool hasUpdatedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearUpdatedAt() => $_clearField(9);
+
+  /// 펀드 코드
+  @$pb.TagNumber(10)
+  $core.String get fundCode => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set fundCode($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasFundCode() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearFundCode() => $_clearField(10);
 }
 
 

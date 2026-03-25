@@ -315,6 +315,9 @@ pub struct Order {
     /// 업데이트 시간 (Unix timestamp)
     #[prost(int64, tag="9")]
     pub updated_at: i64,
+    /// 펀드 코드
+    #[prost(string, tag="10")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 // ========== Enums ==========
 

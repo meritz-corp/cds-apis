@@ -434,6 +434,7 @@ const Order$json = {
     {'1': 'status', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderStatus', '10': 'status'},
     {'1': 'created_at', '3': 8, '4': 1, '5': 3, '10': 'createdAt'},
     {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
+    {'1': 'fund_code', '3': 10, '4': 1, '5': 9, '10': 'fundCode'},
   ],
 };
 
@@ -444,5 +445,6 @@ final $typed_data.Uint8List orderDescriptor = $convert.base64Decode(
     'bWJvbBIUCgVwcmljZRgEIAEoCVIFcHJpY2USGgoIcXVhbnRpdHkYBSABKANSCHF1YW50aXR5Ei'
     'cKD2ZpbGxlZF9xdWFudGl0eRgGIAEoA1IOZmlsbGVkUXVhbnRpdHkSMQoGc3RhdHVzGAcgASgO'
     'Mhkua2RvLnYxLm9yZGVyLk9yZGVyU3RhdHVzUgZzdGF0dXMSHQoKY3JlYXRlZF9hdBgIIAEoA1'
-    'IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYCSABKANSCXVwZGF0ZWRBdA==');
+    'IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYCSABKANSCXVwZGF0ZWRBdBIbCglmdW5kX2NvZGUY'
+    'CiABKAlSCGZ1bmRDb2Rl');
 

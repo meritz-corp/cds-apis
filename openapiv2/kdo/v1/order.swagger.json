@@ -429,6 +429,10 @@
           "type": "string",
           "format": "int64",
           "title": "업데이트 시간 (Unix timestamp)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
         }
       },
       "title": "주문 정보"
