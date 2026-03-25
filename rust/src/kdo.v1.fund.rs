@@ -58,9 +58,6 @@ pub struct Fund {
     /// 공매도ID
     #[prost(string, tag="20")]
     pub short_selling_id: ::prost::alloc::string::String,
-    /// 펀드별 종목별 한도정보
-    #[prost(map="string, message", tag="21")]
-    pub fund_limits: ::std::collections::HashMap<::prost::alloc::string::String, FundLimit>,
     /// ETF LP 여부
     #[prost(bool, tag="22")]
     pub etf_lp: bool,
@@ -157,6 +154,22 @@ pub struct GetFundRequest {
     #[prost(string, tag="1")]
     pub fund: ::prost::alloc::string::String,
 }
+/// GetFundLimit 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetFundLimitRequest {
+    /// 펀드 리소스 이름 (예: funds/0159)
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+}
+/// GetFundLimit 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetFundLimitResponse {
+    /// 펀드별 종목별 한도정보
+    #[prost(map="string, message", tag="1")]
+    pub fund_limits: ::std::collections::HashMap<::prost::alloc::string::String, FundLimit>,
+}
 /// UpdateFundLimit 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -186,9 +199,12 @@ pub struct ListFundsRequest {
     ///    * `equal`, `contains`
     /// * employee_name
     ///    * `equal`, `contains`
+    /// * name
+    ///    * `equal`, `contains`
     ///
     /// Examples
     /// * filter=fund_code="0159"
+    /// * filter=fund_code:"015"
     /// * filter=employee_name:"홍길동"
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,

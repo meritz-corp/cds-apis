@@ -42,7 +42,6 @@ class Fund extends $pb.GeneratedMessage {
     $fixnum.Int64? uniqueTradingUnitSerialNumber,
     $core.bool? addUpUniqueTradingUnit,
     $core.String? shortSellingId,
-    $core.Iterable<$core.MapEntry<$core.String, FundLimit>>? fundLimits,
     $core.bool? etfLp,
     ProgramTradingType? programTradingType,
   }) {
@@ -65,7 +64,6 @@ class Fund extends $pb.GeneratedMessage {
     if (uniqueTradingUnitSerialNumber != null) result.uniqueTradingUnitSerialNumber = uniqueTradingUnitSerialNumber;
     if (addUpUniqueTradingUnit != null) result.addUpUniqueTradingUnit = addUpUniqueTradingUnit;
     if (shortSellingId != null) result.shortSellingId = shortSellingId;
-    if (fundLimits != null) result.fundLimits.addEntries(fundLimits);
     if (etfLp != null) result.etfLp = etfLp;
     if (programTradingType != null) result.programTradingType = programTradingType;
     return result;
@@ -95,7 +93,6 @@ class Fund extends $pb.GeneratedMessage {
     ..aInt64(18, _omitFieldNames ? '' : 'uniqueTradingUnitSerialNumber')
     ..aOB(19, _omitFieldNames ? '' : 'addUpUniqueTradingUnit')
     ..aOS(20, _omitFieldNames ? '' : 'shortSellingId')
-    ..m<$core.String, FundLimit>(21, _omitFieldNames ? '' : 'fundLimits', entryClassName: 'Fund.FundLimitsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: FundLimit.create, valueDefaultOrMaker: FundLimit.getDefault, packageName: const $pb.PackageName('kdo.v1.fund'))
     ..aOB(22, _omitFieldNames ? '' : 'etfLp')
     ..e<ProgramTradingType>(23, _omitFieldNames ? '' : 'programTradingType', $pb.PbFieldType.OE, defaultOrMaker: ProgramTradingType.PROGRAM_TRADING_TYPE_UNSPECIFIED, valueOf: ProgramTradingType.valueOf, enumValues: ProgramTradingType.values)
     ..hasRequiredFields = false
@@ -298,27 +295,23 @@ class Fund extends $pb.GeneratedMessage {
   @$pb.TagNumber(20)
   void clearShortSellingId() => $_clearField(20);
 
-  /// 펀드별 종목별 한도정보
-  @$pb.TagNumber(21)
-  $pb.PbMap<$core.String, FundLimit> get fundLimits => $_getMap(18);
-
   /// ETF LP 여부
   @$pb.TagNumber(22)
-  $core.bool get etfLp => $_getBF(19);
+  $core.bool get etfLp => $_getBF(18);
   @$pb.TagNumber(22)
-  set etfLp($core.bool value) => $_setBool(19, value);
+  set etfLp($core.bool value) => $_setBool(18, value);
   @$pb.TagNumber(22)
-  $core.bool hasEtfLp() => $_has(19);
+  $core.bool hasEtfLp() => $_has(18);
   @$pb.TagNumber(22)
   void clearEtfLp() => $_clearField(22);
 
   /// 프로그램매매 구분 (nullable)
   @$pb.TagNumber(23)
-  ProgramTradingType get programTradingType => $_getN(20);
+  ProgramTradingType get programTradingType => $_getN(19);
   @$pb.TagNumber(23)
   set programTradingType(ProgramTradingType value) => $_setField(23, value);
   @$pb.TagNumber(23)
-  $core.bool hasProgramTradingType() => $_has(20);
+  $core.bool hasProgramTradingType() => $_has(19);
   @$pb.TagNumber(23)
   void clearProgramTradingType() => $_clearField(23);
 }
@@ -773,6 +766,96 @@ class GetFundRequest extends $pb.GeneratedMessage {
   void clearFund() => $_clearField(1);
 }
 
+/// GetFundLimit 요청
+class GetFundLimitRequest extends $pb.GeneratedMessage {
+  factory GetFundLimitRequest({
+    $core.String? fund,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    return result;
+  }
+
+  GetFundLimitRequest._();
+
+  factory GetFundLimitRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetFundLimitRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFundLimitRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetFundLimitRequest clone() => GetFundLimitRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetFundLimitRequest copyWith(void Function(GetFundLimitRequest) updates) => super.copyWith((message) => updates(message as GetFundLimitRequest)) as GetFundLimitRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetFundLimitRequest create() => GetFundLimitRequest._();
+  @$core.override
+  GetFundLimitRequest createEmptyInstance() => create();
+  static $pb.PbList<GetFundLimitRequest> createRepeated() => $pb.PbList<GetFundLimitRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetFundLimitRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFundLimitRequest>(create);
+  static GetFundLimitRequest? _defaultInstance;
+
+  /// 펀드 리소스 이름 (예: funds/0159)
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+}
+
+/// GetFundLimit 응답
+class GetFundLimitResponse extends $pb.GeneratedMessage {
+  factory GetFundLimitResponse({
+    $core.Iterable<$core.MapEntry<$core.String, FundLimit>>? fundLimits,
+  }) {
+    final result = create();
+    if (fundLimits != null) result.fundLimits.addEntries(fundLimits);
+    return result;
+  }
+
+  GetFundLimitResponse._();
+
+  factory GetFundLimitResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetFundLimitResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFundLimitResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..m<$core.String, FundLimit>(1, _omitFieldNames ? '' : 'fundLimits', entryClassName: 'GetFundLimitResponse.FundLimitsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: FundLimit.create, valueDefaultOrMaker: FundLimit.getDefault, packageName: const $pb.PackageName('kdo.v1.fund'))
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetFundLimitResponse clone() => GetFundLimitResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetFundLimitResponse copyWith(void Function(GetFundLimitResponse) updates) => super.copyWith((message) => updates(message as GetFundLimitResponse)) as GetFundLimitResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetFundLimitResponse create() => GetFundLimitResponse._();
+  @$core.override
+  GetFundLimitResponse createEmptyInstance() => create();
+  static $pb.PbList<GetFundLimitResponse> createRepeated() => $pb.PbList<GetFundLimitResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetFundLimitResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFundLimitResponse>(create);
+  static GetFundLimitResponse? _defaultInstance;
+
+  /// 펀드별 종목별 한도정보
+  @$pb.TagNumber(1)
+  $pb.PbMap<$core.String, FundLimit> get fundLimits => $_getMap(0);
+}
+
 /// UpdateFundLimit 요청
 class UpdateFundLimitRequest extends $pb.GeneratedMessage {
   factory UpdateFundLimitRequest({
@@ -917,9 +1000,12 @@ class ListFundsRequest extends $pb.GeneratedMessage {
   ///   * `equal`, `contains`
   /// * employee_name
   ///   * `equal`, `contains`
+  /// * name
+  ///   * `equal`, `contains`
   ///
   /// Examples
   /// * filter=fund_code="0159"
+  /// * filter=fund_code:"015"
   /// * filter=employee_name:"홍길동"
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);

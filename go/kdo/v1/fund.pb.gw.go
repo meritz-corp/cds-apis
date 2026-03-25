@@ -83,8 +83,8 @@ func local_request_FundService_GetFund_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_FundService_StreamFund_0(ctx context.Context, marshaler runtime.Marshaler, client FundServiceClient, req *http.Request, pathParams map[string]string) (FundService_StreamFundClient, runtime.ServerMetadata, error) {
-	var protoReq GetFundRequest
+func request_FundService_GetFundLimit_0(ctx context.Context, marshaler runtime.Marshaler, client FundServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetFundLimitRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -104,7 +104,59 @@ func request_FundService_StreamFund_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
 	}
 
-	stream, err := client.StreamFund(ctx, &protoReq)
+	msg, err := client.GetFundLimit(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_FundService_GetFundLimit_0(ctx context.Context, marshaler runtime.Marshaler, server FundServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetFundLimitRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
+
+	msg, err := server.GetFundLimit(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_FundService_StreamFundLimit_0(ctx context.Context, marshaler runtime.Marshaler, client FundServiceClient, req *http.Request, pathParams map[string]string) (FundService_StreamFundLimitClient, runtime.ServerMetadata, error) {
+	var protoReq GetFundLimitRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
+
+	stream, err := client.StreamFundLimit(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -272,7 +324,32 @@ func RegisterFundServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_FundService_StreamFund_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_FundService_GetFundLimit_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.fund.FundService/GetFundLimit", runtime.WithHTTPPathPattern("/v1/{fund=funds/*}/limits"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_FundService_GetFundLimit_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_FundService_GetFundLimit_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_FundService_StreamFundLimit_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -392,25 +469,47 @@ func RegisterFundServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_FundService_StreamFund_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_FundService_GetFundLimit_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.fund.FundService/StreamFund", runtime.WithHTTPPathPattern("/v1/{fund=funds/*}:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.fund.FundService/GetFundLimit", runtime.WithHTTPPathPattern("/v1/{fund=funds/*}/limits"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_FundService_StreamFund_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_FundService_GetFundLimit_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_FundService_StreamFund_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_FundService_GetFundLimit_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_FundService_StreamFundLimit_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.fund.FundService/StreamFundLimit", runtime.WithHTTPPathPattern("/v1/{fund=funds/*}/limits:stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_FundService_StreamFundLimit_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_FundService_StreamFundLimit_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -464,7 +563,9 @@ func RegisterFundServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 var (
 	pattern_FundService_GetFund_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "funds", "fund"}, ""))
 
-	pattern_FundService_StreamFund_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "funds", "fund"}, "stream"))
+	pattern_FundService_GetFundLimit_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "funds", "fund", "limits"}, ""))
+
+	pattern_FundService_StreamFundLimit_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "funds", "fund", "limits"}, "stream"))
 
 	pattern_FundService_UpdateFundLimit_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "funds", "fund", "limits", "symbol"}, ""))
 
@@ -474,7 +575,9 @@ var (
 var (
 	forward_FundService_GetFund_0 = runtime.ForwardResponseMessage
 
-	forward_FundService_StreamFund_0 = runtime.ForwardResponseStream
+	forward_FundService_GetFundLimit_0 = runtime.ForwardResponseMessage
+
+	forward_FundService_StreamFundLimit_0 = runtime.ForwardResponseStream
 
 	forward_FundService_UpdateFundLimit_0 = runtime.ForwardResponseMessage
 

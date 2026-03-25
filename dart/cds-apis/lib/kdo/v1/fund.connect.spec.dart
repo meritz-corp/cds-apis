@@ -19,12 +19,20 @@ abstract final class FundService {
     kdov1fund.Fund.new,
   );
 
-  /// 단일 펀드 스트림
-  static const streamFund = connect.Spec(
-    '/$name/StreamFund',
+  /// 펀드 한도 조회
+  static const getFundLimit = connect.Spec(
+    '/$name/GetFundLimit',
+    connect.StreamType.unary,
+    kdov1fund.GetFundLimitRequest.new,
+    kdov1fund.GetFundLimitResponse.new,
+  );
+
+  /// 펀드 한도 스트림
+  static const streamFundLimit = connect.Spec(
+    '/$name/StreamFundLimit',
     connect.StreamType.server,
-    kdov1fund.GetFundRequest.new,
-    kdov1fund.Fund.new,
+    kdov1fund.GetFundLimitRequest.new,
+    kdov1fund.GetFundLimitResponse.new,
   );
 
   /// 펀드 한도 수정

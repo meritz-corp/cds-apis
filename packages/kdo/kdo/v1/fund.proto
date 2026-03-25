@@ -22,10 +22,18 @@ service FundService {
     option (google.api.method_signature) = "fund";
   }
 
-  // 단일 펀드 스트림
-  rpc StreamFund(GetFundRequest) returns (stream Fund) {
+  // 펀드 한도 조회
+  rpc GetFundLimit(GetFundLimitRequest) returns (GetFundLimitResponse) {
     option (google.api.http) = {
-      get: "/v1/{fund=funds/*}:stream"
+      get: "/v1/{fund=funds/*}/limits"
+    };
+    option (google.api.method_signature) = "fund";
+  }
+
+  // 펀드 한도 스트림
+  rpc StreamFundLimit(GetFundLimitRequest) returns (stream GetFundLimitResponse) {
+    option (google.api.http) = {
+      get: "/v1/{fund=funds/*}/limits:stream"
     };
     option (google.api.method_signature) = "fund";
   }
@@ -86,8 +94,6 @@ message Fund {
   bool add_up_unique_trading_unit = 19;
   // 공매도ID
   string short_selling_id = 20;
-  // 펀드별 종목별 한도정보
-  map<string, FundLimit> fund_limits = 21;
   // ETF LP 여부
   bool etf_lp = 22;
   // 프로그램매매 구분 (nullable)
@@ -199,6 +205,23 @@ message GetFundRequest {
   ];
 }
 
+// GetFundLimit 요청
+message GetFundLimitRequest {
+  // 펀드 리소스 이름 (예: funds/0159)
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
+// GetFundLimit 응답
+message GetFundLimitResponse {
+  // 펀드별 종목별 한도정보
+  map<string, FundLimit> fund_limits = 1;
+}
+
 // UpdateFundLimit 요청
 message UpdateFundLimitRequest {
   // 펀드 리소스 이름 (예: funds/0159)
@@ -229,9 +252,12 @@ message ListFundsRequest {
   //   * `equal`, `contains`
   // * employee_name
   //   * `equal`, `contains`
+  // * name
+  //   * `equal`, `contains`
   //
   // Examples
   // * filter=fund_code="0159"
+  // * filter=fund_code:"015"
   // * filter=employee_name:"홍길동"
   string filter = 3;
 }
@@ -244,6 +270,3 @@ message ListFundsResponse {
   // 다음 페이지 토큰
   string next_page_token = 2;
 }
-
-
-

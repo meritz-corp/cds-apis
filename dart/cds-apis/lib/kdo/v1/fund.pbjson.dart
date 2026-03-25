@@ -68,24 +68,12 @@ const Fund$json = {
     {'1': 'unique_trading_unit_serial_number', '3': 18, '4': 1, '5': 3, '10': 'uniqueTradingUnitSerialNumber'},
     {'1': 'add_up_unique_trading_unit', '3': 19, '4': 1, '5': 8, '10': 'addUpUniqueTradingUnit'},
     {'1': 'short_selling_id', '3': 20, '4': 1, '5': 9, '10': 'shortSellingId'},
-    {'1': 'fund_limits', '3': 21, '4': 3, '5': 11, '6': '.kdo.v1.fund.Fund.FundLimitsEntry', '10': 'fundLimits'},
     {'1': 'etf_lp', '3': 22, '4': 1, '5': 8, '10': 'etfLp'},
     {'1': 'program_trading_type', '3': 23, '4': 1, '5': 14, '6': '.kdo.v1.fund.ProgramTradingType', '9': 0, '10': 'programTradingType', '17': true},
   ],
-  '3': [Fund_FundLimitsEntry$json],
   '8': [
     {'1': '_program_trading_type'},
   ],
-};
-
-@$core.Deprecated('Use fundDescriptor instead')
-const Fund_FundLimitsEntry$json = {
-  '1': 'FundLimitsEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundLimit', '10': 'value'},
-  ],
-  '7': {'7': true},
 };
 
 /// Descriptor for `Fund`. Decode as a `google.protobuf.DescriptorProto`.
@@ -103,12 +91,10 @@ final $typed_data.Uint8List fundDescriptor = $convert.base64Decode(
     'GXVuaXF1ZVRyYWRpbmdVbml0UGFydENvZGUSSAohdW5pcXVlX3RyYWRpbmdfdW5pdF9zZXJpYW'
     'xfbnVtYmVyGBIgASgDUh11bmlxdWVUcmFkaW5nVW5pdFNlcmlhbE51bWJlchI6ChphZGRfdXBf'
     'dW5pcXVlX3RyYWRpbmdfdW5pdBgTIAEoCFIWYWRkVXBVbmlxdWVUcmFkaW5nVW5pdBIoChBzaG'
-    '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZBJCCgtmdW5kX2xpbWl0cxgVIAMo'
-    'CzIhLmtkby52MS5mdW5kLkZ1bmQuRnVuZExpbWl0c0VudHJ5UgpmdW5kTGltaXRzEhUKBmV0Zl'
-    '9scBgWIAEoCFIFZXRmTHASVgoUcHJvZ3JhbV90cmFkaW5nX3R5cGUYFyABKA4yHy5rZG8udjEu'
-    'ZnVuZC5Qcm9ncmFtVHJhZGluZ1R5cGVIAFIScHJvZ3JhbVRyYWRpbmdUeXBliAEBGlUKD0Z1bm'
-    'RMaW1pdHNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIsCgV2YWx1ZRgCIAEoCzIWLmtkby52MS5m'
-    'dW5kLkZ1bmRMaW1pdFIFdmFsdWU6AjgBQhcKFV9wcm9ncmFtX3RyYWRpbmdfdHlwZQ==');
+    '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZBIVCgZldGZfbHAYFiABKAhSBWV0'
+    'ZkxwElYKFHByb2dyYW1fdHJhZGluZ190eXBlGBcgASgOMh8ua2RvLnYxLmZ1bmQuUHJvZ3JhbV'
+    'RyYWRpbmdUeXBlSABSEnByb2dyYW1UcmFkaW5nVHlwZYgBAUIXChVfcHJvZ3JhbV90cmFkaW5n'
+    'X3R5cGU=');
 
 @$core.Deprecated('Use fundLimitDescriptor instead')
 const FundLimit$json = {
@@ -214,6 +200,45 @@ const GetFundRequest$json = {
 final $typed_data.Uint8List getFundRequestDescriptor = $convert.base64Decode(
     'Cg5HZXRGdW5kUmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBpcy54eX'
     'ovRnVuZFIEZnVuZA==');
+
+@$core.Deprecated('Use getFundLimitRequestDescriptor instead')
+const GetFundLimitRequest$json = {
+  '1': 'GetFundLimitRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+  ],
+};
+
+/// Descriptor for `GetFundLimitRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getFundLimitRequestDescriptor = $convert.base64Decode(
+    'ChNHZXRGdW5kTGltaXRSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby5jZHNhcG'
+    'lzLnh5ei9GdW5kUgRmdW5k');
+
+@$core.Deprecated('Use getFundLimitResponseDescriptor instead')
+const GetFundLimitResponse$json = {
+  '1': 'GetFundLimitResponse',
+  '2': [
+    {'1': 'fund_limits', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.GetFundLimitResponse.FundLimitsEntry', '10': 'fundLimits'},
+  ],
+  '3': [GetFundLimitResponse_FundLimitsEntry$json],
+};
+
+@$core.Deprecated('Use getFundLimitResponseDescriptor instead')
+const GetFundLimitResponse_FundLimitsEntry$json = {
+  '1': 'FundLimitsEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.fund.FundLimit', '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `GetFundLimitResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getFundLimitResponseDescriptor = $convert.base64Decode(
+    'ChRHZXRGdW5kTGltaXRSZXNwb25zZRJSCgtmdW5kX2xpbWl0cxgBIAMoCzIxLmtkby52MS5mdW'
+    '5kLkdldEZ1bmRMaW1pdFJlc3BvbnNlLkZ1bmRMaW1pdHNFbnRyeVIKZnVuZExpbWl0cxpVCg9G'
+    'dW5kTGltaXRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSLAoFdmFsdWUYAiABKAsyFi5rZG8udj'
+    'EuZnVuZC5GdW5kTGltaXRSBXZhbHVlOgI4AQ==');
 
 @$core.Deprecated('Use updateFundLimitRequestDescriptor instead')
 const UpdateFundLimitRequest$json = {

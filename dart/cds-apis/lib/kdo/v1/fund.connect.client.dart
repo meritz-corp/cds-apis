@@ -27,16 +27,34 @@ extension type FundServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 단일 펀드 스트림
-  Stream<kdov1fund.Fund> streamFund(
-    kdov1fund.GetFundRequest input, {
+  /// 펀드 한도 조회
+  Future<kdov1fund.GetFundLimitResponse> getFundLimit(
+    kdov1fund.GetFundLimitRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FundService.getFundLimit,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 펀드 한도 스트림
+  Stream<kdov1fund.GetFundLimitResponse> streamFundLimit(
+    kdov1fund.GetFundLimitRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.FundService.streamFund,
+      specs.FundService.streamFundLimit,
       input,
       signal: signal,
       headers: headers,

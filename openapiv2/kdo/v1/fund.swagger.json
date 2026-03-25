@@ -52,7 +52,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* employee_name\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=employee_name:\"홍길동\"",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* employee_name\n  * `equal`, `contains`\n* name\n  * `equal`, `contains`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=fund_code:\"015\"\n* filter=employee_name:\"홍길동\"",
             "in": "query",
             "required": false,
             "type": "string"
@@ -85,6 +85,39 @@
           {
             "name": "fund",
             "description": "펀드 리소스 이름 (예: funds/KR1234567890)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "FundService"
+        ]
+      }
+    },
+    "/v1/{fund}/limits": {
+      "get": {
+        "summary": "펀드 한도 조회",
+        "operationId": "FundService_GetFundLimit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fundGetFundLimitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스 이름 (예: funds/0159)",
             "in": "path",
             "required": true,
             "type": "string",
@@ -148,10 +181,10 @@
         ]
       }
     },
-    "/v1/{fund}:stream": {
+    "/v1/{fund}/limits:stream": {
       "get": {
-        "summary": "단일 펀드 스트림",
-        "operationId": "FundService_StreamFund",
+        "summary": "펀드 한도 스트림",
+        "operationId": "FundService_StreamFundLimit",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -159,13 +192,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/fundFund"
+                  "$ref": "#/definitions/fundGetFundLimitResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of fundFund"
+              "title": "Stream result of fundGetFundLimitResponse"
             }
           },
           "default": {
@@ -178,7 +211,7 @@
         "parameters": [
           {
             "name": "fund",
-            "description": "펀드 리소스 이름 (예: funds/KR1234567890)",
+            "description": "펀드 리소스 이름 (예: funds/0159)",
             "in": "path",
             "required": true,
             "type": "string",
@@ -268,13 +301,6 @@
           "type": "string",
           "title": "공매도ID"
         },
-        "fundLimits": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/fundFundLimit"
-          },
-          "title": "펀드별 종목별 한도정보"
-        },
         "etfLp": {
           "type": "boolean",
           "title": "ETF LP 여부"
@@ -360,6 +386,19 @@
         "STOCK"
       ],
       "default": "FUND_LIMIT_UNSPECIFIED"
+    },
+    "fundGetFundLimitResponse": {
+      "type": "object",
+      "properties": {
+        "fundLimits": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/fundFundLimit"
+          },
+          "title": "펀드별 종목별 한도정보"
+        }
+      },
+      "title": "GetFundLimit 응답"
     },
     "fundListFundsResponse": {
       "type": "object",
