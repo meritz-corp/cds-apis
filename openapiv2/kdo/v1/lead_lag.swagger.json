@@ -902,6 +902,11 @@
           "type": "string",
           "format": "uint64",
           "title": "타임스탬프 (마이크로초)"
+        },
+        "etfPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 ETF 포지션 (양수=롱, 음수=숏)"
         }
       },
       "title": "LeadLag 실시간 상태 업데이트 (delta 방식: 변경된 필드만 전송)"

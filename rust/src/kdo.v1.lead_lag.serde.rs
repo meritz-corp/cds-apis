@@ -1923,6 +1923,9 @@ impl serde::Serialize for LeadLagStatusUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.LeadLagStatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("lead_lag_id", &self.lead_lag_id)?;
@@ -1961,6 +1964,11 @@ impl serde::Serialize for LeadLagStatusUpdate {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("timestamp_us", ToString::to_string(&self.timestamp_us).as_str())?;
         }
+        if let Some(v) = self.etf_position.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("etf_position", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -1988,6 +1996,8 @@ impl<'de> serde::Deserialize<'de> for LeadLagStatusUpdate {
             "latencyUs",
             "timestamp_us",
             "timestampUs",
+            "etf_position",
+            "etfPosition",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2001,6 +2011,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagStatusUpdate {
             PriceBuffer,
             LatencyUs,
             TimestampUs,
+            EtfPosition,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2032,6 +2043,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagStatusUpdate {
                             "priceBuffer" | "price_buffer" => Ok(GeneratedField::PriceBuffer),
                             "latencyUs" | "latency_us" => Ok(GeneratedField::LatencyUs),
                             "timestampUs" | "timestamp_us" => Ok(GeneratedField::TimestampUs),
+                            "etfPosition" | "etf_position" => Ok(GeneratedField::EtfPosition),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2060,6 +2072,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagStatusUpdate {
                 let mut price_buffer__ = None;
                 let mut latency_us__ = None;
                 let mut timestamp_us__ = None;
+                let mut etf_position__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::LeadLagId => {
@@ -2128,6 +2141,14 @@ impl<'de> serde::Deserialize<'de> for LeadLagStatusUpdate {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::EtfPosition => {
+                            if etf_position__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPosition"));
+                            }
+                            etf_position__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2143,6 +2164,7 @@ impl<'de> serde::Deserialize<'de> for LeadLagStatusUpdate {
                     price_buffer: price_buffer__,
                     latency_us: latency_us__,
                     timestamp_us: timestamp_us__.unwrap_or_default(),
+                    etf_position: etf_position__,
                 })
             }
         }

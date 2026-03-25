@@ -443,6 +443,9 @@ message LeadLagStatusUpdate {
 
   // 타임스탬프 (마이크로초)
   uint64 timestamp_us = 9;
+
+  // 현재 ETF 포지션 (양수=롱, 음수=숏)
+  optional int64 etf_position = 10;
 }
 
 // LeadLag 서비스 실행 상태

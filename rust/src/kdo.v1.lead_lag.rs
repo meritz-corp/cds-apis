@@ -280,6 +280,9 @@ pub struct LeadLagStatusUpdate {
     /// 타임스탬프 (마이크로초)
     #[prost(uint64, tag="9")]
     pub timestamp_us: u64,
+    /// 현재 ETF 포지션 (양수=롱, 음수=숏)
+    #[prost(int64, optional, tag="10")]
+    pub etf_position: ::core::option::Option<i64>,
 }
 /// 시그널 상세 정보
 #[allow(clippy::derive_partial_eq_without_eq)]

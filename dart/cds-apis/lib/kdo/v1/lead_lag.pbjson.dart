@@ -347,6 +347,7 @@ const LeadLagStatusUpdate$json = {
     {'1': 'price_buffer', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.lead_lag.LeadLagPriceBufferInfo', '9': 5, '10': 'priceBuffer', '17': true},
     {'1': 'latency_us', '3': 8, '4': 1, '5': 4, '9': 6, '10': 'latencyUs', '17': true},
     {'1': 'timestamp_us', '3': 9, '4': 1, '5': 4, '10': 'timestampUs'},
+    {'1': 'etf_position', '3': 10, '4': 1, '5': 3, '9': 7, '10': 'etfPosition', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -356,6 +357,7 @@ const LeadLagStatusUpdate$json = {
     {'1': '_last_signal'},
     {'1': '_price_buffer'},
     {'1': '_latency_us'},
+    {'1': '_etf_position'},
   ],
 };
 
@@ -369,9 +371,10 @@ final $typed_data.Uint8List leadLagStatusUpdateDescriptor = $convert.base64Decod
     '52MS5sZWFkX2xhZy5MZWFkTGFnU2lnbmFsSW5mb0gEUgpsYXN0U2lnbmFsiAEBEk8KDHByaWNl'
     'X2J1ZmZlchgHIAEoCzInLmtkby52MS5sZWFkX2xhZy5MZWFkTGFnUHJpY2VCdWZmZXJJbmZvSA'
     'VSC3ByaWNlQnVmZmVyiAEBEiIKCmxhdGVuY3lfdXMYCCABKARIBlIJbGF0ZW5jeVVziAEBEiEK'
-    'DHRpbWVzdGFtcF91cxgJIAEoBFILdGltZXN0YW1wVXNCCAoGX3N0YXRlQhMKEV9mdXR1cmVzX3'
-    'Bvc2l0aW9uQg8KDV90b3RhbF90cmFkZXNCFQoTX2xhc3RfZnV0dXJlc19wcmljZUIOCgxfbGFz'
-    'dF9zaWduYWxCDwoNX3ByaWNlX2J1ZmZlckINCgtfbGF0ZW5jeV91cw==');
+    'DHRpbWVzdGFtcF91cxgJIAEoBFILdGltZXN0YW1wVXMSJgoMZXRmX3Bvc2l0aW9uGAogASgDSA'
+    'dSC2V0ZlBvc2l0aW9uiAEBQggKBl9zdGF0ZUITChFfZnV0dXJlc19wb3NpdGlvbkIPCg1fdG90'
+    'YWxfdHJhZGVzQhUKE19sYXN0X2Z1dHVyZXNfcHJpY2VCDgoMX2xhc3Rfc2lnbmFsQg8KDV9wcm'
+    'ljZV9idWZmZXJCDQoLX2xhdGVuY3lfdXNCDwoNX2V0Zl9wb3NpdGlvbg==');
 
 @$core.Deprecated('Use leadLagSignalInfoDescriptor instead')
 const LeadLagSignalInfo$json = {

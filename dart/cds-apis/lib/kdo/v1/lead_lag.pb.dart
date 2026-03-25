@@ -1281,6 +1281,7 @@ class LeadLagStatusUpdate extends $pb.GeneratedMessage {
     LeadLagPriceBufferInfo? priceBuffer,
     $fixnum.Int64? latencyUs,
     $fixnum.Int64? timestampUs,
+    $fixnum.Int64? etfPosition,
   }) {
     final result = create();
     if (leadLagId != null) result.leadLagId = leadLagId;
@@ -1292,6 +1293,7 @@ class LeadLagStatusUpdate extends $pb.GeneratedMessage {
     if (priceBuffer != null) result.priceBuffer = priceBuffer;
     if (latencyUs != null) result.latencyUs = latencyUs;
     if (timestampUs != null) result.timestampUs = timestampUs;
+    if (etfPosition != null) result.etfPosition = etfPosition;
     return result;
   }
 
@@ -1310,6 +1312,7 @@ class LeadLagStatusUpdate extends $pb.GeneratedMessage {
     ..aOM<LeadLagPriceBufferInfo>(7, _omitFieldNames ? '' : 'priceBuffer', subBuilder: LeadLagPriceBufferInfo.create)
     ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'latencyUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(9, _omitFieldNames ? '' : 'timestampUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(10, _omitFieldNames ? '' : 'etfPosition')
     ..hasRequiredFields = false
   ;
 
@@ -1423,6 +1426,16 @@ class LeadLagStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasTimestampUs() => $_has(8);
   @$pb.TagNumber(9)
   void clearTimestampUs() => $_clearField(9);
+
+  /// 현재 ETF 포지션 (양수=롱, 음수=숏)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get etfPosition => $_getI64(9);
+  @$pb.TagNumber(10)
+  set etfPosition($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasEtfPosition() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearEtfPosition() => $_clearField(10);
 }
 
 /// 시그널 상세 정보
