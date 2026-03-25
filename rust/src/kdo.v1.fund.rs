@@ -61,6 +61,12 @@ pub struct Fund {
     /// 펀드별 종목별 한도정보
     #[prost(map="string, message", tag="21")]
     pub fund_limits: ::std::collections::HashMap<::prost::alloc::string::String, FundLimit>,
+    /// ETF LP 여부
+    #[prost(bool, tag="22")]
+    pub etf_lp: bool,
+    /// 프로그램매매 구분 (nullable)
+    #[prost(enumeration="ProgramTradingType", optional, tag="23")]
+    pub program_trading_type: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -223,6 +229,42 @@ impl FundLimitType {
             "FUND_LIMIT_UNSPECIFIED" => Some(Self::FundLimitUnspecified),
             "KOSPI_200_Future" => Some(Self::Kospi200Future),
             "STOCK" => Some(Self::Stock),
+            _ => None,
+        }
+    }
+}
+/// 프로그램매매 구분코드
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ProgramTradingType {
+    Unspecified = 0,
+    /// 지수차익거래
+    IndexArbitrage = 1,
+    /// 주식차익거래
+    StockArbitrage = 2,
+    /// ETF LP 헷지거래
+    EtfLpHedge = 3,
+}
+impl ProgramTradingType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ProgramTradingType::Unspecified => "PROGRAM_TRADING_TYPE_UNSPECIFIED",
+            ProgramTradingType::IndexArbitrage => "INDEX_ARBITRAGE",
+            ProgramTradingType::StockArbitrage => "STOCK_ARBITRAGE",
+            ProgramTradingType::EtfLpHedge => "ETF_LP_HEDGE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PROGRAM_TRADING_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "INDEX_ARBITRAGE" => Some(Self::IndexArbitrage),
+            "STOCK_ARBITRAGE" => Some(Self::StockArbitrage),
+            "ETF_LP_HEDGE" => Some(Self::EtfLpHedge),
             _ => None,
         }
     }

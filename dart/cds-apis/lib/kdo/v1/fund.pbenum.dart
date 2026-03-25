@@ -31,5 +31,28 @@ class FundLimitType extends $pb.ProtobufEnum {
   const FundLimitType._(super.value, super.name);
 }
 
+/// 프로그램매매 구분코드
+class ProgramTradingType extends $pb.ProtobufEnum {
+  static const ProgramTradingType PROGRAM_TRADING_TYPE_UNSPECIFIED = ProgramTradingType._(0, _omitEnumNames ? '' : 'PROGRAM_TRADING_TYPE_UNSPECIFIED');
+  /// 지수차익거래
+  static const ProgramTradingType INDEX_ARBITRAGE = ProgramTradingType._(1, _omitEnumNames ? '' : 'INDEX_ARBITRAGE');
+  /// 주식차익거래
+  static const ProgramTradingType STOCK_ARBITRAGE = ProgramTradingType._(2, _omitEnumNames ? '' : 'STOCK_ARBITRAGE');
+  /// ETF LP 헷지거래
+  static const ProgramTradingType ETF_LP_HEDGE = ProgramTradingType._(3, _omitEnumNames ? '' : 'ETF_LP_HEDGE');
+
+  static const $core.List<ProgramTradingType> values = <ProgramTradingType> [
+    PROGRAM_TRADING_TYPE_UNSPECIFIED,
+    INDEX_ARBITRAGE,
+    STOCK_ARBITRAGE,
+    ETF_LP_HEDGE,
+  ];
+
+  static final $core.List<ProgramTradingType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static ProgramTradingType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const ProgramTradingType._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

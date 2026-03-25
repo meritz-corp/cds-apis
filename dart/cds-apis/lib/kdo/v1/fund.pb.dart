@@ -43,6 +43,8 @@ class Fund extends $pb.GeneratedMessage {
     $core.bool? addUpUniqueTradingUnit,
     $core.String? shortSellingId,
     $core.Iterable<$core.MapEntry<$core.String, FundLimit>>? fundLimits,
+    $core.bool? etfLp,
+    ProgramTradingType? programTradingType,
   }) {
     final result = create();
     if (code != null) result.code = code;
@@ -64,6 +66,8 @@ class Fund extends $pb.GeneratedMessage {
     if (addUpUniqueTradingUnit != null) result.addUpUniqueTradingUnit = addUpUniqueTradingUnit;
     if (shortSellingId != null) result.shortSellingId = shortSellingId;
     if (fundLimits != null) result.fundLimits.addEntries(fundLimits);
+    if (etfLp != null) result.etfLp = etfLp;
+    if (programTradingType != null) result.programTradingType = programTradingType;
     return result;
   }
 
@@ -92,6 +96,8 @@ class Fund extends $pb.GeneratedMessage {
     ..aOB(19, _omitFieldNames ? '' : 'addUpUniqueTradingUnit')
     ..aOS(20, _omitFieldNames ? '' : 'shortSellingId')
     ..m<$core.String, FundLimit>(21, _omitFieldNames ? '' : 'fundLimits', entryClassName: 'Fund.FundLimitsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: FundLimit.create, valueDefaultOrMaker: FundLimit.getDefault, packageName: const $pb.PackageName('kdo.v1.fund'))
+    ..aOB(22, _omitFieldNames ? '' : 'etfLp')
+    ..e<ProgramTradingType>(23, _omitFieldNames ? '' : 'programTradingType', $pb.PbFieldType.OE, defaultOrMaker: ProgramTradingType.PROGRAM_TRADING_TYPE_UNSPECIFIED, valueOf: ProgramTradingType.valueOf, enumValues: ProgramTradingType.values)
     ..hasRequiredFields = false
   ;
 
@@ -295,6 +301,26 @@ class Fund extends $pb.GeneratedMessage {
   /// 펀드별 종목별 한도정보
   @$pb.TagNumber(21)
   $pb.PbMap<$core.String, FundLimit> get fundLimits => $_getMap(18);
+
+  /// ETF LP 여부
+  @$pb.TagNumber(22)
+  $core.bool get etfLp => $_getBF(19);
+  @$pb.TagNumber(22)
+  set etfLp($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(22)
+  $core.bool hasEtfLp() => $_has(19);
+  @$pb.TagNumber(22)
+  void clearEtfLp() => $_clearField(22);
+
+  /// 프로그램매매 구분 (nullable)
+  @$pb.TagNumber(23)
+  ProgramTradingType get programTradingType => $_getN(20);
+  @$pb.TagNumber(23)
+  set programTradingType(ProgramTradingType value) => $_setField(23, value);
+  @$pb.TagNumber(23)
+  $core.bool hasProgramTradingType() => $_has(20);
+  @$pb.TagNumber(23)
+  void clearProgramTradingType() => $_clearField(23);
 }
 
 class FundLimit extends $pb.GeneratedMessage {

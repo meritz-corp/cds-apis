@@ -64,6 +64,12 @@ impl serde::Serialize for Fund {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.fund.Fund", len)?;
         if true {
             struct_ser.serialize_field("code", &self.code)?;
@@ -124,6 +130,14 @@ impl serde::Serialize for Fund {
         if true {
             struct_ser.serialize_field("fund_limits", &self.fund_limits)?;
         }
+        if true {
+            struct_ser.serialize_field("etf_lp", &self.etf_lp)?;
+        }
+        if let Some(v) = self.program_trading_type.as_ref() {
+            let v = ProgramTradingType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("program_trading_type", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -170,6 +184,10 @@ impl<'de> serde::Deserialize<'de> for Fund {
             "shortSellingId",
             "fund_limits",
             "fundLimits",
+            "etf_lp",
+            "etfLp",
+            "program_trading_type",
+            "programTradingType",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -193,6 +211,8 @@ impl<'de> serde::Deserialize<'de> for Fund {
             AddUpUniqueTradingUnit,
             ShortSellingId,
             FundLimits,
+            EtfLp,
+            ProgramTradingType,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -234,6 +254,8 @@ impl<'de> serde::Deserialize<'de> for Fund {
                             "addUpUniqueTradingUnit" | "add_up_unique_trading_unit" => Ok(GeneratedField::AddUpUniqueTradingUnit),
                             "shortSellingId" | "short_selling_id" => Ok(GeneratedField::ShortSellingId),
                             "fundLimits" | "fund_limits" => Ok(GeneratedField::FundLimits),
+                            "etfLp" | "etf_lp" => Ok(GeneratedField::EtfLp),
+                            "programTradingType" | "program_trading_type" => Ok(GeneratedField::ProgramTradingType),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -272,6 +294,8 @@ impl<'de> serde::Deserialize<'de> for Fund {
                 let mut add_up_unique_trading_unit__ = None;
                 let mut short_selling_id__ = None;
                 let mut fund_limits__ = None;
+                let mut etf_lp__ = None;
+                let mut program_trading_type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Code => {
@@ -392,6 +416,18 @@ impl<'de> serde::Deserialize<'de> for Fund {
                                 map_.next_value::<std::collections::HashMap<_, _>>()?
                             );
                         }
+                        GeneratedField::EtfLp => {
+                            if etf_lp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfLp"));
+                            }
+                            etf_lp__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ProgramTradingType => {
+                            if program_trading_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("programTradingType"));
+                            }
+                            program_trading_type__ = map_.next_value::<::std::option::Option<ProgramTradingType>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -417,6 +453,8 @@ impl<'de> serde::Deserialize<'de> for Fund {
                     add_up_unique_trading_unit: add_up_unique_trading_unit__.unwrap_or_default(),
                     short_selling_id: short_selling_id__.unwrap_or_default(),
                     fund_limits: fund_limits__.unwrap_or_default(),
+                    etf_lp: etf_lp__.unwrap_or_default(),
+                    program_trading_type: program_trading_type__,
                 })
             }
         }
@@ -1347,6 +1385,83 @@ impl<'de> serde::Deserialize<'de> for LossLimitSnapshot {
             }
         }
         deserializer.deserialize_struct("kdo.v1.fund.LossLimitSnapshot", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ProgramTradingType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "PROGRAM_TRADING_TYPE_UNSPECIFIED",
+            Self::IndexArbitrage => "INDEX_ARBITRAGE",
+            Self::StockArbitrage => "STOCK_ARBITRAGE",
+            Self::EtfLpHedge => "ETF_LP_HEDGE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for ProgramTradingType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "PROGRAM_TRADING_TYPE_UNSPECIFIED",
+            "INDEX_ARBITRAGE",
+            "STOCK_ARBITRAGE",
+            "ETF_LP_HEDGE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ProgramTradingType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "PROGRAM_TRADING_TYPE_UNSPECIFIED" => Ok(ProgramTradingType::Unspecified),
+                    "INDEX_ARBITRAGE" => Ok(ProgramTradingType::IndexArbitrage),
+                    "STOCK_ARBITRAGE" => Ok(ProgramTradingType::StockArbitrage),
+                    "ETF_LP_HEDGE" => Ok(ProgramTradingType::EtfLpHedge),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for SymbolLimitState {

@@ -88,6 +88,10 @@ message Fund {
   string short_selling_id = 20;
   // 펀드별 종목별 한도정보
   map<string, FundLimit> fund_limits = 21;
+  // ETF LP 여부
+  bool etf_lp = 22;
+  // 프로그램매매 구분 (nullable)
+  optional ProgramTradingType program_trading_type = 23;
 }
 
 message FundLimit {
@@ -160,6 +164,17 @@ enum FundLimitType {
   FUND_LIMIT_UNSPECIFIED = 0;
   KOSPI_200_Future = 1;
   STOCK = 2;
+}
+
+// 프로그램매매 구분코드
+enum ProgramTradingType {
+  PROGRAM_TRADING_TYPE_UNSPECIFIED = 0;
+  // 지수차익거래
+  INDEX_ARBITRAGE = 1;
+  // 주식차익거래
+  STOCK_ARBITRAGE = 2;
+  // ETF LP 헷지거래
+  ETF_LP_HEDGE = 3;
 }
 
 

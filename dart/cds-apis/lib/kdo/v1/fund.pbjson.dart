@@ -29,6 +29,23 @@ final $typed_data.Uint8List fundLimitTypeDescriptor = $convert.base64Decode(
     'Cg1GdW5kTGltaXRUeXBlEhoKFkZVTkRfTElNSVRfVU5TUEVDSUZJRUQQABIUChBLT1NQSV8yMD'
     'BfRnV0dXJlEAESCQoFU1RPQ0sQAg==');
 
+@$core.Deprecated('Use programTradingTypeDescriptor instead')
+const ProgramTradingType$json = {
+  '1': 'ProgramTradingType',
+  '2': [
+    {'1': 'PROGRAM_TRADING_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'INDEX_ARBITRAGE', '2': 1},
+    {'1': 'STOCK_ARBITRAGE', '2': 2},
+    {'1': 'ETF_LP_HEDGE', '2': 3},
+  ],
+};
+
+/// Descriptor for `ProgramTradingType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List programTradingTypeDescriptor = $convert.base64Decode(
+    'ChJQcm9ncmFtVHJhZGluZ1R5cGUSJAogUFJPR1JBTV9UUkFESU5HX1RZUEVfVU5TUEVDSUZJRU'
+    'QQABITCg9JTkRFWF9BUkJJVFJBR0UQARITCg9TVE9DS19BUkJJVFJBR0UQAhIQCgxFVEZfTFBf'
+    'SEVER0UQAw==');
+
 @$core.Deprecated('Use fundDescriptor instead')
 const Fund$json = {
   '1': 'Fund',
@@ -52,8 +69,13 @@ const Fund$json = {
     {'1': 'add_up_unique_trading_unit', '3': 19, '4': 1, '5': 8, '10': 'addUpUniqueTradingUnit'},
     {'1': 'short_selling_id', '3': 20, '4': 1, '5': 9, '10': 'shortSellingId'},
     {'1': 'fund_limits', '3': 21, '4': 3, '5': 11, '6': '.kdo.v1.fund.Fund.FundLimitsEntry', '10': 'fundLimits'},
+    {'1': 'etf_lp', '3': 22, '4': 1, '5': 8, '10': 'etfLp'},
+    {'1': 'program_trading_type', '3': 23, '4': 1, '5': 14, '6': '.kdo.v1.fund.ProgramTradingType', '9': 0, '10': 'programTradingType', '17': true},
   ],
   '3': [Fund_FundLimitsEntry$json],
+  '8': [
+    {'1': '_program_trading_type'},
+  ],
 };
 
 @$core.Deprecated('Use fundDescriptor instead')
@@ -82,9 +104,11 @@ final $typed_data.Uint8List fundDescriptor = $convert.base64Decode(
     'xfbnVtYmVyGBIgASgDUh11bmlxdWVUcmFkaW5nVW5pdFNlcmlhbE51bWJlchI6ChphZGRfdXBf'
     'dW5pcXVlX3RyYWRpbmdfdW5pdBgTIAEoCFIWYWRkVXBVbmlxdWVUcmFkaW5nVW5pdBIoChBzaG'
     '9ydF9zZWxsaW5nX2lkGBQgASgJUg5zaG9ydFNlbGxpbmdJZBJCCgtmdW5kX2xpbWl0cxgVIAMo'
-    'CzIhLmtkby52MS5mdW5kLkZ1bmQuRnVuZExpbWl0c0VudHJ5UgpmdW5kTGltaXRzGlUKD0Z1bm'
+    'CzIhLmtkby52MS5mdW5kLkZ1bmQuRnVuZExpbWl0c0VudHJ5UgpmdW5kTGltaXRzEhUKBmV0Zl'
+    '9scBgWIAEoCFIFZXRmTHASVgoUcHJvZ3JhbV90cmFkaW5nX3R5cGUYFyABKA4yHy5rZG8udjEu'
+    'ZnVuZC5Qcm9ncmFtVHJhZGluZ1R5cGVIAFIScHJvZ3JhbVRyYWRpbmdUeXBliAEBGlUKD0Z1bm'
     'RMaW1pdHNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIsCgV2YWx1ZRgCIAEoCzIWLmtkby52MS5m'
-    'dW5kLkZ1bmRMaW1pdFIFdmFsdWU6AjgB');
+    'dW5kLkZ1bmRMaW1pdFIFdmFsdWU6AjgBQhcKFV9wcm9ncmFtX3RyYWRpbmdfdHlwZQ==');
 
 @$core.Deprecated('Use fundLimitDescriptor instead')
 const FundLimit$json = {
