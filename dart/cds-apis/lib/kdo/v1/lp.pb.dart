@@ -286,10 +286,12 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   factory EtfLpQuantityLimit({
     $fixnum.Int64? maxBidQuantity,
     $fixnum.Int64? maxAskQuantity,
+    $fixnum.Int64? netQuantity,
   }) {
     final result = create();
     if (maxBidQuantity != null) result.maxBidQuantity = maxBidQuantity;
     if (maxAskQuantity != null) result.maxAskQuantity = maxAskQuantity;
+    if (netQuantity != null) result.netQuantity = netQuantity;
     return result;
   }
 
@@ -301,6 +303,7 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aInt64(2, _omitFieldNames ? '' : 'maxBidQuantity')
     ..aInt64(4, _omitFieldNames ? '' : 'maxAskQuantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'netQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -321,7 +324,7 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   static EtfLpQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpQuantityLimit>(create);
   static EtfLpQuantityLimit? _defaultInstance;
 
-  /// 매수 수량 상한
+  /// 매수 수량 상한 (gross 누적 매수 체결 기준)
   @$pb.TagNumber(2)
   $fixnum.Int64 get maxBidQuantity => $_getI64(0);
   @$pb.TagNumber(2)
@@ -331,7 +334,7 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearMaxBidQuantity() => $_clearField(2);
 
-  /// 매도 수량 상한
+  /// 매도 수량 상한 (gross 누적 매도 체결 기준)
   @$pb.TagNumber(4)
   $fixnum.Int64 get maxAskQuantity => $_getI64(1);
   @$pb.TagNumber(4)
@@ -340,6 +343,17 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   $core.bool hasMaxAskQuantity() => $_has(1);
   @$pb.TagNumber(4)
   void clearMaxAskQuantity() => $_clearField(4);
+
+  /// 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
+  /// 한도 검증에는 사용하지 않고 상태 조회용으로만 노출
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get netQuantity => $_getI64(2);
+  @$pb.TagNumber(5)
+  set netQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(5)
+  $core.bool hasNetQuantity() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearNetQuantity() => $_clearField(5);
 }
 
 enum EtfPricing_Method {

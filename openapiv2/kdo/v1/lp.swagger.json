@@ -694,12 +694,17 @@
         "maxBidQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "매수 수량 상한"
+          "title": "매수 수량 상한 (gross 누적 매수 체결 기준)"
         },
         "maxAskQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "매도 수량 상한"
+          "title": "매도 수량 상한 (gross 누적 매도 체결 기준)"
+        },
+        "netQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n한도 검증에는 사용하지 않고 상태 조회용으로만 노출"
         }
       },
       "title": "매수/매도 수량 한도"

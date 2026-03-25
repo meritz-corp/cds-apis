@@ -59,12 +59,16 @@ pub struct EtfLp {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EtfLpQuantityLimit {
-    /// 매수 수량 상한
+    /// 매수 수량 상한 (gross 누적 매수 체결 기준)
     #[prost(int64, tag="2")]
     pub max_bid_quantity: i64,
-    /// 매도 수량 상한
+    /// 매도 수량 상한 (gross 누적 매도 체결 기준)
     #[prost(int64, tag="4")]
     pub max_ask_quantity: i64,
+    /// 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
+    /// 한도 검증에는 사용하지 않고 상태 조회용으로만 노출
+    #[prost(int64, optional, tag="5")]
+    pub net_quantity: ::core::option::Option<i64>,
 }
 /// ETF 가격 산출 방식
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -109,6 +109,10 @@ const EtfLpQuantityLimit$json = {
   '2': [
     {'1': 'max_bid_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxBidQuantity'},
     {'1': 'max_ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'maxAskQuantity'},
+    {'1': 'net_quantity', '3': 5, '4': 1, '5': 3, '9': 0, '10': 'netQuantity', '17': true},
+  ],
+  '8': [
+    {'1': '_net_quantity'},
   ],
   '9': [
     {'1': 1, '2': 2},
@@ -120,8 +124,9 @@ const EtfLpQuantityLimit$json = {
 /// Descriptor for `EtfLpQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpQuantityLimitDescriptor = $convert.base64Decode(
     'ChJFdGZMcFF1YW50aXR5TGltaXQSKAoQbWF4X2JpZF9xdWFudGl0eRgCIAEoA1IObWF4QmlkUX'
-    'VhbnRpdHkSKAoQbWF4X2Fza19xdWFudGl0eRgEIAEoA1IObWF4QXNrUXVhbnRpdHlKBAgBEAJK'
-    'BAgDEARSEG1pbl9iaWRfcXVhbnRpdHlSEG1pbl9hc2tfcXVhbnRpdHk=');
+    'VhbnRpdHkSKAoQbWF4X2Fza19xdWFudGl0eRgEIAEoA1IObWF4QXNrUXVhbnRpdHkSJgoMbmV0'
+    'X3F1YW50aXR5GAUgASgDSABSC25ldFF1YW50aXR5iAEBQg8KDV9uZXRfcXVhbnRpdHlKBAgBEA'
+    'JKBAgDEARSEG1pbl9iaWRfcXVhbnRpdHlSEG1pbl9hc2tfcXVhbnRpdHk=');
 
 @$core.Deprecated('Use etfPricingDescriptor instead')
 const EtfPricing$json = {
