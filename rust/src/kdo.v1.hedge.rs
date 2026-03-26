@@ -336,16 +336,16 @@ pub enum ExecPriceType {
     ImmediateFill = 1,
     /// 상대호가: 상대방 최우선호가 가격으로 지정가 주문
     CounterBest = 2,
-    /// 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱
-    CounterBestPlusTick = 3,
+    /// 상대호가 +1틱 (공격적: 매수→더 비싸게, 매도→더 싸게)
+    CounterBestPlus1 = 3,
     /// 호가 가격: 지정된 호가 가격으로 주문
     QuotedPrice = 4,
-    /// QuotedPrice에서 1틱 더 공격적 (매수: +1틱, 매도: -1틱)
-    QuotedPricePlus1 = 5,
-    /// QuotedPrice에서 2틱 더 공격적 (매수: +2틱, 매도: -2틱)
-    QuotedPricePlus2 = 6,
-    /// QuotedPrice에서 3틱 더 공격적 (매수: +3틱, 매도: -3틱)
-    QuotedPricePlus3 = 7,
+    /// QuotedPrice에서 1틱 더 방어적 (매수: -1틱, 매도: +1틱)
+    QuotedPriceMinus1 = 5,
+    /// QuotedPrice에서 2틱 더 방어적 (매수: -2틱, 매도: +2틱)
+    QuotedPriceMinus2 = 6,
+    /// QuotedPrice에서 3틱 더 방어적 (매수: -3틱, 매도: +3틱)
+    QuotedPriceMinus3 = 7,
     /// 상대호가 +2틱
     CounterBestPlus2 = 8,
     /// 상대호가 +3틱
@@ -365,11 +365,11 @@ impl ExecPriceType {
             ExecPriceType::Unspecified => "EXEC_PRICE_TYPE_UNSPECIFIED",
             ExecPriceType::ImmediateFill => "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
             ExecPriceType::CounterBest => "EXEC_PRICE_TYPE_COUNTER_BEST",
-            ExecPriceType::CounterBestPlusTick => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
+            ExecPriceType::CounterBestPlus1 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1",
             ExecPriceType::QuotedPrice => "EXEC_PRICE_TYPE_QUOTED_PRICE",
-            ExecPriceType::QuotedPricePlus1 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1",
-            ExecPriceType::QuotedPricePlus2 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2",
-            ExecPriceType::QuotedPricePlus3 => "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3",
+            ExecPriceType::QuotedPriceMinus1 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1",
+            ExecPriceType::QuotedPriceMinus2 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2",
+            ExecPriceType::QuotedPriceMinus3 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3",
             ExecPriceType::CounterBestPlus2 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2",
             ExecPriceType::CounterBestPlus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
             ExecPriceType::CounterBestPlus4 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
@@ -382,11 +382,11 @@ impl ExecPriceType {
             "EXEC_PRICE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "EXEC_PRICE_TYPE_IMMEDIATE_FILL" => Some(Self::ImmediateFill),
             "EXEC_PRICE_TYPE_COUNTER_BEST" => Some(Self::CounterBest),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK" => Some(Self::CounterBestPlusTick),
+            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1" => Some(Self::CounterBestPlus1),
             "EXEC_PRICE_TYPE_QUOTED_PRICE" => Some(Self::QuotedPrice),
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1" => Some(Self::QuotedPricePlus1),
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2" => Some(Self::QuotedPricePlus2),
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3" => Some(Self::QuotedPricePlus3),
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1" => Some(Self::QuotedPriceMinus1),
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2" => Some(Self::QuotedPriceMinus2),
+            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3" => Some(Self::QuotedPriceMinus3),
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2" => Some(Self::CounterBestPlus2),
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3" => Some(Self::CounterBestPlus3),
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4" => Some(Self::CounterBestPlus4),

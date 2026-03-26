@@ -571,18 +571,18 @@
         "EXEC_PRICE_TYPE_UNSPECIFIED",
         "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
         "EXEC_PRICE_TYPE_COUNTER_BEST",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK",
+        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1",
         "EXEC_PRICE_TYPE_QUOTED_PRICE",
-        "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1",
-        "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2",
-        "EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3",
+        "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1",
+        "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2",
+        "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3",
         "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2",
         "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
         "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
         "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5"
       ],
       "default": "EXEC_PRICE_TYPE_UNSPECIFIED",
-      "description": "헷지 주문 체결 가격 유형\n거래소의 구체적인 호가 유형(QuoteType)과 달리,\n헷지 주문의 전략적 의도를 표현합니다.\n\n - EXEC_PRICE_TYPE_UNSPECIFIED: 미지정\n - EXEC_PRICE_TYPE_IMMEDIATE_FILL: 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도\n - EXEC_PRICE_TYPE_COUNTER_BEST: 상대호가: 상대방 최우선호가 가격으로 지정가 주문\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_TICK: 상대호가 ± 1틱: 매도면 상대호가 +1틱, 매수면 상대호가 -1틱\n - EXEC_PRICE_TYPE_QUOTED_PRICE: 호가 가격: 지정된 호가 가격으로 주문\n - EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_1: QuotedPrice에서 1틱 더 공격적 (매수: +1틱, 매도: -1틱)\n - EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_2: QuotedPrice에서 2틱 더 공격적 (매수: +2틱, 매도: -2틱)\n - EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3: QuotedPrice에서 3틱 더 공격적 (매수: +3틱, 매도: -3틱)\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2: 상대호가 +2틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3: 상대호가 +3틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4: 상대호가 +4틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5: 상대호가 +5틱"
+      "description": "헷지 주문 체결 가격 유형\n거래소의 구체적인 호가 유형(QuoteType)과 달리,\n헷지 주문의 전략적 의도를 표현합니다.\n\n - EXEC_PRICE_TYPE_UNSPECIFIED: 미지정\n - EXEC_PRICE_TYPE_IMMEDIATE_FILL: 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도\n - EXEC_PRICE_TYPE_COUNTER_BEST: 상대호가: 상대방 최우선호가 가격으로 지정가 주문\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1: 상대호가 +1틱 (공격적: 매수→더 비싸게, 매도→더 싸게)\n - EXEC_PRICE_TYPE_QUOTED_PRICE: 호가 가격: 지정된 호가 가격으로 주문\n - EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1: QuotedPrice에서 1틱 더 방어적 (매수: -1틱, 매도: +1틱)\n - EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2: QuotedPrice에서 2틱 더 방어적 (매수: -2틱, 매도: +2틱)\n - EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3: QuotedPrice에서 3틱 더 방어적 (매수: -3틱, 매도: +3틱)\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2: 상대호가 +2틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3: 상대호가 +3틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4: 상대호가 +4틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5: 상대호가 +5틱"
     },
     "hedgeFutureHedge": {
       "type": "object",
