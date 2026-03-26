@@ -130,6 +130,18 @@ enum ExecPriceType {
 
   // QuotedPrice에서 3틱 더 공격적 (매수: +3틱, 매도: -3틱)
   EXEC_PRICE_TYPE_QUOTED_PRICE_PLUS_3 = 7;
+
+  // 상대호가 +2틱
+  EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2 = 8;
+
+  // 상대호가 +3틱
+  EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3 = 9;
+
+  // 상대호가 +4틱
+  EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4 = 10;
+
+  // 상대호가 +5틱
+  EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5 = 11;
 }
 
 // ========== Resource Messages ==========
