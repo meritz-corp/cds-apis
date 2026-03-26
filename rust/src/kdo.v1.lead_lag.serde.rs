@@ -3202,6 +3202,12 @@ impl serde::Serialize for ListLeadLagTradesRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lead_lag.ListLeadLagTradesRequest", len)?;
         if true {
             struct_ser.serialize_field("lead_lag", &self.lead_lag)?;
@@ -3217,6 +3223,12 @@ impl serde::Serialize for ListLeadLagTradesRequest {
         }
         if true {
             struct_ser.serialize_field("order_by", &self.order_by)?;
+        }
+        if let Some(v) = self.start_date.as_ref() {
+            struct_ser.serialize_field("start_date", v)?;
+        }
+        if let Some(v) = self.end_date.as_ref() {
+            struct_ser.serialize_field("end_date", v)?;
         }
         struct_ser.end()
     }
@@ -3237,6 +3249,10 @@ impl<'de> serde::Deserialize<'de> for ListLeadLagTradesRequest {
             "filter",
             "order_by",
             "orderBy",
+            "start_date",
+            "startDate",
+            "end_date",
+            "endDate",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3246,6 +3262,8 @@ impl<'de> serde::Deserialize<'de> for ListLeadLagTradesRequest {
             PageToken,
             Filter,
             OrderBy,
+            StartDate,
+            EndDate,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3273,6 +3291,8 @@ impl<'de> serde::Deserialize<'de> for ListLeadLagTradesRequest {
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
                             "orderBy" | "order_by" => Ok(GeneratedField::OrderBy),
+                            "startDate" | "start_date" => Ok(GeneratedField::StartDate),
+                            "endDate" | "end_date" => Ok(GeneratedField::EndDate),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3297,6 +3317,8 @@ impl<'de> serde::Deserialize<'de> for ListLeadLagTradesRequest {
                 let mut page_token__ = None;
                 let mut filter__ = None;
                 let mut order_by__ = None;
+                let mut start_date__ = None;
+                let mut end_date__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::LeadLag => {
@@ -3331,6 +3353,22 @@ impl<'de> serde::Deserialize<'de> for ListLeadLagTradesRequest {
                             }
                             order_by__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::StartDate => {
+                            if start_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("startDate"));
+                            }
+                            start_date__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::EndDate => {
+                            if end_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("endDate"));
+                            }
+                            end_date__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3342,6 +3380,8 @@ impl<'de> serde::Deserialize<'de> for ListLeadLagTradesRequest {
                     page_token: page_token__,
                     filter: filter__.unwrap_or_default(),
                     order_by: order_by__.unwrap_or_default(),
+                    start_date: start_date__,
+                    end_date: end_date__,
                 })
             }
         }

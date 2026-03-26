@@ -2251,6 +2251,8 @@ class ListLeadLagTradesRequest extends $pb.GeneratedMessage {
     $core.String? pageToken,
     $core.String? filter,
     $core.String? orderBy,
+    $core.int? startDate,
+    $core.int? endDate,
   }) {
     final result = create();
     if (leadLag != null) result.leadLag = leadLag;
@@ -2258,6 +2260,8 @@ class ListLeadLagTradesRequest extends $pb.GeneratedMessage {
     if (pageToken != null) result.pageToken = pageToken;
     if (filter != null) result.filter = filter;
     if (orderBy != null) result.orderBy = orderBy;
+    if (startDate != null) result.startDate = startDate;
+    if (endDate != null) result.endDate = endDate;
     return result;
   }
 
@@ -2272,6 +2276,8 @@ class ListLeadLagTradesRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
     ..aOS(4, _omitFieldNames ? '' : 'filter')
     ..aOS(5, _omitFieldNames ? '' : 'orderBy')
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'startDate', $pb.PbFieldType.O3)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'endDate', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2343,6 +2349,26 @@ class ListLeadLagTradesRequest extends $pb.GeneratedMessage {
   $core.bool hasOrderBy() => $_has(4);
   @$pb.TagNumber(5)
   void clearOrderBy() => $_clearField(5);
+
+  /// 조회 시작 날짜 (YYYYMMDD 정수, 포함). filter의 date와 별도로 범위 검색용
+  @$pb.TagNumber(6)
+  $core.int get startDate => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set startDate($core.int value) => $_setSignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasStartDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearStartDate() => $_clearField(6);
+
+  /// 조회 종료 날짜 (YYYYMMDD 정수, 포함)
+  @$pb.TagNumber(7)
+  $core.int get endDate => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set endDate($core.int value) => $_setSignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasEndDate() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearEndDate() => $_clearField(7);
 }
 
 /// 체결 내역 목록 응답

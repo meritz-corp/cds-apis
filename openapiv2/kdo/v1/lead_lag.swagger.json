@@ -320,6 +320,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "startDate",
+            "description": "조회 시작 날짜 (YYYYMMDD 정수, 포함). filter의 date와 별도로 범위 검색용",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "endDate",
+            "description": "조회 종료 날짜 (YYYYMMDD 정수, 포함)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [

@@ -564,10 +564,14 @@ const ListLeadLagTradesRequest$json = {
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
     {'1': 'filter', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'filter'},
     {'1': 'order_by', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'orderBy'},
+    {'1': 'start_date', '3': 6, '4': 1, '5': 5, '9': 2, '10': 'startDate', '17': true},
+    {'1': 'end_date', '3': 7, '4': 1, '5': 5, '9': 3, '10': 'endDate', '17': true},
   ],
   '8': [
     {'1': '_page_size'},
     {'1': '_page_token'},
+    {'1': '_start_date'},
+    {'1': '_end_date'},
   ],
 };
 
@@ -576,8 +580,10 @@ final $typed_data.Uint8List listLeadLagTradesRequestDescriptor = $convert.base64
     'ChhMaXN0TGVhZExhZ1RyYWRlc1JlcXVlc3QSOwoIbGVhZF9sYWcYASABKAlCIOJBAQL6QRkKF2'
     'tkby5jZHNhcGlzLnh5ei9MZWFkTGFnUgdsZWFkTGFnEiAKCXBhZ2Vfc2l6ZRgCIAEoBUgAUghw'
     'YWdlU2l6ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBARIcCgZmaWx0ZX'
-    'IYBCABKAlCBOJBAQFSBmZpbHRlchIfCghvcmRlcl9ieRgFIAEoCUIE4kEBAVIHb3JkZXJCeUIM'
-    'CgpfcGFnZV9zaXplQg0KC19wYWdlX3Rva2Vu');
+    'IYBCABKAlCBOJBAQFSBmZpbHRlchIfCghvcmRlcl9ieRgFIAEoCUIE4kEBAVIHb3JkZXJCeRIi'
+    'CgpzdGFydF9kYXRlGAYgASgFSAJSCXN0YXJ0RGF0ZYgBARIeCghlbmRfZGF0ZRgHIAEoBUgDUg'
+    'dlbmREYXRliAEBQgwKCl9wYWdlX3NpemVCDQoLX3BhZ2VfdG9rZW5CDQoLX3N0YXJ0X2RhdGVC'
+    'CwoJX2VuZF9kYXRl');
 
 @$core.Deprecated('Use listLeadLagTradesResponseDescriptor instead')
 const ListLeadLagTradesResponse$json = {

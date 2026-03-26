@@ -482,6 +482,12 @@ pub struct ListLeadLagTradesRequest {
     /// 정렬 기준 (기본: trigger_time_us DESC)
     #[prost(string, tag="5")]
     pub order_by: ::prost::alloc::string::String,
+    /// 조회 시작 날짜 (YYYYMMDD 정수, 포함). filter의 date와 별도로 범위 검색용
+    #[prost(int32, optional, tag="6")]
+    pub start_date: ::core::option::Option<i32>,
+    /// 조회 종료 날짜 (YYYYMMDD 정수, 포함)
+    #[prost(int32, optional, tag="7")]
+    pub end_date: ::core::option::Option<i32>,
 }
 /// 체결 내역 목록 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
