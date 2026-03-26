@@ -704,7 +704,12 @@
         "netQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n한도 검증에는 사용하지 않고 상태 조회용으로만 노출"
+          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조"
+        },
+        "maxNetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순포지션 한도 설정값 (한도 검증에 사용)\nnet_quantity \u003e 0 \u0026\u0026 net_quantity \u003e= max_net_quantity → 매수 차단\nnet_quantity \u003c 0 \u0026\u0026 |net_quantity| \u003e= max_net_quantity → 매도 차단\n미설정(None) 시 순포지션 기반 차단 비활성"
         }
       },
       "title": "매수/매도 수량 한도"

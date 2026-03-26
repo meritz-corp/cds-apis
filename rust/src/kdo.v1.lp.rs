@@ -66,9 +66,15 @@ pub struct EtfLpQuantityLimit {
     #[prost(int64, tag="4")]
     pub max_ask_quantity: i64,
     /// 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
-    /// 한도 검증에는 사용하지 않고 상태 조회용으로만 노출
+    /// 상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조
     #[prost(int64, optional, tag="5")]
     pub net_quantity: ::core::option::Option<i64>,
+    /// 순포지션 한도 설정값 (한도 검증에 사용)
+    /// net_quantity > 0 && net_quantity >= max_net_quantity → 매수 차단
+    /// net_quantity < 0 && |net_quantity| >= max_net_quantity → 매도 차단
+    /// 미설정(None) 시 순포지션 기반 차단 비활성
+    #[prost(int64, optional, tag="6")]
+    pub max_net_quantity: ::core::option::Option<i64>,
 }
 /// ETF 가격 산출 방식
 #[allow(clippy::derive_partial_eq_without_eq)]

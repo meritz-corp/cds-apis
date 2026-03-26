@@ -110,9 +110,11 @@ const EtfLpQuantityLimit$json = {
     {'1': 'max_bid_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxBidQuantity'},
     {'1': 'max_ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'maxAskQuantity'},
     {'1': 'net_quantity', '3': 5, '4': 1, '5': 3, '9': 0, '10': 'netQuantity', '17': true},
+    {'1': 'max_net_quantity', '3': 6, '4': 1, '5': 3, '9': 1, '10': 'maxNetQuantity', '17': true},
   ],
   '8': [
     {'1': '_net_quantity'},
+    {'1': '_max_net_quantity'},
   ],
   '9': [
     {'1': 1, '2': 2},
@@ -125,8 +127,10 @@ const EtfLpQuantityLimit$json = {
 final $typed_data.Uint8List etfLpQuantityLimitDescriptor = $convert.base64Decode(
     'ChJFdGZMcFF1YW50aXR5TGltaXQSKAoQbWF4X2JpZF9xdWFudGl0eRgCIAEoA1IObWF4QmlkUX'
     'VhbnRpdHkSKAoQbWF4X2Fza19xdWFudGl0eRgEIAEoA1IObWF4QXNrUXVhbnRpdHkSJgoMbmV0'
-    'X3F1YW50aXR5GAUgASgDSABSC25ldFF1YW50aXR5iAEBQg8KDV9uZXRfcXVhbnRpdHlKBAgBEA'
-    'JKBAgDEARSEG1pbl9iaWRfcXVhbnRpdHlSEG1pbl9hc2tfcXVhbnRpdHk=');
+    'X3F1YW50aXR5GAUgASgDSABSC25ldFF1YW50aXR5iAEBEi0KEG1heF9uZXRfcXVhbnRpdHkYBi'
+    'ABKANIAVIObWF4TmV0UXVhbnRpdHmIAQFCDwoNX25ldF9xdWFudGl0eUITChFfbWF4X25ldF9x'
+    'dWFudGl0eUoECAEQAkoECAMQBFIQbWluX2JpZF9xdWFudGl0eVIQbWluX2Fza19xdWFudGl0eQ'
+    '==');
 
 @$core.Deprecated('Use etfPricingDescriptor instead')
 const EtfPricing$json = {

@@ -287,11 +287,13 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
     $fixnum.Int64? maxBidQuantity,
     $fixnum.Int64? maxAskQuantity,
     $fixnum.Int64? netQuantity,
+    $fixnum.Int64? maxNetQuantity,
   }) {
     final result = create();
     if (maxBidQuantity != null) result.maxBidQuantity = maxBidQuantity;
     if (maxAskQuantity != null) result.maxAskQuantity = maxAskQuantity;
     if (netQuantity != null) result.netQuantity = netQuantity;
+    if (maxNetQuantity != null) result.maxNetQuantity = maxNetQuantity;
     return result;
   }
 
@@ -304,6 +306,7 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
     ..aInt64(2, _omitFieldNames ? '' : 'maxBidQuantity')
     ..aInt64(4, _omitFieldNames ? '' : 'maxAskQuantity')
     ..aInt64(5, _omitFieldNames ? '' : 'netQuantity')
+    ..aInt64(6, _omitFieldNames ? '' : 'maxNetQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -345,7 +348,7 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   void clearMaxAskQuantity() => $_clearField(4);
 
   /// 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
-  /// 한도 검증에는 사용하지 않고 상태 조회용으로만 노출
+  /// 상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조
   @$pb.TagNumber(5)
   $fixnum.Int64 get netQuantity => $_getI64(2);
   @$pb.TagNumber(5)
@@ -354,6 +357,19 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   $core.bool hasNetQuantity() => $_has(2);
   @$pb.TagNumber(5)
   void clearNetQuantity() => $_clearField(5);
+
+  /// 순포지션 한도 설정값 (한도 검증에 사용)
+  /// net_quantity > 0 && net_quantity >= max_net_quantity → 매수 차단
+  /// net_quantity < 0 && |net_quantity| >= max_net_quantity → 매도 차단
+  /// 미설정(None) 시 순포지션 기반 차단 비활성
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get maxNetQuantity => $_getI64(3);
+  @$pb.TagNumber(6)
+  set maxNetQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(6)
+  $core.bool hasMaxNetQuantity() => $_has(3);
+  @$pb.TagNumber(6)
+  void clearMaxNetQuantity() => $_clearField(6);
 }
 
 enum EtfPricing_Method {
