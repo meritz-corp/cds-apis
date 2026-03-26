@@ -357,6 +357,12 @@ message GetLeadLagExecutionSummaryRequest {
       type: "kdo.cdsapis.xyz/LeadLag"
     }
   ];
+
+  // 조회 시작 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간
+  optional int32 start_date = 2;
+
+  // 조회 종료 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간
+  optional int32 end_date = 3;
 }
 
 // 체결 현황 요약 응답

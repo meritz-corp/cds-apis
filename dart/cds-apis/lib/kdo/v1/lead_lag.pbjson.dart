@@ -256,13 +256,21 @@ const GetLeadLagExecutionSummaryRequest$json = {
   '1': 'GetLeadLagExecutionSummaryRequest',
   '2': [
     {'1': 'lead_lag', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'leadLag'},
+    {'1': 'start_date', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'startDate', '17': true},
+    {'1': 'end_date', '3': 3, '4': 1, '5': 5, '9': 1, '10': 'endDate', '17': true},
+  ],
+  '8': [
+    {'1': '_start_date'},
+    {'1': '_end_date'},
   ],
 };
 
 /// Descriptor for `GetLeadLagExecutionSummaryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getLeadLagExecutionSummaryRequestDescriptor = $convert.base64Decode(
     'CiFHZXRMZWFkTGFnRXhlY3V0aW9uU3VtbWFyeVJlcXVlc3QSOwoIbGVhZF9sYWcYASABKAlCIO'
-    'JBAQL6QRkKF2tkby5jZHNhcGlzLnh5ei9MZWFkTGFnUgdsZWFkTGFn');
+    'JBAQL6QRkKF2tkby5jZHNhcGlzLnh5ei9MZWFkTGFnUgdsZWFkTGFnEiIKCnN0YXJ0X2RhdGUY'
+    'AiABKAVIAFIJc3RhcnREYXRliAEBEh4KCGVuZF9kYXRlGAMgASgFSAFSB2VuZERhdGWIAQFCDQ'
+    'oLX3N0YXJ0X2RhdGVCCwoJX2VuZF9kYXRl');
 
 @$core.Deprecated('Use leadLagExecutionSummaryResponseDescriptor instead')
 const LeadLagExecutionSummaryResponse$json = {

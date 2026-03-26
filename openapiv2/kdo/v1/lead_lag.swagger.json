@@ -394,6 +394,22 @@
             "required": true,
             "type": "string",
             "pattern": "leadLags/[^/]+"
+          },
+          {
+            "name": "startDate",
+            "description": "조회 시작 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "endDate",
+            "description": "조회 종료 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [

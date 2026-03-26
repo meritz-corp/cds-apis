@@ -194,6 +194,12 @@ pub struct GetLeadLagExecutionSummaryRequest {
     /// 리소스 이름 (lead_lags/{id})
     #[prost(string, tag="1")]
     pub lead_lag: ::prost::alloc::string::String,
+    /// 조회 시작 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간
+    #[prost(int32, optional, tag="2")]
+    pub start_date: ::core::option::Option<i32>,
+    /// 조회 종료 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간
+    #[prost(int32, optional, tag="3")]
+    pub end_date: ::core::option::Option<i32>,
 }
 /// 체결 현황 요약 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

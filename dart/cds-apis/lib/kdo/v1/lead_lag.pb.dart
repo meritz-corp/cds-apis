@@ -951,9 +951,13 @@ class StopLeadLagResponse extends $pb.GeneratedMessage {
 class GetLeadLagExecutionSummaryRequest extends $pb.GeneratedMessage {
   factory GetLeadLagExecutionSummaryRequest({
     $core.String? leadLag,
+    $core.int? startDate,
+    $core.int? endDate,
   }) {
     final result = create();
     if (leadLag != null) result.leadLag = leadLag;
+    if (startDate != null) result.startDate = startDate;
+    if (endDate != null) result.endDate = endDate;
     return result;
   }
 
@@ -964,6 +968,8 @@ class GetLeadLagExecutionSummaryRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLeadLagExecutionSummaryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lead_lag'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'leadLag')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'startDate', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'endDate', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -993,6 +999,26 @@ class GetLeadLagExecutionSummaryRequest extends $pb.GeneratedMessage {
   $core.bool hasLeadLag() => $_has(0);
   @$pb.TagNumber(1)
   void clearLeadLag() => $_clearField(1);
+
+  /// 조회 시작 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간
+  @$pb.TagNumber(2)
+  $core.int get startDate => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set startDate($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasStartDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStartDate() => $_clearField(2);
+
+  /// 조회 종료 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간
+  @$pb.TagNumber(3)
+  $core.int get endDate => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set endDate($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEndDate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEndDate() => $_clearField(3);
 }
 
 /// 체결 현황 요약 응답
