@@ -374,6 +374,26 @@ pub struct ListHedgeAccumulatorsResponse {
     #[prost(message, repeated, tag="1")]
     pub hedge_accumulators: ::prost::alloc::vec::Vec<HedgeAccumulatorState>,
 }
+/// StreamHedgeAccumulators 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamHedgeAccumulatorsRequest {
+    /// 필터
+    /// Available filters:
+    /// * portfolio_id
+    ///    * `equal`
+    /// * fund_code
+    ///    * `equal`
+    /// * source_symbol
+    ///    * `equal`
+    ///
+    /// Examples:
+    /// * filter=fund_code="0159"
+    /// * filter=portfolio_id=1
+    /// 빈 문자열 = 전체 accumulator 상태 스트리밍
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
+}
 // ========== Enums ==========
 
 /// 헷지 주문 체결 가격 유형

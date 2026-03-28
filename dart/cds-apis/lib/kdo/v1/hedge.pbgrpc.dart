@@ -42,6 +42,12 @@ class HedgeServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listHedgeAccumulators, request, options: options);
   }
 
+  /// HedgeAccumulator 상태 실시간 스트림
+  /// 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
+  $grpc.ResponseStream<$0.HedgeAccumulatorState> streamHedgeAccumulators($0.StreamHedgeAccumulatorsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamHedgeAccumulators, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// 단일 Hedge 조회
   $grpc.ResponseFuture<$0.Hedge> getHedge($0.GetHedgeRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getHedge, request, options: options);
@@ -98,6 +104,10 @@ class HedgeServiceClient extends $grpc.Client {
       '/kdo.v1.hedge.HedgeService/ListHedgeAccumulators',
       ($0.ListHedgeAccumulatorsRequest value) => value.writeToBuffer(),
       $0.ListHedgeAccumulatorsResponse.fromBuffer);
+  static final _$streamHedgeAccumulators = $grpc.ClientMethod<$0.StreamHedgeAccumulatorsRequest, $0.HedgeAccumulatorState>(
+      '/kdo.v1.hedge.HedgeService/StreamHedgeAccumulators',
+      ($0.StreamHedgeAccumulatorsRequest value) => value.writeToBuffer(),
+      $0.HedgeAccumulatorState.fromBuffer);
   static final _$getHedge = $grpc.ClientMethod<$0.GetHedgeRequest, $0.Hedge>(
       '/kdo.v1.hedge.HedgeService/GetHedge',
       ($0.GetHedgeRequest value) => value.writeToBuffer(),
@@ -152,6 +162,13 @@ abstract class HedgeServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListHedgeAccumulatorsRequest.fromBuffer(value),
         ($0.ListHedgeAccumulatorsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamHedgeAccumulatorsRequest, $0.HedgeAccumulatorState>(
+        'StreamHedgeAccumulators',
+        streamHedgeAccumulators_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamHedgeAccumulatorsRequest.fromBuffer(value),
+        ($0.HedgeAccumulatorState value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetHedgeRequest, $0.Hedge>(
         'GetHedge',
         getHedge_Pre,
@@ -229,6 +246,12 @@ abstract class HedgeServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListHedgeAccumulatorsResponse> listHedgeAccumulators($grpc.ServiceCall call, $0.ListHedgeAccumulatorsRequest request);
+
+  $async.Stream<$0.HedgeAccumulatorState> streamHedgeAccumulators_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamHedgeAccumulatorsRequest> $request) async* {
+    yield* streamHedgeAccumulators($call, await $request);
+  }
+
+  $async.Stream<$0.HedgeAccumulatorState> streamHedgeAccumulators($grpc.ServiceCall call, $0.StreamHedgeAccumulatorsRequest request);
 
   $async.Future<$0.Hedge> getHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.GetHedgeRequest> $request) async {
     return getHedge($call, await $request);

@@ -48,6 +48,47 @@
         ]
       }
     },
+    "/v1/hedge_accumulators:stream": {
+      "get": {
+        "summary": "HedgeAccumulator 상태 실시간 스트림\n즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.",
+        "operationId": "HedgeService_StreamHedgeAccumulators",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/hedgeHedgeAccumulatorState"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of hedgeHedgeAccumulatorState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "필터\nAvailable filters:\n* portfolio_id\n  * `equal`\n* fund_code\n  * `equal`\n* source_symbol\n  * `equal`\n\nExamples:\n* filter=fund_code=\"0159\"\n* filter=portfolio_id=1\n빈 문자열 = 전체 accumulator 상태 스트리밍",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
     "/v1/hedge_groups": {
       "get": {
         "summary": "HedgeGroup 목록 조회",

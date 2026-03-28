@@ -31,6 +31,25 @@ extension type HedgeServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// HedgeAccumulator 상태 실시간 스트림
+  /// 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
+  Stream<kdov1hedge.HedgeAccumulatorState> streamHedgeAccumulators(
+    kdov1hedge.StreamHedgeAccumulatorsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.HedgeService.streamHedgeAccumulators,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 단일 Hedge 조회
   Future<kdov1hedge.Hedge> getHedge(
     kdov1hedge.GetHedgeRequest input, {

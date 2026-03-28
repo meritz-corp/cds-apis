@@ -23,6 +23,15 @@ abstract final class HedgeService {
     kdov1hedge.ListHedgeAccumulatorsResponse.new,
   );
 
+  /// HedgeAccumulator 상태 실시간 스트림
+  /// 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
+  static const streamHedgeAccumulators = connect.Spec(
+    '/$name/StreamHedgeAccumulators',
+    connect.StreamType.server,
+    kdov1hedge.StreamHedgeAccumulatorsRequest.new,
+    kdov1hedge.HedgeAccumulatorState.new,
+  );
+
   /// 단일 Hedge 조회
   static const getHedge = connect.Spec(
     '/$name/GetHedge',

@@ -456,3 +456,16 @@ final $typed_data.Uint8List listHedgeAccumulatorsResponseDescriptor = $convert.b
     'ADKAsyIy5rZG8udjEuaGVkZ2UuSGVkZ2VBY2N1bXVsYXRvclN0YXRlUhFoZWRnZUFjY3VtdWxh'
     'dG9ycw==');
 
+@$core.Deprecated('Use streamHedgeAccumulatorsRequestDescriptor instead')
+const StreamHedgeAccumulatorsRequest$json = {
+  '1': 'StreamHedgeAccumulatorsRequest',
+  '2': [
+    {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
+  ],
+};
+
+/// Descriptor for `StreamHedgeAccumulatorsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamHedgeAccumulatorsRequestDescriptor = $convert.base64Decode(
+    'Ch5TdHJlYW1IZWRnZUFjY3VtdWxhdG9yc1JlcXVlc3QSFgoGZmlsdGVyGAEgASgJUgZmaWx0ZX'
+    'I=');
+

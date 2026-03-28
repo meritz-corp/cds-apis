@@ -26,6 +26,9 @@ type HedgeServiceClient interface {
 	// HedgeAccumulator 상태 목록 조회
 	// 즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.
 	ListHedgeAccumulators(ctx context.Context, in *ListHedgeAccumulatorsRequest, opts ...grpc.CallOption) (*ListHedgeAccumulatorsResponse, error)
+	// HedgeAccumulator 상태 실시간 스트림
+	// 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
+	StreamHedgeAccumulators(ctx context.Context, in *StreamHedgeAccumulatorsRequest, opts ...grpc.CallOption) (HedgeService_StreamHedgeAccumulatorsClient, error)
 	// 단일 Hedge 조회
 	GetHedge(ctx context.Context, in *GetHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// Hedge 목록 조회
@@ -63,6 +66,38 @@ func (c *hedgeServiceClient) ListHedgeAccumulators(ctx context.Context, in *List
 		return nil, err
 	}
 	return out, nil
+}
+
+func (c *hedgeServiceClient) StreamHedgeAccumulators(ctx context.Context, in *StreamHedgeAccumulatorsRequest, opts ...grpc.CallOption) (HedgeService_StreamHedgeAccumulatorsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &HedgeService_ServiceDesc.Streams[0], "/kdo.v1.hedge.HedgeService/StreamHedgeAccumulators", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &hedgeServiceStreamHedgeAccumulatorsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type HedgeService_StreamHedgeAccumulatorsClient interface {
+	Recv() (*HedgeAccumulatorState, error)
+	grpc.ClientStream
+}
+
+type hedgeServiceStreamHedgeAccumulatorsClient struct {
+	grpc.ClientStream
+}
+
+func (x *hedgeServiceStreamHedgeAccumulatorsClient) Recv() (*HedgeAccumulatorState, error) {
+	m := new(HedgeAccumulatorState)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *hedgeServiceClient) GetHedge(ctx context.Context, in *GetHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
@@ -162,6 +197,9 @@ type HedgeServiceServer interface {
 	// HedgeAccumulator 상태 목록 조회
 	// 즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.
 	ListHedgeAccumulators(context.Context, *ListHedgeAccumulatorsRequest) (*ListHedgeAccumulatorsResponse, error)
+	// HedgeAccumulator 상태 실시간 스트림
+	// 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
+	StreamHedgeAccumulators(*StreamHedgeAccumulatorsRequest, HedgeService_StreamHedgeAccumulatorsServer) error
 	// 단일 Hedge 조회
 	GetHedge(context.Context, *GetHedgeRequest) (*Hedge, error)
 	// Hedge 목록 조회
@@ -191,6 +229,9 @@ type UnimplementedHedgeServiceServer struct {
 
 func (UnimplementedHedgeServiceServer) ListHedgeAccumulators(context.Context, *ListHedgeAccumulatorsRequest) (*ListHedgeAccumulatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListHedgeAccumulators not implemented")
+}
+func (UnimplementedHedgeServiceServer) StreamHedgeAccumulators(*StreamHedgeAccumulatorsRequest, HedgeService_StreamHedgeAccumulatorsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamHedgeAccumulators not implemented")
 }
 func (UnimplementedHedgeServiceServer) GetHedge(context.Context, *GetHedgeRequest) (*Hedge, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHedge not implemented")
@@ -251,6 +292,27 @@ func _HedgeService_ListHedgeAccumulators_Handler(srv interface{}, ctx context.Co
 		return srv.(HedgeServiceServer).ListHedgeAccumulators(ctx, req.(*ListHedgeAccumulatorsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _HedgeService_StreamHedgeAccumulators_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamHedgeAccumulatorsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(HedgeServiceServer).StreamHedgeAccumulators(m, &hedgeServiceStreamHedgeAccumulatorsServer{stream})
+}
+
+type HedgeService_StreamHedgeAccumulatorsServer interface {
+	Send(*HedgeAccumulatorState) error
+	grpc.ServerStream
+}
+
+type hedgeServiceStreamHedgeAccumulatorsServer struct {
+	grpc.ServerStream
+}
+
+func (x *hedgeServiceStreamHedgeAccumulatorsServer) Send(m *HedgeAccumulatorState) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _HedgeService_GetHedge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -485,6 +547,12 @@ var HedgeService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HedgeService_DeleteHedgeGroup_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamHedgeAccumulators",
+			Handler:       _HedgeService_StreamHedgeAccumulators_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "kdo/v1/hedge.proto",
 }

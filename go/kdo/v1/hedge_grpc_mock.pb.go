@@ -9,8 +9,251 @@ import (
 
 	gomock "github.com/golang/mock/gomock"
 	grpc "google.golang.org/grpc"
+	metadata "google.golang.org/grpc/metadata"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
+
+// MockHedgeService_StreamHedgeAccumulatorsClient is a mock of HedgeService_StreamHedgeAccumulatorsClient interface.
+type MockHedgeService_StreamHedgeAccumulatorsClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder
+}
+
+// MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder is the mock recorder for MockHedgeService_StreamHedgeAccumulatorsClient.
+type MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder struct {
+	mock *MockHedgeService_StreamHedgeAccumulatorsClient
+}
+
+// NewMockHedgeService_StreamHedgeAccumulatorsClient creates a new mock instance.
+func NewMockHedgeService_StreamHedgeAccumulatorsClient(ctrl *gomock.Controller) *MockHedgeService_StreamHedgeAccumulatorsClient {
+	mock := &MockHedgeService_StreamHedgeAccumulatorsClient{ctrl: ctrl}
+	mock.recorder = &MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) EXPECT() *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) Recv() (*HedgeAccumulatorState, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*HedgeAccumulatorState)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsClient)(nil).Trailer))
+}
+
+// MockHedgeService_StreamHedgeAccumulatorsServer is a mock of HedgeService_StreamHedgeAccumulatorsServer interface.
+type MockHedgeService_StreamHedgeAccumulatorsServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder
+}
+
+// MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder is the mock recorder for MockHedgeService_StreamHedgeAccumulatorsServer.
+type MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder struct {
+	mock *MockHedgeService_StreamHedgeAccumulatorsServer
+}
+
+// NewMockHedgeService_StreamHedgeAccumulatorsServer creates a new mock instance.
+func NewMockHedgeService_StreamHedgeAccumulatorsServer(ctrl *gomock.Controller) *MockHedgeService_StreamHedgeAccumulatorsServer {
+	mock := &MockHedgeService_StreamHedgeAccumulatorsServer{ctrl: ctrl}
+	mock.recorder = &MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) EXPECT() *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) Send(arg0 *HedgeAccumulatorState) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockHedgeService_StreamHedgeAccumulatorsServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockHedgeService_StreamHedgeAccumulatorsServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockHedgeService_StreamHedgeAccumulatorsServer)(nil).SetTrailer), arg0)
+}
 
 // MockHedgeServiceClient is a mock of HedgeServiceClient interface.
 type MockHedgeServiceClient struct {
@@ -215,6 +458,26 @@ func (mr *MockHedgeServiceClientMockRecorder) ListHedges(ctx, in interface{}, op
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedges", reflect.TypeOf((*MockHedgeServiceClient)(nil).ListHedges), varargs...)
 }
 
+// StreamHedgeAccumulators mocks base method.
+func (m *MockHedgeServiceClient) StreamHedgeAccumulators(ctx context.Context, in *StreamHedgeAccumulatorsRequest, opts ...grpc.CallOption) (HedgeService_StreamHedgeAccumulatorsClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamHedgeAccumulators", varargs...)
+	ret0, _ := ret[0].(HedgeService_StreamHedgeAccumulatorsClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamHedgeAccumulators indicates an expected call of StreamHedgeAccumulators.
+func (mr *MockHedgeServiceClientMockRecorder) StreamHedgeAccumulators(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamHedgeAccumulators", reflect.TypeOf((*MockHedgeServiceClient)(nil).StreamHedgeAccumulators), varargs...)
+}
+
 // UpdateHedge mocks base method.
 func (m *MockHedgeServiceClient) UpdateHedge(ctx context.Context, in *UpdateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
 	m.ctrl.T.Helper()
@@ -411,6 +674,20 @@ func (m *MockHedgeServiceServer) ListHedges(ctx context.Context, in *ListHedgesR
 func (mr *MockHedgeServiceServerMockRecorder) ListHedges(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedges", reflect.TypeOf((*MockHedgeServiceServer)(nil).ListHedges), ctx, in)
+}
+
+// StreamHedgeAccumulators mocks base method.
+func (m *MockHedgeServiceServer) StreamHedgeAccumulators(blob *StreamHedgeAccumulatorsRequest, server HedgeService_StreamHedgeAccumulatorsServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamHedgeAccumulators", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamHedgeAccumulators indicates an expected call of StreamHedgeAccumulators.
+func (mr *MockHedgeServiceServerMockRecorder) StreamHedgeAccumulators(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamHedgeAccumulators", reflect.TypeOf((*MockHedgeServiceServer)(nil).StreamHedgeAccumulators), blob, server)
 }
 
 // UpdateHedge mocks base method.

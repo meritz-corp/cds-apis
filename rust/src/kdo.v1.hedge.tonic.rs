@@ -111,6 +111,36 @@ pub mod hedge_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn stream_hedge_accumulators(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamHedgeAccumulatorsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::HedgeAccumulatorState>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.hedge.HedgeService/StreamHedgeAccumulators",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.hedge.HedgeService",
+                        "StreamHedgeAccumulators",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         pub async fn get_hedge(
             &mut self,
             request: impl tonic::IntoRequest<super::GetHedgeRequest>,
@@ -359,6 +389,19 @@ pub mod hedge_service_server {
             tonic::Response<super::ListHedgeAccumulatorsResponse>,
             tonic::Status,
         >;
+        /// Server streaming response type for the StreamHedgeAccumulators method.
+        type StreamHedgeAccumulatorsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::HedgeAccumulatorState, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_hedge_accumulators(
+            &self,
+            request: tonic::Request<super::StreamHedgeAccumulatorsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamHedgeAccumulatorsStream>,
+            tonic::Status,
+        >;
         async fn get_hedge(
             &self,
             request: tonic::Request<super::GetHedgeRequest>,
@@ -527,6 +570,59 @@ pub mod hedge_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.hedge.HedgeService/StreamHedgeAccumulators" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamHedgeAccumulatorsSvc<T: HedgeService>(pub Arc<T>);
+                    impl<
+                        T: HedgeService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamHedgeAccumulatorsRequest,
+                    > for StreamHedgeAccumulatorsSvc<T> {
+                        type Response = super::HedgeAccumulatorState;
+                        type ResponseStream = T::StreamHedgeAccumulatorsStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::StreamHedgeAccumulatorsRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as HedgeService>::stream_hedge_accumulators(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamHedgeAccumulatorsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

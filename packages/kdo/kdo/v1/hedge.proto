@@ -25,6 +25,15 @@ service HedgeService {
     option (google.api.method_signature) = "";
   }
 
+  // HedgeAccumulator 상태 실시간 스트림
+  // 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
+  rpc StreamHedgeAccumulators(StreamHedgeAccumulatorsRequest) returns (stream HedgeAccumulatorState) {
+    option (google.api.http) = {
+      get: "/v1/hedge_accumulators:stream"
+    };
+    option (google.api.method_signature) = "";
+  }
+
   // 단일 Hedge 조회
   rpc GetHedge(GetHedgeRequest) returns (Hedge) {
     option (google.api.http) = {
@@ -498,4 +507,22 @@ message ListHedgeAccumulatorsRequest {
 message ListHedgeAccumulatorsResponse {
   // HedgeAccumulator 상태 목록
   repeated HedgeAccumulatorState hedge_accumulators = 1;
+}
+
+// StreamHedgeAccumulators 요청
+message StreamHedgeAccumulatorsRequest {
+  // 필터
+  // Available filters:
+  // * portfolio_id
+  //   * `equal`
+  // * fund_code
+  //   * `equal`
+  // * source_symbol
+  //   * `equal`
+  //
+  // Examples:
+  // * filter=fund_code="0159"
+  // * filter=portfolio_id=1
+  // 빈 문자열 = 전체 accumulator 상태 스트리밍
+  string filter = 1;
 }

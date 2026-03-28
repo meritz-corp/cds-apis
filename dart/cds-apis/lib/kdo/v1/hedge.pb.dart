@@ -1763,6 +1763,66 @@ class ListHedgeAccumulatorsResponse extends $pb.GeneratedMessage {
   $pb.PbList<HedgeAccumulatorState> get hedgeAccumulators => $_getList(0);
 }
 
+/// StreamHedgeAccumulators 요청
+class StreamHedgeAccumulatorsRequest extends $pb.GeneratedMessage {
+  factory StreamHedgeAccumulatorsRequest({
+    $core.String? filter,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  StreamHedgeAccumulatorsRequest._();
+
+  factory StreamHedgeAccumulatorsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamHedgeAccumulatorsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamHedgeAccumulatorsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamHedgeAccumulatorsRequest clone() => StreamHedgeAccumulatorsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamHedgeAccumulatorsRequest copyWith(void Function(StreamHedgeAccumulatorsRequest) updates) => super.copyWith((message) => updates(message as StreamHedgeAccumulatorsRequest)) as StreamHedgeAccumulatorsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamHedgeAccumulatorsRequest create() => StreamHedgeAccumulatorsRequest._();
+  @$core.override
+  StreamHedgeAccumulatorsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamHedgeAccumulatorsRequest> createRepeated() => $pb.PbList<StreamHedgeAccumulatorsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamHedgeAccumulatorsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamHedgeAccumulatorsRequest>(create);
+  static StreamHedgeAccumulatorsRequest? _defaultInstance;
+
+  /// 필터
+  /// Available filters:
+  /// * portfolio_id
+  ///   * `equal`
+  /// * fund_code
+  ///   * `equal`
+  /// * source_symbol
+  ///   * `equal`
+  ///
+  /// Examples:
+  /// * filter=fund_code="0159"
+  /// * filter=portfolio_id=1
+  /// 빈 문자열 = 전체 accumulator 상태 스트리밍
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
