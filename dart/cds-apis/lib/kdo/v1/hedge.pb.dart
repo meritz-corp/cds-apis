@@ -1547,6 +1547,222 @@ class DeleteHedgeGroupRequest extends $pb.GeneratedMessage {
   void clearName() => $_clearField(1);
 }
 
+/// HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태
+/// bid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값
+/// ask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값
+class HedgeAccumulatorState extends $pb.GeneratedMessage {
+  factory HedgeAccumulatorState({
+    $core.int? portfolioId,
+    $core.String? fundCode,
+    $core.String? sourceSymbol,
+    $core.String? hedgeSymbol,
+    $core.double? bidAccumulator,
+    $core.double? askAccumulator,
+  }) {
+    final result = create();
+    if (portfolioId != null) result.portfolioId = portfolioId;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
+    if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
+    if (bidAccumulator != null) result.bidAccumulator = bidAccumulator;
+    if (askAccumulator != null) result.askAccumulator = askAccumulator;
+    return result;
+  }
+
+  HedgeAccumulatorState._();
+
+  factory HedgeAccumulatorState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory HedgeAccumulatorState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HedgeAccumulatorState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'sourceSymbol')
+    ..aOS(4, _omitFieldNames ? '' : 'hedgeSymbol')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'bidAccumulator', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'askAccumulator', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  HedgeAccumulatorState clone() => HedgeAccumulatorState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  HedgeAccumulatorState copyWith(void Function(HedgeAccumulatorState) updates) => super.copyWith((message) => updates(message as HedgeAccumulatorState)) as HedgeAccumulatorState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static HedgeAccumulatorState create() => HedgeAccumulatorState._();
+  @$core.override
+  HedgeAccumulatorState createEmptyInstance() => create();
+  static $pb.PbList<HedgeAccumulatorState> createRepeated() => $pb.PbList<HedgeAccumulatorState>();
+  @$core.pragma('dart2js:noInline')
+  static HedgeAccumulatorState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HedgeAccumulatorState>(create);
+  static HedgeAccumulatorState? _defaultInstance;
+
+  /// 포트폴리오 ID
+  @$pb.TagNumber(1)
+  $core.int get portfolioId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set portfolioId($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPortfolioId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPortfolioId() => $_clearField(1);
+
+  /// 소스 ETF 펀드 코드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 소스 ETF 종목 심볼
+  @$pb.TagNumber(3)
+  $core.String get sourceSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set sourceSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSourceSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSourceSymbol() => $_clearField(3);
+
+  /// 헷지 종목 심볼 (선물 등)
+  @$pb.TagNumber(4)
+  $core.String get hedgeSymbol => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set hedgeSymbol($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasHedgeSymbol() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearHedgeSymbol() => $_clearField(4);
+
+  /// 매수 방향 누적값 (선물 환산 단위)
+  @$pb.TagNumber(5)
+  $core.double get bidAccumulator => $_getN(4);
+  @$pb.TagNumber(5)
+  set bidAccumulator($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBidAccumulator() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBidAccumulator() => $_clearField(5);
+
+  /// 매도 방향 누적값 (선물 환산 단위)
+  @$pb.TagNumber(6)
+  $core.double get askAccumulator => $_getN(5);
+  @$pb.TagNumber(6)
+  set askAccumulator($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasAskAccumulator() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAskAccumulator() => $_clearField(6);
+}
+
+/// ListHedgeAccumulators 요청
+class ListHedgeAccumulatorsRequest extends $pb.GeneratedMessage {
+  factory ListHedgeAccumulatorsRequest({
+    $core.String? filter,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  ListHedgeAccumulatorsRequest._();
+
+  factory ListHedgeAccumulatorsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListHedgeAccumulatorsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListHedgeAccumulatorsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgeAccumulatorsRequest clone() => ListHedgeAccumulatorsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgeAccumulatorsRequest copyWith(void Function(ListHedgeAccumulatorsRequest) updates) => super.copyWith((message) => updates(message as ListHedgeAccumulatorsRequest)) as ListHedgeAccumulatorsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListHedgeAccumulatorsRequest create() => ListHedgeAccumulatorsRequest._();
+  @$core.override
+  ListHedgeAccumulatorsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListHedgeAccumulatorsRequest> createRepeated() => $pb.PbList<ListHedgeAccumulatorsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListHedgeAccumulatorsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListHedgeAccumulatorsRequest>(create);
+  static ListHedgeAccumulatorsRequest? _defaultInstance;
+
+  /// 필터
+  /// Available filters:
+  /// * portfolio_id
+  ///   * `equal`
+  /// * fund_code
+  ///   * `equal`
+  /// * source_symbol
+  ///   * `equal`
+  ///
+  /// Examples:
+  /// * filter=fund_code="0159"
+  /// * filter=portfolio_id=1
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
+}
+
+/// ListHedgeAccumulators 응답
+class ListHedgeAccumulatorsResponse extends $pb.GeneratedMessage {
+  factory ListHedgeAccumulatorsResponse({
+    $core.Iterable<HedgeAccumulatorState>? hedgeAccumulators,
+  }) {
+    final result = create();
+    if (hedgeAccumulators != null) result.hedgeAccumulators.addAll(hedgeAccumulators);
+    return result;
+  }
+
+  ListHedgeAccumulatorsResponse._();
+
+  factory ListHedgeAccumulatorsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListHedgeAccumulatorsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListHedgeAccumulatorsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..pc<HedgeAccumulatorState>(1, _omitFieldNames ? '' : 'hedgeAccumulators', $pb.PbFieldType.PM, subBuilder: HedgeAccumulatorState.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgeAccumulatorsResponse clone() => ListHedgeAccumulatorsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgeAccumulatorsResponse copyWith(void Function(ListHedgeAccumulatorsResponse) updates) => super.copyWith((message) => updates(message as ListHedgeAccumulatorsResponse)) as ListHedgeAccumulatorsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListHedgeAccumulatorsResponse create() => ListHedgeAccumulatorsResponse._();
+  @$core.override
+  ListHedgeAccumulatorsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListHedgeAccumulatorsResponse> createRepeated() => $pb.PbList<ListHedgeAccumulatorsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListHedgeAccumulatorsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListHedgeAccumulatorsResponse>(create);
+  static ListHedgeAccumulatorsResponse? _defaultInstance;
+
+  /// HedgeAccumulator 상태 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<HedgeAccumulatorState> get hedgeAccumulators => $_getList(0);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

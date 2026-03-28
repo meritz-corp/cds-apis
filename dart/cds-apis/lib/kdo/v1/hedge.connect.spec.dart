@@ -14,6 +14,15 @@ abstract final class HedgeService {
   /// Fully-qualified name of the HedgeService service.
   static const name = 'kdo.v1.hedge.HedgeService';
 
+  /// HedgeAccumulator 상태 목록 조회
+  /// 즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.
+  static const listHedgeAccumulators = connect.Spec(
+    '/$name/ListHedgeAccumulators',
+    connect.StreamType.unary,
+    kdov1hedge.ListHedgeAccumulatorsRequest.new,
+    kdov1hedge.ListHedgeAccumulatorsResponse.new,
+  );
+
   /// 단일 Hedge 조회
   static const getHedge = connect.Spec(
     '/$name/GetHedge',

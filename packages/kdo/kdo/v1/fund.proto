@@ -183,15 +183,6 @@ enum ProgramTradingType {
   ETF_LP_HEDGE = 3;
 }
 
-
-message LossLimitSnapshot {
-  string symbol = 1;
-  int64 quantity = 2;
-  double average_price = 3;
-  double current_price = 4;
-  int64 unrealized_pnl = 5;
-}
-
 // ========== Request/Response Messages ==========
 
 // GetFund 요청

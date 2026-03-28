@@ -409,3 +409,50 @@ final $typed_data.Uint8List deleteHedgeGroupRequestDescriptor = $convert.base64D
     'ChdEZWxldGVIZWRnZUdyb3VwUmVxdWVzdBI3CgRuYW1lGAEgASgJQiPiQQEC+kEcChprZG8uY2'
     'RzYXBpcy54eXovSGVkZ2VHcm91cFIEbmFtZQ==');
 
+@$core.Deprecated('Use hedgeAccumulatorStateDescriptor instead')
+const HedgeAccumulatorState$json = {
+  '1': 'HedgeAccumulatorState',
+  '2': [
+    {'1': 'portfolio_id', '3': 1, '4': 1, '5': 5, '10': 'portfolioId'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'source_symbol', '3': 3, '4': 1, '5': 9, '10': 'sourceSymbol'},
+    {'1': 'hedge_symbol', '3': 4, '4': 1, '5': 9, '10': 'hedgeSymbol'},
+    {'1': 'bid_accumulator', '3': 5, '4': 1, '5': 1, '10': 'bidAccumulator'},
+    {'1': 'ask_accumulator', '3': 6, '4': 1, '5': 1, '10': 'askAccumulator'},
+  ],
+};
+
+/// Descriptor for `HedgeAccumulatorState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List hedgeAccumulatorStateDescriptor = $convert.base64Decode(
+    'ChVIZWRnZUFjY3VtdWxhdG9yU3RhdGUSIQoMcG9ydGZvbGlvX2lkGAEgASgFUgtwb3J0Zm9saW'
+    '9JZBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2RlEiMKDXNvdXJjZV9zeW1ib2wYAyABKAlS'
+    'DHNvdXJjZVN5bWJvbBIhCgxoZWRnZV9zeW1ib2wYBCABKAlSC2hlZGdlU3ltYm9sEicKD2JpZF'
+    '9hY2N1bXVsYXRvchgFIAEoAVIOYmlkQWNjdW11bGF0b3ISJwoPYXNrX2FjY3VtdWxhdG9yGAYg'
+    'ASgBUg5hc2tBY2N1bXVsYXRvcg==');
+
+@$core.Deprecated('Use listHedgeAccumulatorsRequestDescriptor instead')
+const ListHedgeAccumulatorsRequest$json = {
+  '1': 'ListHedgeAccumulatorsRequest',
+  '2': [
+    {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
+  ],
+};
+
+/// Descriptor for `ListHedgeAccumulatorsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listHedgeAccumulatorsRequestDescriptor = $convert.base64Decode(
+    'ChxMaXN0SGVkZ2VBY2N1bXVsYXRvcnNSZXF1ZXN0EhYKBmZpbHRlchgBIAEoCVIGZmlsdGVy');
+
+@$core.Deprecated('Use listHedgeAccumulatorsResponseDescriptor instead')
+const ListHedgeAccumulatorsResponse$json = {
+  '1': 'ListHedgeAccumulatorsResponse',
+  '2': [
+    {'1': 'hedge_accumulators', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.hedge.HedgeAccumulatorState', '10': 'hedgeAccumulators'},
+  ],
+};
+
+/// Descriptor for `ListHedgeAccumulatorsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listHedgeAccumulatorsResponseDescriptor = $convert.base64Decode(
+    'Ch1MaXN0SGVkZ2VBY2N1bXVsYXRvcnNSZXNwb25zZRJSChJoZWRnZV9hY2N1bXVsYXRvcnMYAS'
+    'ADKAsyIy5rZG8udjEuaGVkZ2UuSGVkZ2VBY2N1bXVsYXRvclN0YXRlUhFoZWRnZUFjY3VtdWxh'
+    'dG9ycw==');
+

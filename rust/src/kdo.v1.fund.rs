@@ -130,20 +130,6 @@ pub struct SymbolLimitState {
     #[prost(int64, tag="7")]
     pub current_unfilled_short_amount: i64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LossLimitSnapshot {
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    #[prost(int64, tag="2")]
-    pub quantity: i64,
-    #[prost(double, tag="3")]
-    pub average_price: f64,
-    #[prost(double, tag="4")]
-    pub current_price: f64,
-    #[prost(int64, tag="5")]
-    pub unrealized_pnl: i64,
-}
 // ========== Request/Response Messages ==========
 
 /// GetFund 요청

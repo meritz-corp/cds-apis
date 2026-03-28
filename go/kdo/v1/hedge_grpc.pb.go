@@ -23,6 +23,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HedgeServiceClient interface {
+	// HedgeAccumulator 상태 목록 조회
+	// 즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.
+	ListHedgeAccumulators(ctx context.Context, in *ListHedgeAccumulatorsRequest, opts ...grpc.CallOption) (*ListHedgeAccumulatorsResponse, error)
 	// 단일 Hedge 조회
 	GetHedge(ctx context.Context, in *GetHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// Hedge 목록 조회
@@ -51,6 +54,15 @@ type hedgeServiceClient struct {
 
 func NewHedgeServiceClient(cc grpc.ClientConnInterface) HedgeServiceClient {
 	return &hedgeServiceClient{cc}
+}
+
+func (c *hedgeServiceClient) ListHedgeAccumulators(ctx context.Context, in *ListHedgeAccumulatorsRequest, opts ...grpc.CallOption) (*ListHedgeAccumulatorsResponse, error) {
+	out := new(ListHedgeAccumulatorsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/ListHedgeAccumulators", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *hedgeServiceClient) GetHedge(ctx context.Context, in *GetHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
@@ -147,6 +159,9 @@ func (c *hedgeServiceClient) DeleteHedgeGroup(ctx context.Context, in *DeleteHed
 // All implementations must embed UnimplementedHedgeServiceServer
 // for forward compatibility
 type HedgeServiceServer interface {
+	// HedgeAccumulator 상태 목록 조회
+	// 즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.
+	ListHedgeAccumulators(context.Context, *ListHedgeAccumulatorsRequest) (*ListHedgeAccumulatorsResponse, error)
 	// 단일 Hedge 조회
 	GetHedge(context.Context, *GetHedgeRequest) (*Hedge, error)
 	// Hedge 목록 조회
@@ -174,6 +189,9 @@ type HedgeServiceServer interface {
 type UnimplementedHedgeServiceServer struct {
 }
 
+func (UnimplementedHedgeServiceServer) ListHedgeAccumulators(context.Context, *ListHedgeAccumulatorsRequest) (*ListHedgeAccumulatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListHedgeAccumulators not implemented")
+}
 func (UnimplementedHedgeServiceServer) GetHedge(context.Context, *GetHedgeRequest) (*Hedge, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHedge not implemented")
 }
@@ -215,6 +233,24 @@ type UnsafeHedgeServiceServer interface {
 
 func RegisterHedgeServiceServer(s grpc.ServiceRegistrar, srv HedgeServiceServer) {
 	s.RegisterService(&HedgeService_ServiceDesc, srv)
+}
+
+func _HedgeService_ListHedgeAccumulators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHedgeAccumulatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HedgeServiceServer).ListHedgeAccumulators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.hedge.HedgeService/ListHedgeAccumulators",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HedgeServiceServer).ListHedgeAccumulators(ctx, req.(*ListHedgeAccumulatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _HedgeService_GetHedge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -404,6 +440,10 @@ var HedgeService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "kdo.v1.hedge.HedgeService",
 	HandlerType: (*HedgeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListHedgeAccumulators",
+			Handler:    _HedgeService_ListHedgeAccumulators_Handler,
+		},
 		{
 			MethodName: "GetHedge",
 			Handler:    _HedgeService_GetHedge_Handler,

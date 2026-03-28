@@ -322,6 +322,58 @@ pub struct DeleteHedgeGroupRequest {
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
+/// HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태
+/// bid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값
+/// ask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HedgeAccumulatorState {
+    /// 포트폴리오 ID
+    #[prost(int32, tag="1")]
+    pub portfolio_id: i32,
+    /// 소스 ETF 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 소스 ETF 종목 심볼
+    #[prost(string, tag="3")]
+    pub source_symbol: ::prost::alloc::string::String,
+    /// 헷지 종목 심볼 (선물 등)
+    #[prost(string, tag="4")]
+    pub hedge_symbol: ::prost::alloc::string::String,
+    /// 매수 방향 누적값 (선물 환산 단위)
+    #[prost(double, tag="5")]
+    pub bid_accumulator: f64,
+    /// 매도 방향 누적값 (선물 환산 단위)
+    #[prost(double, tag="6")]
+    pub ask_accumulator: f64,
+}
+/// ListHedgeAccumulators 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListHedgeAccumulatorsRequest {
+    /// 필터
+    /// Available filters:
+    /// * portfolio_id
+    ///    * `equal`
+    /// * fund_code
+    ///    * `equal`
+    /// * source_symbol
+    ///    * `equal`
+    ///
+    /// Examples:
+    /// * filter=fund_code="0159"
+    /// * filter=portfolio_id=1
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
+}
+/// ListHedgeAccumulators 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListHedgeAccumulatorsResponse {
+    /// HedgeAccumulator 상태 목록
+    #[prost(message, repeated, tag="1")]
+    pub hedge_accumulators: ::prost::alloc::vec::Vec<HedgeAccumulatorState>,
+}
 // ========== Enums ==========
 
 /// 헷지 주문 체결 가격 유형

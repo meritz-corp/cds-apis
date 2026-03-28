@@ -12,6 +12,25 @@ import "../../google/protobuf/empty.pb.dart" as googleprotobufempty;
 /// Hedge: 펀드 단위 즉시 헷지 (1:1 매핑)
 /// HedgeGroup: 포트폴리오 단위 주기적 헷지 (트리거 조건 기반)
 extension type HedgeServiceClient (connect.Transport _transport) {
+  /// HedgeAccumulator 상태 목록 조회
+  /// 즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.
+  Future<kdov1hedge.ListHedgeAccumulatorsResponse> listHedgeAccumulators(
+    kdov1hedge.ListHedgeAccumulatorsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.HedgeService.listHedgeAccumulators,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 단일 Hedge 조회
   Future<kdov1hedge.Hedge> getHedge(
     kdov1hedge.GetHedgeRequest input, {

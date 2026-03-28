@@ -155,6 +155,26 @@ func (mr *MockHedgeServiceClientMockRecorder) GetHedgeGroup(ctx, in interface{},
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHedgeGroup", reflect.TypeOf((*MockHedgeServiceClient)(nil).GetHedgeGroup), varargs...)
 }
 
+// ListHedgeAccumulators mocks base method.
+func (m *MockHedgeServiceClient) ListHedgeAccumulators(ctx context.Context, in *ListHedgeAccumulatorsRequest, opts ...grpc.CallOption) (*ListHedgeAccumulatorsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListHedgeAccumulators", varargs...)
+	ret0, _ := ret[0].(*ListHedgeAccumulatorsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListHedgeAccumulators indicates an expected call of ListHedgeAccumulators.
+func (mr *MockHedgeServiceClientMockRecorder) ListHedgeAccumulators(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedgeAccumulators", reflect.TypeOf((*MockHedgeServiceClient)(nil).ListHedgeAccumulators), varargs...)
+}
+
 // ListHedgeGroups mocks base method.
 func (m *MockHedgeServiceClient) ListHedgeGroups(ctx context.Context, in *ListHedgeGroupsRequest, opts ...grpc.CallOption) (*ListHedgeGroupsResponse, error) {
 	m.ctrl.T.Helper()
@@ -346,6 +366,21 @@ func (m *MockHedgeServiceServer) GetHedgeGroup(ctx context.Context, in *GetHedge
 func (mr *MockHedgeServiceServerMockRecorder) GetHedgeGroup(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHedgeGroup", reflect.TypeOf((*MockHedgeServiceServer)(nil).GetHedgeGroup), ctx, in)
+}
+
+// ListHedgeAccumulators mocks base method.
+func (m *MockHedgeServiceServer) ListHedgeAccumulators(ctx context.Context, in *ListHedgeAccumulatorsRequest) (*ListHedgeAccumulatorsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListHedgeAccumulators", ctx, in)
+	ret0, _ := ret[0].(*ListHedgeAccumulatorsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListHedgeAccumulators indicates an expected call of ListHedgeAccumulators.
+func (mr *MockHedgeServiceServerMockRecorder) ListHedgeAccumulators(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedgeAccumulators", reflect.TypeOf((*MockHedgeServiceServer)(nil).ListHedgeAccumulators), ctx, in)
 }
 
 // ListHedgeGroups mocks base method.

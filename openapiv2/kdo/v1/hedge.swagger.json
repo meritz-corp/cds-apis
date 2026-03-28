@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/v1/hedge_accumulators": {
+      "get": {
+        "summary": "HedgeAccumulator 상태 목록 조회\n즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.",
+        "operationId": "HedgeService_ListHedgeAccumulators",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeListHedgeAccumulatorsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "필터\nAvailable filters:\n* portfolio_id\n  * `equal`\n* fund_code\n  * `equal`\n* source_symbol\n  * `equal`\n\nExamples:\n* filter=fund_code=\"0159\"\n* filter=portfolio_id=1",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
     "/v1/hedge_groups": {
       "get": {
         "summary": "HedgeGroup 목록 조회",
@@ -665,6 +697,39 @@
         "hedgeMethod"
       ]
     },
+    "hedgeHedgeAccumulatorState": {
+      "type": "object",
+      "properties": {
+        "portfolioId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "포트폴리오 ID"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "소스 ETF 펀드 코드"
+        },
+        "sourceSymbol": {
+          "type": "string",
+          "title": "소스 ETF 종목 심볼"
+        },
+        "hedgeSymbol": {
+          "type": "string",
+          "title": "헷지 종목 심볼 (선물 등)"
+        },
+        "bidAccumulator": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 방향 누적값 (선물 환산 단위)"
+        },
+        "askAccumulator": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 방향 누적값 (선물 환산 단위)"
+        }
+      },
+      "title": "HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태\nbid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값\nask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값"
+    },
     "hedgeHedgeGroup": {
       "type": "object",
       "properties": {
@@ -765,6 +830,19 @@
         }
       },
       "title": "헷지 방식"
+    },
+    "hedgeListHedgeAccumulatorsResponse": {
+      "type": "object",
+      "properties": {
+        "hedgeAccumulators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hedgeHedgeAccumulatorState"
+          },
+          "title": "HedgeAccumulator 상태 목록"
+        }
+      },
+      "title": "ListHedgeAccumulators 응답"
     },
     "hedgeListHedgeGroupsResponse": {
       "type": "object",

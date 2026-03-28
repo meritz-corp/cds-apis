@@ -169,25 +169,6 @@ final $typed_data.Uint8List symbolLimitStateDescriptor = $convert.base64Decode(
     'kSQQodY3VycmVudF91bmZpbGxlZF9zaG9ydF9hbW91bnQYByABKANSGmN1cnJlbnRVbmZpbGxl'
     'ZFNob3J0QW1vdW50');
 
-@$core.Deprecated('Use lossLimitSnapshotDescriptor instead')
-const LossLimitSnapshot$json = {
-  '1': 'LossLimitSnapshot',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'quantity', '3': 2, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'average_price', '3': 3, '4': 1, '5': 1, '10': 'averagePrice'},
-    {'1': 'current_price', '3': 4, '4': 1, '5': 1, '10': 'currentPrice'},
-    {'1': 'unrealized_pnl', '3': 5, '4': 1, '5': 3, '10': 'unrealizedPnl'},
-  ],
-};
-
-/// Descriptor for `LossLimitSnapshot`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List lossLimitSnapshotDescriptor = $convert.base64Decode(
-    'ChFMb3NzTGltaXRTbmFwc2hvdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIaCghxdWFudGl0eR'
-    'gCIAEoA1IIcXVhbnRpdHkSIwoNYXZlcmFnZV9wcmljZRgDIAEoAVIMYXZlcmFnZVByaWNlEiMK'
-    'DWN1cnJlbnRfcHJpY2UYBCABKAFSDGN1cnJlbnRQcmljZRIlCg51bnJlYWxpemVkX3BubBgFIA'
-    'EoA1INdW5yZWFsaXplZFBubA==');
-
 @$core.Deprecated('Use getFundRequestDescriptor instead')
 const GetFundRequest$json = {
   '1': 'GetFundRequest',

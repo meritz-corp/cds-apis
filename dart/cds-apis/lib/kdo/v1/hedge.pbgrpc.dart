@@ -36,6 +36,12 @@ class HedgeServiceClient extends $grpc.Client {
 
   HedgeServiceClient(super.channel, {super.options, super.interceptors});
 
+  /// HedgeAccumulator 상태 목록 조회
+  /// 즉시 헷지의 per-side 누적기(bid/ask) 현재 값을 조회합니다.
+  $grpc.ResponseFuture<$0.ListHedgeAccumulatorsResponse> listHedgeAccumulators($0.ListHedgeAccumulatorsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listHedgeAccumulators, request, options: options);
+  }
+
   /// 단일 Hedge 조회
   $grpc.ResponseFuture<$0.Hedge> getHedge($0.GetHedgeRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getHedge, request, options: options);
@@ -88,6 +94,10 @@ class HedgeServiceClient extends $grpc.Client {
 
     // method descriptors
 
+  static final _$listHedgeAccumulators = $grpc.ClientMethod<$0.ListHedgeAccumulatorsRequest, $0.ListHedgeAccumulatorsResponse>(
+      '/kdo.v1.hedge.HedgeService/ListHedgeAccumulators',
+      ($0.ListHedgeAccumulatorsRequest value) => value.writeToBuffer(),
+      $0.ListHedgeAccumulatorsResponse.fromBuffer);
   static final _$getHedge = $grpc.ClientMethod<$0.GetHedgeRequest, $0.Hedge>(
       '/kdo.v1.hedge.HedgeService/GetHedge',
       ($0.GetHedgeRequest value) => value.writeToBuffer(),
@@ -135,6 +145,13 @@ abstract class HedgeServiceBase extends $grpc.Service {
   $core.String get $name => 'kdo.v1.hedge.HedgeService';
 
   HedgeServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.ListHedgeAccumulatorsRequest, $0.ListHedgeAccumulatorsResponse>(
+        'ListHedgeAccumulators',
+        listHedgeAccumulators_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListHedgeAccumulatorsRequest.fromBuffer(value),
+        ($0.ListHedgeAccumulatorsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetHedgeRequest, $0.Hedge>(
         'GetHedge',
         getHedge_Pre,
@@ -206,6 +223,12 @@ abstract class HedgeServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) => $0.DeleteHedgeGroupRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
   }
+
+  $async.Future<$0.ListHedgeAccumulatorsResponse> listHedgeAccumulators_Pre($grpc.ServiceCall $call, $async.Future<$0.ListHedgeAccumulatorsRequest> $request) async {
+    return listHedgeAccumulators($call, await $request);
+  }
+
+  $async.Future<$0.ListHedgeAccumulatorsResponse> listHedgeAccumulators($grpc.ServiceCall call, $0.ListHedgeAccumulatorsRequest request);
 
   $async.Future<$0.Hedge> getHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.GetHedgeRequest> $request) async {
     return getHedge($call, await $request);
