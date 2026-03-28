@@ -484,6 +484,18 @@ message HedgeAccumulatorState {
 
   // 매도 방향 누적값 (선물 환산 단위)
   double ask_accumulator = 6;
+
+  // 소스 ETF 매수 총 체결수량
+  int64 source_bid_filled_quantity = 7;
+
+  // 소스 ETF 매도 총 체결수량
+  int64 source_ask_filled_quantity = 8;
+
+  // 매수 체결에 대한 desired 헷지 수량 (선물 환산, 누적)
+  double desired_bid_hedge_quantity = 9;
+
+  // 매도 체결에 대한 desired 헷지 수량 (선물 환산, 누적)
+  double desired_ask_hedge_quantity = 10;
 }
 
 // ListHedgeAccumulators 요청

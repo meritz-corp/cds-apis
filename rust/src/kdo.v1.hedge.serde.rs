@@ -1346,6 +1346,18 @@ impl serde::Serialize for HedgeAccumulatorState {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.HedgeAccumulatorState", len)?;
         if true {
             struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
@@ -1364,6 +1376,22 @@ impl serde::Serialize for HedgeAccumulatorState {
         }
         if true {
             struct_ser.serialize_field("ask_accumulator", &self.ask_accumulator)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("source_bid_filled_quantity", ToString::to_string(&self.source_bid_filled_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("source_ask_filled_quantity", ToString::to_string(&self.source_ask_filled_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("desired_bid_hedge_quantity", &self.desired_bid_hedge_quantity)?;
+        }
+        if true {
+            struct_ser.serialize_field("desired_ask_hedge_quantity", &self.desired_ask_hedge_quantity)?;
         }
         struct_ser.end()
     }
@@ -1387,6 +1415,14 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
             "bidAccumulator",
             "ask_accumulator",
             "askAccumulator",
+            "source_bid_filled_quantity",
+            "sourceBidFilledQuantity",
+            "source_ask_filled_quantity",
+            "sourceAskFilledQuantity",
+            "desired_bid_hedge_quantity",
+            "desiredBidHedgeQuantity",
+            "desired_ask_hedge_quantity",
+            "desiredAskHedgeQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1397,6 +1433,10 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
             HedgeSymbol,
             BidAccumulator,
             AskAccumulator,
+            SourceBidFilledQuantity,
+            SourceAskFilledQuantity,
+            DesiredBidHedgeQuantity,
+            DesiredAskHedgeQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1425,6 +1465,10 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                             "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
                             "bidAccumulator" | "bid_accumulator" => Ok(GeneratedField::BidAccumulator),
                             "askAccumulator" | "ask_accumulator" => Ok(GeneratedField::AskAccumulator),
+                            "sourceBidFilledQuantity" | "source_bid_filled_quantity" => Ok(GeneratedField::SourceBidFilledQuantity),
+                            "sourceAskFilledQuantity" | "source_ask_filled_quantity" => Ok(GeneratedField::SourceAskFilledQuantity),
+                            "desiredBidHedgeQuantity" | "desired_bid_hedge_quantity" => Ok(GeneratedField::DesiredBidHedgeQuantity),
+                            "desiredAskHedgeQuantity" | "desired_ask_hedge_quantity" => Ok(GeneratedField::DesiredAskHedgeQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1450,6 +1494,10 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                 let mut hedge_symbol__ = None;
                 let mut bid_accumulator__ = None;
                 let mut ask_accumulator__ = None;
+                let mut source_bid_filled_quantity__ = None;
+                let mut source_ask_filled_quantity__ = None;
+                let mut desired_bid_hedge_quantity__ = None;
+                let mut desired_ask_hedge_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PortfolioId => {
@@ -1494,6 +1542,38 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::SourceBidFilledQuantity => {
+                            if source_bid_filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sourceBidFilledQuantity"));
+                            }
+                            source_bid_filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SourceAskFilledQuantity => {
+                            if source_ask_filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sourceAskFilledQuantity"));
+                            }
+                            source_ask_filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::DesiredBidHedgeQuantity => {
+                            if desired_bid_hedge_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("desiredBidHedgeQuantity"));
+                            }
+                            desired_bid_hedge_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::DesiredAskHedgeQuantity => {
+                            if desired_ask_hedge_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("desiredAskHedgeQuantity"));
+                            }
+                            desired_ask_hedge_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1506,6 +1586,10 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                     hedge_symbol: hedge_symbol__.unwrap_or_default(),
                     bid_accumulator: bid_accumulator__.unwrap_or_default(),
                     ask_accumulator: ask_accumulator__.unwrap_or_default(),
+                    source_bid_filled_quantity: source_bid_filled_quantity__.unwrap_or_default(),
+                    source_ask_filled_quantity: source_ask_filled_quantity__.unwrap_or_default(),
+                    desired_bid_hedge_quantity: desired_bid_hedge_quantity__.unwrap_or_default(),
+                    desired_ask_hedge_quantity: desired_ask_hedge_quantity__.unwrap_or_default(),
                 })
             }
         }

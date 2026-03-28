@@ -346,6 +346,18 @@ pub struct HedgeAccumulatorState {
     /// 매도 방향 누적값 (선물 환산 단위)
     #[prost(double, tag="6")]
     pub ask_accumulator: f64,
+    /// 소스 ETF 매수 총 체결수량
+    #[prost(int64, tag="7")]
+    pub source_bid_filled_quantity: i64,
+    /// 소스 ETF 매도 총 체결수량
+    #[prost(int64, tag="8")]
+    pub source_ask_filled_quantity: i64,
+    /// 매수 체결에 대한 desired 헷지 수량 (선물 환산, 누적)
+    #[prost(double, tag="9")]
+    pub desired_bid_hedge_quantity: f64,
+    /// 매도 체결에 대한 desired 헷지 수량 (선물 환산, 누적)
+    #[prost(double, tag="10")]
+    pub desired_ask_hedge_quantity: f64,
 }
 /// ListHedgeAccumulators 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

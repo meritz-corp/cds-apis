@@ -767,6 +767,26 @@
           "type": "number",
           "format": "double",
           "title": "매도 방향 누적값 (선물 환산 단위)"
+        },
+        "sourceBidFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "소스 ETF 매수 총 체결수량"
+        },
+        "sourceAskFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "소스 ETF 매도 총 체결수량"
+        },
+        "desiredBidHedgeQuantity": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 체결에 대한 desired 헷지 수량 (선물 환산, 누적)"
+        },
+        "desiredAskHedgeQuantity": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 체결에 대한 desired 헷지 수량 (선물 환산, 누적)"
         }
       },
       "title": "HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태\nbid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값\nask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값"
