@@ -163,6 +163,28 @@ pub mod hedge_service_client {
                 .insert(GrpcMethod::new("kdo.v1.hedge.HedgeService", "GetHedge"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn lookup_hedge(
+            &mut self,
+            request: impl tonic::IntoRequest<super::LookupHedgeRequest>,
+        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.hedge.HedgeService/LookupHedge",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.hedge.HedgeService", "LookupHedge"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn list_hedges(
             &mut self,
             request: impl tonic::IntoRequest<super::ListHedgesRequest>,
@@ -405,6 +427,10 @@ pub mod hedge_service_server {
         async fn get_hedge(
             &self,
             request: tonic::Request<super::GetHedgeRequest>,
+        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
+        async fn lookup_hedge(
+            &self,
+            request: tonic::Request<super::LookupHedgeRequest>,
         ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
         async fn list_hedges(
             &self,
@@ -657,6 +683,51 @@ pub mod hedge_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetHedgeSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.hedge.HedgeService/LookupHedge" => {
+                    #[allow(non_camel_case_types)]
+                    struct LookupHedgeSvc<T: HedgeService>(pub Arc<T>);
+                    impl<
+                        T: HedgeService,
+                    > tonic::server::UnaryService<super::LookupHedgeRequest>
+                    for LookupHedgeSvc<T> {
+                        type Response = super::Hedge;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::LookupHedgeRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as HedgeService>::lookup_hedge(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = LookupHedgeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

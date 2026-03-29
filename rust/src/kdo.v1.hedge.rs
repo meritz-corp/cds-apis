@@ -194,6 +194,17 @@ pub struct GetHedgeRequest {
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
+/// LookupHedge 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LookupHedgeRequest {
+    /// 펀드 코드
+    #[prost(string, tag="1")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 소스 종목 심볼
+    #[prost(string, tag="2")]
+    pub source_symbol: ::prost::alloc::string::String,
+}
 /// ListHedges 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

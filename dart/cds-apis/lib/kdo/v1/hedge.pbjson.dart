@@ -249,6 +249,20 @@ final $typed_data.Uint8List getHedgeRequestDescriptor = $convert.base64Decode(
     'Cg9HZXRIZWRnZVJlcXVlc3QSMgoEbmFtZRgBIAEoCUIe4kEBAvpBFwoVa2RvLmNkc2FwaXMueH'
     'l6L0hlZGdlUgRuYW1l');
 
+@$core.Deprecated('Use lookupHedgeRequestDescriptor instead')
+const LookupHedgeRequest$json = {
+  '1': 'LookupHedgeRequest',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'source_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'sourceSymbol'},
+  ],
+};
+
+/// Descriptor for `LookupHedgeRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lookupHedgeRequestDescriptor = $convert.base64Decode(
+    'ChJMb29rdXBIZWRnZVJlcXVlc3QSIQoJZnVuZF9jb2RlGAEgASgJQgTiQQECUghmdW5kQ29kZR'
+    'IpCg1zb3VyY2Vfc3ltYm9sGAIgASgJQgTiQQECUgxzb3VyY2VTeW1ib2w=');
+
 @$core.Deprecated('Use listHedgesRequestDescriptor instead')
 const ListHedgesRequest$json = {
   '1': 'ListHedgesRequest',

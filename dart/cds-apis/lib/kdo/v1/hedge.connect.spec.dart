@@ -40,6 +40,14 @@ abstract final class HedgeService {
     kdov1hedge.Hedge.new,
   );
 
+  /// fund_code + source_symbol로 Hedge 조회
+  static const lookupHedge = connect.Spec(
+    '/$name/LookupHedge',
+    connect.StreamType.unary,
+    kdov1hedge.LookupHedgeRequest.new,
+    kdov1hedge.Hedge.new,
+  );
+
   /// Hedge 목록 조회
   static const listHedges = connect.Spec(
     '/$name/ListHedges',

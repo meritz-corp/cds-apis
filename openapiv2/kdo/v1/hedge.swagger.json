@@ -253,6 +253,45 @@
         ]
       }
     },
+    "/v1/hedges:lookup": {
+      "get": {
+        "summary": "fund_code + source_symbol로 Hedge 조회",
+        "operationId": "HedgeService_LookupHedge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedge"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceSymbol",
+            "description": "소스 종목 심볼",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
     "/v1/{hedge.name}": {
       "patch": {
         "summary": "Hedge 수정",

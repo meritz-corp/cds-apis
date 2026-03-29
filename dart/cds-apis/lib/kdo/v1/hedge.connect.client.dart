@@ -68,6 +68,24 @@ extension type HedgeServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// fund_code + source_symbol로 Hedge 조회
+  Future<kdov1hedge.Hedge> lookupHedge(
+    kdov1hedge.LookupHedgeRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.HedgeService.lookupHedge,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Hedge 목록 조회
   Future<kdov1hedge.ListHedgesResponse> listHedges(
     kdov1hedge.ListHedgesRequest input, {

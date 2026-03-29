@@ -42,6 +42,14 @@ service HedgeService {
     option (google.api.method_signature) = "name";
   }
 
+  // fund_code + source_symbol로 Hedge 조회
+  rpc LookupHedge(LookupHedgeRequest) returns (Hedge) {
+    option (google.api.http) = {
+      get: "/v1/hedges:lookup"
+    };
+    option (google.api.method_signature) = "fund_code,source_symbol";
+  }
+
   // Hedge 목록 조회
   rpc ListHedges(ListHedgesRequest) returns (ListHedgesResponse) {
     option (google.api.http) = {
@@ -340,6 +348,15 @@ message GetHedgeRequest {
       type: "kdo.cdsapis.xyz/Hedge"
     }
   ];
+}
+
+// LookupHedge 요청
+message LookupHedgeRequest {
+  // 펀드 코드
+  string fund_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 소스 종목 심볼
+  string source_symbol = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // ListHedges 요청

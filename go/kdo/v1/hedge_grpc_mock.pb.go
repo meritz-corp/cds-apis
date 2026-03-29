@@ -458,6 +458,26 @@ func (mr *MockHedgeServiceClientMockRecorder) ListHedges(ctx, in interface{}, op
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedges", reflect.TypeOf((*MockHedgeServiceClient)(nil).ListHedges), varargs...)
 }
 
+// LookupHedge mocks base method.
+func (m *MockHedgeServiceClient) LookupHedge(ctx context.Context, in *LookupHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "LookupHedge", varargs...)
+	ret0, _ := ret[0].(*Hedge)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LookupHedge indicates an expected call of LookupHedge.
+func (mr *MockHedgeServiceClientMockRecorder) LookupHedge(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LookupHedge", reflect.TypeOf((*MockHedgeServiceClient)(nil).LookupHedge), varargs...)
+}
+
 // StreamHedgeAccumulators mocks base method.
 func (m *MockHedgeServiceClient) StreamHedgeAccumulators(ctx context.Context, in *StreamHedgeAccumulatorsRequest, opts ...grpc.CallOption) (HedgeService_StreamHedgeAccumulatorsClient, error) {
 	m.ctrl.T.Helper()
@@ -674,6 +694,21 @@ func (m *MockHedgeServiceServer) ListHedges(ctx context.Context, in *ListHedgesR
 func (mr *MockHedgeServiceServerMockRecorder) ListHedges(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedges", reflect.TypeOf((*MockHedgeServiceServer)(nil).ListHedges), ctx, in)
+}
+
+// LookupHedge mocks base method.
+func (m *MockHedgeServiceServer) LookupHedge(ctx context.Context, in *LookupHedgeRequest) (*Hedge, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "LookupHedge", ctx, in)
+	ret0, _ := ret[0].(*Hedge)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LookupHedge indicates an expected call of LookupHedge.
+func (mr *MockHedgeServiceServerMockRecorder) LookupHedge(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LookupHedge", reflect.TypeOf((*MockHedgeServiceServer)(nil).LookupHedge), ctx, in)
 }
 
 // StreamHedgeAccumulators mocks base method.

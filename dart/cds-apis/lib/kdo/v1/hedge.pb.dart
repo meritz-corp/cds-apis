@@ -923,6 +923,67 @@ class GetHedgeRequest extends $pb.GeneratedMessage {
   void clearName() => $_clearField(1);
 }
 
+/// LookupHedge 요청
+class LookupHedgeRequest extends $pb.GeneratedMessage {
+  factory LookupHedgeRequest({
+    $core.String? fundCode,
+    $core.String? sourceSymbol,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
+    return result;
+  }
+
+  LookupHedgeRequest._();
+
+  factory LookupHedgeRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LookupHedgeRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LookupHedgeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'sourceSymbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LookupHedgeRequest clone() => LookupHedgeRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LookupHedgeRequest copyWith(void Function(LookupHedgeRequest) updates) => super.copyWith((message) => updates(message as LookupHedgeRequest)) as LookupHedgeRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LookupHedgeRequest create() => LookupHedgeRequest._();
+  @$core.override
+  LookupHedgeRequest createEmptyInstance() => create();
+  static $pb.PbList<LookupHedgeRequest> createRepeated() => $pb.PbList<LookupHedgeRequest>();
+  @$core.pragma('dart2js:noInline')
+  static LookupHedgeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LookupHedgeRequest>(create);
+  static LookupHedgeRequest? _defaultInstance;
+
+  /// 펀드 코드
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  /// 소스 종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get sourceSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set sourceSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSourceSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSourceSymbol() => $_clearField(2);
+}
+
 /// ListHedges 요청
 class ListHedgesRequest extends $pb.GeneratedMessage {
   factory ListHedgesRequest({
