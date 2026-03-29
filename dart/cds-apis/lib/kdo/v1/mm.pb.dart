@@ -27,11 +27,13 @@ class MmEntry extends $pb.GeneratedMessage {
     $core.String? symbol,
     MmState? state,
     MmConfiguration? config,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (state != null) result.state = state;
     if (config != null) result.config = config;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -44,6 +46,7 @@ class MmEntry extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..e<MmState>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MmState.MM_STATE_UNSPECIFIED, valueOf: MmState.valueOf, enumValues: MmState.values)
     ..aOM<MmConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MmConfiguration.create)
+    ..aOS(4, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -95,6 +98,16 @@ class MmEntry extends $pb.GeneratedMessage {
   void clearConfig() => $_clearField(3);
   @$pb.TagNumber(3)
   MmConfiguration ensureConfig() => $_ensure(2);
+
+  /// 펀드 코드
+  @$pb.TagNumber(4)
+  $core.String get fundCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set fundCode($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFundCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFundCode() => $_clearField(4);
 }
 
 /// MM 상태 상세
@@ -105,6 +118,7 @@ class MmStatus extends $pb.GeneratedMessage {
     MmConfiguration? config,
     $core.bool? registered,
     $core.bool? active,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -112,6 +126,7 @@ class MmStatus extends $pb.GeneratedMessage {
     if (config != null) result.config = config;
     if (registered != null) result.registered = registered;
     if (active != null) result.active = active;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -126,6 +141,7 @@ class MmStatus extends $pb.GeneratedMessage {
     ..aOM<MmConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MmConfiguration.create)
     ..aOB(4, _omitFieldNames ? '' : 'registered')
     ..aOB(5, _omitFieldNames ? '' : 'active')
+    ..aOS(6, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -197,6 +213,16 @@ class MmStatus extends $pb.GeneratedMessage {
   $core.bool hasActive() => $_has(4);
   @$pb.TagNumber(5)
   void clearActive() => $_clearField(5);
+
+  /// 펀드 코드
+  @$pb.TagNumber(6)
+  $core.String get fundCode => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set fundCode($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasFundCode() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFundCode() => $_clearField(6);
 }
 
 /// MM 엔진 설정 (MmConfig 대응)

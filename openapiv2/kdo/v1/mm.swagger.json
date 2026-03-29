@@ -636,6 +636,10 @@
         "config": {
           "$ref": "#/definitions/mmMmConfiguration",
           "title": "MM 설정"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
         }
       },
       "title": "MM 심볼 정보"
@@ -751,6 +755,10 @@
         "active": {
           "type": "boolean",
           "title": "활성 여부 (paused가 아닌 경우)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
         }
       },
       "title": "MM 상태 상세"

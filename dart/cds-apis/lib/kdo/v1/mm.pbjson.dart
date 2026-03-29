@@ -37,6 +37,7 @@ const MmEntry$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.mm.MmState', '10': 'state'},
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '10': 'config'},
+    {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '10': 'fundCode'},
   ],
 };
 
@@ -44,7 +45,7 @@ const MmEntry$json = {
 final $typed_data.Uint8List mmEntryDescriptor = $convert.base64Decode(
     'CgdNbUVudHJ5EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEigKBXN0YXRlGAIgASgOMhIua2RvLn'
     'YxLm1tLk1tU3RhdGVSBXN0YXRlEjIKBmNvbmZpZxgDIAEoCzIaLmtkby52MS5tbS5NbUNvbmZp'
-    'Z3VyYXRpb25SBmNvbmZpZw==');
+    'Z3VyYXRpb25SBmNvbmZpZxIbCglmdW5kX2NvZGUYBCABKAlSCGZ1bmRDb2Rl');
 
 @$core.Deprecated('Use mmStatusDescriptor instead')
 const MmStatus$json = {
@@ -55,6 +56,7 @@ const MmStatus$json = {
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '10': 'config'},
     {'1': 'registered', '3': 4, '4': 1, '5': 8, '10': 'registered'},
     {'1': 'active', '3': 5, '4': 1, '5': 8, '10': 'active'},
+    {'1': 'fund_code', '3': 6, '4': 1, '5': 9, '10': 'fundCode'},
   ],
 };
 
@@ -63,7 +65,7 @@ final $typed_data.Uint8List mmStatusDescriptor = $convert.base64Decode(
     'CghNbVN0YXR1cxIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIoCgVzdGF0ZRgCIAEoDjISLmtkby'
     '52MS5tbS5NbVN0YXRlUgVzdGF0ZRIyCgZjb25maWcYAyABKAsyGi5rZG8udjEubW0uTW1Db25m'
     'aWd1cmF0aW9uUgZjb25maWcSHgoKcmVnaXN0ZXJlZBgEIAEoCFIKcmVnaXN0ZXJlZBIWCgZhY3'
-    'RpdmUYBSABKAhSBmFjdGl2ZQ==');
+    'RpdmUYBSABKAhSBmFjdGl2ZRIbCglmdW5kX2NvZGUYBiABKAlSCGZ1bmRDb2Rl');
 
 @$core.Deprecated('Use mmConfigurationDescriptor instead')
 const MmConfiguration$json = {

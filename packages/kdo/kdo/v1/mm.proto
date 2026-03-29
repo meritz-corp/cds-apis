@@ -145,6 +145,9 @@ message MmEntry {
 
   // MM 설정
   MmConfiguration config = 3;
+
+  // 펀드 코드
+  string fund_code = 4;
 }
 
 // MM 상태 상세
@@ -163,6 +166,9 @@ message MmStatus {
 
   // 활성 여부 (paused가 아닌 경우)
   bool active = 5;
+
+  // 펀드 코드
+  string fund_code = 6;
 }
 
 // MM 엔진 설정 (MmConfig 대응)

@@ -733,6 +733,9 @@ impl serde::Serialize for MmEntry {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmEntry", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -744,6 +747,9 @@ impl serde::Serialize for MmEntry {
         }
         if let Some(v) = self.config.as_ref() {
             struct_ser.serialize_field("config", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         struct_ser.end()
     }
@@ -758,6 +764,8 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
             "symbol",
             "state",
             "config",
+            "fund_code",
+            "fundCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -765,6 +773,7 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
             Symbol,
             State,
             Config,
+            FundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -790,6 +799,7 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "state" => Ok(GeneratedField::State),
                             "config" => Ok(GeneratedField::Config),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -812,6 +822,7 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
                 let mut symbol__ = None;
                 let mut state__ = None;
                 let mut config__ = None;
+                let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -832,6 +843,12 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
                             }
                             config__ = map_.next_value()?;
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -841,6 +858,7 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
                     symbol: symbol__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     config: config__,
+                    fund_code: fund_code__.unwrap_or_default(),
                 })
             }
         }
@@ -1382,6 +1400,9 @@ impl serde::Serialize for MmStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStatus", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -1400,6 +1421,9 @@ impl serde::Serialize for MmStatus {
         if true {
             struct_ser.serialize_field("active", &self.active)?;
         }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
         struct_ser.end()
     }
 }
@@ -1415,6 +1439,8 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
             "config",
             "registered",
             "active",
+            "fund_code",
+            "fundCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1424,6 +1450,7 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
             Config,
             Registered,
             Active,
+            FundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1451,6 +1478,7 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
                             "config" => Ok(GeneratedField::Config),
                             "registered" => Ok(GeneratedField::Registered),
                             "active" => Ok(GeneratedField::Active),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1475,6 +1503,7 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
                 let mut config__ = None;
                 let mut registered__ = None;
                 let mut active__ = None;
+                let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -1507,6 +1536,12 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
                             }
                             active__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1518,6 +1553,7 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
                     config: config__,
                     registered: registered__.unwrap_or_default(),
                     active: active__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
                 })
             }
         }

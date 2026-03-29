@@ -17,6 +17,9 @@ pub struct MmEntry {
     /// MM 설정
     #[prost(message, optional, tag="3")]
     pub config: ::core::option::Option<MmConfiguration>,
+    /// 펀드 코드
+    #[prost(string, tag="4")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// MM 상태 상세
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -37,6 +40,9 @@ pub struct MmStatus {
     /// 활성 여부 (paused가 아닌 경우)
     #[prost(bool, tag="5")]
     pub active: bool,
+    /// 펀드 코드
+    #[prost(string, tag="6")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// MM 엔진 설정 (MmConfig 대응)
 #[allow(clippy::derive_partial_eq_without_eq)]
