@@ -3,7 +3,7 @@
 /// ETF LP 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLp {
+pub struct Mm {
     /// ETF 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -23,7 +23,7 @@ pub struct EtfLp {
     pub tick_size: i64,
     /// 동적 offset 조정 설정
     #[prost(message, optional, tag="10")]
-    pub offset: ::core::option::Option<EtfLpOffset>,
+    pub offset: ::core::option::Option<MmOffset>,
     /// 활성화 여부
     #[prost(bool, tag="11")]
     pub enabled: bool,
@@ -53,12 +53,12 @@ pub struct EtfLp {
     pub momentum_sensitivity: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="20")]
-    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    pub quantity_limit: ::core::option::Option<MmQuantityLimit>,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct EtfLpQuantityLimit {
+pub struct MmQuantityLimit {
     /// 매수 수량 상한 (gross 누적 매수 체결 기준)
     #[prost(int64, tag="2")]
     pub max_bid_quantity: i64,
@@ -128,12 +128,12 @@ pub struct LeverageFuturePricing {
     #[prost(double, tag="2")]
     pub prev_future: f64,
 }
-// ========== ETF LP Status Messages ==========
+// ========== MM Status Messages ==========
 
 /// ETF LP 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLpStatus {
+pub struct MmStatus {
     /// ETF 심볼
     #[prost(string, tag="1")]
     pub etf_symbol: ::prost::alloc::string::String,
@@ -146,7 +146,7 @@ pub struct EtfLpStatus {
     #[prost(double, optional, tag="4")]
     pub bid_basis: ::core::option::Option<f64>,
     /// LP 상태
-    #[prost(enumeration="EtfLpState", tag="8")]
+    #[prost(enumeration="MmState", tag="8")]
     pub state: i32,
     /// 가격 정보
     #[prost(message, optional, tag="9")]
@@ -156,10 +156,10 @@ pub struct EtfLpStatus {
     pub fill_statistics: ::core::option::Option<FillStatistics>,
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
-    pub offset: ::core::option::Option<EtfLpOffset>,
+    pub offset: ::core::option::Option<MmOffset>,
     /// 헷지 정보
     #[prost(message, optional, tag="12")]
-    pub hedge: ::core::option::Option<EtfLpHedge>,
+    pub hedge: ::core::option::Option<MmHedge>,
     /// 매수 호가 조정값
     #[prost(double, optional, tag="13")]
     pub bid_adjustment: ::core::option::Option<f64>,
@@ -189,12 +189,12 @@ pub struct EtfLpStatus {
     pub momentum_ask_adjustment: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="22")]
-    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    pub quantity_limit: ::core::option::Option<MmQuantityLimit>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLpStatusUpdate {
+pub struct MmStatusUpdate {
     /// ETF 심볼
     #[prost(string, tag="1")]
     pub etf_symbol: ::prost::alloc::string::String,
@@ -207,7 +207,7 @@ pub struct EtfLpStatusUpdate {
     #[prost(double, optional, tag="4")]
     pub bid_basis: ::core::option::Option<f64>,
     /// LP 상태
-    #[prost(enumeration="EtfLpState", optional, tag="8")]
+    #[prost(enumeration="MmState", optional, tag="8")]
     pub state: ::core::option::Option<i32>,
     /// 가격 정보
     #[prost(message, optional, tag="9")]
@@ -217,7 +217,7 @@ pub struct EtfLpStatusUpdate {
     pub fill_statistics: ::core::option::Option<FillStatistics>,
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
-    pub offset: ::core::option::Option<EtfLpOffset>,
+    pub offset: ::core::option::Option<MmOffset>,
     /// 매수 호가 조정값
     #[prost(double, optional, tag="12")]
     pub bid_adjustment: ::core::option::Option<f64>,
@@ -247,12 +247,12 @@ pub struct EtfLpStatusUpdate {
     pub momentum_ask_adjustment: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="21")]
-    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    pub quantity_limit: ::core::option::Option<MmQuantityLimit>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct EtfLpOffset {
+pub struct MmOffset {
     ///
     #[prost(double, tag="1")]
     pub bid_offset: f64,
@@ -285,7 +285,7 @@ pub struct EtfLpOffset {
 /// ETF LP 헷지 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLpHedge {
+pub struct MmHedge {
     /// 헷지 대상 종목 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -337,21 +337,6 @@ pub struct OrderStats {
     #[prost(int64, tag="6")]
     pub daily_filled_quantity: i64,
 }
-// Order Limiter 상태
-// message OrderLimitStatus {
-//   // 일일 누적 체결 수량 (i64)
-//   int64 daily_filled_quantity = 1;
-//
-//   // 일일 누적 체결 수량 한도 (i64)
-//   int64 daily_cumulative_limit = 2;
-//
-//   // 시간 프레임별 주문 개수 현황
-//   repeated TimeFrameStatus time_frame_status = 3;
-//
-//   // 일일 사용률 (%)
-//   double daily_usage_percent = 4;
-// }
-
 /// 시간 프레임별 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -385,27 +370,27 @@ pub struct LpPricing {
 }
 // ========== Request/Response Messages ==========
 
-/// CreateEtfLp
+/// CreateMm
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateEtfLpRequest {
+pub struct CreateMmRequest {
     /// 생성할 ETF LP 설정
     #[prost(message, optional, tag="1")]
-    pub etf_lp: ::core::option::Option<EtfLp>,
+    pub mm: ::core::option::Option<Mm>,
 }
-/// GetEtfLp
+/// GetMm
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetEtfLpRequest {
+pub struct GetMmRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
 }
-/// ListEtfLps
+/// ListMms
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListEtfLpsRequest {
+pub struct ListMmsRequest {
     /// 페이지 크기 (optional)
     #[prost(uint32, optional, tag="1")]
     pub page_size: ::core::option::Option<u32>,
@@ -426,17 +411,17 @@ pub struct ListEtfLpsRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListEtfLpsResponse {
+pub struct ListMmsResponse {
     /// ETF 목록
     #[prost(message, repeated, tag="1")]
-    pub etf_lps: ::prost::alloc::vec::Vec<EtfLp>,
+    pub mms: ::prost::alloc::vec::Vec<Mm>,
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListEtfLpStatusesRequest {
+pub struct ListMmStatusesRequest {
     /// 페이지 크기 (optional)
     #[prost(uint32, optional, tag="1")]
     pub page_size: ::core::option::Option<u32>,
@@ -456,7 +441,7 @@ pub struct ListEtfLpStatusesRequest {
     // Examples
     // * filter=etf_symbol:"005930"
     // * filter=fund_code="0159"
-    // * filter=state=ETF_LP_STATE_RUNNING
+    // * filter=state=MM_STATE_RUNNING
     // * filter=fill_statistics.buy_filled_quantity > 1000
 
     #[prost(string, tag="3")]
@@ -473,18 +458,18 @@ pub struct ListEtfLpStatusesRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListEtfLpStatusesResponse {
+pub struct ListMmStatusesResponse {
     /// ETF 목록
     #[prost(message, repeated, tag="1")]
-    pub etf_lp_statuses: ::prost::alloc::vec::Vec<EtfLpStatus>,
+    pub mm_statuses: ::prost::alloc::vec::Vec<MmStatus>,
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-/// UpdateEtfLp
+/// UpdateMm
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateEtfLpRequest {
+pub struct UpdateMmRequest {
     /// ETF 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -499,7 +484,7 @@ pub struct UpdateEtfLpRequest {
     pub depth: ::core::option::Option<u32>,
     /// 동적 offset 조정 설정
     #[prost(message, optional, tag="5")]
-    pub offset: ::core::option::Option<EtfLpOffset>,
+    pub offset: ::core::option::Option<MmOffset>,
     #[prost(double, optional, tag="6")]
     pub ask_basis: ::core::option::Option<f64>,
     #[prost(double, optional, tag="7")]
@@ -527,21 +512,21 @@ pub struct UpdateEtfLpRequest {
     pub momentum_sensitivity: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="15")]
-    pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    pub quantity_limit: ::core::option::Option<MmQuantityLimit>,
 }
-/// GetEtfLpStatus
+/// GetMmStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetEtfLpStatusRequest {
+pub struct GetMmStatusRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
 }
-/// StreamEtfLpStatus
+/// StreamMmStatusUpdate
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamEtfLpStatusUpdateRequest {
+pub struct StreamMmStatusUpdateRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
@@ -550,7 +535,7 @@ pub struct StreamEtfLpStatusUpdateRequest {
 /// ETF LP 시작 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StartEtfLpRequest {
+pub struct StartMmRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
@@ -559,10 +544,10 @@ pub struct StartEtfLpRequest {
 /// ETF LP 시작 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StartEtfLpResponse {
+pub struct StartMmResponse {
     /// LP 상태
     #[prost(message, optional, tag="1")]
-    pub status: ::core::option::Option<EtfLpStatus>,
+    pub status: ::core::option::Option<MmStatus>,
     /// 메시지
     #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,
@@ -570,7 +555,7 @@ pub struct StartEtfLpResponse {
 /// ETF LP 중지 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StopEtfLpRequest {
+pub struct StopMmRequest {
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
@@ -579,15 +564,15 @@ pub struct StopEtfLpRequest {
 /// ETF LP 중지 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StopEtfLpResponse {
+pub struct StopMmResponse {
     /// LP 상태
     #[prost(message, optional, tag="1")]
-    pub status: ::core::option::Option<EtfLpStatus>,
+    pub status: ::core::option::Option<MmStatus>,
     /// 메시지
     #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,
 }
-/// StreamEtfErrors 요청
+/// StreamLpEvents 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamLpEventsRequest {
@@ -661,35 +646,35 @@ impl PositionAdjustmentStrategy {
 /// ETF LP 상태 enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum EtfLpState {
+pub enum MmState {
     Unspecified = 0,
     Idle = 1,
     Running = 2,
     Stopping = 3,
     Error = 4,
 }
-impl EtfLpState {
+impl MmState {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            EtfLpState::Unspecified => "ETF_LP_STATE_UNSPECIFIED",
-            EtfLpState::Idle => "ETF_LP_STATE_IDLE",
-            EtfLpState::Running => "ETF_LP_STATE_RUNNING",
-            EtfLpState::Stopping => "ETF_LP_STATE_STOPPING",
-            EtfLpState::Error => "ETF_LP_STATE_ERROR",
+            MmState::Unspecified => "MM_STATE_UNSPECIFIED",
+            MmState::Idle => "MM_STATE_IDLE",
+            MmState::Running => "MM_STATE_RUNNING",
+            MmState::Stopping => "MM_STATE_STOPPING",
+            MmState::Error => "MM_STATE_ERROR",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "ETF_LP_STATE_UNSPECIFIED" => Some(Self::Unspecified),
-            "ETF_LP_STATE_IDLE" => Some(Self::Idle),
-            "ETF_LP_STATE_RUNNING" => Some(Self::Running),
-            "ETF_LP_STATE_STOPPING" => Some(Self::Stopping),
-            "ETF_LP_STATE_ERROR" => Some(Self::Error),
+            "MM_STATE_UNSPECIFIED" => Some(Self::Unspecified),
+            "MM_STATE_IDLE" => Some(Self::Idle),
+            "MM_STATE_RUNNING" => Some(Self::Running),
+            "MM_STATE_STOPPING" => Some(Self::Stopping),
+            "MM_STATE_ERROR" => Some(Self::Error),
             _ => None,
         }
     }

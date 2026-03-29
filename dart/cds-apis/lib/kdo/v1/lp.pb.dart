@@ -22,15 +22,15 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 export 'lp.pbenum.dart';
 
 /// ETF LP 설정
-class EtfLp extends $pb.GeneratedMessage {
-  factory EtfLp({
+class Mm extends $pb.GeneratedMessage {
+  factory Mm({
     $core.String? symbol,
     $core.String? fundCode,
     $core.double? askBasis,
     $core.double? bidBasis,
     $core.int? depth,
     $fixnum.Int64? tickSize,
-    EtfLpOffset? offset,
+    MmOffset? offset,
     $core.bool? enabled,
     EtfPricing? pricingMethod,
     $core.double? bidAdjustment,
@@ -40,7 +40,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.bool? momentumEnabled,
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
-    EtfLpQuantityLimit? quantityLimit,
+    MmQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -63,19 +63,19 @@ class EtfLp extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfLp._();
+  Mm._();
 
-  factory EtfLp.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLp.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory Mm.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Mm.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLp', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Mm', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..a<$core.double>(3, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..a<$core.int>(8, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
-    ..aOM<EtfLpOffset>(10, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
+    ..aOM<MmOffset>(10, _omitFieldNames ? '' : 'offset', subBuilder: MmOffset.create)
     ..aOB(11, _omitFieldNames ? '' : 'enabled')
     ..aOM<EtfPricing>(12, _omitFieldNames ? '' : 'pricingMethod', subBuilder: EtfPricing.create)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
@@ -85,26 +85,26 @@ class EtfLp extends $pb.GeneratedMessage {
     ..aOB(17, _omitFieldNames ? '' : 'momentumEnabled')
     ..a<$core.int>(18, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
-    ..aOM<EtfLpQuantityLimit>(20, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..aOM<MmQuantityLimit>(20, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MmQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLp clone() => EtfLp()..mergeFromMessage(this);
+  Mm clone() => Mm()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLp copyWith(void Function(EtfLp) updates) => super.copyWith((message) => updates(message as EtfLp)) as EtfLp;
+  Mm copyWith(void Function(Mm) updates) => super.copyWith((message) => updates(message as Mm)) as Mm;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLp create() => EtfLp._();
+  static Mm create() => Mm._();
   @$core.override
-  EtfLp createEmptyInstance() => create();
-  static $pb.PbList<EtfLp> createRepeated() => $pb.PbList<EtfLp>();
+  Mm createEmptyInstance() => create();
+  static $pb.PbList<Mm> createRepeated() => $pb.PbList<Mm>();
   @$core.pragma('dart2js:noInline')
-  static EtfLp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLp>(create);
-  static EtfLp? _defaultInstance;
+  static Mm getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Mm>(create);
+  static Mm? _defaultInstance;
 
   /// ETF 심볼
   @$pb.TagNumber(1)
@@ -166,15 +166,15 @@ class EtfLp extends $pb.GeneratedMessage {
 
   /// 동적 offset 조정 설정
   @$pb.TagNumber(10)
-  EtfLpOffset get offset => $_getN(6);
+  MmOffset get offset => $_getN(6);
   @$pb.TagNumber(10)
-  set offset(EtfLpOffset value) => $_setField(10, value);
+  set offset(MmOffset value) => $_setField(10, value);
   @$pb.TagNumber(10)
   $core.bool hasOffset() => $_has(6);
   @$pb.TagNumber(10)
   void clearOffset() => $_clearField(10);
   @$pb.TagNumber(10)
-  EtfLpOffset ensureOffset() => $_ensure(6);
+  MmOffset ensureOffset() => $_ensure(6);
 
   /// 활성화 여부
   @$pb.TagNumber(11)
@@ -270,20 +270,20 @@ class EtfLp extends $pb.GeneratedMessage {
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(20)
-  EtfLpQuantityLimit get quantityLimit => $_getN(16);
+  MmQuantityLimit get quantityLimit => $_getN(16);
   @$pb.TagNumber(20)
-  set quantityLimit(EtfLpQuantityLimit value) => $_setField(20, value);
+  set quantityLimit(MmQuantityLimit value) => $_setField(20, value);
   @$pb.TagNumber(20)
   $core.bool hasQuantityLimit() => $_has(16);
   @$pb.TagNumber(20)
   void clearQuantityLimit() => $_clearField(20);
   @$pb.TagNumber(20)
-  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(16);
+  MmQuantityLimit ensureQuantityLimit() => $_ensure(16);
 }
 
 /// 매수/매도 수량 한도
-class EtfLpQuantityLimit extends $pb.GeneratedMessage {
-  factory EtfLpQuantityLimit({
+class MmQuantityLimit extends $pb.GeneratedMessage {
+  factory MmQuantityLimit({
     $fixnum.Int64? maxBidQuantity,
     $fixnum.Int64? maxAskQuantity,
     $fixnum.Int64? netQuantity,
@@ -297,12 +297,12 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfLpQuantityLimit._();
+  MmQuantityLimit._();
 
-  factory EtfLpQuantityLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpQuantityLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MmQuantityLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmQuantityLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aInt64(2, _omitFieldNames ? '' : 'maxBidQuantity')
     ..aInt64(4, _omitFieldNames ? '' : 'maxAskQuantity')
     ..aInt64(5, _omitFieldNames ? '' : 'netQuantity')
@@ -311,21 +311,21 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpQuantityLimit clone() => EtfLpQuantityLimit()..mergeFromMessage(this);
+  MmQuantityLimit clone() => MmQuantityLimit()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpQuantityLimit copyWith(void Function(EtfLpQuantityLimit) updates) => super.copyWith((message) => updates(message as EtfLpQuantityLimit)) as EtfLpQuantityLimit;
+  MmQuantityLimit copyWith(void Function(MmQuantityLimit) updates) => super.copyWith((message) => updates(message as MmQuantityLimit)) as MmQuantityLimit;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLpQuantityLimit create() => EtfLpQuantityLimit._();
+  static MmQuantityLimit create() => MmQuantityLimit._();
   @$core.override
-  EtfLpQuantityLimit createEmptyInstance() => create();
-  static $pb.PbList<EtfLpQuantityLimit> createRepeated() => $pb.PbList<EtfLpQuantityLimit>();
+  MmQuantityLimit createEmptyInstance() => create();
+  static $pb.PbList<MmQuantityLimit> createRepeated() => $pb.PbList<MmQuantityLimit>();
   @$core.pragma('dart2js:noInline')
-  static EtfLpQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpQuantityLimit>(create);
-  static EtfLpQuantityLimit? _defaultInstance;
+  static MmQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmQuantityLimit>(create);
+  static MmQuantityLimit? _defaultInstance;
 
   /// 매수 수량 상한 (gross 누적 매수 체결 기준)
   @$pb.TagNumber(2)
@@ -655,17 +655,17 @@ class LeverageFuturePricing extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 상태
-class EtfLpStatus extends $pb.GeneratedMessage {
-  factory EtfLpStatus({
+class MmStatus extends $pb.GeneratedMessage {
+  factory MmStatus({
     $core.String? etfSymbol,
     $core.String? fundCode,
     $core.double? askBasis,
     $core.double? bidBasis,
-    EtfLpState? state,
+    MmState? state,
     LpPricing? pricing,
     FillStatistics? fillStatistics,
-    EtfLpOffset? offset,
-    EtfLpHedge? hedge,
+    MmOffset? offset,
+    MmHedge? hedge,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
     $fixnum.Int64? bidQuantity,
@@ -675,7 +675,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     $core.double? momentumSensitivity,
     $core.double? momentumBidAdjustment,
     $core.double? momentumAskAdjustment,
-    EtfLpQuantityLimit? quantityLimit,
+    MmQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -700,21 +700,21 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfLpStatus._();
+  MmStatus._();
 
-  factory EtfLpStatus.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpStatus.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MmStatus.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmStatus.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..a<$core.double>(3, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
-    ..e<EtfLpState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
+    ..e<MmState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MmState.MM_STATE_UNSPECIFIED, valueOf: MmState.valueOf, enumValues: MmState.values)
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
-    ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
-    ..aOM<EtfLpHedge>(12, _omitFieldNames ? '' : 'hedge', subBuilder: EtfLpHedge.create)
+    ..aOM<MmOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: MmOffset.create)
+    ..aOM<MmHedge>(12, _omitFieldNames ? '' : 'hedge', subBuilder: MmHedge.create)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aInt64(15, _omitFieldNames ? '' : 'bidQuantity')
@@ -724,26 +724,26 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..a<$core.double>(20, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(21, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
-    ..aOM<EtfLpQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..aOM<MmQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MmQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpStatus clone() => EtfLpStatus()..mergeFromMessage(this);
+  MmStatus clone() => MmStatus()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpStatus copyWith(void Function(EtfLpStatus) updates) => super.copyWith((message) => updates(message as EtfLpStatus)) as EtfLpStatus;
+  MmStatus copyWith(void Function(MmStatus) updates) => super.copyWith((message) => updates(message as MmStatus)) as MmStatus;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLpStatus create() => EtfLpStatus._();
+  static MmStatus create() => MmStatus._();
   @$core.override
-  EtfLpStatus createEmptyInstance() => create();
-  static $pb.PbList<EtfLpStatus> createRepeated() => $pb.PbList<EtfLpStatus>();
+  MmStatus createEmptyInstance() => create();
+  static $pb.PbList<MmStatus> createRepeated() => $pb.PbList<MmStatus>();
   @$core.pragma('dart2js:noInline')
-  static EtfLpStatus getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpStatus>(create);
-  static EtfLpStatus? _defaultInstance;
+  static MmStatus getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmStatus>(create);
+  static MmStatus? _defaultInstance;
 
   /// ETF 심볼
   @$pb.TagNumber(1)
@@ -786,9 +786,9 @@ class EtfLpStatus extends $pb.GeneratedMessage {
 
   /// LP 상태
   @$pb.TagNumber(8)
-  EtfLpState get state => $_getN(4);
+  MmState get state => $_getN(4);
   @$pb.TagNumber(8)
-  set state(EtfLpState value) => $_setField(8, value);
+  set state(MmState value) => $_setField(8, value);
   @$pb.TagNumber(8)
   $core.bool hasState() => $_has(4);
   @$pb.TagNumber(8)
@@ -820,27 +820,27 @@ class EtfLpStatus extends $pb.GeneratedMessage {
 
   /// 동적 offset 조정 설정 (optional)
   @$pb.TagNumber(11)
-  EtfLpOffset get offset => $_getN(7);
+  MmOffset get offset => $_getN(7);
   @$pb.TagNumber(11)
-  set offset(EtfLpOffset value) => $_setField(11, value);
+  set offset(MmOffset value) => $_setField(11, value);
   @$pb.TagNumber(11)
   $core.bool hasOffset() => $_has(7);
   @$pb.TagNumber(11)
   void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
-  EtfLpOffset ensureOffset() => $_ensure(7);
+  MmOffset ensureOffset() => $_ensure(7);
 
   /// 헷지 정보
   @$pb.TagNumber(12)
-  EtfLpHedge get hedge => $_getN(8);
+  MmHedge get hedge => $_getN(8);
   @$pb.TagNumber(12)
-  set hedge(EtfLpHedge value) => $_setField(12, value);
+  set hedge(MmHedge value) => $_setField(12, value);
   @$pb.TagNumber(12)
   $core.bool hasHedge() => $_has(8);
   @$pb.TagNumber(12)
   void clearHedge() => $_clearField(12);
   @$pb.TagNumber(12)
-  EtfLpHedge ensureHedge() => $_ensure(8);
+  MmHedge ensureHedge() => $_ensure(8);
 
   /// 매수 호가 조정값
   @$pb.TagNumber(13)
@@ -934,28 +934,28 @@ class EtfLpStatus extends $pb.GeneratedMessage {
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(22)
-  EtfLpQuantityLimit get quantityLimit => $_getN(18);
+  MmQuantityLimit get quantityLimit => $_getN(18);
   @$pb.TagNumber(22)
-  set quantityLimit(EtfLpQuantityLimit value) => $_setField(22, value);
+  set quantityLimit(MmQuantityLimit value) => $_setField(22, value);
   @$pb.TagNumber(22)
   $core.bool hasQuantityLimit() => $_has(18);
   @$pb.TagNumber(22)
   void clearQuantityLimit() => $_clearField(22);
   @$pb.TagNumber(22)
-  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(18);
+  MmQuantityLimit ensureQuantityLimit() => $_ensure(18);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
-class EtfLpStatusUpdate extends $pb.GeneratedMessage {
-  factory EtfLpStatusUpdate({
+class MmStatusUpdate extends $pb.GeneratedMessage {
+  factory MmStatusUpdate({
     $core.String? etfSymbol,
     $core.String? fundCode,
     $core.double? askBasis,
     $core.double? bidBasis,
-    EtfLpState? state,
+    MmState? state,
     LpPricing? pricing,
     FillStatistics? fillStatistics,
-    EtfLpOffset? offset,
+    MmOffset? offset,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
     $fixnum.Int64? bidQuantity,
@@ -965,7 +965,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     $core.double? momentumSensitivity,
     $core.double? momentumBidAdjustment,
     $core.double? momentumAskAdjustment,
-    EtfLpQuantityLimit? quantityLimit,
+    MmQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -989,20 +989,20 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfLpStatusUpdate._();
+  MmStatusUpdate._();
 
-  factory EtfLpStatusUpdate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpStatusUpdate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MmStatusUpdate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmStatusUpdate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..a<$core.double>(3, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
-    ..e<EtfLpState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
+    ..e<MmState>(8, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MmState.MM_STATE_UNSPECIFIED, valueOf: MmState.valueOf, enumValues: MmState.values)
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
-    ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
+    ..aOM<MmOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: MmOffset.create)
     ..a<$core.double>(12, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aInt64(14, _omitFieldNames ? '' : 'bidQuantity')
@@ -1012,26 +1012,26 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(20, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
-    ..aOM<EtfLpQuantityLimit>(21, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..aOM<MmQuantityLimit>(21, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MmQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpStatusUpdate clone() => EtfLpStatusUpdate()..mergeFromMessage(this);
+  MmStatusUpdate clone() => MmStatusUpdate()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpStatusUpdate copyWith(void Function(EtfLpStatusUpdate) updates) => super.copyWith((message) => updates(message as EtfLpStatusUpdate)) as EtfLpStatusUpdate;
+  MmStatusUpdate copyWith(void Function(MmStatusUpdate) updates) => super.copyWith((message) => updates(message as MmStatusUpdate)) as MmStatusUpdate;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLpStatusUpdate create() => EtfLpStatusUpdate._();
+  static MmStatusUpdate create() => MmStatusUpdate._();
   @$core.override
-  EtfLpStatusUpdate createEmptyInstance() => create();
-  static $pb.PbList<EtfLpStatusUpdate> createRepeated() => $pb.PbList<EtfLpStatusUpdate>();
+  MmStatusUpdate createEmptyInstance() => create();
+  static $pb.PbList<MmStatusUpdate> createRepeated() => $pb.PbList<MmStatusUpdate>();
   @$core.pragma('dart2js:noInline')
-  static EtfLpStatusUpdate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpStatusUpdate>(create);
-  static EtfLpStatusUpdate? _defaultInstance;
+  static MmStatusUpdate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmStatusUpdate>(create);
+  static MmStatusUpdate? _defaultInstance;
 
   /// ETF 심볼
   @$pb.TagNumber(1)
@@ -1074,9 +1074,9 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
 
   /// LP 상태
   @$pb.TagNumber(8)
-  EtfLpState get state => $_getN(4);
+  MmState get state => $_getN(4);
   @$pb.TagNumber(8)
-  set state(EtfLpState value) => $_setField(8, value);
+  set state(MmState value) => $_setField(8, value);
   @$pb.TagNumber(8)
   $core.bool hasState() => $_has(4);
   @$pb.TagNumber(8)
@@ -1108,15 +1108,15 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
 
   /// 동적 offset 조정 설정 (optional)
   @$pb.TagNumber(11)
-  EtfLpOffset get offset => $_getN(7);
+  MmOffset get offset => $_getN(7);
   @$pb.TagNumber(11)
-  set offset(EtfLpOffset value) => $_setField(11, value);
+  set offset(MmOffset value) => $_setField(11, value);
   @$pb.TagNumber(11)
   $core.bool hasOffset() => $_has(7);
   @$pb.TagNumber(11)
   void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
-  EtfLpOffset ensureOffset() => $_ensure(7);
+  MmOffset ensureOffset() => $_ensure(7);
 
   /// 매수 호가 조정값
   @$pb.TagNumber(12)
@@ -1210,20 +1210,20 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(21)
-  EtfLpQuantityLimit get quantityLimit => $_getN(17);
+  MmQuantityLimit get quantityLimit => $_getN(17);
   @$pb.TagNumber(21)
-  set quantityLimit(EtfLpQuantityLimit value) => $_setField(21, value);
+  set quantityLimit(MmQuantityLimit value) => $_setField(21, value);
   @$pb.TagNumber(21)
   $core.bool hasQuantityLimit() => $_has(17);
   @$pb.TagNumber(21)
   void clearQuantityLimit() => $_clearField(21);
   @$pb.TagNumber(21)
-  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
+  MmQuantityLimit ensureQuantityLimit() => $_ensure(17);
 }
 
 /// 자동 offset 조정 설정
-class EtfLpOffset extends $pb.GeneratedMessage {
-  factory EtfLpOffset({
+class MmOffset extends $pb.GeneratedMessage {
+  factory MmOffset({
     $core.double? bidOffset,
     $core.double? askOffset,
     $core.double? minOffset,
@@ -1253,12 +1253,12 @@ class EtfLpOffset extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfLpOffset._();
+  MmOffset._();
 
-  factory EtfLpOffset.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MmOffset.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'minOffset', $pb.PbFieldType.OD)
@@ -1275,21 +1275,21 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpOffset clone() => EtfLpOffset()..mergeFromMessage(this);
+  MmOffset clone() => MmOffset()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpOffset copyWith(void Function(EtfLpOffset) updates) => super.copyWith((message) => updates(message as EtfLpOffset)) as EtfLpOffset;
+  MmOffset copyWith(void Function(MmOffset) updates) => super.copyWith((message) => updates(message as MmOffset)) as MmOffset;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLpOffset create() => EtfLpOffset._();
+  static MmOffset create() => MmOffset._();
   @$core.override
-  EtfLpOffset createEmptyInstance() => create();
-  static $pb.PbList<EtfLpOffset> createRepeated() => $pb.PbList<EtfLpOffset>();
+  MmOffset createEmptyInstance() => create();
+  static $pb.PbList<MmOffset> createRepeated() => $pb.PbList<MmOffset>();
   @$core.pragma('dart2js:noInline')
-  static EtfLpOffset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpOffset>(create);
-  static EtfLpOffset? _defaultInstance;
+  static MmOffset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmOffset>(create);
+  static MmOffset? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.double get bidOffset => $_getN(0);
@@ -1404,8 +1404,8 @@ class EtfLpOffset extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 헷지 설정
-class EtfLpHedge extends $pb.GeneratedMessage {
-  factory EtfLpHedge({
+class MmHedge extends $pb.GeneratedMessage {
+  factory MmHedge({
     $core.String? symbol,
     $core.String? fund,
     $fixnum.Int64? filledQuantityPerHedge,
@@ -1417,12 +1417,12 @@ class EtfLpHedge extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfLpHedge._();
+  MmHedge._();
 
-  factory EtfLpHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MmHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..aInt64(3, _omitFieldNames ? '' : 'filledQuantityPerHedge')
@@ -1430,21 +1430,21 @@ class EtfLpHedge extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpHedge clone() => EtfLpHedge()..mergeFromMessage(this);
+  MmHedge clone() => MmHedge()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpHedge copyWith(void Function(EtfLpHedge) updates) => super.copyWith((message) => updates(message as EtfLpHedge)) as EtfLpHedge;
+  MmHedge copyWith(void Function(MmHedge) updates) => super.copyWith((message) => updates(message as MmHedge)) as MmHedge;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfLpHedge create() => EtfLpHedge._();
+  static MmHedge create() => MmHedge._();
   @$core.override
-  EtfLpHedge createEmptyInstance() => create();
-  static $pb.PbList<EtfLpHedge> createRepeated() => $pb.PbList<EtfLpHedge>();
+  MmHedge createEmptyInstance() => create();
+  static $pb.PbList<MmHedge> createRepeated() => $pb.PbList<MmHedge>();
   @$core.pragma('dart2js:noInline')
-  static EtfLpHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpHedge>(create);
-  static EtfLpHedge? _defaultInstance;
+  static MmHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmHedge>(create);
+  static MmHedge? _defaultInstance;
 
   /// 헷지 대상 종목 심볼
   @$pb.TagNumber(1)
@@ -1849,59 +1849,59 @@ class LpPricing extends $pb.GeneratedMessage {
   void clearEtfBidNav() => $_clearField(4);
 }
 
-/// CreateEtfLp
-class CreateEtfLpRequest extends $pb.GeneratedMessage {
-  factory CreateEtfLpRequest({
-    EtfLp? etfLp,
+/// CreateMm
+class CreateMmRequest extends $pb.GeneratedMessage {
+  factory CreateMmRequest({
+    Mm? mm,
   }) {
     final result = create();
-    if (etfLp != null) result.etfLp = etfLp;
+    if (mm != null) result.mm = mm;
     return result;
   }
 
-  CreateEtfLpRequest._();
+  CreateMmRequest._();
 
-  factory CreateEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory CreateEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory CreateMmRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CreateMmRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOM<EtfLp>(1, _omitFieldNames ? '' : 'etfLp', subBuilder: EtfLp.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateMmRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOM<Mm>(1, _omitFieldNames ? '' : 'mm', subBuilder: Mm.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateEtfLpRequest clone() => CreateEtfLpRequest()..mergeFromMessage(this);
+  CreateMmRequest clone() => CreateMmRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateEtfLpRequest copyWith(void Function(CreateEtfLpRequest) updates) => super.copyWith((message) => updates(message as CreateEtfLpRequest)) as CreateEtfLpRequest;
+  CreateMmRequest copyWith(void Function(CreateMmRequest) updates) => super.copyWith((message) => updates(message as CreateMmRequest)) as CreateMmRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static CreateEtfLpRequest create() => CreateEtfLpRequest._();
+  static CreateMmRequest create() => CreateMmRequest._();
   @$core.override
-  CreateEtfLpRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateEtfLpRequest> createRepeated() => $pb.PbList<CreateEtfLpRequest>();
+  CreateMmRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateMmRequest> createRepeated() => $pb.PbList<CreateMmRequest>();
   @$core.pragma('dart2js:noInline')
-  static CreateEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateEtfLpRequest>(create);
-  static CreateEtfLpRequest? _defaultInstance;
+  static CreateMmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateMmRequest>(create);
+  static CreateMmRequest? _defaultInstance;
 
   /// 생성할 ETF LP 설정
   @$pb.TagNumber(1)
-  EtfLp get etfLp => $_getN(0);
+  Mm get mm => $_getN(0);
   @$pb.TagNumber(1)
-  set etfLp(EtfLp value) => $_setField(1, value);
+  set mm(Mm value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasEtfLp() => $_has(0);
+  $core.bool hasMm() => $_has(0);
   @$pb.TagNumber(1)
-  void clearEtfLp() => $_clearField(1);
+  void clearMm() => $_clearField(1);
   @$pb.TagNumber(1)
-  EtfLp ensureEtfLp() => $_ensure(0);
+  Mm ensureMm() => $_ensure(0);
 }
 
-/// GetEtfLp
-class GetEtfLpRequest extends $pb.GeneratedMessage {
-  factory GetEtfLpRequest({
+/// GetMm
+class GetMmRequest extends $pb.GeneratedMessage {
+  factory GetMmRequest({
     $core.String? etf,
     $core.String? fund,
   }) {
@@ -1911,33 +1911,33 @@ class GetEtfLpRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  GetEtfLpRequest._();
+  GetMmRequest._();
 
-  factory GetEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory GetEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory GetMmRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetMmRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMmRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetEtfLpRequest clone() => GetEtfLpRequest()..mergeFromMessage(this);
+  GetMmRequest clone() => GetMmRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetEtfLpRequest copyWith(void Function(GetEtfLpRequest) updates) => super.copyWith((message) => updates(message as GetEtfLpRequest)) as GetEtfLpRequest;
+  GetMmRequest copyWith(void Function(GetMmRequest) updates) => super.copyWith((message) => updates(message as GetMmRequest)) as GetMmRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetEtfLpRequest create() => GetEtfLpRequest._();
+  static GetMmRequest create() => GetMmRequest._();
   @$core.override
-  GetEtfLpRequest createEmptyInstance() => create();
-  static $pb.PbList<GetEtfLpRequest> createRepeated() => $pb.PbList<GetEtfLpRequest>();
+  GetMmRequest createEmptyInstance() => create();
+  static $pb.PbList<GetMmRequest> createRepeated() => $pb.PbList<GetMmRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfLpRequest>(create);
-  static GetEtfLpRequest? _defaultInstance;
+  static GetMmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMmRequest>(create);
+  static GetMmRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -1958,9 +1958,9 @@ class GetEtfLpRequest extends $pb.GeneratedMessage {
   void clearFund() => $_clearField(2);
 }
 
-/// ListEtfLps
-class ListEtfLpsRequest extends $pb.GeneratedMessage {
-  factory ListEtfLpsRequest({
+/// ListMms
+class ListMmsRequest extends $pb.GeneratedMessage {
+  factory ListMmsRequest({
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? filter,
@@ -1972,12 +1972,12 @@ class ListEtfLpsRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  ListEtfLpsRequest._();
+  ListMmsRequest._();
 
-  factory ListEtfLpsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListEtfLpsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListMmsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListEtfLpsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
     ..aOS(2, _omitFieldNames ? '' : 'pageToken')
     ..aOS(3, _omitFieldNames ? '' : 'filter')
@@ -1985,21 +1985,21 @@ class ListEtfLpsRequest extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpsRequest clone() => ListEtfLpsRequest()..mergeFromMessage(this);
+  ListMmsRequest clone() => ListMmsRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpsRequest copyWith(void Function(ListEtfLpsRequest) updates) => super.copyWith((message) => updates(message as ListEtfLpsRequest)) as ListEtfLpsRequest;
+  ListMmsRequest copyWith(void Function(ListMmsRequest) updates) => super.copyWith((message) => updates(message as ListMmsRequest)) as ListMmsRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpsRequest create() => ListEtfLpsRequest._();
+  static ListMmsRequest create() => ListMmsRequest._();
   @$core.override
-  ListEtfLpsRequest createEmptyInstance() => create();
-  static $pb.PbList<ListEtfLpsRequest> createRepeated() => $pb.PbList<ListEtfLpsRequest>();
+  ListMmsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListMmsRequest> createRepeated() => $pb.PbList<ListMmsRequest>();
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListEtfLpsRequest>(create);
-  static ListEtfLpsRequest? _defaultInstance;
+  static ListMmsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmsRequest>(create);
+  static ListMmsRequest? _defaultInstance;
 
   /// 페이지 크기 (optional)
   @$pb.TagNumber(1)
@@ -2040,48 +2040,48 @@ class ListEtfLpsRequest extends $pb.GeneratedMessage {
   void clearFilter() => $_clearField(3);
 }
 
-class ListEtfLpsResponse extends $pb.GeneratedMessage {
-  factory ListEtfLpsResponse({
-    $core.Iterable<EtfLp>? etfLps,
+class ListMmsResponse extends $pb.GeneratedMessage {
+  factory ListMmsResponse({
+    $core.Iterable<Mm>? mms,
     $core.String? nextPageToken,
   }) {
     final result = create();
-    if (etfLps != null) result.etfLps.addAll(etfLps);
+    if (mms != null) result.mms.addAll(mms);
     if (nextPageToken != null) result.nextPageToken = nextPageToken;
     return result;
   }
 
-  ListEtfLpsResponse._();
+  ListMmsResponse._();
 
-  factory ListEtfLpsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListEtfLpsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListMmsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListEtfLpsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..pc<EtfLp>(1, _omitFieldNames ? '' : 'etfLps', $pb.PbFieldType.PM, subBuilder: EtfLp.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..pc<Mm>(1, _omitFieldNames ? '' : 'mms', $pb.PbFieldType.PM, subBuilder: Mm.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpsResponse clone() => ListEtfLpsResponse()..mergeFromMessage(this);
+  ListMmsResponse clone() => ListMmsResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpsResponse copyWith(void Function(ListEtfLpsResponse) updates) => super.copyWith((message) => updates(message as ListEtfLpsResponse)) as ListEtfLpsResponse;
+  ListMmsResponse copyWith(void Function(ListMmsResponse) updates) => super.copyWith((message) => updates(message as ListMmsResponse)) as ListMmsResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpsResponse create() => ListEtfLpsResponse._();
+  static ListMmsResponse create() => ListMmsResponse._();
   @$core.override
-  ListEtfLpsResponse createEmptyInstance() => create();
-  static $pb.PbList<ListEtfLpsResponse> createRepeated() => $pb.PbList<ListEtfLpsResponse>();
+  ListMmsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListMmsResponse> createRepeated() => $pb.PbList<ListMmsResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListEtfLpsResponse>(create);
-  static ListEtfLpsResponse? _defaultInstance;
+  static ListMmsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmsResponse>(create);
+  static ListMmsResponse? _defaultInstance;
 
   /// ETF 목록
   @$pb.TagNumber(1)
-  $pb.PbList<EtfLp> get etfLps => $_getList(0);
+  $pb.PbList<Mm> get mms => $_getList(0);
 
   /// 다음 페이지 토큰
   @$pb.TagNumber(2)
@@ -2094,8 +2094,8 @@ class ListEtfLpsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
-class ListEtfLpStatusesRequest extends $pb.GeneratedMessage {
-  factory ListEtfLpStatusesRequest({
+class ListMmStatusesRequest extends $pb.GeneratedMessage {
+  factory ListMmStatusesRequest({
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? filter,
@@ -2109,12 +2109,12 @@ class ListEtfLpStatusesRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  ListEtfLpStatusesRequest._();
+  ListMmStatusesRequest._();
 
-  factory ListEtfLpStatusesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListEtfLpStatusesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListMmStatusesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmStatusesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListEtfLpStatusesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmStatusesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
     ..aOS(2, _omitFieldNames ? '' : 'pageToken')
     ..aOS(3, _omitFieldNames ? '' : 'filter')
@@ -2123,21 +2123,21 @@ class ListEtfLpStatusesRequest extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpStatusesRequest clone() => ListEtfLpStatusesRequest()..mergeFromMessage(this);
+  ListMmStatusesRequest clone() => ListMmStatusesRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpStatusesRequest copyWith(void Function(ListEtfLpStatusesRequest) updates) => super.copyWith((message) => updates(message as ListEtfLpStatusesRequest)) as ListEtfLpStatusesRequest;
+  ListMmStatusesRequest copyWith(void Function(ListMmStatusesRequest) updates) => super.copyWith((message) => updates(message as ListMmStatusesRequest)) as ListMmStatusesRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpStatusesRequest create() => ListEtfLpStatusesRequest._();
+  static ListMmStatusesRequest create() => ListMmStatusesRequest._();
   @$core.override
-  ListEtfLpStatusesRequest createEmptyInstance() => create();
-  static $pb.PbList<ListEtfLpStatusesRequest> createRepeated() => $pb.PbList<ListEtfLpStatusesRequest>();
+  ListMmStatusesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListMmStatusesRequest> createRepeated() => $pb.PbList<ListMmStatusesRequest>();
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpStatusesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListEtfLpStatusesRequest>(create);
-  static ListEtfLpStatusesRequest? _defaultInstance;
+  static ListMmStatusesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmStatusesRequest>(create);
+  static ListMmStatusesRequest? _defaultInstance;
 
   /// 페이지 크기 (optional)
   @$pb.TagNumber(1)
@@ -2185,48 +2185,48 @@ class ListEtfLpStatusesRequest extends $pb.GeneratedMessage {
   void clearOrderBy() => $_clearField(5);
 }
 
-class ListEtfLpStatusesResponse extends $pb.GeneratedMessage {
-  factory ListEtfLpStatusesResponse({
-    $core.Iterable<EtfLpStatus>? etfLpStatuses,
+class ListMmStatusesResponse extends $pb.GeneratedMessage {
+  factory ListMmStatusesResponse({
+    $core.Iterable<MmStatus>? mmStatuses,
     $core.String? nextPageToken,
   }) {
     final result = create();
-    if (etfLpStatuses != null) result.etfLpStatuses.addAll(etfLpStatuses);
+    if (mmStatuses != null) result.mmStatuses.addAll(mmStatuses);
     if (nextPageToken != null) result.nextPageToken = nextPageToken;
     return result;
   }
 
-  ListEtfLpStatusesResponse._();
+  ListMmStatusesResponse._();
 
-  factory ListEtfLpStatusesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ListEtfLpStatusesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ListMmStatusesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmStatusesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListEtfLpStatusesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..pc<EtfLpStatus>(1, _omitFieldNames ? '' : 'etfLpStatuses', $pb.PbFieldType.PM, subBuilder: EtfLpStatus.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmStatusesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..pc<MmStatus>(1, _omitFieldNames ? '' : 'mmStatuses', $pb.PbFieldType.PM, subBuilder: MmStatus.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpStatusesResponse clone() => ListEtfLpStatusesResponse()..mergeFromMessage(this);
+  ListMmStatusesResponse clone() => ListMmStatusesResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListEtfLpStatusesResponse copyWith(void Function(ListEtfLpStatusesResponse) updates) => super.copyWith((message) => updates(message as ListEtfLpStatusesResponse)) as ListEtfLpStatusesResponse;
+  ListMmStatusesResponse copyWith(void Function(ListMmStatusesResponse) updates) => super.copyWith((message) => updates(message as ListMmStatusesResponse)) as ListMmStatusesResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpStatusesResponse create() => ListEtfLpStatusesResponse._();
+  static ListMmStatusesResponse create() => ListMmStatusesResponse._();
   @$core.override
-  ListEtfLpStatusesResponse createEmptyInstance() => create();
-  static $pb.PbList<ListEtfLpStatusesResponse> createRepeated() => $pb.PbList<ListEtfLpStatusesResponse>();
+  ListMmStatusesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListMmStatusesResponse> createRepeated() => $pb.PbList<ListMmStatusesResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListEtfLpStatusesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListEtfLpStatusesResponse>(create);
-  static ListEtfLpStatusesResponse? _defaultInstance;
+  static ListMmStatusesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmStatusesResponse>(create);
+  static ListMmStatusesResponse? _defaultInstance;
 
   /// ETF 목록
   @$pb.TagNumber(1)
-  $pb.PbList<EtfLpStatus> get etfLpStatuses => $_getList(0);
+  $pb.PbList<MmStatus> get mmStatuses => $_getList(0);
 
   /// 다음 페이지 토큰
   @$pb.TagNumber(2)
@@ -2239,13 +2239,13 @@ class ListEtfLpStatusesResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
-/// UpdateEtfLp
-class UpdateEtfLpRequest extends $pb.GeneratedMessage {
-  factory UpdateEtfLpRequest({
+/// UpdateMm
+class UpdateMmRequest extends $pb.GeneratedMessage {
+  factory UpdateMmRequest({
     $core.String? symbol,
     $core.String? fundCode,
     $core.int? depth,
-    EtfLpOffset? offset,
+    MmOffset? offset,
     $core.double? askBasis,
     $core.double? bidBasis,
     $fixnum.Int64? bidQuantity,
@@ -2255,7 +2255,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $core.bool? momentumEnabled,
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
-    EtfLpQuantityLimit? quantityLimit,
+    MmQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2275,16 +2275,16 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  UpdateEtfLpRequest._();
+  UpdateMmRequest._();
 
-  factory UpdateEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory UpdateEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory UpdateMmRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateMmRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMmRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
-    ..aOM<EtfLpOffset>(5, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
+    ..aOM<MmOffset>(5, _omitFieldNames ? '' : 'offset', subBuilder: MmOffset.create)
     ..a<$core.double>(6, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(7, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..aInt64(8, _omitFieldNames ? '' : 'bidQuantity')
@@ -2294,26 +2294,26 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..aOB(12, _omitFieldNames ? '' : 'momentumEnabled')
     ..a<$core.int>(13, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
-    ..aOM<EtfLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..aOM<MmQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MmQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateEtfLpRequest clone() => UpdateEtfLpRequest()..mergeFromMessage(this);
+  UpdateMmRequest clone() => UpdateMmRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateEtfLpRequest copyWith(void Function(UpdateEtfLpRequest) updates) => super.copyWith((message) => updates(message as UpdateEtfLpRequest)) as UpdateEtfLpRequest;
+  UpdateMmRequest copyWith(void Function(UpdateMmRequest) updates) => super.copyWith((message) => updates(message as UpdateMmRequest)) as UpdateMmRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static UpdateEtfLpRequest create() => UpdateEtfLpRequest._();
+  static UpdateMmRequest create() => UpdateMmRequest._();
   @$core.override
-  UpdateEtfLpRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateEtfLpRequest> createRepeated() => $pb.PbList<UpdateEtfLpRequest>();
+  UpdateMmRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateMmRequest> createRepeated() => $pb.PbList<UpdateMmRequest>();
   @$core.pragma('dart2js:noInline')
-  static UpdateEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateEtfLpRequest>(create);
-  static UpdateEtfLpRequest? _defaultInstance;
+  static UpdateMmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateMmRequest>(create);
+  static UpdateMmRequest? _defaultInstance;
 
   /// ETF 심볼
   @$pb.TagNumber(1)
@@ -2347,15 +2347,15 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
 
   /// 동적 offset 조정 설정
   @$pb.TagNumber(5)
-  EtfLpOffset get offset => $_getN(3);
+  MmOffset get offset => $_getN(3);
   @$pb.TagNumber(5)
-  set offset(EtfLpOffset value) => $_setField(5, value);
+  set offset(MmOffset value) => $_setField(5, value);
   @$pb.TagNumber(5)
   $core.bool hasOffset() => $_has(3);
   @$pb.TagNumber(5)
   void clearOffset() => $_clearField(5);
   @$pb.TagNumber(5)
-  EtfLpOffset ensureOffset() => $_ensure(3);
+  MmOffset ensureOffset() => $_ensure(3);
 
   @$pb.TagNumber(6)
   $core.double get askBasis => $_getN(4);
@@ -2447,20 +2447,20 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(15)
-  EtfLpQuantityLimit get quantityLimit => $_getN(13);
+  MmQuantityLimit get quantityLimit => $_getN(13);
   @$pb.TagNumber(15)
-  set quantityLimit(EtfLpQuantityLimit value) => $_setField(15, value);
+  set quantityLimit(MmQuantityLimit value) => $_setField(15, value);
   @$pb.TagNumber(15)
   $core.bool hasQuantityLimit() => $_has(13);
   @$pb.TagNumber(15)
   void clearQuantityLimit() => $_clearField(15);
   @$pb.TagNumber(15)
-  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(13);
+  MmQuantityLimit ensureQuantityLimit() => $_ensure(13);
 }
 
-/// GetEtfLpStatus
-class GetEtfLpStatusRequest extends $pb.GeneratedMessage {
-  factory GetEtfLpStatusRequest({
+/// GetMmStatus
+class GetMmStatusRequest extends $pb.GeneratedMessage {
+  factory GetMmStatusRequest({
     $core.String? etf,
     $core.String? fund,
   }) {
@@ -2470,33 +2470,33 @@ class GetEtfLpStatusRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  GetEtfLpStatusRequest._();
+  GetMmStatusRequest._();
 
-  factory GetEtfLpStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory GetEtfLpStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory GetMmStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetMmStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfLpStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMmStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetEtfLpStatusRequest clone() => GetEtfLpStatusRequest()..mergeFromMessage(this);
+  GetMmStatusRequest clone() => GetMmStatusRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetEtfLpStatusRequest copyWith(void Function(GetEtfLpStatusRequest) updates) => super.copyWith((message) => updates(message as GetEtfLpStatusRequest)) as GetEtfLpStatusRequest;
+  GetMmStatusRequest copyWith(void Function(GetMmStatusRequest) updates) => super.copyWith((message) => updates(message as GetMmStatusRequest)) as GetMmStatusRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetEtfLpStatusRequest create() => GetEtfLpStatusRequest._();
+  static GetMmStatusRequest create() => GetMmStatusRequest._();
   @$core.override
-  GetEtfLpStatusRequest createEmptyInstance() => create();
-  static $pb.PbList<GetEtfLpStatusRequest> createRepeated() => $pb.PbList<GetEtfLpStatusRequest>();
+  GetMmStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<GetMmStatusRequest> createRepeated() => $pb.PbList<GetMmStatusRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetEtfLpStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfLpStatusRequest>(create);
-  static GetEtfLpStatusRequest? _defaultInstance;
+  static GetMmStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMmStatusRequest>(create);
+  static GetMmStatusRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -2517,9 +2517,9 @@ class GetEtfLpStatusRequest extends $pb.GeneratedMessage {
   void clearFund() => $_clearField(2);
 }
 
-/// StreamEtfLpStatus
-class StreamEtfLpStatusUpdateRequest extends $pb.GeneratedMessage {
-  factory StreamEtfLpStatusUpdateRequest({
+/// StreamMmStatusUpdate
+class StreamMmStatusUpdateRequest extends $pb.GeneratedMessage {
+  factory StreamMmStatusUpdateRequest({
     $core.String? etf,
     $core.String? fund,
   }) {
@@ -2529,33 +2529,33 @@ class StreamEtfLpStatusUpdateRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  StreamEtfLpStatusUpdateRequest._();
+  StreamMmStatusUpdateRequest._();
 
-  factory StreamEtfLpStatusUpdateRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamEtfLpStatusUpdateRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StreamMmStatusUpdateRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamMmStatusUpdateRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfLpStatusUpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmStatusUpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfLpStatusUpdateRequest clone() => StreamEtfLpStatusUpdateRequest()..mergeFromMessage(this);
+  StreamMmStatusUpdateRequest clone() => StreamMmStatusUpdateRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamEtfLpStatusUpdateRequest copyWith(void Function(StreamEtfLpStatusUpdateRequest) updates) => super.copyWith((message) => updates(message as StreamEtfLpStatusUpdateRequest)) as StreamEtfLpStatusUpdateRequest;
+  StreamMmStatusUpdateRequest copyWith(void Function(StreamMmStatusUpdateRequest) updates) => super.copyWith((message) => updates(message as StreamMmStatusUpdateRequest)) as StreamMmStatusUpdateRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StreamEtfLpStatusUpdateRequest create() => StreamEtfLpStatusUpdateRequest._();
+  static StreamMmStatusUpdateRequest create() => StreamMmStatusUpdateRequest._();
   @$core.override
-  StreamEtfLpStatusUpdateRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamEtfLpStatusUpdateRequest> createRepeated() => $pb.PbList<StreamEtfLpStatusUpdateRequest>();
+  StreamMmStatusUpdateRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamMmStatusUpdateRequest> createRepeated() => $pb.PbList<StreamMmStatusUpdateRequest>();
   @$core.pragma('dart2js:noInline')
-  static StreamEtfLpStatusUpdateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfLpStatusUpdateRequest>(create);
-  static StreamEtfLpStatusUpdateRequest? _defaultInstance;
+  static StreamMmStatusUpdateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamMmStatusUpdateRequest>(create);
+  static StreamMmStatusUpdateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -2577,8 +2577,8 @@ class StreamEtfLpStatusUpdateRequest extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 시작 요청
-class StartEtfLpRequest extends $pb.GeneratedMessage {
-  factory StartEtfLpRequest({
+class StartMmRequest extends $pb.GeneratedMessage {
+  factory StartMmRequest({
     $core.String? etf,
     $core.String? fund,
   }) {
@@ -2588,33 +2588,33 @@ class StartEtfLpRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  StartEtfLpRequest._();
+  StartMmRequest._();
 
-  factory StartEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StartEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StartMmRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StartMmRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartMmRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StartEtfLpRequest clone() => StartEtfLpRequest()..mergeFromMessage(this);
+  StartMmRequest clone() => StartMmRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StartEtfLpRequest copyWith(void Function(StartEtfLpRequest) updates) => super.copyWith((message) => updates(message as StartEtfLpRequest)) as StartEtfLpRequest;
+  StartMmRequest copyWith(void Function(StartMmRequest) updates) => super.copyWith((message) => updates(message as StartMmRequest)) as StartMmRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StartEtfLpRequest create() => StartEtfLpRequest._();
+  static StartMmRequest create() => StartMmRequest._();
   @$core.override
-  StartEtfLpRequest createEmptyInstance() => create();
-  static $pb.PbList<StartEtfLpRequest> createRepeated() => $pb.PbList<StartEtfLpRequest>();
+  StartMmRequest createEmptyInstance() => create();
+  static $pb.PbList<StartMmRequest> createRepeated() => $pb.PbList<StartMmRequest>();
   @$core.pragma('dart2js:noInline')
-  static StartEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartEtfLpRequest>(create);
-  static StartEtfLpRequest? _defaultInstance;
+  static StartMmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartMmRequest>(create);
+  static StartMmRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -2636,9 +2636,9 @@ class StartEtfLpRequest extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 시작 응답
-class StartEtfLpResponse extends $pb.GeneratedMessage {
-  factory StartEtfLpResponse({
-    EtfLpStatus? status,
+class StartMmResponse extends $pb.GeneratedMessage {
+  factory StartMmResponse({
+    MmStatus? status,
     $core.String? message,
   }) {
     final result = create();
@@ -2647,45 +2647,45 @@ class StartEtfLpResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  StartEtfLpResponse._();
+  StartMmResponse._();
 
-  factory StartEtfLpResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StartEtfLpResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StartMmResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StartMmResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartEtfLpResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOM<EtfLpStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: EtfLpStatus.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartMmResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOM<MmStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: MmStatus.create)
     ..aOS(2, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StartEtfLpResponse clone() => StartEtfLpResponse()..mergeFromMessage(this);
+  StartMmResponse clone() => StartMmResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StartEtfLpResponse copyWith(void Function(StartEtfLpResponse) updates) => super.copyWith((message) => updates(message as StartEtfLpResponse)) as StartEtfLpResponse;
+  StartMmResponse copyWith(void Function(StartMmResponse) updates) => super.copyWith((message) => updates(message as StartMmResponse)) as StartMmResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StartEtfLpResponse create() => StartEtfLpResponse._();
+  static StartMmResponse create() => StartMmResponse._();
   @$core.override
-  StartEtfLpResponse createEmptyInstance() => create();
-  static $pb.PbList<StartEtfLpResponse> createRepeated() => $pb.PbList<StartEtfLpResponse>();
+  StartMmResponse createEmptyInstance() => create();
+  static $pb.PbList<StartMmResponse> createRepeated() => $pb.PbList<StartMmResponse>();
   @$core.pragma('dart2js:noInline')
-  static StartEtfLpResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartEtfLpResponse>(create);
-  static StartEtfLpResponse? _defaultInstance;
+  static StartMmResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartMmResponse>(create);
+  static StartMmResponse? _defaultInstance;
 
   /// LP 상태
   @$pb.TagNumber(1)
-  EtfLpStatus get status => $_getN(0);
+  MmStatus get status => $_getN(0);
   @$pb.TagNumber(1)
-  set status(EtfLpStatus value) => $_setField(1, value);
+  set status(MmStatus value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)
   void clearStatus() => $_clearField(1);
   @$pb.TagNumber(1)
-  EtfLpStatus ensureStatus() => $_ensure(0);
+  MmStatus ensureStatus() => $_ensure(0);
 
   /// 메시지
   @$pb.TagNumber(2)
@@ -2699,8 +2699,8 @@ class StartEtfLpResponse extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 중지 요청
-class StopEtfLpRequest extends $pb.GeneratedMessage {
-  factory StopEtfLpRequest({
+class StopMmRequest extends $pb.GeneratedMessage {
+  factory StopMmRequest({
     $core.String? etf,
     $core.String? fund,
   }) {
@@ -2710,33 +2710,33 @@ class StopEtfLpRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  StopEtfLpRequest._();
+  StopMmRequest._();
 
-  factory StopEtfLpRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StopEtfLpRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StopMmRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopMmRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopMmRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StopEtfLpRequest clone() => StopEtfLpRequest()..mergeFromMessage(this);
+  StopMmRequest clone() => StopMmRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StopEtfLpRequest copyWith(void Function(StopEtfLpRequest) updates) => super.copyWith((message) => updates(message as StopEtfLpRequest)) as StopEtfLpRequest;
+  StopMmRequest copyWith(void Function(StopMmRequest) updates) => super.copyWith((message) => updates(message as StopMmRequest)) as StopMmRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StopEtfLpRequest create() => StopEtfLpRequest._();
+  static StopMmRequest create() => StopMmRequest._();
   @$core.override
-  StopEtfLpRequest createEmptyInstance() => create();
-  static $pb.PbList<StopEtfLpRequest> createRepeated() => $pb.PbList<StopEtfLpRequest>();
+  StopMmRequest createEmptyInstance() => create();
+  static $pb.PbList<StopMmRequest> createRepeated() => $pb.PbList<StopMmRequest>();
   @$core.pragma('dart2js:noInline')
-  static StopEtfLpRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopEtfLpRequest>(create);
-  static StopEtfLpRequest? _defaultInstance;
+  static StopMmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopMmRequest>(create);
+  static StopMmRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get etf => $_getSZ(0);
@@ -2758,9 +2758,9 @@ class StopEtfLpRequest extends $pb.GeneratedMessage {
 }
 
 /// ETF LP 중지 응답
-class StopEtfLpResponse extends $pb.GeneratedMessage {
-  factory StopEtfLpResponse({
-    EtfLpStatus? status,
+class StopMmResponse extends $pb.GeneratedMessage {
+  factory StopMmResponse({
+    MmStatus? status,
     $core.String? message,
   }) {
     final result = create();
@@ -2769,45 +2769,45 @@ class StopEtfLpResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  StopEtfLpResponse._();
+  StopMmResponse._();
 
-  factory StopEtfLpResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StopEtfLpResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StopMmResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopMmResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopEtfLpResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOM<EtfLpStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: EtfLpStatus.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopMmResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOM<MmStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: MmStatus.create)
     ..aOS(2, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StopEtfLpResponse clone() => StopEtfLpResponse()..mergeFromMessage(this);
+  StopMmResponse clone() => StopMmResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StopEtfLpResponse copyWith(void Function(StopEtfLpResponse) updates) => super.copyWith((message) => updates(message as StopEtfLpResponse)) as StopEtfLpResponse;
+  StopMmResponse copyWith(void Function(StopMmResponse) updates) => super.copyWith((message) => updates(message as StopMmResponse)) as StopMmResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StopEtfLpResponse create() => StopEtfLpResponse._();
+  static StopMmResponse create() => StopMmResponse._();
   @$core.override
-  StopEtfLpResponse createEmptyInstance() => create();
-  static $pb.PbList<StopEtfLpResponse> createRepeated() => $pb.PbList<StopEtfLpResponse>();
+  StopMmResponse createEmptyInstance() => create();
+  static $pb.PbList<StopMmResponse> createRepeated() => $pb.PbList<StopMmResponse>();
   @$core.pragma('dart2js:noInline')
-  static StopEtfLpResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopEtfLpResponse>(create);
-  static StopEtfLpResponse? _defaultInstance;
+  static StopMmResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopMmResponse>(create);
+  static StopMmResponse? _defaultInstance;
 
   /// LP 상태
   @$pb.TagNumber(1)
-  EtfLpStatus get status => $_getN(0);
+  MmStatus get status => $_getN(0);
   @$pb.TagNumber(1)
-  set status(EtfLpStatus value) => $_setField(1, value);
+  set status(MmStatus value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)
   void clearStatus() => $_clearField(1);
   @$pb.TagNumber(1)
-  EtfLpStatus ensureStatus() => $_ensure(0);
+  MmStatus ensureStatus() => $_ensure(0);
 
   /// 메시지
   @$pb.TagNumber(2)
@@ -2820,7 +2820,7 @@ class StopEtfLpResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(2);
 }
 
-/// StreamEtfErrors 요청
+/// StreamLpEvents 요청
 class StreamLpEventsRequest extends $pb.GeneratedMessage {
   factory StreamLpEventsRequest({
     $core.String? etf,

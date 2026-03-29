@@ -9,24 +9,24 @@ import "lp.connect.spec.dart" as specs;
 
 /// LP 서비스는 ETF LP 관련 서비스를 제공합니다.
 /// ETF LP 생성
-///  rpc CreateEtfLp(CreateEtfLpRequest) returns (EtfLp) {
+///  rpc CreateMm(CreateMmRequest) returns (Mm) {
 ///    option (google.api.http) = {
 ///      post: "/v1/lps"
-///      body: "etf_lp"
+///      body: "mm"
 ///    };
-///    option (google.api.method_signature) = "etf_lp";
+///    option (google.api.method_signature) = "mm";
 ///  }
 extension type LpServiceClient (connect.Transport _transport) {
   /// ETF LP 조회
-  Future<kdov1lp.EtfLp> getEtfLp(
-    kdov1lp.GetEtfLpRequest input, {
+  Future<kdov1lp.Mm> getMm(
+    kdov1lp.GetMmRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.getEtfLp,
+      specs.LpService.getMm,
       input,
       signal: signal,
       headers: headers,
@@ -35,16 +35,16 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ETF LP 조회
-  Future<kdov1lp.ListEtfLpsResponse> listEtfLps(
-    kdov1lp.ListEtfLpsRequest input, {
+  /// ETF LP 목록 조회
+  Future<kdov1lp.ListMmsResponse> listMms(
+    kdov1lp.ListMmsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.listEtfLps,
+      specs.LpService.listMms,
       input,
       signal: signal,
       headers: headers,
@@ -54,15 +54,15 @@ extension type LpServiceClient (connect.Transport _transport) {
   }
 
   /// ETF LP 업데이트
-  Future<kdov1lp.EtfLp> updateEtfLp(
-    kdov1lp.UpdateEtfLpRequest input, {
+  Future<kdov1lp.Mm> updateMm(
+    kdov1lp.UpdateMmRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.updateEtfLp,
+      specs.LpService.updateMm,
       input,
       signal: signal,
       headers: headers,
@@ -72,15 +72,15 @@ extension type LpServiceClient (connect.Transport _transport) {
   }
 
   /// ETF LP 상태 조회
-  Future<kdov1lp.EtfLpStatus> getEtfLpStatus(
-    kdov1lp.GetEtfLpStatusRequest input, {
+  Future<kdov1lp.MmStatus> getMmStatus(
+    kdov1lp.GetMmStatusRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.getEtfLpStatus,
+      specs.LpService.getMmStatus,
       input,
       signal: signal,
       headers: headers,
@@ -89,16 +89,16 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ETF LP 상태 조회
-  Future<kdov1lp.ListEtfLpStatusesResponse> listEtfLpStatuses(
-    kdov1lp.ListEtfLpStatusesRequest input, {
+  /// ETF LP 상태 목록 조회
+  Future<kdov1lp.ListMmStatusesResponse> listMmStatuses(
+    kdov1lp.ListMmStatusesRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.listEtfLpStatuses,
+      specs.LpService.listMmStatuses,
       input,
       signal: signal,
       headers: headers,
@@ -108,15 +108,15 @@ extension type LpServiceClient (connect.Transport _transport) {
   }
 
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
-  Stream<kdov1lp.EtfLpStatusUpdate> streamEtfLpStatusUpdate(
-    kdov1lp.StreamEtfLpStatusUpdateRequest input, {
+  Stream<kdov1lp.MmStatusUpdate> streamMmStatusUpdate(
+    kdov1lp.StreamMmStatusUpdateRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.LpService.streamEtfLpStatusUpdate,
+      specs.LpService.streamMmStatusUpdate,
       input,
       signal: signal,
       headers: headers,
@@ -126,15 +126,15 @@ extension type LpServiceClient (connect.Transport _transport) {
   }
 
   /// ETF LP 시작
-  Future<kdov1lp.StartEtfLpResponse> startEtfLp(
-    kdov1lp.StartEtfLpRequest input, {
+  Future<kdov1lp.StartMmResponse> startMm(
+    kdov1lp.StartMmRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.startEtfLp,
+      specs.LpService.startMm,
       input,
       signal: signal,
       headers: headers,
@@ -144,15 +144,15 @@ extension type LpServiceClient (connect.Transport _transport) {
   }
 
   /// ETF LP 중지
-  Future<kdov1lp.StopEtfLpResponse> stopEtfLp(
-    kdov1lp.StopEtfLpRequest input, {
+  Future<kdov1lp.StopMmResponse> stopMm(
+    kdov1lp.StopMmRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.stopEtfLp,
+      specs.LpService.stopMm,
       input,
       signal: signal,
       headers: headers,

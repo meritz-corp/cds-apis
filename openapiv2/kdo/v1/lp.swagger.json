@@ -18,13 +18,13 @@
   "paths": {
     "/v1/lps": {
       "get": {
-        "summary": "ETF LP 조회",
-        "operationId": "LpService_ListEtfLps",
+        "summary": "ETF LP 목록 조회",
+        "operationId": "LpService_ListMms",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpListEtfLpsResponse"
+              "$ref": "#/definitions/lpListMmsResponse"
             }
           },
           "default": {
@@ -65,13 +65,13 @@
     },
     "/v1/lps/etfs/*/funds/*/status": {
       "get": {
-        "summary": "ETF LP 상태 조회",
-        "operationId": "LpService_ListEtfLpStatuses",
+        "summary": "ETF LP 상태 목록 조회",
+        "operationId": "LpService_ListMmStatuses",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpListEtfLpStatusesResponse"
+              "$ref": "#/definitions/lpListMmStatusesResponse"
             }
           },
           "default": {
@@ -119,12 +119,12 @@
     "/v1/lps/etfs/{symbol}/funds/{fundCode}": {
       "patch": {
         "summary": "ETF LP 업데이트",
-        "operationId": "LpService_UpdateEtfLp",
+        "operationId": "LpService_UpdateMm",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpEtfLp"
+              "$ref": "#/definitions/lpMm"
             }
           },
           "default": {
@@ -164,7 +164,7 @@
                   "title": "호가 깊이"
                 },
                 "offset": {
-                  "$ref": "#/definitions/lpEtfLpOffset",
+                  "$ref": "#/definitions/lpMmOffset",
                   "title": "동적 offset 조정 설정"
                 },
                 "askBasis": {
@@ -210,11 +210,11 @@
                   "title": "모멘텀 민감도"
                 },
                 "quantityLimit": {
-                  "$ref": "#/definitions/lpEtfLpQuantityLimit",
+                  "$ref": "#/definitions/lpMmQuantityLimit",
                   "title": "매수/매도 수량 한도"
                 }
               },
-              "title": "UpdateEtfLp"
+              "title": "UpdateMm"
             }
           }
         ],
@@ -226,12 +226,12 @@
     "/v1/lps/{etf}/{fund}": {
       "get": {
         "summary": "ETF LP 조회",
-        "operationId": "LpService_GetEtfLp",
+        "operationId": "LpService_GetMm",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpEtfLp"
+              "$ref": "#/definitions/lpMm"
             }
           },
           "default": {
@@ -352,12 +352,12 @@
     "/v1/lps/{etf}/{fund}/status": {
       "get": {
         "summary": "ETF LP 상태 조회",
-        "operationId": "LpService_GetEtfLpStatus",
+        "operationId": "LpService_GetMmStatus",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpEtfLpStatus"
+              "$ref": "#/definitions/v1lpMmStatus"
             }
           },
           "default": {
@@ -391,7 +391,7 @@
     "/v1/lps/{etf}/{fund}/status_update:stream": {
       "get": {
         "summary": "ETF LP 상태 스트리밍 (실시간 업데이트)",
-        "operationId": "LpService_StreamEtfLpStatusUpdate",
+        "operationId": "LpService_StreamMmStatusUpdate",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -399,13 +399,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/lpEtfLpStatusUpdate"
+                  "$ref": "#/definitions/lpMmStatusUpdate"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of lpEtfLpStatusUpdate"
+              "title": "Stream result of lpMmStatusUpdate"
             }
           },
           "default": {
@@ -439,12 +439,12 @@
     "/v1/lps/{etf}/{fund}:start": {
       "post": {
         "summary": "ETF LP 시작",
-        "operationId": "LpService_StartEtfLp",
+        "operationId": "LpService_StartMm",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpStartEtfLpResponse"
+              "$ref": "#/definitions/v1lpStartMmResponse"
             }
           },
           "default": {
@@ -487,12 +487,12 @@
     "/v1/lps/{etf}/{fund}:stop": {
       "post": {
         "summary": "ETF LP 중지",
-        "operationId": "LpService_StopEtfLp",
+        "operationId": "LpService_StopMm",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpStopEtfLpResponse"
+              "$ref": "#/definitions/v1lpStopMmResponse"
             }
           },
           "default": {
@@ -534,376 +534,6 @@
     }
   },
   "definitions": {
-    "lpEtfLp": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "fundCode": {
-          "type": "string",
-          "title": "Fund"
-        },
-        "askBasis": {
-          "type": "number",
-          "format": "double"
-        },
-        "bidBasis": {
-          "type": "number",
-          "format": "double"
-        },
-        "depth": {
-          "type": "integer",
-          "format": "int64",
-          "title": "호가 깊이 (양방향 레벨 수)"
-        },
-        "tickSize": {
-          "type": "string",
-          "format": "int64",
-          "title": "ETF tick 크기 (원 단위, i64)"
-        },
-        "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "동적 offset 조정 설정"
-        },
-        "enabled": {
-          "type": "boolean",
-          "title": "활성화 여부"
-        },
-        "pricingMethod": {
-          "$ref": "#/definitions/lpEtfPricing",
-          "title": "ETF 가격 산출 방식"
-        },
-        "bidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매수 호가 조정값"
-        },
-        "askAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매도 호가 조정값"
-        },
-        "bidQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매수 주문 수량 (i64)"
-        },
-        "askQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매도 주문 수량 (i64)"
-        },
-        "momentumEnabled": {
-          "type": "boolean",
-          "title": "모멘텀 활성화 여부"
-        },
-        "momentumWindow": {
-          "type": "integer",
-          "format": "int64",
-          "title": "모멘텀 윈도우 크기"
-        },
-        "momentumSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "모멘텀 민감도"
-        },
-        "quantityLimit": {
-          "$ref": "#/definitions/lpEtfLpQuantityLimit",
-          "title": "매수/매도 수량 한도"
-        }
-      },
-      "title": "ETF LP 설정"
-    },
-    "lpEtfLpHedge": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "헷지 대상 종목 심볼"
-        },
-        "fund": {
-          "type": "string",
-          "title": "펀드 리소스 이름\nformat: funds/{fund_code}"
-        },
-        "filledQuantityPerHedge": {
-          "type": "string",
-          "format": "int64",
-          "title": "헷지 1주 주문당 ETF 체결수량 기준"
-        }
-      },
-      "title": "ETF LP 헷지 설정"
-    },
-    "lpEtfLpOffset": {
-      "type": "object",
-      "properties": {
-        "bidOffset": {
-          "type": "number",
-          "format": "double"
-        },
-        "askOffset": {
-          "type": "number",
-          "format": "double"
-        },
-        "minOffset": {
-          "type": "number",
-          "format": "double",
-          "title": "NAV 밴드 설정"
-        },
-        "maxOffset": {
-          "type": "number",
-          "format": "double"
-        },
-        "timeAdjustmentEnabled": {
-          "type": "boolean",
-          "title": "시간 기반 조정"
-        },
-        "adjustmentIntervalSecs": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "adjustmentStep": {
-          "type": "number",
-          "format": "double"
-        },
-        "resetOnFill": {
-          "type": "boolean"
-        },
-        "positionAdjustmentEnabled": {
-          "type": "boolean",
-          "title": "순매매량 기반 조정"
-        },
-        "positionStrategy": {
-          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
-        },
-        "positionThreshold": {
-          "type": "string",
-          "format": "int64"
-        },
-        "positionAdjustmentStep": {
-          "type": "number",
-          "format": "double"
-        }
-      },
-      "title": "자동 offset 조정 설정"
-    },
-    "lpEtfLpQuantityLimit": {
-      "type": "object",
-      "properties": {
-        "maxBidQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매수 수량 상한 (gross 누적 매수 체결 기준)"
-        },
-        "maxAskQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매도 수량 상한 (gross 누적 매도 체결 기준)"
-        },
-        "netQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조"
-        },
-        "maxNetQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "순포지션 한도 설정값 (한도 검증에 사용)\nnet_quantity \u003e 0 \u0026\u0026 net_quantity \u003e= max_net_quantity → 매수 차단\nnet_quantity \u003c 0 \u0026\u0026 |net_quantity| \u003e= max_net_quantity → 매도 차단\n미설정(None) 시 순포지션 기반 차단 비활성"
-        }
-      },
-      "title": "매수/매도 수량 한도"
-    },
-    "lpEtfLpState": {
-      "type": "string",
-      "enum": [
-        "ETF_LP_STATE_UNSPECIFIED",
-        "ETF_LP_STATE_IDLE",
-        "ETF_LP_STATE_RUNNING",
-        "ETF_LP_STATE_STOPPING",
-        "ETF_LP_STATE_ERROR"
-      ],
-      "default": "ETF_LP_STATE_UNSPECIFIED",
-      "title": "ETF LP 상태 enum"
-    },
-    "lpEtfLpStatus": {
-      "type": "object",
-      "properties": {
-        "etfSymbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "fundCode": {
-          "type": "string",
-          "title": "펀드 코드"
-        },
-        "askBasis": {
-          "type": "number",
-          "format": "double",
-          "title": "Basis 스프레드 (원 단위, i64)"
-        },
-        "bidBasis": {
-          "type": "number",
-          "format": "double"
-        },
-        "state": {
-          "$ref": "#/definitions/lpEtfLpState",
-          "title": "LP 상태"
-        },
-        "pricing": {
-          "$ref": "#/definitions/lpLpPricing",
-          "title": "가격 정보"
-        },
-        "fillStatistics": {
-          "$ref": "#/definitions/lpFillStatistics",
-          "title": "체결 통계"
-        },
-        "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "동적 offset 조정 설정 (optional)"
-        },
-        "hedge": {
-          "$ref": "#/definitions/lpEtfLpHedge",
-          "title": "헷지 정보"
-        },
-        "bidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매수 호가 조정값"
-        },
-        "askAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매도 호가 조정값"
-        },
-        "bidQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매수 주문 수량 (i64)"
-        },
-        "askQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매도 주문 수량 (i64)"
-        },
-        "momentumEnabled": {
-          "type": "boolean",
-          "title": "모멘텀 활성화 여부"
-        },
-        "momentumWindow": {
-          "type": "integer",
-          "format": "int64",
-          "title": "모멘텀 윈도우 크기"
-        },
-        "momentumSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "모멘텀 민감도"
-        },
-        "momentumBidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
-        },
-        "momentumAskAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
-        },
-        "quantityLimit": {
-          "$ref": "#/definitions/lpEtfLpQuantityLimit",
-          "title": "매수/매도 수량 한도"
-        }
-      },
-      "title": "ETF LP 상태"
-    },
-    "lpEtfLpStatusUpdate": {
-      "type": "object",
-      "properties": {
-        "etfSymbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "fundCode": {
-          "type": "string",
-          "title": "펀드 코드"
-        },
-        "askBasis": {
-          "type": "number",
-          "format": "double",
-          "title": "Basis 스프레드"
-        },
-        "bidBasis": {
-          "type": "number",
-          "format": "double"
-        },
-        "state": {
-          "$ref": "#/definitions/lpEtfLpState",
-          "title": "LP 상태"
-        },
-        "pricing": {
-          "$ref": "#/definitions/lpLpPricing",
-          "title": "가격 정보"
-        },
-        "fillStatistics": {
-          "$ref": "#/definitions/lpFillStatistics",
-          "title": "체결 통계"
-        },
-        "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "동적 offset 조정 설정 (optional)"
-        },
-        "bidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매수 호가 조정값"
-        },
-        "askAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매도 호가 조정값"
-        },
-        "bidQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매수 주문 수량 (i64)"
-        },
-        "askQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매도 주문 수량 (i64)"
-        },
-        "momentumEnabled": {
-          "type": "boolean",
-          "title": "모멘텀 활성화 여부"
-        },
-        "momentumWindow": {
-          "type": "integer",
-          "format": "int64",
-          "title": "모멘텀 윈도우 크기"
-        },
-        "momentumSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "모멘텀 민감도"
-        },
-        "momentumBidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
-        },
-        "momentumAskAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
-        },
-        "quantityLimit": {
-          "$ref": "#/definitions/lpEtfLpQuantityLimit",
-          "title": "매수/매도 수량 한도"
-        }
-      },
-      "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
-    },
     "lpEtfPricing": {
       "type": "object",
       "properties": {
@@ -977,13 +607,13 @@
       },
       "title": "레버리지 선물 가격 산출"
     },
-    "lpListEtfLpStatusesResponse": {
+    "lpListMmStatusesResponse": {
       "type": "object",
       "properties": {
-        "etfLpStatuses": {
+        "mmStatuses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/lpEtfLpStatus"
+            "$ref": "#/definitions/v1lpMmStatus"
           },
           "title": "ETF 목록"
         },
@@ -993,13 +623,13 @@
         }
       }
     },
-    "lpListEtfLpsResponse": {
+    "lpListMmsResponse": {
       "type": "object",
       "properties": {
-        "etfLps": {
+        "mms": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/lpEtfLp"
+            "$ref": "#/definitions/lpMm"
           },
           "title": "ETF 목록"
         },
@@ -1028,6 +658,273 @@
       },
       "title": "LP 가격 정보"
     },
+    "lpMm": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "Fund"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이 (양방향 레벨 수)"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF tick 크기 (원 단위, i64)"
+        },
+        "offset": {
+          "$ref": "#/definitions/lpMmOffset",
+          "title": "동적 offset 조정 설정"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "pricingMethod": {
+          "$ref": "#/definitions/lpEtfPricing",
+          "title": "ETF 가격 산출 방식"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (i64)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (i64)"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/lpMmQuantityLimit",
+          "title": "매수/매도 수량 한도"
+        }
+      },
+      "title": "ETF LP 설정"
+    },
+    "lpMmHedge": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "헷지 대상 종목 심볼"
+        },
+        "fund": {
+          "type": "string",
+          "title": "펀드 리소스 이름\nformat: funds/{fund_code}"
+        },
+        "filledQuantityPerHedge": {
+          "type": "string",
+          "format": "int64",
+          "title": "헷지 1주 주문당 ETF 체결수량 기준"
+        }
+      },
+      "title": "ETF LP 헷지 설정"
+    },
+    "lpMmOffset": {
+      "type": "object",
+      "properties": {
+        "bidOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "askOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "minOffset": {
+          "type": "number",
+          "format": "double",
+          "title": "NAV 밴드 설정"
+        },
+        "maxOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "timeAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "시간 기반 조정"
+        },
+        "adjustmentIntervalSecs": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "adjustmentStep": {
+          "type": "number",
+          "format": "double"
+        },
+        "resetOnFill": {
+          "type": "boolean"
+        },
+        "positionAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "순매매량 기반 조정"
+        },
+        "positionStrategy": {
+          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
+        },
+        "positionThreshold": {
+          "type": "string",
+          "format": "int64"
+        },
+        "positionAdjustmentStep": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "자동 offset 조정 설정"
+    },
+    "lpMmQuantityLimit": {
+      "type": "object",
+      "properties": {
+        "maxBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 상한 (gross 누적 매수 체결 기준)"
+        },
+        "maxAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 상한 (gross 누적 매도 체결 기준)"
+        },
+        "netQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조"
+        },
+        "maxNetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순포지션 한도 설정값 (한도 검증에 사용)\nnet_quantity \u003e 0 \u0026\u0026 net_quantity \u003e= max_net_quantity → 매수 차단\nnet_quantity \u003c 0 \u0026\u0026 |net_quantity| \u003e= max_net_quantity → 매도 차단\n미설정(None) 시 순포지션 기반 차단 비활성"
+        }
+      },
+      "title": "매수/매도 수량 한도"
+    },
+    "lpMmStatusUpdate": {
+      "type": "object",
+      "properties": {
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "Basis 스프레드"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "state": {
+          "$ref": "#/definitions/v1lpMmState",
+          "title": "LP 상태"
+        },
+        "pricing": {
+          "$ref": "#/definitions/lpLpPricing",
+          "title": "가격 정보"
+        },
+        "fillStatistics": {
+          "$ref": "#/definitions/lpFillStatistics",
+          "title": "체결 통계"
+        },
+        "offset": {
+          "$ref": "#/definitions/lpMmOffset",
+          "title": "동적 offset 조정 설정 (optional)"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (i64)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (i64)"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
+        },
+        "momentumBidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
+        },
+        "momentumAskAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/lpMmQuantityLimit",
+          "title": "매수/매도 수량 한도"
+        }
+      },
+      "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
+    },
     "lpPdfNavHedgePricing": {
       "type": "object",
       "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
@@ -1043,34 +940,6 @@
       "default": "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
       "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
       "title": "순매매량 기반 조정 전략"
-    },
-    "lpStartEtfLpResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/lpEtfLpStatus",
-          "title": "LP 상태"
-        },
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      },
-      "title": "ETF LP 시작 응답"
-    },
-    "lpStopEtfLpResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/lpEtfLpStatus",
-          "title": "LP 상태"
-        },
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      },
-      "title": "ETF LP 중지 응답"
     },
     "protobufAny": {
       "type": "object",
@@ -1098,6 +967,137 @@
           }
         }
       }
+    },
+    "v1lpMmState": {
+      "type": "string",
+      "enum": [
+        "MM_STATE_UNSPECIFIED",
+        "MM_STATE_IDLE",
+        "MM_STATE_RUNNING",
+        "MM_STATE_STOPPING",
+        "MM_STATE_ERROR"
+      ],
+      "default": "MM_STATE_UNSPECIFIED",
+      "title": "ETF LP 상태 enum"
+    },
+    "v1lpMmStatus": {
+      "type": "object",
+      "properties": {
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "Basis 스프레드 (원 단위, i64)"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "state": {
+          "$ref": "#/definitions/v1lpMmState",
+          "title": "LP 상태"
+        },
+        "pricing": {
+          "$ref": "#/definitions/lpLpPricing",
+          "title": "가격 정보"
+        },
+        "fillStatistics": {
+          "$ref": "#/definitions/lpFillStatistics",
+          "title": "체결 통계"
+        },
+        "offset": {
+          "$ref": "#/definitions/lpMmOffset",
+          "title": "동적 offset 조정 설정 (optional)"
+        },
+        "hedge": {
+          "$ref": "#/definitions/lpMmHedge",
+          "title": "헷지 정보"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (i64)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (i64)"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
+        },
+        "momentumBidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
+        },
+        "momentumAskAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/lpMmQuantityLimit",
+          "title": "매수/매도 수량 한도"
+        }
+      },
+      "title": "ETF LP 상태"
+    },
+    "v1lpStartMmResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1lpMmStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "ETF LP 시작 응답"
+    },
+    "v1lpStopMmResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1lpMmStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "ETF LP 중지 응답"
     },
     "v1lpUserOrderbookData": {
       "type": "object",

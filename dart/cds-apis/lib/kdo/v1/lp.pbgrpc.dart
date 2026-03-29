@@ -34,43 +34,43 @@ class LpServiceClient extends $grpc.Client {
   LpServiceClient(super.channel, {super.options, super.interceptors});
 
   /// ETF LP 조회
-  $grpc.ResponseFuture<$0.EtfLp> getEtfLp($0.GetEtfLpRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getEtfLp, request, options: options);
+  $grpc.ResponseFuture<$0.Mm> getMm($0.GetMmRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMm, request, options: options);
   }
 
-  /// ETF LP 조회
-  $grpc.ResponseFuture<$0.ListEtfLpsResponse> listEtfLps($0.ListEtfLpsRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$listEtfLps, request, options: options);
+  /// ETF LP 목록 조회
+  $grpc.ResponseFuture<$0.ListMmsResponse> listMms($0.ListMmsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listMms, request, options: options);
   }
 
   /// ETF LP 업데이트
-  $grpc.ResponseFuture<$0.EtfLp> updateEtfLp($0.UpdateEtfLpRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$updateEtfLp, request, options: options);
+  $grpc.ResponseFuture<$0.Mm> updateMm($0.UpdateMmRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateMm, request, options: options);
   }
 
   /// ETF LP 상태 조회
-  $grpc.ResponseFuture<$0.EtfLpStatus> getEtfLpStatus($0.GetEtfLpStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getEtfLpStatus, request, options: options);
+  $grpc.ResponseFuture<$0.MmStatus> getMmStatus($0.GetMmStatusRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMmStatus, request, options: options);
   }
 
-  /// ETF LP 상태 조회
-  $grpc.ResponseFuture<$0.ListEtfLpStatusesResponse> listEtfLpStatuses($0.ListEtfLpStatusesRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$listEtfLpStatuses, request, options: options);
+  /// ETF LP 상태 목록 조회
+  $grpc.ResponseFuture<$0.ListMmStatusesResponse> listMmStatuses($0.ListMmStatusesRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listMmStatuses, request, options: options);
   }
 
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
-  $grpc.ResponseStream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate($0.StreamEtfLpStatusUpdateRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamEtfLpStatusUpdate, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.MmStatusUpdate> streamMmStatusUpdate($0.StreamMmStatusUpdateRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMmStatusUpdate, $async.Stream.fromIterable([request]), options: options);
   }
 
   /// ETF LP 시작
-  $grpc.ResponseFuture<$0.StartEtfLpResponse> startEtfLp($0.StartEtfLpRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$startEtfLp, request, options: options);
+  $grpc.ResponseFuture<$0.StartMmResponse> startMm($0.StartMmRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$startMm, request, options: options);
   }
 
   /// ETF LP 중지
-  $grpc.ResponseFuture<$0.StopEtfLpResponse> stopEtfLp($0.StopEtfLpRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$stopEtfLp, request, options: options);
+  $grpc.ResponseFuture<$0.StopMmResponse> stopMm($0.StopMmRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$stopMm, request, options: options);
   }
 
   /// 사용자 주문장 업데이트를 가져오기
@@ -85,38 +85,38 @@ class LpServiceClient extends $grpc.Client {
 
     // method descriptors
 
-  static final _$getEtfLp = $grpc.ClientMethod<$0.GetEtfLpRequest, $0.EtfLp>(
-      '/kdo.v1.lp.LpService/GetEtfLp',
-      ($0.GetEtfLpRequest value) => value.writeToBuffer(),
-      $0.EtfLp.fromBuffer);
-  static final _$listEtfLps = $grpc.ClientMethod<$0.ListEtfLpsRequest, $0.ListEtfLpsResponse>(
-      '/kdo.v1.lp.LpService/ListEtfLps',
-      ($0.ListEtfLpsRequest value) => value.writeToBuffer(),
-      $0.ListEtfLpsResponse.fromBuffer);
-  static final _$updateEtfLp = $grpc.ClientMethod<$0.UpdateEtfLpRequest, $0.EtfLp>(
-      '/kdo.v1.lp.LpService/UpdateEtfLp',
-      ($0.UpdateEtfLpRequest value) => value.writeToBuffer(),
-      $0.EtfLp.fromBuffer);
-  static final _$getEtfLpStatus = $grpc.ClientMethod<$0.GetEtfLpStatusRequest, $0.EtfLpStatus>(
-      '/kdo.v1.lp.LpService/GetEtfLpStatus',
-      ($0.GetEtfLpStatusRequest value) => value.writeToBuffer(),
-      $0.EtfLpStatus.fromBuffer);
-  static final _$listEtfLpStatuses = $grpc.ClientMethod<$0.ListEtfLpStatusesRequest, $0.ListEtfLpStatusesResponse>(
-      '/kdo.v1.lp.LpService/ListEtfLpStatuses',
-      ($0.ListEtfLpStatusesRequest value) => value.writeToBuffer(),
-      $0.ListEtfLpStatusesResponse.fromBuffer);
-  static final _$streamEtfLpStatusUpdate = $grpc.ClientMethod<$0.StreamEtfLpStatusUpdateRequest, $0.EtfLpStatusUpdate>(
-      '/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate',
-      ($0.StreamEtfLpStatusUpdateRequest value) => value.writeToBuffer(),
-      $0.EtfLpStatusUpdate.fromBuffer);
-  static final _$startEtfLp = $grpc.ClientMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
-      '/kdo.v1.lp.LpService/StartEtfLp',
-      ($0.StartEtfLpRequest value) => value.writeToBuffer(),
-      $0.StartEtfLpResponse.fromBuffer);
-  static final _$stopEtfLp = $grpc.ClientMethod<$0.StopEtfLpRequest, $0.StopEtfLpResponse>(
-      '/kdo.v1.lp.LpService/StopEtfLp',
-      ($0.StopEtfLpRequest value) => value.writeToBuffer(),
-      $0.StopEtfLpResponse.fromBuffer);
+  static final _$getMm = $grpc.ClientMethod<$0.GetMmRequest, $0.Mm>(
+      '/kdo.v1.lp.LpService/GetMm',
+      ($0.GetMmRequest value) => value.writeToBuffer(),
+      $0.Mm.fromBuffer);
+  static final _$listMms = $grpc.ClientMethod<$0.ListMmsRequest, $0.ListMmsResponse>(
+      '/kdo.v1.lp.LpService/ListMms',
+      ($0.ListMmsRequest value) => value.writeToBuffer(),
+      $0.ListMmsResponse.fromBuffer);
+  static final _$updateMm = $grpc.ClientMethod<$0.UpdateMmRequest, $0.Mm>(
+      '/kdo.v1.lp.LpService/UpdateMm',
+      ($0.UpdateMmRequest value) => value.writeToBuffer(),
+      $0.Mm.fromBuffer);
+  static final _$getMmStatus = $grpc.ClientMethod<$0.GetMmStatusRequest, $0.MmStatus>(
+      '/kdo.v1.lp.LpService/GetMmStatus',
+      ($0.GetMmStatusRequest value) => value.writeToBuffer(),
+      $0.MmStatus.fromBuffer);
+  static final _$listMmStatuses = $grpc.ClientMethod<$0.ListMmStatusesRequest, $0.ListMmStatusesResponse>(
+      '/kdo.v1.lp.LpService/ListMmStatuses',
+      ($0.ListMmStatusesRequest value) => value.writeToBuffer(),
+      $0.ListMmStatusesResponse.fromBuffer);
+  static final _$streamMmStatusUpdate = $grpc.ClientMethod<$0.StreamMmStatusUpdateRequest, $0.MmStatusUpdate>(
+      '/kdo.v1.lp.LpService/StreamMmStatusUpdate',
+      ($0.StreamMmStatusUpdateRequest value) => value.writeToBuffer(),
+      $0.MmStatusUpdate.fromBuffer);
+  static final _$startMm = $grpc.ClientMethod<$0.StartMmRequest, $0.StartMmResponse>(
+      '/kdo.v1.lp.LpService/StartMm',
+      ($0.StartMmRequest value) => value.writeToBuffer(),
+      $0.StartMmResponse.fromBuffer);
+  static final _$stopMm = $grpc.ClientMethod<$0.StopMmRequest, $0.StopMmResponse>(
+      '/kdo.v1.lp.LpService/StopMm',
+      ($0.StopMmRequest value) => value.writeToBuffer(),
+      $0.StopMmResponse.fromBuffer);
   static final _$getUserOrderbook = $grpc.ClientMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
       '/kdo.v1.lp.LpService/GetUserOrderbook',
       ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
@@ -132,62 +132,62 @@ abstract class LpServiceBase extends $grpc.Service {
   $core.String get $name => 'kdo.v1.lp.LpService';
 
   LpServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.GetEtfLpRequest, $0.EtfLp>(
-        'GetEtfLp',
-        getEtfLp_Pre,
+    $addMethod($grpc.ServiceMethod<$0.GetMmRequest, $0.Mm>(
+        'GetMm',
+        getMm_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetEtfLpRequest.fromBuffer(value),
-        ($0.EtfLp value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListEtfLpsRequest, $0.ListEtfLpsResponse>(
-        'ListEtfLps',
-        listEtfLps_Pre,
+        ($core.List<$core.int> value) => $0.GetMmRequest.fromBuffer(value),
+        ($0.Mm value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListMmsRequest, $0.ListMmsResponse>(
+        'ListMms',
+        listMms_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.ListEtfLpsRequest.fromBuffer(value),
-        ($0.ListEtfLpsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateEtfLpRequest, $0.EtfLp>(
-        'UpdateEtfLp',
-        updateEtfLp_Pre,
+        ($core.List<$core.int> value) => $0.ListMmsRequest.fromBuffer(value),
+        ($0.ListMmsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateMmRequest, $0.Mm>(
+        'UpdateMm',
+        updateMm_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.UpdateEtfLpRequest.fromBuffer(value),
-        ($0.EtfLp value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetEtfLpStatusRequest, $0.EtfLpStatus>(
-        'GetEtfLpStatus',
-        getEtfLpStatus_Pre,
+        ($core.List<$core.int> value) => $0.UpdateMmRequest.fromBuffer(value),
+        ($0.Mm value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMmStatusRequest, $0.MmStatus>(
+        'GetMmStatus',
+        getMmStatus_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetEtfLpStatusRequest.fromBuffer(value),
-        ($0.EtfLpStatus value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListEtfLpStatusesRequest, $0.ListEtfLpStatusesResponse>(
-        'ListEtfLpStatuses',
-        listEtfLpStatuses_Pre,
+        ($core.List<$core.int> value) => $0.GetMmStatusRequest.fromBuffer(value),
+        ($0.MmStatus value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListMmStatusesRequest, $0.ListMmStatusesResponse>(
+        'ListMmStatuses',
+        listMmStatuses_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.ListEtfLpStatusesRequest.fromBuffer(value),
-        ($0.ListEtfLpStatusesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamEtfLpStatusUpdateRequest, $0.EtfLpStatusUpdate>(
-        'StreamEtfLpStatusUpdate',
-        streamEtfLpStatusUpdate_Pre,
+        ($core.List<$core.int> value) => $0.ListMmStatusesRequest.fromBuffer(value),
+        ($0.ListMmStatusesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamMmStatusUpdateRequest, $0.MmStatusUpdate>(
+        'StreamMmStatusUpdate',
+        streamMmStatusUpdate_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => $0.StreamEtfLpStatusUpdateRequest.fromBuffer(value),
-        ($0.EtfLpStatusUpdate value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StartEtfLpRequest, $0.StartEtfLpResponse>(
-        'StartEtfLp',
-        startEtfLp_Pre,
+        ($core.List<$core.int> value) => $0.StreamMmStatusUpdateRequest.fromBuffer(value),
+        ($0.MmStatusUpdate value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StartMmRequest, $0.StartMmResponse>(
+        'StartMm',
+        startMm_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.StartEtfLpRequest.fromBuffer(value),
-        ($0.StartEtfLpResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StopEtfLpRequest, $0.StopEtfLpResponse>(
-        'StopEtfLp',
-        stopEtfLp_Pre,
+        ($core.List<$core.int> value) => $0.StartMmRequest.fromBuffer(value),
+        ($0.StartMmResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StopMmRequest, $0.StopMmResponse>(
+        'StopMm',
+        stopMm_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.StopEtfLpRequest.fromBuffer(value),
-        ($0.StopEtfLpResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.StopMmRequest.fromBuffer(value),
+        ($0.StopMmResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetUserOrderBookRequest, $0.UserOrderbookData>(
         'GetUserOrderbook',
         getUserOrderbook_Pre,
@@ -204,53 +204,53 @@ abstract class LpServiceBase extends $grpc.Service {
         ($0.UserOrderbookData value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.EtfLp> getEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfLpRequest> $request) async {
-    return getEtfLp($call, await $request);
+  $async.Future<$0.Mm> getMm_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmRequest> $request) async {
+    return getMm($call, await $request);
   }
 
-  $async.Future<$0.EtfLp> getEtfLp($grpc.ServiceCall call, $0.GetEtfLpRequest request);
+  $async.Future<$0.Mm> getMm($grpc.ServiceCall call, $0.GetMmRequest request);
 
-  $async.Future<$0.ListEtfLpsResponse> listEtfLps_Pre($grpc.ServiceCall $call, $async.Future<$0.ListEtfLpsRequest> $request) async {
-    return listEtfLps($call, await $request);
+  $async.Future<$0.ListMmsResponse> listMms_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmsRequest> $request) async {
+    return listMms($call, await $request);
   }
 
-  $async.Future<$0.ListEtfLpsResponse> listEtfLps($grpc.ServiceCall call, $0.ListEtfLpsRequest request);
+  $async.Future<$0.ListMmsResponse> listMms($grpc.ServiceCall call, $0.ListMmsRequest request);
 
-  $async.Future<$0.EtfLp> updateEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateEtfLpRequest> $request) async {
-    return updateEtfLp($call, await $request);
+  $async.Future<$0.Mm> updateMm_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMmRequest> $request) async {
+    return updateMm($call, await $request);
   }
 
-  $async.Future<$0.EtfLp> updateEtfLp($grpc.ServiceCall call, $0.UpdateEtfLpRequest request);
+  $async.Future<$0.Mm> updateMm($grpc.ServiceCall call, $0.UpdateMmRequest request);
 
-  $async.Future<$0.EtfLpStatus> getEtfLpStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfLpStatusRequest> $request) async {
-    return getEtfLpStatus($call, await $request);
+  $async.Future<$0.MmStatus> getMmStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmStatusRequest> $request) async {
+    return getMmStatus($call, await $request);
   }
 
-  $async.Future<$0.EtfLpStatus> getEtfLpStatus($grpc.ServiceCall call, $0.GetEtfLpStatusRequest request);
+  $async.Future<$0.MmStatus> getMmStatus($grpc.ServiceCall call, $0.GetMmStatusRequest request);
 
-  $async.Future<$0.ListEtfLpStatusesResponse> listEtfLpStatuses_Pre($grpc.ServiceCall $call, $async.Future<$0.ListEtfLpStatusesRequest> $request) async {
-    return listEtfLpStatuses($call, await $request);
+  $async.Future<$0.ListMmStatusesResponse> listMmStatuses_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmStatusesRequest> $request) async {
+    return listMmStatuses($call, await $request);
   }
 
-  $async.Future<$0.ListEtfLpStatusesResponse> listEtfLpStatuses($grpc.ServiceCall call, $0.ListEtfLpStatusesRequest request);
+  $async.Future<$0.ListMmStatusesResponse> listMmStatuses($grpc.ServiceCall call, $0.ListMmStatusesRequest request);
 
-  $async.Stream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfLpStatusUpdateRequest> $request) async* {
-    yield* streamEtfLpStatusUpdate($call, await $request);
+  $async.Stream<$0.MmStatusUpdate> streamMmStatusUpdate_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMmStatusUpdateRequest> $request) async* {
+    yield* streamMmStatusUpdate($call, await $request);
   }
 
-  $async.Stream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate($grpc.ServiceCall call, $0.StreamEtfLpStatusUpdateRequest request);
+  $async.Stream<$0.MmStatusUpdate> streamMmStatusUpdate($grpc.ServiceCall call, $0.StreamMmStatusUpdateRequest request);
 
-  $async.Future<$0.StartEtfLpResponse> startEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.StartEtfLpRequest> $request) async {
-    return startEtfLp($call, await $request);
+  $async.Future<$0.StartMmResponse> startMm_Pre($grpc.ServiceCall $call, $async.Future<$0.StartMmRequest> $request) async {
+    return startMm($call, await $request);
   }
 
-  $async.Future<$0.StartEtfLpResponse> startEtfLp($grpc.ServiceCall call, $0.StartEtfLpRequest request);
+  $async.Future<$0.StartMmResponse> startMm($grpc.ServiceCall call, $0.StartMmRequest request);
 
-  $async.Future<$0.StopEtfLpResponse> stopEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.StopEtfLpRequest> $request) async {
-    return stopEtfLp($call, await $request);
+  $async.Future<$0.StopMmResponse> stopMm_Pre($grpc.ServiceCall $call, $async.Future<$0.StopMmRequest> $request) async {
+    return stopMm($call, await $request);
   }
 
-  $async.Future<$0.StopEtfLpResponse> stopEtfLp($grpc.ServiceCall call, $0.StopEtfLpRequest request);
+  $async.Future<$0.StopMmResponse> stopMm($grpc.ServiceCall call, $0.StopMmRequest request);
 
   $async.Future<$0.UserOrderbookData> getUserOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetUserOrderBookRequest> $request) async {
     return getUserOrderbook($call, await $request);

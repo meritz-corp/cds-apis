@@ -84,10 +84,10 @@ pub mod lp_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn get_etf_lp(
+        pub async fn get_mm(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetEtfLpRequest>,
-        ) -> std::result::Result<tonic::Response<super::EtfLp>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::Mm>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -99,18 +99,17 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/GetEtfLp",
+                "/kdo.v1.lp.LpService/GetMm",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "GetEtfLp"));
+            req.extensions_mut().insert(GrpcMethod::new("kdo.v1.lp.LpService", "GetMm"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn list_etf_lps(
+        pub async fn list_mms(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListEtfLpsRequest>,
+            request: impl tonic::IntoRequest<super::ListMmsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListEtfLpsResponse>,
+            tonic::Response<super::ListMmsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -124,17 +123,17 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/ListEtfLps",
+                "/kdo.v1.lp.LpService/ListMms",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListEtfLps"));
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListMms"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_etf_lp(
+        pub async fn update_mm(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateEtfLpRequest>,
-        ) -> std::result::Result<tonic::Response<super::EtfLp>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::Mm>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -146,17 +145,17 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/UpdateEtfLp",
+                "/kdo.v1.lp.LpService/UpdateMm",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "UpdateEtfLp"));
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "UpdateMm"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn get_etf_lp_status(
+        pub async fn get_mm_status(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetEtfLpStatusRequest>,
-        ) -> std::result::Result<tonic::Response<super::EtfLpStatus>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetMmStatusRequest>,
+        ) -> std::result::Result<tonic::Response<super::MmStatus>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -168,18 +167,18 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/GetEtfLpStatus",
+                "/kdo.v1.lp.LpService/GetMmStatus",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "GetEtfLpStatus"));
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "GetMmStatus"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn list_etf_lp_statuses(
+        pub async fn list_mm_statuses(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListEtfLpStatusesRequest>,
+            request: impl tonic::IntoRequest<super::ListMmStatusesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListEtfLpStatusesResponse>,
+            tonic::Response<super::ListMmStatusesResponse>,
             tonic::Status,
         > {
             self.inner
@@ -193,18 +192,18 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/ListEtfLpStatuses",
+                "/kdo.v1.lp.LpService/ListMmStatuses",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListEtfLpStatuses"));
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListMmStatuses"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_etf_lp_status_update(
+        pub async fn stream_mm_status_update(
             &mut self,
-            request: impl tonic::IntoRequest<super::StreamEtfLpStatusUpdateRequest>,
+            request: impl tonic::IntoRequest<super::StreamMmStatusUpdateRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::EtfLpStatusUpdate>>,
+            tonic::Response<tonic::codec::Streaming<super::MmStatusUpdate>>,
             tonic::Status,
         > {
             self.inner
@@ -218,20 +217,18 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate",
+                "/kdo.v1.lp.LpService/StreamMmStatusUpdate",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("kdo.v1.lp.LpService", "StreamEtfLpStatusUpdate"),
-                );
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "StreamMmStatusUpdate"));
             self.inner.server_streaming(req, path, codec).await
         }
-        pub async fn start_etf_lp(
+        pub async fn start_mm(
             &mut self,
-            request: impl tonic::IntoRequest<super::StartEtfLpRequest>,
+            request: impl tonic::IntoRequest<super::StartMmRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::StartEtfLpResponse>,
+            tonic::Response<super::StartMmResponse>,
             tonic::Status,
         > {
             self.inner
@@ -245,20 +242,17 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/StartEtfLp",
+                "/kdo.v1.lp.LpService/StartMm",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "StartEtfLp"));
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "StartMm"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stop_etf_lp(
+        pub async fn stop_mm(
             &mut self,
-            request: impl tonic::IntoRequest<super::StopEtfLpRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::StopEtfLpResponse>,
-            tonic::Status,
-        > {
+            request: impl tonic::IntoRequest<super::StopMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::StopMmResponse>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -270,11 +264,11 @@ pub mod lp_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.lp.LpService/StopEtfLp",
+                "/kdo.v1.lp.LpService/StopMm",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "StopEtfLp"));
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "StopMm"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn get_user_orderbook(
@@ -336,59 +330,50 @@ pub mod lp_service_server {
     /// Generated trait containing gRPC methods that should be implemented for use with LpServiceServer.
     #[async_trait]
     pub trait LpService: Send + Sync + 'static {
-        async fn get_etf_lp(
+        async fn get_mm(
             &self,
-            request: tonic::Request<super::GetEtfLpRequest>,
-        ) -> std::result::Result<tonic::Response<super::EtfLp>, tonic::Status>;
-        async fn list_etf_lps(
+            request: tonic::Request<super::GetMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::Mm>, tonic::Status>;
+        async fn list_mms(
             &self,
-            request: tonic::Request<super::ListEtfLpsRequest>,
+            request: tonic::Request<super::ListMmsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListMmsResponse>, tonic::Status>;
+        async fn update_mm(
+            &self,
+            request: tonic::Request<super::UpdateMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::Mm>, tonic::Status>;
+        async fn get_mm_status(
+            &self,
+            request: tonic::Request<super::GetMmStatusRequest>,
+        ) -> std::result::Result<tonic::Response<super::MmStatus>, tonic::Status>;
+        async fn list_mm_statuses(
+            &self,
+            request: tonic::Request<super::ListMmStatusesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListEtfLpsResponse>,
+            tonic::Response<super::ListMmStatusesResponse>,
             tonic::Status,
         >;
-        async fn update_etf_lp(
-            &self,
-            request: tonic::Request<super::UpdateEtfLpRequest>,
-        ) -> std::result::Result<tonic::Response<super::EtfLp>, tonic::Status>;
-        async fn get_etf_lp_status(
-            &self,
-            request: tonic::Request<super::GetEtfLpStatusRequest>,
-        ) -> std::result::Result<tonic::Response<super::EtfLpStatus>, tonic::Status>;
-        async fn list_etf_lp_statuses(
-            &self,
-            request: tonic::Request<super::ListEtfLpStatusesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListEtfLpStatusesResponse>,
-            tonic::Status,
-        >;
-        /// Server streaming response type for the StreamEtfLpStatusUpdate method.
-        type StreamEtfLpStatusUpdateStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::EtfLpStatusUpdate, tonic::Status>,
+        /// Server streaming response type for the StreamMmStatusUpdate method.
+        type StreamMmStatusUpdateStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::MmStatusUpdate, tonic::Status>,
             >
             + Send
             + 'static;
-        async fn stream_etf_lp_status_update(
+        async fn stream_mm_status_update(
             &self,
-            request: tonic::Request<super::StreamEtfLpStatusUpdateRequest>,
+            request: tonic::Request<super::StreamMmStatusUpdateRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamEtfLpStatusUpdateStream>,
+            tonic::Response<Self::StreamMmStatusUpdateStream>,
             tonic::Status,
         >;
-        async fn start_etf_lp(
+        async fn start_mm(
             &self,
-            request: tonic::Request<super::StartEtfLpRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::StartEtfLpResponse>,
-            tonic::Status,
-        >;
-        async fn stop_etf_lp(
+            request: tonic::Request<super::StartMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::StartMmResponse>, tonic::Status>;
+        async fn stop_mm(
             &self,
-            request: tonic::Request<super::StopEtfLpRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::StopEtfLpResponse>,
-            tonic::Status,
-        >;
+            request: tonic::Request<super::StopMmRequest>,
+        ) -> std::result::Result<tonic::Response<super::StopMmResponse>, tonic::Status>;
         async fn get_user_orderbook(
             &self,
             request: tonic::Request<super::GetUserOrderBookRequest>,
@@ -486,25 +471,23 @@ pub mod lp_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/kdo.v1.lp.LpService/GetEtfLp" => {
+                "/kdo.v1.lp.LpService/GetMm" => {
                     #[allow(non_camel_case_types)]
-                    struct GetEtfLpSvc<T: LpService>(pub Arc<T>);
-                    impl<
-                        T: LpService,
-                    > tonic::server::UnaryService<super::GetEtfLpRequest>
-                    for GetEtfLpSvc<T> {
-                        type Response = super::EtfLp;
+                    struct GetMmSvc<T: LpService>(pub Arc<T>);
+                    impl<T: LpService> tonic::server::UnaryService<super::GetMmRequest>
+                    for GetMmSvc<T> {
+                        type Response = super::Mm;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetEtfLpRequest>,
+                            request: tonic::Request<super::GetMmRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::get_etf_lp(&inner, request).await
+                                <T as LpService>::get_mm(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -515,7 +498,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetEtfLpSvc(inner);
+                        let method = GetMmSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -531,25 +514,23 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/ListEtfLps" => {
+                "/kdo.v1.lp.LpService/ListMms" => {
                     #[allow(non_camel_case_types)]
-                    struct ListEtfLpsSvc<T: LpService>(pub Arc<T>);
-                    impl<
-                        T: LpService,
-                    > tonic::server::UnaryService<super::ListEtfLpsRequest>
-                    for ListEtfLpsSvc<T> {
-                        type Response = super::ListEtfLpsResponse;
+                    struct ListMmsSvc<T: LpService>(pub Arc<T>);
+                    impl<T: LpService> tonic::server::UnaryService<super::ListMmsRequest>
+                    for ListMmsSvc<T> {
+                        type Response = super::ListMmsResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListEtfLpsRequest>,
+                            request: tonic::Request<super::ListMmsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::list_etf_lps(&inner, request).await
+                                <T as LpService>::list_mms(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -560,7 +541,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ListEtfLpsSvc(inner);
+                        let method = ListMmsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -576,25 +557,25 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/UpdateEtfLp" => {
+                "/kdo.v1.lp.LpService/UpdateMm" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateEtfLpSvc<T: LpService>(pub Arc<T>);
+                    struct UpdateMmSvc<T: LpService>(pub Arc<T>);
                     impl<
                         T: LpService,
-                    > tonic::server::UnaryService<super::UpdateEtfLpRequest>
-                    for UpdateEtfLpSvc<T> {
-                        type Response = super::EtfLp;
+                    > tonic::server::UnaryService<super::UpdateMmRequest>
+                    for UpdateMmSvc<T> {
+                        type Response = super::Mm;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateEtfLpRequest>,
+                            request: tonic::Request<super::UpdateMmRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::update_etf_lp(&inner, request).await
+                                <T as LpService>::update_mm(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -605,7 +586,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = UpdateEtfLpSvc(inner);
+                        let method = UpdateMmSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -621,25 +602,25 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/GetEtfLpStatus" => {
+                "/kdo.v1.lp.LpService/GetMmStatus" => {
                     #[allow(non_camel_case_types)]
-                    struct GetEtfLpStatusSvc<T: LpService>(pub Arc<T>);
+                    struct GetMmStatusSvc<T: LpService>(pub Arc<T>);
                     impl<
                         T: LpService,
-                    > tonic::server::UnaryService<super::GetEtfLpStatusRequest>
-                    for GetEtfLpStatusSvc<T> {
-                        type Response = super::EtfLpStatus;
+                    > tonic::server::UnaryService<super::GetMmStatusRequest>
+                    for GetMmStatusSvc<T> {
+                        type Response = super::MmStatus;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetEtfLpStatusRequest>,
+                            request: tonic::Request<super::GetMmStatusRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::get_etf_lp_status(&inner, request).await
+                                <T as LpService>::get_mm_status(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -650,7 +631,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetEtfLpStatusSvc(inner);
+                        let method = GetMmStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -666,26 +647,25 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/ListEtfLpStatuses" => {
+                "/kdo.v1.lp.LpService/ListMmStatuses" => {
                     #[allow(non_camel_case_types)]
-                    struct ListEtfLpStatusesSvc<T: LpService>(pub Arc<T>);
+                    struct ListMmStatusesSvc<T: LpService>(pub Arc<T>);
                     impl<
                         T: LpService,
-                    > tonic::server::UnaryService<super::ListEtfLpStatusesRequest>
-                    for ListEtfLpStatusesSvc<T> {
-                        type Response = super::ListEtfLpStatusesResponse;
+                    > tonic::server::UnaryService<super::ListMmStatusesRequest>
+                    for ListMmStatusesSvc<T> {
+                        type Response = super::ListMmStatusesResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListEtfLpStatusesRequest>,
+                            request: tonic::Request<super::ListMmStatusesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::list_etf_lp_statuses(&inner, request)
-                                    .await
+                                <T as LpService>::list_mm_statuses(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -696,7 +676,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ListEtfLpStatusesSvc(inner);
+                        let method = ListMmStatusesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -712,32 +692,27 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate" => {
+                "/kdo.v1.lp.LpService/StreamMmStatusUpdate" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamEtfLpStatusUpdateSvc<T: LpService>(pub Arc<T>);
+                    struct StreamMmStatusUpdateSvc<T: LpService>(pub Arc<T>);
                     impl<
                         T: LpService,
                     > tonic::server::ServerStreamingService<
-                        super::StreamEtfLpStatusUpdateRequest,
-                    > for StreamEtfLpStatusUpdateSvc<T> {
-                        type Response = super::EtfLpStatusUpdate;
-                        type ResponseStream = T::StreamEtfLpStatusUpdateStream;
+                        super::StreamMmStatusUpdateRequest,
+                    > for StreamMmStatusUpdateSvc<T> {
+                        type Response = super::MmStatusUpdate;
+                        type ResponseStream = T::StreamMmStatusUpdateStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::StreamEtfLpStatusUpdateRequest,
-                            >,
+                            request: tonic::Request<super::StreamMmStatusUpdateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::stream_etf_lp_status_update(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as LpService>::stream_mm_status_update(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -749,7 +724,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamEtfLpStatusUpdateSvc(inner);
+                        let method = StreamMmStatusUpdateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -765,25 +740,23 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/StartEtfLp" => {
+                "/kdo.v1.lp.LpService/StartMm" => {
                     #[allow(non_camel_case_types)]
-                    struct StartEtfLpSvc<T: LpService>(pub Arc<T>);
-                    impl<
-                        T: LpService,
-                    > tonic::server::UnaryService<super::StartEtfLpRequest>
-                    for StartEtfLpSvc<T> {
-                        type Response = super::StartEtfLpResponse;
+                    struct StartMmSvc<T: LpService>(pub Arc<T>);
+                    impl<T: LpService> tonic::server::UnaryService<super::StartMmRequest>
+                    for StartMmSvc<T> {
+                        type Response = super::StartMmResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StartEtfLpRequest>,
+                            request: tonic::Request<super::StartMmRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::start_etf_lp(&inner, request).await
+                                <T as LpService>::start_mm(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -794,7 +767,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StartEtfLpSvc(inner);
+                        let method = StartMmSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -810,25 +783,23 @@ pub mod lp_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.lp.LpService/StopEtfLp" => {
+                "/kdo.v1.lp.LpService/StopMm" => {
                     #[allow(non_camel_case_types)]
-                    struct StopEtfLpSvc<T: LpService>(pub Arc<T>);
-                    impl<
-                        T: LpService,
-                    > tonic::server::UnaryService<super::StopEtfLpRequest>
-                    for StopEtfLpSvc<T> {
-                        type Response = super::StopEtfLpResponse;
+                    struct StopMmSvc<T: LpService>(pub Arc<T>);
+                    impl<T: LpService> tonic::server::UnaryService<super::StopMmRequest>
+                    for StopMmSvc<T> {
+                        type Response = super::StopMmResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StopEtfLpRequest>,
+                            request: tonic::Request<super::StopMmRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as LpService>::stop_etf_lp(&inner, request).await
+                                <T as LpService>::stop_mm(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -839,7 +810,7 @@ pub mod lp_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StopEtfLpSvc(inner);
+                        let method = StopMmSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

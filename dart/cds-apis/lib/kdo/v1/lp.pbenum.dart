@@ -38,25 +38,25 @@ class PositionAdjustmentStrategy extends $pb.ProtobufEnum {
 }
 
 /// ETF LP 상태 enum
-class EtfLpState extends $pb.ProtobufEnum {
-  static const EtfLpState ETF_LP_STATE_UNSPECIFIED = EtfLpState._(0, _omitEnumNames ? '' : 'ETF_LP_STATE_UNSPECIFIED');
-  static const EtfLpState ETF_LP_STATE_IDLE = EtfLpState._(1, _omitEnumNames ? '' : 'ETF_LP_STATE_IDLE');
-  static const EtfLpState ETF_LP_STATE_RUNNING = EtfLpState._(2, _omitEnumNames ? '' : 'ETF_LP_STATE_RUNNING');
-  static const EtfLpState ETF_LP_STATE_STOPPING = EtfLpState._(3, _omitEnumNames ? '' : 'ETF_LP_STATE_STOPPING');
-  static const EtfLpState ETF_LP_STATE_ERROR = EtfLpState._(4, _omitEnumNames ? '' : 'ETF_LP_STATE_ERROR');
+class MmState extends $pb.ProtobufEnum {
+  static const MmState MM_STATE_UNSPECIFIED = MmState._(0, _omitEnumNames ? '' : 'MM_STATE_UNSPECIFIED');
+  static const MmState MM_STATE_IDLE = MmState._(1, _omitEnumNames ? '' : 'MM_STATE_IDLE');
+  static const MmState MM_STATE_RUNNING = MmState._(2, _omitEnumNames ? '' : 'MM_STATE_RUNNING');
+  static const MmState MM_STATE_STOPPING = MmState._(3, _omitEnumNames ? '' : 'MM_STATE_STOPPING');
+  static const MmState MM_STATE_ERROR = MmState._(4, _omitEnumNames ? '' : 'MM_STATE_ERROR');
 
-  static const $core.List<EtfLpState> values = <EtfLpState> [
-    ETF_LP_STATE_UNSPECIFIED,
-    ETF_LP_STATE_IDLE,
-    ETF_LP_STATE_RUNNING,
-    ETF_LP_STATE_STOPPING,
-    ETF_LP_STATE_ERROR,
+  static const $core.List<MmState> values = <MmState> [
+    MM_STATE_UNSPECIFIED,
+    MM_STATE_IDLE,
+    MM_STATE_RUNNING,
+    MM_STATE_STOPPING,
+    MM_STATE_ERROR,
   ];
 
-  static final $core.List<EtfLpState?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
-  static EtfLpState? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<MmState?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static MmState? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const EtfLpState._(super.value, super.name);
+  const MmState._(super.value, super.name);
 }
 
 
