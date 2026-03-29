@@ -213,6 +213,10 @@ message Hedge {
   // 자동정정 전략 유형 (auto_amend=true 일 때 유효)
   // 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
   kdo.v1.common.AmendMethodType amend_method = 11;
+
+  // 헷지 1주 주문당 소스 종목 체결수량 기준
+  // key: 헷지 대상 심볼, value: 소스 종목 체결수량
+  map<string, int64> filled_quantity_per_hedge = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // 헷지 방식

@@ -60,8 +60,20 @@ const Hedge$json = {
     {'1': 'exec_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.hedge.ExecPriceType', '10': 'execPriceType'},
     {'1': 'auto_amend', '3': 10, '4': 1, '5': 8, '10': 'autoAmend'},
     {'1': 'amend_method', '3': 11, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '10': 'amendMethod'},
+    {'1': 'filled_quantity_per_hedge', '3': 12, '4': 3, '5': 11, '6': '.kdo.v1.hedge.Hedge.FilledQuantityPerHedgeEntry', '8': {}, '10': 'filledQuantityPerHedge'},
   ],
+  '3': [Hedge_FilledQuantityPerHedgeEntry$json],
   '7': {},
+};
+
+@$core.Deprecated('Use hedgeDescriptor instead')
+const Hedge_FilledQuantityPerHedgeEntry$json = {
+  '1': 'FilledQuantityPerHedgeEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 3, '10': 'value'},
+  ],
+  '7': {'7': true},
 };
 
 /// Descriptor for `Hedge`. Decode as a `google.protobuf.DescriptorProto`.
@@ -75,8 +87,11 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'YnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRJDCg9leGVjX3ByaWNlX3R5cGUYCSABKA'
     '4yGy5rZG8udjEuaGVkZ2UuRXhlY1ByaWNlVHlwZVINZXhlY1ByaWNlVHlwZRIdCgphdXRvX2Ft'
     'ZW5kGAogASgIUglhdXRvQW1lbmQSQQoMYW1lbmRfbWV0aG9kGAsgASgOMh4ua2RvLnYxLmNvbW'
-    '1vbi5BbWVuZE1ldGhvZFR5cGVSC2FtZW5kTWV0aG9kOirqQScKFWtkby5jZHNhcGlzLnh5ei9I'
-    'ZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
+    '1vbi5BbWVuZE1ldGhvZFR5cGVSC2FtZW5kTWV0aG9kEnAKGWZpbGxlZF9xdWFudGl0eV9wZXJf'
+    'aGVkZ2UYDCADKAsyLy5rZG8udjEuaGVkZ2UuSGVkZ2UuRmlsbGVkUXVhbnRpdHlQZXJIZWRnZU'
+    'VudHJ5QgTiQQEDUhZmaWxsZWRRdWFudGl0eVBlckhlZGdlGkkKG0ZpbGxlZFF1YW50aXR5UGVy'
+    'SGVkZ2VFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoA1IFdmFsdWU6AjgBOi'
+    'rqQScKFWtkby5jZHNhcGlzLnh5ei9IZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {

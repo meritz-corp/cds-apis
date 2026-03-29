@@ -1081,6 +1081,9 @@ impl serde::Serialize for Hedge {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.Hedge", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1119,6 +1122,11 @@ impl serde::Serialize for Hedge {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.amend_method)))?;
             struct_ser.serialize_field("amend_method", &v)?;
         }
+        if true {
+            let v: std::collections::HashMap<_, _> = self.filled_quantity_per_hedge.iter()
+                .map(|(k, v)| (k, v.to_string())).collect();
+            struct_ser.serialize_field("filled_quantity_per_hedge", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1149,6 +1157,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "autoAmend",
             "amend_method",
             "amendMethod",
+            "filled_quantity_per_hedge",
+            "filledQuantityPerHedge",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1164,6 +1174,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             ExecPriceType,
             AutoAmend,
             AmendMethod,
+            FilledQuantityPerHedge,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1197,6 +1208,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "execPriceType" | "exec_price_type" => Ok(GeneratedField::ExecPriceType),
                             "autoAmend" | "auto_amend" => Ok(GeneratedField::AutoAmend),
                             "amendMethod" | "amend_method" => Ok(GeneratedField::AmendMethod),
+                            "filledQuantityPerHedge" | "filled_quantity_per_hedge" => Ok(GeneratedField::FilledQuantityPerHedge),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1227,6 +1239,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut exec_price_type__ = None;
                 let mut auto_amend__ = None;
                 let mut amend_method__ = None;
+                let mut filled_quantity_per_hedge__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1297,6 +1310,15 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             }
                             amend_method__ = Some(map_.next_value::<super::common::AmendMethodType>()? as i32);
                         }
+                        GeneratedField::FilledQuantityPerHedge => {
+                            if filled_quantity_per_hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledQuantityPerHedge"));
+                            }
+                            filled_quantity_per_hedge__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<i64>>>()?
+                                    .into_iter().map(|(k,v)| (k, v.0)).collect()
+                            );
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1314,6 +1336,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     exec_price_type: exec_price_type__.unwrap_or_default(),
                     auto_amend: auto_amend__.unwrap_or_default(),
                     amend_method: amend_method__.unwrap_or_default(),
+                    filled_quantity_per_hedge: filled_quantity_per_hedge__.unwrap_or_default(),
                 })
             }
         }

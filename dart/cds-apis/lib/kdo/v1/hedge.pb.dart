@@ -38,6 +38,7 @@ class Hedge extends $pb.GeneratedMessage {
     ExecPriceType? execPriceType,
     $core.bool? autoAmend,
     $3.AmendMethodType? amendMethod,
+    $core.Iterable<$core.MapEntry<$core.String, $fixnum.Int64>>? filledQuantityPerHedge,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -51,6 +52,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (execPriceType != null) result.execPriceType = execPriceType;
     if (autoAmend != null) result.autoAmend = autoAmend;
     if (amendMethod != null) result.amendMethod = amendMethod;
+    if (filledQuantityPerHedge != null) result.filledQuantityPerHedge.addEntries(filledQuantityPerHedge);
     return result;
   }
 
@@ -71,6 +73,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..e<ExecPriceType>(9, _omitFieldNames ? '' : 'execPriceType', $pb.PbFieldType.OE, defaultOrMaker: ExecPriceType.EXEC_PRICE_TYPE_UNSPECIFIED, valueOf: ExecPriceType.valueOf, enumValues: ExecPriceType.values)
     ..aOB(10, _omitFieldNames ? '' : 'autoAmend')
     ..e<$3.AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: $3.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $3.AmendMethodType.valueOf, enumValues: $3.AmendMethodType.values)
+    ..m<$core.String, $fixnum.Int64>(12, _omitFieldNames ? '' : 'filledQuantityPerHedge', entryClassName: 'Hedge.FilledQuantityPerHedgeEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.O6, packageName: const $pb.PackageName('kdo.v1.hedge'))
     ..hasRequiredFields = false
   ;
 
@@ -207,6 +210,11 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasAmendMethod() => $_has(10);
   @$pb.TagNumber(11)
   void clearAmendMethod() => $_clearField(11);
+
+  /// 헷지 1주 주문당 소스 종목 체결수량 기준
+  /// key: 헷지 대상 심볼, value: 소스 종목 체결수량
+  @$pb.TagNumber(12)
+  $pb.PbMap<$core.String, $fixnum.Int64> get filledQuantityPerHedge => $_getMap(11);
 }
 
 enum HedgeMethod_Method {

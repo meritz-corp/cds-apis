@@ -372,6 +372,15 @@
                 "amendMethod": {
                   "$ref": "#/definitions/commonAmendMethodType",
                   "title": "자동정정 전략 유형 (auto_amend=true 일 때 유효)\n미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨"
+                },
+                "filledQuantityPerHedge": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string",
+                    "format": "int64"
+                  },
+                  "title": "헷지 1주 주문당 소스 종목 체결수량 기준\nkey: 헷지 대상 심볼, value: 소스 종목 체결수량",
+                  "readOnly": true
                 }
               },
               "title": "수정할 헷지 정보",
@@ -768,6 +777,15 @@
         "amendMethod": {
           "$ref": "#/definitions/commonAmendMethodType",
           "title": "자동정정 전략 유형 (auto_amend=true 일 때 유효)\n미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨"
+        },
+        "filledQuantityPerHedge": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "헷지 1주 주문당 소스 종목 체결수량 기준\nkey: 헷지 대상 심볼, value: 소스 종목 체결수량",
+          "readOnly": true
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",

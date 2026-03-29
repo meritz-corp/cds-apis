@@ -41,6 +41,10 @@ pub struct Hedge {
     /// 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
     #[prost(enumeration="super::common::AmendMethodType", tag="11")]
     pub amend_method: i32,
+    /// 헷지 1주 주문당 소스 종목 체결수량 기준
+    /// key: 헷지 대상 심볼, value: 소스 종목 체결수량
+    #[prost(map="string, int64", tag="12")]
+    pub filled_quantity_per_hedge: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
