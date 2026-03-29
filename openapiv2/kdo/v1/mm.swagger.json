@@ -614,6 +614,10 @@
           "type": "string",
           "format": "int64",
           "title": "ETF tick size (Price internal representation)"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "MM 활성화 여부"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

@@ -181,6 +181,9 @@ message MmConfiguration {
 
   // ETF tick size (Price internal representation)
   int64 tick_size = 5;
+
+  // MM 활성화 여부
+  bool enabled = 6;
 }
 
 // Skew 설정

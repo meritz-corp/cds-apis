@@ -57,6 +57,9 @@ pub struct MmConfiguration {
     /// ETF tick size (Price internal representation)
     #[prost(int64, tag="5")]
     pub tick_size: i64,
+    /// MM 활성화 여부
+    #[prost(bool, tag="6")]
+    pub enabled: bool,
 }
 /// Skew 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -207,6 +207,7 @@ class MmConfiguration extends $pb.GeneratedMessage {
     MmTradeAnalyzerConfig? tradeAnalyzer,
     MmScreeningConfig? screening,
     $fixnum.Int64? tickSize,
+    $core.bool? enabled,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
@@ -214,6 +215,7 @@ class MmConfiguration extends $pb.GeneratedMessage {
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
     if (screening != null) result.screening = screening;
     if (tickSize != null) result.tickSize = tickSize;
+    if (enabled != null) result.enabled = enabled;
     return result;
   }
 
@@ -228,6 +230,7 @@ class MmConfiguration extends $pb.GeneratedMessage {
     ..aOM<MmTradeAnalyzerConfig>(3, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: MmTradeAnalyzerConfig.create)
     ..aOM<MmScreeningConfig>(4, _omitFieldNames ? '' : 'screening', subBuilder: MmScreeningConfig.create)
     ..aInt64(5, _omitFieldNames ? '' : 'tickSize')
+    ..aOB(6, _omitFieldNames ? '' : 'enabled')
     ..hasRequiredFields = false
   ;
 
@@ -303,6 +306,16 @@ class MmConfiguration extends $pb.GeneratedMessage {
   $core.bool hasTickSize() => $_has(4);
   @$pb.TagNumber(5)
   void clearTickSize() => $_clearField(5);
+
+  /// MM 활성화 여부
+  @$pb.TagNumber(6)
+  $core.bool get enabled => $_getBF(5);
+  @$pb.TagNumber(6)
+  set enabled($core.bool value) => $_setBool(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasEnabled() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEnabled() => $_clearField(6);
 }
 
 /// Skew 설정
