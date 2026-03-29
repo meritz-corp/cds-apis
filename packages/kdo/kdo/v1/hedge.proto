@@ -34,6 +34,16 @@ service HedgeService {
     option (google.api.method_signature) = "";
   }
 
+  // HedgeAccumulator 소스 체결수량 업데이트
+  // source_bid_filled_quantity 와 source_ask_filled_quantity 를 직접 설정합니다.
+  rpc UpdateHedgeAccumulatorFilledQuantities(UpdateHedgeAccumulatorFilledQuantitiesRequest) returns (HedgeAccumulatorState) {
+    option (google.api.http) = {
+      post: "/v1/hedge_accumulators:updateFilledQuantities"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund_code,source_symbol,source_bid_filled_quantity,source_ask_filled_quantity";
+  }
+
   // 단일 Hedge 조회
   rpc GetHedge(GetHedgeRequest) returns (Hedge) {
     option (google.api.http) = {
@@ -558,4 +568,19 @@ message StreamHedgeAccumulatorsRequest {
   // * filter=portfolio_id=1
   // 빈 문자열 = 전체 accumulator 상태 스트리밍
   string filter = 1;
+}
+
+// UpdateHedgeAccumulatorFilledQuantities 요청
+message UpdateHedgeAccumulatorFilledQuantitiesRequest {
+  // 소스 ETF 펀드 코드
+  string fund_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 소스 ETF 종목 심볼
+  string source_symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 소스 ETF 매수 총 체결수량
+  int64 source_bid_filled_quantity = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 소스 ETF 매도 총 체결수량
+  int64 source_ask_filled_quantity = 4 [(google.api.field_behavior) = REQUIRED];
 }

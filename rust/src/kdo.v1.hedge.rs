@@ -421,6 +421,23 @@ pub struct StreamHedgeAccumulatorsRequest {
     #[prost(string, tag="1")]
     pub filter: ::prost::alloc::string::String,
 }
+/// UpdateHedgeAccumulatorFilledQuantities 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateHedgeAccumulatorFilledQuantitiesRequest {
+    /// 소스 ETF 펀드 코드
+    #[prost(string, tag="1")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 소스 ETF 종목 심볼
+    #[prost(string, tag="2")]
+    pub source_symbol: ::prost::alloc::string::String,
+    /// 소스 ETF 매수 총 체결수량
+    #[prost(int64, tag="3")]
+    pub source_bid_filled_quantity: i64,
+    /// 소스 ETF 매도 총 체결수량
+    #[prost(int64, tag="4")]
+    pub source_ask_filled_quantity: i64,
+}
 // ========== Enums ==========
 
 /// 헷지 주문 체결 가격 유형

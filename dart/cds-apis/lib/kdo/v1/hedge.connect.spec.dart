@@ -32,6 +32,15 @@ abstract final class HedgeService {
     kdov1hedge.HedgeAccumulatorState.new,
   );
 
+  /// HedgeAccumulator 소스 체결수량 업데이트
+  /// source_bid_filled_quantity 와 source_ask_filled_quantity 를 직접 설정합니다.
+  static const updateHedgeAccumulatorFilledQuantities = connect.Spec(
+    '/$name/UpdateHedgeAccumulatorFilledQuantities',
+    connect.StreamType.unary,
+    kdov1hedge.UpdateHedgeAccumulatorFilledQuantitiesRequest.new,
+    kdov1hedge.HedgeAccumulatorState.new,
+  );
+
   /// 단일 Hedge 조회
   static const getHedge = connect.Spec(
     '/$name/GetHedge',

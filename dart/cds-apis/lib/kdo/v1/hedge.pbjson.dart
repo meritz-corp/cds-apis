@@ -506,3 +506,22 @@ final $typed_data.Uint8List streamHedgeAccumulatorsRequestDescriptor = $convert.
     'Ch5TdHJlYW1IZWRnZUFjY3VtdWxhdG9yc1JlcXVlc3QSFgoGZmlsdGVyGAEgASgJUgZmaWx0ZX'
     'I=');
 
+@$core.Deprecated('Use updateHedgeAccumulatorFilledQuantitiesRequestDescriptor instead')
+const UpdateHedgeAccumulatorFilledQuantitiesRequest$json = {
+  '1': 'UpdateHedgeAccumulatorFilledQuantitiesRequest',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'source_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'sourceSymbol'},
+    {'1': 'source_bid_filled_quantity', '3': 3, '4': 1, '5': 3, '8': {}, '10': 'sourceBidFilledQuantity'},
+    {'1': 'source_ask_filled_quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'sourceAskFilledQuantity'},
+  ],
+};
+
+/// Descriptor for `UpdateHedgeAccumulatorFilledQuantitiesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateHedgeAccumulatorFilledQuantitiesRequestDescriptor = $convert.base64Decode(
+    'Ci1VcGRhdGVIZWRnZUFjY3VtdWxhdG9yRmlsbGVkUXVhbnRpdGllc1JlcXVlc3QSIQoJZnVuZF'
+    '9jb2RlGAEgASgJQgTiQQECUghmdW5kQ29kZRIpCg1zb3VyY2Vfc3ltYm9sGAIgASgJQgTiQQEC'
+    'Ugxzb3VyY2VTeW1ib2wSQQoac291cmNlX2JpZF9maWxsZWRfcXVhbnRpdHkYAyABKANCBOJBAQ'
+    'JSF3NvdXJjZUJpZEZpbGxlZFF1YW50aXR5EkEKGnNvdXJjZV9hc2tfZmlsbGVkX3F1YW50aXR5'
+    'GAQgASgDQgTiQQECUhdzb3VyY2VBc2tGaWxsZWRRdWFudGl0eQ==');
+

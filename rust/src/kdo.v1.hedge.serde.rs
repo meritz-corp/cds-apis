@@ -3266,6 +3266,164 @@ impl<'de> serde::Deserialize<'de> for TriggerCondition {
         deserializer.deserialize_struct("kdo.v1.hedge.TriggerCondition", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for UpdateHedgeAccumulatorFilledQuantitiesRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.UpdateHedgeAccumulatorFilledQuantitiesRequest", len)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("source_symbol", &self.source_symbol)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("source_bid_filled_quantity", ToString::to_string(&self.source_bid_filled_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("source_ask_filled_quantity", ToString::to_string(&self.source_ask_filled_quantity).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UpdateHedgeAccumulatorFilledQuantitiesRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund_code",
+            "fundCode",
+            "source_symbol",
+            "sourceSymbol",
+            "source_bid_filled_quantity",
+            "sourceBidFilledQuantity",
+            "source_ask_filled_quantity",
+            "sourceAskFilledQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FundCode,
+            SourceSymbol,
+            SourceBidFilledQuantity,
+            SourceAskFilledQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "sourceSymbol" | "source_symbol" => Ok(GeneratedField::SourceSymbol),
+                            "sourceBidFilledQuantity" | "source_bid_filled_quantity" => Ok(GeneratedField::SourceBidFilledQuantity),
+                            "sourceAskFilledQuantity" | "source_ask_filled_quantity" => Ok(GeneratedField::SourceAskFilledQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UpdateHedgeAccumulatorFilledQuantitiesRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.hedge.UpdateHedgeAccumulatorFilledQuantitiesRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateHedgeAccumulatorFilledQuantitiesRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund_code__ = None;
+                let mut source_symbol__ = None;
+                let mut source_bid_filled_quantity__ = None;
+                let mut source_ask_filled_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SourceSymbol => {
+                            if source_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sourceSymbol"));
+                            }
+                            source_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SourceBidFilledQuantity => {
+                            if source_bid_filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sourceBidFilledQuantity"));
+                            }
+                            source_bid_filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SourceAskFilledQuantity => {
+                            if source_ask_filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sourceAskFilledQuantity"));
+                            }
+                            source_ask_filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UpdateHedgeAccumulatorFilledQuantitiesRequest {
+                    fund_code: fund_code__.unwrap_or_default(),
+                    source_symbol: source_symbol__.unwrap_or_default(),
+                    source_bid_filled_quantity: source_bid_filled_quantity__.unwrap_or_default(),
+                    source_ask_filled_quantity: source_ask_filled_quantity__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeAccumulatorFilledQuantitiesRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for UpdateHedgeGroupRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>

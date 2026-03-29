@@ -518,6 +518,26 @@ func (mr *MockHedgeServiceClientMockRecorder) UpdateHedge(ctx, in interface{}, o
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedge", reflect.TypeOf((*MockHedgeServiceClient)(nil).UpdateHedge), varargs...)
 }
 
+// UpdateHedgeAccumulatorFilledQuantities mocks base method.
+func (m *MockHedgeServiceClient) UpdateHedgeAccumulatorFilledQuantities(ctx context.Context, in *UpdateHedgeAccumulatorFilledQuantitiesRequest, opts ...grpc.CallOption) (*HedgeAccumulatorState, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateHedgeAccumulatorFilledQuantities", varargs...)
+	ret0, _ := ret[0].(*HedgeAccumulatorState)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateHedgeAccumulatorFilledQuantities indicates an expected call of UpdateHedgeAccumulatorFilledQuantities.
+func (mr *MockHedgeServiceClientMockRecorder) UpdateHedgeAccumulatorFilledQuantities(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeAccumulatorFilledQuantities", reflect.TypeOf((*MockHedgeServiceClient)(nil).UpdateHedgeAccumulatorFilledQuantities), varargs...)
+}
+
 // UpdateHedgeGroup mocks base method.
 func (m *MockHedgeServiceClient) UpdateHedgeGroup(ctx context.Context, in *UpdateHedgeGroupRequest, opts ...grpc.CallOption) (*HedgeGroup, error) {
 	m.ctrl.T.Helper()
@@ -738,6 +758,21 @@ func (m *MockHedgeServiceServer) UpdateHedge(ctx context.Context, in *UpdateHedg
 func (mr *MockHedgeServiceServerMockRecorder) UpdateHedge(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedge", reflect.TypeOf((*MockHedgeServiceServer)(nil).UpdateHedge), ctx, in)
+}
+
+// UpdateHedgeAccumulatorFilledQuantities mocks base method.
+func (m *MockHedgeServiceServer) UpdateHedgeAccumulatorFilledQuantities(ctx context.Context, in *UpdateHedgeAccumulatorFilledQuantitiesRequest) (*HedgeAccumulatorState, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateHedgeAccumulatorFilledQuantities", ctx, in)
+	ret0, _ := ret[0].(*HedgeAccumulatorState)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateHedgeAccumulatorFilledQuantities indicates an expected call of UpdateHedgeAccumulatorFilledQuantities.
+func (mr *MockHedgeServiceServerMockRecorder) UpdateHedgeAccumulatorFilledQuantities(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeAccumulatorFilledQuantities", reflect.TypeOf((*MockHedgeServiceServer)(nil).UpdateHedgeAccumulatorFilledQuantities), ctx, in)
 }
 
 // UpdateHedgeGroup mocks base method.

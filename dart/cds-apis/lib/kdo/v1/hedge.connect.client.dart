@@ -50,6 +50,25 @@ extension type HedgeServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// HedgeAccumulator 소스 체결수량 업데이트
+  /// source_bid_filled_quantity 와 source_ask_filled_quantity 를 직접 설정합니다.
+  Future<kdov1hedge.HedgeAccumulatorState> updateHedgeAccumulatorFilledQuantities(
+    kdov1hedge.UpdateHedgeAccumulatorFilledQuantitiesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.HedgeService.updateHedgeAccumulatorFilledQuantities,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 단일 Hedge 조회
   Future<kdov1hedge.Hedge> getHedge(
     kdov1hedge.GetHedgeRequest input, {

@@ -29,6 +29,9 @@ type HedgeServiceClient interface {
 	// HedgeAccumulator 상태 실시간 스트림
 	// 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
 	StreamHedgeAccumulators(ctx context.Context, in *StreamHedgeAccumulatorsRequest, opts ...grpc.CallOption) (HedgeService_StreamHedgeAccumulatorsClient, error)
+	// HedgeAccumulator 소스 체결수량 업데이트
+	// source_bid_filled_quantity 와 source_ask_filled_quantity 를 직접 설정합니다.
+	UpdateHedgeAccumulatorFilledQuantities(ctx context.Context, in *UpdateHedgeAccumulatorFilledQuantitiesRequest, opts ...grpc.CallOption) (*HedgeAccumulatorState, error)
 	// 단일 Hedge 조회
 	GetHedge(ctx context.Context, in *GetHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// fund_code + source_symbol로 Hedge 조회
@@ -100,6 +103,15 @@ func (x *hedgeServiceStreamHedgeAccumulatorsClient) Recv() (*HedgeAccumulatorSta
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *hedgeServiceClient) UpdateHedgeAccumulatorFilledQuantities(ctx context.Context, in *UpdateHedgeAccumulatorFilledQuantitiesRequest, opts ...grpc.CallOption) (*HedgeAccumulatorState, error) {
+	out := new(HedgeAccumulatorState)
+	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/UpdateHedgeAccumulatorFilledQuantities", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *hedgeServiceClient) GetHedge(ctx context.Context, in *GetHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
@@ -211,6 +223,9 @@ type HedgeServiceServer interface {
 	// HedgeAccumulator 상태 실시간 스트림
 	// 즉시 헷지의 per-side 누적기(bid/ask) 상태 변화를 서버 스트리밍으로 수신합니다.
 	StreamHedgeAccumulators(*StreamHedgeAccumulatorsRequest, HedgeService_StreamHedgeAccumulatorsServer) error
+	// HedgeAccumulator 소스 체결수량 업데이트
+	// source_bid_filled_quantity 와 source_ask_filled_quantity 를 직접 설정합니다.
+	UpdateHedgeAccumulatorFilledQuantities(context.Context, *UpdateHedgeAccumulatorFilledQuantitiesRequest) (*HedgeAccumulatorState, error)
 	// 단일 Hedge 조회
 	GetHedge(context.Context, *GetHedgeRequest) (*Hedge, error)
 	// fund_code + source_symbol로 Hedge 조회
@@ -245,6 +260,9 @@ func (UnimplementedHedgeServiceServer) ListHedgeAccumulators(context.Context, *L
 }
 func (UnimplementedHedgeServiceServer) StreamHedgeAccumulators(*StreamHedgeAccumulatorsRequest, HedgeService_StreamHedgeAccumulatorsServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamHedgeAccumulators not implemented")
+}
+func (UnimplementedHedgeServiceServer) UpdateHedgeAccumulatorFilledQuantities(context.Context, *UpdateHedgeAccumulatorFilledQuantitiesRequest) (*HedgeAccumulatorState, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHedgeAccumulatorFilledQuantities not implemented")
 }
 func (UnimplementedHedgeServiceServer) GetHedge(context.Context, *GetHedgeRequest) (*Hedge, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHedge not implemented")
@@ -329,6 +347,24 @@ type hedgeServiceStreamHedgeAccumulatorsServer struct {
 
 func (x *hedgeServiceStreamHedgeAccumulatorsServer) Send(m *HedgeAccumulatorState) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _HedgeService_UpdateHedgeAccumulatorFilledQuantities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHedgeAccumulatorFilledQuantitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HedgeServiceServer).UpdateHedgeAccumulatorFilledQuantities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.hedge.HedgeService/UpdateHedgeAccumulatorFilledQuantities",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HedgeServiceServer).UpdateHedgeAccumulatorFilledQuantities(ctx, req.(*UpdateHedgeAccumulatorFilledQuantitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _HedgeService_GetHedge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -539,6 +575,10 @@ var HedgeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListHedgeAccumulators",
 			Handler:    _HedgeService_ListHedgeAccumulators_Handler,
+		},
+		{
+			MethodName: "UpdateHedgeAccumulatorFilledQuantities",
+			Handler:    _HedgeService_UpdateHedgeAccumulatorFilledQuantities_Handler,
 		},
 		{
 			MethodName: "GetHedge",

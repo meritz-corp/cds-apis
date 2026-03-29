@@ -1944,6 +1944,93 @@ class StreamHedgeAccumulatorsRequest extends $pb.GeneratedMessage {
   void clearFilter() => $_clearField(1);
 }
 
+/// UpdateHedgeAccumulatorFilledQuantities 요청
+class UpdateHedgeAccumulatorFilledQuantitiesRequest extends $pb.GeneratedMessage {
+  factory UpdateHedgeAccumulatorFilledQuantitiesRequest({
+    $core.String? fundCode,
+    $core.String? sourceSymbol,
+    $fixnum.Int64? sourceBidFilledQuantity,
+    $fixnum.Int64? sourceAskFilledQuantity,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
+    if (sourceBidFilledQuantity != null) result.sourceBidFilledQuantity = sourceBidFilledQuantity;
+    if (sourceAskFilledQuantity != null) result.sourceAskFilledQuantity = sourceAskFilledQuantity;
+    return result;
+  }
+
+  UpdateHedgeAccumulatorFilledQuantitiesRequest._();
+
+  factory UpdateHedgeAccumulatorFilledQuantitiesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateHedgeAccumulatorFilledQuantitiesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHedgeAccumulatorFilledQuantitiesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'sourceSymbol')
+    ..aInt64(3, _omitFieldNames ? '' : 'sourceBidFilledQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'sourceAskFilledQuantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateHedgeAccumulatorFilledQuantitiesRequest clone() => UpdateHedgeAccumulatorFilledQuantitiesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateHedgeAccumulatorFilledQuantitiesRequest copyWith(void Function(UpdateHedgeAccumulatorFilledQuantitiesRequest) updates) => super.copyWith((message) => updates(message as UpdateHedgeAccumulatorFilledQuantitiesRequest)) as UpdateHedgeAccumulatorFilledQuantitiesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateHedgeAccumulatorFilledQuantitiesRequest create() => UpdateHedgeAccumulatorFilledQuantitiesRequest._();
+  @$core.override
+  UpdateHedgeAccumulatorFilledQuantitiesRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateHedgeAccumulatorFilledQuantitiesRequest> createRepeated() => $pb.PbList<UpdateHedgeAccumulatorFilledQuantitiesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateHedgeAccumulatorFilledQuantitiesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHedgeAccumulatorFilledQuantitiesRequest>(create);
+  static UpdateHedgeAccumulatorFilledQuantitiesRequest? _defaultInstance;
+
+  /// 소스 ETF 펀드 코드
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  /// 소스 ETF 종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get sourceSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set sourceSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSourceSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSourceSymbol() => $_clearField(2);
+
+  /// 소스 ETF 매수 총 체결수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get sourceBidFilledQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set sourceBidFilledQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSourceBidFilledQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSourceBidFilledQuantity() => $_clearField(3);
+
+  /// 소스 ETF 매도 총 체결수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get sourceAskFilledQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set sourceAskFilledQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSourceAskFilledQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSourceAskFilledQuantity() => $_clearField(4);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
