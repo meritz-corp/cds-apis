@@ -1,5 +1,5 @@
 // @generated
-impl serde::Serialize for CreateMmRequest {
+impl serde::Serialize for CreateEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -10,26 +10,27 @@ impl serde::Serialize for CreateMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.CreateMmRequest", len)?;
-        if let Some(v) = self.mm.as_ref() {
-            struct_ser.serialize_field("mm", v)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.CreateEtfLpRequest", len)?;
+        if let Some(v) = self.etf_lp.as_ref() {
+            struct_ser.serialize_field("etf_lp", v)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for CreateMmRequest {
+impl<'de> serde::Deserialize<'de> for CreateEtfLpRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "mm",
+            "etf_lp",
+            "etfLp",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Mm,
+            EtfLp,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -52,7 +53,7 @@ impl<'de> serde::Deserialize<'de> for CreateMmRequest {
                         E: serde::de::Error,
                     {
                         match value {
-                            "mm" => Ok(GeneratedField::Mm),
+                            "etfLp" | "etf_lp" => Ok(GeneratedField::EtfLp),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -62,36 +63,2005 @@ impl<'de> serde::Deserialize<'de> for CreateMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = CreateMmRequest;
+            type Value = CreateEtfLpRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.CreateMmRequest")
+                formatter.write_str("struct kdo.v1.lp.CreateEtfLpRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CreateMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CreateEtfLpRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut mm__ = None;
+                let mut etf_lp__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Mm => {
-                            if mm__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mm"));
+                        GeneratedField::EtfLp => {
+                            if etf_lp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfLp"));
                             }
-                            mm__ = map_.next_value()?;
+                            etf_lp__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(CreateMmRequest {
-                    mm: mm__,
+                Ok(CreateEtfLpRequest {
+                    etf_lp: etf_lp__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.CreateMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.CreateEtfLpRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for EtfLp {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_basis", &self.ask_basis)?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_basis", &self.bid_basis)?;
+        }
+        if true {
+            struct_ser.serialize_field("depth", &self.depth)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if let Some(v) = self.pricing_method.as_ref() {
+            struct_ser.serialize_field("pricing_method", v)?;
+        }
+        if let Some(v) = self.bid_adjustment.as_ref() {
+            struct_ser.serialize_field("bid_adjustment", v)?;
+        }
+        if let Some(v) = self.ask_adjustment.as_ref() {
+            struct_ser.serialize_field("ask_adjustment", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
+        if let Some(v) = self.momentum_enabled.as_ref() {
+            struct_ser.serialize_field("momentum_enabled", v)?;
+        }
+        if let Some(v) = self.momentum_window.as_ref() {
+            struct_ser.serialize_field("momentum_window", v)?;
+        }
+        if let Some(v) = self.momentum_sensitivity.as_ref() {
+            struct_ser.serialize_field("momentum_sensitivity", v)?;
+        }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLp {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund_code",
+            "fundCode",
+            "ask_basis",
+            "askBasis",
+            "bid_basis",
+            "bidBasis",
+            "depth",
+            "tick_size",
+            "tickSize",
+            "offset",
+            "enabled",
+            "pricing_method",
+            "pricingMethod",
+            "bid_adjustment",
+            "bidAdjustment",
+            "ask_adjustment",
+            "askAdjustment",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
+            "momentum_enabled",
+            "momentumEnabled",
+            "momentum_window",
+            "momentumWindow",
+            "momentum_sensitivity",
+            "momentumSensitivity",
+            "quantity_limit",
+            "quantityLimit",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            FundCode,
+            AskBasis,
+            BidBasis,
+            Depth,
+            TickSize,
+            Offset,
+            Enabled,
+            PricingMethod,
+            BidAdjustment,
+            AskAdjustment,
+            BidQuantity,
+            AskQuantity,
+            MomentumEnabled,
+            MomentumWindow,
+            MomentumSensitivity,
+            QuantityLimit,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
+                            "depth" => Ok(GeneratedField::Depth),
+                            "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
+                            "offset" => Ok(GeneratedField::Offset),
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "pricingMethod" | "pricing_method" => Ok(GeneratedField::PricingMethod),
+                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
+                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
+                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
+                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLp;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLp")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLp, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                let mut ask_basis__ = None;
+                let mut bid_basis__ = None;
+                let mut depth__ = None;
+                let mut tick_size__ = None;
+                let mut offset__ = None;
+                let mut enabled__ = None;
+                let mut pricing_method__ = None;
+                let mut bid_adjustment__ = None;
+                let mut ask_adjustment__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
+                let mut momentum_enabled__ = None;
+                let mut momentum_window__ = None;
+                let mut momentum_sensitivity__ = None;
+                let mut quantity_limit__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
+                            }
+                            ask_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Depth => {
+                            if depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
+                            }
+                            depth__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TickSize => {
+                            if tick_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickSize"));
+                            }
+                            tick_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Offset => {
+                            if offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
+                            }
+                            offset__ = map_.next_value()?;
+                        }
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PricingMethod => {
+                            if pricing_method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricingMethod"));
+                            }
+                            pricing_method__ = map_.next_value()?;
+                        }
+                        GeneratedField::BidAdjustment => {
+                            if bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
+                            }
+                            bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskAdjustment => {
+                            if ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
+                            }
+                            ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MomentumEnabled => {
+                            if momentum_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                            }
+                            momentum_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::MomentumWindow => {
+                            if momentum_window__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
+                            }
+                            momentum_window__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumSensitivity => {
+                            if momentum_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
+                            }
+                            momentum_sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLp {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    ask_basis: ask_basis__.unwrap_or_default(),
+                    bid_basis: bid_basis__.unwrap_or_default(),
+                    depth: depth__.unwrap_or_default(),
+                    tick_size: tick_size__.unwrap_or_default(),
+                    offset: offset__,
+                    enabled: enabled__.unwrap_or_default(),
+                    pricing_method: pricing_method__,
+                    bid_adjustment: bid_adjustment__,
+                    ask_adjustment: ask_adjustment__,
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
+                    momentum_enabled: momentum_enabled__,
+                    momentum_window: momentum_window__,
+                    momentum_sensitivity: momentum_sensitivity__,
+                    quantity_limit: quantity_limit__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLp", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for EtfLpHedge {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpHedge", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("filled_quantity_per_hedge", ToString::to_string(&self.filled_quantity_per_hedge).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpHedge {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund",
+            "filled_quantity_per_hedge",
+            "filledQuantityPerHedge",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            Fund,
+            FilledQuantityPerHedge,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fund" => Ok(GeneratedField::Fund),
+                            "filledQuantityPerHedge" | "filled_quantity_per_hedge" => Ok(GeneratedField::FilledQuantityPerHedge),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpHedge;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpHedge")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpHedge, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund__ = None;
+                let mut filled_quantity_per_hedge__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FilledQuantityPerHedge => {
+                            if filled_quantity_per_hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledQuantityPerHedge"));
+                            }
+                            filled_quantity_per_hedge__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpHedge {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund: fund__.unwrap_or_default(),
+                    filled_quantity_per_hedge: filled_quantity_per_hedge__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpHedge", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for EtfLpOffset {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpOffset", len)?;
+        if true {
+            struct_ser.serialize_field("bid_offset", &self.bid_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("min_offset", &self.min_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("max_offset", &self.max_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("time_adjustment_enabled", &self.time_adjustment_enabled)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("adjustment_interval_secs", ToString::to_string(&self.adjustment_interval_secs).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("adjustment_step", &self.adjustment_step)?;
+        }
+        if true {
+            struct_ser.serialize_field("reset_on_fill", &self.reset_on_fill)?;
+        }
+        if true {
+            struct_ser.serialize_field("position_adjustment_enabled", &self.position_adjustment_enabled)?;
+        }
+        if true {
+            let v = PositionAdjustmentStrategy::try_from(self.position_strategy)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.position_strategy)))?;
+            struct_ser.serialize_field("position_strategy", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("position_threshold", ToString::to_string(&self.position_threshold).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("position_adjustment_step", &self.position_adjustment_step)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpOffset {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
+            "min_offset",
+            "minOffset",
+            "max_offset",
+            "maxOffset",
+            "time_adjustment_enabled",
+            "timeAdjustmentEnabled",
+            "adjustment_interval_secs",
+            "adjustmentIntervalSecs",
+            "adjustment_step",
+            "adjustmentStep",
+            "reset_on_fill",
+            "resetOnFill",
+            "position_adjustment_enabled",
+            "positionAdjustmentEnabled",
+            "position_strategy",
+            "positionStrategy",
+            "position_threshold",
+            "positionThreshold",
+            "position_adjustment_step",
+            "positionAdjustmentStep",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            BidOffset,
+            AskOffset,
+            MinOffset,
+            MaxOffset,
+            TimeAdjustmentEnabled,
+            AdjustmentIntervalSecs,
+            AdjustmentStep,
+            ResetOnFill,
+            PositionAdjustmentEnabled,
+            PositionStrategy,
+            PositionThreshold,
+            PositionAdjustmentStep,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
+                            "minOffset" | "min_offset" => Ok(GeneratedField::MinOffset),
+                            "maxOffset" | "max_offset" => Ok(GeneratedField::MaxOffset),
+                            "timeAdjustmentEnabled" | "time_adjustment_enabled" => Ok(GeneratedField::TimeAdjustmentEnabled),
+                            "adjustmentIntervalSecs" | "adjustment_interval_secs" => Ok(GeneratedField::AdjustmentIntervalSecs),
+                            "adjustmentStep" | "adjustment_step" => Ok(GeneratedField::AdjustmentStep),
+                            "resetOnFill" | "reset_on_fill" => Ok(GeneratedField::ResetOnFill),
+                            "positionAdjustmentEnabled" | "position_adjustment_enabled" => Ok(GeneratedField::PositionAdjustmentEnabled),
+                            "positionStrategy" | "position_strategy" => Ok(GeneratedField::PositionStrategy),
+                            "positionThreshold" | "position_threshold" => Ok(GeneratedField::PositionThreshold),
+                            "positionAdjustmentStep" | "position_adjustment_step" => Ok(GeneratedField::PositionAdjustmentStep),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpOffset;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpOffset")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpOffset, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
+                let mut min_offset__ = None;
+                let mut max_offset__ = None;
+                let mut time_adjustment_enabled__ = None;
+                let mut adjustment_interval_secs__ = None;
+                let mut adjustment_step__ = None;
+                let mut reset_on_fill__ = None;
+                let mut position_adjustment_enabled__ = None;
+                let mut position_strategy__ = None;
+                let mut position_threshold__ = None;
+                let mut position_adjustment_step__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
+                            }
+                            bid_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MinOffset => {
+                            if min_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minOffset"));
+                            }
+                            min_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxOffset => {
+                            if max_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxOffset"));
+                            }
+                            max_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TimeAdjustmentEnabled => {
+                            if time_adjustment_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("timeAdjustmentEnabled"));
+                            }
+                            time_adjustment_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AdjustmentIntervalSecs => {
+                            if adjustment_interval_secs__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("adjustmentIntervalSecs"));
+                            }
+                            adjustment_interval_secs__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AdjustmentStep => {
+                            if adjustment_step__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("adjustmentStep"));
+                            }
+                            adjustment_step__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ResetOnFill => {
+                            if reset_on_fill__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("resetOnFill"));
+                            }
+                            reset_on_fill__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PositionAdjustmentEnabled => {
+                            if position_adjustment_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionAdjustmentEnabled"));
+                            }
+                            position_adjustment_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PositionStrategy => {
+                            if position_strategy__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionStrategy"));
+                            }
+                            position_strategy__ = Some(map_.next_value::<PositionAdjustmentStrategy>()? as i32);
+                        }
+                        GeneratedField::PositionThreshold => {
+                            if position_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionThreshold"));
+                            }
+                            position_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PositionAdjustmentStep => {
+                            if position_adjustment_step__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionAdjustmentStep"));
+                            }
+                            position_adjustment_step__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpOffset {
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
+                    min_offset: min_offset__.unwrap_or_default(),
+                    max_offset: max_offset__.unwrap_or_default(),
+                    time_adjustment_enabled: time_adjustment_enabled__.unwrap_or_default(),
+                    adjustment_interval_secs: adjustment_interval_secs__.unwrap_or_default(),
+                    adjustment_step: adjustment_step__.unwrap_or_default(),
+                    reset_on_fill: reset_on_fill__.unwrap_or_default(),
+                    position_adjustment_enabled: position_adjustment_enabled__.unwrap_or_default(),
+                    position_strategy: position_strategy__.unwrap_or_default(),
+                    position_threshold: position_threshold__.unwrap_or_default(),
+                    position_adjustment_step: position_adjustment_step__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpOffset", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for EtfLpQuantityLimit {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpQuantityLimit", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_bid_quantity", ToString::to_string(&self.max_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_ask_quantity", ToString::to_string(&self.max_ask_quantity).as_str())?;
+        }
+        if let Some(v) = self.net_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.max_net_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_net_quantity", ToString::to_string(&v).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpQuantityLimit {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "max_bid_quantity",
+            "maxBidQuantity",
+            "max_ask_quantity",
+            "maxAskQuantity",
+            "net_quantity",
+            "netQuantity",
+            "max_net_quantity",
+            "maxNetQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            MaxBidQuantity,
+            MaxAskQuantity,
+            NetQuantity,
+            MaxNetQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "maxBidQuantity" | "max_bid_quantity" => Ok(GeneratedField::MaxBidQuantity),
+                            "maxAskQuantity" | "max_ask_quantity" => Ok(GeneratedField::MaxAskQuantity),
+                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
+                            "maxNetQuantity" | "max_net_quantity" => Ok(GeneratedField::MaxNetQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpQuantityLimit;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpQuantityLimit")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpQuantityLimit, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut max_bid_quantity__ = None;
+                let mut max_ask_quantity__ = None;
+                let mut net_quantity__ = None;
+                let mut max_net_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::MaxBidQuantity => {
+                            if max_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxBidQuantity"));
+                            }
+                            max_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxAskQuantity => {
+                            if max_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxAskQuantity"));
+                            }
+                            max_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantity => {
+                            if net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantity"));
+                            }
+                            net_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MaxNetQuantity => {
+                            if max_net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxNetQuantity"));
+                            }
+                            max_net_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpQuantityLimit {
+                    max_bid_quantity: max_bid_quantity__.unwrap_or_default(),
+                    max_ask_quantity: max_ask_quantity__.unwrap_or_default(),
+                    net_quantity: net_quantity__,
+                    max_net_quantity: max_net_quantity__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpQuantityLimit", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for EtfLpState {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "ETF_LP_STATE_UNSPECIFIED",
+            Self::Idle => "ETF_LP_STATE_IDLE",
+            Self::Running => "ETF_LP_STATE_RUNNING",
+            Self::Stopping => "ETF_LP_STATE_STOPPING",
+            Self::Error => "ETF_LP_STATE_ERROR",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpState {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ETF_LP_STATE_UNSPECIFIED",
+            "ETF_LP_STATE_IDLE",
+            "ETF_LP_STATE_RUNNING",
+            "ETF_LP_STATE_STOPPING",
+            "ETF_LP_STATE_ERROR",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpState;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ETF_LP_STATE_UNSPECIFIED" => Ok(EtfLpState::Unspecified),
+                    "ETF_LP_STATE_IDLE" => Ok(EtfLpState::Idle),
+                    "ETF_LP_STATE_RUNNING" => Ok(EtfLpState::Running),
+                    "ETF_LP_STATE_STOPPING" => Ok(EtfLpState::Stopping),
+                    "ETF_LP_STATE_ERROR" => Ok(EtfLpState::Error),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for EtfLpStatus {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if let Some(v) = self.ask_basis.as_ref() {
+            struct_ser.serialize_field("ask_basis", v)?;
+        }
+        if let Some(v) = self.bid_basis.as_ref() {
+            struct_ser.serialize_field("bid_basis", v)?;
+        }
+        if true {
+            let v = EtfLpState::try_from(self.state)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
+            struct_ser.serialize_field("state", &v)?;
+        }
+        if let Some(v) = self.pricing.as_ref() {
+            struct_ser.serialize_field("pricing", v)?;
+        }
+        if let Some(v) = self.fill_statistics.as_ref() {
+            struct_ser.serialize_field("fill_statistics", v)?;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
+        }
+        if let Some(v) = self.hedge.as_ref() {
+            struct_ser.serialize_field("hedge", v)?;
+        }
+        if let Some(v) = self.bid_adjustment.as_ref() {
+            struct_ser.serialize_field("bid_adjustment", v)?;
+        }
+        if let Some(v) = self.ask_adjustment.as_ref() {
+            struct_ser.serialize_field("ask_adjustment", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
+        if let Some(v) = self.momentum_enabled.as_ref() {
+            struct_ser.serialize_field("momentum_enabled", v)?;
+        }
+        if let Some(v) = self.momentum_window.as_ref() {
+            struct_ser.serialize_field("momentum_window", v)?;
+        }
+        if let Some(v) = self.momentum_sensitivity.as_ref() {
+            struct_ser.serialize_field("momentum_sensitivity", v)?;
+        }
+        if let Some(v) = self.momentum_bid_adjustment.as_ref() {
+            struct_ser.serialize_field("momentum_bid_adjustment", v)?;
+        }
+        if let Some(v) = self.momentum_ask_adjustment.as_ref() {
+            struct_ser.serialize_field("momentum_ask_adjustment", v)?;
+        }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpStatus {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf_symbol",
+            "etfSymbol",
+            "fund_code",
+            "fundCode",
+            "ask_basis",
+            "askBasis",
+            "bid_basis",
+            "bidBasis",
+            "state",
+            "pricing",
+            "fill_statistics",
+            "fillStatistics",
+            "offset",
+            "hedge",
+            "bid_adjustment",
+            "bidAdjustment",
+            "ask_adjustment",
+            "askAdjustment",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
+            "momentum_enabled",
+            "momentumEnabled",
+            "momentum_window",
+            "momentumWindow",
+            "momentum_sensitivity",
+            "momentumSensitivity",
+            "momentum_bid_adjustment",
+            "momentumBidAdjustment",
+            "momentum_ask_adjustment",
+            "momentumAskAdjustment",
+            "quantity_limit",
+            "quantityLimit",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EtfSymbol,
+            FundCode,
+            AskBasis,
+            BidBasis,
+            State,
+            Pricing,
+            FillStatistics,
+            Offset,
+            Hedge,
+            BidAdjustment,
+            AskAdjustment,
+            BidQuantity,
+            AskQuantity,
+            MomentumEnabled,
+            MomentumWindow,
+            MomentumSensitivity,
+            MomentumBidAdjustment,
+            MomentumAskAdjustment,
+            QuantityLimit,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
+                            "state" => Ok(GeneratedField::State),
+                            "pricing" => Ok(GeneratedField::Pricing),
+                            "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
+                            "offset" => Ok(GeneratedField::Offset),
+                            "hedge" => Ok(GeneratedField::Hedge),
+                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
+                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
+                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
+                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
+                            "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
+                            "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpStatus;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpStatus")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpStatus, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf_symbol__ = None;
+                let mut fund_code__ = None;
+                let mut ask_basis__ = None;
+                let mut bid_basis__ = None;
+                let mut state__ = None;
+                let mut pricing__ = None;
+                let mut fill_statistics__ = None;
+                let mut offset__ = None;
+                let mut hedge__ = None;
+                let mut bid_adjustment__ = None;
+                let mut ask_adjustment__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
+                let mut momentum_enabled__ = None;
+                let mut momentum_window__ = None;
+                let mut momentum_sensitivity__ = None;
+                let mut momentum_bid_adjustment__ = None;
+                let mut momentum_ask_adjustment__ = None;
+                let mut quantity_limit__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
+                            }
+                            ask_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::State => {
+                            if state__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("state"));
+                            }
+                            state__ = Some(map_.next_value::<EtfLpState>()? as i32);
+                        }
+                        GeneratedField::Pricing => {
+                            if pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricing"));
+                            }
+                            pricing__ = map_.next_value()?;
+                        }
+                        GeneratedField::FillStatistics => {
+                            if fill_statistics__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fillStatistics"));
+                            }
+                            fill_statistics__ = map_.next_value()?;
+                        }
+                        GeneratedField::Offset => {
+                            if offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
+                            }
+                            offset__ = map_.next_value()?;
+                        }
+                        GeneratedField::Hedge => {
+                            if hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedge"));
+                            }
+                            hedge__ = map_.next_value()?;
+                        }
+                        GeneratedField::BidAdjustment => {
+                            if bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
+                            }
+                            bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskAdjustment => {
+                            if ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
+                            }
+                            ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MomentumEnabled => {
+                            if momentum_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                            }
+                            momentum_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::MomentumWindow => {
+                            if momentum_window__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
+                            }
+                            momentum_window__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumSensitivity => {
+                            if momentum_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
+                            }
+                            momentum_sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumBidAdjustment => {
+                            if momentum_bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumBidAdjustment"));
+                            }
+                            momentum_bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumAskAdjustment => {
+                            if momentum_ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumAskAdjustment"));
+                            }
+                            momentum_ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpStatus {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    ask_basis: ask_basis__,
+                    bid_basis: bid_basis__,
+                    state: state__.unwrap_or_default(),
+                    pricing: pricing__,
+                    fill_statistics: fill_statistics__,
+                    offset: offset__,
+                    hedge: hedge__,
+                    bid_adjustment: bid_adjustment__,
+                    ask_adjustment: ask_adjustment__,
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
+                    momentum_enabled: momentum_enabled__,
+                    momentum_window: momentum_window__,
+                    momentum_sensitivity: momentum_sensitivity__,
+                    momentum_bid_adjustment: momentum_bid_adjustment__,
+                    momentum_ask_adjustment: momentum_ask_adjustment__,
+                    quantity_limit: quantity_limit__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpStatus", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for EtfLpStatusUpdate {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatusUpdate", len)?;
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if let Some(v) = self.ask_basis.as_ref() {
+            struct_ser.serialize_field("ask_basis", v)?;
+        }
+        if let Some(v) = self.bid_basis.as_ref() {
+            struct_ser.serialize_field("bid_basis", v)?;
+        }
+        if let Some(v) = self.state.as_ref() {
+            let v = EtfLpState::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("state", &v)?;
+        }
+        if let Some(v) = self.pricing.as_ref() {
+            struct_ser.serialize_field("pricing", v)?;
+        }
+        if let Some(v) = self.fill_statistics.as_ref() {
+            struct_ser.serialize_field("fill_statistics", v)?;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
+        }
+        if let Some(v) = self.bid_adjustment.as_ref() {
+            struct_ser.serialize_field("bid_adjustment", v)?;
+        }
+        if let Some(v) = self.ask_adjustment.as_ref() {
+            struct_ser.serialize_field("ask_adjustment", v)?;
+        }
+        if let Some(v) = self.bid_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.ask_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.momentum_enabled.as_ref() {
+            struct_ser.serialize_field("momentum_enabled", v)?;
+        }
+        if let Some(v) = self.momentum_window.as_ref() {
+            struct_ser.serialize_field("momentum_window", v)?;
+        }
+        if let Some(v) = self.momentum_sensitivity.as_ref() {
+            struct_ser.serialize_field("momentum_sensitivity", v)?;
+        }
+        if let Some(v) = self.momentum_bid_adjustment.as_ref() {
+            struct_ser.serialize_field("momentum_bid_adjustment", v)?;
+        }
+        if let Some(v) = self.momentum_ask_adjustment.as_ref() {
+            struct_ser.serialize_field("momentum_ask_adjustment", v)?;
+        }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf_symbol",
+            "etfSymbol",
+            "fund_code",
+            "fundCode",
+            "ask_basis",
+            "askBasis",
+            "bid_basis",
+            "bidBasis",
+            "state",
+            "pricing",
+            "fill_statistics",
+            "fillStatistics",
+            "offset",
+            "bid_adjustment",
+            "bidAdjustment",
+            "ask_adjustment",
+            "askAdjustment",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
+            "momentum_enabled",
+            "momentumEnabled",
+            "momentum_window",
+            "momentumWindow",
+            "momentum_sensitivity",
+            "momentumSensitivity",
+            "momentum_bid_adjustment",
+            "momentumBidAdjustment",
+            "momentum_ask_adjustment",
+            "momentumAskAdjustment",
+            "quantity_limit",
+            "quantityLimit",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EtfSymbol,
+            FundCode,
+            AskBasis,
+            BidBasis,
+            State,
+            Pricing,
+            FillStatistics,
+            Offset,
+            BidAdjustment,
+            AskAdjustment,
+            BidQuantity,
+            AskQuantity,
+            MomentumEnabled,
+            MomentumWindow,
+            MomentumSensitivity,
+            MomentumBidAdjustment,
+            MomentumAskAdjustment,
+            QuantityLimit,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
+                            "state" => Ok(GeneratedField::State),
+                            "pricing" => Ok(GeneratedField::Pricing),
+                            "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
+                            "offset" => Ok(GeneratedField::Offset),
+                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
+                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
+                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
+                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
+                            "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
+                            "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfLpStatusUpdate;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.EtfLpStatusUpdate")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EtfLpStatusUpdate, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf_symbol__ = None;
+                let mut fund_code__ = None;
+                let mut ask_basis__ = None;
+                let mut bid_basis__ = None;
+                let mut state__ = None;
+                let mut pricing__ = None;
+                let mut fill_statistics__ = None;
+                let mut offset__ = None;
+                let mut bid_adjustment__ = None;
+                let mut ask_adjustment__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
+                let mut momentum_enabled__ = None;
+                let mut momentum_window__ = None;
+                let mut momentum_sensitivity__ = None;
+                let mut momentum_bid_adjustment__ = None;
+                let mut momentum_ask_adjustment__ = None;
+                let mut quantity_limit__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
+                            }
+                            ask_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::State => {
+                            if state__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("state"));
+                            }
+                            state__ = map_.next_value::<::std::option::Option<EtfLpState>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::Pricing => {
+                            if pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricing"));
+                            }
+                            pricing__ = map_.next_value()?;
+                        }
+                        GeneratedField::FillStatistics => {
+                            if fill_statistics__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fillStatistics"));
+                            }
+                            fill_statistics__ = map_.next_value()?;
+                        }
+                        GeneratedField::Offset => {
+                            if offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
+                            }
+                            offset__ = map_.next_value()?;
+                        }
+                        GeneratedField::BidAdjustment => {
+                            if bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
+                            }
+                            bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskAdjustment => {
+                            if ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
+                            }
+                            ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumEnabled => {
+                            if momentum_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                            }
+                            momentum_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::MomentumWindow => {
+                            if momentum_window__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
+                            }
+                            momentum_window__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumSensitivity => {
+                            if momentum_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
+                            }
+                            momentum_sensitivity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumBidAdjustment => {
+                            if momentum_bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumBidAdjustment"));
+                            }
+                            momentum_bid_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MomentumAskAdjustment => {
+                            if momentum_ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumAskAdjustment"));
+                            }
+                            momentum_ask_adjustment__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(EtfLpStatusUpdate {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    ask_basis: ask_basis__,
+                    bid_basis: bid_basis__,
+                    state: state__,
+                    pricing: pricing__,
+                    fill_statistics: fill_statistics__,
+                    offset: offset__,
+                    bid_adjustment: bid_adjustment__,
+                    ask_adjustment: ask_adjustment__,
+                    bid_quantity: bid_quantity__,
+                    ask_quantity: ask_quantity__,
+                    momentum_enabled: momentum_enabled__,
+                    momentum_window: momentum_window__,
+                    momentum_sensitivity: momentum_sensitivity__,
+                    momentum_bid_adjustment: momentum_bid_adjustment__,
+                    momentum_ask_adjustment: momentum_ask_adjustment__,
+                    quantity_limit: quantity_limit__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.EtfLpStatusUpdate", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for EtfPricing {
@@ -491,7 +2461,7 @@ impl<'de> serde::Deserialize<'de> for FutureBasis {
         deserializer.deserialize_struct("kdo.v1.lp.FutureBasis", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for GetMmRequest {
+impl serde::Serialize for GetEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -505,7 +2475,7 @@ impl serde::Serialize for GetMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
@@ -515,7 +2485,7 @@ impl serde::Serialize for GetMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for GetMmRequest {
+impl<'de> serde::Deserialize<'de> for GetEtfLpRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -563,13 +2533,13 @@ impl<'de> serde::Deserialize<'de> for GetMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GetMmRequest;
+            type Value = GetEtfLpRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.GetMmRequest")
+                formatter.write_str("struct kdo.v1.lp.GetEtfLpRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetEtfLpRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -594,16 +2564,16 @@ impl<'de> serde::Deserialize<'de> for GetMmRequest {
                         }
                     }
                 }
-                Ok(GetMmRequest {
+                Ok(GetEtfLpRequest {
                     etf: etf__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.GetMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.GetEtfLpRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for GetMmStatusRequest {
+impl serde::Serialize for GetEtfLpStatusRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -617,7 +2587,7 @@ impl serde::Serialize for GetMmStatusRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetMmStatusRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetEtfLpStatusRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
@@ -627,7 +2597,7 @@ impl serde::Serialize for GetMmStatusRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for GetMmStatusRequest {
+impl<'de> serde::Deserialize<'de> for GetEtfLpStatusRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -675,13 +2645,13 @@ impl<'de> serde::Deserialize<'de> for GetMmStatusRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GetMmStatusRequest;
+            type Value = GetEtfLpStatusRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.GetMmStatusRequest")
+                formatter.write_str("struct kdo.v1.lp.GetEtfLpStatusRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMmStatusRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetEtfLpStatusRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -706,13 +2676,13 @@ impl<'de> serde::Deserialize<'de> for GetMmStatusRequest {
                         }
                     }
                 }
-                Ok(GetMmStatusRequest {
+                Ok(GetEtfLpStatusRequest {
                     etf: etf__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.GetMmStatusRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.GetEtfLpStatusRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetUserOrderBookRequest {
@@ -1017,7 +2987,7 @@ impl<'de> serde::Deserialize<'de> for LeverageFuturePricing {
         deserializer.deserialize_struct("kdo.v1.lp.LeverageFuturePricing", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListMmStatusesRequest {
+impl serde::Serialize for ListEtfLpStatusesRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1037,7 +3007,7 @@ impl serde::Serialize for ListMmStatusesRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListMmStatusesRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListEtfLpStatusesRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
             struct_ser.serialize_field("page_size", v)?;
         }
@@ -1053,7 +3023,7 @@ impl serde::Serialize for ListMmStatusesRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListMmStatusesRequest {
+impl<'de> serde::Deserialize<'de> for ListEtfLpStatusesRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1110,13 +3080,13 @@ impl<'de> serde::Deserialize<'de> for ListMmStatusesRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListMmStatusesRequest;
+            type Value = ListEtfLpStatusesRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.ListMmStatusesRequest")
+                formatter.write_str("struct kdo.v1.lp.ListEtfLpStatusesRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmStatusesRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListEtfLpStatusesRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1157,7 +3127,7 @@ impl<'de> serde::Deserialize<'de> for ListMmStatusesRequest {
                         }
                     }
                 }
-                Ok(ListMmStatusesRequest {
+                Ok(ListEtfLpStatusesRequest {
                     page_size: page_size__,
                     page_token: page_token__,
                     filter: filter__.unwrap_or_default(),
@@ -1165,10 +3135,10 @@ impl<'de> serde::Deserialize<'de> for ListMmStatusesRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.ListMmStatusesRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.ListEtfLpStatusesRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListMmStatusesResponse {
+impl serde::Serialize for ListEtfLpStatusesResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1182,9 +3152,9 @@ impl serde::Serialize for ListMmStatusesResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListMmStatusesResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListEtfLpStatusesResponse", len)?;
         if true {
-            struct_ser.serialize_field("mm_statuses", &self.mm_statuses)?;
+            struct_ser.serialize_field("etf_lp_statuses", &self.etf_lp_statuses)?;
         }
         if true {
             struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
@@ -1192,22 +3162,22 @@ impl serde::Serialize for ListMmStatusesResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListMmStatusesResponse {
+impl<'de> serde::Deserialize<'de> for ListEtfLpStatusesResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "mm_statuses",
-            "mmStatuses",
+            "etf_lp_statuses",
+            "etfLpStatuses",
             "next_page_token",
             "nextPageToken",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            MmStatuses,
+            EtfLpStatuses,
             NextPageToken,
             __SkipField__,
         }
@@ -1231,7 +3201,7 @@ impl<'de> serde::Deserialize<'de> for ListMmStatusesResponse {
                         E: serde::de::Error,
                     {
                         match value {
-                            "mmStatuses" | "mm_statuses" => Ok(GeneratedField::MmStatuses),
+                            "etfLpStatuses" | "etf_lp_statuses" => Ok(GeneratedField::EtfLpStatuses),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -1242,25 +3212,25 @@ impl<'de> serde::Deserialize<'de> for ListMmStatusesResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListMmStatusesResponse;
+            type Value = ListEtfLpStatusesResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.ListMmStatusesResponse")
+                formatter.write_str("struct kdo.v1.lp.ListEtfLpStatusesResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmStatusesResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListEtfLpStatusesResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut mm_statuses__ = None;
+                let mut etf_lp_statuses__ = None;
                 let mut next_page_token__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::MmStatuses => {
-                            if mm_statuses__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mmStatuses"));
+                        GeneratedField::EtfLpStatuses => {
+                            if etf_lp_statuses__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfLpStatuses"));
                             }
-                            mm_statuses__ = Some(map_.next_value()?);
+                            etf_lp_statuses__ = Some(map_.next_value()?);
                         }
                         GeneratedField::NextPageToken => {
                             if next_page_token__.is_some() {
@@ -1273,16 +3243,16 @@ impl<'de> serde::Deserialize<'de> for ListMmStatusesResponse {
                         }
                     }
                 }
-                Ok(ListMmStatusesResponse {
-                    mm_statuses: mm_statuses__.unwrap_or_default(),
+                Ok(ListEtfLpStatusesResponse {
+                    etf_lp_statuses: etf_lp_statuses__.unwrap_or_default(),
                     next_page_token: next_page_token__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.ListMmStatusesResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.ListEtfLpStatusesResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListMmsRequest {
+impl serde::Serialize for ListEtfLpsRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1299,7 +3269,7 @@ impl serde::Serialize for ListMmsRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListMmsRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListEtfLpsRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
             struct_ser.serialize_field("page_size", v)?;
         }
@@ -1312,7 +3282,7 @@ impl serde::Serialize for ListMmsRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListMmsRequest {
+impl<'de> serde::Deserialize<'de> for ListEtfLpsRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1365,13 +3335,13 @@ impl<'de> serde::Deserialize<'de> for ListMmsRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListMmsRequest;
+            type Value = ListEtfLpsRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.ListMmsRequest")
+                formatter.write_str("struct kdo.v1.lp.ListEtfLpsRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmsRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListEtfLpsRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1405,17 +3375,17 @@ impl<'de> serde::Deserialize<'de> for ListMmsRequest {
                         }
                     }
                 }
-                Ok(ListMmsRequest {
+                Ok(ListEtfLpsRequest {
                     page_size: page_size__,
                     page_token: page_token__,
                     filter: filter__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.ListMmsRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.ListEtfLpsRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListMmsResponse {
+impl serde::Serialize for ListEtfLpsResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1429,9 +3399,9 @@ impl serde::Serialize for ListMmsResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListMmsResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListEtfLpsResponse", len)?;
         if true {
-            struct_ser.serialize_field("mms", &self.mms)?;
+            struct_ser.serialize_field("etf_lps", &self.etf_lps)?;
         }
         if true {
             struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
@@ -1439,21 +3409,22 @@ impl serde::Serialize for ListMmsResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListMmsResponse {
+impl<'de> serde::Deserialize<'de> for ListEtfLpsResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "mms",
+            "etf_lps",
+            "etfLps",
             "next_page_token",
             "nextPageToken",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Mms,
+            EtfLps,
             NextPageToken,
             __SkipField__,
         }
@@ -1477,7 +3448,7 @@ impl<'de> serde::Deserialize<'de> for ListMmsResponse {
                         E: serde::de::Error,
                     {
                         match value {
-                            "mms" => Ok(GeneratedField::Mms),
+                            "etfLps" | "etf_lps" => Ok(GeneratedField::EtfLps),
                             "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -1488,25 +3459,25 @@ impl<'de> serde::Deserialize<'de> for ListMmsResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListMmsResponse;
+            type Value = ListEtfLpsResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.ListMmsResponse")
+                formatter.write_str("struct kdo.v1.lp.ListEtfLpsResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmsResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListEtfLpsResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut mms__ = None;
+                let mut etf_lps__ = None;
                 let mut next_page_token__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Mms => {
-                            if mms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mms"));
+                        GeneratedField::EtfLps => {
+                            if etf_lps__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfLps"));
                             }
-                            mms__ = Some(map_.next_value()?);
+                            etf_lps__ = Some(map_.next_value()?);
                         }
                         GeneratedField::NextPageToken => {
                             if next_page_token__.is_some() {
@@ -1519,13 +3490,13 @@ impl<'de> serde::Deserialize<'de> for ListMmsResponse {
                         }
                     }
                 }
-                Ok(ListMmsResponse {
-                    mms: mms__.unwrap_or_default(),
+                Ok(ListEtfLpsResponse {
+                    etf_lps: etf_lps__.unwrap_or_default(),
                     next_page_token: next_page_token__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.ListMmsResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.ListEtfLpsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for LpPricing {
@@ -1676,1975 +3647,6 @@ impl<'de> serde::Deserialize<'de> for LpPricing {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lp.LpPricing", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for Mm {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.Mm", len)?;
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        if true {
-            struct_ser.serialize_field("ask_basis", &self.ask_basis)?;
-        }
-        if true {
-            struct_ser.serialize_field("bid_basis", &self.bid_basis)?;
-        }
-        if true {
-            struct_ser.serialize_field("depth", &self.depth)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
-        }
-        if let Some(v) = self.offset.as_ref() {
-            struct_ser.serialize_field("offset", v)?;
-        }
-        if true {
-            struct_ser.serialize_field("enabled", &self.enabled)?;
-        }
-        if let Some(v) = self.pricing_method.as_ref() {
-            struct_ser.serialize_field("pricing_method", v)?;
-        }
-        if let Some(v) = self.bid_adjustment.as_ref() {
-            struct_ser.serialize_field("bid_adjustment", v)?;
-        }
-        if let Some(v) = self.ask_adjustment.as_ref() {
-            struct_ser.serialize_field("ask_adjustment", v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
-        }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window.as_ref() {
-            struct_ser.serialize_field("momentum_window", v)?;
-        }
-        if let Some(v) = self.momentum_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_sensitivity", v)?;
-        }
-        if let Some(v) = self.quantity_limit.as_ref() {
-            struct_ser.serialize_field("quantity_limit", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for Mm {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "symbol",
-            "fund_code",
-            "fundCode",
-            "ask_basis",
-            "askBasis",
-            "bid_basis",
-            "bidBasis",
-            "depth",
-            "tick_size",
-            "tickSize",
-            "offset",
-            "enabled",
-            "pricing_method",
-            "pricingMethod",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
-            "bid_quantity",
-            "bidQuantity",
-            "ask_quantity",
-            "askQuantity",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window",
-            "momentumWindow",
-            "momentum_sensitivity",
-            "momentumSensitivity",
-            "quantity_limit",
-            "quantityLimit",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Symbol,
-            FundCode,
-            AskBasis,
-            BidBasis,
-            Depth,
-            TickSize,
-            Offset,
-            Enabled,
-            PricingMethod,
-            BidAdjustment,
-            AskAdjustment,
-            BidQuantity,
-            AskQuantity,
-            MomentumEnabled,
-            MomentumWindow,
-            MomentumSensitivity,
-            QuantityLimit,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "depth" => Ok(GeneratedField::Depth),
-                            "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
-                            "offset" => Ok(GeneratedField::Offset),
-                            "enabled" => Ok(GeneratedField::Enabled),
-                            "pricingMethod" | "pricing_method" => Ok(GeneratedField::PricingMethod),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
-                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
-                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
-                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
-                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Mm;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.Mm")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Mm, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut symbol__ = None;
-                let mut fund_code__ = None;
-                let mut ask_basis__ = None;
-                let mut bid_basis__ = None;
-                let mut depth__ = None;
-                let mut tick_size__ = None;
-                let mut offset__ = None;
-                let mut enabled__ = None;
-                let mut pricing_method__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
-                let mut bid_quantity__ = None;
-                let mut ask_quantity__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window__ = None;
-                let mut momentum_sensitivity__ = None;
-                let mut quantity_limit__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Depth => {
-                            if depth__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("depth"));
-                            }
-                            depth__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::TickSize => {
-                            if tick_size__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("tickSize"));
-                            }
-                            tick_size__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
-                            }
-                            offset__ = map_.next_value()?;
-                        }
-                        GeneratedField::Enabled => {
-                            if enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("enabled"));
-                            }
-                            enabled__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::PricingMethod => {
-                            if pricing_method__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pricingMethod"));
-                            }
-                            pricing_method__ = map_.next_value()?;
-                        }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::BidQuantity => {
-                            if bid_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
-                            }
-                            bid_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskQuantity => {
-                            if ask_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askQuantity"));
-                            }
-                            ask_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
-                            }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindow => {
-                            if momentum_window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
-                            }
-                            momentum_window__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumSensitivity => {
-                            if momentum_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
-                            }
-                            momentum_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::QuantityLimit => {
-                            if quantity_limit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
-                            }
-                            quantity_limit__ = map_.next_value()?;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(Mm {
-                    symbol: symbol__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
-                    ask_basis: ask_basis__.unwrap_or_default(),
-                    bid_basis: bid_basis__.unwrap_or_default(),
-                    depth: depth__.unwrap_or_default(),
-                    tick_size: tick_size__.unwrap_or_default(),
-                    offset: offset__,
-                    enabled: enabled__.unwrap_or_default(),
-                    pricing_method: pricing_method__,
-                    bid_adjustment: bid_adjustment__,
-                    ask_adjustment: ask_adjustment__,
-                    bid_quantity: bid_quantity__.unwrap_or_default(),
-                    ask_quantity: ask_quantity__.unwrap_or_default(),
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window: momentum_window__,
-                    momentum_sensitivity: momentum_sensitivity__,
-                    quantity_limit: quantity_limit__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.Mm", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MmHedge {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.MmHedge", len)?;
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund", &self.fund)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("filled_quantity_per_hedge", ToString::to_string(&self.filled_quantity_per_hedge).as_str())?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MmHedge {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "symbol",
-            "fund",
-            "filled_quantity_per_hedge",
-            "filledQuantityPerHedge",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Symbol,
-            Fund,
-            FilledQuantityPerHedge,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            "fund" => Ok(GeneratedField::Fund),
-                            "filledQuantityPerHedge" | "filled_quantity_per_hedge" => Ok(GeneratedField::FilledQuantityPerHedge),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmHedge;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.MmHedge")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmHedge, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut symbol__ = None;
-                let mut fund__ = None;
-                let mut filled_quantity_per_hedge__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Fund => {
-                            if fund__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fund"));
-                            }
-                            fund__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::FilledQuantityPerHedge => {
-                            if filled_quantity_per_hedge__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("filledQuantityPerHedge"));
-                            }
-                            filled_quantity_per_hedge__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MmHedge {
-                    symbol: symbol__.unwrap_or_default(),
-                    fund: fund__.unwrap_or_default(),
-                    filled_quantity_per_hedge: filled_quantity_per_hedge__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.MmHedge", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MmOffset {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.MmOffset", len)?;
-        if true {
-            struct_ser.serialize_field("bid_offset", &self.bid_offset)?;
-        }
-        if true {
-            struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
-        }
-        if true {
-            struct_ser.serialize_field("min_offset", &self.min_offset)?;
-        }
-        if true {
-            struct_ser.serialize_field("max_offset", &self.max_offset)?;
-        }
-        if true {
-            struct_ser.serialize_field("time_adjustment_enabled", &self.time_adjustment_enabled)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("adjustment_interval_secs", ToString::to_string(&self.adjustment_interval_secs).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("adjustment_step", &self.adjustment_step)?;
-        }
-        if true {
-            struct_ser.serialize_field("reset_on_fill", &self.reset_on_fill)?;
-        }
-        if true {
-            struct_ser.serialize_field("position_adjustment_enabled", &self.position_adjustment_enabled)?;
-        }
-        if true {
-            let v = PositionAdjustmentStrategy::try_from(self.position_strategy)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.position_strategy)))?;
-            struct_ser.serialize_field("position_strategy", &v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("position_threshold", ToString::to_string(&self.position_threshold).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("position_adjustment_step", &self.position_adjustment_step)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MmOffset {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "bid_offset",
-            "bidOffset",
-            "ask_offset",
-            "askOffset",
-            "min_offset",
-            "minOffset",
-            "max_offset",
-            "maxOffset",
-            "time_adjustment_enabled",
-            "timeAdjustmentEnabled",
-            "adjustment_interval_secs",
-            "adjustmentIntervalSecs",
-            "adjustment_step",
-            "adjustmentStep",
-            "reset_on_fill",
-            "resetOnFill",
-            "position_adjustment_enabled",
-            "positionAdjustmentEnabled",
-            "position_strategy",
-            "positionStrategy",
-            "position_threshold",
-            "positionThreshold",
-            "position_adjustment_step",
-            "positionAdjustmentStep",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            BidOffset,
-            AskOffset,
-            MinOffset,
-            MaxOffset,
-            TimeAdjustmentEnabled,
-            AdjustmentIntervalSecs,
-            AdjustmentStep,
-            ResetOnFill,
-            PositionAdjustmentEnabled,
-            PositionStrategy,
-            PositionThreshold,
-            PositionAdjustmentStep,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
-                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
-                            "minOffset" | "min_offset" => Ok(GeneratedField::MinOffset),
-                            "maxOffset" | "max_offset" => Ok(GeneratedField::MaxOffset),
-                            "timeAdjustmentEnabled" | "time_adjustment_enabled" => Ok(GeneratedField::TimeAdjustmentEnabled),
-                            "adjustmentIntervalSecs" | "adjustment_interval_secs" => Ok(GeneratedField::AdjustmentIntervalSecs),
-                            "adjustmentStep" | "adjustment_step" => Ok(GeneratedField::AdjustmentStep),
-                            "resetOnFill" | "reset_on_fill" => Ok(GeneratedField::ResetOnFill),
-                            "positionAdjustmentEnabled" | "position_adjustment_enabled" => Ok(GeneratedField::PositionAdjustmentEnabled),
-                            "positionStrategy" | "position_strategy" => Ok(GeneratedField::PositionStrategy),
-                            "positionThreshold" | "position_threshold" => Ok(GeneratedField::PositionThreshold),
-                            "positionAdjustmentStep" | "position_adjustment_step" => Ok(GeneratedField::PositionAdjustmentStep),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmOffset;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.MmOffset")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmOffset, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut bid_offset__ = None;
-                let mut ask_offset__ = None;
-                let mut min_offset__ = None;
-                let mut max_offset__ = None;
-                let mut time_adjustment_enabled__ = None;
-                let mut adjustment_interval_secs__ = None;
-                let mut adjustment_step__ = None;
-                let mut reset_on_fill__ = None;
-                let mut position_adjustment_enabled__ = None;
-                let mut position_strategy__ = None;
-                let mut position_threshold__ = None;
-                let mut position_adjustment_step__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::BidOffset => {
-                            if bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffset"));
-                            }
-                            bid_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskOffset => {
-                            if ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffset"));
-                            }
-                            ask_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MinOffset => {
-                            if min_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("minOffset"));
-                            }
-                            min_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MaxOffset => {
-                            if max_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxOffset"));
-                            }
-                            max_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::TimeAdjustmentEnabled => {
-                            if time_adjustment_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("timeAdjustmentEnabled"));
-                            }
-                            time_adjustment_enabled__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::AdjustmentIntervalSecs => {
-                            if adjustment_interval_secs__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("adjustmentIntervalSecs"));
-                            }
-                            adjustment_interval_secs__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AdjustmentStep => {
-                            if adjustment_step__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("adjustmentStep"));
-                            }
-                            adjustment_step__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ResetOnFill => {
-                            if reset_on_fill__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("resetOnFill"));
-                            }
-                            reset_on_fill__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::PositionAdjustmentEnabled => {
-                            if position_adjustment_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionAdjustmentEnabled"));
-                            }
-                            position_adjustment_enabled__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::PositionStrategy => {
-                            if position_strategy__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionStrategy"));
-                            }
-                            position_strategy__ = Some(map_.next_value::<PositionAdjustmentStrategy>()? as i32);
-                        }
-                        GeneratedField::PositionThreshold => {
-                            if position_threshold__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionThreshold"));
-                            }
-                            position_threshold__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::PositionAdjustmentStep => {
-                            if position_adjustment_step__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("positionAdjustmentStep"));
-                            }
-                            position_adjustment_step__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MmOffset {
-                    bid_offset: bid_offset__.unwrap_or_default(),
-                    ask_offset: ask_offset__.unwrap_or_default(),
-                    min_offset: min_offset__.unwrap_or_default(),
-                    max_offset: max_offset__.unwrap_or_default(),
-                    time_adjustment_enabled: time_adjustment_enabled__.unwrap_or_default(),
-                    adjustment_interval_secs: adjustment_interval_secs__.unwrap_or_default(),
-                    adjustment_step: adjustment_step__.unwrap_or_default(),
-                    reset_on_fill: reset_on_fill__.unwrap_or_default(),
-                    position_adjustment_enabled: position_adjustment_enabled__.unwrap_or_default(),
-                    position_strategy: position_strategy__.unwrap_or_default(),
-                    position_threshold: position_threshold__.unwrap_or_default(),
-                    position_adjustment_step: position_adjustment_step__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.MmOffset", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MmQuantityLimit {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.MmQuantityLimit", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("max_bid_quantity", ToString::to_string(&self.max_bid_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("max_ask_quantity", ToString::to_string(&self.max_ask_quantity).as_str())?;
-        }
-        if let Some(v) = self.net_quantity.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("net_quantity", ToString::to_string(&v).as_str())?;
-        }
-        if let Some(v) = self.max_net_quantity.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("max_net_quantity", ToString::to_string(&v).as_str())?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MmQuantityLimit {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "max_bid_quantity",
-            "maxBidQuantity",
-            "max_ask_quantity",
-            "maxAskQuantity",
-            "net_quantity",
-            "netQuantity",
-            "max_net_quantity",
-            "maxNetQuantity",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            MaxBidQuantity,
-            MaxAskQuantity,
-            NetQuantity,
-            MaxNetQuantity,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "maxBidQuantity" | "max_bid_quantity" => Ok(GeneratedField::MaxBidQuantity),
-                            "maxAskQuantity" | "max_ask_quantity" => Ok(GeneratedField::MaxAskQuantity),
-                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
-                            "maxNetQuantity" | "max_net_quantity" => Ok(GeneratedField::MaxNetQuantity),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmQuantityLimit;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.MmQuantityLimit")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmQuantityLimit, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut max_bid_quantity__ = None;
-                let mut max_ask_quantity__ = None;
-                let mut net_quantity__ = None;
-                let mut max_net_quantity__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::MaxBidQuantity => {
-                            if max_bid_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxBidQuantity"));
-                            }
-                            max_bid_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MaxAskQuantity => {
-                            if max_ask_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxAskQuantity"));
-                            }
-                            max_ask_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::NetQuantity => {
-                            if net_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("netQuantity"));
-                            }
-                            net_quantity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MaxNetQuantity => {
-                            if max_net_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxNetQuantity"));
-                            }
-                            max_net_quantity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MmQuantityLimit {
-                    max_bid_quantity: max_bid_quantity__.unwrap_or_default(),
-                    max_ask_quantity: max_ask_quantity__.unwrap_or_default(),
-                    net_quantity: net_quantity__,
-                    max_net_quantity: max_net_quantity__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.MmQuantityLimit", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MmState {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "MM_STATE_UNSPECIFIED",
-            Self::Idle => "MM_STATE_IDLE",
-            Self::Running => "MM_STATE_RUNNING",
-            Self::Stopping => "MM_STATE_STOPPING",
-            Self::Error => "MM_STATE_ERROR",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for MmState {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "MM_STATE_UNSPECIFIED",
-            "MM_STATE_IDLE",
-            "MM_STATE_RUNNING",
-            "MM_STATE_STOPPING",
-            "MM_STATE_ERROR",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmState;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "MM_STATE_UNSPECIFIED" => Ok(MmState::Unspecified),
-                    "MM_STATE_IDLE" => Ok(MmState::Idle),
-                    "MM_STATE_RUNNING" => Ok(MmState::Running),
-                    "MM_STATE_STOPPING" => Ok(MmState::Stopping),
-                    "MM_STATE_ERROR" => Ok(MmState::Error),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MmStatus {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.MmStatus", len)?;
-        if true {
-            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        if let Some(v) = self.ask_basis.as_ref() {
-            struct_ser.serialize_field("ask_basis", v)?;
-        }
-        if let Some(v) = self.bid_basis.as_ref() {
-            struct_ser.serialize_field("bid_basis", v)?;
-        }
-        if true {
-            let v = MmState::try_from(self.state)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
-            struct_ser.serialize_field("state", &v)?;
-        }
-        if let Some(v) = self.pricing.as_ref() {
-            struct_ser.serialize_field("pricing", v)?;
-        }
-        if let Some(v) = self.fill_statistics.as_ref() {
-            struct_ser.serialize_field("fill_statistics", v)?;
-        }
-        if let Some(v) = self.offset.as_ref() {
-            struct_ser.serialize_field("offset", v)?;
-        }
-        if let Some(v) = self.hedge.as_ref() {
-            struct_ser.serialize_field("hedge", v)?;
-        }
-        if let Some(v) = self.bid_adjustment.as_ref() {
-            struct_ser.serialize_field("bid_adjustment", v)?;
-        }
-        if let Some(v) = self.ask_adjustment.as_ref() {
-            struct_ser.serialize_field("ask_adjustment", v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
-        }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window.as_ref() {
-            struct_ser.serialize_field("momentum_window", v)?;
-        }
-        if let Some(v) = self.momentum_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_sensitivity", v)?;
-        }
-        if let Some(v) = self.momentum_bid_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_bid_adjustment", v)?;
-        }
-        if let Some(v) = self.momentum_ask_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_ask_adjustment", v)?;
-        }
-        if let Some(v) = self.quantity_limit.as_ref() {
-            struct_ser.serialize_field("quantity_limit", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MmStatus {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "etf_symbol",
-            "etfSymbol",
-            "fund_code",
-            "fundCode",
-            "ask_basis",
-            "askBasis",
-            "bid_basis",
-            "bidBasis",
-            "state",
-            "pricing",
-            "fill_statistics",
-            "fillStatistics",
-            "offset",
-            "hedge",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
-            "bid_quantity",
-            "bidQuantity",
-            "ask_quantity",
-            "askQuantity",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window",
-            "momentumWindow",
-            "momentum_sensitivity",
-            "momentumSensitivity",
-            "momentum_bid_adjustment",
-            "momentumBidAdjustment",
-            "momentum_ask_adjustment",
-            "momentumAskAdjustment",
-            "quantity_limit",
-            "quantityLimit",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            EtfSymbol,
-            FundCode,
-            AskBasis,
-            BidBasis,
-            State,
-            Pricing,
-            FillStatistics,
-            Offset,
-            Hedge,
-            BidAdjustment,
-            AskAdjustment,
-            BidQuantity,
-            AskQuantity,
-            MomentumEnabled,
-            MomentumWindow,
-            MomentumSensitivity,
-            MomentumBidAdjustment,
-            MomentumAskAdjustment,
-            QuantityLimit,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "state" => Ok(GeneratedField::State),
-                            "pricing" => Ok(GeneratedField::Pricing),
-                            "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
-                            "offset" => Ok(GeneratedField::Offset),
-                            "hedge" => Ok(GeneratedField::Hedge),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
-                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
-                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
-                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
-                            "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
-                            "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
-                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmStatus;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.MmStatus")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmStatus, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut etf_symbol__ = None;
-                let mut fund_code__ = None;
-                let mut ask_basis__ = None;
-                let mut bid_basis__ = None;
-                let mut state__ = None;
-                let mut pricing__ = None;
-                let mut fill_statistics__ = None;
-                let mut offset__ = None;
-                let mut hedge__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
-                let mut bid_quantity__ = None;
-                let mut ask_quantity__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window__ = None;
-                let mut momentum_sensitivity__ = None;
-                let mut momentum_bid_adjustment__ = None;
-                let mut momentum_ask_adjustment__ = None;
-                let mut quantity_limit__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::EtfSymbol => {
-                            if etf_symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
-                            }
-                            etf_symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::State => {
-                            if state__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("state"));
-                            }
-                            state__ = Some(map_.next_value::<MmState>()? as i32);
-                        }
-                        GeneratedField::Pricing => {
-                            if pricing__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pricing"));
-                            }
-                            pricing__ = map_.next_value()?;
-                        }
-                        GeneratedField::FillStatistics => {
-                            if fill_statistics__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fillStatistics"));
-                            }
-                            fill_statistics__ = map_.next_value()?;
-                        }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
-                            }
-                            offset__ = map_.next_value()?;
-                        }
-                        GeneratedField::Hedge => {
-                            if hedge__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedge"));
-                            }
-                            hedge__ = map_.next_value()?;
-                        }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::BidQuantity => {
-                            if bid_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
-                            }
-                            bid_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskQuantity => {
-                            if ask_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askQuantity"));
-                            }
-                            ask_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
-                            }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindow => {
-                            if momentum_window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
-                            }
-                            momentum_window__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumSensitivity => {
-                            if momentum_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
-                            }
-                            momentum_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumBidAdjustment => {
-                            if momentum_bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumBidAdjustment"));
-                            }
-                            momentum_bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumAskAdjustment => {
-                            if momentum_ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumAskAdjustment"));
-                            }
-                            momentum_ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::QuantityLimit => {
-                            if quantity_limit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
-                            }
-                            quantity_limit__ = map_.next_value()?;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MmStatus {
-                    etf_symbol: etf_symbol__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
-                    ask_basis: ask_basis__,
-                    bid_basis: bid_basis__,
-                    state: state__.unwrap_or_default(),
-                    pricing: pricing__,
-                    fill_statistics: fill_statistics__,
-                    offset: offset__,
-                    hedge: hedge__,
-                    bid_adjustment: bid_adjustment__,
-                    ask_adjustment: ask_adjustment__,
-                    bid_quantity: bid_quantity__.unwrap_or_default(),
-                    ask_quantity: ask_quantity__.unwrap_or_default(),
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window: momentum_window__,
-                    momentum_sensitivity: momentum_sensitivity__,
-                    momentum_bid_adjustment: momentum_bid_adjustment__,
-                    momentum_ask_adjustment: momentum_ask_adjustment__,
-                    quantity_limit: quantity_limit__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.MmStatus", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MmStatusUpdate {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.MmStatusUpdate", len)?;
-        if true {
-            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        if let Some(v) = self.ask_basis.as_ref() {
-            struct_ser.serialize_field("ask_basis", v)?;
-        }
-        if let Some(v) = self.bid_basis.as_ref() {
-            struct_ser.serialize_field("bid_basis", v)?;
-        }
-        if let Some(v) = self.state.as_ref() {
-            let v = MmState::try_from(*v)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
-            struct_ser.serialize_field("state", &v)?;
-        }
-        if let Some(v) = self.pricing.as_ref() {
-            struct_ser.serialize_field("pricing", v)?;
-        }
-        if let Some(v) = self.fill_statistics.as_ref() {
-            struct_ser.serialize_field("fill_statistics", v)?;
-        }
-        if let Some(v) = self.offset.as_ref() {
-            struct_ser.serialize_field("offset", v)?;
-        }
-        if let Some(v) = self.bid_adjustment.as_ref() {
-            struct_ser.serialize_field("bid_adjustment", v)?;
-        }
-        if let Some(v) = self.ask_adjustment.as_ref() {
-            struct_ser.serialize_field("ask_adjustment", v)?;
-        }
-        if let Some(v) = self.bid_quantity.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_quantity", ToString::to_string(&v).as_str())?;
-        }
-        if let Some(v) = self.ask_quantity.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
-        }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window.as_ref() {
-            struct_ser.serialize_field("momentum_window", v)?;
-        }
-        if let Some(v) = self.momentum_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_sensitivity", v)?;
-        }
-        if let Some(v) = self.momentum_bid_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_bid_adjustment", v)?;
-        }
-        if let Some(v) = self.momentum_ask_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_ask_adjustment", v)?;
-        }
-        if let Some(v) = self.quantity_limit.as_ref() {
-            struct_ser.serialize_field("quantity_limit", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MmStatusUpdate {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "etf_symbol",
-            "etfSymbol",
-            "fund_code",
-            "fundCode",
-            "ask_basis",
-            "askBasis",
-            "bid_basis",
-            "bidBasis",
-            "state",
-            "pricing",
-            "fill_statistics",
-            "fillStatistics",
-            "offset",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
-            "bid_quantity",
-            "bidQuantity",
-            "ask_quantity",
-            "askQuantity",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window",
-            "momentumWindow",
-            "momentum_sensitivity",
-            "momentumSensitivity",
-            "momentum_bid_adjustment",
-            "momentumBidAdjustment",
-            "momentum_ask_adjustment",
-            "momentumAskAdjustment",
-            "quantity_limit",
-            "quantityLimit",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            EtfSymbol,
-            FundCode,
-            AskBasis,
-            BidBasis,
-            State,
-            Pricing,
-            FillStatistics,
-            Offset,
-            BidAdjustment,
-            AskAdjustment,
-            BidQuantity,
-            AskQuantity,
-            MomentumEnabled,
-            MomentumWindow,
-            MomentumSensitivity,
-            MomentumBidAdjustment,
-            MomentumAskAdjustment,
-            QuantityLimit,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
-                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "state" => Ok(GeneratedField::State),
-                            "pricing" => Ok(GeneratedField::Pricing),
-                            "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
-                            "offset" => Ok(GeneratedField::Offset),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
-                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
-                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
-                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
-                            "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
-                            "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
-                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmStatusUpdate;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.MmStatusUpdate")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmStatusUpdate, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut etf_symbol__ = None;
-                let mut fund_code__ = None;
-                let mut ask_basis__ = None;
-                let mut bid_basis__ = None;
-                let mut state__ = None;
-                let mut pricing__ = None;
-                let mut fill_statistics__ = None;
-                let mut offset__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
-                let mut bid_quantity__ = None;
-                let mut ask_quantity__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window__ = None;
-                let mut momentum_sensitivity__ = None;
-                let mut momentum_bid_adjustment__ = None;
-                let mut momentum_ask_adjustment__ = None;
-                let mut quantity_limit__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::EtfSymbol => {
-                            if etf_symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
-                            }
-                            etf_symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::FundCode => {
-                            if fund_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fundCode"));
-                            }
-                            fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::State => {
-                            if state__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("state"));
-                            }
-                            state__ = map_.next_value::<::std::option::Option<MmState>>()?.map(|x| x as i32);
-                        }
-                        GeneratedField::Pricing => {
-                            if pricing__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pricing"));
-                            }
-                            pricing__ = map_.next_value()?;
-                        }
-                        GeneratedField::FillStatistics => {
-                            if fill_statistics__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fillStatistics"));
-                            }
-                            fill_statistics__ = map_.next_value()?;
-                        }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
-                            }
-                            offset__ = map_.next_value()?;
-                        }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::BidQuantity => {
-                            if bid_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
-                            }
-                            bid_quantity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskQuantity => {
-                            if ask_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askQuantity"));
-                            }
-                            ask_quantity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
-                            }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindow => {
-                            if momentum_window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
-                            }
-                            momentum_window__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumSensitivity => {
-                            if momentum_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
-                            }
-                            momentum_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumBidAdjustment => {
-                            if momentum_bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumBidAdjustment"));
-                            }
-                            momentum_bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumAskAdjustment => {
-                            if momentum_ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumAskAdjustment"));
-                            }
-                            momentum_ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::QuantityLimit => {
-                            if quantity_limit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
-                            }
-                            quantity_limit__ = map_.next_value()?;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MmStatusUpdate {
-                    etf_symbol: etf_symbol__.unwrap_or_default(),
-                    fund_code: fund_code__.unwrap_or_default(),
-                    ask_basis: ask_basis__,
-                    bid_basis: bid_basis__,
-                    state: state__,
-                    pricing: pricing__,
-                    fill_statistics: fill_statistics__,
-                    offset: offset__,
-                    bid_adjustment: bid_adjustment__,
-                    ask_adjustment: ask_adjustment__,
-                    bid_quantity: bid_quantity__,
-                    ask_quantity: ask_quantity__,
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window: momentum_window__,
-                    momentum_sensitivity: momentum_sensitivity__,
-                    momentum_bid_adjustment: momentum_bid_adjustment__,
-                    momentum_ask_adjustment: momentum_ask_adjustment__,
-                    quantity_limit: quantity_limit__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.MmStatusUpdate", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for OrderStats {
@@ -4006,7 +4008,7 @@ impl<'de> serde::Deserialize<'de> for PositionAdjustmentStrategy {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
-impl serde::Serialize for StartMmRequest {
+impl serde::Serialize for StartEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -4020,7 +4022,7 @@ impl serde::Serialize for StartMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StartMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StartEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
@@ -4030,7 +4032,7 @@ impl serde::Serialize for StartMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StartMmRequest {
+impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -4078,13 +4080,13 @@ impl<'de> serde::Deserialize<'de> for StartMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StartMmRequest;
+            type Value = StartEtfLpRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.StartMmRequest")
+                formatter.write_str("struct kdo.v1.lp.StartEtfLpRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartEtfLpRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -4109,16 +4111,16 @@ impl<'de> serde::Deserialize<'de> for StartMmRequest {
                         }
                     }
                 }
-                Ok(StartMmRequest {
+                Ok(StartEtfLpRequest {
                     etf: etf__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.StartMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.StartEtfLpRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StartMmResponse {
+impl serde::Serialize for StartEtfLpResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -4132,7 +4134,7 @@ impl serde::Serialize for StartMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StartMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StartEtfLpResponse", len)?;
         if let Some(v) = self.status.as_ref() {
             struct_ser.serialize_field("status", v)?;
         }
@@ -4142,7 +4144,7 @@ impl serde::Serialize for StartMmResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StartMmResponse {
+impl<'de> serde::Deserialize<'de> for StartEtfLpResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -4190,13 +4192,13 @@ impl<'de> serde::Deserialize<'de> for StartMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StartMmResponse;
+            type Value = StartEtfLpResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.StartMmResponse")
+                formatter.write_str("struct kdo.v1.lp.StartEtfLpResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartEtfLpResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -4221,16 +4223,16 @@ impl<'de> serde::Deserialize<'de> for StartMmResponse {
                         }
                     }
                 }
-                Ok(StartMmResponse {
+                Ok(StartEtfLpResponse {
                     status: status__,
                     message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.StartMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.StartEtfLpResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StopMmRequest {
+impl serde::Serialize for StopEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -4244,7 +4246,7 @@ impl serde::Serialize for StopMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StopMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StopEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
@@ -4254,7 +4256,7 @@ impl serde::Serialize for StopMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StopMmRequest {
+impl<'de> serde::Deserialize<'de> for StopEtfLpRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -4302,13 +4304,13 @@ impl<'de> serde::Deserialize<'de> for StopMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StopMmRequest;
+            type Value = StopEtfLpRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.StopMmRequest")
+                formatter.write_str("struct kdo.v1.lp.StopEtfLpRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopEtfLpRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -4333,16 +4335,16 @@ impl<'de> serde::Deserialize<'de> for StopMmRequest {
                         }
                     }
                 }
-                Ok(StopMmRequest {
+                Ok(StopEtfLpRequest {
                     etf: etf__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.StopMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.StopEtfLpRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StopMmResponse {
+impl serde::Serialize for StopEtfLpResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -4356,7 +4358,7 @@ impl serde::Serialize for StopMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StopMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StopEtfLpResponse", len)?;
         if let Some(v) = self.status.as_ref() {
             struct_ser.serialize_field("status", v)?;
         }
@@ -4366,7 +4368,7 @@ impl serde::Serialize for StopMmResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StopMmResponse {
+impl<'de> serde::Deserialize<'de> for StopEtfLpResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -4414,13 +4416,13 @@ impl<'de> serde::Deserialize<'de> for StopMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StopMmResponse;
+            type Value = StopEtfLpResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.StopMmResponse")
+                formatter.write_str("struct kdo.v1.lp.StopEtfLpResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopEtfLpResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -4445,13 +4447,125 @@ impl<'de> serde::Deserialize<'de> for StopMmResponse {
                         }
                     }
                 }
-                Ok(StopMmResponse {
+                Ok(StopEtfLpResponse {
                     status: status__,
                     message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.StopMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.StopEtfLpResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for StreamEtfLpStatusUpdateRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamEtfLpStatusUpdateRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for StreamEtfLpStatusUpdateRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+            "fund",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            Fund,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "fund" => Ok(GeneratedField::Fund),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamEtfLpStatusUpdateRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.StreamEtfLpStatusUpdateRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamEtfLpStatusUpdateRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut fund__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(StreamEtfLpStatusUpdateRequest {
+                    etf: etf__.unwrap_or_default(),
+                    fund: fund__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.StreamEtfLpStatusUpdateRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StreamLpEventsRequest {
@@ -4564,118 +4678,6 @@ impl<'de> serde::Deserialize<'de> for StreamLpEventsRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.lp.StreamLpEventsRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for StreamMmStatusUpdateRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StreamMmStatusUpdateRequest", len)?;
-        if true {
-            struct_ser.serialize_field("etf", &self.etf)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund", &self.fund)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for StreamMmStatusUpdateRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "etf",
-            "fund",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Etf,
-            Fund,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "etf" => Ok(GeneratedField::Etf),
-                            "fund" => Ok(GeneratedField::Fund),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StreamMmStatusUpdateRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.StreamMmStatusUpdateRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamMmStatusUpdateRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut etf__ = None;
-                let mut fund__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Etf => {
-                            if etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etf"));
-                            }
-                            etf__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Fund => {
-                            if fund__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fund"));
-                            }
-                            fund__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(StreamMmStatusUpdateRequest {
-                    etf: etf__.unwrap_or_default(),
-                    fund: fund__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.StreamMmStatusUpdateRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for TimeFrameStatus {
@@ -4838,7 +4840,7 @@ impl<'de> serde::Deserialize<'de> for TimeFrameStatus {
         deserializer.deserialize_struct("kdo.v1.lp.TimeFrameStatus", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for UpdateMmRequest {
+impl serde::Serialize for UpdateEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -4888,7 +4890,7 @@ impl serde::Serialize for UpdateMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -4938,7 +4940,7 @@ impl serde::Serialize for UpdateMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for UpdateMmRequest {
+impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -5033,13 +5035,13 @@ impl<'de> serde::Deserialize<'de> for UpdateMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateMmRequest;
+            type Value = UpdateEtfLpRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.UpdateMmRequest")
+                formatter.write_str("struct kdo.v1.lp.UpdateEtfLpRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateEtfLpRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -5166,7 +5168,7 @@ impl<'de> serde::Deserialize<'de> for UpdateMmRequest {
                         }
                     }
                 }
-                Ok(UpdateMmRequest {
+                Ok(UpdateEtfLpRequest {
                     symbol: symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
                     depth: depth__,
@@ -5184,7 +5186,7 @@ impl<'de> serde::Deserialize<'de> for UpdateMmRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.UpdateMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.UpdateEtfLpRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UserOrderbookData {

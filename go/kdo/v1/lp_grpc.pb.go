@@ -23,21 +23,21 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LpServiceClient interface {
 	// ETF LP 조회
-	GetMm(ctx context.Context, in *GetMmRequest, opts ...grpc.CallOption) (*Mm, error)
-	// ETF LP 목록 조회
-	ListMms(ctx context.Context, in *ListMmsRequest, opts ...grpc.CallOption) (*ListMmsResponse, error)
+	GetEtfLp(ctx context.Context, in *GetEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error)
+	// ETF LP 조회
+	ListEtfLps(ctx context.Context, in *ListEtfLpsRequest, opts ...grpc.CallOption) (*ListEtfLpsResponse, error)
 	// ETF LP 업데이트
-	UpdateMm(ctx context.Context, in *UpdateMmRequest, opts ...grpc.CallOption) (*Mm, error)
+	UpdateEtfLp(ctx context.Context, in *UpdateEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error)
 	// ETF LP 상태 조회
-	GetMmStatus(ctx context.Context, in *GetMmStatusRequest, opts ...grpc.CallOption) (*MmStatus, error)
-	// ETF LP 상태 목록 조회
-	ListMmStatuses(ctx context.Context, in *ListMmStatusesRequest, opts ...grpc.CallOption) (*ListMmStatusesResponse, error)
+	GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest, opts ...grpc.CallOption) (*EtfLpStatus, error)
+	// ETF LP 상태 조회
+	ListEtfLpStatuses(ctx context.Context, in *ListEtfLpStatusesRequest, opts ...grpc.CallOption) (*ListEtfLpStatusesResponse, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
-	StreamMmStatusUpdate(ctx context.Context, in *StreamMmStatusUpdateRequest, opts ...grpc.CallOption) (LpService_StreamMmStatusUpdateClient, error)
+	StreamEtfLpStatusUpdate(ctx context.Context, in *StreamEtfLpStatusUpdateRequest, opts ...grpc.CallOption) (LpService_StreamEtfLpStatusUpdateClient, error)
 	// ETF LP 시작
-	StartMm(ctx context.Context, in *StartMmRequest, opts ...grpc.CallOption) (*StartMmResponse, error)
+	StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error)
 	// ETF LP 중지
-	StopMm(ctx context.Context, in *StopMmRequest, opts ...grpc.CallOption) (*StopMmResponse, error)
+	StopEtfLp(ctx context.Context, in *StopEtfLpRequest, opts ...grpc.CallOption) (*StopEtfLpResponse, error)
 	// 사용자 주문장 업데이트를 가져오기
 	GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
@@ -52,57 +52,57 @@ func NewLpServiceClient(cc grpc.ClientConnInterface) LpServiceClient {
 	return &lpServiceClient{cc}
 }
 
-func (c *lpServiceClient) GetMm(ctx context.Context, in *GetMmRequest, opts ...grpc.CallOption) (*Mm, error) {
-	out := new(Mm)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetMm", in, out, opts...)
+func (c *lpServiceClient) GetEtfLp(ctx context.Context, in *GetEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error) {
+	out := new(EtfLp)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetEtfLp", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *lpServiceClient) ListMms(ctx context.Context, in *ListMmsRequest, opts ...grpc.CallOption) (*ListMmsResponse, error) {
-	out := new(ListMmsResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ListMms", in, out, opts...)
+func (c *lpServiceClient) ListEtfLps(ctx context.Context, in *ListEtfLpsRequest, opts ...grpc.CallOption) (*ListEtfLpsResponse, error) {
+	out := new(ListEtfLpsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ListEtfLps", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *lpServiceClient) UpdateMm(ctx context.Context, in *UpdateMmRequest, opts ...grpc.CallOption) (*Mm, error) {
-	out := new(Mm)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/UpdateMm", in, out, opts...)
+func (c *lpServiceClient) UpdateEtfLp(ctx context.Context, in *UpdateEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error) {
+	out := new(EtfLp)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/UpdateEtfLp", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *lpServiceClient) GetMmStatus(ctx context.Context, in *GetMmStatusRequest, opts ...grpc.CallOption) (*MmStatus, error) {
-	out := new(MmStatus)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetMmStatus", in, out, opts...)
+func (c *lpServiceClient) GetEtfLpStatus(ctx context.Context, in *GetEtfLpStatusRequest, opts ...grpc.CallOption) (*EtfLpStatus, error) {
+	out := new(EtfLpStatus)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetEtfLpStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *lpServiceClient) ListMmStatuses(ctx context.Context, in *ListMmStatusesRequest, opts ...grpc.CallOption) (*ListMmStatusesResponse, error) {
-	out := new(ListMmStatusesResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ListMmStatuses", in, out, opts...)
+func (c *lpServiceClient) ListEtfLpStatuses(ctx context.Context, in *ListEtfLpStatusesRequest, opts ...grpc.CallOption) (*ListEtfLpStatusesResponse, error) {
+	out := new(ListEtfLpStatusesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ListEtfLpStatuses", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *lpServiceClient) StreamMmStatusUpdate(ctx context.Context, in *StreamMmStatusUpdateRequest, opts ...grpc.CallOption) (LpService_StreamMmStatusUpdateClient, error) {
-	stream, err := c.cc.NewStream(ctx, &LpService_ServiceDesc.Streams[0], "/kdo.v1.lp.LpService/StreamMmStatusUpdate", opts...)
+func (c *lpServiceClient) StreamEtfLpStatusUpdate(ctx context.Context, in *StreamEtfLpStatusUpdateRequest, opts ...grpc.CallOption) (LpService_StreamEtfLpStatusUpdateClient, error) {
+	stream, err := c.cc.NewStream(ctx, &LpService_ServiceDesc.Streams[0], "/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &lpServiceStreamMmStatusUpdateClient{stream}
+	x := &lpServiceStreamEtfLpStatusUpdateClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -112,35 +112,35 @@ func (c *lpServiceClient) StreamMmStatusUpdate(ctx context.Context, in *StreamMm
 	return x, nil
 }
 
-type LpService_StreamMmStatusUpdateClient interface {
-	Recv() (*MmStatusUpdate, error)
+type LpService_StreamEtfLpStatusUpdateClient interface {
+	Recv() (*EtfLpStatusUpdate, error)
 	grpc.ClientStream
 }
 
-type lpServiceStreamMmStatusUpdateClient struct {
+type lpServiceStreamEtfLpStatusUpdateClient struct {
 	grpc.ClientStream
 }
 
-func (x *lpServiceStreamMmStatusUpdateClient) Recv() (*MmStatusUpdate, error) {
-	m := new(MmStatusUpdate)
+func (x *lpServiceStreamEtfLpStatusUpdateClient) Recv() (*EtfLpStatusUpdate, error) {
+	m := new(EtfLpStatusUpdate)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *lpServiceClient) StartMm(ctx context.Context, in *StartMmRequest, opts ...grpc.CallOption) (*StartMmResponse, error) {
-	out := new(StartMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/StartMm", in, out, opts...)
+func (c *lpServiceClient) StartEtfLp(ctx context.Context, in *StartEtfLpRequest, opts ...grpc.CallOption) (*StartEtfLpResponse, error) {
+	out := new(StartEtfLpResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/StartEtfLp", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *lpServiceClient) StopMm(ctx context.Context, in *StopMmRequest, opts ...grpc.CallOption) (*StopMmResponse, error) {
-	out := new(StopMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/StopMm", in, out, opts...)
+func (c *lpServiceClient) StopEtfLp(ctx context.Context, in *StopEtfLpRequest, opts ...grpc.CallOption) (*StopEtfLpResponse, error) {
+	out := new(StopEtfLpResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/StopEtfLp", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -193,21 +193,21 @@ func (x *lpServiceStreamUserOrderbookClient) Recv() (*UserOrderbookData, error) 
 // for forward compatibility
 type LpServiceServer interface {
 	// ETF LP 조회
-	GetMm(context.Context, *GetMmRequest) (*Mm, error)
-	// ETF LP 목록 조회
-	ListMms(context.Context, *ListMmsRequest) (*ListMmsResponse, error)
+	GetEtfLp(context.Context, *GetEtfLpRequest) (*EtfLp, error)
+	// ETF LP 조회
+	ListEtfLps(context.Context, *ListEtfLpsRequest) (*ListEtfLpsResponse, error)
 	// ETF LP 업데이트
-	UpdateMm(context.Context, *UpdateMmRequest) (*Mm, error)
+	UpdateEtfLp(context.Context, *UpdateEtfLpRequest) (*EtfLp, error)
 	// ETF LP 상태 조회
-	GetMmStatus(context.Context, *GetMmStatusRequest) (*MmStatus, error)
-	// ETF LP 상태 목록 조회
-	ListMmStatuses(context.Context, *ListMmStatusesRequest) (*ListMmStatusesResponse, error)
+	GetEtfLpStatus(context.Context, *GetEtfLpStatusRequest) (*EtfLpStatus, error)
+	// ETF LP 상태 조회
+	ListEtfLpStatuses(context.Context, *ListEtfLpStatusesRequest) (*ListEtfLpStatusesResponse, error)
 	// ETF LP 상태 스트리밍 (실시간 업데이트)
-	StreamMmStatusUpdate(*StreamMmStatusUpdateRequest, LpService_StreamMmStatusUpdateServer) error
+	StreamEtfLpStatusUpdate(*StreamEtfLpStatusUpdateRequest, LpService_StreamEtfLpStatusUpdateServer) error
 	// ETF LP 시작
-	StartMm(context.Context, *StartMmRequest) (*StartMmResponse, error)
+	StartEtfLp(context.Context, *StartEtfLpRequest) (*StartEtfLpResponse, error)
 	// ETF LP 중지
-	StopMm(context.Context, *StopMmRequest) (*StopMmResponse, error)
+	StopEtfLp(context.Context, *StopEtfLpRequest) (*StopEtfLpResponse, error)
 	// 사용자 주문장 업데이트를 가져오기
 	GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
@@ -219,29 +219,29 @@ type LpServiceServer interface {
 type UnimplementedLpServiceServer struct {
 }
 
-func (UnimplementedLpServiceServer) GetMm(context.Context, *GetMmRequest) (*Mm, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMm not implemented")
+func (UnimplementedLpServiceServer) GetEtfLp(context.Context, *GetEtfLpRequest) (*EtfLp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEtfLp not implemented")
 }
-func (UnimplementedLpServiceServer) ListMms(context.Context, *ListMmsRequest) (*ListMmsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMms not implemented")
+func (UnimplementedLpServiceServer) ListEtfLps(context.Context, *ListEtfLpsRequest) (*ListEtfLpsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEtfLps not implemented")
 }
-func (UnimplementedLpServiceServer) UpdateMm(context.Context, *UpdateMmRequest) (*Mm, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMm not implemented")
+func (UnimplementedLpServiceServer) UpdateEtfLp(context.Context, *UpdateEtfLpRequest) (*EtfLp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEtfLp not implemented")
 }
-func (UnimplementedLpServiceServer) GetMmStatus(context.Context, *GetMmStatusRequest) (*MmStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMmStatus not implemented")
+func (UnimplementedLpServiceServer) GetEtfLpStatus(context.Context, *GetEtfLpStatusRequest) (*EtfLpStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEtfLpStatus not implemented")
 }
-func (UnimplementedLpServiceServer) ListMmStatuses(context.Context, *ListMmStatusesRequest) (*ListMmStatusesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMmStatuses not implemented")
+func (UnimplementedLpServiceServer) ListEtfLpStatuses(context.Context, *ListEtfLpStatusesRequest) (*ListEtfLpStatusesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEtfLpStatuses not implemented")
 }
-func (UnimplementedLpServiceServer) StreamMmStatusUpdate(*StreamMmStatusUpdateRequest, LpService_StreamMmStatusUpdateServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamMmStatusUpdate not implemented")
+func (UnimplementedLpServiceServer) StreamEtfLpStatusUpdate(*StreamEtfLpStatusUpdateRequest, LpService_StreamEtfLpStatusUpdateServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamEtfLpStatusUpdate not implemented")
 }
-func (UnimplementedLpServiceServer) StartMm(context.Context, *StartMmRequest) (*StartMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartMm not implemented")
+func (UnimplementedLpServiceServer) StartEtfLp(context.Context, *StartEtfLpRequest) (*StartEtfLpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartEtfLp not implemented")
 }
-func (UnimplementedLpServiceServer) StopMm(context.Context, *StopMmRequest) (*StopMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StopMm not implemented")
+func (UnimplementedLpServiceServer) StopEtfLp(context.Context, *StopEtfLpRequest) (*StopEtfLpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopEtfLp not implemented")
 }
 func (UnimplementedLpServiceServer) GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserOrderbook not implemented")
@@ -262,149 +262,149 @@ func RegisterLpServiceServer(s grpc.ServiceRegistrar, srv LpServiceServer) {
 	s.RegisterService(&LpService_ServiceDesc, srv)
 }
 
-func _LpService_GetMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMmRequest)
+func _LpService_GetEtfLp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEtfLpRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LpServiceServer).GetMm(ctx, in)
+		return srv.(LpServiceServer).GetEtfLp(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/GetMm",
+		FullMethod: "/kdo.v1.lp.LpService/GetEtfLp",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).GetMm(ctx, req.(*GetMmRequest))
+		return srv.(LpServiceServer).GetEtfLp(ctx, req.(*GetEtfLpRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_ListMms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMmsRequest)
+func _LpService_ListEtfLps_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEtfLpsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LpServiceServer).ListMms(ctx, in)
+		return srv.(LpServiceServer).ListEtfLps(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/ListMms",
+		FullMethod: "/kdo.v1.lp.LpService/ListEtfLps",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).ListMms(ctx, req.(*ListMmsRequest))
+		return srv.(LpServiceServer).ListEtfLps(ctx, req.(*ListEtfLpsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_UpdateMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMmRequest)
+func _LpService_UpdateEtfLp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEtfLpRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LpServiceServer).UpdateMm(ctx, in)
+		return srv.(LpServiceServer).UpdateEtfLp(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/UpdateMm",
+		FullMethod: "/kdo.v1.lp.LpService/UpdateEtfLp",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).UpdateMm(ctx, req.(*UpdateMmRequest))
+		return srv.(LpServiceServer).UpdateEtfLp(ctx, req.(*UpdateEtfLpRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_GetMmStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMmStatusRequest)
+func _LpService_GetEtfLpStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEtfLpStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LpServiceServer).GetMmStatus(ctx, in)
+		return srv.(LpServiceServer).GetEtfLpStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/GetMmStatus",
+		FullMethod: "/kdo.v1.lp.LpService/GetEtfLpStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).GetMmStatus(ctx, req.(*GetMmStatusRequest))
+		return srv.(LpServiceServer).GetEtfLpStatus(ctx, req.(*GetEtfLpStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_ListMmStatuses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMmStatusesRequest)
+func _LpService_ListEtfLpStatuses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEtfLpStatusesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LpServiceServer).ListMmStatuses(ctx, in)
+		return srv.(LpServiceServer).ListEtfLpStatuses(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/ListMmStatuses",
+		FullMethod: "/kdo.v1.lp.LpService/ListEtfLpStatuses",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).ListMmStatuses(ctx, req.(*ListMmStatusesRequest))
+		return srv.(LpServiceServer).ListEtfLpStatuses(ctx, req.(*ListEtfLpStatusesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_StreamMmStatusUpdate_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamMmStatusUpdateRequest)
+func _LpService_StreamEtfLpStatusUpdate_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamEtfLpStatusUpdateRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(LpServiceServer).StreamMmStatusUpdate(m, &lpServiceStreamMmStatusUpdateServer{stream})
+	return srv.(LpServiceServer).StreamEtfLpStatusUpdate(m, &lpServiceStreamEtfLpStatusUpdateServer{stream})
 }
 
-type LpService_StreamMmStatusUpdateServer interface {
-	Send(*MmStatusUpdate) error
+type LpService_StreamEtfLpStatusUpdateServer interface {
+	Send(*EtfLpStatusUpdate) error
 	grpc.ServerStream
 }
 
-type lpServiceStreamMmStatusUpdateServer struct {
+type lpServiceStreamEtfLpStatusUpdateServer struct {
 	grpc.ServerStream
 }
 
-func (x *lpServiceStreamMmStatusUpdateServer) Send(m *MmStatusUpdate) error {
+func (x *lpServiceStreamEtfLpStatusUpdateServer) Send(m *EtfLpStatusUpdate) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _LpService_StartMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartMmRequest)
+func _LpService_StartEtfLp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartEtfLpRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LpServiceServer).StartMm(ctx, in)
+		return srv.(LpServiceServer).StartEtfLp(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/StartMm",
+		FullMethod: "/kdo.v1.lp.LpService/StartEtfLp",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).StartMm(ctx, req.(*StartMmRequest))
+		return srv.(LpServiceServer).StartEtfLp(ctx, req.(*StartEtfLpRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_StopMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopMmRequest)
+func _LpService_StopEtfLp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopEtfLpRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LpServiceServer).StopMm(ctx, in)
+		return srv.(LpServiceServer).StopEtfLp(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/StopMm",
+		FullMethod: "/kdo.v1.lp.LpService/StopEtfLp",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).StopMm(ctx, req.(*StopMmRequest))
+		return srv.(LpServiceServer).StopEtfLp(ctx, req.(*StopEtfLpRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -456,32 +456,32 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*LpServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetMm",
-			Handler:    _LpService_GetMm_Handler,
+			MethodName: "GetEtfLp",
+			Handler:    _LpService_GetEtfLp_Handler,
 		},
 		{
-			MethodName: "ListMms",
-			Handler:    _LpService_ListMms_Handler,
+			MethodName: "ListEtfLps",
+			Handler:    _LpService_ListEtfLps_Handler,
 		},
 		{
-			MethodName: "UpdateMm",
-			Handler:    _LpService_UpdateMm_Handler,
+			MethodName: "UpdateEtfLp",
+			Handler:    _LpService_UpdateEtfLp_Handler,
 		},
 		{
-			MethodName: "GetMmStatus",
-			Handler:    _LpService_GetMmStatus_Handler,
+			MethodName: "GetEtfLpStatus",
+			Handler:    _LpService_GetEtfLpStatus_Handler,
 		},
 		{
-			MethodName: "ListMmStatuses",
-			Handler:    _LpService_ListMmStatuses_Handler,
+			MethodName: "ListEtfLpStatuses",
+			Handler:    _LpService_ListEtfLpStatuses_Handler,
 		},
 		{
-			MethodName: "StartMm",
-			Handler:    _LpService_StartMm_Handler,
+			MethodName: "StartEtfLp",
+			Handler:    _LpService_StartEtfLp_Handler,
 		},
 		{
-			MethodName: "StopMm",
-			Handler:    _LpService_StopMm_Handler,
+			MethodName: "StopEtfLp",
+			Handler:    _LpService_StopEtfLp_Handler,
 		},
 		{
 			MethodName: "GetUserOrderbook",
@@ -490,8 +490,8 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "StreamMmStatusUpdate",
-			Handler:       _LpService_StreamMmStatusUpdate_Handler,
+			StreamName:    "StreamEtfLpStatusUpdate",
+			Handler:       _LpService_StreamEtfLpStatusUpdate_Handler,
 			ServerStreams: true,
 		},
 		{

@@ -32,27 +32,27 @@ final $typed_data.Uint8List positionAdjustmentStrategyDescriptor = $convert.base
     'REFOQ0UQARIpCiVQT1NJVElPTl9BREpVU1RNRU5UX1NUUkFURUdZX1RVUk5PVkVSEAISJAogUE'
     '9TSVRJT05fQURKVVNUTUVOVF9TVFJBVEVHWV9BTEwQCg==');
 
-@$core.Deprecated('Use mmStateDescriptor instead')
-const MmState$json = {
-  '1': 'MmState',
+@$core.Deprecated('Use etfLpStateDescriptor instead')
+const EtfLpState$json = {
+  '1': 'EtfLpState',
   '2': [
-    {'1': 'MM_STATE_UNSPECIFIED', '2': 0},
-    {'1': 'MM_STATE_IDLE', '2': 1},
-    {'1': 'MM_STATE_RUNNING', '2': 2},
-    {'1': 'MM_STATE_STOPPING', '2': 3},
-    {'1': 'MM_STATE_ERROR', '2': 4},
+    {'1': 'ETF_LP_STATE_UNSPECIFIED', '2': 0},
+    {'1': 'ETF_LP_STATE_IDLE', '2': 1},
+    {'1': 'ETF_LP_STATE_RUNNING', '2': 2},
+    {'1': 'ETF_LP_STATE_STOPPING', '2': 3},
+    {'1': 'ETF_LP_STATE_ERROR', '2': 4},
   ],
 };
 
-/// Descriptor for `MmState`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List mmStateDescriptor = $convert.base64Decode(
-    'CgdNbVN0YXRlEhgKFE1NX1NUQVRFX1VOU1BFQ0lGSUVEEAASEQoNTU1fU1RBVEVfSURMRRABEh'
-    'QKEE1NX1NUQVRFX1JVTk5JTkcQAhIVChFNTV9TVEFURV9TVE9QUElORxADEhIKDk1NX1NUQVRF'
-    'X0VSUk9SEAQ=');
+/// Descriptor for `EtfLpState`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List etfLpStateDescriptor = $convert.base64Decode(
+    'CgpFdGZMcFN0YXRlEhwKGEVURl9MUF9TVEFURV9VTlNQRUNJRklFRBAAEhUKEUVURl9MUF9TVE'
+    'FURV9JRExFEAESGAoURVRGX0xQX1NUQVRFX1JVTk5JTkcQAhIZChVFVEZfTFBfU1RBVEVfU1RP'
+    'UFBJTkcQAxIWChJFVEZfTFBfU1RBVEVfRVJST1IQBA==');
 
-@$core.Deprecated('Use mmDescriptor instead')
-const Mm$json = {
-  '1': 'Mm',
+@$core.Deprecated('Use etfLpDescriptor instead')
+const EtfLp$json = {
+  '1': 'EtfLp',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
@@ -60,7 +60,7 @@ const Mm$json = {
     {'1': 'bid_basis', '3': 4, '4': 1, '5': 1, '10': 'bidBasis'},
     {'1': 'depth', '3': 8, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
-    {'1': 'offset', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmOffset', '10': 'offset'},
+    {'1': 'offset', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
     {'1': 'enabled', '3': 11, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'pricing_method', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfPricing', '10': 'pricingMethod'},
     {'1': 'bid_adjustment', '3': 13, '4': 1, '5': 1, '9': 0, '10': 'bidAdjustment', '17': true},
@@ -70,7 +70,7 @@ const Mm$json = {
     {'1': 'momentum_enabled', '3': 17, '4': 1, '5': 8, '9': 2, '10': 'momentumEnabled', '17': true},
     {'1': 'momentum_window', '3': 18, '4': 1, '5': 13, '9': 3, '10': 'momentumWindow', '17': true},
     {'1': 'momentum_sensitivity', '3': 19, '4': 1, '5': 1, '9': 4, '10': 'momentumSensitivity', '17': true},
-    {'1': 'quantity_limit', '3': 20, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmQuantityLimit', '9': 5, '10': 'quantityLimit', '17': true},
+    {'1': 'quantity_limit', '3': 20, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 5, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_bid_adjustment'},
@@ -85,27 +85,27 @@ const Mm$json = {
   ],
 };
 
-/// Descriptor for `Mm`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmDescriptor = $convert.base64Decode(
-    'CgJNbRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2'
-    'RlEhsKCWFza19iYXNpcxgDIAEoAVIIYXNrQmFzaXMSGwoJYmlkX2Jhc2lzGAQgASgBUghiaWRC'
-    'YXNpcxIUCgVkZXB0aBgIIAEoDVIFZGVwdGgSGwoJdGlja19zaXplGAkgASgDUgh0aWNrU2l6ZR'
-    'IrCgZvZmZzZXQYCiABKAsyEy5rZG8udjEubHAuTW1PZmZzZXRSBm9mZnNldBIYCgdlbmFibGVk'
-    'GAsgASgIUgdlbmFibGVkEjwKDnByaWNpbmdfbWV0aG9kGAwgASgLMhUua2RvLnYxLmxwLkV0Zl'
-    'ByaWNpbmdSDXByaWNpbmdNZXRob2QSKgoOYmlkX2FkanVzdG1lbnQYDSABKAFIAFINYmlkQWRq'
-    'dXN0bWVudIgBARIqCg5hc2tfYWRqdXN0bWVudBgOIAEoAUgBUg1hc2tBZGp1c3RtZW50iAEBEi'
-    'EKDGJpZF9xdWFudGl0eRgPIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GBAgASgD'
-    'Ugthc2tRdWFudGl0eRIuChBtb21lbnR1bV9lbmFibGVkGBEgASgISAJSD21vbWVudHVtRW5hYm'
-    'xlZIgBARIsCg9tb21lbnR1bV93aW5kb3cYEiABKA1IA1IObW9tZW50dW1XaW5kb3eIAQESNgoU'
-    'bW9tZW50dW1fc2Vuc2l0aXZpdHkYEyABKAFIBFITbW9tZW50dW1TZW5zaXRpdml0eYgBARJGCg'
-    '5xdWFudGl0eV9saW1pdBgUIAEoCzIaLmtkby52MS5scC5NbVF1YW50aXR5TGltaXRIBVINcXVh'
-    'bnRpdHlMaW1pdIgBAUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhMKEV'
-    '9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNp'
-    'dGl2aXR5QhEKD19xdWFudGl0eV9saW1pdEoECAcQCA==');
+/// Descriptor for `EtfLp`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
+    'CgVFdGZMcBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bm'
+    'RDb2RlEhsKCWFza19iYXNpcxgDIAEoAVIIYXNrQmFzaXMSGwoJYmlkX2Jhc2lzGAQgASgBUghi'
+    'aWRCYXNpcxIUCgVkZXB0aBgIIAEoDVIFZGVwdGgSGwoJdGlja19zaXplGAkgASgDUgh0aWNrU2'
+    'l6ZRIuCgZvZmZzZXQYCiABKAsyFi5rZG8udjEubHAuRXRmTHBPZmZzZXRSBm9mZnNldBIYCgdl'
+    'bmFibGVkGAsgASgIUgdlbmFibGVkEjwKDnByaWNpbmdfbWV0aG9kGAwgASgLMhUua2RvLnYxLm'
+    'xwLkV0ZlByaWNpbmdSDXByaWNpbmdNZXRob2QSKgoOYmlkX2FkanVzdG1lbnQYDSABKAFIAFIN'
+    'YmlkQWRqdXN0bWVudIgBARIqCg5hc2tfYWRqdXN0bWVudBgOIAEoAUgBUg1hc2tBZGp1c3RtZW'
+    '50iAEBEiEKDGJpZF9xdWFudGl0eRgPIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5'
+    'GBAgASgDUgthc2tRdWFudGl0eRIuChBtb21lbnR1bV9lbmFibGVkGBEgASgISAJSD21vbWVudH'
+    'VtRW5hYmxlZIgBARIsCg9tb21lbnR1bV93aW5kb3cYEiABKA1IA1IObW9tZW50dW1XaW5kb3eI'
+    'AQESNgoUbW9tZW50dW1fc2Vuc2l0aXZpdHkYEyABKAFIBFITbW9tZW50dW1TZW5zaXRpdml0eY'
+    'gBARJJCg5xdWFudGl0eV9saW1pdBgUIAEoCzIdLmtkby52MS5scC5FdGZMcFF1YW50aXR5TGlt'
+    'aXRIBVINcXVhbnRpdHlMaW1pdIgBAUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3'
+    'RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVu'
+    'dHVtX3NlbnNpdGl2aXR5QhEKD19xdWFudGl0eV9saW1pdEoECAcQCA==');
 
-@$core.Deprecated('Use mmQuantityLimitDescriptor instead')
-const MmQuantityLimit$json = {
-  '1': 'MmQuantityLimit',
+@$core.Deprecated('Use etfLpQuantityLimitDescriptor instead')
+const EtfLpQuantityLimit$json = {
+  '1': 'EtfLpQuantityLimit',
   '2': [
     {'1': 'max_bid_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxBidQuantity'},
     {'1': 'max_ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'maxAskQuantity'},
@@ -123,13 +123,14 @@ const MmQuantityLimit$json = {
   '10': ['min_bid_quantity', 'min_ask_quantity'],
 };
 
-/// Descriptor for `MmQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmQuantityLimitDescriptor = $convert.base64Decode(
-    'Cg9NbVF1YW50aXR5TGltaXQSKAoQbWF4X2JpZF9xdWFudGl0eRgCIAEoA1IObWF4QmlkUXVhbn'
-    'RpdHkSKAoQbWF4X2Fza19xdWFudGl0eRgEIAEoA1IObWF4QXNrUXVhbnRpdHkSJgoMbmV0X3F1'
-    'YW50aXR5GAUgASgDSABSC25ldFF1YW50aXR5iAEBEi0KEG1heF9uZXRfcXVhbnRpdHkYBiABKA'
-    'NIAVIObWF4TmV0UXVhbnRpdHmIAQFCDwoNX25ldF9xdWFudGl0eUITChFfbWF4X25ldF9xdWFu'
-    'dGl0eUoECAEQAkoECAMQBFIQbWluX2JpZF9xdWFudGl0eVIQbWluX2Fza19xdWFudGl0eQ==');
+/// Descriptor for `EtfLpQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpQuantityLimitDescriptor = $convert.base64Decode(
+    'ChJFdGZMcFF1YW50aXR5TGltaXQSKAoQbWF4X2JpZF9xdWFudGl0eRgCIAEoA1IObWF4QmlkUX'
+    'VhbnRpdHkSKAoQbWF4X2Fza19xdWFudGl0eRgEIAEoA1IObWF4QXNrUXVhbnRpdHkSJgoMbmV0'
+    'X3F1YW50aXR5GAUgASgDSABSC25ldFF1YW50aXR5iAEBEi0KEG1heF9uZXRfcXVhbnRpdHkYBi'
+    'ABKANIAVIObWF4TmV0UXVhbnRpdHmIAQFCDwoNX25ldF9xdWFudGl0eUITChFfbWF4X25ldF9x'
+    'dWFudGl0eUoECAEQAkoECAMQBFIQbWluX2JpZF9xdWFudGl0eVIQbWluX2Fza19xdWFudGl0eQ'
+    '==');
 
 @$core.Deprecated('Use etfPricingDescriptor instead')
 const EtfPricing$json = {
@@ -198,19 +199,19 @@ final $typed_data.Uint8List leverageFuturePricingDescriptor = $convert.base64Dec
     'ChVMZXZlcmFnZUZ1dHVyZVByaWNpbmcSHQoKcHJldl9pbmRleBgBIAEoAVIJcHJldkluZGV4Eh'
     '8KC3ByZXZfZnV0dXJlGAIgASgBUgpwcmV2RnV0dXJl');
 
-@$core.Deprecated('Use mmStatusDescriptor instead')
-const MmStatus$json = {
-  '1': 'MmStatus',
+@$core.Deprecated('Use etfLpStatusDescriptor instead')
+const EtfLpStatus$json = {
+  '1': 'EtfLpStatus',
   '2': [
     {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'ask_basis', '3': 3, '4': 1, '5': 1, '9': 0, '10': 'askBasis', '17': true},
     {'1': 'bid_basis', '3': 4, '4': 1, '5': 1, '9': 1, '10': 'bidBasis', '17': true},
-    {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.MmState', '10': 'state'},
+    {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
-    {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmOffset', '10': 'offset'},
-    {'1': 'hedge', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmHedge', '10': 'hedge'},
+    {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
+    {'1': 'hedge', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpHedge', '10': 'hedge'},
     {'1': 'bid_adjustment', '3': 13, '4': 1, '5': 1, '9': 2, '10': 'bidAdjustment', '17': true},
     {'1': 'ask_adjustment', '3': 14, '4': 1, '5': 1, '9': 3, '10': 'askAdjustment', '17': true},
     {'1': 'bid_quantity', '3': 15, '4': 1, '5': 3, '10': 'bidQuantity'},
@@ -220,7 +221,7 @@ const MmStatus$json = {
     {'1': 'momentum_sensitivity', '3': 19, '4': 1, '5': 1, '9': 6, '10': 'momentumSensitivity', '17': true},
     {'1': 'momentum_bid_adjustment', '3': 20, '4': 1, '5': 1, '9': 7, '10': 'momentumBidAdjustment', '17': true},
     {'1': 'momentum_ask_adjustment', '3': 21, '4': 1, '5': 1, '9': 8, '10': 'momentumAskAdjustment', '17': true},
-    {'1': 'quantity_limit', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmQuantityLimit', '9': 9, '10': 'quantityLimit', '17': true},
+    {'1': 'quantity_limit', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 9, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_ask_basis'},
@@ -239,41 +240,42 @@ const MmStatus$json = {
   ],
 };
 
-/// Descriptor for `MmStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmStatusDescriptor = $convert.base64Decode(
-    'CghNbVN0YXR1cxIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSGwoJZnVuZF9jb2RlGA'
-    'IgASgJUghmdW5kQ29kZRIgCglhc2tfYmFzaXMYAyABKAFIAFIIYXNrQmFzaXOIAQESIAoJYmlk'
-    'X2Jhc2lzGAQgASgBSAFSCGJpZEJhc2lziAEBEigKBXN0YXRlGAggASgOMhIua2RvLnYxLmxwLk'
-    '1tU3RhdGVSBXN0YXRlEi4KB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQcmljaW5nUgdw'
-    'cmljaW5nEkIKD2ZpbGxfc3RhdGlzdGljcxgKIAEoCzIZLmtkby52MS5scC5GaWxsU3RhdGlzdG'
-    'ljc1IOZmlsbFN0YXRpc3RpY3MSKwoGb2Zmc2V0GAsgASgLMhMua2RvLnYxLmxwLk1tT2Zmc2V0'
-    'UgZvZmZzZXQSKAoFaGVkZ2UYDCABKAsyEi5rZG8udjEubHAuTW1IZWRnZVIFaGVkZ2USKgoOYm'
-    'lkX2FkanVzdG1lbnQYDSABKAFIAlINYmlkQWRqdXN0bWVudIgBARIqCg5hc2tfYWRqdXN0bWVu'
-    'dBgOIAEoAUgDUg1hc2tBZGp1c3RtZW50iAEBEiEKDGJpZF9xdWFudGl0eRgPIAEoA1ILYmlkUX'
-    'VhbnRpdHkSIQoMYXNrX3F1YW50aXR5GBAgASgDUgthc2tRdWFudGl0eRIuChBtb21lbnR1bV9l'
-    'bmFibGVkGBEgASgISARSD21vbWVudHVtRW5hYmxlZIgBARIsCg9tb21lbnR1bV93aW5kb3cYEi'
-    'ABKA1IBVIObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vuc2l0aXZpdHkYEyABKAFI'
-    'BlITbW9tZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21lbnR1bV9iaWRfYWRqdXN0bWVudBgUIA'
-    'EoAUgHUhVtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOwoXbW9tZW50dW1fYXNrX2FkanVzdG1l'
-    'bnQYFSABKAFICFIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBEkYKDnF1YW50aXR5X2xpbWl0GB'
-    'YgASgLMhoua2RvLnYxLmxwLk1tUXVhbnRpdHlMaW1pdEgJUg1xdWFudGl0eUxpbWl0iAEBQgwK'
-    'Cl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZG'
-    'p1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21v'
-    'bWVudHVtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1bV9iaWRfYWRqdXN0bWVudEIaChhfbW9tZW'
-    '50dW1fYXNrX2FkanVzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0SgQIBxAI');
+/// Descriptor for `EtfLpStatus`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
+    'CgtFdGZMcFN0YXR1cxIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSGwoJZnVuZF9jb2'
+    'RlGAIgASgJUghmdW5kQ29kZRIgCglhc2tfYmFzaXMYAyABKAFIAFIIYXNrQmFzaXOIAQESIAoJ'
+    'YmlkX2Jhc2lzGAQgASgBSAFSCGJpZEJhc2lziAEBEisKBXN0YXRlGAggASgOMhUua2RvLnYxLm'
+    'xwLkV0ZkxwU3RhdGVSBXN0YXRlEi4KB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQcmlj'
+    'aW5nUgdwcmljaW5nEkIKD2ZpbGxfc3RhdGlzdGljcxgKIAEoCzIZLmtkby52MS5scC5GaWxsU3'
+    'RhdGlzdGljc1IOZmlsbFN0YXRpc3RpY3MSLgoGb2Zmc2V0GAsgASgLMhYua2RvLnYxLmxwLkV0'
+    'ZkxwT2Zmc2V0UgZvZmZzZXQSKwoFaGVkZ2UYDCABKAsyFS5rZG8udjEubHAuRXRmTHBIZWRnZV'
+    'IFaGVkZ2USKgoOYmlkX2FkanVzdG1lbnQYDSABKAFIAlINYmlkQWRqdXN0bWVudIgBARIqCg5h'
+    'c2tfYWRqdXN0bWVudBgOIAEoAUgDUg1hc2tBZGp1c3RtZW50iAEBEiEKDGJpZF9xdWFudGl0eR'
+    'gPIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GBAgASgDUgthc2tRdWFudGl0eRIu'
+    'ChBtb21lbnR1bV9lbmFibGVkGBEgASgISARSD21vbWVudHVtRW5hYmxlZIgBARIsCg9tb21lbn'
+    'R1bV93aW5kb3cYEiABKA1IBVIObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vuc2l0'
+    'aXZpdHkYEyABKAFIBlITbW9tZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21lbnR1bV9iaWRfYW'
+    'RqdXN0bWVudBgUIAEoAUgHUhVtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOwoXbW9tZW50dW1f'
+    'YXNrX2FkanVzdG1lbnQYFSABKAFICFIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBEkkKDnF1YW'
+    '50aXR5X2xpbWl0GBYgASgLMh0ua2RvLnYxLmxwLkV0ZkxwUXVhbnRpdHlMaW1pdEgJUg1xdWFu'
+    'dGl0eUxpbWl0iAEBQgwKCl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IRCg9fYmlkX2FkanVzdG'
+    '1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1'
+    'bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1bV9iaWRfYWRqdX'
+    'N0bWVudEIaChhfbW9tZW50dW1fYXNrX2FkanVzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0SgQI'
+    'BxAI');
 
-@$core.Deprecated('Use mmStatusUpdateDescriptor instead')
-const MmStatusUpdate$json = {
-  '1': 'MmStatusUpdate',
+@$core.Deprecated('Use etfLpStatusUpdateDescriptor instead')
+const EtfLpStatusUpdate$json = {
+  '1': 'EtfLpStatusUpdate',
   '2': [
     {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '10': 'etfSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'ask_basis', '3': 3, '4': 1, '5': 1, '9': 0, '10': 'askBasis', '17': true},
     {'1': 'bid_basis', '3': 4, '4': 1, '5': 1, '9': 1, '10': 'bidBasis', '17': true},
-    {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.MmState', '9': 2, '10': 'state', '17': true},
+    {'1': 'state', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '9': 2, '10': 'state', '17': true},
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '9': 3, '10': 'pricing', '17': true},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '9': 4, '10': 'fillStatistics', '17': true},
-    {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmOffset', '9': 5, '10': 'offset', '17': true},
+    {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 5, '10': 'offset', '17': true},
     {'1': 'bid_adjustment', '3': 12, '4': 1, '5': 1, '9': 6, '10': 'bidAdjustment', '17': true},
     {'1': 'ask_adjustment', '3': 13, '4': 1, '5': 1, '9': 7, '10': 'askAdjustment', '17': true},
     {'1': 'bid_quantity', '3': 14, '4': 1, '5': 3, '9': 8, '10': 'bidQuantity', '17': true},
@@ -283,7 +285,7 @@ const MmStatusUpdate$json = {
     {'1': 'momentum_sensitivity', '3': 18, '4': 1, '5': 1, '9': 12, '10': 'momentumSensitivity', '17': true},
     {'1': 'momentum_bid_adjustment', '3': 19, '4': 1, '5': 1, '9': 13, '10': 'momentumBidAdjustment', '17': true},
     {'1': 'momentum_ask_adjustment', '3': 20, '4': 1, '5': 1, '9': 14, '10': 'momentumAskAdjustment', '17': true},
-    {'1': 'quantity_limit', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmQuantityLimit', '9': 15, '10': 'quantityLimit', '17': true},
+    {'1': 'quantity_limit', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 15, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_ask_basis'},
@@ -308,34 +310,34 @@ const MmStatusUpdate$json = {
   ],
 };
 
-/// Descriptor for `MmStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmStatusUpdateDescriptor = $convert.base64Decode(
-    'Cg5NbVN0YXR1c1VwZGF0ZRIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSGwoJZnVuZF'
-    '9jb2RlGAIgASgJUghmdW5kQ29kZRIgCglhc2tfYmFzaXMYAyABKAFIAFIIYXNrQmFzaXOIAQES'
-    'IAoJYmlkX2Jhc2lzGAQgASgBSAFSCGJpZEJhc2lziAEBEi0KBXN0YXRlGAggASgOMhIua2RvLn'
-    'YxLmxwLk1tU3RhdGVIAlIFc3RhdGWIAQESMwoHcHJpY2luZxgJIAEoCzIULmtkby52MS5scC5M'
-    'cFByaWNpbmdIA1IHcHJpY2luZ4gBARJHCg9maWxsX3N0YXRpc3RpY3MYCiABKAsyGS5rZG8udj'
-    'EubHAuRmlsbFN0YXRpc3RpY3NIBFIOZmlsbFN0YXRpc3RpY3OIAQESMAoGb2Zmc2V0GAsgASgL'
-    'MhMua2RvLnYxLmxwLk1tT2Zmc2V0SAVSBm9mZnNldIgBARIqCg5iaWRfYWRqdXN0bWVudBgMIA'
-    'EoAUgGUg1iaWRBZGp1c3RtZW50iAEBEioKDmFza19hZGp1c3RtZW50GA0gASgBSAdSDWFza0Fk'
-    'anVzdG1lbnSIAQESJgoMYmlkX3F1YW50aXR5GA4gASgDSAhSC2JpZFF1YW50aXR5iAEBEiYKDG'
-    'Fza19xdWFudGl0eRgPIAEoA0gJUgthc2tRdWFudGl0eYgBARIuChBtb21lbnR1bV9lbmFibGVk'
-    'GBAgASgISApSD21vbWVudHVtRW5hYmxlZIgBARIsCg9tb21lbnR1bV93aW5kb3cYESABKA1IC1'
-    'IObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vuc2l0aXZpdHkYEiABKAFIDFITbW9t'
-    'ZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21lbnR1bV9iaWRfYWRqdXN0bWVudBgTIAEoAUgNUh'
-    'Vtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOwoXbW9tZW50dW1fYXNrX2FkanVzdG1lbnQYFCAB'
-    'KAFIDlIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBEkYKDnF1YW50aXR5X2xpbWl0GBUgASgLMh'
-    'oua2RvLnYxLmxwLk1tUXVhbnRpdHlMaW1pdEgPUg1xdWFudGl0eUxpbWl0iAEBQgwKCl9hc2tf'
-    'YmFzaXNCDAoKX2JpZF9iYXNpc0IICgZfc3RhdGVCCgoIX3ByaWNpbmdCEgoQX2ZpbGxfc3RhdG'
-    'lzdGljc0IJCgdfb2Zmc2V0QhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG1lbnRC'
-    'DwoNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW50aXR5QhMKEV9tb21lbnR1bV9lbmFibGVkQh'
-    'IKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1'
-    'bV9iaWRfYWRqdXN0bWVudEIaChhfbW9tZW50dW1fYXNrX2FkanVzdG1lbnRCEQoPX3F1YW50aX'
-    'R5X2xpbWl0SgQIBxAI');
+/// Descriptor for `EtfLpStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
+    'ChFFdGZMcFN0YXR1c1VwZGF0ZRIdCgpldGZfc3ltYm9sGAEgASgJUglldGZTeW1ib2wSGwoJZn'
+    'VuZF9jb2RlGAIgASgJUghmdW5kQ29kZRIgCglhc2tfYmFzaXMYAyABKAFIAFIIYXNrQmFzaXOI'
+    'AQESIAoJYmlkX2Jhc2lzGAQgASgBSAFSCGJpZEJhc2lziAEBEjAKBXN0YXRlGAggASgOMhUua2'
+    'RvLnYxLmxwLkV0ZkxwU3RhdGVIAlIFc3RhdGWIAQESMwoHcHJpY2luZxgJIAEoCzIULmtkby52'
+    'MS5scC5McFByaWNpbmdIA1IHcHJpY2luZ4gBARJHCg9maWxsX3N0YXRpc3RpY3MYCiABKAsyGS'
+    '5rZG8udjEubHAuRmlsbFN0YXRpc3RpY3NIBFIOZmlsbFN0YXRpc3RpY3OIAQESMwoGb2Zmc2V0'
+    'GAsgASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0SAVSBm9mZnNldIgBARIqCg5iaWRfYWRqdX'
+    'N0bWVudBgMIAEoAUgGUg1iaWRBZGp1c3RtZW50iAEBEioKDmFza19hZGp1c3RtZW50GA0gASgB'
+    'SAdSDWFza0FkanVzdG1lbnSIAQESJgoMYmlkX3F1YW50aXR5GA4gASgDSAhSC2JpZFF1YW50aX'
+    'R5iAEBEiYKDGFza19xdWFudGl0eRgPIAEoA0gJUgthc2tRdWFudGl0eYgBARIuChBtb21lbnR1'
+    'bV9lbmFibGVkGBAgASgISApSD21vbWVudHVtRW5hYmxlZIgBARIsCg9tb21lbnR1bV93aW5kb3'
+    'cYESABKA1IC1IObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vuc2l0aXZpdHkYEiAB'
+    'KAFIDFITbW9tZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21lbnR1bV9iaWRfYWRqdXN0bWVudB'
+    'gTIAEoAUgNUhVtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOwoXbW9tZW50dW1fYXNrX2FkanVz'
+    'dG1lbnQYFCABKAFIDlIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBEkkKDnF1YW50aXR5X2xpbW'
+    'l0GBUgASgLMh0ua2RvLnYxLmxwLkV0ZkxwUXVhbnRpdHlMaW1pdEgPUg1xdWFudGl0eUxpbWl0'
+    'iAEBQgwKCl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IICgZfc3RhdGVCCgoIX3ByaWNpbmdCEg'
+    'oQX2ZpbGxfc3RhdGlzdGljc0IJCgdfb2Zmc2V0QhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNr'
+    'X2FkanVzdG1lbnRCDwoNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW50aXR5QhMKEV9tb21lbn'
+    'R1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5'
+    'QhoKGF9tb21lbnR1bV9iaWRfYWRqdXN0bWVudEIaChhfbW9tZW50dW1fYXNrX2FkanVzdG1lbn'
+    'RCEQoPX3F1YW50aXR5X2xpbWl0SgQIBxAI');
 
-@$core.Deprecated('Use mmOffsetDescriptor instead')
-const MmOffset$json = {
-  '1': 'MmOffset',
+@$core.Deprecated('Use etfLpOffsetDescriptor instead')
+const EtfLpOffset$json = {
+  '1': 'EtfLpOffset',
   '2': [
     {'1': 'bid_offset', '3': 1, '4': 1, '5': 1, '10': 'bidOffset'},
     {'1': 'ask_offset', '3': 2, '4': 1, '5': 1, '10': 'askOffset'},
@@ -352,23 +354,23 @@ const MmOffset$json = {
   ],
 };
 
-/// Descriptor for `MmOffset`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmOffsetDescriptor = $convert.base64Decode(
-    'CghNbU9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgBUgliaWRPZmZzZXQSHQoKYXNrX29mZnNldB'
-    'gCIAEoAVIJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKAFSCW1pbk9mZnNldBIdCgptYXhf'
-    'b2Zmc2V0GAQgASgBUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYByABKA'
-    'hSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MYCCAB'
-    'KARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgBUg5hZG'
-    'p1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtwb3Np'
-    'dGlvbl9hZGp1c3RtZW50X2VuYWJsZWQYESABKAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYWJsZW'
-    'QSUgoRcG9zaXRpb25fc3RyYXRlZ3kYEiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1c3Rt'
-    'ZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGBMgAS'
-    'gDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCABKAFS'
-    'FnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
+/// Descriptor for `EtfLpOffset`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
+    'CgtFdGZMcE9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgBUgliaWRPZmZzZXQSHQoKYXNrX29mZn'
+    'NldBgCIAEoAVIJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKAFSCW1pbk9mZnNldBIdCgpt'
+    'YXhfb2Zmc2V0GAQgASgBUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
+    'ABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MY'
+    'CCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgBUg'
+    '5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtw'
+    'b3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWQYESABKAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYW'
+    'JsZWQSUgoRcG9zaXRpb25fc3RyYXRlZ3kYEiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1'
+    'c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGB'
+    'MgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCAB'
+    'KAFSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
 
-@$core.Deprecated('Use mmHedgeDescriptor instead')
-const MmHedge$json = {
-  '1': 'MmHedge',
+@$core.Deprecated('Use etfLpHedgeDescriptor instead')
+const EtfLpHedge$json = {
+  '1': 'EtfLpHedge',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
@@ -376,11 +378,11 @@ const MmHedge$json = {
   ],
 };
 
-/// Descriptor for `MmHedge`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmHedgeDescriptor = $convert.base64Decode(
-    'CgdNbUhlZGdlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEi0KBGZ1bmQYAiABKAlCGfpBFgoUa2'
-    'RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSOQoZZmlsbGVkX3F1YW50aXR5X3Blcl9oZWRnZRgD'
-    'IAEoA1IWZmlsbGVkUXVhbnRpdHlQZXJIZWRnZQ==');
+/// Descriptor for `EtfLpHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpHedgeDescriptor = $convert.base64Decode(
+    'CgpFdGZMcEhlZGdlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEi0KBGZ1bmQYAiABKAlCGfpBFg'
+    'oUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSOQoZZmlsbGVkX3F1YW50aXR5X3Blcl9oZWRn'
+    'ZRgDIAEoA1IWZmlsbGVkUXVhbnRpdHlQZXJIZWRnZQ==');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {
@@ -456,36 +458,37 @@ final $typed_data.Uint8List lpPricingDescriptor = $convert.base64Decode(
     'JpZF9xdW90ZRgCIAEoCVILZXRmQmlkUXVvdGUSHgoLZXRmX2Fza19uYXYYAyABKAlSCWV0ZkFz'
     'a05hdhIeCgtldGZfYmlkX25hdhgEIAEoCVIJZXRmQmlkTmF2');
 
-@$core.Deprecated('Use createMmRequestDescriptor instead')
-const CreateMmRequest$json = {
-  '1': 'CreateMmRequest',
+@$core.Deprecated('Use createEtfLpRequestDescriptor instead')
+const CreateEtfLpRequest$json = {
+  '1': 'CreateEtfLpRequest',
   '2': [
-    {'1': 'mm', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.Mm', '8': {}, '10': 'mm'},
+    {'1': 'etf_lp', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLp', '8': {}, '10': 'etfLp'},
   ],
 };
 
-/// Descriptor for `CreateMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createMmRequestDescriptor = $convert.base64Decode(
-    'Cg9DcmVhdGVNbVJlcXVlc3QSIwoCbW0YASABKAsyDS5rZG8udjEubHAuTW1CBOJBAQJSAm1t');
+/// Descriptor for `CreateEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createEtfLpRequestDescriptor = $convert.base64Decode(
+    'ChJDcmVhdGVFdGZMcFJlcXVlc3QSLQoGZXRmX2xwGAEgASgLMhAua2RvLnYxLmxwLkV0ZkxwQg'
+    'TiQQECUgVldGZMcA==');
 
-@$core.Deprecated('Use getMmRequestDescriptor instead')
-const GetMmRequest$json = {
-  '1': 'GetMmRequest',
+@$core.Deprecated('Use getEtfLpRequestDescriptor instead')
+const GetEtfLpRequest$json = {
+  '1': 'GetEtfLpRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
-/// Descriptor for `GetMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMmRequestDescriptor = $convert.base64Decode(
-    'CgxHZXRNbVJlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2RzYXBpcy54eXovRX'
-    'RmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1'
-    'bmQ=');
+/// Descriptor for `GetEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfLpRequestDescriptor = $convert.base64Decode(
+    'Cg9HZXRFdGZMcFJlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2RzYXBpcy54eX'
+    'ovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6L0Z1bmRS'
+    'BGZ1bmQ=');
 
-@$core.Deprecated('Use listMmsRequestDescriptor instead')
-const ListMmsRequest$json = {
-  '1': 'ListMmsRequest',
+@$core.Deprecated('Use listEtfLpsRequestDescriptor instead')
+const ListEtfLpsRequest$json = {
+  '1': 'ListEtfLpsRequest',
   '2': [
     {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
@@ -497,29 +500,29 @@ const ListMmsRequest$json = {
   ],
 };
 
-/// Descriptor for `ListMmsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMmsRequestDescriptor = $convert.base64Decode(
-    'Cg5MaXN0TW1zUmVxdWVzdBIgCglwYWdlX3NpemUYASABKA1IAFIIcGFnZVNpemWIAQESIgoKcG'
-    'FnZV90b2tlbhgCIAEoCUgBUglwYWdlVG9rZW6IAQESFgoGZmlsdGVyGAMgASgJUgZmaWx0ZXJC'
-    'DAoKX3BhZ2Vfc2l6ZUINCgtfcGFnZV90b2tlbg==');
+/// Descriptor for `ListEtfLpsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpsRequestDescriptor = $convert.base64Decode(
+    'ChFMaXN0RXRmTHBzUmVxdWVzdBIgCglwYWdlX3NpemUYASABKA1IAFIIcGFnZVNpemWIAQESIg'
+    'oKcGFnZV90b2tlbhgCIAEoCUgBUglwYWdlVG9rZW6IAQESFgoGZmlsdGVyGAMgASgJUgZmaWx0'
+    'ZXJCDAoKX3BhZ2Vfc2l6ZUINCgtfcGFnZV90b2tlbg==');
 
-@$core.Deprecated('Use listMmsResponseDescriptor instead')
-const ListMmsResponse$json = {
-  '1': 'ListMmsResponse',
+@$core.Deprecated('Use listEtfLpsResponseDescriptor instead')
+const ListEtfLpsResponse$json = {
+  '1': 'ListEtfLpsResponse',
   '2': [
-    {'1': 'mms', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.Mm', '10': 'mms'},
+    {'1': 'etf_lps', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.EtfLp', '10': 'etfLps'},
     {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
-/// Descriptor for `ListMmsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMmsResponseDescriptor = $convert.base64Decode(
-    'Cg9MaXN0TW1zUmVzcG9uc2USHwoDbW1zGAEgAygLMg0ua2RvLnYxLmxwLk1tUgNtbXMSJgoPbm'
-    'V4dF9wYWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2Vu');
+/// Descriptor for `ListEtfLpsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpsResponseDescriptor = $convert.base64Decode(
+    'ChJMaXN0RXRmTHBzUmVzcG9uc2USKQoHZXRmX2xwcxgBIAMoCzIQLmtkby52MS5scC5FdGZMcF'
+    'IGZXRmTHBzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
-@$core.Deprecated('Use listMmStatusesRequestDescriptor instead')
-const ListMmStatusesRequest$json = {
-  '1': 'ListMmStatusesRequest',
+@$core.Deprecated('Use listEtfLpStatusesRequestDescriptor instead')
+const ListEtfLpStatusesRequest$json = {
+  '1': 'ListEtfLpStatusesRequest',
   '2': [
     {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
@@ -532,36 +535,36 @@ const ListMmStatusesRequest$json = {
   ],
 };
 
-/// Descriptor for `ListMmStatusesRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMmStatusesRequestDescriptor = $convert.base64Decode(
-    'ChVMaXN0TW1TdGF0dXNlc1JlcXVlc3QSIAoJcGFnZV9zaXplGAEgASgNSABSCHBhZ2VTaXpliA'
-    'EBEiIKCnBhZ2VfdG9rZW4YAiABKAlIAVIJcGFnZVRva2VuiAEBEhwKBmZpbHRlchgDIAEoCUIE'
-    '4kEBAVIGZmlsdGVyEh8KCG9yZGVyX2J5GAUgASgJQgTiQQEBUgdvcmRlckJ5QgwKCl9wYWdlX3'
-    'NpemVCDQoLX3BhZ2VfdG9rZW4=');
+/// Descriptor for `ListEtfLpStatusesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpStatusesRequestDescriptor = $convert.base64Decode(
+    'ChhMaXN0RXRmTHBTdGF0dXNlc1JlcXVlc3QSIAoJcGFnZV9zaXplGAEgASgNSABSCHBhZ2VTaX'
+    'pliAEBEiIKCnBhZ2VfdG9rZW4YAiABKAlIAVIJcGFnZVRva2VuiAEBEhwKBmZpbHRlchgDIAEo'
+    'CUIE4kEBAVIGZmlsdGVyEh8KCG9yZGVyX2J5GAUgASgJQgTiQQEBUgdvcmRlckJ5QgwKCl9wYW'
+    'dlX3NpemVCDQoLX3BhZ2VfdG9rZW4=');
 
-@$core.Deprecated('Use listMmStatusesResponseDescriptor instead')
-const ListMmStatusesResponse$json = {
-  '1': 'ListMmStatusesResponse',
+@$core.Deprecated('Use listEtfLpStatusesResponseDescriptor instead')
+const ListEtfLpStatusesResponse$json = {
+  '1': 'ListEtfLpStatusesResponse',
   '2': [
-    {'1': 'mm_statuses', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.MmStatus', '10': 'mmStatuses'},
+    {'1': 'etf_lp_statuses', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.EtfLpStatus', '10': 'etfLpStatuses'},
     {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
-/// Descriptor for `ListMmStatusesResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMmStatusesResponseDescriptor = $convert.base64Decode(
-    'ChZMaXN0TW1TdGF0dXNlc1Jlc3BvbnNlEjQKC21tX3N0YXR1c2VzGAEgAygLMhMua2RvLnYxLm'
-    'xwLk1tU3RhdHVzUgptbVN0YXR1c2VzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBh'
-    'Z2VUb2tlbg==');
+/// Descriptor for `ListEtfLpStatusesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listEtfLpStatusesResponseDescriptor = $convert.base64Decode(
+    'ChlMaXN0RXRmTHBTdGF0dXNlc1Jlc3BvbnNlEj4KD2V0Zl9scF9zdGF0dXNlcxgBIAMoCzIWLm'
+    'tkby52MS5scC5FdGZMcFN0YXR1c1INZXRmTHBTdGF0dXNlcxImCg9uZXh0X3BhZ2VfdG9rZW4Y'
+    'AiABKAlSDW5leHRQYWdlVG9rZW4=');
 
-@$core.Deprecated('Use updateMmRequestDescriptor instead')
-const UpdateMmRequest$json = {
-  '1': 'UpdateMmRequest',
+@$core.Deprecated('Use updateEtfLpRequestDescriptor instead')
+const UpdateEtfLpRequest$json = {
+  '1': 'UpdateEtfLpRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'depth', '3': 4, '4': 1, '5': 13, '9': 0, '10': 'depth', '17': true},
-    {'1': 'offset', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmOffset', '9': 1, '10': 'offset', '17': true},
+    {'1': 'offset', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 1, '10': 'offset', '17': true},
     {'1': 'ask_basis', '3': 6, '4': 1, '5': 1, '9': 2, '10': 'askBasis', '17': true},
     {'1': 'bid_basis', '3': 7, '4': 1, '5': 1, '9': 3, '10': 'bidBasis', '17': true},
     {'1': 'bid_quantity', '3': 8, '4': 1, '5': 3, '9': 4, '10': 'bidQuantity', '17': true},
@@ -571,7 +574,7 @@ const UpdateMmRequest$json = {
     {'1': 'momentum_enabled', '3': 12, '4': 1, '5': 8, '9': 8, '10': 'momentumEnabled', '17': true},
     {'1': 'momentum_window', '3': 13, '4': 1, '5': 13, '9': 9, '10': 'momentumWindow', '17': true},
     {'1': 'momentum_sensitivity', '3': 14, '4': 1, '5': 1, '9': 10, '10': 'momentumSensitivity', '17': true},
-    {'1': 'quantity_limit', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmQuantityLimit', '9': 11, '10': 'quantityLimit', '17': true},
+    {'1': 'quantity_limit', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 11, '10': 'quantityLimit', '17': true},
   ],
   '8': [
     {'1': '_depth'},
@@ -589,111 +592,112 @@ const UpdateMmRequest$json = {
   ],
 };
 
-/// Descriptor for `UpdateMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateMmRequestDescriptor = $convert.base64Decode(
-    'Cg9VcGRhdGVNbVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSIQoJZnVuZF'
-    '9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIZCgVkZXB0aBgEIAEoDUgAUgVkZXB0aIgBARIw'
-    'CgZvZmZzZXQYBSABKAsyEy5rZG8udjEubHAuTW1PZmZzZXRIAVIGb2Zmc2V0iAEBEiAKCWFza1'
-    '9iYXNpcxgGIAEoAUgCUghhc2tCYXNpc4gBARIgCgliaWRfYmFzaXMYByABKAFIA1IIYmlkQmFz'
-    'aXOIAQESJgoMYmlkX3F1YW50aXR5GAggASgDSARSC2JpZFF1YW50aXR5iAEBEiYKDGFza19xdW'
-    'FudGl0eRgJIAEoA0gFUgthc2tRdWFudGl0eYgBARIqCg5iaWRfYWRqdXN0bWVudBgKIAEoAUgG'
-    'Ug1iaWRBZGp1c3RtZW50iAEBEioKDmFza19hZGp1c3RtZW50GAsgASgBSAdSDWFza0FkanVzdG'
-    '1lbnSIAQESLgoQbW9tZW50dW1fZW5hYmxlZBgMIAEoCEgIUg9tb21lbnR1bUVuYWJsZWSIAQES'
-    'LAoPbW9tZW50dW1fd2luZG93GA0gASgNSAlSDm1vbWVudHVtV2luZG93iAEBEjYKFG1vbWVudH'
-    'VtX3NlbnNpdGl2aXR5GA4gASgBSApSE21vbWVudHVtU2Vuc2l0aXZpdHmIAQESRgoOcXVhbnRp'
-    'dHlfbGltaXQYDyABKAsyGi5rZG8udjEubHAuTW1RdWFudGl0eUxpbWl0SAtSDXF1YW50aXR5TG'
-    'ltaXSIAQFCCAoGX2RlcHRoQgkKB19vZmZzZXRCDAoKX2Fza19iYXNpc0IMCgpfYmlkX2Jhc2lz'
-    'Qg8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIRCg9fYmlkX2FkanVzdG1lbnRCEQ'
-    'oPX2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5k'
-    'b3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhEKD19xdWFudGl0eV9saW1pdA==');
+/// Descriptor for `UpdateEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateEtfLpRequestDescriptor = $convert.base64Decode(
+    'ChJVcGRhdGVFdGZMcFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSIQoJZn'
+    'VuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIZCgVkZXB0aBgEIAEoDUgAUgVkZXB0aIgB'
+    'ARIzCgZvZmZzZXQYBSABKAsyFi5rZG8udjEubHAuRXRmTHBPZmZzZXRIAVIGb2Zmc2V0iAEBEi'
+    'AKCWFza19iYXNpcxgGIAEoAUgCUghhc2tCYXNpc4gBARIgCgliaWRfYmFzaXMYByABKAFIA1II'
+    'YmlkQmFzaXOIAQESJgoMYmlkX3F1YW50aXR5GAggASgDSARSC2JpZFF1YW50aXR5iAEBEiYKDG'
+    'Fza19xdWFudGl0eRgJIAEoA0gFUgthc2tRdWFudGl0eYgBARIqCg5iaWRfYWRqdXN0bWVudBgK'
+    'IAEoAUgGUg1iaWRBZGp1c3RtZW50iAEBEioKDmFza19hZGp1c3RtZW50GAsgASgBSAdSDWFza0'
+    'FkanVzdG1lbnSIAQESLgoQbW9tZW50dW1fZW5hYmxlZBgMIAEoCEgIUg9tb21lbnR1bUVuYWJs'
+    'ZWSIAQESLAoPbW9tZW50dW1fd2luZG93GA0gASgNSAlSDm1vbWVudHVtV2luZG93iAEBEjYKFG'
+    '1vbWVudHVtX3NlbnNpdGl2aXR5GA4gASgBSApSE21vbWVudHVtU2Vuc2l0aXZpdHmIAQESSQoO'
+    'cXVhbnRpdHlfbGltaXQYDyABKAsyHS5rZG8udjEubHAuRXRmTHBRdWFudGl0eUxpbWl0SAtSDX'
+    'F1YW50aXR5TGltaXSIAQFCCAoGX2RlcHRoQgkKB19vZmZzZXRCDAoKX2Fza19iYXNpc0IMCgpf'
+    'YmlkX2Jhc2lzQg8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIRCg9fYmlkX2Fkan'
+    'VzdG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21l'
+    'bnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhEKD19xdWFudGl0eV9saW1pdA'
+    '==');
 
-@$core.Deprecated('Use getMmStatusRequestDescriptor instead')
-const GetMmStatusRequest$json = {
-  '1': 'GetMmStatusRequest',
+@$core.Deprecated('Use getEtfLpStatusRequestDescriptor instead')
+const GetEtfLpStatusRequest$json = {
+  '1': 'GetEtfLpStatusRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
-/// Descriptor for `GetMmStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMmStatusRequestDescriptor = $convert.base64Decode(
-    'ChJHZXRNbVN0YXR1c1JlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2RzYXBpcy'
-    '54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6L0Z1'
-    'bmRSBGZ1bmQ=');
+/// Descriptor for `GetEtfLpStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfLpStatusRequestDescriptor = $convert.base64Decode(
+    'ChVHZXRFdGZMcFN0YXR1c1JlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG8uY2RzYX'
+    'Bpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2FwaXMueHl6'
+    'L0Z1bmRSBGZ1bmQ=');
 
-@$core.Deprecated('Use streamMmStatusUpdateRequestDescriptor instead')
-const StreamMmStatusUpdateRequest$json = {
-  '1': 'StreamMmStatusUpdateRequest',
+@$core.Deprecated('Use streamEtfLpStatusUpdateRequestDescriptor instead')
+const StreamEtfLpStatusUpdateRequest$json = {
+  '1': 'StreamEtfLpStatusUpdateRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
-/// Descriptor for `StreamMmStatusUpdateRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamMmStatusUpdateRequestDescriptor = $convert.base64Decode(
-    'ChtTdHJlYW1NbVN0YXR1c1VwZGF0ZVJlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVChNrZG'
-    '8uY2RzYXBpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNkc2Fw'
-    'aXMueHl6L0Z1bmRSBGZ1bmQ=');
+/// Descriptor for `StreamEtfLpStatusUpdateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamEtfLpStatusUpdateRequestDescriptor = $convert.base64Decode(
+    'Ch5TdHJlYW1FdGZMcFN0YXR1c1VwZGF0ZVJlcXVlc3QSLgoDZXRmGAEgASgJQhziQQEC+kEVCh'
+    'NrZG8uY2RzYXBpcy54eXovRXRmUgNldGYSMQoEZnVuZBgCIAEoCUId4kEBAvpBFgoUa2RvLmNk'
+    'c2FwaXMueHl6L0Z1bmRSBGZ1bmQ=');
 
-@$core.Deprecated('Use startMmRequestDescriptor instead')
-const StartMmRequest$json = {
-  '1': 'StartMmRequest',
+@$core.Deprecated('Use startEtfLpRequestDescriptor instead')
+const StartEtfLpRequest$json = {
+  '1': 'StartEtfLpRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
-/// Descriptor for `StartMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List startMmRequestDescriptor = $convert.base64Decode(
-    'Cg5TdGFydE1tUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZHNhcGlzLnh5ei'
-    '9FdGZSA2V0ZhIxCgRmdW5kGAIgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBpcy54eXovRnVuZFIE'
-    'ZnVuZA==');
+/// Descriptor for `StartEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startEtfLpRequestDescriptor = $convert.base64Decode(
+    'ChFTdGFydEV0ZkxwUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZHNhcGlzLn'
+    'h5ei9FdGZSA2V0ZhIxCgRmdW5kGAIgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBpcy54eXovRnVu'
+    'ZFIEZnVuZA==');
 
-@$core.Deprecated('Use startMmResponseDescriptor instead')
-const StartMmResponse$json = {
-  '1': 'StartMmResponse',
+@$core.Deprecated('Use startEtfLpResponseDescriptor instead')
+const StartEtfLpResponse$json = {
+  '1': 'StartEtfLpResponse',
   '2': [
-    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmStatus', '10': 'status'},
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpStatus', '10': 'status'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `StartMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List startMmResponseDescriptor = $convert.base64Decode(
-    'Cg9TdGFydE1tUmVzcG9uc2USKwoGc3RhdHVzGAEgASgLMhMua2RvLnYxLmxwLk1tU3RhdHVzUg'
-    'ZzdGF0dXMSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZQ==');
+/// Descriptor for `StartEtfLpResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startEtfLpResponseDescriptor = $convert.base64Decode(
+    'ChJTdGFydEV0ZkxwUmVzcG9uc2USLgoGc3RhdHVzGAEgASgLMhYua2RvLnYxLmxwLkV0ZkxwU3'
+    'RhdHVzUgZzdGF0dXMSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZQ==');
 
-@$core.Deprecated('Use stopMmRequestDescriptor instead')
-const StopMmRequest$json = {
-  '1': 'StopMmRequest',
+@$core.Deprecated('Use stopEtfLpRequestDescriptor instead')
+const StopEtfLpRequest$json = {
+  '1': 'StopEtfLpRequest',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
   ],
 };
 
-/// Descriptor for `StopMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stopMmRequestDescriptor = $convert.base64Decode(
-    'Cg1TdG9wTW1SZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2FwaXMueHl6L0'
-    'V0ZlIDZXRmEjEKBGZ1bmQYAiABKAlCHeJBAQL6QRYKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRm'
-    'dW5k');
+/// Descriptor for `StopEtfLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopEtfLpRequestDescriptor = $convert.base64Decode(
+    'ChBTdG9wRXRmTHBSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLmNkc2FwaXMueH'
+    'l6L0V0ZlIDZXRmEjEKBGZ1bmQYAiABKAlCHeJBAQL6QRYKFGtkby5jZHNhcGlzLnh5ei9GdW5k'
+    'UgRmdW5k');
 
-@$core.Deprecated('Use stopMmResponseDescriptor instead')
-const StopMmResponse$json = {
-  '1': 'StopMmResponse',
+@$core.Deprecated('Use stopEtfLpResponseDescriptor instead')
+const StopEtfLpResponse$json = {
+  '1': 'StopEtfLpResponse',
   '2': [
-    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.MmStatus', '10': 'status'},
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpStatus', '10': 'status'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `StopMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stopMmResponseDescriptor = $convert.base64Decode(
-    'Cg5TdG9wTW1SZXNwb25zZRIrCgZzdGF0dXMYASABKAsyEy5rZG8udjEubHAuTW1TdGF0dXNSBn'
-    'N0YXR1cxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdl');
+/// Descriptor for `StopEtfLpResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopEtfLpResponseDescriptor = $convert.base64Decode(
+    'ChFTdG9wRXRmTHBSZXNwb25zZRIuCgZzdGF0dXMYASABKAsyFi5rZG8udjEubHAuRXRmTHBTdG'
+    'F0dXNSBnN0YXR1cxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdl');
 
 @$core.Deprecated('Use streamLpEventsRequestDescriptor instead')
 const StreamLpEventsRequest$json = {

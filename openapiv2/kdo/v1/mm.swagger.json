@@ -78,7 +78,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1mmCreateMmRequest"
+              "$ref": "#/definitions/mmCreateMmRequest"
             }
           }
         ],
@@ -272,7 +272,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1mmMmStatus"
+              "$ref": "#/definitions/mmMmStatus"
             }
           },
           "default": {
@@ -431,7 +431,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1mmStartMmResponse"
+              "$ref": "#/definitions/mmStartMmResponse"
             }
           },
           "default": {
@@ -479,7 +479,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1mmStopMmResponse"
+              "$ref": "#/definitions/mmStopMmResponse"
             }
           },
           "default": {
@@ -524,13 +524,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/v1mmMmStatus"
+                  "$ref": "#/definitions/mmMmStatus"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of v1mmMmStatus"
+              "title": "Stream result of mmMmStatus"
             }
           },
           "default": {
@@ -557,6 +557,24 @@
     }
   },
   "definitions": {
+    "mmCreateMmRequest": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "config": {
+          "$ref": "#/definitions/mmMmConfiguration",
+          "title": "MM 설정"
+        }
+      },
+      "title": "CreateMm",
+      "required": [
+        "symbol",
+        "config"
+      ]
+    },
     "mmListMmResponse": {
       "type": "object",
       "properties": {
@@ -608,7 +626,7 @@
           "title": "ISIN 심볼"
         },
         "state": {
-          "$ref": "#/definitions/v1mmMmState",
+          "$ref": "#/definitions/mmMmState",
           "title": "현재 상태"
         },
         "config": {
@@ -695,6 +713,44 @@
       },
       "title": "Skew 설정"
     },
+    "mmMmState": {
+      "type": "string",
+      "enum": [
+        "MM_STATE_UNSPECIFIED",
+        "MM_STATE_IDLE",
+        "MM_STATE_RUNNING",
+        "MM_STATE_PAUSED"
+      ],
+      "default": "MM_STATE_UNSPECIFIED",
+      "description": "- MM_STATE_IDLE: 미등록\n - MM_STATE_RUNNING: 활성\n - MM_STATE_PAUSED: 일시정지",
+      "title": "MM 상태"
+    },
+    "mmMmStatus": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "state": {
+          "$ref": "#/definitions/mmMmState",
+          "title": "현재 상태"
+        },
+        "config": {
+          "$ref": "#/definitions/mmMmConfiguration",
+          "title": "MM 설정"
+        },
+        "registered": {
+          "type": "boolean",
+          "title": "등록 여부"
+        },
+        "active": {
+          "type": "boolean",
+          "title": "활성 여부 (paused가 아닌 경우)"
+        }
+      },
+      "title": "MM 상태 상세"
+    },
     "mmMmTradeAnalyzerConfig": {
       "type": "object",
       "properties": {
@@ -757,6 +813,28 @@
         }
       }
     },
+    "mmStartMmResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/mmMmStatus",
+          "title": "시작된 MM 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
+    "mmStopMmResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -781,84 +859,6 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
-        }
-      }
-    },
-    "v1mmCreateMmRequest": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "ISIN 심볼"
-        },
-        "config": {
-          "$ref": "#/definitions/mmMmConfiguration",
-          "title": "MM 설정"
-        }
-      },
-      "title": "CreateMm",
-      "required": [
-        "symbol",
-        "config"
-      ]
-    },
-    "v1mmMmState": {
-      "type": "string",
-      "enum": [
-        "MM_STATE_UNSPECIFIED",
-        "MM_STATE_IDLE",
-        "MM_STATE_RUNNING",
-        "MM_STATE_PAUSED"
-      ],
-      "default": "MM_STATE_UNSPECIFIED",
-      "description": "- MM_STATE_IDLE: 미등록\n - MM_STATE_RUNNING: 활성\n - MM_STATE_PAUSED: 일시정지",
-      "title": "MM 상태"
-    },
-    "v1mmMmStatus": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "ISIN 심볼"
-        },
-        "state": {
-          "$ref": "#/definitions/v1mmMmState",
-          "title": "현재 상태"
-        },
-        "config": {
-          "$ref": "#/definitions/mmMmConfiguration",
-          "title": "MM 설정"
-        },
-        "registered": {
-          "type": "boolean",
-          "title": "등록 여부"
-        },
-        "active": {
-          "type": "boolean",
-          "title": "활성 여부 (paused가 아닌 경우)"
-        }
-      },
-      "title": "MM 상태 상세"
-    },
-    "v1mmStartMmResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/v1mmMmStatus",
-          "title": "시작된 MM 상태"
-        },
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      }
-    },
-    "v1mmStopMmResponse": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "title": "메시지"
         }
       }
     }
