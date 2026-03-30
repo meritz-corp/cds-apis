@@ -234,6 +234,9 @@ class MmConfiguration extends $pb.GeneratedMessage {
     MmScreeningConfig? screening,
     $fixnum.Int64? tickSize,
     $core.bool? enabled,
+    MmMomentumConfig? momentum,
+    MmExposureGuardConfig? exposureGuard,
+    MmInventoryBalancerConfig? inventoryBalancer,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
@@ -242,6 +245,9 @@ class MmConfiguration extends $pb.GeneratedMessage {
     if (screening != null) result.screening = screening;
     if (tickSize != null) result.tickSize = tickSize;
     if (enabled != null) result.enabled = enabled;
+    if (momentum != null) result.momentum = momentum;
+    if (exposureGuard != null) result.exposureGuard = exposureGuard;
+    if (inventoryBalancer != null) result.inventoryBalancer = inventoryBalancer;
     return result;
   }
 
@@ -257,6 +263,9 @@ class MmConfiguration extends $pb.GeneratedMessage {
     ..aOM<MmScreeningConfig>(4, _omitFieldNames ? '' : 'screening', subBuilder: MmScreeningConfig.create)
     ..aInt64(5, _omitFieldNames ? '' : 'tickSize')
     ..aOB(6, _omitFieldNames ? '' : 'enabled')
+    ..aOM<MmMomentumConfig>(7, _omitFieldNames ? '' : 'momentum', subBuilder: MmMomentumConfig.create)
+    ..aOM<MmExposureGuardConfig>(8, _omitFieldNames ? '' : 'exposureGuard', subBuilder: MmExposureGuardConfig.create)
+    ..aOM<MmInventoryBalancerConfig>(9, _omitFieldNames ? '' : 'inventoryBalancer', subBuilder: MmInventoryBalancerConfig.create)
     ..hasRequiredFields = false
   ;
 
@@ -342,6 +351,42 @@ class MmConfiguration extends $pb.GeneratedMessage {
   $core.bool hasEnabled() => $_has(5);
   @$pb.TagNumber(6)
   void clearEnabled() => $_clearField(6);
+
+  /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
+  @$pb.TagNumber(7)
+  MmMomentumConfig get momentum => $_getN(6);
+  @$pb.TagNumber(7)
+  set momentum(MmMomentumConfig value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasMomentum() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMomentum() => $_clearField(7);
+  @$pb.TagNumber(7)
+  MmMomentumConfig ensureMomentum() => $_ensure(6);
+
+  /// 순노출 hard limit 제어 설정
+  @$pb.TagNumber(8)
+  MmExposureGuardConfig get exposureGuard => $_getN(7);
+  @$pb.TagNumber(8)
+  set exposureGuard(MmExposureGuardConfig value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasExposureGuard() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearExposureGuard() => $_clearField(8);
+  @$pb.TagNumber(8)
+  MmExposureGuardConfig ensureExposureGuard() => $_ensure(7);
+
+  /// 중기 buy/sell imbalance 복원 설정
+  @$pb.TagNumber(9)
+  MmInventoryBalancerConfig get inventoryBalancer => $_getN(8);
+  @$pb.TagNumber(9)
+  set inventoryBalancer(MmInventoryBalancerConfig value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasInventoryBalancer() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearInventoryBalancer() => $_clearField(9);
+  @$pb.TagNumber(9)
+  MmInventoryBalancerConfig ensureInventoryBalancer() => $_ensure(8);
 }
 
 /// Skew 설정
@@ -590,6 +635,319 @@ class MmScreeningConfig extends $pb.GeneratedMessage {
   $core.bool hasMaxPrice() => $_has(2);
   @$pb.TagNumber(3)
   void clearMaxPrice() => $_clearField(3);
+}
+
+/// Momentum 설정
+class MmMomentumConfig extends $pb.GeneratedMessage {
+  factory MmMomentumConfig({
+    $core.bool? enabled,
+    $fixnum.Int64? windowMs,
+    $core.int? triggerTicks,
+    $core.double? followSensitivity,
+    $core.double? escapeSensitivity,
+    $core.int? maxFollowTicks,
+    $core.int? maxEscapeTicks,
+    $core.bool? isOpposite,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (windowMs != null) result.windowMs = windowMs;
+    if (triggerTicks != null) result.triggerTicks = triggerTicks;
+    if (followSensitivity != null) result.followSensitivity = followSensitivity;
+    if (escapeSensitivity != null) result.escapeSensitivity = escapeSensitivity;
+    if (maxFollowTicks != null) result.maxFollowTicks = maxFollowTicks;
+    if (maxEscapeTicks != null) result.maxEscapeTicks = maxEscapeTicks;
+    if (isOpposite != null) result.isOpposite = isOpposite;
+    return result;
+  }
+
+  MmMomentumConfig._();
+
+  factory MmMomentumConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmMomentumConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmMomentumConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'windowMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'triggerTicks', $pb.PbFieldType.O3)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'followSensitivity', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'escapeSensitivity', $pb.PbFieldType.OD)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'maxFollowTicks', $pb.PbFieldType.O3)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'maxEscapeTicks', $pb.PbFieldType.O3)
+    ..aOB(8, _omitFieldNames ? '' : 'isOpposite')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmMomentumConfig clone() => MmMomentumConfig()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmMomentumConfig copyWith(void Function(MmMomentumConfig) updates) => super.copyWith((message) => updates(message as MmMomentumConfig)) as MmMomentumConfig;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmMomentumConfig create() => MmMomentumConfig._();
+  @$core.override
+  MmMomentumConfig createEmptyInstance() => create();
+  static $pb.PbList<MmMomentumConfig> createRepeated() => $pb.PbList<MmMomentumConfig>();
+  @$core.pragma('dart2js:noInline')
+  static MmMomentumConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmMomentumConfig>(create);
+  static MmMomentumConfig? _defaultInstance;
+
+  /// 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 최근 가격 샘플을 유지할 시간 창 (ms)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get windowMs => $_getI64(1);
+  @$pb.TagNumber(2)
+  set windowMs($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasWindowMs() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearWindowMs() => $_clearField(2);
+
+  /// 연속 모멘텀 강도를 정규화할 기준 틱 수
+  @$pb.TagNumber(3)
+  $core.int get triggerTicks => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set triggerTicks($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTriggerTicks() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTriggerTicks() => $_clearField(3);
+
+  /// 정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도
+  @$pb.TagNumber(4)
+  $core.double get followSensitivity => $_getN(3);
+  @$pb.TagNumber(4)
+  set followSensitivity($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFollowSensitivity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFollowSensitivity() => $_clearField(4);
+
+  /// 정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도
+  @$pb.TagNumber(5)
+  $core.double get escapeSensitivity => $_getN(4);
+  @$pb.TagNumber(5)
+  set escapeSensitivity($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasEscapeSensitivity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearEscapeSensitivity() => $_clearField(5);
+
+  /// bid 추종 최대 틱 수
+  @$pb.TagNumber(6)
+  $core.int get maxFollowTicks => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set maxFollowTicks($core.int value) => $_setSignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasMaxFollowTicks() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearMaxFollowTicks() => $_clearField(6);
+
+  /// ask/bid 도망 최대 틱 수
+  @$pb.TagNumber(7)
+  $core.int get maxEscapeTicks => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set maxEscapeTicks($core.int value) => $_setSignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasMaxEscapeTicks() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMaxEscapeTicks() => $_clearField(7);
+
+  /// 인버스 방향으로 해석할지 여부
+  @$pb.TagNumber(8)
+  $core.bool get isOpposite => $_getBF(7);
+  @$pb.TagNumber(8)
+  set isOpposite($core.bool value) => $_setBool(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasIsOpposite() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearIsOpposite() => $_clearField(8);
+}
+
+/// 순노출 hard limit 제어 설정
+class MmExposureGuardConfig extends $pb.GeneratedMessage {
+  factory MmExposureGuardConfig({
+    $core.bool? enabled,
+    $core.int? reduceStartMultiple,
+    $core.int? maxInventoryMultiple,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (reduceStartMultiple != null) result.reduceStartMultiple = reduceStartMultiple;
+    if (maxInventoryMultiple != null) result.maxInventoryMultiple = maxInventoryMultiple;
+    return result;
+  }
+
+  MmExposureGuardConfig._();
+
+  factory MmExposureGuardConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmExposureGuardConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmExposureGuardConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'reduceStartMultiple', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'maxInventoryMultiple', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmExposureGuardConfig clone() => MmExposureGuardConfig()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmExposureGuardConfig copyWith(void Function(MmExposureGuardConfig) updates) => super.copyWith((message) => updates(message as MmExposureGuardConfig)) as MmExposureGuardConfig;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmExposureGuardConfig create() => MmExposureGuardConfig._();
+  @$core.override
+  MmExposureGuardConfig createEmptyInstance() => create();
+  static $pb.PbList<MmExposureGuardConfig> createRepeated() => $pb.PbList<MmExposureGuardConfig>();
+  @$core.pragma('dart2js:noInline')
+  static MmExposureGuardConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmExposureGuardConfig>(create);
+  static MmExposureGuardConfig? _defaultInstance;
+
+  /// 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 이 배수부터 같은 방향 수량을 줄이기 시작한다
+  @$pb.TagNumber(2)
+  $core.int get reduceStartMultiple => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set reduceStartMultiple($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasReduceStartMultiple() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReduceStartMultiple() => $_clearField(2);
+
+  /// 이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다
+  @$pb.TagNumber(3)
+  $core.int get maxInventoryMultiple => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set maxInventoryMultiple($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMaxInventoryMultiple() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMaxInventoryMultiple() => $_clearField(3);
+}
+
+/// 중기 buy/sell imbalance 복원 설정
+class MmInventoryBalancerConfig extends $pb.GeneratedMessage {
+  factory MmInventoryBalancerConfig({
+    $core.bool? enabled,
+    $core.int? triggerMultiple,
+    $core.int? priceSkewTicks,
+    $core.double? sameSideReduction,
+    $core.double? minSameSideScale,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (triggerMultiple != null) result.triggerMultiple = triggerMultiple;
+    if (priceSkewTicks != null) result.priceSkewTicks = priceSkewTicks;
+    if (sameSideReduction != null) result.sameSideReduction = sameSideReduction;
+    if (minSameSideScale != null) result.minSameSideScale = minSameSideScale;
+    return result;
+  }
+
+  MmInventoryBalancerConfig._();
+
+  factory MmInventoryBalancerConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmInventoryBalancerConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmInventoryBalancerConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'triggerMultiple', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'priceSkewTicks', $pb.PbFieldType.O3)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'sameSideReduction', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'minSameSideScale', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmInventoryBalancerConfig clone() => MmInventoryBalancerConfig()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmInventoryBalancerConfig copyWith(void Function(MmInventoryBalancerConfig) updates) => super.copyWith((message) => updates(message as MmInventoryBalancerConfig)) as MmInventoryBalancerConfig;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmInventoryBalancerConfig create() => MmInventoryBalancerConfig._();
+  @$core.override
+  MmInventoryBalancerConfig createEmptyInstance() => create();
+  static $pb.PbList<MmInventoryBalancerConfig> createRepeated() => $pb.PbList<MmInventoryBalancerConfig>();
+  @$core.pragma('dart2js:noInline')
+  static MmInventoryBalancerConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmInventoryBalancerConfig>(create);
+  static MmInventoryBalancerConfig? _defaultInstance;
+
+  /// 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다
+  @$pb.TagNumber(2)
+  $core.int get triggerMultiple => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set triggerMultiple($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTriggerMultiple() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTriggerMultiple() => $_clearField(2);
+
+  /// 단계당 가격 중심 이동 틱 수
+  @$pb.TagNumber(3)
+  $core.int get priceSkewTicks => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set priceSkewTicks($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPriceSkewTicks() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPriceSkewTicks() => $_clearField(3);
+
+  /// 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
+  @$pb.TagNumber(4)
+  $core.double get sameSideReduction => $_getN(3);
+  @$pb.TagNumber(4)
+  set sameSideReduction($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSameSideReduction() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSameSideReduction() => $_clearField(4);
+
+  /// 같은 방향 수량의 최소 비율
+  @$pb.TagNumber(5)
+  $core.double get minSameSideScale => $_getN(4);
+  @$pb.TagNumber(5)
+  set minSameSideScale($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMinSameSideScale() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMinSameSideScale() => $_clearField(5);
 }
 
 /// ListMm

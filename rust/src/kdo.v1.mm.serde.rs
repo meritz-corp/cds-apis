@@ -556,6 +556,15 @@ impl serde::Serialize for MmConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmConfiguration", len)?;
         if true {
             struct_ser.serialize_field("pricing", &self.pricing)?;
@@ -577,6 +586,15 @@ impl serde::Serialize for MmConfiguration {
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
+        if let Some(v) = self.momentum.as_ref() {
+            struct_ser.serialize_field("momentum", v)?;
+        }
+        if let Some(v) = self.exposure_guard.as_ref() {
+            struct_ser.serialize_field("exposure_guard", v)?;
+        }
+        if let Some(v) = self.inventory_balancer.as_ref() {
+            struct_ser.serialize_field("inventory_balancer", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -595,6 +613,11 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
             "tick_size",
             "tickSize",
             "enabled",
+            "momentum",
+            "exposure_guard",
+            "exposureGuard",
+            "inventory_balancer",
+            "inventoryBalancer",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -605,6 +628,9 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
             Screening,
             TickSize,
             Enabled,
+            Momentum,
+            ExposureGuard,
+            InventoryBalancer,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -633,6 +659,9 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                             "screening" => Ok(GeneratedField::Screening),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             "enabled" => Ok(GeneratedField::Enabled),
+                            "momentum" => Ok(GeneratedField::Momentum),
+                            "exposureGuard" | "exposure_guard" => Ok(GeneratedField::ExposureGuard),
+                            "inventoryBalancer" | "inventory_balancer" => Ok(GeneratedField::InventoryBalancer),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -658,6 +687,9 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                 let mut screening__ = None;
                 let mut tick_size__ = None;
                 let mut enabled__ = None;
+                let mut momentum__ = None;
+                let mut exposure_guard__ = None;
+                let mut inventory_balancer__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pricing => {
@@ -698,6 +730,24 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                             }
                             enabled__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::Momentum => {
+                            if momentum__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentum"));
+                            }
+                            momentum__ = map_.next_value()?;
+                        }
+                        GeneratedField::ExposureGuard => {
+                            if exposure_guard__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposureGuard"));
+                            }
+                            exposure_guard__ = map_.next_value()?;
+                        }
+                        GeneratedField::InventoryBalancer => {
+                            if inventory_balancer__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("inventoryBalancer"));
+                            }
+                            inventory_balancer__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -710,6 +760,9 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                     screening: screening__,
                     tick_size: tick_size__.unwrap_or_default(),
                     enabled: enabled__.unwrap_or_default(),
+                    momentum: momentum__,
+                    exposure_guard: exposure_guard__,
+                    inventory_balancer: inventory_balancer__,
                 })
             }
         }
@@ -863,6 +916,551 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MmEntry", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MmExposureGuardConfig {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmExposureGuardConfig", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("reduce_start_multiple", &self.reduce_start_multiple)?;
+        }
+        if true {
+            struct_ser.serialize_field("max_inventory_multiple", &self.max_inventory_multiple)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmExposureGuardConfig {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "reduce_start_multiple",
+            "reduceStartMultiple",
+            "max_inventory_multiple",
+            "maxInventoryMultiple",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            ReduceStartMultiple,
+            MaxInventoryMultiple,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "reduceStartMultiple" | "reduce_start_multiple" => Ok(GeneratedField::ReduceStartMultiple),
+                            "maxInventoryMultiple" | "max_inventory_multiple" => Ok(GeneratedField::MaxInventoryMultiple),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmExposureGuardConfig;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MmExposureGuardConfig")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmExposureGuardConfig, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut reduce_start_multiple__ = None;
+                let mut max_inventory_multiple__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ReduceStartMultiple => {
+                            if reduce_start_multiple__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reduceStartMultiple"));
+                            }
+                            reduce_start_multiple__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxInventoryMultiple => {
+                            if max_inventory_multiple__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxInventoryMultiple"));
+                            }
+                            max_inventory_multiple__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmExposureGuardConfig {
+                    enabled: enabled__.unwrap_or_default(),
+                    reduce_start_multiple: reduce_start_multiple__.unwrap_or_default(),
+                    max_inventory_multiple: max_inventory_multiple__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MmExposureGuardConfig", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MmInventoryBalancerConfig {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmInventoryBalancerConfig", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("trigger_multiple", &self.trigger_multiple)?;
+        }
+        if true {
+            struct_ser.serialize_field("price_skew_ticks", &self.price_skew_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("same_side_reduction", &self.same_side_reduction)?;
+        }
+        if true {
+            struct_ser.serialize_field("min_same_side_scale", &self.min_same_side_scale)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmInventoryBalancerConfig {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "trigger_multiple",
+            "triggerMultiple",
+            "price_skew_ticks",
+            "priceSkewTicks",
+            "same_side_reduction",
+            "sameSideReduction",
+            "min_same_side_scale",
+            "minSameSideScale",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            TriggerMultiple,
+            PriceSkewTicks,
+            SameSideReduction,
+            MinSameSideScale,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "triggerMultiple" | "trigger_multiple" => Ok(GeneratedField::TriggerMultiple),
+                            "priceSkewTicks" | "price_skew_ticks" => Ok(GeneratedField::PriceSkewTicks),
+                            "sameSideReduction" | "same_side_reduction" => Ok(GeneratedField::SameSideReduction),
+                            "minSameSideScale" | "min_same_side_scale" => Ok(GeneratedField::MinSameSideScale),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmInventoryBalancerConfig;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MmInventoryBalancerConfig")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmInventoryBalancerConfig, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut trigger_multiple__ = None;
+                let mut price_skew_ticks__ = None;
+                let mut same_side_reduction__ = None;
+                let mut min_same_side_scale__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TriggerMultiple => {
+                            if trigger_multiple__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerMultiple"));
+                            }
+                            trigger_multiple__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PriceSkewTicks => {
+                            if price_skew_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priceSkewTicks"));
+                            }
+                            price_skew_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SameSideReduction => {
+                            if same_side_reduction__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sameSideReduction"));
+                            }
+                            same_side_reduction__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MinSameSideScale => {
+                            if min_same_side_scale__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minSameSideScale"));
+                            }
+                            min_same_side_scale__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmInventoryBalancerConfig {
+                    enabled: enabled__.unwrap_or_default(),
+                    trigger_multiple: trigger_multiple__.unwrap_or_default(),
+                    price_skew_ticks: price_skew_ticks__.unwrap_or_default(),
+                    same_side_reduction: same_side_reduction__.unwrap_or_default(),
+                    min_same_side_scale: min_same_side_scale__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MmInventoryBalancerConfig", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MmMomentumConfig {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmMomentumConfig", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("window_ms", ToString::to_string(&self.window_ms).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("trigger_ticks", &self.trigger_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("follow_sensitivity", &self.follow_sensitivity)?;
+        }
+        if true {
+            struct_ser.serialize_field("escape_sensitivity", &self.escape_sensitivity)?;
+        }
+        if true {
+            struct_ser.serialize_field("max_follow_ticks", &self.max_follow_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("max_escape_ticks", &self.max_escape_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("is_opposite", &self.is_opposite)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmMomentumConfig {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "window_ms",
+            "windowMs",
+            "trigger_ticks",
+            "triggerTicks",
+            "follow_sensitivity",
+            "followSensitivity",
+            "escape_sensitivity",
+            "escapeSensitivity",
+            "max_follow_ticks",
+            "maxFollowTicks",
+            "max_escape_ticks",
+            "maxEscapeTicks",
+            "is_opposite",
+            "isOpposite",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            WindowMs,
+            TriggerTicks,
+            FollowSensitivity,
+            EscapeSensitivity,
+            MaxFollowTicks,
+            MaxEscapeTicks,
+            IsOpposite,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "windowMs" | "window_ms" => Ok(GeneratedField::WindowMs),
+                            "triggerTicks" | "trigger_ticks" => Ok(GeneratedField::TriggerTicks),
+                            "followSensitivity" | "follow_sensitivity" => Ok(GeneratedField::FollowSensitivity),
+                            "escapeSensitivity" | "escape_sensitivity" => Ok(GeneratedField::EscapeSensitivity),
+                            "maxFollowTicks" | "max_follow_ticks" => Ok(GeneratedField::MaxFollowTicks),
+                            "maxEscapeTicks" | "max_escape_ticks" => Ok(GeneratedField::MaxEscapeTicks),
+                            "isOpposite" | "is_opposite" => Ok(GeneratedField::IsOpposite),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmMomentumConfig;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MmMomentumConfig")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmMomentumConfig, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut window_ms__ = None;
+                let mut trigger_ticks__ = None;
+                let mut follow_sensitivity__ = None;
+                let mut escape_sensitivity__ = None;
+                let mut max_follow_ticks__ = None;
+                let mut max_escape_ticks__ = None;
+                let mut is_opposite__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::WindowMs => {
+                            if window_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("windowMs"));
+                            }
+                            window_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TriggerTicks => {
+                            if trigger_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerTicks"));
+                            }
+                            trigger_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FollowSensitivity => {
+                            if follow_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("followSensitivity"));
+                            }
+                            follow_sensitivity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EscapeSensitivity => {
+                            if escape_sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("escapeSensitivity"));
+                            }
+                            escape_sensitivity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxFollowTicks => {
+                            if max_follow_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxFollowTicks"));
+                            }
+                            max_follow_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxEscapeTicks => {
+                            if max_escape_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxEscapeTicks"));
+                            }
+                            max_escape_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::IsOpposite => {
+                            if is_opposite__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("isOpposite"));
+                            }
+                            is_opposite__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmMomentumConfig {
+                    enabled: enabled__.unwrap_or_default(),
+                    window_ms: window_ms__.unwrap_or_default(),
+                    trigger_ticks: trigger_ticks__.unwrap_or_default(),
+                    follow_sensitivity: follow_sensitivity__.unwrap_or_default(),
+                    escape_sensitivity: escape_sensitivity__.unwrap_or_default(),
+                    max_follow_ticks: max_follow_ticks__.unwrap_or_default(),
+                    max_escape_ticks: max_escape_ticks__.unwrap_or_default(),
+                    is_opposite: is_opposite__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MmMomentumConfig", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MmOrderbookData {

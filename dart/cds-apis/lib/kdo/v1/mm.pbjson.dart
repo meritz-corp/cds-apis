@@ -77,6 +77,9 @@ const MmConfiguration$json = {
     {'1': 'screening', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmScreeningConfig', '10': 'screening'},
     {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
     {'1': 'enabled', '3': 6, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'momentum', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmMomentumConfig', '10': 'momentum'},
+    {'1': 'exposure_guard', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmExposureGuardConfig', '10': 'exposureGuard'},
+    {'1': 'inventory_balancer', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmInventoryBalancerConfig', '10': 'inventoryBalancer'},
   ],
 };
 
@@ -86,7 +89,11 @@ final $typed_data.Uint8List mmConfigurationDescriptor = $convert.base64Decode(
     'gLMhcua2RvLnYxLm1tLk1tU2tld0NvbmZpZ1IEc2tldxJHCg50cmFkZV9hbmFseXplchgDIAEo'
     'CzIgLmtkby52MS5tbS5NbVRyYWRlQW5hbHl6ZXJDb25maWdSDXRyYWRlQW5hbHl6ZXISOgoJc2'
     'NyZWVuaW5nGAQgASgLMhwua2RvLnYxLm1tLk1tU2NyZWVuaW5nQ29uZmlnUglzY3JlZW5pbmcS'
-    'GwoJdGlja19zaXplGAUgASgDUgh0aWNrU2l6ZRIYCgdlbmFibGVkGAYgASgIUgdlbmFibGVk');
+    'GwoJdGlja19zaXplGAUgASgDUgh0aWNrU2l6ZRIYCgdlbmFibGVkGAYgASgIUgdlbmFibGVkEj'
+    'cKCG1vbWVudHVtGAcgASgLMhsua2RvLnYxLm1tLk1tTW9tZW50dW1Db25maWdSCG1vbWVudHVt'
+    'EkcKDmV4cG9zdXJlX2d1YXJkGAggASgLMiAua2RvLnYxLm1tLk1tRXhwb3N1cmVHdWFyZENvbm'
+    'ZpZ1INZXhwb3N1cmVHdWFyZBJTChJpbnZlbnRvcnlfYmFsYW5jZXIYCSABKAsyJC5rZG8udjEu'
+    'bW0uTW1JbnZlbnRvcnlCYWxhbmNlckNvbmZpZ1IRaW52ZW50b3J5QmFsYW5jZXI=');
 
 @$core.Deprecated('Use mmSkewConfigDescriptor instead')
 const MmSkewConfig$json = {
@@ -137,6 +144,66 @@ final $typed_data.Uint8List mmScreeningConfigDescriptor = $convert.base64Decode(
     'ChFNbVNjcmVlbmluZ0NvbmZpZxIzChZtYXhfc3ByZWFkX3dpZHRoX3RpY2tzGAEgASgFUhNtYX'
     'hTcHJlYWRXaWR0aFRpY2tzEhsKCW1pbl9wcmljZRgCIAEoA1IIbWluUHJpY2USGwoJbWF4X3By'
     'aWNlGAMgASgDUghtYXhQcmljZQ==');
+
+@$core.Deprecated('Use mmMomentumConfigDescriptor instead')
+const MmMomentumConfig$json = {
+  '1': 'MmMomentumConfig',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'window_ms', '3': 2, '4': 1, '5': 4, '10': 'windowMs'},
+    {'1': 'trigger_ticks', '3': 3, '4': 1, '5': 5, '10': 'triggerTicks'},
+    {'1': 'follow_sensitivity', '3': 4, '4': 1, '5': 1, '10': 'followSensitivity'},
+    {'1': 'escape_sensitivity', '3': 5, '4': 1, '5': 1, '10': 'escapeSensitivity'},
+    {'1': 'max_follow_ticks', '3': 6, '4': 1, '5': 5, '10': 'maxFollowTicks'},
+    {'1': 'max_escape_ticks', '3': 7, '4': 1, '5': 5, '10': 'maxEscapeTicks'},
+    {'1': 'is_opposite', '3': 8, '4': 1, '5': 8, '10': 'isOpposite'},
+  ],
+};
+
+/// Descriptor for `MmMomentumConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmMomentumConfigDescriptor = $convert.base64Decode(
+    'ChBNbU1vbWVudHVtQ29uZmlnEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSGwoJd2luZG93X2'
+    '1zGAIgASgEUgh3aW5kb3dNcxIjCg10cmlnZ2VyX3RpY2tzGAMgASgFUgx0cmlnZ2VyVGlja3MS'
+    'LQoSZm9sbG93X3NlbnNpdGl2aXR5GAQgASgBUhFmb2xsb3dTZW5zaXRpdml0eRItChJlc2NhcG'
+    'Vfc2Vuc2l0aXZpdHkYBSABKAFSEWVzY2FwZVNlbnNpdGl2aXR5EigKEG1heF9mb2xsb3dfdGlj'
+    'a3MYBiABKAVSDm1heEZvbGxvd1RpY2tzEigKEG1heF9lc2NhcGVfdGlja3MYByABKAVSDm1heE'
+    'VzY2FwZVRpY2tzEh8KC2lzX29wcG9zaXRlGAggASgIUgppc09wcG9zaXRl');
+
+@$core.Deprecated('Use mmExposureGuardConfigDescriptor instead')
+const MmExposureGuardConfig$json = {
+  '1': 'MmExposureGuardConfig',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'reduce_start_multiple', '3': 2, '4': 1, '5': 5, '10': 'reduceStartMultiple'},
+    {'1': 'max_inventory_multiple', '3': 3, '4': 1, '5': 5, '10': 'maxInventoryMultiple'},
+  ],
+};
+
+/// Descriptor for `MmExposureGuardConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmExposureGuardConfigDescriptor = $convert.base64Decode(
+    'ChVNbUV4cG9zdXJlR3VhcmRDb25maWcSGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZBIyChVyZW'
+    'R1Y2Vfc3RhcnRfbXVsdGlwbGUYAiABKAVSE3JlZHVjZVN0YXJ0TXVsdGlwbGUSNAoWbWF4X2lu'
+    'dmVudG9yeV9tdWx0aXBsZRgDIAEoBVIUbWF4SW52ZW50b3J5TXVsdGlwbGU=');
+
+@$core.Deprecated('Use mmInventoryBalancerConfigDescriptor instead')
+const MmInventoryBalancerConfig$json = {
+  '1': 'MmInventoryBalancerConfig',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'trigger_multiple', '3': 2, '4': 1, '5': 5, '10': 'triggerMultiple'},
+    {'1': 'price_skew_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceSkewTicks'},
+    {'1': 'same_side_reduction', '3': 4, '4': 1, '5': 1, '10': 'sameSideReduction'},
+    {'1': 'min_same_side_scale', '3': 5, '4': 1, '5': 1, '10': 'minSameSideScale'},
+  ],
+};
+
+/// Descriptor for `MmInventoryBalancerConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmInventoryBalancerConfigDescriptor = $convert.base64Decode(
+    'ChlNbUludmVudG9yeUJhbGFuY2VyQ29uZmlnEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSKQ'
+    'oQdHJpZ2dlcl9tdWx0aXBsZRgCIAEoBVIPdHJpZ2dlck11bHRpcGxlEigKEHByaWNlX3NrZXdf'
+    'dGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEi4KE3NhbWVfc2lkZV9yZWR1Y3Rpb24YBCABKA'
+    'FSEXNhbWVTaWRlUmVkdWN0aW9uEi0KE21pbl9zYW1lX3NpZGVfc2NhbGUYBSABKAFSEG1pblNh'
+    'bWVTaWRlU2NhbGU=');
 
 @$core.Deprecated('Use listMmRequestDescriptor instead')
 const ListMmRequest$json = {

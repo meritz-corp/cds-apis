@@ -190,6 +190,15 @@ message MmConfiguration {
 
   // MM 활성화 여부
   bool enabled = 6;
+
+  // Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
+  MmMomentumConfig momentum = 7;
+
+  // 순노출 hard limit 제어 설정
+  MmExposureGuardConfig exposure_guard = 8;
+
+  // 중기 buy/sell imbalance 복원 설정
+  MmInventoryBalancerConfig inventory_balancer = 9;
 }
 
 // Skew 설정
@@ -232,6 +241,63 @@ message MmScreeningConfig {
 
   // 최대 가격 (0=비활성)
   int64 max_price = 3;
+}
+
+// Momentum 설정
+message MmMomentumConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 최근 가격 샘플을 유지할 시간 창 (ms)
+  uint64 window_ms = 2;
+
+  // 연속 모멘텀 강도를 정규화할 기준 틱 수
+  int32 trigger_ticks = 3;
+
+  // 정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도
+  double follow_sensitivity = 4;
+
+  // 정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도
+  double escape_sensitivity = 5;
+
+  // bid 추종 최대 틱 수
+  int32 max_follow_ticks = 6;
+
+  // ask/bid 도망 최대 틱 수
+  int32 max_escape_ticks = 7;
+
+  // 인버스 방향으로 해석할지 여부
+  bool is_opposite = 8;
+}
+
+// 순노출 hard limit 제어 설정
+message MmExposureGuardConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 이 배수부터 같은 방향 수량을 줄이기 시작한다
+  int32 reduce_start_multiple = 2;
+
+  // 이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다
+  int32 max_inventory_multiple = 3;
+}
+
+// 중기 buy/sell imbalance 복원 설정
+message MmInventoryBalancerConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다
+  int32 trigger_multiple = 2;
+
+  // 단계당 가격 중심 이동 틱 수
+  int32 price_skew_ticks = 3;
+
+  // 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
+  double same_side_reduction = 4;
+
+  // 같은 방향 수량의 최소 비율
+  double min_same_side_scale = 5;
 }
 
 // ============================================================================
