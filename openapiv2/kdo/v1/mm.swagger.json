@@ -630,6 +630,16 @@
         "inventoryBalancer": {
           "$ref": "#/definitions/mmMmInventoryBalancerConfig",
           "title": "중기 buy/sell imbalance 복원 설정"
+        },
+        "bidAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "기준가격 대비 bid 조정값 (Price internal representation)"
+        },
+        "askAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "기준가격 대비 ask 조정값 (Price internal representation)"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -865,6 +875,45 @@
         "fundCode": {
           "type": "string",
           "title": "펀드 코드"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성 여부"
+        },
+        "momentumWindowMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "모멘텀 윈도우 크기 (ms)"
+        },
+        "momentumTriggerTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "모멘텀 트리거 틱 수"
+        },
+        "momentumFollowSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 추종 민감도"
+        },
+        "momentumEscapeSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 도망 민감도"
+        },
+        "momentumDirection": {
+          "type": "integer",
+          "format": "int32",
+          "title": "모멘텀 방향: 0=none, 1=up, 2=down"
+        },
+        "momentumBidAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "모멘텀 bid 조정값 (Price internal representation)"
+        },
+        "momentumAskAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "모멘텀 ask 조정값 (Price internal representation)"
         }
       },
       "title": "MM 상태 상세"

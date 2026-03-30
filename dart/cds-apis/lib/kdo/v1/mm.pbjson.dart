@@ -57,6 +57,24 @@ const MmStatus$json = {
     {'1': 'registered', '3': 4, '4': 1, '5': 8, '10': 'registered'},
     {'1': 'active', '3': 5, '4': 1, '5': 8, '10': 'active'},
     {'1': 'fund_code', '3': 6, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'momentum_enabled', '3': 7, '4': 1, '5': 8, '9': 0, '10': 'momentumEnabled', '17': true},
+    {'1': 'momentum_window_ms', '3': 8, '4': 1, '5': 4, '9': 1, '10': 'momentumWindowMs', '17': true},
+    {'1': 'momentum_trigger_ticks', '3': 9, '4': 1, '5': 5, '9': 2, '10': 'momentumTriggerTicks', '17': true},
+    {'1': 'momentum_follow_sensitivity', '3': 10, '4': 1, '5': 1, '9': 3, '10': 'momentumFollowSensitivity', '17': true},
+    {'1': 'momentum_escape_sensitivity', '3': 11, '4': 1, '5': 1, '9': 4, '10': 'momentumEscapeSensitivity', '17': true},
+    {'1': 'momentum_direction', '3': 12, '4': 1, '5': 5, '9': 5, '10': 'momentumDirection', '17': true},
+    {'1': 'momentum_bid_adjustment', '3': 13, '4': 1, '5': 3, '9': 6, '10': 'momentumBidAdjustment', '17': true},
+    {'1': 'momentum_ask_adjustment', '3': 14, '4': 1, '5': 3, '9': 7, '10': 'momentumAskAdjustment', '17': true},
+  ],
+  '8': [
+    {'1': '_momentum_enabled'},
+    {'1': '_momentum_window_ms'},
+    {'1': '_momentum_trigger_ticks'},
+    {'1': '_momentum_follow_sensitivity'},
+    {'1': '_momentum_escape_sensitivity'},
+    {'1': '_momentum_direction'},
+    {'1': '_momentum_bid_adjustment'},
+    {'1': '_momentum_ask_adjustment'},
   ],
 };
 
@@ -65,7 +83,20 @@ final $typed_data.Uint8List mmStatusDescriptor = $convert.base64Decode(
     'CghNbVN0YXR1cxIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIoCgVzdGF0ZRgCIAEoDjISLmtkby'
     '52MS5tbS5NbVN0YXRlUgVzdGF0ZRIyCgZjb25maWcYAyABKAsyGi5rZG8udjEubW0uTW1Db25m'
     'aWd1cmF0aW9uUgZjb25maWcSHgoKcmVnaXN0ZXJlZBgEIAEoCFIKcmVnaXN0ZXJlZBIWCgZhY3'
-    'RpdmUYBSABKAhSBmFjdGl2ZRIbCglmdW5kX2NvZGUYBiABKAlSCGZ1bmRDb2Rl');
+    'RpdmUYBSABKAhSBmFjdGl2ZRIbCglmdW5kX2NvZGUYBiABKAlSCGZ1bmRDb2RlEi4KEG1vbWVu'
+    'dHVtX2VuYWJsZWQYByABKAhIAFIPbW9tZW50dW1FbmFibGVkiAEBEjEKEm1vbWVudHVtX3dpbm'
+    'Rvd19tcxgIIAEoBEgBUhBtb21lbnR1bVdpbmRvd01ziAEBEjkKFm1vbWVudHVtX3RyaWdnZXJf'
+    'dGlja3MYCSABKAVIAlIUbW9tZW50dW1UcmlnZ2VyVGlja3OIAQESQwobbW9tZW50dW1fZm9sbG'
+    '93X3NlbnNpdGl2aXR5GAogASgBSANSGW1vbWVudHVtRm9sbG93U2Vuc2l0aXZpdHmIAQESQwob'
+    'bW9tZW50dW1fZXNjYXBlX3NlbnNpdGl2aXR5GAsgASgBSARSGW1vbWVudHVtRXNjYXBlU2Vuc2'
+    'l0aXZpdHmIAQESMgoSbW9tZW50dW1fZGlyZWN0aW9uGAwgASgFSAVSEW1vbWVudHVtRGlyZWN0'
+    'aW9uiAEBEjsKF21vbWVudHVtX2JpZF9hZGp1c3RtZW50GA0gASgDSAZSFW1vbWVudHVtQmlkQW'
+    'RqdXN0bWVudIgBARI7Chdtb21lbnR1bV9hc2tfYWRqdXN0bWVudBgOIAEoA0gHUhVtb21lbnR1'
+    'bUFza0FkanVzdG1lbnSIAQFCEwoRX21vbWVudHVtX2VuYWJsZWRCFQoTX21vbWVudHVtX3dpbm'
+    'Rvd19tc0IZChdfbW9tZW50dW1fdHJpZ2dlcl90aWNrc0IeChxfbW9tZW50dW1fZm9sbG93X3Nl'
+    'bnNpdGl2aXR5Qh4KHF9tb21lbnR1bV9lc2NhcGVfc2Vuc2l0aXZpdHlCFQoTX21vbWVudHVtX2'
+    'RpcmVjdGlvbkIaChhfbW9tZW50dW1fYmlkX2FkanVzdG1lbnRCGgoYX21vbWVudHVtX2Fza19h'
+    'ZGp1c3RtZW50');
 
 @$core.Deprecated('Use mmConfigurationDescriptor instead')
 const MmConfiguration$json = {
@@ -80,6 +111,8 @@ const MmConfiguration$json = {
     {'1': 'momentum', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmMomentumConfig', '10': 'momentum'},
     {'1': 'exposure_guard', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmExposureGuardConfig', '10': 'exposureGuard'},
     {'1': 'inventory_balancer', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmInventoryBalancerConfig', '10': 'inventoryBalancer'},
+    {'1': 'bid_adjustment', '3': 10, '4': 1, '5': 3, '10': 'bidAdjustment'},
+    {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 3, '10': 'askAdjustment'},
   ],
 };
 
@@ -93,7 +126,9 @@ final $typed_data.Uint8List mmConfigurationDescriptor = $convert.base64Decode(
     'cKCG1vbWVudHVtGAcgASgLMhsua2RvLnYxLm1tLk1tTW9tZW50dW1Db25maWdSCG1vbWVudHVt'
     'EkcKDmV4cG9zdXJlX2d1YXJkGAggASgLMiAua2RvLnYxLm1tLk1tRXhwb3N1cmVHdWFyZENvbm'
     'ZpZ1INZXhwb3N1cmVHdWFyZBJTChJpbnZlbnRvcnlfYmFsYW5jZXIYCSABKAsyJC5rZG8udjEu'
-    'bW0uTW1JbnZlbnRvcnlCYWxhbmNlckNvbmZpZ1IRaW52ZW50b3J5QmFsYW5jZXI=');
+    'bW0uTW1JbnZlbnRvcnlCYWxhbmNlckNvbmZpZ1IRaW52ZW50b3J5QmFsYW5jZXISJQoOYmlkX2'
+    'FkanVzdG1lbnQYCiABKANSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG1lbnQYCyABKANS'
+    'DWFza0FkanVzdG1lbnQ=');
 
 @$core.Deprecated('Use mmSkewConfigDescriptor instead')
 const MmSkewConfig$json = {

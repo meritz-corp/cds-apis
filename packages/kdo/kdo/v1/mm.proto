@@ -169,6 +169,30 @@ message MmStatus {
 
   // 펀드 코드
   string fund_code = 6;
+
+  // 모멘텀 활성 여부
+  optional bool momentum_enabled = 7;
+
+  // 모멘텀 윈도우 크기 (ms)
+  optional uint64 momentum_window_ms = 8;
+
+  // 모멘텀 트리거 틱 수
+  optional int32 momentum_trigger_ticks = 9;
+
+  // 모멘텀 추종 민감도
+  optional double momentum_follow_sensitivity = 10;
+
+  // 모멘텀 도망 민감도
+  optional double momentum_escape_sensitivity = 11;
+
+  // 모멘텀 방향: 0=none, 1=up, 2=down
+  optional int32 momentum_direction = 12;
+
+  // 모멘텀 bid 조정값 (Price internal representation)
+  optional int64 momentum_bid_adjustment = 13;
+
+  // 모멘텀 ask 조정값 (Price internal representation)
+  optional int64 momentum_ask_adjustment = 14;
 }
 
 // MM 엔진 설정 (MmConfig 대응)
@@ -199,6 +223,12 @@ message MmConfiguration {
 
   // 중기 buy/sell imbalance 복원 설정
   MmInventoryBalancerConfig inventory_balancer = 9;
+
+  // 기준가격 대비 bid 조정값 (Price internal representation)
+  int64 bid_adjustment = 10;
+
+  // 기준가격 대비 ask 조정값 (Price internal representation)
+  int64 ask_adjustment = 11;
 }
 
 // Skew 설정

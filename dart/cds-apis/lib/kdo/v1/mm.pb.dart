@@ -119,6 +119,14 @@ class MmStatus extends $pb.GeneratedMessage {
     $core.bool? registered,
     $core.bool? active,
     $core.String? fundCode,
+    $core.bool? momentumEnabled,
+    $fixnum.Int64? momentumWindowMs,
+    $core.int? momentumTriggerTicks,
+    $core.double? momentumFollowSensitivity,
+    $core.double? momentumEscapeSensitivity,
+    $core.int? momentumDirection,
+    $fixnum.Int64? momentumBidAdjustment,
+    $fixnum.Int64? momentumAskAdjustment,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -127,6 +135,14 @@ class MmStatus extends $pb.GeneratedMessage {
     if (registered != null) result.registered = registered;
     if (active != null) result.active = active;
     if (fundCode != null) result.fundCode = fundCode;
+    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
+    if (momentumWindowMs != null) result.momentumWindowMs = momentumWindowMs;
+    if (momentumTriggerTicks != null) result.momentumTriggerTicks = momentumTriggerTicks;
+    if (momentumFollowSensitivity != null) result.momentumFollowSensitivity = momentumFollowSensitivity;
+    if (momentumEscapeSensitivity != null) result.momentumEscapeSensitivity = momentumEscapeSensitivity;
+    if (momentumDirection != null) result.momentumDirection = momentumDirection;
+    if (momentumBidAdjustment != null) result.momentumBidAdjustment = momentumBidAdjustment;
+    if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
     return result;
   }
 
@@ -142,6 +158,14 @@ class MmStatus extends $pb.GeneratedMessage {
     ..aOB(4, _omitFieldNames ? '' : 'registered')
     ..aOB(5, _omitFieldNames ? '' : 'active')
     ..aOS(6, _omitFieldNames ? '' : 'fundCode')
+    ..aOB(7, _omitFieldNames ? '' : 'momentumEnabled')
+    ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'momentumWindowMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(9, _omitFieldNames ? '' : 'momentumTriggerTicks', $pb.PbFieldType.O3)
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'momentumFollowSensitivity', $pb.PbFieldType.OD)
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'momentumEscapeSensitivity', $pb.PbFieldType.OD)
+    ..a<$core.int>(12, _omitFieldNames ? '' : 'momentumDirection', $pb.PbFieldType.O3)
+    ..aInt64(13, _omitFieldNames ? '' : 'momentumBidAdjustment')
+    ..aInt64(14, _omitFieldNames ? '' : 'momentumAskAdjustment')
     ..hasRequiredFields = false
   ;
 
@@ -223,6 +247,86 @@ class MmStatus extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(5);
   @$pb.TagNumber(6)
   void clearFundCode() => $_clearField(6);
+
+  /// 모멘텀 활성 여부
+  @$pb.TagNumber(7)
+  $core.bool get momentumEnabled => $_getBF(6);
+  @$pb.TagNumber(7)
+  set momentumEnabled($core.bool value) => $_setBool(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasMomentumEnabled() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMomentumEnabled() => $_clearField(7);
+
+  /// 모멘텀 윈도우 크기 (ms)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get momentumWindowMs => $_getI64(7);
+  @$pb.TagNumber(8)
+  set momentumWindowMs($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasMomentumWindowMs() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearMomentumWindowMs() => $_clearField(8);
+
+  /// 모멘텀 트리거 틱 수
+  @$pb.TagNumber(9)
+  $core.int get momentumTriggerTicks => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set momentumTriggerTicks($core.int value) => $_setSignedInt32(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasMomentumTriggerTicks() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearMomentumTriggerTicks() => $_clearField(9);
+
+  /// 모멘텀 추종 민감도
+  @$pb.TagNumber(10)
+  $core.double get momentumFollowSensitivity => $_getN(9);
+  @$pb.TagNumber(10)
+  set momentumFollowSensitivity($core.double value) => $_setDouble(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasMomentumFollowSensitivity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearMomentumFollowSensitivity() => $_clearField(10);
+
+  /// 모멘텀 도망 민감도
+  @$pb.TagNumber(11)
+  $core.double get momentumEscapeSensitivity => $_getN(10);
+  @$pb.TagNumber(11)
+  set momentumEscapeSensitivity($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasMomentumEscapeSensitivity() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearMomentumEscapeSensitivity() => $_clearField(11);
+
+  /// 모멘텀 방향: 0=none, 1=up, 2=down
+  @$pb.TagNumber(12)
+  $core.int get momentumDirection => $_getIZ(11);
+  @$pb.TagNumber(12)
+  set momentumDirection($core.int value) => $_setSignedInt32(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasMomentumDirection() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearMomentumDirection() => $_clearField(12);
+
+  /// 모멘텀 bid 조정값 (Price internal representation)
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get momentumBidAdjustment => $_getI64(12);
+  @$pb.TagNumber(13)
+  set momentumBidAdjustment($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasMomentumBidAdjustment() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearMomentumBidAdjustment() => $_clearField(13);
+
+  /// 모멘텀 ask 조정값 (Price internal representation)
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get momentumAskAdjustment => $_getI64(13);
+  @$pb.TagNumber(14)
+  set momentumAskAdjustment($fixnum.Int64 value) => $_setInt64(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasMomentumAskAdjustment() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearMomentumAskAdjustment() => $_clearField(14);
 }
 
 /// MM 엔진 설정 (MmConfig 대응)
@@ -237,6 +341,8 @@ class MmConfiguration extends $pb.GeneratedMessage {
     MmMomentumConfig? momentum,
     MmExposureGuardConfig? exposureGuard,
     MmInventoryBalancerConfig? inventoryBalancer,
+    $fixnum.Int64? bidAdjustment,
+    $fixnum.Int64? askAdjustment,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
@@ -248,6 +354,8 @@ class MmConfiguration extends $pb.GeneratedMessage {
     if (momentum != null) result.momentum = momentum;
     if (exposureGuard != null) result.exposureGuard = exposureGuard;
     if (inventoryBalancer != null) result.inventoryBalancer = inventoryBalancer;
+    if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
+    if (askAdjustment != null) result.askAdjustment = askAdjustment;
     return result;
   }
 
@@ -266,6 +374,8 @@ class MmConfiguration extends $pb.GeneratedMessage {
     ..aOM<MmMomentumConfig>(7, _omitFieldNames ? '' : 'momentum', subBuilder: MmMomentumConfig.create)
     ..aOM<MmExposureGuardConfig>(8, _omitFieldNames ? '' : 'exposureGuard', subBuilder: MmExposureGuardConfig.create)
     ..aOM<MmInventoryBalancerConfig>(9, _omitFieldNames ? '' : 'inventoryBalancer', subBuilder: MmInventoryBalancerConfig.create)
+    ..aInt64(10, _omitFieldNames ? '' : 'bidAdjustment')
+    ..aInt64(11, _omitFieldNames ? '' : 'askAdjustment')
     ..hasRequiredFields = false
   ;
 
@@ -387,6 +497,26 @@ class MmConfiguration extends $pb.GeneratedMessage {
   void clearInventoryBalancer() => $_clearField(9);
   @$pb.TagNumber(9)
   MmInventoryBalancerConfig ensureInventoryBalancer() => $_ensure(8);
+
+  /// 기준가격 대비 bid 조정값 (Price internal representation)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get bidAdjustment => $_getI64(9);
+  @$pb.TagNumber(10)
+  set bidAdjustment($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasBidAdjustment() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearBidAdjustment() => $_clearField(10);
+
+  /// 기준가격 대비 ask 조정값 (Price internal representation)
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get askAdjustment => $_getI64(10);
+  @$pb.TagNumber(11)
+  set askAdjustment($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasAskAdjustment() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearAskAdjustment() => $_clearField(11);
 }
 
 /// Skew 설정

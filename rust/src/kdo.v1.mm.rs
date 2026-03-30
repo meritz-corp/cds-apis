@@ -43,6 +43,30 @@ pub struct MmStatus {
     /// 펀드 코드
     #[prost(string, tag="6")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 모멘텀 활성 여부
+    #[prost(bool, optional, tag="7")]
+    pub momentum_enabled: ::core::option::Option<bool>,
+    /// 모멘텀 윈도우 크기 (ms)
+    #[prost(uint64, optional, tag="8")]
+    pub momentum_window_ms: ::core::option::Option<u64>,
+    /// 모멘텀 트리거 틱 수
+    #[prost(int32, optional, tag="9")]
+    pub momentum_trigger_ticks: ::core::option::Option<i32>,
+    /// 모멘텀 추종 민감도
+    #[prost(double, optional, tag="10")]
+    pub momentum_follow_sensitivity: ::core::option::Option<f64>,
+    /// 모멘텀 도망 민감도
+    #[prost(double, optional, tag="11")]
+    pub momentum_escape_sensitivity: ::core::option::Option<f64>,
+    /// 모멘텀 방향: 0=none, 1=up, 2=down
+    #[prost(int32, optional, tag="12")]
+    pub momentum_direction: ::core::option::Option<i32>,
+    /// 모멘텀 bid 조정값 (Price internal representation)
+    #[prost(int64, optional, tag="13")]
+    pub momentum_bid_adjustment: ::core::option::Option<i64>,
+    /// 모멘텀 ask 조정값 (Price internal representation)
+    #[prost(int64, optional, tag="14")]
+    pub momentum_ask_adjustment: ::core::option::Option<i64>,
 }
 /// MM 엔진 설정 (MmConfig 대응)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -75,6 +99,12 @@ pub struct MmConfiguration {
     /// 중기 buy/sell imbalance 복원 설정
     #[prost(message, optional, tag="9")]
     pub inventory_balancer: ::core::option::Option<MmInventoryBalancerConfig>,
+    /// 기준가격 대비 bid 조정값 (Price internal representation)
+    #[prost(int64, tag="10")]
+    pub bid_adjustment: i64,
+    /// 기준가격 대비 ask 조정값 (Price internal representation)
+    #[prost(int64, tag="11")]
+    pub ask_adjustment: i64,
 }
 /// Skew 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
