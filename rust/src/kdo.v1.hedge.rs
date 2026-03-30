@@ -13,9 +13,9 @@ pub struct Hedge {
     /// Hedge ID
     #[prost(int32, tag="2")]
     pub id: i32,
-    /// 펀드 코드
+    /// 소스(원주문) 펀드 코드
     #[prost(string, tag="3")]
-    pub fund_code: ::prost::alloc::string::String,
+    pub source_fund_code: ::prost::alloc::string::String,
     /// 소스 종목 심볼 (체결 감시 대상)
     #[prost(string, tag="4")]
     pub source_symbol: ::prost::alloc::string::String,
@@ -45,6 +45,9 @@ pub struct Hedge {
     /// key: 헷지 대상 심볼, value: 소스 종목 체결수량
     #[prost(map="string, int64", tag="12")]
     pub filled_quantity_per_hedge: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
+    /// 헷지 주문이 실행되는 펀드 코드
+    #[prost(string, tag="13")]
+    pub hedge_fund_code: ::prost::alloc::string::String,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -348,7 +351,7 @@ pub struct HedgeAccumulatorState {
     pub portfolio_id: i32,
     /// 소스 ETF 펀드 코드
     #[prost(string, tag="2")]
-    pub fund_code: ::prost::alloc::string::String,
+    pub source_fund_code: ::prost::alloc::string::String,
     /// 소스 ETF 종목 심볼
     #[prost(string, tag="3")]
     pub source_symbol: ::prost::alloc::string::String,

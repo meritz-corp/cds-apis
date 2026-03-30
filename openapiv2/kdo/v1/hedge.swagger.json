@@ -366,9 +366,9 @@
                   "title": "Hedge ID",
                   "readOnly": true
                 },
-                "fundCode": {
+                "sourceFundCode": {
                   "type": "string",
-                  "title": "펀드 코드"
+                  "title": "소스(원주문) 펀드 코드"
                 },
                 "sourceSymbol": {
                   "type": "string",
@@ -414,13 +414,18 @@
                   },
                   "title": "헷지 1주 주문당 소스 종목 체결수량 기준\nkey: 헷지 대상 심볼, value: 소스 종목 체결수량",
                   "readOnly": true
+                },
+                "hedgeFundCode": {
+                  "type": "string",
+                  "title": "헷지 주문이 실행되는 펀드 코드"
                 }
               },
               "title": "수정할 헷지 정보",
               "required": [
-                "fundCode",
+                "sourceFundCode",
                 "sourceSymbol",
-                "hedgeMethod"
+                "hedgeMethod",
+                "hedgeFundCode"
               ]
             }
           }
@@ -771,9 +776,9 @@
           "title": "Hedge ID",
           "readOnly": true
         },
-        "fundCode": {
+        "sourceFundCode": {
           "type": "string",
-          "title": "펀드 코드"
+          "title": "소스(원주문) 펀드 코드"
         },
         "sourceSymbol": {
           "type": "string",
@@ -819,13 +824,18 @@
           },
           "title": "헷지 1주 주문당 소스 종목 체결수량 기준\nkey: 헷지 대상 심볼, value: 소스 종목 체결수량",
           "readOnly": true
+        },
+        "hedgeFundCode": {
+          "type": "string",
+          "title": "헷지 주문이 실행되는 펀드 코드"
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",
       "required": [
-        "fundCode",
+        "sourceFundCode",
         "sourceSymbol",
-        "hedgeMethod"
+        "hedgeMethod",
+        "hedgeFundCode"
       ]
     },
     "hedgeHedgeAccumulatorState": {
@@ -836,7 +846,7 @@
           "format": "int32",
           "title": "포트폴리오 ID"
         },
-        "fundCode": {
+        "sourceFundCode": {
           "type": "string",
           "title": "소스 ETF 펀드 코드"
         },

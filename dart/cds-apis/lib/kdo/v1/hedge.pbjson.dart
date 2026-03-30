@@ -51,7 +51,7 @@ const Hedge$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'id', '3': 2, '4': 1, '5': 5, '8': {}, '10': 'id'},
-    {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'source_fund_code', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'sourceFundCode'},
     {'1': 'source_symbol', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'sourceSymbol'},
     {'1': 'hedge_method', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.hedge.HedgeMethod', '8': {}, '10': 'hedgeMethod'},
     {'1': 'is_active', '3': 6, '4': 1, '5': 8, '10': 'isActive'},
@@ -61,6 +61,7 @@ const Hedge$json = {
     {'1': 'auto_amend', '3': 10, '4': 1, '5': 8, '10': 'autoAmend'},
     {'1': 'amend_method', '3': 11, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '10': 'amendMethod'},
     {'1': 'filled_quantity_per_hedge', '3': 12, '4': 3, '5': 11, '6': '.kdo.v1.hedge.Hedge.FilledQuantityPerHedgeEntry', '8': {}, '10': 'filledQuantityPerHedge'},
+    {'1': 'hedge_fund_code', '3': 13, '4': 1, '5': 9, '8': {}, '10': 'hedgeFundCode'},
   ],
   '3': [Hedge_FilledQuantityPerHedgeEntry$json],
   '7': {},
@@ -79,19 +80,20 @@ const Hedge_FilledQuantityPerHedgeEntry$json = {
 /// Descriptor for `Hedge`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'CgVIZWRnZRIYCgRuYW1lGAEgASgJQgTiQQEDUgRuYW1lEhQKAmlkGAIgASgFQgTiQQEDUgJpZB'
-    'IhCglmdW5kX2NvZGUYAyABKAlCBOJBAQJSCGZ1bmRDb2RlEikKDXNvdXJjZV9zeW1ib2wYBCAB'
-    'KAlCBOJBAQJSDHNvdXJjZVN5bWJvbBJCCgxoZWRnZV9tZXRob2QYBSABKAsyGS5rZG8udjEuaG'
-    'VkZ2UuSGVkZ2VNZXRob2RCBOJBAQJSC2hlZGdlTWV0aG9kEhsKCWlzX2FjdGl2ZRgGIAEoCFII'
-    'aXNBY3RpdmUSQQoLY3JlYXRlX3RpbWUYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW'
-    '1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90aW1lGAggASgLMhouZ29vZ2xlLnByb3Rv'
-    'YnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRJDCg9leGVjX3ByaWNlX3R5cGUYCSABKA'
-    '4yGy5rZG8udjEuaGVkZ2UuRXhlY1ByaWNlVHlwZVINZXhlY1ByaWNlVHlwZRIdCgphdXRvX2Ft'
-    'ZW5kGAogASgIUglhdXRvQW1lbmQSQQoMYW1lbmRfbWV0aG9kGAsgASgOMh4ua2RvLnYxLmNvbW'
-    '1vbi5BbWVuZE1ldGhvZFR5cGVSC2FtZW5kTWV0aG9kEnAKGWZpbGxlZF9xdWFudGl0eV9wZXJf'
-    'aGVkZ2UYDCADKAsyLy5rZG8udjEuaGVkZ2UuSGVkZ2UuRmlsbGVkUXVhbnRpdHlQZXJIZWRnZU'
-    'VudHJ5QgTiQQEDUhZmaWxsZWRRdWFudGl0eVBlckhlZGdlGkkKG0ZpbGxlZFF1YW50aXR5UGVy'
-    'SGVkZ2VFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoA1IFdmFsdWU6AjgBOi'
-    'rqQScKFWtkby5jZHNhcGlzLnh5ei9IZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
+    'IuChBzb3VyY2VfZnVuZF9jb2RlGAMgASgJQgTiQQECUg5zb3VyY2VGdW5kQ29kZRIpCg1zb3Vy'
+    'Y2Vfc3ltYm9sGAQgASgJQgTiQQECUgxzb3VyY2VTeW1ib2wSQgoMaGVkZ2VfbWV0aG9kGAUgAS'
+    'gLMhkua2RvLnYxLmhlZGdlLkhlZGdlTWV0aG9kQgTiQQECUgtoZWRnZU1ldGhvZBIbCglpc19h'
+    'Y3RpdmUYBiABKAhSCGlzQWN0aXZlEkEKC2NyZWF0ZV90aW1lGAcgASgLMhouZ29vZ2xlLnByb3'
+    'RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKY3JlYXRlVGltZRJBCgt1cGRhdGVfdGltZRgIIAEoCzIa'
+    'Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWUSQwoPZXhlY19wcm'
+    'ljZV90eXBlGAkgASgOMhsua2RvLnYxLmhlZGdlLkV4ZWNQcmljZVR5cGVSDWV4ZWNQcmljZVR5'
+    'cGUSHQoKYXV0b19hbWVuZBgKIAEoCFIJYXV0b0FtZW5kEkEKDGFtZW5kX21ldGhvZBgLIAEoDj'
+    'IeLmtkby52MS5jb21tb24uQW1lbmRNZXRob2RUeXBlUgthbWVuZE1ldGhvZBJwChlmaWxsZWRf'
+    'cXVhbnRpdHlfcGVyX2hlZGdlGAwgAygLMi8ua2RvLnYxLmhlZGdlLkhlZGdlLkZpbGxlZFF1YW'
+    '50aXR5UGVySGVkZ2VFbnRyeUIE4kEBA1IWZmlsbGVkUXVhbnRpdHlQZXJIZWRnZRIsCg9oZWRn'
+    'ZV9mdW5kX2NvZGUYDSABKAlCBOJBAQJSDWhlZGdlRnVuZENvZGUaSQobRmlsbGVkUXVhbnRpdH'
+    'lQZXJIZWRnZUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgDUgV2YWx1ZToC'
+    'OAE6KupBJwoVa2RvLmNkc2FwaXMueHl6L0hlZGdlEg5oZWRnZXMve2hlZGdlfQ==');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {
@@ -443,7 +445,7 @@ const HedgeAccumulatorState$json = {
   '1': 'HedgeAccumulatorState',
   '2': [
     {'1': 'portfolio_id', '3': 1, '4': 1, '5': 5, '10': 'portfolioId'},
-    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'source_fund_code', '3': 2, '4': 1, '5': 9, '10': 'sourceFundCode'},
     {'1': 'source_symbol', '3': 3, '4': 1, '5': 9, '10': 'sourceSymbol'},
     {'1': 'hedge_symbol', '3': 4, '4': 1, '5': 9, '10': 'hedgeSymbol'},
     {'1': 'bid_accumulator', '3': 5, '4': 1, '5': 1, '10': 'bidAccumulator'},
@@ -458,14 +460,14 @@ const HedgeAccumulatorState$json = {
 /// Descriptor for `HedgeAccumulatorState`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List hedgeAccumulatorStateDescriptor = $convert.base64Decode(
     'ChVIZWRnZUFjY3VtdWxhdG9yU3RhdGUSIQoMcG9ydGZvbGlvX2lkGAEgASgFUgtwb3J0Zm9saW'
-    '9JZBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2RlEiMKDXNvdXJjZV9zeW1ib2wYAyABKAlS'
-    'DHNvdXJjZVN5bWJvbBIhCgxoZWRnZV9zeW1ib2wYBCABKAlSC2hlZGdlU3ltYm9sEicKD2JpZF'
-    '9hY2N1bXVsYXRvchgFIAEoAVIOYmlkQWNjdW11bGF0b3ISJwoPYXNrX2FjY3VtdWxhdG9yGAYg'
-    'ASgBUg5hc2tBY2N1bXVsYXRvchI7Chpzb3VyY2VfYmlkX2ZpbGxlZF9xdWFudGl0eRgHIAEoA1'
-    'IXc291cmNlQmlkRmlsbGVkUXVhbnRpdHkSOwoac291cmNlX2Fza19maWxsZWRfcXVhbnRpdHkY'
-    'CCABKANSF3NvdXJjZUFza0ZpbGxlZFF1YW50aXR5EjsKGmRlc2lyZWRfYmlkX2hlZGdlX3F1YW'
-    '50aXR5GAkgASgBUhdkZXNpcmVkQmlkSGVkZ2VRdWFudGl0eRI7ChpkZXNpcmVkX2Fza19oZWRn'
-    'ZV9xdWFudGl0eRgKIAEoAVIXZGVzaXJlZEFza0hlZGdlUXVhbnRpdHk=');
+    '9JZBIoChBzb3VyY2VfZnVuZF9jb2RlGAIgASgJUg5zb3VyY2VGdW5kQ29kZRIjCg1zb3VyY2Vf'
+    'c3ltYm9sGAMgASgJUgxzb3VyY2VTeW1ib2wSIQoMaGVkZ2Vfc3ltYm9sGAQgASgJUgtoZWRnZV'
+    'N5bWJvbBInCg9iaWRfYWNjdW11bGF0b3IYBSABKAFSDmJpZEFjY3VtdWxhdG9yEicKD2Fza19h'
+    'Y2N1bXVsYXRvchgGIAEoAVIOYXNrQWNjdW11bGF0b3ISOwoac291cmNlX2JpZF9maWxsZWRfcX'
+    'VhbnRpdHkYByABKANSF3NvdXJjZUJpZEZpbGxlZFF1YW50aXR5EjsKGnNvdXJjZV9hc2tfZmls'
+    'bGVkX3F1YW50aXR5GAggASgDUhdzb3VyY2VBc2tGaWxsZWRRdWFudGl0eRI7ChpkZXNpcmVkX2'
+    'JpZF9oZWRnZV9xdWFudGl0eRgJIAEoAVIXZGVzaXJlZEJpZEhlZGdlUXVhbnRpdHkSOwoaZGVz'
+    'aXJlZF9hc2tfaGVkZ2VfcXVhbnRpdHkYCiABKAFSF2Rlc2lyZWRBc2tIZWRnZVF1YW50aXR5');
 
 @$core.Deprecated('Use listHedgeAccumulatorsRequestDescriptor instead')
 const ListHedgeAccumulatorsRequest$json = {

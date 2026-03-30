@@ -196,8 +196,8 @@ message Hedge {
   // Hedge ID
   int32 id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // 펀드 코드
-  string fund_code = 3 [(google.api.field_behavior) = REQUIRED];
+  // 소스(원주문) 펀드 코드
+  string source_fund_code = 3 [(google.api.field_behavior) = REQUIRED];
 
   // 소스 종목 심볼 (체결 감시 대상)
   string source_symbol = 4 [(google.api.field_behavior) = REQUIRED];
@@ -227,6 +227,9 @@ message Hedge {
   // 헷지 1주 주문당 소스 종목 체결수량 기준
   // key: 헷지 대상 심볼, value: 소스 종목 체결수량
   map<string, int64> filled_quantity_per_hedge = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // 헷지 주문이 실행되는 펀드 코드
+  string hedge_fund_code = 13 [(google.api.field_behavior) = REQUIRED];
 }
 
 // 헷지 방식
@@ -502,7 +505,7 @@ message HedgeAccumulatorState {
   int32 portfolio_id = 1;
 
   // 소스 ETF 펀드 코드
-  string fund_code = 2;
+  string source_fund_code = 2;
 
   // 소스 ETF 종목 심볼
   string source_symbol = 3;

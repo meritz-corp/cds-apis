@@ -29,7 +29,7 @@ class Hedge extends $pb.GeneratedMessage {
   factory Hedge({
     $core.String? name,
     $core.int? id,
-    $core.String? fundCode,
+    $core.String? sourceFundCode,
     $core.String? sourceSymbol,
     HedgeMethod? hedgeMethod,
     $core.bool? isActive,
@@ -39,11 +39,12 @@ class Hedge extends $pb.GeneratedMessage {
     $core.bool? autoAmend,
     $3.AmendMethodType? amendMethod,
     $core.Iterable<$core.MapEntry<$core.String, $fixnum.Int64>>? filledQuantityPerHedge,
+    $core.String? hedgeFundCode,
   }) {
     final result = create();
     if (name != null) result.name = name;
     if (id != null) result.id = id;
-    if (fundCode != null) result.fundCode = fundCode;
+    if (sourceFundCode != null) result.sourceFundCode = sourceFundCode;
     if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
     if (hedgeMethod != null) result.hedgeMethod = hedgeMethod;
     if (isActive != null) result.isActive = isActive;
@@ -53,6 +54,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (autoAmend != null) result.autoAmend = autoAmend;
     if (amendMethod != null) result.amendMethod = amendMethod;
     if (filledQuantityPerHedge != null) result.filledQuantityPerHedge.addEntries(filledQuantityPerHedge);
+    if (hedgeFundCode != null) result.hedgeFundCode = hedgeFundCode;
     return result;
   }
 
@@ -64,7 +66,7 @@ class Hedge extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Hedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'sourceFundCode')
     ..aOS(4, _omitFieldNames ? '' : 'sourceSymbol')
     ..aOM<HedgeMethod>(5, _omitFieldNames ? '' : 'hedgeMethod', subBuilder: HedgeMethod.create)
     ..aOB(6, _omitFieldNames ? '' : 'isActive')
@@ -74,6 +76,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOB(10, _omitFieldNames ? '' : 'autoAmend')
     ..e<$3.AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: $3.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $3.AmendMethodType.valueOf, enumValues: $3.AmendMethodType.values)
     ..m<$core.String, $fixnum.Int64>(12, _omitFieldNames ? '' : 'filledQuantityPerHedge', entryClassName: 'Hedge.FilledQuantityPerHedgeEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.O6, packageName: const $pb.PackageName('kdo.v1.hedge'))
+    ..aOS(13, _omitFieldNames ? '' : 'hedgeFundCode')
     ..hasRequiredFields = false
   ;
 
@@ -114,15 +117,15 @@ class Hedge extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearId() => $_clearField(2);
 
-  /// 펀드 코드
+  /// 소스(원주문) 펀드 코드
   @$pb.TagNumber(3)
-  $core.String get fundCode => $_getSZ(2);
+  $core.String get sourceFundCode => $_getSZ(2);
   @$pb.TagNumber(3)
-  set fundCode($core.String value) => $_setString(2, value);
+  set sourceFundCode($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasFundCode() => $_has(2);
+  $core.bool hasSourceFundCode() => $_has(2);
   @$pb.TagNumber(3)
-  void clearFundCode() => $_clearField(3);
+  void clearSourceFundCode() => $_clearField(3);
 
   /// 소스 종목 심볼 (체결 감시 대상)
   @$pb.TagNumber(4)
@@ -215,6 +218,16 @@ class Hedge extends $pb.GeneratedMessage {
   /// key: 헷지 대상 심볼, value: 소스 종목 체결수량
   @$pb.TagNumber(12)
   $pb.PbMap<$core.String, $fixnum.Int64> get filledQuantityPerHedge => $_getMap(11);
+
+  /// 헷지 주문이 실행되는 펀드 코드
+  @$pb.TagNumber(13)
+  $core.String get hedgeFundCode => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set hedgeFundCode($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasHedgeFundCode() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearHedgeFundCode() => $_clearField(13);
 }
 
 enum HedgeMethod_Method {
@@ -1622,7 +1635,7 @@ class DeleteHedgeGroupRequest extends $pb.GeneratedMessage {
 class HedgeAccumulatorState extends $pb.GeneratedMessage {
   factory HedgeAccumulatorState({
     $core.int? portfolioId,
-    $core.String? fundCode,
+    $core.String? sourceFundCode,
     $core.String? sourceSymbol,
     $core.String? hedgeSymbol,
     $core.double? bidAccumulator,
@@ -1634,7 +1647,7 @@ class HedgeAccumulatorState extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (portfolioId != null) result.portfolioId = portfolioId;
-    if (fundCode != null) result.fundCode = fundCode;
+    if (sourceFundCode != null) result.sourceFundCode = sourceFundCode;
     if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
     if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
     if (bidAccumulator != null) result.bidAccumulator = bidAccumulator;
@@ -1653,7 +1666,7 @@ class HedgeAccumulatorState extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HedgeAccumulatorState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
-    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'sourceFundCode')
     ..aOS(3, _omitFieldNames ? '' : 'sourceSymbol')
     ..aOS(4, _omitFieldNames ? '' : 'hedgeSymbol')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'bidAccumulator', $pb.PbFieldType.OD)
@@ -1694,13 +1707,13 @@ class HedgeAccumulatorState extends $pb.GeneratedMessage {
 
   /// 소스 ETF 펀드 코드
   @$pb.TagNumber(2)
-  $core.String get fundCode => $_getSZ(1);
+  $core.String get sourceFundCode => $_getSZ(1);
   @$pb.TagNumber(2)
-  set fundCode($core.String value) => $_setString(1, value);
+  set sourceFundCode($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasFundCode() => $_has(1);
+  $core.bool hasSourceFundCode() => $_has(1);
   @$pb.TagNumber(2)
-  void clearFundCode() => $_clearField(2);
+  void clearSourceFundCode() => $_clearField(2);
 
   /// 소스 ETF 종목 심볼
   @$pb.TagNumber(3)
