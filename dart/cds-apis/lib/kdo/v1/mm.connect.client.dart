@@ -8,17 +8,35 @@ import "mm.pb.dart" as kdov1mm;
 import "mm.connect.spec.dart" as specs;
 
 /// Market Making 서비스 (기존 LP 서비스와 완전히 독립)
-extension type MmServiceClient (connect.Transport _transport) {
+extension type MarketMakingServiceClient (connect.Transport _transport) {
   /// MM 목록 조회
-  Future<kdov1mm.ListMmResponse> listMm(
-    kdov1mm.ListMmRequest input, {
+  Future<kdov1mm.ListMarketMakingResponse> listMarketMaking(
+    kdov1mm.ListMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.listMm,
+      specs.MarketMakingService.listMarketMaking,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// MM 단일 심볼 조회
+  Future<kdov1mm.MarketMakingEntry> getMarketMaking(
+    kdov1mm.GetMarketMakingRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.getMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -28,15 +46,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 설정 생성 (DB 저장)
-  Future<kdov1mm.MmEntry> createMm(
-    kdov1mm.CreateMmRequest input, {
+  Future<kdov1mm.MarketMakingEntry> createMarketMaking(
+    kdov1mm.CreateMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.createMm,
+      specs.MarketMakingService.createMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -46,15 +64,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 설정 업데이트 (DB 저장)
-  Future<kdov1mm.MmEntry> updateMm(
-    kdov1mm.UpdateMmRequest input, {
+  Future<kdov1mm.MarketMakingEntry> updateMarketMaking(
+    kdov1mm.UpdateMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.updateMm,
+      specs.MarketMakingService.updateMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -64,15 +82,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 상태 조회
-  Future<kdov1mm.MmStatus> getMmStatus(
-    kdov1mm.GetMmStatusRequest input, {
+  Future<kdov1mm.MarketMakingStatus> getMarketMakingStatus(
+    kdov1mm.GetMarketMakingStatusRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.getMmStatus,
+      specs.MarketMakingService.getMarketMakingStatus,
       input,
       signal: signal,
       headers: headers,
@@ -82,15 +100,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 시작 (심볼 등록)
-  Future<kdov1mm.StartMmResponse> startMm(
-    kdov1mm.StartMmRequest input, {
+  Future<kdov1mm.StartMarketMakingResponse> startMarketMaking(
+    kdov1mm.StartMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.startMm,
+      specs.MarketMakingService.startMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -100,15 +118,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 중지 (심볼 해제)
-  Future<kdov1mm.StopMmResponse> stopMm(
-    kdov1mm.StopMmRequest input, {
+  Future<kdov1mm.StopMarketMakingResponse> stopMarketMaking(
+    kdov1mm.StopMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.stopMm,
+      specs.MarketMakingService.stopMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -118,15 +136,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 일시정지 (호가 산출 중단)
-  Future<kdov1mm.PauseMmResponse> pauseMm(
-    kdov1mm.PauseMmRequest input, {
+  Future<kdov1mm.PauseMarketMakingResponse> pauseMarketMaking(
+    kdov1mm.PauseMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.pauseMm,
+      specs.MarketMakingService.pauseMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -136,15 +154,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 재개
-  Future<kdov1mm.ResumeMmResponse> resumeMm(
-    kdov1mm.ResumeMmRequest input, {
+  Future<kdov1mm.ResumeMarketMakingResponse> resumeMarketMaking(
+    kdov1mm.ResumeMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.resumeMm,
+      specs.MarketMakingService.resumeMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -154,15 +172,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 엔진 리셋 (일초 상태 초기화)
-  Future<kdov1mm.ResetMmResponse> resetMm(
-    kdov1mm.ResetMmRequest input, {
+  Future<kdov1mm.ResetMarketMakingResponse> resetMarketMaking(
+    kdov1mm.ResetMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.resetMm,
+      specs.MarketMakingService.resetMarketMaking,
       input,
       signal: signal,
       headers: headers,
@@ -172,15 +190,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 설정 업데이트
-  Future<kdov1mm.MmConfiguration> updateMmConfig(
-    kdov1mm.UpdateMmConfigRequest input, {
+  Future<kdov1mm.MarketMakingConfiguration> updateMarketMakingConfig(
+    kdov1mm.UpdateMarketMakingConfigRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.updateMmConfig,
+      specs.MarketMakingService.updateMarketMakingConfig,
       input,
       signal: signal,
       headers: headers,
@@ -190,15 +208,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 실시간 상태 스트리밍 (서버→클라이언트)
-  Stream<kdov1mm.MmStatus> streamMmStatus(
-    kdov1mm.StreamMmStatusRequest input, {
+  Stream<kdov1mm.MarketMakingStatus> streamMarketMakingStatus(
+    kdov1mm.StreamMarketMakingStatusRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.MmService.streamMmStatus,
+      specs.MarketMakingService.streamMarketMakingStatus,
       input,
       signal: signal,
       headers: headers,
@@ -208,15 +226,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 전용 주문장 조회
-  Future<kdov1mm.MmOrderbookData> getMmOrderbook(
-    kdov1mm.GetMmOrderbookRequest input, {
+  Future<kdov1mm.MarketMakingOrderbookData> getMarketMakingOrderbook(
+    kdov1mm.GetMarketMakingOrderbookRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.MmService.getMmOrderbook,
+      specs.MarketMakingService.getMarketMakingOrderbook,
       input,
       signal: signal,
       headers: headers,
@@ -226,15 +244,15 @@ extension type MmServiceClient (connect.Transport _transport) {
   }
 
   /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
-  Stream<kdov1mm.MmOrderbookData> streamMmOrderbook(
-    kdov1mm.GetMmOrderbookRequest input, {
+  Stream<kdov1mm.MarketMakingOrderbookData> streamMarketMakingOrderbook(
+    kdov1mm.GetMarketMakingOrderbookRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.MmService.streamMmOrderbook,
+      specs.MarketMakingService.streamMarketMakingOrderbook,
       input,
       signal: signal,
       headers: headers,

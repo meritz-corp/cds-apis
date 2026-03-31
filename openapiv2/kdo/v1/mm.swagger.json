@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "MmService"
+      "name": "MarketMakingService"
     }
   ],
   "consumes": [
@@ -19,12 +19,12 @@
     "/v1/mm": {
       "get": {
         "summary": "MM 목록 조회",
-        "operationId": "MmService_ListMm",
+        "operationId": "MarketMakingService_ListMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmListMmResponse"
+              "$ref": "#/definitions/mmListMarketMakingResponse"
             }
           },
           "default": {
@@ -52,17 +52,17 @@
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       },
       "post": {
         "summary": "MM 설정 생성 (DB 저장)",
-        "operationId": "MmService_CreateMm",
+        "operationId": "MarketMakingService_CreateMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMmEntry"
+              "$ref": "#/definitions/mmMarketMakingEntry"
             }
           },
           "default": {
@@ -78,24 +78,55 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/mmCreateMmRequest"
+              "$ref": "#/definitions/mmCreateMarketMakingRequest"
             }
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}": {
-      "patch": {
-        "summary": "MM 설정 업데이트 (DB 저장)",
-        "operationId": "MmService_UpdateMm",
+      "get": {
+        "summary": "MM 단일 심볼 조회",
+        "operationId": "MarketMakingService_GetMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMmEntry"
+              "$ref": "#/definitions/mmMarketMakingEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      },
+      "patch": {
+        "summary": "MM 설정 업데이트 (DB 저장)",
+        "operationId": "MarketMakingService_UpdateMarketMaking",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMarketMakingEntry"
             }
           },
           "default": {
@@ -122,11 +153,11 @@
               "type": "object",
               "properties": {
                 "config": {
-                  "$ref": "#/definitions/mmMmConfiguration",
+                  "$ref": "#/definitions/mmMarketMakingConfiguration",
                   "title": "업데이트할 MM 설정"
                 }
               },
-              "title": "UpdateMm",
+              "title": "UpdateMarketMaking",
               "required": [
                 "config"
               ]
@@ -134,19 +165,19 @@
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}/config": {
       "patch": {
         "summary": "MM 설정 업데이트",
-        "operationId": "MmService_UpdateMmConfig",
+        "operationId": "MarketMakingService_UpdateMarketMakingConfig",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMmConfiguration"
+              "$ref": "#/definitions/mmMarketMakingConfiguration"
             }
           },
           "default": {
@@ -173,11 +204,11 @@
               "type": "object",
               "properties": {
                 "config": {
-                  "$ref": "#/definitions/mmMmConfiguration",
+                  "$ref": "#/definitions/mmMarketMakingConfiguration",
                   "title": "업데이트할 설정 (전체 교체)"
                 }
               },
-              "title": "UpdateMmConfig",
+              "title": "UpdateMarketMakingConfig",
               "required": [
                 "config"
               ]
@@ -185,19 +216,19 @@
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}/orderbook": {
       "get": {
         "summary": "MM 전용 주문장 조회",
-        "operationId": "MmService_GetMmOrderbook",
+        "operationId": "MarketMakingService_GetMarketMakingOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMmOrderbookData"
+              "$ref": "#/definitions/mmMarketMakingOrderbookData"
             }
           },
           "default": {
@@ -218,14 +249,14 @@
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}/orderbook:stream": {
       "get": {
         "summary": "MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)",
-        "operationId": "MmService_StreamMmOrderbook",
+        "operationId": "MarketMakingService_StreamMarketMakingOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -233,13 +264,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/mmMmOrderbookData"
+                  "$ref": "#/definitions/mmMarketMakingOrderbookData"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of mmMmOrderbookData"
+              "title": "Stream result of mmMarketMakingOrderbookData"
             }
           },
           "default": {
@@ -260,19 +291,19 @@
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}/status": {
       "get": {
         "summary": "MM 상태 조회",
-        "operationId": "MmService_GetMmStatus",
+        "operationId": "MarketMakingService_GetMarketMakingStatus",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMmStatus"
+              "$ref": "#/definitions/mmMarketMakingStatus"
             }
           },
           "default": {
@@ -293,19 +324,19 @@
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}:pause": {
       "post": {
         "summary": "MM 일시정지 (호가 산출 중단)",
-        "operationId": "MmService_PauseMm",
+        "operationId": "MarketMakingService_PauseMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmPauseMmResponse"
+              "$ref": "#/definitions/mmPauseMarketMakingResponse"
             }
           },
           "default": {
@@ -330,24 +361,24 @@
             "required": true,
             "schema": {
               "type": "object",
-              "title": "PauseMm"
+              "title": "PauseMarketMaking"
             }
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}:reset": {
       "post": {
         "summary": "MM 엔진 리셋 (일초 상태 초기화)",
-        "operationId": "MmService_ResetMm",
+        "operationId": "MarketMakingService_ResetMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmResetMmResponse"
+              "$ref": "#/definitions/mmResetMarketMakingResponse"
             }
           },
           "default": {
@@ -372,24 +403,24 @@
             "required": true,
             "schema": {
               "type": "object",
-              "title": "ResetMm"
+              "title": "ResetMarketMaking"
             }
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}:resume": {
       "post": {
         "summary": "MM 재개",
-        "operationId": "MmService_ResumeMm",
+        "operationId": "MarketMakingService_ResumeMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmResumeMmResponse"
+              "$ref": "#/definitions/mmResumeMarketMakingResponse"
             }
           },
           "default": {
@@ -414,24 +445,24 @@
             "required": true,
             "schema": {
               "type": "object",
-              "title": "ResumeMm"
+              "title": "ResumeMarketMaking"
             }
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}:start": {
       "post": {
         "summary": "MM 시작 (심볼 등록)",
-        "operationId": "MmService_StartMm",
+        "operationId": "MarketMakingService_StartMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmStartMmResponse"
+              "$ref": "#/definitions/mmStartMarketMakingResponse"
             }
           },
           "default": {
@@ -458,28 +489,28 @@
               "type": "object",
               "properties": {
                 "config": {
-                  "$ref": "#/definitions/mmMmConfiguration",
+                  "$ref": "#/definitions/mmMarketMakingConfiguration",
                   "title": "MM 설정 오버라이드 (optional, 없으면 기본 설정 사용)"
                 }
               },
-              "title": "StartMm"
+              "title": "StartMarketMaking"
             }
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}:stop": {
       "post": {
         "summary": "MM 중지 (심볼 해제)",
-        "operationId": "MmService_StopMm",
+        "operationId": "MarketMakingService_StopMarketMaking",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmStopMmResponse"
+              "$ref": "#/definitions/mmStopMarketMakingResponse"
             }
           },
           "default": {
@@ -504,19 +535,19 @@
             "required": true,
             "schema": {
               "type": "object",
-              "title": "StopMm"
+              "title": "StopMarketMaking"
             }
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     },
     "/v1/mm/{symbol}:streamStatus": {
       "get": {
         "summary": "MM 실시간 상태 스트리밍 (서버→클라이언트)",
-        "operationId": "MmService_StreamMmStatus",
+        "operationId": "MarketMakingService_StreamMarketMakingStatus",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -524,13 +555,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/mmMmStatus"
+                  "$ref": "#/definitions/mmMarketMakingStatus"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of mmMmStatus"
+              "title": "Stream result of mmMarketMakingStatus"
             }
           },
           "default": {
@@ -551,13 +582,13 @@
           }
         ],
         "tags": [
-          "MmService"
+          "MarketMakingService"
         ]
       }
     }
   },
   "definitions": {
-    "mmCreateMmRequest": {
+    "mmCreateMarketMakingRequest": {
       "type": "object",
       "properties": {
         "symbol": {
@@ -565,23 +596,23 @@
           "title": "ISIN 심볼"
         },
         "config": {
-          "$ref": "#/definitions/mmMmConfiguration",
+          "$ref": "#/definitions/mmMarketMakingConfiguration",
           "title": "MM 설정"
         }
       },
-      "title": "CreateMm",
+      "title": "CreateMarketMaking",
       "required": [
         "symbol",
         "config"
       ]
     },
-    "mmListMmResponse": {
+    "mmListMarketMakingResponse": {
       "type": "object",
       "properties": {
         "entries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/mmMmEntry"
+            "$ref": "#/definitions/mmMarketMakingEntry"
           },
           "title": "등록된 MM 목록"
         },
@@ -591,7 +622,7 @@
         }
       }
     },
-    "mmMmConfiguration": {
+    "mmMarketMakingConfiguration": {
       "type": "object",
       "properties": {
         "pricing": {
@@ -599,15 +630,15 @@
           "title": "Pricing 전략: \"plain_follow\", \"mean_bidask\", \"nav\", \"krx_nav\""
         },
         "skew": {
-          "$ref": "#/definitions/mmMmSkewConfig",
+          "$ref": "#/definitions/mmMarketMakingSkewConfig",
           "title": "Skew 설정"
         },
         "tradeAnalyzer": {
-          "$ref": "#/definitions/mmMmTradeAnalyzerConfig",
+          "$ref": "#/definitions/mmMarketMakingTradeAnalyzerConfig",
           "title": "Trade Analyzer 설정"
         },
         "screening": {
-          "$ref": "#/definitions/mmMmScreeningConfig",
+          "$ref": "#/definitions/mmMarketMakingScreeningConfig",
           "title": "Screening 설정"
         },
         "tickSize": {
@@ -620,15 +651,15 @@
           "title": "MM 활성화 여부"
         },
         "momentum": {
-          "$ref": "#/definitions/mmMmMomentumConfig",
+          "$ref": "#/definitions/mmMarketMakingMomentumConfig",
           "title": "Momentum 설정 (최근 가격 흐름 → bid/ask 조정)"
         },
         "exposureGuard": {
-          "$ref": "#/definitions/mmMmExposureGuardConfig",
+          "$ref": "#/definitions/mmMarketMakingExposureGuardConfig",
           "title": "순노출 hard limit 제어 설정"
         },
         "inventoryBalancer": {
-          "$ref": "#/definitions/mmMmInventoryBalancerConfig",
+          "$ref": "#/definitions/mmMarketMakingInventoryBalancerConfig",
           "title": "중기 buy/sell imbalance 복원 설정"
         },
         "bidAdjustment": {
@@ -644,7 +675,7 @@
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
     },
-    "mmMmEntry": {
+    "mmMarketMakingEntry": {
       "type": "object",
       "properties": {
         "symbol": {
@@ -652,11 +683,11 @@
           "title": "ISIN 심볼"
         },
         "state": {
-          "$ref": "#/definitions/mmMmState",
+          "$ref": "#/definitions/mmMarketMakingState",
           "title": "현재 상태"
         },
         "config": {
-          "$ref": "#/definitions/mmMmConfiguration",
+          "$ref": "#/definitions/mmMarketMakingConfiguration",
           "title": "MM 설정"
         },
         "fundCode": {
@@ -666,7 +697,7 @@
       },
       "title": "MM 심볼 정보"
     },
-    "mmMmExposureGuardConfig": {
+    "mmMarketMakingExposureGuardConfig": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -686,7 +717,7 @@
       },
       "title": "순노출 hard limit 제어 설정"
     },
-    "mmMmInventoryBalancerConfig": {
+    "mmMarketMakingInventoryBalancerConfig": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -716,7 +747,7 @@
       },
       "title": "중기 buy/sell imbalance 복원 설정"
     },
-    "mmMmMomentumConfig": {
+    "mmMarketMakingMomentumConfig": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -760,7 +791,7 @@
       },
       "title": "Momentum 설정"
     },
-    "mmMmOrderbookData": {
+    "mmMarketMakingOrderbookData": {
       "type": "object",
       "properties": {
         "bidPrices": {
@@ -796,7 +827,7 @@
       },
       "title": "MM 전용 주문장 데이터"
     },
-    "mmMmScreeningConfig": {
+    "mmMarketMakingScreeningConfig": {
       "type": "object",
       "properties": {
         "maxSpreadWidthTicks": {
@@ -817,7 +848,7 @@
       },
       "title": "Pre-trade Screening 설정"
     },
-    "mmMmSkewConfig": {
+    "mmMarketMakingSkewConfig": {
       "type": "object",
       "properties": {
         "mode": {
@@ -837,19 +868,19 @@
       },
       "title": "Skew 설정"
     },
-    "mmMmState": {
+    "mmMarketMakingState": {
       "type": "string",
       "enum": [
-        "MM_STATE_UNSPECIFIED",
-        "MM_STATE_IDLE",
-        "MM_STATE_RUNNING",
-        "MM_STATE_PAUSED"
+        "MARKET_MAKING_STATE_UNSPECIFIED",
+        "MARKET_MAKING_STATE_IDLE",
+        "MARKET_MAKING_STATE_RUNNING",
+        "MARKET_MAKING_STATE_PAUSED"
       ],
-      "default": "MM_STATE_UNSPECIFIED",
-      "description": "- MM_STATE_IDLE: 미등록\n - MM_STATE_RUNNING: 활성\n - MM_STATE_PAUSED: 일시정지",
+      "default": "MARKET_MAKING_STATE_UNSPECIFIED",
+      "description": "- MARKET_MAKING_STATE_IDLE: 미등록\n - MARKET_MAKING_STATE_RUNNING: 활성\n - MARKET_MAKING_STATE_PAUSED: 일시정지",
       "title": "MM 상태"
     },
-    "mmMmStatus": {
+    "mmMarketMakingStatus": {
       "type": "object",
       "properties": {
         "symbol": {
@@ -857,11 +888,11 @@
           "title": "ISIN 심볼"
         },
         "state": {
-          "$ref": "#/definitions/mmMmState",
+          "$ref": "#/definitions/mmMarketMakingState",
           "title": "현재 상태"
         },
         "config": {
-          "$ref": "#/definitions/mmMmConfiguration",
+          "$ref": "#/definitions/mmMarketMakingConfiguration",
           "title": "MM 설정"
         },
         "registered": {
@@ -918,7 +949,7 @@
       },
       "title": "MM 상태 상세"
     },
-    "mmMmTradeAnalyzerConfig": {
+    "mmMarketMakingTradeAnalyzerConfig": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -948,7 +979,7 @@
       },
       "title": "Trade Analyzer 설정"
     },
-    "mmPauseMmResponse": {
+    "mmPauseMarketMakingResponse": {
       "type": "object",
       "properties": {
         "message": {
@@ -957,7 +988,7 @@
         }
       }
     },
-    "mmResetMmResponse": {
+    "mmResetMarketMakingResponse": {
       "type": "object",
       "properties": {
         "resetCount": {
@@ -971,7 +1002,7 @@
         }
       }
     },
-    "mmResumeMmResponse": {
+    "mmResumeMarketMakingResponse": {
       "type": "object",
       "properties": {
         "message": {
@@ -980,11 +1011,11 @@
         }
       }
     },
-    "mmStartMmResponse": {
+    "mmStartMarketMakingResponse": {
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/mmMmStatus",
+          "$ref": "#/definitions/mmMarketMakingStatus",
           "title": "시작된 MM 상태"
         },
         "message": {
@@ -993,7 +1024,7 @@
         }
       }
     },
-    "mmStopMmResponse": {
+    "mmStopMarketMakingResponse": {
       "type": "object",
       "properties": {
         "message": {

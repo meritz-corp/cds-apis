@@ -1,14 +1,14 @@
 // @generated
 /// Generated client implementations.
-pub mod mm_service_client {
+pub mod market_making_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct MmServiceClient<T> {
+    pub struct MarketMakingServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl MmServiceClient<tonic::transport::Channel> {
+    impl MarketMakingServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -19,7 +19,7 @@ pub mod mm_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> MmServiceClient<T>
+    impl<T> MarketMakingServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -37,7 +37,7 @@ pub mod mm_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> MmServiceClient<InterceptedService<T, F>>
+        ) -> MarketMakingServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -51,7 +51,7 @@ pub mod mm_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            MmServiceClient::new(InterceptedService::new(inner, interceptor))
+            MarketMakingServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -84,99 +84,11 @@ pub mod mm_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn list_mm(
+        pub async fn list_market_making(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListMmResponse>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/ListMm",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "ListMm"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn create_mm(
-            &mut self,
-            request: impl tonic::IntoRequest<super::CreateMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/CreateMm",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "CreateMm"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn update_mm(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UpdateMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/UpdateMm",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "UpdateMm"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn get_mm_status(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetMmStatusRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmStatus>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/GetMmStatus",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "GetMmStatus"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn start_mm(
-            &mut self,
-            request: impl tonic::IntoRequest<super::StartMmRequest>,
+            request: impl tonic::IntoRequest<super::ListMarketMakingRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::StartMmResponse>,
+            tonic::Response<super::ListMarketMakingResponse>,
             tonic::Status,
         > {
             self.inner
@@ -190,40 +102,20 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/StartMm",
+                "/kdo.v1.mm.MarketMakingService/ListMarketMaking",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "StartMm"));
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "ListMarketMaking"),
+                );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stop_mm(
+        pub async fn get_market_making(
             &mut self,
-            request: impl tonic::IntoRequest<super::StopMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::StopMmResponse>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/StopMm",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "StopMm"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn pause_mm(
-            &mut self,
-            request: impl tonic::IntoRequest<super::PauseMmRequest>,
+            request: impl tonic::IntoRequest<super::GetMarketMakingRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::PauseMmResponse>,
+            tonic::Response<super::MarketMakingEntry>,
             tonic::Status,
         > {
             self.inner
@@ -237,18 +129,20 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/PauseMm",
+                "/kdo.v1.mm.MarketMakingService/GetMarketMaking",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "PauseMm"));
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "GetMarketMaking"),
+                );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn resume_mm(
+        pub async fn create_market_making(
             &mut self,
-            request: impl tonic::IntoRequest<super::ResumeMmRequest>,
+            request: impl tonic::IntoRequest<super::CreateMarketMakingRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ResumeMmResponse>,
+            tonic::Response<super::MarketMakingEntry>,
             tonic::Status,
         > {
             self.inner
@@ -262,18 +156,23 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/ResumeMm",
+                "/kdo.v1.mm.MarketMakingService/CreateMarketMaking",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "ResumeMm"));
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "CreateMarketMaking",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn reset_mm(
+        pub async fn update_market_making(
             &mut self,
-            request: impl tonic::IntoRequest<super::ResetMmRequest>,
+            request: impl tonic::IntoRequest<super::UpdateMarketMakingRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ResetMmResponse>,
+            tonic::Response<super::MarketMakingEntry>,
             tonic::Status,
         > {
             self.inner
@@ -287,18 +186,23 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/ResetMm",
+                "/kdo.v1.mm.MarketMakingService/UpdateMarketMaking",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "ResetMm"));
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "UpdateMarketMaking",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_mm_config(
+        pub async fn get_market_making_status(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateMmConfigRequest>,
+            request: impl tonic::IntoRequest<super::GetMarketMakingStatusRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::MmConfiguration>,
+            tonic::Response<super::MarketMakingStatus>,
             tonic::Status,
         > {
             self.inner
@@ -312,18 +216,23 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/UpdateMmConfig",
+                "/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "UpdateMmConfig"));
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "GetMarketMakingStatus",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_mm_status(
+        pub async fn start_market_making(
             &mut self,
-            request: impl tonic::IntoRequest<super::StreamMmStatusRequest>,
+            request: impl tonic::IntoRequest<super::StartMarketMakingRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::MmStatus>>,
+            tonic::Response<super::StartMarketMakingResponse>,
             tonic::Status,
         > {
             self.inner
@@ -337,18 +246,191 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/StreamMmStatus",
+                "/kdo.v1.mm.MarketMakingService/StartMarketMaking",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "StreamMmStatus"));
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "StartMarketMaking"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stop_market_making(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StopMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopMarketMakingResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/StopMarketMaking",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "StopMarketMaking"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn pause_market_making(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PauseMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::PauseMarketMakingResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/PauseMarketMaking",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "PauseMarketMaking"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn resume_market_making(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ResumeMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ResumeMarketMakingResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "ResumeMarketMaking",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn reset_market_making(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ResetMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ResetMarketMakingResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/ResetMarketMaking",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "ResetMarketMaking"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn update_market_making_config(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateMarketMakingConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MarketMakingConfiguration>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "UpdateMarketMakingConfig",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stream_market_making_status(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamMarketMakingStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::MarketMakingStatus>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/StreamMarketMakingStatus",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "StreamMarketMakingStatus",
+                    ),
+                );
             self.inner.server_streaming(req, path, codec).await
         }
-        pub async fn get_mm_orderbook(
+        pub async fn get_market_making_orderbook(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetMmOrderbookRequest>,
+            request: impl tonic::IntoRequest<super::GetMarketMakingOrderbookRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::MmOrderbookData>,
+            tonic::Response<super::MarketMakingOrderbookData>,
             tonic::Status,
         > {
             self.inner
@@ -362,18 +444,23 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/GetMmOrderbook",
+                "/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "GetMmOrderbook"));
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "GetMarketMakingOrderbook",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn stream_mm_orderbook(
+        pub async fn stream_market_making_orderbook(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetMmOrderbookRequest>,
+            request: impl tonic::IntoRequest<super::GetMarketMakingOrderbookRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::MmOrderbookData>>,
+            tonic::Response<tonic::codec::Streaming<super::MarketMakingOrderbookData>>,
             tonic::Status,
         > {
             self.inner
@@ -387,105 +474,150 @@ pub mod mm_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MmService/StreamMmOrderbook",
+                "/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.mm.MmService", "StreamMmOrderbook"));
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.mm.MarketMakingService",
+                        "StreamMarketMakingOrderbook",
+                    ),
+                );
             self.inner.server_streaming(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod mm_service_server {
+pub mod market_making_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with MmServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with MarketMakingServiceServer.
     #[async_trait]
-    pub trait MmService: Send + Sync + 'static {
-        async fn list_mm(
+    pub trait MarketMakingService: Send + Sync + 'static {
+        async fn list_market_making(
             &self,
-            request: tonic::Request<super::ListMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListMmResponse>, tonic::Status>;
-        async fn create_mm(
-            &self,
-            request: tonic::Request<super::CreateMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status>;
-        async fn update_mm(
-            &self,
-            request: tonic::Request<super::UpdateMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmEntry>, tonic::Status>;
-        async fn get_mm_status(
-            &self,
-            request: tonic::Request<super::GetMmStatusRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmStatus>, tonic::Status>;
-        async fn start_mm(
-            &self,
-            request: tonic::Request<super::StartMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::StartMmResponse>, tonic::Status>;
-        async fn stop_mm(
-            &self,
-            request: tonic::Request<super::StopMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::StopMmResponse>, tonic::Status>;
-        async fn pause_mm(
-            &self,
-            request: tonic::Request<super::PauseMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::PauseMmResponse>, tonic::Status>;
-        async fn resume_mm(
-            &self,
-            request: tonic::Request<super::ResumeMmRequest>,
+            request: tonic::Request<super::ListMarketMakingRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ResumeMmResponse>,
+            tonic::Response<super::ListMarketMakingResponse>,
             tonic::Status,
         >;
-        async fn reset_mm(
+        async fn get_market_making(
             &self,
-            request: tonic::Request<super::ResetMmRequest>,
-        ) -> std::result::Result<tonic::Response<super::ResetMmResponse>, tonic::Status>;
-        async fn update_mm_config(
+            request: tonic::Request<super::GetMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MarketMakingEntry>,
+            tonic::Status,
+        >;
+        async fn create_market_making(
             &self,
-            request: tonic::Request<super::UpdateMmConfigRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmConfiguration>, tonic::Status>;
-        /// Server streaming response type for the StreamMmStatus method.
-        type StreamMmStatusStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::MmStatus, tonic::Status>,
+            request: tonic::Request<super::CreateMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MarketMakingEntry>,
+            tonic::Status,
+        >;
+        async fn update_market_making(
+            &self,
+            request: tonic::Request<super::UpdateMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MarketMakingEntry>,
+            tonic::Status,
+        >;
+        async fn get_market_making_status(
+            &self,
+            request: tonic::Request<super::GetMarketMakingStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MarketMakingStatus>,
+            tonic::Status,
+        >;
+        async fn start_market_making(
+            &self,
+            request: tonic::Request<super::StartMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StartMarketMakingResponse>,
+            tonic::Status,
+        >;
+        async fn stop_market_making(
+            &self,
+            request: tonic::Request<super::StopMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::StopMarketMakingResponse>,
+            tonic::Status,
+        >;
+        async fn pause_market_making(
+            &self,
+            request: tonic::Request<super::PauseMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::PauseMarketMakingResponse>,
+            tonic::Status,
+        >;
+        async fn resume_market_making(
+            &self,
+            request: tonic::Request<super::ResumeMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ResumeMarketMakingResponse>,
+            tonic::Status,
+        >;
+        async fn reset_market_making(
+            &self,
+            request: tonic::Request<super::ResetMarketMakingRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ResetMarketMakingResponse>,
+            tonic::Status,
+        >;
+        async fn update_market_making_config(
+            &self,
+            request: tonic::Request<super::UpdateMarketMakingConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MarketMakingConfiguration>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamMarketMakingStatus method.
+        type StreamMarketMakingStatusStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::MarketMakingStatus, tonic::Status>,
             >
             + Send
             + 'static;
-        async fn stream_mm_status(
+        async fn stream_market_making_status(
             &self,
-            request: tonic::Request<super::StreamMmStatusRequest>,
+            request: tonic::Request<super::StreamMarketMakingStatusRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamMmStatusStream>,
+            tonic::Response<Self::StreamMarketMakingStatusStream>,
             tonic::Status,
         >;
-        async fn get_mm_orderbook(
+        async fn get_market_making_orderbook(
             &self,
-            request: tonic::Request<super::GetMmOrderbookRequest>,
-        ) -> std::result::Result<tonic::Response<super::MmOrderbookData>, tonic::Status>;
-        /// Server streaming response type for the StreamMmOrderbook method.
-        type StreamMmOrderbookStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::MmOrderbookData, tonic::Status>,
+            request: tonic::Request<super::GetMarketMakingOrderbookRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MarketMakingOrderbookData>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamMarketMakingOrderbook method.
+        type StreamMarketMakingOrderbookStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::MarketMakingOrderbookData,
+                    tonic::Status,
+                >,
             >
             + Send
             + 'static;
-        async fn stream_mm_orderbook(
+        async fn stream_market_making_orderbook(
             &self,
-            request: tonic::Request<super::GetMmOrderbookRequest>,
+            request: tonic::Request<super::GetMarketMakingOrderbookRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamMmOrderbookStream>,
+            tonic::Response<Self::StreamMarketMakingOrderbookStream>,
             tonic::Status,
         >;
     }
     #[derive(Debug)]
-    pub struct MmServiceServer<T: MmService> {
+    pub struct MarketMakingServiceServer<T: MarketMakingService> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T: MmService> MmServiceServer<T> {
+    impl<T: MarketMakingService> MarketMakingServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -536,9 +668,9 @@ pub mod mm_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for MmServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for MarketMakingServiceServer<T>
     where
-        T: MmService,
+        T: MarketMakingService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -553,68 +685,29 @@ pub mod mm_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/kdo.v1.mm.MmService/ListMm" => {
+                "/kdo.v1.mm.MarketMakingService/ListMarketMaking" => {
                     #[allow(non_camel_case_types)]
-                    struct ListMmSvc<T: MmService>(pub Arc<T>);
-                    impl<T: MmService> tonic::server::UnaryService<super::ListMmRequest>
-                    for ListMmSvc<T> {
-                        type Response = super::ListMmResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::ListMmRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MmService>::list_mm(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = ListMmSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.mm.MmService/CreateMm" => {
-                    #[allow(non_camel_case_types)]
-                    struct CreateMmSvc<T: MmService>(pub Arc<T>);
+                    struct ListMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
                     impl<
-                        T: MmService,
-                    > tonic::server::UnaryService<super::CreateMmRequest>
-                    for CreateMmSvc<T> {
-                        type Response = super::MmEntry;
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::ListMarketMakingRequest>
+                    for ListMarketMakingSvc<T> {
+                        type Response = super::ListMarketMakingResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateMmRequest>,
+                            request: tonic::Request<super::ListMarketMakingRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::create_mm(&inner, request).await
+                                <T as MarketMakingService>::list_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -625,7 +718,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = CreateMmSvc(inner);
+                        let method = ListMarketMakingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -641,25 +734,29 @@ pub mod mm_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MmService/UpdateMm" => {
+                "/kdo.v1.mm.MarketMakingService/GetMarketMaking" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateMmSvc<T: MmService>(pub Arc<T>);
+                    struct GetMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
                     impl<
-                        T: MmService,
-                    > tonic::server::UnaryService<super::UpdateMmRequest>
-                    for UpdateMmSvc<T> {
-                        type Response = super::MmEntry;
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::GetMarketMakingRequest>
+                    for GetMarketMakingSvc<T> {
+                        type Response = super::MarketMakingEntry;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateMmRequest>,
+                            request: tonic::Request<super::GetMarketMakingRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::update_mm(&inner, request).await
+                                <T as MarketMakingService>::get_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -670,7 +767,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = UpdateMmSvc(inner);
+                        let method = GetMarketMakingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -686,25 +783,29 @@ pub mod mm_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MmService/GetMmStatus" => {
+                "/kdo.v1.mm.MarketMakingService/CreateMarketMaking" => {
                     #[allow(non_camel_case_types)]
-                    struct GetMmStatusSvc<T: MmService>(pub Arc<T>);
+                    struct CreateMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
                     impl<
-                        T: MmService,
-                    > tonic::server::UnaryService<super::GetMmStatusRequest>
-                    for GetMmStatusSvc<T> {
-                        type Response = super::MmStatus;
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::CreateMarketMakingRequest>
+                    for CreateMarketMakingSvc<T> {
+                        type Response = super::MarketMakingEntry;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetMmStatusRequest>,
+                            request: tonic::Request<super::CreateMarketMakingRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::get_mm_status(&inner, request).await
+                                <T as MarketMakingService>::create_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -715,7 +816,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetMmStatusSvc(inner);
+                        let method = CreateMarketMakingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -731,154 +832,29 @@ pub mod mm_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MmService/StartMm" => {
+                "/kdo.v1.mm.MarketMakingService/UpdateMarketMaking" => {
                     #[allow(non_camel_case_types)]
-                    struct StartMmSvc<T: MmService>(pub Arc<T>);
-                    impl<T: MmService> tonic::server::UnaryService<super::StartMmRequest>
-                    for StartMmSvc<T> {
-                        type Response = super::StartMmResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::StartMmRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MmService>::start_mm(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = StartMmSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.mm.MmService/StopMm" => {
-                    #[allow(non_camel_case_types)]
-                    struct StopMmSvc<T: MmService>(pub Arc<T>);
-                    impl<T: MmService> tonic::server::UnaryService<super::StopMmRequest>
-                    for StopMmSvc<T> {
-                        type Response = super::StopMmResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::StopMmRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MmService>::stop_mm(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = StopMmSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.mm.MmService/PauseMm" => {
-                    #[allow(non_camel_case_types)]
-                    struct PauseMmSvc<T: MmService>(pub Arc<T>);
-                    impl<T: MmService> tonic::server::UnaryService<super::PauseMmRequest>
-                    for PauseMmSvc<T> {
-                        type Response = super::PauseMmResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::PauseMmRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MmService>::pause_mm(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = PauseMmSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.mm.MmService/ResumeMm" => {
-                    #[allow(non_camel_case_types)]
-                    struct ResumeMmSvc<T: MmService>(pub Arc<T>);
+                    struct UpdateMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
                     impl<
-                        T: MmService,
-                    > tonic::server::UnaryService<super::ResumeMmRequest>
-                    for ResumeMmSvc<T> {
-                        type Response = super::ResumeMmResponse;
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::UpdateMarketMakingRequest>
+                    for UpdateMarketMakingSvc<T> {
+                        type Response = super::MarketMakingEntry;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ResumeMmRequest>,
+                            request: tonic::Request<super::UpdateMarketMakingRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::resume_mm(&inner, request).await
+                                <T as MarketMakingService>::update_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -889,7 +865,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ResumeMmSvc(inner);
+                        let method = UpdateMarketMakingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -905,68 +881,29 @@ pub mod mm_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MmService/ResetMm" => {
+                "/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus" => {
                     #[allow(non_camel_case_types)]
-                    struct ResetMmSvc<T: MmService>(pub Arc<T>);
-                    impl<T: MmService> tonic::server::UnaryService<super::ResetMmRequest>
-                    for ResetMmSvc<T> {
-                        type Response = super::ResetMmResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::ResetMmRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MmService>::reset_mm(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = ResetMmSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.mm.MmService/UpdateMmConfig" => {
-                    #[allow(non_camel_case_types)]
-                    struct UpdateMmConfigSvc<T: MmService>(pub Arc<T>);
+                    struct GetMarketMakingStatusSvc<T: MarketMakingService>(pub Arc<T>);
                     impl<
-                        T: MmService,
-                    > tonic::server::UnaryService<super::UpdateMmConfigRequest>
-                    for UpdateMmConfigSvc<T> {
-                        type Response = super::MmConfiguration;
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::GetMarketMakingStatusRequest>
+                    for GetMarketMakingStatusSvc<T> {
+                        type Response = super::MarketMakingStatus;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateMmConfigRequest>,
+                            request: tonic::Request<super::GetMarketMakingStatusRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::update_mm_config(&inner, request).await
+                                <T as MarketMakingService>::get_market_making_status(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -977,7 +914,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = UpdateMmConfigSvc(inner);
+                        let method = GetMarketMakingStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -993,26 +930,333 @@ pub mod mm_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MmService/StreamMmStatus" => {
+                "/kdo.v1.mm.MarketMakingService/StartMarketMaking" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamMmStatusSvc<T: MmService>(pub Arc<T>);
+                    struct StartMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
                     impl<
-                        T: MmService,
-                    > tonic::server::ServerStreamingService<super::StreamMmStatusRequest>
-                    for StreamMmStatusSvc<T> {
-                        type Response = super::MmStatus;
-                        type ResponseStream = T::StreamMmStatusStream;
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::StartMarketMakingRequest>
+                    for StartMarketMakingSvc<T> {
+                        type Response = super::StartMarketMakingResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StartMarketMakingRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::start_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StartMarketMakingSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/StopMarketMaking" => {
+                    #[allow(non_camel_case_types)]
+                    struct StopMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::StopMarketMakingRequest>
+                    for StopMarketMakingSvc<T> {
+                        type Response = super::StopMarketMakingResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StopMarketMakingRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::stop_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StopMarketMakingSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/PauseMarketMaking" => {
+                    #[allow(non_camel_case_types)]
+                    struct PauseMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::PauseMarketMakingRequest>
+                    for PauseMarketMakingSvc<T> {
+                        type Response = super::PauseMarketMakingResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::PauseMarketMakingRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::pause_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = PauseMarketMakingSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking" => {
+                    #[allow(non_camel_case_types)]
+                    struct ResumeMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::ResumeMarketMakingRequest>
+                    for ResumeMarketMakingSvc<T> {
+                        type Response = super::ResumeMarketMakingResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ResumeMarketMakingRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::resume_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ResumeMarketMakingSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/ResetMarketMaking" => {
+                    #[allow(non_camel_case_types)]
+                    struct ResetMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::ResetMarketMakingRequest>
+                    for ResetMarketMakingSvc<T> {
+                        type Response = super::ResetMarketMakingResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ResetMarketMakingRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::reset_market_making(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ResetMarketMakingSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateMarketMakingConfigSvc<T: MarketMakingService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::UpdateMarketMakingConfigRequest>
+                    for UpdateMarketMakingConfigSvc<T> {
+                        type Response = super::MarketMakingConfiguration;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::UpdateMarketMakingConfigRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::update_market_making_config(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UpdateMarketMakingConfigSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/StreamMarketMakingStatus" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamMarketMakingStatusSvc<T: MarketMakingService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamMarketMakingStatusRequest,
+                    > for StreamMarketMakingStatusSvc<T> {
+                        type Response = super::MarketMakingStatus;
+                        type ResponseStream = T::StreamMarketMakingStatusStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StreamMmStatusRequest>,
+                            request: tonic::Request<
+                                super::StreamMarketMakingStatusRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::stream_mm_status(&inner, request).await
+                                <T as MarketMakingService>::stream_market_making_status(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1023,7 +1267,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamMmStatusSvc(inner);
+                        let method = StreamMarketMakingStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -1039,25 +1283,33 @@ pub mod mm_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MmService/GetMmOrderbook" => {
+                "/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook" => {
                     #[allow(non_camel_case_types)]
-                    struct GetMmOrderbookSvc<T: MmService>(pub Arc<T>);
+                    struct GetMarketMakingOrderbookSvc<T: MarketMakingService>(
+                        pub Arc<T>,
+                    );
                     impl<
-                        T: MmService,
-                    > tonic::server::UnaryService<super::GetMmOrderbookRequest>
-                    for GetMmOrderbookSvc<T> {
-                        type Response = super::MmOrderbookData;
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::GetMarketMakingOrderbookRequest>
+                    for GetMarketMakingOrderbookSvc<T> {
+                        type Response = super::MarketMakingOrderbookData;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetMmOrderbookRequest>,
+                            request: tonic::Request<
+                                super::GetMarketMakingOrderbookRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::get_mm_orderbook(&inner, request).await
+                                <T as MarketMakingService>::get_market_making_orderbook(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1068,7 +1320,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetMmOrderbookSvc(inner);
+                        let method = GetMarketMakingOrderbookSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -1084,26 +1336,35 @@ pub mod mm_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MmService/StreamMmOrderbook" => {
+                "/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamMmOrderbookSvc<T: MmService>(pub Arc<T>);
+                    struct StreamMarketMakingOrderbookSvc<T: MarketMakingService>(
+                        pub Arc<T>,
+                    );
                     impl<
-                        T: MmService,
-                    > tonic::server::ServerStreamingService<super::GetMmOrderbookRequest>
-                    for StreamMmOrderbookSvc<T> {
-                        type Response = super::MmOrderbookData;
-                        type ResponseStream = T::StreamMmOrderbookStream;
+                        T: MarketMakingService,
+                    > tonic::server::ServerStreamingService<
+                        super::GetMarketMakingOrderbookRequest,
+                    > for StreamMarketMakingOrderbookSvc<T> {
+                        type Response = super::MarketMakingOrderbookData;
+                        type ResponseStream = T::StreamMarketMakingOrderbookStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetMmOrderbookRequest>,
+                            request: tonic::Request<
+                                super::GetMarketMakingOrderbookRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MmService>::stream_mm_orderbook(&inner, request).await
+                                <T as MarketMakingService>::stream_market_making_orderbook(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1114,7 +1375,7 @@ pub mod mm_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamMmOrderbookSvc(inner);
+                        let method = StreamMarketMakingOrderbookSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -1148,7 +1409,7 @@ pub mod mm_service_server {
             }
         }
     }
-    impl<T: MmService> Clone for MmServiceServer<T> {
+    impl<T: MarketMakingService> Clone for MarketMakingServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1160,7 +1421,8 @@ pub mod mm_service_server {
             }
         }
     }
-    impl<T: MmService> tonic::server::NamedService for MmServiceServer<T> {
-        const NAME: &'static str = "kdo.v1.mm.MmService";
+    impl<T: MarketMakingService> tonic::server::NamedService
+    for MarketMakingServiceServer<T> {
+        const NAME: &'static str = "kdo.v1.mm.MarketMakingService";
     }
 }

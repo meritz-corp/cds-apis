@@ -7,16 +7,16 @@
 /// MM 심볼 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MmEntry {
+pub struct MarketMakingEntry {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 현재 상태
-    #[prost(enumeration="MmState", tag="2")]
+    #[prost(enumeration="MarketMakingState", tag="2")]
     pub state: i32,
     /// MM 설정
     #[prost(message, optional, tag="3")]
-    pub config: ::core::option::Option<MmConfiguration>,
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
     /// 펀드 코드
     #[prost(string, tag="4")]
     pub fund_code: ::prost::alloc::string::String,
@@ -24,16 +24,16 @@ pub struct MmEntry {
 /// MM 상태 상세
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MmStatus {
+pub struct MarketMakingStatus {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 현재 상태
-    #[prost(enumeration="MmState", tag="2")]
+    #[prost(enumeration="MarketMakingState", tag="2")]
     pub state: i32,
     /// MM 설정
     #[prost(message, optional, tag="3")]
-    pub config: ::core::option::Option<MmConfiguration>,
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
     /// 등록 여부
     #[prost(bool, tag="4")]
     pub registered: bool,
@@ -71,19 +71,19 @@ pub struct MmStatus {
 /// MM 엔진 설정 (MmConfig 대응)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MmConfiguration {
+pub struct MarketMakingConfiguration {
     /// Pricing 전략: "plain_follow", "mean_bidask", "nav", "krx_nav"
     #[prost(string, tag="1")]
     pub pricing: ::prost::alloc::string::String,
     /// Skew 설정
     #[prost(message, optional, tag="2")]
-    pub skew: ::core::option::Option<MmSkewConfig>,
+    pub skew: ::core::option::Option<MarketMakingSkewConfig>,
     /// Trade Analyzer 설정
     #[prost(message, optional, tag="3")]
-    pub trade_analyzer: ::core::option::Option<MmTradeAnalyzerConfig>,
+    pub trade_analyzer: ::core::option::Option<MarketMakingTradeAnalyzerConfig>,
     /// Screening 설정
     #[prost(message, optional, tag="4")]
-    pub screening: ::core::option::Option<MmScreeningConfig>,
+    pub screening: ::core::option::Option<MarketMakingScreeningConfig>,
     /// ETF tick size (Price internal representation)
     #[prost(int64, tag="5")]
     pub tick_size: i64,
@@ -92,13 +92,13 @@ pub struct MmConfiguration {
     pub enabled: bool,
     /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
     #[prost(message, optional, tag="7")]
-    pub momentum: ::core::option::Option<MmMomentumConfig>,
+    pub momentum: ::core::option::Option<MarketMakingMomentumConfig>,
     /// 순노출 hard limit 제어 설정
     #[prost(message, optional, tag="8")]
-    pub exposure_guard: ::core::option::Option<MmExposureGuardConfig>,
+    pub exposure_guard: ::core::option::Option<MarketMakingExposureGuardConfig>,
     /// 중기 buy/sell imbalance 복원 설정
     #[prost(message, optional, tag="9")]
-    pub inventory_balancer: ::core::option::Option<MmInventoryBalancerConfig>,
+    pub inventory_balancer: ::core::option::Option<MarketMakingInventoryBalancerConfig>,
     /// 기준가격 대비 bid 조정값 (Price internal representation)
     #[prost(int64, tag="10")]
     pub bid_adjustment: i64,
@@ -109,7 +109,7 @@ pub struct MmConfiguration {
 /// Skew 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MmSkewConfig {
+pub struct MarketMakingSkewConfig {
     /// Skew 모드: "fixed" or "slide_on_trade"
     #[prost(string, tag="1")]
     pub mode: ::prost::alloc::string::String,
@@ -123,7 +123,7 @@ pub struct MmSkewConfig {
 /// Trade Analyzer 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MmTradeAnalyzerConfig {
+pub struct MarketMakingTradeAnalyzerConfig {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -143,7 +143,7 @@ pub struct MmTradeAnalyzerConfig {
 /// Pre-trade Screening 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MmScreeningConfig {
+pub struct MarketMakingScreeningConfig {
     /// 최대 스프레드 폭 (틱 단위, 0=비활성)
     #[prost(int32, tag="1")]
     pub max_spread_width_ticks: i32,
@@ -157,7 +157,7 @@ pub struct MmScreeningConfig {
 /// Momentum 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MmMomentumConfig {
+pub struct MarketMakingMomentumConfig {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -186,7 +186,7 @@ pub struct MmMomentumConfig {
 /// 순노출 hard limit 제어 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MmExposureGuardConfig {
+pub struct MarketMakingExposureGuardConfig {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -200,7 +200,7 @@ pub struct MmExposureGuardConfig {
 /// 중기 buy/sell imbalance 복원 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MmInventoryBalancerConfig {
+pub struct MarketMakingInventoryBalancerConfig {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -221,10 +221,10 @@ pub struct MmInventoryBalancerConfig {
 // Request/Response Messages
 // ============================================================================
 
-/// ListMm
+/// ListMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListMmRequest {
+pub struct ListMarketMakingRequest {
     /// 페이지 크기 (optional)
     #[prost(uint32, optional, tag="1")]
     pub page_size: ::core::option::Option<u32>,
@@ -234,99 +234,107 @@ pub struct ListMmRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListMmResponse {
+pub struct ListMarketMakingResponse {
     /// 등록된 MM 목록
     #[prost(message, repeated, tag="1")]
-    pub entries: ::prost::alloc::vec::Vec<MmEntry>,
+    pub entries: ::prost::alloc::vec::Vec<MarketMakingEntry>,
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-/// GetMmStatus
+/// GetMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetMmStatusRequest {
+pub struct GetMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
-/// StartMm
+/// GetMarketMakingStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StartMmRequest {
+pub struct GetMarketMakingStatusRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// StartMarketMaking
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// MM 설정 오버라이드 (optional, 없으면 기본 설정 사용)
     #[prost(message, optional, tag="2")]
-    pub config: ::core::option::Option<MmConfiguration>,
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StartMmResponse {
+pub struct StartMarketMakingResponse {
     /// 시작된 MM 상태
     #[prost(message, optional, tag="1")]
-    pub status: ::core::option::Option<MmStatus>,
+    pub status: ::core::option::Option<MarketMakingStatus>,
     /// 메시지
     #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,
 }
-/// StopMm
+/// StopMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StopMmRequest {
+pub struct StopMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StopMmResponse {
+pub struct StopMarketMakingResponse {
     /// 메시지
     #[prost(string, tag="1")]
     pub message: ::prost::alloc::string::String,
 }
-/// PauseMm
+/// PauseMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PauseMmRequest {
+pub struct PauseMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PauseMmResponse {
+pub struct PauseMarketMakingResponse {
     /// 메시지
     #[prost(string, tag="1")]
     pub message: ::prost::alloc::string::String,
 }
-/// ResumeMm
+/// ResumeMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ResumeMmRequest {
+pub struct ResumeMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ResumeMmResponse {
+pub struct ResumeMarketMakingResponse {
     /// 메시지
     #[prost(string, tag="1")]
     pub message: ::prost::alloc::string::String,
 }
-/// ResetMm
+/// ResetMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ResetMmRequest {
+pub struct ResetMarketMakingRequest {
     /// ISIN 심볼 (빈 문자열이면 전체 리셋)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ResetMmResponse {
+pub struct ResetMarketMakingResponse {
     /// 리셋된 심볼 수
     #[prost(int32, tag="1")]
     pub reset_count: i32,
@@ -334,51 +342,51 @@ pub struct ResetMmResponse {
     #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,
 }
-/// UpdateMmConfig
+/// UpdateMarketMakingConfig
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateMmConfigRequest {
+pub struct UpdateMarketMakingConfigRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 업데이트할 설정 (전체 교체)
     #[prost(message, optional, tag="2")]
-    pub config: ::core::option::Option<MmConfiguration>,
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
 }
-/// StreamMmStatus
+/// StreamMarketMakingStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamMmStatusRequest {
+pub struct StreamMarketMakingStatusRequest {
     /// ISIN 심볼 (빈 문자열이면 전체 스트리밍)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
-/// CreateMm
+/// CreateMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateMmRequest {
+pub struct CreateMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// MM 설정
     #[prost(message, optional, tag="2")]
-    pub config: ::core::option::Option<MmConfiguration>,
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
 }
-/// UpdateMm
+/// UpdateMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateMmRequest {
+pub struct UpdateMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 업데이트할 MM 설정
     #[prost(message, optional, tag="2")]
-    pub config: ::core::option::Option<MmConfiguration>,
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
 }
-/// GetMmOrderbook / StreamMmOrderbook
+/// GetMarketMakingOrderbook / StreamMarketMakingOrderbook
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetMmOrderbookRequest {
+pub struct GetMarketMakingOrderbookRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -386,7 +394,7 @@ pub struct GetMmOrderbookRequest {
 /// MM 전용 주문장 데이터
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MmOrderbookData {
+pub struct MarketMakingOrderbookData {
     /// 매수 호가 목록 (string 표현)
     #[prost(string, repeated, tag="1")]
     pub bid_prices: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -407,7 +415,7 @@ pub struct MmOrderbookData {
 /// MM 상태
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum MmState {
+pub enum MarketMakingState {
     Unspecified = 0,
     /// 미등록
     Idle = 1,
@@ -416,26 +424,26 @@ pub enum MmState {
     /// 일시정지
     Paused = 3,
 }
-impl MmState {
+impl MarketMakingState {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            MmState::Unspecified => "MM_STATE_UNSPECIFIED",
-            MmState::Idle => "MM_STATE_IDLE",
-            MmState::Running => "MM_STATE_RUNNING",
-            MmState::Paused => "MM_STATE_PAUSED",
+            MarketMakingState::Unspecified => "MARKET_MAKING_STATE_UNSPECIFIED",
+            MarketMakingState::Idle => "MARKET_MAKING_STATE_IDLE",
+            MarketMakingState::Running => "MARKET_MAKING_STATE_RUNNING",
+            MarketMakingState::Paused => "MARKET_MAKING_STATE_PAUSED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "MM_STATE_UNSPECIFIED" => Some(Self::Unspecified),
-            "MM_STATE_IDLE" => Some(Self::Idle),
-            "MM_STATE_RUNNING" => Some(Self::Running),
-            "MM_STATE_PAUSED" => Some(Self::Paused),
+            "MARKET_MAKING_STATE_UNSPECIFIED" => Some(Self::Unspecified),
+            "MARKET_MAKING_STATE_IDLE" => Some(Self::Idle),
+            "MARKET_MAKING_STATE_RUNNING" => Some(Self::Running),
+            "MARKET_MAKING_STATE_PAUSED" => Some(Self::Paused),
             _ => None,
         }
     }

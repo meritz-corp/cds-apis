@@ -14,46 +14,48 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use mmStateDescriptor instead')
-const MmState$json = {
-  '1': 'MmState',
+@$core.Deprecated('Use marketMakingStateDescriptor instead')
+const MarketMakingState$json = {
+  '1': 'MarketMakingState',
   '2': [
-    {'1': 'MM_STATE_UNSPECIFIED', '2': 0},
-    {'1': 'MM_STATE_IDLE', '2': 1},
-    {'1': 'MM_STATE_RUNNING', '2': 2},
-    {'1': 'MM_STATE_PAUSED', '2': 3},
+    {'1': 'MARKET_MAKING_STATE_UNSPECIFIED', '2': 0},
+    {'1': 'MARKET_MAKING_STATE_IDLE', '2': 1},
+    {'1': 'MARKET_MAKING_STATE_RUNNING', '2': 2},
+    {'1': 'MARKET_MAKING_STATE_PAUSED', '2': 3},
   ],
 };
 
-/// Descriptor for `MmState`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List mmStateDescriptor = $convert.base64Decode(
-    'CgdNbVN0YXRlEhgKFE1NX1NUQVRFX1VOU1BFQ0lGSUVEEAASEQoNTU1fU1RBVEVfSURMRRABEh'
-    'QKEE1NX1NUQVRFX1JVTk5JTkcQAhITCg9NTV9TVEFURV9QQVVTRUQQAw==');
+/// Descriptor for `MarketMakingState`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List marketMakingStateDescriptor = $convert.base64Decode(
+    'ChFNYXJrZXRNYWtpbmdTdGF0ZRIjCh9NQVJLRVRfTUFLSU5HX1NUQVRFX1VOU1BFQ0lGSUVEEA'
+    'ASHAoYTUFSS0VUX01BS0lOR19TVEFURV9JRExFEAESHwobTUFSS0VUX01BS0lOR19TVEFURV9S'
+    'VU5OSU5HEAISHgoaTUFSS0VUX01BS0lOR19TVEFURV9QQVVTRUQQAw==');
 
-@$core.Deprecated('Use mmEntryDescriptor instead')
-const MmEntry$json = {
-  '1': 'MmEntry',
+@$core.Deprecated('Use marketMakingEntryDescriptor instead')
+const MarketMakingEntry$json = {
+  '1': 'MarketMakingEntry',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.mm.MmState', '10': 'state'},
-    {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '10': 'config'},
+    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingState', '10': 'state'},
+    {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '10': 'fundCode'},
   ],
 };
 
-/// Descriptor for `MmEntry`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmEntryDescriptor = $convert.base64Decode(
-    'CgdNbUVudHJ5EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEigKBXN0YXRlGAIgASgOMhIua2RvLn'
-    'YxLm1tLk1tU3RhdGVSBXN0YXRlEjIKBmNvbmZpZxgDIAEoCzIaLmtkby52MS5tbS5NbUNvbmZp'
-    'Z3VyYXRpb25SBmNvbmZpZxIbCglmdW5kX2NvZGUYBCABKAlSCGZ1bmRDb2Rl');
+/// Descriptor for `MarketMakingEntry`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingEntryDescriptor = $convert.base64Decode(
+    'ChFNYXJrZXRNYWtpbmdFbnRyeRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIyCgVzdGF0ZRgCIA'
+    'EoDjIcLmtkby52MS5tbS5NYXJrZXRNYWtpbmdTdGF0ZVIFc3RhdGUSPAoGY29uZmlnGAMgASgL'
+    'MiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ0NvbmZpZ3VyYXRpb25SBmNvbmZpZxIbCglmdW5kX2'
+    'NvZGUYBCABKAlSCGZ1bmRDb2Rl');
 
-@$core.Deprecated('Use mmStatusDescriptor instead')
-const MmStatus$json = {
-  '1': 'MmStatus',
+@$core.Deprecated('Use marketMakingStatusDescriptor instead')
+const MarketMakingStatus$json = {
+  '1': 'MarketMakingStatus',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.mm.MmState', '10': 'state'},
-    {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '10': 'config'},
+    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingState', '10': 'state'},
+    {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'registered', '3': 4, '4': 1, '5': 8, '10': 'registered'},
     {'1': 'active', '3': 5, '4': 1, '5': 8, '10': 'active'},
     {'1': 'fund_code', '3': 6, '4': 1, '5': 9, '10': 'fundCode'},
@@ -78,61 +80,62 @@ const MmStatus$json = {
   ],
 };
 
-/// Descriptor for `MmStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmStatusDescriptor = $convert.base64Decode(
-    'CghNbVN0YXR1cxIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIoCgVzdGF0ZRgCIAEoDjISLmtkby'
-    '52MS5tbS5NbVN0YXRlUgVzdGF0ZRIyCgZjb25maWcYAyABKAsyGi5rZG8udjEubW0uTW1Db25m'
-    'aWd1cmF0aW9uUgZjb25maWcSHgoKcmVnaXN0ZXJlZBgEIAEoCFIKcmVnaXN0ZXJlZBIWCgZhY3'
-    'RpdmUYBSABKAhSBmFjdGl2ZRIbCglmdW5kX2NvZGUYBiABKAlSCGZ1bmRDb2RlEi4KEG1vbWVu'
-    'dHVtX2VuYWJsZWQYByABKAhIAFIPbW9tZW50dW1FbmFibGVkiAEBEjEKEm1vbWVudHVtX3dpbm'
-    'Rvd19tcxgIIAEoBEgBUhBtb21lbnR1bVdpbmRvd01ziAEBEjkKFm1vbWVudHVtX3RyaWdnZXJf'
-    'dGlja3MYCSABKAVIAlIUbW9tZW50dW1UcmlnZ2VyVGlja3OIAQESQwobbW9tZW50dW1fZm9sbG'
-    '93X3NlbnNpdGl2aXR5GAogASgBSANSGW1vbWVudHVtRm9sbG93U2Vuc2l0aXZpdHmIAQESQwob'
-    'bW9tZW50dW1fZXNjYXBlX3NlbnNpdGl2aXR5GAsgASgBSARSGW1vbWVudHVtRXNjYXBlU2Vuc2'
-    'l0aXZpdHmIAQESMgoSbW9tZW50dW1fZGlyZWN0aW9uGAwgASgFSAVSEW1vbWVudHVtRGlyZWN0'
-    'aW9uiAEBEjsKF21vbWVudHVtX2JpZF9hZGp1c3RtZW50GA0gASgDSAZSFW1vbWVudHVtQmlkQW'
-    'RqdXN0bWVudIgBARI7Chdtb21lbnR1bV9hc2tfYWRqdXN0bWVudBgOIAEoA0gHUhVtb21lbnR1'
-    'bUFza0FkanVzdG1lbnSIAQFCEwoRX21vbWVudHVtX2VuYWJsZWRCFQoTX21vbWVudHVtX3dpbm'
-    'Rvd19tc0IZChdfbW9tZW50dW1fdHJpZ2dlcl90aWNrc0IeChxfbW9tZW50dW1fZm9sbG93X3Nl'
-    'bnNpdGl2aXR5Qh4KHF9tb21lbnR1bV9lc2NhcGVfc2Vuc2l0aXZpdHlCFQoTX21vbWVudHVtX2'
-    'RpcmVjdGlvbkIaChhfbW9tZW50dW1fYmlkX2FkanVzdG1lbnRCGgoYX21vbWVudHVtX2Fza19h'
-    'ZGp1c3RtZW50');
+/// Descriptor for `MarketMakingStatus`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingStatusDescriptor = $convert.base64Decode(
+    'ChJNYXJrZXRNYWtpbmdTdGF0dXMSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSMgoFc3RhdGUYAi'
+    'ABKA4yHC5rZG8udjEubW0uTWFya2V0TWFraW5nU3RhdGVSBXN0YXRlEjwKBmNvbmZpZxgDIAEo'
+    'CzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSHgoKcmVnaX'
+    'N0ZXJlZBgEIAEoCFIKcmVnaXN0ZXJlZBIWCgZhY3RpdmUYBSABKAhSBmFjdGl2ZRIbCglmdW5k'
+    'X2NvZGUYBiABKAlSCGZ1bmRDb2RlEi4KEG1vbWVudHVtX2VuYWJsZWQYByABKAhIAFIPbW9tZW'
+    '50dW1FbmFibGVkiAEBEjEKEm1vbWVudHVtX3dpbmRvd19tcxgIIAEoBEgBUhBtb21lbnR1bVdp'
+    'bmRvd01ziAEBEjkKFm1vbWVudHVtX3RyaWdnZXJfdGlja3MYCSABKAVIAlIUbW9tZW50dW1Ucm'
+    'lnZ2VyVGlja3OIAQESQwobbW9tZW50dW1fZm9sbG93X3NlbnNpdGl2aXR5GAogASgBSANSGW1v'
+    'bWVudHVtRm9sbG93U2Vuc2l0aXZpdHmIAQESQwobbW9tZW50dW1fZXNjYXBlX3NlbnNpdGl2aX'
+    'R5GAsgASgBSARSGW1vbWVudHVtRXNjYXBlU2Vuc2l0aXZpdHmIAQESMgoSbW9tZW50dW1fZGly'
+    'ZWN0aW9uGAwgASgFSAVSEW1vbWVudHVtRGlyZWN0aW9uiAEBEjsKF21vbWVudHVtX2JpZF9hZG'
+    'p1c3RtZW50GA0gASgDSAZSFW1vbWVudHVtQmlkQWRqdXN0bWVudIgBARI7Chdtb21lbnR1bV9h'
+    'c2tfYWRqdXN0bWVudBgOIAEoA0gHUhVtb21lbnR1bUFza0FkanVzdG1lbnSIAQFCEwoRX21vbW'
+    'VudHVtX2VuYWJsZWRCFQoTX21vbWVudHVtX3dpbmRvd19tc0IZChdfbW9tZW50dW1fdHJpZ2dl'
+    'cl90aWNrc0IeChxfbW9tZW50dW1fZm9sbG93X3NlbnNpdGl2aXR5Qh4KHF9tb21lbnR1bV9lc2'
+    'NhcGVfc2Vuc2l0aXZpdHlCFQoTX21vbWVudHVtX2RpcmVjdGlvbkIaChhfbW9tZW50dW1fYmlk'
+    'X2FkanVzdG1lbnRCGgoYX21vbWVudHVtX2Fza19hZGp1c3RtZW50');
 
-@$core.Deprecated('Use mmConfigurationDescriptor instead')
-const MmConfiguration$json = {
-  '1': 'MmConfiguration',
+@$core.Deprecated('Use marketMakingConfigurationDescriptor instead')
+const MarketMakingConfiguration$json = {
+  '1': 'MarketMakingConfiguration',
   '2': [
     {'1': 'pricing', '3': 1, '4': 1, '5': 9, '10': 'pricing'},
-    {'1': 'skew', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmSkewConfig', '10': 'skew'},
-    {'1': 'trade_analyzer', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmTradeAnalyzerConfig', '10': 'tradeAnalyzer'},
-    {'1': 'screening', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmScreeningConfig', '10': 'screening'},
+    {'1': 'skew', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingSkewConfig', '10': 'skew'},
+    {'1': 'trade_analyzer', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTradeAnalyzerConfig', '10': 'tradeAnalyzer'},
+    {'1': 'screening', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingScreeningConfig', '10': 'screening'},
     {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
     {'1': 'enabled', '3': 6, '4': 1, '5': 8, '10': 'enabled'},
-    {'1': 'momentum', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmMomentumConfig', '10': 'momentum'},
-    {'1': 'exposure_guard', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmExposureGuardConfig', '10': 'exposureGuard'},
-    {'1': 'inventory_balancer', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmInventoryBalancerConfig', '10': 'inventoryBalancer'},
+    {'1': 'momentum', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMomentumConfig', '10': 'momentum'},
+    {'1': 'exposure_guard', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureGuardConfig', '10': 'exposureGuard'},
+    {'1': 'inventory_balancer', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingInventoryBalancerConfig', '10': 'inventoryBalancer'},
     {'1': 'bid_adjustment', '3': 10, '4': 1, '5': 3, '10': 'bidAdjustment'},
     {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 3, '10': 'askAdjustment'},
   ],
 };
 
-/// Descriptor for `MmConfiguration`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmConfigurationDescriptor = $convert.base64Decode(
-    'Cg9NbUNvbmZpZ3VyYXRpb24SGAoHcHJpY2luZxgBIAEoCVIHcHJpY2luZxIrCgRza2V3GAIgAS'
-    'gLMhcua2RvLnYxLm1tLk1tU2tld0NvbmZpZ1IEc2tldxJHCg50cmFkZV9hbmFseXplchgDIAEo'
-    'CzIgLmtkby52MS5tbS5NbVRyYWRlQW5hbHl6ZXJDb25maWdSDXRyYWRlQW5hbHl6ZXISOgoJc2'
-    'NyZWVuaW5nGAQgASgLMhwua2RvLnYxLm1tLk1tU2NyZWVuaW5nQ29uZmlnUglzY3JlZW5pbmcS'
-    'GwoJdGlja19zaXplGAUgASgDUgh0aWNrU2l6ZRIYCgdlbmFibGVkGAYgASgIUgdlbmFibGVkEj'
-    'cKCG1vbWVudHVtGAcgASgLMhsua2RvLnYxLm1tLk1tTW9tZW50dW1Db25maWdSCG1vbWVudHVt'
-    'EkcKDmV4cG9zdXJlX2d1YXJkGAggASgLMiAua2RvLnYxLm1tLk1tRXhwb3N1cmVHdWFyZENvbm'
-    'ZpZ1INZXhwb3N1cmVHdWFyZBJTChJpbnZlbnRvcnlfYmFsYW5jZXIYCSABKAsyJC5rZG8udjEu'
-    'bW0uTW1JbnZlbnRvcnlCYWxhbmNlckNvbmZpZ1IRaW52ZW50b3J5QmFsYW5jZXISJQoOYmlkX2'
-    'FkanVzdG1lbnQYCiABKANSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG1lbnQYCyABKANS'
-    'DWFza0FkanVzdG1lbnQ=');
+/// Descriptor for `MarketMakingConfiguration`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base64Decode(
+    'ChlNYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uEhgKB3ByaWNpbmcYASABKAlSB3ByaWNpbmcSNQ'
+    'oEc2tldxgCIAEoCzIhLmtkby52MS5tbS5NYXJrZXRNYWtpbmdTa2V3Q29uZmlnUgRza2V3ElEK'
+    'DnRyYWRlX2FuYWx5emVyGAMgASgLMioua2RvLnYxLm1tLk1hcmtldE1ha2luZ1RyYWRlQW5hbH'
+    'l6ZXJDb25maWdSDXRyYWRlQW5hbHl6ZXISRAoJc2NyZWVuaW5nGAQgASgLMiYua2RvLnYxLm1t'
+    'Lk1hcmtldE1ha2luZ1NjcmVlbmluZ0NvbmZpZ1IJc2NyZWVuaW5nEhsKCXRpY2tfc2l6ZRgFIA'
+    'EoA1IIdGlja1NpemUSGAoHZW5hYmxlZBgGIAEoCFIHZW5hYmxlZBJBCghtb21lbnR1bRgHIAEo'
+    'CzIlLmtkby52MS5tbS5NYXJrZXRNYWtpbmdNb21lbnR1bUNvbmZpZ1IIbW9tZW50dW0SUQoOZX'
+    'hwb3N1cmVfZ3VhcmQYCCABKAsyKi5rZG8udjEubW0uTWFya2V0TWFraW5nRXhwb3N1cmVHdWFy'
+    'ZENvbmZpZ1INZXhwb3N1cmVHdWFyZBJdChJpbnZlbnRvcnlfYmFsYW5jZXIYCSABKAsyLi5rZG'
+    '8udjEubW0uTWFya2V0TWFraW5nSW52ZW50b3J5QmFsYW5jZXJDb25maWdSEWludmVudG9yeUJh'
+    'bGFuY2VyEiUKDmJpZF9hZGp1c3RtZW50GAogASgDUg1iaWRBZGp1c3RtZW50EiUKDmFza19hZG'
+    'p1c3RtZW50GAsgASgDUg1hc2tBZGp1c3RtZW50');
 
-@$core.Deprecated('Use mmSkewConfigDescriptor instead')
-const MmSkewConfig$json = {
-  '1': 'MmSkewConfig',
+@$core.Deprecated('Use marketMakingSkewConfigDescriptor instead')
+const MarketMakingSkewConfig$json = {
+  '1': 'MarketMakingSkewConfig',
   '2': [
     {'1': 'mode', '3': 1, '4': 1, '5': 9, '10': 'mode'},
     {'1': 'trigger_amt', '3': 2, '4': 1, '5': 3, '10': 'triggerAmt'},
@@ -140,14 +143,14 @@ const MmSkewConfig$json = {
   ],
 };
 
-/// Descriptor for `MmSkewConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmSkewConfigDescriptor = $convert.base64Decode(
-    'CgxNbVNrZXdDb25maWcSEgoEbW9kZRgBIAEoCVIEbW9kZRIfCgt0cmlnZ2VyX2FtdBgCIAEoA1'
-    'IKdHJpZ2dlckFtdBIbCglza2V3X3VuaXQYAyABKAVSCHNrZXdVbml0');
+/// Descriptor for `MarketMakingSkewConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingSkewConfigDescriptor = $convert.base64Decode(
+    'ChZNYXJrZXRNYWtpbmdTa2V3Q29uZmlnEhIKBG1vZGUYASABKAlSBG1vZGUSHwoLdHJpZ2dlcl'
+    '9hbXQYAiABKANSCnRyaWdnZXJBbXQSGwoJc2tld191bml0GAMgASgFUghza2V3VW5pdA==');
 
-@$core.Deprecated('Use mmTradeAnalyzerConfigDescriptor instead')
-const MmTradeAnalyzerConfig$json = {
-  '1': 'MmTradeAnalyzerConfig',
+@$core.Deprecated('Use marketMakingTradeAnalyzerConfigDescriptor instead')
+const MarketMakingTradeAnalyzerConfig$json = {
+  '1': 'MarketMakingTradeAnalyzerConfig',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'window', '3': 2, '4': 1, '5': 13, '10': 'window'},
@@ -157,16 +160,16 @@ const MmTradeAnalyzerConfig$json = {
   ],
 };
 
-/// Descriptor for `MmTradeAnalyzerConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmTradeAnalyzerConfigDescriptor = $convert.base64Decode(
-    'ChVNbVRyYWRlQW5hbHl6ZXJDb25maWcSGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZBIWCgZ3aW'
-    '5kb3cYAiABKA1SBndpbmRvdxInCg9yYXRpb190aHJlc2hvbGQYAyABKAFSDnJhdGlvVGhyZXNo'
-    'b2xkEi0KEnN0cmVuZ3RoX3RocmVzaG9sZBgEIAEoAVIRc3RyZW5ndGhUaHJlc2hvbGQSIgoNbW'
-    'F4X2RlY29fdGljaxgFIAEoBVILbWF4RGVjb1RpY2s=');
+/// Descriptor for `MarketMakingTradeAnalyzerConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingTradeAnalyzerConfigDescriptor = $convert.base64Decode(
+    'Ch9NYXJrZXRNYWtpbmdUcmFkZUFuYWx5emVyQ29uZmlnEhgKB2VuYWJsZWQYASABKAhSB2VuYW'
+    'JsZWQSFgoGd2luZG93GAIgASgNUgZ3aW5kb3cSJwoPcmF0aW9fdGhyZXNob2xkGAMgASgBUg5y'
+    'YXRpb1RocmVzaG9sZBItChJzdHJlbmd0aF90aHJlc2hvbGQYBCABKAFSEXN0cmVuZ3RoVGhyZX'
+    'Nob2xkEiIKDW1heF9kZWNvX3RpY2sYBSABKAVSC21heERlY29UaWNr');
 
-@$core.Deprecated('Use mmScreeningConfigDescriptor instead')
-const MmScreeningConfig$json = {
-  '1': 'MmScreeningConfig',
+@$core.Deprecated('Use marketMakingScreeningConfigDescriptor instead')
+const MarketMakingScreeningConfig$json = {
+  '1': 'MarketMakingScreeningConfig',
   '2': [
     {'1': 'max_spread_width_ticks', '3': 1, '4': 1, '5': 5, '10': 'maxSpreadWidthTicks'},
     {'1': 'min_price', '3': 2, '4': 1, '5': 3, '10': 'minPrice'},
@@ -174,15 +177,15 @@ const MmScreeningConfig$json = {
   ],
 };
 
-/// Descriptor for `MmScreeningConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmScreeningConfigDescriptor = $convert.base64Decode(
-    'ChFNbVNjcmVlbmluZ0NvbmZpZxIzChZtYXhfc3ByZWFkX3dpZHRoX3RpY2tzGAEgASgFUhNtYX'
-    'hTcHJlYWRXaWR0aFRpY2tzEhsKCW1pbl9wcmljZRgCIAEoA1IIbWluUHJpY2USGwoJbWF4X3By'
-    'aWNlGAMgASgDUghtYXhQcmljZQ==');
+/// Descriptor for `MarketMakingScreeningConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingScreeningConfigDescriptor = $convert.base64Decode(
+    'ChtNYXJrZXRNYWtpbmdTY3JlZW5pbmdDb25maWcSMwoWbWF4X3NwcmVhZF93aWR0aF90aWNrcx'
+    'gBIAEoBVITbWF4U3ByZWFkV2lkdGhUaWNrcxIbCgltaW5fcHJpY2UYAiABKANSCG1pblByaWNl'
+    'EhsKCW1heF9wcmljZRgDIAEoA1IIbWF4UHJpY2U=');
 
-@$core.Deprecated('Use mmMomentumConfigDescriptor instead')
-const MmMomentumConfig$json = {
-  '1': 'MmMomentumConfig',
+@$core.Deprecated('Use marketMakingMomentumConfigDescriptor instead')
+const MarketMakingMomentumConfig$json = {
+  '1': 'MarketMakingMomentumConfig',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'window_ms', '3': 2, '4': 1, '5': 4, '10': 'windowMs'},
@@ -195,18 +198,18 @@ const MmMomentumConfig$json = {
   ],
 };
 
-/// Descriptor for `MmMomentumConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmMomentumConfigDescriptor = $convert.base64Decode(
-    'ChBNbU1vbWVudHVtQ29uZmlnEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSGwoJd2luZG93X2'
-    '1zGAIgASgEUgh3aW5kb3dNcxIjCg10cmlnZ2VyX3RpY2tzGAMgASgFUgx0cmlnZ2VyVGlja3MS'
-    'LQoSZm9sbG93X3NlbnNpdGl2aXR5GAQgASgBUhFmb2xsb3dTZW5zaXRpdml0eRItChJlc2NhcG'
-    'Vfc2Vuc2l0aXZpdHkYBSABKAFSEWVzY2FwZVNlbnNpdGl2aXR5EigKEG1heF9mb2xsb3dfdGlj'
-    'a3MYBiABKAVSDm1heEZvbGxvd1RpY2tzEigKEG1heF9lc2NhcGVfdGlja3MYByABKAVSDm1heE'
-    'VzY2FwZVRpY2tzEh8KC2lzX29wcG9zaXRlGAggASgIUgppc09wcG9zaXRl');
+/// Descriptor for `MarketMakingMomentumConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingMomentumConfigDescriptor = $convert.base64Decode(
+    'ChpNYXJrZXRNYWtpbmdNb21lbnR1bUNvbmZpZxIYCgdlbmFibGVkGAEgASgIUgdlbmFibGVkEh'
+    'sKCXdpbmRvd19tcxgCIAEoBFIId2luZG93TXMSIwoNdHJpZ2dlcl90aWNrcxgDIAEoBVIMdHJp'
+    'Z2dlclRpY2tzEi0KEmZvbGxvd19zZW5zaXRpdml0eRgEIAEoAVIRZm9sbG93U2Vuc2l0aXZpdH'
+    'kSLQoSZXNjYXBlX3NlbnNpdGl2aXR5GAUgASgBUhFlc2NhcGVTZW5zaXRpdml0eRIoChBtYXhf'
+    'Zm9sbG93X3RpY2tzGAYgASgFUg5tYXhGb2xsb3dUaWNrcxIoChBtYXhfZXNjYXBlX3RpY2tzGA'
+    'cgASgFUg5tYXhFc2NhcGVUaWNrcxIfCgtpc19vcHBvc2l0ZRgIIAEoCFIKaXNPcHBvc2l0ZQ==');
 
-@$core.Deprecated('Use mmExposureGuardConfigDescriptor instead')
-const MmExposureGuardConfig$json = {
-  '1': 'MmExposureGuardConfig',
+@$core.Deprecated('Use marketMakingExposureGuardConfigDescriptor instead')
+const MarketMakingExposureGuardConfig$json = {
+  '1': 'MarketMakingExposureGuardConfig',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'reduce_start_multiple', '3': 2, '4': 1, '5': 5, '10': 'reduceStartMultiple'},
@@ -214,15 +217,15 @@ const MmExposureGuardConfig$json = {
   ],
 };
 
-/// Descriptor for `MmExposureGuardConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmExposureGuardConfigDescriptor = $convert.base64Decode(
-    'ChVNbUV4cG9zdXJlR3VhcmRDb25maWcSGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZBIyChVyZW'
-    'R1Y2Vfc3RhcnRfbXVsdGlwbGUYAiABKAVSE3JlZHVjZVN0YXJ0TXVsdGlwbGUSNAoWbWF4X2lu'
-    'dmVudG9yeV9tdWx0aXBsZRgDIAEoBVIUbWF4SW52ZW50b3J5TXVsdGlwbGU=');
+/// Descriptor for `MarketMakingExposureGuardConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingExposureGuardConfigDescriptor = $convert.base64Decode(
+    'Ch9NYXJrZXRNYWtpbmdFeHBvc3VyZUd1YXJkQ29uZmlnEhgKB2VuYWJsZWQYASABKAhSB2VuYW'
+    'JsZWQSMgoVcmVkdWNlX3N0YXJ0X211bHRpcGxlGAIgASgFUhNyZWR1Y2VTdGFydE11bHRpcGxl'
+    'EjQKFm1heF9pbnZlbnRvcnlfbXVsdGlwbGUYAyABKAVSFG1heEludmVudG9yeU11bHRpcGxl');
 
-@$core.Deprecated('Use mmInventoryBalancerConfigDescriptor instead')
-const MmInventoryBalancerConfig$json = {
-  '1': 'MmInventoryBalancerConfig',
+@$core.Deprecated('Use marketMakingInventoryBalancerConfigDescriptor instead')
+const MarketMakingInventoryBalancerConfig$json = {
+  '1': 'MarketMakingInventoryBalancerConfig',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'trigger_multiple', '3': 2, '4': 1, '5': 5, '10': 'triggerMultiple'},
@@ -232,17 +235,17 @@ const MmInventoryBalancerConfig$json = {
   ],
 };
 
-/// Descriptor for `MmInventoryBalancerConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmInventoryBalancerConfigDescriptor = $convert.base64Decode(
-    'ChlNbUludmVudG9yeUJhbGFuY2VyQ29uZmlnEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSKQ'
-    'oQdHJpZ2dlcl9tdWx0aXBsZRgCIAEoBVIPdHJpZ2dlck11bHRpcGxlEigKEHByaWNlX3NrZXdf'
-    'dGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEi4KE3NhbWVfc2lkZV9yZWR1Y3Rpb24YBCABKA'
-    'FSEXNhbWVTaWRlUmVkdWN0aW9uEi0KE21pbl9zYW1lX3NpZGVfc2NhbGUYBSABKAFSEG1pblNh'
-    'bWVTaWRlU2NhbGU=');
+/// Descriptor for `MarketMakingInventoryBalancerConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingInventoryBalancerConfigDescriptor = $convert.base64Decode(
+    'CiNNYXJrZXRNYWtpbmdJbnZlbnRvcnlCYWxhbmNlckNvbmZpZxIYCgdlbmFibGVkGAEgASgIUg'
+    'dlbmFibGVkEikKEHRyaWdnZXJfbXVsdGlwbGUYAiABKAVSD3RyaWdnZXJNdWx0aXBsZRIoChBw'
+    'cmljZV9za2V3X3RpY2tzGAMgASgFUg5wcmljZVNrZXdUaWNrcxIuChNzYW1lX3NpZGVfcmVkdW'
+    'N0aW9uGAQgASgBUhFzYW1lU2lkZVJlZHVjdGlvbhItChNtaW5fc2FtZV9zaWRlX3NjYWxlGAUg'
+    'ASgBUhBtaW5TYW1lU2lkZVNjYWxl');
 
-@$core.Deprecated('Use listMmRequestDescriptor instead')
-const ListMmRequest$json = {
-  '1': 'ListMmRequest',
+@$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
+const ListMarketMakingRequest$json = {
+  '1': 'ListMarketMakingRequest',
   '2': [
     {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
@@ -253,233 +256,256 @@ const ListMmRequest$json = {
   ],
 };
 
-/// Descriptor for `ListMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMmRequestDescriptor = $convert.base64Decode(
-    'Cg1MaXN0TW1SZXF1ZXN0EiAKCXBhZ2Vfc2l6ZRgBIAEoDUgAUghwYWdlU2l6ZYgBARIiCgpwYW'
-    'dlX3Rva2VuGAIgASgJSAFSCXBhZ2VUb2tlbogBAUIMCgpfcGFnZV9zaXplQg0KC19wYWdlX3Rv'
-    'a2Vu');
+/// Descriptor for `ListMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChdMaXN0TWFya2V0TWFraW5nUmVxdWVzdBIgCglwYWdlX3NpemUYASABKA1IAFIIcGFnZVNpem'
+    'WIAQESIgoKcGFnZV90b2tlbhgCIAEoCUgBUglwYWdlVG9rZW6IAQFCDAoKX3BhZ2Vfc2l6ZUIN'
+    'CgtfcGFnZV90b2tlbg==');
 
-@$core.Deprecated('Use listMmResponseDescriptor instead')
-const ListMmResponse$json = {
-  '1': 'ListMmResponse',
+@$core.Deprecated('Use listMarketMakingResponseDescriptor instead')
+const ListMarketMakingResponse$json = {
+  '1': 'ListMarketMakingResponse',
   '2': [
-    {'1': 'entries', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.mm.MmEntry', '10': 'entries'},
+    {'1': 'entries', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.mm.MarketMakingEntry', '10': 'entries'},
     {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
   ],
 };
 
-/// Descriptor for `ListMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMmResponseDescriptor = $convert.base64Decode(
-    'Cg5MaXN0TW1SZXNwb25zZRIsCgdlbnRyaWVzGAEgAygLMhIua2RvLnYxLm1tLk1tRW50cnlSB2'
-    'VudHJpZXMSJgoPbmV4dF9wYWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2Vu');
+/// Descriptor for `ListMarketMakingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMarketMakingResponseDescriptor = $convert.base64Decode(
+    'ChhMaXN0TWFya2V0TWFraW5nUmVzcG9uc2USNgoHZW50cmllcxgBIAMoCzIcLmtkby52MS5tbS'
+    '5NYXJrZXRNYWtpbmdFbnRyeVIHZW50cmllcxImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlSDW5l'
+    'eHRQYWdlVG9rZW4=');
 
-@$core.Deprecated('Use getMmStatusRequestDescriptor instead')
-const GetMmStatusRequest$json = {
-  '1': 'GetMmStatusRequest',
+@$core.Deprecated('Use getMarketMakingRequestDescriptor instead')
+const GetMarketMakingRequest$json = {
+  '1': 'GetMarketMakingRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `GetMmStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMmStatusRequestDescriptor = $convert.base64Decode(
-    'ChJHZXRNbVN0YXR1c1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2w=');
+/// Descriptor for `GetMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChZHZXRNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9s');
 
-@$core.Deprecated('Use startMmRequestDescriptor instead')
-const StartMmRequest$json = {
-  '1': 'StartMmRequest',
+@$core.Deprecated('Use getMarketMakingStatusRequestDescriptor instead')
+const GetMarketMakingStatusRequest$json = {
+  '1': 'GetMarketMakingStatusRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '10': 'config'},
   ],
 };
 
-/// Descriptor for `StartMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List startMmRequestDescriptor = $convert.base64Decode(
-    'Cg5TdGFydE1tUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbBIyCgZjb25maW'
-    'cYAiABKAsyGi5rZG8udjEubW0uTW1Db25maWd1cmF0aW9uUgZjb25maWc=');
+/// Descriptor for `GetMarketMakingStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMarketMakingStatusRequestDescriptor = $convert.base64Decode(
+    'ChxHZXRNYXJrZXRNYWtpbmdTdGF0dXNSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3'
+    'ltYm9s');
 
-@$core.Deprecated('Use startMmResponseDescriptor instead')
-const StartMmResponse$json = {
-  '1': 'StartMmResponse',
+@$core.Deprecated('Use startMarketMakingRequestDescriptor instead')
+const StartMarketMakingRequest$json = {
+  '1': 'StartMarketMakingRequest',
   '2': [
-    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmStatus', '10': 'status'},
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
+  ],
+};
+
+/// Descriptor for `StartMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChhTdGFydE1hcmtldE1ha2luZ1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2'
+    'wSPAoGY29uZmlnGAIgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ0NvbmZpZ3VyYXRpb25S'
+    'BmNvbmZpZw==');
+
+@$core.Deprecated('Use startMarketMakingResponseDescriptor instead')
+const StartMarketMakingResponse$json = {
+  '1': 'StartMarketMakingResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingStatus', '10': 'status'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `StartMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List startMmResponseDescriptor = $convert.base64Decode(
-    'Cg9TdGFydE1tUmVzcG9uc2USKwoGc3RhdHVzGAEgASgLMhMua2RvLnYxLm1tLk1tU3RhdHVzUg'
-    'ZzdGF0dXMSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZQ==');
+/// Descriptor for `StartMarketMakingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startMarketMakingResponseDescriptor = $convert.base64Decode(
+    'ChlTdGFydE1hcmtldE1ha2luZ1Jlc3BvbnNlEjUKBnN0YXR1cxgBIAEoCzIdLmtkby52MS5tbS'
+    '5NYXJrZXRNYWtpbmdTdGF0dXNSBnN0YXR1cxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdl');
 
-@$core.Deprecated('Use stopMmRequestDescriptor instead')
-const StopMmRequest$json = {
-  '1': 'StopMmRequest',
+@$core.Deprecated('Use stopMarketMakingRequestDescriptor instead')
+const StopMarketMakingRequest$json = {
+  '1': 'StopMarketMakingRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `StopMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stopMmRequestDescriptor = $convert.base64Decode(
-    'Cg1TdG9wTW1SZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9s');
+/// Descriptor for `StopMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChdTdG9wTWFya2V0TWFraW5nUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbA'
+    '==');
 
-@$core.Deprecated('Use stopMmResponseDescriptor instead')
-const StopMmResponse$json = {
-  '1': 'StopMmResponse',
+@$core.Deprecated('Use stopMarketMakingResponseDescriptor instead')
+const StopMarketMakingResponse$json = {
+  '1': 'StopMarketMakingResponse',
   '2': [
     {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `StopMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stopMmResponseDescriptor = $convert.base64Decode(
-    'Cg5TdG9wTW1SZXNwb25zZRIYCgdtZXNzYWdlGAEgASgJUgdtZXNzYWdl');
+/// Descriptor for `StopMarketMakingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopMarketMakingResponseDescriptor = $convert.base64Decode(
+    'ChhTdG9wTWFya2V0TWFraW5nUmVzcG9uc2USGAoHbWVzc2FnZRgBIAEoCVIHbWVzc2FnZQ==');
 
-@$core.Deprecated('Use pauseMmRequestDescriptor instead')
-const PauseMmRequest$json = {
-  '1': 'PauseMmRequest',
+@$core.Deprecated('Use pauseMarketMakingRequestDescriptor instead')
+const PauseMarketMakingRequest$json = {
+  '1': 'PauseMarketMakingRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `PauseMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pauseMmRequestDescriptor = $convert.base64Decode(
-    'Cg5QYXVzZU1tUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbA==');
+/// Descriptor for `PauseMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pauseMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChhQYXVzZU1hcmtldE1ha2luZ1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2'
+    'w=');
 
-@$core.Deprecated('Use pauseMmResponseDescriptor instead')
-const PauseMmResponse$json = {
-  '1': 'PauseMmResponse',
+@$core.Deprecated('Use pauseMarketMakingResponseDescriptor instead')
+const PauseMarketMakingResponse$json = {
+  '1': 'PauseMarketMakingResponse',
   '2': [
     {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `PauseMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pauseMmResponseDescriptor = $convert.base64Decode(
-    'Cg9QYXVzZU1tUmVzcG9uc2USGAoHbWVzc2FnZRgBIAEoCVIHbWVzc2FnZQ==');
+/// Descriptor for `PauseMarketMakingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pauseMarketMakingResponseDescriptor = $convert.base64Decode(
+    'ChlQYXVzZU1hcmtldE1ha2luZ1Jlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
 
-@$core.Deprecated('Use resumeMmRequestDescriptor instead')
-const ResumeMmRequest$json = {
-  '1': 'ResumeMmRequest',
+@$core.Deprecated('Use resumeMarketMakingRequestDescriptor instead')
+const ResumeMarketMakingRequest$json = {
+  '1': 'ResumeMarketMakingRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `ResumeMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List resumeMmRequestDescriptor = $convert.base64Decode(
-    'Cg9SZXN1bWVNbVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2w=');
+/// Descriptor for `ResumeMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resumeMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChlSZXN1bWVNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm'
+    '9s');
 
-@$core.Deprecated('Use resumeMmResponseDescriptor instead')
-const ResumeMmResponse$json = {
-  '1': 'ResumeMmResponse',
+@$core.Deprecated('Use resumeMarketMakingResponseDescriptor instead')
+const ResumeMarketMakingResponse$json = {
+  '1': 'ResumeMarketMakingResponse',
   '2': [
     {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `ResumeMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List resumeMmResponseDescriptor = $convert.base64Decode(
-    'ChBSZXN1bWVNbVJlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
+/// Descriptor for `ResumeMarketMakingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resumeMarketMakingResponseDescriptor = $convert.base64Decode(
+    'ChpSZXN1bWVNYXJrZXRNYWtpbmdSZXNwb25zZRIYCgdtZXNzYWdlGAEgASgJUgdtZXNzYWdl');
 
-@$core.Deprecated('Use resetMmRequestDescriptor instead')
-const ResetMmRequest$json = {
-  '1': 'ResetMmRequest',
+@$core.Deprecated('Use resetMarketMakingRequestDescriptor instead')
+const ResetMarketMakingRequest$json = {
+  '1': 'ResetMarketMakingRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `ResetMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List resetMmRequestDescriptor = $convert.base64Decode(
-    'Cg5SZXNldE1tUmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbA==');
+/// Descriptor for `ResetMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resetMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChhSZXNldE1hcmtldE1ha2luZ1JlcXVlc3QSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
 
-@$core.Deprecated('Use resetMmResponseDescriptor instead')
-const ResetMmResponse$json = {
-  '1': 'ResetMmResponse',
+@$core.Deprecated('Use resetMarketMakingResponseDescriptor instead')
+const ResetMarketMakingResponse$json = {
+  '1': 'ResetMarketMakingResponse',
   '2': [
     {'1': 'reset_count', '3': 1, '4': 1, '5': 5, '10': 'resetCount'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `ResetMmResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List resetMmResponseDescriptor = $convert.base64Decode(
-    'Cg9SZXNldE1tUmVzcG9uc2USHwoLcmVzZXRfY291bnQYASABKAVSCnJlc2V0Q291bnQSGAoHbW'
-    'Vzc2FnZRgCIAEoCVIHbWVzc2FnZQ==');
+/// Descriptor for `ResetMarketMakingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resetMarketMakingResponseDescriptor = $convert.base64Decode(
+    'ChlSZXNldE1hcmtldE1ha2luZ1Jlc3BvbnNlEh8KC3Jlc2V0X2NvdW50GAEgASgFUgpyZXNldE'
+    'NvdW50EhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2U=');
 
-@$core.Deprecated('Use updateMmConfigRequestDescriptor instead')
-const UpdateMmConfigRequest$json = {
-  '1': 'UpdateMmConfigRequest',
+@$core.Deprecated('Use updateMarketMakingConfigRequestDescriptor instead')
+const UpdateMarketMakingConfigRequest$json = {
+  '1': 'UpdateMarketMakingConfigRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '8': {}, '10': 'config'},
+    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '8': {}, '10': 'config'},
   ],
 };
 
-/// Descriptor for `UpdateMmConfigRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateMmConfigRequestDescriptor = $convert.base64Decode(
-    'ChVVcGRhdGVNbUNvbmZpZ1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSOA'
-    'oGY29uZmlnGAIgASgLMhoua2RvLnYxLm1tLk1tQ29uZmlndXJhdGlvbkIE4kEBAlIGY29uZmln');
+/// Descriptor for `UpdateMarketMakingConfigRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateMarketMakingConfigRequestDescriptor = $convert.base64Decode(
+    'Ch9VcGRhdGVNYXJrZXRNYWtpbmdDb25maWdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAl'
+    'IGc3ltYm9sEkIKBmNvbmZpZxgCIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1'
+    'cmF0aW9uQgTiQQECUgZjb25maWc=');
 
-@$core.Deprecated('Use streamMmStatusRequestDescriptor instead')
-const StreamMmStatusRequest$json = {
-  '1': 'StreamMmStatusRequest',
+@$core.Deprecated('Use streamMarketMakingStatusRequestDescriptor instead')
+const StreamMarketMakingStatusRequest$json = {
+  '1': 'StreamMarketMakingStatusRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `StreamMmStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamMmStatusRequestDescriptor = $convert.base64Decode(
-    'ChVTdHJlYW1NbVN0YXR1c1JlcXVlc3QSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
+/// Descriptor for `StreamMarketMakingStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamMarketMakingStatusRequestDescriptor = $convert.base64Decode(
+    'Ch9TdHJlYW1NYXJrZXRNYWtpbmdTdGF0dXNSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm'
+    '9s');
 
-@$core.Deprecated('Use createMmRequestDescriptor instead')
-const CreateMmRequest$json = {
-  '1': 'CreateMmRequest',
+@$core.Deprecated('Use createMarketMakingRequestDescriptor instead')
+const CreateMarketMakingRequest$json = {
+  '1': 'CreateMarketMakingRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '8': {}, '10': 'config'},
+    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '8': {}, '10': 'config'},
   ],
 };
 
-/// Descriptor for `CreateMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createMmRequestDescriptor = $convert.base64Decode(
-    'Cg9DcmVhdGVNbVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSOAoGY29uZm'
-    'lnGAIgASgLMhoua2RvLnYxLm1tLk1tQ29uZmlndXJhdGlvbkIE4kEBAlIGY29uZmln');
+/// Descriptor for `CreateMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChlDcmVhdGVNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm'
+    '9sEkIKBmNvbmZpZxgCIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9u'
+    'QgTiQQECUgZjb25maWc=');
 
-@$core.Deprecated('Use updateMmRequestDescriptor instead')
-const UpdateMmRequest$json = {
-  '1': 'UpdateMmRequest',
+@$core.Deprecated('Use updateMarketMakingRequestDescriptor instead')
+const UpdateMarketMakingRequest$json = {
+  '1': 'UpdateMarketMakingRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MmConfiguration', '8': {}, '10': 'config'},
+    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '8': {}, '10': 'config'},
   ],
 };
 
-/// Descriptor for `UpdateMmRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateMmRequestDescriptor = $convert.base64Decode(
-    'Cg9VcGRhdGVNbVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSOAoGY29uZm'
-    'lnGAIgASgLMhoua2RvLnYxLm1tLk1tQ29uZmlndXJhdGlvbkIE4kEBAlIGY29uZmln');
+/// Descriptor for `UpdateMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateMarketMakingRequestDescriptor = $convert.base64Decode(
+    'ChlVcGRhdGVNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm'
+    '9sEkIKBmNvbmZpZxgCIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9u'
+    'QgTiQQECUgZjb25maWc=');
 
-@$core.Deprecated('Use getMmOrderbookRequestDescriptor instead')
-const GetMmOrderbookRequest$json = {
-  '1': 'GetMmOrderbookRequest',
+@$core.Deprecated('Use getMarketMakingOrderbookRequestDescriptor instead')
+const GetMarketMakingOrderbookRequest$json = {
+  '1': 'GetMarketMakingOrderbookRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `GetMmOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMmOrderbookRequestDescriptor = $convert.base64Decode(
-    'ChVHZXRNbU9yZGVyYm9va1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2w=');
+/// Descriptor for `GetMarketMakingOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMarketMakingOrderbookRequestDescriptor = $convert.base64Decode(
+    'Ch9HZXRNYXJrZXRNYWtpbmdPcmRlcmJvb2tSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAl'
+    'IGc3ltYm9s');
 
-@$core.Deprecated('Use mmOrderbookDataDescriptor instead')
-const MmOrderbookData$json = {
-  '1': 'MmOrderbookData',
+@$core.Deprecated('Use marketMakingOrderbookDataDescriptor instead')
+const MarketMakingOrderbookData$json = {
+  '1': 'MarketMakingOrderbookData',
   '2': [
     {'1': 'bid_prices', '3': 1, '4': 3, '5': 9, '10': 'bidPrices'},
     {'1': 'ask_prices', '3': 2, '4': 3, '5': 9, '10': 'askPrices'},
@@ -488,9 +514,10 @@ const MmOrderbookData$json = {
   ],
 };
 
-/// Descriptor for `MmOrderbookData`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmOrderbookDataDescriptor = $convert.base64Decode(
-    'Cg9NbU9yZGVyYm9va0RhdGESHQoKYmlkX3ByaWNlcxgBIAMoCVIJYmlkUHJpY2VzEh0KCmFza1'
-    '9wcmljZXMYAiADKAlSCWFza1ByaWNlcxIlCg5iaWRfcXVhbnRpdGllcxgDIAMoA1INYmlkUXVh'
-    'bnRpdGllcxIlCg5hc2tfcXVhbnRpdGllcxgEIAMoA1INYXNrUXVhbnRpdGllcw==');
+/// Descriptor for `MarketMakingOrderbookData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingOrderbookDataDescriptor = $convert.base64Decode(
+    'ChlNYXJrZXRNYWtpbmdPcmRlcmJvb2tEYXRhEh0KCmJpZF9wcmljZXMYASADKAlSCWJpZFByaW'
+    'NlcxIdCgphc2tfcHJpY2VzGAIgAygJUglhc2tQcmljZXMSJQoOYmlkX3F1YW50aXRpZXMYAyAD'
+    'KANSDWJpZFF1YW50aXRpZXMSJQoOYXNrX3F1YW50aXRpZXMYBCADKANSDWFza1F1YW50aXRpZX'
+    'M=');
 

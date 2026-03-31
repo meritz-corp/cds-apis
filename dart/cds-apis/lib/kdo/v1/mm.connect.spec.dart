@@ -7,111 +7,119 @@ import "package:connectrpc/connect.dart" as connect;
 import "mm.pb.dart" as kdov1mm;
 
 /// Market Making 서비스 (기존 LP 서비스와 완전히 독립)
-abstract final class MmService {
-  /// Fully-qualified name of the MmService service.
-  static const name = 'kdo.v1.mm.MmService';
+abstract final class MarketMakingService {
+  /// Fully-qualified name of the MarketMakingService service.
+  static const name = 'kdo.v1.mm.MarketMakingService';
 
   /// MM 목록 조회
-  static const listMm = connect.Spec(
-    '/$name/ListMm',
+  static const listMarketMaking = connect.Spec(
+    '/$name/ListMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.ListMmRequest.new,
-    kdov1mm.ListMmResponse.new,
+    kdov1mm.ListMarketMakingRequest.new,
+    kdov1mm.ListMarketMakingResponse.new,
+  );
+
+  /// MM 단일 심볼 조회
+  static const getMarketMaking = connect.Spec(
+    '/$name/GetMarketMaking',
+    connect.StreamType.unary,
+    kdov1mm.GetMarketMakingRequest.new,
+    kdov1mm.MarketMakingEntry.new,
   );
 
   /// MM 설정 생성 (DB 저장)
-  static const createMm = connect.Spec(
-    '/$name/CreateMm',
+  static const createMarketMaking = connect.Spec(
+    '/$name/CreateMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.CreateMmRequest.new,
-    kdov1mm.MmEntry.new,
+    kdov1mm.CreateMarketMakingRequest.new,
+    kdov1mm.MarketMakingEntry.new,
   );
 
   /// MM 설정 업데이트 (DB 저장)
-  static const updateMm = connect.Spec(
-    '/$name/UpdateMm',
+  static const updateMarketMaking = connect.Spec(
+    '/$name/UpdateMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.UpdateMmRequest.new,
-    kdov1mm.MmEntry.new,
+    kdov1mm.UpdateMarketMakingRequest.new,
+    kdov1mm.MarketMakingEntry.new,
   );
 
   /// MM 상태 조회
-  static const getMmStatus = connect.Spec(
-    '/$name/GetMmStatus',
+  static const getMarketMakingStatus = connect.Spec(
+    '/$name/GetMarketMakingStatus',
     connect.StreamType.unary,
-    kdov1mm.GetMmStatusRequest.new,
-    kdov1mm.MmStatus.new,
+    kdov1mm.GetMarketMakingStatusRequest.new,
+    kdov1mm.MarketMakingStatus.new,
   );
 
   /// MM 시작 (심볼 등록)
-  static const startMm = connect.Spec(
-    '/$name/StartMm',
+  static const startMarketMaking = connect.Spec(
+    '/$name/StartMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.StartMmRequest.new,
-    kdov1mm.StartMmResponse.new,
+    kdov1mm.StartMarketMakingRequest.new,
+    kdov1mm.StartMarketMakingResponse.new,
   );
 
   /// MM 중지 (심볼 해제)
-  static const stopMm = connect.Spec(
-    '/$name/StopMm',
+  static const stopMarketMaking = connect.Spec(
+    '/$name/StopMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.StopMmRequest.new,
-    kdov1mm.StopMmResponse.new,
+    kdov1mm.StopMarketMakingRequest.new,
+    kdov1mm.StopMarketMakingResponse.new,
   );
 
   /// MM 일시정지 (호가 산출 중단)
-  static const pauseMm = connect.Spec(
-    '/$name/PauseMm',
+  static const pauseMarketMaking = connect.Spec(
+    '/$name/PauseMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.PauseMmRequest.new,
-    kdov1mm.PauseMmResponse.new,
+    kdov1mm.PauseMarketMakingRequest.new,
+    kdov1mm.PauseMarketMakingResponse.new,
   );
 
   /// MM 재개
-  static const resumeMm = connect.Spec(
-    '/$name/ResumeMm',
+  static const resumeMarketMaking = connect.Spec(
+    '/$name/ResumeMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.ResumeMmRequest.new,
-    kdov1mm.ResumeMmResponse.new,
+    kdov1mm.ResumeMarketMakingRequest.new,
+    kdov1mm.ResumeMarketMakingResponse.new,
   );
 
   /// MM 엔진 리셋 (일초 상태 초기화)
-  static const resetMm = connect.Spec(
-    '/$name/ResetMm',
+  static const resetMarketMaking = connect.Spec(
+    '/$name/ResetMarketMaking',
     connect.StreamType.unary,
-    kdov1mm.ResetMmRequest.new,
-    kdov1mm.ResetMmResponse.new,
+    kdov1mm.ResetMarketMakingRequest.new,
+    kdov1mm.ResetMarketMakingResponse.new,
   );
 
   /// MM 설정 업데이트
-  static const updateMmConfig = connect.Spec(
-    '/$name/UpdateMmConfig',
+  static const updateMarketMakingConfig = connect.Spec(
+    '/$name/UpdateMarketMakingConfig',
     connect.StreamType.unary,
-    kdov1mm.UpdateMmConfigRequest.new,
-    kdov1mm.MmConfiguration.new,
+    kdov1mm.UpdateMarketMakingConfigRequest.new,
+    kdov1mm.MarketMakingConfiguration.new,
   );
 
   /// MM 실시간 상태 스트리밍 (서버→클라이언트)
-  static const streamMmStatus = connect.Spec(
-    '/$name/StreamMmStatus',
+  static const streamMarketMakingStatus = connect.Spec(
+    '/$name/StreamMarketMakingStatus',
     connect.StreamType.server,
-    kdov1mm.StreamMmStatusRequest.new,
-    kdov1mm.MmStatus.new,
+    kdov1mm.StreamMarketMakingStatusRequest.new,
+    kdov1mm.MarketMakingStatus.new,
   );
 
   /// MM 전용 주문장 조회
-  static const getMmOrderbook = connect.Spec(
-    '/$name/GetMmOrderbook',
+  static const getMarketMakingOrderbook = connect.Spec(
+    '/$name/GetMarketMakingOrderbook',
     connect.StreamType.unary,
-    kdov1mm.GetMmOrderbookRequest.new,
-    kdov1mm.MmOrderbookData.new,
+    kdov1mm.GetMarketMakingOrderbookRequest.new,
+    kdov1mm.MarketMakingOrderbookData.new,
   );
 
   /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
-  static const streamMmOrderbook = connect.Spec(
-    '/$name/StreamMmOrderbook',
+  static const streamMarketMakingOrderbook = connect.Spec(
+    '/$name/StreamMarketMakingOrderbook',
     connect.StreamType.server,
-    kdov1mm.GetMmOrderbookRequest.new,
-    kdov1mm.MmOrderbookData.new,
+    kdov1mm.GetMarketMakingOrderbookRequest.new,
+    kdov1mm.MarketMakingOrderbookData.new,
   );
 }

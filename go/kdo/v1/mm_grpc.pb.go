@@ -18,142 +18,153 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// MmServiceClient is the client API for MmService service.
+// MarketMakingServiceClient is the client API for MarketMakingService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MmServiceClient interface {
+type MarketMakingServiceClient interface {
 	// MM 목록 조회
-	ListMm(ctx context.Context, in *ListMmRequest, opts ...grpc.CallOption) (*ListMmResponse, error)
+	ListMarketMaking(ctx context.Context, in *ListMarketMakingRequest, opts ...grpc.CallOption) (*ListMarketMakingResponse, error)
+	// MM 단일 심볼 조회
+	GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error)
 	// MM 설정 생성 (DB 저장)
-	CreateMm(ctx context.Context, in *CreateMmRequest, opts ...grpc.CallOption) (*MmEntry, error)
+	CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error)
 	// MM 설정 업데이트 (DB 저장)
-	UpdateMm(ctx context.Context, in *UpdateMmRequest, opts ...grpc.CallOption) (*MmEntry, error)
+	UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error)
 	// MM 상태 조회
-	GetMmStatus(ctx context.Context, in *GetMmStatusRequest, opts ...grpc.CallOption) (*MmStatus, error)
+	GetMarketMakingStatus(ctx context.Context, in *GetMarketMakingStatusRequest, opts ...grpc.CallOption) (*MarketMakingStatus, error)
 	// MM 시작 (심볼 등록)
-	StartMm(ctx context.Context, in *StartMmRequest, opts ...grpc.CallOption) (*StartMmResponse, error)
+	StartMarketMaking(ctx context.Context, in *StartMarketMakingRequest, opts ...grpc.CallOption) (*StartMarketMakingResponse, error)
 	// MM 중지 (심볼 해제)
-	StopMm(ctx context.Context, in *StopMmRequest, opts ...grpc.CallOption) (*StopMmResponse, error)
+	StopMarketMaking(ctx context.Context, in *StopMarketMakingRequest, opts ...grpc.CallOption) (*StopMarketMakingResponse, error)
 	// MM 일시정지 (호가 산출 중단)
-	PauseMm(ctx context.Context, in *PauseMmRequest, opts ...grpc.CallOption) (*PauseMmResponse, error)
+	PauseMarketMaking(ctx context.Context, in *PauseMarketMakingRequest, opts ...grpc.CallOption) (*PauseMarketMakingResponse, error)
 	// MM 재개
-	ResumeMm(ctx context.Context, in *ResumeMmRequest, opts ...grpc.CallOption) (*ResumeMmResponse, error)
+	ResumeMarketMaking(ctx context.Context, in *ResumeMarketMakingRequest, opts ...grpc.CallOption) (*ResumeMarketMakingResponse, error)
 	// MM 엔진 리셋 (일초 상태 초기화)
-	ResetMm(ctx context.Context, in *ResetMmRequest, opts ...grpc.CallOption) (*ResetMmResponse, error)
+	ResetMarketMaking(ctx context.Context, in *ResetMarketMakingRequest, opts ...grpc.CallOption) (*ResetMarketMakingResponse, error)
 	// MM 설정 업데이트
-	UpdateMmConfig(ctx context.Context, in *UpdateMmConfigRequest, opts ...grpc.CallOption) (*MmConfiguration, error)
+	UpdateMarketMakingConfig(ctx context.Context, in *UpdateMarketMakingConfigRequest, opts ...grpc.CallOption) (*MarketMakingConfiguration, error)
 	// MM 실시간 상태 스트리밍 (서버→클라이언트)
-	StreamMmStatus(ctx context.Context, in *StreamMmStatusRequest, opts ...grpc.CallOption) (MmService_StreamMmStatusClient, error)
+	StreamMarketMakingStatus(ctx context.Context, in *StreamMarketMakingStatusRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingStatusClient, error)
 	// MM 전용 주문장 조회
-	GetMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (*MmOrderbookData, error)
+	GetMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (*MarketMakingOrderbookData, error)
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
-	StreamMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (MmService_StreamMmOrderbookClient, error)
+	StreamMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingOrderbookClient, error)
 }
 
-type mmServiceClient struct {
+type marketMakingServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMmServiceClient(cc grpc.ClientConnInterface) MmServiceClient {
-	return &mmServiceClient{cc}
+func NewMarketMakingServiceClient(cc grpc.ClientConnInterface) MarketMakingServiceClient {
+	return &marketMakingServiceClient{cc}
 }
 
-func (c *mmServiceClient) ListMm(ctx context.Context, in *ListMmRequest, opts ...grpc.CallOption) (*ListMmResponse, error) {
-	out := new(ListMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/ListMm", in, out, opts...)
+func (c *marketMakingServiceClient) ListMarketMaking(ctx context.Context, in *ListMarketMakingRequest, opts ...grpc.CallOption) (*ListMarketMakingResponse, error) {
+	out := new(ListMarketMakingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ListMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) CreateMm(ctx context.Context, in *CreateMmRequest, opts ...grpc.CallOption) (*MmEntry, error) {
-	out := new(MmEntry)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/CreateMm", in, out, opts...)
+func (c *marketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
+	out := new(MarketMakingEntry)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) UpdateMm(ctx context.Context, in *UpdateMmRequest, opts ...grpc.CallOption) (*MmEntry, error) {
-	out := new(MmEntry)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/UpdateMm", in, out, opts...)
+func (c *marketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
+	out := new(MarketMakingEntry)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/CreateMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) GetMmStatus(ctx context.Context, in *GetMmStatusRequest, opts ...grpc.CallOption) (*MmStatus, error) {
-	out := new(MmStatus)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/GetMmStatus", in, out, opts...)
+func (c *marketMakingServiceClient) UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
+	out := new(MarketMakingEntry)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/UpdateMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) StartMm(ctx context.Context, in *StartMmRequest, opts ...grpc.CallOption) (*StartMmResponse, error) {
-	out := new(StartMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/StartMm", in, out, opts...)
+func (c *marketMakingServiceClient) GetMarketMakingStatus(ctx context.Context, in *GetMarketMakingStatusRequest, opts ...grpc.CallOption) (*MarketMakingStatus, error) {
+	out := new(MarketMakingStatus)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) StopMm(ctx context.Context, in *StopMmRequest, opts ...grpc.CallOption) (*StopMmResponse, error) {
-	out := new(StopMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/StopMm", in, out, opts...)
+func (c *marketMakingServiceClient) StartMarketMaking(ctx context.Context, in *StartMarketMakingRequest, opts ...grpc.CallOption) (*StartMarketMakingResponse, error) {
+	out := new(StartMarketMakingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/StartMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) PauseMm(ctx context.Context, in *PauseMmRequest, opts ...grpc.CallOption) (*PauseMmResponse, error) {
-	out := new(PauseMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/PauseMm", in, out, opts...)
+func (c *marketMakingServiceClient) StopMarketMaking(ctx context.Context, in *StopMarketMakingRequest, opts ...grpc.CallOption) (*StopMarketMakingResponse, error) {
+	out := new(StopMarketMakingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/StopMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) ResumeMm(ctx context.Context, in *ResumeMmRequest, opts ...grpc.CallOption) (*ResumeMmResponse, error) {
-	out := new(ResumeMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/ResumeMm", in, out, opts...)
+func (c *marketMakingServiceClient) PauseMarketMaking(ctx context.Context, in *PauseMarketMakingRequest, opts ...grpc.CallOption) (*PauseMarketMakingResponse, error) {
+	out := new(PauseMarketMakingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/PauseMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) ResetMm(ctx context.Context, in *ResetMmRequest, opts ...grpc.CallOption) (*ResetMmResponse, error) {
-	out := new(ResetMmResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/ResetMm", in, out, opts...)
+func (c *marketMakingServiceClient) ResumeMarketMaking(ctx context.Context, in *ResumeMarketMakingRequest, opts ...grpc.CallOption) (*ResumeMarketMakingResponse, error) {
+	out := new(ResumeMarketMakingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) UpdateMmConfig(ctx context.Context, in *UpdateMmConfigRequest, opts ...grpc.CallOption) (*MmConfiguration, error) {
-	out := new(MmConfiguration)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/UpdateMmConfig", in, out, opts...)
+func (c *marketMakingServiceClient) ResetMarketMaking(ctx context.Context, in *ResetMarketMakingRequest, opts ...grpc.CallOption) (*ResetMarketMakingResponse, error) {
+	out := new(ResetMarketMakingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ResetMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) StreamMmStatus(ctx context.Context, in *StreamMmStatusRequest, opts ...grpc.CallOption) (MmService_StreamMmStatusClient, error) {
-	stream, err := c.cc.NewStream(ctx, &MmService_ServiceDesc.Streams[0], "/kdo.v1.mm.MmService/StreamMmStatus", opts...)
+func (c *marketMakingServiceClient) UpdateMarketMakingConfig(ctx context.Context, in *UpdateMarketMakingConfigRequest, opts ...grpc.CallOption) (*MarketMakingConfiguration, error) {
+	out := new(MarketMakingConfiguration)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &mmServiceStreamMmStatusClient{stream}
+	return out, nil
+}
+
+func (c *marketMakingServiceClient) StreamMarketMakingStatus(ctx context.Context, in *StreamMarketMakingStatusRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingStatusClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketMakingService_ServiceDesc.Streams[0], "/kdo.v1.mm.MarketMakingService/StreamMarketMakingStatus", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &marketMakingServiceStreamMarketMakingStatusClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -163,38 +174,38 @@ func (c *mmServiceClient) StreamMmStatus(ctx context.Context, in *StreamMmStatus
 	return x, nil
 }
 
-type MmService_StreamMmStatusClient interface {
-	Recv() (*MmStatus, error)
+type MarketMakingService_StreamMarketMakingStatusClient interface {
+	Recv() (*MarketMakingStatus, error)
 	grpc.ClientStream
 }
 
-type mmServiceStreamMmStatusClient struct {
+type marketMakingServiceStreamMarketMakingStatusClient struct {
 	grpc.ClientStream
 }
 
-func (x *mmServiceStreamMmStatusClient) Recv() (*MmStatus, error) {
-	m := new(MmStatus)
+func (x *marketMakingServiceStreamMarketMakingStatusClient) Recv() (*MarketMakingStatus, error) {
+	m := new(MarketMakingStatus)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *mmServiceClient) GetMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (*MmOrderbookData, error) {
-	out := new(MmOrderbookData)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MmService/GetMmOrderbook", in, out, opts...)
+func (c *marketMakingServiceClient) GetMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (*MarketMakingOrderbookData, error) {
+	out := new(MarketMakingOrderbookData)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mmServiceClient) StreamMmOrderbook(ctx context.Context, in *GetMmOrderbookRequest, opts ...grpc.CallOption) (MmService_StreamMmOrderbookClient, error) {
-	stream, err := c.cc.NewStream(ctx, &MmService_ServiceDesc.Streams[1], "/kdo.v1.mm.MmService/StreamMmOrderbook", opts...)
+func (c *marketMakingServiceClient) StreamMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingOrderbookClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketMakingService_ServiceDesc.Streams[1], "/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &mmServiceStreamMmOrderbookClient{stream}
+	x := &marketMakingServiceStreamMarketMakingOrderbookClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -204,413 +215,440 @@ func (c *mmServiceClient) StreamMmOrderbook(ctx context.Context, in *GetMmOrderb
 	return x, nil
 }
 
-type MmService_StreamMmOrderbookClient interface {
-	Recv() (*MmOrderbookData, error)
+type MarketMakingService_StreamMarketMakingOrderbookClient interface {
+	Recv() (*MarketMakingOrderbookData, error)
 	grpc.ClientStream
 }
 
-type mmServiceStreamMmOrderbookClient struct {
+type marketMakingServiceStreamMarketMakingOrderbookClient struct {
 	grpc.ClientStream
 }
 
-func (x *mmServiceStreamMmOrderbookClient) Recv() (*MmOrderbookData, error) {
-	m := new(MmOrderbookData)
+func (x *marketMakingServiceStreamMarketMakingOrderbookClient) Recv() (*MarketMakingOrderbookData, error) {
+	m := new(MarketMakingOrderbookData)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-// MmServiceServer is the server API for MmService service.
-// All implementations must embed UnimplementedMmServiceServer
+// MarketMakingServiceServer is the server API for MarketMakingService service.
+// All implementations must embed UnimplementedMarketMakingServiceServer
 // for forward compatibility
-type MmServiceServer interface {
+type MarketMakingServiceServer interface {
 	// MM 목록 조회
-	ListMm(context.Context, *ListMmRequest) (*ListMmResponse, error)
+	ListMarketMaking(context.Context, *ListMarketMakingRequest) (*ListMarketMakingResponse, error)
+	// MM 단일 심볼 조회
+	GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMakingEntry, error)
 	// MM 설정 생성 (DB 저장)
-	CreateMm(context.Context, *CreateMmRequest) (*MmEntry, error)
+	CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMakingEntry, error)
 	// MM 설정 업데이트 (DB 저장)
-	UpdateMm(context.Context, *UpdateMmRequest) (*MmEntry, error)
+	UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMakingEntry, error)
 	// MM 상태 조회
-	GetMmStatus(context.Context, *GetMmStatusRequest) (*MmStatus, error)
+	GetMarketMakingStatus(context.Context, *GetMarketMakingStatusRequest) (*MarketMakingStatus, error)
 	// MM 시작 (심볼 등록)
-	StartMm(context.Context, *StartMmRequest) (*StartMmResponse, error)
+	StartMarketMaking(context.Context, *StartMarketMakingRequest) (*StartMarketMakingResponse, error)
 	// MM 중지 (심볼 해제)
-	StopMm(context.Context, *StopMmRequest) (*StopMmResponse, error)
+	StopMarketMaking(context.Context, *StopMarketMakingRequest) (*StopMarketMakingResponse, error)
 	// MM 일시정지 (호가 산출 중단)
-	PauseMm(context.Context, *PauseMmRequest) (*PauseMmResponse, error)
+	PauseMarketMaking(context.Context, *PauseMarketMakingRequest) (*PauseMarketMakingResponse, error)
 	// MM 재개
-	ResumeMm(context.Context, *ResumeMmRequest) (*ResumeMmResponse, error)
+	ResumeMarketMaking(context.Context, *ResumeMarketMakingRequest) (*ResumeMarketMakingResponse, error)
 	// MM 엔진 리셋 (일초 상태 초기화)
-	ResetMm(context.Context, *ResetMmRequest) (*ResetMmResponse, error)
+	ResetMarketMaking(context.Context, *ResetMarketMakingRequest) (*ResetMarketMakingResponse, error)
 	// MM 설정 업데이트
-	UpdateMmConfig(context.Context, *UpdateMmConfigRequest) (*MmConfiguration, error)
+	UpdateMarketMakingConfig(context.Context, *UpdateMarketMakingConfigRequest) (*MarketMakingConfiguration, error)
 	// MM 실시간 상태 스트리밍 (서버→클라이언트)
-	StreamMmStatus(*StreamMmStatusRequest, MmService_StreamMmStatusServer) error
+	StreamMarketMakingStatus(*StreamMarketMakingStatusRequest, MarketMakingService_StreamMarketMakingStatusServer) error
 	// MM 전용 주문장 조회
-	GetMmOrderbook(context.Context, *GetMmOrderbookRequest) (*MmOrderbookData, error)
+	GetMarketMakingOrderbook(context.Context, *GetMarketMakingOrderbookRequest) (*MarketMakingOrderbookData, error)
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
-	StreamMmOrderbook(*GetMmOrderbookRequest, MmService_StreamMmOrderbookServer) error
-	mustEmbedUnimplementedMmServiceServer()
+	StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error
+	mustEmbedUnimplementedMarketMakingServiceServer()
 }
 
-// UnimplementedMmServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedMmServiceServer struct {
+// UnimplementedMarketMakingServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMarketMakingServiceServer struct {
 }
 
-func (UnimplementedMmServiceServer) ListMm(context.Context, *ListMmRequest) (*ListMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMm not implemented")
+func (UnimplementedMarketMakingServiceServer) ListMarketMaking(context.Context, *ListMarketMakingRequest) (*ListMarketMakingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) CreateMm(context.Context, *CreateMmRequest) (*MmEntry, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateMm not implemented")
+func (UnimplementedMarketMakingServiceServer) GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMakingEntry, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) UpdateMm(context.Context, *UpdateMmRequest) (*MmEntry, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMm not implemented")
+func (UnimplementedMarketMakingServiceServer) CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMakingEntry, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) GetMmStatus(context.Context, *GetMmStatusRequest) (*MmStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMmStatus not implemented")
+func (UnimplementedMarketMakingServiceServer) UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMakingEntry, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) StartMm(context.Context, *StartMmRequest) (*StartMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartMm not implemented")
+func (UnimplementedMarketMakingServiceServer) GetMarketMakingStatus(context.Context, *GetMarketMakingStatusRequest) (*MarketMakingStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMarketMakingStatus not implemented")
 }
-func (UnimplementedMmServiceServer) StopMm(context.Context, *StopMmRequest) (*StopMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StopMm not implemented")
+func (UnimplementedMarketMakingServiceServer) StartMarketMaking(context.Context, *StartMarketMakingRequest) (*StartMarketMakingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) PauseMm(context.Context, *PauseMmRequest) (*PauseMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PauseMm not implemented")
+func (UnimplementedMarketMakingServiceServer) StopMarketMaking(context.Context, *StopMarketMakingRequest) (*StopMarketMakingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) ResumeMm(context.Context, *ResumeMmRequest) (*ResumeMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResumeMm not implemented")
+func (UnimplementedMarketMakingServiceServer) PauseMarketMaking(context.Context, *PauseMarketMakingRequest) (*PauseMarketMakingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PauseMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) ResetMm(context.Context, *ResetMmRequest) (*ResetMmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResetMm not implemented")
+func (UnimplementedMarketMakingServiceServer) ResumeMarketMaking(context.Context, *ResumeMarketMakingRequest) (*ResumeMarketMakingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResumeMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) UpdateMmConfig(context.Context, *UpdateMmConfigRequest) (*MmConfiguration, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMmConfig not implemented")
+func (UnimplementedMarketMakingServiceServer) ResetMarketMaking(context.Context, *ResetMarketMakingRequest) (*ResetMarketMakingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetMarketMaking not implemented")
 }
-func (UnimplementedMmServiceServer) StreamMmStatus(*StreamMmStatusRequest, MmService_StreamMmStatusServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamMmStatus not implemented")
+func (UnimplementedMarketMakingServiceServer) UpdateMarketMakingConfig(context.Context, *UpdateMarketMakingConfigRequest) (*MarketMakingConfiguration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMarketMakingConfig not implemented")
 }
-func (UnimplementedMmServiceServer) GetMmOrderbook(context.Context, *GetMmOrderbookRequest) (*MmOrderbookData, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMmOrderbook not implemented")
+func (UnimplementedMarketMakingServiceServer) StreamMarketMakingStatus(*StreamMarketMakingStatusRequest, MarketMakingService_StreamMarketMakingStatusServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamMarketMakingStatus not implemented")
 }
-func (UnimplementedMmServiceServer) StreamMmOrderbook(*GetMmOrderbookRequest, MmService_StreamMmOrderbookServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamMmOrderbook not implemented")
+func (UnimplementedMarketMakingServiceServer) GetMarketMakingOrderbook(context.Context, *GetMarketMakingOrderbookRequest) (*MarketMakingOrderbookData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMarketMakingOrderbook not implemented")
 }
-func (UnimplementedMmServiceServer) mustEmbedUnimplementedMmServiceServer() {}
+func (UnimplementedMarketMakingServiceServer) StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamMarketMakingOrderbook not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) mustEmbedUnimplementedMarketMakingServiceServer() {}
 
-// UnsafeMmServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MmServiceServer will
+// UnsafeMarketMakingServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MarketMakingServiceServer will
 // result in compilation errors.
-type UnsafeMmServiceServer interface {
-	mustEmbedUnimplementedMmServiceServer()
+type UnsafeMarketMakingServiceServer interface {
+	mustEmbedUnimplementedMarketMakingServiceServer()
 }
 
-func RegisterMmServiceServer(s grpc.ServiceRegistrar, srv MmServiceServer) {
-	s.RegisterService(&MmService_ServiceDesc, srv)
+func RegisterMarketMakingServiceServer(s grpc.ServiceRegistrar, srv MarketMakingServiceServer) {
+	s.RegisterService(&MarketMakingService_ServiceDesc, srv)
 }
 
-func _MmService_ListMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMmRequest)
+func _MarketMakingService_ListMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).ListMm(ctx, in)
+		return srv.(MarketMakingServiceServer).ListMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/ListMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ListMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).ListMm(ctx, req.(*ListMmRequest))
+		return srv.(MarketMakingServiceServer).ListMarketMaking(ctx, req.(*ListMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_CreateMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMmRequest)
+func _MarketMakingService_GetMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).CreateMm(ctx, in)
+		return srv.(MarketMakingServiceServer).GetMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/CreateMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/GetMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).CreateMm(ctx, req.(*CreateMmRequest))
+		return srv.(MarketMakingServiceServer).GetMarketMaking(ctx, req.(*GetMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_UpdateMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMmRequest)
+func _MarketMakingService_CreateMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).UpdateMm(ctx, in)
+		return srv.(MarketMakingServiceServer).CreateMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/UpdateMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/CreateMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).UpdateMm(ctx, req.(*UpdateMmRequest))
+		return srv.(MarketMakingServiceServer).CreateMarketMaking(ctx, req.(*CreateMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_GetMmStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMmStatusRequest)
+func _MarketMakingService_UpdateMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).GetMmStatus(ctx, in)
+		return srv.(MarketMakingServiceServer).UpdateMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/GetMmStatus",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/UpdateMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).GetMmStatus(ctx, req.(*GetMmStatusRequest))
+		return srv.(MarketMakingServiceServer).UpdateMarketMaking(ctx, req.(*UpdateMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_StartMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartMmRequest)
+func _MarketMakingService_GetMarketMakingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMarketMakingStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).StartMm(ctx, in)
+		return srv.(MarketMakingServiceServer).GetMarketMakingStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/StartMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).StartMm(ctx, req.(*StartMmRequest))
+		return srv.(MarketMakingServiceServer).GetMarketMakingStatus(ctx, req.(*GetMarketMakingStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_StopMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopMmRequest)
+func _MarketMakingService_StartMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).StopMm(ctx, in)
+		return srv.(MarketMakingServiceServer).StartMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/StopMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/StartMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).StopMm(ctx, req.(*StopMmRequest))
+		return srv.(MarketMakingServiceServer).StartMarketMaking(ctx, req.(*StartMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_PauseMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PauseMmRequest)
+func _MarketMakingService_StopMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).PauseMm(ctx, in)
+		return srv.(MarketMakingServiceServer).StopMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/PauseMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/StopMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).PauseMm(ctx, req.(*PauseMmRequest))
+		return srv.(MarketMakingServiceServer).StopMarketMaking(ctx, req.(*StopMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_ResumeMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResumeMmRequest)
+func _MarketMakingService_PauseMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PauseMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).ResumeMm(ctx, in)
+		return srv.(MarketMakingServiceServer).PauseMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/ResumeMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/PauseMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).ResumeMm(ctx, req.(*ResumeMmRequest))
+		return srv.(MarketMakingServiceServer).PauseMarketMaking(ctx, req.(*PauseMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_ResetMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResetMmRequest)
+func _MarketMakingService_ResumeMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResumeMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).ResetMm(ctx, in)
+		return srv.(MarketMakingServiceServer).ResumeMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/ResetMm",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).ResetMm(ctx, req.(*ResetMmRequest))
+		return srv.(MarketMakingServiceServer).ResumeMarketMaking(ctx, req.(*ResumeMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_UpdateMmConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMmConfigRequest)
+func _MarketMakingService_ResetMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetMarketMakingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).UpdateMmConfig(ctx, in)
+		return srv.(MarketMakingServiceServer).ResetMarketMaking(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/UpdateMmConfig",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ResetMarketMaking",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).UpdateMmConfig(ctx, req.(*UpdateMmConfigRequest))
+		return srv.(MarketMakingServiceServer).ResetMarketMaking(ctx, req.(*ResetMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_StreamMmStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamMmStatusRequest)
+func _MarketMakingService_UpdateMarketMakingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMarketMakingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).UpdateMarketMakingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).UpdateMarketMakingConfig(ctx, req.(*UpdateMarketMakingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MarketMakingService_StreamMarketMakingStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamMarketMakingStatusRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(MmServiceServer).StreamMmStatus(m, &mmServiceStreamMmStatusServer{stream})
+	return srv.(MarketMakingServiceServer).StreamMarketMakingStatus(m, &marketMakingServiceStreamMarketMakingStatusServer{stream})
 }
 
-type MmService_StreamMmStatusServer interface {
-	Send(*MmStatus) error
+type MarketMakingService_StreamMarketMakingStatusServer interface {
+	Send(*MarketMakingStatus) error
 	grpc.ServerStream
 }
 
-type mmServiceStreamMmStatusServer struct {
+type marketMakingServiceStreamMarketMakingStatusServer struct {
 	grpc.ServerStream
 }
 
-func (x *mmServiceStreamMmStatusServer) Send(m *MmStatus) error {
+func (x *marketMakingServiceStreamMarketMakingStatusServer) Send(m *MarketMakingStatus) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _MmService_GetMmOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMmOrderbookRequest)
+func _MarketMakingService_GetMarketMakingOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMarketMakingOrderbookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MmServiceServer).GetMmOrderbook(ctx, in)
+		return srv.(MarketMakingServiceServer).GetMarketMakingOrderbook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MmService/GetMmOrderbook",
+		FullMethod: "/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MmServiceServer).GetMmOrderbook(ctx, req.(*GetMmOrderbookRequest))
+		return srv.(MarketMakingServiceServer).GetMarketMakingOrderbook(ctx, req.(*GetMarketMakingOrderbookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MmService_StreamMmOrderbook_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetMmOrderbookRequest)
+func _MarketMakingService_StreamMarketMakingOrderbook_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetMarketMakingOrderbookRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(MmServiceServer).StreamMmOrderbook(m, &mmServiceStreamMmOrderbookServer{stream})
+	return srv.(MarketMakingServiceServer).StreamMarketMakingOrderbook(m, &marketMakingServiceStreamMarketMakingOrderbookServer{stream})
 }
 
-type MmService_StreamMmOrderbookServer interface {
-	Send(*MmOrderbookData) error
+type MarketMakingService_StreamMarketMakingOrderbookServer interface {
+	Send(*MarketMakingOrderbookData) error
 	grpc.ServerStream
 }
 
-type mmServiceStreamMmOrderbookServer struct {
+type marketMakingServiceStreamMarketMakingOrderbookServer struct {
 	grpc.ServerStream
 }
 
-func (x *mmServiceStreamMmOrderbookServer) Send(m *MmOrderbookData) error {
+func (x *marketMakingServiceStreamMarketMakingOrderbookServer) Send(m *MarketMakingOrderbookData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-// MmService_ServiceDesc is the grpc.ServiceDesc for MmService service.
+// MarketMakingService_ServiceDesc is the grpc.ServiceDesc for MarketMakingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var MmService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "kdo.v1.mm.MmService",
-	HandlerType: (*MmServiceServer)(nil),
+var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "kdo.v1.mm.MarketMakingService",
+	HandlerType: (*MarketMakingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListMm",
-			Handler:    _MmService_ListMm_Handler,
+			MethodName: "ListMarketMaking",
+			Handler:    _MarketMakingService_ListMarketMaking_Handler,
 		},
 		{
-			MethodName: "CreateMm",
-			Handler:    _MmService_CreateMm_Handler,
+			MethodName: "GetMarketMaking",
+			Handler:    _MarketMakingService_GetMarketMaking_Handler,
 		},
 		{
-			MethodName: "UpdateMm",
-			Handler:    _MmService_UpdateMm_Handler,
+			MethodName: "CreateMarketMaking",
+			Handler:    _MarketMakingService_CreateMarketMaking_Handler,
 		},
 		{
-			MethodName: "GetMmStatus",
-			Handler:    _MmService_GetMmStatus_Handler,
+			MethodName: "UpdateMarketMaking",
+			Handler:    _MarketMakingService_UpdateMarketMaking_Handler,
 		},
 		{
-			MethodName: "StartMm",
-			Handler:    _MmService_StartMm_Handler,
+			MethodName: "GetMarketMakingStatus",
+			Handler:    _MarketMakingService_GetMarketMakingStatus_Handler,
 		},
 		{
-			MethodName: "StopMm",
-			Handler:    _MmService_StopMm_Handler,
+			MethodName: "StartMarketMaking",
+			Handler:    _MarketMakingService_StartMarketMaking_Handler,
 		},
 		{
-			MethodName: "PauseMm",
-			Handler:    _MmService_PauseMm_Handler,
+			MethodName: "StopMarketMaking",
+			Handler:    _MarketMakingService_StopMarketMaking_Handler,
 		},
 		{
-			MethodName: "ResumeMm",
-			Handler:    _MmService_ResumeMm_Handler,
+			MethodName: "PauseMarketMaking",
+			Handler:    _MarketMakingService_PauseMarketMaking_Handler,
 		},
 		{
-			MethodName: "ResetMm",
-			Handler:    _MmService_ResetMm_Handler,
+			MethodName: "ResumeMarketMaking",
+			Handler:    _MarketMakingService_ResumeMarketMaking_Handler,
 		},
 		{
-			MethodName: "UpdateMmConfig",
-			Handler:    _MmService_UpdateMmConfig_Handler,
+			MethodName: "ResetMarketMaking",
+			Handler:    _MarketMakingService_ResetMarketMaking_Handler,
 		},
 		{
-			MethodName: "GetMmOrderbook",
-			Handler:    _MmService_GetMmOrderbook_Handler,
+			MethodName: "UpdateMarketMakingConfig",
+			Handler:    _MarketMakingService_UpdateMarketMakingConfig_Handler,
+		},
+		{
+			MethodName: "GetMarketMakingOrderbook",
+			Handler:    _MarketMakingService_GetMarketMakingOrderbook_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "StreamMmStatus",
-			Handler:       _MmService_StreamMmStatus_Handler,
+			StreamName:    "StreamMarketMakingStatus",
+			Handler:       _MarketMakingService_StreamMarketMakingStatus_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamMmOrderbook",
-			Handler:       _MmService_StreamMmOrderbook_Handler,
+			StreamName:    "StreamMarketMakingOrderbook",
+			Handler:       _MarketMakingService_StreamMarketMakingOrderbook_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -1,5 +1,5 @@
 // @generated
-impl serde::Serialize for CreateMmRequest {
+impl serde::Serialize for CreateMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -13,7 +13,7 @@ impl serde::Serialize for CreateMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.CreateMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.CreateMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -23,7 +23,7 @@ impl serde::Serialize for CreateMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for CreateMmRequest {
+impl<'de> serde::Deserialize<'de> for CreateMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -71,13 +71,13 @@ impl<'de> serde::Deserialize<'de> for CreateMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = CreateMmRequest;
+            type Value = CreateMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.CreateMmRequest")
+                formatter.write_str("struct kdo.v1.mm.CreateMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CreateMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CreateMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -102,16 +102,16 @@ impl<'de> serde::Deserialize<'de> for CreateMmRequest {
                         }
                     }
                 }
-                Ok(CreateMmRequest {
+                Ok(CreateMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                     config: config__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.CreateMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.CreateMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for GetMmOrderbookRequest {
+impl serde::Serialize for GetMarketMakingOrderbookRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -122,14 +122,14 @@ impl serde::Serialize for GetMmOrderbookRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetMmOrderbookRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetMarketMakingOrderbookRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for GetMmOrderbookRequest {
+impl<'de> serde::Deserialize<'de> for GetMarketMakingOrderbookRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -174,13 +174,13 @@ impl<'de> serde::Deserialize<'de> for GetMmOrderbookRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GetMmOrderbookRequest;
+            type Value = GetMarketMakingOrderbookRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.GetMmOrderbookRequest")
+                formatter.write_str("struct kdo.v1.mm.GetMarketMakingOrderbookRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMmOrderbookRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMarketMakingOrderbookRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -198,15 +198,15 @@ impl<'de> serde::Deserialize<'de> for GetMmOrderbookRequest {
                         }
                     }
                 }
-                Ok(GetMmOrderbookRequest {
+                Ok(GetMarketMakingOrderbookRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.GetMmOrderbookRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.GetMarketMakingOrderbookRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for GetMmStatusRequest {
+impl serde::Serialize for GetMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -217,14 +217,14 @@ impl serde::Serialize for GetMmStatusRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetMmStatusRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for GetMmStatusRequest {
+impl<'de> serde::Deserialize<'de> for GetMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -269,13 +269,13 @@ impl<'de> serde::Deserialize<'de> for GetMmStatusRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GetMmStatusRequest;
+            type Value = GetMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.GetMmStatusRequest")
+                formatter.write_str("struct kdo.v1.mm.GetMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMmStatusRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -293,15 +293,110 @@ impl<'de> serde::Deserialize<'de> for GetMmStatusRequest {
                         }
                     }
                 }
-                Ok(GetMmStatusRequest {
+                Ok(GetMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.GetMmStatusRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.GetMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListMmRequest {
+impl serde::Serialize for GetMarketMakingStatusRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetMarketMakingStatusRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetMarketMakingStatusRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetMarketMakingStatusRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.GetMarketMakingStatusRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMarketMakingStatusRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetMarketMakingStatusRequest {
+                    symbol: symbol__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.GetMarketMakingStatusRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -315,7 +410,7 @@ impl serde::Serialize for ListMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMarketMakingRequest", len)?;
         if let Some(v) = self.page_size.as_ref() {
             struct_ser.serialize_field("page_size", v)?;
         }
@@ -325,7 +420,7 @@ impl serde::Serialize for ListMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListMmRequest {
+impl<'de> serde::Deserialize<'de> for ListMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -375,13 +470,13 @@ impl<'de> serde::Deserialize<'de> for ListMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListMmRequest;
+            type Value = ListMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ListMmRequest")
+                formatter.write_str("struct kdo.v1.mm.ListMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -408,16 +503,16 @@ impl<'de> serde::Deserialize<'de> for ListMmRequest {
                         }
                     }
                 }
-                Ok(ListMmRequest {
+                Ok(ListMarketMakingRequest {
                     page_size: page_size__,
                     page_token: page_token__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.ListMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.ListMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListMmResponse {
+impl serde::Serialize for ListMarketMakingResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -431,7 +526,7 @@ impl serde::Serialize for ListMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMarketMakingResponse", len)?;
         if true {
             struct_ser.serialize_field("entries", &self.entries)?;
         }
@@ -441,7 +536,7 @@ impl serde::Serialize for ListMmResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ListMmResponse {
+impl<'de> serde::Deserialize<'de> for ListMarketMakingResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -490,13 +585,13 @@ impl<'de> serde::Deserialize<'de> for ListMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListMmResponse;
+            type Value = ListMarketMakingResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ListMmResponse")
+                formatter.write_str("struct kdo.v1.mm.ListMarketMakingResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMarketMakingResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -521,16 +616,16 @@ impl<'de> serde::Deserialize<'de> for ListMmResponse {
                         }
                     }
                 }
-                Ok(ListMmResponse {
+                Ok(ListMarketMakingResponse {
                     entries: entries__.unwrap_or_default(),
                     next_page_token: next_page_token__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.ListMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.ListMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmConfiguration {
+impl serde::Serialize for MarketMakingConfiguration {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -571,7 +666,7 @@ impl serde::Serialize for MmConfiguration {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmConfiguration", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("pricing", &self.pricing)?;
         }
@@ -614,7 +709,7 @@ impl serde::Serialize for MmConfiguration {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmConfiguration {
+impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -695,13 +790,13 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmConfiguration;
+            type Value = MarketMakingConfiguration;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmConfiguration")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingConfiguration")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmConfiguration, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingConfiguration, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -795,7 +890,7 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                         }
                     }
                 }
-                Ok(MmConfiguration {
+                Ok(MarketMakingConfiguration {
                     pricing: pricing__.unwrap_or_default(),
                     skew: skew__,
                     trade_analyzer: trade_analyzer__,
@@ -810,10 +905,10 @@ impl<'de> serde::Deserialize<'de> for MmConfiguration {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmConfiguration", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingConfiguration", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmEntry {
+impl serde::Serialize for MarketMakingEntry {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -833,12 +928,12 @@ impl serde::Serialize for MmEntry {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmEntry", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingEntry", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            let v = MmState::try_from(self.state)
+            let v = MarketMakingState::try_from(self.state)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
             struct_ser.serialize_field("state", &v)?;
         }
@@ -851,7 +946,7 @@ impl serde::Serialize for MmEntry {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmEntry {
+impl<'de> serde::Deserialize<'de> for MarketMakingEntry {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -906,13 +1001,13 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmEntry;
+            type Value = MarketMakingEntry;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmEntry")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingEntry")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmEntry, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingEntry, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -932,7 +1027,7 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
                             if state__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("state"));
                             }
-                            state__ = Some(map_.next_value::<MmState>()? as i32);
+                            state__ = Some(map_.next_value::<MarketMakingState>()? as i32);
                         }
                         GeneratedField::Config => {
                             if config__.is_some() {
@@ -951,7 +1046,7 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
                         }
                     }
                 }
-                Ok(MmEntry {
+                Ok(MarketMakingEntry {
                     symbol: symbol__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     config: config__,
@@ -959,10 +1054,10 @@ impl<'de> serde::Deserialize<'de> for MmEntry {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmEntry", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingEntry", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmExposureGuardConfig {
+impl serde::Serialize for MarketMakingExposureGuardConfig {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -979,7 +1074,7 @@ impl serde::Serialize for MmExposureGuardConfig {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmExposureGuardConfig", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingExposureGuardConfig", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
@@ -992,7 +1087,7 @@ impl serde::Serialize for MmExposureGuardConfig {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmExposureGuardConfig {
+impl<'de> serde::Deserialize<'de> for MarketMakingExposureGuardConfig {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1045,13 +1140,13 @@ impl<'de> serde::Deserialize<'de> for MmExposureGuardConfig {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmExposureGuardConfig;
+            type Value = MarketMakingExposureGuardConfig;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmExposureGuardConfig")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingExposureGuardConfig")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmExposureGuardConfig, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingExposureGuardConfig, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1087,17 +1182,17 @@ impl<'de> serde::Deserialize<'de> for MmExposureGuardConfig {
                         }
                     }
                 }
-                Ok(MmExposureGuardConfig {
+                Ok(MarketMakingExposureGuardConfig {
                     enabled: enabled__.unwrap_or_default(),
                     reduce_start_multiple: reduce_start_multiple__.unwrap_or_default(),
                     max_inventory_multiple: max_inventory_multiple__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmExposureGuardConfig", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingExposureGuardConfig", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmInventoryBalancerConfig {
+impl serde::Serialize for MarketMakingInventoryBalancerConfig {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1120,7 +1215,7 @@ impl serde::Serialize for MmInventoryBalancerConfig {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmInventoryBalancerConfig", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingInventoryBalancerConfig", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
@@ -1139,7 +1234,7 @@ impl serde::Serialize for MmInventoryBalancerConfig {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmInventoryBalancerConfig {
+impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancerConfig {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1200,13 +1295,13 @@ impl<'de> serde::Deserialize<'de> for MmInventoryBalancerConfig {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmInventoryBalancerConfig;
+            type Value = MarketMakingInventoryBalancerConfig;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmInventoryBalancerConfig")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingInventoryBalancerConfig")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmInventoryBalancerConfig, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingInventoryBalancerConfig, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1260,7 +1355,7 @@ impl<'de> serde::Deserialize<'de> for MmInventoryBalancerConfig {
                         }
                     }
                 }
-                Ok(MmInventoryBalancerConfig {
+                Ok(MarketMakingInventoryBalancerConfig {
                     enabled: enabled__.unwrap_or_default(),
                     trigger_multiple: trigger_multiple__.unwrap_or_default(),
                     price_skew_ticks: price_skew_ticks__.unwrap_or_default(),
@@ -1269,10 +1364,10 @@ impl<'de> serde::Deserialize<'de> for MmInventoryBalancerConfig {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmInventoryBalancerConfig", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingInventoryBalancerConfig", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmMomentumConfig {
+impl serde::Serialize for MarketMakingMomentumConfig {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1304,7 +1399,7 @@ impl serde::Serialize for MmMomentumConfig {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmMomentumConfig", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingMomentumConfig", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
@@ -1334,7 +1429,7 @@ impl serde::Serialize for MmMomentumConfig {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmMomentumConfig {
+impl<'de> serde::Deserialize<'de> for MarketMakingMomentumConfig {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1407,13 +1502,13 @@ impl<'de> serde::Deserialize<'de> for MmMomentumConfig {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmMomentumConfig;
+            type Value = MarketMakingMomentumConfig;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmMomentumConfig")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingMomentumConfig")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmMomentumConfig, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingMomentumConfig, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1492,7 +1587,7 @@ impl<'de> serde::Deserialize<'de> for MmMomentumConfig {
                         }
                     }
                 }
-                Ok(MmMomentumConfig {
+                Ok(MarketMakingMomentumConfig {
                     enabled: enabled__.unwrap_or_default(),
                     window_ms: window_ms__.unwrap_or_default(),
                     trigger_ticks: trigger_ticks__.unwrap_or_default(),
@@ -1504,10 +1599,10 @@ impl<'de> serde::Deserialize<'de> for MmMomentumConfig {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmMomentumConfig", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingMomentumConfig", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmOrderbookData {
+impl serde::Serialize for MarketMakingOrderbookData {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1527,7 +1622,7 @@ impl serde::Serialize for MmOrderbookData {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmOrderbookData", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingOrderbookData", len)?;
         if true {
             struct_ser.serialize_field("bid_prices", &self.bid_prices)?;
         }
@@ -1543,7 +1638,7 @@ impl serde::Serialize for MmOrderbookData {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmOrderbookData {
+impl<'de> serde::Deserialize<'de> for MarketMakingOrderbookData {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1601,13 +1696,13 @@ impl<'de> serde::Deserialize<'de> for MmOrderbookData {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmOrderbookData;
+            type Value = MarketMakingOrderbookData;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmOrderbookData")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingOrderbookData")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmOrderbookData, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingOrderbookData, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1652,7 +1747,7 @@ impl<'de> serde::Deserialize<'de> for MmOrderbookData {
                         }
                     }
                 }
-                Ok(MmOrderbookData {
+                Ok(MarketMakingOrderbookData {
                     bid_prices: bid_prices__.unwrap_or_default(),
                     ask_prices: ask_prices__.unwrap_or_default(),
                     bid_quantities: bid_quantities__.unwrap_or_default(),
@@ -1660,10 +1755,10 @@ impl<'de> serde::Deserialize<'de> for MmOrderbookData {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmOrderbookData", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingOrderbookData", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmScreeningConfig {
+impl serde::Serialize for MarketMakingScreeningConfig {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1680,7 +1775,7 @@ impl serde::Serialize for MmScreeningConfig {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmScreeningConfig", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingScreeningConfig", len)?;
         if true {
             struct_ser.serialize_field("max_spread_width_ticks", &self.max_spread_width_ticks)?;
         }
@@ -1697,7 +1792,7 @@ impl serde::Serialize for MmScreeningConfig {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmScreeningConfig {
+impl<'de> serde::Deserialize<'de> for MarketMakingScreeningConfig {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1751,13 +1846,13 @@ impl<'de> serde::Deserialize<'de> for MmScreeningConfig {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmScreeningConfig;
+            type Value = MarketMakingScreeningConfig;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmScreeningConfig")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingScreeningConfig")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmScreeningConfig, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingScreeningConfig, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1795,17 +1890,17 @@ impl<'de> serde::Deserialize<'de> for MmScreeningConfig {
                         }
                     }
                 }
-                Ok(MmScreeningConfig {
+                Ok(MarketMakingScreeningConfig {
                     max_spread_width_ticks: max_spread_width_ticks__.unwrap_or_default(),
                     min_price: min_price__.unwrap_or_default(),
                     max_price: max_price__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmScreeningConfig", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingScreeningConfig", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmSkewConfig {
+impl serde::Serialize for MarketMakingSkewConfig {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1822,7 +1917,7 @@ impl serde::Serialize for MmSkewConfig {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmSkewConfig", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingSkewConfig", len)?;
         if true {
             struct_ser.serialize_field("mode", &self.mode)?;
         }
@@ -1837,7 +1932,7 @@ impl serde::Serialize for MmSkewConfig {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmSkewConfig {
+impl<'de> serde::Deserialize<'de> for MarketMakingSkewConfig {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1890,13 +1985,13 @@ impl<'de> serde::Deserialize<'de> for MmSkewConfig {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmSkewConfig;
+            type Value = MarketMakingSkewConfig;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmSkewConfig")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingSkewConfig")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmSkewConfig, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingSkewConfig, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1932,48 +2027,48 @@ impl<'de> serde::Deserialize<'de> for MmSkewConfig {
                         }
                     }
                 }
-                Ok(MmSkewConfig {
+                Ok(MarketMakingSkewConfig {
                     mode: mode__.unwrap_or_default(),
                     trigger_amt: trigger_amt__.unwrap_or_default(),
                     skew_unit: skew_unit__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmSkewConfig", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingSkewConfig", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmState {
+impl serde::Serialize for MarketMakingState {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
         let variant = match self {
-            Self::Unspecified => "MM_STATE_UNSPECIFIED",
-            Self::Idle => "MM_STATE_IDLE",
-            Self::Running => "MM_STATE_RUNNING",
-            Self::Paused => "MM_STATE_PAUSED",
+            Self::Unspecified => "MARKET_MAKING_STATE_UNSPECIFIED",
+            Self::Idle => "MARKET_MAKING_STATE_IDLE",
+            Self::Running => "MARKET_MAKING_STATE_RUNNING",
+            Self::Paused => "MARKET_MAKING_STATE_PAUSED",
         };
         serializer.serialize_str(variant)
     }
 }
-impl<'de> serde::Deserialize<'de> for MmState {
+impl<'de> serde::Deserialize<'de> for MarketMakingState {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "MM_STATE_UNSPECIFIED",
-            "MM_STATE_IDLE",
-            "MM_STATE_RUNNING",
-            "MM_STATE_PAUSED",
+            "MARKET_MAKING_STATE_UNSPECIFIED",
+            "MARKET_MAKING_STATE_IDLE",
+            "MARKET_MAKING_STATE_RUNNING",
+            "MARKET_MAKING_STATE_PAUSED",
         ];
 
         struct GeneratedVisitor;
 
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmState;
+            type Value = MarketMakingState;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 write!(formatter, "expected one of: {:?}", &FIELDS)
@@ -2008,10 +2103,10 @@ impl<'de> serde::Deserialize<'de> for MmState {
                 E: serde::de::Error,
             {
                 match value {
-                    "MM_STATE_UNSPECIFIED" => Ok(MmState::Unspecified),
-                    "MM_STATE_IDLE" => Ok(MmState::Idle),
-                    "MM_STATE_RUNNING" => Ok(MmState::Running),
-                    "MM_STATE_PAUSED" => Ok(MmState::Paused),
+                    "MARKET_MAKING_STATE_UNSPECIFIED" => Ok(MarketMakingState::Unspecified),
+                    "MARKET_MAKING_STATE_IDLE" => Ok(MarketMakingState::Idle),
+                    "MARKET_MAKING_STATE_RUNNING" => Ok(MarketMakingState::Running),
+                    "MARKET_MAKING_STATE_PAUSED" => Ok(MarketMakingState::Paused),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -2019,7 +2114,7 @@ impl<'de> serde::Deserialize<'de> for MmState {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmStatus {
+impl serde::Serialize for MarketMakingStatus {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2069,12 +2164,12 @@ impl serde::Serialize for MmStatus {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStatus", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingStatus", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            let v = MmState::try_from(self.state)
+            let v = MarketMakingState::try_from(self.state)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
             struct_ser.serialize_field("state", &v)?;
         }
@@ -2123,7 +2218,7 @@ impl serde::Serialize for MmStatus {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmStatus {
+impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2216,13 +2311,13 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmStatus;
+            type Value = MarketMakingStatus;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmStatus")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingStatus")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmStatus, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingStatus, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -2252,7 +2347,7 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
                             if state__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("state"));
                             }
-                            state__ = Some(map_.next_value::<MmState>()? as i32);
+                            state__ = Some(map_.next_value::<MarketMakingState>()? as i32);
                         }
                         GeneratedField::Config => {
                             if config__.is_some() {
@@ -2345,7 +2440,7 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
                         }
                     }
                 }
-                Ok(MmStatus {
+                Ok(MarketMakingStatus {
                     symbol: symbol__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     config: config__,
@@ -2363,10 +2458,10 @@ impl<'de> serde::Deserialize<'de> for MmStatus {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmStatus", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingStatus", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmTradeAnalyzerConfig {
+impl serde::Serialize for MarketMakingTradeAnalyzerConfig {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2389,7 +2484,7 @@ impl serde::Serialize for MmTradeAnalyzerConfig {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmTradeAnalyzerConfig", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingTradeAnalyzerConfig", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
@@ -2408,7 +2503,7 @@ impl serde::Serialize for MmTradeAnalyzerConfig {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmTradeAnalyzerConfig {
+impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzerConfig {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2468,13 +2563,13 @@ impl<'de> serde::Deserialize<'de> for MmTradeAnalyzerConfig {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmTradeAnalyzerConfig;
+            type Value = MarketMakingTradeAnalyzerConfig;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmTradeAnalyzerConfig")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingTradeAnalyzerConfig")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmTradeAnalyzerConfig, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingTradeAnalyzerConfig, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -2528,7 +2623,7 @@ impl<'de> serde::Deserialize<'de> for MmTradeAnalyzerConfig {
                         }
                     }
                 }
-                Ok(MmTradeAnalyzerConfig {
+                Ok(MarketMakingTradeAnalyzerConfig {
                     enabled: enabled__.unwrap_or_default(),
                     window: window__.unwrap_or_default(),
                     ratio_threshold: ratio_threshold__.unwrap_or_default(),
@@ -2537,10 +2632,10 @@ impl<'de> serde::Deserialize<'de> for MmTradeAnalyzerConfig {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmTradeAnalyzerConfig", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingTradeAnalyzerConfig", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for PauseMmRequest {
+impl serde::Serialize for PauseMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2551,14 +2646,14 @@ impl serde::Serialize for PauseMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.PauseMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.PauseMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for PauseMmRequest {
+impl<'de> serde::Deserialize<'de> for PauseMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2603,13 +2698,13 @@ impl<'de> serde::Deserialize<'de> for PauseMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PauseMmRequest;
+            type Value = PauseMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.PauseMmRequest")
+                formatter.write_str("struct kdo.v1.mm.PauseMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PauseMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PauseMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -2627,15 +2722,15 @@ impl<'de> serde::Deserialize<'de> for PauseMmRequest {
                         }
                     }
                 }
-                Ok(PauseMmRequest {
+                Ok(PauseMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.PauseMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.PauseMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for PauseMmResponse {
+impl serde::Serialize for PauseMarketMakingResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2646,14 +2741,14 @@ impl serde::Serialize for PauseMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.PauseMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.PauseMarketMakingResponse", len)?;
         if true {
             struct_ser.serialize_field("message", &self.message)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for PauseMmResponse {
+impl<'de> serde::Deserialize<'de> for PauseMarketMakingResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2698,13 +2793,13 @@ impl<'de> serde::Deserialize<'de> for PauseMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PauseMmResponse;
+            type Value = PauseMarketMakingResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.PauseMmResponse")
+                formatter.write_str("struct kdo.v1.mm.PauseMarketMakingResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PauseMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PauseMarketMakingResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -2722,15 +2817,15 @@ impl<'de> serde::Deserialize<'de> for PauseMmResponse {
                         }
                     }
                 }
-                Ok(PauseMmResponse {
+                Ok(PauseMarketMakingResponse {
                     message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.PauseMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.PauseMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ResetMmRequest {
+impl serde::Serialize for ResetMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2741,14 +2836,14 @@ impl serde::Serialize for ResetMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResetMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResetMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ResetMmRequest {
+impl<'de> serde::Deserialize<'de> for ResetMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2793,13 +2888,13 @@ impl<'de> serde::Deserialize<'de> for ResetMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ResetMmRequest;
+            type Value = ResetMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ResetMmRequest")
+                formatter.write_str("struct kdo.v1.mm.ResetMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResetMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResetMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -2817,15 +2912,15 @@ impl<'de> serde::Deserialize<'de> for ResetMmRequest {
                         }
                     }
                 }
-                Ok(ResetMmRequest {
+                Ok(ResetMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.ResetMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.ResetMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ResetMmResponse {
+impl serde::Serialize for ResetMarketMakingResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2839,7 +2934,7 @@ impl serde::Serialize for ResetMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResetMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResetMarketMakingResponse", len)?;
         if true {
             struct_ser.serialize_field("reset_count", &self.reset_count)?;
         }
@@ -2849,7 +2944,7 @@ impl serde::Serialize for ResetMmResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ResetMmResponse {
+impl<'de> serde::Deserialize<'de> for ResetMarketMakingResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2898,13 +2993,13 @@ impl<'de> serde::Deserialize<'de> for ResetMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ResetMmResponse;
+            type Value = ResetMarketMakingResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ResetMmResponse")
+                formatter.write_str("struct kdo.v1.mm.ResetMarketMakingResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResetMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResetMarketMakingResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -2931,16 +3026,16 @@ impl<'de> serde::Deserialize<'de> for ResetMmResponse {
                         }
                     }
                 }
-                Ok(ResetMmResponse {
+                Ok(ResetMarketMakingResponse {
                     reset_count: reset_count__.unwrap_or_default(),
                     message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.ResetMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.ResetMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ResumeMmRequest {
+impl serde::Serialize for ResumeMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2951,14 +3046,14 @@ impl serde::Serialize for ResumeMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResumeMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResumeMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ResumeMmRequest {
+impl<'de> serde::Deserialize<'de> for ResumeMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3003,13 +3098,13 @@ impl<'de> serde::Deserialize<'de> for ResumeMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ResumeMmRequest;
+            type Value = ResumeMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ResumeMmRequest")
+                formatter.write_str("struct kdo.v1.mm.ResumeMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResumeMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResumeMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3027,15 +3122,15 @@ impl<'de> serde::Deserialize<'de> for ResumeMmRequest {
                         }
                     }
                 }
-                Ok(ResumeMmRequest {
+                Ok(ResumeMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.ResumeMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.ResumeMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ResumeMmResponse {
+impl serde::Serialize for ResumeMarketMakingResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3046,14 +3141,14 @@ impl serde::Serialize for ResumeMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResumeMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResumeMarketMakingResponse", len)?;
         if true {
             struct_ser.serialize_field("message", &self.message)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ResumeMmResponse {
+impl<'de> serde::Deserialize<'de> for ResumeMarketMakingResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3098,13 +3193,13 @@ impl<'de> serde::Deserialize<'de> for ResumeMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ResumeMmResponse;
+            type Value = ResumeMarketMakingResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ResumeMmResponse")
+                formatter.write_str("struct kdo.v1.mm.ResumeMarketMakingResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResumeMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResumeMarketMakingResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3122,15 +3217,15 @@ impl<'de> serde::Deserialize<'de> for ResumeMmResponse {
                         }
                     }
                 }
-                Ok(ResumeMmResponse {
+                Ok(ResumeMarketMakingResponse {
                     message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.ResumeMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.ResumeMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StartMmRequest {
+impl serde::Serialize for StartMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3144,7 +3239,7 @@ impl serde::Serialize for StartMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StartMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StartMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -3154,7 +3249,7 @@ impl serde::Serialize for StartMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StartMmRequest {
+impl<'de> serde::Deserialize<'de> for StartMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3202,13 +3297,13 @@ impl<'de> serde::Deserialize<'de> for StartMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StartMmRequest;
+            type Value = StartMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.StartMmRequest")
+                formatter.write_str("struct kdo.v1.mm.StartMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3233,16 +3328,16 @@ impl<'de> serde::Deserialize<'de> for StartMmRequest {
                         }
                     }
                 }
-                Ok(StartMmRequest {
+                Ok(StartMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                     config: config__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.StartMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.StartMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StartMmResponse {
+impl serde::Serialize for StartMarketMakingResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3256,7 +3351,7 @@ impl serde::Serialize for StartMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StartMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StartMarketMakingResponse", len)?;
         if let Some(v) = self.status.as_ref() {
             struct_ser.serialize_field("status", v)?;
         }
@@ -3266,7 +3361,7 @@ impl serde::Serialize for StartMmResponse {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StartMmResponse {
+impl<'de> serde::Deserialize<'de> for StartMarketMakingResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3314,13 +3409,13 @@ impl<'de> serde::Deserialize<'de> for StartMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StartMmResponse;
+            type Value = StartMarketMakingResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.StartMmResponse")
+                formatter.write_str("struct kdo.v1.mm.StartMarketMakingResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StartMarketMakingResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3345,16 +3440,16 @@ impl<'de> serde::Deserialize<'de> for StartMmResponse {
                         }
                     }
                 }
-                Ok(StartMmResponse {
+                Ok(StartMarketMakingResponse {
                     status: status__,
                     message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.StartMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.StartMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StopMmRequest {
+impl serde::Serialize for StopMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3365,14 +3460,14 @@ impl serde::Serialize for StopMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StopMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StopMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StopMmRequest {
+impl<'de> serde::Deserialize<'de> for StopMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3417,13 +3512,13 @@ impl<'de> serde::Deserialize<'de> for StopMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StopMmRequest;
+            type Value = StopMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.StopMmRequest")
+                formatter.write_str("struct kdo.v1.mm.StopMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3441,15 +3536,15 @@ impl<'de> serde::Deserialize<'de> for StopMmRequest {
                         }
                     }
                 }
-                Ok(StopMmRequest {
+                Ok(StopMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.StopMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.StopMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StopMmResponse {
+impl serde::Serialize for StopMarketMakingResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3460,14 +3555,14 @@ impl serde::Serialize for StopMmResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StopMmResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StopMarketMakingResponse", len)?;
         if true {
             struct_ser.serialize_field("message", &self.message)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StopMmResponse {
+impl<'de> serde::Deserialize<'de> for StopMarketMakingResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3512,13 +3607,13 @@ impl<'de> serde::Deserialize<'de> for StopMmResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StopMmResponse;
+            type Value = StopMarketMakingResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.StopMmResponse")
+                formatter.write_str("struct kdo.v1.mm.StopMarketMakingResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopMmResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopMarketMakingResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3536,15 +3631,15 @@ impl<'de> serde::Deserialize<'de> for StopMmResponse {
                         }
                     }
                 }
-                Ok(StopMmResponse {
+                Ok(StopMarketMakingResponse {
                     message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.StopMmResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.StopMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StreamMmStatusRequest {
+impl serde::Serialize for StreamMarketMakingStatusRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3555,14 +3650,14 @@ impl serde::Serialize for StreamMmStatusRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StreamMmStatusRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StreamMarketMakingStatusRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StreamMmStatusRequest {
+impl<'de> serde::Deserialize<'de> for StreamMarketMakingStatusRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3607,13 +3702,13 @@ impl<'de> serde::Deserialize<'de> for StreamMmStatusRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StreamMmStatusRequest;
+            type Value = StreamMarketMakingStatusRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.StreamMmStatusRequest")
+                formatter.write_str("struct kdo.v1.mm.StreamMarketMakingStatusRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamMmStatusRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamMarketMakingStatusRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3631,15 +3726,15 @@ impl<'de> serde::Deserialize<'de> for StreamMmStatusRequest {
                         }
                     }
                 }
-                Ok(StreamMmStatusRequest {
+                Ok(StreamMarketMakingStatusRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.StreamMmStatusRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.StreamMarketMakingStatusRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for UpdateMmConfigRequest {
+impl serde::Serialize for UpdateMarketMakingConfigRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3653,7 +3748,7 @@ impl serde::Serialize for UpdateMmConfigRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.UpdateMmConfigRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.UpdateMarketMakingConfigRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -3663,7 +3758,7 @@ impl serde::Serialize for UpdateMmConfigRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for UpdateMmConfigRequest {
+impl<'de> serde::Deserialize<'de> for UpdateMarketMakingConfigRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3711,13 +3806,13 @@ impl<'de> serde::Deserialize<'de> for UpdateMmConfigRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateMmConfigRequest;
+            type Value = UpdateMarketMakingConfigRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.UpdateMmConfigRequest")
+                formatter.write_str("struct kdo.v1.mm.UpdateMarketMakingConfigRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateMmConfigRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateMarketMakingConfigRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3742,16 +3837,16 @@ impl<'de> serde::Deserialize<'de> for UpdateMmConfigRequest {
                         }
                     }
                 }
-                Ok(UpdateMmConfigRequest {
+                Ok(UpdateMarketMakingConfigRequest {
                     symbol: symbol__.unwrap_or_default(),
                     config: config__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.UpdateMmConfigRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.UpdateMarketMakingConfigRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for UpdateMmRequest {
+impl serde::Serialize for UpdateMarketMakingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3765,7 +3860,7 @@ impl serde::Serialize for UpdateMmRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.UpdateMmRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.UpdateMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
@@ -3775,7 +3870,7 @@ impl serde::Serialize for UpdateMmRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for UpdateMmRequest {
+impl<'de> serde::Deserialize<'de> for UpdateMarketMakingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3823,13 +3918,13 @@ impl<'de> serde::Deserialize<'de> for UpdateMmRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateMmRequest;
+            type Value = UpdateMarketMakingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.UpdateMmRequest")
+                formatter.write_str("struct kdo.v1.mm.UpdateMarketMakingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateMmRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateMarketMakingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3854,12 +3949,12 @@ impl<'de> serde::Deserialize<'de> for UpdateMmRequest {
                         }
                     }
                 }
-                Ok(UpdateMmRequest {
+                Ok(UpdateMarketMakingRequest {
                     symbol: symbol__.unwrap_or_default(),
                     config: config__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.UpdateMmRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.UpdateMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }

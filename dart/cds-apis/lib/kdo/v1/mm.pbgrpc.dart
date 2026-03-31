@@ -21,8 +21,8 @@ import 'mm.pb.dart' as $0;
 export 'mm.pb.dart';
 
 /// Market Making 서비스 (기존 LP 서비스와 완전히 독립)
-@$pb.GrpcServiceName('kdo.v1.mm.MmService')
-class MmServiceClient extends $grpc.Client {
+@$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
+class MarketMakingServiceClient extends $grpc.Client {
   /// The hostname for this service.
   static const $core.String defaultHost = '';
 
@@ -31,303 +31,325 @@ class MmServiceClient extends $grpc.Client {
     '',
   ];
 
-  MmServiceClient(super.channel, {super.options, super.interceptors});
+  MarketMakingServiceClient(super.channel, {super.options, super.interceptors});
 
   /// MM 목록 조회
-  $grpc.ResponseFuture<$0.ListMmResponse> listMm($0.ListMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$listMm, request, options: options);
+  $grpc.ResponseFuture<$0.ListMarketMakingResponse> listMarketMaking($0.ListMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listMarketMaking, request, options: options);
+  }
+
+  /// MM 단일 심볼 조회
+  $grpc.ResponseFuture<$0.MarketMakingEntry> getMarketMaking($0.GetMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMarketMaking, request, options: options);
   }
 
   /// MM 설정 생성 (DB 저장)
-  $grpc.ResponseFuture<$0.MmEntry> createMm($0.CreateMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$createMm, request, options: options);
+  $grpc.ResponseFuture<$0.MarketMakingEntry> createMarketMaking($0.CreateMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$createMarketMaking, request, options: options);
   }
 
   /// MM 설정 업데이트 (DB 저장)
-  $grpc.ResponseFuture<$0.MmEntry> updateMm($0.UpdateMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$updateMm, request, options: options);
+  $grpc.ResponseFuture<$0.MarketMakingEntry> updateMarketMaking($0.UpdateMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateMarketMaking, request, options: options);
   }
 
   /// MM 상태 조회
-  $grpc.ResponseFuture<$0.MmStatus> getMmStatus($0.GetMmStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getMmStatus, request, options: options);
+  $grpc.ResponseFuture<$0.MarketMakingStatus> getMarketMakingStatus($0.GetMarketMakingStatusRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMarketMakingStatus, request, options: options);
   }
 
   /// MM 시작 (심볼 등록)
-  $grpc.ResponseFuture<$0.StartMmResponse> startMm($0.StartMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$startMm, request, options: options);
+  $grpc.ResponseFuture<$0.StartMarketMakingResponse> startMarketMaking($0.StartMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$startMarketMaking, request, options: options);
   }
 
   /// MM 중지 (심볼 해제)
-  $grpc.ResponseFuture<$0.StopMmResponse> stopMm($0.StopMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$stopMm, request, options: options);
+  $grpc.ResponseFuture<$0.StopMarketMakingResponse> stopMarketMaking($0.StopMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$stopMarketMaking, request, options: options);
   }
 
   /// MM 일시정지 (호가 산출 중단)
-  $grpc.ResponseFuture<$0.PauseMmResponse> pauseMm($0.PauseMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$pauseMm, request, options: options);
+  $grpc.ResponseFuture<$0.PauseMarketMakingResponse> pauseMarketMaking($0.PauseMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$pauseMarketMaking, request, options: options);
   }
 
   /// MM 재개
-  $grpc.ResponseFuture<$0.ResumeMmResponse> resumeMm($0.ResumeMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$resumeMm, request, options: options);
+  $grpc.ResponseFuture<$0.ResumeMarketMakingResponse> resumeMarketMaking($0.ResumeMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$resumeMarketMaking, request, options: options);
   }
 
   /// MM 엔진 리셋 (일초 상태 초기화)
-  $grpc.ResponseFuture<$0.ResetMmResponse> resetMm($0.ResetMmRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$resetMm, request, options: options);
+  $grpc.ResponseFuture<$0.ResetMarketMakingResponse> resetMarketMaking($0.ResetMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$resetMarketMaking, request, options: options);
   }
 
   /// MM 설정 업데이트
-  $grpc.ResponseFuture<$0.MmConfiguration> updateMmConfig($0.UpdateMmConfigRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$updateMmConfig, request, options: options);
+  $grpc.ResponseFuture<$0.MarketMakingConfiguration> updateMarketMakingConfig($0.UpdateMarketMakingConfigRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateMarketMakingConfig, request, options: options);
   }
 
   /// MM 실시간 상태 스트리밍 (서버→클라이언트)
-  $grpc.ResponseStream<$0.MmStatus> streamMmStatus($0.StreamMmStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamMmStatus, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.MarketMakingStatus> streamMarketMakingStatus($0.StreamMarketMakingStatusRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMarketMakingStatus, $async.Stream.fromIterable([request]), options: options);
   }
 
   /// MM 전용 주문장 조회
-  $grpc.ResponseFuture<$0.MmOrderbookData> getMmOrderbook($0.GetMmOrderbookRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getMmOrderbook, request, options: options);
+  $grpc.ResponseFuture<$0.MarketMakingOrderbookData> getMarketMakingOrderbook($0.GetMarketMakingOrderbookRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMarketMakingOrderbook, request, options: options);
   }
 
   /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
-  $grpc.ResponseStream<$0.MmOrderbookData> streamMmOrderbook($0.GetMmOrderbookRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamMmOrderbook, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.MarketMakingOrderbookData> streamMarketMakingOrderbook($0.GetMarketMakingOrderbookRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMarketMakingOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
     // method descriptors
 
-  static final _$listMm = $grpc.ClientMethod<$0.ListMmRequest, $0.ListMmResponse>(
-      '/kdo.v1.mm.MmService/ListMm',
-      ($0.ListMmRequest value) => value.writeToBuffer(),
-      $0.ListMmResponse.fromBuffer);
-  static final _$createMm = $grpc.ClientMethod<$0.CreateMmRequest, $0.MmEntry>(
-      '/kdo.v1.mm.MmService/CreateMm',
-      ($0.CreateMmRequest value) => value.writeToBuffer(),
-      $0.MmEntry.fromBuffer);
-  static final _$updateMm = $grpc.ClientMethod<$0.UpdateMmRequest, $0.MmEntry>(
-      '/kdo.v1.mm.MmService/UpdateMm',
-      ($0.UpdateMmRequest value) => value.writeToBuffer(),
-      $0.MmEntry.fromBuffer);
-  static final _$getMmStatus = $grpc.ClientMethod<$0.GetMmStatusRequest, $0.MmStatus>(
-      '/kdo.v1.mm.MmService/GetMmStatus',
-      ($0.GetMmStatusRequest value) => value.writeToBuffer(),
-      $0.MmStatus.fromBuffer);
-  static final _$startMm = $grpc.ClientMethod<$0.StartMmRequest, $0.StartMmResponse>(
-      '/kdo.v1.mm.MmService/StartMm',
-      ($0.StartMmRequest value) => value.writeToBuffer(),
-      $0.StartMmResponse.fromBuffer);
-  static final _$stopMm = $grpc.ClientMethod<$0.StopMmRequest, $0.StopMmResponse>(
-      '/kdo.v1.mm.MmService/StopMm',
-      ($0.StopMmRequest value) => value.writeToBuffer(),
-      $0.StopMmResponse.fromBuffer);
-  static final _$pauseMm = $grpc.ClientMethod<$0.PauseMmRequest, $0.PauseMmResponse>(
-      '/kdo.v1.mm.MmService/PauseMm',
-      ($0.PauseMmRequest value) => value.writeToBuffer(),
-      $0.PauseMmResponse.fromBuffer);
-  static final _$resumeMm = $grpc.ClientMethod<$0.ResumeMmRequest, $0.ResumeMmResponse>(
-      '/kdo.v1.mm.MmService/ResumeMm',
-      ($0.ResumeMmRequest value) => value.writeToBuffer(),
-      $0.ResumeMmResponse.fromBuffer);
-  static final _$resetMm = $grpc.ClientMethod<$0.ResetMmRequest, $0.ResetMmResponse>(
-      '/kdo.v1.mm.MmService/ResetMm',
-      ($0.ResetMmRequest value) => value.writeToBuffer(),
-      $0.ResetMmResponse.fromBuffer);
-  static final _$updateMmConfig = $grpc.ClientMethod<$0.UpdateMmConfigRequest, $0.MmConfiguration>(
-      '/kdo.v1.mm.MmService/UpdateMmConfig',
-      ($0.UpdateMmConfigRequest value) => value.writeToBuffer(),
-      $0.MmConfiguration.fromBuffer);
-  static final _$streamMmStatus = $grpc.ClientMethod<$0.StreamMmStatusRequest, $0.MmStatus>(
-      '/kdo.v1.mm.MmService/StreamMmStatus',
-      ($0.StreamMmStatusRequest value) => value.writeToBuffer(),
-      $0.MmStatus.fromBuffer);
-  static final _$getMmOrderbook = $grpc.ClientMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
-      '/kdo.v1.mm.MmService/GetMmOrderbook',
-      ($0.GetMmOrderbookRequest value) => value.writeToBuffer(),
-      $0.MmOrderbookData.fromBuffer);
-  static final _$streamMmOrderbook = $grpc.ClientMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
-      '/kdo.v1.mm.MmService/StreamMmOrderbook',
-      ($0.GetMmOrderbookRequest value) => value.writeToBuffer(),
-      $0.MmOrderbookData.fromBuffer);
+  static final _$listMarketMaking = $grpc.ClientMethod<$0.ListMarketMakingRequest, $0.ListMarketMakingResponse>(
+      '/kdo.v1.mm.MarketMakingService/ListMarketMaking',
+      ($0.ListMarketMakingRequest value) => value.writeToBuffer(),
+      $0.ListMarketMakingResponse.fromBuffer);
+  static final _$getMarketMaking = $grpc.ClientMethod<$0.GetMarketMakingRequest, $0.MarketMakingEntry>(
+      '/kdo.v1.mm.MarketMakingService/GetMarketMaking',
+      ($0.GetMarketMakingRequest value) => value.writeToBuffer(),
+      $0.MarketMakingEntry.fromBuffer);
+  static final _$createMarketMaking = $grpc.ClientMethod<$0.CreateMarketMakingRequest, $0.MarketMakingEntry>(
+      '/kdo.v1.mm.MarketMakingService/CreateMarketMaking',
+      ($0.CreateMarketMakingRequest value) => value.writeToBuffer(),
+      $0.MarketMakingEntry.fromBuffer);
+  static final _$updateMarketMaking = $grpc.ClientMethod<$0.UpdateMarketMakingRequest, $0.MarketMakingEntry>(
+      '/kdo.v1.mm.MarketMakingService/UpdateMarketMaking',
+      ($0.UpdateMarketMakingRequest value) => value.writeToBuffer(),
+      $0.MarketMakingEntry.fromBuffer);
+  static final _$getMarketMakingStatus = $grpc.ClientMethod<$0.GetMarketMakingStatusRequest, $0.MarketMakingStatus>(
+      '/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus',
+      ($0.GetMarketMakingStatusRequest value) => value.writeToBuffer(),
+      $0.MarketMakingStatus.fromBuffer);
+  static final _$startMarketMaking = $grpc.ClientMethod<$0.StartMarketMakingRequest, $0.StartMarketMakingResponse>(
+      '/kdo.v1.mm.MarketMakingService/StartMarketMaking',
+      ($0.StartMarketMakingRequest value) => value.writeToBuffer(),
+      $0.StartMarketMakingResponse.fromBuffer);
+  static final _$stopMarketMaking = $grpc.ClientMethod<$0.StopMarketMakingRequest, $0.StopMarketMakingResponse>(
+      '/kdo.v1.mm.MarketMakingService/StopMarketMaking',
+      ($0.StopMarketMakingRequest value) => value.writeToBuffer(),
+      $0.StopMarketMakingResponse.fromBuffer);
+  static final _$pauseMarketMaking = $grpc.ClientMethod<$0.PauseMarketMakingRequest, $0.PauseMarketMakingResponse>(
+      '/kdo.v1.mm.MarketMakingService/PauseMarketMaking',
+      ($0.PauseMarketMakingRequest value) => value.writeToBuffer(),
+      $0.PauseMarketMakingResponse.fromBuffer);
+  static final _$resumeMarketMaking = $grpc.ClientMethod<$0.ResumeMarketMakingRequest, $0.ResumeMarketMakingResponse>(
+      '/kdo.v1.mm.MarketMakingService/ResumeMarketMaking',
+      ($0.ResumeMarketMakingRequest value) => value.writeToBuffer(),
+      $0.ResumeMarketMakingResponse.fromBuffer);
+  static final _$resetMarketMaking = $grpc.ClientMethod<$0.ResetMarketMakingRequest, $0.ResetMarketMakingResponse>(
+      '/kdo.v1.mm.MarketMakingService/ResetMarketMaking',
+      ($0.ResetMarketMakingRequest value) => value.writeToBuffer(),
+      $0.ResetMarketMakingResponse.fromBuffer);
+  static final _$updateMarketMakingConfig = $grpc.ClientMethod<$0.UpdateMarketMakingConfigRequest, $0.MarketMakingConfiguration>(
+      '/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig',
+      ($0.UpdateMarketMakingConfigRequest value) => value.writeToBuffer(),
+      $0.MarketMakingConfiguration.fromBuffer);
+  static final _$streamMarketMakingStatus = $grpc.ClientMethod<$0.StreamMarketMakingStatusRequest, $0.MarketMakingStatus>(
+      '/kdo.v1.mm.MarketMakingService/StreamMarketMakingStatus',
+      ($0.StreamMarketMakingStatusRequest value) => value.writeToBuffer(),
+      $0.MarketMakingStatus.fromBuffer);
+  static final _$getMarketMakingOrderbook = $grpc.ClientMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
+      '/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook',
+      ($0.GetMarketMakingOrderbookRequest value) => value.writeToBuffer(),
+      $0.MarketMakingOrderbookData.fromBuffer);
+  static final _$streamMarketMakingOrderbook = $grpc.ClientMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
+      '/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook',
+      ($0.GetMarketMakingOrderbookRequest value) => value.writeToBuffer(),
+      $0.MarketMakingOrderbookData.fromBuffer);
 }
 
-@$pb.GrpcServiceName('kdo.v1.mm.MmService')
-abstract class MmServiceBase extends $grpc.Service {
-  $core.String get $name => 'kdo.v1.mm.MmService';
+@$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
+abstract class MarketMakingServiceBase extends $grpc.Service {
+  $core.String get $name => 'kdo.v1.mm.MarketMakingService';
 
-  MmServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.ListMmRequest, $0.ListMmResponse>(
-        'ListMm',
-        listMm_Pre,
+  MarketMakingServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.ListMarketMakingRequest, $0.ListMarketMakingResponse>(
+        'ListMarketMaking',
+        listMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.ListMmRequest.fromBuffer(value),
-        ($0.ListMmResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.CreateMmRequest, $0.MmEntry>(
-        'CreateMm',
-        createMm_Pre,
+        ($core.List<$core.int> value) => $0.ListMarketMakingRequest.fromBuffer(value),
+        ($0.ListMarketMakingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMarketMakingRequest, $0.MarketMakingEntry>(
+        'GetMarketMaking',
+        getMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.CreateMmRequest.fromBuffer(value),
-        ($0.MmEntry value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateMmRequest, $0.MmEntry>(
-        'UpdateMm',
-        updateMm_Pre,
+        ($core.List<$core.int> value) => $0.GetMarketMakingRequest.fromBuffer(value),
+        ($0.MarketMakingEntry value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CreateMarketMakingRequest, $0.MarketMakingEntry>(
+        'CreateMarketMaking',
+        createMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.UpdateMmRequest.fromBuffer(value),
-        ($0.MmEntry value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetMmStatusRequest, $0.MmStatus>(
-        'GetMmStatus',
-        getMmStatus_Pre,
+        ($core.List<$core.int> value) => $0.CreateMarketMakingRequest.fromBuffer(value),
+        ($0.MarketMakingEntry value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateMarketMakingRequest, $0.MarketMakingEntry>(
+        'UpdateMarketMaking',
+        updateMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetMmStatusRequest.fromBuffer(value),
-        ($0.MmStatus value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StartMmRequest, $0.StartMmResponse>(
-        'StartMm',
-        startMm_Pre,
+        ($core.List<$core.int> value) => $0.UpdateMarketMakingRequest.fromBuffer(value),
+        ($0.MarketMakingEntry value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMarketMakingStatusRequest, $0.MarketMakingStatus>(
+        'GetMarketMakingStatus',
+        getMarketMakingStatus_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.StartMmRequest.fromBuffer(value),
-        ($0.StartMmResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StopMmRequest, $0.StopMmResponse>(
-        'StopMm',
-        stopMm_Pre,
+        ($core.List<$core.int> value) => $0.GetMarketMakingStatusRequest.fromBuffer(value),
+        ($0.MarketMakingStatus value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StartMarketMakingRequest, $0.StartMarketMakingResponse>(
+        'StartMarketMaking',
+        startMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.StopMmRequest.fromBuffer(value),
-        ($0.StopMmResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.PauseMmRequest, $0.PauseMmResponse>(
-        'PauseMm',
-        pauseMm_Pre,
+        ($core.List<$core.int> value) => $0.StartMarketMakingRequest.fromBuffer(value),
+        ($0.StartMarketMakingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StopMarketMakingRequest, $0.StopMarketMakingResponse>(
+        'StopMarketMaking',
+        stopMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.PauseMmRequest.fromBuffer(value),
-        ($0.PauseMmResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ResumeMmRequest, $0.ResumeMmResponse>(
-        'ResumeMm',
-        resumeMm_Pre,
+        ($core.List<$core.int> value) => $0.StopMarketMakingRequest.fromBuffer(value),
+        ($0.StopMarketMakingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.PauseMarketMakingRequest, $0.PauseMarketMakingResponse>(
+        'PauseMarketMaking',
+        pauseMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.ResumeMmRequest.fromBuffer(value),
-        ($0.ResumeMmResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ResetMmRequest, $0.ResetMmResponse>(
-        'ResetMm',
-        resetMm_Pre,
+        ($core.List<$core.int> value) => $0.PauseMarketMakingRequest.fromBuffer(value),
+        ($0.PauseMarketMakingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ResumeMarketMakingRequest, $0.ResumeMarketMakingResponse>(
+        'ResumeMarketMaking',
+        resumeMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.ResetMmRequest.fromBuffer(value),
-        ($0.ResetMmResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateMmConfigRequest, $0.MmConfiguration>(
-        'UpdateMmConfig',
-        updateMmConfig_Pre,
+        ($core.List<$core.int> value) => $0.ResumeMarketMakingRequest.fromBuffer(value),
+        ($0.ResumeMarketMakingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ResetMarketMakingRequest, $0.ResetMarketMakingResponse>(
+        'ResetMarketMaking',
+        resetMarketMaking_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.UpdateMmConfigRequest.fromBuffer(value),
-        ($0.MmConfiguration value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamMmStatusRequest, $0.MmStatus>(
-        'StreamMmStatus',
-        streamMmStatus_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.StreamMmStatusRequest.fromBuffer(value),
-        ($0.MmStatus value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
-        'GetMmOrderbook',
-        getMmOrderbook_Pre,
+        ($core.List<$core.int> value) => $0.ResetMarketMakingRequest.fromBuffer(value),
+        ($0.ResetMarketMakingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateMarketMakingConfigRequest, $0.MarketMakingConfiguration>(
+        'UpdateMarketMakingConfig',
+        updateMarketMakingConfig_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetMmOrderbookRequest.fromBuffer(value),
-        ($0.MmOrderbookData value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetMmOrderbookRequest, $0.MmOrderbookData>(
-        'StreamMmOrderbook',
-        streamMmOrderbook_Pre,
+        ($core.List<$core.int> value) => $0.UpdateMarketMakingConfigRequest.fromBuffer(value),
+        ($0.MarketMakingConfiguration value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamMarketMakingStatusRequest, $0.MarketMakingStatus>(
+        'StreamMarketMakingStatus',
+        streamMarketMakingStatus_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => $0.GetMmOrderbookRequest.fromBuffer(value),
-        ($0.MmOrderbookData value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.StreamMarketMakingStatusRequest.fromBuffer(value),
+        ($0.MarketMakingStatus value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
+        'GetMarketMakingOrderbook',
+        getMarketMakingOrderbook_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetMarketMakingOrderbookRequest.fromBuffer(value),
+        ($0.MarketMakingOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
+        'StreamMarketMakingOrderbook',
+        streamMarketMakingOrderbook_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetMarketMakingOrderbookRequest.fromBuffer(value),
+        ($0.MarketMakingOrderbookData value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.ListMmResponse> listMm_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmRequest> $request) async {
-    return listMm($call, await $request);
+  $async.Future<$0.ListMarketMakingResponse> listMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketMakingRequest> $request) async {
+    return listMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.ListMmResponse> listMm($grpc.ServiceCall call, $0.ListMmRequest request);
+  $async.Future<$0.ListMarketMakingResponse> listMarketMaking($grpc.ServiceCall call, $0.ListMarketMakingRequest request);
 
-  $async.Future<$0.MmEntry> createMm_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateMmRequest> $request) async {
-    return createMm($call, await $request);
+  $async.Future<$0.MarketMakingEntry> getMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingRequest> $request) async {
+    return getMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.MmEntry> createMm($grpc.ServiceCall call, $0.CreateMmRequest request);
+  $async.Future<$0.MarketMakingEntry> getMarketMaking($grpc.ServiceCall call, $0.GetMarketMakingRequest request);
 
-  $async.Future<$0.MmEntry> updateMm_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMmRequest> $request) async {
-    return updateMm($call, await $request);
+  $async.Future<$0.MarketMakingEntry> createMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateMarketMakingRequest> $request) async {
+    return createMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.MmEntry> updateMm($grpc.ServiceCall call, $0.UpdateMmRequest request);
+  $async.Future<$0.MarketMakingEntry> createMarketMaking($grpc.ServiceCall call, $0.CreateMarketMakingRequest request);
 
-  $async.Future<$0.MmStatus> getMmStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmStatusRequest> $request) async {
-    return getMmStatus($call, await $request);
+  $async.Future<$0.MarketMakingEntry> updateMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMarketMakingRequest> $request) async {
+    return updateMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.MmStatus> getMmStatus($grpc.ServiceCall call, $0.GetMmStatusRequest request);
+  $async.Future<$0.MarketMakingEntry> updateMarketMaking($grpc.ServiceCall call, $0.UpdateMarketMakingRequest request);
 
-  $async.Future<$0.StartMmResponse> startMm_Pre($grpc.ServiceCall $call, $async.Future<$0.StartMmRequest> $request) async {
-    return startMm($call, await $request);
+  $async.Future<$0.MarketMakingStatus> getMarketMakingStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingStatusRequest> $request) async {
+    return getMarketMakingStatus($call, await $request);
   }
 
-  $async.Future<$0.StartMmResponse> startMm($grpc.ServiceCall call, $0.StartMmRequest request);
+  $async.Future<$0.MarketMakingStatus> getMarketMakingStatus($grpc.ServiceCall call, $0.GetMarketMakingStatusRequest request);
 
-  $async.Future<$0.StopMmResponse> stopMm_Pre($grpc.ServiceCall $call, $async.Future<$0.StopMmRequest> $request) async {
-    return stopMm($call, await $request);
+  $async.Future<$0.StartMarketMakingResponse> startMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.StartMarketMakingRequest> $request) async {
+    return startMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.StopMmResponse> stopMm($grpc.ServiceCall call, $0.StopMmRequest request);
+  $async.Future<$0.StartMarketMakingResponse> startMarketMaking($grpc.ServiceCall call, $0.StartMarketMakingRequest request);
 
-  $async.Future<$0.PauseMmResponse> pauseMm_Pre($grpc.ServiceCall $call, $async.Future<$0.PauseMmRequest> $request) async {
-    return pauseMm($call, await $request);
+  $async.Future<$0.StopMarketMakingResponse> stopMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.StopMarketMakingRequest> $request) async {
+    return stopMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.PauseMmResponse> pauseMm($grpc.ServiceCall call, $0.PauseMmRequest request);
+  $async.Future<$0.StopMarketMakingResponse> stopMarketMaking($grpc.ServiceCall call, $0.StopMarketMakingRequest request);
 
-  $async.Future<$0.ResumeMmResponse> resumeMm_Pre($grpc.ServiceCall $call, $async.Future<$0.ResumeMmRequest> $request) async {
-    return resumeMm($call, await $request);
+  $async.Future<$0.PauseMarketMakingResponse> pauseMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.PauseMarketMakingRequest> $request) async {
+    return pauseMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.ResumeMmResponse> resumeMm($grpc.ServiceCall call, $0.ResumeMmRequest request);
+  $async.Future<$0.PauseMarketMakingResponse> pauseMarketMaking($grpc.ServiceCall call, $0.PauseMarketMakingRequest request);
 
-  $async.Future<$0.ResetMmResponse> resetMm_Pre($grpc.ServiceCall $call, $async.Future<$0.ResetMmRequest> $request) async {
-    return resetMm($call, await $request);
+  $async.Future<$0.ResumeMarketMakingResponse> resumeMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ResumeMarketMakingRequest> $request) async {
+    return resumeMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.ResetMmResponse> resetMm($grpc.ServiceCall call, $0.ResetMmRequest request);
+  $async.Future<$0.ResumeMarketMakingResponse> resumeMarketMaking($grpc.ServiceCall call, $0.ResumeMarketMakingRequest request);
 
-  $async.Future<$0.MmConfiguration> updateMmConfig_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMmConfigRequest> $request) async {
-    return updateMmConfig($call, await $request);
+  $async.Future<$0.ResetMarketMakingResponse> resetMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ResetMarketMakingRequest> $request) async {
+    return resetMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.MmConfiguration> updateMmConfig($grpc.ServiceCall call, $0.UpdateMmConfigRequest request);
+  $async.Future<$0.ResetMarketMakingResponse> resetMarketMaking($grpc.ServiceCall call, $0.ResetMarketMakingRequest request);
 
-  $async.Stream<$0.MmStatus> streamMmStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMmStatusRequest> $request) async* {
-    yield* streamMmStatus($call, await $request);
+  $async.Future<$0.MarketMakingConfiguration> updateMarketMakingConfig_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMarketMakingConfigRequest> $request) async {
+    return updateMarketMakingConfig($call, await $request);
   }
 
-  $async.Stream<$0.MmStatus> streamMmStatus($grpc.ServiceCall call, $0.StreamMmStatusRequest request);
+  $async.Future<$0.MarketMakingConfiguration> updateMarketMakingConfig($grpc.ServiceCall call, $0.UpdateMarketMakingConfigRequest request);
 
-  $async.Future<$0.MmOrderbookData> getMmOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmOrderbookRequest> $request) async {
-    return getMmOrderbook($call, await $request);
+  $async.Stream<$0.MarketMakingStatus> streamMarketMakingStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMarketMakingStatusRequest> $request) async* {
+    yield* streamMarketMakingStatus($call, await $request);
   }
 
-  $async.Future<$0.MmOrderbookData> getMmOrderbook($grpc.ServiceCall call, $0.GetMmOrderbookRequest request);
+  $async.Stream<$0.MarketMakingStatus> streamMarketMakingStatus($grpc.ServiceCall call, $0.StreamMarketMakingStatusRequest request);
 
-  $async.Stream<$0.MmOrderbookData> streamMmOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmOrderbookRequest> $request) async* {
-    yield* streamMmOrderbook($call, await $request);
+  $async.Future<$0.MarketMakingOrderbookData> getMarketMakingOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingOrderbookRequest> $request) async {
+    return getMarketMakingOrderbook($call, await $request);
   }
 
-  $async.Stream<$0.MmOrderbookData> streamMmOrderbook($grpc.ServiceCall call, $0.GetMmOrderbookRequest request);
+  $async.Future<$0.MarketMakingOrderbookData> getMarketMakingOrderbook($grpc.ServiceCall call, $0.GetMarketMakingOrderbookRequest request);
+
+  $async.Stream<$0.MarketMakingOrderbookData> streamMarketMakingOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingOrderbookRequest> $request) async* {
+    yield* streamMarketMakingOrderbook($call, await $request);
+  }
+
+  $async.Stream<$0.MarketMakingOrderbookData> streamMarketMakingOrderbook($grpc.ServiceCall call, $0.GetMarketMakingOrderbookRequest request);
 
 }

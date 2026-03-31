@@ -32,145 +32,43 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 var (
-	filter_MmService_ListMm_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_MarketMakingService_ListMarketMaking_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_MmService_ListMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListMmRequest
+func request_MarketMakingService_ListMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MmService_ListMm_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_ListMarketMaking_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.ListMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.ListMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_ListMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListMmRequest
+func local_request_MarketMakingService_ListMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MmService_ListMm_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_ListMarketMaking_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.ListMm(ctx, &protoReq)
+	msg, err := server.ListMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_CreateMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateMmRequest
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	msg, err := client.CreateMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_MmService_CreateMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateMmRequest
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	msg, err := server.CreateMm(ctx, &protoReq)
-	return msg, metadata, err
-
-}
-
-func request_MmService_UpdateMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateMmRequest
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["symbol"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
-	}
-
-	protoReq.Symbol, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
-	}
-
-	msg, err := client.UpdateMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_MmService_UpdateMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateMmRequest
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["symbol"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
-	}
-
-	protoReq.Symbol, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
-	}
-
-	msg, err := server.UpdateMm(ctx, &protoReq)
-	return msg, metadata, err
-
-}
-
-func request_MmService_GetMmStatus_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMmStatusRequest
+func request_MarketMakingService_GetMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -190,13 +88,13 @@ func request_MmService_GetMmStatus_0(ctx context.Context, marshaler runtime.Mars
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.GetMmStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_GetMmStatus_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMmStatusRequest
+func local_request_MarketMakingService_GetMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -216,13 +114,47 @@ func local_request_MmService_GetMmStatus_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.GetMmStatus(ctx, &protoReq)
+	msg, err := server.GetMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_StartMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq StartMmRequest
+func request_MarketMakingService_CreateMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateMarketMakingRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.CreateMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_MarketMakingService_CreateMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateMarketMakingRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.CreateMarketMaking(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_MarketMakingService_UpdateMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -250,13 +182,13 @@ func request_MmService_StartMm_0(ctx context.Context, marshaler runtime.Marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.StartMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.UpdateMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_StartMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq StartMmRequest
+func local_request_MarketMakingService_UpdateMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -284,13 +216,65 @@ func local_request_MmService_StartMm_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.StartMm(ctx, &protoReq)
+	msg, err := server.UpdateMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_StopMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq StopMmRequest
+func request_MarketMakingService_GetMarketMakingStatus_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetMarketMakingStatusRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
+	}
+
+	protoReq.Symbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	msg, err := client.GetMarketMakingStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_MarketMakingService_GetMarketMakingStatus_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetMarketMakingStatusRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
+	}
+
+	protoReq.Symbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	msg, err := server.GetMarketMakingStatus(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_MarketMakingService_StartMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq StartMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -318,13 +302,13 @@ func request_MmService_StopMm_0(ctx context.Context, marshaler runtime.Marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.StopMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.StartMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_StopMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq StopMmRequest
+func local_request_MarketMakingService_StartMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq StartMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -352,13 +336,13 @@ func local_request_MmService_StopMm_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.StopMm(ctx, &protoReq)
+	msg, err := server.StartMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_PauseMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PauseMmRequest
+func request_MarketMakingService_StopMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq StopMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -386,13 +370,13 @@ func request_MmService_PauseMm_0(ctx context.Context, marshaler runtime.Marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.PauseMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.StopMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_PauseMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PauseMmRequest
+func local_request_MarketMakingService_StopMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq StopMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -420,13 +404,13 @@ func local_request_MmService_PauseMm_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.PauseMm(ctx, &protoReq)
+	msg, err := server.StopMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_ResumeMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ResumeMmRequest
+func request_MarketMakingService_PauseMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq PauseMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -454,13 +438,13 @@ func request_MmService_ResumeMm_0(ctx context.Context, marshaler runtime.Marshal
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.ResumeMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.PauseMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_ResumeMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ResumeMmRequest
+func local_request_MarketMakingService_PauseMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq PauseMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -488,13 +472,13 @@ func local_request_MmService_ResumeMm_0(ctx context.Context, marshaler runtime.M
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.ResumeMm(ctx, &protoReq)
+	msg, err := server.PauseMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_ResetMm_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ResetMmRequest
+func request_MarketMakingService_ResumeMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ResumeMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -522,13 +506,13 @@ func request_MmService_ResetMm_0(ctx context.Context, marshaler runtime.Marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.ResetMm(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.ResumeMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_ResetMm_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ResetMmRequest
+func local_request_MarketMakingService_ResumeMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ResumeMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -556,13 +540,13 @@ func local_request_MmService_ResetMm_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.ResetMm(ctx, &protoReq)
+	msg, err := server.ResumeMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_UpdateMmConfig_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateMmConfigRequest
+func request_MarketMakingService_ResetMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ResetMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -590,13 +574,13 @@ func request_MmService_UpdateMmConfig_0(ctx context.Context, marshaler runtime.M
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.UpdateMmConfig(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.ResetMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_UpdateMmConfig_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateMmConfigRequest
+func local_request_MarketMakingService_ResetMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ResetMarketMakingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -624,13 +608,81 @@ func local_request_MmService_UpdateMmConfig_0(ctx context.Context, marshaler run
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.UpdateMmConfig(ctx, &protoReq)
+	msg, err := server.ResetMarketMaking(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_StreamMmStatus_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (MmService_StreamMmStatusClient, runtime.ServerMetadata, error) {
-	var protoReq StreamMmStatusRequest
+func request_MarketMakingService_UpdateMarketMakingConfig_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateMarketMakingConfigRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
+	}
+
+	protoReq.Symbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	msg, err := client.UpdateMarketMakingConfig(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_MarketMakingService_UpdateMarketMakingConfig_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateMarketMakingConfigRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
+	}
+
+	protoReq.Symbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	msg, err := server.UpdateMarketMakingConfig(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_MarketMakingService_StreamMarketMakingStatus_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (MarketMakingService_StreamMarketMakingStatusClient, runtime.ServerMetadata, error) {
+	var protoReq StreamMarketMakingStatusRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -650,7 +702,7 @@ func request_MmService_StreamMmStatus_0(ctx context.Context, marshaler runtime.M
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	stream, err := client.StreamMmStatus(ctx, &protoReq)
+	stream, err := client.StreamMarketMakingStatus(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -663,8 +715,8 @@ func request_MmService_StreamMmStatus_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func request_MmService_GetMmOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMmOrderbookRequest
+func request_MarketMakingService_GetMarketMakingOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetMarketMakingOrderbookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -684,13 +736,13 @@ func request_MmService_GetMmOrderbook_0(ctx context.Context, marshaler runtime.M
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := client.GetMmOrderbook(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetMarketMakingOrderbook(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MmService_GetMmOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, server MmServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMmOrderbookRequest
+func local_request_MarketMakingService_GetMarketMakingOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, server MarketMakingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetMarketMakingOrderbookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -710,13 +762,13 @@ func local_request_MmService_GetMmOrderbook_0(ctx context.Context, marshaler run
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	msg, err := server.GetMmOrderbook(ctx, &protoReq)
+	msg, err := server.GetMarketMakingOrderbook(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_MmService_StreamMmOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MmServiceClient, req *http.Request, pathParams map[string]string) (MmService_StreamMmOrderbookClient, runtime.ServerMetadata, error) {
-	var protoReq GetMmOrderbookRequest
+func request_MarketMakingService_StreamMarketMakingOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (MarketMakingService_StreamMarketMakingOrderbookClient, runtime.ServerMetadata, error) {
+	var protoReq GetMarketMakingOrderbookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -736,7 +788,7 @@ func request_MmService_StreamMmOrderbook_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	stream, err := client.StreamMmOrderbook(ctx, &protoReq)
+	stream, err := client.StreamMarketMakingOrderbook(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -749,13 +801,13 @@ func request_MmService_StreamMmOrderbook_0(ctx context.Context, marshaler runtim
 
 }
 
-// RegisterMmServiceHandlerServer registers the http handlers for service MmService to "mux".
-// UnaryRPC     :call MmServiceServer directly.
+// RegisterMarketMakingServiceHandlerServer registers the http handlers for service MarketMakingService to "mux".
+// UnaryRPC     :call MarketMakingServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterMmServiceHandlerFromEndpoint instead.
-func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server MmServiceServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterMarketMakingServiceHandlerFromEndpoint instead.
+func RegisterMarketMakingServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server MarketMakingServiceServer) error {
 
-	mux.Handle("GET", pattern_MmService_ListMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_ListMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -763,12 +815,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/ListMm", runtime.WithHTTPPathPattern("/v1/mm"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/ListMarketMaking", runtime.WithHTTPPathPattern("/v1/mm"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_ListMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_ListMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -776,11 +828,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_ListMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_ListMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_CreateMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_GetMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -788,12 +840,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/CreateMm", runtime.WithHTTPPathPattern("/v1/mm"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/GetMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_CreateMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_GetMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -801,11 +853,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_CreateMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_GetMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_MmService_UpdateMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_CreateMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -813,12 +865,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/UpdateMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/CreateMarketMaking", runtime.WithHTTPPathPattern("/v1/mm"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_UpdateMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_CreateMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -826,11 +878,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_UpdateMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_CreateMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MmService_GetMmStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_MarketMakingService_UpdateMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -838,12 +890,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/GetMmStatus", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/status"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/UpdateMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_GetMmStatus_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_UpdateMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -851,11 +903,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_GetMmStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_UpdateMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_StartMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_GetMarketMakingStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -863,12 +915,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/StartMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:start"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/status"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_StartMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_GetMarketMakingStatus_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -876,11 +928,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_StartMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_GetMarketMakingStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_StopMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_StartMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -888,12 +940,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/StopMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:stop"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StartMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:start"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_StopMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_StartMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -901,11 +953,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_StopMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_StartMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_PauseMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_StopMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -913,12 +965,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/PauseMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:pause"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StopMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:stop"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_PauseMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_StopMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -926,11 +978,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_PauseMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_StopMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_ResumeMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_PauseMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -938,12 +990,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/ResumeMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:resume"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/PauseMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:pause"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_ResumeMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_PauseMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -951,11 +1003,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_ResumeMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_PauseMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_ResetMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_ResumeMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -963,12 +1015,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/ResetMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:reset"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:resume"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_ResetMm_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_ResumeMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -976,11 +1028,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_ResetMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_ResumeMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_MmService_UpdateMmConfig_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_ResetMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -988,12 +1040,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/UpdateMmConfig", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/config"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/ResetMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:reset"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_UpdateMmConfig_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_ResetMarketMaking_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -1001,18 +1053,43 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_UpdateMmConfig_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_ResetMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MmService_StreamMmStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_MarketMakingService_UpdateMarketMakingConfig_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/config"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_MarketMakingService_UpdateMarketMakingConfig_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketMakingService_UpdateMarketMakingConfig_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_MarketMakingService_StreamMarketMakingStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("GET", pattern_MmService_GetMmOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_GetMarketMakingOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -1020,12 +1097,12 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MmService/GetMmOrderbook", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/orderbook"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MmService_GetMmOrderbook_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MarketMakingService_GetMarketMakingOrderbook_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -1033,11 +1110,11 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_MmService_GetMmOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_GetMarketMakingOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MmService_StreamMmOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_StreamMarketMakingOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1047,9 +1124,9 @@ func RegisterMmServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 	return nil
 }
 
-// RegisterMmServiceHandlerFromEndpoint is same as RegisterMmServiceHandler but
+// RegisterMarketMakingServiceHandlerFromEndpoint is same as RegisterMarketMakingServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterMmServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterMarketMakingServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -1069,305 +1146,327 @@ func RegisterMmServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.Serv
 		}()
 	}()
 
-	return RegisterMmServiceHandler(ctx, mux, conn)
+	return RegisterMarketMakingServiceHandler(ctx, mux, conn)
 }
 
-// RegisterMmServiceHandler registers the http handlers for service MmService to "mux".
+// RegisterMarketMakingServiceHandler registers the http handlers for service MarketMakingService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterMmServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterMmServiceHandlerClient(ctx, mux, NewMmServiceClient(conn))
+func RegisterMarketMakingServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterMarketMakingServiceHandlerClient(ctx, mux, NewMarketMakingServiceClient(conn))
 }
 
-// RegisterMmServiceHandlerClient registers the http handlers for service MmService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "MmServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "MmServiceClient"
+// RegisterMarketMakingServiceHandlerClient registers the http handlers for service MarketMakingService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "MarketMakingServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "MarketMakingServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "MmServiceClient" to call the correct interceptors.
-func RegisterMmServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client MmServiceClient) error {
+// "MarketMakingServiceClient" to call the correct interceptors.
+func RegisterMarketMakingServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client MarketMakingServiceClient) error {
 
-	mux.Handle("GET", pattern_MmService_ListMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_ListMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/ListMm", runtime.WithHTTPPathPattern("/v1/mm"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/ListMarketMaking", runtime.WithHTTPPathPattern("/v1/mm"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_ListMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_ListMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_ListMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_ListMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_CreateMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_GetMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/CreateMm", runtime.WithHTTPPathPattern("/v1/mm"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/GetMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_CreateMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_GetMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_CreateMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_GetMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_MmService_UpdateMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_CreateMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/UpdateMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/CreateMarketMaking", runtime.WithHTTPPathPattern("/v1/mm"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_UpdateMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_CreateMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_UpdateMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_CreateMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MmService_GetMmStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_MarketMakingService_UpdateMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/GetMmStatus", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/status"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/UpdateMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_GetMmStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_UpdateMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_GetMmStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_UpdateMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_StartMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_GetMarketMakingStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/StartMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:start"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/status"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_StartMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_GetMarketMakingStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_StartMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_GetMarketMakingStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_StopMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_StartMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/StopMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:stop"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StartMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:start"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_StopMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_StartMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_StopMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_StartMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_PauseMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_StopMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/PauseMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:pause"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StopMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:stop"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_PauseMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_StopMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_PauseMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_StopMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_ResumeMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_PauseMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/ResumeMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:resume"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/PauseMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:pause"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_ResumeMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_PauseMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_ResumeMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_PauseMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_MmService_ResetMm_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_ResumeMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/ResetMm", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:reset"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:resume"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_ResetMm_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_ResumeMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_ResetMm_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_ResumeMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_MmService_UpdateMmConfig_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MarketMakingService_ResetMarketMaking_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/UpdateMmConfig", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/config"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/ResetMarketMaking", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:reset"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_UpdateMmConfig_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_ResetMarketMaking_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_UpdateMmConfig_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_ResetMarketMaking_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MmService_StreamMmStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_MarketMakingService_UpdateMarketMakingConfig_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/StreamMmStatus", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:streamStatus"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_StreamMmStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_UpdateMarketMakingConfig_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_StreamMmStatus_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_UpdateMarketMakingConfig_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MmService_GetMmOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_StreamMarketMakingStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/GetMmOrderbook", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/orderbook"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StreamMarketMakingStatus", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}:streamStatus"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_GetMmOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_StreamMarketMakingStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_GetMmOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_StreamMarketMakingStatus_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_MmService_StreamMmOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_GetMarketMakingOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MmService/StreamMmOrderbook", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/orderbook:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/orderbook"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MmService_StreamMmOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_GetMarketMakingOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MmService_StreamMmOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_GetMarketMakingOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_MarketMakingService_StreamMarketMakingOrderbook_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/orderbook:stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MarketMakingService_StreamMarketMakingOrderbook_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketMakingService_StreamMarketMakingOrderbook_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1375,57 +1474,61 @@ func RegisterMmServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 }
 
 var (
-	pattern_MmService_ListMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "mm"}, ""))
+	pattern_MarketMakingService_ListMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "mm"}, ""))
 
-	pattern_MmService_CreateMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "mm"}, ""))
+	pattern_MarketMakingService_GetMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, ""))
 
-	pattern_MmService_UpdateMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, ""))
+	pattern_MarketMakingService_CreateMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "mm"}, ""))
 
-	pattern_MmService_GetMmStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "status"}, ""))
+	pattern_MarketMakingService_UpdateMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, ""))
 
-	pattern_MmService_StartMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "start"))
+	pattern_MarketMakingService_GetMarketMakingStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "status"}, ""))
 
-	pattern_MmService_StopMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "stop"))
+	pattern_MarketMakingService_StartMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "start"))
 
-	pattern_MmService_PauseMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "pause"))
+	pattern_MarketMakingService_StopMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "stop"))
 
-	pattern_MmService_ResumeMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "resume"))
+	pattern_MarketMakingService_PauseMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "pause"))
 
-	pattern_MmService_ResetMm_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "reset"))
+	pattern_MarketMakingService_ResumeMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "resume"))
 
-	pattern_MmService_UpdateMmConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "config"}, ""))
+	pattern_MarketMakingService_ResetMarketMaking_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "reset"))
 
-	pattern_MmService_StreamMmStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "streamStatus"))
+	pattern_MarketMakingService_UpdateMarketMakingConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "config"}, ""))
 
-	pattern_MmService_GetMmOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "orderbook"}, ""))
+	pattern_MarketMakingService_StreamMarketMakingStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "mm", "symbol"}, "streamStatus"))
 
-	pattern_MmService_StreamMmOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "orderbook"}, "stream"))
+	pattern_MarketMakingService_GetMarketMakingOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "orderbook"}, ""))
+
+	pattern_MarketMakingService_StreamMarketMakingOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "orderbook"}, "stream"))
 )
 
 var (
-	forward_MmService_ListMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_ListMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_CreateMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_GetMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_UpdateMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_CreateMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_GetMmStatus_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_UpdateMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_StartMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_GetMarketMakingStatus_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_StopMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_StartMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_PauseMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_StopMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_ResumeMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_PauseMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_ResetMm_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_ResumeMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_UpdateMmConfig_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_ResetMarketMaking_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_StreamMmStatus_0 = runtime.ForwardResponseStream
+	forward_MarketMakingService_UpdateMarketMakingConfig_0 = runtime.ForwardResponseMessage
 
-	forward_MmService_GetMmOrderbook_0 = runtime.ForwardResponseMessage
+	forward_MarketMakingService_StreamMarketMakingStatus_0 = runtime.ForwardResponseStream
 
-	forward_MmService_StreamMmOrderbook_0 = runtime.ForwardResponseStream
+	forward_MarketMakingService_GetMarketMakingOrderbook_0 = runtime.ForwardResponseMessage
+
+	forward_MarketMakingService_StreamMarketMakingOrderbook_0 = runtime.ForwardResponseStream
 )

@@ -15,23 +15,23 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 /// MM 상태
-class MmState extends $pb.ProtobufEnum {
-  static const MmState MM_STATE_UNSPECIFIED = MmState._(0, _omitEnumNames ? '' : 'MM_STATE_UNSPECIFIED');
-  static const MmState MM_STATE_IDLE = MmState._(1, _omitEnumNames ? '' : 'MM_STATE_IDLE');
-  static const MmState MM_STATE_RUNNING = MmState._(2, _omitEnumNames ? '' : 'MM_STATE_RUNNING');
-  static const MmState MM_STATE_PAUSED = MmState._(3, _omitEnumNames ? '' : 'MM_STATE_PAUSED');
+class MarketMakingState extends $pb.ProtobufEnum {
+  static const MarketMakingState MARKET_MAKING_STATE_UNSPECIFIED = MarketMakingState._(0, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_UNSPECIFIED');
+  static const MarketMakingState MARKET_MAKING_STATE_IDLE = MarketMakingState._(1, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_IDLE');
+  static const MarketMakingState MARKET_MAKING_STATE_RUNNING = MarketMakingState._(2, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_RUNNING');
+  static const MarketMakingState MARKET_MAKING_STATE_PAUSED = MarketMakingState._(3, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_PAUSED');
 
-  static const $core.List<MmState> values = <MmState> [
-    MM_STATE_UNSPECIFIED,
-    MM_STATE_IDLE,
-    MM_STATE_RUNNING,
-    MM_STATE_PAUSED,
+  static const $core.List<MarketMakingState> values = <MarketMakingState> [
+    MARKET_MAKING_STATE_UNSPECIFIED,
+    MARKET_MAKING_STATE_IDLE,
+    MARKET_MAKING_STATE_RUNNING,
+    MARKET_MAKING_STATE_PAUSED,
   ];
 
-  static final $core.List<MmState?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
-  static MmState? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<MarketMakingState?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static MarketMakingState? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const MmState._(super.value, super.name);
+  const MarketMakingState._(super.value, super.name);
 }
 
 
