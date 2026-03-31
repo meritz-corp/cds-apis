@@ -273,63 +273,6 @@ pub mod market_making_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn pause_market_making(
-            &mut self,
-            request: impl tonic::IntoRequest<super::PauseMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::PauseMarketMakingResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MarketMakingService/PauseMarketMaking",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "PauseMarketMaking"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn resume_market_making(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ResumeMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ResumeMarketMakingResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.mm.MarketMakingService",
-                        "ResumeMarketMaking",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn reset_market_making(
             &mut self,
             request: impl tonic::IntoRequest<super::ResetMarketMakingRequest>,
@@ -524,20 +467,6 @@ pub mod market_making_service_server {
             request: tonic::Request<super::StopMarketMakingRequest>,
         ) -> std::result::Result<
             tonic::Response<super::StopMarketMakingResponse>,
-            tonic::Status,
-        >;
-        async fn pause_market_making(
-            &self,
-            request: tonic::Request<super::PauseMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::PauseMarketMakingResponse>,
-            tonic::Status,
-        >;
-        async fn resume_market_making(
-            &self,
-            request: tonic::Request<super::ResumeMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ResumeMarketMakingResponse>,
             tonic::Status,
         >;
         async fn reset_market_making(
@@ -995,104 +924,6 @@ pub mod market_making_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StopMarketMakingSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.mm.MarketMakingService/PauseMarketMaking" => {
-                    #[allow(non_camel_case_types)]
-                    struct PauseMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
-                    impl<
-                        T: MarketMakingService,
-                    > tonic::server::UnaryService<super::PauseMarketMakingRequest>
-                    for PauseMarketMakingSvc<T> {
-                        type Response = super::PauseMarketMakingResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::PauseMarketMakingRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MarketMakingService>::pause_market_making(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = PauseMarketMakingSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking" => {
-                    #[allow(non_camel_case_types)]
-                    struct ResumeMarketMakingSvc<T: MarketMakingService>(pub Arc<T>);
-                    impl<
-                        T: MarketMakingService,
-                    > tonic::server::UnaryService<super::ResumeMarketMakingRequest>
-                    for ResumeMarketMakingSvc<T> {
-                        type Response = super::ResumeMarketMakingResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::ResumeMarketMakingRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as MarketMakingService>::resume_market_making(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = ResumeMarketMakingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

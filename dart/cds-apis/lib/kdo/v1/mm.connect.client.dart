@@ -135,42 +135,6 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// MM 일시정지 (호가 산출 중단)
-  Future<kdov1mm.PauseMarketMakingResponse> pauseMarketMaking(
-    kdov1mm.PauseMarketMakingRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.MarketMakingService.pauseMarketMaking,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
-  /// MM 재개
-  Future<kdov1mm.ResumeMarketMakingResponse> resumeMarketMaking(
-    kdov1mm.ResumeMarketMakingRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.MarketMakingService.resumeMarketMaking,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
   /// MM 엔진 리셋 (일초 상태 초기화)
   Future<kdov1mm.ResetMarketMakingResponse> resetMarketMaking(
     kdov1mm.ResetMarketMakingRequest input, {

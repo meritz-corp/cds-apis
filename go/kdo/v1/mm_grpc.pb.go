@@ -36,10 +36,6 @@ type MarketMakingServiceClient interface {
 	StartMarketMaking(ctx context.Context, in *StartMarketMakingRequest, opts ...grpc.CallOption) (*StartMarketMakingResponse, error)
 	// MM 중지 (심볼 해제)
 	StopMarketMaking(ctx context.Context, in *StopMarketMakingRequest, opts ...grpc.CallOption) (*StopMarketMakingResponse, error)
-	// MM 일시정지 (호가 산출 중단)
-	PauseMarketMaking(ctx context.Context, in *PauseMarketMakingRequest, opts ...grpc.CallOption) (*PauseMarketMakingResponse, error)
-	// MM 재개
-	ResumeMarketMaking(ctx context.Context, in *ResumeMarketMakingRequest, opts ...grpc.CallOption) (*ResumeMarketMakingResponse, error)
 	// MM 엔진 리셋 (일초 상태 초기화)
 	ResetMarketMaking(ctx context.Context, in *ResetMarketMakingRequest, opts ...grpc.CallOption) (*ResetMarketMakingResponse, error)
 	// MM 설정 업데이트
@@ -117,24 +113,6 @@ func (c *marketMakingServiceClient) StartMarketMaking(ctx context.Context, in *S
 func (c *marketMakingServiceClient) StopMarketMaking(ctx context.Context, in *StopMarketMakingRequest, opts ...grpc.CallOption) (*StopMarketMakingResponse, error) {
 	out := new(StopMarketMakingResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/StopMarketMaking", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *marketMakingServiceClient) PauseMarketMaking(ctx context.Context, in *PauseMarketMakingRequest, opts ...grpc.CallOption) (*PauseMarketMakingResponse, error) {
-	out := new(PauseMarketMakingResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/PauseMarketMaking", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *marketMakingServiceClient) ResumeMarketMaking(ctx context.Context, in *ResumeMarketMakingRequest, opts ...grpc.CallOption) (*ResumeMarketMakingResponse, error) {
-	out := new(ResumeMarketMakingResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -250,10 +228,6 @@ type MarketMakingServiceServer interface {
 	StartMarketMaking(context.Context, *StartMarketMakingRequest) (*StartMarketMakingResponse, error)
 	// MM 중지 (심볼 해제)
 	StopMarketMaking(context.Context, *StopMarketMakingRequest) (*StopMarketMakingResponse, error)
-	// MM 일시정지 (호가 산출 중단)
-	PauseMarketMaking(context.Context, *PauseMarketMakingRequest) (*PauseMarketMakingResponse, error)
-	// MM 재개
-	ResumeMarketMaking(context.Context, *ResumeMarketMakingRequest) (*ResumeMarketMakingResponse, error)
 	// MM 엔진 리셋 (일초 상태 초기화)
 	ResetMarketMaking(context.Context, *ResetMarketMakingRequest) (*ResetMarketMakingResponse, error)
 	// MM 설정 업데이트
@@ -291,12 +265,6 @@ func (UnimplementedMarketMakingServiceServer) StartMarketMaking(context.Context,
 }
 func (UnimplementedMarketMakingServiceServer) StopMarketMaking(context.Context, *StopMarketMakingRequest) (*StopMarketMakingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopMarketMaking not implemented")
-}
-func (UnimplementedMarketMakingServiceServer) PauseMarketMaking(context.Context, *PauseMarketMakingRequest) (*PauseMarketMakingResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PauseMarketMaking not implemented")
-}
-func (UnimplementedMarketMakingServiceServer) ResumeMarketMaking(context.Context, *ResumeMarketMakingRequest) (*ResumeMarketMakingResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResumeMarketMaking not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) ResetMarketMaking(context.Context, *ResetMarketMakingRequest) (*ResetMarketMakingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetMarketMaking not implemented")
@@ -452,42 +420,6 @@ func _MarketMakingService_StopMarketMaking_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MarketMakingService_PauseMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PauseMarketMakingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MarketMakingServiceServer).PauseMarketMaking(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MarketMakingService/PauseMarketMaking",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MarketMakingServiceServer).PauseMarketMaking(ctx, req.(*PauseMarketMakingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MarketMakingService_ResumeMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResumeMarketMakingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MarketMakingServiceServer).ResumeMarketMaking(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MarketMakingService/ResumeMarketMaking",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MarketMakingServiceServer).ResumeMarketMaking(ctx, req.(*ResumeMarketMakingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _MarketMakingService_ResetMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetMarketMakingRequest)
 	if err := dec(in); err != nil {
@@ -618,14 +550,6 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopMarketMaking",
 			Handler:    _MarketMakingService_StopMarketMaking_Handler,
-		},
-		{
-			MethodName: "PauseMarketMaking",
-			Handler:    _MarketMakingService_PauseMarketMaking_Handler,
-		},
-		{
-			MethodName: "ResumeMarketMaking",
-			Handler:    _MarketMakingService_ResumeMarketMaking_Handler,
 		},
 		{
 			MethodName: "ResetMarketMaking",

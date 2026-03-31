@@ -19,16 +19,14 @@ class MarketMakingState extends $pb.ProtobufEnum {
   static const MarketMakingState MARKET_MAKING_STATE_UNSPECIFIED = MarketMakingState._(0, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_UNSPECIFIED');
   static const MarketMakingState MARKET_MAKING_STATE_IDLE = MarketMakingState._(1, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_IDLE');
   static const MarketMakingState MARKET_MAKING_STATE_RUNNING = MarketMakingState._(2, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_RUNNING');
-  static const MarketMakingState MARKET_MAKING_STATE_PAUSED = MarketMakingState._(3, _omitEnumNames ? '' : 'MARKET_MAKING_STATE_PAUSED');
 
   static const $core.List<MarketMakingState> values = <MarketMakingState> [
     MARKET_MAKING_STATE_UNSPECIFIED,
     MARKET_MAKING_STATE_IDLE,
     MARKET_MAKING_STATE_RUNNING,
-    MARKET_MAKING_STATE_PAUSED,
   ];
 
-  static final $core.List<MarketMakingState?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static final $core.List<MarketMakingState?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
   static MarketMakingState? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const MarketMakingState._(super.value, super.name);

@@ -67,22 +67,6 @@ abstract final class MarketMakingService {
     kdov1mm.StopMarketMakingResponse.new,
   );
 
-  /// MM 일시정지 (호가 산출 중단)
-  static const pauseMarketMaking = connect.Spec(
-    '/$name/PauseMarketMaking',
-    connect.StreamType.unary,
-    kdov1mm.PauseMarketMakingRequest.new,
-    kdov1mm.PauseMarketMakingResponse.new,
-  );
-
-  /// MM 재개
-  static const resumeMarketMaking = connect.Spec(
-    '/$name/ResumeMarketMaking',
-    connect.StreamType.unary,
-    kdov1mm.ResumeMarketMakingRequest.new,
-    kdov1mm.ResumeMarketMakingResponse.new,
-  );
-
   /// MM 엔진 리셋 (일초 상태 초기화)
   static const resetMarketMaking = connect.Spec(
     '/$name/ResetMarketMaking',

@@ -68,16 +68,6 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$stopMarketMaking, request, options: options);
   }
 
-  /// MM 일시정지 (호가 산출 중단)
-  $grpc.ResponseFuture<$0.PauseMarketMakingResponse> pauseMarketMaking($0.PauseMarketMakingRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$pauseMarketMaking, request, options: options);
-  }
-
-  /// MM 재개
-  $grpc.ResponseFuture<$0.ResumeMarketMakingResponse> resumeMarketMaking($0.ResumeMarketMakingRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$resumeMarketMaking, request, options: options);
-  }
-
   /// MM 엔진 리셋 (일초 상태 초기화)
   $grpc.ResponseFuture<$0.ResetMarketMakingResponse> resetMarketMaking($0.ResetMarketMakingRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$resetMarketMaking, request, options: options);
@@ -133,14 +123,6 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/StopMarketMaking',
       ($0.StopMarketMakingRequest value) => value.writeToBuffer(),
       $0.StopMarketMakingResponse.fromBuffer);
-  static final _$pauseMarketMaking = $grpc.ClientMethod<$0.PauseMarketMakingRequest, $0.PauseMarketMakingResponse>(
-      '/kdo.v1.mm.MarketMakingService/PauseMarketMaking',
-      ($0.PauseMarketMakingRequest value) => value.writeToBuffer(),
-      $0.PauseMarketMakingResponse.fromBuffer);
-  static final _$resumeMarketMaking = $grpc.ClientMethod<$0.ResumeMarketMakingRequest, $0.ResumeMarketMakingResponse>(
-      '/kdo.v1.mm.MarketMakingService/ResumeMarketMaking',
-      ($0.ResumeMarketMakingRequest value) => value.writeToBuffer(),
-      $0.ResumeMarketMakingResponse.fromBuffer);
   static final _$resetMarketMaking = $grpc.ClientMethod<$0.ResetMarketMakingRequest, $0.ResetMarketMakingResponse>(
       '/kdo.v1.mm.MarketMakingService/ResetMarketMaking',
       ($0.ResetMarketMakingRequest value) => value.writeToBuffer(),
@@ -217,20 +199,6 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.StopMarketMakingRequest.fromBuffer(value),
         ($0.StopMarketMakingResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.PauseMarketMakingRequest, $0.PauseMarketMakingResponse>(
-        'PauseMarketMaking',
-        pauseMarketMaking_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.PauseMarketMakingRequest.fromBuffer(value),
-        ($0.PauseMarketMakingResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ResumeMarketMakingRequest, $0.ResumeMarketMakingResponse>(
-        'ResumeMarketMaking',
-        resumeMarketMaking_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.ResumeMarketMakingRequest.fromBuffer(value),
-        ($0.ResumeMarketMakingResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ResetMarketMakingRequest, $0.ResetMarketMakingResponse>(
         'ResetMarketMaking',
         resetMarketMaking_Pre,
@@ -309,18 +277,6 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.StopMarketMakingResponse> stopMarketMaking($grpc.ServiceCall call, $0.StopMarketMakingRequest request);
-
-  $async.Future<$0.PauseMarketMakingResponse> pauseMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.PauseMarketMakingRequest> $request) async {
-    return pauseMarketMaking($call, await $request);
-  }
-
-  $async.Future<$0.PauseMarketMakingResponse> pauseMarketMaking($grpc.ServiceCall call, $0.PauseMarketMakingRequest request);
-
-  $async.Future<$0.ResumeMarketMakingResponse> resumeMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ResumeMarketMakingRequest> $request) async {
-    return resumeMarketMaking($call, await $request);
-  }
-
-  $async.Future<$0.ResumeMarketMakingResponse> resumeMarketMaking($grpc.ServiceCall call, $0.ResumeMarketMakingRequest request);
 
   $async.Future<$0.ResetMarketMakingResponse> resetMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ResetMarketMakingRequest> $request) async {
     return resetMarketMaking($call, await $request);

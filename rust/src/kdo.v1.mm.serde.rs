@@ -2047,7 +2047,6 @@ impl serde::Serialize for MarketMakingState {
             Self::Unspecified => "MARKET_MAKING_STATE_UNSPECIFIED",
             Self::Idle => "MARKET_MAKING_STATE_IDLE",
             Self::Running => "MARKET_MAKING_STATE_RUNNING",
-            Self::Paused => "MARKET_MAKING_STATE_PAUSED",
         };
         serializer.serialize_str(variant)
     }
@@ -2062,7 +2061,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingState {
             "MARKET_MAKING_STATE_UNSPECIFIED",
             "MARKET_MAKING_STATE_IDLE",
             "MARKET_MAKING_STATE_RUNNING",
-            "MARKET_MAKING_STATE_PAUSED",
         ];
 
         struct GeneratedVisitor;
@@ -2106,7 +2104,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingState {
                     "MARKET_MAKING_STATE_UNSPECIFIED" => Ok(MarketMakingState::Unspecified),
                     "MARKET_MAKING_STATE_IDLE" => Ok(MarketMakingState::Idle),
                     "MARKET_MAKING_STATE_RUNNING" => Ok(MarketMakingState::Running),
-                    "MARKET_MAKING_STATE_PAUSED" => Ok(MarketMakingState::Paused),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -2137,9 +2134,6 @@ impl serde::Serialize for MarketMakingStatus {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingStatus", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2151,9 +2145,6 @@ impl serde::Serialize for MarketMakingStatus {
         }
         if let Some(v) = self.config.as_ref() {
             struct_ser.serialize_field("config", v)?;
-        }
-        if true {
-            struct_ser.serialize_field("registered", &self.registered)?;
         }
         if true {
             struct_ser.serialize_field("active", &self.active)?;
@@ -2174,7 +2165,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
             "symbol",
             "state",
             "config",
-            "registered",
             "active",
             "fund_code",
             "fundCode",
@@ -2185,7 +2175,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
             Symbol,
             State,
             Config,
-            Registered,
             Active,
             FundCode,
             __SkipField__,
@@ -2213,7 +2202,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "state" => Ok(GeneratedField::State),
                             "config" => Ok(GeneratedField::Config),
-                            "registered" => Ok(GeneratedField::Registered),
                             "active" => Ok(GeneratedField::Active),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -2238,7 +2226,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                 let mut symbol__ = None;
                 let mut state__ = None;
                 let mut config__ = None;
-                let mut registered__ = None;
                 let mut active__ = None;
                 let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -2261,12 +2248,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                             }
                             config__ = map_.next_value()?;
                         }
-                        GeneratedField::Registered => {
-                            if registered__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("registered"));
-                            }
-                            registered__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::Active => {
                             if active__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("active"));
@@ -2288,7 +2269,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                     symbol: symbol__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     config: config__,
-                    registered: registered__.unwrap_or_default(),
                     active: active__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
                 })
@@ -2469,196 +2449,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingTradeAnalyzer", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PauseMarketMakingRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.PauseMarketMakingRequest", len)?;
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for PauseMarketMakingRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "symbol",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Symbol,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PauseMarketMakingRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.PauseMarketMakingRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PauseMarketMakingRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut symbol__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(PauseMarketMakingRequest {
-                    symbol: symbol__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.mm.PauseMarketMakingRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PauseMarketMakingResponse {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.PauseMarketMakingResponse", len)?;
-        if true {
-            struct_ser.serialize_field("message", &self.message)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for PauseMarketMakingResponse {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "message",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Message,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "message" => Ok(GeneratedField::Message),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PauseMarketMakingResponse;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.PauseMarketMakingResponse")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PauseMarketMakingResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut message__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Message => {
-                            if message__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("message"));
-                            }
-                            message__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(PauseMarketMakingResponse {
-                    message: message__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.mm.PauseMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ResetMarketMakingRequest {
@@ -2869,196 +2659,6 @@ impl<'de> serde::Deserialize<'de> for ResetMarketMakingResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.ResetMarketMakingResponse", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ResumeMarketMakingRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResumeMarketMakingRequest", len)?;
-        if true {
-            struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ResumeMarketMakingRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "symbol",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Symbol,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "symbol" => Ok(GeneratedField::Symbol),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ResumeMarketMakingRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ResumeMarketMakingRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResumeMarketMakingRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut symbol__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Symbol => {
-                            if symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbol"));
-                            }
-                            symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ResumeMarketMakingRequest {
-                    symbol: symbol__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.mm.ResumeMarketMakingRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ResumeMarketMakingResponse {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ResumeMarketMakingResponse", len)?;
-        if true {
-            struct_ser.serialize_field("message", &self.message)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ResumeMarketMakingResponse {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "message",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Message,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "message" => Ok(GeneratedField::Message),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ResumeMarketMakingResponse;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ResumeMarketMakingResponse")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResumeMarketMakingResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut message__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Message => {
-                            if message__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("message"));
-                            }
-                            message__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ResumeMarketMakingResponse {
-                    message: message__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.mm.ResumeMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StartMarketMakingRequest {

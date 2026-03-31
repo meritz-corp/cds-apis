@@ -69,22 +69,6 @@ service MarketMakingService {
     };
   }
 
-  // MM 일시정지 (호가 산출 중단)
-  rpc PauseMarketMaking(PauseMarketMakingRequest) returns (PauseMarketMakingResponse) {
-    option (google.api.http) = {
-      post: "/v1/mm/{symbol=*}:pause"
-      body: "*"
-    };
-  }
-
-  // MM 재개
-  rpc ResumeMarketMaking(ResumeMarketMakingRequest) returns (ResumeMarketMakingResponse) {
-    option (google.api.http) = {
-      post: "/v1/mm/{symbol=*}:resume"
-      body: "*"
-    };
-  }
-
   // MM 엔진 리셋 (일초 상태 초기화)
   rpc ResetMarketMaking(ResetMarketMakingRequest) returns (ResetMarketMakingResponse) {
     option (google.api.http) = {
@@ -134,9 +118,11 @@ service MarketMakingService {
 // MM 상태
 enum MarketMakingState {
   MARKET_MAKING_STATE_UNSPECIFIED = 0;
-  MARKET_MAKING_STATE_IDLE = 1;        // 미등록
+  MARKET_MAKING_STATE_IDLE = 1;        // 대기
   MARKET_MAKING_STATE_RUNNING = 2;     // 활성
-  MARKET_MAKING_STATE_PAUSED = 3;      // 일시정지
+  // reserved: 3 (removed MARKET_MAKING_STATE_PAUSED)
+  reserved 3;
+  reserved "MARKET_MAKING_STATE_PAUSED";
 }
 
 // ============================================================================
@@ -172,10 +158,11 @@ message MarketMakingStatus {
   // MM 설정 (config 필드에 momentum 포함)
   MarketMakingConfiguration config = 3;
 
-  // 등록 여부
-  bool registered = 4;
+  // reserved: 4 (removed registered field)
+  reserved 4;
+  reserved "registered";
 
-  // 활성 여부 (paused가 아닌 경우)
+  // 활성 여부
   bool active = 5;
 
   // 펀드 코드
@@ -377,28 +364,6 @@ message StopMarketMakingRequest {
 }
 
 message StopMarketMakingResponse {
-  // 메시지
-  string message = 1;
-}
-
-// PauseMarketMaking
-message PauseMarketMakingRequest {
-  // ISIN 심볼
-  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-message PauseMarketMakingResponse {
-  // 메시지
-  string message = 1;
-}
-
-// ResumeMarketMaking
-message ResumeMarketMakingRequest {
-  // ISIN 심볼
-  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-message ResumeMarketMakingResponse {
   // 메시지
   string message = 1;
 }

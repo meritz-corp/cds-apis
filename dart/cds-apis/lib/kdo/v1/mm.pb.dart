@@ -129,7 +129,6 @@ class MarketMakingStatus extends $pb.GeneratedMessage {
     $core.String? symbol,
     MarketMakingState? state,
     MarketMakingConfiguration? config,
-    $core.bool? registered,
     $core.bool? active,
     $core.String? fundCode,
   }) {
@@ -137,7 +136,6 @@ class MarketMakingStatus extends $pb.GeneratedMessage {
     if (symbol != null) result.symbol = symbol;
     if (state != null) result.state = state;
     if (config != null) result.config = config;
-    if (registered != null) result.registered = registered;
     if (active != null) result.active = active;
     if (fundCode != null) result.fundCode = fundCode;
     return result;
@@ -152,7 +150,6 @@ class MarketMakingStatus extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..e<MarketMakingState>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingState.MARKET_MAKING_STATE_UNSPECIFIED, valueOf: MarketMakingState.valueOf, enumValues: MarketMakingState.values)
     ..aOM<MarketMakingConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
-    ..aOB(4, _omitFieldNames ? '' : 'registered')
     ..aOB(5, _omitFieldNames ? '' : 'active')
     ..aOS(6, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
@@ -207,33 +204,23 @@ class MarketMakingStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   MarketMakingConfiguration ensureConfig() => $_ensure(2);
 
-  /// 등록 여부
-  @$pb.TagNumber(4)
-  $core.bool get registered => $_getBF(3);
-  @$pb.TagNumber(4)
-  set registered($core.bool value) => $_setBool(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasRegistered() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearRegistered() => $_clearField(4);
-
-  /// 활성 여부 (paused가 아닌 경우)
+  /// 활성 여부
   @$pb.TagNumber(5)
-  $core.bool get active => $_getBF(4);
+  $core.bool get active => $_getBF(3);
   @$pb.TagNumber(5)
-  set active($core.bool value) => $_setBool(4, value);
+  set active($core.bool value) => $_setBool(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasActive() => $_has(4);
+  $core.bool hasActive() => $_has(3);
   @$pb.TagNumber(5)
   void clearActive() => $_clearField(5);
 
   /// 펀드 코드
   @$pb.TagNumber(6)
-  $core.String get fundCode => $_getSZ(5);
+  $core.String get fundCode => $_getSZ(4);
   @$pb.TagNumber(6)
-  set fundCode($core.String value) => $_setString(5, value);
+  set fundCode($core.String value) => $_setString(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasFundCode() => $_has(5);
+  $core.bool hasFundCode() => $_has(4);
   @$pb.TagNumber(6)
   void clearFundCode() => $_clearField(6);
 }
@@ -1395,196 +1382,6 @@ class StopMarketMakingResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static StopMarketMakingResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopMarketMakingResponse>(create);
   static StopMarketMakingResponse? _defaultInstance;
-
-  /// 메시지
-  @$pb.TagNumber(1)
-  $core.String get message => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set message($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMessage() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMessage() => $_clearField(1);
-}
-
-/// PauseMarketMaking
-class PauseMarketMakingRequest extends $pb.GeneratedMessage {
-  factory PauseMarketMakingRequest({
-    $core.String? symbol,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    return result;
-  }
-
-  PauseMarketMakingRequest._();
-
-  factory PauseMarketMakingRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PauseMarketMakingRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PauseMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PauseMarketMakingRequest clone() => PauseMarketMakingRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PauseMarketMakingRequest copyWith(void Function(PauseMarketMakingRequest) updates) => super.copyWith((message) => updates(message as PauseMarketMakingRequest)) as PauseMarketMakingRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PauseMarketMakingRequest create() => PauseMarketMakingRequest._();
-  @$core.override
-  PauseMarketMakingRequest createEmptyInstance() => create();
-  static $pb.PbList<PauseMarketMakingRequest> createRepeated() => $pb.PbList<PauseMarketMakingRequest>();
-  @$core.pragma('dart2js:noInline')
-  static PauseMarketMakingRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PauseMarketMakingRequest>(create);
-  static PauseMarketMakingRequest? _defaultInstance;
-
-  /// ISIN 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-}
-
-class PauseMarketMakingResponse extends $pb.GeneratedMessage {
-  factory PauseMarketMakingResponse({
-    $core.String? message,
-  }) {
-    final result = create();
-    if (message != null) result.message = message;
-    return result;
-  }
-
-  PauseMarketMakingResponse._();
-
-  factory PauseMarketMakingResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PauseMarketMakingResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PauseMarketMakingResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'message')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PauseMarketMakingResponse clone() => PauseMarketMakingResponse()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PauseMarketMakingResponse copyWith(void Function(PauseMarketMakingResponse) updates) => super.copyWith((message) => updates(message as PauseMarketMakingResponse)) as PauseMarketMakingResponse;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PauseMarketMakingResponse create() => PauseMarketMakingResponse._();
-  @$core.override
-  PauseMarketMakingResponse createEmptyInstance() => create();
-  static $pb.PbList<PauseMarketMakingResponse> createRepeated() => $pb.PbList<PauseMarketMakingResponse>();
-  @$core.pragma('dart2js:noInline')
-  static PauseMarketMakingResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PauseMarketMakingResponse>(create);
-  static PauseMarketMakingResponse? _defaultInstance;
-
-  /// 메시지
-  @$pb.TagNumber(1)
-  $core.String get message => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set message($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMessage() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMessage() => $_clearField(1);
-}
-
-/// ResumeMarketMaking
-class ResumeMarketMakingRequest extends $pb.GeneratedMessage {
-  factory ResumeMarketMakingRequest({
-    $core.String? symbol,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    return result;
-  }
-
-  ResumeMarketMakingRequest._();
-
-  factory ResumeMarketMakingRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ResumeMarketMakingRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResumeMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ResumeMarketMakingRequest clone() => ResumeMarketMakingRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ResumeMarketMakingRequest copyWith(void Function(ResumeMarketMakingRequest) updates) => super.copyWith((message) => updates(message as ResumeMarketMakingRequest)) as ResumeMarketMakingRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ResumeMarketMakingRequest create() => ResumeMarketMakingRequest._();
-  @$core.override
-  ResumeMarketMakingRequest createEmptyInstance() => create();
-  static $pb.PbList<ResumeMarketMakingRequest> createRepeated() => $pb.PbList<ResumeMarketMakingRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ResumeMarketMakingRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResumeMarketMakingRequest>(create);
-  static ResumeMarketMakingRequest? _defaultInstance;
-
-  /// ISIN 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-}
-
-class ResumeMarketMakingResponse extends $pb.GeneratedMessage {
-  factory ResumeMarketMakingResponse({
-    $core.String? message,
-  }) {
-    final result = create();
-    if (message != null) result.message = message;
-    return result;
-  }
-
-  ResumeMarketMakingResponse._();
-
-  factory ResumeMarketMakingResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ResumeMarketMakingResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResumeMarketMakingResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'message')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ResumeMarketMakingResponse clone() => ResumeMarketMakingResponse()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ResumeMarketMakingResponse copyWith(void Function(ResumeMarketMakingResponse) updates) => super.copyWith((message) => updates(message as ResumeMarketMakingResponse)) as ResumeMarketMakingResponse;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ResumeMarketMakingResponse create() => ResumeMarketMakingResponse._();
-  @$core.override
-  ResumeMarketMakingResponse createEmptyInstance() => create();
-  static $pb.PbList<ResumeMarketMakingResponse> createRepeated() => $pb.PbList<ResumeMarketMakingResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ResumeMarketMakingResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResumeMarketMakingResponse>(create);
-  static ResumeMarketMakingResponse? _defaultInstance;
 
   /// 메시지
   @$pb.TagNumber(1)

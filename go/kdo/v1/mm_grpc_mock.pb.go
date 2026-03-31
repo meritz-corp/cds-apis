@@ -619,26 +619,6 @@ func (mr *MockMarketMakingServiceClientMockRecorder) ListMarketMaking(ctx, in in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMarketMaking", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ListMarketMaking), varargs...)
 }
 
-// PauseMarketMaking mocks base method.
-func (m *MockMarketMakingServiceClient) PauseMarketMaking(ctx context.Context, in *PauseMarketMakingRequest, opts ...grpc.CallOption) (*PauseMarketMakingResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "PauseMarketMaking", varargs...)
-	ret0, _ := ret[0].(*PauseMarketMakingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// PauseMarketMaking indicates an expected call of PauseMarketMaking.
-func (mr *MockMarketMakingServiceClientMockRecorder) PauseMarketMaking(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PauseMarketMaking", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).PauseMarketMaking), varargs...)
-}
-
 // ResetMarketMaking mocks base method.
 func (m *MockMarketMakingServiceClient) ResetMarketMaking(ctx context.Context, in *ResetMarketMakingRequest, opts ...grpc.CallOption) (*ResetMarketMakingResponse, error) {
 	m.ctrl.T.Helper()
@@ -657,26 +637,6 @@ func (mr *MockMarketMakingServiceClientMockRecorder) ResetMarketMaking(ctx, in i
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetMarketMaking", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ResetMarketMaking), varargs...)
-}
-
-// ResumeMarketMaking mocks base method.
-func (m *MockMarketMakingServiceClient) ResumeMarketMaking(ctx context.Context, in *ResumeMarketMakingRequest, opts ...grpc.CallOption) (*ResumeMarketMakingResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ResumeMarketMaking", varargs...)
-	ret0, _ := ret[0].(*ResumeMarketMakingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ResumeMarketMaking indicates an expected call of ResumeMarketMaking.
-func (mr *MockMarketMakingServiceClientMockRecorder) ResumeMarketMaking(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResumeMarketMaking", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ResumeMarketMaking), varargs...)
 }
 
 // StartMarketMaking mocks base method.
@@ -897,21 +857,6 @@ func (mr *MockMarketMakingServiceServerMockRecorder) ListMarketMaking(ctx, in in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMarketMaking", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ListMarketMaking), ctx, in)
 }
 
-// PauseMarketMaking mocks base method.
-func (m *MockMarketMakingServiceServer) PauseMarketMaking(ctx context.Context, in *PauseMarketMakingRequest) (*PauseMarketMakingResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "PauseMarketMaking", ctx, in)
-	ret0, _ := ret[0].(*PauseMarketMakingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// PauseMarketMaking indicates an expected call of PauseMarketMaking.
-func (mr *MockMarketMakingServiceServerMockRecorder) PauseMarketMaking(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PauseMarketMaking", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).PauseMarketMaking), ctx, in)
-}
-
 // ResetMarketMaking mocks base method.
 func (m *MockMarketMakingServiceServer) ResetMarketMaking(ctx context.Context, in *ResetMarketMakingRequest) (*ResetMarketMakingResponse, error) {
 	m.ctrl.T.Helper()
@@ -925,21 +870,6 @@ func (m *MockMarketMakingServiceServer) ResetMarketMaking(ctx context.Context, i
 func (mr *MockMarketMakingServiceServerMockRecorder) ResetMarketMaking(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetMarketMaking", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ResetMarketMaking), ctx, in)
-}
-
-// ResumeMarketMaking mocks base method.
-func (m *MockMarketMakingServiceServer) ResumeMarketMaking(ctx context.Context, in *ResumeMarketMakingRequest) (*ResumeMarketMakingResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ResumeMarketMaking", ctx, in)
-	ret0, _ := ret[0].(*ResumeMarketMakingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ResumeMarketMaking indicates an expected call of ResumeMarketMaking.
-func (mr *MockMarketMakingServiceServerMockRecorder) ResumeMarketMaking(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResumeMarketMaking", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ResumeMarketMaking), ctx, in)
 }
 
 // StartMarketMaking mocks base method.

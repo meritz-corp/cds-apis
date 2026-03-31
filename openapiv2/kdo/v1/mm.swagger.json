@@ -328,48 +328,6 @@
         ]
       }
     },
-    "/v1/mm/{symbol}:pause": {
-      "post": {
-        "summary": "MM 일시정지 (호가 산출 중단)",
-        "operationId": "MarketMakingService_PauseMarketMaking",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/mmPauseMarketMakingResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "symbol",
-            "description": "ISIN 심볼",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "title": "PauseMarketMaking"
-            }
-          }
-        ],
-        "tags": [
-          "MarketMakingService"
-        ]
-      }
-    },
     "/v1/mm/{symbol}:reset": {
       "post": {
         "summary": "MM 엔진 리셋 (일초 상태 초기화)",
@@ -404,48 +362,6 @@
             "schema": {
               "type": "object",
               "title": "ResetMarketMaking"
-            }
-          }
-        ],
-        "tags": [
-          "MarketMakingService"
-        ]
-      }
-    },
-    "/v1/mm/{symbol}:resume": {
-      "post": {
-        "summary": "MM 재개",
-        "operationId": "MarketMakingService_ResumeMarketMaking",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/mmResumeMarketMakingResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "symbol",
-            "description": "ISIN 심볼",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "title": "ResumeMarketMaking"
             }
           }
         ],
@@ -873,11 +789,10 @@
       "enum": [
         "MARKET_MAKING_STATE_UNSPECIFIED",
         "MARKET_MAKING_STATE_IDLE",
-        "MARKET_MAKING_STATE_RUNNING",
-        "MARKET_MAKING_STATE_PAUSED"
+        "MARKET_MAKING_STATE_RUNNING"
       ],
       "default": "MARKET_MAKING_STATE_UNSPECIFIED",
-      "description": "- MARKET_MAKING_STATE_IDLE: 미등록\n - MARKET_MAKING_STATE_RUNNING: 활성\n - MARKET_MAKING_STATE_PAUSED: 일시정지",
+      "description": "- MARKET_MAKING_STATE_IDLE: 대기\n - MARKET_MAKING_STATE_RUNNING: 활성",
       "title": "MM 상태"
     },
     "mmMarketMakingStatus": {
@@ -895,13 +810,9 @@
           "$ref": "#/definitions/mmMarketMakingConfiguration",
           "title": "MM 설정 (config 필드에 momentum 포함)"
         },
-        "registered": {
-          "type": "boolean",
-          "title": "등록 여부"
-        },
         "active": {
           "type": "boolean",
-          "title": "활성 여부 (paused가 아닌 경우)"
+          "title": "활성 여부"
         },
         "fundCode": {
           "type": "string",
@@ -940,15 +851,6 @@
       },
       "title": "Trade Analyzer 설정"
     },
-    "mmPauseMarketMakingResponse": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      }
-    },
     "mmResetMarketMakingResponse": {
       "type": "object",
       "properties": {
@@ -957,15 +859,6 @@
           "format": "int32",
           "title": "리셋된 심볼 수"
         },
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      }
-    },
-    "mmResumeMarketMakingResponse": {
-      "type": "object",
-      "properties": {
         "message": {
           "type": "string",
           "title": "메시지"

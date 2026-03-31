@@ -37,10 +37,7 @@ pub struct MarketMakingStatus {
     /// MM 설정 (config 필드에 momentum 포함)
     #[prost(message, optional, tag="3")]
     pub config: ::core::option::Option<MarketMakingConfiguration>,
-    /// 등록 여부
-    #[prost(bool, tag="4")]
-    pub registered: bool,
-    /// 활성 여부 (paused가 아닌 경우)
+    /// 활성 여부
     #[prost(bool, tag="5")]
     pub active: bool,
     /// 펀드 코드
@@ -270,36 +267,6 @@ pub struct StopMarketMakingResponse {
     #[prost(string, tag="1")]
     pub message: ::prost::alloc::string::String,
 }
-/// PauseMarketMaking
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PauseMarketMakingRequest {
-    /// ISIN 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PauseMarketMakingResponse {
-    /// 메시지
-    #[prost(string, tag="1")]
-    pub message: ::prost::alloc::string::String,
-}
-/// ResumeMarketMaking
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ResumeMarketMakingRequest {
-    /// ISIN 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ResumeMarketMakingResponse {
-    /// 메시지
-    #[prost(string, tag="1")]
-    pub message: ::prost::alloc::string::String,
-}
 /// ResetMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -393,12 +360,10 @@ pub struct MarketMakingOrderbookData {
 #[repr(i32)]
 pub enum MarketMakingState {
     Unspecified = 0,
-    /// 미등록
+    /// 대기
     Idle = 1,
     /// 활성
     Running = 2,
-    /// 일시정지
-    Paused = 3,
 }
 impl MarketMakingState {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -410,7 +375,6 @@ impl MarketMakingState {
             MarketMakingState::Unspecified => "MARKET_MAKING_STATE_UNSPECIFIED",
             MarketMakingState::Idle => "MARKET_MAKING_STATE_IDLE",
             MarketMakingState::Running => "MARKET_MAKING_STATE_RUNNING",
-            MarketMakingState::Paused => "MARKET_MAKING_STATE_PAUSED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -419,7 +383,6 @@ impl MarketMakingState {
             "MARKET_MAKING_STATE_UNSPECIFIED" => Some(Self::Unspecified),
             "MARKET_MAKING_STATE_IDLE" => Some(Self::Idle),
             "MARKET_MAKING_STATE_RUNNING" => Some(Self::Running),
-            "MARKET_MAKING_STATE_PAUSED" => Some(Self::Paused),
             _ => None,
         }
     }
