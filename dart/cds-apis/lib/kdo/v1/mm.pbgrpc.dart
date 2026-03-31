@@ -39,17 +39,17 @@ class MarketMakingServiceClient extends $grpc.Client {
   }
 
   /// MM 단일 심볼 조회
-  $grpc.ResponseFuture<$0.MarketMakingEntry> getMarketMaking($0.GetMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+  $grpc.ResponseFuture<$0.MarketMaking> getMarketMaking($0.GetMarketMakingRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getMarketMaking, request, options: options);
   }
 
   /// MM 설정 생성 (DB 저장)
-  $grpc.ResponseFuture<$0.MarketMakingEntry> createMarketMaking($0.CreateMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+  $grpc.ResponseFuture<$0.MarketMaking> createMarketMaking($0.CreateMarketMakingRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$createMarketMaking, request, options: options);
   }
 
   /// MM 설정 업데이트 (DB 저장)
-  $grpc.ResponseFuture<$0.MarketMakingEntry> updateMarketMaking($0.UpdateMarketMakingRequest request, {$grpc.CallOptions? options,}) {
+  $grpc.ResponseFuture<$0.MarketMaking> updateMarketMaking($0.UpdateMarketMakingRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$updateMarketMaking, request, options: options);
   }
 
@@ -109,18 +109,18 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/ListMarketMaking',
       ($0.ListMarketMakingRequest value) => value.writeToBuffer(),
       $0.ListMarketMakingResponse.fromBuffer);
-  static final _$getMarketMaking = $grpc.ClientMethod<$0.GetMarketMakingRequest, $0.MarketMakingEntry>(
+  static final _$getMarketMaking = $grpc.ClientMethod<$0.GetMarketMakingRequest, $0.MarketMaking>(
       '/kdo.v1.mm.MarketMakingService/GetMarketMaking',
       ($0.GetMarketMakingRequest value) => value.writeToBuffer(),
-      $0.MarketMakingEntry.fromBuffer);
-  static final _$createMarketMaking = $grpc.ClientMethod<$0.CreateMarketMakingRequest, $0.MarketMakingEntry>(
+      $0.MarketMaking.fromBuffer);
+  static final _$createMarketMaking = $grpc.ClientMethod<$0.CreateMarketMakingRequest, $0.MarketMaking>(
       '/kdo.v1.mm.MarketMakingService/CreateMarketMaking',
       ($0.CreateMarketMakingRequest value) => value.writeToBuffer(),
-      $0.MarketMakingEntry.fromBuffer);
-  static final _$updateMarketMaking = $grpc.ClientMethod<$0.UpdateMarketMakingRequest, $0.MarketMakingEntry>(
+      $0.MarketMaking.fromBuffer);
+  static final _$updateMarketMaking = $grpc.ClientMethod<$0.UpdateMarketMakingRequest, $0.MarketMaking>(
       '/kdo.v1.mm.MarketMakingService/UpdateMarketMaking',
       ($0.UpdateMarketMakingRequest value) => value.writeToBuffer(),
-      $0.MarketMakingEntry.fromBuffer);
+      $0.MarketMaking.fromBuffer);
   static final _$getMarketMakingStatus = $grpc.ClientMethod<$0.GetMarketMakingStatusRequest, $0.MarketMakingStatus>(
       '/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus',
       ($0.GetMarketMakingStatusRequest value) => value.writeToBuffer(),
@@ -175,27 +175,27 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListMarketMakingRequest.fromBuffer(value),
         ($0.ListMarketMakingResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetMarketMakingRequest, $0.MarketMakingEntry>(
+    $addMethod($grpc.ServiceMethod<$0.GetMarketMakingRequest, $0.MarketMaking>(
         'GetMarketMaking',
         getMarketMaking_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.GetMarketMakingRequest.fromBuffer(value),
-        ($0.MarketMakingEntry value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.CreateMarketMakingRequest, $0.MarketMakingEntry>(
+        ($0.MarketMaking value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CreateMarketMakingRequest, $0.MarketMaking>(
         'CreateMarketMaking',
         createMarketMaking_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.CreateMarketMakingRequest.fromBuffer(value),
-        ($0.MarketMakingEntry value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateMarketMakingRequest, $0.MarketMakingEntry>(
+        ($0.MarketMaking value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateMarketMakingRequest, $0.MarketMaking>(
         'UpdateMarketMaking',
         updateMarketMaking_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.UpdateMarketMakingRequest.fromBuffer(value),
-        ($0.MarketMakingEntry value) => value.writeToBuffer()));
+        ($0.MarketMaking value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetMarketMakingStatusRequest, $0.MarketMakingStatus>(
         'GetMarketMakingStatus',
         getMarketMakingStatus_Pre,
@@ -274,23 +274,23 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
 
   $async.Future<$0.ListMarketMakingResponse> listMarketMaking($grpc.ServiceCall call, $0.ListMarketMakingRequest request);
 
-  $async.Future<$0.MarketMakingEntry> getMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingRequest> $request) async {
+  $async.Future<$0.MarketMaking> getMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingRequest> $request) async {
     return getMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.MarketMakingEntry> getMarketMaking($grpc.ServiceCall call, $0.GetMarketMakingRequest request);
+  $async.Future<$0.MarketMaking> getMarketMaking($grpc.ServiceCall call, $0.GetMarketMakingRequest request);
 
-  $async.Future<$0.MarketMakingEntry> createMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateMarketMakingRequest> $request) async {
+  $async.Future<$0.MarketMaking> createMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateMarketMakingRequest> $request) async {
     return createMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.MarketMakingEntry> createMarketMaking($grpc.ServiceCall call, $0.CreateMarketMakingRequest request);
+  $async.Future<$0.MarketMaking> createMarketMaking($grpc.ServiceCall call, $0.CreateMarketMakingRequest request);
 
-  $async.Future<$0.MarketMakingEntry> updateMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMarketMakingRequest> $request) async {
+  $async.Future<$0.MarketMaking> updateMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMarketMakingRequest> $request) async {
     return updateMarketMaking($call, await $request);
   }
 
-  $async.Future<$0.MarketMakingEntry> updateMarketMaking($grpc.ServiceCall call, $0.UpdateMarketMakingRequest request);
+  $async.Future<$0.MarketMaking> updateMarketMaking($grpc.ServiceCall call, $0.UpdateMarketMakingRequest request);
 
   $async.Future<$0.MarketMakingStatus> getMarketMakingStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingStatusRequest> $request) async {
     return getMarketMakingStatus($call, await $request);

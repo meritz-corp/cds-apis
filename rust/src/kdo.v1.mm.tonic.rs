@@ -114,10 +114,7 @@ pub mod market_making_service_client {
         pub async fn get_market_making(
             &mut self,
             request: impl tonic::IntoRequest<super::GetMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarketMakingEntry>,
-            tonic::Status,
-        > {
+        ) -> std::result::Result<tonic::Response<super::MarketMaking>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -141,10 +138,7 @@ pub mod market_making_service_client {
         pub async fn create_market_making(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarketMakingEntry>,
-            tonic::Status,
-        > {
+        ) -> std::result::Result<tonic::Response<super::MarketMaking>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -171,10 +165,7 @@ pub mod market_making_service_client {
         pub async fn update_market_making(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarketMakingEntry>,
-            tonic::Status,
-        > {
+        ) -> std::result::Result<tonic::Response<super::MarketMaking>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -505,24 +496,15 @@ pub mod market_making_service_server {
         async fn get_market_making(
             &self,
             request: tonic::Request<super::GetMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarketMakingEntry>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::MarketMaking>, tonic::Status>;
         async fn create_market_making(
             &self,
             request: tonic::Request<super::CreateMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarketMakingEntry>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::MarketMaking>, tonic::Status>;
         async fn update_market_making(
             &self,
             request: tonic::Request<super::UpdateMarketMakingRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarketMakingEntry>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::MarketMaking>, tonic::Status>;
         async fn get_market_making_status(
             &self,
             request: tonic::Request<super::GetMarketMakingStatusRequest>,
@@ -741,7 +723,7 @@ pub mod market_making_service_server {
                         T: MarketMakingService,
                     > tonic::server::UnaryService<super::GetMarketMakingRequest>
                     for GetMarketMakingSvc<T> {
-                        type Response = super::MarketMakingEntry;
+                        type Response = super::MarketMaking;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -790,7 +772,7 @@ pub mod market_making_service_server {
                         T: MarketMakingService,
                     > tonic::server::UnaryService<super::CreateMarketMakingRequest>
                     for CreateMarketMakingSvc<T> {
-                        type Response = super::MarketMakingEntry;
+                        type Response = super::MarketMaking;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -839,7 +821,7 @@ pub mod market_making_service_server {
                         T: MarketMakingService,
                     > tonic::server::UnaryService<super::UpdateMarketMakingRequest>
                     for UpdateMarketMakingSvc<T> {
-                        type Response = super::MarketMakingEntry;
+                        type Response = super::MarketMaking;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,

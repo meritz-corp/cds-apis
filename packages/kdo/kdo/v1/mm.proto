@@ -20,7 +20,7 @@ service MarketMakingService {
   }
 
   // MM 단일 심볼 조회
-  rpc GetMarketMaking(GetMarketMakingRequest) returns (MarketMakingEntry) {
+  rpc GetMarketMaking(GetMarketMakingRequest) returns (MarketMaking) {
     option (google.api.http) = {
       get: "/v1/mm/{symbol=*}"
     };
@@ -28,7 +28,7 @@ service MarketMakingService {
   }
 
   // MM 설정 생성 (DB 저장)
-  rpc CreateMarketMaking(CreateMarketMakingRequest) returns (MarketMakingEntry) {
+  rpc CreateMarketMaking(CreateMarketMakingRequest) returns (MarketMaking) {
     option (google.api.http) = {
       post: "/v1/mm"
       body: "*"
@@ -37,7 +37,7 @@ service MarketMakingService {
   }
 
   // MM 설정 업데이트 (DB 저장)
-  rpc UpdateMarketMaking(UpdateMarketMakingRequest) returns (MarketMakingEntry) {
+  rpc UpdateMarketMaking(UpdateMarketMakingRequest) returns (MarketMaking) {
     option (google.api.http) = {
       patch: "/v1/mm/{symbol=*}"
       body: "*"
@@ -144,7 +144,7 @@ enum MarketMakingState {
 // ============================================================================
 
 // MM 심볼 정보
-message MarketMakingEntry {
+message MarketMaking {
   // ISIN 심볼
   string symbol = 1;
 
@@ -156,6 +156,9 @@ message MarketMakingEntry {
 
   // 펀드 코드
   string fund_code = 4;
+
+  // ETF tick size (Price internal representation)
+  int64 tick_size = 5;
 }
 
 // MM 상태 상세
@@ -174,9 +177,6 @@ message MarketMakingStatus {
 
   // 활성 여부 (paused가 아닌 경우)
   bool active = 5;
-
-  // 펀드 코드
-  string fund_code = 6;
 
   // 모멘텀 활성 여부
   optional bool momentum_enabled = 7;
@@ -209,28 +209,25 @@ message MarketMakingConfiguration {
   string pricing = 1;
 
   // Skew 설정
-  MarketMakingSkewConfig skew = 2;
+  MarketMakingSkew skew = 2;
 
   // Trade Analyzer 설정
-  MarketMakingTradeAnalyzerConfig trade_analyzer = 3;
+  MarketMakingTradeAnalyzer trade_analyzer = 3;
 
   // Screening 설정
-  MarketMakingScreeningConfig screening = 4;
-
-  // ETF tick size (Price internal representation)
-  int64 tick_size = 5;
+  MarketMakingScreening screening = 4;
 
   // MM 활성화 여부
   bool enabled = 6;
 
   // Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
-  MarketMakingMomentumConfig momentum = 7;
+  MarketMakingMomentum momentum = 7;
 
   // 순노출 hard limit 제어 설정
-  MarketMakingExposureGuardConfig exposure_guard = 8;
+  MarketMakingExposureGuard exposure_guard = 8;
 
   // 중기 buy/sell imbalance 복원 설정
-  MarketMakingInventoryBalancerConfig inventory_balancer = 9;
+  MarketMakingInventoryBalancer inventory_balancer = 9;
 
   // 기준가격 대비 bid 조정값 (Price internal representation)
   int64 bid_adjustment = 10;
@@ -240,7 +237,7 @@ message MarketMakingConfiguration {
 }
 
 // Skew 설정
-message MarketMakingSkewConfig {
+message MarketMakingSkew {
   // Skew 모드: "fixed" or "slide_on_trade"
   string mode = 1;
 
@@ -252,7 +249,7 @@ message MarketMakingSkewConfig {
 }
 
 // Trade Analyzer 설정
-message MarketMakingTradeAnalyzerConfig {
+message MarketMakingTradeAnalyzer {
   // 활성화 여부
   bool enabled = 1;
 
@@ -270,7 +267,7 @@ message MarketMakingTradeAnalyzerConfig {
 }
 
 // Pre-trade Screening 설정
-message MarketMakingScreeningConfig {
+message MarketMakingScreening {
   // 최대 스프레드 폭 (틱 단위, 0=비활성)
   int32 max_spread_width_ticks = 1;
 
@@ -282,7 +279,7 @@ message MarketMakingScreeningConfig {
 }
 
 // Momentum 설정
-message MarketMakingMomentumConfig {
+message MarketMakingMomentum {
   // 활성화 여부
   bool enabled = 1;
 
@@ -309,7 +306,7 @@ message MarketMakingMomentumConfig {
 }
 
 // 순노출 hard limit 제어 설정
-message MarketMakingExposureGuardConfig {
+message MarketMakingExposureGuard {
   // 활성화 여부
   bool enabled = 1;
 
@@ -321,7 +318,7 @@ message MarketMakingExposureGuardConfig {
 }
 
 // 중기 buy/sell imbalance 복원 설정
-message MarketMakingInventoryBalancerConfig {
+message MarketMakingInventoryBalancer {
   // 활성화 여부
   bool enabled = 1;
 
@@ -353,7 +350,7 @@ message ListMarketMakingRequest {
 
 message ListMarketMakingResponse {
   // 등록된 MM 목록
-  repeated MarketMakingEntry entries = 1;
+  repeated MarketMaking entries = 1;
 
   // 다음 페이지 토큰
   string next_page_token = 2;

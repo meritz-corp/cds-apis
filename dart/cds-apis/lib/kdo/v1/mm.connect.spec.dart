@@ -24,7 +24,7 @@ abstract final class MarketMakingService {
     '/$name/GetMarketMaking',
     connect.StreamType.unary,
     kdov1mm.GetMarketMakingRequest.new,
-    kdov1mm.MarketMakingEntry.new,
+    kdov1mm.MarketMaking.new,
   );
 
   /// MM 설정 생성 (DB 저장)
@@ -32,7 +32,7 @@ abstract final class MarketMakingService {
     '/$name/CreateMarketMaking',
     connect.StreamType.unary,
     kdov1mm.CreateMarketMakingRequest.new,
-    kdov1mm.MarketMakingEntry.new,
+    kdov1mm.MarketMaking.new,
   );
 
   /// MM 설정 업데이트 (DB 저장)
@@ -40,7 +40,7 @@ abstract final class MarketMakingService {
     '/$name/UpdateMarketMaking',
     connect.StreamType.unary,
     kdov1mm.UpdateMarketMakingRequest.new,
-    kdov1mm.MarketMakingEntry.new,
+    kdov1mm.MarketMaking.new,
   );
 
   /// MM 상태 조회

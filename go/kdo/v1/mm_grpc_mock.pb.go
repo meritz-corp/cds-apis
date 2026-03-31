@@ -520,14 +520,14 @@ func (m *MockMarketMakingServiceClient) EXPECT() *MockMarketMakingServiceClientM
 }
 
 // CreateMarketMaking mocks base method.
-func (m *MockMarketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
+func (m *MockMarketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateMarketMaking", varargs...)
-	ret0, _ := ret[0].(*MarketMakingEntry)
+	ret0, _ := ret[0].(*MarketMaking)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -540,14 +540,14 @@ func (mr *MockMarketMakingServiceClientMockRecorder) CreateMarketMaking(ctx, in 
 }
 
 // GetMarketMaking mocks base method.
-func (m *MockMarketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
+func (m *MockMarketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetMarketMaking", varargs...)
-	ret0, _ := ret[0].(*MarketMakingEntry)
+	ret0, _ := ret[0].(*MarketMaking)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -760,14 +760,14 @@ func (mr *MockMarketMakingServiceClientMockRecorder) StreamMarketMakingStatus(ct
 }
 
 // UpdateMarketMaking mocks base method.
-func (m *MockMarketMakingServiceClient) UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
+func (m *MockMarketMakingServiceClient) UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "UpdateMarketMaking", varargs...)
-	ret0, _ := ret[0].(*MarketMakingEntry)
+	ret0, _ := ret[0].(*MarketMaking)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -823,10 +823,10 @@ func (m *MockMarketMakingServiceServer) EXPECT() *MockMarketMakingServiceServerM
 }
 
 // CreateMarketMaking mocks base method.
-func (m *MockMarketMakingServiceServer) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest) (*MarketMakingEntry, error) {
+func (m *MockMarketMakingServiceServer) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateMarketMaking", ctx, in)
-	ret0, _ := ret[0].(*MarketMakingEntry)
+	ret0, _ := ret[0].(*MarketMaking)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -838,10 +838,10 @@ func (mr *MockMarketMakingServiceServerMockRecorder) CreateMarketMaking(ctx, in 
 }
 
 // GetMarketMaking mocks base method.
-func (m *MockMarketMakingServiceServer) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest) (*MarketMakingEntry, error) {
+func (m *MockMarketMakingServiceServer) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMarketMaking", ctx, in)
-	ret0, _ := ret[0].(*MarketMakingEntry)
+	ret0, _ := ret[0].(*MarketMaking)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -1001,10 +1001,10 @@ func (mr *MockMarketMakingServiceServerMockRecorder) StreamMarketMakingStatus(bl
 }
 
 // UpdateMarketMaking mocks base method.
-func (m *MockMarketMakingServiceServer) UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest) (*MarketMakingEntry, error) {
+func (m *MockMarketMakingServiceServer) UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateMarketMaking", ctx, in)
-	ret0, _ := ret[0].(*MarketMakingEntry)
+	ret0, _ := ret[0].(*MarketMaking)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

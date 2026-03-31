@@ -28,7 +28,7 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
   }
 
   /// MM 단일 심볼 조회
-  Future<kdov1mm.MarketMakingEntry> getMarketMaking(
+  Future<kdov1mm.MarketMaking> getMarketMaking(
     kdov1mm.GetMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -46,7 +46,7 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
   }
 
   /// MM 설정 생성 (DB 저장)
-  Future<kdov1mm.MarketMakingEntry> createMarketMaking(
+  Future<kdov1mm.MarketMaking> createMarketMaking(
     kdov1mm.CreateMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -64,7 +64,7 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
   }
 
   /// MM 설정 업데이트 (DB 저장)
-  Future<kdov1mm.MarketMakingEntry> updateMarketMaking(
+  Future<kdov1mm.MarketMaking> updateMarketMaking(
     kdov1mm.UpdateMarketMakingRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,

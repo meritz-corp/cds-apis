@@ -62,7 +62,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMarketMakingEntry"
+              "$ref": "#/definitions/mmMarketMaking"
             }
           },
           "default": {
@@ -95,7 +95,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMarketMakingEntry"
+              "$ref": "#/definitions/mmMarketMaking"
             }
           },
           "default": {
@@ -126,7 +126,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/mmMarketMakingEntry"
+              "$ref": "#/definitions/mmMarketMaking"
             }
           },
           "default": {
@@ -612,7 +612,7 @@
         "entries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/mmMarketMakingEntry"
+            "$ref": "#/definitions/mmMarketMaking"
           },
           "title": "등록된 MM 목록"
         },
@@ -622,60 +622,7 @@
         }
       }
     },
-    "mmMarketMakingConfiguration": {
-      "type": "object",
-      "properties": {
-        "pricing": {
-          "type": "string",
-          "title": "Pricing 전략: \"plain_follow\", \"mean_bidask\", \"nav\", \"krx_nav\""
-        },
-        "skew": {
-          "$ref": "#/definitions/mmMarketMakingSkewConfig",
-          "title": "Skew 설정"
-        },
-        "tradeAnalyzer": {
-          "$ref": "#/definitions/mmMarketMakingTradeAnalyzerConfig",
-          "title": "Trade Analyzer 설정"
-        },
-        "screening": {
-          "$ref": "#/definitions/mmMarketMakingScreeningConfig",
-          "title": "Screening 설정"
-        },
-        "tickSize": {
-          "type": "string",
-          "format": "int64",
-          "title": "ETF tick size (Price internal representation)"
-        },
-        "enabled": {
-          "type": "boolean",
-          "title": "MM 활성화 여부"
-        },
-        "momentum": {
-          "$ref": "#/definitions/mmMarketMakingMomentumConfig",
-          "title": "Momentum 설정 (최근 가격 흐름 → bid/ask 조정)"
-        },
-        "exposureGuard": {
-          "$ref": "#/definitions/mmMarketMakingExposureGuardConfig",
-          "title": "순노출 hard limit 제어 설정"
-        },
-        "inventoryBalancer": {
-          "$ref": "#/definitions/mmMarketMakingInventoryBalancerConfig",
-          "title": "중기 buy/sell imbalance 복원 설정"
-        },
-        "bidAdjustment": {
-          "type": "string",
-          "format": "int64",
-          "title": "기준가격 대비 bid 조정값 (Price internal representation)"
-        },
-        "askAdjustment": {
-          "type": "string",
-          "format": "int64",
-          "title": "기준가격 대비 ask 조정값 (Price internal representation)"
-        }
-      },
-      "title": "MM 엔진 설정 (MmConfig 대응)"
-    },
-    "mmMarketMakingEntry": {
+    "mmMarketMaking": {
       "type": "object",
       "properties": {
         "symbol": {
@@ -693,11 +640,64 @@
         "fundCode": {
           "type": "string",
           "title": "펀드 코드"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF tick size (Price internal representation)"
         }
       },
       "title": "MM 심볼 정보"
     },
-    "mmMarketMakingExposureGuardConfig": {
+    "mmMarketMakingConfiguration": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "type": "string",
+          "title": "Pricing 전략: \"plain_follow\", \"mean_bidask\", \"nav\", \"krx_nav\""
+        },
+        "skew": {
+          "$ref": "#/definitions/mmMarketMakingSkew",
+          "title": "Skew 설정"
+        },
+        "tradeAnalyzer": {
+          "$ref": "#/definitions/mmMarketMakingTradeAnalyzer",
+          "title": "Trade Analyzer 설정"
+        },
+        "screening": {
+          "$ref": "#/definitions/mmMarketMakingScreening",
+          "title": "Screening 설정"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "MM 활성화 여부"
+        },
+        "momentum": {
+          "$ref": "#/definitions/mmMarketMakingMomentum",
+          "title": "Momentum 설정 (최근 가격 흐름 → bid/ask 조정)"
+        },
+        "exposureGuard": {
+          "$ref": "#/definitions/mmMarketMakingExposureGuard",
+          "title": "순노출 hard limit 제어 설정"
+        },
+        "inventoryBalancer": {
+          "$ref": "#/definitions/mmMarketMakingInventoryBalancer",
+          "title": "중기 buy/sell imbalance 복원 설정"
+        },
+        "bidAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "기준가격 대비 bid 조정값 (Price internal representation)"
+        },
+        "askAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "기준가격 대비 ask 조정값 (Price internal representation)"
+        }
+      },
+      "title": "MM 엔진 설정 (MmConfig 대응)"
+    },
+    "mmMarketMakingExposureGuard": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -717,7 +717,7 @@
       },
       "title": "순노출 hard limit 제어 설정"
     },
-    "mmMarketMakingInventoryBalancerConfig": {
+    "mmMarketMakingInventoryBalancer": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -747,7 +747,7 @@
       },
       "title": "중기 buy/sell imbalance 복원 설정"
     },
-    "mmMarketMakingMomentumConfig": {
+    "mmMarketMakingMomentum": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -827,7 +827,7 @@
       },
       "title": "MM 전용 주문장 데이터"
     },
-    "mmMarketMakingScreeningConfig": {
+    "mmMarketMakingScreening": {
       "type": "object",
       "properties": {
         "maxSpreadWidthTicks": {
@@ -848,7 +848,7 @@
       },
       "title": "Pre-trade Screening 설정"
     },
-    "mmMarketMakingSkewConfig": {
+    "mmMarketMakingSkew": {
       "type": "object",
       "properties": {
         "mode": {
@@ -903,10 +903,6 @@
           "type": "boolean",
           "title": "활성 여부 (paused가 아닌 경우)"
         },
-        "fundCode": {
-          "type": "string",
-          "title": "펀드 코드"
-        },
         "momentumEnabled": {
           "type": "boolean",
           "title": "모멘텀 활성 여부"
@@ -949,7 +945,7 @@
       },
       "title": "MM 상태 상세"
     },
-    "mmMarketMakingTradeAnalyzerConfig": {
+    "mmMarketMakingTradeAnalyzer": {
       "type": "object",
       "properties": {
         "enabled": {

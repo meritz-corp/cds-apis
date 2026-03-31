@@ -25,11 +25,11 @@ type MarketMakingServiceClient interface {
 	// MM 목록 조회
 	ListMarketMaking(ctx context.Context, in *ListMarketMakingRequest, opts ...grpc.CallOption) (*ListMarketMakingResponse, error)
 	// MM 단일 심볼 조회
-	GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error)
+	GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error)
 	// MM 설정 생성 (DB 저장)
-	CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error)
+	CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error)
 	// MM 설정 업데이트 (DB 저장)
-	UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error)
+	UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error)
 	// MM 상태 조회
 	GetMarketMakingStatus(ctx context.Context, in *GetMarketMakingStatusRequest, opts ...grpc.CallOption) (*MarketMakingStatus, error)
 	// MM 시작 (심볼 등록)
@@ -69,8 +69,8 @@ func (c *marketMakingServiceClient) ListMarketMaking(ctx context.Context, in *Li
 	return out, nil
 }
 
-func (c *marketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
-	out := new(MarketMakingEntry)
+func (c *marketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
+	out := new(MarketMaking)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -78,8 +78,8 @@ func (c *marketMakingServiceClient) GetMarketMaking(ctx context.Context, in *Get
 	return out, nil
 }
 
-func (c *marketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
-	out := new(MarketMakingEntry)
+func (c *marketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
+	out := new(MarketMaking)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/CreateMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -87,8 +87,8 @@ func (c *marketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *marketMakingServiceClient) UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMakingEntry, error) {
-	out := new(MarketMakingEntry)
+func (c *marketMakingServiceClient) UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
+	out := new(MarketMaking)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/UpdateMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -239,11 +239,11 @@ type MarketMakingServiceServer interface {
 	// MM 목록 조회
 	ListMarketMaking(context.Context, *ListMarketMakingRequest) (*ListMarketMakingResponse, error)
 	// MM 단일 심볼 조회
-	GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMakingEntry, error)
+	GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMaking, error)
 	// MM 설정 생성 (DB 저장)
-	CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMakingEntry, error)
+	CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMaking, error)
 	// MM 설정 업데이트 (DB 저장)
-	UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMakingEntry, error)
+	UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMaking, error)
 	// MM 상태 조회
 	GetMarketMakingStatus(context.Context, *GetMarketMakingStatusRequest) (*MarketMakingStatus, error)
 	// MM 시작 (심볼 등록)
@@ -274,13 +274,13 @@ type UnimplementedMarketMakingServiceServer struct {
 func (UnimplementedMarketMakingServiceServer) ListMarketMaking(context.Context, *ListMarketMakingRequest) (*ListMarketMakingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMarketMaking not implemented")
 }
-func (UnimplementedMarketMakingServiceServer) GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMakingEntry, error) {
+func (UnimplementedMarketMakingServiceServer) GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMaking, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketMaking not implemented")
 }
-func (UnimplementedMarketMakingServiceServer) CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMakingEntry, error) {
+func (UnimplementedMarketMakingServiceServer) CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMaking, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMarketMaking not implemented")
 }
-func (UnimplementedMarketMakingServiceServer) UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMakingEntry, error) {
+func (UnimplementedMarketMakingServiceServer) UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMaking, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMarketMaking not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) GetMarketMakingStatus(context.Context, *GetMarketMakingStatusRequest) (*MarketMakingStatus, error) {

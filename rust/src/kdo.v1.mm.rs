@@ -7,7 +7,7 @@
 /// MM 심볼 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MarketMakingEntry {
+pub struct MarketMaking {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
@@ -20,6 +20,9 @@ pub struct MarketMakingEntry {
     /// 펀드 코드
     #[prost(string, tag="4")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF tick size (Price internal representation)
+    #[prost(int64, tag="5")]
+    pub tick_size: i64,
 }
 /// MM 상태 상세
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -40,9 +43,6 @@ pub struct MarketMakingStatus {
     /// 활성 여부 (paused가 아닌 경우)
     #[prost(bool, tag="5")]
     pub active: bool,
-    /// 펀드 코드
-    #[prost(string, tag="6")]
-    pub fund_code: ::prost::alloc::string::String,
     /// 모멘텀 활성 여부
     #[prost(bool, optional, tag="7")]
     pub momentum_enabled: ::core::option::Option<bool>,
@@ -77,28 +77,25 @@ pub struct MarketMakingConfiguration {
     pub pricing: ::prost::alloc::string::String,
     /// Skew 설정
     #[prost(message, optional, tag="2")]
-    pub skew: ::core::option::Option<MarketMakingSkewConfig>,
+    pub skew: ::core::option::Option<MarketMakingSkew>,
     /// Trade Analyzer 설정
     #[prost(message, optional, tag="3")]
-    pub trade_analyzer: ::core::option::Option<MarketMakingTradeAnalyzerConfig>,
+    pub trade_analyzer: ::core::option::Option<MarketMakingTradeAnalyzer>,
     /// Screening 설정
     #[prost(message, optional, tag="4")]
-    pub screening: ::core::option::Option<MarketMakingScreeningConfig>,
-    /// ETF tick size (Price internal representation)
-    #[prost(int64, tag="5")]
-    pub tick_size: i64,
+    pub screening: ::core::option::Option<MarketMakingScreening>,
     /// MM 활성화 여부
     #[prost(bool, tag="6")]
     pub enabled: bool,
     /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
     #[prost(message, optional, tag="7")]
-    pub momentum: ::core::option::Option<MarketMakingMomentumConfig>,
+    pub momentum: ::core::option::Option<MarketMakingMomentum>,
     /// 순노출 hard limit 제어 설정
     #[prost(message, optional, tag="8")]
-    pub exposure_guard: ::core::option::Option<MarketMakingExposureGuardConfig>,
+    pub exposure_guard: ::core::option::Option<MarketMakingExposureGuard>,
     /// 중기 buy/sell imbalance 복원 설정
     #[prost(message, optional, tag="9")]
-    pub inventory_balancer: ::core::option::Option<MarketMakingInventoryBalancerConfig>,
+    pub inventory_balancer: ::core::option::Option<MarketMakingInventoryBalancer>,
     /// 기준가격 대비 bid 조정값 (Price internal representation)
     #[prost(int64, tag="10")]
     pub bid_adjustment: i64,
@@ -109,7 +106,7 @@ pub struct MarketMakingConfiguration {
 /// Skew 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MarketMakingSkewConfig {
+pub struct MarketMakingSkew {
     /// Skew 모드: "fixed" or "slide_on_trade"
     #[prost(string, tag="1")]
     pub mode: ::prost::alloc::string::String,
@@ -123,7 +120,7 @@ pub struct MarketMakingSkewConfig {
 /// Trade Analyzer 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingTradeAnalyzerConfig {
+pub struct MarketMakingTradeAnalyzer {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -143,7 +140,7 @@ pub struct MarketMakingTradeAnalyzerConfig {
 /// Pre-trade Screening 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingScreeningConfig {
+pub struct MarketMakingScreening {
     /// 최대 스프레드 폭 (틱 단위, 0=비활성)
     #[prost(int32, tag="1")]
     pub max_spread_width_ticks: i32,
@@ -157,7 +154,7 @@ pub struct MarketMakingScreeningConfig {
 /// Momentum 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingMomentumConfig {
+pub struct MarketMakingMomentum {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -186,7 +183,7 @@ pub struct MarketMakingMomentumConfig {
 /// 순노출 hard limit 제어 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingExposureGuardConfig {
+pub struct MarketMakingExposureGuard {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -200,7 +197,7 @@ pub struct MarketMakingExposureGuardConfig {
 /// 중기 buy/sell imbalance 복원 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingInventoryBalancerConfig {
+pub struct MarketMakingInventoryBalancer {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
@@ -237,7 +234,7 @@ pub struct ListMarketMakingRequest {
 pub struct ListMarketMakingResponse {
     /// 등록된 MM 목록
     #[prost(message, repeated, tag="1")]
-    pub entries: ::prost::alloc::vec::Vec<MarketMakingEntry>,
+    pub entries: ::prost::alloc::vec::Vec<MarketMaking>,
     /// 다음 페이지 토큰
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
