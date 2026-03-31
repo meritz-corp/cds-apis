@@ -169,7 +169,7 @@ message MarketMakingStatus {
   // 현재 상태
   MarketMakingState state = 2;
 
-  // MM 설정
+  // MM 설정 (config 필드에 momentum 포함)
   MarketMakingConfiguration config = 3;
 
   // 등록 여부
@@ -178,29 +178,14 @@ message MarketMakingStatus {
   // 활성 여부 (paused가 아닌 경우)
   bool active = 5;
 
-  // 모멘텀 활성 여부
-  optional bool momentum_enabled = 7;
+  // 펀드 코드
+  string fund_code = 6;
 
-  // 모멘텀 윈도우 크기 (ms)
-  optional uint64 momentum_window_ms = 8;
-
-  // 모멘텀 트리거 틱 수
-  optional int32 momentum_trigger_ticks = 9;
-
-  // 모멘텀 추종 민감도
-  optional double momentum_follow_sensitivity = 10;
-
-  // 모멘텀 도망 민감도
-  optional double momentum_escape_sensitivity = 11;
-
-  // 모멘텀 방향: 0=none, 1=up, 2=down
-  optional int32 momentum_direction = 12;
-
-  // 모멘텀 bid 조정값 (Price internal representation)
-  optional int64 momentum_bid_adjustment = 13;
-
-  // 모멘텀 ask 조정값 (Price internal representation)
-  optional int64 momentum_ask_adjustment = 14;
+  // reserved: 7~14 (removed momentum_* fields — use config.momentum instead)
+  reserved 7, 8, 9, 10, 11, 12, 13, 14;
+  reserved "momentum_enabled", "momentum_window_ms", "momentum_trigger_ticks",
+           "momentum_follow_sensitivity", "momentum_escape_sensitivity",
+           "momentum_direction", "momentum_bid_adjustment", "momentum_ask_adjustment";
 }
 
 // MM 엔진 설정 (MmConfig 대응)

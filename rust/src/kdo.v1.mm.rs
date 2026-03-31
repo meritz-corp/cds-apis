@@ -34,7 +34,7 @@ pub struct MarketMakingStatus {
     /// 현재 상태
     #[prost(enumeration="MarketMakingState", tag="2")]
     pub state: i32,
-    /// MM 설정
+    /// MM 설정 (config 필드에 momentum 포함)
     #[prost(message, optional, tag="3")]
     pub config: ::core::option::Option<MarketMakingConfiguration>,
     /// 등록 여부
@@ -43,30 +43,9 @@ pub struct MarketMakingStatus {
     /// 활성 여부 (paused가 아닌 경우)
     #[prost(bool, tag="5")]
     pub active: bool,
-    /// 모멘텀 활성 여부
-    #[prost(bool, optional, tag="7")]
-    pub momentum_enabled: ::core::option::Option<bool>,
-    /// 모멘텀 윈도우 크기 (ms)
-    #[prost(uint64, optional, tag="8")]
-    pub momentum_window_ms: ::core::option::Option<u64>,
-    /// 모멘텀 트리거 틱 수
-    #[prost(int32, optional, tag="9")]
-    pub momentum_trigger_ticks: ::core::option::Option<i32>,
-    /// 모멘텀 추종 민감도
-    #[prost(double, optional, tag="10")]
-    pub momentum_follow_sensitivity: ::core::option::Option<f64>,
-    /// 모멘텀 도망 민감도
-    #[prost(double, optional, tag="11")]
-    pub momentum_escape_sensitivity: ::core::option::Option<f64>,
-    /// 모멘텀 방향: 0=none, 1=up, 2=down
-    #[prost(int32, optional, tag="12")]
-    pub momentum_direction: ::core::option::Option<i32>,
-    /// 모멘텀 bid 조정값 (Price internal representation)
-    #[prost(int64, optional, tag="13")]
-    pub momentum_bid_adjustment: ::core::option::Option<i64>,
-    /// 모멘텀 ask 조정값 (Price internal representation)
-    #[prost(int64, optional, tag="14")]
-    pub momentum_ask_adjustment: ::core::option::Option<i64>,
+    /// 펀드 코드
+    #[prost(string, tag="6")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// MM 엔진 설정 (MmConfig 대응)
 #[allow(clippy::derive_partial_eq_without_eq)]

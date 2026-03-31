@@ -59,25 +59,19 @@ const MarketMakingStatus$json = {
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'registered', '3': 4, '4': 1, '5': 8, '10': 'registered'},
     {'1': 'active', '3': 5, '4': 1, '5': 8, '10': 'active'},
-    {'1': 'momentum_enabled', '3': 7, '4': 1, '5': 8, '9': 0, '10': 'momentumEnabled', '17': true},
-    {'1': 'momentum_window_ms', '3': 8, '4': 1, '5': 4, '9': 1, '10': 'momentumWindowMs', '17': true},
-    {'1': 'momentum_trigger_ticks', '3': 9, '4': 1, '5': 5, '9': 2, '10': 'momentumTriggerTicks', '17': true},
-    {'1': 'momentum_follow_sensitivity', '3': 10, '4': 1, '5': 1, '9': 3, '10': 'momentumFollowSensitivity', '17': true},
-    {'1': 'momentum_escape_sensitivity', '3': 11, '4': 1, '5': 1, '9': 4, '10': 'momentumEscapeSensitivity', '17': true},
-    {'1': 'momentum_direction', '3': 12, '4': 1, '5': 5, '9': 5, '10': 'momentumDirection', '17': true},
-    {'1': 'momentum_bid_adjustment', '3': 13, '4': 1, '5': 3, '9': 6, '10': 'momentumBidAdjustment', '17': true},
-    {'1': 'momentum_ask_adjustment', '3': 14, '4': 1, '5': 3, '9': 7, '10': 'momentumAskAdjustment', '17': true},
+    {'1': 'fund_code', '3': 6, '4': 1, '5': 9, '10': 'fundCode'},
   ],
-  '8': [
-    {'1': '_momentum_enabled'},
-    {'1': '_momentum_window_ms'},
-    {'1': '_momentum_trigger_ticks'},
-    {'1': '_momentum_follow_sensitivity'},
-    {'1': '_momentum_escape_sensitivity'},
-    {'1': '_momentum_direction'},
-    {'1': '_momentum_bid_adjustment'},
-    {'1': '_momentum_ask_adjustment'},
+  '9': [
+    {'1': 7, '2': 8},
+    {'1': 8, '2': 9},
+    {'1': 9, '2': 10},
+    {'1': 10, '2': 11},
+    {'1': 11, '2': 12},
+    {'1': 12, '2': 13},
+    {'1': 13, '2': 14},
+    {'1': 14, '2': 15},
   ],
+  '10': ['momentum_enabled', 'momentum_window_ms', 'momentum_trigger_ticks', 'momentum_follow_sensitivity', 'momentum_escape_sensitivity', 'momentum_direction', 'momentum_bid_adjustment', 'momentum_ask_adjustment'],
 };
 
 /// Descriptor for `MarketMakingStatus`. Decode as a `google.protobuf.DescriptorProto`.
@@ -85,20 +79,12 @@ final $typed_data.Uint8List marketMakingStatusDescriptor = $convert.base64Decode
     'ChJNYXJrZXRNYWtpbmdTdGF0dXMSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSMgoFc3RhdGUYAi'
     'ABKA4yHC5rZG8udjEubW0uTWFya2V0TWFraW5nU3RhdGVSBXN0YXRlEjwKBmNvbmZpZxgDIAEo'
     'CzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSHgoKcmVnaX'
-    'N0ZXJlZBgEIAEoCFIKcmVnaXN0ZXJlZBIWCgZhY3RpdmUYBSABKAhSBmFjdGl2ZRIuChBtb21l'
-    'bnR1bV9lbmFibGVkGAcgASgISABSD21vbWVudHVtRW5hYmxlZIgBARIxChJtb21lbnR1bV93aW'
-    '5kb3dfbXMYCCABKARIAVIQbW9tZW50dW1XaW5kb3dNc4gBARI5ChZtb21lbnR1bV90cmlnZ2Vy'
-    'X3RpY2tzGAkgASgFSAJSFG1vbWVudHVtVHJpZ2dlclRpY2tziAEBEkMKG21vbWVudHVtX2ZvbG'
-    'xvd19zZW5zaXRpdml0eRgKIAEoAUgDUhltb21lbnR1bUZvbGxvd1NlbnNpdGl2aXR5iAEBEkMK'
-    'G21vbWVudHVtX2VzY2FwZV9zZW5zaXRpdml0eRgLIAEoAUgEUhltb21lbnR1bUVzY2FwZVNlbn'
-    'NpdGl2aXR5iAEBEjIKEm1vbWVudHVtX2RpcmVjdGlvbhgMIAEoBUgFUhFtb21lbnR1bURpcmVj'
-    'dGlvbogBARI7Chdtb21lbnR1bV9iaWRfYWRqdXN0bWVudBgNIAEoA0gGUhVtb21lbnR1bUJpZE'
-    'FkanVzdG1lbnSIAQESOwoXbW9tZW50dW1fYXNrX2FkanVzdG1lbnQYDiABKANIB1IVbW9tZW50'
-    'dW1Bc2tBZGp1c3RtZW50iAEBQhMKEV9tb21lbnR1bV9lbmFibGVkQhUKE19tb21lbnR1bV93aW'
-    '5kb3dfbXNCGQoXX21vbWVudHVtX3RyaWdnZXJfdGlja3NCHgocX21vbWVudHVtX2ZvbGxvd19z'
-    'ZW5zaXRpdml0eUIeChxfbW9tZW50dW1fZXNjYXBlX3NlbnNpdGl2aXR5QhUKE19tb21lbnR1bV'
-    '9kaXJlY3Rpb25CGgoYX21vbWVudHVtX2JpZF9hZGp1c3RtZW50QhoKGF9tb21lbnR1bV9hc2tf'
-    'YWRqdXN0bWVudA==');
+    'N0ZXJlZBgEIAEoCFIKcmVnaXN0ZXJlZBIWCgZhY3RpdmUYBSABKAhSBmFjdGl2ZRIbCglmdW5k'
+    'X2NvZGUYBiABKAlSCGZ1bmRDb2RlSgQIBxAISgQICBAJSgQICRAKSgQIChALSgQICxAMSgQIDB'
+    'ANSgQIDRAOSgQIDhAPUhBtb21lbnR1bV9lbmFibGVkUhJtb21lbnR1bV93aW5kb3dfbXNSFm1v'
+    'bWVudHVtX3RyaWdnZXJfdGlja3NSG21vbWVudHVtX2ZvbGxvd19zZW5zaXRpdml0eVIbbW9tZW'
+    '50dW1fZXNjYXBlX3NlbnNpdGl2aXR5UhJtb21lbnR1bV9kaXJlY3Rpb25SF21vbWVudHVtX2Jp'
+    'ZF9hZGp1c3RtZW50Uhdtb21lbnR1bV9hc2tfYWRqdXN0bWVudA==');
 
 @$core.Deprecated('Use marketMakingConfigurationDescriptor instead')
 const MarketMakingConfiguration$json = {

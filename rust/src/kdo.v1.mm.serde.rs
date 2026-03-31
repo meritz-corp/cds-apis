@@ -2140,27 +2140,6 @@ impl serde::Serialize for MarketMakingStatus {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingStatus", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2179,35 +2158,8 @@ impl serde::Serialize for MarketMakingStatus {
         if true {
             struct_ser.serialize_field("active", &self.active)?;
         }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window_ms.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("momentum_window_ms", ToString::to_string(&v).as_str())?;
-        }
-        if let Some(v) = self.momentum_trigger_ticks.as_ref() {
-            struct_ser.serialize_field("momentum_trigger_ticks", v)?;
-        }
-        if let Some(v) = self.momentum_follow_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_follow_sensitivity", v)?;
-        }
-        if let Some(v) = self.momentum_escape_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_escape_sensitivity", v)?;
-        }
-        if let Some(v) = self.momentum_direction.as_ref() {
-            struct_ser.serialize_field("momentum_direction", v)?;
-        }
-        if let Some(v) = self.momentum_bid_adjustment.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("momentum_bid_adjustment", ToString::to_string(&v).as_str())?;
-        }
-        if let Some(v) = self.momentum_ask_adjustment.as_ref() {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("momentum_ask_adjustment", ToString::to_string(&v).as_str())?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         struct_ser.end()
     }
@@ -2224,22 +2176,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
             "config",
             "registered",
             "active",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window_ms",
-            "momentumWindowMs",
-            "momentum_trigger_ticks",
-            "momentumTriggerTicks",
-            "momentum_follow_sensitivity",
-            "momentumFollowSensitivity",
-            "momentum_escape_sensitivity",
-            "momentumEscapeSensitivity",
-            "momentum_direction",
-            "momentumDirection",
-            "momentum_bid_adjustment",
-            "momentumBidAdjustment",
-            "momentum_ask_adjustment",
-            "momentumAskAdjustment",
+            "fund_code",
+            "fundCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2249,14 +2187,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
             Config,
             Registered,
             Active,
-            MomentumEnabled,
-            MomentumWindowMs,
-            MomentumTriggerTicks,
-            MomentumFollowSensitivity,
-            MomentumEscapeSensitivity,
-            MomentumDirection,
-            MomentumBidAdjustment,
-            MomentumAskAdjustment,
+            FundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2284,14 +2215,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                             "config" => Ok(GeneratedField::Config),
                             "registered" => Ok(GeneratedField::Registered),
                             "active" => Ok(GeneratedField::Active),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindowMs" | "momentum_window_ms" => Ok(GeneratedField::MomentumWindowMs),
-                            "momentumTriggerTicks" | "momentum_trigger_ticks" => Ok(GeneratedField::MomentumTriggerTicks),
-                            "momentumFollowSensitivity" | "momentum_follow_sensitivity" => Ok(GeneratedField::MomentumFollowSensitivity),
-                            "momentumEscapeSensitivity" | "momentum_escape_sensitivity" => Ok(GeneratedField::MomentumEscapeSensitivity),
-                            "momentumDirection" | "momentum_direction" => Ok(GeneratedField::MomentumDirection),
-                            "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
-                            "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2316,14 +2240,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                 let mut config__ = None;
                 let mut registered__ = None;
                 let mut active__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window_ms__ = None;
-                let mut momentum_trigger_ticks__ = None;
-                let mut momentum_follow_sensitivity__ = None;
-                let mut momentum_escape_sensitivity__ = None;
-                let mut momentum_direction__ = None;
-                let mut momentum_bid_adjustment__ = None;
-                let mut momentum_ask_adjustment__ = None;
+                let mut fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2356,67 +2273,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                             }
                             active__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindowMs => {
-                            if momentum_window_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindowMs"));
-                            }
-                            momentum_window_ms__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumTriggerTicks => {
-                            if momentum_trigger_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumTriggerTicks"));
-                            }
-                            momentum_trigger_ticks__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumFollowSensitivity => {
-                            if momentum_follow_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumFollowSensitivity"));
-                            }
-                            momentum_follow_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumEscapeSensitivity => {
-                            if momentum_escape_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEscapeSensitivity"));
-                            }
-                            momentum_escape_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumDirection => {
-                            if momentum_direction__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumDirection"));
-                            }
-                            momentum_direction__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumBidAdjustment => {
-                            if momentum_bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumBidAdjustment"));
-                            }
-                            momentum_bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumAskAdjustment => {
-                            if momentum_ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumAskAdjustment"));
-                            }
-                            momentum_ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
+                            fund_code__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -2429,14 +2290,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingStatus {
                     config: config__,
                     registered: registered__.unwrap_or_default(),
                     active: active__.unwrap_or_default(),
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window_ms: momentum_window_ms__,
-                    momentum_trigger_ticks: momentum_trigger_ticks__,
-                    momentum_follow_sensitivity: momentum_follow_sensitivity__,
-                    momentum_escape_sensitivity: momentum_escape_sensitivity__,
-                    momentum_direction: momentum_direction__,
-                    momentum_bid_adjustment: momentum_bid_adjustment__,
-                    momentum_ask_adjustment: momentum_ask_adjustment__,
+                    fund_code: fund_code__.unwrap_or_default(),
                 })
             }
         }
