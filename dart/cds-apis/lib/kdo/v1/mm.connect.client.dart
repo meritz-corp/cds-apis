@@ -225,42 +225,6 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// MM 엔진 설정 조회
-  Future<kdov1mm.MmEngineConfig> getMmEngineConfig(
-    kdov1mm.GetMmEngineConfigRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.MarketMakingService.getMmEngineConfig,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
-  /// MM 엔진 설정 업데이트
-  Future<kdov1mm.MmEngineConfig> updateMmEngineConfig(
-    kdov1mm.UpdateMmEngineConfigRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.MarketMakingService.updateMmEngineConfig,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
   /// MM 엔진 런타임 상태 실시간 스트리밍
   Stream<kdov1mm.MmEngineRuntimeState> streamMmEngineState(
     kdov1mm.StreamMmEngineStateRequest input, {

@@ -46,10 +46,6 @@ type MarketMakingServiceClient interface {
 	GetMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (*MarketMakingOrderbookData, error)
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
 	StreamMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingOrderbookClient, error)
-	// MM 엔진 설정 조회
-	GetMmEngineConfig(ctx context.Context, in *GetMmEngineConfigRequest, opts ...grpc.CallOption) (*MmEngineConfig, error)
-	// MM 엔진 설정 업데이트
-	UpdateMmEngineConfig(ctx context.Context, in *UpdateMmEngineConfigRequest, opts ...grpc.CallOption) (*MmEngineConfig, error)
 	// MM 엔진 런타임 상태 실시간 스트리밍
 	StreamMmEngineState(ctx context.Context, in *StreamMmEngineStateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmEngineStateClient, error)
 }
@@ -216,24 +212,6 @@ func (x *marketMakingServiceStreamMarketMakingOrderbookClient) Recv() (*MarketMa
 	return m, nil
 }
 
-func (c *marketMakingServiceClient) GetMmEngineConfig(ctx context.Context, in *GetMmEngineConfigRequest, opts ...grpc.CallOption) (*MmEngineConfig, error) {
-	out := new(MmEngineConfig)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetMmEngineConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *marketMakingServiceClient) UpdateMmEngineConfig(ctx context.Context, in *UpdateMmEngineConfigRequest, opts ...grpc.CallOption) (*MmEngineConfig, error) {
-	out := new(MmEngineConfig)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/UpdateMmEngineConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *marketMakingServiceClient) StreamMmEngineState(ctx context.Context, in *StreamMmEngineStateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmEngineStateClient, error) {
 	stream, err := c.cc.NewStream(ctx, &MarketMakingService_ServiceDesc.Streams[2], "/kdo.v1.mm.MarketMakingService/StreamMmEngineState", opts...)
 	if err != nil {
@@ -294,10 +272,6 @@ type MarketMakingServiceServer interface {
 	GetMarketMakingOrderbook(context.Context, *GetMarketMakingOrderbookRequest) (*MarketMakingOrderbookData, error)
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
 	StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error
-	// MM 엔진 설정 조회
-	GetMmEngineConfig(context.Context, *GetMmEngineConfigRequest) (*MmEngineConfig, error)
-	// MM 엔진 설정 업데이트
-	UpdateMmEngineConfig(context.Context, *UpdateMmEngineConfigRequest) (*MmEngineConfig, error)
 	// MM 엔진 런타임 상태 실시간 스트리밍
 	StreamMmEngineState(*StreamMmEngineStateRequest, MarketMakingService_StreamMmEngineStateServer) error
 	mustEmbedUnimplementedMarketMakingServiceServer()
@@ -342,12 +316,6 @@ func (UnimplementedMarketMakingServiceServer) GetMarketMakingOrderbook(context.C
 }
 func (UnimplementedMarketMakingServiceServer) StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMarketMakingOrderbook not implemented")
-}
-func (UnimplementedMarketMakingServiceServer) GetMmEngineConfig(context.Context, *GetMmEngineConfigRequest) (*MmEngineConfig, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMmEngineConfig not implemented")
-}
-func (UnimplementedMarketMakingServiceServer) UpdateMmEngineConfig(context.Context, *UpdateMmEngineConfigRequest) (*MmEngineConfig, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMmEngineConfig not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) StreamMmEngineState(*StreamMmEngineStateRequest, MarketMakingService_StreamMmEngineStateServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMmEngineState not implemented")
@@ -587,42 +555,6 @@ func (x *marketMakingServiceStreamMarketMakingOrderbookServer) Send(m *MarketMak
 	return x.ServerStream.SendMsg(m)
 }
 
-func _MarketMakingService_GetMmEngineConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMmEngineConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MarketMakingServiceServer).GetMmEngineConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MarketMakingService/GetMmEngineConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MarketMakingServiceServer).GetMmEngineConfig(ctx, req.(*GetMmEngineConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MarketMakingService_UpdateMmEngineConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMmEngineConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MarketMakingServiceServer).UpdateMmEngineConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MarketMakingService/UpdateMmEngineConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MarketMakingServiceServer).UpdateMmEngineConfig(ctx, req.(*UpdateMmEngineConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _MarketMakingService_StreamMmEngineState_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(StreamMmEngineStateRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -690,14 +622,6 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMarketMakingOrderbook",
 			Handler:    _MarketMakingService_GetMarketMakingOrderbook_Handler,
-		},
-		{
-			MethodName: "GetMmEngineConfig",
-			Handler:    _MarketMakingService_GetMmEngineConfig_Handler,
-		},
-		{
-			MethodName: "UpdateMmEngineConfig",
-			Handler:    _MarketMakingService_UpdateMmEngineConfig_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

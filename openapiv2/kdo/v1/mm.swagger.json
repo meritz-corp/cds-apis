@@ -220,88 +220,6 @@
         ]
       }
     },
-    "/v1/mm/{symbol}/engine-config": {
-      "get": {
-        "summary": "MM 엔진 설정 조회",
-        "operationId": "MarketMakingService_GetMmEngineConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/mmMmEngineConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "symbol",
-            "description": "ISIN 심볼",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[^/]+"
-          }
-        ],
-        "tags": [
-          "MarketMakingService"
-        ]
-      },
-      "patch": {
-        "summary": "MM 엔진 설정 업데이트",
-        "operationId": "MarketMakingService_UpdateMmEngineConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/mmMmEngineConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "symbol",
-            "description": "ISIN 심볼",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "config": {
-                  "$ref": "#/definitions/mmMmEngineConfig",
-                  "title": "업데이트할 엔진 설정"
-                }
-              },
-              "title": "UpdateMmEngineConfig",
-              "required": [
-                "config"
-              ]
-            }
-          }
-        ],
-        "tags": [
-          "MarketMakingService"
-        ]
-      }
-    },
     "/v1/mm/{symbol}/engine-state:stream": {
       "get": {
         "summary": "MM 엔진 런타임 상태 실시간 스트리밍",
@@ -646,26 +564,6 @@
         "config"
       ]
     },
-    "mmExposureGuardConfig": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "title": "활성화 여부"
-        },
-        "reduceStartMultiple": {
-          "type": "integer",
-          "format": "int32",
-          "title": "이 배수부터 같은 방향 수량을 줄이기 시작한다"
-        },
-        "maxInventoryMultiple": {
-          "type": "integer",
-          "format": "int32",
-          "title": "이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다"
-        }
-      },
-      "title": "순노출 hard limit 엔진 설정"
-    },
     "mmExposureGuardState": {
       "type": "object",
       "properties": {
@@ -686,36 +584,6 @@
         }
       },
       "title": "순노출 guard 런타임 상태"
-    },
-    "mmInventoryBalancerConfig": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "title": "활성화 여부"
-        },
-        "triggerMultiple": {
-          "type": "integer",
-          "format": "int32",
-          "title": "imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다"
-        },
-        "priceSkewTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "단계당 가격 중심 이동 틱 수"
-        },
-        "sameSideReduction": {
-          "type": "number",
-          "format": "double",
-          "title": "단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)"
-        },
-        "minSameSideScale": {
-          "type": "number",
-          "format": "double",
-          "title": "같은 방향 수량의 최소 비율"
-        }
-      },
-      "title": "중기 buy/sell imbalance 복원 엔진 설정"
     },
     "mmInventoryBalancerState": {
       "type": "object",
@@ -1072,36 +940,6 @@
       },
       "title": "Trade Analyzer 설정"
     },
-    "mmMmEngineConfig": {
-      "type": "object",
-      "properties": {
-        "momentum": {
-          "$ref": "#/definitions/mmMomentumConfig",
-          "title": "Momentum 설정"
-        },
-        "skew": {
-          "$ref": "#/definitions/mmSkewConfig",
-          "title": "Skew 설정"
-        },
-        "tradeAnalyzer": {
-          "$ref": "#/definitions/mmTradeAnalyzerConfig",
-          "title": "Trade Analyzer 설정"
-        },
-        "exposureGuard": {
-          "$ref": "#/definitions/mmExposureGuardConfig",
-          "title": "순노출 hard limit 설정"
-        },
-        "inventoryBalancer": {
-          "$ref": "#/definitions/mmInventoryBalancerConfig",
-          "title": "중기 imbalance 복원 설정"
-        },
-        "screening": {
-          "$ref": "#/definitions/mmScreeningConfig",
-          "title": "Pre-trade Screening 설정"
-        }
-      },
-      "title": "MM 엔진 전체 설정 (런타임 조회/업데이트용)"
-    },
     "mmMmEngineRuntimeState": {
       "type": "object",
       "properties": {
@@ -1137,50 +975,6 @@
       },
       "title": "MM 엔진 전체 런타임 상태 스냅샷"
     },
-    "mmMomentumConfig": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "title": "활성화 여부"
-        },
-        "windowMs": {
-          "type": "string",
-          "format": "uint64",
-          "title": "최근 가격 샘플을 유지할 시간 창 (ms)"
-        },
-        "triggerTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "연속 모멘텀 강도를 정규화할 기준 틱 수"
-        },
-        "followSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도"
-        },
-        "escapeSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도"
-        },
-        "maxFollowTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "bid 추종 최대 틱 수"
-        },
-        "maxEscapeTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "ask/bid 도망 최대 틱 수"
-        },
-        "isOpposite": {
-          "type": "boolean",
-          "title": "인버스 방향으로 해석할지 여부"
-        }
-      },
-      "title": "Momentum 엔진 설정"
-    },
     "mmMomentumState": {
       "type": "object",
       "properties": {
@@ -1215,37 +1009,6 @@
         }
       }
     },
-    "mmScreeningConfig": {
-      "type": "object",
-      "properties": {
-        "maxSpreadWidthTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "최대 스프레드 폭 (틱 단위, 0=비활성)"
-        }
-      },
-      "title": "Pre-trade Screening 엔진 설정"
-    },
-    "mmSkewConfig": {
-      "type": "object",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "title": "Skew 모드: \"fixed\" or \"slide_on_trade\""
-        },
-        "triggerAmt": {
-          "type": "string",
-          "format": "int64",
-          "title": "SlideOnTrade 트리거 수량"
-        },
-        "skewUnit": {
-          "type": "integer",
-          "format": "int32",
-          "title": "트리거당 skew 틱 수"
-        }
-      },
-      "title": "Skew 엔진 설정"
-    },
     "mmSkewState": {
       "type": "object",
       "properties": {
@@ -1278,36 +1041,6 @@
           "title": "메시지"
         }
       }
-    },
-    "mmTradeAnalyzerConfig": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "title": "활성화 여부"
-        },
-        "window": {
-          "type": "integer",
-          "format": "int32",
-          "title": "분석 윈도우 크기"
-        },
-        "ratioThreshold": {
-          "type": "number",
-          "format": "double",
-          "title": "Adverse fill ratio 임계값"
-        },
-        "strengthThreshold": {
-          "type": "number",
-          "format": "double",
-          "title": "Take-fill strength 임계값"
-        },
-        "maxDecoTick": {
-          "type": "integer",
-          "format": "int32",
-          "title": "최대 decoration 틱 수"
-        }
-      },
-      "title": "Trade Analyzer 엔진 설정"
     },
     "mmTradeAnalyzerState": {
       "type": "object",

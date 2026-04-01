@@ -107,22 +107,6 @@ abstract final class MarketMakingService {
     kdov1mm.MarketMakingOrderbookData.new,
   );
 
-  /// MM 엔진 설정 조회
-  static const getMmEngineConfig = connect.Spec(
-    '/$name/GetMmEngineConfig',
-    connect.StreamType.unary,
-    kdov1mm.GetMmEngineConfigRequest.new,
-    kdov1mm.MmEngineConfig.new,
-  );
-
-  /// MM 엔진 설정 업데이트
-  static const updateMmEngineConfig = connect.Spec(
-    '/$name/UpdateMmEngineConfig',
-    connect.StreamType.unary,
-    kdov1mm.UpdateMmEngineConfigRequest.new,
-    kdov1mm.MmEngineConfig.new,
-  );
-
   /// MM 엔진 런타임 상태 실시간 스트리밍
   static const streamMmEngineState = connect.Spec(
     '/$name/StreamMmEngineState',

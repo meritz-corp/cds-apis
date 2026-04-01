@@ -841,26 +841,6 @@ func (mr *MockMarketMakingServiceClientMockRecorder) GetMarketMakingStatus(ctx, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketMakingStatus", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).GetMarketMakingStatus), varargs...)
 }
 
-// GetMmEngineConfig mocks base method.
-func (m *MockMarketMakingServiceClient) GetMmEngineConfig(ctx context.Context, in *GetMmEngineConfigRequest, opts ...grpc.CallOption) (*MmEngineConfig, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetMmEngineConfig", varargs...)
-	ret0, _ := ret[0].(*MmEngineConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetMmEngineConfig indicates an expected call of GetMmEngineConfig.
-func (mr *MockMarketMakingServiceClientMockRecorder) GetMmEngineConfig(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMmEngineConfig", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).GetMmEngineConfig), varargs...)
-}
-
 // ListMarketMaking mocks base method.
 func (m *MockMarketMakingServiceClient) ListMarketMaking(ctx context.Context, in *ListMarketMakingRequest, opts ...grpc.CallOption) (*ListMarketMakingResponse, error) {
 	m.ctrl.T.Helper()
@@ -1041,26 +1021,6 @@ func (mr *MockMarketMakingServiceClientMockRecorder) UpdateMarketMakingConfig(ct
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMarketMakingConfig", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).UpdateMarketMakingConfig), varargs...)
 }
 
-// UpdateMmEngineConfig mocks base method.
-func (m *MockMarketMakingServiceClient) UpdateMmEngineConfig(ctx context.Context, in *UpdateMmEngineConfigRequest, opts ...grpc.CallOption) (*MmEngineConfig, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "UpdateMmEngineConfig", varargs...)
-	ret0, _ := ret[0].(*MmEngineConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateMmEngineConfig indicates an expected call of UpdateMmEngineConfig.
-func (mr *MockMarketMakingServiceClientMockRecorder) UpdateMmEngineConfig(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMmEngineConfig", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).UpdateMmEngineConfig), varargs...)
-}
-
 // MockMarketMakingServiceServer is a mock of MarketMakingServiceServer interface.
 type MockMarketMakingServiceServer struct {
 	ctrl     *gomock.Controller
@@ -1142,21 +1102,6 @@ func (m *MockMarketMakingServiceServer) GetMarketMakingStatus(ctx context.Contex
 func (mr *MockMarketMakingServiceServerMockRecorder) GetMarketMakingStatus(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketMakingStatus", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).GetMarketMakingStatus), ctx, in)
-}
-
-// GetMmEngineConfig mocks base method.
-func (m *MockMarketMakingServiceServer) GetMmEngineConfig(ctx context.Context, in *GetMmEngineConfigRequest) (*MmEngineConfig, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetMmEngineConfig", ctx, in)
-	ret0, _ := ret[0].(*MmEngineConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetMmEngineConfig indicates an expected call of GetMmEngineConfig.
-func (mr *MockMarketMakingServiceServerMockRecorder) GetMmEngineConfig(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMmEngineConfig", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).GetMmEngineConfig), ctx, in)
 }
 
 // ListMarketMaking mocks base method.
@@ -1289,19 +1234,4 @@ func (m *MockMarketMakingServiceServer) UpdateMarketMakingConfig(ctx context.Con
 func (mr *MockMarketMakingServiceServerMockRecorder) UpdateMarketMakingConfig(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMarketMakingConfig", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).UpdateMarketMakingConfig), ctx, in)
-}
-
-// UpdateMmEngineConfig mocks base method.
-func (m *MockMarketMakingServiceServer) UpdateMmEngineConfig(ctx context.Context, in *UpdateMmEngineConfigRequest) (*MmEngineConfig, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateMmEngineConfig", ctx, in)
-	ret0, _ := ret[0].(*MmEngineConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateMmEngineConfig indicates an expected call of UpdateMmEngineConfig.
-func (mr *MockMarketMakingServiceServerMockRecorder) UpdateMmEngineConfig(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMmEngineConfig", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).UpdateMmEngineConfig), ctx, in)
 }
