@@ -368,6 +368,21 @@ pub struct MomentumState {
     /// 현재 ask 가격 조정값 (Price internal representation)
     #[prost(int64, tag="3")]
     pub ask_adjustment: i64,
+    /// 원시 틱 변화량 (부호 포함)
+    #[prost(double, tag="4")]
+    pub raw_ticks: f64,
+    /// 정규화 강도 (raw_ticks / trigger_ticks)
+    #[prost(double, tag="5")]
+    pub normalized_strength: f64,
+    /// 실제 적용된 follow 틱
+    #[prost(int32, tag="6")]
+    pub follow_ticks: i32,
+    /// 실제 적용된 escape 틱
+    #[prost(int32, tag="7")]
+    pub escape_ticks: i32,
+    /// 윈도우 내 샘플 수
+    #[prost(int32, tag="8")]
+    pub sample_count: i32,
 }
 /// Skew 런타임 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -388,27 +403,13 @@ pub struct TradeAnalyzerState {
     #[prost(int32, tag="2")]
     pub fill_count: i32,
 }
-/// 순노출 guard 런타임 상태
+/// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct ExposureGuardState {
+pub struct ExposureBalancerState {
     /// 현재 순노출 수량
     #[prost(int64, tag="1")]
     pub net_exposure: i64,
-    /// 현재 bid 수량 스케일 (0.0 ~ 1.0)
-    #[prost(double, tag="2")]
-    pub bid_scale: f64,
-    /// 현재 ask 수량 스케일 (0.0 ~ 1.0)
-    #[prost(double, tag="3")]
-    pub ask_scale: f64,
-}
-/// InventoryBalancer 런타임 상태
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct InventoryBalancerState {
-    /// 현재 누적 순매매 흐름
-    #[prost(int64, tag="1")]
-    pub net_flow: i64,
     /// 현재 가격 중심 이동 틱 수
     #[prost(int32, tag="2")]
     pub price_shift_ticks: i32,
@@ -438,12 +439,9 @@ pub struct MmEngineRuntimeState {
     /// Trade Analyzer 상태
     #[prost(message, optional, tag="5")]
     pub trade_analyzer: ::core::option::Option<TradeAnalyzerState>,
-    /// 순노출 guard 상태
+    /// 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
     #[prost(message, optional, tag="6")]
-    pub exposure_guard: ::core::option::Option<ExposureGuardState>,
-    /// InventoryBalancer 상태
-    #[prost(message, optional, tag="7")]
-    pub inventory_balancer: ::core::option::Option<InventoryBalancerState>,
+    pub exposure_balancer: ::core::option::Option<ExposureBalancerState>,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

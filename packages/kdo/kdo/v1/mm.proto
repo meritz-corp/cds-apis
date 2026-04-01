@@ -458,6 +458,21 @@ message MomentumState {
 
   // 현재 ask 가격 조정값 (Price internal representation)
   int64 ask_adjustment = 3;
+
+  // 원시 틱 변화량 (부호 포함)
+  double raw_ticks = 4;
+
+  // 정규화 강도 (raw_ticks / trigger_ticks)
+  double normalized_strength = 5;
+
+  // 실제 적용된 follow 틱
+  int32 follow_ticks = 6;
+
+  // 실제 적용된 escape 틱
+  int32 escape_ticks = 7;
+
+  // 윈도우 내 샘플 수
+  int32 sample_count = 8;
 }
 
 // Skew 런타임 상태
@@ -475,22 +490,10 @@ message TradeAnalyzerState {
   int32 fill_count = 2;
 }
 
-// 순노출 guard 런타임 상태
-message ExposureGuardState {
+// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
+message ExposureBalancerState {
   // 현재 순노출 수량
   int64 net_exposure = 1;
-
-  // 현재 bid 수량 스케일 (0.0 ~ 1.0)
-  double bid_scale = 2;
-
-  // 현재 ask 수량 스케일 (0.0 ~ 1.0)
-  double ask_scale = 3;
-}
-
-// InventoryBalancer 런타임 상태
-message InventoryBalancerState {
-  // 현재 누적 순매매 흐름
-  int64 net_flow = 1;
 
   // 현재 가격 중심 이동 틱 수
   int32 price_shift_ticks = 2;
@@ -519,11 +522,12 @@ message MmEngineRuntimeState {
   // Trade Analyzer 상태
   TradeAnalyzerState trade_analyzer = 5;
 
-  // 순노출 guard 상태
-  ExposureGuardState exposure_guard = 6;
+  // 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
+  ExposureBalancerState exposure_balancer = 6;
 
-  // InventoryBalancer 상태
-  InventoryBalancerState inventory_balancer = 7;
+  // reserved: 7 (removed inventory_balancer field)
+  reserved 7;
+  reserved "inventory_balancer";
 }
 
 // ============================================================================

@@ -1856,11 +1856,21 @@ class MomentumState extends $pb.GeneratedMessage {
     $core.String? direction,
     $fixnum.Int64? bidAdjustment,
     $fixnum.Int64? askAdjustment,
+    $core.double? rawTicks,
+    $core.double? normalizedStrength,
+    $core.int? followTicks,
+    $core.int? escapeTicks,
+    $core.int? sampleCount,
   }) {
     final result = create();
     if (direction != null) result.direction = direction;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
+    if (rawTicks != null) result.rawTicks = rawTicks;
+    if (normalizedStrength != null) result.normalizedStrength = normalizedStrength;
+    if (followTicks != null) result.followTicks = followTicks;
+    if (escapeTicks != null) result.escapeTicks = escapeTicks;
+    if (sampleCount != null) result.sampleCount = sampleCount;
     return result;
   }
 
@@ -1873,6 +1883,11 @@ class MomentumState extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'direction')
     ..aInt64(2, _omitFieldNames ? '' : 'bidAdjustment')
     ..aInt64(3, _omitFieldNames ? '' : 'askAdjustment')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'rawTicks', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'normalizedStrength', $pb.PbFieldType.OD)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'followTicks', $pb.PbFieldType.O3)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'escapeTicks', $pb.PbFieldType.O3)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'sampleCount', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1922,6 +1937,56 @@ class MomentumState extends $pb.GeneratedMessage {
   $core.bool hasAskAdjustment() => $_has(2);
   @$pb.TagNumber(3)
   void clearAskAdjustment() => $_clearField(3);
+
+  /// 원시 틱 변화량 (부호 포함)
+  @$pb.TagNumber(4)
+  $core.double get rawTicks => $_getN(3);
+  @$pb.TagNumber(4)
+  set rawTicks($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasRawTicks() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRawTicks() => $_clearField(4);
+
+  /// 정규화 강도 (raw_ticks / trigger_ticks)
+  @$pb.TagNumber(5)
+  $core.double get normalizedStrength => $_getN(4);
+  @$pb.TagNumber(5)
+  set normalizedStrength($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasNormalizedStrength() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearNormalizedStrength() => $_clearField(5);
+
+  /// 실제 적용된 follow 틱
+  @$pb.TagNumber(6)
+  $core.int get followTicks => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set followTicks($core.int value) => $_setSignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasFollowTicks() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFollowTicks() => $_clearField(6);
+
+  /// 실제 적용된 escape 틱
+  @$pb.TagNumber(7)
+  $core.int get escapeTicks => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set escapeTicks($core.int value) => $_setSignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasEscapeTicks() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearEscapeTicks() => $_clearField(7);
+
+  /// 윈도우 내 샘플 수
+  @$pb.TagNumber(8)
+  $core.int get sampleCount => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set sampleCount($core.int value) => $_setSignedInt32(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasSampleCount() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearSampleCount() => $_clearField(8);
 }
 
 /// Skew 런타임 상태
@@ -2033,48 +2098,51 @@ class TradeAnalyzerState extends $pb.GeneratedMessage {
   void clearFillCount() => $_clearField(2);
 }
 
-/// 순노출 guard 런타임 상태
-class ExposureGuardState extends $pb.GeneratedMessage {
-  factory ExposureGuardState({
+/// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
+class ExposureBalancerState extends $pb.GeneratedMessage {
+  factory ExposureBalancerState({
     $fixnum.Int64? netExposure,
+    $core.int? priceShiftTicks,
     $core.double? bidScale,
     $core.double? askScale,
   }) {
     final result = create();
     if (netExposure != null) result.netExposure = netExposure;
+    if (priceShiftTicks != null) result.priceShiftTicks = priceShiftTicks;
     if (bidScale != null) result.bidScale = bidScale;
     if (askScale != null) result.askScale = askScale;
     return result;
   }
 
-  ExposureGuardState._();
+  ExposureBalancerState._();
 
-  factory ExposureGuardState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ExposureGuardState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ExposureBalancerState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ExposureBalancerState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExposureGuardState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExposureBalancerState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'netExposure')
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'bidScale', $pb.PbFieldType.OD)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'askScale', $pb.PbFieldType.OD)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'priceShiftTicks', $pb.PbFieldType.O3)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'bidScale', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'askScale', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ExposureGuardState clone() => ExposureGuardState()..mergeFromMessage(this);
+  ExposureBalancerState clone() => ExposureBalancerState()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ExposureGuardState copyWith(void Function(ExposureGuardState) updates) => super.copyWith((message) => updates(message as ExposureGuardState)) as ExposureGuardState;
+  ExposureBalancerState copyWith(void Function(ExposureBalancerState) updates) => super.copyWith((message) => updates(message as ExposureBalancerState)) as ExposureBalancerState;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ExposureGuardState create() => ExposureGuardState._();
+  static ExposureBalancerState create() => ExposureBalancerState._();
   @$core.override
-  ExposureGuardState createEmptyInstance() => create();
-  static $pb.PbList<ExposureGuardState> createRepeated() => $pb.PbList<ExposureGuardState>();
+  ExposureBalancerState createEmptyInstance() => create();
+  static $pb.PbList<ExposureBalancerState> createRepeated() => $pb.PbList<ExposureBalancerState>();
   @$core.pragma('dart2js:noInline')
-  static ExposureGuardState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExposureGuardState>(create);
-  static ExposureGuardState? _defaultInstance;
+  static ExposureBalancerState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExposureBalancerState>(create);
+  static ExposureBalancerState? _defaultInstance;
 
   /// 현재 순노출 수량
   @$pb.TagNumber(1)
@@ -2085,83 +2153,6 @@ class ExposureGuardState extends $pb.GeneratedMessage {
   $core.bool hasNetExposure() => $_has(0);
   @$pb.TagNumber(1)
   void clearNetExposure() => $_clearField(1);
-
-  /// 현재 bid 수량 스케일 (0.0 ~ 1.0)
-  @$pb.TagNumber(2)
-  $core.double get bidScale => $_getN(1);
-  @$pb.TagNumber(2)
-  set bidScale($core.double value) => $_setDouble(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBidScale() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBidScale() => $_clearField(2);
-
-  /// 현재 ask 수량 스케일 (0.0 ~ 1.0)
-  @$pb.TagNumber(3)
-  $core.double get askScale => $_getN(2);
-  @$pb.TagNumber(3)
-  set askScale($core.double value) => $_setDouble(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasAskScale() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAskScale() => $_clearField(3);
-}
-
-/// InventoryBalancer 런타임 상태
-class InventoryBalancerState extends $pb.GeneratedMessage {
-  factory InventoryBalancerState({
-    $fixnum.Int64? netFlow,
-    $core.int? priceShiftTicks,
-    $core.double? bidScale,
-    $core.double? askScale,
-  }) {
-    final result = create();
-    if (netFlow != null) result.netFlow = netFlow;
-    if (priceShiftTicks != null) result.priceShiftTicks = priceShiftTicks;
-    if (bidScale != null) result.bidScale = bidScale;
-    if (askScale != null) result.askScale = askScale;
-    return result;
-  }
-
-  InventoryBalancerState._();
-
-  factory InventoryBalancerState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory InventoryBalancerState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InventoryBalancerState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'netFlow')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'priceShiftTicks', $pb.PbFieldType.O3)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'bidScale', $pb.PbFieldType.OD)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'askScale', $pb.PbFieldType.OD)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  InventoryBalancerState clone() => InventoryBalancerState()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  InventoryBalancerState copyWith(void Function(InventoryBalancerState) updates) => super.copyWith((message) => updates(message as InventoryBalancerState)) as InventoryBalancerState;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static InventoryBalancerState create() => InventoryBalancerState._();
-  @$core.override
-  InventoryBalancerState createEmptyInstance() => create();
-  static $pb.PbList<InventoryBalancerState> createRepeated() => $pb.PbList<InventoryBalancerState>();
-  @$core.pragma('dart2js:noInline')
-  static InventoryBalancerState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InventoryBalancerState>(create);
-  static InventoryBalancerState? _defaultInstance;
-
-  /// 현재 누적 순매매 흐름
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get netFlow => $_getI64(0);
-  @$pb.TagNumber(1)
-  set netFlow($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasNetFlow() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearNetFlow() => $_clearField(1);
 
   /// 현재 가격 중심 이동 틱 수
   @$pb.TagNumber(2)
@@ -2202,8 +2193,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     MomentumState? momentum,
     SkewState? skew,
     TradeAnalyzerState? tradeAnalyzer,
-    ExposureGuardState? exposureGuard,
-    InventoryBalancerState? inventoryBalancer,
+    ExposureBalancerState? exposureBalancer,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2211,8 +2201,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     if (momentum != null) result.momentum = momentum;
     if (skew != null) result.skew = skew;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
-    if (exposureGuard != null) result.exposureGuard = exposureGuard;
-    if (inventoryBalancer != null) result.inventoryBalancer = inventoryBalancer;
+    if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
     return result;
   }
 
@@ -2227,8 +2216,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     ..aOM<MomentumState>(3, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
     ..aOM<SkewState>(4, _omitFieldNames ? '' : 'skew', subBuilder: SkewState.create)
     ..aOM<TradeAnalyzerState>(5, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: TradeAnalyzerState.create)
-    ..aOM<ExposureGuardState>(6, _omitFieldNames ? '' : 'exposureGuard', subBuilder: ExposureGuardState.create)
-    ..aOM<InventoryBalancerState>(7, _omitFieldNames ? '' : 'inventoryBalancer', subBuilder: InventoryBalancerState.create)
+    ..aOM<ExposureBalancerState>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: ExposureBalancerState.create)
     ..hasRequiredFields = false
   ;
 
@@ -2305,29 +2293,17 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(4);
 
-  /// 순노출 guard 상태
+  /// 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
   @$pb.TagNumber(6)
-  ExposureGuardState get exposureGuard => $_getN(5);
+  ExposureBalancerState get exposureBalancer => $_getN(5);
   @$pb.TagNumber(6)
-  set exposureGuard(ExposureGuardState value) => $_setField(6, value);
+  set exposureBalancer(ExposureBalancerState value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasExposureGuard() => $_has(5);
+  $core.bool hasExposureBalancer() => $_has(5);
   @$pb.TagNumber(6)
-  void clearExposureGuard() => $_clearField(6);
+  void clearExposureBalancer() => $_clearField(6);
   @$pb.TagNumber(6)
-  ExposureGuardState ensureExposureGuard() => $_ensure(5);
-
-  /// InventoryBalancer 상태
-  @$pb.TagNumber(7)
-  InventoryBalancerState get inventoryBalancer => $_getN(6);
-  @$pb.TagNumber(7)
-  set inventoryBalancer(InventoryBalancerState value) => $_setField(7, value);
-  @$pb.TagNumber(7)
-  $core.bool hasInventoryBalancer() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearInventoryBalancer() => $_clearField(7);
-  @$pb.TagNumber(7)
-  InventoryBalancerState ensureInventoryBalancer() => $_ensure(6);
+  ExposureBalancerState ensureExposureBalancer() => $_ensure(5);
 }
 
 /// StreamMmEngineState

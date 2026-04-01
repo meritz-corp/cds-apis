@@ -465,6 +465,11 @@ const MomentumState$json = {
     {'1': 'direction', '3': 1, '4': 1, '5': 9, '10': 'direction'},
     {'1': 'bid_adjustment', '3': 2, '4': 1, '5': 3, '10': 'bidAdjustment'},
     {'1': 'ask_adjustment', '3': 3, '4': 1, '5': 3, '10': 'askAdjustment'},
+    {'1': 'raw_ticks', '3': 4, '4': 1, '5': 1, '10': 'rawTicks'},
+    {'1': 'normalized_strength', '3': 5, '4': 1, '5': 1, '10': 'normalizedStrength'},
+    {'1': 'follow_ticks', '3': 6, '4': 1, '5': 5, '10': 'followTicks'},
+    {'1': 'escape_ticks', '3': 7, '4': 1, '5': 5, '10': 'escapeTicks'},
+    {'1': 'sample_count', '3': 8, '4': 1, '5': 5, '10': 'sampleCount'},
   ],
 };
 
@@ -472,7 +477,10 @@ const MomentumState$json = {
 final $typed_data.Uint8List momentumStateDescriptor = $convert.base64Decode(
     'Cg1Nb21lbnR1bVN0YXRlEhwKCWRpcmVjdGlvbhgBIAEoCVIJZGlyZWN0aW9uEiUKDmJpZF9hZG'
     'p1c3RtZW50GAIgASgDUg1iaWRBZGp1c3RtZW50EiUKDmFza19hZGp1c3RtZW50GAMgASgDUg1h'
-    'c2tBZGp1c3RtZW50');
+    'c2tBZGp1c3RtZW50EhsKCXJhd190aWNrcxgEIAEoAVIIcmF3VGlja3MSLwoTbm9ybWFsaXplZF'
+    '9zdHJlbmd0aBgFIAEoAVISbm9ybWFsaXplZFN0cmVuZ3RoEiEKDGZvbGxvd190aWNrcxgGIAEo'
+    'BVILZm9sbG93VGlja3MSIQoMZXNjYXBlX3RpY2tzGAcgASgFUgtlc2NhcGVUaWNrcxIhCgxzYW'
+    '1wbGVfY291bnQYCCABKAVSC3NhbXBsZUNvdW50');
 
 @$core.Deprecated('Use skewStateDescriptor instead')
 const SkewState$json = {
@@ -500,38 +508,22 @@ final $typed_data.Uint8List tradeAnalyzerStateDescriptor = $convert.base64Decode
     'ChJUcmFkZUFuYWx5emVyU3RhdGUSGwoJZGVjb190aWNrGAEgASgFUghkZWNvVGljaxIdCgpmaW'
     'xsX2NvdW50GAIgASgFUglmaWxsQ291bnQ=');
 
-@$core.Deprecated('Use exposureGuardStateDescriptor instead')
-const ExposureGuardState$json = {
-  '1': 'ExposureGuardState',
+@$core.Deprecated('Use exposureBalancerStateDescriptor instead')
+const ExposureBalancerState$json = {
+  '1': 'ExposureBalancerState',
   '2': [
     {'1': 'net_exposure', '3': 1, '4': 1, '5': 3, '10': 'netExposure'},
-    {'1': 'bid_scale', '3': 2, '4': 1, '5': 1, '10': 'bidScale'},
-    {'1': 'ask_scale', '3': 3, '4': 1, '5': 1, '10': 'askScale'},
-  ],
-};
-
-/// Descriptor for `ExposureGuardState`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List exposureGuardStateDescriptor = $convert.base64Decode(
-    'ChJFeHBvc3VyZUd1YXJkU3RhdGUSIQoMbmV0X2V4cG9zdXJlGAEgASgDUgtuZXRFeHBvc3VyZR'
-    'IbCgliaWRfc2NhbGUYAiABKAFSCGJpZFNjYWxlEhsKCWFza19zY2FsZRgDIAEoAVIIYXNrU2Nh'
-    'bGU=');
-
-@$core.Deprecated('Use inventoryBalancerStateDescriptor instead')
-const InventoryBalancerState$json = {
-  '1': 'InventoryBalancerState',
-  '2': [
-    {'1': 'net_flow', '3': 1, '4': 1, '5': 3, '10': 'netFlow'},
     {'1': 'price_shift_ticks', '3': 2, '4': 1, '5': 5, '10': 'priceShiftTicks'},
     {'1': 'bid_scale', '3': 3, '4': 1, '5': 1, '10': 'bidScale'},
     {'1': 'ask_scale', '3': 4, '4': 1, '5': 1, '10': 'askScale'},
   ],
 };
 
-/// Descriptor for `InventoryBalancerState`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List inventoryBalancerStateDescriptor = $convert.base64Decode(
-    'ChZJbnZlbnRvcnlCYWxhbmNlclN0YXRlEhkKCG5ldF9mbG93GAEgASgDUgduZXRGbG93EioKEX'
-    'ByaWNlX3NoaWZ0X3RpY2tzGAIgASgFUg9wcmljZVNoaWZ0VGlja3MSGwoJYmlkX3NjYWxlGAMg'
-    'ASgBUghiaWRTY2FsZRIbCglhc2tfc2NhbGUYBCABKAFSCGFza1NjYWxl');
+/// Descriptor for `ExposureBalancerState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List exposureBalancerStateDescriptor = $convert.base64Decode(
+    'ChVFeHBvc3VyZUJhbGFuY2VyU3RhdGUSIQoMbmV0X2V4cG9zdXJlGAEgASgDUgtuZXRFeHBvc3'
+    'VyZRIqChFwcmljZV9zaGlmdF90aWNrcxgCIAEoBVIPcHJpY2VTaGlmdFRpY2tzEhsKCWJpZF9z'
+    'Y2FsZRgDIAEoAVIIYmlkU2NhbGUSGwoJYXNrX3NjYWxlGAQgASgBUghhc2tTY2FsZQ==');
 
 @$core.Deprecated('Use mmEngineRuntimeStateDescriptor instead')
 const MmEngineRuntimeState$json = {
@@ -542,9 +534,12 @@ const MmEngineRuntimeState$json = {
     {'1': 'momentum', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MomentumState', '10': 'momentum'},
     {'1': 'skew', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.SkewState', '10': 'skew'},
     {'1': 'trade_analyzer', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.TradeAnalyzerState', '10': 'tradeAnalyzer'},
-    {'1': 'exposure_guard', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.ExposureGuardState', '10': 'exposureGuard'},
-    {'1': 'inventory_balancer', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.mm.InventoryBalancerState', '10': 'inventoryBalancer'},
+    {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.ExposureBalancerState', '10': 'exposureBalancer'},
   ],
+  '9': [
+    {'1': 7, '2': 8},
+  ],
+  '10': ['inventory_balancer'],
 };
 
 /// Descriptor for `MmEngineRuntimeState`. Decode as a `google.protobuf.DescriptorProto`.
@@ -553,10 +548,9 @@ final $typed_data.Uint8List mmEngineRuntimeStateDescriptor = $convert.base64Deco
     'RhbXAYAiABKANSCXRpbWVzdGFtcBI0Cghtb21lbnR1bRgDIAEoCzIYLmtkby52MS5tbS5Nb21l'
     'bnR1bVN0YXRlUghtb21lbnR1bRIoCgRza2V3GAQgASgLMhQua2RvLnYxLm1tLlNrZXdTdGF0ZV'
     'IEc2tldxJECg50cmFkZV9hbmFseXplchgFIAEoCzIdLmtkby52MS5tbS5UcmFkZUFuYWx5emVy'
-    'U3RhdGVSDXRyYWRlQW5hbHl6ZXISRAoOZXhwb3N1cmVfZ3VhcmQYBiABKAsyHS5rZG8udjEubW'
-    '0uRXhwb3N1cmVHdWFyZFN0YXRlUg1leHBvc3VyZUd1YXJkElAKEmludmVudG9yeV9iYWxhbmNl'
-    'chgHIAEoCzIhLmtkby52MS5tbS5JbnZlbnRvcnlCYWxhbmNlclN0YXRlUhFpbnZlbnRvcnlCYW'
-    'xhbmNlcg==');
+    'U3RhdGVSDXRyYWRlQW5hbHl6ZXISTQoRZXhwb3N1cmVfYmFsYW5jZXIYBiABKAsyIC5rZG8udj'
+    'EubW0uRXhwb3N1cmVCYWxhbmNlclN0YXRlUhBleHBvc3VyZUJhbGFuY2VySgQIBxAIUhJpbnZl'
+    'bnRvcnlfYmFsYW5jZXI=');
 
 @$core.Deprecated('Use streamMmEngineStateRequestDescriptor instead')
 const StreamMmEngineStateRequest$json = {

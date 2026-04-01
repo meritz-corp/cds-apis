@@ -564,34 +564,13 @@
         "config"
       ]
     },
-    "mmExposureGuardState": {
+    "mmExposureBalancerState": {
       "type": "object",
       "properties": {
         "netExposure": {
           "type": "string",
           "format": "int64",
           "title": "현재 순노출 수량"
-        },
-        "bidScale": {
-          "type": "number",
-          "format": "double",
-          "title": "현재 bid 수량 스케일 (0.0 ~ 1.0)"
-        },
-        "askScale": {
-          "type": "number",
-          "format": "double",
-          "title": "현재 ask 수량 스케일 (0.0 ~ 1.0)"
-        }
-      },
-      "title": "순노출 guard 런타임 상태"
-    },
-    "mmInventoryBalancerState": {
-      "type": "object",
-      "properties": {
-        "netFlow": {
-          "type": "string",
-          "format": "int64",
-          "title": "현재 누적 순매매 흐름"
         },
         "priceShiftTicks": {
           "type": "integer",
@@ -609,7 +588,7 @@
           "title": "현재 ask 수량 스케일 (0.0 ~ 1.0)"
         }
       },
-      "title": "InventoryBalancer 런타임 상태"
+      "title": "순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)"
     },
     "mmListMarketMakingResponse": {
       "type": "object",
@@ -964,13 +943,9 @@
           "$ref": "#/definitions/mmTradeAnalyzerState",
           "title": "Trade Analyzer 상태"
         },
-        "exposureGuard": {
-          "$ref": "#/definitions/mmExposureGuardState",
-          "title": "순노출 guard 상태"
-        },
-        "inventoryBalancer": {
-          "$ref": "#/definitions/mmInventoryBalancerState",
-          "title": "InventoryBalancer 상태"
+        "exposureBalancer": {
+          "$ref": "#/definitions/mmExposureBalancerState",
+          "title": "순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)"
         }
       },
       "title": "MM 엔진 전체 런타임 상태 스냅샷"
@@ -991,6 +966,31 @@
           "type": "string",
           "format": "int64",
           "title": "현재 ask 가격 조정값 (Price internal representation)"
+        },
+        "rawTicks": {
+          "type": "number",
+          "format": "double",
+          "title": "원시 틱 변화량 (부호 포함)"
+        },
+        "normalizedStrength": {
+          "type": "number",
+          "format": "double",
+          "title": "정규화 강도 (raw_ticks / trigger_ticks)"
+        },
+        "followTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "실제 적용된 follow 틱"
+        },
+        "escapeTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "실제 적용된 escape 틱"
+        },
+        "sampleCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "윈도우 내 샘플 수"
         }
       },
       "title": "Momentum 런타임 상태"

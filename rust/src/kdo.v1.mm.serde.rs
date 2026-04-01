@@ -111,7 +111,7 @@ impl<'de> serde::Deserialize<'de> for CreateMarketMakingRequest {
         deserializer.deserialize_struct("kdo.v1.mm.CreateMarketMakingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ExposureGuardState {
+impl serde::Serialize for ExposureBalancerState {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -128,11 +128,17 @@ impl serde::Serialize for ExposureGuardState {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ExposureGuardState", len)?;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ExposureBalancerState", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("net_exposure", ToString::to_string(&self.net_exposure).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("price_shift_ticks", &self.price_shift_ticks)?;
         }
         if true {
             struct_ser.serialize_field("bid_scale", &self.bid_scale)?;
@@ -143,7 +149,7 @@ impl serde::Serialize for ExposureGuardState {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for ExposureGuardState {
+impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -152,6 +158,8 @@ impl<'de> serde::Deserialize<'de> for ExposureGuardState {
         const FIELDS: &[&str] = &[
             "net_exposure",
             "netExposure",
+            "price_shift_ticks",
+            "priceShiftTicks",
             "bid_scale",
             "bidScale",
             "ask_scale",
@@ -161,6 +169,7 @@ impl<'de> serde::Deserialize<'de> for ExposureGuardState {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             NetExposure,
+            PriceShiftTicks,
             BidScale,
             AskScale,
             __SkipField__,
@@ -186,6 +195,7 @@ impl<'de> serde::Deserialize<'de> for ExposureGuardState {
                     {
                         match value {
                             "netExposure" | "net_exposure" => Ok(GeneratedField::NetExposure),
+                            "priceShiftTicks" | "price_shift_ticks" => Ok(GeneratedField::PriceShiftTicks),
                             "bidScale" | "bid_scale" => Ok(GeneratedField::BidScale),
                             "askScale" | "ask_scale" => Ok(GeneratedField::AskScale),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -197,17 +207,18 @@ impl<'de> serde::Deserialize<'de> for ExposureGuardState {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ExposureGuardState;
+            type Value = ExposureBalancerState;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.ExposureGuardState")
+                formatter.write_str("struct kdo.v1.mm.ExposureBalancerState")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ExposureGuardState, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ExposureBalancerState, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut net_exposure__ = None;
+                let mut price_shift_ticks__ = None;
                 let mut bid_scale__ = None;
                 let mut ask_scale__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -217,6 +228,14 @@ impl<'de> serde::Deserialize<'de> for ExposureGuardState {
                                 return Err(serde::de::Error::duplicate_field("netExposure"));
                             }
                             net_exposure__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PriceShiftTicks => {
+                            if price_shift_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priceShiftTicks"));
+                            }
+                            price_shift_ticks__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -241,14 +260,15 @@ impl<'de> serde::Deserialize<'de> for ExposureGuardState {
                         }
                     }
                 }
-                Ok(ExposureGuardState {
+                Ok(ExposureBalancerState {
                     net_exposure: net_exposure__.unwrap_or_default(),
+                    price_shift_ticks: price_shift_ticks__.unwrap_or_default(),
                     bid_scale: bid_scale__.unwrap_or_default(),
                     ask_scale: ask_scale__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.ExposureGuardState", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.ExposureBalancerState", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetMarketMakingOrderbookRequest {
@@ -534,166 +554,6 @@ impl<'de> serde::Deserialize<'de> for GetMarketMakingStatusRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.GetMarketMakingStatusRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for InventoryBalancerState {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.InventoryBalancerState", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("net_flow", ToString::to_string(&self.net_flow).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("price_shift_ticks", &self.price_shift_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("bid_scale", &self.bid_scale)?;
-        }
-        if true {
-            struct_ser.serialize_field("ask_scale", &self.ask_scale)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for InventoryBalancerState {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "net_flow",
-            "netFlow",
-            "price_shift_ticks",
-            "priceShiftTicks",
-            "bid_scale",
-            "bidScale",
-            "ask_scale",
-            "askScale",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            NetFlow,
-            PriceShiftTicks,
-            BidScale,
-            AskScale,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "netFlow" | "net_flow" => Ok(GeneratedField::NetFlow),
-                            "priceShiftTicks" | "price_shift_ticks" => Ok(GeneratedField::PriceShiftTicks),
-                            "bidScale" | "bid_scale" => Ok(GeneratedField::BidScale),
-                            "askScale" | "ask_scale" => Ok(GeneratedField::AskScale),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = InventoryBalancerState;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.InventoryBalancerState")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<InventoryBalancerState, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut net_flow__ = None;
-                let mut price_shift_ticks__ = None;
-                let mut bid_scale__ = None;
-                let mut ask_scale__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::NetFlow => {
-                            if net_flow__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("netFlow"));
-                            }
-                            net_flow__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::PriceShiftTicks => {
-                            if price_shift_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("priceShiftTicks"));
-                            }
-                            price_shift_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BidScale => {
-                            if bid_scale__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidScale"));
-                            }
-                            bid_scale__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskScale => {
-                            if ask_scale__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askScale"));
-                            }
-                            ask_scale__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(InventoryBalancerState {
-                    net_flow: net_flow__.unwrap_or_default(),
-                    price_shift_ticks: price_shift_ticks__.unwrap_or_default(),
-                    bid_scale: bid_scale__.unwrap_or_default(),
-                    ask_scale: ask_scale__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.mm.InventoryBalancerState", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListMarketMakingRequest {
@@ -2777,9 +2637,6 @@ impl serde::Serialize for MmEngineRuntimeState {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmEngineRuntimeState", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2798,11 +2655,8 @@ impl serde::Serialize for MmEngineRuntimeState {
         if let Some(v) = self.trade_analyzer.as_ref() {
             struct_ser.serialize_field("trade_analyzer", v)?;
         }
-        if let Some(v) = self.exposure_guard.as_ref() {
-            struct_ser.serialize_field("exposure_guard", v)?;
-        }
-        if let Some(v) = self.inventory_balancer.as_ref() {
-            struct_ser.serialize_field("inventory_balancer", v)?;
+        if let Some(v) = self.exposure_balancer.as_ref() {
+            struct_ser.serialize_field("exposure_balancer", v)?;
         }
         struct_ser.end()
     }
@@ -2820,10 +2674,8 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
             "skew",
             "trade_analyzer",
             "tradeAnalyzer",
-            "exposure_guard",
-            "exposureGuard",
-            "inventory_balancer",
-            "inventoryBalancer",
+            "exposure_balancer",
+            "exposureBalancer",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2833,8 +2685,7 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
             Momentum,
             Skew,
             TradeAnalyzer,
-            ExposureGuard,
-            InventoryBalancer,
+            ExposureBalancer,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2862,8 +2713,7 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             "momentum" => Ok(GeneratedField::Momentum),
                             "skew" => Ok(GeneratedField::Skew),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
-                            "exposureGuard" | "exposure_guard" => Ok(GeneratedField::ExposureGuard),
-                            "inventoryBalancer" | "inventory_balancer" => Ok(GeneratedField::InventoryBalancer),
+                            "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2888,8 +2738,7 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                 let mut momentum__ = None;
                 let mut skew__ = None;
                 let mut trade_analyzer__ = None;
-                let mut exposure_guard__ = None;
-                let mut inventory_balancer__ = None;
+                let mut exposure_balancer__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2924,17 +2773,11 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             }
                             trade_analyzer__ = map_.next_value()?;
                         }
-                        GeneratedField::ExposureGuard => {
-                            if exposure_guard__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("exposureGuard"));
+                        GeneratedField::ExposureBalancer => {
+                            if exposure_balancer__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposureBalancer"));
                             }
-                            exposure_guard__ = map_.next_value()?;
-                        }
-                        GeneratedField::InventoryBalancer => {
-                            if inventory_balancer__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("inventoryBalancer"));
-                            }
-                            inventory_balancer__ = map_.next_value()?;
+                            exposure_balancer__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -2947,8 +2790,7 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                     momentum: momentum__,
                     skew: skew__,
                     trade_analyzer: trade_analyzer__,
-                    exposure_guard: exposure_guard__,
-                    inventory_balancer: inventory_balancer__,
+                    exposure_balancer: exposure_balancer__,
                 })
             }
         }
@@ -2972,6 +2814,21 @@ impl serde::Serialize for MomentumState {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MomentumState", len)?;
         if true {
             struct_ser.serialize_field("direction", &self.direction)?;
@@ -2985,6 +2842,21 @@ impl serde::Serialize for MomentumState {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_adjustment", ToString::to_string(&self.ask_adjustment).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("raw_ticks", &self.raw_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("normalized_strength", &self.normalized_strength)?;
+        }
+        if true {
+            struct_ser.serialize_field("follow_ticks", &self.follow_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("escape_ticks", &self.escape_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("sample_count", &self.sample_count)?;
         }
         struct_ser.end()
     }
@@ -3001,6 +2873,16 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
+            "raw_ticks",
+            "rawTicks",
+            "normalized_strength",
+            "normalizedStrength",
+            "follow_ticks",
+            "followTicks",
+            "escape_ticks",
+            "escapeTicks",
+            "sample_count",
+            "sampleCount",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3008,6 +2890,11 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
             Direction,
             BidAdjustment,
             AskAdjustment,
+            RawTicks,
+            NormalizedStrength,
+            FollowTicks,
+            EscapeTicks,
+            SampleCount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3033,6 +2920,11 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                             "direction" => Ok(GeneratedField::Direction),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "rawTicks" | "raw_ticks" => Ok(GeneratedField::RawTicks),
+                            "normalizedStrength" | "normalized_strength" => Ok(GeneratedField::NormalizedStrength),
+                            "followTicks" | "follow_ticks" => Ok(GeneratedField::FollowTicks),
+                            "escapeTicks" | "escape_ticks" => Ok(GeneratedField::EscapeTicks),
+                            "sampleCount" | "sample_count" => Ok(GeneratedField::SampleCount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3055,6 +2947,11 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                 let mut direction__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
+                let mut raw_ticks__ = None;
+                let mut normalized_strength__ = None;
+                let mut follow_ticks__ = None;
+                let mut escape_ticks__ = None;
+                let mut sample_count__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Direction => {
@@ -3079,6 +2976,46 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::RawTicks => {
+                            if raw_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("rawTicks"));
+                            }
+                            raw_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NormalizedStrength => {
+                            if normalized_strength__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("normalizedStrength"));
+                            }
+                            normalized_strength__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FollowTicks => {
+                            if follow_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("followTicks"));
+                            }
+                            follow_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EscapeTicks => {
+                            if escape_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("escapeTicks"));
+                            }
+                            escape_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SampleCount => {
+                            if sample_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sampleCount"));
+                            }
+                            sample_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3088,6 +3025,11 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                     direction: direction__.unwrap_or_default(),
                     bid_adjustment: bid_adjustment__.unwrap_or_default(),
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
+                    raw_ticks: raw_ticks__.unwrap_or_default(),
+                    normalized_strength: normalized_strength__.unwrap_or_default(),
+                    follow_ticks: follow_ticks__.unwrap_or_default(),
+                    escape_ticks: escape_ticks__.unwrap_or_default(),
+                    sample_count: sample_count__.unwrap_or_default(),
                 })
             }
         }
