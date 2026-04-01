@@ -352,6 +352,263 @@ pub struct MarketMakingOrderbookData {
     pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
 }
 // ============================================================================
+// MM 엔진 설정 (모니터링/런타임 조회용)
+// ============================================================================
+
+/// Momentum 엔진 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MomentumConfig {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 최근 가격 샘플을 유지할 시간 창 (ms)
+    #[prost(uint64, tag="2")]
+    pub window_ms: u64,
+    /// 연속 모멘텀 강도를 정규화할 기준 틱 수
+    #[prost(int32, tag="3")]
+    pub trigger_ticks: i32,
+    /// 정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도
+    #[prost(double, tag="4")]
+    pub follow_sensitivity: f64,
+    /// 정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도
+    #[prost(double, tag="5")]
+    pub escape_sensitivity: f64,
+    /// bid 추종 최대 틱 수
+    #[prost(int32, tag="6")]
+    pub max_follow_ticks: i32,
+    /// ask/bid 도망 최대 틱 수
+    #[prost(int32, tag="7")]
+    pub max_escape_ticks: i32,
+    /// 인버스 방향으로 해석할지 여부
+    #[prost(bool, tag="8")]
+    pub is_opposite: bool,
+}
+/// Skew 엔진 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SkewConfig {
+    /// Skew 모드: "fixed" or "slide_on_trade"
+    #[prost(string, tag="1")]
+    pub mode: ::prost::alloc::string::String,
+    /// SlideOnTrade 트리거 수량
+    #[prost(int64, tag="2")]
+    pub trigger_amt: i64,
+    /// 트리거당 skew 틱 수
+    #[prost(int32, tag="3")]
+    pub skew_unit: i32,
+}
+/// Trade Analyzer 엔진 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TradeAnalyzerConfig {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 분석 윈도우 크기
+    #[prost(int32, tag="2")]
+    pub window: i32,
+    /// Adverse fill ratio 임계값
+    #[prost(double, tag="3")]
+    pub ratio_threshold: f64,
+    /// Take-fill strength 임계값
+    #[prost(double, tag="4")]
+    pub strength_threshold: f64,
+    /// 최대 decoration 틱 수
+    #[prost(int32, tag="5")]
+    pub max_deco_tick: i32,
+}
+/// 순노출 hard limit 엔진 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ExposureGuardConfig {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 이 배수부터 같은 방향 수량을 줄이기 시작한다
+    #[prost(int32, tag="2")]
+    pub reduce_start_multiple: i32,
+    /// 이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다
+    #[prost(int32, tag="3")]
+    pub max_inventory_multiple: i32,
+}
+/// 중기 buy/sell imbalance 복원 엔진 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct InventoryBalancerConfig {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다
+    #[prost(int32, tag="2")]
+    pub trigger_multiple: i32,
+    /// 단계당 가격 중심 이동 틱 수
+    #[prost(int32, tag="3")]
+    pub price_skew_ticks: i32,
+    /// 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
+    #[prost(double, tag="4")]
+    pub same_side_reduction: f64,
+    /// 같은 방향 수량의 최소 비율
+    #[prost(double, tag="5")]
+    pub min_same_side_scale: f64,
+}
+/// Pre-trade Screening 엔진 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ScreeningConfig {
+    /// 최대 스프레드 폭 (틱 단위, 0=비활성)
+    #[prost(int32, tag="1")]
+    pub max_spread_width_ticks: i32,
+}
+/// MM 엔진 전체 설정 (런타임 조회/업데이트용)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MmEngineConfig {
+    /// Momentum 설정
+    #[prost(message, optional, tag="1")]
+    pub momentum: ::core::option::Option<MomentumConfig>,
+    /// Skew 설정
+    #[prost(message, optional, tag="2")]
+    pub skew: ::core::option::Option<SkewConfig>,
+    /// Trade Analyzer 설정
+    #[prost(message, optional, tag="3")]
+    pub trade_analyzer: ::core::option::Option<TradeAnalyzerConfig>,
+    /// 순노출 hard limit 설정
+    #[prost(message, optional, tag="4")]
+    pub exposure_guard: ::core::option::Option<ExposureGuardConfig>,
+    /// 중기 imbalance 복원 설정
+    #[prost(message, optional, tag="5")]
+    pub inventory_balancer: ::core::option::Option<InventoryBalancerConfig>,
+    /// Pre-trade Screening 설정
+    #[prost(message, optional, tag="6")]
+    pub screening: ::core::option::Option<ScreeningConfig>,
+}
+// ============================================================================
+// MM 엔진 런타임 상태
+// ============================================================================
+
+/// Momentum 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MomentumState {
+    /// 현재 모멘텀 방향 ("up", "down", "neutral")
+    #[prost(string, tag="1")]
+    pub direction: ::prost::alloc::string::String,
+    /// 현재 bid 가격 조정값 (Price internal representation)
+    #[prost(int64, tag="2")]
+    pub bid_adjustment: i64,
+    /// 현재 ask 가격 조정값 (Price internal representation)
+    #[prost(int64, tag="3")]
+    pub ask_adjustment: i64,
+}
+/// Skew 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SkewState {
+    /// 현재 누적 순매매 수량
+    #[prost(int64, tag="1")]
+    pub net_traded: i64,
+}
+/// Trade Analyzer 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TradeAnalyzerState {
+    /// 현재 decoration 틱 수
+    #[prost(int32, tag="1")]
+    pub deco_tick: i32,
+    /// 현재 윈도우 내 체결 횟수
+    #[prost(int32, tag="2")]
+    pub fill_count: i32,
+}
+/// 순노출 guard 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ExposureGuardState {
+    /// 현재 순노출 수량
+    #[prost(int64, tag="1")]
+    pub net_exposure: i64,
+    /// 현재 bid 수량 스케일 (0.0 ~ 1.0)
+    #[prost(double, tag="2")]
+    pub bid_scale: f64,
+    /// 현재 ask 수량 스케일 (0.0 ~ 1.0)
+    #[prost(double, tag="3")]
+    pub ask_scale: f64,
+}
+/// InventoryBalancer 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct InventoryBalancerState {
+    /// 현재 누적 순매매 흐름
+    #[prost(int64, tag="1")]
+    pub net_flow: i64,
+    /// 현재 가격 중심 이동 틱 수
+    #[prost(int32, tag="2")]
+    pub price_shift_ticks: i32,
+    /// 현재 bid 수량 스케일 (0.0 ~ 1.0)
+    #[prost(double, tag="3")]
+    pub bid_scale: f64,
+    /// 현재 ask 수량 스케일 (0.0 ~ 1.0)
+    #[prost(double, tag="4")]
+    pub ask_scale: f64,
+}
+/// MM 엔진 전체 런타임 상태 스냅샷
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MmEngineRuntimeState {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 상태 스냅샷 타임스탬프 (Unix nanoseconds)
+    #[prost(int64, tag="2")]
+    pub timestamp: i64,
+    /// Momentum 상태
+    #[prost(message, optional, tag="3")]
+    pub momentum: ::core::option::Option<MomentumState>,
+    /// Skew 상태
+    #[prost(message, optional, tag="4")]
+    pub skew: ::core::option::Option<SkewState>,
+    /// Trade Analyzer 상태
+    #[prost(message, optional, tag="5")]
+    pub trade_analyzer: ::core::option::Option<TradeAnalyzerState>,
+    /// 순노출 guard 상태
+    #[prost(message, optional, tag="6")]
+    pub exposure_guard: ::core::option::Option<ExposureGuardState>,
+    /// InventoryBalancer 상태
+    #[prost(message, optional, tag="7")]
+    pub inventory_balancer: ::core::option::Option<InventoryBalancerState>,
+}
+// ============================================================================
+// MM 엔진 설정/상태 Request Messages
+// ============================================================================
+
+/// GetMmEngineConfig
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetMmEngineConfigRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// UpdateMmEngineConfig
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateMmEngineConfigRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 업데이트할 엔진 설정
+    #[prost(message, optional, tag="2")]
+    pub config: ::core::option::Option<MmEngineConfig>,
+}
+/// StreamMmEngineState
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamMmEngineStateRequest {
+    /// ISIN 심볼 (빈 문자열이면 전체 스트리밍)
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+// ============================================================================
 // Enums
 // ============================================================================
 

@@ -93,6 +93,21 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamMarketMakingOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// MM 엔진 설정 조회
+  $grpc.ResponseFuture<$0.MmEngineConfig> getMmEngineConfig($0.GetMmEngineConfigRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMmEngineConfig, request, options: options);
+  }
+
+  /// MM 엔진 설정 업데이트
+  $grpc.ResponseFuture<$0.MmEngineConfig> updateMmEngineConfig($0.UpdateMmEngineConfigRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateMmEngineConfig, request, options: options);
+  }
+
+  /// MM 엔진 런타임 상태 실시간 스트리밍
+  $grpc.ResponseStream<$0.MmEngineRuntimeState> streamMmEngineState($0.StreamMmEngineStateRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMmEngineState, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$listMarketMaking = $grpc.ClientMethod<$0.ListMarketMakingRequest, $0.ListMarketMakingResponse>(
@@ -143,6 +158,18 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook',
       ($0.GetMarketMakingOrderbookRequest value) => value.writeToBuffer(),
       $0.MarketMakingOrderbookData.fromBuffer);
+  static final _$getMmEngineConfig = $grpc.ClientMethod<$0.GetMmEngineConfigRequest, $0.MmEngineConfig>(
+      '/kdo.v1.mm.MarketMakingService/GetMmEngineConfig',
+      ($0.GetMmEngineConfigRequest value) => value.writeToBuffer(),
+      $0.MmEngineConfig.fromBuffer);
+  static final _$updateMmEngineConfig = $grpc.ClientMethod<$0.UpdateMmEngineConfigRequest, $0.MmEngineConfig>(
+      '/kdo.v1.mm.MarketMakingService/UpdateMmEngineConfig',
+      ($0.UpdateMmEngineConfigRequest value) => value.writeToBuffer(),
+      $0.MmEngineConfig.fromBuffer);
+  static final _$streamMmEngineState = $grpc.ClientMethod<$0.StreamMmEngineStateRequest, $0.MmEngineRuntimeState>(
+      '/kdo.v1.mm.MarketMakingService/StreamMmEngineState',
+      ($0.StreamMmEngineStateRequest value) => value.writeToBuffer(),
+      $0.MmEngineRuntimeState.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
@@ -234,6 +261,27 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.GetMarketMakingOrderbookRequest.fromBuffer(value),
         ($0.MarketMakingOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMmEngineConfigRequest, $0.MmEngineConfig>(
+        'GetMmEngineConfig',
+        getMmEngineConfig_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetMmEngineConfigRequest.fromBuffer(value),
+        ($0.MmEngineConfig value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateMmEngineConfigRequest, $0.MmEngineConfig>(
+        'UpdateMmEngineConfig',
+        updateMmEngineConfig_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateMmEngineConfigRequest.fromBuffer(value),
+        ($0.MmEngineConfig value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamMmEngineStateRequest, $0.MmEngineRuntimeState>(
+        'StreamMmEngineState',
+        streamMmEngineState_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamMmEngineStateRequest.fromBuffer(value),
+        ($0.MmEngineRuntimeState value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMarketMakingResponse> listMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketMakingRequest> $request) async {
@@ -307,5 +355,23 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.MarketMakingOrderbookData> streamMarketMakingOrderbook($grpc.ServiceCall call, $0.GetMarketMakingOrderbookRequest request);
+
+  $async.Future<$0.MmEngineConfig> getMmEngineConfig_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMmEngineConfigRequest> $request) async {
+    return getMmEngineConfig($call, await $request);
+  }
+
+  $async.Future<$0.MmEngineConfig> getMmEngineConfig($grpc.ServiceCall call, $0.GetMmEngineConfigRequest request);
+
+  $async.Future<$0.MmEngineConfig> updateMmEngineConfig_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMmEngineConfigRequest> $request) async {
+    return updateMmEngineConfig($call, await $request);
+  }
+
+  $async.Future<$0.MmEngineConfig> updateMmEngineConfig($grpc.ServiceCall call, $0.UpdateMmEngineConfigRequest request);
+
+  $async.Stream<$0.MmEngineRuntimeState> streamMmEngineState_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMmEngineStateRequest> $request) async* {
+    yield* streamMmEngineState($call, await $request);
+  }
+
+  $async.Stream<$0.MmEngineRuntimeState> streamMmEngineState($grpc.ServiceCall call, $0.StreamMmEngineStateRequest request);
 
 }

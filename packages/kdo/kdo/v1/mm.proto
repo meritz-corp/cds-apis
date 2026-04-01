@@ -109,6 +109,31 @@ service MarketMakingService {
     };
     option (google.api.method_signature) = "symbol";
   }
+
+  // MM 엔진 설정 조회
+  rpc GetMmEngineConfig(GetMmEngineConfigRequest) returns (MmEngineConfig) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/engine-config"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
+  // MM 엔진 설정 업데이트
+  rpc UpdateMmEngineConfig(UpdateMmEngineConfigRequest) returns (MmEngineConfig) {
+    option (google.api.http) = {
+      patch: "/v1/mm/{symbol=*}/engine-config"
+      body: "*"
+    };
+    option (google.api.method_signature) = "symbol,config";
+  }
+
+  // MM 엔진 런타임 상태 실시간 스트리밍
+  rpc StreamMmEngineState(StreamMmEngineStateRequest) returns (stream MmEngineRuntimeState) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/engine-state:stream"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
 }
 
 // ============================================================================
@@ -434,4 +459,229 @@ message MarketMakingOrderbookData {
 
   // 매도 수량 목록
   repeated int64 ask_quantities = 4;
+}
+
+// ============================================================================
+// MM 엔진 설정 (모니터링/런타임 조회용)
+// ============================================================================
+
+// Momentum 엔진 설정
+message MomentumConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 최근 가격 샘플을 유지할 시간 창 (ms)
+  uint64 window_ms = 2;
+
+  // 연속 모멘텀 강도를 정규화할 기준 틱 수
+  int32 trigger_ticks = 3;
+
+  // 정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도
+  double follow_sensitivity = 4;
+
+  // 정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도
+  double escape_sensitivity = 5;
+
+  // bid 추종 최대 틱 수
+  int32 max_follow_ticks = 6;
+
+  // ask/bid 도망 최대 틱 수
+  int32 max_escape_ticks = 7;
+
+  // 인버스 방향으로 해석할지 여부
+  bool is_opposite = 8;
+}
+
+// Skew 엔진 설정
+message SkewConfig {
+  // Skew 모드: "fixed" or "slide_on_trade"
+  string mode = 1;
+
+  // SlideOnTrade 트리거 수량
+  int64 trigger_amt = 2;
+
+  // 트리거당 skew 틱 수
+  int32 skew_unit = 3;
+}
+
+// Trade Analyzer 엔진 설정
+message TradeAnalyzerConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 분석 윈도우 크기
+  int32 window = 2;
+
+  // Adverse fill ratio 임계값
+  double ratio_threshold = 3;
+
+  // Take-fill strength 임계값
+  double strength_threshold = 4;
+
+  // 최대 decoration 틱 수
+  int32 max_deco_tick = 5;
+}
+
+// 순노출 hard limit 엔진 설정
+message ExposureGuardConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 이 배수부터 같은 방향 수량을 줄이기 시작한다
+  int32 reduce_start_multiple = 2;
+
+  // 이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다
+  int32 max_inventory_multiple = 3;
+}
+
+// 중기 buy/sell imbalance 복원 엔진 설정
+message InventoryBalancerConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다
+  int32 trigger_multiple = 2;
+
+  // 단계당 가격 중심 이동 틱 수
+  int32 price_skew_ticks = 3;
+
+  // 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
+  double same_side_reduction = 4;
+
+  // 같은 방향 수량의 최소 비율
+  double min_same_side_scale = 5;
+}
+
+// Pre-trade Screening 엔진 설정
+message ScreeningConfig {
+  // 최대 스프레드 폭 (틱 단위, 0=비활성)
+  int32 max_spread_width_ticks = 1;
+}
+
+// MM 엔진 전체 설정 (런타임 조회/업데이트용)
+message MmEngineConfig {
+  // Momentum 설정
+  MomentumConfig momentum = 1;
+
+  // Skew 설정
+  SkewConfig skew = 2;
+
+  // Trade Analyzer 설정
+  TradeAnalyzerConfig trade_analyzer = 3;
+
+  // 순노출 hard limit 설정
+  ExposureGuardConfig exposure_guard = 4;
+
+  // 중기 imbalance 복원 설정
+  InventoryBalancerConfig inventory_balancer = 5;
+
+  // Pre-trade Screening 설정
+  ScreeningConfig screening = 6;
+}
+
+// ============================================================================
+// MM 엔진 런타임 상태
+// ============================================================================
+
+// Momentum 런타임 상태
+message MomentumState {
+  // 현재 모멘텀 방향 ("up", "down", "neutral")
+  string direction = 1;
+
+  // 현재 bid 가격 조정값 (Price internal representation)
+  int64 bid_adjustment = 2;
+
+  // 현재 ask 가격 조정값 (Price internal representation)
+  int64 ask_adjustment = 3;
+}
+
+// Skew 런타임 상태
+message SkewState {
+  // 현재 누적 순매매 수량
+  int64 net_traded = 1;
+}
+
+// Trade Analyzer 런타임 상태
+message TradeAnalyzerState {
+  // 현재 decoration 틱 수
+  int32 deco_tick = 1;
+
+  // 현재 윈도우 내 체결 횟수
+  int32 fill_count = 2;
+}
+
+// 순노출 guard 런타임 상태
+message ExposureGuardState {
+  // 현재 순노출 수량
+  int64 net_exposure = 1;
+
+  // 현재 bid 수량 스케일 (0.0 ~ 1.0)
+  double bid_scale = 2;
+
+  // 현재 ask 수량 스케일 (0.0 ~ 1.0)
+  double ask_scale = 3;
+}
+
+// InventoryBalancer 런타임 상태
+message InventoryBalancerState {
+  // 현재 누적 순매매 흐름
+  int64 net_flow = 1;
+
+  // 현재 가격 중심 이동 틱 수
+  int32 price_shift_ticks = 2;
+
+  // 현재 bid 수량 스케일 (0.0 ~ 1.0)
+  double bid_scale = 3;
+
+  // 현재 ask 수량 스케일 (0.0 ~ 1.0)
+  double ask_scale = 4;
+}
+
+// MM 엔진 전체 런타임 상태 스냅샷
+message MmEngineRuntimeState {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // 상태 스냅샷 타임스탬프 (Unix nanoseconds)
+  int64 timestamp = 2;
+
+  // Momentum 상태
+  MomentumState momentum = 3;
+
+  // Skew 상태
+  SkewState skew = 4;
+
+  // Trade Analyzer 상태
+  TradeAnalyzerState trade_analyzer = 5;
+
+  // 순노출 guard 상태
+  ExposureGuardState exposure_guard = 6;
+
+  // InventoryBalancer 상태
+  InventoryBalancerState inventory_balancer = 7;
+}
+
+// ============================================================================
+// MM 엔진 설정/상태 Request Messages
+// ============================================================================
+
+// GetMmEngineConfig
+message GetMmEngineConfigRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// UpdateMmEngineConfig
+message UpdateMmEngineConfigRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 업데이트할 엔진 설정
+  MmEngineConfig config = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// StreamMmEngineState
+message StreamMmEngineStateRequest {
+  // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
+  string symbol = 1;
 }
