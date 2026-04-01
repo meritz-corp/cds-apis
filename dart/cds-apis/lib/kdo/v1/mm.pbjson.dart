@@ -106,6 +106,8 @@ const MarketMakingConfiguration$json = {
     {'1': 'exposure_balancer', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureBalancer', '10': 'exposureBalancer'},
     {'1': 'bid_adjustment', '3': 10, '4': 1, '5': 3, '10': 'bidAdjustment'},
     {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 3, '10': 'askAdjustment'},
+    {'1': 'bid_quantity', '3': 12, '4': 1, '5': 3, '10': 'bidQuantity'},
+    {'1': 'ask_quantity', '3': 13, '4': 1, '5': 3, '10': 'askQuantity'},
   ],
   '9': [
     {'1': 9, '2': 10},
@@ -123,8 +125,9 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     '50dW0YByABKAsyHy5rZG8udjEubW0uTWFya2V0TWFraW5nTW9tZW50dW1SCG1vbWVudHVtElQK'
     'EWV4cG9zdXJlX2JhbGFuY2VyGAggASgLMicua2RvLnYxLm1tLk1hcmtldE1ha2luZ0V4cG9zdX'
     'JlQmFsYW5jZXJSEGV4cG9zdXJlQmFsYW5jZXISJQoOYmlkX2FkanVzdG1lbnQYCiABKANSDWJp'
-    'ZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG1lbnQYCyABKANSDWFza0FkanVzdG1lbnRKBAgJEA'
-    'pSEmludmVudG9yeV9iYWxhbmNlcg==');
+    'ZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG1lbnQYCyABKANSDWFza0FkanVzdG1lbnQSIQoMYm'
+    'lkX3F1YW50aXR5GAwgASgDUgtiaWRRdWFudGl0eRIhCgxhc2tfcXVhbnRpdHkYDSABKANSC2Fz'
+    'a1F1YW50aXR5SgQICRAKUhJpbnZlbnRvcnlfYmFsYW5jZXI=');
 
 @$core.Deprecated('Use marketMakingSkewDescriptor instead')
 const MarketMakingSkew$json = {

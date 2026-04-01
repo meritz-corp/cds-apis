@@ -81,6 +81,12 @@ pub struct MarketMakingConfiguration {
     /// 기준가격 대비 ask 조정값 (Price internal representation)
     #[prost(int64, tag="11")]
     pub ask_adjustment: i64,
+    /// 레벨당 매수 수량
+    #[prost(int64, tag="12")]
+    pub bid_quantity: i64,
+    /// 레벨당 매도 수량
+    #[prost(int64, tag="13")]
+    pub ask_quantity: i64,
 }
 /// Skew 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

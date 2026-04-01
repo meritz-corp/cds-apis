@@ -683,6 +683,16 @@
           "type": "string",
           "format": "int64",
           "title": "기준가격 대비 ask 조정값 (Price internal representation)"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "레벨당 매수 수량"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "레벨당 매도 수량"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

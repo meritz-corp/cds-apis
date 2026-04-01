@@ -263,6 +263,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingExposureBalancer? exposureBalancer,
     $fixnum.Int64? bidAdjustment,
     $fixnum.Int64? askAdjustment,
+    $fixnum.Int64? bidQuantity,
+    $fixnum.Int64? askQuantity,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
@@ -274,6 +276,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
+    if (askQuantity != null) result.askQuantity = askQuantity;
     return result;
   }
 
@@ -292,6 +296,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingExposureBalancer>(8, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: MarketMakingExposureBalancer.create)
     ..aInt64(10, _omitFieldNames ? '' : 'bidAdjustment')
     ..aInt64(11, _omitFieldNames ? '' : 'askAdjustment')
+    ..aInt64(12, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(13, _omitFieldNames ? '' : 'askQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -411,6 +417,26 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasAskAdjustment() => $_has(8);
   @$pb.TagNumber(11)
   void clearAskAdjustment() => $_clearField(11);
+
+  /// 레벨당 매수 수량
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get bidQuantity => $_getI64(9);
+  @$pb.TagNumber(12)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(12)
+  $core.bool hasBidQuantity() => $_has(9);
+  @$pb.TagNumber(12)
+  void clearBidQuantity() => $_clearField(12);
+
+  /// 레벨당 매도 수량
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get askQuantity => $_getI64(10);
+  @$pb.TagNumber(13)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(13)
+  $core.bool hasAskQuantity() => $_has(10);
+  @$pb.TagNumber(13)
+  void clearAskQuantity() => $_clearField(13);
 }
 
 /// Skew 설정

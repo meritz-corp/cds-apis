@@ -1035,6 +1035,12 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("pricing", &self.pricing)?;
@@ -1067,6 +1073,16 @@ impl serde::Serialize for MarketMakingConfiguration {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_adjustment", ToString::to_string(&self.ask_adjustment).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -1090,6 +1106,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1103,6 +1123,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             ExposureBalancer,
             BidAdjustment,
             AskAdjustment,
+            BidQuantity,
+            AskQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1134,6 +1156,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1162,6 +1186,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut exposure_balancer__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pricing => {
@@ -1222,6 +1248,22 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1237,6 +1279,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     exposure_balancer: exposure_balancer__,
                     bid_adjustment: bid_adjustment__.unwrap_or_default(),
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
                 })
             }
         }

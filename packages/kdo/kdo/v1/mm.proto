@@ -221,6 +221,12 @@ message MarketMakingConfiguration {
 
   // 기준가격 대비 ask 조정값 (Price internal representation)
   int64 ask_adjustment = 11;
+
+  // 레벨당 매수 수량
+  int64 bid_quantity = 12;
+
+  // 레벨당 매도 수량
+  int64 ask_quantity = 13;
 }
 
 // Skew 설정
