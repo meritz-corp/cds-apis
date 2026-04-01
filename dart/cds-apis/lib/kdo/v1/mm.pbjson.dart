@@ -103,11 +103,14 @@ const MarketMakingConfiguration$json = {
     {'1': 'screening', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingScreening', '10': 'screening'},
     {'1': 'enabled', '3': 6, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'momentum', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMomentum', '10': 'momentum'},
-    {'1': 'exposure_guard', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureGuard', '10': 'exposureGuard'},
-    {'1': 'inventory_balancer', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingInventoryBalancer', '10': 'inventoryBalancer'},
+    {'1': 'exposure_balancer', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureBalancer', '10': 'exposureBalancer'},
     {'1': 'bid_adjustment', '3': 10, '4': 1, '5': 3, '10': 'bidAdjustment'},
     {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 3, '10': 'askAdjustment'},
   ],
+  '9': [
+    {'1': 9, '2': 10},
+  ],
+  '10': ['inventory_balancer'],
 };
 
 /// Descriptor for `MarketMakingConfiguration`. Decode as a `google.protobuf.DescriptorProto`.
@@ -117,12 +120,11 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'X2FuYWx5emVyGAMgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ1RyYWRlQW5hbHl6ZXJSDX'
     'RyYWRlQW5hbHl6ZXISPgoJc2NyZWVuaW5nGAQgASgLMiAua2RvLnYxLm1tLk1hcmtldE1ha2lu'
     'Z1NjcmVlbmluZ1IJc2NyZWVuaW5nEhgKB2VuYWJsZWQYBiABKAhSB2VuYWJsZWQSOwoIbW9tZW'
-    '50dW0YByABKAsyHy5rZG8udjEubW0uTWFya2V0TWFraW5nTW9tZW50dW1SCG1vbWVudHVtEksK'
-    'DmV4cG9zdXJlX2d1YXJkGAggASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ0V4cG9zdXJlR3'
-    'VhcmRSDWV4cG9zdXJlR3VhcmQSVwoSaW52ZW50b3J5X2JhbGFuY2VyGAkgASgLMigua2RvLnYx'
-    'Lm1tLk1hcmtldE1ha2luZ0ludmVudG9yeUJhbGFuY2VyUhFpbnZlbnRvcnlCYWxhbmNlchIlCg'
-    '5iaWRfYWRqdXN0bWVudBgKIAEoA1INYmlkQWRqdXN0bWVudBIlCg5hc2tfYWRqdXN0bWVudBgL'
-    'IAEoA1INYXNrQWRqdXN0bWVudA==');
+    '50dW0YByABKAsyHy5rZG8udjEubW0uTWFya2V0TWFraW5nTW9tZW50dW1SCG1vbWVudHVtElQK'
+    'EWV4cG9zdXJlX2JhbGFuY2VyGAggASgLMicua2RvLnYxLm1tLk1hcmtldE1ha2luZ0V4cG9zdX'
+    'JlQmFsYW5jZXJSEGV4cG9zdXJlQmFsYW5jZXISJQoOYmlkX2FkanVzdG1lbnQYCiABKANSDWJp'
+    'ZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG1lbnQYCyABKANSDWFza0FkanVzdG1lbnRKBAgJEA'
+    'pSEmludmVudG9yeV9iYWxhbmNlcg==');
 
 @$core.Deprecated('Use marketMakingSkewDescriptor instead')
 const MarketMakingSkew$json = {
@@ -198,41 +200,28 @@ final $typed_data.Uint8List marketMakingMomentumDescriptor = $convert.base64Deco
     'X3RpY2tzGAYgASgFUg5tYXhGb2xsb3dUaWNrcxIoChBtYXhfZXNjYXBlX3RpY2tzGAcgASgFUg'
     '5tYXhFc2NhcGVUaWNrcxIfCgtpc19vcHBvc2l0ZRgIIAEoCFIKaXNPcHBvc2l0ZQ==');
 
-@$core.Deprecated('Use marketMakingExposureGuardDescriptor instead')
-const MarketMakingExposureGuard$json = {
-  '1': 'MarketMakingExposureGuard',
-  '2': [
-    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
-    {'1': 'reduce_start_multiple', '3': 2, '4': 1, '5': 5, '10': 'reduceStartMultiple'},
-    {'1': 'max_inventory_multiple', '3': 3, '4': 1, '5': 5, '10': 'maxInventoryMultiple'},
-  ],
-};
-
-/// Descriptor for `MarketMakingExposureGuard`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List marketMakingExposureGuardDescriptor = $convert.base64Decode(
-    'ChlNYXJrZXRNYWtpbmdFeHBvc3VyZUd1YXJkEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSMg'
-    'oVcmVkdWNlX3N0YXJ0X211bHRpcGxlGAIgASgFUhNyZWR1Y2VTdGFydE11bHRpcGxlEjQKFm1h'
-    'eF9pbnZlbnRvcnlfbXVsdGlwbGUYAyABKAVSFG1heEludmVudG9yeU11bHRpcGxl');
-
-@$core.Deprecated('Use marketMakingInventoryBalancerDescriptor instead')
-const MarketMakingInventoryBalancer$json = {
-  '1': 'MarketMakingInventoryBalancer',
+@$core.Deprecated('Use marketMakingExposureBalancerDescriptor instead')
+const MarketMakingExposureBalancer$json = {
+  '1': 'MarketMakingExposureBalancer',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'trigger_multiple', '3': 2, '4': 1, '5': 5, '10': 'triggerMultiple'},
     {'1': 'price_skew_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceSkewTicks'},
     {'1': 'same_side_reduction', '3': 4, '4': 1, '5': 1, '10': 'sameSideReduction'},
     {'1': 'min_same_side_scale', '3': 5, '4': 1, '5': 1, '10': 'minSameSideScale'},
+    {'1': 'hard_limit_start', '3': 6, '4': 1, '5': 5, '10': 'hardLimitStart'},
+    {'1': 'hard_limit_max', '3': 7, '4': 1, '5': 5, '10': 'hardLimitMax'},
   ],
 };
 
-/// Descriptor for `MarketMakingInventoryBalancer`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List marketMakingInventoryBalancerDescriptor = $convert.base64Decode(
-    'Ch1NYXJrZXRNYWtpbmdJbnZlbnRvcnlCYWxhbmNlchIYCgdlbmFibGVkGAEgASgIUgdlbmFibG'
-    'VkEikKEHRyaWdnZXJfbXVsdGlwbGUYAiABKAVSD3RyaWdnZXJNdWx0aXBsZRIoChBwcmljZV9z'
-    'a2V3X3RpY2tzGAMgASgFUg5wcmljZVNrZXdUaWNrcxIuChNzYW1lX3NpZGVfcmVkdWN0aW9uGA'
-    'QgASgBUhFzYW1lU2lkZVJlZHVjdGlvbhItChNtaW5fc2FtZV9zaWRlX3NjYWxlGAUgASgBUhBt'
-    'aW5TYW1lU2lkZVNjYWxl');
+/// Descriptor for `MarketMakingExposureBalancer`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.base64Decode(
+    'ChxNYXJrZXRNYWtpbmdFeHBvc3VyZUJhbGFuY2VyEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZW'
+    'QSKQoQdHJpZ2dlcl9tdWx0aXBsZRgCIAEoBVIPdHJpZ2dlck11bHRpcGxlEigKEHByaWNlX3Nr'
+    'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEi4KE3NhbWVfc2lkZV9yZWR1Y3Rpb24YBC'
+    'ABKAFSEXNhbWVTaWRlUmVkdWN0aW9uEi0KE21pbl9zYW1lX3NpZGVfc2NhbGUYBSABKAFSEG1p'
+    'blNhbWVTaWRlU2NhbGUSKAoQaGFyZF9saW1pdF9zdGFydBgGIAEoBVIOaGFyZExpbWl0U3Rhcn'
+    'QSJAoOaGFyZF9saW1pdF9tYXgYByABKAVSDGhhcmRMaW1pdE1heA==');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {

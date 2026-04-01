@@ -670,13 +670,9 @@
           "$ref": "#/definitions/mmMarketMakingMomentum",
           "title": "Momentum 설정 (최근 가격 흐름 → bid/ask 조정)"
         },
-        "exposureGuard": {
-          "$ref": "#/definitions/mmMarketMakingExposureGuard",
-          "title": "순노출 hard limit 제어 설정"
-        },
-        "inventoryBalancer": {
-          "$ref": "#/definitions/mmMarketMakingInventoryBalancer",
-          "title": "중기 buy/sell imbalance 복원 설정"
+        "exposureBalancer": {
+          "$ref": "#/definitions/mmMarketMakingExposureBalancer",
+          "title": "통합 포지션 관리 설정"
         },
         "bidAdjustment": {
           "type": "string",
@@ -691,27 +687,7 @@
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
     },
-    "mmMarketMakingExposureGuard": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "title": "활성화 여부"
-        },
-        "reduceStartMultiple": {
-          "type": "integer",
-          "format": "int32",
-          "title": "이 배수부터 같은 방향 수량을 줄이기 시작한다"
-        },
-        "maxInventoryMultiple": {
-          "type": "integer",
-          "format": "int32",
-          "title": "이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다"
-        }
-      },
-      "title": "순노출 hard limit 제어 설정"
-    },
-    "mmMarketMakingInventoryBalancer": {
+    "mmMarketMakingExposureBalancer": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -721,25 +697,35 @@
         "triggerMultiple": {
           "type": "integer",
           "format": "int32",
-          "title": "imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다"
+          "title": "soft zone: 이 배수부터 soft rebalance 발동"
         },
         "priceSkewTicks": {
           "type": "integer",
           "format": "int32",
-          "title": "단계당 가격 중심 이동 틱 수"
+          "title": "soft zone: 단계당 가격 중심 이동 틱 수"
         },
         "sameSideReduction": {
           "type": "number",
           "format": "double",
-          "title": "단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)"
+          "title": "soft zone: 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)"
         },
         "minSameSideScale": {
           "type": "number",
           "format": "double",
-          "title": "같은 방향 수량의 최소 비율"
+          "title": "soft zone: 같은 방향 수량의 최소 비율"
+        },
+        "hardLimitStart": {
+          "type": "integer",
+          "format": "int32",
+          "title": "hard zone: 이 배수부터 선형 축소 시작"
+        },
+        "hardLimitMax": {
+          "type": "integer",
+          "format": "int32",
+          "title": "hard zone: 이 배수에서 같은 방향 수량 0"
         }
       },
-      "title": "중기 buy/sell imbalance 복원 설정"
+      "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"
     },
     "mmMarketMakingMomentum": {
       "type": "object",

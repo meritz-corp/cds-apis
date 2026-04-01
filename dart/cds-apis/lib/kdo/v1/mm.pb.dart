@@ -260,8 +260,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingScreening? screening,
     $core.bool? enabled,
     MarketMakingMomentum? momentum,
-    MarketMakingExposureGuard? exposureGuard,
-    MarketMakingInventoryBalancer? inventoryBalancer,
+    MarketMakingExposureBalancer? exposureBalancer,
     $fixnum.Int64? bidAdjustment,
     $fixnum.Int64? askAdjustment,
   }) {
@@ -272,8 +271,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (screening != null) result.screening = screening;
     if (enabled != null) result.enabled = enabled;
     if (momentum != null) result.momentum = momentum;
-    if (exposureGuard != null) result.exposureGuard = exposureGuard;
-    if (inventoryBalancer != null) result.inventoryBalancer = inventoryBalancer;
+    if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     return result;
@@ -291,8 +289,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingScreening>(4, _omitFieldNames ? '' : 'screening', subBuilder: MarketMakingScreening.create)
     ..aOB(6, _omitFieldNames ? '' : 'enabled')
     ..aOM<MarketMakingMomentum>(7, _omitFieldNames ? '' : 'momentum', subBuilder: MarketMakingMomentum.create)
-    ..aOM<MarketMakingExposureGuard>(8, _omitFieldNames ? '' : 'exposureGuard', subBuilder: MarketMakingExposureGuard.create)
-    ..aOM<MarketMakingInventoryBalancer>(9, _omitFieldNames ? '' : 'inventoryBalancer', subBuilder: MarketMakingInventoryBalancer.create)
+    ..aOM<MarketMakingExposureBalancer>(8, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: MarketMakingExposureBalancer.create)
     ..aInt64(10, _omitFieldNames ? '' : 'bidAdjustment')
     ..aInt64(11, _omitFieldNames ? '' : 'askAdjustment')
     ..hasRequiredFields = false
@@ -383,47 +380,35 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   MarketMakingMomentum ensureMomentum() => $_ensure(5);
 
-  /// 순노출 hard limit 제어 설정
+  /// 통합 포지션 관리 설정
   @$pb.TagNumber(8)
-  MarketMakingExposureGuard get exposureGuard => $_getN(6);
+  MarketMakingExposureBalancer get exposureBalancer => $_getN(6);
   @$pb.TagNumber(8)
-  set exposureGuard(MarketMakingExposureGuard value) => $_setField(8, value);
+  set exposureBalancer(MarketMakingExposureBalancer value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasExposureGuard() => $_has(6);
+  $core.bool hasExposureBalancer() => $_has(6);
   @$pb.TagNumber(8)
-  void clearExposureGuard() => $_clearField(8);
+  void clearExposureBalancer() => $_clearField(8);
   @$pb.TagNumber(8)
-  MarketMakingExposureGuard ensureExposureGuard() => $_ensure(6);
-
-  /// 중기 buy/sell imbalance 복원 설정
-  @$pb.TagNumber(9)
-  MarketMakingInventoryBalancer get inventoryBalancer => $_getN(7);
-  @$pb.TagNumber(9)
-  set inventoryBalancer(MarketMakingInventoryBalancer value) => $_setField(9, value);
-  @$pb.TagNumber(9)
-  $core.bool hasInventoryBalancer() => $_has(7);
-  @$pb.TagNumber(9)
-  void clearInventoryBalancer() => $_clearField(9);
-  @$pb.TagNumber(9)
-  MarketMakingInventoryBalancer ensureInventoryBalancer() => $_ensure(7);
+  MarketMakingExposureBalancer ensureExposureBalancer() => $_ensure(6);
 
   /// 기준가격 대비 bid 조정값 (Price internal representation)
   @$pb.TagNumber(10)
-  $fixnum.Int64 get bidAdjustment => $_getI64(8);
+  $fixnum.Int64 get bidAdjustment => $_getI64(7);
   @$pb.TagNumber(10)
-  set bidAdjustment($fixnum.Int64 value) => $_setInt64(8, value);
+  set bidAdjustment($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(10)
-  $core.bool hasBidAdjustment() => $_has(8);
+  $core.bool hasBidAdjustment() => $_has(7);
   @$pb.TagNumber(10)
   void clearBidAdjustment() => $_clearField(10);
 
   /// 기준가격 대비 ask 조정값 (Price internal representation)
   @$pb.TagNumber(11)
-  $fixnum.Int64 get askAdjustment => $_getI64(9);
+  $fixnum.Int64 get askAdjustment => $_getI64(8);
   @$pb.TagNumber(11)
-  set askAdjustment($fixnum.Int64 value) => $_setInt64(9, value);
+  set askAdjustment($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(11)
-  $core.bool hasAskAdjustment() => $_has(9);
+  $core.bool hasAskAdjustment() => $_has(8);
   @$pb.TagNumber(11)
   void clearAskAdjustment() => $_clearField(11);
 }
@@ -815,88 +800,16 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   void clearIsOpposite() => $_clearField(8);
 }
 
-/// 순노출 hard limit 제어 설정
-class MarketMakingExposureGuard extends $pb.GeneratedMessage {
-  factory MarketMakingExposureGuard({
-    $core.bool? enabled,
-    $core.int? reduceStartMultiple,
-    $core.int? maxInventoryMultiple,
-  }) {
-    final result = create();
-    if (enabled != null) result.enabled = enabled;
-    if (reduceStartMultiple != null) result.reduceStartMultiple = reduceStartMultiple;
-    if (maxInventoryMultiple != null) result.maxInventoryMultiple = maxInventoryMultiple;
-    return result;
-  }
-
-  MarketMakingExposureGuard._();
-
-  factory MarketMakingExposureGuard.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MarketMakingExposureGuard.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingExposureGuard', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'enabled')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'reduceStartMultiple', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'maxInventoryMultiple', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingExposureGuard clone() => MarketMakingExposureGuard()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingExposureGuard copyWith(void Function(MarketMakingExposureGuard) updates) => super.copyWith((message) => updates(message as MarketMakingExposureGuard)) as MarketMakingExposureGuard;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingExposureGuard create() => MarketMakingExposureGuard._();
-  @$core.override
-  MarketMakingExposureGuard createEmptyInstance() => create();
-  static $pb.PbList<MarketMakingExposureGuard> createRepeated() => $pb.PbList<MarketMakingExposureGuard>();
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingExposureGuard getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingExposureGuard>(create);
-  static MarketMakingExposureGuard? _defaultInstance;
-
-  /// 활성화 여부
-  @$pb.TagNumber(1)
-  $core.bool get enabled => $_getBF(0);
-  @$pb.TagNumber(1)
-  set enabled($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasEnabled() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearEnabled() => $_clearField(1);
-
-  /// 이 배수부터 같은 방향 수량을 줄이기 시작한다
-  @$pb.TagNumber(2)
-  $core.int get reduceStartMultiple => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set reduceStartMultiple($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasReduceStartMultiple() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearReduceStartMultiple() => $_clearField(2);
-
-  /// 이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다
-  @$pb.TagNumber(3)
-  $core.int get maxInventoryMultiple => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set maxInventoryMultiple($core.int value) => $_setSignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasMaxInventoryMultiple() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearMaxInventoryMultiple() => $_clearField(3);
-}
-
-/// 중기 buy/sell imbalance 복원 설정
-class MarketMakingInventoryBalancer extends $pb.GeneratedMessage {
-  factory MarketMakingInventoryBalancer({
+/// 통합 포지션 관리 설정 (soft rebalance + hard limit)
+class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
+  factory MarketMakingExposureBalancer({
     $core.bool? enabled,
     $core.int? triggerMultiple,
     $core.int? priceSkewTicks,
     $core.double? sameSideReduction,
     $core.double? minSameSideScale,
+    $core.int? hardLimitStart,
+    $core.int? hardLimitMax,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -904,39 +817,43 @@ class MarketMakingInventoryBalancer extends $pb.GeneratedMessage {
     if (priceSkewTicks != null) result.priceSkewTicks = priceSkewTicks;
     if (sameSideReduction != null) result.sameSideReduction = sameSideReduction;
     if (minSameSideScale != null) result.minSameSideScale = minSameSideScale;
+    if (hardLimitStart != null) result.hardLimitStart = hardLimitStart;
+    if (hardLimitMax != null) result.hardLimitMax = hardLimitMax;
     return result;
   }
 
-  MarketMakingInventoryBalancer._();
+  MarketMakingExposureBalancer._();
 
-  factory MarketMakingInventoryBalancer.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MarketMakingInventoryBalancer.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MarketMakingExposureBalancer.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingExposureBalancer.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingInventoryBalancer', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingExposureBalancer', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'triggerMultiple', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'priceSkewTicks', $pb.PbFieldType.O3)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'sameSideReduction', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'minSameSideScale', $pb.PbFieldType.OD)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'hardLimitStart', $pb.PbFieldType.O3)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'hardLimitMax', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingInventoryBalancer clone() => MarketMakingInventoryBalancer()..mergeFromMessage(this);
+  MarketMakingExposureBalancer clone() => MarketMakingExposureBalancer()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingInventoryBalancer copyWith(void Function(MarketMakingInventoryBalancer) updates) => super.copyWith((message) => updates(message as MarketMakingInventoryBalancer)) as MarketMakingInventoryBalancer;
+  MarketMakingExposureBalancer copyWith(void Function(MarketMakingExposureBalancer) updates) => super.copyWith((message) => updates(message as MarketMakingExposureBalancer)) as MarketMakingExposureBalancer;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MarketMakingInventoryBalancer create() => MarketMakingInventoryBalancer._();
+  static MarketMakingExposureBalancer create() => MarketMakingExposureBalancer._();
   @$core.override
-  MarketMakingInventoryBalancer createEmptyInstance() => create();
-  static $pb.PbList<MarketMakingInventoryBalancer> createRepeated() => $pb.PbList<MarketMakingInventoryBalancer>();
+  MarketMakingExposureBalancer createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingExposureBalancer> createRepeated() => $pb.PbList<MarketMakingExposureBalancer>();
   @$core.pragma('dart2js:noInline')
-  static MarketMakingInventoryBalancer getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingInventoryBalancer>(create);
-  static MarketMakingInventoryBalancer? _defaultInstance;
+  static MarketMakingExposureBalancer getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingExposureBalancer>(create);
+  static MarketMakingExposureBalancer? _defaultInstance;
 
   /// 활성화 여부
   @$pb.TagNumber(1)
@@ -948,7 +865,7 @@ class MarketMakingInventoryBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEnabled() => $_clearField(1);
 
-  /// imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다
+  /// soft zone: 이 배수부터 soft rebalance 발동
   @$pb.TagNumber(2)
   $core.int get triggerMultiple => $_getIZ(1);
   @$pb.TagNumber(2)
@@ -958,7 +875,7 @@ class MarketMakingInventoryBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTriggerMultiple() => $_clearField(2);
 
-  /// 단계당 가격 중심 이동 틱 수
+  /// soft zone: 단계당 가격 중심 이동 틱 수
   @$pb.TagNumber(3)
   $core.int get priceSkewTicks => $_getIZ(2);
   @$pb.TagNumber(3)
@@ -968,7 +885,7 @@ class MarketMakingInventoryBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPriceSkewTicks() => $_clearField(3);
 
-  /// 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
+  /// soft zone: 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
   @$pb.TagNumber(4)
   $core.double get sameSideReduction => $_getN(3);
   @$pb.TagNumber(4)
@@ -978,7 +895,7 @@ class MarketMakingInventoryBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearSameSideReduction() => $_clearField(4);
 
-  /// 같은 방향 수량의 최소 비율
+  /// soft zone: 같은 방향 수량의 최소 비율
   @$pb.TagNumber(5)
   $core.double get minSameSideScale => $_getN(4);
   @$pb.TagNumber(5)
@@ -987,6 +904,26 @@ class MarketMakingInventoryBalancer extends $pb.GeneratedMessage {
   $core.bool hasMinSameSideScale() => $_has(4);
   @$pb.TagNumber(5)
   void clearMinSameSideScale() => $_clearField(5);
+
+  /// hard zone: 이 배수부터 선형 축소 시작
+  @$pb.TagNumber(6)
+  $core.int get hardLimitStart => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set hardLimitStart($core.int value) => $_setSignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasHardLimitStart() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearHardLimitStart() => $_clearField(6);
+
+  /// hard zone: 이 배수에서 같은 방향 수량 0
+  @$pb.TagNumber(7)
+  $core.int get hardLimitMax => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set hardLimitMax($core.int value) => $_setSignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasHardLimitMax() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearHardLimitMax() => $_clearField(7);
 }
 
 /// ListMarketMaking

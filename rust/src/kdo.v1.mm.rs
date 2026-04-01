@@ -72,12 +72,9 @@ pub struct MarketMakingConfiguration {
     /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
     #[prost(message, optional, tag="7")]
     pub momentum: ::core::option::Option<MarketMakingMomentum>,
-    /// 순노출 hard limit 제어 설정
+    /// 통합 포지션 관리 설정
     #[prost(message, optional, tag="8")]
-    pub exposure_guard: ::core::option::Option<MarketMakingExposureGuard>,
-    /// 중기 buy/sell imbalance 복원 설정
-    #[prost(message, optional, tag="9")]
-    pub inventory_balancer: ::core::option::Option<MarketMakingInventoryBalancer>,
+    pub exposure_balancer: ::core::option::Option<MarketMakingExposureBalancer>,
     /// 기준가격 대비 bid 조정값 (Price internal representation)
     #[prost(int64, tag="10")]
     pub bid_adjustment: i64,
@@ -162,39 +159,31 @@ pub struct MarketMakingMomentum {
     #[prost(bool, tag="8")]
     pub is_opposite: bool,
 }
-/// 순노출 hard limit 제어 설정
+/// 통합 포지션 관리 설정 (soft rebalance + hard limit)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingExposureGuard {
+pub struct MarketMakingExposureBalancer {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
-    /// 이 배수부터 같은 방향 수량을 줄이기 시작한다
-    #[prost(int32, tag="2")]
-    pub reduce_start_multiple: i32,
-    /// 이 배수에 도달하면 같은 방향 호가 수량을 0으로 clamp 한다
-    #[prost(int32, tag="3")]
-    pub max_inventory_multiple: i32,
-}
-/// 중기 buy/sell imbalance 복원 설정
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingInventoryBalancer {
-    /// 활성화 여부
-    #[prost(bool, tag="1")]
-    pub enabled: bool,
-    /// imbalance가 이 배수만큼 쌓이면 복원 로직이 발동한다
+    /// soft zone: 이 배수부터 soft rebalance 발동
     #[prost(int32, tag="2")]
     pub trigger_multiple: i32,
-    /// 단계당 가격 중심 이동 틱 수
+    /// soft zone: 단계당 가격 중심 이동 틱 수
     #[prost(int32, tag="3")]
     pub price_skew_ticks: i32,
-    /// 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
+    /// soft zone: 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
     #[prost(double, tag="4")]
     pub same_side_reduction: f64,
-    /// 같은 방향 수량의 최소 비율
+    /// soft zone: 같은 방향 수량의 최소 비율
     #[prost(double, tag="5")]
     pub min_same_side_scale: f64,
+    /// hard zone: 이 배수부터 선형 축소 시작
+    #[prost(int32, tag="6")]
+    pub hard_limit_start: i32,
+    /// hard zone: 이 배수에서 같은 방향 수량 0
+    #[prost(int32, tag="7")]
+    pub hard_limit_max: i32,
 }
 // ============================================================================
 // Request/Response Messages

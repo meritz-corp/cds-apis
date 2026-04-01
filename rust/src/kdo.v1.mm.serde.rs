@@ -1035,9 +1035,6 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("pricing", &self.pricing)?;
@@ -1057,11 +1054,8 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.momentum.as_ref() {
             struct_ser.serialize_field("momentum", v)?;
         }
-        if let Some(v) = self.exposure_guard.as_ref() {
-            struct_ser.serialize_field("exposure_guard", v)?;
-        }
-        if let Some(v) = self.inventory_balancer.as_ref() {
-            struct_ser.serialize_field("inventory_balancer", v)?;
+        if let Some(v) = self.exposure_balancer.as_ref() {
+            struct_ser.serialize_field("exposure_balancer", v)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1090,10 +1084,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "screening",
             "enabled",
             "momentum",
-            "exposure_guard",
-            "exposureGuard",
-            "inventory_balancer",
-            "inventoryBalancer",
+            "exposure_balancer",
+            "exposureBalancer",
             "bid_adjustment",
             "bidAdjustment",
             "ask_adjustment",
@@ -1108,8 +1100,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             Screening,
             Enabled,
             Momentum,
-            ExposureGuard,
-            InventoryBalancer,
+            ExposureBalancer,
             BidAdjustment,
             AskAdjustment,
             __SkipField__,
@@ -1140,8 +1131,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "screening" => Ok(GeneratedField::Screening),
                             "enabled" => Ok(GeneratedField::Enabled),
                             "momentum" => Ok(GeneratedField::Momentum),
-                            "exposureGuard" | "exposure_guard" => Ok(GeneratedField::ExposureGuard),
-                            "inventoryBalancer" | "inventory_balancer" => Ok(GeneratedField::InventoryBalancer),
+                            "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -1169,8 +1159,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut screening__ = None;
                 let mut enabled__ = None;
                 let mut momentum__ = None;
-                let mut exposure_guard__ = None;
-                let mut inventory_balancer__ = None;
+                let mut exposure_balancer__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -1211,17 +1200,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             momentum__ = map_.next_value()?;
                         }
-                        GeneratedField::ExposureGuard => {
-                            if exposure_guard__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("exposureGuard"));
+                        GeneratedField::ExposureBalancer => {
+                            if exposure_balancer__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposureBalancer"));
                             }
-                            exposure_guard__ = map_.next_value()?;
-                        }
-                        GeneratedField::InventoryBalancer => {
-                            if inventory_balancer__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("inventoryBalancer"));
-                            }
-                            inventory_balancer__ = map_.next_value()?;
+                            exposure_balancer__ = map_.next_value()?;
                         }
                         GeneratedField::BidAdjustment => {
                             if bid_adjustment__.is_some() {
@@ -1251,8 +1234,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     screening: screening__,
                     enabled: enabled__.unwrap_or_default(),
                     momentum: momentum__,
-                    exposure_guard: exposure_guard__,
-                    inventory_balancer: inventory_balancer__,
+                    exposure_balancer: exposure_balancer__,
                     bid_adjustment: bid_adjustment__.unwrap_or_default(),
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
                 })
@@ -1261,142 +1243,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingConfiguration", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MarketMakingExposureGuard {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingExposureGuard", len)?;
-        if true {
-            struct_ser.serialize_field("enabled", &self.enabled)?;
-        }
-        if true {
-            struct_ser.serialize_field("reduce_start_multiple", &self.reduce_start_multiple)?;
-        }
-        if true {
-            struct_ser.serialize_field("max_inventory_multiple", &self.max_inventory_multiple)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MarketMakingExposureGuard {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "enabled",
-            "reduce_start_multiple",
-            "reduceStartMultiple",
-            "max_inventory_multiple",
-            "maxInventoryMultiple",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Enabled,
-            ReduceStartMultiple,
-            MaxInventoryMultiple,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "enabled" => Ok(GeneratedField::Enabled),
-                            "reduceStartMultiple" | "reduce_start_multiple" => Ok(GeneratedField::ReduceStartMultiple),
-                            "maxInventoryMultiple" | "max_inventory_multiple" => Ok(GeneratedField::MaxInventoryMultiple),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MarketMakingExposureGuard;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MarketMakingExposureGuard")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingExposureGuard, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut enabled__ = None;
-                let mut reduce_start_multiple__ = None;
-                let mut max_inventory_multiple__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Enabled => {
-                            if enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("enabled"));
-                            }
-                            enabled__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::ReduceStartMultiple => {
-                            if reduce_start_multiple__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("reduceStartMultiple"));
-                            }
-                            reduce_start_multiple__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MaxInventoryMultiple => {
-                            if max_inventory_multiple__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxInventoryMultiple"));
-                            }
-                            max_inventory_multiple__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MarketMakingExposureGuard {
-                    enabled: enabled__.unwrap_or_default(),
-                    reduce_start_multiple: reduce_start_multiple__.unwrap_or_default(),
-                    max_inventory_multiple: max_inventory_multiple__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingExposureGuard", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MarketMakingInventoryBalancer {
+impl serde::Serialize for MarketMakingExposureBalancer {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1419,7 +1266,13 @@ impl serde::Serialize for MarketMakingInventoryBalancer {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingInventoryBalancer", len)?;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
@@ -1435,10 +1288,16 @@ impl serde::Serialize for MarketMakingInventoryBalancer {
         if true {
             struct_ser.serialize_field("min_same_side_scale", &self.min_same_side_scale)?;
         }
+        if true {
+            struct_ser.serialize_field("hard_limit_start", &self.hard_limit_start)?;
+        }
+        if true {
+            struct_ser.serialize_field("hard_limit_max", &self.hard_limit_max)?;
+        }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancer {
+impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1454,6 +1313,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancer {
             "sameSideReduction",
             "min_same_side_scale",
             "minSameSideScale",
+            "hard_limit_start",
+            "hardLimitStart",
+            "hard_limit_max",
+            "hardLimitMax",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1463,6 +1326,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancer {
             PriceSkewTicks,
             SameSideReduction,
             MinSameSideScale,
+            HardLimitStart,
+            HardLimitMax,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1490,6 +1355,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancer {
                             "priceSkewTicks" | "price_skew_ticks" => Ok(GeneratedField::PriceSkewTicks),
                             "sameSideReduction" | "same_side_reduction" => Ok(GeneratedField::SameSideReduction),
                             "minSameSideScale" | "min_same_side_scale" => Ok(GeneratedField::MinSameSideScale),
+                            "hardLimitStart" | "hard_limit_start" => Ok(GeneratedField::HardLimitStart),
+                            "hardLimitMax" | "hard_limit_max" => Ok(GeneratedField::HardLimitMax),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1499,13 +1366,13 @@ impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancer {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MarketMakingInventoryBalancer;
+            type Value = MarketMakingExposureBalancer;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MarketMakingInventoryBalancer")
+                formatter.write_str("struct kdo.v1.mm.MarketMakingExposureBalancer")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingInventoryBalancer, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingExposureBalancer, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -1514,6 +1381,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancer {
                 let mut price_skew_ticks__ = None;
                 let mut same_side_reduction__ = None;
                 let mut min_same_side_scale__ = None;
+                let mut hard_limit_start__ = None;
+                let mut hard_limit_max__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -1554,21 +1423,39 @@ impl<'de> serde::Deserialize<'de> for MarketMakingInventoryBalancer {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::HardLimitStart => {
+                            if hard_limit_start__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hardLimitStart"));
+                            }
+                            hard_limit_start__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::HardLimitMax => {
+                            if hard_limit_max__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hardLimitMax"));
+                            }
+                            hard_limit_max__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(MarketMakingInventoryBalancer {
+                Ok(MarketMakingExposureBalancer {
                     enabled: enabled__.unwrap_or_default(),
                     trigger_multiple: trigger_multiple__.unwrap_or_default(),
                     price_skew_ticks: price_skew_ticks__.unwrap_or_default(),
                     same_side_reduction: same_side_reduction__.unwrap_or_default(),
                     min_same_side_scale: min_same_side_scale__.unwrap_or_default(),
+                    hard_limit_start: hard_limit_start__.unwrap_or_default(),
+                    hard_limit_max: hard_limit_max__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingInventoryBalancer", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingMomentum {
