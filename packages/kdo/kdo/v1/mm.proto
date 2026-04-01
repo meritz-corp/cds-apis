@@ -153,6 +153,12 @@ message MarketMaking {
 
   // ETF tick size (Price internal representation)
   int64 tick_size = 5;
+
+  // 매수 호가 수량
+  int64 bid_quantity = 6;
+
+  // 매도 호가 수량
+  int64 ask_quantity = 7;
 }
 
 // MM 상태 상세

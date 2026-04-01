@@ -808,6 +808,12 @@ impl serde::Serialize for MarketMaking {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMaking", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -828,6 +834,16 @@ impl serde::Serialize for MarketMaking {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -845,6 +861,10 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
             "fundCode",
             "tick_size",
             "tickSize",
+            "bid_quantity",
+            "bidQuantity",
+            "ask_quantity",
+            "askQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -854,6 +874,8 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
             Config,
             FundCode,
             TickSize,
+            BidQuantity,
+            AskQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -881,6 +903,8 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                             "config" => Ok(GeneratedField::Config),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -905,6 +929,8 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                 let mut config__ = None;
                 let mut fund_code__ = None;
                 let mut tick_size__ = None;
+                let mut bid_quantity__ = None;
+                let mut ask_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -939,6 +965,22 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -950,6 +992,8 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                     config: config__,
                     fund_code: fund_code__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
                 })
             }
         }

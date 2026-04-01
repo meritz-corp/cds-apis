@@ -29,6 +29,8 @@ class MarketMaking extends $pb.GeneratedMessage {
     MarketMakingConfiguration? config,
     $core.String? fundCode,
     $fixnum.Int64? tickSize,
+    $fixnum.Int64? bidQuantity,
+    $fixnum.Int64? askQuantity,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -36,6 +38,8 @@ class MarketMaking extends $pb.GeneratedMessage {
     if (config != null) result.config = config;
     if (fundCode != null) result.fundCode = fundCode;
     if (tickSize != null) result.tickSize = tickSize;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
+    if (askQuantity != null) result.askQuantity = askQuantity;
     return result;
   }
 
@@ -50,6 +54,8 @@ class MarketMaking extends $pb.GeneratedMessage {
     ..aOM<MarketMakingConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aOS(4, _omitFieldNames ? '' : 'fundCode')
     ..aInt64(5, _omitFieldNames ? '' : 'tickSize')
+    ..aInt64(6, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(7, _omitFieldNames ? '' : 'askQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -121,6 +127,26 @@ class MarketMaking extends $pb.GeneratedMessage {
   $core.bool hasTickSize() => $_has(4);
   @$pb.TagNumber(5)
   void clearTickSize() => $_clearField(5);
+
+  /// 매수 호가 수량
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get bidQuantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBidQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBidQuantity() => $_clearField(6);
+
+  /// 매도 호가 수량
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get askQuantity => $_getI64(6);
+  @$pb.TagNumber(7)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasAskQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearAskQuantity() => $_clearField(7);
 }
 
 /// MM 상태 상세

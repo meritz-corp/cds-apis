@@ -629,6 +629,16 @@
           "type": "string",
           "format": "int64",
           "title": "ETF tick size (Price internal representation)"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 호가 수량"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 호가 수량"
         }
       },
       "title": "MM 심볼 정보"

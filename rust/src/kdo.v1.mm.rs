@@ -23,6 +23,12 @@ pub struct MarketMaking {
     /// ETF tick size (Price internal representation)
     #[prost(int64, tag="5")]
     pub tick_size: i64,
+    /// 매수 호가 수량
+    #[prost(int64, tag="6")]
+    pub bid_quantity: i64,
+    /// 매도 호가 수량
+    #[prost(int64, tag="7")]
+    pub ask_quantity: i64,
 }
 /// MM 상태 상세
 #[allow(clippy::derive_partial_eq_without_eq)]

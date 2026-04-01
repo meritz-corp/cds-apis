@@ -43,6 +43,8 @@ const MarketMaking$json = {
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'bid_quantity', '3': 6, '4': 1, '5': 3, '10': 'bidQuantity'},
+    {'1': 'ask_quantity', '3': 7, '4': 1, '5': 3, '10': 'askQuantity'},
   ],
 };
 
@@ -51,7 +53,9 @@ final $typed_data.Uint8List marketMakingDescriptor = $convert.base64Decode(
     'CgxNYXJrZXRNYWtpbmcSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSMgoFc3RhdGUYAiABKA4yHC'
     '5rZG8udjEubW0uTWFya2V0TWFraW5nU3RhdGVSBXN0YXRlEjwKBmNvbmZpZxgDIAEoCzIkLmtk'
     'by52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSGwoJZnVuZF9jb2RlGA'
-    'QgASgJUghmdW5kQ29kZRIbCgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXpl');
+    'QgASgJUghmdW5kQ29kZRIbCgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXplEiEKDGJpZF9xdWFu'
+    'dGl0eRgGIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GAcgASgDUgthc2tRdWFudG'
+    'l0eQ==');
 
 @$core.Deprecated('Use marketMakingStatusDescriptor instead')
 const MarketMakingStatus$json = {
