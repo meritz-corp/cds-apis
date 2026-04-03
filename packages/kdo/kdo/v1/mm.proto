@@ -194,8 +194,9 @@ message MarketMakingConfiguration {
   // Pricing 전략: "plain_follow", "mean_bidask", "nav", "krx_nav"
   string pricing = 1;
 
-  // Skew 설정
-  MarketMakingSkew skew = 2;
+  // reserved: 2 (removed skew — SkewLogic 제거됨)
+  reserved 2;
+  reserved "skew";
 
   // Trade Analyzer 설정
   MarketMakingTradeAnalyzer trade_analyzer = 3;
@@ -229,16 +230,12 @@ message MarketMakingConfiguration {
   int64 ask_quantity = 13;
 }
 
-// Skew 설정
+// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
+// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
 message MarketMakingSkew {
-  // Skew 모드: "fixed" or "slide_on_trade"
-  string mode = 1;
-
-  // SlideOnTrade 트리거 수량
-  int64 trigger_amt = 2;
-
-  // 트리거당 skew 틱 수
-  int32 skew_unit = 3;
+  // reserved: 모든 필드 deprecated
+  reserved 1, 2, 3;
+  reserved "mode", "trigger_amt", "skew_unit";
 }
 
 // Trade Analyzer 설정
@@ -306,20 +303,16 @@ message MarketMakingExposureBalancer {
   // soft zone: 이 배수부터 soft rebalance 발동
   int32 trigger_multiple = 2;
 
-  // soft zone: 단계당 가격 중심 이동 틱 수
+  // 단계당 가격 중심 이동 틱 수
   int32 price_skew_ticks = 3;
 
-  // soft zone: 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
-  double same_side_reduction = 4;
+  // reserved: 4, 5, 6, 7 (removed same_side_reduction, min_same_side_scale,
+  //   hard_limit_start, hard_limit_max — simplified ExposureBalancer)
+  reserved 4, 5, 6, 7;
+  reserved "same_side_reduction", "min_same_side_scale", "hard_limit_start", "hard_limit_max";
 
-  // soft zone: 같은 방향 수량의 최소 비율
-  double min_same_side_scale = 5;
-
-  // hard zone: 이 배수부터 선형 축소 시작
-  int32 hard_limit_start = 6;
-
-  // hard zone: 이 배수에서 같은 방향 수량 0
-  int32 hard_limit_max = 7;
+  // hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
+  int32 limit_multiple = 8;
 }
 
 // ============================================================================
@@ -482,10 +475,12 @@ message MomentumState {
   int32 sample_count = 8;
 }
 
-// Skew 런타임 상태
+// reserved: SkewState (removed — SkewLogic 제거됨)
+// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
 message SkewState {
-  // 현재 누적 순매매 수량
-  int64 net_traded = 1;
+  // reserved: 모든 필드 deprecated
+  reserved 1;
+  reserved "net_traded";
 }
 
 // Trade Analyzer 런타임 상태
@@ -523,8 +518,9 @@ message MmEngineRuntimeState {
   // Momentum 상태
   MomentumState momentum = 3;
 
-  // Skew 상태
-  SkewState skew = 4;
+  // reserved: 4 (removed skew — SkewLogic 제거됨)
+  reserved 4;
+  reserved "skew";
 
   // Trade Analyzer 상태
   TradeAnalyzerState trade_analyzer = 5;

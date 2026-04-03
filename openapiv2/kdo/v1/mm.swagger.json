@@ -650,10 +650,6 @@
           "type": "string",
           "title": "Pricing 전략: \"plain_follow\", \"mean_bidask\", \"nav\", \"krx_nav\""
         },
-        "skew": {
-          "$ref": "#/definitions/mmMarketMakingSkew",
-          "title": "Skew 설정"
-        },
         "tradeAnalyzer": {
           "$ref": "#/definitions/mmMarketMakingTradeAnalyzer",
           "title": "Trade Analyzer 설정"
@@ -712,27 +708,12 @@
         "priceSkewTicks": {
           "type": "integer",
           "format": "int32",
-          "title": "soft zone: 단계당 가격 중심 이동 틱 수"
+          "title": "단계당 가격 중심 이동 틱 수"
         },
-        "sameSideReduction": {
-          "type": "number",
-          "format": "double",
-          "title": "soft zone: 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)"
-        },
-        "minSameSideScale": {
-          "type": "number",
-          "format": "double",
-          "title": "soft zone: 같은 방향 수량의 최소 비율"
-        },
-        "hardLimitStart": {
+        "limitMultiple": {
           "type": "integer",
           "format": "int32",
-          "title": "hard zone: 이 배수부터 선형 축소 시작"
-        },
-        "hardLimitMax": {
-          "type": "integer",
-          "format": "int32",
-          "title": "hard zone: 이 배수에서 같은 방향 수량 0"
+          "title": "hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)"
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"
@@ -838,26 +819,6 @@
       },
       "title": "Pre-trade Screening 설정"
     },
-    "mmMarketMakingSkew": {
-      "type": "object",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "title": "Skew 모드: \"fixed\" or \"slide_on_trade\""
-        },
-        "triggerAmt": {
-          "type": "string",
-          "format": "int64",
-          "title": "SlideOnTrade 트리거 수량"
-        },
-        "skewUnit": {
-          "type": "integer",
-          "format": "int32",
-          "title": "트리거당 skew 틱 수"
-        }
-      },
-      "title": "Skew 설정"
-    },
     "mmMarketMakingState": {
       "type": "string",
       "enum": [
@@ -941,10 +902,6 @@
           "$ref": "#/definitions/mmMomentumState",
           "title": "Momentum 상태"
         },
-        "skew": {
-          "$ref": "#/definitions/mmSkewState",
-          "title": "Skew 상태"
-        },
         "tradeAnalyzer": {
           "$ref": "#/definitions/mmTradeAnalyzerState",
           "title": "Trade Analyzer 상태"
@@ -1014,17 +971,6 @@
           "title": "메시지"
         }
       }
-    },
-    "mmSkewState": {
-      "type": "object",
-      "properties": {
-        "netTraded": {
-          "type": "string",
-          "format": "int64",
-          "title": "현재 누적 순매매 수량"
-        }
-      },
-      "title": "Skew 런타임 상태"
     },
     "mmStartMarketMakingResponse": {
       "type": "object",

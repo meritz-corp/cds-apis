@@ -57,9 +57,6 @@ pub struct MarketMakingConfiguration {
     /// Pricing 전략: "plain_follow", "mean_bidask", "nav", "krx_nav"
     #[prost(string, tag="1")]
     pub pricing: ::prost::alloc::string::String,
-    /// Skew 설정
-    #[prost(message, optional, tag="2")]
-    pub skew: ::core::option::Option<MarketMakingSkew>,
     /// Trade Analyzer 설정
     #[prost(message, optional, tag="3")]
     pub trade_analyzer: ::core::option::Option<MarketMakingTradeAnalyzer>,
@@ -88,19 +85,11 @@ pub struct MarketMakingConfiguration {
     #[prost(int64, tag="13")]
     pub ask_quantity: i64,
 }
-/// Skew 설정
+/// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
+/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MarketMakingSkew {
-    /// Skew 모드: "fixed" or "slide_on_trade"
-    #[prost(string, tag="1")]
-    pub mode: ::prost::alloc::string::String,
-    /// SlideOnTrade 트리거 수량
-    #[prost(int64, tag="2")]
-    pub trigger_amt: i64,
-    /// 트리거당 skew 틱 수
-    #[prost(int32, tag="3")]
-    pub skew_unit: i32,
 }
 /// Trade Analyzer 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -175,21 +164,12 @@ pub struct MarketMakingExposureBalancer {
     /// soft zone: 이 배수부터 soft rebalance 발동
     #[prost(int32, tag="2")]
     pub trigger_multiple: i32,
-    /// soft zone: 단계당 가격 중심 이동 틱 수
+    /// 단계당 가격 중심 이동 틱 수
     #[prost(int32, tag="3")]
     pub price_skew_ticks: i32,
-    /// soft zone: 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
-    #[prost(double, tag="4")]
-    pub same_side_reduction: f64,
-    /// soft zone: 같은 방향 수량의 최소 비율
-    #[prost(double, tag="5")]
-    pub min_same_side_scale: f64,
-    /// hard zone: 이 배수부터 선형 축소 시작
-    #[prost(int32, tag="6")]
-    pub hard_limit_start: i32,
-    /// hard zone: 이 배수에서 같은 방향 수량 0
-    #[prost(int32, tag="7")]
-    pub hard_limit_max: i32,
+    /// hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
+    #[prost(int32, tag="8")]
+    pub limit_multiple: i32,
 }
 // ============================================================================
 // Request/Response Messages
@@ -385,13 +365,11 @@ pub struct MomentumState {
     #[prost(int32, tag="8")]
     pub sample_count: i32,
 }
-/// Skew 런타임 상태
+/// reserved: SkewState (removed — SkewLogic 제거됨)
+/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SkewState {
-    /// 현재 누적 순매매 수량
-    #[prost(int64, tag="1")]
-    pub net_traded: i64,
 }
 /// Trade Analyzer 런타임 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -434,9 +412,6 @@ pub struct MmEngineRuntimeState {
     /// Momentum 상태
     #[prost(message, optional, tag="3")]
     pub momentum: ::core::option::Option<MomentumState>,
-    /// Skew 상태
-    #[prost(message, optional, tag="4")]
-    pub skew: ::core::option::Option<SkewState>,
     /// Trade Analyzer 상태
     #[prost(message, optional, tag="5")]
     pub trade_analyzer: ::core::option::Option<TradeAnalyzerState>,

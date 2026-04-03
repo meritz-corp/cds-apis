@@ -255,7 +255,6 @@ class MarketMakingStatus extends $pb.GeneratedMessage {
 class MarketMakingConfiguration extends $pb.GeneratedMessage {
   factory MarketMakingConfiguration({
     $core.String? pricing,
-    MarketMakingSkew? skew,
     MarketMakingTradeAnalyzer? tradeAnalyzer,
     MarketMakingScreening? screening,
     $core.bool? enabled,
@@ -268,7 +267,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
-    if (skew != null) result.skew = skew;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
     if (screening != null) result.screening = screening;
     if (enabled != null) result.enabled = enabled;
@@ -288,7 +286,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingConfiguration', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'pricing')
-    ..aOM<MarketMakingSkew>(2, _omitFieldNames ? '' : 'skew', subBuilder: MarketMakingSkew.create)
     ..aOM<MarketMakingTradeAnalyzer>(3, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: MarketMakingTradeAnalyzer.create)
     ..aOM<MarketMakingScreening>(4, _omitFieldNames ? '' : 'screening', subBuilder: MarketMakingScreening.create)
     ..aOB(6, _omitFieldNames ? '' : 'enabled')
@@ -328,130 +325,109 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPricing() => $_clearField(1);
 
-  /// Skew 설정
-  @$pb.TagNumber(2)
-  MarketMakingSkew get skew => $_getN(1);
-  @$pb.TagNumber(2)
-  set skew(MarketMakingSkew value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasSkew() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSkew() => $_clearField(2);
-  @$pb.TagNumber(2)
-  MarketMakingSkew ensureSkew() => $_ensure(1);
-
   /// Trade Analyzer 설정
   @$pb.TagNumber(3)
-  MarketMakingTradeAnalyzer get tradeAnalyzer => $_getN(2);
+  MarketMakingTradeAnalyzer get tradeAnalyzer => $_getN(1);
   @$pb.TagNumber(3)
   set tradeAnalyzer(MarketMakingTradeAnalyzer value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasTradeAnalyzer() => $_has(2);
+  $core.bool hasTradeAnalyzer() => $_has(1);
   @$pb.TagNumber(3)
   void clearTradeAnalyzer() => $_clearField(3);
   @$pb.TagNumber(3)
-  MarketMakingTradeAnalyzer ensureTradeAnalyzer() => $_ensure(2);
+  MarketMakingTradeAnalyzer ensureTradeAnalyzer() => $_ensure(1);
 
   /// Screening 설정
   @$pb.TagNumber(4)
-  MarketMakingScreening get screening => $_getN(3);
+  MarketMakingScreening get screening => $_getN(2);
   @$pb.TagNumber(4)
   set screening(MarketMakingScreening value) => $_setField(4, value);
   @$pb.TagNumber(4)
-  $core.bool hasScreening() => $_has(3);
+  $core.bool hasScreening() => $_has(2);
   @$pb.TagNumber(4)
   void clearScreening() => $_clearField(4);
   @$pb.TagNumber(4)
-  MarketMakingScreening ensureScreening() => $_ensure(3);
+  MarketMakingScreening ensureScreening() => $_ensure(2);
 
   /// MM 활성화 여부
   @$pb.TagNumber(6)
-  $core.bool get enabled => $_getBF(4);
+  $core.bool get enabled => $_getBF(3);
   @$pb.TagNumber(6)
-  set enabled($core.bool value) => $_setBool(4, value);
+  set enabled($core.bool value) => $_setBool(3, value);
   @$pb.TagNumber(6)
-  $core.bool hasEnabled() => $_has(4);
+  $core.bool hasEnabled() => $_has(3);
   @$pb.TagNumber(6)
   void clearEnabled() => $_clearField(6);
 
   /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
   @$pb.TagNumber(7)
-  MarketMakingMomentum get momentum => $_getN(5);
+  MarketMakingMomentum get momentum => $_getN(4);
   @$pb.TagNumber(7)
   set momentum(MarketMakingMomentum value) => $_setField(7, value);
   @$pb.TagNumber(7)
-  $core.bool hasMomentum() => $_has(5);
+  $core.bool hasMomentum() => $_has(4);
   @$pb.TagNumber(7)
   void clearMomentum() => $_clearField(7);
   @$pb.TagNumber(7)
-  MarketMakingMomentum ensureMomentum() => $_ensure(5);
+  MarketMakingMomentum ensureMomentum() => $_ensure(4);
 
   /// 통합 포지션 관리 설정
   @$pb.TagNumber(8)
-  MarketMakingExposureBalancer get exposureBalancer => $_getN(6);
+  MarketMakingExposureBalancer get exposureBalancer => $_getN(5);
   @$pb.TagNumber(8)
   set exposureBalancer(MarketMakingExposureBalancer value) => $_setField(8, value);
   @$pb.TagNumber(8)
-  $core.bool hasExposureBalancer() => $_has(6);
+  $core.bool hasExposureBalancer() => $_has(5);
   @$pb.TagNumber(8)
   void clearExposureBalancer() => $_clearField(8);
   @$pb.TagNumber(8)
-  MarketMakingExposureBalancer ensureExposureBalancer() => $_ensure(6);
+  MarketMakingExposureBalancer ensureExposureBalancer() => $_ensure(5);
 
   /// 기준가격 대비 bid 조정값 (Price internal representation)
   @$pb.TagNumber(10)
-  $fixnum.Int64 get bidAdjustment => $_getI64(7);
+  $fixnum.Int64 get bidAdjustment => $_getI64(6);
   @$pb.TagNumber(10)
-  set bidAdjustment($fixnum.Int64 value) => $_setInt64(7, value);
+  set bidAdjustment($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(10)
-  $core.bool hasBidAdjustment() => $_has(7);
+  $core.bool hasBidAdjustment() => $_has(6);
   @$pb.TagNumber(10)
   void clearBidAdjustment() => $_clearField(10);
 
   /// 기준가격 대비 ask 조정값 (Price internal representation)
   @$pb.TagNumber(11)
-  $fixnum.Int64 get askAdjustment => $_getI64(8);
+  $fixnum.Int64 get askAdjustment => $_getI64(7);
   @$pb.TagNumber(11)
-  set askAdjustment($fixnum.Int64 value) => $_setInt64(8, value);
+  set askAdjustment($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(11)
-  $core.bool hasAskAdjustment() => $_has(8);
+  $core.bool hasAskAdjustment() => $_has(7);
   @$pb.TagNumber(11)
   void clearAskAdjustment() => $_clearField(11);
 
   /// 레벨당 매수 수량
   @$pb.TagNumber(12)
-  $fixnum.Int64 get bidQuantity => $_getI64(9);
+  $fixnum.Int64 get bidQuantity => $_getI64(8);
   @$pb.TagNumber(12)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(12)
-  $core.bool hasBidQuantity() => $_has(9);
+  $core.bool hasBidQuantity() => $_has(8);
   @$pb.TagNumber(12)
   void clearBidQuantity() => $_clearField(12);
 
   /// 레벨당 매도 수량
   @$pb.TagNumber(13)
-  $fixnum.Int64 get askQuantity => $_getI64(10);
+  $fixnum.Int64 get askQuantity => $_getI64(9);
   @$pb.TagNumber(13)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(10, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(9, value);
   @$pb.TagNumber(13)
-  $core.bool hasAskQuantity() => $_has(10);
+  $core.bool hasAskQuantity() => $_has(9);
   @$pb.TagNumber(13)
   void clearAskQuantity() => $_clearField(13);
 }
 
-/// Skew 설정
+/// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
+/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
 class MarketMakingSkew extends $pb.GeneratedMessage {
-  factory MarketMakingSkew({
-    $core.String? mode,
-    $fixnum.Int64? triggerAmt,
-    $core.int? skewUnit,
-  }) {
-    final result = create();
-    if (mode != null) result.mode = mode;
-    if (triggerAmt != null) result.triggerAmt = triggerAmt;
-    if (skewUnit != null) result.skewUnit = skewUnit;
-    return result;
-  }
+  factory MarketMakingSkew() => create();
 
   MarketMakingSkew._();
 
@@ -459,9 +435,6 @@ class MarketMakingSkew extends $pb.GeneratedMessage {
   factory MarketMakingSkew.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingSkew', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'mode')
-    ..aInt64(2, _omitFieldNames ? '' : 'triggerAmt')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'skewUnit', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -481,36 +454,6 @@ class MarketMakingSkew extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static MarketMakingSkew getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingSkew>(create);
   static MarketMakingSkew? _defaultInstance;
-
-  /// Skew 모드: "fixed" or "slide_on_trade"
-  @$pb.TagNumber(1)
-  $core.String get mode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set mode($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMode() => $_clearField(1);
-
-  /// SlideOnTrade 트리거 수량
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get triggerAmt => $_getI64(1);
-  @$pb.TagNumber(2)
-  set triggerAmt($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTriggerAmt() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTriggerAmt() => $_clearField(2);
-
-  /// 트리거당 skew 틱 수
-  @$pb.TagNumber(3)
-  $core.int get skewUnit => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set skewUnit($core.int value) => $_setSignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasSkewUnit() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSkewUnit() => $_clearField(3);
 }
 
 /// Trade Analyzer 설정
@@ -832,19 +775,13 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     $core.bool? enabled,
     $core.int? triggerMultiple,
     $core.int? priceSkewTicks,
-    $core.double? sameSideReduction,
-    $core.double? minSameSideScale,
-    $core.int? hardLimitStart,
-    $core.int? hardLimitMax,
+    $core.int? limitMultiple,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (triggerMultiple != null) result.triggerMultiple = triggerMultiple;
     if (priceSkewTicks != null) result.priceSkewTicks = priceSkewTicks;
-    if (sameSideReduction != null) result.sameSideReduction = sameSideReduction;
-    if (minSameSideScale != null) result.minSameSideScale = minSameSideScale;
-    if (hardLimitStart != null) result.hardLimitStart = hardLimitStart;
-    if (hardLimitMax != null) result.hardLimitMax = hardLimitMax;
+    if (limitMultiple != null) result.limitMultiple = limitMultiple;
     return result;
   }
 
@@ -857,10 +794,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'triggerMultiple', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'priceSkewTicks', $pb.PbFieldType.O3)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'sameSideReduction', $pb.PbFieldType.OD)
-    ..a<$core.double>(5, _omitFieldNames ? '' : 'minSameSideScale', $pb.PbFieldType.OD)
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'hardLimitStart', $pb.PbFieldType.O3)
-    ..a<$core.int>(7, _omitFieldNames ? '' : 'hardLimitMax', $pb.PbFieldType.O3)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'limitMultiple', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -901,7 +835,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTriggerMultiple() => $_clearField(2);
 
-  /// soft zone: 단계당 가격 중심 이동 틱 수
+  /// 단계당 가격 중심 이동 틱 수
   @$pb.TagNumber(3)
   $core.int get priceSkewTicks => $_getIZ(2);
   @$pb.TagNumber(3)
@@ -911,45 +845,15 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPriceSkewTicks() => $_clearField(3);
 
-  /// soft zone: 단계당 같은 방향 수량 축소 비율 (0.0 ~ 1.0)
-  @$pb.TagNumber(4)
-  $core.double get sameSideReduction => $_getN(3);
-  @$pb.TagNumber(4)
-  set sameSideReduction($core.double value) => $_setDouble(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasSameSideReduction() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearSameSideReduction() => $_clearField(4);
-
-  /// soft zone: 같은 방향 수량의 최소 비율
-  @$pb.TagNumber(5)
-  $core.double get minSameSideScale => $_getN(4);
-  @$pb.TagNumber(5)
-  set minSameSideScale($core.double value) => $_setDouble(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasMinSameSideScale() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearMinSameSideScale() => $_clearField(5);
-
-  /// hard zone: 이 배수부터 선형 축소 시작
-  @$pb.TagNumber(6)
-  $core.int get hardLimitStart => $_getIZ(5);
-  @$pb.TagNumber(6)
-  set hardLimitStart($core.int value) => $_setSignedInt32(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasHardLimitStart() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearHardLimitStart() => $_clearField(6);
-
-  /// hard zone: 이 배수에서 같은 방향 수량 0
-  @$pb.TagNumber(7)
-  $core.int get hardLimitMax => $_getIZ(6);
-  @$pb.TagNumber(7)
-  set hardLimitMax($core.int value) => $_setSignedInt32(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasHardLimitMax() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearHardLimitMax() => $_clearField(7);
+  /// hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
+  @$pb.TagNumber(8)
+  $core.int get limitMultiple => $_getIZ(3);
+  @$pb.TagNumber(8)
+  set limitMultiple($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(8)
+  $core.bool hasLimitMultiple() => $_has(3);
+  @$pb.TagNumber(8)
+  void clearLimitMultiple() => $_clearField(8);
 }
 
 /// ListMarketMaking
@@ -1978,15 +1882,10 @@ class MomentumState extends $pb.GeneratedMessage {
   void clearSampleCount() => $_clearField(8);
 }
 
-/// Skew 런타임 상태
+/// reserved: SkewState (removed — SkewLogic 제거됨)
+/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
 class SkewState extends $pb.GeneratedMessage {
-  factory SkewState({
-    $fixnum.Int64? netTraded,
-  }) {
-    final result = create();
-    if (netTraded != null) result.netTraded = netTraded;
-    return result;
-  }
+  factory SkewState() => create();
 
   SkewState._();
 
@@ -1994,7 +1893,6 @@ class SkewState extends $pb.GeneratedMessage {
   factory SkewState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SkewState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'netTraded')
     ..hasRequiredFields = false
   ;
 
@@ -2014,16 +1912,6 @@ class SkewState extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SkewState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SkewState>(create);
   static SkewState? _defaultInstance;
-
-  /// 현재 누적 순매매 수량
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get netTraded => $_getI64(0);
-  @$pb.TagNumber(1)
-  set netTraded($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasNetTraded() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearNetTraded() => $_clearField(1);
 }
 
 /// Trade Analyzer 런타임 상태
@@ -2180,7 +2068,6 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     $core.String? symbol,
     $fixnum.Int64? timestamp,
     MomentumState? momentum,
-    SkewState? skew,
     TradeAnalyzerState? tradeAnalyzer,
     ExposureBalancerState? exposureBalancer,
   }) {
@@ -2188,7 +2075,6 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     if (symbol != null) result.symbol = symbol;
     if (timestamp != null) result.timestamp = timestamp;
     if (momentum != null) result.momentum = momentum;
-    if (skew != null) result.skew = skew;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
     return result;
@@ -2203,7 +2089,6 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aInt64(2, _omitFieldNames ? '' : 'timestamp')
     ..aOM<MomentumState>(3, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
-    ..aOM<SkewState>(4, _omitFieldNames ? '' : 'skew', subBuilder: SkewState.create)
     ..aOM<TradeAnalyzerState>(5, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: TradeAnalyzerState.create)
     ..aOM<ExposureBalancerState>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: ExposureBalancerState.create)
     ..hasRequiredFields = false
@@ -2258,41 +2143,29 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   MomentumState ensureMomentum() => $_ensure(2);
 
-  /// Skew 상태
-  @$pb.TagNumber(4)
-  SkewState get skew => $_getN(3);
-  @$pb.TagNumber(4)
-  set skew(SkewState value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasSkew() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearSkew() => $_clearField(4);
-  @$pb.TagNumber(4)
-  SkewState ensureSkew() => $_ensure(3);
-
   /// Trade Analyzer 상태
   @$pb.TagNumber(5)
-  TradeAnalyzerState get tradeAnalyzer => $_getN(4);
+  TradeAnalyzerState get tradeAnalyzer => $_getN(3);
   @$pb.TagNumber(5)
   set tradeAnalyzer(TradeAnalyzerState value) => $_setField(5, value);
   @$pb.TagNumber(5)
-  $core.bool hasTradeAnalyzer() => $_has(4);
+  $core.bool hasTradeAnalyzer() => $_has(3);
   @$pb.TagNumber(5)
   void clearTradeAnalyzer() => $_clearField(5);
   @$pb.TagNumber(5)
-  TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(4);
+  TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(3);
 
   /// 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
   @$pb.TagNumber(6)
-  ExposureBalancerState get exposureBalancer => $_getN(5);
+  ExposureBalancerState get exposureBalancer => $_getN(4);
   @$pb.TagNumber(6)
   set exposureBalancer(ExposureBalancerState value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasExposureBalancer() => $_has(5);
+  $core.bool hasExposureBalancer() => $_has(4);
   @$pb.TagNumber(6)
   void clearExposureBalancer() => $_clearField(6);
   @$pb.TagNumber(6)
-  ExposureBalancerState ensureExposureBalancer() => $_ensure(5);
+  ExposureBalancerState ensureExposureBalancer() => $_ensure(4);
 }
 
 /// StreamMmEngineState

@@ -1038,15 +1038,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("pricing", &self.pricing)?;
-        }
-        if let Some(v) = self.skew.as_ref() {
-            struct_ser.serialize_field("skew", v)?;
         }
         if let Some(v) = self.trade_analyzer.as_ref() {
             struct_ser.serialize_field("trade_analyzer", v)?;
@@ -1094,7 +1088,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
     {
         const FIELDS: &[&str] = &[
             "pricing",
-            "skew",
             "trade_analyzer",
             "tradeAnalyzer",
             "screening",
@@ -1115,7 +1108,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Pricing,
-            Skew,
             TradeAnalyzer,
             Screening,
             Enabled,
@@ -1148,7 +1140,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     {
                         match value {
                             "pricing" => Ok(GeneratedField::Pricing),
-                            "skew" => Ok(GeneratedField::Skew),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
                             "screening" => Ok(GeneratedField::Screening),
                             "enabled" => Ok(GeneratedField::Enabled),
@@ -1178,7 +1169,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut pricing__ = None;
-                let mut skew__ = None;
                 let mut trade_analyzer__ = None;
                 let mut screening__ = None;
                 let mut enabled__ = None;
@@ -1195,12 +1185,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 return Err(serde::de::Error::duplicate_field("pricing"));
                             }
                             pricing__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Skew => {
-                            if skew__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("skew"));
-                            }
-                            skew__ = map_.next_value()?;
                         }
                         GeneratedField::TradeAnalyzer => {
                             if trade_analyzer__.is_some() {
@@ -1271,7 +1255,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 }
                 Ok(MarketMakingConfiguration {
                     pricing: pricing__.unwrap_or_default(),
-                    skew: skew__,
                     trade_analyzer: trade_analyzer__,
                     screening: screening__,
                     enabled: enabled__.unwrap_or_default(),
@@ -1307,15 +1290,6 @@ impl serde::Serialize for MarketMakingExposureBalancer {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -1327,16 +1301,7 @@ impl serde::Serialize for MarketMakingExposureBalancer {
             struct_ser.serialize_field("price_skew_ticks", &self.price_skew_ticks)?;
         }
         if true {
-            struct_ser.serialize_field("same_side_reduction", &self.same_side_reduction)?;
-        }
-        if true {
-            struct_ser.serialize_field("min_same_side_scale", &self.min_same_side_scale)?;
-        }
-        if true {
-            struct_ser.serialize_field("hard_limit_start", &self.hard_limit_start)?;
-        }
-        if true {
-            struct_ser.serialize_field("hard_limit_max", &self.hard_limit_max)?;
+            struct_ser.serialize_field("limit_multiple", &self.limit_multiple)?;
         }
         struct_ser.end()
     }
@@ -1353,14 +1318,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             "triggerMultiple",
             "price_skew_ticks",
             "priceSkewTicks",
-            "same_side_reduction",
-            "sameSideReduction",
-            "min_same_side_scale",
-            "minSameSideScale",
-            "hard_limit_start",
-            "hardLimitStart",
-            "hard_limit_max",
-            "hardLimitMax",
+            "limit_multiple",
+            "limitMultiple",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1368,10 +1327,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             Enabled,
             TriggerMultiple,
             PriceSkewTicks,
-            SameSideReduction,
-            MinSameSideScale,
-            HardLimitStart,
-            HardLimitMax,
+            LimitMultiple,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1397,10 +1353,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                             "enabled" => Ok(GeneratedField::Enabled),
                             "triggerMultiple" | "trigger_multiple" => Ok(GeneratedField::TriggerMultiple),
                             "priceSkewTicks" | "price_skew_ticks" => Ok(GeneratedField::PriceSkewTicks),
-                            "sameSideReduction" | "same_side_reduction" => Ok(GeneratedField::SameSideReduction),
-                            "minSameSideScale" | "min_same_side_scale" => Ok(GeneratedField::MinSameSideScale),
-                            "hardLimitStart" | "hard_limit_start" => Ok(GeneratedField::HardLimitStart),
-                            "hardLimitMax" | "hard_limit_max" => Ok(GeneratedField::HardLimitMax),
+                            "limitMultiple" | "limit_multiple" => Ok(GeneratedField::LimitMultiple),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1423,10 +1376,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                 let mut enabled__ = None;
                 let mut trigger_multiple__ = None;
                 let mut price_skew_ticks__ = None;
-                let mut same_side_reduction__ = None;
-                let mut min_same_side_scale__ = None;
-                let mut hard_limit_start__ = None;
-                let mut hard_limit_max__ = None;
+                let mut limit_multiple__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -1451,35 +1401,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::SameSideReduction => {
-                            if same_side_reduction__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sameSideReduction"));
+                        GeneratedField::LimitMultiple => {
+                            if limit_multiple__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitMultiple"));
                             }
-                            same_side_reduction__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MinSameSideScale => {
-                            if min_same_side_scale__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("minSameSideScale"));
-                            }
-                            min_same_side_scale__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::HardLimitStart => {
-                            if hard_limit_start__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hardLimitStart"));
-                            }
-                            hard_limit_start__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::HardLimitMax => {
-                            if hard_limit_max__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hardLimitMax"));
-                            }
-                            hard_limit_max__ = 
+                            limit_multiple__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1492,10 +1418,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                     enabled: enabled__.unwrap_or_default(),
                     trigger_multiple: trigger_multiple__.unwrap_or_default(),
                     price_skew_ticks: price_skew_ticks__.unwrap_or_default(),
-                    same_side_reduction: same_side_reduction__.unwrap_or_default(),
-                    min_same_side_scale: min_same_side_scale__.unwrap_or_default(),
-                    hard_limit_start: hard_limit_start__.unwrap_or_default(),
-                    hard_limit_max: hard_limit_max__.unwrap_or_default(),
+                    limit_multiple: limit_multiple__.unwrap_or_default(),
                 })
             }
         }
@@ -2042,28 +1965,8 @@ impl serde::Serialize for MarketMakingSkew {
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingSkew", len)?;
-        if true {
-            struct_ser.serialize_field("mode", &self.mode)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("trigger_amt", ToString::to_string(&self.trigger_amt).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("skew_unit", &self.skew_unit)?;
-        }
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingSkew", len)?;
         struct_ser.end()
     }
 }
@@ -2074,18 +1977,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingSkew {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "mode",
-            "trigger_amt",
-            "triggerAmt",
-            "skew_unit",
-            "skewUnit",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Mode,
-            TriggerAmt,
-            SkewUnit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2107,12 +2002,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingSkew {
                     where
                         E: serde::de::Error,
                     {
-                        match value {
-                            "mode" => Ok(GeneratedField::Mode),
-                            "triggerAmt" | "trigger_amt" => Ok(GeneratedField::TriggerAmt),
-                            "skewUnit" | "skew_unit" => Ok(GeneratedField::SkewUnit),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
+                            Ok(GeneratedField::__SkipField__)
                     }
                 }
                 deserializer.deserialize_identifier(GeneratedVisitor)
@@ -2130,42 +2020,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingSkew {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut mode__ = None;
-                let mut trigger_amt__ = None;
-                let mut skew_unit__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Mode => {
-                            if mode__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mode"));
-                            }
-                            mode__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::TriggerAmt => {
-                            if trigger_amt__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("triggerAmt"));
-                            }
-                            trigger_amt__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SkewUnit => {
-                            if skew_unit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("skewUnit"));
-                            }
-                            skew_unit__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                 }
                 Ok(MarketMakingSkew {
-                    mode: mode__.unwrap_or_default(),
-                    trigger_amt: trigger_amt__.unwrap_or_default(),
-                    skew_unit: skew_unit__.unwrap_or_default(),
                 })
             }
         }
@@ -2609,9 +2467,6 @@ impl serde::Serialize for MmEngineRuntimeState {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmEngineRuntimeState", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2623,9 +2478,6 @@ impl serde::Serialize for MmEngineRuntimeState {
         }
         if let Some(v) = self.momentum.as_ref() {
             struct_ser.serialize_field("momentum", v)?;
-        }
-        if let Some(v) = self.skew.as_ref() {
-            struct_ser.serialize_field("skew", v)?;
         }
         if let Some(v) = self.trade_analyzer.as_ref() {
             struct_ser.serialize_field("trade_analyzer", v)?;
@@ -2646,7 +2498,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
             "symbol",
             "timestamp",
             "momentum",
-            "skew",
             "trade_analyzer",
             "tradeAnalyzer",
             "exposure_balancer",
@@ -2658,7 +2509,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
             Symbol,
             Timestamp,
             Momentum,
-            Skew,
             TradeAnalyzer,
             ExposureBalancer,
             __SkipField__,
@@ -2686,7 +2536,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "timestamp" => Ok(GeneratedField::Timestamp),
                             "momentum" => Ok(GeneratedField::Momentum),
-                            "skew" => Ok(GeneratedField::Skew),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
                             "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -2711,7 +2560,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                 let mut symbol__ = None;
                 let mut timestamp__ = None;
                 let mut momentum__ = None;
-                let mut skew__ = None;
                 let mut trade_analyzer__ = None;
                 let mut exposure_balancer__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -2736,12 +2584,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             }
                             momentum__ = map_.next_value()?;
                         }
-                        GeneratedField::Skew => {
-                            if skew__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("skew"));
-                            }
-                            skew__ = map_.next_value()?;
-                        }
                         GeneratedField::TradeAnalyzer => {
                             if trade_analyzer__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("tradeAnalyzer"));
@@ -2763,7 +2605,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                     symbol: symbol__.unwrap_or_default(),
                     timestamp: timestamp__.unwrap_or_default(),
                     momentum: momentum__,
-                    skew: skew__,
                     trade_analyzer: trade_analyzer__,
                     exposure_balancer: exposure_balancer__,
                 })
@@ -3228,16 +3069,8 @@ impl serde::Serialize for SkewState {
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.SkewState", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("net_traded", ToString::to_string(&self.net_traded).as_str())?;
-        }
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("kdo.v1.mm.SkewState", len)?;
         struct_ser.end()
     }
 }
@@ -3248,13 +3081,10 @@ impl<'de> serde::Deserialize<'de> for SkewState {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "net_traded",
-            "netTraded",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            NetTraded,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3276,10 +3106,7 @@ impl<'de> serde::Deserialize<'de> for SkewState {
                     where
                         E: serde::de::Error,
                     {
-                        match value {
-                            "netTraded" | "net_traded" => Ok(GeneratedField::NetTraded),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
+                            Ok(GeneratedField::__SkipField__)
                     }
                 }
                 deserializer.deserialize_identifier(GeneratedVisitor)
@@ -3297,24 +3124,10 @@ impl<'de> serde::Deserialize<'de> for SkewState {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut net_traded__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::NetTraded => {
-                            if net_traded__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("netTraded"));
-                            }
-                            net_traded__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                 }
                 Ok(SkewState {
-                    net_traded: net_traded__.unwrap_or_default(),
                 })
             }
         }

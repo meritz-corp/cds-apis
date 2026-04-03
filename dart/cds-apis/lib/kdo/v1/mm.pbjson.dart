@@ -98,7 +98,6 @@ const MarketMakingConfiguration$json = {
   '1': 'MarketMakingConfiguration',
   '2': [
     {'1': 'pricing', '3': 1, '4': 1, '5': 9, '10': 'pricing'},
-    {'1': 'skew', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingSkew', '10': 'skew'},
     {'1': 'trade_analyzer', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTradeAnalyzer', '10': 'tradeAnalyzer'},
     {'1': 'screening', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingScreening', '10': 'screening'},
     {'1': 'enabled', '3': 6, '4': 1, '5': 8, '10': 'enabled'},
@@ -110,39 +109,40 @@ const MarketMakingConfiguration$json = {
     {'1': 'ask_quantity', '3': 13, '4': 1, '5': 3, '10': 'askQuantity'},
   ],
   '9': [
+    {'1': 2, '2': 3},
     {'1': 9, '2': 10},
   ],
-  '10': ['inventory_balancer'],
+  '10': ['skew', 'inventory_balancer'],
 };
 
 /// Descriptor for `MarketMakingConfiguration`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base64Decode(
-    'ChlNYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uEhgKB3ByaWNpbmcYASABKAlSB3ByaWNpbmcSLw'
-    'oEc2tldxgCIAEoCzIbLmtkby52MS5tbS5NYXJrZXRNYWtpbmdTa2V3UgRza2V3EksKDnRyYWRl'
-    'X2FuYWx5emVyGAMgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ1RyYWRlQW5hbHl6ZXJSDX'
-    'RyYWRlQW5hbHl6ZXISPgoJc2NyZWVuaW5nGAQgASgLMiAua2RvLnYxLm1tLk1hcmtldE1ha2lu'
-    'Z1NjcmVlbmluZ1IJc2NyZWVuaW5nEhgKB2VuYWJsZWQYBiABKAhSB2VuYWJsZWQSOwoIbW9tZW'
-    '50dW0YByABKAsyHy5rZG8udjEubW0uTWFya2V0TWFraW5nTW9tZW50dW1SCG1vbWVudHVtElQK'
-    'EWV4cG9zdXJlX2JhbGFuY2VyGAggASgLMicua2RvLnYxLm1tLk1hcmtldE1ha2luZ0V4cG9zdX'
-    'JlQmFsYW5jZXJSEGV4cG9zdXJlQmFsYW5jZXISJQoOYmlkX2FkanVzdG1lbnQYCiABKANSDWJp'
-    'ZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG1lbnQYCyABKANSDWFza0FkanVzdG1lbnQSIQoMYm'
-    'lkX3F1YW50aXR5GAwgASgDUgtiaWRRdWFudGl0eRIhCgxhc2tfcXVhbnRpdHkYDSABKANSC2Fz'
-    'a1F1YW50aXR5SgQICRAKUhJpbnZlbnRvcnlfYmFsYW5jZXI=');
+    'ChlNYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uEhgKB3ByaWNpbmcYASABKAlSB3ByaWNpbmcSSw'
+    'oOdHJhZGVfYW5hbHl6ZXIYAyABKAsyJC5rZG8udjEubW0uTWFya2V0TWFraW5nVHJhZGVBbmFs'
+    'eXplclINdHJhZGVBbmFseXplchI+CglzY3JlZW5pbmcYBCABKAsyIC5rZG8udjEubW0uTWFya2'
+    'V0TWFraW5nU2NyZWVuaW5nUglzY3JlZW5pbmcSGAoHZW5hYmxlZBgGIAEoCFIHZW5hYmxlZBI7'
+    'Cghtb21lbnR1bRgHIAEoCzIfLmtkby52MS5tbS5NYXJrZXRNYWtpbmdNb21lbnR1bVIIbW9tZW'
+    '50dW0SVAoRZXhwb3N1cmVfYmFsYW5jZXIYCCABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5n'
+    'RXhwb3N1cmVCYWxhbmNlclIQZXhwb3N1cmVCYWxhbmNlchIlCg5iaWRfYWRqdXN0bWVudBgKIA'
+    'EoA1INYmlkQWRqdXN0bWVudBIlCg5hc2tfYWRqdXN0bWVudBgLIAEoA1INYXNrQWRqdXN0bWVu'
+    'dBIhCgxiaWRfcXVhbnRpdHkYDCABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFudGl0eRgNIA'
+    'EoA1ILYXNrUXVhbnRpdHlKBAgCEANKBAgJEApSBHNrZXdSEmludmVudG9yeV9iYWxhbmNlcg==');
 
 @$core.Deprecated('Use marketMakingSkewDescriptor instead')
 const MarketMakingSkew$json = {
   '1': 'MarketMakingSkew',
-  '2': [
-    {'1': 'mode', '3': 1, '4': 1, '5': 9, '10': 'mode'},
-    {'1': 'trigger_amt', '3': 2, '4': 1, '5': 3, '10': 'triggerAmt'},
-    {'1': 'skew_unit', '3': 3, '4': 1, '5': 5, '10': 'skewUnit'},
+  '9': [
+    {'1': 1, '2': 2},
+    {'1': 2, '2': 3},
+    {'1': 3, '2': 4},
   ],
+  '10': ['mode', 'trigger_amt', 'skew_unit'],
 };
 
 /// Descriptor for `MarketMakingSkew`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingSkewDescriptor = $convert.base64Decode(
-    'ChBNYXJrZXRNYWtpbmdTa2V3EhIKBG1vZGUYASABKAlSBG1vZGUSHwoLdHJpZ2dlcl9hbXQYAi'
-    'ABKANSCnRyaWdnZXJBbXQSGwoJc2tld191bml0GAMgASgFUghza2V3VW5pdA==');
+    'ChBNYXJrZXRNYWtpbmdTa2V3SgQIARACSgQIAhADSgQIAxAEUgRtb2RlUgt0cmlnZ2VyX2FtdF'
+    'IJc2tld191bml0');
 
 @$core.Deprecated('Use marketMakingTradeAnalyzerDescriptor instead')
 const MarketMakingTradeAnalyzer$json = {
@@ -210,21 +210,25 @@ const MarketMakingExposureBalancer$json = {
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'trigger_multiple', '3': 2, '4': 1, '5': 5, '10': 'triggerMultiple'},
     {'1': 'price_skew_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceSkewTicks'},
-    {'1': 'same_side_reduction', '3': 4, '4': 1, '5': 1, '10': 'sameSideReduction'},
-    {'1': 'min_same_side_scale', '3': 5, '4': 1, '5': 1, '10': 'minSameSideScale'},
-    {'1': 'hard_limit_start', '3': 6, '4': 1, '5': 5, '10': 'hardLimitStart'},
-    {'1': 'hard_limit_max', '3': 7, '4': 1, '5': 5, '10': 'hardLimitMax'},
+    {'1': 'limit_multiple', '3': 8, '4': 1, '5': 5, '10': 'limitMultiple'},
   ],
+  '9': [
+    {'1': 4, '2': 5},
+    {'1': 5, '2': 6},
+    {'1': 6, '2': 7},
+    {'1': 7, '2': 8},
+  ],
+  '10': ['same_side_reduction', 'min_same_side_scale', 'hard_limit_start', 'hard_limit_max'],
 };
 
 /// Descriptor for `MarketMakingExposureBalancer`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.base64Decode(
     'ChxNYXJrZXRNYWtpbmdFeHBvc3VyZUJhbGFuY2VyEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZW'
     'QSKQoQdHJpZ2dlcl9tdWx0aXBsZRgCIAEoBVIPdHJpZ2dlck11bHRpcGxlEigKEHByaWNlX3Nr'
-    'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEi4KE3NhbWVfc2lkZV9yZWR1Y3Rpb24YBC'
-    'ABKAFSEXNhbWVTaWRlUmVkdWN0aW9uEi0KE21pbl9zYW1lX3NpZGVfc2NhbGUYBSABKAFSEG1p'
-    'blNhbWVTaWRlU2NhbGUSKAoQaGFyZF9saW1pdF9zdGFydBgGIAEoBVIOaGFyZExpbWl0U3Rhcn'
-    'QSJAoOaGFyZF9saW1pdF9tYXgYByABKAVSDGhhcmRMaW1pdE1heA==');
+    'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEiUKDmxpbWl0X211bHRpcGxlGAggASgFUg'
+    '1saW1pdE11bHRpcGxlSgQIBBAFSgQIBRAGSgQIBhAHSgQIBxAIUhNzYW1lX3NpZGVfcmVkdWN0'
+    'aW9uUhNtaW5fc2FtZV9zaWRlX3NjYWxlUhBoYXJkX2xpbWl0X3N0YXJ0Ug5oYXJkX2xpbWl0X2'
+    '1heA==');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {
@@ -481,14 +485,15 @@ final $typed_data.Uint8List momentumStateDescriptor = $convert.base64Decode(
 @$core.Deprecated('Use skewStateDescriptor instead')
 const SkewState$json = {
   '1': 'SkewState',
-  '2': [
-    {'1': 'net_traded', '3': 1, '4': 1, '5': 3, '10': 'netTraded'},
+  '9': [
+    {'1': 1, '2': 2},
   ],
+  '10': ['net_traded'],
 };
 
 /// Descriptor for `SkewState`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List skewStateDescriptor = $convert.base64Decode(
-    'CglTa2V3U3RhdGUSHQoKbmV0X3RyYWRlZBgBIAEoA1IJbmV0VHJhZGVk');
+    'CglTa2V3U3RhdGVKBAgBEAJSCm5ldF90cmFkZWQ=');
 
 @$core.Deprecated('Use tradeAnalyzerStateDescriptor instead')
 const TradeAnalyzerState$json = {
@@ -528,25 +533,24 @@ const MmEngineRuntimeState$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'timestamp', '3': 2, '4': 1, '5': 3, '10': 'timestamp'},
     {'1': 'momentum', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MomentumState', '10': 'momentum'},
-    {'1': 'skew', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.SkewState', '10': 'skew'},
     {'1': 'trade_analyzer', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.TradeAnalyzerState', '10': 'tradeAnalyzer'},
     {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.ExposureBalancerState', '10': 'exposureBalancer'},
   ],
   '9': [
+    {'1': 4, '2': 5},
     {'1': 7, '2': 8},
   ],
-  '10': ['inventory_balancer'],
+  '10': ['skew', 'inventory_balancer'],
 };
 
 /// Descriptor for `MmEngineRuntimeState`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mmEngineRuntimeStateDescriptor = $convert.base64Decode(
     'ChRNbUVuZ2luZVJ1bnRpbWVTdGF0ZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIcCgl0aW1lc3'
     'RhbXAYAiABKANSCXRpbWVzdGFtcBI0Cghtb21lbnR1bRgDIAEoCzIYLmtkby52MS5tbS5Nb21l'
-    'bnR1bVN0YXRlUghtb21lbnR1bRIoCgRza2V3GAQgASgLMhQua2RvLnYxLm1tLlNrZXdTdGF0ZV'
-    'IEc2tldxJECg50cmFkZV9hbmFseXplchgFIAEoCzIdLmtkby52MS5tbS5UcmFkZUFuYWx5emVy'
-    'U3RhdGVSDXRyYWRlQW5hbHl6ZXISTQoRZXhwb3N1cmVfYmFsYW5jZXIYBiABKAsyIC5rZG8udj'
-    'EubW0uRXhwb3N1cmVCYWxhbmNlclN0YXRlUhBleHBvc3VyZUJhbGFuY2VySgQIBxAIUhJpbnZl'
-    'bnRvcnlfYmFsYW5jZXI=');
+    'bnR1bVN0YXRlUghtb21lbnR1bRJECg50cmFkZV9hbmFseXplchgFIAEoCzIdLmtkby52MS5tbS'
+    '5UcmFkZUFuYWx5emVyU3RhdGVSDXRyYWRlQW5hbHl6ZXISTQoRZXhwb3N1cmVfYmFsYW5jZXIY'
+    'BiABKAsyIC5rZG8udjEubW0uRXhwb3N1cmVCYWxhbmNlclN0YXRlUhBleHBvc3VyZUJhbGFuY2'
+    'VySgQIBBAFSgQIBxAIUgRza2V3UhJpbnZlbnRvcnlfYmFsYW5jZXI=');
 
 @$core.Deprecated('Use streamMmEngineStateRequestDescriptor instead')
 const StreamMmEngineStateRequest$json = {
