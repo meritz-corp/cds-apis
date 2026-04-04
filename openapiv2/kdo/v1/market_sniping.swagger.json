@@ -1,0 +1,784 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/market_sniping.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MarketSnipingService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/market-sniping": {
+      "get": {
+        "summary": "Market Sniping 목록 조회",
+        "operationId": "MarketSnipingService_ListMarketSniping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/market_snipingListMarketSnipingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      },
+      "post": {
+        "summary": "Market Sniping 설정 생성 (DB 저장)",
+        "operationId": "MarketSnipingService_CreateMarketSniping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/market_snipingMarketSnipingEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/market_snipingCreateMarketSnipingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      }
+    },
+    "/v1/market-sniping/{symbol}": {
+      "get": {
+        "summary": "Market Sniping 단일 심볼 조회",
+        "operationId": "MarketSnipingService_GetMarketSniping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/market_snipingMarketSnipingEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      },
+      "delete": {
+        "summary": "Market Sniping 삭제",
+        "operationId": "MarketSnipingService_DeleteMarketSniping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      },
+      "patch": {
+        "summary": "Market Sniping 설정 업데이트 (DB 저장)",
+        "operationId": "MarketSnipingService_UpdateMarketSniping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/market_snipingMarketSnipingEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "$ref": "#/definitions/market_snipingMarketSnipingConfig",
+                  "title": "업데이트할 Market Sniping 설정"
+                },
+                "navConfig": {
+                  "$ref": "#/definitions/market_snipingMarketSnipingNavConfig",
+                  "title": "업데이트할 NAV 설정"
+                }
+              },
+              "title": "UpdateMarketSniping",
+              "required": [
+                "config",
+                "navConfig"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      }
+    },
+    "/v1/market-sniping/{symbol}/status": {
+      "get": {
+        "summary": "Market Sniping 런타임 상태 조회",
+        "operationId": "MarketSnipingService_GetMarketSnipingStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/market_snipingMarketSnipingStatusMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      }
+    },
+    "/v1/market-sniping/{symbol}:start": {
+      "post": {
+        "summary": "Market Sniping 시작 (심볼 등록)",
+        "operationId": "MarketSnipingService_StartMarketSniping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/market_snipingStartMarketSnipingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "StartMarketSniping"
+            }
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      }
+    },
+    "/v1/market-sniping/{symbol}:stop": {
+      "post": {
+        "summary": "Market Sniping 중지 (심볼 해제)",
+        "operationId": "MarketSnipingService_StopMarketSniping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/market_snipingStopMarketSnipingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "StopMarketSniping"
+            }
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      }
+    },
+    "/v1/market-sniping/{symbol}:streamStatus": {
+      "get": {
+        "summary": "Market Sniping 실시간 상태 스트리밍 (서버→클라이언트)",
+        "operationId": "MarketSnipingService_StreamMarketSnipingStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/market_snipingMarketSnipingStatusMessage"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of market_snipingMarketSnipingStatusMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼 (빈 문자열이면 전체 스트리밍)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "market_snipingCreateMarketSnipingRequest": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "config": {
+          "$ref": "#/definitions/market_snipingMarketSnipingConfig",
+          "title": "Market Sniping 설정"
+        },
+        "navConfig": {
+          "$ref": "#/definitions/market_snipingMarketSnipingNavConfig",
+          "title": "NAV 설정"
+        }
+      },
+      "title": "CreateMarketSniping",
+      "required": [
+        "symbol",
+        "config",
+        "navConfig"
+      ]
+    },
+    "market_snipingExecutionPolicy": {
+      "type": "string",
+      "enum": [
+        "EXECUTION_POLICY_UNSPECIFIED",
+        "EXECUTION_POLICY_PASSIVE_LIMIT",
+        "EXECUTION_POLICY_IMMEDIATE_OR_CANCEL"
+      ],
+      "default": "EXECUTION_POLICY_UNSPECIFIED",
+      "description": "- EXECUTION_POLICY_PASSIVE_LIMIT: 수동 지정가\n - EXECUTION_POLICY_IMMEDIATE_OR_CANCEL: IOC",
+      "title": "진입/청산 주문 방식"
+    },
+    "market_snipingListMarketSnipingResponse": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/market_snipingMarketSnipingEntry"
+          },
+          "title": "등록된 Market Sniping 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "market_snipingMarketSnipingConditionalExitPolicy": {
+      "type": "object",
+      "properties": {
+        "exitOnSignalEnd": {
+          "type": "boolean",
+          "title": "신호 종료 시 청산"
+        },
+        "exitOnReverseSignal": {
+          "type": "boolean",
+          "title": "역방향 신호 시 청산"
+        },
+        "maxHoldingMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "최대 보유 시간 (ms, 0 = 제한 없음)"
+        },
+        "minProfitTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "최소 수익 틱 (0 = 제한 없음)"
+        },
+        "maxLossTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "최대 손실 틱 (0 = 제한 없음)"
+        }
+      },
+      "title": "조건부 청산 정책 (ConditionalExitPolicy)"
+    },
+    "market_snipingMarketSnipingConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "Tick size (Price internal representation)"
+        },
+        "pricing": {
+          "$ref": "#/definitions/market_snipingSnipingPricing",
+          "title": "Pricing 전략"
+        },
+        "bidAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "bid 가격 조정값 (Price internal representation)"
+        },
+        "askAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "ask 가격 조정값 (Price internal representation)"
+        },
+        "baseQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "기본 주문 수량"
+        },
+        "momentum": {
+          "$ref": "#/definitions/market_snipingMarketSnipingMomentumSignal",
+          "title": "Momentum Signal 설정"
+        },
+        "entryPolicy": {
+          "$ref": "#/definitions/market_snipingMarketSnipingEntryPolicy",
+          "title": "진입 정책"
+        },
+        "exitPolicy": {
+          "$ref": "#/definitions/market_snipingMarketSnipingExitPolicy",
+          "title": "청산 정책"
+        },
+        "exposureBalancer": {
+          "$ref": "#/definitions/market_snipingMarketSnipingExposureBalancer",
+          "title": "노출 균형 관리 설정"
+        },
+        "screening": {
+          "$ref": "#/definitions/market_snipingMarketSnipingScreening",
+          "title": "스크리닝 설정"
+        },
+        "executionPolicy": {
+          "$ref": "#/definitions/market_snipingExecutionPolicy",
+          "title": "주문 실행 방식"
+        },
+        "strategy": {
+          "$ref": "#/definitions/market_snipingStrategyKind",
+          "title": "전략 종류"
+        }
+      },
+      "title": "Market Sniping 메인 설정"
+    },
+    "market_snipingMarketSnipingEntry": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "config": {
+          "$ref": "#/definitions/market_snipingMarketSnipingConfig",
+          "title": "Market Sniping 설정"
+        },
+        "navConfig": {
+          "$ref": "#/definitions/market_snipingMarketSnipingNavConfig",
+          "title": "NAV 설정"
+        }
+      },
+      "title": "Market Sniping 항목 (config + nav_config)"
+    },
+    "market_snipingMarketSnipingEntryPolicy": {
+      "type": "object",
+      "properties": {
+        "minSignalStrength": {
+          "type": "number",
+          "format": "double",
+          "title": "최소 신호 강도"
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "재진입 쿨다운 (ms)"
+        },
+        "maxEntryQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "최대 진입 수량 (0 = 제한 없음)"
+        }
+      },
+      "title": "진입 정책"
+    },
+    "market_snipingMarketSnipingExitPolicy": {
+      "type": "object",
+      "properties": {
+        "alwaysExit": {
+          "type": "boolean",
+          "title": "항상 전량 청산"
+        },
+        "conditional": {
+          "$ref": "#/definitions/market_snipingMarketSnipingConditionalExitPolicy",
+          "title": "조건부 청산 정책"
+        }
+      },
+      "title": "청산 정책 (oneof: 항상 청산 | 조건부 청산)"
+    },
+    "market_snipingMarketSnipingExposureBalancer": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "minExitQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "부분 청산 최소 수량"
+        },
+        "partialExitRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "부분 청산 비율 (0.0 ~ 1.0)"
+        },
+        "forceFullExitOnSignalEnd": {
+          "type": "boolean",
+          "title": "신호 종료 시 전량 강제 청산"
+        }
+      },
+      "title": "노출 균형 관리 설정"
+    },
+    "market_snipingMarketSnipingMomentumSignal": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "windowMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "모멘텀 샘플 유지 시간 창 (ms)"
+        },
+        "triggerTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "연속 모멘텀 정규화 기준 틱 수"
+        },
+        "maxSignalTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "최대 신호 틱 수"
+        },
+        "sensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "신호 민감도"
+        },
+        "isOpposite": {
+          "type": "boolean",
+          "title": "인버스 방향 해석 여부"
+        }
+      },
+      "title": "Momentum Signal 설정"
+    },
+    "market_snipingMarketSnipingNavConfig": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "type": "string",
+          "title": "ETF Pricing 방식 (EtfPricing enum name: \"KrxPrevNav\", \"Intraday\", etc.)"
+        },
+        "askBasis": {
+          "type": "string",
+          "format": "int64",
+          "title": "ask 기준 조정값 (Price internal representation)"
+        },
+        "bidBasis": {
+          "type": "string",
+          "format": "int64",
+          "title": "bid 기준 조정값 (Price internal representation)"
+        }
+      },
+      "title": "NAV 설정 (ETF 기준가 계산용)"
+    },
+    "market_snipingMarketSnipingScreening": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "최소 가격 (0 = 비활성)"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "최대 가격 (0 = 비활성)"
+        }
+      },
+      "title": "사전 스크리닝 설정"
+    },
+    "market_snipingMarketSnipingStatus": {
+      "type": "string",
+      "enum": [
+        "MARKET_SNIPING_STATUS_UNSPECIFIED",
+        "MARKET_SNIPING_STATUS_IDLE",
+        "MARKET_SNIPING_STATUS_ENTERING",
+        "MARKET_SNIPING_STATUS_OPEN",
+        "MARKET_SNIPING_STATUS_EXITING",
+        "MARKET_SNIPING_STATUS_COOLDOWN"
+      ],
+      "default": "MARKET_SNIPING_STATUS_UNSPECIFIED",
+      "description": "- MARKET_SNIPING_STATUS_IDLE: 대기 (에피소드 없음)\n - MARKET_SNIPING_STATUS_ENTERING: 진입 주문 중\n - MARKET_SNIPING_STATUS_OPEN: 포지션 보유 중\n - MARKET_SNIPING_STATUS_EXITING: 청산 중\n - MARKET_SNIPING_STATUS_COOLDOWN: 쿨다운 대기 중",
+      "title": "Market Sniping 런타임 상태"
+    },
+    "market_snipingMarketSnipingStatusMessage": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "status": {
+          "$ref": "#/definitions/market_snipingMarketSnipingStatus",
+          "title": "현재 상태"
+        },
+        "lastSignalBidPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "마지막 신호 시점 bid 가격"
+        },
+        "lastSignalAskPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "마지막 신호 시점 ask 가격"
+        },
+        "openQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 오픈 수량"
+        },
+        "reason": {
+          "type": "string",
+          "title": "상태 변경 사유 (optional)"
+        }
+      },
+      "title": "Market Sniping 런타임 상태"
+    },
+    "market_snipingSnipingPricing": {
+      "type": "string",
+      "enum": [
+        "SNIPING_PRICING_UNSPECIFIED",
+        "SNIPING_PRICING_MULTI_QUOTE_NAV"
+      ],
+      "default": "SNIPING_PRICING_UNSPECIFIED",
+      "description": "- SNIPING_PRICING_MULTI_QUOTE_NAV: 멀티 호가 NAV 기반",
+      "title": "Pricing 전략"
+    },
+    "market_snipingStartMarketSnipingResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "시작 메시지"
+        }
+      }
+    },
+    "market_snipingStopMarketSnipingResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "중지 메시지"
+        }
+      }
+    },
+    "market_snipingStrategyKind": {
+      "type": "string",
+      "enum": [
+        "STRATEGY_KIND_UNSPECIFIED",
+        "STRATEGY_KIND_MOMENTUM_ACCUMULATOR",
+        "STRATEGY_KIND_ROTATION"
+      ],
+      "default": "STRATEGY_KIND_UNSPECIFIED",
+      "description": "- STRATEGY_KIND_MOMENTUM_ACCUMULATOR: 모멘텀 누적\n - STRATEGY_KIND_ROTATION: 로테이션",
+      "title": "전략 종류"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

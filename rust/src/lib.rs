@@ -80,6 +80,9 @@ pub mod kdo {
         pub mod mm {
             include!("kdo.v1.mm.rs");
         }
+        pub mod market_sniping {
+            include!("kdo.v1.market_sniping.rs");
+        }
         pub mod common {
             include!("kdo.v1.common.rs");
         }

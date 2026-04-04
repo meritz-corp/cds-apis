@@ -1,0 +1,406 @@
+syntax = "proto3";
+
+package kdo.v1.market_sniping;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/client.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// Market Sniping 서비스 (NAV 기반 단기 스나이핑 전략)
+service MarketSnipingService {
+  // Market Sniping 목록 조회
+  rpc ListMarketSniping(ListMarketSnipingRequest) returns (ListMarketSnipingResponse) {
+    option (google.api.http) = {
+      get: "/v1/market-sniping"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // Market Sniping 단일 심볼 조회
+  rpc GetMarketSniping(GetMarketSnipingRequest) returns (MarketSnipingEntry) {
+    option (google.api.http) = {
+      get: "/v1/market-sniping/{symbol=*}"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
+  // Market Sniping 설정 생성 (DB 저장)
+  rpc CreateMarketSniping(CreateMarketSnipingRequest) returns (MarketSnipingEntry) {
+    option (google.api.http) = {
+      post: "/v1/market-sniping"
+      body: "*"
+    };
+    option (google.api.method_signature) = "symbol,config,nav_config";
+  }
+
+  // Market Sniping 설정 업데이트 (DB 저장)
+  rpc UpdateMarketSniping(UpdateMarketSnipingRequest) returns (MarketSnipingEntry) {
+    option (google.api.http) = {
+      patch: "/v1/market-sniping/{symbol=*}"
+      body: "*"
+    };
+    option (google.api.method_signature) = "symbol,config,nav_config";
+  }
+
+  // Market Sniping 삭제
+  rpc DeleteMarketSniping(DeleteMarketSnipingRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/market-sniping/{symbol=*}"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
+  // Market Sniping 시작 (심볼 등록)
+  rpc StartMarketSniping(StartMarketSnipingRequest) returns (StartMarketSnipingResponse) {
+    option (google.api.http) = {
+      post: "/v1/market-sniping/{symbol=*}:start"
+      body: "*"
+    };
+  }
+
+  // Market Sniping 중지 (심볼 해제)
+  rpc StopMarketSniping(StopMarketSnipingRequest) returns (StopMarketSnipingResponse) {
+    option (google.api.http) = {
+      post: "/v1/market-sniping/{symbol=*}:stop"
+      body: "*"
+    };
+  }
+
+  // Market Sniping 런타임 상태 조회
+  rpc GetMarketSnipingStatus(GetMarketSnipingStatusRequest) returns (MarketSnipingStatusMessage) {
+    option (google.api.http) = {
+      get: "/v1/market-sniping/{symbol=*}/status"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
+  // Market Sniping 실시간 상태 스트리밍 (서버→클라이언트)
+  rpc StreamMarketSnipingStatus(StreamMarketSnipingStatusRequest) returns (stream MarketSnipingStatusMessage) {
+    option (google.api.http) = {
+      get: "/v1/market-sniping/{symbol=*}:streamStatus"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+}
+
+// ============================================================================
+// Enums
+// ============================================================================
+
+// Market Sniping 런타임 상태
+enum MarketSnipingStatus {
+  MARKET_SNIPING_STATUS_UNSPECIFIED = 0;
+  MARKET_SNIPING_STATUS_IDLE = 1;       // 대기 (에피소드 없음)
+  MARKET_SNIPING_STATUS_ENTERING = 2;   // 진입 주문 중
+  MARKET_SNIPING_STATUS_OPEN = 3;       // 포지션 보유 중
+  MARKET_SNIPING_STATUS_EXITING = 4;    // 청산 중
+  MARKET_SNIPING_STATUS_COOLDOWN = 5;   // 쿨다운 대기 중
+}
+
+// Pricing 전략
+enum SnipingPricing {
+  SNIPING_PRICING_UNSPECIFIED = 0;
+  SNIPING_PRICING_MULTI_QUOTE_NAV = 1;  // 멀티 호가 NAV 기반
+}
+
+// 진입/청산 주문 방식
+enum ExecutionPolicy {
+  EXECUTION_POLICY_UNSPECIFIED = 0;
+  EXECUTION_POLICY_PASSIVE_LIMIT = 1;   // 수동 지정가
+  EXECUTION_POLICY_IMMEDIATE_OR_CANCEL = 2; // IOC
+}
+
+// 전략 종류
+enum StrategyKind {
+  STRATEGY_KIND_UNSPECIFIED = 0;
+  STRATEGY_KIND_MOMENTUM_ACCUMULATOR = 1; // 모멘텀 누적
+  STRATEGY_KIND_ROTATION = 2;             // 로테이션
+}
+
+// ============================================================================
+// Config Messages
+// ============================================================================
+
+// Momentum Signal 설정
+message MarketSnipingMomentumSignal {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 모멘텀 샘플 유지 시간 창 (ms)
+  uint64 window_ms = 2;
+
+  // 연속 모멘텀 정규화 기준 틱 수
+  int32 trigger_ticks = 3;
+
+  // 최대 신호 틱 수
+  int32 max_signal_ticks = 4;
+
+  // 신호 민감도
+  double sensitivity = 5;
+
+  // 인버스 방향 해석 여부
+  bool is_opposite = 6;
+}
+
+// 진입 정책
+message MarketSnipingEntryPolicy {
+  // 최소 신호 강도
+  double min_signal_strength = 1;
+
+  // 재진입 쿨다운 (ms)
+  uint64 cooldown_ms = 2;
+
+  // 최대 진입 수량 (0 = 제한 없음)
+  int64 max_entry_quantity = 3;
+}
+
+// 조건부 청산 정책 (ConditionalExitPolicy)
+message MarketSnipingConditionalExitPolicy {
+  // 신호 종료 시 청산
+  bool exit_on_signal_end = 1;
+
+  // 역방향 신호 시 청산
+  bool exit_on_reverse_signal = 2;
+
+  // 최대 보유 시간 (ms, 0 = 제한 없음)
+  uint64 max_holding_ms = 3;
+
+  // 최소 수익 틱 (0 = 제한 없음)
+  int32 min_profit_ticks = 4;
+
+  // 최대 손실 틱 (0 = 제한 없음)
+  int32 max_loss_ticks = 5;
+}
+
+// 청산 정책 (oneof: 항상 청산 | 조건부 청산)
+message MarketSnipingExitPolicy {
+  oneof policy {
+    // 항상 전량 청산
+    bool always_exit = 1;
+
+    // 조건부 청산 정책
+    MarketSnipingConditionalExitPolicy conditional = 2;
+  }
+}
+
+// 노출 균형 관리 설정
+message MarketSnipingExposureBalancer {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 부분 청산 최소 수량
+  int64 min_exit_quantity = 2;
+
+  // 부분 청산 비율 (0.0 ~ 1.0)
+  double partial_exit_ratio = 3;
+
+  // 신호 종료 시 전량 강제 청산
+  bool force_full_exit_on_signal_end = 4;
+}
+
+// 사전 스크리닝 설정
+message MarketSnipingScreening {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 최소 가격 (0 = 비활성)
+  int64 min_price = 2;
+
+  // 최대 가격 (0 = 비활성)
+  int64 max_price = 3;
+}
+
+// Market Sniping 메인 설정
+message MarketSnipingConfig {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // Tick size (Price internal representation)
+  int64 tick_size = 3;
+
+  // Pricing 전략
+  SnipingPricing pricing = 4;
+
+  // bid 가격 조정값 (Price internal representation)
+  int64 bid_adjustment = 5;
+
+  // ask 가격 조정값 (Price internal representation)
+  int64 ask_adjustment = 6;
+
+  // 기본 주문 수량
+  int64 base_quantity = 7;
+
+  // Momentum Signal 설정
+  MarketSnipingMomentumSignal momentum = 8;
+
+  // 진입 정책
+  MarketSnipingEntryPolicy entry_policy = 9;
+
+  // 청산 정책
+  MarketSnipingExitPolicy exit_policy = 10;
+
+  // 노출 균형 관리 설정
+  MarketSnipingExposureBalancer exposure_balancer = 11;
+
+  // 스크리닝 설정
+  MarketSnipingScreening screening = 12;
+
+  // 주문 실행 방식
+  ExecutionPolicy execution_policy = 13;
+
+  // 전략 종류
+  StrategyKind strategy = 14;
+}
+
+// NAV 설정 (ETF 기준가 계산용)
+message MarketSnipingNavConfig {
+  // ETF Pricing 방식 (EtfPricing enum name: "KrxPrevNav", "Intraday", etc.)
+  string pricing = 1;
+
+  // ask 기준 조정값 (Price internal representation)
+  int64 ask_basis = 2;
+
+  // bid 기준 조정값 (Price internal representation)
+  int64 bid_basis = 3;
+}
+
+// ============================================================================
+// Entry Messages
+// ============================================================================
+
+// Market Sniping 항목 (config + nav_config)
+message MarketSnipingEntry {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // Market Sniping 설정
+  MarketSnipingConfig config = 2;
+
+  // NAV 설정
+  MarketSnipingNavConfig nav_config = 3;
+}
+
+// ============================================================================
+// Runtime State Messages
+// ============================================================================
+
+// Market Sniping 런타임 상태
+message MarketSnipingStatusMessage {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // 현재 상태
+  MarketSnipingStatus status = 3;
+
+  // 마지막 신호 시점 bid 가격
+  int64 last_signal_bid_price = 4;
+
+  // 마지막 신호 시점 ask 가격
+  int64 last_signal_ask_price = 5;
+
+  // 현재 오픈 수량
+  int64 open_quantity = 6;
+
+  // 상태 변경 사유 (optional)
+  string reason = 7;
+}
+
+// ============================================================================
+// Request/Response Messages
+// ============================================================================
+
+// ListMarketSniping
+message ListMarketSnipingRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional)
+  optional string page_token = 2;
+}
+
+message ListMarketSnipingResponse {
+  // 등록된 Market Sniping 목록
+  repeated MarketSnipingEntry entries = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+// GetMarketSniping
+message GetMarketSnipingRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// CreateMarketSniping
+message CreateMarketSnipingRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Market Sniping 설정
+  MarketSnipingConfig config = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // NAV 설정
+  MarketSnipingNavConfig nav_config = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// UpdateMarketSniping
+message UpdateMarketSnipingRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 업데이트할 Market Sniping 설정
+  MarketSnipingConfig config = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 업데이트할 NAV 설정
+  MarketSnipingNavConfig nav_config = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// DeleteMarketSniping
+message DeleteMarketSnipingRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// StartMarketSniping
+message StartMarketSnipingRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message StartMarketSnipingResponse {
+  // 시작 메시지
+  string message = 1;
+}
+
+// StopMarketSniping
+message StopMarketSnipingRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message StopMarketSnipingResponse {
+  // 중지 메시지
+  string message = 1;
+}
+
+// GetMarketSnipingStatus
+message GetMarketSnipingStatusRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// StreamMarketSnipingStatus
+message StreamMarketSnipingStatusRequest {
+  // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
+  string symbol = 1;
+}
