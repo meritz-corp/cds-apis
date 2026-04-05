@@ -943,6 +943,9 @@ impl serde::Serialize for MarketSnipingConfig {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market_sniping.MarketSnipingConfig", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -1000,6 +1003,11 @@ impl serde::Serialize for MarketSnipingConfig {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.strategy)))?;
             struct_ser.serialize_field("strategy", &v)?;
         }
+        if true {
+            let v = super::common::AmendMethodType::try_from(self.exit_amend_method)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.exit_amend_method)))?;
+            struct_ser.serialize_field("exit_amend_method", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1033,6 +1041,8 @@ impl<'de> serde::Deserialize<'de> for MarketSnipingConfig {
             "execution_policy",
             "executionPolicy",
             "strategy",
+            "exit_amend_method",
+            "exitAmendMethod",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1051,6 +1061,7 @@ impl<'de> serde::Deserialize<'de> for MarketSnipingConfig {
             Screening,
             ExecutionPolicy,
             Strategy,
+            ExitAmendMethod,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1087,6 +1098,7 @@ impl<'de> serde::Deserialize<'de> for MarketSnipingConfig {
                             "screening" => Ok(GeneratedField::Screening),
                             "executionPolicy" | "execution_policy" => Ok(GeneratedField::ExecutionPolicy),
                             "strategy" => Ok(GeneratedField::Strategy),
+                            "exitAmendMethod" | "exit_amend_method" => Ok(GeneratedField::ExitAmendMethod),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1120,6 +1132,7 @@ impl<'de> serde::Deserialize<'de> for MarketSnipingConfig {
                 let mut screening__ = None;
                 let mut execution_policy__ = None;
                 let mut strategy__ = None;
+                let mut exit_amend_method__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -1214,6 +1227,12 @@ impl<'de> serde::Deserialize<'de> for MarketSnipingConfig {
                             }
                             strategy__ = Some(map_.next_value::<StrategyKind>()? as i32);
                         }
+                        GeneratedField::ExitAmendMethod => {
+                            if exit_amend_method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitAmendMethod"));
+                            }
+                            exit_amend_method__ = Some(map_.next_value::<super::common::AmendMethodType>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1234,6 +1253,7 @@ impl<'de> serde::Deserialize<'de> for MarketSnipingConfig {
                     screening: screening__,
                     execution_policy: execution_policy__.unwrap_or_default(),
                     strategy: strategy__.unwrap_or_default(),
+                    exit_amend_method: exit_amend_method__.unwrap_or_default(),
                 })
             }
         }

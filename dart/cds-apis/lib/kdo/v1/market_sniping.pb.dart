@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pbenum.dart' as $2;
 import 'market_sniping.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -564,6 +565,7 @@ class MarketSnipingConfig extends $pb.GeneratedMessage {
     MarketSnipingScreening? screening,
     ExecutionPolicy? executionPolicy,
     StrategyKind? strategy,
+    $2.AmendMethodType? exitAmendMethod,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -580,6 +582,7 @@ class MarketSnipingConfig extends $pb.GeneratedMessage {
     if (screening != null) result.screening = screening;
     if (executionPolicy != null) result.executionPolicy = executionPolicy;
     if (strategy != null) result.strategy = strategy;
+    if (exitAmendMethod != null) result.exitAmendMethod = exitAmendMethod;
     return result;
   }
 
@@ -603,6 +606,7 @@ class MarketSnipingConfig extends $pb.GeneratedMessage {
     ..aOM<MarketSnipingScreening>(12, _omitFieldNames ? '' : 'screening', subBuilder: MarketSnipingScreening.create)
     ..e<ExecutionPolicy>(13, _omitFieldNames ? '' : 'executionPolicy', $pb.PbFieldType.OE, defaultOrMaker: ExecutionPolicy.EXECUTION_POLICY_UNSPECIFIED, valueOf: ExecutionPolicy.valueOf, enumValues: ExecutionPolicy.values)
     ..e<StrategyKind>(14, _omitFieldNames ? '' : 'strategy', $pb.PbFieldType.OE, defaultOrMaker: StrategyKind.STRATEGY_KIND_UNSPECIFIED, valueOf: StrategyKind.valueOf, enumValues: StrategyKind.values)
+    ..e<$2.AmendMethodType>(15, _omitFieldNames ? '' : 'exitAmendMethod', $pb.PbFieldType.OE, defaultOrMaker: $2.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $2.AmendMethodType.valueOf, enumValues: $2.AmendMethodType.values)
     ..hasRequiredFields = false
   ;
 
@@ -772,6 +776,16 @@ class MarketSnipingConfig extends $pb.GeneratedMessage {
   $core.bool hasStrategy() => $_has(13);
   @$pb.TagNumber(14)
   void clearStrategy() => $_clearField(14);
+
+  /// 청산 주문 자동정정 방식
+  @$pb.TagNumber(15)
+  $2.AmendMethodType get exitAmendMethod => $_getN(14);
+  @$pb.TagNumber(15)
+  set exitAmendMethod($2.AmendMethodType value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasExitAmendMethod() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearExitAmendMethod() => $_clearField(15);
 }
 
 /// NAV 설정 (ETF 기준가 계산용)

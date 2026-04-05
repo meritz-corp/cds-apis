@@ -207,6 +207,7 @@ const MarketSnipingConfig$json = {
     {'1': 'screening', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.market_sniping.MarketSnipingScreening', '10': 'screening'},
     {'1': 'execution_policy', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.market_sniping.ExecutionPolicy', '10': 'executionPolicy'},
     {'1': 'strategy', '3': 14, '4': 1, '5': 14, '6': '.kdo.v1.market_sniping.StrategyKind', '10': 'strategy'},
+    {'1': 'exit_amend_method', '3': 15, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '10': 'exitAmendMethod'},
   ],
 };
 
@@ -227,7 +228,8 @@ final $typed_data.Uint8List marketSnipingConfigDescriptor = $convert.base64Decod
     'bmlwaW5nLk1hcmtldFNuaXBpbmdTY3JlZW5pbmdSCXNjcmVlbmluZxJRChBleGVjdXRpb25fcG'
     '9saWN5GA0gASgOMiYua2RvLnYxLm1hcmtldF9zbmlwaW5nLkV4ZWN1dGlvblBvbGljeVIPZXhl'
     'Y3V0aW9uUG9saWN5Ej8KCHN0cmF0ZWd5GA4gASgOMiMua2RvLnYxLm1hcmtldF9zbmlwaW5nLl'
-    'N0cmF0ZWd5S2luZFIIc3RyYXRlZ3k=');
+    'N0cmF0ZWd5S2luZFIIc3RyYXRlZ3kSSgoRZXhpdF9hbWVuZF9tZXRob2QYDyABKA4yHi5rZG8u'
+    'djEuY29tbW9uLkFtZW5kTWV0aG9kVHlwZVIPZXhpdEFtZW5kTWV0aG9k');
 
 @$core.Deprecated('Use marketSnipingNavConfigDescriptor instead')
 const MarketSnipingNavConfig$json = {

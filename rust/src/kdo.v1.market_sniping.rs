@@ -158,6 +158,9 @@ pub struct MarketSnipingConfig {
     /// 전략 종류
     #[prost(enumeration="StrategyKind", tag="14")]
     pub strategy: i32,
+    /// 청산 주문 자동정정 방식
+    #[prost(enumeration="super::common::AmendMethodType", tag="15")]
+    pub exit_amend_method: i32,
 }
 /// NAV 설정 (ETF 기준가 계산용)
 #[allow(clippy::derive_partial_eq_without_eq)]

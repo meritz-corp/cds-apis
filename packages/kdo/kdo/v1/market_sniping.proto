@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/api/client.proto";
 import "google/protobuf/empty.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -264,6 +265,9 @@ message MarketSnipingConfig {
 
   // 전략 종류
   StrategyKind strategy = 14;
+
+  // 청산 주문 자동정정 방식
+  kdo.v1.common.AmendMethodType exit_amend_method = 15;
 }
 
 // NAV 설정 (ETF 기준가 계산용)
