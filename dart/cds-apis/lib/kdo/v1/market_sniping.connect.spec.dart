@@ -83,4 +83,12 @@ abstract final class MarketSnipingService {
     kdov1market_sniping.StreamMarketSnipingStatusRequest.new,
     kdov1market_sniping.MarketSnipingStatusMessage.new,
   );
+
+  /// 엔진 런타임 상태 스트리밍 (1초 간격 폴링)
+  static const streamSnipingEngineState = connect.Spec(
+    '/$name/StreamSnipingEngineState',
+    connect.StreamType.server,
+    kdov1market_sniping.StreamSnipingEngineStateRequest.new,
+    kdov1market_sniping.SnipingEngineRuntimeState.new,
+  );
 }

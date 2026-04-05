@@ -495,6 +495,40 @@ func request_MarketSnipingService_StreamMarketSnipingStatus_0(ctx context.Contex
 
 }
 
+func request_MarketSnipingService_StreamSnipingEngineState_0(ctx context.Context, marshaler runtime.Marshaler, client MarketSnipingServiceClient, req *http.Request, pathParams map[string]string) (MarketSnipingService_StreamSnipingEngineStateClient, runtime.ServerMetadata, error) {
+	var protoReq StreamSnipingEngineStateRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
+	}
+
+	protoReq.Symbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	stream, err := client.StreamSnipingEngineState(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterMarketSnipingServiceHandlerServer registers the http handlers for service MarketSnipingService to "mux".
 // UnaryRPC     :call MarketSnipingServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -702,6 +736,13 @@ func RegisterMarketSnipingServiceHandlerServer(ctx context.Context, mux *runtime
 	})
 
 	mux.Handle("GET", pattern_MarketSnipingService_StreamMarketSnipingStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_MarketSnipingService_StreamSnipingEngineState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -947,6 +988,28 @@ func RegisterMarketSnipingServiceHandlerClient(ctx context.Context, mux *runtime
 
 	})
 
+	mux.Handle("GET", pattern_MarketSnipingService_StreamSnipingEngineState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.market_sniping.MarketSnipingService/StreamSnipingEngineState", runtime.WithHTTPPathPattern("/v1/market-sniping/{symbol=*}:streamEngineState"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MarketSnipingService_StreamSnipingEngineState_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MarketSnipingService_StreamSnipingEngineState_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -968,6 +1031,8 @@ var (
 	pattern_MarketSnipingService_GetMarketSnipingStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "market-sniping", "symbol", "status"}, ""))
 
 	pattern_MarketSnipingService_StreamMarketSnipingStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "market-sniping", "symbol"}, "streamStatus"))
+
+	pattern_MarketSnipingService_StreamSnipingEngineState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "market-sniping", "symbol"}, "streamEngineState"))
 )
 
 var (
@@ -988,4 +1053,6 @@ var (
 	forward_MarketSnipingService_GetMarketSnipingStatus_0 = runtime.ForwardResponseMessage
 
 	forward_MarketSnipingService_StreamMarketSnipingStatus_0 = runtime.ForwardResponseStream
+
+	forward_MarketSnipingService_StreamSnipingEngineState_0 = runtime.ForwardResponseStream
 )

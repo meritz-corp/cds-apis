@@ -336,6 +336,117 @@ pub struct StreamMarketSnipingStatusRequest {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
+/// StreamSnipingEngineState
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamSnipingEngineStateRequest {
+    /// ISIN 심볼 (빈 문자열이면 전체)
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+/// Sniping 엔진 전체 런타임 상태 스냅샷
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SnipingEngineRuntimeState {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// Unix timestamp (KST HHMMSSuuuuuu)
+    #[prost(int64, tag="2")]
+    pub timestamp: i64,
+    /// Episode 상태 ("idle", "active", "unwinding", "cooldown")
+    #[prost(string, tag="3")]
+    pub episode: ::prost::alloc::string::String,
+    /// 전략 종류 ("momentum_accumulator", "rotation")
+    #[prost(string, tag="4")]
+    pub strategy: ::prost::alloc::string::String,
+    /// Momentum 상태
+    #[prost(message, optional, tag="5")]
+    pub momentum: ::core::option::Option<SnipingMomentumState>,
+    /// Position 상태
+    #[prost(message, optional, tag="6")]
+    pub position: ::core::option::Option<SnipingPositionState>,
+    /// Working Orders 상태
+    #[prost(message, optional, tag="7")]
+    pub working_orders: ::core::option::Option<SnipingWorkingOrdersState>,
+    /// Pricing 상태
+    #[prost(message, optional, tag="8")]
+    pub pricing: ::core::option::Option<SnipingPricingState>,
+}
+/// Momentum 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SnipingMomentumState {
+    /// 방향 ("none", "up", "down")
+    #[prost(string, tag="1")]
+    pub direction: ::prost::alloc::string::String,
+    /// 원시 틱 수
+    #[prost(double, tag="2")]
+    pub raw_ticks: f64,
+    /// 신호 틱 수
+    #[prost(int32, tag="3")]
+    pub signal_ticks: i32,
+    /// 신호 강도
+    #[prost(double, tag="4")]
+    pub strength: f64,
+    /// 샘플 수
+    #[prost(int32, tag="5")]
+    pub sample_count: i32,
+}
+/// Position 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SnipingPositionState {
+    /// 순 수량
+    #[prost(int64, tag="1")]
+    pub net_qty: i64,
+    /// 총 매수 수량
+    #[prost(int64, tag="2")]
+    pub gross_buy_qty: i64,
+    /// 총 매도 수량
+    #[prost(int64, tag="3")]
+    pub gross_sell_qty: i64,
+    /// 평균 진입 가격 (Price internal representation)
+    #[prost(int64, tag="4")]
+    pub avg_entry_price: i64,
+}
+/// Working Orders 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SnipingWorkingOrdersState {
+    /// 미체결 주문 수
+    #[prost(int32, tag="1")]
+    pub count: i32,
+    /// 진입 bid 미체결 수량
+    #[prost(int64, tag="2")]
+    pub entry_bid_working_qty: i64,
+    /// 진입 ask 미체결 수량
+    #[prost(int64, tag="3")]
+    pub entry_ask_working_qty: i64,
+    /// 청산 bid 미체결 수량
+    #[prost(int64, tag="4")]
+    pub exit_bid_working_qty: i64,
+    /// 청산 ask 미체결 수량
+    #[prost(int64, tag="5")]
+    pub exit_ask_working_qty: i64,
+}
+/// Pricing 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SnipingPricingState {
+    /// NAV bid 가격
+    #[prost(int64, tag="1")]
+    pub nav_bid: i64,
+    /// NAV ask 가격
+    #[prost(int64, tag="2")]
+    pub nav_ask: i64,
+    /// Signal bid 가격 (last)
+    #[prost(int64, tag="3")]
+    pub signal_bid: i64,
+    /// Signal ask 가격 (last)
+    #[prost(int64, tag="4")]
+    pub signal_ask: i64,
+}
 // ============================================================================
 // Enums
 // ============================================================================

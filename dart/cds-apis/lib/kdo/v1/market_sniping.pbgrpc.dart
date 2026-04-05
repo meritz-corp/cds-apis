@@ -79,6 +79,11 @@ class MarketSnipingServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamMarketSnipingStatus, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 엔진 런타임 상태 스트리밍 (1초 간격 폴링)
+  $grpc.ResponseStream<$0.SnipingEngineRuntimeState> streamSnipingEngineState($0.StreamSnipingEngineStateRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamSnipingEngineState, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$listMarketSniping = $grpc.ClientMethod<$0.ListMarketSnipingRequest, $0.ListMarketSnipingResponse>(
@@ -117,6 +122,10 @@ class MarketSnipingServiceClient extends $grpc.Client {
       '/kdo.v1.market_sniping.MarketSnipingService/StreamMarketSnipingStatus',
       ($0.StreamMarketSnipingStatusRequest value) => value.writeToBuffer(),
       $0.MarketSnipingStatusMessage.fromBuffer);
+  static final _$streamSnipingEngineState = $grpc.ClientMethod<$0.StreamSnipingEngineStateRequest, $0.SnipingEngineRuntimeState>(
+      '/kdo.v1.market_sniping.MarketSnipingService/StreamSnipingEngineState',
+      ($0.StreamSnipingEngineStateRequest value) => value.writeToBuffer(),
+      $0.SnipingEngineRuntimeState.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.market_sniping.MarketSnipingService')
@@ -187,6 +196,13 @@ abstract class MarketSnipingServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamMarketSnipingStatusRequest.fromBuffer(value),
         ($0.MarketSnipingStatusMessage value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamSnipingEngineStateRequest, $0.SnipingEngineRuntimeState>(
+        'StreamSnipingEngineState',
+        streamSnipingEngineState_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamSnipingEngineStateRequest.fromBuffer(value),
+        ($0.SnipingEngineRuntimeState value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMarketSnipingResponse> listMarketSniping_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketSnipingRequest> $request) async {
@@ -242,5 +258,11 @@ abstract class MarketSnipingServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.MarketSnipingStatusMessage> streamMarketSnipingStatus($grpc.ServiceCall call, $0.StreamMarketSnipingStatusRequest request);
+
+  $async.Stream<$0.SnipingEngineRuntimeState> streamSnipingEngineState_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamSnipingEngineStateRequest> $request) async* {
+    yield* streamSnipingEngineState($call, await $request);
+  }
+
+  $async.Stream<$0.SnipingEngineRuntimeState> streamSnipingEngineState($grpc.ServiceCall call, $0.StreamSnipingEngineStateRequest request);
 
 }

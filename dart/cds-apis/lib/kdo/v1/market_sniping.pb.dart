@@ -1705,6 +1705,575 @@ class StreamMarketSnipingStatusRequest extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 }
 
+/// StreamSnipingEngineState
+class StreamSnipingEngineStateRequest extends $pb.GeneratedMessage {
+  factory StreamSnipingEngineStateRequest({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  StreamSnipingEngineStateRequest._();
+
+  factory StreamSnipingEngineStateRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamSnipingEngineStateRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamSnipingEngineStateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market_sniping'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamSnipingEngineStateRequest clone() => StreamSnipingEngineStateRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamSnipingEngineStateRequest copyWith(void Function(StreamSnipingEngineStateRequest) updates) => super.copyWith((message) => updates(message as StreamSnipingEngineStateRequest)) as StreamSnipingEngineStateRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamSnipingEngineStateRequest create() => StreamSnipingEngineStateRequest._();
+  @$core.override
+  StreamSnipingEngineStateRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamSnipingEngineStateRequest> createRepeated() => $pb.PbList<StreamSnipingEngineStateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamSnipingEngineStateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamSnipingEngineStateRequest>(create);
+  static StreamSnipingEngineStateRequest? _defaultInstance;
+
+  /// ISIN 심볼 (빈 문자열이면 전체)
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
+/// Sniping 엔진 전체 런타임 상태 스냅샷
+class SnipingEngineRuntimeState extends $pb.GeneratedMessage {
+  factory SnipingEngineRuntimeState({
+    $core.String? symbol,
+    $fixnum.Int64? timestamp,
+    $core.String? episode,
+    $core.String? strategy,
+    SnipingMomentumState? momentum,
+    SnipingPositionState? position,
+    SnipingWorkingOrdersState? workingOrders,
+    SnipingPricingState? pricing,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (timestamp != null) result.timestamp = timestamp;
+    if (episode != null) result.episode = episode;
+    if (strategy != null) result.strategy = strategy;
+    if (momentum != null) result.momentum = momentum;
+    if (position != null) result.position = position;
+    if (workingOrders != null) result.workingOrders = workingOrders;
+    if (pricing != null) result.pricing = pricing;
+    return result;
+  }
+
+  SnipingEngineRuntimeState._();
+
+  factory SnipingEngineRuntimeState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SnipingEngineRuntimeState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SnipingEngineRuntimeState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market_sniping'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'timestamp')
+    ..aOS(3, _omitFieldNames ? '' : 'episode')
+    ..aOS(4, _omitFieldNames ? '' : 'strategy')
+    ..aOM<SnipingMomentumState>(5, _omitFieldNames ? '' : 'momentum', subBuilder: SnipingMomentumState.create)
+    ..aOM<SnipingPositionState>(6, _omitFieldNames ? '' : 'position', subBuilder: SnipingPositionState.create)
+    ..aOM<SnipingWorkingOrdersState>(7, _omitFieldNames ? '' : 'workingOrders', subBuilder: SnipingWorkingOrdersState.create)
+    ..aOM<SnipingPricingState>(8, _omitFieldNames ? '' : 'pricing', subBuilder: SnipingPricingState.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingEngineRuntimeState clone() => SnipingEngineRuntimeState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingEngineRuntimeState copyWith(void Function(SnipingEngineRuntimeState) updates) => super.copyWith((message) => updates(message as SnipingEngineRuntimeState)) as SnipingEngineRuntimeState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SnipingEngineRuntimeState create() => SnipingEngineRuntimeState._();
+  @$core.override
+  SnipingEngineRuntimeState createEmptyInstance() => create();
+  static $pb.PbList<SnipingEngineRuntimeState> createRepeated() => $pb.PbList<SnipingEngineRuntimeState>();
+  @$core.pragma('dart2js:noInline')
+  static SnipingEngineRuntimeState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SnipingEngineRuntimeState>(create);
+  static SnipingEngineRuntimeState? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// Unix timestamp (KST HHMMSSuuuuuu)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get timestamp => $_getI64(1);
+  @$pb.TagNumber(2)
+  set timestamp($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTimestamp() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTimestamp() => $_clearField(2);
+
+  /// Episode 상태 ("idle", "active", "unwinding", "cooldown")
+  @$pb.TagNumber(3)
+  $core.String get episode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set episode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEpisode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEpisode() => $_clearField(3);
+
+  /// 전략 종류 ("momentum_accumulator", "rotation")
+  @$pb.TagNumber(4)
+  $core.String get strategy => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set strategy($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasStrategy() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStrategy() => $_clearField(4);
+
+  /// Momentum 상태
+  @$pb.TagNumber(5)
+  SnipingMomentumState get momentum => $_getN(4);
+  @$pb.TagNumber(5)
+  set momentum(SnipingMomentumState value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMomentum() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMomentum() => $_clearField(5);
+  @$pb.TagNumber(5)
+  SnipingMomentumState ensureMomentum() => $_ensure(4);
+
+  /// Position 상태
+  @$pb.TagNumber(6)
+  SnipingPositionState get position => $_getN(5);
+  @$pb.TagNumber(6)
+  set position(SnipingPositionState value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasPosition() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPosition() => $_clearField(6);
+  @$pb.TagNumber(6)
+  SnipingPositionState ensurePosition() => $_ensure(5);
+
+  /// Working Orders 상태
+  @$pb.TagNumber(7)
+  SnipingWorkingOrdersState get workingOrders => $_getN(6);
+  @$pb.TagNumber(7)
+  set workingOrders(SnipingWorkingOrdersState value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasWorkingOrders() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearWorkingOrders() => $_clearField(7);
+  @$pb.TagNumber(7)
+  SnipingWorkingOrdersState ensureWorkingOrders() => $_ensure(6);
+
+  /// Pricing 상태
+  @$pb.TagNumber(8)
+  SnipingPricingState get pricing => $_getN(7);
+  @$pb.TagNumber(8)
+  set pricing(SnipingPricingState value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasPricing() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearPricing() => $_clearField(8);
+  @$pb.TagNumber(8)
+  SnipingPricingState ensurePricing() => $_ensure(7);
+}
+
+/// Momentum 런타임 상태
+class SnipingMomentumState extends $pb.GeneratedMessage {
+  factory SnipingMomentumState({
+    $core.String? direction,
+    $core.double? rawTicks,
+    $core.int? signalTicks,
+    $core.double? strength,
+    $core.int? sampleCount,
+  }) {
+    final result = create();
+    if (direction != null) result.direction = direction;
+    if (rawTicks != null) result.rawTicks = rawTicks;
+    if (signalTicks != null) result.signalTicks = signalTicks;
+    if (strength != null) result.strength = strength;
+    if (sampleCount != null) result.sampleCount = sampleCount;
+    return result;
+  }
+
+  SnipingMomentumState._();
+
+  factory SnipingMomentumState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SnipingMomentumState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SnipingMomentumState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market_sniping'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'direction')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'rawTicks', $pb.PbFieldType.OD)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'signalTicks', $pb.PbFieldType.O3)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'strength', $pb.PbFieldType.OD)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'sampleCount', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingMomentumState clone() => SnipingMomentumState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingMomentumState copyWith(void Function(SnipingMomentumState) updates) => super.copyWith((message) => updates(message as SnipingMomentumState)) as SnipingMomentumState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SnipingMomentumState create() => SnipingMomentumState._();
+  @$core.override
+  SnipingMomentumState createEmptyInstance() => create();
+  static $pb.PbList<SnipingMomentumState> createRepeated() => $pb.PbList<SnipingMomentumState>();
+  @$core.pragma('dart2js:noInline')
+  static SnipingMomentumState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SnipingMomentumState>(create);
+  static SnipingMomentumState? _defaultInstance;
+
+  /// 방향 ("none", "up", "down")
+  @$pb.TagNumber(1)
+  $core.String get direction => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set direction($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDirection() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDirection() => $_clearField(1);
+
+  /// 원시 틱 수
+  @$pb.TagNumber(2)
+  $core.double get rawTicks => $_getN(1);
+  @$pb.TagNumber(2)
+  set rawTicks($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRawTicks() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRawTicks() => $_clearField(2);
+
+  /// 신호 틱 수
+  @$pb.TagNumber(3)
+  $core.int get signalTicks => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set signalTicks($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSignalTicks() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSignalTicks() => $_clearField(3);
+
+  /// 신호 강도
+  @$pb.TagNumber(4)
+  $core.double get strength => $_getN(3);
+  @$pb.TagNumber(4)
+  set strength($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasStrength() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStrength() => $_clearField(4);
+
+  /// 샘플 수
+  @$pb.TagNumber(5)
+  $core.int get sampleCount => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set sampleCount($core.int value) => $_setSignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSampleCount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSampleCount() => $_clearField(5);
+}
+
+/// Position 런타임 상태
+class SnipingPositionState extends $pb.GeneratedMessage {
+  factory SnipingPositionState({
+    $fixnum.Int64? netQty,
+    $fixnum.Int64? grossBuyQty,
+    $fixnum.Int64? grossSellQty,
+    $fixnum.Int64? avgEntryPrice,
+  }) {
+    final result = create();
+    if (netQty != null) result.netQty = netQty;
+    if (grossBuyQty != null) result.grossBuyQty = grossBuyQty;
+    if (grossSellQty != null) result.grossSellQty = grossSellQty;
+    if (avgEntryPrice != null) result.avgEntryPrice = avgEntryPrice;
+    return result;
+  }
+
+  SnipingPositionState._();
+
+  factory SnipingPositionState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SnipingPositionState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SnipingPositionState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market_sniping'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'netQty')
+    ..aInt64(2, _omitFieldNames ? '' : 'grossBuyQty')
+    ..aInt64(3, _omitFieldNames ? '' : 'grossSellQty')
+    ..aInt64(4, _omitFieldNames ? '' : 'avgEntryPrice')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingPositionState clone() => SnipingPositionState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingPositionState copyWith(void Function(SnipingPositionState) updates) => super.copyWith((message) => updates(message as SnipingPositionState)) as SnipingPositionState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SnipingPositionState create() => SnipingPositionState._();
+  @$core.override
+  SnipingPositionState createEmptyInstance() => create();
+  static $pb.PbList<SnipingPositionState> createRepeated() => $pb.PbList<SnipingPositionState>();
+  @$core.pragma('dart2js:noInline')
+  static SnipingPositionState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SnipingPositionState>(create);
+  static SnipingPositionState? _defaultInstance;
+
+  /// 순 수량
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get netQty => $_getI64(0);
+  @$pb.TagNumber(1)
+  set netQty($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasNetQty() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNetQty() => $_clearField(1);
+
+  /// 총 매수 수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get grossBuyQty => $_getI64(1);
+  @$pb.TagNumber(2)
+  set grossBuyQty($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasGrossBuyQty() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearGrossBuyQty() => $_clearField(2);
+
+  /// 총 매도 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get grossSellQty => $_getI64(2);
+  @$pb.TagNumber(3)
+  set grossSellQty($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasGrossSellQty() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearGrossSellQty() => $_clearField(3);
+
+  /// 평균 진입 가격 (Price internal representation)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get avgEntryPrice => $_getI64(3);
+  @$pb.TagNumber(4)
+  set avgEntryPrice($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAvgEntryPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAvgEntryPrice() => $_clearField(4);
+}
+
+/// Working Orders 상태
+class SnipingWorkingOrdersState extends $pb.GeneratedMessage {
+  factory SnipingWorkingOrdersState({
+    $core.int? count,
+    $fixnum.Int64? entryBidWorkingQty,
+    $fixnum.Int64? entryAskWorkingQty,
+    $fixnum.Int64? exitBidWorkingQty,
+    $fixnum.Int64? exitAskWorkingQty,
+  }) {
+    final result = create();
+    if (count != null) result.count = count;
+    if (entryBidWorkingQty != null) result.entryBidWorkingQty = entryBidWorkingQty;
+    if (entryAskWorkingQty != null) result.entryAskWorkingQty = entryAskWorkingQty;
+    if (exitBidWorkingQty != null) result.exitBidWorkingQty = exitBidWorkingQty;
+    if (exitAskWorkingQty != null) result.exitAskWorkingQty = exitAskWorkingQty;
+    return result;
+  }
+
+  SnipingWorkingOrdersState._();
+
+  factory SnipingWorkingOrdersState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SnipingWorkingOrdersState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SnipingWorkingOrdersState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market_sniping'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'count', $pb.PbFieldType.O3)
+    ..aInt64(2, _omitFieldNames ? '' : 'entryBidWorkingQty')
+    ..aInt64(3, _omitFieldNames ? '' : 'entryAskWorkingQty')
+    ..aInt64(4, _omitFieldNames ? '' : 'exitBidWorkingQty')
+    ..aInt64(5, _omitFieldNames ? '' : 'exitAskWorkingQty')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingWorkingOrdersState clone() => SnipingWorkingOrdersState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingWorkingOrdersState copyWith(void Function(SnipingWorkingOrdersState) updates) => super.copyWith((message) => updates(message as SnipingWorkingOrdersState)) as SnipingWorkingOrdersState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SnipingWorkingOrdersState create() => SnipingWorkingOrdersState._();
+  @$core.override
+  SnipingWorkingOrdersState createEmptyInstance() => create();
+  static $pb.PbList<SnipingWorkingOrdersState> createRepeated() => $pb.PbList<SnipingWorkingOrdersState>();
+  @$core.pragma('dart2js:noInline')
+  static SnipingWorkingOrdersState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SnipingWorkingOrdersState>(create);
+  static SnipingWorkingOrdersState? _defaultInstance;
+
+  /// 미체결 주문 수
+  @$pb.TagNumber(1)
+  $core.int get count => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set count($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCount() => $_clearField(1);
+
+  /// 진입 bid 미체결 수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get entryBidWorkingQty => $_getI64(1);
+  @$pb.TagNumber(2)
+  set entryBidWorkingQty($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasEntryBidWorkingQty() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEntryBidWorkingQty() => $_clearField(2);
+
+  /// 진입 ask 미체결 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get entryAskWorkingQty => $_getI64(2);
+  @$pb.TagNumber(3)
+  set entryAskWorkingQty($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEntryAskWorkingQty() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEntryAskWorkingQty() => $_clearField(3);
+
+  /// 청산 bid 미체결 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get exitBidWorkingQty => $_getI64(3);
+  @$pb.TagNumber(4)
+  set exitBidWorkingQty($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExitBidWorkingQty() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExitBidWorkingQty() => $_clearField(4);
+
+  /// 청산 ask 미체결 수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get exitAskWorkingQty => $_getI64(4);
+  @$pb.TagNumber(5)
+  set exitAskWorkingQty($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasExitAskWorkingQty() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearExitAskWorkingQty() => $_clearField(5);
+}
+
+/// Pricing 상태
+class SnipingPricingState extends $pb.GeneratedMessage {
+  factory SnipingPricingState({
+    $fixnum.Int64? navBid,
+    $fixnum.Int64? navAsk,
+    $fixnum.Int64? signalBid,
+    $fixnum.Int64? signalAsk,
+  }) {
+    final result = create();
+    if (navBid != null) result.navBid = navBid;
+    if (navAsk != null) result.navAsk = navAsk;
+    if (signalBid != null) result.signalBid = signalBid;
+    if (signalAsk != null) result.signalAsk = signalAsk;
+    return result;
+  }
+
+  SnipingPricingState._();
+
+  factory SnipingPricingState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SnipingPricingState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SnipingPricingState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market_sniping'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'navBid')
+    ..aInt64(2, _omitFieldNames ? '' : 'navAsk')
+    ..aInt64(3, _omitFieldNames ? '' : 'signalBid')
+    ..aInt64(4, _omitFieldNames ? '' : 'signalAsk')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingPricingState clone() => SnipingPricingState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SnipingPricingState copyWith(void Function(SnipingPricingState) updates) => super.copyWith((message) => updates(message as SnipingPricingState)) as SnipingPricingState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SnipingPricingState create() => SnipingPricingState._();
+  @$core.override
+  SnipingPricingState createEmptyInstance() => create();
+  static $pb.PbList<SnipingPricingState> createRepeated() => $pb.PbList<SnipingPricingState>();
+  @$core.pragma('dart2js:noInline')
+  static SnipingPricingState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SnipingPricingState>(create);
+  static SnipingPricingState? _defaultInstance;
+
+  /// NAV bid 가격
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get navBid => $_getI64(0);
+  @$pb.TagNumber(1)
+  set navBid($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasNavBid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNavBid() => $_clearField(1);
+
+  /// NAV ask 가격
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get navAsk => $_getI64(1);
+  @$pb.TagNumber(2)
+  set navAsk($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNavAsk() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNavAsk() => $_clearField(2);
+
+  /// Signal bid 가격 (last)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get signalBid => $_getI64(2);
+  @$pb.TagNumber(3)
+  set signalBid($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSignalBid() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSignalBid() => $_clearField(3);
+
+  /// Signal ask 가격 (last)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get signalAsk => $_getI64(3);
+  @$pb.TagNumber(4)
+  set signalAsk($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSignalAsk() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSignalAsk() => $_clearField(4);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

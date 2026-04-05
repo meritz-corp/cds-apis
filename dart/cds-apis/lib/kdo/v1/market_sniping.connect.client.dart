@@ -171,4 +171,22 @@ extension type MarketSnipingServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 엔진 런타임 상태 스트리밍 (1초 간격 폴링)
+  Stream<kdov1market_sniping.SnipingEngineRuntimeState> streamSnipingEngineState(
+    kdov1market_sniping.StreamSnipingEngineStateRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketSnipingService.streamSnipingEngineState,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

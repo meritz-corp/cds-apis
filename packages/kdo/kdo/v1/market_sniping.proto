@@ -84,6 +84,14 @@ service MarketSnipingService {
     };
     option (google.api.method_signature) = "symbol";
   }
+
+  // 엔진 런타임 상태 스트리밍 (1초 간격 폴링)
+  rpc StreamSnipingEngineState(StreamSnipingEngineStateRequest) returns (stream SnipingEngineRuntimeState) {
+    option (google.api.http) = {
+      get: "/v1/market-sniping/{symbol=*}:streamEngineState"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
 }
 
 // ============================================================================
@@ -403,4 +411,103 @@ message GetMarketSnipingStatusRequest {
 message StreamMarketSnipingStatusRequest {
   // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
   string symbol = 1;
+}
+
+// StreamSnipingEngineState
+message StreamSnipingEngineStateRequest {
+  // ISIN 심볼 (빈 문자열이면 전체)
+  string symbol = 1;
+}
+
+// Sniping 엔진 전체 런타임 상태 스냅샷
+message SnipingEngineRuntimeState {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // Unix timestamp (KST HHMMSSuuuuuu)
+  int64 timestamp = 2;
+
+  // Episode 상태 ("idle", "active", "unwinding", "cooldown")
+  string episode = 3;
+
+  // 전략 종류 ("momentum_accumulator", "rotation")
+  string strategy = 4;
+
+  // Momentum 상태
+  SnipingMomentumState momentum = 5;
+
+  // Position 상태
+  SnipingPositionState position = 6;
+
+  // Working Orders 상태
+  SnipingWorkingOrdersState working_orders = 7;
+
+  // Pricing 상태
+  SnipingPricingState pricing = 8;
+}
+
+// Momentum 런타임 상태
+message SnipingMomentumState {
+  // 방향 ("none", "up", "down")
+  string direction = 1;
+
+  // 원시 틱 수
+  double raw_ticks = 2;
+
+  // 신호 틱 수
+  int32 signal_ticks = 3;
+
+  // 신호 강도
+  double strength = 4;
+
+  // 샘플 수
+  int32 sample_count = 5;
+}
+
+// Position 런타임 상태
+message SnipingPositionState {
+  // 순 수량
+  int64 net_qty = 1;
+
+  // 총 매수 수량
+  int64 gross_buy_qty = 2;
+
+  // 총 매도 수량
+  int64 gross_sell_qty = 3;
+
+  // 평균 진입 가격 (Price internal representation)
+  int64 avg_entry_price = 4;
+}
+
+// Working Orders 상태
+message SnipingWorkingOrdersState {
+  // 미체결 주문 수
+  int32 count = 1;
+
+  // 진입 bid 미체결 수량
+  int64 entry_bid_working_qty = 2;
+
+  // 진입 ask 미체결 수량
+  int64 entry_ask_working_qty = 3;
+
+  // 청산 bid 미체결 수량
+  int64 exit_bid_working_qty = 4;
+
+  // 청산 ask 미체결 수량
+  int64 exit_ask_working_qty = 5;
+}
+
+// Pricing 상태
+message SnipingPricingState {
+  // NAV bid 가격
+  int64 nav_bid = 1;
+
+  // NAV ask 가격
+  int64 nav_ask = 2;
+
+  // Signal bid 가격 (last)
+  int64 signal_bid = 3;
+
+  // Signal ask 가격 (last)
+  int64 signal_ask = 4;
 }

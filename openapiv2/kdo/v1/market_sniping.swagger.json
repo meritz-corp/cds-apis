@@ -323,6 +323,48 @@
         ]
       }
     },
+    "/v1/market-sniping/{symbol}:streamEngineState": {
+      "get": {
+        "summary": "엔진 런타임 상태 스트리밍 (1초 간격 폴링)",
+        "operationId": "MarketSnipingService_StreamSnipingEngineState",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/market_snipingSnipingEngineRuntimeState"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of market_snipingSnipingEngineRuntimeState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼 (빈 문자열이면 전체)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketSnipingService"
+        ]
+      }
+    },
     "/v1/market-sniping/{symbol}:streamStatus": {
       "get": {
         "summary": "Market Sniping 실시간 상태 스트리밍 (서버→클라이언트)",
@@ -714,6 +756,101 @@
       },
       "title": "Market Sniping 런타임 상태"
     },
+    "market_snipingSnipingEngineRuntimeState": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "Unix timestamp (KST HHMMSSuuuuuu)"
+        },
+        "episode": {
+          "type": "string",
+          "title": "Episode 상태 (\"idle\", \"active\", \"unwinding\", \"cooldown\")"
+        },
+        "strategy": {
+          "type": "string",
+          "title": "전략 종류 (\"momentum_accumulator\", \"rotation\")"
+        },
+        "momentum": {
+          "$ref": "#/definitions/market_snipingSnipingMomentumState",
+          "title": "Momentum 상태"
+        },
+        "position": {
+          "$ref": "#/definitions/market_snipingSnipingPositionState",
+          "title": "Position 상태"
+        },
+        "workingOrders": {
+          "$ref": "#/definitions/market_snipingSnipingWorkingOrdersState",
+          "title": "Working Orders 상태"
+        },
+        "pricing": {
+          "$ref": "#/definitions/market_snipingSnipingPricingState",
+          "title": "Pricing 상태"
+        }
+      },
+      "title": "Sniping 엔진 전체 런타임 상태 스냅샷"
+    },
+    "market_snipingSnipingMomentumState": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "title": "방향 (\"none\", \"up\", \"down\")"
+        },
+        "rawTicks": {
+          "type": "number",
+          "format": "double",
+          "title": "원시 틱 수"
+        },
+        "signalTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "신호 틱 수"
+        },
+        "strength": {
+          "type": "number",
+          "format": "double",
+          "title": "신호 강도"
+        },
+        "sampleCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "샘플 수"
+        }
+      },
+      "title": "Momentum 런타임 상태"
+    },
+    "market_snipingSnipingPositionState": {
+      "type": "object",
+      "properties": {
+        "netQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "순 수량"
+        },
+        "grossBuyQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매수 수량"
+        },
+        "grossSellQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "총 매도 수량"
+        },
+        "avgEntryPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "평균 진입 가격 (Price internal representation)"
+        }
+      },
+      "title": "Position 런타임 상태"
+    },
     "market_snipingSnipingPricing": {
       "type": "string",
       "enum": [
@@ -723,6 +860,63 @@
       "default": "SNIPING_PRICING_UNSPECIFIED",
       "description": "- SNIPING_PRICING_MULTI_QUOTE_NAV: 멀티 호가 NAV 기반",
       "title": "Pricing 전략"
+    },
+    "market_snipingSnipingPricingState": {
+      "type": "object",
+      "properties": {
+        "navBid": {
+          "type": "string",
+          "format": "int64",
+          "title": "NAV bid 가격"
+        },
+        "navAsk": {
+          "type": "string",
+          "format": "int64",
+          "title": "NAV ask 가격"
+        },
+        "signalBid": {
+          "type": "string",
+          "format": "int64",
+          "title": "Signal bid 가격 (last)"
+        },
+        "signalAsk": {
+          "type": "string",
+          "format": "int64",
+          "title": "Signal ask 가격 (last)"
+        }
+      },
+      "title": "Pricing 상태"
+    },
+    "market_snipingSnipingWorkingOrdersState": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "미체결 주문 수"
+        },
+        "entryBidWorkingQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "진입 bid 미체결 수량"
+        },
+        "entryAskWorkingQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "진입 ask 미체결 수량"
+        },
+        "exitBidWorkingQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "청산 bid 미체결 수량"
+        },
+        "exitAskWorkingQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "청산 ask 미체결 수량"
+        }
+      },
+      "title": "Working Orders 상태"
     },
     "market_snipingStartMarketSnipingResponse": {
       "type": "object",

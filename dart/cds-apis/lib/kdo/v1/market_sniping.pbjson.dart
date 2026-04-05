@@ -454,3 +454,115 @@ final $typed_data.Uint8List streamMarketSnipingStatusRequestDescriptor = $conver
     'CiBTdHJlYW1NYXJrZXRTbmlwaW5nU3RhdHVzUmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bW'
     'JvbA==');
 
+@$core.Deprecated('Use streamSnipingEngineStateRequestDescriptor instead')
+const StreamSnipingEngineStateRequest$json = {
+  '1': 'StreamSnipingEngineStateRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `StreamSnipingEngineStateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamSnipingEngineStateRequestDescriptor = $convert.base64Decode(
+    'Ch9TdHJlYW1TbmlwaW5nRW5naW5lU3RhdGVSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm'
+    '9s');
+
+@$core.Deprecated('Use snipingEngineRuntimeStateDescriptor instead')
+const SnipingEngineRuntimeState$json = {
+  '1': 'SnipingEngineRuntimeState',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'timestamp', '3': 2, '4': 1, '5': 3, '10': 'timestamp'},
+    {'1': 'episode', '3': 3, '4': 1, '5': 9, '10': 'episode'},
+    {'1': 'strategy', '3': 4, '4': 1, '5': 9, '10': 'strategy'},
+    {'1': 'momentum', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.market_sniping.SnipingMomentumState', '10': 'momentum'},
+    {'1': 'position', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.market_sniping.SnipingPositionState', '10': 'position'},
+    {'1': 'working_orders', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.market_sniping.SnipingWorkingOrdersState', '10': 'workingOrders'},
+    {'1': 'pricing', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.market_sniping.SnipingPricingState', '10': 'pricing'},
+  ],
+};
+
+/// Descriptor for `SnipingEngineRuntimeState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List snipingEngineRuntimeStateDescriptor = $convert.base64Decode(
+    'ChlTbmlwaW5nRW5naW5lUnVudGltZVN0YXRlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhwKCX'
+    'RpbWVzdGFtcBgCIAEoA1IJdGltZXN0YW1wEhgKB2VwaXNvZGUYAyABKAlSB2VwaXNvZGUSGgoI'
+    'c3RyYXRlZ3kYBCABKAlSCHN0cmF0ZWd5EkcKCG1vbWVudHVtGAUgASgLMisua2RvLnYxLm1hcm'
+    'tldF9zbmlwaW5nLlNuaXBpbmdNb21lbnR1bVN0YXRlUghtb21lbnR1bRJHCghwb3NpdGlvbhgG'
+    'IAEoCzIrLmtkby52MS5tYXJrZXRfc25pcGluZy5TbmlwaW5nUG9zaXRpb25TdGF0ZVIIcG9zaX'
+    'Rpb24SVwoOd29ya2luZ19vcmRlcnMYByABKAsyMC5rZG8udjEubWFya2V0X3NuaXBpbmcuU25p'
+    'cGluZ1dvcmtpbmdPcmRlcnNTdGF0ZVINd29ya2luZ09yZGVycxJECgdwcmljaW5nGAggASgLMi'
+    'oua2RvLnYxLm1hcmtldF9zbmlwaW5nLlNuaXBpbmdQcmljaW5nU3RhdGVSB3ByaWNpbmc=');
+
+@$core.Deprecated('Use snipingMomentumStateDescriptor instead')
+const SnipingMomentumState$json = {
+  '1': 'SnipingMomentumState',
+  '2': [
+    {'1': 'direction', '3': 1, '4': 1, '5': 9, '10': 'direction'},
+    {'1': 'raw_ticks', '3': 2, '4': 1, '5': 1, '10': 'rawTicks'},
+    {'1': 'signal_ticks', '3': 3, '4': 1, '5': 5, '10': 'signalTicks'},
+    {'1': 'strength', '3': 4, '4': 1, '5': 1, '10': 'strength'},
+    {'1': 'sample_count', '3': 5, '4': 1, '5': 5, '10': 'sampleCount'},
+  ],
+};
+
+/// Descriptor for `SnipingMomentumState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List snipingMomentumStateDescriptor = $convert.base64Decode(
+    'ChRTbmlwaW5nTW9tZW50dW1TdGF0ZRIcCglkaXJlY3Rpb24YASABKAlSCWRpcmVjdGlvbhIbCg'
+    'lyYXdfdGlja3MYAiABKAFSCHJhd1RpY2tzEiEKDHNpZ25hbF90aWNrcxgDIAEoBVILc2lnbmFs'
+    'VGlja3MSGgoIc3RyZW5ndGgYBCABKAFSCHN0cmVuZ3RoEiEKDHNhbXBsZV9jb3VudBgFIAEoBV'
+    'ILc2FtcGxlQ291bnQ=');
+
+@$core.Deprecated('Use snipingPositionStateDescriptor instead')
+const SnipingPositionState$json = {
+  '1': 'SnipingPositionState',
+  '2': [
+    {'1': 'net_qty', '3': 1, '4': 1, '5': 3, '10': 'netQty'},
+    {'1': 'gross_buy_qty', '3': 2, '4': 1, '5': 3, '10': 'grossBuyQty'},
+    {'1': 'gross_sell_qty', '3': 3, '4': 1, '5': 3, '10': 'grossSellQty'},
+    {'1': 'avg_entry_price', '3': 4, '4': 1, '5': 3, '10': 'avgEntryPrice'},
+  ],
+};
+
+/// Descriptor for `SnipingPositionState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List snipingPositionStateDescriptor = $convert.base64Decode(
+    'ChRTbmlwaW5nUG9zaXRpb25TdGF0ZRIXCgduZXRfcXR5GAEgASgDUgZuZXRRdHkSIgoNZ3Jvc3'
+    'NfYnV5X3F0eRgCIAEoA1ILZ3Jvc3NCdXlRdHkSJAoOZ3Jvc3Nfc2VsbF9xdHkYAyABKANSDGdy'
+    'b3NzU2VsbFF0eRImCg9hdmdfZW50cnlfcHJpY2UYBCABKANSDWF2Z0VudHJ5UHJpY2U=');
+
+@$core.Deprecated('Use snipingWorkingOrdersStateDescriptor instead')
+const SnipingWorkingOrdersState$json = {
+  '1': 'SnipingWorkingOrdersState',
+  '2': [
+    {'1': 'count', '3': 1, '4': 1, '5': 5, '10': 'count'},
+    {'1': 'entry_bid_working_qty', '3': 2, '4': 1, '5': 3, '10': 'entryBidWorkingQty'},
+    {'1': 'entry_ask_working_qty', '3': 3, '4': 1, '5': 3, '10': 'entryAskWorkingQty'},
+    {'1': 'exit_bid_working_qty', '3': 4, '4': 1, '5': 3, '10': 'exitBidWorkingQty'},
+    {'1': 'exit_ask_working_qty', '3': 5, '4': 1, '5': 3, '10': 'exitAskWorkingQty'},
+  ],
+};
+
+/// Descriptor for `SnipingWorkingOrdersState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List snipingWorkingOrdersStateDescriptor = $convert.base64Decode(
+    'ChlTbmlwaW5nV29ya2luZ09yZGVyc1N0YXRlEhQKBWNvdW50GAEgASgFUgVjb3VudBIxChVlbn'
+    'RyeV9iaWRfd29ya2luZ19xdHkYAiABKANSEmVudHJ5QmlkV29ya2luZ1F0eRIxChVlbnRyeV9h'
+    'c2tfd29ya2luZ19xdHkYAyABKANSEmVudHJ5QXNrV29ya2luZ1F0eRIvChRleGl0X2JpZF93b3'
+    'JraW5nX3F0eRgEIAEoA1IRZXhpdEJpZFdvcmtpbmdRdHkSLwoUZXhpdF9hc2tfd29ya2luZ19x'
+    'dHkYBSABKANSEWV4aXRBc2tXb3JraW5nUXR5');
+
+@$core.Deprecated('Use snipingPricingStateDescriptor instead')
+const SnipingPricingState$json = {
+  '1': 'SnipingPricingState',
+  '2': [
+    {'1': 'nav_bid', '3': 1, '4': 1, '5': 3, '10': 'navBid'},
+    {'1': 'nav_ask', '3': 2, '4': 1, '5': 3, '10': 'navAsk'},
+    {'1': 'signal_bid', '3': 3, '4': 1, '5': 3, '10': 'signalBid'},
+    {'1': 'signal_ask', '3': 4, '4': 1, '5': 3, '10': 'signalAsk'},
+  ],
+};
+
+/// Descriptor for `SnipingPricingState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List snipingPricingStateDescriptor = $convert.base64Decode(
+    'ChNTbmlwaW5nUHJpY2luZ1N0YXRlEhcKB25hdl9iaWQYASABKANSBm5hdkJpZBIXCgduYXZfYX'
+    'NrGAIgASgDUgZuYXZBc2sSHQoKc2lnbmFsX2JpZBgDIAEoA1IJc2lnbmFsQmlkEh0KCnNpZ25h'
+    'bF9hc2sYBCABKANSCXNpZ25hbEFzaw==');
+

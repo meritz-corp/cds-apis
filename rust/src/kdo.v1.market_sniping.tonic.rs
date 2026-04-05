@@ -351,6 +351,36 @@ pub mod market_sniping_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn stream_sniping_engine_state(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamSnipingEngineStateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::SnipingEngineRuntimeState>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market_sniping.MarketSnipingService/StreamSnipingEngineState",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.market_sniping.MarketSnipingService",
+                        "StreamSnipingEngineState",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -427,6 +457,22 @@ pub mod market_sniping_service_server {
             request: tonic::Request<super::StreamMarketSnipingStatusRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamMarketSnipingStatusStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamSnipingEngineState method.
+        type StreamSnipingEngineStateStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::SnipingEngineRuntimeState,
+                    tonic::Status,
+                >,
+            >
+            + Send
+            + 'static;
+        async fn stream_sniping_engine_state(
+            &self,
+            request: tonic::Request<super::StreamSnipingEngineStateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamSnipingEngineStateStream>,
             tonic::Status,
         >;
     }
@@ -941,6 +987,61 @@ pub mod market_sniping_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StreamMarketSnipingStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market_sniping.MarketSnipingService/StreamSnipingEngineState" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamSnipingEngineStateSvc<T: MarketSnipingService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: MarketSnipingService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamSnipingEngineStateRequest,
+                    > for StreamSnipingEngineStateSvc<T> {
+                        type Response = super::SnipingEngineRuntimeState;
+                        type ResponseStream = T::StreamSnipingEngineStateStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::StreamSnipingEngineStateRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketSnipingService>::stream_sniping_engine_state(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamSnipingEngineStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

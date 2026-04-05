@@ -41,6 +41,8 @@ type MarketSnipingServiceClient interface {
 	GetMarketSnipingStatus(ctx context.Context, in *GetMarketSnipingStatusRequest, opts ...grpc.CallOption) (*MarketSnipingStatusMessage, error)
 	// Market Sniping 실시간 상태 스트리밍 (서버→클라이언트)
 	StreamMarketSnipingStatus(ctx context.Context, in *StreamMarketSnipingStatusRequest, opts ...grpc.CallOption) (MarketSnipingService_StreamMarketSnipingStatusClient, error)
+	// 엔진 런타임 상태 스트리밍 (1초 간격 폴링)
+	StreamSnipingEngineState(ctx context.Context, in *StreamSnipingEngineStateRequest, opts ...grpc.CallOption) (MarketSnipingService_StreamSnipingEngineStateClient, error)
 }
 
 type marketSnipingServiceClient struct {
@@ -155,6 +157,38 @@ func (x *marketSnipingServiceStreamMarketSnipingStatusClient) Recv() (*MarketSni
 	return m, nil
 }
 
+func (c *marketSnipingServiceClient) StreamSnipingEngineState(ctx context.Context, in *StreamSnipingEngineStateRequest, opts ...grpc.CallOption) (MarketSnipingService_StreamSnipingEngineStateClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketSnipingService_ServiceDesc.Streams[1], "/kdo.v1.market_sniping.MarketSnipingService/StreamSnipingEngineState", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &marketSnipingServiceStreamSnipingEngineStateClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MarketSnipingService_StreamSnipingEngineStateClient interface {
+	Recv() (*SnipingEngineRuntimeState, error)
+	grpc.ClientStream
+}
+
+type marketSnipingServiceStreamSnipingEngineStateClient struct {
+	grpc.ClientStream
+}
+
+func (x *marketSnipingServiceStreamSnipingEngineStateClient) Recv() (*SnipingEngineRuntimeState, error) {
+	m := new(SnipingEngineRuntimeState)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // MarketSnipingServiceServer is the server API for MarketSnipingService service.
 // All implementations must embed UnimplementedMarketSnipingServiceServer
 // for forward compatibility
@@ -177,6 +211,8 @@ type MarketSnipingServiceServer interface {
 	GetMarketSnipingStatus(context.Context, *GetMarketSnipingStatusRequest) (*MarketSnipingStatusMessage, error)
 	// Market Sniping 실시간 상태 스트리밍 (서버→클라이언트)
 	StreamMarketSnipingStatus(*StreamMarketSnipingStatusRequest, MarketSnipingService_StreamMarketSnipingStatusServer) error
+	// 엔진 런타임 상태 스트리밍 (1초 간격 폴링)
+	StreamSnipingEngineState(*StreamSnipingEngineStateRequest, MarketSnipingService_StreamSnipingEngineStateServer) error
 	mustEmbedUnimplementedMarketSnipingServiceServer()
 }
 
@@ -210,6 +246,9 @@ func (UnimplementedMarketSnipingServiceServer) GetMarketSnipingStatus(context.Co
 }
 func (UnimplementedMarketSnipingServiceServer) StreamMarketSnipingStatus(*StreamMarketSnipingStatusRequest, MarketSnipingService_StreamMarketSnipingStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMarketSnipingStatus not implemented")
+}
+func (UnimplementedMarketSnipingServiceServer) StreamSnipingEngineState(*StreamSnipingEngineStateRequest, MarketSnipingService_StreamSnipingEngineStateServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamSnipingEngineState not implemented")
 }
 func (UnimplementedMarketSnipingServiceServer) mustEmbedUnimplementedMarketSnipingServiceServer() {}
 
@@ -389,6 +428,27 @@ func (x *marketSnipingServiceStreamMarketSnipingStatusServer) Send(m *MarketSnip
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MarketSnipingService_StreamSnipingEngineState_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamSnipingEngineStateRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MarketSnipingServiceServer).StreamSnipingEngineState(m, &marketSnipingServiceStreamSnipingEngineStateServer{stream})
+}
+
+type MarketSnipingService_StreamSnipingEngineStateServer interface {
+	Send(*SnipingEngineRuntimeState) error
+	grpc.ServerStream
+}
+
+type marketSnipingServiceStreamSnipingEngineStateServer struct {
+	grpc.ServerStream
+}
+
+func (x *marketSnipingServiceStreamSnipingEngineStateServer) Send(m *SnipingEngineRuntimeState) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // MarketSnipingService_ServiceDesc is the grpc.ServiceDesc for MarketSnipingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -433,6 +493,11 @@ var MarketSnipingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamMarketSnipingStatus",
 			Handler:       _MarketSnipingService_StreamMarketSnipingStatus_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamSnipingEngineState",
+			Handler:       _MarketSnipingService_StreamSnipingEngineState_Handler,
 			ServerStreams: true,
 		},
 	},
