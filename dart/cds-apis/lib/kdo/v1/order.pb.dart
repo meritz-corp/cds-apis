@@ -34,6 +34,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $core.bool? isLp,
     $2.AmendMethodType? autoAmendStrategy,
     LimitPriceType? limitPriceType,
+    $2.OrderConditionType? orderCondition,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -45,6 +46,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (isLp != null) result.isLp = isLp;
     if (autoAmendStrategy != null) result.autoAmendStrategy = autoAmendStrategy;
     if (limitPriceType != null) result.limitPriceType = limitPriceType;
+    if (orderCondition != null) result.orderCondition = orderCondition;
     return result;
   }
 
@@ -63,6 +65,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
     ..e<$2.AmendMethodType>(8, _omitFieldNames ? '' : 'autoAmendStrategy', $pb.PbFieldType.OE, defaultOrMaker: $2.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $2.AmendMethodType.valueOf, enumValues: $2.AmendMethodType.values)
     ..e<LimitPriceType>(9, _omitFieldNames ? '' : 'limitPriceType', $pb.PbFieldType.OE, defaultOrMaker: LimitPriceType.LIMIT_PRICE_TYPE_UNSPECIFIED, valueOf: LimitPriceType.valueOf, enumValues: LimitPriceType.values)
+    ..e<$2.OrderConditionType>(10, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $2.OrderConditionType.valueOf, enumValues: $2.OrderConditionType.values)
     ..hasRequiredFields = false
   ;
 
@@ -172,6 +175,16 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasLimitPriceType() => $_has(8);
   @$pb.TagNumber(9)
   void clearLimitPriceType() => $_clearField(9);
+
+  /// 호가조건 (미지정 시 FAS, 일반 지정가)
+  @$pb.TagNumber(10)
+  $2.OrderConditionType get orderCondition => $_getN(9);
+  @$pb.TagNumber(10)
+  set orderCondition($2.OrderConditionType value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasOrderCondition() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearOrderCondition() => $_clearField(10);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {
@@ -256,6 +269,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     $core.bool? isLp,
     QuoteType? quoteType,
     $core.String? fundCode,
+    $2.OrderConditionType? orderCondition,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
@@ -265,6 +279,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     if (isLp != null) result.isLp = isLp;
     if (quoteType != null) result.quoteType = quoteType;
     if (fundCode != null) result.fundCode = fundCode;
+    if (orderCondition != null) result.orderCondition = orderCondition;
     return result;
   }
 
@@ -281,6 +296,7 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     ..aOB(7, _omitFieldNames ? '' : 'isLp')
     ..e<QuoteType>(8, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
     ..aOS(9, _omitFieldNames ? '' : 'fundCode')
+    ..e<$2.OrderConditionType>(10, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $2.OrderConditionType.valueOf, enumValues: $2.OrderConditionType.values)
     ..hasRequiredFields = false
   ;
 
@@ -370,6 +386,16 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(6);
   @$pb.TagNumber(9)
   void clearFundCode() => $_clearField(9);
+
+  /// 호가조건 (미지정 시 FAS, 일반 지정가)
+  @$pb.TagNumber(10)
+  $2.OrderConditionType get orderCondition => $_getN(7);
+  @$pb.TagNumber(10)
+  set orderCondition($2.OrderConditionType value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasOrderCondition() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearOrderCondition() => $_clearField(10);
 }
 
 class AmendOrderResponse extends $pb.GeneratedMessage {

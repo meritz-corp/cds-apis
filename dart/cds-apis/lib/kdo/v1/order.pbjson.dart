@@ -103,10 +103,12 @@ const SubmitOrderRequest$json = {
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
     {'1': 'auto_amend_strategy', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '9': 0, '10': 'autoAmendStrategy', '17': true},
     {'1': 'limit_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.order.LimitPriceType', '9': 1, '10': 'limitPriceType', '17': true},
+    {'1': 'order_condition', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderConditionType', '9': 2, '10': 'orderCondition', '17': true},
   ],
   '8': [
     {'1': '_auto_amend_strategy'},
     {'1': '_limit_price_type'},
+    {'1': '_order_condition'},
   ],
 };
 
@@ -120,7 +122,9 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     'TiQQECUgRpc0xwElMKE2F1dG9fYW1lbmRfc3RyYXRlZ3kYCCABKA4yHi5rZG8udjEuY29tbW9u'
     'LkFtZW5kTWV0aG9kVHlwZUgAUhFhdXRvQW1lbmRTdHJhdGVneYgBARJLChBsaW1pdF9wcmljZV'
     '90eXBlGAkgASgOMhwua2RvLnYxLm9yZGVyLkxpbWl0UHJpY2VUeXBlSAFSDmxpbWl0UHJpY2VU'
-    'eXBliAEBQhYKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5QhMKEV9saW1pdF9wcmljZV90eXBl');
+    'eXBliAEBEk8KD29yZGVyX2NvbmRpdGlvbhgKIAEoDjIhLmtkby52MS5jb21tb24uT3JkZXJDb2'
+    '5kaXRpb25UeXBlSAJSDm9yZGVyQ29uZGl0aW9uiAEBQhYKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5'
+    'QhMKEV9saW1pdF9wcmljZV90eXBlQhIKEF9vcmRlcl9jb25kaXRpb24=');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {
@@ -149,6 +153,10 @@ const AmendOrderRequest$json = {
     {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
     {'1': 'quote_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
     {'1': 'fund_code', '3': 9, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'order_condition', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderConditionType', '9': 0, '10': 'orderCondition', '17': true},
+  ],
+  '8': [
+    {'1': '_order_condition'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -164,7 +172,9 @@ final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'ASgJQgTiQQECUgVwcmljZRIyCgRzaWRlGAYgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZG'
     'VCBOJBAQJSBHNpZGUSGQoFaXNfbHAYByABKAhCBOJBAQJSBGlzTHASPAoKcXVvdGVfdHlwZRgI'
     'IAEoDjIXLmtkby52MS5vcmRlci5RdW90ZVR5cGVCBOJBAQJSCXF1b3RlVHlwZRIhCglmdW5kX2'
-    'NvZGUYCSABKAlCBOJBAQJSCGZ1bmRDb2RlSgQIAhADSgQIBBAFUghxdWFudGl0eQ==');
+    'NvZGUYCSABKAlCBOJBAQJSCGZ1bmRDb2RlEk8KD29yZGVyX2NvbmRpdGlvbhgKIAEoDjIhLmtk'
+    'by52MS5jb21tb24uT3JkZXJDb25kaXRpb25UeXBlSABSDm9yZGVyQ29uZGl0aW9uiAEBQhIKEF'
+    '9vcmRlcl9jb25kaXRpb25KBAgCEANKBAgEEAVSCHF1YW50aXR5');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {

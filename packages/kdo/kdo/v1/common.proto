@@ -41,6 +41,19 @@ enum TradingSession {
   TRADING_SESSION_CLOSED = 5;           // 장 종료
 }
 
+// 호가조건코드 (KRX)
+// 주문 체결 방식을 지정하는 조건
+enum OrderConditionType {
+  // 미지정 (기본값: FAS로 처리, 하위 호환)
+  ORDER_CONDITION_TYPE_UNSPECIFIED = 0;
+  // Fill-and-Store: 체결 후 잔량은 호가창에 유지 (일반 지정가) — KRX code "0"
+  ORDER_CONDITION_TYPE_FAS = 1;
+  // Fill-and-Kill (IOC): 체결 후 잔량 즉시 취소 — KRX code "3"
+  ORDER_CONDITION_TYPE_FAK = 2;
+  // Fill-or-Kill: 전량 체결 아니면 전량 취소 — KRX code "4"
+  ORDER_CONDITION_TYPE_FOK = 3;
+}
+
 // 자동정정 전략 유형
 enum AmendMethodType {
   // 미지정 (기본값: TIMED_MARKET으로 처리)

@@ -101,6 +101,31 @@ class TradingSession extends $pb.ProtobufEnum {
   const TradingSession._(super.value, super.name);
 }
 
+/// 호가조건코드 (KRX)
+/// 주문 체결 방식을 지정하는 조건
+class OrderConditionType extends $pb.ProtobufEnum {
+  /// 미지정 (기본값: FAS로 처리, 하위 호환)
+  static const OrderConditionType ORDER_CONDITION_TYPE_UNSPECIFIED = OrderConditionType._(0, _omitEnumNames ? '' : 'ORDER_CONDITION_TYPE_UNSPECIFIED');
+  /// Fill-and-Store: 체결 후 잔량은 호가창에 유지 (일반 지정가) — KRX code "0"
+  static const OrderConditionType ORDER_CONDITION_TYPE_FAS = OrderConditionType._(1, _omitEnumNames ? '' : 'ORDER_CONDITION_TYPE_FAS');
+  /// Fill-and-Kill (IOC): 체결 후 잔량 즉시 취소 — KRX code "3"
+  static const OrderConditionType ORDER_CONDITION_TYPE_FAK = OrderConditionType._(2, _omitEnumNames ? '' : 'ORDER_CONDITION_TYPE_FAK');
+  /// Fill-or-Kill: 전량 체결 아니면 전량 취소 — KRX code "4"
+  static const OrderConditionType ORDER_CONDITION_TYPE_FOK = OrderConditionType._(3, _omitEnumNames ? '' : 'ORDER_CONDITION_TYPE_FOK');
+
+  static const $core.List<OrderConditionType> values = <OrderConditionType> [
+    ORDER_CONDITION_TYPE_UNSPECIFIED,
+    ORDER_CONDITION_TYPE_FAS,
+    ORDER_CONDITION_TYPE_FAK,
+    ORDER_CONDITION_TYPE_FOK,
+  ];
+
+  static final $core.List<OrderConditionType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static OrderConditionType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderConditionType._(super.value, super.name);
+}
+
 /// 자동정정 전략 유형
 class AmendMethodType extends $pb.ProtobufEnum {
   /// 미지정 (기본값: TIMED_MARKET으로 처리)

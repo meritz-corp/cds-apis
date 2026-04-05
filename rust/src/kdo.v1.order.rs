@@ -32,6 +32,9 @@ pub struct SubmitOrderRequest {
     /// 지정가 가격 결정 방식 (미지정 시 price 필드의 가격 사용)
     #[prost(enumeration="LimitPriceType", optional, tag="9")]
     pub limit_price_type: ::core::option::Option<i32>,
+    /// 호가조건 (미지정 시 FAS, 일반 지정가)
+    #[prost(enumeration="super::common::OrderConditionType", optional, tag="10")]
+    pub order_condition: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -72,6 +75,9 @@ pub struct AmendOrderRequest {
     /// 펀드 코드 (필수)
     #[prost(string, tag="9")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 호가조건 (미지정 시 FAS, 일반 지정가)
+    #[prost(enumeration="super::common::OrderConditionType", optional, tag="10")]
+    pub order_condition: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

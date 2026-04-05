@@ -84,6 +84,23 @@ final $typed_data.Uint8List tradingSessionDescriptor = $convert.base64Decode(
     'Q1RJT04QAhIbChdUUkFESU5HX1NFU1NJT05fUkVHVUxBUhADEiMKH1RSQURJTkdfU0VTU0lPTl'
     '9DTE9TSU5HX0FVQ1RJT04QBBIaChZUUkFESU5HX1NFU1NJT05fQ0xPU0VEEAU=');
 
+@$core.Deprecated('Use orderConditionTypeDescriptor instead')
+const OrderConditionType$json = {
+  '1': 'OrderConditionType',
+  '2': [
+    {'1': 'ORDER_CONDITION_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'ORDER_CONDITION_TYPE_FAS', '2': 1},
+    {'1': 'ORDER_CONDITION_TYPE_FAK', '2': 2},
+    {'1': 'ORDER_CONDITION_TYPE_FOK', '2': 3},
+  ],
+};
+
+/// Descriptor for `OrderConditionType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List orderConditionTypeDescriptor = $convert.base64Decode(
+    'ChJPcmRlckNvbmRpdGlvblR5cGUSJAogT1JERVJfQ09ORElUSU9OX1RZUEVfVU5TUEVDSUZJRU'
+    'QQABIcChhPUkRFUl9DT05ESVRJT05fVFlQRV9GQVMQARIcChhPUkRFUl9DT05ESVRJT05fVFlQ'
+    'RV9GQUsQAhIcChhPUkRFUl9DT05ESVRJT05fVFlQRV9GT0sQAw==');
+
 @$core.Deprecated('Use amendMethodTypeDescriptor instead')
 const AmendMethodType$json = {
   '1': 'AmendMethodType',

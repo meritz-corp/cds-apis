@@ -148,6 +148,44 @@ impl TradingSession {
         }
     }
 }
+/// 호가조건코드 (KRX)
+/// 주문 체결 방식을 지정하는 조건
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum OrderConditionType {
+    /// 미지정 (기본값: FAS로 처리, 하위 호환)
+    Unspecified = 0,
+    /// Fill-and-Store: 체결 후 잔량은 호가창에 유지 (일반 지정가) — KRX code "0"
+    Fas = 1,
+    /// Fill-and-Kill (IOC): 체결 후 잔량 즉시 취소 — KRX code "3"
+    Fak = 2,
+    /// Fill-or-Kill: 전량 체결 아니면 전량 취소 — KRX code "4"
+    Fok = 3,
+}
+impl OrderConditionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            OrderConditionType::Unspecified => "ORDER_CONDITION_TYPE_UNSPECIFIED",
+            OrderConditionType::Fas => "ORDER_CONDITION_TYPE_FAS",
+            OrderConditionType::Fak => "ORDER_CONDITION_TYPE_FAK",
+            OrderConditionType::Fok => "ORDER_CONDITION_TYPE_FOK",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ORDER_CONDITION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "ORDER_CONDITION_TYPE_FAS" => Some(Self::Fas),
+            "ORDER_CONDITION_TYPE_FAK" => Some(Self::Fak),
+            "ORDER_CONDITION_TYPE_FOK" => Some(Self::Fok),
+            _ => None,
+        }
+    }
+}
 /// 자동정정 전략 유형
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

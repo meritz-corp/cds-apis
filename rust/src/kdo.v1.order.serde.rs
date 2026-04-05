@@ -28,6 +28,9 @@ impl serde::Serialize for AmendOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.AmendOrderRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -56,6 +59,11 @@ impl serde::Serialize for AmendOrderRequest {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
+        if let Some(v) = self.order_condition.as_ref() {
+            let v = super::common::OrderConditionType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("order_condition", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -77,6 +85,8 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             "quoteType",
             "fund_code",
             "fundCode",
+            "order_condition",
+            "orderCondition",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -88,6 +98,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
             IsLp,
             QuoteType,
             FundCode,
+            OrderCondition,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -117,6 +128,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             "quoteType" | "quote_type" => Ok(GeneratedField::QuoteType),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "orderCondition" | "order_condition" => Ok(GeneratedField::OrderCondition),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -143,6 +155,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                 let mut is_lp__ = None;
                 let mut quote_type__ = None;
                 let mut fund_code__ = None;
+                let mut order_condition__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::OriginalOrderId => {
@@ -189,6 +202,12 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::OrderCondition => {
+                            if order_condition__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderCondition"));
+                            }
+                            order_condition__ = map_.next_value::<::std::option::Option<super::common::OrderConditionType>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -202,6 +221,7 @@ impl<'de> serde::Deserialize<'de> for AmendOrderRequest {
                     is_lp: is_lp__.unwrap_or_default(),
                     quote_type: quote_type__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    order_condition: order_condition__,
                 })
             }
         }
@@ -2845,6 +2865,9 @@ impl serde::Serialize for SubmitOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.SubmitOrderRequest", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -2883,6 +2906,11 @@ impl serde::Serialize for SubmitOrderRequest {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("limit_price_type", &v)?;
         }
+        if let Some(v) = self.order_condition.as_ref() {
+            let v = super::common::OrderConditionType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("order_condition", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2907,6 +2935,8 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             "autoAmendStrategy",
             "limit_price_type",
             "limitPriceType",
+            "order_condition",
+            "orderCondition",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2920,6 +2950,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             IsLp,
             AutoAmendStrategy,
             LimitPriceType,
+            OrderCondition,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2951,6 +2982,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             "autoAmendStrategy" | "auto_amend_strategy" => Ok(GeneratedField::AutoAmendStrategy),
                             "limitPriceType" | "limit_price_type" => Ok(GeneratedField::LimitPriceType),
+                            "orderCondition" | "order_condition" => Ok(GeneratedField::OrderCondition),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2979,6 +3011,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                 let mut is_lp__ = None;
                 let mut auto_amend_strategy__ = None;
                 let mut limit_price_type__ = None;
+                let mut order_condition__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -3037,6 +3070,12 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             }
                             limit_price_type__ = map_.next_value::<::std::option::Option<LimitPriceType>>()?.map(|x| x as i32);
                         }
+                        GeneratedField::OrderCondition => {
+                            if order_condition__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderCondition"));
+                            }
+                            order_condition__ = map_.next_value::<::std::option::Option<super::common::OrderConditionType>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3052,6 +3091,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                     is_lp: is_lp__.unwrap_or_default(),
                     auto_amend_strategy: auto_amend_strategy__,
                     limit_price_type: limit_price_type__,
+                    order_condition: order_condition__,
                 })
             }
         }

@@ -116,6 +116,9 @@ message SubmitOrderRequest {
 
   // 지정가 가격 결정 방식 (미지정 시 price 필드의 가격 사용)
   optional LimitPriceType limit_price_type = 9;
+
+  // 호가조건 (미지정 시 FAS, 일반 지정가)
+  optional kdo.v1.common.OrderConditionType order_condition = 10;
 }
 
 message SubmitOrderResponse {
@@ -159,6 +162,9 @@ message AmendOrderRequest {
 
   // 펀드 코드 (필수)
   string fund_code = 9 [(google.api.field_behavior) = REQUIRED];
+
+  // 호가조건 (미지정 시 FAS, 일반 지정가)
+  optional kdo.v1.common.OrderConditionType order_condition = 10;
 }
 
 message AmendOrderResponse {

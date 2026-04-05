@@ -159,6 +159,83 @@ impl<'de> serde::Deserialize<'de> for MarketType {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for OrderConditionType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "ORDER_CONDITION_TYPE_UNSPECIFIED",
+            Self::Fas => "ORDER_CONDITION_TYPE_FAS",
+            Self::Fak => "ORDER_CONDITION_TYPE_FAK",
+            Self::Fok => "ORDER_CONDITION_TYPE_FOK",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrderConditionType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ORDER_CONDITION_TYPE_UNSPECIFIED",
+            "ORDER_CONDITION_TYPE_FAS",
+            "ORDER_CONDITION_TYPE_FAK",
+            "ORDER_CONDITION_TYPE_FOK",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrderConditionType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ORDER_CONDITION_TYPE_UNSPECIFIED" => Ok(OrderConditionType::Unspecified),
+                    "ORDER_CONDITION_TYPE_FAS" => Ok(OrderConditionType::Fas),
+                    "ORDER_CONDITION_TYPE_FAK" => Ok(OrderConditionType::Fak),
+                    "ORDER_CONDITION_TYPE_FOK" => Ok(OrderConditionType::Fok),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for OrderSide {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
