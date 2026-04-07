@@ -264,6 +264,9 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? askAdjustment,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
+    $fixnum.Int64? bidBasis,
+    $fixnum.Int64? askBasis,
+    MarketMakingNavConfig? navConfig,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
@@ -276,6 +279,9 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
+    if (bidBasis != null) result.bidBasis = bidBasis;
+    if (askBasis != null) result.askBasis = askBasis;
+    if (navConfig != null) result.navConfig = navConfig;
     return result;
   }
 
@@ -295,6 +301,9 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aInt64(11, _omitFieldNames ? '' : 'askAdjustment')
     ..aInt64(12, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(13, _omitFieldNames ? '' : 'askQuantity')
+    ..aInt64(14, _omitFieldNames ? '' : 'bidBasis')
+    ..aInt64(15, _omitFieldNames ? '' : 'askBasis')
+    ..aOM<MarketMakingNavConfig>(16, _omitFieldNames ? '' : 'navConfig', subBuilder: MarketMakingNavConfig.create)
     ..hasRequiredFields = false
   ;
 
@@ -422,6 +431,38 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasAskQuantity() => $_has(9);
   @$pb.TagNumber(13)
   void clearAskQuantity() => $_clearField(13);
+
+  /// NAV 계산용 bid basis (Price internal representation)
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get bidBasis => $_getI64(10);
+  @$pb.TagNumber(14)
+  set bidBasis($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(14)
+  $core.bool hasBidBasis() => $_has(10);
+  @$pb.TagNumber(14)
+  void clearBidBasis() => $_clearField(14);
+
+  /// NAV 계산용 ask basis (Price internal representation)
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get askBasis => $_getI64(11);
+  @$pb.TagNumber(15)
+  set askBasis($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(15)
+  $core.bool hasAskBasis() => $_has(11);
+  @$pb.TagNumber(15)
+  void clearAskBasis() => $_clearField(15);
+
+  /// NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
+  @$pb.TagNumber(16)
+  MarketMakingNavConfig get navConfig => $_getN(12);
+  @$pb.TagNumber(16)
+  set navConfig(MarketMakingNavConfig value) => $_setField(16, value);
+  @$pb.TagNumber(16)
+  $core.bool hasNavConfig() => $_has(12);
+  @$pb.TagNumber(16)
+  void clearNavConfig() => $_clearField(16);
+  @$pb.TagNumber(16)
+  MarketMakingNavConfig ensureNavConfig() => $_ensure(12);
 }
 
 /// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
@@ -454,6 +495,291 @@ class MarketMakingSkew extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static MarketMakingSkew getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingSkew>(create);
   static MarketMakingSkew? _defaultInstance;
+}
+
+enum MarketMakingNavConfig_Pricing {
+  pdfNavHedge, 
+  indexTrackingHedge, 
+  futureBasis, 
+  leverageFuture, 
+  notSet
+}
+
+/// NAV pricing 상세 설정
+class MarketMakingNavConfig extends $pb.GeneratedMessage {
+  factory MarketMakingNavConfig({
+    EtfPricingPdfNavHedge? pdfNavHedge,
+    EtfPricingIndexTrackingHedge? indexTrackingHedge,
+    EtfPricingFutureBasis? futureBasis,
+    EtfPricingLeverageFuture? leverageFuture,
+  }) {
+    final result = create();
+    if (pdfNavHedge != null) result.pdfNavHedge = pdfNavHedge;
+    if (indexTrackingHedge != null) result.indexTrackingHedge = indexTrackingHedge;
+    if (futureBasis != null) result.futureBasis = futureBasis;
+    if (leverageFuture != null) result.leverageFuture = leverageFuture;
+    return result;
+  }
+
+  MarketMakingNavConfig._();
+
+  factory MarketMakingNavConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingNavConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static const $core.Map<$core.int, MarketMakingNavConfig_Pricing> _MarketMakingNavConfig_PricingByTag = {
+    1 : MarketMakingNavConfig_Pricing.pdfNavHedge,
+    2 : MarketMakingNavConfig_Pricing.indexTrackingHedge,
+    3 : MarketMakingNavConfig_Pricing.futureBasis,
+    4 : MarketMakingNavConfig_Pricing.leverageFuture,
+    0 : MarketMakingNavConfig_Pricing.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingNavConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3, 4])
+    ..aOM<EtfPricingPdfNavHedge>(1, _omitFieldNames ? '' : 'pdfNavHedge', subBuilder: EtfPricingPdfNavHedge.create)
+    ..aOM<EtfPricingIndexTrackingHedge>(2, _omitFieldNames ? '' : 'indexTrackingHedge', subBuilder: EtfPricingIndexTrackingHedge.create)
+    ..aOM<EtfPricingFutureBasis>(3, _omitFieldNames ? '' : 'futureBasis', subBuilder: EtfPricingFutureBasis.create)
+    ..aOM<EtfPricingLeverageFuture>(4, _omitFieldNames ? '' : 'leverageFuture', subBuilder: EtfPricingLeverageFuture.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingNavConfig clone() => MarketMakingNavConfig()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingNavConfig copyWith(void Function(MarketMakingNavConfig) updates) => super.copyWith((message) => updates(message as MarketMakingNavConfig)) as MarketMakingNavConfig;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingNavConfig create() => MarketMakingNavConfig._();
+  @$core.override
+  MarketMakingNavConfig createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingNavConfig> createRepeated() => $pb.PbList<MarketMakingNavConfig>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingNavConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingNavConfig>(create);
+  static MarketMakingNavConfig? _defaultInstance;
+
+  MarketMakingNavConfig_Pricing whichPricing() => _MarketMakingNavConfig_PricingByTag[$_whichOneof(0)]!;
+  void clearPricing() => $_clearField($_whichOneof(0));
+
+  /// PDF 기반 nav 계산 및 헷지 프라이싱
+  @$pb.TagNumber(1)
+  EtfPricingPdfNavHedge get pdfNavHedge => $_getN(0);
+  @$pb.TagNumber(1)
+  set pdfNavHedge(EtfPricingPdfNavHedge value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPdfNavHedge() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPdfNavHedge() => $_clearField(1);
+  @$pb.TagNumber(1)
+  EtfPricingPdfNavHedge ensurePdfNavHedge() => $_ensure(0);
+
+  /// 지수 추종 헷지 프라이싱
+  @$pb.TagNumber(2)
+  EtfPricingIndexTrackingHedge get indexTrackingHedge => $_getN(1);
+  @$pb.TagNumber(2)
+  set indexTrackingHedge(EtfPricingIndexTrackingHedge value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasIndexTrackingHedge() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIndexTrackingHedge() => $_clearField(2);
+  @$pb.TagNumber(2)
+  EtfPricingIndexTrackingHedge ensureIndexTrackingHedge() => $_ensure(1);
+
+  /// 선물 베이시스 기반 프라이싱
+  @$pb.TagNumber(3)
+  EtfPricingFutureBasis get futureBasis => $_getN(2);
+  @$pb.TagNumber(3)
+  set futureBasis(EtfPricingFutureBasis value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFutureBasis() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFutureBasis() => $_clearField(3);
+  @$pb.TagNumber(3)
+  EtfPricingFutureBasis ensureFutureBasis() => $_ensure(2);
+
+  /// 레버리지 선물 기반 프라이싱
+  @$pb.TagNumber(4)
+  EtfPricingLeverageFuture get leverageFuture => $_getN(3);
+  @$pb.TagNumber(4)
+  set leverageFuture(EtfPricingLeverageFuture value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasLeverageFuture() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLeverageFuture() => $_clearField(4);
+  @$pb.TagNumber(4)
+  EtfPricingLeverageFuture ensureLeverageFuture() => $_ensure(3);
+}
+
+/// EtfPricing::PdfNavHedge
+class EtfPricingPdfNavHedge extends $pb.GeneratedMessage {
+  factory EtfPricingPdfNavHedge() => create();
+
+  EtfPricingPdfNavHedge._();
+
+  factory EtfPricingPdfNavHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfPricingPdfNavHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingPdfNavHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingPdfNavHedge clone() => EtfPricingPdfNavHedge()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingPdfNavHedge copyWith(void Function(EtfPricingPdfNavHedge) updates) => super.copyWith((message) => updates(message as EtfPricingPdfNavHedge)) as EtfPricingPdfNavHedge;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingPdfNavHedge create() => EtfPricingPdfNavHedge._();
+  @$core.override
+  EtfPricingPdfNavHedge createEmptyInstance() => create();
+  static $pb.PbList<EtfPricingPdfNavHedge> createRepeated() => $pb.PbList<EtfPricingPdfNavHedge>();
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingPdfNavHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingPdfNavHedge>(create);
+  static EtfPricingPdfNavHedge? _defaultInstance;
+}
+
+/// EtfPricing::IndexTrackingHedge
+class EtfPricingIndexTrackingHedge extends $pb.GeneratedMessage {
+  factory EtfPricingIndexTrackingHedge() => create();
+
+  EtfPricingIndexTrackingHedge._();
+
+  factory EtfPricingIndexTrackingHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfPricingIndexTrackingHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingIndexTrackingHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingIndexTrackingHedge clone() => EtfPricingIndexTrackingHedge()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingIndexTrackingHedge copyWith(void Function(EtfPricingIndexTrackingHedge) updates) => super.copyWith((message) => updates(message as EtfPricingIndexTrackingHedge)) as EtfPricingIndexTrackingHedge;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingIndexTrackingHedge create() => EtfPricingIndexTrackingHedge._();
+  @$core.override
+  EtfPricingIndexTrackingHedge createEmptyInstance() => create();
+  static $pb.PbList<EtfPricingIndexTrackingHedge> createRepeated() => $pb.PbList<EtfPricingIndexTrackingHedge>();
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingIndexTrackingHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingIndexTrackingHedge>(create);
+  static EtfPricingIndexTrackingHedge? _defaultInstance;
+}
+
+/// EtfPricing::FutureBasis { prev_index }
+class EtfPricingFutureBasis extends $pb.GeneratedMessage {
+  factory EtfPricingFutureBasis({
+    $fixnum.Int64? prevIndex,
+  }) {
+    final result = create();
+    if (prevIndex != null) result.prevIndex = prevIndex;
+    return result;
+  }
+
+  EtfPricingFutureBasis._();
+
+  factory EtfPricingFutureBasis.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfPricingFutureBasis.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingFutureBasis', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'prevIndex')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingFutureBasis clone() => EtfPricingFutureBasis()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingFutureBasis copyWith(void Function(EtfPricingFutureBasis) updates) => super.copyWith((message) => updates(message as EtfPricingFutureBasis)) as EtfPricingFutureBasis;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingFutureBasis create() => EtfPricingFutureBasis._();
+  @$core.override
+  EtfPricingFutureBasis createEmptyInstance() => create();
+  static $pb.PbList<EtfPricingFutureBasis> createRepeated() => $pb.PbList<EtfPricingFutureBasis>();
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingFutureBasis getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingFutureBasis>(create);
+  static EtfPricingFutureBasis? _defaultInstance;
+
+  /// 이전 지수 (Price internal representation)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get prevIndex => $_getI64(0);
+  @$pb.TagNumber(1)
+  set prevIndex($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPrevIndex() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPrevIndex() => $_clearField(1);
+}
+
+/// EtfPricing::LeverageFuture { prev_index, prev_future }
+class EtfPricingLeverageFuture extends $pb.GeneratedMessage {
+  factory EtfPricingLeverageFuture({
+    $fixnum.Int64? prevIndex,
+    $fixnum.Int64? prevFuture,
+  }) {
+    final result = create();
+    if (prevIndex != null) result.prevIndex = prevIndex;
+    if (prevFuture != null) result.prevFuture = prevFuture;
+    return result;
+  }
+
+  EtfPricingLeverageFuture._();
+
+  factory EtfPricingLeverageFuture.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfPricingLeverageFuture.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingLeverageFuture', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'prevIndex')
+    ..aInt64(2, _omitFieldNames ? '' : 'prevFuture')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingLeverageFuture clone() => EtfPricingLeverageFuture()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPricingLeverageFuture copyWith(void Function(EtfPricingLeverageFuture) updates) => super.copyWith((message) => updates(message as EtfPricingLeverageFuture)) as EtfPricingLeverageFuture;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingLeverageFuture create() => EtfPricingLeverageFuture._();
+  @$core.override
+  EtfPricingLeverageFuture createEmptyInstance() => create();
+  static $pb.PbList<EtfPricingLeverageFuture> createRepeated() => $pb.PbList<EtfPricingLeverageFuture>();
+  @$core.pragma('dart2js:noInline')
+  static EtfPricingLeverageFuture getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingLeverageFuture>(create);
+  static EtfPricingLeverageFuture? _defaultInstance;
+
+  /// 이전 지수 (Price internal representation)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get prevIndex => $_getI64(0);
+  @$pb.TagNumber(1)
+  set prevIndex($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPrevIndex() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPrevIndex() => $_clearField(1);
+
+  /// 이전 선물 (Price internal representation)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get prevFuture => $_getI64(1);
+  @$pb.TagNumber(2)
+  set prevFuture($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPrevFuture() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrevFuture() => $_clearField(2);
 }
 
 /// Trade Analyzer 설정

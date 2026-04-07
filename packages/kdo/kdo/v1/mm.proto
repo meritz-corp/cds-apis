@@ -219,6 +219,15 @@ message MarketMakingConfiguration {
 
   // 레벨당 매도 수량
   int64 ask_quantity = 13;
+
+  // NAV 계산용 bid basis (Price internal representation)
+  int64 bid_basis = 14;
+
+  // NAV 계산용 ask basis (Price internal representation)
+  int64 ask_basis = 15;
+
+  // NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
+  MarketMakingNavConfig nav_config = 16;
 }
 
 // reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
@@ -227,6 +236,45 @@ message MarketMakingSkew {
   // reserved: 모든 필드 deprecated
   reserved 1, 2, 3;
   reserved "mode", "trigger_amt", "skew_unit";
+}
+
+// NAV pricing 상세 설정
+message MarketMakingNavConfig {
+  // EtfPricing 전략 (oneof)
+  oneof pricing {
+    // PDF 기반 nav 계산 및 헷지 프라이싱
+    EtfPricingPdfNavHedge pdf_nav_hedge = 1;
+
+    // 지수 추종 헷지 프라이싱
+    EtfPricingIndexTrackingHedge index_tracking_hedge = 2;
+
+    // 선물 베이시스 기반 프라이싱
+    EtfPricingFutureBasis future_basis = 3;
+
+    // 레버리지 선물 기반 프라이싱
+    EtfPricingLeverageFuture leverage_future = 4;
+  }
+}
+
+// EtfPricing::PdfNavHedge
+message EtfPricingPdfNavHedge {}
+
+// EtfPricing::IndexTrackingHedge
+message EtfPricingIndexTrackingHedge {}
+
+// EtfPricing::FutureBasis { prev_index }
+message EtfPricingFutureBasis {
+  // 이전 지수 (Price internal representation)
+  int64 prev_index = 1;
+}
+
+// EtfPricing::LeverageFuture { prev_index, prev_future }
+message EtfPricingLeverageFuture {
+  // 이전 지수 (Price internal representation)
+  int64 prev_index = 1;
+
+  // 이전 선물 (Price internal representation)
+  int64 prev_future = 2;
 }
 
 // Trade Analyzer 설정

@@ -515,6 +515,41 @@
     }
   },
   "definitions": {
+    "mmEtfPricingFutureBasis": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "string",
+          "format": "int64",
+          "title": "이전 지수 (Price internal representation)"
+        }
+      },
+      "title": "EtfPricing::FutureBasis { prev_index }"
+    },
+    "mmEtfPricingIndexTrackingHedge": {
+      "type": "object",
+      "title": "EtfPricing::IndexTrackingHedge"
+    },
+    "mmEtfPricingLeverageFuture": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "string",
+          "format": "int64",
+          "title": "이전 지수 (Price internal representation)"
+        },
+        "prevFuture": {
+          "type": "string",
+          "format": "int64",
+          "title": "이전 선물 (Price internal representation)"
+        }
+      },
+      "title": "EtfPricing::LeverageFuture { prev_index, prev_future }"
+    },
+    "mmEtfPricingPdfNavHedge": {
+      "type": "object",
+      "title": "EtfPricing::PdfNavHedge"
+    },
     "mmExposureBalancerState": {
       "type": "object",
       "properties": {
@@ -640,6 +675,20 @@
           "type": "string",
           "format": "int64",
           "title": "레벨당 매도 수량"
+        },
+        "bidBasis": {
+          "type": "string",
+          "format": "int64",
+          "title": "NAV 계산용 bid basis (Price internal representation)"
+        },
+        "askBasis": {
+          "type": "string",
+          "format": "int64",
+          "title": "NAV 계산용 ask basis (Price internal representation)"
+        },
+        "navConfig": {
+          "$ref": "#/definitions/mmMarketMakingNavConfig",
+          "title": "NAV pricing 상세 설정 (pricing = \"nav\" 일 때 사용)"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -712,6 +761,28 @@
         }
       },
       "title": "Momentum 설정"
+    },
+    "mmMarketMakingNavConfig": {
+      "type": "object",
+      "properties": {
+        "pdfNavHedge": {
+          "$ref": "#/definitions/mmEtfPricingPdfNavHedge",
+          "title": "PDF 기반 nav 계산 및 헷지 프라이싱"
+        },
+        "indexTrackingHedge": {
+          "$ref": "#/definitions/mmEtfPricingIndexTrackingHedge",
+          "title": "지수 추종 헷지 프라이싱"
+        },
+        "futureBasis": {
+          "$ref": "#/definitions/mmEtfPricingFutureBasis",
+          "title": "선물 베이시스 기반 프라이싱"
+        },
+        "leverageFuture": {
+          "$ref": "#/definitions/mmEtfPricingLeverageFuture",
+          "title": "레버리지 선물 기반 프라이싱"
+        }
+      },
+      "title": "NAV pricing 상세 설정"
     },
     "mmMarketMakingOrderbookData": {
       "type": "object",

@@ -107,6 +107,9 @@ const MarketMakingConfiguration$json = {
     {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 3, '10': 'askAdjustment'},
     {'1': 'bid_quantity', '3': 12, '4': 1, '5': 3, '10': 'bidQuantity'},
     {'1': 'ask_quantity', '3': 13, '4': 1, '5': 3, '10': 'askQuantity'},
+    {'1': 'bid_basis', '3': 14, '4': 1, '5': 3, '10': 'bidBasis'},
+    {'1': 'ask_basis', '3': 15, '4': 1, '5': 3, '10': 'askBasis'},
+    {'1': 'nav_config', '3': 16, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingNavConfig', '10': 'navConfig'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -126,7 +129,10 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'RXhwb3N1cmVCYWxhbmNlclIQZXhwb3N1cmVCYWxhbmNlchIlCg5iaWRfYWRqdXN0bWVudBgKIA'
     'EoA1INYmlkQWRqdXN0bWVudBIlCg5hc2tfYWRqdXN0bWVudBgLIAEoA1INYXNrQWRqdXN0bWVu'
     'dBIhCgxiaWRfcXVhbnRpdHkYDCABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFudGl0eRgNIA'
-    'EoA1ILYXNrUXVhbnRpdHlKBAgCEANKBAgJEApSBHNrZXdSEmludmVudG9yeV9iYWxhbmNlcg==');
+    'EoA1ILYXNrUXVhbnRpdHkSGwoJYmlkX2Jhc2lzGA4gASgDUghiaWRCYXNpcxIbCglhc2tfYmFz'
+    'aXMYDyABKANSCGFza0Jhc2lzEj8KCm5hdl9jb25maWcYECABKAsyIC5rZG8udjEubW0uTWFya2'
+    'V0TWFraW5nTmF2Q29uZmlnUgluYXZDb25maWdKBAgCEANKBAgJEApSBHNrZXdSEmludmVudG9y'
+    'eV9iYWxhbmNlcg==');
 
 @$core.Deprecated('Use marketMakingSkewDescriptor instead')
 const MarketMakingSkew$json = {
@@ -143,6 +149,74 @@ const MarketMakingSkew$json = {
 final $typed_data.Uint8List marketMakingSkewDescriptor = $convert.base64Decode(
     'ChBNYXJrZXRNYWtpbmdTa2V3SgQIARACSgQIAhADSgQIAxAEUgRtb2RlUgt0cmlnZ2VyX2FtdF'
     'IJc2tld191bml0');
+
+@$core.Deprecated('Use marketMakingNavConfigDescriptor instead')
+const MarketMakingNavConfig$json = {
+  '1': 'MarketMakingNavConfig',
+  '2': [
+    {'1': 'pdf_nav_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingPdfNavHedge', '9': 0, '10': 'pdfNavHedge'},
+    {'1': 'index_tracking_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingIndexTrackingHedge', '9': 0, '10': 'indexTrackingHedge'},
+    {'1': 'future_basis', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingFutureBasis', '9': 0, '10': 'futureBasis'},
+    {'1': 'leverage_future', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingLeverageFuture', '9': 0, '10': 'leverageFuture'},
+  ],
+  '8': [
+    {'1': 'pricing'},
+  ],
+};
+
+/// Descriptor for `MarketMakingNavConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingNavConfigDescriptor = $convert.base64Decode(
+    'ChVNYXJrZXRNYWtpbmdOYXZDb25maWcSRgoNcGRmX25hdl9oZWRnZRgBIAEoCzIgLmtkby52MS'
+    '5tbS5FdGZQcmljaW5nUGRmTmF2SGVkZ2VIAFILcGRmTmF2SGVkZ2USWwoUaW5kZXhfdHJhY2tp'
+    'bmdfaGVkZ2UYAiABKAsyJy5rZG8udjEubW0uRXRmUHJpY2luZ0luZGV4VHJhY2tpbmdIZWRnZU'
+    'gAUhJpbmRleFRyYWNraW5nSGVkZ2USRQoMZnV0dXJlX2Jhc2lzGAMgASgLMiAua2RvLnYxLm1t'
+    'LkV0ZlByaWNpbmdGdXR1cmVCYXNpc0gAUgtmdXR1cmVCYXNpcxJOCg9sZXZlcmFnZV9mdXR1cm'
+    'UYBCABKAsyIy5rZG8udjEubW0uRXRmUHJpY2luZ0xldmVyYWdlRnV0dXJlSABSDmxldmVyYWdl'
+    'RnV0dXJlQgkKB3ByaWNpbmc=');
+
+@$core.Deprecated('Use etfPricingPdfNavHedgeDescriptor instead')
+const EtfPricingPdfNavHedge$json = {
+  '1': 'EtfPricingPdfNavHedge',
+};
+
+/// Descriptor for `EtfPricingPdfNavHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfPricingPdfNavHedgeDescriptor = $convert.base64Decode(
+    'ChVFdGZQcmljaW5nUGRmTmF2SGVkZ2U=');
+
+@$core.Deprecated('Use etfPricingIndexTrackingHedgeDescriptor instead')
+const EtfPricingIndexTrackingHedge$json = {
+  '1': 'EtfPricingIndexTrackingHedge',
+};
+
+/// Descriptor for `EtfPricingIndexTrackingHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfPricingIndexTrackingHedgeDescriptor = $convert.base64Decode(
+    'ChxFdGZQcmljaW5nSW5kZXhUcmFja2luZ0hlZGdl');
+
+@$core.Deprecated('Use etfPricingFutureBasisDescriptor instead')
+const EtfPricingFutureBasis$json = {
+  '1': 'EtfPricingFutureBasis',
+  '2': [
+    {'1': 'prev_index', '3': 1, '4': 1, '5': 3, '10': 'prevIndex'},
+  ],
+};
+
+/// Descriptor for `EtfPricingFutureBasis`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfPricingFutureBasisDescriptor = $convert.base64Decode(
+    'ChVFdGZQcmljaW5nRnV0dXJlQmFzaXMSHQoKcHJldl9pbmRleBgBIAEoA1IJcHJldkluZGV4');
+
+@$core.Deprecated('Use etfPricingLeverageFutureDescriptor instead')
+const EtfPricingLeverageFuture$json = {
+  '1': 'EtfPricingLeverageFuture',
+  '2': [
+    {'1': 'prev_index', '3': 1, '4': 1, '5': 3, '10': 'prevIndex'},
+    {'1': 'prev_future', '3': 2, '4': 1, '5': 3, '10': 'prevFuture'},
+  ],
+};
+
+/// Descriptor for `EtfPricingLeverageFuture`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfPricingLeverageFutureDescriptor = $convert.base64Decode(
+    'ChhFdGZQcmljaW5nTGV2ZXJhZ2VGdXR1cmUSHQoKcHJldl9pbmRleBgBIAEoA1IJcHJldkluZG'
+    'V4Eh8KC3ByZXZfZnV0dXJlGAIgASgDUgpwcmV2RnV0dXJl');
 
 @$core.Deprecated('Use marketMakingTradeAnalyzerDescriptor instead')
 const MarketMakingTradeAnalyzer$json = {

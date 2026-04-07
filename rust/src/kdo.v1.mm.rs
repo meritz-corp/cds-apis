@@ -84,12 +84,78 @@ pub struct MarketMakingConfiguration {
     /// 레벨당 매도 수량
     #[prost(int64, tag="13")]
     pub ask_quantity: i64,
+    /// NAV 계산용 bid basis (Price internal representation)
+    #[prost(int64, tag="14")]
+    pub bid_basis: i64,
+    /// NAV 계산용 ask basis (Price internal representation)
+    #[prost(int64, tag="15")]
+    pub ask_basis: i64,
+    /// NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
+    #[prost(message, optional, tag="16")]
+    pub nav_config: ::core::option::Option<MarketMakingNavConfig>,
 }
 /// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
 /// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MarketMakingSkew {
+}
+/// NAV pricing 상세 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingNavConfig {
+    /// EtfPricing 전략 (oneof)
+    #[prost(oneof="market_making_nav_config::Pricing", tags="1, 2, 3, 4")]
+    pub pricing: ::core::option::Option<market_making_nav_config::Pricing>,
+}
+/// Nested message and enum types in `MarketMakingNavConfig`.
+pub mod market_making_nav_config {
+    /// EtfPricing 전략 (oneof)
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Pricing {
+        /// PDF 기반 nav 계산 및 헷지 프라이싱
+        #[prost(message, tag="1")]
+        PdfNavHedge(super::EtfPricingPdfNavHedge),
+        /// 지수 추종 헷지 프라이싱
+        #[prost(message, tag="2")]
+        IndexTrackingHedge(super::EtfPricingIndexTrackingHedge),
+        /// 선물 베이시스 기반 프라이싱
+        #[prost(message, tag="3")]
+        FutureBasis(super::EtfPricingFutureBasis),
+        /// 레버리지 선물 기반 프라이싱
+        #[prost(message, tag="4")]
+        LeverageFuture(super::EtfPricingLeverageFuture),
+    }
+}
+/// EtfPricing::PdfNavHedge
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct EtfPricingPdfNavHedge {
+}
+/// EtfPricing::IndexTrackingHedge
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct EtfPricingIndexTrackingHedge {
+}
+/// EtfPricing::FutureBasis { prev_index }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct EtfPricingFutureBasis {
+    /// 이전 지수 (Price internal representation)
+    #[prost(int64, tag="1")]
+    pub prev_index: i64,
+}
+/// EtfPricing::LeverageFuture { prev_index, prev_future }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct EtfPricingLeverageFuture {
+    /// 이전 지수 (Price internal representation)
+    #[prost(int64, tag="1")]
+    pub prev_index: i64,
+    /// 이전 선물 (Price internal representation)
+    #[prost(int64, tag="2")]
+    pub prev_future: i64,
 }
 /// Trade Analyzer 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
