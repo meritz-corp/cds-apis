@@ -399,34 +399,36 @@ pub struct ExposureBalancerState {
     #[prost(double, tag="4")]
     pub ask_scale: f64,
 }
-/// MM 엔진 전체 런타임 상태 스냅샷
+/// MM 엔진 런타임 상태 델타 메시지.
+/// 스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.
+/// symbol은 항상 포함된다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MmEngineRuntimeState {
-    /// ISIN 심볼
+    /// ISIN 심볼 (항상 포함)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 상태 스냅샷 타임스탬프 (Unix nanoseconds)
+    /// 상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)
     #[prost(int64, tag="2")]
     pub timestamp: i64,
-    /// MM 상태
-    #[prost(enumeration="MarketMakingState", tag="3")]
-    pub state: i32,
-    /// Momentum 상태
+    /// MM 상태 (변경 시에만 포함)
+    #[prost(enumeration="MarketMakingState", optional, tag="3")]
+    pub state: ::core::option::Option<i32>,
+    /// Momentum 상태 (변경 시에만 포함)
     #[prost(message, optional, tag="4")]
     pub momentum: ::core::option::Option<MomentumState>,
-    /// Trade Analyzer 상태
+    /// Trade Analyzer 상태 (변경 시에만 포함)
     #[prost(message, optional, tag="5")]
     pub trade_analyzer: ::core::option::Option<TradeAnalyzerState>,
-    /// 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
+    /// 순노출 및 재고 균형 상태 (변경 시에만 포함)
     #[prost(message, optional, tag="6")]
     pub exposure_balancer: ::core::option::Option<ExposureBalancerState>,
-    /// 현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
-    #[prost(string, tag="7")]
-    pub ask_quote: ::prost::alloc::string::String,
-    /// 현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
-    #[prost(string, tag="8")]
-    pub bid_quote: ::prost::alloc::string::String,
+    /// 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
+    #[prost(string, optional, tag="7")]
+    pub ask_quote: ::core::option::Option<::prost::alloc::string::String>,
+    /// 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
+    #[prost(string, optional, tag="8")]
+    pub bid_quote: ::core::option::Option<::prost::alloc::string::String>,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

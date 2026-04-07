@@ -2312,9 +2312,9 @@ impl serde::Serialize for MmEngineRuntimeState {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("timestamp", ToString::to_string(&self.timestamp).as_str())?;
         }
-        if true {
-            let v = MarketMakingState::try_from(self.state)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
+        if let Some(v) = self.state.as_ref() {
+            let v = MarketMakingState::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("state", &v)?;
         }
         if let Some(v) = self.momentum.as_ref() {
@@ -2326,11 +2326,11 @@ impl serde::Serialize for MmEngineRuntimeState {
         if let Some(v) = self.exposure_balancer.as_ref() {
             struct_ser.serialize_field("exposure_balancer", v)?;
         }
-        if true {
-            struct_ser.serialize_field("ask_quote", &self.ask_quote)?;
+        if let Some(v) = self.ask_quote.as_ref() {
+            struct_ser.serialize_field("ask_quote", v)?;
         }
-        if true {
-            struct_ser.serialize_field("bid_quote", &self.bid_quote)?;
+        if let Some(v) = self.bid_quote.as_ref() {
+            struct_ser.serialize_field("bid_quote", v)?;
         }
         struct_ser.end()
     }
@@ -2443,7 +2443,7 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             if state__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("state"));
                             }
-                            state__ = Some(map_.next_value::<MarketMakingState>()? as i32);
+                            state__ = map_.next_value::<::std::option::Option<MarketMakingState>>()?.map(|x| x as i32);
                         }
                         GeneratedField::Momentum => {
                             if momentum__.is_some() {
@@ -2467,13 +2467,13 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             if ask_quote__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askQuote"));
                             }
-                            ask_quote__ = Some(map_.next_value()?);
+                            ask_quote__ = map_.next_value()?;
                         }
                         GeneratedField::BidQuote => {
                             if bid_quote__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidQuote"));
                             }
-                            bid_quote__ = Some(map_.next_value()?);
+                            bid_quote__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -2483,12 +2483,12 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                 Ok(MmEngineRuntimeState {
                     symbol: symbol__.unwrap_or_default(),
                     timestamp: timestamp__.unwrap_or_default(),
-                    state: state__.unwrap_or_default(),
+                    state: state__,
                     momentum: momentum__,
                     trade_analyzer: trade_analyzer__,
                     exposure_balancer: exposure_balancer__,
-                    ask_quote: ask_quote__.unwrap_or_default(),
-                    bid_quote: bid_quote__.unwrap_or_default(),
+                    ask_quote: ask_quote__,
+                    bid_quote: bid_quote__,
                 })
             }
         }

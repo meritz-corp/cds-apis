@@ -769,39 +769,39 @@
       "properties": {
         "symbol": {
           "type": "string",
-          "title": "ISIN 심볼"
+          "title": "ISIN 심볼 (항상 포함)"
         },
         "timestamp": {
           "type": "string",
           "format": "int64",
-          "title": "상태 스냅샷 타임스탬프 (Unix nanoseconds)"
+          "title": "상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)"
         },
         "state": {
           "$ref": "#/definitions/mmMarketMakingState",
-          "title": "MM 상태"
+          "title": "MM 상태 (변경 시에만 포함)"
         },
         "momentum": {
           "$ref": "#/definitions/mmMomentumState",
-          "title": "Momentum 상태"
+          "title": "Momentum 상태 (변경 시에만 포함)"
         },
         "tradeAnalyzer": {
           "$ref": "#/definitions/mmTradeAnalyzerState",
-          "title": "Trade Analyzer 상태"
+          "title": "Trade Analyzer 상태 (변경 시에만 포함)"
         },
         "exposureBalancer": {
           "$ref": "#/definitions/mmExposureBalancerState",
-          "title": "순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)"
+          "title": "순노출 및 재고 균형 상태 (변경 시에만 포함)"
         },
         "askQuote": {
           "type": "string",
-          "title": "현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)"
+          "title": "현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)"
         },
         "bidQuote": {
           "type": "string",
-          "title": "현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)"
+          "title": "현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)"
         }
       },
-      "title": "MM 엔진 전체 런타임 상태 스냅샷"
+      "description": "MM 엔진 런타임 상태 델타 메시지.\n스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.\nsymbol은 항상 포함된다."
     },
     "mmMomentumState": {
       "type": "object",

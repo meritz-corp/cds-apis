@@ -2035,7 +2035,9 @@ class ExposureBalancerState extends $pb.GeneratedMessage {
   void clearAskScale() => $_clearField(4);
 }
 
-/// MM 엔진 전체 런타임 상태 스냅샷
+/// MM 엔진 런타임 상태 델타 메시지.
+/// 스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.
+/// symbol은 항상 포함된다.
 class MmEngineRuntimeState extends $pb.GeneratedMessage {
   factory MmEngineRuntimeState({
     $core.String? symbol,
@@ -2093,7 +2095,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   static MmEngineRuntimeState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmEngineRuntimeState>(create);
   static MmEngineRuntimeState? _defaultInstance;
 
-  /// ISIN 심볼
+  /// ISIN 심볼 (항상 포함)
   @$pb.TagNumber(1)
   $core.String get symbol => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -2103,7 +2105,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
-  /// 상태 스냅샷 타임스탬프 (Unix nanoseconds)
+  /// 상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)
   @$pb.TagNumber(2)
   $fixnum.Int64 get timestamp => $_getI64(1);
   @$pb.TagNumber(2)
@@ -2113,7 +2115,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTimestamp() => $_clearField(2);
 
-  /// MM 상태
+  /// MM 상태 (변경 시에만 포함)
   @$pb.TagNumber(3)
   MarketMakingState get state => $_getN(2);
   @$pb.TagNumber(3)
@@ -2123,7 +2125,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearState() => $_clearField(3);
 
-  /// Momentum 상태
+  /// Momentum 상태 (변경 시에만 포함)
   @$pb.TagNumber(4)
   MomentumState get momentum => $_getN(3);
   @$pb.TagNumber(4)
@@ -2135,7 +2137,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   MomentumState ensureMomentum() => $_ensure(3);
 
-  /// Trade Analyzer 상태
+  /// Trade Analyzer 상태 (변경 시에만 포함)
   @$pb.TagNumber(5)
   TradeAnalyzerState get tradeAnalyzer => $_getN(4);
   @$pb.TagNumber(5)
@@ -2147,7 +2149,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(4);
 
-  /// 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
+  /// 순노출 및 재고 균형 상태 (변경 시에만 포함)
   @$pb.TagNumber(6)
   ExposureBalancerState get exposureBalancer => $_getN(5);
   @$pb.TagNumber(6)
@@ -2159,7 +2161,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   ExposureBalancerState ensureExposureBalancer() => $_ensure(5);
 
-  /// 현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+  /// 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(7)
   $core.String get askQuote => $_getSZ(6);
   @$pb.TagNumber(7)
@@ -2169,7 +2171,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearAskQuote() => $_clearField(7);
 
-  /// 현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+  /// 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(8)
   $core.String get bidQuote => $_getSZ(7);
   @$pb.TagNumber(8)

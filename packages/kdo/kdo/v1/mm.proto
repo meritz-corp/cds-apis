@@ -433,31 +433,33 @@ message ExposureBalancerState {
   double ask_scale = 4;
 }
 
-// MM 엔진 전체 런타임 상태 스냅샷
+// MM 엔진 런타임 상태 델타 메시지.
+// 스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.
+// symbol은 항상 포함된다.
 message MmEngineRuntimeState {
-  // ISIN 심볼
+  // ISIN 심볼 (항상 포함)
   string symbol = 1;
 
-  // 상태 스냅샷 타임스탬프 (Unix nanoseconds)
+  // 상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)
   int64 timestamp = 2;
 
-  // MM 상태
-  MarketMakingState state = 3;
+  // MM 상태 (변경 시에만 포함)
+  optional MarketMakingState state = 3;
 
-  // Momentum 상태
-  MomentumState momentum = 4;
+  // Momentum 상태 (변경 시에만 포함)
+  optional MomentumState momentum = 4;
 
-  // Trade Analyzer 상태
-  TradeAnalyzerState trade_analyzer = 5;
+  // Trade Analyzer 상태 (변경 시에만 포함)
+  optional TradeAnalyzerState trade_analyzer = 5;
 
-  // 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
-  ExposureBalancerState exposure_balancer = 6;
+  // 순노출 및 재고 균형 상태 (변경 시에만 포함)
+  optional ExposureBalancerState exposure_balancer = 6;
 
-  // 현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
-  string ask_quote = 7;
+  // 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
+  optional string ask_quote = 7;
 
-  // 현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
-  string bid_quote = 8;
+  // 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
+  optional string bid_quote = 8;
 }
 
 // ============================================================================
