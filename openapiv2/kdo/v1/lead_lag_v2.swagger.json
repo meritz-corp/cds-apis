@@ -1,0 +1,1147 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/lead_lag_v2.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "LeadLagV2Service"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/lead_lag_v2s": {
+      "get": {
+        "summary": "LeadLagV2 목록 조회",
+        "operationId": "LeadLagV2Service_ListLeadLagV2s",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2ListLeadLagV2sResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* is_active - 활성화 여부\n\nExamples:\n* is_active=true",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      },
+      "post": {
+        "summary": "LeadLagV2 생성",
+        "operationId": "LeadLagV2Service_CreateLeadLagV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "생성할 LeadLagV2",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2",
+              "required": [
+                "leadLagV2"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2.name}": {
+      "patch": {
+        "summary": "LeadLagV2 수정",
+        "operationId": "LeadLagV2Service_UpdateLeadLagV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2.name",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          },
+          {
+            "name": "leadLagV2",
+            "description": "수정할 LeadLagV2",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "LeadLagV2 ID",
+                  "readOnly": true
+                },
+                "displayName": {
+                  "type": "string",
+                  "title": "전략 이름 (고유)"
+                },
+                "futuresIsin": {
+                  "type": "string",
+                  "title": "선물 ISIN 코드"
+                },
+                "etfIsin": {
+                  "type": "string",
+                  "title": "ETF ISIN 코드"
+                },
+                "futuresFundCode": {
+                  "type": "string",
+                  "title": "선물 펀드코드"
+                },
+                "etfFundCode": {
+                  "type": "string",
+                  "title": "ETF 펀드코드"
+                },
+                "triggerConfig": {
+                  "$ref": "#/definitions/lead_lag_v2LeadLagV2TriggerConfig",
+                  "title": "트리거 설정 (V2)"
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "title": "활성화 여부"
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "생성 시간",
+                  "readOnly": true
+                },
+                "updateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "수정 시간",
+                  "readOnly": true
+                }
+              },
+              "title": "수정할 LeadLagV2",
+              "required": [
+                "displayName",
+                "futuresIsin",
+                "etfIsin",
+                "futuresFundCode",
+                "etfFundCode"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}": {
+      "get": {
+        "summary": "단일 LeadLagV2 조회",
+        "operationId": "LeadLagV2Service_GetLeadLagV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      },
+      "delete": {
+        "summary": "LeadLagV2 삭제",
+        "operationId": "LeadLagV2Service_DeleteLeadLagV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}/trades": {
+      "get": {
+        "summary": "체결 내역 목록 조회 (DB 저장된 과거 체결 기록, 페이징)",
+        "operationId": "LeadLagV2Service_ListLeadLagV2Trades",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2ListLeadLagV2TradesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          },
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (기본: 50, 최대: 200)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (다음 페이지 조회용)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터링 조건\nAvailable Fields:\n* date - 거래일 (YYYYMMDD), 예: date=20260228",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "정렬 기준 (기본: send_order_time DESC)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "description": "조회 시작 날짜 (YYYYMMDD 정수, 포함). filter의 date와 별도로 범위 검색용",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "endDate",
+            "description": "조회 종료 날짜 (YYYYMMDD 정수, 포함)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}/trades/{tradeId}": {
+      "get": {
+        "summary": "단일 체결 내역 조회",
+        "operationId": "LeadLagV2Service_GetLeadLagV2Trade",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2TradeRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "부모 리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          },
+          {
+            "name": "tradeId",
+            "description": "체결 기록 ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}:executionSummary": {
+      "get": {
+        "summary": "LeadLagV2 체결 현황 요약 (선물/ETF 레그별 체결수량, 체결단가, 순매매)",
+        "operationId": "LeadLagV2Service_GetLeadLagV2ExecutionSummary",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2ExecutionSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          },
+          {
+            "name": "startDate",
+            "description": "조회 시작 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "endDate",
+            "description": "조회 종료 날짜 (YYYYMMDD 정수, 포함). 미지정 시 전체 기간",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}:setActive": {
+      "post": {
+        "summary": "LeadLagV2 활성화/비활성화",
+        "operationId": "LeadLagV2Service_SetLeadLagV2Active",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isActive": {
+                  "type": "boolean",
+                  "title": "활성화 여부"
+                }
+              },
+              "required": [
+                "isActive"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}:start": {
+      "post": {
+        "summary": "LeadLagV2 전략 시작 (hot loop 시작)",
+        "operationId": "LeadLagV2Service_StartLeadLagV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2StartLeadLagV2Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "LeadLagV2 전략 시작 요청"
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}:status": {
+      "get": {
+        "summary": "LeadLagV2 현재 상태 단건 조회 (unary)",
+        "operationId": "LeadLagV2Service_GetLeadLagV2Status",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2LeadLagV2StatusUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}:stop": {
+      "post": {
+        "summary": "LeadLagV2 전략 중지 (hot loop 중지)",
+        "operationId": "LeadLagV2Service_StopLeadLagV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lead_lag_v2StopLeadLagV2Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "LeadLagV2 전략 중지 요청"
+            }
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    },
+    "/v1/{leadLagV2}:streamStatus": {
+      "get": {
+        "summary": "LeadLagV2 실시간 상태 스트리밍 (서버→클라이언트)",
+        "operationId": "LeadLagV2Service_StreamLeadLagV2Status",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/lead_lag_v2LeadLagV2StatusUpdate"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of lead_lag_v2LeadLagV2StatusUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leadLagV2",
+            "description": "리소스 이름 (lead_lag_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "leadLagV2s/[^/]+"
+          }
+        ],
+        "tags": [
+          "LeadLagV2Service"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "lead_lag_v2LeadLagV2": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "리소스 이름 (lead_lag_v2s/{id})"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "LeadLagV2 ID",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "title": "전략 이름 (고유)"
+        },
+        "futuresIsin": {
+          "type": "string",
+          "title": "선물 ISIN 코드"
+        },
+        "etfIsin": {
+          "type": "string",
+          "title": "ETF ISIN 코드"
+        },
+        "futuresFundCode": {
+          "type": "string",
+          "title": "선물 펀드코드"
+        },
+        "etfFundCode": {
+          "type": "string",
+          "title": "ETF 펀드코드"
+        },
+        "triggerConfig": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2TriggerConfig",
+          "title": "트리거 설정 (V2)"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시간",
+          "readOnly": true
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "수정 시간",
+          "readOnly": true
+        }
+      },
+      "title": "선물-ETF 선행 차익거래 설정 (V2 — is_etf_inverse 제거, 스프레드 기반 트리거)",
+      "required": [
+        "displayName",
+        "futuresIsin",
+        "etfIsin",
+        "futuresFundCode",
+        "etfFundCode"
+      ]
+    },
+    "lead_lag_v2LeadLagV2ExecutionSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "futures": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2LegExecutionSummary",
+          "title": "선물 레그 체결 현황"
+        },
+        "etf": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2LegExecutionSummary",
+          "title": "ETF 레그 체결 현황"
+        },
+        "spread": {
+          "type": "number",
+          "format": "double",
+          "title": "스프레드 (선물-ETF 체결단가 차이)"
+        }
+      },
+      "title": "체결 현황 요약 응답"
+    },
+    "lead_lag_v2LeadLagV2LegExecutionSummary": {
+      "type": "object",
+      "properties": {
+        "sellFilledQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 체결수량"
+        },
+        "buyFilledQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 체결수량"
+        },
+        "sellAvgPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 평균 체결단가"
+        },
+        "buyAvgPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 평균 체결단가"
+        },
+        "netQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "순매매 (매수체결수량 - 매도체결수량)"
+        }
+      },
+      "title": "개별 레그 체결 현황"
+    },
+    "lead_lag_v2LeadLagV2SignalInfo": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "title": "시그널 방향 (BID/ASK)"
+        },
+        "spread": {
+          "type": "string",
+          "format": "int64",
+          "title": "스프레드 값 (틱 단위)"
+        },
+        "futuresSide": {
+          "type": "string",
+          "title": "선물 주문 방향 (BID/ASK)"
+        },
+        "etfSide": {
+          "type": "string",
+          "title": "ETF 주문 방향 (BID/ASK)"
+        },
+        "futuresPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 주문 가격"
+        },
+        "etfPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF 주문 가격"
+        },
+        "futuresQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 주문 수량"
+        },
+        "etfQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 주문 수량"
+        },
+        "etfFokStatus": {
+          "type": "string",
+          "title": "ETF FOK 주문 결과 (\"FILLED\" 또는 \"AUTO_CANCELLED\")"
+        }
+      },
+      "title": "시그널 상세 정보 (V2 — spread 기반)"
+    },
+    "lead_lag_v2LeadLagV2SpreadInfo": {
+      "type": "object",
+      "properties": {
+        "etfBid1": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF 매수 1호가"
+        },
+        "etfAsk1": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF 매도 1호가"
+        },
+        "futuresBid1": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 매수 1호가"
+        },
+        "futuresAsk1": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 매도 1호가"
+        }
+      },
+      "title": "스프레드 상태 정보 (선물/ETF 호가 정보)"
+    },
+    "lead_lag_v2LeadLagV2State": {
+      "type": "string",
+      "enum": [
+        "LEAD_LAG_V2_STATE_UNSPECIFIED",
+        "LEAD_LAG_V2_STATE_IDLE",
+        "LEAD_LAG_V2_STATE_MONITORING",
+        "LEAD_LAG_V2_STATE_TRIGGERED",
+        "LEAD_LAG_V2_STATE_ERROR"
+      ],
+      "default": "LEAD_LAG_V2_STATE_UNSPECIFIED",
+      "title": "LeadLagV2 서비스 실행 상태"
+    },
+    "lead_lag_v2LeadLagV2StatusUpdate": {
+      "type": "object",
+      "properties": {
+        "leadLagV2Id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "전략 ID"
+        },
+        "state": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2State",
+          "title": "서비스 실행 상태 (변경 시에만 전송)"
+        },
+        "futuresPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 선물 포지션 (양수=롱, 음수=숏)"
+        },
+        "totalTrades": {
+          "type": "string",
+          "format": "uint64",
+          "title": "총 트레이드 수"
+        },
+        "lastFuturesPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "마지막 선물 mid price"
+        },
+        "lastSignal": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2SignalInfo",
+          "title": "마지막 시그널 정보 (변경 시에만 전송)"
+        },
+        "spreadInfo": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2SpreadInfo",
+          "title": "스프레드 상태 (bid1/ask1 정보)"
+        },
+        "latencyUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "주문 실행 지연시간 (마이크로초)"
+        },
+        "timestampUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "타임스탬프 (마이크로초)"
+        },
+        "etfPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 ETF 포지션 (양수=롱, 음수=숏)"
+        }
+      },
+      "title": "LeadLagV2 실시간 상태 업데이트 (delta 방식: 변경된 필드만 전송)"
+    },
+    "lead_lag_v2LeadLagV2TradeRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "DB ID"
+        },
+        "leadLagV2": {
+          "type": "string",
+          "title": "부모 리소스 이름 (lead_lag_v2s/{id})",
+          "readOnly": true
+        },
+        "tradeNumber": {
+          "type": "string",
+          "format": "int64",
+          "title": "세션 내 순차 트레이드 번호"
+        },
+        "direction": {
+          "type": "string",
+          "title": "시그널 방향 (BID/ASK)"
+        },
+        "spread": {
+          "type": "string",
+          "format": "int64",
+          "title": "스프레드 값 (틱 단위)"
+        },
+        "futuresSide": {
+          "type": "string",
+          "title": "선물 주문 방향 (BID/ASK)"
+        },
+        "etfSide": {
+          "type": "string",
+          "title": "ETF 주문 방향 (BID/ASK)"
+        },
+        "futuresPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 주문 가격"
+        },
+        "etfPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF 주문 가격"
+        },
+        "futuresQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 주문 수량"
+        },
+        "etfQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 주문 수량"
+        },
+        "futuresPositionAfter": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 후 선물 포지션"
+        },
+        "latencyUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "주문 실행 지연시간 (마이크로초)"
+        },
+        "date": {
+          "type": "integer",
+          "format": "int32",
+          "title": "거래일 (YYYYMMDD)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "생성 시각",
+          "readOnly": true
+        },
+        "sendOrderTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문제출시간 (HHMMSSuuuuuu KST)"
+        },
+        "triggerExchangeTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "트리거한 시세의 거래소 시간 (HHMMSSuuuuuu KST)"
+        },
+        "futuresFilledTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 체결시간 (HHMMSSuuuuuu KST)"
+        },
+        "etfFilledTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 체결시간 (HHMMSSuuuuuu KST)"
+        },
+        "futuresTriggerPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "트리거 당시 선물 가격 (시그널 발생 시점의 호가)"
+        },
+        "etfTriggerPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "트리거 당시 ETF 가격 (시그널 발생 시점의 호가)"
+        },
+        "etfFokStatus": {
+          "type": "string",
+          "title": "ETF FOK 주문 결과 (\"FILLED\" 또는 \"AUTO_CANCELLED\")"
+        }
+      },
+      "title": "체결 기록 (DB에 영구 저장되는 트레이드 레코드, V2)"
+    },
+    "lead_lag_v2LeadLagV2TriggerConfig": {
+      "type": "object",
+      "properties": {
+        "buyAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 스프레드 임계값 (틱 단위, 매수 트리거 조건)"
+        },
+        "sellAdjustment": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 스프레드 임계값 (틱 단위, 매도 트리거 조건)"
+        },
+        "verifyWaitUs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "검증 대기시간 (마이크로초) — 트리거 후 스프레드 재확인 대기"
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "재트리거 쿨다운 (밀리초)"
+        },
+        "maxBidPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 매수 포지션 상한"
+        },
+        "maxAskPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 매도 포지션 상한"
+        },
+        "etfOrderQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 주문 수량"
+        },
+        "futuresOrderQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 주문 수량 (계약 수)"
+        }
+      },
+      "title": "스프레드 기반 트리거 설정 (V2)"
+    },
+    "lead_lag_v2ListLeadLagV2TradesResponse": {
+      "type": "object",
+      "properties": {
+        "trades": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lead_lag_v2LeadLagV2TradeRecord"
+          },
+          "title": "체결 기록 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "전체 건수"
+        }
+      },
+      "title": "체결 내역 목록 응답"
+    },
+    "lead_lag_v2ListLeadLagV2sResponse": {
+      "type": "object",
+      "properties": {
+        "leadLagV2s": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lead_lag_v2LeadLagV2"
+          },
+          "title": "LeadLagV2 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "lead_lag_v2StartLeadLagV2Response": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2State",
+          "title": "현재 실행 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "응답 메시지"
+        }
+      },
+      "title": "LeadLagV2 전략 시작 응답"
+    },
+    "lead_lag_v2StopLeadLagV2Response": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/lead_lag_v2LeadLagV2State",
+          "title": "현재 실행 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "응답 메시지"
+        }
+      },
+      "title": "LeadLagV2 전략 중지 응답"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
