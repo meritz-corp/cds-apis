@@ -54,37 +54,6 @@
         "tags": [
           "MarketMakingService"
         ]
-      },
-      "post": {
-        "summary": "MM 설정 생성 (DB 저장)",
-        "operationId": "MarketMakingService_CreateMarketMaking",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/mmMarketMaking"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/mmCreateMarketMakingRequest"
-            }
-          }
-        ],
-        "tags": [
-          "MarketMakingService"
-        ]
       }
     },
     "/v1/mm/{symbol}": {
@@ -546,24 +515,6 @@
     }
   },
   "definitions": {
-    "mmCreateMarketMakingRequest": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "ISIN 심볼"
-        },
-        "config": {
-          "$ref": "#/definitions/mmMarketMakingConfiguration",
-          "title": "MM 설정"
-        }
-      },
-      "title": "CreateMarketMaking",
-      "required": [
-        "symbol",
-        "config"
-      ]
-    },
     "mmExposureBalancerState": {
       "type": "object",
       "properties": {

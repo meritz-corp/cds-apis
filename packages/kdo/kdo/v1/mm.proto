@@ -27,15 +27,6 @@ service MarketMakingService {
     option (google.api.method_signature) = "symbol";
   }
 
-  // MM 설정 생성 (DB 저장)
-  rpc CreateMarketMaking(CreateMarketMakingRequest) returns (MarketMaking) {
-    option (google.api.http) = {
-      post: "/v1/mm"
-      body: "*"
-    };
-    option (google.api.method_signature) = "symbol,config";
-  }
-
   // MM 설정 업데이트 (DB 저장)
   rpc UpdateMarketMaking(UpdateMarketMakingRequest) returns (MarketMaking) {
     option (google.api.http) = {
@@ -403,15 +394,6 @@ message UpdateMarketMakingConfigRequest {
 message StreamMarketMakingStatusRequest {
   // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
   string symbol = 1;
-}
-
-// CreateMarketMaking
-message CreateMarketMakingRequest {
-  // ISIN 심볼
-  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
-
-  // MM 설정
-  MarketMakingConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // UpdateMarketMaking

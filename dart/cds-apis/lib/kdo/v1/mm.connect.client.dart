@@ -45,24 +45,6 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// MM 설정 생성 (DB 저장)
-  Future<kdov1mm.MarketMaking> createMarketMaking(
-    kdov1mm.CreateMarketMakingRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.MarketMakingService.createMarketMaking,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
   /// MM 설정 업데이트 (DB 저장)
   Future<kdov1mm.MarketMaking> updateMarketMaking(
     kdov1mm.UpdateMarketMakingRequest input, {

@@ -285,17 +285,6 @@ pub struct StreamMarketMakingStatusRequest {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
-/// CreateMarketMaking
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateMarketMakingRequest {
-    /// ISIN 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    /// MM 설정
-    #[prost(message, optional, tag="2")]
-    pub config: ::core::option::Option<MarketMakingConfiguration>,
-}
 /// UpdateMarketMaking
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

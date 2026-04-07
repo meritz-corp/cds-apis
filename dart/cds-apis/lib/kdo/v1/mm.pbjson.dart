@@ -397,21 +397,6 @@ final $typed_data.Uint8List streamMarketMakingStatusRequestDescriptor = $convert
     'Ch9TdHJlYW1NYXJrZXRNYWtpbmdTdGF0dXNSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm'
     '9s');
 
-@$core.Deprecated('Use createMarketMakingRequestDescriptor instead')
-const CreateMarketMakingRequest$json = {
-  '1': 'CreateMarketMakingRequest',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '8': {}, '10': 'config'},
-  ],
-};
-
-/// Descriptor for `CreateMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createMarketMakingRequestDescriptor = $convert.base64Decode(
-    'ChlDcmVhdGVNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm'
-    '9sEkIKBmNvbmZpZxgCIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9u'
-    'QgTiQQECUgZjb25maWc=');
-
 @$core.Deprecated('Use updateMarketMakingRequestDescriptor instead')
 const UpdateMarketMakingRequest$json = {
   '1': 'UpdateMarketMakingRequest',

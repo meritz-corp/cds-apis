@@ -1506,69 +1506,6 @@ class StreamMarketMakingStatusRequest extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 }
 
-/// CreateMarketMaking
-class CreateMarketMakingRequest extends $pb.GeneratedMessage {
-  factory CreateMarketMakingRequest({
-    $core.String? symbol,
-    MarketMakingConfiguration? config,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (config != null) result.config = config;
-    return result;
-  }
-
-  CreateMarketMakingRequest._();
-
-  factory CreateMarketMakingRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory CreateMarketMakingRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateMarketMakingRequest clone() => CreateMarketMakingRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateMarketMakingRequest copyWith(void Function(CreateMarketMakingRequest) updates) => super.copyWith((message) => updates(message as CreateMarketMakingRequest)) as CreateMarketMakingRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static CreateMarketMakingRequest create() => CreateMarketMakingRequest._();
-  @$core.override
-  CreateMarketMakingRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateMarketMakingRequest> createRepeated() => $pb.PbList<CreateMarketMakingRequest>();
-  @$core.pragma('dart2js:noInline')
-  static CreateMarketMakingRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateMarketMakingRequest>(create);
-  static CreateMarketMakingRequest? _defaultInstance;
-
-  /// ISIN 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// MM 설정
-  @$pb.TagNumber(2)
-  MarketMakingConfiguration get config => $_getN(1);
-  @$pb.TagNumber(2)
-  set config(MarketMakingConfiguration value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasConfig() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearConfig() => $_clearField(2);
-  @$pb.TagNumber(2)
-  MarketMakingConfiguration ensureConfig() => $_ensure(1);
-}
-
 /// UpdateMarketMaking
 class UpdateMarketMakingRequest extends $pb.GeneratedMessage {
   factory UpdateMarketMakingRequest({

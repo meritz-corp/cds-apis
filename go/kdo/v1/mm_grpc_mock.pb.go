@@ -761,26 +761,6 @@ func (m *MockMarketMakingServiceClient) EXPECT() *MockMarketMakingServiceClientM
 	return m.recorder
 }
 
-// CreateMarketMaking mocks base method.
-func (m *MockMarketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateMarketMaking", varargs...)
-	ret0, _ := ret[0].(*MarketMaking)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateMarketMaking indicates an expected call of CreateMarketMaking.
-func (mr *MockMarketMakingServiceClientMockRecorder) CreateMarketMaking(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMarketMaking", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).CreateMarketMaking), varargs...)
-}
-
 // GetMarketMaking mocks base method.
 func (m *MockMarketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
@@ -1042,21 +1022,6 @@ func NewMockMarketMakingServiceServer(ctrl *gomock.Controller) *MockMarketMaking
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockMarketMakingServiceServer) EXPECT() *MockMarketMakingServiceServerMockRecorder {
 	return m.recorder
-}
-
-// CreateMarketMaking mocks base method.
-func (m *MockMarketMakingServiceServer) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest) (*MarketMaking, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateMarketMaking", ctx, in)
-	ret0, _ := ret[0].(*MarketMaking)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateMarketMaking indicates an expected call of CreateMarketMaking.
-func (mr *MockMarketMakingServiceServerMockRecorder) CreateMarketMaking(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMarketMaking", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).CreateMarketMaking), ctx, in)
 }
 
 // GetMarketMaking mocks base method.

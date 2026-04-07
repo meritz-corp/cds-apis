@@ -27,14 +27,6 @@ abstract final class MarketMakingService {
     kdov1mm.MarketMaking.new,
   );
 
-  /// MM 설정 생성 (DB 저장)
-  static const createMarketMaking = connect.Spec(
-    '/$name/CreateMarketMaking',
-    connect.StreamType.unary,
-    kdov1mm.CreateMarketMakingRequest.new,
-    kdov1mm.MarketMaking.new,
-  );
-
   /// MM 설정 업데이트 (DB 저장)
   static const updateMarketMaking = connect.Spec(
     '/$name/UpdateMarketMaking',

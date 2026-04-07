@@ -26,8 +26,6 @@ type MarketMakingServiceClient interface {
 	ListMarketMaking(ctx context.Context, in *ListMarketMakingRequest, opts ...grpc.CallOption) (*ListMarketMakingResponse, error)
 	// MM 단일 심볼 조회
 	GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error)
-	// MM 설정 생성 (DB 저장)
-	CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error)
 	// MM 설정 업데이트 (DB 저장)
 	UpdateMarketMaking(ctx context.Context, in *UpdateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error)
 	// MM 상태 조회
@@ -70,15 +68,6 @@ func (c *marketMakingServiceClient) ListMarketMaking(ctx context.Context, in *Li
 func (c *marketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
 	out := new(MarketMaking)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetMarketMaking", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *marketMakingServiceClient) CreateMarketMaking(ctx context.Context, in *CreateMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
-	out := new(MarketMaking)
-	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/CreateMarketMaking", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -252,8 +241,6 @@ type MarketMakingServiceServer interface {
 	ListMarketMaking(context.Context, *ListMarketMakingRequest) (*ListMarketMakingResponse, error)
 	// MM 단일 심볼 조회
 	GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMaking, error)
-	// MM 설정 생성 (DB 저장)
-	CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMaking, error)
 	// MM 설정 업데이트 (DB 저장)
 	UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMaking, error)
 	// MM 상태 조회
@@ -286,9 +273,6 @@ func (UnimplementedMarketMakingServiceServer) ListMarketMaking(context.Context, 
 }
 func (UnimplementedMarketMakingServiceServer) GetMarketMaking(context.Context, *GetMarketMakingRequest) (*MarketMaking, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketMaking not implemented")
-}
-func (UnimplementedMarketMakingServiceServer) CreateMarketMaking(context.Context, *CreateMarketMakingRequest) (*MarketMaking, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateMarketMaking not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) UpdateMarketMaking(context.Context, *UpdateMarketMakingRequest) (*MarketMaking, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMarketMaking not implemented")
@@ -365,24 +349,6 @@ func _MarketMakingService_GetMarketMaking_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MarketMakingServiceServer).GetMarketMaking(ctx, req.(*GetMarketMakingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MarketMakingService_CreateMarketMaking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMarketMakingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MarketMakingServiceServer).CreateMarketMaking(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.mm.MarketMakingService/CreateMarketMaking",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MarketMakingServiceServer).CreateMarketMaking(ctx, req.(*CreateMarketMakingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -590,10 +556,6 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMarketMaking",
 			Handler:    _MarketMakingService_GetMarketMaking_Handler,
-		},
-		{
-			MethodName: "CreateMarketMaking",
-			Handler:    _MarketMakingService_CreateMarketMaking_Handler,
 		},
 		{
 			MethodName: "UpdateMarketMaking",
