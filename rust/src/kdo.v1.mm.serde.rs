@@ -2297,6 +2297,12 @@ impl serde::Serialize for MmEngineRuntimeState {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmEngineRuntimeState", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2320,6 +2326,12 @@ impl serde::Serialize for MmEngineRuntimeState {
         if let Some(v) = self.exposure_balancer.as_ref() {
             struct_ser.serialize_field("exposure_balancer", v)?;
         }
+        if true {
+            struct_ser.serialize_field("ask_quote", &self.ask_quote)?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_quote", &self.bid_quote)?;
+        }
         struct_ser.end()
     }
 }
@@ -2338,6 +2350,10 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
             "tradeAnalyzer",
             "exposure_balancer",
             "exposureBalancer",
+            "ask_quote",
+            "askQuote",
+            "bid_quote",
+            "bidQuote",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2348,6 +2364,8 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
             Momentum,
             TradeAnalyzer,
             ExposureBalancer,
+            AskQuote,
+            BidQuote,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2376,6 +2394,8 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             "momentum" => Ok(GeneratedField::Momentum),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
                             "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
+                            "askQuote" | "ask_quote" => Ok(GeneratedField::AskQuote),
+                            "bidQuote" | "bid_quote" => Ok(GeneratedField::BidQuote),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2401,6 +2421,8 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                 let mut momentum__ = None;
                 let mut trade_analyzer__ = None;
                 let mut exposure_balancer__ = None;
+                let mut ask_quote__ = None;
+                let mut bid_quote__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2441,6 +2463,18 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                             }
                             exposure_balancer__ = map_.next_value()?;
                         }
+                        GeneratedField::AskQuote => {
+                            if ask_quote__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuote"));
+                            }
+                            ask_quote__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BidQuote => {
+                            if bid_quote__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuote"));
+                            }
+                            bid_quote__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2453,6 +2487,8 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                     momentum: momentum__,
                     trade_analyzer: trade_analyzer__,
                     exposure_balancer: exposure_balancer__,
+                    ask_quote: ask_quote__.unwrap_or_default(),
+                    bid_quote: bid_quote__.unwrap_or_default(),
                 })
             }
         }

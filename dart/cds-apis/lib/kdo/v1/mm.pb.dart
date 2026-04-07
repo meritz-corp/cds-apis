@@ -2044,6 +2044,8 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     MomentumState? momentum,
     TradeAnalyzerState? tradeAnalyzer,
     ExposureBalancerState? exposureBalancer,
+    $core.String? askQuote,
+    $core.String? bidQuote,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2052,6 +2054,8 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     if (momentum != null) result.momentum = momentum;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
+    if (askQuote != null) result.askQuote = askQuote;
+    if (bidQuote != null) result.bidQuote = bidQuote;
     return result;
   }
 
@@ -2067,6 +2071,8 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     ..aOM<MomentumState>(4, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
     ..aOM<TradeAnalyzerState>(5, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: TradeAnalyzerState.create)
     ..aOM<ExposureBalancerState>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: ExposureBalancerState.create)
+    ..aOS(7, _omitFieldNames ? '' : 'askQuote')
+    ..aOS(8, _omitFieldNames ? '' : 'bidQuote')
     ..hasRequiredFields = false
   ;
 
@@ -2152,6 +2158,26 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   void clearExposureBalancer() => $_clearField(6);
   @$pb.TagNumber(6)
   ExposureBalancerState ensureExposureBalancer() => $_ensure(5);
+
+  /// 현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+  @$pb.TagNumber(7)
+  $core.String get askQuote => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set askQuote($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasAskQuote() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearAskQuote() => $_clearField(7);
+
+  /// 현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+  @$pb.TagNumber(8)
+  $core.String get bidQuote => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set bidQuote($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasBidQuote() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBidQuote() => $_clearField(8);
 }
 
 /// StreamMmEngineState

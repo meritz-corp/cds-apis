@@ -421,6 +421,12 @@ pub struct MmEngineRuntimeState {
     /// 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
     #[prost(message, optional, tag="6")]
     pub exposure_balancer: ::core::option::Option<ExposureBalancerState>,
+    /// 현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+    #[prost(string, tag="7")]
+    pub ask_quote: ::prost::alloc::string::String,
+    /// 현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+    #[prost(string, tag="8")]
+    pub bid_quote: ::prost::alloc::string::String,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

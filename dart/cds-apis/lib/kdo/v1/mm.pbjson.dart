@@ -486,6 +486,8 @@ const MmEngineRuntimeState$json = {
     {'1': 'momentum', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MomentumState', '10': 'momentum'},
     {'1': 'trade_analyzer', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.TradeAnalyzerState', '10': 'tradeAnalyzer'},
     {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.ExposureBalancerState', '10': 'exposureBalancer'},
+    {'1': 'ask_quote', '3': 7, '4': 1, '5': 9, '10': 'askQuote'},
+    {'1': 'bid_quote', '3': 8, '4': 1, '5': 9, '10': 'bidQuote'},
   ],
 };
 
@@ -496,7 +498,9 @@ final $typed_data.Uint8List mmEngineRuntimeStateDescriptor = $convert.base64Deco
     'YWtpbmdTdGF0ZVIFc3RhdGUSNAoIbW9tZW50dW0YBCABKAsyGC5rZG8udjEubW0uTW9tZW50dW'
     '1TdGF0ZVIIbW9tZW50dW0SRAoOdHJhZGVfYW5hbHl6ZXIYBSABKAsyHS5rZG8udjEubW0uVHJh'
     'ZGVBbmFseXplclN0YXRlUg10cmFkZUFuYWx5emVyEk0KEWV4cG9zdXJlX2JhbGFuY2VyGAYgAS'
-    'gLMiAua2RvLnYxLm1tLkV4cG9zdXJlQmFsYW5jZXJTdGF0ZVIQZXhwb3N1cmVCYWxhbmNlcg==');
+    'gLMiAua2RvLnYxLm1tLkV4cG9zdXJlQmFsYW5jZXJTdGF0ZVIQZXhwb3N1cmVCYWxhbmNlchIb'
+    'Cglhc2tfcXVvdGUYByABKAlSCGFza1F1b3RlEhsKCWJpZF9xdW90ZRgIIAEoCVIIYmlkUXVvdG'
+    'U=');
 
 @$core.Deprecated('Use streamMmEngineStateRequestDescriptor instead')
 const StreamMmEngineStateRequest$json = {

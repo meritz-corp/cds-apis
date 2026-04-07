@@ -791,6 +791,14 @@
         "exposureBalancer": {
           "$ref": "#/definitions/mmExposureBalancerState",
           "title": "순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)"
+        },
+        "askQuote": {
+          "type": "string",
+          "title": "현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)"
+        },
+        "bidQuote": {
+          "type": "string",
+          "title": "현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)"
         }
       },
       "title": "MM 엔진 전체 런타임 상태 스냅샷"

@@ -452,6 +452,12 @@ message MmEngineRuntimeState {
 
   // 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
   ExposureBalancerState exposure_balancer = 6;
+
+  // 현재 MM 매도 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+  string ask_quote = 7;
+
+  // 현재 MM 매수 호가 (Price internal representation의 string 표현, 빈 문자열이면 미산출)
+  string bid_quote = 8;
 }
 
 // ============================================================================
