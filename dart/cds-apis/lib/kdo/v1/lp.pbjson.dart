@@ -62,7 +62,7 @@ const EtfLp$json = {
     {'1': 'tick_size', '3': 9, '4': 1, '5': 3, '10': 'tickSize'},
     {'1': 'offset', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
     {'1': 'enabled', '3': 11, '4': 1, '5': 8, '10': 'enabled'},
-    {'1': 'pricing_method', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfPricing', '10': 'pricingMethod'},
+    {'1': 'pricing_method', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '10': 'pricingMethod'},
     {'1': 'bid_adjustment', '3': 13, '4': 1, '5': 1, '9': 0, '10': 'bidAdjustment', '17': true},
     {'1': 'ask_adjustment', '3': 14, '4': 1, '5': 1, '9': 1, '10': 'askAdjustment', '17': true},
     {'1': 'bid_quantity', '3': 15, '4': 1, '5': 3, '10': 'bidQuantity'},
@@ -91,17 +91,17 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'RDb2RlEhsKCWFza19iYXNpcxgDIAEoAVIIYXNrQmFzaXMSGwoJYmlkX2Jhc2lzGAQgASgBUghi'
     'aWRCYXNpcxIUCgVkZXB0aBgIIAEoDVIFZGVwdGgSGwoJdGlja19zaXplGAkgASgDUgh0aWNrU2'
     'l6ZRIuCgZvZmZzZXQYCiABKAsyFi5rZG8udjEubHAuRXRmTHBPZmZzZXRSBm9mZnNldBIYCgdl'
-    'bmFibGVkGAsgASgIUgdlbmFibGVkEjwKDnByaWNpbmdfbWV0aG9kGAwgASgLMhUua2RvLnYxLm'
-    'xwLkV0ZlByaWNpbmdSDXByaWNpbmdNZXRob2QSKgoOYmlkX2FkanVzdG1lbnQYDSABKAFIAFIN'
-    'YmlkQWRqdXN0bWVudIgBARIqCg5hc2tfYWRqdXN0bWVudBgOIAEoAUgBUg1hc2tBZGp1c3RtZW'
-    '50iAEBEiEKDGJpZF9xdWFudGl0eRgPIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5'
-    'GBAgASgDUgthc2tRdWFudGl0eRIuChBtb21lbnR1bV9lbmFibGVkGBEgASgISAJSD21vbWVudH'
-    'VtRW5hYmxlZIgBARIsCg9tb21lbnR1bV93aW5kb3cYEiABKA1IA1IObW9tZW50dW1XaW5kb3eI'
-    'AQESNgoUbW9tZW50dW1fc2Vuc2l0aXZpdHkYEyABKAFIBFITbW9tZW50dW1TZW5zaXRpdml0eY'
-    'gBARJJCg5xdWFudGl0eV9saW1pdBgUIAEoCzIdLmtkby52MS5scC5FdGZMcFF1YW50aXR5TGlt'
-    'aXRIBVINcXVhbnRpdHlMaW1pdIgBAUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3'
-    'RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVu'
-    'dHVtX3NlbnNpdGl2aXR5QhEKD19xdWFudGl0eV9saW1pdEoECAcQCA==');
+    'bmFibGVkGAsgASgIUgdlbmFibGVkEkAKDnByaWNpbmdfbWV0aG9kGAwgASgLMhkua2RvLnYxLm'
+    'NvbW1vbi5FdGZQcmljaW5nUg1wcmljaW5nTWV0aG9kEioKDmJpZF9hZGp1c3RtZW50GA0gASgB'
+    'SABSDWJpZEFkanVzdG1lbnSIAQESKgoOYXNrX2FkanVzdG1lbnQYDiABKAFIAVINYXNrQWRqdX'
+    'N0bWVudIgBARIhCgxiaWRfcXVhbnRpdHkYDyABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFu'
+    'dGl0eRgQIAEoA1ILYXNrUXVhbnRpdHkSLgoQbW9tZW50dW1fZW5hYmxlZBgRIAEoCEgCUg9tb2'
+    '1lbnR1bUVuYWJsZWSIAQESLAoPbW9tZW50dW1fd2luZG93GBIgASgNSANSDm1vbWVudHVtV2lu'
+    'ZG93iAEBEjYKFG1vbWVudHVtX3NlbnNpdGl2aXR5GBMgASgBSARSE21vbWVudHVtU2Vuc2l0aX'
+    'ZpdHmIAQESSQoOcXVhbnRpdHlfbGltaXQYFCABKAsyHS5rZG8udjEubHAuRXRmTHBRdWFudGl0'
+    'eUxpbWl0SAVSDXF1YW50aXR5TGltaXSIAQFCEQoPX2JpZF9hZGp1c3RtZW50QhEKD19hc2tfYW'
+    'RqdXN0bWVudEITChFfbW9tZW50dW1fZW5hYmxlZEISChBfbW9tZW50dW1fd2luZG93QhcKFV9t'
+    'b21lbnR1bV9zZW5zaXRpdml0eUIRCg9fcXVhbnRpdHlfbGltaXRKBAgHEAg=');
 
 @$core.Deprecated('Use etfLpQuantityLimitDescriptor instead')
 const EtfLpQuantityLimit$json = {
@@ -131,73 +131,6 @@ final $typed_data.Uint8List etfLpQuantityLimitDescriptor = $convert.base64Decode
     'ABKANIAVIObWF4TmV0UXVhbnRpdHmIAQFCDwoNX25ldF9xdWFudGl0eUITChFfbWF4X25ldF9x'
     'dWFudGl0eUoECAEQAkoECAMQBFIQbWluX2JpZF9xdWFudGl0eVIQbWluX2Fza19xdWFudGl0eQ'
     '==');
-
-@$core.Deprecated('Use etfPricingDescriptor instead')
-const EtfPricing$json = {
-  '1': 'EtfPricing',
-  '2': [
-    {'1': 'pdf_nav_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.PdfNavHedgePricing', '9': 0, '10': 'pdfNavHedge'},
-    {'1': 'index_tracking_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.lp.IndexTrackingHedgePricing', '9': 0, '10': 'indexTrackingHedge'},
-    {'1': 'future_basis', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.lp.FutureBasis', '9': 0, '10': 'futureBasis'},
-    {'1': 'leverage_future', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.lp.LeverageFuturePricing', '9': 0, '10': 'leverageFuture'},
-  ],
-  '8': [
-    {'1': 'method'},
-  ],
-};
-
-/// Descriptor for `EtfPricing`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfPricingDescriptor = $convert.base64Decode(
-    'CgpFdGZQcmljaW5nEkMKDXBkZl9uYXZfaGVkZ2UYASABKAsyHS5rZG8udjEubHAuUGRmTmF2SG'
-    'VkZ2VQcmljaW5nSABSC3BkZk5hdkhlZGdlElgKFGluZGV4X3RyYWNraW5nX2hlZGdlGAIgASgL'
-    'MiQua2RvLnYxLmxwLkluZGV4VHJhY2tpbmdIZWRnZVByaWNpbmdIAFISaW5kZXhUcmFja2luZ0'
-    'hlZGdlEjsKDGZ1dHVyZV9iYXNpcxgDIAEoCzIWLmtkby52MS5scC5GdXR1cmVCYXNpc0gAUgtm'
-    'dXR1cmVCYXNpcxJLCg9sZXZlcmFnZV9mdXR1cmUYBCABKAsyIC5rZG8udjEubHAuTGV2ZXJhZ2'
-    'VGdXR1cmVQcmljaW5nSABSDmxldmVyYWdlRnV0dXJlQggKBm1ldGhvZA==');
-
-@$core.Deprecated('Use pdfNavHedgePricingDescriptor instead')
-const PdfNavHedgePricing$json = {
-  '1': 'PdfNavHedgePricing',
-};
-
-/// Descriptor for `PdfNavHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pdfNavHedgePricingDescriptor = $convert.base64Decode(
-    'ChJQZGZOYXZIZWRnZVByaWNpbmc=');
-
-@$core.Deprecated('Use indexTrackingHedgePricingDescriptor instead')
-const IndexTrackingHedgePricing$json = {
-  '1': 'IndexTrackingHedgePricing',
-};
-
-/// Descriptor for `IndexTrackingHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List indexTrackingHedgePricingDescriptor = $convert.base64Decode(
-    'ChlJbmRleFRyYWNraW5nSGVkZ2VQcmljaW5n');
-
-@$core.Deprecated('Use futureBasisDescriptor instead')
-const FutureBasis$json = {
-  '1': 'FutureBasis',
-  '2': [
-    {'1': 'prev_index', '3': 1, '4': 1, '5': 9, '10': 'prevIndex'},
-  ],
-};
-
-/// Descriptor for `FutureBasis`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List futureBasisDescriptor = $convert.base64Decode(
-    'CgtGdXR1cmVCYXNpcxIdCgpwcmV2X2luZGV4GAEgASgJUglwcmV2SW5kZXg=');
-
-@$core.Deprecated('Use leverageFuturePricingDescriptor instead')
-const LeverageFuturePricing$json = {
-  '1': 'LeverageFuturePricing',
-  '2': [
-    {'1': 'prev_index', '3': 1, '4': 1, '5': 1, '10': 'prevIndex'},
-    {'1': 'prev_future', '3': 2, '4': 1, '5': 1, '10': 'prevFuture'},
-  ],
-};
-
-/// Descriptor for `LeverageFuturePricing`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List leverageFuturePricingDescriptor = $convert.base64Decode(
-    'ChVMZXZlcmFnZUZ1dHVyZVByaWNpbmcSHQoKcHJldl9pbmRleBgBIAEoAVIJcHJldkluZGV4Eh'
-    '8KC3ByZXZfZnV0dXJlGAIgASgBUgpwcmV2RnV0dXJl');
 
 @$core.Deprecated('Use etfLpStatusDescriptor instead')
 const EtfLpStatus$json = {

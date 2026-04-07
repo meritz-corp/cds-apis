@@ -29,7 +29,7 @@ pub struct EtfLp {
     pub enabled: bool,
     /// ETF 가격 산출 방식
     #[prost(message, optional, tag="12")]
-    pub pricing_method: ::core::option::Option<EtfPricing>,
+    pub pricing_method: ::core::option::Option<super::common::EtfPricing>,
     /// 매수 호가 조정값
     #[prost(double, optional, tag="13")]
     pub bid_adjustment: ::core::option::Option<f64>,
@@ -75,58 +75,6 @@ pub struct EtfLpQuantityLimit {
     /// 미설정(None) 시 순포지션 기반 차단 비활성
     #[prost(int64, optional, tag="6")]
     pub max_net_quantity: ::core::option::Option<i64>,
-}
-/// ETF 가격 산출 방식
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfPricing {
-    #[prost(oneof="etf_pricing::Method", tags="1, 2, 3, 4")]
-    pub method: ::core::option::Option<etf_pricing::Method>,
-}
-/// Nested message and enum types in `EtfPricing`.
-pub mod etf_pricing {
-    #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Method {
-        /// 분해 헷지 방식
-        #[prost(message, tag="1")]
-        PdfNavHedge(super::PdfNavHedgePricing),
-        /// 선물 헷지 방식
-        #[prost(message, tag="2")]
-        IndexTrackingHedge(super::IndexTrackingHedgePricing),
-        #[prost(message, tag="3")]
-        FutureBasis(super::FutureBasis),
-        /// 레버리지 선물 방식
-        #[prost(message, tag="4")]
-        LeverageFuture(super::LeverageFuturePricing),
-    }
-}
-/// 분해 헷지 가격 산출 (추가 파라미터 없음)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PdfNavHedgePricing {
-}
-/// 선물 헷지 가격 산출
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct IndexTrackingHedgePricing {
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FutureBasis {
-    #[prost(string, tag="1")]
-    pub prev_index: ::prost::alloc::string::String,
-}
-/// 레버리지 선물 가격 산출
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct LeverageFuturePricing {
-    /// 기초지수 전일종가
-    #[prost(double, tag="1")]
-    pub prev_index: f64,
-    /// 선물 전일종가
-    #[prost(double, tag="2")]
-    pub prev_future: f64,
 }
 // ========== ETF LP Status Messages ==========
 

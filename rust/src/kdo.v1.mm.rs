@@ -23,54 +23,25 @@ pub struct MarketMaking {
     /// ETF tick size (Price internal representation)
     #[prost(int64, tag="5")]
     pub tick_size: i64,
-    /// 매수 호가 수량
-    #[prost(int64, tag="6")]
-    pub bid_quantity: i64,
-    /// 매도 호가 수량
-    #[prost(int64, tag="7")]
-    pub ask_quantity: i64,
-}
-/// MM 상태 상세
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MarketMakingStatus {
-    /// ISIN 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 현재 상태
-    #[prost(enumeration="MarketMakingState", tag="2")]
-    pub state: i32,
-    /// MM 설정 (config 필드에 momentum 포함)
-    #[prost(message, optional, tag="3")]
-    pub config: ::core::option::Option<MarketMakingConfiguration>,
-    /// 활성 여부
-    #[prost(bool, tag="5")]
-    pub active: bool,
-    /// 펀드 코드
-    #[prost(string, tag="6")]
-    pub fund_code: ::prost::alloc::string::String,
 }
 /// MM 엔진 설정 (MmConfig 대응)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MarketMakingConfiguration {
-    /// Pricing 전략: "plain_follow", "mean_bidask", "nav", "krx_nav"
-    #[prost(string, tag="1")]
-    pub pricing: ::prost::alloc::string::String,
+    /// MM 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
+    #[prost(message, optional, tag="2")]
+    pub pricing: ::core::option::Option<MarketMakingPricing>,
     /// Trade Analyzer 설정
     #[prost(message, optional, tag="3")]
     pub trade_analyzer: ::core::option::Option<MarketMakingTradeAnalyzer>,
-    /// Screening 설정
-    #[prost(message, optional, tag="4")]
-    pub screening: ::core::option::Option<MarketMakingScreening>,
-    /// MM 활성화 여부
-    #[prost(bool, tag="6")]
-    pub enabled: bool,
     /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
-    #[prost(message, optional, tag="7")]
+    #[prost(message, optional, tag="5")]
     pub momentum: ::core::option::Option<MarketMakingMomentum>,
     /// 통합 포지션 관리 설정
-    #[prost(message, optional, tag="8")]
+    #[prost(message, optional, tag="6")]
     pub exposure_balancer: ::core::option::Option<MarketMakingExposureBalancer>,
     /// 기준가격 대비 bid 조정값 (Price internal representation)
     #[prost(int64, tag="10")]
@@ -90,75 +61,57 @@ pub struct MarketMakingConfiguration {
     /// NAV 계산용 ask basis (Price internal representation)
     #[prost(int64, tag="15")]
     pub ask_basis: i64,
-    /// NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
-    #[prost(message, optional, tag="16")]
-    pub nav_config: ::core::option::Option<MarketMakingNavConfig>,
-    /// 펀드 코드 (read-only: UpdateMarketMakingConfig에서 변경 불가)
-    #[prost(string, tag="17")]
-    pub fund_code: ::prost::alloc::string::String,
-    /// ETF tick size (read-only: UpdateMarketMakingConfig에서 변경 불가)
-    #[prost(int64, tag="18")]
-    pub tick_size: i64,
-    /// 호가 depth (read-only: UpdateMarketMakingConfig에서 변경 불가)
-    #[prost(int32, tag="19")]
-    pub depth: i32,
-}
-/// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
-/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingSkew {
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingNavConfig {
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MarketMakingPricing {
     /// EtfPricing 전략 (oneof)
-    #[prost(oneof="market_making_nav_config::Pricing", tags="1, 2, 3, 4")]
-    pub pricing: ::core::option::Option<market_making_nav_config::Pricing>,
+    #[prost(oneof="market_making_pricing::Pricing", tags="1, 2, 3, 4")]
+    pub pricing: ::core::option::Option<market_making_pricing::Pricing>,
 }
-/// Nested message and enum types in `MarketMakingNavConfig`.
-pub mod market_making_nav_config {
+/// Nested message and enum types in `MarketMakingPricing`.
+pub mod market_making_pricing {
     /// EtfPricing 전략 (oneof)
     #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Pricing {
         /// PDF 기반 nav 계산 및 헷지 프라이싱
         #[prost(message, tag="1")]
-        PdfNavHedge(super::EtfPricingPdfNavHedge),
+        PlainFollow(super::PlainFollow),
         /// 지수 추종 헷지 프라이싱
         #[prost(message, tag="2")]
-        IndexTrackingHedge(super::EtfPricingIndexTrackingHedge),
+        MeanBidAsk(super::MeanBidAsk),
         /// 선물 베이시스 기반 프라이싱
         #[prost(message, tag="3")]
-        FutureBasis(super::EtfPricingFutureBasis),
+        Nav(super::Nav),
         /// 레버리지 선물 기반 프라이싱
         #[prost(message, tag="4")]
-        LeverageFuture(super::EtfPricingLeverageFuture),
+        KrxNav(super::KrxNav),
     }
 }
 /// EtfPricing::PdfNavHedge
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct EtfPricingPdfNavHedge {
+pub struct PlainFollow {
 }
 /// EtfPricing::IndexTrackingHedge
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct EtfPricingIndexTrackingHedge {
+pub struct MeanBidAsk {
 }
 /// EtfPricing::FutureBasis { prev_index }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct EtfPricingFutureBasis {
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Nav {
     /// 이전 지수 (Price internal representation)
-    #[prost(int64, tag="1")]
-    pub prev_index: i64,
+    #[prost(message, optional, tag="1")]
+    pub etf_pricing: ::core::option::Option<super::common::EtfPricing>,
 }
 /// EtfPricing::LeverageFuture { prev_index, prev_future }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct EtfPricingLeverageFuture {
+pub struct KrxNav {
     /// 이전 지수 (Price internal representation)
     #[prost(int64, tag="1")]
     pub prev_index: i64,
@@ -185,20 +138,6 @@ pub struct MarketMakingTradeAnalyzer {
     /// 최대 decoration 틱 수
     #[prost(int32, tag="5")]
     pub max_deco_tick: i32,
-}
-/// Pre-trade Screening 설정
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MarketMakingScreening {
-    /// 최대 스프레드 폭 (틱 단위, 0=비활성)
-    #[prost(int32, tag="1")]
-    pub max_spread_width_ticks: i32,
-    /// 최소 가격 (0=비활성)
-    #[prost(int64, tag="2")]
-    pub min_price: i64,
-    /// 최대 가격 (0=비활성)
-    #[prost(int64, tag="3")]
-    pub max_price: i64,
 }
 /// Momentum 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -243,7 +182,7 @@ pub struct MarketMakingExposureBalancer {
     #[prost(int32, tag="3")]
     pub price_skew_ticks: i32,
     /// hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
-    #[prost(int32, tag="8")]
+    #[prost(int32, tag="4")]
     pub limit_multiple: i32,
 }
 // ============================================================================
@@ -302,8 +241,8 @@ pub struct StartMarketMakingRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartMarketMakingResponse {
     /// 시작된 MM 상태
-    #[prost(message, optional, tag="1")]
-    pub status: ::core::option::Option<MarketMakingStatus>,
+    #[prost(enumeration="MarketMakingState", tag="1")]
+    pub state: i32,
     /// 메시지
     #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,
@@ -432,12 +371,6 @@ pub struct MomentumState {
     #[prost(int32, tag="8")]
     pub sample_count: i32,
 }
-/// reserved: SkewState (removed — SkewLogic 제거됨)
-/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct SkewState {
-}
 /// Trade Analyzer 런타임 상태
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -476,8 +409,11 @@ pub struct MmEngineRuntimeState {
     /// 상태 스냅샷 타임스탬프 (Unix nanoseconds)
     #[prost(int64, tag="2")]
     pub timestamp: i64,
+    /// MM 상태
+    #[prost(enumeration="MarketMakingState", tag="3")]
+    pub state: i32,
     /// Momentum 상태
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag="4")]
     pub momentum: ::core::option::Option<MomentumState>,
     /// Trade Analyzer 상태
     #[prost(message, optional, tag="5")]

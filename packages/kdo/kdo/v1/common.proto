@@ -54,6 +54,41 @@ enum OrderConditionType {
   ORDER_CONDITION_TYPE_FOK = 3;
 }
 
+// ETF 가격 산출 방식
+message EtfPricing {
+  oneof method {
+    // 분해 헷지 방식
+    PdfNavHedgePricing pdf_nav_hedge = 1;
+
+    // 선물 헷지 방식
+    IndexTrackingHedgePricing index_tracking_hedge = 2;
+
+    FutureBasis future_basis = 3;
+
+    // 레버리지 선물 방식
+    LeverageFuturePricing leverage_future = 4;
+  }
+}
+
+// 분해 헷지 가격 산출 (추가 파라미터 없음)
+message PdfNavHedgePricing {}
+
+// 선물 헷지 가격 산출
+message IndexTrackingHedgePricing {}
+
+message FutureBasis {
+  string prev_index = 1;
+}
+
+// 레버리지 선물 가격 산출
+message LeverageFuturePricing {
+  // 기초지수 전일종가
+  double prev_index = 1;
+
+  // 선물 전일종가
+  double prev_future = 2;
+}
+
 // 자동정정 전략 유형
 enum AmendMethodType {
   // 미지정 (기본값: TIMED_MARKET으로 처리)

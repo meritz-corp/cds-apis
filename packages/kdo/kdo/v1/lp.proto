@@ -8,6 +8,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -132,7 +133,7 @@ message EtfLp {
   bool enabled = 11;
 
   // ETF 가격 산출 방식
-  EtfPricing pricing_method = 12;
+  kdo.v1.common.EtfPricing pricing_method = 12;
 
   // 매수 호가 조정값
   optional double bid_adjustment = 13;
@@ -178,41 +179,6 @@ message EtfLpQuantityLimit {
   // net_quantity < 0 && |net_quantity| >= max_net_quantity → 매도 차단
   // 미설정(None) 시 순포지션 기반 차단 비활성
   optional int64 max_net_quantity = 6;
-}
-
-// ETF 가격 산출 방식
-message EtfPricing {
-  oneof method {
-    // 분해 헷지 방식
-    PdfNavHedgePricing pdf_nav_hedge = 1;
-
-    // 선물 헷지 방식
-    IndexTrackingHedgePricing index_tracking_hedge = 2;
-
-    FutureBasis future_basis = 3;
-
-    // 레버리지 선물 방식
-    LeverageFuturePricing leverage_future = 4;
-  }
-}
-
-// 분해 헷지 가격 산출 (추가 파라미터 없음)
-message PdfNavHedgePricing {}
-
-// 선물 헷지 가격 산출
-message IndexTrackingHedgePricing {}
-
-message FutureBasis {
-  string prev_index = 1;
-}
-
-// 레버리지 선물 가격 산출
-message LeverageFuturePricing {
-  // 기초지수 전일종가
-  double prev_index = 1;
-
-  // 선물 전일종가
-  double prev_future = 2;
 }
 
 // ========== ETF LP Status Messages ==========

@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pb.dart' as $1;
 import 'mm.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -29,8 +30,6 @@ class MarketMaking extends $pb.GeneratedMessage {
     MarketMakingConfiguration? config,
     $core.String? fundCode,
     $fixnum.Int64? tickSize,
-    $fixnum.Int64? bidQuantity,
-    $fixnum.Int64? askQuantity,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -38,8 +37,6 @@ class MarketMaking extends $pb.GeneratedMessage {
     if (config != null) result.config = config;
     if (fundCode != null) result.fundCode = fundCode;
     if (tickSize != null) result.tickSize = tickSize;
-    if (bidQuantity != null) result.bidQuantity = bidQuantity;
-    if (askQuantity != null) result.askQuantity = askQuantity;
     return result;
   }
 
@@ -54,8 +51,6 @@ class MarketMaking extends $pb.GeneratedMessage {
     ..aOM<MarketMakingConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aOS(4, _omitFieldNames ? '' : 'fundCode')
     ..aInt64(5, _omitFieldNames ? '' : 'tickSize')
-    ..aInt64(6, _omitFieldNames ? '' : 'bidQuantity')
-    ..aInt64(7, _omitFieldNames ? '' : 'askQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -127,137 +122,14 @@ class MarketMaking extends $pb.GeneratedMessage {
   $core.bool hasTickSize() => $_has(4);
   @$pb.TagNumber(5)
   void clearTickSize() => $_clearField(5);
-
-  /// 매수 호가 수량
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get bidQuantity => $_getI64(5);
-  @$pb.TagNumber(6)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasBidQuantity() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearBidQuantity() => $_clearField(6);
-
-  /// 매도 호가 수량
-  @$pb.TagNumber(7)
-  $fixnum.Int64 get askQuantity => $_getI64(6);
-  @$pb.TagNumber(7)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasAskQuantity() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearAskQuantity() => $_clearField(7);
-}
-
-/// MM 상태 상세
-class MarketMakingStatus extends $pb.GeneratedMessage {
-  factory MarketMakingStatus({
-    $core.String? symbol,
-    MarketMakingState? state,
-    MarketMakingConfiguration? config,
-    $core.bool? active,
-    $core.String? fundCode,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (state != null) result.state = state;
-    if (config != null) result.config = config;
-    if (active != null) result.active = active;
-    if (fundCode != null) result.fundCode = fundCode;
-    return result;
-  }
-
-  MarketMakingStatus._();
-
-  factory MarketMakingStatus.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MarketMakingStatus.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..e<MarketMakingState>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingState.MARKET_MAKING_STATE_UNSPECIFIED, valueOf: MarketMakingState.valueOf, enumValues: MarketMakingState.values)
-    ..aOM<MarketMakingConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
-    ..aOB(5, _omitFieldNames ? '' : 'active')
-    ..aOS(6, _omitFieldNames ? '' : 'fundCode')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingStatus clone() => MarketMakingStatus()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingStatus copyWith(void Function(MarketMakingStatus) updates) => super.copyWith((message) => updates(message as MarketMakingStatus)) as MarketMakingStatus;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingStatus create() => MarketMakingStatus._();
-  @$core.override
-  MarketMakingStatus createEmptyInstance() => create();
-  static $pb.PbList<MarketMakingStatus> createRepeated() => $pb.PbList<MarketMakingStatus>();
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingStatus getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingStatus>(create);
-  static MarketMakingStatus? _defaultInstance;
-
-  /// ISIN 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// 현재 상태
-  @$pb.TagNumber(2)
-  MarketMakingState get state => $_getN(1);
-  @$pb.TagNumber(2)
-  set state(MarketMakingState value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasState() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearState() => $_clearField(2);
-
-  /// MM 설정 (config 필드에 momentum 포함)
-  @$pb.TagNumber(3)
-  MarketMakingConfiguration get config => $_getN(2);
-  @$pb.TagNumber(3)
-  set config(MarketMakingConfiguration value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasConfig() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearConfig() => $_clearField(3);
-  @$pb.TagNumber(3)
-  MarketMakingConfiguration ensureConfig() => $_ensure(2);
-
-  /// 활성 여부
-  @$pb.TagNumber(5)
-  $core.bool get active => $_getBF(3);
-  @$pb.TagNumber(5)
-  set active($core.bool value) => $_setBool(3, value);
-  @$pb.TagNumber(5)
-  $core.bool hasActive() => $_has(3);
-  @$pb.TagNumber(5)
-  void clearActive() => $_clearField(5);
-
-  /// 펀드 코드
-  @$pb.TagNumber(6)
-  $core.String get fundCode => $_getSZ(4);
-  @$pb.TagNumber(6)
-  set fundCode($core.String value) => $_setString(4, value);
-  @$pb.TagNumber(6)
-  $core.bool hasFundCode() => $_has(4);
-  @$pb.TagNumber(6)
-  void clearFundCode() => $_clearField(6);
 }
 
 /// MM 엔진 설정 (MmConfig 대응)
 class MarketMakingConfiguration extends $pb.GeneratedMessage {
   factory MarketMakingConfiguration({
-    $core.String? pricing,
-    MarketMakingTradeAnalyzer? tradeAnalyzer,
-    MarketMakingScreening? screening,
     $core.bool? enabled,
+    MarketMakingPricing? pricing,
+    MarketMakingTradeAnalyzer? tradeAnalyzer,
     MarketMakingMomentum? momentum,
     MarketMakingExposureBalancer? exposureBalancer,
     $fixnum.Int64? bidAdjustment,
@@ -266,16 +138,11 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? askQuantity,
     $fixnum.Int64? bidBasis,
     $fixnum.Int64? askBasis,
-    MarketMakingNavConfig? navConfig,
-    $core.String? fundCode,
-    $fixnum.Int64? tickSize,
-    $core.int? depth,
   }) {
     final result = create();
+    if (enabled != null) result.enabled = enabled;
     if (pricing != null) result.pricing = pricing;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
-    if (screening != null) result.screening = screening;
-    if (enabled != null) result.enabled = enabled;
     if (momentum != null) result.momentum = momentum;
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
@@ -284,10 +151,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (askBasis != null) result.askBasis = askBasis;
-    if (navConfig != null) result.navConfig = navConfig;
-    if (fundCode != null) result.fundCode = fundCode;
-    if (tickSize != null) result.tickSize = tickSize;
-    if (depth != null) result.depth = depth;
     return result;
   }
 
@@ -297,22 +160,17 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   factory MarketMakingConfiguration.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingConfiguration', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'pricing')
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..aOM<MarketMakingPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: MarketMakingPricing.create)
     ..aOM<MarketMakingTradeAnalyzer>(3, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: MarketMakingTradeAnalyzer.create)
-    ..aOM<MarketMakingScreening>(4, _omitFieldNames ? '' : 'screening', subBuilder: MarketMakingScreening.create)
-    ..aOB(6, _omitFieldNames ? '' : 'enabled')
-    ..aOM<MarketMakingMomentum>(7, _omitFieldNames ? '' : 'momentum', subBuilder: MarketMakingMomentum.create)
-    ..aOM<MarketMakingExposureBalancer>(8, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: MarketMakingExposureBalancer.create)
+    ..aOM<MarketMakingMomentum>(5, _omitFieldNames ? '' : 'momentum', subBuilder: MarketMakingMomentum.create)
+    ..aOM<MarketMakingExposureBalancer>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: MarketMakingExposureBalancer.create)
     ..aInt64(10, _omitFieldNames ? '' : 'bidAdjustment')
     ..aInt64(11, _omitFieldNames ? '' : 'askAdjustment')
     ..aInt64(12, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(13, _omitFieldNames ? '' : 'askQuantity')
     ..aInt64(14, _omitFieldNames ? '' : 'bidBasis')
     ..aInt64(15, _omitFieldNames ? '' : 'askBasis')
-    ..aOM<MarketMakingNavConfig>(16, _omitFieldNames ? '' : 'navConfig', subBuilder: MarketMakingNavConfig.create)
-    ..aOS(17, _omitFieldNames ? '' : 'fundCode')
-    ..aInt64(18, _omitFieldNames ? '' : 'tickSize')
-    ..a<$core.int>(19, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -333,436 +191,354 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   static MarketMakingConfiguration getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingConfiguration>(create);
   static MarketMakingConfiguration? _defaultInstance;
 
-  /// Pricing 전략: "plain_follow", "mean_bidask", "nav", "krx_nav"
+  /// MM 활성화 여부
   @$pb.TagNumber(1)
-  $core.String get pricing => $_getSZ(0);
+  $core.bool get enabled => $_getBF(0);
   @$pb.TagNumber(1)
-  set pricing($core.String value) => $_setString(0, value);
+  set enabled($core.bool value) => $_setBool(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasPricing() => $_has(0);
+  $core.bool hasEnabled() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPricing() => $_clearField(1);
+  void clearEnabled() => $_clearField(1);
+
+  /// NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
+  @$pb.TagNumber(2)
+  MarketMakingPricing get pricing => $_getN(1);
+  @$pb.TagNumber(2)
+  set pricing(MarketMakingPricing value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPricing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPricing() => $_clearField(2);
+  @$pb.TagNumber(2)
+  MarketMakingPricing ensurePricing() => $_ensure(1);
 
   /// Trade Analyzer 설정
   @$pb.TagNumber(3)
-  MarketMakingTradeAnalyzer get tradeAnalyzer => $_getN(1);
+  MarketMakingTradeAnalyzer get tradeAnalyzer => $_getN(2);
   @$pb.TagNumber(3)
   set tradeAnalyzer(MarketMakingTradeAnalyzer value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasTradeAnalyzer() => $_has(1);
+  $core.bool hasTradeAnalyzer() => $_has(2);
   @$pb.TagNumber(3)
   void clearTradeAnalyzer() => $_clearField(3);
   @$pb.TagNumber(3)
-  MarketMakingTradeAnalyzer ensureTradeAnalyzer() => $_ensure(1);
-
-  /// Screening 설정
-  @$pb.TagNumber(4)
-  MarketMakingScreening get screening => $_getN(2);
-  @$pb.TagNumber(4)
-  set screening(MarketMakingScreening value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasScreening() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearScreening() => $_clearField(4);
-  @$pb.TagNumber(4)
-  MarketMakingScreening ensureScreening() => $_ensure(2);
-
-  /// MM 활성화 여부
-  @$pb.TagNumber(6)
-  $core.bool get enabled => $_getBF(3);
-  @$pb.TagNumber(6)
-  set enabled($core.bool value) => $_setBool(3, value);
-  @$pb.TagNumber(6)
-  $core.bool hasEnabled() => $_has(3);
-  @$pb.TagNumber(6)
-  void clearEnabled() => $_clearField(6);
+  MarketMakingTradeAnalyzer ensureTradeAnalyzer() => $_ensure(2);
 
   /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
-  @$pb.TagNumber(7)
-  MarketMakingMomentum get momentum => $_getN(4);
-  @$pb.TagNumber(7)
-  set momentum(MarketMakingMomentum value) => $_setField(7, value);
-  @$pb.TagNumber(7)
-  $core.bool hasMomentum() => $_has(4);
-  @$pb.TagNumber(7)
-  void clearMomentum() => $_clearField(7);
-  @$pb.TagNumber(7)
-  MarketMakingMomentum ensureMomentum() => $_ensure(4);
+  @$pb.TagNumber(5)
+  MarketMakingMomentum get momentum => $_getN(3);
+  @$pb.TagNumber(5)
+  set momentum(MarketMakingMomentum value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMomentum() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearMomentum() => $_clearField(5);
+  @$pb.TagNumber(5)
+  MarketMakingMomentum ensureMomentum() => $_ensure(3);
 
   /// 통합 포지션 관리 설정
-  @$pb.TagNumber(8)
-  MarketMakingExposureBalancer get exposureBalancer => $_getN(5);
-  @$pb.TagNumber(8)
-  set exposureBalancer(MarketMakingExposureBalancer value) => $_setField(8, value);
-  @$pb.TagNumber(8)
-  $core.bool hasExposureBalancer() => $_has(5);
-  @$pb.TagNumber(8)
-  void clearExposureBalancer() => $_clearField(8);
-  @$pb.TagNumber(8)
-  MarketMakingExposureBalancer ensureExposureBalancer() => $_ensure(5);
+  @$pb.TagNumber(6)
+  MarketMakingExposureBalancer get exposureBalancer => $_getN(4);
+  @$pb.TagNumber(6)
+  set exposureBalancer(MarketMakingExposureBalancer value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasExposureBalancer() => $_has(4);
+  @$pb.TagNumber(6)
+  void clearExposureBalancer() => $_clearField(6);
+  @$pb.TagNumber(6)
+  MarketMakingExposureBalancer ensureExposureBalancer() => $_ensure(4);
 
   /// 기준가격 대비 bid 조정값 (Price internal representation)
   @$pb.TagNumber(10)
-  $fixnum.Int64 get bidAdjustment => $_getI64(6);
+  $fixnum.Int64 get bidAdjustment => $_getI64(5);
   @$pb.TagNumber(10)
-  set bidAdjustment($fixnum.Int64 value) => $_setInt64(6, value);
+  set bidAdjustment($fixnum.Int64 value) => $_setInt64(5, value);
   @$pb.TagNumber(10)
-  $core.bool hasBidAdjustment() => $_has(6);
+  $core.bool hasBidAdjustment() => $_has(5);
   @$pb.TagNumber(10)
   void clearBidAdjustment() => $_clearField(10);
 
   /// 기준가격 대비 ask 조정값 (Price internal representation)
   @$pb.TagNumber(11)
-  $fixnum.Int64 get askAdjustment => $_getI64(7);
+  $fixnum.Int64 get askAdjustment => $_getI64(6);
   @$pb.TagNumber(11)
-  set askAdjustment($fixnum.Int64 value) => $_setInt64(7, value);
+  set askAdjustment($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(11)
-  $core.bool hasAskAdjustment() => $_has(7);
+  $core.bool hasAskAdjustment() => $_has(6);
   @$pb.TagNumber(11)
   void clearAskAdjustment() => $_clearField(11);
 
   /// 레벨당 매수 수량
   @$pb.TagNumber(12)
-  $fixnum.Int64 get bidQuantity => $_getI64(8);
+  $fixnum.Int64 get bidQuantity => $_getI64(7);
   @$pb.TagNumber(12)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(12)
-  $core.bool hasBidQuantity() => $_has(8);
+  $core.bool hasBidQuantity() => $_has(7);
   @$pb.TagNumber(12)
   void clearBidQuantity() => $_clearField(12);
 
   /// 레벨당 매도 수량
   @$pb.TagNumber(13)
-  $fixnum.Int64 get askQuantity => $_getI64(9);
+  $fixnum.Int64 get askQuantity => $_getI64(8);
   @$pb.TagNumber(13)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(13)
-  $core.bool hasAskQuantity() => $_has(9);
+  $core.bool hasAskQuantity() => $_has(8);
   @$pb.TagNumber(13)
   void clearAskQuantity() => $_clearField(13);
 
   /// NAV 계산용 bid basis (Price internal representation)
   @$pb.TagNumber(14)
-  $fixnum.Int64 get bidBasis => $_getI64(10);
+  $fixnum.Int64 get bidBasis => $_getI64(9);
   @$pb.TagNumber(14)
-  set bidBasis($fixnum.Int64 value) => $_setInt64(10, value);
+  set bidBasis($fixnum.Int64 value) => $_setInt64(9, value);
   @$pb.TagNumber(14)
-  $core.bool hasBidBasis() => $_has(10);
+  $core.bool hasBidBasis() => $_has(9);
   @$pb.TagNumber(14)
   void clearBidBasis() => $_clearField(14);
 
   /// NAV 계산용 ask basis (Price internal representation)
   @$pb.TagNumber(15)
-  $fixnum.Int64 get askBasis => $_getI64(11);
+  $fixnum.Int64 get askBasis => $_getI64(10);
   @$pb.TagNumber(15)
-  set askBasis($fixnum.Int64 value) => $_setInt64(11, value);
+  set askBasis($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(15)
-  $core.bool hasAskBasis() => $_has(11);
+  $core.bool hasAskBasis() => $_has(10);
   @$pb.TagNumber(15)
   void clearAskBasis() => $_clearField(15);
-
-  /// NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
-  @$pb.TagNumber(16)
-  MarketMakingNavConfig get navConfig => $_getN(12);
-  @$pb.TagNumber(16)
-  set navConfig(MarketMakingNavConfig value) => $_setField(16, value);
-  @$pb.TagNumber(16)
-  $core.bool hasNavConfig() => $_has(12);
-  @$pb.TagNumber(16)
-  void clearNavConfig() => $_clearField(16);
-  @$pb.TagNumber(16)
-  MarketMakingNavConfig ensureNavConfig() => $_ensure(12);
-
-  /// 펀드 코드 (read-only: UpdateMarketMakingConfig에서 변경 불가)
-  @$pb.TagNumber(17)
-  $core.String get fundCode => $_getSZ(13);
-  @$pb.TagNumber(17)
-  set fundCode($core.String value) => $_setString(13, value);
-  @$pb.TagNumber(17)
-  $core.bool hasFundCode() => $_has(13);
-  @$pb.TagNumber(17)
-  void clearFundCode() => $_clearField(17);
-
-  /// ETF tick size (read-only: UpdateMarketMakingConfig에서 변경 불가)
-  @$pb.TagNumber(18)
-  $fixnum.Int64 get tickSize => $_getI64(14);
-  @$pb.TagNumber(18)
-  set tickSize($fixnum.Int64 value) => $_setInt64(14, value);
-  @$pb.TagNumber(18)
-  $core.bool hasTickSize() => $_has(14);
-  @$pb.TagNumber(18)
-  void clearTickSize() => $_clearField(18);
-
-  /// 호가 depth (read-only: UpdateMarketMakingConfig에서 변경 불가)
-  @$pb.TagNumber(19)
-  $core.int get depth => $_getIZ(15);
-  @$pb.TagNumber(19)
-  set depth($core.int value) => $_setSignedInt32(15, value);
-  @$pb.TagNumber(19)
-  $core.bool hasDepth() => $_has(15);
-  @$pb.TagNumber(19)
-  void clearDepth() => $_clearField(19);
 }
 
-/// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
-/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
-class MarketMakingSkew extends $pb.GeneratedMessage {
-  factory MarketMakingSkew() => create();
-
-  MarketMakingSkew._();
-
-  factory MarketMakingSkew.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MarketMakingSkew.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingSkew', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingSkew clone() => MarketMakingSkew()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingSkew copyWith(void Function(MarketMakingSkew) updates) => super.copyWith((message) => updates(message as MarketMakingSkew)) as MarketMakingSkew;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingSkew create() => MarketMakingSkew._();
-  @$core.override
-  MarketMakingSkew createEmptyInstance() => create();
-  static $pb.PbList<MarketMakingSkew> createRepeated() => $pb.PbList<MarketMakingSkew>();
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingSkew getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingSkew>(create);
-  static MarketMakingSkew? _defaultInstance;
-}
-
-enum MarketMakingNavConfig_Pricing {
-  pdfNavHedge, 
-  indexTrackingHedge, 
-  futureBasis, 
-  leverageFuture, 
+enum MarketMakingPricing_Pricing {
+  plainFollow, 
+  meanBidAsk, 
+  nav, 
+  krxNav, 
   notSet
 }
 
 /// NAV pricing 상세 설정
-class MarketMakingNavConfig extends $pb.GeneratedMessage {
-  factory MarketMakingNavConfig({
-    EtfPricingPdfNavHedge? pdfNavHedge,
-    EtfPricingIndexTrackingHedge? indexTrackingHedge,
-    EtfPricingFutureBasis? futureBasis,
-    EtfPricingLeverageFuture? leverageFuture,
+class MarketMakingPricing extends $pb.GeneratedMessage {
+  factory MarketMakingPricing({
+    PlainFollow? plainFollow,
+    MeanBidAsk? meanBidAsk,
+    Nav? nav,
+    KrxNav? krxNav,
   }) {
     final result = create();
-    if (pdfNavHedge != null) result.pdfNavHedge = pdfNavHedge;
-    if (indexTrackingHedge != null) result.indexTrackingHedge = indexTrackingHedge;
-    if (futureBasis != null) result.futureBasis = futureBasis;
-    if (leverageFuture != null) result.leverageFuture = leverageFuture;
+    if (plainFollow != null) result.plainFollow = plainFollow;
+    if (meanBidAsk != null) result.meanBidAsk = meanBidAsk;
+    if (nav != null) result.nav = nav;
+    if (krxNav != null) result.krxNav = krxNav;
     return result;
   }
 
-  MarketMakingNavConfig._();
+  MarketMakingPricing._();
 
-  factory MarketMakingNavConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MarketMakingNavConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MarketMakingPricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static const $core.Map<$core.int, MarketMakingNavConfig_Pricing> _MarketMakingNavConfig_PricingByTag = {
-    1 : MarketMakingNavConfig_Pricing.pdfNavHedge,
-    2 : MarketMakingNavConfig_Pricing.indexTrackingHedge,
-    3 : MarketMakingNavConfig_Pricing.futureBasis,
-    4 : MarketMakingNavConfig_Pricing.leverageFuture,
-    0 : MarketMakingNavConfig_Pricing.notSet
+  static const $core.Map<$core.int, MarketMakingPricing_Pricing> _MarketMakingPricing_PricingByTag = {
+    1 : MarketMakingPricing_Pricing.plainFollow,
+    2 : MarketMakingPricing_Pricing.meanBidAsk,
+    3 : MarketMakingPricing_Pricing.nav,
+    4 : MarketMakingPricing_Pricing.krxNav,
+    0 : MarketMakingPricing_Pricing.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingNavConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..oo(0, [1, 2, 3, 4])
-    ..aOM<EtfPricingPdfNavHedge>(1, _omitFieldNames ? '' : 'pdfNavHedge', subBuilder: EtfPricingPdfNavHedge.create)
-    ..aOM<EtfPricingIndexTrackingHedge>(2, _omitFieldNames ? '' : 'indexTrackingHedge', subBuilder: EtfPricingIndexTrackingHedge.create)
-    ..aOM<EtfPricingFutureBasis>(3, _omitFieldNames ? '' : 'futureBasis', subBuilder: EtfPricingFutureBasis.create)
-    ..aOM<EtfPricingLeverageFuture>(4, _omitFieldNames ? '' : 'leverageFuture', subBuilder: EtfPricingLeverageFuture.create)
+    ..aOM<PlainFollow>(1, _omitFieldNames ? '' : 'plainFollow', subBuilder: PlainFollow.create)
+    ..aOM<MeanBidAsk>(2, _omitFieldNames ? '' : 'meanBidAsk', subBuilder: MeanBidAsk.create)
+    ..aOM<Nav>(3, _omitFieldNames ? '' : 'nav', subBuilder: Nav.create)
+    ..aOM<KrxNav>(4, _omitFieldNames ? '' : 'krxNav', subBuilder: KrxNav.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingNavConfig clone() => MarketMakingNavConfig()..mergeFromMessage(this);
+  MarketMakingPricing clone() => MarketMakingPricing()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingNavConfig copyWith(void Function(MarketMakingNavConfig) updates) => super.copyWith((message) => updates(message as MarketMakingNavConfig)) as MarketMakingNavConfig;
+  MarketMakingPricing copyWith(void Function(MarketMakingPricing) updates) => super.copyWith((message) => updates(message as MarketMakingPricing)) as MarketMakingPricing;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MarketMakingNavConfig create() => MarketMakingNavConfig._();
+  static MarketMakingPricing create() => MarketMakingPricing._();
   @$core.override
-  MarketMakingNavConfig createEmptyInstance() => create();
-  static $pb.PbList<MarketMakingNavConfig> createRepeated() => $pb.PbList<MarketMakingNavConfig>();
+  MarketMakingPricing createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingPricing> createRepeated() => $pb.PbList<MarketMakingPricing>();
   @$core.pragma('dart2js:noInline')
-  static MarketMakingNavConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingNavConfig>(create);
-  static MarketMakingNavConfig? _defaultInstance;
+  static MarketMakingPricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingPricing>(create);
+  static MarketMakingPricing? _defaultInstance;
 
-  MarketMakingNavConfig_Pricing whichPricing() => _MarketMakingNavConfig_PricingByTag[$_whichOneof(0)]!;
+  MarketMakingPricing_Pricing whichPricing() => _MarketMakingPricing_PricingByTag[$_whichOneof(0)]!;
   void clearPricing() => $_clearField($_whichOneof(0));
 
   /// PDF 기반 nav 계산 및 헷지 프라이싱
   @$pb.TagNumber(1)
-  EtfPricingPdfNavHedge get pdfNavHedge => $_getN(0);
+  PlainFollow get plainFollow => $_getN(0);
   @$pb.TagNumber(1)
-  set pdfNavHedge(EtfPricingPdfNavHedge value) => $_setField(1, value);
+  set plainFollow(PlainFollow value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasPdfNavHedge() => $_has(0);
+  $core.bool hasPlainFollow() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPdfNavHedge() => $_clearField(1);
+  void clearPlainFollow() => $_clearField(1);
   @$pb.TagNumber(1)
-  EtfPricingPdfNavHedge ensurePdfNavHedge() => $_ensure(0);
+  PlainFollow ensurePlainFollow() => $_ensure(0);
 
   /// 지수 추종 헷지 프라이싱
   @$pb.TagNumber(2)
-  EtfPricingIndexTrackingHedge get indexTrackingHedge => $_getN(1);
+  MeanBidAsk get meanBidAsk => $_getN(1);
   @$pb.TagNumber(2)
-  set indexTrackingHedge(EtfPricingIndexTrackingHedge value) => $_setField(2, value);
+  set meanBidAsk(MeanBidAsk value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasIndexTrackingHedge() => $_has(1);
+  $core.bool hasMeanBidAsk() => $_has(1);
   @$pb.TagNumber(2)
-  void clearIndexTrackingHedge() => $_clearField(2);
+  void clearMeanBidAsk() => $_clearField(2);
   @$pb.TagNumber(2)
-  EtfPricingIndexTrackingHedge ensureIndexTrackingHedge() => $_ensure(1);
+  MeanBidAsk ensureMeanBidAsk() => $_ensure(1);
 
   /// 선물 베이시스 기반 프라이싱
   @$pb.TagNumber(3)
-  EtfPricingFutureBasis get futureBasis => $_getN(2);
+  Nav get nav => $_getN(2);
   @$pb.TagNumber(3)
-  set futureBasis(EtfPricingFutureBasis value) => $_setField(3, value);
+  set nav(Nav value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasFutureBasis() => $_has(2);
+  $core.bool hasNav() => $_has(2);
   @$pb.TagNumber(3)
-  void clearFutureBasis() => $_clearField(3);
+  void clearNav() => $_clearField(3);
   @$pb.TagNumber(3)
-  EtfPricingFutureBasis ensureFutureBasis() => $_ensure(2);
+  Nav ensureNav() => $_ensure(2);
 
   /// 레버리지 선물 기반 프라이싱
   @$pb.TagNumber(4)
-  EtfPricingLeverageFuture get leverageFuture => $_getN(3);
+  KrxNav get krxNav => $_getN(3);
   @$pb.TagNumber(4)
-  set leverageFuture(EtfPricingLeverageFuture value) => $_setField(4, value);
+  set krxNav(KrxNav value) => $_setField(4, value);
   @$pb.TagNumber(4)
-  $core.bool hasLeverageFuture() => $_has(3);
+  $core.bool hasKrxNav() => $_has(3);
   @$pb.TagNumber(4)
-  void clearLeverageFuture() => $_clearField(4);
+  void clearKrxNav() => $_clearField(4);
   @$pb.TagNumber(4)
-  EtfPricingLeverageFuture ensureLeverageFuture() => $_ensure(3);
+  KrxNav ensureKrxNav() => $_ensure(3);
 }
 
 /// EtfPricing::PdfNavHedge
-class EtfPricingPdfNavHedge extends $pb.GeneratedMessage {
-  factory EtfPricingPdfNavHedge() => create();
+class PlainFollow extends $pb.GeneratedMessage {
+  factory PlainFollow() => create();
 
-  EtfPricingPdfNavHedge._();
+  PlainFollow._();
 
-  factory EtfPricingPdfNavHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfPricingPdfNavHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory PlainFollow.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PlainFollow.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingPdfNavHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlainFollow', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingPdfNavHedge clone() => EtfPricingPdfNavHedge()..mergeFromMessage(this);
+  PlainFollow clone() => PlainFollow()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingPdfNavHedge copyWith(void Function(EtfPricingPdfNavHedge) updates) => super.copyWith((message) => updates(message as EtfPricingPdfNavHedge)) as EtfPricingPdfNavHedge;
+  PlainFollow copyWith(void Function(PlainFollow) updates) => super.copyWith((message) => updates(message as PlainFollow)) as PlainFollow;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfPricingPdfNavHedge create() => EtfPricingPdfNavHedge._();
+  static PlainFollow create() => PlainFollow._();
   @$core.override
-  EtfPricingPdfNavHedge createEmptyInstance() => create();
-  static $pb.PbList<EtfPricingPdfNavHedge> createRepeated() => $pb.PbList<EtfPricingPdfNavHedge>();
+  PlainFollow createEmptyInstance() => create();
+  static $pb.PbList<PlainFollow> createRepeated() => $pb.PbList<PlainFollow>();
   @$core.pragma('dart2js:noInline')
-  static EtfPricingPdfNavHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingPdfNavHedge>(create);
-  static EtfPricingPdfNavHedge? _defaultInstance;
+  static PlainFollow getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlainFollow>(create);
+  static PlainFollow? _defaultInstance;
 }
 
 /// EtfPricing::IndexTrackingHedge
-class EtfPricingIndexTrackingHedge extends $pb.GeneratedMessage {
-  factory EtfPricingIndexTrackingHedge() => create();
+class MeanBidAsk extends $pb.GeneratedMessage {
+  factory MeanBidAsk() => create();
 
-  EtfPricingIndexTrackingHedge._();
+  MeanBidAsk._();
 
-  factory EtfPricingIndexTrackingHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfPricingIndexTrackingHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MeanBidAsk.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MeanBidAsk.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingIndexTrackingHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeanBidAsk', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingIndexTrackingHedge clone() => EtfPricingIndexTrackingHedge()..mergeFromMessage(this);
+  MeanBidAsk clone() => MeanBidAsk()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingIndexTrackingHedge copyWith(void Function(EtfPricingIndexTrackingHedge) updates) => super.copyWith((message) => updates(message as EtfPricingIndexTrackingHedge)) as EtfPricingIndexTrackingHedge;
+  MeanBidAsk copyWith(void Function(MeanBidAsk) updates) => super.copyWith((message) => updates(message as MeanBidAsk)) as MeanBidAsk;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfPricingIndexTrackingHedge create() => EtfPricingIndexTrackingHedge._();
+  static MeanBidAsk create() => MeanBidAsk._();
   @$core.override
-  EtfPricingIndexTrackingHedge createEmptyInstance() => create();
-  static $pb.PbList<EtfPricingIndexTrackingHedge> createRepeated() => $pb.PbList<EtfPricingIndexTrackingHedge>();
+  MeanBidAsk createEmptyInstance() => create();
+  static $pb.PbList<MeanBidAsk> createRepeated() => $pb.PbList<MeanBidAsk>();
   @$core.pragma('dart2js:noInline')
-  static EtfPricingIndexTrackingHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingIndexTrackingHedge>(create);
-  static EtfPricingIndexTrackingHedge? _defaultInstance;
+  static MeanBidAsk getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MeanBidAsk>(create);
+  static MeanBidAsk? _defaultInstance;
 }
 
 /// EtfPricing::FutureBasis { prev_index }
-class EtfPricingFutureBasis extends $pb.GeneratedMessage {
-  factory EtfPricingFutureBasis({
-    $fixnum.Int64? prevIndex,
+class Nav extends $pb.GeneratedMessage {
+  factory Nav({
+    $1.EtfPricing? etfPricing,
   }) {
     final result = create();
-    if (prevIndex != null) result.prevIndex = prevIndex;
+    if (etfPricing != null) result.etfPricing = etfPricing;
     return result;
   }
 
-  EtfPricingFutureBasis._();
+  Nav._();
 
-  factory EtfPricingFutureBasis.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfPricingFutureBasis.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory Nav.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Nav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingFutureBasis', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'prevIndex')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Nav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOM<$1.EtfPricing>(1, _omitFieldNames ? '' : 'etfPricing', subBuilder: $1.EtfPricing.create)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingFutureBasis clone() => EtfPricingFutureBasis()..mergeFromMessage(this);
+  Nav clone() => Nav()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingFutureBasis copyWith(void Function(EtfPricingFutureBasis) updates) => super.copyWith((message) => updates(message as EtfPricingFutureBasis)) as EtfPricingFutureBasis;
+  Nav copyWith(void Function(Nav) updates) => super.copyWith((message) => updates(message as Nav)) as Nav;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfPricingFutureBasis create() => EtfPricingFutureBasis._();
+  static Nav create() => Nav._();
   @$core.override
-  EtfPricingFutureBasis createEmptyInstance() => create();
-  static $pb.PbList<EtfPricingFutureBasis> createRepeated() => $pb.PbList<EtfPricingFutureBasis>();
+  Nav createEmptyInstance() => create();
+  static $pb.PbList<Nav> createRepeated() => $pb.PbList<Nav>();
   @$core.pragma('dart2js:noInline')
-  static EtfPricingFutureBasis getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingFutureBasis>(create);
-  static EtfPricingFutureBasis? _defaultInstance;
+  static Nav getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Nav>(create);
+  static Nav? _defaultInstance;
 
   /// 이전 지수 (Price internal representation)
   @$pb.TagNumber(1)
-  $fixnum.Int64 get prevIndex => $_getI64(0);
+  $1.EtfPricing get etfPricing => $_getN(0);
   @$pb.TagNumber(1)
-  set prevIndex($fixnum.Int64 value) => $_setInt64(0, value);
+  set etfPricing($1.EtfPricing value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasPrevIndex() => $_has(0);
+  $core.bool hasEtfPricing() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPrevIndex() => $_clearField(1);
+  void clearEtfPricing() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.EtfPricing ensureEtfPricing() => $_ensure(0);
 }
 
 /// EtfPricing::LeverageFuture { prev_index, prev_future }
-class EtfPricingLeverageFuture extends $pb.GeneratedMessage {
-  factory EtfPricingLeverageFuture({
+class KrxNav extends $pb.GeneratedMessage {
+  factory KrxNav({
     $fixnum.Int64? prevIndex,
     $fixnum.Int64? prevFuture,
   }) {
@@ -772,33 +548,33 @@ class EtfPricingLeverageFuture extends $pb.GeneratedMessage {
     return result;
   }
 
-  EtfPricingLeverageFuture._();
+  KrxNav._();
 
-  factory EtfPricingLeverageFuture.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfPricingLeverageFuture.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory KrxNav.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory KrxNav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricingLeverageFuture', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'KrxNav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'prevIndex')
     ..aInt64(2, _omitFieldNames ? '' : 'prevFuture')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingLeverageFuture clone() => EtfPricingLeverageFuture()..mergeFromMessage(this);
+  KrxNav clone() => KrxNav()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricingLeverageFuture copyWith(void Function(EtfPricingLeverageFuture) updates) => super.copyWith((message) => updates(message as EtfPricingLeverageFuture)) as EtfPricingLeverageFuture;
+  KrxNav copyWith(void Function(KrxNav) updates) => super.copyWith((message) => updates(message as KrxNav)) as KrxNav;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EtfPricingLeverageFuture create() => EtfPricingLeverageFuture._();
+  static KrxNav create() => KrxNav._();
   @$core.override
-  EtfPricingLeverageFuture createEmptyInstance() => create();
-  static $pb.PbList<EtfPricingLeverageFuture> createRepeated() => $pb.PbList<EtfPricingLeverageFuture>();
+  KrxNav createEmptyInstance() => create();
+  static $pb.PbList<KrxNav> createRepeated() => $pb.PbList<KrxNav>();
   @$core.pragma('dart2js:noInline')
-  static EtfPricingLeverageFuture getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricingLeverageFuture>(create);
-  static EtfPricingLeverageFuture? _defaultInstance;
+  static KrxNav getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<KrxNav>(create);
+  static KrxNav? _defaultInstance;
 
   /// 이전 지수 (Price internal representation)
   @$pb.TagNumber(1)
@@ -919,80 +695,6 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
   $core.bool hasMaxDecoTick() => $_has(4);
   @$pb.TagNumber(5)
   void clearMaxDecoTick() => $_clearField(5);
-}
-
-/// Pre-trade Screening 설정
-class MarketMakingScreening extends $pb.GeneratedMessage {
-  factory MarketMakingScreening({
-    $core.int? maxSpreadWidthTicks,
-    $fixnum.Int64? minPrice,
-    $fixnum.Int64? maxPrice,
-  }) {
-    final result = create();
-    if (maxSpreadWidthTicks != null) result.maxSpreadWidthTicks = maxSpreadWidthTicks;
-    if (minPrice != null) result.minPrice = minPrice;
-    if (maxPrice != null) result.maxPrice = maxPrice;
-    return result;
-  }
-
-  MarketMakingScreening._();
-
-  factory MarketMakingScreening.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MarketMakingScreening.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingScreening', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'maxSpreadWidthTicks', $pb.PbFieldType.O3)
-    ..aInt64(2, _omitFieldNames ? '' : 'minPrice')
-    ..aInt64(3, _omitFieldNames ? '' : 'maxPrice')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingScreening clone() => MarketMakingScreening()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingScreening copyWith(void Function(MarketMakingScreening) updates) => super.copyWith((message) => updates(message as MarketMakingScreening)) as MarketMakingScreening;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingScreening create() => MarketMakingScreening._();
-  @$core.override
-  MarketMakingScreening createEmptyInstance() => create();
-  static $pb.PbList<MarketMakingScreening> createRepeated() => $pb.PbList<MarketMakingScreening>();
-  @$core.pragma('dart2js:noInline')
-  static MarketMakingScreening getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingScreening>(create);
-  static MarketMakingScreening? _defaultInstance;
-
-  /// 최대 스프레드 폭 (틱 단위, 0=비활성)
-  @$pb.TagNumber(1)
-  $core.int get maxSpreadWidthTicks => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set maxSpreadWidthTicks($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMaxSpreadWidthTicks() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMaxSpreadWidthTicks() => $_clearField(1);
-
-  /// 최소 가격 (0=비활성)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get minPrice => $_getI64(1);
-  @$pb.TagNumber(2)
-  set minPrice($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasMinPrice() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMinPrice() => $_clearField(2);
-
-  /// 최대 가격 (0=비활성)
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get maxPrice => $_getI64(2);
-  @$pb.TagNumber(3)
-  set maxPrice($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasMaxPrice() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearMaxPrice() => $_clearField(3);
 }
 
 /// Momentum 설정
@@ -1159,7 +861,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'triggerMultiple', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'priceSkewTicks', $pb.PbFieldType.O3)
-    ..a<$core.int>(8, _omitFieldNames ? '' : 'limitMultiple', $pb.PbFieldType.O3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'limitMultiple', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1211,14 +913,14 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   void clearPriceSkewTicks() => $_clearField(3);
 
   /// hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(4)
   $core.int get limitMultiple => $_getIZ(3);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(4)
   set limitMultiple($core.int value) => $_setSignedInt32(3, value);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(4)
   $core.bool hasLimitMultiple() => $_has(3);
-  @$pb.TagNumber(8)
-  void clearLimitMultiple() => $_clearField(8);
+  @$pb.TagNumber(4)
+  void clearLimitMultiple() => $_clearField(4);
 }
 
 /// ListMarketMaking
@@ -1497,11 +1199,11 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
 
 class StartMarketMakingResponse extends $pb.GeneratedMessage {
   factory StartMarketMakingResponse({
-    MarketMakingStatus? status,
+    MarketMakingState? state,
     $core.String? message,
   }) {
     final result = create();
-    if (status != null) result.status = status;
+    if (state != null) result.state = state;
     if (message != null) result.message = message;
     return result;
   }
@@ -1512,7 +1214,7 @@ class StartMarketMakingResponse extends $pb.GeneratedMessage {
   factory StartMarketMakingResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartMarketMakingResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aOM<MarketMakingStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: MarketMakingStatus.create)
+    ..e<MarketMakingState>(1, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingState.MARKET_MAKING_STATE_UNSPECIFIED, valueOf: MarketMakingState.valueOf, enumValues: MarketMakingState.values)
     ..aOS(2, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false
   ;
@@ -1536,15 +1238,13 @@ class StartMarketMakingResponse extends $pb.GeneratedMessage {
 
   /// 시작된 MM 상태
   @$pb.TagNumber(1)
-  MarketMakingStatus get status => $_getN(0);
+  MarketMakingState get state => $_getN(0);
   @$pb.TagNumber(1)
-  set status(MarketMakingStatus value) => $_setField(1, value);
+  set state(MarketMakingState value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasStatus() => $_has(0);
+  $core.bool hasState() => $_has(0);
   @$pb.TagNumber(1)
-  void clearStatus() => $_clearField(1);
-  @$pb.TagNumber(1)
-  MarketMakingStatus ensureStatus() => $_ensure(0);
+  void clearState() => $_clearField(1);
 
   /// 메시지
   @$pb.TagNumber(2)
@@ -2187,38 +1887,6 @@ class MomentumState extends $pb.GeneratedMessage {
   void clearSampleCount() => $_clearField(8);
 }
 
-/// reserved: SkewState (removed — SkewLogic 제거됨)
-/// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
-class SkewState extends $pb.GeneratedMessage {
-  factory SkewState() => create();
-
-  SkewState._();
-
-  factory SkewState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SkewState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SkewState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SkewState clone() => SkewState()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SkewState copyWith(void Function(SkewState) updates) => super.copyWith((message) => updates(message as SkewState)) as SkewState;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SkewState create() => SkewState._();
-  @$core.override
-  SkewState createEmptyInstance() => create();
-  static $pb.PbList<SkewState> createRepeated() => $pb.PbList<SkewState>();
-  @$core.pragma('dart2js:noInline')
-  static SkewState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SkewState>(create);
-  static SkewState? _defaultInstance;
-}
-
 /// Trade Analyzer 런타임 상태
 class TradeAnalyzerState extends $pb.GeneratedMessage {
   factory TradeAnalyzerState({
@@ -2372,6 +2040,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   factory MmEngineRuntimeState({
     $core.String? symbol,
     $fixnum.Int64? timestamp,
+    MarketMakingState? state,
     MomentumState? momentum,
     TradeAnalyzerState? tradeAnalyzer,
     ExposureBalancerState? exposureBalancer,
@@ -2379,6 +2048,7 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (timestamp != null) result.timestamp = timestamp;
+    if (state != null) result.state = state;
     if (momentum != null) result.momentum = momentum;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
@@ -2393,7 +2063,8 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmEngineRuntimeState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aInt64(2, _omitFieldNames ? '' : 'timestamp')
-    ..aOM<MomentumState>(3, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
+    ..e<MarketMakingState>(3, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingState.MARKET_MAKING_STATE_UNSPECIFIED, valueOf: MarketMakingState.valueOf, enumValues: MarketMakingState.values)
+    ..aOM<MomentumState>(4, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
     ..aOM<TradeAnalyzerState>(5, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: TradeAnalyzerState.create)
     ..aOM<ExposureBalancerState>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: ExposureBalancerState.create)
     ..hasRequiredFields = false
@@ -2436,41 +2107,51 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTimestamp() => $_clearField(2);
 
+  /// MM 상태
+  @$pb.TagNumber(3)
+  MarketMakingState get state => $_getN(2);
+  @$pb.TagNumber(3)
+  set state(MarketMakingState value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasState() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearState() => $_clearField(3);
+
   /// Momentum 상태
-  @$pb.TagNumber(3)
-  MomentumState get momentum => $_getN(2);
-  @$pb.TagNumber(3)
-  set momentum(MomentumState value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasMomentum() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearMomentum() => $_clearField(3);
-  @$pb.TagNumber(3)
-  MomentumState ensureMomentum() => $_ensure(2);
+  @$pb.TagNumber(4)
+  MomentumState get momentum => $_getN(3);
+  @$pb.TagNumber(4)
+  set momentum(MomentumState value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMomentum() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMomentum() => $_clearField(4);
+  @$pb.TagNumber(4)
+  MomentumState ensureMomentum() => $_ensure(3);
 
   /// Trade Analyzer 상태
   @$pb.TagNumber(5)
-  TradeAnalyzerState get tradeAnalyzer => $_getN(3);
+  TradeAnalyzerState get tradeAnalyzer => $_getN(4);
   @$pb.TagNumber(5)
   set tradeAnalyzer(TradeAnalyzerState value) => $_setField(5, value);
   @$pb.TagNumber(5)
-  $core.bool hasTradeAnalyzer() => $_has(3);
+  $core.bool hasTradeAnalyzer() => $_has(4);
   @$pb.TagNumber(5)
   void clearTradeAnalyzer() => $_clearField(5);
   @$pb.TagNumber(5)
-  TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(3);
+  TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(4);
 
   /// 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
   @$pb.TagNumber(6)
-  ExposureBalancerState get exposureBalancer => $_getN(4);
+  ExposureBalancerState get exposureBalancer => $_getN(5);
   @$pb.TagNumber(6)
   set exposureBalancer(ExposureBalancerState value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasExposureBalancer() => $_has(4);
+  $core.bool hasExposureBalancer() => $_has(5);
   @$pb.TagNumber(6)
   void clearExposureBalancer() => $_clearField(6);
   @$pb.TagNumber(6)
-  ExposureBalancerState ensureExposureBalancer() => $_ensure(4);
+  ExposureBalancerState ensureExposureBalancer() => $_ensure(5);
 }
 
 /// StreamMmEngineState

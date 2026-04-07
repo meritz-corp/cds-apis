@@ -63,24 +63,6 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// MM 상태 조회
-  Future<kdov1mm.MarketMakingStatus> getMarketMakingStatus(
-    kdov1mm.GetMarketMakingStatusRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.MarketMakingService.getMarketMakingStatus,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
   /// MM 시작 (심볼 등록)
   Future<kdov1mm.StartMarketMakingResponse> startMarketMaking(
     kdov1mm.StartMarketMakingRequest input, {
@@ -117,24 +99,6 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// MM 엔진 리셋 (일초 상태 초기화)
-  Future<kdov1mm.ResetMarketMakingResponse> resetMarketMaking(
-    kdov1mm.ResetMarketMakingRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.MarketMakingService.resetMarketMaking,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
   /// MM 설정 업데이트
   Future<kdov1mm.MarketMakingConfiguration> updateMarketMakingConfig(
     kdov1mm.UpdateMarketMakingConfigRequest input, {
@@ -145,24 +109,6 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.MarketMakingService.updateMarketMakingConfig,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
-  /// MM 실시간 상태 스트리밍 (서버→클라이언트)
-  Stream<kdov1mm.MarketMakingStatus> streamMarketMakingStatus(
-    kdov1mm.StreamMarketMakingStatusRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).server(
-      specs.MarketMakingService.streamMarketMakingStatus,
       input,
       signal: signal,
       headers: headers,

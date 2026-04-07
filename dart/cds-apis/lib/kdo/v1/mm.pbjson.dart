@@ -22,17 +22,13 @@ const MarketMakingState$json = {
     {'1': 'MARKET_MAKING_STATE_IDLE', '2': 1},
     {'1': 'MARKET_MAKING_STATE_RUNNING', '2': 2},
   ],
-  '4': [
-    {'1': 3, '2': 3},
-  ],
-  '5': ['MARKET_MAKING_STATE_PAUSED'],
 };
 
 /// Descriptor for `MarketMakingState`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List marketMakingStateDescriptor = $convert.base64Decode(
     'ChFNYXJrZXRNYWtpbmdTdGF0ZRIjCh9NQVJLRVRfTUFLSU5HX1NUQVRFX1VOU1BFQ0lGSUVEEA'
     'ASHAoYTUFSS0VUX01BS0lOR19TVEFURV9JRExFEAESHwobTUFSS0VUX01BS0lOR19TVEFURV9S'
-    'VU5OSU5HEAIiBAgDEAMqGk1BUktFVF9NQUtJTkdfU1RBVEVfUEFVU0VE');
+    'VU5OSU5HEAI=');
 
 @$core.Deprecated('Use marketMakingDescriptor instead')
 const MarketMaking$json = {
@@ -43,8 +39,6 @@ const MarketMaking$json = {
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
-    {'1': 'bid_quantity', '3': 6, '4': 1, '5': 3, '10': 'bidQuantity'},
-    {'1': 'ask_quantity', '3': 7, '4': 1, '5': 3, '10': 'askQuantity'},
   ],
 };
 
@@ -53,174 +47,105 @@ final $typed_data.Uint8List marketMakingDescriptor = $convert.base64Decode(
     'CgxNYXJrZXRNYWtpbmcSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSMgoFc3RhdGUYAiABKA4yHC'
     '5rZG8udjEubW0uTWFya2V0TWFraW5nU3RhdGVSBXN0YXRlEjwKBmNvbmZpZxgDIAEoCzIkLmtk'
     'by52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSGwoJZnVuZF9jb2RlGA'
-    'QgASgJUghmdW5kQ29kZRIbCgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXplEiEKDGJpZF9xdWFu'
-    'dGl0eRgGIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GAcgASgDUgthc2tRdWFudG'
-    'l0eQ==');
-
-@$core.Deprecated('Use marketMakingStatusDescriptor instead')
-const MarketMakingStatus$json = {
-  '1': 'MarketMakingStatus',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingState', '10': 'state'},
-    {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
-    {'1': 'active', '3': 5, '4': 1, '5': 8, '10': 'active'},
-    {'1': 'fund_code', '3': 6, '4': 1, '5': 9, '10': 'fundCode'},
-  ],
-  '9': [
-    {'1': 4, '2': 5},
-    {'1': 7, '2': 8},
-    {'1': 8, '2': 9},
-    {'1': 9, '2': 10},
-    {'1': 10, '2': 11},
-    {'1': 11, '2': 12},
-    {'1': 12, '2': 13},
-    {'1': 13, '2': 14},
-    {'1': 14, '2': 15},
-  ],
-  '10': ['registered', 'momentum_enabled', 'momentum_window_ms', 'momentum_trigger_ticks', 'momentum_follow_sensitivity', 'momentum_escape_sensitivity', 'momentum_direction', 'momentum_bid_adjustment', 'momentum_ask_adjustment'],
-};
-
-/// Descriptor for `MarketMakingStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List marketMakingStatusDescriptor = $convert.base64Decode(
-    'ChJNYXJrZXRNYWtpbmdTdGF0dXMSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSMgoFc3RhdGUYAi'
-    'ABKA4yHC5rZG8udjEubW0uTWFya2V0TWFraW5nU3RhdGVSBXN0YXRlEjwKBmNvbmZpZxgDIAEo'
-    'CzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSFgoGYWN0aX'
-    'ZlGAUgASgIUgZhY3RpdmUSGwoJZnVuZF9jb2RlGAYgASgJUghmdW5kQ29kZUoECAQQBUoECAcQ'
-    'CEoECAgQCUoECAkQCkoECAoQC0oECAsQDEoECAwQDUoECA0QDkoECA4QD1IKcmVnaXN0ZXJlZF'
-    'IQbW9tZW50dW1fZW5hYmxlZFISbW9tZW50dW1fd2luZG93X21zUhZtb21lbnR1bV90cmlnZ2Vy'
-    'X3RpY2tzUhttb21lbnR1bV9mb2xsb3dfc2Vuc2l0aXZpdHlSG21vbWVudHVtX2VzY2FwZV9zZW'
-    '5zaXRpdml0eVISbW9tZW50dW1fZGlyZWN0aW9uUhdtb21lbnR1bV9iaWRfYWRqdXN0bWVudFIX'
-    'bW9tZW50dW1fYXNrX2FkanVzdG1lbnQ=');
+    'QgASgJUghmdW5kQ29kZRIbCgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXpl');
 
 @$core.Deprecated('Use marketMakingConfigurationDescriptor instead')
 const MarketMakingConfiguration$json = {
   '1': 'MarketMakingConfiguration',
   '2': [
-    {'1': 'pricing', '3': 1, '4': 1, '5': 9, '10': 'pricing'},
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingPricing', '10': 'pricing'},
     {'1': 'trade_analyzer', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTradeAnalyzer', '10': 'tradeAnalyzer'},
-    {'1': 'screening', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingScreening', '10': 'screening'},
-    {'1': 'enabled', '3': 6, '4': 1, '5': 8, '10': 'enabled'},
-    {'1': 'momentum', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMomentum', '10': 'momentum'},
-    {'1': 'exposure_balancer', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureBalancer', '10': 'exposureBalancer'},
+    {'1': 'momentum', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMomentum', '10': 'momentum'},
+    {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureBalancer', '10': 'exposureBalancer'},
     {'1': 'bid_adjustment', '3': 10, '4': 1, '5': 3, '10': 'bidAdjustment'},
     {'1': 'ask_adjustment', '3': 11, '4': 1, '5': 3, '10': 'askAdjustment'},
     {'1': 'bid_quantity', '3': 12, '4': 1, '5': 3, '10': 'bidQuantity'},
     {'1': 'ask_quantity', '3': 13, '4': 1, '5': 3, '10': 'askQuantity'},
     {'1': 'bid_basis', '3': 14, '4': 1, '5': 3, '10': 'bidBasis'},
     {'1': 'ask_basis', '3': 15, '4': 1, '5': 3, '10': 'askBasis'},
-    {'1': 'nav_config', '3': 16, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingNavConfig', '10': 'navConfig'},
-    {'1': 'fund_code', '3': 17, '4': 1, '5': 9, '10': 'fundCode'},
-    {'1': 'tick_size', '3': 18, '4': 1, '5': 3, '10': 'tickSize'},
-    {'1': 'depth', '3': 19, '4': 1, '5': 5, '10': 'depth'},
   ],
-  '9': [
-    {'1': 2, '2': 3},
-    {'1': 9, '2': 10},
-  ],
-  '10': ['skew', 'inventory_balancer'],
 };
 
 /// Descriptor for `MarketMakingConfiguration`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base64Decode(
-    'ChlNYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uEhgKB3ByaWNpbmcYASABKAlSB3ByaWNpbmcSSw'
-    'oOdHJhZGVfYW5hbHl6ZXIYAyABKAsyJC5rZG8udjEubW0uTWFya2V0TWFraW5nVHJhZGVBbmFs'
-    'eXplclINdHJhZGVBbmFseXplchI+CglzY3JlZW5pbmcYBCABKAsyIC5rZG8udjEubW0uTWFya2'
-    'V0TWFraW5nU2NyZWVuaW5nUglzY3JlZW5pbmcSGAoHZW5hYmxlZBgGIAEoCFIHZW5hYmxlZBI7'
-    'Cghtb21lbnR1bRgHIAEoCzIfLmtkby52MS5tbS5NYXJrZXRNYWtpbmdNb21lbnR1bVIIbW9tZW'
-    '50dW0SVAoRZXhwb3N1cmVfYmFsYW5jZXIYCCABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5n'
-    'RXhwb3N1cmVCYWxhbmNlclIQZXhwb3N1cmVCYWxhbmNlchIlCg5iaWRfYWRqdXN0bWVudBgKIA'
-    'EoA1INYmlkQWRqdXN0bWVudBIlCg5hc2tfYWRqdXN0bWVudBgLIAEoA1INYXNrQWRqdXN0bWVu'
-    'dBIhCgxiaWRfcXVhbnRpdHkYDCABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFudGl0eRgNIA'
-    'EoA1ILYXNrUXVhbnRpdHkSGwoJYmlkX2Jhc2lzGA4gASgDUghiaWRCYXNpcxIbCglhc2tfYmFz'
-    'aXMYDyABKANSCGFza0Jhc2lzEj8KCm5hdl9jb25maWcYECABKAsyIC5rZG8udjEubW0uTWFya2'
-    'V0TWFraW5nTmF2Q29uZmlnUgluYXZDb25maWcSGwoJZnVuZF9jb2RlGBEgASgJUghmdW5kQ29k'
-    'ZRIbCgl0aWNrX3NpemUYEiABKANSCHRpY2tTaXplEhQKBWRlcHRoGBMgASgFUgVkZXB0aEoECA'
-    'IQA0oECAkQClIEc2tld1ISaW52ZW50b3J5X2JhbGFuY2Vy');
+    'ChlNYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSOA'
+    'oHcHJpY2luZxgCIAEoCzIeLmtkby52MS5tbS5NYXJrZXRNYWtpbmdQcmljaW5nUgdwcmljaW5n'
+    'EksKDnRyYWRlX2FuYWx5emVyGAMgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ1RyYWRlQW'
+    '5hbHl6ZXJSDXRyYWRlQW5hbHl6ZXISOwoIbW9tZW50dW0YBSABKAsyHy5rZG8udjEubW0uTWFy'
+    'a2V0TWFraW5nTW9tZW50dW1SCG1vbWVudHVtElQKEWV4cG9zdXJlX2JhbGFuY2VyGAYgASgLMi'
+    'cua2RvLnYxLm1tLk1hcmtldE1ha2luZ0V4cG9zdXJlQmFsYW5jZXJSEGV4cG9zdXJlQmFsYW5j'
+    'ZXISJQoOYmlkX2FkanVzdG1lbnQYCiABKANSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG'
+    '1lbnQYCyABKANSDWFza0FkanVzdG1lbnQSIQoMYmlkX3F1YW50aXR5GAwgASgDUgtiaWRRdWFu'
+    'dGl0eRIhCgxhc2tfcXVhbnRpdHkYDSABKANSC2Fza1F1YW50aXR5EhsKCWJpZF9iYXNpcxgOIA'
+    'EoA1IIYmlkQmFzaXMSGwoJYXNrX2Jhc2lzGA8gASgDUghhc2tCYXNpcw==');
 
-@$core.Deprecated('Use marketMakingSkewDescriptor instead')
-const MarketMakingSkew$json = {
-  '1': 'MarketMakingSkew',
-  '9': [
-    {'1': 1, '2': 2},
-    {'1': 2, '2': 3},
-    {'1': 3, '2': 4},
-  ],
-  '10': ['mode', 'trigger_amt', 'skew_unit'],
-};
-
-/// Descriptor for `MarketMakingSkew`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List marketMakingSkewDescriptor = $convert.base64Decode(
-    'ChBNYXJrZXRNYWtpbmdTa2V3SgQIARACSgQIAhADSgQIAxAEUgRtb2RlUgt0cmlnZ2VyX2FtdF'
-    'IJc2tld191bml0');
-
-@$core.Deprecated('Use marketMakingNavConfigDescriptor instead')
-const MarketMakingNavConfig$json = {
-  '1': 'MarketMakingNavConfig',
+@$core.Deprecated('Use marketMakingPricingDescriptor instead')
+const MarketMakingPricing$json = {
+  '1': 'MarketMakingPricing',
   '2': [
-    {'1': 'pdf_nav_hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingPdfNavHedge', '9': 0, '10': 'pdfNavHedge'},
-    {'1': 'index_tracking_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingIndexTrackingHedge', '9': 0, '10': 'indexTrackingHedge'},
-    {'1': 'future_basis', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingFutureBasis', '9': 0, '10': 'futureBasis'},
-    {'1': 'leverage_future', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.EtfPricingLeverageFuture', '9': 0, '10': 'leverageFuture'},
+    {'1': 'plain_follow', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.mm.PlainFollow', '9': 0, '10': 'plainFollow'},
+    {'1': 'mean_bid_ask', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MeanBidAsk', '9': 0, '10': 'meanBidAsk'},
+    {'1': 'nav', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.Nav', '9': 0, '10': 'nav'},
+    {'1': 'krx_nav', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.KrxNav', '9': 0, '10': 'krxNav'},
   ],
   '8': [
     {'1': 'pricing'},
   ],
 };
 
-/// Descriptor for `MarketMakingNavConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List marketMakingNavConfigDescriptor = $convert.base64Decode(
-    'ChVNYXJrZXRNYWtpbmdOYXZDb25maWcSRgoNcGRmX25hdl9oZWRnZRgBIAEoCzIgLmtkby52MS'
-    '5tbS5FdGZQcmljaW5nUGRmTmF2SGVkZ2VIAFILcGRmTmF2SGVkZ2USWwoUaW5kZXhfdHJhY2tp'
-    'bmdfaGVkZ2UYAiABKAsyJy5rZG8udjEubW0uRXRmUHJpY2luZ0luZGV4VHJhY2tpbmdIZWRnZU'
-    'gAUhJpbmRleFRyYWNraW5nSGVkZ2USRQoMZnV0dXJlX2Jhc2lzGAMgASgLMiAua2RvLnYxLm1t'
-    'LkV0ZlByaWNpbmdGdXR1cmVCYXNpc0gAUgtmdXR1cmVCYXNpcxJOCg9sZXZlcmFnZV9mdXR1cm'
-    'UYBCABKAsyIy5rZG8udjEubW0uRXRmUHJpY2luZ0xldmVyYWdlRnV0dXJlSABSDmxldmVyYWdl'
-    'RnV0dXJlQgkKB3ByaWNpbmc=');
+/// Descriptor for `MarketMakingPricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingPricingDescriptor = $convert.base64Decode(
+    'ChNNYXJrZXRNYWtpbmdQcmljaW5nEjsKDHBsYWluX2ZvbGxvdxgBIAEoCzIWLmtkby52MS5tbS'
+    '5QbGFpbkZvbGxvd0gAUgtwbGFpbkZvbGxvdxI5CgxtZWFuX2JpZF9hc2sYAiABKAsyFS5rZG8u'
+    'djEubW0uTWVhbkJpZEFza0gAUgptZWFuQmlkQXNrEiIKA25hdhgDIAEoCzIOLmtkby52MS5tbS'
+    '5OYXZIAFIDbmF2EiwKB2tyeF9uYXYYBCABKAsyES5rZG8udjEubW0uS3J4TmF2SABSBmtyeE5h'
+    'dkIJCgdwcmljaW5n');
 
-@$core.Deprecated('Use etfPricingPdfNavHedgeDescriptor instead')
-const EtfPricingPdfNavHedge$json = {
-  '1': 'EtfPricingPdfNavHedge',
+@$core.Deprecated('Use plainFollowDescriptor instead')
+const PlainFollow$json = {
+  '1': 'PlainFollow',
 };
 
-/// Descriptor for `EtfPricingPdfNavHedge`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfPricingPdfNavHedgeDescriptor = $convert.base64Decode(
-    'ChVFdGZQcmljaW5nUGRmTmF2SGVkZ2U=');
+/// Descriptor for `PlainFollow`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List plainFollowDescriptor = $convert.base64Decode(
+    'CgtQbGFpbkZvbGxvdw==');
 
-@$core.Deprecated('Use etfPricingIndexTrackingHedgeDescriptor instead')
-const EtfPricingIndexTrackingHedge$json = {
-  '1': 'EtfPricingIndexTrackingHedge',
+@$core.Deprecated('Use meanBidAskDescriptor instead')
+const MeanBidAsk$json = {
+  '1': 'MeanBidAsk',
 };
 
-/// Descriptor for `EtfPricingIndexTrackingHedge`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfPricingIndexTrackingHedgeDescriptor = $convert.base64Decode(
-    'ChxFdGZQcmljaW5nSW5kZXhUcmFja2luZ0hlZGdl');
+/// Descriptor for `MeanBidAsk`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List meanBidAskDescriptor = $convert.base64Decode(
+    'CgpNZWFuQmlkQXNr');
 
-@$core.Deprecated('Use etfPricingFutureBasisDescriptor instead')
-const EtfPricingFutureBasis$json = {
-  '1': 'EtfPricingFutureBasis',
+@$core.Deprecated('Use navDescriptor instead')
+const Nav$json = {
+  '1': 'Nav',
   '2': [
-    {'1': 'prev_index', '3': 1, '4': 1, '5': 3, '10': 'prevIndex'},
+    {'1': 'etf_pricing', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '10': 'etfPricing'},
   ],
 };
 
-/// Descriptor for `EtfPricingFutureBasis`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfPricingFutureBasisDescriptor = $convert.base64Decode(
-    'ChVFdGZQcmljaW5nRnV0dXJlQmFzaXMSHQoKcHJldl9pbmRleBgBIAEoA1IJcHJldkluZGV4');
+/// Descriptor for `Nav`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List navDescriptor = $convert.base64Decode(
+    'CgNOYXYSOgoLZXRmX3ByaWNpbmcYASABKAsyGS5rZG8udjEuY29tbW9uLkV0ZlByaWNpbmdSCm'
+    'V0ZlByaWNpbmc=');
 
-@$core.Deprecated('Use etfPricingLeverageFutureDescriptor instead')
-const EtfPricingLeverageFuture$json = {
-  '1': 'EtfPricingLeverageFuture',
+@$core.Deprecated('Use krxNavDescriptor instead')
+const KrxNav$json = {
+  '1': 'KrxNav',
   '2': [
     {'1': 'prev_index', '3': 1, '4': 1, '5': 3, '10': 'prevIndex'},
     {'1': 'prev_future', '3': 2, '4': 1, '5': 3, '10': 'prevFuture'},
   ],
 };
 
-/// Descriptor for `EtfPricingLeverageFuture`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfPricingLeverageFutureDescriptor = $convert.base64Decode(
-    'ChhFdGZQcmljaW5nTGV2ZXJhZ2VGdXR1cmUSHQoKcHJldl9pbmRleBgBIAEoA1IJcHJldkluZG'
-    'V4Eh8KC3ByZXZfZnV0dXJlGAIgASgDUgpwcmV2RnV0dXJl');
+/// Descriptor for `KrxNav`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List krxNavDescriptor = $convert.base64Decode(
+    'CgZLcnhOYXYSHQoKcHJldl9pbmRleBgBIAEoA1IJcHJldkluZGV4Eh8KC3ByZXZfZnV0dXJlGA'
+    'IgASgDUgpwcmV2RnV0dXJl');
 
 @$core.Deprecated('Use marketMakingTradeAnalyzerDescriptor instead')
 const MarketMakingTradeAnalyzer$json = {
@@ -240,22 +165,6 @@ final $typed_data.Uint8List marketMakingTradeAnalyzerDescriptor = $convert.base6
     'oGd2luZG93GAIgASgNUgZ3aW5kb3cSJwoPcmF0aW9fdGhyZXNob2xkGAMgASgBUg5yYXRpb1Ro'
     'cmVzaG9sZBItChJzdHJlbmd0aF90aHJlc2hvbGQYBCABKAFSEXN0cmVuZ3RoVGhyZXNob2xkEi'
     'IKDW1heF9kZWNvX3RpY2sYBSABKAVSC21heERlY29UaWNr');
-
-@$core.Deprecated('Use marketMakingScreeningDescriptor instead')
-const MarketMakingScreening$json = {
-  '1': 'MarketMakingScreening',
-  '2': [
-    {'1': 'max_spread_width_ticks', '3': 1, '4': 1, '5': 5, '10': 'maxSpreadWidthTicks'},
-    {'1': 'min_price', '3': 2, '4': 1, '5': 3, '10': 'minPrice'},
-    {'1': 'max_price', '3': 3, '4': 1, '5': 3, '10': 'maxPrice'},
-  ],
-};
-
-/// Descriptor for `MarketMakingScreening`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List marketMakingScreeningDescriptor = $convert.base64Decode(
-    'ChVNYXJrZXRNYWtpbmdTY3JlZW5pbmcSMwoWbWF4X3NwcmVhZF93aWR0aF90aWNrcxgBIAEoBV'
-    'ITbWF4U3ByZWFkV2lkdGhUaWNrcxIbCgltaW5fcHJpY2UYAiABKANSCG1pblByaWNlEhsKCW1h'
-    'eF9wcmljZRgDIAEoA1IIbWF4UHJpY2U=');
 
 @$core.Deprecated('Use marketMakingMomentumDescriptor instead')
 const MarketMakingMomentum$json = {
@@ -288,25 +197,16 @@ const MarketMakingExposureBalancer$json = {
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'trigger_multiple', '3': 2, '4': 1, '5': 5, '10': 'triggerMultiple'},
     {'1': 'price_skew_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceSkewTicks'},
-    {'1': 'limit_multiple', '3': 8, '4': 1, '5': 5, '10': 'limitMultiple'},
+    {'1': 'limit_multiple', '3': 4, '4': 1, '5': 5, '10': 'limitMultiple'},
   ],
-  '9': [
-    {'1': 4, '2': 5},
-    {'1': 5, '2': 6},
-    {'1': 6, '2': 7},
-    {'1': 7, '2': 8},
-  ],
-  '10': ['same_side_reduction', 'min_same_side_scale', 'hard_limit_start', 'hard_limit_max'],
 };
 
 /// Descriptor for `MarketMakingExposureBalancer`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.base64Decode(
     'ChxNYXJrZXRNYWtpbmdFeHBvc3VyZUJhbGFuY2VyEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZW'
     'QSKQoQdHJpZ2dlcl9tdWx0aXBsZRgCIAEoBVIPdHJpZ2dlck11bHRpcGxlEigKEHByaWNlX3Nr'
-    'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEiUKDmxpbWl0X211bHRpcGxlGAggASgFUg'
-    '1saW1pdE11bHRpcGxlSgQIBBAFSgQIBRAGSgQIBhAHSgQIBxAIUhNzYW1lX3NpZGVfcmVkdWN0'
-    'aW9uUhNtaW5fc2FtZV9zaWRlX3NjYWxlUhBoYXJkX2xpbWl0X3N0YXJ0Ug5oYXJkX2xpbWl0X2'
-    '1heA==');
+    'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEiUKDmxpbWl0X211bHRpcGxlGAQgASgFUg'
+    '1saW1pdE11bHRpcGxl');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {
@@ -386,15 +286,15 @@ final $typed_data.Uint8List startMarketMakingRequestDescriptor = $convert.base64
 const StartMarketMakingResponse$json = {
   '1': 'StartMarketMakingResponse',
   '2': [
-    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingStatus', '10': 'status'},
+    {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingState', '10': 'state'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
 /// Descriptor for `StartMarketMakingResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List startMarketMakingResponseDescriptor = $convert.base64Decode(
-    'ChlTdGFydE1hcmtldE1ha2luZ1Jlc3BvbnNlEjUKBnN0YXR1cxgBIAEoCzIdLmtkby52MS5tbS'
-    '5NYXJrZXRNYWtpbmdTdGF0dXNSBnN0YXR1cxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdl');
+    'ChlTdGFydE1hcmtldE1ha2luZ1Jlc3BvbnNlEjIKBXN0YXRlGAEgASgOMhwua2RvLnYxLm1tLk'
+    '1hcmtldE1ha2luZ1N0YXRlUgVzdGF0ZRIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdl');
 
 @$core.Deprecated('Use stopMarketMakingRequestDescriptor instead')
 const StopMarketMakingRequest$json = {
@@ -545,19 +445,6 @@ final $typed_data.Uint8List momentumStateDescriptor = $convert.base64Decode(
     'BVILZm9sbG93VGlja3MSIQoMZXNjYXBlX3RpY2tzGAcgASgFUgtlc2NhcGVUaWNrcxIhCgxzYW'
     '1wbGVfY291bnQYCCABKAVSC3NhbXBsZUNvdW50');
 
-@$core.Deprecated('Use skewStateDescriptor instead')
-const SkewState$json = {
-  '1': 'SkewState',
-  '9': [
-    {'1': 1, '2': 2},
-  ],
-  '10': ['net_traded'],
-};
-
-/// Descriptor for `SkewState`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List skewStateDescriptor = $convert.base64Decode(
-    'CglTa2V3U3RhdGVKBAgBEAJSCm5ldF90cmFkZWQ=');
-
 @$core.Deprecated('Use tradeAnalyzerStateDescriptor instead')
 const TradeAnalyzerState$json = {
   '1': 'TradeAnalyzerState',
@@ -595,25 +482,21 @@ const MmEngineRuntimeState$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'timestamp', '3': 2, '4': 1, '5': 3, '10': 'timestamp'},
-    {'1': 'momentum', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MomentumState', '10': 'momentum'},
+    {'1': 'state', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingState', '10': 'state'},
+    {'1': 'momentum', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MomentumState', '10': 'momentum'},
     {'1': 'trade_analyzer', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.TradeAnalyzerState', '10': 'tradeAnalyzer'},
     {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.ExposureBalancerState', '10': 'exposureBalancer'},
   ],
-  '9': [
-    {'1': 4, '2': 5},
-    {'1': 7, '2': 8},
-  ],
-  '10': ['skew', 'inventory_balancer'],
 };
 
 /// Descriptor for `MmEngineRuntimeState`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mmEngineRuntimeStateDescriptor = $convert.base64Decode(
     'ChRNbUVuZ2luZVJ1bnRpbWVTdGF0ZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIcCgl0aW1lc3'
-    'RhbXAYAiABKANSCXRpbWVzdGFtcBI0Cghtb21lbnR1bRgDIAEoCzIYLmtkby52MS5tbS5Nb21l'
-    'bnR1bVN0YXRlUghtb21lbnR1bRJECg50cmFkZV9hbmFseXplchgFIAEoCzIdLmtkby52MS5tbS'
-    '5UcmFkZUFuYWx5emVyU3RhdGVSDXRyYWRlQW5hbHl6ZXISTQoRZXhwb3N1cmVfYmFsYW5jZXIY'
-    'BiABKAsyIC5rZG8udjEubW0uRXhwb3N1cmVCYWxhbmNlclN0YXRlUhBleHBvc3VyZUJhbGFuY2'
-    'VySgQIBBAFSgQIBxAIUgRza2V3UhJpbnZlbnRvcnlfYmFsYW5jZXI=');
+    'RhbXAYAiABKANSCXRpbWVzdGFtcBIyCgVzdGF0ZRgDIAEoDjIcLmtkby52MS5tbS5NYXJrZXRN'
+    'YWtpbmdTdGF0ZVIFc3RhdGUSNAoIbW9tZW50dW0YBCABKAsyGC5rZG8udjEubW0uTW9tZW50dW'
+    '1TdGF0ZVIIbW9tZW50dW0SRAoOdHJhZGVfYW5hbHl6ZXIYBSABKAsyHS5rZG8udjEubW0uVHJh'
+    'ZGVBbmFseXplclN0YXRlUg10cmFkZUFuYWx5emVyEk0KEWV4cG9zdXJlX2JhbGFuY2VyGAYgAS'
+    'gLMiAua2RvLnYxLm1tLkV4cG9zdXJlQmFsYW5jZXJTdGF0ZVIQZXhwb3N1cmVCYWxhbmNlcg==');
 
 @$core.Deprecated('Use streamMmEngineStateRequestDescriptor instead')
 const StreamMmEngineStateRequest$json = {

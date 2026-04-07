@@ -12,248 +12,6 @@ import (
 	metadata "google.golang.org/grpc/metadata"
 )
 
-// MockMarketMakingService_StreamMarketMakingStatusClient is a mock of MarketMakingService_StreamMarketMakingStatusClient interface.
-type MockMarketMakingService_StreamMarketMakingStatusClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder
-}
-
-// MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder is the mock recorder for MockMarketMakingService_StreamMarketMakingStatusClient.
-type MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder struct {
-	mock *MockMarketMakingService_StreamMarketMakingStatusClient
-}
-
-// NewMockMarketMakingService_StreamMarketMakingStatusClient creates a new mock instance.
-func NewMockMarketMakingService_StreamMarketMakingStatusClient(ctrl *gomock.Controller) *MockMarketMakingService_StreamMarketMakingStatusClient {
-	mock := &MockMarketMakingService_StreamMarketMakingStatusClient{ctrl: ctrl}
-	mock.recorder = &MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) EXPECT() *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) Recv() (*MarketMakingStatus, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*MarketMakingStatus)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) RecvMsg(arg0 interface{}) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RecvMsg", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusClient)(nil).RecvMsg), arg0)
-}
-
-// SendMsg mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) SendMsg(arg0 interface{}) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendMsg", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusClient)(nil).SendMsg), arg0)
-}
-
-// Trailer mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusClient)(nil).Trailer))
-}
-
-// MockMarketMakingService_StreamMarketMakingStatusServer is a mock of MarketMakingService_StreamMarketMakingStatusServer interface.
-type MockMarketMakingService_StreamMarketMakingStatusServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder
-}
-
-// MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder is the mock recorder for MockMarketMakingService_StreamMarketMakingStatusServer.
-type MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder struct {
-	mock *MockMarketMakingService_StreamMarketMakingStatusServer
-}
-
-// NewMockMarketMakingService_StreamMarketMakingStatusServer creates a new mock instance.
-func NewMockMarketMakingService_StreamMarketMakingStatusServer(ctrl *gomock.Controller) *MockMarketMakingService_StreamMarketMakingStatusServer {
-	mock := &MockMarketMakingService_StreamMarketMakingStatusServer{ctrl: ctrl}
-	mock.recorder = &MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) EXPECT() *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) RecvMsg(arg0 interface{}) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RecvMsg", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusServer)(nil).RecvMsg), arg0)
-}
-
-// Send mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) Send(arg0 *MarketMakingStatus) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) SendMsg(arg0 interface{}) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendMsg", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusServer)(nil).SendMsg), arg0)
-}
-
-// SetHeader mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockMarketMakingService_StreamMarketMakingStatusServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockMarketMakingService_StreamMarketMakingStatusServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockMarketMakingService_StreamMarketMakingStatusServer)(nil).SetTrailer), arg0)
-}
-
 // MockMarketMakingService_StreamMarketMakingOrderbookClient is a mock of MarketMakingService_StreamMarketMakingOrderbookClient interface.
 type MockMarketMakingService_StreamMarketMakingOrderbookClient struct {
 	ctrl     *gomock.Controller
@@ -801,26 +559,6 @@ func (mr *MockMarketMakingServiceClientMockRecorder) GetMarketMakingOrderbook(ct
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketMakingOrderbook", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).GetMarketMakingOrderbook), varargs...)
 }
 
-// GetMarketMakingStatus mocks base method.
-func (m *MockMarketMakingServiceClient) GetMarketMakingStatus(ctx context.Context, in *GetMarketMakingStatusRequest, opts ...grpc.CallOption) (*MarketMakingStatus, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetMarketMakingStatus", varargs...)
-	ret0, _ := ret[0].(*MarketMakingStatus)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetMarketMakingStatus indicates an expected call of GetMarketMakingStatus.
-func (mr *MockMarketMakingServiceClientMockRecorder) GetMarketMakingStatus(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketMakingStatus", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).GetMarketMakingStatus), varargs...)
-}
-
 // ListMarketMaking mocks base method.
 func (m *MockMarketMakingServiceClient) ListMarketMaking(ctx context.Context, in *ListMarketMakingRequest, opts ...grpc.CallOption) (*ListMarketMakingResponse, error) {
 	m.ctrl.T.Helper()
@@ -839,26 +577,6 @@ func (mr *MockMarketMakingServiceClientMockRecorder) ListMarketMaking(ctx, in in
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMarketMaking", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ListMarketMaking), varargs...)
-}
-
-// ResetMarketMaking mocks base method.
-func (m *MockMarketMakingServiceClient) ResetMarketMaking(ctx context.Context, in *ResetMarketMakingRequest, opts ...grpc.CallOption) (*ResetMarketMakingResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ResetMarketMaking", varargs...)
-	ret0, _ := ret[0].(*ResetMarketMakingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ResetMarketMaking indicates an expected call of ResetMarketMaking.
-func (mr *MockMarketMakingServiceClientMockRecorder) ResetMarketMaking(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetMarketMaking", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ResetMarketMaking), varargs...)
 }
 
 // StartMarketMaking mocks base method.
@@ -919,26 +637,6 @@ func (mr *MockMarketMakingServiceClientMockRecorder) StreamMarketMakingOrderbook
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMarketMakingOrderbook", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).StreamMarketMakingOrderbook), varargs...)
-}
-
-// StreamMarketMakingStatus mocks base method.
-func (m *MockMarketMakingServiceClient) StreamMarketMakingStatus(ctx context.Context, in *StreamMarketMakingStatusRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingStatusClient, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "StreamMarketMakingStatus", varargs...)
-	ret0, _ := ret[0].(MarketMakingService_StreamMarketMakingStatusClient)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// StreamMarketMakingStatus indicates an expected call of StreamMarketMakingStatus.
-func (mr *MockMarketMakingServiceClientMockRecorder) StreamMarketMakingStatus(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMarketMakingStatus", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).StreamMarketMakingStatus), varargs...)
 }
 
 // StreamMmEngineState mocks base method.
@@ -1054,21 +752,6 @@ func (mr *MockMarketMakingServiceServerMockRecorder) GetMarketMakingOrderbook(ct
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketMakingOrderbook", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).GetMarketMakingOrderbook), ctx, in)
 }
 
-// GetMarketMakingStatus mocks base method.
-func (m *MockMarketMakingServiceServer) GetMarketMakingStatus(ctx context.Context, in *GetMarketMakingStatusRequest) (*MarketMakingStatus, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetMarketMakingStatus", ctx, in)
-	ret0, _ := ret[0].(*MarketMakingStatus)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetMarketMakingStatus indicates an expected call of GetMarketMakingStatus.
-func (mr *MockMarketMakingServiceServerMockRecorder) GetMarketMakingStatus(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketMakingStatus", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).GetMarketMakingStatus), ctx, in)
-}
-
 // ListMarketMaking mocks base method.
 func (m *MockMarketMakingServiceServer) ListMarketMaking(ctx context.Context, in *ListMarketMakingRequest) (*ListMarketMakingResponse, error) {
 	m.ctrl.T.Helper()
@@ -1082,21 +765,6 @@ func (m *MockMarketMakingServiceServer) ListMarketMaking(ctx context.Context, in
 func (mr *MockMarketMakingServiceServerMockRecorder) ListMarketMaking(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMarketMaking", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ListMarketMaking), ctx, in)
-}
-
-// ResetMarketMaking mocks base method.
-func (m *MockMarketMakingServiceServer) ResetMarketMaking(ctx context.Context, in *ResetMarketMakingRequest) (*ResetMarketMakingResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ResetMarketMaking", ctx, in)
-	ret0, _ := ret[0].(*ResetMarketMakingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ResetMarketMaking indicates an expected call of ResetMarketMaking.
-func (mr *MockMarketMakingServiceServerMockRecorder) ResetMarketMaking(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetMarketMaking", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ResetMarketMaking), ctx, in)
 }
 
 // StartMarketMaking mocks base method.
@@ -1141,20 +809,6 @@ func (m *MockMarketMakingServiceServer) StreamMarketMakingOrderbook(blob *GetMar
 func (mr *MockMarketMakingServiceServerMockRecorder) StreamMarketMakingOrderbook(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMarketMakingOrderbook", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).StreamMarketMakingOrderbook), blob, server)
-}
-
-// StreamMarketMakingStatus mocks base method.
-func (m *MockMarketMakingServiceServer) StreamMarketMakingStatus(blob *StreamMarketMakingStatusRequest, server MarketMakingService_StreamMarketMakingStatusServer) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "StreamMarketMakingStatus", blob, server)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// StreamMarketMakingStatus indicates an expected call of StreamMarketMakingStatus.
-func (mr *MockMarketMakingServiceServerMockRecorder) StreamMarketMakingStatus(blob, server interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamMarketMakingStatus", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).StreamMarketMakingStatus), blob, server)
 }
 
 // StreamMmEngineState mocks base method.

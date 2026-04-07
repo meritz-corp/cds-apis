@@ -534,6 +534,59 @@
     }
   },
   "definitions": {
+    "commonEtfPricing": {
+      "type": "object",
+      "properties": {
+        "pdfNavHedge": {
+          "$ref": "#/definitions/commonPdfNavHedgePricing",
+          "title": "분해 헷지 방식"
+        },
+        "indexTrackingHedge": {
+          "$ref": "#/definitions/commonIndexTrackingHedgePricing",
+          "title": "선물 헷지 방식"
+        },
+        "futureBasis": {
+          "$ref": "#/definitions/commonFutureBasis"
+        },
+        "leverageFuture": {
+          "$ref": "#/definitions/commonLeverageFuturePricing",
+          "title": "레버리지 선물 방식"
+        }
+      },
+      "title": "ETF 가격 산출 방식"
+    },
+    "commonFutureBasis": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "string"
+        }
+      }
+    },
+    "commonIndexTrackingHedgePricing": {
+      "type": "object",
+      "title": "선물 헷지 가격 산출"
+    },
+    "commonLeverageFuturePricing": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "number",
+          "format": "double",
+          "title": "기초지수 전일종가"
+        },
+        "prevFuture": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 전일종가"
+        }
+      },
+      "title": "레버리지 선물 가격 산출"
+    },
+    "commonPdfNavHedgePricing": {
+      "type": "object",
+      "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
+    },
     "lpEtfLp": {
       "type": "object",
       "properties": {
@@ -572,7 +625,7 @@
           "title": "활성화 여부"
         },
         "pricingMethod": {
-          "$ref": "#/definitions/lpEtfPricing",
+          "$ref": "#/definitions/commonEtfPricing",
           "title": "ETF 가격 산출 방식"
         },
         "bidAdjustment": {
@@ -904,27 +957,6 @@
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
     },
-    "lpEtfPricing": {
-      "type": "object",
-      "properties": {
-        "pdfNavHedge": {
-          "$ref": "#/definitions/lpPdfNavHedgePricing",
-          "title": "분해 헷지 방식"
-        },
-        "indexTrackingHedge": {
-          "$ref": "#/definitions/lpIndexTrackingHedgePricing",
-          "title": "선물 헷지 방식"
-        },
-        "futureBasis": {
-          "$ref": "#/definitions/lpFutureBasis"
-        },
-        "leverageFuture": {
-          "$ref": "#/definitions/lpLeverageFuturePricing",
-          "title": "레버리지 선물 방식"
-        }
-      },
-      "title": "ETF 가격 산출 방식"
-    },
     "lpFillStatistics": {
       "type": "object",
       "properties": {
@@ -948,34 +980,6 @@
         }
       },
       "title": "ETF 체결 통계 (매수/매도 체결량 및 평균 단가)"
-    },
-    "lpFutureBasis": {
-      "type": "object",
-      "properties": {
-        "prevIndex": {
-          "type": "string"
-        }
-      }
-    },
-    "lpIndexTrackingHedgePricing": {
-      "type": "object",
-      "title": "선물 헷지 가격 산출"
-    },
-    "lpLeverageFuturePricing": {
-      "type": "object",
-      "properties": {
-        "prevIndex": {
-          "type": "number",
-          "format": "double",
-          "title": "기초지수 전일종가"
-        },
-        "prevFuture": {
-          "type": "number",
-          "format": "double",
-          "title": "선물 전일종가"
-        }
-      },
-      "title": "레버리지 선물 가격 산출"
     },
     "lpListEtfLpStatusesResponse": {
       "type": "object",
@@ -1027,10 +1031,6 @@
         }
       },
       "title": "LP 가격 정보"
-    },
-    "lpPdfNavHedgePricing": {
-      "type": "object",
-      "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
     },
     "lpPositionAdjustmentStrategy": {
       "type": "string",

@@ -35,14 +35,6 @@ abstract final class MarketMakingService {
     kdov1mm.MarketMaking.new,
   );
 
-  /// MM 상태 조회
-  static const getMarketMakingStatus = connect.Spec(
-    '/$name/GetMarketMakingStatus',
-    connect.StreamType.unary,
-    kdov1mm.GetMarketMakingStatusRequest.new,
-    kdov1mm.MarketMakingStatus.new,
-  );
-
   /// MM 시작 (심볼 등록)
   static const startMarketMaking = connect.Spec(
     '/$name/StartMarketMaking',
@@ -59,28 +51,12 @@ abstract final class MarketMakingService {
     kdov1mm.StopMarketMakingResponse.new,
   );
 
-  /// MM 엔진 리셋 (일초 상태 초기화)
-  static const resetMarketMaking = connect.Spec(
-    '/$name/ResetMarketMaking',
-    connect.StreamType.unary,
-    kdov1mm.ResetMarketMakingRequest.new,
-    kdov1mm.ResetMarketMakingResponse.new,
-  );
-
   /// MM 설정 업데이트
   static const updateMarketMakingConfig = connect.Spec(
     '/$name/UpdateMarketMakingConfig',
     connect.StreamType.unary,
     kdov1mm.UpdateMarketMakingConfigRequest.new,
     kdov1mm.MarketMakingConfiguration.new,
-  );
-
-  /// MM 실시간 상태 스트리밍 (서버→클라이언트)
-  static const streamMarketMakingStatus = connect.Spec(
-    '/$name/StreamMarketMakingStatus',
-    connect.StreamType.server,
-    kdov1mm.StreamMarketMakingStatusRequest.new,
-    kdov1mm.MarketMakingStatus.new,
   );
 
   /// MM 전용 주문장 조회

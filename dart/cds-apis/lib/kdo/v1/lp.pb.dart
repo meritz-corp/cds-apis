@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pb.dart' as $1;
 import 'lp.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -32,7 +33,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $fixnum.Int64? tickSize,
     EtfLpOffset? offset,
     $core.bool? enabled,
-    EtfPricing? pricingMethod,
+    $1.EtfPricing? pricingMethod,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
     $fixnum.Int64? bidQuantity,
@@ -77,7 +78,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'tickSize')
     ..aOM<EtfLpOffset>(10, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
     ..aOB(11, _omitFieldNames ? '' : 'enabled')
-    ..aOM<EtfPricing>(12, _omitFieldNames ? '' : 'pricingMethod', subBuilder: EtfPricing.create)
+    ..aOM<$1.EtfPricing>(12, _omitFieldNames ? '' : 'pricingMethod', subBuilder: $1.EtfPricing.create)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aInt64(15, _omitFieldNames ? '' : 'bidQuantity')
@@ -188,15 +189,15 @@ class EtfLp extends $pb.GeneratedMessage {
 
   /// ETF 가격 산출 방식
   @$pb.TagNumber(12)
-  EtfPricing get pricingMethod => $_getN(8);
+  $1.EtfPricing get pricingMethod => $_getN(8);
   @$pb.TagNumber(12)
-  set pricingMethod(EtfPricing value) => $_setField(12, value);
+  set pricingMethod($1.EtfPricing value) => $_setField(12, value);
   @$pb.TagNumber(12)
   $core.bool hasPricingMethod() => $_has(8);
   @$pb.TagNumber(12)
   void clearPricingMethod() => $_clearField(12);
   @$pb.TagNumber(12)
-  EtfPricing ensurePricingMethod() => $_ensure(8);
+  $1.EtfPricing ensurePricingMethod() => $_ensure(8);
 
   /// 매수 호가 조정값
   @$pb.TagNumber(13)
@@ -370,288 +371,6 @@ class EtfLpQuantityLimit extends $pb.GeneratedMessage {
   $core.bool hasMaxNetQuantity() => $_has(3);
   @$pb.TagNumber(6)
   void clearMaxNetQuantity() => $_clearField(6);
-}
-
-enum EtfPricing_Method {
-  pdfNavHedge, 
-  indexTrackingHedge, 
-  futureBasis, 
-  leverageFuture, 
-  notSet
-}
-
-/// ETF 가격 산출 방식
-class EtfPricing extends $pb.GeneratedMessage {
-  factory EtfPricing({
-    PdfNavHedgePricing? pdfNavHedge,
-    IndexTrackingHedgePricing? indexTrackingHedge,
-    FutureBasis? futureBasis,
-    LeverageFuturePricing? leverageFuture,
-  }) {
-    final result = create();
-    if (pdfNavHedge != null) result.pdfNavHedge = pdfNavHedge;
-    if (indexTrackingHedge != null) result.indexTrackingHedge = indexTrackingHedge;
-    if (futureBasis != null) result.futureBasis = futureBasis;
-    if (leverageFuture != null) result.leverageFuture = leverageFuture;
-    return result;
-  }
-
-  EtfPricing._();
-
-  factory EtfPricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static const $core.Map<$core.int, EtfPricing_Method> _EtfPricing_MethodByTag = {
-    1 : EtfPricing_Method.pdfNavHedge,
-    2 : EtfPricing_Method.indexTrackingHedge,
-    3 : EtfPricing_Method.futureBasis,
-    4 : EtfPricing_Method.leverageFuture,
-    0 : EtfPricing_Method.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4])
-    ..aOM<PdfNavHedgePricing>(1, _omitFieldNames ? '' : 'pdfNavHedge', subBuilder: PdfNavHedgePricing.create)
-    ..aOM<IndexTrackingHedgePricing>(2, _omitFieldNames ? '' : 'indexTrackingHedge', subBuilder: IndexTrackingHedgePricing.create)
-    ..aOM<FutureBasis>(3, _omitFieldNames ? '' : 'futureBasis', subBuilder: FutureBasis.create)
-    ..aOM<LeverageFuturePricing>(4, _omitFieldNames ? '' : 'leverageFuture', subBuilder: LeverageFuturePricing.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricing clone() => EtfPricing()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfPricing copyWith(void Function(EtfPricing) updates) => super.copyWith((message) => updates(message as EtfPricing)) as EtfPricing;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static EtfPricing create() => EtfPricing._();
-  @$core.override
-  EtfPricing createEmptyInstance() => create();
-  static $pb.PbList<EtfPricing> createRepeated() => $pb.PbList<EtfPricing>();
-  @$core.pragma('dart2js:noInline')
-  static EtfPricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPricing>(create);
-  static EtfPricing? _defaultInstance;
-
-  EtfPricing_Method whichMethod() => _EtfPricing_MethodByTag[$_whichOneof(0)]!;
-  void clearMethod() => $_clearField($_whichOneof(0));
-
-  /// 분해 헷지 방식
-  @$pb.TagNumber(1)
-  PdfNavHedgePricing get pdfNavHedge => $_getN(0);
-  @$pb.TagNumber(1)
-  set pdfNavHedge(PdfNavHedgePricing value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasPdfNavHedge() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPdfNavHedge() => $_clearField(1);
-  @$pb.TagNumber(1)
-  PdfNavHedgePricing ensurePdfNavHedge() => $_ensure(0);
-
-  /// 선물 헷지 방식
-  @$pb.TagNumber(2)
-  IndexTrackingHedgePricing get indexTrackingHedge => $_getN(1);
-  @$pb.TagNumber(2)
-  set indexTrackingHedge(IndexTrackingHedgePricing value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasIndexTrackingHedge() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearIndexTrackingHedge() => $_clearField(2);
-  @$pb.TagNumber(2)
-  IndexTrackingHedgePricing ensureIndexTrackingHedge() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  FutureBasis get futureBasis => $_getN(2);
-  @$pb.TagNumber(3)
-  set futureBasis(FutureBasis value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasFutureBasis() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearFutureBasis() => $_clearField(3);
-  @$pb.TagNumber(3)
-  FutureBasis ensureFutureBasis() => $_ensure(2);
-
-  /// 레버리지 선물 방식
-  @$pb.TagNumber(4)
-  LeverageFuturePricing get leverageFuture => $_getN(3);
-  @$pb.TagNumber(4)
-  set leverageFuture(LeverageFuturePricing value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasLeverageFuture() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearLeverageFuture() => $_clearField(4);
-  @$pb.TagNumber(4)
-  LeverageFuturePricing ensureLeverageFuture() => $_ensure(3);
-}
-
-/// 분해 헷지 가격 산출 (추가 파라미터 없음)
-class PdfNavHedgePricing extends $pb.GeneratedMessage {
-  factory PdfNavHedgePricing() => create();
-
-  PdfNavHedgePricing._();
-
-  factory PdfNavHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PdfNavHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PdfNavHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PdfNavHedgePricing clone() => PdfNavHedgePricing()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PdfNavHedgePricing copyWith(void Function(PdfNavHedgePricing) updates) => super.copyWith((message) => updates(message as PdfNavHedgePricing)) as PdfNavHedgePricing;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PdfNavHedgePricing create() => PdfNavHedgePricing._();
-  @$core.override
-  PdfNavHedgePricing createEmptyInstance() => create();
-  static $pb.PbList<PdfNavHedgePricing> createRepeated() => $pb.PbList<PdfNavHedgePricing>();
-  @$core.pragma('dart2js:noInline')
-  static PdfNavHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PdfNavHedgePricing>(create);
-  static PdfNavHedgePricing? _defaultInstance;
-}
-
-/// 선물 헷지 가격 산출
-class IndexTrackingHedgePricing extends $pb.GeneratedMessage {
-  factory IndexTrackingHedgePricing() => create();
-
-  IndexTrackingHedgePricing._();
-
-  factory IndexTrackingHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory IndexTrackingHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'IndexTrackingHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IndexTrackingHedgePricing clone() => IndexTrackingHedgePricing()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IndexTrackingHedgePricing copyWith(void Function(IndexTrackingHedgePricing) updates) => super.copyWith((message) => updates(message as IndexTrackingHedgePricing)) as IndexTrackingHedgePricing;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static IndexTrackingHedgePricing create() => IndexTrackingHedgePricing._();
-  @$core.override
-  IndexTrackingHedgePricing createEmptyInstance() => create();
-  static $pb.PbList<IndexTrackingHedgePricing> createRepeated() => $pb.PbList<IndexTrackingHedgePricing>();
-  @$core.pragma('dart2js:noInline')
-  static IndexTrackingHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IndexTrackingHedgePricing>(create);
-  static IndexTrackingHedgePricing? _defaultInstance;
-}
-
-class FutureBasis extends $pb.GeneratedMessage {
-  factory FutureBasis({
-    $core.String? prevIndex,
-  }) {
-    final result = create();
-    if (prevIndex != null) result.prevIndex = prevIndex;
-    return result;
-  }
-
-  FutureBasis._();
-
-  factory FutureBasis.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory FutureBasis.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FutureBasis', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'prevIndex')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FutureBasis clone() => FutureBasis()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FutureBasis copyWith(void Function(FutureBasis) updates) => super.copyWith((message) => updates(message as FutureBasis)) as FutureBasis;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static FutureBasis create() => FutureBasis._();
-  @$core.override
-  FutureBasis createEmptyInstance() => create();
-  static $pb.PbList<FutureBasis> createRepeated() => $pb.PbList<FutureBasis>();
-  @$core.pragma('dart2js:noInline')
-  static FutureBasis getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FutureBasis>(create);
-  static FutureBasis? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get prevIndex => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set prevIndex($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasPrevIndex() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPrevIndex() => $_clearField(1);
-}
-
-/// 레버리지 선물 가격 산출
-class LeverageFuturePricing extends $pb.GeneratedMessage {
-  factory LeverageFuturePricing({
-    $core.double? prevIndex,
-    $core.double? prevFuture,
-  }) {
-    final result = create();
-    if (prevIndex != null) result.prevIndex = prevIndex;
-    if (prevFuture != null) result.prevFuture = prevFuture;
-    return result;
-  }
-
-  LeverageFuturePricing._();
-
-  factory LeverageFuturePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory LeverageFuturePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeverageFuturePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'prevIndex', $pb.PbFieldType.OD)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'prevFuture', $pb.PbFieldType.OD)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LeverageFuturePricing clone() => LeverageFuturePricing()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LeverageFuturePricing copyWith(void Function(LeverageFuturePricing) updates) => super.copyWith((message) => updates(message as LeverageFuturePricing)) as LeverageFuturePricing;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static LeverageFuturePricing create() => LeverageFuturePricing._();
-  @$core.override
-  LeverageFuturePricing createEmptyInstance() => create();
-  static $pb.PbList<LeverageFuturePricing> createRepeated() => $pb.PbList<LeverageFuturePricing>();
-  @$core.pragma('dart2js:noInline')
-  static LeverageFuturePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LeverageFuturePricing>(create);
-  static LeverageFuturePricing? _defaultInstance;
-
-  /// 기초지수 전일종가
-  @$pb.TagNumber(1)
-  $core.double get prevIndex => $_getN(0);
-  @$pb.TagNumber(1)
-  set prevIndex($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasPrevIndex() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPrevIndex() => $_clearField(1);
-
-  /// 선물 전일종가
-  @$pb.TagNumber(2)
-  $core.double get prevFuture => $_getN(1);
-  @$pb.TagNumber(2)
-  set prevFuture($core.double value) => $_setDouble(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasPrevFuture() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearPrevFuture() => $_clearField(2);
 }
 
 /// ETF LP 상태

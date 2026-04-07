@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/api/client.proto";
 import "google/protobuf/empty.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -36,14 +37,6 @@ service MarketMakingService {
     option (google.api.method_signature) = "symbol,config";
   }
 
-  // MM 상태 조회
-  rpc GetMarketMakingStatus(GetMarketMakingStatusRequest) returns (MarketMakingStatus) {
-    option (google.api.http) = {
-      get: "/v1/mm/{symbol=*}/status"
-    };
-    option (google.api.method_signature) = "symbol";
-  }
-
   // MM 시작 (심볼 등록)
   rpc StartMarketMaking(StartMarketMakingRequest) returns (StartMarketMakingResponse) {
     option (google.api.http) = {
@@ -60,27 +53,11 @@ service MarketMakingService {
     };
   }
 
-  // MM 엔진 리셋 (일초 상태 초기화)
-  rpc ResetMarketMaking(ResetMarketMakingRequest) returns (ResetMarketMakingResponse) {
-    option (google.api.http) = {
-      post: "/v1/mm/{symbol=*}:reset"
-      body: "*"
-    };
-  }
-
   // MM 설정 업데이트
   rpc UpdateMarketMakingConfig(UpdateMarketMakingConfigRequest) returns (MarketMakingConfiguration) {
     option (google.api.http) = {
       patch: "/v1/mm/{symbol=*}/config"
       body: "*"
-    };
-    option (google.api.method_signature) = "symbol";
-  }
-
-  // MM 실시간 상태 스트리밍 (서버→클라이언트)
-  rpc StreamMarketMakingStatus(StreamMarketMakingStatusRequest) returns (stream MarketMakingStatus) {
-    option (google.api.http) = {
-      get: "/v1/mm/{symbol=*}:streamStatus"
     };
     option (google.api.method_signature) = "symbol";
   }
@@ -119,9 +96,6 @@ enum MarketMakingState {
   MARKET_MAKING_STATE_UNSPECIFIED = 0;
   MARKET_MAKING_STATE_IDLE = 1;        // 대기
   MARKET_MAKING_STATE_RUNNING = 2;     // 활성
-  // reserved: 3 (removed MARKET_MAKING_STATE_PAUSED)
-  reserved 3;
-  reserved "MARKET_MAKING_STATE_PAUSED";
 }
 
 // ============================================================================
@@ -144,69 +118,24 @@ message MarketMaking {
 
   // ETF tick size (Price internal representation)
   int64 tick_size = 5;
-
-  // 매수 호가 수량
-  int64 bid_quantity = 6;
-
-  // 매도 호가 수량
-  int64 ask_quantity = 7;
-}
-
-// MM 상태 상세
-message MarketMakingStatus {
-  // ISIN 심볼
-  string symbol = 1;
-
-  // 현재 상태
-  MarketMakingState state = 2;
-
-  // MM 설정 (config 필드에 momentum 포함)
-  MarketMakingConfiguration config = 3;
-
-  // reserved: 4 (removed registered field)
-  reserved 4;
-  reserved "registered";
-
-  // 활성 여부
-  bool active = 5;
-
-  // 펀드 코드
-  string fund_code = 6;
-
-  // reserved: 7~14 (removed momentum_* fields — use config.momentum instead)
-  reserved 7, 8, 9, 10, 11, 12, 13, 14;
-  reserved "momentum_enabled", "momentum_window_ms", "momentum_trigger_ticks",
-           "momentum_follow_sensitivity", "momentum_escape_sensitivity",
-           "momentum_direction", "momentum_bid_adjustment", "momentum_ask_adjustment";
 }
 
 // MM 엔진 설정 (MmConfig 대응)
 message MarketMakingConfiguration {
-  // Pricing 전략: "plain_follow", "mean_bidask", "nav", "krx_nav"
-  string pricing = 1;
+  // MM 활성화 여부
+  bool enabled = 1;
 
-  // reserved: 2 (removed skew — SkewLogic 제거됨)
-  reserved 2;
-  reserved "skew";
+  // NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
+  MarketMakingPricing pricing = 2;
 
   // Trade Analyzer 설정
   MarketMakingTradeAnalyzer trade_analyzer = 3;
 
-  // Screening 설정
-  MarketMakingScreening screening = 4;
-
-  // MM 활성화 여부
-  bool enabled = 6;
-
   // Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
-  MarketMakingMomentum momentum = 7;
+  MarketMakingMomentum momentum = 5;
 
   // 통합 포지션 관리 설정
-  MarketMakingExposureBalancer exposure_balancer = 8;
-
-  // reserved: 9 (removed inventory_balancer — merged into exposure_balancer)
-  reserved 9;
-  reserved "inventory_balancer";
+  MarketMakingExposureBalancer exposure_balancer = 6;
 
   // 기준가격 대비 bid 조정값 (Price internal representation)
   int64 bid_adjustment = 10;
@@ -225,60 +154,40 @@ message MarketMakingConfiguration {
 
   // NAV 계산용 ask basis (Price internal representation)
   int64 ask_basis = 15;
-
-  // NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
-  MarketMakingNavConfig nav_config = 16;
-
-  // 펀드 코드 (read-only: UpdateMarketMakingConfig에서 변경 불가)
-  string fund_code = 17;
-
-  // ETF tick size (read-only: UpdateMarketMakingConfig에서 변경 불가)
-  int64 tick_size = 18;
-
-  // 호가 depth (read-only: UpdateMarketMakingConfig에서 변경 불가)
-  int32 depth = 19;
-}
-
-// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
-// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
-message MarketMakingSkew {
-  // reserved: 모든 필드 deprecated
-  reserved 1, 2, 3;
-  reserved "mode", "trigger_amt", "skew_unit";
 }
 
 // NAV pricing 상세 설정
-message MarketMakingNavConfig {
+message MarketMakingPricing {
   // EtfPricing 전략 (oneof)
   oneof pricing {
     // PDF 기반 nav 계산 및 헷지 프라이싱
-    EtfPricingPdfNavHedge pdf_nav_hedge = 1;
+    PlainFollow plain_follow = 1;
 
     // 지수 추종 헷지 프라이싱
-    EtfPricingIndexTrackingHedge index_tracking_hedge = 2;
+    MeanBidAsk mean_bid_ask = 2;
 
     // 선물 베이시스 기반 프라이싱
-    EtfPricingFutureBasis future_basis = 3;
+    Nav nav = 3;
 
     // 레버리지 선물 기반 프라이싱
-    EtfPricingLeverageFuture leverage_future = 4;
+    KrxNav krx_nav = 4;
   }
 }
 
 // EtfPricing::PdfNavHedge
-message EtfPricingPdfNavHedge {}
+message PlainFollow {}
 
 // EtfPricing::IndexTrackingHedge
-message EtfPricingIndexTrackingHedge {}
+message MeanBidAsk {}
 
 // EtfPricing::FutureBasis { prev_index }
-message EtfPricingFutureBasis {
+message Nav {
   // 이전 지수 (Price internal representation)
-  int64 prev_index = 1;
+  kdo.v1.common.EtfPricing etf_pricing = 1;
 }
 
 // EtfPricing::LeverageFuture { prev_index, prev_future }
-message EtfPricingLeverageFuture {
+message KrxNav {
   // 이전 지수 (Price internal representation)
   int64 prev_index = 1;
 
@@ -302,18 +211,6 @@ message MarketMakingTradeAnalyzer {
 
   // 최대 decoration 틱 수
   int32 max_deco_tick = 5;
-}
-
-// Pre-trade Screening 설정
-message MarketMakingScreening {
-  // 최대 스프레드 폭 (틱 단위, 0=비활성)
-  int32 max_spread_width_ticks = 1;
-
-  // 최소 가격 (0=비활성)
-  int64 min_price = 2;
-
-  // 최대 가격 (0=비활성)
-  int64 max_price = 3;
 }
 
 // Momentum 설정
@@ -354,13 +251,8 @@ message MarketMakingExposureBalancer {
   // 단계당 가격 중심 이동 틱 수
   int32 price_skew_ticks = 3;
 
-  // reserved: 4, 5, 6, 7 (removed same_side_reduction, min_same_side_scale,
-  //   hard_limit_start, hard_limit_max — simplified ExposureBalancer)
-  reserved 4, 5, 6, 7;
-  reserved "same_side_reduction", "min_same_side_scale", "hard_limit_start", "hard_limit_max";
-
   // hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
-  int32 limit_multiple = 8;
+  int32 limit_multiple = 4;
 }
 
 // ============================================================================
@@ -407,7 +299,7 @@ message StartMarketMakingRequest {
 
 message StartMarketMakingResponse {
   // 시작된 MM 상태
-  MarketMakingStatus status = 1;
+  MarketMakingState state = 1;
 
   // 메시지
   string message = 2;
@@ -517,14 +409,6 @@ message MomentumState {
   int32 sample_count = 8;
 }
 
-// reserved: SkewState (removed — SkewLogic 제거됨)
-// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
-message SkewState {
-  // reserved: 모든 필드 deprecated
-  reserved 1;
-  reserved "net_traded";
-}
-
 // Trade Analyzer 런타임 상태
 message TradeAnalyzerState {
   // 현재 decoration 틱 수
@@ -557,22 +441,17 @@ message MmEngineRuntimeState {
   // 상태 스냅샷 타임스탬프 (Unix nanoseconds)
   int64 timestamp = 2;
 
-  // Momentum 상태
-  MomentumState momentum = 3;
+  // MM 상태
+  MarketMakingState state = 3;
 
-  // reserved: 4 (removed skew — SkewLogic 제거됨)
-  reserved 4;
-  reserved "skew";
+  // Momentum 상태
+  MomentumState momentum = 4;
 
   // Trade Analyzer 상태
   TradeAnalyzerState trade_analyzer = 5;
 
   // 순노출 및 재고 균형 상태 (기존 exposure_guard(6) + inventory_balancer(7) 통합)
   ExposureBalancerState exposure_balancer = 6;
-
-  // reserved: 7 (removed inventory_balancer field)
-  reserved 7;
-  reserved "inventory_balancer";
 }
 
 // ============================================================================

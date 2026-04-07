@@ -48,11 +48,6 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$updateMarketMaking, request, options: options);
   }
 
-  /// MM 상태 조회
-  $grpc.ResponseFuture<$0.MarketMakingStatus> getMarketMakingStatus($0.GetMarketMakingStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getMarketMakingStatus, request, options: options);
-  }
-
   /// MM 시작 (심볼 등록)
   $grpc.ResponseFuture<$0.StartMarketMakingResponse> startMarketMaking($0.StartMarketMakingRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$startMarketMaking, request, options: options);
@@ -63,19 +58,9 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$stopMarketMaking, request, options: options);
   }
 
-  /// MM 엔진 리셋 (일초 상태 초기화)
-  $grpc.ResponseFuture<$0.ResetMarketMakingResponse> resetMarketMaking($0.ResetMarketMakingRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$resetMarketMaking, request, options: options);
-  }
-
   /// MM 설정 업데이트
   $grpc.ResponseFuture<$0.MarketMakingConfiguration> updateMarketMakingConfig($0.UpdateMarketMakingConfigRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$updateMarketMakingConfig, request, options: options);
-  }
-
-  /// MM 실시간 상태 스트리밍 (서버→클라이언트)
-  $grpc.ResponseStream<$0.MarketMakingStatus> streamMarketMakingStatus($0.StreamMarketMakingStatusRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamMarketMakingStatus, $async.Stream.fromIterable([request]), options: options);
   }
 
   /// MM 전용 주문장 조회
@@ -107,10 +92,6 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/UpdateMarketMaking',
       ($0.UpdateMarketMakingRequest value) => value.writeToBuffer(),
       $0.MarketMaking.fromBuffer);
-  static final _$getMarketMakingStatus = $grpc.ClientMethod<$0.GetMarketMakingStatusRequest, $0.MarketMakingStatus>(
-      '/kdo.v1.mm.MarketMakingService/GetMarketMakingStatus',
-      ($0.GetMarketMakingStatusRequest value) => value.writeToBuffer(),
-      $0.MarketMakingStatus.fromBuffer);
   static final _$startMarketMaking = $grpc.ClientMethod<$0.StartMarketMakingRequest, $0.StartMarketMakingResponse>(
       '/kdo.v1.mm.MarketMakingService/StartMarketMaking',
       ($0.StartMarketMakingRequest value) => value.writeToBuffer(),
@@ -119,18 +100,10 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/StopMarketMaking',
       ($0.StopMarketMakingRequest value) => value.writeToBuffer(),
       $0.StopMarketMakingResponse.fromBuffer);
-  static final _$resetMarketMaking = $grpc.ClientMethod<$0.ResetMarketMakingRequest, $0.ResetMarketMakingResponse>(
-      '/kdo.v1.mm.MarketMakingService/ResetMarketMaking',
-      ($0.ResetMarketMakingRequest value) => value.writeToBuffer(),
-      $0.ResetMarketMakingResponse.fromBuffer);
   static final _$updateMarketMakingConfig = $grpc.ClientMethod<$0.UpdateMarketMakingConfigRequest, $0.MarketMakingConfiguration>(
       '/kdo.v1.mm.MarketMakingService/UpdateMarketMakingConfig',
       ($0.UpdateMarketMakingConfigRequest value) => value.writeToBuffer(),
       $0.MarketMakingConfiguration.fromBuffer);
-  static final _$streamMarketMakingStatus = $grpc.ClientMethod<$0.StreamMarketMakingStatusRequest, $0.MarketMakingStatus>(
-      '/kdo.v1.mm.MarketMakingService/StreamMarketMakingStatus',
-      ($0.StreamMarketMakingStatusRequest value) => value.writeToBuffer(),
-      $0.MarketMakingStatus.fromBuffer);
   static final _$getMarketMakingOrderbook = $grpc.ClientMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
       '/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook',
       ($0.GetMarketMakingOrderbookRequest value) => value.writeToBuffer(),
@@ -171,13 +144,6 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.UpdateMarketMakingRequest.fromBuffer(value),
         ($0.MarketMaking value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetMarketMakingStatusRequest, $0.MarketMakingStatus>(
-        'GetMarketMakingStatus',
-        getMarketMakingStatus_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.GetMarketMakingStatusRequest.fromBuffer(value),
-        ($0.MarketMakingStatus value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StartMarketMakingRequest, $0.StartMarketMakingResponse>(
         'StartMarketMaking',
         startMarketMaking_Pre,
@@ -192,13 +158,6 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.StopMarketMakingRequest.fromBuffer(value),
         ($0.StopMarketMakingResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ResetMarketMakingRequest, $0.ResetMarketMakingResponse>(
-        'ResetMarketMaking',
-        resetMarketMaking_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.ResetMarketMakingRequest.fromBuffer(value),
-        ($0.ResetMarketMakingResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UpdateMarketMakingConfigRequest, $0.MarketMakingConfiguration>(
         'UpdateMarketMakingConfig',
         updateMarketMakingConfig_Pre,
@@ -206,13 +165,6 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.UpdateMarketMakingConfigRequest.fromBuffer(value),
         ($0.MarketMakingConfiguration value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamMarketMakingStatusRequest, $0.MarketMakingStatus>(
-        'StreamMarketMakingStatus',
-        streamMarketMakingStatus_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) => $0.StreamMarketMakingStatusRequest.fromBuffer(value),
-        ($0.MarketMakingStatus value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
         'GetMarketMakingOrderbook',
         getMarketMakingOrderbook_Pre,
@@ -254,12 +206,6 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
 
   $async.Future<$0.MarketMaking> updateMarketMaking($grpc.ServiceCall call, $0.UpdateMarketMakingRequest request);
 
-  $async.Future<$0.MarketMakingStatus> getMarketMakingStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingStatusRequest> $request) async {
-    return getMarketMakingStatus($call, await $request);
-  }
-
-  $async.Future<$0.MarketMakingStatus> getMarketMakingStatus($grpc.ServiceCall call, $0.GetMarketMakingStatusRequest request);
-
   $async.Future<$0.StartMarketMakingResponse> startMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.StartMarketMakingRequest> $request) async {
     return startMarketMaking($call, await $request);
   }
@@ -272,23 +218,11 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
 
   $async.Future<$0.StopMarketMakingResponse> stopMarketMaking($grpc.ServiceCall call, $0.StopMarketMakingRequest request);
 
-  $async.Future<$0.ResetMarketMakingResponse> resetMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ResetMarketMakingRequest> $request) async {
-    return resetMarketMaking($call, await $request);
-  }
-
-  $async.Future<$0.ResetMarketMakingResponse> resetMarketMaking($grpc.ServiceCall call, $0.ResetMarketMakingRequest request);
-
   $async.Future<$0.MarketMakingConfiguration> updateMarketMakingConfig_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateMarketMakingConfigRequest> $request) async {
     return updateMarketMakingConfig($call, await $request);
   }
 
   $async.Future<$0.MarketMakingConfiguration> updateMarketMakingConfig($grpc.ServiceCall call, $0.UpdateMarketMakingConfigRequest request);
-
-  $async.Stream<$0.MarketMakingStatus> streamMarketMakingStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMarketMakingStatusRequest> $request) async* {
-    yield* streamMarketMakingStatus($call, await $request);
-  }
-
-  $async.Stream<$0.MarketMakingStatus> streamMarketMakingStatus($grpc.ServiceCall call, $0.StreamMarketMakingStatusRequest request);
 
   $async.Future<$0.MarketMakingOrderbookData> getMarketMakingOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingOrderbookRequest> $request) async {
     return getMarketMakingOrderbook($call, await $request);
