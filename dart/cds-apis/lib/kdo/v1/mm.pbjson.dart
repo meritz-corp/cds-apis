@@ -110,6 +110,9 @@ const MarketMakingConfiguration$json = {
     {'1': 'bid_basis', '3': 14, '4': 1, '5': 3, '10': 'bidBasis'},
     {'1': 'ask_basis', '3': 15, '4': 1, '5': 3, '10': 'askBasis'},
     {'1': 'nav_config', '3': 16, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingNavConfig', '10': 'navConfig'},
+    {'1': 'fund_code', '3': 17, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'tick_size', '3': 18, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'depth', '3': 19, '4': 1, '5': 5, '10': 'depth'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -131,8 +134,9 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'dBIhCgxiaWRfcXVhbnRpdHkYDCABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFudGl0eRgNIA'
     'EoA1ILYXNrUXVhbnRpdHkSGwoJYmlkX2Jhc2lzGA4gASgDUghiaWRCYXNpcxIbCglhc2tfYmFz'
     'aXMYDyABKANSCGFza0Jhc2lzEj8KCm5hdl9jb25maWcYECABKAsyIC5rZG8udjEubW0uTWFya2'
-    'V0TWFraW5nTmF2Q29uZmlnUgluYXZDb25maWdKBAgCEANKBAgJEApSBHNrZXdSEmludmVudG9y'
-    'eV9iYWxhbmNlcg==');
+    'V0TWFraW5nTmF2Q29uZmlnUgluYXZDb25maWcSGwoJZnVuZF9jb2RlGBEgASgJUghmdW5kQ29k'
+    'ZRIbCgl0aWNrX3NpemUYEiABKANSCHRpY2tTaXplEhQKBWRlcHRoGBMgASgFUgVkZXB0aEoECA'
+    'IQA0oECAkQClIEc2tld1ISaW52ZW50b3J5X2JhbGFuY2Vy');
 
 @$core.Deprecated('Use marketMakingSkewDescriptor instead')
 const MarketMakingSkew$json = {

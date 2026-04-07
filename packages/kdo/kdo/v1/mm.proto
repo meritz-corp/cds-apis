@@ -228,6 +228,15 @@ message MarketMakingConfiguration {
 
   // NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
   MarketMakingNavConfig nav_config = 16;
+
+  // 펀드 코드 (read-only: UpdateMarketMakingConfig에서 변경 불가)
+  string fund_code = 17;
+
+  // ETF tick size (read-only: UpdateMarketMakingConfig에서 변경 불가)
+  int64 tick_size = 18;
+
+  // 호가 depth (read-only: UpdateMarketMakingConfig에서 변경 불가)
+  int32 depth = 19;
 }
 
 // reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
@@ -430,11 +439,14 @@ message ResetMarketMakingResponse {
 }
 
 // UpdateMarketMakingConfig
+// NOTE: config 내 pricing, fund_code, tick_size, depth 필드는 이 요청으로 변경할 수 없습니다.
+// 해당 필드들은 서버에서 무시됩니다.
 message UpdateMarketMakingConfigRequest {
   // ISIN 심볼
   string symbol = 1 [(google.api.field_behavior) = REQUIRED];
 
   // 업데이트할 설정 (전체 교체)
+  // pricing, fund_code, tick_size, depth 필드는 read-only이며 무시됩니다.
   MarketMakingConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
 }
 

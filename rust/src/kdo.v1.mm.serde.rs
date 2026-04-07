@@ -1301,6 +1301,15 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("pricing", &self.pricing)?;
@@ -1353,6 +1362,17 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.nav_config.as_ref() {
             struct_ser.serialize_field("nav_config", v)?;
         }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("depth", &self.depth)?;
+        }
         struct_ser.end()
     }
 }
@@ -1385,6 +1405,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "askBasis",
             "nav_config",
             "navConfig",
+            "fund_code",
+            "fundCode",
+            "tick_size",
+            "tickSize",
+            "depth",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1402,6 +1427,9 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             BidBasis,
             AskBasis,
             NavConfig,
+            FundCode,
+            TickSize,
+            Depth,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1437,6 +1465,9 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "navConfig" | "nav_config" => Ok(GeneratedField::NavConfig),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
+                            "depth" => Ok(GeneratedField::Depth),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1469,6 +1500,9 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut bid_basis__ = None;
                 let mut ask_basis__ = None;
                 let mut nav_config__ = None;
+                let mut fund_code__ = None;
+                let mut tick_size__ = None;
+                let mut depth__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pricing => {
@@ -1561,6 +1595,28 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             nav_config__ = map_.next_value()?;
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TickSize => {
+                            if tick_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickSize"));
+                            }
+                            tick_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Depth => {
+                            if depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
+                            }
+                            depth__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1580,6 +1636,9 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     bid_basis: bid_basis__.unwrap_or_default(),
                     ask_basis: ask_basis__.unwrap_or_default(),
                     nav_config: nav_config__,
+                    fund_code: fund_code__.unwrap_or_default(),
+                    tick_size: tick_size__.unwrap_or_default(),
+                    depth: depth__.unwrap_or_default(),
                 })
             }
         }

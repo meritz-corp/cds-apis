@@ -267,6 +267,9 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? bidBasis,
     $fixnum.Int64? askBasis,
     MarketMakingNavConfig? navConfig,
+    $core.String? fundCode,
+    $fixnum.Int64? tickSize,
+    $core.int? depth,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
@@ -282,6 +285,9 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (askBasis != null) result.askBasis = askBasis;
     if (navConfig != null) result.navConfig = navConfig;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (tickSize != null) result.tickSize = tickSize;
+    if (depth != null) result.depth = depth;
     return result;
   }
 
@@ -304,6 +310,9 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aInt64(14, _omitFieldNames ? '' : 'bidBasis')
     ..aInt64(15, _omitFieldNames ? '' : 'askBasis')
     ..aOM<MarketMakingNavConfig>(16, _omitFieldNames ? '' : 'navConfig', subBuilder: MarketMakingNavConfig.create)
+    ..aOS(17, _omitFieldNames ? '' : 'fundCode')
+    ..aInt64(18, _omitFieldNames ? '' : 'tickSize')
+    ..a<$core.int>(19, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -463,6 +472,36 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearNavConfig() => $_clearField(16);
   @$pb.TagNumber(16)
   MarketMakingNavConfig ensureNavConfig() => $_ensure(12);
+
+  /// 펀드 코드 (read-only: UpdateMarketMakingConfig에서 변경 불가)
+  @$pb.TagNumber(17)
+  $core.String get fundCode => $_getSZ(13);
+  @$pb.TagNumber(17)
+  set fundCode($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(17)
+  $core.bool hasFundCode() => $_has(13);
+  @$pb.TagNumber(17)
+  void clearFundCode() => $_clearField(17);
+
+  /// ETF tick size (read-only: UpdateMarketMakingConfig에서 변경 불가)
+  @$pb.TagNumber(18)
+  $fixnum.Int64 get tickSize => $_getI64(14);
+  @$pb.TagNumber(18)
+  set tickSize($fixnum.Int64 value) => $_setInt64(14, value);
+  @$pb.TagNumber(18)
+  $core.bool hasTickSize() => $_has(14);
+  @$pb.TagNumber(18)
+  void clearTickSize() => $_clearField(18);
+
+  /// 호가 depth (read-only: UpdateMarketMakingConfig에서 변경 불가)
+  @$pb.TagNumber(19)
+  $core.int get depth => $_getIZ(15);
+  @$pb.TagNumber(19)
+  set depth($core.int value) => $_setSignedInt32(15, value);
+  @$pb.TagNumber(19)
+  $core.bool hasDepth() => $_has(15);
+  @$pb.TagNumber(19)
+  void clearDepth() => $_clearField(19);
 }
 
 /// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
@@ -1722,6 +1761,8 @@ class ResetMarketMakingResponse extends $pb.GeneratedMessage {
 }
 
 /// UpdateMarketMakingConfig
+/// NOTE: config 내 pricing, fund_code, tick_size, depth 필드는 이 요청으로 변경할 수 없습니다.
+/// 해당 필드들은 서버에서 무시됩니다.
 class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
   factory UpdateMarketMakingConfigRequest({
     $core.String? symbol,
@@ -1772,6 +1813,7 @@ class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 
   /// 업데이트할 설정 (전체 교체)
+  /// pricing, fund_code, tick_size, depth 필드는 read-only이며 무시됩니다.
   @$pb.TagNumber(2)
   MarketMakingConfiguration get config => $_getN(1);
   @$pb.TagNumber(2)

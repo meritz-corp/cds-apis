@@ -93,6 +93,15 @@ pub struct MarketMakingConfiguration {
     /// NAV pricing 상세 설정 (pricing = "nav" 일 때 사용)
     #[prost(message, optional, tag="16")]
     pub nav_config: ::core::option::Option<MarketMakingNavConfig>,
+    /// 펀드 코드 (read-only: UpdateMarketMakingConfig에서 변경 불가)
+    #[prost(string, tag="17")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// ETF tick size (read-only: UpdateMarketMakingConfig에서 변경 불가)
+    #[prost(int64, tag="18")]
+    pub tick_size: i64,
+    /// 호가 depth (read-only: UpdateMarketMakingConfig에서 변경 불가)
+    #[prost(int32, tag="19")]
+    pub depth: i32,
 }
 /// reserved: MarketMakingSkew (removed — SkewLogic 제거됨)
 /// 필드 번호 및 타입 보존을 위해 메시지는 유지하되 사용하지 않음
@@ -333,6 +342,8 @@ pub struct ResetMarketMakingResponse {
     pub message: ::prost::alloc::string::String,
 }
 /// UpdateMarketMakingConfig
+/// NOTE: config 내 pricing, fund_code, tick_size, depth 필드는 이 요청으로 변경할 수 없습니다.
+/// 해당 필드들은 서버에서 무시됩니다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateMarketMakingConfigRequest {
@@ -340,6 +351,7 @@ pub struct UpdateMarketMakingConfigRequest {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 업데이트할 설정 (전체 교체)
+    /// pricing, fund_code, tick_size, depth 필드는 read-only이며 무시됩니다.
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<MarketMakingConfiguration>,
 }

@@ -174,10 +174,10 @@
               "properties": {
                 "config": {
                   "$ref": "#/definitions/mmMarketMakingConfiguration",
-                  "title": "업데이트할 설정 (전체 교체)"
+                  "description": "업데이트할 설정 (전체 교체)\npricing, fund_code, tick_size, depth 필드는 read-only이며 무시됩니다."
                 }
               },
-              "title": "UpdateMarketMakingConfig",
+              "description": "UpdateMarketMakingConfig\nNOTE: config 내 pricing, fund_code, tick_size, depth 필드는 이 요청으로 변경할 수 없습니다.\n해당 필드들은 서버에서 무시됩니다.",
               "required": [
                 "config"
               ]
@@ -689,6 +689,20 @@
         "navConfig": {
           "$ref": "#/definitions/mmMarketMakingNavConfig",
           "title": "NAV pricing 상세 설정 (pricing = \"nav\" 일 때 사용)"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드 (read-only: UpdateMarketMakingConfig에서 변경 불가)"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF tick size (read-only: UpdateMarketMakingConfig에서 변경 불가)"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32",
+          "title": "호가 depth (read-only: UpdateMarketMakingConfig에서 변경 불가)"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
