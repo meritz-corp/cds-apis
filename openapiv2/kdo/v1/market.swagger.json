@@ -797,7 +797,16 @@
       "type": "object",
       "properties": {
         "session": {
-          "$ref": "#/definitions/commonTradingSession"
+          "$ref": "#/definitions/commonTradingSession",
+          "title": "고수준 거래 세션 (시간 기반)"
+        },
+        "sessionId": {
+          "type": "string",
+          "title": "KRX 세부 세션 ID (예: \"connected\", \"opening_one_price\")\nmarket feed에서 수신한 실제 세션 코드"
+        },
+        "sessionName": {
+          "type": "string",
+          "title": "세션 한글 이름 (예: \"이상무\", \"시가단일가\")"
         }
       }
     },

@@ -1109,11 +1109,23 @@ impl serde::Serialize for GetMarketSessionResponse {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.market.GetMarketSessionResponse", len)?;
         if true {
             let v = super::common::TradingSession::try_from(self.session)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.session)))?;
             struct_ser.serialize_field("session", &v)?;
+        }
+        if true {
+            struct_ser.serialize_field("session_id", &self.session_id)?;
+        }
+        if true {
+            struct_ser.serialize_field("session_name", &self.session_name)?;
         }
         struct_ser.end()
     }
@@ -1126,11 +1138,17 @@ impl<'de> serde::Deserialize<'de> for GetMarketSessionResponse {
     {
         const FIELDS: &[&str] = &[
             "session",
+            "session_id",
+            "sessionId",
+            "session_name",
+            "sessionName",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Session,
+            SessionId,
+            SessionName,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1154,6 +1172,8 @@ impl<'de> serde::Deserialize<'de> for GetMarketSessionResponse {
                     {
                         match value {
                             "session" => Ok(GeneratedField::Session),
+                            "sessionId" | "session_id" => Ok(GeneratedField::SessionId),
+                            "sessionName" | "session_name" => Ok(GeneratedField::SessionName),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1174,6 +1194,8 @@ impl<'de> serde::Deserialize<'de> for GetMarketSessionResponse {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut session__ = None;
+                let mut session_id__ = None;
+                let mut session_name__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Session => {
@@ -1182,6 +1204,18 @@ impl<'de> serde::Deserialize<'de> for GetMarketSessionResponse {
                             }
                             session__ = Some(map_.next_value::<super::common::TradingSession>()? as i32);
                         }
+                        GeneratedField::SessionId => {
+                            if session_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sessionId"));
+                            }
+                            session_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SessionName => {
+                            if session_name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sessionName"));
+                            }
+                            session_name__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1189,6 +1223,8 @@ impl<'de> serde::Deserialize<'de> for GetMarketSessionResponse {
                 }
                 Ok(GetMarketSessionResponse {
                     session: session__.unwrap_or_default(),
+                    session_id: session_id__.unwrap_or_default(),
+                    session_name: session_name__.unwrap_or_default(),
                 })
             }
         }

@@ -1156,9 +1156,13 @@ class RawMarketMessage extends $pb.GeneratedMessage {
 class GetMarketSessionResponse extends $pb.GeneratedMessage {
   factory GetMarketSessionResponse({
     $2.TradingSession? session,
+    $core.String? sessionId,
+    $core.String? sessionName,
   }) {
     final result = create();
     if (session != null) result.session = session;
+    if (sessionId != null) result.sessionId = sessionId;
+    if (sessionName != null) result.sessionName = sessionName;
     return result;
   }
 
@@ -1169,6 +1173,8 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMarketSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
     ..e<$2.TradingSession>(1, _omitFieldNames ? '' : 'session', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
+    ..aOS(2, _omitFieldNames ? '' : 'sessionId')
+    ..aOS(3, _omitFieldNames ? '' : 'sessionName')
     ..hasRequiredFields = false
   ;
 
@@ -1189,6 +1195,7 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
   static GetMarketSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMarketSessionResponse>(create);
   static GetMarketSessionResponse? _defaultInstance;
 
+  /// 고수준 거래 세션 (시간 기반)
   @$pb.TagNumber(1)
   $2.TradingSession get session => $_getN(0);
   @$pb.TagNumber(1)
@@ -1197,6 +1204,27 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)
   void clearSession() => $_clearField(1);
+
+  /// KRX 세부 세션 ID (예: "connected", "opening_one_price")
+  /// market feed에서 수신한 실제 세션 코드
+  @$pb.TagNumber(2)
+  $core.String get sessionId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set sessionId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSessionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSessionId() => $_clearField(2);
+
+  /// 세션 한글 이름 (예: "이상무", "시가단일가")
+  @$pb.TagNumber(3)
+  $core.String get sessionName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set sessionName($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSessionName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSessionName() => $_clearField(3);
 }
 
 

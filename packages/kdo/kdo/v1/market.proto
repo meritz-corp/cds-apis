@@ -387,5 +387,13 @@ message RawMarketMessage {
 
 
 message GetMarketSessionResponse {
+  // 고수준 거래 세션 (시간 기반)
   kdo.v1.common.TradingSession session = 1;
+
+  // KRX 세부 세션 ID (예: "connected", "opening_one_price")
+  // market feed에서 수신한 실제 세션 코드
+  string session_id = 2;
+
+  // 세션 한글 이름 (예: "이상무", "시가단일가")
+  string session_name = 3;
 }

@@ -313,11 +313,14 @@ const GetMarketSessionResponse$json = {
   '1': 'GetMarketSessionResponse',
   '2': [
     {'1': 'session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'session'},
+    {'1': 'session_id', '3': 2, '4': 1, '5': 9, '10': 'sessionId'},
+    {'1': 'session_name', '3': 3, '4': 1, '5': 9, '10': 'sessionName'},
   ],
 };
 
 /// Descriptor for `GetMarketSessionResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getMarketSessionResponseDescriptor = $convert.base64Decode(
     'ChhHZXRNYXJrZXRTZXNzaW9uUmVzcG9uc2USNwoHc2Vzc2lvbhgBIAEoDjIdLmtkby52MS5jb2'
-    '1tb24uVHJhZGluZ1Nlc3Npb25SB3Nlc3Npb24=');
+    '1tb24uVHJhZGluZ1Nlc3Npb25SB3Nlc3Npb24SHQoKc2Vzc2lvbl9pZBgCIAEoCVIJc2Vzc2lv'
+    'bklkEiEKDHNlc3Npb25fbmFtZRgDIAEoCVILc2Vzc2lvbk5hbWU=');
 

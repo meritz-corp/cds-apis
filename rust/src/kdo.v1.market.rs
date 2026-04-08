@@ -232,10 +232,18 @@ pub struct RawMarketMessage {
     pub sequence_number: u64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMarketSessionResponse {
+    /// 고수준 거래 세션 (시간 기반)
     #[prost(enumeration="super::common::TradingSession", tag="1")]
     pub session: i32,
+    /// KRX 세부 세션 ID (예: "connected", "opening_one_price")
+    /// market feed에서 수신한 실제 세션 코드
+    #[prost(string, tag="2")]
+    pub session_id: ::prost::alloc::string::String,
+    /// 세션 한글 이름 (예: "이상무", "시가단일가")
+    #[prost(string, tag="3")]
+    pub session_name: ::prost::alloc::string::String,
 }
 /// 세션 ID 열거형 (AIP-126)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
