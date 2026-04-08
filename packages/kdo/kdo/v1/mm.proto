@@ -154,6 +154,12 @@ message MarketMakingConfiguration {
 
   // NAV 계산용 ask basis (Price internal representation)
   int64 ask_basis = 15;
+
+  // NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
+  int64 bid_offset = 16;
+
+  // NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
+  int64 ask_offset = 17;
 }
 
 // NAV pricing 상세 설정
@@ -460,6 +466,12 @@ message MmEngineRuntimeState {
 
   // 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
   optional string bid_quote = 8;
+
+  // 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
+  optional string bid_offset = 9;
+
+  // 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
+  optional string ask_offset = 10;
 }
 
 // ============================================================================

@@ -64,6 +64,8 @@ const MarketMakingConfiguration$json = {
     {'1': 'ask_quantity', '3': 13, '4': 1, '5': 3, '10': 'askQuantity'},
     {'1': 'bid_basis', '3': 14, '4': 1, '5': 3, '10': 'bidBasis'},
     {'1': 'ask_basis', '3': 15, '4': 1, '5': 3, '10': 'askBasis'},
+    {'1': 'bid_offset', '3': 16, '4': 1, '5': 3, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 17, '4': 1, '5': 3, '10': 'askOffset'},
   ],
 };
 
@@ -78,7 +80,8 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'ZXISJQoOYmlkX2FkanVzdG1lbnQYCiABKANSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG'
     '1lbnQYCyABKANSDWFza0FkanVzdG1lbnQSIQoMYmlkX3F1YW50aXR5GAwgASgDUgtiaWRRdWFu'
     'dGl0eRIhCgxhc2tfcXVhbnRpdHkYDSABKANSC2Fza1F1YW50aXR5EhsKCWJpZF9iYXNpcxgOIA'
-    'EoA1IIYmlkQmFzaXMSGwoJYXNrX2Jhc2lzGA8gASgDUghhc2tCYXNpcw==');
+    'EoA1IIYmlkQmFzaXMSGwoJYXNrX2Jhc2lzGA8gASgDUghhc2tCYXNpcxIdCgpiaWRfb2Zmc2V0'
+    'GBAgASgDUgliaWRPZmZzZXQSHQoKYXNrX29mZnNldBgRIAEoA1IJYXNrT2Zmc2V0');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -488,6 +491,8 @@ const MmEngineRuntimeState$json = {
     {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.ExposureBalancerState', '9': 3, '10': 'exposureBalancer', '17': true},
     {'1': 'ask_quote', '3': 7, '4': 1, '5': 9, '9': 4, '10': 'askQuote', '17': true},
     {'1': 'bid_quote', '3': 8, '4': 1, '5': 9, '9': 5, '10': 'bidQuote', '17': true},
+    {'1': 'bid_offset', '3': 9, '4': 1, '5': 9, '9': 6, '10': 'bidOffset', '17': true},
+    {'1': 'ask_offset', '3': 10, '4': 1, '5': 9, '9': 7, '10': 'askOffset', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -496,6 +501,8 @@ const MmEngineRuntimeState$json = {
     {'1': '_exposure_balancer'},
     {'1': '_ask_quote'},
     {'1': '_bid_quote'},
+    {'1': '_bid_offset'},
+    {'1': '_ask_offset'},
   ],
 };
 
@@ -508,9 +515,11 @@ final $typed_data.Uint8List mmEngineRuntimeStateDescriptor = $convert.base64Deco
     'LnYxLm1tLlRyYWRlQW5hbHl6ZXJTdGF0ZUgCUg10cmFkZUFuYWx5emVyiAEBElIKEWV4cG9zdX'
     'JlX2JhbGFuY2VyGAYgASgLMiAua2RvLnYxLm1tLkV4cG9zdXJlQmFsYW5jZXJTdGF0ZUgDUhBl'
     'eHBvc3VyZUJhbGFuY2VyiAEBEiAKCWFza19xdW90ZRgHIAEoCUgEUghhc2tRdW90ZYgBARIgCg'
-    'liaWRfcXVvdGUYCCABKAlIBVIIYmlkUXVvdGWIAQFCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIR'
-    'Cg9fdHJhZGVfYW5hbHl6ZXJCFAoSX2V4cG9zdXJlX2JhbGFuY2VyQgwKCl9hc2tfcXVvdGVCDA'
-    'oKX2JpZF9xdW90ZQ==');
+    'liaWRfcXVvdGUYCCABKAlIBVIIYmlkUXVvdGWIAQESIgoKYmlkX29mZnNldBgJIAEoCUgGUgli'
+    'aWRPZmZzZXSIAQESIgoKYXNrX29mZnNldBgKIAEoCUgHUglhc2tPZmZzZXSIAQFCCAoGX3N0YX'
+    'RlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5hbHl6ZXJCFAoSX2V4cG9zdXJlX2JhbGFuY2Vy'
+    'QgwKCl9hc2tfcXVvdGVCDAoKX2JpZF9xdW90ZUINCgtfYmlkX29mZnNldEINCgtfYXNrX29mZn'
+    'NldA==');
 
 @$core.Deprecated('Use streamMmEngineStateRequestDescriptor instead')
 const StreamMmEngineStateRequest$json = {

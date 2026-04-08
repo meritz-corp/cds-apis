@@ -61,6 +61,12 @@ pub struct MarketMakingConfiguration {
     /// NAV 계산용 ask basis (Price internal representation)
     #[prost(int64, tag="15")]
     pub ask_basis: i64,
+    /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
+    #[prost(int64, tag="16")]
+    pub bid_offset: i64,
+    /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
+    #[prost(int64, tag="17")]
+    pub ask_offset: i64,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -429,6 +435,12 @@ pub struct MmEngineRuntimeState {
     /// 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
     #[prost(string, optional, tag="8")]
     pub bid_quote: ::core::option::Option<::prost::alloc::string::String>,
+    /// 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
+    #[prost(string, optional, tag="9")]
+    pub bid_offset: ::core::option::Option<::prost::alloc::string::String>,
+    /// 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
+    #[prost(string, optional, tag="10")]
+    pub ask_offset: ::core::option::Option<::prost::alloc::string::String>,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

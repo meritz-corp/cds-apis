@@ -138,6 +138,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? askQuantity,
     $fixnum.Int64? bidBasis,
     $fixnum.Int64? askBasis,
+    $fixnum.Int64? bidOffset,
+    $fixnum.Int64? askOffset,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -151,6 +153,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (askBasis != null) result.askBasis = askBasis;
+    if (bidOffset != null) result.bidOffset = bidOffset;
+    if (askOffset != null) result.askOffset = askOffset;
     return result;
   }
 
@@ -171,6 +175,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aInt64(13, _omitFieldNames ? '' : 'askQuantity')
     ..aInt64(14, _omitFieldNames ? '' : 'bidBasis')
     ..aInt64(15, _omitFieldNames ? '' : 'askBasis')
+    ..aInt64(16, _omitFieldNames ? '' : 'bidOffset')
+    ..aInt64(17, _omitFieldNames ? '' : 'askOffset')
     ..hasRequiredFields = false
   ;
 
@@ -308,6 +314,26 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasAskBasis() => $_has(10);
   @$pb.TagNumber(15)
   void clearAskBasis() => $_clearField(15);
+
+  /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get bidOffset => $_getI64(11);
+  @$pb.TagNumber(16)
+  set bidOffset($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(16)
+  $core.bool hasBidOffset() => $_has(11);
+  @$pb.TagNumber(16)
+  void clearBidOffset() => $_clearField(16);
+
+  /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get askOffset => $_getI64(12);
+  @$pb.TagNumber(17)
+  set askOffset($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(17)
+  $core.bool hasAskOffset() => $_has(12);
+  @$pb.TagNumber(17)
+  void clearAskOffset() => $_clearField(17);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -2048,6 +2074,8 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     ExposureBalancerState? exposureBalancer,
     $core.String? askQuote,
     $core.String? bidQuote,
+    $core.String? bidOffset,
+    $core.String? askOffset,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2058,6 +2086,8 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
     if (askQuote != null) result.askQuote = askQuote;
     if (bidQuote != null) result.bidQuote = bidQuote;
+    if (bidOffset != null) result.bidOffset = bidOffset;
+    if (askOffset != null) result.askOffset = askOffset;
     return result;
   }
 
@@ -2075,6 +2105,8 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     ..aOM<ExposureBalancerState>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: ExposureBalancerState.create)
     ..aOS(7, _omitFieldNames ? '' : 'askQuote')
     ..aOS(8, _omitFieldNames ? '' : 'bidQuote')
+    ..aOS(9, _omitFieldNames ? '' : 'bidOffset')
+    ..aOS(10, _omitFieldNames ? '' : 'askOffset')
     ..hasRequiredFields = false
   ;
 
@@ -2180,6 +2212,26 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   $core.bool hasBidQuote() => $_has(7);
   @$pb.TagNumber(8)
   void clearBidQuote() => $_clearField(8);
+
+  /// 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
+  @$pb.TagNumber(9)
+  $core.String get bidOffset => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set bidOffset($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasBidOffset() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearBidOffset() => $_clearField(9);
+
+  /// 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
+  @$pb.TagNumber(10)
+  $core.String get askOffset => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set askOffset($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasAskOffset() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearAskOffset() => $_clearField(10);
 }
 
 /// StreamMmEngineState
