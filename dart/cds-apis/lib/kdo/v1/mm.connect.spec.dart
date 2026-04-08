@@ -76,10 +76,10 @@ abstract final class MarketMakingService {
   );
 
   /// MM 엔진 런타임 상태 실시간 스트리밍
-  static const streamMmEngineState = connect.Spec(
-    '/$name/StreamMmEngineState',
+  static const streamMmStateUpdate = connect.Spec(
+    '/$name/StreamMmStateUpdate',
     connect.StreamType.server,
-    kdov1mm.StreamMmEngineStateRequest.new,
-    kdov1mm.MmEngineRuntimeState.new,
+    kdov1mm.StreamMmStateUpdateRequest.new,
+    kdov1mm.MmStateUpdate.new,
   );
 }

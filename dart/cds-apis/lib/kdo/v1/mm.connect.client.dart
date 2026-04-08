@@ -154,15 +154,15 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
   }
 
   /// MM 엔진 런타임 상태 실시간 스트리밍
-  Stream<kdov1mm.MmEngineRuntimeState> streamMmEngineState(
-    kdov1mm.StreamMmEngineStateRequest input, {
+  Stream<kdov1mm.MmStateUpdate> streamMmStateUpdate(
+    kdov1mm.StreamMmStateUpdateRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.MarketMakingService.streamMmEngineState,
+      specs.MarketMakingService.streamMmStateUpdate,
       input,
       signal: signal,
       headers: headers,

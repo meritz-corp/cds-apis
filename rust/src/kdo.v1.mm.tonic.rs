@@ -306,11 +306,11 @@ pub mod market_making_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
-        pub async fn stream_mm_engine_state(
+        pub async fn stream_mm_state_update(
             &mut self,
-            request: impl tonic::IntoRequest<super::StreamMmEngineStateRequest>,
+            request: impl tonic::IntoRequest<super::StreamMmStateUpdateRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::MmEngineRuntimeState>>,
+            tonic::Response<tonic::codec::Streaming<super::MmStateUpdate>>,
             tonic::Status,
         > {
             self.inner
@@ -324,14 +324,14 @@ pub mod market_making_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.mm.MarketMakingService/StreamMmEngineState",
+                "/kdo.v1.mm.MarketMakingService/StreamMmStateUpdate",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "kdo.v1.mm.MarketMakingService",
-                        "StreamMmEngineState",
+                        "StreamMmStateUpdate",
                     ),
                 );
             self.inner.server_streaming(req, path, codec).await
@@ -404,17 +404,17 @@ pub mod market_making_service_server {
             tonic::Response<Self::StreamMarketMakingOrderbookStream>,
             tonic::Status,
         >;
-        /// Server streaming response type for the StreamMmEngineState method.
-        type StreamMmEngineStateStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::MmEngineRuntimeState, tonic::Status>,
+        /// Server streaming response type for the StreamMmStateUpdate method.
+        type StreamMmStateUpdateStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::MmStateUpdate, tonic::Status>,
             >
             + Send
             + 'static;
-        async fn stream_mm_engine_state(
+        async fn stream_mm_state_update(
             &self,
-            request: tonic::Request<super::StreamMmEngineStateRequest>,
+            request: tonic::Request<super::StreamMmStateUpdateRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamMmEngineStateStream>,
+            tonic::Response<Self::StreamMmStateUpdateStream>,
             tonic::Status,
         >;
     }
@@ -900,27 +900,27 @@ pub mod market_making_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.mm.MarketMakingService/StreamMmEngineState" => {
+                "/kdo.v1.mm.MarketMakingService/StreamMmStateUpdate" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamMmEngineStateSvc<T: MarketMakingService>(pub Arc<T>);
+                    struct StreamMmStateUpdateSvc<T: MarketMakingService>(pub Arc<T>);
                     impl<
                         T: MarketMakingService,
                     > tonic::server::ServerStreamingService<
-                        super::StreamMmEngineStateRequest,
-                    > for StreamMmEngineStateSvc<T> {
-                        type Response = super::MmEngineRuntimeState;
-                        type ResponseStream = T::StreamMmEngineStateStream;
+                        super::StreamMmStateUpdateRequest,
+                    > for StreamMmStateUpdateSvc<T> {
+                        type Response = super::MmStateUpdate;
+                        type ResponseStream = T::StreamMmStateUpdateStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StreamMmEngineStateRequest>,
+                            request: tonic::Request<super::StreamMmStateUpdateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as MarketMakingService>::stream_mm_engine_state(
+                                <T as MarketMakingService>::stream_mm_state_update(
                                         &inner,
                                         request,
                                     )
@@ -935,7 +935,7 @@ pub mod market_making_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamMmEngineStateSvc(inner);
+                        let method = StreamMmStateUpdateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

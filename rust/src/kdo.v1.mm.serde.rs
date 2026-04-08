@@ -2315,7 +2315,7 @@ impl<'de> serde::Deserialize<'de> for MeanBidAsk {
         deserializer.deserialize_struct("kdo.v1.mm.MeanBidAsk", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MmEngineRuntimeState {
+impl serde::Serialize for MmStateUpdate {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -2350,17 +2350,9 @@ impl serde::Serialize for MmEngineRuntimeState {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmEngineRuntimeState", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("timestamp", ToString::to_string(&self.timestamp).as_str())?;
         }
         if let Some(v) = self.state.as_ref() {
             let v = MarketMakingState::try_from(*v)
@@ -2391,7 +2383,7 @@ impl serde::Serialize for MmEngineRuntimeState {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
+impl<'de> serde::Deserialize<'de> for MmStateUpdate {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -2399,7 +2391,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
     {
         const FIELDS: &[&str] = &[
             "symbol",
-            "timestamp",
             "state",
             "momentum",
             "trade_analyzer",
@@ -2419,7 +2410,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
-            Timestamp,
             State,
             Momentum,
             TradeAnalyzer,
@@ -2451,7 +2441,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                     {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
-                            "timestamp" => Ok(GeneratedField::Timestamp),
                             "state" => Ok(GeneratedField::State),
                             "momentum" => Ok(GeneratedField::Momentum),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
@@ -2469,18 +2458,17 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MmEngineRuntimeState;
+            type Value = MmStateUpdate;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.MmEngineRuntimeState")
+                formatter.write_str("struct kdo.v1.mm.MmStateUpdate")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmEngineRuntimeState, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmStateUpdate, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
-                let mut timestamp__ = None;
                 let mut state__ = None;
                 let mut momentum__ = None;
                 let mut trade_analyzer__ = None;
@@ -2496,14 +2484,6 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                                 return Err(serde::de::Error::duplicate_field("symbol"));
                             }
                             symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Timestamp => {
-                            if timestamp__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("timestamp"));
-                            }
-                            timestamp__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::State => {
                             if state__.is_some() {
@@ -2558,9 +2538,8 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                         }
                     }
                 }
-                Ok(MmEngineRuntimeState {
+                Ok(MmStateUpdate {
                     symbol: symbol__.unwrap_or_default(),
-                    timestamp: timestamp__.unwrap_or_default(),
                     state: state__,
                     momentum: momentum__,
                     trade_analyzer: trade_analyzer__,
@@ -2572,7 +2551,7 @@ impl<'de> serde::Deserialize<'de> for MmEngineRuntimeState {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.MmEngineRuntimeState", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.MmStateUpdate", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MomentumState {
@@ -3703,7 +3682,7 @@ impl<'de> serde::Deserialize<'de> for StreamMarketMakingStatusRequest {
         deserializer.deserialize_struct("kdo.v1.mm.StreamMarketMakingStatusRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for StreamMmEngineStateRequest {
+impl serde::Serialize for StreamMmStateUpdateRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -3714,14 +3693,14 @@ impl serde::Serialize for StreamMmEngineStateRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StreamMmEngineStateRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StreamMmStateUpdateRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for StreamMmEngineStateRequest {
+impl<'de> serde::Deserialize<'de> for StreamMmStateUpdateRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -3766,13 +3745,13 @@ impl<'de> serde::Deserialize<'de> for StreamMmEngineStateRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StreamMmEngineStateRequest;
+            type Value = StreamMmStateUpdateRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.mm.StreamMmEngineStateRequest")
+                formatter.write_str("struct kdo.v1.mm.StreamMmStateUpdateRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamMmEngineStateRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamMmStateUpdateRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -3790,12 +3769,12 @@ impl<'de> serde::Deserialize<'de> for StreamMmEngineStateRequest {
                         }
                     }
                 }
-                Ok(StreamMmEngineStateRequest {
+                Ok(StreamMmStateUpdateRequest {
                     symbol: symbol__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.mm.StreamMmEngineStateRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.mm.StreamMmStateUpdateRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for TradeAnalyzerState {

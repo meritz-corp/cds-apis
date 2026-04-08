@@ -39,7 +39,7 @@ type MarketMakingServiceClient interface {
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
 	StreamMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingOrderbookClient, error)
 	// MM 엔진 런타임 상태 실시간 스트리밍
-	StreamMmEngineState(ctx context.Context, in *StreamMmEngineStateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmEngineStateClient, error)
+	StreamMmStateUpdate(ctx context.Context, in *StreamMmStateUpdateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmStateUpdateClient, error)
 }
 
 type marketMakingServiceClient struct {
@@ -145,12 +145,12 @@ func (x *marketMakingServiceStreamMarketMakingOrderbookClient) Recv() (*MarketMa
 	return m, nil
 }
 
-func (c *marketMakingServiceClient) StreamMmEngineState(ctx context.Context, in *StreamMmEngineStateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmEngineStateClient, error) {
-	stream, err := c.cc.NewStream(ctx, &MarketMakingService_ServiceDesc.Streams[1], "/kdo.v1.mm.MarketMakingService/StreamMmEngineState", opts...)
+func (c *marketMakingServiceClient) StreamMmStateUpdate(ctx context.Context, in *StreamMmStateUpdateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmStateUpdateClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketMakingService_ServiceDesc.Streams[1], "/kdo.v1.mm.MarketMakingService/StreamMmStateUpdate", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &marketMakingServiceStreamMmEngineStateClient{stream}
+	x := &marketMakingServiceStreamMmStateUpdateClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -160,17 +160,17 @@ func (c *marketMakingServiceClient) StreamMmEngineState(ctx context.Context, in 
 	return x, nil
 }
 
-type MarketMakingService_StreamMmEngineStateClient interface {
-	Recv() (*MmEngineRuntimeState, error)
+type MarketMakingService_StreamMmStateUpdateClient interface {
+	Recv() (*MmStateUpdate, error)
 	grpc.ClientStream
 }
 
-type marketMakingServiceStreamMmEngineStateClient struct {
+type marketMakingServiceStreamMmStateUpdateClient struct {
 	grpc.ClientStream
 }
 
-func (x *marketMakingServiceStreamMmEngineStateClient) Recv() (*MmEngineRuntimeState, error) {
-	m := new(MmEngineRuntimeState)
+func (x *marketMakingServiceStreamMmStateUpdateClient) Recv() (*MmStateUpdate, error) {
+	m := new(MmStateUpdate)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -198,7 +198,7 @@ type MarketMakingServiceServer interface {
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
 	StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error
 	// MM 엔진 런타임 상태 실시간 스트리밍
-	StreamMmEngineState(*StreamMmEngineStateRequest, MarketMakingService_StreamMmEngineStateServer) error
+	StreamMmStateUpdate(*StreamMmStateUpdateRequest, MarketMakingService_StreamMmStateUpdateServer) error
 	mustEmbedUnimplementedMarketMakingServiceServer()
 }
 
@@ -230,8 +230,8 @@ func (UnimplementedMarketMakingServiceServer) GetMarketMakingOrderbook(context.C
 func (UnimplementedMarketMakingServiceServer) StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMarketMakingOrderbook not implemented")
 }
-func (UnimplementedMarketMakingServiceServer) StreamMmEngineState(*StreamMmEngineStateRequest, MarketMakingService_StreamMmEngineStateServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamMmEngineState not implemented")
+func (UnimplementedMarketMakingServiceServer) StreamMmStateUpdate(*StreamMmStateUpdateRequest, MarketMakingService_StreamMmStateUpdateServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamMmStateUpdate not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) mustEmbedUnimplementedMarketMakingServiceServer() {}
 
@@ -393,24 +393,24 @@ func (x *marketMakingServiceStreamMarketMakingOrderbookServer) Send(m *MarketMak
 	return x.ServerStream.SendMsg(m)
 }
 
-func _MarketMakingService_StreamMmEngineState_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamMmEngineStateRequest)
+func _MarketMakingService_StreamMmStateUpdate_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamMmStateUpdateRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(MarketMakingServiceServer).StreamMmEngineState(m, &marketMakingServiceStreamMmEngineStateServer{stream})
+	return srv.(MarketMakingServiceServer).StreamMmStateUpdate(m, &marketMakingServiceStreamMmStateUpdateServer{stream})
 }
 
-type MarketMakingService_StreamMmEngineStateServer interface {
-	Send(*MmEngineRuntimeState) error
+type MarketMakingService_StreamMmStateUpdateServer interface {
+	Send(*MmStateUpdate) error
 	grpc.ServerStream
 }
 
-type marketMakingServiceStreamMmEngineStateServer struct {
+type marketMakingServiceStreamMmStateUpdateServer struct {
 	grpc.ServerStream
 }
 
-func (x *marketMakingServiceStreamMmEngineStateServer) Send(m *MmEngineRuntimeState) error {
+func (x *marketMakingServiceStreamMmStateUpdateServer) Send(m *MmStateUpdate) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -457,8 +457,8 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamMmEngineState",
-			Handler:       _MarketMakingService_StreamMmEngineState_Handler,
+			StreamName:    "StreamMmStateUpdate",
+			Handler:       _MarketMakingService_StreamMmStateUpdate_Handler,
 			ServerStreams: true,
 		},
 	},

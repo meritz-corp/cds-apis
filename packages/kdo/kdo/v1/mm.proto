@@ -79,7 +79,7 @@ service MarketMakingService {
   }
 
   // MM 엔진 런타임 상태 실시간 스트리밍
-  rpc StreamMmEngineState(StreamMmEngineStateRequest) returns (stream MmEngineRuntimeState) {
+  rpc StreamMmStateUpdate(StreamMmStateUpdateRequest) returns (stream MmStateUpdate) {
     option (google.api.http) = {
       get: "/v1/mm/{symbol=*}/engine-state:stream"
     };
@@ -442,12 +442,11 @@ message ExposureBalancerState {
 // MM 엔진 런타임 상태 델타 메시지.
 // 스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.
 // symbol은 항상 포함된다.
-message MmEngineRuntimeState {
+message MmStateUpdate {
   // ISIN 심볼 (항상 포함)
   string symbol = 1;
 
-  // 상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)
-  int64 timestamp = 2;
+  reserved 2; // timestamp (deprecated, removed)
 
   // MM 상태 (변경 시에만 포함)
   optional MarketMakingState state = 3;
@@ -478,8 +477,8 @@ message MmEngineRuntimeState {
 // MM 엔진 상태 Request Messages
 // ============================================================================
 
-// StreamMmEngineState
-message StreamMmEngineStateRequest {
+// StreamMmStateUpdate
+message StreamMmStateUpdateRequest {
   // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
   string symbol = 1;
 }

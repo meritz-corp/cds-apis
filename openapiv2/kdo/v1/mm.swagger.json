@@ -192,7 +192,7 @@
     "/v1/mm/{symbol}/engine-state:stream": {
       "get": {
         "summary": "MM 엔진 런타임 상태 실시간 스트리밍",
-        "operationId": "MarketMakingService_StreamMmEngineState",
+        "operationId": "MarketMakingService_StreamMmStateUpdate",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -200,13 +200,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/mmMmEngineRuntimeState"
+                  "$ref": "#/definitions/mmMmStateUpdate"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of mmMmEngineRuntimeState"
+              "title": "Stream result of mmMmStateUpdate"
             }
           },
           "default": {
@@ -774,17 +774,12 @@
       "type": "object",
       "title": "EtfPricing::IndexTrackingHedge"
     },
-    "mmMmEngineRuntimeState": {
+    "mmMmStateUpdate": {
       "type": "object",
       "properties": {
         "symbol": {
           "type": "string",
           "title": "ISIN 심볼 (항상 포함)"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64",
-          "title": "상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)"
         },
         "state": {
           "$ref": "#/definitions/mmMarketMakingState",

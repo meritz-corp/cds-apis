@@ -479,12 +479,11 @@ final $typed_data.Uint8List exposureBalancerStateDescriptor = $convert.base64Dec
     'VyZRIqChFwcmljZV9zaGlmdF90aWNrcxgCIAEoBVIPcHJpY2VTaGlmdFRpY2tzEhsKCWJpZF9z'
     'Y2FsZRgDIAEoAVIIYmlkU2NhbGUSGwoJYXNrX3NjYWxlGAQgASgBUghhc2tTY2FsZQ==');
 
-@$core.Deprecated('Use mmEngineRuntimeStateDescriptor instead')
-const MmEngineRuntimeState$json = {
-  '1': 'MmEngineRuntimeState',
+@$core.Deprecated('Use mmStateUpdateDescriptor instead')
+const MmStateUpdate$json = {
+  '1': 'MmStateUpdate',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'timestamp', '3': 2, '4': 1, '5': 3, '10': 'timestamp'},
     {'1': 'state', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingState', '9': 0, '10': 'state', '17': true},
     {'1': 'momentum', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MomentumState', '9': 1, '10': 'momentum', '17': true},
     {'1': 'trade_analyzer', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.TradeAnalyzerState', '9': 2, '10': 'tradeAnalyzer', '17': true},
@@ -504,32 +503,34 @@ const MmEngineRuntimeState$json = {
     {'1': '_bid_offset'},
     {'1': '_ask_offset'},
   ],
+  '9': [
+    {'1': 2, '2': 3},
+  ],
 };
 
-/// Descriptor for `MmEngineRuntimeState`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mmEngineRuntimeStateDescriptor = $convert.base64Decode(
-    'ChRNbUVuZ2luZVJ1bnRpbWVTdGF0ZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIcCgl0aW1lc3'
-    'RhbXAYAiABKANSCXRpbWVzdGFtcBI3CgVzdGF0ZRgDIAEoDjIcLmtkby52MS5tbS5NYXJrZXRN'
-    'YWtpbmdTdGF0ZUgAUgVzdGF0ZYgBARI5Cghtb21lbnR1bRgEIAEoCzIYLmtkby52MS5tbS5Nb2'
-    '1lbnR1bVN0YXRlSAFSCG1vbWVudHVtiAEBEkkKDnRyYWRlX2FuYWx5emVyGAUgASgLMh0ua2Rv'
-    'LnYxLm1tLlRyYWRlQW5hbHl6ZXJTdGF0ZUgCUg10cmFkZUFuYWx5emVyiAEBElIKEWV4cG9zdX'
-    'JlX2JhbGFuY2VyGAYgASgLMiAua2RvLnYxLm1tLkV4cG9zdXJlQmFsYW5jZXJTdGF0ZUgDUhBl'
-    'eHBvc3VyZUJhbGFuY2VyiAEBEiAKCWFza19xdW90ZRgHIAEoCUgEUghhc2tRdW90ZYgBARIgCg'
-    'liaWRfcXVvdGUYCCABKAlIBVIIYmlkUXVvdGWIAQESIgoKYmlkX29mZnNldBgJIAEoCUgGUgli'
-    'aWRPZmZzZXSIAQESIgoKYXNrX29mZnNldBgKIAEoCUgHUglhc2tPZmZzZXSIAQFCCAoGX3N0YX'
-    'RlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5hbHl6ZXJCFAoSX2V4cG9zdXJlX2JhbGFuY2Vy'
-    'QgwKCl9hc2tfcXVvdGVCDAoKX2JpZF9xdW90ZUINCgtfYmlkX29mZnNldEINCgtfYXNrX29mZn'
-    'NldA==');
+/// Descriptor for `MmStateUpdate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
+    'Cg1NbVN0YXRlVXBkYXRlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEjcKBXN0YXRlGAMgASgOMh'
+    'wua2RvLnYxLm1tLk1hcmtldE1ha2luZ1N0YXRlSABSBXN0YXRliAEBEjkKCG1vbWVudHVtGAQg'
+    'ASgLMhgua2RvLnYxLm1tLk1vbWVudHVtU3RhdGVIAVIIbW9tZW50dW2IAQESSQoOdHJhZGVfYW'
+    '5hbHl6ZXIYBSABKAsyHS5rZG8udjEubW0uVHJhZGVBbmFseXplclN0YXRlSAJSDXRyYWRlQW5h'
+    'bHl6ZXKIAQESUgoRZXhwb3N1cmVfYmFsYW5jZXIYBiABKAsyIC5rZG8udjEubW0uRXhwb3N1cm'
+    'VCYWxhbmNlclN0YXRlSANSEGV4cG9zdXJlQmFsYW5jZXKIAQESIAoJYXNrX3F1b3RlGAcgASgJ'
+    'SARSCGFza1F1b3RliAEBEiAKCWJpZF9xdW90ZRgIIAEoCUgFUghiaWRRdW90ZYgBARIiCgpiaW'
+    'Rfb2Zmc2V0GAkgASgJSAZSCWJpZE9mZnNldIgBARIiCgphc2tfb2Zmc2V0GAogASgJSAdSCWFz'
+    'a09mZnNldIgBAUIICgZfc3RhdGVCCwoJX21vbWVudHVtQhEKD190cmFkZV9hbmFseXplckIUCh'
+    'JfZXhwb3N1cmVfYmFsYW5jZXJCDAoKX2Fza19xdW90ZUIMCgpfYmlkX3F1b3RlQg0KC19iaWRf'
+    'b2Zmc2V0Qg0KC19hc2tfb2Zmc2V0SgQIAhAD');
 
-@$core.Deprecated('Use streamMmEngineStateRequestDescriptor instead')
-const StreamMmEngineStateRequest$json = {
-  '1': 'StreamMmEngineStateRequest',
+@$core.Deprecated('Use streamMmStateUpdateRequestDescriptor instead')
+const StreamMmStateUpdateRequest$json = {
+  '1': 'StreamMmStateUpdateRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
   ],
 };
 
-/// Descriptor for `StreamMmEngineStateRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamMmEngineStateRequestDescriptor = $convert.base64Decode(
-    'ChpTdHJlYW1NbUVuZ2luZVN0YXRlUmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbA==');
+/// Descriptor for `StreamMmStateUpdateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamMmStateUpdateRequestDescriptor = $convert.base64Decode(
+    'ChpTdHJlYW1NbVN0YXRlVXBkYXRlUmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbA==');
 

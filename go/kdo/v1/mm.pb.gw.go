@@ -477,8 +477,8 @@ func request_MarketMakingService_StreamMarketMakingOrderbook_0(ctx context.Conte
 
 }
 
-func request_MarketMakingService_StreamMmEngineState_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (MarketMakingService_StreamMmEngineStateClient, runtime.ServerMetadata, error) {
-	var protoReq StreamMmEngineStateRequest
+func request_MarketMakingService_StreamMmStateUpdate_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (MarketMakingService_StreamMmStateUpdateClient, runtime.ServerMetadata, error) {
+	var protoReq StreamMmStateUpdateRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -498,7 +498,7 @@ func request_MarketMakingService_StreamMmEngineState_0(ctx context.Context, mars
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
-	stream, err := client.StreamMmEngineState(ctx, &protoReq)
+	stream, err := client.StreamMmStateUpdate(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -699,7 +699,7 @@ func RegisterMarketMakingServiceHandlerServer(ctx context.Context, mux *runtime.
 		return
 	})
 
-	mux.Handle("GET", pattern_MarketMakingService_StreamMmEngineState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_StreamMmStateUpdate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -923,25 +923,25 @@ func RegisterMarketMakingServiceHandlerClient(ctx context.Context, mux *runtime.
 
 	})
 
-	mux.Handle("GET", pattern_MarketMakingService_StreamMmEngineState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_MarketMakingService_StreamMmStateUpdate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StreamMmEngineState", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/engine-state:stream"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.mm.MarketMakingService/StreamMmStateUpdate", runtime.WithHTTPPathPattern("/v1/mm/{symbol=*}/engine-state:stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MarketMakingService_StreamMmEngineState_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MarketMakingService_StreamMmStateUpdate_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MarketMakingService_StreamMmEngineState_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_MarketMakingService_StreamMmStateUpdate_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -965,7 +965,7 @@ var (
 
 	pattern_MarketMakingService_StreamMarketMakingOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "orderbook"}, "stream"))
 
-	pattern_MarketMakingService_StreamMmEngineState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "engine-state"}, "stream"))
+	pattern_MarketMakingService_StreamMmStateUpdate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "mm", "symbol", "engine-state"}, "stream"))
 )
 
 var (
@@ -985,5 +985,5 @@ var (
 
 	forward_MarketMakingService_StreamMarketMakingOrderbook_0 = runtime.ForwardResponseStream
 
-	forward_MarketMakingService_StreamMmEngineState_0 = runtime.ForwardResponseStream
+	forward_MarketMakingService_StreamMmStateUpdate_0 = runtime.ForwardResponseStream
 )

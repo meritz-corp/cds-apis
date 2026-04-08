@@ -410,13 +410,10 @@ pub struct ExposureBalancerState {
 /// symbol은 항상 포함된다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MmEngineRuntimeState {
+pub struct MmStateUpdate {
     /// ISIN 심볼 (항상 포함)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)
-    #[prost(int64, tag="2")]
-    pub timestamp: i64,
     /// MM 상태 (변경 시에만 포함)
     #[prost(enumeration="MarketMakingState", optional, tag="3")]
     pub state: ::core::option::Option<i32>,
@@ -446,10 +443,10 @@ pub struct MmEngineRuntimeState {
 // MM 엔진 상태 Request Messages
 // ============================================================================
 
-/// StreamMmEngineState
+/// StreamMmStateUpdate
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamMmEngineStateRequest {
+pub struct StreamMmStateUpdateRequest {
     /// ISIN 심볼 (빈 문자열이면 전체 스트리밍)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,

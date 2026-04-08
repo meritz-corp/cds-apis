@@ -2064,10 +2064,9 @@ class ExposureBalancerState extends $pb.GeneratedMessage {
 /// MM 엔진 런타임 상태 델타 메시지.
 /// 스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.
 /// symbol은 항상 포함된다.
-class MmEngineRuntimeState extends $pb.GeneratedMessage {
-  factory MmEngineRuntimeState({
+class MmStateUpdate extends $pb.GeneratedMessage {
+  factory MmStateUpdate({
     $core.String? symbol,
-    $fixnum.Int64? timestamp,
     MarketMakingState? state,
     MomentumState? momentum,
     TradeAnalyzerState? tradeAnalyzer,
@@ -2079,7 +2078,6 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
-    if (timestamp != null) result.timestamp = timestamp;
     if (state != null) result.state = state;
     if (momentum != null) result.momentum = momentum;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
@@ -2091,14 +2089,13 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
     return result;
   }
 
-  MmEngineRuntimeState._();
+  MmStateUpdate._();
 
-  factory MmEngineRuntimeState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MmEngineRuntimeState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MmStateUpdate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmStateUpdate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmEngineRuntimeState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmStateUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aInt64(2, _omitFieldNames ? '' : 'timestamp')
     ..e<MarketMakingState>(3, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingState.MARKET_MAKING_STATE_UNSPECIFIED, valueOf: MarketMakingState.valueOf, enumValues: MarketMakingState.values)
     ..aOM<MomentumState>(4, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
     ..aOM<TradeAnalyzerState>(5, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: TradeAnalyzerState.create)
@@ -2111,21 +2108,21 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MmEngineRuntimeState clone() => MmEngineRuntimeState()..mergeFromMessage(this);
+  MmStateUpdate clone() => MmStateUpdate()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MmEngineRuntimeState copyWith(void Function(MmEngineRuntimeState) updates) => super.copyWith((message) => updates(message as MmEngineRuntimeState)) as MmEngineRuntimeState;
+  MmStateUpdate copyWith(void Function(MmStateUpdate) updates) => super.copyWith((message) => updates(message as MmStateUpdate)) as MmStateUpdate;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MmEngineRuntimeState create() => MmEngineRuntimeState._();
+  static MmStateUpdate create() => MmStateUpdate._();
   @$core.override
-  MmEngineRuntimeState createEmptyInstance() => create();
-  static $pb.PbList<MmEngineRuntimeState> createRepeated() => $pb.PbList<MmEngineRuntimeState>();
+  MmStateUpdate createEmptyInstance() => create();
+  static $pb.PbList<MmStateUpdate> createRepeated() => $pb.PbList<MmStateUpdate>();
   @$core.pragma('dart2js:noInline')
-  static MmEngineRuntimeState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmEngineRuntimeState>(create);
-  static MmEngineRuntimeState? _defaultInstance;
+  static MmStateUpdate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmStateUpdate>(create);
+  static MmStateUpdate? _defaultInstance;
 
   /// ISIN 심볼 (항상 포함)
   @$pb.TagNumber(1)
@@ -2137,106 +2134,96 @@ class MmEngineRuntimeState extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
-  /// 상태 스냅샷 타임스탬프 (Unix nanoseconds, 항상 포함)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get timestamp => $_getI64(1);
-  @$pb.TagNumber(2)
-  set timestamp($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTimestamp() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTimestamp() => $_clearField(2);
-
   /// MM 상태 (변경 시에만 포함)
   @$pb.TagNumber(3)
-  MarketMakingState get state => $_getN(2);
+  MarketMakingState get state => $_getN(1);
   @$pb.TagNumber(3)
   set state(MarketMakingState value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasState() => $_has(2);
+  $core.bool hasState() => $_has(1);
   @$pb.TagNumber(3)
   void clearState() => $_clearField(3);
 
   /// Momentum 상태 (변경 시에만 포함)
   @$pb.TagNumber(4)
-  MomentumState get momentum => $_getN(3);
+  MomentumState get momentum => $_getN(2);
   @$pb.TagNumber(4)
   set momentum(MomentumState value) => $_setField(4, value);
   @$pb.TagNumber(4)
-  $core.bool hasMomentum() => $_has(3);
+  $core.bool hasMomentum() => $_has(2);
   @$pb.TagNumber(4)
   void clearMomentum() => $_clearField(4);
   @$pb.TagNumber(4)
-  MomentumState ensureMomentum() => $_ensure(3);
+  MomentumState ensureMomentum() => $_ensure(2);
 
   /// Trade Analyzer 상태 (변경 시에만 포함)
   @$pb.TagNumber(5)
-  TradeAnalyzerState get tradeAnalyzer => $_getN(4);
+  TradeAnalyzerState get tradeAnalyzer => $_getN(3);
   @$pb.TagNumber(5)
   set tradeAnalyzer(TradeAnalyzerState value) => $_setField(5, value);
   @$pb.TagNumber(5)
-  $core.bool hasTradeAnalyzer() => $_has(4);
+  $core.bool hasTradeAnalyzer() => $_has(3);
   @$pb.TagNumber(5)
   void clearTradeAnalyzer() => $_clearField(5);
   @$pb.TagNumber(5)
-  TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(4);
+  TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(3);
 
   /// 순노출 및 재고 균형 상태 (변경 시에만 포함)
   @$pb.TagNumber(6)
-  ExposureBalancerState get exposureBalancer => $_getN(5);
+  ExposureBalancerState get exposureBalancer => $_getN(4);
   @$pb.TagNumber(6)
   set exposureBalancer(ExposureBalancerState value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasExposureBalancer() => $_has(5);
+  $core.bool hasExposureBalancer() => $_has(4);
   @$pb.TagNumber(6)
   void clearExposureBalancer() => $_clearField(6);
   @$pb.TagNumber(6)
-  ExposureBalancerState ensureExposureBalancer() => $_ensure(5);
+  ExposureBalancerState ensureExposureBalancer() => $_ensure(4);
 
   /// 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(7)
-  $core.String get askQuote => $_getSZ(6);
+  $core.String get askQuote => $_getSZ(5);
   @$pb.TagNumber(7)
-  set askQuote($core.String value) => $_setString(6, value);
+  set askQuote($core.String value) => $_setString(5, value);
   @$pb.TagNumber(7)
-  $core.bool hasAskQuote() => $_has(6);
+  $core.bool hasAskQuote() => $_has(5);
   @$pb.TagNumber(7)
   void clearAskQuote() => $_clearField(7);
 
   /// 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(8)
-  $core.String get bidQuote => $_getSZ(7);
+  $core.String get bidQuote => $_getSZ(6);
   @$pb.TagNumber(8)
-  set bidQuote($core.String value) => $_setString(7, value);
+  set bidQuote($core.String value) => $_setString(6, value);
   @$pb.TagNumber(8)
-  $core.bool hasBidQuote() => $_has(7);
+  $core.bool hasBidQuote() => $_has(6);
   @$pb.TagNumber(8)
   void clearBidQuote() => $_clearField(8);
 
   /// 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(9)
-  $core.String get bidOffset => $_getSZ(8);
+  $core.String get bidOffset => $_getSZ(7);
   @$pb.TagNumber(9)
-  set bidOffset($core.String value) => $_setString(8, value);
+  set bidOffset($core.String value) => $_setString(7, value);
   @$pb.TagNumber(9)
-  $core.bool hasBidOffset() => $_has(8);
+  $core.bool hasBidOffset() => $_has(7);
   @$pb.TagNumber(9)
   void clearBidOffset() => $_clearField(9);
 
   /// 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(10)
-  $core.String get askOffset => $_getSZ(9);
+  $core.String get askOffset => $_getSZ(8);
   @$pb.TagNumber(10)
-  set askOffset($core.String value) => $_setString(9, value);
+  set askOffset($core.String value) => $_setString(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasAskOffset() => $_has(9);
+  $core.bool hasAskOffset() => $_has(8);
   @$pb.TagNumber(10)
   void clearAskOffset() => $_clearField(10);
 }
 
-/// StreamMmEngineState
-class StreamMmEngineStateRequest extends $pb.GeneratedMessage {
-  factory StreamMmEngineStateRequest({
+/// StreamMmStateUpdate
+class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
+  factory StreamMmStateUpdateRequest({
     $core.String? symbol,
   }) {
     final result = create();
@@ -2244,32 +2231,32 @@ class StreamMmEngineStateRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  StreamMmEngineStateRequest._();
+  StreamMmStateUpdateRequest._();
 
-  factory StreamMmEngineStateRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory StreamMmEngineStateRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory StreamMmStateUpdateRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamMmStateUpdateRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmEngineStateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmStateUpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamMmEngineStateRequest clone() => StreamMmEngineStateRequest()..mergeFromMessage(this);
+  StreamMmStateUpdateRequest clone() => StreamMmStateUpdateRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StreamMmEngineStateRequest copyWith(void Function(StreamMmEngineStateRequest) updates) => super.copyWith((message) => updates(message as StreamMmEngineStateRequest)) as StreamMmEngineStateRequest;
+  StreamMmStateUpdateRequest copyWith(void Function(StreamMmStateUpdateRequest) updates) => super.copyWith((message) => updates(message as StreamMmStateUpdateRequest)) as StreamMmStateUpdateRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static StreamMmEngineStateRequest create() => StreamMmEngineStateRequest._();
+  static StreamMmStateUpdateRequest create() => StreamMmStateUpdateRequest._();
   @$core.override
-  StreamMmEngineStateRequest createEmptyInstance() => create();
-  static $pb.PbList<StreamMmEngineStateRequest> createRepeated() => $pb.PbList<StreamMmEngineStateRequest>();
+  StreamMmStateUpdateRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamMmStateUpdateRequest> createRepeated() => $pb.PbList<StreamMmStateUpdateRequest>();
   @$core.pragma('dart2js:noInline')
-  static StreamMmEngineStateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamMmEngineStateRequest>(create);
-  static StreamMmEngineStateRequest? _defaultInstance;
+  static StreamMmStateUpdateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamMmStateUpdateRequest>(create);
+  static StreamMmStateUpdateRequest? _defaultInstance;
 
   /// ISIN 심볼 (빈 문자열이면 전체 스트리밍)
   @$pb.TagNumber(1)

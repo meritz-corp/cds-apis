@@ -74,8 +74,8 @@ class MarketMakingServiceClient extends $grpc.Client {
   }
 
   /// MM 엔진 런타임 상태 실시간 스트리밍
-  $grpc.ResponseStream<$0.MmEngineRuntimeState> streamMmEngineState($0.StreamMmEngineStateRequest request, {$grpc.CallOptions? options,}) {
-    return $createStreamingCall(_$streamMmEngineState, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$0.MmStateUpdate> streamMmStateUpdate($0.StreamMmStateUpdateRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMmStateUpdate, $async.Stream.fromIterable([request]), options: options);
   }
 
     // method descriptors
@@ -112,10 +112,10 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook',
       ($0.GetMarketMakingOrderbookRequest value) => value.writeToBuffer(),
       $0.MarketMakingOrderbookData.fromBuffer);
-  static final _$streamMmEngineState = $grpc.ClientMethod<$0.StreamMmEngineStateRequest, $0.MmEngineRuntimeState>(
-      '/kdo.v1.mm.MarketMakingService/StreamMmEngineState',
-      ($0.StreamMmEngineStateRequest value) => value.writeToBuffer(),
-      $0.MmEngineRuntimeState.fromBuffer);
+  static final _$streamMmStateUpdate = $grpc.ClientMethod<$0.StreamMmStateUpdateRequest, $0.MmStateUpdate>(
+      '/kdo.v1.mm.MarketMakingService/StreamMmStateUpdate',
+      ($0.StreamMmStateUpdateRequest value) => value.writeToBuffer(),
+      $0.MmStateUpdate.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
@@ -179,13 +179,13 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.GetMarketMakingOrderbookRequest.fromBuffer(value),
         ($0.MarketMakingOrderbookData value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamMmEngineStateRequest, $0.MmEngineRuntimeState>(
-        'StreamMmEngineState',
-        streamMmEngineState_Pre,
+    $addMethod($grpc.ServiceMethod<$0.StreamMmStateUpdateRequest, $0.MmStateUpdate>(
+        'StreamMmStateUpdate',
+        streamMmStateUpdate_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => $0.StreamMmEngineStateRequest.fromBuffer(value),
-        ($0.MmEngineRuntimeState value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.StreamMmStateUpdateRequest.fromBuffer(value),
+        ($0.MmStateUpdate value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMarketMakingResponse> listMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketMakingRequest> $request) async {
@@ -236,10 +236,10 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
 
   $async.Stream<$0.MarketMakingOrderbookData> streamMarketMakingOrderbook($grpc.ServiceCall call, $0.GetMarketMakingOrderbookRequest request);
 
-  $async.Stream<$0.MmEngineRuntimeState> streamMmEngineState_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMmEngineStateRequest> $request) async* {
-    yield* streamMmEngineState($call, await $request);
+  $async.Stream<$0.MmStateUpdate> streamMmStateUpdate_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMmStateUpdateRequest> $request) async* {
+    yield* streamMmStateUpdate($call, await $request);
   }
 
-  $async.Stream<$0.MmEngineRuntimeState> streamMmEngineState($grpc.ServiceCall call, $0.StreamMmEngineStateRequest request);
+  $async.Stream<$0.MmStateUpdate> streamMmStateUpdate($grpc.ServiceCall call, $0.StreamMmStateUpdateRequest request);
 
 }
