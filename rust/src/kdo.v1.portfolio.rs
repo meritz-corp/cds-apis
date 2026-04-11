@@ -639,6 +639,12 @@ pub struct ListExposureSnapshotsRequest {
     /// 페이지 토큰 (optional)
     #[prost(string, optional, tag="3")]
     pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// 스냅샷 생성 시간(created_at) 범위 필터 - 시작 (이 시각 이후에 생성된 스냅샷만 반환, optional)
+    #[prost(message, optional, tag="4")]
+    pub start_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 스냅샷 생성 시간(created_at) 범위 필터 - 종료 (이 시각 이전에 생성된 스냅샷만 반환, optional)
+    #[prost(message, optional, tag="5")]
+    pub end_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 /// ListExposureSnapshots 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

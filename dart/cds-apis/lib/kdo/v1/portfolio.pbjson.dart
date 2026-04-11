@@ -644,10 +644,14 @@ const ListExposureSnapshotsRequest$json = {
     {'1': 'parent', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'parent'},
     {'1': 'page_size', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
+    {'1': 'start_time', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '9': 2, '10': 'startTime', '17': true},
+    {'1': 'end_time', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '9': 3, '10': 'endTime', '17': true},
   ],
   '8': [
     {'1': '_page_size'},
     {'1': '_page_token'},
+    {'1': '_start_time'},
+    {'1': '_end_time'},
   ],
 };
 
@@ -655,8 +659,11 @@ const ListExposureSnapshotsRequest$json = {
 final $typed_data.Uint8List listExposureSnapshotsRequestDescriptor = $convert.base64Decode(
     'ChxMaXN0RXhwb3N1cmVTbmFwc2hvdHNSZXF1ZXN0EjoKBnBhcmVudBgBIAEoCUIi4kEBAvpBGw'
     'oZa2RvLmNkc2FwaXMueHl6L1BvcnRmb2xpb1IGcGFyZW50EiAKCXBhZ2Vfc2l6ZRgCIAEoBUgA'
-    'UghwYWdlU2l6ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBAUIMCgpfcG'
-    'FnZV9zaXplQg0KC19wYWdlX3Rva2Vu');
+    'UghwYWdlU2l6ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBARI+CgpzdG'
+    'FydF90aW1lGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgCUglzdGFydFRpbWWI'
+    'AQESOgoIZW5kX3RpbWUYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSANSB2VuZF'
+    'RpbWWIAQFCDAoKX3BhZ2Vfc2l6ZUINCgtfcGFnZV90b2tlbkINCgtfc3RhcnRfdGltZUILCglf'
+    'ZW5kX3RpbWU=');
 
 @$core.Deprecated('Use listExposureSnapshotsResponseDescriptor instead')
 const ListExposureSnapshotsResponse$json = {

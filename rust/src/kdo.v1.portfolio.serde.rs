@@ -2235,6 +2235,12 @@ impl serde::Serialize for ListExposureSnapshotsRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.portfolio.ListExposureSnapshotsRequest", len)?;
         if true {
             struct_ser.serialize_field("parent", &self.parent)?;
@@ -2244,6 +2250,12 @@ impl serde::Serialize for ListExposureSnapshotsRequest {
         }
         if let Some(v) = self.page_token.as_ref() {
             struct_ser.serialize_field("page_token", v)?;
+        }
+        if let Some(v) = self.start_time.as_ref() {
+            struct_ser.serialize_field("start_time", v)?;
+        }
+        if let Some(v) = self.end_time.as_ref() {
+            struct_ser.serialize_field("end_time", v)?;
         }
         struct_ser.end()
     }
@@ -2260,6 +2272,10 @@ impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsRequest {
             "pageSize",
             "page_token",
             "pageToken",
+            "start_time",
+            "startTime",
+            "end_time",
+            "endTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2267,6 +2283,8 @@ impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsRequest {
             Parent,
             PageSize,
             PageToken,
+            StartTime,
+            EndTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2292,6 +2310,8 @@ impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsRequest {
                             "parent" => Ok(GeneratedField::Parent),
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            "startTime" | "start_time" => Ok(GeneratedField::StartTime),
+                            "endTime" | "end_time" => Ok(GeneratedField::EndTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2314,6 +2334,8 @@ impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsRequest {
                 let mut parent__ = None;
                 let mut page_size__ = None;
                 let mut page_token__ = None;
+                let mut start_time__ = None;
+                let mut end_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Parent => {
@@ -2336,6 +2358,18 @@ impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsRequest {
                             }
                             page_token__ = map_.next_value()?;
                         }
+                        GeneratedField::StartTime => {
+                            if start_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("startTime"));
+                            }
+                            start_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::EndTime => {
+                            if end_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("endTime"));
+                            }
+                            end_time__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2345,6 +2379,8 @@ impl<'de> serde::Deserialize<'de> for ListExposureSnapshotsRequest {
                     parent: parent__.unwrap_or_default(),
                     page_size: page_size__,
                     page_token: page_token__,
+                    start_time: start_time__,
+                    end_time: end_time__,
                 })
             }
         }

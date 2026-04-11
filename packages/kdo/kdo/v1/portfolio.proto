@@ -789,6 +789,12 @@ message ListExposureSnapshotsRequest {
 
   // 페이지 토큰 (optional)
   optional string page_token = 3;
+
+  // 스냅샷 생성 시간(created_at) 범위 필터 - 시작 (이 시각 이후에 생성된 스냅샷만 반환, optional)
+  optional google.protobuf.Timestamp start_time = 4;
+
+  // 스냅샷 생성 시간(created_at) 범위 필터 - 종료 (이 시각 이전에 생성된 스냅샷만 반환, optional)
+  optional google.protobuf.Timestamp end_time = 5;
 }
 
 // ListExposureSnapshots 응답

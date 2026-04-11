@@ -427,6 +427,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "startTime",
+            "description": "스냅샷 생성 시간(created_at) 범위 필터 - 시작 (이 시각 이후에 생성된 스냅샷만 반환, optional)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "description": "스냅샷 생성 시간(created_at) 범위 필터 - 종료 (이 시각 이전에 생성된 스냅샷만 반환, optional)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [

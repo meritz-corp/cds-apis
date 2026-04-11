@@ -3030,11 +3030,15 @@ class ListExposureSnapshotsRequest extends $pb.GeneratedMessage {
     $core.String? parent,
     $core.int? pageSize,
     $core.String? pageToken,
+    $2.Timestamp? startTime,
+    $2.Timestamp? endTime,
   }) {
     final result = create();
     if (parent != null) result.parent = parent;
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
+    if (startTime != null) result.startTime = startTime;
+    if (endTime != null) result.endTime = endTime;
     return result;
   }
 
@@ -3047,6 +3051,8 @@ class ListExposureSnapshotsRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'parent')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
+    ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'startTime', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'endTime', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -3096,6 +3102,30 @@ class ListExposureSnapshotsRequest extends $pb.GeneratedMessage {
   $core.bool hasPageToken() => $_has(2);
   @$pb.TagNumber(3)
   void clearPageToken() => $_clearField(3);
+
+  /// 스냅샷 생성 시간(created_at) 범위 필터 - 시작 (이 시각 이후에 생성된 스냅샷만 반환, optional)
+  @$pb.TagNumber(4)
+  $2.Timestamp get startTime => $_getN(3);
+  @$pb.TagNumber(4)
+  set startTime($2.Timestamp value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasStartTime() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStartTime() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $2.Timestamp ensureStartTime() => $_ensure(3);
+
+  /// 스냅샷 생성 시간(created_at) 범위 필터 - 종료 (이 시각 이전에 생성된 스냅샷만 반환, optional)
+  @$pb.TagNumber(5)
+  $2.Timestamp get endTime => $_getN(4);
+  @$pb.TagNumber(5)
+  set endTime($2.Timestamp value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasEndTime() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearEndTime() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $2.Timestamp ensureEndTime() => $_ensure(4);
 }
 
 /// ListExposureSnapshots 응답
