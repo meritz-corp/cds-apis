@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package kdo.v1.order_limit;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// OrderLimiterService는 주문 건수/수량 제한 설정 관리 및 실시간 모니터링을 제공합니다.
+service OrderLimiterService {
+  // OrderLimiter 설정 업데이트
+  // fund_code는 필수, etf_symbol은 선택 (빈 문자열이면 해당 fund_code 전체 심볼에 적용)
+  rpc UpdateOrderLimiterConfig(UpdateOrderLimiterConfigRequest) returns (UpdateOrderLimiterConfigResponse) {
+    option (google.api.http) = {
+      patch: "/v1/order-limiters/funds/{fund_code=*}"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund_code";
+  }
+
+  // OrderLimiter 시간 프레임별 주문 건수 현황 스트리밍
+  // 전체 active order limiters를 주기적으로 방출 (1초 tick)
+  rpc StreamOrderLimiterStatus(StreamOrderLimiterStatusRequest) returns (stream OrderLimiterStatus) {
+    option (google.api.http) = {
+      get: "/v1/order-limiters/status:stream"
+    };
+    option (google.api.method_signature) = "";
+  }
+}
+
+// ============================================================================
+// Messages
+// ============================================================================
+
+// 시간 프레임별 주문 제한 설정
+message TimeFrameLimit {
+  // 시간 윈도우 (초)
+  uint32 window_seconds = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 최대 주문 건수
+  uint32 max_orders = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// OrderLimiter 설정
+message OrderLimiterConfig {
+  // 활성화 여부
+  optional bool enabled = 1;
+
+  // 일일 누적 주문 수량 한도 (i64)
+  optional int64 daily_cumulative_limit = 2;
+
+  // 단일 주문 수량 한도 (i64)
+  optional int64 single_order_limit = 3;
+
+  // 시간 프레임별 주문 건수 제한 목록
+  // 설정 시 기존 목록을 전체 교체
+  repeated TimeFrameLimit time_frame_limits = 4;
+}
+
+// 시간 프레임별 주문 건수 현황
+message TimeFrameStatus {
+  // 시간 윈도우 (초)
+  uint32 window_seconds = 1;
+
+  // 현재 윈도우 내 주문 건수
+  uint32 current_count = 2;
+
+  // 최대 주문 건수
+  uint32 max_orders = 3;
+}
+
+// (fund_code, etf_symbol) 단위 OrderLimiter 현황
+message OrderLimiterStatus {
+  // 펀드 코드
+  string fund_code = 1;
+
+  // ETF 심볼
+  string etf_symbol = 2;
+
+  // 활성화 여부
+  bool enabled = 3;
+
+  // 일일 누적 주문 수량
+  int64 daily_ordered_quantity = 4;
+
+  // 일일 누적 주문 수량 한도
+  int64 daily_cumulative_limit = 5;
+
+  // 시간 프레임별 주문 건수 현황
+  repeated TimeFrameStatus time_frame_statuses = 6;
+}
+
+// ============================================================================
+// Request/Response Messages
+// ============================================================================
+
+// UpdateOrderLimiterConfig
+message UpdateOrderLimiterConfigRequest {
+  // 펀드 코드 (필수)
+  string fund_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 (선택 — 빈 문자열이면 해당 fund_code 전체 심볼에 적용)
+  string etf_symbol = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // 업데이트할 설정
+  OrderLimiterConfig config = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message UpdateOrderLimiterConfigResponse {
+  // 업데이트된 대상 수
+  uint32 updated_count = 1;
+
+  // 메시지
+  string message = 2;
+}
+
+// StreamOrderLimiterStatus
+message StreamOrderLimiterStatusRequest {
+  // 펀드 코드 필터 (선택 — 빈 문자열이면 전체)
+  string fund_code = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // ETF 심볼 필터 (선택 — 빈 문자열이면 전체)
+  string etf_symbol = 2 [(google.api.field_behavior) = OPTIONAL];
+}

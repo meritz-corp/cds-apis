@@ -1,0 +1,269 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/order_limit.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OrderLimiterService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/order-limiters/funds/{fundCode}": {
+      "patch": {
+        "summary": "OrderLimiter 설정 업데이트\nfund_code는 필수, etf_symbol은 선택 (빈 문자열이면 해당 fund_code 전체 심볼에 적용)",
+        "operationId": "OrderLimiterService_UpdateOrderLimiterConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_limitUpdateOrderLimiterConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 (필수)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "etfSymbol": {
+                  "type": "string",
+                  "title": "ETF 심볼 (선택 — 빈 문자열이면 해당 fund_code 전체 심볼에 적용)"
+                },
+                "config": {
+                  "$ref": "#/definitions/order_limitOrderLimiterConfig",
+                  "title": "업데이트할 설정"
+                }
+              },
+              "title": "UpdateOrderLimiterConfig",
+              "required": [
+                "config"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "OrderLimiterService"
+        ]
+      }
+    },
+    "/v1/order-limiters/status:stream": {
+      "get": {
+        "summary": "OrderLimiter 시간 프레임별 주문 건수 현황 스트리밍\n전체 active order limiters를 주기적으로 방출 (1초 tick)",
+        "operationId": "OrderLimiterService_StreamOrderLimiterStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/order_limitOrderLimiterStatus"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of order_limitOrderLimiterStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 필터 (선택 — 빈 문자열이면 전체)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "etfSymbol",
+            "description": "ETF 심볼 필터 (선택 — 빈 문자열이면 전체)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLimiterService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "order_limitOrderLimiterConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "dailyCumulativeLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "일일 누적 주문 수량 한도 (i64)"
+        },
+        "singleOrderLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "단일 주문 수량 한도 (i64)"
+        },
+        "timeFrameLimits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/order_limitTimeFrameLimit"
+          },
+          "title": "시간 프레임별 주문 건수 제한 목록\n설정 시 기존 목록을 전체 교체"
+        }
+      },
+      "title": "OrderLimiter 설정"
+    },
+    "order_limitOrderLimiterStatus": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "dailyOrderedQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "일일 누적 주문 수량"
+        },
+        "dailyCumulativeLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "일일 누적 주문 수량 한도"
+        },
+        "timeFrameStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1order_limitTimeFrameStatus"
+          },
+          "title": "시간 프레임별 주문 건수 현황"
+        }
+      },
+      "title": "(fund_code, etf_symbol) 단위 OrderLimiter 현황"
+    },
+    "order_limitTimeFrameLimit": {
+      "type": "object",
+      "properties": {
+        "windowSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "title": "시간 윈도우 (초)"
+        },
+        "maxOrders": {
+          "type": "integer",
+          "format": "int64",
+          "title": "최대 주문 건수"
+        }
+      },
+      "title": "시간 프레임별 주문 제한 설정",
+      "required": [
+        "windowSeconds",
+        "maxOrders"
+      ]
+    },
+    "order_limitUpdateOrderLimiterConfigResponse": {
+      "type": "object",
+      "properties": {
+        "updatedCount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "업데이트된 대상 수"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1order_limitTimeFrameStatus": {
+      "type": "object",
+      "properties": {
+        "windowSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "title": "시간 윈도우 (초)"
+        },
+        "currentCount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "현재 윈도우 내 주문 건수"
+        },
+        "maxOrders": {
+          "type": "integer",
+          "format": "int64",
+          "title": "최대 주문 건수"
+        }
+      },
+      "title": "시간 프레임별 주문 건수 현황"
+    }
+  }
+}
