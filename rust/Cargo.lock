@@ -426,7 +426,7 @@ dependencies = [
 
 [[package]]
 name = "ids-apis"
-version = "1.0.217"
+version = "1.0.218"
 dependencies = [
  "async-trait",
  "http",
