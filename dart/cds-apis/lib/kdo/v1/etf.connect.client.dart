@@ -94,4 +94,22 @@ extension type EtfServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// ETF-선물 헷지 포지션의 단가를 계산합니다.
+  Future<kdov1etf.CalcEtfUnitPriceResponse> calcEtfUnitPrice(
+    kdov1etf.CalcEtfUnitPriceRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.EtfService.calcEtfUnitPrice,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

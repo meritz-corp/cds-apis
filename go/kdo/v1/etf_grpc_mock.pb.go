@@ -34,6 +34,26 @@ func (m *MockEtfServiceClient) EXPECT() *MockEtfServiceClientMockRecorder {
 	return m.recorder
 }
 
+// CalcEtfUnitPrice mocks base method.
+func (m *MockEtfServiceClient) CalcEtfUnitPrice(ctx context.Context, in *CalcEtfUnitPriceRequest, opts ...grpc.CallOption) (*CalcEtfUnitPriceResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CalcEtfUnitPrice", varargs...)
+	ret0, _ := ret[0].(*CalcEtfUnitPriceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CalcEtfUnitPrice indicates an expected call of CalcEtfUnitPrice.
+func (mr *MockEtfServiceClientMockRecorder) CalcEtfUnitPrice(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CalcEtfUnitPrice", reflect.TypeOf((*MockEtfServiceClient)(nil).CalcEtfUnitPrice), varargs...)
+}
+
 // CreateRedeemEtf mocks base method.
 func (m *MockEtfServiceClient) CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error) {
 	m.ctrl.T.Helper()
@@ -155,6 +175,21 @@ func NewMockEtfServiceServer(ctrl *gomock.Controller) *MockEtfServiceServer {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockEtfServiceServer) EXPECT() *MockEtfServiceServerMockRecorder {
 	return m.recorder
+}
+
+// CalcEtfUnitPrice mocks base method.
+func (m *MockEtfServiceServer) CalcEtfUnitPrice(ctx context.Context, in *CalcEtfUnitPriceRequest) (*CalcEtfUnitPriceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CalcEtfUnitPrice", ctx, in)
+	ret0, _ := ret[0].(*CalcEtfUnitPriceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CalcEtfUnitPrice indicates an expected call of CalcEtfUnitPrice.
+func (mr *MockEtfServiceServerMockRecorder) CalcEtfUnitPrice(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CalcEtfUnitPrice", reflect.TypeOf((*MockEtfServiceServer)(nil).CalcEtfUnitPrice), ctx, in)
 }
 
 // CreateRedeemEtf mocks base method.

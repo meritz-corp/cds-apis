@@ -180,6 +180,92 @@
         ]
       }
     },
+    "/v1/{etf}:calc_unit_price": {
+      "post": {
+        "summary": "ETF-선물 헷지 포지션의 단가를 계산합니다.",
+        "operationId": "EtfService_CalcEtfUnitPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfCalcEtfUnitPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pricing": {
+                  "$ref": "#/definitions/commonEtfPricing",
+                  "title": "가격 산출 방식 (IndexTrackingHedge / LeverageFuture 만 지원)"
+                },
+                "etfSide": {
+                  "$ref": "#/definitions/commonOrderSide",
+                  "title": "ETF 체결 방향 (Bid=매수 / Ask=매도)"
+                },
+                "etfQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "ETF 체결 수량"
+                },
+                "etfPrice": {
+                  "type": "string",
+                  "title": "ETF 체결 가격"
+                },
+                "hedgeSide": {
+                  "$ref": "#/definitions/commonOrderSide",
+                  "title": "헷지(선물) 방향"
+                },
+                "hedgeQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "헷지(선물) 수량"
+                },
+                "hedgePrice": {
+                  "type": "string",
+                  "title": "헷지(선물) 가격"
+                },
+                "targetUnitPrice": {
+                  "type": "string",
+                  "title": "타겟 단가 (optional, 제공 시 PnL 계산)"
+                }
+              },
+              "title": "CalcEtfUnitPrice",
+              "required": [
+                "pricing",
+                "etfSide",
+                "etfQuantity",
+                "etfPrice",
+                "hedgeSide",
+                "hedgeQuantity",
+                "hedgePrice"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
     "/v1/{etf}:update_unit_delta": {
       "post": {
         "operationId": "EtfService_UpdateEtfUnitDelta",
@@ -229,6 +315,70 @@
     }
   },
   "definitions": {
+    "commonEtfPricing": {
+      "type": "object",
+      "properties": {
+        "pdfNavHedge": {
+          "$ref": "#/definitions/commonPdfNavHedgePricing",
+          "title": "분해 헷지 방식"
+        },
+        "indexTrackingHedge": {
+          "$ref": "#/definitions/commonIndexTrackingHedgePricing",
+          "title": "선물 헷지 방식"
+        },
+        "futureBasis": {
+          "$ref": "#/definitions/commonFutureBasis"
+        },
+        "leverageFuture": {
+          "$ref": "#/definitions/commonLeverageFuturePricing",
+          "title": "레버리지 선물 방식"
+        }
+      },
+      "title": "ETF 가격 산출 방식"
+    },
+    "commonFutureBasis": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "string"
+        }
+      }
+    },
+    "commonIndexTrackingHedgePricing": {
+      "type": "object",
+      "title": "선물 헷지 가격 산출"
+    },
+    "commonLeverageFuturePricing": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "number",
+          "format": "double",
+          "title": "기초지수 전일종가"
+        },
+        "prevFuture": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 전일종가"
+        }
+      },
+      "title": "레버리지 선물 가격 산출"
+    },
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
+    "commonPdfNavHedgePricing": {
+      "type": "object",
+      "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
+    },
     "commonProductType": {
       "type": "string",
       "enum": [
@@ -240,6 +390,19 @@
       ],
       "default": "PRODUCT_TYPE_UNSPECIFIED",
       "title": "상품 타입"
+    },
+    "etfCalcEtfUnitPriceResponse": {
+      "type": "object",
+      "properties": {
+        "unitPrice": {
+          "type": "string",
+          "title": "계산된 단가"
+        },
+        "pnl": {
+          "type": "string",
+          "title": "(unit_price - target_unit_price) × etf_quantity, target 제공 시에만"
+        }
+      }
     },
     "etfConversion": {
       "type": "object",

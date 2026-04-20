@@ -334,6 +334,47 @@ pub struct CreateRedeemEtfRequest {
     #[prost(bool, tag="4")]
     pub is_creation: bool,
 }
+/// CalcEtfUnitPrice
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CalcEtfUnitPriceRequest {
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// 가격 산출 방식 (IndexTrackingHedge / LeverageFuture 만 지원)
+    #[prost(message, optional, tag="2")]
+    pub pricing: ::core::option::Option<super::common::EtfPricing>,
+    /// ETF 체결 방향 (Bid=매수 / Ask=매도)
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
+    pub etf_side: i32,
+    /// ETF 체결 수량
+    #[prost(int64, tag="4")]
+    pub etf_quantity: i64,
+    /// ETF 체결 가격
+    #[prost(string, tag="5")]
+    pub etf_price: ::prost::alloc::string::String,
+    /// 헷지(선물) 방향
+    #[prost(enumeration="super::common::OrderSide", tag="6")]
+    pub hedge_side: i32,
+    /// 헷지(선물) 수량
+    #[prost(int64, tag="7")]
+    pub hedge_quantity: i64,
+    /// 헷지(선물) 가격
+    #[prost(string, tag="8")]
+    pub hedge_price: ::prost::alloc::string::String,
+    /// 타겟 단가 (optional, 제공 시 PnL 계산)
+    #[prost(string, optional, tag="9")]
+    pub target_unit_price: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CalcEtfUnitPriceResponse {
+    /// 계산된 단가
+    #[prost(string, tag="1")]
+    pub unit_price: ::prost::alloc::string::String,
+    /// (unit_price - target_unit_price) × etf_quantity, target 제공 시에만
+    #[prost(string, optional, tag="2")]
+    pub pnl: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// 복제 방법
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

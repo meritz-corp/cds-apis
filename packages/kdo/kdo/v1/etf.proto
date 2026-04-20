@@ -52,6 +52,15 @@ service EtfService {
         };
         option (google.api.method_signature) = "etf,unit_delta";
     }
+
+    // ETF-선물 헷지 포지션의 단가를 계산합니다.
+    rpc CalcEtfUnitPrice(CalcEtfUnitPriceRequest) returns (CalcEtfUnitPriceResponse) {
+        option (google.api.http) = {
+            post: "/v1/{etf=etfs/*}:calc_unit_price"
+            body: "*"
+        };
+        option (google.api.method_signature) = "etf";
+    }
 }
 
 
@@ -366,4 +375,46 @@ message CreateRedeemEtfRequest {
   bool is_creation = 4 [
     (google.api.field_behavior) = REQUIRED
   ];
+}
+
+// CalcEtfUnitPrice
+message CalcEtfUnitPriceRequest {
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+
+    // 가격 산출 방식 (IndexTrackingHedge / LeverageFuture 만 지원)
+    kdo.v1.common.EtfPricing pricing = 2 [(google.api.field_behavior) = REQUIRED];
+
+    // ETF 체결 방향 (Bid=매수 / Ask=매도)
+    kdo.v1.common.OrderSide etf_side = 3 [(google.api.field_behavior) = REQUIRED];
+
+    // ETF 체결 수량
+    int64 etf_quantity = 4 [(google.api.field_behavior) = REQUIRED];
+
+    // ETF 체결 가격
+    string etf_price = 5 [(google.api.field_behavior) = REQUIRED];
+
+    // 헷지(선물) 방향
+    kdo.v1.common.OrderSide hedge_side = 6 [(google.api.field_behavior) = REQUIRED];
+
+    // 헷지(선물) 수량
+    int64 hedge_quantity = 7 [(google.api.field_behavior) = REQUIRED];
+
+    // 헷지(선물) 가격
+    string hedge_price = 8 [(google.api.field_behavior) = REQUIRED];
+
+    // 타겟 단가 (optional, 제공 시 PnL 계산)
+    optional string target_unit_price = 9;
+}
+
+message CalcEtfUnitPriceResponse {
+    // 계산된 단가
+    string unit_price = 1;
+
+    // (unit_price - target_unit_price) × etf_quantity, target 제공 시에만
+    optional string pnl = 2;
 }

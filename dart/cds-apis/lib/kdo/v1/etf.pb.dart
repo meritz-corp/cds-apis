@@ -15,7 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'common.pbenum.dart' as $1;
+import 'common.pb.dart' as $1;
 import 'etf.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -1810,6 +1810,219 @@ class CreateRedeemEtfRequest extends $pb.GeneratedMessage {
   $core.bool hasIsCreation() => $_has(3);
   @$pb.TagNumber(4)
   void clearIsCreation() => $_clearField(4);
+}
+
+/// CalcEtfUnitPrice
+class CalcEtfUnitPriceRequest extends $pb.GeneratedMessage {
+  factory CalcEtfUnitPriceRequest({
+    $core.String? etf,
+    $1.EtfPricing? pricing,
+    $1.OrderSide? etfSide,
+    $fixnum.Int64? etfQuantity,
+    $core.String? etfPrice,
+    $1.OrderSide? hedgeSide,
+    $fixnum.Int64? hedgeQuantity,
+    $core.String? hedgePrice,
+    $core.String? targetUnitPrice,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (pricing != null) result.pricing = pricing;
+    if (etfSide != null) result.etfSide = etfSide;
+    if (etfQuantity != null) result.etfQuantity = etfQuantity;
+    if (etfPrice != null) result.etfPrice = etfPrice;
+    if (hedgeSide != null) result.hedgeSide = hedgeSide;
+    if (hedgeQuantity != null) result.hedgeQuantity = hedgeQuantity;
+    if (hedgePrice != null) result.hedgePrice = hedgePrice;
+    if (targetUnitPrice != null) result.targetUnitPrice = targetUnitPrice;
+    return result;
+  }
+
+  CalcEtfUnitPriceRequest._();
+
+  factory CalcEtfUnitPriceRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CalcEtfUnitPriceRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CalcEtfUnitPriceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOM<$1.EtfPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
+    ..e<$1.OrderSide>(3, _omitFieldNames ? '' : 'etfSide', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
+    ..aInt64(4, _omitFieldNames ? '' : 'etfQuantity')
+    ..aOS(5, _omitFieldNames ? '' : 'etfPrice')
+    ..e<$1.OrderSide>(6, _omitFieldNames ? '' : 'hedgeSide', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
+    ..aInt64(7, _omitFieldNames ? '' : 'hedgeQuantity')
+    ..aOS(8, _omitFieldNames ? '' : 'hedgePrice')
+    ..aOS(9, _omitFieldNames ? '' : 'targetUnitPrice')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfUnitPriceRequest clone() => CalcEtfUnitPriceRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfUnitPriceRequest copyWith(void Function(CalcEtfUnitPriceRequest) updates) => super.copyWith((message) => updates(message as CalcEtfUnitPriceRequest)) as CalcEtfUnitPriceRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfUnitPriceRequest create() => CalcEtfUnitPriceRequest._();
+  @$core.override
+  CalcEtfUnitPriceRequest createEmptyInstance() => create();
+  static $pb.PbList<CalcEtfUnitPriceRequest> createRepeated() => $pb.PbList<CalcEtfUnitPriceRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfUnitPriceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CalcEtfUnitPriceRequest>(create);
+  static CalcEtfUnitPriceRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// 가격 산출 방식 (IndexTrackingHedge / LeverageFuture 만 지원)
+  @$pb.TagNumber(2)
+  $1.EtfPricing get pricing => $_getN(1);
+  @$pb.TagNumber(2)
+  set pricing($1.EtfPricing value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPricing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPricing() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $1.EtfPricing ensurePricing() => $_ensure(1);
+
+  /// ETF 체결 방향 (Bid=매수 / Ask=매도)
+  @$pb.TagNumber(3)
+  $1.OrderSide get etfSide => $_getN(2);
+  @$pb.TagNumber(3)
+  set etfSide($1.OrderSide value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSide() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSide() => $_clearField(3);
+
+  /// ETF 체결 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get etfQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set etfQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEtfQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEtfQuantity() => $_clearField(4);
+
+  /// ETF 체결 가격
+  @$pb.TagNumber(5)
+  $core.String get etfPrice => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set etfPrice($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasEtfPrice() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearEtfPrice() => $_clearField(5);
+
+  /// 헷지(선물) 방향
+  @$pb.TagNumber(6)
+  $1.OrderSide get hedgeSide => $_getN(5);
+  @$pb.TagNumber(6)
+  set hedgeSide($1.OrderSide value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasHedgeSide() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearHedgeSide() => $_clearField(6);
+
+  /// 헷지(선물) 수량
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get hedgeQuantity => $_getI64(6);
+  @$pb.TagNumber(7)
+  set hedgeQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasHedgeQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearHedgeQuantity() => $_clearField(7);
+
+  /// 헷지(선물) 가격
+  @$pb.TagNumber(8)
+  $core.String get hedgePrice => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set hedgePrice($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasHedgePrice() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearHedgePrice() => $_clearField(8);
+
+  /// 타겟 단가 (optional, 제공 시 PnL 계산)
+  @$pb.TagNumber(9)
+  $core.String get targetUnitPrice => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set targetUnitPrice($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasTargetUnitPrice() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearTargetUnitPrice() => $_clearField(9);
+}
+
+class CalcEtfUnitPriceResponse extends $pb.GeneratedMessage {
+  factory CalcEtfUnitPriceResponse({
+    $core.String? unitPrice,
+    $core.String? pnl,
+  }) {
+    final result = create();
+    if (unitPrice != null) result.unitPrice = unitPrice;
+    if (pnl != null) result.pnl = pnl;
+    return result;
+  }
+
+  CalcEtfUnitPriceResponse._();
+
+  factory CalcEtfUnitPriceResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CalcEtfUnitPriceResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CalcEtfUnitPriceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'unitPrice')
+    ..aOS(2, _omitFieldNames ? '' : 'pnl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfUnitPriceResponse clone() => CalcEtfUnitPriceResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfUnitPriceResponse copyWith(void Function(CalcEtfUnitPriceResponse) updates) => super.copyWith((message) => updates(message as CalcEtfUnitPriceResponse)) as CalcEtfUnitPriceResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfUnitPriceResponse create() => CalcEtfUnitPriceResponse._();
+  @$core.override
+  CalcEtfUnitPriceResponse createEmptyInstance() => create();
+  static $pb.PbList<CalcEtfUnitPriceResponse> createRepeated() => $pb.PbList<CalcEtfUnitPriceResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfUnitPriceResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CalcEtfUnitPriceResponse>(create);
+  static CalcEtfUnitPriceResponse? _defaultInstance;
+
+  /// 계산된 단가
+  @$pb.TagNumber(1)
+  $core.String get unitPrice => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set unitPrice($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasUnitPrice() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUnitPrice() => $_clearField(1);
+
+  /// (unit_price - target_unit_price) × etf_quantity, target 제공 시에만
+  @$pb.TagNumber(2)
+  $core.String get pnl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set pnl($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPnl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPnl() => $_clearField(2);
 }
 
 

@@ -425,3 +425,51 @@ final $typed_data.Uint8List createRedeemEtfRequestDescriptor = $convert.base64De
     'ei9GdW5kUgRmdW5kEiAKCHF1YW50aXR5GAMgASgDQgTiQQECUghxdWFudGl0eRIlCgtpc19jcm'
     'VhdGlvbhgEIAEoCEIE4kEBAlIKaXNDcmVhdGlvbg==');
 
+@$core.Deprecated('Use calcEtfUnitPriceRequestDescriptor instead')
+const CalcEtfUnitPriceRequest$json = {
+  '1': 'CalcEtfUnitPriceRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '8': {}, '10': 'pricing'},
+    {'1': 'etf_side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'etfSide'},
+    {'1': 'etf_quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'etfQuantity'},
+    {'1': 'etf_price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'etfPrice'},
+    {'1': 'hedge_side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'hedgeSide'},
+    {'1': 'hedge_quantity', '3': 7, '4': 1, '5': 3, '8': {}, '10': 'hedgeQuantity'},
+    {'1': 'hedge_price', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'hedgePrice'},
+    {'1': 'target_unit_price', '3': 9, '4': 1, '5': 9, '9': 0, '10': 'targetUnitPrice', '17': true},
+  ],
+  '8': [
+    {'1': '_target_unit_price'},
+  ],
+};
+
+/// Descriptor for `CalcEtfUnitPriceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List calcEtfUnitPriceRequestDescriptor = $convert.base64Decode(
+    'ChdDYWxjRXRmVW5pdFByaWNlUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZH'
+    'NhcGlzLnh5ei9FdGZSA2V0ZhI5CgdwcmljaW5nGAIgASgLMhkua2RvLnYxLmNvbW1vbi5FdGZQ'
+    'cmljaW5nQgTiQQECUgdwcmljaW5nEjkKCGV0Zl9zaWRlGAMgASgOMhgua2RvLnYxLmNvbW1vbi'
+    '5PcmRlclNpZGVCBOJBAQJSB2V0ZlNpZGUSJwoMZXRmX3F1YW50aXR5GAQgASgDQgTiQQECUgtl'
+    'dGZRdWFudGl0eRIhCglldGZfcHJpY2UYBSABKAlCBOJBAQJSCGV0ZlByaWNlEj0KCmhlZGdlX3'
+    'NpZGUYBiABKA4yGC5rZG8udjEuY29tbW9uLk9yZGVyU2lkZUIE4kEBAlIJaGVkZ2VTaWRlEisK'
+    'DmhlZGdlX3F1YW50aXR5GAcgASgDQgTiQQECUg1oZWRnZVF1YW50aXR5EiUKC2hlZGdlX3ByaW'
+    'NlGAggASgJQgTiQQECUgpoZWRnZVByaWNlEi8KEXRhcmdldF91bml0X3ByaWNlGAkgASgJSABS'
+    'D3RhcmdldFVuaXRQcmljZYgBAUIUChJfdGFyZ2V0X3VuaXRfcHJpY2U=');
+
+@$core.Deprecated('Use calcEtfUnitPriceResponseDescriptor instead')
+const CalcEtfUnitPriceResponse$json = {
+  '1': 'CalcEtfUnitPriceResponse',
+  '2': [
+    {'1': 'unit_price', '3': 1, '4': 1, '5': 9, '10': 'unitPrice'},
+    {'1': 'pnl', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'pnl', '17': true},
+  ],
+  '8': [
+    {'1': '_pnl'},
+  ],
+};
+
+/// Descriptor for `CalcEtfUnitPriceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List calcEtfUnitPriceResponseDescriptor = $convert.base64Decode(
+    'ChhDYWxjRXRmVW5pdFByaWNlUmVzcG9uc2USHQoKdW5pdF9wcmljZRgBIAEoCVIJdW5pdFByaW'
+    'NlEhUKA3BubBgCIAEoCUgAUgNwbmyIAQFCBgoEX3BubA==');
+

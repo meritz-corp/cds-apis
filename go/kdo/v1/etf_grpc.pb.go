@@ -28,6 +28,8 @@ type EtfServiceClient interface {
 	GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest, opts ...grpc.CallOption) (*EtfTickImpact, error)
 	CreateRedeemEtf(ctx context.Context, in *CreateRedeemEtfRequest, opts ...grpc.CallOption) (*Etf, error)
 	UpdateEtfUnitDelta(ctx context.Context, in *UpdateEtfUnitDeltaRequest, opts ...grpc.CallOption) (*Etf, error)
+	// ETF-선물 헷지 포지션의 단가를 계산합니다.
+	CalcEtfUnitPrice(ctx context.Context, in *CalcEtfUnitPriceRequest, opts ...grpc.CallOption) (*CalcEtfUnitPriceResponse, error)
 }
 
 type etfServiceClient struct {
@@ -83,6 +85,15 @@ func (c *etfServiceClient) UpdateEtfUnitDelta(ctx context.Context, in *UpdateEtf
 	return out, nil
 }
 
+func (c *etfServiceClient) CalcEtfUnitPrice(ctx context.Context, in *CalcEtfUnitPriceRequest, opts ...grpc.CallOption) (*CalcEtfUnitPriceResponse, error) {
+	out := new(CalcEtfUnitPriceResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/CalcEtfUnitPrice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EtfServiceServer is the server API for EtfService service.
 // All implementations must embed UnimplementedEtfServiceServer
 // for forward compatibility
@@ -93,6 +104,8 @@ type EtfServiceServer interface {
 	GetEtfTickImpact(context.Context, *GetEtfTickImpactRequest) (*EtfTickImpact, error)
 	CreateRedeemEtf(context.Context, *CreateRedeemEtfRequest) (*Etf, error)
 	UpdateEtfUnitDelta(context.Context, *UpdateEtfUnitDeltaRequest) (*Etf, error)
+	// ETF-선물 헷지 포지션의 단가를 계산합니다.
+	CalcEtfUnitPrice(context.Context, *CalcEtfUnitPriceRequest) (*CalcEtfUnitPriceResponse, error)
 	mustEmbedUnimplementedEtfServiceServer()
 }
 
@@ -114,6 +127,9 @@ func (UnimplementedEtfServiceServer) CreateRedeemEtf(context.Context, *CreateRed
 }
 func (UnimplementedEtfServiceServer) UpdateEtfUnitDelta(context.Context, *UpdateEtfUnitDeltaRequest) (*Etf, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEtfUnitDelta not implemented")
+}
+func (UnimplementedEtfServiceServer) CalcEtfUnitPrice(context.Context, *CalcEtfUnitPriceRequest) (*CalcEtfUnitPriceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalcEtfUnitPrice not implemented")
 }
 func (UnimplementedEtfServiceServer) mustEmbedUnimplementedEtfServiceServer() {}
 
@@ -218,6 +234,24 @@ func _EtfService_UpdateEtfUnitDelta_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EtfService_CalcEtfUnitPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CalcEtfUnitPriceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).CalcEtfUnitPrice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/CalcEtfUnitPrice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).CalcEtfUnitPrice(ctx, req.(*CalcEtfUnitPriceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EtfService_ServiceDesc is the grpc.ServiceDesc for EtfService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -244,6 +278,10 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateEtfUnitDelta",
 			Handler:    _EtfService_UpdateEtfUnitDelta_Handler,
+		},
+		{
+			MethodName: "CalcEtfUnitPrice",
+			Handler:    _EtfService_CalcEtfUnitPrice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

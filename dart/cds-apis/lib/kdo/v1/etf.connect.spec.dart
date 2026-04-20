@@ -46,4 +46,12 @@ abstract final class EtfService {
     kdov1etf.UpdateEtfUnitDeltaRequest.new,
     kdov1etf.Etf.new,
   );
+
+  /// ETF-선물 헷지 포지션의 단가를 계산합니다.
+  static const calcEtfUnitPrice = connect.Spec(
+    '/$name/CalcEtfUnitPrice',
+    connect.StreamType.unary,
+    kdov1etf.CalcEtfUnitPriceRequest.new,
+    kdov1etf.CalcEtfUnitPriceResponse.new,
+  );
 }

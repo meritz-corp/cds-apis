@@ -54,6 +54,11 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$updateEtfUnitDelta, request, options: options);
   }
 
+  /// ETF-선물 헷지 포지션의 단가를 계산합니다.
+  $grpc.ResponseFuture<$0.CalcEtfUnitPriceResponse> calcEtfUnitPrice($0.CalcEtfUnitPriceRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$calcEtfUnitPrice, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -76,6 +81,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/UpdateEtfUnitDelta',
       ($0.UpdateEtfUnitDeltaRequest value) => value.writeToBuffer(),
       $0.Etf.fromBuffer);
+  static final _$calcEtfUnitPrice = $grpc.ClientMethod<$0.CalcEtfUnitPriceRequest, $0.CalcEtfUnitPriceResponse>(
+      '/kdo.v1.etf.EtfService/CalcEtfUnitPrice',
+      ($0.CalcEtfUnitPriceRequest value) => value.writeToBuffer(),
+      $0.CalcEtfUnitPriceResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -118,6 +127,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.UpdateEtfUnitDeltaRequest.fromBuffer(value),
         ($0.Etf value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CalcEtfUnitPriceRequest, $0.CalcEtfUnitPriceResponse>(
+        'CalcEtfUnitPrice',
+        calcEtfUnitPrice_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CalcEtfUnitPriceRequest.fromBuffer(value),
+        ($0.CalcEtfUnitPriceResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -149,5 +165,11 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.Etf> updateEtfUnitDelta($grpc.ServiceCall call, $0.UpdateEtfUnitDeltaRequest request);
+
+  $async.Future<$0.CalcEtfUnitPriceResponse> calcEtfUnitPrice_Pre($grpc.ServiceCall $call, $async.Future<$0.CalcEtfUnitPriceRequest> $request) async {
+    return calcEtfUnitPrice($call, await $request);
+  }
+
+  $async.Future<$0.CalcEtfUnitPriceResponse> calcEtfUnitPrice($grpc.ServiceCall call, $0.CalcEtfUnitPriceRequest request);
 
 }
