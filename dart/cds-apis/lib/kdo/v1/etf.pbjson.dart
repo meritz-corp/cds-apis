@@ -225,6 +225,7 @@ const UnderlyingAsset$json = {
     {'1': 'fixed_income', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingFixedIncome', '9': 0, '10': 'fixedIncome'},
     {'1': 'commodity', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingCommodity', '9': 0, '10': 'commodity'},
     {'1': 'currency', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingCurrency', '9': 0, '10': 'currency'},
+    {'1': 'decomposed_stock', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.etf.UnderlyingDecomposedStock', '9': 0, '10': 'decomposedStock'},
   ],
   '8': [
     {'1': 'asset'},
@@ -237,8 +238,9 @@ final $typed_data.Uint8List underlyingAssetDescriptor = $convert.base64Decode(
     '5nRnV0dXJlSABSBmZ1dHVyZRJGCgxmaXhlZF9pbmNvbWUYAiABKAsyIS5rZG8udjEuZXRmLlVu'
     'ZGVybHlpbmdGaXhlZEluY29tZUgAUgtmaXhlZEluY29tZRI/Cgljb21tb2RpdHkYAyABKAsyHy'
     '5rZG8udjEuZXRmLlVuZGVybHlpbmdDb21tb2RpdHlIAFIJY29tbW9kaXR5EjwKCGN1cnJlbmN5'
-    'GAQgASgLMh4ua2RvLnYxLmV0Zi5VbmRlcmx5aW5nQ3VycmVuY3lIAFIIY3VycmVuY3lCBwoFYX'
-    'NzZXQ=');
+    'GAQgASgLMh4ua2RvLnYxLmV0Zi5VbmRlcmx5aW5nQ3VycmVuY3lIAFIIY3VycmVuY3kSUgoQZG'
+    'Vjb21wb3NlZF9zdG9jaxgFIAEoCzIlLmtkby52MS5ldGYuVW5kZXJseWluZ0RlY29tcG9zZWRT'
+    'dG9ja0gAUg9kZWNvbXBvc2VkU3RvY2tCBwoFYXNzZXQ=');
 
 @$core.Deprecated('Use underlyingFutureDescriptor instead')
 const UnderlyingFuture$json = {
@@ -292,6 +294,22 @@ const UnderlyingCurrency$json = {
 /// Descriptor for `UnderlyingCurrency`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List underlyingCurrencyDescriptor = $convert.base64Decode(
     'ChJVbmRlcmx5aW5nQ3VycmVuY3kSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
+
+@$core.Deprecated('Use underlyingDecomposedStockDescriptor instead')
+const UnderlyingDecomposedStock$json = {
+  '1': 'UnderlyingDecomposedStock',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'last_ask_price', '3': 2, '4': 1, '5': 9, '10': 'lastAskPrice'},
+    {'1': 'last_bid_price', '3': 3, '4': 1, '5': 9, '10': 'lastBidPrice'},
+  ],
+};
+
+/// Descriptor for `UnderlyingDecomposedStock`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List underlyingDecomposedStockDescriptor = $convert.base64Decode(
+    'ChlVbmRlcmx5aW5nRGVjb21wb3NlZFN0b2NrEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEiQKDm'
+    'xhc3RfYXNrX3ByaWNlGAIgASgJUgxsYXN0QXNrUHJpY2USJAoObGFzdF9iaWRfcHJpY2UYAyAB'
+    'KAlSDGxhc3RCaWRQcmljZQ==');
 
 @$core.Deprecated('Use getEtfRequestDescriptor instead')
 const GetEtfRequest$json = {

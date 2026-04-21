@@ -129,6 +129,7 @@ const EtfPricing$json = {
     {'1': 'index_tracking_hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.common.IndexTrackingHedgePricing', '9': 0, '10': 'indexTrackingHedge'},
     {'1': 'future_basis', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.common.FutureBasis', '9': 0, '10': 'futureBasis'},
     {'1': 'leverage_future', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.common.LeverageFuturePricing', '9': 0, '10': 'leverageFuture'},
+    {'1': 'pdf_decompose_hedge', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.common.PdfDecomposeHedgePricing', '9': 0, '10': 'pdfDecomposeHedge'},
   ],
   '8': [
     {'1': 'method'},
@@ -142,8 +143,9 @@ final $typed_data.Uint8List etfPricingDescriptor = $convert.base64Decode(
     'IAEoCzIoLmtkby52MS5jb21tb24uSW5kZXhUcmFja2luZ0hlZGdlUHJpY2luZ0gAUhJpbmRleF'
     'RyYWNraW5nSGVkZ2USPwoMZnV0dXJlX2Jhc2lzGAMgASgLMhoua2RvLnYxLmNvbW1vbi5GdXR1'
     'cmVCYXNpc0gAUgtmdXR1cmVCYXNpcxJPCg9sZXZlcmFnZV9mdXR1cmUYBCABKAsyJC5rZG8udj'
-    'EuY29tbW9uLkxldmVyYWdlRnV0dXJlUHJpY2luZ0gAUg5sZXZlcmFnZUZ1dHVyZUIICgZtZXRo'
-    'b2Q=');
+    'EuY29tbW9uLkxldmVyYWdlRnV0dXJlUHJpY2luZ0gAUg5sZXZlcmFnZUZ1dHVyZRJZChNwZGZf'
+    'ZGVjb21wb3NlX2hlZGdlGAUgASgLMicua2RvLnYxLmNvbW1vbi5QZGZEZWNvbXBvc2VIZWRnZV'
+    'ByaWNpbmdIAFIRcGRmRGVjb21wb3NlSGVkZ2VCCAoGbWV0aG9k');
 
 @$core.Deprecated('Use pdfNavHedgePricingDescriptor instead')
 const PdfNavHedgePricing$json = {
@@ -188,4 +190,17 @@ const LeverageFuturePricing$json = {
 final $typed_data.Uint8List leverageFuturePricingDescriptor = $convert.base64Decode(
     'ChVMZXZlcmFnZUZ1dHVyZVByaWNpbmcSHQoKcHJldl9pbmRleBgBIAEoAVIJcHJldkluZGV4Eh'
     '8KC3ByZXZfZnV0dXJlGAIgASgBUgpwcmV2RnV0dXJl');
+
+@$core.Deprecated('Use pdfDecomposeHedgePricingDescriptor instead')
+const PdfDecomposeHedgePricing$json = {
+  '1': 'PdfDecomposeHedgePricing',
+  '2': [
+    {'1': 'ratio_per_share', '3': 1, '4': 1, '5': 1, '10': 'ratioPerShare'},
+  ],
+};
+
+/// Descriptor for `PdfDecomposeHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pdfDecomposeHedgePricingDescriptor = $convert.base64Decode(
+    'ChhQZGZEZWNvbXBvc2VIZWRnZVByaWNpbmcSJgoPcmF0aW9fcGVyX3NoYXJlGAEgASgBUg1yYX'
+    'Rpb1BlclNoYXJl');
 

@@ -332,6 +332,10 @@
         "leverageFuture": {
           "$ref": "#/definitions/commonLeverageFuturePricing",
           "title": "레버리지 선물 방식"
+        },
+        "pdfDecomposeHedge": {
+          "$ref": "#/definitions/commonPdfDecomposeHedgePricing",
+          "title": "PDF 재귀 분해 헷지 방식: leaf가 단일 종목으로 귀결되는 ETF에 대한 프라이싱"
         }
       },
       "title": "ETF 가격 산출 방식"
@@ -374,6 +378,17 @@
       "default": "ORDER_SIDE_UNSPECIFIED",
       "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
       "title": "주문 방향"
+    },
+    "commonPdfDecomposeHedgePricing": {
+      "type": "object",
+      "properties": {
+        "ratioPerShare": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF 1주당 leaf 종목 환산 수량 (ETF-side 부호)"
+        }
+      },
+      "title": "PDF 재귀 분해 헷지 가격 산출\nnav = leaf_price × ratio_per_share"
     },
     "commonPdfNavHedgePricing": {
       "type": "object",
@@ -660,6 +675,10 @@
         "currency": {
           "$ref": "#/definitions/etfUnderlyingCurrency",
           "title": "통화형"
+        },
+        "decomposedStock": {
+          "$ref": "#/definitions/etfUnderlyingDecomposedStock",
+          "title": "PDF 재귀 분해 결과 단일 leaf 종목형"
         }
       },
       "title": "기초자산"
@@ -683,6 +702,24 @@
         }
       },
       "title": "통화형 기초자산"
+    },
+    "etfUnderlyingDecomposedStock": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "lastAskPrice": {
+          "type": "string",
+          "title": "최근 매도호가"
+        },
+        "lastBidPrice": {
+          "type": "string",
+          "title": "최근 매수호가"
+        }
+      },
+      "title": "PDF 재귀 분해 결과 단일 leaf 종목형 기초자산"
     },
     "etfUnderlyingFixedIncome": {
       "type": "object",

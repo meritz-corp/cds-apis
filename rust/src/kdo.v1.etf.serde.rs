@@ -2901,6 +2901,9 @@ impl serde::Serialize for UnderlyingAsset {
                 underlying_asset::Asset::Currency(v) => {
                     struct_ser.serialize_field("currency", v)?;
                 }
+                underlying_asset::Asset::DecomposedStock(v) => {
+                    struct_ser.serialize_field("decomposed_stock", v)?;
+                }
             }
         }
         struct_ser.end()
@@ -2918,6 +2921,8 @@ impl<'de> serde::Deserialize<'de> for UnderlyingAsset {
             "fixedIncome",
             "commodity",
             "currency",
+            "decomposed_stock",
+            "decomposedStock",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2926,6 +2931,7 @@ impl<'de> serde::Deserialize<'de> for UnderlyingAsset {
             FixedIncome,
             Commodity,
             Currency,
+            DecomposedStock,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2952,6 +2958,7 @@ impl<'de> serde::Deserialize<'de> for UnderlyingAsset {
                             "fixedIncome" | "fixed_income" => Ok(GeneratedField::FixedIncome),
                             "commodity" => Ok(GeneratedField::Commodity),
                             "currency" => Ok(GeneratedField::Currency),
+                            "decomposedStock" | "decomposed_stock" => Ok(GeneratedField::DecomposedStock),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3000,6 +3007,13 @@ impl<'de> serde::Deserialize<'de> for UnderlyingAsset {
                                 return Err(serde::de::Error::duplicate_field("currency"));
                             }
                             asset__ = map_.next_value::<::std::option::Option<_>>()?.map(underlying_asset::Asset::Currency)
+;
+                        }
+                        GeneratedField::DecomposedStock => {
+                            if asset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decomposedStock"));
+                            }
+                            asset__ = map_.next_value::<::std::option::Option<_>>()?.map(underlying_asset::Asset::DecomposedStock)
 ;
                         }
                         GeneratedField::__SkipField__ => {
@@ -3203,6 +3217,137 @@ impl<'de> serde::Deserialize<'de> for UnderlyingCurrency {
             }
         }
         deserializer.deserialize_struct("kdo.v1.etf.UnderlyingCurrency", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UnderlyingDecomposedStock {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.UnderlyingDecomposedStock", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("last_ask_price", &self.last_ask_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("last_bid_price", &self.last_bid_price)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UnderlyingDecomposedStock {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "last_ask_price",
+            "lastAskPrice",
+            "last_bid_price",
+            "lastBidPrice",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            LastAskPrice,
+            LastBidPrice,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "lastAskPrice" | "last_ask_price" => Ok(GeneratedField::LastAskPrice),
+                            "lastBidPrice" | "last_bid_price" => Ok(GeneratedField::LastBidPrice),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UnderlyingDecomposedStock;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.UnderlyingDecomposedStock")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UnderlyingDecomposedStock, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut last_ask_price__ = None;
+                let mut last_bid_price__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LastAskPrice => {
+                            if last_ask_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastAskPrice"));
+                            }
+                            last_ask_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LastBidPrice => {
+                            if last_bid_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastBidPrice"));
+                            }
+                            last_bid_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UnderlyingDecomposedStock {
+                    symbol: symbol__.unwrap_or_default(),
+                    last_ask_price: last_ask_price__.unwrap_or_default(),
+                    last_bid_price: last_bid_price__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.UnderlyingDecomposedStock", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UnderlyingFixedIncome {

@@ -167,7 +167,7 @@ pub struct Conversion {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnderlyingAsset {
-    #[prost(oneof="underlying_asset::Asset", tags="1, 2, 3, 4")]
+    #[prost(oneof="underlying_asset::Asset", tags="1, 2, 3, 4, 5")]
     pub asset: ::core::option::Option<underlying_asset::Asset>,
 }
 /// Nested message and enum types in `UnderlyingAsset`.
@@ -187,6 +187,9 @@ pub mod underlying_asset {
         /// 통화형
         #[prost(message, tag="4")]
         Currency(super::UnderlyingCurrency),
+        /// PDF 재귀 분해 결과 단일 leaf 종목형
+        #[prost(message, tag="5")]
+        DecomposedStock(super::UnderlyingDecomposedStock),
     }
 }
 /// 선물형 기초자산
@@ -229,6 +232,20 @@ pub struct UnderlyingCurrency {
     /// 종목 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+}
+/// PDF 재귀 분해 결과 단일 leaf 종목형 기초자산
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnderlyingDecomposedStock {
+    /// 종목 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 최근 매도호가
+    #[prost(string, tag="2")]
+    pub last_ask_price: ::prost::alloc::string::String,
+    /// 최근 매수호가
+    #[prost(string, tag="3")]
+    pub last_bid_price: ::prost::alloc::string::String,
 }
 // ========== Request/Response Messages ==========
 

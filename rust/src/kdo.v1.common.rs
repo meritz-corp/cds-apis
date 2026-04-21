@@ -4,7 +4,7 @@
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfPricing {
-    #[prost(oneof="etf_pricing::Method", tags="1, 2, 3, 4")]
+    #[prost(oneof="etf_pricing::Method", tags="1, 2, 3, 4, 5")]
     pub method: ::core::option::Option<etf_pricing::Method>,
 }
 /// Nested message and enum types in `EtfPricing`.
@@ -23,6 +23,9 @@ pub mod etf_pricing {
         /// 레버리지 선물 방식
         #[prost(message, tag="4")]
         LeverageFuture(super::LeverageFuturePricing),
+        /// PDF 재귀 분해 헷지 방식: leaf가 단일 종목으로 귀결되는 ETF에 대한 프라이싱
+        #[prost(message, tag="5")]
+        PdfDecomposeHedge(super::PdfDecomposeHedgePricing),
     }
 }
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
@@ -51,6 +54,15 @@ pub struct LeverageFuturePricing {
     /// 선물 전일종가
     #[prost(double, tag="2")]
     pub prev_future: f64,
+}
+/// PDF 재귀 분해 헷지 가격 산출
+/// nav = leaf_price × ratio_per_share
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PdfDecomposeHedgePricing {
+    /// ETF 1주당 leaf 종목 환산 수량 (ETF-side 부호)
+    #[prost(double, tag="1")]
+    pub ratio_per_share: f64,
 }
 /// 주문 방향
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

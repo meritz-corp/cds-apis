@@ -67,6 +67,9 @@ message EtfPricing {
 
     // 레버리지 선물 방식
     LeverageFuturePricing leverage_future = 4;
+
+    // PDF 재귀 분해 헷지 방식: leaf가 단일 종목으로 귀결되는 ETF에 대한 프라이싱
+    PdfDecomposeHedgePricing pdf_decompose_hedge = 5;
   }
 }
 
@@ -87,6 +90,13 @@ message LeverageFuturePricing {
 
   // 선물 전일종가
   double prev_future = 2;
+}
+
+// PDF 재귀 분해 헷지 가격 산출
+// nav = leaf_price × ratio_per_share
+message PdfDecomposeHedgePricing {
+  // ETF 1주당 leaf 종목 환산 수량 (ETF-side 부호)
+  double ratio_per_share = 1;
 }
 
 // 자동정정 전략 유형

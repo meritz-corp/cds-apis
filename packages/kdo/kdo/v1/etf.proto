@@ -224,6 +224,9 @@ message UnderlyingAsset {
 
     // 통화형
     UnderlyingCurrency currency = 4;
+
+    // PDF 재귀 분해 결과 단일 leaf 종목형
+    UnderlyingDecomposedStock decomposed_stock = 5;
   }
 }
 
@@ -258,6 +261,18 @@ message UnderlyingCommodity {
 message UnderlyingCurrency {
   // 종목 심볼
   string symbol = 1;
+}
+
+// PDF 재귀 분해 결과 단일 leaf 종목형 기초자산
+message UnderlyingDecomposedStock {
+  // 종목 심볼
+  string symbol = 1;
+
+  // 최근 매도호가
+  string last_ask_price = 2;
+
+  // 최근 매수호가
+  string last_bid_price = 3;
 }
 
 // ========== Request/Response Messages ==========

@@ -23,6 +23,7 @@ enum EtfPricing_Method {
   indexTrackingHedge, 
   futureBasis, 
   leverageFuture, 
+  pdfDecomposeHedge, 
   notSet
 }
 
@@ -33,12 +34,14 @@ class EtfPricing extends $pb.GeneratedMessage {
     IndexTrackingHedgePricing? indexTrackingHedge,
     FutureBasis? futureBasis,
     LeverageFuturePricing? leverageFuture,
+    PdfDecomposeHedgePricing? pdfDecomposeHedge,
   }) {
     final result = create();
     if (pdfNavHedge != null) result.pdfNavHedge = pdfNavHedge;
     if (indexTrackingHedge != null) result.indexTrackingHedge = indexTrackingHedge;
     if (futureBasis != null) result.futureBasis = futureBasis;
     if (leverageFuture != null) result.leverageFuture = leverageFuture;
+    if (pdfDecomposeHedge != null) result.pdfDecomposeHedge = pdfDecomposeHedge;
     return result;
   }
 
@@ -52,14 +55,16 @@ class EtfPricing extends $pb.GeneratedMessage {
     2 : EtfPricing_Method.indexTrackingHedge,
     3 : EtfPricing_Method.futureBasis,
     4 : EtfPricing_Method.leverageFuture,
+    5 : EtfPricing_Method.pdfDecomposeHedge,
     0 : EtfPricing_Method.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.common'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4])
+    ..oo(0, [1, 2, 3, 4, 5])
     ..aOM<PdfNavHedgePricing>(1, _omitFieldNames ? '' : 'pdfNavHedge', subBuilder: PdfNavHedgePricing.create)
     ..aOM<IndexTrackingHedgePricing>(2, _omitFieldNames ? '' : 'indexTrackingHedge', subBuilder: IndexTrackingHedgePricing.create)
     ..aOM<FutureBasis>(3, _omitFieldNames ? '' : 'futureBasis', subBuilder: FutureBasis.create)
     ..aOM<LeverageFuturePricing>(4, _omitFieldNames ? '' : 'leverageFuture', subBuilder: LeverageFuturePricing.create)
+    ..aOM<PdfDecomposeHedgePricing>(5, _omitFieldNames ? '' : 'pdfDecomposeHedge', subBuilder: PdfDecomposeHedgePricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -129,6 +134,18 @@ class EtfPricing extends $pb.GeneratedMessage {
   void clearLeverageFuture() => $_clearField(4);
   @$pb.TagNumber(4)
   LeverageFuturePricing ensureLeverageFuture() => $_ensure(3);
+
+  /// PDF 재귀 분해 헷지 방식: leaf가 단일 종목으로 귀결되는 ETF에 대한 프라이싱
+  @$pb.TagNumber(5)
+  PdfDecomposeHedgePricing get pdfDecomposeHedge => $_getN(4);
+  @$pb.TagNumber(5)
+  set pdfDecomposeHedge(PdfDecomposeHedgePricing value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPdfDecomposeHedge() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPdfDecomposeHedge() => $_clearField(5);
+  @$pb.TagNumber(5)
+  PdfDecomposeHedgePricing ensurePdfDecomposeHedge() => $_ensure(4);
 }
 
 /// 분해 헷지 가격 산출 (추가 파라미터 없음)
@@ -298,6 +315,55 @@ class LeverageFuturePricing extends $pb.GeneratedMessage {
   $core.bool hasPrevFuture() => $_has(1);
   @$pb.TagNumber(2)
   void clearPrevFuture() => $_clearField(2);
+}
+
+/// PDF 재귀 분해 헷지 가격 산출
+/// nav = leaf_price × ratio_per_share
+class PdfDecomposeHedgePricing extends $pb.GeneratedMessage {
+  factory PdfDecomposeHedgePricing({
+    $core.double? ratioPerShare,
+  }) {
+    final result = create();
+    if (ratioPerShare != null) result.ratioPerShare = ratioPerShare;
+    return result;
+  }
+
+  PdfDecomposeHedgePricing._();
+
+  factory PdfDecomposeHedgePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PdfDecomposeHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PdfDecomposeHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.common'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'ratioPerShare', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PdfDecomposeHedgePricing clone() => PdfDecomposeHedgePricing()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PdfDecomposeHedgePricing copyWith(void Function(PdfDecomposeHedgePricing) updates) => super.copyWith((message) => updates(message as PdfDecomposeHedgePricing)) as PdfDecomposeHedgePricing;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PdfDecomposeHedgePricing create() => PdfDecomposeHedgePricing._();
+  @$core.override
+  PdfDecomposeHedgePricing createEmptyInstance() => create();
+  static $pb.PbList<PdfDecomposeHedgePricing> createRepeated() => $pb.PbList<PdfDecomposeHedgePricing>();
+  @$core.pragma('dart2js:noInline')
+  static PdfDecomposeHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PdfDecomposeHedgePricing>(create);
+  static PdfDecomposeHedgePricing? _defaultInstance;
+
+  /// ETF 1주당 leaf 종목 환산 수량 (ETF-side 부호)
+  @$pb.TagNumber(1)
+  $core.double get ratioPerShare => $_getN(0);
+  @$pb.TagNumber(1)
+  set ratioPerShare($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRatioPerShare() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRatioPerShare() => $_clearField(1);
 }
 
 
