@@ -589,14 +589,7 @@
     },
     "commonPdfDecomposeHedgePricing": {
       "type": "object",
-      "properties": {
-        "ratioPerShare": {
-          "type": "number",
-          "format": "double",
-          "title": "ETF 1주당 leaf 종목 환산 수량 (ETF-side 부호)"
-        }
-      },
-      "title": "PDF 재귀 분해 헷지 가격 산출\nnav = leaf_price × ratio_per_share"
+      "description": "PDF 재귀 분해 헷지 가격 산출 (파라미터 없음)\nNAV 계산은 Etf.decomposed_constituents를 PdfNavHedge와 동일 공식으로 적용."
     },
     "commonPdfNavHedgePricing": {
       "type": "object",

@@ -194,13 +194,13 @@ final $typed_data.Uint8List leverageFuturePricingDescriptor = $convert.base64Dec
 @$core.Deprecated('Use pdfDecomposeHedgePricingDescriptor instead')
 const PdfDecomposeHedgePricing$json = {
   '1': 'PdfDecomposeHedgePricing',
-  '2': [
-    {'1': 'ratio_per_share', '3': 1, '4': 1, '5': 1, '10': 'ratioPerShare'},
+  '9': [
+    {'1': 1, '2': 2},
   ],
+  '10': ['ratio_per_share'],
 };
 
 /// Descriptor for `PdfDecomposeHedgePricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pdfDecomposeHedgePricingDescriptor = $convert.base64Decode(
-    'ChhQZGZEZWNvbXBvc2VIZWRnZVByaWNpbmcSJgoPcmF0aW9fcGVyX3NoYXJlGAEgASgBUg1yYX'
-    'Rpb1BlclNoYXJl');
+    'ChhQZGZEZWNvbXBvc2VIZWRnZVByaWNpbmdKBAgBEAJSD3JhdGlvX3Blcl9zaGFyZQ==');
 

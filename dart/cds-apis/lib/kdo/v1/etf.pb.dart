@@ -46,6 +46,7 @@ class Etf extends $pb.GeneratedMessage {
     $fixnum.Int64? cashCreationAmount,
     $core.Iterable<$core.MapEntry<$core.String, Conversion>>? conversions,
     $core.String? unitDelta,
+    $core.Iterable<$core.MapEntry<$core.String, EtfPdfConstituent>>? decomposedConstituents,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -70,6 +71,7 @@ class Etf extends $pb.GeneratedMessage {
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
     if (conversions != null) result.conversions.addEntries(conversions);
     if (unitDelta != null) result.unitDelta = unitDelta;
+    if (decomposedConstituents != null) result.decomposedConstituents.addEntries(decomposedConstituents);
     return result;
   }
 
@@ -101,6 +103,7 @@ class Etf extends $pb.GeneratedMessage {
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
     ..m<$core.String, Conversion>(25, _omitFieldNames ? '' : 'conversions', entryClassName: 'Etf.ConversionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: Conversion.create, valueDefaultOrMaker: Conversion.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..aOS(26, _omitFieldNames ? '' : 'unitDelta')
+    ..m<$core.String, EtfPdfConstituent>(27, _omitFieldNames ? '' : 'decomposedConstituents', entryClassName: 'Etf.DecomposedConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..hasRequiredFields = false
   ;
 
@@ -321,6 +324,11 @@ class Etf extends $pb.GeneratedMessage {
   $core.bool hasUnitDelta() => $_has(21);
   @$pb.TagNumber(26)
   void clearUnitDelta() => $_clearField(26);
+
+  /// PdfDecomposeHedge pricing 전용: sub-ETF를 재귀 분해하여 leaf(Stock/Futures/Cash)로
+  /// netting된 pre-flattened PDF. 비어있을 수 있음 (PdfDecomposeHedge pricing 미설정 시).
+  @$pb.TagNumber(27)
+  $pb.PbMap<$core.String, EtfPdfConstituent> get decomposedConstituents => $_getMap(22);
 }
 
 enum EtfConstituent_ConstituentType {
@@ -902,7 +910,6 @@ enum UnderlyingAsset_Asset {
   fixedIncome, 
   commodity, 
   currency, 
-  decomposedStock, 
   notSet
 }
 
@@ -913,14 +920,12 @@ class UnderlyingAsset extends $pb.GeneratedMessage {
     UnderlyingFixedIncome? fixedIncome,
     UnderlyingCommodity? commodity,
     UnderlyingCurrency? currency,
-    UnderlyingDecomposedStock? decomposedStock,
   }) {
     final result = create();
     if (future != null) result.future = future;
     if (fixedIncome != null) result.fixedIncome = fixedIncome;
     if (commodity != null) result.commodity = commodity;
     if (currency != null) result.currency = currency;
-    if (decomposedStock != null) result.decomposedStock = decomposedStock;
     return result;
   }
 
@@ -934,16 +939,14 @@ class UnderlyingAsset extends $pb.GeneratedMessage {
     2 : UnderlyingAsset_Asset.fixedIncome,
     3 : UnderlyingAsset_Asset.commodity,
     4 : UnderlyingAsset_Asset.currency,
-    5 : UnderlyingAsset_Asset.decomposedStock,
     0 : UnderlyingAsset_Asset.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingAsset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5])
+    ..oo(0, [1, 2, 3, 4])
     ..aOM<UnderlyingFuture>(1, _omitFieldNames ? '' : 'future', subBuilder: UnderlyingFuture.create)
     ..aOM<UnderlyingFixedIncome>(2, _omitFieldNames ? '' : 'fixedIncome', subBuilder: UnderlyingFixedIncome.create)
     ..aOM<UnderlyingCommodity>(3, _omitFieldNames ? '' : 'commodity', subBuilder: UnderlyingCommodity.create)
     ..aOM<UnderlyingCurrency>(4, _omitFieldNames ? '' : 'currency', subBuilder: UnderlyingCurrency.create)
-    ..aOM<UnderlyingDecomposedStock>(5, _omitFieldNames ? '' : 'decomposedStock', subBuilder: UnderlyingDecomposedStock.create)
     ..hasRequiredFields = false
   ;
 
@@ -1014,18 +1017,6 @@ class UnderlyingAsset extends $pb.GeneratedMessage {
   void clearCurrency() => $_clearField(4);
   @$pb.TagNumber(4)
   UnderlyingCurrency ensureCurrency() => $_ensure(3);
-
-  /// PDF 재귀 분해 결과 단일 leaf 종목형
-  @$pb.TagNumber(5)
-  UnderlyingDecomposedStock get decomposedStock => $_getN(4);
-  @$pb.TagNumber(5)
-  set decomposedStock(UnderlyingDecomposedStock value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasDecomposedStock() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearDecomposedStock() => $_clearField(5);
-  @$pb.TagNumber(5)
-  UnderlyingDecomposedStock ensureDecomposedStock() => $_ensure(4);
 }
 
 /// 선물형 기초자산
@@ -1257,80 +1248,6 @@ class UnderlyingCurrency extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
-}
-
-/// PDF 재귀 분해 결과 단일 leaf 종목형 기초자산
-class UnderlyingDecomposedStock extends $pb.GeneratedMessage {
-  factory UnderlyingDecomposedStock({
-    $core.String? symbol,
-    $core.String? lastAskPrice,
-    $core.String? lastBidPrice,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (lastAskPrice != null) result.lastAskPrice = lastAskPrice;
-    if (lastBidPrice != null) result.lastBidPrice = lastBidPrice;
-    return result;
-  }
-
-  UnderlyingDecomposedStock._();
-
-  factory UnderlyingDecomposedStock.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory UnderlyingDecomposedStock.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UnderlyingDecomposedStock', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aOS(2, _omitFieldNames ? '' : 'lastAskPrice')
-    ..aOS(3, _omitFieldNames ? '' : 'lastBidPrice')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UnderlyingDecomposedStock clone() => UnderlyingDecomposedStock()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UnderlyingDecomposedStock copyWith(void Function(UnderlyingDecomposedStock) updates) => super.copyWith((message) => updates(message as UnderlyingDecomposedStock)) as UnderlyingDecomposedStock;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UnderlyingDecomposedStock create() => UnderlyingDecomposedStock._();
-  @$core.override
-  UnderlyingDecomposedStock createEmptyInstance() => create();
-  static $pb.PbList<UnderlyingDecomposedStock> createRepeated() => $pb.PbList<UnderlyingDecomposedStock>();
-  @$core.pragma('dart2js:noInline')
-  static UnderlyingDecomposedStock getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnderlyingDecomposedStock>(create);
-  static UnderlyingDecomposedStock? _defaultInstance;
-
-  /// 종목 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// 최근 매도호가
-  @$pb.TagNumber(2)
-  $core.String get lastAskPrice => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set lastAskPrice($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasLastAskPrice() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearLastAskPrice() => $_clearField(2);
-
-  /// 최근 매수호가
-  @$pb.TagNumber(3)
-  $core.String get lastBidPrice => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set lastBidPrice($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasLastBidPrice() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearLastBidPrice() => $_clearField(3);
 }
 
 /// GetEtf

@@ -55,14 +55,11 @@ pub struct LeverageFuturePricing {
     #[prost(double, tag="2")]
     pub prev_future: f64,
 }
-/// PDF 재귀 분해 헷지 가격 산출
-/// nav = leaf_price × ratio_per_share
+/// PDF 재귀 분해 헷지 가격 산출 (파라미터 없음)
+/// NAV 계산은 Etf.decomposed_constituents를 PdfNavHedge와 동일 공식으로 적용.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PdfDecomposeHedgePricing {
-    /// ETF 1주당 leaf 종목 환산 수량 (ETF-side 부호)
-    #[prost(double, tag="1")]
-    pub ratio_per_share: f64,
 }
 /// 주문 방향
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

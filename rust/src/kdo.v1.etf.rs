@@ -60,6 +60,10 @@ pub struct Etf {
     /// unit_delta (구성종목 기반 NAV 계산용)
     #[prost(string, tag="26")]
     pub unit_delta: ::prost::alloc::string::String,
+    /// PdfDecomposeHedge pricing 전용: sub-ETF를 재귀 분해하여 leaf(Stock/Futures/Cash)로
+    /// netting된 pre-flattened PDF. 비어있을 수 있음 (PdfDecomposeHedge pricing 미설정 시).
+    #[prost(map="string, message", tag="27")]
+    pub decomposed_constituents: ::std::collections::HashMap<::prost::alloc::string::String, EtfPdfConstituent>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -167,7 +171,7 @@ pub struct Conversion {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnderlyingAsset {
-    #[prost(oneof="underlying_asset::Asset", tags="1, 2, 3, 4, 5")]
+    #[prost(oneof="underlying_asset::Asset", tags="1, 2, 3, 4")]
     pub asset: ::core::option::Option<underlying_asset::Asset>,
 }
 /// Nested message and enum types in `UnderlyingAsset`.
@@ -187,9 +191,6 @@ pub mod underlying_asset {
         /// 통화형
         #[prost(message, tag="4")]
         Currency(super::UnderlyingCurrency),
-        /// PDF 재귀 분해 결과 단일 leaf 종목형
-        #[prost(message, tag="5")]
-        DecomposedStock(super::UnderlyingDecomposedStock),
     }
 }
 /// 선물형 기초자산
@@ -232,20 +233,6 @@ pub struct UnderlyingCurrency {
     /// 종목 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-}
-/// PDF 재귀 분해 결과 단일 leaf 종목형 기초자산
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UnderlyingDecomposedStock {
-    /// 종목 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 최근 매도호가
-    #[prost(string, tag="2")]
-    pub last_ask_price: ::prost::alloc::string::String,
-    /// 최근 매수호가
-    #[prost(string, tag="3")]
-    pub last_bid_price: ::prost::alloc::string::String,
 }
 // ========== Request/Response Messages ==========
 

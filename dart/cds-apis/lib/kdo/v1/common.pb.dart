@@ -317,16 +317,10 @@ class LeverageFuturePricing extends $pb.GeneratedMessage {
   void clearPrevFuture() => $_clearField(2);
 }
 
-/// PDF 재귀 분해 헷지 가격 산출
-/// nav = leaf_price × ratio_per_share
+/// PDF 재귀 분해 헷지 가격 산출 (파라미터 없음)
+/// NAV 계산은 Etf.decomposed_constituents를 PdfNavHedge와 동일 공식으로 적용.
 class PdfDecomposeHedgePricing extends $pb.GeneratedMessage {
-  factory PdfDecomposeHedgePricing({
-    $core.double? ratioPerShare,
-  }) {
-    final result = create();
-    if (ratioPerShare != null) result.ratioPerShare = ratioPerShare;
-    return result;
-  }
+  factory PdfDecomposeHedgePricing() => create();
 
   PdfDecomposeHedgePricing._();
 
@@ -334,7 +328,6 @@ class PdfDecomposeHedgePricing extends $pb.GeneratedMessage {
   factory PdfDecomposeHedgePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PdfDecomposeHedgePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.common'), createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'ratioPerShare', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -354,16 +347,6 @@ class PdfDecomposeHedgePricing extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static PdfDecomposeHedgePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PdfDecomposeHedgePricing>(create);
   static PdfDecomposeHedgePricing? _defaultInstance;
-
-  /// ETF 1주당 leaf 종목 환산 수량 (ETF-side 부호)
-  @$pb.TagNumber(1)
-  $core.double get ratioPerShare => $_getN(0);
-  @$pb.TagNumber(1)
-  set ratioPerShare($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasRatioPerShare() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRatioPerShare() => $_clearField(1);
 }
 
 
