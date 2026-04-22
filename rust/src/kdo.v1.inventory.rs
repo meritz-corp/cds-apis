@@ -356,6 +356,25 @@ pub struct ListLedgerInventoriesResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+/// UpdateInventory 용 주식 데이터 (업데이트 가능 필드만)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct UpdateStockData {
+    /// 가용수량 (일반가용)
+    #[prost(int64, tag="1")]
+    pub sellable: i64,
+    /// 차입가용수량
+    #[prost(int64, tag="2")]
+    pub borrow_sellable: i64,
+}
+/// UpdateInventory 용 파생 데이터 (업데이트 가능 필드만)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct UpdateDerivData {
+    /// 잔고수량 (양수: Long, 음수: Short)
+    #[prost(int64, tag="1")]
+    pub quantity: i64,
+}
 /// UpdateInventory 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -365,7 +384,7 @@ pub struct UpdateInventoryRequest {
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
     /// 업데이트할 재고 데이터
-    #[prost(oneof="update_inventory_request::Data", tags="10, 11")]
+    #[prost(oneof="update_inventory_request::Data", tags="10, 11, 12, 13")]
     pub data: ::core::option::Option<update_inventory_request::Data>,
 }
 /// Nested message and enum types in `UpdateInventoryRequest`.
@@ -374,12 +393,18 @@ pub mod update_inventory_request {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
-        /// 주식 재고 데이터
+        /// DEPRECATED: use stock_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환.
         #[prost(message, tag="10")]
         Stock(super::StockData),
-        /// 파생상품 재고 데이터
+        /// DEPRECATED: use deriv_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환.
         #[prost(message, tag="11")]
         Deriv(super::DerivData),
+        /// 주식 재고 업데이트 (가용/차입가용만)
+        #[prost(message, tag="12")]
+        StockPatch(super::UpdateStockData),
+        /// 파생 재고 업데이트 (잔고만)
+        #[prost(message, tag="13")]
+        DerivPatch(super::UpdateDerivData),
     }
 }
 /// SyncInventoryFromLedger 응답

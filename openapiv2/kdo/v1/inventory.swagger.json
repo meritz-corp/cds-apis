@@ -407,11 +407,19 @@
               "properties": {
                 "stock": {
                   "$ref": "#/definitions/inventoryStockData",
-                  "title": "주식 재고 데이터"
+                  "description": "DEPRECATED: use stock_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환."
                 },
                 "deriv": {
                   "$ref": "#/definitions/inventoryDerivData",
-                  "title": "파생상품 재고 데이터"
+                  "description": "DEPRECATED: use deriv_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환."
+                },
+                "stockPatch": {
+                  "$ref": "#/definitions/inventoryUpdateStockData",
+                  "title": "주식 재고 업데이트 (가용/차입가용만)"
+                },
+                "derivPatch": {
+                  "$ref": "#/definitions/inventoryUpdateDerivData",
+                  "title": "파생 재고 업데이트 (잔고만)"
                 }
               },
               "title": "UpdateInventory 요청"
@@ -1512,6 +1520,33 @@
     "inventoryTransferLoanResponse": {
       "type": "object",
       "title": "TransferLoan 응답"
+    },
+    "inventoryUpdateDerivData": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "잔고수량 (양수: Long, 음수: Short)"
+        }
+      },
+      "title": "UpdateInventory 용 파생 데이터 (업데이트 가능 필드만)"
+    },
+    "inventoryUpdateStockData": {
+      "type": "object",
+      "properties": {
+        "sellable": {
+          "type": "string",
+          "format": "int64",
+          "title": "가용수량 (일반가용)"
+        },
+        "borrowSellable": {
+          "type": "string",
+          "format": "int64",
+          "title": "차입가용수량"
+        }
+      },
+      "title": "UpdateInventory 용 주식 데이터 (업데이트 가능 필드만)"
     },
     "protobufAny": {
       "type": "object",

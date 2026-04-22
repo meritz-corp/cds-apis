@@ -395,14 +395,60 @@ final $typed_data.Uint8List listLedgerInventoriesResponseDescriptor = $convert.b
     'ADKAsyIS5rZG8udjEuaW52ZW50b3J5LkxlZGdlckludmVudG9yeVIRbGVkZ2VySW52ZW50b3Jp'
     'ZXMSJgoPbmV4dF9wYWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2Vu');
 
+@$core.Deprecated('Use updateStockDataDescriptor instead')
+const UpdateStockData$json = {
+  '1': 'UpdateStockData',
+  '2': [
+    {'1': 'sellable', '3': 1, '4': 1, '5': 3, '10': 'sellable'},
+    {'1': 'borrow_sellable', '3': 2, '4': 1, '5': 3, '10': 'borrowSellable'},
+  ],
+};
+
+/// Descriptor for `UpdateStockData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateStockDataDescriptor = $convert.base64Decode(
+    'Cg9VcGRhdGVTdG9ja0RhdGESGgoIc2VsbGFibGUYASABKANSCHNlbGxhYmxlEicKD2JvcnJvd1'
+    '9zZWxsYWJsZRgCIAEoA1IOYm9ycm93U2VsbGFibGU=');
+
+@$core.Deprecated('Use updateDerivDataDescriptor instead')
+const UpdateDerivData$json = {
+  '1': 'UpdateDerivData',
+  '2': [
+    {'1': 'quantity', '3': 1, '4': 1, '5': 3, '10': 'quantity'},
+  ],
+};
+
+/// Descriptor for `UpdateDerivData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateDerivDataDescriptor = $convert.base64Decode(
+    'Cg9VcGRhdGVEZXJpdkRhdGESGgoIcXVhbnRpdHkYASABKANSCHF1YW50aXR5');
+
 @$core.Deprecated('Use updateInventoryRequestDescriptor instead')
 const UpdateInventoryRequest$json = {
   '1': 'UpdateInventoryRequest',
   '2': [
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'stock', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.inventory.StockData', '9': 0, '10': 'stock'},
-    {'1': 'deriv', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.inventory.DerivData', '9': 0, '10': 'deriv'},
+    {
+      '1': 'stock',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.kdo.v1.inventory.StockData',
+      '8': {'3': true},
+      '9': 0,
+      '10': 'stock',
+    },
+    {
+      '1': 'deriv',
+      '3': 11,
+      '4': 1,
+      '5': 11,
+      '6': '.kdo.v1.inventory.DerivData',
+      '8': {'3': true},
+      '9': 0,
+      '10': 'deriv',
+    },
+    {'1': 'stock_patch', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.inventory.UpdateStockData', '9': 0, '10': 'stockPatch'},
+    {'1': 'deriv_patch', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.inventory.UpdateDerivData', '9': 0, '10': 'derivPatch'},
   ],
   '8': [
     {'1': 'data'},
@@ -412,9 +458,12 @@ const UpdateInventoryRequest$json = {
 /// Descriptor for `UpdateInventoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateInventoryRequestDescriptor = $convert.base64Decode(
     'ChZVcGRhdGVJbnZlbnRvcnlSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFGtkby5jZH'
-    'NhcGlzLnh5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3ltYm9sEjMKBXN0'
-    'b2NrGAogASgLMhsua2RvLnYxLmludmVudG9yeS5TdG9ja0RhdGFIAFIFc3RvY2sSMwoFZGVyaX'
-    'YYCyABKAsyGy5rZG8udjEuaW52ZW50b3J5LkRlcml2RGF0YUgAUgVkZXJpdkIGCgRkYXRh');
+    'NhcGlzLnh5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3ltYm9sEjcKBXN0'
+    'b2NrGAogASgLMhsua2RvLnYxLmludmVudG9yeS5TdG9ja0RhdGFCAhgBSABSBXN0b2NrEjcKBW'
+    'Rlcml2GAsgASgLMhsua2RvLnYxLmludmVudG9yeS5EZXJpdkRhdGFCAhgBSABSBWRlcml2EkQK'
+    'C3N0b2NrX3BhdGNoGAwgASgLMiEua2RvLnYxLmludmVudG9yeS5VcGRhdGVTdG9ja0RhdGFIAF'
+    'IKc3RvY2tQYXRjaBJECgtkZXJpdl9wYXRjaBgNIAEoCzIhLmtkby52MS5pbnZlbnRvcnkuVXBk'
+    'YXRlRGVyaXZEYXRhSABSCmRlcml2UGF0Y2hCBgoEZGF0YQ==');
 
 @$core.Deprecated('Use syncInventoryFromLedgerResponseDescriptor instead')
 const SyncInventoryFromLedgerResponse$json = {

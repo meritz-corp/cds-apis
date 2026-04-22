@@ -1553,9 +1553,120 @@ class ListLedgerInventoriesResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+/// UpdateInventory 용 주식 데이터 (업데이트 가능 필드만)
+class UpdateStockData extends $pb.GeneratedMessage {
+  factory UpdateStockData({
+    $fixnum.Int64? sellable,
+    $fixnum.Int64? borrowSellable,
+  }) {
+    final result = create();
+    if (sellable != null) result.sellable = sellable;
+    if (borrowSellable != null) result.borrowSellable = borrowSellable;
+    return result;
+  }
+
+  UpdateStockData._();
+
+  factory UpdateStockData.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateStockData.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateStockData', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'sellable')
+    ..aInt64(2, _omitFieldNames ? '' : 'borrowSellable')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateStockData clone() => UpdateStockData()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateStockData copyWith(void Function(UpdateStockData) updates) => super.copyWith((message) => updates(message as UpdateStockData)) as UpdateStockData;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateStockData create() => UpdateStockData._();
+  @$core.override
+  UpdateStockData createEmptyInstance() => create();
+  static $pb.PbList<UpdateStockData> createRepeated() => $pb.PbList<UpdateStockData>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateStockData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateStockData>(create);
+  static UpdateStockData? _defaultInstance;
+
+  /// 가용수량 (일반가용)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get sellable => $_getI64(0);
+  @$pb.TagNumber(1)
+  set sellable($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSellable() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSellable() => $_clearField(1);
+
+  /// 차입가용수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get borrowSellable => $_getI64(1);
+  @$pb.TagNumber(2)
+  set borrowSellable($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBorrowSellable() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBorrowSellable() => $_clearField(2);
+}
+
+/// UpdateInventory 용 파생 데이터 (업데이트 가능 필드만)
+class UpdateDerivData extends $pb.GeneratedMessage {
+  factory UpdateDerivData({
+    $fixnum.Int64? quantity,
+  }) {
+    final result = create();
+    if (quantity != null) result.quantity = quantity;
+    return result;
+  }
+
+  UpdateDerivData._();
+
+  factory UpdateDerivData.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateDerivData.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateDerivData', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'quantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateDerivData clone() => UpdateDerivData()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateDerivData copyWith(void Function(UpdateDerivData) updates) => super.copyWith((message) => updates(message as UpdateDerivData)) as UpdateDerivData;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateDerivData create() => UpdateDerivData._();
+  @$core.override
+  UpdateDerivData createEmptyInstance() => create();
+  static $pb.PbList<UpdateDerivData> createRepeated() => $pb.PbList<UpdateDerivData>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateDerivData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateDerivData>(create);
+  static UpdateDerivData? _defaultInstance;
+
+  /// 잔고수량 (양수: Long, 음수: Short)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get quantity => $_getI64(0);
+  @$pb.TagNumber(1)
+  set quantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasQuantity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearQuantity() => $_clearField(1);
+}
+
 enum UpdateInventoryRequest_Data {
   stock, 
   deriv, 
+  stockPatch, 
+  derivPatch, 
   notSet
 }
 
@@ -1564,14 +1675,20 @@ class UpdateInventoryRequest extends $pb.GeneratedMessage {
   factory UpdateInventoryRequest({
     $core.String? fund,
     $core.String? symbol,
+  @$core.Deprecated('This field is deprecated.')
     StockData? stock,
+  @$core.Deprecated('This field is deprecated.')
     DerivData? deriv,
+    UpdateStockData? stockPatch,
+    UpdateDerivData? derivPatch,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (symbol != null) result.symbol = symbol;
     if (stock != null) result.stock = stock;
     if (deriv != null) result.deriv = deriv;
+    if (stockPatch != null) result.stockPatch = stockPatch;
+    if (derivPatch != null) result.derivPatch = derivPatch;
     return result;
   }
 
@@ -1583,14 +1700,18 @@ class UpdateInventoryRequest extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, UpdateInventoryRequest_Data> _UpdateInventoryRequest_DataByTag = {
     10 : UpdateInventoryRequest_Data.stock,
     11 : UpdateInventoryRequest_Data.deriv,
+    12 : UpdateInventoryRequest_Data.stockPatch,
+    13 : UpdateInventoryRequest_Data.derivPatch,
     0 : UpdateInventoryRequest_Data.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateInventoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
-    ..oo(0, [10, 11])
+    ..oo(0, [10, 11, 12, 13])
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOM<StockData>(10, _omitFieldNames ? '' : 'stock', subBuilder: StockData.create)
     ..aOM<DerivData>(11, _omitFieldNames ? '' : 'deriv', subBuilder: DerivData.create)
+    ..aOM<UpdateStockData>(12, _omitFieldNames ? '' : 'stockPatch', subBuilder: UpdateStockData.create)
+    ..aOM<UpdateDerivData>(13, _omitFieldNames ? '' : 'derivPatch', subBuilder: UpdateDerivData.create)
     ..hasRequiredFields = false
   ;
 
@@ -1632,29 +1753,63 @@ class UpdateInventoryRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearSymbol() => $_clearField(2);
 
-  /// 주식 재고 데이터
+  /// DEPRECATED: use stock_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(10)
   StockData get stock => $_getN(2);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(10)
   set stock(StockData value) => $_setField(10, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(10)
   $core.bool hasStock() => $_has(2);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(10)
   void clearStock() => $_clearField(10);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(10)
   StockData ensureStock() => $_ensure(2);
 
-  /// 파생상품 재고 데이터
+  /// DEPRECATED: use deriv_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   DerivData get deriv => $_getN(3);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   set deriv(DerivData value) => $_setField(11, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   $core.bool hasDeriv() => $_has(3);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   void clearDeriv() => $_clearField(11);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   DerivData ensureDeriv() => $_ensure(3);
+
+  /// 주식 재고 업데이트 (가용/차입가용만)
+  @$pb.TagNumber(12)
+  UpdateStockData get stockPatch => $_getN(4);
+  @$pb.TagNumber(12)
+  set stockPatch(UpdateStockData value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasStockPatch() => $_has(4);
+  @$pb.TagNumber(12)
+  void clearStockPatch() => $_clearField(12);
+  @$pb.TagNumber(12)
+  UpdateStockData ensureStockPatch() => $_ensure(4);
+
+  /// 파생 재고 업데이트 (잔고만)
+  @$pb.TagNumber(13)
+  UpdateDerivData get derivPatch => $_getN(5);
+  @$pb.TagNumber(13)
+  set derivPatch(UpdateDerivData value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasDerivPatch() => $_has(5);
+  @$pb.TagNumber(13)
+  void clearDerivPatch() => $_clearField(13);
+  @$pb.TagNumber(13)
+  UpdateDerivData ensureDerivPatch() => $_ensure(5);
 }
 
 /// SyncInventoryFromLedger 응답

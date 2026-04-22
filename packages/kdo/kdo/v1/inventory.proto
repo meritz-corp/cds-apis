@@ -473,6 +473,20 @@ message ListLedgerInventoriesResponse {
   string next_page_token = 2;
 }
 
+// UpdateInventory 용 주식 데이터 (업데이트 가능 필드만)
+message UpdateStockData {
+  // 가용수량 (일반가용)
+  int64 sellable = 1;
+  // 차입가용수량
+  int64 borrow_sellable = 2;
+}
+
+// UpdateInventory 용 파생 데이터 (업데이트 가능 필드만)
+message UpdateDerivData {
+  // 잔고수량 (양수: Long, 음수: Short)
+  int64 quantity = 1;
+}
+
 // UpdateInventory 요청
 message UpdateInventoryRequest {
   string fund = 1 [
@@ -488,10 +502,14 @@ message UpdateInventoryRequest {
 
   // 업데이트할 재고 데이터
   oneof data {
-    // 주식 재고 데이터
-    StockData stock = 10;
-    // 파생상품 재고 데이터
-    DerivData deriv = 11;
+    // DEPRECATED: use stock_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환.
+    StockData stock = 10 [deprecated = true];
+    // DEPRECATED: use deriv_patch instead. 서버는 이 variant 사용 시 InvalidArgument 반환.
+    DerivData deriv = 11 [deprecated = true];
+    // 주식 재고 업데이트 (가용/차입가용만)
+    UpdateStockData stock_patch = 12;
+    // 파생 재고 업데이트 (잔고만)
+    UpdateDerivData deriv_patch = 13;
   }
 }
 
