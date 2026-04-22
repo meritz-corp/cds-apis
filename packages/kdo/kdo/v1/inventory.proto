@@ -475,10 +475,17 @@ message ListLedgerInventoriesResponse {
 
 // UpdateInventory 용 주식 데이터 (업데이트 가능 필드만)
 message UpdateStockData {
-  // 가용수량 (일반가용)
-  int64 sellable = 1;
-  // 차입가용수량
-  int64 borrow_sellable = 2;
+  reserved 1, 2;
+  reserved "sellable", "borrow_sellable";
+
+  // 장부수량
+  int64 book_quantity = 3;
+  // 매도예약수량
+  int64 selling = 4;
+  // 차입수량
+  int64 borrow_quantity = 5;
+  // 차입매도예약수량
+  int64 borrow_selling = 6;
 }
 
 // UpdateInventory 용 파생 데이터 (업데이트 가능 필드만)

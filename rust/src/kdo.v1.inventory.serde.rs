@@ -5979,16 +5979,32 @@ impl serde::Serialize for UpdateStockData {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.UpdateStockData", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("sellable", ToString::to_string(&self.sellable).as_str())?;
+            struct_ser.serialize_field("book_quantity", ToString::to_string(&self.book_quantity).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("borrow_sellable", ToString::to_string(&self.borrow_sellable).as_str())?;
+            struct_ser.serialize_field("selling", ToString::to_string(&self.selling).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("borrow_quantity", ToString::to_string(&self.borrow_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("borrow_selling", ToString::to_string(&self.borrow_selling).as_str())?;
         }
         struct_ser.end()
     }
@@ -6000,15 +6016,21 @@ impl<'de> serde::Deserialize<'de> for UpdateStockData {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "sellable",
-            "borrow_sellable",
-            "borrowSellable",
+            "book_quantity",
+            "bookQuantity",
+            "selling",
+            "borrow_quantity",
+            "borrowQuantity",
+            "borrow_selling",
+            "borrowSelling",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Sellable,
-            BorrowSellable,
+            BookQuantity,
+            Selling,
+            BorrowQuantity,
+            BorrowSelling,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6031,8 +6053,10 @@ impl<'de> serde::Deserialize<'de> for UpdateStockData {
                         E: serde::de::Error,
                     {
                         match value {
-                            "sellable" => Ok(GeneratedField::Sellable),
-                            "borrowSellable" | "borrow_sellable" => Ok(GeneratedField::BorrowSellable),
+                            "bookQuantity" | "book_quantity" => Ok(GeneratedField::BookQuantity),
+                            "selling" => Ok(GeneratedField::Selling),
+                            "borrowQuantity" | "borrow_quantity" => Ok(GeneratedField::BorrowQuantity),
+                            "borrowSelling" | "borrow_selling" => Ok(GeneratedField::BorrowSelling),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6052,23 +6076,41 @@ impl<'de> serde::Deserialize<'de> for UpdateStockData {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut sellable__ = None;
-                let mut borrow_sellable__ = None;
+                let mut book_quantity__ = None;
+                let mut selling__ = None;
+                let mut borrow_quantity__ = None;
+                let mut borrow_selling__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Sellable => {
-                            if sellable__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sellable"));
+                        GeneratedField::BookQuantity => {
+                            if book_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bookQuantity"));
                             }
-                            sellable__ = 
+                            book_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::BorrowSellable => {
-                            if borrow_sellable__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("borrowSellable"));
+                        GeneratedField::Selling => {
+                            if selling__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("selling"));
                             }
-                            borrow_sellable__ = 
+                            selling__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BorrowQuantity => {
+                            if borrow_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("borrowQuantity"));
+                            }
+                            borrow_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BorrowSelling => {
+                            if borrow_selling__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("borrowSelling"));
+                            }
+                            borrow_selling__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -6078,8 +6120,10 @@ impl<'de> serde::Deserialize<'de> for UpdateStockData {
                     }
                 }
                 Ok(UpdateStockData {
-                    sellable: sellable__.unwrap_or_default(),
-                    borrow_sellable: borrow_sellable__.unwrap_or_default(),
+                    book_quantity: book_quantity__.unwrap_or_default(),
+                    selling: selling__.unwrap_or_default(),
+                    borrow_quantity: borrow_quantity__.unwrap_or_default(),
+                    borrow_selling: borrow_selling__.unwrap_or_default(),
                 })
             }
         }

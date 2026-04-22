@@ -399,15 +399,24 @@ final $typed_data.Uint8List listLedgerInventoriesResponseDescriptor = $convert.b
 const UpdateStockData$json = {
   '1': 'UpdateStockData',
   '2': [
-    {'1': 'sellable', '3': 1, '4': 1, '5': 3, '10': 'sellable'},
-    {'1': 'borrow_sellable', '3': 2, '4': 1, '5': 3, '10': 'borrowSellable'},
+    {'1': 'book_quantity', '3': 3, '4': 1, '5': 3, '10': 'bookQuantity'},
+    {'1': 'selling', '3': 4, '4': 1, '5': 3, '10': 'selling'},
+    {'1': 'borrow_quantity', '3': 5, '4': 1, '5': 3, '10': 'borrowQuantity'},
+    {'1': 'borrow_selling', '3': 6, '4': 1, '5': 3, '10': 'borrowSelling'},
   ],
+  '9': [
+    {'1': 1, '2': 2},
+    {'1': 2, '2': 3},
+  ],
+  '10': ['sellable', 'borrow_sellable'],
 };
 
 /// Descriptor for `UpdateStockData`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateStockDataDescriptor = $convert.base64Decode(
-    'Cg9VcGRhdGVTdG9ja0RhdGESGgoIc2VsbGFibGUYASABKANSCHNlbGxhYmxlEicKD2JvcnJvd1'
-    '9zZWxsYWJsZRgCIAEoA1IOYm9ycm93U2VsbGFibGU=');
+    'Cg9VcGRhdGVTdG9ja0RhdGESIwoNYm9va19xdWFudGl0eRgDIAEoA1IMYm9va1F1YW50aXR5Eh'
+    'gKB3NlbGxpbmcYBCABKANSB3NlbGxpbmcSJwoPYm9ycm93X3F1YW50aXR5GAUgASgDUg5ib3Jy'
+    'b3dRdWFudGl0eRIlCg5ib3Jyb3dfc2VsbGluZxgGIAEoA1INYm9ycm93U2VsbGluZ0oECAEQAk'
+    'oECAIQA1IIc2VsbGFibGVSD2JvcnJvd19zZWxsYWJsZQ==');
 
 @$core.Deprecated('Use updateDerivDataDescriptor instead')
 const UpdateDerivData$json = {

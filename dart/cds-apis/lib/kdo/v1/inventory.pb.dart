@@ -1556,12 +1556,16 @@ class ListLedgerInventoriesResponse extends $pb.GeneratedMessage {
 /// UpdateInventory 용 주식 데이터 (업데이트 가능 필드만)
 class UpdateStockData extends $pb.GeneratedMessage {
   factory UpdateStockData({
-    $fixnum.Int64? sellable,
-    $fixnum.Int64? borrowSellable,
+    $fixnum.Int64? bookQuantity,
+    $fixnum.Int64? selling,
+    $fixnum.Int64? borrowQuantity,
+    $fixnum.Int64? borrowSelling,
   }) {
     final result = create();
-    if (sellable != null) result.sellable = sellable;
-    if (borrowSellable != null) result.borrowSellable = borrowSellable;
+    if (bookQuantity != null) result.bookQuantity = bookQuantity;
+    if (selling != null) result.selling = selling;
+    if (borrowQuantity != null) result.borrowQuantity = borrowQuantity;
+    if (borrowSelling != null) result.borrowSelling = borrowSelling;
     return result;
   }
 
@@ -1571,8 +1575,10 @@ class UpdateStockData extends $pb.GeneratedMessage {
   factory UpdateStockData.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateStockData', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'sellable')
-    ..aInt64(2, _omitFieldNames ? '' : 'borrowSellable')
+    ..aInt64(3, _omitFieldNames ? '' : 'bookQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'selling')
+    ..aInt64(5, _omitFieldNames ? '' : 'borrowQuantity')
+    ..aInt64(6, _omitFieldNames ? '' : 'borrowSelling')
     ..hasRequiredFields = false
   ;
 
@@ -1593,25 +1599,45 @@ class UpdateStockData extends $pb.GeneratedMessage {
   static UpdateStockData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateStockData>(create);
   static UpdateStockData? _defaultInstance;
 
-  /// 가용수량 (일반가용)
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get sellable => $_getI64(0);
-  @$pb.TagNumber(1)
-  set sellable($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSellable() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSellable() => $_clearField(1);
+  /// 장부수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get bookQuantity => $_getI64(0);
+  @$pb.TagNumber(3)
+  set bookQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBookQuantity() => $_has(0);
+  @$pb.TagNumber(3)
+  void clearBookQuantity() => $_clearField(3);
 
-  /// 차입가용수량
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get borrowSellable => $_getI64(1);
-  @$pb.TagNumber(2)
-  set borrowSellable($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBorrowSellable() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBorrowSellable() => $_clearField(2);
+  /// 매도예약수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get selling => $_getI64(1);
+  @$pb.TagNumber(4)
+  set selling($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSelling() => $_has(1);
+  @$pb.TagNumber(4)
+  void clearSelling() => $_clearField(4);
+
+  /// 차입수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get borrowQuantity => $_getI64(2);
+  @$pb.TagNumber(5)
+  set borrowQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBorrowQuantity() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearBorrowQuantity() => $_clearField(5);
+
+  /// 차입매도예약수량
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get borrowSelling => $_getI64(3);
+  @$pb.TagNumber(6)
+  set borrowSelling($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBorrowSelling() => $_has(3);
+  @$pb.TagNumber(6)
+  void clearBorrowSelling() => $_clearField(6);
 }
 
 /// UpdateInventory 용 파생 데이터 (업데이트 가능 필드만)

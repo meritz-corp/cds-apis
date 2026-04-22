@@ -360,12 +360,18 @@ pub struct ListLedgerInventoriesResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UpdateStockData {
-    /// 가용수량 (일반가용)
-    #[prost(int64, tag="1")]
-    pub sellable: i64,
-    /// 차입가용수량
-    #[prost(int64, tag="2")]
-    pub borrow_sellable: i64,
+    /// 장부수량
+    #[prost(int64, tag="3")]
+    pub book_quantity: i64,
+    /// 매도예약수량
+    #[prost(int64, tag="4")]
+    pub selling: i64,
+    /// 차입수량
+    #[prost(int64, tag="5")]
+    pub borrow_quantity: i64,
+    /// 차입매도예약수량
+    #[prost(int64, tag="6")]
+    pub borrow_selling: i64,
 }
 /// UpdateInventory 용 파생 데이터 (업데이트 가능 필드만)
 #[allow(clippy::derive_partial_eq_without_eq)]

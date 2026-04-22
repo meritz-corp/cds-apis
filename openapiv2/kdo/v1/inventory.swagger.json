@@ -1535,15 +1535,25 @@
     "inventoryUpdateStockData": {
       "type": "object",
       "properties": {
-        "sellable": {
+        "bookQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "가용수량 (일반가용)"
+          "title": "장부수량"
         },
-        "borrowSellable": {
+        "selling": {
           "type": "string",
           "format": "int64",
-          "title": "차입가용수량"
+          "title": "매도예약수량"
+        },
+        "borrowQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "차입수량"
+        },
+        "borrowSelling": {
+          "type": "string",
+          "format": "int64",
+          "title": "차입매도예약수량"
         }
       },
       "title": "UpdateInventory 용 주식 데이터 (업데이트 가능 필드만)"
