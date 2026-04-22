@@ -15,16 +15,13 @@ pub struct TimeFrameLimit {
     #[prost(uint32, tag="2")]
     pub max_orders: u32,
 }
-/// OrderLimiter 설정
+/// OrderLimiter 설정 (전역 싱글톤)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OrderLimiterConfig {
     /// 활성화 여부
     #[prost(bool, optional, tag="1")]
     pub enabled: ::core::option::Option<bool>,
-    /// 일일 누적 주문 수량 한도 (i64)
-    #[prost(int64, optional, tag="2")]
-    pub daily_cumulative_limit: ::core::option::Option<i64>,
     /// 단일 주문 수량 한도 (i64)
     #[prost(int64, optional, tag="3")]
     pub single_order_limit: ::core::option::Option<i64>,
@@ -47,25 +44,13 @@ pub struct TimeFrameStatus {
     #[prost(uint32, tag="3")]
     pub max_orders: u32,
 }
-/// (fund_code, etf_symbol) 단위 OrderLimiter 현황
+/// 전역 OrderLimiter 현황
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OrderLimiterStatus {
-    /// 펀드 코드
-    #[prost(string, tag="1")]
-    pub fund_code: ::prost::alloc::string::String,
-    /// ETF 심볼
-    #[prost(string, tag="2")]
-    pub etf_symbol: ::prost::alloc::string::String,
     /// 활성화 여부
     #[prost(bool, tag="3")]
     pub enabled: bool,
-    /// 일일 누적 주문 수량
-    #[prost(int64, tag="4")]
-    pub daily_ordered_quantity: i64,
-    /// 일일 누적 주문 수량 한도
-    #[prost(int64, tag="5")]
-    pub daily_cumulative_limit: i64,
     /// 시간 프레임별 주문 건수 현황
     #[prost(message, repeated, tag="6")]
     pub time_frame_statuses: ::prost::alloc::vec::Vec<TimeFrameStatus>,
@@ -78,12 +63,6 @@ pub struct OrderLimiterStatus {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateOrderLimiterConfigRequest {
-    /// 펀드 코드 (필수)
-    #[prost(string, tag="1")]
-    pub fund_code: ::prost::alloc::string::String,
-    /// ETF 심볼 (선택 — 빈 문자열이면 해당 fund_code 전체 심볼에 적용)
-    #[prost(string, tag="2")]
-    pub etf_symbol: ::prost::alloc::string::String,
     /// 업데이트할 설정
     #[prost(message, optional, tag="3")]
     pub config: ::core::option::Option<OrderLimiterConfig>,
@@ -100,14 +79,8 @@ pub struct UpdateOrderLimiterConfigResponse {
 }
 /// StreamOrderLimiterStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StreamOrderLimiterStatusRequest {
-    /// 펀드 코드 필터 (선택 — 빈 문자열이면 전체)
-    #[prost(string, tag="1")]
-    pub fund_code: ::prost::alloc::string::String,
-    /// ETF 심볼 필터 (선택 — 빈 문자열이면 전체)
-    #[prost(string, tag="2")]
-    pub etf_symbol: ::prost::alloc::string::String,
 }
 include!("kdo.v1.order_limit.tonic.rs");
 include!("kdo.v1.order_limit.serde.rs");

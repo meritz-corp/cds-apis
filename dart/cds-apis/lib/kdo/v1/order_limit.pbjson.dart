@@ -33,25 +33,25 @@ const OrderLimiterConfig$json = {
   '1': 'OrderLimiterConfig',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '9': 0, '10': 'enabled', '17': true},
-    {'1': 'daily_cumulative_limit', '3': 2, '4': 1, '5': 3, '9': 1, '10': 'dailyCumulativeLimit', '17': true},
-    {'1': 'single_order_limit', '3': 3, '4': 1, '5': 3, '9': 2, '10': 'singleOrderLimit', '17': true},
+    {'1': 'single_order_limit', '3': 3, '4': 1, '5': 3, '9': 1, '10': 'singleOrderLimit', '17': true},
     {'1': 'time_frame_limits', '3': 4, '4': 3, '5': 11, '6': '.kdo.v1.order_limit.TimeFrameLimit', '10': 'timeFrameLimits'},
   ],
   '8': [
     {'1': '_enabled'},
-    {'1': '_daily_cumulative_limit'},
     {'1': '_single_order_limit'},
+  ],
+  '9': [
+    {'1': 2, '2': 3},
   ],
 };
 
 /// Descriptor for `OrderLimiterConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List orderLimiterConfigDescriptor = $convert.base64Decode(
-    'ChJPcmRlckxpbWl0ZXJDb25maWcSHQoHZW5hYmxlZBgBIAEoCEgAUgdlbmFibGVkiAEBEjkKFm'
-    'RhaWx5X2N1bXVsYXRpdmVfbGltaXQYAiABKANIAVIUZGFpbHlDdW11bGF0aXZlTGltaXSIAQES'
-    'MQoSc2luZ2xlX29yZGVyX2xpbWl0GAMgASgDSAJSEHNpbmdsZU9yZGVyTGltaXSIAQESTgoRdG'
-    'ltZV9mcmFtZV9saW1pdHMYBCADKAsyIi5rZG8udjEub3JkZXJfbGltaXQuVGltZUZyYW1lTGlt'
-    'aXRSD3RpbWVGcmFtZUxpbWl0c0IKCghfZW5hYmxlZEIZChdfZGFpbHlfY3VtdWxhdGl2ZV9saW'
-    '1pdEIVChNfc2luZ2xlX29yZGVyX2xpbWl0');
+    'ChJPcmRlckxpbWl0ZXJDb25maWcSHQoHZW5hYmxlZBgBIAEoCEgAUgdlbmFibGVkiAEBEjEKEn'
+    'NpbmdsZV9vcmRlcl9saW1pdBgDIAEoA0gBUhBzaW5nbGVPcmRlckxpbWl0iAEBEk4KEXRpbWVf'
+    'ZnJhbWVfbGltaXRzGAQgAygLMiIua2RvLnYxLm9yZGVyX2xpbWl0LlRpbWVGcmFtZUxpbWl0Ug'
+    '90aW1lRnJhbWVMaW1pdHNCCgoIX2VuYWJsZWRCFQoTX3NpbmdsZV9vcmRlcl9saW1pdEoECAIQ'
+    'Aw==');
 
 @$core.Deprecated('Use timeFrameStatusDescriptor instead')
 const TimeFrameStatus$json = {
@@ -73,40 +73,40 @@ final $typed_data.Uint8List timeFrameStatusDescriptor = $convert.base64Decode(
 const OrderLimiterStatus$json = {
   '1': 'OrderLimiterStatus',
   '2': [
-    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '10': 'fundCode'},
-    {'1': 'etf_symbol', '3': 2, '4': 1, '5': 9, '10': 'etfSymbol'},
     {'1': 'enabled', '3': 3, '4': 1, '5': 8, '10': 'enabled'},
-    {'1': 'daily_ordered_quantity', '3': 4, '4': 1, '5': 3, '10': 'dailyOrderedQuantity'},
-    {'1': 'daily_cumulative_limit', '3': 5, '4': 1, '5': 3, '10': 'dailyCumulativeLimit'},
     {'1': 'time_frame_statuses', '3': 6, '4': 3, '5': 11, '6': '.kdo.v1.order_limit.TimeFrameStatus', '10': 'timeFrameStatuses'},
+  ],
+  '9': [
+    {'1': 1, '2': 2},
+    {'1': 2, '2': 3},
+    {'1': 4, '2': 5},
+    {'1': 5, '2': 6},
   ],
 };
 
 /// Descriptor for `OrderLimiterStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List orderLimiterStatusDescriptor = $convert.base64Decode(
-    'ChJPcmRlckxpbWl0ZXJTdGF0dXMSGwoJZnVuZF9jb2RlGAEgASgJUghmdW5kQ29kZRIdCgpldG'
-    'Zfc3ltYm9sGAIgASgJUglldGZTeW1ib2wSGAoHZW5hYmxlZBgDIAEoCFIHZW5hYmxlZBI0ChZk'
-    'YWlseV9vcmRlcmVkX3F1YW50aXR5GAQgASgDUhRkYWlseU9yZGVyZWRRdWFudGl0eRI0ChZkYW'
-    'lseV9jdW11bGF0aXZlX2xpbWl0GAUgASgDUhRkYWlseUN1bXVsYXRpdmVMaW1pdBJTChN0aW1l'
-    'X2ZyYW1lX3N0YXR1c2VzGAYgAygLMiMua2RvLnYxLm9yZGVyX2xpbWl0LlRpbWVGcmFtZVN0YX'
-    'R1c1IRdGltZUZyYW1lU3RhdHVzZXM=');
+    'ChJPcmRlckxpbWl0ZXJTdGF0dXMSGAoHZW5hYmxlZBgDIAEoCFIHZW5hYmxlZBJTChN0aW1lX2'
+    'ZyYW1lX3N0YXR1c2VzGAYgAygLMiMua2RvLnYxLm9yZGVyX2xpbWl0LlRpbWVGcmFtZVN0YXR1'
+    'c1IRdGltZUZyYW1lU3RhdHVzZXNKBAgBEAJKBAgCEANKBAgEEAVKBAgFEAY=');
 
 @$core.Deprecated('Use updateOrderLimiterConfigRequestDescriptor instead')
 const UpdateOrderLimiterConfigRequest$json = {
   '1': 'UpdateOrderLimiterConfigRequest',
   '2': [
-    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-    {'1': 'etf_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'etfSymbol'},
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.order_limit.OrderLimiterConfig', '8': {}, '10': 'config'},
+  ],
+  '9': [
+    {'1': 1, '2': 2},
+    {'1': 2, '2': 3},
   ],
 };
 
 /// Descriptor for `UpdateOrderLimiterConfigRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateOrderLimiterConfigRequestDescriptor = $convert.base64Decode(
-    'Ch9VcGRhdGVPcmRlckxpbWl0ZXJDb25maWdSZXF1ZXN0EiEKCWZ1bmRfY29kZRgBIAEoCUIE4k'
-    'EBAlIIZnVuZENvZGUSIwoKZXRmX3N5bWJvbBgCIAEoCUIE4kEBAVIJZXRmU3ltYm9sEkQKBmNv'
-    'bmZpZxgDIAEoCzImLmtkby52MS5vcmRlcl9saW1pdC5PcmRlckxpbWl0ZXJDb25maWdCBOJBAQ'
-    'JSBmNvbmZpZw==');
+    'Ch9VcGRhdGVPcmRlckxpbWl0ZXJDb25maWdSZXF1ZXN0EkQKBmNvbmZpZxgDIAEoCzImLmtkby'
+    '52MS5vcmRlcl9saW1pdC5PcmRlckxpbWl0ZXJDb25maWdCBOJBAQJSBmNvbmZpZ0oECAEQAkoE'
+    'CAIQAw==');
 
 @$core.Deprecated('Use updateOrderLimiterConfigResponseDescriptor instead')
 const UpdateOrderLimiterConfigResponse$json = {
@@ -125,14 +125,13 @@ final $typed_data.Uint8List updateOrderLimiterConfigResponseDescriptor = $conver
 @$core.Deprecated('Use streamOrderLimiterStatusRequestDescriptor instead')
 const StreamOrderLimiterStatusRequest$json = {
   '1': 'StreamOrderLimiterStatusRequest',
-  '2': [
-    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-    {'1': 'etf_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'etfSymbol'},
+  '9': [
+    {'1': 1, '2': 2},
+    {'1': 2, '2': 3},
   ],
 };
 
 /// Descriptor for `StreamOrderLimiterStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamOrderLimiterStatusRequestDescriptor = $convert.base64Decode(
-    'Ch9TdHJlYW1PcmRlckxpbWl0ZXJTdGF0dXNSZXF1ZXN0EiEKCWZ1bmRfY29kZRgBIAEoCUIE4k'
-    'EBAVIIZnVuZENvZGUSIwoKZXRmX3N5bWJvbBgCIAEoCUIE4kEBAVIJZXRmU3ltYm9s');
+    'Ch9TdHJlYW1PcmRlckxpbWl0ZXJTdGF0dXNSZXF1ZXN0SgQIARACSgQIAhAD');
 

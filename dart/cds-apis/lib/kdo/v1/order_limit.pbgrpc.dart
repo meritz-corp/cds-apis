@@ -33,14 +33,12 @@ class OrderLimiterServiceClient extends $grpc.Client {
 
   OrderLimiterServiceClient(super.channel, {super.options, super.interceptors});
 
-  /// OrderLimiter 설정 업데이트
-  /// fund_code는 필수, etf_symbol은 선택 (빈 문자열이면 해당 fund_code 전체 심볼에 적용)
+  /// 전역 OrderLimiter 설정 업데이트
   $grpc.ResponseFuture<$0.UpdateOrderLimiterConfigResponse> updateOrderLimiterConfig($0.UpdateOrderLimiterConfigRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$updateOrderLimiterConfig, request, options: options);
   }
 
-  /// OrderLimiter 시간 프레임별 주문 건수 현황 스트리밍
-  /// 전체 active order limiters를 주기적으로 방출 (1초 tick)
+  /// 전역 OrderLimiter 시간 프레임 현황 스트리밍
   $grpc.ResponseStream<$0.OrderLimiterStatus> streamOrderLimiterStatus($0.StreamOrderLimiterStatusRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamOrderLimiterStatus, $async.Stream.fromIterable([request]), options: options);
   }

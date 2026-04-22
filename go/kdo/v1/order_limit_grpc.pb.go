@@ -22,11 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderLimiterServiceClient interface {
-	// OrderLimiter 설정 업데이트
-	// fund_code는 필수, etf_symbol은 선택 (빈 문자열이면 해당 fund_code 전체 심볼에 적용)
+	// 전역 OrderLimiter 설정 업데이트
 	UpdateOrderLimiterConfig(ctx context.Context, in *UpdateOrderLimiterConfigRequest, opts ...grpc.CallOption) (*UpdateOrderLimiterConfigResponse, error)
-	// OrderLimiter 시간 프레임별 주문 건수 현황 스트리밍
-	// 전체 active order limiters를 주기적으로 방출 (1초 tick)
+	// 전역 OrderLimiter 시간 프레임 현황 스트리밍
 	StreamOrderLimiterStatus(ctx context.Context, in *StreamOrderLimiterStatusRequest, opts ...grpc.CallOption) (OrderLimiterService_StreamOrderLimiterStatusClient, error)
 }
 
@@ -83,11 +81,9 @@ func (x *orderLimiterServiceStreamOrderLimiterStatusClient) Recv() (*OrderLimite
 // All implementations must embed UnimplementedOrderLimiterServiceServer
 // for forward compatibility
 type OrderLimiterServiceServer interface {
-	// OrderLimiter 설정 업데이트
-	// fund_code는 필수, etf_symbol은 선택 (빈 문자열이면 해당 fund_code 전체 심볼에 적용)
+	// 전역 OrderLimiter 설정 업데이트
 	UpdateOrderLimiterConfig(context.Context, *UpdateOrderLimiterConfigRequest) (*UpdateOrderLimiterConfigResponse, error)
-	// OrderLimiter 시간 프레임별 주문 건수 현황 스트리밍
-	// 전체 active order limiters를 주기적으로 방출 (1초 tick)
+	// 전역 OrderLimiter 시간 프레임 현황 스트리밍
 	StreamOrderLimiterStatus(*StreamOrderLimiterStatusRequest, OrderLimiterService_StreamOrderLimiterStatusServer) error
 	mustEmbedUnimplementedOrderLimiterServiceServer()
 }

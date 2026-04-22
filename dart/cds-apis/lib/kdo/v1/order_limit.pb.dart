@@ -78,17 +78,15 @@ class TimeFrameLimit extends $pb.GeneratedMessage {
   void clearMaxOrders() => $_clearField(2);
 }
 
-/// OrderLimiter 설정
+/// OrderLimiter 설정 (전역 싱글톤)
 class OrderLimiterConfig extends $pb.GeneratedMessage {
   factory OrderLimiterConfig({
     $core.bool? enabled,
-    $fixnum.Int64? dailyCumulativeLimit,
     $fixnum.Int64? singleOrderLimit,
     $core.Iterable<TimeFrameLimit>? timeFrameLimits,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
-    if (dailyCumulativeLimit != null) result.dailyCumulativeLimit = dailyCumulativeLimit;
     if (singleOrderLimit != null) result.singleOrderLimit = singleOrderLimit;
     if (timeFrameLimits != null) result.timeFrameLimits.addAll(timeFrameLimits);
     return result;
@@ -101,7 +99,6 @@ class OrderLimiterConfig extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderLimiterConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
-    ..aInt64(2, _omitFieldNames ? '' : 'dailyCumulativeLimit')
     ..aInt64(3, _omitFieldNames ? '' : 'singleOrderLimit')
     ..pc<TimeFrameLimit>(4, _omitFieldNames ? '' : 'timeFrameLimits', $pb.PbFieldType.PM, subBuilder: TimeFrameLimit.create)
     ..hasRequiredFields = false
@@ -134,30 +131,20 @@ class OrderLimiterConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEnabled() => $_clearField(1);
 
-  /// 일일 누적 주문 수량 한도 (i64)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get dailyCumulativeLimit => $_getI64(1);
-  @$pb.TagNumber(2)
-  set dailyCumulativeLimit($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasDailyCumulativeLimit() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDailyCumulativeLimit() => $_clearField(2);
-
   /// 단일 주문 수량 한도 (i64)
   @$pb.TagNumber(3)
-  $fixnum.Int64 get singleOrderLimit => $_getI64(2);
+  $fixnum.Int64 get singleOrderLimit => $_getI64(1);
   @$pb.TagNumber(3)
-  set singleOrderLimit($fixnum.Int64 value) => $_setInt64(2, value);
+  set singleOrderLimit($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasSingleOrderLimit() => $_has(2);
+  $core.bool hasSingleOrderLimit() => $_has(1);
   @$pb.TagNumber(3)
   void clearSingleOrderLimit() => $_clearField(3);
 
   /// 시간 프레임별 주문 건수 제한 목록
   /// 설정 시 기존 목록을 전체 교체
   @$pb.TagNumber(4)
-  $pb.PbList<TimeFrameLimit> get timeFrameLimits => $_getList(3);
+  $pb.PbList<TimeFrameLimit> get timeFrameLimits => $_getList(2);
 }
 
 /// 시간 프레임별 주문 건수 현황
@@ -234,22 +221,14 @@ class TimeFrameStatus extends $pb.GeneratedMessage {
   void clearMaxOrders() => $_clearField(3);
 }
 
-/// (fund_code, etf_symbol) 단위 OrderLimiter 현황
+/// 전역 OrderLimiter 현황
 class OrderLimiterStatus extends $pb.GeneratedMessage {
   factory OrderLimiterStatus({
-    $core.String? fundCode,
-    $core.String? etfSymbol,
     $core.bool? enabled,
-    $fixnum.Int64? dailyOrderedQuantity,
-    $fixnum.Int64? dailyCumulativeLimit,
     $core.Iterable<TimeFrameStatus>? timeFrameStatuses,
   }) {
     final result = create();
-    if (fundCode != null) result.fundCode = fundCode;
-    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     if (enabled != null) result.enabled = enabled;
-    if (dailyOrderedQuantity != null) result.dailyOrderedQuantity = dailyOrderedQuantity;
-    if (dailyCumulativeLimit != null) result.dailyCumulativeLimit = dailyCumulativeLimit;
     if (timeFrameStatuses != null) result.timeFrameStatuses.addAll(timeFrameStatuses);
     return result;
   }
@@ -260,11 +239,7 @@ class OrderLimiterStatus extends $pb.GeneratedMessage {
   factory OrderLimiterStatus.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderLimiterStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
-    ..aOS(2, _omitFieldNames ? '' : 'etfSymbol')
     ..aOB(3, _omitFieldNames ? '' : 'enabled')
-    ..aInt64(4, _omitFieldNames ? '' : 'dailyOrderedQuantity')
-    ..aInt64(5, _omitFieldNames ? '' : 'dailyCumulativeLimit')
     ..pc<TimeFrameStatus>(6, _omitFieldNames ? '' : 'timeFrameStatuses', $pb.PbFieldType.PM, subBuilder: TimeFrameStatus.create)
     ..hasRequiredFields = false
   ;
@@ -286,71 +261,27 @@ class OrderLimiterStatus extends $pb.GeneratedMessage {
   static OrderLimiterStatus getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OrderLimiterStatus>(create);
   static OrderLimiterStatus? _defaultInstance;
 
-  /// 펀드 코드
-  @$pb.TagNumber(1)
-  $core.String get fundCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set fundCode($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasFundCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFundCode() => $_clearField(1);
-
-  /// ETF 심볼
-  @$pb.TagNumber(2)
-  $core.String get etfSymbol => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set etfSymbol($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasEtfSymbol() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearEtfSymbol() => $_clearField(2);
-
   /// 활성화 여부
   @$pb.TagNumber(3)
-  $core.bool get enabled => $_getBF(2);
+  $core.bool get enabled => $_getBF(0);
   @$pb.TagNumber(3)
-  set enabled($core.bool value) => $_setBool(2, value);
+  set enabled($core.bool value) => $_setBool(0, value);
   @$pb.TagNumber(3)
-  $core.bool hasEnabled() => $_has(2);
+  $core.bool hasEnabled() => $_has(0);
   @$pb.TagNumber(3)
   void clearEnabled() => $_clearField(3);
 
-  /// 일일 누적 주문 수량
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get dailyOrderedQuantity => $_getI64(3);
-  @$pb.TagNumber(4)
-  set dailyOrderedQuantity($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasDailyOrderedQuantity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearDailyOrderedQuantity() => $_clearField(4);
-
-  /// 일일 누적 주문 수량 한도
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get dailyCumulativeLimit => $_getI64(4);
-  @$pb.TagNumber(5)
-  set dailyCumulativeLimit($fixnum.Int64 value) => $_setInt64(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasDailyCumulativeLimit() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearDailyCumulativeLimit() => $_clearField(5);
-
   /// 시간 프레임별 주문 건수 현황
   @$pb.TagNumber(6)
-  $pb.PbList<TimeFrameStatus> get timeFrameStatuses => $_getList(5);
+  $pb.PbList<TimeFrameStatus> get timeFrameStatuses => $_getList(1);
 }
 
 /// UpdateOrderLimiterConfig
 class UpdateOrderLimiterConfigRequest extends $pb.GeneratedMessage {
   factory UpdateOrderLimiterConfigRequest({
-    $core.String? fundCode,
-    $core.String? etfSymbol,
     OrderLimiterConfig? config,
   }) {
     final result = create();
-    if (fundCode != null) result.fundCode = fundCode;
-    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     if (config != null) result.config = config;
     return result;
   }
@@ -361,8 +292,6 @@ class UpdateOrderLimiterConfigRequest extends $pb.GeneratedMessage {
   factory UpdateOrderLimiterConfigRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateOrderLimiterConfigRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
-    ..aOS(2, _omitFieldNames ? '' : 'etfSymbol')
     ..aOM<OrderLimiterConfig>(3, _omitFieldNames ? '' : 'config', subBuilder: OrderLimiterConfig.create)
     ..hasRequiredFields = false
   ;
@@ -384,37 +313,17 @@ class UpdateOrderLimiterConfigRequest extends $pb.GeneratedMessage {
   static UpdateOrderLimiterConfigRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateOrderLimiterConfigRequest>(create);
   static UpdateOrderLimiterConfigRequest? _defaultInstance;
 
-  /// 펀드 코드 (필수)
-  @$pb.TagNumber(1)
-  $core.String get fundCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set fundCode($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasFundCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFundCode() => $_clearField(1);
-
-  /// ETF 심볼 (선택 — 빈 문자열이면 해당 fund_code 전체 심볼에 적용)
-  @$pb.TagNumber(2)
-  $core.String get etfSymbol => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set etfSymbol($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasEtfSymbol() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearEtfSymbol() => $_clearField(2);
-
   /// 업데이트할 설정
   @$pb.TagNumber(3)
-  OrderLimiterConfig get config => $_getN(2);
+  OrderLimiterConfig get config => $_getN(0);
   @$pb.TagNumber(3)
   set config(OrderLimiterConfig value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasConfig() => $_has(2);
+  $core.bool hasConfig() => $_has(0);
   @$pb.TagNumber(3)
   void clearConfig() => $_clearField(3);
   @$pb.TagNumber(3)
-  OrderLimiterConfig ensureConfig() => $_ensure(2);
+  OrderLimiterConfig ensureConfig() => $_ensure(0);
 }
 
 class UpdateOrderLimiterConfigResponse extends $pb.GeneratedMessage {
@@ -479,15 +388,7 @@ class UpdateOrderLimiterConfigResponse extends $pb.GeneratedMessage {
 
 /// StreamOrderLimiterStatus
 class StreamOrderLimiterStatusRequest extends $pb.GeneratedMessage {
-  factory StreamOrderLimiterStatusRequest({
-    $core.String? fundCode,
-    $core.String? etfSymbol,
-  }) {
-    final result = create();
-    if (fundCode != null) result.fundCode = fundCode;
-    if (etfSymbol != null) result.etfSymbol = etfSymbol;
-    return result;
-  }
+  factory StreamOrderLimiterStatusRequest() => create();
 
   StreamOrderLimiterStatusRequest._();
 
@@ -495,8 +396,6 @@ class StreamOrderLimiterStatusRequest extends $pb.GeneratedMessage {
   factory StreamOrderLimiterStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamOrderLimiterStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
-    ..aOS(2, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -516,26 +415,6 @@ class StreamOrderLimiterStatusRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static StreamOrderLimiterStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamOrderLimiterStatusRequest>(create);
   static StreamOrderLimiterStatusRequest? _defaultInstance;
-
-  /// 펀드 코드 필터 (선택 — 빈 문자열이면 전체)
-  @$pb.TagNumber(1)
-  $core.String get fundCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set fundCode($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasFundCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFundCode() => $_clearField(1);
-
-  /// ETF 심볼 필터 (선택 — 빈 문자열이면 전체)
-  @$pb.TagNumber(2)
-  $core.String get etfSymbol => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set etfSymbol($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasEtfSymbol() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearEtfSymbol() => $_clearField(2);
 }
 
 

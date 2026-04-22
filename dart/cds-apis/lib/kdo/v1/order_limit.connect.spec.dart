@@ -11,8 +11,7 @@ abstract final class OrderLimiterService {
   /// Fully-qualified name of the OrderLimiterService service.
   static const name = 'kdo.v1.order_limit.OrderLimiterService';
 
-  /// OrderLimiter 설정 업데이트
-  /// fund_code는 필수, etf_symbol은 선택 (빈 문자열이면 해당 fund_code 전체 심볼에 적용)
+  /// 전역 OrderLimiter 설정 업데이트
   static const updateOrderLimiterConfig = connect.Spec(
     '/$name/UpdateOrderLimiterConfig',
     connect.StreamType.unary,
@@ -20,8 +19,7 @@ abstract final class OrderLimiterService {
     kdov1order_limit.UpdateOrderLimiterConfigResponse.new,
   );
 
-  /// OrderLimiter 시간 프레임별 주문 건수 현황 스트리밍
-  /// 전체 active order limiters를 주기적으로 방출 (1초 tick)
+  /// 전역 OrderLimiter 시간 프레임 현황 스트리밍
   static const streamOrderLimiterStatus = connect.Spec(
     '/$name/StreamOrderLimiterStatus',
     connect.StreamType.server,
