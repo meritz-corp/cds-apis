@@ -459,6 +459,96 @@ pub mod inventory_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn allocate_session_inventory(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AllocateSessionInventoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AllocateSessionInventoryResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.inventory.InventoryService/AllocateSessionInventory",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.inventory.InventoryService",
+                        "AllocateSessionInventory",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn release_session_inventory(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ReleaseSessionInventoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ReleaseSessionInventoryResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.inventory.InventoryService/ReleaseSessionInventory",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.inventory.InventoryService",
+                        "ReleaseSessionInventory",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn get_session_inventory(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetSessionInventoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SessionInventory>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.inventory.InventoryService/GetSessionInventory",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.inventory.InventoryService",
+                        "GetSessionInventory",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -560,6 +650,27 @@ pub mod inventory_service_server {
             request: tonic::Request<super::RegisterLendingRequest>,
         ) -> std::result::Result<
             tonic::Response<super::RegisterLendingResponse>,
+            tonic::Status,
+        >;
+        async fn allocate_session_inventory(
+            &self,
+            request: tonic::Request<super::AllocateSessionInventoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AllocateSessionInventoryResponse>,
+            tonic::Status,
+        >;
+        async fn release_session_inventory(
+            &self,
+            request: tonic::Request<super::ReleaseSessionInventoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ReleaseSessionInventoryResponse>,
+            tonic::Status,
+        >;
+        async fn get_session_inventory(
+            &self,
+            request: tonic::Request<super::GetSessionInventoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SessionInventory>,
             tonic::Status,
         >;
     }
@@ -1246,6 +1357,157 @@ pub mod inventory_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = RegisterLendingSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.inventory.InventoryService/AllocateSessionInventory" => {
+                    #[allow(non_camel_case_types)]
+                    struct AllocateSessionInventorySvc<T: InventoryService>(pub Arc<T>);
+                    impl<
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::AllocateSessionInventoryRequest>
+                    for AllocateSessionInventorySvc<T> {
+                        type Response = super::AllocateSessionInventoryResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::AllocateSessionInventoryRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as InventoryService>::allocate_session_inventory(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = AllocateSessionInventorySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.inventory.InventoryService/ReleaseSessionInventory" => {
+                    #[allow(non_camel_case_types)]
+                    struct ReleaseSessionInventorySvc<T: InventoryService>(pub Arc<T>);
+                    impl<
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::ReleaseSessionInventoryRequest>
+                    for ReleaseSessionInventorySvc<T> {
+                        type Response = super::ReleaseSessionInventoryResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::ReleaseSessionInventoryRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as InventoryService>::release_session_inventory(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ReleaseSessionInventorySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.inventory.InventoryService/GetSessionInventory" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetSessionInventorySvc<T: InventoryService>(pub Arc<T>);
+                    impl<
+                        T: InventoryService,
+                    > tonic::server::UnaryService<super::GetSessionInventoryRequest>
+                    for GetSessionInventorySvc<T> {
+                        type Response = super::SessionInventory;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetSessionInventoryRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as InventoryService>::get_session_inventory(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetSessionInventorySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

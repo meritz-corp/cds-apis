@@ -114,4 +114,32 @@ abstract final class InventoryService {
     kdov1inventory.RegisterLendingRequest.new,
     kdov1inventory.RegisterLendingResponse.new,
   );
+
+  /// 세션 인벤토리 할당.
+  /// LP 시작(StartEtfLp) 전에 global inventory 에서 매도 한도를 선점한다.
+  /// balance_override 가 0 이면 DB 의 lp.session_inventory_balance 를 사용한다.
+  static const allocateSessionInventory = connect.Spec(
+    '/$name/AllocateSessionInventory',
+    connect.StreamType.unary,
+    kdov1inventory.AllocateSessionInventoryRequest.new,
+    kdov1inventory.AllocateSessionInventoryResponse.new,
+  );
+
+  /// 세션 인벤토리 해제.
+  /// 남은 balance 를 global inventory 에 반환한다.
+  /// selling > 0 (미체결 매도 잔량) 인 경우 FAILED_PRECONDITION 으로 거부된다.
+  static const releaseSessionInventory = connect.Spec(
+    '/$name/ReleaseSessionInventory',
+    connect.StreamType.unary,
+    kdov1inventory.ReleaseSessionInventoryRequest.new,
+    kdov1inventory.ReleaseSessionInventoryResponse.new,
+  );
+
+  /// 세션 인벤토리 현재 상태 조회.
+  static const getSessionInventory = connect.Spec(
+    '/$name/GetSessionInventory',
+    connect.StreamType.unary,
+    kdov1inventory.GetSessionInventoryRequest.new,
+    kdov1inventory.SessionInventory.new,
+  );
 }

@@ -98,6 +98,25 @@ class InventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$registerLending, request, options: options);
   }
 
+  /// 세션 인벤토리 할당.
+  /// LP 시작(StartEtfLp) 전에 global inventory 에서 매도 한도를 선점한다.
+  /// balance_override 가 0 이면 DB 의 lp.session_inventory_balance 를 사용한다.
+  $grpc.ResponseFuture<$0.AllocateSessionInventoryResponse> allocateSessionInventory($0.AllocateSessionInventoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$allocateSessionInventory, request, options: options);
+  }
+
+  /// 세션 인벤토리 해제.
+  /// 남은 balance 를 global inventory 에 반환한다.
+  /// selling > 0 (미체결 매도 잔량) 인 경우 FAILED_PRECONDITION 으로 거부된다.
+  $grpc.ResponseFuture<$0.ReleaseSessionInventoryResponse> releaseSessionInventory($0.ReleaseSessionInventoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$releaseSessionInventory, request, options: options);
+  }
+
+  /// 세션 인벤토리 현재 상태 조회.
+  $grpc.ResponseFuture<$0.SessionInventory> getSessionInventory($0.GetSessionInventoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getSessionInventory, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getInventory = $grpc.ClientMethod<$0.GetInventoryRequest, $0.Inventory>(
@@ -152,6 +171,18 @@ class InventoryServiceClient extends $grpc.Client {
       '/kdo.v1.inventory.InventoryService/RegisterLending',
       ($0.RegisterLendingRequest value) => value.writeToBuffer(),
       $0.RegisterLendingResponse.fromBuffer);
+  static final _$allocateSessionInventory = $grpc.ClientMethod<$0.AllocateSessionInventoryRequest, $0.AllocateSessionInventoryResponse>(
+      '/kdo.v1.inventory.InventoryService/AllocateSessionInventory',
+      ($0.AllocateSessionInventoryRequest value) => value.writeToBuffer(),
+      $0.AllocateSessionInventoryResponse.fromBuffer);
+  static final _$releaseSessionInventory = $grpc.ClientMethod<$0.ReleaseSessionInventoryRequest, $0.ReleaseSessionInventoryResponse>(
+      '/kdo.v1.inventory.InventoryService/ReleaseSessionInventory',
+      ($0.ReleaseSessionInventoryRequest value) => value.writeToBuffer(),
+      $0.ReleaseSessionInventoryResponse.fromBuffer);
+  static final _$getSessionInventory = $grpc.ClientMethod<$0.GetSessionInventoryRequest, $0.SessionInventory>(
+      '/kdo.v1.inventory.InventoryService/GetSessionInventory',
+      ($0.GetSessionInventoryRequest value) => value.writeToBuffer(),
+      $0.SessionInventory.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.inventory.InventoryService')
@@ -250,6 +281,27 @@ abstract class InventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.RegisterLendingRequest.fromBuffer(value),
         ($0.RegisterLendingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AllocateSessionInventoryRequest, $0.AllocateSessionInventoryResponse>(
+        'AllocateSessionInventory',
+        allocateSessionInventory_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.AllocateSessionInventoryRequest.fromBuffer(value),
+        ($0.AllocateSessionInventoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ReleaseSessionInventoryRequest, $0.ReleaseSessionInventoryResponse>(
+        'ReleaseSessionInventory',
+        releaseSessionInventory_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ReleaseSessionInventoryRequest.fromBuffer(value),
+        ($0.ReleaseSessionInventoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetSessionInventoryRequest, $0.SessionInventory>(
+        'GetSessionInventory',
+        getSessionInventory_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetSessionInventoryRequest.fromBuffer(value),
+        ($0.SessionInventory value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Inventory> getInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetInventoryRequest> $request) async {
@@ -329,5 +381,23 @@ abstract class InventoryServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.RegisterLendingResponse> registerLending($grpc.ServiceCall call, $0.RegisterLendingRequest request);
+
+  $async.Future<$0.AllocateSessionInventoryResponse> allocateSessionInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.AllocateSessionInventoryRequest> $request) async {
+    return allocateSessionInventory($call, await $request);
+  }
+
+  $async.Future<$0.AllocateSessionInventoryResponse> allocateSessionInventory($grpc.ServiceCall call, $0.AllocateSessionInventoryRequest request);
+
+  $async.Future<$0.ReleaseSessionInventoryResponse> releaseSessionInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.ReleaseSessionInventoryRequest> $request) async {
+    return releaseSessionInventory($call, await $request);
+  }
+
+  $async.Future<$0.ReleaseSessionInventoryResponse> releaseSessionInventory($grpc.ServiceCall call, $0.ReleaseSessionInventoryRequest request);
+
+  $async.Future<$0.SessionInventory> getSessionInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetSessionInventoryRequest> $request) async {
+    return getSessionInventory($call, await $request);
+  }
+
+  $async.Future<$0.SessionInventory> getSessionInventory($grpc.ServiceCall call, $0.GetSessionInventoryRequest request);
 
 }

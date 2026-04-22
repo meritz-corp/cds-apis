@@ -48,6 +48,16 @@ type InventoryServiceClient interface {
 	BatchProcessLoanDeliveries(ctx context.Context, in *BatchProcessLoanDeliveriesRequest, opts ...grpc.CallOption) (*BatchProcessLoanDeliveriesResponse, error)
 	// 대여 등록 (obfnp_loan_015a - 45221 화면)
 	RegisterLending(ctx context.Context, in *RegisterLendingRequest, opts ...grpc.CallOption) (*RegisterLendingResponse, error)
+	// 세션 인벤토리 할당.
+	// LP 시작(StartEtfLp) 전에 global inventory 에서 매도 한도를 선점한다.
+	// balance_override 가 0 이면 DB 의 lp.session_inventory_balance 를 사용한다.
+	AllocateSessionInventory(ctx context.Context, in *AllocateSessionInventoryRequest, opts ...grpc.CallOption) (*AllocateSessionInventoryResponse, error)
+	// 세션 인벤토리 해제.
+	// 남은 balance 를 global inventory 에 반환한다.
+	// selling > 0 (미체결 매도 잔량) 인 경우 FAILED_PRECONDITION 으로 거부된다.
+	ReleaseSessionInventory(ctx context.Context, in *ReleaseSessionInventoryRequest, opts ...grpc.CallOption) (*ReleaseSessionInventoryResponse, error)
+	// 세션 인벤토리 현재 상태 조회.
+	GetSessionInventory(ctx context.Context, in *GetSessionInventoryRequest, opts ...grpc.CallOption) (*SessionInventory, error)
 }
 
 type inventoryServiceClient struct {
@@ -221,6 +231,33 @@ func (c *inventoryServiceClient) RegisterLending(ctx context.Context, in *Regist
 	return out, nil
 }
 
+func (c *inventoryServiceClient) AllocateSessionInventory(ctx context.Context, in *AllocateSessionInventoryRequest, opts ...grpc.CallOption) (*AllocateSessionInventoryResponse, error) {
+	out := new(AllocateSessionInventoryResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/AllocateSessionInventory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) ReleaseSessionInventory(ctx context.Context, in *ReleaseSessionInventoryRequest, opts ...grpc.CallOption) (*ReleaseSessionInventoryResponse, error) {
+	out := new(ReleaseSessionInventoryResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/ReleaseSessionInventory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) GetSessionInventory(ctx context.Context, in *GetSessionInventoryRequest, opts ...grpc.CallOption) (*SessionInventory, error) {
+	out := new(SessionInventory)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/GetSessionInventory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InventoryServiceServer is the server API for InventoryService service.
 // All implementations must embed UnimplementedInventoryServiceServer
 // for forward compatibility
@@ -251,6 +288,16 @@ type InventoryServiceServer interface {
 	BatchProcessLoanDeliveries(context.Context, *BatchProcessLoanDeliveriesRequest) (*BatchProcessLoanDeliveriesResponse, error)
 	// 대여 등록 (obfnp_loan_015a - 45221 화면)
 	RegisterLending(context.Context, *RegisterLendingRequest) (*RegisterLendingResponse, error)
+	// 세션 인벤토리 할당.
+	// LP 시작(StartEtfLp) 전에 global inventory 에서 매도 한도를 선점한다.
+	// balance_override 가 0 이면 DB 의 lp.session_inventory_balance 를 사용한다.
+	AllocateSessionInventory(context.Context, *AllocateSessionInventoryRequest) (*AllocateSessionInventoryResponse, error)
+	// 세션 인벤토리 해제.
+	// 남은 balance 를 global inventory 에 반환한다.
+	// selling > 0 (미체결 매도 잔량) 인 경우 FAILED_PRECONDITION 으로 거부된다.
+	ReleaseSessionInventory(context.Context, *ReleaseSessionInventoryRequest) (*ReleaseSessionInventoryResponse, error)
+	// 세션 인벤토리 현재 상태 조회.
+	GetSessionInventory(context.Context, *GetSessionInventoryRequest) (*SessionInventory, error)
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -296,6 +343,15 @@ func (UnimplementedInventoryServiceServer) BatchProcessLoanDeliveries(context.Co
 }
 func (UnimplementedInventoryServiceServer) RegisterLending(context.Context, *RegisterLendingRequest) (*RegisterLendingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterLending not implemented")
+}
+func (UnimplementedInventoryServiceServer) AllocateSessionInventory(context.Context, *AllocateSessionInventoryRequest) (*AllocateSessionInventoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AllocateSessionInventory not implemented")
+}
+func (UnimplementedInventoryServiceServer) ReleaseSessionInventory(context.Context, *ReleaseSessionInventoryRequest) (*ReleaseSessionInventoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReleaseSessionInventory not implemented")
+}
+func (UnimplementedInventoryServiceServer) GetSessionInventory(context.Context, *GetSessionInventoryRequest) (*SessionInventory, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSessionInventory not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -550,6 +606,60 @@ func _InventoryService_RegisterLending_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_AllocateSessionInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AllocateSessionInventoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).AllocateSessionInventory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/AllocateSessionInventory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).AllocateSessionInventory(ctx, req.(*AllocateSessionInventoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InventoryService_ReleaseSessionInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReleaseSessionInventoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).ReleaseSessionInventory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/ReleaseSessionInventory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).ReleaseSessionInventory(ctx, req.(*ReleaseSessionInventoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InventoryService_GetSessionInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSessionInventoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).GetSessionInventory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/GetSessionInventory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).GetSessionInventory(ctx, req.(*GetSessionInventoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InventoryService_ServiceDesc is the grpc.ServiceDesc for InventoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -600,6 +710,18 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterLending",
 			Handler:    _InventoryService_RegisterLending_Handler,
+		},
+		{
+			MethodName: "AllocateSessionInventory",
+			Handler:    _InventoryService_AllocateSessionInventory_Handler,
+		},
+		{
+			MethodName: "ReleaseSessionInventory",
+			Handler:    _InventoryService_ReleaseSessionInventory_Handler,
+		},
+		{
+			MethodName: "GetSessionInventory",
+			Handler:    _InventoryService_GetSessionInventory_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -752,6 +752,96 @@ pub struct RegisterLendingResponse {
     #[prost(message, repeated, tag="1")]
     pub results: ::prost::alloc::vec::Vec<LendingResultItem>,
 }
+// ========== 세션 인벤토리 Request/Response Messages ==========
+
+/// 세션 인벤토리 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SessionInventory {
+    /// 종목 코드
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 세션 소유 서비스 이름 (예: "multi_service")
+    #[prost(string, tag="3")]
+    pub service_name: ::prost::alloc::string::String,
+    /// 세션 할당 잔고 (매도 체결 시 감소, 매수 체결 시 증가)
+    #[prost(int64, tag="4")]
+    pub balance: i64,
+    /// 미체결 매도 예약 수량
+    #[prost(int64, tag="5")]
+    pub selling: i64,
+    /// 매도 가용 수량 (= balance - selling)
+    #[prost(int64, tag="6")]
+    pub available: i64,
+}
+/// AllocateSessionInventory 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AllocateSessionInventoryRequest {
+    /// 펀드 리소스명 (예: "funds/KD0001")
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 종목 코드 (예: "KR7005930003")
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 세션 소유 서비스 이름.
+    /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+    #[prost(string, tag="3")]
+    pub service_name: ::prost::alloc::string::String,
+    /// 할당 잔고 수량.
+    /// 0 이면 서버가 DB 의 lp.session_inventory_balance 를 사용한다.
+    #[prost(int64, tag="4")]
+    pub balance_override: i64,
+}
+/// AllocateSessionInventory 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AllocateSessionInventoryResponse {
+    /// 할당된 세션 인벤토리 상태
+    #[prost(message, optional, tag="1")]
+    pub session: ::core::option::Option<SessionInventory>,
+}
+/// ReleaseSessionInventory 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReleaseSessionInventoryRequest {
+    /// 펀드 리소스명 (예: "funds/KD0001")
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 종목 코드 (예: "KR7005930003")
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 세션 소유 서비스 이름.
+    /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+    #[prost(string, tag="3")]
+    pub service_name: ::prost::alloc::string::String,
+}
+/// ReleaseSessionInventory 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReleaseSessionInventoryResponse {
+    /// 해제 직전 세션의 최종 상태 스냅샷
+    #[prost(message, optional, tag="1")]
+    pub released_session: ::core::option::Option<SessionInventory>,
+}
+/// GetSessionInventory 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSessionInventoryRequest {
+    /// 펀드 리소스명 (예: "funds/KD0001")
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 종목 코드 (예: "KR7005930003")
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 세션 소유 서비스 이름.
+    /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+    #[prost(string, tag="3")]
+    pub service_name: ::prost::alloc::string::String,
+}
 /// 상품포지션구분 (PROD_PSTN_CLS_CODE)
 /// 042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

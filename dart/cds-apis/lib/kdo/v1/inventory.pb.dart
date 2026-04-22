@@ -3447,6 +3447,458 @@ class RegisterLendingResponse extends $pb.GeneratedMessage {
   $pb.PbList<LendingResultItem> get results => $_getList(0);
 }
 
+/// 세션 인벤토리 상태
+class SessionInventory extends $pb.GeneratedMessage {
+  factory SessionInventory({
+    $core.String? symbol,
+    $core.String? fundCode,
+    $core.String? serviceName,
+    $fixnum.Int64? balance,
+    $fixnum.Int64? selling,
+    $fixnum.Int64? available,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (serviceName != null) result.serviceName = serviceName;
+    if (balance != null) result.balance = balance;
+    if (selling != null) result.selling = selling;
+    if (available != null) result.available = available;
+    return result;
+  }
+
+  SessionInventory._();
+
+  factory SessionInventory.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SessionInventory.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionInventory', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'serviceName')
+    ..aInt64(4, _omitFieldNames ? '' : 'balance')
+    ..aInt64(5, _omitFieldNames ? '' : 'selling')
+    ..aInt64(6, _omitFieldNames ? '' : 'available')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SessionInventory clone() => SessionInventory()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SessionInventory copyWith(void Function(SessionInventory) updates) => super.copyWith((message) => updates(message as SessionInventory)) as SessionInventory;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SessionInventory create() => SessionInventory._();
+  @$core.override
+  SessionInventory createEmptyInstance() => create();
+  static $pb.PbList<SessionInventory> createRepeated() => $pb.PbList<SessionInventory>();
+  @$core.pragma('dart2js:noInline')
+  static SessionInventory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SessionInventory>(create);
+  static SessionInventory? _defaultInstance;
+
+  /// 종목 코드
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 세션 소유 서비스 이름 (예: "multi_service")
+  @$pb.TagNumber(3)
+  $core.String get serviceName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set serviceName($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasServiceName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearServiceName() => $_clearField(3);
+
+  /// 세션 할당 잔고 (매도 체결 시 감소, 매수 체결 시 증가)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get balance => $_getI64(3);
+  @$pb.TagNumber(4)
+  set balance($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBalance() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBalance() => $_clearField(4);
+
+  /// 미체결 매도 예약 수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get selling => $_getI64(4);
+  @$pb.TagNumber(5)
+  set selling($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSelling() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSelling() => $_clearField(5);
+
+  /// 매도 가용 수량 (= balance - selling)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get available => $_getI64(5);
+  @$pb.TagNumber(6)
+  set available($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasAvailable() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAvailable() => $_clearField(6);
+}
+
+/// AllocateSessionInventory 요청
+class AllocateSessionInventoryRequest extends $pb.GeneratedMessage {
+  factory AllocateSessionInventoryRequest({
+    $core.String? fund,
+    $core.String? symbol,
+    $core.String? serviceName,
+    $fixnum.Int64? balanceOverride,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (symbol != null) result.symbol = symbol;
+    if (serviceName != null) result.serviceName = serviceName;
+    if (balanceOverride != null) result.balanceOverride = balanceOverride;
+    return result;
+  }
+
+  AllocateSessionInventoryRequest._();
+
+  factory AllocateSessionInventoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AllocateSessionInventoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AllocateSessionInventoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOS(3, _omitFieldNames ? '' : 'serviceName')
+    ..aInt64(4, _omitFieldNames ? '' : 'balanceOverride')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AllocateSessionInventoryRequest clone() => AllocateSessionInventoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AllocateSessionInventoryRequest copyWith(void Function(AllocateSessionInventoryRequest) updates) => super.copyWith((message) => updates(message as AllocateSessionInventoryRequest)) as AllocateSessionInventoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AllocateSessionInventoryRequest create() => AllocateSessionInventoryRequest._();
+  @$core.override
+  AllocateSessionInventoryRequest createEmptyInstance() => create();
+  static $pb.PbList<AllocateSessionInventoryRequest> createRepeated() => $pb.PbList<AllocateSessionInventoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static AllocateSessionInventoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AllocateSessionInventoryRequest>(create);
+  static AllocateSessionInventoryRequest? _defaultInstance;
+
+  /// 펀드 리소스명 (예: "funds/KD0001")
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 종목 코드 (예: "KR7005930003")
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 세션 소유 서비스 이름.
+  /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  @$pb.TagNumber(3)
+  $core.String get serviceName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set serviceName($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasServiceName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearServiceName() => $_clearField(3);
+
+  /// 할당 잔고 수량.
+  /// 0 이면 서버가 DB 의 lp.session_inventory_balance 를 사용한다.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get balanceOverride => $_getI64(3);
+  @$pb.TagNumber(4)
+  set balanceOverride($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBalanceOverride() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBalanceOverride() => $_clearField(4);
+}
+
+/// AllocateSessionInventory 응답
+class AllocateSessionInventoryResponse extends $pb.GeneratedMessage {
+  factory AllocateSessionInventoryResponse({
+    SessionInventory? session,
+  }) {
+    final result = create();
+    if (session != null) result.session = session;
+    return result;
+  }
+
+  AllocateSessionInventoryResponse._();
+
+  factory AllocateSessionInventoryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AllocateSessionInventoryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AllocateSessionInventoryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOM<SessionInventory>(1, _omitFieldNames ? '' : 'session', subBuilder: SessionInventory.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AllocateSessionInventoryResponse clone() => AllocateSessionInventoryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AllocateSessionInventoryResponse copyWith(void Function(AllocateSessionInventoryResponse) updates) => super.copyWith((message) => updates(message as AllocateSessionInventoryResponse)) as AllocateSessionInventoryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AllocateSessionInventoryResponse create() => AllocateSessionInventoryResponse._();
+  @$core.override
+  AllocateSessionInventoryResponse createEmptyInstance() => create();
+  static $pb.PbList<AllocateSessionInventoryResponse> createRepeated() => $pb.PbList<AllocateSessionInventoryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AllocateSessionInventoryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AllocateSessionInventoryResponse>(create);
+  static AllocateSessionInventoryResponse? _defaultInstance;
+
+  /// 할당된 세션 인벤토리 상태
+  @$pb.TagNumber(1)
+  SessionInventory get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(SessionInventory value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => $_clearField(1);
+  @$pb.TagNumber(1)
+  SessionInventory ensureSession() => $_ensure(0);
+}
+
+/// ReleaseSessionInventory 요청
+class ReleaseSessionInventoryRequest extends $pb.GeneratedMessage {
+  factory ReleaseSessionInventoryRequest({
+    $core.String? fund,
+    $core.String? symbol,
+    $core.String? serviceName,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (symbol != null) result.symbol = symbol;
+    if (serviceName != null) result.serviceName = serviceName;
+    return result;
+  }
+
+  ReleaseSessionInventoryRequest._();
+
+  factory ReleaseSessionInventoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ReleaseSessionInventoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReleaseSessionInventoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOS(3, _omitFieldNames ? '' : 'serviceName')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReleaseSessionInventoryRequest clone() => ReleaseSessionInventoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReleaseSessionInventoryRequest copyWith(void Function(ReleaseSessionInventoryRequest) updates) => super.copyWith((message) => updates(message as ReleaseSessionInventoryRequest)) as ReleaseSessionInventoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ReleaseSessionInventoryRequest create() => ReleaseSessionInventoryRequest._();
+  @$core.override
+  ReleaseSessionInventoryRequest createEmptyInstance() => create();
+  static $pb.PbList<ReleaseSessionInventoryRequest> createRepeated() => $pb.PbList<ReleaseSessionInventoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ReleaseSessionInventoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReleaseSessionInventoryRequest>(create);
+  static ReleaseSessionInventoryRequest? _defaultInstance;
+
+  /// 펀드 리소스명 (예: "funds/KD0001")
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 종목 코드 (예: "KR7005930003")
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 세션 소유 서비스 이름.
+  /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  @$pb.TagNumber(3)
+  $core.String get serviceName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set serviceName($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasServiceName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearServiceName() => $_clearField(3);
+}
+
+/// ReleaseSessionInventory 응답
+class ReleaseSessionInventoryResponse extends $pb.GeneratedMessage {
+  factory ReleaseSessionInventoryResponse({
+    SessionInventory? releasedSession,
+  }) {
+    final result = create();
+    if (releasedSession != null) result.releasedSession = releasedSession;
+    return result;
+  }
+
+  ReleaseSessionInventoryResponse._();
+
+  factory ReleaseSessionInventoryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ReleaseSessionInventoryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReleaseSessionInventoryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOM<SessionInventory>(1, _omitFieldNames ? '' : 'releasedSession', subBuilder: SessionInventory.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReleaseSessionInventoryResponse clone() => ReleaseSessionInventoryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReleaseSessionInventoryResponse copyWith(void Function(ReleaseSessionInventoryResponse) updates) => super.copyWith((message) => updates(message as ReleaseSessionInventoryResponse)) as ReleaseSessionInventoryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ReleaseSessionInventoryResponse create() => ReleaseSessionInventoryResponse._();
+  @$core.override
+  ReleaseSessionInventoryResponse createEmptyInstance() => create();
+  static $pb.PbList<ReleaseSessionInventoryResponse> createRepeated() => $pb.PbList<ReleaseSessionInventoryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ReleaseSessionInventoryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReleaseSessionInventoryResponse>(create);
+  static ReleaseSessionInventoryResponse? _defaultInstance;
+
+  /// 해제 직전 세션의 최종 상태 스냅샷
+  @$pb.TagNumber(1)
+  SessionInventory get releasedSession => $_getN(0);
+  @$pb.TagNumber(1)
+  set releasedSession(SessionInventory value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasReleasedSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReleasedSession() => $_clearField(1);
+  @$pb.TagNumber(1)
+  SessionInventory ensureReleasedSession() => $_ensure(0);
+}
+
+/// GetSessionInventory 요청
+class GetSessionInventoryRequest extends $pb.GeneratedMessage {
+  factory GetSessionInventoryRequest({
+    $core.String? fund,
+    $core.String? symbol,
+    $core.String? serviceName,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (symbol != null) result.symbol = symbol;
+    if (serviceName != null) result.serviceName = serviceName;
+    return result;
+  }
+
+  GetSessionInventoryRequest._();
+
+  factory GetSessionInventoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetSessionInventoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionInventoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOS(3, _omitFieldNames ? '' : 'serviceName')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetSessionInventoryRequest clone() => GetSessionInventoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetSessionInventoryRequest copyWith(void Function(GetSessionInventoryRequest) updates) => super.copyWith((message) => updates(message as GetSessionInventoryRequest)) as GetSessionInventoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetSessionInventoryRequest create() => GetSessionInventoryRequest._();
+  @$core.override
+  GetSessionInventoryRequest createEmptyInstance() => create();
+  static $pb.PbList<GetSessionInventoryRequest> createRepeated() => $pb.PbList<GetSessionInventoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetSessionInventoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSessionInventoryRequest>(create);
+  static GetSessionInventoryRequest? _defaultInstance;
+
+  /// 펀드 리소스명 (예: "funds/KD0001")
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 종목 코드 (예: "KR7005930003")
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 세션 소유 서비스 이름.
+  /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  @$pb.TagNumber(3)
+  $core.String get serviceName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set serviceName($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasServiceName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearServiceName() => $_clearField(3);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

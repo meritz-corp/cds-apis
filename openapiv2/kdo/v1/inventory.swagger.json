@@ -470,6 +470,54 @@
         ]
       }
     },
+    "/v1/inventories/{fund}/{symbol}:getSession": {
+      "get": {
+        "summary": "세션 인벤토리 현재 상태 조회.",
+        "operationId": "InventoryService_GetSessionInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventorySessionInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명 (예: \"funds/KD0001\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "symbol",
+            "description": "종목 코드 (예: \"KR7005930003\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "symbols/[^/]+"
+          },
+          {
+            "name": "serviceName",
+            "description": "세션 소유 서비스 이름.\n빈 문자열이면 서버가 \"multi_service\" 를 기본값으로 사용한다.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
     "/v1/inventories/{fund}/{symbol}:stream": {
       "get": {
         "summary": "단일 재고 현황 스트림",
@@ -511,6 +559,66 @@
             "required": true,
             "type": "string",
             "pattern": "symbols/[^/]+"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
+    "/v1/inventories/{fund}:allocateSession": {
+      "post": {
+        "summary": "세션 인벤토리 할당.\nLP 시작(StartEtfLp) 전에 global inventory 에서 매도 한도를 선점한다.\nbalance_override 가 0 이면 DB 의 lp.session_inventory_balance 를 사용한다.",
+        "operationId": "InventoryService_AllocateSessionInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryAllocateSessionInventoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명 (예: \"funds/KD0001\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "title": "종목 코드 (예: \"KR7005930003\")"
+                },
+                "serviceName": {
+                  "type": "string",
+                  "description": "세션 소유 서비스 이름.\n빈 문자열이면 서버가 \"multi_service\" 를 기본값으로 사용한다."
+                },
+                "balanceOverride": {
+                  "type": "string",
+                  "format": "int64",
+                  "description": "할당 잔고 수량.\n0 이면 서버가 DB 의 lp.session_inventory_balance 를 사용한다."
+                }
+              },
+              "title": "AllocateSessionInventory 요청",
+              "required": [
+                "symbol"
+              ]
+            }
           }
         ],
         "tags": [
@@ -568,6 +676,61 @@
               "required": [
                 "request",
                 "items"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
+    "/v1/inventories/{fund}:releaseSession": {
+      "post": {
+        "summary": "세션 인벤토리 해제.\n남은 balance 를 global inventory 에 반환한다.\nselling \u003e 0 (미체결 매도 잔량) 인 경우 FAILED_PRECONDITION 으로 거부된다.",
+        "operationId": "InventoryService_ReleaseSessionInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryReleaseSessionInventoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명 (예: \"funds/KD0001\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "title": "종목 코드 (예: \"KR7005930003\")"
+                },
+                "serviceName": {
+                  "type": "string",
+                  "description": "세션 소유 서비스 이름.\n빈 문자열이면 서버가 \"multi_service\" 를 기본값으로 사용한다."
+                }
+              },
+              "title": "ReleaseSessionInventory 요청",
+              "required": [
+                "symbol"
               ]
             }
           }
@@ -756,6 +919,16 @@
     }
   },
   "definitions": {
+    "inventoryAllocateSessionInventoryResponse": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/inventorySessionInventory",
+          "title": "할당된 세션 인벤토리 상태"
+        }
+      },
+      "title": "AllocateSessionInventory 응답"
+    },
     "inventoryBatchProcessLoanDeliveriesResponse": {
       "type": "object",
       "properties": {
@@ -1440,9 +1613,52 @@
       },
       "title": "RegisterLending 응답"
     },
+    "inventoryReleaseSessionInventoryResponse": {
+      "type": "object",
+      "properties": {
+        "releasedSession": {
+          "$ref": "#/definitions/inventorySessionInventory",
+          "title": "해제 직전 세션의 최종 상태 스냅샷"
+        }
+      },
+      "title": "ReleaseSessionInventory 응답"
+    },
     "inventoryRepayLoanResponse": {
       "type": "object",
       "title": "RepayLoan 응답"
+    },
+    "inventorySessionInventory": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "종목 코드"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "serviceName": {
+          "type": "string",
+          "title": "세션 소유 서비스 이름 (예: \"multi_service\")"
+        },
+        "balance": {
+          "type": "string",
+          "format": "int64",
+          "title": "세션 할당 잔고 (매도 체결 시 감소, 매수 체결 시 증가)"
+        },
+        "selling": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결 매도 예약 수량"
+        },
+        "available": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 가용 수량 (= balance - selling)"
+        }
+      },
+      "title": "세션 인벤토리 상태"
     },
     "inventoryStockData": {
       "type": "object",

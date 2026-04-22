@@ -120,6 +120,38 @@ service InventoryService {
     };
     option (google.api.method_signature) = "fund,request,items";
   }
+
+  // ========== 세션 인벤토리 (Session Inventory) ==========
+
+  // 세션 인벤토리 할당.
+  // LP 시작(StartEtfLp) 전에 global inventory 에서 매도 한도를 선점한다.
+  // balance_override 가 0 이면 DB 의 lp.session_inventory_balance 를 사용한다.
+  rpc AllocateSessionInventory(AllocateSessionInventoryRequest) returns (AllocateSessionInventoryResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{fund=funds/*}:allocateSession"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,symbol,service_name";
+  }
+
+  // 세션 인벤토리 해제.
+  // 남은 balance 를 global inventory 에 반환한다.
+  // selling > 0 (미체결 매도 잔량) 인 경우 FAILED_PRECONDITION 으로 거부된다.
+  rpc ReleaseSessionInventory(ReleaseSessionInventoryRequest) returns (ReleaseSessionInventoryResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{fund=funds/*}:releaseSession"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,symbol,service_name";
+  }
+
+  // 세션 인벤토리 현재 상태 조회.
+  rpc GetSessionInventory(GetSessionInventoryRequest) returns (SessionInventory) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}/{symbol=symbols/*}:getSession"
+    };
+    option (google.api.method_signature) = "fund,symbol,service_name";
+  }
 }
 
 // 상품포지션구분 (PROD_PSTN_CLS_CODE)
@@ -832,4 +864,97 @@ message RegisterLendingRequest {
 message RegisterLendingResponse {
   // 대여 등록 결과 목록 (OutBlock1)
   repeated LendingResultItem results = 1;
+}
+
+// ========== 세션 인벤토리 Request/Response Messages ==========
+
+// 세션 인벤토리 상태
+message SessionInventory {
+  // 종목 코드
+  string symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // 세션 소유 서비스 이름 (예: "multi_service")
+  string service_name = 3;
+
+  // 세션 할당 잔고 (매도 체결 시 감소, 매수 체결 시 증가)
+  int64 balance = 4;
+
+  // 미체결 매도 예약 수량
+  int64 selling = 5;
+
+  // 매도 가용 수량 (= balance - selling)
+  int64 available = 6;
+}
+
+// AllocateSessionInventory 요청
+message AllocateSessionInventoryRequest {
+  // 펀드 리소스명 (예: "funds/KD0001")
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 종목 코드 (예: "KR7005930003")
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 세션 소유 서비스 이름.
+  // 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  string service_name = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // 할당 잔고 수량.
+  // 0 이면 서버가 DB 의 lp.session_inventory_balance 를 사용한다.
+  int64 balance_override = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// AllocateSessionInventory 응답
+message AllocateSessionInventoryResponse {
+  // 할당된 세션 인벤토리 상태
+  SessionInventory session = 1;
+}
+
+// ReleaseSessionInventory 요청
+message ReleaseSessionInventoryRequest {
+  // 펀드 리소스명 (예: "funds/KD0001")
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 종목 코드 (예: "KR7005930003")
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 세션 소유 서비스 이름.
+  // 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  string service_name = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// ReleaseSessionInventory 응답
+message ReleaseSessionInventoryResponse {
+  // 해제 직전 세션의 최종 상태 스냅샷
+  SessionInventory released_session = 1;
+}
+
+// GetSessionInventory 요청
+message GetSessionInventoryRequest {
+  // 펀드 리소스명 (예: "funds/KD0001")
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 종목 코드 (예: "KR7005930003")
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 세션 소유 서비스 이름.
+  // 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  string service_name = 3 [(google.api.field_behavior) = OPTIONAL];
 }

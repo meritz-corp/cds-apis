@@ -793,3 +793,100 @@ final $typed_data.Uint8List registerLendingResponseDescriptor = $convert.base64D
     'ChdSZWdpc3RlckxlbmRpbmdSZXNwb25zZRI9CgdyZXN1bHRzGAEgAygLMiMua2RvLnYxLmludm'
     'VudG9yeS5MZW5kaW5nUmVzdWx0SXRlbVIHcmVzdWx0cw==');
 
+@$core.Deprecated('Use sessionInventoryDescriptor instead')
+const SessionInventory$json = {
+  '1': 'SessionInventory',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'service_name', '3': 3, '4': 1, '5': 9, '10': 'serviceName'},
+    {'1': 'balance', '3': 4, '4': 1, '5': 3, '10': 'balance'},
+    {'1': 'selling', '3': 5, '4': 1, '5': 3, '10': 'selling'},
+    {'1': 'available', '3': 6, '4': 1, '5': 3, '10': 'available'},
+  ],
+};
+
+/// Descriptor for `SessionInventory`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sessionInventoryDescriptor = $convert.base64Decode(
+    'ChBTZXNzaW9uSW52ZW50b3J5EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhsKCWZ1bmRfY29kZR'
+    'gCIAEoCVIIZnVuZENvZGUSIQoMc2VydmljZV9uYW1lGAMgASgJUgtzZXJ2aWNlTmFtZRIYCgdi'
+    'YWxhbmNlGAQgASgDUgdiYWxhbmNlEhgKB3NlbGxpbmcYBSABKANSB3NlbGxpbmcSHAoJYXZhaW'
+    'xhYmxlGAYgASgDUglhdmFpbGFibGU=');
+
+@$core.Deprecated('Use allocateSessionInventoryRequestDescriptor instead')
+const AllocateSessionInventoryRequest$json = {
+  '1': 'AllocateSessionInventoryRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
+    {'1': 'balance_override', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'balanceOverride'},
+  ],
+};
+
+/// Descriptor for `AllocateSessionInventoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List allocateSessionInventoryRequestDescriptor = $convert.base64Decode(
+    'Ch9BbGxvY2F0ZVNlc3Npb25JbnZlbnRvcnlSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QR'
+    'YKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3lt'
+    'Ym9sEicKDHNlcnZpY2VfbmFtZRgDIAEoCUIE4kEBAVILc2VydmljZU5hbWUSLwoQYmFsYW5jZV'
+    '9vdmVycmlkZRgEIAEoA0IE4kEBAVIPYmFsYW5jZU92ZXJyaWRl');
+
+@$core.Deprecated('Use allocateSessionInventoryResponseDescriptor instead')
+const AllocateSessionInventoryResponse$json = {
+  '1': 'AllocateSessionInventoryResponse',
+  '2': [
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.inventory.SessionInventory', '10': 'session'},
+  ],
+};
+
+/// Descriptor for `AllocateSessionInventoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List allocateSessionInventoryResponseDescriptor = $convert.base64Decode(
+    'CiBBbGxvY2F0ZVNlc3Npb25JbnZlbnRvcnlSZXNwb25zZRI8CgdzZXNzaW9uGAEgASgLMiIua2'
+    'RvLnYxLmludmVudG9yeS5TZXNzaW9uSW52ZW50b3J5UgdzZXNzaW9u');
+
+@$core.Deprecated('Use releaseSessionInventoryRequestDescriptor instead')
+const ReleaseSessionInventoryRequest$json = {
+  '1': 'ReleaseSessionInventoryRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
+  ],
+};
+
+/// Descriptor for `ReleaseSessionInventoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List releaseSessionInventoryRequestDescriptor = $convert.base64Decode(
+    'Ch5SZWxlYXNlU2Vzc2lvbkludmVudG9yeVJlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAvpBFg'
+    'oUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSHAoGc3ltYm9sGAIgASgJQgTiQQECUgZzeW1i'
+    'b2wSJwoMc2VydmljZV9uYW1lGAMgASgJQgTiQQEBUgtzZXJ2aWNlTmFtZQ==');
+
+@$core.Deprecated('Use releaseSessionInventoryResponseDescriptor instead')
+const ReleaseSessionInventoryResponse$json = {
+  '1': 'ReleaseSessionInventoryResponse',
+  '2': [
+    {'1': 'released_session', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.inventory.SessionInventory', '10': 'releasedSession'},
+  ],
+};
+
+/// Descriptor for `ReleaseSessionInventoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List releaseSessionInventoryResponseDescriptor = $convert.base64Decode(
+    'Ch9SZWxlYXNlU2Vzc2lvbkludmVudG9yeVJlc3BvbnNlEk0KEHJlbGVhc2VkX3Nlc3Npb24YAS'
+    'ABKAsyIi5rZG8udjEuaW52ZW50b3J5LlNlc3Npb25JbnZlbnRvcnlSD3JlbGVhc2VkU2Vzc2lv'
+    'bg==');
+
+@$core.Deprecated('Use getSessionInventoryRequestDescriptor instead')
+const GetSessionInventoryRequest$json = {
+  '1': 'GetSessionInventoryRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
+  ],
+};
+
+/// Descriptor for `GetSessionInventoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getSessionInventoryRequestDescriptor = $convert.base64Decode(
+    'ChpHZXRTZXNzaW9uSW52ZW50b3J5UmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWChRrZG'
+    '8uY2RzYXBpcy54eXovRnVuZFIEZnVuZBIcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIn'
+    'CgxzZXJ2aWNlX25hbWUYAyABKAlCBOJBAQFSC3NlcnZpY2VOYW1l');
+
