@@ -3899,6 +3899,158 @@ class GetSessionInventoryRequest extends $pb.GeneratedMessage {
   void clearServiceName() => $_clearField(3);
 }
 
+/// ResizeSessionInventory 요청
+class ResizeSessionInventoryRequest extends $pb.GeneratedMessage {
+  factory ResizeSessionInventoryRequest({
+    $core.String? fund,
+    $core.String? symbol,
+    $core.String? serviceName,
+    $fixnum.Int64? newBalance,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (symbol != null) result.symbol = symbol;
+    if (serviceName != null) result.serviceName = serviceName;
+    if (newBalance != null) result.newBalance = newBalance;
+    return result;
+  }
+
+  ResizeSessionInventoryRequest._();
+
+  factory ResizeSessionInventoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ResizeSessionInventoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResizeSessionInventoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOS(3, _omitFieldNames ? '' : 'serviceName')
+    ..aInt64(4, _omitFieldNames ? '' : 'newBalance')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResizeSessionInventoryRequest clone() => ResizeSessionInventoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResizeSessionInventoryRequest copyWith(void Function(ResizeSessionInventoryRequest) updates) => super.copyWith((message) => updates(message as ResizeSessionInventoryRequest)) as ResizeSessionInventoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ResizeSessionInventoryRequest create() => ResizeSessionInventoryRequest._();
+  @$core.override
+  ResizeSessionInventoryRequest createEmptyInstance() => create();
+  static $pb.PbList<ResizeSessionInventoryRequest> createRepeated() => $pb.PbList<ResizeSessionInventoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ResizeSessionInventoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResizeSessionInventoryRequest>(create);
+  static ResizeSessionInventoryRequest? _defaultInstance;
+
+  /// 펀드 리소스명 (예: "funds/KD0001")
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 종목 코드 (예: "KR7005930003")
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 세션 소유 서비스 이름.
+  /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  @$pb.TagNumber(3)
+  $core.String get serviceName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set serviceName($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasServiceName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearServiceName() => $_clearField(3);
+
+  /// 새 balance 수량 (양수여야 함).
+  /// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get newBalance => $_getI64(3);
+  @$pb.TagNumber(4)
+  set newBalance($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasNewBalance() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearNewBalance() => $_clearField(4);
+}
+
+/// ResizeSessionInventory 응답
+class ResizeSessionInventoryResponse extends $pb.GeneratedMessage {
+  factory ResizeSessionInventoryResponse({
+    SessionInventory? session,
+    $fixnum.Int64? delta,
+  }) {
+    final result = create();
+    if (session != null) result.session = session;
+    if (delta != null) result.delta = delta;
+    return result;
+  }
+
+  ResizeSessionInventoryResponse._();
+
+  factory ResizeSessionInventoryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ResizeSessionInventoryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResizeSessionInventoryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOM<SessionInventory>(1, _omitFieldNames ? '' : 'session', subBuilder: SessionInventory.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'delta')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResizeSessionInventoryResponse clone() => ResizeSessionInventoryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResizeSessionInventoryResponse copyWith(void Function(ResizeSessionInventoryResponse) updates) => super.copyWith((message) => updates(message as ResizeSessionInventoryResponse)) as ResizeSessionInventoryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ResizeSessionInventoryResponse create() => ResizeSessionInventoryResponse._();
+  @$core.override
+  ResizeSessionInventoryResponse createEmptyInstance() => create();
+  static $pb.PbList<ResizeSessionInventoryResponse> createRepeated() => $pb.PbList<ResizeSessionInventoryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ResizeSessionInventoryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResizeSessionInventoryResponse>(create);
+  static ResizeSessionInventoryResponse? _defaultInstance;
+
+  /// 변경 후 세션 상태
+  @$pb.TagNumber(1)
+  SessionInventory get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(SessionInventory value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => $_clearField(1);
+  @$pb.TagNumber(1)
+  SessionInventory ensureSession() => $_ensure(0);
+
+  /// 변경량 (양수=증가, 음수=감소)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get delta => $_getI64(1);
+  @$pb.TagNumber(2)
+  set delta($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDelta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDelta() => $_clearField(2);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

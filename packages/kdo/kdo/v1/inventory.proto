@@ -152,6 +152,18 @@ service InventoryService {
     };
     option (google.api.method_signature) = "fund,symbol,service_name";
   }
+
+  // 세션 인벤토리 balance 재조정.
+  // Arc<SessionInventory> 의 내부 atomic balance 만 변경하므로
+  // EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
+  // selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+  rpc ResizeSessionInventory(ResizeSessionInventoryRequest) returns (ResizeSessionInventoryResponse) {
+    option (google.api.http) = {
+      post: "/v1/inventories/{fund=funds/*}:resizeSession"
+      body: "*"
+    };
+    option (google.api.method_signature) = "fund,symbol,service_name,new_balance";
+  }
 }
 
 // 상품포지션구분 (PROD_PSTN_CLS_CODE)
@@ -957,4 +969,35 @@ message GetSessionInventoryRequest {
   // 세션 소유 서비스 이름.
   // 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
   string service_name = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// ResizeSessionInventory 요청
+message ResizeSessionInventoryRequest {
+  // 펀드 리소스명 (예: "funds/KD0001")
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 종목 코드 (예: "KR7005930003")
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 세션 소유 서비스 이름.
+  // 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+  string service_name = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // 새 balance 수량 (양수여야 함).
+  // selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+  int64 new_balance = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ResizeSessionInventory 응답
+message ResizeSessionInventoryResponse {
+  // 변경 후 세션 상태
+  SessionInventory session = 1;
+
+  // 변경량 (양수=증가, 음수=감소)
+  int64 delta = 2;
 }

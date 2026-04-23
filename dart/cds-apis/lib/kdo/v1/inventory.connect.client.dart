@@ -300,4 +300,25 @@ extension type InventoryServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 세션 인벤토리 balance 재조정.
+  /// Arc<SessionInventory> 의 내부 atomic balance 만 변경하므로
+  /// EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
+  /// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+  Future<kdov1inventory.ResizeSessionInventoryResponse> resizeSessionInventory(
+    kdov1inventory.ResizeSessionInventoryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.resizeSessionInventory,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

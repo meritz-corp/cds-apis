@@ -739,6 +739,26 @@ func (mr *MockInventoryServiceClientMockRecorder) RepayLoan(ctx, in interface{},
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RepayLoan", reflect.TypeOf((*MockInventoryServiceClient)(nil).RepayLoan), varargs...)
 }
 
+// ResizeSessionInventory mocks base method.
+func (m *MockInventoryServiceClient) ResizeSessionInventory(ctx context.Context, in *ResizeSessionInventoryRequest, opts ...grpc.CallOption) (*ResizeSessionInventoryResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ResizeSessionInventory", varargs...)
+	ret0, _ := ret[0].(*ResizeSessionInventoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResizeSessionInventory indicates an expected call of ResizeSessionInventory.
+func (mr *MockInventoryServiceClientMockRecorder) ResizeSessionInventory(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResizeSessionInventory", reflect.TypeOf((*MockInventoryServiceClient)(nil).ResizeSessionInventory), varargs...)
+}
+
 // StreamInventories mocks base method.
 func (m *MockInventoryServiceClient) StreamInventories(ctx context.Context, in *ListInventoriesRequest, opts ...grpc.CallOption) (InventoryService_StreamInventoriesClient, error) {
 	m.ctrl.T.Helper()
@@ -1025,6 +1045,21 @@ func (m *MockInventoryServiceServer) RepayLoan(ctx context.Context, in *RepayLoa
 func (mr *MockInventoryServiceServerMockRecorder) RepayLoan(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RepayLoan", reflect.TypeOf((*MockInventoryServiceServer)(nil).RepayLoan), ctx, in)
+}
+
+// ResizeSessionInventory mocks base method.
+func (m *MockInventoryServiceServer) ResizeSessionInventory(ctx context.Context, in *ResizeSessionInventoryRequest) (*ResizeSessionInventoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ResizeSessionInventory", ctx, in)
+	ret0, _ := ret[0].(*ResizeSessionInventoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResizeSessionInventory indicates an expected call of ResizeSessionInventory.
+func (mr *MockInventoryServiceServerMockRecorder) ResizeSessionInventory(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResizeSessionInventory", reflect.TypeOf((*MockInventoryServiceServer)(nil).ResizeSessionInventory), ctx, in)
 }
 
 // StreamInventories mocks base method.

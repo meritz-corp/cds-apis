@@ -842,6 +842,36 @@ pub struct GetSessionInventoryRequest {
     #[prost(string, tag="3")]
     pub service_name: ::prost::alloc::string::String,
 }
+/// ResizeSessionInventory 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResizeSessionInventoryRequest {
+    /// 펀드 리소스명 (예: "funds/KD0001")
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 종목 코드 (예: "KR7005930003")
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 세션 소유 서비스 이름.
+    /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
+    #[prost(string, tag="3")]
+    pub service_name: ::prost::alloc::string::String,
+    /// 새 balance 수량 (양수여야 함).
+    /// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+    #[prost(int64, tag="4")]
+    pub new_balance: i64,
+}
+/// ResizeSessionInventory 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResizeSessionInventoryResponse {
+    /// 변경 후 세션 상태
+    #[prost(message, optional, tag="1")]
+    pub session: ::core::option::Option<SessionInventory>,
+    /// 변경량 (양수=증가, 음수=감소)
+    #[prost(int64, tag="2")]
+    pub delta: i64,
+}
 /// 상품포지션구분 (PROD_PSTN_CLS_CODE)
 /// 042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

@@ -890,3 +890,36 @@ final $typed_data.Uint8List getSessionInventoryRequestDescriptor = $convert.base
     '8uY2RzYXBpcy54eXovRnVuZFIEZnVuZBIcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIn'
     'CgxzZXJ2aWNlX25hbWUYAyABKAlCBOJBAQFSC3NlcnZpY2VOYW1l');
 
+@$core.Deprecated('Use resizeSessionInventoryRequestDescriptor instead')
+const ResizeSessionInventoryRequest$json = {
+  '1': 'ResizeSessionInventoryRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
+    {'1': 'new_balance', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'newBalance'},
+  ],
+};
+
+/// Descriptor for `ResizeSessionInventoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resizeSessionInventoryRequestDescriptor = $convert.base64Decode(
+    'Ch1SZXNpemVTZXNzaW9uSW52ZW50b3J5UmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWCh'
+    'RrZG8uY2RzYXBpcy54eXovRnVuZFIEZnVuZBIcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJv'
+    'bBInCgxzZXJ2aWNlX25hbWUYAyABKAlCBOJBAQFSC3NlcnZpY2VOYW1lEiUKC25ld19iYWxhbm'
+    'NlGAQgASgDQgTiQQECUgpuZXdCYWxhbmNl');
+
+@$core.Deprecated('Use resizeSessionInventoryResponseDescriptor instead')
+const ResizeSessionInventoryResponse$json = {
+  '1': 'ResizeSessionInventoryResponse',
+  '2': [
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.inventory.SessionInventory', '10': 'session'},
+    {'1': 'delta', '3': 2, '4': 1, '5': 3, '10': 'delta'},
+  ],
+};
+
+/// Descriptor for `ResizeSessionInventoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resizeSessionInventoryResponseDescriptor = $convert.base64Decode(
+    'Ch5SZXNpemVTZXNzaW9uSW52ZW50b3J5UmVzcG9uc2USPAoHc2Vzc2lvbhgBIAEoCzIiLmtkby'
+    '52MS5pbnZlbnRvcnkuU2Vzc2lvbkludmVudG9yeVIHc2Vzc2lvbhIUCgVkZWx0YRgCIAEoA1IF'
+    'ZGVsdGE=');
+

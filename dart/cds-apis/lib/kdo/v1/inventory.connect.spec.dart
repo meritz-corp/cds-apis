@@ -142,4 +142,15 @@ abstract final class InventoryService {
     kdov1inventory.GetSessionInventoryRequest.new,
     kdov1inventory.SessionInventory.new,
   );
+
+  /// 세션 인벤토리 balance 재조정.
+  /// Arc<SessionInventory> 의 내부 atomic balance 만 변경하므로
+  /// EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
+  /// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+  static const resizeSessionInventory = connect.Spec(
+    '/$name/ResizeSessionInventory',
+    connect.StreamType.unary,
+    kdov1inventory.ResizeSessionInventoryRequest.new,
+    kdov1inventory.ResizeSessionInventoryResponse.new,
+  );
 }

@@ -58,6 +58,11 @@ type InventoryServiceClient interface {
 	ReleaseSessionInventory(ctx context.Context, in *ReleaseSessionInventoryRequest, opts ...grpc.CallOption) (*ReleaseSessionInventoryResponse, error)
 	// 세션 인벤토리 현재 상태 조회.
 	GetSessionInventory(ctx context.Context, in *GetSessionInventoryRequest, opts ...grpc.CallOption) (*SessionInventory, error)
+	// 세션 인벤토리 balance 재조정.
+	// Arc<SessionInventory> 의 내부 atomic balance 만 변경하므로
+	// EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
+	// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+	ResizeSessionInventory(ctx context.Context, in *ResizeSessionInventoryRequest, opts ...grpc.CallOption) (*ResizeSessionInventoryResponse, error)
 }
 
 type inventoryServiceClient struct {
@@ -258,6 +263,15 @@ func (c *inventoryServiceClient) GetSessionInventory(ctx context.Context, in *Ge
 	return out, nil
 }
 
+func (c *inventoryServiceClient) ResizeSessionInventory(ctx context.Context, in *ResizeSessionInventoryRequest, opts ...grpc.CallOption) (*ResizeSessionInventoryResponse, error) {
+	out := new(ResizeSessionInventoryResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/ResizeSessionInventory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InventoryServiceServer is the server API for InventoryService service.
 // All implementations must embed UnimplementedInventoryServiceServer
 // for forward compatibility
@@ -298,6 +312,11 @@ type InventoryServiceServer interface {
 	ReleaseSessionInventory(context.Context, *ReleaseSessionInventoryRequest) (*ReleaseSessionInventoryResponse, error)
 	// 세션 인벤토리 현재 상태 조회.
 	GetSessionInventory(context.Context, *GetSessionInventoryRequest) (*SessionInventory, error)
+	// 세션 인벤토리 balance 재조정.
+	// Arc<SessionInventory> 의 내부 atomic balance 만 변경하므로
+	// EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
+	// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+	ResizeSessionInventory(context.Context, *ResizeSessionInventoryRequest) (*ResizeSessionInventoryResponse, error)
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -352,6 +371,9 @@ func (UnimplementedInventoryServiceServer) ReleaseSessionInventory(context.Conte
 }
 func (UnimplementedInventoryServiceServer) GetSessionInventory(context.Context, *GetSessionInventoryRequest) (*SessionInventory, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSessionInventory not implemented")
+}
+func (UnimplementedInventoryServiceServer) ResizeSessionInventory(context.Context, *ResizeSessionInventoryRequest) (*ResizeSessionInventoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResizeSessionInventory not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -660,6 +682,24 @@ func _InventoryService_GetSessionInventory_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_ResizeSessionInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResizeSessionInventoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).ResizeSessionInventory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/ResizeSessionInventory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).ResizeSessionInventory(ctx, req.(*ResizeSessionInventoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InventoryService_ServiceDesc is the grpc.ServiceDesc for InventoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -722,6 +762,10 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSessionInventory",
 			Handler:    _InventoryService_GetSessionInventory_Handler,
+		},
+		{
+			MethodName: "ResizeSessionInventory",
+			Handler:    _InventoryService_ResizeSessionInventory_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

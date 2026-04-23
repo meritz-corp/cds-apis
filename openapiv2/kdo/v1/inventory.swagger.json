@@ -797,6 +797,67 @@
         ]
       }
     },
+    "/v1/inventories/{fund}:resizeSession": {
+      "post": {
+        "summary": "세션 인벤토리 balance 재조정.\nArc\u003cSessionInventory\u003e 의 내부 atomic balance 만 변경하므로\nEtfContext 가 보유한 Arc 참조가 그대로 유효하다.\nselling \u003e new_balance 이면 FAILED_PRECONDITION 으로 거부된다.",
+        "operationId": "InventoryService_ResizeSessionInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inventoryResizeSessionInventoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명 (예: \"funds/KD0001\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "title": "종목 코드 (예: \"KR7005930003\")"
+                },
+                "serviceName": {
+                  "type": "string",
+                  "description": "세션 소유 서비스 이름.\n빈 문자열이면 서버가 \"multi_service\" 를 기본값으로 사용한다."
+                },
+                "newBalance": {
+                  "type": "string",
+                  "format": "int64",
+                  "description": "새 balance 수량 (양수여야 함).\nselling \u003e new_balance 이면 FAILED_PRECONDITION 으로 거부된다."
+                }
+              },
+              "title": "ResizeSessionInventory 요청",
+              "required": [
+                "symbol",
+                "newBalance"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
     "/v1/inventories/{fund}:stream": {
       "get": {
         "summary": "펀드별 재고 현황 목록 스트림",
@@ -1626,6 +1687,21 @@
     "inventoryRepayLoanResponse": {
       "type": "object",
       "title": "RepayLoan 응답"
+    },
+    "inventoryResizeSessionInventoryResponse": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/inventorySessionInventory",
+          "title": "변경 후 세션 상태"
+        },
+        "delta": {
+          "type": "string",
+          "format": "int64",
+          "title": "변경량 (양수=증가, 음수=감소)"
+        }
+      },
+      "title": "ResizeSessionInventory 응답"
     },
     "inventorySessionInventory": {
       "type": "object",
