@@ -125,6 +125,13 @@ class InventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$resizeSessionInventory, request, options: options);
   }
 
+  /// 세션 인벤토리 실시간 스트림.
+  /// tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
+  /// 세션이 해제(release)되면 스트림이 자동 종료된다.
+  $grpc.ResponseStream<$0.SessionInventory> streamSessionInventory($0.GetSessionInventoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamSessionInventory, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$getInventory = $grpc.ClientMethod<$0.GetInventoryRequest, $0.Inventory>(
@@ -195,6 +202,10 @@ class InventoryServiceClient extends $grpc.Client {
       '/kdo.v1.inventory.InventoryService/ResizeSessionInventory',
       ($0.ResizeSessionInventoryRequest value) => value.writeToBuffer(),
       $0.ResizeSessionInventoryResponse.fromBuffer);
+  static final _$streamSessionInventory = $grpc.ClientMethod<$0.GetSessionInventoryRequest, $0.SessionInventory>(
+      '/kdo.v1.inventory.InventoryService/StreamSessionInventory',
+      ($0.GetSessionInventoryRequest value) => value.writeToBuffer(),
+      $0.SessionInventory.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.inventory.InventoryService')
@@ -321,6 +332,13 @@ abstract class InventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ResizeSessionInventoryRequest.fromBuffer(value),
         ($0.ResizeSessionInventoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetSessionInventoryRequest, $0.SessionInventory>(
+        'StreamSessionInventory',
+        streamSessionInventory_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetSessionInventoryRequest.fromBuffer(value),
+        ($0.SessionInventory value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Inventory> getInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetInventoryRequest> $request) async {
@@ -424,5 +442,11 @@ abstract class InventoryServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ResizeSessionInventoryResponse> resizeSessionInventory($grpc.ServiceCall call, $0.ResizeSessionInventoryRequest request);
+
+  $async.Stream<$0.SessionInventory> streamSessionInventory_Pre($grpc.ServiceCall $call, $async.Future<$0.GetSessionInventoryRequest> $request) async* {
+    yield* streamSessionInventory($call, await $request);
+  }
+
+  $async.Stream<$0.SessionInventory> streamSessionInventory($grpc.ServiceCall call, $0.GetSessionInventoryRequest request);
 
 }

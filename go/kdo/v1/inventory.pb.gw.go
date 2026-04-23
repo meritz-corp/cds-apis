@@ -1196,6 +1196,61 @@ func local_request_InventoryService_ResizeSessionInventory_0(ctx context.Context
 
 }
 
+var (
+	filter_InventoryService_StreamSessionInventory_0 = &utilities.DoubleArray{Encoding: map[string]int{"fund": 0, "symbol": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+)
+
+func request_InventoryService_StreamSessionInventory_0(ctx context.Context, marshaler runtime.Marshaler, client InventoryServiceClient, req *http.Request, pathParams map[string]string) (InventoryService_StreamSessionInventoryClient, runtime.ServerMetadata, error) {
+	var protoReq GetSessionInventoryRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["fund"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund")
+	}
+
+	protoReq.Fund, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund", err)
+	}
+
+	val, ok = pathParams["symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "symbol")
+	}
+
+	protoReq.Symbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_InventoryService_StreamSessionInventory_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.StreamSessionInventory(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterInventoryServiceHandlerServer registers the http handlers for service InventoryService to "mux".
 // UnaryRPC     :call InventoryServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -1589,6 +1644,13 @@ func RegisterInventoryServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 
 		forward_InventoryService_ResizeSessionInventory_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("GET", pattern_InventoryService_StreamSessionInventory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -2006,6 +2068,28 @@ func RegisterInventoryServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 
 	})
 
+	mux.Handle("GET", pattern_InventoryService_StreamSessionInventory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.inventory.InventoryService/StreamSessionInventory", runtime.WithHTTPPathPattern("/v1/inventories/{fund=funds/*}/{symbol=symbols/*}:streamSession"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_InventoryService_StreamSessionInventory_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_InventoryService_StreamSessionInventory_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -2043,6 +2127,8 @@ var (
 	pattern_InventoryService_GetSessionInventory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "inventories", "funds", "fund", "symbols", "symbol"}, "getSession"))
 
 	pattern_InventoryService_ResizeSessionInventory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3}, []string{"v1", "inventories", "funds", "fund"}, "resizeSession"))
+
+	pattern_InventoryService_StreamSessionInventory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3, 2, 4, 1, 0, 4, 2, 5, 5}, []string{"v1", "inventories", "funds", "fund", "symbols", "symbol"}, "streamSession"))
 )
 
 var (
@@ -2079,4 +2165,6 @@ var (
 	forward_InventoryService_GetSessionInventory_0 = runtime.ForwardResponseMessage
 
 	forward_InventoryService_ResizeSessionInventory_0 = runtime.ForwardResponseMessage
+
+	forward_InventoryService_StreamSessionInventory_0 = runtime.ForwardResponseStream
 )

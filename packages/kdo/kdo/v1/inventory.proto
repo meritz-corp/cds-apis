@@ -164,6 +164,16 @@ service InventoryService {
     };
     option (google.api.method_signature) = "fund,symbol,service_name,new_balance";
   }
+
+  // 세션 인벤토리 실시간 스트림.
+  // tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
+  // 세션이 해제(release)되면 스트림이 자동 종료된다.
+  rpc StreamSessionInventory(GetSessionInventoryRequest) returns (stream SessionInventory) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}/{symbol=symbols/*}:streamSession"
+    };
+    option (google.api.method_signature) = "fund,symbol,service_name";
+  }
 }
 
 // 상품포지션구분 (PROD_PSTN_CLS_CODE)

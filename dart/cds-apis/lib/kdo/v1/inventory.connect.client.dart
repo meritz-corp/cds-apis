@@ -321,4 +321,24 @@ extension type InventoryServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 세션 인벤토리 실시간 스트림.
+  /// tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
+  /// 세션이 해제(release)되면 스트림이 자동 종료된다.
+  Stream<kdov1inventory.SessionInventory> streamSessionInventory(
+    kdov1inventory.GetSessionInventoryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.InventoryService.streamSessionInventory,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

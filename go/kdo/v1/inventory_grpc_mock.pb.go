@@ -496,6 +496,248 @@ func (mr *MockInventoryService_StreamInventoriesServerMockRecorder) SetTrailer(a
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockInventoryService_StreamInventoriesServer)(nil).SetTrailer), arg0)
 }
 
+// MockInventoryService_StreamSessionInventoryClient is a mock of InventoryService_StreamSessionInventoryClient interface.
+type MockInventoryService_StreamSessionInventoryClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockInventoryService_StreamSessionInventoryClientMockRecorder
+}
+
+// MockInventoryService_StreamSessionInventoryClientMockRecorder is the mock recorder for MockInventoryService_StreamSessionInventoryClient.
+type MockInventoryService_StreamSessionInventoryClientMockRecorder struct {
+	mock *MockInventoryService_StreamSessionInventoryClient
+}
+
+// NewMockInventoryService_StreamSessionInventoryClient creates a new mock instance.
+func NewMockInventoryService_StreamSessionInventoryClient(ctrl *gomock.Controller) *MockInventoryService_StreamSessionInventoryClient {
+	mock := &MockInventoryService_StreamSessionInventoryClient{ctrl: ctrl}
+	mock.recorder = &MockInventoryService_StreamSessionInventoryClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockInventoryService_StreamSessionInventoryClient) EXPECT() *MockInventoryService_StreamSessionInventoryClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockInventoryService_StreamSessionInventoryClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockInventoryService_StreamSessionInventoryClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockInventoryService_StreamSessionInventoryClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryClient) Recv() (*SessionInventory, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*SessionInventory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockInventoryService_StreamSessionInventoryClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockInventoryService_StreamSessionInventoryClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockInventoryService_StreamSessionInventoryClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockInventoryService_StreamSessionInventoryClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryClient)(nil).Trailer))
+}
+
+// MockInventoryService_StreamSessionInventoryServer is a mock of InventoryService_StreamSessionInventoryServer interface.
+type MockInventoryService_StreamSessionInventoryServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockInventoryService_StreamSessionInventoryServerMockRecorder
+}
+
+// MockInventoryService_StreamSessionInventoryServerMockRecorder is the mock recorder for MockInventoryService_StreamSessionInventoryServer.
+type MockInventoryService_StreamSessionInventoryServerMockRecorder struct {
+	mock *MockInventoryService_StreamSessionInventoryServer
+}
+
+// NewMockInventoryService_StreamSessionInventoryServer creates a new mock instance.
+func NewMockInventoryService_StreamSessionInventoryServer(ctrl *gomock.Controller) *MockInventoryService_StreamSessionInventoryServer {
+	mock := &MockInventoryService_StreamSessionInventoryServer{ctrl: ctrl}
+	mock.recorder = &MockInventoryService_StreamSessionInventoryServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockInventoryService_StreamSessionInventoryServer) EXPECT() *MockInventoryService_StreamSessionInventoryServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockInventoryService_StreamSessionInventoryServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockInventoryService_StreamSessionInventoryServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryServer) Send(arg0 *SessionInventory) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockInventoryService_StreamSessionInventoryServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockInventoryService_StreamSessionInventoryServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockInventoryService_StreamSessionInventoryServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockInventoryService_StreamSessionInventoryServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockInventoryService_StreamSessionInventoryServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockInventoryService_StreamSessionInventoryServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockInventoryService_StreamSessionInventoryServer)(nil).SetTrailer), arg0)
+}
+
 // MockInventoryServiceClient is a mock of InventoryServiceClient interface.
 type MockInventoryServiceClient struct {
 	ctrl     *gomock.Controller
@@ -799,6 +1041,26 @@ func (mr *MockInventoryServiceClientMockRecorder) StreamInventory(ctx, in interf
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamInventory", reflect.TypeOf((*MockInventoryServiceClient)(nil).StreamInventory), varargs...)
 }
 
+// StreamSessionInventory mocks base method.
+func (m *MockInventoryServiceClient) StreamSessionInventory(ctx context.Context, in *GetSessionInventoryRequest, opts ...grpc.CallOption) (InventoryService_StreamSessionInventoryClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamSessionInventory", varargs...)
+	ret0, _ := ret[0].(InventoryService_StreamSessionInventoryClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamSessionInventory indicates an expected call of StreamSessionInventory.
+func (mr *MockInventoryServiceClientMockRecorder) StreamSessionInventory(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamSessionInventory", reflect.TypeOf((*MockInventoryServiceClient)(nil).StreamSessionInventory), varargs...)
+}
+
 // SyncInventoryFromLedger mocks base method.
 func (m *MockInventoryServiceClient) SyncInventoryFromLedger(ctx context.Context, in *SyncInventoryFromLedgerRequest, opts ...grpc.CallOption) (*SyncInventoryFromLedgerResponse, error) {
 	m.ctrl.T.Helper()
@@ -1088,6 +1350,20 @@ func (m *MockInventoryServiceServer) StreamInventory(blob *GetInventoryRequest, 
 func (mr *MockInventoryServiceServerMockRecorder) StreamInventory(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamInventory", reflect.TypeOf((*MockInventoryServiceServer)(nil).StreamInventory), blob, server)
+}
+
+// StreamSessionInventory mocks base method.
+func (m *MockInventoryServiceServer) StreamSessionInventory(blob *GetSessionInventoryRequest, server InventoryService_StreamSessionInventoryServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamSessionInventory", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamSessionInventory indicates an expected call of StreamSessionInventory.
+func (mr *MockInventoryServiceServerMockRecorder) StreamSessionInventory(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamSessionInventory", reflect.TypeOf((*MockInventoryServiceServer)(nil).StreamSessionInventory), blob, server)
 }
 
 // SyncInventoryFromLedger mocks base method.

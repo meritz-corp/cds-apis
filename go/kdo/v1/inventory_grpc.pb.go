@@ -63,6 +63,10 @@ type InventoryServiceClient interface {
 	// EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
 	// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
 	ResizeSessionInventory(ctx context.Context, in *ResizeSessionInventoryRequest, opts ...grpc.CallOption) (*ResizeSessionInventoryResponse, error)
+	// 세션 인벤토리 실시간 스트림.
+	// tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
+	// 세션이 해제(release)되면 스트림이 자동 종료된다.
+	StreamSessionInventory(ctx context.Context, in *GetSessionInventoryRequest, opts ...grpc.CallOption) (InventoryService_StreamSessionInventoryClient, error)
 }
 
 type inventoryServiceClient struct {
@@ -272,6 +276,38 @@ func (c *inventoryServiceClient) ResizeSessionInventory(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *inventoryServiceClient) StreamSessionInventory(ctx context.Context, in *GetSessionInventoryRequest, opts ...grpc.CallOption) (InventoryService_StreamSessionInventoryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &InventoryService_ServiceDesc.Streams[2], "/kdo.v1.inventory.InventoryService/StreamSessionInventory", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &inventoryServiceStreamSessionInventoryClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type InventoryService_StreamSessionInventoryClient interface {
+	Recv() (*SessionInventory, error)
+	grpc.ClientStream
+}
+
+type inventoryServiceStreamSessionInventoryClient struct {
+	grpc.ClientStream
+}
+
+func (x *inventoryServiceStreamSessionInventoryClient) Recv() (*SessionInventory, error) {
+	m := new(SessionInventory)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // InventoryServiceServer is the server API for InventoryService service.
 // All implementations must embed UnimplementedInventoryServiceServer
 // for forward compatibility
@@ -317,6 +353,10 @@ type InventoryServiceServer interface {
 	// EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
 	// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
 	ResizeSessionInventory(context.Context, *ResizeSessionInventoryRequest) (*ResizeSessionInventoryResponse, error)
+	// 세션 인벤토리 실시간 스트림.
+	// tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
+	// 세션이 해제(release)되면 스트림이 자동 종료된다.
+	StreamSessionInventory(*GetSessionInventoryRequest, InventoryService_StreamSessionInventoryServer) error
 	mustEmbedUnimplementedInventoryServiceServer()
 }
 
@@ -374,6 +414,9 @@ func (UnimplementedInventoryServiceServer) GetSessionInventory(context.Context, 
 }
 func (UnimplementedInventoryServiceServer) ResizeSessionInventory(context.Context, *ResizeSessionInventoryRequest) (*ResizeSessionInventoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResizeSessionInventory not implemented")
+}
+func (UnimplementedInventoryServiceServer) StreamSessionInventory(*GetSessionInventoryRequest, InventoryService_StreamSessionInventoryServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamSessionInventory not implemented")
 }
 func (UnimplementedInventoryServiceServer) mustEmbedUnimplementedInventoryServiceServer() {}
 
@@ -700,6 +743,27 @@ func _InventoryService_ResizeSessionInventory_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_StreamSessionInventory_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetSessionInventoryRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(InventoryServiceServer).StreamSessionInventory(m, &inventoryServiceStreamSessionInventoryServer{stream})
+}
+
+type InventoryService_StreamSessionInventoryServer interface {
+	Send(*SessionInventory) error
+	grpc.ServerStream
+}
+
+type inventoryServiceStreamSessionInventoryServer struct {
+	grpc.ServerStream
+}
+
+func (x *inventoryServiceStreamSessionInventoryServer) Send(m *SessionInventory) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // InventoryService_ServiceDesc is the grpc.ServiceDesc for InventoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -777,6 +841,11 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamInventories",
 			Handler:       _InventoryService_StreamInventories_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamSessionInventory",
+			Handler:       _InventoryService_StreamSessionInventory_Handler,
 			ServerStreams: true,
 		},
 	},

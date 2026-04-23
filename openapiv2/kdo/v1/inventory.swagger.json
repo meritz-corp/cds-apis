@@ -566,6 +566,63 @@
         ]
       }
     },
+    "/v1/inventories/{fund}/{symbol}:streamSession": {
+      "get": {
+        "summary": "세션 인벤토리 실시간 스트림.\ntokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.\n세션이 해제(release)되면 스트림이 자동 종료된다.",
+        "operationId": "InventoryService_StreamSessionInventory",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/inventorySessionInventory"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of inventorySessionInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fund",
+            "description": "펀드 리소스명 (예: \"funds/KD0001\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "symbol",
+            "description": "종목 코드 (예: \"KR7005930003\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "symbols/[^/]+"
+          },
+          {
+            "name": "serviceName",
+            "description": "세션 소유 서비스 이름.\n빈 문자열이면 서버가 \"multi_service\" 를 기본값으로 사용한다.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InventoryService"
+        ]
+      }
+    },
     "/v1/inventories/{fund}:allocateSession": {
       "post": {
         "summary": "세션 인벤토리 할당.\nLP 시작(StartEtfLp) 전에 global inventory 에서 매도 한도를 선점한다.\nbalance_override 가 0 이면 DB 의 lp.session_inventory_balance 를 사용한다.",
