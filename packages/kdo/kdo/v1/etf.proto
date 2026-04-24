@@ -199,8 +199,11 @@ message EtfPdfConstituent {
     // 상품 타입
     kdo.v1.common.ProductType product_type = 3;
 
-    // 구성 수량 (선물 숏의 경우 음수)
+    // 구성 수량 (선물 숏의 경우 음수). 소수값은 손실되므로 정확한 값은 quantity_exact 참조.
     int64 quantity = 4;
+
+    // 정확한 구성 수량 (소수 지원, 예: "-0.37"). Cash의 경우 원화 금액(원 단위 정수).
+    string quantity_exact = 5;
 }
 
 // ETF가 다른 상품으로 변환될 수 있는 정보

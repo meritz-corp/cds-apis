@@ -1425,6 +1425,9 @@ impl serde::Serialize for EtfPdfConstituent {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.EtfPdfConstituent", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -1442,6 +1445,9 @@ impl serde::Serialize for EtfPdfConstituent {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("quantity_exact", &self.quantity_exact)?;
+        }
         struct_ser.end()
     }
 }
@@ -1457,6 +1463,8 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
             "product_type",
             "productType",
             "quantity",
+            "quantity_exact",
+            "quantityExact",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1465,6 +1473,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
             Name,
             ProductType,
             Quantity,
+            QuantityExact,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1491,6 +1500,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                             "name" => Ok(GeneratedField::Name),
                             "productType" | "product_type" => Ok(GeneratedField::ProductType),
                             "quantity" => Ok(GeneratedField::Quantity),
+                            "quantityExact" | "quantity_exact" => Ok(GeneratedField::QuantityExact),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1514,6 +1524,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                 let mut name__ = None;
                 let mut product_type__ = None;
                 let mut quantity__ = None;
+                let mut quantity_exact__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -1542,6 +1553,12 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::QuantityExact => {
+                            if quantity_exact__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityExact"));
+                            }
+                            quantity_exact__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1552,6 +1569,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfConstituent {
                     name: name__.unwrap_or_default(),
                     product_type: product_type__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
+                    quantity_exact: quantity_exact__.unwrap_or_default(),
                 })
             }
         }

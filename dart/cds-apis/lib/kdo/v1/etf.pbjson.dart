@@ -197,6 +197,7 @@ const EtfPdfConstituent$json = {
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     {'1': 'product_type', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.ProductType', '10': 'productType'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'quantity_exact', '3': 5, '4': 1, '5': 9, '10': 'quantityExact'},
   ],
 };
 
@@ -204,7 +205,8 @@ const EtfPdfConstituent$json = {
 final $typed_data.Uint8List etfPdfConstituentDescriptor = $convert.base64Decode(
     'ChFFdGZQZGZDb25zdGl0dWVudBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBISCgRuYW1lGAIgAS'
     'gJUgRuYW1lEj0KDHByb2R1Y3RfdHlwZRgDIAEoDjIaLmtkby52MS5jb21tb24uUHJvZHVjdFR5'
-    'cGVSC3Byb2R1Y3RUeXBlEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eQ==');
+    'cGVSC3Byb2R1Y3RUeXBlEhoKCHF1YW50aXR5GAQgASgDUghxdWFudGl0eRIlCg5xdWFudGl0eV'
+    '9leGFjdBgFIAEoCVINcXVhbnRpdHlFeGFjdA==');
 
 @$core.Deprecated('Use conversionDescriptor instead')
 const Conversion$json = {
