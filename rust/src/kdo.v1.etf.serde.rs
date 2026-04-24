@@ -859,9 +859,6 @@ impl serde::Serialize for Etf {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.Etf", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -941,9 +938,6 @@ impl serde::Serialize for Etf {
         if true {
             struct_ser.serialize_field("unit_delta", &self.unit_delta)?;
         }
-        if true {
-            struct_ser.serialize_field("decomposed_constituents", &self.decomposed_constituents)?;
-        }
         struct_ser.end()
     }
 }
@@ -990,8 +984,6 @@ impl<'de> serde::Deserialize<'de> for Etf {
             "conversions",
             "unit_delta",
             "unitDelta",
-            "decomposed_constituents",
-            "decomposedConstituents",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1018,7 +1010,6 @@ impl<'de> serde::Deserialize<'de> for Etf {
             CashCreationAmount,
             Conversions,
             UnitDelta,
-            DecomposedConstituents,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1063,7 +1054,6 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             "cashCreationAmount" | "cash_creation_amount" => Ok(GeneratedField::CashCreationAmount),
                             "conversions" => Ok(GeneratedField::Conversions),
                             "unitDelta" | "unit_delta" => Ok(GeneratedField::UnitDelta),
-                            "decomposedConstituents" | "decomposed_constituents" => Ok(GeneratedField::DecomposedConstituents),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1105,7 +1095,6 @@ impl<'de> serde::Deserialize<'de> for Etf {
                 let mut cash_creation_amount__ = None;
                 let mut conversions__ = None;
                 let mut unit_delta__ = None;
-                let mut decomposed_constituents__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -1256,14 +1245,6 @@ impl<'de> serde::Deserialize<'de> for Etf {
                             }
                             unit_delta__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::DecomposedConstituents => {
-                            if decomposed_constituents__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("decomposedConstituents"));
-                            }
-                            decomposed_constituents__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, _>>()?
-                            );
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1292,7 +1273,6 @@ impl<'de> serde::Deserialize<'de> for Etf {
                     cash_creation_amount: cash_creation_amount__.unwrap_or_default(),
                     conversions: conversions__.unwrap_or_default(),
                     unit_delta: unit_delta__.unwrap_or_default(),
-                    decomposed_constituents: decomposed_constituents__.unwrap_or_default(),
                 })
             }
         }
@@ -1976,6 +1956,215 @@ impl<'de> serde::Deserialize<'de> for FuturesConstituent {
             }
         }
         deserializer.deserialize_struct("kdo.v1.etf.FuturesConstituent", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetEtfConstituentsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.GetEtfConstituentsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if let Some(v) = self.pricing.as_ref() {
+            struct_ser.serialize_field("pricing", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetEtfConstituentsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+            "pricing",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            Pricing,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "pricing" => Ok(GeneratedField::Pricing),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetEtfConstituentsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.GetEtfConstituentsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetEtfConstituentsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut pricing__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Pricing => {
+                            if pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricing"));
+                            }
+                            pricing__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetEtfConstituentsRequest {
+                    etf: etf__.unwrap_or_default(),
+                    pricing: pricing__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.GetEtfConstituentsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetEtfConstituentsResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.GetEtfConstituentsResponse", len)?;
+        if true {
+            struct_ser.serialize_field("constituents", &self.constituents)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetEtfConstituentsResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "constituents",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Constituents,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "constituents" => Ok(GeneratedField::Constituents),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetEtfConstituentsResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.GetEtfConstituentsResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetEtfConstituentsResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut constituents__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Constituents => {
+                            if constituents__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituents"));
+                            }
+                            constituents__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetEtfConstituentsResponse {
+                    constituents: constituents__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.GetEtfConstituentsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetEtfRequest {

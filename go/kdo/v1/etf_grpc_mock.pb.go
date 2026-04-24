@@ -94,6 +94,26 @@ func (mr *MockEtfServiceClientMockRecorder) GetEtf(ctx, in interface{}, opts ...
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtf", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtf), varargs...)
 }
 
+// GetEtfConstituents mocks base method.
+func (m *MockEtfServiceClient) GetEtfConstituents(ctx context.Context, in *GetEtfConstituentsRequest, opts ...grpc.CallOption) (*GetEtfConstituentsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetEtfConstituents", varargs...)
+	ret0, _ := ret[0].(*GetEtfConstituentsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfConstituents indicates an expected call of GetEtfConstituents.
+func (mr *MockEtfServiceClientMockRecorder) GetEtfConstituents(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfConstituents", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtfConstituents), varargs...)
+}
+
 // GetEtfTickImpact mocks base method.
 func (m *MockEtfServiceClient) GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest, opts ...grpc.CallOption) (*EtfTickImpact, error) {
 	m.ctrl.T.Helper()
@@ -220,6 +240,21 @@ func (m *MockEtfServiceServer) GetEtf(ctx context.Context, in *GetEtfRequest) (*
 func (mr *MockEtfServiceServerMockRecorder) GetEtf(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtf", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtf), ctx, in)
+}
+
+// GetEtfConstituents mocks base method.
+func (m *MockEtfServiceServer) GetEtfConstituents(ctx context.Context, in *GetEtfConstituentsRequest) (*GetEtfConstituentsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetEtfConstituents", ctx, in)
+	ret0, _ := ret[0].(*GetEtfConstituentsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfConstituents indicates an expected call of GetEtfConstituents.
+func (mr *MockEtfServiceServerMockRecorder) GetEtfConstituents(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfConstituents", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtfConstituents), ctx, in)
 }
 
 // GetEtfTickImpact mocks base method.

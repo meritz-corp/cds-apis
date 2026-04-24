@@ -57,9 +57,12 @@ const Etf$json = {
     {'1': 'cash_creation_amount', '3': 24, '4': 1, '5': 3, '10': 'cashCreationAmount'},
     {'1': 'conversions', '3': 25, '4': 3, '5': 11, '6': '.kdo.v1.etf.Etf.ConversionsEntry', '10': 'conversions'},
     {'1': 'unit_delta', '3': 26, '4': 1, '5': 9, '10': 'unitDelta'},
-    {'1': 'decomposed_constituents', '3': 27, '4': 3, '5': 11, '6': '.kdo.v1.etf.Etf.DecomposedConstituentsEntry', '10': 'decomposedConstituents'},
   ],
-  '3': [Etf_ConstituentsEntry$json, Etf_ConversionsEntry$json, Etf_DecomposedConstituentsEntry$json],
+  '3': [Etf_ConstituentsEntry$json, Etf_ConversionsEntry$json],
+  '9': [
+    {'1': 27, '2': 28},
+  ],
+  '10': ['decomposed_constituents'],
 };
 
 @$core.Deprecated('Use etfDescriptor instead')
@@ -82,16 +85,6 @@ const Etf_ConversionsEntry$json = {
   '7': {'7': true},
 };
 
-@$core.Deprecated('Use etfDescriptor instead')
-const Etf_DecomposedConstituentsEntry$json = {
-  '1': 'DecomposedConstituentsEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfPdfConstituent', '10': 'value'},
-  ],
-  '7': {'7': true},
-};
-
 /// Descriptor for `Etf`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'CgNFdGYSDgoCaWQYASABKARSAmlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhIKBGNvZGUYAy'
@@ -109,14 +102,11 @@ final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'Y2tpbmdBc3NldBInCg9jYXNoX2NyZWRpdGFibGUYFyABKAhSDmNhc2hDcmVkaXRhYmxlEjAKFG'
     'Nhc2hfY3JlYXRpb25fYW1vdW50GBggASgDUhJjYXNoQ3JlYXRpb25BbW91bnQSQgoLY29udmVy'
     'c2lvbnMYGSADKAsyIC5rZG8udjEuZXRmLkV0Zi5Db252ZXJzaW9uc0VudHJ5Ugtjb252ZXJzaW'
-    '9ucxIdCgp1bml0X2RlbHRhGBogASgJUgl1bml0RGVsdGESZAoXZGVjb21wb3NlZF9jb25zdGl0'
-    'dWVudHMYGyADKAsyKy5rZG8udjEuZXRmLkV0Zi5EZWNvbXBvc2VkQ29uc3RpdHVlbnRzRW50cn'
-    'lSFmRlY29tcG9zZWRDb25zdGl0dWVudHMaXgoRQ29uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEg'
-    'ASgJUgNrZXkSMwoFdmFsdWUYAiABKAsyHS5rZG8udjEuZXRmLkV0ZlBkZkNvbnN0aXR1ZW50Ug'
-    'V2YWx1ZToCOAEaVgoQQ29udmVyc2lvbnNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIsCgV2YWx1'
-    'ZRgCIAEoCzIWLmtkby52MS5ldGYuQ29udmVyc2lvblIFdmFsdWU6AjgBGmgKG0RlY29tcG9zZW'
-    'RDb25zdGl0dWVudHNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIzCgV2YWx1ZRgCIAEoCzIdLmtk'
-    'by52MS5ldGYuRXRmUGRmQ29uc3RpdHVlbnRSBXZhbHVlOgI4AQ==');
+    '9ucxIdCgp1bml0X2RlbHRhGBogASgJUgl1bml0RGVsdGEaXgoRQ29uc3RpdHVlbnRzRW50cnkS'
+    'EAoDa2V5GAEgASgJUgNrZXkSMwoFdmFsdWUYAiABKAsyHS5rZG8udjEuZXRmLkV0ZlBkZkNvbn'
+    'N0aXR1ZW50UgV2YWx1ZToCOAEaVgoQQ29udmVyc2lvbnNFbnRyeRIQCgNrZXkYASABKAlSA2tl'
+    'eRIsCgV2YWx1ZRgCIAEoCzIWLmtkby52MS5ldGYuQ29udmVyc2lvblIFdmFsdWU6AjgBSgQIGx'
+    'AcUhdkZWNvbXBvc2VkX2NvbnN0aXR1ZW50cw==');
 
 @$core.Deprecated('Use etfConstituentDescriptor instead')
 const EtfConstituent$json = {
@@ -491,4 +481,45 @@ const CalcEtfUnitPriceResponse$json = {
 final $typed_data.Uint8List calcEtfUnitPriceResponseDescriptor = $convert.base64Decode(
     'ChhDYWxjRXRmVW5pdFByaWNlUmVzcG9uc2USHQoKdW5pdF9wcmljZRgBIAEoCVIJdW5pdFByaW'
     'NlEhUKA3BubBgCIAEoCUgAUgNwbmyIAQFCBgoEX3BubA==');
+
+@$core.Deprecated('Use getEtfConstituentsRequestDescriptor instead')
+const GetEtfConstituentsRequest$json = {
+  '1': 'GetEtfConstituentsRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '8': {}, '10': 'pricing'},
+  ],
+};
+
+/// Descriptor for `GetEtfConstituentsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfConstituentsRequestDescriptor = $convert.base64Decode(
+    'ChlHZXRFdGZDb25zdGl0dWVudHNSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLm'
+    'Nkc2FwaXMueHl6L0V0ZlIDZXRmEjkKB3ByaWNpbmcYAiABKAsyGS5rZG8udjEuY29tbW9uLkV0'
+    'ZlByaWNpbmdCBOJBAQJSB3ByaWNpbmc=');
+
+@$core.Deprecated('Use getEtfConstituentsResponseDescriptor instead')
+const GetEtfConstituentsResponse$json = {
+  '1': 'GetEtfConstituentsResponse',
+  '2': [
+    {'1': 'constituents', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.etf.GetEtfConstituentsResponse.ConstituentsEntry', '10': 'constituents'},
+  ],
+  '3': [GetEtfConstituentsResponse_ConstituentsEntry$json],
+};
+
+@$core.Deprecated('Use getEtfConstituentsResponseDescriptor instead')
+const GetEtfConstituentsResponse_ConstituentsEntry$json = {
+  '1': 'ConstituentsEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.etf.EtfPdfConstituent', '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `GetEtfConstituentsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfConstituentsResponseDescriptor = $convert.base64Decode(
+    'ChpHZXRFdGZDb25zdGl0dWVudHNSZXNwb25zZRJcCgxjb25zdGl0dWVudHMYASADKAsyOC5rZG'
+    '8udjEuZXRmLkdldEV0ZkNvbnN0aXR1ZW50c1Jlc3BvbnNlLkNvbnN0aXR1ZW50c0VudHJ5Ugxj'
+    'b25zdGl0dWVudHMaXgoRQ29uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSMwoFdm'
+    'FsdWUYAiABKAsyHS5rZG8udjEuZXRmLkV0ZlBkZkNvbnN0aXR1ZW50UgV2YWx1ZToCOAE=');
 

@@ -46,7 +46,6 @@ class Etf extends $pb.GeneratedMessage {
     $fixnum.Int64? cashCreationAmount,
     $core.Iterable<$core.MapEntry<$core.String, Conversion>>? conversions,
     $core.String? unitDelta,
-    $core.Iterable<$core.MapEntry<$core.String, EtfPdfConstituent>>? decomposedConstituents,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -71,7 +70,6 @@ class Etf extends $pb.GeneratedMessage {
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
     if (conversions != null) result.conversions.addEntries(conversions);
     if (unitDelta != null) result.unitDelta = unitDelta;
-    if (decomposedConstituents != null) result.decomposedConstituents.addEntries(decomposedConstituents);
     return result;
   }
 
@@ -103,7 +101,6 @@ class Etf extends $pb.GeneratedMessage {
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
     ..m<$core.String, Conversion>(25, _omitFieldNames ? '' : 'conversions', entryClassName: 'Etf.ConversionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: Conversion.create, valueDefaultOrMaker: Conversion.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..aOS(26, _omitFieldNames ? '' : 'unitDelta')
-    ..m<$core.String, EtfPdfConstituent>(27, _omitFieldNames ? '' : 'decomposedConstituents', entryClassName: 'Etf.DecomposedConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..hasRequiredFields = false
   ;
 
@@ -324,11 +321,6 @@ class Etf extends $pb.GeneratedMessage {
   $core.bool hasUnitDelta() => $_has(21);
   @$pb.TagNumber(26)
   void clearUnitDelta() => $_clearField(26);
-
-  /// PdfDecomposeHedge pricing 전용: sub-ETF를 재귀 분해하여 leaf(Stock/Futures/Cash)로
-  /// netting된 pre-flattened PDF. 비어있을 수 있음 (PdfDecomposeHedge pricing 미설정 시).
-  @$pb.TagNumber(27)
-  $pb.PbMap<$core.String, EtfPdfConstituent> get decomposedConstituents => $_getMap(22);
 }
 
 enum EtfConstituent_ConstituentType {
@@ -2031,6 +2023,112 @@ class CalcEtfUnitPriceResponse extends $pb.GeneratedMessage {
   $core.bool hasPnl() => $_has(1);
   @$pb.TagNumber(2)
   void clearPnl() => $_clearField(2);
+}
+
+/// GetEtfConstituents
+class GetEtfConstituentsRequest extends $pb.GeneratedMessage {
+  factory GetEtfConstituentsRequest({
+    $core.String? etf,
+    $1.EtfPricing? pricing,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (pricing != null) result.pricing = pricing;
+    return result;
+  }
+
+  GetEtfConstituentsRequest._();
+
+  factory GetEtfConstituentsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfConstituentsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfConstituentsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOM<$1.EtfPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfConstituentsRequest clone() => GetEtfConstituentsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfConstituentsRequest copyWith(void Function(GetEtfConstituentsRequest) updates) => super.copyWith((message) => updates(message as GetEtfConstituentsRequest)) as GetEtfConstituentsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfConstituentsRequest create() => GetEtfConstituentsRequest._();
+  @$core.override
+  GetEtfConstituentsRequest createEmptyInstance() => create();
+  static $pb.PbList<GetEtfConstituentsRequest> createRepeated() => $pb.PbList<GetEtfConstituentsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfConstituentsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfConstituentsRequest>(create);
+  static GetEtfConstituentsRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: etfs/069500)
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// 가격 산출 방식 (pricing 종류에 따라 flattened 여부가 결정됨)
+  @$pb.TagNumber(2)
+  $1.EtfPricing get pricing => $_getN(1);
+  @$pb.TagNumber(2)
+  set pricing($1.EtfPricing value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPricing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPricing() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $1.EtfPricing ensurePricing() => $_ensure(1);
+}
+
+class GetEtfConstituentsResponse extends $pb.GeneratedMessage {
+  factory GetEtfConstituentsResponse({
+    $core.Iterable<$core.MapEntry<$core.String, EtfPdfConstituent>>? constituents,
+  }) {
+    final result = create();
+    if (constituents != null) result.constituents.addEntries(constituents);
+    return result;
+  }
+
+  GetEtfConstituentsResponse._();
+
+  factory GetEtfConstituentsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfConstituentsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfConstituentsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..m<$core.String, EtfPdfConstituent>(1, _omitFieldNames ? '' : 'constituents', entryClassName: 'GetEtfConstituentsResponse.ConstituentsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: EtfPdfConstituent.create, valueDefaultOrMaker: EtfPdfConstituent.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfConstituentsResponse clone() => GetEtfConstituentsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfConstituentsResponse copyWith(void Function(GetEtfConstituentsResponse) updates) => super.copyWith((message) => updates(message as GetEtfConstituentsResponse)) as GetEtfConstituentsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfConstituentsResponse create() => GetEtfConstituentsResponse._();
+  @$core.override
+  GetEtfConstituentsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetEtfConstituentsResponse> createRepeated() => $pb.PbList<GetEtfConstituentsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfConstituentsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfConstituentsResponse>(create);
+  static GetEtfConstituentsResponse? _defaultInstance;
+
+  /// pricing에 따라 flattened 여부가 결정된 구성종목 맵
+  /// PdfDecomposeHedge: leaf(Stock/Futures/Cash)로 재귀 분해된 flattened 버전
+  /// 그 외: 원본 PDF 구성종목
+  @$pb.TagNumber(1)
+  $pb.PbMap<$core.String, EtfPdfConstituent> get constituents => $_getMap(0);
 }
 
 

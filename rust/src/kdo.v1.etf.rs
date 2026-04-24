@@ -60,10 +60,6 @@ pub struct Etf {
     /// unit_delta (구성종목 기반 NAV 계산용)
     #[prost(string, tag="26")]
     pub unit_delta: ::prost::alloc::string::String,
-    /// PdfDecomposeHedge pricing 전용: sub-ETF를 재귀 분해하여 leaf(Stock/Futures/Cash)로
-    /// netting된 pre-flattened PDF. 비어있을 수 있음 (PdfDecomposeHedge pricing 미설정 시).
-    #[prost(map="string, message", tag="27")]
-    pub decomposed_constituents: ::std::collections::HashMap<::prost::alloc::string::String, EtfPdfConstituent>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -378,6 +374,26 @@ pub struct CalcEtfUnitPriceResponse {
     /// (unit_price - target_unit_price) × etf_quantity, target 제공 시에만
     #[prost(string, optional, tag="2")]
     pub pnl: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// GetEtfConstituents
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfConstituentsRequest {
+    /// ETF 리소스 이름 (예: etfs/069500)
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// 가격 산출 방식 (pricing 종류에 따라 flattened 여부가 결정됨)
+    #[prost(message, optional, tag="2")]
+    pub pricing: ::core::option::Option<super::common::EtfPricing>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfConstituentsResponse {
+    /// pricing에 따라 flattened 여부가 결정된 구성종목 맵
+    /// PdfDecomposeHedge: leaf(Stock/Futures/Cash)로 재귀 분해된 flattened 버전
+    /// 그 외: 원본 PDF 구성종목
+    #[prost(map="string, message", tag="1")]
+    pub constituents: ::std::collections::HashMap<::prost::alloc::string::String, EtfPdfConstituent>,
 }
 /// 복제 방법
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

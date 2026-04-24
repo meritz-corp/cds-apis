@@ -59,6 +59,13 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$calcEtfUnitPrice, request, options: options);
   }
 
+  /// pricing 종류에 따라 결정된 ETF 구성종목을 조회합니다.
+  /// PdfDecomposeHedge pricing의 경우 sub-ETF를 leaf(Stock/Futures/Cash)로 재귀 분해한
+  /// flattened 버전을 반환합니다.
+  $grpc.ResponseFuture<$0.GetEtfConstituentsResponse> getEtfConstituents($0.GetEtfConstituentsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getEtfConstituents, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -85,6 +92,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/CalcEtfUnitPrice',
       ($0.CalcEtfUnitPriceRequest value) => value.writeToBuffer(),
       $0.CalcEtfUnitPriceResponse.fromBuffer);
+  static final _$getEtfConstituents = $grpc.ClientMethod<$0.GetEtfConstituentsRequest, $0.GetEtfConstituentsResponse>(
+      '/kdo.v1.etf.EtfService/GetEtfConstituents',
+      ($0.GetEtfConstituentsRequest value) => value.writeToBuffer(),
+      $0.GetEtfConstituentsResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -134,6 +145,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CalcEtfUnitPriceRequest.fromBuffer(value),
         ($0.CalcEtfUnitPriceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetEtfConstituentsRequest, $0.GetEtfConstituentsResponse>(
+        'GetEtfConstituents',
+        getEtfConstituents_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetEtfConstituentsRequest.fromBuffer(value),
+        ($0.GetEtfConstituentsResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -171,5 +189,11 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.CalcEtfUnitPriceResponse> calcEtfUnitPrice($grpc.ServiceCall call, $0.CalcEtfUnitPriceRequest request);
+
+  $async.Future<$0.GetEtfConstituentsResponse> getEtfConstituents_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfConstituentsRequest> $request) async {
+    return getEtfConstituents($call, await $request);
+  }
+
+  $async.Future<$0.GetEtfConstituentsResponse> getEtfConstituents($grpc.ServiceCall call, $0.GetEtfConstituentsRequest request);
 
 }

@@ -54,4 +54,14 @@ abstract final class EtfService {
     kdov1etf.CalcEtfUnitPriceRequest.new,
     kdov1etf.CalcEtfUnitPriceResponse.new,
   );
+
+  /// pricing 종류에 따라 결정된 ETF 구성종목을 조회합니다.
+  /// PdfDecomposeHedge pricing의 경우 sub-ETF를 leaf(Stock/Futures/Cash)로 재귀 분해한
+  /// flattened 버전을 반환합니다.
+  static const getEtfConstituents = connect.Spec(
+    '/$name/GetEtfConstituents',
+    connect.StreamType.unary,
+    kdov1etf.GetEtfConstituentsRequest.new,
+    kdov1etf.GetEtfConstituentsResponse.new,
+  );
 }
