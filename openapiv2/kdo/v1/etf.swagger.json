@@ -620,12 +620,7 @@
         },
         "quantity": {
           "type": "string",
-          "format": "int64",
-          "description": "구성 수량 (선물 숏의 경우 음수). 소수값은 손실되므로 정확한 값은 quantity_exact 참조."
-        },
-        "quantityExact": {
-          "type": "string",
-          "description": "정확한 구성 수량 (소수 지원, 예: \"-0.37\"). Cash의 경우 원화 금액(원 단위 정수)."
+          "description": "구성 수량 (선물 숏의 경우 음수, 소수 지원). Cash의 경우 원화 금액(원 단위 정수)."
         }
       },
       "title": "PDF 구성 종목"

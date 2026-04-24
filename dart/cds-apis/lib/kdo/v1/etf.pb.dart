@@ -740,15 +740,13 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? name,
     $1.ProductType? productType,
-    $fixnum.Int64? quantity,
-    $core.String? quantityExact,
+    $core.String? quantity,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
     if (productType != null) result.productType = productType;
     if (quantity != null) result.quantity = quantity;
-    if (quantityExact != null) result.quantityExact = quantityExact;
     return result;
   }
 
@@ -761,8 +759,7 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..e<$1.ProductType>(3, _omitFieldNames ? '' : 'productType', $pb.PbFieldType.OE, defaultOrMaker: $1.ProductType.PRODUCT_TYPE_UNSPECIFIED, valueOf: $1.ProductType.valueOf, enumValues: $1.ProductType.values)
-    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
-    ..aOS(5, _omitFieldNames ? '' : 'quantityExact')
+    ..aOS(4, _omitFieldNames ? '' : 'quantity')
     ..hasRequiredFields = false
   ;
 
@@ -813,25 +810,15 @@ class EtfPdfConstituent extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearProductType() => $_clearField(3);
 
-  /// 구성 수량 (선물 숏의 경우 음수). 소수값은 손실되므로 정확한 값은 quantity_exact 참조.
+  /// 구성 수량 (선물 숏의 경우 음수, 소수 지원). Cash의 경우 원화 금액(원 단위 정수).
   @$pb.TagNumber(4)
-  $fixnum.Int64 get quantity => $_getI64(3);
+  $core.String get quantity => $_getSZ(3);
   @$pb.TagNumber(4)
-  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  set quantity($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
   $core.bool hasQuantity() => $_has(3);
   @$pb.TagNumber(4)
   void clearQuantity() => $_clearField(4);
-
-  /// 정확한 구성 수량 (소수 지원, 예: "-0.37"). Cash의 경우 원화 금액(원 단위 정수).
-  @$pb.TagNumber(5)
-  $core.String get quantityExact => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set quantityExact($core.String value) => $_setString(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasQuantityExact() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearQuantityExact() => $_clearField(5);
 }
 
 /// ETF가 다른 상품으로 변환될 수 있는 정보

@@ -143,12 +143,9 @@ pub struct EtfPdfConstituent {
     /// 상품 타입
     #[prost(enumeration="super::common::ProductType", tag="3")]
     pub product_type: i32,
-    /// 구성 수량 (선물 숏의 경우 음수). 소수값은 손실되므로 정확한 값은 quantity_exact 참조.
-    #[prost(int64, tag="4")]
-    pub quantity: i64,
-    /// 정확한 구성 수량 (소수 지원, 예: "-0.37"). Cash의 경우 원화 금액(원 단위 정수).
-    #[prost(string, tag="5")]
-    pub quantity_exact: ::prost::alloc::string::String,
+    /// 구성 수량 (선물 숏의 경우 음수, 소수 지원). Cash의 경우 원화 금액(원 단위 정수).
+    #[prost(string, tag="4")]
+    pub quantity: ::prost::alloc::string::String,
 }
 /// ETF가 다른 상품으로 변환될 수 있는 정보
 /// 예: KODEX 2X Inverse는 1cu당 -0.37개의 코스피200 선물로 변환 가능
