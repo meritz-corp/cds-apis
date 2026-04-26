@@ -158,6 +158,9 @@ message EtfLp {
 
   // 매수/매도 수량 한도
   optional EtfLpQuantityLimit quantity_limit = 20;
+
+  // precomputed quote retreat 처리 정책
+  optional PrecomputePolicy precompute_policy = 21;
 }
 
 // 매수/매도 수량 한도
@@ -242,6 +245,12 @@ message EtfLpStatus {
 
   // 매수/매도 수량 한도
   optional EtfLpQuantityLimit quantity_limit = 22;
+
+  // precomputed quote retreat 처리 정책
+  optional PrecomputePolicy precompute_policy = 23;
+
+  // 호가 깊이 (양방향 레벨 수)
+  uint32 depth = 24;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -300,6 +309,21 @@ message EtfLpStatusUpdate {
 
   // 매수/매도 수량 한도
   optional EtfLpQuantityLimit quantity_limit = 21;
+
+  // precomputed quote retreat 처리 정책
+  optional PrecomputePolicy precompute_policy = 22;
+
+  // 호가 깊이 (양방향 레벨 수, 변경 시에만 Some)
+  optional uint32 depth = 23;
+}
+
+// precomputed quote retreat 처리 정책
+enum PrecomputePolicy {
+  PRECOMPUTE_POLICY_UNSPECIFIED = 0;
+  // 현재 동작: retreat side depth가 줄고 이후 refill/new order로 복구
+  PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT = 1;
+  // retreat side depth를 amend로 유지
+  PRECOMPUTE_POLICY_AMEND_ON_RETREAT = 2;
 }
 
 
@@ -583,6 +607,9 @@ message UpdateEtfLpRequest {
 
   // 매수/매도 수량 한도
   optional EtfLpQuantityLimit quantity_limit = 15;
+
+  // precomputed quote retreat 처리 정책
+  optional PrecomputePolicy precompute_policy = 16;
 }
 
 

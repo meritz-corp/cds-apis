@@ -154,6 +154,9 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -212,6 +215,11 @@ impl serde::Serialize for EtfLp {
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
+        if let Some(v) = self.precompute_policy.as_ref() {
+            let v = PrecomputePolicy::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("precompute_policy", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -252,6 +260,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "momentumSensitivity",
             "quantity_limit",
             "quantityLimit",
+            "precompute_policy",
+            "precomputePolicy",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -273,6 +283,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             MomentumWindow,
             MomentumSensitivity,
             QuantityLimit,
+            PrecomputePolicy,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -312,6 +323,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -348,6 +360,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut momentum_window__ = None;
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
+                let mut precompute_policy__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -472,6 +485,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             }
                             quantity_limit__ = map_.next_value()?;
                         }
+                        GeneratedField::PrecomputePolicy => {
+                            if precompute_policy__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("precomputePolicy"));
+                            }
+                            precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -495,6 +514,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     momentum_window: momentum_window__,
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
+                    precompute_policy: precompute_policy__,
                 })
             }
         }
@@ -1262,6 +1282,12 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -1326,6 +1352,14 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
+        if let Some(v) = self.precompute_policy.as_ref() {
+            let v = PrecomputePolicy::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("precompute_policy", &v)?;
+        }
+        if true {
+            struct_ser.serialize_field("depth", &self.depth)?;
+        }
         struct_ser.end()
     }
 }
@@ -1370,6 +1404,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "momentumAskAdjustment",
             "quantity_limit",
             "quantityLimit",
+            "precompute_policy",
+            "precomputePolicy",
+            "depth",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1393,6 +1430,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             MomentumBidAdjustment,
             MomentumAskAdjustment,
             QuantityLimit,
+            PrecomputePolicy,
+            Depth,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1434,6 +1473,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
                             "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
+                            "depth" => Ok(GeneratedField::Depth),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1472,6 +1513,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut momentum_bid_adjustment__ = None;
                 let mut momentum_ask_adjustment__ = None;
                 let mut quantity_limit__ = None;
+                let mut precompute_policy__ = None;
+                let mut depth__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1608,6 +1651,20 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             quantity_limit__ = map_.next_value()?;
                         }
+                        GeneratedField::PrecomputePolicy => {
+                            if precompute_policy__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("precomputePolicy"));
+                            }
+                            precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::Depth => {
+                            if depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
+                            }
+                            depth__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1633,6 +1690,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     momentum_bid_adjustment: momentum_bid_adjustment__,
                     momentum_ask_adjustment: momentum_ask_adjustment__,
                     quantity_limit: quantity_limit__,
+                    precompute_policy: precompute_policy__,
+                    depth: depth__.unwrap_or_default(),
                 })
             }
         }
@@ -1647,6 +1706,12 @@ impl serde::Serialize for EtfLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1762,6 +1827,14 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
+        if let Some(v) = self.precompute_policy.as_ref() {
+            let v = PrecomputePolicy::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("precompute_policy", &v)?;
+        }
+        if let Some(v) = self.depth.as_ref() {
+            struct_ser.serialize_field("depth", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1805,6 +1878,9 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "momentumAskAdjustment",
             "quantity_limit",
             "quantityLimit",
+            "precompute_policy",
+            "precomputePolicy",
+            "depth",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1827,6 +1903,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             MomentumBidAdjustment,
             MomentumAskAdjustment,
             QuantityLimit,
+            PrecomputePolicy,
+            Depth,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1867,6 +1945,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
                             "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
+                            "depth" => Ok(GeneratedField::Depth),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1904,6 +1984,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut momentum_bid_adjustment__ = None;
                 let mut momentum_ask_adjustment__ = None;
                 let mut quantity_limit__ = None;
+                let mut precompute_policy__ = None;
+                let mut depth__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -2034,6 +2116,20 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             }
                             quantity_limit__ = map_.next_value()?;
                         }
+                        GeneratedField::PrecomputePolicy => {
+                            if precompute_policy__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("precomputePolicy"));
+                            }
+                            precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::Depth => {
+                            if depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
+                            }
+                            depth__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2058,6 +2154,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     momentum_bid_adjustment: momentum_bid_adjustment__,
                     momentum_ask_adjustment: momentum_ask_adjustment__,
                     quantity_limit: quantity_limit__,
+                    precompute_policy: precompute_policy__,
+                    depth: depth__,
                 })
             }
         }
@@ -3507,6 +3605,80 @@ impl<'de> serde::Deserialize<'de> for PositionAdjustmentStrategy {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for PrecomputePolicy {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "PRECOMPUTE_POLICY_UNSPECIFIED",
+            Self::DepleteOnRetreat => "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT",
+            Self::AmendOnRetreat => "PRECOMPUTE_POLICY_AMEND_ON_RETREAT",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for PrecomputePolicy {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "PRECOMPUTE_POLICY_UNSPECIFIED",
+            "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT",
+            "PRECOMPUTE_POLICY_AMEND_ON_RETREAT",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PrecomputePolicy;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "PRECOMPUTE_POLICY_UNSPECIFIED" => Ok(PrecomputePolicy::Unspecified),
+                    "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT" => Ok(PrecomputePolicy::DepleteOnRetreat),
+                    "PRECOMPUTE_POLICY_AMEND_ON_RETREAT" => Ok(PrecomputePolicy::AmendOnRetreat),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for StartEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4389,6 +4561,9 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -4436,6 +4611,11 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
+        if let Some(v) = self.precompute_policy.as_ref() {
+            let v = PrecomputePolicy::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("precompute_policy", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4471,6 +4651,8 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "momentumSensitivity",
             "quantity_limit",
             "quantityLimit",
+            "precompute_policy",
+            "precomputePolicy",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4489,6 +4671,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             MomentumWindow,
             MomentumSensitivity,
             QuantityLimit,
+            PrecomputePolicy,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4525,6 +4708,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4558,6 +4742,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 let mut momentum_window__ = None;
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
+                let mut precompute_policy__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -4662,6 +4847,12 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             }
                             quantity_limit__ = map_.next_value()?;
                         }
+                        GeneratedField::PrecomputePolicy => {
+                            if precompute_policy__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("precomputePolicy"));
+                            }
+                            precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4682,6 +4873,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                     momentum_window: momentum_window__,
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
+                    precompute_policy: precompute_policy__,
                 })
             }
         }

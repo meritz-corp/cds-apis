@@ -212,6 +212,10 @@
                 "quantityLimit": {
                   "$ref": "#/definitions/lpEtfLpQuantityLimit",
                   "title": "매수/매도 수량 한도"
+                },
+                "precomputePolicy": {
+                  "$ref": "#/definitions/lpPrecomputePolicy",
+                  "title": "precomputed quote retreat 처리 정책"
                 }
               },
               "title": "UpdateEtfLp"
@@ -673,6 +677,10 @@
         "quantityLimit": {
           "$ref": "#/definitions/lpEtfLpQuantityLimit",
           "title": "매수/매도 수량 한도"
+        },
+        "precomputePolicy": {
+          "$ref": "#/definitions/lpPrecomputePolicy",
+          "title": "precomputed quote retreat 처리 정책"
         }
       },
       "title": "ETF LP 설정"
@@ -874,6 +882,15 @@
         "quantityLimit": {
           "$ref": "#/definitions/lpEtfLpQuantityLimit",
           "title": "매수/매도 수량 한도"
+        },
+        "precomputePolicy": {
+          "$ref": "#/definitions/lpPrecomputePolicy",
+          "title": "precomputed quote retreat 처리 정책"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이 (양방향 레벨 수)"
         }
       },
       "title": "ETF LP 상태"
@@ -961,6 +978,15 @@
         "quantityLimit": {
           "$ref": "#/definitions/lpEtfLpQuantityLimit",
           "title": "매수/매도 수량 한도"
+        },
+        "precomputePolicy": {
+          "$ref": "#/definitions/lpPrecomputePolicy",
+          "title": "precomputed quote retreat 처리 정책"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이 (양방향 레벨 수, 변경 시에만 Some)"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
@@ -1051,6 +1077,17 @@
       "default": "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
       "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
       "title": "순매매량 기반 조정 전략"
+    },
+    "lpPrecomputePolicy": {
+      "type": "string",
+      "enum": [
+        "PRECOMPUTE_POLICY_UNSPECIFIED",
+        "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT",
+        "PRECOMPUTE_POLICY_AMEND_ON_RETREAT"
+      ],
+      "default": "PRECOMPUTE_POLICY_UNSPECIFIED",
+      "description": "- PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT: 현재 동작: retreat side depth가 줄고 이후 refill/new order로 복구\n - PRECOMPUTE_POLICY_AMEND_ON_RETREAT: retreat side depth를 amend로 유지",
+      "title": "precomputed quote retreat 처리 정책"
     },
     "lpStartEtfLpResponse": {
       "type": "object",

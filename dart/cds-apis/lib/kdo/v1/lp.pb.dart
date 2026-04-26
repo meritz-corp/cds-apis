@@ -42,6 +42,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
     EtfLpQuantityLimit? quantityLimit,
+    PrecomputePolicy? precomputePolicy,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -61,6 +62,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (momentumWindow != null) result.momentumWindow = momentumWindow;
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
+    if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     return result;
   }
 
@@ -87,6 +89,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..a<$core.int>(18, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<EtfLpQuantityLimit>(20, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..e<PrecomputePolicy>(21, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..hasRequiredFields = false
   ;
 
@@ -280,6 +283,16 @@ class EtfLp extends $pb.GeneratedMessage {
   void clearQuantityLimit() => $_clearField(20);
   @$pb.TagNumber(20)
   EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(16);
+
+  /// precomputed quote retreat 처리 정책
+  @$pb.TagNumber(21)
+  PrecomputePolicy get precomputePolicy => $_getN(17);
+  @$pb.TagNumber(21)
+  set precomputePolicy(PrecomputePolicy value) => $_setField(21, value);
+  @$pb.TagNumber(21)
+  $core.bool hasPrecomputePolicy() => $_has(17);
+  @$pb.TagNumber(21)
+  void clearPrecomputePolicy() => $_clearField(21);
 }
 
 /// 매수/매도 수량 한도
@@ -395,6 +408,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     $core.double? momentumBidAdjustment,
     $core.double? momentumAskAdjustment,
     EtfLpQuantityLimit? quantityLimit,
+    PrecomputePolicy? precomputePolicy,
+    $core.int? depth,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -416,6 +431,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (momentumBidAdjustment != null) result.momentumBidAdjustment = momentumBidAdjustment;
     if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
+    if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
+    if (depth != null) result.depth = depth;
     return result;
   }
 
@@ -444,6 +461,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..a<$core.double>(20, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(21, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
     ..aOM<EtfLpQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..e<PrecomputePolicy>(23, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
+    ..a<$core.int>(24, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -662,6 +681,26 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   void clearQuantityLimit() => $_clearField(22);
   @$pb.TagNumber(22)
   EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(18);
+
+  /// precomputed quote retreat 처리 정책
+  @$pb.TagNumber(23)
+  PrecomputePolicy get precomputePolicy => $_getN(19);
+  @$pb.TagNumber(23)
+  set precomputePolicy(PrecomputePolicy value) => $_setField(23, value);
+  @$pb.TagNumber(23)
+  $core.bool hasPrecomputePolicy() => $_has(19);
+  @$pb.TagNumber(23)
+  void clearPrecomputePolicy() => $_clearField(23);
+
+  /// 호가 깊이 (양방향 레벨 수)
+  @$pb.TagNumber(24)
+  $core.int get depth => $_getIZ(20);
+  @$pb.TagNumber(24)
+  set depth($core.int value) => $_setUnsignedInt32(20, value);
+  @$pb.TagNumber(24)
+  $core.bool hasDepth() => $_has(20);
+  @$pb.TagNumber(24)
+  void clearDepth() => $_clearField(24);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -685,6 +724,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     $core.double? momentumBidAdjustment,
     $core.double? momentumAskAdjustment,
     EtfLpQuantityLimit? quantityLimit,
+    PrecomputePolicy? precomputePolicy,
+    $core.int? depth,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -705,6 +746,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (momentumBidAdjustment != null) result.momentumBidAdjustment = momentumBidAdjustment;
     if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
+    if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
+    if (depth != null) result.depth = depth;
     return result;
   }
 
@@ -732,6 +775,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(20, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
     ..aOM<EtfLpQuantityLimit>(21, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..e<PrecomputePolicy>(22, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
+    ..a<$core.int>(23, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -938,6 +983,26 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   void clearQuantityLimit() => $_clearField(21);
   @$pb.TagNumber(21)
   EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
+
+  /// precomputed quote retreat 처리 정책
+  @$pb.TagNumber(22)
+  PrecomputePolicy get precomputePolicy => $_getN(18);
+  @$pb.TagNumber(22)
+  set precomputePolicy(PrecomputePolicy value) => $_setField(22, value);
+  @$pb.TagNumber(22)
+  $core.bool hasPrecomputePolicy() => $_has(18);
+  @$pb.TagNumber(22)
+  void clearPrecomputePolicy() => $_clearField(22);
+
+  /// 호가 깊이 (양방향 레벨 수, 변경 시에만 Some)
+  @$pb.TagNumber(23)
+  $core.int get depth => $_getIZ(19);
+  @$pb.TagNumber(23)
+  set depth($core.int value) => $_setUnsignedInt32(19, value);
+  @$pb.TagNumber(23)
+  $core.bool hasDepth() => $_has(19);
+  @$pb.TagNumber(23)
+  void clearDepth() => $_clearField(23);
 }
 
 /// 자동 offset 조정 설정
@@ -1975,6 +2040,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
     EtfLpQuantityLimit? quantityLimit,
+    PrecomputePolicy? precomputePolicy,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -1991,6 +2057,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (momentumWindow != null) result.momentumWindow = momentumWindow;
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
+    if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     return result;
   }
 
@@ -2014,6 +2081,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(13, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<EtfLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
+    ..e<PrecomputePolicy>(16, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..hasRequiredFields = false
   ;
 
@@ -2175,6 +2243,16 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   void clearQuantityLimit() => $_clearField(15);
   @$pb.TagNumber(15)
   EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(13);
+
+  /// precomputed quote retreat 처리 정책
+  @$pb.TagNumber(16)
+  PrecomputePolicy get precomputePolicy => $_getN(14);
+  @$pb.TagNumber(16)
+  set precomputePolicy(PrecomputePolicy value) => $_setField(16, value);
+  @$pb.TagNumber(16)
+  $core.bool hasPrecomputePolicy() => $_has(14);
+  @$pb.TagNumber(16)
+  void clearPrecomputePolicy() => $_clearField(16);
 }
 
 /// GetEtfLpStatus

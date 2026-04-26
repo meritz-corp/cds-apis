@@ -54,6 +54,9 @@ pub struct EtfLp {
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="20")]
     pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    /// precomputed quote retreat 처리 정책
+    #[prost(enumeration="PrecomputePolicy", optional, tag="21")]
+    pub precompute_policy: ::core::option::Option<i32>,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -138,6 +141,12 @@ pub struct EtfLpStatus {
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="22")]
     pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    /// precomputed quote retreat 처리 정책
+    #[prost(enumeration="PrecomputePolicy", optional, tag="23")]
+    pub precompute_policy: ::core::option::Option<i32>,
+    /// 호가 깊이 (양방향 레벨 수)
+    #[prost(uint32, tag="24")]
+    pub depth: u32,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -196,6 +205,12 @@ pub struct EtfLpStatusUpdate {
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="21")]
     pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    /// precomputed quote retreat 처리 정책
+    #[prost(enumeration="PrecomputePolicy", optional, tag="22")]
+    pub precompute_policy: ::core::option::Option<i32>,
+    /// 호가 깊이 (양방향 레벨 수, 변경 시에만 Some)
+    #[prost(uint32, optional, tag="23")]
+    pub depth: ::core::option::Option<u32>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -476,6 +491,9 @@ pub struct UpdateEtfLpRequest {
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="15")]
     pub quantity_limit: ::core::option::Option<EtfLpQuantityLimit>,
+    /// precomputed quote retreat 처리 정책
+    #[prost(enumeration="PrecomputePolicy", optional, tag="16")]
+    pub precompute_policy: ::core::option::Option<i32>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -569,6 +587,38 @@ pub struct UserOrderbookData {
     /// 매도 수량 (10단계)
     #[prost(int64, repeated, tag="4")]
     pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
+}
+/// precomputed quote retreat 처리 정책
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PrecomputePolicy {
+    Unspecified = 0,
+    /// 현재 동작: retreat side depth가 줄고 이후 refill/new order로 복구
+    DepleteOnRetreat = 1,
+    /// retreat side depth를 amend로 유지
+    AmendOnRetreat = 2,
+}
+impl PrecomputePolicy {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PrecomputePolicy::Unspecified => "PRECOMPUTE_POLICY_UNSPECIFIED",
+            PrecomputePolicy::DepleteOnRetreat => "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT",
+            PrecomputePolicy::AmendOnRetreat => "PRECOMPUTE_POLICY_AMEND_ON_RETREAT",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PRECOMPUTE_POLICY_UNSPECIFIED" => Some(Self::Unspecified),
+            "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT" => Some(Self::DepleteOnRetreat),
+            "PRECOMPUTE_POLICY_AMEND_ON_RETREAT" => Some(Self::AmendOnRetreat),
+            _ => None,
+        }
+    }
 }
 /// 순매매량 기반 조정 전략
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

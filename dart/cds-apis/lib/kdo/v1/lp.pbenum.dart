@@ -14,6 +14,26 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// precomputed quote retreat 처리 정책
+class PrecomputePolicy extends $pb.ProtobufEnum {
+  static const PrecomputePolicy PRECOMPUTE_POLICY_UNSPECIFIED = PrecomputePolicy._(0, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_UNSPECIFIED');
+  /// 현재 동작: retreat side depth가 줄고 이후 refill/new order로 복구
+  static const PrecomputePolicy PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT = PrecomputePolicy._(1, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT');
+  /// retreat side depth를 amend로 유지
+  static const PrecomputePolicy PRECOMPUTE_POLICY_AMEND_ON_RETREAT = PrecomputePolicy._(2, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_AMEND_ON_RETREAT');
+
+  static const $core.List<PrecomputePolicy> values = <PrecomputePolicy> [
+    PRECOMPUTE_POLICY_UNSPECIFIED,
+    PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT,
+    PRECOMPUTE_POLICY_AMEND_ON_RETREAT,
+  ];
+
+  static final $core.List<PrecomputePolicy?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static PrecomputePolicy? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const PrecomputePolicy._(super.value, super.name);
+}
+
 /// 순매매량 기반 조정 전략
 class PositionAdjustmentStrategy extends $pb.ProtobufEnum {
   static const PositionAdjustmentStrategy POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED = PositionAdjustmentStrategy._(0, _omitEnumNames ? '' : 'POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED');
