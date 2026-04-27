@@ -244,6 +244,10 @@ pub struct EtfLpOffset {
     pub position_threshold: i64,
     #[prost(double, tag="20")]
     pub position_adjustment_step: f64,
+    /// 누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.
+    /// 트리거 발동(offset 변경) 시 0으로 리셋됩니다.
+    #[prost(int64, tag="21")]
+    pub net_position: i64,
 }
 /// ETF LP 헷지 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

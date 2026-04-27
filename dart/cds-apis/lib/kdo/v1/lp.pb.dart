@@ -1020,6 +1020,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
     PositionAdjustmentStrategy? positionStrategy,
     $fixnum.Int64? positionThreshold,
     $core.double? positionAdjustmentStep,
+    $fixnum.Int64? netPosition,
   }) {
     final result = create();
     if (bidOffset != null) result.bidOffset = bidOffset;
@@ -1034,6 +1035,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
     if (positionStrategy != null) result.positionStrategy = positionStrategy;
     if (positionThreshold != null) result.positionThreshold = positionThreshold;
     if (positionAdjustmentStep != null) result.positionAdjustmentStep = positionAdjustmentStep;
+    if (netPosition != null) result.netPosition = netPosition;
     return result;
   }
 
@@ -1055,6 +1057,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
     ..e<PositionAdjustmentStrategy>(18, _omitFieldNames ? '' : 'positionStrategy', $pb.PbFieldType.OE, defaultOrMaker: PositionAdjustmentStrategy.POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED, valueOf: PositionAdjustmentStrategy.valueOf, enumValues: PositionAdjustmentStrategy.values)
     ..aInt64(19, _omitFieldNames ? '' : 'positionThreshold')
     ..a<$core.double>(20, _omitFieldNames ? '' : 'positionAdjustmentStep', $pb.PbFieldType.OD)
+    ..aInt64(21, _omitFieldNames ? '' : 'netPosition')
     ..hasRequiredFields = false
   ;
 
@@ -1185,6 +1188,17 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   $core.bool hasPositionAdjustmentStep() => $_has(11);
   @$pb.TagNumber(20)
   void clearPositionAdjustmentStep() => $_clearField(20);
+
+  /// 누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.
+  /// 트리거 발동(offset 변경) 시 0으로 리셋됩니다.
+  @$pb.TagNumber(21)
+  $fixnum.Int64 get netPosition => $_getI64(12);
+  @$pb.TagNumber(21)
+  set netPosition($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(21)
+  $core.bool hasNetPosition() => $_has(12);
+  @$pb.TagNumber(21)
+  void clearNetPosition() => $_clearField(21);
 }
 
 /// ETF LP 헷지 설정

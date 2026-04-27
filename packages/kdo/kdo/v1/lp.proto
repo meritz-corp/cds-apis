@@ -359,6 +359,10 @@ message EtfLpOffset {
   PositionAdjustmentStrategy position_strategy = 18;
   int64 position_threshold = 19;
   double position_adjustment_step = 20;
+
+  // 누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.
+  // 트리거 발동(offset 변경) 시 0으로 리셋됩니다.
+  int64 net_position = 21;
 }
 
 // ETF LP 헷지 설정

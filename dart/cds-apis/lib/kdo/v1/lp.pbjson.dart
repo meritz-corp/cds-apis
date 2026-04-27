@@ -315,6 +315,7 @@ const EtfLpOffset$json = {
     {'1': 'position_strategy', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.lp.PositionAdjustmentStrategy', '10': 'positionStrategy'},
     {'1': 'position_threshold', '3': 19, '4': 1, '5': 3, '10': 'positionThreshold'},
     {'1': 'position_adjustment_step', '3': 20, '4': 1, '5': 1, '10': 'positionAdjustmentStep'},
+    {'1': 'net_position', '3': 21, '4': 1, '5': 3, '10': 'netPosition'},
   ],
 };
 
@@ -330,7 +331,8 @@ final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
     'JsZWQSUgoRcG9zaXRpb25fc3RyYXRlZ3kYEiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1'
     'c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGB'
     'MgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCAB'
-    'KAFSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXA=');
+    'KAFSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXASIQoMbmV0X3Bvc2l0aW9uGBUgASgDUgtuZXRQb3'
+    'NpdGlvbg==');
 
 @$core.Deprecated('Use etfLpHedgeDescriptor instead')
 const EtfLpHedge$json = {
