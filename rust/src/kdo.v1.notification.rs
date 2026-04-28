@@ -16,14 +16,23 @@ pub struct ListNotificationsRequest {
     /// Token of the page to retrieve.
     #[prost(string, tag="3")]
     pub page_token: ::prost::alloc::string::String,
-    /// Filter expression.
-    /// Available filters:
-    /// * state: CREATED, ACKNOWLEDGED, EXPIRED
-    /// * type: INFO, ERROR
+    /// 필터 표현식. 키-값 쌍을 `;`으로 구분하며, 복수 값은 `,`로 구분한다.
     ///
-    /// Examples:
+    /// 지원 필터 키:
+    /// * state=CREATED|ACKNOWLEDGED|EXPIRED  — 알림 상태 필터
+    /// * type=INFO|ERROR                     — 알림 종류 필터
+    /// * exclude_event_type=Name1,Name2,...  — 특정 event_type 제외 (신규)
+    ///
+    /// 자주 쓰는 event_type 이름:
+    ///    ReconcileOrphan, ReconcileDuplicate, ReconcileInvalidOrder,
+    ///    ReconcileQuantitySync, OffsetAdjustmentTimeStrategy,
+    ///    OffsetAdjustmentPositionStrategy, FundLimitExceeded, FundLimitWarning,
+    ///    HedgeError, System, Custom, QuickOrderError
+    ///
+    /// 예시:
     /// * state=CREATED
     /// * type=INFO
+    /// * state=CREATED;exclude_event_type=ReconcileOrphan,System
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
 }

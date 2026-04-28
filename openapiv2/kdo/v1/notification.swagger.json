@@ -59,7 +59,7 @@
           },
           {
             "name": "filter",
-            "description": "Filter expression.\nAvailable filters:\n* state: CREATED, ACKNOWLEDGED, EXPIRED\n* type: INFO, ERROR\n\nExamples:\n* state=CREATED\n* type=INFO",
+            "description": "필터 표현식. 키-값 쌍을 `;`으로 구분하며, 복수 값은 `,`로 구분한다.\n\n지원 필터 키:\n* state=CREATED|ACKNOWLEDGED|EXPIRED  — 알림 상태 필터\n* type=INFO|ERROR                     — 알림 종류 필터\n* exclude_event_type=Name1,Name2,...  — 특정 event_type 제외 (신규)\n\n자주 쓰는 event_type 이름:\n  ReconcileOrphan, ReconcileDuplicate, ReconcileInvalidOrder,\n  ReconcileQuantitySync, OffsetAdjustmentTimeStrategy,\n  OffsetAdjustmentPositionStrategy, FundLimitExceeded, FundLimitWarning,\n  HedgeError, System, Custom, QuickOrderError\n\n예시:\n* state=CREATED\n* type=INFO\n* state=CREATED;exclude_event_type=ReconcileOrphan,System",
             "in": "query",
             "required": false,
             "type": "string"

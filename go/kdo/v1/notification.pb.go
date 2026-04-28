@@ -146,14 +146,24 @@ type ListNotificationsRequest struct {
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Token of the page to retrieve.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// Filter expression.
-	// Available filters:
-	// * state: CREATED, ACKNOWLEDGED, EXPIRED
-	// * type: INFO, ERROR
+	// 필터 표현식. 키-값 쌍을 `;`으로 구분하며, 복수 값은 `,`로 구분한다.
 	//
-	// Examples:
+	// 지원 필터 키:
+	// * state=CREATED|ACKNOWLEDGED|EXPIRED  — 알림 상태 필터
+	// * type=INFO|ERROR                     — 알림 종류 필터
+	// * exclude_event_type=Name1,Name2,...  — 특정 event_type 제외 (신규)
+	//
+	// 자주 쓰는 event_type 이름:
+	//
+	//	ReconcileOrphan, ReconcileDuplicate, ReconcileInvalidOrder,
+	//	ReconcileQuantitySync, OffsetAdjustmentTimeStrategy,
+	//	OffsetAdjustmentPositionStrategy, FundLimitExceeded, FundLimitWarning,
+	//	HedgeError, System, Custom, QuickOrderError
+	//
+	// 예시:
 	// * state=CREATED
 	// * type=INFO
+	// * state=CREATED;exclude_event_type=ReconcileOrphan,System
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
