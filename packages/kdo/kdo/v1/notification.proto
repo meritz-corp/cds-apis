@@ -63,7 +63,11 @@ message ListNotificationsRequest {
   // 지원 필터 키:
   // * state=CREATED|ACKNOWLEDGED|EXPIRED  — 알림 상태 필터
   // * type=INFO|ERROR                     — 알림 종류 필터
-  // * exclude_event_type=Name1,Name2,...  — 특정 event_type 제외 (신규)
+  // * exclude_event_type=Name1,Name2,...  — 특정 event_type 제외
+  // * symbol=A,B,C                        — 심볼 CSV 화이트리스트 필터.
+  //                                         비어있지 않으면 Notification.symbol이
+  //                                         목록 안에 있는 알림만 통과.
+  //                                         symbol이 NULL(비어있음)인 알림은 제외됨.
   //
   // 자주 쓰는 event_type 이름:
   //   ReconcileOrphan, ReconcileDuplicate, ReconcileInvalidOrder,
@@ -75,6 +79,7 @@ message ListNotificationsRequest {
   // * state=CREATED
   // * type=INFO
   // * state=CREATED;exclude_event_type=ReconcileOrphan,System
+  // * state=CREATED;symbol=KR7252670005;exclude_event_type=ReconcileOrphan
   string filter = 4;
 }
 
@@ -270,6 +275,13 @@ message Notification {
 
   // Acknowledged timestamp
   optional google.protobuf.Timestamp acknowledge_time = 14 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 관련 심볼 (예: ETF 종목코드 KR7252670005).
+  // LP/주문 관련 알림(EtfLpEvent, QuickOrderError)이 채움.
+  // 심볼 무관 알림(System/Custom 등)은 비어있음.
+  optional string symbol = 15 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
 }

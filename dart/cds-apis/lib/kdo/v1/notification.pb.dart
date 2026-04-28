@@ -106,7 +106,11 @@ class ListNotificationsRequest extends $pb.GeneratedMessage {
   /// 지원 필터 키:
   /// * state=CREATED|ACKNOWLEDGED|EXPIRED  — 알림 상태 필터
   /// * type=INFO|ERROR                     — 알림 종류 필터
-  /// * exclude_event_type=Name1,Name2,...  — 특정 event_type 제외 (신규)
+  /// * exclude_event_type=Name1,Name2,...  — 특정 event_type 제외
+  /// * symbol=A,B,C                        — 심볼 CSV 화이트리스트 필터.
+  ///                                         비어있지 않으면 Notification.symbol이
+  ///                                         목록 안에 있는 알림만 통과.
+  ///                                         symbol이 NULL(비어있음)인 알림은 제외됨.
   ///
   /// 자주 쓰는 event_type 이름:
   ///   ReconcileOrphan, ReconcileDuplicate, ReconcileInvalidOrder,
@@ -118,6 +122,7 @@ class ListNotificationsRequest extends $pb.GeneratedMessage {
   /// * state=CREATED
   /// * type=INFO
   /// * state=CREATED;exclude_event_type=ReconcileOrphan,System
+  /// * state=CREATED;symbol=KR7252670005;exclude_event_type=ReconcileOrphan
   @$pb.TagNumber(4)
   $core.String get filter => $_getSZ(3);
   @$pb.TagNumber(4)
@@ -545,6 +550,7 @@ class Notification extends $pb.GeneratedMessage {
     $2.Timestamp? createTime,
     $2.Timestamp? expireTime,
     $2.Timestamp? acknowledgeTime,
+    $core.String? symbol,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -561,6 +567,7 @@ class Notification extends $pb.GeneratedMessage {
     if (createTime != null) result.createTime = createTime;
     if (expireTime != null) result.expireTime = expireTime;
     if (acknowledgeTime != null) result.acknowledgeTime = acknowledgeTime;
+    if (symbol != null) result.symbol = symbol;
     return result;
   }
 
@@ -584,6 +591,7 @@ class Notification extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(12, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(13, _omitFieldNames ? '' : 'expireTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(14, _omitFieldNames ? '' : 'acknowledgeTime', subBuilder: $2.Timestamp.create)
+    ..aOS(15, _omitFieldNames ? '' : 'symbol')
     ..hasRequiredFields = false
   ;
 
@@ -749,6 +757,18 @@ class Notification extends $pb.GeneratedMessage {
   void clearAcknowledgeTime() => $_clearField(14);
   @$pb.TagNumber(14)
   $2.Timestamp ensureAcknowledgeTime() => $_ensure(13);
+
+  /// 관련 심볼 (예: ETF 종목코드 KR7252670005).
+  /// LP/주문 관련 알림(EtfLpEvent, QuickOrderError)이 채움.
+  /// 심볼 무관 알림(System/Custom 등)은 비어있음.
+  @$pb.TagNumber(15)
+  $core.String get symbol => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set symbol($core.String value) => $_setString(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasSymbol() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearSymbol() => $_clearField(15);
 }
 
 
