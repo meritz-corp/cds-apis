@@ -57,13 +57,13 @@ const Etf$json = {
     {'1': 'cash_creation_amount', '3': 24, '4': 1, '5': 3, '10': 'cashCreationAmount'},
     {'1': 'conversions', '3': 25, '4': 3, '5': 11, '6': '.kdo.v1.etf.Etf.ConversionsEntry', '10': 'conversions'},
     {'1': 'unit_delta', '3': 26, '4': 1, '5': 9, '10': 'unitDelta'},
-    {'1': 'pricing', '3': 28, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '10': 'pricing'},
   ],
   '3': [Etf_ConstituentsEntry$json, Etf_ConversionsEntry$json],
   '9': [
     {'1': 27, '2': 28},
+    {'1': 28, '2': 29},
   ],
-  '10': ['decomposed_constituents'],
+  '10': ['decomposed_constituents', 'pricing'],
 };
 
 @$core.Deprecated('Use etfDescriptor instead')
@@ -103,12 +103,11 @@ final $typed_data.Uint8List etfDescriptor = $convert.base64Decode(
     'Y2tpbmdBc3NldBInCg9jYXNoX2NyZWRpdGFibGUYFyABKAhSDmNhc2hDcmVkaXRhYmxlEjAKFG'
     'Nhc2hfY3JlYXRpb25fYW1vdW50GBggASgDUhJjYXNoQ3JlYXRpb25BbW91bnQSQgoLY29udmVy'
     'c2lvbnMYGSADKAsyIC5rZG8udjEuZXRmLkV0Zi5Db252ZXJzaW9uc0VudHJ5Ugtjb252ZXJzaW'
-    '9ucxIdCgp1bml0X2RlbHRhGBogASgJUgl1bml0RGVsdGESMwoHcHJpY2luZxgcIAEoCzIZLmtk'
-    'by52MS5jb21tb24uRXRmUHJpY2luZ1IHcHJpY2luZxpeChFDb25zdGl0dWVudHNFbnRyeRIQCg'
-    'NrZXkYASABKAlSA2tleRIzCgV2YWx1ZRgCIAEoCzIdLmtkby52MS5ldGYuRXRmUGRmQ29uc3Rp'
-    'dHVlbnRSBXZhbHVlOgI4ARpWChBDb252ZXJzaW9uc0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5Ei'
-    'wKBXZhbHVlGAIgASgLMhYua2RvLnYxLmV0Zi5Db252ZXJzaW9uUgV2YWx1ZToCOAFKBAgbEBxS'
-    'F2RlY29tcG9zZWRfY29uc3RpdHVlbnRz');
+    '9ucxIdCgp1bml0X2RlbHRhGBogASgJUgl1bml0RGVsdGEaXgoRQ29uc3RpdHVlbnRzRW50cnkS'
+    'EAoDa2V5GAEgASgJUgNrZXkSMwoFdmFsdWUYAiABKAsyHS5rZG8udjEuZXRmLkV0ZlBkZkNvbn'
+    'N0aXR1ZW50UgV2YWx1ZToCOAEaVgoQQ29udmVyc2lvbnNFbnRyeRIQCgNrZXkYASABKAlSA2tl'
+    'eRIsCgV2YWx1ZRgCIAEoCzIWLmtkby52MS5ldGYuQ29udmVyc2lvblIFdmFsdWU6AjgBSgQIGx'
+    'AcSgQIHBAdUhdkZWNvbXBvc2VkX2NvbnN0aXR1ZW50c1IHcHJpY2luZw==');
 
 @$core.Deprecated('Use etfConstituentDescriptor instead')
 const EtfConstituent$json = {

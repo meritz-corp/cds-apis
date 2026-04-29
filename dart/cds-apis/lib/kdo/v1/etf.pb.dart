@@ -46,7 +46,6 @@ class Etf extends $pb.GeneratedMessage {
     $fixnum.Int64? cashCreationAmount,
     $core.Iterable<$core.MapEntry<$core.String, Conversion>>? conversions,
     $core.String? unitDelta,
-    $1.EtfPricing? pricing,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -71,7 +70,6 @@ class Etf extends $pb.GeneratedMessage {
     if (cashCreationAmount != null) result.cashCreationAmount = cashCreationAmount;
     if (conversions != null) result.conversions.addEntries(conversions);
     if (unitDelta != null) result.unitDelta = unitDelta;
-    if (pricing != null) result.pricing = pricing;
     return result;
   }
 
@@ -103,7 +101,6 @@ class Etf extends $pb.GeneratedMessage {
     ..aInt64(24, _omitFieldNames ? '' : 'cashCreationAmount')
     ..m<$core.String, Conversion>(25, _omitFieldNames ? '' : 'conversions', entryClassName: 'Etf.ConversionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: Conversion.create, valueDefaultOrMaker: Conversion.getDefault, packageName: const $pb.PackageName('kdo.v1.etf'))
     ..aOS(26, _omitFieldNames ? '' : 'unitDelta')
-    ..aOM<$1.EtfPricing>(28, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -324,18 +321,6 @@ class Etf extends $pb.GeneratedMessage {
   $core.bool hasUnitDelta() => $_has(21);
   @$pb.TagNumber(26)
   void clearUnitDelta() => $_clearField(26);
-
-  /// 가격 산출 방식. LeverageFuture의 경우 prev_index/prev_future 포함
-  @$pb.TagNumber(28)
-  $1.EtfPricing get pricing => $_getN(22);
-  @$pb.TagNumber(28)
-  set pricing($1.EtfPricing value) => $_setField(28, value);
-  @$pb.TagNumber(28)
-  $core.bool hasPricing() => $_has(22);
-  @$pb.TagNumber(28)
-  void clearPricing() => $_clearField(28);
-  @$pb.TagNumber(28)
-  $1.EtfPricing ensurePricing() => $_ensure(22);
 }
 
 enum EtfConstituent_ConstituentType {

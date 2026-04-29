@@ -60,9 +60,6 @@ pub struct Etf {
     /// unit_delta (구성종목 기반 NAV 계산용)
     #[prost(string, tag="26")]
     pub unit_delta: ::prost::alloc::string::String,
-    /// 가격 산출 방식. LeverageFuture의 경우 prev_index/prev_future 포함
-    #[prost(message, optional, tag="28")]
-    pub pricing: ::core::option::Option<super::common::EtfPricing>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

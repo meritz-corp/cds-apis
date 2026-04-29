@@ -599,10 +599,6 @@
         "unitDelta": {
           "type": "string",
           "title": "unit_delta (구성종목 기반 NAV 계산용)"
-        },
-        "pricing": {
-          "$ref": "#/definitions/commonEtfPricing",
-          "title": "가격 산출 방식. LeverageFuture의 경우 prev_index/prev_future 포함"
         }
       }
     },
