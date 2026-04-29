@@ -136,6 +136,9 @@ message Etf {
     // field number 27 reserved: decomposed_constituents removed (도메인 통합 이후 constituents 자체가 flattened PDF, 2026-04-24)
     reserved 27;
     reserved "decomposed_constituents";
+
+    // 가격 산출 방식. LeverageFuture의 경우 prev_index/prev_future 포함
+    kdo.v1.common.EtfPricing pricing = 28;
 }
 
 message EtfConstituent {
