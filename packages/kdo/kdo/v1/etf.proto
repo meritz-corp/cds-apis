@@ -497,8 +497,8 @@ message GetEtfPricingStateResponse {
     // 공통 — 모든 pricing 모드에서 채워짐
     string unit_delta = 2;
     string prev_nav = 3;
-    // 정적 leverage 설정값 (예: 2.0, -1.0). 인버스면 음수.
-    double leverage = 4;
+    // 정적 leverage 설정값 (예: "2.0", "-1.0"). 인버스면 음수.
+    string leverage = 4;
     string cash_per_share = 5;
     int64 creation_unit = 6;
 

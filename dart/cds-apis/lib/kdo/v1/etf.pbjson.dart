@@ -546,7 +546,7 @@ const GetEtfPricingStateResponse$json = {
     {'1': 'pricing_kind', '3': 1, '4': 1, '5': 9, '10': 'pricingKind'},
     {'1': 'unit_delta', '3': 2, '4': 1, '5': 9, '10': 'unitDelta'},
     {'1': 'prev_nav', '3': 3, '4': 1, '5': 9, '10': 'prevNav'},
-    {'1': 'leverage', '3': 4, '4': 1, '5': 1, '10': 'leverage'},
+    {'1': 'leverage', '3': 4, '4': 1, '5': 9, '10': 'leverage'},
     {'1': 'cash_per_share', '3': 5, '4': 1, '5': 9, '10': 'cashPerShare'},
     {'1': 'creation_unit', '3': 6, '4': 1, '5': 3, '10': 'creationUnit'},
     {'1': 'stock_ratio', '3': 10, '4': 1, '5': 1, '9': 0, '10': 'stockRatio', '17': true},
@@ -568,7 +568,7 @@ const GetEtfPricingStateResponse$json = {
 final $typed_data.Uint8List getEtfPricingStateResponseDescriptor = $convert.base64Decode(
     'ChpHZXRFdGZQcmljaW5nU3RhdGVSZXNwb25zZRIhCgxwcmljaW5nX2tpbmQYASABKAlSC3ByaW'
     'NpbmdLaW5kEh0KCnVuaXRfZGVsdGEYAiABKAlSCXVuaXREZWx0YRIZCghwcmV2X25hdhgDIAEo'
-    'CVIHcHJldk5hdhIaCghsZXZlcmFnZRgEIAEoAVIIbGV2ZXJhZ2USJAoOY2FzaF9wZXJfc2hhcm'
+    'CVIHcHJldk5hdhIaCghsZXZlcmFnZRgEIAEoCVIIbGV2ZXJhZ2USJAoOY2FzaF9wZXJfc2hhcm'
     'UYBSABKAlSDGNhc2hQZXJTaGFyZRIjCg1jcmVhdGlvbl91bml0GAYgASgDUgxjcmVhdGlvblVu'
     'aXQSJAoLc3RvY2tfcmF0aW8YCiABKAFIAFIKc3RvY2tSYXRpb4gBARJGCh1jb25zdGl0dWVudF'
     '9hZGp1c3RlZF9wcmV2X25hdhgLIAEoCUgBUhpjb25zdGl0dWVudEFkanVzdGVkUHJldk5hdogB'

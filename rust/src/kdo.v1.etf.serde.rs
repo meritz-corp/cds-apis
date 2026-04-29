@@ -2485,9 +2485,7 @@ impl<'de> serde::Deserialize<'de> for GetEtfPricingStateResponse {
                             if leverage__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("leverage"));
                             }
-                            leverage__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            leverage__ = Some(map_.next_value()?);
                         }
                         GeneratedField::CashPerShare => {
                             if cash_per_share__.is_some() {

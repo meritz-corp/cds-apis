@@ -2199,7 +2199,7 @@ class GetEtfPricingStateResponse extends $pb.GeneratedMessage {
     $core.String? pricingKind,
     $core.String? unitDelta,
     $core.String? prevNav,
-    $core.double? leverage,
+    $core.String? leverage,
     $core.String? cashPerShare,
     $fixnum.Int64? creationUnit,
     $core.double? stockRatio,
@@ -2232,7 +2232,7 @@ class GetEtfPricingStateResponse extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'pricingKind')
     ..aOS(2, _omitFieldNames ? '' : 'unitDelta')
     ..aOS(3, _omitFieldNames ? '' : 'prevNav')
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'leverage', $pb.PbFieldType.OD)
+    ..aOS(4, _omitFieldNames ? '' : 'leverage')
     ..aOS(5, _omitFieldNames ? '' : 'cashPerShare')
     ..aInt64(6, _omitFieldNames ? '' : 'creationUnit')
     ..a<$core.double>(10, _omitFieldNames ? '' : 'stockRatio', $pb.PbFieldType.OD)
@@ -2291,11 +2291,11 @@ class GetEtfPricingStateResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPrevNav() => $_clearField(3);
 
-  /// 정적 leverage 설정값 (예: 2.0, -1.0). 인버스면 음수.
+  /// 정적 leverage 설정값 (예: "2.0", "-1.0"). 인버스면 음수.
   @$pb.TagNumber(4)
-  $core.double get leverage => $_getN(3);
+  $core.String get leverage => $_getSZ(3);
   @$pb.TagNumber(4)
-  set leverage($core.double value) => $_setDouble(3, value);
+  set leverage($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
   $core.bool hasLeverage() => $_has(3);
   @$pb.TagNumber(4)

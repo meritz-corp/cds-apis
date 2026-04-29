@@ -732,9 +732,8 @@
           "type": "string"
         },
         "leverage": {
-          "type": "number",
-          "format": "double",
-          "description": "정적 leverage 설정값 (예: 2.0, -1.0). 인버스면 음수."
+          "type": "string",
+          "description": "정적 leverage 설정값 (예: \"2.0\", \"-1.0\"). 인버스면 음수."
         },
         "cashPerShare": {
           "type": "string"

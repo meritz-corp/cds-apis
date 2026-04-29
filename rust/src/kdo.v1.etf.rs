@@ -419,9 +419,9 @@ pub struct GetEtfPricingStateResponse {
     pub unit_delta: ::prost::alloc::string::String,
     #[prost(string, tag="3")]
     pub prev_nav: ::prost::alloc::string::String,
-    /// 정적 leverage 설정값 (예: 2.0, -1.0). 인버스면 음수.
-    #[prost(double, tag="4")]
-    pub leverage: f64,
+    /// 정적 leverage 설정값 (예: "2.0", "-1.0"). 인버스면 음수.
+    #[prost(string, tag="4")]
+    pub leverage: ::prost::alloc::string::String,
     #[prost(string, tag="5")]
     pub cash_per_share: ::prost::alloc::string::String,
     #[prost(int64, tag="6")]
