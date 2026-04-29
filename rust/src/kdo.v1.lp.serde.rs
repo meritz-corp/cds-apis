@@ -3635,8 +3635,8 @@ impl serde::Serialize for PrecomputePolicy {
     {
         let variant = match self {
             Self::Unspecified => "PRECOMPUTE_POLICY_UNSPECIFIED",
-            Self::DepleteOnRetreat => "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT",
-            Self::AmendOnRetreat => "PRECOMPUTE_POLICY_AMEND_ON_RETREAT",
+            Self::OneToOne => "PRECOMPUTE_POLICY_ONE_TO_ONE",
+            Self::OneToMany => "PRECOMPUTE_POLICY_ONE_TO_MANY",
         };
         serializer.serialize_str(variant)
     }
@@ -3649,8 +3649,8 @@ impl<'de> serde::Deserialize<'de> for PrecomputePolicy {
     {
         const FIELDS: &[&str] = &[
             "PRECOMPUTE_POLICY_UNSPECIFIED",
-            "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT",
-            "PRECOMPUTE_POLICY_AMEND_ON_RETREAT",
+            "PRECOMPUTE_POLICY_ONE_TO_ONE",
+            "PRECOMPUTE_POLICY_ONE_TO_MANY",
         ];
 
         struct GeneratedVisitor;
@@ -3692,8 +3692,8 @@ impl<'de> serde::Deserialize<'de> for PrecomputePolicy {
             {
                 match value {
                     "PRECOMPUTE_POLICY_UNSPECIFIED" => Ok(PrecomputePolicy::Unspecified),
-                    "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT" => Ok(PrecomputePolicy::DepleteOnRetreat),
-                    "PRECOMPUTE_POLICY_AMEND_ON_RETREAT" => Ok(PrecomputePolicy::AmendOnRetreat),
+                    "PRECOMPUTE_POLICY_ONE_TO_ONE" => Ok(PrecomputePolicy::OneToOne),
+                    "PRECOMPUTE_POLICY_ONE_TO_MANY" => Ok(PrecomputePolicy::OneToMany),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

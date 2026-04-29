@@ -17,15 +17,21 @@ import 'package:protobuf/protobuf.dart' as $pb;
 /// precomputed quote retreat 처리 정책
 class PrecomputePolicy extends $pb.ProtobufEnum {
   static const PrecomputePolicy PRECOMPUTE_POLICY_UNSPECIFIED = PrecomputePolicy._(0, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_UNSPECIFIED');
-  /// 현재 동작: retreat side depth가 줄고 이후 refill/new order로 복구
-  static const PrecomputePolicy PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT = PrecomputePolicy._(1, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT');
-  /// retreat side depth를 amend로 유지
-  static const PrecomputePolicy PRECOMPUTE_POLICY_AMEND_ON_RETREAT = PrecomputePolicy._(2, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_AMEND_ON_RETREAT');
+  /// 선물 1틱 ↔ ETF 1틱 (1:1 대응). 빠른 추격 LP.
+  /// precompute 시나리오 경우의 수 축소를 위한 최적화 적용:
+  ///   - depth 초과 / 역방향 시 cancel-all + slowpath refill
+  ///   - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함
+  static const PrecomputePolicy PRECOMPUTE_POLICY_ONE_TO_ONE = PrecomputePolicy._(1, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_ONE_TO_ONE');
+  /// 선물 N틱 ↔ ETF 1틱 (1:N 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:
+  ///   - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)
+  ///   - depth 초과(드문 케이스)는 cancel-all만
+  ///   - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill
+  static const PrecomputePolicy PRECOMPUTE_POLICY_ONE_TO_MANY = PrecomputePolicy._(2, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_ONE_TO_MANY');
 
   static const $core.List<PrecomputePolicy> values = <PrecomputePolicy> [
     PRECOMPUTE_POLICY_UNSPECIFIED,
-    PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT,
-    PRECOMPUTE_POLICY_AMEND_ON_RETREAT,
+    PRECOMPUTE_POLICY_ONE_TO_ONE,
+    PRECOMPUTE_POLICY_ONE_TO_MANY,
   ];
 
   static final $core.List<PrecomputePolicy?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);

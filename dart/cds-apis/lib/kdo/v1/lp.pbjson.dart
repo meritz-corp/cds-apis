@@ -19,16 +19,16 @@ const PrecomputePolicy$json = {
   '1': 'PrecomputePolicy',
   '2': [
     {'1': 'PRECOMPUTE_POLICY_UNSPECIFIED', '2': 0},
-    {'1': 'PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT', '2': 1},
-    {'1': 'PRECOMPUTE_POLICY_AMEND_ON_RETREAT', '2': 2},
+    {'1': 'PRECOMPUTE_POLICY_ONE_TO_ONE', '2': 1},
+    {'1': 'PRECOMPUTE_POLICY_ONE_TO_MANY', '2': 2},
   ],
 };
 
 /// Descriptor for `PrecomputePolicy`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List precomputePolicyDescriptor = $convert.base64Decode(
-    'ChBQcmVjb21wdXRlUG9saWN5EiEKHVBSRUNPTVBVVEVfUE9MSUNZX1VOU1BFQ0lGSUVEEAASKA'
-    'okUFJFQ09NUFVURV9QT0xJQ1lfREVQTEVURV9PTl9SRVRSRUFUEAESJgoiUFJFQ09NUFVURV9Q'
-    'T0xJQ1lfQU1FTkRfT05fUkVUUkVBVBAC');
+    'ChBQcmVjb21wdXRlUG9saWN5EiEKHVBSRUNPTVBVVEVfUE9MSUNZX1VOU1BFQ0lGSUVEEAASIA'
+    'ocUFJFQ09NUFVURV9QT0xJQ1lfT05FX1RPX09ORRABEiEKHVBSRUNPTVBVVEVfUE9MSUNZX09O'
+    'RV9UT19NQU5ZEAI=');
 
 @$core.Deprecated('Use positionAdjustmentStrategyDescriptor instead')
 const PositionAdjustmentStrategy$json = {

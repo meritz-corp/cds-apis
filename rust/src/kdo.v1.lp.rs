@@ -597,10 +597,16 @@ pub struct UserOrderbookData {
 #[repr(i32)]
 pub enum PrecomputePolicy {
     Unspecified = 0,
-    /// 현재 동작: retreat side depth가 줄고 이후 refill/new order로 복구
-    DepleteOnRetreat = 1,
-    /// retreat side depth를 amend로 유지
-    AmendOnRetreat = 2,
+    /// 선물 1틱 ↔ ETF 1틱 (1:1 대응). 빠른 추격 LP.
+    /// precompute 시나리오 경우의 수 축소를 위한 최적화 적용:
+    ///    - depth 초과 / 역방향 시 cancel-all + slowpath refill
+    ///    - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함
+    OneToOne = 1,
+    /// 선물 N틱 ↔ ETF 1틱 (1:N 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:
+    ///    - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)
+    ///    - depth 초과(드문 케이스)는 cancel-all만
+    ///    - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill
+    OneToMany = 2,
 }
 impl PrecomputePolicy {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -610,16 +616,16 @@ impl PrecomputePolicy {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             PrecomputePolicy::Unspecified => "PRECOMPUTE_POLICY_UNSPECIFIED",
-            PrecomputePolicy::DepleteOnRetreat => "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT",
-            PrecomputePolicy::AmendOnRetreat => "PRECOMPUTE_POLICY_AMEND_ON_RETREAT",
+            PrecomputePolicy::OneToOne => "PRECOMPUTE_POLICY_ONE_TO_ONE",
+            PrecomputePolicy::OneToMany => "PRECOMPUTE_POLICY_ONE_TO_MANY",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "PRECOMPUTE_POLICY_UNSPECIFIED" => Some(Self::Unspecified),
-            "PRECOMPUTE_POLICY_DEPLETE_ON_RETREAT" => Some(Self::DepleteOnRetreat),
-            "PRECOMPUTE_POLICY_AMEND_ON_RETREAT" => Some(Self::AmendOnRetreat),
+            "PRECOMPUTE_POLICY_ONE_TO_ONE" => Some(Self::OneToOne),
+            "PRECOMPUTE_POLICY_ONE_TO_MANY" => Some(Self::OneToMany),
             _ => None,
         }
     }
