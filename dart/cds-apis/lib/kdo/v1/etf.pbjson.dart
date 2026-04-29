@@ -524,3 +524,57 @@ final $typed_data.Uint8List getEtfConstituentsResponseDescriptor = $convert.base
     'b25zdGl0dWVudHMaXgoRQ29uc3RpdHVlbnRzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSMwoFdm'
     'FsdWUYAiABKAsyHS5rZG8udjEuZXRmLkV0ZlBkZkNvbnN0aXR1ZW50UgV2YWx1ZToCOAE=');
 
+@$core.Deprecated('Use getEtfPricingStateRequestDescriptor instead')
+const GetEtfPricingStateRequest$json = {
+  '1': 'GetEtfPricingStateRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '8': {}, '10': 'pricing'},
+  ],
+};
+
+/// Descriptor for `GetEtfPricingStateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfPricingStateRequestDescriptor = $convert.base64Decode(
+    'ChlHZXRFdGZQcmljaW5nU3RhdGVSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLm'
+    'Nkc2FwaXMueHl6L0V0ZlIDZXRmEjkKB3ByaWNpbmcYAiABKAsyGS5rZG8udjEuY29tbW9uLkV0'
+    'ZlByaWNpbmdCBOJBAQJSB3ByaWNpbmc=');
+
+@$core.Deprecated('Use getEtfPricingStateResponseDescriptor instead')
+const GetEtfPricingStateResponse$json = {
+  '1': 'GetEtfPricingStateResponse',
+  '2': [
+    {'1': 'pricing_kind', '3': 1, '4': 1, '5': 9, '10': 'pricingKind'},
+    {'1': 'unit_delta', '3': 2, '4': 1, '5': 9, '10': 'unitDelta'},
+    {'1': 'prev_nav', '3': 3, '4': 1, '5': 9, '10': 'prevNav'},
+    {'1': 'leverage', '3': 4, '4': 1, '5': 1, '10': 'leverage'},
+    {'1': 'cash_per_share', '3': 5, '4': 1, '5': 9, '10': 'cashPerShare'},
+    {'1': 'creation_unit', '3': 6, '4': 1, '5': 3, '10': 'creationUnit'},
+    {'1': 'stock_ratio', '3': 10, '4': 1, '5': 1, '9': 0, '10': 'stockRatio', '17': true},
+    {'1': 'constituent_adjusted_prev_nav', '3': 11, '4': 1, '5': 9, '9': 1, '10': 'constituentAdjustedPrevNav', '17': true},
+    {'1': 'actual_leverage_l', '3': 12, '4': 1, '5': 9, '9': 2, '10': 'actualLeverageL', '17': true},
+    {'1': 'prev_index', '3': 13, '4': 1, '5': 9, '9': 3, '10': 'prevIndex', '17': true},
+    {'1': 'prev_future', '3': 14, '4': 1, '5': 9, '9': 4, '10': 'prevFuture', '17': true},
+  ],
+  '8': [
+    {'1': '_stock_ratio'},
+    {'1': '_constituent_adjusted_prev_nav'},
+    {'1': '_actual_leverage_l'},
+    {'1': '_prev_index'},
+    {'1': '_prev_future'},
+  ],
+};
+
+/// Descriptor for `GetEtfPricingStateResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfPricingStateResponseDescriptor = $convert.base64Decode(
+    'ChpHZXRFdGZQcmljaW5nU3RhdGVSZXNwb25zZRIhCgxwcmljaW5nX2tpbmQYASABKAlSC3ByaW'
+    'NpbmdLaW5kEh0KCnVuaXRfZGVsdGEYAiABKAlSCXVuaXREZWx0YRIZCghwcmV2X25hdhgDIAEo'
+    'CVIHcHJldk5hdhIaCghsZXZlcmFnZRgEIAEoAVIIbGV2ZXJhZ2USJAoOY2FzaF9wZXJfc2hhcm'
+    'UYBSABKAlSDGNhc2hQZXJTaGFyZRIjCg1jcmVhdGlvbl91bml0GAYgASgDUgxjcmVhdGlvblVu'
+    'aXQSJAoLc3RvY2tfcmF0aW8YCiABKAFIAFIKc3RvY2tSYXRpb4gBARJGCh1jb25zdGl0dWVudF'
+    '9hZGp1c3RlZF9wcmV2X25hdhgLIAEoCUgBUhpjb25zdGl0dWVudEFkanVzdGVkUHJldk5hdogB'
+    'ARIvChFhY3R1YWxfbGV2ZXJhZ2VfbBgMIAEoCUgCUg9hY3R1YWxMZXZlcmFnZUyIAQESIgoKcH'
+    'Jldl9pbmRleBgNIAEoCUgDUglwcmV2SW5kZXiIAQESJAoLcHJldl9mdXR1cmUYDiABKAlIBFIK'
+    'cHJldkZ1dHVyZYgBAUIOCgxfc3RvY2tfcmF0aW9CIAoeX2NvbnN0aXR1ZW50X2FkanVzdGVkX3'
+    'ByZXZfbmF2QhQKEl9hY3R1YWxfbGV2ZXJhZ2VfbEINCgtfcHJldl9pbmRleEIOCgxfcHJldl9m'
+    'dXR1cmU=');
+

@@ -64,4 +64,14 @@ abstract final class EtfService {
     kdov1etf.GetEtfConstituentsRequest.new,
     kdov1etf.GetEtfConstituentsResponse.new,
   );
+
+  /// ETF pricing 디버그용 — pricing 모드별 내부 상태 스냅샷 반환.
+  /// 특히 LeverageFuture는 k(stock_ratio), Nav0(constituent_adjusted_prev_nav),
+  /// L(=unit_delta/Nav0, signed)을 노출해 외부에서 NAV 공식 검증 가능.
+  static const getEtfPricingState = connect.Spec(
+    '/$name/GetEtfPricingState',
+    connect.StreamType.unary,
+    kdov1etf.GetEtfPricingStateRequest.new,
+    kdov1etf.GetEtfPricingStateResponse.new,
+  );
 }

@@ -247,6 +247,31 @@ pub mod etf_service_client {
                 .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "GetEtfConstituents"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn get_etf_pricing_state(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetEtfPricingStateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEtfPricingStateResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.etf.EtfService/GetEtfPricingState",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.etf.EtfService", "GetEtfPricingState"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -291,6 +316,13 @@ pub mod etf_service_server {
             request: tonic::Request<super::GetEtfConstituentsRequest>,
         ) -> std::result::Result<
             tonic::Response<super::GetEtfConstituentsResponse>,
+            tonic::Status,
+        >;
+        async fn get_etf_pricing_state(
+            &self,
+            request: tonic::Request<super::GetEtfPricingStateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEtfPricingStateResponse>,
             tonic::Status,
         >;
     }
@@ -672,6 +704,52 @@ pub mod etf_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetEtfConstituentsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.etf.EtfService/GetEtfPricingState" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetEtfPricingStateSvc<T: EtfService>(pub Arc<T>);
+                    impl<
+                        T: EtfService,
+                    > tonic::server::UnaryService<super::GetEtfPricingStateRequest>
+                    for GetEtfPricingStateSvc<T> {
+                        type Response = super::GetEtfPricingStateResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetEtfPricingStateRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as EtfService>::get_etf_pricing_state(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetEtfPricingStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

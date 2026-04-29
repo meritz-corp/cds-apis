@@ -114,6 +114,26 @@ func (mr *MockEtfServiceClientMockRecorder) GetEtfConstituents(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfConstituents", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtfConstituents), varargs...)
 }
 
+// GetEtfPricingState mocks base method.
+func (m *MockEtfServiceClient) GetEtfPricingState(ctx context.Context, in *GetEtfPricingStateRequest, opts ...grpc.CallOption) (*GetEtfPricingStateResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetEtfPricingState", varargs...)
+	ret0, _ := ret[0].(*GetEtfPricingStateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfPricingState indicates an expected call of GetEtfPricingState.
+func (mr *MockEtfServiceClientMockRecorder) GetEtfPricingState(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfPricingState", reflect.TypeOf((*MockEtfServiceClient)(nil).GetEtfPricingState), varargs...)
+}
+
 // GetEtfTickImpact mocks base method.
 func (m *MockEtfServiceClient) GetEtfTickImpact(ctx context.Context, in *GetEtfTickImpactRequest, opts ...grpc.CallOption) (*EtfTickImpact, error) {
 	m.ctrl.T.Helper()
@@ -255,6 +275,21 @@ func (m *MockEtfServiceServer) GetEtfConstituents(ctx context.Context, in *GetEt
 func (mr *MockEtfServiceServerMockRecorder) GetEtfConstituents(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfConstituents", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtfConstituents), ctx, in)
+}
+
+// GetEtfPricingState mocks base method.
+func (m *MockEtfServiceServer) GetEtfPricingState(ctx context.Context, in *GetEtfPricingStateRequest) (*GetEtfPricingStateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetEtfPricingState", ctx, in)
+	ret0, _ := ret[0].(*GetEtfPricingStateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEtfPricingState indicates an expected call of GetEtfPricingState.
+func (mr *MockEtfServiceServerMockRecorder) GetEtfPricingState(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfPricingState", reflect.TypeOf((*MockEtfServiceServer)(nil).GetEtfPricingState), ctx, in)
 }
 
 // GetEtfTickImpact mocks base method.

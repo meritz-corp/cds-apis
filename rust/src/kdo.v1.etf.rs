@@ -395,6 +395,54 @@ pub struct GetEtfConstituentsResponse {
     #[prost(map="string, message", tag="1")]
     pub constituents: ::std::collections::HashMap<::prost::alloc::string::String, EtfPdfConstituent>,
 }
+/// GetEtfPricingState
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfPricingStateRequest {
+    /// ETF 리소스 이름 (예: "etfs/069500")
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// pricing 모드 + 파라미터
+    #[prost(message, optional, tag="2")]
+    pub pricing: ::core::option::Option<super::common::EtfPricing>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfPricingStateResponse {
+    /// pricing 식별자 (도메인 EtfPricing::as_str():
+    /// "pdf_nav_hedge" | "pdf_decompose_hedge" | "index_tracking_hedge"
+    /// | "future_basis" | "leverage_future")
+    #[prost(string, tag="1")]
+    pub pricing_kind: ::prost::alloc::string::String,
+    /// 공통 — 모든 pricing 모드에서 채워짐
+    #[prost(string, tag="2")]
+    pub unit_delta: ::prost::alloc::string::String,
+    #[prost(string, tag="3")]
+    pub prev_nav: ::prost::alloc::string::String,
+    /// 정적 leverage 설정값 (예: 2.0, -1.0). 인버스면 음수.
+    #[prost(double, tag="4")]
+    pub leverage: f64,
+    #[prost(string, tag="5")]
+    pub cash_per_share: ::prost::alloc::string::String,
+    #[prost(int64, tag="6")]
+    pub creation_unit: i64,
+    /// LeverageFuture 전용 (pricing_kind == "leverage_future"일 때만 채움)
+    /// k: 바스켓 내 현물 비중 (0.0 ~ 1.0)
+    #[prost(double, optional, tag="10")]
+    pub stock_ratio: ::core::option::Option<f64>,
+    /// Nav0: 하위 ETF 시장가-NAV 괴리 보정 전일 NAV
+    #[prost(string, optional, tag="11")]
+    pub constituent_adjusted_prev_nav: ::core::option::Option<::prost::alloc::string::String>,
+    /// L = unit_delta / Nav0 (인버스면 부호 반전)
+    #[prost(string, optional, tag="12")]
+    pub actual_leverage_l: ::core::option::Option<::prost::alloc::string::String>,
+    /// 요청에서 받은 prev_index, prev_future echo
+    /// (FutureBasis는 prev_index만 채워짐)
+    #[prost(string, optional, tag="13")]
+    pub prev_index: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(string, optional, tag="14")]
+    pub prev_future: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// 복제 방법
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

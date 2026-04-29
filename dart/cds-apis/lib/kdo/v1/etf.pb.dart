@@ -2131,6 +2131,246 @@ class GetEtfConstituentsResponse extends $pb.GeneratedMessage {
   $pb.PbMap<$core.String, EtfPdfConstituent> get constituents => $_getMap(0);
 }
 
+/// GetEtfPricingState
+class GetEtfPricingStateRequest extends $pb.GeneratedMessage {
+  factory GetEtfPricingStateRequest({
+    $core.String? etf,
+    $1.EtfPricing? pricing,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (pricing != null) result.pricing = pricing;
+    return result;
+  }
+
+  GetEtfPricingStateRequest._();
+
+  factory GetEtfPricingStateRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfPricingStateRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfPricingStateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOM<$1.EtfPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfPricingStateRequest clone() => GetEtfPricingStateRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfPricingStateRequest copyWith(void Function(GetEtfPricingStateRequest) updates) => super.copyWith((message) => updates(message as GetEtfPricingStateRequest)) as GetEtfPricingStateRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfPricingStateRequest create() => GetEtfPricingStateRequest._();
+  @$core.override
+  GetEtfPricingStateRequest createEmptyInstance() => create();
+  static $pb.PbList<GetEtfPricingStateRequest> createRepeated() => $pb.PbList<GetEtfPricingStateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfPricingStateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfPricingStateRequest>(create);
+  static GetEtfPricingStateRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: "etfs/069500")
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// pricing 모드 + 파라미터
+  @$pb.TagNumber(2)
+  $1.EtfPricing get pricing => $_getN(1);
+  @$pb.TagNumber(2)
+  set pricing($1.EtfPricing value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPricing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPricing() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $1.EtfPricing ensurePricing() => $_ensure(1);
+}
+
+class GetEtfPricingStateResponse extends $pb.GeneratedMessage {
+  factory GetEtfPricingStateResponse({
+    $core.String? pricingKind,
+    $core.String? unitDelta,
+    $core.String? prevNav,
+    $core.double? leverage,
+    $core.String? cashPerShare,
+    $fixnum.Int64? creationUnit,
+    $core.double? stockRatio,
+    $core.String? constituentAdjustedPrevNav,
+    $core.String? actualLeverageL,
+    $core.String? prevIndex,
+    $core.String? prevFuture,
+  }) {
+    final result = create();
+    if (pricingKind != null) result.pricingKind = pricingKind;
+    if (unitDelta != null) result.unitDelta = unitDelta;
+    if (prevNav != null) result.prevNav = prevNav;
+    if (leverage != null) result.leverage = leverage;
+    if (cashPerShare != null) result.cashPerShare = cashPerShare;
+    if (creationUnit != null) result.creationUnit = creationUnit;
+    if (stockRatio != null) result.stockRatio = stockRatio;
+    if (constituentAdjustedPrevNav != null) result.constituentAdjustedPrevNav = constituentAdjustedPrevNav;
+    if (actualLeverageL != null) result.actualLeverageL = actualLeverageL;
+    if (prevIndex != null) result.prevIndex = prevIndex;
+    if (prevFuture != null) result.prevFuture = prevFuture;
+    return result;
+  }
+
+  GetEtfPricingStateResponse._();
+
+  factory GetEtfPricingStateResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfPricingStateResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfPricingStateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pricingKind')
+    ..aOS(2, _omitFieldNames ? '' : 'unitDelta')
+    ..aOS(3, _omitFieldNames ? '' : 'prevNav')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'leverage', $pb.PbFieldType.OD)
+    ..aOS(5, _omitFieldNames ? '' : 'cashPerShare')
+    ..aInt64(6, _omitFieldNames ? '' : 'creationUnit')
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'stockRatio', $pb.PbFieldType.OD)
+    ..aOS(11, _omitFieldNames ? '' : 'constituentAdjustedPrevNav')
+    ..aOS(12, _omitFieldNames ? '' : 'actualLeverageL')
+    ..aOS(13, _omitFieldNames ? '' : 'prevIndex')
+    ..aOS(14, _omitFieldNames ? '' : 'prevFuture')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfPricingStateResponse clone() => GetEtfPricingStateResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfPricingStateResponse copyWith(void Function(GetEtfPricingStateResponse) updates) => super.copyWith((message) => updates(message as GetEtfPricingStateResponse)) as GetEtfPricingStateResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfPricingStateResponse create() => GetEtfPricingStateResponse._();
+  @$core.override
+  GetEtfPricingStateResponse createEmptyInstance() => create();
+  static $pb.PbList<GetEtfPricingStateResponse> createRepeated() => $pb.PbList<GetEtfPricingStateResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfPricingStateResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfPricingStateResponse>(create);
+  static GetEtfPricingStateResponse? _defaultInstance;
+
+  /// pricing 식별자 (도메인 EtfPricing::as_str():
+  /// "pdf_nav_hedge" | "pdf_decompose_hedge" | "index_tracking_hedge"
+  /// | "future_basis" | "leverage_future")
+  @$pb.TagNumber(1)
+  $core.String get pricingKind => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pricingKind($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPricingKind() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPricingKind() => $_clearField(1);
+
+  /// 공통 — 모든 pricing 모드에서 채워짐
+  @$pb.TagNumber(2)
+  $core.String get unitDelta => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set unitDelta($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUnitDelta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUnitDelta() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get prevNav => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set prevNav($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPrevNav() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPrevNav() => $_clearField(3);
+
+  /// 정적 leverage 설정값 (예: 2.0, -1.0). 인버스면 음수.
+  @$pb.TagNumber(4)
+  $core.double get leverage => $_getN(3);
+  @$pb.TagNumber(4)
+  set leverage($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasLeverage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLeverage() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get cashPerShare => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set cashPerShare($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCashPerShare() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCashPerShare() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get creationUnit => $_getI64(5);
+  @$pb.TagNumber(6)
+  set creationUnit($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCreationUnit() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCreationUnit() => $_clearField(6);
+
+  /// LeverageFuture 전용 (pricing_kind == "leverage_future"일 때만 채움)
+  /// k: 바스켓 내 현물 비중 (0.0 ~ 1.0)
+  @$pb.TagNumber(10)
+  $core.double get stockRatio => $_getN(6);
+  @$pb.TagNumber(10)
+  set stockRatio($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(10)
+  $core.bool hasStockRatio() => $_has(6);
+  @$pb.TagNumber(10)
+  void clearStockRatio() => $_clearField(10);
+
+  /// Nav0: 하위 ETF 시장가-NAV 괴리 보정 전일 NAV
+  @$pb.TagNumber(11)
+  $core.String get constituentAdjustedPrevNav => $_getSZ(7);
+  @$pb.TagNumber(11)
+  set constituentAdjustedPrevNav($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(11)
+  $core.bool hasConstituentAdjustedPrevNav() => $_has(7);
+  @$pb.TagNumber(11)
+  void clearConstituentAdjustedPrevNav() => $_clearField(11);
+
+  /// L = unit_delta / Nav0 (인버스면 부호 반전)
+  @$pb.TagNumber(12)
+  $core.String get actualLeverageL => $_getSZ(8);
+  @$pb.TagNumber(12)
+  set actualLeverageL($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(12)
+  $core.bool hasActualLeverageL() => $_has(8);
+  @$pb.TagNumber(12)
+  void clearActualLeverageL() => $_clearField(12);
+
+  /// 요청에서 받은 prev_index, prev_future echo
+  /// (FutureBasis는 prev_index만 채워짐)
+  @$pb.TagNumber(13)
+  $core.String get prevIndex => $_getSZ(9);
+  @$pb.TagNumber(13)
+  set prevIndex($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(13)
+  $core.bool hasPrevIndex() => $_has(9);
+  @$pb.TagNumber(13)
+  void clearPrevIndex() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get prevFuture => $_getSZ(10);
+  @$pb.TagNumber(14)
+  set prevFuture($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(14)
+  $core.bool hasPrevFuture() => $_has(10);
+  @$pb.TagNumber(14)
+  void clearPrevFuture() => $_clearField(14);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

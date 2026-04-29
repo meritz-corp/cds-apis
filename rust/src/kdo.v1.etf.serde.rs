@@ -2163,6 +2163,401 @@ impl<'de> serde::Deserialize<'de> for GetEtfConstituentsResponse {
         deserializer.deserialize_struct("kdo.v1.etf.GetEtfConstituentsResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for GetEtfPricingStateRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.GetEtfPricingStateRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if let Some(v) = self.pricing.as_ref() {
+            struct_ser.serialize_field("pricing", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetEtfPricingStateRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+            "pricing",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            Pricing,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "pricing" => Ok(GeneratedField::Pricing),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetEtfPricingStateRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.GetEtfPricingStateRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetEtfPricingStateRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut pricing__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Pricing => {
+                            if pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricing"));
+                            }
+                            pricing__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetEtfPricingStateRequest {
+                    etf: etf__.unwrap_or_default(),
+                    pricing: pricing__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.GetEtfPricingStateRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetEtfPricingStateResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.GetEtfPricingStateResponse", len)?;
+        if true {
+            struct_ser.serialize_field("pricing_kind", &self.pricing_kind)?;
+        }
+        if true {
+            struct_ser.serialize_field("unit_delta", &self.unit_delta)?;
+        }
+        if true {
+            struct_ser.serialize_field("prev_nav", &self.prev_nav)?;
+        }
+        if true {
+            struct_ser.serialize_field("leverage", &self.leverage)?;
+        }
+        if true {
+            struct_ser.serialize_field("cash_per_share", &self.cash_per_share)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("creation_unit", ToString::to_string(&self.creation_unit).as_str())?;
+        }
+        if let Some(v) = self.stock_ratio.as_ref() {
+            struct_ser.serialize_field("stock_ratio", v)?;
+        }
+        if let Some(v) = self.constituent_adjusted_prev_nav.as_ref() {
+            struct_ser.serialize_field("constituent_adjusted_prev_nav", v)?;
+        }
+        if let Some(v) = self.actual_leverage_l.as_ref() {
+            struct_ser.serialize_field("actual_leverage_l", v)?;
+        }
+        if let Some(v) = self.prev_index.as_ref() {
+            struct_ser.serialize_field("prev_index", v)?;
+        }
+        if let Some(v) = self.prev_future.as_ref() {
+            struct_ser.serialize_field("prev_future", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetEtfPricingStateResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pricing_kind",
+            "pricingKind",
+            "unit_delta",
+            "unitDelta",
+            "prev_nav",
+            "prevNav",
+            "leverage",
+            "cash_per_share",
+            "cashPerShare",
+            "creation_unit",
+            "creationUnit",
+            "stock_ratio",
+            "stockRatio",
+            "constituent_adjusted_prev_nav",
+            "constituentAdjustedPrevNav",
+            "actual_leverage_l",
+            "actualLeverageL",
+            "prev_index",
+            "prevIndex",
+            "prev_future",
+            "prevFuture",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PricingKind,
+            UnitDelta,
+            PrevNav,
+            Leverage,
+            CashPerShare,
+            CreationUnit,
+            StockRatio,
+            ConstituentAdjustedPrevNav,
+            ActualLeverageL,
+            PrevIndex,
+            PrevFuture,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pricingKind" | "pricing_kind" => Ok(GeneratedField::PricingKind),
+                            "unitDelta" | "unit_delta" => Ok(GeneratedField::UnitDelta),
+                            "prevNav" | "prev_nav" => Ok(GeneratedField::PrevNav),
+                            "leverage" => Ok(GeneratedField::Leverage),
+                            "cashPerShare" | "cash_per_share" => Ok(GeneratedField::CashPerShare),
+                            "creationUnit" | "creation_unit" => Ok(GeneratedField::CreationUnit),
+                            "stockRatio" | "stock_ratio" => Ok(GeneratedField::StockRatio),
+                            "constituentAdjustedPrevNav" | "constituent_adjusted_prev_nav" => Ok(GeneratedField::ConstituentAdjustedPrevNav),
+                            "actualLeverageL" | "actual_leverage_l" => Ok(GeneratedField::ActualLeverageL),
+                            "prevIndex" | "prev_index" => Ok(GeneratedField::PrevIndex),
+                            "prevFuture" | "prev_future" => Ok(GeneratedField::PrevFuture),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetEtfPricingStateResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.etf.GetEtfPricingStateResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetEtfPricingStateResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pricing_kind__ = None;
+                let mut unit_delta__ = None;
+                let mut prev_nav__ = None;
+                let mut leverage__ = None;
+                let mut cash_per_share__ = None;
+                let mut creation_unit__ = None;
+                let mut stock_ratio__ = None;
+                let mut constituent_adjusted_prev_nav__ = None;
+                let mut actual_leverage_l__ = None;
+                let mut prev_index__ = None;
+                let mut prev_future__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PricingKind => {
+                            if pricing_kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricingKind"));
+                            }
+                            pricing_kind__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::UnitDelta => {
+                            if unit_delta__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unitDelta"));
+                            }
+                            unit_delta__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PrevNav => {
+                            if prev_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prevNav"));
+                            }
+                            prev_nav__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Leverage => {
+                            if leverage__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("leverage"));
+                            }
+                            leverage__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CashPerShare => {
+                            if cash_per_share__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cashPerShare"));
+                            }
+                            cash_per_share__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CreationUnit => {
+                            if creation_unit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("creationUnit"));
+                            }
+                            creation_unit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::StockRatio => {
+                            if stock_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("stockRatio"));
+                            }
+                            stock_ratio__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::ConstituentAdjustedPrevNav => {
+                            if constituent_adjusted_prev_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituentAdjustedPrevNav"));
+                            }
+                            constituent_adjusted_prev_nav__ = map_.next_value()?;
+                        }
+                        GeneratedField::ActualLeverageL => {
+                            if actual_leverage_l__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("actualLeverageL"));
+                            }
+                            actual_leverage_l__ = map_.next_value()?;
+                        }
+                        GeneratedField::PrevIndex => {
+                            if prev_index__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prevIndex"));
+                            }
+                            prev_index__ = map_.next_value()?;
+                        }
+                        GeneratedField::PrevFuture => {
+                            if prev_future__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("prevFuture"));
+                            }
+                            prev_future__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetEtfPricingStateResponse {
+                    pricing_kind: pricing_kind__.unwrap_or_default(),
+                    unit_delta: unit_delta__.unwrap_or_default(),
+                    prev_nav: prev_nav__.unwrap_or_default(),
+                    leverage: leverage__.unwrap_or_default(),
+                    cash_per_share: cash_per_share__.unwrap_or_default(),
+                    creation_unit: creation_unit__.unwrap_or_default(),
+                    stock_ratio: stock_ratio__,
+                    constituent_adjusted_prev_nav: constituent_adjusted_prev_nav__,
+                    actual_leverage_l: actual_leverage_l__,
+                    prev_index: prev_index__,
+                    prev_future: prev_future__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.etf.GetEtfPricingStateResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for GetEtfRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>

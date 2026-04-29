@@ -66,6 +66,13 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getEtfConstituents, request, options: options);
   }
 
+  /// ETF pricing 디버그용 — pricing 모드별 내부 상태 스냅샷 반환.
+  /// 특히 LeverageFuture는 k(stock_ratio), Nav0(constituent_adjusted_prev_nav),
+  /// L(=unit_delta/Nav0, signed)을 노출해 외부에서 NAV 공식 검증 가능.
+  $grpc.ResponseFuture<$0.GetEtfPricingStateResponse> getEtfPricingState($0.GetEtfPricingStateRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getEtfPricingState, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -96,6 +103,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/GetEtfConstituents',
       ($0.GetEtfConstituentsRequest value) => value.writeToBuffer(),
       $0.GetEtfConstituentsResponse.fromBuffer);
+  static final _$getEtfPricingState = $grpc.ClientMethod<$0.GetEtfPricingStateRequest, $0.GetEtfPricingStateResponse>(
+      '/kdo.v1.etf.EtfService/GetEtfPricingState',
+      ($0.GetEtfPricingStateRequest value) => value.writeToBuffer(),
+      $0.GetEtfPricingStateResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -152,6 +163,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetEtfConstituentsRequest.fromBuffer(value),
         ($0.GetEtfConstituentsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetEtfPricingStateRequest, $0.GetEtfPricingStateResponse>(
+        'GetEtfPricingState',
+        getEtfPricingState_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetEtfPricingStateRequest.fromBuffer(value),
+        ($0.GetEtfPricingStateResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -195,5 +213,11 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetEtfConstituentsResponse> getEtfConstituents($grpc.ServiceCall call, $0.GetEtfConstituentsRequest request);
+
+  $async.Future<$0.GetEtfPricingStateResponse> getEtfPricingState_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfPricingStateRequest> $request) async {
+    return getEtfPricingState($call, await $request);
+  }
+
+  $async.Future<$0.GetEtfPricingStateResponse> getEtfPricingState($grpc.ServiceCall call, $0.GetEtfPricingStateRequest request);
 
 }
