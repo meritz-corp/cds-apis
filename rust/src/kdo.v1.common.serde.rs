@@ -12,6 +12,9 @@ impl serde::Serialize for AmendMethodType {
             Self::BestPrice => "AMEND_METHOD_TYPE_BEST_PRICE",
             Self::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
             Self::TimedMarket => "AMEND_METHOD_TYPE_TIMED_MARKET",
+            Self::TickAdvance100ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
+            Self::TickAdvance500ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
+            Self::TickAdvance1s => "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
         };
         serializer.serialize_str(variant)
     }
@@ -29,6 +32,9 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
             "AMEND_METHOD_TYPE_BEST_PRICE",
             "AMEND_METHOD_TYPE_STOP_LOSS",
             "AMEND_METHOD_TYPE_TIMED_MARKET",
+            "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
+            "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
+            "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
         ];
 
         struct GeneratedVisitor;
@@ -75,6 +81,9 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
                     "AMEND_METHOD_TYPE_BEST_PRICE" => Ok(AmendMethodType::BestPrice),
                     "AMEND_METHOD_TYPE_STOP_LOSS" => Ok(AmendMethodType::StopLoss),
                     "AMEND_METHOD_TYPE_TIMED_MARKET" => Ok(AmendMethodType::TimedMarket),
+                    "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS" => Ok(AmendMethodType::TickAdvance100ms),
+                    "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS" => Ok(AmendMethodType::TickAdvance500ms),
+                    "AMEND_METHOD_TYPE_TICK_ADVANCE_1S" => Ok(AmendMethodType::TickAdvance1s),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

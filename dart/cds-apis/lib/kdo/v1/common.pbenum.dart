@@ -140,6 +140,12 @@ class AmendMethodType extends $pb.ProtobufEnum {
   static const AmendMethodType AMEND_METHOD_TYPE_STOP_LOSS = AmendMethodType._(4, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_STOP_LOSS');
   /// 시간 제한 시장가: timeout 후 시장가로 전환
   static const AmendMethodType AMEND_METHOD_TYPE_TIMED_MARKET = AmendMethodType._(5, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TIMED_MARKET');
+  /// 시간 기반 전진 정정 (100ms 간격): 상대호가 방향으로 1tick씩 전진
+  static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_100MS = AmendMethodType._(6, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_100MS');
+  /// 시간 기반 전진 정정 (500ms 간격): 상대호가 방향으로 1tick씩 전진
+  static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_500MS = AmendMethodType._(7, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_500MS');
+  /// 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
+  static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_1S = AmendMethodType._(8, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_1S');
 
   static const $core.List<AmendMethodType> values = <AmendMethodType> [
     AMEND_METHOD_TYPE_UNSPECIFIED,
@@ -148,9 +154,12 @@ class AmendMethodType extends $pb.ProtobufEnum {
     AMEND_METHOD_TYPE_BEST_PRICE,
     AMEND_METHOD_TYPE_STOP_LOSS,
     AMEND_METHOD_TYPE_TIMED_MARKET,
+    AMEND_METHOD_TYPE_TICK_ADVANCE_100MS,
+    AMEND_METHOD_TYPE_TICK_ADVANCE_500MS,
+    AMEND_METHOD_TYPE_TICK_ADVANCE_1S,
   ];
 
-  static final $core.List<AmendMethodType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static final $core.List<AmendMethodType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 8);
   static AmendMethodType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const AmendMethodType._(super.value, super.name);

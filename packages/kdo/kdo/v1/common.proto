@@ -118,4 +118,13 @@ enum AmendMethodType {
 
   // 시간 제한 시장가: timeout 후 시장가로 전환
   AMEND_METHOD_TYPE_TIMED_MARKET = 5;
+
+  // 시간 기반 전진 정정 (100ms 간격): 상대호가 방향으로 1tick씩 전진
+  AMEND_METHOD_TYPE_TICK_ADVANCE_100MS = 6;
+
+  // 시간 기반 전진 정정 (500ms 간격): 상대호가 방향으로 1tick씩 전진
+  AMEND_METHOD_TYPE_TICK_ADVANCE_500MS = 7;
+
+  // 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
+  AMEND_METHOD_TYPE_TICK_ADVANCE_1S = 8;
 }

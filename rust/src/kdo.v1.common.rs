@@ -263,6 +263,12 @@ pub enum AmendMethodType {
     StopLoss = 4,
     /// 시간 제한 시장가: timeout 후 시장가로 전환
     TimedMarket = 5,
+    /// 시간 기반 전진 정정 (100ms 간격): 상대호가 방향으로 1tick씩 전진
+    TickAdvance100ms = 6,
+    /// 시간 기반 전진 정정 (500ms 간격): 상대호가 방향으로 1tick씩 전진
+    TickAdvance500ms = 7,
+    /// 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
+    TickAdvance1s = 8,
 }
 impl AmendMethodType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -277,6 +283,9 @@ impl AmendMethodType {
             AmendMethodType::BestPrice => "AMEND_METHOD_TYPE_BEST_PRICE",
             AmendMethodType::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
             AmendMethodType::TimedMarket => "AMEND_METHOD_TYPE_TIMED_MARKET",
+            AmendMethodType::TickAdvance100ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
+            AmendMethodType::TickAdvance500ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
+            AmendMethodType::TickAdvance1s => "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -288,6 +297,9 @@ impl AmendMethodType {
             "AMEND_METHOD_TYPE_BEST_PRICE" => Some(Self::BestPrice),
             "AMEND_METHOD_TYPE_STOP_LOSS" => Some(Self::StopLoss),
             "AMEND_METHOD_TYPE_TIMED_MARKET" => Some(Self::TimedMarket),
+            "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS" => Some(Self::TickAdvance100ms),
+            "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS" => Some(Self::TickAdvance500ms),
+            "AMEND_METHOD_TYPE_TICK_ADVANCE_1S" => Some(Self::TickAdvance1s),
             _ => None,
         }
     }
