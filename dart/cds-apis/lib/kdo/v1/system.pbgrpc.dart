@@ -38,12 +38,21 @@ class SystemServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getConnectionInfo, request, options: options);
   }
 
+  /// GetVersionInfo returns build-time version information of the running KDO instance.
+  $grpc.ResponseFuture<$0.GetVersionInfoResponse> getVersionInfo($0.GetVersionInfoRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getVersionInfo, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getConnectionInfo = $grpc.ClientMethod<$0.GetConnectionInfoRequest, $0.GetConnectionInfoResponse>(
       '/kdo.v1.system.SystemService/GetConnectionInfo',
       ($0.GetConnectionInfoRequest value) => value.writeToBuffer(),
       $0.GetConnectionInfoResponse.fromBuffer);
+  static final _$getVersionInfo = $grpc.ClientMethod<$0.GetVersionInfoRequest, $0.GetVersionInfoResponse>(
+      '/kdo.v1.system.SystemService/GetVersionInfo',
+      ($0.GetVersionInfoRequest value) => value.writeToBuffer(),
+      $0.GetVersionInfoResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.system.SystemService')
@@ -58,6 +67,13 @@ abstract class SystemServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetConnectionInfoRequest.fromBuffer(value),
         ($0.GetConnectionInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetVersionInfoRequest, $0.GetVersionInfoResponse>(
+        'GetVersionInfo',
+        getVersionInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetVersionInfoRequest.fromBuffer(value),
+        ($0.GetVersionInfoResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetConnectionInfoResponse> getConnectionInfo_Pre($grpc.ServiceCall $call, $async.Future<$0.GetConnectionInfoRequest> $request) async {
@@ -65,5 +81,11 @@ abstract class SystemServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetConnectionInfoResponse> getConnectionInfo($grpc.ServiceCall call, $0.GetConnectionInfoRequest request);
+
+  $async.Future<$0.GetVersionInfoResponse> getVersionInfo_Pre($grpc.ServiceCall $call, $async.Future<$0.GetVersionInfoRequest> $request) async {
+    return getVersionInfo($call, await $request);
+  }
+
+  $async.Future<$0.GetVersionInfoResponse> getVersionInfo($grpc.ServiceCall call, $0.GetVersionInfoRequest request);
 
 }

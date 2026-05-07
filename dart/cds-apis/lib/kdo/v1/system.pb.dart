@@ -46,6 +46,83 @@ class GetConnectionInfoRequest extends $pb.GeneratedMessage {
   static GetConnectionInfoRequest? _defaultInstance;
 }
 
+class GetVersionInfoRequest extends $pb.GeneratedMessage {
+  factory GetVersionInfoRequest() => create();
+
+  GetVersionInfoRequest._();
+
+  factory GetVersionInfoRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetVersionInfoRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetVersionInfoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetVersionInfoRequest clone() => GetVersionInfoRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetVersionInfoRequest copyWith(void Function(GetVersionInfoRequest) updates) => super.copyWith((message) => updates(message as GetVersionInfoRequest)) as GetVersionInfoRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetVersionInfoRequest create() => GetVersionInfoRequest._();
+  @$core.override
+  GetVersionInfoRequest createEmptyInstance() => create();
+  static $pb.PbList<GetVersionInfoRequest> createRepeated() => $pb.PbList<GetVersionInfoRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetVersionInfoRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetVersionInfoRequest>(create);
+  static GetVersionInfoRequest? _defaultInstance;
+}
+
+class GetVersionInfoResponse extends $pb.GeneratedMessage {
+  factory GetVersionInfoResponse({
+    $core.String? gitCommitHash,
+  }) {
+    final result = create();
+    if (gitCommitHash != null) result.gitCommitHash = gitCommitHash;
+    return result;
+  }
+
+  GetVersionInfoResponse._();
+
+  factory GetVersionInfoResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetVersionInfoResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetVersionInfoResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'gitCommitHash')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetVersionInfoResponse clone() => GetVersionInfoResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetVersionInfoResponse copyWith(void Function(GetVersionInfoResponse) updates) => super.copyWith((message) => updates(message as GetVersionInfoResponse)) as GetVersionInfoResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetVersionInfoResponse create() => GetVersionInfoResponse._();
+  @$core.override
+  GetVersionInfoResponse createEmptyInstance() => create();
+  static $pb.PbList<GetVersionInfoResponse> createRepeated() => $pb.PbList<GetVersionInfoResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetVersionInfoResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetVersionInfoResponse>(create);
+  static GetVersionInfoResponse? _defaultInstance;
+
+  /// Full git commit hash (e.g., "33d5b91abc...")
+  @$pb.TagNumber(1)
+  $core.String get gitCommitHash => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set gitCommitHash($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasGitCommitHash() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGitCommitHash() => $_clearField(1);
+}
+
 class GetConnectionInfoResponse extends $pb.GeneratedMessage {
   factory GetConnectionInfoResponse({
     MarketFeedInfo? krxMarketFeed,

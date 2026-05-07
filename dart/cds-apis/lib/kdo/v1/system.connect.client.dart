@@ -26,4 +26,22 @@ extension type SystemServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// GetVersionInfo returns build-time version information of the running KDO instance.
+  Future<kdov1system.GetVersionInfoResponse> getVersionInfo(
+    kdov1system.GetVersionInfoRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.SystemService.getVersionInfo,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

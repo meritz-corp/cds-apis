@@ -18,4 +18,12 @@ abstract final class SystemService {
     kdov1system.GetConnectionInfoRequest.new,
     kdov1system.GetConnectionInfoResponse.new,
   );
+
+  /// GetVersionInfo returns build-time version information of the running KDO instance.
+  static const getVersionInfo = connect.Spec(
+    '/$name/GetVersionInfo',
+    connect.StreamType.unary,
+    kdov1system.GetVersionInfoRequest.new,
+    kdov1system.GetVersionInfoResponse.new,
+  );
 }

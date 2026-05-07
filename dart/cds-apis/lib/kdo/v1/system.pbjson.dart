@@ -23,6 +23,28 @@ const GetConnectionInfoRequest$json = {
 final $typed_data.Uint8List getConnectionInfoRequestDescriptor = $convert.base64Decode(
     'ChhHZXRDb25uZWN0aW9uSW5mb1JlcXVlc3Q=');
 
+@$core.Deprecated('Use getVersionInfoRequestDescriptor instead')
+const GetVersionInfoRequest$json = {
+  '1': 'GetVersionInfoRequest',
+};
+
+/// Descriptor for `GetVersionInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getVersionInfoRequestDescriptor = $convert.base64Decode(
+    'ChVHZXRWZXJzaW9uSW5mb1JlcXVlc3Q=');
+
+@$core.Deprecated('Use getVersionInfoResponseDescriptor instead')
+const GetVersionInfoResponse$json = {
+  '1': 'GetVersionInfoResponse',
+  '2': [
+    {'1': 'git_commit_hash', '3': 1, '4': 1, '5': 9, '10': 'gitCommitHash'},
+  ],
+};
+
+/// Descriptor for `GetVersionInfoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getVersionInfoResponseDescriptor = $convert.base64Decode(
+    'ChZHZXRWZXJzaW9uSW5mb1Jlc3BvbnNlEiYKD2dpdF9jb21taXRfaGFzaBgBIAEoCVINZ2l0Q2'
+    '9tbWl0SGFzaA==');
+
 @$core.Deprecated('Use getConnectionInfoResponseDescriptor instead')
 const GetConnectionInfoResponse$json = {
   '1': 'GetConnectionInfoResponse',

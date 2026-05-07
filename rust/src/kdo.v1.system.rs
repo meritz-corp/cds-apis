@@ -5,6 +5,17 @@
 pub struct GetConnectionInfoRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetVersionInfoRequest {
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetVersionInfoResponse {
+    /// Full git commit hash (e.g., "33d5b91abc...")
+    #[prost(string, tag="1")]
+    pub git_commit_hash: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConnectionInfoResponse {
     /// Market feed connection info per exchange

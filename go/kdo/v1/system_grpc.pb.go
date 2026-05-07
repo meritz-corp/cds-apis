@@ -24,6 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type SystemServiceClient interface {
 	// GetConnectionInfo returns current market feed and FEP connection information.
 	GetConnectionInfo(ctx context.Context, in *GetConnectionInfoRequest, opts ...grpc.CallOption) (*GetConnectionInfoResponse, error)
+	// GetVersionInfo returns build-time version information of the running KDO instance.
+	GetVersionInfo(ctx context.Context, in *GetVersionInfoRequest, opts ...grpc.CallOption) (*GetVersionInfoResponse, error)
 }
 
 type systemServiceClient struct {
@@ -43,12 +45,23 @@ func (c *systemServiceClient) GetConnectionInfo(ctx context.Context, in *GetConn
 	return out, nil
 }
 
+func (c *systemServiceClient) GetVersionInfo(ctx context.Context, in *GetVersionInfoRequest, opts ...grpc.CallOption) (*GetVersionInfoResponse, error) {
+	out := new(GetVersionInfoResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.system.SystemService/GetVersionInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServiceServer is the server API for SystemService service.
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility
 type SystemServiceServer interface {
 	// GetConnectionInfo returns current market feed and FEP connection information.
 	GetConnectionInfo(context.Context, *GetConnectionInfoRequest) (*GetConnectionInfoResponse, error)
+	// GetVersionInfo returns build-time version information of the running KDO instance.
+	GetVersionInfo(context.Context, *GetVersionInfoRequest) (*GetVersionInfoResponse, error)
 	mustEmbedUnimplementedSystemServiceServer()
 }
 
@@ -58,6 +71,9 @@ type UnimplementedSystemServiceServer struct {
 
 func (UnimplementedSystemServiceServer) GetConnectionInfo(context.Context, *GetConnectionInfoRequest) (*GetConnectionInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConnectionInfo not implemented")
+}
+func (UnimplementedSystemServiceServer) GetVersionInfo(context.Context, *GetVersionInfoRequest) (*GetVersionInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetVersionInfo not implemented")
 }
 func (UnimplementedSystemServiceServer) mustEmbedUnimplementedSystemServiceServer() {}
 
@@ -90,6 +106,24 @@ func _SystemService_GetConnectionInfo_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SystemService_GetVersionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVersionInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).GetVersionInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.system.SystemService/GetVersionInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).GetVersionInfo(ctx, req.(*GetVersionInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SystemService_ServiceDesc is the grpc.ServiceDesc for SystemService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -100,6 +134,10 @@ var SystemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetConnectionInfo",
 			Handler:    _SystemService_GetConnectionInfo_Handler,
+		},
+		{
+			MethodName: "GetVersionInfo",
+			Handler:    _SystemService_GetVersionInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -8,9 +8,19 @@ option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 service SystemService {
   // GetConnectionInfo returns current market feed and FEP connection information.
   rpc GetConnectionInfo(GetConnectionInfoRequest) returns (GetConnectionInfoResponse) {}
+
+  // GetVersionInfo returns build-time version information of the running KDO instance.
+  rpc GetVersionInfo(GetVersionInfoRequest) returns (GetVersionInfoResponse) {}
 }
 
 message GetConnectionInfoRequest {}
+
+message GetVersionInfoRequest {}
+
+message GetVersionInfoResponse {
+  // Full git commit hash (e.g., "33d5b91abc...")
+  string git_commit_hash = 1;
+}
 
 message GetConnectionInfoResponse {
   // Market feed connection info per exchange

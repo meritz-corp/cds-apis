@@ -121,6 +121,15 @@
         }
       }
     },
+    "systemGetVersionInfoResponse": {
+      "type": "object",
+      "properties": {
+        "gitCommitHash": {
+          "type": "string",
+          "title": "Full git commit hash (e.g., \"33d5b91abc...\")"
+        }
+      }
+    },
     "systemMarketFeedInfo": {
       "type": "object",
       "properties": {
