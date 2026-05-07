@@ -8,7 +8,6 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
-import "google/rpc/status.proto";
 import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
@@ -790,8 +789,8 @@ message ClearUserOrderBookRequest {
 
 // 사용자 주문 오더북 강제 비우기 응답
 message ClearUserOrderBookResponse {
-  // 처리 결과 상태
-  google.rpc.Status status = 1;
+  // LP 상태
+  EtfLpStatus status = 1;
 
   // 메시지
   string message = 2;

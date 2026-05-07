@@ -15,7 +15,6 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/rpc/status.pb.dart' as $2;
 import 'common.pb.dart' as $1;
 import 'lp.pbenum.dart';
 
@@ -2877,7 +2876,7 @@ class ClearUserOrderBookRequest extends $pb.GeneratedMessage {
 /// 사용자 주문 오더북 강제 비우기 응답
 class ClearUserOrderBookResponse extends $pb.GeneratedMessage {
   factory ClearUserOrderBookResponse({
-    $2.Status? status,
+    EtfLpStatus? status,
     $core.String? message,
     $core.int? clearedCount,
   }) {
@@ -2894,7 +2893,7 @@ class ClearUserOrderBookResponse extends $pb.GeneratedMessage {
   factory ClearUserOrderBookResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClearUserOrderBookResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOM<$2.Status>(1, _omitFieldNames ? '' : 'status', subBuilder: $2.Status.create)
+    ..aOM<EtfLpStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: EtfLpStatus.create)
     ..aOS(2, _omitFieldNames ? '' : 'message')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'clearedCount', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -2917,17 +2916,17 @@ class ClearUserOrderBookResponse extends $pb.GeneratedMessage {
   static ClearUserOrderBookResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClearUserOrderBookResponse>(create);
   static ClearUserOrderBookResponse? _defaultInstance;
 
-  /// 처리 결과 상태
+  /// LP 상태
   @$pb.TagNumber(1)
-  $2.Status get status => $_getN(0);
+  EtfLpStatus get status => $_getN(0);
   @$pb.TagNumber(1)
-  set status($2.Status value) => $_setField(1, value);
+  set status(EtfLpStatus value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)
   void clearStatus() => $_clearField(1);
   @$pb.TagNumber(1)
-  $2.Status ensureStatus() => $_ensure(0);
+  EtfLpStatus ensureStatus() => $_ensure(0);
 
   /// 메시지
   @$pb.TagNumber(2)

@@ -607,9 +607,9 @@ pub struct ClearUserOrderBookRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClearUserOrderBookResponse {
-    /// 처리 결과 상태
+    /// LP 상태
     #[prost(message, optional, tag="1")]
-    pub status: ::core::option::Option<super::super::super::google::rpc::Status>,
+    pub status: ::core::option::Option<EtfLpStatus>,
     /// 메시지
     #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,

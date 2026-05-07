@@ -734,7 +734,7 @@ final $typed_data.Uint8List clearUserOrderBookRequestDescriptor = $convert.base6
 const ClearUserOrderBookResponse$json = {
   '1': 'ClearUserOrderBookResponse',
   '2': [
-    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.google.rpc.Status', '10': 'status'},
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpStatus', '10': 'status'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
     {'1': 'cleared_count', '3': 3, '4': 1, '5': 5, '10': 'clearedCount'},
   ],
@@ -742,7 +742,7 @@ const ClearUserOrderBookResponse$json = {
 
 /// Descriptor for `ClearUserOrderBookResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List clearUserOrderBookResponseDescriptor = $convert.base64Decode(
-    'ChpDbGVhclVzZXJPcmRlckJvb2tSZXNwb25zZRIqCgZzdGF0dXMYASABKAsyEi5nb29nbGUucn'
-    'BjLlN0YXR1c1IGc3RhdHVzEhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2USIwoNY2xlYXJlZF9j'
-    'b3VudBgDIAEoBVIMY2xlYXJlZENvdW50');
+    'ChpDbGVhclVzZXJPcmRlckJvb2tSZXNwb25zZRIuCgZzdGF0dXMYASABKAsyFi5rZG8udjEubH'
+    'AuRXRmTHBTdGF0dXNSBnN0YXR1cxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdlEiMKDWNsZWFy'
+    'ZWRfY291bnQYAyABKAVSDGNsZWFyZWRDb3VudA==');
 
