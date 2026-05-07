@@ -98,4 +98,15 @@ abstract final class LpService {
     kdov1lp.GetUserOrderBookRequest.new,
     kdov1lp.UserOrderbookData.new,
   );
+
+  /// 사용자 주문 오더북을 강제로 비웁니다.
+  /// LP 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).
+  /// LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
+  /// 운영 중 좀비 주문이 누적된 경우 수동 복구용.
+  static const clearUserOrderBook = connect.Spec(
+    '/$name/ClearUserOrderBook',
+    connect.StreamType.unary,
+    kdov1lp.ClearUserOrderBookRequest.new,
+    kdov1lp.ClearUserOrderBookResponse.new,
+  );
 }

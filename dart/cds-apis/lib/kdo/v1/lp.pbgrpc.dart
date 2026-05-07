@@ -83,6 +83,14 @@ class LpServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamUserOrderbook, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 사용자 주문 오더북을 강제로 비웁니다.
+  /// LP 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).
+  /// LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
+  /// 운영 중 좀비 주문이 누적된 경우 수동 복구용.
+  $grpc.ResponseFuture<$0.ClearUserOrderBookResponse> clearUserOrderBook($0.ClearUserOrderBookRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$clearUserOrderBook, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtfLp = $grpc.ClientMethod<$0.GetEtfLpRequest, $0.EtfLp>(
@@ -125,6 +133,10 @@ class LpServiceClient extends $grpc.Client {
       '/kdo.v1.lp.LpService/StreamUserOrderbook',
       ($0.GetUserOrderBookRequest value) => value.writeToBuffer(),
       $0.UserOrderbookData.fromBuffer);
+  static final _$clearUserOrderBook = $grpc.ClientMethod<$0.ClearUserOrderBookRequest, $0.ClearUserOrderBookResponse>(
+      '/kdo.v1.lp.LpService/ClearUserOrderBook',
+      ($0.ClearUserOrderBookRequest value) => value.writeToBuffer(),
+      $0.ClearUserOrderBookResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lp.LpService')
@@ -202,6 +214,13 @@ abstract class LpServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.GetUserOrderBookRequest.fromBuffer(value),
         ($0.UserOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ClearUserOrderBookRequest, $0.ClearUserOrderBookResponse>(
+        'ClearUserOrderBook',
+        clearUserOrderBook_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ClearUserOrderBookRequest.fromBuffer(value),
+        ($0.ClearUserOrderBookResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.EtfLp> getEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfLpRequest> $request) async {
@@ -263,5 +282,11 @@ abstract class LpServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.UserOrderbookData> streamUserOrderbook($grpc.ServiceCall call, $0.GetUserOrderBookRequest request);
+
+  $async.Future<$0.ClearUserOrderBookResponse> clearUserOrderBook_Pre($grpc.ServiceCall $call, $async.Future<$0.ClearUserOrderBookRequest> $request) async {
+    return clearUserOrderBook($call, await $request);
+  }
+
+  $async.Future<$0.ClearUserOrderBookResponse> clearUserOrderBook($grpc.ServiceCall call, $0.ClearUserOrderBookRequest request);
 
 }

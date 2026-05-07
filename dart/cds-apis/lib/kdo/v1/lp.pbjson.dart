@@ -715,3 +715,34 @@ final $typed_data.Uint8List userOrderbookDataDescriptor = $convert.base64Decode(
     'NrX3ByaWNlcxgCIAMoCVIJYXNrUHJpY2VzEiUKDmJpZF9xdWFudGl0aWVzGAMgAygDUg1iaWRR'
     'dWFudGl0aWVzEiUKDmFza19xdWFudGl0aWVzGAQgAygDUg1hc2tRdWFudGl0aWVz');
 
+@$core.Deprecated('Use clearUserOrderBookRequestDescriptor instead')
+const ClearUserOrderBookRequest$json = {
+  '1': 'ClearUserOrderBookRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+  ],
+};
+
+/// Descriptor for `ClearUserOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List clearUserOrderBookRequestDescriptor = $convert.base64Decode(
+    'ChlDbGVhclVzZXJPcmRlckJvb2tSZXF1ZXN0Ei4KA2V0ZhgBIAEoCUIc4kEBAvpBFQoTa2RvLm'
+    'Nkc2FwaXMueHl6L0V0ZlIDZXRmEjEKBGZ1bmQYAiABKAlCHeJBAQL6QRYKFGtkby5jZHNhcGlz'
+    'Lnh5ei9GdW5kUgRmdW5k');
+
+@$core.Deprecated('Use clearUserOrderBookResponseDescriptor instead')
+const ClearUserOrderBookResponse$json = {
+  '1': 'ClearUserOrderBookResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.google.rpc.Status', '10': 'status'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+    {'1': 'cleared_count', '3': 3, '4': 1, '5': 5, '10': 'clearedCount'},
+  ],
+};
+
+/// Descriptor for `ClearUserOrderBookResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List clearUserOrderBookResponseDescriptor = $convert.base64Decode(
+    'ChpDbGVhclVzZXJPcmRlckJvb2tSZXNwb25zZRIqCgZzdGF0dXMYASABKAsyEi5nb29nbGUucn'
+    'BjLlN0YXR1c1IGc3RhdHVzEhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2USIwoNY2xlYXJlZF9j'
+    'b3VudBgDIAEoBVIMY2xlYXJlZENvdW50');
+

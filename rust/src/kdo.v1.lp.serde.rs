@@ -1,4 +1,248 @@
 // @generated
+impl serde::Serialize for ClearUserOrderBookRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ClearUserOrderBookRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ClearUserOrderBookRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+            "fund",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            Fund,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "fund" => Ok(GeneratedField::Fund),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ClearUserOrderBookRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.ClearUserOrderBookRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ClearUserOrderBookRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut fund__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ClearUserOrderBookRequest {
+                    etf: etf__.unwrap_or_default(),
+                    fund: fund__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.ClearUserOrderBookRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ClearUserOrderBookResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ClearUserOrderBookResponse", len)?;
+        if let Some(v) = self.status.as_ref() {
+            struct_ser.serialize_field("status", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("message", &self.message)?;
+        }
+        if true {
+            struct_ser.serialize_field("cleared_count", &self.cleared_count)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ClearUserOrderBookResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "status",
+            "message",
+            "cleared_count",
+            "clearedCount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Status,
+            Message,
+            ClearedCount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "status" => Ok(GeneratedField::Status),
+                            "message" => Ok(GeneratedField::Message),
+                            "clearedCount" | "cleared_count" => Ok(GeneratedField::ClearedCount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ClearUserOrderBookResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.ClearUserOrderBookResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ClearUserOrderBookResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut status__ = None;
+                let mut message__ = None;
+                let mut cleared_count__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Status => {
+                            if status__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("status"));
+                            }
+                            status__ = map_.next_value()?;
+                        }
+                        GeneratedField::Message => {
+                            if message__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("message"));
+                            }
+                            message__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ClearedCount => {
+                            if cleared_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("clearedCount"));
+                            }
+                            cleared_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ClearUserOrderBookResponse {
+                    status: status__,
+                    message: message__.unwrap_or_default(),
+                    cleared_count: cleared_count__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.ClearUserOrderBookResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CreateEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>

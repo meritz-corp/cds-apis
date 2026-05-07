@@ -519,6 +519,26 @@ func (m *MockLpServiceClient) EXPECT() *MockLpServiceClientMockRecorder {
 	return m.recorder
 }
 
+// ClearUserOrderBook mocks base method.
+func (m *MockLpServiceClient) ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest, opts ...grpc.CallOption) (*ClearUserOrderBookResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ClearUserOrderBook", varargs...)
+	ret0, _ := ret[0].(*ClearUserOrderBookResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ClearUserOrderBook indicates an expected call of ClearUserOrderBook.
+func (mr *MockLpServiceClientMockRecorder) ClearUserOrderBook(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClearUserOrderBook", reflect.TypeOf((*MockLpServiceClient)(nil).ClearUserOrderBook), varargs...)
+}
+
 // GetEtfLp mocks base method.
 func (m *MockLpServiceClient) GetEtfLp(ctx context.Context, in *GetEtfLpRequest, opts ...grpc.CallOption) (*EtfLp, error) {
 	m.ctrl.T.Helper()
@@ -740,6 +760,21 @@ func NewMockLpServiceServer(ctrl *gomock.Controller) *MockLpServiceServer {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockLpServiceServer) EXPECT() *MockLpServiceServerMockRecorder {
 	return m.recorder
+}
+
+// ClearUserOrderBook mocks base method.
+func (m *MockLpServiceServer) ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest) (*ClearUserOrderBookResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ClearUserOrderBook", ctx, in)
+	ret0, _ := ret[0].(*ClearUserOrderBookResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ClearUserOrderBook indicates an expected call of ClearUserOrderBook.
+func (mr *MockLpServiceServerMockRecorder) ClearUserOrderBook(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClearUserOrderBook", reflect.TypeOf((*MockLpServiceServer)(nil).ClearUserOrderBook), ctx, in)
 }
 
 // GetEtfLp mocks base method.

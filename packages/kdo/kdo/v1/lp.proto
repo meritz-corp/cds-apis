@@ -8,6 +8,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "google/rpc/status.proto";
 import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
@@ -100,6 +101,17 @@ service LpService {
   rpc StreamUserOrderbook(GetUserOrderBookRequest) returns (stream UserOrderbookData) {
     option (google.api.http) = {
       get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/orderbook:stream"
+    };
+  }
+
+  // 사용자 주문 오더북을 강제로 비웁니다.
+  // LP 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).
+  // LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
+  // 운영 중 좀비 주문이 누적된 경우 수동 복구용.
+  rpc ClearUserOrderBook(ClearUserOrderBookRequest) returns (ClearUserOrderBookResponse) {
+    option (google.api.http) = {
+      post: "/v1/lps/{etf=etfs/*}/{fund=funds/*}:clearOrderBook"
+      body: "*"
     };
   }
 }
@@ -755,4 +767,35 @@ message UserOrderbookData {
 
   // 매도 수량 (10단계)
   repeated int64 ask_quantities = 4;
+}
+
+// 사용자 주문 오더북 강제 비우기 요청
+message ClearUserOrderBookRequest {
+  // ETF resource: "etfs/{symbol}"
+  string etf = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Etf"
+    }
+  ];
+
+  // Fund resource: "funds/{fund_code}"
+  string fund = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+}
+
+// 사용자 주문 오더북 강제 비우기 응답
+message ClearUserOrderBookResponse {
+  // 처리 결과 상태
+  google.rpc.Status status = 1;
+
+  // 메시지
+  string message = 2;
+
+  // 비워진 주문 갯수 (bids + asks)
+  int32 cleared_count = 3;
 }

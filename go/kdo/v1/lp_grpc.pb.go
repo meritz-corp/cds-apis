@@ -42,6 +42,11 @@ type LpServiceClient interface {
 	GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
 	StreamUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (LpService_StreamUserOrderbookClient, error)
+	// 사용자 주문 오더북을 강제로 비웁니다.
+	// LP 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).
+	// LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
+	// 운영 중 좀비 주문이 누적된 경우 수동 복구용.
+	ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest, opts ...grpc.CallOption) (*ClearUserOrderBookResponse, error)
 }
 
 type lpServiceClient struct {
@@ -188,6 +193,15 @@ func (x *lpServiceStreamUserOrderbookClient) Recv() (*UserOrderbookData, error) 
 	return m, nil
 }
 
+func (c *lpServiceClient) ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest, opts ...grpc.CallOption) (*ClearUserOrderBookResponse, error) {
+	out := new(ClearUserOrderBookResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ClearUserOrderBook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LpServiceServer is the server API for LpService service.
 // All implementations must embed UnimplementedLpServiceServer
 // for forward compatibility
@@ -212,6 +226,11 @@ type LpServiceServer interface {
 	GetUserOrderbook(context.Context, *GetUserOrderBookRequest) (*UserOrderbookData, error)
 	// 사용자 주문장 업데이트를 스트리밍
 	StreamUserOrderbook(*GetUserOrderBookRequest, LpService_StreamUserOrderbookServer) error
+	// 사용자 주문 오더북을 강제로 비웁니다.
+	// LP 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).
+	// LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
+	// 운영 중 좀비 주문이 누적된 경우 수동 복구용.
+	ClearUserOrderBook(context.Context, *ClearUserOrderBookRequest) (*ClearUserOrderBookResponse, error)
 	mustEmbedUnimplementedLpServiceServer()
 }
 
@@ -248,6 +267,9 @@ func (UnimplementedLpServiceServer) GetUserOrderbook(context.Context, *GetUserOr
 }
 func (UnimplementedLpServiceServer) StreamUserOrderbook(*GetUserOrderBookRequest, LpService_StreamUserOrderbookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamUserOrderbook not implemented")
+}
+func (UnimplementedLpServiceServer) ClearUserOrderBook(context.Context, *ClearUserOrderBookRequest) (*ClearUserOrderBookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClearUserOrderBook not implemented")
 }
 func (UnimplementedLpServiceServer) mustEmbedUnimplementedLpServiceServer() {}
 
@@ -448,6 +470,24 @@ func (x *lpServiceStreamUserOrderbookServer) Send(m *UserOrderbookData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _LpService_ClearUserOrderBook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearUserOrderBookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LpServiceServer).ClearUserOrderBook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.lp.LpService/ClearUserOrderBook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LpServiceServer).ClearUserOrderBook(ctx, req.(*ClearUserOrderBookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LpService_ServiceDesc is the grpc.ServiceDesc for LpService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -486,6 +526,10 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserOrderbook",
 			Handler:    _LpService_GetUserOrderbook_Handler,
+		},
+		{
+			MethodName: "ClearUserOrderBook",
+			Handler:    _LpService_ClearUserOrderBook_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

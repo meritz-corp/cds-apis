@@ -592,6 +592,31 @@ pub struct UserOrderbookData {
     #[prost(int64, repeated, tag="4")]
     pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
 }
+/// 사용자 주문 오더북 강제 비우기 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClearUserOrderBookRequest {
+    /// ETF resource: "etfs/{symbol}"
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// Fund resource: "funds/{fund_code}"
+    #[prost(string, tag="2")]
+    pub fund: ::prost::alloc::string::String,
+}
+/// 사용자 주문 오더북 강제 비우기 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClearUserOrderBookResponse {
+    /// 처리 결과 상태
+    #[prost(message, optional, tag="1")]
+    pub status: ::core::option::Option<super::super::super::google::rpc::Status>,
+    /// 메시지
+    #[prost(string, tag="2")]
+    pub message: ::prost::alloc::string::String,
+    /// 비워진 주문 갯수 (bids + asks)
+    #[prost(int32, tag="3")]
+    pub cleared_count: i32,
+}
 /// precomputed quote retreat 처리 정책
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

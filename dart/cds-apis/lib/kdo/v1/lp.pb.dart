@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../google/rpc/status.pb.dart' as $2;
 import 'common.pb.dart' as $1;
 import 'lp.pbenum.dart';
 
@@ -2810,6 +2811,143 @@ class UserOrderbookData extends $pb.GeneratedMessage {
   /// 매도 수량 (10단계)
   @$pb.TagNumber(4)
   $pb.PbList<$fixnum.Int64> get askQuantities => $_getList(3);
+}
+
+/// 사용자 주문 오더북 강제 비우기 요청
+class ClearUserOrderBookRequest extends $pb.GeneratedMessage {
+  factory ClearUserOrderBookRequest({
+    $core.String? etf,
+    $core.String? fund,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (fund != null) result.fund = fund;
+    return result;
+  }
+
+  ClearUserOrderBookRequest._();
+
+  factory ClearUserOrderBookRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ClearUserOrderBookRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClearUserOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ClearUserOrderBookRequest clone() => ClearUserOrderBookRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ClearUserOrderBookRequest copyWith(void Function(ClearUserOrderBookRequest) updates) => super.copyWith((message) => updates(message as ClearUserOrderBookRequest)) as ClearUserOrderBookRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ClearUserOrderBookRequest create() => ClearUserOrderBookRequest._();
+  @$core.override
+  ClearUserOrderBookRequest createEmptyInstance() => create();
+  static $pb.PbList<ClearUserOrderBookRequest> createRepeated() => $pb.PbList<ClearUserOrderBookRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ClearUserOrderBookRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClearUserOrderBookRequest>(create);
+  static ClearUserOrderBookRequest? _defaultInstance;
+
+  /// ETF resource: "etfs/{symbol}"
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// Fund resource: "funds/{fund_code}"
+  @$pb.TagNumber(2)
+  $core.String get fund => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fund($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFund() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFund() => $_clearField(2);
+}
+
+/// 사용자 주문 오더북 강제 비우기 응답
+class ClearUserOrderBookResponse extends $pb.GeneratedMessage {
+  factory ClearUserOrderBookResponse({
+    $2.Status? status,
+    $core.String? message,
+    $core.int? clearedCount,
+  }) {
+    final result = create();
+    if (status != null) result.status = status;
+    if (message != null) result.message = message;
+    if (clearedCount != null) result.clearedCount = clearedCount;
+    return result;
+  }
+
+  ClearUserOrderBookResponse._();
+
+  factory ClearUserOrderBookResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ClearUserOrderBookResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClearUserOrderBookResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOM<$2.Status>(1, _omitFieldNames ? '' : 'status', subBuilder: $2.Status.create)
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'clearedCount', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ClearUserOrderBookResponse clone() => ClearUserOrderBookResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ClearUserOrderBookResponse copyWith(void Function(ClearUserOrderBookResponse) updates) => super.copyWith((message) => updates(message as ClearUserOrderBookResponse)) as ClearUserOrderBookResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ClearUserOrderBookResponse create() => ClearUserOrderBookResponse._();
+  @$core.override
+  ClearUserOrderBookResponse createEmptyInstance() => create();
+  static $pb.PbList<ClearUserOrderBookResponse> createRepeated() => $pb.PbList<ClearUserOrderBookResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ClearUserOrderBookResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClearUserOrderBookResponse>(create);
+  static ClearUserOrderBookResponse? _defaultInstance;
+
+  /// 처리 결과 상태
+  @$pb.TagNumber(1)
+  $2.Status get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status($2.Status value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.Status ensureStatus() => $_ensure(0);
+
+  /// 메시지
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+
+  /// 비워진 주문 갯수 (bids + asks)
+  @$pb.TagNumber(3)
+  $core.int get clearedCount => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set clearedCount($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasClearedCount() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearClearedCount() => $_clearField(3);
 }
 
 

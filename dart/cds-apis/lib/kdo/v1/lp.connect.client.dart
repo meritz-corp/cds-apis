@@ -196,4 +196,25 @@ extension type LpServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 사용자 주문 오더북을 강제로 비웁니다.
+  /// LP 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).
+  /// LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
+  /// 운영 중 좀비 주문이 누적된 경우 수동 복구용.
+  Future<kdov1lp.ClearUserOrderBookResponse> clearUserOrderBook(
+    kdov1lp.ClearUserOrderBookRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LpService.clearUserOrderBook,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }
