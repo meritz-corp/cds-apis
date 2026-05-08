@@ -627,11 +627,11 @@ pub enum PrecomputePolicy {
     ///    - depth 초과 / 역방향 시 cancel-all + slowpath refill
     ///    - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함
     OneToOne = 1,
-    /// 선물 N틱 ↔ ETF 1틱 (1:N 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:
+    /// 선물 N틱 ↔ ETF 1틱 (N:1 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:
     ///    - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)
     ///    - depth 초과(드문 케이스)는 cancel-all만
     ///    - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill
-    OneToMany = 2,
+    ManyToOne = 2,
 }
 impl PrecomputePolicy {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -642,7 +642,7 @@ impl PrecomputePolicy {
         match self {
             PrecomputePolicy::Unspecified => "PRECOMPUTE_POLICY_UNSPECIFIED",
             PrecomputePolicy::OneToOne => "PRECOMPUTE_POLICY_ONE_TO_ONE",
-            PrecomputePolicy::OneToMany => "PRECOMPUTE_POLICY_ONE_TO_MANY",
+            PrecomputePolicy::ManyToOne => "PRECOMPUTE_POLICY_MANY_TO_ONE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -650,7 +650,7 @@ impl PrecomputePolicy {
         match value {
             "PRECOMPUTE_POLICY_UNSPECIFIED" => Some(Self::Unspecified),
             "PRECOMPUTE_POLICY_ONE_TO_ONE" => Some(Self::OneToOne),
-            "PRECOMPUTE_POLICY_ONE_TO_MANY" => Some(Self::OneToMany),
+            "PRECOMPUTE_POLICY_MANY_TO_ONE" => Some(Self::ManyToOne),
             _ => None,
         }
     }

@@ -22,16 +22,16 @@ class PrecomputePolicy extends $pb.ProtobufEnum {
   ///   - depth 초과 / 역방향 시 cancel-all + slowpath refill
   ///   - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함
   static const PrecomputePolicy PRECOMPUTE_POLICY_ONE_TO_ONE = PrecomputePolicy._(1, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_ONE_TO_ONE');
-  /// 선물 N틱 ↔ ETF 1틱 (1:N 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:
+  /// 선물 N틱 ↔ ETF 1틱 (N:1 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:
   ///   - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)
   ///   - depth 초과(드문 케이스)는 cancel-all만
   ///   - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill
-  static const PrecomputePolicy PRECOMPUTE_POLICY_ONE_TO_MANY = PrecomputePolicy._(2, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_ONE_TO_MANY');
+  static const PrecomputePolicy PRECOMPUTE_POLICY_MANY_TO_ONE = PrecomputePolicy._(2, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_MANY_TO_ONE');
 
   static const $core.List<PrecomputePolicy> values = <PrecomputePolicy> [
     PRECOMPUTE_POLICY_UNSPECIFIED,
     PRECOMPUTE_POLICY_ONE_TO_ONE,
-    PRECOMPUTE_POLICY_ONE_TO_MANY,
+    PRECOMPUTE_POLICY_MANY_TO_ONE,
   ];
 
   static final $core.List<PrecomputePolicy?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
