@@ -1078,6 +1078,8 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   static EtfLpOffset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpOffset>(create);
   static EtfLpOffset? _defaultInstance;
 
+  /// optional: 미설정(None) 시 해당 필드를 덮어쓰지 않음.
+  /// proto3 optional scalar → prost::Message 에서 Option<T>로 생성됨.
   @$pb.TagNumber(1)
   $core.double get bidOffset => $_getN(0);
   @$pb.TagNumber(1)
@@ -1191,6 +1193,7 @@ class EtfLpOffset extends $pb.GeneratedMessage {
 
   /// 누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.
   /// 트리거 발동(offset 변경) 시 0으로 리셋됩니다.
+  /// runtime 추적값이므로 optional 아님 — mapper에서 drop 처리.
   @$pb.TagNumber(21)
   $fixnum.Int64 get netPosition => $_getI64(12);
   @$pb.TagNumber(21)

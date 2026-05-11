@@ -947,47 +947,47 @@ impl serde::Serialize for EtfLpOffset {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpOffset", len)?;
-        if true {
-            struct_ser.serialize_field("bid_offset", &self.bid_offset)?;
+        if let Some(v) = self.bid_offset.as_ref() {
+            struct_ser.serialize_field("bid_offset", v)?;
         }
-        if true {
-            struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
+        if let Some(v) = self.ask_offset.as_ref() {
+            struct_ser.serialize_field("ask_offset", v)?;
         }
-        if true {
-            struct_ser.serialize_field("min_offset", &self.min_offset)?;
+        if let Some(v) = self.min_offset.as_ref() {
+            struct_ser.serialize_field("min_offset", v)?;
         }
-        if true {
-            struct_ser.serialize_field("max_offset", &self.max_offset)?;
+        if let Some(v) = self.max_offset.as_ref() {
+            struct_ser.serialize_field("max_offset", v)?;
         }
-        if true {
-            struct_ser.serialize_field("time_adjustment_enabled", &self.time_adjustment_enabled)?;
+        if let Some(v) = self.time_adjustment_enabled.as_ref() {
+            struct_ser.serialize_field("time_adjustment_enabled", v)?;
         }
-        if true {
+        if let Some(v) = self.adjustment_interval_secs.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("adjustment_interval_secs", ToString::to_string(&self.adjustment_interval_secs).as_str())?;
+            struct_ser.serialize_field("adjustment_interval_secs", ToString::to_string(&v).as_str())?;
         }
-        if true {
-            struct_ser.serialize_field("adjustment_step", &self.adjustment_step)?;
+        if let Some(v) = self.adjustment_step.as_ref() {
+            struct_ser.serialize_field("adjustment_step", v)?;
         }
-        if true {
-            struct_ser.serialize_field("reset_on_fill", &self.reset_on_fill)?;
+        if let Some(v) = self.reset_on_fill.as_ref() {
+            struct_ser.serialize_field("reset_on_fill", v)?;
         }
-        if true {
-            struct_ser.serialize_field("position_adjustment_enabled", &self.position_adjustment_enabled)?;
+        if let Some(v) = self.position_adjustment_enabled.as_ref() {
+            struct_ser.serialize_field("position_adjustment_enabled", v)?;
         }
-        if true {
-            let v = PositionAdjustmentStrategy::try_from(self.position_strategy)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.position_strategy)))?;
+        if let Some(v) = self.position_strategy.as_ref() {
+            let v = PositionAdjustmentStrategy::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("position_strategy", &v)?;
         }
-        if true {
+        if let Some(v) = self.position_threshold.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("position_threshold", ToString::to_string(&self.position_threshold).as_str())?;
+            struct_ser.serialize_field("position_threshold", ToString::to_string(&v).as_str())?;
         }
-        if true {
-            struct_ser.serialize_field("position_adjustment_step", &self.position_adjustment_step)?;
+        if let Some(v) = self.position_adjustment_step.as_ref() {
+            struct_ser.serialize_field("position_adjustment_step", v)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1121,7 +1121,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                                 return Err(serde::de::Error::duplicate_field("bidOffset"));
                             }
                             bid_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::AskOffset => {
@@ -1129,7 +1129,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                                 return Err(serde::de::Error::duplicate_field("askOffset"));
                             }
                             ask_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::MinOffset => {
@@ -1137,7 +1137,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                                 return Err(serde::de::Error::duplicate_field("minOffset"));
                             }
                             min_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::MaxOffset => {
@@ -1145,21 +1145,21 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                                 return Err(serde::de::Error::duplicate_field("maxOffset"));
                             }
                             max_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::TimeAdjustmentEnabled => {
                             if time_adjustment_enabled__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("timeAdjustmentEnabled"));
                             }
-                            time_adjustment_enabled__ = Some(map_.next_value()?);
+                            time_adjustment_enabled__ = map_.next_value()?;
                         }
                         GeneratedField::AdjustmentIntervalSecs => {
                             if adjustment_interval_secs__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("adjustmentIntervalSecs"));
                             }
                             adjustment_interval_secs__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::AdjustmentStep => {
@@ -1167,33 +1167,33 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                                 return Err(serde::de::Error::duplicate_field("adjustmentStep"));
                             }
                             adjustment_step__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::ResetOnFill => {
                             if reset_on_fill__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("resetOnFill"));
                             }
-                            reset_on_fill__ = Some(map_.next_value()?);
+                            reset_on_fill__ = map_.next_value()?;
                         }
                         GeneratedField::PositionAdjustmentEnabled => {
                             if position_adjustment_enabled__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("positionAdjustmentEnabled"));
                             }
-                            position_adjustment_enabled__ = Some(map_.next_value()?);
+                            position_adjustment_enabled__ = map_.next_value()?;
                         }
                         GeneratedField::PositionStrategy => {
                             if position_strategy__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("positionStrategy"));
                             }
-                            position_strategy__ = Some(map_.next_value::<PositionAdjustmentStrategy>()? as i32);
+                            position_strategy__ = map_.next_value::<::std::option::Option<PositionAdjustmentStrategy>>()?.map(|x| x as i32);
                         }
                         GeneratedField::PositionThreshold => {
                             if position_threshold__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("positionThreshold"));
                             }
                             position_threshold__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::PositionAdjustmentStep => {
@@ -1201,7 +1201,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                                 return Err(serde::de::Error::duplicate_field("positionAdjustmentStep"));
                             }
                             position_adjustment_step__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::NetPosition => {
@@ -1218,18 +1218,18 @@ impl<'de> serde::Deserialize<'de> for EtfLpOffset {
                     }
                 }
                 Ok(EtfLpOffset {
-                    bid_offset: bid_offset__.unwrap_or_default(),
-                    ask_offset: ask_offset__.unwrap_or_default(),
-                    min_offset: min_offset__.unwrap_or_default(),
-                    max_offset: max_offset__.unwrap_or_default(),
-                    time_adjustment_enabled: time_adjustment_enabled__.unwrap_or_default(),
-                    adjustment_interval_secs: adjustment_interval_secs__.unwrap_or_default(),
-                    adjustment_step: adjustment_step__.unwrap_or_default(),
-                    reset_on_fill: reset_on_fill__.unwrap_or_default(),
-                    position_adjustment_enabled: position_adjustment_enabled__.unwrap_or_default(),
-                    position_strategy: position_strategy__.unwrap_or_default(),
-                    position_threshold: position_threshold__.unwrap_or_default(),
-                    position_adjustment_step: position_adjustment_step__.unwrap_or_default(),
+                    bid_offset: bid_offset__,
+                    ask_offset: ask_offset__,
+                    min_offset: min_offset__,
+                    max_offset: max_offset__,
+                    time_adjustment_enabled: time_adjustment_enabled__,
+                    adjustment_interval_secs: adjustment_interval_secs__,
+                    adjustment_step: adjustment_step__,
+                    reset_on_fill: reset_on_fill__,
+                    position_adjustment_enabled: position_adjustment_enabled__,
+                    position_strategy: position_strategy__,
+                    position_threshold: position_threshold__,
+                    position_adjustment_step: position_adjustment_step__,
                     net_position: net_position__.unwrap_or_default(),
                 })
             }

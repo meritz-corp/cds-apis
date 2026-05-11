@@ -216,36 +216,38 @@ pub struct EtfLpStatusUpdate {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EtfLpOffset {
-    ///
-    #[prost(double, tag="1")]
-    pub bid_offset: f64,
-    #[prost(double, tag="2")]
-    pub ask_offset: f64,
+    /// optional: 미설정(None) 시 해당 필드를 덮어쓰지 않음.
+    /// proto3 optional scalar → prost::Message 에서 Option<T>로 생성됨.
+    #[prost(double, optional, tag="1")]
+    pub bid_offset: ::core::option::Option<f64>,
+    #[prost(double, optional, tag="2")]
+    pub ask_offset: ::core::option::Option<f64>,
     /// NAV 밴드 설정
-    #[prost(double, tag="3")]
-    pub min_offset: f64,
-    #[prost(double, tag="4")]
-    pub max_offset: f64,
+    #[prost(double, optional, tag="3")]
+    pub min_offset: ::core::option::Option<f64>,
+    #[prost(double, optional, tag="4")]
+    pub max_offset: ::core::option::Option<f64>,
     /// 시간 기반 조정
-    #[prost(bool, tag="7")]
-    pub time_adjustment_enabled: bool,
-    #[prost(uint64, tag="8")]
-    pub adjustment_interval_secs: u64,
-    #[prost(double, tag="9")]
-    pub adjustment_step: f64,
-    #[prost(bool, tag="10")]
-    pub reset_on_fill: bool,
+    #[prost(bool, optional, tag="7")]
+    pub time_adjustment_enabled: ::core::option::Option<bool>,
+    #[prost(uint64, optional, tag="8")]
+    pub adjustment_interval_secs: ::core::option::Option<u64>,
+    #[prost(double, optional, tag="9")]
+    pub adjustment_step: ::core::option::Option<f64>,
+    #[prost(bool, optional, tag="10")]
+    pub reset_on_fill: ::core::option::Option<bool>,
     /// 순매매량 기반 조정
-    #[prost(bool, tag="17")]
-    pub position_adjustment_enabled: bool,
-    #[prost(enumeration="PositionAdjustmentStrategy", tag="18")]
-    pub position_strategy: i32,
-    #[prost(int64, tag="19")]
-    pub position_threshold: i64,
-    #[prost(double, tag="20")]
-    pub position_adjustment_step: f64,
+    #[prost(bool, optional, tag="17")]
+    pub position_adjustment_enabled: ::core::option::Option<bool>,
+    #[prost(enumeration="PositionAdjustmentStrategy", optional, tag="18")]
+    pub position_strategy: ::core::option::Option<i32>,
+    #[prost(int64, optional, tag="19")]
+    pub position_threshold: ::core::option::Option<i64>,
+    #[prost(double, optional, tag="20")]
+    pub position_adjustment_step: ::core::option::Option<f64>,
     /// 누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.
     /// 트리거 발동(offset 변경) 시 0으로 리셋됩니다.
+    /// runtime 추적값이므로 optional 아님 — mapper에서 drop 처리.
     #[prost(int64, tag="21")]
     pub net_position: i64,
 }

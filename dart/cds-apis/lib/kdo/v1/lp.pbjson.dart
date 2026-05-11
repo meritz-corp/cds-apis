@@ -304,36 +304,55 @@ final $typed_data.Uint8List etfLpStatusUpdateDescriptor = $convert.base64Decode(
 const EtfLpOffset$json = {
   '1': 'EtfLpOffset',
   '2': [
-    {'1': 'bid_offset', '3': 1, '4': 1, '5': 1, '10': 'bidOffset'},
-    {'1': 'ask_offset', '3': 2, '4': 1, '5': 1, '10': 'askOffset'},
-    {'1': 'min_offset', '3': 3, '4': 1, '5': 1, '10': 'minOffset'},
-    {'1': 'max_offset', '3': 4, '4': 1, '5': 1, '10': 'maxOffset'},
-    {'1': 'time_adjustment_enabled', '3': 7, '4': 1, '5': 8, '10': 'timeAdjustmentEnabled'},
-    {'1': 'adjustment_interval_secs', '3': 8, '4': 1, '5': 4, '10': 'adjustmentIntervalSecs'},
-    {'1': 'adjustment_step', '3': 9, '4': 1, '5': 1, '10': 'adjustmentStep'},
-    {'1': 'reset_on_fill', '3': 10, '4': 1, '5': 8, '10': 'resetOnFill'},
-    {'1': 'position_adjustment_enabled', '3': 17, '4': 1, '5': 8, '10': 'positionAdjustmentEnabled'},
-    {'1': 'position_strategy', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.lp.PositionAdjustmentStrategy', '10': 'positionStrategy'},
-    {'1': 'position_threshold', '3': 19, '4': 1, '5': 3, '10': 'positionThreshold'},
-    {'1': 'position_adjustment_step', '3': 20, '4': 1, '5': 1, '10': 'positionAdjustmentStep'},
+    {'1': 'bid_offset', '3': 1, '4': 1, '5': 1, '9': 0, '10': 'bidOffset', '17': true},
+    {'1': 'ask_offset', '3': 2, '4': 1, '5': 1, '9': 1, '10': 'askOffset', '17': true},
+    {'1': 'min_offset', '3': 3, '4': 1, '5': 1, '9': 2, '10': 'minOffset', '17': true},
+    {'1': 'max_offset', '3': 4, '4': 1, '5': 1, '9': 3, '10': 'maxOffset', '17': true},
+    {'1': 'time_adjustment_enabled', '3': 7, '4': 1, '5': 8, '9': 4, '10': 'timeAdjustmentEnabled', '17': true},
+    {'1': 'adjustment_interval_secs', '3': 8, '4': 1, '5': 4, '9': 5, '10': 'adjustmentIntervalSecs', '17': true},
+    {'1': 'adjustment_step', '3': 9, '4': 1, '5': 1, '9': 6, '10': 'adjustmentStep', '17': true},
+    {'1': 'reset_on_fill', '3': 10, '4': 1, '5': 8, '9': 7, '10': 'resetOnFill', '17': true},
+    {'1': 'position_adjustment_enabled', '3': 17, '4': 1, '5': 8, '9': 8, '10': 'positionAdjustmentEnabled', '17': true},
+    {'1': 'position_strategy', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.lp.PositionAdjustmentStrategy', '9': 9, '10': 'positionStrategy', '17': true},
+    {'1': 'position_threshold', '3': 19, '4': 1, '5': 3, '9': 10, '10': 'positionThreshold', '17': true},
+    {'1': 'position_adjustment_step', '3': 20, '4': 1, '5': 1, '9': 11, '10': 'positionAdjustmentStep', '17': true},
     {'1': 'net_position', '3': 21, '4': 1, '5': 3, '10': 'netPosition'},
+  ],
+  '8': [
+    {'1': '_bid_offset'},
+    {'1': '_ask_offset'},
+    {'1': '_min_offset'},
+    {'1': '_max_offset'},
+    {'1': '_time_adjustment_enabled'},
+    {'1': '_adjustment_interval_secs'},
+    {'1': '_adjustment_step'},
+    {'1': '_reset_on_fill'},
+    {'1': '_position_adjustment_enabled'},
+    {'1': '_position_strategy'},
+    {'1': '_position_threshold'},
+    {'1': '_position_adjustment_step'},
   ],
 };
 
 /// Descriptor for `EtfLpOffset`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
-    'CgtFdGZMcE9mZnNldBIdCgpiaWRfb2Zmc2V0GAEgASgBUgliaWRPZmZzZXQSHQoKYXNrX29mZn'
-    'NldBgCIAEoAVIJYXNrT2Zmc2V0Eh0KCm1pbl9vZmZzZXQYAyABKAFSCW1pbk9mZnNldBIdCgpt'
-    'YXhfb2Zmc2V0GAQgASgBUgltYXhPZmZzZXQSNgoXdGltZV9hZGp1c3RtZW50X2VuYWJsZWQYBy'
-    'ABKAhSFXRpbWVBZGp1c3RtZW50RW5hYmxlZBI4ChhhZGp1c3RtZW50X2ludGVydmFsX3NlY3MY'
-    'CCABKARSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3MSJwoPYWRqdXN0bWVudF9zdGVwGAkgASgBUg'
-    '5hZGp1c3RtZW50U3RlcBIiCg1yZXNldF9vbl9maWxsGAogASgIUgtyZXNldE9uRmlsbBI+Chtw'
-    'b3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWQYESABKAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYW'
-    'JsZWQSUgoRcG9zaXRpb25fc3RyYXRlZ3kYEiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1'
-    'c3RtZW50U3RyYXRlZ3lSEHBvc2l0aW9uU3RyYXRlZ3kSLQoScG9zaXRpb25fdGhyZXNob2xkGB'
-    'MgASgDUhFwb3NpdGlvblRocmVzaG9sZBI4Chhwb3NpdGlvbl9hZGp1c3RtZW50X3N0ZXAYFCAB'
-    'KAFSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXASIQoMbmV0X3Bvc2l0aW9uGBUgASgDUgtuZXRQb3'
-    'NpdGlvbg==');
+    'CgtFdGZMcE9mZnNldBIiCgpiaWRfb2Zmc2V0GAEgASgBSABSCWJpZE9mZnNldIgBARIiCgphc2'
+    'tfb2Zmc2V0GAIgASgBSAFSCWFza09mZnNldIgBARIiCgptaW5fb2Zmc2V0GAMgASgBSAJSCW1p'
+    'bk9mZnNldIgBARIiCgptYXhfb2Zmc2V0GAQgASgBSANSCW1heE9mZnNldIgBARI7Chd0aW1lX2'
+    'FkanVzdG1lbnRfZW5hYmxlZBgHIAEoCEgEUhV0aW1lQWRqdXN0bWVudEVuYWJsZWSIAQESPQoY'
+    'YWRqdXN0bWVudF9pbnRlcnZhbF9zZWNzGAggASgESAVSFmFkanVzdG1lbnRJbnRlcnZhbFNlY3'
+    'OIAQESLAoPYWRqdXN0bWVudF9zdGVwGAkgASgBSAZSDmFkanVzdG1lbnRTdGVwiAEBEicKDXJl'
+    'c2V0X29uX2ZpbGwYCiABKAhIB1ILcmVzZXRPbkZpbGyIAQESQwobcG9zaXRpb25fYWRqdXN0bW'
+    'VudF9lbmFibGVkGBEgASgISAhSGXBvc2l0aW9uQWRqdXN0bWVudEVuYWJsZWSIAQESVwoRcG9z'
+    'aXRpb25fc3RyYXRlZ3kYEiABKA4yJS5rZG8udjEubHAuUG9zaXRpb25BZGp1c3RtZW50U3RyYX'
+    'RlZ3lICVIQcG9zaXRpb25TdHJhdGVneYgBARIyChJwb3NpdGlvbl90aHJlc2hvbGQYEyABKANI'
+    'ClIRcG9zaXRpb25UaHJlc2hvbGSIAQESPQoYcG9zaXRpb25fYWRqdXN0bWVudF9zdGVwGBQgAS'
+    'gBSAtSFnBvc2l0aW9uQWRqdXN0bWVudFN0ZXCIAQESIQoMbmV0X3Bvc2l0aW9uGBUgASgDUgtu'
+    'ZXRQb3NpdGlvbkINCgtfYmlkX29mZnNldEINCgtfYXNrX29mZnNldEINCgtfbWluX29mZnNldE'
+    'INCgtfbWF4X29mZnNldEIaChhfdGltZV9hZGp1c3RtZW50X2VuYWJsZWRCGwoZX2FkanVzdG1l'
+    'bnRfaW50ZXJ2YWxfc2Vjc0ISChBfYWRqdXN0bWVudF9zdGVwQhAKDl9yZXNldF9vbl9maWxsQh'
+    '4KHF9wb3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWRCFAoSX3Bvc2l0aW9uX3N0cmF0ZWd5QhUK'
+    'E19wb3NpdGlvbl90aHJlc2hvbGRCGwoZX3Bvc2l0aW9uX2FkanVzdG1lbnRfc3RlcA==');
 
 @$core.Deprecated('Use etfLpHedgeDescriptor instead')
 const EtfLpHedge$json = {

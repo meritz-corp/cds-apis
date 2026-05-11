@@ -1093,7 +1093,8 @@
       "properties": {
         "bidOffset": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "optional: 미설정(None) 시 해당 필드를 덮어쓰지 않음.\nproto3 optional scalar → prost::Message 에서 Option\u003cT\u003e로 생성됨."
         },
         "askOffset": {
           "type": "number",
@@ -1141,7 +1142,7 @@
         "netPosition": {
           "type": "string",
           "format": "int64",
-          "description": "누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.\n트리거 발동(offset 변경) 시 0으로 리셋됩니다."
+          "description": "누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.\n트리거 발동(offset 변경) 시 0으로 리셋됩니다.\nruntime 추적값이므로 optional 아님 — mapper에서 drop 처리."
         }
       },
       "title": "자동 offset 조정 설정"

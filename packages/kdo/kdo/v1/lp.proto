@@ -361,28 +361,30 @@ enum PositionAdjustmentStrategy {
 
 // 자동 offset 조정 설정
 message EtfLpOffset {
-  //
-  double bid_offset = 1;
-  double ask_offset = 2;
+  // optional: 미설정(None) 시 해당 필드를 덮어쓰지 않음.
+  // proto3 optional scalar → prost::Message 에서 Option<T>로 생성됨.
+  optional double bid_offset = 1;
+  optional double ask_offset = 2;
 
   // NAV 밴드 설정
-  double min_offset = 3;
-  double max_offset = 4;
+  optional double min_offset = 3;
+  optional double max_offset = 4;
 
   // 시간 기반 조정
-  bool time_adjustment_enabled = 7;
-  uint64 adjustment_interval_secs = 8;
-  double adjustment_step = 9;
-  bool reset_on_fill = 10;
+  optional bool time_adjustment_enabled = 7;
+  optional uint64 adjustment_interval_secs = 8;
+  optional double adjustment_step = 9;
+  optional bool reset_on_fill = 10;
 
   // 순매매량 기반 조정
-  bool position_adjustment_enabled = 17;
-  PositionAdjustmentStrategy position_strategy = 18;
-  int64 position_threshold = 19;
-  double position_adjustment_step = 20;
+  optional bool position_adjustment_enabled = 17;
+  optional PositionAdjustmentStrategy position_strategy = 18;
+  optional int64 position_threshold = 19;
+  optional double position_adjustment_step = 20;
 
   // 누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.
   // 트리거 발동(offset 변경) 시 0으로 리셋됩니다.
+  // runtime 추적값이므로 optional 아님 — mapper에서 drop 처리.
   int64 net_position = 21;
 }
 
