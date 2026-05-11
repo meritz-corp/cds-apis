@@ -1643,6 +1643,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   factory UpdateFuturesLpRequest({
     $core.String? futureSymbol,
     $core.String? fundCode,
+  @$core.Deprecated('This field is deprecated.')
     $core.double? carry,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
@@ -1738,12 +1739,17 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   void clearFundCode() => $_clearField(2);
 
   /// Cost of carry (만기 가까울수록 조정 가능)
+  /// [DEPRECATED] carry는 Future/Etf에서 runtime derive되므로 서버에서 이 값을 무시합니다.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(3)
   $core.double get carry => $_getN(2);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(3)
   set carry($core.double value) => $_setDouble(2, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(3)
   $core.bool hasCarry() => $_has(2);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(3)
   void clearCarry() => $_clearField(3);
 

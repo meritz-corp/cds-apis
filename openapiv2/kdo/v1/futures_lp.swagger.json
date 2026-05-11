@@ -201,7 +201,7 @@
                 "carry": {
                   "type": "number",
                   "format": "double",
-                  "title": "Cost of carry (만기 가까울수록 조정 가능)"
+                  "description": "Cost of carry (만기 가까울수록 조정 가능)\n[DEPRECATED] carry는 Future/Etf에서 runtime derive되므로 서버에서 이 값을 무시합니다."
                 },
                 "bidQuantity": {
                   "type": "string",

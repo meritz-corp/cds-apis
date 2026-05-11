@@ -367,6 +367,8 @@ pub struct UpdateFuturesLpRequest {
     // 각 필드가 optional — 여러 필드를 동시에 설정 가능
 
     /// Cost of carry (만기 가까울수록 조정 가능)
+    /// \[DEPRECATED\] carry는 Future/Etf에서 runtime derive되므로 서버에서 이 값을 무시합니다.
+    #[deprecated]
     #[prost(double, optional, tag="3")]
     pub carry: ::core::option::Option<f64>,
     /// 매수 주문 수량

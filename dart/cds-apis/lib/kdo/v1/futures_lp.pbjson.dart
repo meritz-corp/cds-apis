@@ -393,7 +393,16 @@ const UpdateFuturesLpRequest$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-    {'1': 'carry', '3': 3, '4': 1, '5': 1, '9': 0, '10': 'carry', '17': true},
+    {
+      '1': 'carry',
+      '3': 3,
+      '4': 1,
+      '5': 1,
+      '8': {'3': true},
+      '9': 0,
+      '10': 'carry',
+      '17': true,
+    },
     {'1': 'bid_quantity', '3': 4, '4': 1, '5': 3, '9': 1, '10': 'bidQuantity', '17': true},
     {'1': 'ask_quantity', '3': 5, '4': 1, '5': 3, '9': 2, '10': 'askQuantity', '17': true},
     {'1': 'bid_adjustment', '3': 6, '4': 1, '5': 1, '9': 3, '10': 'bidAdjustment', '17': true},
@@ -427,22 +436,22 @@ const UpdateFuturesLpRequest$json = {
 /// Descriptor for `UpdateFuturesLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateFuturesLpRequestDescriptor = $convert.base64Decode(
     'ChZVcGRhdGVGdXR1cmVzTHBSZXF1ZXN0EikKDWZ1dHVyZV9zeW1ib2wYASABKAlCBOJBAQJSDG'
-    'Z1dHVyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEhkKBWNhcnJ5'
-    'GAMgASgBSABSBWNhcnJ5iAEBEiYKDGJpZF9xdWFudGl0eRgEIAEoA0gBUgtiaWRRdWFudGl0eY'
-    'gBARImCgxhc2tfcXVhbnRpdHkYBSABKANIAlILYXNrUXVhbnRpdHmIAQESKgoOYmlkX2FkanVz'
-    'dG1lbnQYBiABKAFIA1INYmlkQWRqdXN0bWVudIgBARIqCg5hc2tfYWRqdXN0bWVudBgHIAEoAU'
-    'gEUg1hc2tBZGp1c3RtZW50iAEBEiAKCWJpZF9iYXNpcxgIIAEoAUgFUghiaWRCYXNpc4gBARIg'
-    'Cglhc2tfYmFzaXMYCSABKAFIBlIIYXNrQmFzaXOIAQESGQoFZGVwdGgYCiABKA1IB1IFZGVwdG'
-    'iIAQESMwoGb2Zmc2V0GAsgASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0SAhSBm9mZnNldIgB'
-    'ARIuChBtb21lbnR1bV9lbmFibGVkGAwgASgISAlSD21vbWVudHVtRW5hYmxlZIgBARIsCg9tb2'
-    '1lbnR1bV93aW5kb3cYDSABKA1IClIObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vu'
-    'c2l0aXZpdHkYDiABKAFIC1ITbW9tZW50dW1TZW5zaXRpdml0eYgBARJVCg5xdWFudGl0eV9saW'
-    '1pdBgPIAEoCzIpLmtkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRIDFIN'
-    'cXVhbnRpdHlMaW1pdIgBAUIICgZfY2FycnlCDwoNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW'
-    '50aXR5QhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG1lbnRCDAoKX2JpZF9iYXNp'
-    'c0IMCgpfYXNrX2Jhc2lzQggKBl9kZXB0aEIJCgdfb2Zmc2V0QhMKEV9tb21lbnR1bV9lbmFibG'
-    'VkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhEKD19xdWFu'
-    'dGl0eV9saW1pdA==');
+    'Z1dHVyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEh0KBWNhcnJ5'
+    'GAMgASgBQgIYAUgAUgVjYXJyeYgBARImCgxiaWRfcXVhbnRpdHkYBCABKANIAVILYmlkUXVhbn'
+    'RpdHmIAQESJgoMYXNrX3F1YW50aXR5GAUgASgDSAJSC2Fza1F1YW50aXR5iAEBEioKDmJpZF9h'
+    'ZGp1c3RtZW50GAYgASgBSANSDWJpZEFkanVzdG1lbnSIAQESKgoOYXNrX2FkanVzdG1lbnQYBy'
+    'ABKAFIBFINYXNrQWRqdXN0bWVudIgBARIgCgliaWRfYmFzaXMYCCABKAFIBVIIYmlkQmFzaXOI'
+    'AQESIAoJYXNrX2Jhc2lzGAkgASgBSAZSCGFza0Jhc2lziAEBEhkKBWRlcHRoGAogASgNSAdSBW'
+    'RlcHRoiAEBEjMKBm9mZnNldBgLIAEoCzIWLmtkby52MS5scC5FdGZMcE9mZnNldEgIUgZvZmZz'
+    'ZXSIAQESLgoQbW9tZW50dW1fZW5hYmxlZBgMIAEoCEgJUg9tb21lbnR1bUVuYWJsZWSIAQESLA'
+    'oPbW9tZW50dW1fd2luZG93GA0gASgNSApSDm1vbWVudHVtV2luZG93iAEBEjYKFG1vbWVudHVt'
+    'X3NlbnNpdGl2aXR5GA4gASgBSAtSE21vbWVudHVtU2Vuc2l0aXZpdHmIAQESVQoOcXVhbnRpdH'
+    'lfbGltaXQYDyABKAsyKS5rZG8udjEuZnV0dXJlc19scC5GdXR1cmVzTHBRdWFudGl0eUxpbWl0'
+    'SAxSDXF1YW50aXR5TGltaXSIAQFCCAoGX2NhcnJ5Qg8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza1'
+    '9xdWFudGl0eUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QgwKCl9iaWRf'
+    'YmFzaXNCDAoKX2Fza19iYXNpc0IICgZfZGVwdGhCCQoHX29mZnNldEITChFfbW9tZW50dW1fZW'
+    '5hYmxlZEISChBfbW9tZW50dW1fd2luZG93QhcKFV9tb21lbnR1bV9zZW5zaXRpdml0eUIRCg9f'
+    'cXVhbnRpdHlfbGltaXQ=');
 
 @$core.Deprecated('Use getFuturesLpStatusRequestDescriptor instead')
 const GetFuturesLpStatusRequest$json = {
