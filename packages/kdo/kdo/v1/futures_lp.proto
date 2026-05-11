@@ -1,0 +1,590 @@
+syntax = "proto3";
+
+package kdo.v1.futures_lp;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/client.proto";
+import "kdo/v1/lp.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// Futures LP 서비스. ETF best price를 reference로 선물 LP 호가를 관리합니다.
+service FuturesLpService {
+  // 선물 LP 설정 조회
+  rpc GetFuturesLp(GetFuturesLpRequest) returns (FuturesLp) {
+    option (google.api.http) = {
+      get: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code";
+  }
+
+  // 선물 LP 목록 조회
+  rpc ListFuturesLps(ListFuturesLpsRequest) returns (ListFuturesLpsResponse) {
+    option (google.api.http) = {
+      get: "/v1/futures/lp"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 선물 LP 설정 업데이트
+  rpc UpdateFuturesLp(UpdateFuturesLpRequest) returns (FuturesLp) {
+    option (google.api.http) = {
+      patch: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}"
+      body: "*"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code";
+  }
+
+  // 선물 LP 상태 조회
+  rpc GetFuturesLpStatus(GetFuturesLpStatusRequest) returns (FuturesLpStatus) {
+    option (google.api.http) = {
+      get: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}/status"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code";
+  }
+
+  // 선물 LP 상태 목록 조회
+  rpc ListFuturesLpStatuses(ListFuturesLpStatusesRequest) returns (ListFuturesLpStatusesResponse) {
+    option (google.api.http) = {
+      get: "/v1/futures/lp/status"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 선물 LP 상태 스트리밍 (실시간 업데이트)
+  rpc StreamFuturesLpStatusUpdate(StreamFuturesLpStatusUpdateRequest) returns (stream FuturesLpStatusUpdate) {
+    option (google.api.http) = {
+      get: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}/status:stream"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code";
+  }
+
+  // 선물 LP 시작
+  rpc StartFuturesLp(StartFuturesLpRequest) returns (StartFuturesLpResponse) {
+    option (google.api.http) = {
+      post: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}:start"
+      body: "*"
+    };
+  }
+
+  // 선물 LP 중지
+  rpc StopFuturesLp(StopFuturesLpRequest) returns (StopFuturesLpResponse) {
+    option (google.api.http) = {
+      post: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}:stop"
+      body: "*"
+    };
+  }
+
+  // 선물 LP 주문장 조회
+  rpc GetFuturesOrderBook(GetFuturesOrderBookRequest) returns (FuturesOrderBook) {
+    option (google.api.http) = {
+      get: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}/orderbook"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code";
+  }
+
+  // 선물 LP 주문장 스트리밍
+  rpc StreamFuturesOrderBook(GetFuturesOrderBookRequest) returns (stream FuturesOrderBook) {
+    option (google.api.http) = {
+      get: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}/orderbook:stream"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code";
+  }
+}
+
+// ========== Core Entity ==========
+
+// 선물 LP 설정
+message FuturesLp {
+  // 선물 종목 심볼
+  string future_symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // Reference로 사용하는 기초 ETF 심볼
+  string etf_symbol = 3;
+
+  // 선물 1계약 = ETF N units. 항상 양수 (Forward only).
+  double multiplier = 4;
+
+  // Cost of carry / 배당 보정 (고정 상수).
+  // theoretical_ask에 +carry, theoretical_bid에 -carry 적용.
+  double carry = 5;
+
+  // LP 마진 — 이론가 위에 추가로 띄울 ask spread
+  double ask_basis = 6;
+
+  // LP 마진 — 이론가 아래에 추가로 띄울 bid spread
+  double bid_basis = 7;
+
+  // 매수 주문 수량 (계약 수)
+  int64 bid_quantity = 8;
+
+  // 매도 주문 수량 (계약 수)
+  int64 ask_quantity = 9;
+
+  // 호가 깊이 (양방향 레벨 수)
+  uint32 depth = 10;
+
+  // 선물 tick 크기
+  double tick_size = 11;
+
+  // 자동 offset 조정 설정 (ETF LP의 EtfLpOffset 재사용)
+  kdo.v1.lp.EtfLpOffset offset = 12;
+
+  // LP 활성화 여부
+  bool enabled = 13;
+
+  // 매수 호가 조정값
+  optional double bid_adjustment = 14;
+
+  // 매도 호가 조정값
+  optional double ask_adjustment = 15;
+
+  // 모멘텀 활성화 여부
+  optional bool momentum_enabled = 16;
+
+  // 모멘텀 윈도우 크기
+  optional uint32 momentum_window = 17;
+
+  // 모멘텀 민감도
+  optional double momentum_sensitivity = 18;
+
+  // 매수/매도 수량 한도
+  optional FuturesLpQuantityLimit quantity_limit = 19;
+}
+
+// 매수/매도 수량 한도
+message FuturesLpQuantityLimit {
+  // 매수 수량 상한 (gross 누적 매수 체결 기준)
+  int64 max_bid_quantity = 1;
+
+  // 매도 수량 상한 (gross 누적 매도 체결 기준)
+  int64 max_ask_quantity = 2;
+
+  // 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
+  // 상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조
+  optional int64 net_quantity = 3;
+
+  // 순포지션 한도 설정값 (한도 검증에 사용)
+  // net_quantity > 0 && net_quantity >= max_net_quantity → 매수 차단
+  // net_quantity < 0 && |net_quantity| >= max_net_quantity → 매도 차단
+  // 미설정(None) 시 순포지션 기반 차단 비활성
+  optional int64 max_net_quantity = 4;
+}
+
+// ========== Status Messages ==========
+
+// 선물 LP 상태 enum
+enum FuturesLpState {
+  FUTURES_LP_STATE_UNSPECIFIED = 0;
+  FUTURES_LP_STATE_IDLE = 1;
+  FUTURES_LP_STATE_RUNNING = 2;
+  FUTURES_LP_STATE_STOPPING = 3;
+  FUTURES_LP_STATE_ERROR = 4;
+}
+
+// 선물 LP Pricing 정보 (호가 + ETF reference)
+message FuturesLpPricing {
+  // 산출된 선물 매수 호가
+  double future_bid_quote = 1;
+
+  // 산출된 선물 매도 호가
+  double future_ask_quote = 2;
+
+  // ETF reference로 계산한 이론가 (bid)
+  double theoretical_bid = 3;
+
+  // ETF reference로 계산한 이론가 (ask)
+  double theoretical_ask = 4;
+
+  // 현재 사용 중인 ETF best bid (입력)
+  double etf_best_bid = 5;
+
+  // 현재 사용 중인 ETF best ask (입력)
+  double etf_best_ask = 6;
+}
+
+// 선물 LP 상태
+message FuturesLpStatus {
+  // 선물 종목 심볼
+  string future_symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // LP 상태
+  FuturesLpState state = 3;
+
+  // Order Limiter 상태
+  FuturesLpOrderLimitStatus order_limit = 4;
+
+  // 가격 정보
+  FuturesLpPricing pricing = 5;
+
+  // 체결 통계
+  FuturesLpFillStatistics fill_statistics = 6;
+
+  // Reference ETF 심볼
+  string etf_symbol = 7;
+
+  // 선물 1계약 = ETF N units
+  double multiplier = 8;
+
+  // Cost of carry
+  double carry = 9;
+
+  // LP 마진 — ask spread
+  double ask_basis = 10;
+
+  // LP 마진 — bid spread
+  double bid_basis = 11;
+
+  // 매수 호가 조정값
+  optional double bid_adjustment = 12;
+
+  // 매도 호가 조정값
+  optional double ask_adjustment = 13;
+
+  // 모멘텀 활성화 여부
+  optional bool momentum_enabled = 14;
+
+  // 모멘텀 윈도우 크기
+  optional uint32 momentum_window = 15;
+
+  // 모멘텀 민감도
+  optional double momentum_sensitivity = 16;
+
+  // 런타임 계산된 모멘텀 매수 호가 조정값
+  optional double momentum_bid_adjustment = 17;
+
+  // 런타임 계산된 모멘텀 매도 호가 조정값
+  optional double momentum_ask_adjustment = 18;
+
+  // 매수 주문 수량 (계약 수)
+  int64 bid_quantity = 19;
+
+  // 매도 주문 수량 (계약 수)
+  int64 ask_quantity = 20;
+
+  // 자동 offset 조정 설정 (런타임 상태 포함)
+  kdo.v1.lp.EtfLpOffset offset = 21;
+
+  // 매수/매도 수량 한도
+  optional FuturesLpQuantityLimit quantity_limit = 22;
+
+  // 호가 깊이
+  uint32 depth = 23;
+}
+
+// 선물 LP 상태 업데이트 (변경된 필드만 포함)
+message FuturesLpStatusUpdate {
+  // 선물 종목 심볼
+  string future_symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
+
+  // LP 상태 (변경 시에만 Some)
+  optional FuturesLpState state = 3;
+
+  // 가격 정보 (변경 시에만 Some)
+  optional FuturesLpPricing pricing = 4;
+
+  // 체결 통계 (변경 시에만 Some)
+  optional FuturesLpFillStatistics fill_statistics = 5;
+
+  // Cost of carry (변경 시에만 Some)
+  optional double carry = 6;
+
+  // LP 마진 — ask spread (변경 시에만 Some)
+  optional double ask_basis = 7;
+
+  // LP 마진 — bid spread (변경 시에만 Some)
+  optional double bid_basis = 8;
+
+  // 매수 호가 조정값 (변경 시에만 Some)
+  optional double bid_adjustment = 9;
+
+  // 매도 호가 조정값 (변경 시에만 Some)
+  optional double ask_adjustment = 10;
+
+  // 매수 주문 수량 (변경 시에만 Some)
+  optional int64 bid_quantity = 11;
+
+  // 매도 주문 수량 (변경 시에만 Some)
+  optional int64 ask_quantity = 12;
+
+  // 자동 offset 조정 설정 (변경 시에만 Some)
+  optional kdo.v1.lp.EtfLpOffset offset = 13;
+
+  // 모멘텀 활성화 여부 (변경 시에만 Some)
+  optional bool momentum_enabled = 14;
+
+  // 모멘텀 윈도우 크기 (변경 시에만 Some)
+  optional uint32 momentum_window = 15;
+
+  // 모멘텀 민감도 (변경 시에만 Some)
+  optional double momentum_sensitivity = 16;
+
+  // 런타임 계산된 모멘텀 매수 호가 조정값 (변경 시에만 Some)
+  optional double momentum_bid_adjustment = 17;
+
+  // 런타임 계산된 모멘텀 매도 호가 조정값 (변경 시에만 Some)
+  optional double momentum_ask_adjustment = 18;
+
+  // 매수/매도 수량 한도 (변경 시에만 Some)
+  optional FuturesLpQuantityLimit quantity_limit = 19;
+
+  // 호가 깊이 (변경 시에만 Some)
+  optional uint32 depth = 20;
+}
+
+// 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
+message FuturesLpFillStatistics {
+  // 매수 체결량 (계약 수)
+  int64 buy_filled_quantity = 1;
+
+  // 매도 체결량 (계약 수)
+  int64 sell_filled_quantity = 2;
+
+  // 매수 총금액 (평균 단가 계산용)
+  string buy_total_amount = 3;
+
+  // 매도 총금액 (평균 단가 계산용)
+  string sell_total_amount = 4;
+}
+
+// Order Limiter 상태
+message FuturesLpOrderLimitStatus {
+  // 시간 프레임별 주문 개수 현황
+  repeated FuturesLpTimeFrameStatus time_frame_status = 1;
+}
+
+// 시간 프레임별 상태
+message FuturesLpTimeFrameStatus {
+  // 시간 윈도우 (초)
+  uint64 window_seconds = 1;
+
+  // 현재 윈도우 내 주문 개수
+  uint32 current_count = 2;
+
+  // 최대 주문 개수
+  uint32 max_orders = 3;
+
+  // 사용률 (%)
+  double usage_percent = 4;
+}
+
+// 선물 주문장 (LP 주문 상태)
+message FuturesOrderBook {
+  // 매수 호가 목록 (depth 단계)
+  repeated double bid_prices = 1;
+
+  // 매도 호가 목록 (depth 단계)
+  repeated double ask_prices = 2;
+
+  // 매수 수량 목록 (depth 단계)
+  repeated int64 bid_quantities = 3;
+
+  // 매도 수량 목록 (depth 단계)
+  repeated int64 ask_quantities = 4;
+}
+
+// ========== Request/Response Messages ==========
+
+// GetFuturesLp
+message GetFuturesLpRequest {
+  // 선물 종목 심볼 (예: "101S6")
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ListFuturesLps
+message ListFuturesLpsRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 필터 조건
+  //
+  // Available Fields and Operators
+  // * future_symbol
+  //   * `equal`, `contains`
+  // * fund_code
+  //   * `equal`, `contains`
+  //
+  // Examples
+  // * filter=future_symbol:"101S6"
+  // * filter=fund_code="0331"
+  string filter = 3;
+}
+
+message ListFuturesLpsResponse {
+  // 선물 LP 목록
+  repeated FuturesLp futures_lps = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+// UpdateFuturesLp
+message UpdateFuturesLpRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 각 필드가 optional — 여러 필드를 동시에 설정 가능
+
+  // Cost of carry (만기 가까울수록 조정 가능)
+  optional double carry = 3;
+
+  // 매수 주문 수량
+  optional int64 bid_quantity = 4;
+
+  // 매도 주문 수량
+  optional int64 ask_quantity = 5;
+
+  // 매수 호가 조정값
+  optional double bid_adjustment = 6;
+
+  // 매도 호가 조정값
+  optional double ask_adjustment = 7;
+
+  // LP 마진 — bid spread
+  optional double bid_basis = 8;
+
+  // LP 마진 — ask spread
+  optional double ask_basis = 9;
+
+  // 호가 깊이
+  optional uint32 depth = 10;
+
+  // 자동 offset 조정 설정
+  optional kdo.v1.lp.EtfLpOffset offset = 11;
+
+  // 모멘텀 활성화 여부
+  optional bool momentum_enabled = 12;
+
+  // 모멘텀 윈도우 크기
+  optional uint32 momentum_window = 13;
+
+  // 모멘텀 민감도
+  optional double momentum_sensitivity = 14;
+
+  // 매수/매도 수량 한도
+  optional FuturesLpQuantityLimit quantity_limit = 15;
+}
+
+// GetFuturesLpStatus
+message GetFuturesLpStatusRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ListFuturesLpStatuses
+message ListFuturesLpStatusesRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 필터 조건
+  //
+  // Available Fields and Operators
+  // * future_symbol
+  //   * `equal`, `contains`
+  // * fund_code
+  //   * `equal`, `contains`
+  // * state
+  //   * `equal`
+  // * fill_statistics.buy_filled_quantity
+  //   * `greater_than`, `less_than`
+  //
+  // Examples
+  // * filter=future_symbol:"101S6"
+  // * filter=fund_code="0331"
+  // * filter=state=FUTURES_LP_STATE_RUNNING
+  // * filter=fill_statistics.buy_filled_quantity > 1000
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // 오더링 조건 (optional, AIP-132)
+  //
+  // Supported Fields
+  // * "fill_statistics.buy_filled_quantity", "fill_statistics.sell_filled_quantity"
+  //
+  // Examples
+  // * order_by=fill_statistics.buy_filled_quantity desc
+  string order_by = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListFuturesLpStatusesResponse {
+  // 선물 LP 상태 목록
+  repeated FuturesLpStatus futures_lp_statuses = 1;
+}
+
+// StreamFuturesLpStatusUpdate
+message StreamFuturesLpStatusUpdateRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// StartFuturesLp
+message StartFuturesLpRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 선물 LP 시작 응답
+message StartFuturesLpResponse {
+  // LP 상태
+  FuturesLpStatus status = 1;
+
+  // 메시지
+  string message = 2;
+}
+
+// StopFuturesLp
+message StopFuturesLpRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 선물 LP 중지 응답
+message StopFuturesLpResponse {
+  // LP 상태
+  FuturesLpStatus status = 1;
+
+  // 메시지
+  string message = 2;
+}
+
+// GetFuturesOrderBook / StreamFuturesOrderBook
+message GetFuturesOrderBookRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}

@@ -1,0 +1,1189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/futures_lp.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "FuturesLpService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/futures/lp": {
+      "get": {
+        "summary": "선물 LP 목록 조회",
+        "operationId": "FuturesLpService_ListFuturesLps",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpListFuturesLpsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터 조건\n\nAvailable Fields and Operators\n* future_symbol\n  * `equal`, `contains`\n* fund_code\n  * `equal`, `contains`\n\nExamples\n* filter=future_symbol:\"101S6\"\n* filter=fund_code=\"0331\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/lp/status": {
+      "get": {
+        "summary": "선물 LP 상태 목록 조회",
+        "operationId": "FuturesLpService_ListFuturesLpStatuses",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpListFuturesLpStatusesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "필터 조건\n\nAvailable Fields and Operators\n* future_symbol\n  * `equal`, `contains`\n* fund_code\n  * `equal`, `contains`\n* state\n  * `equal`\n* fill_statistics.buy_filled_quantity\n  * `greater_than`, `less_than`\n\nExamples\n* filter=future_symbol:\"101S6\"\n* filter=fund_code=\"0331\"\n* filter=state=FUTURES_LP_STATE_RUNNING\n* filter=fill_statistics.buy_filled_quantity \u003e 1000",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "오더링 조건 (optional, AIP-132)\n\nSupported Fields\n* \"fill_statistics.buy_filled_quantity\", \"fill_statistics.sell_filled_quantity\"\n\nExamples\n* order_by=fill_statistics.buy_filled_quantity desc",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/{futureSymbol}/lp/{fundCode}": {
+      "get": {
+        "summary": "선물 LP 설정 조회",
+        "operationId": "FuturesLpService_GetFuturesLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpFuturesLp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼 (예: \"101S6\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      },
+      "patch": {
+        "summary": "선물 LP 설정 업데이트",
+        "operationId": "FuturesLpService_UpdateFuturesLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpFuturesLp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "carry": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "Cost of carry (만기 가까울수록 조정 가능)"
+                },
+                "bidQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "매수 주문 수량"
+                },
+                "askQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "매도 주문 수량"
+                },
+                "bidAdjustment": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "매수 호가 조정값"
+                },
+                "askAdjustment": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "매도 호가 조정값"
+                },
+                "bidBasis": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "LP 마진 — bid spread"
+                },
+                "askBasis": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "LP 마진 — ask spread"
+                },
+                "depth": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "호가 깊이"
+                },
+                "offset": {
+                  "$ref": "#/definitions/lpEtfLpOffset",
+                  "title": "자동 offset 조정 설정"
+                },
+                "momentumEnabled": {
+                  "type": "boolean",
+                  "title": "모멘텀 활성화 여부"
+                },
+                "momentumWindow": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "모멘텀 윈도우 크기"
+                },
+                "momentumSensitivity": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "모멘텀 민감도"
+                },
+                "quantityLimit": {
+                  "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
+                  "title": "매수/매도 수량 한도"
+                }
+              },
+              "title": "UpdateFuturesLp"
+            }
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/{futureSymbol}/lp/{fundCode}/orderbook": {
+      "get": {
+        "summary": "선물 LP 주문장 조회",
+        "operationId": "FuturesLpService_GetFuturesOrderBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpFuturesOrderBook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/{futureSymbol}/lp/{fundCode}/orderbook:stream": {
+      "get": {
+        "summary": "선물 LP 주문장 스트리밍",
+        "operationId": "FuturesLpService_StreamFuturesOrderBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/futures_lpFuturesOrderBook"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of futures_lpFuturesOrderBook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/{futureSymbol}/lp/{fundCode}/status": {
+      "get": {
+        "summary": "선물 LP 상태 조회",
+        "operationId": "FuturesLpService_GetFuturesLpStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpFuturesLpStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/{futureSymbol}/lp/{fundCode}/status:stream": {
+      "get": {
+        "summary": "선물 LP 상태 스트리밍 (실시간 업데이트)",
+        "operationId": "FuturesLpService_StreamFuturesLpStatusUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/futures_lpFuturesLpStatusUpdate"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of futures_lpFuturesLpStatusUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/{futureSymbol}/lp/{fundCode}:start": {
+      "post": {
+        "summary": "선물 LP 시작",
+        "operationId": "FuturesLpService_StartFuturesLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpStartFuturesLpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "StartFuturesLp"
+            }
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    },
+    "/v1/futures/{futureSymbol}/lp/{fundCode}:stop": {
+      "post": {
+        "summary": "선물 LP 중지",
+        "operationId": "FuturesLpService_StopFuturesLp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/futures_lpStopFuturesLpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "futureSymbol",
+            "description": "선물 종목 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "StopFuturesLp"
+            }
+          }
+        ],
+        "tags": [
+          "FuturesLpService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "futures_lpFuturesLp": {
+      "type": "object",
+      "properties": {
+        "futureSymbol": {
+          "type": "string",
+          "title": "선물 종목 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "etfSymbol": {
+          "type": "string",
+          "title": "Reference로 사용하는 기초 ETF 심볼"
+        },
+        "multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "선물 1계약 = ETF N units. 항상 양수 (Forward only)."
+        },
+        "carry": {
+          "type": "number",
+          "format": "double",
+          "description": "Cost of carry / 배당 보정 (고정 상수).\ntheoretical_ask에 +carry, theoretical_bid에 -carry 적용."
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "LP 마진 — 이론가 위에 추가로 띄울 ask spread"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "LP 마진 — 이론가 아래에 추가로 띄울 bid spread"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (계약 수)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (계약 수)"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이 (양방향 레벨 수)"
+        },
+        "tickSize": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 tick 크기"
+        },
+        "offset": {
+          "$ref": "#/definitions/lpEtfLpOffset",
+          "title": "자동 offset 조정 설정 (ETF LP의 EtfLpOffset 재사용)"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "LP 활성화 여부"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
+          "title": "매수/매도 수량 한도"
+        }
+      },
+      "title": "선물 LP 설정"
+    },
+    "futures_lpFuturesLpFillStatistics": {
+      "type": "object",
+      "properties": {
+        "buyFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 체결량 (계약 수)"
+        },
+        "sellFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 체결량 (계약 수)"
+        },
+        "buyTotalAmount": {
+          "type": "string",
+          "title": "매수 총금액 (평균 단가 계산용)"
+        },
+        "sellTotalAmount": {
+          "type": "string",
+          "title": "매도 총금액 (평균 단가 계산용)"
+        }
+      },
+      "title": "선물 LP 체결 통계 (매수/매도 체결량 및 총금액)"
+    },
+    "futures_lpFuturesLpOrderLimitStatus": {
+      "type": "object",
+      "properties": {
+        "timeFrameStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/futures_lpFuturesLpTimeFrameStatus"
+          },
+          "title": "시간 프레임별 주문 개수 현황"
+        }
+      },
+      "title": "Order Limiter 상태"
+    },
+    "futures_lpFuturesLpPricing": {
+      "type": "object",
+      "properties": {
+        "futureBidQuote": {
+          "type": "number",
+          "format": "double",
+          "title": "산출된 선물 매수 호가"
+        },
+        "futureAskQuote": {
+          "type": "number",
+          "format": "double",
+          "title": "산출된 선물 매도 호가"
+        },
+        "theoreticalBid": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF reference로 계산한 이론가 (bid)"
+        },
+        "theoreticalAsk": {
+          "type": "number",
+          "format": "double",
+          "title": "ETF reference로 계산한 이론가 (ask)"
+        },
+        "etfBestBid": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 사용 중인 ETF best bid (입력)"
+        },
+        "etfBestAsk": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 사용 중인 ETF best ask (입력)"
+        }
+      },
+      "title": "선물 LP Pricing 정보 (호가 + ETF reference)"
+    },
+    "futures_lpFuturesLpQuantityLimit": {
+      "type": "object",
+      "properties": {
+        "maxBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 수량 상한 (gross 누적 매수 체결 기준)"
+        },
+        "maxAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 수량 상한 (gross 누적 매도 체결 기준)"
+        },
+        "netQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조"
+        },
+        "maxNetQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순포지션 한도 설정값 (한도 검증에 사용)\nnet_quantity \u003e 0 \u0026\u0026 net_quantity \u003e= max_net_quantity → 매수 차단\nnet_quantity \u003c 0 \u0026\u0026 |net_quantity| \u003e= max_net_quantity → 매도 차단\n미설정(None) 시 순포지션 기반 차단 비활성"
+        }
+      },
+      "title": "매수/매도 수량 한도"
+    },
+    "futures_lpFuturesLpState": {
+      "type": "string",
+      "enum": [
+        "FUTURES_LP_STATE_UNSPECIFIED",
+        "FUTURES_LP_STATE_IDLE",
+        "FUTURES_LP_STATE_RUNNING",
+        "FUTURES_LP_STATE_STOPPING",
+        "FUTURES_LP_STATE_ERROR"
+      ],
+      "default": "FUTURES_LP_STATE_UNSPECIFIED",
+      "title": "선물 LP 상태 enum"
+    },
+    "futures_lpFuturesLpStatus": {
+      "type": "object",
+      "properties": {
+        "futureSymbol": {
+          "type": "string",
+          "title": "선물 종목 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "state": {
+          "$ref": "#/definitions/futures_lpFuturesLpState",
+          "title": "LP 상태"
+        },
+        "orderLimit": {
+          "$ref": "#/definitions/futures_lpFuturesLpOrderLimitStatus",
+          "title": "Order Limiter 상태"
+        },
+        "pricing": {
+          "$ref": "#/definitions/futures_lpFuturesLpPricing",
+          "title": "가격 정보"
+        },
+        "fillStatistics": {
+          "$ref": "#/definitions/futures_lpFuturesLpFillStatistics",
+          "title": "체결 통계"
+        },
+        "etfSymbol": {
+          "type": "string",
+          "title": "Reference ETF 심볼"
+        },
+        "multiplier": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 1계약 = ETF N units"
+        },
+        "carry": {
+          "type": "number",
+          "format": "double",
+          "title": "Cost of carry"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "LP 마진 — ask spread"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "LP 마진 — bid spread"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
+        },
+        "momentumBidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
+        },
+        "momentumAskAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (계약 수)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (계약 수)"
+        },
+        "offset": {
+          "$ref": "#/definitions/lpEtfLpOffset",
+          "title": "자동 offset 조정 설정 (런타임 상태 포함)"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
+          "title": "매수/매도 수량 한도"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이"
+        }
+      },
+      "title": "선물 LP 상태"
+    },
+    "futures_lpFuturesLpStatusUpdate": {
+      "type": "object",
+      "properties": {
+        "futureSymbol": {
+          "type": "string",
+          "title": "선물 종목 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "state": {
+          "$ref": "#/definitions/futures_lpFuturesLpState",
+          "title": "LP 상태 (변경 시에만 Some)"
+        },
+        "pricing": {
+          "$ref": "#/definitions/futures_lpFuturesLpPricing",
+          "title": "가격 정보 (변경 시에만 Some)"
+        },
+        "fillStatistics": {
+          "$ref": "#/definitions/futures_lpFuturesLpFillStatistics",
+          "title": "체결 통계 (변경 시에만 Some)"
+        },
+        "carry": {
+          "type": "number",
+          "format": "double",
+          "title": "Cost of carry (변경 시에만 Some)"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "LP 마진 — ask spread (변경 시에만 Some)"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "LP 마진 — bid spread (변경 시에만 Some)"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값 (변경 시에만 Some)"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값 (변경 시에만 Some)"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량 (변경 시에만 Some)"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량 (변경 시에만 Some)"
+        },
+        "offset": {
+          "$ref": "#/definitions/lpEtfLpOffset",
+          "title": "자동 offset 조정 설정 (변경 시에만 Some)"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부 (변경 시에만 Some)"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기 (변경 시에만 Some)"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도 (변경 시에만 Some)"
+        },
+        "momentumBidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매수 호가 조정값 (변경 시에만 Some)"
+        },
+        "momentumAskAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매도 호가 조정값 (변경 시에만 Some)"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
+          "title": "매수/매도 수량 한도 (변경 시에만 Some)"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이 (변경 시에만 Some)"
+        }
+      },
+      "title": "선물 LP 상태 업데이트 (변경된 필드만 포함)"
+    },
+    "futures_lpFuturesLpTimeFrameStatus": {
+      "type": "object",
+      "properties": {
+        "windowSeconds": {
+          "type": "string",
+          "format": "uint64",
+          "title": "시간 윈도우 (초)"
+        },
+        "currentCount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "현재 윈도우 내 주문 개수"
+        },
+        "maxOrders": {
+          "type": "integer",
+          "format": "int64",
+          "title": "최대 주문 개수"
+        },
+        "usagePercent": {
+          "type": "number",
+          "format": "double",
+          "title": "사용률 (%)"
+        }
+      },
+      "title": "시간 프레임별 상태"
+    },
+    "futures_lpFuturesOrderBook": {
+      "type": "object",
+      "properties": {
+        "bidPrices": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "title": "매수 호가 목록 (depth 단계)"
+        },
+        "askPrices": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "title": "매도 호가 목록 (depth 단계)"
+        },
+        "bidQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매수 수량 목록 (depth 단계)"
+        },
+        "askQuantities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "매도 수량 목록 (depth 단계)"
+        }
+      },
+      "title": "선물 주문장 (LP 주문 상태)"
+    },
+    "futures_lpListFuturesLpStatusesResponse": {
+      "type": "object",
+      "properties": {
+        "futuresLpStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/futures_lpFuturesLpStatus"
+          },
+          "title": "선물 LP 상태 목록"
+        }
+      }
+    },
+    "futures_lpListFuturesLpsResponse": {
+      "type": "object",
+      "properties": {
+        "futuresLps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/futures_lpFuturesLp"
+          },
+          "title": "선물 LP 목록"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰"
+        }
+      }
+    },
+    "futures_lpStartFuturesLpResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/futures_lpFuturesLpStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "선물 LP 시작 응답"
+    },
+    "futures_lpStopFuturesLpResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/futures_lpFuturesLpStatus",
+          "title": "LP 상태"
+        },
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      },
+      "title": "선물 LP 중지 응답"
+    },
+    "lpEtfLpOffset": {
+      "type": "object",
+      "properties": {
+        "bidOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "askOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "minOffset": {
+          "type": "number",
+          "format": "double",
+          "title": "NAV 밴드 설정"
+        },
+        "maxOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "timeAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "시간 기반 조정"
+        },
+        "adjustmentIntervalSecs": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "adjustmentStep": {
+          "type": "number",
+          "format": "double"
+        },
+        "resetOnFill": {
+          "type": "boolean"
+        },
+        "positionAdjustmentEnabled": {
+          "type": "boolean",
+          "title": "순매매량 기반 조정"
+        },
+        "positionStrategy": {
+          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
+        },
+        "positionThreshold": {
+          "type": "string",
+          "format": "int64"
+        },
+        "positionAdjustmentStep": {
+          "type": "number",
+          "format": "double"
+        },
+        "netPosition": {
+          "type": "string",
+          "format": "int64",
+          "description": "누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.\n트리거 발동(offset 변경) 시 0으로 리셋됩니다."
+        }
+      },
+      "title": "자동 offset 조정 설정"
+    },
+    "lpPositionAdjustmentStrategy": {
+      "type": "string",
+      "enum": [
+        "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
+        "POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE",
+        "POSITION_ADJUSTMENT_STRATEGY_TURNOVER",
+        "POSITION_ADJUSTMENT_STRATEGY_ALL"
+      ],
+      "default": "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
+      "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
+      "title": "순매매량 기반 조정 전략"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
