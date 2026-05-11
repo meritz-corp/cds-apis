@@ -32,6 +32,9 @@ pub mod kdo {
         pub mod lp {
             include!("kdo.v1.lp.rs");
         }
+        pub mod futures_lp {
+            include!("kdo.v1.futures_lp.rs");
+        }
         pub mod inventory {
             include!("kdo.v1.inventory.rs");
         }
