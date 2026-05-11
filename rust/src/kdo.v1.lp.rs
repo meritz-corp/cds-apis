@@ -632,6 +632,10 @@ pub enum PrecomputePolicy {
     ///    - depth 초과(드문 케이스)는 cancel-all만
     ///    - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill
     ManyToOne = 2,
+    /// 선물 1틱 ↔ ETF N틱 (1:N 대응). 고가 레버리지 ETF용.
+    ///    - 단일측 ±2/±3틱 8개 시나리오를 하드코딩 precompute
+    ///    - 그 외 케이스는 slow refill
+    OneToMany = 3,
 }
 impl PrecomputePolicy {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -643,6 +647,7 @@ impl PrecomputePolicy {
             PrecomputePolicy::Unspecified => "PRECOMPUTE_POLICY_UNSPECIFIED",
             PrecomputePolicy::OneToOne => "PRECOMPUTE_POLICY_ONE_TO_ONE",
             PrecomputePolicy::ManyToOne => "PRECOMPUTE_POLICY_MANY_TO_ONE",
+            PrecomputePolicy::OneToMany => "PRECOMPUTE_POLICY_ONE_TO_MANY",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -651,6 +656,7 @@ impl PrecomputePolicy {
             "PRECOMPUTE_POLICY_UNSPECIFIED" => Some(Self::Unspecified),
             "PRECOMPUTE_POLICY_ONE_TO_ONE" => Some(Self::OneToOne),
             "PRECOMPUTE_POLICY_MANY_TO_ONE" => Some(Self::ManyToOne),
+            "PRECOMPUTE_POLICY_ONE_TO_MANY" => Some(Self::OneToMany),
             _ => None,
         }
     }

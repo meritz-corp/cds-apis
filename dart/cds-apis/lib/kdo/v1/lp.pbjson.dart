@@ -21,6 +21,7 @@ const PrecomputePolicy$json = {
     {'1': 'PRECOMPUTE_POLICY_UNSPECIFIED', '2': 0},
     {'1': 'PRECOMPUTE_POLICY_ONE_TO_ONE', '2': 1},
     {'1': 'PRECOMPUTE_POLICY_MANY_TO_ONE', '2': 2},
+    {'1': 'PRECOMPUTE_POLICY_ONE_TO_MANY', '2': 3},
   ],
 };
 
@@ -28,7 +29,7 @@ const PrecomputePolicy$json = {
 final $typed_data.Uint8List precomputePolicyDescriptor = $convert.base64Decode(
     'ChBQcmVjb21wdXRlUG9saWN5EiEKHVBSRUNPTVBVVEVfUE9MSUNZX1VOU1BFQ0lGSUVEEAASIA'
     'ocUFJFQ09NUFVURV9QT0xJQ1lfT05FX1RPX09ORRABEiEKHVBSRUNPTVBVVEVfUE9MSUNZX01B'
-    'TllfVE9fT05FEAI=');
+    'TllfVE9fT05FEAISIQodUFJFQ09NUFVURV9QT0xJQ1lfT05FX1RPX01BTlkQAw==');
 
 @$core.Deprecated('Use positionAdjustmentStrategyDescriptor instead')
 const PositionAdjustmentStrategy$json = {

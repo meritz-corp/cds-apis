@@ -1157,10 +1157,11 @@
       "enum": [
         "PRECOMPUTE_POLICY_UNSPECIFIED",
         "PRECOMPUTE_POLICY_ONE_TO_ONE",
-        "PRECOMPUTE_POLICY_MANY_TO_ONE"
+        "PRECOMPUTE_POLICY_MANY_TO_ONE",
+        "PRECOMPUTE_POLICY_ONE_TO_MANY"
       ],
       "default": "PRECOMPUTE_POLICY_UNSPECIFIED",
-      "description": "- PRECOMPUTE_POLICY_ONE_TO_ONE: 선물 1틱 ↔ ETF 1틱 (1:1 대응). 빠른 추격 LP.\nprecompute 시나리오 경우의 수 축소를 위한 최적화 적용:\n  - depth 초과 / 역방향 시 cancel-all + slowpath refill\n  - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함\n - PRECOMPUTE_POLICY_MANY_TO_ONE: 선물 N틱 ↔ ETF 1틱 (N:1 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:\n  - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)\n  - depth 초과(드문 케이스)는 cancel-all만\n  - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill",
+      "description": "- PRECOMPUTE_POLICY_ONE_TO_ONE: 선물 1틱 ↔ ETF 1틱 (1:1 대응). 빠른 추격 LP.\nprecompute 시나리오 경우의 수 축소를 위한 최적화 적용:\n  - depth 초과 / 역방향 시 cancel-all + slowpath refill\n  - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함\n - PRECOMPUTE_POLICY_MANY_TO_ONE: 선물 N틱 ↔ ETF 1틱 (N:1 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:\n  - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)\n  - depth 초과(드문 케이스)는 cancel-all만\n  - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill\n - PRECOMPUTE_POLICY_ONE_TO_MANY: 선물 1틱 ↔ ETF N틱 (1:N 대응). 고가 레버리지 ETF용.\n  - 단일측 ±2/±3틱 8개 시나리오를 하드코딩 precompute\n  - 그 외 케이스는 slow refill",
       "title": "precomputed quote retreat 처리 정책"
     },
     "lpStartEtfLpResponse": {

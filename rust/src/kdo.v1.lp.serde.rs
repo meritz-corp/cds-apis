@@ -3881,6 +3881,7 @@ impl serde::Serialize for PrecomputePolicy {
             Self::Unspecified => "PRECOMPUTE_POLICY_UNSPECIFIED",
             Self::OneToOne => "PRECOMPUTE_POLICY_ONE_TO_ONE",
             Self::ManyToOne => "PRECOMPUTE_POLICY_MANY_TO_ONE",
+            Self::OneToMany => "PRECOMPUTE_POLICY_ONE_TO_MANY",
         };
         serializer.serialize_str(variant)
     }
@@ -3895,6 +3896,7 @@ impl<'de> serde::Deserialize<'de> for PrecomputePolicy {
             "PRECOMPUTE_POLICY_UNSPECIFIED",
             "PRECOMPUTE_POLICY_ONE_TO_ONE",
             "PRECOMPUTE_POLICY_MANY_TO_ONE",
+            "PRECOMPUTE_POLICY_ONE_TO_MANY",
         ];
 
         struct GeneratedVisitor;
@@ -3938,6 +3940,7 @@ impl<'de> serde::Deserialize<'de> for PrecomputePolicy {
                     "PRECOMPUTE_POLICY_UNSPECIFIED" => Ok(PrecomputePolicy::Unspecified),
                     "PRECOMPUTE_POLICY_ONE_TO_ONE" => Ok(PrecomputePolicy::OneToOne),
                     "PRECOMPUTE_POLICY_MANY_TO_ONE" => Ok(PrecomputePolicy::ManyToOne),
+                    "PRECOMPUTE_POLICY_ONE_TO_MANY" => Ok(PrecomputePolicy::OneToMany),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
