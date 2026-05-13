@@ -254,6 +254,10 @@
                 "quantityLimit": {
                   "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
                   "title": "매수/매도 수량 한도"
+                },
+                "etfPricing": {
+                  "type": "string",
+                  "title": "EtfPricing variant 이름 (변경 시에만 Some, 예: \"pdf_nav_hedge\", \"leverage_future\")"
                 }
               },
               "title": "UpdateFuturesLp"
@@ -634,6 +638,10 @@
         "quantityLimit": {
           "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
           "title": "매수/매도 수량 한도"
+        },
+        "etfPricing": {
+          "type": "string",
+          "title": "EtfPricing variant 이름 (예: \"pdf_nav_hedge\", \"leverage_future\")"
         }
       },
       "title": "선물 LP 설정"
@@ -851,6 +859,10 @@
           "type": "integer",
           "format": "int64",
           "title": "호가 깊이"
+        },
+        "etfPricing": {
+          "type": "string",
+          "title": "EtfPricing variant 이름 (예: \"pdf_nav_hedge\", \"leverage_future\")"
         }
       },
       "title": "선물 LP 상태"
@@ -944,6 +956,10 @@
           "type": "integer",
           "format": "int64",
           "title": "호가 깊이 (변경 시에만 Some)"
+        },
+        "etfPricing": {
+          "type": "string",
+          "title": "EtfPricing variant 이름 (변경 시에만 Some, 예: \"pdf_nav_hedge\", \"leverage_future\")"
         }
       },
       "title": "선물 LP 상태 업데이트 (변경된 필드만 포함)"

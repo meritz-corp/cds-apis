@@ -61,6 +61,9 @@ impl serde::Serialize for FuturesLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLp", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -120,6 +123,9 @@ impl serde::Serialize for FuturesLp {
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
+        if true {
+            struct_ser.serialize_field("etf_pricing", &self.etf_pricing)?;
+        }
         struct_ser.end()
     }
 }
@@ -162,6 +168,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "momentumSensitivity",
             "quantity_limit",
             "quantityLimit",
+            "etf_pricing",
+            "etfPricing",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -184,6 +192,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             MomentumWindow,
             MomentumSensitivity,
             QuantityLimit,
+            EtfPricing,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -224,6 +233,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -261,6 +271,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut momentum_window__ = None;
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
+                let mut etf_pricing__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -393,6 +404,12 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             }
                             quantity_limit__ = map_.next_value()?;
                         }
+                        GeneratedField::EtfPricing => {
+                            if etf_pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPricing"));
+                            }
+                            etf_pricing__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -417,6 +434,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     momentum_window: momentum_window__,
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
+                    etf_pricing: etf_pricing__.unwrap_or_default(),
                 })
             }
         }
@@ -1195,6 +1213,9 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLpStatus", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -1268,6 +1289,9 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             struct_ser.serialize_field("depth", &self.depth)?;
         }
+        if true {
+            struct_ser.serialize_field("etf_pricing", &self.etf_pricing)?;
+        }
         struct_ser.end()
     }
 }
@@ -1317,6 +1341,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             "quantity_limit",
             "quantityLimit",
             "depth",
+            "etf_pricing",
+            "etfPricing",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1343,6 +1369,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             Offset,
             QuantityLimit,
             Depth,
+            EtfPricing,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1387,6 +1414,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             "offset" => Ok(GeneratedField::Offset),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "depth" => Ok(GeneratedField::Depth),
+                            "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1428,6 +1456,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                 let mut offset__ = None;
                 let mut quantity_limit__ = None;
                 let mut depth__ = None;
+                let mut etf_pricing__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -1586,6 +1615,12 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::EtfPricing => {
+                            if etf_pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPricing"));
+                            }
+                            etf_pricing__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1614,6 +1649,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                     offset: offset__,
                     quantity_limit: quantity_limit__,
                     depth: depth__.unwrap_or_default(),
+                    etf_pricing: etf_pricing__.unwrap_or_default(),
                 })
             }
         }
@@ -1628,6 +1664,9 @@ impl serde::Serialize for FuturesLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1749,6 +1788,9 @@ impl serde::Serialize for FuturesLpStatusUpdate {
         if let Some(v) = self.depth.as_ref() {
             struct_ser.serialize_field("depth", v)?;
         }
+        if let Some(v) = self.etf_pricing.as_ref() {
+            struct_ser.serialize_field("etf_pricing", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1793,6 +1835,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             "quantity_limit",
             "quantityLimit",
             "depth",
+            "etf_pricing",
+            "etfPricing",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1816,6 +1860,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             MomentumAskAdjustment,
             QuantityLimit,
             Depth,
+            EtfPricing,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1857,6 +1902,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "depth" => Ok(GeneratedField::Depth),
+                            "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1895,6 +1941,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                 let mut momentum_ask_adjustment__ = None;
                 let mut quantity_limit__ = None;
                 let mut depth__ = None;
+                let mut etf_pricing__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -2033,6 +2080,12 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::EtfPricing => {
+                            if etf_pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPricing"));
+                            }
+                            etf_pricing__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2058,6 +2111,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                     momentum_ask_adjustment: momentum_ask_adjustment__,
                     quantity_limit: quantity_limit__,
                     depth: depth__,
+                    etf_pricing: etf_pricing__,
                 })
             }
         }
@@ -3838,6 +3892,9 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -3885,6 +3942,9 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
+        if let Some(v) = self.etf_pricing.as_ref() {
+            struct_ser.serialize_field("etf_pricing", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -3921,6 +3981,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "momentumSensitivity",
             "quantity_limit",
             "quantityLimit",
+            "etf_pricing",
+            "etfPricing",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3939,6 +4001,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             MomentumWindow,
             MomentumSensitivity,
             QuantityLimit,
+            EtfPricing,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3975,6 +4038,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
+                            "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4008,6 +4072,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut momentum_window__ = None;
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
+                let mut etf_pricing__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -4112,6 +4177,12 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             }
                             quantity_limit__ = map_.next_value()?;
                         }
+                        GeneratedField::EtfPricing => {
+                            if etf_pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfPricing"));
+                            }
+                            etf_pricing__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4132,6 +4203,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     momentum_window: momentum_window__,
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
+                    etf_pricing: etf_pricing__,
                 })
             }
         }

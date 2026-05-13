@@ -43,6 +43,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
     FuturesLpQuantityLimit? quantityLimit,
+    $core.String? etfPricing,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -63,6 +64,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (momentumWindow != null) result.momentumWindow = momentumWindow;
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
+    if (etfPricing != null) result.etfPricing = etfPricing;
     return result;
   }
 
@@ -90,6 +92,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..a<$core.int>(17, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<FuturesLpQuantityLimit>(19, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
+    ..aOS(20, _omitFieldNames ? '' : 'etfPricing')
     ..hasRequiredFields = false
   ;
 
@@ -294,6 +297,16 @@ class FuturesLp extends $pb.GeneratedMessage {
   void clearQuantityLimit() => $_clearField(19);
   @$pb.TagNumber(19)
   FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
+
+  /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
+  @$pb.TagNumber(20)
+  $core.String get etfPricing => $_getSZ(18);
+  @$pb.TagNumber(20)
+  set etfPricing($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(20)
+  $core.bool hasEtfPricing() => $_has(18);
+  @$pb.TagNumber(20)
+  void clearEtfPricing() => $_clearField(20);
 }
 
 /// 매수/매도 수량 한도
@@ -525,6 +538,7 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     $1.EtfLpOffset? offset,
     FuturesLpQuantityLimit? quantityLimit,
     $core.int? depth,
+    $core.String? etfPricing,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -549,6 +563,7 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     if (offset != null) result.offset = offset;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (depth != null) result.depth = depth;
+    if (etfPricing != null) result.etfPricing = etfPricing;
     return result;
   }
 
@@ -580,6 +595,7 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     ..aOM<$1.EtfLpOffset>(21, _omitFieldNames ? '' : 'offset', subBuilder: $1.EtfLpOffset.create)
     ..aOM<FuturesLpQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..a<$core.int>(23, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
+    ..aOS(24, _omitFieldNames ? '' : 'etfPricing')
     ..hasRequiredFields = false
   ;
 
@@ -830,6 +846,16 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
   $core.bool hasDepth() => $_has(21);
   @$pb.TagNumber(23)
   void clearDepth() => $_clearField(23);
+
+  /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
+  @$pb.TagNumber(24)
+  $core.String get etfPricing => $_getSZ(22);
+  @$pb.TagNumber(24)
+  set etfPricing($core.String value) => $_setString(22, value);
+  @$pb.TagNumber(24)
+  $core.bool hasEtfPricing() => $_has(22);
+  @$pb.TagNumber(24)
+  void clearEtfPricing() => $_clearField(24);
 }
 
 /// 선물 LP 상태 업데이트 (변경된 필드만 포함)
@@ -854,6 +880,7 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     $core.double? momentumAskAdjustment,
     FuturesLpQuantityLimit? quantityLimit,
     $core.int? depth,
+    $core.String? etfPricing,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -875,6 +902,7 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (depth != null) result.depth = depth;
+    if (etfPricing != null) result.etfPricing = etfPricing;
     return result;
   }
 
@@ -903,6 +931,7 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
     ..aOM<FuturesLpQuantityLimit>(19, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..a<$core.int>(20, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
+    ..aOS(21, _omitFieldNames ? '' : 'etfPricing')
     ..hasRequiredFields = false
   ;
 
@@ -1120,6 +1149,16 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasDepth() => $_has(18);
   @$pb.TagNumber(20)
   void clearDepth() => $_clearField(20);
+
+  /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
+  @$pb.TagNumber(21)
+  $core.String get etfPricing => $_getSZ(19);
+  @$pb.TagNumber(21)
+  set etfPricing($core.String value) => $_setString(19, value);
+  @$pb.TagNumber(21)
+  $core.bool hasEtfPricing() => $_has(19);
+  @$pb.TagNumber(21)
+  void clearEtfPricing() => $_clearField(21);
 }
 
 /// 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
@@ -1617,6 +1656,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.int? momentumWindow,
     $core.double? momentumSensitivity,
     FuturesLpQuantityLimit? quantityLimit,
+    $core.String? etfPricing,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1633,6 +1673,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (momentumWindow != null) result.momentumWindow = momentumWindow;
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
+    if (etfPricing != null) result.etfPricing = etfPricing;
     return result;
   }
 
@@ -1656,6 +1697,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(13, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<FuturesLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
+    ..aOS(16, _omitFieldNames ? '' : 'etfPricing')
     ..hasRequiredFields = false
   ;
 
@@ -1819,6 +1861,16 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   void clearQuantityLimit() => $_clearField(15);
   @$pb.TagNumber(15)
   FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(13);
+
+  /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
+  @$pb.TagNumber(16)
+  $core.String get etfPricing => $_getSZ(14);
+  @$pb.TagNumber(16)
+  set etfPricing($core.String value) => $_setString(14, value);
+  @$pb.TagNumber(16)
+  $core.bool hasEtfPricing() => $_has(14);
+  @$pb.TagNumber(16)
+  void clearEtfPricing() => $_clearField(16);
 }
 
 /// GetFuturesLpStatus

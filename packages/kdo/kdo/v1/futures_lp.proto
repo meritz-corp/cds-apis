@@ -154,6 +154,9 @@ message FuturesLp {
 
   // 매수/매도 수량 한도
   optional FuturesLpQuantityLimit quantity_limit = 19;
+
+  // EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
+  string etf_pricing = 20;
 }
 
 // 매수/매도 수량 한도
@@ -278,6 +281,9 @@ message FuturesLpStatus {
 
   // 호가 깊이
   uint32 depth = 23;
+
+  // EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
+  string etf_pricing = 24;
 }
 
 // 선물 LP 상태 업데이트 (변경된 필드만 포함)
@@ -341,6 +347,9 @@ message FuturesLpStatusUpdate {
 
   // 호가 깊이 (변경 시에만 Some)
   optional uint32 depth = 20;
+
+  // EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
+  optional string etf_pricing = 21;
 }
 
 // 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
@@ -483,6 +492,9 @@ message UpdateFuturesLpRequest {
 
   // 매수/매도 수량 한도
   optional FuturesLpQuantityLimit quantity_limit = 15;
+
+  // EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
+  optional string etf_pricing = 16;
 }
 
 // GetFuturesLpStatus

@@ -61,6 +61,9 @@ pub struct FuturesLp {
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="19")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
+    /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
+    #[prost(string, tag="20")]
+    pub etf_pricing: ::prost::alloc::string::String,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -177,6 +180,9 @@ pub struct FuturesLpStatus {
     /// 호가 깊이
     #[prost(uint32, tag="23")]
     pub depth: u32,
+    /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
+    #[prost(string, tag="24")]
+    pub etf_pricing: ::prost::alloc::string::String,
 }
 /// 선물 LP 상태 업데이트 (변경된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -239,6 +245,9 @@ pub struct FuturesLpStatusUpdate {
     /// 호가 깊이 (변경 시에만 Some)
     #[prost(uint32, optional, tag="20")]
     pub depth: ::core::option::Option<u32>,
+    /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
+    #[prost(string, optional, tag="21")]
+    pub etf_pricing: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -394,6 +403,9 @@ pub struct UpdateFuturesLpRequest {
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="15")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
+    /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
+    #[prost(string, optional, tag="16")]
+    pub etf_pricing: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
