@@ -29,7 +29,6 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.String? fundCode,
     $core.String? etfSymbol,
     $core.double? multiplier,
-    $core.double? carry,
     $core.double? askBasis,
     $core.double? bidBasis,
     $fixnum.Int64? bidQuantity,
@@ -50,7 +49,6 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (fundCode != null) result.fundCode = fundCode;
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
     if (multiplier != null) result.multiplier = multiplier;
-    if (carry != null) result.carry = carry;
     if (askBasis != null) result.askBasis = askBasis;
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
@@ -78,7 +76,6 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'multiplier', $pb.PbFieldType.OD)
-    ..a<$core.double>(5, _omitFieldNames ? '' : 'carry', $pb.PbFieldType.OD)
     ..a<$core.double>(6, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(7, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..aInt64(8, _omitFieldNames ? '' : 'bidQuantity')
@@ -153,160 +150,150 @@ class FuturesLp extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearMultiplier() => $_clearField(4);
 
-  /// Cost of carry / 배당 보정 (고정 상수).
-  /// theoretical_ask에 +carry, theoretical_bid에 -carry 적용.
-  @$pb.TagNumber(5)
-  $core.double get carry => $_getN(4);
-  @$pb.TagNumber(5)
-  set carry($core.double value) => $_setDouble(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasCarry() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearCarry() => $_clearField(5);
-
   /// LP 마진 — 이론가 위에 추가로 띄울 ask spread
+  /// (cost of carry는 ask_basis/bid_basis에 흡수됨)
   @$pb.TagNumber(6)
-  $core.double get askBasis => $_getN(5);
+  $core.double get askBasis => $_getN(4);
   @$pb.TagNumber(6)
-  set askBasis($core.double value) => $_setDouble(5, value);
+  set askBasis($core.double value) => $_setDouble(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasAskBasis() => $_has(5);
+  $core.bool hasAskBasis() => $_has(4);
   @$pb.TagNumber(6)
   void clearAskBasis() => $_clearField(6);
 
   /// LP 마진 — 이론가 아래에 추가로 띄울 bid spread
   @$pb.TagNumber(7)
-  $core.double get bidBasis => $_getN(6);
+  $core.double get bidBasis => $_getN(5);
   @$pb.TagNumber(7)
-  set bidBasis($core.double value) => $_setDouble(6, value);
+  set bidBasis($core.double value) => $_setDouble(5, value);
   @$pb.TagNumber(7)
-  $core.bool hasBidBasis() => $_has(6);
+  $core.bool hasBidBasis() => $_has(5);
   @$pb.TagNumber(7)
   void clearBidBasis() => $_clearField(7);
 
   /// 매수 주문 수량 (계약 수)
   @$pb.TagNumber(8)
-  $fixnum.Int64 get bidQuantity => $_getI64(7);
+  $fixnum.Int64 get bidQuantity => $_getI64(6);
   @$pb.TagNumber(8)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(7, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(8)
-  $core.bool hasBidQuantity() => $_has(7);
+  $core.bool hasBidQuantity() => $_has(6);
   @$pb.TagNumber(8)
   void clearBidQuantity() => $_clearField(8);
 
   /// 매도 주문 수량 (계약 수)
   @$pb.TagNumber(9)
-  $fixnum.Int64 get askQuantity => $_getI64(8);
+  $fixnum.Int64 get askQuantity => $_getI64(7);
   @$pb.TagNumber(9)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(9)
-  $core.bool hasAskQuantity() => $_has(8);
+  $core.bool hasAskQuantity() => $_has(7);
   @$pb.TagNumber(9)
   void clearAskQuantity() => $_clearField(9);
 
   /// 호가 깊이 (양방향 레벨 수)
   @$pb.TagNumber(10)
-  $core.int get depth => $_getIZ(9);
+  $core.int get depth => $_getIZ(8);
   @$pb.TagNumber(10)
-  set depth($core.int value) => $_setUnsignedInt32(9, value);
+  set depth($core.int value) => $_setUnsignedInt32(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasDepth() => $_has(9);
+  $core.bool hasDepth() => $_has(8);
   @$pb.TagNumber(10)
   void clearDepth() => $_clearField(10);
 
   /// 선물 tick 크기
   @$pb.TagNumber(11)
-  $core.double get tickSize => $_getN(10);
+  $core.double get tickSize => $_getN(9);
   @$pb.TagNumber(11)
-  set tickSize($core.double value) => $_setDouble(10, value);
+  set tickSize($core.double value) => $_setDouble(9, value);
   @$pb.TagNumber(11)
-  $core.bool hasTickSize() => $_has(10);
+  $core.bool hasTickSize() => $_has(9);
   @$pb.TagNumber(11)
   void clearTickSize() => $_clearField(11);
 
   /// 자동 offset 조정 설정 (ETF LP의 EtfLpOffset 재사용)
   @$pb.TagNumber(12)
-  $1.EtfLpOffset get offset => $_getN(11);
+  $1.EtfLpOffset get offset => $_getN(10);
   @$pb.TagNumber(12)
   set offset($1.EtfLpOffset value) => $_setField(12, value);
   @$pb.TagNumber(12)
-  $core.bool hasOffset() => $_has(11);
+  $core.bool hasOffset() => $_has(10);
   @$pb.TagNumber(12)
   void clearOffset() => $_clearField(12);
   @$pb.TagNumber(12)
-  $1.EtfLpOffset ensureOffset() => $_ensure(11);
+  $1.EtfLpOffset ensureOffset() => $_ensure(10);
 
   /// LP 활성화 여부
   @$pb.TagNumber(13)
-  $core.bool get enabled => $_getBF(12);
+  $core.bool get enabled => $_getBF(11);
   @$pb.TagNumber(13)
-  set enabled($core.bool value) => $_setBool(12, value);
+  set enabled($core.bool value) => $_setBool(11, value);
   @$pb.TagNumber(13)
-  $core.bool hasEnabled() => $_has(12);
+  $core.bool hasEnabled() => $_has(11);
   @$pb.TagNumber(13)
   void clearEnabled() => $_clearField(13);
 
   /// 매수 호가 조정값
   @$pb.TagNumber(14)
-  $core.double get bidAdjustment => $_getN(13);
+  $core.double get bidAdjustment => $_getN(12);
   @$pb.TagNumber(14)
-  set bidAdjustment($core.double value) => $_setDouble(13, value);
+  set bidAdjustment($core.double value) => $_setDouble(12, value);
   @$pb.TagNumber(14)
-  $core.bool hasBidAdjustment() => $_has(13);
+  $core.bool hasBidAdjustment() => $_has(12);
   @$pb.TagNumber(14)
   void clearBidAdjustment() => $_clearField(14);
 
   /// 매도 호가 조정값
   @$pb.TagNumber(15)
-  $core.double get askAdjustment => $_getN(14);
+  $core.double get askAdjustment => $_getN(13);
   @$pb.TagNumber(15)
-  set askAdjustment($core.double value) => $_setDouble(14, value);
+  set askAdjustment($core.double value) => $_setDouble(13, value);
   @$pb.TagNumber(15)
-  $core.bool hasAskAdjustment() => $_has(14);
+  $core.bool hasAskAdjustment() => $_has(13);
   @$pb.TagNumber(15)
   void clearAskAdjustment() => $_clearField(15);
 
   /// 모멘텀 활성화 여부
   @$pb.TagNumber(16)
-  $core.bool get momentumEnabled => $_getBF(15);
+  $core.bool get momentumEnabled => $_getBF(14);
   @$pb.TagNumber(16)
-  set momentumEnabled($core.bool value) => $_setBool(15, value);
+  set momentumEnabled($core.bool value) => $_setBool(14, value);
   @$pb.TagNumber(16)
-  $core.bool hasMomentumEnabled() => $_has(15);
+  $core.bool hasMomentumEnabled() => $_has(14);
   @$pb.TagNumber(16)
   void clearMomentumEnabled() => $_clearField(16);
 
   /// 모멘텀 윈도우 크기
   @$pb.TagNumber(17)
-  $core.int get momentumWindow => $_getIZ(16);
+  $core.int get momentumWindow => $_getIZ(15);
   @$pb.TagNumber(17)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(16, value);
+  set momentumWindow($core.int value) => $_setUnsignedInt32(15, value);
   @$pb.TagNumber(17)
-  $core.bool hasMomentumWindow() => $_has(16);
+  $core.bool hasMomentumWindow() => $_has(15);
   @$pb.TagNumber(17)
   void clearMomentumWindow() => $_clearField(17);
 
   /// 모멘텀 민감도
   @$pb.TagNumber(18)
-  $core.double get momentumSensitivity => $_getN(17);
+  $core.double get momentumSensitivity => $_getN(16);
   @$pb.TagNumber(18)
-  set momentumSensitivity($core.double value) => $_setDouble(17, value);
+  set momentumSensitivity($core.double value) => $_setDouble(16, value);
   @$pb.TagNumber(18)
-  $core.bool hasMomentumSensitivity() => $_has(17);
+  $core.bool hasMomentumSensitivity() => $_has(16);
   @$pb.TagNumber(18)
   void clearMomentumSensitivity() => $_clearField(18);
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(18);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(17);
   @$pb.TagNumber(19)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(19, value);
   @$pb.TagNumber(19)
-  $core.bool hasQuantityLimit() => $_has(18);
+  $core.bool hasQuantityLimit() => $_has(17);
   @$pb.TagNumber(19)
   void clearQuantityLimit() => $_clearField(19);
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(18);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
 }
 
 /// 매수/매도 수량 한도
@@ -524,7 +511,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     FuturesLpFillStatistics? fillStatistics,
     $core.String? etfSymbol,
     $core.double? multiplier,
-    $core.double? carry,
     $core.double? askBasis,
     $core.double? bidBasis,
     $core.double? bidAdjustment,
@@ -549,7 +535,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
     if (multiplier != null) result.multiplier = multiplier;
-    if (carry != null) result.carry = carry;
     if (askBasis != null) result.askBasis = askBasis;
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
@@ -581,7 +566,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     ..aOM<FuturesLpFillStatistics>(6, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FuturesLpFillStatistics.create)
     ..aOS(7, _omitFieldNames ? '' : 'etfSymbol')
     ..a<$core.double>(8, _omitFieldNames ? '' : 'multiplier', $pb.PbFieldType.OD)
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'carry', $pb.PbFieldType.OD)
     ..a<$core.double>(10, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(11, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(12, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
@@ -702,157 +686,148 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearMultiplier() => $_clearField(8);
 
-  /// Cost of carry
-  @$pb.TagNumber(9)
-  $core.double get carry => $_getN(8);
-  @$pb.TagNumber(9)
-  set carry($core.double value) => $_setDouble(8, value);
-  @$pb.TagNumber(9)
-  $core.bool hasCarry() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearCarry() => $_clearField(9);
-
   /// LP 마진 — ask spread
+  /// (cost of carry는 ask_basis/bid_basis에 흡수됨)
   @$pb.TagNumber(10)
-  $core.double get askBasis => $_getN(9);
+  $core.double get askBasis => $_getN(8);
   @$pb.TagNumber(10)
-  set askBasis($core.double value) => $_setDouble(9, value);
+  set askBasis($core.double value) => $_setDouble(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasAskBasis() => $_has(9);
+  $core.bool hasAskBasis() => $_has(8);
   @$pb.TagNumber(10)
   void clearAskBasis() => $_clearField(10);
 
   /// LP 마진 — bid spread
   @$pb.TagNumber(11)
-  $core.double get bidBasis => $_getN(10);
+  $core.double get bidBasis => $_getN(9);
   @$pb.TagNumber(11)
-  set bidBasis($core.double value) => $_setDouble(10, value);
+  set bidBasis($core.double value) => $_setDouble(9, value);
   @$pb.TagNumber(11)
-  $core.bool hasBidBasis() => $_has(10);
+  $core.bool hasBidBasis() => $_has(9);
   @$pb.TagNumber(11)
   void clearBidBasis() => $_clearField(11);
 
   /// 매수 호가 조정값
   @$pb.TagNumber(12)
-  $core.double get bidAdjustment => $_getN(11);
+  $core.double get bidAdjustment => $_getN(10);
   @$pb.TagNumber(12)
-  set bidAdjustment($core.double value) => $_setDouble(11, value);
+  set bidAdjustment($core.double value) => $_setDouble(10, value);
   @$pb.TagNumber(12)
-  $core.bool hasBidAdjustment() => $_has(11);
+  $core.bool hasBidAdjustment() => $_has(10);
   @$pb.TagNumber(12)
   void clearBidAdjustment() => $_clearField(12);
 
   /// 매도 호가 조정값
   @$pb.TagNumber(13)
-  $core.double get askAdjustment => $_getN(12);
+  $core.double get askAdjustment => $_getN(11);
   @$pb.TagNumber(13)
-  set askAdjustment($core.double value) => $_setDouble(12, value);
+  set askAdjustment($core.double value) => $_setDouble(11, value);
   @$pb.TagNumber(13)
-  $core.bool hasAskAdjustment() => $_has(12);
+  $core.bool hasAskAdjustment() => $_has(11);
   @$pb.TagNumber(13)
   void clearAskAdjustment() => $_clearField(13);
 
   /// 모멘텀 활성화 여부
   @$pb.TagNumber(14)
-  $core.bool get momentumEnabled => $_getBF(13);
+  $core.bool get momentumEnabled => $_getBF(12);
   @$pb.TagNumber(14)
-  set momentumEnabled($core.bool value) => $_setBool(13, value);
+  set momentumEnabled($core.bool value) => $_setBool(12, value);
   @$pb.TagNumber(14)
-  $core.bool hasMomentumEnabled() => $_has(13);
+  $core.bool hasMomentumEnabled() => $_has(12);
   @$pb.TagNumber(14)
   void clearMomentumEnabled() => $_clearField(14);
 
   /// 모멘텀 윈도우 크기
   @$pb.TagNumber(15)
-  $core.int get momentumWindow => $_getIZ(14);
+  $core.int get momentumWindow => $_getIZ(13);
   @$pb.TagNumber(15)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(14, value);
+  set momentumWindow($core.int value) => $_setUnsignedInt32(13, value);
   @$pb.TagNumber(15)
-  $core.bool hasMomentumWindow() => $_has(14);
+  $core.bool hasMomentumWindow() => $_has(13);
   @$pb.TagNumber(15)
   void clearMomentumWindow() => $_clearField(15);
 
   /// 모멘텀 민감도
   @$pb.TagNumber(16)
-  $core.double get momentumSensitivity => $_getN(15);
+  $core.double get momentumSensitivity => $_getN(14);
   @$pb.TagNumber(16)
-  set momentumSensitivity($core.double value) => $_setDouble(15, value);
+  set momentumSensitivity($core.double value) => $_setDouble(14, value);
   @$pb.TagNumber(16)
-  $core.bool hasMomentumSensitivity() => $_has(15);
+  $core.bool hasMomentumSensitivity() => $_has(14);
   @$pb.TagNumber(16)
   void clearMomentumSensitivity() => $_clearField(16);
 
   /// 런타임 계산된 모멘텀 매수 호가 조정값
   @$pb.TagNumber(17)
-  $core.double get momentumBidAdjustment => $_getN(16);
+  $core.double get momentumBidAdjustment => $_getN(15);
   @$pb.TagNumber(17)
-  set momentumBidAdjustment($core.double value) => $_setDouble(16, value);
+  set momentumBidAdjustment($core.double value) => $_setDouble(15, value);
   @$pb.TagNumber(17)
-  $core.bool hasMomentumBidAdjustment() => $_has(16);
+  $core.bool hasMomentumBidAdjustment() => $_has(15);
   @$pb.TagNumber(17)
   void clearMomentumBidAdjustment() => $_clearField(17);
 
   /// 런타임 계산된 모멘텀 매도 호가 조정값
   @$pb.TagNumber(18)
-  $core.double get momentumAskAdjustment => $_getN(17);
+  $core.double get momentumAskAdjustment => $_getN(16);
   @$pb.TagNumber(18)
-  set momentumAskAdjustment($core.double value) => $_setDouble(17, value);
+  set momentumAskAdjustment($core.double value) => $_setDouble(16, value);
   @$pb.TagNumber(18)
-  $core.bool hasMomentumAskAdjustment() => $_has(17);
+  $core.bool hasMomentumAskAdjustment() => $_has(16);
   @$pb.TagNumber(18)
   void clearMomentumAskAdjustment() => $_clearField(18);
 
   /// 매수 주문 수량 (계약 수)
   @$pb.TagNumber(19)
-  $fixnum.Int64 get bidQuantity => $_getI64(18);
+  $fixnum.Int64 get bidQuantity => $_getI64(17);
   @$pb.TagNumber(19)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(18, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(17, value);
   @$pb.TagNumber(19)
-  $core.bool hasBidQuantity() => $_has(18);
+  $core.bool hasBidQuantity() => $_has(17);
   @$pb.TagNumber(19)
   void clearBidQuantity() => $_clearField(19);
 
   /// 매도 주문 수량 (계약 수)
   @$pb.TagNumber(20)
-  $fixnum.Int64 get askQuantity => $_getI64(19);
+  $fixnum.Int64 get askQuantity => $_getI64(18);
   @$pb.TagNumber(20)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(19, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(18, value);
   @$pb.TagNumber(20)
-  $core.bool hasAskQuantity() => $_has(19);
+  $core.bool hasAskQuantity() => $_has(18);
   @$pb.TagNumber(20)
   void clearAskQuantity() => $_clearField(20);
 
   /// 자동 offset 조정 설정 (런타임 상태 포함)
   @$pb.TagNumber(21)
-  $1.EtfLpOffset get offset => $_getN(20);
+  $1.EtfLpOffset get offset => $_getN(19);
   @$pb.TagNumber(21)
   set offset($1.EtfLpOffset value) => $_setField(21, value);
   @$pb.TagNumber(21)
-  $core.bool hasOffset() => $_has(20);
+  $core.bool hasOffset() => $_has(19);
   @$pb.TagNumber(21)
   void clearOffset() => $_clearField(21);
   @$pb.TagNumber(21)
-  $1.EtfLpOffset ensureOffset() => $_ensure(20);
+  $1.EtfLpOffset ensureOffset() => $_ensure(19);
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(22)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(21);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(20);
   @$pb.TagNumber(22)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(22, value);
   @$pb.TagNumber(22)
-  $core.bool hasQuantityLimit() => $_has(21);
+  $core.bool hasQuantityLimit() => $_has(20);
   @$pb.TagNumber(22)
   void clearQuantityLimit() => $_clearField(22);
   @$pb.TagNumber(22)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(21);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(20);
 
   /// 호가 깊이
   @$pb.TagNumber(23)
-  $core.int get depth => $_getIZ(22);
+  $core.int get depth => $_getIZ(21);
   @$pb.TagNumber(23)
-  set depth($core.int value) => $_setUnsignedInt32(22, value);
+  set depth($core.int value) => $_setUnsignedInt32(21, value);
   @$pb.TagNumber(23)
-  $core.bool hasDepth() => $_has(22);
+  $core.bool hasDepth() => $_has(21);
   @$pb.TagNumber(23)
   void clearDepth() => $_clearField(23);
 }
@@ -865,7 +840,6 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     FuturesLpState? state,
     FuturesLpPricing? pricing,
     FuturesLpFillStatistics? fillStatistics,
-    $core.double? carry,
     $core.double? askBasis,
     $core.double? bidBasis,
     $core.double? bidAdjustment,
@@ -887,7 +861,6 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     if (state != null) result.state = state;
     if (pricing != null) result.pricing = pricing;
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
-    if (carry != null) result.carry = carry;
     if (askBasis != null) result.askBasis = askBasis;
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
@@ -916,7 +889,6 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     ..e<FuturesLpState>(3, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: FuturesLpState.FUTURES_LP_STATE_UNSPECIFIED, valueOf: FuturesLpState.valueOf, enumValues: FuturesLpState.values)
     ..aOM<FuturesLpPricing>(4, _omitFieldNames ? '' : 'pricing', subBuilder: FuturesLpPricing.create)
     ..aOM<FuturesLpFillStatistics>(5, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FuturesLpFillStatistics.create)
-    ..a<$core.double>(6, _omitFieldNames ? '' : 'carry', $pb.PbFieldType.OD)
     ..a<$core.double>(7, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(8, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(9, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
@@ -1005,157 +977,147 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   FuturesLpFillStatistics ensureFillStatistics() => $_ensure(4);
 
-  /// Cost of carry (변경 시에만 Some)
-  @$pb.TagNumber(6)
-  $core.double get carry => $_getN(5);
-  @$pb.TagNumber(6)
-  set carry($core.double value) => $_setDouble(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasCarry() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearCarry() => $_clearField(6);
-
   /// LP 마진 — ask spread (변경 시에만 Some)
   @$pb.TagNumber(7)
-  $core.double get askBasis => $_getN(6);
+  $core.double get askBasis => $_getN(5);
   @$pb.TagNumber(7)
-  set askBasis($core.double value) => $_setDouble(6, value);
+  set askBasis($core.double value) => $_setDouble(5, value);
   @$pb.TagNumber(7)
-  $core.bool hasAskBasis() => $_has(6);
+  $core.bool hasAskBasis() => $_has(5);
   @$pb.TagNumber(7)
   void clearAskBasis() => $_clearField(7);
 
   /// LP 마진 — bid spread (변경 시에만 Some)
   @$pb.TagNumber(8)
-  $core.double get bidBasis => $_getN(7);
+  $core.double get bidBasis => $_getN(6);
   @$pb.TagNumber(8)
-  set bidBasis($core.double value) => $_setDouble(7, value);
+  set bidBasis($core.double value) => $_setDouble(6, value);
   @$pb.TagNumber(8)
-  $core.bool hasBidBasis() => $_has(7);
+  $core.bool hasBidBasis() => $_has(6);
   @$pb.TagNumber(8)
   void clearBidBasis() => $_clearField(8);
 
   /// 매수 호가 조정값 (변경 시에만 Some)
   @$pb.TagNumber(9)
-  $core.double get bidAdjustment => $_getN(8);
+  $core.double get bidAdjustment => $_getN(7);
   @$pb.TagNumber(9)
-  set bidAdjustment($core.double value) => $_setDouble(8, value);
+  set bidAdjustment($core.double value) => $_setDouble(7, value);
   @$pb.TagNumber(9)
-  $core.bool hasBidAdjustment() => $_has(8);
+  $core.bool hasBidAdjustment() => $_has(7);
   @$pb.TagNumber(9)
   void clearBidAdjustment() => $_clearField(9);
 
   /// 매도 호가 조정값 (변경 시에만 Some)
   @$pb.TagNumber(10)
-  $core.double get askAdjustment => $_getN(9);
+  $core.double get askAdjustment => $_getN(8);
   @$pb.TagNumber(10)
-  set askAdjustment($core.double value) => $_setDouble(9, value);
+  set askAdjustment($core.double value) => $_setDouble(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasAskAdjustment() => $_has(9);
+  $core.bool hasAskAdjustment() => $_has(8);
   @$pb.TagNumber(10)
   void clearAskAdjustment() => $_clearField(10);
 
   /// 매수 주문 수량 (변경 시에만 Some)
   @$pb.TagNumber(11)
-  $fixnum.Int64 get bidQuantity => $_getI64(10);
+  $fixnum.Int64 get bidQuantity => $_getI64(9);
   @$pb.TagNumber(11)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(10, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(9, value);
   @$pb.TagNumber(11)
-  $core.bool hasBidQuantity() => $_has(10);
+  $core.bool hasBidQuantity() => $_has(9);
   @$pb.TagNumber(11)
   void clearBidQuantity() => $_clearField(11);
 
   /// 매도 주문 수량 (변경 시에만 Some)
   @$pb.TagNumber(12)
-  $fixnum.Int64 get askQuantity => $_getI64(11);
+  $fixnum.Int64 get askQuantity => $_getI64(10);
   @$pb.TagNumber(12)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(11, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(12)
-  $core.bool hasAskQuantity() => $_has(11);
+  $core.bool hasAskQuantity() => $_has(10);
   @$pb.TagNumber(12)
   void clearAskQuantity() => $_clearField(12);
 
   /// 자동 offset 조정 설정 (변경 시에만 Some)
   @$pb.TagNumber(13)
-  $1.EtfLpOffset get offset => $_getN(12);
+  $1.EtfLpOffset get offset => $_getN(11);
   @$pb.TagNumber(13)
   set offset($1.EtfLpOffset value) => $_setField(13, value);
   @$pb.TagNumber(13)
-  $core.bool hasOffset() => $_has(12);
+  $core.bool hasOffset() => $_has(11);
   @$pb.TagNumber(13)
   void clearOffset() => $_clearField(13);
   @$pb.TagNumber(13)
-  $1.EtfLpOffset ensureOffset() => $_ensure(12);
+  $1.EtfLpOffset ensureOffset() => $_ensure(11);
 
   /// 모멘텀 활성화 여부 (변경 시에만 Some)
   @$pb.TagNumber(14)
-  $core.bool get momentumEnabled => $_getBF(13);
+  $core.bool get momentumEnabled => $_getBF(12);
   @$pb.TagNumber(14)
-  set momentumEnabled($core.bool value) => $_setBool(13, value);
+  set momentumEnabled($core.bool value) => $_setBool(12, value);
   @$pb.TagNumber(14)
-  $core.bool hasMomentumEnabled() => $_has(13);
+  $core.bool hasMomentumEnabled() => $_has(12);
   @$pb.TagNumber(14)
   void clearMomentumEnabled() => $_clearField(14);
 
   /// 모멘텀 윈도우 크기 (변경 시에만 Some)
   @$pb.TagNumber(15)
-  $core.int get momentumWindow => $_getIZ(14);
+  $core.int get momentumWindow => $_getIZ(13);
   @$pb.TagNumber(15)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(14, value);
+  set momentumWindow($core.int value) => $_setUnsignedInt32(13, value);
   @$pb.TagNumber(15)
-  $core.bool hasMomentumWindow() => $_has(14);
+  $core.bool hasMomentumWindow() => $_has(13);
   @$pb.TagNumber(15)
   void clearMomentumWindow() => $_clearField(15);
 
   /// 모멘텀 민감도 (변경 시에만 Some)
   @$pb.TagNumber(16)
-  $core.double get momentumSensitivity => $_getN(15);
+  $core.double get momentumSensitivity => $_getN(14);
   @$pb.TagNumber(16)
-  set momentumSensitivity($core.double value) => $_setDouble(15, value);
+  set momentumSensitivity($core.double value) => $_setDouble(14, value);
   @$pb.TagNumber(16)
-  $core.bool hasMomentumSensitivity() => $_has(15);
+  $core.bool hasMomentumSensitivity() => $_has(14);
   @$pb.TagNumber(16)
   void clearMomentumSensitivity() => $_clearField(16);
 
   /// 런타임 계산된 모멘텀 매수 호가 조정값 (변경 시에만 Some)
   @$pb.TagNumber(17)
-  $core.double get momentumBidAdjustment => $_getN(16);
+  $core.double get momentumBidAdjustment => $_getN(15);
   @$pb.TagNumber(17)
-  set momentumBidAdjustment($core.double value) => $_setDouble(16, value);
+  set momentumBidAdjustment($core.double value) => $_setDouble(15, value);
   @$pb.TagNumber(17)
-  $core.bool hasMomentumBidAdjustment() => $_has(16);
+  $core.bool hasMomentumBidAdjustment() => $_has(15);
   @$pb.TagNumber(17)
   void clearMomentumBidAdjustment() => $_clearField(17);
 
   /// 런타임 계산된 모멘텀 매도 호가 조정값 (변경 시에만 Some)
   @$pb.TagNumber(18)
-  $core.double get momentumAskAdjustment => $_getN(17);
+  $core.double get momentumAskAdjustment => $_getN(16);
   @$pb.TagNumber(18)
-  set momentumAskAdjustment($core.double value) => $_setDouble(17, value);
+  set momentumAskAdjustment($core.double value) => $_setDouble(16, value);
   @$pb.TagNumber(18)
-  $core.bool hasMomentumAskAdjustment() => $_has(17);
+  $core.bool hasMomentumAskAdjustment() => $_has(16);
   @$pb.TagNumber(18)
   void clearMomentumAskAdjustment() => $_clearField(18);
 
   /// 매수/매도 수량 한도 (변경 시에만 Some)
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(18);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(17);
   @$pb.TagNumber(19)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(19, value);
   @$pb.TagNumber(19)
-  $core.bool hasQuantityLimit() => $_has(18);
+  $core.bool hasQuantityLimit() => $_has(17);
   @$pb.TagNumber(19)
   void clearQuantityLimit() => $_clearField(19);
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(18);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
 
   /// 호가 깊이 (변경 시에만 Some)
   @$pb.TagNumber(20)
-  $core.int get depth => $_getIZ(19);
+  $core.int get depth => $_getIZ(18);
   @$pb.TagNumber(20)
-  set depth($core.int value) => $_setUnsignedInt32(19, value);
+  set depth($core.int value) => $_setUnsignedInt32(18, value);
   @$pb.TagNumber(20)
-  $core.bool hasDepth() => $_has(19);
+  $core.bool hasDepth() => $_has(18);
   @$pb.TagNumber(20)
   void clearDepth() => $_clearField(20);
 }
@@ -1643,8 +1605,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   factory UpdateFuturesLpRequest({
     $core.String? futureSymbol,
     $core.String? fundCode,
-  @$core.Deprecated('This field is deprecated.')
-    $core.double? carry,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
     $core.double? bidAdjustment,
@@ -1661,7 +1621,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (fundCode != null) result.fundCode = fundCode;
-    if (carry != null) result.carry = carry;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
@@ -1685,7 +1644,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateFuturesLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'carry', $pb.PbFieldType.OD)
     ..aInt64(4, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(5, _omitFieldNames ? '' : 'askQuantity')
     ..a<$core.double>(6, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
@@ -1738,144 +1696,129 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
-  /// Cost of carry (만기 가까울수록 조정 가능)
-  /// [DEPRECATED] carry는 Future/Etf에서 runtime derive되므로 서버에서 이 값을 무시합니다.
-  @$core.Deprecated('This field is deprecated.')
-  @$pb.TagNumber(3)
-  $core.double get carry => $_getN(2);
-  @$core.Deprecated('This field is deprecated.')
-  @$pb.TagNumber(3)
-  set carry($core.double value) => $_setDouble(2, value);
-  @$core.Deprecated('This field is deprecated.')
-  @$pb.TagNumber(3)
-  $core.bool hasCarry() => $_has(2);
-  @$core.Deprecated('This field is deprecated.')
-  @$pb.TagNumber(3)
-  void clearCarry() => $_clearField(3);
-
   /// 매수 주문 수량
   @$pb.TagNumber(4)
-  $fixnum.Int64 get bidQuantity => $_getI64(3);
+  $fixnum.Int64 get bidQuantity => $_getI64(2);
   @$pb.TagNumber(4)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(4)
-  $core.bool hasBidQuantity() => $_has(3);
+  $core.bool hasBidQuantity() => $_has(2);
   @$pb.TagNumber(4)
   void clearBidQuantity() => $_clearField(4);
 
   /// 매도 주문 수량
   @$pb.TagNumber(5)
-  $fixnum.Int64 get askQuantity => $_getI64(4);
+  $fixnum.Int64 get askQuantity => $_getI64(3);
   @$pb.TagNumber(5)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasAskQuantity() => $_has(4);
+  $core.bool hasAskQuantity() => $_has(3);
   @$pb.TagNumber(5)
   void clearAskQuantity() => $_clearField(5);
 
   /// 매수 호가 조정값
   @$pb.TagNumber(6)
-  $core.double get bidAdjustment => $_getN(5);
+  $core.double get bidAdjustment => $_getN(4);
   @$pb.TagNumber(6)
-  set bidAdjustment($core.double value) => $_setDouble(5, value);
+  set bidAdjustment($core.double value) => $_setDouble(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasBidAdjustment() => $_has(5);
+  $core.bool hasBidAdjustment() => $_has(4);
   @$pb.TagNumber(6)
   void clearBidAdjustment() => $_clearField(6);
 
   /// 매도 호가 조정값
   @$pb.TagNumber(7)
-  $core.double get askAdjustment => $_getN(6);
+  $core.double get askAdjustment => $_getN(5);
   @$pb.TagNumber(7)
-  set askAdjustment($core.double value) => $_setDouble(6, value);
+  set askAdjustment($core.double value) => $_setDouble(5, value);
   @$pb.TagNumber(7)
-  $core.bool hasAskAdjustment() => $_has(6);
+  $core.bool hasAskAdjustment() => $_has(5);
   @$pb.TagNumber(7)
   void clearAskAdjustment() => $_clearField(7);
 
   /// LP 마진 — bid spread
   @$pb.TagNumber(8)
-  $core.double get bidBasis => $_getN(7);
+  $core.double get bidBasis => $_getN(6);
   @$pb.TagNumber(8)
-  set bidBasis($core.double value) => $_setDouble(7, value);
+  set bidBasis($core.double value) => $_setDouble(6, value);
   @$pb.TagNumber(8)
-  $core.bool hasBidBasis() => $_has(7);
+  $core.bool hasBidBasis() => $_has(6);
   @$pb.TagNumber(8)
   void clearBidBasis() => $_clearField(8);
 
   /// LP 마진 — ask spread
   @$pb.TagNumber(9)
-  $core.double get askBasis => $_getN(8);
+  $core.double get askBasis => $_getN(7);
   @$pb.TagNumber(9)
-  set askBasis($core.double value) => $_setDouble(8, value);
+  set askBasis($core.double value) => $_setDouble(7, value);
   @$pb.TagNumber(9)
-  $core.bool hasAskBasis() => $_has(8);
+  $core.bool hasAskBasis() => $_has(7);
   @$pb.TagNumber(9)
   void clearAskBasis() => $_clearField(9);
 
   /// 호가 깊이
   @$pb.TagNumber(10)
-  $core.int get depth => $_getIZ(9);
+  $core.int get depth => $_getIZ(8);
   @$pb.TagNumber(10)
-  set depth($core.int value) => $_setUnsignedInt32(9, value);
+  set depth($core.int value) => $_setUnsignedInt32(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasDepth() => $_has(9);
+  $core.bool hasDepth() => $_has(8);
   @$pb.TagNumber(10)
   void clearDepth() => $_clearField(10);
 
   /// 자동 offset 조정 설정
   @$pb.TagNumber(11)
-  $1.EtfLpOffset get offset => $_getN(10);
+  $1.EtfLpOffset get offset => $_getN(9);
   @$pb.TagNumber(11)
   set offset($1.EtfLpOffset value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasOffset() => $_has(10);
+  $core.bool hasOffset() => $_has(9);
   @$pb.TagNumber(11)
   void clearOffset() => $_clearField(11);
   @$pb.TagNumber(11)
-  $1.EtfLpOffset ensureOffset() => $_ensure(10);
+  $1.EtfLpOffset ensureOffset() => $_ensure(9);
 
   /// 모멘텀 활성화 여부
   @$pb.TagNumber(12)
-  $core.bool get momentumEnabled => $_getBF(11);
+  $core.bool get momentumEnabled => $_getBF(10);
   @$pb.TagNumber(12)
-  set momentumEnabled($core.bool value) => $_setBool(11, value);
+  set momentumEnabled($core.bool value) => $_setBool(10, value);
   @$pb.TagNumber(12)
-  $core.bool hasMomentumEnabled() => $_has(11);
+  $core.bool hasMomentumEnabled() => $_has(10);
   @$pb.TagNumber(12)
   void clearMomentumEnabled() => $_clearField(12);
 
   /// 모멘텀 윈도우 크기
   @$pb.TagNumber(13)
-  $core.int get momentumWindow => $_getIZ(12);
+  $core.int get momentumWindow => $_getIZ(11);
   @$pb.TagNumber(13)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(12, value);
+  set momentumWindow($core.int value) => $_setUnsignedInt32(11, value);
   @$pb.TagNumber(13)
-  $core.bool hasMomentumWindow() => $_has(12);
+  $core.bool hasMomentumWindow() => $_has(11);
   @$pb.TagNumber(13)
   void clearMomentumWindow() => $_clearField(13);
 
   /// 모멘텀 민감도
   @$pb.TagNumber(14)
-  $core.double get momentumSensitivity => $_getN(13);
+  $core.double get momentumSensitivity => $_getN(12);
   @$pb.TagNumber(14)
-  set momentumSensitivity($core.double value) => $_setDouble(13, value);
+  set momentumSensitivity($core.double value) => $_setDouble(12, value);
   @$pb.TagNumber(14)
-  $core.bool hasMomentumSensitivity() => $_has(13);
+  $core.bool hasMomentumSensitivity() => $_has(12);
   @$pb.TagNumber(14)
   void clearMomentumSensitivity() => $_clearField(14);
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(15)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(14);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(13);
   @$pb.TagNumber(15)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(15, value);
   @$pb.TagNumber(15)
-  $core.bool hasQuantityLimit() => $_has(14);
+  $core.bool hasQuantityLimit() => $_has(13);
   @$pb.TagNumber(15)
   void clearQuantityLimit() => $_clearField(15);
   @$pb.TagNumber(15)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(14);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(13);
 }
 
 /// GetFuturesLpStatus

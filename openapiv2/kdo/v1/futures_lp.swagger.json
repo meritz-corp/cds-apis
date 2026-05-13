@@ -198,11 +198,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "carry": {
-                  "type": "number",
-                  "format": "double",
-                  "description": "Cost of carry (만기 가까울수록 조정 가능)\n[DEPRECATED] carry는 Future/Etf에서 runtime derive되므로 서버에서 이 값을 무시합니다."
-                },
                 "bidQuantity": {
                   "type": "string",
                   "format": "int64",
@@ -574,15 +569,10 @@
           "format": "double",
           "description": "선물 1계약 = ETF N units. 항상 양수 (Forward only)."
         },
-        "carry": {
-          "type": "number",
-          "format": "double",
-          "description": "Cost of carry / 배당 보정 (고정 상수).\ntheoretical_ask에 +carry, theoretical_bid에 -carry 적용."
-        },
         "askBasis": {
           "type": "number",
           "format": "double",
-          "title": "LP 마진 — 이론가 위에 추가로 띄울 ask spread"
+          "title": "LP 마진 — 이론가 위에 추가로 띄울 ask spread\n(cost of carry는 ask_basis/bid_basis에 흡수됨)"
         },
         "bidBasis": {
           "type": "number",
@@ -795,15 +785,10 @@
           "format": "double",
           "title": "선물 1계약 = ETF N units"
         },
-        "carry": {
-          "type": "number",
-          "format": "double",
-          "title": "Cost of carry"
-        },
         "askBasis": {
           "type": "number",
           "format": "double",
-          "title": "LP 마진 — ask spread"
+          "title": "LP 마진 — ask spread\n(cost of carry는 ask_basis/bid_basis에 흡수됨)"
         },
         "bidBasis": {
           "type": "number",
@@ -892,11 +877,6 @@
         "fillStatistics": {
           "$ref": "#/definitions/futures_lpFuturesLpFillStatistics",
           "title": "체결 통계 (변경 시에만 Some)"
-        },
-        "carry": {
-          "type": "number",
-          "format": "double",
-          "title": "Cost of carry (변경 시에만 Some)"
         },
         "askBasis": {
           "type": "number",

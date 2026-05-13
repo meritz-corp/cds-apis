@@ -97,6 +97,9 @@ service FuturesLpService {
 
 // 선물 LP 설정
 message FuturesLp {
+  reserved 5;
+  reserved "carry";
+
   // 선물 종목 심볼
   string future_symbol = 1;
 
@@ -109,11 +112,8 @@ message FuturesLp {
   // 선물 1계약 = ETF N units. 항상 양수 (Forward only).
   double multiplier = 4;
 
-  // Cost of carry / 배당 보정 (고정 상수).
-  // theoretical_ask에 +carry, theoretical_bid에 -carry 적용.
-  double carry = 5;
-
   // LP 마진 — 이론가 위에 추가로 띄울 ask spread
+  // (cost of carry는 ask_basis/bid_basis에 흡수됨)
   double ask_basis = 6;
 
   // LP 마진 — 이론가 아래에 추가로 띄울 bid spread
@@ -209,6 +209,9 @@ message FuturesLpPricing {
 
 // 선물 LP 상태
 message FuturesLpStatus {
+  reserved 9;
+  reserved "carry";
+
   // 선물 종목 심볼
   string future_symbol = 1;
 
@@ -233,10 +236,8 @@ message FuturesLpStatus {
   // 선물 1계약 = ETF N units
   double multiplier = 8;
 
-  // Cost of carry
-  double carry = 9;
-
   // LP 마진 — ask spread
+  // (cost of carry는 ask_basis/bid_basis에 흡수됨)
   double ask_basis = 10;
 
   // LP 마진 — bid spread
@@ -281,6 +282,9 @@ message FuturesLpStatus {
 
 // 선물 LP 상태 업데이트 (변경된 필드만 포함)
 message FuturesLpStatusUpdate {
+  reserved 6;
+  reserved "carry";
+
   // 선물 종목 심볼
   string future_symbol = 1;
 
@@ -295,9 +299,6 @@ message FuturesLpStatusUpdate {
 
   // 체결 통계 (변경 시에만 Some)
   optional FuturesLpFillStatistics fill_statistics = 5;
-
-  // Cost of carry (변경 시에만 Some)
-  optional double carry = 6;
 
   // LP 마진 — ask spread (변경 시에만 Some)
   optional double ask_basis = 7;
@@ -436,6 +437,9 @@ message ListFuturesLpsResponse {
 
 // UpdateFuturesLp
 message UpdateFuturesLpRequest {
+  reserved 3;
+  reserved "carry";
+
   // 선물 종목 심볼
   string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
 
@@ -443,10 +447,6 @@ message UpdateFuturesLpRequest {
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
 
   // 각 필드가 optional — 여러 필드를 동시에 설정 가능
-
-  // Cost of carry (만기 가까울수록 조정 가능)
-  // [DEPRECATED] carry는 Future/Etf에서 runtime derive되므로 서버에서 이 값을 무시합니다.
-  optional double carry = 3 [deprecated = true];
 
   // 매수 주문 수량
   optional int64 bid_quantity = 4;

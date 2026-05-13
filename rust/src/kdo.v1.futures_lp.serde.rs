@@ -61,9 +61,6 @@ impl serde::Serialize for FuturesLp {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLp", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -76,9 +73,6 @@ impl serde::Serialize for FuturesLp {
         }
         if true {
             struct_ser.serialize_field("multiplier", &self.multiplier)?;
-        }
-        if true {
-            struct_ser.serialize_field("carry", &self.carry)?;
         }
         if true {
             struct_ser.serialize_field("ask_basis", &self.ask_basis)?;
@@ -143,7 +137,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "etf_symbol",
             "etfSymbol",
             "multiplier",
-            "carry",
             "ask_basis",
             "askBasis",
             "bid_basis",
@@ -177,7 +170,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             FundCode,
             EtfSymbol,
             Multiplier,
-            Carry,
             AskBasis,
             BidBasis,
             BidQuantity,
@@ -218,7 +210,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             "multiplier" => Ok(GeneratedField::Multiplier),
-                            "carry" => Ok(GeneratedField::Carry),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
@@ -256,7 +247,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut fund_code__ = None;
                 let mut etf_symbol__ = None;
                 let mut multiplier__ = None;
-                let mut carry__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
                 let mut bid_quantity__ = None;
@@ -296,14 +286,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 return Err(serde::de::Error::duplicate_field("multiplier"));
                             }
                             multiplier__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Carry => {
-                            if carry__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("carry"));
-                            }
-                            carry__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -421,7 +403,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     fund_code: fund_code__.unwrap_or_default(),
                     etf_symbol: etf_symbol__.unwrap_or_default(),
                     multiplier: multiplier__.unwrap_or_default(),
-                    carry: carry__.unwrap_or_default(),
                     ask_basis: ask_basis__.unwrap_or_default(),
                     bid_basis: bid_basis__.unwrap_or_default(),
                     bid_quantity: bid_quantity__.unwrap_or_default(),
@@ -1214,9 +1195,6 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLpStatus", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -1243,9 +1221,6 @@ impl serde::Serialize for FuturesLpStatus {
         }
         if true {
             struct_ser.serialize_field("multiplier", &self.multiplier)?;
-        }
-        if true {
-            struct_ser.serialize_field("carry", &self.carry)?;
         }
         if true {
             struct_ser.serialize_field("ask_basis", &self.ask_basis)?;
@@ -1316,7 +1291,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             "etf_symbol",
             "etfSymbol",
             "multiplier",
-            "carry",
             "ask_basis",
             "askBasis",
             "bid_basis",
@@ -1355,7 +1329,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             FillStatistics,
             EtfSymbol,
             Multiplier,
-            Carry,
             AskBasis,
             BidBasis,
             BidAdjustment,
@@ -1400,7 +1373,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
                             "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             "multiplier" => Ok(GeneratedField::Multiplier),
-                            "carry" => Ok(GeneratedField::Carry),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
@@ -1442,7 +1414,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                 let mut fill_statistics__ = None;
                 let mut etf_symbol__ = None;
                 let mut multiplier__ = None;
-                let mut carry__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
                 let mut bid_adjustment__ = None;
@@ -1506,14 +1477,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                                 return Err(serde::de::Error::duplicate_field("multiplier"));
                             }
                             multiplier__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Carry => {
-                            if carry__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("carry"));
-                            }
-                            carry__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1637,7 +1600,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                     fill_statistics: fill_statistics__,
                     etf_symbol: etf_symbol__.unwrap_or_default(),
                     multiplier: multiplier__.unwrap_or_default(),
-                    carry: carry__.unwrap_or_default(),
                     ask_basis: ask_basis__.unwrap_or_default(),
                     bid_basis: bid_basis__.unwrap_or_default(),
                     bid_adjustment: bid_adjustment__,
@@ -1723,9 +1685,6 @@ impl serde::Serialize for FuturesLpStatusUpdate {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLpStatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -1743,9 +1702,6 @@ impl serde::Serialize for FuturesLpStatusUpdate {
         }
         if let Some(v) = self.fill_statistics.as_ref() {
             struct_ser.serialize_field("fill_statistics", v)?;
-        }
-        if let Some(v) = self.carry.as_ref() {
-            struct_ser.serialize_field("carry", v)?;
         }
         if let Some(v) = self.ask_basis.as_ref() {
             struct_ser.serialize_field("ask_basis", v)?;
@@ -1811,7 +1767,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             "pricing",
             "fill_statistics",
             "fillStatistics",
-            "carry",
             "ask_basis",
             "askBasis",
             "bid_basis",
@@ -1847,7 +1802,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             State,
             Pricing,
             FillStatistics,
-            Carry,
             AskBasis,
             BidBasis,
             BidAdjustment,
@@ -1889,7 +1843,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             "state" => Ok(GeneratedField::State),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
-                            "carry" => Ok(GeneratedField::Carry),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
@@ -1928,7 +1881,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                 let mut state__ = None;
                 let mut pricing__ = None;
                 let mut fill_statistics__ = None;
-                let mut carry__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
                 let mut bid_adjustment__ = None;
@@ -1974,14 +1926,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                                 return Err(serde::de::Error::duplicate_field("fillStatistics"));
                             }
                             fill_statistics__ = map_.next_value()?;
-                        }
-                        GeneratedField::Carry => {
-                            if carry__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("carry"));
-                            }
-                            carry__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
                         }
                         GeneratedField::AskBasis => {
                             if ask_basis__.is_some() {
@@ -2100,7 +2044,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                     state: state__,
                     pricing: pricing__,
                     fill_statistics: fill_statistics__,
-                    carry: carry__,
                     ask_basis: ask_basis__,
                     bid_basis: bid_basis__,
                     bid_adjustment: bid_adjustment__,
@@ -3895,18 +3838,12 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
-        }
-        if let Some(v) = self.carry.as_ref() {
-            struct_ser.serialize_field("carry", v)?;
         }
         if let Some(v) = self.bid_quantity.as_ref() {
             #[allow(clippy::needless_borrow)]
@@ -3962,7 +3899,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "futureSymbol",
             "fund_code",
             "fundCode",
-            "carry",
             "bid_quantity",
             "bidQuantity",
             "ask_quantity",
@@ -3991,7 +3927,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
         enum GeneratedField {
             FutureSymbol,
             FundCode,
-            Carry,
             BidQuantity,
             AskQuantity,
             BidAdjustment,
@@ -4028,7 +3963,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                         match value {
                             "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
-                            "carry" => Ok(GeneratedField::Carry),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
@@ -4062,7 +3996,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             {
                 let mut future_symbol__ = None;
                 let mut fund_code__ = None;
-                let mut carry__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
                 let mut bid_adjustment__ = None;
@@ -4088,14 +4021,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
                             fund_code__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Carry => {
-                            if carry__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("carry"));
-                            }
-                            carry__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
                         }
                         GeneratedField::BidQuantity => {
                             if bid_quantity__.is_some() {
@@ -4195,7 +4120,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 Ok(UpdateFuturesLpRequest {
                     future_symbol: future_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
-                    carry: carry__,
                     bid_quantity: bid_quantity__,
                     ask_quantity: ask_quantity__,
                     bid_adjustment: bid_adjustment__,

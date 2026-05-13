@@ -18,11 +18,8 @@ pub struct FuturesLp {
     /// 선물 1계약 = ETF N units. 항상 양수 (Forward only).
     #[prost(double, tag="4")]
     pub multiplier: f64,
-    /// Cost of carry / 배당 보정 (고정 상수).
-    /// theoretical_ask에 +carry, theoretical_bid에 -carry 적용.
-    #[prost(double, tag="5")]
-    pub carry: f64,
     /// LP 마진 — 이론가 위에 추가로 띄울 ask spread
+    /// (cost of carry는 ask_basis/bid_basis에 흡수됨)
     #[prost(double, tag="6")]
     pub ask_basis: f64,
     /// LP 마진 — 이론가 아래에 추가로 띄울 bid spread
@@ -137,10 +134,8 @@ pub struct FuturesLpStatus {
     /// 선물 1계약 = ETF N units
     #[prost(double, tag="8")]
     pub multiplier: f64,
-    /// Cost of carry
-    #[prost(double, tag="9")]
-    pub carry: f64,
     /// LP 마진 — ask spread
+    /// (cost of carry는 ask_basis/bid_basis에 흡수됨)
     #[prost(double, tag="10")]
     pub ask_basis: f64,
     /// LP 마진 — bid spread
@@ -202,9 +197,6 @@ pub struct FuturesLpStatusUpdate {
     /// 체결 통계 (변경 시에만 Some)
     #[prost(message, optional, tag="5")]
     pub fill_statistics: ::core::option::Option<FuturesLpFillStatistics>,
-    /// Cost of carry (변경 시에만 Some)
-    #[prost(double, optional, tag="6")]
-    pub carry: ::core::option::Option<f64>,
     /// LP 마진 — ask spread (변경 시에만 Some)
     #[prost(double, optional, tag="7")]
     pub ask_basis: ::core::option::Option<f64>,
@@ -366,11 +358,6 @@ pub struct UpdateFuturesLpRequest {
     pub fund_code: ::prost::alloc::string::String,
     // 각 필드가 optional — 여러 필드를 동시에 설정 가능
 
-    /// Cost of carry (만기 가까울수록 조정 가능)
-    /// \[DEPRECATED\] carry는 Future/Etf에서 runtime derive되므로 서버에서 이 값을 무시합니다.
-    #[deprecated]
-    #[prost(double, optional, tag="3")]
-    pub carry: ::core::option::Option<f64>,
     /// 매수 주문 수량
     #[prost(int64, optional, tag="4")]
     pub bid_quantity: ::core::option::Option<i64>,
