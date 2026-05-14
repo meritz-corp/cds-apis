@@ -197,11 +197,11 @@ message FuturesLpPricing {
   // 산출된 선물 매도 호가
   double future_ask_quote = 2;
 
-  // ETF reference로 계산한 이론가 (bid)
-  double theoretical_bid = 3;
+  // ETF reference로 계산한 선물 공정가치 NAV (bid)
+  double bid_nav = 3;
 
-  // ETF reference로 계산한 이론가 (ask)
-  double theoretical_ask = 4;
+  // ETF reference로 계산한 선물 공정가치 NAV (ask)
+  double ask_nav = 4;
 
   // 현재 사용 중인 ETF best bid (입력)
   double etf_best_bid = 5;

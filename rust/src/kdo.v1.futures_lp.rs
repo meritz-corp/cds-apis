@@ -96,12 +96,12 @@ pub struct FuturesLpPricing {
     /// 산출된 선물 매도 호가
     #[prost(double, tag="2")]
     pub future_ask_quote: f64,
-    /// ETF reference로 계산한 이론가 (bid)
+    /// ETF reference로 계산한 선물 공정가치 NAV (bid)
     #[prost(double, tag="3")]
-    pub theoretical_bid: f64,
-    /// ETF reference로 계산한 이론가 (ask)
+    pub bid_nav: f64,
+    /// ETF reference로 계산한 선물 공정가치 NAV (ask)
     #[prost(double, tag="4")]
-    pub theoretical_ask: f64,
+    pub ask_nav: f64,
     /// 현재 사용 중인 ETF best bid (입력)
     #[prost(double, tag="5")]
     pub etf_best_bid: f64,

@@ -119,8 +119,8 @@ const FuturesLpPricing$json = {
   '2': [
     {'1': 'future_bid_quote', '3': 1, '4': 1, '5': 1, '10': 'futureBidQuote'},
     {'1': 'future_ask_quote', '3': 2, '4': 1, '5': 1, '10': 'futureAskQuote'},
-    {'1': 'theoretical_bid', '3': 3, '4': 1, '5': 1, '10': 'theoreticalBid'},
-    {'1': 'theoretical_ask', '3': 4, '4': 1, '5': 1, '10': 'theoreticalAsk'},
+    {'1': 'bid_nav', '3': 3, '4': 1, '5': 1, '10': 'bidNav'},
+    {'1': 'ask_nav', '3': 4, '4': 1, '5': 1, '10': 'askNav'},
     {'1': 'etf_best_bid', '3': 5, '4': 1, '5': 1, '10': 'etfBestBid'},
     {'1': 'etf_best_ask', '3': 6, '4': 1, '5': 1, '10': 'etfBestAsk'},
   ],
@@ -129,10 +129,9 @@ const FuturesLpPricing$json = {
 /// Descriptor for `FuturesLpPricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List futuresLpPricingDescriptor = $convert.base64Decode(
     'ChBGdXR1cmVzTHBQcmljaW5nEigKEGZ1dHVyZV9iaWRfcXVvdGUYASABKAFSDmZ1dHVyZUJpZF'
-    'F1b3RlEigKEGZ1dHVyZV9hc2tfcXVvdGUYAiABKAFSDmZ1dHVyZUFza1F1b3RlEicKD3RoZW9y'
-    'ZXRpY2FsX2JpZBgDIAEoAVIOdGhlb3JldGljYWxCaWQSJwoPdGhlb3JldGljYWxfYXNrGAQgAS'
-    'gBUg50aGVvcmV0aWNhbEFzaxIgCgxldGZfYmVzdF9iaWQYBSABKAFSCmV0ZkJlc3RCaWQSIAoM'
-    'ZXRmX2Jlc3RfYXNrGAYgASgBUgpldGZCZXN0QXNr');
+    'F1b3RlEigKEGZ1dHVyZV9hc2tfcXVvdGUYAiABKAFSDmZ1dHVyZUFza1F1b3RlEhcKB2JpZF9u'
+    'YXYYAyABKAFSBmJpZE5hdhIXCgdhc2tfbmF2GAQgASgBUgZhc2tOYXYSIAoMZXRmX2Jlc3RfYm'
+    'lkGAUgASgBUgpldGZCZXN0QmlkEiAKDGV0Zl9iZXN0X2FzaxgGIAEoAVIKZXRmQmVzdEFzaw==');
 
 @$core.Deprecated('Use futuresLpStatusDescriptor instead')
 const FuturesLpStatus$json = {

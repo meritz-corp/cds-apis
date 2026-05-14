@@ -405,16 +405,16 @@ class FuturesLpPricing extends $pb.GeneratedMessage {
   factory FuturesLpPricing({
     $core.double? futureBidQuote,
     $core.double? futureAskQuote,
-    $core.double? theoreticalBid,
-    $core.double? theoreticalAsk,
+    $core.double? bidNav,
+    $core.double? askNav,
     $core.double? etfBestBid,
     $core.double? etfBestAsk,
   }) {
     final result = create();
     if (futureBidQuote != null) result.futureBidQuote = futureBidQuote;
     if (futureAskQuote != null) result.futureAskQuote = futureAskQuote;
-    if (theoreticalBid != null) result.theoreticalBid = theoreticalBid;
-    if (theoreticalAsk != null) result.theoreticalAsk = theoreticalAsk;
+    if (bidNav != null) result.bidNav = bidNav;
+    if (askNav != null) result.askNav = askNav;
     if (etfBestBid != null) result.etfBestBid = etfBestBid;
     if (etfBestAsk != null) result.etfBestAsk = etfBestAsk;
     return result;
@@ -428,8 +428,8 @@ class FuturesLpPricing extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesLpPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'futureBidQuote', $pb.PbFieldType.OD)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'futureAskQuote', $pb.PbFieldType.OD)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'theoreticalBid', $pb.PbFieldType.OD)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'theoreticalAsk', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'bidNav', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'askNav', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'etfBestBid', $pb.PbFieldType.OD)
     ..a<$core.double>(6, _omitFieldNames ? '' : 'etfBestAsk', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
@@ -472,25 +472,25 @@ class FuturesLpPricing extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFutureAskQuote() => $_clearField(2);
 
-  /// ETF reference로 계산한 이론가 (bid)
+  /// ETF reference로 계산한 선물 공정가치 NAV (bid)
   @$pb.TagNumber(3)
-  $core.double get theoreticalBid => $_getN(2);
+  $core.double get bidNav => $_getN(2);
   @$pb.TagNumber(3)
-  set theoreticalBid($core.double value) => $_setDouble(2, value);
+  set bidNav($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasTheoreticalBid() => $_has(2);
+  $core.bool hasBidNav() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTheoreticalBid() => $_clearField(3);
+  void clearBidNav() => $_clearField(3);
 
-  /// ETF reference로 계산한 이론가 (ask)
+  /// ETF reference로 계산한 선물 공정가치 NAV (ask)
   @$pb.TagNumber(4)
-  $core.double get theoreticalAsk => $_getN(3);
+  $core.double get askNav => $_getN(3);
   @$pb.TagNumber(4)
-  set theoreticalAsk($core.double value) => $_setDouble(3, value);
+  set askNav($core.double value) => $_setDouble(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasTheoreticalAsk() => $_has(3);
+  $core.bool hasAskNav() => $_has(3);
   @$pb.TagNumber(4)
-  void clearTheoreticalAsk() => $_clearField(4);
+  void clearAskNav() => $_clearField(4);
 
   /// 현재 사용 중인 ETF best bid (입력)
   @$pb.TagNumber(5)

@@ -729,10 +729,10 @@ impl serde::Serialize for FuturesLpPricing {
             struct_ser.serialize_field("future_ask_quote", &self.future_ask_quote)?;
         }
         if true {
-            struct_ser.serialize_field("theoretical_bid", &self.theoretical_bid)?;
+            struct_ser.serialize_field("bid_nav", &self.bid_nav)?;
         }
         if true {
-            struct_ser.serialize_field("theoretical_ask", &self.theoretical_ask)?;
+            struct_ser.serialize_field("ask_nav", &self.ask_nav)?;
         }
         if true {
             struct_ser.serialize_field("etf_best_bid", &self.etf_best_bid)?;
@@ -754,10 +754,10 @@ impl<'de> serde::Deserialize<'de> for FuturesLpPricing {
             "futureBidQuote",
             "future_ask_quote",
             "futureAskQuote",
-            "theoretical_bid",
-            "theoreticalBid",
-            "theoretical_ask",
-            "theoreticalAsk",
+            "bid_nav",
+            "bidNav",
+            "ask_nav",
+            "askNav",
             "etf_best_bid",
             "etfBestBid",
             "etf_best_ask",
@@ -768,8 +768,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpPricing {
         enum GeneratedField {
             FutureBidQuote,
             FutureAskQuote,
-            TheoreticalBid,
-            TheoreticalAsk,
+            BidNav,
+            AskNav,
             EtfBestBid,
             EtfBestAsk,
             __SkipField__,
@@ -796,8 +796,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpPricing {
                         match value {
                             "futureBidQuote" | "future_bid_quote" => Ok(GeneratedField::FutureBidQuote),
                             "futureAskQuote" | "future_ask_quote" => Ok(GeneratedField::FutureAskQuote),
-                            "theoreticalBid" | "theoretical_bid" => Ok(GeneratedField::TheoreticalBid),
-                            "theoreticalAsk" | "theoretical_ask" => Ok(GeneratedField::TheoreticalAsk),
+                            "bidNav" | "bid_nav" => Ok(GeneratedField::BidNav),
+                            "askNav" | "ask_nav" => Ok(GeneratedField::AskNav),
                             "etfBestBid" | "etf_best_bid" => Ok(GeneratedField::EtfBestBid),
                             "etfBestAsk" | "etf_best_ask" => Ok(GeneratedField::EtfBestAsk),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -821,8 +821,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpPricing {
             {
                 let mut future_bid_quote__ = None;
                 let mut future_ask_quote__ = None;
-                let mut theoretical_bid__ = None;
-                let mut theoretical_ask__ = None;
+                let mut bid_nav__ = None;
+                let mut ask_nav__ = None;
                 let mut etf_best_bid__ = None;
                 let mut etf_best_ask__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -843,19 +843,19 @@ impl<'de> serde::Deserialize<'de> for FuturesLpPricing {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::TheoreticalBid => {
-                            if theoretical_bid__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("theoreticalBid"));
+                        GeneratedField::BidNav => {
+                            if bid_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidNav"));
                             }
-                            theoretical_bid__ = 
+                            bid_nav__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::TheoreticalAsk => {
-                            if theoretical_ask__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("theoreticalAsk"));
+                        GeneratedField::AskNav => {
+                            if ask_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askNav"));
                             }
-                            theoretical_ask__ = 
+                            ask_nav__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -883,8 +883,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpPricing {
                 Ok(FuturesLpPricing {
                     future_bid_quote: future_bid_quote__.unwrap_or_default(),
                     future_ask_quote: future_ask_quote__.unwrap_or_default(),
-                    theoretical_bid: theoretical_bid__.unwrap_or_default(),
-                    theoretical_ask: theoretical_ask__.unwrap_or_default(),
+                    bid_nav: bid_nav__.unwrap_or_default(),
+                    ask_nav: ask_nav__.unwrap_or_default(),
                     etf_best_bid: etf_best_bid__.unwrap_or_default(),
                     etf_best_ask: etf_best_ask__.unwrap_or_default(),
                 })

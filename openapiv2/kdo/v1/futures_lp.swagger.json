@@ -696,15 +696,15 @@
           "format": "double",
           "title": "산출된 선물 매도 호가"
         },
-        "theoreticalBid": {
+        "bidNav": {
           "type": "number",
           "format": "double",
-          "title": "ETF reference로 계산한 이론가 (bid)"
+          "title": "ETF reference로 계산한 선물 공정가치 NAV (bid)"
         },
-        "theoreticalAsk": {
+        "askNav": {
           "type": "number",
           "format": "double",
-          "title": "ETF reference로 계산한 이론가 (ask)"
+          "title": "ETF reference로 계산한 선물 공정가치 NAV (ask)"
         },
         "etfBestBid": {
           "type": "number",
