@@ -468,7 +468,7 @@ impl serde::Serialize for EtfLp {
             struct_ser.serialize_field("precompute_policy", &v)?;
         }
         if true {
-            struct_ser.serialize_field("imbalance_guard_enabled", &self.imbalance_guard_enabled)?;
+            struct_ser.serialize_field("pricing_source_liquidity_imbalance_guard_enabled", &self.pricing_source_liquidity_imbalance_guard_enabled)?;
         }
         struct_ser.end()
     }
@@ -512,8 +512,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "quantityLimit",
             "precompute_policy",
             "precomputePolicy",
-            "imbalance_guard_enabled",
-            "imbalanceGuardEnabled",
+            "pricing_source_liquidity_imbalance_guard_enabled",
+            "pricingSourceLiquidityImbalanceGuardEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -536,7 +536,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             MomentumSensitivity,
             QuantityLimit,
             PrecomputePolicy,
-            ImbalanceGuardEnabled,
+            PricingSourceLiquidityImbalanceGuardEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -577,7 +577,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
-                            "imbalanceGuardEnabled" | "imbalance_guard_enabled" => Ok(GeneratedField::ImbalanceGuardEnabled),
+                            "pricingSourceLiquidityImbalanceGuardEnabled" | "pricing_source_liquidity_imbalance_guard_enabled" => Ok(GeneratedField::PricingSourceLiquidityImbalanceGuardEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -615,7 +615,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
                 let mut precompute_policy__ = None;
-                let mut imbalance_guard_enabled__ = None;
+                let mut pricing_source_liquidity_imbalance_guard_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -746,11 +746,11 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             }
                             precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
                         }
-                        GeneratedField::ImbalanceGuardEnabled => {
-                            if imbalance_guard_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("imbalanceGuardEnabled"));
+                        GeneratedField::PricingSourceLiquidityImbalanceGuardEnabled => {
+                            if pricing_source_liquidity_imbalance_guard_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricingSourceLiquidityImbalanceGuardEnabled"));
                             }
-                            imbalance_guard_enabled__ = Some(map_.next_value()?);
+                            pricing_source_liquidity_imbalance_guard_enabled__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -776,7 +776,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
                     precompute_policy: precompute_policy__,
-                    imbalance_guard_enabled: imbalance_guard_enabled__.unwrap_or_default(),
+                    pricing_source_liquidity_imbalance_guard_enabled: pricing_source_liquidity_imbalance_guard_enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -1648,7 +1648,7 @@ impl serde::Serialize for EtfLpStatus {
             struct_ser.serialize_field("depth", &self.depth)?;
         }
         if true {
-            struct_ser.serialize_field("imbalance_guard_enabled", &self.imbalance_guard_enabled)?;
+            struct_ser.serialize_field("pricing_source_liquidity_imbalance_guard_enabled", &self.pricing_source_liquidity_imbalance_guard_enabled)?;
         }
         struct_ser.end()
     }
@@ -1697,8 +1697,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "precompute_policy",
             "precomputePolicy",
             "depth",
-            "imbalance_guard_enabled",
-            "imbalanceGuardEnabled",
+            "pricing_source_liquidity_imbalance_guard_enabled",
+            "pricingSourceLiquidityImbalanceGuardEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1724,7 +1724,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             QuantityLimit,
             PrecomputePolicy,
             Depth,
-            ImbalanceGuardEnabled,
+            PricingSourceLiquidityImbalanceGuardEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1768,7 +1768,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
                             "depth" => Ok(GeneratedField::Depth),
-                            "imbalanceGuardEnabled" | "imbalance_guard_enabled" => Ok(GeneratedField::ImbalanceGuardEnabled),
+                            "pricingSourceLiquidityImbalanceGuardEnabled" | "pricing_source_liquidity_imbalance_guard_enabled" => Ok(GeneratedField::PricingSourceLiquidityImbalanceGuardEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1809,7 +1809,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut quantity_limit__ = None;
                 let mut precompute_policy__ = None;
                 let mut depth__ = None;
-                let mut imbalance_guard_enabled__ = None;
+                let mut pricing_source_liquidity_imbalance_guard_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1960,11 +1960,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::ImbalanceGuardEnabled => {
-                            if imbalance_guard_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("imbalanceGuardEnabled"));
+                        GeneratedField::PricingSourceLiquidityImbalanceGuardEnabled => {
+                            if pricing_source_liquidity_imbalance_guard_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricingSourceLiquidityImbalanceGuardEnabled"));
                             }
-                            imbalance_guard_enabled__ = Some(map_.next_value()?);
+                            pricing_source_liquidity_imbalance_guard_enabled__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1993,7 +1993,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     quantity_limit: quantity_limit__,
                     precompute_policy: precompute_policy__,
                     depth: depth__.unwrap_or_default(),
-                    imbalance_guard_enabled: imbalance_guard_enabled__.unwrap_or_default(),
+                    pricing_source_liquidity_imbalance_guard_enabled: pricing_source_liquidity_imbalance_guard_enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -2008,6 +2008,9 @@ impl serde::Serialize for EtfLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -2137,6 +2140,11 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.depth.as_ref() {
             struct_ser.serialize_field("depth", v)?;
         }
+        if let Some(v) = self.pricing_source_liquidity_imbalance_guard_state.as_ref() {
+            let v = PricingSourceLiquidityImbalanceGuardState::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("pricing_source_liquidity_imbalance_guard_state", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2183,6 +2191,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "precompute_policy",
             "precomputePolicy",
             "depth",
+            "pricing_source_liquidity_imbalance_guard_state",
+            "pricingSourceLiquidityImbalanceGuardState",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2207,6 +2217,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             QuantityLimit,
             PrecomputePolicy,
             Depth,
+            PricingSourceLiquidityImbalanceGuardState,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2249,6 +2260,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
                             "depth" => Ok(GeneratedField::Depth),
+                            "pricingSourceLiquidityImbalanceGuardState" | "pricing_source_liquidity_imbalance_guard_state" => Ok(GeneratedField::PricingSourceLiquidityImbalanceGuardState),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2288,6 +2300,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut quantity_limit__ = None;
                 let mut precompute_policy__ = None;
                 let mut depth__ = None;
+                let mut pricing_source_liquidity_imbalance_guard_state__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -2432,6 +2445,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::PricingSourceLiquidityImbalanceGuardState => {
+                            if pricing_source_liquidity_imbalance_guard_state__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricingSourceLiquidityImbalanceGuardState"));
+                            }
+                            pricing_source_liquidity_imbalance_guard_state__ = map_.next_value::<::std::option::Option<PricingSourceLiquidityImbalanceGuardState>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2458,6 +2477,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     quantity_limit: quantity_limit__,
                     precompute_policy: precompute_policy__,
                     depth: depth__,
+                    pricing_source_liquidity_imbalance_guard_state: pricing_source_liquidity_imbalance_guard_state__,
                 })
             }
         }
@@ -3984,6 +4004,83 @@ impl<'de> serde::Deserialize<'de> for PrecomputePolicy {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for PricingSourceLiquidityImbalanceGuardState {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED",
+            Self::Normal => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL",
+            Self::BidThin => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN",
+            Self::AskThin => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for PricingSourceLiquidityImbalanceGuardState {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED",
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL",
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN",
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PricingSourceLiquidityImbalanceGuardState;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED" => Ok(PricingSourceLiquidityImbalanceGuardState::Unspecified),
+                    "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL" => Ok(PricingSourceLiquidityImbalanceGuardState::Normal),
+                    "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN" => Ok(PricingSourceLiquidityImbalanceGuardState::BidThin),
+                    "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN" => Ok(PricingSourceLiquidityImbalanceGuardState::AskThin),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for StartEtfLpRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4924,8 +5021,8 @@ impl serde::Serialize for UpdateEtfLpRequest {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("precompute_policy", &v)?;
         }
-        if let Some(v) = self.imbalance_guard_enabled.as_ref() {
-            struct_ser.serialize_field("imbalance_guard_enabled", v)?;
+        if let Some(v) = self.pricing_source_liquidity_imbalance_guard_enabled.as_ref() {
+            struct_ser.serialize_field("pricing_source_liquidity_imbalance_guard_enabled", v)?;
         }
         struct_ser.end()
     }
@@ -4964,8 +5061,8 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "quantityLimit",
             "precompute_policy",
             "precomputePolicy",
-            "imbalance_guard_enabled",
-            "imbalanceGuardEnabled",
+            "pricing_source_liquidity_imbalance_guard_enabled",
+            "pricingSourceLiquidityImbalanceGuardEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4985,7 +5082,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             MomentumSensitivity,
             QuantityLimit,
             PrecomputePolicy,
-            ImbalanceGuardEnabled,
+            PricingSourceLiquidityImbalanceGuardEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5023,7 +5120,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
-                            "imbalanceGuardEnabled" | "imbalance_guard_enabled" => Ok(GeneratedField::ImbalanceGuardEnabled),
+                            "pricingSourceLiquidityImbalanceGuardEnabled" | "pricing_source_liquidity_imbalance_guard_enabled" => Ok(GeneratedField::PricingSourceLiquidityImbalanceGuardEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5058,7 +5155,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
                 let mut precompute_policy__ = None;
-                let mut imbalance_guard_enabled__ = None;
+                let mut pricing_source_liquidity_imbalance_guard_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -5169,11 +5266,11 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             }
                             precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
                         }
-                        GeneratedField::ImbalanceGuardEnabled => {
-                            if imbalance_guard_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("imbalanceGuardEnabled"));
+                        GeneratedField::PricingSourceLiquidityImbalanceGuardEnabled => {
+                            if pricing_source_liquidity_imbalance_guard_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricingSourceLiquidityImbalanceGuardEnabled"));
                             }
-                            imbalance_guard_enabled__ = map_.next_value()?;
+                            pricing_source_liquidity_imbalance_guard_enabled__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -5196,7 +5293,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
                     precompute_policy: precompute_policy__,
-                    imbalance_guard_enabled: imbalance_guard_enabled__,
+                    pricing_source_liquidity_imbalance_guard_enabled: pricing_source_liquidity_imbalance_guard_enabled__,
                 })
             }
         }

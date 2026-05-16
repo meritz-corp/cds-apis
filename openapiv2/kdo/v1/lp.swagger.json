@@ -217,9 +217,9 @@
                   "$ref": "#/definitions/lpPrecomputePolicy",
                   "title": "precomputed quote retreat 처리 정책"
                 },
-                "imbalanceGuardEnabled": {
+                "pricingSourceLiquidityImbalanceGuardEnabled": {
                   "type": "boolean",
-                  "title": "imbalance guard 활성화 여부"
+                  "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
                 }
               },
               "title": "UpdateEtfLp"
@@ -755,9 +755,9 @@
           "$ref": "#/definitions/lpPrecomputePolicy",
           "title": "precomputed quote retreat 처리 정책"
         },
-        "imbalanceGuardEnabled": {
+        "pricingSourceLiquidityImbalanceGuardEnabled": {
           "type": "boolean",
-          "title": "imbalance guard 활성화 여부\n선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel"
+          "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부\n선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel"
         }
       },
       "title": "ETF LP 설정"
@@ -975,9 +975,9 @@
           "format": "int64",
           "title": "호가 깊이 (양방향 레벨 수)"
         },
-        "imbalanceGuardEnabled": {
+        "pricingSourceLiquidityImbalanceGuardEnabled": {
           "type": "boolean",
-          "title": "imbalance guard 활성화 여부"
+          "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
         }
       },
       "title": "ETF LP 상태"
@@ -1074,6 +1074,10 @@
           "type": "integer",
           "format": "int64",
           "title": "호가 깊이 (양방향 레벨 수, 변경 시에만 Some)"
+        },
+        "pricingSourceLiquidityImbalanceGuardState": {
+          "$ref": "#/definitions/lpPricingSourceLiquidityImbalanceGuardState",
+          "title": "pricing source 선물 1호가 잔량 imbalance guard 상태 (변경 시에만 Some)"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
@@ -1176,6 +1180,17 @@
       "default": "PRECOMPUTE_POLICY_UNSPECIFIED",
       "description": "- PRECOMPUTE_POLICY_ONE_TO_ONE: 선물 1틱 ↔ ETF 1틱 (1:1 대응). 빠른 추격 LP.\nprecompute 시나리오 경우의 수 축소를 위한 최적화 적용:\n  - depth 초과 / 역방향 시 cancel-all + slowpath refill\n  - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함\n - PRECOMPUTE_POLICY_MANY_TO_ONE: 선물 N틱 ↔ ETF 1틱 (N:1 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:\n  - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)\n  - depth 초과(드문 케이스)는 cancel-all만\n  - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill\n - PRECOMPUTE_POLICY_ONE_TO_MANY: 선물 1틱 ↔ ETF N틱 (1:N 대응). 고가 레버리지 ETF용.\n  - 단일측 ±2/±3틱 8개 시나리오를 하드코딩 precompute\n  - 그 외 케이스는 slow refill",
       "title": "precomputed quote retreat 처리 정책"
+    },
+    "lpPricingSourceLiquidityImbalanceGuardState": {
+      "type": "string",
+      "enum": [
+        "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED",
+        "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL",
+        "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN",
+        "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN"
+      ],
+      "default": "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED",
+      "title": "pricing source 선물 1호가 잔량 imbalance guard 상태\nNORMAL: 매수/매도 1호가 잔량 균형 상태\nBID_THIN: source 선물 매수 1호가 잔량이 매도 1호가 잔량의 30% 이하 (매수 side 얇음)\nASK_THIN: source 선물 매도 1호가 잔량이 매수 1호가 잔량의 30% 이하 (매도 side 얇음)"
     },
     "lpStartEtfLpResponse": {
       "type": "object",

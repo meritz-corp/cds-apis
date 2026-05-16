@@ -173,9 +173,9 @@ message EtfLp {
   // precomputed quote retreat 처리 정책
   optional PrecomputePolicy precompute_policy = 21;
 
-  // imbalance guard 활성화 여부
+  // pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
   // 선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel
-  bool imbalance_guard_enabled = 22;
+  bool pricing_source_liquidity_imbalance_guard_enabled = 22;
 }
 
 // 매수/매도 수량 한도
@@ -267,8 +267,8 @@ message EtfLpStatus {
   // 호가 깊이 (양방향 레벨 수)
   uint32 depth = 24;
 
-  // imbalance guard 활성화 여부
-  bool imbalance_guard_enabled = 25;
+  // pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
+  bool pricing_source_liquidity_imbalance_guard_enabled = 25;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -333,6 +333,20 @@ message EtfLpStatusUpdate {
 
   // 호가 깊이 (양방향 레벨 수, 변경 시에만 Some)
   optional uint32 depth = 23;
+
+  // pricing source 선물 1호가 잔량 imbalance guard 상태 (변경 시에만 Some)
+  optional PricingSourceLiquidityImbalanceGuardState pricing_source_liquidity_imbalance_guard_state = 24;
+}
+
+// pricing source 선물 1호가 잔량 imbalance guard 상태
+// NORMAL: 매수/매도 1호가 잔량 균형 상태
+// BID_THIN: source 선물 매수 1호가 잔량이 매도 1호가 잔량의 30% 이하 (매수 side 얇음)
+// ASK_THIN: source 선물 매도 1호가 잔량이 매수 1호가 잔량의 30% 이하 (매도 side 얇음)
+enum PricingSourceLiquidityImbalanceGuardState {
+  PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED = 0;
+  PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL = 1;
+  PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN = 2;
+  PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN = 3;
 }
 
 // precomputed quote retreat 처리 정책
@@ -645,8 +659,8 @@ message UpdateEtfLpRequest {
   // precomputed quote retreat 처리 정책
   optional PrecomputePolicy precompute_policy = 16;
 
-  // imbalance guard 활성화 여부
-  optional bool imbalance_guard_enabled = 17;
+  // pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
+  optional bool pricing_source_liquidity_imbalance_guard_enabled = 17;
 }
 
 

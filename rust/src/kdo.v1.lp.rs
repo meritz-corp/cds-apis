@@ -57,10 +57,10 @@ pub struct EtfLp {
     /// precomputed quote retreat 처리 정책
     #[prost(enumeration="PrecomputePolicy", optional, tag="21")]
     pub precompute_policy: ::core::option::Option<i32>,
-    /// imbalance guard 활성화 여부
+    /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
     /// 선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel
     #[prost(bool, tag="22")]
-    pub imbalance_guard_enabled: bool,
+    pub pricing_source_liquidity_imbalance_guard_enabled: bool,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -151,9 +151,9 @@ pub struct EtfLpStatus {
     /// 호가 깊이 (양방향 레벨 수)
     #[prost(uint32, tag="24")]
     pub depth: u32,
-    /// imbalance guard 활성화 여부
+    /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
     #[prost(bool, tag="25")]
-    pub imbalance_guard_enabled: bool,
+    pub pricing_source_liquidity_imbalance_guard_enabled: bool,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -218,6 +218,9 @@ pub struct EtfLpStatusUpdate {
     /// 호가 깊이 (양방향 레벨 수, 변경 시에만 Some)
     #[prost(uint32, optional, tag="23")]
     pub depth: ::core::option::Option<u32>,
+    /// pricing source 선물 1호가 잔량 imbalance guard 상태 (변경 시에만 Some)
+    #[prost(enumeration="PricingSourceLiquidityImbalanceGuardState", optional, tag="24")]
+    pub pricing_source_liquidity_imbalance_guard_state: ::core::option::Option<i32>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -507,9 +510,9 @@ pub struct UpdateEtfLpRequest {
     /// precomputed quote retreat 처리 정책
     #[prost(enumeration="PrecomputePolicy", optional, tag="16")]
     pub precompute_policy: ::core::option::Option<i32>,
-    /// imbalance guard 활성화 여부
+    /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
     #[prost(bool, optional, tag="17")]
-    pub imbalance_guard_enabled: ::core::option::Option<bool>,
+    pub pricing_source_liquidity_imbalance_guard_enabled: ::core::option::Option<bool>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -628,6 +631,42 @@ pub struct ClearUserOrderBookResponse {
     /// 비워진 주문 갯수 (bids + asks)
     #[prost(int32, tag="3")]
     pub cleared_count: i32,
+}
+/// pricing source 선물 1호가 잔량 imbalance guard 상태
+/// NORMAL: 매수/매도 1호가 잔량 균형 상태
+/// BID_THIN: source 선물 매수 1호가 잔량이 매도 1호가 잔량의 30% 이하 (매수 side 얇음)
+/// ASK_THIN: source 선물 매도 1호가 잔량이 매수 1호가 잔량의 30% 이하 (매도 side 얇음)
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PricingSourceLiquidityImbalanceGuardState {
+    Unspecified = 0,
+    Normal = 1,
+    BidThin = 2,
+    AskThin = 3,
+}
+impl PricingSourceLiquidityImbalanceGuardState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PricingSourceLiquidityImbalanceGuardState::Unspecified => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED",
+            PricingSourceLiquidityImbalanceGuardState::Normal => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL",
+            PricingSourceLiquidityImbalanceGuardState::BidThin => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN",
+            PricingSourceLiquidityImbalanceGuardState::AskThin => "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED" => Some(Self::Unspecified),
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL" => Some(Self::Normal),
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN" => Some(Self::BidThin),
+            "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN" => Some(Self::AskThin),
+            _ => None,
+        }
+    }
 }
 /// precomputed quote retreat 처리 정책
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

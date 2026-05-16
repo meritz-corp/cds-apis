@@ -14,6 +14,29 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// pricing source 선물 1호가 잔량 imbalance guard 상태
+/// NORMAL: 매수/매도 1호가 잔량 균형 상태
+/// BID_THIN: source 선물 매수 1호가 잔량이 매도 1호가 잔량의 30% 이하 (매수 side 얇음)
+/// ASK_THIN: source 선물 매도 1호가 잔량이 매수 1호가 잔량의 30% 이하 (매도 side 얇음)
+class PricingSourceLiquidityImbalanceGuardState extends $pb.ProtobufEnum {
+  static const PricingSourceLiquidityImbalanceGuardState PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED = PricingSourceLiquidityImbalanceGuardState._(0, _omitEnumNames ? '' : 'PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED');
+  static const PricingSourceLiquidityImbalanceGuardState PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL = PricingSourceLiquidityImbalanceGuardState._(1, _omitEnumNames ? '' : 'PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL');
+  static const PricingSourceLiquidityImbalanceGuardState PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN = PricingSourceLiquidityImbalanceGuardState._(2, _omitEnumNames ? '' : 'PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN');
+  static const PricingSourceLiquidityImbalanceGuardState PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN = PricingSourceLiquidityImbalanceGuardState._(3, _omitEnumNames ? '' : 'PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN');
+
+  static const $core.List<PricingSourceLiquidityImbalanceGuardState> values = <PricingSourceLiquidityImbalanceGuardState> [
+    PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED,
+    PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_NORMAL,
+    PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_BID_THIN,
+    PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN,
+  ];
+
+  static final $core.List<PricingSourceLiquidityImbalanceGuardState?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static PricingSourceLiquidityImbalanceGuardState? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const PricingSourceLiquidityImbalanceGuardState._(super.value, super.name);
+}
+
 /// precomputed quote retreat 처리 정책
 class PrecomputePolicy extends $pb.ProtobufEnum {
   static const PrecomputePolicy PRECOMPUTE_POLICY_UNSPECIFIED = PrecomputePolicy._(0, _omitEnumNames ? '' : 'PRECOMPUTE_POLICY_UNSPECIFIED');

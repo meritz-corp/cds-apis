@@ -43,7 +43,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.double? momentumSensitivity,
     EtfLpQuantityLimit? quantityLimit,
     PrecomputePolicy? precomputePolicy,
-    $core.bool? imbalanceGuardEnabled,
+    $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -64,7 +64,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
-    if (imbalanceGuardEnabled != null) result.imbalanceGuardEnabled = imbalanceGuardEnabled;
+    if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
     return result;
   }
 
@@ -92,7 +92,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..a<$core.double>(19, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<EtfLpQuantityLimit>(20, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..e<PrecomputePolicy>(21, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
-    ..aOB(22, _omitFieldNames ? '' : 'imbalanceGuardEnabled')
+    ..aOB(22, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -297,16 +297,16 @@ class EtfLp extends $pb.GeneratedMessage {
   @$pb.TagNumber(21)
   void clearPrecomputePolicy() => $_clearField(21);
 
-  /// imbalance guard 활성화 여부
+  /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
   /// 선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel
   @$pb.TagNumber(22)
-  $core.bool get imbalanceGuardEnabled => $_getBF(18);
+  $core.bool get pricingSourceLiquidityImbalanceGuardEnabled => $_getBF(18);
   @$pb.TagNumber(22)
-  set imbalanceGuardEnabled($core.bool value) => $_setBool(18, value);
+  set pricingSourceLiquidityImbalanceGuardEnabled($core.bool value) => $_setBool(18, value);
   @$pb.TagNumber(22)
-  $core.bool hasImbalanceGuardEnabled() => $_has(18);
+  $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(18);
   @$pb.TagNumber(22)
-  void clearImbalanceGuardEnabled() => $_clearField(22);
+  void clearPricingSourceLiquidityImbalanceGuardEnabled() => $_clearField(22);
 }
 
 /// 매수/매도 수량 한도
@@ -424,7 +424,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     EtfLpQuantityLimit? quantityLimit,
     PrecomputePolicy? precomputePolicy,
     $core.int? depth,
-    $core.bool? imbalanceGuardEnabled,
+    $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -448,7 +448,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (depth != null) result.depth = depth;
-    if (imbalanceGuardEnabled != null) result.imbalanceGuardEnabled = imbalanceGuardEnabled;
+    if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
     return result;
   }
 
@@ -479,7 +479,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..aOM<EtfLpQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..e<PrecomputePolicy>(23, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..a<$core.int>(24, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
-    ..aOB(25, _omitFieldNames ? '' : 'imbalanceGuardEnabled')
+    ..aOB(25, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -719,15 +719,15 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(24)
   void clearDepth() => $_clearField(24);
 
-  /// imbalance guard 활성화 여부
+  /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
   @$pb.TagNumber(25)
-  $core.bool get imbalanceGuardEnabled => $_getBF(21);
+  $core.bool get pricingSourceLiquidityImbalanceGuardEnabled => $_getBF(21);
   @$pb.TagNumber(25)
-  set imbalanceGuardEnabled($core.bool value) => $_setBool(21, value);
+  set pricingSourceLiquidityImbalanceGuardEnabled($core.bool value) => $_setBool(21, value);
   @$pb.TagNumber(25)
-  $core.bool hasImbalanceGuardEnabled() => $_has(21);
+  $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(21);
   @$pb.TagNumber(25)
-  void clearImbalanceGuardEnabled() => $_clearField(25);
+  void clearPricingSourceLiquidityImbalanceGuardEnabled() => $_clearField(25);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -753,6 +753,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     EtfLpQuantityLimit? quantityLimit,
     PrecomputePolicy? precomputePolicy,
     $core.int? depth,
+    PricingSourceLiquidityImbalanceGuardState? pricingSourceLiquidityImbalanceGuardState,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -775,6 +776,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (depth != null) result.depth = depth;
+    if (pricingSourceLiquidityImbalanceGuardState != null) result.pricingSourceLiquidityImbalanceGuardState = pricingSourceLiquidityImbalanceGuardState;
     return result;
   }
 
@@ -804,6 +806,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..aOM<EtfLpQuantityLimit>(21, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..e<PrecomputePolicy>(22, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..a<$core.int>(23, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
+    ..e<PricingSourceLiquidityImbalanceGuardState>(24, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardState', $pb.PbFieldType.OE, defaultOrMaker: PricingSourceLiquidityImbalanceGuardState.PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED, valueOf: PricingSourceLiquidityImbalanceGuardState.valueOf, enumValues: PricingSourceLiquidityImbalanceGuardState.values)
     ..hasRequiredFields = false
   ;
 
@@ -1030,6 +1033,16 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasDepth() => $_has(19);
   @$pb.TagNumber(23)
   void clearDepth() => $_clearField(23);
+
+  /// pricing source 선물 1호가 잔량 imbalance guard 상태 (변경 시에만 Some)
+  @$pb.TagNumber(24)
+  PricingSourceLiquidityImbalanceGuardState get pricingSourceLiquidityImbalanceGuardState => $_getN(20);
+  @$pb.TagNumber(24)
+  set pricingSourceLiquidityImbalanceGuardState(PricingSourceLiquidityImbalanceGuardState value) => $_setField(24, value);
+  @$pb.TagNumber(24)
+  $core.bool hasPricingSourceLiquidityImbalanceGuardState() => $_has(20);
+  @$pb.TagNumber(24)
+  void clearPricingSourceLiquidityImbalanceGuardState() => $_clearField(24);
 }
 
 /// 자동 offset 조정 설정
@@ -2085,7 +2098,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $core.double? momentumSensitivity,
     EtfLpQuantityLimit? quantityLimit,
     PrecomputePolicy? precomputePolicy,
-    $core.bool? imbalanceGuardEnabled,
+    $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2103,7 +2116,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
-    if (imbalanceGuardEnabled != null) result.imbalanceGuardEnabled = imbalanceGuardEnabled;
+    if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
     return result;
   }
 
@@ -2128,7 +2141,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(14, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<EtfLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..e<PrecomputePolicy>(16, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
-    ..aOB(17, _omitFieldNames ? '' : 'imbalanceGuardEnabled')
+    ..aOB(17, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -2301,15 +2314,15 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(16)
   void clearPrecomputePolicy() => $_clearField(16);
 
-  /// imbalance guard 활성화 여부
+  /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
   @$pb.TagNumber(17)
-  $core.bool get imbalanceGuardEnabled => $_getBF(15);
+  $core.bool get pricingSourceLiquidityImbalanceGuardEnabled => $_getBF(15);
   @$pb.TagNumber(17)
-  set imbalanceGuardEnabled($core.bool value) => $_setBool(15, value);
+  set pricingSourceLiquidityImbalanceGuardEnabled($core.bool value) => $_setBool(15, value);
   @$pb.TagNumber(17)
-  $core.bool hasImbalanceGuardEnabled() => $_has(15);
+  $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(15);
   @$pb.TagNumber(17)
-  void clearImbalanceGuardEnabled() => $_clearField(17);
+  void clearPricingSourceLiquidityImbalanceGuardEnabled() => $_clearField(17);
 }
 
 /// GetEtfLpStatus
