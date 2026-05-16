@@ -172,6 +172,10 @@ message EtfLp {
 
   // precomputed quote retreat 처리 정책
   optional PrecomputePolicy precompute_policy = 21;
+
+  // imbalance guard 활성화 여부
+  // 선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel
+  bool imbalance_guard_enabled = 22;
 }
 
 // 매수/매도 수량 한도
@@ -262,6 +266,9 @@ message EtfLpStatus {
 
   // 호가 깊이 (양방향 레벨 수)
   uint32 depth = 24;
+
+  // imbalance guard 활성화 여부
+  bool imbalance_guard_enabled = 25;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -637,6 +644,9 @@ message UpdateEtfLpRequest {
 
   // precomputed quote retreat 처리 정책
   optional PrecomputePolicy precompute_policy = 16;
+
+  // imbalance guard 활성화 여부
+  optional bool imbalance_guard_enabled = 17;
 }
 
 

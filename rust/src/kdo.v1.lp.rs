@@ -57,6 +57,10 @@ pub struct EtfLp {
     /// precomputed quote retreat 처리 정책
     #[prost(enumeration="PrecomputePolicy", optional, tag="21")]
     pub precompute_policy: ::core::option::Option<i32>,
+    /// imbalance guard 활성화 여부
+    /// 선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel
+    #[prost(bool, tag="22")]
+    pub imbalance_guard_enabled: bool,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -147,6 +151,9 @@ pub struct EtfLpStatus {
     /// 호가 깊이 (양방향 레벨 수)
     #[prost(uint32, tag="24")]
     pub depth: u32,
+    /// imbalance guard 활성화 여부
+    #[prost(bool, tag="25")]
+    pub imbalance_guard_enabled: bool,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -500,6 +507,9 @@ pub struct UpdateEtfLpRequest {
     /// precomputed quote retreat 처리 정책
     #[prost(enumeration="PrecomputePolicy", optional, tag="16")]
     pub precompute_policy: ::core::option::Option<i32>,
+    /// imbalance guard 활성화 여부
+    #[prost(bool, optional, tag="17")]
+    pub imbalance_guard_enabled: ::core::option::Option<bool>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

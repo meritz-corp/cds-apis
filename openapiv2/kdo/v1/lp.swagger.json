@@ -216,6 +216,10 @@
                 "precomputePolicy": {
                   "$ref": "#/definitions/lpPrecomputePolicy",
                   "title": "precomputed quote retreat 처리 정책"
+                },
+                "imbalanceGuardEnabled": {
+                  "type": "boolean",
+                  "title": "imbalance guard 활성화 여부"
                 }
               },
               "title": "UpdateEtfLp"
@@ -750,6 +754,10 @@
         "precomputePolicy": {
           "$ref": "#/definitions/lpPrecomputePolicy",
           "title": "precomputed quote retreat 처리 정책"
+        },
+        "imbalanceGuardEnabled": {
+          "type": "boolean",
+          "title": "imbalance guard 활성화 여부\n선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel"
         }
       },
       "title": "ETF LP 설정"
@@ -966,6 +974,10 @@
           "type": "integer",
           "format": "int64",
           "title": "호가 깊이 (양방향 레벨 수)"
+        },
+        "imbalanceGuardEnabled": {
+          "type": "boolean",
+          "title": "imbalance guard 활성화 여부"
         }
       },
       "title": "ETF LP 상태"

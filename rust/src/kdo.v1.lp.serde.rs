@@ -401,6 +401,9 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -464,6 +467,9 @@ impl serde::Serialize for EtfLp {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("precompute_policy", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("imbalance_guard_enabled", &self.imbalance_guard_enabled)?;
+        }
         struct_ser.end()
     }
 }
@@ -506,6 +512,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "quantityLimit",
             "precompute_policy",
             "precomputePolicy",
+            "imbalance_guard_enabled",
+            "imbalanceGuardEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -528,6 +536,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             MomentumSensitivity,
             QuantityLimit,
             PrecomputePolicy,
+            ImbalanceGuardEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -568,6 +577,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
+                            "imbalanceGuardEnabled" | "imbalance_guard_enabled" => Ok(GeneratedField::ImbalanceGuardEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -605,6 +615,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
                 let mut precompute_policy__ = None;
+                let mut imbalance_guard_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -735,6 +746,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             }
                             precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
                         }
+                        GeneratedField::ImbalanceGuardEnabled => {
+                            if imbalance_guard_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceGuardEnabled"));
+                            }
+                            imbalance_guard_enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -759,6 +776,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
                     precompute_policy: precompute_policy__,
+                    imbalance_guard_enabled: imbalance_guard_enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -1554,6 +1572,9 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -1626,6 +1647,9 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             struct_ser.serialize_field("depth", &self.depth)?;
         }
+        if true {
+            struct_ser.serialize_field("imbalance_guard_enabled", &self.imbalance_guard_enabled)?;
+        }
         struct_ser.end()
     }
 }
@@ -1673,6 +1697,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "precompute_policy",
             "precomputePolicy",
             "depth",
+            "imbalance_guard_enabled",
+            "imbalanceGuardEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1698,6 +1724,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             QuantityLimit,
             PrecomputePolicy,
             Depth,
+            ImbalanceGuardEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1741,6 +1768,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
                             "depth" => Ok(GeneratedField::Depth),
+                            "imbalanceGuardEnabled" | "imbalance_guard_enabled" => Ok(GeneratedField::ImbalanceGuardEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1781,6 +1809,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut quantity_limit__ = None;
                 let mut precompute_policy__ = None;
                 let mut depth__ = None;
+                let mut imbalance_guard_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -1931,6 +1960,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ImbalanceGuardEnabled => {
+                            if imbalance_guard_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceGuardEnabled"));
+                            }
+                            imbalance_guard_enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1958,6 +1993,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     quantity_limit: quantity_limit__,
                     precompute_policy: precompute_policy__,
                     depth: depth__.unwrap_or_default(),
+                    imbalance_guard_enabled: imbalance_guard_enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -4833,6 +4869,9 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -4885,6 +4924,9 @@ impl serde::Serialize for UpdateEtfLpRequest {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("precompute_policy", &v)?;
         }
+        if let Some(v) = self.imbalance_guard_enabled.as_ref() {
+            struct_ser.serialize_field("imbalance_guard_enabled", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4922,6 +4964,8 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "quantityLimit",
             "precompute_policy",
             "precomputePolicy",
+            "imbalance_guard_enabled",
+            "imbalanceGuardEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4941,6 +4985,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             MomentumSensitivity,
             QuantityLimit,
             PrecomputePolicy,
+            ImbalanceGuardEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4978,6 +5023,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "precomputePolicy" | "precompute_policy" => Ok(GeneratedField::PrecomputePolicy),
+                            "imbalanceGuardEnabled" | "imbalance_guard_enabled" => Ok(GeneratedField::ImbalanceGuardEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5012,6 +5058,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
                 let mut precompute_policy__ = None;
+                let mut imbalance_guard_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -5122,6 +5169,12 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             }
                             precompute_policy__ = map_.next_value::<::std::option::Option<PrecomputePolicy>>()?.map(|x| x as i32);
                         }
+                        GeneratedField::ImbalanceGuardEnabled => {
+                            if imbalance_guard_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceGuardEnabled"));
+                            }
+                            imbalance_guard_enabled__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5143,6 +5196,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                     momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
                     precompute_policy: precompute_policy__,
+                    imbalance_guard_enabled: imbalance_guard_enabled__,
                 })
             }
         }
