@@ -86,6 +86,9 @@ pub mod kdo {
         pub mod mm {
             include!("kdo.v1.mm.rs");
         }
+        pub mod mm_v2 {
+            include!("kdo.v1.mm_v2.rs");
+        }
         pub mod market_sniping {
             include!("kdo.v1.market_sniping.rs");
         }
