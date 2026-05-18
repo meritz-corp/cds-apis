@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "kdo/v1/lp.proto",
+    "title": "kdo/v1/mm_v2.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "LpService"
+      "name": "MmV2Service"
     }
   ],
   "consumes": [
@@ -16,15 +16,15 @@
     "application/json"
   ],
   "paths": {
-    "/v1/lps": {
+    "/v1/mm_v2": {
       "get": {
-        "summary": "ETF LP 조회",
-        "operationId": "LpService_ListEtfLps",
+        "summary": "ETF MM v2 목록 조회",
+        "operationId": "MmV2Service_ListEtfMmV2s",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpListEtfLpsResponse"
+              "$ref": "#/definitions/mm_v2ListEtfMmV2sResponse"
             }
           },
           "default": {
@@ -37,7 +37,6 @@
         "parameters": [
           {
             "name": "pageSize",
-            "description": "페이지 크기 (optional)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -45,33 +44,32 @@
           },
           {
             "name": "pageToken",
-            "description": "페이지 토큰 (optional, for pagination)",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* etf_symbol\n  * `equal`, `contains`\n* fund_code\n  * `equal`, `contains`\n\nExamples\n* filter=etf_symbol:\"005930\"\n* filter=fund_code=\"0159\"",
+            "description": "Available Sequence and Operator\n* etf_symbol\n  * `equal`, `contains`\n* fund_code\n  * `equal`, `contains`",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/etfs/*/funds/*/status": {
+    "/v1/mm_v2/etfs/*/funds/*/status": {
       "get": {
-        "summary": "ETF LP 상태 조회",
-        "operationId": "LpService_ListEtfLpStatuses",
+        "summary": "ETF MM v2 상태 목록 조회",
+        "operationId": "MmV2Service_ListEtfMmV2Statuses",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpListEtfLpStatusesResponse"
+              "$ref": "#/definitions/mm_v2ListEtfMmV2StatusesResponse"
             }
           },
           "default": {
@@ -84,7 +82,6 @@
         "parameters": [
           {
             "name": "pageSize",
-            "description": "페이지 크기 (optional)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -92,39 +89,39 @@
           },
           {
             "name": "pageToken",
-            "description": "페이지 토큰 (optional, for pagination)",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "filter",
+            "description": "Available Sequence and Operator\n* etf_symbol: `equal`, `contains`\n* fund_code: `equal`, `contains`\n* state: `equal`\n* fill_statistics.buy_filled_quantity: `greater_than`, `less_than`",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "orderBy",
-            "description": "오더링 조건. (optional, AIP-132)\n\nSupported Fields\n* \"fill_statistics.buy_filled_quantity\", \"fill_statistics.sell_filled_quantity\"\n\nExamples\n* order_by=fill_statistics.buy_filled_quantity desc",
+            "description": "Supported Fields: \"fill_statistics.buy_filled_quantity\", \"fill_statistics.sell_filled_quantity\"",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/etfs/{symbol}/funds/{fundCode}": {
+    "/v1/mm_v2/etfs/{symbol}/funds/{fundCode}": {
       "patch": {
-        "summary": "ETF LP 업데이트",
-        "operationId": "LpService_UpdateEtfLp",
+        "summary": "ETF MM v2 업데이트",
+        "operationId": "MmV2Service_UpdateEtfMmV2",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpEtfLp"
+              "$ref": "#/definitions/mm_v2EtfMmV2"
             }
           },
           "default": {
@@ -164,7 +161,7 @@
                   "title": "호가 깊이"
                 },
                 "offset": {
-                  "$ref": "#/definitions/lpEtfLpOffset",
+                  "$ref": "#/definitions/mm_v2EtfMmV2Offset",
                   "title": "동적 offset 조정 설정"
                 },
                 "askBasis": {
@@ -210,36 +207,45 @@
                   "title": "모멘텀 민감도"
                 },
                 "quantityLimit": {
-                  "$ref": "#/definitions/lpEtfLpQuantityLimit",
+                  "$ref": "#/definitions/mm_v2EtfMmV2QuantityLimit",
                   "title": "매수/매도 수량 한도"
                 },
                 "precomputePolicy": {
-                  "$ref": "#/definitions/v1lpPrecomputePolicy",
+                  "$ref": "#/definitions/v1mm_v2PrecomputePolicy",
                   "title": "precomputed quote retreat 처리 정책"
                 },
                 "pricingSourceLiquidityImbalanceGuardEnabled": {
                   "type": "boolean",
                   "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
+                },
+                "momentumDeadbandTicks": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "모멘텀 deadband 틱 수"
+                },
+                "exposureSkew": {
+                  "$ref": "#/definitions/mm_v2UpdateEtfMmV2ExposureSkewFields",
+                  "title": "ExposureSkew 설정 업데이트"
                 }
               },
-              "title": "UpdateEtfLp"
+              "title": "UpdateEtfMmV2"
             }
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}": {
+    "/v1/mm_v2/{etf}/{fund}": {
       "get": {
-        "summary": "ETF LP 조회",
-        "operationId": "LpService_GetEtfLp",
+        "summary": "ETF MM v2 조회",
+        "operationId": "MmV2Service_GetEtfMmV2",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpEtfLp"
+              "$ref": "#/definitions/mm_v2EtfMmV2"
             }
           },
           "default": {
@@ -266,19 +272,19 @@
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}/orderbook": {
+    "/v1/mm_v2/{etf}/{fund}/orderbook": {
       "get": {
-        "summary": "사용자 주문장 업데이트를 가져오기",
-        "operationId": "LpService_GetUserOrderbook",
+        "summary": "사용자 주문장 조회",
+        "operationId": "MmV2Service_GetUserOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1lpUserOrderbookData"
+              "$ref": "#/definitions/v1mm_v2UserOrderbookData"
             }
           },
           "default": {
@@ -305,14 +311,14 @@
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}/orderbook:stream": {
+    "/v1/mm_v2/{etf}/{fund}/orderbook:stream": {
       "get": {
-        "summary": "사용자 주문장 업데이트를 스트리밍",
-        "operationId": "LpService_StreamUserOrderbook",
+        "summary": "사용자 주문장 스트리밍",
+        "operationId": "MmV2Service_StreamUserOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -320,13 +326,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/v1lpUserOrderbookData"
+                  "$ref": "#/definitions/v1mm_v2UserOrderbookData"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of v1lpUserOrderbookData"
+              "title": "Stream result of v1mm_v2UserOrderbookData"
             }
           },
           "default": {
@@ -353,19 +359,19 @@
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}/status": {
+    "/v1/mm_v2/{etf}/{fund}/status": {
       "get": {
-        "summary": "ETF LP 상태 조회",
-        "operationId": "LpService_GetEtfLpStatus",
+        "summary": "ETF MM v2 상태 조회",
+        "operationId": "MmV2Service_GetEtfMmV2Status",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpEtfLpStatus"
+              "$ref": "#/definitions/mm_v2EtfMmV2Status"
             }
           },
           "default": {
@@ -392,14 +398,14 @@
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}/status_update:stream": {
+    "/v1/mm_v2/{etf}/{fund}/status_update:stream": {
       "get": {
-        "summary": "ETF LP 상태 스트리밍 (실시간 업데이트)",
-        "operationId": "LpService_StreamEtfLpStatusUpdate",
+        "summary": "ETF MM v2 상태 스트리밍 (실시간 업데이트)",
+        "operationId": "MmV2Service_StreamEtfMmV2StatusUpdate",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -407,13 +413,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/lpEtfLpStatusUpdate"
+                  "$ref": "#/definitions/mm_v2EtfMmV2StatusUpdate"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of lpEtfLpStatusUpdate"
+              "title": "Stream result of mm_v2EtfMmV2StatusUpdate"
             }
           },
           "default": {
@@ -440,19 +446,19 @@
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}:clearOrderBook": {
+    "/v1/mm_v2/{etf}/{fund}:clearOrderBook": {
       "post": {
-        "summary": "사용자 주문 오더북을 강제로 비웁니다.\nLP 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).\nLP 가 Idle / Stopping / Error 상태일 때만 사용 가능.\n운영 중 좀비 주문이 누적된 경우 수동 복구용.",
-        "operationId": "LpService_ClearUserOrderBook",
+        "summary": "사용자 주문 오더북을 강제로 비웁니다.\nMM v2 가 Running 상태일 때는 호출 불가 (FailedPrecondition 반환).\nMM v2 가 Idle / Stopping / Error 상태일 때만 사용 가능.",
+        "operationId": "MmV2Service_ClearUserOrderBook",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1lpClearUserOrderBookResponse"
+              "$ref": "#/definitions/v1mm_v2ClearUserOrderBookResponse"
             }
           },
           "default": {
@@ -465,7 +471,6 @@
         "parameters": [
           {
             "name": "etf",
-            "description": "ETF resource: \"etfs/{symbol}\"",
             "in": "path",
             "required": true,
             "type": "string",
@@ -473,7 +478,6 @@
           },
           {
             "name": "fund",
-            "description": "Fund resource: \"funds/{fund_code}\"",
             "in": "path",
             "required": true,
             "type": "string",
@@ -490,19 +494,19 @@
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}:start": {
+    "/v1/mm_v2/{etf}/{fund}:start": {
       "post": {
-        "summary": "ETF LP 시작",
-        "operationId": "LpService_StartEtfLp",
+        "summary": "ETF MM v2 시작",
+        "operationId": "MmV2Service_StartEtfMmV2",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpStartEtfLpResponse"
+              "$ref": "#/definitions/mm_v2StartEtfMmV2Response"
             }
           },
           "default": {
@@ -533,24 +537,24 @@
             "required": true,
             "schema": {
               "type": "object",
-              "title": "ETF LP 시작 요청"
+              "title": "ETF MM v2 시작 요청"
             }
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     },
-    "/v1/lps/{etf}/{fund}:stop": {
+    "/v1/mm_v2/{etf}/{fund}:stop": {
       "post": {
-        "summary": "ETF LP 중지",
-        "operationId": "LpService_StopEtfLp",
+        "summary": "ETF MM v2 중지",
+        "operationId": "MmV2Service_StopEtfMmV2",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lpStopEtfLpResponse"
+              "$ref": "#/definitions/mm_v2StopEtfMmV2Response"
             }
           },
           "default": {
@@ -581,12 +585,12 @@
             "required": true,
             "schema": {
               "type": "object",
-              "title": "ETF LP 중지 요청"
+              "title": "ETF MM v2 중지 요청"
             }
           }
         ],
         "tags": [
-          "LpService"
+          "MmV2Service"
         ]
       }
     }
@@ -653,7 +657,7 @@
       "type": "object",
       "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
     },
-    "lpEtfLp": {
+    "mm_v2EtfMmV2": {
       "type": "object",
       "properties": {
         "symbol": {
@@ -666,11 +670,13 @@
         },
         "askBasis": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "title": "매도 basis 스프레드"
         },
         "bidBasis": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "title": "매수 basis 스프레드"
         },
         "depth": {
           "type": "integer",
@@ -683,7 +689,7 @@
           "title": "ETF tick 크기 (원 단위, i64)"
         },
         "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
+          "$ref": "#/definitions/mm_v2EtfMmV2Offset",
           "title": "동적 offset 조정 설정"
         },
         "enabled": {
@@ -729,46 +735,50 @@
           "title": "모멘텀 민감도"
         },
         "quantityLimit": {
-          "$ref": "#/definitions/lpEtfLpQuantityLimit",
+          "$ref": "#/definitions/mm_v2EtfMmV2QuantityLimit",
           "title": "매수/매도 수량 한도"
         },
         "precomputePolicy": {
-          "$ref": "#/definitions/v1lpPrecomputePolicy",
+          "$ref": "#/definitions/v1mm_v2PrecomputePolicy",
           "title": "precomputed quote retreat 처리 정책"
         },
         "pricingSourceLiquidityImbalanceGuardEnabled": {
           "type": "boolean",
-          "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부\n선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel"
-        }
-      },
-      "title": "ETF LP 설정"
-    },
-    "lpEtfLpHedge": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "헷지 대상 종목 심볼"
+          "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
         },
-        "fund": {
-          "type": "string",
-          "title": "펀드 리소스 이름\nformat: funds/{fund_code}"
+        "momentumDeadbandTicks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "모멘텀 활성 판정 deadband (틱 수).\n|bid_adj| 또는 |ask_adj|가 이 틱 수 이상이어야 Momentum 모드로 진입.\n0이면 모멘텀 enabled만으로 활성 판정."
         },
-        "filledQuantityPerHedge": {
+        "exposureSkewEnabled": {
+          "type": "boolean",
+          "title": "ExposureSkew 활성화 여부 (MM v2 모드 2: 누적 노출 균형)"
+        },
+        "exposureSkewTriggerQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "헷지 1주 주문당 ETF 체결수량 기준"
+          "title": "ExposureSkew 활성화 임계값 (순포지션 절댓값이 이 값 이상이면 skew 활성화)"
+        },
+        "exposureSkewLimitQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "ExposureSkew 포화 임계값 (순포지션 절댓값이 이 값에 도달하면 max_skew_ticks 적용)"
+        },
+        "exposureSkewMaxSkewTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "ExposureSkew 최대 틱 수 (양방향 호가 평행이동 상한)"
         }
       },
-      "title": "ETF LP 헷지 설정"
+      "description": "ETF MM v2 설정\nLP 대비 차이: hedge 필드 없음, position_adjustment 없음, ExposureSkew + momentum_deadband_ticks 추가."
     },
-    "lpEtfLpOffset": {
+    "mm_v2EtfMmV2Offset": {
       "type": "object",
       "properties": {
         "bidOffset": {
           "type": "number",
-          "format": "double",
-          "description": "optional: 미설정(None) 시 해당 필드를 덮어쓰지 않음.\nproto3 optional scalar → prost::Message 에서 Option\u003cT\u003e로 생성됨."
+          "format": "double"
         },
         "askOffset": {
           "type": "number",
@@ -798,30 +808,15 @@
         "resetOnFill": {
           "type": "boolean"
         },
-        "positionAdjustmentEnabled": {
-          "type": "boolean",
-          "title": "순매매량 기반 조정"
-        },
-        "positionStrategy": {
-          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
-        },
-        "positionThreshold": {
-          "type": "string",
-          "format": "int64"
-        },
-        "positionAdjustmentStep": {
-          "type": "number",
-          "format": "double"
-        },
         "netPosition": {
           "type": "string",
           "format": "int64",
-          "description": "누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.\n트리거 발동(offset 변경) 시 0으로 리셋됩니다.\nruntime 추적값이므로 optional 아님 — mapper에서 drop 처리."
+          "title": "누적 순포지션 런타임 값 (런타임 추적값 - 상태 조회 시 노출)"
         }
       },
-      "title": "자동 offset 조정 설정"
+      "description": "자동 offset 조정 설정\nMM v2는 순매매량 기반 조정을 ExposureSkew가 담당하므로 position_adjustment 필드 없음."
     },
-    "lpEtfLpQuantityLimit": {
+    "mm_v2EtfMmV2QuantityLimit": {
       "type": "object",
       "properties": {
         "maxBidQuantity": {
@@ -837,133 +832,29 @@
         "netQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조"
+          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask"
         },
         "maxNetQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "순포지션 한도 설정값 (한도 검증에 사용)\nnet_quantity \u003e 0 \u0026\u0026 net_quantity \u003e= max_net_quantity → 매수 차단\nnet_quantity \u003c 0 \u0026\u0026 |net_quantity| \u003e= max_net_quantity → 매도 차단\n미설정(None) 시 순포지션 기반 차단 비활성"
+          "title": "순포지션 한도 설정값"
         }
       },
       "title": "매수/매도 수량 한도"
     },
-    "lpEtfLpState": {
+    "mm_v2EtfMmV2State": {
       "type": "string",
       "enum": [
-        "ETF_LP_STATE_UNSPECIFIED",
-        "ETF_LP_STATE_IDLE",
-        "ETF_LP_STATE_RUNNING",
-        "ETF_LP_STATE_STOPPING",
-        "ETF_LP_STATE_ERROR"
+        "ETF_MM_V2_STATE_UNSPECIFIED",
+        "ETF_MM_V2_STATE_IDLE",
+        "ETF_MM_V2_STATE_RUNNING",
+        "ETF_MM_V2_STATE_STOPPING",
+        "ETF_MM_V2_STATE_ERROR"
       ],
-      "default": "ETF_LP_STATE_UNSPECIFIED",
-      "title": "ETF LP 상태 enum"
+      "default": "ETF_MM_V2_STATE_UNSPECIFIED",
+      "title": "ETF MM v2 상태 enum"
     },
-    "lpEtfLpStatus": {
-      "type": "object",
-      "properties": {
-        "etfSymbol": {
-          "type": "string",
-          "title": "ETF 심볼"
-        },
-        "fundCode": {
-          "type": "string",
-          "title": "펀드 코드"
-        },
-        "askBasis": {
-          "type": "number",
-          "format": "double",
-          "title": "Basis 스프레드 (원 단위, i64)"
-        },
-        "bidBasis": {
-          "type": "number",
-          "format": "double"
-        },
-        "state": {
-          "$ref": "#/definitions/lpEtfLpState",
-          "title": "LP 상태"
-        },
-        "pricing": {
-          "$ref": "#/definitions/lpLpPricing",
-          "title": "가격 정보"
-        },
-        "fillStatistics": {
-          "$ref": "#/definitions/v1lpFillStatistics",
-          "title": "체결 통계"
-        },
-        "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "동적 offset 조정 설정 (optional)"
-        },
-        "hedge": {
-          "$ref": "#/definitions/lpEtfLpHedge",
-          "title": "헷지 정보"
-        },
-        "bidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매수 호가 조정값"
-        },
-        "askAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매도 호가 조정값"
-        },
-        "bidQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매수 주문 수량 (i64)"
-        },
-        "askQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매도 주문 수량 (i64)"
-        },
-        "momentumEnabled": {
-          "type": "boolean",
-          "title": "모멘텀 활성화 여부"
-        },
-        "momentumWindow": {
-          "type": "integer",
-          "format": "int64",
-          "title": "모멘텀 윈도우 크기"
-        },
-        "momentumSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "모멘텀 민감도"
-        },
-        "momentumBidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
-        },
-        "momentumAskAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
-        },
-        "quantityLimit": {
-          "$ref": "#/definitions/lpEtfLpQuantityLimit",
-          "title": "매수/매도 수량 한도"
-        },
-        "precomputePolicy": {
-          "$ref": "#/definitions/v1lpPrecomputePolicy",
-          "title": "precomputed quote retreat 처리 정책"
-        },
-        "depth": {
-          "type": "integer",
-          "format": "int64",
-          "title": "호가 깊이 (양방향 레벨 수)"
-        },
-        "pricingSourceLiquidityImbalanceGuardEnabled": {
-          "type": "boolean",
-          "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
-        }
-      },
-      "title": "ETF LP 상태"
-    },
-    "lpEtfLpStatusUpdate": {
+    "mm_v2EtfMmV2Status": {
       "type": "object",
       "properties": {
         "etfSymbol": {
@@ -984,20 +875,20 @@
           "format": "double"
         },
         "state": {
-          "$ref": "#/definitions/lpEtfLpState",
-          "title": "LP 상태"
+          "$ref": "#/definitions/mm_v2EtfMmV2State",
+          "title": "MM v2 상태"
         },
         "pricing": {
-          "$ref": "#/definitions/lpLpPricing",
+          "$ref": "#/definitions/mm_v2MmV2Pricing",
           "title": "가격 정보"
         },
         "fillStatistics": {
-          "$ref": "#/definitions/v1lpFillStatistics",
+          "$ref": "#/definitions/v1mm_v2FillStatistics",
           "title": "체결 통계"
         },
         "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "동적 offset 조정 설정 (optional)"
+          "$ref": "#/definitions/mm_v2EtfMmV2Offset",
+          "title": "동적 offset 조정 설정"
         },
         "bidAdjustment": {
           "type": "number",
@@ -1012,12 +903,12 @@
         "bidQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "매수 주문 수량 (i64)"
+          "title": "매수 주문 수량"
         },
         "askQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "매도 주문 수량 (i64)"
+          "title": "매도 주문 수량"
         },
         "momentumEnabled": {
           "type": "boolean",
@@ -1044,58 +935,194 @@
           "title": "런타임 계산된 모멘텀 매도 호가 조정값"
         },
         "quantityLimit": {
-          "$ref": "#/definitions/lpEtfLpQuantityLimit",
+          "$ref": "#/definitions/mm_v2EtfMmV2QuantityLimit",
           "title": "매수/매도 수량 한도"
         },
         "precomputePolicy": {
-          "$ref": "#/definitions/v1lpPrecomputePolicy",
+          "$ref": "#/definitions/v1mm_v2PrecomputePolicy",
           "title": "precomputed quote retreat 처리 정책"
         },
         "depth": {
           "type": "integer",
           "format": "int64",
-          "title": "호가 깊이 (양방향 레벨 수, 변경 시에만 Some)"
+          "title": "호가 깊이 (양방향 레벨 수)"
+        },
+        "pricingSourceLiquidityImbalanceGuardEnabled": {
+          "type": "boolean",
+          "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
+        },
+        "mode": {
+          "$ref": "#/definitions/mm_v2MmV2Mode",
+          "title": "현재 운영 모드 (Momentum / ExposureBalance / Neutral)"
+        },
+        "momentumActive": {
+          "type": "boolean",
+          "title": "모멘텀 활성 판정 여부 (deadband 통과 여부)"
+        },
+        "netPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 노출 (signed). bid 체결 += qty, ask 체결 -= qty"
+        },
+        "exposureSkewTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "ExposureSkew가 산출한 부호 있는 틱. 0이면 비활성"
+        },
+        "avgBuyPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "volume-weighted 누적 매수 평균 체결가 (매수 체결 없으면 absent)"
+        },
+        "avgSellPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "volume-weighted 누적 매도 평균 체결가 (매도 체결 없으면 absent)"
+        }
+      },
+      "title": "ETF MM v2 상태"
+    },
+    "mm_v2EtfMmV2StatusUpdate": {
+      "type": "object",
+      "properties": {
+        "etfSymbol": {
+          "type": "string",
+          "title": "ETF 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double",
+          "title": "Basis 스프레드"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "state": {
+          "$ref": "#/definitions/mm_v2EtfMmV2State",
+          "title": "MM v2 상태"
+        },
+        "pricing": {
+          "$ref": "#/definitions/mm_v2MmV2Pricing",
+          "title": "가격 정보"
+        },
+        "fillStatistics": {
+          "$ref": "#/definitions/v1mm_v2FillStatistics",
+          "title": "체결 통계"
+        },
+        "offset": {
+          "$ref": "#/definitions/mm_v2EtfMmV2Offset",
+          "title": "동적 offset 조정 설정"
+        },
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 호가 조정값"
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 호가 조정값"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 주문 수량"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 주문 수량"
+        },
+        "momentumEnabled": {
+          "type": "boolean",
+          "title": "모멘텀 활성화 여부"
+        },
+        "momentumWindow": {
+          "type": "integer",
+          "format": "int64",
+          "title": "모멘텀 윈도우 크기"
+        },
+        "momentumSensitivity": {
+          "type": "number",
+          "format": "double",
+          "title": "모멘텀 민감도"
+        },
+        "momentumBidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
+        },
+        "momentumAskAdjustment": {
+          "type": "number",
+          "format": "double",
+          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/mm_v2EtfMmV2QuantityLimit",
+          "title": "매수/매도 수량 한도"
+        },
+        "precomputePolicy": {
+          "$ref": "#/definitions/v1mm_v2PrecomputePolicy",
+          "title": "precomputed quote retreat 처리 정책"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "title": "호가 깊이 (변경 시에만 Some)"
         },
         "pricingSourceLiquidityImbalanceGuardState": {
-          "$ref": "#/definitions/v1lpPricingSourceLiquidityImbalanceGuardState",
+          "$ref": "#/definitions/v1mm_v2PricingSourceLiquidityImbalanceGuardState",
           "title": "pricing source 선물 1호가 잔량 imbalance guard 상태 (변경 시에만 Some)"
         }
       },
-      "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
+      "title": "ETF MM v2 상태 업데이트 메시지 (변화된 필드만 포함)"
     },
-    "lpListEtfLpStatusesResponse": {
+    "mm_v2ListEtfMmV2StatusesResponse": {
       "type": "object",
       "properties": {
-        "etfLpStatuses": {
+        "etfMmV2Statuses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/lpEtfLpStatus"
-          },
-          "title": "ETF 목록"
+            "$ref": "#/definitions/mm_v2EtfMmV2Status"
+          }
         },
         "nextPageToken": {
-          "type": "string",
-          "title": "다음 페이지 토큰"
+          "type": "string"
         }
       }
     },
-    "lpListEtfLpsResponse": {
+    "mm_v2ListEtfMmV2sResponse": {
       "type": "object",
       "properties": {
-        "etfLps": {
+        "etfMmV2s": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/lpEtfLp"
-          },
-          "title": "ETF 목록"
+            "$ref": "#/definitions/mm_v2EtfMmV2"
+          }
         },
         "nextPageToken": {
-          "type": "string",
-          "title": "다음 페이지 토큰"
+          "type": "string"
         }
       }
     },
-    "lpLpPricing": {
+    "mm_v2MmV2Mode": {
+      "type": "string",
+      "enum": [
+        "MM_V2_MODE_UNSPECIFIED",
+        "MM_V2_MODE_MOMENTUM",
+        "MM_V2_MODE_EXPOSURE_BALANCE",
+        "MM_V2_MODE_NEUTRAL"
+      ],
+      "default": "MM_V2_MODE_UNSPECIFIED",
+      "description": "- MM_V2_MODE_MOMENTUM: 선물 모멘텀 추종 모드 (deadband 이상의 모멘텀 감지 시)\n - MM_V2_MODE_EXPOSURE_BALANCE: 누적 노출 균형 모드 (모멘텀 비활성 + 순포지션이 trigger 초과 시)\n - MM_V2_MODE_NEUTRAL: 중립 모드 (모멘텀/ExposureSkew 모두 비활성)",
+      "title": "MM v2 운영 모드\n우선순위: Momentum \u003e ExposureBalance \u003e Neutral"
+    },
+    "mm_v2MmV2Pricing": {
       "type": "object",
       "properties": {
         "etfAskQuote": {
@@ -1105,54 +1132,58 @@
           "type": "string"
         },
         "etfAskNav": {
-          "type": "string",
-          "title": "ETF NAV (원 단위)"
+          "type": "string"
         },
         "etfBidNav": {
           "type": "string"
         }
       },
-      "title": "LP 가격 정보"
+      "title": "MM v2 가격 정보"
     },
-    "lpPositionAdjustmentStrategy": {
-      "type": "string",
-      "enum": [
-        "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
-        "POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE",
-        "POSITION_ADJUSTMENT_STRATEGY_TURNOVER",
-        "POSITION_ADJUSTMENT_STRATEGY_ALL"
-      ],
-      "default": "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
-      "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
-      "title": "순매매량 기반 조정 전략"
-    },
-    "lpStartEtfLpResponse": {
+    "mm_v2StartEtfMmV2Response": {
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/lpEtfLpStatus",
-          "title": "LP 상태"
+          "$ref": "#/definitions/mm_v2EtfMmV2Status"
         },
         "message": {
-          "type": "string",
-          "title": "메시지"
+          "type": "string"
         }
       },
-      "title": "ETF LP 시작 응답"
+      "title": "ETF MM v2 시작 응답"
     },
-    "lpStopEtfLpResponse": {
+    "mm_v2StopEtfMmV2Response": {
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/lpEtfLpStatus",
-          "title": "LP 상태"
+          "$ref": "#/definitions/mm_v2EtfMmV2Status"
         },
         "message": {
-          "type": "string",
-          "title": "메시지"
+          "type": "string"
         }
       },
-      "title": "ETF LP 중지 응답"
+      "title": "ETF MM v2 중지 응답"
+    },
+    "mm_v2UpdateEtfMmV2ExposureSkewFields": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "triggerQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limitQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxSkewTicks": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ExposureSkew 설정 업데이트 필드"
     },
     "protobufAny": {
       "type": "object",
@@ -1181,26 +1212,23 @@
         }
       }
     },
-    "v1lpClearUserOrderBookResponse": {
+    "v1mm_v2ClearUserOrderBookResponse": {
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/lpEtfLpStatus",
-          "title": "LP 상태"
+          "$ref": "#/definitions/mm_v2EtfMmV2Status"
         },
         "message": {
-          "type": "string",
-          "title": "메시지"
+          "type": "string"
         },
         "clearedCount": {
           "type": "integer",
-          "format": "int32",
-          "title": "비워진 주문 갯수 (bids + asks)"
+          "format": "int32"
         }
       },
       "title": "사용자 주문 오더북 강제 비우기 응답"
     },
-    "v1lpFillStatistics": {
+    "v1mm_v2FillStatistics": {
       "type": "object",
       "properties": {
         "buyFilledQuantity": {
@@ -1224,7 +1252,7 @@
       },
       "title": "ETF 체결 통계 (매수/매도 체결량 및 평균 단가)"
     },
-    "v1lpPrecomputePolicy": {
+    "v1mm_v2PrecomputePolicy": {
       "type": "string",
       "enum": [
         "PRECOMPUTE_POLICY_UNSPECIFIED",
@@ -1233,10 +1261,10 @@
         "PRECOMPUTE_POLICY_ONE_TO_MANY"
       ],
       "default": "PRECOMPUTE_POLICY_UNSPECIFIED",
-      "description": "- PRECOMPUTE_POLICY_ONE_TO_ONE: 선물 1틱 ↔ ETF 1틱 (1:1 대응). 빠른 추격 LP.\nprecompute 시나리오 경우의 수 축소를 위한 최적화 적용:\n  - depth 초과 / 역방향 시 cancel-all + slowpath refill\n  - 체결로 슬롯 빈 상태에서 tick=0이면 refill 안 함\n - PRECOMPUTE_POLICY_MANY_TO_ONE: 선물 N틱 ↔ ETF 1틱 (N:1 대응, N≥3). 정석 LP. 항상 정확한 호가 유지:\n  - 같은 방향 후퇴 / 역방향은 amend로 정정 (cancel 없음)\n  - depth 초과(드문 케이스)는 cancel-all만\n  - 체결로 슬롯 빈 상태에서 tick=0이면 즉시 fill-gap refill\n - PRECOMPUTE_POLICY_ONE_TO_MANY: 선물 1틱 ↔ ETF N틱 (1:N 대응). 고가 레버리지 ETF용.\n  - 단일측 ±2/±3틱 8개 시나리오를 하드코딩 precompute\n  - 그 외 케이스는 slow refill",
+      "description": "- PRECOMPUTE_POLICY_ONE_TO_ONE: 선물 1틱 ↔ ETF 1틱 (1:1 대응). 빠른 추격.\n - PRECOMPUTE_POLICY_MANY_TO_ONE: 선물 N틱 ↔ ETF 1틱 (N:1 대응, N≥3). 정석. 항상 정확한 호가 유지.\n - PRECOMPUTE_POLICY_ONE_TO_MANY: 선물 1틱 ↔ ETF N틱 (1:N 대응). 고가 레버리지 ETF용.",
       "title": "precomputed quote retreat 처리 정책"
     },
-    "v1lpPricingSourceLiquidityImbalanceGuardState": {
+    "v1mm_v2PricingSourceLiquidityImbalanceGuardState": {
       "type": "string",
       "enum": [
         "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED",
@@ -1245,9 +1273,9 @@
         "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_ASK_THIN"
       ],
       "default": "PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED",
-      "title": "pricing source 선물 1호가 잔량 imbalance guard 상태\nNORMAL: 매수/매도 1호가 잔량 균형 상태\nBID_THIN: source 선물 매수 1호가 잔량이 매도 1호가 잔량의 30% 이하 (매수 side 얇음)\nASK_THIN: source 선물 매도 1호가 잔량이 매수 1호가 잔량의 30% 이하 (매도 side 얇음)"
+      "title": "pricing source 선물 1호가 잔량 imbalance guard 상태"
     },
-    "v1lpUserOrderbookData": {
+    "v1mm_v2UserOrderbookData": {
       "type": "object",
       "properties": {
         "bidPrices": {
@@ -1255,7 +1283,7 @@
           "items": {
             "type": "string"
           },
-          "title": "매수 호가 (10단계, AIP-144)"
+          "title": "매수 호가 (10단계)"
         },
         "askPrices": {
           "type": "array",
