@@ -97,8 +97,8 @@ service FuturesLpService {
 
 // 선물 LP 설정
 message FuturesLp {
-  reserved 5;
-  reserved "carry";
+  reserved 5, 16, 17, 18;
+  reserved "carry", "momentum_enabled", "momentum_window", "momentum_sensitivity";
 
   // 선물 종목 심볼
   string future_symbol = 1;
@@ -142,15 +142,6 @@ message FuturesLp {
 
   // 매도 호가 조정값
   optional double ask_adjustment = 15;
-
-  // 모멘텀 활성화 여부
-  optional bool momentum_enabled = 16;
-
-  // 모멘텀 윈도우 크기
-  optional uint32 momentum_window = 17;
-
-  // 모멘텀 민감도
-  optional double momentum_sensitivity = 18;
 
   // 매수/매도 수량 한도
   optional FuturesLpQuantityLimit quantity_limit = 19;
@@ -212,8 +203,8 @@ message FuturesLpPricing {
 
 // 선물 LP 상태
 message FuturesLpStatus {
-  reserved 9;
-  reserved "carry";
+  reserved 9, 14, 15, 16, 17, 18;
+  reserved "carry", "momentum_enabled", "momentum_window", "momentum_sensitivity", "momentum_bid_adjustment", "momentum_ask_adjustment";
 
   // 선물 종목 심볼
   string future_symbol = 1;
@@ -252,21 +243,6 @@ message FuturesLpStatus {
   // 매도 호가 조정값
   optional double ask_adjustment = 13;
 
-  // 모멘텀 활성화 여부
-  optional bool momentum_enabled = 14;
-
-  // 모멘텀 윈도우 크기
-  optional uint32 momentum_window = 15;
-
-  // 모멘텀 민감도
-  optional double momentum_sensitivity = 16;
-
-  // 런타임 계산된 모멘텀 매수 호가 조정값
-  optional double momentum_bid_adjustment = 17;
-
-  // 런타임 계산된 모멘텀 매도 호가 조정값
-  optional double momentum_ask_adjustment = 18;
-
   // 매수 주문 수량 (계약 수)
   int64 bid_quantity = 19;
 
@@ -288,8 +264,8 @@ message FuturesLpStatus {
 
 // 선물 LP 상태 업데이트 (변경된 필드만 포함)
 message FuturesLpStatusUpdate {
-  reserved 6;
-  reserved "carry";
+  reserved 6, 14, 15, 16, 17, 18;
+  reserved "carry", "momentum_enabled", "momentum_window", "momentum_sensitivity", "momentum_bid_adjustment", "momentum_ask_adjustment";
 
   // 선물 종목 심볼
   string future_symbol = 1;
@@ -326,21 +302,6 @@ message FuturesLpStatusUpdate {
 
   // 자동 offset 조정 설정 (변경 시에만 Some)
   optional kdo.v1.lp.EtfLpOffset offset = 13;
-
-  // 모멘텀 활성화 여부 (변경 시에만 Some)
-  optional bool momentum_enabled = 14;
-
-  // 모멘텀 윈도우 크기 (변경 시에만 Some)
-  optional uint32 momentum_window = 15;
-
-  // 모멘텀 민감도 (변경 시에만 Some)
-  optional double momentum_sensitivity = 16;
-
-  // 런타임 계산된 모멘텀 매수 호가 조정값 (변경 시에만 Some)
-  optional double momentum_bid_adjustment = 17;
-
-  // 런타임 계산된 모멘텀 매도 호가 조정값 (변경 시에만 Some)
-  optional double momentum_ask_adjustment = 18;
 
   // 매수/매도 수량 한도 (변경 시에만 Some)
   optional FuturesLpQuantityLimit quantity_limit = 19;
@@ -446,8 +407,8 @@ message ListFuturesLpsResponse {
 
 // UpdateFuturesLp
 message UpdateFuturesLpRequest {
-  reserved 3;
-  reserved "carry";
+  reserved 3, 12, 13, 14;
+  reserved "carry", "momentum_enabled", "momentum_window", "momentum_sensitivity";
 
   // 선물 종목 심볼
   string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
@@ -480,15 +441,6 @@ message UpdateFuturesLpRequest {
 
   // 자동 offset 조정 설정
   optional kdo.v1.lp.EtfLpOffset offset = 11;
-
-  // 모멘텀 활성화 여부
-  optional bool momentum_enabled = 12;
-
-  // 모멘텀 윈도우 크기
-  optional uint32 momentum_window = 13;
-
-  // 모멘텀 민감도
-  optional double momentum_sensitivity = 14;
 
   // 매수/매도 수량 한도
   optional FuturesLpQuantityLimit quantity_limit = 15;

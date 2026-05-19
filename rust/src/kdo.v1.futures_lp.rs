@@ -49,15 +49,6 @@ pub struct FuturesLp {
     /// 매도 호가 조정값
     #[prost(double, optional, tag="15")]
     pub ask_adjustment: ::core::option::Option<f64>,
-    /// 모멘텀 활성화 여부
-    #[prost(bool, optional, tag="16")]
-    pub momentum_enabled: ::core::option::Option<bool>,
-    /// 모멘텀 윈도우 크기
-    #[prost(uint32, optional, tag="17")]
-    pub momentum_window: ::core::option::Option<u32>,
-    /// 모멘텀 민감도
-    #[prost(double, optional, tag="18")]
-    pub momentum_sensitivity: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="19")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
@@ -150,21 +141,6 @@ pub struct FuturesLpStatus {
     /// 매도 호가 조정값
     #[prost(double, optional, tag="13")]
     pub ask_adjustment: ::core::option::Option<f64>,
-    /// 모멘텀 활성화 여부
-    #[prost(bool, optional, tag="14")]
-    pub momentum_enabled: ::core::option::Option<bool>,
-    /// 모멘텀 윈도우 크기
-    #[prost(uint32, optional, tag="15")]
-    pub momentum_window: ::core::option::Option<u32>,
-    /// 모멘텀 민감도
-    #[prost(double, optional, tag="16")]
-    pub momentum_sensitivity: ::core::option::Option<f64>,
-    /// 런타임 계산된 모멘텀 매수 호가 조정값
-    #[prost(double, optional, tag="17")]
-    pub momentum_bid_adjustment: ::core::option::Option<f64>,
-    /// 런타임 계산된 모멘텀 매도 호가 조정값
-    #[prost(double, optional, tag="18")]
-    pub momentum_ask_adjustment: ::core::option::Option<f64>,
     /// 매수 주문 수량 (계약 수)
     #[prost(int64, tag="19")]
     pub bid_quantity: i64,
@@ -224,21 +200,6 @@ pub struct FuturesLpStatusUpdate {
     /// 자동 offset 조정 설정 (변경 시에만 Some)
     #[prost(message, optional, tag="13")]
     pub offset: ::core::option::Option<super::lp::EtfLpOffset>,
-    /// 모멘텀 활성화 여부 (변경 시에만 Some)
-    #[prost(bool, optional, tag="14")]
-    pub momentum_enabled: ::core::option::Option<bool>,
-    /// 모멘텀 윈도우 크기 (변경 시에만 Some)
-    #[prost(uint32, optional, tag="15")]
-    pub momentum_window: ::core::option::Option<u32>,
-    /// 모멘텀 민감도 (변경 시에만 Some)
-    #[prost(double, optional, tag="16")]
-    pub momentum_sensitivity: ::core::option::Option<f64>,
-    /// 런타임 계산된 모멘텀 매수 호가 조정값 (변경 시에만 Some)
-    #[prost(double, optional, tag="17")]
-    pub momentum_bid_adjustment: ::core::option::Option<f64>,
-    /// 런타임 계산된 모멘텀 매도 호가 조정값 (변경 시에만 Some)
-    #[prost(double, optional, tag="18")]
-    pub momentum_ask_adjustment: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도 (변경 시에만 Some)
     #[prost(message, optional, tag="19")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
@@ -391,15 +352,6 @@ pub struct UpdateFuturesLpRequest {
     /// 자동 offset 조정 설정
     #[prost(message, optional, tag="11")]
     pub offset: ::core::option::Option<super::lp::EtfLpOffset>,
-    /// 모멘텀 활성화 여부
-    #[prost(bool, optional, tag="12")]
-    pub momentum_enabled: ::core::option::Option<bool>,
-    /// 모멘텀 윈도우 크기
-    #[prost(uint32, optional, tag="13")]
-    pub momentum_window: ::core::option::Option<u32>,
-    /// 모멘텀 민감도
-    #[prost(double, optional, tag="14")]
-    pub momentum_sensitivity: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="15")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,

@@ -39,9 +39,6 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.bool? enabled,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
-    $core.bool? momentumEnabled,
-    $core.int? momentumWindow,
-    $core.double? momentumSensitivity,
     FuturesLpQuantityLimit? quantityLimit,
     $core.String? etfPricing,
   }) {
@@ -60,9 +57,6 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (enabled != null) result.enabled = enabled;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
-    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
-    if (momentumWindow != null) result.momentumWindow = momentumWindow;
-    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (etfPricing != null) result.etfPricing = etfPricing;
     return result;
@@ -88,9 +82,6 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..aOB(13, _omitFieldNames ? '' : 'enabled')
     ..a<$core.double>(14, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(15, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
-    ..aOB(16, _omitFieldNames ? '' : 'momentumEnabled')
-    ..a<$core.int>(17, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
-    ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<FuturesLpQuantityLimit>(19, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..aOS(20, _omitFieldNames ? '' : 'etfPricing')
     ..hasRequiredFields = false
@@ -256,55 +247,25 @@ class FuturesLp extends $pb.GeneratedMessage {
   @$pb.TagNumber(15)
   void clearAskAdjustment() => $_clearField(15);
 
-  /// 모멘텀 활성화 여부
-  @$pb.TagNumber(16)
-  $core.bool get momentumEnabled => $_getBF(14);
-  @$pb.TagNumber(16)
-  set momentumEnabled($core.bool value) => $_setBool(14, value);
-  @$pb.TagNumber(16)
-  $core.bool hasMomentumEnabled() => $_has(14);
-  @$pb.TagNumber(16)
-  void clearMomentumEnabled() => $_clearField(16);
-
-  /// 모멘텀 윈도우 크기
-  @$pb.TagNumber(17)
-  $core.int get momentumWindow => $_getIZ(15);
-  @$pb.TagNumber(17)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(15, value);
-  @$pb.TagNumber(17)
-  $core.bool hasMomentumWindow() => $_has(15);
-  @$pb.TagNumber(17)
-  void clearMomentumWindow() => $_clearField(17);
-
-  /// 모멘텀 민감도
-  @$pb.TagNumber(18)
-  $core.double get momentumSensitivity => $_getN(16);
-  @$pb.TagNumber(18)
-  set momentumSensitivity($core.double value) => $_setDouble(16, value);
-  @$pb.TagNumber(18)
-  $core.bool hasMomentumSensitivity() => $_has(16);
-  @$pb.TagNumber(18)
-  void clearMomentumSensitivity() => $_clearField(18);
-
   /// 매수/매도 수량 한도
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(17);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(14);
   @$pb.TagNumber(19)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(19, value);
   @$pb.TagNumber(19)
-  $core.bool hasQuantityLimit() => $_has(17);
+  $core.bool hasQuantityLimit() => $_has(14);
   @$pb.TagNumber(19)
   void clearQuantityLimit() => $_clearField(19);
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(14);
 
   /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
   @$pb.TagNumber(20)
-  $core.String get etfPricing => $_getSZ(18);
+  $core.String get etfPricing => $_getSZ(15);
   @$pb.TagNumber(20)
-  set etfPricing($core.String value) => $_setString(18, value);
+  set etfPricing($core.String value) => $_setString(15, value);
   @$pb.TagNumber(20)
-  $core.bool hasEtfPricing() => $_has(18);
+  $core.bool hasEtfPricing() => $_has(15);
   @$pb.TagNumber(20)
   void clearEtfPricing() => $_clearField(20);
 }
@@ -528,11 +489,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     $core.double? bidBasis,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
-    $core.bool? momentumEnabled,
-    $core.int? momentumWindow,
-    $core.double? momentumSensitivity,
-    $core.double? momentumBidAdjustment,
-    $core.double? momentumAskAdjustment,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
     $1.EtfLpOffset? offset,
@@ -553,11 +509,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
-    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
-    if (momentumWindow != null) result.momentumWindow = momentumWindow;
-    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
-    if (momentumBidAdjustment != null) result.momentumBidAdjustment = momentumBidAdjustment;
-    if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (offset != null) result.offset = offset;
@@ -585,11 +536,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     ..a<$core.double>(11, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(12, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
-    ..aOB(14, _omitFieldNames ? '' : 'momentumEnabled')
-    ..a<$core.int>(15, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
-    ..a<$core.double>(16, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
-    ..a<$core.double>(17, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
-    ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
     ..aInt64(19, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(20, _omitFieldNames ? '' : 'askQuantity')
     ..aOM<$1.EtfLpOffset>(21, _omitFieldNames ? '' : 'offset', subBuilder: $1.EtfLpOffset.create)
@@ -743,117 +689,67 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearAskAdjustment() => $_clearField(13);
 
-  /// 모멘텀 활성화 여부
-  @$pb.TagNumber(14)
-  $core.bool get momentumEnabled => $_getBF(12);
-  @$pb.TagNumber(14)
-  set momentumEnabled($core.bool value) => $_setBool(12, value);
-  @$pb.TagNumber(14)
-  $core.bool hasMomentumEnabled() => $_has(12);
-  @$pb.TagNumber(14)
-  void clearMomentumEnabled() => $_clearField(14);
-
-  /// 모멘텀 윈도우 크기
-  @$pb.TagNumber(15)
-  $core.int get momentumWindow => $_getIZ(13);
-  @$pb.TagNumber(15)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(13, value);
-  @$pb.TagNumber(15)
-  $core.bool hasMomentumWindow() => $_has(13);
-  @$pb.TagNumber(15)
-  void clearMomentumWindow() => $_clearField(15);
-
-  /// 모멘텀 민감도
-  @$pb.TagNumber(16)
-  $core.double get momentumSensitivity => $_getN(14);
-  @$pb.TagNumber(16)
-  set momentumSensitivity($core.double value) => $_setDouble(14, value);
-  @$pb.TagNumber(16)
-  $core.bool hasMomentumSensitivity() => $_has(14);
-  @$pb.TagNumber(16)
-  void clearMomentumSensitivity() => $_clearField(16);
-
-  /// 런타임 계산된 모멘텀 매수 호가 조정값
-  @$pb.TagNumber(17)
-  $core.double get momentumBidAdjustment => $_getN(15);
-  @$pb.TagNumber(17)
-  set momentumBidAdjustment($core.double value) => $_setDouble(15, value);
-  @$pb.TagNumber(17)
-  $core.bool hasMomentumBidAdjustment() => $_has(15);
-  @$pb.TagNumber(17)
-  void clearMomentumBidAdjustment() => $_clearField(17);
-
-  /// 런타임 계산된 모멘텀 매도 호가 조정값
-  @$pb.TagNumber(18)
-  $core.double get momentumAskAdjustment => $_getN(16);
-  @$pb.TagNumber(18)
-  set momentumAskAdjustment($core.double value) => $_setDouble(16, value);
-  @$pb.TagNumber(18)
-  $core.bool hasMomentumAskAdjustment() => $_has(16);
-  @$pb.TagNumber(18)
-  void clearMomentumAskAdjustment() => $_clearField(18);
-
   /// 매수 주문 수량 (계약 수)
   @$pb.TagNumber(19)
-  $fixnum.Int64 get bidQuantity => $_getI64(17);
+  $fixnum.Int64 get bidQuantity => $_getI64(12);
   @$pb.TagNumber(19)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(17, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(12, value);
   @$pb.TagNumber(19)
-  $core.bool hasBidQuantity() => $_has(17);
+  $core.bool hasBidQuantity() => $_has(12);
   @$pb.TagNumber(19)
   void clearBidQuantity() => $_clearField(19);
 
   /// 매도 주문 수량 (계약 수)
   @$pb.TagNumber(20)
-  $fixnum.Int64 get askQuantity => $_getI64(18);
+  $fixnum.Int64 get askQuantity => $_getI64(13);
   @$pb.TagNumber(20)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(18, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(13, value);
   @$pb.TagNumber(20)
-  $core.bool hasAskQuantity() => $_has(18);
+  $core.bool hasAskQuantity() => $_has(13);
   @$pb.TagNumber(20)
   void clearAskQuantity() => $_clearField(20);
 
   /// 자동 offset 조정 설정 (런타임 상태 포함)
   @$pb.TagNumber(21)
-  $1.EtfLpOffset get offset => $_getN(19);
+  $1.EtfLpOffset get offset => $_getN(14);
   @$pb.TagNumber(21)
   set offset($1.EtfLpOffset value) => $_setField(21, value);
   @$pb.TagNumber(21)
-  $core.bool hasOffset() => $_has(19);
+  $core.bool hasOffset() => $_has(14);
   @$pb.TagNumber(21)
   void clearOffset() => $_clearField(21);
   @$pb.TagNumber(21)
-  $1.EtfLpOffset ensureOffset() => $_ensure(19);
+  $1.EtfLpOffset ensureOffset() => $_ensure(14);
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(22)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(20);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(15);
   @$pb.TagNumber(22)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(22, value);
   @$pb.TagNumber(22)
-  $core.bool hasQuantityLimit() => $_has(20);
+  $core.bool hasQuantityLimit() => $_has(15);
   @$pb.TagNumber(22)
   void clearQuantityLimit() => $_clearField(22);
   @$pb.TagNumber(22)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(20);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(15);
 
   /// 호가 깊이
   @$pb.TagNumber(23)
-  $core.int get depth => $_getIZ(21);
+  $core.int get depth => $_getIZ(16);
   @$pb.TagNumber(23)
-  set depth($core.int value) => $_setUnsignedInt32(21, value);
+  set depth($core.int value) => $_setUnsignedInt32(16, value);
   @$pb.TagNumber(23)
-  $core.bool hasDepth() => $_has(21);
+  $core.bool hasDepth() => $_has(16);
   @$pb.TagNumber(23)
   void clearDepth() => $_clearField(23);
 
   /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
   @$pb.TagNumber(24)
-  $core.String get etfPricing => $_getSZ(22);
+  $core.String get etfPricing => $_getSZ(17);
   @$pb.TagNumber(24)
-  set etfPricing($core.String value) => $_setString(22, value);
+  set etfPricing($core.String value) => $_setString(17, value);
   @$pb.TagNumber(24)
-  $core.bool hasEtfPricing() => $_has(22);
+  $core.bool hasEtfPricing() => $_has(17);
   @$pb.TagNumber(24)
   void clearEtfPricing() => $_clearField(24);
 }
@@ -873,11 +769,6 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
     $1.EtfLpOffset? offset,
-    $core.bool? momentumEnabled,
-    $core.int? momentumWindow,
-    $core.double? momentumSensitivity,
-    $core.double? momentumBidAdjustment,
-    $core.double? momentumAskAdjustment,
     FuturesLpQuantityLimit? quantityLimit,
     $core.int? depth,
     $core.String? etfPricing,
@@ -895,11 +786,6 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
     if (offset != null) result.offset = offset;
-    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
-    if (momentumWindow != null) result.momentumWindow = momentumWindow;
-    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
-    if (momentumBidAdjustment != null) result.momentumBidAdjustment = momentumBidAdjustment;
-    if (momentumAskAdjustment != null) result.momentumAskAdjustment = momentumAskAdjustment;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (depth != null) result.depth = depth;
     if (etfPricing != null) result.etfPricing = etfPricing;
@@ -924,11 +810,6 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     ..aInt64(11, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(12, _omitFieldNames ? '' : 'askQuantity')
     ..aOM<$1.EtfLpOffset>(13, _omitFieldNames ? '' : 'offset', subBuilder: $1.EtfLpOffset.create)
-    ..aOB(14, _omitFieldNames ? '' : 'momentumEnabled')
-    ..a<$core.int>(15, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
-    ..a<$core.double>(16, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
-    ..a<$core.double>(17, _omitFieldNames ? '' : 'momentumBidAdjustment', $pb.PbFieldType.OD)
-    ..a<$core.double>(18, _omitFieldNames ? '' : 'momentumAskAdjustment', $pb.PbFieldType.OD)
     ..aOM<FuturesLpQuantityLimit>(19, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..a<$core.int>(20, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aOS(21, _omitFieldNames ? '' : 'etfPricing')
@@ -1078,85 +959,35 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   $1.EtfLpOffset ensureOffset() => $_ensure(11);
 
-  /// 모멘텀 활성화 여부 (변경 시에만 Some)
-  @$pb.TagNumber(14)
-  $core.bool get momentumEnabled => $_getBF(12);
-  @$pb.TagNumber(14)
-  set momentumEnabled($core.bool value) => $_setBool(12, value);
-  @$pb.TagNumber(14)
-  $core.bool hasMomentumEnabled() => $_has(12);
-  @$pb.TagNumber(14)
-  void clearMomentumEnabled() => $_clearField(14);
-
-  /// 모멘텀 윈도우 크기 (변경 시에만 Some)
-  @$pb.TagNumber(15)
-  $core.int get momentumWindow => $_getIZ(13);
-  @$pb.TagNumber(15)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(13, value);
-  @$pb.TagNumber(15)
-  $core.bool hasMomentumWindow() => $_has(13);
-  @$pb.TagNumber(15)
-  void clearMomentumWindow() => $_clearField(15);
-
-  /// 모멘텀 민감도 (변경 시에만 Some)
-  @$pb.TagNumber(16)
-  $core.double get momentumSensitivity => $_getN(14);
-  @$pb.TagNumber(16)
-  set momentumSensitivity($core.double value) => $_setDouble(14, value);
-  @$pb.TagNumber(16)
-  $core.bool hasMomentumSensitivity() => $_has(14);
-  @$pb.TagNumber(16)
-  void clearMomentumSensitivity() => $_clearField(16);
-
-  /// 런타임 계산된 모멘텀 매수 호가 조정값 (변경 시에만 Some)
-  @$pb.TagNumber(17)
-  $core.double get momentumBidAdjustment => $_getN(15);
-  @$pb.TagNumber(17)
-  set momentumBidAdjustment($core.double value) => $_setDouble(15, value);
-  @$pb.TagNumber(17)
-  $core.bool hasMomentumBidAdjustment() => $_has(15);
-  @$pb.TagNumber(17)
-  void clearMomentumBidAdjustment() => $_clearField(17);
-
-  /// 런타임 계산된 모멘텀 매도 호가 조정값 (변경 시에만 Some)
-  @$pb.TagNumber(18)
-  $core.double get momentumAskAdjustment => $_getN(16);
-  @$pb.TagNumber(18)
-  set momentumAskAdjustment($core.double value) => $_setDouble(16, value);
-  @$pb.TagNumber(18)
-  $core.bool hasMomentumAskAdjustment() => $_has(16);
-  @$pb.TagNumber(18)
-  void clearMomentumAskAdjustment() => $_clearField(18);
-
   /// 매수/매도 수량 한도 (변경 시에만 Some)
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(17);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(12);
   @$pb.TagNumber(19)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(19, value);
   @$pb.TagNumber(19)
-  $core.bool hasQuantityLimit() => $_has(17);
+  $core.bool hasQuantityLimit() => $_has(12);
   @$pb.TagNumber(19)
   void clearQuantityLimit() => $_clearField(19);
   @$pb.TagNumber(19)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(12);
 
   /// 호가 깊이 (변경 시에만 Some)
   @$pb.TagNumber(20)
-  $core.int get depth => $_getIZ(18);
+  $core.int get depth => $_getIZ(13);
   @$pb.TagNumber(20)
-  set depth($core.int value) => $_setUnsignedInt32(18, value);
+  set depth($core.int value) => $_setUnsignedInt32(13, value);
   @$pb.TagNumber(20)
-  $core.bool hasDepth() => $_has(18);
+  $core.bool hasDepth() => $_has(13);
   @$pb.TagNumber(20)
   void clearDepth() => $_clearField(20);
 
   /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
   @$pb.TagNumber(21)
-  $core.String get etfPricing => $_getSZ(19);
+  $core.String get etfPricing => $_getSZ(14);
   @$pb.TagNumber(21)
-  set etfPricing($core.String value) => $_setString(19, value);
+  set etfPricing($core.String value) => $_setString(14, value);
   @$pb.TagNumber(21)
-  $core.bool hasEtfPricing() => $_has(19);
+  $core.bool hasEtfPricing() => $_has(14);
   @$pb.TagNumber(21)
   void clearEtfPricing() => $_clearField(21);
 }
@@ -1652,9 +1483,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.double? askBasis,
     $core.int? depth,
     $1.EtfLpOffset? offset,
-    $core.bool? momentumEnabled,
-    $core.int? momentumWindow,
-    $core.double? momentumSensitivity,
     FuturesLpQuantityLimit? quantityLimit,
     $core.String? etfPricing,
   }) {
@@ -1669,9 +1497,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (askBasis != null) result.askBasis = askBasis;
     if (depth != null) result.depth = depth;
     if (offset != null) result.offset = offset;
-    if (momentumEnabled != null) result.momentumEnabled = momentumEnabled;
-    if (momentumWindow != null) result.momentumWindow = momentumWindow;
-    if (momentumSensitivity != null) result.momentumSensitivity = momentumSensitivity;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (etfPricing != null) result.etfPricing = etfPricing;
     return result;
@@ -1693,9 +1518,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(9, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.int>(10, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aOM<$1.EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: $1.EtfLpOffset.create)
-    ..aOB(12, _omitFieldNames ? '' : 'momentumEnabled')
-    ..a<$core.int>(13, _omitFieldNames ? '' : 'momentumWindow', $pb.PbFieldType.OU3)
-    ..a<$core.double>(14, _omitFieldNames ? '' : 'momentumSensitivity', $pb.PbFieldType.OD)
     ..aOM<FuturesLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..aOS(16, _omitFieldNames ? '' : 'etfPricing')
     ..hasRequiredFields = false
@@ -1820,55 +1642,25 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $1.EtfLpOffset ensureOffset() => $_ensure(9);
 
-  /// 모멘텀 활성화 여부
-  @$pb.TagNumber(12)
-  $core.bool get momentumEnabled => $_getBF(10);
-  @$pb.TagNumber(12)
-  set momentumEnabled($core.bool value) => $_setBool(10, value);
-  @$pb.TagNumber(12)
-  $core.bool hasMomentumEnabled() => $_has(10);
-  @$pb.TagNumber(12)
-  void clearMomentumEnabled() => $_clearField(12);
-
-  /// 모멘텀 윈도우 크기
-  @$pb.TagNumber(13)
-  $core.int get momentumWindow => $_getIZ(11);
-  @$pb.TagNumber(13)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(11, value);
-  @$pb.TagNumber(13)
-  $core.bool hasMomentumWindow() => $_has(11);
-  @$pb.TagNumber(13)
-  void clearMomentumWindow() => $_clearField(13);
-
-  /// 모멘텀 민감도
-  @$pb.TagNumber(14)
-  $core.double get momentumSensitivity => $_getN(12);
-  @$pb.TagNumber(14)
-  set momentumSensitivity($core.double value) => $_setDouble(12, value);
-  @$pb.TagNumber(14)
-  $core.bool hasMomentumSensitivity() => $_has(12);
-  @$pb.TagNumber(14)
-  void clearMomentumSensitivity() => $_clearField(14);
-
   /// 매수/매도 수량 한도
   @$pb.TagNumber(15)
-  FuturesLpQuantityLimit get quantityLimit => $_getN(13);
+  FuturesLpQuantityLimit get quantityLimit => $_getN(10);
   @$pb.TagNumber(15)
   set quantityLimit(FuturesLpQuantityLimit value) => $_setField(15, value);
   @$pb.TagNumber(15)
-  $core.bool hasQuantityLimit() => $_has(13);
+  $core.bool hasQuantityLimit() => $_has(10);
   @$pb.TagNumber(15)
   void clearQuantityLimit() => $_clearField(15);
   @$pb.TagNumber(15)
-  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(13);
+  FuturesLpQuantityLimit ensureQuantityLimit() => $_ensure(10);
 
   /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
   @$pb.TagNumber(16)
-  $core.String get etfPricing => $_getSZ(14);
+  $core.String get etfPricing => $_getSZ(11);
   @$pb.TagNumber(16)
-  set etfPricing($core.String value) => $_setString(14, value);
+  set etfPricing($core.String value) => $_setString(11, value);
   @$pb.TagNumber(16)
-  $core.bool hasEtfPricing() => $_has(14);
+  $core.bool hasEtfPricing() => $_has(11);
   @$pb.TagNumber(16)
   void clearEtfPricing() => $_clearField(16);
 }

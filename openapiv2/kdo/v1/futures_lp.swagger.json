@@ -237,20 +237,6 @@
                   "$ref": "#/definitions/lpEtfLpOffset",
                   "title": "자동 offset 조정 설정"
                 },
-                "momentumEnabled": {
-                  "type": "boolean",
-                  "title": "모멘텀 활성화 여부"
-                },
-                "momentumWindow": {
-                  "type": "integer",
-                  "format": "int64",
-                  "title": "모멘텀 윈도우 크기"
-                },
-                "momentumSensitivity": {
-                  "type": "number",
-                  "format": "double",
-                  "title": "모멘텀 민감도"
-                },
                 "quantityLimit": {
                   "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
                   "title": "매수/매도 수량 한도"
@@ -621,20 +607,6 @@
           "format": "double",
           "title": "매도 호가 조정값"
         },
-        "momentumEnabled": {
-          "type": "boolean",
-          "title": "모멘텀 활성화 여부"
-        },
-        "momentumWindow": {
-          "type": "integer",
-          "format": "int64",
-          "title": "모멘텀 윈도우 크기"
-        },
-        "momentumSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "모멘텀 민감도"
-        },
         "quantityLimit": {
           "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
           "title": "매수/매도 수량 한도"
@@ -813,30 +785,6 @@
           "format": "double",
           "title": "매도 호가 조정값"
         },
-        "momentumEnabled": {
-          "type": "boolean",
-          "title": "모멘텀 활성화 여부"
-        },
-        "momentumWindow": {
-          "type": "integer",
-          "format": "int64",
-          "title": "모멘텀 윈도우 크기"
-        },
-        "momentumSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "모멘텀 민감도"
-        },
-        "momentumBidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매수 호가 조정값"
-        },
-        "momentumAskAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매도 호가 조정값"
-        },
         "bidQuantity": {
           "type": "string",
           "format": "int64",
@@ -923,30 +871,6 @@
         "offset": {
           "$ref": "#/definitions/lpEtfLpOffset",
           "title": "자동 offset 조정 설정 (변경 시에만 Some)"
-        },
-        "momentumEnabled": {
-          "type": "boolean",
-          "title": "모멘텀 활성화 여부 (변경 시에만 Some)"
-        },
-        "momentumWindow": {
-          "type": "integer",
-          "format": "int64",
-          "title": "모멘텀 윈도우 크기 (변경 시에만 Some)"
-        },
-        "momentumSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "모멘텀 민감도 (변경 시에만 Some)"
-        },
-        "momentumBidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매수 호가 조정값 (변경 시에만 Some)"
-        },
-        "momentumAskAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "런타임 계산된 모멘텀 매도 호가 조정값 (변경 시에만 Some)"
         },
         "quantityLimit": {
           "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",

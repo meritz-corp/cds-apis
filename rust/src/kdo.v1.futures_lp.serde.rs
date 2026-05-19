@@ -55,15 +55,6 @@ impl serde::Serialize for FuturesLp {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLp", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -111,15 +102,6 @@ impl serde::Serialize for FuturesLp {
         if let Some(v) = self.ask_adjustment.as_ref() {
             struct_ser.serialize_field("ask_adjustment", v)?;
         }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window.as_ref() {
-            struct_ser.serialize_field("momentum_window", v)?;
-        }
-        if let Some(v) = self.momentum_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_sensitivity", v)?;
-        }
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
@@ -160,12 +142,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window",
-            "momentumWindow",
-            "momentum_sensitivity",
-            "momentumSensitivity",
             "quantity_limit",
             "quantityLimit",
             "etf_pricing",
@@ -188,9 +164,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             Enabled,
             BidAdjustment,
             AskAdjustment,
-            MomentumEnabled,
-            MomentumWindow,
-            MomentumSensitivity,
             QuantityLimit,
             EtfPricing,
             __SkipField__,
@@ -229,9 +202,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "enabled" => Ok(GeneratedField::Enabled),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
-                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -267,9 +237,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut enabled__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window__ = None;
-                let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
                 let mut etf_pricing__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -376,28 +343,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
-                            }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindow => {
-                            if momentum_window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
-                            }
-                            momentum_window__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumSensitivity => {
-                            if momentum_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
-                            }
-                            momentum_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::QuantityLimit => {
                             if quantity_limit__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("quantityLimit"));
@@ -430,9 +375,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     enabled: enabled__.unwrap_or_default(),
                     bid_adjustment: bid_adjustment__,
                     ask_adjustment: ask_adjustment__,
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window: momentum_window__,
-                    momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
                     etf_pricing: etf_pricing__.unwrap_or_default(),
                 })
@@ -1201,21 +1143,6 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLpStatus", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -1254,21 +1181,6 @@ impl serde::Serialize for FuturesLpStatus {
         }
         if let Some(v) = self.ask_adjustment.as_ref() {
             struct_ser.serialize_field("ask_adjustment", v)?;
-        }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window.as_ref() {
-            struct_ser.serialize_field("momentum_window", v)?;
-        }
-        if let Some(v) = self.momentum_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_sensitivity", v)?;
-        }
-        if let Some(v) = self.momentum_bid_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_bid_adjustment", v)?;
-        }
-        if let Some(v) = self.momentum_ask_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_ask_adjustment", v)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1323,16 +1235,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window",
-            "momentumWindow",
-            "momentum_sensitivity",
-            "momentumSensitivity",
-            "momentum_bid_adjustment",
-            "momentumBidAdjustment",
-            "momentum_ask_adjustment",
-            "momentumAskAdjustment",
             "bid_quantity",
             "bidQuantity",
             "ask_quantity",
@@ -1359,11 +1261,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             BidBasis,
             BidAdjustment,
             AskAdjustment,
-            MomentumEnabled,
-            MomentumWindow,
-            MomentumSensitivity,
-            MomentumBidAdjustment,
-            MomentumAskAdjustment,
             BidQuantity,
             AskQuantity,
             Offset,
@@ -1404,11 +1301,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
-                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
-                            "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
-                            "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             "offset" => Ok(GeneratedField::Offset),
@@ -1446,11 +1338,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                 let mut bid_basis__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window__ = None;
-                let mut momentum_sensitivity__ = None;
-                let mut momentum_bid_adjustment__ = None;
-                let mut momentum_ask_adjustment__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
                 let mut offset__ = None;
@@ -1541,44 +1428,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
-                            }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindow => {
-                            if momentum_window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
-                            }
-                            momentum_window__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumSensitivity => {
-                            if momentum_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
-                            }
-                            momentum_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumBidAdjustment => {
-                            if momentum_bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumBidAdjustment"));
-                            }
-                            momentum_bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumAskAdjustment => {
-                            if momentum_ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumAskAdjustment"));
-                            }
-                            momentum_ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::BidQuantity => {
                             if bid_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidQuantity"));
@@ -1639,11 +1488,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                     bid_basis: bid_basis__.unwrap_or_default(),
                     bid_adjustment: bid_adjustment__,
                     ask_adjustment: ask_adjustment__,
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window: momentum_window__,
-                    momentum_sensitivity: momentum_sensitivity__,
-                    momentum_bid_adjustment: momentum_bid_adjustment__,
-                    momentum_ask_adjustment: momentum_ask_adjustment__,
                     bid_quantity: bid_quantity__.unwrap_or_default(),
                     ask_quantity: ask_quantity__.unwrap_or_default(),
                     offset: offset__,
@@ -1664,21 +1508,6 @@ impl serde::Serialize for FuturesLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         if true {
             len += 1;
         }
@@ -1767,21 +1596,6 @@ impl serde::Serialize for FuturesLpStatusUpdate {
         if let Some(v) = self.offset.as_ref() {
             struct_ser.serialize_field("offset", v)?;
         }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window.as_ref() {
-            struct_ser.serialize_field("momentum_window", v)?;
-        }
-        if let Some(v) = self.momentum_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_sensitivity", v)?;
-        }
-        if let Some(v) = self.momentum_bid_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_bid_adjustment", v)?;
-        }
-        if let Some(v) = self.momentum_ask_adjustment.as_ref() {
-            struct_ser.serialize_field("momentum_ask_adjustment", v)?;
-        }
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
@@ -1822,16 +1636,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             "ask_quantity",
             "askQuantity",
             "offset",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window",
-            "momentumWindow",
-            "momentum_sensitivity",
-            "momentumSensitivity",
-            "momentum_bid_adjustment",
-            "momentumBidAdjustment",
-            "momentum_ask_adjustment",
-            "momentumAskAdjustment",
             "quantity_limit",
             "quantityLimit",
             "depth",
@@ -1853,11 +1657,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             BidQuantity,
             AskQuantity,
             Offset,
-            MomentumEnabled,
-            MomentumWindow,
-            MomentumSensitivity,
-            MomentumBidAdjustment,
-            MomentumAskAdjustment,
             QuantityLimit,
             Depth,
             EtfPricing,
@@ -1895,11 +1694,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             "offset" => Ok(GeneratedField::Offset),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
-                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
-                            "momentumBidAdjustment" | "momentum_bid_adjustment" => Ok(GeneratedField::MomentumBidAdjustment),
-                            "momentumAskAdjustment" | "momentum_ask_adjustment" => Ok(GeneratedField::MomentumAskAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "depth" => Ok(GeneratedField::Depth),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
@@ -1934,11 +1728,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
                 let mut offset__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window__ = None;
-                let mut momentum_sensitivity__ = None;
-                let mut momentum_bid_adjustment__ = None;
-                let mut momentum_ask_adjustment__ = None;
                 let mut quantity_limit__ = None;
                 let mut depth__ = None;
                 let mut etf_pricing__ = None;
@@ -2028,44 +1817,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             }
                             offset__ = map_.next_value()?;
                         }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
-                            }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindow => {
-                            if momentum_window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
-                            }
-                            momentum_window__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumSensitivity => {
-                            if momentum_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
-                            }
-                            momentum_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumBidAdjustment => {
-                            if momentum_bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumBidAdjustment"));
-                            }
-                            momentum_bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumAskAdjustment => {
-                            if momentum_ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumAskAdjustment"));
-                            }
-                            momentum_ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::QuantityLimit => {
                             if quantity_limit__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("quantityLimit"));
@@ -2104,11 +1855,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                     bid_quantity: bid_quantity__,
                     ask_quantity: ask_quantity__,
                     offset: offset__,
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window: momentum_window__,
-                    momentum_sensitivity: momentum_sensitivity__,
-                    momentum_bid_adjustment: momentum_bid_adjustment__,
-                    momentum_ask_adjustment: momentum_ask_adjustment__,
                     quantity_limit: quantity_limit__,
                     depth: depth__,
                     etf_pricing: etf_pricing__,
@@ -3886,15 +3632,6 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -3930,15 +3667,6 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.offset.as_ref() {
             struct_ser.serialize_field("offset", v)?;
         }
-        if let Some(v) = self.momentum_enabled.as_ref() {
-            struct_ser.serialize_field("momentum_enabled", v)?;
-        }
-        if let Some(v) = self.momentum_window.as_ref() {
-            struct_ser.serialize_field("momentum_window", v)?;
-        }
-        if let Some(v) = self.momentum_sensitivity.as_ref() {
-            struct_ser.serialize_field("momentum_sensitivity", v)?;
-        }
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
         }
@@ -3973,12 +3701,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "askBasis",
             "depth",
             "offset",
-            "momentum_enabled",
-            "momentumEnabled",
-            "momentum_window",
-            "momentumWindow",
-            "momentum_sensitivity",
-            "momentumSensitivity",
             "quantity_limit",
             "quantityLimit",
             "etf_pricing",
@@ -3997,9 +3719,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             AskBasis,
             Depth,
             Offset,
-            MomentumEnabled,
-            MomentumWindow,
-            MomentumSensitivity,
             QuantityLimit,
             EtfPricing,
             __SkipField__,
@@ -4034,9 +3753,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "depth" => Ok(GeneratedField::Depth),
                             "offset" => Ok(GeneratedField::Offset),
-                            "momentumEnabled" | "momentum_enabled" => Ok(GeneratedField::MomentumEnabled),
-                            "momentumWindow" | "momentum_window" => Ok(GeneratedField::MomentumWindow),
-                            "momentumSensitivity" | "momentum_sensitivity" => Ok(GeneratedField::MomentumSensitivity),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -4068,9 +3784,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut ask_basis__ = None;
                 let mut depth__ = None;
                 let mut offset__ = None;
-                let mut momentum_enabled__ = None;
-                let mut momentum_window__ = None;
-                let mut momentum_sensitivity__ = None;
                 let mut quantity_limit__ = None;
                 let mut etf_pricing__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -4149,28 +3862,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             }
                             offset__ = map_.next_value()?;
                         }
-                        GeneratedField::MomentumEnabled => {
-                            if momentum_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumEnabled"));
-                            }
-                            momentum_enabled__ = map_.next_value()?;
-                        }
-                        GeneratedField::MomentumWindow => {
-                            if momentum_window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumWindow"));
-                            }
-                            momentum_window__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::MomentumSensitivity => {
-                            if momentum_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("momentumSensitivity"));
-                            }
-                            momentum_sensitivity__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::QuantityLimit => {
                             if quantity_limit__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("quantityLimit"));
@@ -4199,9 +3890,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     ask_basis: ask_basis__,
                     depth: depth__,
                     offset: offset__,
-                    momentum_enabled: momentum_enabled__,
-                    momentum_window: momentum_window__,
-                    momentum_sensitivity: momentum_sensitivity__,
                     quantity_limit: quantity_limit__,
                     etf_pricing: etf_pricing__,
                 })
