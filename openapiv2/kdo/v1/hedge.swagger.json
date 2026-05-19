@@ -406,13 +406,12 @@
                   "$ref": "#/definitions/commonAmendMethodType",
                   "title": "자동정정 전략 유형 (auto_amend=true 일 때 유효)\n미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨"
                 },
-                "filledQuantityPerHedge": {
+                "quantityPerHedge": {
                   "type": "object",
                   "additionalProperties": {
-                    "type": "string",
-                    "format": "int64"
+                    "type": "string"
                   },
-                  "title": "헷지 1주 주문당 소스 종목 체결수량 기준\nkey: 헷지 대상 심볼, value: 소스 종목 체결수량",
+                  "title": "헷지 1단위당 소스 종목 환산 수량 (정적 비율).\nkey: 헷지 대상 심볼.\nvalue: 헷지 1단위당 소스 수량을 십진수 문자열로 인코딩한 값 (f64 정밀도 보존).\n예) ratio=0.01 → \"100\", ratio=69.59 (leverage_future) → \"0.01437...\"",
                   "readOnly": true
                 },
                 "hedgeFundCode": {
@@ -819,13 +818,12 @@
           "$ref": "#/definitions/commonAmendMethodType",
           "title": "자동정정 전략 유형 (auto_amend=true 일 때 유효)\n미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨"
         },
-        "filledQuantityPerHedge": {
+        "quantityPerHedge": {
           "type": "object",
           "additionalProperties": {
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           },
-          "title": "헷지 1주 주문당 소스 종목 체결수량 기준\nkey: 헷지 대상 심볼, value: 소스 종목 체결수량",
+          "title": "헷지 1단위당 소스 종목 환산 수량 (정적 비율).\nkey: 헷지 대상 심볼.\nvalue: 헷지 1단위당 소스 수량을 십진수 문자열로 인코딩한 값 (f64 정밀도 보존).\n예) ratio=0.01 → \"100\", ratio=69.59 (leverage_future) → \"0.01437...\"",
           "readOnly": true
         },
         "hedgeFundCode": {

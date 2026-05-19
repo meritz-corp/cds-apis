@@ -1249,12 +1249,12 @@ class EtfLpHedge extends $pb.GeneratedMessage {
   factory EtfLpHedge({
     $core.String? symbol,
     $core.String? fund,
-    $fixnum.Int64? filledQuantityPerHedge,
+    $core.String? quantityPerHedge,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fund != null) result.fund = fund;
-    if (filledQuantityPerHedge != null) result.filledQuantityPerHedge = filledQuantityPerHedge;
+    if (quantityPerHedge != null) result.quantityPerHedge = quantityPerHedge;
     return result;
   }
 
@@ -1266,7 +1266,7 @@ class EtfLpHedge extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
-    ..aInt64(3, _omitFieldNames ? '' : 'filledQuantityPerHedge')
+    ..aOS(3, _omitFieldNames ? '' : 'quantityPerHedge')
     ..hasRequiredFields = false
   ;
 
@@ -1308,15 +1308,15 @@ class EtfLpHedge extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFund() => $_clearField(2);
 
-  /// 헷지 1주 주문당 ETF 체결수량 기준
+  /// 헷지 1단위당 ETF 환산 수량 (정적 비율). f64 정밀도를 보존하기 위해 문자열로 직렬화.
   @$pb.TagNumber(3)
-  $fixnum.Int64 get filledQuantityPerHedge => $_getI64(2);
+  $core.String get quantityPerHedge => $_getSZ(2);
   @$pb.TagNumber(3)
-  set filledQuantityPerHedge($fixnum.Int64 value) => $_setInt64(2, value);
+  set quantityPerHedge($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasFilledQuantityPerHedge() => $_has(2);
+  $core.bool hasQuantityPerHedge() => $_has(2);
   @$pb.TagNumber(3)
-  void clearFilledQuantityPerHedge() => $_clearField(3);
+  void clearQuantityPerHedge() => $_clearField(3);
 }
 
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

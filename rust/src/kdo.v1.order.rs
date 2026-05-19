@@ -35,6 +35,11 @@ pub struct SubmitOrderRequest {
     /// 호가조건 (미지정 시 FAS, 일반 지정가)
     #[prost(enumeration="super::common::OrderConditionType", optional, tag="10")]
     pub order_condition: ::core::option::Option<i32>,
+    /// 헷지 누적 대상 여부 (미지정 시 false)
+    /// true 로 설정하면 외부에서 직접 제출한 주문의 체결도 hedge accumulator 에 누적되어 목표 헷지에 반영됨.
+    /// 실제 누적되려면 (fund_code, symbol) 조합으로 Hedge 가 DB 에 등록되어 있어야 함.
+    #[prost(bool, optional, tag="11")]
+    pub need_hedge: ::core::option::Option<bool>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

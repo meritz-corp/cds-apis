@@ -392,15 +392,15 @@ const EtfLpHedge$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
-    {'1': 'filled_quantity_per_hedge', '3': 3, '4': 1, '5': 3, '10': 'filledQuantityPerHedge'},
+    {'1': 'quantity_per_hedge', '3': 3, '4': 1, '5': 9, '10': 'quantityPerHedge'},
   ],
 };
 
 /// Descriptor for `EtfLpHedge`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpHedgeDescriptor = $convert.base64Decode(
     'CgpFdGZMcEhlZGdlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEi0KBGZ1bmQYAiABKAlCGfpBFg'
-    'oUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSOQoZZmlsbGVkX3F1YW50aXR5X3Blcl9oZWRn'
-    'ZRgDIAEoA1IWZmlsbGVkUXVhbnRpdHlQZXJIZWRnZQ==');
+    'oUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSLAoScXVhbnRpdHlfcGVyX2hlZGdlGAMgASgJ'
+    'UhBxdWFudGl0eVBlckhlZGdl');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

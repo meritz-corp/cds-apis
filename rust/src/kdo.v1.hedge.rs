@@ -41,10 +41,12 @@ pub struct Hedge {
     /// 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
     #[prost(enumeration="super::common::AmendMethodType", tag="11")]
     pub amend_method: i32,
-    /// 헷지 1주 주문당 소스 종목 체결수량 기준
-    /// key: 헷지 대상 심볼, value: 소스 종목 체결수량
-    #[prost(map="string, int64", tag="12")]
-    pub filled_quantity_per_hedge: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
+    /// 헷지 1단위당 소스 종목 환산 수량 (정적 비율).
+    /// key: 헷지 대상 심볼.
+    /// value: 헷지 1단위당 소스 수량을 십진수 문자열로 인코딩한 값 (f64 정밀도 보존).
+    /// 예) ratio=0.01 → "100", ratio=69.59 (leverage_future) → "0.01437..."
+    #[prost(map="string, string", tag="12")]
+    pub quantity_per_hedge: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// 헷지 주문이 실행되는 펀드 코드
     #[prost(string, tag="13")]
     pub hedge_fund_code: ::prost::alloc::string::String,

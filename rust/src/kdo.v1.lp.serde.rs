@@ -808,9 +808,7 @@ impl serde::Serialize for EtfLpHedge {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("filled_quantity_per_hedge", ToString::to_string(&self.filled_quantity_per_hedge).as_str())?;
+            struct_ser.serialize_field("quantity_per_hedge", &self.quantity_per_hedge)?;
         }
         struct_ser.end()
     }
@@ -824,15 +822,15 @@ impl<'de> serde::Deserialize<'de> for EtfLpHedge {
         const FIELDS: &[&str] = &[
             "symbol",
             "fund",
-            "filled_quantity_per_hedge",
-            "filledQuantityPerHedge",
+            "quantity_per_hedge",
+            "quantityPerHedge",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
             Fund,
-            FilledQuantityPerHedge,
+            QuantityPerHedge,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -857,7 +855,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpHedge {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "fund" => Ok(GeneratedField::Fund),
-                            "filledQuantityPerHedge" | "filled_quantity_per_hedge" => Ok(GeneratedField::FilledQuantityPerHedge),
+                            "quantityPerHedge" | "quantity_per_hedge" => Ok(GeneratedField::QuantityPerHedge),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -879,7 +877,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpHedge {
             {
                 let mut symbol__ = None;
                 let mut fund__ = None;
-                let mut filled_quantity_per_hedge__ = None;
+                let mut quantity_per_hedge__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -894,13 +892,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpHedge {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::FilledQuantityPerHedge => {
-                            if filled_quantity_per_hedge__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("filledQuantityPerHedge"));
+                        GeneratedField::QuantityPerHedge => {
+                            if quantity_per_hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityPerHedge"));
                             }
-                            filled_quantity_per_hedge__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            quantity_per_hedge__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -910,7 +906,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpHedge {
                 Ok(EtfLpHedge {
                     symbol: symbol__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
-                    filled_quantity_per_hedge: filled_quantity_per_hedge__.unwrap_or_default(),
+                    quantity_per_hedge: quantity_per_hedge__.unwrap_or_default(),
                 })
             }
         }

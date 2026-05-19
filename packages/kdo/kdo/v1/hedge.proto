@@ -224,9 +224,11 @@ message Hedge {
   // 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
   kdo.v1.common.AmendMethodType amend_method = 11;
 
-  // 헷지 1주 주문당 소스 종목 체결수량 기준
-  // key: 헷지 대상 심볼, value: 소스 종목 체결수량
-  map<string, int64> filled_quantity_per_hedge = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // 헷지 1단위당 소스 종목 환산 수량 (정적 비율).
+  // key: 헷지 대상 심볼.
+  // value: 헷지 1단위당 소스 수량을 십진수 문자열로 인코딩한 값 (f64 정밀도 보존).
+  // 예) ratio=0.01 → "100", ratio=69.59 (leverage_future) → "0.01437..."
+  map<string, string> quantity_per_hedge = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // 헷지 주문이 실행되는 펀드 코드
   string hedge_fund_code = 13 [(google.api.field_behavior) = REQUIRED];

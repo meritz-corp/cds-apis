@@ -422,8 +422,8 @@ message EtfLpHedge {
     }
   ];
 
-  // 헷지 1주 주문당 ETF 체결수량 기준
-  int64 filled_quantity_per_hedge = 3;
+  // 헷지 1단위당 ETF 환산 수량 (정적 비율). f64 정밀도를 보존하기 위해 문자열로 직렬화.
+  string quantity_per_hedge = 3;
 }
 
 

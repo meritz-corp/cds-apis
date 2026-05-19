@@ -272,9 +272,9 @@ pub struct EtfLpHedge {
     /// format: funds/{fund_code}
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
-    /// 헷지 1주 주문당 ETF 체결수량 기준
-    #[prost(int64, tag="3")]
-    pub filled_quantity_per_hedge: i64,
+    /// 헷지 1단위당 ETF 환산 수량 (정적 비율). f64 정밀도를 보존하기 위해 문자열로 직렬화.
+    #[prost(string, tag="3")]
+    pub quantity_per_hedge: ::prost::alloc::string::String,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]

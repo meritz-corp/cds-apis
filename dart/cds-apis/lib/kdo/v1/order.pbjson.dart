@@ -104,11 +104,13 @@ const SubmitOrderRequest$json = {
     {'1': 'auto_amend_strategy', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '9': 0, '10': 'autoAmendStrategy', '17': true},
     {'1': 'limit_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.order.LimitPriceType', '9': 1, '10': 'limitPriceType', '17': true},
     {'1': 'order_condition', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderConditionType', '9': 2, '10': 'orderCondition', '17': true},
+    {'1': 'need_hedge', '3': 11, '4': 1, '5': 8, '9': 3, '10': 'needHedge', '17': true},
   ],
   '8': [
     {'1': '_auto_amend_strategy'},
     {'1': '_limit_price_type'},
     {'1': '_order_condition'},
+    {'1': '_need_hedge'},
   ],
 };
 
@@ -123,8 +125,9 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     'LkFtZW5kTWV0aG9kVHlwZUgAUhFhdXRvQW1lbmRTdHJhdGVneYgBARJLChBsaW1pdF9wcmljZV'
     '90eXBlGAkgASgOMhwua2RvLnYxLm9yZGVyLkxpbWl0UHJpY2VUeXBlSAFSDmxpbWl0UHJpY2VU'
     'eXBliAEBEk8KD29yZGVyX2NvbmRpdGlvbhgKIAEoDjIhLmtkby52MS5jb21tb24uT3JkZXJDb2'
-    '5kaXRpb25UeXBlSAJSDm9yZGVyQ29uZGl0aW9uiAEBQhYKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5'
-    'QhMKEV9saW1pdF9wcmljZV90eXBlQhIKEF9vcmRlcl9jb25kaXRpb24=');
+    '5kaXRpb25UeXBlSAJSDm9yZGVyQ29uZGl0aW9uiAEBEiIKCm5lZWRfaGVkZ2UYCyABKAhIA1IJ'
+    'bmVlZEhlZGdliAEBQhYKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5QhMKEV9saW1pdF9wcmljZV90eX'
+    'BlQhIKEF9vcmRlcl9jb25kaXRpb25CDQoLX25lZWRfaGVkZ2U=');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {

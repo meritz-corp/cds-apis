@@ -2868,6 +2868,9 @@ impl serde::Serialize for SubmitOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.SubmitOrderRequest", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -2911,6 +2914,9 @@ impl serde::Serialize for SubmitOrderRequest {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("order_condition", &v)?;
         }
+        if let Some(v) = self.need_hedge.as_ref() {
+            struct_ser.serialize_field("need_hedge", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2937,6 +2943,8 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             "limitPriceType",
             "order_condition",
             "orderCondition",
+            "need_hedge",
+            "needHedge",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2951,6 +2959,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             AutoAmendStrategy,
             LimitPriceType,
             OrderCondition,
+            NeedHedge,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2983,6 +2992,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             "autoAmendStrategy" | "auto_amend_strategy" => Ok(GeneratedField::AutoAmendStrategy),
                             "limitPriceType" | "limit_price_type" => Ok(GeneratedField::LimitPriceType),
                             "orderCondition" | "order_condition" => Ok(GeneratedField::OrderCondition),
+                            "needHedge" | "need_hedge" => Ok(GeneratedField::NeedHedge),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3012,6 +3022,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                 let mut auto_amend_strategy__ = None;
                 let mut limit_price_type__ = None;
                 let mut order_condition__ = None;
+                let mut need_hedge__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -3076,6 +3087,12 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             }
                             order_condition__ = map_.next_value::<::std::option::Option<super::common::OrderConditionType>>()?.map(|x| x as i32);
                         }
+                        GeneratedField::NeedHedge => {
+                            if need_hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("needHedge"));
+                            }
+                            need_hedge__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3092,6 +3109,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                     auto_amend_strategy: auto_amend_strategy__,
                     limit_price_type: limit_price_type__,
                     order_condition: order_condition__,
+                    need_hedge: need_hedge__,
                 })
             }
         }

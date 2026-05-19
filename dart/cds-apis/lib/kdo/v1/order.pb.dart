@@ -35,6 +35,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $2.AmendMethodType? autoAmendStrategy,
     LimitPriceType? limitPriceType,
     $2.OrderConditionType? orderCondition,
+    $core.bool? needHedge,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -47,6 +48,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (autoAmendStrategy != null) result.autoAmendStrategy = autoAmendStrategy;
     if (limitPriceType != null) result.limitPriceType = limitPriceType;
     if (orderCondition != null) result.orderCondition = orderCondition;
+    if (needHedge != null) result.needHedge = needHedge;
     return result;
   }
 
@@ -66,6 +68,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..e<$2.AmendMethodType>(8, _omitFieldNames ? '' : 'autoAmendStrategy', $pb.PbFieldType.OE, defaultOrMaker: $2.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $2.AmendMethodType.valueOf, enumValues: $2.AmendMethodType.values)
     ..e<LimitPriceType>(9, _omitFieldNames ? '' : 'limitPriceType', $pb.PbFieldType.OE, defaultOrMaker: LimitPriceType.LIMIT_PRICE_TYPE_UNSPECIFIED, valueOf: LimitPriceType.valueOf, enumValues: LimitPriceType.values)
     ..e<$2.OrderConditionType>(10, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $2.OrderConditionType.valueOf, enumValues: $2.OrderConditionType.values)
+    ..aOB(11, _omitFieldNames ? '' : 'needHedge')
     ..hasRequiredFields = false
   ;
 
@@ -185,6 +188,18 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasOrderCondition() => $_has(9);
   @$pb.TagNumber(10)
   void clearOrderCondition() => $_clearField(10);
+
+  /// 헷지 누적 대상 여부 (미지정 시 false)
+  /// true 로 설정하면 외부에서 직접 제출한 주문의 체결도 hedge accumulator 에 누적되어 목표 헷지에 반영됨.
+  /// 실제 누적되려면 (fund_code, symbol) 조합으로 Hedge 가 DB 에 등록되어 있어야 함.
+  @$pb.TagNumber(11)
+  $core.bool get needHedge => $_getBF(10);
+  @$pb.TagNumber(11)
+  set needHedge($core.bool value) => $_setBool(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasNeedHedge() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearNeedHedge() => $_clearField(11);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {

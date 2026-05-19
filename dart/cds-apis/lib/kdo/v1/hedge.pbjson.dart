@@ -60,19 +60,19 @@ const Hedge$json = {
     {'1': 'exec_price_type', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.hedge.ExecPriceType', '10': 'execPriceType'},
     {'1': 'auto_amend', '3': 10, '4': 1, '5': 8, '10': 'autoAmend'},
     {'1': 'amend_method', '3': 11, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '10': 'amendMethod'},
-    {'1': 'filled_quantity_per_hedge', '3': 12, '4': 3, '5': 11, '6': '.kdo.v1.hedge.Hedge.FilledQuantityPerHedgeEntry', '8': {}, '10': 'filledQuantityPerHedge'},
+    {'1': 'quantity_per_hedge', '3': 12, '4': 3, '5': 11, '6': '.kdo.v1.hedge.Hedge.QuantityPerHedgeEntry', '8': {}, '10': 'quantityPerHedge'},
     {'1': 'hedge_fund_code', '3': 13, '4': 1, '5': 9, '8': {}, '10': 'hedgeFundCode'},
   ],
-  '3': [Hedge_FilledQuantityPerHedgeEntry$json],
+  '3': [Hedge_QuantityPerHedgeEntry$json],
   '7': {},
 };
 
 @$core.Deprecated('Use hedgeDescriptor instead')
-const Hedge_FilledQuantityPerHedgeEntry$json = {
-  '1': 'FilledQuantityPerHedgeEntry',
+const Hedge_QuantityPerHedgeEntry$json = {
+  '1': 'QuantityPerHedgeEntry',
   '2': [
     {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 3, '10': 'value'},
+    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
   ],
   '7': {'7': true},
 };
@@ -88,12 +88,12 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWUSQwoPZXhlY19wcm'
     'ljZV90eXBlGAkgASgOMhsua2RvLnYxLmhlZGdlLkV4ZWNQcmljZVR5cGVSDWV4ZWNQcmljZVR5'
     'cGUSHQoKYXV0b19hbWVuZBgKIAEoCFIJYXV0b0FtZW5kEkEKDGFtZW5kX21ldGhvZBgLIAEoDj'
-    'IeLmtkby52MS5jb21tb24uQW1lbmRNZXRob2RUeXBlUgthbWVuZE1ldGhvZBJwChlmaWxsZWRf'
-    'cXVhbnRpdHlfcGVyX2hlZGdlGAwgAygLMi8ua2RvLnYxLmhlZGdlLkhlZGdlLkZpbGxlZFF1YW'
-    '50aXR5UGVySGVkZ2VFbnRyeUIE4kEBA1IWZmlsbGVkUXVhbnRpdHlQZXJIZWRnZRIsCg9oZWRn'
-    'ZV9mdW5kX2NvZGUYDSABKAlCBOJBAQJSDWhlZGdlRnVuZENvZGUaSQobRmlsbGVkUXVhbnRpdH'
-    'lQZXJIZWRnZUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgDUgV2YWx1ZToC'
-    'OAE6KupBJwoVa2RvLmNkc2FwaXMueHl6L0hlZGdlEg5oZWRnZXMve2hlZGdlfQ==');
+    'IeLmtkby52MS5jb21tb24uQW1lbmRNZXRob2RUeXBlUgthbWVuZE1ldGhvZBJdChJxdWFudGl0'
+    'eV9wZXJfaGVkZ2UYDCADKAsyKS5rZG8udjEuaGVkZ2UuSGVkZ2UuUXVhbnRpdHlQZXJIZWRnZU'
+    'VudHJ5QgTiQQEDUhBxdWFudGl0eVBlckhlZGdlEiwKD2hlZGdlX2Z1bmRfY29kZRgNIAEoCUIE'
+    '4kEBAlINaGVkZ2VGdW5kQ29kZRpDChVRdWFudGl0eVBlckhlZGdlRW50cnkSEAoDa2V5GAEgAS'
+    'gJUgNrZXkSFAoFdmFsdWUYAiABKAlSBXZhbHVlOgI4AToq6kEnChVrZG8uY2RzYXBpcy54eXov'
+    'SGVkZ2USDmhlZGdlcy97aGVkZ2V9');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {
