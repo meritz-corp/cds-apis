@@ -379,18 +379,18 @@ pub enum LimitPriceType {
     Unspecified = 0,
     /// 상대호가 (매수→매도1호가, 매도→매수1호가)
     BestTake = 1,
-    /// 상대호가 +1틱
-    BestTake1 = 2,
-    /// 상대호가 +2틱
-    BestTake2 = 3,
-    /// 상대호가 +3틱
-    BestTake3 = 4,
-    /// 자기호가 +1틱
-    BestMake1 = 5,
-    /// 자기호가 +2틱
-    BestMake2 = 6,
-    /// 자기호가 +3틱
-    BestMake3 = 7,
+    /// 상대호가 +1틱 (더 공격적: 매수는 가격↑, 매도는 가격↓)
+    BestTakePlus1 = 2,
+    /// 상대호가 +2틱 (더 공격적)
+    BestTakePlus2 = 3,
+    /// 상대호가 +3틱 (더 공격적)
+    BestTakePlus3 = 4,
+    /// 자기호가 -1틱 (덜 공격적: 매수는 가격↓, 매도는 가격↑)
+    BestMakeMinus1 = 5,
+    /// 자기호가 -2틱 (덜 공격적)
+    BestMakeMinus2 = 6,
+    /// 자기호가 -3틱 (덜 공격적)
+    BestMakeMinus3 = 7,
 }
 impl LimitPriceType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -401,12 +401,12 @@ impl LimitPriceType {
         match self {
             LimitPriceType::Unspecified => "LIMIT_PRICE_TYPE_UNSPECIFIED",
             LimitPriceType::BestTake => "LIMIT_PRICE_TYPE_BEST_TAKE",
-            LimitPriceType::BestTake1 => "LIMIT_PRICE_TYPE_BEST_TAKE_1",
-            LimitPriceType::BestTake2 => "LIMIT_PRICE_TYPE_BEST_TAKE_2",
-            LimitPriceType::BestTake3 => "LIMIT_PRICE_TYPE_BEST_TAKE_3",
-            LimitPriceType::BestMake1 => "LIMIT_PRICE_TYPE_BEST_MAKE_1",
-            LimitPriceType::BestMake2 => "LIMIT_PRICE_TYPE_BEST_MAKE_2",
-            LimitPriceType::BestMake3 => "LIMIT_PRICE_TYPE_BEST_MAKE_3",
+            LimitPriceType::BestTakePlus1 => "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_1",
+            LimitPriceType::BestTakePlus2 => "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_2",
+            LimitPriceType::BestTakePlus3 => "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_3",
+            LimitPriceType::BestMakeMinus1 => "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_1",
+            LimitPriceType::BestMakeMinus2 => "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_2",
+            LimitPriceType::BestMakeMinus3 => "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_3",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -414,12 +414,12 @@ impl LimitPriceType {
         match value {
             "LIMIT_PRICE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "LIMIT_PRICE_TYPE_BEST_TAKE" => Some(Self::BestTake),
-            "LIMIT_PRICE_TYPE_BEST_TAKE_1" => Some(Self::BestTake1),
-            "LIMIT_PRICE_TYPE_BEST_TAKE_2" => Some(Self::BestTake2),
-            "LIMIT_PRICE_TYPE_BEST_TAKE_3" => Some(Self::BestTake3),
-            "LIMIT_PRICE_TYPE_BEST_MAKE_1" => Some(Self::BestMake1),
-            "LIMIT_PRICE_TYPE_BEST_MAKE_2" => Some(Self::BestMake2),
-            "LIMIT_PRICE_TYPE_BEST_MAKE_3" => Some(Self::BestMake3),
+            "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_1" => Some(Self::BestTakePlus1),
+            "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_2" => Some(Self::BestTakePlus2),
+            "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_3" => Some(Self::BestTakePlus3),
+            "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_1" => Some(Self::BestMakeMinus1),
+            "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_2" => Some(Self::BestMakeMinus2),
+            "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_3" => Some(Self::BestMakeMinus3),
             _ => None,
         }
     }

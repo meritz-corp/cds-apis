@@ -1152,12 +1152,12 @@ impl serde::Serialize for LimitPriceType {
         let variant = match self {
             Self::Unspecified => "LIMIT_PRICE_TYPE_UNSPECIFIED",
             Self::BestTake => "LIMIT_PRICE_TYPE_BEST_TAKE",
-            Self::BestTake1 => "LIMIT_PRICE_TYPE_BEST_TAKE_1",
-            Self::BestTake2 => "LIMIT_PRICE_TYPE_BEST_TAKE_2",
-            Self::BestTake3 => "LIMIT_PRICE_TYPE_BEST_TAKE_3",
-            Self::BestMake1 => "LIMIT_PRICE_TYPE_BEST_MAKE_1",
-            Self::BestMake2 => "LIMIT_PRICE_TYPE_BEST_MAKE_2",
-            Self::BestMake3 => "LIMIT_PRICE_TYPE_BEST_MAKE_3",
+            Self::BestTakePlus1 => "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_1",
+            Self::BestTakePlus2 => "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_2",
+            Self::BestTakePlus3 => "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_3",
+            Self::BestMakeMinus1 => "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_1",
+            Self::BestMakeMinus2 => "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_2",
+            Self::BestMakeMinus3 => "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_3",
         };
         serializer.serialize_str(variant)
     }
@@ -1171,12 +1171,12 @@ impl<'de> serde::Deserialize<'de> for LimitPriceType {
         const FIELDS: &[&str] = &[
             "LIMIT_PRICE_TYPE_UNSPECIFIED",
             "LIMIT_PRICE_TYPE_BEST_TAKE",
-            "LIMIT_PRICE_TYPE_BEST_TAKE_1",
-            "LIMIT_PRICE_TYPE_BEST_TAKE_2",
-            "LIMIT_PRICE_TYPE_BEST_TAKE_3",
-            "LIMIT_PRICE_TYPE_BEST_MAKE_1",
-            "LIMIT_PRICE_TYPE_BEST_MAKE_2",
-            "LIMIT_PRICE_TYPE_BEST_MAKE_3",
+            "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_1",
+            "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_2",
+            "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_3",
+            "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_1",
+            "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_2",
+            "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_3",
         ];
 
         struct GeneratedVisitor;
@@ -1219,12 +1219,12 @@ impl<'de> serde::Deserialize<'de> for LimitPriceType {
                 match value {
                     "LIMIT_PRICE_TYPE_UNSPECIFIED" => Ok(LimitPriceType::Unspecified),
                     "LIMIT_PRICE_TYPE_BEST_TAKE" => Ok(LimitPriceType::BestTake),
-                    "LIMIT_PRICE_TYPE_BEST_TAKE_1" => Ok(LimitPriceType::BestTake1),
-                    "LIMIT_PRICE_TYPE_BEST_TAKE_2" => Ok(LimitPriceType::BestTake2),
-                    "LIMIT_PRICE_TYPE_BEST_TAKE_3" => Ok(LimitPriceType::BestTake3),
-                    "LIMIT_PRICE_TYPE_BEST_MAKE_1" => Ok(LimitPriceType::BestMake1),
-                    "LIMIT_PRICE_TYPE_BEST_MAKE_2" => Ok(LimitPriceType::BestMake2),
-                    "LIMIT_PRICE_TYPE_BEST_MAKE_3" => Ok(LimitPriceType::BestMake3),
+                    "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_1" => Ok(LimitPriceType::BestTakePlus1),
+                    "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_2" => Ok(LimitPriceType::BestTakePlus2),
+                    "LIMIT_PRICE_TYPE_BEST_TAKE_PLUS_3" => Ok(LimitPriceType::BestTakePlus3),
+                    "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_1" => Ok(LimitPriceType::BestMakeMinus1),
+                    "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_2" => Ok(LimitPriceType::BestMakeMinus2),
+                    "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_3" => Ok(LimitPriceType::BestMakeMinus3),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
