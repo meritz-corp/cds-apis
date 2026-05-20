@@ -342,6 +342,20 @@ pub struct DeleteHedgeGroupRequest {
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
+/// InstrumentAccumulatorState: instrument 별 bid/ask 누적기 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InstrumentAccumulatorState {
+    /// 헷지 종목 심볼
+    #[prost(string, tag="1")]
+    pub hedge_symbol: ::prost::alloc::string::String,
+    /// 매수 방향 누적값
+    #[prost(double, tag="2")]
+    pub bid_accumulator: f64,
+    /// 매도 방향 누적값
+    #[prost(double, tag="3")]
+    pub ask_accumulator: f64,
+}
 /// HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태
 /// bid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값
 /// ask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값
@@ -378,6 +392,9 @@ pub struct HedgeAccumulatorState {
     /// 매도 체결에 대한 desired 헷지 수량 (선물 환산, 누적)
     #[prost(double, tag="10")]
     pub desired_ask_hedge_quantity: f64,
+    /// instrument 별 누적기 상세 (multi-instrument 헷지 지원)
+    #[prost(message, repeated, tag="11")]
+    pub per_instrument: ::prost::alloc::vec::Vec<InstrumentAccumulatorState>,
 }
 /// ListHedgeAccumulators 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

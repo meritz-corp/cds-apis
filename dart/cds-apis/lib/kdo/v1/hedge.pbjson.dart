@@ -440,6 +440,22 @@ final $typed_data.Uint8List deleteHedgeGroupRequestDescriptor = $convert.base64D
     'ChdEZWxldGVIZWRnZUdyb3VwUmVxdWVzdBI3CgRuYW1lGAEgASgJQiPiQQEC+kEcChprZG8uY2'
     'RzYXBpcy54eXovSGVkZ2VHcm91cFIEbmFtZQ==');
 
+@$core.Deprecated('Use instrumentAccumulatorStateDescriptor instead')
+const InstrumentAccumulatorState$json = {
+  '1': 'InstrumentAccumulatorState',
+  '2': [
+    {'1': 'hedge_symbol', '3': 1, '4': 1, '5': 9, '10': 'hedgeSymbol'},
+    {'1': 'bid_accumulator', '3': 2, '4': 1, '5': 1, '10': 'bidAccumulator'},
+    {'1': 'ask_accumulator', '3': 3, '4': 1, '5': 1, '10': 'askAccumulator'},
+  ],
+};
+
+/// Descriptor for `InstrumentAccumulatorState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List instrumentAccumulatorStateDescriptor = $convert.base64Decode(
+    'ChpJbnN0cnVtZW50QWNjdW11bGF0b3JTdGF0ZRIhCgxoZWRnZV9zeW1ib2wYASABKAlSC2hlZG'
+    'dlU3ltYm9sEicKD2JpZF9hY2N1bXVsYXRvchgCIAEoAVIOYmlkQWNjdW11bGF0b3ISJwoPYXNr'
+    'X2FjY3VtdWxhdG9yGAMgASgBUg5hc2tBY2N1bXVsYXRvcg==');
+
 @$core.Deprecated('Use hedgeAccumulatorStateDescriptor instead')
 const HedgeAccumulatorState$json = {
   '1': 'HedgeAccumulatorState',
@@ -454,6 +470,7 @@ const HedgeAccumulatorState$json = {
     {'1': 'source_ask_filled_quantity', '3': 8, '4': 1, '5': 3, '10': 'sourceAskFilledQuantity'},
     {'1': 'desired_bid_hedge_quantity', '3': 9, '4': 1, '5': 1, '10': 'desiredBidHedgeQuantity'},
     {'1': 'desired_ask_hedge_quantity', '3': 10, '4': 1, '5': 1, '10': 'desiredAskHedgeQuantity'},
+    {'1': 'per_instrument', '3': 11, '4': 3, '5': 11, '6': '.kdo.v1.hedge.InstrumentAccumulatorState', '10': 'perInstrument'},
   ],
 };
 
@@ -467,7 +484,9 @@ final $typed_data.Uint8List hedgeAccumulatorStateDescriptor = $convert.base64Dec
     'VhbnRpdHkYByABKANSF3NvdXJjZUJpZEZpbGxlZFF1YW50aXR5EjsKGnNvdXJjZV9hc2tfZmls'
     'bGVkX3F1YW50aXR5GAggASgDUhdzb3VyY2VBc2tGaWxsZWRRdWFudGl0eRI7ChpkZXNpcmVkX2'
     'JpZF9oZWRnZV9xdWFudGl0eRgJIAEoAVIXZGVzaXJlZEJpZEhlZGdlUXVhbnRpdHkSOwoaZGVz'
-    'aXJlZF9hc2tfaGVkZ2VfcXVhbnRpdHkYCiABKAFSF2Rlc2lyZWRBc2tIZWRnZVF1YW50aXR5');
+    'aXJlZF9hc2tfaGVkZ2VfcXVhbnRpdHkYCiABKAFSF2Rlc2lyZWRBc2tIZWRnZVF1YW50aXR5Ek'
+    '8KDnBlcl9pbnN0cnVtZW50GAsgAygLMigua2RvLnYxLmhlZGdlLkluc3RydW1lbnRBY2N1bXVs'
+    'YXRvclN0YXRlUg1wZXJJbnN0cnVtZW50');
 
 @$core.Deprecated('Use listHedgeAccumulatorsRequestDescriptor instead')
 const ListHedgeAccumulatorsRequest$json = {

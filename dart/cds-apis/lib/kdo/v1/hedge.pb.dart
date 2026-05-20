@@ -1631,6 +1631,80 @@ class DeleteHedgeGroupRequest extends $pb.GeneratedMessage {
   void clearName() => $_clearField(1);
 }
 
+/// InstrumentAccumulatorState: instrument 별 bid/ask 누적기 상태
+class InstrumentAccumulatorState extends $pb.GeneratedMessage {
+  factory InstrumentAccumulatorState({
+    $core.String? hedgeSymbol,
+    $core.double? bidAccumulator,
+    $core.double? askAccumulator,
+  }) {
+    final result = create();
+    if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
+    if (bidAccumulator != null) result.bidAccumulator = bidAccumulator;
+    if (askAccumulator != null) result.askAccumulator = askAccumulator;
+    return result;
+  }
+
+  InstrumentAccumulatorState._();
+
+  factory InstrumentAccumulatorState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory InstrumentAccumulatorState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InstrumentAccumulatorState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'hedgeSymbol')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'bidAccumulator', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'askAccumulator', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  InstrumentAccumulatorState clone() => InstrumentAccumulatorState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  InstrumentAccumulatorState copyWith(void Function(InstrumentAccumulatorState) updates) => super.copyWith((message) => updates(message as InstrumentAccumulatorState)) as InstrumentAccumulatorState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static InstrumentAccumulatorState create() => InstrumentAccumulatorState._();
+  @$core.override
+  InstrumentAccumulatorState createEmptyInstance() => create();
+  static $pb.PbList<InstrumentAccumulatorState> createRepeated() => $pb.PbList<InstrumentAccumulatorState>();
+  @$core.pragma('dart2js:noInline')
+  static InstrumentAccumulatorState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InstrumentAccumulatorState>(create);
+  static InstrumentAccumulatorState? _defaultInstance;
+
+  /// 헷지 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get hedgeSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set hedgeSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasHedgeSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearHedgeSymbol() => $_clearField(1);
+
+  /// 매수 방향 누적값
+  @$pb.TagNumber(2)
+  $core.double get bidAccumulator => $_getN(1);
+  @$pb.TagNumber(2)
+  set bidAccumulator($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBidAccumulator() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBidAccumulator() => $_clearField(2);
+
+  /// 매도 방향 누적값
+  @$pb.TagNumber(3)
+  $core.double get askAccumulator => $_getN(2);
+  @$pb.TagNumber(3)
+  set askAccumulator($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskAccumulator() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskAccumulator() => $_clearField(3);
+}
+
 /// HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태
 /// bid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값
 /// ask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값
@@ -1646,6 +1720,7 @@ class HedgeAccumulatorState extends $pb.GeneratedMessage {
     $fixnum.Int64? sourceAskFilledQuantity,
     $core.double? desiredBidHedgeQuantity,
     $core.double? desiredAskHedgeQuantity,
+    $core.Iterable<InstrumentAccumulatorState>? perInstrument,
   }) {
     final result = create();
     if (portfolioId != null) result.portfolioId = portfolioId;
@@ -1658,6 +1733,7 @@ class HedgeAccumulatorState extends $pb.GeneratedMessage {
     if (sourceAskFilledQuantity != null) result.sourceAskFilledQuantity = sourceAskFilledQuantity;
     if (desiredBidHedgeQuantity != null) result.desiredBidHedgeQuantity = desiredBidHedgeQuantity;
     if (desiredAskHedgeQuantity != null) result.desiredAskHedgeQuantity = desiredAskHedgeQuantity;
+    if (perInstrument != null) result.perInstrument.addAll(perInstrument);
     return result;
   }
 
@@ -1677,6 +1753,7 @@ class HedgeAccumulatorState extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'sourceAskFilledQuantity')
     ..a<$core.double>(9, _omitFieldNames ? '' : 'desiredBidHedgeQuantity', $pb.PbFieldType.OD)
     ..a<$core.double>(10, _omitFieldNames ? '' : 'desiredAskHedgeQuantity', $pb.PbFieldType.OD)
+    ..pc<InstrumentAccumulatorState>(11, _omitFieldNames ? '' : 'perInstrument', $pb.PbFieldType.PM, subBuilder: InstrumentAccumulatorState.create)
     ..hasRequiredFields = false
   ;
 
@@ -1796,6 +1873,10 @@ class HedgeAccumulatorState extends $pb.GeneratedMessage {
   $core.bool hasDesiredAskHedgeQuantity() => $_has(9);
   @$pb.TagNumber(10)
   void clearDesiredAskHedgeQuantity() => $_clearField(10);
+
+  /// instrument 별 누적기 상세 (multi-instrument 헷지 지원)
+  @$pb.TagNumber(11)
+  $pb.PbList<InstrumentAccumulatorState> get perInstrument => $_getList(10);
 }
 
 /// ListHedgeAccumulators 요청

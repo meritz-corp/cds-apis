@@ -1396,6 +1396,9 @@ impl serde::Serialize for HedgeAccumulatorState {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.HedgeAccumulatorState", len)?;
         if true {
             struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
@@ -1431,6 +1434,9 @@ impl serde::Serialize for HedgeAccumulatorState {
         if true {
             struct_ser.serialize_field("desired_ask_hedge_quantity", &self.desired_ask_hedge_quantity)?;
         }
+        if true {
+            struct_ser.serialize_field("per_instrument", &self.per_instrument)?;
+        }
         struct_ser.end()
     }
 }
@@ -1461,6 +1467,8 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
             "desiredBidHedgeQuantity",
             "desired_ask_hedge_quantity",
             "desiredAskHedgeQuantity",
+            "per_instrument",
+            "perInstrument",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1475,6 +1483,7 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
             SourceAskFilledQuantity,
             DesiredBidHedgeQuantity,
             DesiredAskHedgeQuantity,
+            PerInstrument,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1507,6 +1516,7 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                             "sourceAskFilledQuantity" | "source_ask_filled_quantity" => Ok(GeneratedField::SourceAskFilledQuantity),
                             "desiredBidHedgeQuantity" | "desired_bid_hedge_quantity" => Ok(GeneratedField::DesiredBidHedgeQuantity),
                             "desiredAskHedgeQuantity" | "desired_ask_hedge_quantity" => Ok(GeneratedField::DesiredAskHedgeQuantity),
+                            "perInstrument" | "per_instrument" => Ok(GeneratedField::PerInstrument),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1536,6 +1546,7 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                 let mut source_ask_filled_quantity__ = None;
                 let mut desired_bid_hedge_quantity__ = None;
                 let mut desired_ask_hedge_quantity__ = None;
+                let mut per_instrument__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PortfolioId => {
@@ -1612,6 +1623,12 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PerInstrument => {
+                            if per_instrument__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("perInstrument"));
+                            }
+                            per_instrument__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1628,6 +1645,7 @@ impl<'de> serde::Deserialize<'de> for HedgeAccumulatorState {
                     source_ask_filled_quantity: source_ask_filled_quantity__.unwrap_or_default(),
                     desired_bid_hedge_quantity: desired_bid_hedge_quantity__.unwrap_or_default(),
                     desired_ask_hedge_quantity: desired_ask_hedge_quantity__.unwrap_or_default(),
+                    per_instrument: per_instrument__.unwrap_or_default(),
                 })
             }
         }
@@ -2137,6 +2155,142 @@ impl<'de> serde::Deserialize<'de> for HedgeMethod {
             }
         }
         deserializer.deserialize_struct("kdo.v1.hedge.HedgeMethod", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for InstrumentAccumulatorState {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.InstrumentAccumulatorState", len)?;
+        if true {
+            struct_ser.serialize_field("hedge_symbol", &self.hedge_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_accumulator", &self.bid_accumulator)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_accumulator", &self.ask_accumulator)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for InstrumentAccumulatorState {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "hedge_symbol",
+            "hedgeSymbol",
+            "bid_accumulator",
+            "bidAccumulator",
+            "ask_accumulator",
+            "askAccumulator",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            HedgeSymbol,
+            BidAccumulator,
+            AskAccumulator,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
+                            "bidAccumulator" | "bid_accumulator" => Ok(GeneratedField::BidAccumulator),
+                            "askAccumulator" | "ask_accumulator" => Ok(GeneratedField::AskAccumulator),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = InstrumentAccumulatorState;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.hedge.InstrumentAccumulatorState")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<InstrumentAccumulatorState, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut hedge_symbol__ = None;
+                let mut bid_accumulator__ = None;
+                let mut ask_accumulator__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::HedgeSymbol => {
+                            if hedge_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeSymbol"));
+                            }
+                            hedge_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BidAccumulator => {
+                            if bid_accumulator__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAccumulator"));
+                            }
+                            bid_accumulator__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAccumulator => {
+                            if ask_accumulator__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAccumulator"));
+                            }
+                            ask_accumulator__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(InstrumentAccumulatorState {
+                    hedge_symbol: hedge_symbol__.unwrap_or_default(),
+                    bid_accumulator: bid_accumulator__.unwrap_or_default(),
+                    ask_accumulator: ask_accumulator__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.hedge.InstrumentAccumulatorState", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListHedgeAccumulatorsRequest {

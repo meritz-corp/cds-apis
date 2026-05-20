@@ -888,6 +888,13 @@
           "type": "number",
           "format": "double",
           "title": "매도 체결에 대한 desired 헷지 수량 (선물 환산, 누적)"
+        },
+        "perInstrument": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hedgeInstrumentAccumulatorState"
+          },
+          "title": "instrument 별 누적기 상세 (multi-instrument 헷지 지원)"
         }
       },
       "title": "HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태\nbid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값\nask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값"
@@ -992,6 +999,26 @@
         }
       },
       "title": "헷지 방식"
+    },
+    "hedgeInstrumentAccumulatorState": {
+      "type": "object",
+      "properties": {
+        "hedgeSymbol": {
+          "type": "string",
+          "title": "헷지 종목 심볼"
+        },
+        "bidAccumulator": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 방향 누적값"
+        },
+        "askAccumulator": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 방향 누적값"
+        }
+      },
+      "title": "InstrumentAccumulatorState: instrument 별 bid/ask 누적기 상태"
     },
     "hedgeListHedgeAccumulatorsResponse": {
       "type": "object",

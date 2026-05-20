@@ -499,6 +499,18 @@ message DeleteHedgeGroupRequest {
   ];
 }
 
+// InstrumentAccumulatorState: instrument 별 bid/ask 누적기 상태
+message InstrumentAccumulatorState {
+  // 헷지 종목 심볼
+  string hedge_symbol = 1;
+
+  // 매수 방향 누적값
+  double bid_accumulator = 2;
+
+  // 매도 방향 누적값
+  double ask_accumulator = 3;
+}
+
 // HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태
 // bid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값
 // ask_accumulator: 매도 방향 ETF 체결의 선물 환산 누적값
@@ -532,6 +544,9 @@ message HedgeAccumulatorState {
 
   // 매도 체결에 대한 desired 헷지 수량 (선물 환산, 누적)
   double desired_ask_hedge_quantity = 10;
+
+  // instrument 별 누적기 상세 (multi-instrument 헷지 지원)
+  repeated InstrumentAccumulatorState per_instrument = 11;
 }
 
 // ListHedgeAccumulators 요청
