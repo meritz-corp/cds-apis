@@ -235,6 +235,7 @@ class Hedge extends $pb.GeneratedMessage {
 enum HedgeMethod_Method {
   future, 
   etfDecomposition, 
+  etfPdf, 
   notSet
 }
 
@@ -243,10 +244,12 @@ class HedgeMethod extends $pb.GeneratedMessage {
   factory HedgeMethod({
     FutureHedge? future,
     EtfDecompositionHedge? etfDecomposition,
+    EtfPdfHedge? etfPdf,
   }) {
     final result = create();
     if (future != null) result.future = future;
     if (etfDecomposition != null) result.etfDecomposition = etfDecomposition;
+    if (etfPdf != null) result.etfPdf = etfPdf;
     return result;
   }
 
@@ -258,12 +261,14 @@ class HedgeMethod extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, HedgeMethod_Method> _HedgeMethod_MethodByTag = {
     1 : HedgeMethod_Method.future,
     2 : HedgeMethod_Method.etfDecomposition,
+    3 : HedgeMethod_Method.etfPdf,
     0 : HedgeMethod_Method.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HedgeMethod', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2, 3])
     ..aOM<FutureHedge>(1, _omitFieldNames ? '' : 'future', subBuilder: FutureHedge.create)
     ..aOM<EtfDecompositionHedge>(2, _omitFieldNames ? '' : 'etfDecomposition', subBuilder: EtfDecompositionHedge.create)
+    ..aOM<EtfPdfHedge>(3, _omitFieldNames ? '' : 'etfPdf', subBuilder: EtfPdfHedge.create)
     ..hasRequiredFields = false
   ;
 
@@ -310,6 +315,18 @@ class HedgeMethod extends $pb.GeneratedMessage {
   void clearEtfDecomposition() => $_clearField(2);
   @$pb.TagNumber(2)
   EtfDecompositionHedge ensureEtfDecomposition() => $_ensure(1);
+
+  /// ETF PDF 헷지 (master.etf_constituent PDF 재귀 분해, 네팅 없이 그대로 헷지 발사)
+  @$pb.TagNumber(3)
+  EtfPdfHedge get etfPdf => $_getN(2);
+  @$pb.TagNumber(3)
+  set etfPdf(EtfPdfHedge value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfPdf() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfPdf() => $_clearField(3);
+  @$pb.TagNumber(3)
+  EtfPdfHedge ensureEtfPdf() => $_ensure(2);
 }
 
 /// 선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매
@@ -424,6 +441,62 @@ class EtfDecompositionHedge extends $pb.GeneratedMessage {
   void clearCu() => $_clearField(1);
 
   /// 1CU 당 구성 종목별 헷지 주문 수량
+  /// key: 종목 심볼, value: 1CU 당 주문 수량
+  @$pb.TagNumber(2)
+  $pb.PbMap<$core.String, $core.int> get hedgeOrdersPer1cu => $_getMap(1);
+}
+
+/// ETF PDF 헷지: master.etf_constituent의 PDF를 재귀 분해하여 네팅 없이 그대로 헷지 발사
+class EtfPdfHedge extends $pb.GeneratedMessage {
+  factory EtfPdfHedge({
+    $core.int? cu,
+    $core.Iterable<$core.MapEntry<$core.String, $core.int>>? hedgeOrdersPer1cu,
+  }) {
+    final result = create();
+    if (cu != null) result.cu = cu;
+    if (hedgeOrdersPer1cu != null) result.hedgeOrdersPer1cu.addEntries(hedgeOrdersPer1cu);
+    return result;
+  }
+
+  EtfPdfHedge._();
+
+  factory EtfPdfHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfPdfHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPdfHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'cu', $pb.PbFieldType.O3)
+    ..m<$core.String, $core.int>(2, _omitFieldNames ? '' : 'hedgeOrdersPer1cu', protoName: 'hedge_orders_per_1cu', entryClassName: 'EtfPdfHedge.HedgeOrdersPer1cuEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.O3, packageName: const $pb.PackageName('kdo.v1.hedge'))
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPdfHedge clone() => EtfPdfHedge()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfPdfHedge copyWith(void Function(EtfPdfHedge) updates) => super.copyWith((message) => updates(message as EtfPdfHedge)) as EtfPdfHedge;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfPdfHedge create() => EtfPdfHedge._();
+  @$core.override
+  EtfPdfHedge createEmptyInstance() => create();
+  static $pb.PbList<EtfPdfHedge> createRepeated() => $pb.PbList<EtfPdfHedge>();
+  @$core.pragma('dart2js:noInline')
+  static EtfPdfHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfPdfHedge>(create);
+  static EtfPdfHedge? _defaultInstance;
+
+  /// 1CU(설정단위) 당 ETF 주수
+  @$pb.TagNumber(1)
+  $core.int get cu => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set cu($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCu() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCu() => $_clearField(1);
+
+  /// 1CU 당 헷지 주문 수량 (Symbol → quantity)
   /// key: 종목 심볼, value: 1CU 당 주문 수량
   @$pb.TagNumber(2)
   $pb.PbMap<$core.String, $core.int> get hedgeOrdersPer1cu => $_getMap(1);

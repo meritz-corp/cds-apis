@@ -242,6 +242,9 @@ message HedgeMethod {
 
     // ETF 분해 헷지 (CU 기반)
     EtfDecompositionHedge etf_decomposition = 2;
+
+    // ETF PDF 헷지 (master.etf_constituent PDF 재귀 분해, 네팅 없이 그대로 헷지 발사)
+    EtfPdfHedge etf_pdf = 3;
   }
 }
 
@@ -260,6 +263,16 @@ message EtfDecompositionHedge {
   int32 cu = 1 [(google.api.field_behavior) = REQUIRED];
 
   // 1CU 당 구성 종목별 헷지 주문 수량
+  // key: 종목 심볼, value: 1CU 당 주문 수량
+  map<string, int32> hedge_orders_per_1cu = 2;
+}
+
+// ETF PDF 헷지: master.etf_constituent의 PDF를 재귀 분해하여 네팅 없이 그대로 헷지 발사
+message EtfPdfHedge {
+  // 1CU(설정단위) 당 ETF 주수
+  int32 cu = 1;
+
+  // 1CU 당 헷지 주문 수량 (Symbol → quantity)
   // key: 종목 심볼, value: 1CU 당 주문 수량
   map<string, int32> hedge_orders_per_1cu = 2;
 }

@@ -101,6 +101,7 @@ const HedgeMethod$json = {
   '2': [
     {'1': 'future', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.hedge.FutureHedge', '9': 0, '10': 'future'},
     {'1': 'etf_decomposition', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.hedge.EtfDecompositionHedge', '9': 0, '10': 'etfDecomposition'},
+    {'1': 'etf_pdf', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.hedge.EtfPdfHedge', '9': 0, '10': 'etfPdf'},
   ],
   '8': [
     {'1': 'method'},
@@ -111,7 +112,8 @@ const HedgeMethod$json = {
 final $typed_data.Uint8List hedgeMethodDescriptor = $convert.base64Decode(
     'CgtIZWRnZU1ldGhvZBIzCgZmdXR1cmUYASABKAsyGS5rZG8udjEuaGVkZ2UuRnV0dXJlSGVkZ2'
     'VIAFIGZnV0dXJlElIKEWV0Zl9kZWNvbXBvc2l0aW9uGAIgASgLMiMua2RvLnYxLmhlZGdlLkV0'
-    'ZkRlY29tcG9zaXRpb25IZWRnZUgAUhBldGZEZWNvbXBvc2l0aW9uQggKBm1ldGhvZA==');
+    'ZkRlY29tcG9zaXRpb25IZWRnZUgAUhBldGZEZWNvbXBvc2l0aW9uEjQKB2V0Zl9wZGYYAyABKA'
+    'syGS5rZG8udjEuaGVkZ2UuRXRmUGRmSGVkZ2VIAFIGZXRmUGRmQggKBm1ldGhvZA==');
 
 @$core.Deprecated('Use futureHedgeDescriptor instead')
 const FutureHedge$json = {
@@ -154,6 +156,33 @@ final $typed_data.Uint8List etfDecompositionHedgeDescriptor = $convert.base64Dec
     'ZS5IZWRnZU9yZGVyc1BlcjFjdUVudHJ5UhFoZWRnZU9yZGVyc1BlcjFjdRpEChZIZWRnZU9yZG'
     'Vyc1BlcjFjdUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgFUgV2YWx1ZToC'
     'OAE=');
+
+@$core.Deprecated('Use etfPdfHedgeDescriptor instead')
+const EtfPdfHedge$json = {
+  '1': 'EtfPdfHedge',
+  '2': [
+    {'1': 'cu', '3': 1, '4': 1, '5': 5, '10': 'cu'},
+    {'1': 'hedge_orders_per_1cu', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.hedge.EtfPdfHedge.HedgeOrdersPer1cuEntry', '10': 'hedgeOrdersPer1cu'},
+  ],
+  '3': [EtfPdfHedge_HedgeOrdersPer1cuEntry$json],
+};
+
+@$core.Deprecated('Use etfPdfHedgeDescriptor instead')
+const EtfPdfHedge_HedgeOrdersPer1cuEntry$json = {
+  '1': 'HedgeOrdersPer1cuEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 5, '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `EtfPdfHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfPdfHedgeDescriptor = $convert.base64Decode(
+    'CgtFdGZQZGZIZWRnZRIOCgJjdRgBIAEoBVICY3USYQoUaGVkZ2Vfb3JkZXJzX3Blcl8xY3UYAi'
+    'ADKAsyMC5rZG8udjEuaGVkZ2UuRXRmUGRmSGVkZ2UuSGVkZ2VPcmRlcnNQZXIxY3VFbnRyeVIR'
+    'aGVkZ2VPcmRlcnNQZXIxY3UaRAoWSGVkZ2VPcmRlcnNQZXIxY3VFbnRyeRIQCgNrZXkYASABKA'
+    'lSA2tleRIUCgV2YWx1ZRgCIAEoBVIFdmFsdWU6AjgB');
 
 @$core.Deprecated('Use hedgeGroupDescriptor instead')
 const HedgeGroup$json = {

@@ -726,6 +726,25 @@
         "cu"
       ]
     },
+    "hedgeEtfPdfHedge": {
+      "type": "object",
+      "properties": {
+        "cu": {
+          "type": "integer",
+          "format": "int32",
+          "title": "1CU(설정단위) 당 ETF 주수"
+        },
+        "hedgeOrdersPer1cu": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": "1CU 당 헷지 주문 수량 (Symbol → quantity)\nkey: 종목 심볼, value: 1CU 당 주문 수량"
+        }
+      },
+      "title": "ETF PDF 헷지: master.etf_constituent의 PDF를 재귀 분해하여 네팅 없이 그대로 헷지 발사"
+    },
     "hedgeExecPriceType": {
       "type": "string",
       "enum": [
@@ -996,6 +1015,10 @@
         "etfDecomposition": {
           "$ref": "#/definitions/hedgeEtfDecompositionHedge",
           "title": "ETF 분해 헷지 (CU 기반)"
+        },
+        "etfPdf": {
+          "$ref": "#/definitions/hedgeEtfPdfHedge",
+          "title": "ETF PDF 헷지 (master.etf_constituent PDF 재귀 분해, 네팅 없이 그대로 헷지 발사)"
         }
       },
       "title": "헷지 방식"

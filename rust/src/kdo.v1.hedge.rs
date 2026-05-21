@@ -55,7 +55,7 @@ pub struct Hedge {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HedgeMethod {
-    #[prost(oneof="hedge_method::Method", tags="1, 2")]
+    #[prost(oneof="hedge_method::Method", tags="1, 2, 3")]
     pub method: ::core::option::Option<hedge_method::Method>,
 }
 /// Nested message and enum types in `HedgeMethod`.
@@ -69,6 +69,9 @@ pub mod hedge_method {
         /// ETF 분해 헷지 (CU 기반)
         #[prost(message, tag="2")]
         EtfDecomposition(super::EtfDecompositionHedge),
+        /// ETF PDF 헷지 (master.etf_constituent PDF 재귀 분해, 네팅 없이 그대로 헷지 발사)
+        #[prost(message, tag="3")]
+        EtfPdf(super::EtfPdfHedge),
     }
 }
 /// 선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매
@@ -90,6 +93,18 @@ pub struct EtfDecompositionHedge {
     #[prost(int32, tag="1")]
     pub cu: i32,
     /// 1CU 당 구성 종목별 헷지 주문 수량
+    /// key: 종목 심볼, value: 1CU 당 주문 수량
+    #[prost(map="string, int32", tag="2")]
+    pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, i32>,
+}
+/// ETF PDF 헷지: master.etf_constituent의 PDF를 재귀 분해하여 네팅 없이 그대로 헷지 발사
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfPdfHedge {
+    /// 1CU(설정단위) 당 ETF 주수
+    #[prost(int32, tag="1")]
+    pub cu: i32,
+    /// 1CU 당 헷지 주문 수량 (Symbol → quantity)
     /// key: 종목 심볼, value: 1CU 당 주문 수량
     #[prost(map="string, int32", tag="2")]
     pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, i32>,
