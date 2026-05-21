@@ -98,6 +98,12 @@ pub mod kdo {
         pub mod system {
             include!("kdo.v1.system.rs");
         }
+        pub mod order_limit {
+            include!("kdo.v1.order_limit.rs");
+        }
+        pub mod pair {
+            include!("kdo.v1.pair.rs");
+        }
     }
 }
 pub mod market {
