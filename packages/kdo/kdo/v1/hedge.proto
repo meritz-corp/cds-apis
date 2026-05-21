@@ -263,8 +263,8 @@ message EtfDecompositionHedge {
   int32 cu = 1 [(google.api.field_behavior) = REQUIRED];
 
   // 1CU 당 구성 종목별 헷지 주문 수량
-  // key: 종목 심볼, value: 1CU 당 주문 수량
-  map<string, int32> hedge_orders_per_1cu = 2;
+  // key: 종목 심볼, value: 1CU 당 주문 수량 (소수 수량 지원, 예: KOSPI200 선물 +0.08/CU)
+  map<string, double> hedge_orders_per_1cu = 2;
 }
 
 // ETF PDF 헷지: master.etf_constituent의 PDF를 재귀 분해하여 네팅 없이 그대로 헷지 발사
@@ -273,8 +273,8 @@ message EtfPdfHedge {
   int32 cu = 1;
 
   // 1CU 당 헷지 주문 수량 (Symbol → quantity)
-  // key: 종목 심볼, value: 1CU 당 주문 수량
-  map<string, int32> hedge_orders_per_1cu = 2;
+  // key: 종목 심볼, value: 1CU 당 주문 수량 (소수 수량 지원, 예: KOSPI200 선물 +0.08/CU)
+  map<string, double> hedge_orders_per_1cu = 2;
 }
 
 // HedgeGroup: 포트폴리오 단위 주기적 헷지

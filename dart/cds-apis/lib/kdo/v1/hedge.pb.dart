@@ -394,7 +394,7 @@ class FutureHedge extends $pb.GeneratedMessage {
 class EtfDecompositionHedge extends $pb.GeneratedMessage {
   factory EtfDecompositionHedge({
     $core.int? cu,
-    $core.Iterable<$core.MapEntry<$core.String, $core.int>>? hedgeOrdersPer1cu,
+    $core.Iterable<$core.MapEntry<$core.String, $core.double>>? hedgeOrdersPer1cu,
   }) {
     final result = create();
     if (cu != null) result.cu = cu;
@@ -409,7 +409,7 @@ class EtfDecompositionHedge extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfDecompositionHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'cu', $pb.PbFieldType.O3)
-    ..m<$core.String, $core.int>(2, _omitFieldNames ? '' : 'hedgeOrdersPer1cu', protoName: 'hedge_orders_per_1cu', entryClassName: 'EtfDecompositionHedge.HedgeOrdersPer1cuEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.O3, packageName: const $pb.PackageName('kdo.v1.hedge'))
+    ..m<$core.String, $core.double>(2, _omitFieldNames ? '' : 'hedgeOrdersPer1cu', protoName: 'hedge_orders_per_1cu', entryClassName: 'EtfDecompositionHedge.HedgeOrdersPer1cuEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OD, packageName: const $pb.PackageName('kdo.v1.hedge'))
     ..hasRequiredFields = false
   ;
 
@@ -441,16 +441,16 @@ class EtfDecompositionHedge extends $pb.GeneratedMessage {
   void clearCu() => $_clearField(1);
 
   /// 1CU 당 구성 종목별 헷지 주문 수량
-  /// key: 종목 심볼, value: 1CU 당 주문 수량
+  /// key: 종목 심볼, value: 1CU 당 주문 수량 (소수 수량 지원, 예: KOSPI200 선물 +0.08/CU)
   @$pb.TagNumber(2)
-  $pb.PbMap<$core.String, $core.int> get hedgeOrdersPer1cu => $_getMap(1);
+  $pb.PbMap<$core.String, $core.double> get hedgeOrdersPer1cu => $_getMap(1);
 }
 
 /// ETF PDF 헷지: master.etf_constituent의 PDF를 재귀 분해하여 네팅 없이 그대로 헷지 발사
 class EtfPdfHedge extends $pb.GeneratedMessage {
   factory EtfPdfHedge({
     $core.int? cu,
-    $core.Iterable<$core.MapEntry<$core.String, $core.int>>? hedgeOrdersPer1cu,
+    $core.Iterable<$core.MapEntry<$core.String, $core.double>>? hedgeOrdersPer1cu,
   }) {
     final result = create();
     if (cu != null) result.cu = cu;
@@ -465,7 +465,7 @@ class EtfPdfHedge extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfPdfHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'cu', $pb.PbFieldType.O3)
-    ..m<$core.String, $core.int>(2, _omitFieldNames ? '' : 'hedgeOrdersPer1cu', protoName: 'hedge_orders_per_1cu', entryClassName: 'EtfPdfHedge.HedgeOrdersPer1cuEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.O3, packageName: const $pb.PackageName('kdo.v1.hedge'))
+    ..m<$core.String, $core.double>(2, _omitFieldNames ? '' : 'hedgeOrdersPer1cu', protoName: 'hedge_orders_per_1cu', entryClassName: 'EtfPdfHedge.HedgeOrdersPer1cuEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OD, packageName: const $pb.PackageName('kdo.v1.hedge'))
     ..hasRequiredFields = false
   ;
 
@@ -497,9 +497,9 @@ class EtfPdfHedge extends $pb.GeneratedMessage {
   void clearCu() => $_clearField(1);
 
   /// 1CU 당 헷지 주문 수량 (Symbol → quantity)
-  /// key: 종목 심볼, value: 1CU 당 주문 수량
+  /// key: 종목 심볼, value: 1CU 당 주문 수량 (소수 수량 지원, 예: KOSPI200 선물 +0.08/CU)
   @$pb.TagNumber(2)
-  $pb.PbMap<$core.String, $core.int> get hedgeOrdersPer1cu => $_getMap(1);
+  $pb.PbMap<$core.String, $core.double> get hedgeOrdersPer1cu => $_getMap(1);
 }
 
 /// HedgeGroup: 포트폴리오 단위 주기적 헷지

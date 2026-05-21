@@ -616,7 +616,7 @@ impl<'de> serde::Deserialize<'de> for EtfDecompositionHedge {
                                 return Err(serde::de::Error::duplicate_field("hedgeOrdersPer1cu"));
                             }
                             hedge_orders_per_1cu__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<i32>>>()?
+                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<f64>>>()?
                                     .into_iter().map(|(k,v)| (k, v.0)).collect()
                             );
                         }
@@ -734,7 +734,7 @@ impl<'de> serde::Deserialize<'de> for EtfPdfHedge {
                                 return Err(serde::de::Error::duplicate_field("hedgeOrdersPer1cu"));
                             }
                             hedge_orders_per_1cu__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<i32>>>()?
+                                map_.next_value::<std::collections::HashMap<_, ::pbjson::private::NumberDeserialize<f64>>>()?
                                     .into_iter().map(|(k,v)| (k, v.0)).collect()
                             );
                         }

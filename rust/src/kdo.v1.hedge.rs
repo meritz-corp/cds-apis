@@ -93,9 +93,9 @@ pub struct EtfDecompositionHedge {
     #[prost(int32, tag="1")]
     pub cu: i32,
     /// 1CU 당 구성 종목별 헷지 주문 수량
-    /// key: 종목 심볼, value: 1CU 당 주문 수량
-    #[prost(map="string, int32", tag="2")]
-    pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, i32>,
+    /// key: 종목 심볼, value: 1CU 당 주문 수량 (소수 수량 지원, 예: KOSPI200 선물 +0.08/CU)
+    #[prost(map="string, double", tag="2")]
+    pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, f64>,
 }
 /// ETF PDF 헷지: master.etf_constituent의 PDF를 재귀 분해하여 네팅 없이 그대로 헷지 발사
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -105,9 +105,9 @@ pub struct EtfPdfHedge {
     #[prost(int32, tag="1")]
     pub cu: i32,
     /// 1CU 당 헷지 주문 수량 (Symbol → quantity)
-    /// key: 종목 심볼, value: 1CU 당 주문 수량
-    #[prost(map="string, int32", tag="2")]
-    pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, i32>,
+    /// key: 종목 심볼, value: 1CU 당 주문 수량 (소수 수량 지원, 예: KOSPI200 선물 +0.08/CU)
+    #[prost(map="string, double", tag="2")]
+    pub hedge_orders_per_1cu: ::std::collections::HashMap<::prost::alloc::string::String, f64>,
 }
 /// HedgeGroup: 포트폴리오 단위 주기적 헷지
 /// 트리거 조건에 따라 주기적으로 헷지 실행
