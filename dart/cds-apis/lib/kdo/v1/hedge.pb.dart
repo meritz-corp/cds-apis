@@ -233,7 +233,7 @@ class Hedge extends $pb.GeneratedMessage {
 }
 
 enum HedgeMethod_Method {
-  future, 
+  direct, 
   etfDecomposition, 
   etfPdf, 
   notSet
@@ -242,12 +242,12 @@ enum HedgeMethod_Method {
 /// 헷지 방식
 class HedgeMethod extends $pb.GeneratedMessage {
   factory HedgeMethod({
-    FutureHedge? future,
+    DirectHedge? direct,
     EtfDecompositionHedge? etfDecomposition,
     EtfPdfHedge? etfPdf,
   }) {
     final result = create();
-    if (future != null) result.future = future;
+    if (direct != null) result.direct = direct;
     if (etfDecomposition != null) result.etfDecomposition = etfDecomposition;
     if (etfPdf != null) result.etfPdf = etfPdf;
     return result;
@@ -259,14 +259,14 @@ class HedgeMethod extends $pb.GeneratedMessage {
   factory HedgeMethod.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, HedgeMethod_Method> _HedgeMethod_MethodByTag = {
-    1 : HedgeMethod_Method.future,
+    1 : HedgeMethod_Method.direct,
     2 : HedgeMethod_Method.etfDecomposition,
     3 : HedgeMethod_Method.etfPdf,
     0 : HedgeMethod_Method.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HedgeMethod', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..oo(0, [1, 2, 3])
-    ..aOM<FutureHedge>(1, _omitFieldNames ? '' : 'future', subBuilder: FutureHedge.create)
+    ..aOM<DirectHedge>(1, _omitFieldNames ? '' : 'direct', subBuilder: DirectHedge.create)
     ..aOM<EtfDecompositionHedge>(2, _omitFieldNames ? '' : 'etfDecomposition', subBuilder: EtfDecompositionHedge.create)
     ..aOM<EtfPdfHedge>(3, _omitFieldNames ? '' : 'etfPdf', subBuilder: EtfPdfHedge.create)
     ..hasRequiredFields = false
@@ -292,17 +292,17 @@ class HedgeMethod extends $pb.GeneratedMessage {
   HedgeMethod_Method whichMethod() => _HedgeMethod_MethodByTag[$_whichOneof(0)]!;
   void clearMethod() => $_clearField($_whichOneof(0));
 
-  /// 선물 헷지 (비율 기반)
+  /// 직접 헷지 (비율 기반, instrument 종류 무관)
   @$pb.TagNumber(1)
-  FutureHedge get future => $_getN(0);
+  DirectHedge get direct => $_getN(0);
   @$pb.TagNumber(1)
-  set future(FutureHedge value) => $_setField(1, value);
+  set direct(DirectHedge value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasFuture() => $_has(0);
+  $core.bool hasDirect() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFuture() => $_clearField(1);
+  void clearDirect() => $_clearField(1);
   @$pb.TagNumber(1)
-  FutureHedge ensureFuture() => $_ensure(0);
+  DirectHedge ensureDirect() => $_ensure(0);
 
   /// ETF 분해 헷지 (CU 기반)
   @$pb.TagNumber(2)
@@ -329,9 +329,9 @@ class HedgeMethod extends $pb.GeneratedMessage {
   EtfPdfHedge ensureEtfPdf() => $_ensure(2);
 }
 
-/// 선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매
-class FutureHedge extends $pb.GeneratedMessage {
-  factory FutureHedge({
+/// 직접 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매 (instrument 종류 무관)
+class DirectHedge extends $pb.GeneratedMessage {
+  factory DirectHedge({
     $core.String? hedgeSymbol,
     $core.double? ratio,
   }) {
@@ -341,33 +341,33 @@ class FutureHedge extends $pb.GeneratedMessage {
     return result;
   }
 
-  FutureHedge._();
+  DirectHedge._();
 
-  factory FutureHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory FutureHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory DirectHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory DirectHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FutureHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DirectHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'hedgeSymbol')
     ..a<$core.double>(2, _omitFieldNames ? '' : 'ratio', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FutureHedge clone() => FutureHedge()..mergeFromMessage(this);
+  DirectHedge clone() => DirectHedge()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FutureHedge copyWith(void Function(FutureHedge) updates) => super.copyWith((message) => updates(message as FutureHedge)) as FutureHedge;
+  DirectHedge copyWith(void Function(DirectHedge) updates) => super.copyWith((message) => updates(message as DirectHedge)) as DirectHedge;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static FutureHedge create() => FutureHedge._();
+  static DirectHedge create() => DirectHedge._();
   @$core.override
-  FutureHedge createEmptyInstance() => create();
-  static $pb.PbList<FutureHedge> createRepeated() => $pb.PbList<FutureHedge>();
+  DirectHedge createEmptyInstance() => create();
+  static $pb.PbList<DirectHedge> createRepeated() => $pb.PbList<DirectHedge>();
   @$core.pragma('dart2js:noInline')
-  static FutureHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FutureHedge>(create);
-  static FutureHedge? _defaultInstance;
+  static DirectHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DirectHedge>(create);
+  static DirectHedge? _defaultInstance;
 
   /// 헷지 대상 종목 심볼
   @$pb.TagNumber(1)

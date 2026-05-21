@@ -99,7 +99,7 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
 const HedgeMethod$json = {
   '1': 'HedgeMethod',
   '2': [
-    {'1': 'future', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.hedge.FutureHedge', '9': 0, '10': 'future'},
+    {'1': 'direct', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.hedge.DirectHedge', '9': 0, '10': 'direct'},
     {'1': 'etf_decomposition', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.hedge.EtfDecompositionHedge', '9': 0, '10': 'etfDecomposition'},
     {'1': 'etf_pdf', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.hedge.EtfPdfHedge', '9': 0, '10': 'etfPdf'},
   ],
@@ -110,23 +110,23 @@ const HedgeMethod$json = {
 
 /// Descriptor for `HedgeMethod`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List hedgeMethodDescriptor = $convert.base64Decode(
-    'CgtIZWRnZU1ldGhvZBIzCgZmdXR1cmUYASABKAsyGS5rZG8udjEuaGVkZ2UuRnV0dXJlSGVkZ2'
-    'VIAFIGZnV0dXJlElIKEWV0Zl9kZWNvbXBvc2l0aW9uGAIgASgLMiMua2RvLnYxLmhlZGdlLkV0'
+    'CgtIZWRnZU1ldGhvZBIzCgZkaXJlY3QYASABKAsyGS5rZG8udjEuaGVkZ2UuRGlyZWN0SGVkZ2'
+    'VIAFIGZGlyZWN0ElIKEWV0Zl9kZWNvbXBvc2l0aW9uGAIgASgLMiMua2RvLnYxLmhlZGdlLkV0'
     'ZkRlY29tcG9zaXRpb25IZWRnZUgAUhBldGZEZWNvbXBvc2l0aW9uEjQKB2V0Zl9wZGYYAyABKA'
     'syGS5rZG8udjEuaGVkZ2UuRXRmUGRmSGVkZ2VIAFIGZXRmUGRmQggKBm1ldGhvZA==');
 
-@$core.Deprecated('Use futureHedgeDescriptor instead')
-const FutureHedge$json = {
-  '1': 'FutureHedge',
+@$core.Deprecated('Use directHedgeDescriptor instead')
+const DirectHedge$json = {
+  '1': 'DirectHedge',
   '2': [
     {'1': 'hedge_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'hedgeSymbol'},
     {'1': 'ratio', '3': 2, '4': 1, '5': 1, '8': {}, '10': 'ratio'},
   ],
 };
 
-/// Descriptor for `FutureHedge`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List futureHedgeDescriptor = $convert.base64Decode(
-    'CgtGdXR1cmVIZWRnZRInCgxoZWRnZV9zeW1ib2wYASABKAlCBOJBAQJSC2hlZGdlU3ltYm9sEh'
+/// Descriptor for `DirectHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List directHedgeDescriptor = $convert.base64Decode(
+    'CgtEaXJlY3RIZWRnZRInCgxoZWRnZV9zeW1ib2wYASABKAlCBOJBAQJSC2hlZGdlU3ltYm9sEh'
     'oKBXJhdGlvGAIgASgBQgTiQQECUgVyYXRpbw==');
 
 @$core.Deprecated('Use etfDecompositionHedgeDescriptor instead')

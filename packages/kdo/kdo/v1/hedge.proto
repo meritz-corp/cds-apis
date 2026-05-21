@@ -237,8 +237,8 @@ message Hedge {
 // 헷지 방식
 message HedgeMethod {
   oneof method {
-    // 선물 헷지 (비율 기반)
-    FutureHedge future = 1;
+    // 직접 헷지 (비율 기반, instrument 종류 무관)
+    DirectHedge direct = 1;
 
     // ETF 분해 헷지 (CU 기반)
     EtfDecompositionHedge etf_decomposition = 2;
@@ -248,8 +248,8 @@ message HedgeMethod {
   }
 }
 
-// 선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매
-message FutureHedge {
+// 직접 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매 (instrument 종류 무관)
+message DirectHedge {
   // 헷지 대상 종목 심볼
   string hedge_symbol = 1 [(google.api.field_behavior) = REQUIRED];
 

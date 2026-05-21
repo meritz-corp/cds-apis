@@ -284,7 +284,7 @@ type HedgeMethod struct {
 
 	// Types that are assignable to Method:
 	//
-	//	*HedgeMethod_Future
+	//	*HedgeMethod_Direct
 	//	*HedgeMethod_EtfDecomposition
 	//	*HedgeMethod_EtfPdf
 	Method isHedgeMethod_Method `protobuf_oneof:"method"`
@@ -329,9 +329,9 @@ func (m *HedgeMethod) GetMethod() isHedgeMethod_Method {
 	return nil
 }
 
-func (x *HedgeMethod) GetFuture() *FutureHedge {
-	if x, ok := x.GetMethod().(*HedgeMethod_Future); ok {
-		return x.Future
+func (x *HedgeMethod) GetDirect() *DirectHedge {
+	if x, ok := x.GetMethod().(*HedgeMethod_Direct); ok {
+		return x.Direct
 	}
 	return nil
 }
@@ -354,9 +354,9 @@ type isHedgeMethod_Method interface {
 	isHedgeMethod_Method()
 }
 
-type HedgeMethod_Future struct {
-	// 선물 헷지 (비율 기반)
-	Future *FutureHedge `protobuf:"bytes,1,opt,name=future,proto3,oneof"`
+type HedgeMethod_Direct struct {
+	// 직접 헷지 (비율 기반, instrument 종류 무관)
+	Direct *DirectHedge `protobuf:"bytes,1,opt,name=direct,proto3,oneof"`
 }
 
 type HedgeMethod_EtfDecomposition struct {
@@ -369,14 +369,14 @@ type HedgeMethod_EtfPdf struct {
 	EtfPdf *EtfPdfHedge `protobuf:"bytes,3,opt,name=etf_pdf,json=etfPdf,proto3,oneof"`
 }
 
-func (*HedgeMethod_Future) isHedgeMethod_Method() {}
+func (*HedgeMethod_Direct) isHedgeMethod_Method() {}
 
 func (*HedgeMethod_EtfDecomposition) isHedgeMethod_Method() {}
 
 func (*HedgeMethod_EtfPdf) isHedgeMethod_Method() {}
 
-// 선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매
-type FutureHedge struct {
+// 직접 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매 (instrument 종류 무관)
+type DirectHedge struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -387,8 +387,8 @@ type FutureHedge struct {
 	Ratio float64 `protobuf:"fixed64,2,opt,name=ratio,proto3" json:"ratio,omitempty"`
 }
 
-func (x *FutureHedge) Reset() {
-	*x = FutureHedge{}
+func (x *DirectHedge) Reset() {
+	*x = DirectHedge{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_kdo_v1_hedge_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -396,13 +396,13 @@ func (x *FutureHedge) Reset() {
 	}
 }
 
-func (x *FutureHedge) String() string {
+func (x *DirectHedge) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FutureHedge) ProtoMessage() {}
+func (*DirectHedge) ProtoMessage() {}
 
-func (x *FutureHedge) ProtoReflect() protoreflect.Message {
+func (x *DirectHedge) ProtoReflect() protoreflect.Message {
 	mi := &file_kdo_v1_hedge_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -414,19 +414,19 @@ func (x *FutureHedge) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FutureHedge.ProtoReflect.Descriptor instead.
-func (*FutureHedge) Descriptor() ([]byte, []int) {
+// Deprecated: Use DirectHedge.ProtoReflect.Descriptor instead.
+func (*DirectHedge) Descriptor() ([]byte, []int) {
 	return file_kdo_v1_hedge_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *FutureHedge) GetHedgeSymbol() string {
+func (x *DirectHedge) GetHedgeSymbol() string {
 	if x != nil {
 		return x.HedgeSymbol
 	}
 	return ""
 }
 
-func (x *FutureHedge) GetRatio() float64 {
+func (x *DirectHedge) GetRatio() float64 {
 	if x != nil {
 		return x.Ratio
 	}
@@ -2220,10 +2220,10 @@ var file_kdo_v1_hedge_proto_rawDesc = []byte{
 	0x41, 0x27, 0x0a, 0x15, 0x6b, 0x64, 0x6f, 0x2e, 0x63, 0x64, 0x73, 0x61, 0x70, 0x69, 0x73, 0x2e,
 	0x78, 0x79, 0x7a, 0x2f, 0x48, 0x65, 0x64, 0x67, 0x65, 0x12, 0x0e, 0x68, 0x65, 0x64, 0x67, 0x65,
 	0x73, 0x2f, 0x7b, 0x68, 0x65, 0x64, 0x67, 0x65, 0x7d, 0x22, 0xd6, 0x01, 0x0a, 0x0b, 0x48, 0x65,
-	0x64, 0x67, 0x65, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x33, 0x0a, 0x06, 0x66, 0x75, 0x74,
-	0x75, 0x72, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6b, 0x64, 0x6f, 0x2e,
-	0x76, 0x31, 0x2e, 0x68, 0x65, 0x64, 0x67, 0x65, 0x2e, 0x46, 0x75, 0x74, 0x75, 0x72, 0x65, 0x48,
-	0x65, 0x64, 0x67, 0x65, 0x48, 0x00, 0x52, 0x06, 0x66, 0x75, 0x74, 0x75, 0x72, 0x65, 0x12, 0x52,
+	0x64, 0x67, 0x65, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x33, 0x0a, 0x06, 0x64, 0x69, 0x72,
+	0x65, 0x63, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6b, 0x64, 0x6f, 0x2e,
+	0x76, 0x31, 0x2e, 0x68, 0x65, 0x64, 0x67, 0x65, 0x2e, 0x44, 0x69, 0x72, 0x65, 0x63, 0x74, 0x48,
+	0x65, 0x64, 0x67, 0x65, 0x48, 0x00, 0x52, 0x06, 0x64, 0x69, 0x72, 0x65, 0x63, 0x74, 0x12, 0x52,
 	0x0a, 0x11, 0x65, 0x74, 0x66, 0x5f, 0x64, 0x65, 0x63, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69, 0x74,
 	0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6b, 0x64, 0x6f, 0x2e,
 	0x76, 0x31, 0x2e, 0x68, 0x65, 0x64, 0x67, 0x65, 0x2e, 0x45, 0x74, 0x66, 0x44, 0x65, 0x63, 0x6f,
@@ -2233,7 +2233,7 @@ var file_kdo_v1_hedge_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x68, 0x65, 0x64,
 	0x67, 0x65, 0x2e, 0x45, 0x74, 0x66, 0x50, 0x64, 0x66, 0x48, 0x65, 0x64, 0x67, 0x65, 0x48, 0x00,
 	0x52, 0x06, 0x65, 0x74, 0x66, 0x50, 0x64, 0x66, 0x42, 0x08, 0x0a, 0x06, 0x6d, 0x65, 0x74, 0x68,
-	0x6f, 0x64, 0x22, 0x52, 0x0a, 0x0b, 0x46, 0x75, 0x74, 0x75, 0x72, 0x65, 0x48, 0x65, 0x64, 0x67,
+	0x6f, 0x64, 0x22, 0x52, 0x0a, 0x0b, 0x44, 0x69, 0x72, 0x65, 0x63, 0x74, 0x48, 0x65, 0x64, 0x67,
 	0x65, 0x12, 0x27, 0x0a, 0x0c, 0x68, 0x65, 0x64, 0x67, 0x65, 0x5f, 0x73, 0x79, 0x6d, 0x62, 0x6f,
 	0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe2, 0x41, 0x01, 0x02, 0x52, 0x0b, 0x68,
 	0x65, 0x64, 0x67, 0x65, 0x53, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x12, 0x1a, 0x0a, 0x05, 0x72, 0x61,
@@ -2666,7 +2666,7 @@ var file_kdo_v1_hedge_proto_goTypes = []interface{}{
 	(ExecPriceType)(0),                                    // 0: kdo.v1.hedge.ExecPriceType
 	(*Hedge)(nil),                                         // 1: kdo.v1.hedge.Hedge
 	(*HedgeMethod)(nil),                                   // 2: kdo.v1.hedge.HedgeMethod
-	(*FutureHedge)(nil),                                   // 3: kdo.v1.hedge.FutureHedge
+	(*DirectHedge)(nil),                                   // 3: kdo.v1.hedge.DirectHedge
 	(*EtfDecompositionHedge)(nil),                         // 4: kdo.v1.hedge.EtfDecompositionHedge
 	(*EtfPdfHedge)(nil),                                   // 5: kdo.v1.hedge.EtfPdfHedge
 	(*HedgeGroup)(nil),                                    // 6: kdo.v1.hedge.HedgeGroup
@@ -2707,7 +2707,7 @@ var file_kdo_v1_hedge_proto_depIdxs = []int32{
 	0,  // 3: kdo.v1.hedge.Hedge.exec_price_type:type_name -> kdo.v1.hedge.ExecPriceType
 	34, // 4: kdo.v1.hedge.Hedge.amend_method:type_name -> kdo.v1.common.AmendMethodType
 	30, // 5: kdo.v1.hedge.Hedge.quantity_per_hedge:type_name -> kdo.v1.hedge.Hedge.QuantityPerHedgeEntry
-	3,  // 6: kdo.v1.hedge.HedgeMethod.future:type_name -> kdo.v1.hedge.FutureHedge
+	3,  // 6: kdo.v1.hedge.HedgeMethod.direct:type_name -> kdo.v1.hedge.DirectHedge
 	4,  // 7: kdo.v1.hedge.HedgeMethod.etf_decomposition:type_name -> kdo.v1.hedge.EtfDecompositionHedge
 	5,  // 8: kdo.v1.hedge.HedgeMethod.etf_pdf:type_name -> kdo.v1.hedge.EtfPdfHedge
 	31, // 9: kdo.v1.hedge.EtfDecompositionHedge.hedge_orders_per_1cu:type_name -> kdo.v1.hedge.EtfDecompositionHedge.HedgeOrdersPer1cuEntry
@@ -2793,7 +2793,7 @@ func file_kdo_v1_hedge_proto_init() {
 			}
 		}
 		file_kdo_v1_hedge_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FutureHedge); i {
+			switch v := v.(*DirectHedge); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3118,7 +3118,7 @@ func file_kdo_v1_hedge_proto_init() {
 		}
 	}
 	file_kdo_v1_hedge_proto_msgTypes[1].OneofWrappers = []interface{}{
-		(*HedgeMethod_Future)(nil),
+		(*HedgeMethod_Direct)(nil),
 		(*HedgeMethod_EtfDecomposition)(nil),
 		(*HedgeMethod_EtfPdf)(nil),
 	}

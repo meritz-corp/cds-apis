@@ -516,6 +516,121 @@ impl<'de> serde::Deserialize<'de> for DeleteHedgeRequest {
         deserializer.deserialize_struct("kdo.v1.hedge.DeleteHedgeRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for DirectHedge {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.DirectHedge", len)?;
+        if true {
+            struct_ser.serialize_field("hedge_symbol", &self.hedge_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("ratio", &self.ratio)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for DirectHedge {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "hedge_symbol",
+            "hedgeSymbol",
+            "ratio",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            HedgeSymbol,
+            Ratio,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
+                            "ratio" => Ok(GeneratedField::Ratio),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DirectHedge;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.hedge.DirectHedge")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DirectHedge, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut hedge_symbol__ = None;
+                let mut ratio__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::HedgeSymbol => {
+                            if hedge_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeSymbol"));
+                            }
+                            hedge_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Ratio => {
+                            if ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ratio"));
+                            }
+                            ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(DirectHedge {
+                    hedge_symbol: hedge_symbol__.unwrap_or_default(),
+                    ratio: ratio__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.hedge.DirectHedge", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for EtfDecompositionHedge {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -851,121 +966,6 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for FutureHedge {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.FutureHedge", len)?;
-        if true {
-            struct_ser.serialize_field("hedge_symbol", &self.hedge_symbol)?;
-        }
-        if true {
-            struct_ser.serialize_field("ratio", &self.ratio)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for FutureHedge {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "hedge_symbol",
-            "hedgeSymbol",
-            "ratio",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            HedgeSymbol,
-            Ratio,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
-                            "ratio" => Ok(GeneratedField::Ratio),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FutureHedge;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.hedge.FutureHedge")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FutureHedge, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut hedge_symbol__ = None;
-                let mut ratio__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::HedgeSymbol => {
-                            if hedge_symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeSymbol"));
-                            }
-                            hedge_symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Ratio => {
-                            if ratio__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("ratio"));
-                            }
-                            ratio__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(FutureHedge {
-                    hedge_symbol: hedge_symbol__.unwrap_or_default(),
-                    ratio: ratio__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.hedge.FutureHedge", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetHedgeGroupRequest {
@@ -2175,8 +2175,8 @@ impl serde::Serialize for HedgeMethod {
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.HedgeMethod", len)?;
         if let Some(v) = self.method.as_ref() {
             match v {
-                hedge_method::Method::Future(v) => {
-                    struct_ser.serialize_field("future", v)?;
+                hedge_method::Method::Direct(v) => {
+                    struct_ser.serialize_field("direct", v)?;
                 }
                 hedge_method::Method::EtfDecomposition(v) => {
                     struct_ser.serialize_field("etf_decomposition", v)?;
@@ -2196,7 +2196,7 @@ impl<'de> serde::Deserialize<'de> for HedgeMethod {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "future",
+            "direct",
             "etf_decomposition",
             "etfDecomposition",
             "etf_pdf",
@@ -2205,7 +2205,7 @@ impl<'de> serde::Deserialize<'de> for HedgeMethod {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Future,
+            Direct,
             EtfDecomposition,
             EtfPdf,
             __SkipField__,
@@ -2230,7 +2230,7 @@ impl<'de> serde::Deserialize<'de> for HedgeMethod {
                         E: serde::de::Error,
                     {
                         match value {
-                            "future" => Ok(GeneratedField::Future),
+                            "direct" => Ok(GeneratedField::Direct),
                             "etfDecomposition" | "etf_decomposition" => Ok(GeneratedField::EtfDecomposition),
                             "etfPdf" | "etf_pdf" => Ok(GeneratedField::EtfPdf),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -2255,11 +2255,11 @@ impl<'de> serde::Deserialize<'de> for HedgeMethod {
                 let mut method__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Future => {
+                        GeneratedField::Direct => {
                             if method__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("future"));
+                                return Err(serde::de::Error::duplicate_field("direct"));
                             }
-                            method__ = map_.next_value::<::std::option::Option<_>>()?.map(hedge_method::Method::Future)
+                            method__ = map_.next_value::<::std::option::Option<_>>()?.map(hedge_method::Method::Direct)
 ;
                         }
                         GeneratedField::EtfDecomposition => {

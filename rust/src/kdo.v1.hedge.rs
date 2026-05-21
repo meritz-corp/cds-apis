@@ -63,9 +63,9 @@ pub mod hedge_method {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Method {
-        /// 선물 헷지 (비율 기반)
+        /// 직접 헷지 (비율 기반, instrument 종류 무관)
         #[prost(message, tag="1")]
-        Future(super::FutureHedge),
+        Direct(super::DirectHedge),
         /// ETF 분해 헷지 (CU 기반)
         #[prost(message, tag="2")]
         EtfDecomposition(super::EtfDecompositionHedge),
@@ -74,10 +74,10 @@ pub mod hedge_method {
         EtfPdf(super::EtfPdfHedge),
     }
 }
-/// 선물 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매
+/// 직접 헷지: 소스 종목 체결 시 헷지 종목을 ratio 비율로 반대 매매 (instrument 종류 무관)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FutureHedge {
+pub struct DirectHedge {
     /// 헷지 대상 종목 심볼
     #[prost(string, tag="1")]
     pub hedge_symbol: ::prost::alloc::string::String,
