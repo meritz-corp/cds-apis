@@ -1084,28 +1084,6 @@
       },
       "title": "라운드 시작 이벤트"
     },
-    "arbitrageSpreadAmountCondition": {
-      "type": "object",
-      "properties": {
-        "threshold": {
-          "type": "string",
-          "format": "int64",
-          "title": "스프레드 임계값 (원)"
-        }
-      },
-      "title": "절대 스프레드 조건"
-    },
-    "arbitrageSpreadBpsCondition": {
-      "type": "object",
-      "properties": {
-        "thresholdBps": {
-          "type": "number",
-          "format": "double",
-          "title": "스프레드 임계값 (bps, 1bp = 0.01%)"
-        }
-      },
-      "title": "상대 스프레드 조건"
-    },
     "arbitrageStateChangedEvent": {
       "type": "object",
       "properties": {
@@ -1204,7 +1182,7 @@
           "title": "수량 (음수 가능: 매도 포지션)"
         },
         "priceSource": {
-          "$ref": "#/definitions/basketPriceSource",
+          "$ref": "#/definitions/v1basketPriceSource",
           "title": "가격 소스 (바스켓 가치 계산용)"
         },
         "multiple": {
@@ -1295,32 +1273,15 @@
       },
       "title": "청산 바스켓 설정\n청산은 방향이 없음 - 롱 포지션은 매도, 숏 포지션은 매수로 자동 결정"
     },
-    "basketPriceSource": {
-      "type": "string",
-      "enum": [
-        "PRICE_SOURCE_UNSPECIFIED",
-        "PRICE_SOURCE_MID_PRICE",
-        "PRICE_SOURCE_BID1",
-        "PRICE_SOURCE_ASK1",
-        "PRICE_SOURCE_BID2",
-        "PRICE_SOURCE_ASK2",
-        "PRICE_SOURCE_LAST_PRICE",
-        "PRICE_SOURCE_BID3",
-        "PRICE_SOURCE_ASK3"
-      ],
-      "default": "PRICE_SOURCE_UNSPECIFIED",
-      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가\n - PRICE_SOURCE_BID3: 3차 매수호가\n - PRICE_SOURCE_ASK3: 3차 매도호가",
-      "title": "가격 소스"
-    },
     "basketSymbolPricingConfig": {
       "type": "object",
       "properties": {
         "buyPriceSource": {
-          "$ref": "#/definitions/basketPriceSource",
+          "$ref": "#/definitions/v1basketPriceSource",
           "title": "매수 시 사용할 가격"
         },
         "sellPriceSource": {
-          "$ref": "#/definitions/basketPriceSource",
+          "$ref": "#/definitions/v1basketPriceSource",
           "title": "매도 시 사용할 가격"
         },
         "priceOffsetTicks": {
@@ -1358,15 +1319,37 @@
         }
       }
     },
+    "v1arbitrageSpreadAmountCondition": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "string",
+          "format": "int64",
+          "title": "스프레드 임계값 (원)"
+        }
+      },
+      "title": "절대 스프레드 조건"
+    },
+    "v1arbitrageSpreadBpsCondition": {
+      "type": "object",
+      "properties": {
+        "thresholdBps": {
+          "type": "number",
+          "format": "double",
+          "title": "스프레드 임계값 (bps, 1bp = 0.01%)"
+        }
+      },
+      "title": "상대 스프레드 조건"
+    },
     "v1arbitrageTriggerCondition": {
       "type": "object",
       "properties": {
         "spreadAmount": {
-          "$ref": "#/definitions/arbitrageSpreadAmountCondition",
+          "$ref": "#/definitions/v1arbitrageSpreadAmountCondition",
           "title": "절대 스프레드 (금액)"
         },
         "spreadBps": {
-          "$ref": "#/definitions/arbitrageSpreadBpsCondition",
+          "$ref": "#/definitions/v1arbitrageSpreadBpsCondition",
           "title": "상대 스프레드 (bps)"
         }
       },
@@ -1396,6 +1379,23 @@
       "default": "ORDER_TYPE_UNSPECIFIED",
       "description": "- ORDER_TYPE_MARKET: 시장가\n - ORDER_TYPE_LIMIT: 지정가 (pricing_config 기반)\n - ORDER_TYPE_AGGRESSIVE: 공격적 지정가 (상대호가)",
       "title": "주문 유형"
+    },
+    "v1basketPriceSource": {
+      "type": "string",
+      "enum": [
+        "PRICE_SOURCE_UNSPECIFIED",
+        "PRICE_SOURCE_MID_PRICE",
+        "PRICE_SOURCE_BID1",
+        "PRICE_SOURCE_ASK1",
+        "PRICE_SOURCE_BID2",
+        "PRICE_SOURCE_ASK2",
+        "PRICE_SOURCE_LAST_PRICE",
+        "PRICE_SOURCE_BID3",
+        "PRICE_SOURCE_ASK3"
+      ],
+      "default": "PRICE_SOURCE_UNSPECIFIED",
+      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가\n - PRICE_SOURCE_BID3: 3차 매수호가\n - PRICE_SOURCE_ASK3: 3차 매도호가",
+      "title": "가격 소스"
     }
   }
 }

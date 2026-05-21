@@ -369,7 +369,7 @@
           "title": "수량 (음수 가능: 매도 포지션)"
         },
         "priceSource": {
-          "$ref": "#/definitions/basketPriceSource",
+          "$ref": "#/definitions/v1basketPriceSource",
           "title": "가격 소스 (바스켓 가치 계산용)"
         },
         "multiple": {
@@ -405,7 +405,7 @@
           "title": "사용된 가격"
         },
         "priceSource": {
-          "$ref": "#/definitions/basketPriceSource",
+          "$ref": "#/definitions/v1basketPriceSource",
           "title": "가격 소스"
         },
         "multiple": {
@@ -541,32 +541,15 @@
         }
       }
     },
-    "basketPriceSource": {
-      "type": "string",
-      "enum": [
-        "PRICE_SOURCE_UNSPECIFIED",
-        "PRICE_SOURCE_MID_PRICE",
-        "PRICE_SOURCE_BID1",
-        "PRICE_SOURCE_ASK1",
-        "PRICE_SOURCE_BID2",
-        "PRICE_SOURCE_ASK2",
-        "PRICE_SOURCE_LAST_PRICE",
-        "PRICE_SOURCE_BID3",
-        "PRICE_SOURCE_ASK3"
-      ],
-      "default": "PRICE_SOURCE_UNSPECIFIED",
-      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가\n - PRICE_SOURCE_BID3: 3차 매수호가\n - PRICE_SOURCE_ASK3: 3차 매도호가",
-      "title": "가격 소스"
-    },
     "basketSymbolPricingConfig": {
       "type": "object",
       "properties": {
         "buyPriceSource": {
-          "$ref": "#/definitions/basketPriceSource",
+          "$ref": "#/definitions/v1basketPriceSource",
           "title": "매수 시 사용할 가격"
         },
         "sellPriceSource": {
-          "$ref": "#/definitions/basketPriceSource",
+          "$ref": "#/definitions/v1basketPriceSource",
           "title": "매도 시 사용할 가격"
         },
         "priceOffsetTicks": {
@@ -615,6 +598,23 @@
       "default": "ORDER_TYPE_UNSPECIFIED",
       "description": "- ORDER_TYPE_MARKET: 시장가\n - ORDER_TYPE_LIMIT: 지정가 (pricing_config 기반)\n - ORDER_TYPE_AGGRESSIVE: 공격적 지정가 (상대호가)",
       "title": "주문 유형"
+    },
+    "v1basketPriceSource": {
+      "type": "string",
+      "enum": [
+        "PRICE_SOURCE_UNSPECIFIED",
+        "PRICE_SOURCE_MID_PRICE",
+        "PRICE_SOURCE_BID1",
+        "PRICE_SOURCE_ASK1",
+        "PRICE_SOURCE_BID2",
+        "PRICE_SOURCE_ASK2",
+        "PRICE_SOURCE_LAST_PRICE",
+        "PRICE_SOURCE_BID3",
+        "PRICE_SOURCE_ASK3"
+      ],
+      "default": "PRICE_SOURCE_UNSPECIFIED",
+      "description": "- PRICE_SOURCE_MID_PRICE: (bid1 + ask1) / 2\n - PRICE_SOURCE_BID1: 최우선 매수호가\n - PRICE_SOURCE_ASK1: 최우선 매도호가\n - PRICE_SOURCE_BID2: 2차 매수호가\n - PRICE_SOURCE_ASK2: 2차 매도호가\n - PRICE_SOURCE_LAST_PRICE: 최근 체결가\n - PRICE_SOURCE_BID3: 3차 매수호가\n - PRICE_SOURCE_ASK3: 3차 매도호가",
+      "title": "가격 소스"
     }
   }
 }

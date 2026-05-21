@@ -137,13 +137,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/marketEtfNav"
+                  "$ref": "#/definitions/v1marketEtfNav"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of marketEtfNav"
+              "title": "Stream result of v1marketEtfNav"
             }
           },
           "default": {
@@ -606,25 +606,6 @@
       },
       "title": "Response from adding a raw socket"
     },
-    "marketEtfNav": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "etfSymbol": {
-          "type": "string"
-        },
-        "theoryNav": {
-          "type": "string",
-          "title": "순자산가치 (원 단위, string)"
-        },
-        "krxNav": {
-          "type": "string",
-          "title": "전일 대비 (string)"
-        }
-      }
-    },
     "marketEtfOrderbookData": {
       "type": "object",
       "properties": {
@@ -880,6 +861,25 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1marketEtfNav": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "etfSymbol": {
+          "type": "string"
+        },
+        "theoryNav": {
+          "type": "string",
+          "title": "순자산가치 (원 단위, string)"
+        },
+        "krxNav": {
+          "type": "string",
+          "title": "전일 대비 (string)"
         }
       }
     },
