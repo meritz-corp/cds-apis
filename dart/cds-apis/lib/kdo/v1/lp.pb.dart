@@ -2099,6 +2099,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     EtfLpQuantityLimit? quantityLimit,
     PrecomputePolicy? precomputePolicy,
     $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
+    $1.EtfPricing? pricing,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2117,6 +2118,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
+    if (pricing != null) result.pricing = pricing;
     return result;
   }
 
@@ -2142,6 +2144,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..aOM<EtfLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..e<PrecomputePolicy>(16, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..aOB(17, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
+    ..aOM<$1.EtfPricing>(18, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -2323,6 +2326,19 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(15);
   @$pb.TagNumber(17)
   void clearPricingSourceLiquidityImbalanceGuardEnabled() => $_clearField(17);
+
+  /// ETF pricing 방식. LP가 Idle/Error 상태일 때만 변경 가능.
+  /// EtfPricing은 common.proto의 oneof method 메시지 (Pdf*, IndexTracking*, FutureBasis, LeverageFuture).
+  @$pb.TagNumber(18)
+  $1.EtfPricing get pricing => $_getN(16);
+  @$pb.TagNumber(18)
+  set pricing($1.EtfPricing value) => $_setField(18, value);
+  @$pb.TagNumber(18)
+  $core.bool hasPricing() => $_has(16);
+  @$pb.TagNumber(18)
+  void clearPricing() => $_clearField(18);
+  @$pb.TagNumber(18)
+  $1.EtfPricing ensurePricing() => $_ensure(16);
 }
 
 /// GetEtfLpStatus

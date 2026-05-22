@@ -220,6 +220,10 @@
                 "pricingSourceLiquidityImbalanceGuardEnabled": {
                   "type": "boolean",
                   "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
+                },
+                "pricing": {
+                  "$ref": "#/definitions/commonEtfPricing",
+                  "description": "ETF pricing 방식. LP가 Idle/Error 상태일 때만 변경 가능.\nEtfPricing은 common.proto의 oneof method 메시지 (Pdf*, IndexTracking*, FutureBasis, LeverageFuture)."
                 }
               },
               "title": "UpdateEtfLp"

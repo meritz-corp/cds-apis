@@ -513,6 +513,10 @@ pub struct UpdateEtfLpRequest {
     /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
     #[prost(bool, optional, tag="17")]
     pub pricing_source_liquidity_imbalance_guard_enabled: ::core::option::Option<bool>,
+    /// ETF pricing 방식. LP가 Idle/Error 상태일 때만 변경 가능.
+    /// EtfPricing은 common.proto의 oneof method 메시지 (Pdf*, IndexTracking*, FutureBasis, LeverageFuture).
+    #[prost(message, optional, tag="18")]
+    pub pricing: ::core::option::Option<super::common::EtfPricing>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

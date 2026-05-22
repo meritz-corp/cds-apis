@@ -595,6 +595,7 @@ const UpdateEtfLpRequest$json = {
     {'1': 'quantity_limit', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 11, '10': 'quantityLimit', '17': true},
     {'1': 'precompute_policy', '3': 16, '4': 1, '5': 14, '6': '.kdo.v1.lp.PrecomputePolicy', '9': 12, '10': 'precomputePolicy', '17': true},
     {'1': 'pricing_source_liquidity_imbalance_guard_enabled', '3': 17, '4': 1, '5': 8, '9': 13, '10': 'pricingSourceLiquidityImbalanceGuardEnabled', '17': true},
+    {'1': 'pricing', '3': 18, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '9': 14, '10': 'pricing', '17': true},
   ],
   '8': [
     {'1': '_depth'},
@@ -611,6 +612,7 @@ const UpdateEtfLpRequest$json = {
     {'1': '_quantity_limit'},
     {'1': '_precompute_policy'},
     {'1': '_pricing_source_liquidity_imbalance_guard_enabled'},
+    {'1': '_pricing'},
   ],
 };
 
@@ -630,12 +632,13 @@ final $typed_data.Uint8List updateEtfLpRequestDescriptor = $convert.base64Decode
     'F1YW50aXR5TGltaXSIAQESTQoRcHJlY29tcHV0ZV9wb2xpY3kYECABKA4yGy5rZG8udjEubHAu'
     'UHJlY29tcHV0ZVBvbGljeUgMUhBwcmVjb21wdXRlUG9saWN5iAEBEmoKMHByaWNpbmdfc291cm'
     'NlX2xpcXVpZGl0eV9pbWJhbGFuY2VfZ3VhcmRfZW5hYmxlZBgRIAEoCEgNUitwcmljaW5nU291'
-    'cmNlTGlxdWlkaXR5SW1iYWxhbmNlR3VhcmRFbmFibGVkiAEBQggKBl9kZXB0aEIJCgdfb2Zmc2'
-    'V0QgwKCl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IPCg1fYmlkX3F1YW50aXR5Qg8KDV9hc2tf'
-    'cXVhbnRpdHlCEQoPX2JpZF9hZGp1c3RtZW50QhEKD19hc2tfYWRqdXN0bWVudEITChFfbW9tZW'
-    '50dW1fZW5hYmxlZEISChBfbW9tZW50dW1fd2luZG93QhcKFV9tb21lbnR1bV9zZW5zaXRpdml0'
-    'eUIRCg9fcXVhbnRpdHlfbGltaXRCFAoSX3ByZWNvbXB1dGVfcG9saWN5QjMKMV9wcmljaW5nX3'
-    'NvdXJjZV9saXF1aWRpdHlfaW1iYWxhbmNlX2d1YXJkX2VuYWJsZWQ=');
+    'cmNlTGlxdWlkaXR5SW1iYWxhbmNlR3VhcmRFbmFibGVkiAEBEjgKB3ByaWNpbmcYEiABKAsyGS'
+    '5rZG8udjEuY29tbW9uLkV0ZlByaWNpbmdIDlIHcHJpY2luZ4gBAUIICgZfZGVwdGhCCQoHX29m'
+    'ZnNldEIMCgpfYXNrX2Jhc2lzQgwKCl9iaWRfYmFzaXNCDwoNX2JpZF9xdWFudGl0eUIPCg1fYX'
+    'NrX3F1YW50aXR5QhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG1lbnRCEwoRX21v'
+    'bWVudHVtX2VuYWJsZWRCEgoQX21vbWVudHVtX3dpbmRvd0IXChVfbW9tZW50dW1fc2Vuc2l0aX'
+    'ZpdHlCEQoPX3F1YW50aXR5X2xpbWl0QhQKEl9wcmVjb21wdXRlX3BvbGljeUIzCjFfcHJpY2lu'
+    'Z19zb3VyY2VfbGlxdWlkaXR5X2ltYmFsYW5jZV9ndWFyZF9lbmFibGVkQgoKCF9wcmljaW5n');
 
 @$core.Deprecated('Use getEtfLpStatusRequestDescriptor instead')
 const GetEtfLpStatusRequest$json = {
