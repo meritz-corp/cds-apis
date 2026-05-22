@@ -83,4 +83,20 @@ abstract final class PairService {
     kdov1pair.ListMakerTakerEventsRequest.new,
     kdov1pair.ListMakerTakerEventsResponse.new,
   );
+
+  /// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+  static const streamPairStatus = connect.Spec(
+    '/$name/StreamPairStatus',
+    connect.StreamType.server,
+    kdov1pair.StreamPairStatusRequest.new,
+    kdov1pair.PairStatusUpdate.new,
+  );
+
+  /// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
+  static const getPairStatistics = connect.Spec(
+    '/$name/GetPairStatistics',
+    connect.StreamType.unary,
+    kdov1pair.GetPairStatisticsRequest.new,
+    kdov1pair.PairStatistics.new,
+  );
 }

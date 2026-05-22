@@ -2473,6 +2473,383 @@ class ListMakerTakerEventsResponse extends $pb.GeneratedMessage {
   void clearTotalCount() => $_clearField(3);
 }
 
+/// StreamPairStatus 요청
+class StreamPairStatusRequest extends $pb.GeneratedMessage {
+  factory StreamPairStatusRequest({
+    $core.String? pair,
+  }) {
+    final result = create();
+    if (pair != null) result.pair = pair;
+    return result;
+  }
+
+  StreamPairStatusRequest._();
+
+  factory StreamPairStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamPairStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamPairStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pair')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamPairStatusRequest clone() => StreamPairStatusRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamPairStatusRequest copyWith(void Function(StreamPairStatusRequest) updates) => super.copyWith((message) => updates(message as StreamPairStatusRequest)) as StreamPairStatusRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamPairStatusRequest create() => StreamPairStatusRequest._();
+  @$core.override
+  StreamPairStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamPairStatusRequest> createRepeated() => $pb.PbList<StreamPairStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamPairStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamPairStatusRequest>(create);
+  static StreamPairStatusRequest? _defaultInstance;
+
+  /// 리소스 이름 (pairs/{id})
+  @$pb.TagNumber(1)
+  $core.String get pair => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pair($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPair() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPair() => $_clearField(1);
+}
+
+/// 페어 단일 leg 실시간 상태 스냅샷
+/// (태그 번호는 클라이언트 UI 계약으로 보존됨)
+class LegStatus extends $pb.GeneratedMessage {
+  factory LegStatus({
+    $fixnum.Int64? unfilledQuantity,
+    $fixnum.Int64? filledQuantity,
+    $fixnum.Int64? avgFillPrice,
+    $fixnum.Int64? submittedQuantity,
+  }) {
+    final result = create();
+    if (unfilledQuantity != null) result.unfilledQuantity = unfilledQuantity;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (avgFillPrice != null) result.avgFillPrice = avgFillPrice;
+    if (submittedQuantity != null) result.submittedQuantity = submittedQuantity;
+    return result;
+  }
+
+  LegStatus._();
+
+  factory LegStatus.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LegStatus.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LegStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'unfilledQuantity')
+    ..aInt64(2, _omitFieldNames ? '' : 'filledQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'avgFillPrice')
+    ..aInt64(4, _omitFieldNames ? '' : 'submittedQuantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LegStatus clone() => LegStatus()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LegStatus copyWith(void Function(LegStatus) updates) => super.copyWith((message) => updates(message as LegStatus)) as LegStatus;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LegStatus create() => LegStatus._();
+  @$core.override
+  LegStatus createEmptyInstance() => create();
+  static $pb.PbList<LegStatus> createRepeated() => $pb.PbList<LegStatus>();
+  @$core.pragma('dart2js:noInline')
+  static LegStatus getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LegStatus>(create);
+  static LegStatus? _defaultInstance;
+
+  /// 미체결 수량 (submitted - filled)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get unfilledQuantity => $_getI64(0);
+  @$pb.TagNumber(1)
+  set unfilledQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasUnfilledQuantity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUnfilledQuantity() => $_clearField(1);
+
+  /// 누적 체결 수량 (현재 세션 메모리 카운터, 재시작 시 0)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get filledQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFilledQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilledQuantity() => $_clearField(2);
+
+  /// 체결 VWAP (milli-won 단위)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get avgFillPrice => $_getI64(2);
+  @$pb.TagNumber(3)
+  set avgFillPrice($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAvgFillPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAvgFillPrice() => $_clearField(3);
+
+  /// 누적 발주 수량 (현재 세션 메모리 카운터)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get submittedQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set submittedQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSubmittedQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSubmittedQuantity() => $_clearField(4);
+}
+
+/// StreamPairStatus 스트리밍 응답 — 페어 상태 스냅샷
+class PairStatusUpdate extends $pb.GeneratedMessage {
+  factory PairStatusUpdate({
+    $core.String? pair,
+    LegStatus? left,
+    LegStatus? right,
+    $2.Timestamp? updatedAt,
+  }) {
+    final result = create();
+    if (pair != null) result.pair = pair;
+    if (left != null) result.left = left;
+    if (right != null) result.right = right;
+    if (updatedAt != null) result.updatedAt = updatedAt;
+    return result;
+  }
+
+  PairStatusUpdate._();
+
+  factory PairStatusUpdate.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairStatusUpdate.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pair')
+    ..aOM<LegStatus>(2, _omitFieldNames ? '' : 'left', subBuilder: LegStatus.create)
+    ..aOM<LegStatus>(3, _omitFieldNames ? '' : 'right', subBuilder: LegStatus.create)
+    ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairStatusUpdate clone() => PairStatusUpdate()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairStatusUpdate copyWith(void Function(PairStatusUpdate) updates) => super.copyWith((message) => updates(message as PairStatusUpdate)) as PairStatusUpdate;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairStatusUpdate create() => PairStatusUpdate._();
+  @$core.override
+  PairStatusUpdate createEmptyInstance() => create();
+  static $pb.PbList<PairStatusUpdate> createRepeated() => $pb.PbList<PairStatusUpdate>();
+  @$core.pragma('dart2js:noInline')
+  static PairStatusUpdate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairStatusUpdate>(create);
+  static PairStatusUpdate? _defaultInstance;
+
+  /// 리소스 이름 (pairs/{id})
+  @$pb.TagNumber(1)
+  $core.String get pair => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pair($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPair() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPair() => $_clearField(1);
+
+  /// Left leg 상태
+  @$pb.TagNumber(2)
+  LegStatus get left => $_getN(1);
+  @$pb.TagNumber(2)
+  set left(LegStatus value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLeft() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLeft() => $_clearField(2);
+  @$pb.TagNumber(2)
+  LegStatus ensureLeft() => $_ensure(1);
+
+  /// Right leg 상태
+  @$pb.TagNumber(3)
+  LegStatus get right => $_getN(2);
+  @$pb.TagNumber(3)
+  set right(LegStatus value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRight() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRight() => $_clearField(3);
+  @$pb.TagNumber(3)
+  LegStatus ensureRight() => $_ensure(2);
+
+  /// 스냅샷 시각
+  @$pb.TagNumber(4)
+  $2.Timestamp get updatedAt => $_getN(3);
+  @$pb.TagNumber(4)
+  set updatedAt($2.Timestamp value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasUpdatedAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUpdatedAt() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $2.Timestamp ensureUpdatedAt() => $_ensure(3);
+}
+
+/// GetPairStatistics 요청
+class GetPairStatisticsRequest extends $pb.GeneratedMessage {
+  factory GetPairStatisticsRequest({
+    $core.String? pair,
+  }) {
+    final result = create();
+    if (pair != null) result.pair = pair;
+    return result;
+  }
+
+  GetPairStatisticsRequest._();
+
+  factory GetPairStatisticsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetPairStatisticsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPairStatisticsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pair')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPairStatisticsRequest clone() => GetPairStatisticsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPairStatisticsRequest copyWith(void Function(GetPairStatisticsRequest) updates) => super.copyWith((message) => updates(message as GetPairStatisticsRequest)) as GetPairStatisticsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPairStatisticsRequest create() => GetPairStatisticsRequest._();
+  @$core.override
+  GetPairStatisticsRequest createEmptyInstance() => create();
+  static $pb.PbList<GetPairStatisticsRequest> createRepeated() => $pb.PbList<GetPairStatisticsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetPairStatisticsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPairStatisticsRequest>(create);
+  static GetPairStatisticsRequest? _defaultInstance;
+
+  /// 리소스 이름 (pairs/{id})
+  @$pb.TagNumber(1)
+  $core.String get pair => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pair($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPair() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPair() => $_clearField(1);
+}
+
+/// 페어 누적 통계 스냅샷 (인메모리 카운터 기반)
+class PairStatistics extends $pb.GeneratedMessage {
+  factory PairStatistics({
+    $core.String? pair,
+    $fixnum.Int64? totalSubmitted,
+    $fixnum.Int64? totalFilled,
+    $fixnum.Int64? executionCount,
+    $fixnum.Int64? realizedPnl,
+  }) {
+    final result = create();
+    if (pair != null) result.pair = pair;
+    if (totalSubmitted != null) result.totalSubmitted = totalSubmitted;
+    if (totalFilled != null) result.totalFilled = totalFilled;
+    if (executionCount != null) result.executionCount = executionCount;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
+    return result;
+  }
+
+  PairStatistics._();
+
+  factory PairStatistics.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairStatistics.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairStatistics', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pair')
+    ..aInt64(2, _omitFieldNames ? '' : 'totalSubmitted')
+    ..aInt64(3, _omitFieldNames ? '' : 'totalFilled')
+    ..aInt64(4, _omitFieldNames ? '' : 'executionCount')
+    ..aInt64(5, _omitFieldNames ? '' : 'realizedPnl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairStatistics clone() => PairStatistics()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairStatistics copyWith(void Function(PairStatistics) updates) => super.copyWith((message) => updates(message as PairStatistics)) as PairStatistics;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairStatistics create() => PairStatistics._();
+  @$core.override
+  PairStatistics createEmptyInstance() => create();
+  static $pb.PbList<PairStatistics> createRepeated() => $pb.PbList<PairStatistics>();
+  @$core.pragma('dart2js:noInline')
+  static PairStatistics getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairStatistics>(create);
+  static PairStatistics? _defaultInstance;
+
+  /// 리소스 이름 (pairs/{id})
+  @$pb.TagNumber(1)
+  $core.String get pair => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pair($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPair() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPair() => $_clearField(1);
+
+  /// left + right 누적 발주 수량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get totalSubmitted => $_getI64(1);
+  @$pb.TagNumber(2)
+  set totalSubmitted($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTotalSubmitted() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTotalSubmitted() => $_clearField(2);
+
+  /// left + right 누적 체결 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get totalFilled => $_getI64(2);
+  @$pb.TagNumber(3)
+  set totalFilled($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTotalFilled() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalFilled() => $_clearField(3);
+
+  /// Spread 모드: 발주 성공 횟수 / PricingMakerTaker 모드: 사이클 수
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get executionCount => $_getI64(3);
+  @$pb.TagNumber(4)
+  set executionCount($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExecutionCount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExecutionCount() => $_clearField(4);
+
+  /// 실현 손익 (milli-won). 현재 메모리 카운터 기반, Spread 모드는 0.
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get realizedPnl => $_getI64(4);
+  @$pb.TagNumber(5)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasRealizedPnl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRealizedPnl() => $_clearField(5);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

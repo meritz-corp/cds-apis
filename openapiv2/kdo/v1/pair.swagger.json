@@ -384,6 +384,39 @@
         ]
       }
     },
+    "/v1/{pair}/statistics": {
+      "get": {
+        "summary": "Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)",
+        "operationId": "PairService_GetPairStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pairPairStatistics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pair",
+            "description": "리소스 이름 (pairs/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairs/[^/]+"
+          }
+        ],
+        "tags": [
+          "PairService"
+        ]
+      }
+    },
     "/v1/{pair}:activate": {
       "post": {
         "summary": "Pair 활성화 (status → ACTIVE, hot loop 시작)",
@@ -465,6 +498,48 @@
           "PairService"
         ]
       }
+    },
+    "/v1/{pair}:streamStatus": {
+      "get": {
+        "summary": "Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)",
+        "operationId": "PairService_StreamPairStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/pairPairStatusUpdate"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of pairPairStatusUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pair",
+            "description": "리소스 이름 (pairs/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairs/[^/]+"
+          }
+        ],
+        "tags": [
+          "PairService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -479,6 +554,32 @@
       "default": "ETF_NAV_KIND_UNSPECIFIED",
       "description": "- ETF_NAV_KIND_INDEX_TRACKING_HEDGE: 지수 추종 헷지 프라이싱: (future + basis) * multiple + cash\n - ETF_NAV_KIND_FUTURE_BASIS: 선물 베이시스 기반: unit_delta * future / (prev_index + basis) + cash\n - ETF_NAV_KIND_LEVERAGE_FUTURE: 레버리지/인버스 ETF용 선물 기반",
       "title": "ETF NAV 계산 공식 종류\n(PdfNavHedge/PdfDecomposeHedge는 Pair 미지원 — 서버에서 거부됨)"
+    },
+    "pairLegStatus": {
+      "type": "object",
+      "properties": {
+        "unfilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결 수량 (submitted - filled)"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 체결 수량 (현재 세션 메모리 카운터, 재시작 시 0)"
+        },
+        "avgFillPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결 VWAP (milli-won 단위)"
+        },
+        "submittedQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 발주 수량 (현재 세션 메모리 카운터)"
+        }
+      },
+      "title": "페어 단일 leg 실시간 상태 스냅샷\n(태그 번호는 클라이언트 UI 계약으로 보존됨)"
     },
     "pairLinearBasis": {
       "type": "object",
@@ -922,6 +1023,36 @@
       "description": "- PAIR_SIDE_BID: 매수\n - PAIR_SIDE_ASK: 매도",
       "title": "주문 방향"
     },
+    "pairPairStatistics": {
+      "type": "object",
+      "properties": {
+        "pair": {
+          "type": "string",
+          "title": "리소스 이름 (pairs/{id})"
+        },
+        "totalSubmitted": {
+          "type": "string",
+          "format": "int64",
+          "title": "left + right 누적 발주 수량"
+        },
+        "totalFilled": {
+          "type": "string",
+          "format": "int64",
+          "title": "left + right 누적 체결 수량"
+        },
+        "executionCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "Spread 모드: 발주 성공 횟수 / PricingMakerTaker 모드: 사이클 수"
+        },
+        "realizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "description": "실현 손익 (milli-won). 현재 메모리 카운터 기반, Spread 모드는 0."
+        }
+      },
+      "title": "페어 누적 통계 스냅샷 (인메모리 카운터 기반)"
+    },
     "pairPairStatus": {
       "type": "string",
       "enum": [
@@ -933,6 +1064,29 @@
       "default": "PAIR_STATUS_UNSPECIFIED",
       "description": "- PAIR_STATUS_ACTIVE: 운영 중 (hot loop 동작)\n - PAIR_STATUS_PAUSED: 일시 중지\n - PAIR_STATUS_ARCHIVED: 보관 (더 이상 사용 안 함)",
       "title": "Pair 상태"
+    },
+    "pairPairStatusUpdate": {
+      "type": "object",
+      "properties": {
+        "pair": {
+          "type": "string",
+          "title": "리소스 이름 (pairs/{id})"
+        },
+        "left": {
+          "$ref": "#/definitions/pairLegStatus",
+          "title": "Left leg 상태"
+        },
+        "right": {
+          "$ref": "#/definitions/pairLegStatus",
+          "title": "Right leg 상태"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "스냅샷 시각"
+        }
+      },
+      "title": "StreamPairStatus 스트리밍 응답 — 페어 상태 스냅샷"
     },
     "pairPriceRatioCondition": {
       "type": "object",

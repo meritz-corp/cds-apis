@@ -79,6 +79,16 @@ class PairServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listMakerTakerEvents, request, options: options);
   }
 
+  /// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+  $grpc.ResponseStream<$0.PairStatusUpdate> streamPairStatus($0.StreamPairStatusRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamPairStatus, $async.Stream.fromIterable([request]), options: options);
+  }
+
+  /// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
+  $grpc.ResponseFuture<$0.PairStatistics> getPairStatistics($0.GetPairStatisticsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getPairStatistics, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getPair = $grpc.ClientMethod<$0.GetPairRequest, $0.Pair>(
@@ -117,6 +127,14 @@ class PairServiceClient extends $grpc.Client {
       '/kdo.v1.pair.PairService/ListMakerTakerEvents',
       ($0.ListMakerTakerEventsRequest value) => value.writeToBuffer(),
       $0.ListMakerTakerEventsResponse.fromBuffer);
+  static final _$streamPairStatus = $grpc.ClientMethod<$0.StreamPairStatusRequest, $0.PairStatusUpdate>(
+      '/kdo.v1.pair.PairService/StreamPairStatus',
+      ($0.StreamPairStatusRequest value) => value.writeToBuffer(),
+      $0.PairStatusUpdate.fromBuffer);
+  static final _$getPairStatistics = $grpc.ClientMethod<$0.GetPairStatisticsRequest, $0.PairStatistics>(
+      '/kdo.v1.pair.PairService/GetPairStatistics',
+      ($0.GetPairStatisticsRequest value) => value.writeToBuffer(),
+      $0.PairStatistics.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.pair.PairService')
@@ -187,6 +205,20 @@ abstract class PairServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListMakerTakerEventsRequest.fromBuffer(value),
         ($0.ListMakerTakerEventsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamPairStatusRequest, $0.PairStatusUpdate>(
+        'StreamPairStatus',
+        streamPairStatus_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamPairStatusRequest.fromBuffer(value),
+        ($0.PairStatusUpdate value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetPairStatisticsRequest, $0.PairStatistics>(
+        'GetPairStatistics',
+        getPairStatistics_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetPairStatisticsRequest.fromBuffer(value),
+        ($0.PairStatistics value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Pair> getPair_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPairRequest> $request) async {
@@ -242,5 +274,17 @@ abstract class PairServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListMakerTakerEventsResponse> listMakerTakerEvents($grpc.ServiceCall call, $0.ListMakerTakerEventsRequest request);
+
+  $async.Stream<$0.PairStatusUpdate> streamPairStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamPairStatusRequest> $request) async* {
+    yield* streamPairStatus($call, await $request);
+  }
+
+  $async.Stream<$0.PairStatusUpdate> streamPairStatus($grpc.ServiceCall call, $0.StreamPairStatusRequest request);
+
+  $async.Future<$0.PairStatistics> getPairStatistics_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPairStatisticsRequest> $request) async {
+    return getPairStatistics($call, await $request);
+  }
+
+  $async.Future<$0.PairStatistics> getPairStatistics($grpc.ServiceCall call, $0.GetPairStatisticsRequest request);
 
 }

@@ -535,6 +535,85 @@ pub struct ListMakerTakerEventsResponse {
     #[prost(int32, tag="3")]
     pub total_count: i32,
 }
+// ============================================================================
+// Real-time Status Streaming
+// ============================================================================
+
+/// StreamPairStatus 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamPairStatusRequest {
+    /// 리소스 이름 (pairs/{id})
+    #[prost(string, tag="1")]
+    pub pair: ::prost::alloc::string::String,
+}
+/// 페어 단일 leg 실시간 상태 스냅샷
+/// (태그 번호는 클라이언트 UI 계약으로 보존됨)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LegStatus {
+    /// 미체결 수량 (submitted - filled)
+    #[prost(int64, tag="1")]
+    pub unfilled_quantity: i64,
+    /// 누적 체결 수량 (현재 세션 메모리 카운터, 재시작 시 0)
+    #[prost(int64, tag="2")]
+    pub filled_quantity: i64,
+    /// 체결 VWAP (milli-won 단위)
+    #[prost(int64, tag="3")]
+    pub avg_fill_price: i64,
+    /// 누적 발주 수량 (현재 세션 메모리 카운터)
+    #[prost(int64, tag="4")]
+    pub submitted_quantity: i64,
+}
+/// StreamPairStatus 스트리밍 응답 — 페어 상태 스냅샷
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PairStatusUpdate {
+    /// 리소스 이름 (pairs/{id})
+    #[prost(string, tag="1")]
+    pub pair: ::prost::alloc::string::String,
+    /// Left leg 상태
+    #[prost(message, optional, tag="2")]
+    pub left: ::core::option::Option<LegStatus>,
+    /// Right leg 상태
+    #[prost(message, optional, tag="3")]
+    pub right: ::core::option::Option<LegStatus>,
+    /// 스냅샷 시각
+    #[prost(message, optional, tag="4")]
+    pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
+// ============================================================================
+// Pair Statistics
+// ============================================================================
+
+/// GetPairStatistics 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPairStatisticsRequest {
+    /// 리소스 이름 (pairs/{id})
+    #[prost(string, tag="1")]
+    pub pair: ::prost::alloc::string::String,
+}
+/// 페어 누적 통계 스냅샷 (인메모리 카운터 기반)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PairStatistics {
+    /// 리소스 이름 (pairs/{id})
+    #[prost(string, tag="1")]
+    pub pair: ::prost::alloc::string::String,
+    /// left + right 누적 발주 수량
+    #[prost(int64, tag="2")]
+    pub total_submitted: i64,
+    /// left + right 누적 체결 수량
+    #[prost(int64, tag="3")]
+    pub total_filled: i64,
+    /// Spread 모드: 발주 성공 횟수 / PricingMakerTaker 모드: 사이클 수
+    #[prost(int64, tag="4")]
+    pub execution_count: i64,
+    /// 실현 손익 (milli-won). 현재 메모리 카운터 기반, Spread 모드는 0.
+    #[prost(int64, tag="5")]
+    pub realized_pnl: i64,
+}
 /// 주문 방향
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

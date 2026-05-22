@@ -9,8 +9,251 @@ import (
 
 	gomock "github.com/golang/mock/gomock"
 	grpc "google.golang.org/grpc"
+	metadata "google.golang.org/grpc/metadata"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
+
+// MockPairService_StreamPairStatusClient is a mock of PairService_StreamPairStatusClient interface.
+type MockPairService_StreamPairStatusClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockPairService_StreamPairStatusClientMockRecorder
+}
+
+// MockPairService_StreamPairStatusClientMockRecorder is the mock recorder for MockPairService_StreamPairStatusClient.
+type MockPairService_StreamPairStatusClientMockRecorder struct {
+	mock *MockPairService_StreamPairStatusClient
+}
+
+// NewMockPairService_StreamPairStatusClient creates a new mock instance.
+func NewMockPairService_StreamPairStatusClient(ctrl *gomock.Controller) *MockPairService_StreamPairStatusClient {
+	mock := &MockPairService_StreamPairStatusClient{ctrl: ctrl}
+	mock.recorder = &MockPairService_StreamPairStatusClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockPairService_StreamPairStatusClient) EXPECT() *MockPairService_StreamPairStatusClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockPairService_StreamPairStatusClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockPairService_StreamPairStatusClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPairService_StreamPairStatusClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockPairService_StreamPairStatusClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockPairService_StreamPairStatusClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPairService_StreamPairStatusClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockPairService_StreamPairStatusClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockPairService_StreamPairStatusClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPairService_StreamPairStatusClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockPairService_StreamPairStatusClient) Recv() (*PairStatusUpdate, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*PairStatusUpdate)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockPairService_StreamPairStatusClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPairService_StreamPairStatusClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockPairService_StreamPairStatusClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockPairService_StreamPairStatusClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPairService_StreamPairStatusClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockPairService_StreamPairStatusClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockPairService_StreamPairStatusClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPairService_StreamPairStatusClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockPairService_StreamPairStatusClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockPairService_StreamPairStatusClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPairService_StreamPairStatusClient)(nil).Trailer))
+}
+
+// MockPairService_StreamPairStatusServer is a mock of PairService_StreamPairStatusServer interface.
+type MockPairService_StreamPairStatusServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockPairService_StreamPairStatusServerMockRecorder
+}
+
+// MockPairService_StreamPairStatusServerMockRecorder is the mock recorder for MockPairService_StreamPairStatusServer.
+type MockPairService_StreamPairStatusServerMockRecorder struct {
+	mock *MockPairService_StreamPairStatusServer
+}
+
+// NewMockPairService_StreamPairStatusServer creates a new mock instance.
+func NewMockPairService_StreamPairStatusServer(ctrl *gomock.Controller) *MockPairService_StreamPairStatusServer {
+	mock := &MockPairService_StreamPairStatusServer{ctrl: ctrl}
+	mock.recorder = &MockPairService_StreamPairStatusServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockPairService_StreamPairStatusServer) EXPECT() *MockPairService_StreamPairStatusServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockPairService_StreamPairStatusServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockPairService_StreamPairStatusServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPairService_StreamPairStatusServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockPairService_StreamPairStatusServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockPairService_StreamPairStatusServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPairService_StreamPairStatusServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockPairService_StreamPairStatusServer) Send(arg0 *PairStatusUpdate) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockPairService_StreamPairStatusServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPairService_StreamPairStatusServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockPairService_StreamPairStatusServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockPairService_StreamPairStatusServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPairService_StreamPairStatusServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockPairService_StreamPairStatusServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockPairService_StreamPairStatusServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPairService_StreamPairStatusServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockPairService_StreamPairStatusServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockPairService_StreamPairStatusServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPairService_StreamPairStatusServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockPairService_StreamPairStatusServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockPairService_StreamPairStatusServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPairService_StreamPairStatusServer)(nil).SetTrailer), arg0)
+}
 
 // MockPairServiceClient is a mock of PairServiceClient interface.
 type MockPairServiceClient struct {
@@ -115,6 +358,26 @@ func (mr *MockPairServiceClientMockRecorder) GetPair(ctx, in interface{}, opts .
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPair", reflect.TypeOf((*MockPairServiceClient)(nil).GetPair), varargs...)
 }
 
+// GetPairStatistics mocks base method.
+func (m *MockPairServiceClient) GetPairStatistics(ctx context.Context, in *GetPairStatisticsRequest, opts ...grpc.CallOption) (*PairStatistics, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetPairStatistics", varargs...)
+	ret0, _ := ret[0].(*PairStatistics)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPairStatistics indicates an expected call of GetPairStatistics.
+func (mr *MockPairServiceClientMockRecorder) GetPairStatistics(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairStatistics", reflect.TypeOf((*MockPairServiceClient)(nil).GetPairStatistics), varargs...)
+}
+
 // ListMakerTakerEvents mocks base method.
 func (m *MockPairServiceClient) ListMakerTakerEvents(ctx context.Context, in *ListMakerTakerEventsRequest, opts ...grpc.CallOption) (*ListMakerTakerEventsResponse, error) {
 	m.ctrl.T.Helper()
@@ -193,6 +456,26 @@ func (mr *MockPairServiceClientMockRecorder) PausePair(ctx, in interface{}, opts
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PausePair", reflect.TypeOf((*MockPairServiceClient)(nil).PausePair), varargs...)
+}
+
+// StreamPairStatus mocks base method.
+func (m *MockPairServiceClient) StreamPairStatus(ctx context.Context, in *StreamPairStatusRequest, opts ...grpc.CallOption) (PairService_StreamPairStatusClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamPairStatus", varargs...)
+	ret0, _ := ret[0].(PairService_StreamPairStatusClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamPairStatus indicates an expected call of StreamPairStatus.
+func (mr *MockPairServiceClientMockRecorder) StreamPairStatus(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamPairStatus", reflect.TypeOf((*MockPairServiceClient)(nil).StreamPairStatus), varargs...)
 }
 
 // UpdatePair mocks base method.
@@ -298,6 +581,21 @@ func (mr *MockPairServiceServerMockRecorder) GetPair(ctx, in interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPair", reflect.TypeOf((*MockPairServiceServer)(nil).GetPair), ctx, in)
 }
 
+// GetPairStatistics mocks base method.
+func (m *MockPairServiceServer) GetPairStatistics(ctx context.Context, in *GetPairStatisticsRequest) (*PairStatistics, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetPairStatistics", ctx, in)
+	ret0, _ := ret[0].(*PairStatistics)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPairStatistics indicates an expected call of GetPairStatistics.
+func (mr *MockPairServiceServerMockRecorder) GetPairStatistics(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairStatistics", reflect.TypeOf((*MockPairServiceServer)(nil).GetPairStatistics), ctx, in)
+}
+
 // ListMakerTakerEvents mocks base method.
 func (m *MockPairServiceServer) ListMakerTakerEvents(ctx context.Context, in *ListMakerTakerEventsRequest) (*ListMakerTakerEventsResponse, error) {
 	m.ctrl.T.Helper()
@@ -356,6 +654,20 @@ func (m *MockPairServiceServer) PausePair(ctx context.Context, in *PausePairRequ
 func (mr *MockPairServiceServerMockRecorder) PausePair(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PausePair", reflect.TypeOf((*MockPairServiceServer)(nil).PausePair), ctx, in)
+}
+
+// StreamPairStatus mocks base method.
+func (m *MockPairServiceServer) StreamPairStatus(blob *StreamPairStatusRequest, server PairService_StreamPairStatusServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamPairStatus", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamPairStatus indicates an expected call of StreamPairStatus.
+func (mr *MockPairServiceServerMockRecorder) StreamPairStatus(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamPairStatus", reflect.TypeOf((*MockPairServiceServer)(nil).StreamPairStatus), blob, server)
 }
 
 // UpdatePair mocks base method.

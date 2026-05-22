@@ -88,6 +88,22 @@ service PairService {
     };
     option (google.api.method_signature) = "pair";
   }
+
+  // Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+  rpc StreamPairStatus(StreamPairStatusRequest) returns (stream PairStatusUpdate) {
+    option (google.api.http) = {
+      get: "/v1/{pair=pairs/*}:streamStatus"
+    };
+    option (google.api.method_signature) = "pair";
+  }
+
+  // Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
+  rpc GetPairStatistics(GetPairStatisticsRequest) returns (PairStatistics) {
+    option (google.api.http) = {
+      get: "/v1/{pair=pairs/*}/statistics"
+    };
+    option (google.api.method_signature) = "pair";
+  }
 }
 
 // ============================================================================
@@ -762,4 +778,71 @@ message ListMakerTakerEventsResponse {
 
   // 전체 건수
   int32 total_count = 3;
+}
+
+// ============================================================================
+// Real-time Status Streaming
+// ============================================================================
+
+// StreamPairStatus 요청
+message StreamPairStatusRequest {
+  // 리소스 이름 (pairs/{id})
+  string pair = 1 [
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Pair"
+    }
+  ];
+}
+
+// 페어 단일 leg 실시간 상태 스냅샷
+// (태그 번호는 클라이언트 UI 계약으로 보존됨)
+message LegStatus {
+  // 미체결 수량 (submitted - filled)
+  int64 unfilled_quantity = 1;
+  // 누적 체결 수량 (현재 세션 메모리 카운터, 재시작 시 0)
+  int64 filled_quantity = 2;
+  // 체결 VWAP (milli-won 단위)
+  int64 avg_fill_price = 3;
+  // 누적 발주 수량 (현재 세션 메모리 카운터)
+  int64 submitted_quantity = 4;
+}
+
+// StreamPairStatus 스트리밍 응답 — 페어 상태 스냅샷
+message PairStatusUpdate {
+  // 리소스 이름 (pairs/{id})
+  string pair = 1;
+  // Left leg 상태
+  LegStatus left = 2;
+  // Right leg 상태
+  LegStatus right = 3;
+  // 스냅샷 시각
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+// ============================================================================
+// Pair Statistics
+// ============================================================================
+
+// GetPairStatistics 요청
+message GetPairStatisticsRequest {
+  // 리소스 이름 (pairs/{id})
+  string pair = 1 [
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Pair"
+    }
+  ];
+}
+
+// 페어 누적 통계 스냅샷 (인메모리 카운터 기반)
+message PairStatistics {
+  // 리소스 이름 (pairs/{id})
+  string pair = 1;
+  // left + right 누적 발주 수량
+  int64 total_submitted = 2;
+  // left + right 누적 체결 수량
+  int64 total_filled = 3;
+  // Spread 모드: 발주 성공 횟수 / PricingMakerTaker 모드: 사이클 수
+  int64 execution_count = 4;
+  // 실현 손익 (milli-won). 현재 메모리 카운터 기반, Spread 모드는 0.
+  int64 realized_pnl = 5;
 }

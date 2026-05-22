@@ -742,3 +742,84 @@ final $typed_data.Uint8List listMakerTakerEventsResponseDescriptor = $convert.ba
     '5wYWlyLk1ha2VyVGFrZXJFdmVudExvZ1IGZXZlbnRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEo'
     'CVINbmV4dFBhZ2VUb2tlbhIfCgt0b3RhbF9jb3VudBgDIAEoBVIKdG90YWxDb3VudA==');
 
+@$core.Deprecated('Use streamPairStatusRequestDescriptor instead')
+const StreamPairStatusRequest$json = {
+  '1': 'StreamPairStatusRequest',
+  '2': [
+    {'1': 'pair', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pair'},
+  ],
+};
+
+/// Descriptor for `StreamPairStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamPairStatusRequestDescriptor = $convert.base64Decode(
+    'ChdTdHJlYW1QYWlyU3RhdHVzUmVxdWVzdBItCgRwYWlyGAEgASgJQhn6QRYKFGtkby5jZHNhcG'
+    'lzLnh5ei9QYWlyUgRwYWly');
+
+@$core.Deprecated('Use legStatusDescriptor instead')
+const LegStatus$json = {
+  '1': 'LegStatus',
+  '2': [
+    {'1': 'unfilled_quantity', '3': 1, '4': 1, '5': 3, '10': 'unfilledQuantity'},
+    {'1': 'filled_quantity', '3': 2, '4': 1, '5': 3, '10': 'filledQuantity'},
+    {'1': 'avg_fill_price', '3': 3, '4': 1, '5': 3, '10': 'avgFillPrice'},
+    {'1': 'submitted_quantity', '3': 4, '4': 1, '5': 3, '10': 'submittedQuantity'},
+  ],
+};
+
+/// Descriptor for `LegStatus`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List legStatusDescriptor = $convert.base64Decode(
+    'CglMZWdTdGF0dXMSKwoRdW5maWxsZWRfcXVhbnRpdHkYASABKANSEHVuZmlsbGVkUXVhbnRpdH'
+    'kSJwoPZmlsbGVkX3F1YW50aXR5GAIgASgDUg5maWxsZWRRdWFudGl0eRIkCg5hdmdfZmlsbF9w'
+    'cmljZRgDIAEoA1IMYXZnRmlsbFByaWNlEi0KEnN1Ym1pdHRlZF9xdWFudGl0eRgEIAEoA1IRc3'
+    'VibWl0dGVkUXVhbnRpdHk=');
+
+@$core.Deprecated('Use pairStatusUpdateDescriptor instead')
+const PairStatusUpdate$json = {
+  '1': 'PairStatusUpdate',
+  '2': [
+    {'1': 'pair', '3': 1, '4': 1, '5': 9, '10': 'pair'},
+    {'1': 'left', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'left'},
+    {'1': 'right', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'right'},
+    {'1': 'updated_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `PairStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairStatusUpdateDescriptor = $convert.base64Decode(
+    'ChBQYWlyU3RhdHVzVXBkYXRlEhIKBHBhaXIYASABKAlSBHBhaXISKgoEbGVmdBgCIAEoCzIWLm'
+    'tkby52MS5wYWlyLkxlZ1N0YXR1c1IEbGVmdBIsCgVyaWdodBgDIAEoCzIWLmtkby52MS5wYWly'
+    'LkxlZ1N0YXR1c1IFcmlnaHQSOQoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi'
+    '5UaW1lc3RhbXBSCXVwZGF0ZWRBdA==');
+
+@$core.Deprecated('Use getPairStatisticsRequestDescriptor instead')
+const GetPairStatisticsRequest$json = {
+  '1': 'GetPairStatisticsRequest',
+  '2': [
+    {'1': 'pair', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pair'},
+  ],
+};
+
+/// Descriptor for `GetPairStatisticsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPairStatisticsRequestDescriptor = $convert.base64Decode(
+    'ChhHZXRQYWlyU3RhdGlzdGljc1JlcXVlc3QSLQoEcGFpchgBIAEoCUIZ+kEWChRrZG8uY2RzYX'
+    'Bpcy54eXovUGFpclIEcGFpcg==');
+
+@$core.Deprecated('Use pairStatisticsDescriptor instead')
+const PairStatistics$json = {
+  '1': 'PairStatistics',
+  '2': [
+    {'1': 'pair', '3': 1, '4': 1, '5': 9, '10': 'pair'},
+    {'1': 'total_submitted', '3': 2, '4': 1, '5': 3, '10': 'totalSubmitted'},
+    {'1': 'total_filled', '3': 3, '4': 1, '5': 3, '10': 'totalFilled'},
+    {'1': 'execution_count', '3': 4, '4': 1, '5': 3, '10': 'executionCount'},
+    {'1': 'realized_pnl', '3': 5, '4': 1, '5': 3, '10': 'realizedPnl'},
+  ],
+};
+
+/// Descriptor for `PairStatistics`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairStatisticsDescriptor = $convert.base64Decode(
+    'Cg5QYWlyU3RhdGlzdGljcxISCgRwYWlyGAEgASgJUgRwYWlyEicKD3RvdGFsX3N1Ym1pdHRlZB'
+    'gCIAEoA1IOdG90YWxTdWJtaXR0ZWQSIQoMdG90YWxfZmlsbGVkGAMgASgDUgt0b3RhbEZpbGxl'
+    'ZBInCg9leGVjdXRpb25fY291bnQYBCABKANSDmV4ZWN1dGlvbkNvdW50EiEKDHJlYWxpemVkX3'
+    'BubBgFIAEoA1ILcmVhbGl6ZWRQbmw=');
+
