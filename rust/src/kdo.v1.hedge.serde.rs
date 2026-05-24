@@ -1805,9 +1805,6 @@ impl serde::Serialize for HedgeGroup {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.HedgeGroup", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1826,9 +1823,6 @@ impl serde::Serialize for HedgeGroup {
         }
         if let Some(v) = self.trigger_condition.as_ref() {
             struct_ser.serialize_field("trigger_condition", v)?;
-        }
-        if true {
-            struct_ser.serialize_field("items", &self.items)?;
         }
         if true {
             struct_ser.serialize_field("is_active", &self.is_active)?;
@@ -1858,7 +1852,6 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
             "hedgeFundCode",
             "trigger_condition",
             "triggerCondition",
-            "items",
             "is_active",
             "isActive",
             "create_time",
@@ -1875,7 +1868,6 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
             DisplayName,
             HedgeFundCode,
             TriggerCondition,
-            Items,
             IsActive,
             CreateTime,
             UpdateTime,
@@ -1907,7 +1899,6 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                             "displayName" | "display_name" => Ok(GeneratedField::DisplayName),
                             "hedgeFundCode" | "hedge_fund_code" => Ok(GeneratedField::HedgeFundCode),
                             "triggerCondition" | "trigger_condition" => Ok(GeneratedField::TriggerCondition),
-                            "items" => Ok(GeneratedField::Items),
                             "isActive" | "is_active" => Ok(GeneratedField::IsActive),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
@@ -1936,7 +1927,6 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                 let mut display_name__ = None;
                 let mut hedge_fund_code__ = None;
                 let mut trigger_condition__ = None;
-                let mut items__ = None;
                 let mut is_active__ = None;
                 let mut create_time__ = None;
                 let mut update_time__ = None;
@@ -1980,12 +1970,6 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                             }
                             trigger_condition__ = map_.next_value()?;
                         }
-                        GeneratedField::Items => {
-                            if items__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("items"));
-                            }
-                            items__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::IsActive => {
                             if is_active__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("isActive"));
@@ -2016,7 +2000,6 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                     display_name: display_name__.unwrap_or_default(),
                     hedge_fund_code: hedge_fund_code__.unwrap_or_default(),
                     trigger_condition: trigger_condition__,
-                    items: items__.unwrap_or_default(),
                     is_active: is_active__.unwrap_or_default(),
                     create_time: create_time__,
                     update_time: update_time__,
@@ -2024,141 +2007,6 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
             }
         }
         deserializer.deserialize_struct("kdo.v1.hedge.HedgeGroup", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for HedgeGroupItem {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.HedgeGroupItem", len)?;
-        if true {
-            struct_ser.serialize_field("id", &self.id)?;
-        }
-        if true {
-            struct_ser.serialize_field("hedge_group_id", &self.hedge_group_id)?;
-        }
-        if true {
-            struct_ser.serialize_field("source_symbol", &self.source_symbol)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for HedgeGroupItem {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "id",
-            "hedge_group_id",
-            "hedgeGroupId",
-            "source_symbol",
-            "sourceSymbol",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Id,
-            HedgeGroupId,
-            SourceSymbol,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "id" => Ok(GeneratedField::Id),
-                            "hedgeGroupId" | "hedge_group_id" => Ok(GeneratedField::HedgeGroupId),
-                            "sourceSymbol" | "source_symbol" => Ok(GeneratedField::SourceSymbol),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = HedgeGroupItem;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.hedge.HedgeGroupItem")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<HedgeGroupItem, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut id__ = None;
-                let mut hedge_group_id__ = None;
-                let mut source_symbol__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Id => {
-                            if id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("id"));
-                            }
-                            id__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::HedgeGroupId => {
-                            if hedge_group_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeGroupId"));
-                            }
-                            hedge_group_id__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SourceSymbol => {
-                            if source_symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sourceSymbol"));
-                            }
-                            source_symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(HedgeGroupItem {
-                    id: id__.unwrap_or_default(),
-                    hedge_group_id: hedge_group_id__.unwrap_or_default(),
-                    source_symbol: source_symbol__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.hedge.HedgeGroupItem", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for HedgeMethod {

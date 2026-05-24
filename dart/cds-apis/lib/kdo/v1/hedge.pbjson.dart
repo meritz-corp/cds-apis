@@ -194,12 +194,15 @@ const HedgeGroup$json = {
     {'1': 'display_name', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'displayName'},
     {'1': 'hedge_fund_code', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'hedgeFundCode'},
     {'1': 'trigger_condition', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.hedge.TriggerCondition', '8': {}, '10': 'triggerCondition'},
-    {'1': 'items', '3': 7, '4': 3, '5': 11, '6': '.kdo.v1.hedge.HedgeGroupItem', '10': 'items'},
     {'1': 'is_active', '3': 8, '4': 1, '5': 8, '10': 'isActive'},
     {'1': 'create_time', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
   '7': {},
+  '9': [
+    {'1': 7, '2': 8},
+  ],
+  '10': ['items'],
 };
 
 /// Descriptor for `HedgeGroup`. Decode as a `google.protobuf.DescriptorProto`.
@@ -209,28 +212,11 @@ final $typed_data.Uint8List hedgeGroupDescriptor = $convert.base64Decode(
     'b2xpb1IJcG9ydGZvbGlvEicKDGRpc3BsYXlfbmFtZRgEIAEoCUIE4kEBAlILZGlzcGxheU5hbW'
     'USLAoPaGVkZ2VfZnVuZF9jb2RlGAUgASgJQgTiQQECUg1oZWRnZUZ1bmRDb2RlElEKEXRyaWdn'
     'ZXJfY29uZGl0aW9uGAYgASgLMh4ua2RvLnYxLmhlZGdlLlRyaWdnZXJDb25kaXRpb25CBOJBAQ'
-    'JSEHRyaWdnZXJDb25kaXRpb24SMgoFaXRlbXMYByADKAsyHC5rZG8udjEuaGVkZ2UuSGVkZ2VH'
-    'cm91cEl0ZW1SBWl0ZW1zEhsKCWlzX2FjdGl2ZRgIIAEoCFIIaXNBY3RpdmUSQQoLY3JlYXRlX3'
-    'RpbWUYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1l'
-    'EkEKC3VwZGF0ZV90aW1lGAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1'
-    'IKdXBkYXRlVGltZTo76kE4ChprZG8uY2RzYXBpcy54eXovSGVkZ2VHcm91cBIaaGVkZ2VfZ3Jv'
-    'dXBzL3toZWRnZV9ncm91cH0=');
-
-@$core.Deprecated('Use hedgeGroupItemDescriptor instead')
-const HedgeGroupItem$json = {
-  '1': 'HedgeGroupItem',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 5, '8': {}, '10': 'id'},
-    {'1': 'hedge_group_id', '3': 2, '4': 1, '5': 5, '8': {}, '10': 'hedgeGroupId'},
-    {'1': 'source_symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'sourceSymbol'},
-  ],
-};
-
-/// Descriptor for `HedgeGroupItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List hedgeGroupItemDescriptor = $convert.base64Decode(
-    'Cg5IZWRnZUdyb3VwSXRlbRIUCgJpZBgBIAEoBUIE4kEBA1ICaWQSKgoOaGVkZ2VfZ3JvdXBfaW'
-    'QYAiABKAVCBOJBAQNSDGhlZGdlR3JvdXBJZBIpCg1zb3VyY2Vfc3ltYm9sGAMgASgJQgTiQQEC'
-    'Ugxzb3VyY2VTeW1ib2w=');
+    'JSEHRyaWdnZXJDb25kaXRpb24SGwoJaXNfYWN0aXZlGAggASgIUghpc0FjdGl2ZRJBCgtjcmVh'
+    'dGVfdGltZRgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCmNyZWF0ZV'
+    'RpbWUSQQoLdXBkYXRlX3RpbWUYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTi'
+    'QQEDUgp1cGRhdGVUaW1lOjvqQTgKGmtkby5jZHNhcGlzLnh5ei9IZWRnZUdyb3VwEhpoZWRnZV'
+    '9ncm91cHMve2hlZGdlX2dyb3VwfUoECAcQCFIFaXRlbXM=');
 
 @$core.Deprecated('Use triggerConditionDescriptor instead')
 const TriggerCondition$json = {

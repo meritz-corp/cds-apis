@@ -491,13 +491,6 @@
                   "$ref": "#/definitions/v1hedgeTriggerCondition",
                   "title": "트리거 조건"
                 },
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/hedgeHedgeGroupItem"
-                  },
-                  "title": "그룹 소속 항목들"
-                },
                 "isActive": {
                   "type": "boolean",
                   "title": "활성화 여부"
@@ -948,13 +941,6 @@
           "$ref": "#/definitions/v1hedgeTriggerCondition",
           "title": "트리거 조건"
         },
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/hedgeHedgeGroupItem"
-          },
-          "title": "그룹 소속 항목들"
-        },
         "isActive": {
           "type": "boolean",
           "title": "활성화 여부"
@@ -978,31 +964,6 @@
         "displayName",
         "hedgeFundCode",
         "triggerCondition"
-      ]
-    },
-    "hedgeHedgeGroupItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32",
-          "title": "항목 ID",
-          "readOnly": true
-        },
-        "hedgeGroupId": {
-          "type": "integer",
-          "format": "int32",
-          "title": "소속 HedgeGroup ID",
-          "readOnly": true
-        },
-        "sourceSymbol": {
-          "type": "string",
-          "title": "소스 종목 심볼"
-        }
-      },
-      "title": "HedgeGroup 소속 항목",
-      "required": [
-        "sourceSymbol"
       ]
     },
     "hedgeHedgeMethod": {

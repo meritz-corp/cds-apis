@@ -512,7 +512,6 @@ class HedgeGroup extends $pb.GeneratedMessage {
     $core.String? displayName,
     $core.String? hedgeFundCode,
     TriggerCondition? triggerCondition,
-    $core.Iterable<HedgeGroupItem>? items,
     $core.bool? isActive,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
@@ -524,7 +523,6 @@ class HedgeGroup extends $pb.GeneratedMessage {
     if (displayName != null) result.displayName = displayName;
     if (hedgeFundCode != null) result.hedgeFundCode = hedgeFundCode;
     if (triggerCondition != null) result.triggerCondition = triggerCondition;
-    if (items != null) result.items.addAll(items);
     if (isActive != null) result.isActive = isActive;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
@@ -543,7 +541,6 @@ class HedgeGroup extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'displayName')
     ..aOS(5, _omitFieldNames ? '' : 'hedgeFundCode')
     ..aOM<TriggerCondition>(6, _omitFieldNames ? '' : 'triggerCondition', subBuilder: TriggerCondition.create)
-    ..pc<HedgeGroupItem>(7, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: HedgeGroupItem.create)
     ..aOB(8, _omitFieldNames ? '' : 'isActive')
     ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(10, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
@@ -630,117 +627,39 @@ class HedgeGroup extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   TriggerCondition ensureTriggerCondition() => $_ensure(5);
 
-  /// 그룹 소속 항목들
-  @$pb.TagNumber(7)
-  $pb.PbList<HedgeGroupItem> get items => $_getList(6);
-
   /// 활성화 여부
   @$pb.TagNumber(8)
-  $core.bool get isActive => $_getBF(7);
+  $core.bool get isActive => $_getBF(6);
   @$pb.TagNumber(8)
-  set isActive($core.bool value) => $_setBool(7, value);
+  set isActive($core.bool value) => $_setBool(6, value);
   @$pb.TagNumber(8)
-  $core.bool hasIsActive() => $_has(7);
+  $core.bool hasIsActive() => $_has(6);
   @$pb.TagNumber(8)
   void clearIsActive() => $_clearField(8);
 
   /// 생성 시간
   @$pb.TagNumber(9)
-  $2.Timestamp get createTime => $_getN(8);
+  $2.Timestamp get createTime => $_getN(7);
   @$pb.TagNumber(9)
   set createTime($2.Timestamp value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasCreateTime() => $_has(8);
+  $core.bool hasCreateTime() => $_has(7);
   @$pb.TagNumber(9)
   void clearCreateTime() => $_clearField(9);
   @$pb.TagNumber(9)
-  $2.Timestamp ensureCreateTime() => $_ensure(8);
+  $2.Timestamp ensureCreateTime() => $_ensure(7);
 
   /// 수정 시간
   @$pb.TagNumber(10)
-  $2.Timestamp get updateTime => $_getN(9);
+  $2.Timestamp get updateTime => $_getN(8);
   @$pb.TagNumber(10)
   set updateTime($2.Timestamp value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasUpdateTime() => $_has(9);
+  $core.bool hasUpdateTime() => $_has(8);
   @$pb.TagNumber(10)
   void clearUpdateTime() => $_clearField(10);
   @$pb.TagNumber(10)
-  $2.Timestamp ensureUpdateTime() => $_ensure(9);
-}
-
-/// HedgeGroup 소속 항목
-class HedgeGroupItem extends $pb.GeneratedMessage {
-  factory HedgeGroupItem({
-    $core.int? id,
-    $core.int? hedgeGroupId,
-    $core.String? sourceSymbol,
-  }) {
-    final result = create();
-    if (id != null) result.id = id;
-    if (hedgeGroupId != null) result.hedgeGroupId = hedgeGroupId;
-    if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
-    return result;
-  }
-
-  HedgeGroupItem._();
-
-  factory HedgeGroupItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory HedgeGroupItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HedgeGroupItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'hedgeGroupId', $pb.PbFieldType.O3)
-    ..aOS(3, _omitFieldNames ? '' : 'sourceSymbol')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  HedgeGroupItem clone() => HedgeGroupItem()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  HedgeGroupItem copyWith(void Function(HedgeGroupItem) updates) => super.copyWith((message) => updates(message as HedgeGroupItem)) as HedgeGroupItem;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static HedgeGroupItem create() => HedgeGroupItem._();
-  @$core.override
-  HedgeGroupItem createEmptyInstance() => create();
-  static $pb.PbList<HedgeGroupItem> createRepeated() => $pb.PbList<HedgeGroupItem>();
-  @$core.pragma('dart2js:noInline')
-  static HedgeGroupItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HedgeGroupItem>(create);
-  static HedgeGroupItem? _defaultInstance;
-
-  /// 항목 ID
-  @$pb.TagNumber(1)
-  $core.int get id => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set id($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => $_clearField(1);
-
-  /// 소속 HedgeGroup ID
-  @$pb.TagNumber(2)
-  $core.int get hedgeGroupId => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set hedgeGroupId($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasHedgeGroupId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearHedgeGroupId() => $_clearField(2);
-
-  /// 소스 종목 심볼
-  @$pb.TagNumber(3)
-  $core.String get sourceSymbol => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set sourceSymbol($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasSourceSymbol() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSourceSymbol() => $_clearField(3);
+  $2.Timestamp ensureUpdateTime() => $_ensure(8);
 }
 
 enum TriggerCondition_Condition {

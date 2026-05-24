@@ -309,8 +309,9 @@ message HedgeGroup {
   // 트리거 조건
   TriggerCondition trigger_condition = 6 [(google.api.field_behavior) = REQUIRED];
 
-  // 그룹 소속 항목들
-  repeated HedgeGroupItem items = 7;
+  // 필드 번호 7은 HedgeGroupItem items 에 사용됐으나 제거됨 (예약)
+  reserved 7;
+  reserved "items";
 
   // 활성화 여부
   bool is_active = 8;
@@ -320,18 +321,6 @@ message HedgeGroup {
 
   // 수정 시간
   google.protobuf.Timestamp update_time = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
-}
-
-// HedgeGroup 소속 항목
-message HedgeGroupItem {
-  // 항목 ID
-  int32 id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
-
-  // 소속 HedgeGroup ID
-  int32 hedge_group_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
-
-  // 소스 종목 심볼
-  string source_symbol = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // 트리거 조건: 헷지 실행 기준

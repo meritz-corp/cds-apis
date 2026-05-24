@@ -133,9 +133,6 @@ pub struct HedgeGroup {
     /// 트리거 조건
     #[prost(message, optional, tag="6")]
     pub trigger_condition: ::core::option::Option<TriggerCondition>,
-    /// 그룹 소속 항목들
-    #[prost(message, repeated, tag="7")]
-    pub items: ::prost::alloc::vec::Vec<HedgeGroupItem>,
     /// 활성화 여부
     #[prost(bool, tag="8")]
     pub is_active: bool,
@@ -145,20 +142,6 @@ pub struct HedgeGroup {
     /// 수정 시간
     #[prost(message, optional, tag="10")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-}
-/// HedgeGroup 소속 항목
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HedgeGroupItem {
-    /// 항목 ID
-    #[prost(int32, tag="1")]
-    pub id: i32,
-    /// 소속 HedgeGroup ID
-    #[prost(int32, tag="2")]
-    pub hedge_group_id: i32,
-    /// 소스 종목 심볼
-    #[prost(string, tag="3")]
-    pub source_symbol: ::prost::alloc::string::String,
 }
 /// 트리거 조건: 헷지 실행 기준
 #[allow(clippy::derive_partial_eq_without_eq)]
