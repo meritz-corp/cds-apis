@@ -1,0 +1,214 @@
+syntax = "proto3";
+
+package system_ops.v1.holiday;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/system_ops/v1;system_ops";
+
+// HolidayService - 휴일(휴장일) 관리 서비스
+//
+// 운영에 필요한 휴일 정보를 등록/조회/삭제합니다.
+// 날짜(YYYYMMDD)가 곧 휴일 리소스의 식별자입니다.
+service HolidayService {
+  // 휴일 등록
+  rpc CreateHoliday(CreateHolidayRequest) returns (Holiday) {
+    option (google.api.http) = {
+      post: "/v1/holidays"
+      body: "holiday"
+    };
+    option (google.api.method_signature) = "holiday";
+  }
+
+  // 휴일 목록 조회
+  rpc ListHolidays(ListHolidaysRequest) returns (ListHolidaysResponse) {
+    option (google.api.http) = {
+      get: "/v1/holidays"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 날짜로 휴일 조회
+  //
+  // 해당 날짜가 휴일이면 Holiday를 반환하고, 휴일이 아니면 NOT_FOUND를 반환합니다.
+  rpc GetHolidayByDate(GetHolidayByDateRequest) returns (Holiday) {
+    option (google.api.http) = {
+      get: "/v1/holidays:byDate"
+    };
+    option (google.api.method_signature) = "date";
+  }
+
+  // 오늘 휴일 여부 확인
+  //
+  // 서버 기준 오늘 날짜가 휴일인지 여부를 반환합니다.
+  // 특정 날짜를 확인하려면 GetHolidayByDate를 사용하세요.
+  rpc CheckHoliday(CheckHolidayRequest) returns (CheckHolidayResponse) {
+    option (google.api.http) = {
+      get: "/v1/holidays:checkToday"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 가장 최근 영업일 조회
+  //
+  // 기준 날짜(미지정 시 오늘) 이전(포함)의 가장 최근 영업일을 반환합니다.
+  // 영업일은 주말이 아니고 휴일로 등록되지 않은 날입니다.
+  rpc GetLatestBusinessDay(GetLatestBusinessDayRequest) returns (GetLatestBusinessDayResponse) {
+    option (google.api.http) = {
+      get: "/v1/businessDays:latest"
+    };
+    option (google.api.method_signature) = "as_of_date";
+  }
+
+  // 휴일 삭제
+  rpc DeleteHoliday(DeleteHolidayRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{holiday=holidays/*}"
+    };
+    option (google.api.method_signature) = "holiday";
+  }
+}
+
+// ============================================================================
+// Holiday Entity
+// ============================================================================
+
+// 휴일 - 시장이 휴장하는 날
+message Holiday {
+  option (google.api.resource) = {
+    type: "system_ops.cdsapis.xyz/Holiday"
+    pattern: "holidays/{date}"
+  };
+
+  // 리소스 이름 (holidays/{date})
+  string name = 1;
+
+  // 날짜 (YYYYMMDD) - 고유 식별자
+  string date = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 휴일명 (예: "신정", "설날", "임시공휴일")
+  string display_name = 3 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 휴일 유형
+  HolidayType holiday_type = 4;
+
+  // 비고 (optional)
+  string description = 5;
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 11 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 12 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
+
+// 휴일 유형
+enum HolidayType {
+  HOLIDAY_TYPE_UNSPECIFIED = 0;
+  // 법정 공휴일
+  HOLIDAY_TYPE_PUBLIC = 1;
+  // 임시 공휴일
+  HOLIDAY_TYPE_TEMPORARY = 2;
+  // 거래소 휴장일 (공휴일은 아니나 시장이 열리지 않는 날)
+  HOLIDAY_TYPE_MARKET_CLOSED = 3;
+}
+
+// ============================================================================
+// Request/Response Messages
+// ============================================================================
+
+message CreateHolidayRequest {
+  // 등록할 휴일
+  Holiday holiday = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+message ListHolidaysRequest {
+  // 페이지 크기 (optional)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * date - 날짜 (YYYYMMDD, 부분 일치로 연/월 조회 가능)
+  // * display_name - 휴일명 (문자열, 부분 일치)
+  // * holiday_type - 휴일 유형 (HOLIDAY_TYPE_PUBLIC, HOLIDAY_TYPE_TEMPORARY, HOLIDAY_TYPE_MARKET_CLOSED)
+  //
+  // Operators:
+  // * = : 일치
+  // * != : 불일치
+  // * : : 포함 (문자열 부분 일치)
+  //
+  // Examples:
+  // * date:"2026"
+  // * date:"202601"
+  // * holiday_type=HOLIDAY_TYPE_PUBLIC
+  // * holiday_type=HOLIDAY_TYPE_MARKET_CLOSED AND date:"2026"
+  string filter = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListHolidaysResponse {
+  // 휴일 목록
+  repeated Holiday holidays = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+message GetHolidayByDateRequest {
+  // 조회할 날짜 (YYYYMMDD)
+  string date = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+message CheckHolidayRequest {}
+
+message CheckHolidayResponse {
+  // 확인한 날짜 (서버 기준 오늘, YYYYMMDD)
+  string date = 1;
+
+  // 휴일 여부
+  bool is_holiday = 2;
+
+  // 휴일 상세 정보 (is_holiday=true 인 경우에만 채워짐)
+  Holiday holiday = 3;
+}
+
+message GetLatestBusinessDayRequest {
+  // 기준 날짜 (YYYYMMDD). 미지정 시 오늘 날짜 기준.
+  // 이 날짜를 포함한 이전의 가장 최근 영업일을 반환합니다.
+  optional string as_of_date = 1 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message GetLatestBusinessDayResponse {
+  // 가장 최근 영업일 (YYYYMMDD)
+  string date = 1;
+}
+
+message DeleteHolidayRequest {
+  // 리소스 이름 (holidays/{date})
+  string holiday = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "system_ops.cdsapis.xyz/Holiday"
+    }
+  ];
+}

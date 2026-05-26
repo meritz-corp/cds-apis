@@ -148,3 +148,11 @@ pub mod mmm {
 
     }
 }
+
+pub mod system_ops {
+    pub mod v1 {
+        pub mod holiday {
+            include!("system_ops.v1.holiday.rs");
+        }
+    }
+}

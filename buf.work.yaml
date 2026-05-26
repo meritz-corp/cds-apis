@@ -5,3 +5,4 @@ directories:
   - packages/market
   - packages/master_sync
   - packages/mmm
+  - packages/system_ops
