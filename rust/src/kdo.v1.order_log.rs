@@ -241,6 +241,75 @@ pub struct HedgePairDetail {
     #[prost(uint64, tag="12")]
     pub hedge_exchange_time: u64,
 }
+/// 한쪽 방향(매수 또는 매도)의 체결 집계
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SideFillSummary {
+    /// 체결 건수
+    #[prost(uint64, tag="1")]
+    pub fill_count: u64,
+    /// 누적 체결 수량
+    #[prost(int64, tag="2")]
+    pub filled_quantity: i64,
+    /// 평균 체결 가격 (금액/수량)
+    #[prost(double, tag="3")]
+    pub avg_price: f64,
+    /// 체결 금액 합 (filled_price*filled_quantity 합)
+    #[prost(double, tag="4")]
+    pub amount: f64,
+    /// 마지막 체결 거래소 시각 (마이크로초)
+    #[prost(uint64, tag="5")]
+    pub last_exchange_time: u64,
+}
+/// 한 다리(원주문 또는 헷지)의 fund+symbol 단위 집계
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LegFillSummary {
+    #[prost(string, tag="1")]
+    pub fund_code: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 매수 집계
+    #[prost(message, optional, tag="3")]
+    pub bid: ::core::option::Option<SideFillSummary>,
+    /// 매도 집계
+    #[prost(message, optional, tag="4")]
+    pub ask: ::core::option::Option<SideFillSummary>,
+}
+/// 원주문/헷지 두 다리를 페어로 묶은 스냅샷 (stream 의 각 틱마다 emit)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PairFillSummary {
+    /// 원주문 다리 (ETF)
+    #[prost(message, optional, tag="1")]
+    pub quote: ::core::option::Option<LegFillSummary>,
+    /// 헷지 다리 (선물)
+    #[prost(message, optional, tag="2")]
+    pub hedge: ::core::option::Option<LegFillSummary>,
+    /// YYYYMMDD
+    #[prost(uint32, tag="3")]
+    pub date: u32,
+}
+/// StreamPairFillSummary 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamPairFillSummaryRequest {
+    /// 원주문 펀드 코드
+    #[prost(string, tag="1")]
+    pub quote_fund_code: ::prost::alloc::string::String,
+    /// 원주문 심볼 (ETF)
+    #[prost(string, tag="2")]
+    pub quote_symbol: ::prost::alloc::string::String,
+    /// 헷지 펀드 코드
+    #[prost(string, tag="3")]
+    pub hedge_fund_code: ::prost::alloc::string::String,
+    /// 헷지 심볼 (선물)
+    #[prost(string, tag="4")]
+    pub hedge_symbol: ::prost::alloc::string::String,
+    /// 날짜(YYYYMMDD). 미지정 시 서버가 당일로 처리
+    #[prost(uint32, optional, tag="5")]
+    pub date: ::core::option::Option<u32>,
+}
 /// 주문 로그 타입
 ///
 /// Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의

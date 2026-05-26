@@ -738,6 +738,248 @@ func (mr *MockOrderLogService_StreamHedgePairDetailServerMockRecorder) SetTraile
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockOrderLogService_StreamHedgePairDetailServer)(nil).SetTrailer), arg0)
 }
 
+// MockOrderLogService_StreamPairFillSummaryClient is a mock of OrderLogService_StreamPairFillSummaryClient interface.
+type MockOrderLogService_StreamPairFillSummaryClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockOrderLogService_StreamPairFillSummaryClientMockRecorder
+}
+
+// MockOrderLogService_StreamPairFillSummaryClientMockRecorder is the mock recorder for MockOrderLogService_StreamPairFillSummaryClient.
+type MockOrderLogService_StreamPairFillSummaryClientMockRecorder struct {
+	mock *MockOrderLogService_StreamPairFillSummaryClient
+}
+
+// NewMockOrderLogService_StreamPairFillSummaryClient creates a new mock instance.
+func NewMockOrderLogService_StreamPairFillSummaryClient(ctrl *gomock.Controller) *MockOrderLogService_StreamPairFillSummaryClient {
+	mock := &MockOrderLogService_StreamPairFillSummaryClient{ctrl: ctrl}
+	mock.recorder = &MockOrderLogService_StreamPairFillSummaryClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) EXPECT() *MockOrderLogService_StreamPairFillSummaryClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockOrderLogService_StreamPairFillSummaryClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockOrderLogService_StreamPairFillSummaryClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockOrderLogService_StreamPairFillSummaryClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) Recv() (*PairFillSummary, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*PairFillSummary)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockOrderLogService_StreamPairFillSummaryClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockOrderLogService_StreamPairFillSummaryClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockOrderLogService_StreamPairFillSummaryClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockOrderLogService_StreamPairFillSummaryClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryClient)(nil).Trailer))
+}
+
+// MockOrderLogService_StreamPairFillSummaryServer is a mock of OrderLogService_StreamPairFillSummaryServer interface.
+type MockOrderLogService_StreamPairFillSummaryServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockOrderLogService_StreamPairFillSummaryServerMockRecorder
+}
+
+// MockOrderLogService_StreamPairFillSummaryServerMockRecorder is the mock recorder for MockOrderLogService_StreamPairFillSummaryServer.
+type MockOrderLogService_StreamPairFillSummaryServerMockRecorder struct {
+	mock *MockOrderLogService_StreamPairFillSummaryServer
+}
+
+// NewMockOrderLogService_StreamPairFillSummaryServer creates a new mock instance.
+func NewMockOrderLogService_StreamPairFillSummaryServer(ctrl *gomock.Controller) *MockOrderLogService_StreamPairFillSummaryServer {
+	mock := &MockOrderLogService_StreamPairFillSummaryServer{ctrl: ctrl}
+	mock.recorder = &MockOrderLogService_StreamPairFillSummaryServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) EXPECT() *MockOrderLogService_StreamPairFillSummaryServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockOrderLogService_StreamPairFillSummaryServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockOrderLogService_StreamPairFillSummaryServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) Send(arg0 *PairFillSummary) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockOrderLogService_StreamPairFillSummaryServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockOrderLogService_StreamPairFillSummaryServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockOrderLogService_StreamPairFillSummaryServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockOrderLogService_StreamPairFillSummaryServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockOrderLogService_StreamPairFillSummaryServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockOrderLogService_StreamPairFillSummaryServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockOrderLogService_StreamPairFillSummaryServer)(nil).SetTrailer), arg0)
+}
+
 // MockOrderLogServiceClient is a mock of OrderLogServiceClient interface.
 type MockOrderLogServiceClient struct {
 	ctrl     *gomock.Controller
@@ -901,6 +1143,26 @@ func (mr *MockOrderLogServiceClientMockRecorder) StreamOrderLogs(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamOrderLogs", reflect.TypeOf((*MockOrderLogServiceClient)(nil).StreamOrderLogs), varargs...)
 }
 
+// StreamPairFillSummary mocks base method.
+func (m *MockOrderLogServiceClient) StreamPairFillSummary(ctx context.Context, in *StreamPairFillSummaryRequest, opts ...grpc.CallOption) (OrderLogService_StreamPairFillSummaryClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamPairFillSummary", varargs...)
+	ret0, _ := ret[0].(OrderLogService_StreamPairFillSummaryClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamPairFillSummary indicates an expected call of StreamPairFillSummary.
+func (mr *MockOrderLogServiceClientMockRecorder) StreamPairFillSummary(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamPairFillSummary", reflect.TypeOf((*MockOrderLogServiceClient)(nil).StreamPairFillSummary), varargs...)
+}
+
 // MockOrderLogServiceServer is a mock of OrderLogServiceServer interface.
 type MockOrderLogServiceServer struct {
 	ctrl     *gomock.Controller
@@ -1024,4 +1286,18 @@ func (m *MockOrderLogServiceServer) StreamOrderLogs(blob *ListOrderLogsRequest, 
 func (mr *MockOrderLogServiceServerMockRecorder) StreamOrderLogs(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamOrderLogs", reflect.TypeOf((*MockOrderLogServiceServer)(nil).StreamOrderLogs), blob, server)
+}
+
+// StreamPairFillSummary mocks base method.
+func (m *MockOrderLogServiceServer) StreamPairFillSummary(blob *StreamPairFillSummaryRequest, server OrderLogService_StreamPairFillSummaryServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamPairFillSummary", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamPairFillSummary indicates an expected call of StreamPairFillSummary.
+func (mr *MockOrderLogServiceServerMockRecorder) StreamPairFillSummary(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamPairFillSummary", reflect.TypeOf((*MockOrderLogServiceServer)(nil).StreamPairFillSummary), blob, server)
 }

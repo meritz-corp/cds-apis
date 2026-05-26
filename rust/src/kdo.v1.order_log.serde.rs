@@ -746,6 +746,153 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
         deserializer.deserialize_struct("kdo.v1.order_log.HedgePairDetail", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for LegFillSummary {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.LegFillSummary", len)?;
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if let Some(v) = self.bid.as_ref() {
+            struct_ser.serialize_field("bid", v)?;
+        }
+        if let Some(v) = self.ask.as_ref() {
+            struct_ser.serialize_field("ask", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LegFillSummary {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fund_code",
+            "fundCode",
+            "symbol",
+            "bid",
+            "ask",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FundCode,
+            Symbol,
+            Bid,
+            Ask,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "bid" => Ok(GeneratedField::Bid),
+                            "ask" => Ok(GeneratedField::Ask),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LegFillSummary;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.LegFillSummary")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LegFillSummary, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fund_code__ = None;
+                let mut symbol__ = None;
+                let mut bid__ = None;
+                let mut ask__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Bid => {
+                            if bid__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bid"));
+                            }
+                            bid__ = map_.next_value()?;
+                        }
+                        GeneratedField::Ask => {
+                            if ask__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ask"));
+                            }
+                            ask__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LegFillSummary {
+                    fund_code: fund_code__.unwrap_or_default(),
+                    symbol: symbol__.unwrap_or_default(),
+                    bid: bid__,
+                    ask: ask__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.LegFillSummary", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListOrderLogsRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1839,6 +1986,320 @@ impl<'de> serde::Deserialize<'de> for OrderType {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for PairFillSummary {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.PairFillSummary", len)?;
+        if let Some(v) = self.quote.as_ref() {
+            struct_ser.serialize_field("quote", v)?;
+        }
+        if let Some(v) = self.hedge.as_ref() {
+            struct_ser.serialize_field("hedge", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("date", &self.date)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairFillSummary {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "quote",
+            "hedge",
+            "date",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Quote,
+            Hedge,
+            Date,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "quote" => Ok(GeneratedField::Quote),
+                            "hedge" => Ok(GeneratedField::Hedge),
+                            "date" => Ok(GeneratedField::Date),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairFillSummary;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.PairFillSummary")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairFillSummary, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut quote__ = None;
+                let mut hedge__ = None;
+                let mut date__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Quote => {
+                            if quote__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quote"));
+                            }
+                            quote__ = map_.next_value()?;
+                        }
+                        GeneratedField::Hedge => {
+                            if hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedge"));
+                            }
+                            hedge__ = map_.next_value()?;
+                        }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PairFillSummary {
+                    quote: quote__,
+                    hedge: hedge__,
+                    date: date__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.PairFillSummary", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SideFillSummary {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.SideFillSummary", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("fill_count", ToString::to_string(&self.fill_count).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("filled_quantity", ToString::to_string(&self.filled_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("avg_price", &self.avg_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("amount", &self.amount)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("last_exchange_time", ToString::to_string(&self.last_exchange_time).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SideFillSummary {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fill_count",
+            "fillCount",
+            "filled_quantity",
+            "filledQuantity",
+            "avg_price",
+            "avgPrice",
+            "amount",
+            "last_exchange_time",
+            "lastExchangeTime",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FillCount,
+            FilledQuantity,
+            AvgPrice,
+            Amount,
+            LastExchangeTime,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fillCount" | "fill_count" => Ok(GeneratedField::FillCount),
+                            "filledQuantity" | "filled_quantity" => Ok(GeneratedField::FilledQuantity),
+                            "avgPrice" | "avg_price" => Ok(GeneratedField::AvgPrice),
+                            "amount" => Ok(GeneratedField::Amount),
+                            "lastExchangeTime" | "last_exchange_time" => Ok(GeneratedField::LastExchangeTime),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SideFillSummary;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.SideFillSummary")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SideFillSummary, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fill_count__ = None;
+                let mut filled_quantity__ = None;
+                let mut avg_price__ = None;
+                let mut amount__ = None;
+                let mut last_exchange_time__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FillCount => {
+                            if fill_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fillCount"));
+                            }
+                            fill_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FilledQuantity => {
+                            if filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledQuantity"));
+                            }
+                            filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AvgPrice => {
+                            if avg_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("avgPrice"));
+                            }
+                            avg_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Amount => {
+                            if amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("amount"));
+                            }
+                            amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LastExchangeTime => {
+                            if last_exchange_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastExchangeTime"));
+                            }
+                            last_exchange_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SideFillSummary {
+                    fill_count: fill_count__.unwrap_or_default(),
+                    filled_quantity: filled_quantity__.unwrap_or_default(),
+                    avg_price: avg_price__.unwrap_or_default(),
+                    amount: amount__.unwrap_or_default(),
+                    last_exchange_time: last_exchange_time__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.SideFillSummary", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for StreamHedgePairDetailRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1952,5 +2413,174 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.order_log.StreamHedgePairDetailRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for StreamPairFillSummaryRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.StreamPairFillSummaryRequest", len)?;
+        if true {
+            struct_ser.serialize_field("quote_fund_code", &self.quote_fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("quote_symbol", &self.quote_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("hedge_fund_code", &self.hedge_fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("hedge_symbol", &self.hedge_symbol)?;
+        }
+        if let Some(v) = self.date.as_ref() {
+            struct_ser.serialize_field("date", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for StreamPairFillSummaryRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "quote_fund_code",
+            "quoteFundCode",
+            "quote_symbol",
+            "quoteSymbol",
+            "hedge_fund_code",
+            "hedgeFundCode",
+            "hedge_symbol",
+            "hedgeSymbol",
+            "date",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            QuoteFundCode,
+            QuoteSymbol,
+            HedgeFundCode,
+            HedgeSymbol,
+            Date,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "quoteFundCode" | "quote_fund_code" => Ok(GeneratedField::QuoteFundCode),
+                            "quoteSymbol" | "quote_symbol" => Ok(GeneratedField::QuoteSymbol),
+                            "hedgeFundCode" | "hedge_fund_code" => Ok(GeneratedField::HedgeFundCode),
+                            "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
+                            "date" => Ok(GeneratedField::Date),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamPairFillSummaryRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.StreamPairFillSummaryRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamPairFillSummaryRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut quote_fund_code__ = None;
+                let mut quote_symbol__ = None;
+                let mut hedge_fund_code__ = None;
+                let mut hedge_symbol__ = None;
+                let mut date__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::QuoteFundCode => {
+                            if quote_fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteFundCode"));
+                            }
+                            quote_fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::QuoteSymbol => {
+                            if quote_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteSymbol"));
+                            }
+                            quote_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::HedgeFundCode => {
+                            if hedge_fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeFundCode"));
+                            }
+                            hedge_fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::HedgeSymbol => {
+                            if hedge_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeSymbol"));
+                            }
+                            hedge_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(StreamPairFillSummaryRequest {
+                    quote_fund_code: quote_fund_code__.unwrap_or_default(),
+                    quote_symbol: quote_symbol__.unwrap_or_default(),
+                    hedge_fund_code: hedge_fund_code__.unwrap_or_default(),
+                    hedge_symbol: hedge_symbol__.unwrap_or_default(),
+                    date: date__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.StreamPairFillSummaryRequest", FIELDS, GeneratedVisitor)
     }
 }

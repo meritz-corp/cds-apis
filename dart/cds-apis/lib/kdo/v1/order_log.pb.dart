@@ -1072,6 +1072,358 @@ class HedgePairDetail extends $pb.GeneratedMessage {
   void clearHedgeExchangeTime() => $_clearField(12);
 }
 
+/// 한쪽 방향(매수 또는 매도)의 체결 집계
+class SideFillSummary extends $pb.GeneratedMessage {
+  factory SideFillSummary({
+    $fixnum.Int64? fillCount,
+    $fixnum.Int64? filledQuantity,
+    $core.double? avgPrice,
+    $core.double? amount,
+    $fixnum.Int64? lastExchangeTime,
+  }) {
+    final result = create();
+    if (fillCount != null) result.fillCount = fillCount;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (avgPrice != null) result.avgPrice = avgPrice;
+    if (amount != null) result.amount = amount;
+    if (lastExchangeTime != null) result.lastExchangeTime = lastExchangeTime;
+    return result;
+  }
+
+  SideFillSummary._();
+
+  factory SideFillSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SideFillSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SideFillSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'fillCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(2, _omitFieldNames ? '' : 'filledQuantity')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'avgPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'amount', $pb.PbFieldType.OD)
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'lastExchangeTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SideFillSummary clone() => SideFillSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SideFillSummary copyWith(void Function(SideFillSummary) updates) => super.copyWith((message) => updates(message as SideFillSummary)) as SideFillSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SideFillSummary create() => SideFillSummary._();
+  @$core.override
+  SideFillSummary createEmptyInstance() => create();
+  static $pb.PbList<SideFillSummary> createRepeated() => $pb.PbList<SideFillSummary>();
+  @$core.pragma('dart2js:noInline')
+  static SideFillSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SideFillSummary>(create);
+  static SideFillSummary? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get fillCount => $_getI64(0);
+  @$pb.TagNumber(1)
+  set fillCount($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFillCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFillCount() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get filledQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFilledQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilledQuantity() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get avgPrice => $_getN(2);
+  @$pb.TagNumber(3)
+  set avgPrice($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAvgPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAvgPrice() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get amount => $_getN(3);
+  @$pb.TagNumber(4)
+  set amount($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAmount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAmount() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get lastExchangeTime => $_getI64(4);
+  @$pb.TagNumber(5)
+  set lastExchangeTime($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasLastExchangeTime() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLastExchangeTime() => $_clearField(5);
+}
+
+/// 한 다리(원주문 또는 헷지)의 fund+symbol 단위 집계
+class LegFillSummary extends $pb.GeneratedMessage {
+  factory LegFillSummary({
+    $core.String? fundCode,
+    $core.String? symbol,
+    SideFillSummary? bid,
+    SideFillSummary? ask,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (symbol != null) result.symbol = symbol;
+    if (bid != null) result.bid = bid;
+    if (ask != null) result.ask = ask;
+    return result;
+  }
+
+  LegFillSummary._();
+
+  factory LegFillSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LegFillSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LegFillSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOM<SideFillSummary>(3, _omitFieldNames ? '' : 'bid', subBuilder: SideFillSummary.create)
+    ..aOM<SideFillSummary>(4, _omitFieldNames ? '' : 'ask', subBuilder: SideFillSummary.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LegFillSummary clone() => LegFillSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LegFillSummary copyWith(void Function(LegFillSummary) updates) => super.copyWith((message) => updates(message as LegFillSummary)) as LegFillSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LegFillSummary create() => LegFillSummary._();
+  @$core.override
+  LegFillSummary createEmptyInstance() => create();
+  static $pb.PbList<LegFillSummary> createRepeated() => $pb.PbList<LegFillSummary>();
+  @$core.pragma('dart2js:noInline')
+  static LegFillSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LegFillSummary>(create);
+  static LegFillSummary? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  SideFillSummary get bid => $_getN(2);
+  @$pb.TagNumber(3)
+  set bid(SideFillSummary value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBid() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBid() => $_clearField(3);
+  @$pb.TagNumber(3)
+  SideFillSummary ensureBid() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  SideFillSummary get ask => $_getN(3);
+  @$pb.TagNumber(4)
+  set ask(SideFillSummary value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAsk() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAsk() => $_clearField(4);
+  @$pb.TagNumber(4)
+  SideFillSummary ensureAsk() => $_ensure(3);
+}
+
+/// 원주문/헷지 두 다리를 페어로 묶은 스냅샷 (stream 의 각 틱마다 emit)
+class PairFillSummary extends $pb.GeneratedMessage {
+  factory PairFillSummary({
+    LegFillSummary? quote,
+    LegFillSummary? hedge,
+    $core.int? date,
+  }) {
+    final result = create();
+    if (quote != null) result.quote = quote;
+    if (hedge != null) result.hedge = hedge;
+    if (date != null) result.date = date;
+    return result;
+  }
+
+  PairFillSummary._();
+
+  factory PairFillSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairFillSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairFillSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aOM<LegFillSummary>(1, _omitFieldNames ? '' : 'quote', subBuilder: LegFillSummary.create)
+    ..aOM<LegFillSummary>(2, _omitFieldNames ? '' : 'hedge', subBuilder: LegFillSummary.create)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairFillSummary clone() => PairFillSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairFillSummary copyWith(void Function(PairFillSummary) updates) => super.copyWith((message) => updates(message as PairFillSummary)) as PairFillSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairFillSummary create() => PairFillSummary._();
+  @$core.override
+  PairFillSummary createEmptyInstance() => create();
+  static $pb.PbList<PairFillSummary> createRepeated() => $pb.PbList<PairFillSummary>();
+  @$core.pragma('dart2js:noInline')
+  static PairFillSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairFillSummary>(create);
+  static PairFillSummary? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  LegFillSummary get quote => $_getN(0);
+  @$pb.TagNumber(1)
+  set quote(LegFillSummary value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasQuote() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearQuote() => $_clearField(1);
+  @$pb.TagNumber(1)
+  LegFillSummary ensureQuote() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  LegFillSummary get hedge => $_getN(1);
+  @$pb.TagNumber(2)
+  set hedge(LegFillSummary value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasHedge() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHedge() => $_clearField(2);
+  @$pb.TagNumber(2)
+  LegFillSummary ensureHedge() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.int get date => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set date($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasDate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDate() => $_clearField(3);
+}
+
+/// StreamPairFillSummary 요청
+class StreamPairFillSummaryRequest extends $pb.GeneratedMessage {
+  factory StreamPairFillSummaryRequest({
+    $core.String? quoteFundCode,
+    $core.String? quoteSymbol,
+    $core.String? hedgeFundCode,
+    $core.String? hedgeSymbol,
+    $core.int? date,
+  }) {
+    final result = create();
+    if (quoteFundCode != null) result.quoteFundCode = quoteFundCode;
+    if (quoteSymbol != null) result.quoteSymbol = quoteSymbol;
+    if (hedgeFundCode != null) result.hedgeFundCode = hedgeFundCode;
+    if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
+    if (date != null) result.date = date;
+    return result;
+  }
+
+  StreamPairFillSummaryRequest._();
+
+  factory StreamPairFillSummaryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamPairFillSummaryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamPairFillSummaryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'quoteFundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'quoteSymbol')
+    ..aOS(3, _omitFieldNames ? '' : 'hedgeFundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'hedgeSymbol')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamPairFillSummaryRequest clone() => StreamPairFillSummaryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamPairFillSummaryRequest copyWith(void Function(StreamPairFillSummaryRequest) updates) => super.copyWith((message) => updates(message as StreamPairFillSummaryRequest)) as StreamPairFillSummaryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamPairFillSummaryRequest create() => StreamPairFillSummaryRequest._();
+  @$core.override
+  StreamPairFillSummaryRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamPairFillSummaryRequest> createRepeated() => $pb.PbList<StreamPairFillSummaryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamPairFillSummaryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamPairFillSummaryRequest>(create);
+  static StreamPairFillSummaryRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get quoteFundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set quoteFundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasQuoteFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearQuoteFundCode() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get quoteSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set quoteSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasQuoteSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearQuoteSymbol() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get hedgeFundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set hedgeFundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHedgeFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHedgeFundCode() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get hedgeSymbol => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set hedgeSymbol($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasHedgeSymbol() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearHedgeSymbol() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get date => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set date($core.int value) => $_setUnsignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasDate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDate() => $_clearField(5);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

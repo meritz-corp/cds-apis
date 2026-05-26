@@ -36,6 +36,8 @@ type OrderLogServiceClient interface {
 	GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (*HedgePairDetail, error)
 	// 헷지 쌍 상세 정보 실시간 스트림
 	StreamHedgePairDetail(ctx context.Context, in *StreamHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error)
+	// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
+	StreamPairFillSummary(ctx context.Context, in *StreamPairFillSummaryRequest, opts ...grpc.CallOption) (OrderLogService_StreamPairFillSummaryClient, error)
 }
 
 type orderLogServiceClient struct {
@@ -178,6 +180,38 @@ func (x *orderLogServiceStreamHedgePairDetailClient) Recv() (*HedgePairDetail, e
 	return m, nil
 }
 
+func (c *orderLogServiceClient) StreamPairFillSummary(ctx context.Context, in *StreamPairFillSummaryRequest, opts ...grpc.CallOption) (OrderLogService_StreamPairFillSummaryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &OrderLogService_ServiceDesc.Streams[3], "/kdo.v1.order_log.OrderLogService/StreamPairFillSummary", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &orderLogServiceStreamPairFillSummaryClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type OrderLogService_StreamPairFillSummaryClient interface {
+	Recv() (*PairFillSummary, error)
+	grpc.ClientStream
+}
+
+type orderLogServiceStreamPairFillSummaryClient struct {
+	grpc.ClientStream
+}
+
+func (x *orderLogServiceStreamPairFillSummaryClient) Recv() (*PairFillSummary, error) {
+	m := new(PairFillSummary)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // OrderLogServiceServer is the server API for OrderLogService service.
 // All implementations must embed UnimplementedOrderLogServiceServer
 // for forward compatibility
@@ -196,6 +230,8 @@ type OrderLogServiceServer interface {
 	GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error)
 	// 헷지 쌍 상세 정보 실시간 스트림
 	StreamHedgePairDetail(*StreamHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error
+	// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
+	StreamPairFillSummary(*StreamPairFillSummaryRequest, OrderLogService_StreamPairFillSummaryServer) error
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
 
@@ -223,6 +259,9 @@ func (UnimplementedOrderLogServiceServer) GetHedgePairDetail(context.Context, *G
 }
 func (UnimplementedOrderLogServiceServer) StreamHedgePairDetail(*StreamHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamHedgePairDetail not implemented")
+}
+func (UnimplementedOrderLogServiceServer) StreamPairFillSummary(*StreamPairFillSummaryRequest, OrderLogService_StreamPairFillSummaryServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamPairFillSummary not implemented")
 }
 func (UnimplementedOrderLogServiceServer) mustEmbedUnimplementedOrderLogServiceServer() {}
 
@@ -372,6 +411,27 @@ func (x *orderLogServiceStreamHedgePairDetailServer) Send(m *HedgePairDetail) er
 	return x.ServerStream.SendMsg(m)
 }
 
+func _OrderLogService_StreamPairFillSummary_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamPairFillSummaryRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(OrderLogServiceServer).StreamPairFillSummary(m, &orderLogServiceStreamPairFillSummaryServer{stream})
+}
+
+type OrderLogService_StreamPairFillSummaryServer interface {
+	Send(*PairFillSummary) error
+	grpc.ServerStream
+}
+
+type orderLogServiceStreamPairFillSummaryServer struct {
+	grpc.ServerStream
+}
+
+func (x *orderLogServiceStreamPairFillSummaryServer) Send(m *PairFillSummary) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // OrderLogService_ServiceDesc is the grpc.ServiceDesc for OrderLogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -410,6 +470,11 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamHedgePairDetail",
 			Handler:       _OrderLogService_StreamHedgePairDetail_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamPairFillSummary",
+			Handler:       _OrderLogService_StreamPairFillSummary_Handler,
 			ServerStreams: true,
 		},
 	},

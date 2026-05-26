@@ -70,6 +70,14 @@ service OrderLogService {
     };
     option (google.api.method_signature) = "symbol";
   }
+
+  // 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
+  rpc StreamPairFillSummary(StreamPairFillSummaryRequest) returns (stream PairFillSummary) {
+    option (google.api.http) = {
+      get: "/v1/order_logs:streamPairFillSummary"
+    };
+    option (google.api.method_signature) = "quote_fund_code,quote_symbol,hedge_fund_code,hedge_symbol";
+  }
 }
 
 
@@ -317,4 +325,37 @@ message HedgePairDetail {
   uint32 date = 11;
   // 마지막 Hedge 거래소 시각 (마이크로초)
   uint64 hedge_exchange_time = 12;
+}
+
+// 한쪽 방향(매수 또는 매도)의 체결 집계
+message SideFillSummary {
+  uint64 fill_count = 1;          // 체결 건수
+  int64  filled_quantity = 2;     // 누적 체결 수량
+  double avg_price = 3;           // 평균 체결 가격 (금액/수량)
+  double amount = 4;              // 체결 금액 합 (filled_price*filled_quantity 합)
+  uint64 last_exchange_time = 5;  // 마지막 체결 거래소 시각 (마이크로초)
+}
+
+// 한 다리(원주문 또는 헷지)의 fund+symbol 단위 집계
+message LegFillSummary {
+  string fund_code = 1;
+  string symbol = 2;
+  SideFillSummary bid = 3;        // 매수 집계
+  SideFillSummary ask = 4;        // 매도 집계
+}
+
+// 원주문/헷지 두 다리를 페어로 묶은 스냅샷 (stream 의 각 틱마다 emit)
+message PairFillSummary {
+  LegFillSummary quote = 1;       // 원주문 다리 (ETF)
+  LegFillSummary hedge = 2;       // 헷지 다리 (선물)
+  uint32 date = 3;                // YYYYMMDD
+}
+
+// StreamPairFillSummary 요청
+message StreamPairFillSummaryRequest {
+  string quote_fund_code = 1;     // 원주문 펀드 코드
+  string quote_symbol = 2;        // 원주문 심볼 (ETF)
+  string hedge_fund_code = 3;     // 헷지 펀드 코드
+  string hedge_symbol = 4;        // 헷지 심볼 (선물)
+  optional uint32 date = 5;       // 날짜(YYYYMMDD). 미지정 시 서버가 당일로 처리
 }

@@ -277,3 +277,78 @@ final $typed_data.Uint8List hedgePairDetailDescriptor = $convert.base64Decode(
     'FkEhsKCWZ1bmRfY29kZRgKIAEoCVIIZnVuZENvZGUSEgoEZGF0ZRgLIAEoDVIEZGF0ZRIuChNo'
     'ZWRnZV9leGNoYW5nZV90aW1lGAwgASgEUhFoZWRnZUV4Y2hhbmdlVGltZQ==');
 
+@$core.Deprecated('Use sideFillSummaryDescriptor instead')
+const SideFillSummary$json = {
+  '1': 'SideFillSummary',
+  '2': [
+    {'1': 'fill_count', '3': 1, '4': 1, '5': 4, '10': 'fillCount'},
+    {'1': 'filled_quantity', '3': 2, '4': 1, '5': 3, '10': 'filledQuantity'},
+    {'1': 'avg_price', '3': 3, '4': 1, '5': 1, '10': 'avgPrice'},
+    {'1': 'amount', '3': 4, '4': 1, '5': 1, '10': 'amount'},
+    {'1': 'last_exchange_time', '3': 5, '4': 1, '5': 4, '10': 'lastExchangeTime'},
+  ],
+};
+
+/// Descriptor for `SideFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sideFillSummaryDescriptor = $convert.base64Decode(
+    'Cg9TaWRlRmlsbFN1bW1hcnkSHQoKZmlsbF9jb3VudBgBIAEoBFIJZmlsbENvdW50EicKD2ZpbG'
+    'xlZF9xdWFudGl0eRgCIAEoA1IOZmlsbGVkUXVhbnRpdHkSGwoJYXZnX3ByaWNlGAMgASgBUghh'
+    'dmdQcmljZRIWCgZhbW91bnQYBCABKAFSBmFtb3VudBIsChJsYXN0X2V4Y2hhbmdlX3RpbWUYBS'
+    'ABKARSEGxhc3RFeGNoYW5nZVRpbWU=');
+
+@$core.Deprecated('Use legFillSummaryDescriptor instead')
+const LegFillSummary$json = {
+  '1': 'LegFillSummary',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'bid', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.order_log.SideFillSummary', '10': 'bid'},
+    {'1': 'ask', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.order_log.SideFillSummary', '10': 'ask'},
+  ],
+};
+
+/// Descriptor for `LegFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List legFillSummaryDescriptor = $convert.base64Decode(
+    'Cg5MZWdGaWxsU3VtbWFyeRIbCglmdW5kX2NvZGUYASABKAlSCGZ1bmRDb2RlEhYKBnN5bWJvbB'
+    'gCIAEoCVIGc3ltYm9sEjMKA2JpZBgDIAEoCzIhLmtkby52MS5vcmRlcl9sb2cuU2lkZUZpbGxT'
+    'dW1tYXJ5UgNiaWQSMwoDYXNrGAQgASgLMiEua2RvLnYxLm9yZGVyX2xvZy5TaWRlRmlsbFN1bW'
+    '1hcnlSA2Fzaw==');
+
+@$core.Deprecated('Use pairFillSummaryDescriptor instead')
+const PairFillSummary$json = {
+  '1': 'PairFillSummary',
+  '2': [
+    {'1': 'quote', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.order_log.LegFillSummary', '10': 'quote'},
+    {'1': 'hedge', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.order_log.LegFillSummary', '10': 'hedge'},
+    {'1': 'date', '3': 3, '4': 1, '5': 13, '10': 'date'},
+  ],
+};
+
+/// Descriptor for `PairFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairFillSummaryDescriptor = $convert.base64Decode(
+    'Cg9QYWlyRmlsbFN1bW1hcnkSNgoFcXVvdGUYASABKAsyIC5rZG8udjEub3JkZXJfbG9nLkxlZ0'
+    'ZpbGxTdW1tYXJ5UgVxdW90ZRI2CgVoZWRnZRgCIAEoCzIgLmtkby52MS5vcmRlcl9sb2cuTGVn'
+    'RmlsbFN1bW1hcnlSBWhlZGdlEhIKBGRhdGUYAyABKA1SBGRhdGU=');
+
+@$core.Deprecated('Use streamPairFillSummaryRequestDescriptor instead')
+const StreamPairFillSummaryRequest$json = {
+  '1': 'StreamPairFillSummaryRequest',
+  '2': [
+    {'1': 'quote_fund_code', '3': 1, '4': 1, '5': 9, '10': 'quoteFundCode'},
+    {'1': 'quote_symbol', '3': 2, '4': 1, '5': 9, '10': 'quoteSymbol'},
+    {'1': 'hedge_fund_code', '3': 3, '4': 1, '5': 9, '10': 'hedgeFundCode'},
+    {'1': 'hedge_symbol', '3': 4, '4': 1, '5': 9, '10': 'hedgeSymbol'},
+    {'1': 'date', '3': 5, '4': 1, '5': 13, '9': 0, '10': 'date', '17': true},
+  ],
+  '8': [
+    {'1': '_date'},
+  ],
+};
+
+/// Descriptor for `StreamPairFillSummaryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamPairFillSummaryRequestDescriptor = $convert.base64Decode(
+    'ChxTdHJlYW1QYWlyRmlsbFN1bW1hcnlSZXF1ZXN0EiYKD3F1b3RlX2Z1bmRfY29kZRgBIAEoCV'
+    'INcXVvdGVGdW5kQ29kZRIhCgxxdW90ZV9zeW1ib2wYAiABKAlSC3F1b3RlU3ltYm9sEiYKD2hl'
+    'ZGdlX2Z1bmRfY29kZRgDIAEoCVINaGVkZ2VGdW5kQ29kZRIhCgxoZWRnZV9zeW1ib2wYBCABKA'
+    'lSC2hlZGdlU3ltYm9sEhcKBGRhdGUYBSABKA1IAFIEZGF0ZYgBAUIHCgVfZGF0ZQ==');
+

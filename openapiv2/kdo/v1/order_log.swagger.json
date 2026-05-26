@@ -340,6 +340,76 @@
           "OrderLogService"
         ]
       }
+    },
+    "/v1/order_logs:streamPairFillSummary": {
+      "get": {
+        "summary": "원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍",
+        "operationId": "OrderLogService_StreamPairFillSummary",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/order_logPairFillSummary"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of order_logPairFillSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "quoteFundCode",
+            "description": "원주문 펀드 코드",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "quoteSymbol",
+            "description": "원주문 심볼 (ETF)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hedgeFundCode",
+            "description": "헷지 펀드 코드",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hedgeSymbol",
+            "description": "헷지 심볼 (선물)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "description": "날짜(YYYYMMDD). 미지정 시 서버가 당일로 처리",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -438,6 +508,26 @@
         }
       },
       "title": "헷지 쌍 상세 정보"
+    },
+    "order_logLegFillSummary": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "bid": {
+          "$ref": "#/definitions/order_logSideFillSummary",
+          "title": "매수 집계"
+        },
+        "ask": {
+          "$ref": "#/definitions/order_logSideFillSummary",
+          "title": "매도 집계"
+        }
+      },
+      "title": "한 다리(원주문 또는 헷지)의 fund+symbol 단위 집계"
     },
     "order_logListOrderLogsResponse": {
       "type": "object",
@@ -596,6 +686,56 @@
       "default": "ORDER_LOG_TYPE_UNSPECIFIED",
       "description": "Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의\n 주석은 Rust 코드의 내용을 번역했습니다.\n\n - ORDER_LOG_TYPE_UNSPECIFIED: 알 수 없는 값 (기본값)\n - RECEIVED: 접수 확인\n - REJECTED: 거래소 거부\n - MERITZ_REJECTED: 메리츠 내부 거부\n - FILLED: 체결\n - AUTO_CANCELLED: 자동 취소",
       "title": "주문 로그 타입"
+    },
+    "order_logPairFillSummary": {
+      "type": "object",
+      "properties": {
+        "quote": {
+          "$ref": "#/definitions/order_logLegFillSummary",
+          "title": "원주문 다리 (ETF)"
+        },
+        "hedge": {
+          "$ref": "#/definitions/order_logLegFillSummary",
+          "title": "헷지 다리 (선물)"
+        },
+        "date": {
+          "type": "integer",
+          "format": "int64",
+          "title": "YYYYMMDD"
+        }
+      },
+      "title": "원주문/헷지 두 다리를 페어로 묶은 스냅샷 (stream 의 각 틱마다 emit)"
+    },
+    "order_logSideFillSummary": {
+      "type": "object",
+      "properties": {
+        "fillCount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "체결 건수"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 체결 수량"
+        },
+        "avgPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "평균 체결 가격 (금액/수량)"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "title": "체결 금액 합 (filled_price*filled_quantity 합)"
+        },
+        "lastExchangeTime": {
+          "type": "string",
+          "format": "uint64",
+          "title": "마지막 체결 거래소 시각 (마이크로초)"
+        }
+      },
+      "title": "한쪽 방향(매수 또는 매도)의 체결 집계"
     },
     "protobufAny": {
       "type": "object",

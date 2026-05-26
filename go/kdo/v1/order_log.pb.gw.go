@@ -327,6 +327,34 @@ func request_OrderLogService_StreamHedgePairDetail_0(ctx context.Context, marsha
 
 }
 
+var (
+	filter_OrderLogService_StreamPairFillSummary_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_OrderLogService_StreamPairFillSummary_0(ctx context.Context, marshaler runtime.Marshaler, client OrderLogServiceClient, req *http.Request, pathParams map[string]string) (OrderLogService_StreamPairFillSummaryClient, runtime.ServerMetadata, error) {
+	var protoReq StreamPairFillSummaryRequest
+	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_OrderLogService_StreamPairFillSummary_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.StreamPairFillSummary(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterOrderLogServiceHandlerServer registers the http handlers for service OrderLogService to "mux".
 // UnaryRPC     :call OrderLogServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -448,6 +476,13 @@ func RegisterOrderLogServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 	})
 
 	mux.Handle("GET", pattern_OrderLogService_StreamHedgePairDetail_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_OrderLogService_StreamPairFillSummary_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -649,6 +684,28 @@ func RegisterOrderLogServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 
 	})
 
+	mux.Handle("GET", pattern_OrderLogService_StreamPairFillSummary_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.order_log.OrderLogService/StreamPairFillSummary", runtime.WithHTTPPathPattern("/v1/order_logs:streamPairFillSummary"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_OrderLogService_StreamPairFillSummary_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_OrderLogService_StreamPairFillSummary_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -666,6 +723,8 @@ var (
 	pattern_OrderLogService_GetHedgePairDetail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "order_logs", "order_id"}, "hedgePairDetail"))
 
 	pattern_OrderLogService_StreamHedgePairDetail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "order_logs"}, "streamHedgePairDetail"))
+
+	pattern_OrderLogService_StreamPairFillSummary_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "order_logs"}, "streamPairFillSummary"))
 )
 
 var (
@@ -682,4 +741,6 @@ var (
 	forward_OrderLogService_GetHedgePairDetail_0 = runtime.ForwardResponseMessage
 
 	forward_OrderLogService_StreamHedgePairDetail_0 = runtime.ForwardResponseStream
+
+	forward_OrderLogService_StreamPairFillSummary_0 = runtime.ForwardResponseStream
 )
