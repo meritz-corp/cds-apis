@@ -515,6 +515,7 @@ class HedgeGroup extends $pb.GeneratedMessage {
     $core.bool? isActive,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
+    $core.bool? separateBySource,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -526,6 +527,7 @@ class HedgeGroup extends $pb.GeneratedMessage {
     if (isActive != null) result.isActive = isActive;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
+    if (separateBySource != null) result.separateBySource = separateBySource;
     return result;
   }
 
@@ -544,6 +546,7 @@ class HedgeGroup extends $pb.GeneratedMessage {
     ..aOB(8, _omitFieldNames ? '' : 'isActive')
     ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(10, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..aOB(11, _omitFieldNames ? '' : 'separateBySource')
     ..hasRequiredFields = false
   ;
 
@@ -660,6 +663,18 @@ class HedgeGroup extends $pb.GeneratedMessage {
   void clearUpdateTime() => $_clearField(10);
   @$pb.TagNumber(10)
   $2.Timestamp ensureUpdateTime() => $_ensure(8);
+
+  /// If true, hedge accumulator separates accumulation by source_symbol.
+  /// If false (default), accumulations are aggregated per hedge_symbol across all source_symbols.
+  /// Controls trigger granularity for portfolios with multiple ETFs hedged to the same target instrument.
+  @$pb.TagNumber(11)
+  $core.bool get separateBySource => $_getBF(9);
+  @$pb.TagNumber(11)
+  set separateBySource($core.bool value) => $_setBool(9, value);
+  @$pb.TagNumber(11)
+  $core.bool hasSeparateBySource() => $_has(9);
+  @$pb.TagNumber(11)
+  void clearSeparateBySource() => $_clearField(11);
 }
 
 enum TriggerCondition_Condition {

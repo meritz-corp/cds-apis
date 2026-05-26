@@ -142,6 +142,11 @@ pub struct HedgeGroup {
     /// 수정 시간
     #[prost(message, optional, tag="10")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// If true, hedge accumulator separates accumulation by source_symbol.
+    /// If false (default), accumulations are aggregated per hedge_symbol across all source_symbols.
+    /// Controls trigger granularity for portfolios with multiple ETFs hedged to the same target instrument.
+    #[prost(bool, tag="11")]
+    pub separate_by_source: bool,
 }
 /// 트리거 조건: 헷지 실행 기준
 #[allow(clippy::derive_partial_eq_without_eq)]

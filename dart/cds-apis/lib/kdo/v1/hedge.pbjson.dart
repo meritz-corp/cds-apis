@@ -197,6 +197,7 @@ const HedgeGroup$json = {
     {'1': 'is_active', '3': 8, '4': 1, '5': 8, '10': 'isActive'},
     {'1': 'create_time', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
+    {'1': 'separate_by_source', '3': 11, '4': 1, '5': 8, '10': 'separateBySource'},
   ],
   '7': {},
   '9': [
@@ -215,8 +216,9 @@ final $typed_data.Uint8List hedgeGroupDescriptor = $convert.base64Decode(
     'JSEHRyaWdnZXJDb25kaXRpb24SGwoJaXNfYWN0aXZlGAggASgIUghpc0FjdGl2ZRJBCgtjcmVh'
     'dGVfdGltZRgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCmNyZWF0ZV'
     'RpbWUSQQoLdXBkYXRlX3RpbWUYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTi'
-    'QQEDUgp1cGRhdGVUaW1lOjvqQTgKGmtkby5jZHNhcGlzLnh5ei9IZWRnZUdyb3VwEhpoZWRnZV'
-    '9ncm91cHMve2hlZGdlX2dyb3VwfUoECAcQCFIFaXRlbXM=');
+    'QQEDUgp1cGRhdGVUaW1lEiwKEnNlcGFyYXRlX2J5X3NvdXJjZRgLIAEoCFIQc2VwYXJhdGVCeV'
+    'NvdXJjZTo76kE4ChprZG8uY2RzYXBpcy54eXovSGVkZ2VHcm91cBIaaGVkZ2VfZ3JvdXBzL3to'
+    'ZWRnZV9ncm91cH1KBAgHEAhSBWl0ZW1z');
 
 @$core.Deprecated('Use triggerConditionDescriptor instead')
 const TriggerCondition$json = {

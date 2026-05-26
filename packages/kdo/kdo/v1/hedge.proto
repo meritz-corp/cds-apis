@@ -321,6 +321,11 @@ message HedgeGroup {
 
   // 수정 시간
   google.protobuf.Timestamp update_time = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // If true, hedge accumulator separates accumulation by source_symbol.
+  // If false (default), accumulations are aggregated per hedge_symbol across all source_symbols.
+  // Controls trigger granularity for portfolios with multiple ETFs hedged to the same target instrument.
+  bool separate_by_source = 11;
 }
 
 // 트리거 조건: 헷지 실행 기준

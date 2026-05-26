@@ -1805,6 +1805,9 @@ impl serde::Serialize for HedgeGroup {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.HedgeGroup", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1833,6 +1836,9 @@ impl serde::Serialize for HedgeGroup {
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
         }
+        if true {
+            struct_ser.serialize_field("separate_by_source", &self.separate_by_source)?;
+        }
         struct_ser.end()
     }
 }
@@ -1858,6 +1864,8 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
             "createTime",
             "update_time",
             "updateTime",
+            "separate_by_source",
+            "separateBySource",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1871,6 +1879,7 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
             IsActive,
             CreateTime,
             UpdateTime,
+            SeparateBySource,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1902,6 +1911,7 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                             "isActive" | "is_active" => Ok(GeneratedField::IsActive),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
+                            "separateBySource" | "separate_by_source" => Ok(GeneratedField::SeparateBySource),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1930,6 +1940,7 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                 let mut is_active__ = None;
                 let mut create_time__ = None;
                 let mut update_time__ = None;
+                let mut separate_by_source__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1988,6 +1999,12 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                             }
                             update_time__ = map_.next_value()?;
                         }
+                        GeneratedField::SeparateBySource => {
+                            if separate_by_source__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("separateBySource"));
+                            }
+                            separate_by_source__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2003,6 +2020,7 @@ impl<'de> serde::Deserialize<'de> for HedgeGroup {
                     is_active: is_active__.unwrap_or_default(),
                     create_time: create_time__,
                     update_time: update_time__,
+                    separate_by_source: separate_by_source__.unwrap_or_default(),
                 })
             }
         }
