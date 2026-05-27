@@ -886,6 +886,9 @@ impl serde::Serialize for ExecPriceType {
             Self::CounterBestPlus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
             Self::CounterBestPlus4 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
             Self::CounterBestPlus5 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5",
+            Self::CounterBestMinus1 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1",
+            Self::CounterBestMinus2 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2",
+            Self::CounterBestMinus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3",
         };
         serializer.serialize_str(variant)
     }
@@ -909,6 +912,9 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5",
+            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1",
+            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2",
+            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3",
         ];
 
         struct GeneratedVisitor;
@@ -961,6 +967,9 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
                     "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3" => Ok(ExecPriceType::CounterBestPlus3),
                     "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4" => Ok(ExecPriceType::CounterBestPlus4),
                     "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5" => Ok(ExecPriceType::CounterBestPlus5),
+                    "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1" => Ok(ExecPriceType::CounterBestMinus1),
+                    "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2" => Ok(ExecPriceType::CounterBestMinus2),
+                    "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3" => Ok(ExecPriceType::CounterBestMinus3),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

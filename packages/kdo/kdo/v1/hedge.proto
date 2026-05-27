@@ -178,6 +178,15 @@ enum ExecPriceType {
 
   // 상대호가 +5틱
   EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5 = 11;
+
+  // 상대호가 -1틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
+  EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1 = 12;
+
+  // 상대호가 -2틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
+  EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2 = 13;
+
+  // 상대호가 -3틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
+  EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3 = 14;
 }
 
 // ========== Resource Messages ==========

@@ -495,6 +495,12 @@ pub enum ExecPriceType {
     CounterBestPlus4 = 10,
     /// 상대호가 +5틱
     CounterBestPlus5 = 11,
+    /// 상대호가 -1틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
+    CounterBestMinus1 = 12,
+    /// 상대호가 -2틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
+    CounterBestMinus2 = 13,
+    /// 상대호가 -3틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
+    CounterBestMinus3 = 14,
 }
 impl ExecPriceType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -515,6 +521,9 @@ impl ExecPriceType {
             ExecPriceType::CounterBestPlus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
             ExecPriceType::CounterBestPlus4 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
             ExecPriceType::CounterBestPlus5 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5",
+            ExecPriceType::CounterBestMinus1 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1",
+            ExecPriceType::CounterBestMinus2 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2",
+            ExecPriceType::CounterBestMinus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -532,6 +541,9 @@ impl ExecPriceType {
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3" => Some(Self::CounterBestPlus3),
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4" => Some(Self::CounterBestPlus4),
             "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5" => Some(Self::CounterBestPlus5),
+            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1" => Some(Self::CounterBestMinus1),
+            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2" => Some(Self::CounterBestMinus2),
+            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3" => Some(Self::CounterBestMinus3),
             _ => None,
         }
     }
