@@ -58,6 +58,10 @@ pub struct FuturesLp {
     /// 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
     #[prost(int32, tag="21")]
     pub portfolio_id: i32,
+    /// EtfPricing 상세 정보 (EtfLp.pricing_method와 동일 패턴).
+    /// leverage_future의 경우 prev_index/prev_future를 채워서 반환.
+    #[prost(message, optional, tag="22")]
+    pub pricing_method: ::core::option::Option<super::common::EtfPricing>,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]

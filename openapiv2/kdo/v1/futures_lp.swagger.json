@@ -539,6 +539,67 @@
     }
   },
   "definitions": {
+    "commonEtfPricing": {
+      "type": "object",
+      "properties": {
+        "pdfNavHedge": {
+          "$ref": "#/definitions/commonPdfNavHedgePricing",
+          "title": "분해 헷지 방식"
+        },
+        "indexTrackingHedge": {
+          "$ref": "#/definitions/commonIndexTrackingHedgePricing",
+          "title": "선물 헷지 방식"
+        },
+        "futureBasis": {
+          "$ref": "#/definitions/commonFutureBasis"
+        },
+        "leverageFuture": {
+          "$ref": "#/definitions/commonLeverageFuturePricing",
+          "title": "레버리지 선물 방식"
+        },
+        "pdfDecomposeHedge": {
+          "$ref": "#/definitions/commonPdfDecomposeHedgePricing",
+          "title": "PDF 재귀 분해 헷지 방식: leaf가 단일 종목으로 귀결되는 ETF에 대한 프라이싱"
+        }
+      },
+      "title": "ETF 가격 산출 방식"
+    },
+    "commonFutureBasis": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "string"
+        }
+      }
+    },
+    "commonIndexTrackingHedgePricing": {
+      "type": "object",
+      "title": "선물 헷지 가격 산출"
+    },
+    "commonLeverageFuturePricing": {
+      "type": "object",
+      "properties": {
+        "prevIndex": {
+          "type": "number",
+          "format": "double",
+          "title": "기초지수 전일종가"
+        },
+        "prevFuture": {
+          "type": "number",
+          "format": "double",
+          "title": "선물 전일종가"
+        }
+      },
+      "title": "레버리지 선물 가격 산출"
+    },
+    "commonPdfDecomposeHedgePricing": {
+      "type": "object",
+      "description": "PDF 재귀 분해 헷지 가격 산출 (파라미터 없음)\nNAV 계산은 Etf.decomposed_constituents를 PdfNavHedge와 동일 공식으로 적용."
+    },
+    "commonPdfNavHedgePricing": {
+      "type": "object",
+      "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
+    },
     "futures_lpFuturesLp": {
       "type": "object",
       "properties": {
@@ -619,6 +680,10 @@
           "type": "integer",
           "format": "int32",
           "title": "포트폴리오 ID (응답용 - portfolio_fund 에서 derive)"
+        },
+        "pricingMethod": {
+          "$ref": "#/definitions/commonEtfPricing",
+          "description": "EtfPricing 상세 정보 (EtfLp.pricing_method와 동일 패턴).\nleverage_future의 경우 prev_index/prev_future를 채워서 반환."
         }
       },
       "title": "선물 LP 설정"

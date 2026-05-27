@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pb.dart' as $2;
 import 'futures_lp.pbenum.dart';
 import 'lp.pb.dart' as $1;
 
@@ -42,6 +43,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     FuturesLpQuantityLimit? quantityLimit,
     $core.String? etfPricing,
     $core.int? portfolioId,
+    $2.EtfPricing? pricingMethod,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -61,6 +63,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (etfPricing != null) result.etfPricing = etfPricing;
     if (portfolioId != null) result.portfolioId = portfolioId;
+    if (pricingMethod != null) result.pricingMethod = pricingMethod;
     return result;
   }
 
@@ -87,6 +90,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..aOM<FuturesLpQuantityLimit>(19, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..aOS(20, _omitFieldNames ? '' : 'etfPricing')
     ..a<$core.int>(21, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
+    ..aOM<$2.EtfPricing>(22, _omitFieldNames ? '' : 'pricingMethod', subBuilder: $2.EtfPricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -281,6 +285,19 @@ class FuturesLp extends $pb.GeneratedMessage {
   $core.bool hasPortfolioId() => $_has(16);
   @$pb.TagNumber(21)
   void clearPortfolioId() => $_clearField(21);
+
+  /// EtfPricing 상세 정보 (EtfLp.pricing_method와 동일 패턴).
+  /// leverage_future의 경우 prev_index/prev_future를 채워서 반환.
+  @$pb.TagNumber(22)
+  $2.EtfPricing get pricingMethod => $_getN(17);
+  @$pb.TagNumber(22)
+  set pricingMethod($2.EtfPricing value) => $_setField(22, value);
+  @$pb.TagNumber(22)
+  $core.bool hasPricingMethod() => $_has(17);
+  @$pb.TagNumber(22)
+  void clearPricingMethod() => $_clearField(22);
+  @$pb.TagNumber(22)
+  $2.EtfPricing ensurePricingMethod() => $_ensure(17);
 }
 
 /// 매수/매도 수량 한도

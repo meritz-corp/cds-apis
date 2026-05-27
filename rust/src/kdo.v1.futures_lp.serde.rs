@@ -58,6 +58,9 @@ impl serde::Serialize for FuturesLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLp", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -114,6 +117,9 @@ impl serde::Serialize for FuturesLp {
         if true {
             struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
         }
+        if let Some(v) = self.pricing_method.as_ref() {
+            struct_ser.serialize_field("pricing_method", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -154,6 +160,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "etfPricing",
             "portfolio_id",
             "portfolioId",
+            "pricing_method",
+            "pricingMethod",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -175,6 +183,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             QuantityLimit,
             EtfPricing,
             PortfolioId,
+            PricingMethod,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -214,6 +223,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
+                            "pricingMethod" | "pricing_method" => Ok(GeneratedField::PricingMethod),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -250,6 +260,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut quantity_limit__ = None;
                 let mut etf_pricing__ = None;
                 let mut portfolio_id__ = None;
+                let mut pricing_method__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -374,6 +385,12 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PricingMethod => {
+                            if pricing_method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricingMethod"));
+                            }
+                            pricing_method__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -397,6 +414,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     quantity_limit: quantity_limit__,
                     etf_pricing: etf_pricing__.unwrap_or_default(),
                     portfolio_id: portfolio_id__.unwrap_or_default(),
+                    pricing_method: pricing_method__,
                 })
             }
         }

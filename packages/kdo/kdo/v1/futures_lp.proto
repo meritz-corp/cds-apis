@@ -7,6 +7,7 @@ import "google/api/field_behavior.proto";
 import "google/api/client.proto";
 import "google/api/resource.proto";
 import "kdo/v1/lp.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -152,6 +153,10 @@ message FuturesLp {
 
   // 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
   int32 portfolio_id = 21;
+
+  // EtfPricing 상세 정보 (EtfLp.pricing_method와 동일 패턴).
+  // leverage_future의 경우 prev_index/prev_future를 채워서 반환.
+  kdo.v1.common.EtfPricing pricing_method = 22;
 }
 
 // 매수/매도 수량 한도
