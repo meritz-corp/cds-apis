@@ -15,6 +15,7 @@ impl serde::Serialize for AmendMethodType {
             Self::TickAdvance100ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
             Self::TickAdvance500ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
             Self::TickAdvance1s => "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
+            Self::SpreadFollow => "AMEND_METHOD_TYPE_SPREAD_FOLLOW",
         };
         serializer.serialize_str(variant)
     }
@@ -35,6 +36,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
             "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
             "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
             "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
+            "AMEND_METHOD_TYPE_SPREAD_FOLLOW",
         ];
 
         struct GeneratedVisitor;
@@ -84,6 +86,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
                     "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS" => Ok(AmendMethodType::TickAdvance100ms),
                     "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS" => Ok(AmendMethodType::TickAdvance500ms),
                     "AMEND_METHOD_TYPE_TICK_ADVANCE_1S" => Ok(AmendMethodType::TickAdvance1s),
+                    "AMEND_METHOD_TYPE_SPREAD_FOLLOW" => Ok(AmendMethodType::SpreadFollow),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

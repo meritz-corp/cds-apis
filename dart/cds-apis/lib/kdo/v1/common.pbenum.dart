@@ -146,6 +146,10 @@ class AmendMethodType extends $pb.ProtobufEnum {
   static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_500MS = AmendMethodType._(7, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_500MS');
   /// 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
   static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_1S = AmendMethodType._(8, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_1S');
+  /// 스프레드 갭 추격 + 잔량 감소 추격
+  /// 1단계: 내 가격과 상대호가 사이 빈 tick 존재 시 상대호가 ±1tick으로 점프
+  /// 2단계: 스프레드 1tick 상태에서 상대 1호가 잔량이 임계 비율 미만 시 1tick 추격
+  static const AmendMethodType AMEND_METHOD_TYPE_SPREAD_FOLLOW = AmendMethodType._(9, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_SPREAD_FOLLOW');
 
   static const $core.List<AmendMethodType> values = <AmendMethodType> [
     AMEND_METHOD_TYPE_UNSPECIFIED,
@@ -157,9 +161,10 @@ class AmendMethodType extends $pb.ProtobufEnum {
     AMEND_METHOD_TYPE_TICK_ADVANCE_100MS,
     AMEND_METHOD_TYPE_TICK_ADVANCE_500MS,
     AMEND_METHOD_TYPE_TICK_ADVANCE_1S,
+    AMEND_METHOD_TYPE_SPREAD_FOLLOW,
   ];
 
-  static final $core.List<AmendMethodType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 8);
+  static final $core.List<AmendMethodType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 9);
   static AmendMethodType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const AmendMethodType._(super.value, super.name);

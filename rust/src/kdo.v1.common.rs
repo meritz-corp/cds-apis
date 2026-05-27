@@ -269,6 +269,10 @@ pub enum AmendMethodType {
     TickAdvance500ms = 7,
     /// 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
     TickAdvance1s = 8,
+    /// 스프레드 갭 추격 + 잔량 감소 추격
+    /// 1단계: 내 가격과 상대호가 사이 빈 tick 존재 시 상대호가 ±1tick으로 점프
+    /// 2단계: 스프레드 1tick 상태에서 상대 1호가 잔량이 임계 비율 미만 시 1tick 추격
+    SpreadFollow = 9,
 }
 impl AmendMethodType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -286,6 +290,7 @@ impl AmendMethodType {
             AmendMethodType::TickAdvance100ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
             AmendMethodType::TickAdvance500ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
             AmendMethodType::TickAdvance1s => "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
+            AmendMethodType::SpreadFollow => "AMEND_METHOD_TYPE_SPREAD_FOLLOW",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -300,6 +305,7 @@ impl AmendMethodType {
             "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS" => Some(Self::TickAdvance100ms),
             "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS" => Some(Self::TickAdvance500ms),
             "AMEND_METHOD_TYPE_TICK_ADVANCE_1S" => Some(Self::TickAdvance1s),
+            "AMEND_METHOD_TYPE_SPREAD_FOLLOW" => Some(Self::SpreadFollow),
             _ => None,
         }
     }
