@@ -44,6 +44,7 @@ class EtfLp extends $pb.GeneratedMessage {
     EtfLpQuantityLimit? quantityLimit,
     PrecomputePolicy? precomputePolicy,
     $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
+    $core.int? portfolioId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -65,6 +66,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
+    if (portfolioId != null) result.portfolioId = portfolioId;
     return result;
   }
 
@@ -93,6 +95,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..aOM<EtfLpQuantityLimit>(20, _omitFieldNames ? '' : 'quantityLimit', subBuilder: EtfLpQuantityLimit.create)
     ..e<PrecomputePolicy>(21, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..aOB(22, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
+    ..a<$core.int>(23, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -307,6 +310,16 @@ class EtfLp extends $pb.GeneratedMessage {
   $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(18);
   @$pb.TagNumber(22)
   void clearPricingSourceLiquidityImbalanceGuardEnabled() => $_clearField(22);
+
+  /// 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
+  @$pb.TagNumber(23)
+  $core.int get portfolioId => $_getIZ(19);
+  @$pb.TagNumber(23)
+  set portfolioId($core.int value) => $_setSignedInt32(19, value);
+  @$pb.TagNumber(23)
+  $core.bool hasPortfolioId() => $_has(19);
+  @$pb.TagNumber(23)
+  void clearPortfolioId() => $_clearField(23);
 }
 
 /// 매수/매도 수량 한도
@@ -1921,7 +1934,7 @@ class ListEtfLpStatusesRequest extends $pb.GeneratedMessage {
 
   /// 오더링 조건. (optional, AIP-132)
   ///
-  /// Supported Fields
+  /// Support,ed Fields
   /// * "fill_statistics.buy_filled_quantity", "fill_statistics.sell_filled_quantity"
   ///
   /// Examples

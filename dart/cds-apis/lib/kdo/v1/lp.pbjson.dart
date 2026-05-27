@@ -110,6 +110,7 @@ const EtfLp$json = {
     {'1': 'quantity_limit', '3': 20, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpQuantityLimit', '9': 5, '10': 'quantityLimit', '17': true},
     {'1': 'precompute_policy', '3': 21, '4': 1, '5': 14, '6': '.kdo.v1.lp.PrecomputePolicy', '9': 6, '10': 'precomputePolicy', '17': true},
     {'1': 'pricing_source_liquidity_imbalance_guard_enabled', '3': 22, '4': 1, '5': 8, '10': 'pricingSourceLiquidityImbalanceGuardEnabled'},
+    {'1': 'portfolio_id', '3': 23, '4': 1, '5': 5, '10': 'portfolioId'},
   ],
   '8': [
     {'1': '_bid_adjustment'},
@@ -142,10 +143,11 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'eUxpbWl0SAVSDXF1YW50aXR5TGltaXSIAQESTQoRcHJlY29tcHV0ZV9wb2xpY3kYFSABKA4yGy'
     '5rZG8udjEubHAuUHJlY29tcHV0ZVBvbGljeUgGUhBwcmVjb21wdXRlUG9saWN5iAEBEmUKMHBy'
     'aWNpbmdfc291cmNlX2xpcXVpZGl0eV9pbWJhbGFuY2VfZ3VhcmRfZW5hYmxlZBgWIAEoCFIrcH'
-    'JpY2luZ1NvdXJjZUxpcXVpZGl0eUltYmFsYW5jZUd1YXJkRW5hYmxlZEIRCg9fYmlkX2FkanVz'
-    'dG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbn'
-    'R1bV93aW5kb3dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhEKD19xdWFudGl0eV9saW1pdEIU'
-    'ChJfcHJlY29tcHV0ZV9wb2xpY3lKBAgHEAg=');
+    'JpY2luZ1NvdXJjZUxpcXVpZGl0eUltYmFsYW5jZUd1YXJkRW5hYmxlZBIhCgxwb3J0Zm9saW9f'
+    'aWQYFyABKAVSC3BvcnRmb2xpb0lkQhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG'
+    '1lbnRCEwoRX21vbWVudHVtX2VuYWJsZWRCEgoQX21vbWVudHVtX3dpbmRvd0IXChVfbW9tZW50'
+    'dW1fc2Vuc2l0aXZpdHlCEQoPX3F1YW50aXR5X2xpbWl0QhQKEl9wcmVjb21wdXRlX3BvbGljeU'
+    'oECAcQCA==');
 
 @$core.Deprecated('Use etfLpQuantityLimitDescriptor instead')
 const EtfLpQuantityLimit$json = {

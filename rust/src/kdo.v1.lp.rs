@@ -61,6 +61,9 @@ pub struct EtfLp {
     /// 선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel
     #[prost(bool, tag="22")]
     pub pricing_source_liquidity_imbalance_guard_enabled: bool,
+    /// 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
+    #[prost(int32, tag="23")]
+    pub portfolio_id: i32,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -424,7 +427,7 @@ pub struct ListEtfLpStatusesRequest {
     pub filter: ::prost::alloc::string::String,
     /// 오더링 조건. (optional, AIP-132)
     ///
-    /// Supported Fields
+    /// Support,ed Fields
     /// * "fill_statistics.buy_filled_quantity", "fill_statistics.sell_filled_quantity"
     ///
     /// Examples

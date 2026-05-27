@@ -176,6 +176,9 @@ message EtfLp {
   // pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
   // 선물 1호가 잔량이 반대편의 30% 이하로 imbalance 발생 시 영향받는 ETF side 주문 자동 cancel
   bool pricing_source_liquidity_imbalance_guard_enabled = 22;
+
+  // 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
+  int32 portfolio_id = 23;
 }
 
 // 매수/매도 수량 한도
@@ -575,7 +578,7 @@ message ListEtfLpStatusesRequest {
 
   // 오더링 조건. (optional, AIP-132)
   //
-  // Supported Fields
+  // Support,ed Fields
   // * "fill_statistics.buy_filled_quantity", "fill_statistics.sell_filled_quantity"
   //
   // Examples
