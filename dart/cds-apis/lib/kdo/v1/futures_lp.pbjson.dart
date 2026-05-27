@@ -108,6 +108,22 @@ final $typed_data.Uint8List futuresLpQuantityLimitDescriptor = $convert.base64De
     'R5GAQgASgDSAFSDm1heE5ldFF1YW50aXR5iAEBQg8KDV9uZXRfcXVhbnRpdHlCEwoRX21heF9u'
     'ZXRfcXVhbnRpdHk=');
 
+@$core.Deprecated('Use futuresLpHedgeDescriptor instead')
+const FuturesLpHedge$json = {
+  '1': 'FuturesLpHedge',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'quantity_per_hedge', '3': 3, '4': 1, '5': 9, '10': 'quantityPerHedge'},
+  ],
+};
+
+/// Descriptor for `FuturesLpHedge`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List futuresLpHedgeDescriptor = $convert.base64Decode(
+    'Cg5GdXR1cmVzTHBIZWRnZRIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBItCgRmdW5kGAIgASgJQh'
+    'n6QRYKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEiwKEnF1YW50aXR5X3Blcl9oZWRnZRgD'
+    'IAEoCVIQcXVhbnRpdHlQZXJIZWRnZQ==');
+
 @$core.Deprecated('Use futuresLpPricingDescriptor instead')
 const FuturesLpPricing$json = {
   '1': 'FuturesLpPricing',
@@ -150,11 +166,13 @@ const FuturesLpStatus$json = {
     {'1': 'quantity_limit', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 2, '10': 'quantityLimit', '17': true},
     {'1': 'depth', '3': 23, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'etf_pricing', '3': 24, '4': 1, '5': 9, '10': 'etfPricing'},
+    {'1': 'hedge', '3': 25, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpHedge', '9': 3, '10': 'hedge', '17': true},
   ],
   '8': [
     {'1': '_bid_adjustment'},
     {'1': '_ask_adjustment'},
     {'1': '_quantity_limit'},
+    {'1': '_hedge'},
   ],
   '9': [
     {'1': 9, '2': 10},
@@ -184,10 +202,12 @@ final $typed_data.Uint8List futuresLpStatusDescriptor = $convert.base64Decode(
     'ZG8udjEubHAuRXRmTHBPZmZzZXRSBm9mZnNldBJVCg5xdWFudGl0eV9saW1pdBgWIAEoCzIpLm'
     'tkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRIAlINcXVhbnRpdHlMaW1p'
     'dIgBARIUCgVkZXB0aBgXIAEoDVIFZGVwdGgSHwoLZXRmX3ByaWNpbmcYGCABKAlSCmV0ZlByaW'
-    'NpbmdCEQoPX2JpZF9hZGp1c3RtZW50QhEKD19hc2tfYWRqdXN0bWVudEIRCg9fcXVhbnRpdHlf'
-    'bGltaXRKBAgJEApKBAgOEA9KBAgPEBBKBAgQEBFKBAgREBJKBAgSEBNSBWNhcnJ5UhBtb21lbn'
-    'R1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudHVtX3NlbnNpdGl2aXR5Uhdtb21l'
-    'bnR1bV9iaWRfYWRqdXN0bWVudFIXbW9tZW50dW1fYXNrX2FkanVzdG1lbnQ=');
+    'NpbmcSPAoFaGVkZ2UYGSABKAsyIS5rZG8udjEuZnV0dXJlc19scC5GdXR1cmVzTHBIZWRnZUgD'
+    'UgVoZWRnZYgBAUIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhEKD19xdW'
+    'FudGl0eV9saW1pdEIICgZfaGVkZ2VKBAgJEApKBAgOEA9KBAgPEBBKBAgQEBFKBAgREBJKBAgS'
+    'EBNSBWNhcnJ5UhBtb21lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudHVtX3'
+    'NlbnNpdGl2aXR5Uhdtb21lbnR1bV9iaWRfYWRqdXN0bWVudFIXbW9tZW50dW1fYXNrX2FkanVz'
+    'dG1lbnQ=');
 
 @$core.Deprecated('Use futuresLpStatusUpdateDescriptor instead')
 const FuturesLpStatusUpdate$json = {
