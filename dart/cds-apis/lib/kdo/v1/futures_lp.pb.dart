@@ -361,81 +361,6 @@ class FuturesLpQuantityLimit extends $pb.GeneratedMessage {
   void clearMaxNetQuantity() => $_clearField(4);
 }
 
-/// 선물 LP 헷지 정보 (ETF LP의 EtfLpHedge와 동일 구조)
-class FuturesLpHedge extends $pb.GeneratedMessage {
-  factory FuturesLpHedge({
-    $core.String? symbol,
-    $core.String? fund,
-    $core.String? quantityPerHedge,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (fund != null) result.fund = fund;
-    if (quantityPerHedge != null) result.quantityPerHedge = quantityPerHedge;
-    return result;
-  }
-
-  FuturesLpHedge._();
-
-  factory FuturesLpHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory FuturesLpHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesLpHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aOS(2, _omitFieldNames ? '' : 'fund')
-    ..aOS(3, _omitFieldNames ? '' : 'quantityPerHedge')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FuturesLpHedge clone() => FuturesLpHedge()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FuturesLpHedge copyWith(void Function(FuturesLpHedge) updates) => super.copyWith((message) => updates(message as FuturesLpHedge)) as FuturesLpHedge;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static FuturesLpHedge create() => FuturesLpHedge._();
-  @$core.override
-  FuturesLpHedge createEmptyInstance() => create();
-  static $pb.PbList<FuturesLpHedge> createRepeated() => $pb.PbList<FuturesLpHedge>();
-  @$core.pragma('dart2js:noInline')
-  static FuturesLpHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FuturesLpHedge>(create);
-  static FuturesLpHedge? _defaultInstance;
-
-  /// 헷지 대상 종목 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// 헷지 fund 리소스 이름
-  /// format: funds/{fund_code}
-  @$pb.TagNumber(2)
-  $core.String get fund => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set fund($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFund() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFund() => $_clearField(2);
-
-  /// 헷지 1건당 수량 (f64 stringify)
-  @$pb.TagNumber(3)
-  $core.String get quantityPerHedge => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set quantityPerHedge($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasQuantityPerHedge() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearQuantityPerHedge() => $_clearField(3);
-}
-
 /// 선물 LP Pricing 정보 (호가 + ETF reference)
 class FuturesLpPricing extends $pb.GeneratedMessage {
   factory FuturesLpPricing({
@@ -570,7 +495,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     FuturesLpQuantityLimit? quantityLimit,
     $core.int? depth,
     $core.String? etfPricing,
-    FuturesLpHedge? hedge,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -591,7 +515,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (depth != null) result.depth = depth;
     if (etfPricing != null) result.etfPricing = etfPricing;
-    if (hedge != null) result.hedge = hedge;
     return result;
   }
 
@@ -619,7 +542,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     ..aOM<FuturesLpQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..a<$core.int>(23, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aOS(24, _omitFieldNames ? '' : 'etfPricing')
-    ..aOM<FuturesLpHedge>(25, _omitFieldNames ? '' : 'hedge', subBuilder: FuturesLpHedge.create)
     ..hasRequiredFields = false
   ;
 
@@ -830,18 +752,6 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
   $core.bool hasEtfPricing() => $_has(17);
   @$pb.TagNumber(24)
   void clearEtfPricing() => $_clearField(24);
-
-  /// 헷지 정보 (초기 상태에서만 전달, ETF LP와 동일 정책)
-  @$pb.TagNumber(25)
-  FuturesLpHedge get hedge => $_getN(18);
-  @$pb.TagNumber(25)
-  set hedge(FuturesLpHedge value) => $_setField(25, value);
-  @$pb.TagNumber(25)
-  $core.bool hasHedge() => $_has(18);
-  @$pb.TagNumber(25)
-  void clearHedge() => $_clearField(25);
-  @$pb.TagNumber(25)
-  FuturesLpHedge ensureHedge() => $_ensure(18);
 }
 
 /// 선물 LP 상태 업데이트 (변경된 필드만 포함)

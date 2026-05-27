@@ -188,7 +188,6 @@ const EtfLpStatus$json = {
     {'1': 'pricing', '3': 9, '4': 1, '5': 11, '6': '.kdo.v1.lp.LpPricing', '10': 'pricing'},
     {'1': 'fill_statistics', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStatistics', '10': 'fillStatistics'},
     {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
-    {'1': 'hedge', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpHedge', '10': 'hedge'},
     {'1': 'bid_adjustment', '3': 13, '4': 1, '5': 1, '9': 2, '10': 'bidAdjustment', '17': true},
     {'1': 'ask_adjustment', '3': 14, '4': 1, '5': 1, '9': 3, '10': 'askAdjustment', '17': true},
     {'1': 'bid_quantity', '3': 15, '4': 1, '5': 3, '10': 'bidQuantity'},
@@ -218,6 +217,7 @@ const EtfLpStatus$json = {
   ],
   '9': [
     {'1': 7, '2': 8},
+    {'1': 12, '2': 13},
   ],
 };
 
@@ -229,25 +229,24 @@ final $typed_data.Uint8List etfLpStatusDescriptor = $convert.base64Decode(
     'xwLkV0ZkxwU3RhdGVSBXN0YXRlEi4KB3ByaWNpbmcYCSABKAsyFC5rZG8udjEubHAuTHBQcmlj'
     'aW5nUgdwcmljaW5nEkIKD2ZpbGxfc3RhdGlzdGljcxgKIAEoCzIZLmtkby52MS5scC5GaWxsU3'
     'RhdGlzdGljc1IOZmlsbFN0YXRpc3RpY3MSLgoGb2Zmc2V0GAsgASgLMhYua2RvLnYxLmxwLkV0'
-    'ZkxwT2Zmc2V0UgZvZmZzZXQSKwoFaGVkZ2UYDCABKAsyFS5rZG8udjEubHAuRXRmTHBIZWRnZV'
-    'IFaGVkZ2USKgoOYmlkX2FkanVzdG1lbnQYDSABKAFIAlINYmlkQWRqdXN0bWVudIgBARIqCg5h'
-    'c2tfYWRqdXN0bWVudBgOIAEoAUgDUg1hc2tBZGp1c3RtZW50iAEBEiEKDGJpZF9xdWFudGl0eR'
-    'gPIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GBAgASgDUgthc2tRdWFudGl0eRIu'
-    'ChBtb21lbnR1bV9lbmFibGVkGBEgASgISARSD21vbWVudHVtRW5hYmxlZIgBARIsCg9tb21lbn'
-    'R1bV93aW5kb3cYEiABKA1IBVIObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW50dW1fc2Vuc2l0'
-    'aXZpdHkYEyABKAFIBlITbW9tZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21lbnR1bV9iaWRfYW'
-    'RqdXN0bWVudBgUIAEoAUgHUhVtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOwoXbW9tZW50dW1f'
-    'YXNrX2FkanVzdG1lbnQYFSABKAFICFIVbW9tZW50dW1Bc2tBZGp1c3RtZW50iAEBEkkKDnF1YW'
-    '50aXR5X2xpbWl0GBYgASgLMh0ua2RvLnYxLmxwLkV0ZkxwUXVhbnRpdHlMaW1pdEgJUg1xdWFu'
-    'dGl0eUxpbWl0iAEBEk0KEXByZWNvbXB1dGVfcG9saWN5GBcgASgOMhsua2RvLnYxLmxwLlByZW'
-    'NvbXB1dGVQb2xpY3lIClIQcHJlY29tcHV0ZVBvbGljeYgBARIUCgVkZXB0aBgYIAEoDVIFZGVw'
-    'dGgSZQowcHJpY2luZ19zb3VyY2VfbGlxdWlkaXR5X2ltYmFsYW5jZV9ndWFyZF9lbmFibGVkGB'
-    'kgASgIUitwcmljaW5nU291cmNlTGlxdWlkaXR5SW1iYWxhbmNlR3VhcmRFbmFibGVkQgwKCl9h'
-    'c2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3'
-    'RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3dCFwoVX21vbWVu'
-    'dHVtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1bV9iaWRfYWRqdXN0bWVudEIaChhfbW9tZW50dW'
-    '1fYXNrX2FkanVzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0QhQKEl9wcmVjb21wdXRlX3BvbGlj'
-    'eUoECAcQCA==');
+    'ZkxwT2Zmc2V0UgZvZmZzZXQSKgoOYmlkX2FkanVzdG1lbnQYDSABKAFIAlINYmlkQWRqdXN0bW'
+    'VudIgBARIqCg5hc2tfYWRqdXN0bWVudBgOIAEoAUgDUg1hc2tBZGp1c3RtZW50iAEBEiEKDGJp'
+    'ZF9xdWFudGl0eRgPIAEoA1ILYmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GBAgASgDUgthc2'
+    'tRdWFudGl0eRIuChBtb21lbnR1bV9lbmFibGVkGBEgASgISARSD21vbWVudHVtRW5hYmxlZIgB'
+    'ARIsCg9tb21lbnR1bV93aW5kb3cYEiABKA1IBVIObW9tZW50dW1XaW5kb3eIAQESNgoUbW9tZW'
+    '50dW1fc2Vuc2l0aXZpdHkYEyABKAFIBlITbW9tZW50dW1TZW5zaXRpdml0eYgBARI7Chdtb21l'
+    'bnR1bV9iaWRfYWRqdXN0bWVudBgUIAEoAUgHUhVtb21lbnR1bUJpZEFkanVzdG1lbnSIAQESOw'
+    'oXbW9tZW50dW1fYXNrX2FkanVzdG1lbnQYFSABKAFICFIVbW9tZW50dW1Bc2tBZGp1c3RtZW50'
+    'iAEBEkkKDnF1YW50aXR5X2xpbWl0GBYgASgLMh0ua2RvLnYxLmxwLkV0ZkxwUXVhbnRpdHlMaW'
+    '1pdEgJUg1xdWFudGl0eUxpbWl0iAEBEk0KEXByZWNvbXB1dGVfcG9saWN5GBcgASgOMhsua2Rv'
+    'LnYxLmxwLlByZWNvbXB1dGVQb2xpY3lIClIQcHJlY29tcHV0ZVBvbGljeYgBARIUCgVkZXB0aB'
+    'gYIAEoDVIFZGVwdGgSZQowcHJpY2luZ19zb3VyY2VfbGlxdWlkaXR5X2ltYmFsYW5jZV9ndWFy'
+    'ZF9lbmFibGVkGBkgASgIUitwcmljaW5nU291cmNlTGlxdWlkaXR5SW1iYWxhbmNlR3VhcmRFbm'
+    'FibGVkQgwKCl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IRCg9fYmlkX2FkanVzdG1lbnRCEQoP'
+    'X2Fza19hZGp1c3RtZW50QhMKEV9tb21lbnR1bV9lbmFibGVkQhIKEF9tb21lbnR1bV93aW5kb3'
+    'dCFwoVX21vbWVudHVtX3NlbnNpdGl2aXR5QhoKGF9tb21lbnR1bV9iaWRfYWRqdXN0bWVudEIa'
+    'ChhfbW9tZW50dW1fYXNrX2FkanVzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0QhQKEl9wcmVjb2'
+    '1wdXRlX3BvbGljeUoECAcQCEoECAwQDQ==');
 
 @$core.Deprecated('Use etfLpStatusUpdateDescriptor instead')
 const EtfLpStatusUpdate$json = {
@@ -385,22 +384,6 @@ final $typed_data.Uint8List etfLpOffsetDescriptor = $convert.base64Decode(
     'bnRfaW50ZXJ2YWxfc2Vjc0ISChBfYWRqdXN0bWVudF9zdGVwQhAKDl9yZXNldF9vbl9maWxsQh'
     '4KHF9wb3NpdGlvbl9hZGp1c3RtZW50X2VuYWJsZWRCFAoSX3Bvc2l0aW9uX3N0cmF0ZWd5QhUK'
     'E19wb3NpdGlvbl90aHJlc2hvbGRCGwoZX3Bvc2l0aW9uX2FkanVzdG1lbnRfc3RlcA==');
-
-@$core.Deprecated('Use etfLpHedgeDescriptor instead')
-const EtfLpHedge$json = {
-  '1': 'EtfLpHedge',
-  '2': [
-    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
-    {'1': 'quantity_per_hedge', '3': 3, '4': 1, '5': 9, '10': 'quantityPerHedge'},
-  ],
-};
-
-/// Descriptor for `EtfLpHedge`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfLpHedgeDescriptor = $convert.base64Decode(
-    'CgpFdGZMcEhlZGdlEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEi0KBGZ1bmQYAiABKAlCGfpBFg'
-    'oUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSLAoScXVhbnRpdHlfcGVyX2hlZGdlGAMgASgJ'
-    'UhBxdWFudGl0eVBlckhlZGdl');
 
 @$core.Deprecated('Use fillStatisticsDescriptor instead')
 const FillStatistics$json = {

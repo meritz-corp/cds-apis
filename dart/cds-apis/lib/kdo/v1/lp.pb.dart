@@ -411,7 +411,6 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     LpPricing? pricing,
     FillStatistics? fillStatistics,
     EtfLpOffset? offset,
-    EtfLpHedge? hedge,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
     $fixnum.Int64? bidQuantity,
@@ -435,7 +434,6 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (pricing != null) result.pricing = pricing;
     if (fillStatistics != null) result.fillStatistics = fillStatistics;
     if (offset != null) result.offset = offset;
-    if (hedge != null) result.hedge = hedge;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
@@ -466,7 +464,6 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..aOM<LpPricing>(9, _omitFieldNames ? '' : 'pricing', subBuilder: LpPricing.create)
     ..aOM<FillStatistics>(10, _omitFieldNames ? '' : 'fillStatistics', subBuilder: FillStatistics.create)
     ..aOM<EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: EtfLpOffset.create)
-    ..aOM<EtfLpHedge>(12, _omitFieldNames ? '' : 'hedge', subBuilder: EtfLpHedge.create)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aInt64(15, _omitFieldNames ? '' : 'bidQuantity')
@@ -585,147 +582,135 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   EtfLpOffset ensureOffset() => $_ensure(7);
 
-  /// 헷지 정보
-  @$pb.TagNumber(12)
-  EtfLpHedge get hedge => $_getN(8);
-  @$pb.TagNumber(12)
-  set hedge(EtfLpHedge value) => $_setField(12, value);
-  @$pb.TagNumber(12)
-  $core.bool hasHedge() => $_has(8);
-  @$pb.TagNumber(12)
-  void clearHedge() => $_clearField(12);
-  @$pb.TagNumber(12)
-  EtfLpHedge ensureHedge() => $_ensure(8);
-
   /// 매수 호가 조정값
   @$pb.TagNumber(13)
-  $core.double get bidAdjustment => $_getN(9);
+  $core.double get bidAdjustment => $_getN(8);
   @$pb.TagNumber(13)
-  set bidAdjustment($core.double value) => $_setDouble(9, value);
+  set bidAdjustment($core.double value) => $_setDouble(8, value);
   @$pb.TagNumber(13)
-  $core.bool hasBidAdjustment() => $_has(9);
+  $core.bool hasBidAdjustment() => $_has(8);
   @$pb.TagNumber(13)
   void clearBidAdjustment() => $_clearField(13);
 
   /// 매도 호가 조정값
   @$pb.TagNumber(14)
-  $core.double get askAdjustment => $_getN(10);
+  $core.double get askAdjustment => $_getN(9);
   @$pb.TagNumber(14)
-  set askAdjustment($core.double value) => $_setDouble(10, value);
+  set askAdjustment($core.double value) => $_setDouble(9, value);
   @$pb.TagNumber(14)
-  $core.bool hasAskAdjustment() => $_has(10);
+  $core.bool hasAskAdjustment() => $_has(9);
   @$pb.TagNumber(14)
   void clearAskAdjustment() => $_clearField(14);
 
   /// 매수 주문 수량 (i64)
   @$pb.TagNumber(15)
-  $fixnum.Int64 get bidQuantity => $_getI64(11);
+  $fixnum.Int64 get bidQuantity => $_getI64(10);
   @$pb.TagNumber(15)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(11, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(15)
-  $core.bool hasBidQuantity() => $_has(11);
+  $core.bool hasBidQuantity() => $_has(10);
   @$pb.TagNumber(15)
   void clearBidQuantity() => $_clearField(15);
 
   /// 매도 주문 수량 (i64)
   @$pb.TagNumber(16)
-  $fixnum.Int64 get askQuantity => $_getI64(12);
+  $fixnum.Int64 get askQuantity => $_getI64(11);
   @$pb.TagNumber(16)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(12, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(11, value);
   @$pb.TagNumber(16)
-  $core.bool hasAskQuantity() => $_has(12);
+  $core.bool hasAskQuantity() => $_has(11);
   @$pb.TagNumber(16)
   void clearAskQuantity() => $_clearField(16);
 
   /// 모멘텀 활성화 여부
   @$pb.TagNumber(17)
-  $core.bool get momentumEnabled => $_getBF(13);
+  $core.bool get momentumEnabled => $_getBF(12);
   @$pb.TagNumber(17)
-  set momentumEnabled($core.bool value) => $_setBool(13, value);
+  set momentumEnabled($core.bool value) => $_setBool(12, value);
   @$pb.TagNumber(17)
-  $core.bool hasMomentumEnabled() => $_has(13);
+  $core.bool hasMomentumEnabled() => $_has(12);
   @$pb.TagNumber(17)
   void clearMomentumEnabled() => $_clearField(17);
 
   /// 모멘텀 윈도우 크기
   @$pb.TagNumber(18)
-  $core.int get momentumWindow => $_getIZ(14);
+  $core.int get momentumWindow => $_getIZ(13);
   @$pb.TagNumber(18)
-  set momentumWindow($core.int value) => $_setUnsignedInt32(14, value);
+  set momentumWindow($core.int value) => $_setUnsignedInt32(13, value);
   @$pb.TagNumber(18)
-  $core.bool hasMomentumWindow() => $_has(14);
+  $core.bool hasMomentumWindow() => $_has(13);
   @$pb.TagNumber(18)
   void clearMomentumWindow() => $_clearField(18);
 
   /// 모멘텀 민감도
   @$pb.TagNumber(19)
-  $core.double get momentumSensitivity => $_getN(15);
+  $core.double get momentumSensitivity => $_getN(14);
   @$pb.TagNumber(19)
-  set momentumSensitivity($core.double value) => $_setDouble(15, value);
+  set momentumSensitivity($core.double value) => $_setDouble(14, value);
   @$pb.TagNumber(19)
-  $core.bool hasMomentumSensitivity() => $_has(15);
+  $core.bool hasMomentumSensitivity() => $_has(14);
   @$pb.TagNumber(19)
   void clearMomentumSensitivity() => $_clearField(19);
 
   /// 런타임 계산된 모멘텀 매수 호가 조정값
   @$pb.TagNumber(20)
-  $core.double get momentumBidAdjustment => $_getN(16);
+  $core.double get momentumBidAdjustment => $_getN(15);
   @$pb.TagNumber(20)
-  set momentumBidAdjustment($core.double value) => $_setDouble(16, value);
+  set momentumBidAdjustment($core.double value) => $_setDouble(15, value);
   @$pb.TagNumber(20)
-  $core.bool hasMomentumBidAdjustment() => $_has(16);
+  $core.bool hasMomentumBidAdjustment() => $_has(15);
   @$pb.TagNumber(20)
   void clearMomentumBidAdjustment() => $_clearField(20);
 
   /// 런타임 계산된 모멘텀 매도 호가 조정값
   @$pb.TagNumber(21)
-  $core.double get momentumAskAdjustment => $_getN(17);
+  $core.double get momentumAskAdjustment => $_getN(16);
   @$pb.TagNumber(21)
-  set momentumAskAdjustment($core.double value) => $_setDouble(17, value);
+  set momentumAskAdjustment($core.double value) => $_setDouble(16, value);
   @$pb.TagNumber(21)
-  $core.bool hasMomentumAskAdjustment() => $_has(17);
+  $core.bool hasMomentumAskAdjustment() => $_has(16);
   @$pb.TagNumber(21)
   void clearMomentumAskAdjustment() => $_clearField(21);
 
   /// 매수/매도 수량 한도
   @$pb.TagNumber(22)
-  EtfLpQuantityLimit get quantityLimit => $_getN(18);
+  EtfLpQuantityLimit get quantityLimit => $_getN(17);
   @$pb.TagNumber(22)
   set quantityLimit(EtfLpQuantityLimit value) => $_setField(22, value);
   @$pb.TagNumber(22)
-  $core.bool hasQuantityLimit() => $_has(18);
+  $core.bool hasQuantityLimit() => $_has(17);
   @$pb.TagNumber(22)
   void clearQuantityLimit() => $_clearField(22);
   @$pb.TagNumber(22)
-  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(18);
+  EtfLpQuantityLimit ensureQuantityLimit() => $_ensure(17);
 
   /// precomputed quote retreat 처리 정책
   @$pb.TagNumber(23)
-  PrecomputePolicy get precomputePolicy => $_getN(19);
+  PrecomputePolicy get precomputePolicy => $_getN(18);
   @$pb.TagNumber(23)
   set precomputePolicy(PrecomputePolicy value) => $_setField(23, value);
   @$pb.TagNumber(23)
-  $core.bool hasPrecomputePolicy() => $_has(19);
+  $core.bool hasPrecomputePolicy() => $_has(18);
   @$pb.TagNumber(23)
   void clearPrecomputePolicy() => $_clearField(23);
 
   /// 호가 깊이 (양방향 레벨 수)
   @$pb.TagNumber(24)
-  $core.int get depth => $_getIZ(20);
+  $core.int get depth => $_getIZ(19);
   @$pb.TagNumber(24)
-  set depth($core.int value) => $_setUnsignedInt32(20, value);
+  set depth($core.int value) => $_setUnsignedInt32(19, value);
   @$pb.TagNumber(24)
-  $core.bool hasDepth() => $_has(20);
+  $core.bool hasDepth() => $_has(19);
   @$pb.TagNumber(24)
   void clearDepth() => $_clearField(24);
 
   /// pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
   @$pb.TagNumber(25)
-  $core.bool get pricingSourceLiquidityImbalanceGuardEnabled => $_getBF(21);
+  $core.bool get pricingSourceLiquidityImbalanceGuardEnabled => $_getBF(20);
   @$pb.TagNumber(25)
-  set pricingSourceLiquidityImbalanceGuardEnabled($core.bool value) => $_setBool(21, value);
+  set pricingSourceLiquidityImbalanceGuardEnabled($core.bool value) => $_setBool(20, value);
   @$pb.TagNumber(25)
-  $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(21);
+  $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(20);
   @$pb.TagNumber(25)
   void clearPricingSourceLiquidityImbalanceGuardEnabled() => $_clearField(25);
 }
@@ -1242,81 +1227,6 @@ class EtfLpOffset extends $pb.GeneratedMessage {
   $core.bool hasNetPosition() => $_has(12);
   @$pb.TagNumber(21)
   void clearNetPosition() => $_clearField(21);
-}
-
-/// ETF LP 헷지 설정
-class EtfLpHedge extends $pb.GeneratedMessage {
-  factory EtfLpHedge({
-    $core.String? symbol,
-    $core.String? fund,
-    $core.String? quantityPerHedge,
-  }) {
-    final result = create();
-    if (symbol != null) result.symbol = symbol;
-    if (fund != null) result.fund = fund;
-    if (quantityPerHedge != null) result.quantityPerHedge = quantityPerHedge;
-    return result;
-  }
-
-  EtfLpHedge._();
-
-  factory EtfLpHedge.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory EtfLpHedge.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpHedge', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..aOS(2, _omitFieldNames ? '' : 'fund')
-    ..aOS(3, _omitFieldNames ? '' : 'quantityPerHedge')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpHedge clone() => EtfLpHedge()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EtfLpHedge copyWith(void Function(EtfLpHedge) updates) => super.copyWith((message) => updates(message as EtfLpHedge)) as EtfLpHedge;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static EtfLpHedge create() => EtfLpHedge._();
-  @$core.override
-  EtfLpHedge createEmptyInstance() => create();
-  static $pb.PbList<EtfLpHedge> createRepeated() => $pb.PbList<EtfLpHedge>();
-  @$core.pragma('dart2js:noInline')
-  static EtfLpHedge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpHedge>(create);
-  static EtfLpHedge? _defaultInstance;
-
-  /// 헷지 대상 종목 심볼
-  @$pb.TagNumber(1)
-  $core.String get symbol => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set symbol($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSymbol() => $_clearField(1);
-
-  /// 펀드 리소스 이름
-  /// format: funds/{fund_code}
-  @$pb.TagNumber(2)
-  $core.String get fund => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set fund($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFund() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFund() => $_clearField(2);
-
-  /// 헷지 1단위당 ETF 환산 수량 (정적 비율). f64 정밀도를 보존하기 위해 문자열로 직렬화.
-  @$pb.TagNumber(3)
-  $core.String get quantityPerHedge => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set quantityPerHedge($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasQuantityPerHedge() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearQuantityPerHedge() => $_clearField(3);
 }
 
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)

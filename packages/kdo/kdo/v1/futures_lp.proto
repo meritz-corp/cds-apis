@@ -170,23 +170,6 @@ message FuturesLpQuantityLimit {
   optional int64 max_net_quantity = 4;
 }
 
-// 선물 LP 헷지 정보 (ETF LP의 EtfLpHedge와 동일 구조)
-message FuturesLpHedge {
-  // 헷지 대상 종목 심볼
-  string symbol = 1;
-
-  // 헷지 fund 리소스 이름
-  // format: funds/{fund_code}
-  string fund = 2 [
-    (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/Fund"
-    }
-  ];
-
-  // 헷지 1건당 수량 (f64 stringify)
-  string quantity_per_hedge = 3;
-}
-
 // ========== Status Messages ==========
 
 // 선물 LP 상태 enum
@@ -279,8 +262,7 @@ message FuturesLpStatus {
   // EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
   string etf_pricing = 24;
 
-  // 헷지 정보 (초기 상태에서만 전달, ETF LP와 동일 정책)
-  optional FuturesLpHedge hedge = 25;
+  reserved 25; // was: FuturesLpHedge hedge (removed — use HedgeService.LookupHedge instead)
 }
 
 // 선물 LP 상태 업데이트 (변경된 필드만 포함)

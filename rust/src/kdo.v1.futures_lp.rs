@@ -77,21 +77,6 @@ pub struct FuturesLpQuantityLimit {
     #[prost(int64, optional, tag="4")]
     pub max_net_quantity: ::core::option::Option<i64>,
 }
-/// 선물 LP 헷지 정보 (ETF LP의 EtfLpHedge와 동일 구조)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FuturesLpHedge {
-    /// 헷지 대상 종목 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 헷지 fund 리소스 이름
-    /// format: funds/{fund_code}
-    #[prost(string, tag="2")]
-    pub fund: ::prost::alloc::string::String,
-    /// 헷지 1건당 수량 (f64 stringify)
-    #[prost(string, tag="3")]
-    pub quantity_per_hedge: ::prost::alloc::string::String,
-}
 /// 선물 LP Pricing 정보 (호가 + ETF reference)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -174,9 +159,6 @@ pub struct FuturesLpStatus {
     /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
     #[prost(string, tag="24")]
     pub etf_pricing: ::prost::alloc::string::String,
-    /// 헷지 정보 (초기 상태에서만 전달, ETF LP와 동일 정책)
-    #[prost(message, optional, tag="25")]
-    pub hedge: ::core::option::Option<FuturesLpHedge>,
 }
 /// 선물 LP 상태 업데이트 (변경된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]

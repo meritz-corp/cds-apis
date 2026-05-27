@@ -747,24 +747,6 @@
       },
       "title": "ETF LP 설정"
     },
-    "lpEtfLpHedge": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "헷지 대상 종목 심볼"
-        },
-        "fund": {
-          "type": "string",
-          "title": "펀드 리소스 이름\nformat: funds/{fund_code}"
-        },
-        "quantityPerHedge": {
-          "type": "string",
-          "description": "헷지 1단위당 ETF 환산 수량 (정적 비율). f64 정밀도를 보존하기 위해 문자열로 직렬화."
-        }
-      },
-      "title": "ETF LP 헷지 설정"
-    },
     "lpEtfLpOffset": {
       "type": "object",
       "properties": {
@@ -897,10 +879,6 @@
         "offset": {
           "$ref": "#/definitions/lpEtfLpOffset",
           "title": "동적 offset 조정 설정 (optional)"
-        },
-        "hedge": {
-          "$ref": "#/definitions/lpEtfLpHedge",
-          "title": "헷지 정보"
         },
         "bidAdjustment": {
           "type": "number",

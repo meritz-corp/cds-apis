@@ -392,6 +392,9 @@ message LookupHedgeRequest {
 
   // 소스 종목 심볼
   string source_symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 체결 들어오는 portfolio id — hedge.portfolio_id 와 일치하지 않으면 FAILED_PRECONDITION
+  int32 portfolio_id = 3;
 }
 
 // ListHedges 요청

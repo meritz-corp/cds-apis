@@ -642,24 +642,6 @@
       },
       "title": "선물 LP 체결 통계 (매수/매도 체결량 및 총금액)"
     },
-    "futures_lpFuturesLpHedge": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "title": "헷지 대상 종목 심볼"
-        },
-        "fund": {
-          "type": "string",
-          "title": "헷지 fund 리소스 이름\nformat: funds/{fund_code}"
-        },
-        "quantityPerHedge": {
-          "type": "string",
-          "title": "헷지 1건당 수량 (f64 stringify)"
-        }
-      },
-      "title": "선물 LP 헷지 정보 (ETF LP의 EtfLpHedge와 동일 구조)"
-    },
     "futures_lpFuturesLpOrderLimitStatus": {
       "type": "object",
       "properties": {
@@ -829,10 +811,6 @@
         "etfPricing": {
           "type": "string",
           "title": "EtfPricing variant 이름 (예: \"pdf_nav_hedge\", \"leverage_future\")"
-        },
-        "hedge": {
-          "$ref": "#/definitions/futures_lpFuturesLpHedge",
-          "title": "헷지 정보 (초기 상태에서만 전달, ETF LP와 동일 정책)"
         }
       },
       "title": "선물 LP 상태"

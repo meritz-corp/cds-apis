@@ -112,9 +112,6 @@ pub struct EtfLpStatus {
     /// 동적 offset 조정 설정 (optional)
     #[prost(message, optional, tag="11")]
     pub offset: ::core::option::Option<EtfLpOffset>,
-    /// 헷지 정보
-    #[prost(message, optional, tag="12")]
-    pub hedge: ::core::option::Option<EtfLpHedge>,
     /// 매수 호가 조정값
     #[prost(double, optional, tag="13")]
     pub bid_adjustment: ::core::option::Option<f64>,
@@ -260,21 +257,6 @@ pub struct EtfLpOffset {
     /// runtime 추적값이므로 optional 아님 — mapper에서 drop 처리.
     #[prost(int64, tag="21")]
     pub net_position: i64,
-}
-/// ETF LP 헷지 설정
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EtfLpHedge {
-    /// 헷지 대상 종목 심볼
-    #[prost(string, tag="1")]
-    pub symbol: ::prost::alloc::string::String,
-    /// 펀드 리소스 이름
-    /// format: funds/{fund_code}
-    #[prost(string, tag="2")]
-    pub fund: ::prost::alloc::string::String,
-    /// 헷지 1단위당 ETF 환산 수량 (정적 비율). f64 정밀도를 보존하기 위해 문자열로 직렬화.
-    #[prost(string, tag="3")]
-    pub quantity_per_hedge: ::prost::alloc::string::String,
 }
 /// ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -318,6 +318,14 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "portfolioId",
+            "description": "체결 들어오는 portfolio id — hedge.portfolio_id 와 일치하지 않으면 FAILED_PRECONDITION",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [

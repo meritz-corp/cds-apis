@@ -2998,12 +2998,18 @@ impl serde::Serialize for LookupHedgeRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.LookupHedgeRequest", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if true {
             struct_ser.serialize_field("source_symbol", &self.source_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
         }
         struct_ser.end()
     }
@@ -3019,12 +3025,15 @@ impl<'de> serde::Deserialize<'de> for LookupHedgeRequest {
             "fundCode",
             "source_symbol",
             "sourceSymbol",
+            "portfolio_id",
+            "portfolioId",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             FundCode,
             SourceSymbol,
+            PortfolioId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3049,6 +3058,7 @@ impl<'de> serde::Deserialize<'de> for LookupHedgeRequest {
                         match value {
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "sourceSymbol" | "source_symbol" => Ok(GeneratedField::SourceSymbol),
+                            "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3070,6 +3080,7 @@ impl<'de> serde::Deserialize<'de> for LookupHedgeRequest {
             {
                 let mut fund_code__ = None;
                 let mut source_symbol__ = None;
+                let mut portfolio_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -3084,6 +3095,14 @@ impl<'de> serde::Deserialize<'de> for LookupHedgeRequest {
                             }
                             source_symbol__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::PortfolioId => {
+                            if portfolio_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("portfolioId"));
+                            }
+                            portfolio_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3092,6 +3111,7 @@ impl<'de> serde::Deserialize<'de> for LookupHedgeRequest {
                 Ok(LookupHedgeRequest {
                     fund_code: fund_code__.unwrap_or_default(),
                     source_symbol: source_symbol__.unwrap_or_default(),
+                    portfolio_id: portfolio_id__.unwrap_or_default(),
                 })
             }
         }

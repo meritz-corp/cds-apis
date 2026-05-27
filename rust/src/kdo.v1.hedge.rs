@@ -216,6 +216,9 @@ pub struct LookupHedgeRequest {
     /// 소스 종목 심볼
     #[prost(string, tag="2")]
     pub source_symbol: ::prost::alloc::string::String,
+    /// 체결 들어오는 portfolio id — hedge.portfolio_id 와 일치하지 않으면 FAILED_PRECONDITION
+    #[prost(int32, tag="3")]
+    pub portfolio_id: i32,
 }
 /// ListHedges 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

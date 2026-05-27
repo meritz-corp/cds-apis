@@ -228,8 +228,7 @@ message EtfLpStatus {
   // 동적 offset 조정 설정 (optional)
   EtfLpOffset offset = 11;
 
-  // 헷지 정보
-  EtfLpHedge hedge = 12;
+  reserved 12; // was: EtfLpHedge hedge (removed — use HedgeService.LookupHedge instead)
 
   // 매수 호가 조정값
   optional double bid_adjustment = 13;
@@ -408,24 +407,6 @@ message EtfLpOffset {
   // runtime 추적값이므로 optional 아님 — mapper에서 drop 처리.
   int64 net_position = 21;
 }
-
-// ETF LP 헷지 설정
-message EtfLpHedge {
-  // 헷지 대상 종목 심볼
-  string symbol = 1;
-
-  // 펀드 리소스 이름
-  // format: funds/{fund_code}
-  string fund = 2 [
-    (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/Fund"
-    }
-  ];
-
-  // 헷지 1단위당 ETF 환산 수량 (정적 비율). f64 정밀도를 보존하기 위해 문자열로 직렬화.
-  string quantity_per_hedge = 3;
-}
-
 
 // ETF 체결 통계 (매수/매도 체결량 및 평균 단가)
 message FillStatistics {

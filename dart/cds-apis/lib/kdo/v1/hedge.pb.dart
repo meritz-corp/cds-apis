@@ -958,10 +958,12 @@ class LookupHedgeRequest extends $pb.GeneratedMessage {
   factory LookupHedgeRequest({
     $core.String? fundCode,
     $core.String? sourceSymbol,
+    $core.int? portfolioId,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
     if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
+    if (portfolioId != null) result.portfolioId = portfolioId;
     return result;
   }
 
@@ -973,6 +975,7 @@ class LookupHedgeRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LookupHedgeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fundCode')
     ..aOS(2, _omitFieldNames ? '' : 'sourceSymbol')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1012,6 +1015,16 @@ class LookupHedgeRequest extends $pb.GeneratedMessage {
   $core.bool hasSourceSymbol() => $_has(1);
   @$pb.TagNumber(2)
   void clearSourceSymbol() => $_clearField(2);
+
+  /// 체결 들어오는 portfolio id — hedge.portfolio_id 와 일치하지 않으면 FAILED_PRECONDITION
+  @$pb.TagNumber(3)
+  $core.int get portfolioId => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set portfolioId($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPortfolioId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPortfolioId() => $_clearField(3);
 }
 
 /// ListHedges 요청
