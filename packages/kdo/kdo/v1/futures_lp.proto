@@ -149,6 +149,9 @@ message FuturesLp {
 
   // EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
   string etf_pricing = 20;
+
+  // 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
+  int32 portfolio_id = 21;
 }
 
 // 매수/매도 수량 한도

@@ -55,6 +55,9 @@ pub struct FuturesLp {
     /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
     #[prost(string, tag="20")]
     pub etf_pricing: ::prost::alloc::string::String,
+    /// 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
+    #[prost(int32, tag="21")]
+    pub portfolio_id: i32,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]

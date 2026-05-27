@@ -41,6 +41,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.double? askAdjustment,
     FuturesLpQuantityLimit? quantityLimit,
     $core.String? etfPricing,
+    $core.int? portfolioId,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -59,6 +60,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (etfPricing != null) result.etfPricing = etfPricing;
+    if (portfolioId != null) result.portfolioId = portfolioId;
     return result;
   }
 
@@ -84,6 +86,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..a<$core.double>(15, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..aOM<FuturesLpQuantityLimit>(19, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..aOS(20, _omitFieldNames ? '' : 'etfPricing')
+    ..a<$core.int>(21, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -268,6 +271,16 @@ class FuturesLp extends $pb.GeneratedMessage {
   $core.bool hasEtfPricing() => $_has(15);
   @$pb.TagNumber(20)
   void clearEtfPricing() => $_clearField(20);
+
+  /// 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
+  @$pb.TagNumber(21)
+  $core.int get portfolioId => $_getIZ(16);
+  @$pb.TagNumber(21)
+  set portfolioId($core.int value) => $_setSignedInt32(16, value);
+  @$pb.TagNumber(21)
+  $core.bool hasPortfolioId() => $_has(16);
+  @$pb.TagNumber(21)
+  void clearPortfolioId() => $_clearField(21);
 }
 
 /// 매수/매도 수량 한도

@@ -614,6 +614,11 @@
         "etfPricing": {
           "type": "string",
           "title": "EtfPricing variant 이름 (예: \"pdf_nav_hedge\", \"leverage_future\")"
+        },
+        "portfolioId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "포트폴리오 ID (응답용 - portfolio_fund 에서 derive)"
         }
       },
       "title": "선물 LP 설정"

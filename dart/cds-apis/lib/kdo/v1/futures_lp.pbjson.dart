@@ -53,6 +53,7 @@ const FuturesLp$json = {
     {'1': 'ask_adjustment', '3': 15, '4': 1, '5': 1, '9': 1, '10': 'askAdjustment', '17': true},
     {'1': 'quantity_limit', '3': 19, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 2, '10': 'quantityLimit', '17': true},
     {'1': 'etf_pricing', '3': 20, '4': 1, '5': 9, '10': 'etfPricing'},
+    {'1': 'portfolio_id', '3': 21, '4': 1, '5': 5, '10': 'portfolioId'},
   ],
   '8': [
     {'1': '_bid_adjustment'},
@@ -80,10 +81,11 @@ final $typed_data.Uint8List futuresLpDescriptor = $convert.base64Decode(
     'FibGVkEioKDmJpZF9hZGp1c3RtZW50GA4gASgBSABSDWJpZEFkanVzdG1lbnSIAQESKgoOYXNr'
     'X2FkanVzdG1lbnQYDyABKAFIAVINYXNrQWRqdXN0bWVudIgBARJVCg5xdWFudGl0eV9saW1pdB'
     'gTIAEoCzIpLmtkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRIAlINcXVh'
-    'bnRpdHlMaW1pdIgBARIfCgtldGZfcHJpY2luZxgUIAEoCVIKZXRmUHJpY2luZ0IRCg9fYmlkX2'
-    'FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3RtZW50QhEKD19xdWFudGl0eV9saW1pdEoECAUQBkoE'
-    'CBAQEUoECBEQEkoECBIQE1IFY2FycnlSEG1vbWVudHVtX2VuYWJsZWRSD21vbWVudHVtX3dpbm'
-    'Rvd1IUbW9tZW50dW1fc2Vuc2l0aXZpdHk=');
+    'bnRpdHlMaW1pdIgBARIfCgtldGZfcHJpY2luZxgUIAEoCVIKZXRmUHJpY2luZxIhCgxwb3J0Zm'
+    '9saW9faWQYFSABKAVSC3BvcnRmb2xpb0lkQhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2Fk'
+    'anVzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0SgQIBRAGSgQIEBARSgQIERASSgQIEhATUgVjYX'
+    'JyeVIQbW9tZW50dW1fZW5hYmxlZFIPbW9tZW50dW1fd2luZG93UhRtb21lbnR1bV9zZW5zaXRp'
+    'dml0eQ==');
 
 @$core.Deprecated('Use futuresLpQuantityLimitDescriptor instead')
 const FuturesLpQuantityLimit$json = {
