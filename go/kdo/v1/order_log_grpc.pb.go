@@ -36,6 +36,8 @@ type OrderLogServiceClient interface {
 	GetHedgePairDetail(ctx context.Context, in *GetHedgePairDetailRequest, opts ...grpc.CallOption) (*HedgePairDetail, error)
 	// 헷지 쌍 상세 정보 실시간 스트림
 	StreamHedgePairDetail(ctx context.Context, in *StreamHedgePairDetailRequest, opts ...grpc.CallOption) (OrderLogService_StreamHedgePairDetailClient, error)
+	// 헷지 쌍 상세 정보 페이지네이션 조회 (historical)
+	ListHedgePairDetails(ctx context.Context, in *ListHedgePairDetailsRequest, opts ...grpc.CallOption) (*ListHedgePairDetailsResponse, error)
 	// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
 	StreamPairFillSummary(ctx context.Context, in *StreamPairFillSummaryRequest, opts ...grpc.CallOption) (OrderLogService_StreamPairFillSummaryClient, error)
 }
@@ -180,6 +182,15 @@ func (x *orderLogServiceStreamHedgePairDetailClient) Recv() (*HedgePairDetail, e
 	return m, nil
 }
 
+func (c *orderLogServiceClient) ListHedgePairDetails(ctx context.Context, in *ListHedgePairDetailsRequest, opts ...grpc.CallOption) (*ListHedgePairDetailsResponse, error) {
+	out := new(ListHedgePairDetailsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order_log.OrderLogService/ListHedgePairDetails", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderLogServiceClient) StreamPairFillSummary(ctx context.Context, in *StreamPairFillSummaryRequest, opts ...grpc.CallOption) (OrderLogService_StreamPairFillSummaryClient, error) {
 	stream, err := c.cc.NewStream(ctx, &OrderLogService_ServiceDesc.Streams[3], "/kdo.v1.order_log.OrderLogService/StreamPairFillSummary", opts...)
 	if err != nil {
@@ -230,6 +241,8 @@ type OrderLogServiceServer interface {
 	GetHedgePairDetail(context.Context, *GetHedgePairDetailRequest) (*HedgePairDetail, error)
 	// 헷지 쌍 상세 정보 실시간 스트림
 	StreamHedgePairDetail(*StreamHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error
+	// 헷지 쌍 상세 정보 페이지네이션 조회 (historical)
+	ListHedgePairDetails(context.Context, *ListHedgePairDetailsRequest) (*ListHedgePairDetailsResponse, error)
 	// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
 	StreamPairFillSummary(*StreamPairFillSummaryRequest, OrderLogService_StreamPairFillSummaryServer) error
 	mustEmbedUnimplementedOrderLogServiceServer()
@@ -259,6 +272,9 @@ func (UnimplementedOrderLogServiceServer) GetHedgePairDetail(context.Context, *G
 }
 func (UnimplementedOrderLogServiceServer) StreamHedgePairDetail(*StreamHedgePairDetailRequest, OrderLogService_StreamHedgePairDetailServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamHedgePairDetail not implemented")
+}
+func (UnimplementedOrderLogServiceServer) ListHedgePairDetails(context.Context, *ListHedgePairDetailsRequest) (*ListHedgePairDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListHedgePairDetails not implemented")
 }
 func (UnimplementedOrderLogServiceServer) StreamPairFillSummary(*StreamPairFillSummaryRequest, OrderLogService_StreamPairFillSummaryServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamPairFillSummary not implemented")
@@ -411,6 +427,24 @@ func (x *orderLogServiceStreamHedgePairDetailServer) Send(m *HedgePairDetail) er
 	return x.ServerStream.SendMsg(m)
 }
 
+func _OrderLogService_ListHedgePairDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHedgePairDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderLogServiceServer).ListHedgePairDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order_log.OrderLogService/ListHedgePairDetails",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderLogServiceServer).ListHedgePairDetails(ctx, req.(*ListHedgePairDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OrderLogService_StreamPairFillSummary_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(StreamPairFillSummaryRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -454,6 +488,10 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetHedgePairDetail",
 			Handler:    _OrderLogService_GetHedgePairDetail_Handler,
+		},
+		{
+			MethodName: "ListHedgePairDetails",
+			Handler:    _OrderLogService_ListHedgePairDetails_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

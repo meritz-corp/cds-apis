@@ -71,6 +71,14 @@ service OrderLogService {
     option (google.api.method_signature) = "symbol";
   }
 
+  // 헷지 쌍 상세 정보 페이지네이션 조회 (historical)
+  rpc ListHedgePairDetails(ListHedgePairDetailsRequest) returns (ListHedgePairDetailsResponse) {
+    option (google.api.http) = {
+      get: "/v1/order_logs:listHedgePairDetails"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
   // 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
   rpc StreamPairFillSummary(StreamPairFillSummaryRequest) returns (stream PairFillSummary) {
     option (google.api.http) = {
@@ -293,10 +301,17 @@ message StreamHedgePairDetailRequest {
   // 감시할 ETF 심볼
   string symbol = 1;
 
-  reserved 2;
+  // 펀드 필터
+  optional string fund_code = 2;
+
+  // 선물 LP 헷지 ETF 필터
+  optional string hedge_symbol = 3;
 
   // Quote 방향 필터 (optional - 미지정 시 양방향 모두)
-  optional kdo.v1.common.OrderSide quote_side = 3;
+  optional kdo.v1.common.OrderSide quote_side = 4;
+
+  // 재연결 시 끊긴 시점 이후만 받고 싶을 때 (마이크로초)
+  optional uint64 since_hedge_exchange_time_us = 5;
 }
 
 // 헷지 쌍 상세 정보
@@ -358,4 +373,37 @@ message StreamPairFillSummaryRequest {
   string hedge_fund_code = 3;     // 헷지 펀드 코드
   string hedge_symbol = 4;        // 헷지 심볼 (선물)
   optional uint32 date = 5;       // 날짜(YYYYMMDD). 미지정 시 서버가 당일로 처리
+}
+
+// ListHedgePairDetails 요청
+message ListHedgePairDetailsRequest {
+  // 감시할 ETF/quote 심볼 (필수)
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 필터
+  optional string fund_code = 2;
+
+  // 선물 LP의 헷지 ETF 필터 (hedge_symbol 매칭)
+  optional string hedge_symbol = 3;
+
+  // Quote 방향 필터
+  optional kdo.v1.common.OrderSide quote_side = 4;
+
+  // 날짜 필터 (YYYYMMDD). 당일만 조회할 때 사용
+  optional uint32 date = 5;
+
+  // 이 시각 이후의 결과만 (resume용, 마이크로초)
+  optional uint64 since_hedge_exchange_time_us = 6;
+
+  // 페이지 크기 (기본 200, 최대 1000)
+  int32 page_size = 7;
+
+  // 페이지 토큰
+  string page_token = 8;
+}
+
+// ListHedgePairDetails 응답
+message ListHedgePairDetailsResponse {
+  repeated HedgePairDetail details = 1;
+  string next_page_token = 2;
 }

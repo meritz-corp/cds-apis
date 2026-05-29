@@ -1063,6 +1063,26 @@ func (mr *MockOrderLogServiceClientMockRecorder) GetOrderLogStatistics(ctx, in i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderLogStatistics", reflect.TypeOf((*MockOrderLogServiceClient)(nil).GetOrderLogStatistics), varargs...)
 }
 
+// ListHedgePairDetails mocks base method.
+func (m *MockOrderLogServiceClient) ListHedgePairDetails(ctx context.Context, in *ListHedgePairDetailsRequest, opts ...grpc.CallOption) (*ListHedgePairDetailsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListHedgePairDetails", varargs...)
+	ret0, _ := ret[0].(*ListHedgePairDetailsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListHedgePairDetails indicates an expected call of ListHedgePairDetails.
+func (mr *MockOrderLogServiceClientMockRecorder) ListHedgePairDetails(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedgePairDetails", reflect.TypeOf((*MockOrderLogServiceClient)(nil).ListHedgePairDetails), varargs...)
+}
+
 // ListOrderLogs mocks base method.
 func (m *MockOrderLogServiceClient) ListOrderLogs(ctx context.Context, in *ListOrderLogsRequest, opts ...grpc.CallOption) (*ListOrderLogsResponse, error) {
 	m.ctrl.T.Helper()
@@ -1229,6 +1249,21 @@ func (m *MockOrderLogServiceServer) GetOrderLogStatistics(ctx context.Context, i
 func (mr *MockOrderLogServiceServerMockRecorder) GetOrderLogStatistics(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderLogStatistics", reflect.TypeOf((*MockOrderLogServiceServer)(nil).GetOrderLogStatistics), ctx, in)
+}
+
+// ListHedgePairDetails mocks base method.
+func (m *MockOrderLogServiceServer) ListHedgePairDetails(ctx context.Context, in *ListHedgePairDetailsRequest) (*ListHedgePairDetailsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListHedgePairDetails", ctx, in)
+	ret0, _ := ret[0].(*ListHedgePairDetailsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListHedgePairDetails indicates an expected call of ListHedgePairDetails.
+func (mr *MockOrderLogServiceServerMockRecorder) ListHedgePairDetails(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHedgePairDetails", reflect.TypeOf((*MockOrderLogServiceServer)(nil).ListHedgePairDetails), ctx, in)
 }
 
 // ListOrderLogs mocks base method.

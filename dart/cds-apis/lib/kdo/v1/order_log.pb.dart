@@ -824,11 +824,17 @@ class GetHedgePairDetailRequest extends $pb.GeneratedMessage {
 class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
   factory StreamHedgePairDetailRequest({
     $core.String? symbol,
+    $core.String? fundCode,
+    $core.String? hedgeSymbol,
     $2.OrderSide? quoteSide,
+    $fixnum.Int64? sinceHedgeExchangeTimeUs,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
     if (quoteSide != null) result.quoteSide = quoteSide;
+    if (sinceHedgeExchangeTimeUs != null) result.sinceHedgeExchangeTimeUs = sinceHedgeExchangeTimeUs;
     return result;
   }
 
@@ -839,7 +845,10 @@ class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamHedgePairDetailRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'quoteSide', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'hedgeSymbol')
+    ..e<$2.OrderSide>(4, _omitFieldNames ? '' : 'quoteSide', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'sinceHedgeExchangeTimeUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -870,15 +879,45 @@ class StreamHedgePairDetailRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
+  /// 펀드 필터
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 선물 LP 헷지 ETF 필터
+  @$pb.TagNumber(3)
+  $core.String get hedgeSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set hedgeSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHedgeSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHedgeSymbol() => $_clearField(3);
+
   /// Quote 방향 필터 (optional - 미지정 시 양방향 모두)
-  @$pb.TagNumber(3)
-  $2.OrderSide get quoteSide => $_getN(1);
-  @$pb.TagNumber(3)
-  set quoteSide($2.OrderSide value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasQuoteSide() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearQuoteSide() => $_clearField(3);
+  @$pb.TagNumber(4)
+  $2.OrderSide get quoteSide => $_getN(3);
+  @$pb.TagNumber(4)
+  set quoteSide($2.OrderSide value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuoteSide() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuoteSide() => $_clearField(4);
+
+  /// 재연결 시 끊긴 시점 이후만 받고 싶을 때 (마이크로초)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get sinceHedgeExchangeTimeUs => $_getI64(4);
+  @$pb.TagNumber(5)
+  set sinceHedgeExchangeTimeUs($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSinceHedgeExchangeTimeUs() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSinceHedgeExchangeTimeUs() => $_clearField(5);
 }
 
 /// 헷지 쌍 상세 정보
@@ -1422,6 +1461,198 @@ class StreamPairFillSummaryRequest extends $pb.GeneratedMessage {
   $core.bool hasDate() => $_has(4);
   @$pb.TagNumber(5)
   void clearDate() => $_clearField(5);
+}
+
+/// ListHedgePairDetails 요청
+class ListHedgePairDetailsRequest extends $pb.GeneratedMessage {
+  factory ListHedgePairDetailsRequest({
+    $core.String? symbol,
+    $core.String? fundCode,
+    $core.String? hedgeSymbol,
+    $2.OrderSide? quoteSide,
+    $core.int? date,
+    $fixnum.Int64? sinceHedgeExchangeTimeUs,
+    $core.int? pageSize,
+    $core.String? pageToken,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
+    if (quoteSide != null) result.quoteSide = quoteSide;
+    if (date != null) result.date = date;
+    if (sinceHedgeExchangeTimeUs != null) result.sinceHedgeExchangeTimeUs = sinceHedgeExchangeTimeUs;
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    return result;
+  }
+
+  ListHedgePairDetailsRequest._();
+
+  factory ListHedgePairDetailsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListHedgePairDetailsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListHedgePairDetailsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'hedgeSymbol')
+    ..e<$2.OrderSide>(4, _omitFieldNames ? '' : 'quoteSide', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'sinceHedgeExchangeTimeUs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(8, _omitFieldNames ? '' : 'pageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgePairDetailsRequest clone() => ListHedgePairDetailsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgePairDetailsRequest copyWith(void Function(ListHedgePairDetailsRequest) updates) => super.copyWith((message) => updates(message as ListHedgePairDetailsRequest)) as ListHedgePairDetailsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListHedgePairDetailsRequest create() => ListHedgePairDetailsRequest._();
+  @$core.override
+  ListHedgePairDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListHedgePairDetailsRequest> createRepeated() => $pb.PbList<ListHedgePairDetailsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListHedgePairDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListHedgePairDetailsRequest>(create);
+  static ListHedgePairDetailsRequest? _defaultInstance;
+
+  /// 감시할 ETF/quote 심볼 (필수)
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 필터
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 선물 LP의 헷지 ETF 필터 (hedge_symbol 매칭)
+  @$pb.TagNumber(3)
+  $core.String get hedgeSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set hedgeSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHedgeSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHedgeSymbol() => $_clearField(3);
+
+  /// Quote 방향 필터
+  @$pb.TagNumber(4)
+  $2.OrderSide get quoteSide => $_getN(3);
+  @$pb.TagNumber(4)
+  set quoteSide($2.OrderSide value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuoteSide() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuoteSide() => $_clearField(4);
+
+  /// 날짜 필터 (YYYYMMDD). 당일만 조회할 때 사용
+  @$pb.TagNumber(5)
+  $core.int get date => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set date($core.int value) => $_setUnsignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasDate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDate() => $_clearField(5);
+
+  /// 이 시각 이후의 결과만 (resume용, 마이크로초)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get sinceHedgeExchangeTimeUs => $_getI64(5);
+  @$pb.TagNumber(6)
+  set sinceHedgeExchangeTimeUs($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSinceHedgeExchangeTimeUs() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSinceHedgeExchangeTimeUs() => $_clearField(6);
+
+  /// 페이지 크기 (기본 200, 최대 1000)
+  @$pb.TagNumber(7)
+  $core.int get pageSize => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set pageSize($core.int value) => $_setSignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasPageSize() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPageSize() => $_clearField(7);
+
+  /// 페이지 토큰
+  @$pb.TagNumber(8)
+  $core.String get pageToken => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set pageToken($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasPageToken() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearPageToken() => $_clearField(8);
+}
+
+/// ListHedgePairDetails 응답
+class ListHedgePairDetailsResponse extends $pb.GeneratedMessage {
+  factory ListHedgePairDetailsResponse({
+    $core.Iterable<HedgePairDetail>? details,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (details != null) result.details.addAll(details);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListHedgePairDetailsResponse._();
+
+  factory ListHedgePairDetailsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListHedgePairDetailsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListHedgePairDetailsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..pc<HedgePairDetail>(1, _omitFieldNames ? '' : 'details', $pb.PbFieldType.PM, subBuilder: HedgePairDetail.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgePairDetailsResponse clone() => ListHedgePairDetailsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListHedgePairDetailsResponse copyWith(void Function(ListHedgePairDetailsResponse) updates) => super.copyWith((message) => updates(message as ListHedgePairDetailsResponse)) as ListHedgePairDetailsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListHedgePairDetailsResponse create() => ListHedgePairDetailsResponse._();
+  @$core.override
+  ListHedgePairDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListHedgePairDetailsResponse> createRepeated() => $pb.PbList<ListHedgePairDetailsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListHedgePairDetailsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListHedgePairDetailsResponse>(create);
+  static ListHedgePairDetailsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<HedgePairDetail> get details => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
 }
 
 

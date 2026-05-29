@@ -67,6 +67,14 @@ abstract final class OrderLogService {
     kdov1order_log.HedgePairDetail.new,
   );
 
+  /// 헷지 쌍 상세 정보 페이지네이션 조회 (historical)
+  static const listHedgePairDetails = connect.Spec(
+    '/$name/ListHedgePairDetails',
+    connect.StreamType.unary,
+    kdov1order_log.ListHedgePairDetailsRequest.new,
+    kdov1order_log.ListHedgePairDetailsResponse.new,
+  );
+
   /// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
   static const streamPairFillSummary = connect.Spec(
     '/$name/StreamPairFillSummary',

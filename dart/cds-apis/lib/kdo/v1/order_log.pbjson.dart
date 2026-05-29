@@ -230,21 +230,28 @@ const StreamHedgePairDetailRequest$json = {
   '1': 'StreamHedgePairDetailRequest',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'quote_side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '9': 0, '10': 'quoteSide', '17': true},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'fundCode', '17': true},
+    {'1': 'hedge_symbol', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'hedgeSymbol', '17': true},
+    {'1': 'quote_side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '9': 2, '10': 'quoteSide', '17': true},
+    {'1': 'since_hedge_exchange_time_us', '3': 5, '4': 1, '5': 4, '9': 3, '10': 'sinceHedgeExchangeTimeUs', '17': true},
   ],
   '8': [
+    {'1': '_fund_code'},
+    {'1': '_hedge_symbol'},
     {'1': '_quote_side'},
-  ],
-  '9': [
-    {'1': 2, '2': 3},
+    {'1': '_since_hedge_exchange_time_us'},
   ],
 };
 
 /// Descriptor for `StreamHedgePairDetailRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamHedgePairDetailRequestDescriptor = $convert.base64Decode(
-    'ChxTdHJlYW1IZWRnZVBhaXJEZXRhaWxSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEj'
-    'wKCnF1b3RlX3NpZGUYAyABKA4yGC5rZG8udjEuY29tbW9uLk9yZGVyU2lkZUgAUglxdW90ZVNp'
-    'ZGWIAQFCDQoLX3F1b3RlX3NpZGVKBAgCEAM=');
+    'ChxTdHJlYW1IZWRnZVBhaXJEZXRhaWxSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEi'
+    'AKCWZ1bmRfY29kZRgCIAEoCUgAUghmdW5kQ29kZYgBARImCgxoZWRnZV9zeW1ib2wYAyABKAlI'
+    'AVILaGVkZ2VTeW1ib2yIAQESPAoKcXVvdGVfc2lkZRgEIAEoDjIYLmtkby52MS5jb21tb24uT3'
+    'JkZXJTaWRlSAJSCXF1b3RlU2lkZYgBARJDChxzaW5jZV9oZWRnZV9leGNoYW5nZV90aW1lX3Vz'
+    'GAUgASgESANSGHNpbmNlSGVkZ2VFeGNoYW5nZVRpbWVVc4gBAUIMCgpfZnVuZF9jb2RlQg8KDV'
+    '9oZWRnZV9zeW1ib2xCDQoLX3F1b3RlX3NpZGVCHwodX3NpbmNlX2hlZGdlX2V4Y2hhbmdlX3Rp'
+    'bWVfdXM=');
 
 @$core.Deprecated('Use hedgePairDetailDescriptor instead')
 const HedgePairDetail$json = {
@@ -351,4 +358,52 @@ final $typed_data.Uint8List streamPairFillSummaryRequestDescriptor = $convert.ba
     'INcXVvdGVGdW5kQ29kZRIhCgxxdW90ZV9zeW1ib2wYAiABKAlSC3F1b3RlU3ltYm9sEiYKD2hl'
     'ZGdlX2Z1bmRfY29kZRgDIAEoCVINaGVkZ2VGdW5kQ29kZRIhCgxoZWRnZV9zeW1ib2wYBCABKA'
     'lSC2hlZGdlU3ltYm9sEhcKBGRhdGUYBSABKA1IAFIEZGF0ZYgBAUIHCgVfZGF0ZQ==');
+
+@$core.Deprecated('Use listHedgePairDetailsRequestDescriptor instead')
+const ListHedgePairDetailsRequest$json = {
+  '1': 'ListHedgePairDetailsRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'fundCode', '17': true},
+    {'1': 'hedge_symbol', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'hedgeSymbol', '17': true},
+    {'1': 'quote_side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '9': 2, '10': 'quoteSide', '17': true},
+    {'1': 'date', '3': 5, '4': 1, '5': 13, '9': 3, '10': 'date', '17': true},
+    {'1': 'since_hedge_exchange_time_us', '3': 6, '4': 1, '5': 4, '9': 4, '10': 'sinceHedgeExchangeTimeUs', '17': true},
+    {'1': 'page_size', '3': 7, '4': 1, '5': 5, '10': 'pageSize'},
+    {'1': 'page_token', '3': 8, '4': 1, '5': 9, '10': 'pageToken'},
+  ],
+  '8': [
+    {'1': '_fund_code'},
+    {'1': '_hedge_symbol'},
+    {'1': '_quote_side'},
+    {'1': '_date'},
+    {'1': '_since_hedge_exchange_time_us'},
+  ],
+};
+
+/// Descriptor for `ListHedgePairDetailsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listHedgePairDetailsRequestDescriptor = $convert.base64Decode(
+    'ChtMaXN0SGVkZ2VQYWlyRGV0YWlsc1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW'
+    '1ib2wSIAoJZnVuZF9jb2RlGAIgASgJSABSCGZ1bmRDb2RliAEBEiYKDGhlZGdlX3N5bWJvbBgD'
+    'IAEoCUgBUgtoZWRnZVN5bWJvbIgBARI8CgpxdW90ZV9zaWRlGAQgASgOMhgua2RvLnYxLmNvbW'
+    '1vbi5PcmRlclNpZGVIAlIJcXVvdGVTaWRliAEBEhcKBGRhdGUYBSABKA1IA1IEZGF0ZYgBARJD'
+    'ChxzaW5jZV9oZWRnZV9leGNoYW5nZV90aW1lX3VzGAYgASgESARSGHNpbmNlSGVkZ2VFeGNoYW'
+    '5nZVRpbWVVc4gBARIbCglwYWdlX3NpemUYByABKAVSCHBhZ2VTaXplEh0KCnBhZ2VfdG9rZW4Y'
+    'CCABKAlSCXBhZ2VUb2tlbkIMCgpfZnVuZF9jb2RlQg8KDV9oZWRnZV9zeW1ib2xCDQoLX3F1b3'
+    'RlX3NpZGVCBwoFX2RhdGVCHwodX3NpbmNlX2hlZGdlX2V4Y2hhbmdlX3RpbWVfdXM=');
+
+@$core.Deprecated('Use listHedgePairDetailsResponseDescriptor instead')
+const ListHedgePairDetailsResponse$json = {
+  '1': 'ListHedgePairDetailsResponse',
+  '2': [
+    {'1': 'details', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.order_log.HedgePairDetail', '10': 'details'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+  ],
+};
+
+/// Descriptor for `ListHedgePairDetailsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listHedgePairDetailsResponseDescriptor = $convert.base64Decode(
+    'ChxMaXN0SGVkZ2VQYWlyRGV0YWlsc1Jlc3BvbnNlEjsKB2RldGFpbHMYASADKAsyIS5rZG8udj'
+    'Eub3JkZXJfbG9nLkhlZGdlUGFpckRldGFpbFIHZGV0YWlscxImCg9uZXh0X3BhZ2VfdG9rZW4Y'
+    'AiABKAlSDW5leHRQYWdlVG9rZW4=');
 

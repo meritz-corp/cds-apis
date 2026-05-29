@@ -224,6 +224,96 @@
         ]
       }
     },
+    "/v1/order_logs:listHedgePairDetails": {
+      "get": {
+        "summary": "헷지 쌍 상세 정보 페이지네이션 조회 (historical)",
+        "operationId": "OrderLogService_ListHedgePairDetails",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logListHedgePairDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "감시할 ETF/quote 심볼 (필수)",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 필터",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hedgeSymbol",
+            "description": "선물 LP의 헷지 ETF 필터 (hedge_symbol 매칭)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "quoteSide",
+            "description": "Quote 방향 필터\n\n - ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ORDER_SIDE_UNSPECIFIED",
+              "ORDER_SIDE_BID",
+              "ORDER_SIDE_ASK"
+            ],
+            "default": "ORDER_SIDE_UNSPECIFIED"
+          },
+          {
+            "name": "date",
+            "description": "날짜 필터 (YYYYMMDD). 당일만 조회할 때 사용",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "sinceHedgeExchangeTimeUs",
+            "description": "이 시각 이후의 결과만 (resume용, 마이크로초)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (기본 200, 최대 1000)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
     "/v1/order_logs:stream": {
       "get": {
         "summary": "주문 로그 스트리밍",
@@ -323,6 +413,20 @@
             "type": "string"
           },
           {
+            "name": "fundCode",
+            "description": "펀드 필터",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hedgeSymbol",
+            "description": "선물 LP 헷지 ETF 필터",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "quoteSide",
             "description": "Quote 방향 필터 (optional - 미지정 시 양방향 모두)\n\n - ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
             "in": "query",
@@ -334,6 +438,14 @@
               "ORDER_SIDE_ASK"
             ],
             "default": "ORDER_SIDE_UNSPECIFIED"
+          },
+          {
+            "name": "sinceHedgeExchangeTimeUs",
+            "description": "재연결 시 끊긴 시점 이후만 받고 싶을 때 (마이크로초)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -528,6 +640,21 @@
         }
       },
       "title": "한 다리(원주문 또는 헷지)의 fund+symbol 단위 집계"
+    },
+    "order_logListHedgePairDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/order_logHedgePairDetail"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      },
+      "title": "ListHedgePairDetails 응답"
     },
     "order_logListOrderLogsResponse": {
       "type": "object",

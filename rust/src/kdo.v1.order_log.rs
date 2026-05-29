@@ -196,9 +196,18 @@ pub struct StreamHedgePairDetailRequest {
     /// 감시할 ETF 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 필터
+    #[prost(string, optional, tag="2")]
+    pub fund_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// 선물 LP 헷지 ETF 필터
+    #[prost(string, optional, tag="3")]
+    pub hedge_symbol: ::core::option::Option<::prost::alloc::string::String>,
     /// Quote 방향 필터 (optional - 미지정 시 양방향 모두)
-    #[prost(enumeration="super::common::OrderSide", optional, tag="3")]
+    #[prost(enumeration="super::common::OrderSide", optional, tag="4")]
     pub quote_side: ::core::option::Option<i32>,
+    /// 재연결 시 끊긴 시점 이후만 받고 싶을 때 (마이크로초)
+    #[prost(uint64, optional, tag="5")]
+    pub since_hedge_exchange_time_us: ::core::option::Option<u64>,
 }
 /// 헷지 쌍 상세 정보
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -309,6 +318,44 @@ pub struct StreamPairFillSummaryRequest {
     /// 날짜(YYYYMMDD). 미지정 시 서버가 당일로 처리
     #[prost(uint32, optional, tag="5")]
     pub date: ::core::option::Option<u32>,
+}
+/// ListHedgePairDetails 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListHedgePairDetailsRequest {
+    /// 감시할 ETF/quote 심볼 (필수)
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 필터
+    #[prost(string, optional, tag="2")]
+    pub fund_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// 선물 LP의 헷지 ETF 필터 (hedge_symbol 매칭)
+    #[prost(string, optional, tag="3")]
+    pub hedge_symbol: ::core::option::Option<::prost::alloc::string::String>,
+    /// Quote 방향 필터
+    #[prost(enumeration="super::common::OrderSide", optional, tag="4")]
+    pub quote_side: ::core::option::Option<i32>,
+    /// 날짜 필터 (YYYYMMDD). 당일만 조회할 때 사용
+    #[prost(uint32, optional, tag="5")]
+    pub date: ::core::option::Option<u32>,
+    /// 이 시각 이후의 결과만 (resume용, 마이크로초)
+    #[prost(uint64, optional, tag="6")]
+    pub since_hedge_exchange_time_us: ::core::option::Option<u64>,
+    /// 페이지 크기 (기본 200, 최대 1000)
+    #[prost(int32, tag="7")]
+    pub page_size: i32,
+    /// 페이지 토큰
+    #[prost(string, tag="8")]
+    pub page_token: ::prost::alloc::string::String,
+}
+/// ListHedgePairDetails 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListHedgePairDetailsResponse {
+    #[prost(message, repeated, tag="1")]
+    pub details: ::prost::alloc::vec::Vec<HedgePairDetail>,
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
 }
 /// 주문 로그 타입
 ///

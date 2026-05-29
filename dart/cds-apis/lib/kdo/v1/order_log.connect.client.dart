@@ -135,6 +135,24 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 헷지 쌍 상세 정보 페이지네이션 조회 (historical)
+  Future<kdov1order_log.ListHedgePairDetailsResponse> listHedgePairDetails(
+    kdov1order_log.ListHedgePairDetailsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLogService.listHedgePairDetails,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
   Stream<kdov1order_log.PairFillSummary> streamPairFillSummary(
     kdov1order_log.StreamPairFillSummaryRequest input, {

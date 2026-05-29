@@ -893,6 +893,349 @@ impl<'de> serde::Deserialize<'de> for LegFillSummary {
         deserializer.deserialize_struct("kdo.v1.order_log.LegFillSummary", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ListHedgePairDetailsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.ListHedgePairDetailsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if let Some(v) = self.fund_code.as_ref() {
+            struct_ser.serialize_field("fund_code", v)?;
+        }
+        if let Some(v) = self.hedge_symbol.as_ref() {
+            struct_ser.serialize_field("hedge_symbol", v)?;
+        }
+        if let Some(v) = self.quote_side.as_ref() {
+            let v = super::common::OrderSide::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("quote_side", &v)?;
+        }
+        if let Some(v) = self.date.as_ref() {
+            struct_ser.serialize_field("date", v)?;
+        }
+        if let Some(v) = self.since_hedge_exchange_time_us.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("since_hedge_exchange_time_us", ToString::to_string(&v).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("page_size", &self.page_size)?;
+        }
+        if true {
+            struct_ser.serialize_field("page_token", &self.page_token)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListHedgePairDetailsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund_code",
+            "fundCode",
+            "hedge_symbol",
+            "hedgeSymbol",
+            "quote_side",
+            "quoteSide",
+            "date",
+            "since_hedge_exchange_time_us",
+            "sinceHedgeExchangeTimeUs",
+            "page_size",
+            "pageSize",
+            "page_token",
+            "pageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            FundCode,
+            HedgeSymbol,
+            QuoteSide,
+            Date,
+            SinceHedgeExchangeTimeUs,
+            PageSize,
+            PageToken,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
+                            "quoteSide" | "quote_side" => Ok(GeneratedField::QuoteSide),
+                            "date" => Ok(GeneratedField::Date),
+                            "sinceHedgeExchangeTimeUs" | "since_hedge_exchange_time_us" => Ok(GeneratedField::SinceHedgeExchangeTimeUs),
+                            "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
+                            "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListHedgePairDetailsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.ListHedgePairDetailsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListHedgePairDetailsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                let mut hedge_symbol__ = None;
+                let mut quote_side__ = None;
+                let mut date__ = None;
+                let mut since_hedge_exchange_time_us__ = None;
+                let mut page_size__ = None;
+                let mut page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = map_.next_value()?;
+                        }
+                        GeneratedField::HedgeSymbol => {
+                            if hedge_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeSymbol"));
+                            }
+                            hedge_symbol__ = map_.next_value()?;
+                        }
+                        GeneratedField::QuoteSide => {
+                            if quote_side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quoteSide"));
+                            }
+                            quote_side__ = map_.next_value::<::std::option::Option<super::common::OrderSide>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::SinceHedgeExchangeTimeUs => {
+                            if since_hedge_exchange_time_us__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sinceHedgeExchangeTimeUs"));
+                            }
+                            since_hedge_exchange_time_us__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::PageSize => {
+                            if page_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageSize"));
+                            }
+                            page_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PageToken => {
+                            if page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageToken"));
+                            }
+                            page_token__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListHedgePairDetailsRequest {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__,
+                    hedge_symbol: hedge_symbol__,
+                    quote_side: quote_side__,
+                    date: date__,
+                    since_hedge_exchange_time_us: since_hedge_exchange_time_us__,
+                    page_size: page_size__.unwrap_or_default(),
+                    page_token: page_token__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.ListHedgePairDetailsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListHedgePairDetailsResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.ListHedgePairDetailsResponse", len)?;
+        if true {
+            struct_ser.serialize_field("details", &self.details)?;
+        }
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListHedgePairDetailsResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "details",
+            "next_page_token",
+            "nextPageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Details,
+            NextPageToken,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "details" => Ok(GeneratedField::Details),
+                            "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListHedgePairDetailsResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.order_log.ListHedgePairDetailsResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListHedgePairDetailsResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut details__ = None;
+                let mut next_page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Details => {
+                            if details__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("details"));
+                            }
+                            details__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::NextPageToken => {
+                            if next_page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nextPageToken"));
+                            }
+                            next_page_token__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListHedgePairDetailsResponse {
+                    details: details__.unwrap_or_default(),
+                    next_page_token: next_page_token__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.order_log.ListHedgePairDetailsResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListOrderLogsRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2314,14 +2657,34 @@ impl serde::Serialize for StreamHedgePairDetailRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.StreamHedgePairDetailRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if let Some(v) = self.fund_code.as_ref() {
+            struct_ser.serialize_field("fund_code", v)?;
+        }
+        if let Some(v) = self.hedge_symbol.as_ref() {
+            struct_ser.serialize_field("hedge_symbol", v)?;
         }
         if let Some(v) = self.quote_side.as_ref() {
             let v = super::common::OrderSide::try_from(*v)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
             struct_ser.serialize_field("quote_side", &v)?;
+        }
+        if let Some(v) = self.since_hedge_exchange_time_us.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("since_hedge_exchange_time_us", ToString::to_string(&v).as_str())?;
         }
         struct_ser.end()
     }
@@ -2334,14 +2697,23 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
     {
         const FIELDS: &[&str] = &[
             "symbol",
+            "fund_code",
+            "fundCode",
+            "hedge_symbol",
+            "hedgeSymbol",
             "quote_side",
             "quoteSide",
+            "since_hedge_exchange_time_us",
+            "sinceHedgeExchangeTimeUs",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
+            FundCode,
+            HedgeSymbol,
             QuoteSide,
+            SinceHedgeExchangeTimeUs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2365,7 +2737,10 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                     {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "hedgeSymbol" | "hedge_symbol" => Ok(GeneratedField::HedgeSymbol),
                             "quoteSide" | "quote_side" => Ok(GeneratedField::QuoteSide),
+                            "sinceHedgeExchangeTimeUs" | "since_hedge_exchange_time_us" => Ok(GeneratedField::SinceHedgeExchangeTimeUs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2386,7 +2761,10 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut symbol__ = None;
+                let mut fund_code__ = None;
+                let mut hedge_symbol__ = None;
                 let mut quote_side__ = None;
+                let mut since_hedge_exchange_time_us__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2395,11 +2773,31 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                             }
                             symbol__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = map_.next_value()?;
+                        }
+                        GeneratedField::HedgeSymbol => {
+                            if hedge_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeSymbol"));
+                            }
+                            hedge_symbol__ = map_.next_value()?;
+                        }
                         GeneratedField::QuoteSide => {
                             if quote_side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("quoteSide"));
                             }
                             quote_side__ = map_.next_value::<::std::option::Option<super::common::OrderSide>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::SinceHedgeExchangeTimeUs => {
+                            if since_hedge_exchange_time_us__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sinceHedgeExchangeTimeUs"));
+                            }
+                            since_hedge_exchange_time_us__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -2408,7 +2806,10 @@ impl<'de> serde::Deserialize<'de> for StreamHedgePairDetailRequest {
                 }
                 Ok(StreamHedgePairDetailRequest {
                     symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__,
+                    hedge_symbol: hedge_symbol__,
                     quote_side: quote_side__,
+                    since_hedge_exchange_time_us: since_hedge_exchange_time_us__,
                 })
             }
         }

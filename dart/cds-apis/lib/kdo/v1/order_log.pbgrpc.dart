@@ -68,6 +68,11 @@ class OrderLogServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamHedgePairDetail, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 헷지 쌍 상세 정보 페이지네이션 조회 (historical)
+  $grpc.ResponseFuture<$0.ListHedgePairDetailsResponse> listHedgePairDetails($0.ListHedgePairDetailsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listHedgePairDetails, request, options: options);
+  }
+
   /// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
   $grpc.ResponseStream<$0.PairFillSummary> streamPairFillSummary($0.StreamPairFillSummaryRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamPairFillSummary, $async.Stream.fromIterable([request]), options: options);
@@ -103,6 +108,10 @@ class OrderLogServiceClient extends $grpc.Client {
       '/kdo.v1.order_log.OrderLogService/StreamHedgePairDetail',
       ($0.StreamHedgePairDetailRequest value) => value.writeToBuffer(),
       $0.HedgePairDetail.fromBuffer);
+  static final _$listHedgePairDetails = $grpc.ClientMethod<$0.ListHedgePairDetailsRequest, $0.ListHedgePairDetailsResponse>(
+      '/kdo.v1.order_log.OrderLogService/ListHedgePairDetails',
+      ($0.ListHedgePairDetailsRequest value) => value.writeToBuffer(),
+      $0.ListHedgePairDetailsResponse.fromBuffer);
   static final _$streamPairFillSummary = $grpc.ClientMethod<$0.StreamPairFillSummaryRequest, $0.PairFillSummary>(
       '/kdo.v1.order_log.OrderLogService/StreamPairFillSummary',
       ($0.StreamPairFillSummaryRequest value) => value.writeToBuffer(),
@@ -163,6 +172,13 @@ abstract class OrderLogServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamHedgePairDetailRequest.fromBuffer(value),
         ($0.HedgePairDetail value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListHedgePairDetailsRequest, $0.ListHedgePairDetailsResponse>(
+        'ListHedgePairDetails',
+        listHedgePairDetails_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListHedgePairDetailsRequest.fromBuffer(value),
+        ($0.ListHedgePairDetailsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StreamPairFillSummaryRequest, $0.PairFillSummary>(
         'StreamPairFillSummary',
         streamPairFillSummary_Pre,
@@ -213,6 +229,12 @@ abstract class OrderLogServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.HedgePairDetail> streamHedgePairDetail($grpc.ServiceCall call, $0.StreamHedgePairDetailRequest request);
+
+  $async.Future<$0.ListHedgePairDetailsResponse> listHedgePairDetails_Pre($grpc.ServiceCall $call, $async.Future<$0.ListHedgePairDetailsRequest> $request) async {
+    return listHedgePairDetails($call, await $request);
+  }
+
+  $async.Future<$0.ListHedgePairDetailsResponse> listHedgePairDetails($grpc.ServiceCall call, $0.ListHedgePairDetailsRequest request);
 
   $async.Stream<$0.PairFillSummary> streamPairFillSummary_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamPairFillSummaryRequest> $request) async* {
     yield* streamPairFillSummary($call, await $request);
