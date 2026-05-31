@@ -131,7 +131,10 @@ message MarketMakingConfiguration {
   // Trade Analyzer 설정
   MarketMakingTradeAnalyzer trade_analyzer = 3;
 
-  // Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
+  // MarketBias 설정 (장기 시장 체결 누적 → 영구 skew)
+  MarketMakingMarketBias market_bias = 4;
+
+  // Momentum 설정 (단기 시장 체결 비율/강도 → 즉각 bid/ask 동일 shift)
   MarketMakingMomentum momentum = 5;
 
   // 통합 포지션 관리 설정
@@ -201,49 +204,75 @@ message KrxNav {
   int64 prev_future = 2;
 }
 
-// Trade Analyzer 설정
+// Trade Analyzer 설정 (갤럭티코 SingleTradeAnalyzer 포팅 — 시장 체결 추종)
 message MarketMakingTradeAnalyzer {
   // 활성화 여부
   bool enabled = 1;
 
-  // 분석 윈도우 크기
-  uint32 window = 2;
+  // 폐기된 필드 (구 adverse selection 의미). 재사용 금지.
+  reserved 2, 3, 4, 5;
+  reserved "window", "ratio_threshold", "strength_threshold", "max_deco_tick";
 
-  // Adverse fill ratio 임계값
-  double ratio_threshold = 3;
+  // 매 체결마다 net/total 에 곱하는 감쇠 비율 (갤럭티코 기본 0.98)
+  double count_decay_ratio = 6;
 
-  // Take-fill strength 임계값
-  double strength_threshold = 4;
+  // 시간 감쇠 주기 (초). 0 = 비활성 (갤럭티코 기본 10)
+  uint64 decay_interval_secs = 7;
 
-  // 최대 decoration 틱 수
-  int32 max_deco_tick = 5;
+  // 시간 주기마다 total 에 곱하는 비율 (갤럭티코 기본 0.95)
+  double total_decay_ratio = 8;
+
+  // 시간 주기마다 net 에 곱하는 비율 (갤럭티코 기본 0.9). total_decay_ratio 보다 작아야 방향성이 먼저 사라짐.
+  double net_decay_ratio = 9;
+
+  // strength 분모 최소치 (기본 100)
+  int64 min_book_qty = 10;
 }
 
-// Momentum 설정
+// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
 message MarketMakingMomentum {
   // 활성화 여부
   bool enabled = 1;
 
-  // 최근 가격 샘플을 유지할 시간 창 (ms)
-  uint64 window_ms = 2;
+  // 폐기된 필드 (구 가격 시계열 follow/escape 의미). 재사용 금지.
+  reserved 2, 3, 4, 5, 6, 7;
+  reserved "window_ms", "trigger_ticks", "follow_sensitivity", "escape_sensitivity", "max_follow_ticks", "max_escape_ticks";
 
-  // 연속 모멘텀 강도를 정규화할 기준 틱 수
-  int32 trigger_ticks = 3;
-
-  // 정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도
-  double follow_sensitivity = 4;
-
-  // 정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도
-  double escape_sensitivity = 5;
-
-  // bid 추종 최대 틱 수
-  int32 max_follow_ticks = 6;
-
-  // ask/bid 도망 최대 틱 수
-  int32 max_escape_ticks = 7;
-
-  // 인버스 방향으로 해석할지 여부
+  // 인버스 ETF: ratio 부호 반전
   bool is_opposite = 8;
+
+  // 최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)
+  double max_tick = 9;
+
+  // ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
+  double ratio_threshold = 10;
+
+  // strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
+  double strength_threshold = 11;
+}
+
+// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)
+message MarketMakingMarketBias {
+  // 활성화 여부
+  bool enabled = 1;
+
+  // 주기 평가 간격 (초, 갤럭티코 accNextUpdateSec 기본 60)
+  uint64 eval_interval_secs = 2;
+
+  // ratio 발동 임계 (기본 0.6)
+  double ratio_threshold = 3;
+
+  // strength 발동 임계 (기본 0.5)
+  double strength_threshold = 4;
+
+  // 점수 임계 0~100 (기본 5). 이 위를 통과해야 한 단계 가산.
+  int32 bias_huddle = 5;
+
+  // 1 단계 가산량 (가격 단위, Price internal representation)
+  int64 bias_unit = 6;
+
+  // 누적 상한 절댓값 (가격 단위, Price internal representation)
+  int64 max_bias = 7;
 }
 
 // 통합 포지션 관리 설정 (soft rebalance + hard limit)
@@ -390,7 +419,7 @@ message MarketMakingOrderbookData {
 
 // Momentum 런타임 상태
 message MomentumState {
-  // 현재 모멘텀 방향 ("up", "down", "neutral")
+  // 현재 모멘텀 방향 ("none" / "up" / "down")
   string direction = 1;
 
   // 현재 bid 가격 조정값 (Price internal representation)
@@ -399,29 +428,49 @@ message MomentumState {
   // 현재 ask 가격 조정값 (Price internal representation)
   int64 ask_adjustment = 3;
 
-  // 원시 틱 변화량 (부호 포함)
+  // 원시 틱 변화량 (부호 포함, 모니터링용)
   double raw_ticks = 4;
 
-  // 정규화 강도 (raw_ticks / trigger_ticks)
-  double normalized_strength = 5;
-
-  // 실제 적용된 follow 틱
-  int32 follow_ticks = 6;
-
-  // 실제 적용된 escape 틱
-  int32 escape_ticks = 7;
-
-  // 윈도우 내 샘플 수
-  int32 sample_count = 8;
+  // 폐기된 필드 (구 follow/escape 모델). 재사용 금지.
+  reserved 5, 6, 7, 8;
+  reserved "normalized_strength", "follow_ticks", "escape_ticks", "sample_count";
 }
 
-// Trade Analyzer 런타임 상태
+// Trade Analyzer 런타임 상태 (갤럭티코 SingleTradeAnalyzer 포팅)
 message TradeAnalyzerState {
-  // 현재 decoration 틱 수
-  int32 deco_tick = 1;
+  // 폐기된 필드 (구 adverse selection 의미). 재사용 금지.
+  reserved 1, 2;
+  reserved "deco_tick", "fill_count";
 
-  // 현재 윈도우 내 체결 횟수
-  int32 fill_count = 2;
+  // 매수/매도 누적 비율 ∈ [-1, +1]. 매수 우세 +.
+  double ratio = 3;
+
+  // 체결 강도 ∈ [0, 1]. ratio 방향 가중 호가창 잔량 대비 누적 체결량.
+  double strength = 4;
+
+  // 부호 있는 누적 체결량 (매수 우세 +)
+  int64 net_amount = 5;
+
+  // 절댓값 누적 체결량
+  int64 total_amount = 6;
+
+  // 5단 호가 평균 매수 잔량
+  double avg_bid_qty = 7;
+
+  // 5단 호가 평균 매도 잔량
+  double avg_ask_qty = 8;
+}
+
+// MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
+message MarketBiasState {
+  // 누적 영구 편향 (가격 단위, Price internal representation)
+  int64 accumulated_bias = 1;
+
+  // 마지막 평가 점수 (0~100)
+  int32 last_score = 2;
+
+  // 누적 평가 횟수
+  int64 eval_count = 3;
 }
 
 // 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
@@ -459,6 +508,9 @@ message MmStateUpdate {
 
   // 순노출 및 재고 균형 상태 (변경 시에만 포함)
   optional ExposureBalancerState exposure_balancer = 6;
+
+  // MarketBias 상태 (변경 시에만 포함)
+  optional MarketBiasState market_bias = 11;
 
   // 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
   optional string ask_quote = 7;

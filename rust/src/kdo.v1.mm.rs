@@ -37,7 +37,10 @@ pub struct MarketMakingConfiguration {
     /// Trade Analyzer 설정
     #[prost(message, optional, tag="3")]
     pub trade_analyzer: ::core::option::Option<MarketMakingTradeAnalyzer>,
-    /// Momentum 설정 (최근 가격 흐름 → bid/ask 조정)
+    /// MarketBias 설정 (장기 시장 체결 누적 → 영구 skew)
+    #[prost(message, optional, tag="4")]
+    pub market_bias: ::core::option::Option<MarketMakingMarketBias>,
+    /// Momentum 설정 (단기 시장 체결 비율/강도 → 즉각 bid/ask 동일 shift)
     #[prost(message, optional, tag="5")]
     pub momentum: ::core::option::Option<MarketMakingMomentum>,
     /// 통합 포지션 관리 설정
@@ -125,54 +128,74 @@ pub struct KrxNav {
     #[prost(int64, tag="2")]
     pub prev_future: i64,
 }
-/// Trade Analyzer 설정
+/// Trade Analyzer 설정 (갤럭티코 SingleTradeAnalyzer 포팅 — 시장 체결 추종)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MarketMakingTradeAnalyzer {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
-    /// 분석 윈도우 크기
-    #[prost(uint32, tag="2")]
-    pub window: u32,
-    /// Adverse fill ratio 임계값
-    #[prost(double, tag="3")]
-    pub ratio_threshold: f64,
-    /// Take-fill strength 임계값
-    #[prost(double, tag="4")]
-    pub strength_threshold: f64,
-    /// 최대 decoration 틱 수
-    #[prost(int32, tag="5")]
-    pub max_deco_tick: i32,
+    /// 매 체결마다 net/total 에 곱하는 감쇠 비율 (갤럭티코 기본 0.98)
+    #[prost(double, tag="6")]
+    pub count_decay_ratio: f64,
+    /// 시간 감쇠 주기 (초). 0 = 비활성 (갤럭티코 기본 10)
+    #[prost(uint64, tag="7")]
+    pub decay_interval_secs: u64,
+    /// 시간 주기마다 total 에 곱하는 비율 (갤럭티코 기본 0.95)
+    #[prost(double, tag="8")]
+    pub total_decay_ratio: f64,
+    /// 시간 주기마다 net 에 곱하는 비율 (갤럭티코 기본 0.9). total_decay_ratio 보다 작아야 방향성이 먼저 사라짐.
+    #[prost(double, tag="9")]
+    pub net_decay_ratio: f64,
+    /// strength 분모 최소치 (기본 100)
+    #[prost(int64, tag="10")]
+    pub min_book_qty: i64,
 }
-/// Momentum 설정
+/// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MarketMakingMomentum {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
-    /// 최근 가격 샘플을 유지할 시간 창 (ms)
-    #[prost(uint64, tag="2")]
-    pub window_ms: u64,
-    /// 연속 모멘텀 강도를 정규화할 기준 틱 수
-    #[prost(int32, tag="3")]
-    pub trigger_ticks: i32,
-    /// 정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도
-    #[prost(double, tag="4")]
-    pub follow_sensitivity: f64,
-    /// 정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도
-    #[prost(double, tag="5")]
-    pub escape_sensitivity: f64,
-    /// bid 추종 최대 틱 수
-    #[prost(int32, tag="6")]
-    pub max_follow_ticks: i32,
-    /// ask/bid 도망 최대 틱 수
-    #[prost(int32, tag="7")]
-    pub max_escape_ticks: i32,
-    /// 인버스 방향으로 해석할지 여부
+    /// 인버스 ETF: ratio 부호 반전
     #[prost(bool, tag="8")]
     pub is_opposite: bool,
+    /// 최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)
+    #[prost(double, tag="9")]
+    pub max_tick: f64,
+    /// ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
+    #[prost(double, tag="10")]
+    pub ratio_threshold: f64,
+    /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
+    #[prost(double, tag="11")]
+    pub strength_threshold: f64,
+}
+/// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingMarketBias {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 주기 평가 간격 (초, 갤럭티코 accNextUpdateSec 기본 60)
+    #[prost(uint64, tag="2")]
+    pub eval_interval_secs: u64,
+    /// ratio 발동 임계 (기본 0.6)
+    #[prost(double, tag="3")]
+    pub ratio_threshold: f64,
+    /// strength 발동 임계 (기본 0.5)
+    #[prost(double, tag="4")]
+    pub strength_threshold: f64,
+    /// 점수 임계 0~100 (기본 5). 이 위를 통과해야 한 단계 가산.
+    #[prost(int32, tag="5")]
+    pub bias_huddle: i32,
+    /// 1 단계 가산량 (가격 단위, Price internal representation)
+    #[prost(int64, tag="6")]
+    pub bias_unit: i64,
+    /// 누적 상한 절댓값 (가격 단위, Price internal representation)
+    #[prost(int64, tag="7")]
+    pub max_bias: i64,
 }
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -352,7 +375,7 @@ pub struct MarketMakingOrderbookData {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MomentumState {
-    /// 현재 모멘텀 방향 ("up", "down", "neutral")
+    /// 현재 모멘텀 방향 ("none" / "up" / "down")
     #[prost(string, tag="1")]
     pub direction: ::prost::alloc::string::String,
     /// 현재 bid 가격 조정값 (Price internal representation)
@@ -361,32 +384,46 @@ pub struct MomentumState {
     /// 현재 ask 가격 조정값 (Price internal representation)
     #[prost(int64, tag="3")]
     pub ask_adjustment: i64,
-    /// 원시 틱 변화량 (부호 포함)
+    /// 원시 틱 변화량 (부호 포함, 모니터링용)
     #[prost(double, tag="4")]
     pub raw_ticks: f64,
-    /// 정규화 강도 (raw_ticks / trigger_ticks)
-    #[prost(double, tag="5")]
-    pub normalized_strength: f64,
-    /// 실제 적용된 follow 틱
-    #[prost(int32, tag="6")]
-    pub follow_ticks: i32,
-    /// 실제 적용된 escape 틱
-    #[prost(int32, tag="7")]
-    pub escape_ticks: i32,
-    /// 윈도우 내 샘플 수
-    #[prost(int32, tag="8")]
-    pub sample_count: i32,
 }
-/// Trade Analyzer 런타임 상태
+/// Trade Analyzer 런타임 상태 (갤럭티코 SingleTradeAnalyzer 포팅)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TradeAnalyzerState {
-    /// 현재 decoration 틱 수
-    #[prost(int32, tag="1")]
-    pub deco_tick: i32,
-    /// 현재 윈도우 내 체결 횟수
+    /// 매수/매도 누적 비율 ∈ \[-1, +1\]. 매수 우세 +.
+    #[prost(double, tag="3")]
+    pub ratio: f64,
+    /// 체결 강도 ∈ \[0, 1\]. ratio 방향 가중 호가창 잔량 대비 누적 체결량.
+    #[prost(double, tag="4")]
+    pub strength: f64,
+    /// 부호 있는 누적 체결량 (매수 우세 +)
+    #[prost(int64, tag="5")]
+    pub net_amount: i64,
+    /// 절댓값 누적 체결량
+    #[prost(int64, tag="6")]
+    pub total_amount: i64,
+    /// 5단 호가 평균 매수 잔량
+    #[prost(double, tag="7")]
+    pub avg_bid_qty: f64,
+    /// 5단 호가 평균 매도 잔량
+    #[prost(double, tag="8")]
+    pub avg_ask_qty: f64,
+}
+/// MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketBiasState {
+    /// 누적 영구 편향 (가격 단위, Price internal representation)
+    #[prost(int64, tag="1")]
+    pub accumulated_bias: i64,
+    /// 마지막 평가 점수 (0~100)
     #[prost(int32, tag="2")]
-    pub fill_count: i32,
+    pub last_score: i32,
+    /// 누적 평가 횟수
+    #[prost(int64, tag="3")]
+    pub eval_count: i64,
 }
 /// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -426,6 +463,9 @@ pub struct MmStateUpdate {
     /// 순노출 및 재고 균형 상태 (변경 시에만 포함)
     #[prost(message, optional, tag="6")]
     pub exposure_balancer: ::core::option::Option<ExposureBalancerState>,
+    /// MarketBias 상태 (변경 시에만 포함)
+    #[prost(message, optional, tag="11")]
+    pub market_bias: ::core::option::Option<MarketBiasState>,
     /// 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
     #[prost(string, optional, tag="7")]
     pub ask_quote: ::core::option::Option<::prost::alloc::string::String>,

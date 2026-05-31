@@ -795,6 +795,148 @@ impl<'de> serde::Deserialize<'de> for ListMarketMakingResponse {
         deserializer.deserialize_struct("kdo.v1.mm.ListMarketMakingResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for MarketBiasState {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketBiasState", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("accumulated_bias", ToString::to_string(&self.accumulated_bias).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("last_score", &self.last_score)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("eval_count", ToString::to_string(&self.eval_count).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketBiasState {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "accumulated_bias",
+            "accumulatedBias",
+            "last_score",
+            "lastScore",
+            "eval_count",
+            "evalCount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            AccumulatedBias,
+            LastScore,
+            EvalCount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "accumulatedBias" | "accumulated_bias" => Ok(GeneratedField::AccumulatedBias),
+                            "lastScore" | "last_score" => Ok(GeneratedField::LastScore),
+                            "evalCount" | "eval_count" => Ok(GeneratedField::EvalCount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketBiasState;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketBiasState")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketBiasState, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut accumulated_bias__ = None;
+                let mut last_score__ = None;
+                let mut eval_count__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::AccumulatedBias => {
+                            if accumulated_bias__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("accumulatedBias"));
+                            }
+                            accumulated_bias__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LastScore => {
+                            if last_score__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastScore"));
+                            }
+                            last_score__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EvalCount => {
+                            if eval_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("evalCount"));
+                            }
+                            eval_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketBiasState {
+                    accumulated_bias: accumulated_bias__.unwrap_or_default(),
+                    last_score: last_score__.unwrap_or_default(),
+                    eval_count: eval_count__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketBiasState", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for MarketMaking {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1013,6 +1155,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -1022,6 +1167,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         }
         if let Some(v) = self.trade_analyzer.as_ref() {
             struct_ser.serialize_field("trade_analyzer", v)?;
+        }
+        if let Some(v) = self.market_bias.as_ref() {
+            struct_ser.serialize_field("market_bias", v)?;
         }
         if let Some(v) = self.momentum.as_ref() {
             struct_ser.serialize_field("momentum", v)?;
@@ -1083,6 +1231,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "pricing",
             "trade_analyzer",
             "tradeAnalyzer",
+            "market_bias",
+            "marketBias",
             "momentum",
             "exposure_balancer",
             "exposureBalancer",
@@ -1109,6 +1259,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             Enabled,
             Pricing,
             TradeAnalyzer,
+            MarketBias,
             Momentum,
             ExposureBalancer,
             BidAdjustment,
@@ -1144,6 +1295,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "enabled" => Ok(GeneratedField::Enabled),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
+                            "marketBias" | "market_bias" => Ok(GeneratedField::MarketBias),
                             "momentum" => Ok(GeneratedField::Momentum),
                             "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
@@ -1176,6 +1328,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut enabled__ = None;
                 let mut pricing__ = None;
                 let mut trade_analyzer__ = None;
+                let mut market_bias__ = None;
                 let mut momentum__ = None;
                 let mut exposure_balancer__ = None;
                 let mut bid_adjustment__ = None;
@@ -1205,6 +1358,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 return Err(serde::de::Error::duplicate_field("tradeAnalyzer"));
                             }
                             trade_analyzer__ = map_.next_value()?;
+                        }
+                        GeneratedField::MarketBias => {
+                            if market_bias__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("marketBias"));
+                            }
+                            market_bias__ = map_.next_value()?;
                         }
                         GeneratedField::Momentum => {
                             if momentum__.is_some() {
@@ -1291,6 +1450,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     enabled: enabled__.unwrap_or_default(),
                     pricing: pricing__,
                     trade_analyzer: trade_analyzer__,
+                    market_bias: market_bias__,
                     momentum: momentum__,
                     exposure_balancer: exposure_balancer__,
                     bid_adjustment: bid_adjustment__.unwrap_or_default(),
@@ -1462,7 +1622,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MarketMakingMomentum {
+impl serde::Serialize for MarketMakingMarketBias {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -1491,40 +1651,38 @@ impl serde::Serialize for MarketMakingMomentum {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingMomentum", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingMarketBias", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("window_ms", ToString::to_string(&self.window_ms).as_str())?;
+            struct_ser.serialize_field("eval_interval_secs", ToString::to_string(&self.eval_interval_secs).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("trigger_ticks", &self.trigger_ticks)?;
+            struct_ser.serialize_field("ratio_threshold", &self.ratio_threshold)?;
         }
         if true {
-            struct_ser.serialize_field("follow_sensitivity", &self.follow_sensitivity)?;
+            struct_ser.serialize_field("strength_threshold", &self.strength_threshold)?;
         }
         if true {
-            struct_ser.serialize_field("escape_sensitivity", &self.escape_sensitivity)?;
+            struct_ser.serialize_field("bias_huddle", &self.bias_huddle)?;
         }
         if true {
-            struct_ser.serialize_field("max_follow_ticks", &self.max_follow_ticks)?;
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bias_unit", ToString::to_string(&self.bias_unit).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("max_escape_ticks", &self.max_escape_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("is_opposite", &self.is_opposite)?;
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_bias", ToString::to_string(&self.max_bias).as_str())?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
+impl<'de> serde::Deserialize<'de> for MarketMakingMarketBias {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -1532,32 +1690,29 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
     {
         const FIELDS: &[&str] = &[
             "enabled",
-            "window_ms",
-            "windowMs",
-            "trigger_ticks",
-            "triggerTicks",
-            "follow_sensitivity",
-            "followSensitivity",
-            "escape_sensitivity",
-            "escapeSensitivity",
-            "max_follow_ticks",
-            "maxFollowTicks",
-            "max_escape_ticks",
-            "maxEscapeTicks",
-            "is_opposite",
-            "isOpposite",
+            "eval_interval_secs",
+            "evalIntervalSecs",
+            "ratio_threshold",
+            "ratioThreshold",
+            "strength_threshold",
+            "strengthThreshold",
+            "bias_huddle",
+            "biasHuddle",
+            "bias_unit",
+            "biasUnit",
+            "max_bias",
+            "maxBias",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Enabled,
-            WindowMs,
-            TriggerTicks,
-            FollowSensitivity,
-            EscapeSensitivity,
-            MaxFollowTicks,
-            MaxEscapeTicks,
-            IsOpposite,
+            EvalIntervalSecs,
+            RatioThreshold,
+            StrengthThreshold,
+            BiasHuddle,
+            BiasUnit,
+            MaxBias,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1581,13 +1736,207 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
                     {
                         match value {
                             "enabled" => Ok(GeneratedField::Enabled),
-                            "windowMs" | "window_ms" => Ok(GeneratedField::WindowMs),
-                            "triggerTicks" | "trigger_ticks" => Ok(GeneratedField::TriggerTicks),
-                            "followSensitivity" | "follow_sensitivity" => Ok(GeneratedField::FollowSensitivity),
-                            "escapeSensitivity" | "escape_sensitivity" => Ok(GeneratedField::EscapeSensitivity),
-                            "maxFollowTicks" | "max_follow_ticks" => Ok(GeneratedField::MaxFollowTicks),
-                            "maxEscapeTicks" | "max_escape_ticks" => Ok(GeneratedField::MaxEscapeTicks),
+                            "evalIntervalSecs" | "eval_interval_secs" => Ok(GeneratedField::EvalIntervalSecs),
+                            "ratioThreshold" | "ratio_threshold" => Ok(GeneratedField::RatioThreshold),
+                            "strengthThreshold" | "strength_threshold" => Ok(GeneratedField::StrengthThreshold),
+                            "biasHuddle" | "bias_huddle" => Ok(GeneratedField::BiasHuddle),
+                            "biasUnit" | "bias_unit" => Ok(GeneratedField::BiasUnit),
+                            "maxBias" | "max_bias" => Ok(GeneratedField::MaxBias),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingMarketBias;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingMarketBias")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingMarketBias, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut eval_interval_secs__ = None;
+                let mut ratio_threshold__ = None;
+                let mut strength_threshold__ = None;
+                let mut bias_huddle__ = None;
+                let mut bias_unit__ = None;
+                let mut max_bias__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EvalIntervalSecs => {
+                            if eval_interval_secs__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("evalIntervalSecs"));
+                            }
+                            eval_interval_secs__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RatioThreshold => {
+                            if ratio_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ratioThreshold"));
+                            }
+                            ratio_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::StrengthThreshold => {
+                            if strength_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("strengthThreshold"));
+                            }
+                            strength_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BiasHuddle => {
+                            if bias_huddle__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("biasHuddle"));
+                            }
+                            bias_huddle__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BiasUnit => {
+                            if bias_unit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("biasUnit"));
+                            }
+                            bias_unit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxBias => {
+                            if max_bias__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxBias"));
+                            }
+                            max_bias__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingMarketBias {
+                    enabled: enabled__.unwrap_or_default(),
+                    eval_interval_secs: eval_interval_secs__.unwrap_or_default(),
+                    ratio_threshold: ratio_threshold__.unwrap_or_default(),
+                    strength_threshold: strength_threshold__.unwrap_or_default(),
+                    bias_huddle: bias_huddle__.unwrap_or_default(),
+                    bias_unit: bias_unit__.unwrap_or_default(),
+                    max_bias: max_bias__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingMarketBias", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingMomentum {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingMomentum", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("is_opposite", &self.is_opposite)?;
+        }
+        if true {
+            struct_ser.serialize_field("max_tick", &self.max_tick)?;
+        }
+        if true {
+            struct_ser.serialize_field("ratio_threshold", &self.ratio_threshold)?;
+        }
+        if true {
+            struct_ser.serialize_field("strength_threshold", &self.strength_threshold)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "is_opposite",
+            "isOpposite",
+            "max_tick",
+            "maxTick",
+            "ratio_threshold",
+            "ratioThreshold",
+            "strength_threshold",
+            "strengthThreshold",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            IsOpposite,
+            MaxTick,
+            RatioThreshold,
+            StrengthThreshold,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
                             "isOpposite" | "is_opposite" => Ok(GeneratedField::IsOpposite),
+                            "maxTick" | "max_tick" => Ok(GeneratedField::MaxTick),
+                            "ratioThreshold" | "ratio_threshold" => Ok(GeneratedField::RatioThreshold),
+                            "strengthThreshold" | "strength_threshold" => Ok(GeneratedField::StrengthThreshold),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1608,13 +1957,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut enabled__ = None;
-                let mut window_ms__ = None;
-                let mut trigger_ticks__ = None;
-                let mut follow_sensitivity__ = None;
-                let mut escape_sensitivity__ = None;
-                let mut max_follow_ticks__ = None;
-                let mut max_escape_ticks__ = None;
                 let mut is_opposite__ = None;
+                let mut max_tick__ = None;
+                let mut ratio_threshold__ = None;
+                let mut strength_threshold__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -1623,59 +1969,35 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
                             }
                             enabled__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::WindowMs => {
-                            if window_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("windowMs"));
-                            }
-                            window_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::TriggerTicks => {
-                            if trigger_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("triggerTicks"));
-                            }
-                            trigger_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::FollowSensitivity => {
-                            if follow_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("followSensitivity"));
-                            }
-                            follow_sensitivity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::EscapeSensitivity => {
-                            if escape_sensitivity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("escapeSensitivity"));
-                            }
-                            escape_sensitivity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MaxFollowTicks => {
-                            if max_follow_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxFollowTicks"));
-                            }
-                            max_follow_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::MaxEscapeTicks => {
-                            if max_escape_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxEscapeTicks"));
-                            }
-                            max_escape_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::IsOpposite => {
                             if is_opposite__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("isOpposite"));
                             }
                             is_opposite__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::MaxTick => {
+                            if max_tick__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxTick"));
+                            }
+                            max_tick__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RatioThreshold => {
+                            if ratio_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ratioThreshold"));
+                            }
+                            ratio_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::StrengthThreshold => {
+                            if strength_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("strengthThreshold"));
+                            }
+                            strength_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1684,13 +2006,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
                 }
                 Ok(MarketMakingMomentum {
                     enabled: enabled__.unwrap_or_default(),
-                    window_ms: window_ms__.unwrap_or_default(),
-                    trigger_ticks: trigger_ticks__.unwrap_or_default(),
-                    follow_sensitivity: follow_sensitivity__.unwrap_or_default(),
-                    escape_sensitivity: escape_sensitivity__.unwrap_or_default(),
-                    max_follow_ticks: max_follow_ticks__.unwrap_or_default(),
-                    max_escape_ticks: max_escape_ticks__.unwrap_or_default(),
                     is_opposite: is_opposite__.unwrap_or_default(),
+                    max_tick: max_tick__.unwrap_or_default(),
+                    ratio_threshold: ratio_threshold__.unwrap_or_default(),
+                    strength_threshold: strength_threshold__.unwrap_or_default(),
                 })
             }
         }
@@ -2092,21 +2411,31 @@ impl serde::Serialize for MarketMakingTradeAnalyzer {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingTradeAnalyzer", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
         if true {
-            struct_ser.serialize_field("window", &self.window)?;
+            struct_ser.serialize_field("count_decay_ratio", &self.count_decay_ratio)?;
         }
         if true {
-            struct_ser.serialize_field("ratio_threshold", &self.ratio_threshold)?;
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("decay_interval_secs", ToString::to_string(&self.decay_interval_secs).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("strength_threshold", &self.strength_threshold)?;
+            struct_ser.serialize_field("total_decay_ratio", &self.total_decay_ratio)?;
         }
         if true {
-            struct_ser.serialize_field("max_deco_tick", &self.max_deco_tick)?;
+            struct_ser.serialize_field("net_decay_ratio", &self.net_decay_ratio)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("min_book_qty", ToString::to_string(&self.min_book_qty).as_str())?;
         }
         struct_ser.end()
     }
@@ -2119,22 +2448,26 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
     {
         const FIELDS: &[&str] = &[
             "enabled",
-            "window",
-            "ratio_threshold",
-            "ratioThreshold",
-            "strength_threshold",
-            "strengthThreshold",
-            "max_deco_tick",
-            "maxDecoTick",
+            "count_decay_ratio",
+            "countDecayRatio",
+            "decay_interval_secs",
+            "decayIntervalSecs",
+            "total_decay_ratio",
+            "totalDecayRatio",
+            "net_decay_ratio",
+            "netDecayRatio",
+            "min_book_qty",
+            "minBookQty",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Enabled,
-            Window,
-            RatioThreshold,
-            StrengthThreshold,
-            MaxDecoTick,
+            CountDecayRatio,
+            DecayIntervalSecs,
+            TotalDecayRatio,
+            NetDecayRatio,
+            MinBookQty,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2158,10 +2491,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                     {
                         match value {
                             "enabled" => Ok(GeneratedField::Enabled),
-                            "window" => Ok(GeneratedField::Window),
-                            "ratioThreshold" | "ratio_threshold" => Ok(GeneratedField::RatioThreshold),
-                            "strengthThreshold" | "strength_threshold" => Ok(GeneratedField::StrengthThreshold),
-                            "maxDecoTick" | "max_deco_tick" => Ok(GeneratedField::MaxDecoTick),
+                            "countDecayRatio" | "count_decay_ratio" => Ok(GeneratedField::CountDecayRatio),
+                            "decayIntervalSecs" | "decay_interval_secs" => Ok(GeneratedField::DecayIntervalSecs),
+                            "totalDecayRatio" | "total_decay_ratio" => Ok(GeneratedField::TotalDecayRatio),
+                            "netDecayRatio" | "net_decay_ratio" => Ok(GeneratedField::NetDecayRatio),
+                            "minBookQty" | "min_book_qty" => Ok(GeneratedField::MinBookQty),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2182,10 +2516,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut enabled__ = None;
-                let mut window__ = None;
-                let mut ratio_threshold__ = None;
-                let mut strength_threshold__ = None;
-                let mut max_deco_tick__ = None;
+                let mut count_decay_ratio__ = None;
+                let mut decay_interval_secs__ = None;
+                let mut total_decay_ratio__ = None;
+                let mut net_decay_ratio__ = None;
+                let mut min_book_qty__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -2194,35 +2529,43 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                             }
                             enabled__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Window => {
-                            if window__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("window"));
+                        GeneratedField::CountDecayRatio => {
+                            if count_decay_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("countDecayRatio"));
                             }
-                            window__ = 
+                            count_decay_ratio__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::RatioThreshold => {
-                            if ratio_threshold__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("ratioThreshold"));
+                        GeneratedField::DecayIntervalSecs => {
+                            if decay_interval_secs__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decayIntervalSecs"));
                             }
-                            ratio_threshold__ = 
+                            decay_interval_secs__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::StrengthThreshold => {
-                            if strength_threshold__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("strengthThreshold"));
+                        GeneratedField::TotalDecayRatio => {
+                            if total_decay_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalDecayRatio"));
                             }
-                            strength_threshold__ = 
+                            total_decay_ratio__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::MaxDecoTick => {
-                            if max_deco_tick__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxDecoTick"));
+                        GeneratedField::NetDecayRatio => {
+                            if net_decay_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netDecayRatio"));
                             }
-                            max_deco_tick__ = 
+                            net_decay_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MinBookQty => {
+                            if min_book_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minBookQty"));
+                            }
+                            min_book_qty__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -2233,10 +2576,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                 }
                 Ok(MarketMakingTradeAnalyzer {
                     enabled: enabled__.unwrap_or_default(),
-                    window: window__.unwrap_or_default(),
-                    ratio_threshold: ratio_threshold__.unwrap_or_default(),
-                    strength_threshold: strength_threshold__.unwrap_or_default(),
-                    max_deco_tick: max_deco_tick__.unwrap_or_default(),
+                    count_decay_ratio: count_decay_ratio__.unwrap_or_default(),
+                    decay_interval_secs: decay_interval_secs__.unwrap_or_default(),
+                    total_decay_ratio: total_decay_ratio__.unwrap_or_default(),
+                    net_decay_ratio: net_decay_ratio__.unwrap_or_default(),
+                    min_book_qty: min_book_qty__.unwrap_or_default(),
                 })
             }
         }
@@ -2350,6 +2694,9 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2367,6 +2714,9 @@ impl serde::Serialize for MmStateUpdate {
         }
         if let Some(v) = self.exposure_balancer.as_ref() {
             struct_ser.serialize_field("exposure_balancer", v)?;
+        }
+        if let Some(v) = self.market_bias.as_ref() {
+            struct_ser.serialize_field("market_bias", v)?;
         }
         if let Some(v) = self.ask_quote.as_ref() {
             struct_ser.serialize_field("ask_quote", v)?;
@@ -2397,6 +2747,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "tradeAnalyzer",
             "exposure_balancer",
             "exposureBalancer",
+            "market_bias",
+            "marketBias",
             "ask_quote",
             "askQuote",
             "bid_quote",
@@ -2414,6 +2766,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             Momentum,
             TradeAnalyzer,
             ExposureBalancer,
+            MarketBias,
             AskQuote,
             BidQuote,
             BidOffset,
@@ -2445,6 +2798,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "momentum" => Ok(GeneratedField::Momentum),
                             "tradeAnalyzer" | "trade_analyzer" => Ok(GeneratedField::TradeAnalyzer),
                             "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
+                            "marketBias" | "market_bias" => Ok(GeneratedField::MarketBias),
                             "askQuote" | "ask_quote" => Ok(GeneratedField::AskQuote),
                             "bidQuote" | "bid_quote" => Ok(GeneratedField::BidQuote),
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
@@ -2473,6 +2827,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut momentum__ = None;
                 let mut trade_analyzer__ = None;
                 let mut exposure_balancer__ = None;
+                let mut market_bias__ = None;
                 let mut ask_quote__ = None;
                 let mut bid_quote__ = None;
                 let mut bid_offset__ = None;
@@ -2509,6 +2864,12 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             exposure_balancer__ = map_.next_value()?;
                         }
+                        GeneratedField::MarketBias => {
+                            if market_bias__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("marketBias"));
+                            }
+                            market_bias__ = map_.next_value()?;
+                        }
                         GeneratedField::AskQuote => {
                             if ask_quote__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askQuote"));
@@ -2544,6 +2905,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     momentum: momentum__,
                     trade_analyzer: trade_analyzer__,
                     exposure_balancer: exposure_balancer__,
+                    market_bias: market_bias__,
                     ask_quote: ask_quote__,
                     bid_quote: bid_quote__,
                     bid_offset: bid_offset__,
@@ -2574,18 +2936,6 @@ impl serde::Serialize for MomentumState {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MomentumState", len)?;
         if true {
             struct_ser.serialize_field("direction", &self.direction)?;
@@ -2602,18 +2952,6 @@ impl serde::Serialize for MomentumState {
         }
         if true {
             struct_ser.serialize_field("raw_ticks", &self.raw_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("normalized_strength", &self.normalized_strength)?;
-        }
-        if true {
-            struct_ser.serialize_field("follow_ticks", &self.follow_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("escape_ticks", &self.escape_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("sample_count", &self.sample_count)?;
         }
         struct_ser.end()
     }
@@ -2632,14 +2970,6 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
             "askAdjustment",
             "raw_ticks",
             "rawTicks",
-            "normalized_strength",
-            "normalizedStrength",
-            "follow_ticks",
-            "followTicks",
-            "escape_ticks",
-            "escapeTicks",
-            "sample_count",
-            "sampleCount",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2648,10 +2978,6 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
             BidAdjustment,
             AskAdjustment,
             RawTicks,
-            NormalizedStrength,
-            FollowTicks,
-            EscapeTicks,
-            SampleCount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2678,10 +3004,6 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "rawTicks" | "raw_ticks" => Ok(GeneratedField::RawTicks),
-                            "normalizedStrength" | "normalized_strength" => Ok(GeneratedField::NormalizedStrength),
-                            "followTicks" | "follow_ticks" => Ok(GeneratedField::FollowTicks),
-                            "escapeTicks" | "escape_ticks" => Ok(GeneratedField::EscapeTicks),
-                            "sampleCount" | "sample_count" => Ok(GeneratedField::SampleCount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2705,10 +3027,6 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
                 let mut raw_ticks__ = None;
-                let mut normalized_strength__ = None;
-                let mut follow_ticks__ = None;
-                let mut escape_ticks__ = None;
-                let mut sample_count__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Direction => {
@@ -2741,38 +3059,6 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::NormalizedStrength => {
-                            if normalized_strength__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("normalizedStrength"));
-                            }
-                            normalized_strength__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::FollowTicks => {
-                            if follow_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("followTicks"));
-                            }
-                            follow_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::EscapeTicks => {
-                            if escape_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("escapeTicks"));
-                            }
-                            escape_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SampleCount => {
-                            if sample_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sampleCount"));
-                            }
-                            sample_count__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2783,10 +3069,6 @@ impl<'de> serde::Deserialize<'de> for MomentumState {
                     bid_adjustment: bid_adjustment__.unwrap_or_default(),
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
                     raw_ticks: raw_ticks__.unwrap_or_default(),
-                    normalized_strength: normalized_strength__.unwrap_or_default(),
-                    follow_ticks: follow_ticks__.unwrap_or_default(),
-                    escape_ticks: escape_ticks__.unwrap_or_default(),
-                    sample_count: sample_count__.unwrap_or_default(),
                 })
             }
         }
@@ -3791,12 +4073,40 @@ impl serde::Serialize for TradeAnalyzerState {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.TradeAnalyzerState", len)?;
         if true {
-            struct_ser.serialize_field("deco_tick", &self.deco_tick)?;
+            len += 1;
         }
         if true {
-            struct_ser.serialize_field("fill_count", &self.fill_count)?;
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.TradeAnalyzerState", len)?;
+        if true {
+            struct_ser.serialize_field("ratio", &self.ratio)?;
+        }
+        if true {
+            struct_ser.serialize_field("strength", &self.strength)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_amount", ToString::to_string(&self.net_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_amount", ToString::to_string(&self.total_amount).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("avg_bid_qty", &self.avg_bid_qty)?;
+        }
+        if true {
+            struct_ser.serialize_field("avg_ask_qty", &self.avg_ask_qty)?;
         }
         struct_ser.end()
     }
@@ -3808,16 +4118,26 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "deco_tick",
-            "decoTick",
-            "fill_count",
-            "fillCount",
+            "ratio",
+            "strength",
+            "net_amount",
+            "netAmount",
+            "total_amount",
+            "totalAmount",
+            "avg_bid_qty",
+            "avgBidQty",
+            "avg_ask_qty",
+            "avgAskQty",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            DecoTick,
-            FillCount,
+            Ratio,
+            Strength,
+            NetAmount,
+            TotalAmount,
+            AvgBidQty,
+            AvgAskQty,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3840,8 +4160,12 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
                         E: serde::de::Error,
                     {
                         match value {
-                            "decoTick" | "deco_tick" => Ok(GeneratedField::DecoTick),
-                            "fillCount" | "fill_count" => Ok(GeneratedField::FillCount),
+                            "ratio" => Ok(GeneratedField::Ratio),
+                            "strength" => Ok(GeneratedField::Strength),
+                            "netAmount" | "net_amount" => Ok(GeneratedField::NetAmount),
+                            "totalAmount" | "total_amount" => Ok(GeneratedField::TotalAmount),
+                            "avgBidQty" | "avg_bid_qty" => Ok(GeneratedField::AvgBidQty),
+                            "avgAskQty" | "avg_ask_qty" => Ok(GeneratedField::AvgAskQty),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3861,23 +4185,59 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut deco_tick__ = None;
-                let mut fill_count__ = None;
+                let mut ratio__ = None;
+                let mut strength__ = None;
+                let mut net_amount__ = None;
+                let mut total_amount__ = None;
+                let mut avg_bid_qty__ = None;
+                let mut avg_ask_qty__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::DecoTick => {
-                            if deco_tick__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("decoTick"));
+                        GeneratedField::Ratio => {
+                            if ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ratio"));
                             }
-                            deco_tick__ = 
+                            ratio__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::FillCount => {
-                            if fill_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fillCount"));
+                        GeneratedField::Strength => {
+                            if strength__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("strength"));
                             }
-                            fill_count__ = 
+                            strength__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetAmount => {
+                            if net_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netAmount"));
+                            }
+                            net_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TotalAmount => {
+                            if total_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalAmount"));
+                            }
+                            total_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AvgBidQty => {
+                            if avg_bid_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("avgBidQty"));
+                            }
+                            avg_bid_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AvgAskQty => {
+                            if avg_ask_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("avgAskQty"));
+                            }
+                            avg_ask_qty__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -3887,8 +4247,12 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
                     }
                 }
                 Ok(TradeAnalyzerState {
-                    deco_tick: deco_tick__.unwrap_or_default(),
-                    fill_count: fill_count__.unwrap_or_default(),
+                    ratio: ratio__.unwrap_or_default(),
+                    strength: strength__.unwrap_or_default(),
+                    net_amount: net_amount__.unwrap_or_default(),
+                    total_amount: total_amount__.unwrap_or_default(),
+                    avg_bid_qty: avg_bid_qty__.unwrap_or_default(),
+                    avg_ask_qty: avg_ask_qty__.unwrap_or_default(),
                 })
             }
         }

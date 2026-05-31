@@ -517,6 +517,27 @@
         }
       }
     },
+    "mmMarketBiasState": {
+      "type": "object",
+      "properties": {
+        "accumulatedBias": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 영구 편향 (가격 단위, Price internal representation)"
+        },
+        "lastScore": {
+          "type": "integer",
+          "format": "int32",
+          "title": "마지막 평가 점수 (0~100)"
+        },
+        "evalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 평가 횟수"
+        }
+      },
+      "title": "MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)"
+    },
     "mmMarketMaking": {
       "type": "object",
       "properties": {
@@ -559,9 +580,13 @@
           "$ref": "#/definitions/mmMarketMakingTradeAnalyzer",
           "title": "Trade Analyzer 설정"
         },
+        "marketBias": {
+          "$ref": "#/definitions/mmMarketMakingMarketBias",
+          "title": "MarketBias 설정 (장기 시장 체결 누적 → 영구 skew)"
+        },
         "momentum": {
           "$ref": "#/definitions/mmMarketMakingMomentum",
-          "title": "Momentum 설정 (최근 가격 흐름 → bid/ask 조정)"
+          "title": "Momentum 설정 (단기 시장 체결 비율/강도 → 즉각 bid/ask 동일 shift)"
         },
         "exposureBalancer": {
           "$ref": "#/definitions/mmMarketMakingExposureBalancer",
@@ -635,6 +660,46 @@
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"
     },
+    "mmMarketMakingMarketBias": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "evalIntervalSecs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "주기 평가 간격 (초, 갤럭티코 accNextUpdateSec 기본 60)"
+        },
+        "ratioThreshold": {
+          "type": "number",
+          "format": "double",
+          "title": "ratio 발동 임계 (기본 0.6)"
+        },
+        "strengthThreshold": {
+          "type": "number",
+          "format": "double",
+          "title": "strength 발동 임계 (기본 0.5)"
+        },
+        "biasHuddle": {
+          "type": "integer",
+          "format": "int32",
+          "description": "점수 임계 0~100 (기본 5). 이 위를 통과해야 한 단계 가산."
+        },
+        "biasUnit": {
+          "type": "string",
+          "format": "int64",
+          "title": "1 단계 가산량 (가격 단위, Price internal representation)"
+        },
+        "maxBias": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 상한 절댓값 (가격 단위, Price internal representation)"
+        }
+      },
+      "title": "MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)"
+    },
     "mmMarketMakingMomentum": {
       "type": "object",
       "properties": {
@@ -642,42 +707,27 @@
           "type": "boolean",
           "title": "활성화 여부"
         },
-        "windowMs": {
-          "type": "string",
-          "format": "uint64",
-          "title": "최근 가격 샘플을 유지할 시간 창 (ms)"
-        },
-        "triggerTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "연속 모멘텀 강도를 정규화할 기준 틱 수"
-        },
-        "followSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "정규화된 모멘텀 강도를 bid 추종 틱으로 바꾸는 민감도"
-        },
-        "escapeSensitivity": {
-          "type": "number",
-          "format": "double",
-          "title": "정규화된 모멘텀 강도를 ask/bid 도망 틱으로 바꾸는 민감도"
-        },
-        "maxFollowTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "bid 추종 최대 틱 수"
-        },
-        "maxEscapeTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "ask/bid 도망 최대 틱 수"
-        },
         "isOpposite": {
           "type": "boolean",
-          "title": "인버스 방향으로 해석할지 여부"
+          "title": "인버스 ETF: ratio 부호 반전"
+        },
+        "maxTick": {
+          "type": "number",
+          "format": "double",
+          "title": "최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)"
+        },
+        "ratioThreshold": {
+          "type": "number",
+          "format": "double",
+          "title": "ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)"
+        },
+        "strengthThreshold": {
+          "type": "number",
+          "format": "double",
+          "title": "strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)"
         }
       },
-      "title": "Momentum 설정"
+      "title": "Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)"
     },
     "mmMarketMakingOrderbookData": {
       "type": "object",
@@ -755,28 +805,33 @@
           "type": "boolean",
           "title": "활성화 여부"
         },
-        "window": {
-          "type": "integer",
+        "countDecayRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "매 체결마다 net/total 에 곱하는 감쇠 비율 (갤럭티코 기본 0.98)"
+        },
+        "decayIntervalSecs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "시간 감쇠 주기 (초). 0 = 비활성 (갤럭티코 기본 10)"
+        },
+        "totalDecayRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "시간 주기마다 total 에 곱하는 비율 (갤럭티코 기본 0.95)"
+        },
+        "netDecayRatio": {
+          "type": "number",
+          "format": "double",
+          "description": "시간 주기마다 net 에 곱하는 비율 (갤럭티코 기본 0.9). total_decay_ratio 보다 작아야 방향성이 먼저 사라짐."
+        },
+        "minBookQty": {
+          "type": "string",
           "format": "int64",
-          "title": "분석 윈도우 크기"
-        },
-        "ratioThreshold": {
-          "type": "number",
-          "format": "double",
-          "title": "Adverse fill ratio 임계값"
-        },
-        "strengthThreshold": {
-          "type": "number",
-          "format": "double",
-          "title": "Take-fill strength 임계값"
-        },
-        "maxDecoTick": {
-          "type": "integer",
-          "format": "int32",
-          "title": "최대 decoration 틱 수"
+          "title": "strength 분모 최소치 (기본 100)"
         }
       },
-      "title": "Trade Analyzer 설정"
+      "title": "Trade Analyzer 설정 (갤럭티코 SingleTradeAnalyzer 포팅 — 시장 체결 추종)"
     },
     "mmMeanBidAsk": {
       "type": "object",
@@ -805,6 +860,10 @@
           "$ref": "#/definitions/mmExposureBalancerState",
           "title": "순노출 및 재고 균형 상태 (변경 시에만 포함)"
         },
+        "marketBias": {
+          "$ref": "#/definitions/mmMarketBiasState",
+          "title": "MarketBias 상태 (변경 시에만 포함)"
+        },
         "askQuote": {
           "type": "string",
           "title": "현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)"
@@ -829,7 +888,7 @@
       "properties": {
         "direction": {
           "type": "string",
-          "title": "현재 모멘텀 방향 (\"up\", \"down\", \"neutral\")"
+          "title": "현재 모멘텀 방향 (\"none\" / \"up\" / \"down\")"
         },
         "bidAdjustment": {
           "type": "string",
@@ -844,27 +903,7 @@
         "rawTicks": {
           "type": "number",
           "format": "double",
-          "title": "원시 틱 변화량 (부호 포함)"
-        },
-        "normalizedStrength": {
-          "type": "number",
-          "format": "double",
-          "title": "정규화 강도 (raw_ticks / trigger_ticks)"
-        },
-        "followTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "실제 적용된 follow 틱"
-        },
-        "escapeTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "실제 적용된 escape 틱"
-        },
-        "sampleCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "윈도우 내 샘플 수"
+          "title": "원시 틱 변화량 (부호 포함, 모니터링용)"
         }
       },
       "title": "Momentum 런타임 상태"
@@ -908,18 +947,38 @@
     "mmTradeAnalyzerState": {
       "type": "object",
       "properties": {
-        "decoTick": {
-          "type": "integer",
-          "format": "int32",
-          "title": "현재 decoration 틱 수"
+        "ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "매수/매도 누적 비율 ∈ [-1, +1]. 매수 우세 +."
         },
-        "fillCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "현재 윈도우 내 체결 횟수"
+        "strength": {
+          "type": "number",
+          "format": "double",
+          "description": "체결 강도 ∈ [0, 1]. ratio 방향 가중 호가창 잔량 대비 누적 체결량."
+        },
+        "netAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "부호 있는 누적 체결량 (매수 우세 +)"
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "절댓값 누적 체결량"
+        },
+        "avgBidQty": {
+          "type": "number",
+          "format": "double",
+          "title": "5단 호가 평균 매수 잔량"
+        },
+        "avgAskQty": {
+          "type": "number",
+          "format": "double",
+          "title": "5단 호가 평균 매도 잔량"
         }
       },
-      "title": "Trade Analyzer 런타임 상태"
+      "title": "Trade Analyzer 런타임 상태 (갤럭티코 SingleTradeAnalyzer 포팅)"
     },
     "protobufAny": {
       "type": "object",
