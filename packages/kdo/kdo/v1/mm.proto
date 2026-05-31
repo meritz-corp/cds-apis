@@ -141,28 +141,28 @@ message MarketMakingConfiguration {
   MarketMakingExposureBalancer exposure_balancer = 6;
 
   // 기준가격 대비 bid 조정값 (Price internal representation)
-  int64 bid_adjustment = 10;
+  int64 bid_adjustment = 7;
 
   // 기준가격 대비 ask 조정값 (Price internal representation)
-  int64 ask_adjustment = 11;
+  int64 ask_adjustment = 8;
 
   // 레벨당 매수 수량
-  int64 bid_quantity = 12;
+  int64 bid_quantity = 9;
 
   // 레벨당 매도 수량
-  int64 ask_quantity = 13;
+  int64 ask_quantity = 10;
 
   // NAV 계산용 bid basis (Price internal representation)
-  int64 bid_basis = 14;
+  int64 bid_basis = 11;
 
   // NAV 계산용 ask basis (Price internal representation)
-  int64 ask_basis = 15;
+  int64 ask_basis = 12;
 
   // NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
-  int64 bid_offset = 16;
+  int64 bid_offset = 13;
 
   // NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
-  int64 ask_offset = 17;
+  int64 ask_offset = 14;
 }
 
 // NAV pricing 상세 설정
@@ -209,24 +209,20 @@ message MarketMakingTradeAnalyzer {
   // 활성화 여부
   bool enabled = 1;
 
-  // 폐기된 필드 (구 adverse selection 의미). 재사용 금지.
-  reserved 2, 3, 4, 5;
-  reserved "window", "ratio_threshold", "strength_threshold", "max_deco_tick";
-
   // 매 체결마다 net/total 에 곱하는 감쇠 비율 (갤럭티코 기본 0.98)
-  double count_decay_ratio = 6;
+  double count_decay_ratio = 2;
 
   // 시간 감쇠 주기 (초). 0 = 비활성 (갤럭티코 기본 10)
-  uint64 decay_interval_secs = 7;
+  uint64 decay_interval_secs = 3;
 
   // 시간 주기마다 total 에 곱하는 비율 (갤럭티코 기본 0.95)
-  double total_decay_ratio = 8;
+  double total_decay_ratio = 4;
 
   // 시간 주기마다 net 에 곱하는 비율 (갤럭티코 기본 0.9). total_decay_ratio 보다 작아야 방향성이 먼저 사라짐.
-  double net_decay_ratio = 9;
+  double net_decay_ratio = 5;
 
   // strength 분모 최소치 (기본 100)
-  int64 min_book_qty = 10;
+  int64 min_book_qty = 6;
 }
 
 // Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
@@ -234,21 +230,17 @@ message MarketMakingMomentum {
   // 활성화 여부
   bool enabled = 1;
 
-  // 폐기된 필드 (구 가격 시계열 follow/escape 의미). 재사용 금지.
-  reserved 2, 3, 4, 5, 6, 7;
-  reserved "window_ms", "trigger_ticks", "follow_sensitivity", "escape_sensitivity", "max_follow_ticks", "max_escape_ticks";
-
   // 인버스 ETF: ratio 부호 반전
-  bool is_opposite = 8;
+  bool is_opposite = 2;
 
   // 최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)
-  double max_tick = 9;
+  double max_tick = 3;
 
   // ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
-  double ratio_threshold = 10;
+  double ratio_threshold = 4;
 
   // strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
-  double strength_threshold = 11;
+  double strength_threshold = 5;
 }
 
 // MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)
@@ -430,35 +422,27 @@ message MomentumState {
 
   // 원시 틱 변화량 (부호 포함, 모니터링용)
   double raw_ticks = 4;
-
-  // 폐기된 필드 (구 follow/escape 모델). 재사용 금지.
-  reserved 5, 6, 7, 8;
-  reserved "normalized_strength", "follow_ticks", "escape_ticks", "sample_count";
 }
 
 // Trade Analyzer 런타임 상태 (갤럭티코 SingleTradeAnalyzer 포팅)
 message TradeAnalyzerState {
-  // 폐기된 필드 (구 adverse selection 의미). 재사용 금지.
-  reserved 1, 2;
-  reserved "deco_tick", "fill_count";
-
   // 매수/매도 누적 비율 ∈ [-1, +1]. 매수 우세 +.
-  double ratio = 3;
+  double ratio = 1;
 
   // 체결 강도 ∈ [0, 1]. ratio 방향 가중 호가창 잔량 대비 누적 체결량.
-  double strength = 4;
+  double strength = 2;
 
   // 부호 있는 누적 체결량 (매수 우세 +)
-  int64 net_amount = 5;
+  int64 net_amount = 3;
 
   // 절댓값 누적 체결량
-  int64 total_amount = 6;
+  int64 total_amount = 4;
 
   // 5단 호가 평균 매수 잔량
-  double avg_bid_qty = 7;
+  double avg_bid_qty = 5;
 
   // 5단 호가 평균 매도 잔량
-  double avg_ask_qty = 8;
+  double avg_ask_qty = 6;
 }
 
 // MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
@@ -495,22 +479,20 @@ message MmStateUpdate {
   // ISIN 심볼 (항상 포함)
   string symbol = 1;
 
-  reserved 2; // timestamp (deprecated, removed)
-
   // MM 상태 (변경 시에만 포함)
-  optional MarketMakingState state = 3;
+  optional MarketMakingState state = 2;
 
   // Momentum 상태 (변경 시에만 포함)
-  optional MomentumState momentum = 4;
+  optional MomentumState momentum = 3;
 
   // Trade Analyzer 상태 (변경 시에만 포함)
-  optional TradeAnalyzerState trade_analyzer = 5;
+  optional TradeAnalyzerState trade_analyzer = 4;
 
   // 순노출 및 재고 균형 상태 (변경 시에만 포함)
-  optional ExposureBalancerState exposure_balancer = 6;
+  optional ExposureBalancerState exposure_balancer = 5;
 
   // MarketBias 상태 (변경 시에만 포함)
-  optional MarketBiasState market_bias = 11;
+  optional MarketBiasState market_bias = 6;
 
   // 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
   optional string ask_quote = 7;

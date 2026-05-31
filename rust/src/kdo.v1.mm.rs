@@ -47,28 +47,28 @@ pub struct MarketMakingConfiguration {
     #[prost(message, optional, tag="6")]
     pub exposure_balancer: ::core::option::Option<MarketMakingExposureBalancer>,
     /// 기준가격 대비 bid 조정값 (Price internal representation)
-    #[prost(int64, tag="10")]
+    #[prost(int64, tag="7")]
     pub bid_adjustment: i64,
     /// 기준가격 대비 ask 조정값 (Price internal representation)
-    #[prost(int64, tag="11")]
+    #[prost(int64, tag="8")]
     pub ask_adjustment: i64,
     /// 레벨당 매수 수량
-    #[prost(int64, tag="12")]
+    #[prost(int64, tag="9")]
     pub bid_quantity: i64,
     /// 레벨당 매도 수량
-    #[prost(int64, tag="13")]
+    #[prost(int64, tag="10")]
     pub ask_quantity: i64,
     /// NAV 계산용 bid basis (Price internal representation)
-    #[prost(int64, tag="14")]
+    #[prost(int64, tag="11")]
     pub bid_basis: i64,
     /// NAV 계산용 ask basis (Price internal representation)
-    #[prost(int64, tag="15")]
+    #[prost(int64, tag="12")]
     pub ask_basis: i64,
     /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
-    #[prost(int64, tag="16")]
+    #[prost(int64, tag="13")]
     pub bid_offset: i64,
     /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
-    #[prost(int64, tag="17")]
+    #[prost(int64, tag="14")]
     pub ask_offset: i64,
 }
 /// NAV pricing 상세 설정
@@ -136,19 +136,19 @@ pub struct MarketMakingTradeAnalyzer {
     #[prost(bool, tag="1")]
     pub enabled: bool,
     /// 매 체결마다 net/total 에 곱하는 감쇠 비율 (갤럭티코 기본 0.98)
-    #[prost(double, tag="6")]
+    #[prost(double, tag="2")]
     pub count_decay_ratio: f64,
     /// 시간 감쇠 주기 (초). 0 = 비활성 (갤럭티코 기본 10)
-    #[prost(uint64, tag="7")]
+    #[prost(uint64, tag="3")]
     pub decay_interval_secs: u64,
     /// 시간 주기마다 total 에 곱하는 비율 (갤럭티코 기본 0.95)
-    #[prost(double, tag="8")]
+    #[prost(double, tag="4")]
     pub total_decay_ratio: f64,
     /// 시간 주기마다 net 에 곱하는 비율 (갤럭티코 기본 0.9). total_decay_ratio 보다 작아야 방향성이 먼저 사라짐.
-    #[prost(double, tag="9")]
+    #[prost(double, tag="5")]
     pub net_decay_ratio: f64,
     /// strength 분모 최소치 (기본 100)
-    #[prost(int64, tag="10")]
+    #[prost(int64, tag="6")]
     pub min_book_qty: i64,
 }
 /// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
@@ -159,16 +159,16 @@ pub struct MarketMakingMomentum {
     #[prost(bool, tag="1")]
     pub enabled: bool,
     /// 인버스 ETF: ratio 부호 반전
-    #[prost(bool, tag="8")]
+    #[prost(bool, tag="2")]
     pub is_opposite: bool,
     /// 최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)
-    #[prost(double, tag="9")]
+    #[prost(double, tag="3")]
     pub max_tick: f64,
     /// ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
-    #[prost(double, tag="10")]
+    #[prost(double, tag="4")]
     pub ratio_threshold: f64,
     /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
-    #[prost(double, tag="11")]
+    #[prost(double, tag="5")]
     pub strength_threshold: f64,
 }
 /// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)
@@ -393,22 +393,22 @@ pub struct MomentumState {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TradeAnalyzerState {
     /// 매수/매도 누적 비율 ∈ \[-1, +1\]. 매수 우세 +.
-    #[prost(double, tag="3")]
+    #[prost(double, tag="1")]
     pub ratio: f64,
     /// 체결 강도 ∈ \[0, 1\]. ratio 방향 가중 호가창 잔량 대비 누적 체결량.
-    #[prost(double, tag="4")]
+    #[prost(double, tag="2")]
     pub strength: f64,
     /// 부호 있는 누적 체결량 (매수 우세 +)
-    #[prost(int64, tag="5")]
+    #[prost(int64, tag="3")]
     pub net_amount: i64,
     /// 절댓값 누적 체결량
-    #[prost(int64, tag="6")]
+    #[prost(int64, tag="4")]
     pub total_amount: i64,
     /// 5단 호가 평균 매수 잔량
-    #[prost(double, tag="7")]
+    #[prost(double, tag="5")]
     pub avg_bid_qty: f64,
     /// 5단 호가 평균 매도 잔량
-    #[prost(double, tag="8")]
+    #[prost(double, tag="6")]
     pub avg_ask_qty: f64,
 }
 /// MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
@@ -452,19 +452,19 @@ pub struct MmStateUpdate {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// MM 상태 (변경 시에만 포함)
-    #[prost(enumeration="MarketMakingState", optional, tag="3")]
+    #[prost(enumeration="MarketMakingState", optional, tag="2")]
     pub state: ::core::option::Option<i32>,
     /// Momentum 상태 (변경 시에만 포함)
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag="3")]
     pub momentum: ::core::option::Option<MomentumState>,
     /// Trade Analyzer 상태 (변경 시에만 포함)
-    #[prost(message, optional, tag="5")]
+    #[prost(message, optional, tag="4")]
     pub trade_analyzer: ::core::option::Option<TradeAnalyzerState>,
     /// 순노출 및 재고 균형 상태 (변경 시에만 포함)
-    #[prost(message, optional, tag="6")]
+    #[prost(message, optional, tag="5")]
     pub exposure_balancer: ::core::option::Option<ExposureBalancerState>,
     /// MarketBias 상태 (변경 시에만 포함)
-    #[prost(message, optional, tag="11")]
+    #[prost(message, optional, tag="6")]
     pub market_bias: ::core::option::Option<MarketBiasState>,
     /// 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
     #[prost(string, optional, tag="7")]

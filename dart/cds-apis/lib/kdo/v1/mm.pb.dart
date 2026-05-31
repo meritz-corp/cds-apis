@@ -172,14 +172,14 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingMarketBias>(4, _omitFieldNames ? '' : 'marketBias', subBuilder: MarketMakingMarketBias.create)
     ..aOM<MarketMakingMomentum>(5, _omitFieldNames ? '' : 'momentum', subBuilder: MarketMakingMomentum.create)
     ..aOM<MarketMakingExposureBalancer>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: MarketMakingExposureBalancer.create)
-    ..aInt64(10, _omitFieldNames ? '' : 'bidAdjustment')
-    ..aInt64(11, _omitFieldNames ? '' : 'askAdjustment')
-    ..aInt64(12, _omitFieldNames ? '' : 'bidQuantity')
-    ..aInt64(13, _omitFieldNames ? '' : 'askQuantity')
-    ..aInt64(14, _omitFieldNames ? '' : 'bidBasis')
-    ..aInt64(15, _omitFieldNames ? '' : 'askBasis')
-    ..aInt64(16, _omitFieldNames ? '' : 'bidOffset')
-    ..aInt64(17, _omitFieldNames ? '' : 'askOffset')
+    ..aInt64(7, _omitFieldNames ? '' : 'bidAdjustment')
+    ..aInt64(8, _omitFieldNames ? '' : 'askAdjustment')
+    ..aInt64(9, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(10, _omitFieldNames ? '' : 'askQuantity')
+    ..aInt64(11, _omitFieldNames ? '' : 'bidBasis')
+    ..aInt64(12, _omitFieldNames ? '' : 'askBasis')
+    ..aInt64(13, _omitFieldNames ? '' : 'bidOffset')
+    ..aInt64(14, _omitFieldNames ? '' : 'askOffset')
     ..hasRequiredFields = false
   ;
 
@@ -271,84 +271,84 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   MarketMakingExposureBalancer ensureExposureBalancer() => $_ensure(5);
 
   /// 기준가격 대비 bid 조정값 (Price internal representation)
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(7)
   $fixnum.Int64 get bidAdjustment => $_getI64(6);
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(7)
   set bidAdjustment($fixnum.Int64 value) => $_setInt64(6, value);
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(7)
   $core.bool hasBidAdjustment() => $_has(6);
-  @$pb.TagNumber(10)
-  void clearBidAdjustment() => $_clearField(10);
+  @$pb.TagNumber(7)
+  void clearBidAdjustment() => $_clearField(7);
 
   /// 기준가격 대비 ask 조정값 (Price internal representation)
-  @$pb.TagNumber(11)
+  @$pb.TagNumber(8)
   $fixnum.Int64 get askAdjustment => $_getI64(7);
-  @$pb.TagNumber(11)
+  @$pb.TagNumber(8)
   set askAdjustment($fixnum.Int64 value) => $_setInt64(7, value);
-  @$pb.TagNumber(11)
+  @$pb.TagNumber(8)
   $core.bool hasAskAdjustment() => $_has(7);
-  @$pb.TagNumber(11)
-  void clearAskAdjustment() => $_clearField(11);
+  @$pb.TagNumber(8)
+  void clearAskAdjustment() => $_clearField(8);
 
   /// 레벨당 매수 수량
-  @$pb.TagNumber(12)
+  @$pb.TagNumber(9)
   $fixnum.Int64 get bidQuantity => $_getI64(8);
-  @$pb.TagNumber(12)
+  @$pb.TagNumber(9)
   set bidQuantity($fixnum.Int64 value) => $_setInt64(8, value);
-  @$pb.TagNumber(12)
+  @$pb.TagNumber(9)
   $core.bool hasBidQuantity() => $_has(8);
-  @$pb.TagNumber(12)
-  void clearBidQuantity() => $_clearField(12);
+  @$pb.TagNumber(9)
+  void clearBidQuantity() => $_clearField(9);
 
   /// 레벨당 매도 수량
-  @$pb.TagNumber(13)
+  @$pb.TagNumber(10)
   $fixnum.Int64 get askQuantity => $_getI64(9);
-  @$pb.TagNumber(13)
+  @$pb.TagNumber(10)
   set askQuantity($fixnum.Int64 value) => $_setInt64(9, value);
-  @$pb.TagNumber(13)
+  @$pb.TagNumber(10)
   $core.bool hasAskQuantity() => $_has(9);
-  @$pb.TagNumber(13)
-  void clearAskQuantity() => $_clearField(13);
+  @$pb.TagNumber(10)
+  void clearAskQuantity() => $_clearField(10);
 
   /// NAV 계산용 bid basis (Price internal representation)
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(11)
   $fixnum.Int64 get bidBasis => $_getI64(10);
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(11)
   set bidBasis($fixnum.Int64 value) => $_setInt64(10, value);
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(11)
   $core.bool hasBidBasis() => $_has(10);
-  @$pb.TagNumber(14)
-  void clearBidBasis() => $_clearField(14);
+  @$pb.TagNumber(11)
+  void clearBidBasis() => $_clearField(11);
 
   /// NAV 계산용 ask basis (Price internal representation)
-  @$pb.TagNumber(15)
+  @$pb.TagNumber(12)
   $fixnum.Int64 get askBasis => $_getI64(11);
-  @$pb.TagNumber(15)
+  @$pb.TagNumber(12)
   set askBasis($fixnum.Int64 value) => $_setInt64(11, value);
-  @$pb.TagNumber(15)
+  @$pb.TagNumber(12)
   $core.bool hasAskBasis() => $_has(11);
-  @$pb.TagNumber(15)
-  void clearAskBasis() => $_clearField(15);
+  @$pb.TagNumber(12)
+  void clearAskBasis() => $_clearField(12);
 
   /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
-  @$pb.TagNumber(16)
+  @$pb.TagNumber(13)
   $fixnum.Int64 get bidOffset => $_getI64(12);
-  @$pb.TagNumber(16)
+  @$pb.TagNumber(13)
   set bidOffset($fixnum.Int64 value) => $_setInt64(12, value);
-  @$pb.TagNumber(16)
+  @$pb.TagNumber(13)
   $core.bool hasBidOffset() => $_has(12);
-  @$pb.TagNumber(16)
-  void clearBidOffset() => $_clearField(16);
+  @$pb.TagNumber(13)
+  void clearBidOffset() => $_clearField(13);
 
   /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
-  @$pb.TagNumber(17)
+  @$pb.TagNumber(14)
   $fixnum.Int64 get askOffset => $_getI64(13);
-  @$pb.TagNumber(17)
+  @$pb.TagNumber(14)
   set askOffset($fixnum.Int64 value) => $_setInt64(13, value);
-  @$pb.TagNumber(17)
+  @$pb.TagNumber(14)
   $core.bool hasAskOffset() => $_has(13);
-  @$pb.TagNumber(17)
-  void clearAskOffset() => $_clearField(17);
+  @$pb.TagNumber(14)
+  void clearAskOffset() => $_clearField(14);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -665,11 +665,11 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingTradeAnalyzer', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
-    ..a<$core.double>(6, _omitFieldNames ? '' : 'countDecayRatio', $pb.PbFieldType.OD)
-    ..a<$fixnum.Int64>(7, _omitFieldNames ? '' : 'decayIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$core.double>(8, _omitFieldNames ? '' : 'totalDecayRatio', $pb.PbFieldType.OD)
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'netDecayRatio', $pb.PbFieldType.OD)
-    ..aInt64(10, _omitFieldNames ? '' : 'minBookQty')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'countDecayRatio', $pb.PbFieldType.OD)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'decayIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'totalDecayRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'netDecayRatio', $pb.PbFieldType.OD)
+    ..aInt64(6, _omitFieldNames ? '' : 'minBookQty')
     ..hasRequiredFields = false
   ;
 
@@ -701,54 +701,54 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
   void clearEnabled() => $_clearField(1);
 
   /// 매 체결마다 net/total 에 곱하는 감쇠 비율 (갤럭티코 기본 0.98)
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(2)
   $core.double get countDecayRatio => $_getN(1);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(2)
   set countDecayRatio($core.double value) => $_setDouble(1, value);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(2)
   $core.bool hasCountDecayRatio() => $_has(1);
-  @$pb.TagNumber(6)
-  void clearCountDecayRatio() => $_clearField(6);
+  @$pb.TagNumber(2)
+  void clearCountDecayRatio() => $_clearField(2);
 
   /// 시간 감쇠 주기 (초). 0 = 비활성 (갤럭티코 기본 10)
-  @$pb.TagNumber(7)
+  @$pb.TagNumber(3)
   $fixnum.Int64 get decayIntervalSecs => $_getI64(2);
-  @$pb.TagNumber(7)
+  @$pb.TagNumber(3)
   set decayIntervalSecs($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(7)
+  @$pb.TagNumber(3)
   $core.bool hasDecayIntervalSecs() => $_has(2);
-  @$pb.TagNumber(7)
-  void clearDecayIntervalSecs() => $_clearField(7);
+  @$pb.TagNumber(3)
+  void clearDecayIntervalSecs() => $_clearField(3);
 
   /// 시간 주기마다 total 에 곱하는 비율 (갤럭티코 기본 0.95)
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(4)
   $core.double get totalDecayRatio => $_getN(3);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(4)
   set totalDecayRatio($core.double value) => $_setDouble(3, value);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(4)
   $core.bool hasTotalDecayRatio() => $_has(3);
-  @$pb.TagNumber(8)
-  void clearTotalDecayRatio() => $_clearField(8);
+  @$pb.TagNumber(4)
+  void clearTotalDecayRatio() => $_clearField(4);
 
   /// 시간 주기마다 net 에 곱하는 비율 (갤럭티코 기본 0.9). total_decay_ratio 보다 작아야 방향성이 먼저 사라짐.
-  @$pb.TagNumber(9)
+  @$pb.TagNumber(5)
   $core.double get netDecayRatio => $_getN(4);
-  @$pb.TagNumber(9)
+  @$pb.TagNumber(5)
   set netDecayRatio($core.double value) => $_setDouble(4, value);
-  @$pb.TagNumber(9)
+  @$pb.TagNumber(5)
   $core.bool hasNetDecayRatio() => $_has(4);
-  @$pb.TagNumber(9)
-  void clearNetDecayRatio() => $_clearField(9);
+  @$pb.TagNumber(5)
+  void clearNetDecayRatio() => $_clearField(5);
 
   /// strength 분모 최소치 (기본 100)
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(6)
   $fixnum.Int64 get minBookQty => $_getI64(5);
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(6)
   set minBookQty($fixnum.Int64 value) => $_setInt64(5, value);
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(6)
   $core.bool hasMinBookQty() => $_has(5);
-  @$pb.TagNumber(10)
-  void clearMinBookQty() => $_clearField(10);
+  @$pb.TagNumber(6)
+  void clearMinBookQty() => $_clearField(6);
 }
 
 /// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
@@ -776,10 +776,10 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingMomentum', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
-    ..aOB(8, _omitFieldNames ? '' : 'isOpposite')
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'maxTick', $pb.PbFieldType.OD)
-    ..a<$core.double>(10, _omitFieldNames ? '' : 'ratioThreshold', $pb.PbFieldType.OD)
-    ..a<$core.double>(11, _omitFieldNames ? '' : 'strengthThreshold', $pb.PbFieldType.OD)
+    ..aOB(2, _omitFieldNames ? '' : 'isOpposite')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'maxTick', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'ratioThreshold', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'strengthThreshold', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -811,44 +811,44 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   void clearEnabled() => $_clearField(1);
 
   /// 인버스 ETF: ratio 부호 반전
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(2)
   $core.bool get isOpposite => $_getBF(1);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(2)
   set isOpposite($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(2)
   $core.bool hasIsOpposite() => $_has(1);
-  @$pb.TagNumber(8)
-  void clearIsOpposite() => $_clearField(8);
+  @$pb.TagNumber(2)
+  void clearIsOpposite() => $_clearField(2);
 
   /// 최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)
-  @$pb.TagNumber(9)
+  @$pb.TagNumber(3)
   $core.double get maxTick => $_getN(2);
-  @$pb.TagNumber(9)
+  @$pb.TagNumber(3)
   set maxTick($core.double value) => $_setDouble(2, value);
-  @$pb.TagNumber(9)
+  @$pb.TagNumber(3)
   $core.bool hasMaxTick() => $_has(2);
-  @$pb.TagNumber(9)
-  void clearMaxTick() => $_clearField(9);
+  @$pb.TagNumber(3)
+  void clearMaxTick() => $_clearField(3);
 
   /// ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(4)
   $core.double get ratioThreshold => $_getN(3);
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(4)
   set ratioThreshold($core.double value) => $_setDouble(3, value);
-  @$pb.TagNumber(10)
+  @$pb.TagNumber(4)
   $core.bool hasRatioThreshold() => $_has(3);
-  @$pb.TagNumber(10)
-  void clearRatioThreshold() => $_clearField(10);
+  @$pb.TagNumber(4)
+  void clearRatioThreshold() => $_clearField(4);
 
   /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
-  @$pb.TagNumber(11)
+  @$pb.TagNumber(5)
   $core.double get strengthThreshold => $_getN(4);
-  @$pb.TagNumber(11)
+  @$pb.TagNumber(5)
   set strengthThreshold($core.double value) => $_setDouble(4, value);
-  @$pb.TagNumber(11)
+  @$pb.TagNumber(5)
   $core.bool hasStrengthThreshold() => $_has(4);
-  @$pb.TagNumber(11)
-  void clearStrengthThreshold() => $_clearField(11);
+  @$pb.TagNumber(5)
+  void clearStrengthThreshold() => $_clearField(5);
 }
 
 /// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)
@@ -2002,12 +2002,12 @@ class TradeAnalyzerState extends $pb.GeneratedMessage {
   factory TradeAnalyzerState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TradeAnalyzerState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'ratio', $pb.PbFieldType.OD)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'strength', $pb.PbFieldType.OD)
-    ..aInt64(5, _omitFieldNames ? '' : 'netAmount')
-    ..aInt64(6, _omitFieldNames ? '' : 'totalAmount')
-    ..a<$core.double>(7, _omitFieldNames ? '' : 'avgBidQty', $pb.PbFieldType.OD)
-    ..a<$core.double>(8, _omitFieldNames ? '' : 'avgAskQty', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'ratio', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'strength', $pb.PbFieldType.OD)
+    ..aInt64(3, _omitFieldNames ? '' : 'netAmount')
+    ..aInt64(4, _omitFieldNames ? '' : 'totalAmount')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'avgBidQty', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'avgAskQty', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2029,64 +2029,64 @@ class TradeAnalyzerState extends $pb.GeneratedMessage {
   static TradeAnalyzerState? _defaultInstance;
 
   /// 매수/매도 누적 비율 ∈ [-1, +1]. 매수 우세 +.
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(1)
   $core.double get ratio => $_getN(0);
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(1)
   set ratio($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(1)
   $core.bool hasRatio() => $_has(0);
-  @$pb.TagNumber(3)
-  void clearRatio() => $_clearField(3);
+  @$pb.TagNumber(1)
+  void clearRatio() => $_clearField(1);
 
   /// 체결 강도 ∈ [0, 1]. ratio 방향 가중 호가창 잔량 대비 누적 체결량.
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(2)
   $core.double get strength => $_getN(1);
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(2)
   set strength($core.double value) => $_setDouble(1, value);
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(2)
   $core.bool hasStrength() => $_has(1);
-  @$pb.TagNumber(4)
-  void clearStrength() => $_clearField(4);
+  @$pb.TagNumber(2)
+  void clearStrength() => $_clearField(2);
 
   /// 부호 있는 누적 체결량 (매수 우세 +)
-  @$pb.TagNumber(5)
+  @$pb.TagNumber(3)
   $fixnum.Int64 get netAmount => $_getI64(2);
-  @$pb.TagNumber(5)
+  @$pb.TagNumber(3)
   set netAmount($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(5)
+  @$pb.TagNumber(3)
   $core.bool hasNetAmount() => $_has(2);
-  @$pb.TagNumber(5)
-  void clearNetAmount() => $_clearField(5);
+  @$pb.TagNumber(3)
+  void clearNetAmount() => $_clearField(3);
 
   /// 절댓값 누적 체결량
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(4)
   $fixnum.Int64 get totalAmount => $_getI64(3);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(4)
   set totalAmount($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(4)
   $core.bool hasTotalAmount() => $_has(3);
-  @$pb.TagNumber(6)
-  void clearTotalAmount() => $_clearField(6);
+  @$pb.TagNumber(4)
+  void clearTotalAmount() => $_clearField(4);
 
   /// 5단 호가 평균 매수 잔량
-  @$pb.TagNumber(7)
+  @$pb.TagNumber(5)
   $core.double get avgBidQty => $_getN(4);
-  @$pb.TagNumber(7)
+  @$pb.TagNumber(5)
   set avgBidQty($core.double value) => $_setDouble(4, value);
-  @$pb.TagNumber(7)
+  @$pb.TagNumber(5)
   $core.bool hasAvgBidQty() => $_has(4);
-  @$pb.TagNumber(7)
-  void clearAvgBidQty() => $_clearField(7);
+  @$pb.TagNumber(5)
+  void clearAvgBidQty() => $_clearField(5);
 
   /// 5단 호가 평균 매도 잔량
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(6)
   $core.double get avgAskQty => $_getN(5);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(6)
   set avgAskQty($core.double value) => $_setDouble(5, value);
-  @$pb.TagNumber(8)
+  @$pb.TagNumber(6)
   $core.bool hasAvgAskQty() => $_has(5);
-  @$pb.TagNumber(8)
-  void clearAvgAskQty() => $_clearField(8);
+  @$pb.TagNumber(6)
+  void clearAvgAskQty() => $_clearField(6);
 }
 
 /// MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
@@ -2260,11 +2260,11 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     MomentumState? momentum,
     TradeAnalyzerState? tradeAnalyzer,
     ExposureBalancerState? exposureBalancer,
+    MarketBiasState? marketBias,
     $core.String? askQuote,
     $core.String? bidQuote,
     $core.String? bidOffset,
     $core.String? askOffset,
-    MarketBiasState? marketBias,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2272,11 +2272,11 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (momentum != null) result.momentum = momentum;
     if (tradeAnalyzer != null) result.tradeAnalyzer = tradeAnalyzer;
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
+    if (marketBias != null) result.marketBias = marketBias;
     if (askQuote != null) result.askQuote = askQuote;
     if (bidQuote != null) result.bidQuote = bidQuote;
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
-    if (marketBias != null) result.marketBias = marketBias;
     return result;
   }
 
@@ -2287,15 +2287,15 @@ class MmStateUpdate extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmStateUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
-    ..e<MarketMakingState>(3, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingState.MARKET_MAKING_STATE_UNSPECIFIED, valueOf: MarketMakingState.valueOf, enumValues: MarketMakingState.values)
-    ..aOM<MomentumState>(4, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
-    ..aOM<TradeAnalyzerState>(5, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: TradeAnalyzerState.create)
-    ..aOM<ExposureBalancerState>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: ExposureBalancerState.create)
+    ..e<MarketMakingState>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingState.MARKET_MAKING_STATE_UNSPECIFIED, valueOf: MarketMakingState.valueOf, enumValues: MarketMakingState.values)
+    ..aOM<MomentumState>(3, _omitFieldNames ? '' : 'momentum', subBuilder: MomentumState.create)
+    ..aOM<TradeAnalyzerState>(4, _omitFieldNames ? '' : 'tradeAnalyzer', subBuilder: TradeAnalyzerState.create)
+    ..aOM<ExposureBalancerState>(5, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: ExposureBalancerState.create)
+    ..aOM<MarketBiasState>(6, _omitFieldNames ? '' : 'marketBias', subBuilder: MarketBiasState.create)
     ..aOS(7, _omitFieldNames ? '' : 'askQuote')
     ..aOS(8, _omitFieldNames ? '' : 'bidQuote')
     ..aOS(9, _omitFieldNames ? '' : 'bidOffset')
     ..aOS(10, _omitFieldNames ? '' : 'askOffset')
-    ..aOM<MarketBiasState>(11, _omitFieldNames ? '' : 'marketBias', subBuilder: MarketBiasState.create)
     ..hasRequiredFields = false
   ;
 
@@ -2327,102 +2327,102 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 
   /// MM 상태 (변경 시에만 포함)
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
   MarketMakingState get state => $_getN(1);
-  @$pb.TagNumber(3)
-  set state(MarketMakingState value) => $_setField(3, value);
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
+  set state(MarketMakingState value) => $_setField(2, value);
+  @$pb.TagNumber(2)
   $core.bool hasState() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearState() => $_clearField(3);
+  @$pb.TagNumber(2)
+  void clearState() => $_clearField(2);
 
   /// Momentum 상태 (변경 시에만 포함)
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
   MomentumState get momentum => $_getN(2);
-  @$pb.TagNumber(4)
-  set momentum(MomentumState value) => $_setField(4, value);
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
+  set momentum(MomentumState value) => $_setField(3, value);
+  @$pb.TagNumber(3)
   $core.bool hasMomentum() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearMomentum() => $_clearField(4);
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
+  void clearMomentum() => $_clearField(3);
+  @$pb.TagNumber(3)
   MomentumState ensureMomentum() => $_ensure(2);
 
   /// Trade Analyzer 상태 (변경 시에만 포함)
-  @$pb.TagNumber(5)
+  @$pb.TagNumber(4)
   TradeAnalyzerState get tradeAnalyzer => $_getN(3);
-  @$pb.TagNumber(5)
-  set tradeAnalyzer(TradeAnalyzerState value) => $_setField(5, value);
-  @$pb.TagNumber(5)
+  @$pb.TagNumber(4)
+  set tradeAnalyzer(TradeAnalyzerState value) => $_setField(4, value);
+  @$pb.TagNumber(4)
   $core.bool hasTradeAnalyzer() => $_has(3);
-  @$pb.TagNumber(5)
-  void clearTradeAnalyzer() => $_clearField(5);
-  @$pb.TagNumber(5)
+  @$pb.TagNumber(4)
+  void clearTradeAnalyzer() => $_clearField(4);
+  @$pb.TagNumber(4)
   TradeAnalyzerState ensureTradeAnalyzer() => $_ensure(3);
 
   /// 순노출 및 재고 균형 상태 (변경 시에만 포함)
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(5)
   ExposureBalancerState get exposureBalancer => $_getN(4);
-  @$pb.TagNumber(6)
-  set exposureBalancer(ExposureBalancerState value) => $_setField(6, value);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(5)
+  set exposureBalancer(ExposureBalancerState value) => $_setField(5, value);
+  @$pb.TagNumber(5)
   $core.bool hasExposureBalancer() => $_has(4);
-  @$pb.TagNumber(6)
-  void clearExposureBalancer() => $_clearField(6);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(5)
+  void clearExposureBalancer() => $_clearField(5);
+  @$pb.TagNumber(5)
   ExposureBalancerState ensureExposureBalancer() => $_ensure(4);
+
+  /// MarketBias 상태 (변경 시에만 포함)
+  @$pb.TagNumber(6)
+  MarketBiasState get marketBias => $_getN(5);
+  @$pb.TagNumber(6)
+  set marketBias(MarketBiasState value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasMarketBias() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearMarketBias() => $_clearField(6);
+  @$pb.TagNumber(6)
+  MarketBiasState ensureMarketBias() => $_ensure(5);
 
   /// 현재 MM 매도 호가 (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(7)
-  $core.String get askQuote => $_getSZ(5);
+  $core.String get askQuote => $_getSZ(6);
   @$pb.TagNumber(7)
-  set askQuote($core.String value) => $_setString(5, value);
+  set askQuote($core.String value) => $_setString(6, value);
   @$pb.TagNumber(7)
-  $core.bool hasAskQuote() => $_has(5);
+  $core.bool hasAskQuote() => $_has(6);
   @$pb.TagNumber(7)
   void clearAskQuote() => $_clearField(7);
 
   /// 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(8)
-  $core.String get bidQuote => $_getSZ(6);
+  $core.String get bidQuote => $_getSZ(7);
   @$pb.TagNumber(8)
-  set bidQuote($core.String value) => $_setString(6, value);
+  set bidQuote($core.String value) => $_setString(7, value);
   @$pb.TagNumber(8)
-  $core.bool hasBidQuote() => $_has(6);
+  $core.bool hasBidQuote() => $_has(7);
   @$pb.TagNumber(8)
   void clearBidQuote() => $_clearField(8);
 
   /// 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(9)
-  $core.String get bidOffset => $_getSZ(7);
+  $core.String get bidOffset => $_getSZ(8);
   @$pb.TagNumber(9)
-  set bidOffset($core.String value) => $_setString(7, value);
+  set bidOffset($core.String value) => $_setString(8, value);
   @$pb.TagNumber(9)
-  $core.bool hasBidOffset() => $_has(7);
+  $core.bool hasBidOffset() => $_has(8);
   @$pb.TagNumber(9)
   void clearBidOffset() => $_clearField(9);
 
   /// 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
   @$pb.TagNumber(10)
-  $core.String get askOffset => $_getSZ(8);
+  $core.String get askOffset => $_getSZ(9);
   @$pb.TagNumber(10)
-  set askOffset($core.String value) => $_setString(8, value);
+  set askOffset($core.String value) => $_setString(9, value);
   @$pb.TagNumber(10)
-  $core.bool hasAskOffset() => $_has(8);
+  $core.bool hasAskOffset() => $_has(9);
   @$pb.TagNumber(10)
   void clearAskOffset() => $_clearField(10);
-
-  /// MarketBias 상태 (변경 시에만 포함)
-  @$pb.TagNumber(11)
-  MarketBiasState get marketBias => $_getN(9);
-  @$pb.TagNumber(11)
-  set marketBias(MarketBiasState value) => $_setField(11, value);
-  @$pb.TagNumber(11)
-  $core.bool hasMarketBias() => $_has(9);
-  @$pb.TagNumber(11)
-  void clearMarketBias() => $_clearField(11);
-  @$pb.TagNumber(11)
-  MarketBiasState ensureMarketBias() => $_ensure(9);
 }
 
 /// StreamMmStateUpdate
