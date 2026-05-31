@@ -473,6 +473,11 @@ const TradeAnalyzerState$json = {
     {'1': 'total_amount', '3': 4, '4': 1, '5': 3, '10': 'totalAmount'},
     {'1': 'avg_bid_qty', '3': 5, '4': 1, '5': 1, '10': 'avgBidQty'},
     {'1': 'avg_ask_qty', '3': 6, '4': 1, '5': 1, '10': 'avgAskQty'},
+    {'1': 'last_trade_at_us', '3': 7, '4': 1, '5': 3, '9': 0, '10': 'lastTradeAtUs', '17': true},
+    {'1': 'trade_count', '3': 8, '4': 1, '5': 3, '10': 'tradeCount'},
+  ],
+  '8': [
+    {'1': '_last_trade_at_us'},
   ],
 };
 
@@ -481,7 +486,9 @@ final $typed_data.Uint8List tradeAnalyzerStateDescriptor = $convert.base64Decode
     'ChJUcmFkZUFuYWx5emVyU3RhdGUSFAoFcmF0aW8YASABKAFSBXJhdGlvEhoKCHN0cmVuZ3RoGA'
     'IgASgBUghzdHJlbmd0aBIdCgpuZXRfYW1vdW50GAMgASgDUgluZXRBbW91bnQSIQoMdG90YWxf'
     'YW1vdW50GAQgASgDUgt0b3RhbEFtb3VudBIeCgthdmdfYmlkX3F0eRgFIAEoAVIJYXZnQmlkUX'
-    'R5Eh4KC2F2Z19hc2tfcXR5GAYgASgBUglhdmdBc2tRdHk=');
+    'R5Eh4KC2F2Z19hc2tfcXR5GAYgASgBUglhdmdBc2tRdHkSLAoQbGFzdF90cmFkZV9hdF91cxgH'
+    'IAEoA0gAUg1sYXN0VHJhZGVBdFVziAEBEh8KC3RyYWRlX2NvdW50GAggASgDUgp0cmFkZUNvdW'
+    '50QhMKEV9sYXN0X3RyYWRlX2F0X3Vz');
 
 @$core.Deprecated('Use marketBiasStateDescriptor instead')
 const MarketBiasState$json = {
@@ -530,6 +537,7 @@ const MmStateUpdate$json = {
     {'1': 'bid_quote', '3': 8, '4': 1, '5': 9, '9': 6, '10': 'bidQuote', '17': true},
     {'1': 'bid_offset', '3': 9, '4': 1, '5': 9, '9': 7, '10': 'bidOffset', '17': true},
     {'1': 'ask_offset', '3': 10, '4': 1, '5': 9, '9': 8, '10': 'askOffset', '17': true},
+    {'1': 'decomposition', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.mm.SpreadDecomposition', '9': 9, '10': 'decomposition', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -541,6 +549,7 @@ const MmStateUpdate$json = {
     {'1': '_bid_quote'},
     {'1': '_bid_offset'},
     {'1': '_ask_offset'},
+    {'1': '_decomposition'},
   ],
 };
 
@@ -555,9 +564,33 @@ final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
     'KAsyGi5rZG8udjEubW0uTWFya2V0Qmlhc1N0YXRlSARSCm1hcmtldEJpYXOIAQESIAoJYXNrX3'
     'F1b3RlGAcgASgJSAVSCGFza1F1b3RliAEBEiAKCWJpZF9xdW90ZRgIIAEoCUgGUghiaWRRdW90'
     'ZYgBARIiCgpiaWRfb2Zmc2V0GAkgASgJSAdSCWJpZE9mZnNldIgBARIiCgphc2tfb2Zmc2V0GA'
-    'ogASgJSAhSCWFza09mZnNldIgBAUIICgZfc3RhdGVCCwoJX21vbWVudHVtQhEKD190cmFkZV9h'
-    'bmFseXplckIUChJfZXhwb3N1cmVfYmFsYW5jZXJCDgoMX21hcmtldF9iaWFzQgwKCl9hc2tfcX'
-    'VvdGVCDAoKX2JpZF9xdW90ZUINCgtfYmlkX29mZnNldEINCgtfYXNrX29mZnNldA==');
+    'ogASgJSAhSCWFza09mZnNldIgBARJJCg1kZWNvbXBvc2l0aW9uGAsgASgLMh4ua2RvLnYxLm1t'
+    'LlNwcmVhZERlY29tcG9zaXRpb25ICVINZGVjb21wb3NpdGlvbogBAUIICgZfc3RhdGVCCwoJX2'
+    '1vbWVudHVtQhEKD190cmFkZV9hbmFseXplckIUChJfZXhwb3N1cmVfYmFsYW5jZXJCDgoMX21h'
+    'cmtldF9iaWFzQgwKCl9hc2tfcXVvdGVCDAoKX2JpZF9xdW90ZUINCgtfYmlkX29mZnNldEINCg'
+    'tfYXNrX29mZnNldEIQCg5fZGVjb21wb3NpdGlvbg==');
+
+@$core.Deprecated('Use spreadDecompositionDescriptor instead')
+const SpreadDecomposition$json = {
+  '1': 'SpreadDecomposition',
+  '2': [
+    {'1': 'base_bid', '3': 1, '4': 1, '5': 3, '10': 'baseBid'},
+    {'1': 'base_ask', '3': 2, '4': 1, '5': 3, '10': 'baseAsk'},
+    {'1': 'momentum_shift', '3': 3, '4': 1, '5': 3, '10': 'momentumShift'},
+    {'1': 'exposure_shift', '3': 4, '4': 1, '5': 3, '10': 'exposureShift'},
+    {'1': 'market_bias_shift', '3': 5, '4': 1, '5': 3, '10': 'marketBiasShift'},
+    {'1': 'final_bid', '3': 6, '4': 1, '5': 3, '10': 'finalBid'},
+    {'1': 'final_ask', '3': 7, '4': 1, '5': 3, '10': 'finalAsk'},
+  ],
+};
+
+/// Descriptor for `SpreadDecomposition`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List spreadDecompositionDescriptor = $convert.base64Decode(
+    'ChNTcHJlYWREZWNvbXBvc2l0aW9uEhkKCGJhc2VfYmlkGAEgASgDUgdiYXNlQmlkEhkKCGJhc2'
+    'VfYXNrGAIgASgDUgdiYXNlQXNrEiUKDm1vbWVudHVtX3NoaWZ0GAMgASgDUg1tb21lbnR1bVNo'
+    'aWZ0EiUKDmV4cG9zdXJlX3NoaWZ0GAQgASgDUg1leHBvc3VyZVNoaWZ0EioKEW1hcmtldF9iaW'
+    'FzX3NoaWZ0GAUgASgDUg9tYXJrZXRCaWFzU2hpZnQSGwoJZmluYWxfYmlkGAYgASgDUghmaW5h'
+    'bEJpZBIbCglmaW5hbF9hc2sYByABKANSCGZpbmFsQXNr');
 
 @$core.Deprecated('Use streamMmStateUpdateRequestDescriptor instead')
 const StreamMmStateUpdateRequest$json = {

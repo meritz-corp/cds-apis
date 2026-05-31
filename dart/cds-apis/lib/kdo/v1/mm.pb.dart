@@ -1985,6 +1985,8 @@ class TradeAnalyzerState extends $pb.GeneratedMessage {
     $fixnum.Int64? totalAmount,
     $core.double? avgBidQty,
     $core.double? avgAskQty,
+    $fixnum.Int64? lastTradeAtUs,
+    $fixnum.Int64? tradeCount,
   }) {
     final result = create();
     if (ratio != null) result.ratio = ratio;
@@ -1993,6 +1995,8 @@ class TradeAnalyzerState extends $pb.GeneratedMessage {
     if (totalAmount != null) result.totalAmount = totalAmount;
     if (avgBidQty != null) result.avgBidQty = avgBidQty;
     if (avgAskQty != null) result.avgAskQty = avgAskQty;
+    if (lastTradeAtUs != null) result.lastTradeAtUs = lastTradeAtUs;
+    if (tradeCount != null) result.tradeCount = tradeCount;
     return result;
   }
 
@@ -2008,6 +2012,8 @@ class TradeAnalyzerState extends $pb.GeneratedMessage {
     ..aInt64(4, _omitFieldNames ? '' : 'totalAmount')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'avgBidQty', $pb.PbFieldType.OD)
     ..a<$core.double>(6, _omitFieldNames ? '' : 'avgAskQty', $pb.PbFieldType.OD)
+    ..aInt64(7, _omitFieldNames ? '' : 'lastTradeAtUs')
+    ..aInt64(8, _omitFieldNames ? '' : 'tradeCount')
     ..hasRequiredFields = false
   ;
 
@@ -2087,6 +2093,26 @@ class TradeAnalyzerState extends $pb.GeneratedMessage {
   $core.bool hasAvgAskQty() => $_has(5);
   @$pb.TagNumber(6)
   void clearAvgAskQty() => $_clearField(6);
+
+  /// 마지막 시장 체결 시각 (일중 마이크로초). 체결 없으면 absent.
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get lastTradeAtUs => $_getI64(6);
+  @$pb.TagNumber(7)
+  set lastTradeAtUs($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasLastTradeAtUs() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearLastTradeAtUs() => $_clearField(7);
+
+  /// 누적 시장 체결 건수
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get tradeCount => $_getI64(7);
+  @$pb.TagNumber(8)
+  set tradeCount($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasTradeCount() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearTradeCount() => $_clearField(8);
 }
 
 /// MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
@@ -2265,6 +2291,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     $core.String? bidQuote,
     $core.String? bidOffset,
     $core.String? askOffset,
+    SpreadDecomposition? decomposition,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2277,6 +2304,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (bidQuote != null) result.bidQuote = bidQuote;
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
+    if (decomposition != null) result.decomposition = decomposition;
     return result;
   }
 
@@ -2296,6 +2324,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOS(8, _omitFieldNames ? '' : 'bidQuote')
     ..aOS(9, _omitFieldNames ? '' : 'bidOffset')
     ..aOS(10, _omitFieldNames ? '' : 'askOffset')
+    ..aOM<SpreadDecomposition>(11, _omitFieldNames ? '' : 'decomposition', subBuilder: SpreadDecomposition.create)
     ..hasRequiredFields = false
   ;
 
@@ -2423,6 +2452,144 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   $core.bool hasAskOffset() => $_has(9);
   @$pb.TagNumber(10)
   void clearAskOffset() => $_clearField(10);
+
+  /// 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
+  @$pb.TagNumber(11)
+  SpreadDecomposition get decomposition => $_getN(10);
+  @$pb.TagNumber(11)
+  set decomposition(SpreadDecomposition value) => $_setField(11, value);
+  @$pb.TagNumber(11)
+  $core.bool hasDecomposition() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearDecomposition() => $_clearField(11);
+  @$pb.TagNumber(11)
+  SpreadDecomposition ensureDecomposition() => $_ensure(10);
+}
+
+/// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
+class SpreadDecomposition extends $pb.GeneratedMessage {
+  factory SpreadDecomposition({
+    $fixnum.Int64? baseBid,
+    $fixnum.Int64? baseAsk,
+    $fixnum.Int64? momentumShift,
+    $fixnum.Int64? exposureShift,
+    $fixnum.Int64? marketBiasShift,
+    $fixnum.Int64? finalBid,
+    $fixnum.Int64? finalAsk,
+  }) {
+    final result = create();
+    if (baseBid != null) result.baseBid = baseBid;
+    if (baseAsk != null) result.baseAsk = baseAsk;
+    if (momentumShift != null) result.momentumShift = momentumShift;
+    if (exposureShift != null) result.exposureShift = exposureShift;
+    if (marketBiasShift != null) result.marketBiasShift = marketBiasShift;
+    if (finalBid != null) result.finalBid = finalBid;
+    if (finalAsk != null) result.finalAsk = finalAsk;
+    return result;
+  }
+
+  SpreadDecomposition._();
+
+  factory SpreadDecomposition.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SpreadDecomposition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpreadDecomposition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'baseBid')
+    ..aInt64(2, _omitFieldNames ? '' : 'baseAsk')
+    ..aInt64(3, _omitFieldNames ? '' : 'momentumShift')
+    ..aInt64(4, _omitFieldNames ? '' : 'exposureShift')
+    ..aInt64(5, _omitFieldNames ? '' : 'marketBiasShift')
+    ..aInt64(6, _omitFieldNames ? '' : 'finalBid')
+    ..aInt64(7, _omitFieldNames ? '' : 'finalAsk')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SpreadDecomposition clone() => SpreadDecomposition()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SpreadDecomposition copyWith(void Function(SpreadDecomposition) updates) => super.copyWith((message) => updates(message as SpreadDecomposition)) as SpreadDecomposition;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SpreadDecomposition create() => SpreadDecomposition._();
+  @$core.override
+  SpreadDecomposition createEmptyInstance() => create();
+  static $pb.PbList<SpreadDecomposition> createRepeated() => $pb.PbList<SpreadDecomposition>();
+  @$core.pragma('dart2js:noInline')
+  static SpreadDecomposition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SpreadDecomposition>(create);
+  static SpreadDecomposition? _defaultInstance;
+
+  /// Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get baseBid => $_getI64(0);
+  @$pb.TagNumber(1)
+  set baseBid($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBaseBid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBaseBid() => $_clearField(1);
+
+  /// Pricing 직후 ask (NAV + ask_adjustment, Price internal representation)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get baseAsk => $_getI64(1);
+  @$pb.TagNumber(2)
+  set baseAsk($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBaseAsk() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBaseAsk() => $_clearField(2);
+
+  /// Momentum 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get momentumShift => $_getI64(2);
+  @$pb.TagNumber(3)
+  set momentumShift($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMomentumShift() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMomentumShift() => $_clearField(3);
+
+  /// ExposureSkew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get exposureShift => $_getI64(3);
+  @$pb.TagNumber(4)
+  set exposureShift($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExposureShift() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExposureShift() => $_clearField(4);
+
+  /// MarketBias 영구 편향 (부호 포함, bid·ask 동일, Price internal representation)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get marketBiasShift => $_getI64(4);
+  @$pb.TagNumber(5)
+  set marketBiasShift($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMarketBiasShift() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMarketBiasShift() => $_clearField(5);
+
+  /// 정렬 후 최종 bid (Price internal representation)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get finalBid => $_getI64(5);
+  @$pb.TagNumber(6)
+  set finalBid($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasFinalBid() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFinalBid() => $_clearField(6);
+
+  /// 정렬 후 최종 ask (Price internal representation)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get finalAsk => $_getI64(6);
+  @$pb.TagNumber(7)
+  set finalAsk($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasFinalAsk() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearFinalAsk() => $_clearField(7);
 }
 
 /// StreamMmStateUpdate

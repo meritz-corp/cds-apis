@@ -443,6 +443,12 @@ message TradeAnalyzerState {
 
   // 5단 호가 평균 매도 잔량
   double avg_ask_qty = 6;
+
+  // 마지막 시장 체결 시각 (일중 마이크로초). 체결 없으면 absent.
+  optional int64 last_trade_at_us = 7;
+
+  // 누적 시장 체결 건수
+  int64 trade_count = 8;
 }
 
 // MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
@@ -505,6 +511,33 @@ message MmStateUpdate {
 
   // 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
   optional string ask_offset = 10;
+
+  // 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
+  optional SpreadDecomposition decomposition = 11;
+}
+
+// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
+message SpreadDecomposition {
+  // Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)
+  int64 base_bid = 1;
+
+  // Pricing 직후 ask (NAV + ask_adjustment, Price internal representation)
+  int64 base_ask = 2;
+
+  // Momentum 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  int64 momentum_shift = 3;
+
+  // ExposureSkew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  int64 exposure_shift = 4;
+
+  // MarketBias 영구 편향 (부호 포함, bid·ask 동일, Price internal representation)
+  int64 market_bias_shift = 5;
+
+  // 정렬 후 최종 bid (Price internal representation)
+  int64 final_bid = 6;
+
+  // 정렬 후 최종 ask (Price internal representation)
+  int64 final_ask = 7;
 }
 
 // ============================================================================

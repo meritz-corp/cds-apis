@@ -2697,6 +2697,9 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2730,6 +2733,9 @@ impl serde::Serialize for MmStateUpdate {
         if let Some(v) = self.ask_offset.as_ref() {
             struct_ser.serialize_field("ask_offset", v)?;
         }
+        if let Some(v) = self.decomposition.as_ref() {
+            struct_ser.serialize_field("decomposition", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2757,6 +2763,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "bidOffset",
             "ask_offset",
             "askOffset",
+            "decomposition",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2771,6 +2778,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             BidQuote,
             BidOffset,
             AskOffset,
+            Decomposition,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2803,6 +2811,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "bidQuote" | "bid_quote" => Ok(GeneratedField::BidQuote),
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
+                            "decomposition" => Ok(GeneratedField::Decomposition),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2832,6 +2841,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut bid_quote__ = None;
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
+                let mut decomposition__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2894,6 +2904,12 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             ask_offset__ = map_.next_value()?;
                         }
+                        GeneratedField::Decomposition => {
+                            if decomposition__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decomposition"));
+                            }
+                            decomposition__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2910,6 +2926,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     bid_quote: bid_quote__,
                     bid_offset: bid_offset__,
                     ask_offset: ask_offset__,
+                    decomposition: decomposition__,
                 })
             }
         }
@@ -3451,6 +3468,238 @@ impl<'de> serde::Deserialize<'de> for ResetMarketMakingResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.ResetMarketMakingResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SpreadDecomposition {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.SpreadDecomposition", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_bid", ToString::to_string(&self.base_bid).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_ask", ToString::to_string(&self.base_ask).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("momentum_shift", ToString::to_string(&self.momentum_shift).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exposure_shift", ToString::to_string(&self.exposure_shift).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("market_bias_shift", ToString::to_string(&self.market_bias_shift).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("final_bid", ToString::to_string(&self.final_bid).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("final_ask", ToString::to_string(&self.final_ask).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "base_bid",
+            "baseBid",
+            "base_ask",
+            "baseAsk",
+            "momentum_shift",
+            "momentumShift",
+            "exposure_shift",
+            "exposureShift",
+            "market_bias_shift",
+            "marketBiasShift",
+            "final_bid",
+            "finalBid",
+            "final_ask",
+            "finalAsk",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            BaseBid,
+            BaseAsk,
+            MomentumShift,
+            ExposureShift,
+            MarketBiasShift,
+            FinalBid,
+            FinalAsk,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "baseBid" | "base_bid" => Ok(GeneratedField::BaseBid),
+                            "baseAsk" | "base_ask" => Ok(GeneratedField::BaseAsk),
+                            "momentumShift" | "momentum_shift" => Ok(GeneratedField::MomentumShift),
+                            "exposureShift" | "exposure_shift" => Ok(GeneratedField::ExposureShift),
+                            "marketBiasShift" | "market_bias_shift" => Ok(GeneratedField::MarketBiasShift),
+                            "finalBid" | "final_bid" => Ok(GeneratedField::FinalBid),
+                            "finalAsk" | "final_ask" => Ok(GeneratedField::FinalAsk),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SpreadDecomposition;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.SpreadDecomposition")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SpreadDecomposition, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut base_bid__ = None;
+                let mut base_ask__ = None;
+                let mut momentum_shift__ = None;
+                let mut exposure_shift__ = None;
+                let mut market_bias_shift__ = None;
+                let mut final_bid__ = None;
+                let mut final_ask__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::BaseBid => {
+                            if base_bid__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseBid"));
+                            }
+                            base_bid__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BaseAsk => {
+                            if base_ask__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseAsk"));
+                            }
+                            base_ask__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MomentumShift => {
+                            if momentum_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("momentumShift"));
+                            }
+                            momentum_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ExposureShift => {
+                            if exposure_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exposureShift"));
+                            }
+                            exposure_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MarketBiasShift => {
+                            if market_bias_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("marketBiasShift"));
+                            }
+                            market_bias_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FinalBid => {
+                            if final_bid__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("finalBid"));
+                            }
+                            final_bid__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FinalAsk => {
+                            if final_ask__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("finalAsk"));
+                            }
+                            final_ask__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SpreadDecomposition {
+                    base_bid: base_bid__.unwrap_or_default(),
+                    base_ask: base_ask__.unwrap_or_default(),
+                    momentum_shift: momentum_shift__.unwrap_or_default(),
+                    exposure_shift: exposure_shift__.unwrap_or_default(),
+                    market_bias_shift: market_bias_shift__.unwrap_or_default(),
+                    final_bid: final_bid__.unwrap_or_default(),
+                    final_ask: final_ask__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.SpreadDecomposition", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StartMarketMakingRequest {
@@ -4085,6 +4334,12 @@ impl serde::Serialize for TradeAnalyzerState {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.TradeAnalyzerState", len)?;
         if true {
             struct_ser.serialize_field("ratio", &self.ratio)?;
@@ -4108,6 +4363,16 @@ impl serde::Serialize for TradeAnalyzerState {
         if true {
             struct_ser.serialize_field("avg_ask_qty", &self.avg_ask_qty)?;
         }
+        if let Some(v) = self.last_trade_at_us.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("last_trade_at_us", ToString::to_string(&v).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("trade_count", ToString::to_string(&self.trade_count).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -4128,6 +4393,10 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
             "avgBidQty",
             "avg_ask_qty",
             "avgAskQty",
+            "last_trade_at_us",
+            "lastTradeAtUs",
+            "trade_count",
+            "tradeCount",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4138,6 +4407,8 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
             TotalAmount,
             AvgBidQty,
             AvgAskQty,
+            LastTradeAtUs,
+            TradeCount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4166,6 +4437,8 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
                             "totalAmount" | "total_amount" => Ok(GeneratedField::TotalAmount),
                             "avgBidQty" | "avg_bid_qty" => Ok(GeneratedField::AvgBidQty),
                             "avgAskQty" | "avg_ask_qty" => Ok(GeneratedField::AvgAskQty),
+                            "lastTradeAtUs" | "last_trade_at_us" => Ok(GeneratedField::LastTradeAtUs),
+                            "tradeCount" | "trade_count" => Ok(GeneratedField::TradeCount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4191,6 +4464,8 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
                 let mut total_amount__ = None;
                 let mut avg_bid_qty__ = None;
                 let mut avg_ask_qty__ = None;
+                let mut last_trade_at_us__ = None;
+                let mut trade_count__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Ratio => {
@@ -4241,6 +4516,22 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::LastTradeAtUs => {
+                            if last_trade_at_us__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastTradeAtUs"));
+                            }
+                            last_trade_at_us__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::TradeCount => {
+                            if trade_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradeCount"));
+                            }
+                            trade_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4253,6 +4544,8 @@ impl<'de> serde::Deserialize<'de> for TradeAnalyzerState {
                     total_amount: total_amount__.unwrap_or_default(),
                     avg_bid_qty: avg_bid_qty__.unwrap_or_default(),
                     avg_ask_qty: avg_ask_qty__.unwrap_or_default(),
+                    last_trade_at_us: last_trade_at_us__,
+                    trade_count: trade_count__.unwrap_or_default(),
                 })
             }
         }

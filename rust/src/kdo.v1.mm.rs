@@ -410,6 +410,12 @@ pub struct TradeAnalyzerState {
     /// 5단 호가 평균 매도 잔량
     #[prost(double, tag="6")]
     pub avg_ask_qty: f64,
+    /// 마지막 시장 체결 시각 (일중 마이크로초). 체결 없으면 absent.
+    #[prost(int64, optional, tag="7")]
+    pub last_trade_at_us: ::core::option::Option<i64>,
+    /// 누적 시장 체결 건수
+    #[prost(int64, tag="8")]
+    pub trade_count: i64,
 }
 /// MarketBias 런타임 상태 (갤럭티코 DecoByTradeAcc 포팅)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -478,6 +484,35 @@ pub struct MmStateUpdate {
     /// 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
     #[prost(string, optional, tag="10")]
     pub ask_offset: ::core::option::Option<::prost::alloc::string::String>,
+    /// 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
+    #[prost(message, optional, tag="11")]
+    pub decomposition: ::core::option::Option<SpreadDecomposition>,
+}
+/// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SpreadDecomposition {
+    /// Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)
+    #[prost(int64, tag="1")]
+    pub base_bid: i64,
+    /// Pricing 직후 ask (NAV + ask_adjustment, Price internal representation)
+    #[prost(int64, tag="2")]
+    pub base_ask: i64,
+    /// Momentum 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+    #[prost(int64, tag="3")]
+    pub momentum_shift: i64,
+    /// ExposureSkew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+    #[prost(int64, tag="4")]
+    pub exposure_shift: i64,
+    /// MarketBias 영구 편향 (부호 포함, bid·ask 동일, Price internal representation)
+    #[prost(int64, tag="5")]
+    pub market_bias_shift: i64,
+    /// 정렬 후 최종 bid (Price internal representation)
+    #[prost(int64, tag="6")]
+    pub final_bid: i64,
+    /// 정렬 후 최종 ask (Price internal representation)
+    #[prost(int64, tag="7")]
+    pub final_ask: i64,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages
