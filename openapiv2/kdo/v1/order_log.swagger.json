@@ -91,7 +91,7 @@
         "parameters": [
           {
             "name": "filter",
-            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정 시 전체 기간 누적 집계.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"",
+            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"",
             "in": "query",
             "required": false,
             "type": "string"
@@ -132,7 +132,7 @@
         "parameters": [
           {
             "name": "filter",
-            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정 시 전체 기간 누적 집계.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"",
+            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"",
             "in": "query",
             "required": false,
             "type": "string"

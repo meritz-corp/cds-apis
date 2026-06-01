@@ -650,7 +650,7 @@ class GetOrderLogStatisticsRequest extends $pb.GeneratedMessage {
   ///   * `equal`, `contains`
   /// * exchange_time
   ///   * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `>`, `>=`, `<`, `<=` 지원.
-  ///   * 미지정 시 전체 기간 누적 집계.
+  ///   * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.
   ///
   /// Examples
   /// * filter=fund_code="0159"
