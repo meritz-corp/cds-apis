@@ -656,6 +656,10 @@
           "type": "integer",
           "format": "int32",
           "title": "hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)"
+        },
+        "opportunisticEnabled": {
+          "type": "boolean",
+          "title": "opportunistic close 기능 활성화 여부"
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"

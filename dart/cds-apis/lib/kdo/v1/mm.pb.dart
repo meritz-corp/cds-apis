@@ -984,12 +984,14 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     $core.int? triggerMultiple,
     $core.int? priceSkewTicks,
     $core.int? limitMultiple,
+    $core.bool? opportunisticEnabled,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (triggerMultiple != null) result.triggerMultiple = triggerMultiple;
     if (priceSkewTicks != null) result.priceSkewTicks = priceSkewTicks;
     if (limitMultiple != null) result.limitMultiple = limitMultiple;
+    if (opportunisticEnabled != null) result.opportunisticEnabled = opportunisticEnabled;
     return result;
   }
 
@@ -1003,6 +1005,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'triggerMultiple', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'priceSkewTicks', $pb.PbFieldType.O3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'limitMultiple', $pb.PbFieldType.O3)
+    ..aOB(5, _omitFieldNames ? '' : 'opportunisticEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -1062,6 +1065,16 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   $core.bool hasLimitMultiple() => $_has(3);
   @$pb.TagNumber(4)
   void clearLimitMultiple() => $_clearField(4);
+
+  /// opportunistic close 기능 활성화 여부
+  @$pb.TagNumber(5)
+  $core.bool get opportunisticEnabled => $_getBF(4);
+  @$pb.TagNumber(5)
+  set opportunisticEnabled($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOpportunisticEnabled() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOpportunisticEnabled() => $_clearField(5);
 }
 
 /// ListMarketMaking

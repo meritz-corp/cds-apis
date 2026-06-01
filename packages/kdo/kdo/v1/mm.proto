@@ -280,6 +280,9 @@ message MarketMakingExposureBalancer {
 
   // hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
   int32 limit_multiple = 4;
+
+  // opportunistic close 기능 활성화 여부
+  bool opportunistic_enabled = 5;
 }
 
 // ============================================================================

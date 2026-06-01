@@ -223,6 +223,7 @@ const MarketMakingExposureBalancer$json = {
     {'1': 'trigger_multiple', '3': 2, '4': 1, '5': 5, '10': 'triggerMultiple'},
     {'1': 'price_skew_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceSkewTicks'},
     {'1': 'limit_multiple', '3': 4, '4': 1, '5': 5, '10': 'limitMultiple'},
+    {'1': 'opportunistic_enabled', '3': 5, '4': 1, '5': 8, '10': 'opportunisticEnabled'},
   ],
 };
 
@@ -231,7 +232,8 @@ final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.ba
     'ChxNYXJrZXRNYWtpbmdFeHBvc3VyZUJhbGFuY2VyEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZW'
     'QSKQoQdHJpZ2dlcl9tdWx0aXBsZRgCIAEoBVIPdHJpZ2dlck11bHRpcGxlEigKEHByaWNlX3Nr'
     'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEiUKDmxpbWl0X211bHRpcGxlGAQgASgFUg'
-    '1saW1pdE11bHRpcGxl');
+    '1saW1pdE11bHRpcGxlEjMKFW9wcG9ydHVuaXN0aWNfZW5hYmxlZBgFIAEoCFIUb3Bwb3J0dW5p'
+    'c3RpY0VuYWJsZWQ=');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {

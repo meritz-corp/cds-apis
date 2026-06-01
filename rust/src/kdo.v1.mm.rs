@@ -213,6 +213,9 @@ pub struct MarketMakingExposureBalancer {
     /// hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
     #[prost(int32, tag="4")]
     pub limit_multiple: i32,
+    /// opportunistic close 기능 활성화 여부
+    #[prost(bool, tag="5")]
+    pub opportunistic_enabled: bool,
 }
 // ============================================================================
 // Request/Response Messages
