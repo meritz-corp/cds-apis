@@ -1152,18 +1152,6 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -1186,32 +1174,12 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_adjustment", ToString::to_string(&self.bid_adjustment).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_adjustment", ToString::to_string(&self.ask_adjustment).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_basis", ToString::to_string(&self.bid_basis).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1250,18 +1218,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "momentum",
             "exposure_balancer",
             "exposureBalancer",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
             "bid_quantity",
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
-            "bid_basis",
-            "bidBasis",
-            "ask_basis",
-            "askBasis",
             "bid_offset",
             "bidOffset",
             "ask_offset",
@@ -1279,12 +1239,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             MarketBias,
             Momentum,
             ExposureBalancer,
-            BidAdjustment,
-            AskAdjustment,
             BidQuantity,
             AskQuantity,
-            BidBasis,
-            AskBasis,
             BidOffset,
             AskOffset,
             Basis,
@@ -1317,12 +1273,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "marketBias" | "market_bias" => Ok(GeneratedField::MarketBias),
                             "momentum" => Ok(GeneratedField::Momentum),
                             "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "basis" => Ok(GeneratedField::Basis),
@@ -1352,12 +1304,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut market_bias__ = None;
                 let mut momentum__ = None;
                 let mut exposure_balancer__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
-                let mut bid_basis__ = None;
-                let mut ask_basis__ = None;
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
                 let mut basis__ = None;
@@ -1400,22 +1348,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             exposure_balancer__ = map_.next_value()?;
                         }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::BidQuantity => {
                             if bid_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidQuantity"));
@@ -1429,22 +1361,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 return Err(serde::de::Error::duplicate_field("askQuantity"));
                             }
                             ask_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -1492,12 +1408,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     market_bias: market_bias__,
                     momentum: momentum__,
                     exposure_balancer: exposure_balancer__,
-                    bid_adjustment: bid_adjustment__.unwrap_or_default(),
-                    ask_adjustment: ask_adjustment__.unwrap_or_default(),
                     bid_quantity: bid_quantity__.unwrap_or_default(),
                     ask_quantity: ask_quantity__.unwrap_or_default(),
-                    bid_basis: bid_basis__.unwrap_or_default(),
-                    ask_basis: ask_basis__.unwrap_or_default(),
                     bid_offset: bid_offset__.unwrap_or_default(),
                     ask_offset: ask_offset__.unwrap_or_default(),
                     basis: basis__.unwrap_or_default(),

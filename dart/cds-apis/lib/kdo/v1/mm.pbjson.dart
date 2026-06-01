@@ -59,17 +59,20 @@ const MarketMakingConfiguration$json = {
     {'1': 'market_bias', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMarketBias', '10': 'marketBias'},
     {'1': 'momentum', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMomentum', '10': 'momentum'},
     {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureBalancer', '10': 'exposureBalancer'},
-    {'1': 'bid_adjustment', '3': 7, '4': 1, '5': 3, '10': 'bidAdjustment'},
-    {'1': 'ask_adjustment', '3': 8, '4': 1, '5': 3, '10': 'askAdjustment'},
     {'1': 'bid_quantity', '3': 9, '4': 1, '5': 3, '10': 'bidQuantity'},
     {'1': 'ask_quantity', '3': 10, '4': 1, '5': 3, '10': 'askQuantity'},
-    {'1': 'bid_basis', '3': 11, '4': 1, '5': 3, '10': 'bidBasis'},
-    {'1': 'ask_basis', '3': 12, '4': 1, '5': 3, '10': 'askBasis'},
     {'1': 'bid_offset', '3': 13, '4': 1, '5': 3, '10': 'bidOffset'},
     {'1': 'ask_offset', '3': 14, '4': 1, '5': 3, '10': 'askOffset'},
     {'1': 'basis', '3': 15, '4': 1, '5': 3, '10': 'basis'},
     {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 5, '10': 'baseHalfTicks'},
   ],
+  '9': [
+    {'1': 7, '2': 8},
+    {'1': 8, '2': 9},
+    {'1': 11, '2': 12},
+    {'1': 12, '2': 13},
+  ],
+  '10': ['bid_adjustment', 'ask_adjustment', 'bid_basis', 'ask_basis'],
 };
 
 /// Descriptor for `MarketMakingConfiguration`. Decode as a `google.protobuf.DescriptorProto`.
@@ -81,13 +84,12 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'TWFya2V0TWFraW5nTWFya2V0Qmlhc1IKbWFya2V0QmlhcxI7Cghtb21lbnR1bRgFIAEoCzIfLm'
     'tkby52MS5tbS5NYXJrZXRNYWtpbmdNb21lbnR1bVIIbW9tZW50dW0SVAoRZXhwb3N1cmVfYmFs'
     'YW5jZXIYBiABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5nRXhwb3N1cmVCYWxhbmNlclIQZX'
-    'hwb3N1cmVCYWxhbmNlchIlCg5iaWRfYWRqdXN0bWVudBgHIAEoA1INYmlkQWRqdXN0bWVudBIl'
-    'Cg5hc2tfYWRqdXN0bWVudBgIIAEoA1INYXNrQWRqdXN0bWVudBIhCgxiaWRfcXVhbnRpdHkYCS'
-    'ABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSGwoJ'
-    'YmlkX2Jhc2lzGAsgASgDUghiaWRCYXNpcxIbCglhc2tfYmFzaXMYDCABKANSCGFza0Jhc2lzEh'
-    '0KCmJpZF9vZmZzZXQYDSABKANSCWJpZE9mZnNldBIdCgphc2tfb2Zmc2V0GA4gASgDUglhc2tP'
-    'ZmZzZXQSFAoFYmFzaXMYDyABKANSBWJhc2lzEiYKD2Jhc2VfaGFsZl90aWNrcxgQIAEoBVINYm'
-    'FzZUhhbGZUaWNrcw==');
+    'hwb3N1cmVCYWxhbmNlchIhCgxiaWRfcXVhbnRpdHkYCSABKANSC2JpZFF1YW50aXR5EiEKDGFz'
+    'a19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSHQoKYmlkX29mZnNldBgNIAEoA1IJYmlkT2'
+    'Zmc2V0Eh0KCmFza19vZmZzZXQYDiABKANSCWFza09mZnNldBIUCgViYXNpcxgPIAEoA1IFYmFz'
+    'aXMSJgoPYmFzZV9oYWxmX3RpY2tzGBAgASgFUg1iYXNlSGFsZlRpY2tzSgQIBxAISgQICBAJSg'
+    'QICxAMSgQIDBANUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJ'
+    'YXNrX2Jhc2lz');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

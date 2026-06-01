@@ -46,24 +46,12 @@ pub struct MarketMakingConfiguration {
     /// 통합 포지션 관리 설정
     #[prost(message, optional, tag="6")]
     pub exposure_balancer: ::core::option::Option<MarketMakingExposureBalancer>,
-    /// 기준가격 대비 bid 조정값 (Price internal representation)
-    #[prost(int64, tag="7")]
-    pub bid_adjustment: i64,
-    /// 기준가격 대비 ask 조정값 (Price internal representation)
-    #[prost(int64, tag="8")]
-    pub ask_adjustment: i64,
     /// 레벨당 매수 수량
     #[prost(int64, tag="9")]
     pub bid_quantity: i64,
     /// 레벨당 매도 수량
     #[prost(int64, tag="10")]
     pub ask_quantity: i64,
-    /// NAV 계산용 bid basis (Price internal representation)
-    #[prost(int64, tag="11")]
-    pub bid_basis: i64,
-    /// NAV 계산용 ask basis (Price internal representation)
-    #[prost(int64, tag="12")]
-    pub ask_basis: i64,
     /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
     #[prost(int64, tag="13")]
     pub bid_offset: i64,

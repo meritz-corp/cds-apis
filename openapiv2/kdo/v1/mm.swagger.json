@@ -592,16 +592,6 @@
           "$ref": "#/definitions/mmMarketMakingExposureBalancer",
           "title": "통합 포지션 관리 설정"
         },
-        "bidAdjustment": {
-          "type": "string",
-          "format": "int64",
-          "title": "기준가격 대비 bid 조정값 (Price internal representation)"
-        },
-        "askAdjustment": {
-          "type": "string",
-          "format": "int64",
-          "title": "기준가격 대비 ask 조정값 (Price internal representation)"
-        },
         "bidQuantity": {
           "type": "string",
           "format": "int64",
@@ -611,16 +601,6 @@
           "type": "string",
           "format": "int64",
           "title": "레벨당 매도 수량"
-        },
-        "bidBasis": {
-          "type": "string",
-          "format": "int64",
-          "title": "NAV 계산용 bid basis (Price internal representation)"
-        },
-        "askBasis": {
-          "type": "string",
-          "format": "int64",
-          "title": "NAV 계산용 ask basis (Price internal representation)"
         },
         "bidOffset": {
           "type": "string",

@@ -140,23 +140,15 @@ message MarketMakingConfiguration {
   // 통합 포지션 관리 설정
   MarketMakingExposureBalancer exposure_balancer = 6;
 
-  // 기준가격 대비 bid 조정값 (Price internal representation)
-  int64 bid_adjustment = 7;
-
-  // 기준가격 대비 ask 조정값 (Price internal representation)
-  int64 ask_adjustment = 8;
+  // 필드 7, 8, 11, 12 제거 (bid_adjustment, ask_adjustment, bid_basis, ask_basis — deprecated)
+  reserved 7, 8, 11, 12;
+  reserved "bid_adjustment", "ask_adjustment", "bid_basis", "ask_basis";
 
   // 레벨당 매수 수량
   int64 bid_quantity = 9;
 
   // 레벨당 매도 수량
   int64 ask_quantity = 10;
-
-  // NAV 계산용 bid basis (Price internal representation)
-  int64 bid_basis = 11;
-
-  // NAV 계산용 ask basis (Price internal representation)
-  int64 ask_basis = 12;
 
   // NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
   int64 bid_offset = 13;

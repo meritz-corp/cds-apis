@@ -133,12 +133,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingMarketBias? marketBias,
     MarketMakingMomentum? momentum,
     MarketMakingExposureBalancer? exposureBalancer,
-    $fixnum.Int64? bidAdjustment,
-    $fixnum.Int64? askAdjustment,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
-    $fixnum.Int64? bidBasis,
-    $fixnum.Int64? askBasis,
     $fixnum.Int64? bidOffset,
     $fixnum.Int64? askOffset,
     $fixnum.Int64? basis,
@@ -151,12 +147,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (marketBias != null) result.marketBias = marketBias;
     if (momentum != null) result.momentum = momentum;
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
-    if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
-    if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
-    if (bidBasis != null) result.bidBasis = bidBasis;
-    if (askBasis != null) result.askBasis = askBasis;
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
     if (basis != null) result.basis = basis;
@@ -176,12 +168,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingMarketBias>(4, _omitFieldNames ? '' : 'marketBias', subBuilder: MarketMakingMarketBias.create)
     ..aOM<MarketMakingMomentum>(5, _omitFieldNames ? '' : 'momentum', subBuilder: MarketMakingMomentum.create)
     ..aOM<MarketMakingExposureBalancer>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: MarketMakingExposureBalancer.create)
-    ..aInt64(7, _omitFieldNames ? '' : 'bidAdjustment')
-    ..aInt64(8, _omitFieldNames ? '' : 'askAdjustment')
     ..aInt64(9, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(10, _omitFieldNames ? '' : 'askQuantity')
-    ..aInt64(11, _omitFieldNames ? '' : 'bidBasis')
-    ..aInt64(12, _omitFieldNames ? '' : 'askBasis')
     ..aInt64(13, _omitFieldNames ? '' : 'bidOffset')
     ..aInt64(14, _omitFieldNames ? '' : 'askOffset')
     ..aInt64(15, _omitFieldNames ? '' : 'basis')
@@ -276,103 +264,63 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   MarketMakingExposureBalancer ensureExposureBalancer() => $_ensure(5);
 
-  /// 기준가격 대비 bid 조정값 (Price internal representation)
-  @$pb.TagNumber(7)
-  $fixnum.Int64 get bidAdjustment => $_getI64(6);
-  @$pb.TagNumber(7)
-  set bidAdjustment($fixnum.Int64 value) => $_setInt64(6, value);
-  @$pb.TagNumber(7)
-  $core.bool hasBidAdjustment() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearBidAdjustment() => $_clearField(7);
-
-  /// 기준가격 대비 ask 조정값 (Price internal representation)
-  @$pb.TagNumber(8)
-  $fixnum.Int64 get askAdjustment => $_getI64(7);
-  @$pb.TagNumber(8)
-  set askAdjustment($fixnum.Int64 value) => $_setInt64(7, value);
-  @$pb.TagNumber(8)
-  $core.bool hasAskAdjustment() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearAskAdjustment() => $_clearField(8);
-
   /// 레벨당 매수 수량
   @$pb.TagNumber(9)
-  $fixnum.Int64 get bidQuantity => $_getI64(8);
+  $fixnum.Int64 get bidQuantity => $_getI64(6);
   @$pb.TagNumber(9)
-  set bidQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(9)
-  $core.bool hasBidQuantity() => $_has(8);
+  $core.bool hasBidQuantity() => $_has(6);
   @$pb.TagNumber(9)
   void clearBidQuantity() => $_clearField(9);
 
   /// 레벨당 매도 수량
   @$pb.TagNumber(10)
-  $fixnum.Int64 get askQuantity => $_getI64(9);
+  $fixnum.Int64 get askQuantity => $_getI64(7);
   @$pb.TagNumber(10)
-  set askQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  set askQuantity($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(10)
-  $core.bool hasAskQuantity() => $_has(9);
+  $core.bool hasAskQuantity() => $_has(7);
   @$pb.TagNumber(10)
   void clearAskQuantity() => $_clearField(10);
 
-  /// NAV 계산용 bid basis (Price internal representation)
-  @$pb.TagNumber(11)
-  $fixnum.Int64 get bidBasis => $_getI64(10);
-  @$pb.TagNumber(11)
-  set bidBasis($fixnum.Int64 value) => $_setInt64(10, value);
-  @$pb.TagNumber(11)
-  $core.bool hasBidBasis() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearBidBasis() => $_clearField(11);
-
-  /// NAV 계산용 ask basis (Price internal representation)
-  @$pb.TagNumber(12)
-  $fixnum.Int64 get askBasis => $_getI64(11);
-  @$pb.TagNumber(12)
-  set askBasis($fixnum.Int64 value) => $_setInt64(11, value);
-  @$pb.TagNumber(12)
-  $core.bool hasAskBasis() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearAskBasis() => $_clearField(12);
-
   /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
   @$pb.TagNumber(13)
-  $fixnum.Int64 get bidOffset => $_getI64(12);
+  $fixnum.Int64 get bidOffset => $_getI64(8);
   @$pb.TagNumber(13)
-  set bidOffset($fixnum.Int64 value) => $_setInt64(12, value);
+  set bidOffset($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(13)
-  $core.bool hasBidOffset() => $_has(12);
+  $core.bool hasBidOffset() => $_has(8);
   @$pb.TagNumber(13)
   void clearBidOffset() => $_clearField(13);
 
   /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
   @$pb.TagNumber(14)
-  $fixnum.Int64 get askOffset => $_getI64(13);
+  $fixnum.Int64 get askOffset => $_getI64(9);
   @$pb.TagNumber(14)
-  set askOffset($fixnum.Int64 value) => $_setInt64(13, value);
+  set askOffset($fixnum.Int64 value) => $_setInt64(9, value);
   @$pb.TagNumber(14)
-  $core.bool hasAskOffset() => $_has(13);
+  $core.bool hasAskOffset() => $_has(9);
   @$pb.TagNumber(14)
   void clearAskOffset() => $_clearField(14);
 
   /// 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
   @$pb.TagNumber(15)
-  $fixnum.Int64 get basis => $_getI64(14);
+  $fixnum.Int64 get basis => $_getI64(10);
   @$pb.TagNumber(15)
-  set basis($fixnum.Int64 value) => $_setInt64(14, value);
+  set basis($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(15)
-  $core.bool hasBasis() => $_has(14);
+  $core.bool hasBasis() => $_has(10);
   @$pb.TagNumber(15)
   void clearBasis() => $_clearField(15);
 
   /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
   @$pb.TagNumber(16)
-  $core.int get baseHalfTicks => $_getIZ(15);
+  $core.int get baseHalfTicks => $_getIZ(11);
   @$pb.TagNumber(16)
-  set baseHalfTicks($core.int value) => $_setSignedInt32(15, value);
+  set baseHalfTicks($core.int value) => $_setSignedInt32(11, value);
   @$pb.TagNumber(16)
-  $core.bool hasBaseHalfTicks() => $_has(15);
+  $core.bool hasBaseHalfTicks() => $_has(11);
   @$pb.TagNumber(16)
   void clearBaseHalfTicks() => $_clearField(16);
 }
