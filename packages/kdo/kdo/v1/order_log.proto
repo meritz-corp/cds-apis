@@ -266,15 +266,22 @@ message ListOrderLogsResponse {
 }
 
 message GetOrderLogStatisticsRequest {
-  // Available Sequence and Operator
+  // AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.
+  //
+  // Available Fields and Operators
   // * fund_code
   //   * `equal`, `contains`
   // * symbol
   //   * `equal`, `contains`
+  // * exchange_time
+  //   * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `>`, `>=`, `<`, `<=` 지원.
+  //   * 미지정 시 전체 기간 누적 집계.
   //
   // Examples
   // * filter=fund_code="0159"
   // * filter=symbol:"7526"
+  // * filter=exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
+  // * filter=fund_code="0159" AND exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
   string filter = 1;
 }
 
