@@ -70,6 +70,12 @@ pub struct MarketMakingConfiguration {
     /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
     #[prost(int64, tag="14")]
     pub ask_offset: i64,
+    /// 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
+    #[prost(int64, tag="15")]
+    pub basis: i64,
+    /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
+    #[prost(int32, tag="16")]
+    pub base_half_ticks: i32,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

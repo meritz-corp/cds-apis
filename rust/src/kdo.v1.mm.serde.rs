@@ -1158,6 +1158,12 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -1217,6 +1223,14 @@ impl serde::Serialize for MarketMakingConfiguration {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("base_half_ticks", &self.base_half_ticks)?;
+        }
         struct_ser.end()
     }
 }
@@ -1252,6 +1266,9 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "bidOffset",
             "ask_offset",
             "askOffset",
+            "basis",
+            "base_half_ticks",
+            "baseHalfTicks",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1270,6 +1287,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             AskBasis,
             BidOffset,
             AskOffset,
+            Basis,
+            BaseHalfTicks,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1306,6 +1325,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
+                            "basis" => Ok(GeneratedField::Basis),
+                            "baseHalfTicks" | "base_half_ticks" => Ok(GeneratedField::BaseHalfTicks),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1339,6 +1360,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut ask_basis__ = None;
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
+                let mut basis__ = None;
+                let mut base_half_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -1441,6 +1464,22 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::Basis => {
+                            if basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basis"));
+                            }
+                            basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BaseHalfTicks => {
+                            if base_half_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseHalfTicks"));
+                            }
+                            base_half_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1461,6 +1500,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     ask_basis: ask_basis__.unwrap_or_default(),
                     bid_offset: bid_offset__.unwrap_or_default(),
                     ask_offset: ask_offset__.unwrap_or_default(),
+                    basis: basis__.unwrap_or_default(),
+                    base_half_ticks: base_half_ticks__.unwrap_or_default(),
                 })
             }
         }

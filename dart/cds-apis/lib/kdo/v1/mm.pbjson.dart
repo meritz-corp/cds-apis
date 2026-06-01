@@ -67,6 +67,8 @@ const MarketMakingConfiguration$json = {
     {'1': 'ask_basis', '3': 12, '4': 1, '5': 3, '10': 'askBasis'},
     {'1': 'bid_offset', '3': 13, '4': 1, '5': 3, '10': 'bidOffset'},
     {'1': 'ask_offset', '3': 14, '4': 1, '5': 3, '10': 'askOffset'},
+    {'1': 'basis', '3': 15, '4': 1, '5': 3, '10': 'basis'},
+    {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 5, '10': 'baseHalfTicks'},
   ],
 };
 
@@ -84,7 +86,8 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'ABKANSC2JpZFF1YW50aXR5EiEKDGFza19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSGwoJ'
     'YmlkX2Jhc2lzGAsgASgDUghiaWRCYXNpcxIbCglhc2tfYmFzaXMYDCABKANSCGFza0Jhc2lzEh'
     '0KCmJpZF9vZmZzZXQYDSABKANSCWJpZE9mZnNldBIdCgphc2tfb2Zmc2V0GA4gASgDUglhc2tP'
-    'ZmZzZXQ=');
+    'ZmZzZXQSFAoFYmFzaXMYDyABKANSBWJhc2lzEiYKD2Jhc2VfaGFsZl90aWNrcxgQIAEoBVINYm'
+    'FzZUhhbGZUaWNrcw==');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

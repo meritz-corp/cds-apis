@@ -141,6 +141,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? askBasis,
     $fixnum.Int64? bidOffset,
     $fixnum.Int64? askOffset,
+    $fixnum.Int64? basis,
+    $core.int? baseHalfTicks,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -157,6 +159,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (askBasis != null) result.askBasis = askBasis;
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
+    if (basis != null) result.basis = basis;
+    if (baseHalfTicks != null) result.baseHalfTicks = baseHalfTicks;
     return result;
   }
 
@@ -180,6 +184,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aInt64(12, _omitFieldNames ? '' : 'askBasis')
     ..aInt64(13, _omitFieldNames ? '' : 'bidOffset')
     ..aInt64(14, _omitFieldNames ? '' : 'askOffset')
+    ..aInt64(15, _omitFieldNames ? '' : 'basis')
+    ..a<$core.int>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -349,6 +355,26 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasAskOffset() => $_has(13);
   @$pb.TagNumber(14)
   void clearAskOffset() => $_clearField(14);
+
+  /// 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get basis => $_getI64(14);
+  @$pb.TagNumber(15)
+  set basis($fixnum.Int64 value) => $_setInt64(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasBasis() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearBasis() => $_clearField(15);
+
+  /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
+  @$pb.TagNumber(16)
+  $core.int get baseHalfTicks => $_getIZ(15);
+  @$pb.TagNumber(16)
+  set baseHalfTicks($core.int value) => $_setSignedInt32(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasBaseHalfTicks() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearBaseHalfTicks() => $_clearField(16);
 }
 
 enum MarketMakingPricing_Pricing {

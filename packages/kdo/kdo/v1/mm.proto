@@ -163,6 +163,12 @@ message MarketMakingConfiguration {
 
   // NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
   int64 ask_offset = 14;
+
+  // 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
+  int64 basis = 15;
+
+  // 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
+  int32 base_half_ticks = 16;
 }
 
 // NAV pricing 상세 설정

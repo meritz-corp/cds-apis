@@ -631,6 +631,16 @@
           "type": "string",
           "format": "int64",
           "title": "NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)"
+        },
+        "basis": {
+          "type": "string",
+          "format": "int64",
+          "title": "단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)"
+        },
+        "baseHalfTicks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "호가 반폭 (틱 수). bid = mid - half, ask = mid + half"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
