@@ -425,6 +425,11 @@
                 "hedgeFundCode": {
                   "type": "string",
                   "title": "헷지 주문이 실행되는 펀드 코드"
+                },
+                "tickOffset": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "상대호가/호가 가격에서의 틱 오프셋 (-30 ~ +30).\n양수 = 공격적 (매수 더 비싸게 / 매도 더 싸게),\n음수 = 방어적 (매수 더 싸게 / 매도 더 비싸게).\nImmediateFill 일 때는 무시됨."
                 }
               },
               "title": "수정할 헷지 정보",
@@ -776,21 +781,10 @@
         "EXEC_PRICE_TYPE_UNSPECIFIED",
         "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
         "EXEC_PRICE_TYPE_COUNTER_BEST",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1",
-        "EXEC_PRICE_TYPE_QUOTED_PRICE",
-        "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1",
-        "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2",
-        "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2",
-        "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3"
+        "EXEC_PRICE_TYPE_QUOTED_PRICE"
       ],
       "default": "EXEC_PRICE_TYPE_UNSPECIFIED",
-      "description": "헷지 주문 체결 가격 유형\n거래소의 구체적인 호가 유형(QuoteType)과 달리,\n헷지 주문의 전략적 의도를 표현합니다.\n\n - EXEC_PRICE_TYPE_UNSPECIFIED: 미지정\n - EXEC_PRICE_TYPE_IMMEDIATE_FILL: 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도\n - EXEC_PRICE_TYPE_COUNTER_BEST: 상대호가: 상대방 최우선호가 가격으로 지정가 주문\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1: 상대호가 +1틱 (공격적: 매수→더 비싸게, 매도→더 싸게)\n - EXEC_PRICE_TYPE_QUOTED_PRICE: 호가 가격: 지정된 호가 가격으로 주문\n - EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1: QuotedPrice에서 1틱 더 방어적 (매수: -1틱, 매도: +1틱)\n - EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2: QuotedPrice에서 2틱 더 방어적 (매수: -2틱, 매도: +2틱)\n - EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3: QuotedPrice에서 3틱 더 방어적 (매수: -3틱, 매도: +3틱)\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2: 상대호가 +2틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3: 상대호가 +3틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4: 상대호가 +4틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5: 상대호가 +5틱\n - EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1: 상대호가 -1틱 (방어적: 매수→더 싸게, 매도→더 비싸게)\n - EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2: 상대호가 -2틱 (방어적: 매수→더 싸게, 매도→더 비싸게)\n - EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3: 상대호가 -3틱 (방어적: 매수→더 싸게, 매도→더 비싸게)"
+      "description": "헷지 주문 체결 가격 유형\n거래소의 구체적인 호가 유형(QuoteType)과 달리,\n헷지 주문의 전략적 의도를 표현합니다.\n틱 오프셋은 Hedge.tick_offset 필드로 별도 지정합니다.\n\n - EXEC_PRICE_TYPE_UNSPECIFIED: 미지정\n - EXEC_PRICE_TYPE_IMMEDIATE_FILL: 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도\n - EXEC_PRICE_TYPE_COUNTER_BEST: 상대호가: 상대방 최우선호가 가격으로 지정가 주문 + tick_offset 적용\n - EXEC_PRICE_TYPE_QUOTED_PRICE: 호가 가격: 지정된 호가 가격으로 주문 + tick_offset 적용"
     },
     "hedgeHedge": {
       "type": "object",
@@ -857,6 +851,11 @@
         "hedgeFundCode": {
           "type": "string",
           "title": "헷지 주문이 실행되는 펀드 코드"
+        },
+        "tickOffset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "상대호가/호가 가격에서의 틱 오프셋 (-30 ~ +30).\n양수 = 공격적 (매수 더 비싸게 / 매도 더 싸게),\n음수 = 방어적 (매수 더 싸게 / 매도 더 비싸게).\nImmediateFill 일 때는 무시됨."
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",

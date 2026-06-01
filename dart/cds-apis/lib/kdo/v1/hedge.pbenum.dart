@@ -17,57 +17,25 @@ import 'package:protobuf/protobuf.dart' as $pb;
 /// 헷지 주문 체결 가격 유형
 /// 거래소의 구체적인 호가 유형(QuoteType)과 달리,
 /// 헷지 주문의 전략적 의도를 표현합니다.
+/// 틱 오프셋은 Hedge.tick_offset 필드로 별도 지정합니다.
 class ExecPriceType extends $pb.ProtobufEnum {
   /// 미지정
   static const ExecPriceType EXEC_PRICE_TYPE_UNSPECIFIED = ExecPriceType._(0, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_UNSPECIFIED');
   /// 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도
   static const ExecPriceType EXEC_PRICE_TYPE_IMMEDIATE_FILL = ExecPriceType._(1, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_IMMEDIATE_FILL');
-  /// 상대호가: 상대방 최우선호가 가격으로 지정가 주문
+  /// 상대호가: 상대방 최우선호가 가격으로 지정가 주문 + tick_offset 적용
   static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST = ExecPriceType._(2, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST');
-  /// 상대호가 +1틱 (공격적: 매수→더 비싸게, 매도→더 싸게)
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1 = ExecPriceType._(3, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1');
-  /// 호가 가격: 지정된 호가 가격으로 주문
+  /// 호가 가격: 지정된 호가 가격으로 주문 + tick_offset 적용
   static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE = ExecPriceType._(4, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE');
-  /// QuotedPrice에서 1틱 더 방어적 (매수: -1틱, 매도: +1틱)
-  static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1 = ExecPriceType._(5, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1');
-  /// QuotedPrice에서 2틱 더 방어적 (매수: -2틱, 매도: +2틱)
-  static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2 = ExecPriceType._(6, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2');
-  /// QuotedPrice에서 3틱 더 방어적 (매수: -3틱, 매도: +3틱)
-  static const ExecPriceType EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3 = ExecPriceType._(7, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3');
-  /// 상대호가 +2틱
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2 = ExecPriceType._(8, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2');
-  /// 상대호가 +3틱
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3 = ExecPriceType._(9, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3');
-  /// 상대호가 +4틱
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4 = ExecPriceType._(10, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4');
-  /// 상대호가 +5틱
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5 = ExecPriceType._(11, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5');
-  /// 상대호가 -1틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1 = ExecPriceType._(12, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1');
-  /// 상대호가 -2틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2 = ExecPriceType._(13, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2');
-  /// 상대호가 -3틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
-  static const ExecPriceType EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3 = ExecPriceType._(14, _omitEnumNames ? '' : 'EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3');
 
   static const $core.List<ExecPriceType> values = <ExecPriceType> [
     EXEC_PRICE_TYPE_UNSPECIFIED,
     EXEC_PRICE_TYPE_IMMEDIATE_FILL,
     EXEC_PRICE_TYPE_COUNTER_BEST,
-    EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1,
     EXEC_PRICE_TYPE_QUOTED_PRICE,
-    EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1,
-    EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2,
-    EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3,
-    EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2,
-    EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3,
-    EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4,
-    EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5,
-    EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1,
-    EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2,
-    EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3,
   ];
 
-  static final $core.List<ExecPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 14);
+  static final $core.List<ExecPriceType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
   static ExecPriceType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const ExecPriceType._(super.value, super.name);

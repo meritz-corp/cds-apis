@@ -50,6 +50,12 @@ pub struct Hedge {
     /// 헷지 주문이 실행되는 펀드 코드
     #[prost(string, tag="13")]
     pub hedge_fund_code: ::prost::alloc::string::String,
+    /// 상대호가/호가 가격에서의 틱 오프셋 (-30 ~ +30).
+    /// 양수 = 공격적 (매수 더 비싸게 / 매도 더 싸게),
+    /// 음수 = 방어적 (매수 더 싸게 / 매도 더 비싸게).
+    /// ImmediateFill 일 때는 무시됨.
+    #[prost(int32, tag="14")]
+    pub tick_offset: i32,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -471,6 +477,7 @@ pub struct UpdateHedgeAccumulatorFilledQuantitiesRequest {
 /// 헷지 주문 체결 가격 유형
 /// 거래소의 구체적인 호가 유형(QuoteType)과 달리,
 /// 헷지 주문의 전략적 의도를 표현합니다.
+/// 틱 오프셋은 Hedge.tick_offset 필드로 별도 지정합니다.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ExecPriceType {
@@ -478,32 +485,10 @@ pub enum ExecPriceType {
     Unspecified = 0,
     /// 즉시 체결: 조건부지정가(PriceLimitBestTake)로 즉시 체결 시도
     ImmediateFill = 1,
-    /// 상대호가: 상대방 최우선호가 가격으로 지정가 주문
+    /// 상대호가: 상대방 최우선호가 가격으로 지정가 주문 + tick_offset 적용
     CounterBest = 2,
-    /// 상대호가 +1틱 (공격적: 매수→더 비싸게, 매도→더 싸게)
-    CounterBestPlus1 = 3,
-    /// 호가 가격: 지정된 호가 가격으로 주문
+    /// 호가 가격: 지정된 호가 가격으로 주문 + tick_offset 적용
     QuotedPrice = 4,
-    /// QuotedPrice에서 1틱 더 방어적 (매수: -1틱, 매도: +1틱)
-    QuotedPriceMinus1 = 5,
-    /// QuotedPrice에서 2틱 더 방어적 (매수: -2틱, 매도: +2틱)
-    QuotedPriceMinus2 = 6,
-    /// QuotedPrice에서 3틱 더 방어적 (매수: -3틱, 매도: +3틱)
-    QuotedPriceMinus3 = 7,
-    /// 상대호가 +2틱
-    CounterBestPlus2 = 8,
-    /// 상대호가 +3틱
-    CounterBestPlus3 = 9,
-    /// 상대호가 +4틱
-    CounterBestPlus4 = 10,
-    /// 상대호가 +5틱
-    CounterBestPlus5 = 11,
-    /// 상대호가 -1틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
-    CounterBestMinus1 = 12,
-    /// 상대호가 -2틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
-    CounterBestMinus2 = 13,
-    /// 상대호가 -3틱 (방어적: 매수→더 싸게, 매도→더 비싸게)
-    CounterBestMinus3 = 14,
 }
 impl ExecPriceType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -515,18 +500,7 @@ impl ExecPriceType {
             ExecPriceType::Unspecified => "EXEC_PRICE_TYPE_UNSPECIFIED",
             ExecPriceType::ImmediateFill => "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
             ExecPriceType::CounterBest => "EXEC_PRICE_TYPE_COUNTER_BEST",
-            ExecPriceType::CounterBestPlus1 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1",
             ExecPriceType::QuotedPrice => "EXEC_PRICE_TYPE_QUOTED_PRICE",
-            ExecPriceType::QuotedPriceMinus1 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1",
-            ExecPriceType::QuotedPriceMinus2 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2",
-            ExecPriceType::QuotedPriceMinus3 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3",
-            ExecPriceType::CounterBestPlus2 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2",
-            ExecPriceType::CounterBestPlus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
-            ExecPriceType::CounterBestPlus4 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
-            ExecPriceType::CounterBestPlus5 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5",
-            ExecPriceType::CounterBestMinus1 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1",
-            ExecPriceType::CounterBestMinus2 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2",
-            ExecPriceType::CounterBestMinus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -535,18 +509,7 @@ impl ExecPriceType {
             "EXEC_PRICE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "EXEC_PRICE_TYPE_IMMEDIATE_FILL" => Some(Self::ImmediateFill),
             "EXEC_PRICE_TYPE_COUNTER_BEST" => Some(Self::CounterBest),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1" => Some(Self::CounterBestPlus1),
             "EXEC_PRICE_TYPE_QUOTED_PRICE" => Some(Self::QuotedPrice),
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1" => Some(Self::QuotedPriceMinus1),
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2" => Some(Self::QuotedPriceMinus2),
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3" => Some(Self::QuotedPriceMinus3),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2" => Some(Self::CounterBestPlus2),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3" => Some(Self::CounterBestPlus3),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4" => Some(Self::CounterBestPlus4),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5" => Some(Self::CounterBestPlus5),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1" => Some(Self::CounterBestMinus1),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2" => Some(Self::CounterBestMinus2),
-            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3" => Some(Self::CounterBestMinus3),
             _ => None,
         }
     }

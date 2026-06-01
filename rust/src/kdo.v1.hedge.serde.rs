@@ -877,18 +877,7 @@ impl serde::Serialize for ExecPriceType {
             Self::Unspecified => "EXEC_PRICE_TYPE_UNSPECIFIED",
             Self::ImmediateFill => "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
             Self::CounterBest => "EXEC_PRICE_TYPE_COUNTER_BEST",
-            Self::CounterBestPlus1 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1",
             Self::QuotedPrice => "EXEC_PRICE_TYPE_QUOTED_PRICE",
-            Self::QuotedPriceMinus1 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1",
-            Self::QuotedPriceMinus2 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2",
-            Self::QuotedPriceMinus3 => "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3",
-            Self::CounterBestPlus2 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2",
-            Self::CounterBestPlus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
-            Self::CounterBestPlus4 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
-            Self::CounterBestPlus5 => "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5",
-            Self::CounterBestMinus1 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1",
-            Self::CounterBestMinus2 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2",
-            Self::CounterBestMinus3 => "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3",
         };
         serializer.serialize_str(variant)
     }
@@ -903,18 +892,7 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
             "EXEC_PRICE_TYPE_UNSPECIFIED",
             "EXEC_PRICE_TYPE_IMMEDIATE_FILL",
             "EXEC_PRICE_TYPE_COUNTER_BEST",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1",
             "EXEC_PRICE_TYPE_QUOTED_PRICE",
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1",
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2",
-            "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2",
-            "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3",
         ];
 
         struct GeneratedVisitor;
@@ -958,18 +936,7 @@ impl<'de> serde::Deserialize<'de> for ExecPriceType {
                     "EXEC_PRICE_TYPE_UNSPECIFIED" => Ok(ExecPriceType::Unspecified),
                     "EXEC_PRICE_TYPE_IMMEDIATE_FILL" => Ok(ExecPriceType::ImmediateFill),
                     "EXEC_PRICE_TYPE_COUNTER_BEST" => Ok(ExecPriceType::CounterBest),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_1" => Ok(ExecPriceType::CounterBestPlus1),
                     "EXEC_PRICE_TYPE_QUOTED_PRICE" => Ok(ExecPriceType::QuotedPrice),
-                    "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_1" => Ok(ExecPriceType::QuotedPriceMinus1),
-                    "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_2" => Ok(ExecPriceType::QuotedPriceMinus2),
-                    "EXEC_PRICE_TYPE_QUOTED_PRICE_MINUS_3" => Ok(ExecPriceType::QuotedPriceMinus3),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_2" => Ok(ExecPriceType::CounterBestPlus2),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_3" => Ok(ExecPriceType::CounterBestPlus3),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_4" => Ok(ExecPriceType::CounterBestPlus4),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_PLUS_5" => Ok(ExecPriceType::CounterBestPlus5),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_1" => Ok(ExecPriceType::CounterBestMinus1),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_2" => Ok(ExecPriceType::CounterBestMinus2),
-                    "EXEC_PRICE_TYPE_COUNTER_BEST_MINUS_3" => Ok(ExecPriceType::CounterBestMinus3),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -1214,6 +1181,9 @@ impl serde::Serialize for Hedge {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.Hedge", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1258,6 +1228,9 @@ impl serde::Serialize for Hedge {
         if true {
             struct_ser.serialize_field("hedge_fund_code", &self.hedge_fund_code)?;
         }
+        if true {
+            struct_ser.serialize_field("tick_offset", &self.tick_offset)?;
+        }
         struct_ser.end()
     }
 }
@@ -1292,6 +1265,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "quantityPerHedge",
             "hedge_fund_code",
             "hedgeFundCode",
+            "tick_offset",
+            "tickOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1309,6 +1284,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             AmendMethod,
             QuantityPerHedge,
             HedgeFundCode,
+            TickOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1344,6 +1320,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "amendMethod" | "amend_method" => Ok(GeneratedField::AmendMethod),
                             "quantityPerHedge" | "quantity_per_hedge" => Ok(GeneratedField::QuantityPerHedge),
                             "hedgeFundCode" | "hedge_fund_code" => Ok(GeneratedField::HedgeFundCode),
+                            "tickOffset" | "tick_offset" => Ok(GeneratedField::TickOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1376,6 +1353,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut amend_method__ = None;
                 let mut quantity_per_hedge__ = None;
                 let mut hedge_fund_code__ = None;
+                let mut tick_offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1460,6 +1438,14 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             }
                             hedge_fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::TickOffset => {
+                            if tick_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickOffset"));
+                            }
+                            tick_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1479,6 +1465,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     amend_method: amend_method__.unwrap_or_default(),
                     quantity_per_hedge: quantity_per_hedge__.unwrap_or_default(),
                     hedge_fund_code: hedge_fund_code__.unwrap_or_default(),
+                    tick_offset: tick_offset__.unwrap_or_default(),
                 })
             }
         }

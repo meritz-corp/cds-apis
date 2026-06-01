@@ -40,6 +40,7 @@ class Hedge extends $pb.GeneratedMessage {
     $3.AmendMethodType? amendMethod,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? quantityPerHedge,
     $core.String? hedgeFundCode,
+    $core.int? tickOffset,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -55,6 +56,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (amendMethod != null) result.amendMethod = amendMethod;
     if (quantityPerHedge != null) result.quantityPerHedge.addEntries(quantityPerHedge);
     if (hedgeFundCode != null) result.hedgeFundCode = hedgeFundCode;
+    if (tickOffset != null) result.tickOffset = tickOffset;
     return result;
   }
 
@@ -77,6 +79,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..e<$3.AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: $3.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $3.AmendMethodType.valueOf, enumValues: $3.AmendMethodType.values)
     ..m<$core.String, $core.String>(12, _omitFieldNames ? '' : 'quantityPerHedge', entryClassName: 'Hedge.QuantityPerHedgeEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('kdo.v1.hedge'))
     ..aOS(13, _omitFieldNames ? '' : 'hedgeFundCode')
+    ..a<$core.int>(14, _omitFieldNames ? '' : 'tickOffset', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -230,6 +233,19 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasHedgeFundCode() => $_has(12);
   @$pb.TagNumber(13)
   void clearHedgeFundCode() => $_clearField(13);
+
+  /// 상대호가/호가 가격에서의 틱 오프셋 (-30 ~ +30).
+  /// 양수 = 공격적 (매수 더 비싸게 / 매도 더 싸게),
+  /// 음수 = 방어적 (매수 더 싸게 / 매도 더 비싸게).
+  /// ImmediateFill 일 때는 무시됨.
+  @$pb.TagNumber(14)
+  $core.int get tickOffset => $_getIZ(13);
+  @$pb.TagNumber(14)
+  set tickOffset($core.int value) => $_setSignedInt32(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasTickOffset() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearTickOffset() => $_clearField(14);
 }
 
 enum HedgeMethod_Method {
