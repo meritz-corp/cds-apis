@@ -63,8 +63,11 @@ const MarketMakingConfiguration$json = {
     {'1': 'ask_quantity', '3': 10, '4': 1, '5': 3, '10': 'askQuantity'},
     {'1': 'bid_offset', '3': 13, '4': 1, '5': 3, '10': 'bidOffset'},
     {'1': 'ask_offset', '3': 14, '4': 1, '5': 3, '10': 'askOffset'},
-    {'1': 'basis', '3': 15, '4': 1, '5': 3, '10': 'basis'},
+    {'1': 'basis', '3': 15, '4': 1, '5': 3, '9': 0, '10': 'basis', '17': true},
     {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 5, '10': 'baseHalfTicks'},
+  ],
+  '8': [
+    {'1': '_basis'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -86,10 +89,10 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'YW5jZXIYBiABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5nRXhwb3N1cmVCYWxhbmNlclIQZX'
     'hwb3N1cmVCYWxhbmNlchIhCgxiaWRfcXVhbnRpdHkYCSABKANSC2JpZFF1YW50aXR5EiEKDGFz'
     'a19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSHQoKYmlkX29mZnNldBgNIAEoA1IJYmlkT2'
-    'Zmc2V0Eh0KCmFza19vZmZzZXQYDiABKANSCWFza09mZnNldBIUCgViYXNpcxgPIAEoA1IFYmFz'
-    'aXMSJgoPYmFzZV9oYWxmX3RpY2tzGBAgASgFUg1iYXNlSGFsZlRpY2tzSgQIBxAISgQICBAJSg'
-    'QICxAMSgQIDBANUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJ'
-    'YXNrX2Jhc2lz');
+    'Zmc2V0Eh0KCmFza19vZmZzZXQYDiABKANSCWFza09mZnNldBIZCgViYXNpcxgPIAEoA0gAUgVi'
+    'YXNpc4gBARImCg9iYXNlX2hhbGZfdGlja3MYECABKAVSDWJhc2VIYWxmVGlja3NCCAoGX2Jhc2'
+    'lzSgQIBxAISgQICBAJSgQICxAMSgQIDBANUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1l'
+    'bnRSCWJpZF9iYXNpc1IJYXNrX2Jhc2lz');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

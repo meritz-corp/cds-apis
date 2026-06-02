@@ -1571,10 +1571,10 @@ impl serde::Serialize for MarketMakingConfiguration {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
-        if true {
+        if let Some(v) = self.basis.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
+            struct_ser.serialize_field("basis", ToString::to_string(&v).as_str())?;
         }
         if true {
             struct_ser.serialize_field("base_half_ticks", &self.base_half_ticks)?;
@@ -1765,7 +1765,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 return Err(serde::de::Error::duplicate_field("basis"));
                             }
                             basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::BaseHalfTicks => {
@@ -1792,7 +1792,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     ask_quantity: ask_quantity__.unwrap_or_default(),
                     bid_offset: bid_offset__.unwrap_or_default(),
                     ask_offset: ask_offset__.unwrap_or_default(),
-                    basis: basis__.unwrap_or_default(),
+                    basis: basis__,
                     base_half_ticks: base_half_ticks__.unwrap_or_default(),
                 })
             }

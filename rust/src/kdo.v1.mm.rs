@@ -59,8 +59,8 @@ pub struct MarketMakingConfiguration {
     #[prost(int64, tag="14")]
     pub ask_offset: i64,
     /// 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
-    #[prost(int64, tag="15")]
-    pub basis: i64,
+    #[prost(int64, optional, tag="15")]
+    pub basis: ::core::option::Option<i64>,
     /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
     #[prost(int32, tag="16")]
     pub base_half_ticks: i32,
