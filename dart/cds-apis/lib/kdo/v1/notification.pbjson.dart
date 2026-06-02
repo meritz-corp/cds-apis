@@ -140,6 +140,7 @@ const NavigateAction$json = {
   '1': 'NavigateAction',
   '2': [
     {'1': 'lp_page', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.notification.LpPageTarget', '9': 0, '10': 'lpPage'},
+    {'1': 'future_lp_page', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.notification.FutureLpPageTarget', '9': 0, '10': 'futureLpPage'},
   ],
   '8': [
     {'1': 'target'},
@@ -149,7 +150,9 @@ const NavigateAction$json = {
 /// Descriptor for `NavigateAction`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List navigateActionDescriptor = $convert.base64Decode(
     'Cg5OYXZpZ2F0ZUFjdGlvbhI8CgdscF9wYWdlGAEgASgLMiEua2RvLnYxLm5vdGlmaWNhdGlvbi'
-    '5McFBhZ2VUYXJnZXRIAFIGbHBQYWdlQggKBnRhcmdldA==');
+    '5McFBhZ2VUYXJnZXRIAFIGbHBQYWdlEk8KDmZ1dHVyZV9scF9wYWdlGAIgASgLMicua2RvLnYx'
+    'Lm5vdGlmaWNhdGlvbi5GdXR1cmVMcFBhZ2VUYXJnZXRIAFIMZnV0dXJlTHBQYWdlQggKBnRhcm'
+    'dldA==');
 
 @$core.Deprecated('Use lpPageTargetDescriptor instead')
 const LpPageTarget$json = {
@@ -164,6 +167,20 @@ const LpPageTarget$json = {
 final $typed_data.Uint8List lpPageTargetDescriptor = $convert.base64Decode(
     'CgxMcFBhZ2VUYXJnZXQSGQoIZXRmX2NvZGUYASABKAlSB2V0ZkNvZGUSGwoJZnVuZF9jb2RlGA'
     'IgASgJUghmdW5kQ29kZQ==');
+
+@$core.Deprecated('Use futureLpPageTargetDescriptor instead')
+const FutureLpPageTarget$json = {
+  '1': 'FutureLpPageTarget',
+  '2': [
+    {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '10': 'futureSymbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+  ],
+};
+
+/// Descriptor for `FutureLpPageTarget`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List futureLpPageTargetDescriptor = $convert.base64Decode(
+    'ChJGdXR1cmVMcFBhZ2VUYXJnZXQSIwoNZnV0dXJlX3N5bWJvbBgBIAEoCVIMZnV0dXJlU3ltYm'
+    '9sEhsKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGU=');
 
 @$core.Deprecated('Use notificationDescriptor instead')
 const Notification$json = {

@@ -104,7 +104,7 @@ pub struct NoOp {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NavigateAction {
     /// Navigation target
-    #[prost(oneof="navigate_action::Target", tags="1")]
+    #[prost(oneof="navigate_action::Target", tags="1, 2")]
     pub target: ::core::option::Option<navigate_action::Target>,
 }
 /// Nested message and enum types in `NavigateAction`.
@@ -113,22 +113,36 @@ pub mod navigate_action {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
-        /// Navigate to LP page
-        ///
-        /// Future targets can be added here:
-        /// OrderDetailTarget order_detail = 2;
-        /// SettingsTarget settings = 3;
+        /// Navigate to LP page (ETF LP)
         #[prost(message, tag="1")]
         LpPage(super::LpPageTarget),
+        /// Navigate to Futures LP page
+        ///
+        /// Future targets can be added here:
+        /// OrderDetailTarget order_detail = 3;
+        /// SettingsTarget settings = 4;
+        #[prost(message, tag="2")]
+        FutureLpPage(super::FutureLpPageTarget),
     }
 }
-/// LP page navigation target
+/// LP page navigation target (ETF LP)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LpPageTarget {
     /// ETF code (e.g., "A252670")
     #[prost(string, tag="1")]
     pub etf_code: ::prost::alloc::string::String,
+    /// Fund code (e.g., "0331")
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+}
+/// Futures LP page navigation target
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FutureLpPageTarget {
+    /// Futures symbol (e.g., "101W3000")
+    #[prost(string, tag="1")]
+    pub future_symbol: ::prost::alloc::string::String,
     /// Fund code (e.g., "0331")
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,

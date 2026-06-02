@@ -411,6 +411,7 @@ class NoOp extends $pb.GeneratedMessage {
 
 enum NavigateAction_Target {
   lpPage, 
+  futureLpPage, 
   notSet
 }
 
@@ -418,9 +419,11 @@ enum NavigateAction_Target {
 class NavigateAction extends $pb.GeneratedMessage {
   factory NavigateAction({
     LpPageTarget? lpPage,
+    FutureLpPageTarget? futureLpPage,
   }) {
     final result = create();
     if (lpPage != null) result.lpPage = lpPage;
+    if (futureLpPage != null) result.futureLpPage = futureLpPage;
     return result;
   }
 
@@ -431,11 +434,13 @@ class NavigateAction extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, NavigateAction_Target> _NavigateAction_TargetByTag = {
     1 : NavigateAction_Target.lpPage,
+    2 : NavigateAction_Target.futureLpPage,
     0 : NavigateAction_Target.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NavigateAction', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1, 2])
     ..aOM<LpPageTarget>(1, _omitFieldNames ? '' : 'lpPage', subBuilder: LpPageTarget.create)
+    ..aOM<FutureLpPageTarget>(2, _omitFieldNames ? '' : 'futureLpPage', subBuilder: FutureLpPageTarget.create)
     ..hasRequiredFields = false
   ;
 
@@ -459,7 +464,7 @@ class NavigateAction extends $pb.GeneratedMessage {
   NavigateAction_Target whichTarget() => _NavigateAction_TargetByTag[$_whichOneof(0)]!;
   void clearTarget() => $_clearField($_whichOneof(0));
 
-  /// Navigate to LP page
+  /// Navigate to LP page (ETF LP)
   @$pb.TagNumber(1)
   LpPageTarget get lpPage => $_getN(0);
   @$pb.TagNumber(1)
@@ -470,9 +475,21 @@ class NavigateAction extends $pb.GeneratedMessage {
   void clearLpPage() => $_clearField(1);
   @$pb.TagNumber(1)
   LpPageTarget ensureLpPage() => $_ensure(0);
+
+  /// Navigate to Futures LP page
+  @$pb.TagNumber(2)
+  FutureLpPageTarget get futureLpPage => $_getN(1);
+  @$pb.TagNumber(2)
+  set futureLpPage(FutureLpPageTarget value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFutureLpPage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFutureLpPage() => $_clearField(2);
+  @$pb.TagNumber(2)
+  FutureLpPageTarget ensureFutureLpPage() => $_ensure(1);
 }
 
-/// LP page navigation target
+/// LP page navigation target (ETF LP)
 class LpPageTarget extends $pb.GeneratedMessage {
   factory LpPageTarget({
     $core.String? etfCode,
@@ -521,6 +538,67 @@ class LpPageTarget extends $pb.GeneratedMessage {
   $core.bool hasEtfCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearEtfCode() => $_clearField(1);
+
+  /// Fund code (e.g., "0331")
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+}
+
+/// Futures LP page navigation target
+class FutureLpPageTarget extends $pb.GeneratedMessage {
+  factory FutureLpPageTarget({
+    $core.String? futureSymbol,
+    $core.String? fundCode,
+  }) {
+    final result = create();
+    if (futureSymbol != null) result.futureSymbol = futureSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    return result;
+  }
+
+  FutureLpPageTarget._();
+
+  factory FutureLpPageTarget.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FutureLpPageTarget.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FutureLpPageTarget', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FutureLpPageTarget clone() => FutureLpPageTarget()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FutureLpPageTarget copyWith(void Function(FutureLpPageTarget) updates) => super.copyWith((message) => updates(message as FutureLpPageTarget)) as FutureLpPageTarget;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FutureLpPageTarget create() => FutureLpPageTarget._();
+  @$core.override
+  FutureLpPageTarget createEmptyInstance() => create();
+  static $pb.PbList<FutureLpPageTarget> createRepeated() => $pb.PbList<FutureLpPageTarget>();
+  @$core.pragma('dart2js:noInline')
+  static FutureLpPageTarget getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FutureLpPageTarget>(create);
+  static FutureLpPageTarget? _defaultInstance;
+
+  /// Futures symbol (e.g., "101W3000")
+  @$pb.TagNumber(1)
+  $core.String get futureSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set futureSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFutureSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFutureSymbol() => $_clearField(1);
 
   /// Fund code (e.g., "0331")
   @$pb.TagNumber(2)

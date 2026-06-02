@@ -176,18 +176,29 @@ message NoOp {}
 message NavigateAction {
   // Navigation target
   oneof target {
-    // Navigate to LP page
+    // Navigate to LP page (ETF LP)
     LpPageTarget lp_page = 1;
+    // Navigate to Futures LP page
+    FutureLpPageTarget future_lp_page = 2;
     // Future targets can be added here:
-    // OrderDetailTarget order_detail = 2;
-    // SettingsTarget settings = 3;
+    // OrderDetailTarget order_detail = 3;
+    // SettingsTarget settings = 4;
   }
 }
 
-// LP page navigation target
+// LP page navigation target (ETF LP)
 message LpPageTarget {
   // ETF code (e.g., "A252670")
   string etf_code = 1;
+
+  // Fund code (e.g., "0331")
+  string fund_code = 2;
+}
+
+// Futures LP page navigation target
+message FutureLpPageTarget {
+  // Futures symbol (e.g., "101W3000")
+  string future_symbol = 1;
 
   // Fund code (e.g., "0331")
   string fund_code = 2;
