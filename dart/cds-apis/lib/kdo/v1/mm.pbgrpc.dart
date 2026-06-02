@@ -78,6 +78,16 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamMmStateUpdate, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+  $grpc.ResponseFuture<$0.FitToMarketResponse> fitToMarket($0.FitToMarketRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$fitToMarket, request, options: options);
+  }
+
+  /// Clear Fit to Market: F2M skew 해제 (0으로 리셋)
+  $grpc.ResponseFuture<$0.ClearFitToMarketResponse> clearFitToMarket($0.ClearFitToMarketRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$clearFitToMarket, request, options: options);
+  }
+
     // method descriptors
 
   static final _$listMarketMaking = $grpc.ClientMethod<$0.ListMarketMakingRequest, $0.ListMarketMakingResponse>(
@@ -116,6 +126,14 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/StreamMmStateUpdate',
       ($0.StreamMmStateUpdateRequest value) => value.writeToBuffer(),
       $0.MmStateUpdate.fromBuffer);
+  static final _$fitToMarket = $grpc.ClientMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
+      '/kdo.v1.mm.MarketMakingService/FitToMarket',
+      ($0.FitToMarketRequest value) => value.writeToBuffer(),
+      $0.FitToMarketResponse.fromBuffer);
+  static final _$clearFitToMarket = $grpc.ClientMethod<$0.ClearFitToMarketRequest, $0.ClearFitToMarketResponse>(
+      '/kdo.v1.mm.MarketMakingService/ClearFitToMarket',
+      ($0.ClearFitToMarketRequest value) => value.writeToBuffer(),
+      $0.ClearFitToMarketResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
@@ -186,6 +204,20 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamMmStateUpdateRequest.fromBuffer(value),
         ($0.MmStateUpdate value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
+        'FitToMarket',
+        fitToMarket_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.FitToMarketRequest.fromBuffer(value),
+        ($0.FitToMarketResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ClearFitToMarketRequest, $0.ClearFitToMarketResponse>(
+        'ClearFitToMarket',
+        clearFitToMarket_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ClearFitToMarketRequest.fromBuffer(value),
+        ($0.ClearFitToMarketResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMarketMakingResponse> listMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketMakingRequest> $request) async {
@@ -241,5 +273,17 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.MmStateUpdate> streamMmStateUpdate($grpc.ServiceCall call, $0.StreamMmStateUpdateRequest request);
+
+  $async.Future<$0.FitToMarketResponse> fitToMarket_Pre($grpc.ServiceCall $call, $async.Future<$0.FitToMarketRequest> $request) async {
+    return fitToMarket($call, await $request);
+  }
+
+  $async.Future<$0.FitToMarketResponse> fitToMarket($grpc.ServiceCall call, $0.FitToMarketRequest request);
+
+  $async.Future<$0.ClearFitToMarketResponse> clearFitToMarket_Pre($grpc.ServiceCall $call, $async.Future<$0.ClearFitToMarketRequest> $request) async {
+    return clearFitToMarket($call, await $request);
+  }
+
+  $async.Future<$0.ClearFitToMarketResponse> clearFitToMarket($grpc.ServiceCall call, $0.ClearFitToMarketRequest request);
 
 }

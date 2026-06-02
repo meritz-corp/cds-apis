@@ -40,6 +40,10 @@ type MarketMakingServiceClient interface {
 	StreamMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingOrderbookClient, error)
 	// MM 엔진 런타임 상태 실시간 스트리밍
 	StreamMmStateUpdate(ctx context.Context, in *StreamMmStateUpdateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmStateUpdateClient, error)
+	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+	FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error)
+	// Clear Fit to Market: F2M skew 해제 (0으로 리셋)
+	ClearFitToMarket(ctx context.Context, in *ClearFitToMarketRequest, opts ...grpc.CallOption) (*ClearFitToMarketResponse, error)
 }
 
 type marketMakingServiceClient struct {
@@ -177,6 +181,24 @@ func (x *marketMakingServiceStreamMmStateUpdateClient) Recv() (*MmStateUpdate, e
 	return m, nil
 }
 
+func (c *marketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error) {
+	out := new(FitToMarketResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/FitToMarket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *marketMakingServiceClient) ClearFitToMarket(ctx context.Context, in *ClearFitToMarketRequest, opts ...grpc.CallOption) (*ClearFitToMarketResponse, error) {
+	out := new(ClearFitToMarketResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ClearFitToMarket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MarketMakingServiceServer is the server API for MarketMakingService service.
 // All implementations must embed UnimplementedMarketMakingServiceServer
 // for forward compatibility
@@ -199,6 +221,10 @@ type MarketMakingServiceServer interface {
 	StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error
 	// MM 엔진 런타임 상태 실시간 스트리밍
 	StreamMmStateUpdate(*StreamMmStateUpdateRequest, MarketMakingService_StreamMmStateUpdateServer) error
+	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+	FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error)
+	// Clear Fit to Market: F2M skew 해제 (0으로 리셋)
+	ClearFitToMarket(context.Context, *ClearFitToMarketRequest) (*ClearFitToMarketResponse, error)
 	mustEmbedUnimplementedMarketMakingServiceServer()
 }
 
@@ -232,6 +258,12 @@ func (UnimplementedMarketMakingServiceServer) StreamMarketMakingOrderbook(*GetMa
 }
 func (UnimplementedMarketMakingServiceServer) StreamMmStateUpdate(*StreamMmStateUpdateRequest, MarketMakingService_StreamMmStateUpdateServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMmStateUpdate not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FitToMarket not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) ClearFitToMarket(context.Context, *ClearFitToMarketRequest) (*ClearFitToMarketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClearFitToMarket not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) mustEmbedUnimplementedMarketMakingServiceServer() {}
 
@@ -414,6 +446,42 @@ func (x *marketMakingServiceStreamMmStateUpdateServer) Send(m *MmStateUpdate) er
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MarketMakingService_FitToMarket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FitToMarketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).FitToMarket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/FitToMarket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).FitToMarket(ctx, req.(*FitToMarketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MarketMakingService_ClearFitToMarket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearFitToMarketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).ClearFitToMarket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ClearFitToMarket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).ClearFitToMarket(ctx, req.(*ClearFitToMarketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MarketMakingService_ServiceDesc is the grpc.ServiceDesc for MarketMakingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -448,6 +516,14 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMarketMakingOrderbook",
 			Handler:    _MarketMakingService_GetMarketMakingOrderbook_Handler,
+		},
+		{
+			MethodName: "FitToMarket",
+			Handler:    _MarketMakingService_FitToMarket_Handler,
+		},
+		{
+			MethodName: "ClearFitToMarket",
+			Handler:    _MarketMakingService_ClearFitToMarket_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
