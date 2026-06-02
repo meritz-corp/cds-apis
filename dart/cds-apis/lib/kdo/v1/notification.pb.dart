@@ -555,10 +555,12 @@ class FutureLpPageTarget extends $pb.GeneratedMessage {
   factory FutureLpPageTarget({
     $core.String? futureSymbol,
     $core.String? fundCode,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -570,6 +572,7 @@ class FutureLpPageTarget extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FutureLpPageTarget', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -609,6 +612,16 @@ class FutureLpPageTarget extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// ETF symbol (e.g., "A252670") — futures LP는 ETF hedge 컨텍스트에서 등록되므로 클라이언트가 관련 ETF 페이지 컨텍스트도 알 수 있도록 함
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
 }
 
 /// Notification resource

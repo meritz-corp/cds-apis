@@ -146,6 +146,9 @@ pub struct FutureLpPageTarget {
     /// Fund code (e.g., "0331")
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF symbol (e.g., "A252670") — futures LP는 ETF hedge 컨텍스트에서 등록되므로 클라이언트가 관련 ETF 페이지 컨텍스트도 알 수 있도록 함
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 /// Notification resource
 #[allow(clippy::derive_partial_eq_without_eq)]

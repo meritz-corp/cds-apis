@@ -174,13 +174,15 @@ const FutureLpPageTarget$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
 };
 
 /// Descriptor for `FutureLpPageTarget`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List futureLpPageTargetDescriptor = $convert.base64Decode(
     'ChJGdXR1cmVMcFBhZ2VUYXJnZXQSIwoNZnV0dXJlX3N5bWJvbBgBIAEoCVIMZnV0dXJlU3ltYm'
-    '9sEhsKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGU=');
+    '9sEhsKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGUSHQoKZXRmX3N5bWJvbBgDIAEoCVIJZXRm'
+    'U3ltYm9s');
 
 @$core.Deprecated('Use notificationDescriptor instead')
 const Notification$json = {
