@@ -484,6 +484,9 @@ pub struct MmStateUpdate {
     /// 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
     #[prost(message, optional, tag="11")]
     pub decomposition: ::core::option::Option<SpreadDecomposition>,
+    /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
+    #[prost(string, optional, tag="12")]
+    pub f2m_shift: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
 #[allow(clippy::derive_partial_eq_without_eq)]

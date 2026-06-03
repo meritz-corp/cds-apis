@@ -3051,6 +3051,9 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -3087,6 +3090,9 @@ impl serde::Serialize for MmStateUpdate {
         if let Some(v) = self.decomposition.as_ref() {
             struct_ser.serialize_field("decomposition", v)?;
         }
+        if let Some(v) = self.f2m_shift.as_ref() {
+            struct_ser.serialize_field("f2m_shift", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -3115,6 +3121,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "ask_offset",
             "askOffset",
             "decomposition",
+            "f2m_shift",
+            "f2mShift",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3130,6 +3138,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             BidOffset,
             AskOffset,
             Decomposition,
+            F2mShift,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3163,6 +3172,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "decomposition" => Ok(GeneratedField::Decomposition),
+                            "f2mShift" | "f2m_shift" => Ok(GeneratedField::F2mShift),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3193,6 +3203,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
                 let mut decomposition__ = None;
+                let mut f2m_shift__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -3261,6 +3272,12 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             decomposition__ = map_.next_value()?;
                         }
+                        GeneratedField::F2mShift => {
+                            if f2m_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("f2mShift"));
+                            }
+                            f2m_shift__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3278,6 +3295,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     bid_offset: bid_offset__,
                     ask_offset: ask_offset__,
                     decomposition: decomposition__,
+                    f2m_shift: f2m_shift__,
                 })
             }
         }

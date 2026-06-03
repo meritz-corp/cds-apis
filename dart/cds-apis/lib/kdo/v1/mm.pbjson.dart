@@ -548,6 +548,7 @@ const MmStateUpdate$json = {
     {'1': 'bid_offset', '3': 9, '4': 1, '5': 9, '9': 7, '10': 'bidOffset', '17': true},
     {'1': 'ask_offset', '3': 10, '4': 1, '5': 9, '9': 8, '10': 'askOffset', '17': true},
     {'1': 'decomposition', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.mm.SpreadDecomposition', '9': 9, '10': 'decomposition', '17': true},
+    {'1': 'f2m_shift', '3': 12, '4': 1, '5': 9, '9': 10, '10': 'f2mShift', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -560,6 +561,7 @@ const MmStateUpdate$json = {
     {'1': '_bid_offset'},
     {'1': '_ask_offset'},
     {'1': '_decomposition'},
+    {'1': '_f2m_shift'},
   ],
 };
 
@@ -575,10 +577,11 @@ final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
     'F1b3RlGAcgASgJSAVSCGFza1F1b3RliAEBEiAKCWJpZF9xdW90ZRgIIAEoCUgGUghiaWRRdW90'
     'ZYgBARIiCgpiaWRfb2Zmc2V0GAkgASgJSAdSCWJpZE9mZnNldIgBARIiCgphc2tfb2Zmc2V0GA'
     'ogASgJSAhSCWFza09mZnNldIgBARJJCg1kZWNvbXBvc2l0aW9uGAsgASgLMh4ua2RvLnYxLm1t'
-    'LlNwcmVhZERlY29tcG9zaXRpb25ICVINZGVjb21wb3NpdGlvbogBAUIICgZfc3RhdGVCCwoJX2'
-    '1vbWVudHVtQhEKD190cmFkZV9hbmFseXplckIUChJfZXhwb3N1cmVfYmFsYW5jZXJCDgoMX21h'
-    'cmtldF9iaWFzQgwKCl9hc2tfcXVvdGVCDAoKX2JpZF9xdW90ZUINCgtfYmlkX29mZnNldEINCg'
-    'tfYXNrX29mZnNldEIQCg5fZGVjb21wb3NpdGlvbg==');
+    'LlNwcmVhZERlY29tcG9zaXRpb25ICVINZGVjb21wb3NpdGlvbogBARIgCglmMm1fc2hpZnQYDC'
+    'ABKAlIClIIZjJtU2hpZnSIAQFCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5h'
+    'bHl6ZXJCFAoSX2V4cG9zdXJlX2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3F1b3'
+    'RlQgwKCl9iaWRfcXVvdGVCDQoLX2JpZF9vZmZzZXRCDQoLX2Fza19vZmZzZXRCEAoOX2RlY29t'
+    'cG9zaXRpb25CDAoKX2YybV9zaGlmdA==');
 
 @$core.Deprecated('Use spreadDecompositionDescriptor instead')
 const SpreadDecomposition$json = {

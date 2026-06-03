@@ -2279,6 +2279,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     $core.String? bidOffset,
     $core.String? askOffset,
     SpreadDecomposition? decomposition,
+    $core.String? f2mShift,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2292,6 +2293,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
     if (decomposition != null) result.decomposition = decomposition;
+    if (f2mShift != null) result.f2mShift = f2mShift;
     return result;
   }
 
@@ -2312,6 +2314,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOS(9, _omitFieldNames ? '' : 'bidOffset')
     ..aOS(10, _omitFieldNames ? '' : 'askOffset')
     ..aOM<SpreadDecomposition>(11, _omitFieldNames ? '' : 'decomposition', subBuilder: SpreadDecomposition.create)
+    ..aOS(12, _omitFieldNames ? '' : 'f2mShift')
     ..hasRequiredFields = false
   ;
 
@@ -2451,6 +2454,16 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   void clearDecomposition() => $_clearField(11);
   @$pb.TagNumber(11)
   SpreadDecomposition ensureDecomposition() => $_ensure(10);
+
+  /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
+  @$pb.TagNumber(12)
+  $core.String get f2mShift => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set f2mShift($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasF2mShift() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearF2mShift() => $_clearField(12);
 }
 
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
