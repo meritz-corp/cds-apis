@@ -412,6 +412,7 @@ class NoOp extends $pb.GeneratedMessage {
 enum NavigateAction_Target {
   lpPage, 
   futureLpPage, 
+  mmPage, 
   notSet
 }
 
@@ -420,10 +421,12 @@ class NavigateAction extends $pb.GeneratedMessage {
   factory NavigateAction({
     LpPageTarget? lpPage,
     FutureLpPageTarget? futureLpPage,
+    MmPageTarget? mmPage,
   }) {
     final result = create();
     if (lpPage != null) result.lpPage = lpPage;
     if (futureLpPage != null) result.futureLpPage = futureLpPage;
+    if (mmPage != null) result.mmPage = mmPage;
     return result;
   }
 
@@ -435,12 +438,14 @@ class NavigateAction extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, NavigateAction_Target> _NavigateAction_TargetByTag = {
     1 : NavigateAction_Target.lpPage,
     2 : NavigateAction_Target.futureLpPage,
+    3 : NavigateAction_Target.mmPage,
     0 : NavigateAction_Target.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NavigateAction', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2, 3])
     ..aOM<LpPageTarget>(1, _omitFieldNames ? '' : 'lpPage', subBuilder: LpPageTarget.create)
     ..aOM<FutureLpPageTarget>(2, _omitFieldNames ? '' : 'futureLpPage', subBuilder: FutureLpPageTarget.create)
+    ..aOM<MmPageTarget>(3, _omitFieldNames ? '' : 'mmPage', subBuilder: MmPageTarget.create)
     ..hasRequiredFields = false
   ;
 
@@ -487,6 +492,18 @@ class NavigateAction extends $pb.GeneratedMessage {
   void clearFutureLpPage() => $_clearField(2);
   @$pb.TagNumber(2)
   FutureLpPageTarget ensureFutureLpPage() => $_ensure(1);
+
+  /// Navigate to MM page
+  @$pb.TagNumber(3)
+  MmPageTarget get mmPage => $_getN(2);
+  @$pb.TagNumber(3)
+  set mmPage(MmPageTarget value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMmPage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMmPage() => $_clearField(3);
+  @$pb.TagNumber(3)
+  MmPageTarget ensureMmPage() => $_ensure(2);
 }
 
 /// LP page navigation target (ETF LP)
@@ -622,6 +639,67 @@ class FutureLpPageTarget extends $pb.GeneratedMessage {
   $core.bool hasEtfSymbol() => $_has(2);
   @$pb.TagNumber(3)
   void clearEtfSymbol() => $_clearField(3);
+}
+
+/// MM(Market Making) page navigation target
+class MmPageTarget extends $pb.GeneratedMessage {
+  factory MmPageTarget({
+    $core.String? symbol,
+    $core.String? fundCode,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    return result;
+  }
+
+  MmPageTarget._();
+
+  factory MmPageTarget.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmPageTarget.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmPageTarget', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmPageTarget clone() => MmPageTarget()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmPageTarget copyWith(void Function(MmPageTarget) updates) => super.copyWith((message) => updates(message as MmPageTarget)) as MmPageTarget;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmPageTarget create() => MmPageTarget._();
+  @$core.override
+  MmPageTarget createEmptyInstance() => create();
+  static $pb.PbList<MmPageTarget> createRepeated() => $pb.PbList<MmPageTarget>();
+  @$core.pragma('dart2js:noInline')
+  static MmPageTarget getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmPageTarget>(create);
+  static MmPageTarget? _defaultInstance;
+
+  /// MM 대상 심볼 (e.g., "KR7091160002")
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 /// Notification resource

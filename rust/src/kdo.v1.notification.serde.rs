@@ -603,6 +603,119 @@ impl<'de> serde::Deserialize<'de> for LpPageTarget {
         deserializer.deserialize_struct("kdo.v1.notification.LpPageTarget", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for MmPageTarget {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.notification.MmPageTarget", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmPageTarget {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund_code",
+            "fundCode",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            FundCode,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmPageTarget;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.notification.MmPageTarget")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmPageTarget, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmPageTarget {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.notification.MmPageTarget", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for NavigateAction {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -623,6 +736,9 @@ impl serde::Serialize for NavigateAction {
                 navigate_action::Target::FutureLpPage(v) => {
                     struct_ser.serialize_field("future_lp_page", v)?;
                 }
+                navigate_action::Target::MmPage(v) => {
+                    struct_ser.serialize_field("mm_page", v)?;
+                }
             }
         }
         struct_ser.end()
@@ -639,12 +755,15 @@ impl<'de> serde::Deserialize<'de> for NavigateAction {
             "lpPage",
             "future_lp_page",
             "futureLpPage",
+            "mm_page",
+            "mmPage",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             LpPage,
             FutureLpPage,
+            MmPage,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -669,6 +788,7 @@ impl<'de> serde::Deserialize<'de> for NavigateAction {
                         match value {
                             "lpPage" | "lp_page" => Ok(GeneratedField::LpPage),
                             "futureLpPage" | "future_lp_page" => Ok(GeneratedField::FutureLpPage),
+                            "mmPage" | "mm_page" => Ok(GeneratedField::MmPage),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -703,6 +823,13 @@ impl<'de> serde::Deserialize<'de> for NavigateAction {
                                 return Err(serde::de::Error::duplicate_field("futureLpPage"));
                             }
                             target__ = map_.next_value::<::std::option::Option<_>>()?.map(navigate_action::Target::FutureLpPage)
+;
+                        }
+                        GeneratedField::MmPage => {
+                            if target__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("mmPage"));
+                            }
+                            target__ = map_.next_value::<::std::option::Option<_>>()?.map(navigate_action::Target::MmPage)
 ;
                         }
                         GeneratedField::__SkipField__ => {

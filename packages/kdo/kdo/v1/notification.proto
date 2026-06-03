@@ -180,9 +180,8 @@ message NavigateAction {
     LpPageTarget lp_page = 1;
     // Navigate to Futures LP page
     FutureLpPageTarget future_lp_page = 2;
-    // Future targets can be added here:
-    // OrderDetailTarget order_detail = 3;
-    // SettingsTarget settings = 4;
+    // Navigate to MM page
+    MmPageTarget mm_page = 3;
   }
 }
 
@@ -205,6 +204,15 @@ message FutureLpPageTarget {
 
   // ETF symbol (e.g., "A252670") — futures LP는 ETF hedge 컨텍스트에서 등록되므로 클라이언트가 관련 ETF 페이지 컨텍스트도 알 수 있도록 함
   string etf_symbol = 3;
+}
+
+// MM(Market Making) page navigation target
+message MmPageTarget {
+  // MM 대상 심볼 (e.g., "KR7091160002")
+  string symbol = 1;
+
+  // 펀드 코드
+  string fund_code = 2;
 }
 
 // Notification resource

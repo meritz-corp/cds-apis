@@ -210,6 +210,20 @@
       },
       "title": "LP page navigation target (ETF LP)"
     },
+    "notificationMmPageTarget": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "MM 대상 심볼 (e.g., \"KR7091160002\")"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "펀드 코드"
+        }
+      },
+      "title": "MM(Market Making) page navigation target"
+    },
     "notificationNavigateAction": {
       "type": "object",
       "properties": {
@@ -219,8 +233,11 @@
         },
         "futureLpPage": {
           "$ref": "#/definitions/notificationFutureLpPageTarget",
-          "description": "Future targets can be added here:\n OrderDetailTarget order_detail = 3;\n SettingsTarget settings = 4;",
           "title": "Navigate to Futures LP page"
+        },
+        "mmPage": {
+          "$ref": "#/definitions/notificationMmPageTarget",
+          "title": "Navigate to MM page"
         }
       },
       "title": "Navigation action"

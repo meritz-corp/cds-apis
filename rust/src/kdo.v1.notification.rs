@@ -104,7 +104,7 @@ pub struct NoOp {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NavigateAction {
     /// Navigation target
-    #[prost(oneof="navigate_action::Target", tags="1, 2")]
+    #[prost(oneof="navigate_action::Target", tags="1, 2, 3")]
     pub target: ::core::option::Option<navigate_action::Target>,
 }
 /// Nested message and enum types in `NavigateAction`.
@@ -117,12 +117,11 @@ pub mod navigate_action {
         #[prost(message, tag="1")]
         LpPage(super::LpPageTarget),
         /// Navigate to Futures LP page
-        ///
-        /// Future targets can be added here:
-        /// OrderDetailTarget order_detail = 3;
-        /// SettingsTarget settings = 4;
         #[prost(message, tag="2")]
         FutureLpPage(super::FutureLpPageTarget),
+        /// Navigate to MM page
+        #[prost(message, tag="3")]
+        MmPage(super::MmPageTarget),
     }
 }
 /// LP page navigation target (ETF LP)
@@ -149,6 +148,17 @@ pub struct FutureLpPageTarget {
     /// ETF symbol (e.g., "A252670") — futures LP는 ETF hedge 컨텍스트에서 등록되므로 클라이언트가 관련 ETF 페이지 컨텍스트도 알 수 있도록 함
     #[prost(string, tag="3")]
     pub etf_symbol: ::prost::alloc::string::String,
+}
+/// MM(Market Making) page navigation target
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MmPageTarget {
+    /// MM 대상 심볼 (e.g., "KR7091160002")
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// Notification resource
 #[allow(clippy::derive_partial_eq_without_eq)]

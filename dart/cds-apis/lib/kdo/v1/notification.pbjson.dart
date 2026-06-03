@@ -141,6 +141,7 @@ const NavigateAction$json = {
   '2': [
     {'1': 'lp_page', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.notification.LpPageTarget', '9': 0, '10': 'lpPage'},
     {'1': 'future_lp_page', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.notification.FutureLpPageTarget', '9': 0, '10': 'futureLpPage'},
+    {'1': 'mm_page', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.notification.MmPageTarget', '9': 0, '10': 'mmPage'},
   ],
   '8': [
     {'1': 'target'},
@@ -151,8 +152,9 @@ const NavigateAction$json = {
 final $typed_data.Uint8List navigateActionDescriptor = $convert.base64Decode(
     'Cg5OYXZpZ2F0ZUFjdGlvbhI8CgdscF9wYWdlGAEgASgLMiEua2RvLnYxLm5vdGlmaWNhdGlvbi'
     '5McFBhZ2VUYXJnZXRIAFIGbHBQYWdlEk8KDmZ1dHVyZV9scF9wYWdlGAIgASgLMicua2RvLnYx'
-    'Lm5vdGlmaWNhdGlvbi5GdXR1cmVMcFBhZ2VUYXJnZXRIAFIMZnV0dXJlTHBQYWdlQggKBnRhcm'
-    'dldA==');
+    'Lm5vdGlmaWNhdGlvbi5GdXR1cmVMcFBhZ2VUYXJnZXRIAFIMZnV0dXJlTHBQYWdlEjwKB21tX3'
+    'BhZ2UYAyABKAsyIS5rZG8udjEubm90aWZpY2F0aW9uLk1tUGFnZVRhcmdldEgAUgZtbVBhZ2VC'
+    'CAoGdGFyZ2V0');
 
 @$core.Deprecated('Use lpPageTargetDescriptor instead')
 const LpPageTarget$json = {
@@ -183,6 +185,20 @@ final $typed_data.Uint8List futureLpPageTargetDescriptor = $convert.base64Decode
     'ChJGdXR1cmVMcFBhZ2VUYXJnZXQSIwoNZnV0dXJlX3N5bWJvbBgBIAEoCVIMZnV0dXJlU3ltYm'
     '9sEhsKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGUSHQoKZXRmX3N5bWJvbBgDIAEoCVIJZXRm'
     'U3ltYm9s');
+
+@$core.Deprecated('Use mmPageTargetDescriptor instead')
+const MmPageTarget$json = {
+  '1': 'MmPageTarget',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+  ],
+};
+
+/// Descriptor for `MmPageTarget`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmPageTargetDescriptor = $convert.base64Decode(
+    'CgxNbVBhZ2VUYXJnZXQSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGwoJZnVuZF9jb2RlGAIgAS'
+    'gJUghmdW5kQ29kZQ==');
 
 @$core.Deprecated('Use notificationDescriptor instead')
 const Notification$json = {
