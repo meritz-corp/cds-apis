@@ -1532,6 +1532,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -1579,6 +1582,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             struct_ser.serialize_field("base_half_ticks", &self.base_half_ticks)?;
         }
+        if let Some(v) = self.quantity_limit.as_ref() {
+            struct_ser.serialize_field("quantity_limit", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1609,6 +1615,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "basis",
             "base_half_ticks",
             "baseHalfTicks",
+            "quantity_limit",
+            "quantityLimit",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1625,6 +1633,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             AskOffset,
             Basis,
             BaseHalfTicks,
+            QuantityLimit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1659,6 +1668,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "basis" => Ok(GeneratedField::Basis),
                             "baseHalfTicks" | "base_half_ticks" => Ok(GeneratedField::BaseHalfTicks),
+                            "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1690,6 +1700,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut ask_offset__ = None;
                 let mut basis__ = None;
                 let mut base_half_ticks__ = None;
+                let mut quantity_limit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -1776,6 +1787,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::QuantityLimit => {
+                            if quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantityLimit"));
+                            }
+                            quantity_limit__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1794,6 +1811,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     ask_offset: ask_offset__.unwrap_or_default(),
                     basis: basis__,
                     base_half_ticks: base_half_ticks__.unwrap_or_default(),
+                    quantity_limit: quantity_limit__,
                 })
             }
         }
@@ -2663,6 +2681,128 @@ impl<'de> serde::Deserialize<'de> for MarketMakingPricing {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingPricing", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingQuantityLimit {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingQuantityLimit", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_bid_quantity", ToString::to_string(&self.max_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_ask_quantity", ToString::to_string(&self.max_ask_quantity).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingQuantityLimit {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "max_bid_quantity",
+            "maxBidQuantity",
+            "max_ask_quantity",
+            "maxAskQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            MaxBidQuantity,
+            MaxAskQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "maxBidQuantity" | "max_bid_quantity" => Ok(GeneratedField::MaxBidQuantity),
+                            "maxAskQuantity" | "max_ask_quantity" => Ok(GeneratedField::MaxAskQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingQuantityLimit;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingQuantityLimit")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingQuantityLimit, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut max_bid_quantity__ = None;
+                let mut max_ask_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::MaxBidQuantity => {
+                            if max_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxBidQuantity"));
+                            }
+                            max_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxAskQuantity => {
+                            if max_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxAskQuantity"));
+                            }
+                            max_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingQuantityLimit {
+                    max_bid_quantity: max_bid_quantity__.unwrap_or_default(),
+                    max_ask_quantity: max_ask_quantity__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingQuantityLimit", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingState {

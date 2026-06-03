@@ -723,6 +723,10 @@
           "type": "integer",
           "format": "int32",
           "title": "호가 반폭 (틱 수). bid = mid - half, ask = mid + half"
+        },
+        "quantityLimit": {
+          "$ref": "#/definitions/mmMarketMakingQuantityLimit",
+          "title": "순포지션 수량 한도 (방향별 호가 차단)"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -882,6 +886,22 @@
         }
       },
       "title": "NAV pricing 상세 설정"
+    },
+    "mmMarketMakingQuantityLimit": {
+      "type": "object",
+      "properties": {
+        "maxBidQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순매수(롱) 상한. net(매수체결-매도체결) \u003e= 이 값이면 매수 호가 차단. 0=비활성"
+        },
+        "maxAskQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "순매도(숏) 상한. net \u003c= -이 값이면 매도 호가 차단. 0=비활성"
+        }
+      },
+      "title": "순포지션 수량 한도 설정 (방향별 호가 차단)"
     },
     "mmMarketMakingState": {
       "type": "string",

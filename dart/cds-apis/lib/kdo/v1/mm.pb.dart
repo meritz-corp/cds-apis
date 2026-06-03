@@ -139,6 +139,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? askOffset,
     $fixnum.Int64? basis,
     $core.int? baseHalfTicks,
+    MarketMakingQuantityLimit? quantityLimit,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -153,6 +154,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (askOffset != null) result.askOffset = askOffset;
     if (basis != null) result.basis = basis;
     if (baseHalfTicks != null) result.baseHalfTicks = baseHalfTicks;
+    if (quantityLimit != null) result.quantityLimit = quantityLimit;
     return result;
   }
 
@@ -174,6 +176,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aInt64(14, _omitFieldNames ? '' : 'askOffset')
     ..aInt64(15, _omitFieldNames ? '' : 'basis')
     ..a<$core.int>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.O3)
+    ..aOM<MarketMakingQuantityLimit>(17, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MarketMakingQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
@@ -323,6 +326,18 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasBaseHalfTicks() => $_has(11);
   @$pb.TagNumber(16)
   void clearBaseHalfTicks() => $_clearField(16);
+
+  /// 순포지션 수량 한도 (방향별 호가 차단)
+  @$pb.TagNumber(17)
+  MarketMakingQuantityLimit get quantityLimit => $_getN(12);
+  @$pb.TagNumber(17)
+  set quantityLimit(MarketMakingQuantityLimit value) => $_setField(17, value);
+  @$pb.TagNumber(17)
+  $core.bool hasQuantityLimit() => $_has(12);
+  @$pb.TagNumber(17)
+  void clearQuantityLimit() => $_clearField(17);
+  @$pb.TagNumber(17)
+  MarketMakingQuantityLimit ensureQuantityLimit() => $_ensure(12);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -1049,6 +1064,67 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   $core.bool hasOpportunisticEnabled() => $_has(4);
   @$pb.TagNumber(5)
   void clearOpportunisticEnabled() => $_clearField(5);
+}
+
+/// 순포지션 수량 한도 설정 (방향별 호가 차단)
+class MarketMakingQuantityLimit extends $pb.GeneratedMessage {
+  factory MarketMakingQuantityLimit({
+    $fixnum.Int64? maxBidQuantity,
+    $fixnum.Int64? maxAskQuantity,
+  }) {
+    final result = create();
+    if (maxBidQuantity != null) result.maxBidQuantity = maxBidQuantity;
+    if (maxAskQuantity != null) result.maxAskQuantity = maxAskQuantity;
+    return result;
+  }
+
+  MarketMakingQuantityLimit._();
+
+  factory MarketMakingQuantityLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingQuantityLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'maxBidQuantity')
+    ..aInt64(2, _omitFieldNames ? '' : 'maxAskQuantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingQuantityLimit clone() => MarketMakingQuantityLimit()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingQuantityLimit copyWith(void Function(MarketMakingQuantityLimit) updates) => super.copyWith((message) => updates(message as MarketMakingQuantityLimit)) as MarketMakingQuantityLimit;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingQuantityLimit create() => MarketMakingQuantityLimit._();
+  @$core.override
+  MarketMakingQuantityLimit createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingQuantityLimit> createRepeated() => $pb.PbList<MarketMakingQuantityLimit>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingQuantityLimit>(create);
+  static MarketMakingQuantityLimit? _defaultInstance;
+
+  /// 순매수(롱) 상한. net(매수체결-매도체결) >= 이 값이면 매수 호가 차단. 0=비활성
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get maxBidQuantity => $_getI64(0);
+  @$pb.TagNumber(1)
+  set maxBidQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMaxBidQuantity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMaxBidQuantity() => $_clearField(1);
+
+  /// 순매도(숏) 상한. net <= -이 값이면 매도 호가 차단. 0=비활성
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get maxAskQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set maxAskQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMaxAskQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMaxAskQuantity() => $_clearField(2);
 }
 
 /// ListMarketMaking

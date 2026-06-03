@@ -65,6 +65,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'ask_offset', '3': 14, '4': 1, '5': 3, '10': 'askOffset'},
     {'1': 'basis', '3': 15, '4': 1, '5': 3, '9': 0, '10': 'basis', '17': true},
     {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 5, '10': 'baseHalfTicks'},
+    {'1': 'quantity_limit', '3': 17, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQuantityLimit', '10': 'quantityLimit'},
   ],
   '8': [
     {'1': '_basis'},
@@ -90,9 +91,10 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'hwb3N1cmVCYWxhbmNlchIhCgxiaWRfcXVhbnRpdHkYCSABKANSC2JpZFF1YW50aXR5EiEKDGFz'
     'a19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSHQoKYmlkX29mZnNldBgNIAEoA1IJYmlkT2'
     'Zmc2V0Eh0KCmFza19vZmZzZXQYDiABKANSCWFza09mZnNldBIZCgViYXNpcxgPIAEoA0gAUgVi'
-    'YXNpc4gBARImCg9iYXNlX2hhbGZfdGlja3MYECABKAVSDWJhc2VIYWxmVGlja3NCCAoGX2Jhc2'
-    'lzSgQIBxAISgQICBAJSgQICxAMSgQIDBANUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1l'
-    'bnRSCWJpZF9iYXNpc1IJYXNrX2Jhc2lz');
+    'YXNpc4gBARImCg9iYXNlX2hhbGZfdGlja3MYECABKAVSDWJhc2VIYWxmVGlja3MSSwoOcXVhbn'
+    'RpdHlfbGltaXQYESABKAsyJC5rZG8udjEubW0uTWFya2V0TWFraW5nUXVhbnRpdHlMaW1pdFIN'
+    'cXVhbnRpdHlMaW1pdEIICgZfYmFzaXNKBAgHEAhKBAgIEAlKBAgLEAxKBAgMEA1SDmJpZF9hZG'
+    'p1c3RtZW50Ug5hc2tfYWRqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXM=');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -242,6 +244,20 @@ final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.ba
     'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEiUKDmxpbWl0X211bHRpcGxlGAQgASgFUg'
     '1saW1pdE11bHRpcGxlEjMKFW9wcG9ydHVuaXN0aWNfZW5hYmxlZBgFIAEoCFIUb3Bwb3J0dW5p'
     'c3RpY0VuYWJsZWQ=');
+
+@$core.Deprecated('Use marketMakingQuantityLimitDescriptor instead')
+const MarketMakingQuantityLimit$json = {
+  '1': 'MarketMakingQuantityLimit',
+  '2': [
+    {'1': 'max_bid_quantity', '3': 1, '4': 1, '5': 3, '10': 'maxBidQuantity'},
+    {'1': 'max_ask_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxAskQuantity'},
+  ],
+};
+
+/// Descriptor for `MarketMakingQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingQuantityLimitDescriptor = $convert.base64Decode(
+    'ChlNYXJrZXRNYWtpbmdRdWFudGl0eUxpbWl0EigKEG1heF9iaWRfcXVhbnRpdHkYASABKANSDm'
+    '1heEJpZFF1YW50aXR5EigKEG1heF9hc2tfcXVhbnRpdHkYAiABKANSDm1heEFza1F1YW50aXR5');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {

@@ -64,6 +64,9 @@ pub struct MarketMakingConfiguration {
     /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
     #[prost(int32, tag="16")]
     pub base_half_ticks: i32,
+    /// 순포지션 수량 한도 (방향별 호가 차단)
+    #[prost(message, optional, tag="17")]
+    pub quantity_limit: ::core::option::Option<MarketMakingQuantityLimit>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -210,6 +213,17 @@ pub struct MarketMakingExposureBalancer {
     /// opportunistic close 기능 활성화 여부
     #[prost(bool, tag="5")]
     pub opportunistic_enabled: bool,
+}
+/// 순포지션 수량 한도 설정 (방향별 호가 차단)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingQuantityLimit {
+    /// 순매수(롱) 상한. net(매수체결-매도체결) >= 이 값이면 매수 호가 차단. 0=비활성
+    #[prost(int64, tag="1")]
+    pub max_bid_quantity: i64,
+    /// 순매도(숏) 상한. net <= -이 값이면 매도 호가 차단. 0=비활성
+    #[prost(int64, tag="2")]
+    pub max_ask_quantity: i64,
 }
 // ============================================================================
 // Request/Response Messages

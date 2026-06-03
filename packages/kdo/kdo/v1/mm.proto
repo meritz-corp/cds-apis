@@ -177,6 +177,9 @@ message MarketMakingConfiguration {
 
   // 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
   int32 base_half_ticks = 16;
+
+  // 순포지션 수량 한도 (방향별 호가 차단)
+  MarketMakingQuantityLimit quantity_limit = 17;
 }
 
 // NAV pricing 상세 설정
@@ -297,6 +300,15 @@ message MarketMakingExposureBalancer {
 
   // opportunistic close 기능 활성화 여부
   bool opportunistic_enabled = 5;
+}
+
+// 순포지션 수량 한도 설정 (방향별 호가 차단)
+message MarketMakingQuantityLimit {
+  // 순매수(롱) 상한. net(매수체결-매도체결) >= 이 값이면 매수 호가 차단. 0=비활성
+  int64 max_bid_quantity = 1;
+
+  // 순매도(숏) 상한. net <= -이 값이면 매도 호가 차단. 0=비활성
+  int64 max_ask_quantity = 2;
 }
 
 // ============================================================================
