@@ -494,6 +494,9 @@ message GetFuturesLpStatusRequest {
 
   // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  string etf_symbol = 3;
 }
 
 // ListFuturesLpStatuses
@@ -545,6 +548,9 @@ message StreamFuturesLpStatusUpdateRequest {
 
   // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  string etf_symbol = 3;
 }
 
 // StartFuturesLp
@@ -554,6 +560,9 @@ message StartFuturesLpRequest {
 
   // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  string etf_symbol = 3;
 }
 
 // 선물 LP 시작 응답
@@ -572,6 +581,9 @@ message StopFuturesLpRequest {
 
   // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  string etf_symbol = 3;
 }
 
 // 선물 LP 중지 응답
@@ -590,4 +602,7 @@ message GetFuturesOrderBookRequest {
 
   // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  string etf_symbol = 3;
 }

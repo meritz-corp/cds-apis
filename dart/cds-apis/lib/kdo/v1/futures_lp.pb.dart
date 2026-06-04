@@ -1817,10 +1817,12 @@ class GetFuturesLpStatusRequest extends $pb.GeneratedMessage {
   factory GetFuturesLpStatusRequest({
     $core.String? futureSymbol,
     $core.String? fundCode,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -1832,6 +1834,7 @@ class GetFuturesLpStatusRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFuturesLpStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -1871,6 +1874,16 @@ class GetFuturesLpStatusRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
 }
 
 /// ListFuturesLpStatuses
@@ -2028,10 +2041,12 @@ class StreamFuturesLpStatusUpdateRequest extends $pb.GeneratedMessage {
   factory StreamFuturesLpStatusUpdateRequest({
     $core.String? futureSymbol,
     $core.String? fundCode,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -2043,6 +2058,7 @@ class StreamFuturesLpStatusUpdateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFuturesLpStatusUpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -2082,6 +2098,16 @@ class StreamFuturesLpStatusUpdateRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
 }
 
 /// StartFuturesLp
@@ -2089,10 +2115,12 @@ class StartFuturesLpRequest extends $pb.GeneratedMessage {
   factory StartFuturesLpRequest({
     $core.String? futureSymbol,
     $core.String? fundCode,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -2104,6 +2132,7 @@ class StartFuturesLpRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartFuturesLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -2143,6 +2172,16 @@ class StartFuturesLpRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
 }
 
 /// 선물 LP 시작 응답
@@ -2213,10 +2252,12 @@ class StopFuturesLpRequest extends $pb.GeneratedMessage {
   factory StopFuturesLpRequest({
     $core.String? futureSymbol,
     $core.String? fundCode,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -2228,6 +2269,7 @@ class StopFuturesLpRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopFuturesLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -2267,6 +2309,16 @@ class StopFuturesLpRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
 }
 
 /// 선물 LP 중지 응답
@@ -2337,10 +2389,12 @@ class GetFuturesOrderBookRequest extends $pb.GeneratedMessage {
   factory GetFuturesOrderBookRequest({
     $core.String? futureSymbol,
     $core.String? fundCode,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -2352,6 +2406,7 @@ class GetFuturesOrderBookRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFuturesOrderBookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -2391,6 +2446,16 @@ class GetFuturesOrderBookRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
 }
 
 

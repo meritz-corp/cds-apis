@@ -2478,12 +2478,18 @@ impl serde::Serialize for GetFuturesLpStatusRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.GetFuturesLpStatusRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         struct_ser.end()
     }
@@ -2499,12 +2505,15 @@ impl<'de> serde::Deserialize<'de> for GetFuturesLpStatusRequest {
             "futureSymbol",
             "fund_code",
             "fundCode",
+            "etf_symbol",
+            "etfSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             FutureSymbol,
             FundCode,
+            EtfSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2529,6 +2538,7 @@ impl<'de> serde::Deserialize<'de> for GetFuturesLpStatusRequest {
                         match value {
                             "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2550,6 +2560,7 @@ impl<'de> serde::Deserialize<'de> for GetFuturesLpStatusRequest {
             {
                 let mut future_symbol__ = None;
                 let mut fund_code__ = None;
+                let mut etf_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -2564,6 +2575,12 @@ impl<'de> serde::Deserialize<'de> for GetFuturesLpStatusRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2572,6 +2589,7 @@ impl<'de> serde::Deserialize<'de> for GetFuturesLpStatusRequest {
                 Ok(GetFuturesLpStatusRequest {
                     future_symbol: future_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
                 })
             }
         }
@@ -2592,12 +2610,18 @@ impl serde::Serialize for GetFuturesOrderBookRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.GetFuturesOrderBookRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         struct_ser.end()
     }
@@ -2613,12 +2637,15 @@ impl<'de> serde::Deserialize<'de> for GetFuturesOrderBookRequest {
             "futureSymbol",
             "fund_code",
             "fundCode",
+            "etf_symbol",
+            "etfSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             FutureSymbol,
             FundCode,
+            EtfSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2643,6 +2670,7 @@ impl<'de> serde::Deserialize<'de> for GetFuturesOrderBookRequest {
                         match value {
                             "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2664,6 +2692,7 @@ impl<'de> serde::Deserialize<'de> for GetFuturesOrderBookRequest {
             {
                 let mut future_symbol__ = None;
                 let mut fund_code__ = None;
+                let mut etf_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -2678,6 +2707,12 @@ impl<'de> serde::Deserialize<'de> for GetFuturesOrderBookRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2686,6 +2721,7 @@ impl<'de> serde::Deserialize<'de> for GetFuturesOrderBookRequest {
                 Ok(GetFuturesOrderBookRequest {
                     future_symbol: future_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
                 })
             }
         }
@@ -3200,12 +3236,18 @@ impl serde::Serialize for StartFuturesLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.StartFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         struct_ser.end()
     }
@@ -3221,12 +3263,15 @@ impl<'de> serde::Deserialize<'de> for StartFuturesLpRequest {
             "futureSymbol",
             "fund_code",
             "fundCode",
+            "etf_symbol",
+            "etfSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             FutureSymbol,
             FundCode,
+            EtfSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3251,6 +3296,7 @@ impl<'de> serde::Deserialize<'de> for StartFuturesLpRequest {
                         match value {
                             "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3272,6 +3318,7 @@ impl<'de> serde::Deserialize<'de> for StartFuturesLpRequest {
             {
                 let mut future_symbol__ = None;
                 let mut fund_code__ = None;
+                let mut etf_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -3286,6 +3333,12 @@ impl<'de> serde::Deserialize<'de> for StartFuturesLpRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3294,6 +3347,7 @@ impl<'de> serde::Deserialize<'de> for StartFuturesLpRequest {
                 Ok(StartFuturesLpRequest {
                     future_symbol: future_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
                 })
             }
         }
@@ -3426,12 +3480,18 @@ impl serde::Serialize for StopFuturesLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.StopFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         struct_ser.end()
     }
@@ -3447,12 +3507,15 @@ impl<'de> serde::Deserialize<'de> for StopFuturesLpRequest {
             "futureSymbol",
             "fund_code",
             "fundCode",
+            "etf_symbol",
+            "etfSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             FutureSymbol,
             FundCode,
+            EtfSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3477,6 +3540,7 @@ impl<'de> serde::Deserialize<'de> for StopFuturesLpRequest {
                         match value {
                             "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3498,6 +3562,7 @@ impl<'de> serde::Deserialize<'de> for StopFuturesLpRequest {
             {
                 let mut future_symbol__ = None;
                 let mut fund_code__ = None;
+                let mut etf_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -3512,6 +3577,12 @@ impl<'de> serde::Deserialize<'de> for StopFuturesLpRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3520,6 +3591,7 @@ impl<'de> serde::Deserialize<'de> for StopFuturesLpRequest {
                 Ok(StopFuturesLpRequest {
                     future_symbol: future_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
                 })
             }
         }
@@ -3652,12 +3724,18 @@ impl serde::Serialize for StreamFuturesLpStatusUpdateRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.StreamFuturesLpStatusUpdateRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         struct_ser.end()
     }
@@ -3673,12 +3751,15 @@ impl<'de> serde::Deserialize<'de> for StreamFuturesLpStatusUpdateRequest {
             "futureSymbol",
             "fund_code",
             "fundCode",
+            "etf_symbol",
+            "etfSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             FutureSymbol,
             FundCode,
+            EtfSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3703,6 +3784,7 @@ impl<'de> serde::Deserialize<'de> for StreamFuturesLpStatusUpdateRequest {
                         match value {
                             "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3724,6 +3806,7 @@ impl<'de> serde::Deserialize<'de> for StreamFuturesLpStatusUpdateRequest {
             {
                 let mut future_symbol__ = None;
                 let mut fund_code__ = None;
+                let mut etf_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -3738,6 +3821,12 @@ impl<'de> serde::Deserialize<'de> for StreamFuturesLpStatusUpdateRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3746,6 +3835,7 @@ impl<'de> serde::Deserialize<'de> for StreamFuturesLpStatusUpdateRequest {
                 Ok(StreamFuturesLpStatusUpdateRequest {
                     future_symbol: future_symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
                 })
             }
         }

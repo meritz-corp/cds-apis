@@ -403,6 +403,9 @@ pub struct GetFuturesLpStatusRequest {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 /// ListFuturesLpStatuses
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -460,6 +463,9 @@ pub struct StreamFuturesLpStatusUpdateRequest {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 /// StartFuturesLp
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -471,6 +477,9 @@ pub struct StartFuturesLpRequest {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 /// 선물 LP 시작 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -493,6 +502,9 @@ pub struct StopFuturesLpRequest {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 /// 선물 LP 중지 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -515,6 +527,9 @@ pub struct GetFuturesOrderBookRequest {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 // ========== Status Messages ==========
 

@@ -462,13 +462,15 @@ const GetFuturesLpStatusRequest$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
 };
 
 /// Descriptor for `GetFuturesLpStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getFuturesLpStatusRequestDescriptor = $convert.base64Decode(
     'ChlHZXRGdXR1cmVzTHBTdGF0dXNSZXF1ZXN0EikKDWZ1dHVyZV9zeW1ib2wYASABKAlCBOJBAQ'
-    'JSDGZ1dHVyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2Rl');
+    'JSDGZ1dHVyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEh0KCmV0'
+    'Zl9zeW1ib2wYAyABKAlSCWV0ZlN5bWJvbA==');
 
 @$core.Deprecated('Use listFuturesLpStatusesRequestDescriptor instead')
 const ListFuturesLpStatusesRequest$json = {
@@ -512,6 +514,7 @@ const StreamFuturesLpStatusUpdateRequest$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
 };
 
@@ -519,7 +522,7 @@ const StreamFuturesLpStatusUpdateRequest$json = {
 final $typed_data.Uint8List streamFuturesLpStatusUpdateRequestDescriptor = $convert.base64Decode(
     'CiJTdHJlYW1GdXR1cmVzTHBTdGF0dXNVcGRhdGVSZXF1ZXN0EikKDWZ1dHVyZV9zeW1ib2wYAS'
     'ABKAlCBOJBAQJSDGZ1dHVyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRD'
-    'b2Rl');
+    'b2RlEh0KCmV0Zl9zeW1ib2wYAyABKAlSCWV0ZlN5bWJvbA==');
 
 @$core.Deprecated('Use startFuturesLpRequestDescriptor instead')
 const StartFuturesLpRequest$json = {
@@ -527,13 +530,15 @@ const StartFuturesLpRequest$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
 };
 
 /// Descriptor for `StartFuturesLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List startFuturesLpRequestDescriptor = $convert.base64Decode(
     'ChVTdGFydEZ1dHVyZXNMcFJlcXVlc3QSKQoNZnV0dXJlX3N5bWJvbBgBIAEoCUIE4kEBAlIMZn'
-    'V0dXJlU3ltYm9sEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGU=');
+    'V0dXJlU3ltYm9sEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSHQoKZXRmX3N5'
+    'bWJvbBgDIAEoCVIJZXRmU3ltYm9s');
 
 @$core.Deprecated('Use startFuturesLpResponseDescriptor instead')
 const StartFuturesLpResponse$json = {
@@ -555,13 +560,15 @@ const StopFuturesLpRequest$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
 };
 
 /// Descriptor for `StopFuturesLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List stopFuturesLpRequestDescriptor = $convert.base64Decode(
     'ChRTdG9wRnV0dXJlc0xwUmVxdWVzdBIpCg1mdXR1cmVfc3ltYm9sGAEgASgJQgTiQQECUgxmdX'
-    'R1cmVTeW1ib2wSIQoJZnVuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZQ==');
+    'R1cmVTeW1ib2wSIQoJZnVuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIdCgpldGZfc3lt'
+    'Ym9sGAMgASgJUglldGZTeW1ib2w=');
 
 @$core.Deprecated('Use stopFuturesLpResponseDescriptor instead')
 const StopFuturesLpResponse$json = {
@@ -583,11 +590,13 @@ const GetFuturesOrderBookRequest$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
 };
 
 /// Descriptor for `GetFuturesOrderBookRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getFuturesOrderBookRequestDescriptor = $convert.base64Decode(
     'ChpHZXRGdXR1cmVzT3JkZXJCb29rUmVxdWVzdBIpCg1mdXR1cmVfc3ltYm9sGAEgASgJQgTiQQ'
-    'ECUgxmdXR1cmVTeW1ib2wSIQoJZnVuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZQ==');
+    'ECUgxmdXR1cmVTeW1ib2wSIQoJZnVuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZRIdCgpl'
+    'dGZfc3ltYm9sGAMgASgJUglldGZTeW1ib2w=');
 
