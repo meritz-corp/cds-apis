@@ -402,6 +402,9 @@ message GetFuturesLpRequest {
 
   // 펀드 코드
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  string etf_symbol = 3;
 }
 
 // ListFuturesLps

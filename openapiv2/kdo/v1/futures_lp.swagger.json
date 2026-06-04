@@ -151,6 +151,13 @@
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
+          },
+          {
+            "name": "etfSymbol",
+            "description": "ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [

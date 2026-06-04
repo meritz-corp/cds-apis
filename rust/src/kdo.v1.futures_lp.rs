@@ -306,6 +306,9 @@ pub struct GetFuturesLpRequest {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 /// ListFuturesLps
 #[allow(clippy::derive_partial_eq_without_eq)]

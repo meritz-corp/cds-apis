@@ -349,13 +349,15 @@ const GetFuturesLpRequest$json = {
   '2': [
     {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
 };
 
 /// Descriptor for `GetFuturesLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getFuturesLpRequestDescriptor = $convert.base64Decode(
     'ChNHZXRGdXR1cmVzTHBSZXF1ZXN0EikKDWZ1dHVyZV9zeW1ib2wYASABKAlCBOJBAQJSDGZ1dH'
-    'VyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2Rl');
+    'VyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEh0KCmV0Zl9zeW1i'
+    'b2wYAyABKAlSCWV0ZlN5bWJvbA==');
 
 @$core.Deprecated('Use listFuturesLpsRequestDescriptor instead')
 const ListFuturesLpsRequest$json = {
