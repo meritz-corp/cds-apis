@@ -44,6 +44,8 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.String? etfPricing,
     $core.int? portfolioId,
     $2.EtfPricing? pricingMethod,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -64,6 +66,8 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (etfPricing != null) result.etfPricing = etfPricing;
     if (portfolioId != null) result.portfolioId = portfolioId;
     if (pricingMethod != null) result.pricingMethod = pricingMethod;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -91,6 +95,8 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..aOS(20, _omitFieldNames ? '' : 'etfPricing')
     ..a<$core.int>(21, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
     ..aOM<$2.EtfPricing>(22, _omitFieldNames ? '' : 'pricingMethod', subBuilder: $2.EtfPricing.create)
+    ..aOB(23, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(24, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -298,6 +304,26 @@ class FuturesLp extends $pb.GeneratedMessage {
   void clearPricingMethod() => $_clearField(22);
   @$pb.TagNumber(22)
   $2.EtfPricing ensurePricingMethod() => $_ensure(17);
+
+  /// 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  @$pb.TagNumber(23)
+  $core.bool get bidEnabled => $_getBF(18);
+  @$pb.TagNumber(23)
+  set bidEnabled($core.bool value) => $_setBool(18, value);
+  @$pb.TagNumber(23)
+  $core.bool hasBidEnabled() => $_has(18);
+  @$pb.TagNumber(23)
+  void clearBidEnabled() => $_clearField(23);
+
+  /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  @$pb.TagNumber(24)
+  $core.bool get askEnabled => $_getBF(19);
+  @$pb.TagNumber(24)
+  set askEnabled($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(24)
+  $core.bool hasAskEnabled() => $_has(19);
+  @$pb.TagNumber(24)
+  void clearAskEnabled() => $_clearField(24);
 }
 
 /// 매수/매도 수량 한도
@@ -525,6 +551,8 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     FuturesLpQuantityLimit? quantityLimit,
     $core.int? depth,
     $core.String? etfPricing,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -545,6 +573,8 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (depth != null) result.depth = depth;
     if (etfPricing != null) result.etfPricing = etfPricing;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -572,6 +602,8 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
     ..aOM<FuturesLpQuantityLimit>(22, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..a<$core.int>(23, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aOS(24, _omitFieldNames ? '' : 'etfPricing')
+    ..aOB(26, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(27, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -782,6 +814,26 @@ class FuturesLpStatus extends $pb.GeneratedMessage {
   $core.bool hasEtfPricing() => $_has(17);
   @$pb.TagNumber(24)
   void clearEtfPricing() => $_clearField(24);
+
+  /// 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  @$pb.TagNumber(26)
+  $core.bool get bidEnabled => $_getBF(18);
+  @$pb.TagNumber(26)
+  set bidEnabled($core.bool value) => $_setBool(18, value);
+  @$pb.TagNumber(26)
+  $core.bool hasBidEnabled() => $_has(18);
+  @$pb.TagNumber(26)
+  void clearBidEnabled() => $_clearField(26);
+
+  /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  @$pb.TagNumber(27)
+  $core.bool get askEnabled => $_getBF(19);
+  @$pb.TagNumber(27)
+  set askEnabled($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(27)
+  $core.bool hasAskEnabled() => $_has(19);
+  @$pb.TagNumber(27)
+  void clearAskEnabled() => $_clearField(27);
 }
 
 /// 선물 LP 상태 업데이트 (변경된 필드만 포함)
@@ -802,6 +854,8 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     FuturesLpQuantityLimit? quantityLimit,
     $core.int? depth,
     $core.String? etfPricing,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -819,6 +873,8 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (depth != null) result.depth = depth;
     if (etfPricing != null) result.etfPricing = etfPricing;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -843,6 +899,8 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
     ..aOM<FuturesLpQuantityLimit>(19, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..a<$core.int>(20, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aOS(21, _omitFieldNames ? '' : 'etfPricing')
+    ..aOB(22, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(23, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -1020,6 +1078,26 @@ class FuturesLpStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasEtfPricing() => $_has(14);
   @$pb.TagNumber(21)
   void clearEtfPricing() => $_clearField(21);
+
+  /// 매수 호가 활성화 여부 (변경 시에만 Some)
+  @$pb.TagNumber(22)
+  $core.bool get bidEnabled => $_getBF(15);
+  @$pb.TagNumber(22)
+  set bidEnabled($core.bool value) => $_setBool(15, value);
+  @$pb.TagNumber(22)
+  $core.bool hasBidEnabled() => $_has(15);
+  @$pb.TagNumber(22)
+  void clearBidEnabled() => $_clearField(22);
+
+  /// 매도 호가 활성화 여부 (변경 시에만 Some)
+  @$pb.TagNumber(23)
+  $core.bool get askEnabled => $_getBF(16);
+  @$pb.TagNumber(23)
+  set askEnabled($core.bool value) => $_setBool(16, value);
+  @$pb.TagNumber(23)
+  $core.bool hasAskEnabled() => $_has(16);
+  @$pb.TagNumber(23)
+  void clearAskEnabled() => $_clearField(23);
 }
 
 /// 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
@@ -1515,6 +1593,8 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $1.EtfLpOffset? offset,
     FuturesLpQuantityLimit? quantityLimit,
     $core.String? etfPricing,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1529,6 +1609,8 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (offset != null) result.offset = offset;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (etfPricing != null) result.etfPricing = etfPricing;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -1550,6 +1632,8 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..aOM<$1.EtfLpOffset>(11, _omitFieldNames ? '' : 'offset', subBuilder: $1.EtfLpOffset.create)
     ..aOM<FuturesLpQuantityLimit>(15, _omitFieldNames ? '' : 'quantityLimit', subBuilder: FuturesLpQuantityLimit.create)
     ..aOS(16, _omitFieldNames ? '' : 'etfPricing')
+    ..aOB(17, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(18, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -1693,6 +1777,26 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   $core.bool hasEtfPricing() => $_has(11);
   @$pb.TagNumber(16)
   void clearEtfPricing() => $_clearField(16);
+
+  /// 매수 호가 활성화 여부 (PATCH 시에만 명시)
+  @$pb.TagNumber(17)
+  $core.bool get bidEnabled => $_getBF(12);
+  @$pb.TagNumber(17)
+  set bidEnabled($core.bool value) => $_setBool(12, value);
+  @$pb.TagNumber(17)
+  $core.bool hasBidEnabled() => $_has(12);
+  @$pb.TagNumber(17)
+  void clearBidEnabled() => $_clearField(17);
+
+  /// 매도 호가 활성화 여부 (PATCH 시에만 명시)
+  @$pb.TagNumber(18)
+  $core.bool get askEnabled => $_getBF(13);
+  @$pb.TagNumber(18)
+  set askEnabled($core.bool value) => $_setBool(13, value);
+  @$pb.TagNumber(18)
+  $core.bool hasAskEnabled() => $_has(13);
+  @$pb.TagNumber(18)
+  void clearAskEnabled() => $_clearField(18);
 }
 
 /// GetFuturesLpStatus

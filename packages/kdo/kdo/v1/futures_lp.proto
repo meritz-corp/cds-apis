@@ -157,6 +157,12 @@ message FuturesLp {
   // EtfPricing 상세 정보 (EtfLp.pricing_method와 동일 패턴).
   // leverage_future의 경우 prev_index/prev_future를 채워서 반환.
   kdo.v1.common.EtfPricing pricing_method = 22;
+
+  // 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  bool bid_enabled = 23;
+
+  // 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  bool ask_enabled = 24;
 }
 
 // 매수/매도 수량 한도
@@ -271,6 +277,12 @@ message FuturesLpStatus {
   string etf_pricing = 24;
 
   reserved 25; // was: FuturesLpHedge hedge (removed — use HedgeService.LookupHedge instead)
+
+  // 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  bool bid_enabled = 26;
+
+  // 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  bool ask_enabled = 27;
 }
 
 // 선물 LP 상태 업데이트 (변경된 필드만 포함)
@@ -322,6 +334,12 @@ message FuturesLpStatusUpdate {
 
   // EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
   optional string etf_pricing = 21;
+
+  // 매수 호가 활성화 여부 (변경 시에만 Some)
+  optional bool bid_enabled = 22;
+
+  // 매도 호가 활성화 여부 (변경 시에만 Some)
+  optional bool ask_enabled = 23;
 }
 
 // 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
@@ -458,6 +476,12 @@ message UpdateFuturesLpRequest {
 
   // EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
   optional string etf_pricing = 16;
+
+  // 매수 호가 활성화 여부 (PATCH 시에만 명시)
+  optional bool bid_enabled = 17;
+
+  // 매도 호가 활성화 여부 (PATCH 시에만 명시)
+  optional bool ask_enabled = 18;
 }
 
 // GetFuturesLpStatus

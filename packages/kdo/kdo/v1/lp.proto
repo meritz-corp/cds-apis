@@ -179,6 +179,12 @@ message EtfLp {
 
   // 포트폴리오 ID (응답용 - portfolio_fund 에서 derive)
   int32 portfolio_id = 23;
+
+  // 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  bool bid_enabled = 24;
+
+  // 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  bool ask_enabled = 25;
 }
 
 // 매수/매도 수량 한도
@@ -271,6 +277,12 @@ message EtfLpStatus {
 
   // pricing source 선물 1호가 잔량 imbalance guard 활성화 여부
   bool pricing_source_liquidity_imbalance_guard_enabled = 25;
+
+  // 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  bool bid_enabled = 26;
+
+  // 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  bool ask_enabled = 27;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -338,6 +350,12 @@ message EtfLpStatusUpdate {
 
   // pricing source 선물 1호가 잔량 imbalance guard 상태 (변경 시에만 Some)
   optional PricingSourceLiquidityImbalanceGuardState pricing_source_liquidity_imbalance_guard_state = 24;
+
+  // 매수 호가 활성화 여부 (변경 시에만 Some)
+  optional bool bid_enabled = 25;
+
+  // 매도 호가 활성화 여부 (변경 시에만 Some)
+  optional bool ask_enabled = 26;
 }
 
 // pricing source 선물 1호가 잔량 imbalance guard 상태
@@ -649,6 +667,12 @@ message UpdateEtfLpRequest {
   // ETF pricing 방식. LP가 Idle/Error 상태일 때만 변경 가능.
   // EtfPricing은 common.proto의 oneof method 메시지 (Pdf*, IndexTracking*, FutureBasis, LeverageFuture).
   optional kdo.v1.common.EtfPricing pricing = 18;
+
+  // 매수 호가 활성화 여부 (PATCH 시에만 명시)
+  optional bool bid_enabled = 19;
+
+  // 매도 호가 활성화 여부 (PATCH 시에만 명시)
+  optional bool ask_enabled = 20;
 }
 
 

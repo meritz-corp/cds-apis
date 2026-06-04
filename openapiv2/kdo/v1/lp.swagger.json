@@ -224,6 +224,14 @@
                 "pricing": {
                   "$ref": "#/definitions/commonEtfPricing",
                   "description": "ETF pricing 방식. LP가 Idle/Error 상태일 때만 변경 가능.\nEtfPricing은 common.proto의 oneof method 메시지 (Pdf*, IndexTracking*, FutureBasis, LeverageFuture)."
+                },
+                "bidEnabled": {
+                  "type": "boolean",
+                  "title": "매수 호가 활성화 여부 (PATCH 시에만 명시)"
+                },
+                "askEnabled": {
+                  "type": "boolean",
+                  "title": "매도 호가 활성화 여부 (PATCH 시에만 명시)"
                 }
               },
               "title": "UpdateEtfLp"
@@ -748,6 +756,14 @@
           "type": "integer",
           "format": "int32",
           "title": "포트폴리오 ID (응답용 - portfolio_fund 에서 derive)"
+        },
+        "bidEnabled": {
+          "type": "boolean",
+          "title": "매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)"
+        },
+        "askEnabled": {
+          "type": "boolean",
+          "title": "매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)"
         }
       },
       "title": "ETF LP 설정"
@@ -945,6 +961,14 @@
         "pricingSourceLiquidityImbalanceGuardEnabled": {
           "type": "boolean",
           "title": "pricing source 선물 1호가 잔량 imbalance guard 활성화 여부"
+        },
+        "bidEnabled": {
+          "type": "boolean",
+          "title": "매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)"
+        },
+        "askEnabled": {
+          "type": "boolean",
+          "title": "매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)"
         }
       },
       "title": "ETF LP 상태"
@@ -1045,6 +1069,14 @@
         "pricingSourceLiquidityImbalanceGuardState": {
           "$ref": "#/definitions/v1lpPricingSourceLiquidityImbalanceGuardState",
           "title": "pricing source 선물 1호가 잔량 imbalance guard 상태 (변경 시에만 Some)"
+        },
+        "bidEnabled": {
+          "type": "boolean",
+          "title": "매수 호가 활성화 여부 (변경 시에만 Some)"
+        },
+        "askEnabled": {
+          "type": "boolean",
+          "title": "매도 호가 활성화 여부 (변경 시에만 Some)"
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"

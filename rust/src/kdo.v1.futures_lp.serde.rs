@@ -61,6 +61,12 @@ impl serde::Serialize for FuturesLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLp", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -120,6 +126,12 @@ impl serde::Serialize for FuturesLp {
         if let Some(v) = self.pricing_method.as_ref() {
             struct_ser.serialize_field("pricing_method", v)?;
         }
+        if true {
+            struct_ser.serialize_field("bid_enabled", &self.bid_enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_enabled", &self.ask_enabled)?;
+        }
         struct_ser.end()
     }
 }
@@ -162,6 +174,10 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "portfolioId",
             "pricing_method",
             "pricingMethod",
+            "bid_enabled",
+            "bidEnabled",
+            "ask_enabled",
+            "askEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -184,6 +200,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             EtfPricing,
             PortfolioId,
             PricingMethod,
+            BidEnabled,
+            AskEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -224,6 +242,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
                             "pricingMethod" | "pricing_method" => Ok(GeneratedField::PricingMethod),
+                            "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
+                            "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -261,6 +281,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut etf_pricing__ = None;
                 let mut portfolio_id__ = None;
                 let mut pricing_method__ = None;
+                let mut bid_enabled__ = None;
+                let mut ask_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -391,6 +413,18 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             }
                             pricing_method__ = map_.next_value()?;
                         }
+                        GeneratedField::BidEnabled => {
+                            if bid_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidEnabled"));
+                            }
+                            bid_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AskEnabled => {
+                            if ask_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askEnabled"));
+                            }
+                            ask_enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -415,6 +449,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     etf_pricing: etf_pricing__.unwrap_or_default(),
                     portfolio_id: portfolio_id__.unwrap_or_default(),
                     pricing_method: pricing_method__,
+                    bid_enabled: bid_enabled__.unwrap_or_default(),
+                    ask_enabled: ask_enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -1181,6 +1217,12 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLpStatus", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -1242,6 +1284,12 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             struct_ser.serialize_field("etf_pricing", &self.etf_pricing)?;
         }
+        if true {
+            struct_ser.serialize_field("bid_enabled", &self.bid_enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_enabled", &self.ask_enabled)?;
+        }
         struct_ser.end()
     }
 }
@@ -1283,6 +1331,10 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             "depth",
             "etf_pricing",
             "etfPricing",
+            "bid_enabled",
+            "bidEnabled",
+            "ask_enabled",
+            "askEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1305,6 +1357,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             QuantityLimit,
             Depth,
             EtfPricing,
+            BidEnabled,
+            AskEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1345,6 +1399,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "depth" => Ok(GeneratedField::Depth),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
+                            "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
+                            "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1382,6 +1438,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                 let mut quantity_limit__ = None;
                 let mut depth__ = None;
                 let mut etf_pricing__ = None;
+                let mut bid_enabled__ = None;
+                let mut ask_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -1508,6 +1566,18 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             }
                             etf_pricing__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::BidEnabled => {
+                            if bid_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidEnabled"));
+                            }
+                            bid_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AskEnabled => {
+                            if ask_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askEnabled"));
+                            }
+                            ask_enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1532,6 +1602,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                     quantity_limit: quantity_limit__,
                     depth: depth__.unwrap_or_default(),
                     etf_pricing: etf_pricing__.unwrap_or_default(),
+                    bid_enabled: bid_enabled__.unwrap_or_default(),
+                    ask_enabled: ask_enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -1546,6 +1618,12 @@ impl serde::Serialize for FuturesLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1643,6 +1721,12 @@ impl serde::Serialize for FuturesLpStatusUpdate {
         if let Some(v) = self.etf_pricing.as_ref() {
             struct_ser.serialize_field("etf_pricing", v)?;
         }
+        if let Some(v) = self.bid_enabled.as_ref() {
+            struct_ser.serialize_field("bid_enabled", v)?;
+        }
+        if let Some(v) = self.ask_enabled.as_ref() {
+            struct_ser.serialize_field("ask_enabled", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1679,6 +1763,10 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             "depth",
             "etf_pricing",
             "etfPricing",
+            "bid_enabled",
+            "bidEnabled",
+            "ask_enabled",
+            "askEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1698,6 +1786,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             QuantityLimit,
             Depth,
             EtfPricing,
+            BidEnabled,
+            AskEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1735,6 +1825,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "depth" => Ok(GeneratedField::Depth),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
+                            "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
+                            "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1769,6 +1861,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                 let mut quantity_limit__ = None;
                 let mut depth__ = None;
                 let mut etf_pricing__ = None;
+                let mut bid_enabled__ = None;
+                let mut ask_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -1875,6 +1969,18 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             }
                             etf_pricing__ = map_.next_value()?;
                         }
+                        GeneratedField::BidEnabled => {
+                            if bid_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidEnabled"));
+                            }
+                            bid_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::AskEnabled => {
+                            if ask_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askEnabled"));
+                            }
+                            ask_enabled__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1896,6 +2002,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                     quantity_limit: quantity_limit__,
                     depth: depth__,
                     etf_pricing: etf_pricing__,
+                    bid_enabled: bid_enabled__,
+                    ask_enabled: ask_enabled__,
                 })
             }
         }
@@ -3670,6 +3778,12 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -3711,6 +3825,12 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.etf_pricing.as_ref() {
             struct_ser.serialize_field("etf_pricing", v)?;
         }
+        if let Some(v) = self.bid_enabled.as_ref() {
+            struct_ser.serialize_field("bid_enabled", v)?;
+        }
+        if let Some(v) = self.ask_enabled.as_ref() {
+            struct_ser.serialize_field("ask_enabled", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -3743,6 +3863,10 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "quantityLimit",
             "etf_pricing",
             "etfPricing",
+            "bid_enabled",
+            "bidEnabled",
+            "ask_enabled",
+            "askEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3759,6 +3883,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             Offset,
             QuantityLimit,
             EtfPricing,
+            BidEnabled,
+            AskEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3793,6 +3919,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "offset" => Ok(GeneratedField::Offset),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
+                            "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
+                            "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3824,6 +3952,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut offset__ = None;
                 let mut quantity_limit__ = None;
                 let mut etf_pricing__ = None;
+                let mut bid_enabled__ = None;
+                let mut ask_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -3912,6 +4042,18 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             }
                             etf_pricing__ = map_.next_value()?;
                         }
+                        GeneratedField::BidEnabled => {
+                            if bid_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidEnabled"));
+                            }
+                            bid_enabled__ = map_.next_value()?;
+                        }
+                        GeneratedField::AskEnabled => {
+                            if ask_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askEnabled"));
+                            }
+                            ask_enabled__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3930,6 +4072,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     offset: offset__,
                     quantity_limit: quantity_limit__,
                     etf_pricing: etf_pricing__,
+                    bid_enabled: bid_enabled__,
+                    ask_enabled: ask_enabled__,
                 })
             }
         }

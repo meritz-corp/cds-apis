@@ -244,6 +244,14 @@
                 "etfPricing": {
                   "type": "string",
                   "title": "EtfPricing variant 이름 (변경 시에만 Some, 예: \"pdf_nav_hedge\", \"leverage_future\")"
+                },
+                "bidEnabled": {
+                  "type": "boolean",
+                  "title": "매수 호가 활성화 여부 (PATCH 시에만 명시)"
+                },
+                "askEnabled": {
+                  "type": "boolean",
+                  "title": "매도 호가 활성화 여부 (PATCH 시에만 명시)"
                 }
               },
               "title": "UpdateFuturesLp"
@@ -684,6 +692,14 @@
         "pricingMethod": {
           "$ref": "#/definitions/commonEtfPricing",
           "description": "EtfPricing 상세 정보 (EtfLp.pricing_method와 동일 패턴).\nleverage_future의 경우 prev_index/prev_future를 채워서 반환."
+        },
+        "bidEnabled": {
+          "type": "boolean",
+          "title": "매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)"
+        },
+        "askEnabled": {
+          "type": "boolean",
+          "title": "매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)"
         }
       },
       "title": "선물 LP 설정"
@@ -881,6 +897,14 @@
         "etfPricing": {
           "type": "string",
           "title": "EtfPricing variant 이름 (예: \"pdf_nav_hedge\", \"leverage_future\")"
+        },
+        "bidEnabled": {
+          "type": "boolean",
+          "title": "매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)"
+        },
+        "askEnabled": {
+          "type": "boolean",
+          "title": "매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)"
         }
       },
       "title": "선물 LP 상태"
@@ -954,6 +978,14 @@
         "etfPricing": {
           "type": "string",
           "title": "EtfPricing variant 이름 (변경 시에만 Some, 예: \"pdf_nav_hedge\", \"leverage_future\")"
+        },
+        "bidEnabled": {
+          "type": "boolean",
+          "title": "매수 호가 활성화 여부 (변경 시에만 Some)"
+        },
+        "askEnabled": {
+          "type": "boolean",
+          "title": "매도 호가 활성화 여부 (변경 시에만 Some)"
         }
       },
       "title": "선물 LP 상태 업데이트 (변경된 필드만 포함)"

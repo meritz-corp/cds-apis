@@ -62,6 +62,12 @@ pub struct FuturesLp {
     /// leverage_future의 경우 prev_index/prev_future를 채워서 반환.
     #[prost(message, optional, tag="22")]
     pub pricing_method: ::core::option::Option<super::common::EtfPricing>,
+    /// 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+    #[prost(bool, tag="23")]
+    pub bid_enabled: bool,
+    /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+    #[prost(bool, tag="24")]
+    pub ask_enabled: bool,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -166,6 +172,12 @@ pub struct FuturesLpStatus {
     /// EtfPricing variant 이름 (예: "pdf_nav_hedge", "leverage_future")
     #[prost(string, tag="24")]
     pub etf_pricing: ::prost::alloc::string::String,
+    /// 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+    #[prost(bool, tag="26")]
+    pub bid_enabled: bool,
+    /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+    #[prost(bool, tag="27")]
+    pub ask_enabled: bool,
 }
 /// 선물 LP 상태 업데이트 (변경된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -216,6 +228,12 @@ pub struct FuturesLpStatusUpdate {
     /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
     #[prost(string, optional, tag="21")]
     pub etf_pricing: ::core::option::Option<::prost::alloc::string::String>,
+    /// 매수 호가 활성화 여부 (변경 시에만 Some)
+    #[prost(bool, optional, tag="22")]
+    pub bid_enabled: ::core::option::Option<bool>,
+    /// 매도 호가 활성화 여부 (변경 시에만 Some)
+    #[prost(bool, optional, tag="23")]
+    pub ask_enabled: ::core::option::Option<bool>,
 }
 /// 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -365,6 +383,12 @@ pub struct UpdateFuturesLpRequest {
     /// EtfPricing variant 이름 (변경 시에만 Some, 예: "pdf_nav_hedge", "leverage_future")
     #[prost(string, optional, tag="16")]
     pub etf_pricing: ::core::option::Option<::prost::alloc::string::String>,
+    /// 매수 호가 활성화 여부 (PATCH 시에만 명시)
+    #[prost(bool, optional, tag="17")]
+    pub bid_enabled: ::core::option::Option<bool>,
+    /// 매도 호가 활성화 여부 (PATCH 시에만 명시)
+    #[prost(bool, optional, tag="18")]
+    pub ask_enabled: ::core::option::Option<bool>,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

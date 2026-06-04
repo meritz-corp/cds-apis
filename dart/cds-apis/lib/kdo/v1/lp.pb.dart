@@ -45,6 +45,8 @@ class EtfLp extends $pb.GeneratedMessage {
     PrecomputePolicy? precomputePolicy,
     $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
     $core.int? portfolioId,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -67,6 +69,8 @@ class EtfLp extends $pb.GeneratedMessage {
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
     if (portfolioId != null) result.portfolioId = portfolioId;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -96,6 +100,8 @@ class EtfLp extends $pb.GeneratedMessage {
     ..e<PrecomputePolicy>(21, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..aOB(22, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
     ..a<$core.int>(23, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
+    ..aOB(24, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(25, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -320,6 +326,26 @@ class EtfLp extends $pb.GeneratedMessage {
   $core.bool hasPortfolioId() => $_has(19);
   @$pb.TagNumber(23)
   void clearPortfolioId() => $_clearField(23);
+
+  /// 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  @$pb.TagNumber(24)
+  $core.bool get bidEnabled => $_getBF(20);
+  @$pb.TagNumber(24)
+  set bidEnabled($core.bool value) => $_setBool(20, value);
+  @$pb.TagNumber(24)
+  $core.bool hasBidEnabled() => $_has(20);
+  @$pb.TagNumber(24)
+  void clearBidEnabled() => $_clearField(24);
+
+  /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  @$pb.TagNumber(25)
+  $core.bool get askEnabled => $_getBF(21);
+  @$pb.TagNumber(25)
+  set askEnabled($core.bool value) => $_setBool(21, value);
+  @$pb.TagNumber(25)
+  $core.bool hasAskEnabled() => $_has(21);
+  @$pb.TagNumber(25)
+  void clearAskEnabled() => $_clearField(25);
 }
 
 /// 매수/매도 수량 한도
@@ -437,6 +463,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     PrecomputePolicy? precomputePolicy,
     $core.int? depth,
     $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -460,6 +488,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (depth != null) result.depth = depth;
     if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -490,6 +520,8 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..e<PrecomputePolicy>(23, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..a<$core.int>(24, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..aOB(25, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
+    ..aOB(26, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(27, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -726,6 +758,26 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   $core.bool hasPricingSourceLiquidityImbalanceGuardEnabled() => $_has(20);
   @$pb.TagNumber(25)
   void clearPricingSourceLiquidityImbalanceGuardEnabled() => $_clearField(25);
+
+  /// 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
+  @$pb.TagNumber(26)
+  $core.bool get bidEnabled => $_getBF(21);
+  @$pb.TagNumber(26)
+  set bidEnabled($core.bool value) => $_setBool(21, value);
+  @$pb.TagNumber(26)
+  $core.bool hasBidEnabled() => $_has(21);
+  @$pb.TagNumber(26)
+  void clearBidEnabled() => $_clearField(26);
+
+  /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
+  @$pb.TagNumber(27)
+  $core.bool get askEnabled => $_getBF(22);
+  @$pb.TagNumber(27)
+  set askEnabled($core.bool value) => $_setBool(22, value);
+  @$pb.TagNumber(27)
+  $core.bool hasAskEnabled() => $_has(22);
+  @$pb.TagNumber(27)
+  void clearAskEnabled() => $_clearField(27);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -752,6 +804,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     PrecomputePolicy? precomputePolicy,
     $core.int? depth,
     PricingSourceLiquidityImbalanceGuardState? pricingSourceLiquidityImbalanceGuardState,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -775,6 +829,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (depth != null) result.depth = depth;
     if (pricingSourceLiquidityImbalanceGuardState != null) result.pricingSourceLiquidityImbalanceGuardState = pricingSourceLiquidityImbalanceGuardState;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -805,6 +861,8 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..e<PrecomputePolicy>(22, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..a<$core.int>(23, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
     ..e<PricingSourceLiquidityImbalanceGuardState>(24, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardState', $pb.PbFieldType.OE, defaultOrMaker: PricingSourceLiquidityImbalanceGuardState.PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED, valueOf: PricingSourceLiquidityImbalanceGuardState.valueOf, enumValues: PricingSourceLiquidityImbalanceGuardState.values)
+    ..aOB(25, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(26, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -1041,6 +1099,26 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasPricingSourceLiquidityImbalanceGuardState() => $_has(20);
   @$pb.TagNumber(24)
   void clearPricingSourceLiquidityImbalanceGuardState() => $_clearField(24);
+
+  /// 매수 호가 활성화 여부 (변경 시에만 Some)
+  @$pb.TagNumber(25)
+  $core.bool get bidEnabled => $_getBF(21);
+  @$pb.TagNumber(25)
+  set bidEnabled($core.bool value) => $_setBool(21, value);
+  @$pb.TagNumber(25)
+  $core.bool hasBidEnabled() => $_has(21);
+  @$pb.TagNumber(25)
+  void clearBidEnabled() => $_clearField(25);
+
+  /// 매도 호가 활성화 여부 (변경 시에만 Some)
+  @$pb.TagNumber(26)
+  $core.bool get askEnabled => $_getBF(22);
+  @$pb.TagNumber(26)
+  set askEnabled($core.bool value) => $_setBool(22, value);
+  @$pb.TagNumber(26)
+  $core.bool hasAskEnabled() => $_has(22);
+  @$pb.TagNumber(26)
+  void clearAskEnabled() => $_clearField(26);
 }
 
 /// 자동 offset 조정 설정
@@ -2023,6 +2101,8 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     PrecomputePolicy? precomputePolicy,
     $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
     $1.EtfPricing? pricing,
+    $core.bool? bidEnabled,
+    $core.bool? askEnabled,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2042,6 +2122,8 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (precomputePolicy != null) result.precomputePolicy = precomputePolicy;
     if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
     if (pricing != null) result.pricing = pricing;
+    if (bidEnabled != null) result.bidEnabled = bidEnabled;
+    if (askEnabled != null) result.askEnabled = askEnabled;
     return result;
   }
 
@@ -2068,6 +2150,8 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..e<PrecomputePolicy>(16, _omitFieldNames ? '' : 'precomputePolicy', $pb.PbFieldType.OE, defaultOrMaker: PrecomputePolicy.PRECOMPUTE_POLICY_UNSPECIFIED, valueOf: PrecomputePolicy.valueOf, enumValues: PrecomputePolicy.values)
     ..aOB(17, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
     ..aOM<$1.EtfPricing>(18, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
+    ..aOB(19, _omitFieldNames ? '' : 'bidEnabled')
+    ..aOB(20, _omitFieldNames ? '' : 'askEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -2262,6 +2346,26 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   void clearPricing() => $_clearField(18);
   @$pb.TagNumber(18)
   $1.EtfPricing ensurePricing() => $_ensure(16);
+
+  /// 매수 호가 활성화 여부 (PATCH 시에만 명시)
+  @$pb.TagNumber(19)
+  $core.bool get bidEnabled => $_getBF(17);
+  @$pb.TagNumber(19)
+  set bidEnabled($core.bool value) => $_setBool(17, value);
+  @$pb.TagNumber(19)
+  $core.bool hasBidEnabled() => $_has(17);
+  @$pb.TagNumber(19)
+  void clearBidEnabled() => $_clearField(19);
+
+  /// 매도 호가 활성화 여부 (PATCH 시에만 명시)
+  @$pb.TagNumber(20)
+  $core.bool get askEnabled => $_getBF(18);
+  @$pb.TagNumber(20)
+  set askEnabled($core.bool value) => $_setBool(18, value);
+  @$pb.TagNumber(20)
+  $core.bool hasAskEnabled() => $_has(18);
+  @$pb.TagNumber(20)
+  void clearAskEnabled() => $_clearField(20);
 }
 
 /// GetEtfLpStatus
