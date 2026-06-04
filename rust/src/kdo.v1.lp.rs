@@ -161,11 +161,11 @@ pub struct EtfLpStatus {
     #[prost(bool, tag="25")]
     pub pricing_source_liquidity_imbalance_guard_enabled: bool,
     /// 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
-    #[prost(bool, tag="26")]
-    pub bid_enabled: bool,
+    #[prost(bool, optional, tag="26")]
+    pub bid_enabled: ::core::option::Option<bool>,
     /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
-    #[prost(bool, tag="27")]
-    pub ask_enabled: bool,
+    #[prost(bool, optional, tag="27")]
+    pub ask_enabled: ::core::option::Option<bool>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]

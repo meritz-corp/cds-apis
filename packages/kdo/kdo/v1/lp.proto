@@ -279,10 +279,10 @@ message EtfLpStatus {
   bool pricing_source_liquidity_imbalance_guard_enabled = 25;
 
   // 매수 호가 활성화 여부 (enabled=true 일 때만 적용. false=매수 호가 중단)
-  bool bid_enabled = 26;
+  optional bool bid_enabled = 26;
 
   // 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
-  bool ask_enabled = 27;
+  optional bool ask_enabled = 27;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)

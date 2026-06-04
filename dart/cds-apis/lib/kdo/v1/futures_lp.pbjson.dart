@@ -157,13 +157,15 @@ const FuturesLpStatus$json = {
     {'1': 'quantity_limit', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 2, '10': 'quantityLimit', '17': true},
     {'1': 'depth', '3': 23, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'etf_pricing', '3': 24, '4': 1, '5': 9, '10': 'etfPricing'},
-    {'1': 'bid_enabled', '3': 26, '4': 1, '5': 8, '10': 'bidEnabled'},
-    {'1': 'ask_enabled', '3': 27, '4': 1, '5': 8, '10': 'askEnabled'},
+    {'1': 'bid_enabled', '3': 26, '4': 1, '5': 8, '9': 3, '10': 'bidEnabled', '17': true},
+    {'1': 'ask_enabled', '3': 27, '4': 1, '5': 8, '9': 4, '10': 'askEnabled', '17': true},
   ],
   '8': [
     {'1': '_bid_adjustment'},
     {'1': '_ask_adjustment'},
     {'1': '_quantity_limit'},
+    {'1': '_bid_enabled'},
+    {'1': '_ask_enabled'},
   ],
   '9': [
     {'1': 9, '2': 10},
@@ -194,12 +196,12 @@ final $typed_data.Uint8List futuresLpStatusDescriptor = $convert.base64Decode(
     'ZG8udjEubHAuRXRmTHBPZmZzZXRSBm9mZnNldBJVCg5xdWFudGl0eV9saW1pdBgWIAEoCzIpLm'
     'tkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRIAlINcXVhbnRpdHlMaW1p'
     'dIgBARIUCgVkZXB0aBgXIAEoDVIFZGVwdGgSHwoLZXRmX3ByaWNpbmcYGCABKAlSCmV0ZlByaW'
-    'NpbmcSHwoLYmlkX2VuYWJsZWQYGiABKAhSCmJpZEVuYWJsZWQSHwoLYXNrX2VuYWJsZWQYGyAB'
-    'KAhSCmFza0VuYWJsZWRCEQoPX2JpZF9hZGp1c3RtZW50QhEKD19hc2tfYWRqdXN0bWVudEIRCg'
-    '9fcXVhbnRpdHlfbGltaXRKBAgJEApKBAgOEA9KBAgPEBBKBAgQEBFKBAgREBJKBAgSEBNKBAgZ'
-    'EBpSBWNhcnJ5UhBtb21lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudHVtX3'
-    'NlbnNpdGl2aXR5Uhdtb21lbnR1bV9iaWRfYWRqdXN0bWVudFIXbW9tZW50dW1fYXNrX2FkanVz'
-    'dG1lbnQ=');
+    'NpbmcSJAoLYmlkX2VuYWJsZWQYGiABKAhIA1IKYmlkRW5hYmxlZIgBARIkCgthc2tfZW5hYmxl'
+    'ZBgbIAEoCEgEUgphc2tFbmFibGVkiAEBQhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2Fkan'
+    'VzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0Qg4KDF9iaWRfZW5hYmxlZEIOCgxfYXNrX2VuYWJs'
+    'ZWRKBAgJEApKBAgOEA9KBAgPEBBKBAgQEBFKBAgREBJKBAgSEBNKBAgZEBpSBWNhcnJ5UhBtb2'
+    '1lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudHVtX3NlbnNpdGl2aXR5Uhdt'
+    'b21lbnR1bV9iaWRfYWRqdXN0bWVudFIXbW9tZW50dW1fYXNrX2FkanVzdG1lbnQ=');
 
 @$core.Deprecated('Use futuresLpStatusUpdateDescriptor instead')
 const FuturesLpStatusUpdate$json = {

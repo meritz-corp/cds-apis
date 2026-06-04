@@ -1284,11 +1284,11 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             struct_ser.serialize_field("etf_pricing", &self.etf_pricing)?;
         }
-        if true {
-            struct_ser.serialize_field("bid_enabled", &self.bid_enabled)?;
+        if let Some(v) = self.bid_enabled.as_ref() {
+            struct_ser.serialize_field("bid_enabled", v)?;
         }
-        if true {
-            struct_ser.serialize_field("ask_enabled", &self.ask_enabled)?;
+        if let Some(v) = self.ask_enabled.as_ref() {
+            struct_ser.serialize_field("ask_enabled", v)?;
         }
         struct_ser.end()
     }
@@ -1570,13 +1570,13 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             if bid_enabled__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidEnabled"));
                             }
-                            bid_enabled__ = Some(map_.next_value()?);
+                            bid_enabled__ = map_.next_value()?;
                         }
                         GeneratedField::AskEnabled => {
                             if ask_enabled__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("askEnabled"));
                             }
-                            ask_enabled__ = Some(map_.next_value()?);
+                            ask_enabled__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1602,8 +1602,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                     quantity_limit: quantity_limit__,
                     depth: depth__.unwrap_or_default(),
                     etf_pricing: etf_pricing__.unwrap_or_default(),
-                    bid_enabled: bid_enabled__.unwrap_or_default(),
-                    ask_enabled: ask_enabled__.unwrap_or_default(),
+                    bid_enabled: bid_enabled__,
+                    ask_enabled: ask_enabled__,
                 })
             }
         }
