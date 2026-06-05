@@ -68,6 +68,11 @@ pub struct FuturesLp {
     /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
     #[prost(bool, tag="24")]
     pub ask_enabled: bool,
+    /// 선물 LP 1호가 잔량 imbalance 비율 임계값.
+    /// 잔량 비율이 이 값 미만이면 부족한 측 sub-order에 대해 ETF 사전 헷지(IOC) 가동.
+    /// 0.0 = 기능 OFF.
+    #[prost(double, tag="25")]
+    pub early_hedge_threshold_ratio: f64,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -392,6 +397,10 @@ pub struct UpdateFuturesLpRequest {
     /// 매도 호가 활성화 여부 (PATCH 시에만 명시)
     #[prost(bool, optional, tag="18")]
     pub ask_enabled: ::core::option::Option<bool>,
+    /// 선물 LP 1호가 잔량 imbalance 비율 임계값 (PATCH 시에만 명시)
+    /// 0.0 = 기능 OFF.
+    #[prost(double, optional, tag="19")]
+    pub early_hedge_threshold_ratio: ::core::option::Option<f64>,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

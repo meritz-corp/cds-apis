@@ -259,6 +259,11 @@
                 "askEnabled": {
                   "type": "boolean",
                   "title": "매도 호가 활성화 여부 (PATCH 시에만 명시)"
+                },
+                "earlyHedgeThresholdRatio": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "선물 LP 1호가 잔량 imbalance 비율 임계값 (PATCH 시에만 명시)\n0.0 = 기능 OFF."
                 }
               },
               "title": "UpdateFuturesLp"
@@ -747,6 +752,11 @@
         "askEnabled": {
           "type": "boolean",
           "title": "매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)"
+        },
+        "earlyHedgeThresholdRatio": {
+          "type": "number",
+          "format": "double",
+          "description": "선물 LP 1호가 잔량 imbalance 비율 임계값.\n잔량 비율이 이 값 미만이면 부족한 측 sub-order에 대해 ETF 사전 헷지(IOC) 가동.\n0.0 = 기능 OFF."
         }
       },
       "title": "선물 LP 설정"
