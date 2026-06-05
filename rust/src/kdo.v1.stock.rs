@@ -80,6 +80,19 @@ pub struct ListStocksResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStockTickSizeRequest {
+    #[prost(string, tag="1")]
+    pub target_price: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetStockTickSizeResponse {
+    /// 리소스 이름 (stocks/{code})
+    #[prost(int64, tag="1")]
+    pub tick_size: i64,
+}
 include!("kdo.v1.stock.tonic.rs");
 include!("kdo.v1.stock.serde.rs");
 // @@protoc_insertion_point(module)

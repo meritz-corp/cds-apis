@@ -43,6 +43,10 @@ class StockServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listStocks, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.GetStockTickSizeResponse> getStockTickSize($0.GetStockTickSizeRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getStockTickSize, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getStock = $grpc.ClientMethod<$0.GetStockRequest, $0.Stock>(
@@ -53,6 +57,10 @@ class StockServiceClient extends $grpc.Client {
       '/kdo.v1.stock.StockService/ListStocks',
       ($0.ListStocksRequest value) => value.writeToBuffer(),
       $0.ListStocksResponse.fromBuffer);
+  static final _$getStockTickSize = $grpc.ClientMethod<$0.GetStockTickSizeRequest, $0.GetStockTickSizeResponse>(
+      '/kdo.v1.stock.StockService/GetStockTickSize',
+      ($0.GetStockTickSizeRequest value) => value.writeToBuffer(),
+      $0.GetStockTickSizeResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.stock.StockService')
@@ -74,6 +82,13 @@ abstract class StockServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListStocksRequest.fromBuffer(value),
         ($0.ListStocksResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetStockTickSizeRequest, $0.GetStockTickSizeResponse>(
+        'GetStockTickSize',
+        getStockTickSize_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetStockTickSizeRequest.fromBuffer(value),
+        ($0.GetStockTickSizeResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Stock> getStock_Pre($grpc.ServiceCall $call, $async.Future<$0.GetStockRequest> $request) async {
@@ -87,5 +102,11 @@ abstract class StockServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListStocksResponse> listStocks($grpc.ServiceCall call, $0.ListStocksRequest request);
+
+  $async.Future<$0.GetStockTickSizeResponse> getStockTickSize_Pre($grpc.ServiceCall $call, $async.Future<$0.GetStockTickSizeRequest> $request) async {
+    return getStockTickSize($call, await $request);
+  }
+
+  $async.Future<$0.GetStockTickSizeResponse> getStockTickSize($grpc.ServiceCall call, $0.GetStockTickSizeRequest request);
 
 }

@@ -28,6 +28,13 @@ service StockService {
     };
     option (google.api.method_signature) = "";
   }
+
+  rpc GetStockTickSize(GetStockTickSizeRequest) returns (GetStockTickSizeResponse) {
+    option (google.api.http) = {
+      get: "/v1/stocks:tickSize"
+    };
+    option (google.api.method_signature) = "stock";
+  }
 }
 
 // 주식 종목 정보
@@ -110,4 +117,17 @@ message ListStocksResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
+}
+
+
+message GetStockTickSizeRequest {
+  string target_price = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+
+message GetStockTickSizeResponse {
+  // 리소스 이름 (stocks/{code})
+  int64 tick_size = 1;
 }

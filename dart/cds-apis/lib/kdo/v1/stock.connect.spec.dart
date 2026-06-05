@@ -26,4 +26,11 @@ abstract final class StockService {
     kdov1stock.ListStocksRequest.new,
     kdov1stock.ListStocksResponse.new,
   );
+
+  static const getStockTickSize = connect.Spec(
+    '/$name/GetStockTickSize',
+    connect.StreamType.unary,
+    kdov1stock.GetStockTickSizeRequest.new,
+    kdov1stock.GetStockTickSizeResponse.new,
+  );
 }

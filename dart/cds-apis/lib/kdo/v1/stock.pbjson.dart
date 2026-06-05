@@ -89,3 +89,29 @@ final $typed_data.Uint8List listStocksResponseDescriptor = $convert.base64Decode
     'ChJMaXN0U3RvY2tzUmVzcG9uc2USKwoGc3RvY2tzGAEgAygLMhMua2RvLnYxLnN0b2NrLlN0b2'
     'NrUgZzdG9ja3MSJgoPbmV4dF9wYWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2Vu');
 
+@$core.Deprecated('Use getStockTickSizeRequestDescriptor instead')
+const GetStockTickSizeRequest$json = {
+  '1': 'GetStockTickSizeRequest',
+  '2': [
+    {'1': 'target_price', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'targetPrice'},
+  ],
+};
+
+/// Descriptor for `GetStockTickSizeRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getStockTickSizeRequestDescriptor = $convert.base64Decode(
+    'ChdHZXRTdG9ja1RpY2tTaXplUmVxdWVzdBInCgx0YXJnZXRfcHJpY2UYASABKAlCBOJBAQJSC3'
+    'RhcmdldFByaWNl');
+
+@$core.Deprecated('Use getStockTickSizeResponseDescriptor instead')
+const GetStockTickSizeResponse$json = {
+  '1': 'GetStockTickSizeResponse',
+  '2': [
+    {'1': 'tick_size', '3': 1, '4': 1, '5': 3, '10': 'tickSize'},
+  ],
+};
+
+/// Descriptor for `GetStockTickSizeResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getStockTickSizeResponseDescriptor = $convert.base64Decode(
+    'ChhHZXRTdG9ja1RpY2tTaXplUmVzcG9uc2USGwoJdGlja19zaXplGAEgASgDUgh0aWNrU2l6ZQ'
+    '==');
+

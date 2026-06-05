@@ -54,6 +54,26 @@ func (mr *MockStockServiceClientMockRecorder) GetStock(ctx, in interface{}, opts
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetStock", reflect.TypeOf((*MockStockServiceClient)(nil).GetStock), varargs...)
 }
 
+// GetStockTickSize mocks base method.
+func (m *MockStockServiceClient) GetStockTickSize(ctx context.Context, in *GetStockTickSizeRequest, opts ...grpc.CallOption) (*GetStockTickSizeResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetStockTickSize", varargs...)
+	ret0, _ := ret[0].(*GetStockTickSizeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetStockTickSize indicates an expected call of GetStockTickSize.
+func (mr *MockStockServiceClientMockRecorder) GetStockTickSize(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetStockTickSize", reflect.TypeOf((*MockStockServiceClient)(nil).GetStockTickSize), varargs...)
+}
+
 // ListStocks mocks base method.
 func (m *MockStockServiceClient) ListStocks(ctx context.Context, in *ListStocksRequest, opts ...grpc.CallOption) (*ListStocksResponse, error) {
 	m.ctrl.T.Helper()
@@ -110,6 +130,21 @@ func (m *MockStockServiceServer) GetStock(ctx context.Context, in *GetStockReque
 func (mr *MockStockServiceServerMockRecorder) GetStock(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetStock", reflect.TypeOf((*MockStockServiceServer)(nil).GetStock), ctx, in)
+}
+
+// GetStockTickSize mocks base method.
+func (m *MockStockServiceServer) GetStockTickSize(ctx context.Context, in *GetStockTickSizeRequest) (*GetStockTickSizeResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetStockTickSize", ctx, in)
+	ret0, _ := ret[0].(*GetStockTickSizeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetStockTickSize indicates an expected call of GetStockTickSize.
+func (mr *MockStockServiceServerMockRecorder) GetStockTickSize(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetStockTickSize", reflect.TypeOf((*MockStockServiceServer)(nil).GetStockTickSize), ctx, in)
 }
 
 // ListStocks mocks base method.

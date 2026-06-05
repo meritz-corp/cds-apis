@@ -371,6 +371,99 @@ class ListStocksResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+class GetStockTickSizeRequest extends $pb.GeneratedMessage {
+  factory GetStockTickSizeRequest({
+    $core.String? targetPrice,
+  }) {
+    final result = create();
+    if (targetPrice != null) result.targetPrice = targetPrice;
+    return result;
+  }
+
+  GetStockTickSizeRequest._();
+
+  factory GetStockTickSizeRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetStockTickSizeRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetStockTickSizeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.stock'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'targetPrice')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStockTickSizeRequest clone() => GetStockTickSizeRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStockTickSizeRequest copyWith(void Function(GetStockTickSizeRequest) updates) => super.copyWith((message) => updates(message as GetStockTickSizeRequest)) as GetStockTickSizeRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetStockTickSizeRequest create() => GetStockTickSizeRequest._();
+  @$core.override
+  GetStockTickSizeRequest createEmptyInstance() => create();
+  static $pb.PbList<GetStockTickSizeRequest> createRepeated() => $pb.PbList<GetStockTickSizeRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetStockTickSizeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetStockTickSizeRequest>(create);
+  static GetStockTickSizeRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get targetPrice => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set targetPrice($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTargetPrice() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTargetPrice() => $_clearField(1);
+}
+
+class GetStockTickSizeResponse extends $pb.GeneratedMessage {
+  factory GetStockTickSizeResponse({
+    $fixnum.Int64? tickSize,
+  }) {
+    final result = create();
+    if (tickSize != null) result.tickSize = tickSize;
+    return result;
+  }
+
+  GetStockTickSizeResponse._();
+
+  factory GetStockTickSizeResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetStockTickSizeResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetStockTickSizeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.stock'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'tickSize')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStockTickSizeResponse clone() => GetStockTickSizeResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStockTickSizeResponse copyWith(void Function(GetStockTickSizeResponse) updates) => super.copyWith((message) => updates(message as GetStockTickSizeResponse)) as GetStockTickSizeResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetStockTickSizeResponse create() => GetStockTickSizeResponse._();
+  @$core.override
+  GetStockTickSizeResponse createEmptyInstance() => create();
+  static $pb.PbList<GetStockTickSizeResponse> createRepeated() => $pb.PbList<GetStockTickSizeResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetStockTickSizeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetStockTickSizeResponse>(create);
+  static GetStockTickSizeResponse? _defaultInstance;
+
+  /// 리소스 이름 (stocks/{code})
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get tickSize => $_getI64(0);
+  @$pb.TagNumber(1)
+  set tickSize($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTickSize() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTickSize() => $_clearField(1);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
