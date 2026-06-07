@@ -148,13 +148,13 @@
                   "format": "int32",
                   "title": "Portfolio ID"
                 },
-                "left": {
+                "base": {
                   "$ref": "#/definitions/pairPairEntry",
-                  "title": "Left 엔트리"
+                  "title": "Base 엔트리"
                 },
-                "right": {
+                "counter": {
                   "$ref": "#/definitions/pairPairEntry",
-                  "title": "Right 엔트리"
+                  "title": "Counter 엔트리"
                 },
                 "condition": {
                   "$ref": "#/definitions/pairPairCondition",
@@ -190,8 +190,8 @@
               "required": [
                 "displayName",
                 "portfolioId",
-                "left",
-                "right",
+                "base",
+                "counter",
                 "condition"
               ]
             }
@@ -772,13 +772,13 @@
           "format": "int32",
           "title": "Portfolio ID"
         },
-        "left": {
+        "base": {
           "$ref": "#/definitions/pairPairEntry",
-          "title": "Left 엔트리"
+          "title": "Base 엔트리"
         },
-        "right": {
+        "counter": {
           "$ref": "#/definitions/pairPairEntry",
-          "title": "Right 엔트리"
+          "title": "Counter 엔트리"
         },
         "condition": {
           "$ref": "#/definitions/pairPairCondition",
@@ -814,8 +814,8 @@
       "required": [
         "displayName",
         "portfolioId",
-        "left",
-        "right",
+        "base",
+        "counter",
         "condition"
       ]
     },
@@ -904,36 +904,36 @@
         },
         "scenario": {
           "type": "string",
-          "title": "시그널 시나리오 (예: \"LEFT_HIGH\", \"RIGHT_HIGH\")"
+          "title": "시그널 시나리오 (예: \"BASE_HIGH\", \"COUNTER_HIGH\")"
         },
         "outcome": {
           "$ref": "#/definitions/pairPairExecutionOutcome",
           "title": "실행 결과"
         },
-        "leftOrderId": {
+        "baseOrderId": {
           "type": "string",
           "format": "uint64",
-          "title": "Left 측 주문 ID (발주 성공 시)"
+          "title": "Base 측 주문 ID (발주 성공 시)"
         },
-        "rightOrderId": {
+        "counterOrderId": {
           "type": "string",
           "format": "uint64",
-          "title": "Right 측 주문 ID (발주 성공 시)"
+          "title": "Counter 측 주문 ID (발주 성공 시)"
         },
-        "leftPrice": {
+        "basePrice": {
           "type": "string",
           "format": "int64",
-          "title": "Left 참조 가격 (원, raw int64)"
+          "title": "Base 참조 가격 (원, raw int64)"
         },
-        "rightPrice": {
+        "counterPrice": {
           "type": "string",
           "format": "int64",
-          "title": "Right 참조 가격 (원, raw int64)"
+          "title": "Counter 참조 가격 (원, raw int64)"
         },
         "spread": {
           "type": "string",
           "format": "int64",
-          "title": "스프레드 (left - right, 원, raw int64)"
+          "title": "스프레드 (base - counter, 원, raw int64)"
         },
         "dispatchedAt": {
           "type": "string",
@@ -966,8 +966,8 @@
       "type": "string",
       "enum": [
         "PAIR_LEG_UNSPECIFIED",
-        "PAIR_LEG_LEFT",
-        "PAIR_LEG_RIGHT"
+        "PAIR_LEG_BASE",
+        "PAIR_LEG_COUNTER"
       ],
       "default": "PAIR_LEG_UNSPECIFIED",
       "title": "Pair leg 식별자"
@@ -1033,12 +1033,12 @@
         "totalSubmitted": {
           "type": "string",
           "format": "int64",
-          "title": "left + right 누적 발주 수량"
+          "title": "base + counter 누적 발주 수량"
         },
         "totalFilled": {
           "type": "string",
           "format": "int64",
-          "title": "left + right 누적 체결 수량"
+          "title": "base + counter 누적 체결 수량"
         },
         "executionCount": {
           "type": "string",
@@ -1072,13 +1072,13 @@
           "type": "string",
           "title": "리소스 이름 (pairs/{id})"
         },
-        "left": {
+        "base": {
           "$ref": "#/definitions/pairLegStatus",
-          "title": "Left leg 상태"
+          "title": "Base leg 상태"
         },
-        "right": {
+        "counter": {
           "$ref": "#/definitions/pairLegStatus",
-          "title": "Right leg 상태"
+          "title": "Counter leg 상태"
         },
         "updatedAt": {
           "type": "string",
@@ -1094,15 +1094,15 @@
         "minRatio": {
           "type": "number",
           "format": "double",
-          "title": "최소 비율 (이 값 미만이면 RightHigh 트리거)"
+          "title": "최소 비율 (이 값 미만이면 CounterHigh 트리거)"
         },
         "maxRatio": {
           "type": "number",
           "format": "double",
-          "title": "최대 비율 (이 값 초과 시 LeftHigh 트리거)"
+          "title": "최대 비율 (이 값 초과 시 BaseHigh 트리거)"
         }
       },
-      "title": "가격 비율 조건 (left / right)",
+      "title": "가격 비율 조건 (base / counter)",
       "required": [
         "minRatio",
         "maxRatio"
@@ -1149,7 +1149,7 @@
       "properties": {
         "makerLeg": {
           "$ref": "#/definitions/pairPairLeg",
-          "title": "maker 역할 leg (반대 leg가 pricer 겸 taker)"
+          "title": "maker 역할 leg (BASE or COUNTER; 반대 leg가 pricer 겸 taker)"
         },
         "pricing": {
           "$ref": "#/definitions/pairPairPricingMethod",
@@ -1198,12 +1198,12 @@
       "type": "string",
       "enum": [
         "SPREAD_DIRECTION_UNSPECIFIED",
-        "SPREAD_DIRECTION_LEFT_HIGH",
-        "SPREAD_DIRECTION_RIGHT_HIGH",
+        "SPREAD_DIRECTION_BASE_HIGH",
+        "SPREAD_DIRECTION_COUNTER_HIGH",
         "SPREAD_DIRECTION_BOTH"
       ],
       "default": "SPREAD_DIRECTION_UNSPECIFIED",
-      "description": "- SPREAD_DIRECTION_LEFT_HIGH: Left가 비쌀 때만 트리거\n - SPREAD_DIRECTION_RIGHT_HIGH: Right가 비쌀 때만 트리거\n - SPREAD_DIRECTION_BOTH: 양방향",
+      "description": "- SPREAD_DIRECTION_BASE_HIGH: Base가 비쌀 때만 트리거\n - SPREAD_DIRECTION_COUNTER_HIGH: Counter가 비쌀 때만 트리거\n - SPREAD_DIRECTION_BOTH: 양방향",
       "title": "스프레드 방향 (어느 쪽이 비쌀 때 트리거할지)"
     },
     "protobufAny": {
@@ -1307,7 +1307,7 @@
           "title": "트리거 방향"
         }
       },
-      "title": "절대 스프레드 금액 조건 (|left - right| \u003e= threshold)",
+      "title": "절대 스프레드 금액 조건 (|base - counter| \u003e= threshold)",
       "required": [
         "threshold",
         "direction"
@@ -1326,7 +1326,7 @@
           "title": "트리거 방향"
         }
       },
-      "title": "상대 스프레드 (bps) 조건 (|spread| / mid * 10000 \u003e= threshold_bps)",
+      "title": "상대 스프레드 (bps) 조건 (|spread| / mid * 10000 \u003e= threshold_bps, base 기준)",
       "required": [
         "thresholdBps",
         "direction"

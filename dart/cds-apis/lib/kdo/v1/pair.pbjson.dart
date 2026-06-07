@@ -52,8 +52,8 @@ const SpreadDirection$json = {
   '1': 'SpreadDirection',
   '2': [
     {'1': 'SPREAD_DIRECTION_UNSPECIFIED', '2': 0},
-    {'1': 'SPREAD_DIRECTION_LEFT_HIGH', '2': 1},
-    {'1': 'SPREAD_DIRECTION_RIGHT_HIGH', '2': 2},
+    {'1': 'SPREAD_DIRECTION_BASE_HIGH', '2': 1},
+    {'1': 'SPREAD_DIRECTION_COUNTER_HIGH', '2': 2},
     {'1': 'SPREAD_DIRECTION_BOTH', '2': 3},
   ],
 };
@@ -61,8 +61,8 @@ const SpreadDirection$json = {
 /// Descriptor for `SpreadDirection`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List spreadDirectionDescriptor = $convert.base64Decode(
     'Cg9TcHJlYWREaXJlY3Rpb24SIAocU1BSRUFEX0RJUkVDVElPTl9VTlNQRUNJRklFRBAAEh4KGl'
-    'NQUkVBRF9ESVJFQ1RJT05fTEVGVF9ISUdIEAESHwobU1BSRUFEX0RJUkVDVElPTl9SSUdIVF9I'
-    'SUdIEAISGQoVU1BSRUFEX0RJUkVDVElPTl9CT1RIEAM=');
+    'NQUkVBRF9ESVJFQ1RJT05fQkFTRV9ISUdIEAESIQodU1BSRUFEX0RJUkVDVElPTl9DT1VOVEVS'
+    'X0hJR0gQAhIZChVTUFJFQURfRElSRUNUSU9OX0JPVEgQAw==');
 
 @$core.Deprecated('Use pairOrderTypeDescriptor instead')
 const PairOrderType$json = {
@@ -103,15 +103,15 @@ const PairLeg$json = {
   '1': 'PairLeg',
   '2': [
     {'1': 'PAIR_LEG_UNSPECIFIED', '2': 0},
-    {'1': 'PAIR_LEG_LEFT', '2': 1},
-    {'1': 'PAIR_LEG_RIGHT', '2': 2},
+    {'1': 'PAIR_LEG_BASE', '2': 1},
+    {'1': 'PAIR_LEG_COUNTER', '2': 2},
   ],
 };
 
 /// Descriptor for `PairLeg`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List pairLegDescriptor = $convert.base64Decode(
-    'CgdQYWlyTGVnEhgKFFBBSVJfTEVHX1VOU1BFQ0lGSUVEEAASEQoNUEFJUl9MRUdfTEVGVBABEh'
-    'IKDlBBSVJfTEVHX1JJR0hUEAI=');
+    'CgdQYWlyTGVnEhgKFFBBSVJfTEVHX1VOU1BFQ0lGSUVEEAASEQoNUEFJUl9MRUdfQkFTRRABEh'
+    'QKEFBBSVJfTEVHX0NPVU5URVIQAg==');
 
 @$core.Deprecated('Use etfNavKindDescriptor instead')
 const EtfNavKind$json = {
@@ -203,8 +203,8 @@ const Pair$json = {
     {'1': 'id', '3': 2, '4': 1, '5': 5, '8': {}, '10': 'id'},
     {'1': 'display_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'displayName'},
     {'1': 'portfolio_id', '3': 4, '4': 1, '5': 5, '8': {}, '10': 'portfolioId'},
-    {'1': 'left', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'left'},
-    {'1': 'right', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'right'},
+    {'1': 'base', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'base'},
+    {'1': 'counter', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'counter'},
     {'1': 'condition', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairCondition', '8': {}, '10': 'condition'},
     {'1': 'exec_config', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairExecConfig', '10': 'execConfig'},
     {'1': 'status', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairStatus', '8': {}, '10': 'status'},
@@ -219,16 +219,16 @@ const Pair$json = {
 final $typed_data.Uint8List pairDescriptor = $convert.base64Decode(
     'CgRQYWlyEhIKBG5hbWUYASABKAlSBG5hbWUSFAoCaWQYAiABKAVCBOJBAQNSAmlkEicKDGRpc3'
     'BsYXlfbmFtZRgDIAEoCUIE4kEBAlILZGlzcGxheU5hbWUSJwoMcG9ydGZvbGlvX2lkGAQgASgF'
-    'QgTiQQECUgtwb3J0Zm9saW9JZBIwCgRsZWZ0GAUgASgLMhYua2RvLnYxLnBhaXIuUGFpckVudH'
-    'J5QgTiQQECUgRsZWZ0EjIKBXJpZ2h0GAYgASgLMhYua2RvLnYxLnBhaXIuUGFpckVudHJ5QgTi'
-    'QQECUgVyaWdodBI+Cgljb25kaXRpb24YByABKAsyGi5rZG8udjEucGFpci5QYWlyQ29uZGl0aW'
-    '9uQgTiQQECUgljb25kaXRpb24SPAoLZXhlY19jb25maWcYCCABKAsyGy5rZG8udjEucGFpci5Q'
-    'YWlyRXhlY0NvbmZpZ1IKZXhlY0NvbmZpZxI1CgZzdGF0dXMYCSABKA4yFy5rZG8udjEucGFpci'
-    '5QYWlyU3RhdHVzQgTiQQEDUgZzdGF0dXMSKQoEbW9kZRgKIAEoCzIVLmtkby52MS5wYWlyLlBh'
-    'aXJNb2RlUgRtb2RlEkEKC2NyZWF0ZV90aW1lGAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbW'
-    'VzdGFtcEIE4kEBA1IKY3JlYXRlVGltZRJBCgt1cGRhdGVfdGltZRgMIAEoCzIaLmdvb2dsZS5w'
-    'cm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWU6J+pBJAoUa2RvLmNkc2FwaXMueH'
-    'l6L1BhaXISDHBhaXJzL3twYWlyfQ==');
+    'QgTiQQECUgtwb3J0Zm9saW9JZBIwCgRiYXNlGAUgASgLMhYua2RvLnYxLnBhaXIuUGFpckVudH'
+    'J5QgTiQQECUgRiYXNlEjYKB2NvdW50ZXIYBiABKAsyFi5rZG8udjEucGFpci5QYWlyRW50cnlC'
+    'BOJBAQJSB2NvdW50ZXISPgoJY29uZGl0aW9uGAcgASgLMhoua2RvLnYxLnBhaXIuUGFpckNvbm'
+    'RpdGlvbkIE4kEBAlIJY29uZGl0aW9uEjwKC2V4ZWNfY29uZmlnGAggASgLMhsua2RvLnYxLnBh'
+    'aXIuUGFpckV4ZWNDb25maWdSCmV4ZWNDb25maWcSNQoGc3RhdHVzGAkgASgOMhcua2RvLnYxLn'
+    'BhaXIuUGFpclN0YXR1c0IE4kEBA1IGc3RhdHVzEikKBG1vZGUYCiABKAsyFS5rZG8udjEucGFp'
+    'ci5QYWlyTW9kZVIEbW9kZRJBCgtjcmVhdGVfdGltZRgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi'
+    '5UaW1lc3RhbXBCBOJBAQNSCmNyZWF0ZVRpbWUSQQoLdXBkYXRlX3RpbWUYDCABKAsyGi5nb29n'
+    'bGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lOifqQSQKFGtkby5jZHNhcG'
+    'lzLnh5ei9QYWlyEgxwYWlycy97cGFpcn0=');
 
 @$core.Deprecated('Use pairEntryDescriptor instead')
 const PairEntry$json = {
@@ -596,17 +596,17 @@ const PairExecutionLog$json = {
     {'1': 'pair_id', '3': 1, '4': 1, '5': 5, '10': 'pairId'},
     {'1': 'scenario', '3': 2, '4': 1, '5': 9, '10': 'scenario'},
     {'1': 'outcome', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairExecutionOutcome', '10': 'outcome'},
-    {'1': 'left_order_id', '3': 4, '4': 1, '5': 4, '9': 0, '10': 'leftOrderId', '17': true},
-    {'1': 'right_order_id', '3': 5, '4': 1, '5': 4, '9': 1, '10': 'rightOrderId', '17': true},
-    {'1': 'left_price', '3': 6, '4': 1, '5': 3, '10': 'leftPrice'},
-    {'1': 'right_price', '3': 7, '4': 1, '5': 3, '10': 'rightPrice'},
+    {'1': 'base_order_id', '3': 4, '4': 1, '5': 4, '9': 0, '10': 'baseOrderId', '17': true},
+    {'1': 'counter_order_id', '3': 5, '4': 1, '5': 4, '9': 1, '10': 'counterOrderId', '17': true},
+    {'1': 'base_price', '3': 6, '4': 1, '5': 3, '10': 'basePrice'},
+    {'1': 'counter_price', '3': 7, '4': 1, '5': 3, '10': 'counterPrice'},
     {'1': 'spread', '3': 8, '4': 1, '5': 3, '10': 'spread'},
     {'1': 'dispatched_at', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'dispatchedAt'},
     {'1': 'detail', '3': 10, '4': 1, '5': 9, '9': 2, '10': 'detail', '17': true},
   ],
   '8': [
-    {'1': '_left_order_id'},
-    {'1': '_right_order_id'},
+    {'1': '_base_order_id'},
+    {'1': '_counter_order_id'},
     {'1': '_detail'},
   ],
 };
@@ -615,13 +615,13 @@ const PairExecutionLog$json = {
 final $typed_data.Uint8List pairExecutionLogDescriptor = $convert.base64Decode(
     'ChBQYWlyRXhlY3V0aW9uTG9nEhcKB3BhaXJfaWQYASABKAVSBnBhaXJJZBIaCghzY2VuYXJpbx'
     'gCIAEoCVIIc2NlbmFyaW8SOwoHb3V0Y29tZRgDIAEoDjIhLmtkby52MS5wYWlyLlBhaXJFeGVj'
-    'dXRpb25PdXRjb21lUgdvdXRjb21lEicKDWxlZnRfb3JkZXJfaWQYBCABKARIAFILbGVmdE9yZG'
-    'VySWSIAQESKQoOcmlnaHRfb3JkZXJfaWQYBSABKARIAVIMcmlnaHRPcmRlcklkiAEBEh0KCmxl'
-    'ZnRfcHJpY2UYBiABKANSCWxlZnRQcmljZRIfCgtyaWdodF9wcmljZRgHIAEoA1IKcmlnaHRQcm'
-    'ljZRIWCgZzcHJlYWQYCCABKANSBnNwcmVhZBI/Cg1kaXNwYXRjaGVkX2F0GAkgASgLMhouZ29v'
-    'Z2xlLnByb3RvYnVmLlRpbWVzdGFtcFIMZGlzcGF0Y2hlZEF0EhsKBmRldGFpbBgKIAEoCUgCUg'
-    'ZkZXRhaWyIAQFCEAoOX2xlZnRfb3JkZXJfaWRCEQoPX3JpZ2h0X29yZGVyX2lkQgkKB19kZXRh'
-    'aWw=');
+    'dXRpb25PdXRjb21lUgdvdXRjb21lEicKDWJhc2Vfb3JkZXJfaWQYBCABKARIAFILYmFzZU9yZG'
+    'VySWSIAQESLQoQY291bnRlcl9vcmRlcl9pZBgFIAEoBEgBUg5jb3VudGVyT3JkZXJJZIgBARId'
+    'CgpiYXNlX3ByaWNlGAYgASgDUgliYXNlUHJpY2USIwoNY291bnRlcl9wcmljZRgHIAEoA1IMY2'
+    '91bnRlclByaWNlEhYKBnNwcmVhZBgIIAEoA1IGc3ByZWFkEj8KDWRpc3BhdGNoZWRfYXQYCSAB'
+    'KAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgxkaXNwYXRjaGVkQXQSGwoGZGV0YWlsGA'
+    'ogASgJSAJSBmRldGFpbIgBAUIQCg5fYmFzZV9vcmRlcl9pZEITChFfY291bnRlcl9vcmRlcl9p'
+    'ZEIJCgdfZGV0YWls');
 
 @$core.Deprecated('Use listPairExecutionLogsRequestDescriptor instead')
 const ListPairExecutionLogsRequest$json = {
@@ -778,18 +778,18 @@ const PairStatusUpdate$json = {
   '1': 'PairStatusUpdate',
   '2': [
     {'1': 'pair', '3': 1, '4': 1, '5': 9, '10': 'pair'},
-    {'1': 'left', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'left'},
-    {'1': 'right', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'right'},
+    {'1': 'base', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'base'},
+    {'1': 'counter', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'counter'},
     {'1': 'updated_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
   ],
 };
 
 /// Descriptor for `PairStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pairStatusUpdateDescriptor = $convert.base64Decode(
-    'ChBQYWlyU3RhdHVzVXBkYXRlEhIKBHBhaXIYASABKAlSBHBhaXISKgoEbGVmdBgCIAEoCzIWLm'
-    'tkby52MS5wYWlyLkxlZ1N0YXR1c1IEbGVmdBIsCgVyaWdodBgDIAEoCzIWLmtkby52MS5wYWly'
-    'LkxlZ1N0YXR1c1IFcmlnaHQSOQoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi'
-    '5UaW1lc3RhbXBSCXVwZGF0ZWRBdA==');
+    'ChBQYWlyU3RhdHVzVXBkYXRlEhIKBHBhaXIYASABKAlSBHBhaXISKgoEYmFzZRgCIAEoCzIWLm'
+    'tkby52MS5wYWlyLkxlZ1N0YXR1c1IEYmFzZRIwCgdjb3VudGVyGAMgASgLMhYua2RvLnYxLnBh'
+    'aXIuTGVnU3RhdHVzUgdjb3VudGVyEjkKCnVwZGF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG'
+    '9idWYuVGltZXN0YW1wUgl1cGRhdGVkQXQ=');
 
 @$core.Deprecated('Use getPairStatisticsRequestDescriptor instead')
 const GetPairStatisticsRequest$json = {

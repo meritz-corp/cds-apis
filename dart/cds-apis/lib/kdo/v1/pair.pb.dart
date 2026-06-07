@@ -29,8 +29,8 @@ class Pair extends $pb.GeneratedMessage {
     $core.int? id,
     $core.String? displayName,
     $core.int? portfolioId,
-    PairEntry? left,
-    PairEntry? right,
+    PairEntry? base,
+    PairEntry? counter,
     PairCondition? condition,
     PairExecConfig? execConfig,
     PairStatus? status,
@@ -43,8 +43,8 @@ class Pair extends $pb.GeneratedMessage {
     if (id != null) result.id = id;
     if (displayName != null) result.displayName = displayName;
     if (portfolioId != null) result.portfolioId = portfolioId;
-    if (left != null) result.left = left;
-    if (right != null) result.right = right;
+    if (base != null) result.base = base;
+    if (counter != null) result.counter = counter;
     if (condition != null) result.condition = condition;
     if (execConfig != null) result.execConfig = execConfig;
     if (status != null) result.status = status;
@@ -64,8 +64,8 @@ class Pair extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'displayName')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
-    ..aOM<PairEntry>(5, _omitFieldNames ? '' : 'left', subBuilder: PairEntry.create)
-    ..aOM<PairEntry>(6, _omitFieldNames ? '' : 'right', subBuilder: PairEntry.create)
+    ..aOM<PairEntry>(5, _omitFieldNames ? '' : 'base', subBuilder: PairEntry.create)
+    ..aOM<PairEntry>(6, _omitFieldNames ? '' : 'counter', subBuilder: PairEntry.create)
     ..aOM<PairCondition>(7, _omitFieldNames ? '' : 'condition', subBuilder: PairCondition.create)
     ..aOM<PairExecConfig>(8, _omitFieldNames ? '' : 'execConfig', subBuilder: PairExecConfig.create)
     ..e<PairStatus>(9, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PairStatus.PAIR_STATUS_UNSPECIFIED, valueOf: PairStatus.valueOf, enumValues: PairStatus.values)
@@ -132,29 +132,29 @@ class Pair extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearPortfolioId() => $_clearField(4);
 
-  /// Left 엔트리
+  /// Base 엔트리
   @$pb.TagNumber(5)
-  PairEntry get left => $_getN(4);
+  PairEntry get base => $_getN(4);
   @$pb.TagNumber(5)
-  set left(PairEntry value) => $_setField(5, value);
+  set base(PairEntry value) => $_setField(5, value);
   @$pb.TagNumber(5)
-  $core.bool hasLeft() => $_has(4);
+  $core.bool hasBase() => $_has(4);
   @$pb.TagNumber(5)
-  void clearLeft() => $_clearField(5);
+  void clearBase() => $_clearField(5);
   @$pb.TagNumber(5)
-  PairEntry ensureLeft() => $_ensure(4);
+  PairEntry ensureBase() => $_ensure(4);
 
-  /// Right 엔트리
+  /// Counter 엔트리
   @$pb.TagNumber(6)
-  PairEntry get right => $_getN(5);
+  PairEntry get counter => $_getN(5);
   @$pb.TagNumber(6)
-  set right(PairEntry value) => $_setField(6, value);
+  set counter(PairEntry value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasRight() => $_has(5);
+  $core.bool hasCounter() => $_has(5);
   @$pb.TagNumber(6)
-  void clearRight() => $_clearField(6);
+  void clearCounter() => $_clearField(6);
   @$pb.TagNumber(6)
-  PairEntry ensureRight() => $_ensure(5);
+  PairEntry ensureCounter() => $_ensure(5);
 
   /// 가격 비교 조건 (oneof)
   @$pb.TagNumber(7)
@@ -438,7 +438,7 @@ class PairCondition extends $pb.GeneratedMessage {
   PriceRatioCondition ensurePriceRatio() => $_ensure(2);
 }
 
-/// 절대 스프레드 금액 조건 (|left - right| >= threshold)
+/// 절대 스프레드 금액 조건 (|base - counter| >= threshold)
 class SpreadAmountCondition extends $pb.GeneratedMessage {
   factory SpreadAmountCondition({
     $fixnum.Int64? threshold,
@@ -499,7 +499,7 @@ class SpreadAmountCondition extends $pb.GeneratedMessage {
   void clearDirection() => $_clearField(2);
 }
 
-/// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps)
+/// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps, base 기준)
 class SpreadBpsCondition extends $pb.GeneratedMessage {
   factory SpreadBpsCondition({
     $core.double? thresholdBps,
@@ -560,7 +560,7 @@ class SpreadBpsCondition extends $pb.GeneratedMessage {
   void clearDirection() => $_clearField(2);
 }
 
-/// 가격 비율 조건 (left / right)
+/// 가격 비율 조건 (base / counter)
 class PriceRatioCondition extends $pb.GeneratedMessage {
   factory PriceRatioCondition({
     $core.double? minRatio,
@@ -600,7 +600,7 @@ class PriceRatioCondition extends $pb.GeneratedMessage {
   static PriceRatioCondition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PriceRatioCondition>(create);
   static PriceRatioCondition? _defaultInstance;
 
-  /// 최소 비율 (이 값 미만이면 RightHigh 트리거)
+  /// 최소 비율 (이 값 미만이면 CounterHigh 트리거)
   @$pb.TagNumber(1)
   $core.double get minRatio => $_getN(0);
   @$pb.TagNumber(1)
@@ -610,7 +610,7 @@ class PriceRatioCondition extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMinRatio() => $_clearField(1);
 
-  /// 최대 비율 (이 값 초과 시 LeftHigh 트리거)
+  /// 최대 비율 (이 값 초과 시 BaseHigh 트리거)
   @$pb.TagNumber(2)
   $core.double get maxRatio => $_getN(1);
   @$pb.TagNumber(2)
@@ -852,7 +852,7 @@ class PricingMakerTaker extends $pb.GeneratedMessage {
   static PricingMakerTaker getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PricingMakerTaker>(create);
   static PricingMakerTaker? _defaultInstance;
 
-  /// maker 역할 leg (반대 leg가 pricer 겸 taker)
+  /// maker 역할 leg (BASE or COUNTER; 반대 leg가 pricer 겸 taker)
   @$pb.TagNumber(1)
   PairLeg get makerLeg => $_getN(0);
   @$pb.TagNumber(1)
@@ -1809,10 +1809,10 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $core.int? pairId,
     $core.String? scenario,
     PairExecutionOutcome? outcome,
-    $fixnum.Int64? leftOrderId,
-    $fixnum.Int64? rightOrderId,
-    $fixnum.Int64? leftPrice,
-    $fixnum.Int64? rightPrice,
+    $fixnum.Int64? baseOrderId,
+    $fixnum.Int64? counterOrderId,
+    $fixnum.Int64? basePrice,
+    $fixnum.Int64? counterPrice,
     $fixnum.Int64? spread,
     $2.Timestamp? dispatchedAt,
     $core.String? detail,
@@ -1821,10 +1821,10 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (pairId != null) result.pairId = pairId;
     if (scenario != null) result.scenario = scenario;
     if (outcome != null) result.outcome = outcome;
-    if (leftOrderId != null) result.leftOrderId = leftOrderId;
-    if (rightOrderId != null) result.rightOrderId = rightOrderId;
-    if (leftPrice != null) result.leftPrice = leftPrice;
-    if (rightPrice != null) result.rightPrice = rightPrice;
+    if (baseOrderId != null) result.baseOrderId = baseOrderId;
+    if (counterOrderId != null) result.counterOrderId = counterOrderId;
+    if (basePrice != null) result.basePrice = basePrice;
+    if (counterPrice != null) result.counterPrice = counterPrice;
     if (spread != null) result.spread = spread;
     if (dispatchedAt != null) result.dispatchedAt = dispatchedAt;
     if (detail != null) result.detail = detail;
@@ -1840,10 +1840,10 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pairId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'scenario')
     ..e<PairExecutionOutcome>(3, _omitFieldNames ? '' : 'outcome', $pb.PbFieldType.OE, defaultOrMaker: PairExecutionOutcome.PAIR_EXECUTION_OUTCOME_UNSPECIFIED, valueOf: PairExecutionOutcome.valueOf, enumValues: PairExecutionOutcome.values)
-    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'leftOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'rightOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aInt64(6, _omitFieldNames ? '' : 'leftPrice')
-    ..aInt64(7, _omitFieldNames ? '' : 'rightPrice')
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'baseOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'counterOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(6, _omitFieldNames ? '' : 'basePrice')
+    ..aInt64(7, _omitFieldNames ? '' : 'counterPrice')
     ..aInt64(8, _omitFieldNames ? '' : 'spread')
     ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'dispatchedAt', subBuilder: $2.Timestamp.create)
     ..aOS(10, _omitFieldNames ? '' : 'detail')
@@ -1877,7 +1877,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPairId() => $_clearField(1);
 
-  /// 시그널 시나리오 (예: "LEFT_HIGH", "RIGHT_HIGH")
+  /// 시그널 시나리오 (예: "BASE_HIGH", "COUNTER_HIGH")
   @$pb.TagNumber(2)
   $core.String get scenario => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -1897,47 +1897,47 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearOutcome() => $_clearField(3);
 
-  /// Left 측 주문 ID (발주 성공 시)
+  /// Base 측 주문 ID (발주 성공 시)
   @$pb.TagNumber(4)
-  $fixnum.Int64 get leftOrderId => $_getI64(3);
+  $fixnum.Int64 get baseOrderId => $_getI64(3);
   @$pb.TagNumber(4)
-  set leftOrderId($fixnum.Int64 value) => $_setInt64(3, value);
+  set baseOrderId($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasLeftOrderId() => $_has(3);
+  $core.bool hasBaseOrderId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearLeftOrderId() => $_clearField(4);
+  void clearBaseOrderId() => $_clearField(4);
 
-  /// Right 측 주문 ID (발주 성공 시)
+  /// Counter 측 주문 ID (발주 성공 시)
   @$pb.TagNumber(5)
-  $fixnum.Int64 get rightOrderId => $_getI64(4);
+  $fixnum.Int64 get counterOrderId => $_getI64(4);
   @$pb.TagNumber(5)
-  set rightOrderId($fixnum.Int64 value) => $_setInt64(4, value);
+  set counterOrderId($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasRightOrderId() => $_has(4);
+  $core.bool hasCounterOrderId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearRightOrderId() => $_clearField(5);
+  void clearCounterOrderId() => $_clearField(5);
 
-  /// Left 참조 가격 (원, raw int64)
+  /// Base 참조 가격 (원, raw int64)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get leftPrice => $_getI64(5);
+  $fixnum.Int64 get basePrice => $_getI64(5);
   @$pb.TagNumber(6)
-  set leftPrice($fixnum.Int64 value) => $_setInt64(5, value);
+  set basePrice($fixnum.Int64 value) => $_setInt64(5, value);
   @$pb.TagNumber(6)
-  $core.bool hasLeftPrice() => $_has(5);
+  $core.bool hasBasePrice() => $_has(5);
   @$pb.TagNumber(6)
-  void clearLeftPrice() => $_clearField(6);
+  void clearBasePrice() => $_clearField(6);
 
-  /// Right 참조 가격 (원, raw int64)
+  /// Counter 참조 가격 (원, raw int64)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get rightPrice => $_getI64(6);
+  $fixnum.Int64 get counterPrice => $_getI64(6);
   @$pb.TagNumber(7)
-  set rightPrice($fixnum.Int64 value) => $_setInt64(6, value);
+  set counterPrice($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(7)
-  $core.bool hasRightPrice() => $_has(6);
+  $core.bool hasCounterPrice() => $_has(6);
   @$pb.TagNumber(7)
-  void clearRightPrice() => $_clearField(7);
+  void clearCounterPrice() => $_clearField(7);
 
-  /// 스프레드 (left - right, 원, raw int64)
+  /// 스프레드 (base - counter, 원, raw int64)
   @$pb.TagNumber(8)
   $fixnum.Int64 get spread => $_getI64(7);
   @$pb.TagNumber(8)
@@ -2613,14 +2613,14 @@ class LegStatus extends $pb.GeneratedMessage {
 class PairStatusUpdate extends $pb.GeneratedMessage {
   factory PairStatusUpdate({
     $core.String? pair,
-    LegStatus? left,
-    LegStatus? right,
+    LegStatus? base,
+    LegStatus? counter,
     $2.Timestamp? updatedAt,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
-    if (left != null) result.left = left;
-    if (right != null) result.right = right;
+    if (base != null) result.base = base;
+    if (counter != null) result.counter = counter;
     if (updatedAt != null) result.updatedAt = updatedAt;
     return result;
   }
@@ -2632,8 +2632,8 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'pair')
-    ..aOM<LegStatus>(2, _omitFieldNames ? '' : 'left', subBuilder: LegStatus.create)
-    ..aOM<LegStatus>(3, _omitFieldNames ? '' : 'right', subBuilder: LegStatus.create)
+    ..aOM<LegStatus>(2, _omitFieldNames ? '' : 'base', subBuilder: LegStatus.create)
+    ..aOM<LegStatus>(3, _omitFieldNames ? '' : 'counter', subBuilder: LegStatus.create)
     ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
@@ -2665,29 +2665,29 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPair() => $_clearField(1);
 
-  /// Left leg 상태
+  /// Base leg 상태
   @$pb.TagNumber(2)
-  LegStatus get left => $_getN(1);
+  LegStatus get base => $_getN(1);
   @$pb.TagNumber(2)
-  set left(LegStatus value) => $_setField(2, value);
+  set base(LegStatus value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasLeft() => $_has(1);
+  $core.bool hasBase() => $_has(1);
   @$pb.TagNumber(2)
-  void clearLeft() => $_clearField(2);
+  void clearBase() => $_clearField(2);
   @$pb.TagNumber(2)
-  LegStatus ensureLeft() => $_ensure(1);
+  LegStatus ensureBase() => $_ensure(1);
 
-  /// Right leg 상태
+  /// Counter leg 상태
   @$pb.TagNumber(3)
-  LegStatus get right => $_getN(2);
+  LegStatus get counter => $_getN(2);
   @$pb.TagNumber(3)
-  set right(LegStatus value) => $_setField(3, value);
+  set counter(LegStatus value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasRight() => $_has(2);
+  $core.bool hasCounter() => $_has(2);
   @$pb.TagNumber(3)
-  void clearRight() => $_clearField(3);
+  void clearCounter() => $_clearField(3);
   @$pb.TagNumber(3)
-  LegStatus ensureRight() => $_ensure(2);
+  LegStatus ensureCounter() => $_ensure(2);
 
   /// 스냅샷 시각
   @$pb.TagNumber(4)
@@ -2809,7 +2809,7 @@ class PairStatistics extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPair() => $_clearField(1);
 
-  /// left + right 누적 발주 수량
+  /// base + counter 누적 발주 수량
   @$pb.TagNumber(2)
   $fixnum.Int64 get totalSubmitted => $_getI64(1);
   @$pb.TagNumber(2)
@@ -2819,7 +2819,7 @@ class PairStatistics extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTotalSubmitted() => $_clearField(2);
 
-  /// left + right 누적 체결 수량
+  /// base + counter 누적 체결 수량
   @$pb.TagNumber(3)
   $fixnum.Int64 get totalFilled => $_getI64(2);
   @$pb.TagNumber(3)

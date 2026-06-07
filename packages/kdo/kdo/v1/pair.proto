@@ -135,13 +135,13 @@ message Pair {
     (google.api.field_behavior) = REQUIRED
   ];
 
-  // Left 엔트리
-  PairEntry left = 5 [
+  // Base 엔트리
+  PairEntry base = 5 [
     (google.api.field_behavior) = REQUIRED
   ];
 
-  // Right 엔트리
-  PairEntry right = 6 [
+  // Counter 엔트리
+  PairEntry counter = 6 [
     (google.api.field_behavior) = REQUIRED
   ];
 
@@ -244,7 +244,7 @@ message PairCondition {
   }
 }
 
-// 절대 스프레드 금액 조건 (|left - right| >= threshold)
+// 절대 스프레드 금액 조건 (|base - counter| >= threshold)
 message SpreadAmountCondition {
   // 스프레드 임계값 (원, 1 이상)
   int64 threshold = 1 [
@@ -257,7 +257,7 @@ message SpreadAmountCondition {
   ];
 }
 
-// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps)
+// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps, base 기준)
 message SpreadBpsCondition {
   // 스프레드 임계값 (bps, 1bp = 0.01%)
   double threshold_bps = 1 [
@@ -270,14 +270,14 @@ message SpreadBpsCondition {
   ];
 }
 
-// 가격 비율 조건 (left / right)
+// 가격 비율 조건 (base / counter)
 message PriceRatioCondition {
-  // 최소 비율 (이 값 미만이면 RightHigh 트리거)
+  // 최소 비율 (이 값 미만이면 CounterHigh 트리거)
   double min_ratio = 1 [
     (google.api.field_behavior) = REQUIRED
   ];
 
-  // 최대 비율 (이 값 초과 시 LeftHigh 트리거)
+  // 최대 비율 (이 값 초과 시 BaseHigh 트리거)
   double max_ratio = 2 [
     (google.api.field_behavior) = REQUIRED
   ];
@@ -286,10 +286,10 @@ message PriceRatioCondition {
 // 스프레드 방향 (어느 쪽이 비쌀 때 트리거할지)
 enum SpreadDirection {
   SPREAD_DIRECTION_UNSPECIFIED = 0;
-  // Left가 비쌀 때만 트리거
-  SPREAD_DIRECTION_LEFT_HIGH = 1;
-  // Right가 비쌀 때만 트리거
-  SPREAD_DIRECTION_RIGHT_HIGH = 2;
+  // Base가 비쌀 때만 트리거
+  SPREAD_DIRECTION_BASE_HIGH = 1;
+  // Counter가 비쌀 때만 트리거
+  SPREAD_DIRECTION_COUNTER_HIGH = 2;
   // 양방향
   SPREAD_DIRECTION_BOTH = 3;
 }
@@ -355,7 +355,7 @@ message SimultaneousCompare {}
 
 // PricingMakerTaker 모드 설정
 message PricingMakerTaker {
-  // maker 역할 leg (반대 leg가 pricer 겸 taker)
+  // maker 역할 leg (BASE or COUNTER; 반대 leg가 pricer 겸 taker)
   PairLeg maker_leg = 1 [
     (google.api.field_behavior) = REQUIRED
   ];
@@ -375,8 +375,8 @@ message PricingMakerTaker {
 // Pair leg 식별자
 enum PairLeg {
   PAIR_LEG_UNSPECIFIED = 0;
-  PAIR_LEG_LEFT = 1;
-  PAIR_LEG_RIGHT = 2;
+  PAIR_LEG_BASE = 1;
+  PAIR_LEG_COUNTER = 2;
 }
 
 // ============================================================================
@@ -601,25 +601,25 @@ message PairExecutionLog {
   // Pair ID
   int32 pair_id = 1;
 
-  // 시그널 시나리오 (예: "LEFT_HIGH", "RIGHT_HIGH")
+  // 시그널 시나리오 (예: "BASE_HIGH", "COUNTER_HIGH")
   string scenario = 2;
 
   // 실행 결과
   PairExecutionOutcome outcome = 3;
 
-  // Left 측 주문 ID (발주 성공 시)
-  optional uint64 left_order_id = 4;
+  // Base 측 주문 ID (발주 성공 시)
+  optional uint64 base_order_id = 4;
 
-  // Right 측 주문 ID (발주 성공 시)
-  optional uint64 right_order_id = 5;
+  // Counter 측 주문 ID (발주 성공 시)
+  optional uint64 counter_order_id = 5;
 
-  // Left 참조 가격 (원, raw int64)
-  int64 left_price = 6;
+  // Base 참조 가격 (원, raw int64)
+  int64 base_price = 6;
 
-  // Right 참조 가격 (원, raw int64)
-  int64 right_price = 7;
+  // Counter 참조 가격 (원, raw int64)
+  int64 counter_price = 7;
 
-  // 스프레드 (left - right, 원, raw int64)
+  // 스프레드 (base - counter, 원, raw int64)
   int64 spread = 8;
 
   // 발주 시각
@@ -811,10 +811,10 @@ message LegStatus {
 message PairStatusUpdate {
   // 리소스 이름 (pairs/{id})
   string pair = 1;
-  // Left leg 상태
-  LegStatus left = 2;
-  // Right leg 상태
-  LegStatus right = 3;
+  // Base leg 상태
+  LegStatus base = 2;
+  // Counter leg 상태
+  LegStatus counter = 3;
   // 스냅샷 시각
   google.protobuf.Timestamp updated_at = 4;
 }
@@ -837,9 +837,9 @@ message GetPairStatisticsRequest {
 message PairStatistics {
   // 리소스 이름 (pairs/{id})
   string pair = 1;
-  // left + right 누적 발주 수량
+  // base + counter 누적 발주 수량
   int64 total_submitted = 2;
-  // left + right 누적 체결 수량
+  // base + counter 누적 체결 수량
   int64 total_filled = 3;
   // Spread 모드: 발주 성공 횟수 / PricingMakerTaker 모드: 사이클 수
   int64 execution_count = 4;

@@ -63,17 +63,17 @@ class PriceSource extends $pb.ProtobufEnum {
 /// 스프레드 방향 (어느 쪽이 비쌀 때 트리거할지)
 class SpreadDirection extends $pb.ProtobufEnum {
   static const SpreadDirection SPREAD_DIRECTION_UNSPECIFIED = SpreadDirection._(0, _omitEnumNames ? '' : 'SPREAD_DIRECTION_UNSPECIFIED');
-  /// Left가 비쌀 때만 트리거
-  static const SpreadDirection SPREAD_DIRECTION_LEFT_HIGH = SpreadDirection._(1, _omitEnumNames ? '' : 'SPREAD_DIRECTION_LEFT_HIGH');
-  /// Right가 비쌀 때만 트리거
-  static const SpreadDirection SPREAD_DIRECTION_RIGHT_HIGH = SpreadDirection._(2, _omitEnumNames ? '' : 'SPREAD_DIRECTION_RIGHT_HIGH');
+  /// Base가 비쌀 때만 트리거
+  static const SpreadDirection SPREAD_DIRECTION_BASE_HIGH = SpreadDirection._(1, _omitEnumNames ? '' : 'SPREAD_DIRECTION_BASE_HIGH');
+  /// Counter가 비쌀 때만 트리거
+  static const SpreadDirection SPREAD_DIRECTION_COUNTER_HIGH = SpreadDirection._(2, _omitEnumNames ? '' : 'SPREAD_DIRECTION_COUNTER_HIGH');
   /// 양방향
   static const SpreadDirection SPREAD_DIRECTION_BOTH = SpreadDirection._(3, _omitEnumNames ? '' : 'SPREAD_DIRECTION_BOTH');
 
   static const $core.List<SpreadDirection> values = <SpreadDirection> [
     SPREAD_DIRECTION_UNSPECIFIED,
-    SPREAD_DIRECTION_LEFT_HIGH,
-    SPREAD_DIRECTION_RIGHT_HIGH,
+    SPREAD_DIRECTION_BASE_HIGH,
+    SPREAD_DIRECTION_COUNTER_HIGH,
     SPREAD_DIRECTION_BOTH,
   ];
 
@@ -132,13 +132,13 @@ class PairStatus extends $pb.ProtobufEnum {
 /// Pair leg 식별자
 class PairLeg extends $pb.ProtobufEnum {
   static const PairLeg PAIR_LEG_UNSPECIFIED = PairLeg._(0, _omitEnumNames ? '' : 'PAIR_LEG_UNSPECIFIED');
-  static const PairLeg PAIR_LEG_LEFT = PairLeg._(1, _omitEnumNames ? '' : 'PAIR_LEG_LEFT');
-  static const PairLeg PAIR_LEG_RIGHT = PairLeg._(2, _omitEnumNames ? '' : 'PAIR_LEG_RIGHT');
+  static const PairLeg PAIR_LEG_BASE = PairLeg._(1, _omitEnumNames ? '' : 'PAIR_LEG_BASE');
+  static const PairLeg PAIR_LEG_COUNTER = PairLeg._(2, _omitEnumNames ? '' : 'PAIR_LEG_COUNTER');
 
   static const $core.List<PairLeg> values = <PairLeg> [
     PAIR_LEG_UNSPECIFIED,
-    PAIR_LEG_LEFT,
-    PAIR_LEG_RIGHT,
+    PAIR_LEG_BASE,
+    PAIR_LEG_COUNTER,
   ];
 
   static final $core.List<PairLeg?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);

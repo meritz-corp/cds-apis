@@ -20,12 +20,12 @@ pub struct Pair {
     /// Portfolio ID
     #[prost(int32, tag="4")]
     pub portfolio_id: i32,
-    /// Left 엔트리
+    /// Base 엔트리
     #[prost(message, optional, tag="5")]
-    pub left: ::core::option::Option<PairEntry>,
-    /// Right 엔트리
+    pub base: ::core::option::Option<PairEntry>,
+    /// Counter 엔트리
     #[prost(message, optional, tag="6")]
-    pub right: ::core::option::Option<PairEntry>,
+    pub counter: ::core::option::Option<PairEntry>,
     /// 가격 비교 조건 (oneof)
     #[prost(message, optional, tag="7")]
     pub condition: ::core::option::Option<PairCondition>,
@@ -100,7 +100,7 @@ pub mod pair_condition {
         PriceRatio(super::PriceRatioCondition),
     }
 }
-/// 절대 스프레드 금액 조건 (|left - right| >= threshold)
+/// 절대 스프레드 금액 조건 (|base - counter| >= threshold)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpreadAmountCondition {
@@ -111,7 +111,7 @@ pub struct SpreadAmountCondition {
     #[prost(enumeration="SpreadDirection", tag="2")]
     pub direction: i32,
 }
-/// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps)
+/// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps, base 기준)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpreadBpsCondition {
@@ -122,14 +122,14 @@ pub struct SpreadBpsCondition {
     #[prost(enumeration="SpreadDirection", tag="2")]
     pub direction: i32,
 }
-/// 가격 비율 조건 (left / right)
+/// 가격 비율 조건 (base / counter)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PriceRatioCondition {
-    /// 최소 비율 (이 값 미만이면 RightHigh 트리거)
+    /// 최소 비율 (이 값 미만이면 CounterHigh 트리거)
     #[prost(double, tag="1")]
     pub min_ratio: f64,
-    /// 최대 비율 (이 값 초과 시 LeftHigh 트리거)
+    /// 최대 비율 (이 값 초과 시 BaseHigh 트리거)
     #[prost(double, tag="2")]
     pub max_ratio: f64,
 }
@@ -184,7 +184,7 @@ pub struct SimultaneousCompare {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PricingMakerTaker {
-    /// maker 역할 leg (반대 leg가 pricer 겸 taker)
+    /// maker 역할 leg (BASE or COUNTER; 반대 leg가 pricer 겸 taker)
     #[prost(enumeration="PairLeg", tag="1")]
     pub maker_leg: i32,
     /// pricer → maker 가격 환산 방식
@@ -400,25 +400,25 @@ pub struct PairExecutionLog {
     /// Pair ID
     #[prost(int32, tag="1")]
     pub pair_id: i32,
-    /// 시그널 시나리오 (예: "LEFT_HIGH", "RIGHT_HIGH")
+    /// 시그널 시나리오 (예: "BASE_HIGH", "COUNTER_HIGH")
     #[prost(string, tag="2")]
     pub scenario: ::prost::alloc::string::String,
     /// 실행 결과
     #[prost(enumeration="PairExecutionOutcome", tag="3")]
     pub outcome: i32,
-    /// Left 측 주문 ID (발주 성공 시)
+    /// Base 측 주문 ID (발주 성공 시)
     #[prost(uint64, optional, tag="4")]
-    pub left_order_id: ::core::option::Option<u64>,
-    /// Right 측 주문 ID (발주 성공 시)
+    pub base_order_id: ::core::option::Option<u64>,
+    /// Counter 측 주문 ID (발주 성공 시)
     #[prost(uint64, optional, tag="5")]
-    pub right_order_id: ::core::option::Option<u64>,
-    /// Left 참조 가격 (원, raw int64)
+    pub counter_order_id: ::core::option::Option<u64>,
+    /// Base 참조 가격 (원, raw int64)
     #[prost(int64, tag="6")]
-    pub left_price: i64,
-    /// Right 참조 가격 (원, raw int64)
+    pub base_price: i64,
+    /// Counter 참조 가격 (원, raw int64)
     #[prost(int64, tag="7")]
-    pub right_price: i64,
-    /// 스프레드 (left - right, 원, raw int64)
+    pub counter_price: i64,
+    /// 스프레드 (base - counter, 원, raw int64)
     #[prost(int64, tag="8")]
     pub spread: i64,
     /// 발주 시각
@@ -572,12 +572,12 @@ pub struct PairStatusUpdate {
     /// 리소스 이름 (pairs/{id})
     #[prost(string, tag="1")]
     pub pair: ::prost::alloc::string::String,
-    /// Left leg 상태
+    /// Base leg 상태
     #[prost(message, optional, tag="2")]
-    pub left: ::core::option::Option<LegStatus>,
-    /// Right leg 상태
+    pub base: ::core::option::Option<LegStatus>,
+    /// Counter leg 상태
     #[prost(message, optional, tag="3")]
-    pub right: ::core::option::Option<LegStatus>,
+    pub counter: ::core::option::Option<LegStatus>,
     /// 스냅샷 시각
     #[prost(message, optional, tag="4")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
@@ -601,10 +601,10 @@ pub struct PairStatistics {
     /// 리소스 이름 (pairs/{id})
     #[prost(string, tag="1")]
     pub pair: ::prost::alloc::string::String,
-    /// left + right 누적 발주 수량
+    /// base + counter 누적 발주 수량
     #[prost(int64, tag="2")]
     pub total_submitted: i64,
-    /// left + right 누적 체결 수량
+    /// base + counter 누적 체결 수량
     #[prost(int64, tag="3")]
     pub total_filled: i64,
     /// Spread 모드: 발주 성공 횟수 / PricingMakerTaker 모드: 사이클 수
@@ -691,10 +691,10 @@ impl PriceSource {
 #[repr(i32)]
 pub enum SpreadDirection {
     Unspecified = 0,
-    /// Left가 비쌀 때만 트리거
-    LeftHigh = 1,
-    /// Right가 비쌀 때만 트리거
-    RightHigh = 2,
+    /// Base가 비쌀 때만 트리거
+    BaseHigh = 1,
+    /// Counter가 비쌀 때만 트리거
+    CounterHigh = 2,
     /// 양방향
     Both = 3,
 }
@@ -706,8 +706,8 @@ impl SpreadDirection {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             SpreadDirection::Unspecified => "SPREAD_DIRECTION_UNSPECIFIED",
-            SpreadDirection::LeftHigh => "SPREAD_DIRECTION_LEFT_HIGH",
-            SpreadDirection::RightHigh => "SPREAD_DIRECTION_RIGHT_HIGH",
+            SpreadDirection::BaseHigh => "SPREAD_DIRECTION_BASE_HIGH",
+            SpreadDirection::CounterHigh => "SPREAD_DIRECTION_COUNTER_HIGH",
             SpreadDirection::Both => "SPREAD_DIRECTION_BOTH",
         }
     }
@@ -715,8 +715,8 @@ impl SpreadDirection {
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "SPREAD_DIRECTION_UNSPECIFIED" => Some(Self::Unspecified),
-            "SPREAD_DIRECTION_LEFT_HIGH" => Some(Self::LeftHigh),
-            "SPREAD_DIRECTION_RIGHT_HIGH" => Some(Self::RightHigh),
+            "SPREAD_DIRECTION_BASE_HIGH" => Some(Self::BaseHigh),
+            "SPREAD_DIRECTION_COUNTER_HIGH" => Some(Self::CounterHigh),
             "SPREAD_DIRECTION_BOTH" => Some(Self::Both),
             _ => None,
         }
@@ -803,8 +803,8 @@ impl PairStatus {
 #[repr(i32)]
 pub enum PairLeg {
     Unspecified = 0,
-    Left = 1,
-    Right = 2,
+    Base = 1,
+    Counter = 2,
 }
 impl PairLeg {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -814,16 +814,16 @@ impl PairLeg {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             PairLeg::Unspecified => "PAIR_LEG_UNSPECIFIED",
-            PairLeg::Left => "PAIR_LEG_LEFT",
-            PairLeg::Right => "PAIR_LEG_RIGHT",
+            PairLeg::Base => "PAIR_LEG_BASE",
+            PairLeg::Counter => "PAIR_LEG_COUNTER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "PAIR_LEG_UNSPECIFIED" => Some(Self::Unspecified),
-            "PAIR_LEG_LEFT" => Some(Self::Left),
-            "PAIR_LEG_RIGHT" => Some(Self::Right),
+            "PAIR_LEG_BASE" => Some(Self::Base),
+            "PAIR_LEG_COUNTER" => Some(Self::Counter),
             _ => None,
         }
     }

@@ -2461,11 +2461,11 @@ impl serde::Serialize for Pair {
         if true {
             struct_ser.serialize_field("portfolio_id", &self.portfolio_id)?;
         }
-        if let Some(v) = self.left.as_ref() {
-            struct_ser.serialize_field("left", v)?;
+        if let Some(v) = self.base.as_ref() {
+            struct_ser.serialize_field("base", v)?;
         }
-        if let Some(v) = self.right.as_ref() {
-            struct_ser.serialize_field("right", v)?;
+        if let Some(v) = self.counter.as_ref() {
+            struct_ser.serialize_field("counter", v)?;
         }
         if let Some(v) = self.condition.as_ref() {
             struct_ser.serialize_field("condition", v)?;
@@ -2503,8 +2503,8 @@ impl<'de> serde::Deserialize<'de> for Pair {
             "displayName",
             "portfolio_id",
             "portfolioId",
-            "left",
-            "right",
+            "base",
+            "counter",
             "condition",
             "exec_config",
             "execConfig",
@@ -2522,8 +2522,8 @@ impl<'de> serde::Deserialize<'de> for Pair {
             Id,
             DisplayName,
             PortfolioId,
-            Left,
-            Right,
+            Base,
+            Counter,
             Condition,
             ExecConfig,
             Status,
@@ -2556,8 +2556,8 @@ impl<'de> serde::Deserialize<'de> for Pair {
                             "id" => Ok(GeneratedField::Id),
                             "displayName" | "display_name" => Ok(GeneratedField::DisplayName),
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
-                            "left" => Ok(GeneratedField::Left),
-                            "right" => Ok(GeneratedField::Right),
+                            "base" => Ok(GeneratedField::Base),
+                            "counter" => Ok(GeneratedField::Counter),
                             "condition" => Ok(GeneratedField::Condition),
                             "execConfig" | "exec_config" => Ok(GeneratedField::ExecConfig),
                             "status" => Ok(GeneratedField::Status),
@@ -2587,8 +2587,8 @@ impl<'de> serde::Deserialize<'de> for Pair {
                 let mut id__ = None;
                 let mut display_name__ = None;
                 let mut portfolio_id__ = None;
-                let mut left__ = None;
-                let mut right__ = None;
+                let mut base__ = None;
+                let mut counter__ = None;
                 let mut condition__ = None;
                 let mut exec_config__ = None;
                 let mut status__ = None;
@@ -2625,17 +2625,17 @@ impl<'de> serde::Deserialize<'de> for Pair {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Left => {
-                            if left__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("left"));
+                        GeneratedField::Base => {
+                            if base__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("base"));
                             }
-                            left__ = map_.next_value()?;
+                            base__ = map_.next_value()?;
                         }
-                        GeneratedField::Right => {
-                            if right__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("right"));
+                        GeneratedField::Counter => {
+                            if counter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counter"));
                             }
-                            right__ = map_.next_value()?;
+                            counter__ = map_.next_value()?;
                         }
                         GeneratedField::Condition => {
                             if condition__.is_some() {
@@ -2683,8 +2683,8 @@ impl<'de> serde::Deserialize<'de> for Pair {
                     id: id__.unwrap_or_default(),
                     display_name: display_name__.unwrap_or_default(),
                     portfolio_id: portfolio_id__.unwrap_or_default(),
-                    left: left__,
-                    right: right__,
+                    base: base__,
+                    counter: counter__,
                     condition: condition__,
                     exec_config: exec_config__,
                     status: status__.unwrap_or_default(),
@@ -3207,25 +3207,25 @@ impl serde::Serialize for PairExecutionLog {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.outcome)))?;
             struct_ser.serialize_field("outcome", &v)?;
         }
-        if let Some(v) = self.left_order_id.as_ref() {
+        if let Some(v) = self.base_order_id.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("left_order_id", ToString::to_string(&v).as_str())?;
+            struct_ser.serialize_field("base_order_id", ToString::to_string(&v).as_str())?;
         }
-        if let Some(v) = self.right_order_id.as_ref() {
+        if let Some(v) = self.counter_order_id.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("right_order_id", ToString::to_string(&v).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("left_price", ToString::to_string(&self.left_price).as_str())?;
+            struct_ser.serialize_field("counter_order_id", ToString::to_string(&v).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("right_price", ToString::to_string(&self.right_price).as_str())?;
+            struct_ser.serialize_field("base_price", ToString::to_string(&self.base_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_price", ToString::to_string(&self.counter_price).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -3252,14 +3252,14 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "pairId",
             "scenario",
             "outcome",
-            "left_order_id",
-            "leftOrderId",
-            "right_order_id",
-            "rightOrderId",
-            "left_price",
-            "leftPrice",
-            "right_price",
-            "rightPrice",
+            "base_order_id",
+            "baseOrderId",
+            "counter_order_id",
+            "counterOrderId",
+            "base_price",
+            "basePrice",
+            "counter_price",
+            "counterPrice",
             "spread",
             "dispatched_at",
             "dispatchedAt",
@@ -3271,10 +3271,10 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             PairId,
             Scenario,
             Outcome,
-            LeftOrderId,
-            RightOrderId,
-            LeftPrice,
-            RightPrice,
+            BaseOrderId,
+            CounterOrderId,
+            BasePrice,
+            CounterPrice,
             Spread,
             DispatchedAt,
             Detail,
@@ -3303,10 +3303,10 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "pairId" | "pair_id" => Ok(GeneratedField::PairId),
                             "scenario" => Ok(GeneratedField::Scenario),
                             "outcome" => Ok(GeneratedField::Outcome),
-                            "leftOrderId" | "left_order_id" => Ok(GeneratedField::LeftOrderId),
-                            "rightOrderId" | "right_order_id" => Ok(GeneratedField::RightOrderId),
-                            "leftPrice" | "left_price" => Ok(GeneratedField::LeftPrice),
-                            "rightPrice" | "right_price" => Ok(GeneratedField::RightPrice),
+                            "baseOrderId" | "base_order_id" => Ok(GeneratedField::BaseOrderId),
+                            "counterOrderId" | "counter_order_id" => Ok(GeneratedField::CounterOrderId),
+                            "basePrice" | "base_price" => Ok(GeneratedField::BasePrice),
+                            "counterPrice" | "counter_price" => Ok(GeneratedField::CounterPrice),
                             "spread" => Ok(GeneratedField::Spread),
                             "dispatchedAt" | "dispatched_at" => Ok(GeneratedField::DispatchedAt),
                             "detail" => Ok(GeneratedField::Detail),
@@ -3332,10 +3332,10 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut pair_id__ = None;
                 let mut scenario__ = None;
                 let mut outcome__ = None;
-                let mut left_order_id__ = None;
-                let mut right_order_id__ = None;
-                let mut left_price__ = None;
-                let mut right_price__ = None;
+                let mut base_order_id__ = None;
+                let mut counter_order_id__ = None;
+                let mut base_price__ = None;
+                let mut counter_price__ = None;
                 let mut spread__ = None;
                 let mut dispatched_at__ = None;
                 let mut detail__ = None;
@@ -3361,35 +3361,35 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             }
                             outcome__ = Some(map_.next_value::<PairExecutionOutcome>()? as i32);
                         }
-                        GeneratedField::LeftOrderId => {
-                            if left_order_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("leftOrderId"));
+                        GeneratedField::BaseOrderId => {
+                            if base_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseOrderId"));
                             }
-                            left_order_id__ = 
+                            base_order_id__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::RightOrderId => {
-                            if right_order_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rightOrderId"));
+                        GeneratedField::CounterOrderId => {
+                            if counter_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterOrderId"));
                             }
-                            right_order_id__ = 
+                            counter_order_id__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::LeftPrice => {
-                            if left_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("leftPrice"));
+                        GeneratedField::BasePrice => {
+                            if base_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basePrice"));
                             }
-                            left_price__ = 
+                            base_price__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::RightPrice => {
-                            if right_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rightPrice"));
+                        GeneratedField::CounterPrice => {
+                            if counter_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterPrice"));
                             }
-                            right_price__ = 
+                            counter_price__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -3422,10 +3422,10 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     pair_id: pair_id__.unwrap_or_default(),
                     scenario: scenario__.unwrap_or_default(),
                     outcome: outcome__.unwrap_or_default(),
-                    left_order_id: left_order_id__,
-                    right_order_id: right_order_id__,
-                    left_price: left_price__.unwrap_or_default(),
-                    right_price: right_price__.unwrap_or_default(),
+                    base_order_id: base_order_id__,
+                    counter_order_id: counter_order_id__,
+                    base_price: base_price__.unwrap_or_default(),
+                    counter_price: counter_price__.unwrap_or_default(),
                     spread: spread__.unwrap_or_default(),
                     dispatched_at: dispatched_at__,
                     detail: detail__,
@@ -3529,8 +3529,8 @@ impl serde::Serialize for PairLeg {
     {
         let variant = match self {
             Self::Unspecified => "PAIR_LEG_UNSPECIFIED",
-            Self::Left => "PAIR_LEG_LEFT",
-            Self::Right => "PAIR_LEG_RIGHT",
+            Self::Base => "PAIR_LEG_BASE",
+            Self::Counter => "PAIR_LEG_COUNTER",
         };
         serializer.serialize_str(variant)
     }
@@ -3543,8 +3543,8 @@ impl<'de> serde::Deserialize<'de> for PairLeg {
     {
         const FIELDS: &[&str] = &[
             "PAIR_LEG_UNSPECIFIED",
-            "PAIR_LEG_LEFT",
-            "PAIR_LEG_RIGHT",
+            "PAIR_LEG_BASE",
+            "PAIR_LEG_COUNTER",
         ];
 
         struct GeneratedVisitor;
@@ -3586,8 +3586,8 @@ impl<'de> serde::Deserialize<'de> for PairLeg {
             {
                 match value {
                     "PAIR_LEG_UNSPECIFIED" => Ok(PairLeg::Unspecified),
-                    "PAIR_LEG_LEFT" => Ok(PairLeg::Left),
-                    "PAIR_LEG_RIGHT" => Ok(PairLeg::Right),
+                    "PAIR_LEG_BASE" => Ok(PairLeg::Base),
+                    "PAIR_LEG_COUNTER" => Ok(PairLeg::Counter),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -4260,11 +4260,11 @@ impl serde::Serialize for PairStatusUpdate {
         if true {
             struct_ser.serialize_field("pair", &self.pair)?;
         }
-        if let Some(v) = self.left.as_ref() {
-            struct_ser.serialize_field("left", v)?;
+        if let Some(v) = self.base.as_ref() {
+            struct_ser.serialize_field("base", v)?;
         }
-        if let Some(v) = self.right.as_ref() {
-            struct_ser.serialize_field("right", v)?;
+        if let Some(v) = self.counter.as_ref() {
+            struct_ser.serialize_field("counter", v)?;
         }
         if let Some(v) = self.updated_at.as_ref() {
             struct_ser.serialize_field("updated_at", v)?;
@@ -4280,8 +4280,8 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
     {
         const FIELDS: &[&str] = &[
             "pair",
-            "left",
-            "right",
+            "base",
+            "counter",
             "updated_at",
             "updatedAt",
         ];
@@ -4289,8 +4289,8 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Pair,
-            Left,
-            Right,
+            Base,
+            Counter,
             UpdatedAt,
             __SkipField__,
         }
@@ -4315,8 +4315,8 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                     {
                         match value {
                             "pair" => Ok(GeneratedField::Pair),
-                            "left" => Ok(GeneratedField::Left),
-                            "right" => Ok(GeneratedField::Right),
+                            "base" => Ok(GeneratedField::Base),
+                            "counter" => Ok(GeneratedField::Counter),
                             "updatedAt" | "updated_at" => Ok(GeneratedField::UpdatedAt),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -4338,8 +4338,8 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut pair__ = None;
-                let mut left__ = None;
-                let mut right__ = None;
+                let mut base__ = None;
+                let mut counter__ = None;
                 let mut updated_at__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -4349,17 +4349,17 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                             }
                             pair__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Left => {
-                            if left__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("left"));
+                        GeneratedField::Base => {
+                            if base__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("base"));
                             }
-                            left__ = map_.next_value()?;
+                            base__ = map_.next_value()?;
                         }
-                        GeneratedField::Right => {
-                            if right__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("right"));
+                        GeneratedField::Counter => {
+                            if counter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counter"));
                             }
-                            right__ = map_.next_value()?;
+                            counter__ = map_.next_value()?;
                         }
                         GeneratedField::UpdatedAt => {
                             if updated_at__.is_some() {
@@ -4374,8 +4374,8 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                 }
                 Ok(PairStatusUpdate {
                     pair: pair__.unwrap_or_default(),
-                    left: left__,
-                    right: right__,
+                    base: base__,
+                    counter: counter__,
                     updated_at: updated_at__,
                 })
             }
@@ -5486,8 +5486,8 @@ impl serde::Serialize for SpreadDirection {
     {
         let variant = match self {
             Self::Unspecified => "SPREAD_DIRECTION_UNSPECIFIED",
-            Self::LeftHigh => "SPREAD_DIRECTION_LEFT_HIGH",
-            Self::RightHigh => "SPREAD_DIRECTION_RIGHT_HIGH",
+            Self::BaseHigh => "SPREAD_DIRECTION_BASE_HIGH",
+            Self::CounterHigh => "SPREAD_DIRECTION_COUNTER_HIGH",
             Self::Both => "SPREAD_DIRECTION_BOTH",
         };
         serializer.serialize_str(variant)
@@ -5501,8 +5501,8 @@ impl<'de> serde::Deserialize<'de> for SpreadDirection {
     {
         const FIELDS: &[&str] = &[
             "SPREAD_DIRECTION_UNSPECIFIED",
-            "SPREAD_DIRECTION_LEFT_HIGH",
-            "SPREAD_DIRECTION_RIGHT_HIGH",
+            "SPREAD_DIRECTION_BASE_HIGH",
+            "SPREAD_DIRECTION_COUNTER_HIGH",
             "SPREAD_DIRECTION_BOTH",
         ];
 
@@ -5545,8 +5545,8 @@ impl<'de> serde::Deserialize<'de> for SpreadDirection {
             {
                 match value {
                     "SPREAD_DIRECTION_UNSPECIFIED" => Ok(SpreadDirection::Unspecified),
-                    "SPREAD_DIRECTION_LEFT_HIGH" => Ok(SpreadDirection::LeftHigh),
-                    "SPREAD_DIRECTION_RIGHT_HIGH" => Ok(SpreadDirection::RightHigh),
+                    "SPREAD_DIRECTION_BASE_HIGH" => Ok(SpreadDirection::BaseHigh),
+                    "SPREAD_DIRECTION_COUNTER_HIGH" => Ok(SpreadDirection::CounterHigh),
                     "SPREAD_DIRECTION_BOTH" => Ok(SpreadDirection::Both),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
