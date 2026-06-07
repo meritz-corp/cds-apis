@@ -46,7 +46,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     $2.EtfPricing? pricingMethod,
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
-    $core.double? earlyHedgeThresholdRatio,
+    $core.double? imbalanceCancelThresholdRatio,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -69,7 +69,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (pricingMethod != null) result.pricingMethod = pricingMethod;
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
-    if (earlyHedgeThresholdRatio != null) result.earlyHedgeThresholdRatio = earlyHedgeThresholdRatio;
+    if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
     return result;
   }
 
@@ -99,7 +99,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..aOM<$2.EtfPricing>(22, _omitFieldNames ? '' : 'pricingMethod', subBuilder: $2.EtfPricing.create)
     ..aOB(23, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(24, _omitFieldNames ? '' : 'askEnabled')
-    ..a<$core.double>(25, _omitFieldNames ? '' : 'earlyHedgeThresholdRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(25, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -329,16 +329,16 @@ class FuturesLp extends $pb.GeneratedMessage {
   void clearAskEnabled() => $_clearField(24);
 
   /// 선물 LP 1호가 잔량 imbalance 비율 임계값.
-  /// 잔량 비율이 이 값 미만이면 부족한 측 sub-order에 대해 ETF 사전 헷지(IOC) 가동.
+  /// 잔량 비율이 이 값 미만이면 imbalance 감지 측 호가를 취소.
   /// 0.0 = 기능 OFF.
   @$pb.TagNumber(25)
-  $core.double get earlyHedgeThresholdRatio => $_getN(20);
+  $core.double get imbalanceCancelThresholdRatio => $_getN(20);
   @$pb.TagNumber(25)
-  set earlyHedgeThresholdRatio($core.double value) => $_setDouble(20, value);
+  set imbalanceCancelThresholdRatio($core.double value) => $_setDouble(20, value);
   @$pb.TagNumber(25)
-  $core.bool hasEarlyHedgeThresholdRatio() => $_has(20);
+  $core.bool hasImbalanceCancelThresholdRatio() => $_has(20);
   @$pb.TagNumber(25)
-  void clearEarlyHedgeThresholdRatio() => $_clearField(25);
+  void clearImbalanceCancelThresholdRatio() => $_clearField(25);
 }
 
 /// 매수/매도 수량 한도
@@ -1623,7 +1623,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.String? etfPricing,
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
-    $core.double? earlyHedgeThresholdRatio,
+    $core.double? imbalanceCancelThresholdRatio,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1640,7 +1640,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (etfPricing != null) result.etfPricing = etfPricing;
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
-    if (earlyHedgeThresholdRatio != null) result.earlyHedgeThresholdRatio = earlyHedgeThresholdRatio;
+    if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
     return result;
   }
 
@@ -1664,7 +1664,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..aOS(16, _omitFieldNames ? '' : 'etfPricing')
     ..aOB(17, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(18, _omitFieldNames ? '' : 'askEnabled')
-    ..a<$core.double>(19, _omitFieldNames ? '' : 'earlyHedgeThresholdRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(19, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1832,13 +1832,13 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   /// 선물 LP 1호가 잔량 imbalance 비율 임계값 (PATCH 시에만 명시)
   /// 0.0 = 기능 OFF.
   @$pb.TagNumber(19)
-  $core.double get earlyHedgeThresholdRatio => $_getN(14);
+  $core.double get imbalanceCancelThresholdRatio => $_getN(14);
   @$pb.TagNumber(19)
-  set earlyHedgeThresholdRatio($core.double value) => $_setDouble(14, value);
+  set imbalanceCancelThresholdRatio($core.double value) => $_setDouble(14, value);
   @$pb.TagNumber(19)
-  $core.bool hasEarlyHedgeThresholdRatio() => $_has(14);
+  $core.bool hasImbalanceCancelThresholdRatio() => $_has(14);
   @$pb.TagNumber(19)
-  void clearEarlyHedgeThresholdRatio() => $_clearField(19);
+  void clearImbalanceCancelThresholdRatio() => $_clearField(19);
 }
 
 /// GetFuturesLpStatus

@@ -136,7 +136,7 @@ impl serde::Serialize for FuturesLp {
             struct_ser.serialize_field("ask_enabled", &self.ask_enabled)?;
         }
         if true {
-            struct_ser.serialize_field("early_hedge_threshold_ratio", &self.early_hedge_threshold_ratio)?;
+            struct_ser.serialize_field("imbalance_cancel_threshold_ratio", &self.imbalance_cancel_threshold_ratio)?;
         }
         struct_ser.end()
     }
@@ -184,8 +184,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
-            "early_hedge_threshold_ratio",
-            "earlyHedgeThresholdRatio",
+            "imbalance_cancel_threshold_ratio",
+            "imbalanceCancelThresholdRatio",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -210,7 +210,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             PricingMethod,
             BidEnabled,
             AskEnabled,
-            EarlyHedgeThresholdRatio,
+            ImbalanceCancelThresholdRatio,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -253,7 +253,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "pricingMethod" | "pricing_method" => Ok(GeneratedField::PricingMethod),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
-                            "earlyHedgeThresholdRatio" | "early_hedge_threshold_ratio" => Ok(GeneratedField::EarlyHedgeThresholdRatio),
+                            "imbalanceCancelThresholdRatio" | "imbalance_cancel_threshold_ratio" => Ok(GeneratedField::ImbalanceCancelThresholdRatio),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -293,7 +293,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut pricing_method__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
-                let mut early_hedge_threshold_ratio__ = None;
+                let mut imbalance_cancel_threshold_ratio__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -436,11 +436,11 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             }
                             ask_enabled__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::EarlyHedgeThresholdRatio => {
-                            if early_hedge_threshold_ratio__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("earlyHedgeThresholdRatio"));
+                        GeneratedField::ImbalanceCancelThresholdRatio => {
+                            if imbalance_cancel_threshold_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceCancelThresholdRatio"));
                             }
-                            early_hedge_threshold_ratio__ = 
+                            imbalance_cancel_threshold_ratio__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -470,7 +470,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     pricing_method: pricing_method__,
                     bid_enabled: bid_enabled__.unwrap_or_default(),
                     ask_enabled: ask_enabled__.unwrap_or_default(),
-                    early_hedge_threshold_ratio: early_hedge_threshold_ratio__.unwrap_or_default(),
+                    imbalance_cancel_threshold_ratio: imbalance_cancel_threshold_ratio__.unwrap_or_default(),
                 })
             }
         }
@@ -3962,8 +3962,8 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.ask_enabled.as_ref() {
             struct_ser.serialize_field("ask_enabled", v)?;
         }
-        if let Some(v) = self.early_hedge_threshold_ratio.as_ref() {
-            struct_ser.serialize_field("early_hedge_threshold_ratio", v)?;
+        if let Some(v) = self.imbalance_cancel_threshold_ratio.as_ref() {
+            struct_ser.serialize_field("imbalance_cancel_threshold_ratio", v)?;
         }
         struct_ser.end()
     }
@@ -4001,8 +4001,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
-            "early_hedge_threshold_ratio",
-            "earlyHedgeThresholdRatio",
+            "imbalance_cancel_threshold_ratio",
+            "imbalanceCancelThresholdRatio",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4021,7 +4021,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             EtfPricing,
             BidEnabled,
             AskEnabled,
-            EarlyHedgeThresholdRatio,
+            ImbalanceCancelThresholdRatio,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4058,7 +4058,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
-                            "earlyHedgeThresholdRatio" | "early_hedge_threshold_ratio" => Ok(GeneratedField::EarlyHedgeThresholdRatio),
+                            "imbalanceCancelThresholdRatio" | "imbalance_cancel_threshold_ratio" => Ok(GeneratedField::ImbalanceCancelThresholdRatio),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4092,7 +4092,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut etf_pricing__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
-                let mut early_hedge_threshold_ratio__ = None;
+                let mut imbalance_cancel_threshold_ratio__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -4193,11 +4193,11 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             }
                             ask_enabled__ = map_.next_value()?;
                         }
-                        GeneratedField::EarlyHedgeThresholdRatio => {
-                            if early_hedge_threshold_ratio__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("earlyHedgeThresholdRatio"));
+                        GeneratedField::ImbalanceCancelThresholdRatio => {
+                            if imbalance_cancel_threshold_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceCancelThresholdRatio"));
                             }
-                            early_hedge_threshold_ratio__ = 
+                            imbalance_cancel_threshold_ratio__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
@@ -4221,7 +4221,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     etf_pricing: etf_pricing__,
                     bid_enabled: bid_enabled__,
                     ask_enabled: ask_enabled__,
-                    early_hedge_threshold_ratio: early_hedge_threshold_ratio__,
+                    imbalance_cancel_threshold_ratio: imbalance_cancel_threshold_ratio__,
                 })
             }
         }
