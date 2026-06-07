@@ -73,6 +73,9 @@ pub struct FuturesLp {
     /// 0.0 = 기능 OFF.
     #[prost(double, tag="25")]
     pub imbalance_cancel_threshold_ratio: f64,
+    /// false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
+    #[prost(bool, tag="26")]
+    pub imbalance_cancel_enabled: bool,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -401,6 +404,10 @@ pub struct UpdateFuturesLpRequest {
     /// 0.0 = 기능 OFF.
     #[prost(double, optional, tag="19")]
     pub imbalance_cancel_threshold_ratio: ::core::option::Option<f64>,
+    /// imbalance flee 마스터 토글 (PATCH 시에만 명시).
+    /// false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
+    #[prost(bool, optional, tag="20")]
+    pub imbalance_cancel_enabled: ::core::option::Option<bool>,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

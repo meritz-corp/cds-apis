@@ -168,6 +168,9 @@ message FuturesLp {
   // 잔량 비율이 이 값 미만이면 imbalance 감지 측 호가를 취소.
   // 0.0 = 기능 OFF.
   double imbalance_cancel_threshold_ratio = 25;
+
+  // false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
+  bool imbalance_cancel_enabled = 26;
 }
 
 // 매수/매도 수량 한도
@@ -494,6 +497,10 @@ message UpdateFuturesLpRequest {
   // 선물 LP 1호가 잔량 imbalance 비율 임계값 (PATCH 시에만 명시)
   // 0.0 = 기능 OFF.
   optional double imbalance_cancel_threshold_ratio = 19;
+
+  // imbalance flee 마스터 토글 (PATCH 시에만 명시).
+  // false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
+  optional bool imbalance_cancel_enabled = 20;
 }
 
 // GetFuturesLpStatus

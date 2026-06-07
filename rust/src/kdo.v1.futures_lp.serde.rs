@@ -70,6 +70,9 @@ impl serde::Serialize for FuturesLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLp", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -138,6 +141,9 @@ impl serde::Serialize for FuturesLp {
         if true {
             struct_ser.serialize_field("imbalance_cancel_threshold_ratio", &self.imbalance_cancel_threshold_ratio)?;
         }
+        if true {
+            struct_ser.serialize_field("imbalance_cancel_enabled", &self.imbalance_cancel_enabled)?;
+        }
         struct_ser.end()
     }
 }
@@ -186,6 +192,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "askEnabled",
             "imbalance_cancel_threshold_ratio",
             "imbalanceCancelThresholdRatio",
+            "imbalance_cancel_enabled",
+            "imbalanceCancelEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -211,6 +219,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             BidEnabled,
             AskEnabled,
             ImbalanceCancelThresholdRatio,
+            ImbalanceCancelEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -254,6 +263,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
                             "imbalanceCancelThresholdRatio" | "imbalance_cancel_threshold_ratio" => Ok(GeneratedField::ImbalanceCancelThresholdRatio),
+                            "imbalanceCancelEnabled" | "imbalance_cancel_enabled" => Ok(GeneratedField::ImbalanceCancelEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -294,6 +304,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
                 let mut imbalance_cancel_threshold_ratio__ = None;
+                let mut imbalance_cancel_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -444,6 +455,12 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ImbalanceCancelEnabled => {
+                            if imbalance_cancel_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceCancelEnabled"));
+                            }
+                            imbalance_cancel_enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -471,6 +488,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     bid_enabled: bid_enabled__.unwrap_or_default(),
                     ask_enabled: ask_enabled__.unwrap_or_default(),
                     imbalance_cancel_threshold_ratio: imbalance_cancel_threshold_ratio__.unwrap_or_default(),
+                    imbalance_cancel_enabled: imbalance_cancel_enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -3915,6 +3933,9 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -3965,6 +3986,9 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.imbalance_cancel_threshold_ratio.as_ref() {
             struct_ser.serialize_field("imbalance_cancel_threshold_ratio", v)?;
         }
+        if let Some(v) = self.imbalance_cancel_enabled.as_ref() {
+            struct_ser.serialize_field("imbalance_cancel_enabled", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4003,6 +4027,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "askEnabled",
             "imbalance_cancel_threshold_ratio",
             "imbalanceCancelThresholdRatio",
+            "imbalance_cancel_enabled",
+            "imbalanceCancelEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4022,6 +4048,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             BidEnabled,
             AskEnabled,
             ImbalanceCancelThresholdRatio,
+            ImbalanceCancelEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4059,6 +4086,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
                             "imbalanceCancelThresholdRatio" | "imbalance_cancel_threshold_ratio" => Ok(GeneratedField::ImbalanceCancelThresholdRatio),
+                            "imbalanceCancelEnabled" | "imbalance_cancel_enabled" => Ok(GeneratedField::ImbalanceCancelEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4093,6 +4121,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
                 let mut imbalance_cancel_threshold_ratio__ = None;
+                let mut imbalance_cancel_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -4201,6 +4230,12 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::ImbalanceCancelEnabled => {
+                            if imbalance_cancel_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceCancelEnabled"));
+                            }
+                            imbalance_cancel_enabled__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4222,6 +4257,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     bid_enabled: bid_enabled__,
                     ask_enabled: ask_enabled__,
                     imbalance_cancel_threshold_ratio: imbalance_cancel_threshold_ratio__,
+                    imbalance_cancel_enabled: imbalance_cancel_enabled__,
                 })
             }
         }

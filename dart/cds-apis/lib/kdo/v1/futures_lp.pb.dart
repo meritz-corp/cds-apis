@@ -47,6 +47,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
     $core.double? imbalanceCancelThresholdRatio,
+    $core.bool? imbalanceCancelEnabled,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -70,6 +71,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
     if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
+    if (imbalanceCancelEnabled != null) result.imbalanceCancelEnabled = imbalanceCancelEnabled;
     return result;
   }
 
@@ -100,6 +102,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..aOB(23, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(24, _omitFieldNames ? '' : 'askEnabled')
     ..a<$core.double>(25, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
+    ..aOB(26, _omitFieldNames ? '' : 'imbalanceCancelEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -339,6 +342,16 @@ class FuturesLp extends $pb.GeneratedMessage {
   $core.bool hasImbalanceCancelThresholdRatio() => $_has(20);
   @$pb.TagNumber(25)
   void clearImbalanceCancelThresholdRatio() => $_clearField(25);
+
+  /// false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
+  @$pb.TagNumber(26)
+  $core.bool get imbalanceCancelEnabled => $_getBF(21);
+  @$pb.TagNumber(26)
+  set imbalanceCancelEnabled($core.bool value) => $_setBool(21, value);
+  @$pb.TagNumber(26)
+  $core.bool hasImbalanceCancelEnabled() => $_has(21);
+  @$pb.TagNumber(26)
+  void clearImbalanceCancelEnabled() => $_clearField(26);
 }
 
 /// 매수/매도 수량 한도
@@ -1624,6 +1637,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
     $core.double? imbalanceCancelThresholdRatio,
+    $core.bool? imbalanceCancelEnabled,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1641,6 +1655,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
     if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
+    if (imbalanceCancelEnabled != null) result.imbalanceCancelEnabled = imbalanceCancelEnabled;
     return result;
   }
 
@@ -1665,6 +1680,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..aOB(17, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(18, _omitFieldNames ? '' : 'askEnabled')
     ..a<$core.double>(19, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
+    ..aOB(20, _omitFieldNames ? '' : 'imbalanceCancelEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -1839,6 +1855,17 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   $core.bool hasImbalanceCancelThresholdRatio() => $_has(14);
   @$pb.TagNumber(19)
   void clearImbalanceCancelThresholdRatio() => $_clearField(19);
+
+  /// imbalance flee 마스터 토글 (PATCH 시에만 명시).
+  /// false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
+  @$pb.TagNumber(20)
+  $core.bool get imbalanceCancelEnabled => $_getBF(15);
+  @$pb.TagNumber(20)
+  set imbalanceCancelEnabled($core.bool value) => $_setBool(15, value);
+  @$pb.TagNumber(20)
+  $core.bool hasImbalanceCancelEnabled() => $_has(15);
+  @$pb.TagNumber(20)
+  void clearImbalanceCancelEnabled() => $_clearField(20);
 }
 
 /// GetFuturesLpStatus

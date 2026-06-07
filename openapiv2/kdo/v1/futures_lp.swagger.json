@@ -264,6 +264,10 @@
                   "type": "number",
                   "format": "double",
                   "description": "선물 LP 1호가 잔량 imbalance 비율 임계값 (PATCH 시에만 명시)\n0.0 = 기능 OFF."
+                },
+                "imbalanceCancelEnabled": {
+                  "type": "boolean",
+                  "description": "imbalance flee 마스터 토글 (PATCH 시에만 명시).\nfalse 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true."
                 }
               },
               "title": "UpdateFuturesLp"
@@ -757,6 +761,10 @@
           "type": "number",
           "format": "double",
           "description": "선물 LP 1호가 잔량 imbalance 비율 임계값.\n잔량 비율이 이 값 미만이면 imbalance 감지 측 호가를 취소.\n0.0 = 기능 OFF."
+        },
+        "imbalanceCancelEnabled": {
+          "type": "boolean",
+          "description": "false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true."
         }
       },
       "title": "선물 LP 설정"
