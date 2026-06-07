@@ -120,6 +120,9 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalance", len)?;
         if let Some(v) = self.pricing.as_ref() {
             struct_ser.serialize_field("pricing", v)?;
@@ -143,6 +146,11 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("reconcile_alert_amount", ToString::to_string(&self.reconcile_alert_amount).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -164,6 +172,8 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
             "settleTimeoutMs",
             "reconcile_alert_amount",
             "reconcileAlertAmount",
+            "cooldown_ms",
+            "cooldownMs",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -174,6 +184,7 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
             ImbalanceRecoveryRatio,
             SettleTimeoutMs,
             ReconcileAlertAmount,
+            CooldownMs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -202,6 +213,7 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                             "imbalanceRecoveryRatio" | "imbalance_recovery_ratio" => Ok(GeneratedField::ImbalanceRecoveryRatio),
                             "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
                             "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
+                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -227,6 +239,7 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                 let mut imbalance_recovery_ratio__ = None;
                 let mut settle_timeout_ms__ = None;
                 let mut reconcile_alert_amount__ = None;
+                let mut cooldown_ms__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pricing => {
@@ -273,6 +286,14 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::CooldownMs => {
+                            if cooldown_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
+                            }
+                            cooldown_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -285,6 +306,7 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                     imbalance_recovery_ratio: imbalance_recovery_ratio__.unwrap_or_default(),
                     settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
                     reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
+                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
                 })
             }
         }
@@ -2639,12 +2661,6 @@ impl serde::Serialize for Pair {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.Pair", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -2663,12 +2679,6 @@ impl serde::Serialize for Pair {
         }
         if let Some(v) = self.counter.as_ref() {
             struct_ser.serialize_field("counter", v)?;
-        }
-        if let Some(v) = self.condition.as_ref() {
-            struct_ser.serialize_field("condition", v)?;
-        }
-        if let Some(v) = self.exec_config.as_ref() {
-            struct_ser.serialize_field("exec_config", v)?;
         }
         if true {
             let v = PairStatus::try_from(self.status)
@@ -2702,9 +2712,6 @@ impl<'de> serde::Deserialize<'de> for Pair {
             "portfolioId",
             "base",
             "counter",
-            "condition",
-            "exec_config",
-            "execConfig",
             "status",
             "mode",
             "create_time",
@@ -2721,8 +2728,6 @@ impl<'de> serde::Deserialize<'de> for Pair {
             PortfolioId,
             Base,
             Counter,
-            Condition,
-            ExecConfig,
             Status,
             Mode,
             CreateTime,
@@ -2755,8 +2760,6 @@ impl<'de> serde::Deserialize<'de> for Pair {
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
                             "base" => Ok(GeneratedField::Base),
                             "counter" => Ok(GeneratedField::Counter),
-                            "condition" => Ok(GeneratedField::Condition),
-                            "execConfig" | "exec_config" => Ok(GeneratedField::ExecConfig),
                             "status" => Ok(GeneratedField::Status),
                             "mode" => Ok(GeneratedField::Mode),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
@@ -2786,8 +2789,6 @@ impl<'de> serde::Deserialize<'de> for Pair {
                 let mut portfolio_id__ = None;
                 let mut base__ = None;
                 let mut counter__ = None;
-                let mut condition__ = None;
-                let mut exec_config__ = None;
                 let mut status__ = None;
                 let mut mode__ = None;
                 let mut create_time__ = None;
@@ -2834,18 +2835,6 @@ impl<'de> serde::Deserialize<'de> for Pair {
                             }
                             counter__ = map_.next_value()?;
                         }
-                        GeneratedField::Condition => {
-                            if condition__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("condition"));
-                            }
-                            condition__ = map_.next_value()?;
-                        }
-                        GeneratedField::ExecConfig => {
-                            if exec_config__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("execConfig"));
-                            }
-                            exec_config__ = map_.next_value()?;
-                        }
                         GeneratedField::Status => {
                             if status__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("status"));
@@ -2882,8 +2871,6 @@ impl<'de> serde::Deserialize<'de> for Pair {
                     portfolio_id: portfolio_id__.unwrap_or_default(),
                     base: base__,
                     counter: counter__,
-                    condition: condition__,
-                    exec_config: exec_config__,
                     status: status__.unwrap_or_default(),
                     mode: mode__,
                     create_time: create_time__,
@@ -3214,144 +3201,6 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair.PairEntry", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PairExecConfig {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairExecConfig", len)?;
-        if true {
-            let v = PairOrderType::try_from(self.order_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.order_type)))?;
-            struct_ser.serialize_field("order_type", &v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("apply_tick_offset", &self.apply_tick_offset)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for PairExecConfig {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "order_type",
-            "orderType",
-            "cooldown_ms",
-            "cooldownMs",
-            "apply_tick_offset",
-            "applyTickOffset",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            OrderType,
-            CooldownMs,
-            ApplyTickOffset,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "orderType" | "order_type" => Ok(GeneratedField::OrderType),
-                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
-                            "applyTickOffset" | "apply_tick_offset" => Ok(GeneratedField::ApplyTickOffset),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PairExecConfig;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.pair.PairExecConfig")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairExecConfig, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut order_type__ = None;
-                let mut cooldown_ms__ = None;
-                let mut apply_tick_offset__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::OrderType => {
-                            if order_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orderType"));
-                            }
-                            order_type__ = Some(map_.next_value::<PairOrderType>()? as i32);
-                        }
-                        GeneratedField::CooldownMs => {
-                            if cooldown_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
-                            }
-                            cooldown_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ApplyTickOffset => {
-                            if apply_tick_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("applyTickOffset"));
-                            }
-                            apply_tick_offset__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(PairExecConfig {
-                    order_type: order_type__.unwrap_or_default(),
-                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
-                    apply_tick_offset: apply_tick_offset__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.pair.PairExecConfig", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairExecutionLog {
@@ -5389,8 +5238,36 @@ impl serde::Serialize for SimultaneousCompare {
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
-        let len = 0;
-        let struct_ser = serializer.serialize_struct("kdo.v1.pair.SimultaneousCompare", len)?;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.SimultaneousCompare", len)?;
+        if let Some(v) = self.condition.as_ref() {
+            struct_ser.serialize_field("condition", v)?;
+        }
+        if true {
+            let v = PairOrderType::try_from(self.order_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.order_type)))?;
+            struct_ser.serialize_field("order_type", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("apply_tick_offset", &self.apply_tick_offset)?;
+        }
         struct_ser.end()
     }
 }
@@ -5401,10 +5278,21 @@ impl<'de> serde::Deserialize<'de> for SimultaneousCompare {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "condition",
+            "order_type",
+            "orderType",
+            "cooldown_ms",
+            "cooldownMs",
+            "apply_tick_offset",
+            "applyTickOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            Condition,
+            OrderType,
+            CooldownMs,
+            ApplyTickOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5426,7 +5314,13 @@ impl<'de> serde::Deserialize<'de> for SimultaneousCompare {
                     where
                         E: serde::de::Error,
                     {
-                            Ok(GeneratedField::__SkipField__)
+                        match value {
+                            "condition" => Ok(GeneratedField::Condition),
+                            "orderType" | "order_type" => Ok(GeneratedField::OrderType),
+                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            "applyTickOffset" | "apply_tick_offset" => Ok(GeneratedField::ApplyTickOffset),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
                     }
                 }
                 deserializer.deserialize_identifier(GeneratedVisitor)
@@ -5444,10 +5338,48 @@ impl<'de> serde::Deserialize<'de> for SimultaneousCompare {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                while map_.next_key::<GeneratedField>()?.is_some() {
-                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                let mut condition__ = None;
+                let mut order_type__ = None;
+                let mut cooldown_ms__ = None;
+                let mut apply_tick_offset__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Condition => {
+                            if condition__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("condition"));
+                            }
+                            condition__ = map_.next_value()?;
+                        }
+                        GeneratedField::OrderType => {
+                            if order_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderType"));
+                            }
+                            order_type__ = Some(map_.next_value::<PairOrderType>()? as i32);
+                        }
+                        GeneratedField::CooldownMs => {
+                            if cooldown_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
+                            }
+                            cooldown_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ApplyTickOffset => {
+                            if apply_tick_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("applyTickOffset"));
+                            }
+                            apply_tick_offset__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
                 }
                 Ok(SimultaneousCompare {
+                    condition: condition__,
+                    order_type: order_type__.unwrap_or_default(),
+                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                    apply_tick_offset: apply_tick_offset__.unwrap_or_default(),
                 })
             }
         }

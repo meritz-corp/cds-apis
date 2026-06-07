@@ -156,14 +156,6 @@
                   "$ref": "#/definitions/pairPairEntry",
                   "title": "Counter 엔트리"
                 },
-                "condition": {
-                  "$ref": "#/definitions/pairPairCondition",
-                  "title": "가격 비교 조건 (oneof)"
-                },
-                "execConfig": {
-                  "$ref": "#/definitions/pairPairExecConfig",
-                  "title": "주문 실행 설정"
-                },
                 "status": {
                   "$ref": "#/definitions/pairPairStatus",
                   "title": "상태",
@@ -191,8 +183,7 @@
                 "displayName",
                 "portfolioId",
                 "base",
-                "counter",
-                "condition"
+                "counter"
               ]
             }
           }
@@ -573,6 +564,11 @@
           "type": "string",
           "format": "int64",
           "title": "잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)"
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "트리거 후 재트리거까지 대기시간 (ms)"
         }
       },
       "title": "BaseMakeCounterIocAndBalance 모드 설정"
@@ -814,14 +810,6 @@
           "$ref": "#/definitions/pairPairEntry",
           "title": "Counter 엔트리"
         },
-        "condition": {
-          "$ref": "#/definitions/pairPairCondition",
-          "title": "가격 비교 조건 (oneof)"
-        },
-        "execConfig": {
-          "$ref": "#/definitions/pairPairExecConfig",
-          "title": "주문 실행 설정"
-        },
         "status": {
           "$ref": "#/definitions/pairPairStatus",
           "title": "상태",
@@ -849,8 +837,7 @@
         "displayName",
         "portfolioId",
         "base",
-        "counter",
-        "condition"
+        "counter"
       ]
     },
     "pairPairCondition": {
@@ -908,25 +895,6 @@
         "side",
         "quantity"
       ]
-    },
-    "pairPairExecConfig": {
-      "type": "object",
-      "properties": {
-        "orderType": {
-          "$ref": "#/definitions/pairPairOrderType",
-          "title": "주문 유형"
-        },
-        "cooldownMs": {
-          "type": "string",
-          "format": "uint64",
-          "title": "트리거 후 재트리거까지 대기시간 (ms)"
-        },
-        "applyTickOffset": {
-          "type": "boolean",
-          "title": "hit 직후 지정가 조정 여부"
-        }
-      },
-      "title": "페어 주문 실행 설정"
     },
     "pairPairExecutionLog": {
       "type": "object",
@@ -1230,7 +1198,26 @@
     },
     "pairSimultaneousCompare": {
       "type": "object",
-      "title": "SimultaneousCompare 모드 설정 (현재 파라미터 없음)"
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/pairPairCondition",
+          "title": "가격 비교 조건"
+        },
+        "orderType": {
+          "$ref": "#/definitions/pairPairOrderType",
+          "title": "주문 유형"
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "트리거 후 재트리거까지 대기시간 (ms)"
+        },
+        "applyTickOffset": {
+          "type": "boolean",
+          "title": "hit 직후 지정가 조정 여부"
+        }
+      },
+      "title": "SimultaneousCompare 모드 설정"
     },
     "pairSpreadDirection": {
       "type": "string",

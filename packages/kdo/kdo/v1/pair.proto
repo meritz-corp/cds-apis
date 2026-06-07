@@ -145,13 +145,11 @@ message Pair {
     (google.api.field_behavior) = REQUIRED
   ];
 
-  // 가격 비교 조건 (oneof)
-  PairCondition condition = 7 [
-    (google.api.field_behavior) = REQUIRED
-  ];
+  reserved 7;
+  reserved "condition";
 
-  // 주문 실행 설정
-  PairExecConfig exec_config = 8;
+  reserved 8;
+  reserved "exec_config";
 
   // 상태
   PairStatus status = 9 [
@@ -294,22 +292,6 @@ enum SpreadDirection {
   SPREAD_DIRECTION_BOTH = 3;
 }
 
-// ============================================================================
-// Pair Execution Config
-// ============================================================================
-
-// 페어 주문 실행 설정
-message PairExecConfig {
-  // 주문 유형
-  PairOrderType order_type = 1;
-
-  // 트리거 후 재트리거까지 대기시간 (ms)
-  uint64 cooldown_ms = 2;
-
-  // hit 직후 지정가 조정 여부
-  bool apply_tick_offset = 3;
-}
-
 // 페어 주문 유형
 enum PairOrderType {
   PAIR_ORDER_TYPE_UNSPECIFIED = 0;
@@ -374,10 +356,25 @@ message BaseMakeCounterIocAndBalance {
 
   // 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
   int64 reconcile_alert_amount = 7;
+
+  // 트리거 후 재트리거까지 대기시간 (ms)
+  uint64 cooldown_ms = 8;
 }
 
-// SimultaneousCompare 모드 설정 (현재 파라미터 없음)
-message SimultaneousCompare {}
+// SimultaneousCompare 모드 설정
+message SimultaneousCompare {
+  // 가격 비교 조건
+  PairCondition condition = 1;
+
+  // 주문 유형
+  PairOrderType order_type = 2;
+
+  // 트리거 후 재트리거까지 대기시간 (ms)
+  uint64 cooldown_ms = 3;
+
+  // hit 직후 지정가 조정 여부
+  bool apply_tick_offset = 4;
+}
 
 // PricingMakerTaker 모드 설정
 message PricingMakerTaker {

@@ -26,12 +26,6 @@ pub struct Pair {
     /// Counter 엔트리
     #[prost(message, optional, tag="6")]
     pub counter: ::core::option::Option<PairEntry>,
-    /// 가격 비교 조건 (oneof)
-    #[prost(message, optional, tag="7")]
-    pub condition: ::core::option::Option<PairCondition>,
-    /// 주문 실행 설정
-    #[prost(message, optional, tag="8")]
-    pub exec_config: ::core::option::Option<PairExecConfig>,
     /// 상태
     #[prost(enumeration="PairStatus", tag="9")]
     pub status: i32,
@@ -134,24 +128,6 @@ pub struct PriceRatioCondition {
     pub max_ratio: f64,
 }
 // ============================================================================
-// Pair Execution Config
-// ============================================================================
-
-/// 페어 주문 실행 설정
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PairExecConfig {
-    /// 주문 유형
-    #[prost(enumeration="PairOrderType", tag="1")]
-    pub order_type: i32,
-    /// 트리거 후 재트리거까지 대기시간 (ms)
-    #[prost(uint64, tag="2")]
-    pub cooldown_ms: u64,
-    /// hit 직후 지정가 조정 여부
-    #[prost(bool, tag="3")]
-    pub apply_tick_offset: bool,
-}
-// ============================================================================
 // Pair Mode (oneof wrapper)
 // ============================================================================
 
@@ -200,11 +176,26 @@ pub struct BaseMakeCounterIocAndBalance {
     /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
     #[prost(int64, tag="7")]
     pub reconcile_alert_amount: i64,
+    /// 트리거 후 재트리거까지 대기시간 (ms)
+    #[prost(uint64, tag="8")]
+    pub cooldown_ms: u64,
 }
-/// SimultaneousCompare 모드 설정 (현재 파라미터 없음)
+/// SimultaneousCompare 모드 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SimultaneousCompare {
+    /// 가격 비교 조건
+    #[prost(message, optional, tag="1")]
+    pub condition: ::core::option::Option<PairCondition>,
+    /// 주문 유형
+    #[prost(enumeration="PairOrderType", tag="2")]
+    pub order_type: i32,
+    /// 트리거 후 재트리거까지 대기시간 (ms)
+    #[prost(uint64, tag="3")]
+    pub cooldown_ms: u64,
+    /// hit 직후 지정가 조정 여부
+    #[prost(bool, tag="4")]
+    pub apply_tick_offset: bool,
 }
 /// PricingMakerTaker 모드 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

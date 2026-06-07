@@ -205,14 +205,17 @@ const Pair$json = {
     {'1': 'portfolio_id', '3': 4, '4': 1, '5': 5, '8': {}, '10': 'portfolioId'},
     {'1': 'base', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'base'},
     {'1': 'counter', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'counter'},
-    {'1': 'condition', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairCondition', '8': {}, '10': 'condition'},
-    {'1': 'exec_config', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairExecConfig', '10': 'execConfig'},
     {'1': 'status', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairStatus', '8': {}, '10': 'status'},
     {'1': 'mode', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairMode', '10': 'mode'},
     {'1': 'create_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
   '7': {},
+  '9': [
+    {'1': 7, '2': 8},
+    {'1': 8, '2': 9},
+  ],
+  '10': ['condition', 'exec_config'],
 };
 
 /// Descriptor for `Pair`. Decode as a `google.protobuf.DescriptorProto`.
@@ -221,14 +224,12 @@ final $typed_data.Uint8List pairDescriptor = $convert.base64Decode(
     'BsYXlfbmFtZRgDIAEoCUIE4kEBAlILZGlzcGxheU5hbWUSJwoMcG9ydGZvbGlvX2lkGAQgASgF'
     'QgTiQQECUgtwb3J0Zm9saW9JZBIwCgRiYXNlGAUgASgLMhYua2RvLnYxLnBhaXIuUGFpckVudH'
     'J5QgTiQQECUgRiYXNlEjYKB2NvdW50ZXIYBiABKAsyFi5rZG8udjEucGFpci5QYWlyRW50cnlC'
-    'BOJBAQJSB2NvdW50ZXISPgoJY29uZGl0aW9uGAcgASgLMhoua2RvLnYxLnBhaXIuUGFpckNvbm'
-    'RpdGlvbkIE4kEBAlIJY29uZGl0aW9uEjwKC2V4ZWNfY29uZmlnGAggASgLMhsua2RvLnYxLnBh'
-    'aXIuUGFpckV4ZWNDb25maWdSCmV4ZWNDb25maWcSNQoGc3RhdHVzGAkgASgOMhcua2RvLnYxLn'
-    'BhaXIuUGFpclN0YXR1c0IE4kEBA1IGc3RhdHVzEikKBG1vZGUYCiABKAsyFS5rZG8udjEucGFp'
-    'ci5QYWlyTW9kZVIEbW9kZRJBCgtjcmVhdGVfdGltZRgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi'
-    '5UaW1lc3RhbXBCBOJBAQNSCmNyZWF0ZVRpbWUSQQoLdXBkYXRlX3RpbWUYDCABKAsyGi5nb29n'
-    'bGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lOifqQSQKFGtkby5jZHNhcG'
-    'lzLnh5ei9QYWlyEgxwYWlycy97cGFpcn0=');
+    'BOJBAQJSB2NvdW50ZXISNQoGc3RhdHVzGAkgASgOMhcua2RvLnYxLnBhaXIuUGFpclN0YXR1c0'
+    'IE4kEBA1IGc3RhdHVzEikKBG1vZGUYCiABKAsyFS5rZG8udjEucGFpci5QYWlyTW9kZVIEbW9k'
+    'ZRJBCgtjcmVhdGVfdGltZRgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQ'
+    'NSCmNyZWF0ZVRpbWUSQQoLdXBkYXRlX3RpbWUYDCABKAsyGi5nb29nbGUucHJvdG9idWYuVGlt'
+    'ZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lOifqQSQKFGtkby5jZHNhcGlzLnh5ei9QYWlyEgxwYW'
+    'lycy97cGFpcn1KBAgHEAhKBAgIEAlSCWNvbmRpdGlvblILZXhlY19jb25maWc=');
 
 @$core.Deprecated('Use pairEntryDescriptor instead')
 const PairEntry$json = {
@@ -316,22 +317,6 @@ final $typed_data.Uint8List priceRatioConditionDescriptor = $convert.base64Decod
     'ChNQcmljZVJhdGlvQ29uZGl0aW9uEiEKCW1pbl9yYXRpbxgBIAEoAUIE4kEBAlIIbWluUmF0aW'
     '8SIQoJbWF4X3JhdGlvGAIgASgBQgTiQQECUghtYXhSYXRpbw==');
 
-@$core.Deprecated('Use pairExecConfigDescriptor instead')
-const PairExecConfig$json = {
-  '1': 'PairExecConfig',
-  '2': [
-    {'1': 'order_type', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairOrderType', '10': 'orderType'},
-    {'1': 'cooldown_ms', '3': 2, '4': 1, '5': 4, '10': 'cooldownMs'},
-    {'1': 'apply_tick_offset', '3': 3, '4': 1, '5': 8, '10': 'applyTickOffset'},
-  ],
-};
-
-/// Descriptor for `PairExecConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pairExecConfigDescriptor = $convert.base64Decode(
-    'Cg5QYWlyRXhlY0NvbmZpZxI5CgpvcmRlcl90eXBlGAEgASgOMhoua2RvLnYxLnBhaXIuUGFpck'
-    '9yZGVyVHlwZVIJb3JkZXJUeXBlEh8KC2Nvb2xkb3duX21zGAIgASgEUgpjb29sZG93bk1zEioK'
-    'EWFwcGx5X3RpY2tfb2Zmc2V0GAMgASgIUg9hcHBseVRpY2tPZmZzZXQ=');
-
 @$core.Deprecated('Use pairModeDescriptor instead')
 const PairMode$json = {
   '1': 'PairMode',
@@ -364,6 +349,7 @@ const BaseMakeCounterIocAndBalance$json = {
     {'1': 'imbalance_recovery_ratio', '3': 5, '4': 1, '5': 1, '10': 'imbalanceRecoveryRatio'},
     {'1': 'settle_timeout_ms', '3': 6, '4': 1, '5': 4, '10': 'settleTimeoutMs'},
     {'1': 'reconcile_alert_amount', '3': 7, '4': 1, '5': 3, '10': 'reconcileAlertAmount'},
+    {'1': 'cooldown_ms', '3': 8, '4': 1, '5': 4, '10': 'cooldownMs'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -379,16 +365,26 @@ final $typed_data.Uint8List baseMakeCounterIocAndBalanceDescriptor = $convert.ba
     'ltYmFsYW5jZVRocmVzaG9sZFJhdGlvEjgKGGltYmFsYW5jZV9yZWNvdmVyeV9yYXRpbxgFIAEo'
     'AVIWaW1iYWxhbmNlUmVjb3ZlcnlSYXRpbxIqChFzZXR0bGVfdGltZW91dF9tcxgGIAEoBFIPc2'
     'V0dGxlVGltZW91dE1zEjQKFnJlY29uY2lsZV9hbGVydF9hbW91bnQYByABKANSFHJlY29uY2ls'
-    'ZUFsZXJ0QW1vdW50SgQIAhADUgtoZWRnZV9yYXRpbw==');
+    'ZUFsZXJ0QW1vdW50Eh8KC2Nvb2xkb3duX21zGAggASgEUgpjb29sZG93bk1zSgQIAhADUgtoZW'
+    'RnZV9yYXRpbw==');
 
 @$core.Deprecated('Use simultaneousCompareDescriptor instead')
 const SimultaneousCompare$json = {
   '1': 'SimultaneousCompare',
+  '2': [
+    {'1': 'condition', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairCondition', '10': 'condition'},
+    {'1': 'order_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairOrderType', '10': 'orderType'},
+    {'1': 'cooldown_ms', '3': 3, '4': 1, '5': 4, '10': 'cooldownMs'},
+    {'1': 'apply_tick_offset', '3': 4, '4': 1, '5': 8, '10': 'applyTickOffset'},
+  ],
 };
 
 /// Descriptor for `SimultaneousCompare`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List simultaneousCompareDescriptor = $convert.base64Decode(
-    'ChNTaW11bHRhbmVvdXNDb21wYXJl');
+    'ChNTaW11bHRhbmVvdXNDb21wYXJlEjgKCWNvbmRpdGlvbhgBIAEoCzIaLmtkby52MS5wYWlyLl'
+    'BhaXJDb25kaXRpb25SCWNvbmRpdGlvbhI5CgpvcmRlcl90eXBlGAIgASgOMhoua2RvLnYxLnBh'
+    'aXIuUGFpck9yZGVyVHlwZVIJb3JkZXJUeXBlEh8KC2Nvb2xkb3duX21zGAMgASgEUgpjb29sZG'
+    '93bk1zEioKEWFwcGx5X3RpY2tfb2Zmc2V0GAQgASgIUg9hcHBseVRpY2tPZmZzZXQ=');
 
 @$core.Deprecated('Use pricingMakerTakerDescriptor instead')
 const PricingMakerTaker$json = {

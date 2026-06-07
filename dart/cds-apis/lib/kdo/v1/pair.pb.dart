@@ -31,8 +31,6 @@ class Pair extends $pb.GeneratedMessage {
     $core.int? portfolioId,
     PairEntry? base,
     PairEntry? counter,
-    PairCondition? condition,
-    PairExecConfig? execConfig,
     PairStatus? status,
     PairMode? mode,
     $2.Timestamp? createTime,
@@ -45,8 +43,6 @@ class Pair extends $pb.GeneratedMessage {
     if (portfolioId != null) result.portfolioId = portfolioId;
     if (base != null) result.base = base;
     if (counter != null) result.counter = counter;
-    if (condition != null) result.condition = condition;
-    if (execConfig != null) result.execConfig = execConfig;
     if (status != null) result.status = status;
     if (mode != null) result.mode = mode;
     if (createTime != null) result.createTime = createTime;
@@ -66,8 +62,6 @@ class Pair extends $pb.GeneratedMessage {
     ..a<$core.int>(4, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
     ..aOM<PairEntry>(5, _omitFieldNames ? '' : 'base', subBuilder: PairEntry.create)
     ..aOM<PairEntry>(6, _omitFieldNames ? '' : 'counter', subBuilder: PairEntry.create)
-    ..aOM<PairCondition>(7, _omitFieldNames ? '' : 'condition', subBuilder: PairCondition.create)
-    ..aOM<PairExecConfig>(8, _omitFieldNames ? '' : 'execConfig', subBuilder: PairExecConfig.create)
     ..e<PairStatus>(9, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PairStatus.PAIR_STATUS_UNSPECIFIED, valueOf: PairStatus.valueOf, enumValues: PairStatus.values)
     ..aOM<PairMode>(10, _omitFieldNames ? '' : 'mode', subBuilder: PairMode.create)
     ..aOM<$2.Timestamp>(11, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
@@ -156,75 +150,51 @@ class Pair extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   PairEntry ensureCounter() => $_ensure(5);
 
-  /// 가격 비교 조건 (oneof)
-  @$pb.TagNumber(7)
-  PairCondition get condition => $_getN(6);
-  @$pb.TagNumber(7)
-  set condition(PairCondition value) => $_setField(7, value);
-  @$pb.TagNumber(7)
-  $core.bool hasCondition() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearCondition() => $_clearField(7);
-  @$pb.TagNumber(7)
-  PairCondition ensureCondition() => $_ensure(6);
-
-  /// 주문 실행 설정
-  @$pb.TagNumber(8)
-  PairExecConfig get execConfig => $_getN(7);
-  @$pb.TagNumber(8)
-  set execConfig(PairExecConfig value) => $_setField(8, value);
-  @$pb.TagNumber(8)
-  $core.bool hasExecConfig() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearExecConfig() => $_clearField(8);
-  @$pb.TagNumber(8)
-  PairExecConfig ensureExecConfig() => $_ensure(7);
-
   /// 상태
   @$pb.TagNumber(9)
-  PairStatus get status => $_getN(8);
+  PairStatus get status => $_getN(6);
   @$pb.TagNumber(9)
   set status(PairStatus value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasStatus() => $_has(8);
+  $core.bool hasStatus() => $_has(6);
   @$pb.TagNumber(9)
   void clearStatus() => $_clearField(9);
 
   /// 실행 모드 (oneof)
   @$pb.TagNumber(10)
-  PairMode get mode => $_getN(9);
+  PairMode get mode => $_getN(7);
   @$pb.TagNumber(10)
   set mode(PairMode value) => $_setField(10, value);
   @$pb.TagNumber(10)
-  $core.bool hasMode() => $_has(9);
+  $core.bool hasMode() => $_has(7);
   @$pb.TagNumber(10)
   void clearMode() => $_clearField(10);
   @$pb.TagNumber(10)
-  PairMode ensureMode() => $_ensure(9);
+  PairMode ensureMode() => $_ensure(7);
 
   /// 생성 시간
   @$pb.TagNumber(11)
-  $2.Timestamp get createTime => $_getN(10);
+  $2.Timestamp get createTime => $_getN(8);
   @$pb.TagNumber(11)
   set createTime($2.Timestamp value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasCreateTime() => $_has(10);
+  $core.bool hasCreateTime() => $_has(8);
   @$pb.TagNumber(11)
   void clearCreateTime() => $_clearField(11);
   @$pb.TagNumber(11)
-  $2.Timestamp ensureCreateTime() => $_ensure(10);
+  $2.Timestamp ensureCreateTime() => $_ensure(8);
 
   /// 수정 시간
   @$pb.TagNumber(12)
-  $2.Timestamp get updateTime => $_getN(11);
+  $2.Timestamp get updateTime => $_getN(9);
   @$pb.TagNumber(12)
   set updateTime($2.Timestamp value) => $_setField(12, value);
   @$pb.TagNumber(12)
-  $core.bool hasUpdateTime() => $_has(11);
+  $core.bool hasUpdateTime() => $_has(9);
   @$pb.TagNumber(12)
   void clearUpdateTime() => $_clearField(12);
   @$pb.TagNumber(12)
-  $2.Timestamp ensureUpdateTime() => $_ensure(11);
+  $2.Timestamp ensureUpdateTime() => $_ensure(9);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
@@ -621,80 +591,6 @@ class PriceRatioCondition extends $pb.GeneratedMessage {
   void clearMaxRatio() => $_clearField(2);
 }
 
-/// 페어 주문 실행 설정
-class PairExecConfig extends $pb.GeneratedMessage {
-  factory PairExecConfig({
-    PairOrderType? orderType,
-    $fixnum.Int64? cooldownMs,
-    $core.bool? applyTickOffset,
-  }) {
-    final result = create();
-    if (orderType != null) result.orderType = orderType;
-    if (cooldownMs != null) result.cooldownMs = cooldownMs;
-    if (applyTickOffset != null) result.applyTickOffset = applyTickOffset;
-    return result;
-  }
-
-  PairExecConfig._();
-
-  factory PairExecConfig.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PairExecConfig.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairExecConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..e<PairOrderType>(1, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: PairOrderType.PAIR_ORDER_TYPE_UNSPECIFIED, valueOf: PairOrderType.valueOf, enumValues: PairOrderType.values)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOB(3, _omitFieldNames ? '' : 'applyTickOffset')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PairExecConfig clone() => PairExecConfig()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PairExecConfig copyWith(void Function(PairExecConfig) updates) => super.copyWith((message) => updates(message as PairExecConfig)) as PairExecConfig;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PairExecConfig create() => PairExecConfig._();
-  @$core.override
-  PairExecConfig createEmptyInstance() => create();
-  static $pb.PbList<PairExecConfig> createRepeated() => $pb.PbList<PairExecConfig>();
-  @$core.pragma('dart2js:noInline')
-  static PairExecConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairExecConfig>(create);
-  static PairExecConfig? _defaultInstance;
-
-  /// 주문 유형
-  @$pb.TagNumber(1)
-  PairOrderType get orderType => $_getN(0);
-  @$pb.TagNumber(1)
-  set orderType(PairOrderType value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasOrderType() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearOrderType() => $_clearField(1);
-
-  /// 트리거 후 재트리거까지 대기시간 (ms)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get cooldownMs => $_getI64(1);
-  @$pb.TagNumber(2)
-  set cooldownMs($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasCooldownMs() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCooldownMs() => $_clearField(2);
-
-  /// hit 직후 지정가 조정 여부
-  @$pb.TagNumber(3)
-  $core.bool get applyTickOffset => $_getBF(2);
-  @$pb.TagNumber(3)
-  set applyTickOffset($core.bool value) => $_setBool(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasApplyTickOffset() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearApplyTickOffset() => $_clearField(3);
-}
-
 enum PairMode_Kind {
   simultaneousCompare, 
   pricingMakerTaker, 
@@ -801,6 +697,7 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
     $core.double? imbalanceRecoveryRatio,
     $fixnum.Int64? settleTimeoutMs,
     $fixnum.Int64? reconcileAlertAmount,
+    $fixnum.Int64? cooldownMs,
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
@@ -809,6 +706,7 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
     if (imbalanceRecoveryRatio != null) result.imbalanceRecoveryRatio = imbalanceRecoveryRatio;
     if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
     if (reconcileAlertAmount != null) result.reconcileAlertAmount = reconcileAlertAmount;
+    if (cooldownMs != null) result.cooldownMs = cooldownMs;
     return result;
   }
 
@@ -824,6 +722,7 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
     ..a<$core.double>(5, _omitFieldNames ? '' : 'imbalanceRecoveryRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(7, _omitFieldNames ? '' : 'reconcileAlertAmount')
+    ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -905,11 +804,33 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   $core.bool hasReconcileAlertAmount() => $_has(5);
   @$pb.TagNumber(7)
   void clearReconcileAlertAmount() => $_clearField(7);
+
+  /// 트리거 후 재트리거까지 대기시간 (ms)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get cooldownMs => $_getI64(6);
+  @$pb.TagNumber(8)
+  set cooldownMs($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCooldownMs() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearCooldownMs() => $_clearField(8);
 }
 
-/// SimultaneousCompare 모드 설정 (현재 파라미터 없음)
+/// SimultaneousCompare 모드 설정
 class SimultaneousCompare extends $pb.GeneratedMessage {
-  factory SimultaneousCompare() => create();
+  factory SimultaneousCompare({
+    PairCondition? condition,
+    PairOrderType? orderType,
+    $fixnum.Int64? cooldownMs,
+    $core.bool? applyTickOffset,
+  }) {
+    final result = create();
+    if (condition != null) result.condition = condition;
+    if (orderType != null) result.orderType = orderType;
+    if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    if (applyTickOffset != null) result.applyTickOffset = applyTickOffset;
+    return result;
+  }
 
   SimultaneousCompare._();
 
@@ -917,6 +838,10 @@ class SimultaneousCompare extends $pb.GeneratedMessage {
   factory SimultaneousCompare.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SimultaneousCompare', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aOM<PairCondition>(1, _omitFieldNames ? '' : 'condition', subBuilder: PairCondition.create)
+    ..e<PairOrderType>(2, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: PairOrderType.PAIR_ORDER_TYPE_UNSPECIFIED, valueOf: PairOrderType.valueOf, enumValues: PairOrderType.values)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(4, _omitFieldNames ? '' : 'applyTickOffset')
     ..hasRequiredFields = false
   ;
 
@@ -936,6 +861,48 @@ class SimultaneousCompare extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SimultaneousCompare getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SimultaneousCompare>(create);
   static SimultaneousCompare? _defaultInstance;
+
+  /// 가격 비교 조건
+  @$pb.TagNumber(1)
+  PairCondition get condition => $_getN(0);
+  @$pb.TagNumber(1)
+  set condition(PairCondition value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCondition() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCondition() => $_clearField(1);
+  @$pb.TagNumber(1)
+  PairCondition ensureCondition() => $_ensure(0);
+
+  /// 주문 유형
+  @$pb.TagNumber(2)
+  PairOrderType get orderType => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderType(PairOrderType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasOrderType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderType() => $_clearField(2);
+
+  /// 트리거 후 재트리거까지 대기시간 (ms)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get cooldownMs => $_getI64(2);
+  @$pb.TagNumber(3)
+  set cooldownMs($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCooldownMs() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCooldownMs() => $_clearField(3);
+
+  /// hit 직후 지정가 조정 여부
+  @$pb.TagNumber(4)
+  $core.bool get applyTickOffset => $_getBF(3);
+  @$pb.TagNumber(4)
+  set applyTickOffset($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasApplyTickOffset() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearApplyTickOffset() => $_clearField(4);
 }
 
 /// PricingMakerTaker 모드 설정
