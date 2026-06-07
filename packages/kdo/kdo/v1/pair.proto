@@ -347,7 +347,33 @@ message PairMode {
     SimultaneousCompare simultaneous_compare = 1;
     // 신규: pricer 시세 기반 maker 호가 유지 + 체결 시 taker 헷지
     PricingMakerTaker pricing_maker_taker = 2;
+    // 신규: base maker 호가 유지, counter IOC 헷지 + 잔량 추적 처리
+    BaseMakeCounterIocAndBalance base_make_counter_ioc_and_balance = 3;
   }
+}
+
+// BaseMakeCounterIocAndBalance 모드 설정
+message BaseMakeCounterIocAndBalance {
+  // pricer → maker 가격 환산 방식
+  PairPricingMethod pricing = 1;
+
+  // 헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)
+  double hedge_ratio = 2;
+
+  // counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
+  bool counter_inverse = 3;
+
+  // IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
+  double imbalance_threshold_ratio = 4;
+
+  // 불균형 회복 목표 비율 (재발주 시 목표 충족 비율)
+  double imbalance_recovery_ratio = 5;
+
+  // 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
+  uint64 settle_timeout_ms = 6;
+
+  // 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
+  int64 reconcile_alert_amount = 7;
 }
 
 // SimultaneousCompare 모드 설정 (현재 파라미터 없음)

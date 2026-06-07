@@ -159,7 +159,7 @@ pub struct PairExecConfig {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PairMode {
-    #[prost(oneof="pair_mode::Kind", tags="1, 2")]
+    #[prost(oneof="pair_mode::Kind", tags="1, 2, 3")]
     pub kind: ::core::option::Option<pair_mode::Kind>,
 }
 /// Nested message and enum types in `PairMode`.
@@ -173,7 +173,36 @@ pub mod pair_mode {
         /// 신규: pricer 시세 기반 maker 호가 유지 + 체결 시 taker 헷지
         #[prost(message, tag="2")]
         PricingMakerTaker(super::PricingMakerTaker),
+        /// 신규: base maker 호가 유지, counter IOC 헷지 + 잔량 추적 처리
+        #[prost(message, tag="3")]
+        BaseMakeCounterIocAndBalance(super::BaseMakeCounterIocAndBalance),
     }
+}
+/// BaseMakeCounterIocAndBalance 모드 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct BaseMakeCounterIocAndBalance {
+    /// pricer → maker 가격 환산 방식
+    #[prost(message, optional, tag="1")]
+    pub pricing: ::core::option::Option<PairPricingMethod>,
+    /// 헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)
+    #[prost(double, tag="2")]
+    pub hedge_ratio: f64,
+    /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
+    #[prost(bool, tag="3")]
+    pub counter_inverse: bool,
+    /// IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
+    #[prost(double, tag="4")]
+    pub imbalance_threshold_ratio: f64,
+    /// 불균형 회복 목표 비율 (재발주 시 목표 충족 비율)
+    #[prost(double, tag="5")]
+    pub imbalance_recovery_ratio: f64,
+    /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
+    #[prost(uint64, tag="6")]
+    pub settle_timeout_ms: u64,
+    /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
+    #[prost(int64, tag="7")]
+    pub reconcile_alert_amount: i64,
 }
 /// SimultaneousCompare 모드 설정 (현재 파라미터 없음)
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -338,6 +338,7 @@ const PairMode$json = {
   '2': [
     {'1': 'simultaneous_compare', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.SimultaneousCompare', '9': 0, '10': 'simultaneousCompare'},
     {'1': 'pricing_maker_taker', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.PricingMakerTaker', '9': 0, '10': 'pricingMakerTaker'},
+    {'1': 'base_make_counter_ioc_and_balance', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.BaseMakeCounterIocAndBalance', '9': 0, '10': 'baseMakeCounterIocAndBalance'},
   ],
   '8': [
     {'1': 'kind'},
@@ -349,7 +350,33 @@ final $typed_data.Uint8List pairModeDescriptor = $convert.base64Decode(
     'CghQYWlyTW9kZRJVChRzaW11bHRhbmVvdXNfY29tcGFyZRgBIAEoCzIgLmtkby52MS5wYWlyLl'
     'NpbXVsdGFuZW91c0NvbXBhcmVIAFITc2ltdWx0YW5lb3VzQ29tcGFyZRJQChNwcmljaW5nX21h'
     'a2VyX3Rha2VyGAIgASgLMh4ua2RvLnYxLnBhaXIuUHJpY2luZ01ha2VyVGFrZXJIAFIRcHJpY2'
-    'luZ01ha2VyVGFrZXJCBgoEa2luZA==');
+    'luZ01ha2VyVGFrZXISdAohYmFzZV9tYWtlX2NvdW50ZXJfaW9jX2FuZF9iYWxhbmNlGAMgASgL'
+    'Mikua2RvLnYxLnBhaXIuQmFzZU1ha2VDb3VudGVySW9jQW5kQmFsYW5jZUgAUhxiYXNlTWFrZU'
+    'NvdW50ZXJJb2NBbmRCYWxhbmNlQgYKBGtpbmQ=');
+
+@$core.Deprecated('Use baseMakeCounterIocAndBalanceDescriptor instead')
+const BaseMakeCounterIocAndBalance$json = {
+  '1': 'BaseMakeCounterIocAndBalance',
+  '2': [
+    {'1': 'pricing', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairPricingMethod', '10': 'pricing'},
+    {'1': 'hedge_ratio', '3': 2, '4': 1, '5': 1, '10': 'hedgeRatio'},
+    {'1': 'counter_inverse', '3': 3, '4': 1, '5': 8, '10': 'counterInverse'},
+    {'1': 'imbalance_threshold_ratio', '3': 4, '4': 1, '5': 1, '10': 'imbalanceThresholdRatio'},
+    {'1': 'imbalance_recovery_ratio', '3': 5, '4': 1, '5': 1, '10': 'imbalanceRecoveryRatio'},
+    {'1': 'settle_timeout_ms', '3': 6, '4': 1, '5': 4, '10': 'settleTimeoutMs'},
+    {'1': 'reconcile_alert_amount', '3': 7, '4': 1, '5': 3, '10': 'reconcileAlertAmount'},
+  ],
+};
+
+/// Descriptor for `BaseMakeCounterIocAndBalance`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List baseMakeCounterIocAndBalanceDescriptor = $convert.base64Decode(
+    'ChxCYXNlTWFrZUNvdW50ZXJJb2NBbmRCYWxhbmNlEjgKB3ByaWNpbmcYASABKAsyHi5rZG8udj'
+    'EucGFpci5QYWlyUHJpY2luZ01ldGhvZFIHcHJpY2luZxIfCgtoZWRnZV9yYXRpbxgCIAEoAVIK'
+    'aGVkZ2VSYXRpbxInCg9jb3VudGVyX2ludmVyc2UYAyABKAhSDmNvdW50ZXJJbnZlcnNlEjoKGW'
+    'ltYmFsYW5jZV90aHJlc2hvbGRfcmF0aW8YBCABKAFSF2ltYmFsYW5jZVRocmVzaG9sZFJhdGlv'
+    'EjgKGGltYmFsYW5jZV9yZWNvdmVyeV9yYXRpbxgFIAEoAVIWaW1iYWxhbmNlUmVjb3ZlcnlSYX'
+    'RpbxIqChFzZXR0bGVfdGltZW91dF9tcxgGIAEoBFIPc2V0dGxlVGltZW91dE1zEjQKFnJlY29u'
+    'Y2lsZV9hbGVydF9hbW91bnQYByABKANSFHJlY29uY2lsZUFsZXJ0QW1vdW50');
 
 @$core.Deprecated('Use simultaneousCompareDescriptor instead')
 const SimultaneousCompare$json = {

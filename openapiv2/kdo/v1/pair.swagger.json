@@ -543,6 +543,45 @@
     }
   },
   "definitions": {
+    "pairBaseMakeCounterIocAndBalance": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "$ref": "#/definitions/pairPairPricingMethod",
+          "title": "pricer → maker 가격 환산 방식"
+        },
+        "hedgeRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)"
+        },
+        "counterInverse": {
+          "type": "boolean",
+          "title": "counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)"
+        },
+        "imbalanceThresholdRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)"
+        },
+        "imbalanceRecoveryRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "불균형 회복 목표 비율 (재발주 시 목표 충족 비율)"
+        },
+        "settleTimeoutMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)"
+        },
+        "reconcileAlertAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)"
+        }
+      },
+      "title": "BaseMakeCounterIocAndBalance 모드 설정"
+    },
     "pairEtfNavKind": {
       "type": "string",
       "enum": [
@@ -982,6 +1021,10 @@
         "pricingMakerTaker": {
           "$ref": "#/definitions/pairPricingMakerTaker",
           "title": "신규: pricer 시세 기반 maker 호가 유지 + 체결 시 taker 헷지"
+        },
+        "baseMakeCounterIocAndBalance": {
+          "$ref": "#/definitions/pairBaseMakeCounterIocAndBalance",
+          "title": "신규: base maker 호가 유지, counter IOC 헷지 + 잔량 추적 처리"
         }
       },
       "title": "Pair 실행 모드"

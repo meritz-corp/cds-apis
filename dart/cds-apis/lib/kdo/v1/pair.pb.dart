@@ -698,6 +698,7 @@ class PairExecConfig extends $pb.GeneratedMessage {
 enum PairMode_Kind {
   simultaneousCompare, 
   pricingMakerTaker, 
+  baseMakeCounterIocAndBalance, 
   notSet
 }
 
@@ -706,10 +707,12 @@ class PairMode extends $pb.GeneratedMessage {
   factory PairMode({
     SimultaneousCompare? simultaneousCompare,
     PricingMakerTaker? pricingMakerTaker,
+    BaseMakeCounterIocAndBalance? baseMakeCounterIocAndBalance,
   }) {
     final result = create();
     if (simultaneousCompare != null) result.simultaneousCompare = simultaneousCompare;
     if (pricingMakerTaker != null) result.pricingMakerTaker = pricingMakerTaker;
+    if (baseMakeCounterIocAndBalance != null) result.baseMakeCounterIocAndBalance = baseMakeCounterIocAndBalance;
     return result;
   }
 
@@ -721,12 +724,14 @@ class PairMode extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, PairMode_Kind> _PairMode_KindByTag = {
     1 : PairMode_Kind.simultaneousCompare,
     2 : PairMode_Kind.pricingMakerTaker,
+    3 : PairMode_Kind.baseMakeCounterIocAndBalance,
     0 : PairMode_Kind.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairMode', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2, 3])
     ..aOM<SimultaneousCompare>(1, _omitFieldNames ? '' : 'simultaneousCompare', subBuilder: SimultaneousCompare.create)
     ..aOM<PricingMakerTaker>(2, _omitFieldNames ? '' : 'pricingMakerTaker', subBuilder: PricingMakerTaker.create)
+    ..aOM<BaseMakeCounterIocAndBalance>(3, _omitFieldNames ? '' : 'baseMakeCounterIocAndBalance', subBuilder: BaseMakeCounterIocAndBalance.create)
     ..hasRequiredFields = false
   ;
 
@@ -773,6 +778,146 @@ class PairMode extends $pb.GeneratedMessage {
   void clearPricingMakerTaker() => $_clearField(2);
   @$pb.TagNumber(2)
   PricingMakerTaker ensurePricingMakerTaker() => $_ensure(1);
+
+  /// 신규: base maker 호가 유지, counter IOC 헷지 + 잔량 추적 처리
+  @$pb.TagNumber(3)
+  BaseMakeCounterIocAndBalance get baseMakeCounterIocAndBalance => $_getN(2);
+  @$pb.TagNumber(3)
+  set baseMakeCounterIocAndBalance(BaseMakeCounterIocAndBalance value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBaseMakeCounterIocAndBalance() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBaseMakeCounterIocAndBalance() => $_clearField(3);
+  @$pb.TagNumber(3)
+  BaseMakeCounterIocAndBalance ensureBaseMakeCounterIocAndBalance() => $_ensure(2);
+}
+
+/// BaseMakeCounterIocAndBalance 모드 설정
+class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
+  factory BaseMakeCounterIocAndBalance({
+    PairPricingMethod? pricing,
+    $core.double? hedgeRatio,
+    $core.bool? counterInverse,
+    $core.double? imbalanceThresholdRatio,
+    $core.double? imbalanceRecoveryRatio,
+    $fixnum.Int64? settleTimeoutMs,
+    $fixnum.Int64? reconcileAlertAmount,
+  }) {
+    final result = create();
+    if (pricing != null) result.pricing = pricing;
+    if (hedgeRatio != null) result.hedgeRatio = hedgeRatio;
+    if (counterInverse != null) result.counterInverse = counterInverse;
+    if (imbalanceThresholdRatio != null) result.imbalanceThresholdRatio = imbalanceThresholdRatio;
+    if (imbalanceRecoveryRatio != null) result.imbalanceRecoveryRatio = imbalanceRecoveryRatio;
+    if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
+    if (reconcileAlertAmount != null) result.reconcileAlertAmount = reconcileAlertAmount;
+    return result;
+  }
+
+  BaseMakeCounterIocAndBalance._();
+
+  factory BaseMakeCounterIocAndBalance.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BaseMakeCounterIocAndBalance.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterIocAndBalance', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aOM<PairPricingMethod>(1, _omitFieldNames ? '' : 'pricing', subBuilder: PairPricingMethod.create)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'hedgeRatio', $pb.PbFieldType.OD)
+    ..aOB(3, _omitFieldNames ? '' : 'counterInverse')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'imbalanceThresholdRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'imbalanceRecoveryRatio', $pb.PbFieldType.OD)
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(7, _omitFieldNames ? '' : 'reconcileAlertAmount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BaseMakeCounterIocAndBalance clone() => BaseMakeCounterIocAndBalance()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BaseMakeCounterIocAndBalance copyWith(void Function(BaseMakeCounterIocAndBalance) updates) => super.copyWith((message) => updates(message as BaseMakeCounterIocAndBalance)) as BaseMakeCounterIocAndBalance;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BaseMakeCounterIocAndBalance create() => BaseMakeCounterIocAndBalance._();
+  @$core.override
+  BaseMakeCounterIocAndBalance createEmptyInstance() => create();
+  static $pb.PbList<BaseMakeCounterIocAndBalance> createRepeated() => $pb.PbList<BaseMakeCounterIocAndBalance>();
+  @$core.pragma('dart2js:noInline')
+  static BaseMakeCounterIocAndBalance getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BaseMakeCounterIocAndBalance>(create);
+  static BaseMakeCounterIocAndBalance? _defaultInstance;
+
+  /// pricer → maker 가격 환산 방식
+  @$pb.TagNumber(1)
+  PairPricingMethod get pricing => $_getN(0);
+  @$pb.TagNumber(1)
+  set pricing(PairPricingMethod value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPricing() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPricing() => $_clearField(1);
+  @$pb.TagNumber(1)
+  PairPricingMethod ensurePricing() => $_ensure(0);
+
+  /// 헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)
+  @$pb.TagNumber(2)
+  $core.double get hedgeRatio => $_getN(1);
+  @$pb.TagNumber(2)
+  set hedgeRatio($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasHedgeRatio() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHedgeRatio() => $_clearField(2);
+
+  /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
+  @$pb.TagNumber(3)
+  $core.bool get counterInverse => $_getBF(2);
+  @$pb.TagNumber(3)
+  set counterInverse($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCounterInverse() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCounterInverse() => $_clearField(3);
+
+  /// IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
+  @$pb.TagNumber(4)
+  $core.double get imbalanceThresholdRatio => $_getN(3);
+  @$pb.TagNumber(4)
+  set imbalanceThresholdRatio($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasImbalanceThresholdRatio() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearImbalanceThresholdRatio() => $_clearField(4);
+
+  /// 불균형 회복 목표 비율 (재발주 시 목표 충족 비율)
+  @$pb.TagNumber(5)
+  $core.double get imbalanceRecoveryRatio => $_getN(4);
+  @$pb.TagNumber(5)
+  set imbalanceRecoveryRatio($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasImbalanceRecoveryRatio() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearImbalanceRecoveryRatio() => $_clearField(5);
+
+  /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get settleTimeoutMs => $_getI64(5);
+  @$pb.TagNumber(6)
+  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSettleTimeoutMs() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSettleTimeoutMs() => $_clearField(6);
+
+  /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get reconcileAlertAmount => $_getI64(6);
+  @$pb.TagNumber(7)
+  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasReconcileAlertAmount() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearReconcileAlertAmount() => $_clearField(7);
 }
 
 /// SimultaneousCompare 모드 설정 (현재 파라미터 없음)
