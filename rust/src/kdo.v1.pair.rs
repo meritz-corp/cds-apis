@@ -158,9 +158,6 @@ pub mod pair_mode {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BaseMakeCounterIocAndBalance {
-    /// pricer → maker 가격 환산 방식
-    #[prost(message, optional, tag="1")]
-    pub pricing: ::core::option::Option<PairPricingMethod>,
     /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
     #[prost(bool, tag="3")]
     pub counter_inverse: bool,
@@ -179,6 +176,15 @@ pub struct BaseMakeCounterIocAndBalance {
     /// 트리거 후 재트리거까지 대기시간 (ms)
     #[prost(uint64, tag="8")]
     pub cooldown_ms: u64,
+    /// NAV 계산 공식 종류 (서버 런타임에 PricingContext 엔티티 조회, proto엔 종류만 지정)
+    #[prost(enumeration="EtfNavKind", tag="9")]
+    pub nav_kind: i32,
+    /// Bid quote 산출용 basis 오프셋 (원, raw int64)
+    #[prost(int64, tag="10")]
+    pub bid_basis: i64,
+    /// Ask quote 산출용 basis 오프셋 (원, raw int64)
+    #[prost(int64, tag="11")]
+    pub ask_basis: i64,
 }
 /// SimultaneousCompare 모드 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

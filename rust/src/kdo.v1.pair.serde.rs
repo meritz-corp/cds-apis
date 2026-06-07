@@ -123,10 +123,13 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalance", len)?;
-        if let Some(v) = self.pricing.as_ref() {
-            struct_ser.serialize_field("pricing", v)?;
+        if true {
+            len += 1;
         }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalance", len)?;
         if true {
             struct_ser.serialize_field("counter_inverse", &self.counter_inverse)?;
         }
@@ -151,6 +154,21 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
         }
+        if true {
+            let v = EtfNavKind::try_from(self.nav_kind)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.nav_kind)))?;
+            struct_ser.serialize_field("nav_kind", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_basis", ToString::to_string(&self.bid_basis).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -161,7 +179,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "pricing",
             "counter_inverse",
             "counterInverse",
             "imbalance_threshold_ratio",
@@ -174,17 +191,25 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
             "reconcileAlertAmount",
             "cooldown_ms",
             "cooldownMs",
+            "nav_kind",
+            "navKind",
+            "bid_basis",
+            "bidBasis",
+            "ask_basis",
+            "askBasis",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Pricing,
             CounterInverse,
             ImbalanceThresholdRatio,
             ImbalanceRecoveryRatio,
             SettleTimeoutMs,
             ReconcileAlertAmount,
             CooldownMs,
+            NavKind,
+            BidBasis,
+            AskBasis,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -207,13 +232,15 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                         E: serde::de::Error,
                     {
                         match value {
-                            "pricing" => Ok(GeneratedField::Pricing),
                             "counterInverse" | "counter_inverse" => Ok(GeneratedField::CounterInverse),
                             "imbalanceThresholdRatio" | "imbalance_threshold_ratio" => Ok(GeneratedField::ImbalanceThresholdRatio),
                             "imbalanceRecoveryRatio" | "imbalance_recovery_ratio" => Ok(GeneratedField::ImbalanceRecoveryRatio),
                             "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
                             "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
                             "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -233,21 +260,17 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut pricing__ = None;
                 let mut counter_inverse__ = None;
                 let mut imbalance_threshold_ratio__ = None;
                 let mut imbalance_recovery_ratio__ = None;
                 let mut settle_timeout_ms__ = None;
                 let mut reconcile_alert_amount__ = None;
                 let mut cooldown_ms__ = None;
+                let mut nav_kind__ = None;
+                let mut bid_basis__ = None;
+                let mut ask_basis__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Pricing => {
-                            if pricing__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pricing"));
-                            }
-                            pricing__ = map_.next_value()?;
-                        }
                         GeneratedField::CounterInverse => {
                             if counter_inverse__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("counterInverse"));
@@ -294,19 +317,43 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::NavKind => {
+                            if nav_kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("navKind"));
+                            }
+                            nav_kind__ = Some(map_.next_value::<EtfNavKind>()? as i32);
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
+                            }
+                            ask_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
                 Ok(BaseMakeCounterIocAndBalance {
-                    pricing: pricing__,
                     counter_inverse: counter_inverse__.unwrap_or_default(),
                     imbalance_threshold_ratio: imbalance_threshold_ratio__.unwrap_or_default(),
                     imbalance_recovery_ratio: imbalance_recovery_ratio__.unwrap_or_default(),
                     settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
                     reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
                     cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                    nav_kind: nav_kind__.unwrap_or_default(),
+                    bid_basis: bid_basis__.unwrap_or_default(),
+                    ask_basis: ask_basis__.unwrap_or_default(),
                 })
             }
         }

@@ -343,30 +343,34 @@ final $typed_data.Uint8List pairModeDescriptor = $convert.base64Decode(
 const BaseMakeCounterIocAndBalance$json = {
   '1': 'BaseMakeCounterIocAndBalance',
   '2': [
-    {'1': 'pricing', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairPricingMethod', '10': 'pricing'},
     {'1': 'counter_inverse', '3': 3, '4': 1, '5': 8, '10': 'counterInverse'},
     {'1': 'imbalance_threshold_ratio', '3': 4, '4': 1, '5': 1, '10': 'imbalanceThresholdRatio'},
     {'1': 'imbalance_recovery_ratio', '3': 5, '4': 1, '5': 1, '10': 'imbalanceRecoveryRatio'},
     {'1': 'settle_timeout_ms', '3': 6, '4': 1, '5': 4, '10': 'settleTimeoutMs'},
     {'1': 'reconcile_alert_amount', '3': 7, '4': 1, '5': 3, '10': 'reconcileAlertAmount'},
     {'1': 'cooldown_ms', '3': 8, '4': 1, '5': 4, '10': 'cooldownMs'},
+    {'1': 'nav_kind', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
+    {'1': 'bid_basis', '3': 10, '4': 1, '5': 3, '10': 'bidBasis'},
+    {'1': 'ask_basis', '3': 11, '4': 1, '5': 3, '10': 'askBasis'},
   ],
   '9': [
+    {'1': 1, '2': 2},
     {'1': 2, '2': 3},
   ],
-  '10': ['hedge_ratio'],
+  '10': ['pricing', 'hedge_ratio'],
 };
 
 /// Descriptor for `BaseMakeCounterIocAndBalance`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List baseMakeCounterIocAndBalanceDescriptor = $convert.base64Decode(
-    'ChxCYXNlTWFrZUNvdW50ZXJJb2NBbmRCYWxhbmNlEjgKB3ByaWNpbmcYASABKAsyHi5rZG8udj'
-    'EucGFpci5QYWlyUHJpY2luZ01ldGhvZFIHcHJpY2luZxInCg9jb3VudGVyX2ludmVyc2UYAyAB'
-    'KAhSDmNvdW50ZXJJbnZlcnNlEjoKGWltYmFsYW5jZV90aHJlc2hvbGRfcmF0aW8YBCABKAFSF2'
-    'ltYmFsYW5jZVRocmVzaG9sZFJhdGlvEjgKGGltYmFsYW5jZV9yZWNvdmVyeV9yYXRpbxgFIAEo'
-    'AVIWaW1iYWxhbmNlUmVjb3ZlcnlSYXRpbxIqChFzZXR0bGVfdGltZW91dF9tcxgGIAEoBFIPc2'
-    'V0dGxlVGltZW91dE1zEjQKFnJlY29uY2lsZV9hbGVydF9hbW91bnQYByABKANSFHJlY29uY2ls'
-    'ZUFsZXJ0QW1vdW50Eh8KC2Nvb2xkb3duX21zGAggASgEUgpjb29sZG93bk1zSgQIAhADUgtoZW'
-    'RnZV9yYXRpbw==');
+    'ChxCYXNlTWFrZUNvdW50ZXJJb2NBbmRCYWxhbmNlEicKD2NvdW50ZXJfaW52ZXJzZRgDIAEoCF'
+    'IOY291bnRlckludmVyc2USOgoZaW1iYWxhbmNlX3RocmVzaG9sZF9yYXRpbxgEIAEoAVIXaW1i'
+    'YWxhbmNlVGhyZXNob2xkUmF0aW8SOAoYaW1iYWxhbmNlX3JlY292ZXJ5X3JhdGlvGAUgASgBUh'
+    'ZpbWJhbGFuY2VSZWNvdmVyeVJhdGlvEioKEXNldHRsZV90aW1lb3V0X21zGAYgASgEUg9zZXR0'
+    'bGVUaW1lb3V0TXMSNAoWcmVjb25jaWxlX2FsZXJ0X2Ftb3VudBgHIAEoA1IUcmVjb25jaWxlQW'
+    'xlcnRBbW91bnQSHwoLY29vbGRvd25fbXMYCCABKARSCmNvb2xkb3duTXMSMgoIbmF2X2tpbmQY'
+    'CSABKA4yFy5rZG8udjEucGFpci5FdGZOYXZLaW5kUgduYXZLaW5kEhsKCWJpZF9iYXNpcxgKIA'
+    'EoA1IIYmlkQmFzaXMSGwoJYXNrX2Jhc2lzGAsgASgDUghhc2tCYXNpc0oECAEQAkoECAIQA1IH'
+    'cHJpY2luZ1ILaGVkZ2VfcmF0aW8=');
 
 @$core.Deprecated('Use simultaneousCompareDescriptor instead')
 const SimultaneousCompare$json = {

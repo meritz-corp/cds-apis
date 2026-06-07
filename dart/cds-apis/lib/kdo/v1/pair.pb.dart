@@ -691,22 +691,26 @@ class PairMode extends $pb.GeneratedMessage {
 /// BaseMakeCounterIocAndBalance 모드 설정
 class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalance({
-    PairPricingMethod? pricing,
     $core.bool? counterInverse,
     $core.double? imbalanceThresholdRatio,
     $core.double? imbalanceRecoveryRatio,
     $fixnum.Int64? settleTimeoutMs,
     $fixnum.Int64? reconcileAlertAmount,
     $fixnum.Int64? cooldownMs,
+    EtfNavKind? navKind,
+    $fixnum.Int64? bidBasis,
+    $fixnum.Int64? askBasis,
   }) {
     final result = create();
-    if (pricing != null) result.pricing = pricing;
     if (counterInverse != null) result.counterInverse = counterInverse;
     if (imbalanceThresholdRatio != null) result.imbalanceThresholdRatio = imbalanceThresholdRatio;
     if (imbalanceRecoveryRatio != null) result.imbalanceRecoveryRatio = imbalanceRecoveryRatio;
     if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
     if (reconcileAlertAmount != null) result.reconcileAlertAmount = reconcileAlertAmount;
     if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    if (navKind != null) result.navKind = navKind;
+    if (bidBasis != null) result.bidBasis = bidBasis;
+    if (askBasis != null) result.askBasis = askBasis;
     return result;
   }
 
@@ -716,13 +720,15 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalance.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterIocAndBalance', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..aOM<PairPricingMethod>(1, _omitFieldNames ? '' : 'pricing', subBuilder: PairPricingMethod.create)
     ..aOB(3, _omitFieldNames ? '' : 'counterInverse')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'imbalanceThresholdRatio', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'imbalanceRecoveryRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(7, _omitFieldNames ? '' : 'reconcileAlertAmount')
     ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..e<EtfNavKind>(9, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
+    ..aInt64(10, _omitFieldNames ? '' : 'bidBasis')
+    ..aInt64(11, _omitFieldNames ? '' : 'askBasis')
     ..hasRequiredFields = false
   ;
 
@@ -743,77 +749,95 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   static BaseMakeCounterIocAndBalance getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BaseMakeCounterIocAndBalance>(create);
   static BaseMakeCounterIocAndBalance? _defaultInstance;
 
-  /// pricer → maker 가격 환산 방식
-  @$pb.TagNumber(1)
-  PairPricingMethod get pricing => $_getN(0);
-  @$pb.TagNumber(1)
-  set pricing(PairPricingMethod value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasPricing() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPricing() => $_clearField(1);
-  @$pb.TagNumber(1)
-  PairPricingMethod ensurePricing() => $_ensure(0);
-
   /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
   @$pb.TagNumber(3)
-  $core.bool get counterInverse => $_getBF(1);
+  $core.bool get counterInverse => $_getBF(0);
   @$pb.TagNumber(3)
-  set counterInverse($core.bool value) => $_setBool(1, value);
+  set counterInverse($core.bool value) => $_setBool(0, value);
   @$pb.TagNumber(3)
-  $core.bool hasCounterInverse() => $_has(1);
+  $core.bool hasCounterInverse() => $_has(0);
   @$pb.TagNumber(3)
   void clearCounterInverse() => $_clearField(3);
 
   /// IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
   @$pb.TagNumber(4)
-  $core.double get imbalanceThresholdRatio => $_getN(2);
+  $core.double get imbalanceThresholdRatio => $_getN(1);
   @$pb.TagNumber(4)
-  set imbalanceThresholdRatio($core.double value) => $_setDouble(2, value);
+  set imbalanceThresholdRatio($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(4)
-  $core.bool hasImbalanceThresholdRatio() => $_has(2);
+  $core.bool hasImbalanceThresholdRatio() => $_has(1);
   @$pb.TagNumber(4)
   void clearImbalanceThresholdRatio() => $_clearField(4);
 
   /// 불균형 회복 목표 비율 (재발주 시 목표 충족 비율)
   @$pb.TagNumber(5)
-  $core.double get imbalanceRecoveryRatio => $_getN(3);
+  $core.double get imbalanceRecoveryRatio => $_getN(2);
   @$pb.TagNumber(5)
-  set imbalanceRecoveryRatio($core.double value) => $_setDouble(3, value);
+  set imbalanceRecoveryRatio($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(5)
-  $core.bool hasImbalanceRecoveryRatio() => $_has(3);
+  $core.bool hasImbalanceRecoveryRatio() => $_has(2);
   @$pb.TagNumber(5)
   void clearImbalanceRecoveryRatio() => $_clearField(5);
 
   /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get settleTimeoutMs => $_getI64(4);
+  $fixnum.Int64 get settleTimeoutMs => $_getI64(3);
   @$pb.TagNumber(6)
-  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(4, value);
+  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(6)
-  $core.bool hasSettleTimeoutMs() => $_has(4);
+  $core.bool hasSettleTimeoutMs() => $_has(3);
   @$pb.TagNumber(6)
   void clearSettleTimeoutMs() => $_clearField(6);
 
   /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get reconcileAlertAmount => $_getI64(5);
+  $fixnum.Int64 get reconcileAlertAmount => $_getI64(4);
   @$pb.TagNumber(7)
-  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(5, value);
+  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(7)
-  $core.bool hasReconcileAlertAmount() => $_has(5);
+  $core.bool hasReconcileAlertAmount() => $_has(4);
   @$pb.TagNumber(7)
   void clearReconcileAlertAmount() => $_clearField(7);
 
   /// 트리거 후 재트리거까지 대기시간 (ms)
   @$pb.TagNumber(8)
-  $fixnum.Int64 get cooldownMs => $_getI64(6);
+  $fixnum.Int64 get cooldownMs => $_getI64(5);
   @$pb.TagNumber(8)
-  set cooldownMs($fixnum.Int64 value) => $_setInt64(6, value);
+  set cooldownMs($fixnum.Int64 value) => $_setInt64(5, value);
   @$pb.TagNumber(8)
-  $core.bool hasCooldownMs() => $_has(6);
+  $core.bool hasCooldownMs() => $_has(5);
   @$pb.TagNumber(8)
   void clearCooldownMs() => $_clearField(8);
+
+  /// NAV 계산 공식 종류 (서버 런타임에 PricingContext 엔티티 조회, proto엔 종류만 지정)
+  @$pb.TagNumber(9)
+  EtfNavKind get navKind => $_getN(6);
+  @$pb.TagNumber(9)
+  set navKind(EtfNavKind value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasNavKind() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearNavKind() => $_clearField(9);
+
+  /// Bid quote 산출용 basis 오프셋 (원, raw int64)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get bidBasis => $_getI64(7);
+  @$pb.TagNumber(10)
+  set bidBasis($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(10)
+  $core.bool hasBidBasis() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearBidBasis() => $_clearField(10);
+
+  /// Ask quote 산출용 basis 오프셋 (원, raw int64)
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get askBasis => $_getI64(8);
+  @$pb.TagNumber(11)
+  set askBasis($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(11)
+  $core.bool hasAskBasis() => $_has(8);
+  @$pb.TagNumber(11)
+  void clearAskBasis() => $_clearField(11);
 }
 
 /// SimultaneousCompare 모드 설정
