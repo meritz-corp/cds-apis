@@ -120,15 +120,9 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalance", len)?;
         if let Some(v) = self.pricing.as_ref() {
             struct_ser.serialize_field("pricing", v)?;
-        }
-        if true {
-            struct_ser.serialize_field("hedge_ratio", &self.hedge_ratio)?;
         }
         if true {
             struct_ser.serialize_field("counter_inverse", &self.counter_inverse)?;
@@ -160,8 +154,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
     {
         const FIELDS: &[&str] = &[
             "pricing",
-            "hedge_ratio",
-            "hedgeRatio",
             "counter_inverse",
             "counterInverse",
             "imbalance_threshold_ratio",
@@ -177,7 +169,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Pricing,
-            HedgeRatio,
             CounterInverse,
             ImbalanceThresholdRatio,
             ImbalanceRecoveryRatio,
@@ -206,7 +197,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                     {
                         match value {
                             "pricing" => Ok(GeneratedField::Pricing),
-                            "hedgeRatio" | "hedge_ratio" => Ok(GeneratedField::HedgeRatio),
                             "counterInverse" | "counter_inverse" => Ok(GeneratedField::CounterInverse),
                             "imbalanceThresholdRatio" | "imbalance_threshold_ratio" => Ok(GeneratedField::ImbalanceThresholdRatio),
                             "imbalanceRecoveryRatio" | "imbalance_recovery_ratio" => Ok(GeneratedField::ImbalanceRecoveryRatio),
@@ -232,7 +222,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut pricing__ = None;
-                let mut hedge_ratio__ = None;
                 let mut counter_inverse__ = None;
                 let mut imbalance_threshold_ratio__ = None;
                 let mut imbalance_recovery_ratio__ = None;
@@ -245,14 +234,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                                 return Err(serde::de::Error::duplicate_field("pricing"));
                             }
                             pricing__ = map_.next_value()?;
-                        }
-                        GeneratedField::HedgeRatio => {
-                            if hedge_ratio__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeRatio"));
-                            }
-                            hedge_ratio__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
                         }
                         GeneratedField::CounterInverse => {
                             if counter_inverse__.is_some() {
@@ -299,7 +280,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                 }
                 Ok(BaseMakeCounterIocAndBalance {
                     pricing: pricing__,
-                    hedge_ratio: hedge_ratio__.unwrap_or_default(),
                     counter_inverse: counter_inverse__.unwrap_or_default(),
                     imbalance_threshold_ratio: imbalance_threshold_ratio__.unwrap_or_default(),
                     imbalance_recovery_ratio: imbalance_recovery_ratio__.unwrap_or_default(),

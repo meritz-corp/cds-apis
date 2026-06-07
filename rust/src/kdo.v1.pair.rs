@@ -185,9 +185,6 @@ pub struct BaseMakeCounterIocAndBalance {
     /// pricer → maker 가격 환산 방식
     #[prost(message, optional, tag="1")]
     pub pricing: ::core::option::Option<PairPricingMethod>,
-    /// 헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)
-    #[prost(double, tag="2")]
-    pub hedge_ratio: f64,
     /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
     #[prost(bool, tag="3")]
     pub counter_inverse: bool,

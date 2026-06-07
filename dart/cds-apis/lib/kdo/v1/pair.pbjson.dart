@@ -359,24 +359,27 @@ const BaseMakeCounterIocAndBalance$json = {
   '1': 'BaseMakeCounterIocAndBalance',
   '2': [
     {'1': 'pricing', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairPricingMethod', '10': 'pricing'},
-    {'1': 'hedge_ratio', '3': 2, '4': 1, '5': 1, '10': 'hedgeRatio'},
     {'1': 'counter_inverse', '3': 3, '4': 1, '5': 8, '10': 'counterInverse'},
     {'1': 'imbalance_threshold_ratio', '3': 4, '4': 1, '5': 1, '10': 'imbalanceThresholdRatio'},
     {'1': 'imbalance_recovery_ratio', '3': 5, '4': 1, '5': 1, '10': 'imbalanceRecoveryRatio'},
     {'1': 'settle_timeout_ms', '3': 6, '4': 1, '5': 4, '10': 'settleTimeoutMs'},
     {'1': 'reconcile_alert_amount', '3': 7, '4': 1, '5': 3, '10': 'reconcileAlertAmount'},
   ],
+  '9': [
+    {'1': 2, '2': 3},
+  ],
+  '10': ['hedge_ratio'],
 };
 
 /// Descriptor for `BaseMakeCounterIocAndBalance`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List baseMakeCounterIocAndBalanceDescriptor = $convert.base64Decode(
     'ChxCYXNlTWFrZUNvdW50ZXJJb2NBbmRCYWxhbmNlEjgKB3ByaWNpbmcYASABKAsyHi5rZG8udj'
-    'EucGFpci5QYWlyUHJpY2luZ01ldGhvZFIHcHJpY2luZxIfCgtoZWRnZV9yYXRpbxgCIAEoAVIK'
-    'aGVkZ2VSYXRpbxInCg9jb3VudGVyX2ludmVyc2UYAyABKAhSDmNvdW50ZXJJbnZlcnNlEjoKGW'
-    'ltYmFsYW5jZV90aHJlc2hvbGRfcmF0aW8YBCABKAFSF2ltYmFsYW5jZVRocmVzaG9sZFJhdGlv'
-    'EjgKGGltYmFsYW5jZV9yZWNvdmVyeV9yYXRpbxgFIAEoAVIWaW1iYWxhbmNlUmVjb3ZlcnlSYX'
-    'RpbxIqChFzZXR0bGVfdGltZW91dF9tcxgGIAEoBFIPc2V0dGxlVGltZW91dE1zEjQKFnJlY29u'
-    'Y2lsZV9hbGVydF9hbW91bnQYByABKANSFHJlY29uY2lsZUFsZXJ0QW1vdW50');
+    'EucGFpci5QYWlyUHJpY2luZ01ldGhvZFIHcHJpY2luZxInCg9jb3VudGVyX2ludmVyc2UYAyAB'
+    'KAhSDmNvdW50ZXJJbnZlcnNlEjoKGWltYmFsYW5jZV90aHJlc2hvbGRfcmF0aW8YBCABKAFSF2'
+    'ltYmFsYW5jZVRocmVzaG9sZFJhdGlvEjgKGGltYmFsYW5jZV9yZWNvdmVyeV9yYXRpbxgFIAEo'
+    'AVIWaW1iYWxhbmNlUmVjb3ZlcnlSYXRpbxIqChFzZXR0bGVfdGltZW91dF9tcxgGIAEoBFIPc2'
+    'V0dGxlVGltZW91dE1zEjQKFnJlY29uY2lsZV9hbGVydF9hbW91bnQYByABKANSFHJlY29uY2ls'
+    'ZUFsZXJ0QW1vdW50SgQIAhADUgtoZWRnZV9yYXRpbw==');
 
 @$core.Deprecated('Use simultaneousCompareDescriptor instead')
 const SimultaneousCompare$json = {

@@ -550,11 +550,6 @@
           "$ref": "#/definitions/pairPairPricingMethod",
           "title": "pricer → maker 가격 환산 방식"
         },
-        "hedgeRatio": {
-          "type": "number",
-          "format": "double",
-          "title": "헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)"
-        },
         "counterInverse": {
           "type": "boolean",
           "title": "counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)"

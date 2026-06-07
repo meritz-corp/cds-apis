@@ -796,7 +796,6 @@ class PairMode extends $pb.GeneratedMessage {
 class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalance({
     PairPricingMethod? pricing,
-    $core.double? hedgeRatio,
     $core.bool? counterInverse,
     $core.double? imbalanceThresholdRatio,
     $core.double? imbalanceRecoveryRatio,
@@ -805,7 +804,6 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   }) {
     final result = create();
     if (pricing != null) result.pricing = pricing;
-    if (hedgeRatio != null) result.hedgeRatio = hedgeRatio;
     if (counterInverse != null) result.counterInverse = counterInverse;
     if (imbalanceThresholdRatio != null) result.imbalanceThresholdRatio = imbalanceThresholdRatio;
     if (imbalanceRecoveryRatio != null) result.imbalanceRecoveryRatio = imbalanceRecoveryRatio;
@@ -821,7 +819,6 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterIocAndBalance', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..aOM<PairPricingMethod>(1, _omitFieldNames ? '' : 'pricing', subBuilder: PairPricingMethod.create)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'hedgeRatio', $pb.PbFieldType.OD)
     ..aOB(3, _omitFieldNames ? '' : 'counterInverse')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'imbalanceThresholdRatio', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'imbalanceRecoveryRatio', $pb.PbFieldType.OD)
@@ -859,63 +856,53 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   PairPricingMethod ensurePricing() => $_ensure(0);
 
-  /// 헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)
-  @$pb.TagNumber(2)
-  $core.double get hedgeRatio => $_getN(1);
-  @$pb.TagNumber(2)
-  set hedgeRatio($core.double value) => $_setDouble(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasHedgeRatio() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearHedgeRatio() => $_clearField(2);
-
   /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
   @$pb.TagNumber(3)
-  $core.bool get counterInverse => $_getBF(2);
+  $core.bool get counterInverse => $_getBF(1);
   @$pb.TagNumber(3)
-  set counterInverse($core.bool value) => $_setBool(2, value);
+  set counterInverse($core.bool value) => $_setBool(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasCounterInverse() => $_has(2);
+  $core.bool hasCounterInverse() => $_has(1);
   @$pb.TagNumber(3)
   void clearCounterInverse() => $_clearField(3);
 
   /// IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
   @$pb.TagNumber(4)
-  $core.double get imbalanceThresholdRatio => $_getN(3);
+  $core.double get imbalanceThresholdRatio => $_getN(2);
   @$pb.TagNumber(4)
-  set imbalanceThresholdRatio($core.double value) => $_setDouble(3, value);
+  set imbalanceThresholdRatio($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(4)
-  $core.bool hasImbalanceThresholdRatio() => $_has(3);
+  $core.bool hasImbalanceThresholdRatio() => $_has(2);
   @$pb.TagNumber(4)
   void clearImbalanceThresholdRatio() => $_clearField(4);
 
   /// 불균형 회복 목표 비율 (재발주 시 목표 충족 비율)
   @$pb.TagNumber(5)
-  $core.double get imbalanceRecoveryRatio => $_getN(4);
+  $core.double get imbalanceRecoveryRatio => $_getN(3);
   @$pb.TagNumber(5)
-  set imbalanceRecoveryRatio($core.double value) => $_setDouble(4, value);
+  set imbalanceRecoveryRatio($core.double value) => $_setDouble(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasImbalanceRecoveryRatio() => $_has(4);
+  $core.bool hasImbalanceRecoveryRatio() => $_has(3);
   @$pb.TagNumber(5)
   void clearImbalanceRecoveryRatio() => $_clearField(5);
 
   /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get settleTimeoutMs => $_getI64(5);
+  $fixnum.Int64 get settleTimeoutMs => $_getI64(4);
   @$pb.TagNumber(6)
-  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(5, value);
+  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasSettleTimeoutMs() => $_has(5);
+  $core.bool hasSettleTimeoutMs() => $_has(4);
   @$pb.TagNumber(6)
   void clearSettleTimeoutMs() => $_clearField(6);
 
   /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get reconcileAlertAmount => $_getI64(6);
+  $fixnum.Int64 get reconcileAlertAmount => $_getI64(5);
   @$pb.TagNumber(7)
-  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(6, value);
+  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(5, value);
   @$pb.TagNumber(7)
-  $core.bool hasReconcileAlertAmount() => $_has(6);
+  $core.bool hasReconcileAlertAmount() => $_has(5);
   @$pb.TagNumber(7)
   void clearReconcileAlertAmount() => $_clearField(7);
 }

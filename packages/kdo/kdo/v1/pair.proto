@@ -357,8 +357,8 @@ message BaseMakeCounterIocAndBalance {
   // pricer → maker 가격 환산 방식
   PairPricingMethod pricing = 1;
 
-  // 헷지 비율 (base 체결 수량 × hedge_ratio = counter 주문 수량)
-  double hedge_ratio = 2;
+  reserved 2;
+  reserved "hedge_ratio";
 
   // counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
   bool counter_inverse = 3;
