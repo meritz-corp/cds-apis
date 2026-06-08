@@ -1849,7 +1849,7 @@ impl serde::Serialize for ServiceStatus {
             struct_ser.serialize_field("is_running", &self.is_running)?;
         }
         if true {
-            let v = super::common::TradingSession::try_from(self.current_session)
+            let v = super::common::SessionId::try_from(self.current_session)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.current_session)))?;
             struct_ser.serialize_field("current_session", &v)?;
         }
@@ -1946,7 +1946,7 @@ impl<'de> serde::Deserialize<'de> for ServiceStatus {
                             if current_session__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("currentSession"));
                             }
-                            current_session__ = Some(map_.next_value::<super::common::TradingSession>()? as i32);
+                            current_session__ = Some(map_.next_value::<super::common::SessionId>()? as i32);
                         }
                         GeneratedField::ActiveOrderCount => {
                             if active_order_count__.is_some() {
@@ -1996,12 +1996,12 @@ impl serde::Serialize for SessionChangedEvent {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.auto_amend.SessionChangedEvent", len)?;
         if true {
-            let v = super::common::TradingSession::try_from(self.old_session)
+            let v = super::common::SessionId::try_from(self.old_session)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.old_session)))?;
             struct_ser.serialize_field("old_session", &v)?;
         }
         if true {
-            let v = super::common::TradingSession::try_from(self.new_session)
+            let v = super::common::SessionId::try_from(self.new_session)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.new_session)))?;
             struct_ser.serialize_field("new_session", &v)?;
         }
@@ -2076,13 +2076,13 @@ impl<'de> serde::Deserialize<'de> for SessionChangedEvent {
                             if old_session__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("oldSession"));
                             }
-                            old_session__ = Some(map_.next_value::<super::common::TradingSession>()? as i32);
+                            old_session__ = Some(map_.next_value::<super::common::SessionId>()? as i32);
                         }
                         GeneratedField::NewSession => {
                             if new_session__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("newSession"));
                             }
-                            new_session__ = Some(map_.next_value::<super::common::TradingSession>()? as i32);
+                            new_session__ = Some(map_.next_value::<super::common::SessionId>()? as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;

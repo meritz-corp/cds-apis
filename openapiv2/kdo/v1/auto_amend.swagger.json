@@ -494,11 +494,11 @@
       "type": "object",
       "properties": {
         "oldSession": {
-          "$ref": "#/definitions/commonTradingSession",
+          "$ref": "#/definitions/commonSessionId",
           "title": "이전 세션"
         },
         "newSession": {
-          "$ref": "#/definitions/commonTradingSession",
+          "$ref": "#/definitions/commonSessionId",
           "title": "새 세션"
         }
       },
@@ -515,19 +515,30 @@
       "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
       "title": "주문 방향"
     },
-    "commonTradingSession": {
+    "commonSessionId": {
       "type": "string",
       "enum": [
-        "TRADING_SESSION_UNSPECIFIED",
-        "TRADING_SESSION_PRE_MARKET",
-        "TRADING_SESSION_OPENING_AUCTION",
-        "TRADING_SESSION_REGULAR",
-        "TRADING_SESSION_CLOSING_AUCTION",
-        "TRADING_SESSION_CLOSED"
+        "SESSION_ID_UNSPECIFIED",
+        "PREVIOUS",
+        "CONNECTED",
+        "OPENING_ONE_PRICE",
+        "ONE_PRICE",
+        "CLOSING_ONE_PRICE",
+        "VI_ONE_PRICE",
+        "VI_OPENING_ONE_PRICE",
+        "VI_CLOSING_ONE_PRICE",
+        "UNIT_TRADE",
+        "POST_MARKET",
+        "AUCTION_BID",
+        "AUCTION_ASK",
+        "SUSPENDED",
+        "SHUTDOWN",
+        "CLOSED",
+        "ETC"
       ],
-      "default": "TRADING_SESSION_UNSPECIFIED",
-      "description": "- TRADING_SESSION_PRE_MARKET: 장 시작 전\n - TRADING_SESSION_OPENING_AUCTION: 시가 동시호가 (08:30 ~ 09:00)\n - TRADING_SESSION_REGULAR: 장중 (09:00 ~ 15:20)\n - TRADING_SESSION_CLOSING_AUCTION: 종가 동시호가 (15:20 ~ 15:30)\n - TRADING_SESSION_CLOSED: 장 종료",
-      "title": "거래 세션 타입"
+      "default": "SESSION_ID_UNSPECIFIED",
+      "description": "- PREVIOUS: 장개시전\n - CONNECTED: 연결됨\n - OPENING_ONE_PRICE: 시가단일가\n - ONE_PRICE: 단일가\n - CLOSING_ONE_PRICE: 종가단일가\n - VI_ONE_PRICE: VI장중단일가\n - VI_OPENING_ONE_PRICE: VI시가단일가\n - VI_CLOSING_ONE_PRICE: VI종가단일가\n - UNIT_TRADE: 단위매매\n - POST_MARKET: 장종료후호가접수\n - AUCTION_BID: 경매매수호가 접수 세션\n - AUCTION_ASK: 경매매도호가 접수 세션\n - SUSPENDED: 거래정지\n - SHUTDOWN: 셧다운\n - CLOSED: 장마감\n - ETC: 기타",
+      "title": "KRX 세부 세션 ID (16-state)"
     },
     "protobufAny": {
       "type": "object",

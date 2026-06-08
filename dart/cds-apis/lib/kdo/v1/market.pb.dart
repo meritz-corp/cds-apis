@@ -16,11 +16,8 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'common.pbenum.dart' as $2;
-import 'market.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
-
-export 'market.pbenum.dart';
 
 /// ETF 주문장 데이터
 class EtfOrderbookData extends $pb.GeneratedMessage {
@@ -38,7 +35,7 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
     $fixnum.Int64? bidQuoteTotalQuantity,
     $core.String? estPrice,
     $fixnum.Int64? estVolume,
-    SessionId? sessionId,
+    $2.SessionId? sessionId,
   }) {
     final result = create();
     if (bidPrices != null) result.bidPrices.addAll(bidPrices);
@@ -77,7 +74,7 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
     ..aInt64(11, _omitFieldNames ? '' : 'bidQuoteTotalQuantity')
     ..aOS(12, _omitFieldNames ? '' : 'estPrice')
     ..aInt64(13, _omitFieldNames ? '' : 'estVolume')
-    ..e<SessionId>(14, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: SessionId.SESSION_ID_UNSPECIFIED, valueOf: SessionId.valueOf, enumValues: SessionId.values)
+    ..e<$2.SessionId>(14, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: $2.SessionId.SESSION_ID_UNSPECIFIED, valueOf: $2.SessionId.valueOf, enumValues: $2.SessionId.values)
     ..hasRequiredFields = false
   ;
 
@@ -194,9 +191,9 @@ class EtfOrderbookData extends $pb.GeneratedMessage {
 
   /// 세션 ID
   @$pb.TagNumber(14)
-  SessionId get sessionId => $_getN(13);
+  $2.SessionId get sessionId => $_getN(13);
   @$pb.TagNumber(14)
-  set sessionId(SessionId value) => $_setField(14, value);
+  set sessionId($2.SessionId value) => $_setField(14, value);
   @$pb.TagNumber(14)
   $core.bool hasSessionId() => $_has(13);
   @$pb.TagNumber(14)
@@ -217,7 +214,7 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
     $core.String? midPrice,
     $core.String? estPrice,
     $fixnum.Int64? estVolume,
-    SessionId? sessionId,
+    $2.SessionId? sessionId,
   }) {
     final result = create();
     if (bidPrices != null) result.bidPrices.addAll(bidPrices);
@@ -252,7 +249,7 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
     ..aOS(9, _omitFieldNames ? '' : 'midPrice')
     ..aOS(10, _omitFieldNames ? '' : 'estPrice')
     ..aInt64(11, _omitFieldNames ? '' : 'estVolume')
-    ..e<SessionId>(12, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: SessionId.SESSION_ID_UNSPECIFIED, valueOf: SessionId.valueOf, enumValues: SessionId.values)
+    ..e<$2.SessionId>(12, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.OE, defaultOrMaker: $2.SessionId.SESSION_ID_UNSPECIFIED, valueOf: $2.SessionId.valueOf, enumValues: $2.SessionId.values)
     ..hasRequiredFields = false
   ;
 
@@ -349,9 +346,9 @@ class FuturesOrderbookData extends $pb.GeneratedMessage {
 
   /// 세션 ID
   @$pb.TagNumber(12)
-  SessionId get sessionId => $_getN(11);
+  $2.SessionId get sessionId => $_getN(11);
   @$pb.TagNumber(12)
-  set sessionId(SessionId value) => $_setField(12, value);
+  set sessionId($2.SessionId value) => $_setField(12, value);
   @$pb.TagNumber(12)
   $core.bool hasSessionId() => $_has(11);
   @$pb.TagNumber(12)
@@ -1155,7 +1152,7 @@ class RawMarketMessage extends $pb.GeneratedMessage {
 
 class GetMarketSessionResponse extends $pb.GeneratedMessage {
   factory GetMarketSessionResponse({
-    $2.TradingSession? session,
+    $2.SessionId? session,
     $core.String? sessionId,
     $core.String? sessionName,
   }) {
@@ -1172,7 +1169,7 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
   factory GetMarketSessionResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMarketSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
-    ..e<$2.TradingSession>(1, _omitFieldNames ? '' : 'session', $pb.PbFieldType.OE, defaultOrMaker: $2.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $2.TradingSession.valueOf, enumValues: $2.TradingSession.values)
+    ..e<$2.SessionId>(1, _omitFieldNames ? '' : 'session', $pb.PbFieldType.OE, defaultOrMaker: $2.SessionId.SESSION_ID_UNSPECIFIED, valueOf: $2.SessionId.valueOf, enumValues: $2.SessionId.values)
     ..aOS(2, _omitFieldNames ? '' : 'sessionId')
     ..aOS(3, _omitFieldNames ? '' : 'sessionName')
     ..hasRequiredFields = false
@@ -1195,11 +1192,11 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
   static GetMarketSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMarketSessionResponse>(create);
   static GetMarketSessionResponse? _defaultInstance;
 
-  /// 고수준 거래 세션 (시간 기반)
+  /// KRX 세션 ID
   @$pb.TagNumber(1)
-  $2.TradingSession get session => $_getN(0);
+  $2.SessionId get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session($2.TradingSession value) => $_setField(1, value);
+  set session($2.SessionId value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)

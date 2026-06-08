@@ -395,7 +395,7 @@ class AuctionSessionConfig extends $pb.GeneratedMessage {
 class ServiceStatus extends $pb.GeneratedMessage {
   factory ServiceStatus({
     $core.bool? isRunning,
-    $1.TradingSession? currentSession,
+    $1.SessionId? currentSession,
     $core.int? activeOrderCount,
     $core.int? totalOrderCount,
   }) {
@@ -414,7 +414,7 @@ class ServiceStatus extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServiceStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isRunning')
-    ..e<$1.TradingSession>(2, _omitFieldNames ? '' : 'currentSession', $pb.PbFieldType.OE, defaultOrMaker: $1.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $1.TradingSession.valueOf, enumValues: $1.TradingSession.values)
+    ..e<$1.SessionId>(2, _omitFieldNames ? '' : 'currentSession', $pb.PbFieldType.OE, defaultOrMaker: $1.SessionId.SESSION_ID_UNSPECIFIED, valueOf: $1.SessionId.valueOf, enumValues: $1.SessionId.values)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'activeOrderCount', $pb.PbFieldType.OU3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'totalOrderCount', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
@@ -449,9 +449,9 @@ class ServiceStatus extends $pb.GeneratedMessage {
 
   /// 현재 세션
   @$pb.TagNumber(2)
-  $1.TradingSession get currentSession => $_getN(1);
+  $1.SessionId get currentSession => $_getN(1);
   @$pb.TagNumber(2)
-  set currentSession($1.TradingSession value) => $_setField(2, value);
+  set currentSession($1.SessionId value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasCurrentSession() => $_has(1);
   @$pb.TagNumber(2)
@@ -820,8 +820,8 @@ class AmendFailedEvent extends $pb.GeneratedMessage {
 /// 세션 변경 이벤트
 class SessionChangedEvent extends $pb.GeneratedMessage {
   factory SessionChangedEvent({
-    $1.TradingSession? oldSession,
-    $1.TradingSession? newSession,
+    $1.SessionId? oldSession,
+    $1.SessionId? newSession,
   }) {
     final result = create();
     if (oldSession != null) result.oldSession = oldSession;
@@ -835,8 +835,8 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
   factory SessionChangedEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionChangedEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
-    ..e<$1.TradingSession>(1, _omitFieldNames ? '' : 'oldSession', $pb.PbFieldType.OE, defaultOrMaker: $1.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $1.TradingSession.valueOf, enumValues: $1.TradingSession.values)
-    ..e<$1.TradingSession>(2, _omitFieldNames ? '' : 'newSession', $pb.PbFieldType.OE, defaultOrMaker: $1.TradingSession.TRADING_SESSION_UNSPECIFIED, valueOf: $1.TradingSession.valueOf, enumValues: $1.TradingSession.values)
+    ..e<$1.SessionId>(1, _omitFieldNames ? '' : 'oldSession', $pb.PbFieldType.OE, defaultOrMaker: $1.SessionId.SESSION_ID_UNSPECIFIED, valueOf: $1.SessionId.valueOf, enumValues: $1.SessionId.values)
+    ..e<$1.SessionId>(2, _omitFieldNames ? '' : 'newSession', $pb.PbFieldType.OE, defaultOrMaker: $1.SessionId.SESSION_ID_UNSPECIFIED, valueOf: $1.SessionId.valueOf, enumValues: $1.SessionId.values)
     ..hasRequiredFields = false
   ;
 
@@ -859,9 +859,9 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
 
   /// 이전 세션
   @$pb.TagNumber(1)
-  $1.TradingSession get oldSession => $_getN(0);
+  $1.SessionId get oldSession => $_getN(0);
   @$pb.TagNumber(1)
-  set oldSession($1.TradingSession value) => $_setField(1, value);
+  set oldSession($1.SessionId value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasOldSession() => $_has(0);
   @$pb.TagNumber(1)
@@ -869,9 +869,9 @@ class SessionChangedEvent extends $pb.GeneratedMessage {
 
   /// 새 세션
   @$pb.TagNumber(2)
-  $1.TradingSession get newSession => $_getN(1);
+  $1.SessionId get newSession => $_getN(1);
   @$pb.TagNumber(2)
-  set newSession($1.TradingSession value) => $_setField(2, value);
+  set newSession($1.SessionId value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasNewSession() => $_has(1);
   @$pb.TagNumber(2)

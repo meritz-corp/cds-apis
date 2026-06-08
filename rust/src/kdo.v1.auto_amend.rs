@@ -97,7 +97,7 @@ pub struct ServiceStatus {
     #[prost(bool, tag="1")]
     pub is_running: bool,
     /// 현재 세션
-    #[prost(enumeration="super::common::TradingSession", tag="2")]
+    #[prost(enumeration="super::common::SessionId", tag="2")]
     pub current_session: i32,
     /// 활성 주문 수
     #[prost(uint32, tag="3")]
@@ -182,10 +182,10 @@ pub struct AmendFailedEvent {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SessionChangedEvent {
     /// 이전 세션
-    #[prost(enumeration="super::common::TradingSession", tag="1")]
+    #[prost(enumeration="super::common::SessionId", tag="1")]
     pub old_session: i32,
     /// 새 세션
-    #[prost(enumeration="super::common::TradingSession", tag="2")]
+    #[prost(enumeration="super::common::SessionId", tag="2")]
     pub new_session: i32,
 }
 /// 주문 등록 이벤트

@@ -31,14 +31,25 @@ enum ProductType {
   PRODUCT_TYPE_CASH = 4;
 }
 
-// 거래 세션 타입
-enum TradingSession {
-  TRADING_SESSION_UNSPECIFIED = 0;
-  TRADING_SESSION_PRE_MARKET = 1;       // 장 시작 전
-  TRADING_SESSION_OPENING_AUCTION = 2;  // 시가 동시호가 (08:30 ~ 09:00)
-  TRADING_SESSION_REGULAR = 3;          // 장중 (09:00 ~ 15:20)
-  TRADING_SESSION_CLOSING_AUCTION = 4;  // 종가 동시호가 (15:20 ~ 15:30)
-  TRADING_SESSION_CLOSED = 5;           // 장 종료
+// KRX 세부 세션 ID (16-state)
+enum SessionId {
+  SESSION_ID_UNSPECIFIED = 0;
+  PREVIOUS = 1;               // 장개시전
+  CONNECTED = 2;              // 연결됨
+  OPENING_ONE_PRICE = 3;      // 시가단일가
+  ONE_PRICE = 4;              // 단일가
+  CLOSING_ONE_PRICE = 5;      // 종가단일가
+  VI_ONE_PRICE = 6;           // VI장중단일가
+  VI_OPENING_ONE_PRICE = 7;   // VI시가단일가
+  VI_CLOSING_ONE_PRICE = 8;   // VI종가단일가
+  UNIT_TRADE = 9;             // 단위매매
+  POST_MARKET = 10;           // 장종료후호가접수
+  AUCTION_BID = 11;           // 경매매수호가 접수 세션
+  AUCTION_ASK = 12;           // 경매매도호가 접수 세션
+  SUSPENDED = 13;             // 거래정지
+  SHUTDOWN = 14;              // 셧다운
+  CLOSED = 15;                // 장마감
+  ETC = 16;                   // 기타
 }
 
 // 호가조건코드 (KRX)

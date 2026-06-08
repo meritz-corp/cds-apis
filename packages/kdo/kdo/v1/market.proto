@@ -112,27 +112,6 @@ service MarketService {
 
 }
 
-// 세션 ID 열거형 (AIP-126)
-enum SessionId {
-    SESSION_ID_UNSPECIFIED = 0; // 기본값
-    PREVIOUS = 1;               // 장개시전
-    CONNECTED = 2;              // 연결됨
-    OPENING_ONE_PRICE = 3;      // 시가단일가
-    ONE_PRICE = 4;              // 단일가
-    CLOSING_ONE_PRICE = 5;      // 종가단일가
-    VI_ONE_PRICE = 6;           // VI장중단일가
-    VI_OPENING_ONE_PRICE = 7;   // VI시가단일가
-    VI_CLOSING_ONE_PRICE = 8;   // VI종가단일가
-    UNIT_TRADE = 9;             // 단위매매
-    POST_MARKET = 10;           // 장종료후호가접수
-    AUCTION_BID = 11;           // 경매매수호가 접수 세션
-    AUCTION_ASK = 12;           // 경매매도호가 접수 세션
-    SUSPENDED = 13;             // 거래정지
-    SHUTDOWN = 14;              // 셧다운
-    CLOSED = 15;                // 장마감
-    ETC = 16;                   // 기타
-}
-
 // ETF 주문장 데이터
 message EtfOrderbookData {
     // 매수 호가 (10단계, AIP-144)
@@ -175,7 +154,7 @@ message EtfOrderbookData {
     int64 est_volume = 13;
 
     // 세션 ID
-    SessionId session_id = 14;
+    kdo.v1.common.SessionId session_id = 14;
 }
 
 // 선물 주문장 데이터
@@ -214,7 +193,7 @@ message FuturesOrderbookData {
     int64 est_volume = 11;
 
     // 세션 ID
-    SessionId session_id = 12;
+    kdo.v1.common.SessionId session_id = 12;
 }
 
 message EtfNav {
@@ -387,8 +366,8 @@ message RawMarketMessage {
 
 
 message GetMarketSessionResponse {
-  // 고수준 거래 세션 (시간 기반)
-  kdo.v1.common.TradingSession session = 1;
+  // KRX 세션 ID
+  kdo.v1.common.SessionId session = 1;
 
   // KRX 세부 세션 ID (예: "connected", "opening_one_price")
   // market feed에서 수신한 실제 세션 코드

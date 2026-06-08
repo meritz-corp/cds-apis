@@ -989,42 +989,64 @@ impl<'de> serde::Deserialize<'de> for ProductType {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
-impl serde::Serialize for TradingSession {
+impl serde::Serialize for SessionId {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
         let variant = match self {
-            Self::Unspecified => "TRADING_SESSION_UNSPECIFIED",
-            Self::PreMarket => "TRADING_SESSION_PRE_MARKET",
-            Self::OpeningAuction => "TRADING_SESSION_OPENING_AUCTION",
-            Self::Regular => "TRADING_SESSION_REGULAR",
-            Self::ClosingAuction => "TRADING_SESSION_CLOSING_AUCTION",
-            Self::Closed => "TRADING_SESSION_CLOSED",
+            Self::Unspecified => "SESSION_ID_UNSPECIFIED",
+            Self::Previous => "PREVIOUS",
+            Self::Connected => "CONNECTED",
+            Self::OpeningOnePrice => "OPENING_ONE_PRICE",
+            Self::OnePrice => "ONE_PRICE",
+            Self::ClosingOnePrice => "CLOSING_ONE_PRICE",
+            Self::ViOnePrice => "VI_ONE_PRICE",
+            Self::ViOpeningOnePrice => "VI_OPENING_ONE_PRICE",
+            Self::ViClosingOnePrice => "VI_CLOSING_ONE_PRICE",
+            Self::UnitTrade => "UNIT_TRADE",
+            Self::PostMarket => "POST_MARKET",
+            Self::AuctionBid => "AUCTION_BID",
+            Self::AuctionAsk => "AUCTION_ASK",
+            Self::Suspended => "SUSPENDED",
+            Self::Shutdown => "SHUTDOWN",
+            Self::Closed => "CLOSED",
+            Self::Etc => "ETC",
         };
         serializer.serialize_str(variant)
     }
 }
-impl<'de> serde::Deserialize<'de> for TradingSession {
+impl<'de> serde::Deserialize<'de> for SessionId {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "TRADING_SESSION_UNSPECIFIED",
-            "TRADING_SESSION_PRE_MARKET",
-            "TRADING_SESSION_OPENING_AUCTION",
-            "TRADING_SESSION_REGULAR",
-            "TRADING_SESSION_CLOSING_AUCTION",
-            "TRADING_SESSION_CLOSED",
+            "SESSION_ID_UNSPECIFIED",
+            "PREVIOUS",
+            "CONNECTED",
+            "OPENING_ONE_PRICE",
+            "ONE_PRICE",
+            "CLOSING_ONE_PRICE",
+            "VI_ONE_PRICE",
+            "VI_OPENING_ONE_PRICE",
+            "VI_CLOSING_ONE_PRICE",
+            "UNIT_TRADE",
+            "POST_MARKET",
+            "AUCTION_BID",
+            "AUCTION_ASK",
+            "SUSPENDED",
+            "SHUTDOWN",
+            "CLOSED",
+            "ETC",
         ];
 
         struct GeneratedVisitor;
 
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = TradingSession;
+            type Value = SessionId;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 write!(formatter, "expected one of: {:?}", &FIELDS)
@@ -1059,12 +1081,23 @@ impl<'de> serde::Deserialize<'de> for TradingSession {
                 E: serde::de::Error,
             {
                 match value {
-                    "TRADING_SESSION_UNSPECIFIED" => Ok(TradingSession::Unspecified),
-                    "TRADING_SESSION_PRE_MARKET" => Ok(TradingSession::PreMarket),
-                    "TRADING_SESSION_OPENING_AUCTION" => Ok(TradingSession::OpeningAuction),
-                    "TRADING_SESSION_REGULAR" => Ok(TradingSession::Regular),
-                    "TRADING_SESSION_CLOSING_AUCTION" => Ok(TradingSession::ClosingAuction),
-                    "TRADING_SESSION_CLOSED" => Ok(TradingSession::Closed),
+                    "SESSION_ID_UNSPECIFIED" => Ok(SessionId::Unspecified),
+                    "PREVIOUS" => Ok(SessionId::Previous),
+                    "CONNECTED" => Ok(SessionId::Connected),
+                    "OPENING_ONE_PRICE" => Ok(SessionId::OpeningOnePrice),
+                    "ONE_PRICE" => Ok(SessionId::OnePrice),
+                    "CLOSING_ONE_PRICE" => Ok(SessionId::ClosingOnePrice),
+                    "VI_ONE_PRICE" => Ok(SessionId::ViOnePrice),
+                    "VI_OPENING_ONE_PRICE" => Ok(SessionId::ViOpeningOnePrice),
+                    "VI_CLOSING_ONE_PRICE" => Ok(SessionId::ViClosingOnePrice),
+                    "UNIT_TRADE" => Ok(SessionId::UnitTrade),
+                    "POST_MARKET" => Ok(SessionId::PostMarket),
+                    "AUCTION_BID" => Ok(SessionId::AuctionBid),
+                    "AUCTION_ASK" => Ok(SessionId::AuctionAsk),
+                    "SUSPENDED" => Ok(SessionId::Suspended),
+                    "SHUTDOWN" => Ok(SessionId::Shutdown),
+                    "CLOSED" => Ok(SessionId::Closed),
+                    "ETC" => Ok(SessionId::Etc),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

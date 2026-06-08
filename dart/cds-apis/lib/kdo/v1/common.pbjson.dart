@@ -64,25 +64,38 @@ final $typed_data.Uint8List productTypeDescriptor = $convert.base64Decode(
     'RZUEVfU1RPQ0sQARIYChRQUk9EVUNUX1RZUEVfRlVUVVJFUxACEhQKEFBST0RVQ1RfVFlQRV9F'
     'VEYQAxIVChFQUk9EVUNUX1RZUEVfQ0FTSBAE');
 
-@$core.Deprecated('Use tradingSessionDescriptor instead')
-const TradingSession$json = {
-  '1': 'TradingSession',
+@$core.Deprecated('Use sessionIdDescriptor instead')
+const SessionId$json = {
+  '1': 'SessionId',
   '2': [
-    {'1': 'TRADING_SESSION_UNSPECIFIED', '2': 0},
-    {'1': 'TRADING_SESSION_PRE_MARKET', '2': 1},
-    {'1': 'TRADING_SESSION_OPENING_AUCTION', '2': 2},
-    {'1': 'TRADING_SESSION_REGULAR', '2': 3},
-    {'1': 'TRADING_SESSION_CLOSING_AUCTION', '2': 4},
-    {'1': 'TRADING_SESSION_CLOSED', '2': 5},
+    {'1': 'SESSION_ID_UNSPECIFIED', '2': 0},
+    {'1': 'PREVIOUS', '2': 1},
+    {'1': 'CONNECTED', '2': 2},
+    {'1': 'OPENING_ONE_PRICE', '2': 3},
+    {'1': 'ONE_PRICE', '2': 4},
+    {'1': 'CLOSING_ONE_PRICE', '2': 5},
+    {'1': 'VI_ONE_PRICE', '2': 6},
+    {'1': 'VI_OPENING_ONE_PRICE', '2': 7},
+    {'1': 'VI_CLOSING_ONE_PRICE', '2': 8},
+    {'1': 'UNIT_TRADE', '2': 9},
+    {'1': 'POST_MARKET', '2': 10},
+    {'1': 'AUCTION_BID', '2': 11},
+    {'1': 'AUCTION_ASK', '2': 12},
+    {'1': 'SUSPENDED', '2': 13},
+    {'1': 'SHUTDOWN', '2': 14},
+    {'1': 'CLOSED', '2': 15},
+    {'1': 'ETC', '2': 16},
   ],
 };
 
-/// Descriptor for `TradingSession`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List tradingSessionDescriptor = $convert.base64Decode(
-    'Cg5UcmFkaW5nU2Vzc2lvbhIfChtUUkFESU5HX1NFU1NJT05fVU5TUEVDSUZJRUQQABIeChpUUk'
-    'FESU5HX1NFU1NJT05fUFJFX01BUktFVBABEiMKH1RSQURJTkdfU0VTU0lPTl9PUEVOSU5HX0FV'
-    'Q1RJT04QAhIbChdUUkFESU5HX1NFU1NJT05fUkVHVUxBUhADEiMKH1RSQURJTkdfU0VTU0lPTl'
-    '9DTE9TSU5HX0FVQ1RJT04QBBIaChZUUkFESU5HX1NFU1NJT05fQ0xPU0VEEAU=');
+/// Descriptor for `SessionId`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List sessionIdDescriptor = $convert.base64Decode(
+    'CglTZXNzaW9uSWQSGgoWU0VTU0lPTl9JRF9VTlNQRUNJRklFRBAAEgwKCFBSRVZJT1VTEAESDQ'
+    'oJQ09OTkVDVEVEEAISFQoRT1BFTklOR19PTkVfUFJJQ0UQAxINCglPTkVfUFJJQ0UQBBIVChFD'
+    'TE9TSU5HX09ORV9QUklDRRAFEhAKDFZJX09ORV9QUklDRRAGEhgKFFZJX09QRU5JTkdfT05FX1'
+    'BSSUNFEAcSGAoUVklfQ0xPU0lOR19PTkVfUFJJQ0UQCBIOCgpVTklUX1RSQURFEAkSDwoLUE9T'
+    'VF9NQVJLRVQQChIPCgtBVUNUSU9OX0JJRBALEg8KC0FVQ1RJT05fQVNLEAwSDQoJU1VTUEVORE'
+    'VEEA0SDAoIU0hVVERPV04QDhIKCgZDTE9TRUQQDxIHCgNFVEMQEA==');
 
 @$core.Deprecated('Use orderConditionTypeDescriptor instead')
 const OrderConditionType$json = {

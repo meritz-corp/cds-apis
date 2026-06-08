@@ -14,39 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use sessionIdDescriptor instead')
-const SessionId$json = {
-  '1': 'SessionId',
-  '2': [
-    {'1': 'SESSION_ID_UNSPECIFIED', '2': 0},
-    {'1': 'PREVIOUS', '2': 1},
-    {'1': 'CONNECTED', '2': 2},
-    {'1': 'OPENING_ONE_PRICE', '2': 3},
-    {'1': 'ONE_PRICE', '2': 4},
-    {'1': 'CLOSING_ONE_PRICE', '2': 5},
-    {'1': 'VI_ONE_PRICE', '2': 6},
-    {'1': 'VI_OPENING_ONE_PRICE', '2': 7},
-    {'1': 'VI_CLOSING_ONE_PRICE', '2': 8},
-    {'1': 'UNIT_TRADE', '2': 9},
-    {'1': 'POST_MARKET', '2': 10},
-    {'1': 'AUCTION_BID', '2': 11},
-    {'1': 'AUCTION_ASK', '2': 12},
-    {'1': 'SUSPENDED', '2': 13},
-    {'1': 'SHUTDOWN', '2': 14},
-    {'1': 'CLOSED', '2': 15},
-    {'1': 'ETC', '2': 16},
-  ],
-};
-
-/// Descriptor for `SessionId`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List sessionIdDescriptor = $convert.base64Decode(
-    'CglTZXNzaW9uSWQSGgoWU0VTU0lPTl9JRF9VTlNQRUNJRklFRBAAEgwKCFBSRVZJT1VTEAESDQ'
-    'oJQ09OTkVDVEVEEAISFQoRT1BFTklOR19PTkVfUFJJQ0UQAxINCglPTkVfUFJJQ0UQBBIVChFD'
-    'TE9TSU5HX09ORV9QUklDRRAFEhAKDFZJX09ORV9QUklDRRAGEhgKFFZJX09QRU5JTkdfT05FX1'
-    'BSSUNFEAcSGAoUVklfQ0xPU0lOR19PTkVfUFJJQ0UQCBIOCgpVTklUX1RSQURFEAkSDwoLUE9T'
-    'VF9NQVJLRVQQChIPCgtBVUNUSU9OX0JJRBALEg8KC0FVQ1RJT05fQVNLEAwSDQoJU1VTUEVORE'
-    'VEEA0SDAoIU0hVVERPV04QDhIKCgZDTE9TRUQQDxIHCgNFVEMQEA==');
-
 @$core.Deprecated('Use etfOrderbookDataDescriptor instead')
 const EtfOrderbookData$json = {
   '1': 'EtfOrderbookData',
@@ -64,7 +31,7 @@ const EtfOrderbookData$json = {
     {'1': 'bid_quote_total_quantity', '3': 11, '4': 1, '5': 3, '10': 'bidQuoteTotalQuantity'},
     {'1': 'est_price', '3': 12, '4': 1, '5': 9, '10': 'estPrice'},
     {'1': 'est_volume', '3': 13, '4': 1, '5': 3, '10': 'estVolume'},
-    {'1': 'session_id', '3': 14, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
+    {'1': 'session_id', '3': 14, '4': 1, '5': 14, '6': '.kdo.v1.common.SessionId', '10': 'sessionId'},
   ],
 };
 
@@ -80,7 +47,7 @@ final $typed_data.Uint8List etfOrderbookDataDescriptor = $convert.base64Decode(
     'ogASgDUhVhc2tRdW90ZVRvdGFsUXVhbnRpdHkSNwoYYmlkX3F1b3RlX3RvdGFsX3F1YW50aXR5'
     'GAsgASgDUhViaWRRdW90ZVRvdGFsUXVhbnRpdHkSGwoJZXN0X3ByaWNlGAwgASgJUghlc3RQcm'
     'ljZRIdCgplc3Rfdm9sdW1lGA0gASgDUgllc3RWb2x1bWUSNwoKc2Vzc2lvbl9pZBgOIAEoDjIY'
-    'Lmtkby52MS5tYXJrZXQuU2Vzc2lvbklkUglzZXNzaW9uSWQ=');
+    'Lmtkby52MS5jb21tb24uU2Vzc2lvbklkUglzZXNzaW9uSWQ=');
 
 @$core.Deprecated('Use futuresOrderbookDataDescriptor instead')
 const FuturesOrderbookData$json = {
@@ -97,7 +64,7 @@ const FuturesOrderbookData$json = {
     {'1': 'mid_price', '3': 9, '4': 1, '5': 9, '10': 'midPrice'},
     {'1': 'est_price', '3': 10, '4': 1, '5': 9, '10': 'estPrice'},
     {'1': 'est_volume', '3': 11, '4': 1, '5': 3, '10': 'estVolume'},
-    {'1': 'session_id', '3': 12, '4': 1, '5': 14, '6': '.kdo.v1.market.SessionId', '10': 'sessionId'},
+    {'1': 'session_id', '3': 12, '4': 1, '5': 14, '6': '.kdo.v1.common.SessionId', '10': 'sessionId'},
   ],
 };
 
@@ -111,7 +78,7 @@ final $typed_data.Uint8List futuresOrderbookDataDescriptor = $convert.base64Deco
     'RpdHkSNwoYYmlkX3F1b3RlX3RvdGFsX3F1YW50aXR5GAggASgDUhViaWRRdW90ZVRvdGFsUXVh'
     'bnRpdHkSGwoJbWlkX3ByaWNlGAkgASgJUghtaWRQcmljZRIbCgllc3RfcHJpY2UYCiABKAlSCG'
     'VzdFByaWNlEh0KCmVzdF92b2x1bWUYCyABKANSCWVzdFZvbHVtZRI3CgpzZXNzaW9uX2lkGAwg'
-    'ASgOMhgua2RvLnYxLm1hcmtldC5TZXNzaW9uSWRSCXNlc3Npb25JZA==');
+    'ASgOMhgua2RvLnYxLmNvbW1vbi5TZXNzaW9uSWRSCXNlc3Npb25JZA==');
 
 @$core.Deprecated('Use etfNavDescriptor instead')
 const EtfNav$json = {
@@ -312,7 +279,7 @@ final $typed_data.Uint8List rawMarketMessageDescriptor = $convert.base64Decode(
 const GetMarketSessionResponse$json = {
   '1': 'GetMarketSessionResponse',
   '2': [
-    {'1': 'session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'session'},
+    {'1': 'session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.SessionId', '10': 'session'},
     {'1': 'session_id', '3': 2, '4': 1, '5': 9, '10': 'sessionId'},
     {'1': 'session_name', '3': 3, '4': 1, '5': 9, '10': 'sessionName'},
   ],
@@ -320,7 +287,7 @@ const GetMarketSessionResponse$json = {
 
 /// Descriptor for `GetMarketSessionResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getMarketSessionResponseDescriptor = $convert.base64Decode(
-    'ChhHZXRNYXJrZXRTZXNzaW9uUmVzcG9uc2USNwoHc2Vzc2lvbhgBIAEoDjIdLmtkby52MS5jb2'
-    '1tb24uVHJhZGluZ1Nlc3Npb25SB3Nlc3Npb24SHQoKc2Vzc2lvbl9pZBgCIAEoCVIJc2Vzc2lv'
-    'bklkEiEKDHNlc3Npb25fbmFtZRgDIAEoCVILc2Vzc2lvbk5hbWU=');
+    'ChhHZXRNYXJrZXRTZXNzaW9uUmVzcG9uc2USMgoHc2Vzc2lvbhgBIAEoDjIYLmtkby52MS5jb2'
+    '1tb24uU2Vzc2lvbklkUgdzZXNzaW9uEh0KCnNlc3Npb25faWQYAiABKAlSCXNlc3Npb25JZBIh'
+    'CgxzZXNzaW9uX25hbWUYAyABKAlSC3Nlc3Npb25OYW1l');
 

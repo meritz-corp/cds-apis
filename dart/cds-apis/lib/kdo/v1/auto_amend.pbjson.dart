@@ -111,7 +111,7 @@ const ServiceStatus$json = {
   '1': 'ServiceStatus',
   '2': [
     {'1': 'is_running', '3': 1, '4': 1, '5': 8, '10': 'isRunning'},
-    {'1': 'current_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'currentSession'},
+    {'1': 'current_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.SessionId', '10': 'currentSession'},
     {'1': 'active_order_count', '3': 3, '4': 1, '5': 13, '10': 'activeOrderCount'},
     {'1': 'total_order_count', '3': 4, '4': 1, '5': 13, '10': 'totalOrderCount'},
   ],
@@ -119,10 +119,10 @@ const ServiceStatus$json = {
 
 /// Descriptor for `ServiceStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List serviceStatusDescriptor = $convert.base64Decode(
-    'Cg1TZXJ2aWNlU3RhdHVzEh0KCmlzX3J1bm5pbmcYASABKAhSCWlzUnVubmluZxJGCg9jdXJyZW'
-    '50X3Nlc3Npb24YAiABKA4yHS5rZG8udjEuY29tbW9uLlRyYWRpbmdTZXNzaW9uUg5jdXJyZW50'
-    'U2Vzc2lvbhIsChJhY3RpdmVfb3JkZXJfY291bnQYAyABKA1SEGFjdGl2ZU9yZGVyQ291bnQSKg'
-    'oRdG90YWxfb3JkZXJfY291bnQYBCABKA1SD3RvdGFsT3JkZXJDb3VudA==');
+    'Cg1TZXJ2aWNlU3RhdHVzEh0KCmlzX3J1bm5pbmcYASABKAhSCWlzUnVubmluZxJBCg9jdXJyZW'
+    '50X3Nlc3Npb24YAiABKA4yGC5rZG8udjEuY29tbW9uLlNlc3Npb25JZFIOY3VycmVudFNlc3Np'
+    'b24SLAoSYWN0aXZlX29yZGVyX2NvdW50GAMgASgNUhBhY3RpdmVPcmRlckNvdW50EioKEXRvdG'
+    'FsX29yZGVyX2NvdW50GAQgASgNUg90b3RhbE9yZGVyQ291bnQ=');
 
 @$core.Deprecated('Use autoAmendEventDescriptor instead')
 const AutoAmendEvent$json = {
@@ -192,16 +192,16 @@ final $typed_data.Uint8List amendFailedEventDescriptor = $convert.base64Decode(
 const SessionChangedEvent$json = {
   '1': 'SessionChangedEvent',
   '2': [
-    {'1': 'old_session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'oldSession'},
-    {'1': 'new_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.TradingSession', '10': 'newSession'},
+    {'1': 'old_session', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.SessionId', '10': 'oldSession'},
+    {'1': 'new_session', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.common.SessionId', '10': 'newSession'},
   ],
 };
 
 /// Descriptor for `SessionChangedEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionChangedEventDescriptor = $convert.base64Decode(
-    'ChNTZXNzaW9uQ2hhbmdlZEV2ZW50Ej4KC29sZF9zZXNzaW9uGAEgASgOMh0ua2RvLnYxLmNvbW'
-    '1vbi5UcmFkaW5nU2Vzc2lvblIKb2xkU2Vzc2lvbhI+CgtuZXdfc2Vzc2lvbhgCIAEoDjIdLmtk'
-    'by52MS5jb21tb24uVHJhZGluZ1Nlc3Npb25SCm5ld1Nlc3Npb24=');
+    'ChNTZXNzaW9uQ2hhbmdlZEV2ZW50EjkKC29sZF9zZXNzaW9uGAEgASgOMhgua2RvLnYxLmNvbW'
+    '1vbi5TZXNzaW9uSWRSCm9sZFNlc3Npb24SOQoLbmV3X3Nlc3Npb24YAiABKA4yGC5rZG8udjEu'
+    'Y29tbW9uLlNlc3Npb25JZFIKbmV3U2Vzc2lvbg==');
 
 @$core.Deprecated('Use orderRegisteredEventDescriptor instead')
 const OrderRegisteredEvent$json = {

@@ -44,7 +44,7 @@ pub struct EtfOrderbookData {
     #[prost(int64, tag="13")]
     pub est_volume: i64,
     /// 세션 ID
-    #[prost(enumeration="SessionId", tag="14")]
+    #[prost(enumeration="super::common::SessionId", tag="14")]
     pub session_id: i32,
 }
 /// 선물 주문장 데이터
@@ -85,7 +85,7 @@ pub struct FuturesOrderbookData {
     #[prost(int64, tag="11")]
     pub est_volume: i64,
     /// 세션 ID
-    #[prost(enumeration="SessionId", tag="12")]
+    #[prost(enumeration="super::common::SessionId", tag="12")]
     pub session_id: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -234,8 +234,8 @@ pub struct RawMarketMessage {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMarketSessionResponse {
-    /// 고수준 거래 세션 (시간 기반)
-    #[prost(enumeration="super::common::TradingSession", tag="1")]
+    /// KRX 세션 ID
+    #[prost(enumeration="super::common::SessionId", tag="1")]
     pub session: i32,
     /// KRX 세부 세션 ID (예: "connected", "opening_one_price")
     /// market feed에서 수신한 실제 세션 코드
@@ -244,95 +244,6 @@ pub struct GetMarketSessionResponse {
     /// 세션 한글 이름 (예: "이상무", "시가단일가")
     #[prost(string, tag="3")]
     pub session_name: ::prost::alloc::string::String,
-}
-/// 세션 ID 열거형 (AIP-126)
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum SessionId {
-    /// 기본값
-    Unspecified = 0,
-    /// 장개시전
-    Previous = 1,
-    /// 연결됨
-    Connected = 2,
-    /// 시가단일가
-    OpeningOnePrice = 3,
-    /// 단일가
-    OnePrice = 4,
-    /// 종가단일가
-    ClosingOnePrice = 5,
-    /// VI장중단일가
-    ViOnePrice = 6,
-    /// VI시가단일가
-    ViOpeningOnePrice = 7,
-    /// VI종가단일가
-    ViClosingOnePrice = 8,
-    /// 단위매매
-    UnitTrade = 9,
-    /// 장종료후호가접수
-    PostMarket = 10,
-    /// 경매매수호가 접수 세션
-    AuctionBid = 11,
-    /// 경매매도호가 접수 세션
-    AuctionAsk = 12,
-    /// 거래정지
-    Suspended = 13,
-    /// 셧다운
-    Shutdown = 14,
-    /// 장마감
-    Closed = 15,
-    /// 기타
-    Etc = 16,
-}
-impl SessionId {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            SessionId::Unspecified => "SESSION_ID_UNSPECIFIED",
-            SessionId::Previous => "PREVIOUS",
-            SessionId::Connected => "CONNECTED",
-            SessionId::OpeningOnePrice => "OPENING_ONE_PRICE",
-            SessionId::OnePrice => "ONE_PRICE",
-            SessionId::ClosingOnePrice => "CLOSING_ONE_PRICE",
-            SessionId::ViOnePrice => "VI_ONE_PRICE",
-            SessionId::ViOpeningOnePrice => "VI_OPENING_ONE_PRICE",
-            SessionId::ViClosingOnePrice => "VI_CLOSING_ONE_PRICE",
-            SessionId::UnitTrade => "UNIT_TRADE",
-            SessionId::PostMarket => "POST_MARKET",
-            SessionId::AuctionBid => "AUCTION_BID",
-            SessionId::AuctionAsk => "AUCTION_ASK",
-            SessionId::Suspended => "SUSPENDED",
-            SessionId::Shutdown => "SHUTDOWN",
-            SessionId::Closed => "CLOSED",
-            SessionId::Etc => "ETC",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "SESSION_ID_UNSPECIFIED" => Some(Self::Unspecified),
-            "PREVIOUS" => Some(Self::Previous),
-            "CONNECTED" => Some(Self::Connected),
-            "OPENING_ONE_PRICE" => Some(Self::OpeningOnePrice),
-            "ONE_PRICE" => Some(Self::OnePrice),
-            "CLOSING_ONE_PRICE" => Some(Self::ClosingOnePrice),
-            "VI_ONE_PRICE" => Some(Self::ViOnePrice),
-            "VI_OPENING_ONE_PRICE" => Some(Self::ViOpeningOnePrice),
-            "VI_CLOSING_ONE_PRICE" => Some(Self::ViClosingOnePrice),
-            "UNIT_TRADE" => Some(Self::UnitTrade),
-            "POST_MARKET" => Some(Self::PostMarket),
-            "AUCTION_BID" => Some(Self::AuctionBid),
-            "AUCTION_ASK" => Some(Self::AuctionAsk),
-            "SUSPENDED" => Some(Self::Suspended),
-            "SHUTDOWN" => Some(Self::Shutdown),
-            "CLOSED" => Some(Self::Closed),
-            "ETC" => Some(Self::Etc),
-            _ => None,
-        }
-    }
 }
 include!("kdo.v1.market.tonic.rs");
 include!("kdo.v1.market.serde.rs");

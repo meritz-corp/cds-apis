@@ -165,46 +165,90 @@ impl ProductType {
         }
     }
 }
-/// 거래 세션 타입
+/// KRX 세부 세션 ID (16-state)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum TradingSession {
+pub enum SessionId {
     Unspecified = 0,
-    /// 장 시작 전
-    PreMarket = 1,
-    /// 시가 동시호가 (08:30 ~ 09:00)
-    OpeningAuction = 2,
-    /// 장중 (09:00 ~ 15:20)
-    Regular = 3,
-    /// 종가 동시호가 (15:20 ~ 15:30)
-    ClosingAuction = 4,
-    /// 장 종료
-    Closed = 5,
+    /// 장개시전
+    Previous = 1,
+    /// 연결됨
+    Connected = 2,
+    /// 시가단일가
+    OpeningOnePrice = 3,
+    /// 단일가
+    OnePrice = 4,
+    /// 종가단일가
+    ClosingOnePrice = 5,
+    /// VI장중단일가
+    ViOnePrice = 6,
+    /// VI시가단일가
+    ViOpeningOnePrice = 7,
+    /// VI종가단일가
+    ViClosingOnePrice = 8,
+    /// 단위매매
+    UnitTrade = 9,
+    /// 장종료후호가접수
+    PostMarket = 10,
+    /// 경매매수호가 접수 세션
+    AuctionBid = 11,
+    /// 경매매도호가 접수 세션
+    AuctionAsk = 12,
+    /// 거래정지
+    Suspended = 13,
+    /// 셧다운
+    Shutdown = 14,
+    /// 장마감
+    Closed = 15,
+    /// 기타
+    Etc = 16,
 }
-impl TradingSession {
+impl SessionId {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TradingSession::Unspecified => "TRADING_SESSION_UNSPECIFIED",
-            TradingSession::PreMarket => "TRADING_SESSION_PRE_MARKET",
-            TradingSession::OpeningAuction => "TRADING_SESSION_OPENING_AUCTION",
-            TradingSession::Regular => "TRADING_SESSION_REGULAR",
-            TradingSession::ClosingAuction => "TRADING_SESSION_CLOSING_AUCTION",
-            TradingSession::Closed => "TRADING_SESSION_CLOSED",
+            SessionId::Unspecified => "SESSION_ID_UNSPECIFIED",
+            SessionId::Previous => "PREVIOUS",
+            SessionId::Connected => "CONNECTED",
+            SessionId::OpeningOnePrice => "OPENING_ONE_PRICE",
+            SessionId::OnePrice => "ONE_PRICE",
+            SessionId::ClosingOnePrice => "CLOSING_ONE_PRICE",
+            SessionId::ViOnePrice => "VI_ONE_PRICE",
+            SessionId::ViOpeningOnePrice => "VI_OPENING_ONE_PRICE",
+            SessionId::ViClosingOnePrice => "VI_CLOSING_ONE_PRICE",
+            SessionId::UnitTrade => "UNIT_TRADE",
+            SessionId::PostMarket => "POST_MARKET",
+            SessionId::AuctionBid => "AUCTION_BID",
+            SessionId::AuctionAsk => "AUCTION_ASK",
+            SessionId::Suspended => "SUSPENDED",
+            SessionId::Shutdown => "SHUTDOWN",
+            SessionId::Closed => "CLOSED",
+            SessionId::Etc => "ETC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "TRADING_SESSION_UNSPECIFIED" => Some(Self::Unspecified),
-            "TRADING_SESSION_PRE_MARKET" => Some(Self::PreMarket),
-            "TRADING_SESSION_OPENING_AUCTION" => Some(Self::OpeningAuction),
-            "TRADING_SESSION_REGULAR" => Some(Self::Regular),
-            "TRADING_SESSION_CLOSING_AUCTION" => Some(Self::ClosingAuction),
-            "TRADING_SESSION_CLOSED" => Some(Self::Closed),
+            "SESSION_ID_UNSPECIFIED" => Some(Self::Unspecified),
+            "PREVIOUS" => Some(Self::Previous),
+            "CONNECTED" => Some(Self::Connected),
+            "OPENING_ONE_PRICE" => Some(Self::OpeningOnePrice),
+            "ONE_PRICE" => Some(Self::OnePrice),
+            "CLOSING_ONE_PRICE" => Some(Self::ClosingOnePrice),
+            "VI_ONE_PRICE" => Some(Self::ViOnePrice),
+            "VI_OPENING_ONE_PRICE" => Some(Self::ViOpeningOnePrice),
+            "VI_CLOSING_ONE_PRICE" => Some(Self::ViClosingOnePrice),
+            "UNIT_TRADE" => Some(Self::UnitTrade),
+            "POST_MARKET" => Some(Self::PostMarket),
+            "AUCTION_BID" => Some(Self::AuctionBid),
+            "AUCTION_ASK" => Some(Self::AuctionAsk),
+            "SUSPENDED" => Some(Self::Suspended),
+            "SHUTDOWN" => Some(Self::Shutdown),
+            "CLOSED" => Some(Self::Closed),
+            "ETC" => Some(Self::Etc),
             _ => None,
         }
     }
