@@ -34,7 +34,7 @@ pub struct Stock {
     /// 대차 가능 여부
     #[prost(bool, tag="10")]
     pub short_sellable: bool,
-    /// 호가 단위
+    /// 틱 크기
     #[prost(int64, tag="11")]
     pub tick_size: i64,
 }

@@ -47,7 +47,7 @@ type Stock struct {
 	Tradable bool `protobuf:"varint,9,opt,name=tradable,proto3" json:"tradable,omitempty"`
 	// 대차 가능 여부
 	ShortSellable bool `protobuf:"varint,10,opt,name=short_sellable,json=shortSellable,proto3" json:"short_sellable,omitempty"`
-	// 호가 단위
+	// 틱 크기
 	TickSize int64 `protobuf:"varint,11,opt,name=tick_size,json=tickSize,proto3" json:"tick_size,omitempty"`
 }
 

@@ -73,6 +73,9 @@ message Stock {
 
   // 대차 가능 여부
   bool short_sellable = 10;
+
+  // 틱 크기
+  int64 tick_size = 11;
 }
 
 // ========== Request/Response Messages ==========

@@ -186,7 +186,7 @@ class Stock extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearShortSellable() => $_clearField(10);
 
-  /// 호가 단위
+  /// 틱 크기
   @$pb.TagNumber(11)
   $fixnum.Int64 get tickSize => $_getI64(10);
   @$pb.TagNumber(11)

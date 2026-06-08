@@ -242,7 +242,7 @@
         "tickSize": {
           "type": "string",
           "format": "int64",
-          "title": "호가 단위"
+          "title": "틱 크기"
         }
       },
       "title": "주식 종목 정보"
