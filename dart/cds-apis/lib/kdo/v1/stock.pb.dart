@@ -32,6 +32,7 @@ class Stock extends $pb.GeneratedMessage {
     $fixnum.Int64? listedQuantity,
     $core.bool? tradable,
     $core.bool? shortSellable,
+    $fixnum.Int64? tickSize,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -44,6 +45,7 @@ class Stock extends $pb.GeneratedMessage {
     if (listedQuantity != null) result.listedQuantity = listedQuantity;
     if (tradable != null) result.tradable = tradable;
     if (shortSellable != null) result.shortSellable = shortSellable;
+    if (tickSize != null) result.tickSize = tickSize;
     return result;
   }
 
@@ -63,6 +65,7 @@ class Stock extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'listedQuantity')
     ..aOB(9, _omitFieldNames ? '' : 'tradable')
     ..aOB(10, _omitFieldNames ? '' : 'shortSellable')
+    ..aInt64(11, _omitFieldNames ? '' : 'tickSize')
     ..hasRequiredFields = false
   ;
 
@@ -182,6 +185,16 @@ class Stock extends $pb.GeneratedMessage {
   $core.bool hasShortSellable() => $_has(9);
   @$pb.TagNumber(10)
   void clearShortSellable() => $_clearField(10);
+
+  /// 호가 단위
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get tickSize => $_getI64(10);
+  @$pb.TagNumber(11)
+  set tickSize($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasTickSize() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearTickSize() => $_clearField(11);
 }
 
 class GetStockRequest extends $pb.GeneratedMessage {

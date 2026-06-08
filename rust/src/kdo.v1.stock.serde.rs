@@ -574,6 +574,9 @@ impl serde::Serialize for Stock {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.stock.Stock", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -613,6 +616,11 @@ impl serde::Serialize for Stock {
         if true {
             struct_ser.serialize_field("short_sellable", &self.short_sellable)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -639,6 +647,8 @@ impl<'de> serde::Deserialize<'de> for Stock {
             "tradable",
             "short_sellable",
             "shortSellable",
+            "tick_size",
+            "tickSize",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -653,6 +663,7 @@ impl<'de> serde::Deserialize<'de> for Stock {
             ListedQuantity,
             Tradable,
             ShortSellable,
+            TickSize,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -685,6 +696,7 @@ impl<'de> serde::Deserialize<'de> for Stock {
                             "listedQuantity" | "listed_quantity" => Ok(GeneratedField::ListedQuantity),
                             "tradable" => Ok(GeneratedField::Tradable),
                             "shortSellable" | "short_sellable" => Ok(GeneratedField::ShortSellable),
+                            "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -714,6 +726,7 @@ impl<'de> serde::Deserialize<'de> for Stock {
                 let mut listed_quantity__ = None;
                 let mut tradable__ = None;
                 let mut short_sellable__ = None;
+                let mut tick_size__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -782,6 +795,14 @@ impl<'de> serde::Deserialize<'de> for Stock {
                             }
                             short_sellable__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::TickSize => {
+                            if tick_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickSize"));
+                            }
+                            tick_size__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -798,6 +819,7 @@ impl<'de> serde::Deserialize<'de> for Stock {
                     listed_quantity: listed_quantity__.unwrap_or_default(),
                     tradable: tradable__.unwrap_or_default(),
                     short_sellable: short_sellable__.unwrap_or_default(),
+                    tick_size: tick_size__.unwrap_or_default(),
                 })
             }
         }

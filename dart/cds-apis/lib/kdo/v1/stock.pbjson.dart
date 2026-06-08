@@ -28,6 +28,7 @@ const Stock$json = {
     {'1': 'listed_quantity', '3': 8, '4': 1, '5': 3, '10': 'listedQuantity'},
     {'1': 'tradable', '3': 9, '4': 1, '5': 8, '10': 'tradable'},
     {'1': 'short_sellable', '3': 10, '4': 1, '5': 8, '10': 'shortSellable'},
+    {'1': 'tick_size', '3': 11, '4': 1, '5': 3, '10': 'tickSize'},
   ],
   '7': {},
 };
@@ -40,7 +41,8 @@ final $typed_data.Uint8List stockDescriptor = $convert.base64Decode(
     'oKcHJldl9wcmljZRgGIAEoA1IJcHJldlByaWNlEh0KCmxhc3RfcHJpY2UYByABKANSCWxhc3RQ'
     'cmljZRInCg9saXN0ZWRfcXVhbnRpdHkYCCABKANSDmxpc3RlZFF1YW50aXR5EhoKCHRyYWRhYm'
     'xlGAkgASgIUgh0cmFkYWJsZRIlCg5zaG9ydF9zZWxsYWJsZRgKIAEoCFINc2hvcnRTZWxsYWJs'
-    'ZToq6kEnChVrZG8uY2RzYXBpcy54eXovU3RvY2sSDnN0b2Nrcy97c3RvY2t9');
+    'ZRIbCgl0aWNrX3NpemUYCyABKANSCHRpY2tTaXplOirqQScKFWtkby5jZHNhcGlzLnh5ei9TdG'
+    '9jaxIOc3RvY2tzL3tzdG9ja30=');
 
 @$core.Deprecated('Use getStockRequestDescriptor instead')
 const GetStockRequest$json = {

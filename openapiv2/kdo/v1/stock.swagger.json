@@ -238,6 +238,11 @@
         "shortSellable": {
           "type": "boolean",
           "title": "대차 가능 여부"
+        },
+        "tickSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "호가 단위"
         }
       },
       "title": "주식 종목 정보"
