@@ -478,6 +478,9 @@ pub struct ListPairExecutionLogsRequest {
     /// 정렬 기준 (기본: dispatched_at DESC)
     #[prost(string, tag="4")]
     pub order_by: ::prost::alloc::string::String,
+    /// outcome 필터 (UNSPECIFIED = 전체, 그 외 값이면 해당 outcome만 반환)
+    #[prost(enumeration="PairExecutionOutcome", tag="5")]
+    pub outcome: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -669,6 +669,7 @@ const ListPairExecutionLogsRequest$json = {
     {'1': 'page_size', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
     {'1': 'order_by', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'orderBy'},
+    {'1': 'outcome', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairExecutionOutcome', '10': 'outcome'},
   ],
   '8': [
     {'1': '_page_size'},
@@ -681,7 +682,8 @@ final $typed_data.Uint8List listPairExecutionLogsRequestDescriptor = $convert.ba
     'ChxMaXN0UGFpckV4ZWN1dGlvbkxvZ3NSZXF1ZXN0EjEKBHBhaXIYASABKAlCHeJBAQL6QRYKFG'
     'tkby5jZHNhcGlzLnh5ei9QYWlyUgRwYWlyEiAKCXBhZ2Vfc2l6ZRgCIAEoBUgAUghwYWdlU2l6'
     'ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBARIfCghvcmRlcl9ieRgEIA'
-    'EoCUIE4kEBAVIHb3JkZXJCeUIMCgpfcGFnZV9zaXplQg0KC19wYWdlX3Rva2Vu');
+    'EoCUIE4kEBAVIHb3JkZXJCeRI7CgdvdXRjb21lGAUgASgOMiEua2RvLnYxLnBhaXIuUGFpckV4'
+    'ZWN1dGlvbk91dGNvbWVSB291dGNvbWVCDAoKX3BhZ2Vfc2l6ZUINCgtfcGFnZV90b2tlbg==');
 
 @$core.Deprecated('Use listPairExecutionLogsResponseDescriptor instead')
 const ListPairExecutionLogsResponse$json = {

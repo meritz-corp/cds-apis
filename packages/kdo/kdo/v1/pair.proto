@@ -711,6 +711,9 @@ message ListPairExecutionLogsRequest {
   string order_by = 4 [
     (google.api.field_behavior) = OPTIONAL
   ];
+
+  // outcome 필터 (UNSPECIFIED = 전체, 그 외 값이면 해당 outcome만 반환)
+  PairExecutionOutcome outcome = 5;
 }
 
 message ListPairExecutionLogsResponse {

@@ -2151,12 +2151,14 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? orderBy,
+    PairExecutionOutcome? outcome,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
     if (orderBy != null) result.orderBy = orderBy;
+    if (outcome != null) result.outcome = outcome;
     return result;
   }
 
@@ -2170,6 +2172,7 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
     ..aOS(4, _omitFieldNames ? '' : 'orderBy')
+    ..e<PairExecutionOutcome>(5, _omitFieldNames ? '' : 'outcome', $pb.PbFieldType.OE, defaultOrMaker: PairExecutionOutcome.PAIR_EXECUTION_OUTCOME_UNSPECIFIED, valueOf: PairExecutionOutcome.valueOf, enumValues: PairExecutionOutcome.values)
     ..hasRequiredFields = false
   ;
 
@@ -2229,6 +2232,16 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
   $core.bool hasOrderBy() => $_has(3);
   @$pb.TagNumber(4)
   void clearOrderBy() => $_clearField(4);
+
+  /// outcome 필터 (UNSPECIFIED = 전체, 그 외 값이면 해당 outcome만 반환)
+  @$pb.TagNumber(5)
+  PairExecutionOutcome get outcome => $_getN(4);
+  @$pb.TagNumber(5)
+  set outcome(PairExecutionOutcome value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOutcome() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOutcome() => $_clearField(5);
 }
 
 class ListPairExecutionLogsResponse extends $pb.GeneratedMessage {
