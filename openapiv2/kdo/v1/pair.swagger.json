@@ -955,6 +955,16 @@
         "detail": {
           "type": "string",
           "title": "상세 내용 (오류 메시지 등, optional)"
+        },
+        "baseQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "Base 레그 최종 체결 수량"
+        },
+        "counterQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "Counter 레그 최종 체결 수량"
         }
       },
       "title": "페어 실행 로그 레코드"
@@ -968,10 +978,11 @@
         "PAIR_EXECUTION_OUTCOME_SKIPPED_COOLDOWN",
         "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED",
         "PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE",
-        "PAIR_EXECUTION_OUTCOME_FAILED"
+        "PAIR_EXECUTION_OUTCOME_FAILED",
+        "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED"
       ],
       "default": "PAIR_EXECUTION_OUTCOME_UNSPECIFIED",
-      "description": "- PAIR_EXECUTION_OUTCOME_SUBMITTED: 발주 성공\n - PAIR_EXECUTION_OUTCOME_SKIPPED_PRE_VALIDATION: 사전 검증 실패로 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_COOLDOWN: 쿨다운 중 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED: 사전 계산 없음으로 스킵\n - PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE: 한쪽만 발주 성공 (부분 실패)\n - PAIR_EXECUTION_OUTCOME_FAILED: 전체 실패",
+      "description": "- PAIR_EXECUTION_OUTCOME_SUBMITTED: 발주 성공\n - PAIR_EXECUTION_OUTCOME_SKIPPED_PRE_VALIDATION: 사전 검증 실패로 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_COOLDOWN: 쿨다운 중 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED: 사전 계산 없음으로 스킵\n - PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE: 한쪽만 발주 성공 (부분 실패)\n - PAIR_EXECUTION_OUTCOME_FAILED: 전체 실패\n - PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED: 체결 수량 없음으로 스킵 (filled qty = 0)",
       "title": "페어 실행 결과"
     },
     "pairPairLeg": {

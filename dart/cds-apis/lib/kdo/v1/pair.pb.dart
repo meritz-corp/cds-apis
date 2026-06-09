@@ -1939,6 +1939,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? spread,
     $2.Timestamp? dispatchedAt,
     $core.String? detail,
+    $fixnum.Int64? baseQty,
+    $fixnum.Int64? counterQty,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1951,6 +1953,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (spread != null) result.spread = spread;
     if (dispatchedAt != null) result.dispatchedAt = dispatchedAt;
     if (detail != null) result.detail = detail;
+    if (baseQty != null) result.baseQty = baseQty;
+    if (counterQty != null) result.counterQty = counterQty;
     return result;
   }
 
@@ -1970,6 +1974,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'spread')
     ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'dispatchedAt', subBuilder: $2.Timestamp.create)
     ..aOS(10, _omitFieldNames ? '' : 'detail')
+    ..aInt64(11, _omitFieldNames ? '' : 'baseQty')
+    ..aInt64(12, _omitFieldNames ? '' : 'counterQty')
     ..hasRequiredFields = false
   ;
 
@@ -2091,6 +2097,26 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   $core.bool hasDetail() => $_has(9);
   @$pb.TagNumber(10)
   void clearDetail() => $_clearField(10);
+
+  /// Base 레그 최종 체결 수량
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get baseQty => $_getI64(10);
+  @$pb.TagNumber(11)
+  set baseQty($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasBaseQty() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearBaseQty() => $_clearField(11);
+
+  /// Counter 레그 최종 체결 수량
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get counterQty => $_getI64(11);
+  @$pb.TagNumber(12)
+  set counterQty($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasCounterQty() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearCounterQty() => $_clearField(12);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {

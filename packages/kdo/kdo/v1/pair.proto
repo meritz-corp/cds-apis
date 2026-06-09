@@ -659,6 +659,12 @@ message PairExecutionLog {
 
   // 상세 내용 (오류 메시지 등, optional)
   optional string detail = 10;
+
+  // Base 레그 최종 체결 수량
+  int64 base_qty = 11;
+
+  // Counter 레그 최종 체결 수량
+  int64 counter_qty = 12;
 }
 
 // 페어 실행 결과
@@ -676,6 +682,8 @@ enum PairExecutionOutcome {
   PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE = 5;
   // 전체 실패
   PAIR_EXECUTION_OUTCOME_FAILED = 6;
+  // 체결 수량 없음으로 스킵 (filled qty = 0)
+  PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED = 7;
 }
 
 message ListPairExecutionLogsRequest {

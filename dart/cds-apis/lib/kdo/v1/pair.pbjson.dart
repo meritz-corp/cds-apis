@@ -156,6 +156,7 @@ const PairExecutionOutcome$json = {
     {'1': 'PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED', '2': 4},
     {'1': 'PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE', '2': 5},
     {'1': 'PAIR_EXECUTION_OUTCOME_FAILED', '2': 6},
+    {'1': 'PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED', '2': 7},
   ],
 };
 
@@ -166,7 +167,8 @@ final $typed_data.Uint8List pairExecutionOutcomeDescriptor = $convert.base64Deco
     'RUNVVElPTl9PVVRDT01FX1NLSVBQRURfUFJFX1ZBTElEQVRJT04QAhIrCidQQUlSX0VYRUNVVE'
     'lPTl9PVVRDT01FX1NLSVBQRURfQ09PTERPV04QAxIxCi1QQUlSX0VYRUNVVElPTl9PVVRDT01F'
     'X1NLSVBQRURfTk9fUFJFQ09NUFVURUQQBBIqCiZQQUlSX0VYRUNVVElPTl9PVVRDT01FX1BBUl'
-    'RJQUxfRkFJTFVSRRAFEiEKHVBBSVJfRVhFQ1VUSU9OX09VVENPTUVfRkFJTEVEEAY=');
+    'RJQUxfRkFJTFVSRRAFEiEKHVBBSVJfRVhFQ1VUSU9OX09VVENPTUVfRkFJTEVEEAYSLAooUEFJ'
+    'Ul9FWEVDVVRJT05fT1VUQ09NRV9TS0lQUEVEX05PX0ZJTExFRBAH');
 
 @$core.Deprecated('Use makerTakerEventTypeDescriptor instead')
 const MakerTakerEventType$json = {
@@ -633,6 +635,8 @@ const PairExecutionLog$json = {
     {'1': 'spread', '3': 8, '4': 1, '5': 3, '10': 'spread'},
     {'1': 'dispatched_at', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'dispatchedAt'},
     {'1': 'detail', '3': 10, '4': 1, '5': 9, '9': 2, '10': 'detail', '17': true},
+    {'1': 'base_qty', '3': 11, '4': 1, '5': 3, '10': 'baseQty'},
+    {'1': 'counter_qty', '3': 12, '4': 1, '5': 3, '10': 'counterQty'},
   ],
   '8': [
     {'1': '_base_order_id'},
@@ -650,8 +654,9 @@ final $typed_data.Uint8List pairExecutionLogDescriptor = $convert.base64Decode(
     'CgpiYXNlX3ByaWNlGAYgASgDUgliYXNlUHJpY2USIwoNY291bnRlcl9wcmljZRgHIAEoA1IMY2'
     '91bnRlclByaWNlEhYKBnNwcmVhZBgIIAEoA1IGc3ByZWFkEj8KDWRpc3BhdGNoZWRfYXQYCSAB'
     'KAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgxkaXNwYXRjaGVkQXQSGwoGZGV0YWlsGA'
-    'ogASgJSAJSBmRldGFpbIgBAUIQCg5fYmFzZV9vcmRlcl9pZEITChFfY291bnRlcl9vcmRlcl9p'
-    'ZEIJCgdfZGV0YWls');
+    'ogASgJSAJSBmRldGFpbIgBARIZCghiYXNlX3F0eRgLIAEoA1IHYmFzZVF0eRIfCgtjb3VudGVy'
+    'X3F0eRgMIAEoA1IKY291bnRlclF0eUIQCg5fYmFzZV9vcmRlcl9pZEITChFfY291bnRlcl9vcm'
+    'Rlcl9pZEIJCgdfZGV0YWls');
 
 @$core.Deprecated('Use listPairExecutionLogsRequestDescriptor instead')
 const ListPairExecutionLogsRequest$json = {

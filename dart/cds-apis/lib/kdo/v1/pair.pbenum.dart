@@ -206,6 +206,8 @@ class PairExecutionOutcome extends $pb.ProtobufEnum {
   static const PairExecutionOutcome PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE = PairExecutionOutcome._(5, _omitEnumNames ? '' : 'PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE');
   /// 전체 실패
   static const PairExecutionOutcome PAIR_EXECUTION_OUTCOME_FAILED = PairExecutionOutcome._(6, _omitEnumNames ? '' : 'PAIR_EXECUTION_OUTCOME_FAILED');
+  /// 체결 수량 없음으로 스킵 (filled qty = 0)
+  static const PairExecutionOutcome PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED = PairExecutionOutcome._(7, _omitEnumNames ? '' : 'PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED');
 
   static const $core.List<PairExecutionOutcome> values = <PairExecutionOutcome> [
     PAIR_EXECUTION_OUTCOME_UNSPECIFIED,
@@ -215,9 +217,10 @@ class PairExecutionOutcome extends $pb.ProtobufEnum {
     PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED,
     PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE,
     PAIR_EXECUTION_OUTCOME_FAILED,
+    PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED,
   ];
 
-  static final $core.List<PairExecutionOutcome?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 6);
+  static final $core.List<PairExecutionOutcome?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
   static PairExecutionOutcome? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const PairExecutionOutcome._(super.value, super.name);

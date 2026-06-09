@@ -450,6 +450,12 @@ pub struct PairExecutionLog {
     /// 상세 내용 (오류 메시지 등, optional)
     #[prost(string, optional, tag="10")]
     pub detail: ::core::option::Option<::prost::alloc::string::String>,
+    /// Base 레그 최종 체결 수량
+    #[prost(int64, tag="11")]
+    pub base_qty: i64,
+    /// Counter 레그 최종 체결 수량
+    #[prost(int64, tag="12")]
+    pub counter_qty: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -937,6 +943,8 @@ pub enum PairExecutionOutcome {
     PartialFailure = 5,
     /// 전체 실패
     Failed = 6,
+    /// 체결 수량 없음으로 스킵 (filled qty = 0)
+    SkippedNoFilled = 7,
 }
 impl PairExecutionOutcome {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -952,6 +960,7 @@ impl PairExecutionOutcome {
             PairExecutionOutcome::SkippedNoPrecomputed => "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED",
             PairExecutionOutcome::PartialFailure => "PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE",
             PairExecutionOutcome::Failed => "PAIR_EXECUTION_OUTCOME_FAILED",
+            PairExecutionOutcome::SkippedNoFilled => "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -964,6 +973,7 @@ impl PairExecutionOutcome {
             "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED" => Some(Self::SkippedNoPrecomputed),
             "PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE" => Some(Self::PartialFailure),
             "PAIR_EXECUTION_OUTCOME_FAILED" => Some(Self::Failed),
+            "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED" => Some(Self::SkippedNoFilled),
             _ => None,
         }
     }

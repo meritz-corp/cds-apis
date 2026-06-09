@@ -3288,6 +3288,12 @@ impl serde::Serialize for PairExecutionLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairExecutionLog", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -3331,6 +3337,16 @@ impl serde::Serialize for PairExecutionLog {
         if let Some(v) = self.detail.as_ref() {
             struct_ser.serialize_field("detail", v)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_qty", ToString::to_string(&self.base_qty).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_qty", ToString::to_string(&self.counter_qty).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -3357,6 +3373,10 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "dispatched_at",
             "dispatchedAt",
             "detail",
+            "base_qty",
+            "baseQty",
+            "counter_qty",
+            "counterQty",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3371,6 +3391,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             Spread,
             DispatchedAt,
             Detail,
+            BaseQty,
+            CounterQty,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3403,6 +3425,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "spread" => Ok(GeneratedField::Spread),
                             "dispatchedAt" | "dispatched_at" => Ok(GeneratedField::DispatchedAt),
                             "detail" => Ok(GeneratedField::Detail),
+                            "baseQty" | "base_qty" => Ok(GeneratedField::BaseQty),
+                            "counterQty" | "counter_qty" => Ok(GeneratedField::CounterQty),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3432,6 +3456,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut spread__ = None;
                 let mut dispatched_at__ = None;
                 let mut detail__ = None;
+                let mut base_qty__ = None;
+                let mut counter_qty__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairId => {
@@ -3506,6 +3532,22 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             }
                             detail__ = map_.next_value()?;
                         }
+                        GeneratedField::BaseQty => {
+                            if base_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseQty"));
+                            }
+                            base_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterQty => {
+                            if counter_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterQty"));
+                            }
+                            counter_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3522,6 +3564,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     spread: spread__.unwrap_or_default(),
                     dispatched_at: dispatched_at__,
                     detail: detail__,
+                    base_qty: base_qty__.unwrap_or_default(),
+                    counter_qty: counter_qty__.unwrap_or_default(),
                 })
             }
         }
@@ -3542,6 +3586,7 @@ impl serde::Serialize for PairExecutionOutcome {
             Self::SkippedNoPrecomputed => "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED",
             Self::PartialFailure => "PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE",
             Self::Failed => "PAIR_EXECUTION_OUTCOME_FAILED",
+            Self::SkippedNoFilled => "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED",
         };
         serializer.serialize_str(variant)
     }
@@ -3560,6 +3605,7 @@ impl<'de> serde::Deserialize<'de> for PairExecutionOutcome {
             "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED",
             "PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE",
             "PAIR_EXECUTION_OUTCOME_FAILED",
+            "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED",
         ];
 
         struct GeneratedVisitor;
@@ -3607,6 +3653,7 @@ impl<'de> serde::Deserialize<'de> for PairExecutionOutcome {
                     "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED" => Ok(PairExecutionOutcome::SkippedNoPrecomputed),
                     "PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE" => Ok(PairExecutionOutcome::PartialFailure),
                     "PAIR_EXECUTION_OUTCOME_FAILED" => Ok(PairExecutionOutcome::Failed),
+                    "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED" => Ok(PairExecutionOutcome::SkippedNoFilled),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
