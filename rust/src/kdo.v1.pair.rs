@@ -462,6 +462,14 @@ pub struct PairExecutionLog {
     /// Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
     #[prost(int64, tag="14")]
     pub counter_fill_price: i64,
+    /// IOC 모드에서 트리거 마켓데이터 수신 시점부터 base 최초 주문 제출 직후까지의 경과 (us)
+    /// 비IOC 모드 또는 미적용 시 0
+    #[prost(int64, tag="15")]
+    pub trigger_to_base_submit_us: i64,
+    /// IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)
+    /// 비IOC 모드 또는 미적용 시 0
+    #[prost(int64, tag="16")]
+    pub trigger_to_counter_submit_us: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

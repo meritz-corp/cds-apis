@@ -993,6 +993,16 @@
           "type": "string",
           "format": "int64",
           "title": "Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)"
+        },
+        "triggerToBaseSubmitUs": {
+          "type": "string",
+          "format": "int64",
+          "title": "IOC 모드에서 트리거 마켓데이터 수신 시점부터 base 최초 주문 제출 직후까지의 경과 (us)\n비IOC 모드 또는 미적용 시 0"
+        },
+        "triggerToCounterSubmitUs": {
+          "type": "string",
+          "format": "int64",
+          "title": "IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)\n비IOC 모드 또는 미적용 시 0"
         }
       },
       "title": "페어 실행 로그 레코드"

@@ -1943,6 +1943,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? counterQty,
     $fixnum.Int64? baseFillPrice,
     $fixnum.Int64? counterFillPrice,
+    $fixnum.Int64? triggerToBaseSubmitUs,
+    $fixnum.Int64? triggerToCounterSubmitUs,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1959,6 +1961,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (counterQty != null) result.counterQty = counterQty;
     if (baseFillPrice != null) result.baseFillPrice = baseFillPrice;
     if (counterFillPrice != null) result.counterFillPrice = counterFillPrice;
+    if (triggerToBaseSubmitUs != null) result.triggerToBaseSubmitUs = triggerToBaseSubmitUs;
+    if (triggerToCounterSubmitUs != null) result.triggerToCounterSubmitUs = triggerToCounterSubmitUs;
     return result;
   }
 
@@ -1982,6 +1986,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..aInt64(12, _omitFieldNames ? '' : 'counterQty')
     ..aInt64(13, _omitFieldNames ? '' : 'baseFillPrice')
     ..aInt64(14, _omitFieldNames ? '' : 'counterFillPrice')
+    ..aInt64(15, _omitFieldNames ? '' : 'triggerToBaseSubmitUs')
+    ..aInt64(16, _omitFieldNames ? '' : 'triggerToCounterSubmitUs')
     ..hasRequiredFields = false
   ;
 
@@ -2143,6 +2149,28 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   $core.bool hasCounterFillPrice() => $_has(13);
   @$pb.TagNumber(14)
   void clearCounterFillPrice() => $_clearField(14);
+
+  /// IOC 모드에서 트리거 마켓데이터 수신 시점부터 base 최초 주문 제출 직후까지의 경과 (us)
+  /// 비IOC 모드 또는 미적용 시 0
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get triggerToBaseSubmitUs => $_getI64(14);
+  @$pb.TagNumber(15)
+  set triggerToBaseSubmitUs($fixnum.Int64 value) => $_setInt64(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasTriggerToBaseSubmitUs() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearTriggerToBaseSubmitUs() => $_clearField(15);
+
+  /// IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)
+  /// 비IOC 모드 또는 미적용 시 0
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get triggerToCounterSubmitUs => $_getI64(15);
+  @$pb.TagNumber(16)
+  set triggerToCounterSubmitUs($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasTriggerToCounterSubmitUs() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearTriggerToCounterSubmitUs() => $_clearField(16);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {

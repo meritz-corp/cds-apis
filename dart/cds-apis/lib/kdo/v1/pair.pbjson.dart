@@ -639,6 +639,8 @@ const PairExecutionLog$json = {
     {'1': 'counter_qty', '3': 12, '4': 1, '5': 3, '10': 'counterQty'},
     {'1': 'base_fill_price', '3': 13, '4': 1, '5': 3, '10': 'baseFillPrice'},
     {'1': 'counter_fill_price', '3': 14, '4': 1, '5': 3, '10': 'counterFillPrice'},
+    {'1': 'trigger_to_base_submit_us', '3': 15, '4': 1, '5': 3, '10': 'triggerToBaseSubmitUs'},
+    {'1': 'trigger_to_counter_submit_us', '3': 16, '4': 1, '5': 3, '10': 'triggerToCounterSubmitUs'},
   ],
   '8': [
     {'1': '_base_order_id'},
@@ -658,8 +660,11 @@ final $typed_data.Uint8List pairExecutionLogDescriptor = $convert.base64Decode(
     'KAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgxkaXNwYXRjaGVkQXQSGwoGZGV0YWlsGA'
     'ogASgJSAJSBmRldGFpbIgBARIZCghiYXNlX3F0eRgLIAEoA1IHYmFzZVF0eRIfCgtjb3VudGVy'
     'X3F0eRgMIAEoA1IKY291bnRlclF0eRImCg9iYXNlX2ZpbGxfcHJpY2UYDSABKANSDWJhc2VGaW'
-    'xsUHJpY2USLAoSY291bnRlcl9maWxsX3ByaWNlGA4gASgDUhBjb3VudGVyRmlsbFByaWNlQhAK'
-    'Dl9iYXNlX29yZGVyX2lkQhMKEV9jb3VudGVyX29yZGVyX2lkQgkKB19kZXRhaWw=');
+    'xsUHJpY2USLAoSY291bnRlcl9maWxsX3ByaWNlGA4gASgDUhBjb3VudGVyRmlsbFByaWNlEjgK'
+    'GXRyaWdnZXJfdG9fYmFzZV9zdWJtaXRfdXMYDyABKANSFXRyaWdnZXJUb0Jhc2VTdWJtaXRVcx'
+    'I+Chx0cmlnZ2VyX3RvX2NvdW50ZXJfc3VibWl0X3VzGBAgASgDUhh0cmlnZ2VyVG9Db3VudGVy'
+    'U3VibWl0VXNCEAoOX2Jhc2Vfb3JkZXJfaWRCEwoRX2NvdW50ZXJfb3JkZXJfaWRCCQoHX2RldG'
+    'FpbA==');
 
 @$core.Deprecated('Use listPairExecutionLogsRequestDescriptor instead')
 const ListPairExecutionLogsRequest$json = {
