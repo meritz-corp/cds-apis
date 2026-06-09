@@ -14,6 +14,21 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use orderTpCodeDescriptor instead')
+const OrderTpCode$json = {
+  '1': 'OrderTpCode',
+  '2': [
+    {'1': 'ORDER_TP_CODE_UNSPECIFIED', '2': 0},
+    {'1': 'ORDER_TP_CODE_NONE', '2': 1},
+    {'1': 'ORDER_TP_CODE_LP', '2': 2},
+  ],
+};
+
+/// Descriptor for `OrderTpCode`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List orderTpCodeDescriptor = $convert.base64Decode(
+    'CgtPcmRlclRwQ29kZRIdChlPUkRFUl9UUF9DT0RFX1VOU1BFQ0lGSUVEEAASFgoST1JERVJfVF'
+    'BfQ09ERV9OT05FEAESFAoQT1JERVJfVFBfQ09ERV9MUBAC');
+
 @$core.Deprecated('Use execPriceTypeDescriptor instead')
 const ExecPriceType$json = {
   '1': 'ExecPriceType',
@@ -72,6 +87,7 @@ const Hedge$json = {
     {'1': 'quantity_per_hedge', '3': 12, '4': 3, '5': 11, '6': '.kdo.v1.hedge.Hedge.QuantityPerHedgeEntry', '8': {}, '10': 'quantityPerHedge'},
     {'1': 'hedge_fund_code', '3': 13, '4': 1, '5': 9, '8': {}, '10': 'hedgeFundCode'},
     {'1': 'tick_offset', '3': 14, '4': 1, '5': 5, '10': 'tickOffset'},
+    {'1': 'tp_code', '3': 15, '4': 1, '5': 14, '6': '.kdo.v1.hedge.OrderTpCode', '10': 'tpCode'},
   ],
   '3': [Hedge_QuantityPerHedgeEntry$json],
   '7': {},
@@ -101,9 +117,10 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'IeLmtkby52MS5jb21tb24uQW1lbmRNZXRob2RUeXBlUgthbWVuZE1ldGhvZBJdChJxdWFudGl0'
     'eV9wZXJfaGVkZ2UYDCADKAsyKS5rZG8udjEuaGVkZ2UuSGVkZ2UuUXVhbnRpdHlQZXJIZWRnZU'
     'VudHJ5QgTiQQEDUhBxdWFudGl0eVBlckhlZGdlEiwKD2hlZGdlX2Z1bmRfY29kZRgNIAEoCUIE'
-    '4kEBAlINaGVkZ2VGdW5kQ29kZRIfCgt0aWNrX29mZnNldBgOIAEoBVIKdGlja09mZnNldBpDCh'
-    'VRdWFudGl0eVBlckhlZGdlRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSFAoFdmFsdWUYAiABKAlS'
-    'BXZhbHVlOgI4AToq6kEnChVrZG8uY2RzYXBpcy54eXovSGVkZ2USDmhlZGdlcy97aGVkZ2V9');
+    '4kEBAlINaGVkZ2VGdW5kQ29kZRIfCgt0aWNrX29mZnNldBgOIAEoBVIKdGlja09mZnNldBIyCg'
+    'd0cF9jb2RlGA8gASgOMhkua2RvLnYxLmhlZGdlLk9yZGVyVHBDb2RlUgZ0cENvZGUaQwoVUXVh'
+    'bnRpdHlQZXJIZWRnZUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YW'
+    'x1ZToCOAE6KupBJwoVa2RvLmNkc2FwaXMueHl6L0hlZGdlEg5oZWRnZXMve2hlZGdlfQ==');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {

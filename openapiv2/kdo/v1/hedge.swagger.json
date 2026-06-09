@@ -430,6 +430,10 @@
                   "type": "integer",
                   "format": "int32",
                   "description": "상대호가/호가 가격에서의 틱 오프셋 (-30 ~ +30).\n양수 = 공격적 (매수 더 비싸게 / 매도 더 싸게),\n음수 = 방어적 (매수 더 싸게 / 매도 더 비싸게).\nImmediateFill 일 때는 무시됨."
+                },
+                "tpCode": {
+                  "$ref": "#/definitions/hedgeOrderTpCode",
+                  "title": "헷지 주문 TP 코드 (호가 구분)"
                 }
               },
               "title": "수정할 헷지 정보",
@@ -856,6 +860,10 @@
           "type": "integer",
           "format": "int32",
           "description": "상대호가/호가 가격에서의 틱 오프셋 (-30 ~ +30).\n양수 = 공격적 (매수 더 비싸게 / 매도 더 싸게),\n음수 = 방어적 (매수 더 싸게 / 매도 더 비싸게).\nImmediateFill 일 때는 무시됨."
+        },
+        "tpCode": {
+          "$ref": "#/definitions/hedgeOrderTpCode",
+          "title": "헷지 주문 TP 코드 (호가 구분)"
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",
@@ -1069,6 +1077,17 @@
         }
       },
       "title": "ListHedges 응답"
+    },
+    "hedgeOrderTpCode": {
+      "type": "string",
+      "enum": [
+        "ORDER_TP_CODE_UNSPECIFIED",
+        "ORDER_TP_CODE_NONE",
+        "ORDER_TP_CODE_LP"
+      ],
+      "default": "ORDER_TP_CODE_UNSPECIFIED",
+      "description": "- ORDER_TP_CODE_UNSPECIFIED: 미지정 (도메인에서 None으로 매핑)\n - ORDER_TP_CODE_NONE: 일반 주문\n - ORDER_TP_CODE_LP: LP 주문",
+      "title": "헷지 주문 TP 코드 (호가 구분)"
     },
     "hedgeQuantityTrigger": {
       "type": "object",

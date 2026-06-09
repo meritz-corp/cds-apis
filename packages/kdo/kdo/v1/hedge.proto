@@ -139,6 +139,18 @@ service HedgeService {
 
 // ========== Enums ==========
 
+// 헷지 주문 TP 코드 (호가 구분)
+enum OrderTpCode {
+  // 미지정 (도메인에서 None으로 매핑)
+  ORDER_TP_CODE_UNSPECIFIED = 0;
+
+  // 일반 주문
+  ORDER_TP_CODE_NONE = 1;
+
+  // LP 주문
+  ORDER_TP_CODE_LP = 2;
+}
+
 // 헷지 주문 체결 가격 유형
 // 거래소의 구체적인 호가 유형(QuoteType)과 달리,
 // 헷지 주문의 전략적 의도를 표현합니다.
@@ -224,6 +236,9 @@ message Hedge {
   // 음수 = 방어적 (매수 더 싸게 / 매도 더 비싸게).
   // ImmediateFill 일 때는 무시됨.
   int32 tick_offset = 14;
+
+  // 헷지 주문 TP 코드 (호가 구분)
+  OrderTpCode tp_code = 15;
 }
 
 // 헷지 방식

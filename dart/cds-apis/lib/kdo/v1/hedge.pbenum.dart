@@ -14,6 +14,27 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// 헷지 주문 TP 코드 (호가 구분)
+class OrderTpCode extends $pb.ProtobufEnum {
+  /// 미지정 (도메인에서 None으로 매핑)
+  static const OrderTpCode ORDER_TP_CODE_UNSPECIFIED = OrderTpCode._(0, _omitEnumNames ? '' : 'ORDER_TP_CODE_UNSPECIFIED');
+  /// 일반 주문
+  static const OrderTpCode ORDER_TP_CODE_NONE = OrderTpCode._(1, _omitEnumNames ? '' : 'ORDER_TP_CODE_NONE');
+  /// LP 주문
+  static const OrderTpCode ORDER_TP_CODE_LP = OrderTpCode._(2, _omitEnumNames ? '' : 'ORDER_TP_CODE_LP');
+
+  static const $core.List<OrderTpCode> values = <OrderTpCode> [
+    ORDER_TP_CODE_UNSPECIFIED,
+    ORDER_TP_CODE_NONE,
+    ORDER_TP_CODE_LP,
+  ];
+
+  static final $core.List<OrderTpCode?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static OrderTpCode? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderTpCode._(super.value, super.name);
+}
+
 /// 헷지 주문 체결 가격 유형
 /// 거래소의 구체적인 호가 유형(QuoteType)과 달리,
 /// 헷지 주문의 전략적 의도를 표현합니다.

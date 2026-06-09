@@ -41,6 +41,7 @@ class Hedge extends $pb.GeneratedMessage {
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? quantityPerHedge,
     $core.String? hedgeFundCode,
     $core.int? tickOffset,
+    OrderTpCode? tpCode,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -57,6 +58,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (quantityPerHedge != null) result.quantityPerHedge.addEntries(quantityPerHedge);
     if (hedgeFundCode != null) result.hedgeFundCode = hedgeFundCode;
     if (tickOffset != null) result.tickOffset = tickOffset;
+    if (tpCode != null) result.tpCode = tpCode;
     return result;
   }
 
@@ -80,6 +82,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..m<$core.String, $core.String>(12, _omitFieldNames ? '' : 'quantityPerHedge', entryClassName: 'Hedge.QuantityPerHedgeEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('kdo.v1.hedge'))
     ..aOS(13, _omitFieldNames ? '' : 'hedgeFundCode')
     ..a<$core.int>(14, _omitFieldNames ? '' : 'tickOffset', $pb.PbFieldType.O3)
+    ..e<OrderTpCode>(15, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: OrderTpCode.valueOf, enumValues: OrderTpCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -246,6 +249,16 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasTickOffset() => $_has(13);
   @$pb.TagNumber(14)
   void clearTickOffset() => $_clearField(14);
+
+  /// 헷지 주문 TP 코드 (호가 구분)
+  @$pb.TagNumber(15)
+  OrderTpCode get tpCode => $_getN(14);
+  @$pb.TagNumber(15)
+  set tpCode(OrderTpCode value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasTpCode() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearTpCode() => $_clearField(15);
 }
 
 enum HedgeMethod_Method {

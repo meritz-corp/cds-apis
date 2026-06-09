@@ -1184,6 +1184,9 @@ impl serde::Serialize for Hedge {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.Hedge", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1231,6 +1234,11 @@ impl serde::Serialize for Hedge {
         if true {
             struct_ser.serialize_field("tick_offset", &self.tick_offset)?;
         }
+        if true {
+            let v = OrderTpCode::try_from(self.tp_code)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.tp_code)))?;
+            struct_ser.serialize_field("tp_code", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1267,6 +1275,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "hedgeFundCode",
             "tick_offset",
             "tickOffset",
+            "tp_code",
+            "tpCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1285,6 +1295,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             QuantityPerHedge,
             HedgeFundCode,
             TickOffset,
+            TpCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1321,6 +1332,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "quantityPerHedge" | "quantity_per_hedge" => Ok(GeneratedField::QuantityPerHedge),
                             "hedgeFundCode" | "hedge_fund_code" => Ok(GeneratedField::HedgeFundCode),
                             "tickOffset" | "tick_offset" => Ok(GeneratedField::TickOffset),
+                            "tpCode" | "tp_code" => Ok(GeneratedField::TpCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1354,6 +1366,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut quantity_per_hedge__ = None;
                 let mut hedge_fund_code__ = None;
                 let mut tick_offset__ = None;
+                let mut tp_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1446,6 +1459,12 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::TpCode => {
+                            if tp_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tpCode"));
+                            }
+                            tp_code__ = Some(map_.next_value::<OrderTpCode>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1466,6 +1485,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     quantity_per_hedge: quantity_per_hedge__.unwrap_or_default(),
                     hedge_fund_code: hedge_fund_code__.unwrap_or_default(),
                     tick_offset: tick_offset__.unwrap_or_default(),
+                    tp_code: tp_code__.unwrap_or_default(),
                 })
             }
         }
@@ -3103,6 +3123,80 @@ impl<'de> serde::Deserialize<'de> for LookupHedgeRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.hedge.LookupHedgeRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for OrderTpCode {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "ORDER_TP_CODE_UNSPECIFIED",
+            Self::None => "ORDER_TP_CODE_NONE",
+            Self::Lp => "ORDER_TP_CODE_LP",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrderTpCode {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ORDER_TP_CODE_UNSPECIFIED",
+            "ORDER_TP_CODE_NONE",
+            "ORDER_TP_CODE_LP",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrderTpCode;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ORDER_TP_CODE_UNSPECIFIED" => Ok(OrderTpCode::Unspecified),
+                    "ORDER_TP_CODE_NONE" => Ok(OrderTpCode::None),
+                    "ORDER_TP_CODE_LP" => Ok(OrderTpCode::Lp),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for QuantityTrigger {
