@@ -456,6 +456,12 @@ pub struct PairExecutionLog {
     /// Counter 레그 최종 체결 수량
     #[prost(int64, tag="12")]
     pub counter_qty: i64,
+    /// Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+    #[prost(int64, tag="13")]
+    pub base_fill_price: i64,
+    /// Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+    #[prost(int64, tag="14")]
+    pub counter_fill_price: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

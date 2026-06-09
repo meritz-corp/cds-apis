@@ -3294,6 +3294,12 @@ impl serde::Serialize for PairExecutionLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairExecutionLog", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -3347,6 +3353,16 @@ impl serde::Serialize for PairExecutionLog {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("counter_qty", ToString::to_string(&self.counter_qty).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_fill_price", ToString::to_string(&self.base_fill_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_fill_price", ToString::to_string(&self.counter_fill_price).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -3377,6 +3393,10 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "baseQty",
             "counter_qty",
             "counterQty",
+            "base_fill_price",
+            "baseFillPrice",
+            "counter_fill_price",
+            "counterFillPrice",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3393,6 +3413,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             Detail,
             BaseQty,
             CounterQty,
+            BaseFillPrice,
+            CounterFillPrice,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3427,6 +3449,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "detail" => Ok(GeneratedField::Detail),
                             "baseQty" | "base_qty" => Ok(GeneratedField::BaseQty),
                             "counterQty" | "counter_qty" => Ok(GeneratedField::CounterQty),
+                            "baseFillPrice" | "base_fill_price" => Ok(GeneratedField::BaseFillPrice),
+                            "counterFillPrice" | "counter_fill_price" => Ok(GeneratedField::CounterFillPrice),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3458,6 +3482,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut detail__ = None;
                 let mut base_qty__ = None;
                 let mut counter_qty__ = None;
+                let mut base_fill_price__ = None;
+                let mut counter_fill_price__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairId => {
@@ -3548,6 +3574,22 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BaseFillPrice => {
+                            if base_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseFillPrice"));
+                            }
+                            base_fill_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterFillPrice => {
+                            if counter_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterFillPrice"));
+                            }
+                            counter_fill_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3566,6 +3608,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     detail: detail__,
                     base_qty: base_qty__.unwrap_or_default(),
                     counter_qty: counter_qty__.unwrap_or_default(),
+                    base_fill_price: base_fill_price__.unwrap_or_default(),
+                    counter_fill_price: counter_fill_price__.unwrap_or_default(),
                 })
             }
         }

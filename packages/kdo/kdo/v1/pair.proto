@@ -665,6 +665,12 @@ message PairExecutionLog {
 
   // Counter 레그 최종 체결 수량
   int64 counter_qty = 12;
+
+  // Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+  int64 base_fill_price = 13;
+
+  // Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+  int64 counter_fill_price = 14;
 }
 
 // 페어 실행 결과

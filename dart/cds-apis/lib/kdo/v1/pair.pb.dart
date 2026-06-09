@@ -1941,6 +1941,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $core.String? detail,
     $fixnum.Int64? baseQty,
     $fixnum.Int64? counterQty,
+    $fixnum.Int64? baseFillPrice,
+    $fixnum.Int64? counterFillPrice,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1955,6 +1957,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (detail != null) result.detail = detail;
     if (baseQty != null) result.baseQty = baseQty;
     if (counterQty != null) result.counterQty = counterQty;
+    if (baseFillPrice != null) result.baseFillPrice = baseFillPrice;
+    if (counterFillPrice != null) result.counterFillPrice = counterFillPrice;
     return result;
   }
 
@@ -1976,6 +1980,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..aOS(10, _omitFieldNames ? '' : 'detail')
     ..aInt64(11, _omitFieldNames ? '' : 'baseQty')
     ..aInt64(12, _omitFieldNames ? '' : 'counterQty')
+    ..aInt64(13, _omitFieldNames ? '' : 'baseFillPrice')
+    ..aInt64(14, _omitFieldNames ? '' : 'counterFillPrice')
     ..hasRequiredFields = false
   ;
 
@@ -2117,6 +2123,26 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   $core.bool hasCounterQty() => $_has(11);
   @$pb.TagNumber(12)
   void clearCounterQty() => $_clearField(12);
+
+  /// Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get baseFillPrice => $_getI64(12);
+  @$pb.TagNumber(13)
+  set baseFillPrice($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasBaseFillPrice() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearBaseFillPrice() => $_clearField(13);
+
+  /// Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get counterFillPrice => $_getI64(13);
+  @$pb.TagNumber(14)
+  set counterFillPrice($fixnum.Int64 value) => $_setInt64(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasCounterFillPrice() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearCounterFillPrice() => $_clearField(14);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {

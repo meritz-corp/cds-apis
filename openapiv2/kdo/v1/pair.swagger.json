@@ -965,6 +965,16 @@
           "type": "string",
           "format": "int64",
           "title": "Counter 레그 최종 체결 수량"
+        },
+        "baseFillPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)"
+        },
+        "counterFillPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)"
         }
       },
       "title": "페어 실행 로그 레코드"
