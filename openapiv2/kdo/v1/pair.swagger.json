@@ -557,7 +557,7 @@
       "properties": {
         "counterInverse": {
           "type": "boolean",
-          "title": "counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)"
+          "title": "counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)\ncounter.side = counter_inverse ? base.side : base.side.opposite()"
         },
         "imbalanceThresholdRatio": {
           "type": "number",
@@ -599,7 +599,8 @@
           "title": "Ask quote 산출용 basis 오프셋 (원, raw int64)"
         }
       },
-      "title": "BaseMakeCounterIocAndBalance 모드 설정"
+      "description": "PairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code: 사용 (필수).\n  - counter.side / counter.quantity: 자동 파생 (counter.side = base.side ± counter_inverse,\n    counter.quantity = base.quantity × hedge_ratio). 입력값은 무시 — UNSPECIFIED / 0 으로 비워도 된다.\n  - PairEntry.price_source / price_offset_ticks (양 leg): 무시. base 가격은 base.side 의 1호가,\n    counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED / 0 으로 정규화한다.",
+      "title": "BaseMakeCounterIocAndBalance 모드 설정 (IOC imbalance hotpath)"
     },
     "pairEtfNavKind": {
       "type": "string",
@@ -899,23 +900,24 @@
         },
         "side": {
           "$ref": "#/definitions/pairPairSide",
-          "title": "주문 방향"
+          "description": "주문 방향\nBMC 모드: base 는 필수(deficit 방향 필터), counter 는 UNSPECIFIED 허용(런타임 파생)."
         },
         "quantity": {
           "type": "string",
           "format": "int64",
-          "title": "주문 수량 (1 이상)"
+          "description": "주문 수량 (1 이상)\nBMC 모드: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio)."
         },
         "priceSource": {
           "$ref": "#/definitions/v1pairPriceSource",
-          "title": "참조 가격 소스"
+          "description": "참조 가격 소스\nBMC 모드에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다."
         },
         "priceOffsetTicks": {
           "type": "integer",
           "format": "int32",
-          "description": "지정가 산출 시 참조 호가에서 이동할 틱 수\nBid: 양수 = 더 높은 가격. Ask: 양수 = 더 낮은 가격."
+          "description": "지정가 산출 시 참조 호가에서 이동할 틱 수\nBid: 양수 = 더 높은 가격. Ask: 양수 = 더 낮은 가격.\nBMC 모드에선 무시(항상 0). 입력값은 0 으로 정규화된다."
         }
       },
+      "description": "모드별 필드 사용:\n- SimultaneousCompare / PricingMakerTaker: 모든 필드 사용 (side/quantity/price_source/price_offset_ticks).\n- BaseMakeCounterIocAndBalance (IOC imbalance):\n  - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).\n  - counter.side / counter.quantity: 자동 파생, 입력값 무시\n    (counter.side = base.side ± counter_inverse, counter.quantity = base.quantity × hedge_ratio).\n    counter 의 side 는 UNSPECIFIED 도 허용, quantity 는 0 으로 비워도 된다.\n  - price_source / price_offset_ticks (양 leg): 무시. base 가격 = base.side 1호가 고정,\n    counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 기본값(UNSPECIFIED/0)으로 정규화.",
       "title": "페어의 한쪽 엔트리 (단일 심볼 주문 스펙)",
       "required": [
         "symbol",

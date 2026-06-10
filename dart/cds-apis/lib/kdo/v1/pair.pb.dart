@@ -198,6 +198,16 @@ class Pair extends $pb.GeneratedMessage {
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
+///
+/// 모드별 필드 사용:
+/// - SimultaneousCompare / PricingMakerTaker: 모든 필드 사용 (side/quantity/price_source/price_offset_ticks).
+/// - BaseMakeCounterIocAndBalance (IOC imbalance):
+///   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
+///   - counter.side / counter.quantity: 자동 파생, 입력값 무시
+///     (counter.side = base.side ± counter_inverse, counter.quantity = base.quantity × hedge_ratio).
+///     counter 의 side 는 UNSPECIFIED 도 허용, quantity 는 0 으로 비워도 된다.
+///   - price_source / price_offset_ticks (양 leg): 무시. base 가격 = base.side 1호가 고정,
+///     counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 기본값(UNSPECIFIED/0)으로 정규화.
 class PairEntry extends $pb.GeneratedMessage {
   factory PairEntry({
     $core.String? symbol,
@@ -270,6 +280,7 @@ class PairEntry extends $pb.GeneratedMessage {
   void clearFundCode() => $_clearField(2);
 
   /// 주문 방향
+  /// BMC 모드: base 는 필수(deficit 방향 필터), counter 는 UNSPECIFIED 허용(런타임 파생).
   @$pb.TagNumber(3)
   PairSide get side => $_getN(2);
   @$pb.TagNumber(3)
@@ -280,6 +291,7 @@ class PairEntry extends $pb.GeneratedMessage {
   void clearSide() => $_clearField(3);
 
   /// 주문 수량 (1 이상)
+  /// BMC 모드: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
   @$pb.TagNumber(4)
   $fixnum.Int64 get quantity => $_getI64(3);
   @$pb.TagNumber(4)
@@ -290,6 +302,7 @@ class PairEntry extends $pb.GeneratedMessage {
   void clearQuantity() => $_clearField(4);
 
   /// 참조 가격 소스
+  /// BMC 모드에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
   @$pb.TagNumber(5)
   PriceSource get priceSource => $_getN(4);
   @$pb.TagNumber(5)
@@ -301,6 +314,7 @@ class PairEntry extends $pb.GeneratedMessage {
 
   /// 지정가 산출 시 참조 호가에서 이동할 틱 수
   /// Bid: 양수 = 더 높은 가격. Ask: 양수 = 더 낮은 가격.
+  /// BMC 모드에선 무시(항상 0). 입력값은 0 으로 정규화된다.
   @$pb.TagNumber(6)
   $core.int get priceOffsetTicks => $_getIZ(5);
   @$pb.TagNumber(6)
@@ -688,7 +702,15 @@ class PairMode extends $pb.GeneratedMessage {
   BaseMakeCounterIocAndBalance ensureBaseMakeCounterIocAndBalance() => $_ensure(2);
 }
 
-/// BaseMakeCounterIocAndBalance 모드 설정
+/// BaseMakeCounterIocAndBalance 모드 설정 (IOC imbalance hotpath)
+///
+/// PairEntry 필드 매핑:
+///   - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
+///   - counter.symbol / counter.fund_code: 사용 (필수).
+///   - counter.side / counter.quantity: 자동 파생 (counter.side = base.side ± counter_inverse,
+///     counter.quantity = base.quantity × hedge_ratio). 입력값은 무시 — UNSPECIFIED / 0 으로 비워도 된다.
+///   - PairEntry.price_source / price_offset_ticks (양 leg): 무시. base 가격은 base.side 의 1호가,
+///     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED / 0 으로 정규화한다.
 class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalance({
     $core.bool? counterInverse,
@@ -750,6 +772,7 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   static BaseMakeCounterIocAndBalance? _defaultInstance;
 
   /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
+  /// counter.side = counter_inverse ? base.side : base.side.opposite()
   @$pb.TagNumber(3)
   $core.bool get counterInverse => $_getBF(0);
   @$pb.TagNumber(3)
