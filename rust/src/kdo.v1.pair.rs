@@ -46,14 +46,14 @@ pub struct Pair {
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
 ///
 /// 모드별 필드 사용:
-/// - SimultaneousCompare / PricingMakerTaker: 모든 필드 사용 (side/quantity/price_source/price_offset_ticks).
+/// - SimultaneousCompare: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
+/// - PricingMakerTaker: pricer leg 가 price_source 로 ref 추출 → fair 산출. maker quote = fair 그대로.
 /// - BaseMakeCounterIocAndBalance (IOC imbalance):
 ///    - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
-///    - counter.side / counter.quantity: 자동 파생, 입력값 무시
-///      (counter.side = base.side ± counter_inverse, counter.quantity = base.quantity × hedge_ratio).
-///      counter 의 side 는 UNSPECIFIED 도 허용, quantity 는 0 으로 비워도 된다.
-///    - price_source / price_offset_ticks (양 leg): 무시. base 가격 = base.side 1호가 고정,
-///      counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 기본값(UNSPECIFIED/0)으로 정규화.
+///    - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
+///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
+///    - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
+///      counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PairEntry {
@@ -64,22 +64,16 @@ pub struct PairEntry {
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
     /// 주문 방향
-    /// BMC 모드: base 는 필수(deficit 방향 필터), counter 는 UNSPECIFIED 허용(런타임 파생).
     #[prost(enumeration="PairSide", tag="3")]
     pub side: i32,
     /// 주문 수량 (1 이상)
     /// BMC 모드: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
     #[prost(int64, tag="4")]
     pub quantity: i64,
-    /// 참조 가격 소스
+    /// 참조 가격 소스 (entry.side 기준 자기/상대 호가).
     /// BMC 모드에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
     #[prost(enumeration="PriceSource", tag="5")]
     pub price_source: i32,
-    /// 지정가 산출 시 참조 호가에서 이동할 틱 수
-    /// Bid: 양수 = 더 높은 가격. Ask: 양수 = 더 낮은 가격.
-    /// BMC 모드에선 무시(항상 0). 입력값은 0 으로 정규화된다.
-    #[prost(int32, tag="6")]
-    pub price_offset_ticks: i32,
 }
 // ============================================================================
 // Pair Condition (oneof wrapper)
@@ -172,18 +166,14 @@ pub mod pair_mode {
 ///
 /// PairEntry 필드 매핑:
 ///    - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
-///    - counter.symbol / counter.fund_code: 사용 (필수).
-///    - counter.side / counter.quantity: 자동 파생 (counter.side = base.side ± counter_inverse,
-///      counter.quantity = base.quantity × hedge_ratio). 입력값은 무시 — UNSPECIFIED / 0 으로 비워도 된다.
-///    - PairEntry.price_source / price_offset_ticks (양 leg): 무시. base 가격은 base.side 의 1호가,
-///      counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED / 0 으로 정규화한다.
+///    - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
+///      정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.
+///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
+///    - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///      counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BaseMakeCounterIocAndBalance {
-    /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
-    /// counter.side = counter_inverse ? base.side : base.side.opposite()
-    #[prost(bool, tag="3")]
-    pub counter_inverse: bool,
     /// IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
     #[prost(double, tag="4")]
     pub imbalance_threshold_ratio: f64,
@@ -715,19 +705,15 @@ impl PairSide {
         }
     }
 }
-/// 참조 가격 소스
+/// 참조 가격 소스 (entry.side 기준 자기/상대 호가).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PriceSource {
     Unspecified = 0,
-    /// 중간가 (Bid1 + Ask1) / 2
-    MidPrice = 1,
-    /// 직전 체결가
-    LastPrice = 2,
-    /// 최우선 매수호가
-    BestBid = 3,
-    /// 최우선 매도호가
-    BestAsk = 4,
+    /// 자기호가 (entry.side 와 같은 방향의 1호가). Bid 주문 → bid1, Ask 주문 → ask1.
+    BestMake = 5,
+    /// 상대호가 (entry.side 반대 방향의 1호가). Bid 주문 → ask1, Ask 주문 → bid1.
+    BestTake = 6,
 }
 impl PriceSource {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -737,20 +723,16 @@ impl PriceSource {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             PriceSource::Unspecified => "PRICE_SOURCE_UNSPECIFIED",
-            PriceSource::MidPrice => "PRICE_SOURCE_MID_PRICE",
-            PriceSource::LastPrice => "PRICE_SOURCE_LAST_PRICE",
-            PriceSource::BestBid => "PRICE_SOURCE_BEST_BID",
-            PriceSource::BestAsk => "PRICE_SOURCE_BEST_ASK",
+            PriceSource::BestMake => "PRICE_SOURCE_BEST_MAKE",
+            PriceSource::BestTake => "PRICE_SOURCE_BEST_TAKE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "PRICE_SOURCE_UNSPECIFIED" => Some(Self::Unspecified),
-            "PRICE_SOURCE_MID_PRICE" => Some(Self::MidPrice),
-            "PRICE_SOURCE_LAST_PRICE" => Some(Self::LastPrice),
-            "PRICE_SOURCE_BEST_BID" => Some(Self::BestBid),
-            "PRICE_SOURCE_BEST_ASK" => Some(Self::BestAsk),
+            "PRICE_SOURCE_BEST_MAKE" => Some(Self::BestMake),
+            "PRICE_SOURCE_BEST_TAKE" => Some(Self::BestTake),
             _ => None,
         }
     }

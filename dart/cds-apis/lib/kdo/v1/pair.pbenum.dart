@@ -34,28 +34,22 @@ class PairSide extends $pb.ProtobufEnum {
   const PairSide._(super.value, super.name);
 }
 
-/// 참조 가격 소스
+/// 참조 가격 소스 (entry.side 기준 자기/상대 호가).
 class PriceSource extends $pb.ProtobufEnum {
   static const PriceSource PRICE_SOURCE_UNSPECIFIED = PriceSource._(0, _omitEnumNames ? '' : 'PRICE_SOURCE_UNSPECIFIED');
-  /// 중간가 (Bid1 + Ask1) / 2
-  static const PriceSource PRICE_SOURCE_MID_PRICE = PriceSource._(1, _omitEnumNames ? '' : 'PRICE_SOURCE_MID_PRICE');
-  /// 직전 체결가
-  static const PriceSource PRICE_SOURCE_LAST_PRICE = PriceSource._(2, _omitEnumNames ? '' : 'PRICE_SOURCE_LAST_PRICE');
-  /// 최우선 매수호가
-  static const PriceSource PRICE_SOURCE_BEST_BID = PriceSource._(3, _omitEnumNames ? '' : 'PRICE_SOURCE_BEST_BID');
-  /// 최우선 매도호가
-  static const PriceSource PRICE_SOURCE_BEST_ASK = PriceSource._(4, _omitEnumNames ? '' : 'PRICE_SOURCE_BEST_ASK');
+  /// 자기호가 (entry.side 와 같은 방향의 1호가). Bid 주문 → bid1, Ask 주문 → ask1.
+  static const PriceSource PRICE_SOURCE_BEST_MAKE = PriceSource._(5, _omitEnumNames ? '' : 'PRICE_SOURCE_BEST_MAKE');
+  /// 상대호가 (entry.side 반대 방향의 1호가). Bid 주문 → ask1, Ask 주문 → bid1.
+  static const PriceSource PRICE_SOURCE_BEST_TAKE = PriceSource._(6, _omitEnumNames ? '' : 'PRICE_SOURCE_BEST_TAKE');
 
   static const $core.List<PriceSource> values = <PriceSource> [
     PRICE_SOURCE_UNSPECIFIED,
-    PRICE_SOURCE_MID_PRICE,
-    PRICE_SOURCE_LAST_PRICE,
-    PRICE_SOURCE_BEST_BID,
-    PRICE_SOURCE_BEST_ASK,
+    PRICE_SOURCE_BEST_MAKE,
+    PRICE_SOURCE_BEST_TAKE,
   ];
 
-  static final $core.List<PriceSource?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
-  static PriceSource? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.Map<$core.int, PriceSource> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static PriceSource? valueOf($core.int value) => _byValue[value];
 
   const PriceSource._(super.value, super.name);
 }

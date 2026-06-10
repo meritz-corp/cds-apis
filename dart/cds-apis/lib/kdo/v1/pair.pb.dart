@@ -200,14 +200,14 @@ class Pair extends $pb.GeneratedMessage {
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
 ///
 /// 모드별 필드 사용:
-/// - SimultaneousCompare / PricingMakerTaker: 모든 필드 사용 (side/quantity/price_source/price_offset_ticks).
+/// - SimultaneousCompare: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
+/// - PricingMakerTaker: pricer leg 가 price_source 로 ref 추출 → fair 산출. maker quote = fair 그대로.
 /// - BaseMakeCounterIocAndBalance (IOC imbalance):
 ///   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
-///   - counter.side / counter.quantity: 자동 파생, 입력값 무시
-///     (counter.side = base.side ± counter_inverse, counter.quantity = base.quantity × hedge_ratio).
-///     counter 의 side 는 UNSPECIFIED 도 허용, quantity 는 0 으로 비워도 된다.
-///   - price_source / price_offset_ticks (양 leg): 무시. base 가격 = base.side 1호가 고정,
-///     counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 기본값(UNSPECIFIED/0)으로 정규화.
+///   - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
+///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
+///   - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
+///     counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
 class PairEntry extends $pb.GeneratedMessage {
   factory PairEntry({
     $core.String? symbol,
@@ -215,7 +215,6 @@ class PairEntry extends $pb.GeneratedMessage {
     PairSide? side,
     $fixnum.Int64? quantity,
     PriceSource? priceSource,
-    $core.int? priceOffsetTicks,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -223,7 +222,6 @@ class PairEntry extends $pb.GeneratedMessage {
     if (side != null) result.side = side;
     if (quantity != null) result.quantity = quantity;
     if (priceSource != null) result.priceSource = priceSource;
-    if (priceOffsetTicks != null) result.priceOffsetTicks = priceOffsetTicks;
     return result;
   }
 
@@ -238,7 +236,6 @@ class PairEntry extends $pb.GeneratedMessage {
     ..e<PairSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: PairSide.PAIR_SIDE_UNSPECIFIED, valueOf: PairSide.valueOf, enumValues: PairSide.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..e<PriceSource>(5, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: PriceSource.PRICE_SOURCE_UNSPECIFIED, valueOf: PriceSource.valueOf, enumValues: PriceSource.values)
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'priceOffsetTicks', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -280,7 +277,6 @@ class PairEntry extends $pb.GeneratedMessage {
   void clearFundCode() => $_clearField(2);
 
   /// 주문 방향
-  /// BMC 모드: base 는 필수(deficit 방향 필터), counter 는 UNSPECIFIED 허용(런타임 파생).
   @$pb.TagNumber(3)
   PairSide get side => $_getN(2);
   @$pb.TagNumber(3)
@@ -301,7 +297,7 @@ class PairEntry extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearQuantity() => $_clearField(4);
 
-  /// 참조 가격 소스
+  /// 참조 가격 소스 (entry.side 기준 자기/상대 호가).
   /// BMC 모드에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
   @$pb.TagNumber(5)
   PriceSource get priceSource => $_getN(4);
@@ -311,18 +307,6 @@ class PairEntry extends $pb.GeneratedMessage {
   $core.bool hasPriceSource() => $_has(4);
   @$pb.TagNumber(5)
   void clearPriceSource() => $_clearField(5);
-
-  /// 지정가 산출 시 참조 호가에서 이동할 틱 수
-  /// Bid: 양수 = 더 높은 가격. Ask: 양수 = 더 낮은 가격.
-  /// BMC 모드에선 무시(항상 0). 입력값은 0 으로 정규화된다.
-  @$pb.TagNumber(6)
-  $core.int get priceOffsetTicks => $_getIZ(5);
-  @$pb.TagNumber(6)
-  set priceOffsetTicks($core.int value) => $_setSignedInt32(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasPriceOffsetTicks() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearPriceOffsetTicks() => $_clearField(6);
 }
 
 enum PairCondition_Kind {
@@ -706,14 +690,13 @@ class PairMode extends $pb.GeneratedMessage {
 ///
 /// PairEntry 필드 매핑:
 ///   - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
-///   - counter.symbol / counter.fund_code: 사용 (필수).
-///   - counter.side / counter.quantity: 자동 파생 (counter.side = base.side ± counter_inverse,
-///     counter.quantity = base.quantity × hedge_ratio). 입력값은 무시 — UNSPECIFIED / 0 으로 비워도 된다.
-///   - PairEntry.price_source / price_offset_ticks (양 leg): 무시. base 가격은 base.side 의 1호가,
-///     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED / 0 으로 정규화한다.
+///   - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
+///     정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.
+///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
+///   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalance({
-    $core.bool? counterInverse,
     $core.double? imbalanceThresholdRatio,
     $core.double? imbalanceRecoveryRatio,
     $fixnum.Int64? settleTimeoutMs,
@@ -724,7 +707,6 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
     $fixnum.Int64? askBasis,
   }) {
     final result = create();
-    if (counterInverse != null) result.counterInverse = counterInverse;
     if (imbalanceThresholdRatio != null) result.imbalanceThresholdRatio = imbalanceThresholdRatio;
     if (imbalanceRecoveryRatio != null) result.imbalanceRecoveryRatio = imbalanceRecoveryRatio;
     if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
@@ -742,7 +724,6 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalance.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterIocAndBalance', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..aOB(3, _omitFieldNames ? '' : 'counterInverse')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'imbalanceThresholdRatio', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'imbalanceRecoveryRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
@@ -771,94 +752,83 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   static BaseMakeCounterIocAndBalance getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BaseMakeCounterIocAndBalance>(create);
   static BaseMakeCounterIocAndBalance? _defaultInstance;
 
-  /// counter leg 역방향 여부 (true: counter 측 방향을 base와 반대로 설정)
-  /// counter.side = counter_inverse ? base.side : base.side.opposite()
-  @$pb.TagNumber(3)
-  $core.bool get counterInverse => $_getBF(0);
-  @$pb.TagNumber(3)
-  set counterInverse($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(3)
-  $core.bool hasCounterInverse() => $_has(0);
-  @$pb.TagNumber(3)
-  void clearCounterInverse() => $_clearField(3);
-
   /// IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
   @$pb.TagNumber(4)
-  $core.double get imbalanceThresholdRatio => $_getN(1);
+  $core.double get imbalanceThresholdRatio => $_getN(0);
   @$pb.TagNumber(4)
-  set imbalanceThresholdRatio($core.double value) => $_setDouble(1, value);
+  set imbalanceThresholdRatio($core.double value) => $_setDouble(0, value);
   @$pb.TagNumber(4)
-  $core.bool hasImbalanceThresholdRatio() => $_has(1);
+  $core.bool hasImbalanceThresholdRatio() => $_has(0);
   @$pb.TagNumber(4)
   void clearImbalanceThresholdRatio() => $_clearField(4);
 
   /// 불균형 회복 목표 비율 (재발주 시 목표 충족 비율)
   @$pb.TagNumber(5)
-  $core.double get imbalanceRecoveryRatio => $_getN(2);
+  $core.double get imbalanceRecoveryRatio => $_getN(1);
   @$pb.TagNumber(5)
-  set imbalanceRecoveryRatio($core.double value) => $_setDouble(2, value);
+  set imbalanceRecoveryRatio($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(5)
-  $core.bool hasImbalanceRecoveryRatio() => $_has(2);
+  $core.bool hasImbalanceRecoveryRatio() => $_has(1);
   @$pb.TagNumber(5)
   void clearImbalanceRecoveryRatio() => $_clearField(5);
 
   /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get settleTimeoutMs => $_getI64(3);
+  $fixnum.Int64 get settleTimeoutMs => $_getI64(2);
   @$pb.TagNumber(6)
-  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(3, value);
+  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(6)
-  $core.bool hasSettleTimeoutMs() => $_has(3);
+  $core.bool hasSettleTimeoutMs() => $_has(2);
   @$pb.TagNumber(6)
   void clearSettleTimeoutMs() => $_clearField(6);
 
   /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
   @$pb.TagNumber(7)
-  $fixnum.Int64 get reconcileAlertAmount => $_getI64(4);
+  $fixnum.Int64 get reconcileAlertAmount => $_getI64(3);
   @$pb.TagNumber(7)
-  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(4, value);
+  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(3, value);
   @$pb.TagNumber(7)
-  $core.bool hasReconcileAlertAmount() => $_has(4);
+  $core.bool hasReconcileAlertAmount() => $_has(3);
   @$pb.TagNumber(7)
   void clearReconcileAlertAmount() => $_clearField(7);
 
   /// 트리거 후 재트리거까지 대기시간 (ms)
   @$pb.TagNumber(8)
-  $fixnum.Int64 get cooldownMs => $_getI64(5);
+  $fixnum.Int64 get cooldownMs => $_getI64(4);
   @$pb.TagNumber(8)
-  set cooldownMs($fixnum.Int64 value) => $_setInt64(5, value);
+  set cooldownMs($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(8)
-  $core.bool hasCooldownMs() => $_has(5);
+  $core.bool hasCooldownMs() => $_has(4);
   @$pb.TagNumber(8)
   void clearCooldownMs() => $_clearField(8);
 
   /// NAV 계산 공식 종류 (서버 런타임에 PricingContext 엔티티 조회, proto엔 종류만 지정)
   @$pb.TagNumber(9)
-  EtfNavKind get navKind => $_getN(6);
+  EtfNavKind get navKind => $_getN(5);
   @$pb.TagNumber(9)
   set navKind(EtfNavKind value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasNavKind() => $_has(6);
+  $core.bool hasNavKind() => $_has(5);
   @$pb.TagNumber(9)
   void clearNavKind() => $_clearField(9);
 
   /// Bid quote 산출용 basis 오프셋 (원, raw int64)
   @$pb.TagNumber(10)
-  $fixnum.Int64 get bidBasis => $_getI64(7);
+  $fixnum.Int64 get bidBasis => $_getI64(6);
   @$pb.TagNumber(10)
-  set bidBasis($fixnum.Int64 value) => $_setInt64(7, value);
+  set bidBasis($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(10)
-  $core.bool hasBidBasis() => $_has(7);
+  $core.bool hasBidBasis() => $_has(6);
   @$pb.TagNumber(10)
   void clearBidBasis() => $_clearField(10);
 
   /// Ask quote 산출용 basis 오프셋 (원, raw int64)
   @$pb.TagNumber(11)
-  $fixnum.Int64 get askBasis => $_getI64(8);
+  $fixnum.Int64 get askBasis => $_getI64(7);
   @$pb.TagNumber(11)
-  set askBasis($fixnum.Int64 value) => $_setInt64(8, value);
+  set askBasis($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(11)
-  $core.bool hasAskBasis() => $_has(8);
+  $core.bool hasAskBasis() => $_has(7);
   @$pb.TagNumber(11)
   void clearAskBasis() => $_clearField(11);
 }

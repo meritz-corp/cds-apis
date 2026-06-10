@@ -126,13 +126,7 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalance", len)?;
-        if true {
-            struct_ser.serialize_field("counter_inverse", &self.counter_inverse)?;
-        }
         if true {
             struct_ser.serialize_field("imbalance_threshold_ratio", &self.imbalance_threshold_ratio)?;
         }
@@ -179,8 +173,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "counter_inverse",
-            "counterInverse",
             "imbalance_threshold_ratio",
             "imbalanceThresholdRatio",
             "imbalance_recovery_ratio",
@@ -201,7 +193,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            CounterInverse,
             ImbalanceThresholdRatio,
             ImbalanceRecoveryRatio,
             SettleTimeoutMs,
@@ -232,7 +223,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                         E: serde::de::Error,
                     {
                         match value {
-                            "counterInverse" | "counter_inverse" => Ok(GeneratedField::CounterInverse),
                             "imbalanceThresholdRatio" | "imbalance_threshold_ratio" => Ok(GeneratedField::ImbalanceThresholdRatio),
                             "imbalanceRecoveryRatio" | "imbalance_recovery_ratio" => Ok(GeneratedField::ImbalanceRecoveryRatio),
                             "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
@@ -260,7 +250,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut counter_inverse__ = None;
                 let mut imbalance_threshold_ratio__ = None;
                 let mut imbalance_recovery_ratio__ = None;
                 let mut settle_timeout_ms__ = None;
@@ -271,12 +260,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                 let mut ask_basis__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::CounterInverse => {
-                            if counter_inverse__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("counterInverse"));
-                            }
-                            counter_inverse__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::ImbalanceThresholdRatio => {
                             if imbalance_threshold_ratio__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("imbalanceThresholdRatio"));
@@ -345,7 +328,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                     }
                 }
                 Ok(BaseMakeCounterIocAndBalance {
-                    counter_inverse: counter_inverse__.unwrap_or_default(),
                     imbalance_threshold_ratio: imbalance_threshold_ratio__.unwrap_or_default(),
                     imbalance_recovery_ratio: imbalance_recovery_ratio__.unwrap_or_default(),
                     settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
@@ -3099,9 +3081,6 @@ impl serde::Serialize for PairEntry {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairEntry", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -3124,9 +3103,6 @@ impl serde::Serialize for PairEntry {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.price_source)))?;
             struct_ser.serialize_field("price_source", &v)?;
         }
-        if true {
-            struct_ser.serialize_field("price_offset_ticks", &self.price_offset_ticks)?;
-        }
         struct_ser.end()
     }
 }
@@ -3144,8 +3120,6 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
             "quantity",
             "price_source",
             "priceSource",
-            "price_offset_ticks",
-            "priceOffsetTicks",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3155,7 +3129,6 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
             Side,
             Quantity,
             PriceSource,
-            PriceOffsetTicks,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3183,7 +3156,6 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                             "side" => Ok(GeneratedField::Side),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "priceSource" | "price_source" => Ok(GeneratedField::PriceSource),
-                            "priceOffsetTicks" | "price_offset_ticks" => Ok(GeneratedField::PriceOffsetTicks),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3208,7 +3180,6 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                 let mut side__ = None;
                 let mut quantity__ = None;
                 let mut price_source__ = None;
-                let mut price_offset_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -3243,14 +3214,6 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                             }
                             price_source__ = Some(map_.next_value::<PriceSource>()? as i32);
                         }
-                        GeneratedField::PriceOffsetTicks => {
-                            if price_offset_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("priceOffsetTicks"));
-                            }
-                            price_offset_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3262,7 +3225,6 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                     side: side__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     price_source: price_source__.unwrap_or_default(),
-                    price_offset_ticks: price_offset_ticks__.unwrap_or_default(),
                 })
             }
         }
@@ -4865,10 +4827,8 @@ impl serde::Serialize for PriceSource {
     {
         let variant = match self {
             Self::Unspecified => "PRICE_SOURCE_UNSPECIFIED",
-            Self::MidPrice => "PRICE_SOURCE_MID_PRICE",
-            Self::LastPrice => "PRICE_SOURCE_LAST_PRICE",
-            Self::BestBid => "PRICE_SOURCE_BEST_BID",
-            Self::BestAsk => "PRICE_SOURCE_BEST_ASK",
+            Self::BestMake => "PRICE_SOURCE_BEST_MAKE",
+            Self::BestTake => "PRICE_SOURCE_BEST_TAKE",
         };
         serializer.serialize_str(variant)
     }
@@ -4881,10 +4841,8 @@ impl<'de> serde::Deserialize<'de> for PriceSource {
     {
         const FIELDS: &[&str] = &[
             "PRICE_SOURCE_UNSPECIFIED",
-            "PRICE_SOURCE_MID_PRICE",
-            "PRICE_SOURCE_LAST_PRICE",
-            "PRICE_SOURCE_BEST_BID",
-            "PRICE_SOURCE_BEST_ASK",
+            "PRICE_SOURCE_BEST_MAKE",
+            "PRICE_SOURCE_BEST_TAKE",
         ];
 
         struct GeneratedVisitor;
@@ -4926,10 +4884,8 @@ impl<'de> serde::Deserialize<'de> for PriceSource {
             {
                 match value {
                     "PRICE_SOURCE_UNSPECIFIED" => Ok(PriceSource::Unspecified),
-                    "PRICE_SOURCE_MID_PRICE" => Ok(PriceSource::MidPrice),
-                    "PRICE_SOURCE_LAST_PRICE" => Ok(PriceSource::LastPrice),
-                    "PRICE_SOURCE_BEST_BID" => Ok(PriceSource::BestBid),
-                    "PRICE_SOURCE_BEST_ASK" => Ok(PriceSource::BestAsk),
+                    "PRICE_SOURCE_BEST_MAKE" => Ok(PriceSource::BestMake),
+                    "PRICE_SOURCE_BEST_TAKE" => Ok(PriceSource::BestTake),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
