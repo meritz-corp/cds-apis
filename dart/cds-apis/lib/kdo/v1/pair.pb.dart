@@ -705,6 +705,7 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
     EtfNavKind? navKind,
     $fixnum.Int64? bidBasis,
     $fixnum.Int64? askBasis,
+    $core.int? recoveryAggressiveTicks,
   }) {
     final result = create();
     if (imbalanceThresholdRatio != null) result.imbalanceThresholdRatio = imbalanceThresholdRatio;
@@ -715,6 +716,7 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
     if (navKind != null) result.navKind = navKind;
     if (bidBasis != null) result.bidBasis = bidBasis;
     if (askBasis != null) result.askBasis = askBasis;
+    if (recoveryAggressiveTicks != null) result.recoveryAggressiveTicks = recoveryAggressiveTicks;
     return result;
   }
 
@@ -732,6 +734,7 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
     ..e<EtfNavKind>(9, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
     ..aInt64(10, _omitFieldNames ? '' : 'bidBasis')
     ..aInt64(11, _omitFieldNames ? '' : 'askBasis')
+    ..a<$core.int>(12, _omitFieldNames ? '' : 'recoveryAggressiveTicks', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -831,6 +834,18 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   $core.bool hasAskBasis() => $_has(7);
   @$pb.TagNumber(11)
   void clearAskBasis() => $_clearField(11);
+
+  /// 복구 정정(recovery amend) 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
+  /// 0 = 상대호가 그대로. Bid 면 cross + N*tick, Ask 면 cross - N*tick.
+  /// 호가창 변동으로 cross 가격이 빠지는 경우에도 체결 보장을 높이고 싶을 때 사용.
+  @$pb.TagNumber(12)
+  $core.int get recoveryAggressiveTicks => $_getIZ(8);
+  @$pb.TagNumber(12)
+  set recoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(8, value);
+  @$pb.TagNumber(12)
+  $core.bool hasRecoveryAggressiveTicks() => $_has(8);
+  @$pb.TagNumber(12)
+  void clearRecoveryAggressiveTicks() => $_clearField(12);
 }
 
 /// SimultaneousCompare 모드 설정

@@ -198,6 +198,11 @@ pub struct BaseMakeCounterIocAndBalance {
     /// Ask quote 산출용 basis 오프셋 (원, raw int64)
     #[prost(int64, tag="11")]
     pub ask_basis: i64,
+    /// 복구 정정(recovery amend) 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
+    /// 0 = 상대호가 그대로. Bid 면 cross + N*tick, Ask 면 cross - N*tick.
+    /// 호가창 변동으로 cross 가격이 빠지는 경우에도 체결 보장을 높이고 싶을 때 사용.
+    #[prost(uint32, tag="12")]
+    pub recovery_aggressive_ticks: u32,
 }
 /// SimultaneousCompare 모드 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
