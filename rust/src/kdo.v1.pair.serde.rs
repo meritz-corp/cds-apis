@@ -129,6 +129,9 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalance", len)?;
         if true {
             struct_ser.serialize_field("imbalance_threshold_ratio", &self.imbalance_threshold_ratio)?;
@@ -167,7 +170,10 @@ impl serde::Serialize for BaseMakeCounterIocAndBalance {
             struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("recovery_aggressive_ticks", &self.recovery_aggressive_ticks)?;
+            struct_ser.serialize_field("base_recovery_aggressive_ticks", &self.base_recovery_aggressive_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("counter_recovery_aggressive_ticks", &self.counter_recovery_aggressive_ticks)?;
         }
         struct_ser.end()
     }
@@ -195,8 +201,10 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
             "bidBasis",
             "ask_basis",
             "askBasis",
-            "recovery_aggressive_ticks",
-            "recoveryAggressiveTicks",
+            "base_recovery_aggressive_ticks",
+            "baseRecoveryAggressiveTicks",
+            "counter_recovery_aggressive_ticks",
+            "counterRecoveryAggressiveTicks",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -209,7 +217,8 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
             NavKind,
             BidBasis,
             AskBasis,
-            RecoveryAggressiveTicks,
+            BaseRecoveryAggressiveTicks,
+            CounterRecoveryAggressiveTicks,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -240,7 +249,8 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                             "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
-                            "recoveryAggressiveTicks" | "recovery_aggressive_ticks" => Ok(GeneratedField::RecoveryAggressiveTicks),
+                            "baseRecoveryAggressiveTicks" | "base_recovery_aggressive_ticks" => Ok(GeneratedField::BaseRecoveryAggressiveTicks),
+                            "counterRecoveryAggressiveTicks" | "counter_recovery_aggressive_ticks" => Ok(GeneratedField::CounterRecoveryAggressiveTicks),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -268,7 +278,8 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                 let mut nav_kind__ = None;
                 let mut bid_basis__ = None;
                 let mut ask_basis__ = None;
-                let mut recovery_aggressive_ticks__ = None;
+                let mut base_recovery_aggressive_ticks__ = None;
+                let mut counter_recovery_aggressive_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ImbalanceThresholdRatio => {
@@ -333,11 +344,19 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::RecoveryAggressiveTicks => {
-                            if recovery_aggressive_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("recoveryAggressiveTicks"));
+                        GeneratedField::BaseRecoveryAggressiveTicks => {
+                            if base_recovery_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseRecoveryAggressiveTicks"));
                             }
-                            recovery_aggressive_ticks__ = 
+                            base_recovery_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterRecoveryAggressiveTicks => {
+                            if counter_recovery_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterRecoveryAggressiveTicks"));
+                            }
+                            counter_recovery_aggressive_ticks__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -355,7 +374,8 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
                     nav_kind: nav_kind__.unwrap_or_default(),
                     bid_basis: bid_basis__.unwrap_or_default(),
                     ask_basis: ask_basis__.unwrap_or_default(),
-                    recovery_aggressive_ticks: recovery_aggressive_ticks__.unwrap_or_default(),
+                    base_recovery_aggressive_ticks: base_recovery_aggressive_ticks__.unwrap_or_default(),
+                    counter_recovery_aggressive_ticks: counter_recovery_aggressive_ticks__.unwrap_or_default(),
                 })
             }
         }

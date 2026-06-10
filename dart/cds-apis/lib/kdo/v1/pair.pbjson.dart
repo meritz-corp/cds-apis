@@ -362,7 +362,8 @@ const BaseMakeCounterIocAndBalance$json = {
     {'1': 'nav_kind', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
     {'1': 'bid_basis', '3': 10, '4': 1, '5': 3, '10': 'bidBasis'},
     {'1': 'ask_basis', '3': 11, '4': 1, '5': 3, '10': 'askBasis'},
-    {'1': 'recovery_aggressive_ticks', '3': 12, '4': 1, '5': 13, '10': 'recoveryAggressiveTicks'},
+    {'1': 'base_recovery_aggressive_ticks', '3': 12, '4': 1, '5': 13, '10': 'baseRecoveryAggressiveTicks'},
+    {'1': 'counter_recovery_aggressive_ticks', '3': 13, '4': 1, '5': 13, '10': 'counterRecoveryAggressiveTicks'},
   ],
   '9': [
     {'1': 1, '2': 2},
@@ -381,9 +382,10 @@ final $typed_data.Uint8List baseMakeCounterIocAndBalanceDescriptor = $convert.ba
     'KANSFHJlY29uY2lsZUFsZXJ0QW1vdW50Eh8KC2Nvb2xkb3duX21zGAggASgEUgpjb29sZG93bk'
     '1zEjIKCG5hdl9raW5kGAkgASgOMhcua2RvLnYxLnBhaXIuRXRmTmF2S2luZFIHbmF2S2luZBIb'
     'CgliaWRfYmFzaXMYCiABKANSCGJpZEJhc2lzEhsKCWFza19iYXNpcxgLIAEoA1IIYXNrQmFzaX'
-    'MSOgoZcmVjb3ZlcnlfYWdncmVzc2l2ZV90aWNrcxgMIAEoDVIXcmVjb3ZlcnlBZ2dyZXNzaXZl'
-    'VGlja3NKBAgBEAJKBAgCEANKBAgDEARSB3ByaWNpbmdSC2hlZGdlX3JhdGlvUg9jb3VudGVyX2'
-    'ludmVyc2U=');
+    'MSQwoeYmFzZV9yZWNvdmVyeV9hZ2dyZXNzaXZlX3RpY2tzGAwgASgNUhtiYXNlUmVjb3ZlcnlB'
+    'Z2dyZXNzaXZlVGlja3MSSQohY291bnRlcl9yZWNvdmVyeV9hZ2dyZXNzaXZlX3RpY2tzGA0gAS'
+    'gNUh5jb3VudGVyUmVjb3ZlcnlBZ2dyZXNzaXZlVGlja3NKBAgBEAJKBAgCEANKBAgDEARSB3By'
+    'aWNpbmdSC2hlZGdlX3JhdGlvUg9jb3VudGVyX2ludmVyc2U=');
 
 @$core.Deprecated('Use simultaneousCompareDescriptor instead')
 const SimultaneousCompare$json = {
